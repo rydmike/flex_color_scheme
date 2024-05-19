@@ -259,7 +259,7 @@ void main() {
       );
     });
 
-    // themeLight = Default material light scheme colors.
+    // themeLight = Default material M3 light scheme colors.
     final ThemeData themeLight = const FlexColorScheme(
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
@@ -272,7 +272,7 @@ void main() {
       background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
     ).toTheme;
-    // themeDark = Default material dark scheme colors.
+    // themeDark = Default material M3 dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
       brightness: Brightness.dark,
       primary: FlexColor.materialDarkPrimary,
@@ -287,8 +287,8 @@ void main() {
     ).toTheme;
 
     test(
-        'FTD1.01: GIVEN a FlexThemeData.raw theme with Material scheme light '
-        'colors EXPECT .colorScheme equality with raw ColorScheme light().',
+        'FTD1.01: GIVEN a FlexThemeData.raw theme with Material3 scheme light'
+        ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
         () {
       expect(
           themeLight.colorScheme,
@@ -326,7 +326,7 @@ void main() {
           ));
     });
     test(
-        'FTD1.02: GIVEN a FlexColorScheme theme with Material scheme dark '
+        'FTD1.02: GIVEN a FlexColorScheme theme with Material3 scheme dark '
         'colors EXPECT .colorScheme equality with raw ColorScheme dark().', () {
       expect(
           themeDark.colorScheme,
@@ -368,17 +368,15 @@ void main() {
     // Test defaults and null input resulting in expected theme values.
     //**************************************************************************
     test(
-        'FTD1.03: GIVEN a FlexThemeData.raw theme with Material scheme light '
+        'FTD1.03: GIVEN a FlexThemeData.raw theme with Material3 scheme light '
         'colors EXPECT appbar theme color to be primary color.', () {
-      expect(themeLight.appBarTheme.backgroundColor,
-          themeLight.colorScheme.primary);
+      expect(themeLight.appBarTheme.backgroundColor, null);
     });
 
     test(
-        'FTD1.04: GIVEN a FlexThemeData.raw theme with Material scheme dark '
+        'FTD1.04: GIVEN a FlexThemeData.raw theme with Material3 scheme dark '
         'colors EXPECT appbar theme color to be surface color.', () {
-      expect(
-          themeDark.appBarTheme.backgroundColor, themeDark.colorScheme.surface);
+      expect(themeDark.appBarTheme.backgroundColor, null);
     });
 
     test(
@@ -388,9 +386,9 @@ void main() {
     });
     test(
         'FTD1.06: GIVEN a FlexThemeData.raw theme with null Typography input '
-        'EXPECT Typography.material2018.', () {
+        'EXPECT Typography.material2021.', () {
       expect(themeLight.typography,
-          Typography.material2018(platform: defaultTargetPlatform));
+          Typography.material2021(platform: defaultTargetPlatform));
     });
 
     //**************************************************************************
@@ -488,17 +486,18 @@ void main() {
       expect(tDarkL.appBarTheme.backgroundColor, tDarkL.colorScheme.surface);
     });
 
+    // TODO(rydmike): See if we need M2 test fo these two!
     test(
         'FTD1.18: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT appbar theme elevation 0.', () {
-      expect(tLightL.appBarTheme.elevation, 0);
+        'EXPECT appbar theme elevation null in M3.', () {
+      expect(tLightL.appBarTheme.elevation, null);
     });
     test(
         'FTD1.19: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT appbar theme elevation 0.', () {
-      expect(tDarkL.appBarTheme.elevation, 0);
+        'EXPECT appbar theme elevation null in M3.', () {
+      expect(tDarkL.appBarTheme.elevation, null);
     });
 
     test(
@@ -1138,11 +1137,11 @@ void main() {
     final TextTheme fLightT = FlexThemeData.light().textTheme;
     // Should be same as a light ThemeData textTheme with Typography 2018
     final TextTheme nLightT =
-        ThemeData(typography: Typography.material2018()).textTheme;
+        ThemeData(typography: Typography.material2021()).textTheme;
     test(
         'FTD1.83: GIVEN a FlexThemeData.light with no TextTheme defined '
         'EXPECT equal to '
-        'ThemeData(typography: Typography.material2018()).textTheme.', () {
+        'ThemeData(typography: Typography.material2021()).textTheme.', () {
       expect(fLightT, equals(nLightT));
     });
     // Default light Primary TextTheme equality verification.
@@ -1151,11 +1150,11 @@ void main() {
     final TextTheme fLightP = FlexThemeData.light().primaryTextTheme;
     // Should be same as a light ThemeData textTheme with Typography 2018
     final TextTheme nLightP =
-        ThemeData(typography: Typography.material2018()).primaryTextTheme;
+        ThemeData(typography: Typography.material2021()).primaryTextTheme;
     test(
         'FTD1.84: GIVEN a FlexThemeData.light with no PrimaryTextTheme '
         'defined EXPECT equal '
-        'ThemeData(typography: Typography.material2018()).primaryTextTheme',
+        'ThemeData(typography: Typography.material2021()).primaryTextTheme',
         () {
       expect(fLightP, equals(nLightP));
     });
@@ -1163,11 +1162,11 @@ void main() {
     final TextTheme fDarkT = FlexThemeData.dark().textTheme;
     final TextTheme nDarkT = ThemeData(
       brightness: Brightness.dark,
-      typography: Typography.material2018(),
+      typography: Typography.material2021(),
     ).textTheme;
     test(
         'FTD1.85: GIVEN a FlexThemeData.dark with no TextTheme defined '
-        'EXPECT equal to default dark with Typography 2018.', () {
+        'EXPECT equal to default dark with Typography 2021.', () {
       expect(fDarkT, equals(nDarkT));
     });
     // Primary dark text theme verification, this is not equal to default
@@ -1176,8 +1175,10 @@ void main() {
     // default dark theme uses an almost black color as primary color, giving
     // us the wrong on primaryTextTheme color for this test case, which is
     // part of the test.
-    final TextTheme fDarkP = FlexThemeData.dark().primaryTextTheme;
-    final Color nDarkPColor = FlexThemeData.dark().primaryColor;
+    final TextTheme fDarkP =
+        FlexThemeData.dark(useMaterial3: false).primaryTextTheme;
+    final Color nDarkPColor =
+        FlexThemeData.dark(useMaterial3: false).primaryColor;
     final TextTheme nDarkP = ThemeData(
       brightness: Brightness.dark,
       primaryColor: nDarkPColor,
@@ -1244,11 +1245,13 @@ void main() {
     final ThemeData fLightTD = FlexThemeData.light(
       textTheme: customText,
       primaryTextTheme: customPrimText,
+      useMaterial3: false,
     );
     final ThemeData nLightTD = ThemeData(
       textTheme: customText,
       primaryTextTheme: customPrimText,
       typography: Typography.material2018(),
+      useMaterial3: false,
     );
 
     // Custom light TextTheme equality verification.
@@ -1273,6 +1276,7 @@ void main() {
     final ThemeData fDarkTD = FlexThemeData.dark(
       textTheme: customText,
       primaryTextTheme: customPrimText,
+      useMaterial3: false,
     );
     final ThemeData nDarkTD = ThemeData(
       brightness: Brightness.dark,
@@ -1280,6 +1284,7 @@ void main() {
       primaryTextTheme: customPrimText,
       primaryColor: nDarkPColor,
       typography: Typography.material2018(),
+      useMaterial3: false,
     );
 
     // Custom dark TextTheme equality verification.
@@ -2723,7 +2728,7 @@ void main() {
     final ThemeData tDSwapLegacy2 = FlexThemeData.dark(
       scheme: FlexScheme.sanJuanBlue,
       // useMaterial3: true, // Default value
-      // swapLegacyOnMaterial3: true, // Default value
+      swapLegacyOnMaterial3: true,
     );
     test(
         'FCS7.100 GIVEN a FlexThemeData.Dark with useMaterial3:true '

@@ -298,8 +298,8 @@ void main() {
       expect(scheme.onErrorContainer, FlexColor.material3LightOnErrorContainer);
       expect(scheme.outline, const Color(0xff73777f));
       // TODO(rydmike): Remove test of deprecated background colors
-      // expect(scheme.background, const Color(0xfffdfcff));
-      // expect(scheme.onBackground, const Color(0xff1a1c1e));
+      expect(scheme.background, const Color(0xfff8f9ff));
+      expect(scheme.onBackground, const Color(0xff191c20));
       // TODO(rydmike): surface changed from Flutter version 3.19 to 3.22!
       expect(scheme.surface, const Color(0xfff8f9ff)); // Old was: 0xfffdfcff
       expect(scheme.onSurface, const Color(0xff191c20)); // Old was: 0xff1a1c1e
@@ -339,20 +339,20 @@ void main() {
       expect(scheme.onError, FlexColor.material3DarkOnError);
       expect(scheme.errorContainer, const Color(0xff93000a));
       expect(scheme.errorContainer, FlexColor.material3DarkErrorContainer);
-      expect(scheme.onErrorContainer, const Color(0xffffb4ab));
+      expect(scheme.onErrorContainer, const Color(0xffffdad6));
       expect(scheme.onErrorContainer, FlexColor.material3DarkOnErrorContainer);
       expect(scheme.outline, const Color(0xff8d9199));
       // TODO(rydmike): Remove test of deprecated background colors
-      // expect(scheme.background, const Color(0xff1a1c1e));
-      // expect(scheme.onBackground, const Color(0xffe2e2e6));
-      expect(scheme.surface, const Color(0xff1a1c1e));
-      expect(scheme.onSurface, const Color(0xffe2e2e6));
+      expect(scheme.background, const Color(0xff111418));
+      expect(scheme.onBackground, const Color(0xffe1e2e8));
+      expect(scheme.surface, const Color(0xff111418));
+      expect(scheme.onSurface, const Color(0xffe1e2e8));
       // TODO(rydmike): Remove test of deprecated surfaceVariant color
-      // expect(scheme.surfaceVariant, const Color(0xff43474e));
+      expect(scheme.surfaceVariant, const Color(0xff43474e));
       expect(scheme.onSurfaceVariant, const Color(0xffc3c7cf));
-      expect(scheme.inverseSurface, const Color(0xffe2e2e6)); // OLD 0xffe2e2e6
-      expect(scheme.onInverseSurface, const Color(0xff2f3033)); //OLD 0xff2f3033
-      expect(scheme.inversePrimary, const Color(0xff0061a4)); // OLD 0xff0061a4
+      expect(scheme.inverseSurface, const Color(0xffe1e2e8)); // OLD 0xffe2e2e6
+      expect(scheme.onInverseSurface, const Color(0xff2e3135)); //OLD 0xff2f3033
+      expect(scheme.inversePrimary, const Color(0xff36618e)); // OLD 0xff0061a4
       expect(scheme.surfaceTint, const Color(0xffa0cafd)); // OLD 0xff9ecaff
       //
       expect(scheme.shadow, const Color(0xff000000));
@@ -503,10 +503,10 @@ void main() {
     });
     test(
         'FC5 colors FlexColor is material3DarkOnErrorContainer '
-        'EXPECT color is Color(0xFFFFB4AB)', () {
+        'EXPECT color is Color(0xffffdad6)', () {
       expect(
         FlexColor.material3DarkOnErrorContainer,
-        equals(const Color(0xFFFFB4AB)),
+        equals(const Color(0xffffdad6)),
       );
     });
     //

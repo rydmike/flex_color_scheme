@@ -489,7 +489,8 @@ void main() {
           equalsIgnoringHashCodes(
               hcLight.toScheme.toString(minLevel: DiagnosticLevel.fine)));
     });
-
+    //'ColorScheme#00000(brightness: Brightness.light, primary: Color(0xff0000ba), onPrimary: Color(0xffffffff), primaryContainer: Color(0xffb6b6ff), onPrimaryContainer: Color(0xff000000), primaryFixed: Color(0xff0000ba), primaryFixedDim: Color(0xff0000ba), onPrimaryFixed: Color(0xffffffff), onPrimaryFixedVariant: Color(0xffffffff), secondary: Color(0xff66fff9), onSecondary: Color(0xff000000), secondaryContainer: Color(0xffc8f9f7), onSecondaryContainer: Color(0xff000000), secondaryFixed: Color(0xff66fff9), secondaryFixedDim: Color(0xff66fff9), onSecondaryFixed: Color(0xff000000), onSecondaryFixedVariant: Color(0xff000000), tertiary: Color(0xff018786), onTertiary: Color(0xffffffff), tertiaryContainer: Color(0xffb3f1f0), onTertiaryContainer: Color(0xff000000), tertiaryFixed: Color(0xff018786), tertiaryFixedDim: Color(0xff018786), onTertiaryFixed: Color(0xffffffff), onTertiaryFixedVariant: Color(0xffffffff), error: Color(0xff790000), onError: Color(0xffffffff), errorContainer: Color(0xfff1d8d8), onErrorContainer: Color(0xff000000), surface: Color(0xffffffff), onSurface: Color(0xff000000), surfaceDim: Color(0xffffffff), surfaceBright: Color(0xffffffff), surfaceContainerLowest: Color(0xffffffff), surfaceContainerLow: Color(0xffffffff), surfaceContainer: Color(0xffffffff), surfaceContainerHigh: Color(0xffffffff), surfaceContainerHighest: Color(0xffffffff), onSurfaceVariant: Color(0xff000000), outline: Color(0xff737373), outlineVariant: Color(0xffbfbfbf), shadow: Color(0xff000000), scrim: Color(0xff000000), inverseSurface: Color(0xff121212), onInverseSurface: Color(0xffffffff), inversePrimary: Color(0xff9999ff), surfaceTint: Color(0xff0000ba), background: Color(0xffffffff), onBackground: Color(0xff000000), surfaceVariant: Color(0xffeeeeee))'
+    //'ColorScheme#00000(brightness: Brightness.light, primary: Color(0xff0000ba), onPrimary: Color(0xffffffff), primaryContainer: Color(0xffb6b6ff), onPrimaryContainer: Color(0xff000000), primaryFixed: Color(0xff0000ba), primaryFixedDim: Color(0xff0000ba), onPrimaryFixed: Color(0xffaaaaaa), onPrimaryFixedVariant: Color(0xffaaaaaa), secondary: Color(0xff66fff9), onSecondary: Color(0xff000000), secondaryContainer: Color(0xffc8f9f7), onSecondaryContainer: Color(0xff000000), secondaryFixed: Color(0xff66fff9), secondaryFixedDim: Color(0xff66fff9), onSecondaryFixed: Color(0xffaaaaaa), onSecondaryFixedVariant: Color(0xffaaaaaa), tertiary: Color(0xff018786), onTertiary: Color(0xffffffff), tertiaryContainer: Color(0xffb3f1f0), onTertiaryContainer: Color(0xff000000), tertiaryFixed: Color(0xffaaaaaa), tertiaryFixedDim: Color(0xffaaaaaa), onTertiaryFixed: Color(0xffaaaaaa), onTertiaryFixedVariant: Color(0xffaaaaaa), error: Color(0xff790000), onError: Color(0xffffffff), errorContainer: Color(0xfff1d8d8), onErrorContainer: Color(0xff000000), surface: Color(0xffffffff), onSurface: Color(0xff000000), surfaceDim: Color(0xffaaaaaa), surfaceBright: Color(0xffaaaaaa), surfaceContainerLowest: Color(0xffaaaaaa), surfaceContainerLow: Color(0xffaaaaaa), surfaceContainer: Color(0xffaaaaaa), surfaceContainerHigh: Color(0xffaaaaaa), surfaceContainerHighest: Color(0xffaaaaaa), onSurfaceVariant: Color(0xff000000), outline: Color(0xff737373), outlineVariant: Color(0xffbfbfbf), shadow: Color(0xff000000), scrim: Color(0xff000000), inverseSurface: Color(0xff121212), onInverseSurface: Color(0xffffffff), inversePrimary: Color(0xff9999ff), surfaceTint: Color(0xff0000ba), background: Color(0xffffffff), onBackground: Color(0xff000000), surfaceVariant: Color(0xffeeeeee))'
     test(
         'FCS7.12-Scheme-hc-light: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
@@ -1292,19 +1293,19 @@ void main() {
     //**************************************************************************
     // Test defaults and null input resulting in expected theme values.
     //**************************************************************************
-    test(
-        'FCS7.03: GIVEN a FlexColorScheme theme with Material scheme light '
-        'colors EXPECT appbar theme color to be primary color.', () {
-      expect(themeLight.appBarTheme.backgroundColor,
-          themeLight.colorScheme.primary);
-    });
 
+    // TODO(rydmike): See if we need M2 versions of these tests too.
     test(
-        'FCS7.04: GIVEN a FlexColorScheme theme with Material scheme dark '
+        'FCS7.03: GIVEN a FlexColorScheme theme with Material3 scheme light '
+        'colors EXPECT appbar theme color to be primary color.', () {
+      expect(themeLight.appBarTheme.backgroundColor, null);
+    });
+    test(
+        'FCS7.04: GIVEN a FlexColorScheme theme with Material3 scheme dark '
         'colors EXPECT appbar theme color to be surface color.', () {
       expect(
         themeDark.appBarTheme.backgroundColor,
-        equals(themeDark.colorScheme.surface),
+        equals(null),
       );
     });
 
@@ -1316,12 +1317,13 @@ void main() {
         equals(VisualDensity.standard),
       );
     });
+    // TODO(rydmike): See if we need M2 version of this test too.
     test(
-        'FCS7.06: GIVEN a FlexColorScheme theme with null Typography input '
-        'EXPECT Typography.material2018.', () {
+        'FCS7.06: GIVEN a FlexColorScheme M3 theme with null Typography input '
+        'EXPECT Typography.material2021.', () {
       expect(
         themeLight.typography,
-        equals(Typography.material2018(platform: defaultTargetPlatform)),
+        equals(Typography.material2021(platform: defaultTargetPlatform)),
       );
     });
 
@@ -1428,15 +1430,16 @@ void main() {
       );
     });
 
+    // TODO(rydmike): See if we need M2 variants of these tests too.
     test(
-        'FCS7.18: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
+        'FCS7.18: GIVEN a FlexColorScheme.light theme FROM scheme "material3" '
         'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
-      expect(tLightL.appBarTheme.elevation, equals(0));
+      expect(tLightL.appBarTheme.elevation, equals(null));
     });
     test(
-        'FCS7.19: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
+        'FCS7.19: GIVEN a FlexColorScheme.dark theme FROM scheme "material3" '
         'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
-      expect(tDarkL.appBarTheme.elevation, equals(0));
+      expect(tDarkL.appBarTheme.elevation, equals(null));
     });
 
     test(
@@ -2624,11 +2627,11 @@ void main() {
     final TextTheme fLightT = FlexColorScheme.light().toTheme.textTheme;
     // Should be same as a light ThemeData textTheme with Typography 2018
     final TextTheme nLightT =
-        ThemeData(typography: Typography.material2018()).textTheme;
+        ThemeData(typography: Typography.material2021()).textTheme;
     test(
         'FCS7.88: GIVEN a FlexColorScheme.light with no TextTheme defined '
         'EXPECT equal to '
-        'ThemeData(typography: Typography.material2018()).textTheme.', () {
+        'ThemeData(typography: Typography.material2021()).textTheme.', () {
       expect(fLightT, equals(nLightT));
     });
 
@@ -2636,9 +2639,9 @@ void main() {
     //
     // Flex default TextTheme light
     final TextTheme fLightP = FlexColorScheme.light().toTheme.primaryTextTheme;
-    // Should be same as a light ThemeData textTheme with Typography 2018
+    // Should be same as a light ThemeData textTheme with Typography 2021
     final TextTheme nLightP =
-        ThemeData(typography: Typography.material2018()).primaryTextTheme;
+        ThemeData(typography: Typography.material2021()).primaryTextTheme;
     test(
         'FCS7.89: GIVEN a FlexColorScheme.light with no PrimaryTextTheme '
         'defined EXPECT equal '
@@ -2651,11 +2654,11 @@ void main() {
     final TextTheme fDarkT = FlexColorScheme.dark().toTheme.textTheme;
     final TextTheme nDarkT = ThemeData(
       brightness: Brightness.dark,
-      typography: Typography.material2018(),
+      typography: Typography.material2021(),
     ).textTheme;
     test(
         'FCS7.90: GIVEN a FlexColorScheme.dark with no TextTheme defined '
-        'EXPECT equal to default dark with Typography 2018.', () {
+        'EXPECT equal to default dark with Typography 2021.', () {
       expect(fDarkT, equals(nDarkT));
     });
 
@@ -2665,9 +2668,12 @@ void main() {
     // default dark theme uses an almost black color as primary color, giving
     // us the wrong on primaryTextTheme color for this test case, which is
     // part of the test.
-    final TextTheme fDarkP = FlexColorScheme.dark().toTheme.primaryTextTheme;
-    final Color nDarkPColor = FlexColorScheme.dark().toTheme.primaryColor;
+    final TextTheme fDarkP =
+        FlexColorScheme.dark(useMaterial3: false).toTheme.primaryTextTheme;
+    final Color nDarkPColor =
+        FlexColorScheme.dark(useMaterial3: false).toTheme.primaryColor;
     final TextTheme nDarkP = ThemeData(
+      useMaterial3: false,
       brightness: Brightness.dark,
       primaryColor: nDarkPColor,
       typography: Typography.material2018(),
@@ -2738,7 +2744,7 @@ void main() {
     final ThemeData nLightTD = ThemeData(
       textTheme: customText,
       primaryTextTheme: customPrimText,
-      typography: Typography.material2018(),
+      typography: Typography.material2021(),
     );
 
     // Custom light TextTheme equality verification.
@@ -2746,7 +2752,7 @@ void main() {
     final TextTheme nCText = nLightTD.textTheme;
     test(
         'FCS7.92: GIVEN a FlexColorScheme.light with custom TextTheme defined '
-        'EXPECT equal to default with same text theme and typography 2018', () {
+        'EXPECT equal to default with same text theme and typography 2021', () {
       expect(fCText, equals(nCText));
     });
     // Custom light TextTheme with Primary derived from it equality test.
@@ -2755,7 +2761,7 @@ void main() {
     test(
         'FCS7.93: GIVEN a FlexColorScheme.light with custom PrimaryTextTheme '
         'defined EXPECT the primaryTextTheme to be equal with default '
-        'ThemeData with same primary text theme and typography 2018.', () {
+        'ThemeData with same primary text theme and typography 2021.', () {
       expect(fCPText, equals(nCPText));
     });
 
@@ -2764,6 +2770,7 @@ void main() {
       textTheme: customText,
       primaryTextTheme: customPrimText,
       applyElevationOverlayColor: false,
+      useMaterial3: false,
     ).toTheme;
     final ThemeData nDarkTD = ThemeData(
       brightness: Brightness.dark,
@@ -2771,6 +2778,7 @@ void main() {
       primaryTextTheme: customPrimText,
       primaryColor: nDarkPColor,
       typography: Typography.material2018(),
+      useMaterial3: false,
     );
 
     // Custom dark TextTheme equality verification.
@@ -2799,7 +2807,7 @@ void main() {
       final ThemeData theme = FlexColorScheme.light(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
-        // useMaterial3: false, // Default value
+        useMaterial3: false,
       ).toTheme;
       expect(
           theme.appBarTheme.backgroundColor, equals(theme.colorScheme.primary));
@@ -2811,7 +2819,7 @@ void main() {
       final ThemeData theme = FlexColorScheme.dark(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
-        // useMaterial3: false, // Default value
+        useMaterial3: false,
       ).toTheme;
       expect(
           theme.appBarTheme.backgroundColor, equals(theme.colorScheme.surface));
@@ -5018,6 +5026,7 @@ void main() {
         'FCS8:2 GIVEN a FlexColorScheme.light with useMaterial3:false '
         'and a custom tabBar theme', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
+          useMaterial3: false,
           scheme: FlexScheme.materialBaseline,
           subThemesData: const FlexSubThemesData(
               tabBarItemSchemeColor: SchemeColor.tertiary));
@@ -5032,6 +5041,7 @@ void main() {
         'FCS8:3 GIVEN a FlexColorScheme.light with useMaterial3:false '
         'and a custom tabBar theme', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
+          useMaterial3: false,
           scheme: FlexScheme.materialBaseline,
           subThemesData: const FlexSubThemesData(
             tabBarItemSchemeColor: SchemeColor.tertiary,
@@ -5811,37 +5821,37 @@ void main() {
       expect(pTextTheme.labelMedium!.fontSize, equals(11));
       expect(pTextTheme.labelSmall!.fontSize, equals(10));
       // Test M2 default font colors for textTheme.
-      expect(textTheme.displayLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displayMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displaySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineSmall!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleSmall!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.bodyLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodyMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.labelLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.labelMedium!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.labelSmall!.color, equals(const Color(0xff29001a)));
+      expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
       // Test M2 default font colors for primTextTheme.
-      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfffaeef5)));
+      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets(
         'FCS11-03 FCS-M2-DARK default textTheme with some other props defined '
@@ -6197,37 +6207,37 @@ void main() {
       expect(pTextTheme.labelMedium!.fontSize, equals(12));
       expect(pTextTheme.labelSmall!.fontSize, equals(11));
       // Test M3 default font colors for textTheme.
-      expect(textTheme.displayLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displayMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displaySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineSmall!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleSmall!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.bodyLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodyMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.labelLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.labelMedium!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.labelSmall!.color, equals(const Color(0xff29001a)));
+      expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
       // Test M3 default font colors for primTextTheme.
-      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfffaeef5)));
+      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets(
         'FCS11-07 FCS-M3-DARK default textTheme with some other props defined '
@@ -6824,37 +6834,37 @@ void main() {
       expect(pTextTheme.labelMedium!.fontSize, equals(13));
       expect(pTextTheme.labelSmall!.fontSize, equals(12));
       // Test M3 custom and tinted font colors for textTheme.
-      expect(textTheme.displayLarge!.color, equals(const Color(0xd8670342)));
-      expect(textTheme.displayMedium!.color, equals(const Color(0xd8493d1d)));
-      expect(textTheme.displaySmall!.color, equals(const Color(0xd82c3558)));
-      expect(textTheme.headlineLarge!.color, equals(const Color(0xd8670342)));
-      expect(textTheme.headlineMedium!.color, equals(const Color(0xd857101c)));
-      expect(textTheme.headlineSmall!.color, equals(const Color(0xf4660642)));
-      expect(textTheme.titleLarge!.color, equals(const Color(0xf4730349)));
-      expect(textTheme.titleMedium!.color, equals(const Color(0xf45a3d1d)));
-      expect(textTheme.titleSmall!.color, equals(const Color(0xff323b2e)));
-      expect(textTheme.bodyLarge!.color, equals(const Color(0xf433241c)));
-      expect(textTheme.bodyMedium!.color, equals(const Color(0xf446002d)));
-      expect(textTheme.bodySmall!.color, equals(const Color(0xd86c0545)));
-      expect(textTheme.labelLarge!.color, equals(const Color(0xf4340358)));
-      expect(textTheme.labelMedium!.color, equals(const Color(0xff300846)));
-      expect(textTheme.labelSmall!.color, equals(const Color(0xff432822)));
+      expect(textTheme.displayLarge!.color, equals(const Color(0xd85d143e)));
+      expect(textTheme.displayMedium!.color, equals(const Color(0xd83e4e1a)));
+      expect(textTheme.displaySmall!.color, equals(const Color(0xd8224655)));
+      expect(textTheme.headlineLarge!.color, equals(const Color(0xd85d143e)));
+      expect(textTheme.headlineMedium!.color, equals(const Color(0xd84c2119)));
+      expect(textTheme.headlineSmall!.color, equals(const Color(0xf45c173f)));
+      expect(textTheme.titleLarge!.color, equals(const Color(0xf4691446)));
+      expect(textTheme.titleMedium!.color, equals(const Color(0xf4504e1a)));
+      expect(textTheme.titleSmall!.color, equals(const Color(0xff264e2a)));
+      expect(textTheme.bodyLarge!.color, equals(const Color(0xf4293519)));
+      expect(textTheme.bodyMedium!.color, equals(const Color(0xf43c112a)));
+      expect(textTheme.bodySmall!.color, equals(const Color(0xd8621642)));
+      expect(textTheme.labelLarge!.color, equals(const Color(0xf42a1455)));
+      expect(textTheme.labelMedium!.color, equals(const Color(0xff241c42)));
+      expect(textTheme.labelSmall!.color, equals(const Color(0xff373b1e)));
       // Test M3 custom and tinted font colors for primTextTheme.
-      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe558394d)));
-      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5554647)));
-      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5423d4d)));
-      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5693656)));
-      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe57e5355)));
-      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xff774764)));
-      expect(pTextTheme.titleLarge!.color, equals(const Color(0xff733e60)));
-      expect(pTextTheme.titleMedium!.color, equals(const Color(0xff6a5e4b)));
-      expect(pTextTheme.titleSmall!.color, equals(const Color(0xff11491d)));
-      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xff555848)));
-      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xff7f4d6c)));
-      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5734562)));
-      expect(pTextTheme.labelLarge!.color, equals(const Color(0xff533d68)));
-      expect(pTextTheme.labelMedium!.color, equals(const Color(0xff595170)));
-      expect(pTextTheme.labelSmall!.color, equals(const Color(0xff6a6b59)));
+      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe553424b)));
+      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5504f46)));
+      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe53d454b)));
+      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5643f55)));
+      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5795b53)));
+      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xff724e63)));
+      expect(pTextTheme.titleLarge!.color, equals(const Color(0xff6e465e)));
+      expect(pTextTheme.titleMedium!.color, equals(const Color(0xff65654a)));
+      expect(pTextTheme.titleSmall!.color, equals(const Color(0xff0e4f1c)));
+      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xff515f47)));
+      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xff7a546a)));
+      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe56e4e60)));
+      expect(pTextTheme.labelLarge!.color, equals(const Color(0xff4e4467)));
+      expect(pTextTheme.labelMedium!.color, equals(const Color(0xff56566f)));
+      expect(pTextTheme.labelSmall!.color, equals(const Color(0xff667158)));
     });
 
     testWidgets(
@@ -7013,11 +7023,11 @@ void main() {
       expect(pTextTheme.labelMedium!.fontSize, equals(13));
       expect(pTextTheme.labelSmall!.fontSize, equals(12));
       // Test M3 custom and tinted font colors for textTheme.
-      expect(textTheme.displayLarge!.color, equals(const Color(0xe26b535f)));
+      expect(textTheme.displayLarge!.color, equals(const Color(0xe26b545f)));
       expect(textTheme.displayMedium!.color, equals(const Color(0xe268605a)));
       expect(textTheme.displaySmall!.color, equals(const Color(0xe256575f)));
       expect(textTheme.headlineLarge!.color, equals(const Color(0xe27b5168)));
-      expect(textTheme.headlineMedium!.color, equals(const Color(0xe28e6b67)));
+      expect(textTheme.headlineMedium!.color, equals(const Color(0xe28e6c67)));
       expect(textTheme.headlineSmall!.color, equals(const Color(0xff835c72)));
       expect(textTheme.titleLarge!.color, equals(const Color(0xff80546d)));
       expect(textTheme.titleMedium!.color, equals(const Color(0xff777259)));
@@ -7026,8 +7036,8 @@ void main() {
       expect(textTheme.bodyMedium!.color, equals(const Color(0xff8b6278)));
       expect(textTheme.bodySmall!.color, equals(const Color(0xe2845f73)));
       expect(textTheme.labelLarge!.color, equals(const Color(0xff605275)));
-      expect(textTheme.labelMedium!.color, equals(const Color(0xff6f6680)));
-      expect(textTheme.labelSmall!.color, equals(const Color(0xff7e7e6b)));
+      expect(textTheme.labelMedium!.color, equals(const Color(0xff6f6780)));
+      expect(textTheme.labelSmall!.color, equals(const Color(0xff7e7f6b)));
       // Test M3 custom and tinted font colors for primTextTheme.
       expect(pTextTheme.displayLarge!.color, equals(const Color(0xd8631745)));
       expect(pTextTheme.displayMedium!.color, equals(const Color(0xd8415a1b)));
@@ -7219,37 +7229,37 @@ void main() {
       expect(pTextTheme.labelMedium!.fontSize, equals(11));
       expect(pTextTheme.labelSmall!.fontSize, equals(10));
       // Test M2 default font colors for textTheme.
-      expect(textTheme.displayLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displayMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displaySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineSmall!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleSmall!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.bodyLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodyMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.labelLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.labelMedium!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.labelSmall!.color, equals(const Color(0xff29001a)));
+      expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
       // Test M2 default font colors for primTextTheme.
-      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfffaeef5)));
+      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets(
         'FCS11-15 FCS-M2-DARK Google textTheme with no other props defined '
@@ -7575,7 +7585,7 @@ void main() {
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(
           brightness: Brightness.light, seedColor: const Color(0xffd9008c));
-      // FCS light, M2 and custom text theme.
+      // FCS light, M3 and custom text theme.
       final FlexColorScheme fcs = FlexColorScheme.light(
         colorScheme: scheme,
         useMaterial3: true,
@@ -7633,37 +7643,37 @@ void main() {
       expect(pTextTheme.labelMedium!.fontSize, equals(12));
       expect(pTextTheme.labelSmall!.fontSize, equals(11));
       // Test M3 default font colors for textTheme.
-      expect(textTheme.displayLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displayMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.displaySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineLarge!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineMedium!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.headlineSmall!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.titleSmall!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.bodyLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodyMedium!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.bodySmall!.color, equals(const Color(0xd8240017)));
-      expect(textTheme.labelLarge!.color, equals(const Color(0xf4240017)));
-      expect(textTheme.labelMedium!.color, equals(const Color(0xff29001a)));
-      expect(textTheme.labelSmall!.color, equals(const Color(0xff29001a)));
+      expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
+      expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
+      expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
+      expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
       // Test M3 default font colors for primTextTheme.
-      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f7e6f1)));
-      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff8e9f3)));
-      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfffaeef5)));
-      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfffaeef5)));
+      expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
+      expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
+      expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
+      expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets(
         'FCS11-19 FCS-M3-DARK Google textTheme with no other props defined '
