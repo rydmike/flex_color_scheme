@@ -25,7 +25,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 At the same time, this release uses the forced breaking change to clean up some older APIs. It also becomes
 more aligned with Flutter's Material-3 theming defaults, by using them as starting points in FCS too. 
 
-- The enum `SchemeColor` got to support for all colors in Flutter 3.22 colors, including same deprecations as in Flutter 3.22. The order of the enum values have been modified, this will break storage of the values for implementations that depend on their order. 
+- The enum `SchemeColor` got to support for all colors in Flutter 3.22 colors, including same deprecations as in Flutter 3.22. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value. 
 - `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the new Material3 color scheme used in **Flutter 3.22**. 
