@@ -2893,11 +2893,10 @@ class FlexColorScheme with Diagnosticable {
           onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3LightOnErrorContainer
               : onColors.onErrorContainer,
-          background: effectiveBackgroundColor,
-          onBackground: onColors.onBackground,
+
           surface: effectiveSurfaceColor,
           onSurface: onColors.onSurface,
-          surfaceVariant: effectiveSurfaceVariantColor,
+
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.light, onColors.onBackground, 45),
           outlineVariant:
@@ -2909,6 +2908,11 @@ class FlexColorScheme with Diagnosticable {
           inversePrimary: _inversePrimary(
               Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
+          // Deprecated ColorScheme colors in Flutter 3.22
+          // TODO(rydmike): Study what happens if we do not set these.
+          background: effectiveBackgroundColor,
+          onBackground: onColors.onBackground,
+          surfaceVariant: effectiveSurfaceVariantColor,
         );
 
     // Determine the effective AppBar color:
@@ -4817,11 +4821,10 @@ class FlexColorScheme with Diagnosticable {
           onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkOnErrorContainer
               : onColors.onErrorContainer,
-          background: effectiveBackgroundColor,
-          onBackground: onColors.onBackground,
+
           surface: effectiveSurfaceColor,
           onSurface: onColors.onSurface,
-          surfaceVariant: effectiveSurfaceVariantColor,
+
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.dark, onColors.onBackground, 45),
           outlineVariant:
@@ -4833,6 +4836,11 @@ class FlexColorScheme with Diagnosticable {
           inversePrimary: _inversePrimary(
               Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
+          // Deprecated ColorScheme colors in Flutter 3.22
+          // TODO(rydmike): Study what happens if we do not set these.
+          background: effectiveBackgroundColor,
+          onBackground: onColors.onBackground,
+          surfaceVariant: effectiveSurfaceVariantColor,
         );
 
     // Determine the effective AppBar color:
