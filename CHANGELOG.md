@@ -4,8 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**May 20, 2024**
-
+**May 22, 2024**
 
 **PACKAGE**
 
@@ -13,7 +12,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **CRITICAL TODOS**
 
-- Update internal `SchemeColor` to support all colors.
 - Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
 - Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
 - Generate full ColorScheme in Themes Playground.
@@ -27,12 +25,14 @@ This version contains a lot of breaking changes due to updates in the Material-3
 At the same time, this release uses the forced breaking change to clean up some older APIs. It also becomes
 more aligned with Flutter's Material-3 theming defaults, by using them as starting points in FCS too. 
 
+- The enum `SchemeColor` got to support for all colors in Flutter 3.22 colors, including same deprecations as in Flutter 3.22. The order of the enum values have been modified, this will break storage of the values for implementations that depend on their order. 
 - `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the new Material3 color scheme used in **Flutter 3.22**. 
 
 **CHANGE**
-- Changed all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.  
+- Changed all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.
+- Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the `SchemeColor` and `ColorScheme`.
 
 **NEW**
 

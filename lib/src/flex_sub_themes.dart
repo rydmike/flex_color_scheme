@@ -10,7 +10,7 @@ import 'flex_extensions.dart';
 // ignore_for_file: comment_references
 
 /// Enum used to select the type of border used on by the input decorator in
-/// [FlexSubThemes.inputDecorationTheme].
+
 enum FlexInputBorderType {
   /// Used to select [OutlineInputBorder] as input decorator in
   /// [FlexSubThemes.inputDecorationTheme].
@@ -22,26 +22,6 @@ enum FlexInputBorderType {
 }
 
 /// Enum used to select the type of built-in value indicator used by [Slider].
-///
-/// The current two options included Material 2 default
-/// [RectangularSliderValueIndicatorShape] and Material 3 default
-/// [DropSliderValueIndicatorShape].
-///
-/// This enum is used by [FlexSubThemes.sliderTheme].
-enum FlexSliderIndicatorType {
-  /// Used to select [RectangularSliderValueIndicatorShape] as value indicator
-  /// in [FlexSubThemes.sliderTheme].
-  ///
-  /// It is a rounded rectangle with talk bubble pointer to slider thumb.
-  rectangular,
-
-  /// Used to select [DropSliderValueIndicatorShape] as value indicator
-  /// in [FlexSubThemes.sliderTheme].
-  ///
-  /// It is a like an inverted water drop, or a map pin drop pointing
-  /// towards the slider thumb.
-  drop,
-}
 
 /// Enum used to described which color from the active theme's 30
 /// [ColorScheme] colors, should be used for by color properties available in
@@ -71,6 +51,18 @@ enum SchemeColor {
   /// The active theme's color scheme onPrimaryContainer color will be used.
   onPrimaryContainer,
 
+  /// The active theme's color scheme primaryFixed color will be used.
+  primaryFixed,
+
+  /// The active theme's color scheme primaryFixedDim color will be used.
+  primaryFixedDim,
+
+  /// The active theme's color scheme onPrimaryFixed color will be used.
+  onPrimaryFixed,
+
+  /// The active theme's color scheme onPrimaryFixedVariant color will be used.
+  onPrimaryFixedVariant,
+
   /// The active theme's color scheme secondary color will be used.
   secondary,
 
@@ -82,6 +74,18 @@ enum SchemeColor {
 
   /// The active theme's color scheme onSecondaryContainer color will be used.
   onSecondaryContainer,
+
+  /// The active theme's color scheme secondaryFixed color will be used.
+  secondaryFixed,
+
+  /// The active theme's color scheme secondaryFixedDim color will be used.
+  secondaryFixedDim,
+
+  /// The active theme's color scheme onSecondaryFixed color will be used.
+  onSecondaryFixed,
+
+  /// The active theme's color scheme onSecondaryFixedVariant color will be used.
+  onSecondaryFixedVariant,
 
   /// The active theme's color scheme tertiary color will be used.
   tertiary,
@@ -95,6 +99,18 @@ enum SchemeColor {
   /// The active theme's color scheme onTertiaryContainer color will be used.
   onTertiaryContainer,
 
+  /// The active theme's color scheme tertiaryFixed color will be used.
+  tertiaryFixed,
+
+  /// The active theme's color scheme tertiaryFixedDim color will be used.
+  tertiaryFixedDim,
+
+  /// The active theme's color scheme onTertiaryFixed color will be used.
+  onTertiaryFixed,
+
+  /// The active theme's color scheme onTertiaryFixedVariant color will be used.
+  onTertiaryFixedVariant,
+
   /// The active theme's color scheme error color will be used.
   error,
 
@@ -107,20 +123,32 @@ enum SchemeColor {
   /// The active theme's color scheme onErrorContainer color will be used.
   onErrorContainer,
 
-  /// The active theme's color scheme background color will be used.
-  background,
-
-  /// The active theme's color scheme onBackground color will be used.
-  onBackground,
-
   /// The active theme's color scheme surface color will be used.
   surface,
 
   /// The active theme's color scheme  onSurface color will be used.
   onSurface,
 
-  /// The active theme's color scheme surfaceVariant color will be used.
-  surfaceVariant,
+  /// The active theme's color scheme surfaceDim color will be used.
+  surfaceDim,
+
+  /// The active theme's color scheme surfaceBright color will be used.
+  surfaceBright,
+
+  /// The active theme's color scheme surfaceContainerLowest color will be used.
+  surfaceContainerLowest,
+
+  /// The active theme's color scheme surfaceContainerLow color will be used.
+  surfaceContainerLow,
+
+  /// The active theme's color scheme surfaceContainer color will be used.
+  surfaceContainer,
+
+  /// The active theme's color scheme surfaceContainerHigh color will be used.
+  surfaceContainerHigh,
+
+  /// The active theme's color scheme surfaceContainerHighest color will be used.
+  surfaceContainerHighest,
 
   /// The active theme's color scheme onSurfaceVariant color will be used.
   onSurfaceVariant,
@@ -148,6 +176,43 @@ enum SchemeColor {
 
   /// The active theme's color scheme surfaceTint color will be used.
   surfaceTint,
+
+  /// The active theme's color scheme background color will be used.
+  @Deprecated('Use surface instead. '
+      'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
+  background,
+
+  /// The active theme's color scheme onBackground color will be used.
+  @Deprecated('Use onSurface instead. '
+      'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
+  onBackground,
+
+  /// The active theme's color scheme surfaceVariant color will be used.
+  @Deprecated('Use surfaceContainerHighest instead. '
+      'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
+  surfaceVariant,
+}
+
+/// [FlexSubThemes.inputDecorationTheme].
+///
+/// The current two options included Material 2 default
+/// [RectangularSliderValueIndicatorShape] and Material 3 default
+/// [DropSliderValueIndicatorShape].
+///
+/// This enum is used by [FlexSubThemes.sliderTheme].
+enum FlexSliderIndicatorType {
+  /// Used to select [RectangularSliderValueIndicatorShape] as value indicator
+  /// in [FlexSubThemes.sliderTheme].
+  ///
+  /// It is a rounded rectangle with talk bubble pointer to slider thumb.
+  rectangular,
+
+  /// Used to select [DropSliderValueIndicatorShape] as value indicator
+  /// in [FlexSubThemes.sliderTheme].
+  ///
+  /// It is a like an inverted water drop, or a map pin drop pointing
+  /// towards the slider thumb.
+  drop,
 }
 
 /// Static sub-theme helpers used by widget sub theming in [FlexColorScheme].
@@ -233,7 +298,7 @@ class FlexSubThemes {
   /// corresponding to the [SchemeColor] enum selection in [value].
   ///
   /// This function is used to select a none default color available in the
-  /// theme's [ColorScheme] in opinionated sub-themes for:
+  /// theme's [ColorScheme] in opinionated sub-themes, used for example by:
   ///
   /// - [TextField] in [FlexSubThemes.inputDecorationTheme]
   /// - [TabBar] indicator color
@@ -253,6 +318,14 @@ class FlexSubThemes {
         return colorScheme.primaryContainer;
       case SchemeColor.onPrimaryContainer:
         return colorScheme.onPrimaryContainer;
+      case SchemeColor.primaryFixed:
+        return colorScheme.primaryFixed;
+      case SchemeColor.primaryFixedDim:
+        return colorScheme.primaryFixedDim;
+      case SchemeColor.onPrimaryFixed:
+        return colorScheme.onPrimaryFixed;
+      case SchemeColor.onPrimaryFixedVariant:
+        return colorScheme.onPrimaryFixedVariant;
       case SchemeColor.secondary:
         return colorScheme.secondary;
       case SchemeColor.onSecondary:
@@ -261,6 +334,14 @@ class FlexSubThemes {
         return colorScheme.secondaryContainer;
       case SchemeColor.onSecondaryContainer:
         return colorScheme.onSecondaryContainer;
+      case SchemeColor.secondaryFixed:
+        return colorScheme.secondaryFixed;
+      case SchemeColor.secondaryFixedDim:
+        return colorScheme.secondaryFixedDim;
+      case SchemeColor.onSecondaryFixed:
+        return colorScheme.onSecondaryFixed;
+      case SchemeColor.onSecondaryFixedVariant:
+        return colorScheme.onSecondaryFixedVariant;
       case SchemeColor.tertiary:
         return colorScheme.tertiary;
       case SchemeColor.onTertiary:
@@ -269,6 +350,14 @@ class FlexSubThemes {
         return colorScheme.tertiaryContainer;
       case SchemeColor.onTertiaryContainer:
         return colorScheme.onTertiaryContainer;
+      case SchemeColor.tertiaryFixed:
+        return colorScheme.tertiaryFixed;
+      case SchemeColor.tertiaryFixedDim:
+        return colorScheme.tertiaryFixedDim;
+      case SchemeColor.onTertiaryFixed:
+        return colorScheme.onTertiaryFixed;
+      case SchemeColor.onTertiaryFixedVariant:
+        return colorScheme.onTertiaryFixedVariant;
       case SchemeColor.error:
         return colorScheme.error;
       case SchemeColor.onError:
@@ -277,16 +366,24 @@ class FlexSubThemes {
         return colorScheme.errorContainer;
       case SchemeColor.onErrorContainer:
         return colorScheme.onErrorContainer;
-      case SchemeColor.background:
-        return colorScheme.background;
-      case SchemeColor.onBackground:
-        return colorScheme.onBackground;
       case SchemeColor.surface:
         return colorScheme.surface;
       case SchemeColor.onSurface:
         return colorScheme.onSurface;
-      case SchemeColor.surfaceVariant:
-        return colorScheme.surfaceVariant;
+      case SchemeColor.surfaceDim:
+        return colorScheme.surfaceDim;
+      case SchemeColor.surfaceBright:
+        return colorScheme.surfaceBright;
+      case SchemeColor.surfaceContainerLowest:
+        return colorScheme.surfaceContainerLowest;
+      case SchemeColor.surfaceContainerLow:
+        return colorScheme.surfaceContainerLow;
+      case SchemeColor.surfaceContainer:
+        return colorScheme.surfaceContainer;
+      case SchemeColor.surfaceContainerHigh:
+        return colorScheme.surfaceContainerHigh;
+      case SchemeColor.surfaceContainerHighest:
+        return colorScheme.surfaceContainerHighest;
       case SchemeColor.onSurfaceVariant:
         return colorScheme.onSurfaceVariant;
       case SchemeColor.outline:
@@ -305,6 +402,13 @@ class FlexSubThemes {
         return colorScheme.inversePrimary;
       case SchemeColor.surfaceTint:
         return colorScheme.surfaceTint;
+      // DEPRECATED (newest deprecations at the bottom)
+      case SchemeColor.background:
+        return colorScheme.surface;
+      case SchemeColor.onBackground:
+        return colorScheme.onSurface;
+      case SchemeColor.surfaceVariant:
+        return colorScheme.surfaceContainerHighest;
     }
   }
 
@@ -321,6 +425,14 @@ class FlexSubThemes {
         return SchemeColor.onPrimaryContainer;
       case SchemeColor.onPrimaryContainer:
         return SchemeColor.primaryContainer;
+      case SchemeColor.primaryFixed:
+        return SchemeColor.onPrimaryFixed;
+      case SchemeColor.onPrimaryFixed:
+        return SchemeColor.primaryFixed;
+      case SchemeColor.primaryFixedDim:
+        return SchemeColor.onPrimaryFixedVariant;
+      case SchemeColor.onPrimaryFixedVariant:
+        return SchemeColor.primaryFixedDim;
       case SchemeColor.secondary:
         return SchemeColor.onSecondary;
       case SchemeColor.onSecondary:
@@ -329,6 +441,14 @@ class FlexSubThemes {
         return SchemeColor.onSecondaryContainer;
       case SchemeColor.onSecondaryContainer:
         return SchemeColor.secondaryContainer;
+      case SchemeColor.secondaryFixed:
+        return SchemeColor.onSecondaryFixed;
+      case SchemeColor.onSecondaryFixed:
+        return SchemeColor.secondaryFixed;
+      case SchemeColor.secondaryFixedDim:
+        return SchemeColor.onSecondaryFixedVariant;
+      case SchemeColor.onSecondaryFixedVariant:
+        return SchemeColor.secondaryFixedDim;
       case SchemeColor.tertiary:
         return SchemeColor.onTertiary;
       case SchemeColor.onTertiary:
@@ -337,6 +457,14 @@ class FlexSubThemes {
         return SchemeColor.onTertiaryContainer;
       case SchemeColor.onTertiaryContainer:
         return SchemeColor.tertiaryContainer;
+      case SchemeColor.tertiaryFixed:
+        return SchemeColor.onTertiaryFixed;
+      case SchemeColor.onTertiaryFixed:
+        return SchemeColor.tertiaryFixed;
+      case SchemeColor.tertiaryFixedDim:
+        return SchemeColor.onTertiaryFixedVariant;
+      case SchemeColor.onTertiaryFixedVariant:
+        return SchemeColor.tertiaryFixedDim;
       case SchemeColor.error:
         return SchemeColor.onError;
       case SchemeColor.onError:
@@ -345,18 +473,19 @@ class FlexSubThemes {
         return SchemeColor.onErrorContainer;
       case SchemeColor.onErrorContainer:
         return SchemeColor.errorContainer;
-      case SchemeColor.background:
-        return SchemeColor.onBackground;
-      case SchemeColor.onBackground:
-        return SchemeColor.background;
       case SchemeColor.surface:
+      case SchemeColor.surfaceDim:
+      case SchemeColor.surfaceBright:
+      case SchemeColor.surfaceContainerLowest:
+      case SchemeColor.surfaceContainerLow:
+      case SchemeColor.surfaceContainer:
+      case SchemeColor.surfaceContainerHigh:
+      case SchemeColor.surfaceContainerHighest:
         return SchemeColor.onSurface;
       case SchemeColor.onSurface:
         return SchemeColor.surface;
-      case SchemeColor.surfaceVariant:
-        return SchemeColor.onSurfaceVariant;
       case SchemeColor.onSurfaceVariant:
-        return SchemeColor.surfaceVariant;
+        return SchemeColor.surfaceContainerHighest;
       case SchemeColor.outline:
         return SchemeColor.background;
       case SchemeColor.outlineVariant:
@@ -371,6 +500,13 @@ class FlexSubThemes {
         return SchemeColor.inverseSurface;
       case SchemeColor.inversePrimary:
         return SchemeColor.onSurface;
+      // DEPRECATED (newest deprecations at the bottom)
+      case SchemeColor.background:
+        return SchemeColor.onSurface;
+      case SchemeColor.onBackground:
+        return SchemeColor.surface;
+      case SchemeColor.surfaceVariant:
+        return SchemeColor.onSurfaceVariant;
     }
   }
 
