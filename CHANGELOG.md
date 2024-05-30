@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**May 22, 2024**
+**May 30, 2024**
 
 **PACKAGE**
 
@@ -36,6 +36,7 @@ more aligned with Flutter's Material-3 theming defaults, by using them as starti
 
 **NEW**
 
+- Added color constants for new Material-3 surface colors based on the monochrome seeded scheme, and its standard tones. These are used as baseline for different surface shades in FCS when seed generated colors are not being used.
 - Added `variant` a `FlexSchemeVariant` to FlexColorsScheme/FlexThemeData light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK had planned to include in version 3.22, but that did not land yet. The variants like `fidelity` will come later to Flutter. With FlexColorScheme 8.0.0 you can use them already now. 
 
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
