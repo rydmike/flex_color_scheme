@@ -78,6 +78,138 @@ class FlexColor {
   /// FlexColors standard for dark scaffold background, same as Material.
   static const Color darkScaffoldBackground = Color(0xFF121212);
 
+  // New surface colors in revised Material-3 design style that landed in
+  // Flutter 3.22.0. The new surface colors are used by the new ColorScheme
+  // in the updated Material-3 design system.
+
+  // Add these light surface colors
+  // surface 0xFFF9F9F9 Tone98 Consider 0xFFFCFCFC Tone99 instead
+  // surfaceDim 0xFFDADADA Tone87
+  // surfaceBright 0xFFF9F9F9 Tone98
+  // surfaceContainerLowest 0xFFFFFFFF Tone100
+  // surfaceContainerLow 0xFFF3F3F3 Tone96
+  // surfaceContainer 0xFFEEEEEE Tone94
+  // surfaceContainerHigh 0xFFE8E8E8 Tone92
+  // surfaceContainerHighest 0xFFE2E2E2 Tone90
+  // onSurface 0xFF1B1B1B Tone10
+  // onSurfaceVariant 0xFF474747 Tone30
+  // inverseSurface 0xFF303030 Tone20
+  // onInverseSurface 0xFFF1F1F1 Tone95
+
+  /// None tinted neutral surface color used as FlexColor standard for light
+  /// surface. Based on M3 monochrome tone 98.
+  static const Color lightM3Surface = Color(0xFFF9F9F9);
+
+  /// None tinted neutral surfaceDim color used as FlexColor standard for light
+  /// surfaceDim. Based on M3 monochrome tone 87.
+  static const Color lightM3SurfaceDim = Color(0xFFDADADA);
+
+  /// None tinted neutral surfaceBright color used as FlexColor standard for
+  /// light surfaceBright. Based on M3 monochrome tone 98.
+  static const Color lightM3SurfaceBright = Color(0xFFF9F9F9);
+
+  /// None tinted neutral surfaceContainerLowest color used as FlexColor
+  /// standard for light surfaceContainerLowest.
+  /// Based on M3 monochrome tone 100.
+  static const Color lightM3SurfaceContainerLowest = Color(0xFFFFFFFF);
+
+  /// None tinted neutral surfaceContainerLow color used as FlexColor standard
+  /// for light surfaceContainerLow. Based on M3 monochrome tone 96.
+  static const Color lightM3SurfaceContainerLow = Color(0xFFF3F3F3);
+
+  /// None tinted neutral surfaceContainer color used as FlexColor standard for
+  /// light surfaceContainer. Based on M3 monochrome tone 94.
+  static const Color lightM3SurfaceContainer = Color(0xFFEEEEEE);
+
+  /// None tinted neutral surfaceContainerHigh color used as FlexColor standard
+  /// for light surfaceContainerHigh. Based on M3 monochrome tone 92.
+  static const Color lightM3SurfaceContainerHigh = Color(0xFFE8E8E8);
+
+  /// None tinted neutral surfaceContainerHighest color used as FlexColor
+  /// standard for light surfaceContainerHighest.
+  /// Based on M3 monochrome tone 90.
+  static const Color lightM3SurfaceContainerHighest = Color(0xFFE2E2E2);
+
+  /// None tinted neutral onSurface color used as FlexColor standard for light
+  /// onSurface. Based on M3 monochrome tone 10.
+  static const Color lightM3OnSurface = Color(0xFF1B1B1B);
+
+  /// None tinted neutral onSurfaceVariant color used as FlexColor standard for
+  /// light onSurfaceVariant. Based on M3 monochrome tone 30.
+  static const Color lightM3OnSurfaceVariant = Color(0xFF474747);
+
+  /// None tinted neutral inverseSurface color used as FlexColor standard for
+  /// light inverseSurface. Based on M3 monochrome tone 20.
+  static const Color lightM3InverseSurface = Color(0xFF303030);
+
+  /// None tinted neutral onInverseSurface color used as FlexColor standard for
+  /// light onInverseSurface. Based on M3 monochrome tone 95.
+  static const Color lightM3OnInverseSurface = Color(0xFFF1F1F1);
+
+  // Add these dark surface colors
+  // surface 0xFF131313 Tone6 Consider 0xFF0E0E0E Tone4 instead
+  // surfaceDim 0xFF131313 Tone6 Consider 0xFF0E0E0E Tone4 instead
+  // surfaceBright 0xFF393939 Tone24
+  // surfaceContainerLowest 0xFF0E0E0E Tone4 Consider 0xFF070707 Tone2 instead
+  // surfaceContainerLow 0xFF1B1B1B Tone10
+  // surfaceContainer 0xFF1F1F1F Tone12
+  // surfaceContainerHigh 0xFF2A2A2A Tone17
+  // surfaceContainerHighest 0xFF353535 Tone22
+  // onSurface 0xFFE2E2E2 Tone90
+  // onSurfaceVariant 0xFFC6C6C6 Tone80
+  // inverseSurface 0xFFE2E2E2 Tone90
+  // onInverseSurface 0xFF303030 Tone20
+
+  /// None tinted neutral surface color used as FlexColor standard for dark
+  /// surface. Based on M3 monochrome tone 6.
+  static const Color darkM3Surface = Color(0xFF131313);
+
+  /// None tinted neutral surfaceDim color used as FlexColor standard for dark
+  /// surfaceDim. Based on M3 monochrome tone 6.
+  static const Color darkM3SurfaceDim = Color(0xFF131313);
+
+  /// None tinted neutral surfaceBright color used as FlexColor standard for
+  /// dark surfaceBright. Based on M3 monochrome tone 24.
+  static const Color darkM3SurfaceBright = Color(0xFF393939);
+
+  /// None tinted neutral surfaceContainerLowest color used as FlexColor
+  /// standard for dark surfaceContainerLowest.
+  /// Based on M3 monochrome tone 4.
+  static const Color darkM3SurfaceContainerLowest = Color(0xFF0E0E0E);
+
+  /// None tinted neutral surfaceContainerLow color used as FlexColor standard
+  /// for dark surfaceContainerLow. Based on M3 monochrome tone 10.
+  static const Color darkM3SurfaceContainerLow = Color(0xFF1B1B1B);
+
+  /// None tinted neutral surfaceContainer color used as FlexColor standard for
+  /// dark surfaceContainer. Based on M3 monochrome tone 12.
+  static const Color darkM3SurfaceContainer = Color(0xFF1F1F1F);
+
+  /// None tinted neutral surfaceContainerHigh color used as FlexColor standard
+  /// for dark surfaceContainerHigh. Based on M3 monochrome tone 17.
+  static const Color darkM3SurfaceContainerHigh = Color(0xFF2A2A2A);
+
+  /// None tinted neutral surfaceContainerHighest color used as FlexColor
+  /// standard for dark surfaceContainerHighest.
+  /// Based on M3 monochrome tone 22.
+  static const Color darkM3SurfaceContainerHighest = Color(0xFF353535);
+
+  /// None tinted neutral onSurface color used as FlexColor standard for dark
+  /// onSurface. Based on M3 monochrome tone 90.
+  static const Color darkM3OnSurface = Color(0xFFE2E2E2);
+
+  /// None tinted neutral onSurfaceVariant color used as FlexColor standard for
+  /// dark onSurfaceVariant. Based on M3 monochrome tone 80.
+  static const Color darkM3OnSurfaceVariant = Color(0xFFC6C6C6);
+
+  /// None tinted neutral inverseSurface color used as FlexColor standard for
+  /// dark inverseSurface. Based on M3 monochrome tone 90.
+  static const Color darkM3InverseSurface = Color(0xFFE2E2E2);
+
+  /// None tinted neutral onInverseSurface color used as FlexColor standard for
+  /// dark onInverseSurface. Based on M3 monochrome tone 20.
+  static const Color darkM3OnInverseSurface = Color(0xFF303030);
+
   // The Material standard error colors for light and dark modes as defined by
   // https://material.io/design/color/the-color-system.html#color-theme-creation.
   // As they were July 11, 2020.
