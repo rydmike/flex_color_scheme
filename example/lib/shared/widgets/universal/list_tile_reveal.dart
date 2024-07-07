@@ -152,6 +152,7 @@ class _ListTileRevealState extends State<ListTileReveal> {
           transitionBuilder: (Widget child, Animation<double> animation) {
             return SizeTransition(
               sizeFactor: animation,
+              axisAlignment: _isOpen ? 1 : -1,
               child: child,
             );
           },
