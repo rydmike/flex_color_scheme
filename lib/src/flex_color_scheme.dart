@@ -2669,6 +2669,13 @@ class FlexColorScheme with Diagnosticable {
       blendColors: FlexSchemeSurfaceColors(
         surface: blendColor,
         surfaceVariant: blendColor,
+        surfaceDim: blendColor,
+        surfaceBright: blendColor,
+        surfaceContainerLowest: blendColor,
+        surfaceContainerLow: blendColor,
+        surfaceContainer: blendColor,
+        surfaceContainerHigh: blendColor,
+        surfaceContainerHighest: blendColor,
         inverseSurface: blendColor,
         dialogBackground: blendColor,
         background: blendColor,
@@ -2679,6 +2686,13 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSchemeSurfaceColors(
               surface: seedScheme!.surface,
               surfaceVariant: seedScheme.surfaceVariant,
+              surfaceDim: seedScheme.surfaceDim,
+              surfaceBright: seedScheme.surfaceBright,
+              surfaceContainerLowest: seedScheme.surfaceContainerLowest,
+              surfaceContainerLow: seedScheme.surfaceContainerLow,
+              surfaceContainer: seedScheme.surfaceContainer,
+              surfaceContainerHigh: seedScheme.surfaceContainerHigh,
+              surfaceContainerHighest: seedScheme.surfaceContainerHighest,
               inverseSurface: seedScheme.inverseSurface,
               dialogBackground: seedScheme.surface,
               background: seedScheme.background,
@@ -2689,6 +2703,13 @@ class FlexColorScheme with Diagnosticable {
               ? FlexSchemeSurfaceColors(
                   surface: colorScheme.surface,
                   surfaceVariant: colorScheme.surfaceVariant,
+                  surfaceDim: colorScheme.surfaceDim,
+                  surfaceBright: colorScheme.surfaceBright,
+                  surfaceContainerLowest: colorScheme.surfaceContainerLowest,
+                  surfaceContainerLow: colorScheme.surfaceContainerLow,
+                  surfaceContainer: colorScheme.surfaceContainer,
+                  surfaceContainerHigh: colorScheme.surfaceContainerHigh,
+                  surfaceContainerHighest: colorScheme.surfaceContainerHighest,
                   inverseSurface: colorScheme.inverseSurface,
                   dialogBackground: colorScheme.surface,
                   background: colorScheme.background,
@@ -2742,6 +2763,13 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainer: effectiveColors.tertiaryContainer,
       surface: inputSurface,
       surfaceVariant: inputSurfaceVariant,
+      surfaceDim: surfaceSchemeColors.surfaceDim,
+      surfaceBright: surfaceSchemeColors.surfaceBright,
+      surfaceContainerLowest: surfaceSchemeColors.surfaceContainerLowest,
+      surfaceContainerLow: surfaceSchemeColors.surfaceContainerLow,
+      surfaceContainer: surfaceSchemeColors.surfaceContainer,
+      surfaceContainerHigh: surfaceSchemeColors.surfaceContainerHigh,
+      surfaceContainerHighest: surfaceSchemeColors.surfaceContainerHighest,
       inverseSurface: surfaceSchemeColors.inverseSurface,
       background: inputBackground,
       error: effectiveColors.error!,
@@ -2779,6 +2807,20 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant:
           seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
+      onSurfaceDim:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceBright:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerLowest:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerLow:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainer:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerHigh:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerHighest:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       onBackground:
@@ -2793,6 +2835,13 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainerAlpha: alphaOnValue.tertiaryContainerAlpha,
       surfaceAlpha: alphaOnValue.surfaceAlpha,
       surfaceVariantAlpha: alphaOnValue.surfaceVariantAlpha,
+      surfaceDimAlpha: alphaOnValue.surfaceAlpha,
+      surfaceBrightAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerLowestAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerLowAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerHighAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerHighestAlpha: alphaOnValue.surfaceAlpha,
       inverseSurfaceAlpha: alphaOnValue.inverseSurfaceAlpha,
       backgroundAlpha: alphaOnValue.backgroundAlpha,
       errorAlpha: alphaOnMain.errorAlpha,
@@ -2806,6 +2855,29 @@ class FlexColorScheme with Diagnosticable {
         lightIsWhite ? inputSurface.lighten(5) : inputSurface;
     final Color effectiveSurfaceVariantColor =
         lightIsWhite ? inputSurfaceVariant.lighten(5) : inputSurfaceVariant;
+
+    final Color effectiveSurfaceDimColor = lightIsWhite
+        ? surfaceSchemeColors.surfaceDim.lighten(5)
+        : surfaceSchemeColors.surfaceDim;
+    final Color effectiveSurfaceBrightColor = lightIsWhite
+        ? surfaceSchemeColors.surfaceBright.lighten(5)
+        : surfaceSchemeColors.surfaceBright;
+    final Color effectiveSurfaceContainerLowestColor = lightIsWhite
+        ? surfaceSchemeColors.surfaceContainerLowest.lighten(5)
+        : surfaceSchemeColors.surfaceContainerLowest;
+    final Color effectiveSurfaceContainerLowColor = lightIsWhite
+        ? surfaceSchemeColors.surfaceContainerLow.lighten(5)
+        : surfaceSchemeColors.surfaceContainerLow;
+    final Color effectiveSurfaceContainerColor = lightIsWhite
+        ? surfaceSchemeColors.surfaceContainer.lighten(5)
+        : surfaceSchemeColors.surfaceContainer;
+    final Color effectiveSurfaceContainerColorHigh = lightIsWhite
+        ? surfaceSchemeColors.surfaceContainerHigh.lighten(5)
+        : surfaceSchemeColors.surfaceContainerHigh;
+    final Color effectiveSurfaceContainerColorHighest = lightIsWhite
+        ? surfaceSchemeColors.surfaceContainerHighest.lighten(5)
+        : surfaceSchemeColors.surfaceContainerHighest;
+
     final Color effectiveInverseSurfaceColor = lightIsWhite
         ? surfaceSchemeColors.inverseSurface.darken(5)
         : surfaceSchemeColors.inverseSurface;
@@ -2845,6 +2917,13 @@ class FlexColorScheme with Diagnosticable {
           // props further below. We don't adjust onColors for
           // surfaceVariant and inverseSurface on purpose.
           surfaceVariant: effectiveSurfaceVariantColor,
+          surfaceDim: effectiveSurfaceDimColor,
+          surfaceBright: effectiveSurfaceBrightColor,
+          surfaceContainerLowest: effectiveSurfaceContainerLowestColor,
+          surfaceContainerLow: effectiveSurfaceContainerLowColor,
+          surfaceContainer: effectiveSurfaceContainerColor,
+          surfaceContainerHigh: effectiveSurfaceContainerColorHigh,
+          surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
           inverseSurface: effectiveInverseSurfaceColor,
           surfaceTint: surfaceTint,
         ) ??
@@ -2895,8 +2974,15 @@ class FlexColorScheme with Diagnosticable {
               : onColors.onErrorContainer,
 
           surface: effectiveSurfaceColor,
-          onSurface: onColors.onSurface,
+          surfaceDim: effectiveSurfaceDimColor,
+          surfaceBright: effectiveSurfaceBrightColor,
+          surfaceContainerLowest: effectiveSurfaceContainerLowestColor,
+          surfaceContainerLow: effectiveSurfaceContainerLowColor,
+          surfaceContainer: effectiveSurfaceContainerColor,
+          surfaceContainerHigh: effectiveSurfaceContainerColorHigh,
+          surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
 
+          onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.light, onColors.onBackground, 45),
           outlineVariant:
@@ -4595,6 +4681,13 @@ class FlexColorScheme with Diagnosticable {
       blendColors: FlexSchemeSurfaceColors(
         surface: blendColor,
         surfaceVariant: blendColor,
+        surfaceDim: blendColor,
+        surfaceBright: blendColor,
+        surfaceContainerLowest: blendColor,
+        surfaceContainerLow: blendColor,
+        surfaceContainer: blendColor,
+        surfaceContainerHigh: blendColor,
+        surfaceContainerHighest: blendColor,
         inverseSurface: blendColor,
         dialogBackground: blendColor,
         background: blendColor,
@@ -4606,6 +4699,13 @@ class FlexColorScheme with Diagnosticable {
               surface: seedScheme!.surface,
               surfaceVariant: seedScheme.surfaceVariant,
               inverseSurface: seedScheme.inverseSurface,
+              surfaceDim: seedScheme.surfaceDim,
+              surfaceBright: seedScheme.surfaceBright,
+              surfaceContainerLowest: seedScheme.surfaceContainerLowest,
+              surfaceContainerLow: seedScheme.surfaceContainerLow,
+              surfaceContainer: seedScheme.surfaceContainer,
+              surfaceContainerHigh: seedScheme.surfaceContainerHigh,
+              surfaceContainerHighest: seedScheme.surfaceContainerHighest,
               dialogBackground: seedScheme.surface,
               background: seedScheme.background,
               scaffoldBackground: seedScheme.background,
@@ -4615,6 +4715,13 @@ class FlexColorScheme with Diagnosticable {
               ? FlexSchemeSurfaceColors(
                   surface: colorScheme.surface,
                   surfaceVariant: colorScheme.surfaceVariant,
+                  surfaceDim: colorScheme.surfaceDim,
+                  surfaceBright: colorScheme.surfaceBright,
+                  surfaceContainerLowest: colorScheme.surfaceContainerLowest,
+                  surfaceContainerLow: colorScheme.surfaceContainerLow,
+                  surfaceContainer: colorScheme.surfaceContainer,
+                  surfaceContainerHigh: colorScheme.surfaceContainerHigh,
+                  surfaceContainerHighest: colorScheme.surfaceContainerHighest,
                   inverseSurface: colorScheme.inverseSurface,
                   dialogBackground: colorScheme.surface,
                   background: colorScheme.background,
@@ -4668,6 +4775,13 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainer: effectiveColors.tertiaryContainer,
       surface: inputSurface,
       surfaceVariant: inputSurfaceVariant,
+      surfaceDim: surfaceSchemeColors.surfaceDim,
+      surfaceBright: surfaceSchemeColors.surfaceBright,
+      surfaceContainerLowest: surfaceSchemeColors.surfaceContainerLowest,
+      surfaceContainerLow: surfaceSchemeColors.surfaceContainerLow,
+      surfaceContainer: surfaceSchemeColors.surfaceContainer,
+      surfaceContainerHigh: surfaceSchemeColors.surfaceContainerHigh,
+      surfaceContainerHighest: surfaceSchemeColors.surfaceContainerHighest,
       inverseSurface: surfaceSchemeColors.inverseSurface,
       background: inputBackground,
       error: effectiveColors.error!,
@@ -4705,6 +4819,20 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant:
           seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
+      onSurfaceDim:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceBright:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerLowest:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerLow:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainer:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerHigh:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
+      onSurfaceContainerHighest:
+          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       onBackground:
@@ -4719,6 +4847,13 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainerAlpha: alphaOnValue.tertiaryContainerAlpha,
       surfaceAlpha: alphaOnValue.surfaceAlpha,
       surfaceVariantAlpha: alphaOnValue.surfaceVariantAlpha,
+      surfaceDimAlpha: alphaOnValue.surfaceAlpha,
+      surfaceBrightAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerLowestAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerLowAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerHighAlpha: alphaOnValue.surfaceAlpha,
+      surfaceContainerHighestAlpha: alphaOnValue.surfaceAlpha,
       inverseSurfaceAlpha: alphaOnValue.inverseSurfaceAlpha,
       backgroundAlpha: alphaOnValue.backgroundAlpha,
       errorAlpha: alphaOnMain.errorAlpha,
@@ -4732,6 +4867,29 @@ class FlexColorScheme with Diagnosticable {
         darkIsTrueBlack ? inputSurface.darken(5) : inputSurface;
     final Color effectiveSurfaceVariantColor =
         darkIsTrueBlack ? inputSurfaceVariant.darken(5) : inputSurfaceVariant;
+
+    final Color effectiveSurfaceDimColor = darkIsTrueBlack
+        ? surfaceSchemeColors.surfaceDim.darken(5)
+        : surfaceSchemeColors.surfaceDim;
+    final Color effectiveSurfaceBrightColor = darkIsTrueBlack
+        ? surfaceSchemeColors.surfaceBright.darken(5)
+        : surfaceSchemeColors.surfaceBright;
+    final Color effectiveSurfaceContainerLowestColor = darkIsTrueBlack
+        ? surfaceSchemeColors.surfaceContainerLowest.darken(5)
+        : surfaceSchemeColors.surfaceContainerLowest;
+    final Color effectiveSurfaceContainerLowColor = darkIsTrueBlack
+        ? surfaceSchemeColors.surfaceContainerLow.darken(5)
+        : surfaceSchemeColors.surfaceContainerLow;
+    final Color effectiveSurfaceContainerColor = darkIsTrueBlack
+        ? surfaceSchemeColors.surfaceContainer.darken(5)
+        : surfaceSchemeColors.surfaceContainer;
+    final Color effectiveSurfaceContainerColorHigh = darkIsTrueBlack
+        ? surfaceSchemeColors.surfaceContainerHigh.darken(5)
+        : surfaceSchemeColors.surfaceContainerHigh;
+    final Color effectiveSurfaceContainerColorHighest = darkIsTrueBlack
+        ? surfaceSchemeColors.surfaceContainerHighest.darken(5)
+        : surfaceSchemeColors.surfaceContainerHighest;
+
     final Color effectiveInverseSurfaceColor = darkIsTrueBlack
         ? surfaceSchemeColors.inverseSurface.lighten(5)
         : surfaceSchemeColors.inverseSurface;
@@ -4773,6 +4931,13 @@ class FlexColorScheme with Diagnosticable {
           // props further below. We don't adjust onColors for
           // surfaceVariant and inverseSurface on purpose.
           surfaceVariant: effectiveSurfaceVariantColor,
+          surfaceDim: effectiveSurfaceDimColor,
+          surfaceBright: effectiveSurfaceBrightColor,
+          surfaceContainerLowest: effectiveSurfaceContainerLowestColor,
+          surfaceContainerLow: effectiveSurfaceContainerLowColor,
+          surfaceContainer: effectiveSurfaceContainerColor,
+          surfaceContainerHigh: effectiveSurfaceContainerColorHigh,
+          surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
           inverseSurface: effectiveInverseSurfaceColor,
           surfaceTint: surfaceTint,
         ) ??
@@ -4823,8 +4988,15 @@ class FlexColorScheme with Diagnosticable {
               : onColors.onErrorContainer,
 
           surface: effectiveSurfaceColor,
-          onSurface: onColors.onSurface,
+          surfaceDim: effectiveSurfaceDimColor,
+          surfaceBright: effectiveSurfaceBrightColor,
+          surfaceContainerLowest: effectiveSurfaceContainerLowestColor,
+          surfaceContainerLow: effectiveSurfaceContainerLowColor,
+          surfaceContainer: effectiveSurfaceContainerColor,
+          surfaceContainerHigh: effectiveSurfaceContainerColorHigh,
+          surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
 
+          onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.dark, onColors.onBackground, 45),
           outlineVariant:
