@@ -40,6 +40,13 @@ class FlexSchemeOnColors with Diagnosticable {
     this.onTertiaryContainer,
     required this.onSurface,
     this.onSurfaceVariant,
+    this.onSurfaceDim,
+    this.onSurfaceBright,
+    this.onSurfaceContainerLowest,
+    this.onSurfaceContainerLow,
+    this.onSurfaceContainer,
+    this.onSurfaceContainerHighest,
+    this.onSurfaceContainerHigh,
     this.onInverseSurface,
     required this.onBackground,
     required this.onError,
@@ -69,6 +76,29 @@ class FlexSchemeOnColors with Diagnosticable {
 
   /// A color that is clearly legible when drawn on surfaceVariant color.
   final Color? onSurfaceVariant;
+
+  /// A color that is clearly legible when drawn on surfaceDim color.
+  final Color? onSurfaceDim;
+
+  /// A color that is clearly legible when drawn on surfaceBright color.
+  final Color? onSurfaceBright;
+
+  /// A color that is clearly legible when drawn on surfaceContainerLowest
+  /// color.
+  final Color? onSurfaceContainerLowest;
+
+  /// A color that is clearly legible when drawn on surfaceContainerLow color.
+  final Color? onSurfaceContainerLow;
+
+  /// A color that is clearly legible when drawn on surfaceContainer color.
+  final Color? onSurfaceContainer;
+
+  /// A color that is clearly legible when drawn on surfaceContainerHigh color.
+  final Color? onSurfaceContainerHigh;
+
+  /// A color that is clearly legible when drawn on surfaceContainerHighest
+  /// color.
+  final Color? onSurfaceContainerHighest;
 
   /// A color that is clearly legible when drawn on inverseSurface color.
   final Color? onInverseSurface;
@@ -102,6 +132,13 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? tertiaryContainer,
     required Color surface,
     Color? surfaceVariant,
+    Color? surfaceDim,
+    Color? surfaceBright,
+    Color? surfaceContainerLowest,
+    Color? surfaceContainerLow,
+    Color? surfaceContainer,
+    Color? surfaceContainerHigh,
+    Color? surfaceContainerHighest,
     Color? inverseSurface,
     required Color background,
     required Color error,
@@ -114,6 +151,13 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onTertiaryContainer,
     Color? onSurface,
     Color? onSurfaceVariant,
+    Color? onSurfaceDim,
+    Color? onSurfaceBright,
+    Color? onSurfaceContainerLowest,
+    Color? onSurfaceContainerLow,
+    Color? onSurfaceContainer,
+    Color? onSurfaceContainerHigh,
+    Color? onSurfaceContainerHighest,
     Color? onInverseSurface,
     Color? onBackground,
     Color? onError,
@@ -126,6 +170,13 @@ class FlexSchemeOnColors with Diagnosticable {
     int tertiaryContainerAlpha = 0,
     int surfaceAlpha = 0,
     int surfaceVariantAlpha = 0,
+    int surfaceDimAlpha = 0,
+    int surfaceBrightAlpha = 0,
+    int surfaceContainerLowestAlpha = 0,
+    int surfaceContainerLowAlpha = 0,
+    int surfaceContainerAlpha = 0,
+    int surfaceContainerHighAlpha = 0,
+    int surfaceContainerHighestAlpha = 0,
     int inverseSurfaceAlpha = 0,
     int backgroundAlpha = 0,
     int errorAlpha = 0,
@@ -189,6 +240,66 @@ class FlexSchemeOnColors with Diagnosticable {
                 .blendAlpha(surfaceVariant ?? surface, surfaceVariantAlpha)
             : Colors.black
                 .blendAlpha(surfaceVariant ?? surface, surfaceVariantAlpha));
+
+    final Color usedOnSurfaceDim = onSurfaceDim ??
+        (ThemeData.estimateBrightnessForColor(surfaceDim ?? surface) ==
+                Brightness.dark
+            ? Colors.white
+                .blendAlpha(surfaceDim ?? surface, surfaceVariantAlpha)
+            : Colors.black
+                .blendAlpha(surfaceDim ?? surface, surfaceVariantAlpha));
+
+    final Color usedOnSurfaceBright = onSurfaceBright ??
+        (ThemeData.estimateBrightnessForColor(surfaceBright ?? surface) ==
+                Brightness.dark
+            ? Colors.white
+                .blendAlpha(surfaceBright ?? surface, surfaceVariantAlpha)
+            : Colors.black
+                .blendAlpha(surfaceBright ?? surface, surfaceVariantAlpha));
+
+    final Color usedOnSurfaceContainerLowest = onSurfaceContainerLowest ??
+        (ThemeData.estimateBrightnessForColor(
+                    surfaceContainerLowest ?? surface) ==
+                Brightness.dark
+            ? Colors.white.blendAlpha(
+                surfaceContainerLowest ?? surface, surfaceVariantAlpha)
+            : Colors.black.blendAlpha(
+                surfaceContainerLowest ?? surface, surfaceVariantAlpha));
+
+    final Color usedOnSurfaceContainerLow = onSurfaceContainerLow ??
+        (ThemeData.estimateBrightnessForColor(surfaceContainerLow ?? surface) ==
+                Brightness.dark
+            ? Colors.white
+                .blendAlpha(surfaceContainerLow ?? surface, surfaceVariantAlpha)
+            : Colors.black.blendAlpha(
+                surfaceContainerLow ?? surface, surfaceVariantAlpha));
+
+    final Color usedOnSurfaceContainer = onSurfaceContainer ??
+        (ThemeData.estimateBrightnessForColor(surfaceContainer ?? surface) ==
+                Brightness.dark
+            ? Colors.white
+                .blendAlpha(surfaceContainer ?? surface, surfaceVariantAlpha)
+            : Colors.black
+                .blendAlpha(surfaceContainer ?? surface, surfaceVariantAlpha));
+
+    final Color usedOnSurfaceContainerHigh = onSurfaceContainerHigh ??
+        (ThemeData.estimateBrightnessForColor(
+                    surfaceContainerHigh ?? surface) ==
+                Brightness.dark
+            ? Colors.white.blendAlpha(
+                surfaceContainerHigh ?? surface, surfaceVariantAlpha)
+            : Colors.black.blendAlpha(
+                surfaceContainerHigh ?? surface, surfaceVariantAlpha));
+
+    final Color usedOnSurfaceContainerHighest = onSurfaceContainerHighest ??
+        (ThemeData.estimateBrightnessForColor(
+                    surfaceContainerHighest ?? surface) ==
+                Brightness.dark
+            ? Colors.white.blendAlpha(
+                surfaceContainerHighest ?? surface, surfaceVariantAlpha)
+            : Colors.black.blendAlpha(
+                surfaceContainerHighest ?? surface, surfaceVariantAlpha));
+
     final Color invSurface = inverseSurface ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
             ? Colors.white
@@ -224,6 +335,13 @@ class FlexSchemeOnColors with Diagnosticable {
       onTertiaryContainer: usedOnTertiaryContainer,
       onSurface: usedOnSurface,
       onSurfaceVariant: usedOnSurfaceVariant,
+      onSurfaceDim: usedOnSurfaceDim,
+      onSurfaceBright: usedOnSurfaceBright,
+      onSurfaceContainerLowest: usedOnSurfaceContainerLowest,
+      onSurfaceContainerLow: usedOnSurfaceContainerLow,
+      onSurfaceContainer: usedOnSurfaceContainer,
+      onSurfaceContainerHigh: usedOnSurfaceContainerHigh,
+      onSurfaceContainerHighest: usedOnSurfaceContainerHighest,
       onInverseSurface: usedOnInverseSurface,
       onBackground: usedOnBackground,
       onError: usedOnError,
@@ -260,6 +378,13 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onTertiaryContainer,
     Color? onSurface,
     Color? onSurfaceVariant,
+    Color? onSurfaceDim,
+    Color? onSurfaceBright,
+    Color? onSurfaceContainerLowest,
+    Color? onSurfaceContainerLow,
+    Color? onSurfaceContainer,
+    Color? onSurfaceContainerHigh,
+    Color? onSurfaceContainerHighest,
     Color? onInverseSurface,
     Color? onBackground,
     Color? onError,
@@ -274,6 +399,17 @@ class FlexSchemeOnColors with Diagnosticable {
       onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
       onSurface: onSurface ?? this.onSurface,
       onSurfaceVariant: onSurfaceVariant ?? this.onSurfaceVariant,
+      onSurfaceDim: onSurfaceDim ?? this.onSurfaceDim,
+      onSurfaceBright: onSurfaceBright ?? this.onSurfaceBright,
+      onSurfaceContainerLowest:
+          onSurfaceContainerLowest ?? this.onSurfaceContainerLowest,
+      onSurfaceContainerLow:
+          onSurfaceContainerLow ?? this.onSurfaceContainerLow,
+      onSurfaceContainer: onSurfaceContainer ?? this.onSurfaceContainer,
+      onSurfaceContainerHigh:
+          onSurfaceContainerHigh ?? this.onSurfaceContainerHigh,
+      onSurfaceContainerHighest:
+          onSurfaceContainerHighest ?? this.onSurfaceContainerHighest,
       onInverseSurface: onInverseSurface ?? this.onInverseSurface,
       onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
@@ -295,6 +431,13 @@ class FlexSchemeOnColors with Diagnosticable {
         other.onTertiaryContainer == onTertiaryContainer &&
         other.onSurface == onSurface &&
         other.onSurfaceVariant == onSurfaceVariant &&
+        other.onSurfaceDim == onSurfaceDim &&
+        other.onSurfaceBright == onSurfaceBright &&
+        other.onSurfaceContainerLowest == onSurfaceContainerLowest &&
+        other.onSurfaceContainerLow == onSurfaceContainerLow &&
+        other.onSurfaceContainer == onSurfaceContainer &&
+        other.onSurfaceContainerHigh == onSurfaceContainerHighest &&
+        other.onSurfaceContainerHighest == onSurface &&
         other.onInverseSurface == onInverseSurface &&
         other.onBackground == onBackground &&
         other.onError == onError &&
@@ -312,6 +455,13 @@ class FlexSchemeOnColors with Diagnosticable {
         onTertiaryContainer,
         onSurface,
         onSurfaceVariant,
+        onSurfaceDim,
+        onSurfaceBright,
+        onSurfaceContainerLowest,
+        onSurfaceContainerLow,
+        onSurfaceContainer,
+        onSurfaceContainerHigh,
+        onSurfaceContainerHighest,
         onInverseSurface,
         onBackground,
         onError,
@@ -330,6 +480,17 @@ class FlexSchemeOnColors with Diagnosticable {
     properties.add(ColorProperty('onTertiaryContainer', onTertiaryContainer));
     properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('onSurfaceVariant', onSurfaceVariant));
+    properties.add(ColorProperty('onSurfaceDim', onSurfaceDim));
+    properties.add(ColorProperty('onSurfaceBright', onSurfaceBright));
+    properties.add(
+        ColorProperty('onSurfaceContainerLowest', onSurfaceContainerLowest));
+    properties
+        .add(ColorProperty('onSurfaceContainerLow', onSurfaceContainerLow));
+    properties.add(ColorProperty('onSurfaceContainer', onSurfaceContainer));
+    properties
+        .add(ColorProperty('onSurfaceContainerHigh', onSurfaceContainerHigh));
+    properties.add(
+        ColorProperty('onSurfaceContainerHighest', onSurfaceContainerHighest));
     properties.add(ColorProperty('onInverseSurface', onInverseSurface));
     properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
