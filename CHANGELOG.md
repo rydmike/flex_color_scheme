@@ -4,20 +4,22 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**May 30, 2024**
+**July 23, 2024**
 
 **PACKAGE**
 
-- Version 8.0.0 brings FlexColorScheme to be fully aligned and compatible with Flutter's Material-3 theming changes introduced in Flutter 3.22, that has a lot of subtle creaking color styles.
+- Version 8.0.0 brings **FlexColorScheme** to be fully aligned and compatible with Flutter's Material-3 theming changes introduced in Flutter 3.22, that introduced a lot of breaking changes to color styles.
 
 **CRITICAL TODOS**
 
-- Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
+* Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color. 
+  * Solution for this done
 - Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
+  * Test this!
 - Generate full ColorScheme in Themes Playground.
-- Get all tests to pass, Flutter 3.22 broke hundreds of tests in FCS.
-- Flutter 3.22 broke +100 tests in FCS, reviewing and fixing them all take time, 12 breaking tests remaining.
-- Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 419 of them remaining. 
+- Flutter 3.22 broke +100 tests in FCS, reviewing and fixing them all take time.
+- Get test back to 100% coverage.
+- Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 492 of them remaining. 
 
 **BREAKING**
 
@@ -26,16 +28,21 @@ At the same time, this release uses the forced breaking change to clean up some 
 more aligned with Flutter's Material-3 theming defaults, by using them as starting points in FCS too. 
 
 - The enum `SchemeColor` got to support for all colors in Flutter 3.22 colors, including same deprecations as in Flutter 3.22. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value. 
+  - **TODO**: Remove the deprecated colors as options in enum `SchemeColor`
 - `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the new Material3 color scheme used in **Flutter 3.22**. 
 
 **CHANGE**
+
 - Changed all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.
 - Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the `SchemeColor` and `ColorScheme`.
 
 **NEW**
 
+- Added the new surface colors to `FlexSchemeSurfaceColors`.
+- Added new on colors to `FlexSchemeOnColors`.
+- Added new surface colors to FlexColorScheme light and dark factories. 
 - Added color constants for new Material-3 surface colors based on the monochrome seeded scheme, and its standard tones. These are used as baseline for different surface shades in FCS when seed generated colors are not being used.
 - Added `variant` a `FlexSchemeVariant` to FlexColorsScheme/FlexThemeData light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK had planned to include in version 3.22, but that did not land yet. The variants like `fidelity` will come later to Flutter. With FlexColorScheme 8.0.0 you can use them already now. 
 
@@ -75,7 +82,7 @@ more aligned with Flutter's Material-3 theming defaults, by using them as starti
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
 - Updates and features for `Chip` theming.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
-- AppBar: Option to decoupled foreground/background color. (Maybe push to 8.1.0)
+- AppBar: Option to decouple foreground/background colors. (Maybe push to 8.1.0)
 - FAB: Option to decoupled foreground/background color. (Maybe push to 8.1.0)
 - Switch: Optional iOS-like style. (Maybe push to 8.1.0)
 - Switch: Platform adaptive iOS-like style. (Maybe push to 8.1.0)
