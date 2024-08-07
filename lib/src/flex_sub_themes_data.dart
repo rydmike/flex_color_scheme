@@ -1306,7 +1306,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// The [MaterialButton] is the parent class of old deprecated and removed
   /// buttons `RaisedButton`, `OutlineButton` and `FlatButton`. The theme
-  /// `ButtonThemeData` it affects, is also used by [ButtonBar] and
+  /// `ButtonThemeData` it affects, is also used by
   /// [DropdownButton] and it may still be useful to theme to same style
   /// as the theme used by the other buttons.
   ///
@@ -2103,9 +2103,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.surface].
   ///
   /// If set to null [Dialog] will use its Flutter SDK default, which is
-  /// [ThemeData.dialogBackgroundColor] which again is [ColorScheme.background].
-  /// [TimePickerDialog] dialogs will use their own Flutter SDK default,
-  /// which is [ColorScheme.surface].
+  /// [ThemeData.dialogBackgroundColor] which is [ColorScheme.surface].
   ///
   /// Since FlexColorScheme also sets [ThemeData.dialogBackgroundColor] to
   /// [ColorScheme.surface], there is no difference when using FlexColorscheme
@@ -2363,7 +2361,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]
   /// color is used. If that is null and [ThemeData.useMaterial3] is true,
-  /// [ColorScheme.surfaceVariant] will be used, otherwise divider will
+  /// [ColorScheme.outlineVariant] will be used, otherwise divider will
   /// not be drawn.
   final Color? tabBarDividerColor;
 
@@ -2612,7 +2610,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.background].
   ///
   /// If [useFlutterDefaults] true, and this property is undefined,
-  /// the effective background color will also be [ColorScheme.background].
+  /// the effective background color will also be [ColorScheme.surface].
   ///
   /// FlexColorScheme sets background defaults of [BottomNavigationBar],
   /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
@@ -2847,12 +2845,12 @@ class FlexSubThemesData with Diagnosticable {
   /// hard coded to 0.
   ///
   /// FlexColorScheme sets background defaults of [NavigationRail],
-  /// [NavigationBar] and [BottomNavigationBar] to [ColorScheme.background]
+  /// [NavigationBar] and [BottomNavigationBar] to [ColorScheme.surface]
   /// when it using opinionated component sub-themes.
   /// Flutter SDK uses different colors on all three widgets. Our opinion is
   /// that they should all default to using the same [ColorScheme] based
   /// color. FlexColorScheme uses and recommends background color as this
-  /// default. The [ColorScheme.background] was chosen as it is the same that
+  /// default. The [ColorScheme.surface] was chosen as it is the same that
   /// the Drawer uses as well, so when using tinted backgrounds where surface
   /// and background are different, they will still match.
   final SchemeColor? navigationBarBackgroundSchemeColor;
@@ -3089,12 +3087,12 @@ class FlexSubThemesData with Diagnosticable {
   /// the effective background color will be [ColorScheme.surface].
   ///
   /// FlexColorScheme sets background defaults of [NavigationRail],
-  /// [NavigationBar] and [BottomNavigationBar] to [ColorScheme.background]
+  /// [NavigationBar] and [BottomNavigationBar] to [ColorScheme.surface]
   /// when it using opinionated component sub-themes.
   /// Flutter SDK uses different colors on all three widgets. Our opinion is
   /// that they should all default to using the same [ColorScheme] based
   /// color. FlexColorScheme uses and recommends background color as this
-  /// default. The [ColorScheme.background] was chosen as it is the same that
+  /// default. The [ColorScheme.surface] was chosen as it is the same that
   /// the Drawer uses as well, so when using tinted backgrounds where surface
   /// and background are different, they will still match.
   final SchemeColor? navigationRailBackgroundSchemeColor;

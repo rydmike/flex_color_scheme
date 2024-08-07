@@ -47,7 +47,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
       case FlexAppBarStyle.surface:
         return colorScheme.surface;
       case FlexAppBarStyle.background:
-        return colorScheme.background;
+        return colorScheme.surfaceContainerLow;
       case FlexAppBarStyle.scaffoldBackground:
         return scaffold;
       case FlexAppBarStyle.custom:

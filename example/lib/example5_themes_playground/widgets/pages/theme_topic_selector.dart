@@ -338,7 +338,7 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
         scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
     final Color iconColor =
         widget.item.group.color(context); //_onColor(background);
-    final Color textColor = theme.colorScheme.onBackground.withAlpha(0xCC);
+    final Color textColor = theme.colorScheme.onSurface.withAlpha(0xCC);
     final Color unselectedColor =
         colorsAreClose(background, scaffoldBackground, isLight) ||
                 colorsAreClose(cardColor, scaffoldBackground, isLight)

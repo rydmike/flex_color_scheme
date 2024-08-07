@@ -102,9 +102,10 @@ enum FlexSystemNavBarStyle {
   surface,
 
   /// The system navigation bar will be the same color as active theme
-  /// colorScheme.background color. If your FlexColorScheme definition is set
-  /// to use primary branded surface and background colors, the same primary
-  /// color blend that the background color has received will be used.
+  /// colorScheme.surfaceContainerLow color. If your FlexColorScheme definition
+  /// is set to use primary branded surface and background colors, the same
+  /// primary color blend that the surfaceContainerLow color has received will
+  /// be used.
   background,
 
   /// The system navigation bar will be the same color as active theme
@@ -2685,7 +2686,7 @@ class FlexColorScheme with Diagnosticable {
           // Using seed colors, starting surfaces are given by generated scheme.
           ? FlexSchemeSurfaceColors(
               surface: seedScheme!.surface,
-              surfaceVariant: seedScheme.surfaceVariant,
+              surfaceVariant: seedScheme.surfaceContainerHighest,
               surfaceDim: seedScheme.surfaceDim,
               surfaceBright: seedScheme.surfaceBright,
               surfaceContainerLowest: seedScheme.surfaceContainerLowest,
@@ -2695,14 +2696,14 @@ class FlexColorScheme with Diagnosticable {
               surfaceContainerHighest: seedScheme.surfaceContainerHighest,
               inverseSurface: seedScheme.inverseSurface,
               dialogBackground: seedScheme.surface,
-              background: seedScheme.background,
-              scaffoldBackground: seedScheme.background,
+              background: seedScheme.surfaceContainerLow,
+              scaffoldBackground: seedScheme.surfaceContainerLowest,
             )
           // Colorscheme surfaces are used as starting point for blended ones.
           : colorScheme != null
               ? FlexSchemeSurfaceColors(
                   surface: colorScheme.surface,
-                  surfaceVariant: colorScheme.surfaceVariant,
+                  surfaceVariant: colorScheme.surfaceContainerHighest,
                   surfaceDim: colorScheme.surfaceDim,
                   surfaceBright: colorScheme.surfaceBright,
                   surfaceContainerLowest: colorScheme.surfaceContainerLowest,
@@ -2712,8 +2713,8 @@ class FlexColorScheme with Diagnosticable {
                   surfaceContainerHighest: colorScheme.surfaceContainerHighest,
                   inverseSurface: colorScheme.inverseSurface,
                   dialogBackground: colorScheme.surface,
-                  background: colorScheme.background,
-                  scaffoldBackground: colorScheme.background,
+                  background: colorScheme.surfaceContainerLow,
+                  scaffoldBackground: colorScheme.surfaceContainerLowest,
                 )
               : null,
     );
@@ -2824,7 +2825,7 @@ class FlexColorScheme with Diagnosticable {
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       onBackground:
-          onBackground ?? seedScheme?.onBackground ?? colorScheme?.onBackground,
+          onBackground ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onError: onError ?? seedScheme?.onError ?? colorScheme?.onError,
       onErrorContainer: seedScheme?.onError ?? colorScheme?.onErrorContainer,
       primaryAlpha: alphaOnMain.primaryAlpha,
@@ -2835,13 +2836,13 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainerAlpha: alphaOnValue.tertiaryContainerAlpha,
       surfaceAlpha: alphaOnValue.surfaceAlpha,
       surfaceVariantAlpha: alphaOnValue.surfaceVariantAlpha,
-      surfaceDimAlpha: alphaOnValue.surfaceAlpha,
-      surfaceBrightAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerLowestAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerLowAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerHighAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerHighestAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceDimAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceBrightAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerLowestAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerLowAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerHighAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerHighestAlpha: alphaOnValue.surfaceAlpha,
       inverseSurfaceAlpha: alphaOnValue.inverseSurfaceAlpha,
       backgroundAlpha: alphaOnValue.backgroundAlpha,
       errorAlpha: alphaOnMain.errorAlpha,
@@ -2853,8 +2854,8 @@ class FlexColorScheme with Diagnosticable {
     // light is white, we use provided surface color, or computed one.
     final Color effectiveSurfaceColor =
         lightIsWhite ? inputSurface.lighten(5) : inputSurface;
-    final Color effectiveSurfaceVariantColor =
-        lightIsWhite ? inputSurfaceVariant.lighten(5) : inputSurfaceVariant;
+    // final Color effectiveSurfaceVariantColor =
+    //     lightIsWhite ? inputSurfaceVariant.lighten(5) : inputSurfaceVariant;
 
     final Color effectiveSurfaceDimColor = lightIsWhite
         ? surfaceSchemeColors.surfaceDim.lighten(5)
@@ -2914,9 +2915,7 @@ class FlexColorScheme with Diagnosticable {
           tertiaryContainer: effectiveColors.tertiaryContainer,
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
-          // props further below. We don't adjust onColors for
-          // surfaceVariant and inverseSurface on purpose.
-          surfaceVariant: effectiveSurfaceVariantColor,
+          // props further below.
           surfaceDim: effectiveSurfaceDimColor,
           surfaceBright: effectiveSurfaceBrightColor,
           surfaceContainerLowest: effectiveSurfaceContainerLowestColor,
@@ -2931,7 +2930,6 @@ class FlexColorScheme with Diagnosticable {
         // override values for props we do not handle via FCS direct
         // props further below.
         colorScheme?.copyWith(
-          surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
@@ -2972,7 +2970,6 @@ class FlexColorScheme with Diagnosticable {
           onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3LightOnErrorContainer
               : onColors.onErrorContainer,
-
           surface: effectiveSurfaceColor,
           surfaceDim: effectiveSurfaceDimColor,
           surfaceBright: effectiveSurfaceBrightColor,
@@ -2981,7 +2978,6 @@ class FlexColorScheme with Diagnosticable {
           surfaceContainer: effectiveSurfaceContainerColor,
           surfaceContainerHigh: effectiveSurfaceContainerColorHigh,
           surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
-
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.light, onColors.onBackground, 45),
@@ -2994,11 +2990,6 @@ class FlexColorScheme with Diagnosticable {
           inversePrimary: _inversePrimary(
               Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
-          // Deprecated ColorScheme colors in Flutter 3.22
-          // TODO(rydmike): Study what happens if we do not set these.
-          background: effectiveBackgroundColor,
-          onBackground: onColors.onBackground,
-          surfaceVariant: effectiveSurfaceVariantColor,
         );
 
     // Determine the effective AppBar color:
@@ -4697,7 +4688,7 @@ class FlexColorScheme with Diagnosticable {
           // Using seed colors, starting surfaces are given by generated scheme.
           ? FlexSchemeSurfaceColors(
               surface: seedScheme!.surface,
-              surfaceVariant: seedScheme.surfaceVariant,
+              surfaceVariant: seedScheme.surfaceContainerHighest,
               inverseSurface: seedScheme.inverseSurface,
               surfaceDim: seedScheme.surfaceDim,
               surfaceBright: seedScheme.surfaceBright,
@@ -4707,14 +4698,14 @@ class FlexColorScheme with Diagnosticable {
               surfaceContainerHigh: seedScheme.surfaceContainerHigh,
               surfaceContainerHighest: seedScheme.surfaceContainerHighest,
               dialogBackground: seedScheme.surface,
-              background: seedScheme.background,
-              scaffoldBackground: seedScheme.background,
+              background: seedScheme.surfaceContainerLow,
+              scaffoldBackground: seedScheme.surfaceContainerLowest,
             )
           // Colorscheme surfaces are used as starting point for blended ones.
           : colorScheme != null
               ? FlexSchemeSurfaceColors(
                   surface: colorScheme.surface,
-                  surfaceVariant: colorScheme.surfaceVariant,
+                  surfaceVariant: colorScheme.surfaceContainerHighest,
                   surfaceDim: colorScheme.surfaceDim,
                   surfaceBright: colorScheme.surfaceBright,
                   surfaceContainerLowest: colorScheme.surfaceContainerLowest,
@@ -4724,8 +4715,8 @@ class FlexColorScheme with Diagnosticable {
                   surfaceContainerHighest: colorScheme.surfaceContainerHighest,
                   inverseSurface: colorScheme.inverseSurface,
                   dialogBackground: colorScheme.surface,
-                  background: colorScheme.background,
-                  scaffoldBackground: colorScheme.background,
+                  background: colorScheme.surfaceContainerLow,
+                  scaffoldBackground: colorScheme.surfaceContainerLowest,
                 )
               : null,
     );
@@ -4836,7 +4827,7 @@ class FlexColorScheme with Diagnosticable {
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       onBackground:
-          onBackground ?? seedScheme?.onBackground ?? colorScheme?.onBackground,
+          onBackground ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onError: onError ?? seedScheme?.onError ?? colorScheme?.onError,
       onErrorContainer: seedScheme?.onError ?? colorScheme?.onErrorContainer,
       primaryAlpha: alphaOnMain.primaryAlpha,
@@ -4847,13 +4838,13 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainerAlpha: alphaOnValue.tertiaryContainerAlpha,
       surfaceAlpha: alphaOnValue.surfaceAlpha,
       surfaceVariantAlpha: alphaOnValue.surfaceVariantAlpha,
-      surfaceDimAlpha: alphaOnValue.surfaceAlpha,
-      surfaceBrightAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerLowestAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerLowAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerHighAlpha: alphaOnValue.surfaceAlpha,
-      surfaceContainerHighestAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceDimAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceBrightAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerLowestAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerLowAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerHighAlpha: alphaOnValue.surfaceAlpha,
+      // surfaceContainerHighestAlpha: alphaOnValue.surfaceAlpha,
       inverseSurfaceAlpha: alphaOnValue.inverseSurfaceAlpha,
       backgroundAlpha: alphaOnValue.backgroundAlpha,
       errorAlpha: alphaOnMain.errorAlpha,
@@ -4865,8 +4856,8 @@ class FlexColorScheme with Diagnosticable {
     // true black, we use provided surface color, or computed one.
     final Color effectiveSurfaceColor =
         darkIsTrueBlack ? inputSurface.darken(5) : inputSurface;
-    final Color effectiveSurfaceVariantColor =
-        darkIsTrueBlack ? inputSurfaceVariant.darken(5) : inputSurfaceVariant;
+    // final Color effectiveSurfaceVariantColor =
+    //    darkIsTrueBlack ? inputSurfaceVariant.darken(5) : inputSurfaceVariant;
 
     final Color effectiveSurfaceDimColor = darkIsTrueBlack
         ? surfaceSchemeColors.surfaceDim.darken(5)
@@ -4928,9 +4919,7 @@ class FlexColorScheme with Diagnosticable {
           tertiaryContainer: effectiveColors.tertiaryContainer,
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
-          // props further below. We don't adjust onColors for
-          // surfaceVariant and inverseSurface on purpose.
-          surfaceVariant: effectiveSurfaceVariantColor,
+          // props further below.
           surfaceDim: effectiveSurfaceDimColor,
           surfaceBright: effectiveSurfaceBrightColor,
           surfaceContainerLowest: effectiveSurfaceContainerLowestColor,
@@ -4945,7 +4934,6 @@ class FlexColorScheme with Diagnosticable {
         // override values for props we have not handled via FCS direct
         // props further below.
         colorScheme?.copyWith(
-          surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
@@ -4986,7 +4974,6 @@ class FlexColorScheme with Diagnosticable {
           onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkOnErrorContainer
               : onColors.onErrorContainer,
-
           surface: effectiveSurfaceColor,
           surfaceDim: effectiveSurfaceDimColor,
           surfaceBright: effectiveSurfaceBrightColor,
@@ -4995,7 +4982,6 @@ class FlexColorScheme with Diagnosticable {
           surfaceContainer: effectiveSurfaceContainerColor,
           surfaceContainerHigh: effectiveSurfaceContainerColorHigh,
           surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
-
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(Brightness.dark, onColors.onBackground, 45),
@@ -5008,11 +4994,6 @@ class FlexColorScheme with Diagnosticable {
           inversePrimary: _inversePrimary(
               Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
-          // Deprecated ColorScheme colors in Flutter 3.22
-          // TODO(rydmike): Study what happens if we do not set these.
-          background: effectiveBackgroundColor,
-          onBackground: onColors.onBackground,
-          surfaceVariant: effectiveSurfaceVariantColor,
         );
 
     // Determine the effective AppBar color:
@@ -5183,7 +5164,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// By default when calling [themedSystemNavigationBar] with context, it
   /// creates a [SystemUiOverlayStyle] where the system navigator bar uses
-  /// current theme's [ColorScheme.background] as its background color and
+  /// current theme's [ColorScheme.surface] as its background color and
   /// icon colors that match this background, without any divider.
   ///
   /// The background color can be modified with [systemNavBarStyle] that
@@ -5340,9 +5321,9 @@ class FlexColorScheme with Diagnosticable {
     /// is null and context is not null, so theme colors corresponding to it
     /// can be used for the background color.
     ///
-    /// Defaults to [FlexSystemNavBarStyle.background].
+    /// Defaults to [FlexSystemNavBarStyle.surface].
     final FlexSystemNavBarStyle systemNavBarStyle =
-        FlexSystemNavBarStyle.background,
+        FlexSystemNavBarStyle.surface,
 
     /// Background color of the system navigation bar. If null the theme of
     /// context `colorScheme.background` will be used as background color.
@@ -5410,7 +5391,7 @@ class FlexColorScheme with Diagnosticable {
         ? systemNavBarStyle == FlexSystemNavBarStyle.system
             ? (isDark ? Colors.black : Colors.white)
             : systemNavBarStyle == FlexSystemNavBarStyle.background
-                ? Theme.of(context).colorScheme.background
+                ? Theme.of(context).colorScheme.surfaceContainerLow
                 : systemNavBarStyle == FlexSystemNavBarStyle.surface
                     ? Theme.of(context).colorScheme.surface
                     : systemNavBarStyle ==
@@ -6389,7 +6370,7 @@ class FlexColorScheme with Diagnosticable {
       // systemNavigationBarColor: const Color(0xFF000000),
       // If we try to set it to scheme background instead in AppBar theme, it
       // does not do anything, result will be black anyway.
-      systemNavigationBarColor: colorScheme.background,
+      systemNavigationBarColor: colorScheme.surface,
       // The systemNavigationBarIconBrightness used by the AppBar in SDK, is
       // always light, for the black background it get, like so:
       // systemNavigationBarIconBrightness: Brightness.light,
@@ -6458,7 +6439,8 @@ class FlexColorScheme with Diagnosticable {
           return (appBarBrightness == Brightness.light &&
                   (effectiveAppBarBackgroundColor == Colors.white ||
                       effectiveAppBarBackgroundColor == colorScheme.surface ||
-                      effectiveAppBarBackgroundColor == colorScheme.background))
+                      effectiveAppBarBackgroundColor ==
+                          colorScheme.surfaceContainerLow))
               ? colorScheme.onSurface.withAlpha(0x99) // 60%
               : tabBarStyleColor().withAlpha(0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
@@ -6741,7 +6723,7 @@ class FlexColorScheme with Diagnosticable {
       // ColorScheme and TextTheme.
       brightness: colorScheme.brightness,
       // TODO(rydmike): Monitor Flutter SDK deprecation of canvasColor.
-      canvasColor: colorScheme.background,
+      canvasColor: colorScheme.surface,
       // TODO(rydmike): Monitor Flutter SDK deprecation of cardColor.
       cardColor: colorScheme.surface,
       // Pass the from FlexColorScheme defined colorScheme to ThemeData
@@ -6843,7 +6825,7 @@ class FlexColorScheme with Diagnosticable {
       // course, but color scheme based themes in Flutter cannot specify it
       // separately alone. We want to do so in order to make elegantly nuanced
       // primary color branded themes.
-      scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.background,
+      scaffoldBackgroundColor: scaffoldBackground ?? colorScheme.surface,
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of secondaryHeaderColor
       // See: https://github.com/flutter/flutter/issues/91772
@@ -7770,7 +7752,8 @@ class FlexColorScheme with Diagnosticable {
         (isDark
             ? FlexColor.materialDarkSurface
             : FlexColor.materialLightSurface);
-    final Color effectiveSurfaceVariantColor = colorScheme?.surfaceVariant ??
+    final Color effectiveSurfaceVariantColor = colorScheme
+            ?.surfaceContainerHighest ??
         (isDark ? FlexColor.darkSurfaceVariant : FlexColor.lightSurfaceVariant);
 
     final Color effectiveInverseSurfaceColor = colorScheme?.inverseSurface ??
@@ -7779,7 +7762,7 @@ class FlexColorScheme with Diagnosticable {
             : FlexColor.materialDarkSurface);
 
     final Color effectiveBackgroundColor = background ??
-        colorScheme?.background ??
+        colorScheme?.surface ??
         (isDark
             ? FlexColor.materialDarkBackground
             : FlexColor.materialLightBackground);
@@ -7814,7 +7797,7 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant: colorScheme?.onSurfaceVariant,
       onInverseSurface: colorScheme?.onInverseSurface,
-      onBackground: onBackground ?? colorScheme?.onBackground,
+      onBackground: onBackground ?? colorScheme?.onSurface,
       onError: onError ?? colorScheme?.onError,
       onErrorContainer: colorScheme?.onErrorContainer,
     );
@@ -7851,11 +7834,8 @@ class FlexColorScheme with Diagnosticable {
           onError: onColors.onError,
           errorContainer: colors.errorContainer ?? errorContainerFallback,
           onErrorContainer: onColors.onErrorContainer,
-          background: effectiveBackgroundColor,
-          onBackground: onColors.onBackground,
           surface: effectiveSurfaceColor,
           onSurface: onColors.onSurface,
-          surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: colorScheme?.outline,
           outlineVariant: colorScheme?.outlineVariant,
@@ -7887,11 +7867,8 @@ class FlexColorScheme with Diagnosticable {
           onError: onColors.onError,
           errorContainer: colors.errorContainer ?? errorContainerFallback,
           onErrorContainer: onColors.onErrorContainer,
-          background: effectiveBackgroundColor,
-          onBackground: onColors.onBackground,
           surface: effectiveSurfaceColor,
           onSurface: onColors.onSurface,
-          surfaceVariant: effectiveSurfaceVariantColor,
           onSurfaceVariant: onColors.onSurfaceVariant,
           outline: _outlineColor(usedBrightness, onColors.onBackground, 45),
           outlineVariant:

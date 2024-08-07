@@ -40,9 +40,9 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
           child: Icon(Icons.lens, color: theme.colorScheme.surface.darken(5)),
         ),
         Tooltip(
-          message: 'Themed background color',
-          child:
-              Icon(Icons.lens, color: theme.colorScheme.background.darken(5)),
+          message: 'Themed surfaceContainerLow color',
+          child: Icon(Icons.lens,
+              color: theme.colorScheme.surfaceContainerLow.darken(5)),
         ),
         Tooltip(
           message: 'Themed scaffold background color',

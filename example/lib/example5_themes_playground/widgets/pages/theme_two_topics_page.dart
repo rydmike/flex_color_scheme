@@ -259,9 +259,9 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
 
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
 
     final Size mediaSize = MediaQuery.sizeOf(context);
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);

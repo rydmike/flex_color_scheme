@@ -52,11 +52,11 @@ ThemeData themeDataDark(ThemeController controller) {
     colorScheme: colorScheme,
     // Use the colorScheme to make a nicer light theme.
     primaryColor: colorScheme.surface,
-    canvasColor: colorScheme.background,
-    scaffoldBackgroundColor: colorScheme.background,
+    canvasColor: colorScheme.surface,
+    scaffoldBackgroundColor: colorScheme.surfaceContainerLowest,
     cardColor: colorScheme.surface,
     dividerColor: colorScheme.outlineVariant,
-    dialogBackgroundColor: colorScheme.background,
+    dialogBackgroundColor: colorScheme.surfaceContainer,
     indicatorColor: colorScheme.onSurface,
     // To our ThemeData we also apply the visual density, typography, selected
     // platform and useMaterial3 flag, that we used in FlexColorScheme created

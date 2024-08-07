@@ -34,9 +34,6 @@ void main() {
             surface: Color.alphaBlend(
                 const ColorScheme.light().primary.withAlpha(surfaceBlend),
                 const ColorScheme.light().surface),
-            background: Color.alphaBlend(
-                const ColorScheme.light().primary.withAlpha(backgroundBlend),
-                const ColorScheme.light().background),
           ),
         );
 
@@ -46,9 +43,6 @@ void main() {
             surface: Color.alphaBlend(
                 const ColorScheme.dark().primary.withAlpha(surfaceBlend),
                 const ColorScheme.dark().surface),
-            background: Color.alphaBlend(
-                const ColorScheme.dark().primary.withAlpha(backgroundBlend),
-                const ColorScheme.dark().background),
           ),
         );
 
@@ -62,7 +56,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.light, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: no elevation overlay color for none elevated surface.
       expect(surface,
@@ -90,7 +84,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.light, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: no elevation overlay color for none elevated surface.
       expect(surface,
@@ -118,7 +112,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.light, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: no elevation overlay color for none elevated surface.
       expect(surface,
@@ -145,7 +139,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.dark, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: no elevation overlay color for none elevated surface.
       expect(surface,
@@ -173,7 +167,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.dark, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: no elevation overlay color for none elevated surface.
       expect(surface,
@@ -201,7 +195,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.dark, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: no elevation overlay color for none elevated surface.
       expect(surface,
@@ -226,7 +220,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.dark, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: elevation overlay color for elevated surface.
       expect(surface,
@@ -256,7 +250,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.dark, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: no elevation overlay color for none elevated surface.
       expect(surface,
@@ -285,7 +279,7 @@ void main() {
       await tester.pumpWidget(testApp(ThemeMode.dark, light, dark));
 
       final Color surface = Theme.of(savedContext).colorScheme.surface;
-      final Color background = Theme.of(savedContext).colorScheme.background;
+      final Color background = Theme.of(savedContext).colorScheme.surface;
 
       // EXPECT: elevation overlay color for elevated surface.
       expect(surface,

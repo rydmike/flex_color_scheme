@@ -1160,7 +1160,7 @@ class _IconToggleButtonState extends State<IconToggleButton> {
 ButtonStyle enabledFilledButtonStyle(bool selected, ColorScheme colors) {
   return IconButton.styleFrom(
     foregroundColor: selected ? colors.onPrimary : colors.primary,
-    backgroundColor: selected ? colors.primary : colors.surfaceVariant,
+    backgroundColor: selected ? colors.primary : colors.surfaceContainerHighest,
     disabledForegroundColor: colors.onSurface.withOpacity(0.38),
     disabledBackgroundColor: colors.onSurface.withOpacity(0.12),
     hoverColor: selected
@@ -1187,7 +1187,7 @@ ButtonStyle enabledFilledTonalButtonStyle(bool selected, ColorScheme colors) {
     foregroundColor:
         selected ? colors.onSecondaryContainer : colors.onSurfaceVariant,
     backgroundColor:
-        selected ? colors.secondaryContainer : colors.surfaceVariant,
+        selected ? colors.secondaryContainer : colors.surfaceContainerHighest,
     hoverColor: selected
         ? colors.onSecondaryContainer.withOpacity(0.08)
         : colors.onSurfaceVariant.withOpacity(0.08),

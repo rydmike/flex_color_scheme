@@ -52,11 +52,11 @@ ThemeData themeDataLight(ThemeController controller) {
     colorScheme: colorScheme,
     // Use the colorScheme to make a nicer light theme.
     primaryColor: colorScheme.primary,
-    canvasColor: colorScheme.background,
-    scaffoldBackgroundColor: colorScheme.background,
+    canvasColor: colorScheme.surface,
+    scaffoldBackgroundColor: colorScheme.surfaceContainerLowest,
     cardColor: colorScheme.surface,
     dividerColor: colorScheme.outlineVariant,
-    dialogBackgroundColor: colorScheme.background,
+    dialogBackgroundColor: colorScheme.surfaceContainer,
     indicatorColor: colorScheme.onPrimary,
 
     // To our ThemeData we also apply the visual density, typography, selected

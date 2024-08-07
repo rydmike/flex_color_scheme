@@ -159,8 +159,7 @@ class ShowSubThemeColors extends StatelessWidget {
             ? Colors.black
             : Colors.white);
     final Color bottomNavBarColor =
-        theme.bottomNavigationBarTheme.backgroundColor ??
-            colorScheme.background;
+        theme.bottomNavigationBarTheme.backgroundColor ?? colorScheme.surface;
     final Color bottomNavBarItemColor =
         theme.bottomNavigationBarTheme.selectedItemColor ??
             (isDark ? colorScheme.secondary : colorScheme.primary);

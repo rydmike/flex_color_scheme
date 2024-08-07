@@ -150,7 +150,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
             Card(
               margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
               elevation: 0,
-              color: theme.colorScheme.surfaceVariant,
+              color: theme.colorScheme.surfaceContainerHighest,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                   maxHeight: widget.controller.deviceSize,

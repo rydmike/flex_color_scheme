@@ -99,13 +99,13 @@ class ShowColorSchemeColors extends StatelessWidget {
             : '';
 
     // Warning label for scaffold background when it uses to much blend.
-    final String backTooHigh = isDark
-        ? _isLight(theme.colorScheme.background)
-            ? '\nTOO HIGH'
-            : ''
-        : _isDark(theme.colorScheme.background)
-            ? '\nTOO HIGH'
-            : '';
+    // final String backTooHigh = isDark
+    //     ? _isLight(theme.colorScheme.background)
+    //         ? '\nTOO HIGH'
+    //         : ''
+    //     : _isDark(theme.colorScheme.background)
+    //         ? '\nTOO HIGH'
+    //         : '';
 
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
@@ -210,16 +210,16 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onErrorContainer,
                 textColor: colorScheme.errorContainer,
               ),
-              ColorCard(
-                label: 'Background$backTooHigh',
-                color: colorScheme.background,
-                textColor: colorScheme.onBackground,
-              ),
-              ColorCard(
-                label: 'on\nBackground',
-                color: colorScheme.onBackground,
-                textColor: colorScheme.background,
-              ),
+              // ColorCard(
+              //   label: 'Background$backTooHigh',
+              //   color: colorScheme.background,
+              //   textColor: colorScheme.onBackground,
+              // ),
+              // ColorCard(
+              //   label: 'on\nBackground',
+              //   color: colorScheme.onBackground,
+              //   textColor: colorScheme.background,
+              // ),
               ColorCard(
                 label: 'Surface$surfaceTooHigh',
                 color: colorScheme.surface,
@@ -230,16 +230,16 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onSurface,
                 textColor: colorScheme.surface,
               ),
-              ColorCard(
-                label: 'Surface\nVariant',
-                color: colorScheme.surfaceVariant,
-                textColor: colorScheme.onSurfaceVariant,
-              ),
-              ColorCard(
-                label: 'onSurface\nVariant',
-                color: colorScheme.onSurfaceVariant,
-                textColor: colorScheme.surfaceVariant,
-              ),
+              // ColorCard(
+              //   label: 'Surface\nVariant',
+              //   color: colorScheme.surfaceVariant,
+              //   textColor: colorScheme.onSurfaceVariant,
+              // ),
+              // ColorCard(
+              //   label: 'onSurface\nVariant',
+              //   color: colorScheme.onSurfaceVariant,
+              //   textColor: colorScheme.surface,
+              // ),
               ColorCard(
                 label: 'Outline',
                 color: colorScheme.outline,

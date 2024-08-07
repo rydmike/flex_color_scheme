@@ -438,7 +438,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Select the ColorScheme color used for bottom navigation bar background.
   // Background is default so no need to set that, provided here as placeholder
   // to enable easy selection of other options.
-  bottomNavigationBarBackgroundSchemeColor: SchemeColor.background,
+  bottomNavigationBarBackgroundSchemeColor: SchemeColor.surfaceContainer,
 
   // Below are some example quick override properties that you can use on the
   // M3 based NavigationBar. The section is double commented out, so it its

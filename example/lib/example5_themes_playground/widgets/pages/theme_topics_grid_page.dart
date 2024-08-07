@@ -117,9 +117,9 @@ class _ThemeTopicsGridPageState extends State<ThemeTopicsGridPage>
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     final ThemeController controller = widget.controller;
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {

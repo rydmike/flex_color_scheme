@@ -214,7 +214,7 @@ void main() {
       //     MaterialStateProperty.all<TextStyle?>(const TextStyle()),
       //
       textButtonRadius: 10,
-      textButtonSchemeColor: SchemeColor.background,
+      textButtonSchemeColor: SchemeColor.surface,
       //
       filledButtonRadius: 13,
       filledButtonSchemeColor: SchemeColor.secondary,
@@ -310,13 +310,13 @@ void main() {
       menuOpacity: 0.85,
       menuPadding: EdgeInsetsDirectional.fromSTEB(4, 5, 6, 7),
       //
-      menuItemBackgroundSchemeColor: SchemeColor.surfaceVariant,
+      menuItemBackgroundSchemeColor: SchemeColor.surfaceContainerHighest,
       menuBarRadius: 5,
       menuBarElevation: 7,
       menuBarShadowColor: Colors.blueAccent,
       //
-      menuBarBackgroundSchemeColor: SchemeColor.background,
-      menuItemForegroundSchemeColor: SchemeColor.onBackground,
+      menuBarBackgroundSchemeColor: SchemeColor.surfaceContainer,
+      menuItemForegroundSchemeColor: SchemeColor.onSurface,
       menuIndicatorBackgroundSchemeColor: SchemeColor.primaryContainer,
       menuIndicatorForegroundSchemeColor: SchemeColor.onPrimaryContainer,
       menuIndicatorRadius: 6,
@@ -334,7 +334,7 @@ void main() {
       dialogBackgroundSchemeColor: SchemeColor.errorContainer,
       useInputDecoratorThemeInDialogs: true,
       //
-      datePickerHeaderBackgroundSchemeColor: SchemeColor.surfaceVariant,
+      datePickerHeaderBackgroundSchemeColor: SchemeColor.surfaceContainerHigh,
       datePickerDialogRadius: 22,
       timePickerDialogRadius: 24,
       //
@@ -347,7 +347,7 @@ void main() {
       appBarCenterTitle: true,
       appBarScrolledUnderElevation: 4,
       //
-      bottomAppBarSchemeColor: SchemeColor.surfaceVariant,
+      bottomAppBarSchemeColor: SchemeColor.surfaceContainer,
       //
       tabBarItemSchemeColor: SchemeColor.onSecondary,
       tabBarUnselectedItemSchemeColor: SchemeColor.onSurfaceVariant,
@@ -360,7 +360,7 @@ void main() {
       //
       drawerRadius: 10,
       drawerElevation: 14,
-      drawerBackgroundSchemeColor: SchemeColor.surfaceVariant,
+      drawerBackgroundSchemeColor: SchemeColor.surfaceContainerLow,
       drawerWidth: 400,
       drawerIndicatorWidth: 350,
       drawerIndicatorRadius: 12,
@@ -369,8 +369,8 @@ void main() {
       drawerSelectedItemSchemeColor: SchemeColor.onSecondaryContainer,
       drawerUnselectedItemSchemeColor: SchemeColor.secondaryContainer,
       //
-      bottomSheetBackgroundColor: SchemeColor.background,
-      bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
+      bottomSheetBackgroundColor: SchemeColor.surfaceContainerLow,
+      bottomSheetModalBackgroundColor: SchemeColor.surfaceContainerLow,
       bottomSheetRadius: 20,
       bottomSheetElevation: 10,
       bottomSheetModalElevation: 8,
@@ -386,7 +386,7 @@ void main() {
       bottomNavigationBarSelectedIconSchemeColor: SchemeColor.primary,
       bottomNavigationBarUnselectedIconSchemeColor: SchemeColor.onSurface,
       bottomNavigationBarMutedUnselectedIcon: true,
-      bottomNavigationBarBackgroundSchemeColor: SchemeColor.surfaceVariant,
+      bottomNavigationBarBackgroundSchemeColor: SchemeColor.surfaceContainer,
       bottomNavigationBarOpacity: 0.89,
       bottomNavigationBarElevation: 4,
       bottomNavigationBarShowSelectedLabels: true,
@@ -429,7 +429,7 @@ void main() {
       navigationRailMutedUnselectedIcon: true,
       navigationRailUseIndicator: true,
       navigationRailIndicatorSchemeColor: SchemeColor.onSecondary,
-      navigationRailBackgroundSchemeColor: SchemeColor.background,
+      navigationRailBackgroundSchemeColor: SchemeColor.surface,
       navigationRailIndicatorOpacity: 0.8,
       navigationRailIndicatorRadius: 7,
       navigationRailOpacity: 1,
@@ -483,7 +483,7 @@ void main() {
           //     MaterialStateProperty.all<TextStyle?>(const TextStyle()),
           //
           textButtonRadius: 10,
-          textButtonSchemeColor: SchemeColor.background,
+          textButtonSchemeColor: SchemeColor.surface,
           //
           filledButtonRadius: 13,
           filledButtonSchemeColor: SchemeColor.secondary,
@@ -578,13 +578,13 @@ void main() {
           menuOpacity: 0.85,
           menuPadding: const EdgeInsetsDirectional.fromSTEB(4, 5, 6, 7),
           //
-          menuBarBackgroundSchemeColor: SchemeColor.background,
+          menuBarBackgroundSchemeColor: SchemeColor.surface,
           menuBarRadius: 5,
           menuBarElevation: 7,
           menuBarShadowColor: Colors.blueAccent,
           //
-          menuItemBackgroundSchemeColor: SchemeColor.surfaceVariant,
-          menuItemForegroundSchemeColor: SchemeColor.onBackground,
+          menuItemBackgroundSchemeColor: SchemeColor.secondaryContainer,
+          menuItemForegroundSchemeColor: SchemeColor.onSurface,
           menuIndicatorBackgroundSchemeColor: SchemeColor.primaryContainer,
           menuIndicatorForegroundSchemeColor: SchemeColor.onPrimaryContainer,
           menuIndicatorRadius: 6,
@@ -601,7 +601,7 @@ void main() {
           dialogElevation: 16,
           dialogBackgroundSchemeColor: SchemeColor.errorContainer,
           useInputDecoratorThemeInDialogs: true,
-          datePickerHeaderBackgroundSchemeColor: SchemeColor.surfaceVariant,
+          datePickerHeaderBackgroundSchemeColor: SchemeColor.surface,
           datePickerDialogRadius: 22,
           timePickerDialogRadius: 24,
           //
@@ -614,7 +614,7 @@ void main() {
           appBarCenterTitle: true,
           appBarScrolledUnderElevation: 4,
           //
-          bottomAppBarSchemeColor: SchemeColor.surfaceVariant,
+          bottomAppBarSchemeColor: SchemeColor.surfaceContainer,
           //
           tabBarItemSchemeColor: SchemeColor.onSecondary,
           tabBarUnselectedItemSchemeColor: SchemeColor.onSurfaceVariant,
@@ -627,7 +627,7 @@ void main() {
           //
           drawerRadius: 10,
           drawerElevation: 14,
-          drawerBackgroundSchemeColor: SchemeColor.surfaceVariant,
+          drawerBackgroundSchemeColor: SchemeColor.surfaceContainerHigh,
           drawerWidth: 400,
           drawerIndicatorWidth: 350,
           drawerIndicatorRadius: 12,
@@ -636,8 +636,8 @@ void main() {
           drawerSelectedItemSchemeColor: SchemeColor.onSecondaryContainer,
           drawerUnselectedItemSchemeColor: SchemeColor.secondaryContainer,
           //
-          bottomSheetBackgroundColor: SchemeColor.background,
-          bottomSheetModalBackgroundColor: SchemeColor.surfaceVariant,
+          bottomSheetBackgroundColor: SchemeColor.surface,
+          bottomSheetModalBackgroundColor: SchemeColor.surfaceContainerLow,
           bottomSheetRadius: 20,
           bottomSheetElevation: 10,
           bottomSheetModalElevation: 8,
@@ -653,7 +653,8 @@ void main() {
           bottomNavigationBarSelectedIconSchemeColor: SchemeColor.primary,
           bottomNavigationBarUnselectedIconSchemeColor: SchemeColor.onSurface,
           bottomNavigationBarMutedUnselectedIcon: true,
-          bottomNavigationBarBackgroundSchemeColor: SchemeColor.surfaceVariant,
+          bottomNavigationBarBackgroundSchemeColor:
+              SchemeColor.surfaceContainer,
           bottomNavigationBarOpacity: 0.89,
           bottomNavigationBarElevation: 4,
           bottomNavigationBarShowSelectedLabels: true,
@@ -700,7 +701,7 @@ void main() {
           navigationRailMutedUnselectedIcon: true,
           navigationRailUseIndicator: true,
           navigationRailIndicatorSchemeColor: SchemeColor.onSecondary,
-          navigationRailBackgroundSchemeColor: SchemeColor.background,
+          navigationRailBackgroundSchemeColor: SchemeColor.surface,
           navigationRailIndicatorOpacity: 0.8,
           navigationRailIndicatorRadius: 7,
           navigationRailOpacity: 1,

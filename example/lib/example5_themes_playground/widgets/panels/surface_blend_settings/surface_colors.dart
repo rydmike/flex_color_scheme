@@ -111,9 +111,9 @@ class SurfaceColors extends StatelessWidget {
                           key: ValueKey<String>('sur scaffoldBackgroundColor '
                               '${theme.scaffoldBackgroundColor}'),
                           color: theme.scaffoldBackgroundColor,
-                          textColor: colorScheme.onBackground,
+                          textColor: colorScheme.onSurface,
                           label: 'Scaffold\nbackground',
-                          tone: tones.backgroundTone,
+                          tone: tones.surfaceTone,
                           showTone: false,
                         ),
                       ),
@@ -121,14 +121,14 @@ class SurfaceColors extends StatelessWidget {
                     Expanded(
                       flex: 6,
                       child: Material(
-                        color: colorScheme.onBackground,
+                        color: colorScheme.onSurface,
                         child: ColorNameValue(
                           key: ValueKey<String>('sur onBackground '
-                              '${colorScheme.onBackground}'),
-                          color: colorScheme.onBackground,
-                          textColor: colorScheme.background,
+                              '${colorScheme.onSurface}'),
+                          color: colorScheme.onSurface,
+                          textColor: colorScheme.surface,
                           label: 'onBackground',
-                          tone: tones.onBackgroundTone,
+                          tone: tones.onSurfaceTone,
                           showTone: showTones,
                         ),
                       ),
@@ -154,14 +154,14 @@ class SurfaceColors extends StatelessWidget {
                     Expanded(
                       flex: 7,
                       child: Material(
-                        color: colorScheme.background,
+                        color: colorScheme.surface,
                         child: ColorNameValue(
                           key: ValueKey<String>('sur background '
-                              '${colorScheme.background}'),
-                          color: colorScheme.background,
-                          textColor: colorScheme.onBackground,
+                              '${colorScheme.surface}'),
+                          color: colorScheme.surface,
+                          textColor: colorScheme.onSurface,
                           label: 'background',
-                          tone: tones.backgroundTone,
+                          tone: tones.surfaceTone,
                           showTone: showTones,
                         ),
                       ),
@@ -169,14 +169,14 @@ class SurfaceColors extends StatelessWidget {
                     Expanded(
                       flex: 6,
                       child: Material(
-                        color: colorScheme.onBackground,
+                        color: colorScheme.onSurface,
                         child: ColorNameValue(
                           key: ValueKey<String>('sur onBackground '
-                              '${colorScheme.onBackground}'),
-                          color: colorScheme.onBackground,
-                          textColor: colorScheme.background,
+                              '${colorScheme.onSurface}'),
+                          color: colorScheme.onSurface,
+                          textColor: colorScheme.surface,
                           label: 'onBackground',
-                          tone: tones.onBackgroundTone,
+                          tone: tones.onSurfaceTone,
                           showTone: showTones,
                         ),
                       ),
@@ -250,14 +250,14 @@ class SurfaceColors extends StatelessWidget {
                     Expanded(
                       flex: 7,
                       child: Material(
-                        color: colorScheme.surfaceVariant,
+                        color: colorScheme.surfaceContainerHighest,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur surfaceVariant '
-                              '${colorScheme.surfaceVariant}'),
-                          color: colorScheme.surfaceVariant,
+                          key: ValueKey<String>('sur surfaceContainerHighest '
+                              '${colorScheme.surfaceContainerHighest}'),
+                          color: colorScheme.surfaceContainerHighest,
                           textColor: colorScheme.onSurfaceVariant,
                           label: 'surface\u200BVariant',
-                          tone: tones.surfaceVariantTone,
+                          tone: tones.surfaceContainerHighestTone,
                           showTone: showTones,
                         ),
                       ),
@@ -270,7 +270,7 @@ class SurfaceColors extends StatelessWidget {
                           key: ValueKey<String>('sur onSurfaceVariant '
                               '${colorScheme.onSurfaceVariant}'),
                           color: colorScheme.onSurfaceVariant,
-                          textColor: colorScheme.surfaceVariant,
+                          textColor: colorScheme.surfaceContainerHighest,
                           label: 'onSurface\u200BVariant',
                           tone: tones.onSurfaceVariantTone,
                           showTone: showTones,

@@ -225,9 +225,9 @@ class _ThemePanelView extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
 
     // Logic to show divider
     final Color background = theme.scaffoldBackgroundColor;
