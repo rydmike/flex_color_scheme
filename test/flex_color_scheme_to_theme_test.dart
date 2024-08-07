@@ -281,8 +281,6 @@ void main() {
       onTertiaryContainer: Color(0xff000000),
       error: Color(0xff790000),
       onError: Color(0xffffffff),
-      background: Color(0xffffffff),
-      onBackground: Color(0xff000000),
       surface: Color(0xffffffff),
       onSurface: Color(0xff000000),
     );
@@ -372,8 +370,6 @@ void main() {
             onError: Colors.white,
             surface: Colors.white,
             onSurface: Colors.black,
-            background: Colors.white,
-            onBackground: Colors.black,
           ).toScheme.toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light(
             colorScheme: overrideScheme,
@@ -395,8 +391,6 @@ void main() {
           onError: Colors.white,
           surface: Colors.white,
           onSurface: Colors.black,
-          background: Colors.white,
-          onBackground: Colors.black,
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
@@ -451,8 +445,6 @@ void main() {
       onTertiaryContainer: Color(0xff000000),
       error: Color(0xff790000),
       onError: Color(0xffffffff),
-      background: Color(0xffffffff),
-      onBackground: Color(0xff000000),
       surface: Color(0xffffffff),
       onSurface: Color(0xff000000),
     );
@@ -537,8 +529,6 @@ void main() {
       onTertiaryContainer: Colors.black,
       error: const Color(0xff9b374d),
       onError: Colors.black,
-      background: const Color(0xff121212),
-      onBackground: Colors.white,
       surface: const Color(0xff121212),
       onSurface: Colors.white,
     );
@@ -692,8 +682,6 @@ void main() {
       onError: Colors.black,
       surface: Color(0xff121212),
       onSurface: Colors.white,
-      background: Color(0xff121212),
-      onBackground: Colors.white,
     );
 
     test(
@@ -777,14 +765,12 @@ void main() {
             tertiary: const Color(0xff03dac6),
             tertiaryContainer: const Color(0xff03dac6),
             surface: const Color(0xff121212),
-            background: const Color(0xff121212),
             error: const Color(0xff9b374d),
             onPrimary: Colors.black,
             onPrimaryContainer: Colors.black,
             onSecondary: Colors.black,
             onSecondaryContainer: Colors.black,
             onSurface: Colors.white,
-            onBackground: Colors.white,
             onError: Colors.white,
           ).toScheme.toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -834,14 +820,12 @@ void main() {
             tertiary: const Color(0xff03dac6),
             tertiaryContainer: const Color(0xff03dac6),
             surface: const Color(0xff121212),
-            background: const Color(0xff121212),
             error: const Color(0xff9b374d),
             onPrimary: Colors.black,
             onPrimaryContainer: Colors.black,
             onSecondary: Colors.black,
             onSecondaryContainer: Colors.black,
             onSurface: Colors.white,
-            onBackground: Colors.white,
             onError: Colors.white,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -1939,8 +1923,6 @@ void main() {
         onTertiaryContainer: const Color(0xff000000),
         error: const Color(0xff790000),
         onError: const Color(0xffffffff),
-        background: const Color(0xfffaf3f3),
-        onBackground: const Color(0xff000000),
         surface: const Color(0xfffaf3f3),
         onSurface: const Color(0xff000000),
         //
@@ -2027,8 +2009,6 @@ void main() {
         onTertiaryContainer: Color(0xff000000),
         error: Color(0xff790000),
         onError: Color(0xffffffff),
-        background: Color(0xfffaf3f3),
-        onBackground: Color(0xff000000),
         surface: Color(0xfffaf3f3),
         onSurface: Color(0xff000000),
         //
@@ -2132,8 +2112,6 @@ void main() {
         onTertiaryContainer: Color(0xffffffff),
         error: Color(0xffcf6679),
         onError: Color(0xff000000),
-        background: Color(0xff191313),
-        onBackground: Color(0xffffffff),
         surface: Color(0xff0e0c0c),
         onSurface: Color(0xffffffff),
         //
@@ -2455,7 +2433,6 @@ void main() {
       lightIsWhite: true,
       usedColors: 3,
       surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
       scaffoldBackground: FlexColor.materialLightBackground,
       applyElevationOverlayColor: false,
     ).toTheme;
@@ -2473,7 +2450,6 @@ void main() {
       darkIsTrueBlack: true,
       usedColors: 3,
       surface: FlexColor.materialDarkSurface,
-      background: FlexColor.materialDarkBackground,
       scaffoldBackground: FlexColor.materialDarkBackground,
       applyElevationOverlayColor: true,
     ).toTheme;
@@ -2490,7 +2466,6 @@ void main() {
       bottomAppBarElevation: 1,
       usedColors: 3,
       surface: FlexColor.materialDarkSurface,
-      background: FlexColor.materialDarkBackground,
       scaffoldBackground: FlexColor.materialDarkBackground,
     ).toTheme;
 
