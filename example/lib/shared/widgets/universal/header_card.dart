@@ -184,6 +184,8 @@ class HeaderCard extends StatelessWidget {
 
     return FocusTraversalGroup(
       child: Card(
+        // TODO(rydmike): We need better container colors for the app!
+        color: scheme.surfaceContainerLow,
         margin: margin,
         shape: shapeBorder,
         elevation: elevation,
