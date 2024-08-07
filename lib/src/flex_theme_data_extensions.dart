@@ -451,20 +451,6 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? surface,
 
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and
-    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
-    ///
-    /// Defaults to null.
-    final Color? background,
-
     /// The color of the [Scaffold] background.
     ///
     /// The color is applied to [ThemeData.scaffoldBackgroundColor].
@@ -634,24 +620,6 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSurface,
-
-    /// A color that is clearly legible when drawn on [background] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this extension, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -1331,6 +1299,44 @@ extension FlexThemeData on ThemeData {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     final Iterable<ThemeExtension<dynamic>>? extensions,
+
+    /// A color that typically appears behind scrollable content.
+    ///
+    /// The color is applied to [ThemeData.canvasColor] and
+    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
+    /// [Material] of type [MaterialType.canvas].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
+    /// [FlexSurface].
+    ///
+    /// Defaults to null.
+    @Deprecated('Use surface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? background,
+
+    /// A color that is clearly legible when drawn on [background] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [background] and [onBackground] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
+    @Deprecated('Use onSurface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? onBackground,
   }) =>
       FlexColorScheme.light(
         colors: colors,
@@ -1353,7 +1359,6 @@ extension FlexThemeData on ThemeData {
         tertiaryContainer: tertiaryContainer,
         error: error,
         surface: surface,
-        background: background,
         scaffoldBackground: scaffoldBackground,
         dialogBackground: dialogBackground,
         appBarBackground: appBarBackground,
@@ -1364,7 +1369,6 @@ extension FlexThemeData on ThemeData {
         onTertiary: onTertiary,
         onTertiaryContainer: onTertiaryContainer,
         onSurface: onSurface,
-        onBackground: onBackground,
         onError: onError,
         surfaceTint: surfaceTint,
         lightIsWhite: lightIsWhite,
@@ -1798,21 +1802,6 @@ extension FlexThemeData on ThemeData {
     /// Defaults to null.
     final Color? surface,
 
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and
-    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface], or if a [colorScheme] was provided it will override the
-    /// same color in it as well.
-    ///
-    /// Defaults to null.
-    final Color? background,
-
     /// The color of the [Scaffold] background.
     ///
     /// The color is applied to [ThemeData.scaffoldBackgroundColor].
@@ -1982,24 +1971,6 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onSurface,
-
-    /// A color that is clearly legible when drawn on [background] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this extension, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -2676,6 +2647,45 @@ extension FlexThemeData on ThemeData {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     final Iterable<ThemeExtension<dynamic>>? extensions,
+
+    /// A color that typically appears behind scrollable content.
+    ///
+    /// The color is applied to [ThemeData.canvasColor] and
+    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
+    /// [Material] of type [MaterialType.canvas].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
+    ///
+    /// Defaults to null.
+    @Deprecated('Use surface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? background,
+
+    /// A color that is clearly legible when drawn on [background] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [background] and [onBackground] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this extension, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the extensions factory behavior.
+    @Deprecated('Use onSurface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? onBackground,
   }) =>
       FlexColorScheme.dark(
         colorScheme: colorScheme,
@@ -2698,7 +2708,6 @@ extension FlexThemeData on ThemeData {
         tertiaryContainer: tertiaryContainer,
         error: error,
         surface: surface,
-        background: background,
         scaffoldBackground: scaffoldBackground,
         dialogBackground: dialogBackground,
         appBarBackground: appBarBackground,
@@ -2709,7 +2718,6 @@ extension FlexThemeData on ThemeData {
         onTertiary: onTertiary,
         onTertiaryContainer: onTertiaryContainer,
         onSurface: onSurface,
-        onBackground: onBackground,
         onError: onError,
         surfaceTint: surfaceTint,
         darkIsTrueBlack: darkIsTrueBlack,

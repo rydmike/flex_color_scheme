@@ -305,7 +305,6 @@ void main() {
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
       surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       scaffoldBackground: FlexColor.materialLightBackground,
       dialogBackground: FlexColor.materialLightBackground,
@@ -316,7 +315,6 @@ void main() {
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
       onSurface: Colors.black,
-      onBackground: Colors.black,
       onError: Colors.white,
     );
     test(
@@ -341,7 +339,6 @@ void main() {
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
       surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       scaffoldBackground: FlexColor.materialLightBackground,
       appBarBackground: FlexColor.materialLightPrimary,
@@ -353,7 +350,6 @@ void main() {
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
       onSurface: Colors.black,
-      onBackground: Colors.black,
       onError: Colors.white,
     );
     test(
@@ -439,7 +435,6 @@ void main() {
       tertiary: FlexColor.materialDarkTertiary,
       tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
       surface: FlexColor.materialDarkSurface,
-      background: FlexColor.materialDarkBackground,
       error: FlexColor.materialDarkError,
       scaffoldBackground: FlexColor.materialDarkBackground,
       dialogBackground: FlexColor.materialDarkBackground,
@@ -450,7 +445,6 @@ void main() {
       onSecondaryContainer: Colors.white,
       onTertiaryContainer: Colors.white,
       onSurface: Colors.white,
-      onBackground: Colors.white,
       onError: Colors.black,
     );
     test(
@@ -532,7 +526,6 @@ void main() {
       tertiary: FlexColor.materialDarkTertiary,
       tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
       surface: FlexColor.materialDarkSurface,
-      background: FlexColor.materialDarkBackground,
       error: FlexColor.materialDarkError,
       scaffoldBackground: FlexColor.materialDarkBackground,
       appBarBackground: FlexColor.materialDarkSurface,
@@ -544,7 +537,6 @@ void main() {
       onSecondaryContainer: Colors.white,
       onTertiaryContainer: Colors.white,
       onSurface: Colors.white,
-      onBackground: Colors.white,
       onError: Colors.black,
     );
     test(
@@ -581,7 +573,6 @@ void main() {
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
       surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       scaffoldBackground: FlexColor.materialLightBackground,
       appBarBackground: FlexColor.materialLightPrimary,
@@ -593,7 +584,6 @@ void main() {
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
       onSurface: Colors.black,
-      onBackground: Colors.black,
       onError: Colors.white,
       tabBarStyle: FlexTabBarStyle.forAppBar,
       appBarElevation: 1,
@@ -619,7 +609,6 @@ void main() {
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
       surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       scaffoldBackground: FlexColor.materialLightBackground,
       appBarBackground: FlexColor.materialLightPrimary,
@@ -631,7 +620,6 @@ void main() {
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
       onSurface: Colors.black,
-      onBackground: Colors.black,
       onError: Colors.white,
       tabBarStyle: FlexTabBarStyle.forAppBar,
       appBarElevation: 1,
@@ -758,7 +746,6 @@ void main() {
           tertiary: FlexColor.materialLightTertiary,
           tertiaryContainer: FlexColor.materialLightTertiaryContainer,
           surface: FlexColor.materialLightSurface,
-          background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightError,
         ).toScheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
@@ -780,7 +767,6 @@ void main() {
           tertiary: FlexColor.materialLightTertiary,
           tertiaryContainer: FlexColor.materialLightTertiaryContainer,
           surface: FlexColor.materialLightSurface,
-          background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightError,
         ).toScheme,
         equals(lightScheme),
@@ -830,7 +816,6 @@ void main() {
           tertiary: FlexColor.materialDarkTertiary,
           tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
           surface: FlexColor.materialDarkSurface,
-          background: FlexColor.materialDarkBackground,
           error: FlexColor.materialDarkError,
         ).toScheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
@@ -851,7 +836,6 @@ void main() {
           tertiary: FlexColor.materialLightTertiaryHc,
           tertiaryContainer: FlexColor.materialLightTertiaryContainerHc,
           surface: FlexColor.materialLightSurface,
-          background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightErrorHc,
         ).toScheme,
         equals(const ColorScheme(
@@ -897,7 +881,6 @@ void main() {
           tertiary: FlexColor.materialDarkTertiaryHc,
           tertiaryContainer: FlexColor.materialDarkTertiaryContainerHc,
           surface: FlexColor.materialDarkSurface,
-          background: FlexColor.materialDarkBackground,
           error: FlexColor.materialDarkErrorHc,
           onError: Colors.black,
         ).toScheme,

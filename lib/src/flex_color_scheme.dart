@@ -284,7 +284,6 @@ class FlexColorScheme with Diagnosticable {
     this.tertiaryContainer,
     this.error,
     this.surface,
-    this.background,
     this.scaffoldBackground,
     this.dialogBackground,
     this.appBarBackground,
@@ -295,7 +294,6 @@ class FlexColorScheme with Diagnosticable {
     this.onTertiary,
     this.onTertiaryContainer,
     this.onSurface,
-    this.onBackground,
     this.onError,
     this.surfaceTint,
     this.tabBarStyle,
@@ -318,6 +316,14 @@ class FlexColorScheme with Diagnosticable {
     this.subThemesData,
     this.useMaterial3 = true,
     this.extensions,
+    @Deprecated('Use FlexColorScheme.surface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    this.background,
+    @Deprecated('Use FlexColorScheme.onSurface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    this.onBackground,
   })  : assert(appBarElevation == null || appBarElevation >= 0.0,
             'AppBar elevation must be >= 0 or null.'),
         assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
@@ -427,17 +433,6 @@ class FlexColorScheme with Diagnosticable {
   /// and to [FlexColor.materialDarkSurface] if brightness is dark.
   final Color? surface;
 
-  /// A color that typically appears behind scrollable content.
-  ///
-  /// The color is applied to [ThemeData.canvasColor] and
-  /// ThemeData.backgroundColor, it is used eg by menu [Drawer] and by all
-  /// [Material] of type [MaterialType.canvas].
-  ///
-  /// If no value is given, and if there is no [colorScheme] defined, it
-  /// defaults to [FlexColor.materialLightBackground] if brightness is light,
-  /// and to [FlexColor.materialDarkBackground] if brightness is dark.
-  final Color? background;
-
   /// The color of the [Scaffold] background.
   ///
   /// The color is applied to [ThemeData.scaffoldBackgroundColor].
@@ -446,7 +441,7 @@ class FlexColorScheme with Diagnosticable {
   /// [ColorScheme] only based themes. FlexColorScheme brings back the
   /// possibility to specify it directly when using color scheme based themes.
   ///
-  /// If no color is given, it defaults to [background].
+  /// If no color is given, it defaults to [surface].
   final Color? scaffoldBackground;
 
   /// The background color of [Dialog] elements.
@@ -557,16 +552,6 @@ class FlexColorScheme with Diagnosticable {
   /// If null, the on color is derived from the brightness of the [surface]
   /// color, and will be be black if it is light and white if it is dark.
   final Color? onSurface;
-
-  /// A color that is clearly legible when drawn on [background] color.
-  ///
-  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-  /// [background] and [onBackground] is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, the on color is derived from the brightness of the [background]
-  /// color, and will be be black if it is light and white if it is dark.
-  final Color? onBackground;
 
   /// A color that is clearly legible when drawn on [error] color.
   ///
@@ -1120,6 +1105,33 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// To obtain an extension, use ThemeData.of(context).extension.
   final Iterable<ThemeExtension<dynamic>>? extensions;
+
+  /// A color that typically appears behind scrollable content.
+  ///
+  /// The color is applied to [ThemeData.canvasColor] and
+  /// ThemeData.backgroundColor, it is used eg by menu [Drawer] and by all
+  /// [Material] of type [MaterialType.canvas].
+  ///
+  /// If no value is given, and if there is no [colorScheme] defined, it
+  /// defaults to [FlexColor.materialLightBackground] if brightness is light,
+  /// and to [FlexColor.materialDarkBackground] if brightness is dark.
+  @Deprecated('Use FlexColorScheme.surface instead. '
+      'This property will be removed in a future release. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color.')
+  final Color? background;
+
+  /// A color that is clearly legible when drawn on background color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// background and onBackground is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, the on color is derived from the brightness of the background
+  /// color, and will be be black if it is light and white if it is dark.
+  @Deprecated('Use FlexColorScheme.onSurface instead. '
+      'This property will be removed in a future release. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color.')
+  final Color? onBackground;
 
   //****************************************************************************
   //
@@ -1677,21 +1689,6 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? surface,
 
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and
-    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface], or if a [colorScheme] was provided it will override the
-    /// same color in it as well.
-    ///
-    /// Defaults to null.
-    final Color? background,
-
     /// The color of the [Scaffold] background.
     ///
     /// The color is applied to [ThemeData.scaffoldBackgroundColor].
@@ -1861,24 +1858,6 @@ class FlexColorScheme with Diagnosticable {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     final Color? onSurface,
-
-    /// A color that is clearly legible when drawn on [background] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -2547,6 +2526,45 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     final Iterable<ThemeExtension<dynamic>>? extensions,
+
+    /// A color that typically appears behind scrollable content.
+    ///
+    /// The color is applied to [ThemeData.canvasColor] and
+    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
+    /// [Material] of type [MaterialType.canvas].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
+    ///
+    /// Defaults to null.
+    @Deprecated('Use surface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? background,
+
+    /// A color that is clearly legible when drawn on [background] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [background] and [onBackground] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    @Deprecated('Use onSurface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? onBackground,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7');
@@ -3051,8 +3069,6 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainer: effectiveColors.tertiaryContainer,
       // Surface is used e.g. by Card and bottom appbar.
       surface: effectiveSurfaceColor,
-      // Background is used e.g. by drawer and bottom nav bar.
-      background: effectiveBackgroundColor,
       // Color of the scaffold background.
       scaffoldBackground: effectiveScaffoldColor,
       // Color of dialog background elements, a passed in dialogBackground
@@ -3071,7 +3087,6 @@ class FlexColorScheme with Diagnosticable {
       onTertiary: onColors.onTertiary,
       onTertiaryContainer: onColors.onTertiaryContainer,
       onSurface: onColors.onSurface,
-      onBackground: onColors.onBackground,
       onError: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3LightOnError
           : onColors.onError,
@@ -3654,21 +3669,6 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? surface,
 
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and
-    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface], or if a [colorScheme] was provided it will override the
-    /// same color in it as well.
-    ///
-    /// Defaults to null.
-    final Color? background,
-
     /// The color of the [Scaffold] background.
     ///
     /// The color is applied to [ThemeData.scaffoldBackgroundColor].
@@ -3838,24 +3838,6 @@ class FlexColorScheme with Diagnosticable {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     final Color? onSurface,
-
-    /// A color that is clearly legible when drawn on [background] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onBackground,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -4524,6 +4506,45 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     final Iterable<ThemeExtension<dynamic>>? extensions,
+
+    /// A color that typically appears behind scrollable content.
+    ///
+    /// The color is applied to [ThemeData.canvasColor] and
+    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
+    /// [Material] of type [MaterialType.canvas].
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on mode defined by property
+    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
+    /// [FlexSurface], or if a [colorScheme] was provided it will override the
+    /// same color in it as well.
+    ///
+    /// Defaults to null.
+    @Deprecated('Use surface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? background,
+
+    /// A color that is clearly legible when drawn on [background] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [background] and [onBackground] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    @Deprecated('Use background instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    final Color? onBackground,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
@@ -5055,8 +5076,6 @@ class FlexColorScheme with Diagnosticable {
       // Surface is used e.g. by Card and bottom appbar and in this
       // implementation also by dialogs.
       surface: effectiveSurfaceColor,
-      // Used e.g. by drawer, nav rail, side menu and bottom bar.
-      background: effectiveBackgroundColor,
       // If darkIsTrueBlack is set, we use black as default scaffold background,
       // otherwise provided value or if null effective scheme background.
       scaffoldBackground: effectiveScaffoldColor,
@@ -5077,7 +5096,6 @@ class FlexColorScheme with Diagnosticable {
       onTertiary: onColors.onTertiary,
       onTertiaryContainer: onColors.onTertiaryContainer,
       onSurface: onColors.onSurface,
-      onBackground: onColors.onBackground,
       onError: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3DarkOnError
           : onColors.onError,
@@ -7761,7 +7779,7 @@ class FlexColorScheme with Diagnosticable {
             ? FlexColor.materialLightSurface
             : FlexColor.materialDarkSurface);
 
-    final Color effectiveBackgroundColor = background ??
+    final Color effectiveBackgroundColor = surface ??
         colorScheme?.surface ??
         (isDark
             ? FlexColor.materialDarkBackground
@@ -7797,7 +7815,7 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant: colorScheme?.onSurfaceVariant,
       onInverseSurface: colorScheme?.onInverseSurface,
-      onBackground: onBackground ?? colorScheme?.onSurface,
+      onBackground: onSurface ?? colorScheme?.onSurface,
       onError: onError ?? colorScheme?.onError,
       onErrorContainer: colorScheme?.onErrorContainer,
     );
@@ -7965,7 +7983,6 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
       error: error ?? this.error,
       surface: surface ?? this.surface,
-      background: background ?? this.background,
       scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
       appBarBackground: appBarBackground ?? this.appBarBackground,
       dialogBackground: dialogBackground ?? this.dialogBackground,
@@ -7976,7 +7993,6 @@ class FlexColorScheme with Diagnosticable {
       onTertiary: onTertiary ?? this.onTertiary,
       onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
       onSurface: onSurface ?? this.onSurface,
-      onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
       surfaceTint: surfaceTint ?? this.surfaceTint,
       tabBarStyle: tabBarStyle ?? this.tabBarStyle,
@@ -8021,7 +8037,7 @@ class FlexColorScheme with Diagnosticable {
         other.tertiaryContainer == tertiaryContainer &&
         other.error == error &&
         other.surface == surface &&
-        other.background == background &&
+        // other.background == background &&
         other.scaffoldBackground == scaffoldBackground &&
         other.dialogBackground == dialogBackground &&
         other.appBarBackground == appBarBackground &&
@@ -8032,7 +8048,7 @@ class FlexColorScheme with Diagnosticable {
         other.onTertiary == onTertiary &&
         other.onTertiaryContainer == onTertiaryContainer &&
         other.onSurface == onSurface &&
-        other.onBackground == onBackground &&
+        // other.onBackground == onBackground &&
         other.onError == onError &&
         other.surfaceTint == surfaceTint &&
         other.tabBarStyle == tabBarStyle &&
@@ -8069,7 +8085,7 @@ class FlexColorScheme with Diagnosticable {
         tertiaryContainer,
         error,
         surface,
-        background,
+        // background,
         scaffoldBackground,
         dialogBackground,
         appBarBackground,
@@ -8080,7 +8096,7 @@ class FlexColorScheme with Diagnosticable {
         onTertiary,
         onTertiaryContainer,
         onSurface,
-        onBackground,
+        // onBackground,
         onError,
         surfaceTint,
         tabBarStyle,
@@ -8119,7 +8135,7 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('tertiaryContainer', tertiaryContainer));
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('surface', surface));
-    properties.add(ColorProperty('background', background));
+    // properties.add(ColorProperty('background', background));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('appBarBackground', appBarBackground));
     properties.add(ColorProperty('dialogBackground', dialogBackground));
@@ -8130,7 +8146,7 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('onTertiary', onTertiary));
     properties.add(ColorProperty('onTertiaryContainer', onTertiaryContainer));
     properties.add(ColorProperty('onSurface', onSurface));
-    properties.add(ColorProperty('onBackground', onBackground));
+    // properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
     properties.add(ColorProperty('surfaceTint', surfaceTint));
     properties.add(EnumProperty<FlexTabBarStyle>('tabBarStyle', tabBarStyle));
