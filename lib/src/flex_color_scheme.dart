@@ -6972,9 +6972,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.bottomNavigationBar(
               colorScheme: colorScheme,
               labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle ??
-                  (subTheme.useFlutterDefaults
-                      ? null
-                      : effectiveTextTheme.bodyMedium),
+                  effectiveTextTheme.bodyMedium,
               selectedLabelSize: subTheme.bottomNavigationBarSelectedLabelSize,
               unselectedLabelSize:
                   subTheme.bottomNavigationBarUnselectedLabelSize,
@@ -7005,7 +7003,6 @@ class FlexColorScheme with Diagnosticable {
               landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
-              useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : useMaterial3
               ? null
@@ -7325,9 +7322,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.navigationBarTheme(
               colorScheme: colorScheme,
               labelTextStyle: subTheme.navigationBarLabelTextStyle ??
-                  (subTheme.useFlutterDefaults
-                      ? null
-                      : effectiveTextTheme.labelMedium),
+                  effectiveTextTheme.labelMedium,
               selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
               selectedLabelSchemeColor:
@@ -7357,7 +7352,6 @@ class FlexColorScheme with Diagnosticable {
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
-              useFlutterDefaults: subTheme.useFlutterDefaults,
               surfaceTintColor: removeNavBarTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
             )
@@ -7391,9 +7385,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.navigationRailTheme(
               colorScheme: colorScheme,
               labelTextStyle: subTheme.navigationRailLabelTextStyle ??
-                  (subTheme.useFlutterDefaults
-                      ? null
-                      : effectiveTextTheme.labelMedium),
+                  effectiveTextTheme.labelMedium,
               selectedLabelSize: subTheme.navigationRailSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationRailUnselectedLabelSize,
               selectedLabelSchemeColor:
@@ -7424,7 +7416,6 @@ class FlexColorScheme with Diagnosticable {
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
-              useFlutterDefaults: subTheme.useFlutterDefaults,
             )
           : null,
       //

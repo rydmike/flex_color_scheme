@@ -165,9 +165,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Outline thickness theming
             thinBorderWidth: controller.thinBorderWidth,
             thickBorderWidth: controller.thickBorderWidth,
-            // Prefer Flutter SDK null default behavior for navigator themes,
-            // when possible.
-            useFlutterDefaults: controller.useFlutterDefaults,
             // Platform adaptive theming feature settings.
             adaptiveRemoveElevationTint: controller
                 .adaptiveRemoveElevationTintLight

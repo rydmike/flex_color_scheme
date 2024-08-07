@@ -82,10 +82,7 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.bottomNavigationBar(
-          colorScheme: colorScheme,
-          useFlutterDefaults: true,
-        ),
+        FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme),
         equals(
           const BottomNavigationBarThemeData(),
         ),
@@ -102,10 +99,7 @@ void main() {
         brightness: Brightness.dark,
       );
       expect(
-        FlexSubThemes.bottomNavigationBar(
-          colorScheme: colorScheme,
-          useFlutterDefaults: true,
-        ),
+        FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme),
         equals(
           const BottomNavigationBarThemeData(),
         ),
@@ -5095,10 +5089,7 @@ void main() {
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.navigationBarTheme(
-          colorScheme: colorScheme,
-          useFlutterDefaults: true,
-        ),
+        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme),
         equals(
           const NavigationBarThemeData(
             height: null,
@@ -5422,7 +5413,6 @@ void main() {
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
-          useFlutterDefaults: true,
         ),
         equals(
           const NavigationRailThemeData(
@@ -5440,10 +5430,7 @@ void main() {
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
-        FlexSubThemes.navigationRailTheme(
-          colorScheme: colorScheme,
-          useFlutterDefaults: true,
-        ),
+        FlexSubThemes.navigationRailTheme(colorScheme: colorScheme),
         equals(
           const NavigationRailThemeData(
             elevation: 0,

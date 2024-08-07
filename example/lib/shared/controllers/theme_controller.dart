@@ -66,8 +66,6 @@ class ThemeController with ChangeNotifier {
         Store.keyUsedVisualDensity, Store.defaultUseFlexColorScheme);
     _useSubThemes = await _themeService.load(
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
-    _useFlutterDefaults = await _themeService.load(
-        Store.keyUseFlutterDefaults, Store.defaultUseFlutterDefaults);
     //
     _adaptiveRemoveElevationTintLight = await _themeService.load(
         Store.keyAdaptiveRemoveElevationTintLight,
@@ -846,7 +844,6 @@ class ThemeController with ChangeNotifier {
     setUsedVisualDensity(Store.defaultUsedVisualDensity, false);
     setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     setUseSubThemes(Store.defaultUseSubThemes, false);
-    setUseFlutterDefaults(Store.defaultUseFlutterDefaults, false);
     //
     setAdaptiveRemoveElevationTintLight(
         Store.defaultAdaptiveRemoveElevationTintLight, false);
@@ -2155,16 +2152,6 @@ class ThemeController with ChangeNotifier {
     _useSubThemes = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseSubThemes, value));
-  }
-
-  late bool _useFlutterDefaults;
-  bool get useFlutterDefaults => _useFlutterDefaults;
-  void setUseFlutterDefaults(bool? value, [bool notify = true]) {
-    if (value == null) return;
-    if (value == _useFlutterDefaults) return;
-    _useFlutterDefaults = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyUseFlutterDefaults, value));
   }
 
   late AdaptiveTheme? _adaptiveRemoveElevationTintLight;
