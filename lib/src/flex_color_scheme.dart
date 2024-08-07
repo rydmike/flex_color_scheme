@@ -1009,33 +1009,31 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// Flutter SDK [useMaterial3] documentation:
   /// --------------------------------------------------------
-  /// If true, then widgets that have been migrated to Material 3 will
-  /// use new colors, typography and other features of Material 3. If false,
-  /// they will use the Material 2 look and feel.
+  /// A temporary flag that can be used to opt-out of Material 3 features.
   ///
-  /// During the migration to Material 3, turning this on may yield
-  /// inconsistent look and feel in your app as some widgets are migrated
-  /// while others have yet to be.
+  /// This flag is _true_ by default. If false, then components will
+  /// continue to use the colors, typography and other features of
+  /// Material 2.
   ///
-  /// Defaults to false. When the Material 3 specification is complete
-  /// and all widgets are migrated on stable, we will change this flag to be
-  /// true by default. After that change has landed on stable, we will deprecate
-  /// this flag and remove all uses of it. At that point, the `material` library
-  /// will aim to only support Material 3.
+  /// In the long run this flag will be deprecated and eventually
+  /// only Material 3 will be supported. We recommend that applications
+  /// migrate to Material 3 as soon as that's practical. Until that migration
+  /// is complete, this flag can be set to false.
   ///
   /// ## Defaults
-  /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
-  /// some properties will get updated defaults. Please note that
-  /// [ThemeData.copyWith] with [useMaterial3] set to true will
-  /// not change any of these properties in the resulting [ThemeData].
+  ///
+  /// If a [ThemeData] is _constructed_ with [useMaterial3] set to true, then
+  /// some properties will get updated defaults. However, the
+  /// [ThemeData.copyWith] method with [useMaterial3] set to true will _not_
+  /// change any of these properties in the resulting [ThemeData].
   ///
   /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
   ///
-  /// | Property        | M3 default                 | M2 default              |
-  /// | :-------------- | :------------------------- | :---------------------- |
-  /// | [colorScheme]   | M3 baseline scheme         | M2 baseline scheme |
-  /// | [typography]  | [Typography.material2021]  | [Typography.material2014] |
-  /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]           |
+  /// | Property        | Material 3 default             | Material 2 default  |
+  /// | :-------------- | :----------------------------- | :------------------ |
+  /// | [colorScheme] | M3 baseline light scheme | M2 baseline light scheme |
+  /// | [typography]  | [Typography.material2021] | [Typography.material2014] |
+  /// | [splashFactory] | [InkSparkle]* or [InkRipple]   | [InkSplash]    |
   ///
   /// \* if the target platform is Android and the app is not
   /// running on the web, otherwise it will fallback to [InkRipple].
@@ -1059,32 +1057,39 @@ class FlexColorScheme with Diagnosticable {
   ///   * Bottom sheets: [BottomSheet]
   ///   * Buttons
   ///     - Common buttons: [ElevatedButton], [FilledButton],
-  ///       [OutlinedButton], [TextButton]
+  ///       [FilledButton.tonal], [OutlinedButton], [TextButton]
   ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
-  ///     - Icon buttons: [IconButton]
-  ///     - Segmented buttons: [SegmentedButton]
+  ///     - Icon buttons: [IconButton], [IconButton.filled] (*new*),
+  ///       [IconButton.filledTonal], [IconButton.outlined]
+  ///     - Segmented buttons: [SegmentedButton] (replacing [ToggleButtons])
   ///   * Cards: [Card]
-  ///   * Checkbox: [Checkbox]
+  ///   * Checkbox: [Checkbox], [CheckboxListTile]
   ///   * Chips:
   ///     - [ActionChip] (used for Assist and Suggestion chips),
   ///     - [FilterChip], [ChoiceChip] (used for single selection filter chips),
   ///     - [InputChip]
-  ///   * Dialogs: [Dialog], [AlertDialog]
-  ///   * Divider: [Divider]
+  ///   * Date pickers: [showDatePicker], [showDateRangePicker],
+  ///     [DatePickerDialog], [DateRangePickerDialog],
+  ///     [InputDatePickerFormField]
+  ///   * Dialogs: [AlertDialog], [Dialog.fullscreen]
+  ///   * Divider: [Divider], [VerticalDivider]
   ///   * Lists: [ListTile]
-  ///   * Menus: [MenuBar], [DropdownMenu]
+  ///   * Menus: [MenuAnchor], [DropdownMenu], [MenuBar]
   ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
-  ///   * Navigation drawer: [NavigationDrawer]
+  ///   * Navigation drawer: [NavigationDrawer] (replacing [Drawer])
   ///   * Navigation rail: [NavigationRail]
   ///   * Progress indicators: [CircularProgressIndicator],
   ///     [LinearProgressIndicator]
-  ///   * Radio button: [Radio]
+  ///   * Radio button: [Radio], [RadioListTile]
+  ///   * Search: [SearchBar], [SearchAnchor],
   ///   * Snack bar: [SnackBar]
-  ///   * Slider: [Slider]
-  ///   * Switch: [Switch]
-  ///   * Tabs: [TabBar]
+  ///   * Slider: [Slider], [RangeSlider]
+  ///   * Switch: [Switch], [SwitchListTile]
+  ///   * Tabs: [TabBar], [TabBar.secondary]
   ///   * TextFields: [TextField] together with its [InputDecoration]
-  ///   * Top app bar: [AppBar]
+  ///   * Time pickers: [showTimePicker], [TimePickerDialog]
+  ///   * Top app bar: [AppBar], [SliverAppBar], [SliverAppBar.medium],
+  ///     [SliverAppBar.large]
   ///
   /// In addition, this flag enables features introduced in Android 12.
   ///   * Stretch overscroll: [MaterialScrollBehavior]
@@ -1092,7 +1097,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// See also:
   ///
-  ///   * [Material 3 specification](https://m3.material.io/)
+  ///   * [Material 3 specification](https://m3.material.io/).
   final bool useMaterial3;
 
   /// Arbitrary additions to this theme.
@@ -2380,33 +2385,31 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
-    /// If true, then widgets that have been migrated to Material 3 will
-    /// use new colors, typography and other features of Material 3. If false,
-    /// they will use the Material 2 look and feel.
+    /// A temporary flag that can be used to opt-out of Material 3 features.
     ///
-    /// During the migration to Material 3, turning this on may yield
-    /// inconsistent look and feel in your app as some widgets are migrated
-    /// while others have yet to be.
+    /// This flag is _true_ by default. If false, then components will
+    /// continue to use the colors, typography and other features of
+    /// Material 2.
     ///
-    /// Defaults to false. When the Material 3 specification is complete
-    /// and all widgets are migrated on stable, we will change this flag to be
-    /// true by default. After that change has landed on stable, we will
-    /// deprecate this flag and remove all uses of it. At that point, the
-    /// `material` library will aim to only support Material 3.
+    /// In the long run this flag will be deprecated and eventually
+    /// only Material 3 will be supported. We recommend that applications
+    /// migrate to Material 3 as soon as that's practical. Until that migration
+    /// is complete, this flag can be set to false.
     ///
     /// ## Defaults
-    /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
-    /// some properties will get updated defaults. Please note that
-    /// [ThemeData.copyWith] with [useMaterial3] set to true will
-    /// not change any of these properties in the resulting [ThemeData].
+    ///
+    /// If a [ThemeData] is _constructed_ with [useMaterial3] set to true, then
+    /// some properties will get updated defaults. However, the
+    /// [ThemeData.copyWith] method with [useMaterial3] set to true will _not_
+    /// change any of these properties in the resulting [ThemeData].
     ///
     /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
     ///
-    /// | Property        | M3 default                 | M2 default           |
-    /// | :-------------- | :------------------------- | :------------------- |
-    /// | [colorScheme]   | M3 baseline scheme         | M2 baseline scheme |
-    /// | [typography]  | [Typography.material2021]| [Typography.material2014] |
-    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]         |
+    /// | Property        | Material 3 default           | Material 2 default  |
+    /// | :-------------- | :--------------------------- | :------------------ |
+    /// | [colorScheme] | M3 baseline light scheme | M2 baseline light scheme |
+    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple]   | [InkSplash]    |
     ///
     /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
@@ -2430,32 +2433,39 @@ class FlexColorScheme with Diagnosticable {
     ///   * Bottom sheets: [BottomSheet]
     ///   * Buttons
     ///     - Common buttons: [ElevatedButton], [FilledButton],
-    ///       [OutlinedButton], [TextButton]
+    ///       [FilledButton.tonal], [OutlinedButton], [TextButton]
     ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
-    ///     - Icon buttons: [IconButton]
-    ///     - Segmented buttons: [SegmentedButton]
+    ///     - Icon buttons: [IconButton], [IconButton.filled] (*new*),
+    ///       [IconButton.filledTonal], [IconButton.outlined]
+    ///     - Segmented buttons: [SegmentedButton] (replacing [ToggleButtons])
     ///   * Cards: [Card]
-    ///   * Checkbox: [Checkbox]
+    ///   * Checkbox: [Checkbox], [CheckboxListTile]
     ///   * Chips:
     ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for single select filter chips),
+    ///     - [FilterChip], [ChoiceChip] (used for selection filter chips),
     ///     - [InputChip]
-    ///   * Dialogs: [Dialog], [AlertDialog]
-    ///   * Divider: [Divider]
+    ///   * Date pickers: [showDatePicker], [showDateRangePicker],
+    ///     [DatePickerDialog], [DateRangePickerDialog],
+    ///     [InputDatePickerFormField]
+    ///   * Dialogs: [AlertDialog], [Dialog.fullscreen]
+    ///   * Divider: [Divider], [VerticalDivider]
     ///   * Lists: [ListTile]
-    ///   * Menus: [MenuBar], [DropdownMenu]
+    ///   * Menus: [MenuAnchor], [DropdownMenu], [MenuBar]
     ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
-    ///   * Navigation drawer: [NavigationDrawer]
+    ///   * Navigation drawer: [NavigationDrawer] (replacing [Drawer])
     ///   * Navigation rail: [NavigationRail]
     ///   * Progress indicators: [CircularProgressIndicator],
     ///     [LinearProgressIndicator]
-    ///   * Radio button: [Radio]
+    ///   * Radio button: [Radio], [RadioListTile]
+    ///   * Search: [SearchBar], [SearchAnchor],
     ///   * Snack bar: [SnackBar]
-    ///   * Slider: [Slider]
-    ///   * Switch: [Switch]
-    ///   * Tabs: [TabBar]
+    ///   * Slider: [Slider], [RangeSlider]
+    ///   * Switch: [Switch], [SwitchListTile]
+    ///   * Tabs: [TabBar], [TabBar.secondary]
     ///   * TextFields: [TextField] together with its [InputDecoration]
-    ///   * Top app bar: [AppBar]
+    ///   * Time pickers: [showTimePicker], [TimePickerDialog]
+    ///   * Top app bar: [AppBar], [SliverAppBar], [SliverAppBar.medium],
+    ///     [SliverAppBar.large]
     ///
     /// In addition, this flag enables features introduced in Android 12.
     ///   * Stretch overscroll: [MaterialScrollBehavior]
@@ -2463,7 +2473,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// See also:
     ///
-    ///   * [Material 3 specification](https://m3.material.io/)
+    ///   * [Material 3 specification](https://m3.material.io/).
     final bool useMaterial3 = true,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
@@ -4360,33 +4370,31 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
-    /// If true, then widgets that have been migrated to Material 3 will
-    /// use new colors, typography and other features of Material 3. If false,
-    /// they will use the Material 2 look and feel.
+    /// A temporary flag that can be used to opt-out of Material 3 features.
     ///
-    /// During the migration to Material 3, turning this on may yield
-    /// inconsistent look and feel in your app as some widgets are migrated
-    /// while others have yet to be.
+    /// This flag is _true_ by default. If false, then components will
+    /// continue to use the colors, typography and other features of
+    /// Material 2.
     ///
-    /// Defaults to false. When the Material 3 specification is complete
-    /// and all widgets are migrated on stable, we will change this flag to be
-    /// true by default. After that change has landed on stable, we will
-    /// deprecate this flag and remove all uses of it. At that point, the
-    /// `material` library will aim to only support Material 3.
+    /// In the long run this flag will be deprecated and eventually
+    /// only Material 3 will be supported. We recommend that applications
+    /// migrate to Material 3 as soon as that's practical. Until that migration
+    /// is complete, this flag can be set to false.
     ///
     /// ## Defaults
-    /// If a [ThemeData] is constructed with [useMaterial3] set to true, then
-    /// some properties will get updated defaults. Please note that
-    /// [ThemeData.copyWith] with [useMaterial3] set to true will
-    /// not change any of these properties in the resulting [ThemeData].
+    ///
+    /// If a [ThemeData] is _constructed_ with [useMaterial3] set to true, then
+    /// some properties will get updated defaults. However, the
+    /// [ThemeData.copyWith] method with [useMaterial3] set to true will _not_
+    /// change any of these properties in the resulting [ThemeData].
     ///
     /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
     ///
-    /// | Property        | M3 default                 | M2 default           |
-    /// | :-------------- | :------------------------- | :------------------- |
-    /// | [colorScheme]   | M3 baseline scheme         | M2 baseline scheme |
-    /// | [typography]  | [Typography.material2021]| [Typography.material2014] |
-    /// | [splashFactory] | [InkSparkle]* or [InkRipple] | [InkSplash]         |
+    /// | Property        | Material 3 default           | Material 2 default  |
+    /// | :-------------- | :--------------------------- | :------------------ |
+    /// | [colorScheme] | M3 baseline light scheme | M2 baseline light scheme |
+    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
+    /// | [splashFactory] | [InkSparkle]* or [InkRipple]   | [InkSplash]    |
     ///
     /// \* if the target platform is Android and the app is not
     /// running on the web, otherwise it will fallback to [InkRipple].
@@ -4410,32 +4418,39 @@ class FlexColorScheme with Diagnosticable {
     ///   * Bottom sheets: [BottomSheet]
     ///   * Buttons
     ///     - Common buttons: [ElevatedButton], [FilledButton],
-    ///       [OutlinedButton], [TextButton]
+    ///       [FilledButton.tonal], [OutlinedButton], [TextButton]
     ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
-    ///     - Icon buttons: [IconButton]
-    ///     - Segmented buttons: [SegmentedButton]
+    ///     - Icon buttons: [IconButton], [IconButton.filled] (*new*),
+    ///       [IconButton.filledTonal], [IconButton.outlined]
+    ///     - Segmented buttons: [SegmentedButton] (replacing [ToggleButtons])
     ///   * Cards: [Card]
-    ///   * Checkbox: [Checkbox]
+    ///   * Checkbox: [Checkbox], [CheckboxListTile]
     ///   * Chips:
     ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for single select filter chips),
+    ///     - [FilterChip], [ChoiceChip] (used for selection filter chips),
     ///     - [InputChip]
-    ///   * Dialogs: [Dialog], [AlertDialog]
-    ///   * Divider: [Divider]
+    ///   * Date pickers: [showDatePicker], [showDateRangePicker],
+    ///     [DatePickerDialog], [DateRangePickerDialog],
+    ///     [InputDatePickerFormField]
+    ///   * Dialogs: [AlertDialog], [Dialog.fullscreen]
+    ///   * Divider: [Divider], [VerticalDivider]
     ///   * Lists: [ListTile]
-    ///   * Menus: [MenuBar], [DropdownMenu]
+    ///   * Menus: [MenuAnchor], [DropdownMenu], [MenuBar]
     ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
-    ///   * Navigation drawer: [NavigationDrawer]
+    ///   * Navigation drawer: [NavigationDrawer] (replacing [Drawer])
     ///   * Navigation rail: [NavigationRail]
     ///   * Progress indicators: [CircularProgressIndicator],
     ///     [LinearProgressIndicator]
-    ///   * Radio button: [Radio]
+    ///   * Radio button: [Radio], [RadioListTile]
+    ///   * Search: [SearchBar], [SearchAnchor],
     ///   * Snack bar: [SnackBar]
-    ///   * Slider: [Slider]
-    ///   * Switch: [Switch]
-    ///   * Tabs: [TabBar]
+    ///   * Slider: [Slider], [RangeSlider]
+    ///   * Switch: [Switch], [SwitchListTile]
+    ///   * Tabs: [TabBar], [TabBar.secondary]
     ///   * TextFields: [TextField] together with its [InputDecoration]
-    ///   * Top app bar: [AppBar]
+    ///   * Time pickers: [showTimePicker], [TimePickerDialog]
+    ///   * Top app bar: [AppBar], [SliverAppBar], [SliverAppBar.medium],
+    ///     [SliverAppBar.large]
     ///
     /// In addition, this flag enables features introduced in Android 12.
     ///   * Stretch overscroll: [MaterialScrollBehavior]
@@ -4443,7 +4458,7 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// See also:
     ///
-    ///   * [Material 3 specification](https://m3.material.io/)
+    ///   * [Material 3 specification](https://m3.material.io/).
     final bool useMaterial3 = true,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
