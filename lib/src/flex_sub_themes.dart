@@ -84,7 +84,8 @@ enum SchemeColor {
   /// The active theme's color scheme onSecondaryFixed color will be used.
   onSecondaryFixed,
 
-  /// The active theme's color scheme onSecondaryFixedVariant color will be used.
+  /// The active theme's color scheme onSecondaryFixedVariant color will
+  /// be used.
   onSecondaryFixedVariant,
 
   /// The active theme's color scheme tertiary color will be used.
@@ -147,7 +148,8 @@ enum SchemeColor {
   /// The active theme's color scheme surfaceContainerHigh color will be used.
   surfaceContainerHigh,
 
-  /// The active theme's color scheme surfaceContainerHighest color will be used.
+  /// The active theme's color scheme surfaceContainerHighest color will
+  /// be used.
   surfaceContainerHighest,
 
   /// The active theme's color scheme onSurfaceVariant color will be used.
@@ -177,20 +179,20 @@ enum SchemeColor {
   /// The active theme's color scheme surfaceTint color will be used.
   surfaceTint,
 
-  /// The active theme's color scheme background color will be used.
-  @Deprecated('Use surface instead. '
-      'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
-  background,
-
-  /// The active theme's color scheme onBackground color will be used.
-  @Deprecated('Use onSurface instead. '
-      'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
-  onBackground,
-
-  /// The active theme's color scheme surfaceVariant color will be used.
-  @Deprecated('Use surfaceContainerHighest instead. '
-      'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
-  surfaceVariant,
+  // /// The active theme's color scheme background color will be used.
+  // @Deprecated('Use surface instead. '
+  //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
+  // background,
+  //
+  // /// The active theme's color scheme onBackground color will be used.
+  // @Deprecated('Use onSurface instead. '
+  //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
+  // onBackground,
+  //
+  // /// The active theme's color scheme surfaceVariant color will be used.
+  // @Deprecated('Use surfaceContainerHighest instead. '
+  //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
+  // surfaceVariant,
 }
 
 /// [FlexSubThemes.inputDecorationTheme].
@@ -402,13 +404,6 @@ class FlexSubThemes {
         return colorScheme.inversePrimary;
       case SchemeColor.surfaceTint:
         return colorScheme.surfaceTint;
-      // DEPRECATED (newest deprecations at the bottom)
-      case SchemeColor.background:
-        return colorScheme.surface;
-      case SchemeColor.onBackground:
-        return colorScheme.onSurface;
-      case SchemeColor.surfaceVariant:
-        return colorScheme.surfaceContainerHighest;
     }
   }
 
@@ -487,9 +482,9 @@ class FlexSubThemes {
       case SchemeColor.onSurfaceVariant:
         return SchemeColor.surfaceContainerHighest;
       case SchemeColor.outline:
-        return SchemeColor.background;
+        return SchemeColor.surface;
       case SchemeColor.outlineVariant:
-        return SchemeColor.onBackground;
+        return SchemeColor.onSurface;
       case SchemeColor.shadow:
         return SchemeColor.outline;
       case SchemeColor.scrim:
@@ -500,13 +495,6 @@ class FlexSubThemes {
         return SchemeColor.inverseSurface;
       case SchemeColor.inversePrimary:
         return SchemeColor.onSurface;
-      // DEPRECATED (newest deprecations at the bottom)
-      case SchemeColor.background:
-        return SchemeColor.onSurface;
-      case SchemeColor.onBackground:
-        return SchemeColor.surface;
-      case SchemeColor.surfaceVariant:
-        return SchemeColor.onSurfaceVariant;
     }
   }
 
@@ -1123,9 +1111,10 @@ class FlexSubThemes {
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
 
-    // Background color, when using normal default, falls back to background.
+    // Background color, when using normal default, falls back to
+    // surfaceContainer.
     final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ?? SchemeColor.background, colorScheme)
+            backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme)
         .withOpacity(opacity ?? 1.0);
 
     return BottomNavigationBarThemeData(
@@ -1282,7 +1271,7 @@ class FlexSubThemes {
   /// The above legacy buttons this sub theme is for, will be completely
   /// removed in Flutter stable version. The `ButtonThemeData` this helper uses
   /// will however remain available after that, because widgets
-  /// [ButtonBar] and [DropdownButton], plus [MaterialButton] (marked as
+  /// [DropdownButton], plus [MaterialButton] (marked as
   /// obsolete in SDK docs though) still use this theme. It is thus kept around
   /// in FlexColorScheme package as long as it might have some use and exists
   /// in Flutter stable SDK.
@@ -1900,7 +1889,13 @@ class FlexSubThemes {
     // Icon color.
     final Color iconColor;
     if (blendColor == colorScheme.surface ||
-        blendColor == colorScheme.background) {
+        blendColor == colorScheme.surfaceContainerLowest ||
+        blendColor == colorScheme.surfaceContainerLow ||
+        blendColor == colorScheme.surfaceContainer ||
+        blendColor == colorScheme.surfaceContainerHigh ||
+        blendColor == colorScheme.surfaceContainerHighest ||
+        blendColor == colorScheme.surfaceDim ||
+        blendColor == colorScheme.surfaceBright) {
       iconColor = selectedColor;
     } else {
       iconColor = blendColor;
@@ -3446,7 +3441,8 @@ class FlexSubThemes {
             }
             return baseSchemeColor == null && useM3
                 ? Color.alphaBlend(
-                    colorScheme.surfaceVariant.withAlpha(effectiveAlpha),
+                    colorScheme.surfaceContainerHighest
+                        .withAlpha(effectiveAlpha),
                     colorScheme.surface)
                 : Color.alphaBlend(
                     baseColor.withAlpha(effectiveAlpha), colorScheme.surface);
@@ -3860,11 +3856,9 @@ class FlexSubThemes {
     // If foreground is plain contrast to a standard surface, we cannot use it
     // for tint, in that case we will use primary color for tint.
     final bool fgIsPlain = fgScheme == SchemeColor.onSurface ||
-        fgScheme == SchemeColor.onSurfaceVariant ||
-        fgScheme == SchemeColor.onBackground;
+        fgScheme == SchemeColor.onSurfaceVariant;
     final bool indFgIsPlain = indFgScheme == SchemeColor.onSurface ||
-        indFgScheme == SchemeColor.onSurfaceVariant ||
-        indFgScheme == SchemeColor.onBackground;
+        indFgScheme == SchemeColor.onSurfaceVariant;
     // We are using a light colorScheme.
     final bool isLight = colorScheme.brightness == Brightness.light;
     // Get brightness of background color.
@@ -4436,11 +4430,10 @@ class FlexSubThemes {
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
 
-    // Background color, when using normal default, falls back to background.
+    // Background color, when using normal default, falls back to
+    // surfaceContainer.
     final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ??
-                (useM3 ? SchemeColor.surface : SchemeColor.surfaceVariant),
-            colorScheme)
+            backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme)
         .withOpacity(opacity ?? 1.0);
 
     // Indicator color, when using normal default, falls back to primary.
@@ -5102,9 +5095,9 @@ class FlexSubThemes {
     final bool effectiveUseIndicator =
         (useM3 && useIndicator == null) || (useIndicator ?? false);
 
-    // Background color, when using normal default, falls back to background.
+    // Background color, falls back to surfaceContainer.
     final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ?? SchemeColor.background, colorScheme)
+            backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme)
         .withOpacity(opacity ?? 1.0);
 
     // Property order here as in NavigationRailThemeData
@@ -6537,7 +6530,8 @@ class FlexSubThemes {
               }
               return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
             }
-            return colorScheme.surfaceVariant.withAlpha(kAlphaVeryLowDisabled);
+            return colorScheme.surfaceContainerHighest
+                .withAlpha(kAlphaVeryLowDisabled);
           }
           if (states.contains(WidgetState.selected)) {
             if (states.contains(WidgetState.pressed)) {
@@ -6556,27 +6550,27 @@ class FlexSubThemes {
                 ? baseColor.withAlpha(isLight
                     ? kAlphaM3SwitchUnselectTrackLight
                     : kAlphaM3SwitchUnselectTrackDark)
-                : colorScheme.surfaceVariant;
+                : colorScheme.surfaceContainerHighest;
           }
           if (states.contains(WidgetState.hovered)) {
             return unselectedColored
                 ? baseColor.withAlpha(isLight
                     ? kAlphaM3SwitchUnselectTrackLight
                     : kAlphaM3SwitchUnselectTrackDark)
-                : colorScheme.surfaceVariant;
+                : colorScheme.surfaceContainerHighest;
           }
           if (states.contains(WidgetState.focused)) {
             return unselectedColored
                 ? baseColor.withAlpha(isLight
                     ? kAlphaM3SwitchUnselectTrackLight
                     : kAlphaM3SwitchUnselectTrackDark)
-                : colorScheme.surfaceVariant;
+                : colorScheme.surfaceContainerHighest;
           }
           return unselectedColored
               ? baseColor.withAlpha(isLight
                   ? kAlphaM3SwitchUnselectTrackLight
                   : kAlphaM3SwitchUnselectTrackDark)
-              : colorScheme.surfaceVariant;
+              : colorScheme.surfaceContainerHighest;
         }),
         trackOutlineColor:
             WidgetStateProperty.resolveWith((Set<WidgetState> states) {
@@ -7124,7 +7118,7 @@ class FlexSubThemes {
           }
           return Color.alphaBlend(overlayColor, colorScheme.primaryContainer);
         } else {
-          Color overlayColor = colorScheme.surfaceVariant;
+          Color overlayColor = colorScheme.surfaceContainerHighest;
           if (states.contains(WidgetState.pressed)) {
             overlayColor = colorScheme.onSurface;
           } else if (states.contains(WidgetState.hovered)) {
@@ -7134,7 +7128,8 @@ class FlexSubThemes {
             const double focusOpacity = 0.12;
             overlayColor = colorScheme.onSurface.withOpacity(focusOpacity);
           }
-          return Color.alphaBlend(overlayColor, colorScheme.surfaceVariant);
+          return Color.alphaBlend(
+              overlayColor, colorScheme.surfaceContainerHighest);
         }
         // coverage:ignore-end
       });
@@ -7239,7 +7234,7 @@ class FlexSubThemes {
       //
       // TODO(rydmike): Fixes for clock dial background color issue in M3.
       // https://github.com/flutter/flutter/issues/118657
-      dialBackgroundColor: useM3 ? colorScheme.surfaceVariant : null,
+      dialBackgroundColor: useM3 ? colorScheme.surfaceContainerHighest : null,
       dayPeriodColor: useM3
           ? WidgetStateColor.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.selected)) {
@@ -7270,7 +7265,7 @@ class FlexSubThemes {
                 return Color.alphaBlend(
                     overlayColor, colorScheme.primaryContainer);
               } else {
-                Color overlayColor = colorScheme.surfaceVariant;
+                Color overlayColor = colorScheme.surfaceContainerHighest;
                 if (states.contains(WidgetState.pressed)) {
                   overlayColor = colorScheme.onSurface;
                 } else if (states.contains(WidgetState.focused)) {
@@ -7279,7 +7274,7 @@ class FlexSubThemes {
                   overlayColor = colorScheme.onSurface.withAlpha(kAlphaHovered);
                 }
                 return Color.alphaBlend(
-                    overlayColor, colorScheme.surfaceVariant);
+                    overlayColor, colorScheme.surfaceContainerHighest);
               }
             })
           : null,

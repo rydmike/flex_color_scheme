@@ -44,10 +44,10 @@ void main() {
       expect(
         FlexSubThemes.bottomAppBarTheme(
           colorScheme: colorScheme,
-          backgroundSchemeColor: SchemeColor.surfaceVariant,
+          backgroundSchemeColor: SchemeColor.surfaceContainer,
         ),
         equals(BottomAppBarTheme(
-          color: colorScheme.surfaceVariant,
+          color: colorScheme.surfaceContainer,
         )),
       );
     });
@@ -4454,7 +4454,8 @@ void main() {
       expect(
         (m.fillColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
         equals(Color.alphaBlend(
-            colorScheme.surfaceVariant.withAlpha(0xCC), colorScheme.surface)),
+            colorScheme.surfaceContainerHighest.withAlpha(0xCC),
+            colorScheme.surface)),
       );
       //
       // labelStyle
@@ -4778,14 +4779,14 @@ void main() {
       );
       menu = FlexSubThemes.menuBarTheme(
         colorScheme: colorScheme,
-        backgroundSchemeColor: SchemeColor.surfaceVariant,
+        backgroundSchemeColor: SchemeColor.surfaceContainer,
         surfaceTintColor: colorScheme.tertiary,
-        shadowColor: colorScheme.onBackground,
+        shadowColor: colorScheme.onSurface,
         elevation: 8,
       );
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainer),
       );
       expect(
         menu.style!.surfaceTintColor?.resolve(<WidgetState>{}),
@@ -4793,7 +4794,7 @@ void main() {
       );
       expect(
         menu.style!.shadowColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.onBackground),
+        equals(colorScheme.onSurface),
       );
       expect(
         menu.style!.elevation?.resolve(<WidgetState>{}),
@@ -4827,7 +4828,7 @@ void main() {
       );
       final MenuButtonThemeData m3 = FlexSubThemes.menuButtonTheme(
         colorScheme: colorScheme,
-        backgroundSchemeColor: SchemeColor.surfaceVariant,
+        backgroundSchemeColor: SchemeColor.surfaceContainer,
         indicatorBackgroundSchemeColor: SchemeColor.primary,
         radius: 11,
         useTintedInteraction: true,
@@ -4835,7 +4836,7 @@ void main() {
       );
       final MenuButtonThemeData m4 = FlexSubThemes.menuButtonTheme(
         colorScheme: colorScheme,
-        backgroundSchemeColor: SchemeColor.background,
+        backgroundSchemeColor: SchemeColor.surfaceContainer,
         indicatorBackgroundSchemeColor: SchemeColor.primary,
         radius: 11,
         useTintedInteraction: true,
@@ -4875,7 +4876,7 @@ void main() {
       );
       expect(
         m4.style!.foregroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.onBackground),
+        equals(colorScheme.onSurface),
       );
       // Icon color
       expect(
@@ -4934,7 +4935,7 @@ void main() {
       );
       expect(
         m3.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
       // Overlay color
       expect(
@@ -5067,11 +5068,11 @@ void main() {
       );
       menu = FlexSubThemes.menuTheme(
         colorScheme: colorScheme,
-        backgroundSchemeColor: SchemeColor.surfaceVariant,
+        backgroundSchemeColor: SchemeColor.surfaceContainer,
       );
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
       menu = FlexSubThemes.menuTheme(
           colorScheme: colorScheme,
@@ -5145,7 +5146,7 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             elevation: 3,
-            backgroundColor: colorScheme.background.withOpacity(0.9),
+            backgroundColor: colorScheme.surface.withOpacity(0.9),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
             indicatorShape: const RoundedRectangleBorder(
@@ -7927,7 +7928,7 @@ void main() {
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.surfaceVariant.withOpacity(0.12)),
+        equals(colorScheme.surfaceContainerHighest.withOpacity(0.12)),
       );
       expect(
         switchTheme.trackOutlineColor!
@@ -8021,19 +8022,19 @@ void main() {
       // trackColor
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
 
       expect(
@@ -8180,7 +8181,7 @@ void main() {
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackOutlineColor!.resolve(<WidgetState>{}),
@@ -8193,7 +8194,7 @@ void main() {
           unselectedIsColored: false,
           useMaterial3: true,
         ).trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceVariant),
+        equals(colorScheme.surfaceContainerHighest),
       );
       // Default state for trackColor when unselectedIsColored, is true
       expect(
@@ -9117,24 +9118,24 @@ void main() {
         (m.hourMinuteColor as WidgetStateColor?)!
             .resolve(<WidgetState>{WidgetState.pressed}),
         equals(Color.alphaBlend(
-            colorScheme.onSurface, colorScheme.surfaceVariant)),
+            colorScheme.onSurface, colorScheme.surfaceContainerHighest)),
       );
       expect(
         (m.hourMinuteColor as WidgetStateColor?)!
             .resolve(<WidgetState>{WidgetState.focused}),
         equals(Color.alphaBlend(colorScheme.onSurface.withAlpha(kAlphaFocused),
-            colorScheme.surfaceVariant)),
+            colorScheme.surfaceContainerHighest)),
       );
       expect(
         (m.hourMinuteColor as WidgetStateColor?)!
             .resolve(<WidgetState>{WidgetState.hovered}),
         equals(Color.alphaBlend(colorScheme.onSurface.withAlpha(kAlphaHovered),
-            colorScheme.surfaceVariant)),
+            colorScheme.surfaceContainerHighest)),
       );
       expect(
         (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
-        equals(Color.alphaBlend(
-            colorScheme.surfaceVariant, colorScheme.surfaceVariant)),
+        equals(Color.alphaBlend(colorScheme.surfaceContainerHighest,
+            colorScheme.surfaceContainerHighest)),
       );
     });
   });

@@ -83,7 +83,7 @@ class ColorSchemeBox extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
     final Color foreground =
-        foregroundColor ?? _onColor(backgroundColor ?? scheme.background);
+        foregroundColor ?? _onColor(backgroundColor ?? scheme.surface);
     final double width =
         size?.width ?? theme.toggleButtonsTheme.constraints?.minWidth ?? 38;
     final double height =
@@ -95,7 +95,7 @@ class ColorSchemeBox extends StatelessWidget {
       width: width + 16,
       height: height,
       child: Material(
-        color: backgroundColor ?? scheme.background,
+        color: backgroundColor ?? scheme.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius,

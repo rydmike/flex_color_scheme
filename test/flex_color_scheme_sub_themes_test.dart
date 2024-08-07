@@ -48,7 +48,7 @@ void main() {
       );
       // We get onSurface as blend color for blended TextTheme in light mode.
       expect(
-        fcsScheme.onBackground.red > fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red > fcsScheme.onSurface.red,
         equals(true),
       );
     });
@@ -85,7 +85,7 @@ void main() {
       );
       // We get onSurface as blend color for blended TextTheme in dark mode.
       expect(
-        fcsScheme.onBackground.red < fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red < fcsScheme.onSurface.red,
         equals(true),
       );
     });
@@ -122,7 +122,7 @@ void main() {
       );
       // We get onSurface as blend color for blended TextTheme
       expect(
-        fcsScheme.onBackground.red <= fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red <= fcsScheme.onSurface.red,
         equals(true),
       );
     });
@@ -159,7 +159,7 @@ void main() {
       );
       // We get onSurface as blend color for blended TextTheme
       expect(
-        fcsScheme.onBackground.red >= fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red >= fcsScheme.onSurface.red,
         equals(true),
       );
     });

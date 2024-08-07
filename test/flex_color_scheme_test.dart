@@ -734,11 +734,8 @@ void main() {
       onError: Color(0xffffffff),
       errorContainer: Color(0xfffcd8df),
       onErrorContainer: Color(0xff000000),
-      background: Color(0xffffffff),
-      onBackground: Color(0xff000000),
       surface: Color(0xffffffff),
       onSurface: Color(0xff000000),
-      surfaceVariant: Color(0xFFEEEEEE),
       onSurfaceVariant: Color(0xff000000),
       outline: Color(0xFF737373),
       outlineVariant: Color(0xFFBFBFBF),
@@ -808,11 +805,8 @@ void main() {
       onError: Color(0xff000000),
       errorContainer: Color(0xffb1384e),
       onErrorContainer: Color(0xffffffff),
-      background: Color(0xff121212),
-      onBackground: Color(0xffffffff),
       surface: Color(0xff121212),
       onSurface: Color(0xffffffff),
-      surfaceVariant: Color(0xFF323232),
       onSurfaceVariant: Color(0xffffffff),
       outline: Color(0xFF8C8C8C),
       outlineVariant: Color(0xFF404040),
@@ -877,11 +871,8 @@ void main() {
           onError: Colors.white,
           errorContainer: Color(0xfffcd8df),
           onErrorContainer: Color(0xff000000),
-          background: Colors.white,
-          onBackground: Colors.black,
           surface: Colors.white,
           onSurface: Colors.black,
-          surfaceVariant: Color(0xFFEEEEEE),
           onSurfaceVariant: Colors.black,
           inverseSurface: Color(0xff121212),
           onInverseSurface: Colors.white,
@@ -928,11 +919,8 @@ void main() {
           onError: Colors.black,
           errorContainer: Color(0xffb1384e),
           onErrorContainer: Colors.white,
-          background: Color(0xff121212),
-          onBackground: Colors.white,
           surface: Color(0xff121212),
           onSurface: Colors.white,
-          surfaceVariant: Color(0xFF323232),
           onSurfaceVariant: Colors.white,
           inverseSurface: Color(0xffffffff),
           onInverseSurface: Colors.black,
@@ -1670,7 +1658,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1709,7 +1696,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1749,7 +1735,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1789,7 +1774,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1830,7 +1814,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1870,7 +1853,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1911,7 +1893,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1927,7 +1908,7 @@ void main() {
                 SystemUiOverlayStyle(
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
-                      Theme.of(context).colorScheme.background,
+                      Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
@@ -1951,7 +1932,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -1968,7 +1948,7 @@ void main() {
                 SystemUiOverlayStyle(
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
-                      Theme.of(context).colorScheme.background,
+                      Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.dark,
                   systemNavigationBarContrastEnforced: false,
@@ -1992,7 +1972,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -2033,7 +2012,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -2077,7 +2055,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -2119,7 +2096,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.light(
-              background: Color(0xFF90CAF9),
               surface: Color(0xFFBBDEFB),
             ),
           ).copyWith(
@@ -2164,7 +2140,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2203,7 +2178,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2243,7 +2217,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2283,7 +2256,6 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2324,7 +2296,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2364,7 +2336,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2405,7 +2377,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2421,7 +2393,7 @@ void main() {
                 SystemUiOverlayStyle(
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
-                      Theme.of(context).colorScheme.background,
+                      Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
@@ -2445,7 +2417,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2462,7 +2434,7 @@ void main() {
                 SystemUiOverlayStyle(
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
-                      Theme.of(context).colorScheme.background,
+                      Theme.of(context).colorScheme.surface,
                   systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
@@ -2486,7 +2458,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2527,7 +2499,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2571,7 +2543,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(
@@ -2613,7 +2585,7 @@ void main() {
         Theme(
           data: ThemeData.from(
             colorScheme: const ColorScheme.dark(
-              background: Color(0xFF303030),
+              // background: Color(0xFF303030),
               surface: Color(0xFF424242),
             ),
           ).copyWith(

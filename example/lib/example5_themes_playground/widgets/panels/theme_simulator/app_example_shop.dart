@@ -196,7 +196,7 @@ class _ProductScreenState extends State<ProductScreen> {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color background = isLight
-        ? theme.colorScheme.surfaceVariant
+        ? theme.colorScheme.surfaceContainerHighest
         : theme.colorScheme.onSurface;
     final Color iconColor = isLight
         ? theme.colorScheme.secondary.withOpacity(0.8)
@@ -600,7 +600,7 @@ class ProductImage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color background = isLight
-        ? theme.colorScheme.surfaceVariant
+        ? theme.colorScheme.surfaceContainerHighest
         : theme.colorScheme.onSurface;
     final Color iconColor = isLight
         ? theme.colorScheme.secondary.withOpacity(0.8)

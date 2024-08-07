@@ -83,8 +83,9 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(
-            backgroundColor:
-                disabled ? colorScheme.surfaceVariant : colorScheme.primary,
+            backgroundColor: disabled
+                ? colorScheme.surfaceContainerHighest
+                : colorScheme.primary,
             foregroundColor: disabled ? theme.dividerColor : null,
             borderColor: disabled ? theme.dividerColor : Colors.transparent,
             defaultOption: disabled,

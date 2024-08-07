@@ -59,7 +59,7 @@ class AppBarSettings extends StatelessWidget {
           elevation: 0,
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          color: theme.colorScheme.surfaceVariant,
+          color: theme.colorScheme.surfaceContainerHighest,
           child: const Padding(
             padding: EdgeInsets.all(16.0),
             child: AppBarShowcase(),

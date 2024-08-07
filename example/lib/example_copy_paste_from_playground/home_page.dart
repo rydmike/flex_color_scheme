@@ -181,9 +181,9 @@ class _MainPanelState extends State<_MainPanel> {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.gradient_outlined, color: iconColor),
       title: const Text('Theme'),
@@ -234,9 +234,9 @@ class _ButtonsSwitchesIconsShowcase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.crop_16_9_outlined, color: iconColor),
       title: const Text('Buttons, Switches and Icons'),
@@ -327,9 +327,9 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.tune, color: iconColor),
       title: const Text('Tooltips, Progress Indicators and Sliders'),
@@ -377,9 +377,9 @@ class _TextInputFieldShowcase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.pin_outlined, color: iconColor),
       title: const Text('TextFields and Menus'),
@@ -430,9 +430,9 @@ class _AppTabBottomSearchBars extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.tab_outlined, color: iconColor),
       title: const Text('AppBar TabBar BottomAppBar and SearchBar'),
@@ -475,9 +475,9 @@ class _BottomNavigationBarsShowCase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.video_label, color: iconColor),
       title: const Text('Bottom Navigation'),
@@ -505,9 +505,9 @@ class _NavigationRailShowCase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
@@ -525,9 +525,9 @@ class _NavigationDrawerShowCase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.featured_video_outlined, color: iconColor),
       title: const Text('NavigationDrawer'),
@@ -555,9 +555,9 @@ class _DialogShowcase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.branding_watermark_outlined, color: iconColor),
       title: const Text('Dialogs'),
@@ -588,9 +588,9 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.call_to_action_outlined, color: iconColor),
       title: const Text('Material, Banner, Sheet & Snack'),
@@ -628,9 +628,9 @@ class _CardShowcase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
         leading: Icon(Icons.picture_in_picture_alt_outlined, color: iconColor),
         title: const Text('Card'),
@@ -659,9 +659,9 @@ class _ListTileShowcase extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTiles'),
@@ -701,9 +701,9 @@ class _TextThemeShowcaseState extends State<_TextThemeShowcase> {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.font_download_outlined, color: iconColor),
       title: const Text('TextTheme'),
@@ -747,9 +747,9 @@ class _PrimaryTextThemeShowcaseState extends State<_PrimaryTextThemeShowcase> {
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
         ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onBackground)
+            theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onBackground);
+            theme.colorScheme.onSurface);
     return StatefulHeaderCard(
       leading: Icon(Icons.font_download, color: iconColor),
       title: const Text('PrimaryTextTheme'),

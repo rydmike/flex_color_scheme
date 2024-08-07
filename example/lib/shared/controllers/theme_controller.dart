@@ -1645,7 +1645,7 @@ class ThemeController with ChangeNotifier {
       setBottomNavBarMuteUnselected(true, false);
       // NavigationBar settings
       setNavBarIndicatorSchemeColor(SchemeColor.secondary, false);
-      setNavBarBackgroundSchemeColor(SchemeColor.surfaceVariant, false);
+      setNavBarBackgroundSchemeColor(SchemeColor.surfaceContainer, false);
       setNavBarSelectedIconSchemeColor(SchemeColor.onSurface, false);
       setNavBarSelectedLabelSchemeColor(SchemeColor.onSurface, false);
       setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
@@ -1730,18 +1730,18 @@ class ThemeController with ChangeNotifier {
       setDrawerIndicatorSchemeColor(SchemeColor.primary, false);
       // BottomNavigationBar
       setBottomNavBarMuteUnselected(false, false);
-      setBottomNavBarBackgroundSchemeColor(SchemeColor.surfaceVariant, false);
+      setBottomNavBarBackgroundSchemeColor(SchemeColor.surfaceContainer, false);
       // NavigationBar settings
-      setNavBarBackgroundSchemeColor(SchemeColor.background, false);
+      setNavBarBackgroundSchemeColor(SchemeColor.surface, false);
       setNavBarMuteUnselected(false, false);
-      setNavBarSelectedIconSchemeColor(SchemeColor.background, false);
+      setNavBarSelectedIconSchemeColor(SchemeColor.surface, false);
       setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavBarElevation(1, false);
       setNavBarIndicatorSchemeColor(SchemeColor.primary, false);
       setNavBarIndicatorOpacity(1.0, false);
       // NavigationRail settings
       setNavRailMuteUnselected(false, false);
-      setNavRailSelectedIconSchemeColor(SchemeColor.background, false);
+      setNavRailSelectedIconSchemeColor(SchemeColor.surface, false);
       setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
@@ -1804,7 +1804,7 @@ class ThemeController with ChangeNotifier {
       // BottomNavigationBar
       setBottomNavBarMuteUnselected(false, false);
       // NavigationBar settings
-      setNavBarBackgroundSchemeColor(SchemeColor.background, false);
+      setNavBarBackgroundSchemeColor(SchemeColor.surfaceContainer, false);
       setNavBarMuteUnselected(false, false);
       setNavBarSelectedIconSchemeColor(SchemeColor.onPrimary, false);
       setNavBarSelectedLabelSchemeColor(SchemeColor.primary, false);

@@ -109,10 +109,10 @@ class ShowThemeDataColors extends StatelessWidget {
 
     // Warning label for scaffold background when it uses to much blend.
     final String backTooHigh = isDark
-        ? _isLight(theme.colorScheme.background)
+        ? _isLight(theme.colorScheme.surface)
             ? '\nTOO HIGH'
             : ''
-        : _isDark(theme.colorScheme.background)
+        : _isDark(theme.colorScheme.surface)
             ? '\nTOO HIGH'
             : '';
 

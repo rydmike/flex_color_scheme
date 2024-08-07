@@ -54,11 +54,8 @@ void main() {
     onError: onError,
     errorContainer: errorContainer,
     onErrorContainer: onErrorContainer,
-    background: background,
-    onBackground: onBackground,
     surface: surface,
     onSurface: onSurface,
-    surfaceVariant: surfaceVariant,
     onSurfaceVariant: onSurfaceVariant,
     outline: outline,
     outlineVariant: outlineVariant,
@@ -171,18 +168,6 @@ void main() {
           equals(onErrorContainer));
     });
     test(
-        'FST.sC-17: GIVEN SchemeColor.background '
-        'EXPECT background color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.background, scheme),
-          equals(background));
-    });
-    test(
-        'FST.sC-18: GIVEN SchemeColor.onBackground '
-        'EXPECT onBackground color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.onBackground, scheme),
-          equals(onBackground));
-    });
-    test(
         'FST.sC-19: GIVEN SchemeColor.surface '
         'EXPECT surface color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.surface, scheme),
@@ -193,12 +178,6 @@ void main() {
         'EXPECT onSurface color to be returned', () {
       expect(FlexSubThemes.schemeColor(SchemeColor.onSurface, scheme),
           equals(onSurface));
-    });
-    test(
-        'FST.sC-21: GIVEN SchemeColor.surfaceVariant '
-        'EXPECT surfaceVariant color to be returned', () {
-      expect(FlexSubThemes.schemeColor(SchemeColor.surfaceVariant, scheme),
-          equals(surfaceVariant));
     });
     test(
         'FST.sC-22: GIVEN SchemeColor.onSurfaceVariant '
@@ -366,18 +345,6 @@ void main() {
           equals(errorContainer));
     });
     test(
-        'FST.sCP-17: GIVEN SchemeColor.background '
-        'EXPECT onBackground color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.background, scheme),
-          equals(onBackground));
-    });
-    test(
-        'FST.sCP-18: GIVEN SchemeColor.onBackground '
-        'EXPECT background color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.onBackground, scheme),
-          equals(background));
-    });
-    test(
         'FST.sCP-19: GIVEN SchemeColor.surface '
         'EXPECT onSurface color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.surface, scheme),
@@ -388,12 +355,6 @@ void main() {
         'EXPECT surface color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.onSurface, scheme),
           equals(surface));
-    });
-    test(
-        'FST.sCP-21: GIVEN SchemeColor.surfaceVariant '
-        'EXPECT onSurfaceVariant color to be returned', () {
-      expect(FlexSubThemes.schemeColorPair(SchemeColor.surfaceVariant, scheme),
-          equals(onSurfaceVariant));
     });
     test(
         'FST.sCP-22: GIVEN SchemeColor.onSurfaceVariant '

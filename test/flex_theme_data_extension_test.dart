@@ -310,11 +310,8 @@ void main() {
             onError: Color(0xffffffff),
             errorContainer: Color(0xfffcd8df),
             onErrorContainer: Color(0xff000000),
-            background: Color(0xffffffff),
-            onBackground: Color(0xff000000),
             surface: Color(0xffffffff),
             onSurface: Color(0xff000000),
-            surfaceVariant: Color(0xFFEEEEEE),
             onSurfaceVariant: Color(0xff000000),
             outline: Color(0xFF737373),
             outlineVariant: Color(0xFFBFBFBF),
@@ -348,11 +345,8 @@ void main() {
             onError: Color(0xff000000),
             errorContainer: Color(0xffb1384e),
             onErrorContainer: Color(0xffffffff),
-            background: Color(0xff121212),
-            onBackground: Color(0xffffffff),
             surface: Color(0xff121212),
             onSurface: Color(0xffffffff),
-            surfaceVariant: Color(0xFF323232),
             onSurfaceVariant: Color(0xffffffff),
             outline: Color(0xFF8C8C8C),
             outlineVariant: Color(0xFF404040),
@@ -517,13 +511,13 @@ void main() {
         'FTD1.22: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT background Color(0xfffcfbfe).', () {
-      expect(tLightL.colorScheme.background, const Color(0xfffcfbfe));
+      expect(tLightL.colorScheme.surface, const Color(0xfffcfbfe));
     });
     test(
         'FTD1.23: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT background Color(0xff131214).', () {
-      expect(tDarkL.colorScheme.background, const Color(0xff131214));
+      expect(tDarkL.colorScheme.surface, const Color(0xff131214));
     });
 
     test(
@@ -650,13 +644,13 @@ void main() {
         'FTD1.38: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
         'EXPECT background Color(0xfff3eefc).', () {
-      expect(tLightM.colorScheme.background, const Color(0xfff3eefc));
+      expect(tLightM.colorScheme.surface, const Color(0xfff3eefc));
     });
     test(
         'FTD1.24: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
         'EXPECT background Color(0xff1a161d).', () {
-      expect(tDarkM.colorScheme.background, const Color(0xff1a161d));
+      expect(tDarkM.colorScheme.surface, const Color(0xff1a161d));
     });
 
     test(
@@ -777,13 +771,13 @@ void main() {
         'FTD1.53: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT background Color(0xfff3eefc).', () {
-      expect(tLightS.colorScheme.background, const Color(0xfff3eefc));
+      expect(tLightS.colorScheme.surface, const Color(0xfff3eefc));
     });
     test(
         'FTD1.54: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT background Color(0xff1a161d).', () {
-      expect(tDarkS.colorScheme.background, const Color(0xff1a161d));
+      expect(tDarkS.colorScheme.surface, const Color(0xff1a161d));
     });
     test(
         'FTD1.55: GIVEN a FlexThemeData.light theme FROM scheme "material" '
@@ -868,14 +862,13 @@ void main() {
         'FTD1.63: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(
-          tLightH.appBarTheme.backgroundColor, tLightH.colorScheme.background);
+      expect(tLightH.appBarTheme.backgroundColor, tLightH.colorScheme.surface);
     });
     test(
         'FTD1.64: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tDarkH.appBarTheme.backgroundColor, tDarkH.colorScheme.background);
+      expect(tDarkH.appBarTheme.backgroundColor, tDarkH.colorScheme.surface);
     });
     test(
         'FTD1.65: GIVEN a FlexThemeData.light theme FROM scheme "material" '
@@ -903,13 +896,13 @@ void main() {
         'FTD1.69: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT background Color(0xfff0e9fb).', () {
-      expect(tLightH.colorScheme.background, const Color(0xfff0e9fb));
+      expect(tLightH.colorScheme.surface, const Color(0xfff0e9fb));
     });
     test(
         'FTD1.70: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT background Color(0xff1d1922).', () {
-      expect(tDarkH.colorScheme.background, const Color(0xff1d1922));
+      expect(tDarkH.colorScheme.surface, const Color(0xff1d1922));
     });
     test(
         'FTD1.71: GIVEN a FlexThemeData.light theme FROM scheme "material" '

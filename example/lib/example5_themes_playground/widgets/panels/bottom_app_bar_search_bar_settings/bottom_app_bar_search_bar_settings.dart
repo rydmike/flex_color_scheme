@@ -44,7 +44,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         Card(
           elevation: 0,
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          color: theme.colorScheme.surfaceVariant,
+          color: theme.colorScheme.surfaceContainerHighest,
           child: const Padding(
             padding: EdgeInsets.all(16.0),
             child: BottomAppBarShowcase(explain: false),

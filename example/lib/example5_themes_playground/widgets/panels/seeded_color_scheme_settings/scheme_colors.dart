@@ -994,14 +994,14 @@ class SchemeColors extends StatelessWidget {
                         //   tc.setHoverTonalPalette(null);
                         // },
                         child: Material(
-                          color: colorScheme.background,
+                          color: colorScheme.surface,
                           child: ColorNameValue(
                             key: ValueKey<String>(
-                                'cnv background ${colorScheme.background}'),
-                            color: colorScheme.background,
-                            textColor: colorScheme.onBackground,
+                                'cnv background ${colorScheme.surface}'),
+                            color: colorScheme.surface,
+                            textColor: colorScheme.onSurface,
                             label: 'background',
-                            tone: tones.backgroundTone,
+                            tone: tones.surfaceTone,
                             showTone: showTones,
                           ),
                         ),
@@ -1019,14 +1019,14 @@ class SchemeColors extends StatelessWidget {
                         //   tc.setHoverTonalPalette(null);
                         // },
                         child: Material(
-                          color: colorScheme.onBackground,
+                          color: colorScheme.surface,
                           child: ColorNameValue(
                             key: ValueKey<String>('cnv onBackground '
-                                '${colorScheme.onBackground}'),
-                            color: colorScheme.onBackground,
-                            textColor: colorScheme.background,
+                                '${colorScheme.onSurface}'),
+                            color: colorScheme.onSurface,
+                            textColor: colorScheme.surface,
                             label: 'onBackground',
-                            tone: tones.onBackgroundTone,
+                            tone: tones.onSurfaceTone,
                             showTone: showTones,
                           ),
                         ),
@@ -1130,14 +1130,14 @@ class SchemeColors extends StatelessWidget {
                         //   tc.setHoverTonalPalette(null);
                         // },
                         child: Material(
-                          color: colorScheme.surfaceVariant,
+                          color: colorScheme.surfaceContainerHighest,
                           child: ColorNameValue(
                             key: ValueKey<String>('cnv surfaceVariant '
-                                '${colorScheme.surfaceVariant}'),
-                            color: colorScheme.surfaceVariant,
+                                '${colorScheme.surfaceContainerHighest}'),
+                            color: colorScheme.surfaceContainerHighest,
                             textColor: colorScheme.onSurfaceVariant,
                             label: 'surface\u200BVariant',
-                            tone: tones.surfaceVariantTone,
+                            tone: tones.surfaceContainerHighestTone,
                             showTone: showTones,
                           ),
                         ),
@@ -1160,7 +1160,7 @@ class SchemeColors extends StatelessWidget {
                             key: ValueKey<String>('cnv onSurfaceVariant '
                                 '${colorScheme.onSurfaceVariant}'),
                             color: colorScheme.onSurfaceVariant,
-                            textColor: colorScheme.surfaceVariant,
+                            textColor: colorScheme.surfaceContainerHighest,
                             label: 'onSurface\u200BVariant',
                             tone: tones.onSurfaceVariantTone,
                             showTone: showTones,

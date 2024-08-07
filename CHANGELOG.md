@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**July 30, 2024**
+**Aug 7, 2024**
 
 **PACKAGE**
 
@@ -23,13 +23,15 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **BREAKING**
 
-This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS becomes more aligned with Flutter's Material-3 theming defaults, by using them as starting points too. 
+This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS becomes more aligned with Flutter's Material-3 theming defaults, by using them as starting points too.
 
+- Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` had far-reaching implications on styles created by FCS and there are many breaking style changes in this release due to this. Some might even be forgotten in the change-log.
 - The enum `SchemeColor` got to support for all colors in Flutter 3.22 colors, including same deprecations as in Flutter 3.22. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value. 
-  - **TODO**: Remove the deprecated colors as options in enum `SchemeColor`
 - The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the **new** Material3 color scheme used in **Flutter 3.22**. 
+
+- Property `systemNavBarStyle` in `FlexColorScheme.themedSystemNavigationBar` now defaults to `FlexSystemNavBarStyle.surface`, instead of `FlexSystemNavBarStyle.background`. Using `FlexSystemNavBarStyle.background` results in the color `Theme.of(context).colorScheme.surfaceContainerLow` being used, where it previously was `Theme.of(context).colorScheme.background`. This is because Flutter 3.22 deprecated `ColorSCheme.-background`.
 
 **CHANGE**
 

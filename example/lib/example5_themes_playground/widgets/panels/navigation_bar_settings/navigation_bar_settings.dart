@@ -164,7 +164,7 @@ class NavigationBarSettings extends StatelessWidget {
           elevation: 0,
           shadowColor: Colors.transparent,
           color: useMaterial3
-              ? theme.colorScheme.surfaceVariant
+              ? theme.colorScheme.surfaceContainerHighest
               : theme.colorScheme.onInverseSurface,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: const Padding(
