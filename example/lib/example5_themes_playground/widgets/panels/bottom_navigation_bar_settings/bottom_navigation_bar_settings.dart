@@ -6,7 +6,6 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/navigators_use_default_switch.dart';
 
 // Panel used to control the sub-theme for BottomNavigationBar.
 class BottomNavigationBarSettings extends StatelessWidget {
@@ -19,21 +18,18 @@ class BottomNavigationBarSettings extends StatelessWidget {
     final bool isDark = theme.brightness == Brightness.dark;
     final String labelForDefaultSelectedItem = isDark &&
             (!controller.useFlexColorScheme ||
-                (controller.useFlutterDefaults &&
-                    controller.bottomNavBarSelectedSchemeColor == null &&
+                (controller.bottomNavBarSelectedSchemeColor == null &&
                     controller.bottomNavBarUnselectedSchemeColor == null))
         ? 'default (secondary)'
         : 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.useFlutterDefaults &&
-            controller.bottomNavBarSelectedSchemeColor == null &&
+        !(controller.bottomNavBarSelectedSchemeColor == null &&
             controller.bottomNavBarUnselectedSchemeColor == null);
     final String labelForDefaultUnelectedItem =
         (!controller.useFlexColorScheme ||
                 !controller.useSubThemes ||
-                (controller.useFlutterDefaults &&
-                    controller.bottomNavBarUnselectedSchemeColor == null &&
+                (controller.bottomNavBarUnselectedSchemeColor == null &&
                     controller.bottomNavBarUnselectedSchemeColor == null))
             ? 'default (onSurface with opacity)'
             : controller.bottomNavBarMuteUnselected && muteUnselectedEnabled
@@ -43,17 +39,14 @@ class BottomNavigationBarSettings extends StatelessWidget {
                     : 'default (black54)';
     final bool navBarOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.bottomNavBarBackgroundSchemeColor == null &&
-            controller.useFlutterDefaults);
+        !(controller.bottomNavBarBackgroundSchemeColor == null);
     final double navBarOpacity =
         navBarOpacityEnabled ? controller.bottomNavigationBarOpacity : 1;
 
     // Logic for default elevation label.
     final String elevationDefaultLabel =
         controller.bottomNavigationBarElevation == null
-            ? controller.useFlutterDefaults
-                ? 'default 8'
-                : 'default 3'
+            ? 'default 3'
             : controller.bottomNavigationBarElevation!.toStringAsFixed(1);
 
     return Column(
@@ -242,7 +235,6 @@ class BottomNavigationBarSettings extends StatelessWidget {
               ? controller.setBottomNavShowUnselectedLabels
               : null,
         ),
-        NavigatorsUseDefaultsSwitch(controller: controller),
         const ListTileReveal(
           dense: true,
           title: Text('More settings with the API'),

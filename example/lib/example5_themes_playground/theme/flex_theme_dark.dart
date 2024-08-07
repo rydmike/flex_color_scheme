@@ -122,7 +122,6 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             tintedDisabledControls: controller.tintedDisabledControls,
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
-            useFlutterDefaults: controller.useFlutterDefaults,
             // Platform adaptive theming feature settings.
             adaptiveRemoveElevationTint: controller
                 .adaptiveRemoveElevationTintDark

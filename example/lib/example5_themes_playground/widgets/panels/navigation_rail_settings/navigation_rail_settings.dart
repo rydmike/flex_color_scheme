@@ -7,7 +7,6 @@ import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../dialogs/set_navigation_rail_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/navigators_use_default_switch.dart';
 import 'navigation_rail_label_type_list_tile.dart';
 
 class NavigationRailSettings extends StatelessWidget {
@@ -34,9 +33,7 @@ class NavigationRailSettings extends StatelessWidget {
     // custom color selection overrides default label and value.
     String indicatorColorLabel() {
       // Use FCS component default, primary.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
-          controller.useSubThemes) {
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
         return 'default (primary)';
       }
       // Use M2 default color
@@ -51,9 +48,7 @@ class NavigationRailSettings extends StatelessWidget {
     // custom color selection overrides default label and value.
     String selectedIconColorLabel() {
       // Use FCS component default, primary.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
-          controller.useSubThemes) {
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
         return 'default (primary)';
       }
       // Use M2 default color
@@ -68,9 +63,7 @@ class NavigationRailSettings extends StatelessWidget {
     // custom color selection overrides default label and value.
     String selectedLabelColorLabel() {
       // Use FCS component default, primary.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
-          controller.useSubThemes) {
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
         return 'default (primary)';
       }
       // Use M2 default color
@@ -84,23 +77,21 @@ class NavigationRailSettings extends StatelessWidget {
     // const String labelForDefaultSelectedItem = 'default (primary)';
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.useFlutterDefaults &&
-            controller.navRailSelectedIconSchemeColor == null &&
+        !(controller.navRailSelectedIconSchemeColor == null &&
             controller.navRailUnselectedSchemeColor == null);
 
     // Logic for unselected item color label default value,
     // custom color selection overrides default label and value.
     String unselectedItemColorLabel() {
       // Use FCS component default, onSurface with muted label.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
+      if (controller.useFlexColorScheme &&
           controller.useSubThemes &&
           controller.navRailMuteUnselected &&
           muteUnselectedEnabled) {
         return 'default (onSurface, with blend & opacity)';
       }
       // Use FCS component default, onSurface.
-      if (!controller.useMaterial3 && controller.useFlutterDefaults) {
+      if (!controller.useMaterial3) {
         return 'default (onSurface, with opacity 64%)';
       }
       // Use M2 default, onSurface.
@@ -113,16 +104,14 @@ class NavigationRailSettings extends StatelessWidget {
 
     final bool navRailOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.navRailBackgroundSchemeColor == null &&
-            controller.useFlutterDefaults);
+        !(controller.navRailBackgroundSchemeColor == null);
     final double navRailOpacity =
         navRailOpacityEnabled ? controller.navRailOpacity : 1;
     final bool navRailIndicatorOpacityEnabled =
         controller.navRailUseIndicator &&
             controller.useSubThemes &&
             controller.useFlexColorScheme &&
-            !(controller.navRailIndicatorSchemeColor == null &&
-                controller.useFlutterDefaults);
+            !(controller.navRailIndicatorSchemeColor == null);
     final double navRailIndicatorOpacity = navRailIndicatorOpacityEnabled
         ? (controller.navRailIndicatorOpacity ?? -0.01)
         : -0.01;
@@ -155,8 +144,7 @@ class NavigationRailSettings extends StatelessWidget {
           title: const Text('Background color'),
           labelForDefault: !controller.useSubThemes ||
                   !controller.useFlexColorScheme ||
-                  (controller.useFlutterDefaults &&
-                      controller.navRailBackgroundSchemeColor == null)
+                  (controller.navRailBackgroundSchemeColor == null)
               ? 'default (surface)'
               : 'default (background)',
           index: controller.navRailBackgroundSchemeColor?.index ?? -1,
@@ -210,22 +198,16 @@ class NavigationRailSettings extends StatelessWidget {
             min: -1,
             max: 24,
             divisions: 25,
-            label: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            label: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navRailElevation == null ||
                         (controller.navRailElevation ?? -1) < 0
                     ? elevationDefaultLabel
                     : (controller.navRailElevation?.toStringAsFixed(1) ?? '')
                 : 'default 0',
-            value: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            value: controller.useSubThemes && controller.useFlexColorScheme
                 ? controller.navRailElevation ?? -1
                 : -1,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    !controller.useFlutterDefaults
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (double value) {
                     controller.setNavRailElevation(
                         value < 0 ? null : value.roundToDouble());
@@ -242,9 +224,7 @@ class NavigationRailSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  controller.useSubThemes &&
-                          controller.useFlexColorScheme &&
-                          !controller.useFlutterDefaults
+                  controller.useSubThemes && controller.useFlexColorScheme
                       ? controller.navRailElevation == null ||
                               (controller.navRailElevation ?? -1) < 0
                           ? elevationDefaultLabel
@@ -459,7 +439,6 @@ class NavigationRailSettings extends StatelessWidget {
                     : null,
               ),
               const Divider(),
-              NavigatorsUseDefaultsSwitch(controller: controller),
               const ListTileReveal(
                 dense: true,
                 title: Text('More settings with the API'),

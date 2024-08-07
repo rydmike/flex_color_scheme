@@ -47,11 +47,6 @@ class Store {
   // Default value for the useSubThemes, also used to reset settings.
   static const bool defaultUseSubThemes = true;
 
-  // Key used to read and save the useFlutterDefaults value.
-  static const String keyUseFlutterDefaults = 'useFlutterDefaults';
-  // Default value for the useFlutterDefaults, also to reset settings.
-  static const bool defaultUseFlutterDefaults = false;
-
   // Key used to read and save the adaptiveRemoveElevationTintLight value.
   static const String keyAdaptiveRemoveElevationTintLight =
       'adaptiveRemoveElevationTintLight';

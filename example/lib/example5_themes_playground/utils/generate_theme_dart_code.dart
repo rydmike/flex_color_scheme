@@ -236,9 +236,6 @@ String generateThemeDartCode(ThemeController controller) {
       controller.useM2StyleDividerInM3 && controller.useMaterial3
           ? '    useM2StyleDividerInM3: ${controller.useM2StyleDividerInM3},\n'
           : '';
-  final String useFlutterDefaults = controller.useFlutterDefaults
-      ? '    useFlutterDefaults: ${controller.useFlutterDefaults},\n'
-      : '';
 
   // Adaptive themes.
   final String adaptiveRemoveElevationTintLight = controller
@@ -923,8 +920,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String bottomNavigationBarMutedUnselectedLabel = controller
               .bottomNavBarMuteUnselected ||
-          (controller.useFlutterDefaults &&
-              controller.bottomNavBarSelectedSchemeColor == null &&
+          (controller.bottomNavBarSelectedSchemeColor == null &&
               controller.bottomNavBarUnselectedSchemeColor == null)
       ? ''
       : '    bottomNavigationBarMutedUnselectedLabel: ${controller.bottomNavBarMuteUnselected},\n';
@@ -940,8 +936,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String bottomNavigationBarMutedUnselectedIcon = controller
               .bottomNavBarMuteUnselected ||
-          (controller.useFlutterDefaults &&
-              controller.bottomNavBarSelectedSchemeColor == null &&
+          (controller.bottomNavBarSelectedSchemeColor == null &&
               controller.bottomNavBarUnselectedSchemeColor == null)
       ? ''
       : '    bottomNavigationBarMutedUnselectedIcon: ${controller.bottomNavBarMuteUnselected},\n';
@@ -953,8 +948,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomNavigationBarOpacity = controller
                   .bottomNavigationBarOpacity !=
               1 &&
-          !(controller.bottomNavBarBackgroundSchemeColor == null &&
-              controller.useFlutterDefaults)
+          !(controller.bottomNavBarBackgroundSchemeColor == null)
       ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity.toStringAsFixed(2)},\n'
       : '';
   final String bottomNavigationBarElevation = controller
@@ -1075,8 +1069,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String navigationBarIndicatorOpacity = controller
                   .navBarIndicatorOpacity !=
               null &&
-          !(controller.navBarIndicatorSchemeColor == null &&
-              controller.useFlutterDefaults)
+          !(controller.navBarIndicatorSchemeColor == null)
       ? '    navigationBarIndicatorOpacity: ${controller.navBarIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationBarIndicatorRadius = controller
@@ -1090,8 +1083,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n'
       : '';
   final String navigationBarOpacity = controller.navBarOpacity != 1 &&
-          !(controller.navBarBackgroundSchemeColor == null &&
-              controller.useFlutterDefaults)
+          !(controller.navBarBackgroundSchemeColor == null)
       ? '    navigationBarOpacity: ${controller.navBarOpacity.toStringAsFixed(2)},\n'
       : '';
   final String navigationBarElevation = controller.navBarElevation != null
@@ -1134,8 +1126,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String navigationRailMutedUnselectedLabel = controller
               .navRailMuteUnselected ||
-          (controller.useFlutterDefaults &&
-              controller.navRailSelectedIconSchemeColor == null &&
+          (controller.navRailSelectedIconSchemeColor == null &&
               controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedLabel: ${controller.navRailMuteUnselected},\n';
@@ -1151,8 +1142,7 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String navigationRailMutedUnselectedIcon = controller
               .navRailMuteUnselected ||
-          (controller.useFlutterDefaults &&
-              controller.navRailSelectedIconSchemeColor == null &&
+          (controller.navRailSelectedIconSchemeColor == null &&
               controller.navRailUnselectedSchemeColor == null)
       ? ''
       : '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n';
@@ -1169,8 +1159,7 @@ String generateThemeDartCode(ThemeController controller) {
                   .navRailIndicatorOpacity !=
               null &&
           !(controller.navRailIndicatorSchemeColor == null &&
-              controller.navRailUseIndicator &&
-              controller.useFlutterDefaults)
+              controller.navRailUseIndicator)
       ? '    navigationRailIndicatorOpacity: ${controller.navRailIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationRailIndicatorRadius = controller
@@ -1184,8 +1173,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailBackgroundSchemeColor: ${controller.navRailBackgroundSchemeColor},\n'
       : '';
   final String navigationRailOpacity = controller.navRailOpacity != 1 &&
-          !(controller.navRailBackgroundSchemeColor == null &&
-              controller.useFlutterDefaults)
+          !(controller.navRailBackgroundSchemeColor == null)
       ? '    navigationRailOpacity: ${controller.navRailOpacity.toStringAsFixed(2)},\n'
       : '';
   final String navigationRailElevation = controller.navRailElevation != null &&
@@ -1206,7 +1194,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$tintedDisabledControls'
           '$blendOnLevelLight'
           '$blendLightOnColors'
-          '$useFlutterDefaults'
           //
           '$blendLightTextTheme'
           '$useTextTheme'
@@ -1427,7 +1414,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$tintedDisabledControls'
           '$blendOnLevelDark'
           '$blendDarkOnColors'
-          '$useFlutterDefaults'
           //
           '$blendDarkTextTheme'
           '$useTextTheme'

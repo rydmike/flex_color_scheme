@@ -166,7 +166,6 @@ class FlexSubThemesData with Diagnosticable {
     this.tintedDisabledControls = true,
     this.blendOnLevel,
     this.blendOnColors = true,
-    this.useFlutterDefaults = false,
     //
     this.adaptiveRemoveElevationTint,
     this.adaptiveElevationShadowsBack,
@@ -419,6 +418,12 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailElevation,
     this.navigationRailLabelType,
     this.navigationRailGroupAlignment,
+    //
+    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
+        'future version. FlexColorScheme in M3 mode now defaults to using '
+        'Flutter defaults. For other configurations modify them as desired. '
+        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    this.useFlutterDefaults,
   });
 
   /// Flag used to enable color tinted hover, focus, highlight, selected,
@@ -575,95 +580,6 @@ class FlexSubThemesData with Diagnosticable {
   /// onColor. Consider setting this property true in dark mode, and false in
   /// light theme mode, for a style that matches the Material 3 color design.
   final bool blendOnColors;
-
-  /// Set to true to use Flutter SDK default component theme designs.
-  ///
-  /// Default to false.
-  ///
-  /// Prefer false to use FlexColorScheme (FCS) defaults.
-  ///
-  /// When set to `true`, many color properties that in [FlexSubThemesData] are
-  /// nullable and default to 'null, but that as undefined default to using
-  /// theming choices that differ from Flutter SDK default component theme
-  /// designs, will when this property is set to true default to
-  /// using Flutter SDK defaults, instead of its own opinionated defaults.
-  ///
-  /// When you use this flag you loose many of the harmonizing defaults
-  /// [FlexColorScheme.subThemesData] bring, but it may serve as an optional
-  /// starting point for your own custom component themes with fewer `copyWith`
-  /// overrides needed for its opinionated choices.
-  ///
-  /// The individual [FlexSubThemesData] properties and [FlexSubThemes]
-  /// document their adherence to this setting, they are also listed here:
-  ///
-  /// Impact on [BottomNavigationBarThemeData] sub-theming:
-  ///
-  /// ```
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     background
-  /// - selected icon    primary        light: theme primary, dark: secondary
-  /// - Selected label   primary        light: theme primary, dark: secondary
-  /// - unselected icon  onSurface      light: black54, dark: white70
-  /// - unSelected label onSurface      light: black54, dark: white70
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [bottomNavigationBarMutedUnselectedIcon] and
-  /// [bottomNavigationBarMutedUnselectedLabel] are true respectively,
-  /// this also applies to undefined color inputs.
-  ///
-  /// When muted unselected options are true, the actual difference to Flutter
-  /// default for unselected items is subtle, FCS has a bit more contrast.
-  ///
-  /// Impact on [NavigationBarThemeData] sub-theming:
-  ///
-  /// ```
-  ///                    FCS defaults   M2 defaults       useMaterial3:true
-  /// useFlutterDefaults false          true              true
-  /// results in:
-  ///
-  /// - background       surfaceVariant surface with      surface with
-  ///                                   onSurface overlay primary overlay
-  ///                    elev 3         elev 0            elev 3
-  /// - height           80             80                80
-  /// - indicator        primary op24%  secondary op24%   secondaryContainer
-  /// - selected icon    primary        onSurface         onSecondaryContainer
-  /// - unselected icon  onSurface      onSurface         onSurfaceVariant
-  /// - Selected label   primary        onSurface         onSurface
-  /// - unSelected label onSurface      onSurface         onSurfaceVariant
-  /// - TextTheme        labelMedium    overline          labelMedium
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [navigationBarMutedUnselectedIcon] and [navigationBarMutedUnselectedLabel]
-  /// are true respectively, this also applies to undefined color inputs.
-  ///
-  /// Impact on [NavigationRailThemeData] sub-theming:
-  ///
-  /// ```
-  ///                    FCS defaults    Flutter defaults
-  /// useFlutterDefaults false           true
-  /// - background       background      surface
-  /// - indicator        primary op24%   secondary op24%
-  /// - selected icon    primary         primary
-  /// - Selected label   primary         primary
-  /// - unselected icon  onSurface       onSurface op64%
-  /// - unSelected label onSurface       onSurface op64%
-  /// - TextTheme        FCS.labelMedium default.bodyText1
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [navigationRailMutedUnselectedIcon] and
-  /// are [navigationRailMutedUnselectedLabel] true respectively,
-  /// this also applies to undefined color inputs.
-  ///
-  /// If you want a style that is consistent by default across
-  /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
-  /// prefer keeping this setting false.
-  ///
-  /// If undefined, defaults to false.
-  final bool useFlutterDefaults;
 
   /// Controls adaptive elevation tint color usage in Material 3 theming.
   ///
@@ -2485,18 +2401,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [BottomNavigationBar] labels.
   ///
-  /// If [useFlutterDefaults] is false, the text style
-  /// [FlexColorScheme.m3TextTheme.bodyMedium]
+  /// If not defined, the text style [bodyMedium]
   /// will be used as base style for the text style.
-  ///
-  /// If [useFlutterDefaults] is true, null will be passed to
-  /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
-  /// labeling modifying properties (size and scheme color) are also null, it
-  /// will then be passed along as null, allowing it to remain undefined
-  /// and widget default behavior sets the default. If label size or scheme
-  /// is defined, a default TextStyle() will be created, if
-  /// [bottomNavigationBarLabelTextStyle] is undefined, that gets th size and
-  /// color applied.
   ///
   /// The size and colors defined in any of the text size and color properties
   /// are applied as overrides on the text style.
@@ -2525,11 +2431,6 @@ class FlexSubThemesData with Diagnosticable {
   /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If undefined, defaults to [SchemeColor.primary].
-  ///
-  /// If [useFlutterDefaults] is true, and this property and all other
-  /// label modifying properties are undefined, including the text style,
-  /// the effective color will be [ColorScheme.primary] in light theme and
-  /// [ColorScheme.dark] in dark theme mode.
   final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor;
 
   /// Select which color from the theme's [ColorScheme] to use as base for
@@ -2540,7 +2441,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
   /// blend and opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ThemeData.unselectedWidgetColor]
   /// which is [Colors.black54] in light mode and [Colors.white70] in dark.
@@ -2573,7 +2474,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.primary].
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// icon modifying properties are undefined, the effective color will be
   /// [ColorScheme.primary] in light and [ColorScheme.dark] in dark theme mode.
   final SchemeColor? bottomNavigationBarSelectedIconSchemeColor;
@@ -2586,7 +2487,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
   /// blend and opacity,if [bottomNavigationBarMutedUnselectedLabel] is true.
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// icon modifying properties are undefined,
   /// the effective color will be [ThemeData.unselectedWidgetColor]
   /// which is [Colors.black54] in light mode and [Colors.white70] in dark.
@@ -2609,7 +2510,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.background].
   ///
-  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// If this property is undefined,
   /// the effective background color will also be [ColorScheme.surface].
   ///
   /// FlexColorScheme sets background defaults of [BottomNavigationBar],
@@ -2683,13 +2584,11 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [NavigationBar] labels.
   ///
-  /// If [useFlutterDefaults] is false, the text style
+  /// The text style
   /// [ThemeData.textTheme.labelMedium]  will be used as base style for the
   /// text style.
   ///
-  /// If [useFlutterDefaults] is true, null will be passed to
-  /// [FlexSubThemes.navigationBarTheme] and along to theme creation, if all
-  /// labeling modifying properties (size and scheme color) are also null, it
+  /// If all label modifying properties (size and scheme color) are null, it
   /// will then be passed along as null, allowing it to remain undefined
   /// and widget default behavior sets the default. If label size or scheme
   /// is defined, a default TextStyle() will be created, if
@@ -2719,7 +2618,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.primary].
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.onSurface] in M2 and M3.
   final SchemeColor? navigationBarSelectedLabelSchemeColor;
@@ -2732,7 +2631,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
   /// blend and opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.onSurface] in M2 and
   /// [ColorScheme.onSurfaceVariant] in M3.
@@ -2765,7 +2664,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.primary].
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// icon modifying properties are undefined, the effective color will be
   /// [ColorScheme.onSurface] in M2 and [ColorScheme.onSecondaryContainer]
   /// in M3.
@@ -2779,7 +2678,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
   /// blend and opacity, if [navigationBarMutedUnselectedIcon] is true.
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// icon modifying properties are undefined,
   /// the effective color will be [ColorScheme.onSurface] in M2 and
   /// [ColorScheme.onSurfaceVariant] in M3.
@@ -2803,7 +2702,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.primary], additionally
   /// a default [navigationBarIndicatorOpacity] is applied.
   ///
-  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// If this property is undefined,
   /// the effective indicator color will be [ColorScheme.secondary]
   /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
   final SchemeColor? navigationBarIndicatorSchemeColor;
@@ -2838,7 +2737,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [ColorScheme.surface], with an [ColorScheme.primary] used as overlay
   /// color with hard coded overlay elevation 3.
   ///
-  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// If this property is undefined,
   /// the effective M2 background color will be [ColorScheme.surface],
   /// with an [ColorScheme.onSurface] used as overlay color with hard
   /// coded overlay elevation 3. The actual Flutter SDK elevation is also
@@ -2857,10 +2756,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Height of the container for the Material 3 [NavigationBar].
   ///
-  /// In undefined, defaults to [kNavigationBarHeight] which is 62 dp.
-  ///
-  /// If [useFlutterDefaults] true, and this property is undefined, it defaults
-  /// to 80.
+  /// In undefined, defaults to component default which is 80dp.
   final double? navigationBarHeight;
 
   /// NavigationBar background opacity.
@@ -2913,13 +2809,10 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [NavigationRail] labels.
   ///
-  /// If [useFlutterDefaults] is false, the text style
-  /// [ThemeData.textTheme.labelMedium] will be used as base style for
-  /// the text style.
+  /// The text style [ThemeData.textTheme.labelMedium] is used as base
+  /// style for the text style.
   ///
-  /// If [useFlutterDefaults] is true, null will be passed to
-  /// [FlexSubThemes.navigationRailTheme] and along to theme creation, if all
-  /// labeling modifying properties (size and scheme color) are also null, it
+  /// If all label modifying properties (size and scheme color) are null, it
   /// will then be passed along as null, allowing it to remain undefined
   /// and widget default behavior sets the default. If label size or scheme
   /// is defined, a default TextStyle() will be created, if
@@ -2949,7 +2842,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.primary].
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.primary] in M2 and
   /// [ColorScheme.onSurface] in M3.
@@ -2963,7 +2856,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
   /// blend and opacity, if [mutedUnselectedLabel] is true.
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// label modifying properties are undefined, including the text style,
   /// the effective color will be [ColorScheme.onSurface] with opacity 64% in
   /// M2 and [ColorScheme.onSurface] in M3.
@@ -2996,7 +2889,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.primary].
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// icon modifying properties are undefined, the effective color will
   /// also be [ColorScheme.primary] in M2 and
   /// [ColorScheme.onSecondaryContainer] in M3.
@@ -3010,7 +2903,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
   /// blend and opacity,if [navigationRailMutedUnselectedLabel] is true.
   ///
-  /// If [useFlutterDefaults] is true, and this property and all other
+  /// If this property and all other
   /// icon modifying properties are undefined,
   /// the effective color will be [ColorScheme.onSurface] with 64% opacity
   /// in M2 and [ColorScheme.onSurfaceVariant] in M3.
@@ -3051,7 +2944,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [SchemeColor.primary], additionally
   /// a default [navigationRailIndicatorOpacity] is applied.
   ///
-  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// If this property is undefined,
   /// the effective background color will also be [ColorScheme.secondary]
   /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
   final SchemeColor? navigationRailIndicatorSchemeColor;
@@ -3083,7 +2976,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.background].
   ///
-  /// If [useFlutterDefaults] true, and this property is undefined,
+  /// If this property is undefined,
   /// the effective background color will be [ColorScheme.surface].
   ///
   /// FlexColorScheme sets background defaults of [NavigationRail],
@@ -3142,13 +3035,105 @@ class FlexSubThemesData with Diagnosticable {
   /// The default is -1.0.
   final double? navigationRailGroupAlignment;
 
+  /// Set to true to use Flutter SDK default component theme designs.
+  ///
+  /// Default to false.
+  ///
+  /// Prefer false to use FlexColorScheme (FCS) defaults.
+  ///
+  /// When set to `true`, many color properties that in [FlexSubThemesData] are
+  /// nullable and default to 'null, but that as undefined default to using
+  /// theming choices that differ from Flutter SDK default component theme
+  /// designs, will when this property is set to true default to
+  /// using Flutter SDK defaults, instead of its own opinionated defaults.
+  ///
+  /// When you use this flag you loose many of the harmonizing defaults
+  /// [FlexColorScheme.subThemesData] bring, but it may serve as an optional
+  /// starting point for your own custom component themes with fewer `copyWith`
+  /// overrides needed for its opinionated choices.
+  ///
+  /// The individual [FlexSubThemesData] properties and [FlexSubThemes]
+  /// document their adherence to this setting, they are also listed here:
+  ///
+  /// Impact on [BottomNavigationBarThemeData] sub-theming:
+  ///
+  /// ```
+  ///                    FCS defaults   Flutter defaults
+  /// useFlutterDefaults false          true
+  /// - background       background     background
+  /// - selected icon    primary        light: theme primary, dark: secondary
+  /// - Selected label   primary        light: theme primary, dark: secondary
+  /// - unselected icon  onSurface      light: black54, dark: white70
+  /// - unSelected label onSurface      light: black54, dark: white70
+  /// ```
+  /// FCS further applies both an alpha blend and slight opacity to
+  /// unselected icon and unselected label, but only if
+  /// [bottomNavigationBarMutedUnselectedIcon] and
+  /// [bottomNavigationBarMutedUnselectedLabel] are true respectively,
+  /// this also applies to undefined color inputs.
+  ///
+  /// When muted unselected options are true, the actual difference to Flutter
+  /// default for unselected items is subtle, FCS has a bit more contrast.
+  ///
+  /// Impact on [NavigationBarThemeData] sub-theming:
+  ///
+  /// ```
+  ///                    FCS defaults   M2 defaults       useMaterial3:true
+  /// useFlutterDefaults false          true              true
+  /// results in:
+  ///
+  /// - background       surfaceVariant surface with      surface with
+  ///                                   onSurface overlay primary overlay
+  ///                    elev 3         elev 0            elev 3
+  /// - height           80             80                80
+  /// - indicator        primary op24%  secondary op24%   secondaryContainer
+  /// - selected icon    primary        onSurface         onSecondaryContainer
+  /// - unselected icon  onSurface      onSurface         onSurfaceVariant
+  /// - Selected label   primary        onSurface         onSurface
+  /// - unSelected label onSurface      onSurface         onSurfaceVariant
+  /// - TextTheme        labelMedium    overline          labelMedium
+  /// ```
+  /// FCS further applies both an alpha blend and slight opacity to
+  /// unselected icon and unselected label, but only if
+  /// [navigationBarMutedUnselectedIcon] and [navigationBarMutedUnselectedLabel]
+  /// are true respectively, this also applies to undefined color inputs.
+  ///
+  /// Impact on [NavigationRailThemeData] sub-theming:
+  ///
+  /// ```
+  ///                    FCS defaults    Flutter defaults
+  /// useFlutterDefaults false           true
+  /// - background       background      surface
+  /// - indicator        primary op24%   secondary op24%
+  /// - selected icon    primary         primary
+  /// - Selected label   primary         primary
+  /// - unselected icon  onSurface       onSurface op64%
+  /// - unSelected label onSurface       onSurface op64%
+  /// - TextTheme        FCS.labelMedium default.bodyText1
+  /// ```
+  /// FCS further applies both an alpha blend and slight opacity to
+  /// unselected icon and unselected label, but only if
+  /// [navigationRailMutedUnselectedIcon] and
+  /// are [navigationRailMutedUnselectedLabel] true respectively,
+  /// this also applies to undefined color inputs.
+  ///
+  /// If you want a style that is consistent by default across
+  /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
+  /// prefer keeping this setting false.
+  ///
+  /// If undefined, defaults to false.
+  @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
+      'future version. FlexColorScheme in M3 mode now defaults to using '
+      'Flutter defaults. For other configurations modify them as desired. '
+      'In M2 mode it will use opinionated defaults as long as M2 exists.')
+  final bool? useFlutterDefaults;
+
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
     final bool? interactionEffects,
     final bool? tintedDisabledControls,
     final int? blendOnLevel,
     final bool? blendOnColors,
-    final bool? useFlutterDefaults,
     //
     final FlexAdaptive? adaptiveRemoveElevationTint,
     final FlexAdaptive? adaptiveElevationShadowsBack,
@@ -3400,6 +3385,12 @@ class FlexSubThemesData with Diagnosticable {
     final double? navigationRailElevation,
     final NavigationRailLabelType? navigationRailLabelType,
     final double? navigationRailGroupAlignment,
+    //
+    @Deprecated('The useFlutterDefaults is deprecated and will be removed in a '
+        'future version. FlexColorScheme in M3 mode now defaults to using '
+        'Flutter defaults. For other configurations modify them as desired. '
+        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    final bool? useFlutterDefaults,
   }) {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
@@ -3407,7 +3398,6 @@ class FlexSubThemesData with Diagnosticable {
           tintedDisabledControls ?? this.tintedDisabledControls,
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
-      useFlutterDefaults: useFlutterDefaults ?? this.useFlutterDefaults,
       //
       adaptiveRemoveElevationTint:
           adaptiveRemoveElevationTint ?? this.adaptiveRemoveElevationTint,
@@ -3843,7 +3833,6 @@ class FlexSubThemesData with Diagnosticable {
         other.tintedDisabledControls == tintedDisabledControls &&
         other.blendOnLevel == blendOnLevel &&
         other.blendOnColors == blendOnColors &&
-        other.useFlutterDefaults == useFlutterDefaults &&
         //
         other.adaptiveRemoveElevationTint == adaptiveRemoveElevationTint &&
         other.adaptiveElevationShadowsBack == adaptiveElevationShadowsBack &&
@@ -4165,7 +4154,6 @@ class FlexSubThemesData with Diagnosticable {
         tintedDisabledControls,
         blendOnLevel,
         blendOnColors,
-        useFlutterDefaults,
         //
         adaptiveRemoveElevationTint,
         adaptiveElevationShadowsBack,
@@ -4428,8 +4416,6 @@ class FlexSubThemesData with Diagnosticable {
         'tintedDisabledControls', tintedDisabledControls));
     properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
-    properties.add(
-        DiagnosticsProperty<bool>('useFlutterDefaults', useFlutterDefaults));
     //
     properties.add(DiagnosticsProperty<FlexAdaptive>(
         'adaptiveRemoveElevationTint', adaptiveRemoveElevationTint));

@@ -958,7 +958,8 @@ class FlexSubThemes {
 
     /// [BottomNavigationBar] container elevation.
     ///
-    /// If not defined, defaults to [kBottomNavigationBarElevation] = 3.
+    /// If not defined, defaults to component theme defaults to
+    /// [kBottomNavigationBarElevation] = 3.
     final double? elevation,
 
     /// Whether the labels are shown for the selected
@@ -1053,7 +1054,11 @@ class FlexSubThemes {
     ///
     /// When muted unselected options are true, the difference to Flutter
     /// default for unselected items is subtle, FCS has a bit more contrast.
-    final bool useFlutterDefaults = false,
+    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
+        'future version. FlexColorScheme in M3 mode now defaults to using '
+        'Flutter defaults. For other configurations modify them as desired. '
+        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    final bool? useFlutterDefaults,
   }) {
     // Determine if we can even use default text styles, only when all are null,
     // can we fall back to Flutter SDK default.
@@ -1061,16 +1066,14 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        unselectedLabelSchemeColor == null &&
-        useFlutterDefaults;
+        unselectedLabelSchemeColor == null;
 
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
     final bool useDefaultIconTheme = selectedIconSize == null &&
         unselectedIconSize == null &&
         selectedIconSchemeColor == null &&
-        unselectedIconSchemeColor == null &&
-        useFlutterDefaults;
+        unselectedIconSchemeColor == null;
 
     // Get text color, defaults to primary in light and to secondary in dark.
     final Color labelColor = schemeColor(
@@ -1118,14 +1121,9 @@ class FlexSubThemes {
         .withOpacity(opacity ?? 1.0);
 
     return BottomNavigationBarThemeData(
-      backgroundColor: backgroundSchemeColor == null
-          ? useFlutterDefaults
-              ? null
-              : backgroundColor
-          : backgroundColor,
-      elevation: useFlutterDefaults && elevation == null
-          ? null
-          : elevation ?? kBottomNavigationBarElevation,
+      // TODO(rydmike): Check what default we should have on this.
+      backgroundColor: backgroundSchemeColor == null ? null : backgroundColor,
+      elevation: elevation ?? kBottomNavigationBarElevation,
       unselectedIconTheme: useDefaultIconTheme
           ? null
           : IconThemeData(
@@ -4213,6 +4211,7 @@ class FlexSubThemes {
     /// If undefined, defaults to true.
     final bool? mutedUnselectedIcon,
 
+    // TODO(rydmike): Check the updated defaults for NavigationBar.
     /// Select which color from the theme [ColorScheme] to use as base for
     /// the [NavigationBar]'s selected item indicator.
     ///
@@ -4220,10 +4219,6 @@ class FlexSubThemes {
     ///
     /// If undefined, defaults to [SchemeColor.primary], additionally
     /// a default [navigationBarIndicatorOpacity] is applied.
-    ///
-    /// If [useFlutterDefaults] true, and this property is undefined,
-    /// the effective indicator color will be [ColorScheme.secondary]
-    /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
     final SchemeColor? indicatorSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as background
@@ -4380,7 +4375,11 @@ class FlexSubThemes {
     /// [navigationBarMutedUnselectedIcon] and
     /// [navigationBarMutedUnselectedLabel] are true respectively, this
     /// also applies to undefined color inputs.
-    final bool useFlutterDefaults = false,
+    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
+        'future version. FlexColorScheme in M3 mode now defaults to using '
+        'Flutter defaults. For other configurations modify them as desired. '
+        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    final bool? useFlutterDefaults,
   }) {
     final bool useM3 = useMaterial3 ?? false;
 
@@ -4390,16 +4389,14 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        unselectedLabelSchemeColor == null &&
-        useFlutterDefaults;
+        unselectedLabelSchemeColor == null;
 
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
     final bool useDefaultIconTheme = selectedIconSize == null &&
         unselectedIconSize == null &&
         selectedIconSchemeColor == null &&
-        unselectedIconSchemeColor == null &&
-        useFlutterDefaults;
+        unselectedIconSchemeColor == null;
 
     // Get text color, defaults to primary.
     final Color labelColor = schemeColor(
@@ -4442,28 +4439,16 @@ class FlexSubThemes {
             .withAlpha(indicatorAlpha ?? kNavigationBarIndicatorAlpha);
 
     // Make default elevation
-    final double? effectiveElevation = useM3
-        ? elevation
-        // ignore: prefer_if_null_operators
-        : elevation == null
-            ? useFlutterDefaults
-                ? null
-                : kBottomNavigationBarElevation
-            : elevation;
+    final double? effectiveElevation =
+        useM3 ? elevation : elevation ?? kBottomNavigationBarElevation;
 
     return NavigationBarThemeData(
       height: height,
       elevation: effectiveElevation,
-      backgroundColor: useFlutterDefaults && backgroundSchemeColor == null
-          ? null
-          : backgroundColor,
+      backgroundColor: backgroundSchemeColor == null ? null : backgroundColor,
       surfaceTintColor: surfaceTintColor,
       shadowColor: shadowColor,
-      indicatorColor: indicatorSchemeColor == null
-          ? useFlutterDefaults
-              ? null
-              : indicatorColor
-          : indicatorColor,
+      indicatorColor: indicatorSchemeColor == null ? null : indicatorColor,
       indicatorShape: indicatorRadius == null
           ? null
           : RoundedRectangleBorder(
@@ -5022,8 +5007,12 @@ class FlexSubThemes {
     /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
     /// prefer keeping this setting false.
     ///
-    /// Defaults to false.
-    final bool useFlutterDefaults = false,
+    /// Defaults to null.
+    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
+        'future version. FlexColorScheme in M3 mode now defaults to using '
+        'Flutter defaults. For other configurations modify them as desired. '
+        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    final bool? useFlutterDefaults,
   }) {
     final bool useM3 = useMaterial3 ?? false;
 
@@ -5033,16 +5022,14 @@ class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        unselectedLabelSchemeColor == null &&
-        useFlutterDefaults;
+        unselectedLabelSchemeColor == null;
 
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
     final bool useDefaultIconTheme = selectedIconSize == null &&
         unselectedIconSize == null &&
         selectedIconSchemeColor == null &&
-        unselectedIconSchemeColor == null &&
-        useFlutterDefaults;
+        unselectedIconSchemeColor == null;
 
     // Get text color, defaults to primary.
     final Color labelColor = selectedLabelSchemeColor == null
@@ -5080,16 +5067,12 @@ class FlexSubThemes {
     // Effective indicator color.
     final Color effectiveIndicatorColor = schemeColor(
             indicatorSchemeColor ??
-                (useFlutterDefaults
-                    ? useM3
-                        ? SchemeColor.secondaryContainer
-                        : SchemeColor.secondary
-                    : SchemeColor.primary),
+                (useM3
+                    ? SchemeColor.secondaryContainer
+                    : SchemeColor.secondary),
             colorScheme)
-        .withAlpha(indicatorAlpha ??
-            ((useM3 && useFlutterDefaults)
-                ? 0xFF
-                : kNavigationBarIndicatorAlpha));
+        .withAlpha(
+            indicatorAlpha ?? (useM3 ? 0xFF : kNavigationBarIndicatorAlpha));
 
     // Effective usage value for indicator.
     final bool effectiveUseIndicator =
@@ -5102,11 +5085,7 @@ class FlexSubThemes {
 
     // Property order here as in NavigationRailThemeData
     return NavigationRailThemeData(
-      backgroundColor: backgroundSchemeColor == null
-          ? useFlutterDefaults
-              ? null
-              : backgroundColor
-          : backgroundColor,
+      backgroundColor: backgroundSchemeColor == null ? null : backgroundColor,
       elevation: elevation ?? kNavigationRailElevation,
       unselectedLabelTextStyle: useDefaultTextStyle
           ? null

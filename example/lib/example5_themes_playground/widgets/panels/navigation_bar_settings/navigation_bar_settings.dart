@@ -11,7 +11,6 @@ import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
-import '../../shared/navigators_use_default_switch.dart';
 import '../../shared/platform_popup_menu.dart';
 import 'navigation_bar_label_behavior_list_tile.dart';
 
@@ -51,8 +50,7 @@ class NavigationBarSettings extends StatelessWidget {
       }
       if (!controller.useSubThemes ||
           !controller.useFlexColorScheme ||
-          (controller.useFlutterDefaults &&
-              controller.navBarBackgroundSchemeColor == null)) {
+          (controller.navBarBackgroundSchemeColor == null)) {
         return 'default (surface with onSurface overlay)';
       }
       return 'default (surfaceVariant)';
@@ -62,9 +60,7 @@ class NavigationBarSettings extends StatelessWidget {
     // custom color selection overrides default label and value.
     String indicatorColorLabel() {
       // Use FCS component default, primary.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
-          controller.useSubThemes) {
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
         return 'default (primary)';
       }
       // Use M2 default color
@@ -79,9 +75,7 @@ class NavigationBarSettings extends StatelessWidget {
     // custom color selection overrides default label and value.
     String selectedIconColorLabel() {
       // Use FCS component default, primary.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
-          controller.useSubThemes) {
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
         return 'default (primary)';
       }
       // Use M2 default color
@@ -96,9 +90,7 @@ class NavigationBarSettings extends StatelessWidget {
     // custom color selection overrides default label and value.
     String selectedLabelColorLabel() {
       // Use FCS component default, primary.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
-          controller.useSubThemes) {
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
         return 'default (primary)';
       }
       // Use M2 default color
@@ -111,22 +103,20 @@ class NavigationBarSettings extends StatelessWidget {
 
     final bool muteUnselectedEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.useFlutterDefaults &&
-            controller.navBarSelectedIconSchemeColor == null &&
+        !(controller.navBarSelectedIconSchemeColor == null &&
             controller.navBarUnselectedSchemeColor == null);
     // Logic for unselected item color label default value,
     // custom color selection overrides default label and value.
     String unselectedItemColorLabel() {
       // Use FCS component default, onSurface with muted label.
-      if (!controller.useFlutterDefaults &&
-          controller.useFlexColorScheme &&
+      if (controller.useFlexColorScheme &&
           controller.useSubThemes &&
           controller.navBarMuteUnselected &&
           muteUnselectedEnabled) {
         return 'default (onSurface, with blend & opacity)';
       }
       // Use FCS component default, onSurface.
-      if (!controller.useMaterial3 || !controller.useFlutterDefaults) {
+      if (!controller.useMaterial3) {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
@@ -135,14 +125,12 @@ class NavigationBarSettings extends StatelessWidget {
 
     final bool navBarOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        (!controller.useFlutterDefaults ||
-            controller.navBarBackgroundSchemeColor != null);
+        (controller.navBarBackgroundSchemeColor != null);
     final double navBarOpacity =
         navBarOpacityEnabled ? controller.navBarOpacity : 1;
     final bool navBarHighlightOpacityEnabled = controller.useSubThemes &&
         controller.useFlexColorScheme &&
-        !(controller.navBarIndicatorSchemeColor == null &&
-            controller.useFlutterDefaults);
+        !(controller.navBarIndicatorSchemeColor == null);
     final double navBarHighlightOpacity = navBarHighlightOpacityEnabled
         ? (controller.navBarIndicatorOpacity ?? -0.01)
         : -0.01;
@@ -559,7 +547,6 @@ class NavigationBarSettings extends StatelessWidget {
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
         const Divider(),
-        NavigatorsUseDefaultsSwitch(controller: controller),
         const ListTileReveal(
           dense: true,
           title: Text('More settings with the API'),

@@ -30,6 +30,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The enum `SchemeColor` got to support for all colors in Flutter 3.22 colors, including same removals as in Flutter 3.22. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value. 
 - The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
+- The FCS legacy property `useFlutterDeaults` was deprecated. FlexColorScheme in M3 mode now defaults to using Flutter defaults. For other configurations, modify them as desired. In M2 mode, FCS will use opinionated defaults as long as M2 exists.
+
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the **new** Material3 color scheme used in **Flutter 3.22**. 
 
 - Property `systemNavBarStyle` in `FlexColorScheme.themedSystemNavigationBar` now defaults to `FlexSystemNavBarStyle.surface`, instead of `FlexSystemNavBarStyle.background`. Using `FlexSystemNavBarStyle.background` results in the color `Theme.of(context).colorScheme.surfaceContainerLow` being used, where it previously was `Theme.of(context).colorScheme.background`. This is because Flutter 3.22 deprecated `ColorSCheme.-background`.
@@ -63,7 +65,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **TODO PACKAGE**
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
-- BREAK: Consider removing FCS legacy property `useFlutterDeaults`. It will not be needed anymore when styles follow M3 defaults.
+
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`.
 - Add TextStyles for `FlexSubThemesData` so that:
