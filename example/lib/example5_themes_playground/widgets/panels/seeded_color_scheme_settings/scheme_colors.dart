@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/flex_tones_enum.dart';
 import '../../shared/color_name_value.dart';
 import '../../shared/color_picker_inkwell.dart';
 
@@ -64,8 +63,11 @@ class SchemeColors extends StatelessWidget {
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
 
+    // TODO(rydmike): Review tones everywhere! And colors! Need a helper?
+    // See show_tonal_palette.dart for correct tones!
+
     // Grab active tones and chroma setup.
-    final FlexTones tones = FlexTonesEnum.values[tc.usedFlexToneSetup]
+    final FlexTones tones = FlexSchemeVariant.values[tc.usedFlexToneSetup]
         .tones(theme.brightness)
         .onMainsUseBW(isLight ? tc.onMainsUseBWLight : tc.onMainsUseBWDark)
         .onSurfacesUseBW(

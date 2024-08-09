@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 7, 2024**
+**Aug 8, 2024**
 
 **PACKAGE**
 
@@ -20,6 +20,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Flutter 3.22 broke +100 tests in FCS, review and fix them.
 - Get tests back to 100% coverage.
 - Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 492 of them remaining. 
+ * Done
 
 **BREAKING**
 
@@ -27,7 +28,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` had far-reaching implications on styles created by FCS and there are many breaking style changes in this release due to this. Some might even be forgotten in the change-log.
 - Deprecated `background` and `onBackground` colors in `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories. They are not used anymore. User `surface` and `onSurface` colors instead.
-- The enum `SchemeColor` got to support for all colors in Flutter 3.22 colors, including same removals as in Flutter 3.22. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value. 
+- The enum `SchemeColor` got support for all colors in Flutter 3.22 colors, also includes same removals as in Flutter 3.22. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value. 
 - The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 - The FCS legacy property `useFlutterDeaults` was deprecated. FlexColorScheme in M3 mode now defaults to using Flutter defaults. For other configurations, modify them as desired. In M2 mode, FCS will use opinionated defaults as long as M2 exists.
@@ -122,9 +123,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **Feature**
 - Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) add `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.  
 - Split FAB and Chip to separate panels.
+- Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
 
 **TODO THEMES PLAYGROUND AND EXAMPLES**
 
+- Add new ColorScheme colors to ColorScheme presentation.
+- Add new ColorScheme colors to ColorScheme code generation.
 - Add info about Card theming issue to the Card settings screen. After filing the Flutter issue. 
 - Add UI and code gen for dense input decorator.
 - Add UI for content padding on input decorator.

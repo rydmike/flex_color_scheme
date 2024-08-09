@@ -1711,6 +1711,8 @@ String generateThemeDartCode(ThemeController controller) {
   if (useKeyColorsDark == '  keyColors: const FlexKeyColors(\n  ),\n') {
     useKeyColorsDark = '  keyColors: const FlexKeyColors(),\n';
   }
+  // TODO(rydmike): Fix code gen for tones and variants
+
   String flexTonesLight = '';
   String flexTonesDark = '';
   if (controller.useKeyColors) {

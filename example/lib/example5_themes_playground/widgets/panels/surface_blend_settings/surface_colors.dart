@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/flex_tones_enum.dart';
 import '../../shared/color_name_value.dart';
 
 // Display the all scheme surface colors in currently selected color scheme,
@@ -39,8 +38,12 @@ class SurfaceColors extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
 
+    // TODO(rydmike): Review tones everywhere! And colors! Need a helper?
+    // See show_tonal_palette.dart for correct tones!
+
     // Grab active tones and chroma setup.
-    final FlexTones tones = FlexTonesEnum.values[controller.usedFlexToneSetup]
+    final FlexTones tones = FlexSchemeVariant
+        .values[controller.usedFlexToneSetup]
         .tones(theme.brightness)
         .onMainsUseBW(isLight
             ? controller.onMainsUseBWLight

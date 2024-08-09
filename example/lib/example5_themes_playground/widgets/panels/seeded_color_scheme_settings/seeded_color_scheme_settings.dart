@@ -1,8 +1,8 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/flex_tones_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/custom_theme_controls.dart';
@@ -22,17 +22,9 @@ class SeededColorSchemeSettings extends StatelessWidget {
 
   String get _flexToneName {
     if (controller.useKeyColors) {
-      return FlexTonesEnum.values[controller.usedFlexToneSetup].toneLabel;
+      return FlexSchemeVariant.values[controller.usedFlexToneSetup].variantName;
     } else {
-      return FlexTonesEnum.values[0].toneLabel;
-    }
-  }
-
-  String get _flexToneSetup {
-    if (controller.useKeyColors) {
-      return FlexTonesEnum.values[controller.usedFlexToneSetup].setup;
-    } else {
-      return FlexTonesEnum.values[0].setup;
+      return FlexSchemeVariant.values[0].variantName;
     }
   }
 
@@ -52,7 +44,6 @@ class SeededColorSchemeSettings extends StatelessWidget {
         FlexToneConfigPopupMenu(
           title: 'ColorScheme made with FlexTones',
           flexToneName: _flexToneName,
-          flexToneSetup: _flexToneSetup,
           index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
           onChanged:
               controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
@@ -200,7 +191,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
         CustomThemeControls(controller: controller),
         // ShowInputColorsSwitch(controller: controller),
 
-        // TODO(rydmike): Remove as not used 29.7.20203
+        // TODO(rydmike): Remove as not used 29.7.2023
         //
         // if (!isLight && controller.schemeIndex ==
         // (AppColor.schemes.length - 1))
