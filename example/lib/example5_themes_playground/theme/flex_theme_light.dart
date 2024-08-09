@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/flex_tones_enum.dart';
 import '../../shared/model/visual_density_enum.dart';
 import 'code_theme.dart';
 import 'topic_theme.dart';
@@ -498,11 +497,19 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // You can make your custom [FlexTones] object right here
     // and apps it it, this just uses an int value to select
     // between a few pre-configured ones.
-    tones: FlexTonesEnum.values[controller.usedFlexToneSetup]
-        .tones(Brightness.light)
-        .onMainsUseBW(controller.onMainsUseBWLight)
-        .onSurfacesUseBW(controller.onSurfacesUseBWLight)
-        .surfacesUseBW(controller.surfacesUseBWLight),
+    tones:
+        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+            ? null
+            : FlexSchemeVariant.values[controller.usedFlexToneSetup]
+                .tones(Brightness.light)
+                .onMainsUseBW(controller.onMainsUseBWLight)
+                .onSurfacesUseBW(controller.onSurfacesUseBWLight)
+                .surfacesUseBW(controller.surfacesUseBWLight),
+    // Use MCU variant based scheme instead
+    variant:
+        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+            ? FlexSchemeVariant.values[controller.usedFlexToneSetup]
+            : null,
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintLight,
     //

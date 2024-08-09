@@ -1,13 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/model/flex_tones_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../shared/color_scheme_box.dart';
 
 /// Widget used to select used [FlexTones] with a popup menu.
 ///
-/// Uses enhanced enum [FlexTonesEnum] to get data for the UI.
+/// Uses enhanced enum [FlexSchemeVariant] to get data for the UI.
 class FlexToneConfigPopupMenu extends StatelessWidget {
   const FlexToneConfigPopupMenu({
     super.key,
@@ -15,14 +14,12 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     this.onChanged,
     this.title = '',
     this.flexToneName = '',
-    this.flexToneSetup = '',
     this.contentPadding,
   });
   final int index;
   final ValueChanged<int>? onChanged;
   final String title;
   final String flexToneName;
-  final String flexToneSetup;
   final EdgeInsetsGeometry? contentPadding;
 
   @override
@@ -30,48 +27,52 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
-    // Value less than 1, or index over range disables the control.
-    final bool disabled = index < 1 || index >= FlexTonesEnum.values.length;
+    // Value less than 0, or index over range disables the control.
+    final bool disabled = index < 0 || index >= FlexSchemeVariant.values.length;
 
     return PopupMenuButton<int>(
-      initialValue: disabled ? 1 : index,
+      initialValue: disabled ? 0 : index,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
         onChanged?.call(
-            index >= FlexTonesEnum.values.length || index < 1 ? 0 : index);
+            index >= FlexSchemeVariant.values.length || index < 1 ? 0 : index);
       },
       enabled: !disabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        // The '0' index is excluded, it describes the disabled state.
-        for (int i = 1; i < FlexTonesEnum.values.length; i++)
+        for (int i = 0; i < FlexSchemeVariant.values.length; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(
               dense: true,
-              leading: ColorSchemeBox(
-                optionIcon: FlexTonesEnum.values[i].icon,
-                backgroundColor: FlexTonesEnum.values[i].shade < 0
-                    ? colorScheme.primary
-                        .lighten(FlexTonesEnum.values[i].shade * -1)
-                    : colorScheme.primary.darken(FlexTonesEnum.values[i].shade),
-                borderColor: Colors.transparent,
+              leading: Badge(
+                label: FlexSchemeVariant.values[i].isFlutterScheme
+                    ? const Text('MCU', style: TextStyle(fontSize: 8))
+                    : const Text('FSS', style: TextStyle(fontSize: 8)),
+                child: ColorSchemeBox(
+                  optionIcon: FlexSchemeVariant.values[i].icon,
+                  backgroundColor: FlexSchemeVariant.values[i].shade < 0
+                      ? colorScheme.primary
+                          .lighten(FlexSchemeVariant.values[i].shade * -1)
+                      : colorScheme.primary
+                          .darken(FlexSchemeVariant.values[i].shade),
+                  borderColor: Colors.transparent,
+                ),
               ),
-              title: Text(FlexTonesEnum.values[i].toneLabel, style: txtStyle),
+              title: Text(FlexSchemeVariant.values[i].variantName,
+                  style: txtStyle),
             ),
           )
       ],
       child: ListTileReveal(
         enabled: !disabled,
         contentPadding: contentPadding,
-        title: Text('$title ${FlexTonesEnum.values[index].toneLabel}'),
+        title: Text('$title ${FlexSchemeVariant.values[index].variantName}'),
         subtitle: Text(
-          '${FlexTonesEnum.values[index].describe}.\n'
-          '$flexToneName FlexTones setup has CAM16 chroma:\n'
+          '$flexToneName setup:\n\n'
+          '${FlexSchemeVariant.values[index].configDetails}.\n'
           '\n'
-          '$flexToneSetup\n'
-          '\n'
-          'With FlexTones, you can configure which tone from '
+          'With FSS based FlexTones, you can configure which tone from '
           'generated palettes each color in the ColorScheme use. '
           'Set limits on used CAM16 chroma values '
           'for the three colors used as keys for primary, '
@@ -82,14 +83,19 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
-          child: ColorSchemeBox(
-            backgroundColor: disabled
-                ? colorScheme.surfaceContainerHighest
-                : colorScheme.primary,
-            foregroundColor: disabled ? theme.dividerColor : null,
-            borderColor: disabled ? theme.dividerColor : Colors.transparent,
-            defaultOption: disabled,
-            optionIcon: FlexTonesEnum.values[index].icon,
+          child: Badge(
+            label: FlexSchemeVariant.values[index].isFlutterScheme
+                ? const Text('MCU', style: TextStyle(fontSize: 8))
+                : const Text('FSS', style: TextStyle(fontSize: 8)),
+            child: ColorSchemeBox(
+              backgroundColor: disabled
+                  ? colorScheme.surfaceContainerHighest
+                  : colorScheme.primary,
+              foregroundColor: disabled ? theme.dividerColor : null,
+              borderColor: disabled ? theme.dividerColor : Colors.transparent,
+              defaultOption: disabled,
+              optionIcon: FlexSchemeVariant.values[index].icon,
+            ),
           ),
         ),
       ),

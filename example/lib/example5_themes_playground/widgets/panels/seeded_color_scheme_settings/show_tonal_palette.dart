@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/flex_tones_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import 'select_palette_type.dart';
 import 'tonal_palette_colors.dart';
 
 class ShowTonalPalette extends StatelessWidget {
@@ -36,40 +34,97 @@ class ShowTonalPalette extends StatelessWidget {
     );
 
     // Type of palette to show.
-    final FlexPaletteType paletteType = controller.paletteType;
+    // final FlexPaletteType paletteType = controller.paletteType;
 
     // Get the FlexTones setup
-    final FlexTones tones =
-        FlexTonesEnum.values[controller.usedFlexToneSetup].tones(brightness);
+    final FlexTones tones = FlexSchemeVariant
+        .values[controller.usedFlexToneSetup]
+        .tones(brightness);
 
-    // Compute all the core Tonal Palettes.
-    final FlexCorePalette palettes = FlexCorePalette.fromSeeds(
-      primary: colors.primary.value,
-      // Pass in null if set to not secondary or tertiary colors seed keys.
-      secondary: controller.useSecondary ? colors.secondary.value : null,
-      tertiary: controller.useTertiary ? colors.tertiary.value : null,
-      // If custom surfaceTint is not null, use it as key for neutrals.
-      neutral: isLight
-          ? controller.surfaceTintLight?.value
-          : controller.surfaceTintDark?.value,
-      neutralVariant: isLight
-          ? controller.surfaceTintLight?.value
-          : controller.surfaceTintDark?.value,
-      // Tone config details we get from active FlexTones.
-      primaryChroma: controller.useKeyColors ? tones.primaryChroma : 0,
-      primaryMinChroma: controller.useKeyColors ? tones.primaryMinChroma : 0,
-      secondaryChroma: controller.useKeyColors ? tones.secondaryChroma : 0,
-      secondaryMinChroma:
-          controller.useKeyColors ? tones.secondaryMinChroma : 0,
-      tertiaryChroma: controller.useKeyColors ? tones.tertiaryChroma : 0,
-      tertiaryMinChroma: controller.useKeyColors ? tones.tertiaryMinChroma : 0,
-      tertiaryHueRotation:
-          controller.useKeyColors ? tones.tertiaryHueRotation : 0,
-      neutralChroma: controller.useKeyColors ? tones.neutralChroma : 0,
-      neutralVariantChroma:
-          controller.useKeyColors ? tones.neutralVariantChroma : 0,
-      paletteType: paletteType,
-    );
+    // List of ints that we need to draw the tonal palettes.
+    List<int> primaryTonals = <int>[];
+    List<int> secondaryTonals = <int>[];
+    List<int> tertiaryTonals = <int>[];
+    List<int> errorTonals = <int>[];
+    List<int> neutralTonals = <int>[];
+    List<int> neutralVariantTonals = <int>[];
+
+    // Which variant is being used?
+    final FlexSchemeVariant usedVariant =
+        FlexSchemeVariant.values[controller.usedFlexToneSetup];
+
+    // Are we using a Flutter SDK scheme? Otherwise use FlexTone.
+    if (usedVariant.isFlutterScheme) {
+      // Get DynamicScheme tones if using Flutter SDK scheme.
+      final DynamicScheme dynamicScheme = SeedColorScheme.buildDynamicScheme(
+        brightness: brightness,
+        primarySeedColor: colors.primary,
+        secondarySeedColor: controller.useSecondary ? colors.secondary : null,
+        tertiarySeedColor: controller.useTertiary ? colors.tertiary : null,
+        // TODO(rydmike): Add custom error seed color support.
+        // errorSeedColor:
+        //     controller.useErrorKey ? controller.errorSeedColor : null,
+        neutralSeedColor:
+            isLight ? controller.surfaceTintLight : controller.surfaceTintDark,
+        neutralVariantSeedColor:
+            isLight ? controller.surfaceTintLight : controller.surfaceTintDark,
+        variant: usedVariant,
+        // TODO(rydmike): Add contrast level support
+        // contrastLevel: controller.contrastLevel,
+        // useExpressiveOnContainerColors: controller.useExpressiveOn,
+      );
+
+      // Assign the tonals for the schemes to the int lists using tone indexes
+      // from FlexTonalPalette based on used type.
+      for (final int i in FlexTonalPalette.extendedTones) {
+        primaryTonals.add(dynamicScheme.primaryPalette.get(i));
+        secondaryTonals.add(dynamicScheme.secondaryPalette.get(i));
+        tertiaryTonals.add(dynamicScheme.tertiaryPalette.get(i));
+        errorTonals.add(dynamicScheme.errorPalette.get(i));
+        neutralTonals.add(dynamicScheme.neutralPalette.get(i));
+        neutralVariantTonals.add(dynamicScheme.neutralVariantPalette.get(i));
+      }
+    } else {
+      // Compute all the core Tonal Palettes.
+      final FlexCorePalette palettes = FlexCorePalette.fromSeeds(
+        primary: colors.primary.value,
+        // Pass in null if set to not secondary or tertiary colors seed keys.
+        secondary: controller.useSecondary ? colors.secondary.value : null,
+        tertiary: controller.useTertiary ? colors.tertiary.value : null,
+        // If custom surfaceTint is not null, use it as key for neutrals.
+        neutral: isLight
+            ? controller.surfaceTintLight?.value
+            : controller.surfaceTintDark?.value,
+        neutralVariant: isLight
+            ? controller.surfaceTintLight?.value
+            : controller.surfaceTintDark?.value,
+        // Tone config details we get from active FlexTones.
+        primaryChroma: controller.useKeyColors ? tones.primaryChroma : 0,
+        primaryMinChroma: controller.useKeyColors ? tones.primaryMinChroma : 0,
+        secondaryChroma: controller.useKeyColors ? tones.secondaryChroma : 0,
+        secondaryMinChroma:
+            controller.useKeyColors ? tones.secondaryMinChroma : 0,
+        tertiaryChroma: controller.useKeyColors ? tones.tertiaryChroma : 0,
+        tertiaryMinChroma:
+            controller.useKeyColors ? tones.tertiaryMinChroma : 0,
+        tertiaryHueRotation:
+            controller.useKeyColors ? tones.tertiaryHueRotation : 0,
+        // TODO(rydmike): Add custom error seed color support.
+        neutralChroma: controller.useKeyColors ? tones.neutralChroma : 0,
+        neutralVariantChroma:
+            controller.useKeyColors ? tones.neutralVariantChroma : 0,
+        paletteType: FlexPaletteType.extended,
+      );
+
+      // Assign the tonals for the schemes to the int lists.
+      primaryTonals = palettes.primary.asList;
+      secondaryTonals = palettes.secondary.asList;
+      tertiaryTonals = palettes.tertiary.asList;
+      errorTonals = palettes.error.asList;
+      neutralTonals = palettes.neutral.asList;
+      neutralVariantTonals = palettes.neutralVariant.asList;
+    }
+
     // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
     // For some reason tone hover feature started causing issues in WEB release
     // mode builds, but only in WEB release mode on both SKIA and HTML. No idea
@@ -83,25 +138,21 @@ class ShowTonalPalette extends StatelessWidget {
     // ------- Commented hover setters below ------
     return Column(
       children: <Widget>[
-        ListTileReveal(
-          contentPadding: const EdgeInsetsDirectional.only(end: 12),
-          title: const Text('Palettes and tones'),
-          subtitle: const Text(
-            'Extended tone usage from TonalPalettes are coming '
-            'later to Flutter ColorScheme fromSeed. They are not supported '
-            'in Flutter 3.10 or earlier. FCS use them already now in the '
-            'new seed strategies CandyPop and Chroma. If you make custom '
-            'FlexTones seed strategies with the API, you can also use the new '
-            'extended tones. This toggle only changes the palette '
-            'visuals below to show the extended tones. It has no impact '
-            'on theme or the tones used by the selected seed strategy.\n',
+        const ListTileReveal(
+          contentPadding: EdgeInsetsDirectional.only(end: 12),
+          title: Text('Palettes and tones'),
+          subtitle: Text(
+            'Tonal palettes and their tones are presented below in this '
+            'order:\n'
+            'Primary, Secondary, Tertiary, Error, Neutral and Neutral '
+            'variant',
           ),
-          trailing: SelectPaletteType(controller: controller),
+          // trailing: SelectPaletteType(controller: controller),
         ),
         TonalPaletteColors(
           name: 'Primary',
-          tonalPalette: palettes.primary.asList,
-          paletteType: paletteType,
+          tonalPalette: primaryTonals,
+          paletteType: FlexPaletteType.extended,
           // selectedColor: controller.useKeyColors &&
           //         controller.hoverTonalPalette == TonalPalettes.primary
           //     ? controller.hoverColor
@@ -109,8 +160,7 @@ class ShowTonalPalette extends StatelessWidget {
         ),
         TonalPaletteColors(
           name: 'Secondary',
-          tonalPalette: palettes.secondary.asList,
-          paletteType: paletteType,
+          tonalPalette: secondaryTonals,
           // selectedColor: controller.useKeyColors &&
           //         controller.hoverTonalPalette == TonalPalettes.secondary
           //     ? controller.hoverColor
@@ -118,8 +168,7 @@ class ShowTonalPalette extends StatelessWidget {
         ),
         TonalPaletteColors(
           name: 'Tertiary',
-          paletteType: paletteType,
-          tonalPalette: palettes.tertiary.asList,
+          tonalPalette: tertiaryTonals,
           // selectedColor: controller.useKeyColors &&
           //         controller.hoverTonalPalette == TonalPalettes.tertiary
           //     ? controller.hoverColor
@@ -127,8 +176,7 @@ class ShowTonalPalette extends StatelessWidget {
         ),
         TonalPaletteColors(
           name: 'Error',
-          tonalPalette: palettes.error.asList,
-          paletteType: paletteType,
+          tonalPalette: errorTonals,
           // selectedColor: controller.useKeyColors &&
           //         controller.hoverTonalPalette == TonalPalettes.error
           //     ? controller.hoverColor
@@ -136,8 +184,7 @@ class ShowTonalPalette extends StatelessWidget {
         ),
         TonalPaletteColors(
           name: 'Neutral',
-          tonalPalette: palettes.neutral.asList,
-          paletteType: paletteType,
+          tonalPalette: neutralTonals,
           // selectedColor: controller.useKeyColors &&
           //         controller.hoverTonalPalette == TonalPalettes.neutral
           //     ? controller.hoverColor
@@ -145,8 +192,7 @@ class ShowTonalPalette extends StatelessWidget {
         ),
         TonalPaletteColors(
           name: 'Neutral variant',
-          tonalPalette: palettes.neutralVariant.asList,
-          paletteType: paletteType,
+          tonalPalette: neutralVariantTonals,
           // selectedColor: controller.useKeyColors &&
           //       controller.hoverTonalPalette == TonalPalettes.neutralVariant
           //     ? controller.hoverColor

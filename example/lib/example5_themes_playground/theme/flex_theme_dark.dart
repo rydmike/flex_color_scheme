@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/flex_tones_enum.dart';
 import '../../shared/model/visual_density_enum.dart';
 import 'code_theme.dart';
 import 'topic_theme.dart';
@@ -428,11 +427,19 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
       keepTertiaryContainer: controller.keepDarkTertiaryContainer,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
-    tones: FlexTonesEnum.values[controller.usedFlexToneSetup]
-        .tones(Brightness.dark)
-        .onMainsUseBW(controller.onMainsUseBWDark)
-        .onSurfacesUseBW(controller.onSurfacesUseBWDark)
-        .surfacesUseBW(controller.surfacesUseBWDark),
+    tones:
+        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+            ? null
+            : FlexSchemeVariant.values[controller.usedFlexToneSetup]
+                .tones(Brightness.dark)
+                .onMainsUseBW(controller.onMainsUseBWDark)
+                .onSurfacesUseBW(controller.onSurfacesUseBWDark)
+                .surfacesUseBW(controller.surfacesUseBWDark),
+    // Use MCU variant based scheme instead
+    variant:
+        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+            ? FlexSchemeVariant.values[controller.usedFlexToneSetup]
+            : null,
     // Use custom surface tint color.
     surfaceTint: controller.surfaceTintDark,
     //

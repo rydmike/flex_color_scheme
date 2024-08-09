@@ -15,7 +15,7 @@ class TonalPaletteColors extends StatelessWidget {
     required this.tonalPalette,
     this.selectedColor,
     this.height = 28,
-    this.paletteType = FlexPaletteType.common,
+    this.paletteType = FlexPaletteType.extended,
   });
 
   /// Name of tonal palette.
