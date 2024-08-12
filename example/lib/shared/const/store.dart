@@ -1798,6 +1798,17 @@ class Store {
   static const Color defaultTertiaryContainerLight =
       AppColor.customTertiaryContainerLight;
 
+  // Key used to read and save the errorLight color value.
+  static const String keyErrorLight = 'errorLight';
+  // Default value for the errorLight color, also to reset settings.
+  static const Color defaultErrorLight = FlexColor.material3LightError;
+
+  // Key used to read and save the errorContainerLight color value.
+  static const String keyErrorContainerLight = 'errorContainerLight';
+  // Default value for the errorLight color, also to reset settings.
+  static const Color defaultErrorContainerLight =
+      FlexColor.material3LightErrorContainer;
+
   // Key used to read and save the primaryDark color value.
   static const String keyPrimaryDark = 'primaryDark';
   // Default value for the primaryDark color, also to reset settings.
@@ -1830,4 +1841,15 @@ class Store {
   // Default value for the tertiaryDark color, also to reset settings.
   static const Color defaultTertiaryContainerDark =
       AppColor.customTertiaryContainerDark;
+
+  // Key used to read and save the errorDark color value.
+  static const String keyErrorDark = 'errorDark';
+  // Default value for the errorDark color, also to reset settings.
+  static const Color defaultErrorDark = FlexColor.material3DarkError;
+
+  // Key used to read and save the errorContainerDark color value.
+  static const String keyErrorContainerDark = 'errorContainerDark';
+  // Default value for the errorDark color, also to reset settings.
+  static const Color defaultErrorContainerDark =
+      FlexColor.material3DarkErrorContainer;
 }

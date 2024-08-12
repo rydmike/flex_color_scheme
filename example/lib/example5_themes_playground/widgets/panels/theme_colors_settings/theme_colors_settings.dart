@@ -58,7 +58,8 @@ class ThemeColorsSettings extends StatelessWidget {
               'using seeded ColorSchemes. Seed generated ColorSchemes always '
               'use M3 error colors. Newer built-in schemes also use the M3 '
               'error colors by default, this setting has no impact on '
-              'them.\n'),
+              'them. For the custom scheme, to use a custom error color, turn '
+              'OFF use Material 3 error colors.\n'),
           value: controller.useM3ErrorColors &&
               controller.useFlexColorScheme &&
               !controller.useKeyColors,

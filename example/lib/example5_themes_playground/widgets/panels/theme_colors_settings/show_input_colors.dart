@@ -57,6 +57,8 @@ class ShowInputColors extends StatelessWidget {
     final Color secondaryContainer = colorScheme.secondaryContainer;
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
+    final Color error = colorScheme.error;
+    final Color errorContainer = colorScheme.errorContainer;
 
     // Get controller input colors, if we are using the the to dark
     final FlexSchemeColor inputColor = isLight || controller.useToDarkMethod
@@ -449,7 +451,7 @@ class ShowInputColors extends StatelessWidget {
               ),
             ),
           ),
-          // Error color
+          // New Error color
           RepaintBoundary(
             key: const ValueKey<String>('input_error'),
             child: SizedBox(
@@ -457,25 +459,47 @@ class ShowInputColors extends StatelessWidget {
               height: boxHeight,
               child: Card(
                 margin: EdgeInsets.zero,
-                elevation: 0,
+                elevation: isCustomTheme ? 2 : 0,
                 clipBehavior: Clip.antiAlias,
                 child: Material(
-                  color: colorScheme.error,
-                  child: ColorNameValue(
-                    key: ValueKey<String>('ipc error ${colorScheme.error}'),
-                    color: colorScheme.error,
-                    textColor: colorScheme.onError,
-                    label: 'error',
-                    showInputColor: showInputColor,
-                    inputColor: inputErrorColor,
-                    inputTextColor: inputOnErrorColor,
-                    showMaterialName: true,
+                  color: error,
+                  child: ColorPickerInkWellDialog(
+                    color: error,
+                    onChanged: (Color color) {
+                      if (isLight) {
+                        controller.setErrorLight(color);
+                      } else {
+                        controller.setErrorDark(color);
+                      }
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          controller.setErrorLight(error);
+                        } else {
+                          controller.setErrorDark(error);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>('ipc error $error'),
+                      color: error,
+                      textColor: colorScheme.onError,
+                      label: 'error',
+                      showInputColor: showInputColor,
+                      inputColor: inputErrorColor,
+                      inputTextColor: inputOnErrorColor,
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-          // ErrorContainer color
+          // New ErrorContainer color
           RepaintBoundary(
             key: const ValueKey<String>('input_errorContainer'),
             child: SizedBox(
@@ -483,20 +507,42 @@ class ShowInputColors extends StatelessWidget {
               height: boxHeight,
               child: Card(
                 margin: EdgeInsets.zero,
-                elevation: 0,
+                elevation: isCustomTheme ? 2 : 0,
                 clipBehavior: Clip.antiAlias,
                 child: Material(
-                  color: colorScheme.errorContainer,
-                  child: ColorNameValue(
-                    key: ValueKey<String>('ipc errorContainer '
-                        '${colorScheme.errorContainer}'),
-                    color: colorScheme.errorContainer,
-                    textColor: colorScheme.onErrorContainer,
-                    label: 'errorContainer',
-                    showInputColor: showInputColor,
-                    inputColor: inputErrorContainerColor,
-                    inputTextColor: inputOnErrorContainerColor,
-                    showMaterialName: true,
+                  color: errorContainer,
+                  child: ColorPickerInkWellDialog(
+                    color: errorContainer,
+                    onChanged: (Color color) {
+                      if (isLight) {
+                        controller.setErrorContainerLight(color);
+                      } else {
+                        controller.setErrorContainerDark(color);
+                      }
+                    },
+                    recentColors: controller.recentColors,
+                    onRecentColorsChanged: controller.setRecentColors,
+                    wasCancelled: (bool cancelled) {
+                      if (cancelled) {
+                        if (isLight) {
+                          controller.setErrorContainerLight(errorContainer);
+                        } else {
+                          controller.setErrorContainerDark(errorContainer);
+                        }
+                      }
+                    },
+                    enabled: isCustomTheme,
+                    child: ColorNameValue(
+                      key: ValueKey<String>(
+                          'ipc errorContainer $errorContainer'),
+                      color: errorContainer,
+                      textColor: colorScheme.onErrorContainer,
+                      label: 'errorContainer',
+                      showInputColor: showInputColor,
+                      inputColor: inputErrorContainerColor,
+                      inputTextColor: inputOnErrorContainerColor,
+                      showMaterialName: true,
+                    ),
                   ),
                 ),
               ),
