@@ -380,6 +380,142 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
+          // primaryFixed colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('primaryFixed'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.primaryFixed);
+                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.primaryFixed,
+                          child: ColorNameValue(
+                            key: ValueKey<String>(
+                                'cnv primaryFixed ${colorScheme.primaryFixed}'),
+                            color: colorScheme.primaryFixed,
+                            textColor: colorScheme.onPrimaryFixed,
+                            label: 'primaryFixed',
+                            tone: tones.primaryFixedTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.primaryFixed);
+                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.onPrimaryFixed,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv onPrimaryFixed '
+                                '${colorScheme.onPrimaryFixed}'),
+                            color: colorScheme.onPrimaryFixed,
+                            textColor: colorScheme.primaryFixed,
+                            label: 'onPrimaryFixed',
+                            tone: tones.onPrimaryFixedTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // primaryFixedDim colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('primaryFixedDim'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.primaryFixedDim);
+                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.primaryFixedDim,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv primaryFixed '
+                                '${colorScheme.primaryFixedDim}'),
+                            color: colorScheme.primaryFixedDim,
+                            textColor: colorScheme.onPrimaryFixedVariant,
+                            label: 'primaryFixedDim',
+                            tone: tones.primaryFixedDimTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //  tc.setHoverColor(colorScheme.onPrimaryFixedVariant);
+                        //  tc.setHoverTonalPalette(TonalPalettes.primary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.onPrimaryFixedVariant,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv onPrimaryFixedVariant '
+                                '${colorScheme.onPrimaryFixedVariant}'),
+                            color: colorScheme.onPrimaryFixedVariant,
+                            textColor: colorScheme.primaryFixedDim,
+                            label: 'onPrimaryFixed\nVariant',
+                            tone: tones.onPrimaryFixedVariantTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
           // Secondary colors presentation
           RepaintBoundary(
             key: const ValueKey<String>('secondary'),
@@ -614,6 +750,142 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
+          // secondaryFixed colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('secondaryFixed'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.secondaryFixed);
+                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.secondaryFixed,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv secondaryFixed '
+                                '${colorScheme.secondaryFixed}'),
+                            color: colorScheme.secondaryFixed,
+                            textColor: colorScheme.onSecondaryFixed,
+                            label: 'secondaryFixed',
+                            tone: tones.secondaryFixedTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.secondaryFixed);
+                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.onSecondaryFixed,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv onSecondaryFixed '
+                                '${colorScheme.onSecondaryFixed}'),
+                            color: colorScheme.onSecondaryFixed,
+                            textColor: colorScheme.secondaryFixed,
+                            label: 'onSecondaryFixed',
+                            tone: tones.onSecondaryFixedTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // secondaryFixedDim colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('secondaryFixedDim'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.secondaryFixedDim);
+                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.secondaryFixedDim,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv secondaryFixed '
+                                '${colorScheme.secondaryFixedDim}'),
+                            color: colorScheme.secondaryFixedDim,
+                            textColor: colorScheme.onSecondaryFixedVariant,
+                            label: 'secondaryFixedDim',
+                            tone: tones.secondaryFixedDimTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //tc.setHoverColor(colorScheme.onSecondaryFixedVariant);
+                        //  tc.setHoverTonalPalette(TonalPalettes.secondary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.onSecondaryFixedVariant,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv onSecondaryFixedVariant '
+                                '${colorScheme.onSecondaryFixedVariant}'),
+                            color: colorScheme.onSecondaryFixedVariant,
+                            textColor: colorScheme.secondaryFixedDim,
+                            label: 'onSecondaryFixed\nVariant',
+                            tone: tones.onSecondaryFixedVariantTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
           // Tertiary colors presentation
           RepaintBoundary(
             key: const ValueKey<String>('tertiary'),
@@ -829,6 +1101,142 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
+          // tertiaryFixed colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('tertiaryFixed'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.tertiaryFixed);
+                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.tertiaryFixed,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv tertiaryFixed '
+                                '${colorScheme.tertiaryFixed}'),
+                            color: colorScheme.tertiaryFixed,
+                            textColor: colorScheme.onTertiaryFixed,
+                            label: 'tertiaryFixed',
+                            tone: tones.tertiaryFixedTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.tertiaryFixed);
+                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.onTertiaryFixed,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv onTertiaryFixed '
+                                '${colorScheme.onTertiaryFixed}'),
+                            color: colorScheme.onTertiaryFixed,
+                            textColor: colorScheme.tertiaryFixed,
+                            label: 'onTertiaryFixed',
+                            tone: tones.onTertiaryFixedTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // tertiaryFixedDim colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('tertiaryFixedDim'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.tertiaryFixedDim);
+                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.tertiaryFixedDim,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv tertiaryFixed '
+                                '${colorScheme.tertiaryFixedDim}'),
+                            color: colorScheme.tertiaryFixedDim,
+                            textColor: colorScheme.onTertiaryFixedVariant,
+                            label: 'tertiaryFixedDim',
+                            tone: tones.tertiaryFixedDimTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        // tc.setHoverColor(colorScheme.onTertiaryFixedVariant);
+                        //  tc.setHoverTonalPalette(TonalPalettes.tertiary);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.onTertiaryFixedVariant,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv onTertiaryFixedVariant '
+                                '${colorScheme.onTertiaryFixedVariant}'),
+                            color: colorScheme.onTertiaryFixedVariant,
+                            textColor: colorScheme.tertiaryFixedDim,
+                            label: 'onTertiaryFixed\nVariant',
+                            tone: tones.onTertiaryFixedVariantTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
           // Error colors presentation
           RepaintBoundary(
             key: const ValueKey<String>('error'),
@@ -971,75 +1379,6 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // Background colors presentation
-          RepaintBoundary(
-            key: const ValueKey<String>('background'),
-            child: SizedBox(
-              width: boxWidth,
-              height: boxHeight,
-              child: Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 3,
-                      child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.background);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
-                        child: Material(
-                          color: colorScheme.surface,
-                          child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv background ${colorScheme.surface}'),
-                            color: colorScheme.surface,
-                            textColor: colorScheme.onSurface,
-                            label: 'background',
-                            tone: tones.surfaceTone,
-                            showTone: showTones,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onBackground);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
-                        child: Material(
-                          color: colorScheme.surface,
-                          child: ColorNameValue(
-                            key: ValueKey<String>('cnv onBackground '
-                                '${colorScheme.onSurface}'),
-                            color: colorScheme.onSurface,
-                            textColor: colorScheme.surface,
-                            label: 'onBackground',
-                            tone: tones.onSurfaceTone,
-                            showTone: showTones,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          //
           // Surface colors presentation
           RepaintBoundary(
             key: const ValueKey<String>('surface'),
@@ -1053,7 +1392,7 @@ class SchemeColors extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      flex: 3,
+                      // flex: 3,
                       child: MouseRegion(
                         // onEnter: (PointerEvent details) {
                         //   tc.setHoverColor(colorScheme.surface);
@@ -1078,7 +1417,7 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 2,
+                      // flex: 2,
                       child: MouseRegion(
                         // onEnter: (PointerEvent details) {
                         //   tc.setHoverColor(colorScheme.onSurface);
@@ -1108,9 +1447,9 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
-          // SurfaceVariant colors presentation
+          // surfaceDim and Bright colors presentation
           RepaintBoundary(
-            key: const ValueKey<String>('surfaceVariant'),
+            key: const ValueKey<String>('surfaceDim'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -1121,10 +1460,146 @@ class SchemeColors extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      flex: 3,
+                      // flex: 3,
                       child: MouseRegion(
                         // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.surfaceVariant);
+                        //   tc.setHoverColor(colorScheme.surfaceDim);
+                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.surfaceDim,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceDim '
+                                '${colorScheme.surfaceDim}'),
+                            color: colorScheme.surfaceDim,
+                            textColor: colorScheme.onSurface,
+                            label: 'surface\u200BDim',
+                            tone: tones.surfaceDimTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      // flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.surfaceBright);
+                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.surfaceBright,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceBright '
+                                '${colorScheme.surfaceBright}'),
+                            color: colorScheme.surfaceBright,
+                            textColor: colorScheme.onSurface,
+                            label: 'surface\u200BBright',
+                            tone: tones.surfaceBrightTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // surfaceContainerLowest and Low colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('surfaceContainerLowest'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      // flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        // tc.setHoverColor(colorScheme.surfaceContainerLowest);
+                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.surfaceContainerLowest,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceContainerLowest '
+                                '${colorScheme.surfaceContainerLowest}'),
+                            color: colorScheme.surfaceContainerLowest,
+                            textColor: colorScheme.onSurface,
+                            label: 'surface\u200BContainer\u200BLowest',
+                            tone: tones.surfaceContainerLowestTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      // flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.surfaceContainerLow);
+                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.surfaceContainerLow,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceContainerLow '
+                                '${colorScheme.surfaceContainerLow}'),
+                            color: colorScheme.surfaceContainerLow,
+                            textColor: colorScheme.onSurface,
+                            label: 'surface\u200BContainer\u200BLow',
+                            tone: tones.surfaceContainerLowTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // SurfaceContainer colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('surfaceContainer'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      // flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //   tc.setHoverColor(colorScheme.surfaceContainer);
                         //tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
                         // },
                         // onExit: (PointerEvent details) {
@@ -1132,21 +1607,21 @@ class SchemeColors extends StatelessWidget {
                         //   tc.setHoverTonalPalette(null);
                         // },
                         child: Material(
-                          color: colorScheme.surfaceContainerHighest,
+                          color: colorScheme.surfaceContainer,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceVariant '
-                                '${colorScheme.surfaceContainerHighest}'),
-                            color: colorScheme.surfaceContainerHighest,
-                            textColor: colorScheme.onSurfaceVariant,
-                            label: 'surface\u200BVariant',
-                            tone: tones.surfaceContainerHighestTone,
+                            key: ValueKey<String>('cnv surfaceContainer '
+                                '${colorScheme.surfaceContainer}'),
+                            color: colorScheme.surfaceContainer,
+                            textColor: colorScheme.onSurface,
+                            label: 'surface\u200BContainer',
+                            tone: tones.surfaceContainerTone,
                             showTone: showTones,
                           ),
                         ),
                       ),
                     ),
                     Expanded(
-                      flex: 2,
+                      // flex: 2,
                       child: MouseRegion(
                         // onEnter: (PointerEvent details) {
                         //   tc.setHoverColor(colorScheme.onSurfaceVariant);
@@ -1176,6 +1651,74 @@ class SchemeColors extends StatelessWidget {
             ),
           ),
           //
+          // surfaceContainerHigh and Highest colors presentation
+          RepaintBoundary(
+            key: const ValueKey<String>('surfaceContainerHigh'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      // flex: 3,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        // tc.setHoverColor(colorScheme.surfaceContainerHigh);
+                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.surfaceContainerHigh,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceContainerLowest '
+                                '${colorScheme.surfaceContainerHigh}'),
+                            color: colorScheme.surfaceContainerHigh,
+                            textColor: colorScheme.onSurface,
+                            label: 'surface\u200BContainer\u200BHigh',
+                            tone: tones.surfaceContainerHighTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      // flex: 2,
+                      child: MouseRegion(
+                        // onEnter: (PointerEvent details) {
+                        //tc.setHoverColor(colorScheme.surfaceContainerHighest);
+                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
+                        // },
+                        // onExit: (PointerEvent details) {
+                        //   tc.setHoverColor(null);
+                        //   tc.setHoverTonalPalette(null);
+                        // },
+                        child: Material(
+                          color: colorScheme.surfaceContainerHighest,
+                          child: ColorNameValue(
+                            key: ValueKey<String>('cnv surfaceContainerHighest '
+                                '${colorScheme.surfaceContainerHighest}'),
+                            color: colorScheme.surfaceContainerHighest,
+                            textColor: colorScheme.onSurface,
+                            label: 'surface\u200BContainer\u200BHighest',
+                            tone: tones.surfaceContainerHighestTone,
+                            showTone: showTones,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
           // InverseSurface colors presentation
           RepaintBoundary(
             key: const ValueKey<String>('inverseSurface'),
@@ -1189,7 +1732,7 @@ class SchemeColors extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      flex: 3,
+                      // flex: 3,
                       child: MouseRegion(
                         // onEnter: (PointerEvent details) {
                         //   tc.setHoverColor(colorScheme.inverseSurface);
@@ -1214,7 +1757,7 @@ class SchemeColors extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 2,
+                      // flex: 2,
                       child: MouseRegion(
                         // onEnter: (PointerEvent details) {
                         //   tc.setHoverColor(colorScheme.onInverseSurface);
