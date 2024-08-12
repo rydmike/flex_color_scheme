@@ -15,8 +15,8 @@ import 'surface_colors.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
-class SurfaceBlendSettings extends StatelessWidget {
-  const SurfaceBlendSettings(
+class SurfaceColorsSettings extends StatelessWidget {
+  const SurfaceColorsSettings(
     this.controller, {
     super.key,
     // required this.allBlends,
