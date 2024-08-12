@@ -8,23 +8,65 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **PACKAGE**
 
-- Version 8.0.0 makes **FlexColorScheme** fully aligned and compatible with Flutter's Material-3 theming changes introduced in Flutter 3.22. This version of Flutter introduced a lot of breaking changes to the `ColorScheme` and default color mappings Material components use.
+- Version 8.0.0 makes **FlexColorScheme** fully aligned and compatible with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. It introduced many breaking changes to the `ColorScheme` and default color mappings that Material components use.
 
 **CRITICAL TODOS**
 
 * Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color. 
-  * Solution for this done
+  * A solution for this is still WIP.
 - Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
   * Test this!
-- Generate full ColorScheme in Themes Playground.
+- Generate full ColorScheme in Themes Playground, also when not seeding. Need all FIXED colors. How?
 - Flutter 3.22 broke +100 tests in FCS, review and fix them.
 - Get tests back to 100% coverage.
 - Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 492 of them remaining. 
  * Done
 
-**BREAKING**
+**TODO PACKAGE**
 
-This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS becomes more aligned with Flutter's Material-3 theming defaults, by using them as starting points too.
+- Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
+- Add 
+- Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
+- Add TabBar theme property `tabAlignment`.
+- Add TextStyles for `FlexSubThemesData` so that:
+  - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle`
+  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogTitleTextStyle`
+  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogContentTextStyle`
+  - `FlexSubThemes.floatingActionButtonTheme` **uses** `FlexSubThemesData.fabExtendedTextStyle`
+  - `FlexSubThemes.menuButtonTheme` **uses** `FlexSubThemesData.menuButtonTextStyle`
+  - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle`
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDayPeriodTextStyle`
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDialTextStyle`,
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHelpTextStyle`,
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHourMinuteTextStyle`,
+  - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle`
+- Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData`.
+  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
+- Updates and features for `Chip` theming.
+- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
+- AppBar: Option to decouple foreground/background colors. (Maybe push to 8.1.0)
+- FAB: Option to decoupled foreground/background color. (Maybe push to 8.1.0)
+- Switch: Optional iOS-like style. (Maybe push to 8.1.0)
+- Switch: Platform adaptive iOS-like style. (Maybe push to 8.1.0)
+- Checkbox: Shape and border. (Maybe push to 8.1.0)
+- DatePicker: Option to style and remove divider. (Maybe push to 8.1.0)
+- InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState. (Maybe push to 8.2.0)
+- InputDecorator: Platform adaptive radius. (Maybe push to 8.1.0)
+
+**POTENTIAL TODOS or maybe in Version 8.1.0 or later**
+- Schemes: Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
+- Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 or wait for Flutter support in SDK).
+- Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
+- Some `ListTile` theming properties, which ones?
+- Some `SearchBar` theming features.
+- Add fidelity for iOS adaptive AppBar (maybe).
+- Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color.
+- Investigate:
+  - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
+
+**BREAKING CHANGES**
+
+This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme ib Flutter 3.22. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS is no more aligned with Flutter's Material-3 theming defaults, by typically using them as starting points in the default Material-3 mode. Material-2 mode is still supported, it has its own opinionated defaults as before.
 
 - Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` had far-reaching implications on styles created by FCS and there are many breaking style changes in this release due to this. Some might even be forgotten in the change-log.
 - Deprecated `background` and `onBackground` colors in `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories. They are not used anymore. User `surface` and `onSurface` colors instead.
@@ -44,11 +86,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
 
+- Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories.
 - Added the new surface colors to `FlexSchemeSurfaceColors`.
 - Added new on colors to `FlexSchemeOnColors`.
 - Added new surface colors to FlexColorScheme light and dark factories. 
 - Added color constants for new Material-3 surface colors based on the monochrome seeded scheme, and its standard tones. These are used as baseline for different surface shades in FCS when seed generated colors are not being used.
-- Added `variant` a `FlexSchemeVariant` to FlexColorsScheme/FlexThemeData light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK had planned to include in version 3.22.0, but that did not land until Flutter version 3.22.2. 
+- Added `variant` a `FlexSchemeVariant` to FlexColorsScheme/FlexThemeData light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK added in version 3.22.2. 
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme()`.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme()`.
@@ -63,52 +106,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
    
 
-**TODO PACKAGE**
-
-- Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
-
-- Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
-- Add TabBar theme property `tabAlignment`.
-- Add TextStyles for `FlexSubThemesData` so that:
-  - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle`
-  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogTitleTextStyle` 
-  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogContentTextStyle`
-  - `FlexSubThemes.floatingActionButtonTheme` **uses** `FlexSubThemesData.fabExtendedTextStyle`
-  - `FlexSubThemes.menuButtonTheme` **uses** `FlexSubThemesData.menuButtonTextStyle`
-  - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle`
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDayPeriodTextStyle`
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDialTextStyle`, 
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHelpTextStyle`,
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHourMinuteTextStyle`,
-  - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle`
-- Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData`.
-  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
-- Updates and features for `Chip` theming.
-- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
-- AppBar: Option to decouple foreground/background colors. (Maybe push to 8.1.0)
-- FAB: Option to decoupled foreground/background color. (Maybe push to 8.1.0)
-- Switch: Optional iOS-like style. (Maybe push to 8.1.0)
-- Switch: Platform adaptive iOS-like style. (Maybe push to 8.1.0)
-- Checkbox: Shape and border. (Maybe push to 8.1.0)
-- DatePicker: Option to style and remove divider. (Maybe push to 8.1.0)
-- InputDecorator: Internal, change InputDecorator theme to use only `border` and its MaterialState. (Maybe push to 8.2.0)
-- InputDecorator: Platform adaptive radius. (Maybe push to 8.1.0)
-
-
 **TESTING**
   - Add full coverage tests for all new package features!
-
-
-**Maybe in Version 8.1.0 or later**
-  - Schemes: Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
-  - Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 or wait for Flutter support in SDK).
-  - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
-  - Some `ListTile` theming properties, which ones?
-  - Some `SearchBar` theming features.
-  - Add fidelity for iOS adaptive AppBar (maybe).
-  - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color.
-- Investigate:
-  - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
 
 **THEMES PLAYGROUND**
 
@@ -119,19 +118,20 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
 - Chore: Update issue resolution status texts for Dialogs.
 
-**Feature**
+**NEW**
 - Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) add `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.  
 - Split FAB and Chip to separate panels.
 - Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
 - Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF. 
 - Add code gen for the new ColorScheme colors introduced in Flutter 3.22.
-- Add showing new Flutter 3.22 ColorScheme colors in the Playground to the Effective Colors panel.
-- Add showing new Flutter 3.22 ColorScheme colors in the Playground to the ColorScheme panel.
+- Add showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
+- Add showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
 
-**TODO THEMES PLAYGROUND AND EXAMPLES**
+**TODO PLAYGROUND AND EXAMPLES**
 
-- Add new ColorScheme colors to ColorScheme presentation.
-- Add new ColorScheme colors to ColorScheme code generation.
+- Add to set `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),`
+- Add an option to select used MaterialTapTargetSize in the Playground.
+  - Maybe also add it to icon theme only? Other places? Switches?
 - Add info about Card theming issue to the Card settings screen. After filing the Flutter issue. 
 - Add UI and code gen for dense input decorator.
 - Add UI for content padding on input decorator.

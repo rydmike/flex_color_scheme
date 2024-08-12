@@ -1,4 +1,5 @@
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_color_scheme.dart';
@@ -1149,6 +1150,19 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
+    /// Components of the [CupertinoThemeData] to override from the Material
+    /// [ThemeData] adaptation.
+    ///
+    /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
+    /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
+    /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
+    /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
+    ///
+    /// This cascading effect for individual attributes of the
+    /// [CupertinoThemeData]
+    /// can be overridden using attributes of this [cupertinoOverrideTheme].
+    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
     /// Flutter SDK [useMaterial3] documentation:
@@ -1396,6 +1410,7 @@ extension FlexThemeData on ThemeData {
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
+        cupertinoOverrideTheme: cupertinoOverrideTheme,
         useMaterial3: useMaterial3,
         swapLegacyOnMaterial3: swapLegacyOnMaterial3,
         extensions: extensions,
@@ -2502,6 +2517,19 @@ extension FlexThemeData on ThemeData {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
+    /// Components of the [CupertinoThemeData] to override from the Material
+    /// [ThemeData] adaptation.
+    ///
+    /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
+    /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
+    /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
+    /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
+    ///
+    /// This cascading effect for individual attributes of the
+    /// [CupertinoThemeData]
+    /// can be overridden using attributes of this [cupertinoOverrideTheme].
+    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
     /// Flutter SDK [useMaterial3] documentation:
@@ -2750,6 +2778,7 @@ extension FlexThemeData on ThemeData {
         platform: platform,
         typography: typography,
         applyElevationOverlayColor: applyElevationOverlayColor,
+        cupertinoOverrideTheme: cupertinoOverrideTheme,
         useMaterial3: useMaterial3,
         swapLegacyOnMaterial3: swapLegacyOnMaterial3,
         extensions: extensions,
