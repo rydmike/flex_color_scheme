@@ -31,7 +31,7 @@ import '../panels/segmented_buttons_settings/segmented_buttons_settings.dart';
 import '../panels/shape_radius_settings/shape_radius_settings.dart';
 import '../panels/slider_settings/slider_settings.dart';
 import '../panels/snack_bar_material_banner_settings/snack_bar_material_banner_settings.dart';
-import '../panels/surface_blend_settings/surface_blend_settings.dart';
+import '../panels/surface_colors_settings/surface_colors_settings.dart';
 import '../panels/switch_settings/switch_settings.dart';
 import '../panels/tab_bar_settings/tab_bar_settings.dart';
 import '../panels/text_field_settings/text_field_settings.dart';
@@ -65,7 +65,7 @@ class ThemePanel extends StatelessWidget {
       ThemeCode(controller),
       InputColorsSettings(controller),
       ColorSchemeSettings(controller),
-      SurfaceBlendSettings(controller),
+      SurfaceColorsSettings(controller),
       EffectiveColors(controller),
       ComponentSettings(controller),
       AdaptiveThemeSettings(controller),
