@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 8, 2024**
+**Aug 12, 2024**
 
 **PACKAGE**
 
@@ -103,7 +103,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - Schemes: Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 or wait for Flutter support in SDK).
   - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
-  - Customizable `errorColor` in Playground.
   - Some `ListTile` theming properties, which ones?
   - Some `SearchBar` theming features.
   - Add fidelity for iOS adaptive AppBar (maybe).
@@ -124,6 +123,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) add `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.  
 - Split FAB and Chip to separate panels.
 - Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
+- Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF. 
 
 **TODO THEMES PLAYGROUND AND EXAMPLES**
 

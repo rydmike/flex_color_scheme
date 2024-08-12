@@ -794,6 +794,10 @@ class ThemeController with ChangeNotifier {
         Store.keyTertiaryLight, Store.defaultTertiaryLight);
     _tertiaryContainerLight = await _themeService.load(
         Store.keyTertiaryContainerLight, Store.defaultTertiaryContainerLight);
+    _errorLight =
+        await _themeService.load(Store.keyErrorLight, Store.defaultErrorLight);
+    _errorContainerLight = await _themeService.load(
+        Store.keyErrorContainerLight, Store.defaultErrorContainerLight);
     _primaryDark = await _themeService.load(
         Store.keyPrimaryDark, Store.defaultPrimaryDark);
     _primaryContainerDark = await _themeService.load(
@@ -806,6 +810,10 @@ class ThemeController with ChangeNotifier {
         Store.keyTertiaryDark, Store.defaultTertiaryDark);
     _tertiaryContainerDark = await _themeService.load(
         Store.keyTertiaryContainerDark, Store.defaultTertiaryContainerDark);
+    _errorDark =
+        await _themeService.load(Store.keyErrorDark, Store.defaultErrorDark);
+    _errorContainerDark = await _themeService.load(
+        Store.keyErrorContainerDark, Store.defaultErrorContainerDark);
 
     // Not persisted, locally controlled popup selection for ThemeService,
     // resets to actual used platform when settings are reset or app loaded.
@@ -1236,12 +1244,16 @@ class ThemeController with ChangeNotifier {
     setSecondaryContainerLight(Store.defaultSecondaryContainerLight, false);
     setTertiaryLight(Store.defaultTertiaryLight, false);
     setTertiaryContainerLight(Store.defaultTertiaryContainerLight, false);
+    setErrorLight(Store.defaultErrorLight, false);
+    setErrorContainerLight(Store.defaultErrorContainerLight, false);
     setPrimaryDark(Store.defaultPrimaryDark, false);
     setPrimaryContainerDark(Store.defaultPrimaryContainerDark, false);
     setSecondaryDark(Store.defaultSecondaryDark, false);
     setSecondaryContainerDark(Store.defaultSecondaryContainerDark, false);
     setTertiaryDark(Store.defaultTertiaryDark, false);
     setTertiaryContainerDark(Store.defaultTertiaryContainerDark, false);
+    setErrorDark(Store.defaultErrorDark, false);
+    setErrorContainerDark(Store.defaultErrorContainerDark, false);
     notifyListeners();
   }
 
@@ -4960,6 +4972,26 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyTertiaryContainerLight, value));
   }
 
+  late Color _errorLight;
+  Color get errorLight => _errorLight;
+  void setErrorLight(Color? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _errorLight) return;
+    _errorLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyErrorLight, value));
+  }
+
+  late Color _errorContainerLight;
+  Color get errorContainerLight => _errorContainerLight;
+  void setErrorContainerLight(Color? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _errorContainerLight) return;
+    _errorContainerLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyErrorContainerLight, value));
+  }
+
   late Color _primaryDark;
   Color get primaryDark => _primaryDark;
   void setPrimaryDark(Color? value, [bool notify = true]) {
@@ -5020,6 +5052,26 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyTertiaryContainerDark, value));
   }
 
+  late Color _errorDark;
+  Color get errorDark => _errorDark;
+  void setErrorDark(Color? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _errorDark) return;
+    _errorDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyErrorDark, value));
+  }
+
+  late Color _errorContainerDark;
+  Color get errorContainerDark => _errorContainerDark;
+  void setErrorContainerDark(Color? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _errorContainerDark) return;
+    _errorContainerDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyErrorContainerDark, value));
+  }
+
   // Get custom scheme data based on currently defined scheme colors.
   FlexSchemeData get customScheme => FlexSchemeData(
         name: FlexColor.customName,
@@ -5032,7 +5084,8 @@ class ThemeController with ChangeNotifier {
           tertiary: tertiaryLight,
           tertiaryContainer: tertiaryContainerLight,
           appBarColor: secondaryContainerLight,
-          error: FlexColor.materialLightError,
+          error: errorLight,
+          errorContainer: errorContainerLight,
         ),
         dark: FlexSchemeColor(
           primary: primaryDark,
@@ -5042,7 +5095,8 @@ class ThemeController with ChangeNotifier {
           tertiary: tertiaryDark,
           tertiaryContainer: tertiaryContainerDark,
           appBarColor: secondaryContainerDark,
-          error: FlexColor.materialDarkError,
+          error: errorDark,
+          errorContainer: errorContainerDark,
         ),
       );
 
@@ -5055,6 +5109,8 @@ class ThemeController with ChangeNotifier {
     setSecondaryContainerLight(scheme.light.secondaryContainer, false);
     setTertiaryLight(scheme.light.tertiary, false);
     setTertiaryContainerLight(scheme.light.tertiaryContainer, false);
+    setErrorLight(scheme.light.error, false);
+    setErrorContainerLight(scheme.light.errorContainer, false);
     //
     setPrimaryDark(scheme.dark.primary, false);
     setPrimaryContainerDark(scheme.dark.primaryContainer, false);
@@ -5062,6 +5118,8 @@ class ThemeController with ChangeNotifier {
     setSecondaryContainerDark(scheme.dark.secondaryContainer, false);
     setTertiaryDark(scheme.dark.tertiary, false);
     setTertiaryContainerDark(scheme.dark.tertiaryContainer, false);
+    setErrorDark(scheme.dark.error, false);
+    setErrorContainerDark(scheme.dark.errorContainer, false);
     // Notify listeners, after all individual values have been set.
     notifyListeners();
   }
