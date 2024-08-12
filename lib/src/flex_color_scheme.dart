@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -313,6 +314,7 @@ class FlexColorScheme with Diagnosticable {
     this.platform,
     this.typography,
     this.applyElevationOverlayColor = true,
+    this.cupertinoOverrideTheme,
     this.subThemesData,
     this.useMaterial3 = true,
     this.extensions,
@@ -902,6 +904,18 @@ class FlexColorScheme with Diagnosticable {
   /// For more information about this limitation, see Flutter SDK issue:
   /// https://github.com/flutter/flutter/issues/90353
   final bool applyElevationOverlayColor;
+
+  /// Components of the [CupertinoThemeData] to override from the Material
+  /// [ThemeData] adaptation.
+  ///
+  /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
+  /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
+  /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
+  /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
+  ///
+  /// This cascading effect for individual attributes of the [CupertinoThemeData]
+  /// can be overridden using attributes of this [cupertinoOverrideTheme].
+  final NoDefaultCupertinoThemeData? cupertinoOverrideTheme;
 
   /// Activate using FlexColorScheme opinionated component sub-themes by
   /// passing in a default `FlexSubThemesData()`.
@@ -2381,6 +2395,19 @@ class FlexColorScheme with Diagnosticable {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
+    /// Components of the [CupertinoThemeData] to override from the Material
+    /// [ThemeData] adaptation.
+    ///
+    /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
+    /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
+    /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
+    /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
+    ///
+    /// This cascading effect for individual attributes of the
+    /// [CupertinoThemeData]
+    /// can be overridden using attributes of this [cupertinoOverrideTheme].
+    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
     /// Flutter SDK [useMaterial3] documentation:
@@ -3118,6 +3145,7 @@ class FlexColorScheme with Diagnosticable {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
+      cupertinoOverrideTheme: cupertinoOverrideTheme,
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
       extensions: extensions,
@@ -4366,6 +4394,19 @@ class FlexColorScheme with Diagnosticable {
     /// https://github.com/flutter/flutter/issues/90353
     final bool applyElevationOverlayColor = true,
 
+    /// Components of the [CupertinoThemeData] to override from the Material
+    /// [ThemeData] adaptation.
+    ///
+    /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
+    /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
+    /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
+    /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
+    ///
+    /// This cascading effect for individual attributes of the
+    /// [CupertinoThemeData]
+    /// can be overridden using attributes of this [cupertinoOverrideTheme].
+    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+
     /// A temporary flag used to opt-in to new SDK Material 3 features.
     ///
     /// Flutter SDK [useMaterial3] documentation:
@@ -5132,6 +5173,7 @@ class FlexColorScheme with Diagnosticable {
       platform: platform,
       typography: typography,
       applyElevationOverlayColor: applyElevationOverlayColor,
+      cupertinoOverrideTheme: cupertinoOverrideTheme,
       subThemesData: subThemesData,
       useMaterial3: useMaterial3,
       extensions: extensions,
@@ -6732,6 +6774,7 @@ class FlexColorScheme with Diagnosticable {
       // default, but older ThemeData factories do not use it by default.
       // A correct Material 2 design should use it.
       applyElevationOverlayColor: isDark && applyElevationOverlayColor,
+      cupertinoOverrideTheme: cupertinoOverrideTheme,
       extensions: extensions,
       materialTapTargetSize: materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme,
@@ -7944,7 +7987,6 @@ class FlexColorScheme with Diagnosticable {
     Color? tertiaryContainer,
     Color? error,
     Color? surface,
-    Color? background,
     Color? scaffoldBackground,
     Color? dialogBackground,
     Color? appBarBackground,
@@ -7955,7 +7997,6 @@ class FlexColorScheme with Diagnosticable {
     Color? onTertiary,
     Color? onTertiaryContainer,
     Color? onSurface,
-    Color? onBackground,
     Color? onError,
     Color? surfaceTint,
     FlexTabBarStyle? tabBarStyle,
@@ -7974,9 +8015,18 @@ class FlexColorScheme with Diagnosticable {
     TargetPlatform? platform,
     Typography? typography,
     bool? applyElevationOverlayColor,
+    NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
     FlexSubThemesData? subThemesData,
     bool? useMaterial3,
     Iterable<ThemeExtension<dynamic>>? extensions,
+    @Deprecated('Use FlexColorScheme.surface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    Color? background,
+    @Deprecated('Use FlexColorScheme.onSurface instead. '
+        'This property will be removed in a future release. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color.')
+    Color? onBackground,
   }) {
     return FlexColorScheme(
       colorScheme: colorScheme ?? this.colorScheme,
@@ -8021,6 +8071,8 @@ class FlexColorScheme with Diagnosticable {
       typography: typography ?? this.typography,
       applyElevationOverlayColor:
           applyElevationOverlayColor ?? this.applyElevationOverlayColor,
+      cupertinoOverrideTheme:
+          cupertinoOverrideTheme ?? this.cupertinoOverrideTheme,
       subThemesData: subThemesData ?? this.subThemesData,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       extensions: extensions ?? this.extensions,
@@ -8043,7 +8095,6 @@ class FlexColorScheme with Diagnosticable {
         other.tertiaryContainer == tertiaryContainer &&
         other.error == error &&
         other.surface == surface &&
-        // other.background == background &&
         other.scaffoldBackground == scaffoldBackground &&
         other.dialogBackground == dialogBackground &&
         other.appBarBackground == appBarBackground &&
@@ -8054,7 +8105,6 @@ class FlexColorScheme with Diagnosticable {
         other.onTertiary == onTertiary &&
         other.onTertiaryContainer == onTertiaryContainer &&
         other.onSurface == onSurface &&
-        // other.onBackground == onBackground &&
         other.onError == onError &&
         other.surfaceTint == surfaceTint &&
         other.tabBarStyle == tabBarStyle &&
@@ -8073,6 +8123,7 @@ class FlexColorScheme with Diagnosticable {
         other.platform == platform &&
         other.typography == typography &&
         other.applyElevationOverlayColor == applyElevationOverlayColor &&
+        other.cupertinoOverrideTheme == cupertinoOverrideTheme &&
         other.subThemesData == subThemesData &&
         other.useMaterial3 == useMaterial3 &&
         other.extensions == extensions;
@@ -8091,7 +8142,6 @@ class FlexColorScheme with Diagnosticable {
         tertiaryContainer,
         error,
         surface,
-        // background,
         scaffoldBackground,
         dialogBackground,
         appBarBackground,
@@ -8102,7 +8152,6 @@ class FlexColorScheme with Diagnosticable {
         onTertiary,
         onTertiaryContainer,
         onSurface,
-        // onBackground,
         onError,
         surfaceTint,
         tabBarStyle,
@@ -8121,6 +8170,7 @@ class FlexColorScheme with Diagnosticable {
         platform,
         typography,
         applyElevationOverlayColor,
+        cupertinoOverrideTheme,
         subThemesData,
         useMaterial3,
         extensions,
@@ -8141,7 +8191,6 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('tertiaryContainer', tertiaryContainer));
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('surface', surface));
-    // properties.add(ColorProperty('background', background));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('appBarBackground', appBarBackground));
     properties.add(ColorProperty('dialogBackground', dialogBackground));
@@ -8152,7 +8201,6 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('onTertiary', onTertiary));
     properties.add(ColorProperty('onTertiaryContainer', onTertiaryContainer));
     properties.add(ColorProperty('onSurface', onSurface));
-    // properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
     properties.add(ColorProperty('surfaceTint', surfaceTint));
     properties.add(EnumProperty<FlexTabBarStyle>('tabBarStyle', tabBarStyle));
@@ -8181,6 +8229,8 @@ class FlexColorScheme with Diagnosticable {
     properties.add(DiagnosticsProperty<Typography>('typography', typography));
     properties.add(DiagnosticsProperty<bool>(
         'applyElevationOverlayColor', applyElevationOverlayColor));
+    properties.add(DiagnosticsProperty<NoDefaultCupertinoThemeData>(
+        'cupertinoOverrideTheme', cupertinoOverrideTheme));
     properties.add(
         DiagnosticsProperty<FlexSubThemesData>('subThemesData', subThemesData));
     properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
