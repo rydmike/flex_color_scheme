@@ -85,8 +85,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.general,
-    heading: 'Premade designs',
-    buttonLabel: 'Premade\ndesigns',
+    heading: 'Premade Designs',
+    buttonLabel: 'Premade\nDesigns',
     icon: Icons.design_services_outlined,
     info: 'To quick start your theming try these '
         'premade designs. You can use them as starting points, for '
@@ -104,8 +104,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.general,
-    heading: 'Theme simulator',
-    buttonLabel: 'Theme\nsimulator',
+    heading: 'Theme Simulator',
+    buttonLabel: 'Theme\nSimulator',
     icon: Icons.phone_iphone,
     info: 'Use the theme simulator in a side view '
         'as you change theme setting and see how the changes '
@@ -122,8 +122,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.general,
-    heading: 'Widget showcase',
-    buttonLabel: 'Widget\nshowcase',
+    heading: 'Widget Showcase',
+    buttonLabel: 'Widget\nShowcase',
     icon: Icons.flutter_dash,
     info: 'This is a presentation of Flutter Material UI widgets '
         'in one large panel. It shows they look when the current theme is '
@@ -132,8 +132,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.general,
-    heading: 'Theme code',
-    buttonLabel: 'Theme\ncode',
+    heading: 'Theme Code',
+    buttonLabel: 'Theme\nCode',
     icon: Icons.integration_instructions_outlined,
     info: 'This is the setup code for the light and dark theme '
         'you have configured. It changes as you adjust theme settings in '
@@ -149,17 +149,18 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.colors,
-    heading: 'Colors',
-    buttonLabel: 'Colors',
+    heading: 'Input Colors',
+    buttonLabel: 'Input\nColors',
     icon: Icons.palette_outlined,
-    info: 'Colors show the color values defined as inputs for the selected '
+    info:
+        'Input Colors show the color values defined as inputs for the selected '
         'color scheme. You can also use any predefined scheme as a starting '
         'point for your own custom colors.\n',
   ),
   ThemeTopic(
     group: TopicGroup.colors,
-    heading: 'Seeded ColorScheme',
-    buttonLabel: 'Seeded\nColorScheme',
+    heading: 'ColorScheme',
+    buttonLabel: 'Color\nScheme',
     icon: Icons.colorize_outlined,
     info: 'In Material-3 color system, seed generated light and '
         'dark mode ColorSchemes use the same key colors to generate six '
@@ -175,8 +176,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.colors,
-    heading: 'Surface blends',
-    buttonLabel: 'Surface\nblends',
+    heading: 'Surface Colors',
+    buttonLabel: 'Surface\nColors',
     icon: Icons.invert_colors_outlined,
     info: 'Material-2 design demonstrated using surfaces with primary color '
         'alpha-blends in dark mode. FlexColorScheme surface blends '
@@ -196,8 +197,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.colors,
-    heading: 'Effective colors',
-    buttonLabel: 'Effective\ncolors',
+    heading: 'Effective Colors',
+    buttonLabel: 'Effective\nColors',
     icon: Icons.gradient_outlined,
     info: 'The effective colors show the current effective colors in the '
         "theme's ColorScheme, and also colors still defined directly in "
@@ -208,8 +209,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.components,
-    heading: 'Component themes',
-    buttonLabel: 'Component\nthemes',
+    heading: 'Component Themes',
+    buttonLabel: 'Component\nThemes',
     icon: Icons.widgets_outlined,
     info: 'To use all theming features on FlexColorScheme you must enable '
         'component sub-themes. If you are only here for the color '
@@ -227,8 +228,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.components,
-    heading: 'Adaptive theme',
-    buttonLabel: 'Adaptive\ntheme',
+    heading: 'Adaptive Theming',
+    buttonLabel: 'Adaptive\nTheming',
     icon: Icons.auto_fix_high,
     info: 'In Flutter, adaptive widgets refer to UI components that use a '
         'different style or completely different platform native looking '
@@ -290,7 +291,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.controls,
-    heading: 'Segmented buttons',
+    heading: 'Segmented Buttons',
     buttonLabel: 'Segmented\nbuttons',
     icon: Icons.view_week_outlined,
     info: 'Segmented buttons help people select options, switch views, '
@@ -583,7 +584,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.general,
-    heading: 'Android system navigation bar',
+    heading: 'Android System Navigation Bar',
     buttonLabel: 'Android\nSystem Nav',
     icon: Icons.android_outlined,
     info: 'The system navigation bar in Android is in newer versions '
@@ -600,7 +601,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.general,
-    heading: 'Page examples',
+    heading: 'Page Examples',
     buttonLabel: 'Page\nexamples',
     icon: Icons.article_outlined,
     info: 'The page examples present the Material showcase content in '

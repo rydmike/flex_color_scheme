@@ -7,7 +7,6 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
-import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
 import 'light_surface_mode_list_tile.dart';
@@ -97,7 +96,7 @@ class SurfaceBlendSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        UseSeededColorSchemeSwitch(controller: controller),
+        // UseSeededColorSchemeSwitch(controller: controller),
         if (isLight) ...<Widget>[
           LightSurfaceModeListTile(controller: controller),
           LightSurfaceModePopupMenu(controller: controller),

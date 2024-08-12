@@ -47,22 +47,22 @@ class CustomThemeControls extends StatelessWidget {
         if (controller.schemeIndex !=
             (AppColor.schemes.length - 1)) ...<Widget>[
           ListTile(
-            title: const Text('Use a custom theme?'),
-            subtitle: const Text('Tap here to active the customizable theme.'),
+            title: const Text('Use custom colors?'),
+            subtitle: const Text('Tap here to active customizable colors'),
             onTap: () {
               controller.setSchemeIndex(AppColor.schemes.length - 1);
             },
           ),
           ListTileReveal(
-            title: const Text('Copy this theme to the customizable theme?'),
+            title: const Text('Copy these colors to the customizable scheme?'),
             subtitleDense: true,
-            subtitle: const Text("When you copy a built-in theme's colors "
-                'to the customizable theme, it becomes a starting point '
-                'for your own custom theme colors. Note that it is always '
-                'the input scheme colors that are copied, not the effective '
+            subtitle: const Text('When you copy a built-in color scheme '
+                'to the customizable ones, it becomes a starting point '
+                'for your own custom colors. Note that it is always '
+                'the input colors that are copied, not the effective '
                 'colors after modifiers. Modifiers are also applied to '
-                'custom colors when used. To see the input scheme colors, '
-                'enable the option to show them below.\n'),
+                'custom colors when used. To see the input colors, '
+                'enable the option to show them below\n'),
             trailing: FilledButton(
               onPressed: () async {
                 await _handleCopySchemeTap(context);
@@ -75,14 +75,14 @@ class CustomThemeControls extends StatelessWidget {
           )
         ] else ...<Widget>[
           const ListTile(
-            title: Text('This theme is customizable'),
-            subtitle: Text('Tap on main colors above to modify them. You can '
-                'copy/paste values to and from the color picker. It is '
-                'always the scheme input color that is modified, not the '
-                'resulting color after theme color modifiers.'),
+            title: Text('These colors are customizable'),
+            subtitle: Text('Tap on the main colors above to modify them. You '
+                'can copy/paste values to and from the color picker. It is '
+                'always the input colors that are modified, not the '
+                'resulting colors after effective color modifiers'),
           ),
           ListTile(
-            title: const Text('Reset custom theme to its default colors?'),
+            title: const Text('Reset custom colors to their defaults?'),
             trailing: FilledButton(
               onPressed: () async {
                 await _handleResetSchemeTap(context);

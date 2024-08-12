@@ -73,7 +73,7 @@ class InputColorsPopupMenu extends StatelessWidget {
       child: ListTile(
         contentPadding: contentPadding,
         title: Text(
-          '${AppColor.schemes[controller.schemeIndex].name} theme',
+          AppColor.schemes[controller.schemeIndex].name,
         ),
         subtitle: Text(AppColor.schemes[controller.schemeIndex].description),
         trailing: SizedBox(
