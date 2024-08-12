@@ -54,7 +54,7 @@ class CustomThemeControls extends StatelessWidget {
             },
           ),
           ListTileReveal(
-            title: const Text('Copy to custom theme?'),
+            title: const Text('Copy this theme to the customizable theme?'),
             subtitleDense: true,
             subtitle: const Text("When you copy a built-in theme's colors "
                 'to the customizable theme, it becomes a starting point '
