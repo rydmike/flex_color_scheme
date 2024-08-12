@@ -41,6 +41,8 @@ class ThemeColorsSettings extends StatelessWidget {
             style: denseBody,
           ),
         ),
+        CustomThemeControls(controller: controller),
+        const Divider(),
         const ListTileReveal(
           title: Text('Theme color modifiers'),
           subtitleDense: true,
@@ -198,8 +200,6 @@ class ThemeColorsSettings extends StatelessWidget {
             ],
           ),
         ),
-        const Divider(),
-        CustomThemeControls(controller: controller),
       ],
     );
   }

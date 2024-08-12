@@ -149,10 +149,10 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.colors,
-    heading: 'Theme colors',
-    buttonLabel: 'Theme\ncolors',
+    heading: 'Colors',
+    buttonLabel: 'Colors',
     icon: Icons.palette_outlined,
-    info: 'Theme colors show the color values defined for the selected '
+    info: 'Colors show the color values defined as inputs for the selected '
         'color scheme. You can also use any predefined scheme as a starting '
         'point for your own custom colors.\n',
   ),
