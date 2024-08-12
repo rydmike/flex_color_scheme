@@ -5188,7 +5188,7 @@ class ThemeController with ChangeNotifier {
   // - theme_controller.dart
   // - scheme_colors.dart
   // - show_tonal_palette.dart
-  // - seeded_color_scheme_settings.dart
+  // - color_scheme_settings.dart
   // ------- Commented controller below ------
 
   // // This is just a controller prop for hovered color on Colorscheme.
