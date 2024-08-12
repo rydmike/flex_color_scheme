@@ -11,6 +11,7 @@ import '../panels/bottom_sheet_settings/bottom_sheet_settings.dart';
 import '../panels/buttons_settings/buttons_settings.dart';
 import '../panels/card_settings/card_settings.dart';
 import '../panels/chip_settings/chip_settings.dart';
+import '../panels/color_scheme_settings/color_scheme_settings.dart';
 import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
 import '../panels/effective_colors/effective_colors.dart';
@@ -25,7 +26,6 @@ import '../panels/navigation_drawer_settings/navigation_drawer_settings.dart';
 import '../panels/navigation_rail_settings/navigation_rail_settings.dart';
 import '../panels/popup_menu_button_settings/popup_menu_button_settings.dart';
 import '../panels/premade_designs/premade_designs_panel.dart';
-import '../panels/seeded_color_scheme_settings/seeded_color_scheme_settings.dart';
 import '../panels/segmented_buttons_settings/segmented_buttons_settings.dart';
 import '../panels/shape_radius_settings/shape_radius_settings.dart';
 import '../panels/slider_settings/slider_settings.dart';
@@ -64,7 +64,7 @@ class ThemePanel extends StatelessWidget {
       const WidgetShowcase(),
       ThemeCode(controller),
       ThemeColorsSettings(controller),
-      SeededColorSchemeSettings(controller),
+      ColorSchemeSettings(controller),
       SurfaceBlendSettings(controller),
       EffectiveColors(controller),
       ComponentSettings(controller),

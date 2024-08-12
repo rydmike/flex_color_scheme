@@ -128,7 +128,7 @@ class SchemeColors extends StatelessWidget {
     // - theme_controller.dart
     // - scheme_colors.dart
     // - show_tonal_palette.dart
-    // - seeded_color_scheme_settings.dart
+    // - color_scheme_settings.dart
     // ----- Commented hover code are in all the MouseRegion's below
     //       The MouseRegion's are still there, maybe remove them as well.
 

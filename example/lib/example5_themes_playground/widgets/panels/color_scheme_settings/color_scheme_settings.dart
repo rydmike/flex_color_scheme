@@ -13,8 +13,8 @@ import 'show_tonal_palette.dart';
 
 // Panel used to show effective color scheme, when using keys to seed it
 // and just using raw FlexSchemeColors input data too based ColorScheme too.
-class SeededColorSchemeSettings extends StatelessWidget {
-  const SeededColorSchemeSettings(
+class ColorSchemeSettings extends StatelessWidget {
+  const ColorSchemeSettings(
     this.controller, {
     super.key,
   });
