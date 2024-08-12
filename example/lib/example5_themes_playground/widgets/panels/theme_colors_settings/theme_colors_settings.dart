@@ -5,7 +5,6 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/custom_theme_controls.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
-import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'input_colors_popup_menu.dart';
 import 'show_input_colors.dart';
 import 'used_colors_popup_menu.dart';
@@ -43,14 +42,12 @@ class ThemeColorsSettings extends StatelessWidget {
         ),
         CustomThemeControls(controller: controller),
         const Divider(),
-        const ListTileReveal(
-          title: Text('Theme color modifiers'),
-          subtitleDense: true,
-          subtitle: Text('Use theme color modifiers below to change how '
-              'the input scheme colors are used to define the effective '
-              "theme's ColorScheme.\n"),
+        const ListTile(
+          title: Text('Color modifiers'),
+          // subtitleDense: true,
+          subtitle: Text('Use these modifiers to change how the above colors '
+              'are used to create the effective ColorScheme'),
         ),
-        UseSeededColorSchemeSwitch(controller: controller),
         SwitchListTileReveal(
           enabled: controller.useFlexColorScheme && !controller.useKeyColors,
           title: const Text('Use Material 3 error colors'),

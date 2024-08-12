@@ -5,7 +5,7 @@ import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/custom_theme_controls.dart';
+import '../../shared/show_input_colors_switch.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'flex_tone_config_popup_menu.dart';
 import 'scheme_colors.dart';
@@ -188,9 +188,7 @@ class SeededColorSchemeSettings extends StatelessWidget {
           ),
         ],
         const Divider(),
-        CustomThemeControls(controller: controller),
-        // ShowInputColorsSwitch(controller: controller),
-
+        ShowInputColorsSwitch(controller: controller),
         // TODO(rydmike): Remove as not used 29.7.2023
         //
         // if (!isLight && controller.schemeIndex ==
