@@ -17,6 +17,7 @@ import '../panels/dialog_settings/dialog_settings.dart';
 import '../panels/effective_colors/effective_colors.dart';
 import '../panels/fab_settings/fab_settings.dart';
 import '../panels/icon_button_avatar_settings/icon_button_avatar_settings.dart';
+import '../panels/input_colors_settings/input_colors_settings.dart';
 import '../panels/introduction/introduction_panel.dart';
 import '../panels/list_tile_settings/list_tile_settings.dart';
 import '../panels/material_panel/material_panel.dart';
@@ -37,7 +38,6 @@ import '../panels/text_field_settings/text_field_settings.dart';
 import '../panels/text_theme_settings/primary_text_theme_settings.dart';
 import '../panels/text_theme_settings/text_theme_settings.dart';
 import '../panels/theme_code/theme_code.dart';
-import '../panels/theme_colors_settings/theme_colors_settings.dart';
 import '../panels/theme_simulator/theme_simulator.dart';
 import '../panels/tooltip_progressbar_settings/tooltip_progressbar_settings.dart';
 import '../panels/widget_showcase/widget_showcase.dart';
@@ -63,7 +63,7 @@ class ThemePanel extends StatelessWidget {
       ThemeSimulator(controller: controller),
       const WidgetShowcase(),
       ThemeCode(controller),
-      ThemeColorsSettings(controller),
+      InputColorsSettings(controller),
       ColorSchemeSettings(controller),
       SurfaceBlendSettings(controller),
       EffectiveColors(controller),
