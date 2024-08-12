@@ -146,9 +146,29 @@ class ShowColorSchemeColors extends StatelessWidget {
                 textColor: colorScheme.onPrimaryContainer,
               ),
               ColorCard(
-                label: 'onPrimary\nContainer',
+                label: 'on\nPrimary\nContainer',
                 color: colorScheme.onPrimaryContainer,
                 textColor: colorScheme.primaryContainer,
+              ),
+              ColorCard(
+                label: 'Primary\nFixed',
+                color: colorScheme.primaryFixed,
+                textColor: colorScheme.onPrimaryFixed,
+              ),
+              ColorCard(
+                label: 'on\nPrimary\nFixed',
+                color: colorScheme.onPrimaryFixed,
+                textColor: colorScheme.primaryFixed,
+              ),
+              ColorCard(
+                label: 'Primary\nFixedDim',
+                color: colorScheme.primaryFixedDim,
+                textColor: colorScheme.onPrimaryFixedVariant,
+              ),
+              ColorCard(
+                label: 'on\nPrimary\nFixedVariant',
+                color: colorScheme.onPrimaryFixedVariant,
+                textColor: colorScheme.primaryFixedDim,
               ),
               ColorCard(
                 label: 'Secondary',
@@ -171,6 +191,26 @@ class ShowColorSchemeColors extends StatelessWidget {
                 textColor: colorScheme.secondaryContainer,
               ),
               ColorCard(
+                label: 'Secondary\nFixed',
+                color: colorScheme.secondaryFixed,
+                textColor: colorScheme.onSecondaryFixed,
+              ),
+              ColorCard(
+                label: 'on\nSecondary\nFixed',
+                color: colorScheme.onSecondaryFixed,
+                textColor: colorScheme.secondaryFixed,
+              ),
+              ColorCard(
+                label: 'Secondary\nFixedDim',
+                color: colorScheme.secondaryFixedDim,
+                textColor: colorScheme.onSecondaryFixedVariant,
+              ),
+              ColorCard(
+                label: 'on\nSecondary\nFixedVariant',
+                color: colorScheme.onSecondaryFixedVariant,
+                textColor: colorScheme.secondaryFixedDim,
+              ),
+              ColorCard(
                 label: 'Tertiary',
                 color: colorScheme.tertiary,
                 textColor: colorScheme.onTertiary,
@@ -191,6 +231,26 @@ class ShowColorSchemeColors extends StatelessWidget {
                 textColor: colorScheme.tertiaryContainer,
               ),
               ColorCard(
+                label: 'Tertiary\nFixed',
+                color: colorScheme.tertiaryFixed,
+                textColor: colorScheme.onTertiaryFixed,
+              ),
+              ColorCard(
+                label: 'on\nTertiary\nFixed',
+                color: colorScheme.onTertiaryFixed,
+                textColor: colorScheme.tertiaryFixed,
+              ),
+              ColorCard(
+                label: 'Tertiary\nFixedDim',
+                color: colorScheme.tertiaryFixedDim,
+                textColor: colorScheme.onTertiaryFixedVariant,
+              ),
+              ColorCard(
+                label: 'on\nTertiary\nFixedVariant',
+                color: colorScheme.onTertiaryFixedVariant,
+                textColor: colorScheme.tertiaryFixedDim,
+              ),
+              ColorCard(
                 label: 'Error',
                 color: colorScheme.error,
                 textColor: colorScheme.onError,
@@ -206,20 +266,10 @@ class ShowColorSchemeColors extends StatelessWidget {
                 textColor: colorScheme.onErrorContainer,
               ),
               ColorCard(
-                label: 'onError\nContainer',
+                label: 'on\nError\nContainer',
                 color: colorScheme.onErrorContainer,
                 textColor: colorScheme.errorContainer,
               ),
-              // ColorCard(
-              //   label: 'Background$backTooHigh',
-              //   color: colorScheme.background,
-              //   textColor: colorScheme.onBackground,
-              // ),
-              // ColorCard(
-              //   label: 'on\nBackground',
-              //   color: colorScheme.onBackground,
-              //   textColor: colorScheme.background,
-              // ),
               ColorCard(
                 label: 'Surface$surfaceTooHigh',
                 color: colorScheme.surface,
@@ -230,16 +280,46 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onSurface,
                 textColor: colorScheme.surface,
               ),
-              // ColorCard(
-              //   label: 'Surface\nVariant',
-              //   color: colorScheme.surfaceVariant,
-              //   textColor: colorScheme.onSurfaceVariant,
-              // ),
-              // ColorCard(
-              //   label: 'onSurface\nVariant',
-              //   color: colorScheme.onSurfaceVariant,
-              //   textColor: colorScheme.surface,
-              // ),
+              ColorCard(
+                label: 'Surface\nDim',
+                color: colorScheme.surfaceDim,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
+                label: 'Surface\nBright',
+                color: colorScheme.surfaceBright,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
+                label: 'Surface\nContainer\nLowest',
+                color: colorScheme.surfaceContainerLowest,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
+                label: 'Surface\nContainer\nLow',
+                color: colorScheme.surfaceContainerLow,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
+                label: 'Surface\nContainer',
+                color: colorScheme.surfaceContainer,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
+                label: 'Surface\nContainer\nHigh',
+                color: colorScheme.surfaceContainerHigh,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
+                label: 'Surface\nContainer\nHighest',
+                color: colorScheme.surfaceContainerHighest,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
+                label: 'onSurface\nVariant',
+                color: colorScheme.onSurfaceVariant,
+                textColor: colorScheme.surface,
+              ),
               ColorCard(
                 label: 'Outline',
                 color: colorScheme.outline,

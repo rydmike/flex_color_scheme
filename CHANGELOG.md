@@ -125,6 +125,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
 - Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF. 
 - Add code gen for the new ColorScheme colors introduced in Flutter 3.22.
+- Add showing new Flutter 3.22 ColorScheme colors in the Playground to Effective Colors.
 
 **TODO THEMES PLAYGROUND AND EXAMPLES**
 
