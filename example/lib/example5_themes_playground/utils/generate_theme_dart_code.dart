@@ -71,6 +71,7 @@ String generateThemeDartCode(ThemeController controller) {
           '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
           '    appBarColor: ${scheme.light.appBarColor},\n'
           '    error: ${scheme.light.error},\n'
+          '    errorContainer: ${scheme.light.errorContainer},\n'
           '  ),\n';
   String darkScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
@@ -83,6 +84,7 @@ String generateThemeDartCode(ThemeController controller) {
           '    tertiaryContainer: ${scheme.dark.tertiaryContainer},\n'
           '    appBarColor: ${scheme.dark.appBarColor},\n'
           '    error: ${scheme.dark.error},\n'
+          '    errorContainer: ${scheme.dark.errorContainer},\n'
           '  ),\n';
   if (controller.useToDarkMethod && !useBuiltIn && !controller.useKeyColors) {
     darkScheme = '  colors: const FlexSchemeColor(\n'
@@ -94,6 +96,7 @@ String generateThemeDartCode(ThemeController controller) {
         '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
         '    appBarColor: ${scheme.light.appBarColor},\n'
         '    error: ${scheme.light.error},\n'
+        '    errorContainer: ${scheme.light.errorContainer},\n'
         '  ).defaultError.toDark(${controller.darkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
   }
   if (controller.useToDarkMethod && useBuiltIn && !controller.useKeyColors) {
