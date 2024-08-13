@@ -221,6 +221,7 @@ class FlexSubThemesData with Diagnosticable {
     this.toggleButtonsUnselectedSchemeColor,
     this.toggleButtonsBorderSchemeColor,
     this.toggleButtonsBorderWidth,
+    this.toggleButtonsTextStyle,
     //
     this.segmentedButtonRadius,
     this.segmentedButtonSchemeColor,
@@ -228,6 +229,7 @@ class FlexSubThemesData with Diagnosticable {
     this.segmentedButtonUnselectedForegroundSchemeColor,
     this.segmentedButtonBorderSchemeColor,
     this.segmentedButtonBorderWidth,
+    this.segmentedButtonTextStyle,
     //
     this.materialButtonSchemeColor,
     //
@@ -270,11 +272,15 @@ class FlexSubThemesData with Diagnosticable {
     this.fabUseShape = false,
     this.fabAlwaysCircular = false,
     this.fabSchemeColor,
+    this.fabExtendedTextStyle,
     //
     this.chipRadius,
     this.chipSchemeColor,
     this.chipSelectedSchemeColor,
     this.chipDeleteIconSchemeColor,
+    this.chipSecondarySelectedSchemeColor,
+    this.chipLabelStyle,
+    this.chipSecondaryLabelStyle,
     //
     this.cardRadius,
     this.cardElevation,
@@ -291,6 +297,7 @@ class FlexSubThemesData with Diagnosticable {
     this.menuSchemeColor,
     this.menuOpacity,
     this.menuPadding,
+    this.menuButtonTextStyle,
     //
     this.menuBarBackgroundSchemeColor,
     this.menuBarRadius,
@@ -309,26 +316,36 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipSchemeColor,
     this.tooltipOpacity,
     //
+    this.useInputDecoratorThemeInDialogs,
     this.adaptiveDialogRadius,
     this.dialogRadius,
     this.dialogRadiusAdaptive,
     this.dialogElevation,
     this.dialogBackgroundSchemeColor,
-    this.useInputDecoratorThemeInDialogs,
+    this.dialogTitleTextStyle,
+    this.dialogContentTextStyle,
     //
     this.datePickerHeaderBackgroundSchemeColor,
     this.datePickerDialogRadius,
+    //
     this.timePickerDialogRadius,
     this.timePickerElementRadius,
+    this.timePickerDayPeriodTextStyle,
+    this.timePickerDialTextStyle,
+    this.timePickerHelpTextStyle,
+    this.timePickerHourMinuteTextStyle,
     //
     this.snackBarRadius,
     this.snackBarElevation,
     this.snackBarBackgroundSchemeColor,
     this.snackBarActionSchemeColor,
+    this.snackBarContentTextStyle,
     //
     this.appBarBackgroundSchemeColor,
     this.appBarCenterTitle,
     this.appBarScrolledUnderElevation,
+    this.appBarToolbarTextStyle,
+    this.appBarTitleTextStyle,
     //
     this.bottomAppBarSchemeColor,
     //
@@ -1178,6 +1195,13 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [thinBorderWidth];
   final double? toggleButtonsBorderWidth;
 
+  /// The default text style for [ToggleButtons.children].
+  ///
+  /// [TextStyle.color] will be ignored and substituted by [color],
+  /// [selectedColor] or [disabledColor] depending on whether the buttons
+  /// are active, selected, or disabled.
+  final TextStyle? toggleButtonsTextStyle;
+
   /// Border radius value for [SegmentedButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -1216,6 +1240,13 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, defaults to [thinBorderWidth];
   final double? segmentedButtonBorderWidth;
+
+  /// The style for the segmented button's [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [segmentedButtonSchemeColor] and [unselectedForegroundSchemeColor] are
+  /// used instead.
+  final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle;
 
   /// Defines which [Theme] based [ColorScheme] based color, that the old
   /// [MaterialButton] use as its main theme color.
@@ -1658,6 +1689,9 @@ class FlexSubThemesData with Diagnosticable {
   /// and [ColorScheme.primaryContainer] in M3 via Flutter theme defaults.
   final SchemeColor? fabSchemeColor;
 
+  /// The text style for an extended [FloatingActionButton]'s label.
+  final TextStyle? fabExtendedTextStyle;
+
   /// Border radius value for [Chip] widgets.
   ///
   ///
@@ -1709,6 +1743,35 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined it defaults to effective theme based color from using
   /// [SchemeColor.onSurface].
   final SchemeColor? chipDeleteIconSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the selected
+  /// ChoiceChips use as their selected state color.
+  ///
+  /// The color scheme contrast pair color is used for text and icons, on the
+  /// [secondarySelectedSchemeColor]
+  ///
+  /// If not defined and [useMaterial3] is true, defaults to
+  /// [selectedSchemeColor].
+  final SchemeColor? chipSecondarySelectedSchemeColor;
+
+  /// Overrides the default for [ChipAttributes.labelStyle],
+  /// the style of the [DefaultTextStyle] that contains the
+  /// chip's label.
+  ///
+  /// This only has an effect on label widgets that respect the
+  /// [DefaultTextStyle], such as [Text].
+  ///
+  /// This property applies to [ActionChip], [Chip],
+  /// [FilterChip], [InputChip], [RawChip].
+  final TextStyle? chipLabelStyle;
+
+  /// Overrides the default for [ChoiceChip.labelStyle],
+  /// the style of the [DefaultTextStyle] that contains the
+  /// chip's label.
+  ///
+  /// This only has an effect on label widgets that respect the
+  /// [DefaultTextStyle], such as [Text].
+  final TextStyle? chipSecondaryLabelStyle;
 
   /// Border radius value for [Card].
   ///
@@ -1838,6 +1901,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, default to 0, no padding.
   final EdgeInsetsGeometry? menuPadding;
 
+  /// The style for a menu button's [Text] widget descendants.
+  ///
+  /// The color of the [textStyle] is typically not used directly, the
+  /// [foregroundSchemeColor] is used instead.
+  final WidgetStateProperty<TextStyle?>? menuButtonTextStyle;
+
   /// Select which color from active [ColorScheme] to use as background color
   /// for the [MenuBar].
   ///
@@ -1945,6 +2014,15 @@ class FlexSubThemesData with Diagnosticable {
   /// [tooltipOpacity] has no effect since it cannot act on undefined value.
   final double? tooltipOpacity;
 
+  /// Set to true to use the app overall app [InputDecoration] theme in
+  /// dialogs themes.
+  ///
+  /// Currently only applies to [TimePickerThemeData], will later also be used
+  /// by [DatePickerDialog] theme when it becomes supported.
+  ///
+  /// If not defined, defaults to false.
+  final bool? useInputDecoratorThemeInDialogs;
+
   /// Controls if the [dialogRadiusAdaptive] is used instead of [dialogRadius]
   /// on configured platforms.
   ///
@@ -2035,14 +2113,13 @@ class FlexSubThemesData with Diagnosticable {
   /// See issue: https://github.com/flutter/flutter/issues/90353
   final SchemeColor? dialogBackgroundSchemeColor;
 
-  /// Set to true to use the app overall app [InputDecoration] theme in
-  /// dialogs themes.
-  ///
-  /// Currently only applies to [TimePickerThemeData], will later also be used
-  /// by [DatePickerDialog] theme when it becomes supported.
-  ///
-  /// If not defined, defaults to false.
-  final bool? useInputDecoratorThemeInDialogs;
+  /// Overrides the default value for [DefaultTextStyle] for
+  /// [SimpleDialog.title] and [AlertDialog.title].
+  final TextStyle? dialogTitleTextStyle;
+
+  /// Overrides the default value for [DefaultTextStyle] for
+  /// [SimpleDialog.children] and [AlertDialog.content].
+  final TextStyle? dialogContentTextStyle;
 
   /// The background color of the header in a [DatePickerDialog].
   ///
@@ -2091,6 +2168,34 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/time-pickers/specs. and defaults to
   /// [kTimeElementRadius] if not defined.
   final double? timePickerElementRadius;
+
+  /// Used to configure the [TextStyle]s for the day period control.
+  ///
+  /// If this is null, the time picker defaults to the overall theme's
+  /// [TextTheme.titleMedium].
+  final TextStyle? timePickerDayPeriodTextStyle;
+
+  /// The [TextStyle] for the numbers on the time selection dial.
+  ///
+  /// If [dialTextStyle]'s [TextStyle.color] is a [WidgetStateColor], then
+  /// the effective text color can depend on the [WidgetState.selected]
+  /// state, i.e. if the text is selected or not.
+  ///
+  /// If this style is null then the dial's text style is based on the theme's
+  /// [ThemeData.textTheme].
+  final TextStyle? timePickerDialTextStyle;
+
+  /// Used to configure the [TextStyle]s for the helper text in the header.
+  ///
+  /// If this is null, the time picker defaults to the overall theme's
+  /// [TextTheme.labelSmall].
+  final TextStyle? timePickerHelpTextStyle;
+
+  /// Used to configure the [TextStyle]s for the hour/minute controls.
+  ///
+  /// If this is null, the time picker defaults to the overall theme's
+  /// [TextTheme.headline3].
+  final TextStyle? timePickerHourMinuteTextStyle;
 
   /// Corner radius of the [SnackBar].
   ///
@@ -2149,6 +2254,12 @@ class FlexSubThemesData with Diagnosticable {
   /// If null, defaults to [ColorScheme.inversePrimary].
   final SchemeColor? snackBarActionSchemeColor;
 
+  /// Used to configure the [DefaultTextStyle] for the [SnackBar.content]
+  /// widget.
+  ///
+  /// If null, [SnackBar] defines its default using titleMedium
+  final TextStyle? snackBarContentTextStyle;
+
   /// Defines which [Theme] based [ColorScheme] based color the [AppBar]
   /// background uses.
   ///
@@ -2180,6 +2291,14 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, defaults to 3.
   final double? appBarScrolledUnderElevation;
+
+  /// Overrides the default value of the [AppBar.toolbarTextStyle]
+  /// property in all descendant [AppBar] widgets.
+  final TextStyle? appBarToolbarTextStyle;
+
+  /// Overrides the default value of [AppBar.titleTextStyle]
+  /// property in all descendant [AppBar] widgets.
+  final TextStyle? appBarTitleTextStyle;
 
   /// Defines which [Theme] based [ColorScheme] based color the [BottomAppBar]
   /// uses as background color.
@@ -3035,6 +3154,7 @@ class FlexSubThemesData with Diagnosticable {
   /// The default is -1.0.
   final double? navigationRailGroupAlignment;
 
+  /// **DEPRECATED** No function anymore.
   /// Set to true to use Flutter SDK default component theme designs.
   ///
   /// Default to false.
@@ -3150,6 +3270,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? defaultRadius,
     final double? defaultRadiusAdaptive,
+    //
     final Size? buttonMinSize,
     final bool? alignedDropdown,
     final EdgeInsetsGeometry? buttonPadding,
@@ -3179,15 +3300,16 @@ class FlexSubThemesData with Diagnosticable {
     final double? outlinedButtonRadius,
     final SchemeColor? outlinedButtonSchemeColor,
     final SchemeColor? outlinedButtonOutlineSchemeColor,
-    final WidgetStateProperty<TextStyle?>? outlinedButtonTextStyle,
     final double? outlinedButtonBorderWidth,
     final double? outlinedButtonPressedBorderWidth,
+    final WidgetStateProperty<TextStyle?>? outlinedButtonTextStyle,
     //
     final double? toggleButtonsRadius,
     final SchemeColor? toggleButtonsSchemeColor,
     final SchemeColor? toggleButtonsUnselectedSchemeColor,
     final SchemeColor? toggleButtonsBorderSchemeColor,
     final double? toggleButtonsBorderWidth,
+    final TextStyle? toggleButtonsTextStyle,
     //
     final double? segmentedButtonRadius,
     final SchemeColor? segmentedButtonSchemeColor,
@@ -3195,6 +3317,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? segmentedButtonUnselectedForegroundSchemeColor,
     final SchemeColor? segmentedButtonBorderSchemeColor,
     final double? segmentedButtonBorderWidth,
+    final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle,
     //
     final SchemeColor? materialButtonSchemeColor,
     //
@@ -3237,11 +3360,15 @@ class FlexSubThemesData with Diagnosticable {
     final bool? fabUseShape,
     final bool? fabAlwaysCircular,
     final SchemeColor? fabSchemeColor,
+    final TextStyle? fabExtendedTextStyle,
     //
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
     final SchemeColor? chipSelectedSchemeColor,
     final SchemeColor? chipDeleteIconSchemeColor,
+    final SchemeColor? chipSecondarySelectedSchemeColor,
+    final TextStyle? chipLabelStyle,
+    final TextStyle? chipSecondaryLabelStyle,
     //
     final double? cardRadius,
     final double? cardElevation,
@@ -3258,6 +3385,7 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? menuSchemeColor,
     final double? menuOpacity,
     final EdgeInsetsGeometry? menuPadding,
+    final WidgetStateProperty<TextStyle?>? menuButtonTextStyle,
     //
     final SchemeColor? menuBarBackgroundSchemeColor,
     final double? menuBarRadius,
@@ -3276,26 +3404,36 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tooltipSchemeColor,
     final double? tooltipOpacity,
     //
+    final bool? useInputDecoratorThemeInDialogs,
     final FlexAdaptive? adaptiveDialogRadius,
     final double? dialogRadius,
     final double? dialogRadiusAdaptive,
     final double? dialogElevation,
     final SchemeColor? dialogBackgroundSchemeColor,
-    final bool? useInputDecoratorThemeInDialogs,
+    final TextStyle? dialogTitleTextStyle,
+    final TextStyle? dialogContentTextStyle,
     //
     final SchemeColor? datePickerHeaderBackgroundSchemeColor,
     final double? datePickerDialogRadius,
     final double? timePickerDialogRadius,
     final double? timePickerElementRadius,
+    final TextStyle? timePickerDayPeriodTextStyle,
+    final TextStyle? timePickerDialTextStyle,
+    final TextStyle? timePickerHelpTextStyle,
+    final TextStyle? timePickerHourMinuteTextStyle,
     //
     final double? snackBarRadius,
     final double? snackBarElevation,
     final SchemeColor? snackBarBackgroundSchemeColor,
     final SchemeColor? snackBarActionSchemeColor,
+    final TextStyle? snackBarContentTextStyle,
     //
     final SchemeColor? appBarBackgroundSchemeColor,
     final bool? appBarCenterTitle,
     final double? appBarScrolledUnderElevation,
+    final TextStyle? appBarToolbarTextStyle,
+    final TextStyle? appBarTitleTextStyle,
+    //
     final SchemeColor? bottomAppBarSchemeColor,
     //
     final SchemeColor? tabBarItemSchemeColor,
@@ -3419,6 +3557,7 @@ class FlexSubThemesData with Diagnosticable {
       defaultRadius: defaultRadius ?? this.defaultRadius,
       defaultRadiusAdaptive:
           defaultRadiusAdaptive ?? this.defaultRadiusAdaptive,
+      //
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
       alignedDropdown: alignedDropdown ?? this.alignedDropdown,
       buttonPadding: buttonPadding ?? this.buttonPadding,
@@ -3476,6 +3615,8 @@ class FlexSubThemesData with Diagnosticable {
           toggleButtonsBorderSchemeColor ?? this.toggleButtonsBorderSchemeColor,
       toggleButtonsBorderWidth:
           toggleButtonsBorderWidth ?? this.toggleButtonsBorderWidth,
+      toggleButtonsTextStyle:
+          toggleButtonsTextStyle ?? this.toggleButtonsTextStyle,
       //
       segmentedButtonRadius:
           segmentedButtonRadius ?? this.segmentedButtonRadius,
@@ -3491,6 +3632,8 @@ class FlexSubThemesData with Diagnosticable {
           this.segmentedButtonBorderSchemeColor,
       segmentedButtonBorderWidth:
           segmentedButtonBorderWidth ?? this.segmentedButtonBorderWidth,
+      segmentedButtonTextStyle:
+      segmentedButtonTextStyle ?? this.segmentedButtonTextStyle,
       //
       materialButtonSchemeColor:
           materialButtonSchemeColor ?? this.materialButtonSchemeColor,
@@ -3560,6 +3703,7 @@ class FlexSubThemesData with Diagnosticable {
       fabUseShape: fabUseShape ?? this.fabUseShape,
       fabAlwaysCircular: fabAlwaysCircular ?? this.fabAlwaysCircular,
       fabSchemeColor: fabSchemeColor ?? this.fabSchemeColor,
+      fabExtendedTextStyle: fabExtendedTextStyle ?? this.fabExtendedTextStyle,
       //
       chipRadius: chipRadius ?? this.chipRadius,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
@@ -3567,27 +3711,14 @@ class FlexSubThemesData with Diagnosticable {
           chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
       chipDeleteIconSchemeColor:
           chipDeleteIconSchemeColor ?? this.chipDeleteIconSchemeColor,
+      chipSecondarySelectedSchemeColor: chipSecondarySelectedSchemeColor ??
+          this.chipSecondarySelectedSchemeColor,
+      chipLabelStyle: chipLabelStyle ?? this.chipLabelStyle,
+      chipSecondaryLabelStyle:
+          chipSecondaryLabelStyle ?? this.chipSecondaryLabelStyle,
       //
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
-      //
-      adaptiveDialogRadius: adaptiveDialogRadius ?? this.adaptiveDialogRadius,
-      dialogRadius: dialogRadius ?? this.dialogRadius,
-      dialogRadiusAdaptive: dialogRadiusAdaptive ?? this.dialogRadiusAdaptive,
-      dialogElevation: dialogElevation ?? this.dialogElevation,
-      dialogBackgroundSchemeColor:
-          dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
-      useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ??
-          this.useInputDecoratorThemeInDialogs,
-      datePickerHeaderBackgroundSchemeColor:
-          datePickerHeaderBackgroundSchemeColor ??
-              this.datePickerHeaderBackgroundSchemeColor,
-      datePickerDialogRadius:
-          datePickerDialogRadius ?? this.datePickerDialogRadius,
-      timePickerDialogRadius:
-          timePickerDialogRadius ?? this.timePickerDialogRadius,
-      timePickerElementRadius:
-          timePickerElementRadius ?? this.timePickerElementRadius,
       //
       popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
       popupMenuElevation: popupMenuElevation ?? this.popupMenuElevation,
@@ -3602,6 +3733,7 @@ class FlexSubThemesData with Diagnosticable {
       menuSchemeColor: menuSchemeColor ?? this.menuSchemeColor,
       menuOpacity: menuOpacity ?? this.menuOpacity,
       menuPadding: menuPadding ?? this.menuPadding,
+      menuButtonTextStyle: menuButtonTextStyle ?? this.menuButtonTextStyle,
       //
       menuBarBackgroundSchemeColor:
           menuBarBackgroundSchemeColor ?? this.menuBarBackgroundSchemeColor,
@@ -3625,18 +3757,54 @@ class FlexSubThemesData with Diagnosticable {
       tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
       tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
       //
+      useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ??
+          this.useInputDecoratorThemeInDialogs,
+      adaptiveDialogRadius: adaptiveDialogRadius ?? this.adaptiveDialogRadius,
+      dialogRadius: dialogRadius ?? this.dialogRadius,
+      dialogRadiusAdaptive: dialogRadiusAdaptive ?? this.dialogRadiusAdaptive,
+      dialogElevation: dialogElevation ?? this.dialogElevation,
+      dialogBackgroundSchemeColor:
+          dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
+      dialogTitleTextStyle: dialogTitleTextStyle ?? this.dialogTitleTextStyle,
+      dialogContentTextStyle:
+          dialogContentTextStyle ?? this.dialogContentTextStyle,
+      //
+      datePickerHeaderBackgroundSchemeColor:
+          datePickerHeaderBackgroundSchemeColor ??
+              this.datePickerHeaderBackgroundSchemeColor,
+      datePickerDialogRadius:
+          datePickerDialogRadius ?? this.datePickerDialogRadius,
+      //
+      timePickerDialogRadius:
+          timePickerDialogRadius ?? this.timePickerDialogRadius,
+      timePickerElementRadius:
+          timePickerElementRadius ?? this.timePickerElementRadius,
+      timePickerDayPeriodTextStyle:
+          timePickerDayPeriodTextStyle ?? this.timePickerDayPeriodTextStyle,
+      timePickerDialTextStyle:
+          timePickerDialTextStyle ?? this.timePickerDialTextStyle,
+      timePickerHelpTextStyle:
+          timePickerHelpTextStyle ?? this.timePickerHelpTextStyle,
+      timePickerHourMinuteTextStyle:
+          timePickerHourMinuteTextStyle ?? this.timePickerHourMinuteTextStyle,
+      //
       snackBarRadius: snackBarRadius ?? this.snackBarRadius,
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
       snackBarBackgroundSchemeColor:
           snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
       snackBarActionSchemeColor:
           snackBarActionSchemeColor ?? this.snackBarActionSchemeColor,
+      snackBarContentTextStyle:
+          snackBarContentTextStyle ?? this.snackBarContentTextStyle,
       //
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
       appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
       appBarScrolledUnderElevation:
           appBarScrolledUnderElevation ?? this.appBarScrolledUnderElevation,
+      appBarToolbarTextStyle:
+          appBarToolbarTextStyle ?? this.appBarToolbarTextStyle,
+      appBarTitleTextStyle: appBarTitleTextStyle ?? this.appBarTitleTextStyle,
       //
       bottomAppBarSchemeColor:
           bottomAppBarSchemeColor ?? this.bottomAppBarSchemeColor,
@@ -3892,6 +4060,7 @@ class FlexSubThemesData with Diagnosticable {
         other.toggleButtonsBorderSchemeColor ==
             toggleButtonsBorderSchemeColor &&
         other.toggleButtonsBorderWidth == toggleButtonsBorderWidth &&
+        other.toggleButtonsTextStyle == toggleButtonsTextStyle &&
         //
         other.segmentedButtonRadius == segmentedButtonRadius &&
         other.segmentedButtonSchemeColor == segmentedButtonSchemeColor &&
@@ -3902,6 +4071,7 @@ class FlexSubThemesData with Diagnosticable {
         other.segmentedButtonBorderSchemeColor ==
             segmentedButtonBorderSchemeColor &&
         other.segmentedButtonBorderWidth == segmentedButtonBorderWidth &&
+        other.segmentedButtonTextStyle == segmentedButtonTextStyle &&
         //
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         //
@@ -3951,11 +4121,16 @@ class FlexSubThemesData with Diagnosticable {
         other.fabUseShape == fabUseShape &&
         other.fabAlwaysCircular == fabAlwaysCircular &&
         other.fabSchemeColor == fabSchemeColor &&
+        other.fabExtendedTextStyle == fabExtendedTextStyle &&
         //
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
         other.chipSelectedSchemeColor == chipSelectedSchemeColor &&
         other.chipDeleteIconSchemeColor == chipDeleteIconSchemeColor &&
+        other.chipSecondarySelectedSchemeColor ==
+            chipSecondarySelectedSchemeColor &&
+        other.chipLabelStyle == chipLabelStyle &&
+        other.chipSecondaryLabelStyle == chipSecondaryLabelStyle &&
         //
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
@@ -3972,6 +4147,7 @@ class FlexSubThemesData with Diagnosticable {
         other.menuSchemeColor == menuSchemeColor &&
         other.menuOpacity == menuOpacity &&
         other.menuPadding == menuPadding &&
+        other.menuButtonTextStyle == menuButtonTextStyle &&
         //
         other.menuBarBackgroundSchemeColor == menuBarBackgroundSchemeColor &&
         other.menuBarRadius == menuBarRadius &&
@@ -3992,27 +4168,38 @@ class FlexSubThemesData with Diagnosticable {
         other.tooltipSchemeColor == tooltipSchemeColor &&
         other.tooltipOpacity == tooltipOpacity &&
         //
+        other.useInputDecoratorThemeInDialogs ==
+            useInputDecoratorThemeInDialogs &&
         other.adaptiveDialogRadius == adaptiveDialogRadius &&
         other.dialogRadius == dialogRadius &&
         other.dialogRadiusAdaptive == dialogRadiusAdaptive &&
         other.dialogElevation == dialogElevation &&
         other.dialogBackgroundSchemeColor == dialogBackgroundSchemeColor &&
-        other.useInputDecoratorThemeInDialogs ==
-            useInputDecoratorThemeInDialogs &&
+        other.dialogTitleTextStyle == dialogTitleTextStyle &&
+        other.dialogContentTextStyle == dialogContentTextStyle &&
+        //
         other.datePickerHeaderBackgroundSchemeColor ==
             datePickerHeaderBackgroundSchemeColor &&
         other.datePickerDialogRadius == datePickerDialogRadius &&
+        //
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.timePickerElementRadius == timePickerElementRadius &&
+        other.timePickerDayPeriodTextStyle == timePickerDayPeriodTextStyle &&
+        other.timePickerDialTextStyle == timePickerDialTextStyle &&
+        other.timePickerHelpTextStyle == timePickerHelpTextStyle &&
+        other.timePickerHourMinuteTextStyle == timePickerHourMinuteTextStyle &&
         //
         other.snackBarRadius == snackBarRadius &&
         other.snackBarElevation == snackBarElevation &&
         other.snackBarBackgroundSchemeColor == snackBarBackgroundSchemeColor &&
         other.snackBarActionSchemeColor == snackBarActionSchemeColor &&
+        other.snackBarContentTextStyle == snackBarContentTextStyle &&
         //
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
         other.appBarCenterTitle == appBarCenterTitle &&
         other.appBarScrolledUnderElevation == appBarScrolledUnderElevation &&
+        other.appBarToolbarTextStyle == appBarToolbarTextStyle &&
+        other.appBarTitleTextStyle == appBarTitleTextStyle &&
         //
         other.bottomAppBarSchemeColor == bottomAppBarSchemeColor &&
         //
@@ -4208,6 +4395,7 @@ class FlexSubThemesData with Diagnosticable {
         toggleButtonsUnselectedSchemeColor,
         toggleButtonsBorderSchemeColor,
         toggleButtonsBorderWidth,
+        toggleButtonsTextStyle,
         //
         segmentedButtonRadius,
         segmentedButtonSchemeColor,
@@ -4215,6 +4403,7 @@ class FlexSubThemesData with Diagnosticable {
         segmentedButtonUnselectedForegroundSchemeColor,
         segmentedButtonBorderSchemeColor,
         segmentedButtonBorderWidth,
+        segmentedButtonTextStyle,
         //
         materialButtonSchemeColor,
         //
@@ -4257,11 +4446,15 @@ class FlexSubThemesData with Diagnosticable {
         fabUseShape,
         fabAlwaysCircular,
         fabSchemeColor,
+        fabExtendedTextStyle,
         //
         chipRadius,
         chipSchemeColor,
         chipSelectedSchemeColor,
         chipDeleteIconSchemeColor,
+        chipSecondarySelectedSchemeColor,
+        chipLabelStyle,
+        chipSecondaryLabelStyle,
         //
         cardRadius,
         cardElevation,
@@ -4278,6 +4471,7 @@ class FlexSubThemesData with Diagnosticable {
         menuSchemeColor,
         menuOpacity,
         menuPadding,
+        menuButtonTextStyle,
         //
         menuBarBackgroundSchemeColor,
         menuBarRadius,
@@ -4296,25 +4490,36 @@ class FlexSubThemesData with Diagnosticable {
         tooltipSchemeColor,
         tooltipOpacity,
         //
+        useInputDecoratorThemeInDialogs,
         adaptiveDialogRadius,
         dialogRadius,
         dialogRadiusAdaptive,
         dialogElevation,
         dialogBackgroundSchemeColor,
-        useInputDecoratorThemeInDialogs,
+        dialogTitleTextStyle,
+        dialogContentTextStyle,
+        //
         datePickerHeaderBackgroundSchemeColor,
         datePickerDialogRadius,
+        //
         timePickerDialogRadius,
         timePickerElementRadius,
+        timePickerDayPeriodTextStyle,
+        timePickerDialTextStyle,
+        timePickerHelpTextStyle,
+        timePickerHourMinuteTextStyle,
         //
         snackBarRadius,
         snackBarElevation,
         snackBarBackgroundSchemeColor,
         snackBarActionSchemeColor,
+        snackBarContentTextStyle,
         //
         appBarBackgroundSchemeColor,
         appBarCenterTitle,
         appBarScrolledUnderElevation,
+        appBarToolbarTextStyle,
+        appBarTitleTextStyle,
         //
         bottomAppBarSchemeColor,
         //
@@ -4508,6 +4713,8 @@ class FlexSubThemesData with Diagnosticable {
         'toggleButtonsBorderSchemeColor', toggleButtonsBorderSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'toggleButtonsBorderWidth', toggleButtonsBorderWidth));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'toggleButtonsTextStyle', toggleButtonsTextStyle));
     //
     properties.add(DiagnosticsProperty<double>(
         'segmentedButtonRadius', segmentedButtonRadius));
@@ -4523,6 +4730,8 @@ class FlexSubThemesData with Diagnosticable {
         'segmentedButtonBorderSchemeColor', segmentedButtonBorderSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'segmentedButtonBorderWidth', segmentedButtonBorderWidth));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
+        'segmentedButtonTextStyle', segmentedButtonTextStyle));
     //
     properties.add(EnumProperty<SchemeColor>(
         'materialButtonSchemeColor', materialButtonSchemeColor));
@@ -4600,6 +4809,8 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<bool>('fabAlwaysCircular', fabAlwaysCircular));
     properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'fabExtendedTextStyle', fabExtendedTextStyle));
     //
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
     properties
@@ -4608,6 +4819,12 @@ class FlexSubThemesData with Diagnosticable {
         'chipSelectedSchemeColor', chipSelectedSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'chipDeleteIconSchemeColor', chipDeleteIconSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'chipSecondarySelectedSchemeColor', chipSecondarySelectedSchemeColor));
+    properties
+        .add(DiagnosticsProperty<TextStyle>('chipLabelStyle', chipLabelStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'chipSecondaryLabelStyle', chipSecondaryLabelStyle));
     //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
@@ -4631,6 +4848,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>('menuOpacity', menuOpacity));
     properties.add(
         DiagnosticsProperty<EdgeInsetsGeometry>('menuPadding', menuPadding));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
+        'menuButtonTextStyle', menuButtonTextStyle));
     //
     properties.add(EnumProperty<SchemeColor>(
         'menuBarBackgroundSchemeColor', menuBarBackgroundSchemeColor));
@@ -4662,6 +4881,8 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
     //
+    properties.add(DiagnosticsProperty<bool>(
+        'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
     properties.add(DiagnosticsProperty<FlexAdaptive>(
         'adaptiveDialogRadius', adaptiveDialogRadius));
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
@@ -4671,18 +4892,29 @@ class FlexSubThemesData with Diagnosticable {
         .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
     properties.add(EnumProperty<SchemeColor>(
         'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'dialogTitleTextStyle', dialogTitleTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'dialogContentTextStyle', dialogContentTextStyle));
     //
     properties.add(EnumProperty<SchemeColor>(
         'datePickerHeaderBackgroundSchemeColor',
         datePickerHeaderBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'datePickerDialogRadius', datePickerDialogRadius));
+    //
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));
     properties.add(DiagnosticsProperty<double>(
         'timePickerElementRadius', timePickerElementRadius));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'timePickerDayPeriodTextStyle', timePickerDayPeriodTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'timePickerDialTextStyle', timePickerDialTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'timePickerHelpTextStyle', timePickerHelpTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'timePickerHourMinuteTextStyle', timePickerHourMinuteTextStyle));
     //
     properties
         .add(DiagnosticsProperty<double>('snackBarRadius', snackBarRadius));
@@ -4692,6 +4924,8 @@ class FlexSubThemesData with Diagnosticable {
         'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'snackBarActionSchemeColor', snackBarActionSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'snackBarContentTextStyle', snackBarContentTextStyle));
     //
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
@@ -4699,6 +4933,10 @@ class FlexSubThemesData with Diagnosticable {
         .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
     properties.add(DiagnosticsProperty<double>(
         'appBarScrolledUnderElevation', appBarScrolledUnderElevation));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'appBarToolbarTextStyle', appBarToolbarTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'appBarTitleTextStyle', appBarTitleTextStyle));
     //
     properties.add(EnumProperty<SchemeColor>(
         'bottomAppBarSchemeColor', bottomAppBarSchemeColor));

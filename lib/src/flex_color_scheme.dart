@@ -913,8 +913,10 @@ class FlexColorScheme with Diagnosticable {
   /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
   /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
   ///
-  /// This cascading effect for individual attributes of the [CupertinoThemeData]
-  /// can be overridden using attributes of this [cupertinoOverrideTheme].
+  /// This cascading effect for individual attributes of the
+  ///
+  /// [CupertinoThemeData] can be overridden using attributes of this
+  /// [cupertinoOverrideTheme].
   final NoDefaultCupertinoThemeData? cupertinoOverrideTheme;
 
   /// Activate using FlexColorScheme opinionated component sub-themes by
@@ -6108,7 +6110,7 @@ class FlexColorScheme with Diagnosticable {
     // different, a bit less colorful, but only very marginally.
     if (useSubThemes && subTheme.blendTextTheme) {
       // Calculate colors for the different TextStyles, color blend strength are
-      // inline with opacities on the 2014/2018/2021 typographies.
+      // inline with opacities on the 2014/2018 typographies.
       // For main text theme we are using surface tint instead of primary,
       // normally it defaults to primary, but if it is customized we should base
       // tinted text theme on it instead.
@@ -6232,7 +6234,7 @@ class FlexColorScheme with Diagnosticable {
       );
 
       // Calculate colors for the different TextStyles, color blend strength are
-      // inline with opacities on the 2014/2018/2021 typographies.
+      // inline with opacities on the 2014/2018 typographies.
       // For main text theme we are using surface tint instead of primary,
       // normally it defaults to primary, but if it is customized we should base
       // tinted text theme on it instead.
@@ -6489,6 +6491,7 @@ class FlexColorScheme with Diagnosticable {
           // TODO(rydmike): Chore: Better FlexTabBarStyle.universal algo?
           //   Maybe try a contrasting color from tonal palettes? Might work if
           //   using seeded color scheme, but not necessarily otherwise.
+          //   Maybe try the new fixed colors in Flutter 3.22 ColorScheme?
           return isDark
               ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
               : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
@@ -6674,7 +6677,7 @@ class FlexColorScheme with Diagnosticable {
     // theme is also passed into the TimePickerTheme, and DropdownMenu so we
     // get the same style used on them too.
     final InputDecorationTheme? effectiveInputDecorationTheme = useSubThemes
-        // FCS V4 and later sub-theme based input decorator used.
+        // FCS V4 and later sub-theme based input decorator use.
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
@@ -6704,8 +6707,8 @@ class FlexColorScheme with Diagnosticable {
             ? null
             // Default decorator in M2 is a bit opinionated, this is the legacy
             // FCS default one in all previous versions before version 4.0.0.
-            // Kept for backwards defaults compatibility. Used when not using
-            // opinionated component sub-themes in M2 mode.
+            // Kept for backwards defaults compatibility. Only used when not
+            // using opinionated component sub-themes in M2 mode.
             : InputDecorationTheme(
                 filled: subTheme.inputDecoratorIsFilled,
                 fillColor: isDark
@@ -6791,8 +6794,7 @@ class FlexColorScheme with Diagnosticable {
       //
       // [colorScheme] is the preferred way to configure colors. The other color
       // properties (as well as primaryColorBrightness, and primarySwatch)
-      // will gradually be phased out,
-      // see https://github.com/flutter/flutter/issues/91772.
+      // will be phased out, https://github.com/flutter/flutter/issues/91772.
       //
       // Most color definitions below are very close to the ones used by the
       // Flutter factory ThemeData.from() for creating a theme from a
@@ -6948,6 +6950,9 @@ class FlexColorScheme with Diagnosticable {
               actionsIconTheme: IconThemeData(color: appBarIconColor),
               systemOverlayStyle: systemOverlayStyle,
               shadowColor: useShadow ? colorScheme.shadow : null,
+              toolbarTextStyle: subTheme.appBarToolbarTextStyle,
+              titleTextStyle: subTheme.appBarTitleTextStyle,
+
               // Surface tint on AppBar is removed via the scroll under setting.
               surfaceTintColor: noScrollUnder ? Colors.transparent : null,
             )
@@ -6976,8 +6981,10 @@ class FlexColorScheme with Diagnosticable {
                 ),
       //
       // badgeTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      badgeTheme: useSubThemes ? const BadgeThemeData() : null,
       //
       // bannerTheme:  NOT YET DEFINED BY FCS. USE: .copyWith
+      bannerTheme: useSubThemes ? const MaterialBannerThemeData() : null,
       //
       // BottomAppBar Theme.
       bottomAppBarTheme: useSubThemes
@@ -7075,8 +7082,6 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // buttonBarTheme: NOT YET DEFINED BY FCS. USE: .copyWith
-      //
       // Button Theme.
       // TODO(rydmike): Monitor Flutter SDK deprecation of buttonTheme.
       // Since the old buttons have been deprecated in Flutter 2.0.0
@@ -7157,10 +7162,16 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.chipTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
-              selectedSchemeColor: subTheme.chipSelectedSchemeColor,
-              // secondarySelectedSchemeColor: SchemeColor.primaryContainer,
+              // TODO(rydmike): Review and test this fallback!
+              selectedSchemeColor: subTheme.chipSecondarySelectedSchemeColor ??
+                  subTheme.chipSelectedSchemeColor,
+              secondarySelectedSchemeColor: SchemeColor.primaryContainer,
               deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
-              labelStyle: effectiveTextTheme.labelLarge!,
+              // TODO(rydmike): Review and test this fallback!
+              labelStyle:
+                  subTheme.chipLabelStyle ?? effectiveTextTheme.labelLarge!,
+              // TODO(rydmike): Review and test this style!
+              secondaryLabelStyle: subTheme.chipSecondaryLabelStyle,
               radius: subTheme.chipRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useTintedDisable: subTheme.tintedDisabledControls,
@@ -7176,7 +7187,8 @@ class FlexColorScheme with Diagnosticable {
                   labelStyle: effectiveTextTheme.bodyLarge!,
                 ),
       //
-      // dataTableTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
+      // Data Table Theme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
+      dataTableTheme: useSubThemes ? const DataTableThemeData() : null,
       //
       // DatePicker theme
       datePickerTheme: useSubThemes
@@ -7207,6 +7219,8 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.dialogElevation,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              titleTextStyle: subTheme.dialogTitleTextStyle,
+              contentTextStyle: subTheme.dialogContentTextStyle,
             )
           : null,
       //
@@ -7266,6 +7280,7 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // expansionTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
+      expansionTileTheme: useSubThemes ? const ExpansionTileThemeData() : null,
       //
       // FilledButton Theme.
       filledButtonTheme: useSubThemes
@@ -7292,6 +7307,7 @@ class FlexColorScheme with Diagnosticable {
               useShape: subTheme.fabUseShape,
               alwaysCircular: subTheme.fabAlwaysCircular,
               useTintedInteraction: subTheme.interactionEffects,
+              extendedTextStyle: subTheme.fabExtendedTextStyle,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -7313,9 +7329,8 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
-      listTileTheme: const ListTileThemeData(),
+      listTileTheme: useSubThemes ? const ListTileThemeData() : null,
       //
-
       // MenuBar theme, used by MenuBar.
       menuBarTheme: useSubThemes
           ? FlexSubThemes.menuBarTheme(
@@ -7343,6 +7358,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.menuIndicatorRadius,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              textStyle: subTheme.menuButtonTextStyle,
             )
           : null,
       //
@@ -7496,6 +7512,8 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // progressIndicatorTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      progressIndicatorTheme:
+          useSubThemes ? const ProgressIndicatorThemeData() : null,
       //
       // Radio Theme.
       radioTheme: useSubThemes
@@ -7508,6 +7526,12 @@ class FlexColorScheme with Diagnosticable {
               useMaterial3: useMaterial3,
             )
           : null,
+      //
+      // searchBarTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      searchBarTheme: useSubThemes ? const SearchBarThemeData() : null,
+      //
+      // searchViewTheme: NOT YET DEFINED BY FCS. USE: .copyWith
+      searchViewTheme: useSubThemes ? const SearchViewThemeData() : null,
       //
       // SegmentedButton Theme.
       segmentedButtonTheme: useSubThemes
@@ -7558,6 +7582,7 @@ class FlexColorScheme with Diagnosticable {
                 blend: colorScheme.primary,
                 brightness: colorScheme.brightness,
               ),
+              contentTextStyle: subTheme.snackBarContentTextStyle,
             )
           : null,
       //
@@ -7679,6 +7704,10 @@ class FlexColorScheme with Diagnosticable {
               elementRadius: subTheme.timePickerElementRadius,
               inputDecorationTheme: effectiveInputDecorationTheme,
               useInputDecoratorTheme: subTheme.useInputDecoratorThemeInDialogs,
+              dayPeriodTextStyle: subTheme.timePickerDayPeriodTextStyle,
+              dialTextStyle: subTheme.timePickerDialTextStyle,
+              helpTextStyle: subTheme.timePickerHelpTextStyle,
+              hourMinuteTextStyle: subTheme.timePickerHourMinuteTextStyle,
               useMaterial3: useMaterial3,
             )
           : null,
@@ -7698,6 +7727,7 @@ class FlexColorScheme with Diagnosticable {
               visualDensity: visualDensity,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              textStyle: subTheme.toggleButtonsTextStyle,
               useMaterial3: useMaterial3,
             )
           : null,

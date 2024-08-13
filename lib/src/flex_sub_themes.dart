@@ -685,6 +685,14 @@ class FlexSubThemes {
     /// descendant [AppBar] widgets.
     final Color? shadowColor,
 
+    /// Overrides the default value of the [AppBar.toolbarTextStyle]
+    /// property in all descendant [AppBar] widgets.
+    final TextStyle? toolbarTextStyle,
+
+    /// Overrides the default value of [AppBar.titleTextStyle]
+    /// property in all descendant [AppBar] widgets.
+    final TextStyle? titleTextStyle,
+
     /// Overrides the default value of [AppBar.surfaceTintColor] in all
     /// descendant [AppBar] widgets.
     final Color? surfaceTintColor,
@@ -704,6 +712,8 @@ class FlexSubThemes {
       systemOverlayStyle: systemOverlayStyle,
       shadowColor: shadowColor,
       surfaceTintColor: surfaceTintColor,
+      toolbarTextStyle: toolbarTextStyle,
+      titleTextStyle: titleTextStyle,
       // TODO(rydmike): This is a workaround to make tint elevation animate.
       // See issue https://github.com/flutter/flutter/issues/131042.
       shape: const RoundedRectangleBorder(),
