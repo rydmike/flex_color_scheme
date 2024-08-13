@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 12, 2024**
+**Aug 13, 2024**
 
 **PACKAGE**
 
@@ -27,22 +27,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 - Add 
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
-- Add TabBar theme property `tabAlignment`.
-- Add TextStyles for `FlexSubThemesData` so that:
-  - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle`
-  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogTitleTextStyle`
-  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogContentTextStyle`
-  - `FlexSubThemes.floatingActionButtonTheme` **uses** `FlexSubThemesData.fabExtendedTextStyle`
-  - `FlexSubThemes.menuButtonTheme` **uses** `FlexSubThemesData.menuButtonTextStyle`
-  - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle`
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDayPeriodTextStyle`
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDialTextStyle`,
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHelpTextStyle`,
-  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHourMinuteTextStyle`,
-  - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle`
-- Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData`.
-  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
+- Add TabBar theme property `tabAlignment`. 
+   
 - Updates and features for `Chip` theming.
+  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. TODO: More REVIEW. Add support in `FlexColorScheme` sub theme call.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
 - AppBar: Option to decouple foreground/background colors. (Maybe push to 8.1.0)
 - FAB: Option to decoupled foreground/background color. (Maybe push to 8.1.0)
@@ -54,6 +42,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - InputDecorator: Platform adaptive radius. (Maybe push to 8.1.0)
 
 **POTENTIAL TODOS or maybe in Version 8.1.0 or later**
+- Not possible to use custom error colors with toDark generated schemes, maybe keep it so?
 - Schemes: Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
 - Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 or wait for Flutter support in SDK).
 - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
@@ -86,6 +75,24 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
 
+- Added TextStyles for `FlexSubThemesData` so that:
+  - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarToolbarTextStyle` for its `toolbarTextStyle`.
+  - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarTitleTextStyle` for its `titleTextStyle`.
+  - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipLabelStyle` for its `labelStyle`.
+  - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle` for its `secondaryLabelStyle`.
+  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogTitleTextStyle` for its `titleTextStyle`.
+  - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogContentTextStyle` for its `contentTextStyle`.
+  - `FlexSubThemes.floatingActionButtonTheme` **uses** `FlexSubThemesData.fabExtendedTextStyle` for its `extendedTextStyle`.
+  - `FlexSubThemes.menuButtonTheme` **uses** `FlexSubThemesData.menuButtonTextStyle` for its `textStyle`.  
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDayPeriodTextStyle` for its `dayPeriodTextStyle`.
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerDialTextStyle` for its `dialTextStyle`.,
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHelpTextStyle` for its `helpTextStyle`.,
+  - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHourMinuteTextStyle` for its `hourMinuteTextStyle`.,
+  - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle` for its `textStyle`.
+  - `FlexSubThemes.segmentedButtonTheme` **uses** `FlexSubThemesData.segmentedButtonTextStyle` for its `textStyle`.  
+  - final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle,
+  - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle` for its `contentTextStyle`.
+- Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
 - Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories.
 - Added the new surface colors to `FlexSchemeSurfaceColors`.
 - Added new on colors to `FlexSchemeOnColors`.
@@ -126,9 +133,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Add code gen for the new ColorScheme colors introduced in Flutter 3.22.
 - Add showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
 - Add showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
+- Add code gen for custom error colors in the Playground.
 
 **TODO PLAYGROUND AND EXAMPLES**
 
+- Add set error colors also on ColorScheme panel? Now only possible on input colors.
 - Add to set `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),`
 - Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switches?
