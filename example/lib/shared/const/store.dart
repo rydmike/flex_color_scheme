@@ -450,6 +450,16 @@ class Store {
   // Default value for the useM3ErrorColor, also to reset settings.
   static const bool defaultUseM3ErrorColors = false;
 
+  // Key used to read and save the useMonoSurfacesLight value.
+  static const String keyUseMonoSurfacesLight = 'useMonoSurfacesLight';
+  // Default value for the useMonoSurfacesLight, also to reset settings.
+  static const bool defaultUseMonoSurfacesLight = false;
+
+  // Key used to read and save the useMonoSurfacesDark value.
+  static const String keyUseMonoSurfacesDark = 'useMonoSurfacesDark';
+  // Default value for the useMonoSurfacesDark, also to reset settings.
+  static const bool defaultUseMonoSurfacesDark = false;
+
   // Key used to read and save the onMainsUseBWLight value.
   static const String keyOnMainsUseBWLight = 'onMainsUseBWLight';
   // Default value for the onMainsUseBWLight, also to reset settings.
