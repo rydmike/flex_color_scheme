@@ -8,9 +8,9 @@ import '../shared/widgets/app/responsive_scaffold.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
+import '../shared/widgets/universal/header_card_stateful.dart';
 import '../shared/widgets/universal/page_body.dart';
 import '../shared/widgets/universal/showcase_material.dart';
-import '../shared/widgets/universal/stateful_header_card.dart';
 import '../shared/widgets/universal/theme_mode_switch.dart';
 
 // -----------------------------------------------------------------------------
@@ -184,7 +184,7 @@ class _MainPanelState extends State<_MainPanel> {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.gradient_outlined, color: iconColor),
       title: const Text('Theme'),
       child: Column(
@@ -237,7 +237,7 @@ class _ButtonsSwitchesIconsShowcase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.crop_16_9_outlined, color: iconColor),
       title: const Text('Buttons, Switches and Icons'),
       child: const Padding(
@@ -330,7 +330,7 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.tune, color: iconColor),
       title: const Text('Tooltips, Progress Indicators and Sliders'),
       child: const Padding(
@@ -380,7 +380,7 @@ class _TextInputFieldShowcase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.pin_outlined, color: iconColor),
       title: const Text('TextFields and Menus'),
       child: const Padding(
@@ -433,7 +433,7 @@ class _AppTabBottomSearchBars extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.tab_outlined, color: iconColor),
       title: const Text('AppBar TabBar BottomAppBar and SearchBar'),
       child: const Padding(
@@ -478,7 +478,7 @@ class _BottomNavigationBarsShowCase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.video_label, color: iconColor),
       title: const Text('Bottom Navigation'),
       child: const Padding(
@@ -508,7 +508,7 @@ class _NavigationRailShowCase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
       child: const NavigationRailShowcase(explain: true),
@@ -528,7 +528,7 @@ class _NavigationDrawerShowCase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.featured_video_outlined, color: iconColor),
       title: const Text('NavigationDrawer'),
       child: const Padding(
@@ -558,7 +558,7 @@ class _DialogShowcase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.branding_watermark_outlined, color: iconColor),
       title: const Text('Dialogs'),
       child: const Column(
@@ -591,7 +591,7 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.call_to_action_outlined, color: iconColor),
       title: const Text('Material, Banner, Sheet & Snack'),
       child: const Padding(
@@ -631,7 +631,7 @@ class _CardShowcase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
         leading: Icon(Icons.picture_in_picture_alt_outlined, color: iconColor),
         title: const Text('Card'),
         child: const Padding(
@@ -662,7 +662,7 @@ class _ListTileShowcase extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTiles'),
       child: const Column(
@@ -704,7 +704,7 @@ class _TextThemeShowcaseState extends State<_TextThemeShowcase> {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.font_download_outlined, color: iconColor),
       title: const Text('TextTheme'),
       child: Column(
@@ -750,7 +750,7 @@ class _PrimaryTextThemeShowcaseState extends State<_PrimaryTextThemeShowcase> {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.font_download, color: iconColor),
       title: const Text('PrimaryTextTheme'),
       child: Column(

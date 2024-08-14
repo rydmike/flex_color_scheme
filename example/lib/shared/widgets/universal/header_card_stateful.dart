@@ -8,7 +8,7 @@ import '../../utils/colors_are_close.dart';
 /// The open reveal is animated.
 ///
 /// The ListTile and its revealed child are wrapped in a Card widget. The
-/// [StatefulHeaderCard] is primarily designed to be placed on [Scaffold] using
+/// [HeaderCardStateful] is primarily designed to be placed on [Scaffold] using
 /// its themed background color.
 ///
 /// The header and background color of the [Card] get a slight primary color
@@ -18,8 +18,8 @@ import '../../utils/colors_are_close.dart';
 ///
 /// This is a Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.
-class StatefulHeaderCard extends StatefulWidget {
-  const StatefulHeaderCard({
+class HeaderCardStateful extends StatefulWidget {
+  const HeaderCardStateful({
     super.key,
     this.leading,
     this.title,
@@ -100,10 +100,10 @@ class StatefulHeaderCard extends StatefulWidget {
   final Widget? child;
 
   @override
-  State<StatefulHeaderCard> createState() => _StatefulHeaderCardState();
+  State<HeaderCardStateful> createState() => _HeaderCardStatefulState();
 }
 
-class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
+class _HeaderCardStatefulState extends State<HeaderCardStateful> {
   late bool _isOpen;
 
   @override
@@ -113,7 +113,7 @@ class _StatefulHeaderCardState extends State<StatefulHeaderCard> {
   }
 
   @override
-  void didUpdateWidget(covariant StatefulHeaderCard oldWidget) {
+  void didUpdateWidget(covariant HeaderCardStateful oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isOpen != oldWidget.isOpen) _isOpen = widget.isOpen;
   }
