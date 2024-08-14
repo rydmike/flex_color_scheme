@@ -136,6 +136,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Add code gen for custom error colors in the Playground.
 - Make FSS seed options unavailable when an MCU variant is selected.
 - Add FFS seed option monochrome surfaces.
+- Adjust both HeaderCards background color to work with new ColorScheme surface colors.
 
 **TODO PLAYGROUND AND EXAMPLES**
 
@@ -149,6 +150,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Make Chips presentation even better (already improved a lot).
 - ADD: To IconButtons, add a text column explaining the type, as on the Chips panel.
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
+- FIX: Card not showing correct default border radius in M2 mode
 
 ## 7.3.1
 

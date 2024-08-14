@@ -131,12 +131,8 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
-    // TODO(rydmike): Monitor deprecation of cardColor.
-    // Use passed in color for the Card, or scheme surface, used for Card.
-    // As long as cardColor exist in ThemeData, we use it here, to demonstrate
-    // the effect it has on an app using Card with default background in M2,
-    // if it does not have correct ColorScheme assignment in the theme.
-    final Color cardColor = widget.color ?? theme.cardColor;
+    final Color cardColor =
+        widget.color ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
     // Compute a header color with fixed primary blend from the card color,
     final Color headerColor = Color.alphaBlend(
         scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
