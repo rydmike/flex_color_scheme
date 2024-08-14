@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../controllers/theme_controller.dart';
 import '../../pages/page_examples.dart';
-import '../universal/stateful_header_card.dart';
+import '../universal/header_card_stateful.dart';
 
 // StatefulHeaderCard wrapper of PageExamples.
 //
@@ -25,7 +25,7 @@ class ShowSubPages extends StatelessWidget {
             theme.colorScheme.onSurface)
         : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
             theme.colorScheme.onSurface);
-    return StatefulHeaderCard(
+    return HeaderCardStateful(
       leading: Icon(Icons.article_outlined, color: iconColor),
       title: const Text('Page Examples'),
       child: PageExamples(controller: controller),
