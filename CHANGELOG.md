@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 13, 2024**
+**Aug 14, 2024**
 
 **PACKAGE**
 
@@ -134,6 +134,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Add showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
 - Add showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
 - Add code gen for custom error colors in the Playground.
+- Make FSS seed options unavailable when an MCU variant is selected.
+- Add FFS seed option monochrome surfaces.
 
 **TODO PLAYGROUND AND EXAMPLES**
 

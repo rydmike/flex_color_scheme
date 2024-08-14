@@ -102,20 +102,36 @@ class ColorSchemeSettings extends StatelessWidget {
               style: theme.textTheme.labelSmall,
             ),
           ),
+        ShowInputColorsSwitch(controller: controller),
+        const Divider(height: 1),
         if (_isFlutterScheme)
           const ListTile(
-            dense: true,
-            title: Text('Additional seed generation options are not '
-                'available when using Flutter MCU dynamic scheme variants. '
-                'Use a variant based on FSS FlexTones for the options below.'),
+            title: Text('Additional options unavailable when using '
+                'MCU dynamic schemes'),
+            subtitle:
+                Text('Use a FSS FlexTones variant to enable options below'),
           )
         else
           const ListTile(
-            dense: true,
-            title: Text('These additional seed generated scheme options are '
-                'available when using FSS FlexTones based scheme variants:'),
+            title: Text('Additional options '
+                'available when using FSS FlexTones based variants'),
+            subtitle: Text('Settings are separate for light and dark mode'),
           ),
         if (isLight) ...<Widget>[
+          SwitchListTileReveal(
+            title: const Text('Monochrome surfaces'),
+            subtitleDense: true,
+            subtitle: const Text(
+              'All seed generated surface colors are pure greyscale with no '
+              'color tint.\n',
+            ),
+            value: controller.useMonoSurfacesLight &&
+                controller.useKeyColors &&
+                !_isFlutterScheme,
+            onChanged: controller.useKeyColors && !_isFlutterScheme
+                ? controller.setUseMonoSurfacesLight
+                : null,
+          ),
           SwitchListTileReveal(
             title: const Text('Black & white main onColors'),
             subtitleDense: true,
@@ -166,6 +182,20 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
         ] else ...<Widget>[
           SwitchListTileReveal(
+            title: const Text('Monochrome surfaces'),
+            subtitleDense: true,
+            subtitle: const Text(
+              'All seed generated surface colors are pure greyscale with no '
+              'color tint.\n',
+            ),
+            value: controller.useMonoSurfacesDark &&
+                controller.useKeyColors &&
+                !_isFlutterScheme,
+            onChanged: controller.useKeyColors && !_isFlutterScheme
+                ? controller.setUseMonoSurfacesDark
+                : null,
+          ),
+          SwitchListTileReveal(
             title: const Text('Black & white main onColors'),
             subtitleDense: true,
             subtitle: const Text(
@@ -214,8 +244,6 @@ class ColorSchemeSettings extends StatelessWidget {
                 : null,
           ),
         ],
-        const Divider(),
-        ShowInputColorsSwitch(controller: controller),
         // TODO(rydmike): Remove as not used 29.7.2023
         //
         // if (!isLight && controller.schemeIndex ==

@@ -230,6 +230,10 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = await _themeService.load(
         Store.keyUseM3ErrorColors, Store.defaultUseM3ErrorColors);
     //
+    _useMonoSurfacesLight = await _themeService.load(
+        Store.keyUseMonoSurfacesLight, Store.defaultUseMonoSurfacesLight);
+    _useMonoSurfacesDark = await _themeService.load(
+        Store.keyUseMonoSurfacesDark, Store.defaultUseMonoSurfacesDark);
     _onMainsUseBWLight = await _themeService.load(
         Store.keyOnMainsUseBWLight, Store.defaultOnMainsUseBWLight);
     _onMainsUseBWDark = await _themeService.load(
@@ -928,6 +932,8 @@ class ThemeController with ChangeNotifier {
     setUsedFlexToneSetup(Store.defaultUsedFlexToneSetup, false);
     setUseM3ErrorColors(Store.defaultUseM3ErrorColors, false);
     //
+    setUseMonoSurfacesLight(Store.defaultUseMonoSurfacesLight, false);
+    setUseMonoSurfacesDark(Store.defaultUseMonoSurfacesDark, false);
     setOnMainsUseBWLight(Store.defaultOnMainsUseBWLight, false);
     setOnMainsUseBWDark(Store.defaultOnMainsUseBWDark, false);
     setOnSurfacesUseBWLight(Store.defaultOnSurfacesUseBWLight, false);
@@ -2873,6 +2879,26 @@ class ThemeController with ChangeNotifier {
     _useM3ErrorColors = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseM3ErrorColors, value));
+  }
+
+  late bool _useMonoSurfacesLight;
+  bool get useMonoSurfacesLight => _useMonoSurfacesLight;
+  void setUseMonoSurfacesLight(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _useMonoSurfacesLight) return;
+    _useMonoSurfacesLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyUseMonoSurfacesLight, value));
+  }
+
+  late bool _useMonoSurfacesDark;
+  bool get useMonoSurfacesDark => _useMonoSurfacesDark;
+  void setUseMonoSurfacesDark(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _useMonoSurfacesDark) return;
+    _useMonoSurfacesDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyUseMonoSurfacesDark, value));
   }
 
   late bool _onMainsUseBWLight;

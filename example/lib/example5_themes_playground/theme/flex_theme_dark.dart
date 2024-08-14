@@ -432,6 +432,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             ? null
             : FlexSchemeVariant.values[controller.usedFlexToneSetup]
                 .tones(Brightness.dark)
+                .monochromeSurfaces(controller.useMonoSurfacesDark)
                 .onMainsUseBW(controller.onMainsUseBWDark)
                 .onSurfacesUseBW(controller.onSurfacesUseBWDark)
                 .surfacesUseBW(controller.surfacesUseBWDark),

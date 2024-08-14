@@ -502,6 +502,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             ? null
             : FlexSchemeVariant.values[controller.usedFlexToneSetup]
                 .tones(Brightness.light)
+                .monochromeSurfaces(controller.useMonoSurfacesLight)
                 .onMainsUseBW(controller.onMainsUseBWLight)
                 .onSurfacesUseBW(controller.onSurfacesUseBWLight)
                 .surfacesUseBW(controller.surfacesUseBWLight),
