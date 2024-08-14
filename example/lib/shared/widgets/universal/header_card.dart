@@ -144,12 +144,8 @@ class HeaderCard extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
-    // TODO(rydmike): Monitor deprecation of cardColor.
-    // Use passed in color for the Card, or scheme surface, used for Card.
-    // As long as cardColor exist in ThemeData, we use it here, to demonstrate
-    // the effect it has on an app using Card with default background in M2,
-    // if it does not have correct ColorScheme assignment in the theme.
-    final Color cardColor = color ?? theme.cardColor;
+    final Color cardColor =
+        color ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
     // Compute a header color with fixed primary blend from the card color,
     // if one was not provided
     final Color headerColor = headingColor ??
@@ -184,8 +180,7 @@ class HeaderCard extends StatelessWidget {
 
     return FocusTraversalGroup(
       child: Card(
-        // TODO(rydmike): We need better container colors for the app!
-        color: scheme.surfaceContainerLow,
+        color: cardColor,
         margin: margin,
         shape: shapeBorder,
         elevation: elevation,
