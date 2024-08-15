@@ -150,6 +150,17 @@ class DialogSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    final String datePickerHeaderBackgroundDefault = controller
+                .dialogBackgroundSchemeColor ==
+            null
+        ? controller.useMaterial3
+            ? 'default (surfaceContainerHigh)'
+            : 'default (primary)'
+        : controller.useMaterial3
+            // ignore: lines_longer_than_80_chars
+            ? 'default (${SchemeColor.values[controller.dialogBackgroundSchemeColor!.index].name})'
+            : 'default (primary)';
+
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -641,11 +652,7 @@ class DialogSettings extends StatelessWidget {
         const DatePickerDialogShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Header background color'),
-          // TODO(rydmike): Should be equal to dialog background color if
-          //  a custom color is set in M3, because that is what it gets.
-          labelForDefault: controller.useMaterial3
-              ? 'default (surfaceContainerHigh)'
-              : 'default (primary)',
+          labelForDefault: datePickerHeaderBackgroundDefault,
           index: controller.datePickerHeaderBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
