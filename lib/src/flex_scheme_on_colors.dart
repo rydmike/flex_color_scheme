@@ -48,9 +48,11 @@ class FlexSchemeOnColors with Diagnosticable {
     this.onSurfaceContainerHighest,
     this.onSurfaceContainerHigh,
     this.onInverseSurface,
-    required this.onBackground,
     required this.onError,
     this.onErrorContainer,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    this.onBackground,
   });
 
   /// A color that is clearly legible when drawn on primary color.
@@ -105,7 +107,9 @@ class FlexSchemeOnColors with Diagnosticable {
 
   /// A color that is clearly legible when drawn on background color also used
   /// as on color for scaffold background color.
-  final Color onBackground;
+  @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+      'deprecated the color, it has no function and should not be used.')
+  final Color? onBackground;
 
   /// A color that is clearly legible when drawn on error color.
   final Color onError;
@@ -131,7 +135,6 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? tertiary,
     Color? tertiaryContainer,
     required Color surface,
-    Color? surfaceVariant,
     Color? surfaceDim,
     Color? surfaceBright,
     Color? surfaceContainerLowest,
@@ -140,7 +143,6 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? surfaceContainerHigh,
     Color? surfaceContainerHighest,
     Color? inverseSurface,
-    required Color background,
     required Color error,
     Color? errorContainer,
     Color? onPrimary,
@@ -159,7 +161,6 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onSurfaceContainerHigh,
     Color? onSurfaceContainerHighest,
     Color? onInverseSurface,
-    Color? onBackground,
     Color? onError,
     Color? onErrorContainer,
     int primaryAlpha = 0,
@@ -170,17 +171,22 @@ class FlexSchemeOnColors with Diagnosticable {
     int tertiaryContainerAlpha = 0,
     int surfaceAlpha = 0,
     int surfaceVariantAlpha = 0,
-    // int surfaceDimAlpha = 0,
-    // int surfaceBrightAlpha = 0,
-    // int surfaceContainerLowestAlpha = 0,
-    // int surfaceContainerLowAlpha = 0,
-    // int surfaceContainerAlpha = 0,
-    // int surfaceContainerHighAlpha = 0,
-    // int surfaceContainerHighestAlpha = 0,
     int inverseSurfaceAlpha = 0,
-    int backgroundAlpha = 0,
     int errorAlpha = 0,
     int errorContainerAlpha = 0,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    Color? background,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    Color? onBackground,
+    @Deprecated('This property was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the related color, it has no function and should '
+        'not be used.')
+    int backgroundAlpha = 0,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    Color? surfaceVariant,
   }) {
     // Check brightness of primary, secondary, error, surface and background
     // colors, then calculate appropriate colors for their onColors, if an
@@ -234,12 +240,9 @@ class FlexSchemeOnColors with Diagnosticable {
             ? Colors.white.blendAlpha(surface, surfaceAlpha)
             : Colors.black.blendAlpha(surface, surfaceAlpha));
     final Color usedOnSurfaceVariant = onSurfaceVariant ??
-        (ThemeData.estimateBrightnessForColor(surfaceVariant ?? surface) ==
-                Brightness.dark
-            ? Colors.white
-                .blendAlpha(surfaceVariant ?? surface, surfaceVariantAlpha)
-            : Colors.black
-                .blendAlpha(surfaceVariant ?? surface, surfaceVariantAlpha));
+        (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
+            ? Colors.white.blendAlpha(surface, surfaceVariantAlpha)
+            : Colors.black.blendAlpha(surface, surfaceVariantAlpha));
 
     final Color usedOnSurfaceDim = onSurfaceDim ??
         (ThemeData.estimateBrightnessForColor(surfaceDim ?? surface) ==
@@ -308,10 +311,7 @@ class FlexSchemeOnColors with Diagnosticable {
         (ThemeData.estimateBrightnessForColor(invSurface) == Brightness.dark
             ? Colors.white.blendAlpha(invSurface, inverseSurfaceAlpha)
             : Colors.black.blendAlpha(invSurface, inverseSurfaceAlpha));
-    final Color usedOnBackground = onBackground ??
-        (ThemeData.estimateBrightnessForColor(background) == Brightness.dark
-            ? Colors.white.blendAlpha(background, backgroundAlpha)
-            : Colors.black.blendAlpha(background, backgroundAlpha));
+
     final Color usedOnError = onError ??
         (estimateErrorBrightness(error) == Brightness.dark
             ? Colors.white.blendAlpha(error.brighten(20), errorAlpha)
@@ -343,7 +343,6 @@ class FlexSchemeOnColors with Diagnosticable {
       onSurfaceContainerHigh: usedOnSurfaceContainerHigh,
       onSurfaceContainerHighest: usedOnSurfaceContainerHighest,
       onInverseSurface: usedOnInverseSurface,
-      onBackground: usedOnBackground,
       onError: usedOnError,
       onErrorContainer: usedOnErrorContainer,
     );
@@ -386,9 +385,11 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onSurfaceContainerHigh,
     Color? onSurfaceContainerHighest,
     Color? onInverseSurface,
-    Color? onBackground,
     Color? onError,
     Color? onErrorContainer,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    Color? onBackground,
   }) {
     return FlexSchemeOnColors(
       onPrimary: onPrimary ?? this.onPrimary,
@@ -411,7 +412,6 @@ class FlexSchemeOnColors with Diagnosticable {
       onSurfaceContainerHighest:
           onSurfaceContainerHighest ?? this.onSurfaceContainerHighest,
       onInverseSurface: onInverseSurface ?? this.onInverseSurface,
-      onBackground: onBackground ?? this.onBackground,
       onError: onError ?? this.onError,
       onErrorContainer: onErrorContainer ?? this.onErrorContainer,
     );
@@ -439,7 +439,6 @@ class FlexSchemeOnColors with Diagnosticable {
         other.onSurfaceContainerHigh == onSurfaceContainerHighest &&
         other.onSurfaceContainerHighest == onSurface &&
         other.onInverseSurface == onInverseSurface &&
-        other.onBackground == onBackground &&
         other.onError == onError &&
         other.onErrorContainer == onErrorContainer;
   }
@@ -463,7 +462,6 @@ class FlexSchemeOnColors with Diagnosticable {
         onSurfaceContainerHigh,
         onSurfaceContainerHighest,
         onInverseSurface,
-        onBackground,
         onError,
         onErrorContainer,
       );
@@ -492,7 +490,6 @@ class FlexSchemeOnColors with Diagnosticable {
     properties.add(
         ColorProperty('onSurfaceContainerHighest', onSurfaceContainerHighest));
     properties.add(ColorProperty('onInverseSurface', onInverseSurface));
-    properties.add(ColorProperty('onBackground', onBackground));
     properties.add(ColorProperty('onError', onError));
     properties.add(ColorProperty('onErrorContainer', onErrorContainer));
   }

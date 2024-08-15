@@ -16,8 +16,8 @@ import 'flex_surface_mode.dart';
 /// [FlexSchemeSurfaceColors.blend] factory. Before version 4.0 the
 /// [FlexSchemeSurfaceColors.from] factory was used.
 ///
-/// Included colors are [surface], [surfaceVariant], [inverseSurface] and
-/// [background], plus blended surface colors
+/// Included colors are [surface] and [inverseSurface] plus
+/// plus blended surface colors
 /// for [scaffoldBackground] and [dialogBackground], which are not a part
 /// of Flutter's standard [ColorScheme].
 ///
@@ -32,7 +32,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// the [FlexSchemeSurfaceColors.from] factory.
   const FlexSchemeSurfaceColors({
     required this.surface,
-    Color? surfaceVariant,
     Color? surfaceDim,
     Color? surfaceBright,
     Color? surfaceContainerLowest,
@@ -41,11 +40,15 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     Color? surfaceContainerHigh,
     Color? surfaceContainerHighest,
     Color? inverseSurface,
-    required this.dialogBackground,
-    required this.background,
     required this.scaffoldBackground,
-  })  : _surfaceVariant = surfaceVariant,
-        _surfaceDim = surfaceDim,
+    required this.dialogBackground,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    this.surfaceVariant,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    this.background,
+  })  : _surfaceDim = surfaceDim,
         _surfaceBright = surfaceBright,
         _surfaceContainerLowest = surfaceContainerLowest,
         _surfaceContainerLow = surfaceContainerLow,
@@ -58,15 +61,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   ///
   /// The default background color of [Material] of type card.
   final Color surface;
-
-  /// A color variant of [surface] that can be used for differentiation
-  /// against a component using [surface]. Local variable with initializer used
-  /// in order to not break past const interface, with past required props.
-  final Color? _surfaceVariant;
-
-  /// A color variant of [surface] that can be used for differentiation against
-  /// a component using [surface]. Defaults to [surface] as fallback.
-  Color get surfaceVariant => _surfaceVariant ?? surface;
 
   /// A color variant of [surface] that can be used for differentiation
   /// against a component using [surface]. Local variable with initializer used
@@ -147,13 +141,21 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// Typically same as the surface color.
   final Color dialogBackground;
 
+  /// The color of the [Scaffold] background.
+  final Color scaffoldBackground;
+
+  /// A color variant of [surface] that can be used for differentiation against
+  /// a component using [surface]. Defaults to [surface] as fallback.
+  @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+      'deprecated the color, it has no function and should not be used.')
+  final Color? surfaceVariant;
+
   /// A color that typically appears behind scrollable content.
   ///
   /// The default background color of [Material] of type canvas.
-  final Color background;
-
-  /// The color of the [Scaffold] background.
-  final Color scaffoldBackground;
+  @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+      'deprecated the color, it has no function and should not be used.')
+  final Color? background;
 
   /// Create nuanced surface colors using pre-defined behavior via enum
   /// [FlexSurfaceMode] property `surfaceMode` or make totally custom color
@@ -247,7 +249,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     FlexSchemeSurfaceColors blendColor = blendColors ??
         FlexSchemeSurfaceColors(
           surface: scheme.primary,
-          surfaceVariant: scheme.primary,
           surfaceDim: scheme.primary,
           surfaceBright: scheme.primary,
           surfaceContainerLowest: scheme.primary,
@@ -257,7 +258,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surfaceContainerHighest: scheme.primary,
           inverseSurface: scheme.primary,
           dialogBackground: scheme.primary,
-          background: scheme.primary,
           scaffoldBackground: scheme.primary,
         );
     // Set dialog blend colors to secondary variant color for modes using it.
@@ -273,7 +273,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         (isLight
             ? const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.lightSurfaceVariant,
                 surfaceDim: FlexColor.lightM3SurfaceDim,
                 surfaceBright: FlexColor.lightM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.lightM3SurfaceContainerLowest,
@@ -283,13 +282,11 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
-                background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
                 dialogBackground: FlexColor.materialLightSurface,
               )
             : const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.darkSurfaceVariant,
                 surfaceDim: FlexColor.darkM3SurfaceDim,
                 surfaceBright: FlexColor.darkM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.darkM3SurfaceContainerLowest,
@@ -299,7 +296,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
-                background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               ));
@@ -322,7 +318,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.lightSurfaceVariant,
                 surfaceDim: FlexColor.lightM3SurfaceDim,
                 surfaceBright: FlexColor.lightM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.lightM3SurfaceContainerLowest,
@@ -332,7 +327,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
-                background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
                 dialogBackground: FlexColor.materialLightSurface,
               );
@@ -340,7 +334,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.darkSurfaceVariant,
                 surfaceDim: FlexColor.darkM3SurfaceDim,
                 surfaceBright: FlexColor.darkM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.darkM3SurfaceContainerLowest,
@@ -350,7 +343,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
-                background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               );
@@ -366,7 +358,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.lightSurface,
-                surfaceVariant: FlexColor.lightSurfaceVariant,
                 surfaceDim: FlexColor.lightM3SurfaceDim,
                 surfaceBright: FlexColor.lightM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.lightM3SurfaceContainerLowest,
@@ -376,7 +367,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.darkSurface,
-                background: FlexColor.lightBackground,
                 scaffoldBackground: FlexColor.lightScaffoldBackground,
                 dialogBackground: FlexColor.lightSurface,
               );
@@ -384,7 +374,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.darkSurface,
-                surfaceVariant: FlexColor.darkSurfaceVariant,
                 surfaceDim: FlexColor.darkM3SurfaceDim,
                 surfaceBright: FlexColor.darkM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.darkM3SurfaceContainerLowest,
@@ -394,7 +383,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.lightSurface,
-                background: FlexColor.darkBackground,
                 scaffoldBackground: FlexColor.darkScaffoldBackground,
                 dialogBackground: FlexColor.darkSurface,
               );
@@ -412,7 +400,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.lightSurfaceVariant,
                 surfaceDim: FlexColor.lightM3SurfaceDim,
                 surfaceBright: FlexColor.lightM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.lightM3SurfaceContainerLowest,
@@ -422,7 +409,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
-                background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
                 dialogBackground: FlexColor.materialLightSurface,
               );
@@ -430,7 +416,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.darkSurfaceVariant,
+                // surfaceVariant: FlexColor.darkSurfaceVariant,
                 surfaceDim: FlexColor.darkM3SurfaceDim,
                 surfaceBright: FlexColor.darkM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.darkM3SurfaceContainerLowest,
@@ -440,7 +426,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
-                background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               );
@@ -450,7 +435,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.lightSurface,
-                surfaceVariant: FlexColor.lightSurfaceVariant,
                 surfaceDim: FlexColor.lightM3SurfaceDim,
                 surfaceBright: FlexColor.lightM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.lightM3SurfaceContainerLowest,
@@ -460,7 +444,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.darkSurface,
-                background: FlexColor.lightSurface,
                 scaffoldBackground: FlexColor.lightSurface,
                 dialogBackground: FlexColor.lightSurface,
               );
@@ -468,7 +451,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.darkSurface,
-                surfaceVariant: FlexColor.darkSurfaceVariant,
                 surfaceDim: FlexColor.darkM3SurfaceDim,
                 surfaceBright: FlexColor.darkM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.darkM3SurfaceContainerLowest,
@@ -478,7 +460,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.lightSurface,
-                background: FlexColor.darkSurface,
                 scaffoldBackground: FlexColor.darkSurface,
                 dialogBackground: FlexColor.darkSurface,
               );
@@ -497,7 +478,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialLightSurface,
-                surfaceVariant: FlexColor.lightSurfaceVariant,
                 surfaceDim: FlexColor.lightM3SurfaceDim,
                 surfaceBright: FlexColor.lightM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.lightM3SurfaceContainerLowest,
@@ -507,7 +487,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
-                background: FlexColor.materialLightBackground,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
                 dialogBackground: FlexColor.materialLightSurface,
               );
@@ -515,7 +494,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
-                surfaceVariant: FlexColor.darkSurfaceVariant,
                 surfaceDim: FlexColor.darkM3SurfaceDim,
                 surfaceBright: FlexColor.darkM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.darkM3SurfaceContainerLowest,
@@ -525,7 +503,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
-                background: FlexColor.materialDarkBackground,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
                 dialogBackground: FlexColor.materialDarkSurface,
               );
@@ -535,7 +512,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.lightBackground,
-                surfaceVariant: FlexColor.lightSurfaceVariant,
+                // surfaceVariant: FlexColor.lightSurfaceVariant,
                 surfaceDim: FlexColor.lightM3SurfaceDim,
                 surfaceBright: FlexColor.lightM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.lightM3SurfaceContainerLowest,
@@ -545,7 +522,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.darkBackground,
-                background: FlexColor.lightBackground,
                 scaffoldBackground: FlexColor.lightBackground,
                 dialogBackground: FlexColor.lightBackground,
               );
@@ -553,7 +529,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           surface = surfaceColors ??
               const FlexSchemeSurfaceColors(
                 surface: FlexColor.darkBackground,
-                surfaceVariant: FlexColor.darkSurfaceVariant,
                 surfaceDim: FlexColor.darkM3SurfaceDim,
                 surfaceBright: FlexColor.darkM3SurfaceBright,
                 surfaceContainerLowest: FlexColor.darkM3SurfaceContainerLowest,
@@ -563,7 +538,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 surfaceContainerHighest:
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.lightBackground,
-                background: FlexColor.darkBackground,
                 scaffoldBackground: FlexColor.darkBackground,
                 dialogBackground: FlexColor.darkBackground,
               );
@@ -578,9 +552,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     return FlexSchemeSurfaceColors(
       surface: surface.surface
           .blendAlpha(blendColor.surface, alphaValue.surfaceAlpha),
-      surfaceVariant: surface.surfaceVariant.blendAlpha(
-          blendColor.surfaceVariant,
-          alphaValue.surfaceVariantAlpha ~/ surfaceVariantBlendDivide),
       surfaceDim: surface.surfaceDim.blendAlpha(blendColor.surfaceDim,
           alphaValue.surfaceVariantAlpha ~/ surfaceVariantBlendDivide),
       surfaceBright: surface.surfaceBright.blendAlpha(blendColor.surfaceBright,
@@ -604,8 +575,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
           blendColor.inverseSurface, alphaValue.inverseSurfaceAlpha),
       dialogBackground: surface.dialogBackground
           .blendAlpha(blendColor.dialogBackground, alphaValue.dialogAlpha),
-      background: surface.background
-          .blendAlpha(blendColor.background, alphaValue.backgroundAlpha),
       scaffoldBackground: surface.scaffoldBackground
           .blendAlpha(blendColor.scaffoldBackground, alphaValue.scaffoldAlpha),
     );
@@ -614,7 +583,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// Copy the object with one or more provided properties changed.
   FlexSchemeSurfaceColors copyWith({
     Color? surface,
-    Color? surfaceVariant,
     Color? surfaceDim,
     Color? surfaceBright,
     Color? surfaceContainerLowest,
@@ -623,13 +591,17 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     Color? surfaceContainerHigh,
     Color? surfaceContainerHighest,
     Color? inverseSurface,
-    Color? background,
     Color? scaffoldBackground,
     Color? dialogBackground,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    Color? surfaceVariant,
+    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the color, it has no function and should not be used.')
+    Color? background,
   }) {
     return FlexSchemeSurfaceColors(
       surface: surface ?? this.surface,
-      surfaceVariant: surfaceVariant ?? this.surfaceVariant,
       surfaceDim: surfaceDim ?? this.surfaceDim,
       surfaceBright: surfaceBright ?? this.surfaceBright,
       surfaceContainerLowest:
@@ -640,7 +612,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
       surfaceContainerHighest:
           surfaceContainerHighest ?? this.surfaceContainerHighest,
       inverseSurface: inverseSurface ?? this.inverseSurface,
-      background: background ?? this.background,
       scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
       dialogBackground: dialogBackground ?? this.dialogBackground,
     );
@@ -653,7 +624,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     if (other.runtimeType != runtimeType) return false;
     return other is FlexSchemeSurfaceColors &&
         other.surface == surface &&
-        other.surfaceVariant == surfaceVariant &&
         other.surfaceDim == surfaceDim &&
         other.surfaceBright == surfaceBright &&
         other.surfaceContainerLowest == surfaceContainerLowest &&
@@ -662,7 +632,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         other.surfaceContainerHigh == surfaceContainerHigh &&
         other.surfaceContainerHighest == surfaceContainerHighest &&
         other.inverseSurface == inverseSurface &&
-        other.background == background &&
         other.scaffoldBackground == scaffoldBackground &&
         other.dialogBackground == dialogBackground;
   }
@@ -671,7 +640,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   @override
   int get hashCode => Object.hash(
         surface,
-        surfaceVariant,
         surfaceDim,
         surfaceBright,
         surfaceContainerLowest,
@@ -680,7 +648,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
         surfaceContainerHigh,
         surfaceContainerHighest,
         inverseSurface,
-        background,
         scaffoldBackground,
         dialogBackground,
       );
@@ -690,7 +657,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(ColorProperty('surface', surface));
-    properties.add(ColorProperty('surfaceVariant', surfaceVariant));
     properties.add(ColorProperty('surfaceDim', surfaceDim));
     properties.add(ColorProperty('surfaceBright', surfaceBright));
     properties
@@ -701,7 +667,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     properties
         .add(ColorProperty('surfaceContainerHighest', surfaceContainerHighest));
     properties.add(ColorProperty('inverseSurface', inverseSurface));
-    properties.add(ColorProperty('background', background));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('dialogBackground', dialogBackground));
   }

@@ -17,7 +17,6 @@ void main() {
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: Colors.black,
-      onBackground: Colors.black,
       onError: Colors.white,
     );
     // m2, same definition as m1.
@@ -25,7 +24,6 @@ void main() {
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: Colors.black,
-      onBackground: Colors.black,
       onError: Colors.white,
     );
     // m3, one different values than m1 and m2.
@@ -33,7 +31,6 @@ void main() {
       onPrimary: Colors.black, // Different from m1 and m2.
       onSecondary: Colors.white,
       onSurface: Colors.black,
-      onBackground: Colors.black,
       onError: Colors.white,
     );
     // m4, all values different from m1 and m2.
@@ -41,7 +38,6 @@ void main() {
       onPrimary: Colors.black,
       onSecondary: Colors.black,
       onSurface: Colors.white,
-      onBackground: Colors.white,
       onError: Colors.black,
     );
     // Identity and quality tests
@@ -88,7 +84,6 @@ void main() {
           onPrimary: Colors.white,
           onSecondary: Colors.white,
           onSurface: Colors.black,
-          onBackground: Colors.black,
           onError: Colors.white,
         ),
         m1,
@@ -104,7 +99,6 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       secondary: FlexColor.materialLightSecondary,
       surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
     );
     test(
@@ -122,7 +116,6 @@ void main() {
           onSurface: Color(0xff000000),
           onSurfaceVariant: Color(0xff000000),
           onInverseSurface: Color(0xffffffff),
-          onBackground: Color(0xff000000),
           onError: Color(0xffffffff),
           onErrorContainer: Color(0xffffffff),
         ),
@@ -142,9 +135,7 @@ void main() {
           tertiary: FlexColor.materialLightTertiary,
           tertiaryContainer: FlexColor.materialLightTertiaryContainer,
           surface: FlexColor.materialLightSurface,
-          surfaceVariant: FlexColor.materialLightSurface,
           inverseSurface: FlexColor.materialDarkSurface,
-          background: FlexColor.materialLightBackground,
           error: FlexColor.materialLightError,
           errorContainer: FlexColor.materialLightError,
         ),
@@ -158,7 +149,6 @@ void main() {
           onSurface: Color(0xff000000),
           onSurfaceVariant: Color(0xff000000),
           onInverseSurface: Color(0xffffffff),
-          onBackground: Color(0xff000000),
           onError: Color(0xffffffff),
           onErrorContainer: Color(0xffffffff),
         ),
@@ -173,9 +163,7 @@ void main() {
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
       surface: FlexColor.materialLightSurface,
-      surfaceVariant: FlexColor.materialLightSurface,
       inverseSurface: FlexColor.materialDarkSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       errorContainer: FlexColor.materialLightError,
       onPrimary: const Color(0xFF121212),
@@ -187,7 +175,6 @@ void main() {
       onSurface: const Color(0xFFCACCBC),
       onSurfaceVariant: const Color(0xFFFC38CC),
       onInverseSurface: const Color(0xFF6CC9CC),
-      onBackground: const Color(0xFFDD77DD),
       onError: const Color(0xFFAA888A),
       onErrorContainer: const Color(0xFFAA346A),
     );
@@ -208,7 +195,6 @@ void main() {
           onSurface: Color(0xFFCACCBC),
           onSurfaceVariant: Color(0xFFFC38CC),
           onInverseSurface: Color(0xFF6CC9CC),
-          onBackground: Color(0xFFDD77DD),
           onError: Color(0xFFAA888A),
           onErrorContainer: Color(0xFFAA346A),
         ),
@@ -223,7 +209,6 @@ void main() {
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiary,
       surface: FlexColor.materialLightSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       errorContainer: FlexColor.materialLightError,
       onPrimary: const Color(0xFF121212),
@@ -233,7 +218,6 @@ void main() {
       onTertiary: const Color(0xFFE45EEE),
       onTertiaryContainer: const Color(0xFF887788),
       onSurface: const Color(0xFFCCCCCC),
-      onBackground: const Color(0xFFDDDDDD),
       onError: const Color(0xFFAAAAAA),
       onErrorContainer: const Color(0xFFAA346A),
     );
@@ -253,7 +237,6 @@ void main() {
           onSurface: Color(0xffcccccc),
           onSurfaceVariant: Color(0xff000000),
           onInverseSurface: Color(0xffffffff),
-          onBackground: Color(0xffdddddd),
           onError: Color(0xffaaaaaa),
           onErrorContainer: Color(0xFFAA346A),
         ),
@@ -268,9 +251,7 @@ void main() {
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
       surface: FlexColor.materialLightSurface,
-      surfaceVariant: FlexColor.materialLightSurface,
       inverseSurface: FlexColor.materialDarkSurface,
-      background: FlexColor.materialLightBackground,
       error: FlexColor.materialLightError,
       errorContainer: FlexColor.materialLightError,
     );
@@ -290,7 +271,6 @@ void main() {
           onSurface: Color(0xff000000),
           onSurfaceVariant: Color(0xff000000),
           onInverseSurface: Color(0xffffffff),
-          onBackground: Color(0xff000000),
           onError: Color(0xffffffff),
           onErrorContainer: Color(0xffffffff),
         ),
@@ -305,9 +285,7 @@ void main() {
       tertiary: const Color(0xff390303),
       tertiaryContainer: FlexColor.materialLightSecondary,
       surface: FlexColor.materialLightSurface,
-      surfaceVariant: FlexColor.materialLightSurface,
       inverseSurface: FlexColor.materialDarkSurface,
-      background: FlexColor.materialLightBackground,
       error: const Color(0xffedb4b4),
       errorContainer: const Color(0xff812424),
     );
@@ -327,7 +305,6 @@ void main() {
           onSurface: Color(0xff000000),
           onSurfaceVariant: Color(0xff000000),
           onInverseSurface: Color(0xffffffff),
-          onBackground: Color(0xff000000),
           onError: Color(0xff000000),
           onErrorContainer: Color(0xffffffff),
         ),
