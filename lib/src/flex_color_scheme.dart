@@ -2749,7 +2749,7 @@ class FlexColorScheme with Diagnosticable {
               surfaceContainerHigh: seedScheme.surfaceContainerHigh,
               surfaceContainerHighest: seedScheme.surfaceContainerHighest,
               inverseSurface: seedScheme.inverseSurface,
-              dialogBackground: seedScheme.surface,
+              dialogBackground: seedScheme.surfaceContainerHigh,
               scaffoldBackground: seedScheme.surfaceContainerLowest,
             )
           // Colorscheme surfaces are used as starting point for blended ones.
@@ -2764,7 +2764,7 @@ class FlexColorScheme with Diagnosticable {
                   surfaceContainerHigh: colorScheme.surfaceContainerHigh,
                   surfaceContainerHighest: colorScheme.surfaceContainerHighest,
                   inverseSurface: colorScheme.inverseSurface,
-                  dialogBackground: colorScheme.surface,
+                  dialogBackground: colorScheme.surfaceContainerHigh,
                   scaffoldBackground: colorScheme.surfaceContainerLowest,
                 )
               : null,
@@ -4742,7 +4742,7 @@ class FlexColorScheme with Diagnosticable {
               surfaceContainer: seedScheme.surfaceContainer,
               surfaceContainerHigh: seedScheme.surfaceContainerHigh,
               surfaceContainerHighest: seedScheme.surfaceContainerHighest,
-              dialogBackground: seedScheme.surface,
+              dialogBackground: seedScheme.surfaceContainerHigh,
               scaffoldBackground: seedScheme.surfaceContainerLowest,
             )
           // Colorscheme surfaces are used as starting point for blended ones.
@@ -4757,7 +4757,7 @@ class FlexColorScheme with Diagnosticable {
                   surfaceContainerHigh: colorScheme.surfaceContainerHigh,
                   surfaceContainerHighest: colorScheme.surfaceContainerHighest,
                   inverseSurface: colorScheme.inverseSurface,
-                  dialogBackground: colorScheme.surface,
+                  dialogBackground: colorScheme.surfaceContainerHigh,
                   scaffoldBackground: colorScheme.surfaceContainerLowest,
                 )
               : null,
@@ -6759,7 +6759,8 @@ class FlexColorScheme with Diagnosticable {
       // colorScheme.surface to ensure it gets elevation overlay color applied
       // in dark mode. See : https://github.com/flutter/flutter/issues/90353
       // The dialogBackgroundColor in ThemeData is going to be deprecated.
-      dialogBackgroundColor: dialogBackground ?? colorScheme.surface,
+      dialogBackgroundColor:
+          dialogBackground ?? colorScheme.surfaceContainerHigh,
       // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
       // Disabled color uses a different style when using tinted disabled.
       // effects, if not opted in same as before v4.0.0 = ThemeData default.

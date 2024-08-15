@@ -69,6 +69,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Property `systemNavBarStyle` in `FlexColorScheme.themedSystemNavigationBar` now defaults to `FlexSystemNavBarStyle.surface`, instead of `FlexSystemNavBarStyle.background`. Using `FlexSystemNavBarStyle.background` results in the color `Theme.of(context).colorScheme.surfaceContainerLow` being used, where it previously was `Theme.of(context).colorScheme.background`. This is because Flutter 3.22 deprecated `ColorSCheme.-background`.
 
+- Dialog background now defaults to `surfaceContainerHigh` in M3 mode instead of `surface` with elevation tint. This to match the breaking change in Material-3 defaults in Flutter 3.22.
+
 **CHANGE**
 
 - Changed all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.

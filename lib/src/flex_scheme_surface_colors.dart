@@ -283,7 +283,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-                dialogBackground: FlexColor.materialLightSurface,
+                dialogBackground: FlexColor.lightM3SurfaceContainerHigh,
               )
             : const FlexSchemeSurfaceColors(
                 surface: FlexColor.materialDarkSurface,
@@ -297,7 +297,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
-                dialogBackground: FlexColor.materialDarkSurface,
+                dialogBackground: FlexColor.darkM3SurfaceContainerHigh,
               ));
     // Below, when blendLevel is zero, we use Material default surfaces. We do
     // that for all cases so that blend level 0 matches Material 2 default
@@ -328,7 +328,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-                dialogBackground: FlexColor.materialLightSurface,
+                dialogBackground: FlexColor.lightM3SurfaceContainerHigh,
               );
         } else {
           surface = surfaceColors ??
@@ -344,7 +344,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
-                dialogBackground: FlexColor.materialDarkSurface,
+                dialogBackground: FlexColor.darkM3SurfaceContainerHigh,
               );
         }
       } else {
@@ -368,7 +368,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.darkSurface,
                 scaffoldBackground: FlexColor.lightScaffoldBackground,
-                dialogBackground: FlexColor.lightSurface,
+                dialogBackground: FlexColor.lightM3SurfaceContainerHigh,
               );
         } else {
           surface = surfaceColors ??
@@ -384,7 +384,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.lightSurface,
                 scaffoldBackground: FlexColor.darkScaffoldBackground,
-                dialogBackground: FlexColor.darkSurface,
+                dialogBackground: FlexColor.darkM3SurfaceContainerHigh,
               );
         }
       }
@@ -410,7 +410,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-                dialogBackground: FlexColor.materialLightSurface,
+                dialogBackground: FlexColor.lightM3SurfaceContainerHigh,
               );
         } else {
           surface = surfaceColors ??
@@ -427,7 +427,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
-                dialogBackground: FlexColor.materialDarkSurface,
+                dialogBackground: FlexColor.darkM3SurfaceContainerHigh,
               );
         }
       } else {
@@ -445,7 +445,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.darkSurface,
                 scaffoldBackground: FlexColor.lightSurface,
-                dialogBackground: FlexColor.lightSurface,
+                dialogBackground: FlexColor.lightM3SurfaceContainerHigh,
               );
         } else {
           surface = surfaceColors ??
@@ -461,7 +461,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.lightSurface,
                 scaffoldBackground: FlexColor.darkSurface,
-                dialogBackground: FlexColor.darkSurface,
+                dialogBackground: FlexColor.darkM3SurfaceContainerHigh,
               );
         }
       }
@@ -488,7 +488,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialDarkSurface,
                 scaffoldBackground: FlexColor.materialLightScaffoldBackground,
-                dialogBackground: FlexColor.materialLightSurface,
+                dialogBackground: FlexColor.lightM3SurfaceContainerHigh,
               );
         } else {
           surface = surfaceColors ??
@@ -504,7 +504,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.materialLightSurface,
                 scaffoldBackground: FlexColor.materialDarkScaffoldBackground,
-                dialogBackground: FlexColor.materialDarkSurface,
+                dialogBackground: FlexColor.darkM3SurfaceContainerHigh,
               );
         }
       } else {
@@ -523,7 +523,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.darkBackground,
                 scaffoldBackground: FlexColor.lightBackground,
-                dialogBackground: FlexColor.lightBackground,
+                dialogBackground: FlexColor.lightM3SurfaceContainerHigh,
               );
         } else {
           surface = surfaceColors ??
@@ -539,7 +539,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkM3SurfaceContainerHighest,
                 inverseSurface: FlexColor.lightBackground,
                 scaffoldBackground: FlexColor.darkBackground,
-                dialogBackground: FlexColor.darkBackground,
+                dialogBackground: FlexColor.darkM3SurfaceContainerHigh,
               );
         }
       }
