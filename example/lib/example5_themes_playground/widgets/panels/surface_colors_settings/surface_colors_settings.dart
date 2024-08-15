@@ -371,16 +371,18 @@ class SurfaceColorsSettings extends StatelessWidget {
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Contrast colors blend level'),
             subtitleDense: true,
-            subtitle: const Text('The contrasting on color blending mixes in '
-                'its own main color, '
-                'into the on color, when seed/M3 colors are not used. This '
-                'affects onContainers, onSurface and onBackground. When the '
-                'main on color blending switch is ON, it also affects on colors '
-                'for primary, secondary, tertiary and error.\n'
-                'When seed color is used, the on color contrast color always '
-                'gets its correct tonal palette on color, but if the main '
-                'color is locked to custom color, the computed blended on '
-                'color contrast color version will be used instead.\n'),
+            subtitle: const Text(
+              'The contrasting on color blending mixes in '
+              'its own main color, '
+              'into the on color, when seed/M3 colors are not used. This '
+              'affects onContainers, onSurface and onBackground. When the '
+              'main on color blending switch is ON, it also affects on colors '
+              'for primary, secondary, tertiary and error.\n'
+              'When seed color is used, the on color contrast color always '
+              'gets its correct tonal palette on color, but if the main '
+              'color is locked to custom color, the computed blended on '
+              'color contrast color version will be used instead.\n',
+            ),
           ),
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -444,16 +446,18 @@ class SurfaceColorsSettings extends StatelessWidget {
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Contrast colors blend level'),
             subtitleDense: true,
-            subtitle: const Text('The contrasting on color blending mixes in '
-                'its own main color, '
-                'into the on color, when seed/M3 colors are not used. This '
-                'affects onContainers, onSurface and onBackground. When the '
-                'main on color blending switch is ON, it also affects on colors '
-                'for primary, secondary, tertiary and error.\n'
-                'When seed color is used, the on color contrast color always '
-                'gets its correct tonal palette on color, but if the main '
-                'color is locked to custom color, the computed blended on '
-                'color contrast color version will be used instead.\n'),
+            subtitle: const Text(
+              'The contrasting on color blending mixes in '
+              'its own main color, '
+              'into the on color, when seed/M3 colors are not used. This '
+              'affects onContainers, onSurface and onBackground. When the '
+              'main on color blending switch is ON, it also affects on colors '
+              'for primary, secondary, tertiary and error.\n'
+              'When seed color is used, the on color contrast color always '
+              'gets its correct tonal palette on color, but if the main '
+              'color is locked to custom color, the computed blended on '
+              'color contrast color version will be used instead.\n',
+            ),
           ),
           ListTile(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
