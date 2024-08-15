@@ -49,14 +49,9 @@ class SwitchesSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 16),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: SwitchShowcase(),
-        ),
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
-          title: const Text('Switch main color'),
+          title: const Text('Switch color'),
           labelForDefault: labelForDefaultColor,
           index: controller.switchSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -68,6 +63,10 @@ class SwitchesSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: SwitchShowcase(showCupertinoSwitches: true),
         ),
         ColorSchemePopupMenu(
           title: Text('Switch ON state$explainThumb thumb color'),
@@ -101,17 +100,8 @@ class SwitchesSettings extends StatelessWidget {
               : null,
         ),
         const Divider(),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: CheckboxShowcase(),
-        ),
-        if (!controller.useMaterial3)
-          const ListTile(
-            dense: true,
-            title: Text('Error state is not supported in M2 mode'),
-          ),
         ColorSchemePopupMenu(
-          title: const Text('Checkbox main color'),
+          title: const Text('Checkbox color'),
           labelForDefault: labelForDefaultColor,
           index: controller.checkboxSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -125,6 +115,15 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: CheckboxShowcase(),
+        ),
+        if (!controller.useMaterial3)
+          const ListTile(
+            dense: true,
+            title: Text('Error state is not supported in M2 mode'),
+          ),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -157,12 +156,8 @@ class SwitchesSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: RadioShowcase(),
-        ),
         ColorSchemePopupMenu(
-          title: const Text('Radio main color'),
+          title: const Text('Radio color'),
           labelForDefault: labelForDefaultColor,
           index: controller.radioSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
@@ -174,6 +169,10 @@ class SwitchesSettings extends StatelessWidget {
                   }
                 }
               : null,
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: RadioShowcase(),
         ),
         const Divider(),
         SwitchListTileReveal(

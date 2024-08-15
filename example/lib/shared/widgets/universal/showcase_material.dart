@@ -60,14 +60,14 @@ class ShowcaseMaterial extends StatelessWidget {
         const SizedBox(height: 8),
         const FabShowcase(),
         const SizedBox(height: 16),
-        const ChipShowcase(),
+        const ChipShowcase(showOptions: true),
         const SizedBox(height: 16),
         //
         // Switch, CheckBox and Radio
         //
         const Text('Switch, Checkbox and Radio', style: headerStyle),
         const SizedBox(height: 8),
-        const SwitchShowcase(showCupertinoSwitches: false),
+        const SwitchShowcase(showCupertinoSwitches: true),
         const CheckboxShowcase(),
         const RadioShowcase(),
         const SizedBox(height: 8),
@@ -681,86 +681,128 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isLight = Theme.of(context).brightness == Brightness.light;
     return RepaintBoundary(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 8,
-        runSpacing: 8,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if (widget.showCupertinoSwitches) const Text('M3:'),
-          Switch(
-            value: isOn1,
-            onChanged: (bool value) {
-              setState(() {
-                isOn1 = value;
-              });
-            },
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              if (widget.showCupertinoSwitches) const Text('Material'),
+              Switch(
+                value: isOn1,
+                onChanged: (bool value) {
+                  setState(() {
+                    isOn1 = value;
+                  });
+                },
+              ),
+              Switch(
+                value: !isOn1,
+                onChanged: (bool value) {
+                  setState(() {
+                    isOn1 = !value;
+                  });
+                },
+              ),
+              Switch(
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                    (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return Icon(Icons.check,
+                        color: isLight
+                            ? colorScheme.primary
+                            : colorScheme.onPrimary);
+                  }
+                  // All other states will use the default thumbIcon.
+                  return Icon(Icons.close, color: colorScheme.onPrimary);
+                }),
+                value: isOn1,
+                onChanged: (bool value) {
+                  setState(() {
+                    isOn1 = value;
+                  });
+                },
+              ),
+              const Text('Disabled'),
+              Switch(
+                value: isOn1,
+                onChanged: null,
+              ),
+              Switch(
+                value: !isOn1,
+                onChanged: null,
+              ),
+            ],
           ),
-          Switch(
-            value: !isOn1,
-            onChanged: (bool value) {
-              setState(() {
-                isOn1 = !value;
-              });
-            },
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              const Text('Adaptive'),
+              Switch.adaptive(
+                value: isOn1,
+                onChanged: (bool value) {
+                  setState(() {
+                    isOn1 = value;
+                  });
+                },
+              ),
+              Switch.adaptive(
+                value: !isOn1,
+                onChanged: (bool value) {
+                  setState(() {
+                    isOn1 = !value;
+                  });
+                },
+              ),
+              const Text('Disabled'),
+              Switch.adaptive(
+                value: isOn1,
+                onChanged: null,
+              ),
+              Switch.adaptive(
+                value: !isOn1,
+                onChanged: null,
+              ),
+            ],
           ),
-          Switch(
-            thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                (Set<WidgetState> states) {
-              if (states.contains(WidgetState.selected)) {
-                return Icon(Icons.check,
-                    color:
-                        isLight ? colorScheme.primary : colorScheme.onPrimary);
-              }
-              // All other states will use the default thumbIcon.
-              return Icon(Icons.close, color: colorScheme.onPrimary);
-            }),
-            value: isOn1,
-            onChanged: (bool value) {
-              setState(() {
-                isOn1 = value;
-              });
-            },
-          ),
-          const Text('Disabled'),
-          Switch(
-            value: isOn1,
-            onChanged: null,
-          ),
-          Switch(
-            value: !isOn1,
-            onChanged: null,
-          ),
-          if (widget.showCupertinoSwitches) ...<Widget>[
-            const Text('iOS'),
-            CupertinoSwitch(
-              activeColor: colorScheme.primary,
-              value: isOn1,
-              onChanged: (bool value) {
-                setState(() {
-                  isOn1 = value;
-                });
-              },
+          if (widget.showCupertinoSwitches)
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                const Text('Cupertino'),
+                CupertinoSwitch(
+                  value: isOn1,
+                  onChanged: (bool value) {
+                    setState(() {
+                      isOn1 = value;
+                    });
+                  },
+                ),
+                CupertinoSwitch(
+                  value: isOn1,
+                  onChanged: null,
+                ),
+                const Text('Disabled'),
+                CupertinoSwitch(
+                  value: !isOn1,
+                  onChanged: (bool value) {
+                    setState(() {
+                      isOn1 = !value;
+                    });
+                  },
+                ),
+                CupertinoSwitch(
+                  value: !isOn1,
+                  onChanged: null,
+                ),
+              ],
             ),
-            CupertinoSwitch(
-              activeColor: colorScheme.primary,
-              value: isOn1,
-              onChanged: null,
-            ),
-            CupertinoSwitch(
-              activeColor: colorScheme.primary,
-              value: !isOn1,
-              onChanged: (bool value) {
-                setState(() {
-                  isOn1 = !value;
-                });
-              },
-            ),
-            CupertinoSwitch(
-              activeColor: colorScheme.primary,
-              value: !isOn1,
-              onChanged: null,
-            ),
-          ],
         ],
       ),
     );
@@ -786,6 +828,7 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
+          const Text('Enabled'),
           Checkbox(
             value: isSelected1,
             onChanged: (bool? value) {
@@ -869,6 +912,7 @@ class _RadioShowcaseState extends State<RadioShowcase> {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
+          const Text('Enabled'),
           Radio<bool>(
             value: true,
             groupValue: groupValue,

@@ -41,6 +41,11 @@ class ChipSettings extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
                 : '';
+
+    // TODO(rydmike): Add choice chip SchemeColor selected color.
+    // TODO(rydmike): Make the blend color vanilla background.
+    // TODO(rydmike): Add blended background as optional toggle.
+    // TODO(rydmike): Add Chip padding settings.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -146,7 +151,7 @@ class ChipSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(),
+          child: ChipShowcase(showOptions: true),
         ),
         ListTileReveal(
           dense: true,
