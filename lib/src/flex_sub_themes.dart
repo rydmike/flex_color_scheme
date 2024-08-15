@@ -1912,9 +1912,10 @@ class FlexSubThemes {
     final TextStyle effectiveLabelStyle =
         labelStyle.copyWith(color: colorScheme.onSurface);
 
+    // TODO(rydmike): Figure out whre I was going with this...
     // Text color, uses the selected foreground color for selected chip styles.
-    final TextStyle effectiveSelectedLabelStyle =
-        labelStyle.copyWith(color: onSelectedColor);
+    // final TextStyle effectiveSelectedLabelStyle =
+    //     labelStyle.copyWith(color: onSelectedColor);
 
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveSecondarySelectedLabelStyle =
