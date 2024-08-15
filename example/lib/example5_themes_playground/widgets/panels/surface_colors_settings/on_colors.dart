@@ -14,14 +14,6 @@ class OnColors extends StatelessWidget {
 
   final ThemeController controller;
 
-  // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
-
-  // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(final Color color, final Color bg) =>
-      _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
-
   @override
   Widget build(BuildContext context) {
     // Used to enable & disable color selection on the color boxes.
@@ -30,7 +22,7 @@ class OnColors extends StatelessWidget {
 
     // Size of the color presentation boxes
     const double boxWidth = 150;
-    const double boxHeight = 180;
+    const double boxHeight = 170;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
