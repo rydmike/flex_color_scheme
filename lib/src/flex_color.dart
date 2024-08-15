@@ -36,11 +36,11 @@ class FlexColor {
   static const Color materialDarkScaffoldBackground = Color(0xFF121212);
 
   // Custom static constants for surface, background, scaffold and background
-  // colors. Some surface colors are slightly modified from the Material
+  // colors. Some surface colors are slightly modified from the Material 2
   // standards and different constants are used so we could tune them,
   // without touching the material standard surface values.
 
-  /// FlexColors standard for light surface, same as material.
+  /// FlexColors standard for light surface, same as Material 2 default.
   static const Color lightSurface = Color(0xFFFFFFFF);
 
   /// FlexColors standard color for light surfaceVariant.
