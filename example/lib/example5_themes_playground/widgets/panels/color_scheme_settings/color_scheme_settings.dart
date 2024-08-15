@@ -30,6 +30,7 @@ class ColorSchemeSettings extends StatelessWidget {
 
   bool get _isFlutterScheme =>
       FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme;
+  String get _seedType => _isFlutterScheme ? 'MCU' : 'FSS';
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +44,9 @@ class ColorSchemeSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        UseSeededColorSchemeSwitch(controller: controller, explainMore: false),
+        UseSeededColorSchemeSwitch(controller: controller),
         FlexToneConfigPopupMenu(
-          title: 'ColorScheme made with FlexTones',
+          title: 'ColorScheme generation using $_seedType',
           flexToneName: _flexToneName,
           index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
           onChanged:

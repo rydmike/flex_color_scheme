@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../shared/color_name_value.dart';
 
-// Display all the surface colors in currently selected color scheme,
-// including their name and color code.
-class SurfaceColors extends StatelessWidget {
-  const SurfaceColors({
+// Display all scheme main and surface onColors in currently selected
+// color scheme, including their name and color code.
+class OnColors extends StatelessWidget {
+  const OnColors({
     super.key,
     required this.controller,
   });
@@ -24,6 +24,10 @@ class SurfaceColors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Used to enable & disable color selection on the color boxes.
+    // We can only pick colors when custom theme is selected, which is
+    // last index in out list of color schemes.
+
     // Size of the color presentation boxes
     const double boxWidth = 150;
     const double boxHeight = 180;
@@ -92,7 +96,7 @@ class SurfaceColors extends StatelessWidget {
           //
           // Surface colors presentation.
           RepaintBoundary(
-            key: const ValueKey<String>('surf surface'),
+            key: const ValueKey<String>('surf onSurface'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -104,73 +108,29 @@ class SurfaceColors extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Material(
-                        color: colorScheme.surface,
+                        color: colorScheme.onSurface,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur surface '
-                              '${colorScheme.surface}'),
-                          color: colorScheme.surface,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface',
-                          tone: tones.surfaceTone,
+                          key: ValueKey<String>('sur onSurface '
+                              '${colorScheme.onSurface}'),
+                          color: colorScheme.onSurface,
+                          textColor: colorScheme.surface,
+                          label: 'onSurface',
+                          tone: tones.onSurfaceTone,
                           showTone: showTones,
                         ),
                       ),
                     ),
+                    const Divider(height: 1),
                     Expanded(
                       child: Material(
-                        color: colorScheme.surfaceContainer,
+                        color: colorScheme.onSurfaceVariant,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur surfaceContainer '
-                              '${colorScheme.surfaceContainer}'),
-                          color: colorScheme.surfaceContainer,
-                          textColor: colorScheme.onSurface,
-                          label: 'surfaceContainer',
-                          tone: tones.surfaceContainerTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          // surfaceDim and Bright colors presentation
-          RepaintBoundary(
-            key: const ValueKey<String>('surfaceDim'),
-            child: SizedBox(
-              width: boxWidth,
-              height: boxHeight,
-              child: Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Material(
-                        color: colorScheme.surfaceDim,
-                        child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceDim '
-                              '${colorScheme.surfaceDim}'),
-                          color: colorScheme.surfaceDim,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface\u200BDim',
-                          tone: tones.surfaceDimTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Material(
-                        color: colorScheme.surfaceBright,
-                        child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceBright '
-                              '${colorScheme.surfaceBright}'),
-                          color: colorScheme.surfaceBright,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface\u200BBright',
-                          tone: tones.surfaceBrightTone,
+                          key: ValueKey<String>('sur onSurfaceVariant '
+                              '${colorScheme.onSurfaceVariant}'),
+                          color: colorScheme.onSurfaceVariant,
+                          textColor: colorScheme.surfaceContainerHighest,
+                          label: 'onSurface\u200BVariant',
+                          tone: tones.onSurfaceVariantTone,
                           showTone: showTones,
                         ),
                       ),
@@ -181,9 +141,9 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // surfaceContainerLowest and Low colors presentation
+          // onPrimaryContainer and onPrimary color presentation.
           RepaintBoundary(
-            key: const ValueKey<String>('surfaceContainerLowest'),
+            key: const ValueKey<String>('surf onPrimaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -195,28 +155,28 @@ class SurfaceColors extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Material(
-                        color: colorScheme.surfaceContainerLowest,
+                        color: colorScheme.onPrimaryContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerLowest '
-                              '${colorScheme.surfaceContainerLowest}'),
-                          color: colorScheme.surfaceContainerLowest,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface\u200BContainer\u200BLowest',
-                          tone: tones.surfaceContainerLowestTone,
+                          key: ValueKey<String>('sur onPrimaryContainer '
+                              '${colorScheme.onPrimaryContainer}'),
+                          color: colorScheme.onPrimaryContainer,
+                          textColor: colorScheme.primaryContainer,
+                          label: 'onPrimaryContainer',
+                          tone: tones.onPrimaryContainerTone,
                           showTone: showTones,
                         ),
                       ),
                     ),
                     Expanded(
                       child: Material(
-                        color: colorScheme.surfaceContainerLow,
+                        color: colorScheme.onPrimary,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerLow '
-                              '${colorScheme.surfaceContainerLow}'),
-                          color: colorScheme.surfaceContainerLow,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface\u200BContainer\u200BLow',
-                          tone: tones.surfaceContainerLowTone,
+                          key: ValueKey<String>('sur onPrimary '
+                              '${colorScheme.onPrimary}'),
+                          color: colorScheme.onPrimary,
+                          textColor: colorScheme.primary,
+                          label: 'onPrimary',
+                          tone: tones.onPrimaryTone,
                           showTone: showTones,
                         ),
                       ),
@@ -227,9 +187,9 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // surfaceContainerHigh and Highest colors presentation
+          // onSecondaryContainer and onSecondary color presentation.
           RepaintBoundary(
-            key: const ValueKey<String>('surfaceContainerHigh'),
+            key: const ValueKey<String>('surf onSecondaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -241,74 +201,28 @@ class SurfaceColors extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Material(
-                        color: colorScheme.surfaceContainerHigh,
+                        color: colorScheme.onSecondaryContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerLowest '
-                              '${colorScheme.surfaceContainerHigh}'),
-                          color: colorScheme.surfaceContainerHigh,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface\u200BContainer\u200BHigh',
-                          tone: tones.surfaceContainerHighTone,
+                          key: ValueKey<String>('sur onSecondaryContainer '
+                              '${colorScheme.onSecondaryContainer}'),
+                          color: colorScheme.onSecondaryContainer,
+                          textColor: colorScheme.secondaryContainer,
+                          label: 'onSecondary\nContainer',
+                          tone: tones.onSecondaryContainerTone,
                           showTone: showTones,
                         ),
                       ),
                     ),
                     Expanded(
                       child: Material(
-                        color: colorScheme.surfaceContainerHighest,
+                        color: colorScheme.onSecondary,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerHighest '
-                              '${colorScheme.surfaceContainerHighest}'),
-                          color: colorScheme.surfaceContainerHighest,
-                          textColor: colorScheme.onSurface,
-                          label: 'surface\u200BContainer\u200BHighest',
-                          tone: tones.surfaceContainerHighestTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          //
-          // ScaffoldBackground colors presentation
-          RepaintBoundary(
-            key: const ValueKey<String>('surf scaffold'),
-            child: SizedBox(
-              width: boxWidth,
-              height: boxHeight,
-              child: Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Material(
-                        color: theme.scaffoldBackgroundColor,
-                        child: ColorNameValue(
-                          key: ValueKey<String>('sur scaffoldBackgroundColor '
-                              '${theme.scaffoldBackgroundColor}'),
-                          color: theme.scaffoldBackgroundColor,
-                          textColor: colorScheme.onSurface,
-                          label: 'Scaffold\nbackground',
-                          tone: tones.surfaceTone,
-                          showTone: false,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Material(
-                        color: colorScheme.inverseSurface,
-                        child: ColorNameValue(
-                          key: ValueKey<String>('sur inverseSurface '
-                              '${colorScheme.inverseSurface}'),
-                          color: colorScheme.inverseSurface,
-                          textColor: colorScheme.onInverseSurface,
-                          label: 'inverse\u200BSurface',
-                          tone: tones.inverseSurfaceTone,
+                          key: ValueKey<String>('sur onSecondary '
+                              '${colorScheme.onSecondary}'),
+                          color: colorScheme.onSecondary,
+                          textColor: colorScheme.secondary,
+                          label: 'onSecondary',
+                          tone: tones.onSecondaryTone,
                           showTone: showTones,
                         ),
                       ),
@@ -319,9 +233,9 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // Shadow color and surface tint color presentation.
+          // onTertiaryContainer and onTertiary color presentation.
           RepaintBoundary(
-            key: const ValueKey<String>('surf shadow'),
+            key: const ValueKey<String>('surf onTertiaryContainer'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
@@ -333,15 +247,106 @@ class SurfaceColors extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Material(
-                        color: colorScheme.surfaceTint,
+                        color: colorScheme.onTertiaryContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur surfaceTint '
-                              '${colorScheme.surfaceTint}'),
-                          color: colorScheme.surfaceTint,
-                          textColor: _onColor(
-                              colorScheme.surfaceTint, colorScheme.surface),
-                          label: 'surfaceTint',
-                          tone: tones.surfaceTintTone,
+                          key: ValueKey<String>('sur onTertiaryContainer '
+                              '${colorScheme.onTertiaryContainer}'),
+                          color: colorScheme.onTertiaryContainer,
+                          textColor: colorScheme.tertiaryContainer,
+                          label: 'onTertiaryContainer',
+                          tone: tones.onTertiaryContainerTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Material(
+                        color: colorScheme.onTertiary,
+                        child: ColorNameValue(
+                          key: ValueKey<String>('sur onTertiary '
+                              '${colorScheme.onTertiary}'),
+                          color: colorScheme.onTertiary,
+                          textColor: colorScheme.tertiary,
+                          label: 'onTertiary',
+                          tone: tones.onTertiaryTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // onErrorContainer and onError color presentation.
+          RepaintBoundary(
+            key: const ValueKey<String>('surf onErrorContainer'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Material(
+                        color: colorScheme.onErrorContainer,
+                        child: ColorNameValue(
+                          key: ValueKey<String>('sur onErrorContainer '
+                              '${colorScheme.onErrorContainer}'),
+                          color: colorScheme.onErrorContainer,
+                          textColor: colorScheme.errorContainer,
+                          label: 'onErrorContainer',
+                          tone: tones.onErrorContainerTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Material(
+                        color: colorScheme.onError,
+                        child: ColorNameValue(
+                          key: ValueKey<String>('sur onError '
+                              '${colorScheme.onError}'),
+                          color: colorScheme.onError,
+                          textColor: colorScheme.error,
+                          label: 'onError',
+                          tone: tones.onErrorTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // InverseSurface colors presentation.
+          RepaintBoundary(
+            key: const ValueKey<String>('surf inversesurface'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Material(
+                        color: colorScheme.onInverseSurface,
+                        child: ColorNameValue(
+                          key: ValueKey<String>('sur onInverseSurface '
+                              '${colorScheme.onInverseSurface}'),
+                          color: colorScheme.onInverseSurface,
+                          textColor: colorScheme.inverseSurface,
+                          label: 'onInverse\u200BSurface',
+                          tone: tones.onInverseSurfaceTone,
                           showTone: showTones,
                         ),
                       ),
