@@ -167,10 +167,12 @@ class DialogSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('Dialog'),
           subtitle: Text('In Flutter M2 the default dialog background '
-              'color is colorScheme.surface for all Dialogs. In M3 mode '
-              'they default to colorScheme.surfaceContainerHigh.\n'
+              'color is surface for all Dialogs. In M3 mode '
+              'they default to surfaceContainerHigh. FCS 8.0 and '
+              'later uses surfaceContainerHigh in both M2 and M3 mode.'
               '\n'
-              'You can theme dialogs to a color scheme based surface color.\n'
+              'You can theme dialogs to a different color scheme color. '
+              'It is recommended to stick to one of the surface colors.\n'
               '\n'
               'The AlertDialog uses the general DialogTheme for theming '
               'values. TimePicker and DatePicker have their own themes. In '
