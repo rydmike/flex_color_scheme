@@ -4,9 +4,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 14, 2024**
+**Aug 15, 2024**
 
-**PACKAGE**
+### PACKAGE
 
 - Version 8.0.0 makes **FlexColorScheme** fully aligned and compatible with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. It introduced many breaking changes to the `ColorScheme` and default color mappings that Material components use.
 
@@ -22,7 +22,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 492 of them remaining. 
  * Done
 
-**TODO PACKAGE**
+**TODO**
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 - Add 
@@ -53,7 +53,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Investigate:
   - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
 
-**BREAKING CHANGES**
+**BREAKING**
 
 This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme ib Flutter 3.22. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS is no more aligned with Flutter's Material-3 theming defaults, by typically using them as starting points in the default Material-3 mode. Material-2 mode is still supported, it has its own opinionated defaults as before.
 
@@ -116,7 +116,28 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **TESTING**
   - Add full coverage tests for all new package features!
 
-**THEMES PLAYGROUND**
+### THEMES PLAYGROUND
+
+
+**NEW**
+ 
+- Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.
+- Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
+- Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF.
+- Add code gen for the new ColorScheme colors introduced in Flutter 3.22.
+- Add showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
+- Add showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
+- Add code gen for custom error colors in the Playground.
+- Make FSS seed options unavailable when an MCU variant is selected.
+- Add FFS seed option monochrome surfaces.
+- Show new surface colors in the playground in surface blends. Rename surface blends to surface colors.
+
+**CHANGE**
+
+- Split FAB and Chip to separate panels.
+- Adjust both HeaderCards background color to work with new ColorScheme surface colors.
+- Change surface and on-color blends to default to 0. Belnds are not used by default anymore in Playground.
+
 
 **FIX**
 
@@ -124,20 +145,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
 - Chore: Update issue resolution status texts for Dialogs.
-
-**NEW**
-- Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) add `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.  
-- Split FAB and Chip to separate panels.
-- Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
-- Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF. 
-- Add code gen for the new ColorScheme colors introduced in Flutter 3.22.
-- Add showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
-- Add showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
-- Add code gen for custom error colors in the Playground.
-- Make FSS seed options unavailable when an MCU variant is selected.
-- Add FFS seed option monochrome surfaces.
-- Adjust both HeaderCards background color to work with new ColorScheme surface colors.
-- Show new surface colors in the playground in surface blends. Rename surface blends to surface colors. 
 
 **TODO PLAYGROUND AND EXAMPLES**
 
@@ -168,7 +175,7 @@ This release uses new features in Material-3 theming that are only available in 
 
 In the next Flutter stable release after 3.13, Flutter will change the `ThemeData.useMaterial3` default from `false` to true. In other words, applications using FCS will get the Material-3 colors, text styles, and other visuals, by default. The `FlexColorScheme` API will then be following along with this breaking change. In this release the `FlexColorScheme` API `useMaterial3` still defaults to `false`. The **Themes Playground** app has for quite some time already defaulted to setting the value to `true`. Which is also already the case in Flutter when you create a new application with `flutter create`.  
 
-**PACKAGE**
+### PACKAGE
 
 **NEW**
 
@@ -202,7 +209,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 
 * Fixed `useInputDecoratorThemeInDialogs` not working for some properties in the `InputDecorator`, when the value was null or `false`, where some properties in the `TextField`s in the `TimePickerDialog` did not revert back to default styles. Now they do, but via hard defined values to mimic the default M3 style, as that is the only way to get back to it when a very custom `themeData.inputDecoratorTheme` is being used.
 
-**THEMES PLAYGROUND**
+### THEMES PLAYGROUND
 
 **NEW**
 
@@ -227,7 +234,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 
 **July 20, 2023**
 
-**PACKAGE**
+### PACKAGE
 
 **NEW**  
 
@@ -269,7 +276,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 * The `FlexSubThemes.menuButtonTheme` and the `MenuButtonThemeData` it makes, got a `style` value, where `ButtonStyle.animationDuration` is always `Duration.zero`. This solved the issue reported in [issue #123615](https://github.com/flutter/flutter/issues/123615). Consequently, there is no need for a fix for the issue, since it could be solved with a theme property.
 
 
-**THEMES PLAYGROUND**
+### THEMES PLAYGROUND
 
 **NEW**
 
@@ -315,7 +322,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 
 **May 17, 2023**
 
-**PACKAGE**
+### PACKAGE
 
 **FIX**
 
@@ -330,7 +337,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 
 **May 15, 2023**
 
-**PACKAGE**
+### PACKAGE
 
 **FIX**
 
@@ -344,7 +351,7 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
   * Tests added for the regression and for the new `GoogleFonts` default `TextTheme` being used and nulling its colors, so they get correct M2/M3 mode default contrast colors in both light and dark mode and for both `textTheme` and `primaryTextTheme`. 
 
 
-**THEMES PLAYGROUND**
+### THEMES PLAYGROUND
 
 **FIX**
 
@@ -357,6 +364,8 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 
 FlexColorScheme v7.1.0 supports new theming features in Flutter 3.10, it thus requires minimum Flutter 3.10 and Dart 3.0. 
 
+### PACKAGE
+
 **NEW**
 
 * Added support for "bring shadows back" adaptive theming feature to `BottomAppBar` and `BottomSheet`.
@@ -367,15 +376,16 @@ FlexColorScheme v7.1.0 supports new theming features in Flutter 3.10, it thus re
 
 - Updated to use minimum `flex_seed_scheme ^1.3.0`. This version, no longer depends on `material_color_utilities`, thus avoiding all version issues and conflicts when Flutter changes what breaking version of `material_color_utilities` it uses on different channels and versions.
 
-**THEMES PLAYGROUND**
-- Themes Playground 7.1 for FlexColorScheme 7.1 can be found [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
+### THEMES PLAYGROUND
 
-* **NEW**
+Themes Playground 7.1 for FlexColorScheme 7.1 can be found [here](https://rydmike.com/flexcolorscheme/themesplayground-v7-1).
+
+**NEW**
   - Added selection of themed header color scheme color for the DatePickerDialog on the Dialogs panel.
   - Added showing SearchBar with SearchView to the AppBar panel.
   - Added showing SearchBar with SearchView to the Widget Showcase.
 
-* **UPDATE**
+**UPDATE**
   - Reviewed and updated status of all known theming issues in info expands.
   - The SKIA **canvaskit** renderer is again being used to build all the web examples, including the **Themes Playground**.
   - Updated all examples to use new `ListenableBuilder` instead of `AnimatedBuilder` where appropriate.

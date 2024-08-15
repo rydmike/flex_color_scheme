@@ -260,25 +260,25 @@ class Store {
   static const String keyBlendLevel = 'blendLevel';
   // Default value for the blendLevel, also used to reset settings.
   // Defaults to 7.
-  static const int defaultBlendLevel = 7;
+  static const int defaultBlendLevel = 0;
 
   // Key used to read and save the blendLevelDark value.
   static const String keyBlendLevelDark = 'blendLevelDark';
   // Default value for the blendLevelDark, also used to reset settings.
   // Defaults to 13.
-  static const int defaultBlendLevelDark = 13;
+  static const int defaultBlendLevelDark = 0;
 
   // Key used to read and save the onBlendLevel value.
   static const String keyOnBlendLevel = 'blendOnLevel';
   // Default value for the onBlendLevel, also used to reset settings.
   // Defaults to 10.
-  static const int defaultBlendOnLevel = 10;
+  static const int defaultBlendOnLevel = 0;
 
   // Key used to read and save the blendOnLevelDark value.
   static const String keyBlendOnLevelDark = 'blendOnLevelDark';
   // Default value for the blendOnLevelDark, also used to reset settings.
   // Defaults to 20.
-  static const int defaultBlendOnLevelDark = 20;
+  static const int defaultBlendOnLevelDark = 0;
 
   // Key used to read and save the usedColors value.
   static const String keyUsedColors = 'usedColors';
@@ -442,8 +442,8 @@ class Store {
   static const String keyUsedFlexToneSetup = 'usedFlexToneSetup';
   // Default value for the usedFlexToneSetupLevel, also used to reset
   // settings.
-  // Defaults to 1 - Flutter SDK default configuration
-  static const int defaultUsedFlexToneSetup = 1;
+  // Defaults to 0 - Flutter SDK default configuration
+  static const int defaultUsedFlexToneSetup = 0;
 
   // Key used to read and save the useM3ErrorColor value.
   static const String keyUseM3ErrorColors = 'useM3ErrorColors';
