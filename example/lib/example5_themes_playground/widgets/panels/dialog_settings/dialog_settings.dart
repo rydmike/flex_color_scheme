@@ -156,20 +156,10 @@ class DialogSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('Dialog'),
           subtitle: Text('In Flutter M2 the default dialog background '
-              'color is colorScheme.background for Dialog and '
-              'DatePickerDialog, but colorScheme.surface for '
-              'TimePickerDialog. In M3 mode they all default to '
-              'colorScheme.surface.\n'
+              'color is colorScheme.surface for all Dialogs. In M3 mode '
+              'they default to colorScheme.surfaceContainerHigh.\n'
               '\n'
-              'FlexColorScheme sub-themes use surface as default for all '
-              'dialogs in both M2 and M3 mode. This ensures that they have the '
-              'same background by default and that elevation overlay '
-              'color works in M2 dark mode when it is another '
-              'color than background.\n'
-              '\n'
-              'You can theme dialogs to a color scheme based color. With '
-              'seeded M3 colors, surfaceVariant, primaryContainer and '
-              'inversePrimary are possible options.\n'
+              'You can theme dialogs to a color scheme based surface color.\n'
               '\n'
               'The AlertDialog uses the general DialogTheme for theming '
               'values. TimePicker and DatePicker have their own themes. In '
@@ -181,8 +171,10 @@ class DialogSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: controller.useFlexColorScheme
-              ? 'default (surface)'
-              : 'default (alert&date=background) (time=surface)',
+              ? 'default (surfaceContainerHigh)'
+              : useMaterial3
+                  ? 'default (surfaceContainerHigh)'
+                  : 'default (alert&date=surfaceContainerHigh) (time=surface)',
           index: controller.dialogBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -649,8 +641,10 @@ class DialogSettings extends StatelessWidget {
         const DatePickerDialogShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Header background color'),
+          // TODO(rydmike): Should be equal to dialog background color if
+          //  a custom color is set in M3, because that is what it gets.
           labelForDefault: controller.useMaterial3
-              ? 'default (surface)'
+              ? 'default (surfaceContainerHigh)'
               : 'default (primary)',
           index: controller.datePickerHeaderBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
