@@ -11,6 +11,7 @@ import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
 import 'light_surface_mode_list_tile.dart';
 import 'light_surface_mode_popup_menu.dart';
+import 'on_colors.dart';
 import 'surface_colors.dart';
 
 // Panel used to define how primary color is blended into surfaces and
@@ -98,18 +99,17 @@ class SurfaceColorsSettings extends StatelessWidget {
         const SizedBox(height: 8),
         // UseSeededColorSchemeSwitch(controller: controller),
         if (isLight) ...<Widget>[
-          LightSurfaceModeListTile(controller: controller),
           LightSurfaceModePopupMenu(controller: controller),
+          LightSurfaceModeListTile(controller: controller),
           const ListTileReveal(
-            title: Text('Blend level'),
+            title: Text('Surface blend level'),
             subtitleDense: true,
             subtitle: Text(
               'Surface blend uses alpha blend, to mix in the surface '
-              'tint color into surfaces and backgrounds. The blend '
+              'tint color into all surface colors. The blend '
               'level is the used alpha value in an alpha blend. The mode '
               'changes used factor of this alpha blend value differently '
-              'for different surface colors, like surface, background, '
-              'scaffold background and dialog background colors.\n'
+              'for different surface colors and scaffold background colors.\n'
               '\n'
               'Blends also applies to surfaces when M3 seeded ColorSchemes are '
               'used. Seed based M3 surfaces already include a touch of '
@@ -156,16 +156,32 @@ class SurfaceColorsSettings extends StatelessWidget {
             ),
           ),
         ] else ...<Widget>[
-          DarkSurfaceModeListTile(controller: controller),
           DarkSurfaceModePopupMenu(controller: controller),
+          DarkSurfaceModeListTile(controller: controller),
           const ListTileReveal(
-            title: Text('Blend level'),
+            title: Text('Surface blend level'),
             subtitleDense: true,
-            subtitle: Text('Adjust the surface, background, scaffold and '
-                'dialog blend level. Also impacts surfaces when '
-                'seed colors are used. Seed based surfaces already include '
-                'a touch of primary, but you can make it stronger with '
-                'surface blends.\n'),
+            subtitle: Text(
+              'Surface blend uses alpha blend, to mix in the surface '
+              'tint color into all surface colors. The blend '
+              'level is the used alpha value in an alpha blend. The mode '
+              'changes used factor of this alpha blend value differently '
+              'for different surface colors and scaffold background colors.\n'
+              '\n'
+              'Blends also applies to surfaces when M3 seeded ColorSchemes are '
+              'used. Seed based M3 surfaces already include a touch of '
+              'primary color, you can make it stronger with surface blends. '
+              'To use default M3 surface color results, use blend level zero.\n'
+              '\n'
+              'When using a surface blend mode with a high factor on Scaffold '
+              'background, the design intent is to not place any controls or '
+              'text on it directly, but to always use them on other surfaces '
+              'with less surface tint, for example in Cards. The Scaffold '
+              'background is then only used as a background color effect. If '
+              'your app places controls directly on Scaffold, a high blend '
+              'factor on Scaffold background color may not be a good fit. '
+              'Choose one where it has a lower color blend factor.',
+            ),
           ),
           ListTile(
             title: Slider(
@@ -197,96 +213,23 @@ class SurfaceColorsSettings extends StatelessWidget {
             ),
           ),
         ],
-        const SizedBox(height: 8),
         // Show all the surface colors to show what is done to them.
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SurfaceColors(controller: controller),
         ),
         const SizedBox(height: 8),
-        //
-        // Light mode widgets
-        //
         if (isLight) ...<Widget>[
-          ListTileReveal(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: const Text('Contrast colors blend level'),
-            subtitleDense: true,
-            subtitle: const Text('The contrast onColor blending mixes in its '
-                'own main color, '
-                'into the onColor, when seed/M3 colors are not used. This '
-                'affects onContainers, onSurface and onBackground. When the '
-                'main onColor blending switch is ON, it also affects on colors '
-                'for primary, secondary, tertiary and error.\n'
-                'When seed color is used, the onColor contrast color always '
-                'gets its correct tonal palette onColor, but if the main '
-                'color is locked to custom color, the computed blended onColor '
-                'contrast color version will be used instead.\n'),
-          ),
-          ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: Slider(
-              min: 0,
-              max: 40,
-              divisions: 40,
-              label: controller.blendOnLevel.toString(),
-              value: controller.useSubThemes && controller.useFlexColorScheme
-                  ? controller.blendOnLevel.toDouble()
-                  : 0,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? (double value) {
-                          controller.setBlendOnLevel(value.toInt());
-                        }
-                      : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Text(
-                    // ignore: lines_longer_than_80_chars
-                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevel : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SwitchListTileReveal(
-            title: const Text('Main colors use onColor blending'),
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            subtitleDense: true,
-            subtitle:
-                const Text('In M3 design, only container colors use color '
-                    'pair tinted onColor. Main colors use black or white. '
-                    'Keep this OFF to do so. Set to ON to use it with '
-                    'onPrimary, onSecondary, onTertiary and onError, when seed '
-                    'colors are not used.\n'),
-            value: controller.blendLightOnColors &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBlendLightOnColors
-                : null,
-          ),
           SwitchListTileReveal(
             title: const Text('Plain white'),
             subtitleDense: true,
             subtitle: const Text(
               'Plain white uses white Scaffold background color in all blend '
-              'modes, other surfaces also become 5% less blended.\n',
+              'modes, other surfaces also become less blended.\n',
             ),
             value: controller.lightIsWhite,
             onChanged: controller.setLightIsWhite,
           ),
-          const Divider(),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintLight ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintLight,
@@ -334,91 +277,18 @@ class SurfaceColorsSettings extends StatelessWidget {
               controller.setSurfaceTintLight(null);
             },
           ),
-        ]
-        //
-        // ELSE Dark mode widgets
-        //
-        else ...<Widget>[
-          ListTileReveal(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: const Text('Contrast colors blend level'),
-            subtitleDense: true,
-            subtitle: const Text('The contrast onColor blending mixes in its '
-                'own main color, into the onColor, when seed/M3 colors are '
-                'not used. This affects onContainers, onSurface and '
-                'onBackground. When the main onColor blending switch is ON, '
-                'it also affects on colors for primary, secondary, '
-                'tertiary and error.\n'
-                'When seed color is used, the onColor contrast color always '
-                'gets its correct tonal palette onColor, but if the main '
-                'color is locked to custom color, the computed blended onColor '
-                'contrast color version will be used instead.\n'),
-          ),
-          ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: Slider(
-              min: 0,
-              max: 40,
-              divisions: 40,
-              label: controller.blendOnLevelDark.toString(),
-              value: controller.useSubThemes && controller.useFlexColorScheme
-                  ? controller.blendOnLevelDark.toDouble()
-                  : 0,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? (double value) {
-                          controller.setBlendOnLevelDark(value.toInt());
-                        }
-                      : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Text(
-                    // ignore: lines_longer_than_80_chars
-                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SwitchListTileReveal(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            title: const Text('Main colors use onColor blending'),
-            subtitleDense: true,
-            subtitle: const Text(
-                'In M3 dark design, not only container colors use '
-                'color pair tinted onColor, but also main colors do. '
-                'Keep this ON to also use it with onPrimary, onSecondary, '
-                'onTertiary and onError colors in dark mode, when seed colors '
-                'are not used.\n'),
-            value: controller.blendDarkOnColors &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBlendDarkOnColors
-                : null,
-          ),
+        ] else ...<Widget>[
           SwitchListTileReveal(
             title: const Text('True black'),
             subtitleDense: true,
             subtitle: const Text(
               'For an ink black dark mode, use True Black. It uses a totally '
               'black Scaffold background in all blend modes, other surfaces '
-              'also become 5% less blended.\n',
+              'also become less blended.\n',
             ),
             value: controller.darkIsTrueBlack,
             onChanged: controller.setDarkIsTrueBlack,
           ),
-          const Divider(),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintDark ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintDark,
@@ -467,6 +337,167 @@ class SurfaceColorsSettings extends StatelessWidget {
             },
           ),
         ],
+        const Divider(),
+        const ListTileReveal(
+          title: Text('Contrasting on color blending'),
+          subtitleDense: true,
+          subtitle: Text(
+            'You can adjust alpha blends for on colors for surfaces and '
+            'for the main and container colors.\n',
+          ),
+        ),
+        //
+        // Light mode widgets
+        //
+        if (isLight) ...<Widget>[
+          SwitchListTileReveal(
+            title: const Text('Main and container colors on color blending'),
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            subtitleDense: true,
+            subtitle:
+                const Text('In M3 design, only container colors use color '
+                    'pair tinted on color. Main colors use black or white. '
+                    'Keep this OFF to do so. Set to ON to use it with '
+                    'onPrimary, onSecondary, onTertiary and onError, when seed '
+                    'colors are not used.\n'),
+            value: controller.blendLightOnColors &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setBlendLightOnColors
+                : null,
+          ),
+          ListTileReveal(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Contrast colors blend level'),
+            subtitleDense: true,
+            subtitle: const Text('The contrasting on color blending mixes in '
+                'its own main color, '
+                'into the on color, when seed/M3 colors are not used. This '
+                'affects onContainers, onSurface and onBackground. When the '
+                'main on color blending switch is ON, it also affects on colors '
+                'for primary, secondary, tertiary and error.\n'
+                'When seed color is used, the on color contrast color always '
+                'gets its correct tonal palette on color, but if the main '
+                'color is locked to custom color, the computed blended on '
+                'color contrast color version will be used instead.\n'),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider(
+              min: 0,
+              max: 40,
+              divisions: 40,
+              label: controller.blendOnLevel.toString(),
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.blendOnLevel.toDouble()
+                  : 0,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setBlendOnLevel(value.toInt());
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'LEVEL',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    // ignore: lines_longer_than_80_chars
+                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevel : ""}',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ]
+        //
+        // ELSE Dark mode widgets
+        //
+        else ...<Widget>[
+          SwitchListTileReveal(
+            title: const Text('Main and container colors on color blending'),
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            subtitleDense: true,
+            subtitle:
+                const Text('In M3 design, only container colors use color '
+                    'pair tinted on color. Main colors use black or white. '
+                    'Keep this OFF to do so. Set to ON to use it with '
+                    'onPrimary, onSecondary, onTertiary and onError, when seed '
+                    'colors are not used.\n'),
+            value: controller.blendDarkOnColors &&
+                controller.useSubThemes &&
+                controller.useFlexColorScheme,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.setBlendDarkOnColors
+                : null,
+          ),
+          ListTileReveal(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: const Text('Contrast colors blend level'),
+            subtitleDense: true,
+            subtitle: const Text('The contrasting on color blending mixes in '
+                'its own main color, '
+                'into the on color, when seed/M3 colors are not used. This '
+                'affects onContainers, onSurface and onBackground. When the '
+                'main on color blending switch is ON, it also affects on colors '
+                'for primary, secondary, tertiary and error.\n'
+                'When seed color is used, the on color contrast color always '
+                'gets its correct tonal palette on color, but if the main '
+                'color is locked to custom color, the computed blended on '
+                'color contrast color version will be used instead.\n'),
+          ),
+          ListTile(
+            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            title: Slider(
+              min: 0,
+              max: 40,
+              divisions: 40,
+              label: controller.blendOnLevelDark.toString(),
+              value: controller.useSubThemes && controller.useFlexColorScheme
+                  ? controller.blendOnLevelDark.toDouble()
+                  : 0,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? (double value) {
+                          controller.setBlendOnLevelDark(value.toInt());
+                        }
+                      : null,
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'LEVEL',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Text(
+                    // ignore: lines_longer_than_80_chars
+                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+        // Show all the on colors to show what is done to them.
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: OnColors(controller: controller),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

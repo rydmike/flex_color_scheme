@@ -47,7 +47,7 @@ class SchemeColors extends StatelessWidget {
 
     // Size of the color presentation boxes
     const double boxWidth = 150;
-    final double boxHeight = showInputColor ? 230 : 200;
+    final double boxHeight = showInputColor ? 230 : 190;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -1338,7 +1338,7 @@ class SchemeColors extends StatelessWidget {
                                 '${colorScheme.errorContainer}'),
                             color: colorScheme.errorContainer,
                             textColor: colorScheme.onErrorContainer,
-                            label: 'error\nContainer',
+                            label: 'error\u200BContainer',
                             showInputColor: showInputColor,
                             inputColor: inputErrorContainerColor,
                             inputTextColor: inputOnErrorContainerColor,

@@ -28,7 +28,9 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     // Value less than 0, or index over range disables the control.
-    final bool disabled = index < 0 || index >= FlexSchemeVariant.values.length;
+    final bool disabled = index < 0 ||
+        index >= FlexSchemeVariant.values.length ||
+        onChanged == null;
 
     return PopupMenuButton<int>(
       initialValue: disabled ? 0 : index,
@@ -36,7 +38,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       onSelected: (int index) {
         onChanged?.call(
-            index >= FlexSchemeVariant.values.length || index < 1 ? 0 : index);
+            index >= FlexSchemeVariant.values.length || index < 0 ? 0 : index);
       },
       enabled: !disabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
