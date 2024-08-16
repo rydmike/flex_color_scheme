@@ -209,11 +209,11 @@ String generateThemeDartCode(ThemeController controller) {
   // Code for FlexSubThemesData setup.
   //
   final String interactionEffects = controller.interactionEffects
-      ? ''
-      : '    interactionEffects: ${controller.interactionEffects},\n';
+      ? '    interactionEffects: ${controller.interactionEffects},\n'
+      : '';
   final String tintedDisabledControls = controller.tintedDisabledControls
-      ? ''
-      : '    tintedDisabledControls: ${controller.tintedDisabledControls},\n';
+      ? '    tintedDisabledControls: ${controller.tintedDisabledControls},\n'
+      : '';
   final String blendOnLevelLight = controller.blendOnLevel > 0
       ? '    blendOnLevel: ${controller.blendOnLevel},\n'
       : '';
@@ -221,11 +221,11 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    blendOnLevel: ${controller.blendOnLevelDark},\n'
       : '';
   final String blendLightOnColors = controller.blendLightOnColors
-      ? ''
-      : '    blendOnColors: ${controller.blendLightOnColors},\n';
+      ? '    blendOnColors: ${controller.blendLightOnColors},\n'
+      : '';
   final String blendDarkOnColors = controller.blendDarkOnColors
-      ? ''
-      : '    blendOnColors: ${controller.blendDarkOnColors},\n';
+      ? '    blendOnColors: ${controller.blendDarkOnColors},\n'
+      : '';
   final String blendLightTextTheme = controller.blendLightTextTheme
       ? '    blendTextTheme: ${controller.blendLightTextTheme},\n'
       : '';

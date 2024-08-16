@@ -96,9 +96,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - The enum `FlexSystemNavBarStyle` value `background` now results in the app bar using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in typical FCS configuration.
 
+- The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`, In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and to align more with Flutter SDK defaults. If you had not configured these values before they defaulted to `true`. You now have to set them explicitly to `true` to get the same result as before when they were not configured.
+
+- The `FlexSubThemesData` properties `blendOnColors` now defaults to `false`. In previous versions it defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and to align more with Flutter defaults. If you had not configured this values before it defaulted to `true`. You now have to set it explicitly to `true` to get the same result as before when it was not configured.  Consider setting this property true in dark mode, and false in light theme mode, for a style that matches the Material-3 color design when not using seed generated `ColorScheme`.
+
 **CHANGE**
 
-- Changed all usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.
+- Changed all internal usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.
 - Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the updated `SchemeColor` and `ColorScheme`.
 
 **NEW**
@@ -162,7 +166,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Split FAB and Chip to separate panels.
 - Adjust both HeaderCards background color to work with new ColorScheme surface colors.
 - Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
-
+- The component theme settings "Use M2 style divider in M2, ""Tinted disabled components" and "Tinted interaction` are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
+- Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mde. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 
 **FIX**
 

@@ -180,14 +180,14 @@ class Store {
   // The controller uses a nullable bool with different defaults in
   // M2 and M3 mode if it is set to null. The API use null as default for this
   // property and it can be set to null in Playground, but playground is
-  // a bit opinionated and defaults to always uing M3 typography since it is
-  // much much better than M2.
+  // a bit opinionated and defaults to always using M3 typography since it is
+  // much better than M2.
   static const bool defaultUseTextTheme = true;
 
   // Key used to read and save the useM2StyleDividerInM3 value.
   static const String keyUseM2StyleDividerInM3 = 'useM2StyleDividerInM3';
   // Default value for the useM2StyleDividerInM3, also used to reset settings.
-  static const bool defaultUseM2StyleDividerInM3 = true;
+  static const bool defaultUseM2StyleDividerInM3 = false;
 
   // Key used to read and save the useAppFont value.
   static const String keyUseAppFont = 'useAppFont';
@@ -209,12 +209,12 @@ class Store {
   // Key used to read and save the interactionEffects value.
   static const String keyInteractionEffects = 'interactionEffects';
   // Default value for the interactionEffects, also used to reset settings.
-  static const bool defaultInteractionEffects = true;
+  static const bool defaultInteractionEffects = false;
 
   // Key used to read and save the tintedDisabledControls value.
   static const String keyTintedDisabledControls = 'tintedDisabledControls';
   // Default value for the tintedDisabledControls, also used to reset settings.
-  static const bool defaultTintedDisabledControls = true;
+  static const bool defaultTintedDisabledControls = false;
 
   // Key used to read and save the defaultRadius value.
   static const String keyDefaultRadius = 'defaultRadius';
