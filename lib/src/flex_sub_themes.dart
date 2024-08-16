@@ -179,6 +179,15 @@ enum SchemeColor {
   /// The active theme's color scheme surfaceTint color will be used.
   surfaceTint,
 
+  /// Black color will be used.
+  black,
+
+  /// White color will be used.
+  white,
+
+  /// Transparent color will be used.
+  transparent,
+
   // /// The active theme's color scheme background color will be used.
   // @Deprecated('Use surface instead. '
   //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
@@ -404,6 +413,12 @@ class FlexSubThemes {
         return colorScheme.inversePrimary;
       case SchemeColor.surfaceTint:
         return colorScheme.surfaceTint;
+      case SchemeColor.black:
+        return Colors.black;
+      case SchemeColor.white:
+        return Colors.white;
+      case SchemeColor.transparent:
+        return Colors.transparent;
     }
   }
 
@@ -476,6 +491,7 @@ class FlexSubThemes {
       case SchemeColor.surfaceContainer:
       case SchemeColor.surfaceContainerHigh:
       case SchemeColor.surfaceContainerHighest:
+      case SchemeColor.transparent:
         return SchemeColor.onSurface;
       case SchemeColor.onSurface:
         return SchemeColor.surface;
@@ -495,6 +511,10 @@ class FlexSubThemes {
         return SchemeColor.inverseSurface;
       case SchemeColor.inversePrimary:
         return SchemeColor.onSurface;
+      case SchemeColor.black:
+        return SchemeColor.white;
+      case SchemeColor.white:
+        return SchemeColor.black;
     }
   }
 
@@ -508,6 +528,9 @@ class FlexSubThemes {
   /// [SchemeColor.primary] enum value, will return the [ColorScheme.onPrimary].
   /// Wise versa, passing in [SchemeColor.onPrimary] will return the color
   /// [ColorScheme.primary].
+  ///
+  /// For the extra colors, black is pair for white and wise versa and
+  /// transparent is paired with onSurface.
   static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) =>
       schemeColor(onSchemeColor(value), colorScheme);
 

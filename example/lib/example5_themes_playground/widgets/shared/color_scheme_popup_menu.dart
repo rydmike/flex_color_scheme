@@ -66,6 +66,11 @@ class ColorSchemePopupMenu extends StatelessWidget {
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
+                foregroundColor: i >= SchemeColor.values.length
+                    ? colorScheme.onSurface
+                    : FlexSubThemes.schemeColor(
+                        FlexSubThemes.onSchemeColor(SchemeColor.values[i]),
+                        colorScheme),
                 backgroundColor: i >= SchemeColor.values.length
                     ? colorScheme.surface
                     : FlexSubThemes.schemeColor(
@@ -101,6 +106,11 @@ class ColorSchemePopupMenu extends StatelessWidget {
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(
+            foregroundColor: enabled && !useDefault
+                ? FlexSubThemes.schemeColor(
+                    FlexSubThemes.onSchemeColor(SchemeColor.values[index]),
+                    colorScheme)
+                : colorScheme.onSurface,
             backgroundColor: enabled && !useDefault
                 ? FlexSubThemes.schemeColor(
                     SchemeColor.values[index], colorScheme)
