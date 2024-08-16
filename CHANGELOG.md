@@ -15,21 +15,18 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color. 
   * A solution for this is still WIP.
 * Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
-  * Test this!
+  * Done: Test it!
 * Generate full ColorScheme in Themes Playground, also when not seeding. Need all FIXED colors. How?
   * Will need to seed for these in the background to get usable colors for them automatically. 
-* Consider what to do with surfaceTint removal. It is basically obsolete now. Convert it into a bring tints back? 
+* Consider what to do with surfaceTint removal. It is basically obsolete now in Flutter 3.22 and later. Convert it into "bring tints back"? 
 * Consider what to do with shadows back. More fine-grained control?
 * Flutter 3.22 broke +100 tests in FCS, review and fix them.
   * Get tests back to 100% coverage.
-* Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. But all the deprecated `background`, `onBackground` and `surfaceVariant` hints should also be addressed where possible. There are 492 of them remaining. 
+* Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. All the remaining 492 deprecated `background`, `onBackground` and `surfaceVariant` hints have now been fixed.
   * Done
 
 **TODO**
 
-- Make TabBarStyle.universal use the primaryFixedDimcolor
-- For BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it now showing any diff in the presentation. Also has no default elevation in M2.
-  * Maybe this is OK? Look into it.
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`. 
@@ -64,7 +61,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> No prefer transparent instead, add guidance to docs instead.
 - Investigate:
   - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
-
+  - Consider `TabBarStyle.universal` using the `primaryFixedDimcolor`? Or keep as is for now?
+- BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. Also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? Would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
+  
 **BREAKING**
 
 This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme ib Flutter 3.22. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS is no more aligned with Flutter's Material-3 theming defaults, by typically using them as starting points in the default Material-3 mode. Material-2 mode is still supported, it has its own opinionated defaults as before.
