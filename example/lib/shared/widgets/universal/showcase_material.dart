@@ -4241,8 +4241,9 @@ class BottomSheetShowcase extends StatelessWidget {
                   style: theme.textTheme.titleMedium,
                 ),
                 Text(
-                  'Uses Material of type canvas as default background.\n'
-                  'ColorScheme background in M2, but surface in M3.',
+                  'In M2 Flutter uses Material of type canvas, resulting in\n'
+                  'color surface. In M3 Flutter uses surfaceContainerLow.\n'
+                  'FCS defaults to surfaceContainerLow in both modes.',
                   style: theme.textTheme.bodySmall,
                   textAlign: TextAlign.center,
                 ),
@@ -4279,8 +4280,9 @@ class BottomSheetModalShowcase extends StatelessWidget {
                   style: theme.textTheme.titleMedium,
                 ),
                 Text(
-                  'Uses Material of type canvas as default background.\n'
-                  'ColorScheme background in M2, but surface in M3.',
+                  'In M2 Flutter uses Material of type canvas, resulting in\n'
+                  'color surface. In M3 Flutter uses surfaceContainerLow.\n'
+                  'FCS defaults to surfaceContainerLow in both modes.',
                   style: theme.textTheme.bodySmall,
                   textAlign: TextAlign.center,
                 ),

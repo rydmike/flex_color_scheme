@@ -19,7 +19,7 @@ class BottomSheetSettings extends StatelessWidget {
 
     final String sheetDefaultColorLabel =
         controller.useSubThemes && controller.useFlexColorScheme
-            ? 'default (surface)'
+            ? 'default (surfaceContainerLow)'
             : useMaterial3
                 ? 'default (surface)'
                 : 'default (theme.canvasColor)';

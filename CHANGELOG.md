@@ -27,6 +27,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO**
 
+- For BottomSheet with no FSS and seeded Scheme in M2 mode, we get same color on surface and surfaceBright, resulting in it now showing any diff in the presentation. Also has no default elevation in M2.
+  * Maybe this is OK? Look into it.
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`. 
@@ -87,6 +89,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `MenuBar` background now defaults to `surfaceContainer` instead of `surface` with elevation tint in M3 mode. This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
 
 - The `MenuTheme` background now defaults to `surfaceContainer` instead of `surface` with elevation tint.  This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22. This affects default background color of the opened menu on `MenuBar`, `MenuAnchor` and `DropDownMenu`.
+
+- The `BottomSheet` background now defaults to `surfaceContainerLow` instead of `surface` with elevation tint. This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
+
 
 **CHANGE**
 
