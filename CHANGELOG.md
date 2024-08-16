@@ -27,7 +27,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **TODO**
 
-- For BottomSheet with no FSS and seeded Scheme in M2 mode, we get same color on surface and surfaceBright, resulting in it now showing any diff in the presentation. Also has no default elevation in M2.
+- Make TabBarStyle.universal use the primaryFixedDimcolor
+- For BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it now showing any diff in the presentation. Also has no default elevation in M2.
   * Maybe this is OK? Look into it.
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
@@ -168,6 +169,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
 - The component theme settings "Use M2 style divider in M2, ""Tinted disabled components" and "Tinted interaction` are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mde. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
+- Update M3 default info for `BottomAppBar` to `surfaceContainer`.
 
 **FIX**
 
