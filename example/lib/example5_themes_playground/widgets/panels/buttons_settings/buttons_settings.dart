@@ -118,7 +118,7 @@ class ButtonsSettings extends StatelessWidget {
               ? const Text('Background color')
               : const Text('Foreground color'),
           labelForDefault: controller.useMaterial3
-              ? 'default (surface)'
+              ? 'default (surfaceContainerLow)'
               : 'default (onPrimary)',
           index: controller.elevatedButtonSecondarySchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
