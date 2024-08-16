@@ -37,12 +37,12 @@ class MenuSettings extends StatelessWidget {
             : 1;
 
     final String menuBarDefault = controller.menuSchemeColor == null
-        ? 'default (surface)'
+        ? 'default (surfaceContainer)'
         // ignore: lines_longer_than_80_chars
         : 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name})';
 
     final String menuItemDefault = controller.menuSchemeColor == null
-        ? 'default (surface)'
+        ? 'default (surfaceContainer)'
         // ignore: lines_longer_than_80_chars
         : 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name})';
 
@@ -327,7 +327,7 @@ class MenuSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color of containers'),
-          labelForDefault: 'default (surface)',
+          labelForDefault: 'default (surfaceContainer)',
           index: controller.menuSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

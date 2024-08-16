@@ -6680,7 +6680,10 @@ class FlexColorScheme with Diagnosticable {
                 colorScheme,
               )
         : subTheme.popupMenuSchemeColor == null
-            ? colorScheme.surface.withOpacity(subTheme.popupMenuOpacity!)
+            ? useMaterial3
+                ? colorScheme.surfaceContainer
+                    .withOpacity(subTheme.popupMenuOpacity!)
+                : colorScheme.surface.withOpacity(subTheme.popupMenuOpacity!)
             : FlexSubThemes.schemeColor(
                 subTheme.popupMenuSchemeColor!,
                 colorScheme,
