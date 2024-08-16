@@ -17,7 +17,9 @@ class CardSettings extends StatelessWidget {
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String cardRadiusDefaultLabel =
         controller.cardBorderRadius == null && effectiveRadius == null
-            ? 'default 12'
+            ? controller.useMaterial3
+                ? 'default 12'
+                : 'default 4'
             : controller.cardBorderRadius == null && effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';

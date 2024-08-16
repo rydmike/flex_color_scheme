@@ -153,7 +153,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Split FAB and Chip to separate panels.
 - Adjust both HeaderCards background color to work with new ColorScheme surface colors.
-- Change surface and on-color blends to default to 0. Belnds are not used by default anymore in Playground.
+- Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
 
 
 **FIX**
@@ -162,6 +162,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
 - Chore: Update issue resolution status texts for Dialogs.
+- Fixed that Card was not showing the correct default border radius in M2 mode when using FCS.
 
 **TODO PLAYGROUND AND EXAMPLES**
 
@@ -176,7 +177,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Make Chips presentation even better (already improved a lot).
 - ADD: To IconButtons, add a text column explaining the type, as on the Chips panel.
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
-- FIX: Card not showing the correct default border radius in M2 mode
+
 
 ## 7.3.1
 
