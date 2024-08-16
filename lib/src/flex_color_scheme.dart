@@ -6655,12 +6655,12 @@ class FlexColorScheme with Diagnosticable {
     final Color bottomSheetColor = subTheme.bottomSheetBackgroundColor != null
         ? FlexSubThemes.schemeColor(
             subTheme.bottomSheetBackgroundColor!, colorScheme)
-        : colorScheme.surface;
+        : colorScheme.surfaceContainerLow;
     final Color bottomSheetModalColor =
         subTheme.bottomSheetModalBackgroundColor != null
             ? FlexSubThemes.schemeColor(
                 subTheme.bottomSheetModalBackgroundColor!, colorScheme)
-            : colorScheme.surface;
+            : colorScheme.surfaceContainerLow;
     final double bottomSheetElevation = subTheme.bottomSheetElevation ??
         (useMaterial3 ? kBottomSheetElevation : kBottomSheetElevationM2);
     final double bottomSheetModalElevation =

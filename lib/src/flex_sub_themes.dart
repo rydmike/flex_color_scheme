@@ -1192,13 +1192,15 @@ class FlexSubThemes {
   static BottomSheetThemeData bottomSheetTheme({
     /// Default value for [BottomSheet.backgroundColor].
     ///
-    /// If null, defaults to [Material]'s default.
+    /// If null, defaults to Flutter's default, which is theme canvas color in
+    /// M2 mode and surfaceContainerLow in M3 mode.
     final Color? backgroundColor,
 
     /// Value for [BottomSheet.backgroundColor] when the Bottom sheet is
     /// presented as a modal bottom sheet.
     ///
-    /// If null, defaults to [Material]'s default.
+    /// If null, defaults to Flutter's default, which is theme canvas color in
+    /// M2 mode and surfaceContainerLow in M3 mode.
     final Color? modalBackgroundColor,
 
     /// The none modal bottom sheet elevation.
