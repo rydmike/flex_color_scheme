@@ -68,11 +68,11 @@ class IconButtonAvatarSettings extends StatelessWidget {
               'explanation of why this limitation is used.\n'),
         ),
         const Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: IconButtonShowcase(),
         ),
         const Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: IconButtonVariantsShowcase(),
         ),
         ListTileReveal(
