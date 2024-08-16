@@ -37,7 +37,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. 
 - InputDecorator: add inputDecoratorPrefixIconSchemeColor
 
-**POTENTIAL TODOS or maybe in Version 8.1.0 or later**
+**POTENTIAL TODOS or maybe push to version 8.1.0 or later**
 
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
 - AppBar: Option to decouple foreground/background colors. 
@@ -53,16 +53,16 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
   - Add ShadCn theme colors?
-- Platform adaptive ShapeBorder configuration (big maybe, probably push to V9 and/or wait for Flutter support in SDK).
+- Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
 - Some `ListTile` theming properties, which ones?
 - Some `SearchBar` theming features.
 - Add fidelity for iOS adaptive AppBar (maybe).
-- Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> No prefer transparent instead, add guidance to docs instead.
+- Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> Maybe, but prefer transparent instead, add guidance to docs about it.
 - Investigate:
   - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
   - Consider `TabBarStyle.universal` using the `primaryFixedDimcolor`? Or keep as is for now?
-- BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. Also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? Would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
+  - BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. Also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? Would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
   
 **BREAKING**
 
@@ -169,10 +169,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **CHANGE**
 
 - Split FAB and Chip to separate panels.
-- Adjust both HeaderCards background color to work with new ColorScheme surface colors.
+- Modified both HeaderCards background colors to work with new ColorScheme surface colors.
 - Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
-- The component theme settings "Use M2 style divider in M2, ""Tinted disabled components" and "Tinted interaction` are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
-- Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mde. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
+- The component theme settings "Use M2 style divider in M2, "Tinted disabled components" and "Tinted interaction" are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
+- Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mode. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 - Update M3 default info for `BottomAppBar` to `surfaceContainer`.
 - No longer generates any code settings for `useMaterial3: true` value. It is the new default if ON and thus no longer explicitly added to the API code gen. 
 
