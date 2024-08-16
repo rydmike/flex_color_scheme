@@ -155,7 +155,9 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         ],
         ColorSchemePopupMenu(
           title: const Text('Background color for light and dark mode'),
-          labelForDefault: 'default (surface)',
+          labelForDefault: controller.useMaterial3
+              ? 'default (surfaceContainer)'
+              : 'default (surface)',
           index: controller.bottomAppBarSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
