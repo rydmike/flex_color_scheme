@@ -242,6 +242,10 @@ extension FlexThemeData on ThemeData {
     /// as a Flutter standard M2 light [ThemeData.from] by tying the app bar
     /// color to the primary color. If [useMaterial3] is true it defaults
     /// [FlexAppBarStyle.surface] which is the same as M3 default.
+    ///
+    /// If you enable component themes you can also control the themed
+    /// [AppBar] by selecting any active [ColorScheme] as its background color.
+    /// If you do so, the setting applied by this property is ignored.
     final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
@@ -1613,6 +1617,10 @@ extension FlexThemeData on ThemeData {
     /// as a Flutter standard M2 dark [ThemeData.from] by tying the app bar
     /// color to the M2 dark Material color. If [useMaterial3] is true it
     /// defaults [FlexAppBarStyle.surface] which is the same as M3 default.
+    ///
+    /// If you enable component themes you can also control the themed
+    /// [AppBar] by selecting any active [ColorScheme] as its background color.
+    /// If you do so, the setting applied by this property is ignored.
     final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.

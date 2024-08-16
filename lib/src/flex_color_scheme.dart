@@ -23,8 +23,13 @@ import 'flex_text_theme_color.dart';
 
 // ignore_for_file: comment_references
 
-/// Enum to select the used AppBarTheme style in [FlexColorScheme] based themes
-/// when using its [FlexColorScheme.light] and [FlexColorScheme.dark] factories.
+/// Enum to select the used AppBarTheme style in [FlexColorScheme] (FCS)
+/// based themes when using its [FlexColorScheme.light] and
+/// [FlexColorScheme.dark] factories.
+///
+/// If you enable component themes in FCS you can also control the themed
+/// [AppBar] by selecting any active [ColorScheme] as its background color.
+/// If you do so, the used [FlexAppBarStyle] value is ignored.
 enum FlexAppBarStyle {
   /// Use the scheme primary color as the AppBar's themed background color.
   ///
@@ -32,7 +37,7 @@ enum FlexAppBarStyle {
   /// false.
   primary,
 
-  /// Use Material 2 default surface color as the AppBar's themed background
+  /// Use Material-2 default surface color as the AppBar's themed background
   /// color.
   ///
   /// This is the default for dark schemes, when [ThemeData.useMaterial3] is
@@ -40,19 +45,25 @@ enum FlexAppBarStyle {
   ///
   /// For a dark scheme this choice will result in a near black app bar with
   /// color value (#FF121212). If this setting is used in a light scheme, it
-  /// will result in a white app bar, as the standard Material 2 surface color
+  /// will result in a white app bar, as the standard Material-2 surface color
   /// for light scheme is white.
   material,
 
-  /// Use scheme surface color as the AppBar's themed background color,
+  /// Use [ColorScheme.surface] color as the AppBar's themed background color,
   /// including any blend (surface tint) color it may have.
   ///
   /// This is the default for light and dark theme mode, when
   /// [ThemeData.useMaterial3] is true.
   surface,
 
-  /// Use scheme background color as the AppBar's themed background color,
-  /// including any blend (surface tint) color it may have.
+  /// Use [ColorScheme.surfaceContainerLow] color as the AppBar's themed
+  /// background color, including any blend (surface tint) color it may have.
+  ///
+  /// In FlexColorScheme versions before 8.0, this selection resulted in the
+  /// [ColorScheme] background color being used as the AppBar color. This was
+  /// deprecated in version 8.0.0 and replaced with
+  /// [ColorScheme.surfaceContainerLow] because Flutter 3.22 deprecated the
+  /// background color.
   background,
 
   /// Use scaffold background color as the AppBar's themed background color,
@@ -102,11 +113,19 @@ enum FlexSystemNavBarStyle {
   /// color blend that the surface color has received will be used.
   surface,
 
-  /// The system navigation bar will be the same color as active theme
-  /// colorScheme.surfaceContainerLow color. If your FlexColorScheme definition
+  /// The system navigation bar will be the same color as active theme's
+  /// [ColorScheme.surfaceContainerLow] color.
+  ///
+  /// If your FlexColorScheme definition
   /// is set to use primary branded surface and background colors, the same
   /// primary color blend that the surfaceContainerLow color has received will
   /// be used.
+  ///
+  /// In FlexColorScheme versions before 8.0, this selection resulted in the
+  /// [ColorScheme] background color being used as the AppBar color. This was
+  /// deprecated in version 8.0.0 and replaced with
+  /// [ColorScheme.surfaceContainerLow] because Flutter 3.22 deprecated the
+  /// background color.
   background,
 
   /// The system navigation bar will be the same color as active theme
@@ -139,10 +158,10 @@ enum FlexTabBarStyle {
   /// the style you want.
   forAppBar,
 
-  /// Themed to fit with current background and surface colors.
+  /// Themed to fit on current surface colors.
   ///
   /// Indicator, text and icons contrast with background and surface colors
-  /// via primary color.
+  /// using primary color.
   ///
   /// If you intend to use your TabBar's only on surfaces, like Scaffold
   /// or in cards using default theme background color, then use this style.
@@ -152,7 +171,7 @@ enum FlexTabBarStyle {
   forBackground,
 
   /// Make a [TabBarTheme] sub-theme that equals the style you get with
-  /// ThemeData.from constructor and Widget default values in Flutter SDK.
+  /// ThemeData constructor and Widget default values in Flutter SDK.
   ///
   /// This works well with default primary colored AppBar's in light
   /// theme and dark surface colored AppBars or other dark surfaces in dark
@@ -1491,6 +1510,10 @@ class FlexColorScheme with Diagnosticable {
     /// as a Flutter standard M2 light [ThemeData.from] by tying the app bar
     /// color to the primary color. If [useMaterial3] is true it defaults
     /// [FlexAppBarStyle.surface] which is the same as M3 default.
+    ///
+    /// If you enable component themes you can also control the themed
+    /// [AppBar] by selecting any active [ColorScheme] as its background color.
+    /// If you do so, the setting applied by this property is ignored.
     final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
@@ -1745,7 +1768,7 @@ class FlexColorScheme with Diagnosticable {
     /// would be used based on the corresponding color property defined in
     /// [FlexSchemeColor] [colors] or for this color defined when using a
     /// pre-defined color scheme based on [FlexScheme] `scheme` property and
-    /// the [FlexAppBarStyle] [appBarStyle] property.
+    /// the [FlexAppBarStyle] via the [appBarStyle] property.
     ///
     /// Thus custom color will also override any scheme color based selection
     /// for the [AppBAr] in active used sub-themes.
@@ -3037,11 +3060,9 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.surface:
           effectiveAppBarColor =
               effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
-
-        // TODO(rydmike): Use other than surface color, like surfaceContainer.
         case FlexAppBarStyle.background:
-          effectiveAppBarColor =
-              effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveSurfaceContainerLowColor
+              .withOpacity(appBarOpacity ?? 1.0);
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor =
               effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
@@ -3459,6 +3480,10 @@ class FlexColorScheme with Diagnosticable {
     /// as a Flutter standard M2 dark [ThemeData.from] by tying the app bar
     /// color to the M2 dark Material color. If [useMaterial3] is true it
     /// defaults [FlexAppBarStyle.surface] which is the same as M3 default.
+    ///
+    /// If you enable component themes you can also control the themed
+    /// [AppBar] by selecting any active [ColorScheme] as its background color.
+    /// If you do so, the setting applied by this property is ignored.
     final FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
@@ -3713,7 +3738,7 @@ class FlexColorScheme with Diagnosticable {
     /// would be used based on the corresponding color property defined in
     /// [FlexSchemeColor] [colors] or for this color defined when using a
     /// pre-defined color scheme based on [FlexScheme] `scheme` property and
-    /// the [FlexAppBarStyle] [appBarStyle] property.
+    /// the [FlexAppBarStyle] and its [appBarStyle] property.
     ///
     /// Thus custom color will also override any scheme color based selection
     /// for the [AppBAr] in active used sub-themes.
@@ -5030,10 +5055,9 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.surface:
           effectiveAppBarColor =
               effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
-        // TODO(rydmike): Use other surface color instead of surface?
         case FlexAppBarStyle.background:
-          effectiveAppBarColor =
-              effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveSurfaceContainerLowColor
+              .withOpacity(appBarOpacity ?? 1.0);
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor =
               effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);

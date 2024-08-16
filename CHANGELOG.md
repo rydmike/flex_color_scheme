@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 15, 2024**
+**Aug 16, 2024**
 
 ### PACKAGE
 
@@ -92,6 +92,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - The `BottomSheet` background now defaults to `surfaceContainerLow` instead of `surface` with elevation tint. This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
 
+- The enum `FlexAppBarStyle` value `background` now results in the app bar using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in typical FCS configuration.
+
+- The enum `FlexSystemNavBarStyle` value `background` now results in the app bar using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in typical FCS configuration.
 
 **CHANGE**
 
