@@ -106,7 +106,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the updated `SchemeColor` and `ColorScheme`.
 
 **NEW**
-- Add `FlexSubThemesData` property `applyAllToCupertino
+
+- Add `black`, `white` and `transparent` as enum values to `SchemeColor`. these colors can in many theming situations be usable instead of the ColorScheme based ones.
+  - The on color pair for black is white and wise versa. For transparent, it is `onSurface`. 
 - Added TextStyles for `FlexSubThemesData` so that:
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarToolbarTextStyle` for its `toolbarTextStyle`.
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarTitleTextStyle` for its `titleTextStyle`.
