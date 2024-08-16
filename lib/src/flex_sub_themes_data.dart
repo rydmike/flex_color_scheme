@@ -162,10 +162,10 @@ import 'flex_sub_themes.dart';
 class FlexSubThemesData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSubThemesData object.
   const FlexSubThemesData({
-    this.interactionEffects = true,
-    this.tintedDisabledControls = true,
+    this.interactionEffects = false,
+    this.tintedDisabledControls = false,
     this.blendOnLevel,
-    this.blendOnColors = true,
+    this.blendOnColors = false,
     //
     this.adaptiveRemoveElevationTint,
     this.adaptiveElevationShadowsBack,
@@ -498,15 +498,15 @@ class FlexSubThemesData with Diagnosticable {
   /// overlay colors work and are used by widgets.
   ///
   /// Some widget's in Flutter still have gaps or bugs in their implementation
-  /// of MaterialState and only works partially. Compromises had to be made in
+  /// of [WidgetState] and only works partially. Compromises had to be made in
   /// some cases. These cases will be improved when support for them in
   /// Flutter is corrected. The status of these issues and gaps are tracked
   /// in FlexColorScheme docs
   /// [known issues](https://docs.flexcolorscheme.com/known_issues) chapter.
   ///
-  /// Set to false to opt-out and use Flutter's default interactions effects.
+  /// Keep it false to use Flutter's default interactions effects.
   //
-  /// Defaults to true.
+  /// Defaults to false.
   final bool interactionEffects;
 
   /// Use color tint on disabled controls.
@@ -538,9 +538,9 @@ class FlexSubThemesData with Diagnosticable {
   /// Implementing this theming feature manually on all widgets, is tedious
   /// and requires a large number of theming definitions on every used control.
   ///
-  /// Set to false to opt-out and use Flutter's default grey disabled controls.
+  /// Keep it false to use Flutter's default its grey disabled controls.
   ///
-  /// Defaults to true.
+  /// Defaults to false.
   final bool tintedDisabledControls;
 
   /// Sets the blend level strength of container color used on its onColor.
@@ -593,9 +593,11 @@ class FlexSubThemesData with Diagnosticable {
   /// with [blendOnLevel] and completely turned off by setting [blendOnLevel]
   /// to 0 (zero).
   ///
-  /// Defaults to true. Main colors also get hint of its own color in their
-  /// onColor. Consider setting this property true in dark mode, and false in
-  /// light theme mode, for a style that matches the Material 3 color design.
+  /// Defaults to false.
+  ///
+  /// Consider setting this property true in dark mode, and false in
+  /// light theme mode, for a style that matches the Material-3 color design
+  /// when not using seed generated [ColorScheme].
   final bool blendOnColors;
 
   /// Controls adaptive elevation tint color usage in Material 3 theming.
@@ -3633,7 +3635,7 @@ class FlexSubThemesData with Diagnosticable {
       segmentedButtonBorderWidth:
           segmentedButtonBorderWidth ?? this.segmentedButtonBorderWidth,
       segmentedButtonTextStyle:
-      segmentedButtonTextStyle ?? this.segmentedButtonTextStyle,
+          segmentedButtonTextStyle ?? this.segmentedButtonTextStyle,
       //
       materialButtonSchemeColor:
           materialButtonSchemeColor ?? this.materialButtonSchemeColor,
