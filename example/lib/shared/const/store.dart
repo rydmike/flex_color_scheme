@@ -47,6 +47,18 @@ class Store {
   // Default value for the useSubThemes, also used to reset settings.
   static const bool defaultUseSubThemes = true;
 
+  // Key used to read and save the applyThemeToAllCupertino value.
+  //
+  // This setting is used to by the Playground to define:
+  //
+  // `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)`
+  //
+  // It makes the theme apply to all Cupertino widgets, including the
+  // `CupertinoSwitch`.
+  static const String keyApplyThemeToAllCupertino = 'applyThemeToAllCupertino';
+  // Default value for the applyThemeToAllCupertino, also to reset settings.
+  static const bool defaultApplyThemeToAllCupertino = true;
+
   // Key used to read and save the adaptiveRemoveElevationTintLight value.
   static const String keyAdaptiveRemoveElevationTintLight =
       'adaptiveRemoveElevationTintLight';

@@ -785,17 +785,17 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
                   },
                 ),
                 CupertinoSwitch(
-                  value: isOn1,
-                  onChanged: null,
-                ),
-                const Text('Disabled'),
-                CupertinoSwitch(
                   value: !isOn1,
                   onChanged: (bool value) {
                     setState(() {
                       isOn1 = !value;
                     });
                   },
+                ),
+                const Text('Disabled'),
+                CupertinoSwitch(
+                  value: isOn1,
+                  onChanged: null,
                 ),
                 CupertinoSwitch(
                   value: !isOn1,

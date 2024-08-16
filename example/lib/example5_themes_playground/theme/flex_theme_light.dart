@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/const/app.dart';
@@ -547,6 +548,11 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     //
     // The platform can be toggled in the app, but not saved.
     platform: controller.platform,
+    // Apply theme's ColorScheme to all cupertino based widgets.
+    cupertinoOverrideTheme: controller.applyThemeToAllCupertino
+        ? const CupertinoThemeData(applyThemeToAll: true)
+        : null,
+    // Use M3 based theme, or M2 based theme.
     useMaterial3: controller.useMaterial3,
     // Add a custom theme extension with light mode code highlight colors and
     // light mode topic colors.

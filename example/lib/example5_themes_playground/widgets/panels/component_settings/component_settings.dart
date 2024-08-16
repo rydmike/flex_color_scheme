@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/splash_type_enum.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/component_colors_reveal.dart';
-import '../../shared/splash_type_popup_menu.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //
@@ -36,6 +34,26 @@ class ComponentSettings extends StatelessWidget {
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
               controller.useFlexColorScheme ? controller.setUseSubThemes : null,
+        ),
+        SwitchListTileReveal(
+          title: const Text('Apply ColorScheme to all Cupertino components'),
+          subtitleDense: true,
+          subtitle: const Text(
+            "Keep this ON to apply the colors of this Material theme's  "
+            'ColorScheme to '
+            'all Cupertino components. For example, without this set to '
+            'ON the CupertinoSwitch remains iOS system green and not '
+            'primary color like the default themed Material Switch is.\n'
+            '\n'
+            'NOTE: Custom Material Switch component themed colors are NOT '
+            'applied to the CupertinoSwitch, only the ColorScheme primary '
+            'color is.',
+          ),
+          value: controller.applyThemeToAllCupertino &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useFlexColorScheme
+              ? controller.setApplyThemeToAllCupertino
+              : null,
         ),
         const Divider(),
         SwitchListTileReveal(
@@ -119,23 +137,6 @@ class ComponentSettings extends StatelessWidget {
               controller.useFlexColorScheme,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.setInteractionEffects
-              : null,
-        ),
-        SplashTypePopupMenu(
-          title: const Text('Ink splash effect'),
-          subtitle: const Text(
-            'Defines the type of tap ink splash effect used on Material '
-            'UI components.\n',
-          ),
-          index: controller.splashType?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= SplashTypeEnum.values.length) {
-                    controller.setSplashType(null);
-                  } else {
-                    controller.setSplashType(SplashTypeEnum.values[index]);
-                  }
-                }
               : null,
         ),
         const Divider(),

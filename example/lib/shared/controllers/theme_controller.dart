@@ -66,6 +66,9 @@ class ThemeController with ChangeNotifier {
         Store.keyUsedVisualDensity, Store.defaultUseFlexColorScheme);
     _useSubThemes = await _themeService.load(
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
+    _applyThemeToAllCupertino = await _themeService.load(
+        Store.keyApplyThemeToAllCupertino,
+        Store.defaultApplyThemeToAllCupertino);
     //
     _adaptiveRemoveElevationTintLight = await _themeService.load(
         Store.keyAdaptiveRemoveElevationTintLight,
@@ -854,6 +857,7 @@ class ThemeController with ChangeNotifier {
     setUsedVisualDensity(Store.defaultUsedVisualDensity, false);
     setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     setUseSubThemes(Store.defaultUseSubThemes, false);
+    setApplyThemeToAllCupertino(Store.defaultApplyThemeToAllCupertino, false);
     //
     setAdaptiveRemoveElevationTintLight(
         Store.defaultAdaptiveRemoveElevationTintLight, false);
@@ -2167,6 +2171,16 @@ class ThemeController with ChangeNotifier {
     _useSubThemes = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseSubThemes, value));
+  }
+
+  late bool _applyThemeToAllCupertino;
+  bool get applyThemeToAllCupertino => _applyThemeToAllCupertino;
+  void setApplyThemeToAllCupertino(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _applyThemeToAllCupertino) return;
+    _applyThemeToAllCupertino = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyApplyThemeToAllCupertino, value));
   }
 
   late AdaptiveTheme? _adaptiveRemoveElevationTintLight;
