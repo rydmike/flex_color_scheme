@@ -46,13 +46,13 @@ class AppBarSettings extends StatelessWidget {
           subtitle: Text('With component themes enabled you can select a '
               'ColorScheme based color for the AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
-              'FlexColorScheme component themes, but doing so offers more '
-              'choices. '
+              'FlexColorScheme component themes, but activating them gives '
+              'even more choices.\n'
+              ' '
               'Selecting a color, overrides used AppBarStyle. Set it back '
               'to default to use AppBarStyle again. Using AppBarStyle also '
-              'offers Scaffold background color as AppBar color, which when '
-              'using surface blends can be different from ColorScheme '
-              'surface and background colors.\n'),
+              'offers Scaffold background color as AppBar color, which can be '
+              'different from ColorScheme surface colors.\n'),
         ),
         // Show sample AppBar's in a Card
         Card(
@@ -340,7 +340,9 @@ class AppBarSettings extends StatelessWidget {
             title: const Text('Light mode background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
-                : 'default (primary)',
+                : controller.useMaterial3
+                    ? 'default (surface)'
+                    : 'default (primary)',
             index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
             onChanged: controller.useSubThemes && controller.useFlexColorScheme
                 ? (int index) {
