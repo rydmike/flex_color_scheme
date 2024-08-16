@@ -70,8 +70,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` had far-reaching implications on styles created by FCS and there are many breaking style changes in this release due to this. Some might even be forgotten in the change-log.
 - Deprecated `background` and `onBackground` colors in `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories. They are not used anymore. User `surface` and `onSurface` colors instead.
-- Deprecated `background`, `onBackground`, `surfaceVariant` from `FlexSchemeOnColors` and  `FlexSchemeSurfaceColors`. They are no longer used and have no function. They were deprecated since the same colors were deprecated in `ColorScheme` in Flutter 3.22. 
-- The enum `SchemeColor` got support for all colors in Flutter 3.22 colors, also includes same removals as in Flutter 3.22. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value. 
+- Deprecated `background`, `onBackground`, `surfaceVariant` from `FlexSchemeOnColors` and  `FlexSchemeSurfaceColors`. They are no longer used and have no function. They were deprecated since the same colors were deprecated in `ColorScheme` in Flutter 3.22.
+- The enum `SchemeColor` got support for all new colors in Flutter 3.22 colors. It also removed the colors Flutter 3.22 deprecated. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value.
+
 - The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. Note that all themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 - The FCS legacy property `useFlutterDeaults` was deprecated. FlexColorScheme in M3 mode now defaults to using Flutter defaults. For other configurations, modify them as desired. In M2 mode, FCS will use opinionated defaults as long as M2 exists.
@@ -107,7 +108,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
 
-- Add `black`, `white` and `transparent` as enum values to `SchemeColor`. these colors can in many theming situations be usable instead of the ColorScheme based ones.
+- The const color definition class `FlexColor` got 24 new color values to support monochrome greyscale colors for all new surfaces and their on colors for light and dark mode. These are used as starting colors for the new surface colors in the in Flutter 3.22 updated and new Material-3 `colorScheme`, when seed generated `ColorScheme` is not used. The colors follow the naming convention `lightFlexSurface___` and `darkFlexSurface___`, plus their on and inverse versions.
+
+- Added `black`, `white` and `transparent` as enum values to `SchemeColor`. these colors can in many theming situations be usable instead of the ColorScheme based ones.
   - The on color pair for black is white and wise versa. For transparent, it is `onSurface`. 
 - Added TextStyles for `FlexSubThemesData` so that:
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarToolbarTextStyle` for its `toolbarTextStyle`.

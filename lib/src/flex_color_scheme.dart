@@ -2745,7 +2745,7 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.light,
       surfaceMode: surfaceMode ?? FlexSurfaceMode.highScaffoldLowSurfaces,
       blendLevel: blendLevel,
-      surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
+      surfaceVariantBlendDivide: seed.useKeyColors ? 3 : 2,
       schemeColors: effectiveColors,
       blendColors: FlexSchemeSurfaceColors(
         surface: blendColor,
