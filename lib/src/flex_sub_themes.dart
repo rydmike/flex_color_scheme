@@ -3695,9 +3695,11 @@ class FlexSubThemes {
     /// Select which color from the passed in [colorScheme] parameter to use as
     /// the MenuBar background color.
     ///
-    /// If not defined, default to [colorScheme.surface]. FlexColorScheme
-    /// passes in [FlexSubThemesData.menuBarBackgroundSchemeColor] first uses
-    /// [FlexSubThemesData.menuSchemeColor] as fallback, that can also be null.
+    /// If not defined, default to [colorScheme.surfaceContainer].
+    ///
+    /// FlexColorScheme passes in
+    /// [FlexSubThemesData.menuBarBackgroundSchemeColor] first, can be null, and
+    /// uses [FlexSubThemesData.menuSchemeColor] as fallback, can also be null.
     final SchemeColor? backgroundSchemeColor,
 
     /// The shadow color of the MenuBar's [Material].
@@ -3721,8 +3723,8 @@ class FlexSubThemes {
     /// widget default values.
     final double? radius,
   }) {
-    final Color surface =
-        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color background = schemeColor(
+        backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme);
 
     final bool allDefault = backgroundSchemeColor == null &&
         shadowColor == null &&
@@ -3735,7 +3737,7 @@ class FlexSubThemes {
           ? null
           : MenuStyle(
               backgroundColor: backgroundSchemeColor != null
-                  ? WidgetStatePropertyAll<Color?>(surface)
+                  ? WidgetStatePropertyAll<Color?>(background)
                   : null,
               surfaceTintColor: surfaceTintColor != null
                   ? WidgetStatePropertyAll<Color?>(surfaceTintColor)
@@ -3779,7 +3781,7 @@ class FlexSubThemes {
     /// container is used by [MenuAnchor], [DropDownMenu] and menus on
     /// [MenuBar].
     ///
-    /// If not defined, defaults to [colorScheme.surface].
+    /// If not defined, defaults to [colorScheme.surfaceContainer].
     final SchemeColor? menuBackgroundSchemeColor,
 
     /// Select which color from the passed in [colorScheme] parameter to use as
@@ -3845,7 +3847,7 @@ class FlexSubThemes {
     // The buttons can have another un-highlighted background color than the
     // menu container, but it is probably not a very useful design.
     final SchemeColor menuBgScheme =
-        menuBackgroundSchemeColor ?? SchemeColor.surface;
+        menuBackgroundSchemeColor ?? SchemeColor.surfaceContainer;
     final SchemeColor bgScheme = backgroundSchemeColor ?? menuBgScheme;
     final Color backgroundColor = schemeColor(bgScheme, colorScheme);
     final SchemeColor fgScheme =
@@ -4004,7 +4006,7 @@ class FlexSubThemes {
     /// of [PopupMenuButton].
     ///
     /// If not defined, will remains null and via Flutter SDK defaults get
-    /// [ColorScheme.surface] color.
+    /// [ColorScheme.surfaceContainer] color.
     final SchemeColor? backgroundSchemeColor,
 
     /// Menu background opacity.
@@ -4016,7 +4018,7 @@ class FlexSubThemes {
     /// If undefined, produced result is same as 1, fully opaque.
     ///
     /// If opacity is defined and [backgroundSchemeColor] is undefined,
-    /// then [ColorScheme.surface] will be used as background color to
+    /// then [ColorScheme.surfaceContainer] will be used as background color to
     /// make a background color with opacity.
     final double? opacity,
 
@@ -4042,7 +4044,7 @@ class FlexSubThemes {
         ? schemeColor(backgroundSchemeColor, colorScheme)
             .withOpacity(opacity ?? 1.0)
         : opacity != null
-            ? colorScheme.surface.withOpacity(opacity)
+            ? colorScheme.surfaceContainer.withOpacity(opacity)
             : null;
 
     final bool allDefaults = backgroundSchemeColor == null &&
@@ -5411,8 +5413,8 @@ class FlexSubThemes {
     ///
     /// If not defined, and [color] is undefined, then it defaults via Flutter
     /// SDK defaults to:
-    /// - [useMaterial3] = false : defaults to theme.cardColor.
-    /// - [useMaterial3] = true  : defaults to theme.colorScheme.surface.
+    /// - [useMaterial3] = false : default theme.cardColor.
+    /// - [useMaterial3] = true  : default theme.colorScheme.surfaceContainer.
     /// Usually they are the same.
     final SchemeColor? backgroundSchemeColor,
 
@@ -5429,8 +5431,8 @@ class FlexSubThemes {
     ///
     /// If not defined, and [backgroundSchemeColor] is undefined, then it
     /// defaults via Flutter SDK defaults to:
-    /// - [useMaterial3] = false : defaults to theme.cardColor.
-    /// - [useMaterial3] = true  : defaults to theme.colorScheme.surface.
+    /// - [useMaterial3] = false : defaults theme.cardColor.
+    /// - [useMaterial3] = true  : defaults theme.colorScheme.surfaceContainer.
     /// Usually they are the same.
     final Color? color,
 

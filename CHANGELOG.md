@@ -80,8 +80,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Dialog background now defaults to `surfaceContainerHigh` in M3 mode instead of `surface` with elevation tint. Breaking change introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
 
-- The `ElevatedButton` background now defaults to `surfaceContainerLow` instead of `surface` with elevation tint.  Breaking change introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
+- The `ElevatedButton` background now defaults to `surfaceContainerLow` instead of `surface` with elevation tint. This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
 
+- The `PopupMenuButton` background now defaults to `surfaceContainer` instead of `surface` with elevation tint in M3 mode. This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
+
+- The `MenuBar` background now defaults to `surfaceContainer` instead of `surface` with elevation tint in M3 mode. This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
+
+- The `MenuTheme` background now defaults to `surfaceContainer` instead of `surface` with elevation tint.  This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22. This affects default background color of the opened menu on `MenuBar`, `MenuAnchor` and `DropDownMenu`.
 
 **CHANGE**
 

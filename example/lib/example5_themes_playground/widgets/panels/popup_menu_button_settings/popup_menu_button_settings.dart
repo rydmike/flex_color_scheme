@@ -78,7 +78,8 @@ class PopupMenuButtonSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color of container'),
-          labelForDefault: 'default (surface)',
+          labelForDefault:
+              useMaterial3 ? 'default (surfaceContainer)' : 'default (surface)',
           index: controller.popupMenuSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
