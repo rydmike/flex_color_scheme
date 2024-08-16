@@ -13,7 +13,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **CRITICAL TODOS**
 
 * Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color. 
-  * A solution for this is still WIP.
+  * A solution for this is still WIP, but now the revised concept is clear.
 * Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
   * Done: Test it!
 * Generate full ColorScheme in Themes Playground, also when not seeding. Need all FIXED colors. How?
