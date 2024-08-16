@@ -1644,6 +1644,20 @@ class IconButtonVariantsShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            SizedBox(height: 18),
+            SizedBox(width: 75, height: 21, child: Text('Type')),
+            SizedBox(height: 16),
+            SizedBox(width: 75, height: 48, child: Text('Tappable')),
+            // SizedBox(height: 8),
+            SizedBox(width: 75, height: 48, child: Text('Toggleable')),
+            // SizedBox(height: 8),
+            SizedBox(width: 75, height: 48, child: Text('Disabled')),
+          ],
+        ),
+        Column(
           // Standard IconButton
           children: <Widget>[
             SizedBox(
@@ -1777,7 +1791,7 @@ class _IconToggleButton extends StatefulWidget {
 }
 
 class _IconToggleButtonState extends State<_IconToggleButton> {
-  bool selected = false;
+  bool selected = true;
 
   @override
   Widget build(BuildContext context) {
