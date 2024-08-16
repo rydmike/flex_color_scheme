@@ -2426,8 +2426,8 @@ class FlexSubThemes {
     /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If not defined, the [baseSchemeColor] on color will be used if
-    /// [useMaterial3] is false, if it is true, then [colorScheme.surface] will
-    /// be used.
+    /// [useMaterial3] is false, if it is true, then
+    /// [colorScheme.surfaceContainerLow] will be used.
     final SchemeColor? onBaseSchemeColor,
 
     /// The button corner radius.
@@ -2522,7 +2522,7 @@ class FlexSubThemes {
     // On color logic for M2 and M3 are different. Elevated button is a mess.
     final Color onBaseColor = onBaseSchemeColor == null
         ? useM3
-            ? schemeColor(SchemeColor.surface, colorScheme)
+            ? schemeColor(SchemeColor.surfaceContainerLow, colorScheme)
             : schemeColorPair(baseScheme, colorScheme)
         : schemeColor(onBaseSchemeColor, colorScheme);
 
