@@ -282,8 +282,8 @@ In the next Flutter stable release after 3.13, Flutter will change the `ThemeDat
 * **Minor style breaking changes:**
 
 * Removed elevation tint impact of general `FlexSubThemesData.adaptiveRemoveElevationTint` setting, from the `NavigationBar` component. It instead has its own setting in `FlexSubThemesData.adaptiveRemoveNavigationBarTint`, that can be used independently of the general tint removal setting. This was done since it may be preferred to not remove the elevation tint from the `NavigationBar`, even when otherwise doing so on selected platforms.
-* In M2 mode, when not using sub-theme, `ThemeData.textSelectionTheme` it now gets a default `TextSelectionThemeData()` and its themed style defaults to SDK defaults. Enable and use sub-themes and its new theming features to style it further.
-  * In previous versions in M2 mode, text selection handles used `Theme.of(context).primaryColorDark`, even when sub-themes where not enabled. They still do by default, but only when sub-themes are enabled. 
+* In M2 mode, when not using a subtheme, `ThemeData.textSelectionTheme` it now gets a default `TextSelectionThemeData()` and its themed style defaults to SDK defaults. Enable and use subthemes and its new theming features to style it further.
+  * In previous versions in M2 mode, text selection handles used `Theme.of(context).primaryColorDark`, even when subthemes where not enabled. They still do by default, but only when subthemes are enabled. 
 * In both M2 and M3 mode `bottomNavigationBarElevation` in `FlexSubThemesData` and `elevation` in `FlexSubThemes.bottomNavigationBar` when undefined, now default to elevation 3, giving the `BottomNavigationBar` a default elevation of 3 when using FlexColorScheme.
   * Previously default elevation was zero. Flutter SDK defaults to 8. The FlexColorScheme opinionated default value was changed to 3 to make it equal to the default elevation of `NavigationBar` in M3 mode, so that the bottom navigators share same default elevation when using FlexColorScheme. As before, you can adjust the elevation as needed with the API and in the Themes Playground.
 * In M2 mode `navigationBarElevation` in `FlexSubThemesData` and `elevation` in `FlexSubThemes.navigationBarTheme` when undefined, now default to elevation 3, giving the `NavigationBar` a default elevation of 3 in M2 mode when using FlexColorScheme.
@@ -527,7 +527,7 @@ The companion app **Themes Playground**, may get label improvements plus spellin
 
 **Nov 20, 2022**
 
-**FlexColorScheme** version 6.1.0 contains many new features, more component sub-themes and configurable properties. It improves seed-generated color scheme capabilities by adding more pre-configured seed generation configurations and color contrast accessibility options. 
+**FlexColorScheme** version 6.1.0 contains many new features, more component subthemes and configurable properties. It improves seed-generated color scheme capabilities by adding more pre-configured seed generation configurations and color contrast accessibility options. 
 
 A criticism of Material 3's color system and seed-generated color schemes, is that using colored contrasting colors may be less accessible. FlexColorScheme offers a way to enable in-app modification of its seed-generated color schemes. Any seed generation configuration can optionally return results with plain white and black contrasting on colors. This can be applied separately for main on colors and on surfaces.
 
@@ -563,12 +563,12 @@ The **Themes Playground** application has been updated to include most of the ne
   - Features that enabled implementation of just black and white seeded **on** colors. 
   - Additional `FlexTones`, the `FlexTones.oneHue` and `FlexTones.vividBackground`.
   - See [FlexSeedScheme on pub.dev](https://pub.dev/packages/flex_seed_scheme/changelog) for more information.
-* In `FlexSubThemesData` all component controlling properties except booleans, are now nullable and null by default. FlexColorScheme made sub themes still default to same values as before when assigning a default `FlexSubThemesData()` to `FlexColorScheme.subThemesData`. The properties are nullable to enable using different defaults in FlexColorScheme made sub-themes for Material 2 and Material 3 modes.
+* In `FlexSubThemesData` all component controlling properties except booleans, are now nullable and null by default. FlexColorScheme made sub themes still default to same values as before when assigning a default `FlexSubThemesData()` to `FlexColorScheme.subThemesData`. The properties are nullable to enable using different defaults in FlexColorScheme made subthemes for Material 2 and Material 3 modes.
 * **Style breaking:** Changed component themes `thinBorderWidth` to default to 1.0. It was 1.5 before. This is a style breaking change from previous thin outline style in FlexColorScheme.
   - Using fractional values may cause artefacts on monitors using native resolution where 1 dp = 1 physical display pixel (common on desktop PC/Linux monitors). We see the new default as a design FIX to avoid such issues with default settings. You can still set `thinBorderWidth` to 1.5, to get the same result as previous default theme.
-* **Style breaking:** When opting in on opinionated sub-themes, the `Chip` style is slightly modified from previous versions. The new opinionated FCS default style is more distinct than before and more aligned with styling borrowed from the Material 3 mode `Chip` design. The `deleteIconColor` now defaults to `onSurface` instead of `primary` and it can be defined to be any `SchemeColor` based color. The Chips revised style, look better than before. Using Material 3 and with it themed `Chips` is also fully supported, also customizing color on selected state of selectable **Chips** is available. Color-tinted chips are also available as before. Be aware though that Material 3 theming in the current 3.3 version of Flutter has some limitations. If you assign a custom color to selected chips, the disabled state of Chips can no longer conform, to M3 spec of disabled selected Chips. 
+* **Style breaking:** When opting in on opinionated subthemes, the `Chip` style is slightly modified from previous versions. The new opinionated FCS default style is more distinct than before and more aligned with styling borrowed from the Material 3 mode `Chip` design. The `deleteIconColor` now defaults to `onSurface` instead of `primary` and it can be defined to be any `SchemeColor` based color. The Chips revised style, look better than before. Using Material 3 and with it themed `Chips` is also fully supported, also customizing color on selected state of selectable **Chips** is available. Color-tinted chips are also available as before. Be aware though that Material 3 theming in the current 3.3 version of Flutter has some limitations. If you assign a custom color to selected chips, the disabled state of Chips can no longer conform, to M3 spec of disabled selected Chips. 
   - For more information, [see issue #115364](https://github.com/flutter/flutter/issues/115364). Note that if you deviate on Chips from its expected designed background brightness, which is now possible to do for **selected** Chips with the new theming capabilities in the Playground. There is no way via theming to set correct text and icon contrasting brightness for selected Chips that require dark text and icons on bright Chips in dark theme mode. Wise versa for light theme mode, setting light text on dark selected Chips in light mode, is also not possible. This limitation applies to selected `FilterChip` and `InputeChip`, there is simple not enough theme properties in `ChipTheme` to support this. Due to this limitation, we recommend only using Chip theme designs that work with dark text in light mode, and light text in dark mode.
-* **Style breaking:** When opting in on opinionated sub-themes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is minor, in most designs the color values are the same. If needed you can put it back to theme `background` color with:
+* **Style breaking:** When opting in on opinionated subthemes, the `BottomSheet` background color now defaults to theme's ColorScheme `surface` color, in both M2 and M3 mode. Previously it defaulted to the `Material`'s default color `theme.canvasColor`, that typically equals ColorScheme `background`. The new default follows upcoming Material 3 default for `BottomSheet`. The style change is minor, in most designs the color values are the same. If needed you can put it back to theme `background` color with:
 
 ```dart
     final ThemeData themeLight = FlexThemeData.light(
@@ -582,7 +582,7 @@ The **Themes Playground** application has been updated to include most of the ne
 **FIX**
 
 * **Temporary Material 3 Flutter SDK GAP fixes** 
-  - The FlexColorScheme Material 3 mode sub-themed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background. This temporary fix works despite Material tint elevation being broken in Flutter 3.3 and earlier, when `useMaterial3` is true. 
+  - The FlexColorScheme Material 3 mode subthemed `BottomSheet` gets a manually applied elevation tint to keep it distinguishable from the background. This temporary fix works despite Material tint elevation being broken in Flutter 3.3 and earlier, when `useMaterial3` is true. 
   - Same temporary M3 fix is also used on themed `PopupMenuButton`. 
   - Unfortunately, elevation-based shadow cannot be added to any of them in the M3 mode. It will have to wait for actual implementation of the components and their Material 3 themes with support for it.
   - The M3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, already exist in the Flutter master channel, they will probably land in next new stable release after Flutter 3.3. 
@@ -742,7 +742,7 @@ issues.
 
 * Added `elevatedButtonSecondarySchemeColor` property of type `SchemeColor?` to
   `FlexSubThemesData`. Use it to control secondary color of the `ElevatedButton` in its
-  sub-themes. FCS applies this color to `FlexSubThemes.elevatedButtonTheme.onBaseSchemeColor`.
+  subthemes. FCS applies this color to `FlexSubThemes.elevatedButtonTheme.onBaseSchemeColor`.
   If `useMaterial3` is false, it is the foreground color. If `useMaterial3` is true, it is the
   background color. Material 3, and 2, have completely different elevated button styles.
   The Material 2 elevated button is color wise, like the M3-filled button, but with elevation.
@@ -792,7 +792,7 @@ self-deprecated members as follows:
   create a theme that replicates the default roundings in M3 of the FAB.
   **Style migration**: If you had kept `FlexSubThemesData.fabUseShape` unspecified and relied on
   default value in a previous version, you must set it to `true` to get the same result as before.
-  Breaking style changes like this, in the opinionated opt in component sub-themes are unfortunate.
+  Breaking style changes like this, in the opinionated opt in component subthemes are unfortunate.
   It is, however, required as FlexColorScheme continues to evolve with Flutter SDK to support Material 3
   theming, while offering its own opinionated tweaks on some M3 default styles as well.
 
@@ -838,24 +838,24 @@ self-deprecated members as follows:
 * Updated `TextButton` to support `useMaterial3` defaults concerning its use of a stadium border
   instead of 20 dp radius, as well M3 size and padding, when `useMaterial3` is opted in on.
 
-* Changed opinionated dialog sub-theme defaults to match M3 defaults. Elevation set to 6, was
+* Changed opinionated dialog subtheme defaults to match M3 defaults. Elevation set to 6, was
   10 and actionsPadding defaults to `EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0)`, it
-  did not have a custom default before. These are new defaults for the opinionated dialog sub-theme
+  did not have a custom default before. These are new defaults for the opinionated dialog subtheme
   for both M2 and M3.
 
-* Updated `Chip` sub-theme when opting in on `useMaterial3`. When  `useMaterial3` is `true`, it 
+* Updated `Chip` subtheme when opting in on `useMaterial3`. When  `useMaterial3` is `true`, it 
   now uses upcoming 
   M3-styled Chips instead of its own opinionated custom style, also when the opinionated component
-  sub-themes are enabled. To get the same opinionated coloring as before, but on the M3 styled
-  chips when using M3, set component sub-themes data
+  subthemes are enabled. To get the same opinionated coloring as before, but on the M3 styled
+  chips when using M3, set component subthemes data
   `subThemesData: const FlexSubThemesData(chipSchemeColor: SchemeColor.primary)`.
   This feature will only work with intended design in the stable channel, after the feature and PR
   ["Migrate Chips to Material 3"](https://github.com/flutter/flutter/pull/107166), lands in the stable
   channel. Currently, it is only available in Flutter *master 3.1.0-x*.
 
-* Updated `InputDecoration` default sub-theme when opting in on `useMaterial3`. When `true` it
+* Updated `InputDecoration` default subtheme when opting in on `useMaterial3`. When `true` it
   now results in a more upcoming M3 styled `TextField` style by default, instead of its own more
-  opinionated custom style, also when the opinionated component sub-themes are enabled.
+  opinionated custom style, also when the opinionated component subthemes are enabled.
   It still uses a touch a lot of its own style in M3 mode, because TextField's real M3 design is
   not yet available in Flutter 3.3. TextField FCS opinionated style, combined with M3 real defaults,
   will need more work on M3 styles after
@@ -877,12 +877,12 @@ self-deprecated members as follows:
 * To support deprecation of `toggleableActiveColor` when PR
   [Deprecate toggleableActiveColor #97972](https://github.com/flutter/flutter/pull/97972) lands,
   while retaining the previous FCS defaults for `Switch`, `CheckBox` and `Radio` widgets, when
-  not opting in on component sub-themes. The created `SwitchThemeData`, `CheckboxThemeData` and
-  `CheckboxThemeData` can no longer be null, when not opting in on sub-themes like before.
+  not opting in on component subthemes. The created `SwitchThemeData`, `CheckboxThemeData` and
+  `CheckboxThemeData` can no longer be null, when not opting in on subthemes like before.
   To support the previous theme colored
   toggles in light and dark themes, that were set by defining the right scheme color for
-  `toggleableActiveColor` in M2 and M3 theme modes, sub-themes for them that replicates the color
-  styles must now be created also when not opting in on sub-themes. This update includes the
+  `toggleableActiveColor` in M2 and M3 theme modes, subthemes for them that replicates the color
+  styles must now be created also when not opting in on subthemes. This update includes the
   necessary change to do so. This will be reflected in updates to the core default documentation.
   For a migration guide concerning `toggleableActiveColor` see
   [Flutter breaking-changes](https://flutter.dev/docs/release/breaking-changes/toggleable-active-color#migration-guide).
@@ -1001,7 +1001,7 @@ also at least in Flutter *master 3.1.0-0.0.pre.2216* and earlier:
   opting in on M3, FlexColorScheme offers an early approximation of it. 
 
 * **NavigationBar M3 defaults change**: Default colors of `NavigationBar` when opting in on 
-  `useMaterial3` and not using opinionated component themes will now match M3 default colors. The background color will follow M3 style also by default when component themes are enabled and `useMaterial3` is true. This style is difficult to replicate with a single color otherwise. The difference is subtle for FCS surface tinted background colors. You can still set it to `background` color to replicate past FCS default color when sub-themes were enabled. For other properties, if opinionated component themes are not used, FCS will use default M3 theme styles on `NavigationBar` when `useMaterial3` is true. If opting in on opinionated component themes, FCS uses its own custom and opinionated default style. It can be modified to be the same as the default M3 style too, just as before. The change also includes a default font size change for FCS opinionated styled navigation bar, from 11 dp to 12 dp. This change was done to harmonize it with its M3 style.
+  `useMaterial3` and not using opinionated component themes will now match M3 default colors. The background color will follow M3 style also by default when component themes are enabled and `useMaterial3` is true. This style is difficult to replicate with a single color otherwise. The difference is subtle for FCS surface tinted background colors. You can still set it to `background` color to replicate past FCS default color when subthemes were enabled. For other properties, if opinionated component themes are not used, FCS will use default M3 theme styles on `NavigationBar` when `useMaterial3` is true. If opting in on opinionated component themes, FCS uses its own custom and opinionated default style. It can be modified to be the same as the default M3 style too, just as before. The change also includes a default font size change for FCS opinionated styled navigation bar, from 11 dp to 12 dp. This change was done to harmonize it with its M3 style.
 
 * **NavigationRail M3 defaults change**: Default colors of `NavigationRail` when opting in on
   `useMaterial3` and not using opinionated component themes will now match M3 default colors. If opinionated component themes are not used, FCS will use default M3 theme styles on `NavigationRail` when `useMaterial3` is true. If opting in on opinionated component themes, FCS uses its own custom and opinionated default style. It can be modified to be the same as the default M3 style too, just as before. The change also includes a default font size change for FCS opinionated styled rail, from 14 dp to 12 dp. This change was done to harmonize it with its M3 style.
@@ -1123,13 +1123,13 @@ theme: FlexThemeData.light(
 * `FlexColorScheme.useSubThemes` no function
   * Deprecated property `useSubThemes`. This property has no function after 4.2.0
     stable and 5.0.0-dev.1. Previously setting this property to true activated
-    the default set and configuration of the optional opinionated component sub-themes,
+    the default set and configuration of the optional opinionated component subthemes,
     even if you did not pass any `FlexSubThemesData()` configuration data to
     `subThemesData`. Before when `useSubThemes` was true and no `subThemesData`
     defined, it created one internally using the default constructor
     `FlexSubThemesData()` and used it. It also ignored any defined and to
     `subThemesData` assigned one, if the flag was set to false.
-  * The default component sub-themes are now instead always activated and created by
+  * The default component subthemes are now instead always activated and created by
     explicitly assigning at least a default constructor `FlexSubThemesData()` to
     `FlexColorScheme.subThemesData`.
   * Removing this property makes the API more consistent. It follows the same
@@ -1266,7 +1266,7 @@ in version 4 deprecated members and, of course, requiring minimum Flutter
 * Updated required Dart SDK to minimum 2.15 that Flutter 2.8.0 uses.
   To use this release, at least Flutter 2.8.0 is required.
  
-* Added support for opinionated sub-theme for the new Material 3 based
+* Added support for opinionated subtheme for the new Material 3 based
   `NavigationBar`. Flutter version 2.8.0 is the first stable version that
   includes the new Material 3 design based `NavigationBar`.
 
@@ -1289,7 +1289,7 @@ in version 4 deprecated members and, of course, requiring minimum Flutter
   FlexColorScheme, and use them as colors to create your `ThemeData`.
 
 * Added a `ColorScheme` color selection option to selected opinionated
-  sub-themes configuration class `FlexSubThemesData`. The sub-themes that
+  subthemes configuration class `FlexSubThemesData`. The subthemes that
   support changing their `ColorScheme` based
   used theme color selection, have one or more properties called
   `nnnSchemeColor` where `nnn` describes the color feature that can be set
@@ -1315,7 +1315,7 @@ in version 4 deprecated members and, of course, requiring minimum Flutter
     surrounds the selected icon and its container background color.
   - `ChipThemeData` from `FlexSubThemes.chipTheme` to change the used
     `ColorScheme` based base color of Chips.
-* The `SchemeColor` properties for the above sub-themes have a default selection
+* The `SchemeColor` properties for the above subthemes have a default selection
   that results in same `ColorScheme` color values being used as they had
   before. The additional configuration options are none breaking. The enum
   properties to modify the used `ColorScheme` color can be defined in the
@@ -1341,11 +1341,11 @@ in version 4 deprecated members and, of course, requiring minimum Flutter
 * A later FlexColorScheme version will add support for the new Material 3
   colors in `ColorScheme` when they land in the stable channel.
 * This quick selection of `ColorScheme` based colors as theme-based
-  colors of widget sub-themes, may be extended to a few more sub-themes in
+  colors of widget subthemes, may be extended to a few more subthemes in
   future versions. At least if it is seen as a practical and quick way to
-  customize widget sub-theme colors within the constraints of colors in
+  customize widget subtheme colors within the constraints of colors in
   the `theme.colorScheme`.
-* As before you can still apply your own total custom sub-themes to the
+* As before you can still apply your own total custom subthemes to the
   `ThemeData` created with `FlexColorScheme` by using `copyWith`.
   FlexColorScheme is a way to easily make fancy, color consistent and
   balanced `ThemeData` objects using convenience-shortcut properties and
@@ -1420,7 +1420,7 @@ in version 4 deprecated members and, of course, requiring minimum Flutter
 **FIX**
 
 * The `defaultRadius` in `FlexSubThemesData` now defaults to null, 
-  sub-themes border radius will then default to M3 default border
+  subthemes border radius will then default to M3 default border
   radius per widget. The const default value it had before was a remnant from early
   dev phase when widgets all defaulted to single shared radius and not M3
   defaults per widget type. If you explicitly passed in null, you did also in
@@ -1495,11 +1495,11 @@ features that it in itself warrants a new major release bump.
   but there was no major reason to break things by removing it either.
   
 * Major new feature, easy sub-theming of Flutter SDK UI widgets.
-  * You can opt in on nice looking opinionated widget sub-themes by setting
+  * You can opt in on nice looking opinionated widget subthemes by setting
   `FlexColorScheme.useSubThemes` to true, it is false by default.
-  * The defaults for the sub-themes are inspired by
+  * The defaults for the subthemes are inspired by
   [Material 3 design (M3)](https://m3.material.io). It mimics it to a large extent
-  when using default value sub-theme values and settings. The varying corner
+  when using default value subtheme values and settings. The varying corner
   radius is different per widget type. The new TextTheme Typography is also
   included. All parts cannot be made to look exactly like M3 in Flutter when using
   [Material 2 design (M2)](https://material.io), but many parts
@@ -1513,13 +1513,13 @@ features that it in itself warrants a new major release bump.
   support changing the Widget's corner radius. With the sub themes enabled, you
   can easily create a theme with a consistent corner radius on built-in
   Flutter SDK UI widgets.
-  * The widget sub-themes also harmonize a few other styles, e.g. `ToggleButtons`
+  * The widget subthemes also harmonize a few other styles, e.g. `ToggleButtons`
   to match the standard buttons regarding size and design as far as possible.
   * In case you still use the old deprecated buttons, they also get
   `ButtonThemeData` that as far as possible match the same style.
   * Via the sub themes, it is by default opted-in to also use a bit of Material You
   like coloring on the text styles. This can also be opted out of, even if
-  otherwise opting in on sub-themes, it is on by default when opting in on
+  otherwise opting in on subthemes, it is on by default when opting in on
   sub themes.
   
 * Added `FlexThemeData` static extension on `ThemeData`.
