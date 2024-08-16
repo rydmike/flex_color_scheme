@@ -107,7 +107,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the updated `SchemeColor` and `ColorScheme`.
 
 **NEW**
-
+- Add `FlexSubThemesData` property `applyAllToCupertino
 - Added TextStyles for `FlexSubThemesData` so that:
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarToolbarTextStyle` for its `toolbarTextStyle`.
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarTitleTextStyle` for its `titleTextStyle`.
@@ -148,7 +148,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 ### THEMES PLAYGROUND
 
-
 **NEW**
  
 - Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.
@@ -161,6 +160,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Make FSS seed options unavailable when an MCU variant is selected.
 - Add FFS seed option monochrome surfaces.
 - Show new surface colors in the playground in surface blends. Rename surface blends to surface colors.
+- On the "Component themes" panel added a toggle for setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply setting to Playground theme.  
 
 **CHANGE**
 
@@ -170,6 +170,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The component theme settings "Use M2 style divider in M2, ""Tinted disabled components" and "Tinted interaction` are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mde. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 - Update M3 default info for `BottomAppBar` to `surfaceContainer`.
+- No longer generates any code settings for `useMaterial3: true` value. It is the new default if ON and thus no longer explicitly added to the API code gen. 
 
 **FIX**
 
@@ -182,8 +183,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **TODO PLAYGROUND AND EXAMPLES**
 
 - Add set error colors also on ColorScheme panel? Now only possible on input colors.
-- Add to set `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),`
-  - Add toggle to component themes, but maybe also on Switch for discoverability.
 - Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switch?
 - Add info about Card theming issue to the Card settings screen. After filing the Flutter issue. 

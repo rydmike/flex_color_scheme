@@ -203,8 +203,15 @@ String generateThemeDartCode(ThemeController controller) {
   final String tintDarkColor = controller.surfaceTintDark != null
       ? '  surfaceTint: const ${controller.surfaceTintDark},\n'
       : '';
+  // Do we apply Cupertino to all components?
+  final String applyToAllCupertino = controller.applyThemeToAllCupertino
+      ? '  cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),\n'
+      : '';
+
   // Are we using Material3?
-  final String useMaterial3 = '  useMaterial3: ${controller.useMaterial3},\n';
+  final String useMaterial3 = controller.useMaterial3
+      ? ''
+      : '  useMaterial3: ${controller.useMaterial3},\n';
   //
   // Code for FlexSubThemesData setup.
   //
@@ -621,7 +628,7 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    inputSelectionHandleSchemeColor: ${controller.inputSelectionHandleLightSchemeColor},\n';
-//
+  //
   final String inputCursorDarkSchemeColor = controller
               .inputCursorDarkSchemeColor ==
           null
@@ -1831,6 +1838,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useM3ErrorColors'
       '$flexTonesLight'
       '$visualDensity'
+      '$applyToAllCupertino'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
       '  // To use the Playground font, add GoogleFonts package and uncomment\n'
@@ -1856,6 +1864,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useM3ErrorColors'
       '$flexTonesDark'
       '$visualDensity'
+      '$applyToAllCupertino'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
       '  // To use the Playground font, add GoogleFonts package and uncomment\n'
