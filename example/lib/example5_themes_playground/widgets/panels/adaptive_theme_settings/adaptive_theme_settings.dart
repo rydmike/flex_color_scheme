@@ -235,11 +235,11 @@ class AdaptiveThemeSettings extends StatelessWidget {
         ),
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
-        const Divider(),
         const ListTile(
-            subtitle: Text('You can find additional platform adaptive '
-                'settings under Shape & Radius, AppBar, NavigationBar '
-                'and Dialogs.'))
+            dense: true,
+            title: Text('You can find additional platform adaptive '
+                'theme settings under Shape & Radius, Switch, AppBar, '
+                'NavigationBar and Dialogs.'))
       ],
     );
   }

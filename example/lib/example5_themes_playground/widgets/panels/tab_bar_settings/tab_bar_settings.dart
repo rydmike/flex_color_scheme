@@ -504,10 +504,10 @@ class TabBarSettings extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     style: spanTextStyle,
-                    text:
-                        'In Flutter 3.7 the TabBar dividerColor cannot be set '
-                        'via theme in Material 3 mode. This is fixed in '
-                        'Flutter 3.10 via ',
+                    text: 'In Flutter 3.7 and earlier the TabBar dividerColor '
+                        'cannot be set '
+                        'via a theme in Material-3 mode. This is fixed in '
+                        'Flutter 3.10 and later via ',
                   ),
                   LinkTextSpan(
                     style: linkStyle,

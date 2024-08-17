@@ -297,7 +297,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
         ),
         ListTileReveal(
           dense: true,
-          title: const Text('Known issues and limitations'),
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
@@ -305,7 +305,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: 'There is a nice new feature to enable circular '
                       'end-caps in Flutter 3.10. However, that feature cannot '
-                      'set via a theme at all yet. To support bringing the '
+                      'be set via a theme at all yet. To support bringing the '
                       'feature Flutter, go upvote this  ',
                 ),
                 LinkTextSpan(

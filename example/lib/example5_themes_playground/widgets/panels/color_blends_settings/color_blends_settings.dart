@@ -16,8 +16,8 @@ import 'surface_colors.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
-class SurfaceColorsSettings extends StatelessWidget {
-  const SurfaceColorsSettings(
+class ColorBlendsSettings extends StatelessWidget {
+  const ColorBlendsSettings(
     this.controller, {
     super.key,
     // required this.allBlends,
@@ -102,7 +102,7 @@ class SurfaceColorsSettings extends StatelessWidget {
           LightSurfaceModePopupMenu(controller: controller),
           LightSurfaceModeListTile(controller: controller),
           const ListTileReveal(
-            title: Text('Surface blend level'),
+            title: Text('Surface colors blend level'),
             subtitleDense: true,
             subtitle: Text(
               'Surface blend uses alpha blend, to mix in the surface '
@@ -159,7 +159,7 @@ class SurfaceColorsSettings extends StatelessWidget {
           DarkSurfaceModePopupMenu(controller: controller),
           DarkSurfaceModeListTile(controller: controller),
           const ListTileReveal(
-            title: Text('Surface blend level'),
+            title: Text('Surface colors blend level'),
             subtitleDense: true,
             subtitle: Text(
               'Surface blend uses alpha blend, to mix in the surface '
@@ -339,7 +339,7 @@ class SurfaceColorsSettings extends StatelessWidget {
         ],
         const Divider(),
         const ListTileReveal(
-          title: Text('Contrasting on color blending'),
+          title: Text('Contrast Color Blends'),
           subtitleDense: true,
           subtitle: Text(
             'You can adjust alpha blends for on colors for surfaces and '
@@ -355,11 +355,12 @@ class SurfaceColorsSettings extends StatelessWidget {
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             subtitleDense: true,
             subtitle:
-                const Text('In M3 design, only container colors use color '
+                const Text('In M3 design, in light mode, only container colors '
+                    'use color '
                     'pair tinted on color. Main colors use black or white. '
-                    'Keep this OFF to do so. Set to ON to use it with '
+                    'Keep this OFF to do so. Set to ON to use blends with '
                     'onPrimary, onSecondary, onTertiary and onError, when seed '
-                    'colors are not used.\n'),
+                    'colors are NOT used.\n'),
             value: controller.blendLightOnColors &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -430,11 +431,11 @@ class SurfaceColorsSettings extends StatelessWidget {
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             subtitleDense: true,
             subtitle:
-                const Text('In M3 design, only container colors use color '
-                    'pair tinted on color. Main colors use black or white. '
-                    'Keep this OFF to do so. Set to ON to use it with '
-                    'onPrimary, onSecondary, onTertiary and onError, when seed '
-                    'colors are not used.\n'),
+                const Text('In M3 design, in dark mode, both container and '
+                    'main colors use color pair tinted on colors. '
+                    'Set this to ON here to use blends for onPrimary, '
+                    'onSecondary, onTertiary and onError, when seed '
+                    'colors are NOT used.\n'),
             value: controller.blendDarkOnColors &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,

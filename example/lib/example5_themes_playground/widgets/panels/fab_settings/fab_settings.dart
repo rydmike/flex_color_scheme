@@ -163,15 +163,16 @@ class FabSettings extends StatelessWidget {
         ),
         ListTileReveal(
           dense: true,
-          title: const Text('Known issues and limitations'),
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Current Flutter SDK FAB theming has limitations. '
-                      'You cannot make themed FABs where the radius varies '
-                      'by FAB type, like the M3 defaults do. See '
+                  text: 'Current Flutter SDK FloatingActionButton theming has '
+                      'limitations. You cannot make themed '
+                      'FloatingActionButtons where the radius varies '
+                      'by type, like the Material-3 defaults do. See '
                       'Flutter SDK ',
                 ),
                 LinkTextSpan(

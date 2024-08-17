@@ -507,12 +507,16 @@ class AppBarSettings extends StatelessWidget {
           dense: true,
           title: Text('AppBar background color'),
           subtitle: Text('With component themes enabled you can select a '
-              'ColorScheme based color for the AppBar background color. '
+              'ColorScheme based color for the AppBar background color.\n'
+              '\n'
               'Using AppBarStyle is convenient and does not require activating '
-              'FlexColorScheme component themes, but doing so offers more '
-              'choices. '
-              'Selecting a color, overrides used AppBarStyle. Set it back '
-              'to default to use AppBarStyle again. Using AppBarStyle also '
+              'FlexColorScheme component themes. Using component themes '
+              'offers more choices. '
+              'Selecting a background color, overrides the older used '
+              'AppBarStyle property. Set it back '
+              'to default to use AppBarStyle again.\n'
+              '\n'
+              'Using AppBarStyle also '
               'offers Scaffold background color as AppBar color, which when '
               'using surface blends can be different from ColorScheme '
               'surface and background colors.\n'),
@@ -589,9 +593,10 @@ class AppBarSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'When using SliverAppBar.large or '
+                  text: 'In Flutter 3.7 and earlier, when using '
+                      'SliverAppBar.large or '
                       'SliverAppBar.medium, the foreground color cannot be '
-                      'changed with widget or theme, see ',
+                      'changed with widget or theme properties, see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -600,9 +605,12 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                     style: spanTextStyle,
-                    text: '. This is fixed in 3.10, but not in 3.7. '
-                        'The theming and defaults are also incorrect for the '
-                        'action icons, see '),
+                    text: '. This is fixed in 3.10, but not in 3.7.\n'
+                        '\n'
+                        'Before Flutter 3.13, the theming and defaults are '
+                        'also incorrect for the '
+                        'action icons for SliverAppBar.large or '
+                        'SliverAppBar.medium, see '),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsFlutterIssue123943,
@@ -610,7 +618,7 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', this is fixed in Flutter 3.13.\n',
+                  text: ', this is fixed in Flutter 3.13 and later.\n',
                 ),
               ],
             ),

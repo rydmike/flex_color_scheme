@@ -173,16 +173,20 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         const ListTileReveal(
           dense: true,
           title: Text('Theming info'),
-          subtitle: Text(
-              'Flutter M2 past default color is ThemeData.bottomAppBarColor '
-              '(deprecated in Flutter 3.7) now colorScheme.surface and '
-              'elevation 8. In M3 it defaults to colorScheme.surface '
-              'color, elevation 3, no shadow, but with surface elevation '
-              'tint.\n'
+          subtitle: Text('Flutter M2 mode older default color is '
+              'ThemeData.bottomAppBarColor. '
+              'This was deprecated in Flutter 3.7, now M2 mode uses '
+              'surface color and elevation 8.\n'
+              '\n'
+              'In M3 mode, before Flutter 3.22 it defaults to '
+              'surface color, elevation 3, no shadow, but '
+              'with surface elevation tint. In Flutter 3.22 and later default '
+              'is surfaceContainer. The elevation is still 3, but surfaceTint '
+              'is transparent, so elevation has no visible impact.\n'
               '\n'
               'The color of the items in a BottomAppBar cannot be themed. If '
               'you use a background color that requires other contrasting '
-              'color than what works on surface and background colors, you '
+              'color than what works on surface colors, you '
               'will have to color the content on widget level.\n'),
         ),
         ListTileReveal(

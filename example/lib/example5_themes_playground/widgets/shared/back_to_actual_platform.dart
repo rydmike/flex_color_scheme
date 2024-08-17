@@ -12,6 +12,7 @@ class BackToActualPlatform extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      dense: true,
       title: const Text('Set to actual platform'),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 5.0),
