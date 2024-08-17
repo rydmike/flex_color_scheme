@@ -43,7 +43,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - Store: keyFabBackgroundSchemeColor, defaultFabBackgroundSchemeColor
   - ThemeController: setFabBackgroundSchemeColor, fabBackgroundSchemeColor
 - Switch: Optional iOS-like style and platform adaptive response.
-  - Get the theme from adaptive theme demo repo
+  * Get the theme from adaptive theme demo repo
   - FlexSubThemesData: FlexAdaptive? switchAdaptiveCupertinoLike
   - Store: keySwitchAdaptiveCupertinoLike, defaultSwitchAdaptiveCupertinoLike
   - ThemeController: setSwitchAdaptiveCupertinoLike, switchAdaptiveCupertinoLike
@@ -150,16 +150,17 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHourMinuteTextStyle` for its `hourMinuteTextStyle`.,
   - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle` for its `textStyle`.
   - `FlexSubThemes.segmentedButtonTheme` **uses** `FlexSubThemesData.segmentedButtonTextStyle` for its `textStyle`.  
-  - final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle,
+  
   - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle` for its `contentTextStyle`.
 
  
 - Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
 - Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories.
+- Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
 
  
-- Added the new surface colors to `FlexSchemeSurfaceColors`.
-- Added the new on colors to `FlexSchemeOnColors`.
+- Added all the new surface colors in Flutter 3.22 to `FlexSchemeSurfaceColors`.
+- Added all the new on colors in Flutter 3.22 to `FlexSchemeOnColors`.
  
  
 - Added `variant` a `FlexSchemeVariant` to `FlexColorsScheme` and `FlexThemeData` light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK added in version 3.22.2. 

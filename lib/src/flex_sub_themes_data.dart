@@ -236,6 +236,8 @@ class FlexSubThemesData with Diagnosticable {
     this.switchSchemeColor,
     this.switchThumbSchemeColor,
     this.switchThumbFixedSize,
+    this.switchAdaptiveCupertinoLike,
+    //
     this.checkboxSchemeColor,
     this.radioSchemeColor,
     this.unselectedToggleIsColored = false,
@@ -631,8 +633,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Not supported in Flutter theming on:
   /// - [BottomNavigationBar], does not have elevation tint in M3 in
   ///   Flutter 3.7, since it is an M2 component it does not support it.
-  /// - [NavigationRail], does not have elevation tint in Flutter 3.7, probably
-  ///   should have when elevated. Default M3 design does not elevate it.
+  /// - [NavigationRail], does not have elevation tint in Flutter 3.7.
   ///
   /// If you want to totally remove elevation tint from all widgets and on all
   /// platforms when using Material 3, you can optionally set
@@ -1310,6 +1311,42 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to false.
   final bool? switchThumbFixedSize;
+
+  /// Controls if the Material-3 Switch uses an adaptive response to change its
+  /// style to be more like the iOS or Cupertino Switch.
+  ///
+  /// This style is different from using Switch.adaptive as it changes the
+  /// Material Switch on selected platforms to look like the iOS or Cupertino
+  /// Switch, but only when the app is run on these platforms. It does not
+  /// change the switch style on other platforms.
+  ///
+  /// It does not use a constructor with own platform builder to change the
+  /// Switch to a CupertinoSwitch like [Switch.adaptive], it only uses a
+  /// different Switch theme on the selected platforms. The [Switch.adaptive]
+  /// constructor is the better choice if you want the exact CupertinoSwitch
+  /// style on Apple platforms.
+  ///
+  /// This feature is more like a light version of the adaptive switch style
+  /// and it is not an exact match, only as close as we can make it
+  /// when theming a Material Switch. It does have the advantage that you
+  /// can have this adaptive response on more platforms than just Apple
+  /// platforms and it only requires theming the Switch, not changing the
+  /// Switch constructor.
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example like the [FlexAdaptive.appleWeb]
+  /// for a configuration that only changes the [Switch] style to be more like
+  /// the iOS or Cupertino Switch when the app is run on iOS, macOS and web
+  /// on iOS and macOS hosts.
+  ///
+  /// If activated and we are on platform where it is chosen to be used, only
+  /// the [switchSchemeColor] property of the Switch theming properties here
+  /// will impact the style, other Switch theming properties will be ignored.
+  ///
+  /// This feature only has any impact when [useMaterial3] is true.
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? switchAdaptiveCupertinoLike;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [Checkbox] and [CheckboxListTile] use as base themed color.
@@ -3326,6 +3363,8 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? switchSchemeColor,
     final SchemeColor? switchThumbSchemeColor,
     final bool? switchThumbFixedSize,
+    final FlexAdaptive? switchAdaptiveCupertinoLike,
+    //
     final SchemeColor? checkboxSchemeColor,
     final SchemeColor? radioSchemeColor,
     final bool? unselectedToggleIsColored,
@@ -3644,6 +3683,9 @@ class FlexSubThemesData with Diagnosticable {
       switchThumbSchemeColor:
           switchThumbSchemeColor ?? this.switchThumbSchemeColor,
       switchThumbFixedSize: switchThumbFixedSize ?? this.switchThumbFixedSize,
+      switchAdaptiveCupertinoLike:
+          switchAdaptiveCupertinoLike ?? this.switchAdaptiveCupertinoLike,
+      //
       checkboxSchemeColor: checkboxSchemeColor ?? this.checkboxSchemeColor,
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
       unselectedToggleIsColored:
@@ -4080,6 +4122,8 @@ class FlexSubThemesData with Diagnosticable {
         other.switchSchemeColor == switchSchemeColor &&
         other.switchThumbSchemeColor == switchThumbSchemeColor &&
         other.switchThumbFixedSize == switchThumbFixedSize &&
+        other.switchAdaptiveCupertinoLike == switchAdaptiveCupertinoLike &&
+        //
         other.checkboxSchemeColor == checkboxSchemeColor &&
         other.radioSchemeColor == radioSchemeColor &&
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
@@ -4412,6 +4456,8 @@ class FlexSubThemesData with Diagnosticable {
         switchSchemeColor,
         switchThumbSchemeColor,
         switchThumbFixedSize,
+        switchAdaptiveCupertinoLike,
+        //
         checkboxSchemeColor,
         radioSchemeColor,
         unselectedToggleIsColored,
@@ -4744,6 +4790,9 @@ class FlexSubThemesData with Diagnosticable {
         'switchThumbSchemeColor', switchThumbSchemeColor));
     properties.add(DiagnosticsProperty<bool>(
         'switchThumbFixedSize', switchThumbFixedSize));
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
+        'switchAdaptiveCupertinoLike', switchAdaptiveCupertinoLike));
+    //
     properties.add(
         EnumProperty<SchemeColor>('checkboxSchemeColor', checkboxSchemeColor));
     properties
