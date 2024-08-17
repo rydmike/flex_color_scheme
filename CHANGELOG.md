@@ -28,6 +28,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **TODO**
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
+  - Mostly done, but still need to remove past opinionated default on NavBar, NavigationRail and NavigationDrawer.
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
 - Add TabBar theme property `tabAlignment`. 
 - Updates and new features for `Chip` theming.
@@ -35,15 +36,28 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - Padding prop
   - Text styles sizing.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. 
+- AppBar: Option to decouple foreground/background colors.
+  - FlexSubThemesData: SchemeColor? appBarForegroundSchemeColor
+  - Store: keyAppBarForegroundSchemeColor, defaultAppBarForegroundSchemeColor
+  - ThemeController: setAppBarForegroundSchemeColor, appBarForegroundSchemeColor
+- FAB: Option to decoupled foreground/background color.
+  - FlexSubThemesData: SchemeColor? fabBackgroundSchemeColor
+  - Store: keyFabBackgroundSchemeColor, defaultFabBackgroundSchemeColor
+  - ThemeController: setFabBackgroundSchemeColor, fabBackgroundSchemeColor
+- Switch: Optional iOS-like style and platform adaptive response.
+  - Get the theme from adaptive theme demo repo
+  - FlexSubThemesData: FlexAdaptive? adaptiveCupertinoStyle
+  - Store: keyAdaptiveCupertinoStyle, defaultAdaptiveCupertinoStyle
+  - ThemeController: setAdaptiveCupertinoStyle, adaptiveCupertinoStyle
 - InputDecorator: add inputDecoratorPrefixIconSchemeColor
+  - FlexSubThemesData: SchemeColor? inputDecoratorPrefixIconSchemeColor
+  - Store: keyInputDecoratorPrefixIconSchemeColor, defaultInputDecoratorPrefixIconSchemeColor
+  - ThemeController: setInputDecoratorPrefixIconSchemeColor, inputDecoratorPrefixIconSchemeColor
 
 **POTENTIAL TODOS or maybe push to version 8.1.0 or later**
 
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
-- AppBar: Option to decouple foreground/background colors. 
-- FAB: Option to decoupled foreground/background color. 
-- Switch: Optional iOS-like style.
-- Switch: Platform adaptive iOS-like style. 
+
 - Checkbox: Shape and border. 
 - DatePicker: Option to style and remove divider. 
 - InputDecorator: Internal, change InputDecorator theme to use only `border` and its WidgetState. 
@@ -57,6 +71,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
 - Some `ListTile` theming properties, which ones?
 - Some `SearchBar` theming features.
+- Some `SearchView` theming features.
 - Add fidelity for iOS adaptive AppBar (maybe).
 - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> Maybe, but prefer transparent instead, add guidance to docs about it.
 - Investigate:
