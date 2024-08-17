@@ -4721,6 +4721,9 @@ class MaterialShowcase extends StatelessWidget {
   const MaterialShowcase({super.key, this.explain = false});
   final bool explain;
 
+  static const double _width = 160;
+  static const double _height = 100;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -4756,144 +4759,160 @@ class MaterialShowcase extends StatelessWidget {
             style: denseBody,
           ),
           const SizedBox(height: 8),
-          Material(
-            type: MaterialType.canvas,
-            elevation: 0,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type canvas, elevation 0, default '
-                    'tint and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: <Widget>[
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.canvas,
+                  elevation: 1,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type canvas, elevation 1, default tint '
+                          'and default shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.canvas,
+                  elevation: 1,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type canvas, elevation 1, '
+                          'assigned surfaceTint and transparent shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.canvas,
+                  elevation: 1,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: colorScheme.primary,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type canvas, elevation 1, '
+                          'assigned surfaceTint and primary shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
-          Material(
-            type: MaterialType.canvas,
-            elevation: 1,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type canvas, elevation 1, default tint '
-                    'and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: <Widget>[
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.canvas,
+                  elevation: 6,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type canvas, elevation 6, default tint '
+                          'and default shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Material(
-            type: MaterialType.canvas,
-            elevation: 1,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: Colors.transparent,
-            child: const SizedBox(
-              height: 60,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type canvas, elevation 1, '
-                    'assigned surfaceTint and no shadow',
-                    textAlign: TextAlign.center,
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.canvas,
+                  elevation: 6,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type canvas, elevation 6, '
+                          'assigned surfaceTint and transparent shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Material(
-            type: MaterialType.canvas,
-            elevation: 1,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: colorScheme.shadow,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type canvas, elevation 1, '
-                    'assigned surfaceTint, and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.canvas,
+                  elevation: 6,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: colorScheme.primary,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type canvas, elevation 6, '
+                          'assigned surfaceTint and primary shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Material(
-            type: MaterialType.canvas,
-            elevation: 6,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type canvas, elevation 6, default tint '
-                    'and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Material(
-            type: MaterialType.canvas,
-            elevation: 6,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: Colors.transparent,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type canvas, elevation 6, '
-                    'assigned surfaceTint and no shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Material(
-            type: MaterialType.canvas,
-            elevation: 6,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: colorScheme.shadow,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type canvas, elevation 6, '
-                    'assigned surfaceTint and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
-                  ),
-                ),
-              ),
-            ),
+            ],
           ),
           const SizedBox(height: 32),
           Text('Material type card', style: denseHeader),
@@ -4904,144 +4923,161 @@ class MaterialShowcase extends StatelessWidget {
             style: denseBody,
           ),
           const SizedBox(height: 8),
-          Material(
-            type: MaterialType.card,
-            elevation: 0,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type card, elevation 0, default tint and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: <Widget>[
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.card,
+                  elevation: 1,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type card, elevation 1, default tint '
+                          'and default shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.card,
+                  elevation: 1,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type card, elevation 1, '
+                          'assigned surfaceTint and transparent shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.card,
+                  elevation: 1,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: colorScheme.shadow,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type card, elevation 1, '
+                          'assigned surfaceTint and primary shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
-          Material(
-            type: MaterialType.card,
-            elevation: 1,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type card, elevation 1, default tint and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: <Widget>[
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.card,
+                  elevation: 6,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type card, elevation 6, default tint '
+                          'and default shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Material(
-            type: MaterialType.card,
-            elevation: 1,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: Colors.transparent,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type card, elevation 1, '
-                    'assigned surfaceTint and no shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.card,
+                  elevation: 6,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type card, elevation 6, '
+                          'assigned surfaceTint and transparent shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Material(
-            type: MaterialType.card,
-            elevation: 1,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: colorScheme.shadow,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type card, elevation 1, '
-                    'assigned surfaceTint and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
+              SizedBox(
+                width: _width,
+                height: _height,
+                child: Material(
+                  type: MaterialType.card,
+                  elevation: 6,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: colorScheme.primary,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Material type card, elevation 6, '
+                          'assigned surfaceTint and primary shadow',
+                          textAlign: TextAlign.center,
+                          style: denseHeader,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          const SizedBox(height: 16),
-          Material(
-            type: MaterialType.card,
-            elevation: 6,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type card, elevation 6, default tint and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Material(
-            type: MaterialType.card,
-            elevation: 6,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: Colors.transparent,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type card, elevation 6, '
-                    'assigned surfaceTint and no shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Material(
-            type: MaterialType.card,
-            elevation: 6,
-            surfaceTintColor: colorScheme.surfaceTint,
-            shadowColor: colorScheme.shadow,
-            child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Material type card, elevation 6, '
-                    'assigned surfaceTint and shadow',
-                    textAlign: TextAlign.center,
-                    style: denseHeader,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
         ],
       ),
     );
@@ -5077,14 +5113,12 @@ class CardShowcase extends StatelessWidget {
                   'In M2 mode default background color is theme.cardColor, '
                   'which typically is set to colorScheme.surface.\n'
                   'In M3 mode before Flutter 3.22 background defaults to '
-                  'surface color and it gets elevation based surfaceTint\n'
+                  'surface color and it gets elevation based surfaceTint.\n'
                   'In M3 mode after Flutter 3.22 background defaults to '
                   'surfaceContainerLow color and it does not get elevation '
                   'based surfaceTint by default.\n'
-                  'In M2 mode surfaceTint has no '
-                  'effect even if specified.\n'
-                  'Card gets elevation shadow by '
-                  'default in both M2 and M3 mode.',
+                  'In M2 mode surfaceTint has no effect even if specified.\n'
+                  'Card gets elevation shadow by default in M2 and M3 mode.',
                   style: denseBody,
                 ),
               ),
