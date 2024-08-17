@@ -16,7 +16,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * A solution for this is still WIP, but now the revised concept is clear.
 * Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
   * Done: Test it!
-* Generate full ColorScheme in Themes Playground, also when not seeding. Need all FIXED colors. How?
+* Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" style colors. How?
   * Will need to seed for these in the background to get usable colors for them automatically. 
 * Consider what to do with surfaceTint removal. It is basically obsolete now in Flutter 3.22 and later. Convert it into "bring tints back"? 
 * Consider what to do with shadows back. More fine-grained control?
@@ -29,13 +29,11 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
   - Mostly done, but still need to remove past opinionated default on NavBar, NavigationRail and NavigationDrawer.
-- Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
+
 - Add TabBar theme property `tabAlignment`. 
-- Updates and new features for `Chip` theming.
-  - Proper use of colors, blend as option, that is default in M2 only, but can be added in FCS M3.
-  - Padding prop
-  - Text styles sizing.
-  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter. 
+  - FlexSubThemesData: TabAlignment? tabBarAlignment
+  - Store: keyTabBarAlignment, defaultTabBarAlignment
+  - ThemeController: SetTabBarAlignment, tabBarAlignment
 - AppBar: Option to decouple foreground/background colors.
   - FlexSubThemesData: SchemeColor? appBarForegroundSchemeColor
   - Store: keyAppBarForegroundSchemeColor, defaultAppBarForegroundSchemeColor
@@ -53,13 +51,22 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - FlexSubThemesData: SchemeColor? inputDecoratorPrefixIconSchemeColor
   - Store: keyInputDecoratorPrefixIconSchemeColor, defaultInputDecoratorPrefixIconSchemeColor
   - ThemeController: setInputDecoratorPrefixIconSchemeColor, inputDecoratorPrefixIconSchemeColor
+- DatePicker: Option to style and remove divider.
+  - FlexSubThemesData: SchemeColor? datePickerDividerSchemeColor
+  - Store: keyDatePickerDividerSchemeColor, defaultDatePickerDividerSchemeColor
+  - ThemeController: setDatePickerDividerSchemeColor, datePickerDividerSchemeColor
+ 
+- Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
+- Add features for `Chip` theming.
+  - Proper use of colors, blend as option, that is default in M2 only, but can be added in FCS M3.
+  - Padding prop
+  - Text styles sizing.
+  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter.
 
 **POTENTIAL TODOS or maybe push to version 8.1.0 or later**
 
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
-
 - Checkbox: Shape and border. 
-- DatePicker: Option to style and remove divider. 
 - InputDecorator: Internal, change InputDecorator theme to use only `border` and its WidgetState. 
 - InputDecorator: Platform adaptive radius. 
 - Not possible to use custom error colors with toDark generated schemes, maybe keep it so?
@@ -77,7 +84,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Investigate:
   - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
   - Consider `TabBarStyle.universal` using the `primaryFixedDimcolor`? Or keep as is for now?
-  - BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. Also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? Would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
+  - BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. It also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? It would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
   
 **BREAKING**
 
