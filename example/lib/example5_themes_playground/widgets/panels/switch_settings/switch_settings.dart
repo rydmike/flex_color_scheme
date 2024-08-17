@@ -142,6 +142,12 @@ class SwitchesSettings extends StatelessWidget {
                 }
               : null,
         ),
+        PlatformPopupMenu(
+          platform: controller.platform,
+          onChanged: controller.setPlatform,
+        ),
+        IsWebListTile(controller: controller),
+        BackToActualPlatform(controller: controller),
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('Checkbox color'),
@@ -219,13 +225,6 @@ class SwitchesSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: RadioShowcase(),
         ),
-        const Divider(),
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        IsWebListTile(controller: controller),
-        BackToActualPlatform(controller: controller),
       ],
     );
   }
