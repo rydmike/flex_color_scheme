@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 16, 2024**
+**Aug 18, 2024**
 
 ### PACKAGE
 
@@ -29,7 +29,11 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
   - Mostly done, but still need to remove past opinionated default on NavBar, NavigationRail and NavigationDrawer.
-
+ 
+- Add a SchemeColor for Scaffold background.
+  - FlexSubThemesData: SchemeColor? scaffoldBackgroundSchemeColor
+  - Store: keyScaffoldBackgroundSchemeColor, defaultScaffoldBackgroundSchemeColor
+  - ThemeController: SetScaffoldBackgroundSchemeColor, scaffoldBackgroundSchemeColor
 - Add TabBar theme property `tabAlignment`. 
   - FlexSubThemesData: TabAlignment? tabBarAlignment
   - Store: keyTabBarAlignment, defaultTabBarAlignment
@@ -221,6 +225,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Make Chips presentation even better (already improved a lot).
 - ADD: To IconButtons, add a text column explaining the type, as on the Chips panel.
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
+- UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
 
 
 ## 7.3.1
