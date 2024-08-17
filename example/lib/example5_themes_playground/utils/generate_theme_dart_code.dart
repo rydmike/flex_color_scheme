@@ -485,6 +485,15 @@ String generateThemeDartCode(ThemeController controller) {
   final String switchThumbFixedSize = controller.switchThumbFixedSize
       ? '    switchThumbFixedSize: ${controller.switchThumbFixedSize},\n'
       : '';
+
+  final String switchAdaptiveCupertinoLike = controller
+                  .switchAdaptiveCupertinoLike !=
+              null &&
+          controller.switchAdaptiveCupertinoLike != AdaptiveTheme.off &&
+          controller.useMaterial3
+      ? '    switchAdaptiveCupertinoLike: ${controller.switchAdaptiveCupertinoLike!.code},\n'
+      : '';
+
   final String checkboxSchemeColor = controller.checkboxSchemeColor == null
       ? ''
       : '    checkboxSchemeColor: ${controller.checkboxSchemeColor},\n';
@@ -1256,6 +1265,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$switchSchemeColor'
           '$switchThumbSchemeColor'
           '$switchThumbFixedSize'
+          '$switchAdaptiveCupertinoLike'
+          //
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'
@@ -1476,6 +1487,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$switchSchemeColor'
           '$switchThumbSchemeColor'
           '$switchThumbFixedSize'
+          '$switchAdaptiveCupertinoLike'
+          //
           '$checkboxSchemeColor'
           '$radioSchemeColor'
           '$unselectedIsColored'
