@@ -28,6 +28,7 @@ class IsWebListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTileReveal(
+      dense: true,
       title: const Text('Mock web'),
       subtitleDense: true,
       subtitle: Text('Use this setting to test what your adaptive theme looks '

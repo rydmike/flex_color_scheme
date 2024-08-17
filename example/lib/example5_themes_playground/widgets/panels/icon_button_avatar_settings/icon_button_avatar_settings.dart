@@ -46,6 +46,7 @@ class IconButtonAvatarSettings extends StatelessWidget {
               'add your custom theming to them.\n'
               '\n'),
         ),
+        const Divider(),
         const ListTileReveal(
           subtitleDense: true,
           title: Text('Icon'),
@@ -60,6 +61,7 @@ class IconButtonAvatarSettings extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: IconShowcase(),
         ),
+        const Divider(),
         const ListTileReveal(
           subtitleDense: true,
           title: Text('IconButton'),
@@ -77,7 +79,7 @@ class IconButtonAvatarSettings extends StatelessWidget {
         ),
         ListTileReveal(
           dense: true,
-          title: const Text('Known issues and limitations'),
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
@@ -140,6 +142,7 @@ class IconButtonAvatarSettings extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
         const ListTileReveal(
           subtitleDense: true,
           title: Text('CircleAvatar'),

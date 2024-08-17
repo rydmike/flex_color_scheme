@@ -320,6 +320,22 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Use platform adaptive dialog border radius'),
+          subtitle: const Text('Use alternative dialog corner radius on '
+              'selected platforms.\n'),
+          index: controller.adaptiveDialogRadius?.index ?? -1,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setAdaptiveDialogRadius(null);
+                  } else {
+                    controller
+                        .setAdaptiveDialogRadius(AdaptiveTheme.values[index]);
+                  }
+                }
+              : null,
+        ),
         ListTileReveal(
           enabled: controller.useSubThemes &&
               controller.useFlexColorScheme &&
@@ -386,28 +402,39 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Use platform adaptive dialog border radius'),
-          subtitle: const Text('Use alternative dialog corner radius on '
-              'selected platforms.\n'),
-          index: controller.adaptiveDialogRadius?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveDialogRadius(null);
-                  } else {
-                    controller
-                        .setAdaptiveDialogRadius(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
-        ),
         PlatformPopupMenu(
           platform: controller.platform,
           onChanged: controller.setPlatform,
         ),
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
+        const Divider(),
+        SwitchListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text("Use TextField's InputDecorationTheme in picker "
+              'dialogs'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'Turn ON to use the FlexColorScheme themed TextField '
+            'InputDecoration style on time and date text entry fields in '
+            'TimePicker and DatePicker dialogs.\n'
+            '\n'
+            'Turn OFF to use default M3 styles on text input fields '
+            'in TimePicker and DatePicker dialogs.\n'
+            '\n'
+            'NOTE: This feature is supported by DatePicker in Flutter 3.13. '
+            'However, the support is flawed, see known issues.\n'
+            '\n'
+            'Defaults to ON in the ThemesPlayground. In the FlexColorScheme '
+            'API it is undefined and thus OFF.\n',
+          ),
+          value: controller.useInputDecoratorThemeInDialogs &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUseInputDecoratorThemeInDialogs
+              : null,
+        ),
         const Divider(),
         const ListTileReveal(
           title: Text('TimePicker'),
@@ -562,33 +589,6 @@ class DialogSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        SwitchListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text("Use TextField's InputDecorationTheme in picker "
-              'dialogs'),
-          subtitleDense: true,
-          subtitle: const Text(
-            'Turn ON to use the FlexColorScheme themed TextField '
-            'InputDecoration style on time and date text entry fields in '
-            'TimePicker and DatePicker dialogs.\n'
-            '\n'
-            'Turn OFF to use default M3 styles on text input fields '
-            'in TimePicker and DatePicker dialogs.\n'
-            '\n'
-            'NOTE: This feature is supported by DatePicker in Flutter 3.13. '
-            'However, the support is flawed, see known issues.\n'
-            '\n'
-            'Defaults to ON in the ThemesPlayground. In the FlexColorScheme '
-            'API it is undefined and thus OFF.\n',
-          ),
-          value: controller.useInputDecoratorThemeInDialogs &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseInputDecoratorThemeInDialogs
-              : null,
-        ),
-        const Divider(),
         const ListTileReveal(
           title: Text('DatePicker'),
           subtitleDense: true,
@@ -675,8 +675,9 @@ class DialogSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.10 in M3 mode, the Divider is hard '
-                      'coded and cannot be removed, it looks poor when you use '
+                  text: 'In Flutter 3.10 in M3 mode, the DatePicker Divider is '
+                      'hard coded and cannot be removed, it looks poor when '
+                      'you use '
                       'any other header color than the default surface color. '
                       'For more info see ',
                 ),
@@ -688,7 +689,7 @@ class DialogSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: '. Both Divider spacing and color styling have been '
-                      'fixed in Flutter 3.13.\n'
+                      'fixed in Flutter 3.13 and later.\n'
                       '\n'
                       'The DatePicker manual date '
                       'entry input field picks up the ambient '
@@ -704,7 +705,7 @@ class DialogSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: '. This issue has a feature in Flutter 3.13 to enable '
                       'using another decorator, but the solution is partially '
-                      'flawed, see\n',
+                      'flawed, see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,

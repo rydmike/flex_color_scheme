@@ -176,8 +176,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.colors,
-    heading: 'Surface Colors',
-    buttonLabel: 'Surface\nColors',
+    heading: 'Color Blends',
+    buttonLabel: 'Color\nBlends',
     icon: Icons.invert_colors_outlined,
     info: 'Material-2 design demonstrated using surfaces with primary color '
         'alpha-blends in dark mode. FlexColorScheme surface blends '

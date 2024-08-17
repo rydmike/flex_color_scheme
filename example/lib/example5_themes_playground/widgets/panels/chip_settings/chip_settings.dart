@@ -155,7 +155,7 @@ class ChipSettings extends StatelessWidget {
         ),
         ListTileReveal(
           dense: true,
-          title: const Text('Known issues and limitations'),
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
@@ -177,7 +177,7 @@ class ChipSettings extends StatelessWidget {
                 // _fcsChipUmbrellaIssue115364
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n'
+                  text: '.\n\n'
                       'Fixes have been made in Flutter 3.13 to '
                       'support this, but it is still unverified and not yet '
                       'available in current FCS version. Until it is verified '

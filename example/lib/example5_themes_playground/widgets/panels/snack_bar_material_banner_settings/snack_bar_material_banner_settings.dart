@@ -66,16 +66,17 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
         const SnackBarShowcase(),
         ListTileReveal(
           dense: true,
-          title: const Text('Known issues and limitations'),
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.7 and earlier the SnackBar border radius '
-                      'for fixed and floating behavior cannot be changed '
+                  text: 'The SnackBar border radius '
+                      'for fixed and floating variants cannot be changed '
                       'separately via themes. The fixed style should always '
-                      'by straight, the floating one may have border radius. '
+                      'by straight, the floating one may have border radius.\n'
+                      '\n'
                       'If you set a border radius both variants will get it. '
                       'See Flutter SDK ',
                 ),
@@ -86,10 +87,15 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information. Due to this issue and because '
+                  text: ' for more information.\n'
+                      '\n'
+                      'Due to this issue and because '
                       'the M3 design spec states one should avoid large '
                       'border radius on on SnackBars, it does not use '
-                      'global radius override.',
+                      'global radius override. You can still set a none '
+                      'default radius here if you want to. It will change the '
+                      'default style of both variants, but if you do not '
+                      'use the older M2 fixed style, it does not matter.\n',
                 ),
               ],
             ),

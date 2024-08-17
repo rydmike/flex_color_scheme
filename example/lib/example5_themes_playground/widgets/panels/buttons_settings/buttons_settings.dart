@@ -263,7 +263,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ListTileReveal(
           dense: true,
-          title: const Text('Known issues and limitations'),
+          title: const Text('Known issues'),
           subtitle: RichText(
             text: TextSpan(
               children: <TextSpan>[

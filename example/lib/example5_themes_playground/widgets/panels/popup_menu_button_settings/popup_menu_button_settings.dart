@@ -245,12 +245,13 @@ class PopupMenuButtonSettings extends StatelessWidget {
           child: DropDownButtonShowcase(),
         ),
         SwitchListTileReveal(
-          title: const Text('Match dropdown menu width to button width'),
-          subtitle: const Text('When ON the menu will match its width to the '
-              "parent's button size. If OFF, the menu will be wider. Is OFF by "
+          title: const Text('Match Dropdown width to parent width'),
+          subtitle: const Text('When ON the DropdownMenuButton and '
+              'DropdownButtonFormField will match their width to the '
+              "parent's button size. If OFF, they will be wider. Is OFF by "
               'default in the FlexColorScheme API, but ON by default in '
-              'Themes Playground. This setting applies to both DropdownButton '
-              'and DropdownButtonFormField.\n'),
+              'Themes Playground. This setting applies to both the '
+              'DropdownButton and DropdownButtonFormField.\n'),
           value: controller.alignedDropdown &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,

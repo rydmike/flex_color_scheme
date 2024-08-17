@@ -46,9 +46,9 @@ class AndroidNavigationBarSettings extends StatelessWidget {
             ? 'System, white with opacity in light mode'
             : 'System, black with opacity in dark mode';
       case FlexSystemNavBarStyle.surface:
-        return 'Surface color, with opacity & alpha blend';
+        return 'Surface, with opacity & alpha blend';
       case FlexSystemNavBarStyle.background:
-        return 'Background color, with opacity & alpha blend';
+        return 'SurfaceContainerLow, with opacity & alpha blend';
       case FlexSystemNavBarStyle.scaffoldBackground:
         return 'Scaffold background, with opacity & alpha blend';
       case FlexSystemNavBarStyle.transparent:
