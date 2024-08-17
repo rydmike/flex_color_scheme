@@ -226,10 +226,11 @@ enum FlexSliderIndicatorType {
   drop,
 }
 
-/// Static sub-theme helpers used by widget sub theming in [FlexColorScheme].
+/// Static sub-theme helpers used by widget component theming in
+/// [FlexColorScheme].
 ///
 /// [FlexSubThemes] offers optional opinionated static theme helpers. You can
-/// change many properties of the the opt-in setup by defining custom
+/// change many properties of the opt-in setup by defining custom
 /// configuration values in the [FlexSubThemesData] configuration class,
 /// and passing it to the [FlexColorScheme.subThemesData] property.
 ///
@@ -249,7 +250,7 @@ enum FlexSliderIndicatorType {
 /// the sub-theme helpers below, that are then used to define the component
 /// sub-themes for the produced [ThemeData].
 ///
-/// These component themes are currently available:
+/// These component theme helpers are currently available:
 ///
 /// * [AppBarTheme] for [AppBar] via [appBarTheme].
 /// * [BottomAppBarTheme] for [BottomAppBar] via [bottomAppBarTheme].
@@ -297,14 +298,12 @@ enum FlexSliderIndicatorType {
 /// While it is possible to use them without [FlexColorScheme] it may not be
 /// ideal, as they are designed with the features used and needed by
 /// [FlexColorScheme] and its configuration class [FlexSubThemesData] in mind.
+///
 /// The [FlexSubThemes] may have more frequent breaking changes than
 /// [FlexColorScheme] and [FlexSubThemesData] as it is a more secondary level.
-/// It was still decided to keep their APIs public.
-class FlexSubThemes {
-  /// Private constructor for the FlexSubThemes static class to prevent it from
-  /// being instantiated or extended.
-  FlexSubThemes._(); // coverage:ignore-line
-
+/// It was decided to keep their APIs public as the may also be useful for
+/// other theming solutions.
+sealed class FlexSubThemes {
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
   /// corresponding to the [SchemeColor] enum selection in [value].
   ///
@@ -317,8 +316,6 @@ class FlexSubThemes {
   /// - [NavigationBar] in [FlexSubThemes.navigationBarTheme]
   /// - [ChipThemeData] from [FlexSubThemes.chipTheme].
   /// - [FloatingActionButton] from [FlexSubThemes.floatingActionButtonTheme]
-  ///
-  /// More adjustable color properties may be added in later versions.
   static Color schemeColor(SchemeColor value, ColorScheme colorScheme) {
     switch (value) {
       case SchemeColor.primary:
@@ -2535,10 +2532,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintDisable = useTintedDisable ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     // Get selected color, defaults to primary.
@@ -2841,10 +2838,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
 
@@ -3053,10 +3050,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final Color? background = backgroundSchemeColor == null
         ? null
@@ -3424,10 +3421,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = tintedInteractions ?? false;
     final bool tintDisable = tintedDisabled ?? false;
     // Used color scheme is for dark mode.
@@ -4378,7 +4375,7 @@ class FlexSubThemes {
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
 
     /// Set to true to use Flutter SDK defaults for [NavigationBar]
@@ -4419,7 +4416,7 @@ class FlexSubThemes {
         'In M2 mode it will use opinionated defaults as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
 
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
@@ -5009,7 +5006,7 @@ class FlexSubThemes {
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
 
     /// Set to true to use Flutter SDK defaults for [NavigationRail]
@@ -5052,7 +5049,7 @@ class FlexSubThemes {
         'In M2 mode it will use opinionated defaults as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
 
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
@@ -5280,10 +5277,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
 
@@ -5588,10 +5585,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool unselectedColored = unselectedIsColored ?? false;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
@@ -5805,10 +5802,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
     // We are using a light colorScheme.
@@ -6075,10 +6072,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
@@ -6382,10 +6379,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
 
     // Get colorScheme brightness.
     final bool isLight = colorScheme.brightness == Brightness.light;
@@ -6701,10 +6698,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final double weight = indicatorWeight ?? (useM3 ? 3 : 2);
     final double radius = indicatorTopRadius ?? (useM3 ? 3 : 0);
@@ -6851,10 +6848,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
@@ -7105,10 +7102,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool useDecorator = useInputDecoratorTheme ?? false;
 
     final Color? background = backgroundSchemeColor == null
@@ -7434,10 +7431,10 @@ class FlexSubThemes {
     /// The M2/M3 defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
     ///
-    /// If undefined, defaults to false.
+    /// If undefined, defaults to true.
     final bool? useMaterial3,
   }) {
-    final bool useM3 = useMaterial3 ?? false;
+    final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
