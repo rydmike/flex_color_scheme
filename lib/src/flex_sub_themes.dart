@@ -6520,6 +6520,7 @@ sealed class FlexSubThemes {
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             return Colors.transparent;
           }),
+          // TODO(rydmike): Add the iOS desktop focused track style!
           trackColor:
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.disabled)) {
@@ -6541,6 +6542,10 @@ sealed class FlexSubThemes {
                   : colorScheme.onSurface.withOpacity(0.7);
             }
             return Colors.white;
+          }),
+          overlayColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            return Colors.transparent;
           }),
         );
       } else {

@@ -5895,6 +5895,12 @@ class FlexColorScheme with Diagnosticable {
         subTheme.adaptiveRemoveElevationTint ?? const FlexAdaptive.off();
     final bool removeTint = useMaterial3 && subTint.adapt(effectivePlatform);
 
+    // Use adaptive iOS style themed Switch?
+    final FlexAdaptive subUseCupertino =
+        subTheme.switchAdaptiveCupertinoLike ?? const FlexAdaptive.off();
+    final bool useCupertinoStyle =
+        useMaterial3 && subUseCupertino.adapt(effectivePlatform);
+
     // Remove NavigationBar elevation tint in M3?
     final FlexAdaptive navBarTint =
         subTheme.adaptiveRemoveNavigationBarTint ?? const FlexAdaptive.off();
@@ -7561,6 +7567,7 @@ class FlexColorScheme with Diagnosticable {
               unselectedIsColored: subTheme.unselectedToggleIsColored,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              useCupertinoStyle: useCupertinoStyle,
               useMaterial3: useMaterial3,
             )
           : null,
