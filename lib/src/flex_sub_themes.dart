@@ -6370,6 +6370,19 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
+    /// Defines if the theme uses Cupertino style switch.
+    ///
+    /// This option only works when [useMaterial3] is true. If it is false
+    /// the setting has no impact.
+    ///
+    /// When used the Switch will be styled like a CupertinoSwitch, but with
+    /// the colors defined by [baseSchemeColor]. The themed Switch is not
+    /// an exact match for the CupertinoSwitch, but as close as you can
+    /// get with the Material Switch theming features.
+    ///
+    /// If undefined, defaults to false.
+    final bool? useCupertinoStyle,
+
     /// A temporary flag used to opt-in to Material 3 features.
     ///
     /// If set to true, the theme will use Material3 default styles when
@@ -6413,7 +6426,7 @@ sealed class FlexSubThemes {
                 : baseSchemeColor ?? SchemeColor.primary),
         colorScheme);
 
-    // Material 2 style Switch
+    // Material-2 mode theming.
     if (!useM3) {
       return SwitchThemeData(
         splashRadius: splashRadius,
@@ -6494,143 +6507,183 @@ sealed class FlexSubThemes {
         }),
       );
     }
-    // Material 3 style Switch
+    // Material-3 mode theming.
     else {
-      return SwitchThemeData(
-        splashRadius: splashRadius,
-        thumbIcon: thumbFixedSize ?? false
-            ? WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
-                return const Icon(Icons.minimize, color: Colors.transparent);
-              })
-            : null,
-        thumbColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
+      // Use a Cupertino style theme Material-3 Switch.
+      if (useCupertinoStyle ?? false) {
+        return SwitchThemeData(
+          thumbIcon:
+              WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
+            return const Icon(Icons.minimize, color: Colors.transparent);
+          }),
+          trackOutlineColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            return Colors.transparent;
+          }),
+          trackColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              if (states.contains(WidgetState.selected)) {
+                return baseColor.withOpacity(0.5);
+              }
+              return colorScheme.onSurface.withOpacity(0.07);
+            }
             if (states.contains(WidgetState.selected)) {
-              return colorScheme.surface;
+              return baseColor;
             }
-            if (tintDisable) {
-              return tintedDisable(colorScheme.onSurface, baseColor);
+            return colorScheme.surfaceContainerHighest;
+          }),
+          thumbColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return isLight
+                  ? colorScheme.surface
+                  : colorScheme.onSurface.withOpacity(0.7);
             }
-            return colorScheme.onSurface.withAlpha(kAlphaDisabled);
-          }
-          if (states.contains(WidgetState.selected)) {
+            return Colors.white;
+          }),
+        );
+      } else {
+        // Use a generally themed Material-3 style Switch
+        return SwitchThemeData(
+          splashRadius: splashRadius,
+          thumbIcon: thumbFixedSize ?? false
+              ? WidgetStateProperty.resolveWith<Icon?>(
+                  (Set<WidgetState> states) {
+                  return const Icon(Icons.minimize, color: Colors.transparent);
+                })
+              : null,
+          thumbColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.surface;
+              }
+              if (tintDisable) {
+                return tintedDisable(colorScheme.onSurface, baseColor);
+              }
+              return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+            }
+            if (states.contains(WidgetState.selected)) {
+              if (states.contains(WidgetState.pressed)) {
+                return thumbColor;
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return thumbColor;
+              }
+              if (states.contains(WidgetState.focused)) {
+                return thumbColor;
+              }
+              return onBaseColor;
+            }
             if (states.contains(WidgetState.pressed)) {
-              return thumbColor;
+              return colorScheme.onSurfaceVariant;
             }
             if (states.contains(WidgetState.hovered)) {
-              return thumbColor;
+              return colorScheme.onSurfaceVariant;
             }
             if (states.contains(WidgetState.focused)) {
-              return thumbColor;
+              return colorScheme.onSurfaceVariant;
             }
-            return onBaseColor;
-          }
-          if (states.contains(WidgetState.pressed)) {
-            return colorScheme.onSurfaceVariant;
-          }
-          if (states.contains(WidgetState.hovered)) {
-            return colorScheme.onSurfaceVariant;
-          }
-          if (states.contains(WidgetState.focused)) {
-            return colorScheme.onSurfaceVariant;
-          }
-          return colorScheme.outline;
-        }),
-        trackColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
+            return colorScheme.outline;
+          }),
+          trackColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              if (states.contains(WidgetState.selected)) {
+                if (tintDisable) {
+                  return tintedDisable(colorScheme.onSurface, baseColor);
+                }
+                return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+              }
+              return colorScheme.surfaceContainerHighest
+                  .withAlpha(kAlphaVeryLowDisabled);
+            }
             if (states.contains(WidgetState.selected)) {
+              if (states.contains(WidgetState.pressed)) {
+                return baseColor;
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return baseColor;
+              }
+              if (states.contains(WidgetState.focused)) {
+                return baseColor;
+              }
+              return baseColor;
+            }
+            if (states.contains(WidgetState.pressed)) {
+              return unselectedColored
+                  ? baseColor.withAlpha(isLight
+                      ? kAlphaM3SwitchUnselectTrackLight
+                      : kAlphaM3SwitchUnselectTrackDark)
+                  : colorScheme.surfaceContainerHighest;
+            }
+            if (states.contains(WidgetState.hovered)) {
+              return unselectedColored
+                  ? baseColor.withAlpha(isLight
+                      ? kAlphaM3SwitchUnselectTrackLight
+                      : kAlphaM3SwitchUnselectTrackDark)
+                  : colorScheme.surfaceContainerHighest;
+            }
+            if (states.contains(WidgetState.focused)) {
+              return unselectedColored
+                  ? baseColor.withAlpha(isLight
+                      ? kAlphaM3SwitchUnselectTrackLight
+                      : kAlphaM3SwitchUnselectTrackDark)
+                  : colorScheme.surfaceContainerHighest;
+            }
+            return unselectedColored
+                ? baseColor.withAlpha(isLight
+                    ? kAlphaM3SwitchUnselectTrackLight
+                    : kAlphaM3SwitchUnselectTrackDark)
+                : colorScheme.surfaceContainerHighest;
+          }),
+          trackOutlineColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.selected)) {
+              return Colors.transparent;
+            }
+            if (states.contains(WidgetState.disabled)) {
               if (tintDisable) {
                 return tintedDisable(colorScheme.onSurface, baseColor);
               }
               return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
             }
-            return colorScheme.surfaceContainerHighest
-                .withAlpha(kAlphaVeryLowDisabled);
-          }
-          if (states.contains(WidgetState.selected)) {
-            if (states.contains(WidgetState.pressed)) {
-              return baseColor;
+            return colorScheme.outline;
+          }),
+          overlayColor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.selected)) {
+              if (states.contains(WidgetState.pressed)) {
+                if (tintInteract) return tintedPressed(overlay, tint, factor);
+                return baseColor.withAlpha(kAlphaPressed);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                if (tintInteract) return tintedHovered(overlay, tint, factor);
+                return baseColor.withAlpha(kAlphaHovered);
+              }
+              if (states.contains(WidgetState.focused)) {
+                if (tintInteract) return tintedFocused(overlay, tint, factor);
+                return baseColor.withAlpha(kAlphaFocused);
+              }
+              return null;
             }
-            if (states.contains(WidgetState.hovered)) {
-              return baseColor;
-            }
-            if (states.contains(WidgetState.focused)) {
-              return baseColor;
-            }
-            return baseColor;
-          }
-          if (states.contains(WidgetState.pressed)) {
-            return unselectedColored
-                ? baseColor.withAlpha(isLight
-                    ? kAlphaM3SwitchUnselectTrackLight
-                    : kAlphaM3SwitchUnselectTrackDark)
-                : colorScheme.surfaceContainerHighest;
-          }
-          if (states.contains(WidgetState.hovered)) {
-            return unselectedColored
-                ? baseColor.withAlpha(isLight
-                    ? kAlphaM3SwitchUnselectTrackLight
-                    : kAlphaM3SwitchUnselectTrackDark)
-                : colorScheme.surfaceContainerHighest;
-          }
-          if (states.contains(WidgetState.focused)) {
-            return unselectedColored
-                ? baseColor.withAlpha(isLight
-                    ? kAlphaM3SwitchUnselectTrackLight
-                    : kAlphaM3SwitchUnselectTrackDark)
-                : colorScheme.surfaceContainerHighest;
-          }
-          return unselectedColored
-              ? baseColor.withAlpha(isLight
-                  ? kAlphaM3SwitchUnselectTrackLight
-                  : kAlphaM3SwitchUnselectTrackDark)
-              : colorScheme.surfaceContainerHighest;
-        }),
-        trackOutlineColor:
-            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-          if (states.contains(WidgetState.selected)) {
-            return Colors.transparent;
-          }
-          if (states.contains(WidgetState.disabled)) {
-            if (tintDisable) {
-              return tintedDisable(colorScheme.onSurface, baseColor);
-            }
-            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
-          }
-          return colorScheme.outline;
-        }),
-        overlayColor:
-            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-          if (states.contains(WidgetState.selected)) {
             if (states.contains(WidgetState.pressed)) {
               if (tintInteract) return tintedPressed(overlay, tint, factor);
-              return baseColor.withAlpha(kAlphaPressed);
+              return colorScheme.onSurface.withAlpha(kAlphaPressed);
             }
             if (states.contains(WidgetState.hovered)) {
               if (tintInteract) return tintedHovered(overlay, tint, factor);
-              return baseColor.withAlpha(kAlphaHovered);
+              return colorScheme.onSurface.withAlpha(kAlphaHovered);
             }
             if (states.contains(WidgetState.focused)) {
               if (tintInteract) return tintedFocused(overlay, tint, factor);
-              return baseColor.withAlpha(kAlphaFocused);
+              return colorScheme.onSurface.withAlpha(kAlphaFocused);
             }
             return null;
-          }
-          if (states.contains(WidgetState.pressed)) {
-            if (tintInteract) return tintedPressed(overlay, tint, factor);
-            return colorScheme.onSurface.withAlpha(kAlphaPressed);
-          }
-          if (states.contains(WidgetState.hovered)) {
-            if (tintInteract) return tintedHovered(overlay, tint, factor);
-            return colorScheme.onSurface.withAlpha(kAlphaHovered);
-          }
-          if (states.contains(WidgetState.focused)) {
-            if (tintInteract) return tintedFocused(overlay, tint, factor);
-            return colorScheme.onSurface.withAlpha(kAlphaFocused);
-          }
-          return null;
-        }),
-      );
+          }),
+        );
+      }
     }
   }
 

@@ -154,7 +154,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle` for its `contentTextStyle`.
 
  
-- Add `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
+- Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
 - Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories.
 
  
@@ -168,7 +168,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`.
 - Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
 - Added `secondarySelectedSchemeColor` property to `FlexSubThemes.chipTheme`.
-
+- Added `useCupertinoStyle` property to `FlexSubThemes.switchTheme`.
 
 - Added enhanced enum functions `data` and `colors` to the `FlexScheme` enum, that returns the predefined `FlexSchemeData` and `FlexSchemeColor` respectively, that are associated with a given enum value. This could be done already using the `FlexColor.schemes` map. This is a convenience API to be able to use e.g. `FlexColor.mango.data` to get the predefined `FlexSchemeData` for the `mango` enum scheme and e.g. `FlexColor.barossa.colors(Brightness.dark)` to get the pre-defined dark colors used for the `barossa` scheme colors. See feature request: https://github.com/rydmike/flex_color_scheme/issues/210
 
