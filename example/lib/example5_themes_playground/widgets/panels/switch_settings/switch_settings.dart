@@ -2,11 +2,16 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../shared/adaptive_theme_popup_menu.dart';
+import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/is_web_list_tile.dart';
+import '../../shared/platform_popup_menu.dart';
 
 // Panel used to configure sub themes on Switch, Checkbox and Radio widgets.
 class SwitchesSettings extends StatelessWidget {
@@ -50,6 +55,21 @@ class SwitchesSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        SwitchListTileReveal(
+          title: const Text('Unselected toggle is colored'),
+          subtitle: const Text('Applies to OFF state of Switch and unselected '
+              'state on checkbox and Radio.\n'
+              '\n'
+              'ON: Use main color on unselected toggle\n'
+              'OFF: Use default grey/surface style on unselected toggle\n'),
+          value: controller.unselectedToggleIsColored &&
+              controller.useSubThemes &&
+              controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUnselectedToggleIsColored
+              : null,
+        ),
+        const Divider(),
         ColorSchemePopupMenu(
           title: const Text('Switch color'),
           labelForDefault: labelForDefaultColor,
@@ -68,6 +88,7 @@ class SwitchesSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: SwitchShowcase(showCupertinoSwitches: true),
         ),
+        const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: Text('Switch ON state$explainThumb thumb color'),
           labelForDefault: labelForDefaultThumbColor,
@@ -97,6 +118,28 @@ class SwitchesSettings extends StatelessWidget {
                   controller.useFlexColorScheme &&
                   controller.useMaterial3
               ? controller.setSwitchThumbFixedSize
+              : null,
+        ),
+        AdaptiveThemePopupMenu(
+          title: const Text('Make Material Switch look like iOS Switch'),
+          subtitle: const Text(
+            'An adaptive theme response to to make the themed Material Switch '
+            'look as close as possible to a CupertinoSwitch. '
+            'This setting has no effect in Material-2 mode and is not '
+            'available in M2 mode.\n',
+          ),
+          index: controller.switchAdaptiveCupertinoLike?.index ?? -1,
+          onChanged: controller.useFlexColorScheme &&
+                  controller.useSubThemes &&
+                  controller.useMaterial3
+              ? (int index) {
+                  if (index < 0 || index >= AdaptiveTheme.values.length) {
+                    controller.setSwitchAdaptiveCupertinoLike(null);
+                  } else {
+                    controller.setSwitchAdaptiveCupertinoLike(
+                        AdaptiveTheme.values[index]);
+                  }
+                }
               : null,
         ),
         const Divider(),
@@ -137,7 +180,9 @@ class SwitchesSettings extends StatelessWidget {
                       'the outline and filled state. If you had themed them '
                       'before, the Flutter release 3.13 breaks the result. '
                       'The theme needs to be changed to get same result as '
-                      'before. This is an undocumented Flutter breaking '
+                      'before.\n'
+                      '\n'
+                      'This is an undocumented Flutter breaking '
                       'change. See ',
                 ),
                 LinkTextSpan(
@@ -175,17 +220,12 @@ class SwitchesSettings extends StatelessWidget {
           child: RadioShowcase(),
         ),
         const Divider(),
-        SwitchListTileReveal(
-          title: const Text('Unselected toggle is colored'),
-          subtitle: const Text('ON: Use main color on unselected toggle\n'
-              'OFF: Use default grey/surface style on unselected toggle\n'),
-          value: controller.unselectedToggleIsColored &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUnselectedToggleIsColored
-              : null,
+        PlatformPopupMenu(
+          platform: controller.platform,
+          onChanged: controller.setPlatform,
         ),
+        IsWebListTile(controller: controller),
+        BackToActualPlatform(controller: controller),
       ],
     );
   }

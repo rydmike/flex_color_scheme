@@ -1497,6 +1497,12 @@ class Store {
   // Default value for the switchThumbFixedSize, also used to reset settings.
   static const bool defaultSwitchThumbFixedSize = false;
 
+  // Key used to read and save the switchAdaptiveCupertinoLike value.
+  static const String keySwitchAdaptiveCupertinoLike =
+      'switchAdaptiveCupertinoLike';
+  // Default value for the switchThumbFixedSize, also used to reset settings.
+  static const AdaptiveTheme? defaultSwitchAdaptiveCupertinoLike = null;
+
   // Key used to read and save the checkboxSchemeColor value.
   static const String keyCheckboxSchemeColor = 'checkboxSchemeColor';
   // Default value for the checkboxSchemeColor, also used to reset settings.

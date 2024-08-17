@@ -42,11 +42,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - FlexSubThemesData: SchemeColor? fabBackgroundSchemeColor
   - Store: keyFabBackgroundSchemeColor, defaultFabBackgroundSchemeColor
   - ThemeController: setFabBackgroundSchemeColor, fabBackgroundSchemeColor
-- Switch: Optional iOS-like style and platform adaptive response.
-  * Get the theme from adaptive theme demo repo
-  - FlexSubThemesData: FlexAdaptive? switchAdaptiveCupertinoLike
-  - Store: keySwitchAdaptiveCupertinoLike, defaultSwitchAdaptiveCupertinoLike
-  - ThemeController: setSwitchAdaptiveCupertinoLike, switchAdaptiveCupertinoLike
 - InputDecorator: add inputDecoratorPrefixIconSchemeColor
   - FlexSubThemesData: SchemeColor? inputDecoratorPrefixIconSchemeColor
   - Store: keyInputDecoratorPrefixIconSchemeColor, defaultInputDecoratorPrefixIconSchemeColor
@@ -150,9 +145,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - `FlexSubThemes.timePickerTheme` **uses** `FlexSubThemesData.timePickerHourMinuteTextStyle` for its `hourMinuteTextStyle`.,
   - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle` for its `textStyle`.
   - `FlexSubThemes.segmentedButtonTheme` **uses** `FlexSubThemesData.segmentedButtonTextStyle` for its `textStyle`.  
-  
   - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle` for its `contentTextStyle`.
-
  
 - Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
 - Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories.
@@ -197,6 +190,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Add FFS seed option monochrome surfaces.
 - Show new surface colors in the playground in surface blends. Rename surface blends to surface colors.
 - On the "Component themes" panel added a toggle for setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply setting to Playground theme.  
+- The Switch panel now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 
 **CHANGE**
 

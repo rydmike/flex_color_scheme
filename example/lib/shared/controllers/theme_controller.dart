@@ -670,6 +670,10 @@ class ThemeController with ChangeNotifier {
         Store.keySwitchThumbSchemeColor, Store.defaultSwitchThumbSchemeColor);
     _switchThumbFixedSize = await _themeService.load(
         Store.keySwitchThumbFixedSize, Store.defaultSwitchThumbFixedSize);
+    _switchAdaptiveCupertinoLike = await _themeService.load(
+        Store.keySwitchAdaptiveCupertinoLike,
+        Store.defaultSwitchAdaptiveCupertinoLike);
+    //
     _checkboxSchemeColor = await _themeService.load(
         Store.keyCheckboxSchemeColor, Store.defaultCheckboxSchemeColor);
     _radioSchemeColor = await _themeService.load(
@@ -1157,6 +1161,9 @@ class ThemeController with ChangeNotifier {
     setSwitchSchemeColor(Store.defaultSwitchSchemeColor, false);
     setSwitchThumbSchemeColor(Store.defaultSwitchThumbSchemeColor, false);
     setSwitchThumbFixedSize(Store.defaultSwitchThumbFixedSize, false);
+    setSwitchAdaptiveCupertinoLike(
+        Store.defaultSwitchAdaptiveCupertinoLike, false);
+    //
     setCheckboxSchemeColor(Store.defaultCheckboxSchemeColor, false);
     setRadioSchemeColor(Store.defaultRadioSchemeColor, false);
     //
@@ -4521,6 +4528,17 @@ class ThemeController with ChangeNotifier {
     _switchThumbFixedSize = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySwitchThumbFixedSize, value));
+  }
+
+  late AdaptiveTheme? _switchAdaptiveCupertinoLike;
+  AdaptiveTheme? get switchAdaptiveCupertinoLike =>
+      _switchAdaptiveCupertinoLike;
+  void setSwitchAdaptiveCupertinoLike(AdaptiveTheme? value,
+      [bool notify = true]) {
+    if (value == _switchAdaptiveCupertinoLike) return;
+    _switchAdaptiveCupertinoLike = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySwitchAdaptiveCupertinoLike, value));
   }
 
   late SchemeColor? _checkboxSchemeColor;

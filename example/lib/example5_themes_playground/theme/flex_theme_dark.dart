@@ -194,6 +194,9 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             switchSchemeColor: controller.switchSchemeColor,
             switchThumbSchemeColor: controller.switchThumbSchemeColor,
             switchThumbFixedSize: controller.switchThumbFixedSize,
+            switchAdaptiveCupertinoLike: controller.switchAdaptiveCupertinoLike
+                ?.setting(controller.fakeIsWeb),
+            //
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
