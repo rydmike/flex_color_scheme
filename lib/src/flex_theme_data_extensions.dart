@@ -281,6 +281,15 @@ extension FlexThemeData on ThemeData {
     /// actually also transparent so that if the app bar is also translucent,
     /// content that scrolls behind it, is also visible behind the status
     /// bar area.
+    ///
+    /// In default Material-2 this would be false, FCS uses an opinionated
+    /// style and sets it true. In Material-3 the style you get when setting
+    /// this to true is used by default. In M3 mode FCS will thus not create
+    /// an AppBar sub theme to adjust this, if it is true and it is not needed
+    /// for any other direct AppBar impacting properties in FlexColorScheme
+    /// constructor. In M2 mode an AppBar theme will always be created, also
+    /// when not opting in on the actual sub-themes feature, this per its
+    /// opinionated and legacy styling for M2 mode.
     final bool transparentStatusBar = true,
 
     /// The themed elevation for the [AppBar].
@@ -303,7 +312,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// By default the TabBarTheme is made to fit with the style of the AppBar.
     /// In M2 mode that is done by defaulting to using
-    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
     /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
@@ -1645,7 +1654,7 @@ extension FlexThemeData on ThemeData {
     /// If not null, must be from 0 to 1.
     final double? appBarOpacity,
 
-    /// When set to true, it makes the status bar on Android the same color as
+    /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
     ///
     /// Defaults to true.
@@ -1656,6 +1665,15 @@ extension FlexThemeData on ThemeData {
     /// actually also transparent so that if the app bar is also translucent,
     /// content that scrolls behind it, is also visible behind the status
     /// bar area.
+    ///
+    /// In default Material-2 this would be false, FCS uses an opinionated
+    /// style and sets it true. In Material-3 the style you get when setting
+    /// this to true is used by default. In M3 mode FCS will thus not create
+    /// an AppBar sub theme to adjust this, if it is true and it is not needed
+    /// for any other direct AppBar impacting properties in FlexColorScheme
+    /// constructor. In M2 mode an AppBar theme will always be created, also
+    /// when not opting in on the actual sub-themes feature, this per its
+    /// opinionated and legacy styling for M2 mode.
     final bool transparentStatusBar = true,
 
     /// The themed elevation for the [AppBar].
@@ -1677,7 +1695,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// By default the TabBarTheme is made to fit with the style of the AppBar.
     /// In M2 mode that is done by defaulting to using
-    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
+    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
     /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
