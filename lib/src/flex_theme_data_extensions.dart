@@ -676,8 +676,10 @@ extension FlexThemeData on ThemeData {
 
     /// Makes the light theme backgrounds lighter or even white.
     ///
-    /// Scaffold background will become white, and other surfaces also get
-    /// lighter (8%), if using low blend levels they may become fully white too.
+    /// Scaffold background will become white and is no longer impacted by used
+    /// [blendLevel]. Other surfaces also become lighter, when using low blend
+    /// levels they may become fully white too, but are still impacted by the
+    /// blend level.
     final bool lightIsWhite = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
@@ -2059,8 +2061,10 @@ extension FlexThemeData on ThemeData {
 
     /// Makes the dark theme backgrounds darker or even black.
     ///
-    /// Scaffold background will become fully black, and other surfaces also get
-    /// darker (8%), if using low blend levels they may become fully black too.
+    /// Scaffold background will become fully black and is no longer impacted
+    /// by used [blendLevel]. Other surfaces also become darker, when
+    /// using low blend levels they may become fully black too, but are still
+    /// impacted by the blend level.
     final bool darkIsTrueBlack = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
