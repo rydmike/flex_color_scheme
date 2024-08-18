@@ -231,6 +231,7 @@ class FlexSubThemesData with Diagnosticable {
     this.segmentedButtonBorderWidth,
     this.segmentedButtonTextStyle,
     //
+    this.scaffoldBackgroundSchemeColor,
     this.materialButtonSchemeColor,
     //
     this.switchSchemeColor,
@@ -1250,6 +1251,31 @@ class FlexSubThemesData with Diagnosticable {
   /// [segmentedButtonSchemeColor] and [unselectedForegroundSchemeColor] are
   /// used instead.
   final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle;
+
+  /// Defines which [Theme] based [ColorScheme] color, that the color
+  /// [ThemeData.scaffoldBackgroundColor] will use as its starting theme color
+  /// when not using a seed generated [ColorScheme].
+  ///
+  /// The select [SchemeColor] starting color may be further modified by the
+  /// [surfaceMode] and [blendLevel] properties, and by [lightIsWhite] in light
+  /// mode, and [darkIsTrueBlack] in dark mode.
+  ///
+  /// Defaults to null, which results in the following default color results:
+  ///
+  /// Defaults in Material-2 mode are equal to Material-2 spec:
+  /// - Light mode: [FlexColor.materialLightScaffoldBackground] (0xFFFFFFFF)
+  /// - Dark mode: [FlexColor.materialDarkScaffoldBackground] (0xFF121212)
+  ///
+  /// Defaults in Material-3 mode are:
+  /// - Light mode: [FlexColor.lightFlexSurfaceContainerLowest] (0xFFFFFFFF)
+  /// - Dark mode: [FlexColor.darkFlexSurfaceContainerLowest] (0xFF010101)
+  ///
+  /// The Material-3 defaults are an internal FCS standard used when not using
+  /// seed generated ColorSchemes. There is no official spec for when not
+  /// using the M3 ColorScheme seeding in the M3 guide. The defaults are based
+  /// on very low starting point values that can be used to create a wide range
+  /// of blended or tinted results.
+  final SchemeColor? scaffoldBackgroundSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color, that the old
   /// [MaterialButton] use as its main theme color.
@@ -3358,6 +3384,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? segmentedButtonBorderWidth,
     final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle,
     //
+    final SchemeColor? scaffoldBackgroundSchemeColor,
     final SchemeColor? materialButtonSchemeColor,
     //
     final SchemeColor? switchSchemeColor,
@@ -3676,6 +3703,8 @@ class FlexSubThemesData with Diagnosticable {
       segmentedButtonTextStyle:
           segmentedButtonTextStyle ?? this.segmentedButtonTextStyle,
       //
+      scaffoldBackgroundSchemeColor:
+          scaffoldBackgroundSchemeColor ?? this.scaffoldBackgroundSchemeColor,
       materialButtonSchemeColor:
           materialButtonSchemeColor ?? this.materialButtonSchemeColor,
       //
@@ -4117,6 +4146,7 @@ class FlexSubThemesData with Diagnosticable {
         other.segmentedButtonBorderWidth == segmentedButtonBorderWidth &&
         other.segmentedButtonTextStyle == segmentedButtonTextStyle &&
         //
+        other.scaffoldBackgroundSchemeColor == scaffoldBackgroundSchemeColor &&
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         //
         other.switchSchemeColor == switchSchemeColor &&
@@ -4451,6 +4481,7 @@ class FlexSubThemesData with Diagnosticable {
         segmentedButtonBorderWidth,
         segmentedButtonTextStyle,
         //
+        scaffoldBackgroundSchemeColor,
         materialButtonSchemeColor,
         //
         switchSchemeColor,
@@ -4781,6 +4812,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
         'segmentedButtonTextStyle', segmentedButtonTextStyle));
     //
+    properties.add(EnumProperty<SchemeColor>(
+        'scaffoldBackgroundSchemeColor', scaffoldBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'materialButtonSchemeColor', materialButtonSchemeColor));
     //
