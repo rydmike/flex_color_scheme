@@ -1281,7 +1281,7 @@ sealed class FlexSubThemes {
   /// An opinionated [ButtonThemeData] theme.
   ///
   /// The `ButtonThemeData` is marked as **obsolete** in Flutter SDK
-  /// documentation, but not yet deprecated in Flutter stable SDK 3.7.x.
+  /// documentation, but not yet deprecated in Flutter stable SDK 3.24.x.
   ///
   /// This sub-theme will be removed in FCS when Flutter SDK deprecates
   /// [ButtonThemeData].
