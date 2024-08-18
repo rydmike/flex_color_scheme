@@ -158,69 +158,13 @@ extension FlexThemeData on ThemeData {
     /// missing scheme color values.
     final int usedColors = 6,
 
-    /// Blends theme colors into surfaces and backgrounds.
+    /// Blends surface tint color into all surface colors and
+    /// scaffold background color.
     ///
-    /// If defined, used mode overrides the older [surfaceStyle]
-    /// property setting. Prefer using [surfaceMode] over [surfaceStyle],
-    /// it offers more color branded surface modes and separate control over
-    /// the used branding level via the separate [blendLevel] property.
+    /// The [surfaceMode] defines the relative strength of the alpha blend
+    /// value for different surfaces.
     ///
-    /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] can be used to
-    /// replace the style that is produced when using
-    /// [FlexColorScheme.surfaceStyle] enum property [FlexSurface] in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark]. The mode
-    /// [FlexSurfaceMode.highBackgroundLowScaffold] uses the same design concept
-    /// as the only style offered by [FlexSurface] in
-    /// [FlexColorScheme.surfaceStyle] in use before version 4.
-    ///
-    /// By adjusting the [FlexColorScheme.blendLevel] property and using this
-    /// style, you can find a similar visual effect when using
-    /// [FlexSurfaceMode.highBackgroundLowScaffold] with the following values
-    /// when matching match most prominent blended [ColorScheme.background]
-    /// color.
-    ///
-    /// In light theme mode:
-    ///
-    /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = 3...4
-    /// * [FlexSurface.medium]   4% : blendLevel = 7
-    /// * [FlexSurface.strong]   6% : blendLevel = 10
-    /// * [FlexSurface.heavy]    8% : blendLevel = 13...14
-    ///
-    /// In dark theme mode:
-    ///
-    /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    5% : blendLevel = 8
-    /// * [FlexSurface.medium]   8% : blendLevel = 13...14
-    /// * [FlexSurface.strong]  11% : blendLevel = 19
-    /// * [FlexSurface.heavy]   14% : blendLevel = 23
-    ///
-    /// Since there it is not the same relationship between background and
-    /// surface, when using the older [FlexSurface] based style, that uses
-    /// individually tuned relationships. The old and new designs do never
-    /// align exactly at any blendLevel. The above values produce visually
-    /// similar results for the most prominent background color blend.
-    ///
-    /// To get elevation overlay color in dark themes on all surfaces used by
-    /// [Material], use one of the modes where background and dialog color
-    /// equals the blend strength on surface color, like [level],
-    /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces] and
-    /// [highScaffoldLowSurfaces]. Other modes will only use
-    /// elevation overlay if their background happens to be equal to resulting
-    /// colorScheme.surface color. For more information
-    /// see issue: https://github.com/flutter/flutter/issues/90353
-    ///
-    /// When using very strong surface branding in dark mode, having an overlay
-    /// elevation color in dark mode is less critical, since the elevation
-    /// becomes partially visible via shadows and the surface may even have
-    /// another color tint if using e.g. [levelSurfacesLowScaffoldVariantDialog]
-    /// or [highScaffoldLowSurfacesVariantDialog].
-    ///
-    /// If values for the properties [surface], [background],
-    /// [dialogBackground] or [scaffoldBackground] are given,
-    /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
-    /// this [surfaceMode].
+    /// If undefined, defaults to [FlexSurfaceMode.level].
     final FlexSurfaceMode? surfaceMode,
 
     /// When [surfaceMode] is defined, this sets the blend level strength used
@@ -469,29 +413,31 @@ extension FlexThemeData on ThemeData {
     ///
     /// The color is applied to [ThemeData.scaffoldBackgroundColor].
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// If [subThemesData.scaffoldBackgroundSchemeColor] is defined, it is used
+    /// instead of this [scaffoldBackground] color.
     ///
-    /// Defaults to null.
+    /// If no value is given, and no
+    /// [subThemesData.scaffoldBackgroundSchemeColor]
+    /// is defined, default color is [ColorScheme.surface] in M2 mode and
+    /// [ColorScheme.surfaceContainerLowest] in M3 mode.
     final Color? scaffoldBackground,
 
-    /// The background color of [Dialog] elements.
+    /// The background color used by [Dialog]s.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
     /// controlled separately with only a [ThemeData.from] a color scheme.
     ///
     /// When using sub-themes, it is also applied to backgroundColor in
-    /// dialog themes, but only if [subThemesData.dialogBackgroundSchemeColor]
-    /// has not be defined in [subThemesData].
+    /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
+    /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
+    /// defined in [subThemesData].
     ///
-    /// * DatePickerThemeData
-    /// * DialogTheme
-    /// * TimePickerThemeData
+    /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
+    /// instead of this [dialogBackground] color.
     ///
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [surface].
+    /// is defined, default color is [ColorScheme.surface] in M2 mode and
+    /// [ColorScheme.surfaceContainerHigh] in M3 mode.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -1544,69 +1490,13 @@ extension FlexThemeData on ThemeData {
     /// missing scheme color values.
     final int usedColors = 6,
 
-    /// Blends theme colors into surfaces and backgrounds.
+    /// Blends surface tint color into all surface colors and
+    /// scaffold background color.
     ///
-    /// If defined, used mode overrides the older [surfaceStyle]
-    /// property setting. Prefer using [surfaceMode] over [surfaceStyle],
-    /// it offers more color branded surface modes and separate control over
-    /// the used branding level via the separate [blendLevel] property.
+    /// The [surfaceMode] defines the relative strength of the alpha blend
+    /// value for different surfaces.
     ///
-    /// The mode [FlexSurfaceMode.highBackgroundLowScaffold] can be used to
-    /// replace the style that is produced when using
-    /// [FlexColorScheme.surfaceStyle] enum property [FlexSurface] in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark]. The mode
-    /// [FlexSurfaceMode.highBackgroundLowScaffold] uses the same design concept
-    /// as the only style offered by [FlexSurface] in
-    /// [FlexColorScheme.surfaceStyle] in use before version 4.
-    ///
-    /// By adjusting the [FlexColorScheme.blendLevel] property and using this
-    /// style, you can find a similar visual effect when using
-    /// [FlexSurfaceMode.highBackgroundLowScaffold] with the following values
-    /// when matching match most prominent blended [ColorScheme.background]
-    /// color.
-    ///
-    /// In light theme mode:
-    ///
-    /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    2% : blendLevel = 3...4
-    /// * [FlexSurface.medium]   4% : blendLevel = 7
-    /// * [FlexSurface.strong]   6% : blendLevel = 10
-    /// * [FlexSurface.heavy]    8% : blendLevel = 13...14
-    ///
-    /// In dark theme mode:
-    ///
-    /// * [FlexSurface.material] 0% : blendLevel = 0
-    /// * [FlexSurface.light]    5% : blendLevel = 8
-    /// * [FlexSurface.medium]   8% : blendLevel = 13...14
-    /// * [FlexSurface.strong]  11% : blendLevel = 19
-    /// * [FlexSurface.heavy]   14% : blendLevel = 23
-    ///
-    /// Since there it is not the same relationship between background and
-    /// surface, when using the older [FlexSurface] based style, that uses
-    /// individually tuned relationships. The old and new designs do never
-    /// align exactly at any blendLevel. The above values produce visually
-    /// similar results for the most prominent background color blend.
-    ///
-    /// To get elevation overlay color in dark themes on all surfaces used by
-    /// [Material], use one of the modes where background and dialog color
-    /// equals the blend strength on surface color, like [level],
-    /// [levelSurfacesLowScaffold], [highScaffoldLowSurfaces] and
-    /// [highScaffoldLowSurfaces]. Other modes will only use
-    /// elevation overlay if their background happens to be equal to resulting
-    /// colorScheme.surface color. For more information
-    /// see issue: https://github.com/flutter/flutter/issues/90353
-    ///
-    /// When using very strong surface branding in dark mode, having an overlay
-    /// elevation color in dark mode is less critical, since the elevation
-    /// becomes partially visible via shadows and the surface may even have
-    /// another color tint if using e.g. [levelSurfacesLowScaffoldVariantDialog]
-    /// or [highScaffoldLowSurfacesVariantDialog].
-    ///
-    /// If values for the properties [surface], [background],
-    /// [dialogBackground] or [scaffoldBackground] are given,
-    /// they are used instead of values that would be assigned based
-    /// on used [FlexSurfaceMode] via [surfaceMode] or [FlexSurface] in
-    /// this [surfaceMode].
+    /// If undefined, defaults to [FlexSurfaceMode.level].
     final FlexSurfaceMode? surfaceMode,
 
     /// When [surfaceMode] is defined, this sets the blend level strength used
@@ -1854,29 +1744,31 @@ extension FlexThemeData on ThemeData {
     ///
     /// The color is applied to [ThemeData.scaffoldBackgroundColor].
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// If [subThemesData.scaffoldBackgroundSchemeColor] is defined, it is used
+    /// instead of this [scaffoldBackground] color.
     ///
-    /// Defaults to null.
+    /// If no value is given, and no
+    /// [subThemesData.scaffoldBackgroundSchemeColor]
+    /// is defined, default color is [ColorScheme.surface] in M2 mode and
+    /// [ColorScheme.surfaceContainerLowest] in M3 mode.
     final Color? scaffoldBackground,
 
-    /// The background color of [Dialog] elements.
+    /// The background color used by [Dialog]s.
     ///
     /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
     /// controlled separately with only a [ThemeData.from] a color scheme.
     ///
     /// When using sub-themes, it is also applied to backgroundColor in
-    /// dialog themes, but only if [subThemesData.dialogBackgroundSchemeColor]
-    /// has not be defined in [subThemesData].
+    /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
+    /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
+    /// defined in [subThemesData].
     ///
-    /// * DatePickerThemeData
-    /// * DialogTheme
-    /// * TimePickerThemeData
+    /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
+    /// instead of this [dialogBackground] color.
     ///
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [surface].
+    /// is defined, default color is [ColorScheme.surface] in M2 mode and
+    /// [ColorScheme.surfaceContainerHigh] in M3 mode.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
