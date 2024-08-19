@@ -2641,30 +2641,35 @@ class FlexColorScheme with Diagnosticable {
       swapColors: swapColors,
       brightness: Brightness.light,
     );
-    // ColorScheme to hold our seeded scheme colors, it will be kept as null
+
+    // ColorScheme to hold our seeded scheme colors, it will be made null
     // if we do not use M3 key based seeded tonal palette ColorScheme.
+    // However, we need to create it even if we do not use a seeded ColorScheme,
+    // because we need it for the new Flutter 3.22 fixed and FixedDim colors.
+    // Those colors are hard to compute without using the seed algo and would
+    // be wrong.
     ColorScheme? seedScheme;
-    // If keyColor seeds is active, apply seeded colors to effective colors.
+
+    // Create a complete ColorScheme from active and effective seed colors.
+    seedScheme = SeedColorScheme.fromSeeds(
+      brightness: Brightness.light,
+      primaryKey: effectiveColors.primary,
+      // If use secondary seed, use it with fromSeeds, otherwise undefined.
+      secondaryKey: seed.useSecondary ? effectiveColors.secondary : null,
+      // If use tertiary seed, use it with fromSeeds, otherwise undefined.
+      tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
+      // If a custom surface tint is used, use it also as key for neutral and
+      // neutral variant tonal palette generation.
+      neutralKey: surfaceTint,
+      neutralVariantKey: surfaceTint,
+      // Use provided tones configuration or default one.
+      tones: tones,
+      variant: variant,
+      surfaceTint: surfaceTint,
+    );
+    // Update effective main colors to seed colors, keeping configured
+    // effective main color values when so defined.
     if (seed.useKeyColors) {
-      // Create a complete ColorScheme from active and effective seed colors.
-      seedScheme = SeedColorScheme.fromSeeds(
-        brightness: Brightness.light,
-        primaryKey: effectiveColors.primary,
-        // If use secondary seed, use it with fromSeeds, otherwise undefined.
-        secondaryKey: seed.useSecondary ? effectiveColors.secondary : null,
-        // If use tertiary seed, use it with fromSeeds, otherwise undefined.
-        tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
-        // If a custom surface tint is used, use it also as key for neutral and
-        // neutral variant tonal palette generation.
-        neutralKey: surfaceTint,
-        neutralVariantKey: surfaceTint,
-        // Use provided tones configuration or default one.
-        tones: tones,
-        variant: variant,
-        surfaceTint: surfaceTint,
-      );
-      // Update effective main colors to seed colors, keeping configured
-      // effective main color values when so defined.
       effectiveColors = FlexSchemeColor(
         primary:
             seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
@@ -2687,6 +2692,16 @@ class FlexColorScheme with Diagnosticable {
         errorContainer: seedScheme.errorContainer,
       );
     }
+    // Store the seedScheme even if we do not use it, as we need it for
+    // new Flutter 3.22 fixed and FixedDim color. They are hard to
+    // compute without using seed algo and would be wrong.
+    final ColorScheme schemeForFixedColors = seedScheme;
+    // If we do not use key colors, we do not need the seedScheme, set it
+    // back to null, as legacy logic expect it to be null when not used.
+    if (!seed.useKeyColors) {
+      seedScheme = null;
+    }
+
     // Get effective surfaceTint color, also used as blend color for surfaces.
     final Color blendColor =
         surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
@@ -2933,29 +2948,39 @@ class FlexColorScheme with Diagnosticable {
           onInverseSurface: onColors.onInverseSurface,
           surfaceTint: surfaceTint,
         ) ??
-        // To avoid using a ColorScheme.light that sets defaults on deprecated
-        // members, we make a full one matching the target. Values that
-        // exist as direct properties in FlexColorScheme, will
-        // be used via them further below, but we need this ColorScheme
-        // to provide the properties we are not handling via FCS main
-        // constructor. An alternative would be to add missing ColorScheme
-        // properties to FlexColorScheme as direct override properties, but that
-        // basically means adding ALL colors in the ColorScheme as direct
-        // properties to FlexColorScheme, we will pass on that for now.
+        // Values that exist as direct properties in FlexColorScheme, are
+        // used via them further below, but we need this ColorScheme when
+        // not seeding to provide the color properties we are not handling
+        // via FCS main constructor.
         ColorScheme(
           brightness: Brightness.light,
           primary: effectiveColors.primary,
           onPrimary: onColors.onPrimary,
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
+          primaryFixed: schemeForFixedColors.primaryFixed,
+          primaryFixedDim: schemeForFixedColors.primaryFixedDim,
+          onPrimaryFixed: schemeForFixedColors.onPrimaryFixed,
+          onPrimaryFixedVariant: schemeForFixedColors.onPrimaryFixedVariant,
+          //
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
+          secondaryFixed: schemeForFixedColors.secondaryFixed,
+          secondaryFixedDim: schemeForFixedColors.secondaryFixedDim,
+          onSecondaryFixed: schemeForFixedColors.onSecondaryFixed,
+          onSecondaryFixedVariant: schemeForFixedColors.onSecondaryFixedVariant,
+          //
           tertiary: effectiveColors.tertiary,
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
+          tertiaryFixed: schemeForFixedColors.tertiaryFixed,
+          tertiaryFixedDim: schemeForFixedColors.tertiaryFixedDim,
+          onTertiaryFixed: schemeForFixedColors.onTertiaryFixed,
+          onTertiaryFixedVariant: schemeForFixedColors.onTertiaryFixedVariant,
+          //
           error: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3LightError
               : effectiveColors.error!,
@@ -2968,6 +2993,7 @@ class FlexColorScheme with Diagnosticable {
           onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3LightOnErrorContainer
               : onColors.onErrorContainer,
+          //
           surface: effectiveSurfaceColor,
           surfaceDim: effectiveSurfaceDimColor,
           surfaceBright: effectiveSurfaceBrightColor,
@@ -2978,6 +3004,7 @@ class FlexColorScheme with Diagnosticable {
           surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          //
           outline: _outlineColor(Brightness.light, onColors.onSurface, 45),
           outlineVariant:
               _outlineColor(Brightness.light, onColors.onSurface, 75),
@@ -4560,55 +4587,59 @@ class FlexColorScheme with Diagnosticable {
       swapColors: swapColors,
       brightness: Brightness.dark,
     );
-    // ColorScheme to hold our seeded scheme colors, it will be kept as null
+
+    // ColorScheme to hold our seeded scheme colors, it will be made null
     // if we do not use M3 key based seeded tonal palette ColorScheme.
+    // However, we need to create it even if we do not use a seeded ColorScheme,
+    // because we need it for the new Flutter 3.22 fixed and FixedDim colors.
+    // Those colors are hard to compute without using the seed algo and would
+    // be wrong.
     ColorScheme? seedScheme;
-    // If keyColor seeds is active, apply seeded colors to effective colors.
+
+    // Build effective input key seed colors as we built the normal colors.
+    // We will need the scheme enum light color as input, for dark tonal when
+    // we use seed with built in schemes in dark mode.
+    final FlexSchemeColor flexKeyColors =
+        colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
+    // Get effective light color with same rules as the dark colors.
+    final FlexSchemeColor withPassedColorsForKeys = flexKeyColors.copyWith(
+      primary: primary ?? colorScheme?.primary,
+      primaryContainer: primaryContainer ?? colorScheme?.primaryContainer,
+      secondary: secondary ?? colorScheme?.secondary,
+      secondaryContainer: secondaryContainer ?? colorScheme?.secondaryContainer,
+      tertiary: tertiary ?? colorScheme?.tertiary,
+      tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
+    );
+    final FlexSchemeColor effectiveKeyColors = FlexSchemeColor.effective(
+      withPassedColorsForKeys,
+      usedColors,
+      swapLegacy: swapLegacy,
+      swapColors: swapColors,
+      brightness: Brightness.dark,
+    );
+    // Create a ColorScheme from active and effective seed key colors.
+    seedScheme = SeedColorScheme.fromSeeds(
+      brightness: Brightness.dark,
+      primaryKey: effectiveKeyColors.primary,
+      // If use secondary seed, use it with fromSeeds, otherwise undefined.
+      secondaryKey: seed.useSecondary ? effectiveKeyColors.secondary : null,
+      // If use tertiary seed, use it with fromSeeds, otherwise undefined.
+      tertiaryKey: seed.useTertiary ? effectiveKeyColors.tertiary : null,
+      // If a custom surface tint is used, use it also as key for neutral and
+      // neutral variant tonal palette generation.
+      neutralKey: surfaceTint,
+      neutralVariantKey: surfaceTint,
+      // Use provided tones configuration or the default one, which uses
+      // defaults that can produce same results as Flutter SDK,
+      // ColorScheme.fromSeed(color), when only primary color is used as key.
+      tones: tones,
+      variant: variant,
+      surfaceTint: surfaceTint,
+    );
+    // Update effective main colors to seed colors, keeping configured
+    // effective main color values when so defined. The main colors to keep
+    // are the ones from the effective normal dark scheme, not the key colors.
     if (seed.useKeyColors) {
-      // Build effective input key seed colors as we built the normal colors.
-      // We will need the scheme enum light color as input, for dark tonal when
-      // we use seed with built in schemes in dark mode.
-      final FlexSchemeColor flexKeyColors =
-          colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
-      // Get effective light color with same rules as the dark colors.
-      final FlexSchemeColor withPassedColors = flexKeyColors.copyWith(
-        primary: primary ?? colorScheme?.primary,
-        primaryContainer: primaryContainer ?? colorScheme?.primaryContainer,
-        secondary: secondary ?? colorScheme?.secondary,
-        secondaryContainer:
-            secondaryContainer ?? colorScheme?.secondaryContainer,
-        tertiary: tertiary ?? colorScheme?.tertiary,
-        tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
-      );
-      final FlexSchemeColor effectiveKeyColors = FlexSchemeColor.effective(
-        withPassedColors,
-        usedColors,
-        swapLegacy: swapLegacy,
-        swapColors: swapColors,
-        brightness: Brightness.dark,
-      );
-      // Create a ColorScheme from active and effective seed key colors.
-      seedScheme = SeedColorScheme.fromSeeds(
-        brightness: Brightness.dark,
-        primaryKey: effectiveKeyColors.primary,
-        // If use secondary seed, use it with fromSeeds, otherwise undefined.
-        secondaryKey: seed.useSecondary ? effectiveKeyColors.secondary : null,
-        // If use tertiary seed, use it with fromSeeds, otherwise undefined.
-        tertiaryKey: seed.useTertiary ? effectiveKeyColors.tertiary : null,
-        // If a custom surface tint is used, use it also as key for neutral and
-        // neutral variant tonal palette generation.
-        neutralKey: surfaceTint,
-        neutralVariantKey: surfaceTint,
-        // Use provided tones configuration or the default one, which uses
-        // defaults that can produce same results as Flutter SDK,
-        // ColorScheme.fromSeed(color), when only primary color is used as key.
-        tones: tones,
-        variant: variant,
-        surfaceTint: surfaceTint,
-      );
-      // Update effective main colors to seed colors, keeping configured
-      // effective main color values when so defined. The main colors to keep
-      // are the ones from the effective normal dark scheme, not the key colors.
       effectiveColors = FlexSchemeColor(
         primary:
             seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
@@ -4631,6 +4662,16 @@ class FlexColorScheme with Diagnosticable {
         errorContainer: seedScheme.errorContainer,
       );
     }
+    // Store the seedScheme even if we do not use it, as we need it for
+    // new Flutter 3.22 fixed and FixedDim color. They are hard to
+    // compute without using seed algo and would be wrong.
+    final ColorScheme schemeForFixedColors = seedScheme;
+    // If we do not use key colors, we do not need the seedScheme, set it
+    // back to null, as legacy logic expect it to be null when not used.
+    if (!seed.useKeyColors) {
+      seedScheme = null;
+    }
+
     // Get effective surfaceTint color, also used as blend color for surfaces.
     final Color blendColor =
         surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
@@ -4879,29 +4920,40 @@ class FlexColorScheme with Diagnosticable {
           onInverseSurface: onColors.onInverseSurface,
           surfaceTint: surfaceTint,
         ) ??
-        // To avoid using a ColorScheme.dark that sets defaults on deprecated
-        // members, we make a full one matching the target. Values that
-        // exist as direct properties in FlexColorScheme, will
-        // be used via them further below, but we need this ColorScheme
-        // to provide the properties we are not handling via FCS main
-        // constructor. An alternative would be to add missing ColorScheme
-        // properties to FlexColorScheme as direct override properties, but that
-        // basically means adding ALL colors in the ColorScheme as direct
-        // properties to FlexColorScheme, we will pass on that for now.
+        // Values that exist as direct properties in FlexColorScheme, are
+        // used via them further below, but we need this ColorScheme when
+        // not seeding to provide the color properties we are not handling
+        // via FCS main constructor.
         ColorScheme(
           brightness: Brightness.dark,
+          //
           primary: effectiveColors.primary,
           onPrimary: onColors.onPrimary,
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
+          primaryFixed: schemeForFixedColors.primaryFixed,
+          primaryFixedDim: schemeForFixedColors.primaryFixedDim,
+          onPrimaryFixed: schemeForFixedColors.onPrimaryFixed,
+          onPrimaryFixedVariant: schemeForFixedColors.onPrimaryFixedVariant,
+          //
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
+          secondaryFixed: schemeForFixedColors.secondaryFixed,
+          secondaryFixedDim: schemeForFixedColors.secondaryFixedDim,
+          onSecondaryFixed: schemeForFixedColors.onSecondaryFixed,
+          onSecondaryFixedVariant: schemeForFixedColors.onSecondaryFixedVariant,
+          //
           tertiary: effectiveColors.tertiary,
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
+          tertiaryFixed: schemeForFixedColors.tertiaryFixed,
+          tertiaryFixedDim: schemeForFixedColors.tertiaryFixedDim,
+          onTertiaryFixed: schemeForFixedColors.onTertiaryFixed,
+          onTertiaryFixedVariant: schemeForFixedColors.onTertiaryFixedVariant,
+          //
           error: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkError
               : effectiveColors.error ?? FlexColor.materialDarkError,
@@ -4914,6 +4966,7 @@ class FlexColorScheme with Diagnosticable {
           onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkOnErrorContainer
               : onColors.onErrorContainer,
+          //
           surface: effectiveSurfaceColor,
           surfaceDim: effectiveSurfaceDimColor,
           surfaceBright: effectiveSurfaceBrightColor,
@@ -4924,6 +4977,7 @@ class FlexColorScheme with Diagnosticable {
           surfaceContainerHighest: effectiveSurfaceContainerColorHighest,
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
+          //
           outline: _outlineColor(Brightness.dark, onColors.onSurface, 45),
           outlineVariant:
               _outlineColor(Brightness.dark, onColors.onSurface, 75),
