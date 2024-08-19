@@ -294,28 +294,34 @@ class FlexColorScheme with Diagnosticable {
   /// surfaces. As well as using [FlexKeyColors] and [FlexTones] to make and
   /// customize key color seed generated [ColorScheme]s.
   const FlexColorScheme({
-    this.colorScheme,
     this.brightness,
+    this.colorScheme,
+    //
     this.primary,
+    this.onPrimary,
     this.primaryContainer,
+    this.onPrimaryContainer,
+    //
     this.secondary,
+    this.onSecondary,
     this.secondaryContainer,
+    this.onSecondaryContainer,
+    //
     this.tertiary,
+    this.onTertiary,
     this.tertiaryContainer,
+    this.onTertiaryContainer,
+    //
     this.error,
+    this.onError,
+    //
     this.surface,
+    this.onSurface,
     this.scaffoldBackground,
     this.dialogBackground,
     this.appBarBackground,
-    this.onPrimary,
-    this.onPrimaryContainer,
-    this.onSecondary,
-    this.onSecondaryContainer,
-    this.onTertiary,
-    this.onTertiaryContainer,
-    this.onError,
-    this.onSurface,
     this.surfaceTint,
+    //
     this.tabBarStyle,
     this.appBarElevation,
     this.bottomAppBarElevation,
@@ -337,6 +343,7 @@ class FlexColorScheme with Diagnosticable {
     this.subThemesData,
     this.useMaterial3 = true,
     this.extensions,
+    //
     @Deprecated('Use FlexColorScheme.surface instead. '
         'This property will be removed in a future release. It is deprecated '
         'because Flutter 3.22 deprecated this ColorScheme color.')
@@ -349,6 +356,16 @@ class FlexColorScheme with Diagnosticable {
             'AppBar elevation must be >= 0 or null.'),
         assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
             'Bottom AppBar elevation must be >= 0 or null.');
+
+  /// The overall brightness of this color scheme.
+  ///
+  /// The [Brightness.light] denotes a theme for light theme mode and
+  /// [Brightness.dark] a dark theme mode. The colors you define should match
+  /// the used [brightness] value in order for the theme to make visual sense.
+  ///
+  /// If not defined, and if there is no [colorScheme] defined, it defaults
+  /// to [Brightness.light].
+  final Brightness? brightness;
 
   /// The overall [ColorScheme] based colors for the theme.
   ///
@@ -382,16 +399,6 @@ class FlexColorScheme with Diagnosticable {
   /// computed from the input colors.
   final ColorScheme? colorScheme;
 
-  /// The overall brightness of this color scheme.
-  ///
-  /// The [Brightness.light] denotes a theme for light theme mode and
-  /// [Brightness.dark] a dark theme mode. The colors you define should match
-  /// the used [brightness] value in order for the theme to make visual sense.
-  ///
-  /// If not defined, and if there is no [colorScheme] defined, it defaults
-  /// to [Brightness.light].
-  final Brightness? brightness;
-
   /// The color displayed most frequently across your application’s screens and
   /// components.
   ///
@@ -401,11 +408,34 @@ class FlexColorScheme with Diagnosticable {
   /// is [Brightness.dark] it defaults to [FlexColor.materialDarkPrimary].
   final Color? primary;
 
+  /// A color that is clearly legible when drawn on [primary] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [primary] and [onPrimary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onPrimary] is null, the color is derived
+  /// from the brightness of the effective primary color, and will be be black
+  /// if it is light and white if it is dark.
+  final Color? onPrimary;
+
   /// A color used for elements needing less emphasis than [primary].
   ///
   /// If not defined, and if there is no [colorScheme] defined, the default
   /// result will be [primary] color.
   final Color? primaryContainer;
+
+  /// A color that's clearly legible when drawn on [primaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onPrimaryContainer] is null, the color
+  /// will via [ColorScheme] default be equal to resulting color scheme
+  /// [ColorScheme.onPrimary].
+  final Color? onPrimaryContainer;
 
   /// An accent color that, when used sparingly, calls attention to parts
   /// of your application.
@@ -414,11 +444,33 @@ class FlexColorScheme with Diagnosticable {
   /// result will be [primary] color.
   final Color? secondary;
 
+  /// A color that is clearly legible when drawn on [secondary] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [secondary] and [onSecondary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, the on color is derived from the brightness of the [secondary]
+  /// color, and will be be black if it is light and white if it is dark.
+  final Color? onSecondary;
+
   /// A color used for elements needing less emphasis than [secondary].
   ///
   /// If not defined, and if there is no [colorScheme] defined, it will default
   /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? secondaryContainer;
+
+  /// A color that's clearly legible when drawn on [secondaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onSecondaryContainer] is null, the color
+  /// will via [ColorScheme] default be equal to resulting color scheme
+  /// [ColorScheme.onSecondary].
+  final Color? onSecondaryContainer;
 
   /// A color used as a contrasting accent that can balance [primary]
   /// and [secondary] colors or bring heightened attention to an element,
@@ -428,11 +480,34 @@ class FlexColorScheme with Diagnosticable {
   /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? tertiary;
 
+  /// A color that's clearly legible when drawn on [tertiary].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [tertiary] and [onTertiary] of at least 4.5:1 is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onTertiary] is null, the color
+  /// will via [ColorScheme] default be equal to resulting color scheme
+  /// [ColorScheme.onSecondary].
+  final Color? onTertiary;
+
   /// A color used for elements needing less emphasis than [tertiary].
   ///
   /// If not defined, and if there is no [colorScheme] defined, it will default
   /// to [secondary] color, and if it is not defined either, then [primary].
   final Color? tertiaryContainer;
+
+  /// A color that's clearly legible when drawn on [tertiaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [tertiaryContainer] and [onTertiaryContainer] of at least 4.5:1 is
+  /// recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, and if [colorScheme.onTertiaryContainer] and [onTertiary) is
+  /// null, the color will via [ColorScheme] default be equal to resulting
+  /// color scheme [ColorScheme.onSecondary].
+  final Color? onTertiaryContainer;
 
   /// The color to use for input validation errors, for example on
   /// [InputDecoration.errorText].
@@ -442,17 +517,37 @@ class FlexColorScheme with Diagnosticable {
   /// and to [FlexColor.materialDarkError] if brightness is dark.
   final Color? error;
 
+  /// A color that is clearly legible when drawn on [error] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for [error]
+  /// and [onError] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, the on color is derived from the brightness of the [error]
+  /// color, and will be be black if it is light and white if it is dark.
+  final Color? onError;
+
   /// The surface (background) color for widgets like [Card] and
   /// [BottomAppBar].
   ///
-  /// The color is applied to [ThemeData.cardColor] and [ColorScheme.surface]
-  /// in [ThemeData.colorScheme], it is also used by all [Material] of type
-  /// [MaterialType.card].
+  /// The color is applied to [ThemeData.cardColor], [ThemeData.canvasColor]
+  /// and [ColorScheme.surface] in [ThemeData.colorScheme], it is also used by
+  /// all [Material] of type [MaterialType.card].
   ///
   /// If no value is given, and if there is no [colorScheme] defined, it
   /// defaults to [FlexColor.materialLightSurface] if brightness is light,
   /// and to [FlexColor.materialDarkSurface] if brightness is dark.
   final Color? surface;
+
+  /// A color that is clearly legible when drawn on [surface] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [surface] and [onSurface] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// If null, the on color is derived from the brightness of the [surface]
+  /// color, and will be be black if it is light and white if it is dark.
+  final Color? onSurface;
 
   /// The color of the [Scaffold] background.
   ///
@@ -497,94 +592,6 @@ class FlexColorScheme with Diagnosticable {
   /// This AppBar color will also override any scheme color based selection
   /// in active used sub-themes if you have selected one for the AppBar there.
   final Color? appBarBackground;
-
-  /// A color that is clearly legible when drawn on [primary] color.
-  ///
-  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-  /// [primary] and [onPrimary] is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, and if [colorScheme.onPrimary] is null, the color is derived
-  /// from the brightness of the effective primary color, and will be be black
-  /// if it is light and white if it is dark.
-  final Color? onPrimary;
-
-  /// A color that's clearly legible when drawn on [primaryContainer].
-  ///
-  /// To ensure that an app is accessible, a contrast ratio between
-  /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
-  /// is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, and if [colorScheme.onPrimaryContainer] is null, the color
-  /// will via [ColorScheme] default be equal to resulting color scheme
-  /// [ColorScheme.onPrimary].
-  final Color? onPrimaryContainer;
-
-  /// A color that is clearly legible when drawn on [secondary] color.
-  ///
-  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-  /// [secondary] and [onSecondary] is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, the on color is derived from the brightness of the [secondary]
-  /// color, and will be be black if it is light and white if it is dark.
-  final Color? onSecondary;
-
-  /// A color that's clearly legible when drawn on [secondaryContainer].
-  ///
-  /// To ensure that an app is accessible, a contrast ratio between
-  /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-  /// is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, and if [colorScheme.onSecondaryContainer] is null, the color
-  /// will via [ColorScheme] default be equal to resulting color scheme
-  /// [ColorScheme.onSecondary].
-  final Color? onSecondaryContainer;
-
-  /// A color that's clearly legible when drawn on [tertiary].
-  ///
-  /// To ensure that an app is accessible, a contrast ratio between
-  /// [tertiary] and [onTertiary] of at least 4.5:1 is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, and if [colorScheme.onTertiary] is null, the color
-  /// will via [ColorScheme] default be equal to resulting color scheme
-  /// [ColorScheme.onSecondary].
-  final Color? onTertiary;
-
-  /// A color that's clearly legible when drawn on [tertiaryContainer].
-  ///
-  /// To ensure that an app is accessible, a contrast ratio between
-  /// [tertiaryContainer] and [onTertiaryContainer] of at least 4.5:1 is
-  /// recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, and if [colorScheme.onTertiaryContainer] and [onTertiary) is
-  /// null, the color will via [ColorScheme] default be equal to resulting
-  /// color scheme [ColorScheme.onSecondary].
-  final Color? onTertiaryContainer;
-
-  /// A color that is clearly legible when drawn on [surface] color.
-  ///
-  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-  /// [surface] and [onSurface] is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, the on color is derived from the brightness of the [surface]
-  /// color, and will be be black if it is light and white if it is dark.
-  final Color? onSurface;
-
-  /// A color that is clearly legible when drawn on [error] color.
-  ///
-  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for [error]
-  /// and [onError] is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, the on color is derived from the brightness of the [error]
-  /// color, and will be be black if it is light and white if it is dark.
-  final Color? onError;
 
   /// A custom color used as an overlay on a surface color to indicate a
   /// component's elevation and surface color branding or tinting.
@@ -1551,6 +1558,24 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? primary,
 
+    /// A color that is clearly legible when drawn on [primary] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [primary] and [onPrimary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onPrimary,
+
     /// A color used for elements needing less emphasis than [primary].
     ///
     /// When using the factory this is an override color for the color that
@@ -1568,6 +1593,25 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? primaryContainer,
+
+    /// A color that's clearly legible when drawn on [primaryContainer].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onPrimaryContainer,
 
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
@@ -1588,6 +1632,24 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? secondary,
 
+    /// A color that is clearly legible when drawn on [secondary] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [secondary] and [onSecondary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSecondary,
+
     /// A color used for elements needing less emphasis than [secondary].
     ///
     /// When using the factory this is an override color for the color that
@@ -1605,6 +1667,25 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? secondaryContainer,
+
+    /// A color that's clearly legible when drawn on [secondaryContainer].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSecondaryContainer,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -1626,6 +1707,24 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? tertiary,
 
+    ////  A color that's clearly legible when drawn on [tertiary].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [secondary] and [onSecondary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiary,
+
     /// A color used for elements needing less emphasis than [tertiary].
     ///
     /// When using the factory this is an override color for the color that
@@ -1644,6 +1743,25 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? tertiaryContainer,
 
+    /// A color that's clearly legible when drawn on [tertiaryContainer].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiaryContainer,
+
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
@@ -1658,11 +1776,29 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? error,
 
+    /// A color that is clearly legible when drawn on [error] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [error] and [onError] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onError,
+
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
     ///
-    /// The color is applied to [ThemeData.cardColor] and
-    /// [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
+    /// The color is applied to [ThemeData.cardColor], [ThemeData.canvasColor]
+    /// and [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
     /// by all [Material] of type [MaterialType.card].
     ///
     /// When using the factory this is an override color for the color that
@@ -1673,6 +1809,24 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? surface,
+
+    /// A color that is clearly legible when drawn on [surface] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [surface] and [onSurface] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSurface,
 
     /// The color of the [Scaffold] background.
     ///
@@ -1716,153 +1870,6 @@ class FlexColorScheme with Diagnosticable {
     /// Thus custom color will also override any scheme color based selection
     /// for the [AppBAr] in active used sub-themes.
     final Color? appBarBackground,
-
-    /// A color that is clearly legible when drawn on [primary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [primary] and [onPrimary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimary,
-
-    /// A color that's clearly legible when drawn on [primaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimaryContainer,
-
-    /// A color that is clearly legible when drawn on [secondary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondary,
-
-    /// A color that's clearly legible when drawn on [secondaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondaryContainer,
-
-    /// A color that's clearly legible when drawn on [tertiary].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiary,
-
-    /// A color that's clearly legible when drawn on [tertiaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiaryContainer,
-
-    /// A color that is clearly legible when drawn on [surface] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [surface] and [onSurface] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSurface,
-
-    /// A color that is clearly legible when drawn on [error] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [error] and [onError] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onError,
 
     /// A custom color used as an overlay on a surface color to indicate a
     /// component's elevation and surface color branding or tinting.
@@ -3530,6 +3537,24 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? primary,
 
+    /// A color that is clearly legible when drawn on [primary] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [primary] and [onPrimary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onPrimary,
+
     /// A color used for elements needing less emphasis than [primary].
     ///
     /// When using the factory this is an override color for the color that
@@ -3547,6 +3572,25 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? primaryContainer,
+
+    /// A color that's clearly legible when drawn on [primaryContainer.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onPrimaryContainer,
 
     /// An accent color that, when used sparingly, calls attention to parts
     /// of your app.
@@ -3567,6 +3611,24 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? secondary,
 
+    /// A color that is clearly legible when drawn on [secondary] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [secondary] and [onSecondary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSecondary,
+
     /// A color used for elements needing less emphasis than [secondary].
     ///
     /// When using the factory this is an override color for the color that
@@ -3584,6 +3646,25 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? secondaryContainer,
+
+    /// A color that's clearly legible when drawn on [secondaryContainer].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSecondaryContainer,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -3605,6 +3686,24 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? tertiary,
 
+    /// A color that's clearly legible when drawn on [tertiary].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [secondary] and [onSecondary] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiary,
+
     /// A color used for elements needing less emphasis than [tertiary].
     ///
     /// When using the factory this is an override color for the color that
@@ -3623,6 +3722,25 @@ class FlexColorScheme with Diagnosticable {
     /// Defaults to null.
     final Color? tertiaryContainer,
 
+    /// A color that's clearly legible when drawn on [tertiaryContainer].
+    ///
+    /// To ensure that an app is accessible, a contrast ratio between
+    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+    /// is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onTertiaryContainer,
+
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
     ///
@@ -3637,11 +3755,29 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? error,
 
+    /// A color that is clearly legible when drawn on [error] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [error] and [onError] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onError,
+
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
     ///
-    /// The color is applied to [ThemeData.cardColor] and
-    /// [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
+    /// The color is applied to [ThemeData.cardColor], [ThemeData.canvasColor]
+    /// and [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
     /// by all [Material] of type [MaterialType.card].
     ///
     /// When using the factory this is an override color for the color that
@@ -3652,6 +3788,24 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// Defaults to null.
     final Color? surface,
+
+    /// A color that is clearly legible when drawn on [surface] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [surface] and [onSurface] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onSurface,
 
     /// The color of the [Scaffold] background.
     ///
@@ -3695,153 +3849,6 @@ class FlexColorScheme with Diagnosticable {
     /// Thus custom color will also override any scheme color based selection
     /// for the [AppBAr] in active used sub-themes.
     final Color? appBarBackground,
-
-    /// A color that is clearly legible when drawn on [primary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [primary] and [onPrimary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimary,
-
-    /// A color that's clearly legible when drawn on [primaryContainer.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimaryContainer,
-
-    /// A color that is clearly legible when drawn on [secondary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondary,
-
-    /// A color that's clearly legible when drawn on [secondaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondaryContainer,
-
-    /// A color that's clearly legible when drawn on [tertiary].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiary,
-
-    /// A color that's clearly legible when drawn on [tertiaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiaryContainer,
-
-    /// A color that is clearly legible when drawn on [surface] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [surface] and [onSurface] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSurface,
-
-    /// A color that is clearly legible when drawn on [error] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [error] and [onError] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onError,
 
     /// A custom color used as an overlay on a surface color to indicate a
     /// component's elevation and surface color branding or tinting.
@@ -7936,28 +7943,34 @@ class FlexColorScheme with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexColorScheme copyWith({
-    ColorScheme? colorScheme,
     Brightness? brightness,
+    ColorScheme? colorScheme,
+    //
     Color? primary,
+    Color? onPrimary,
     Color? primaryContainer,
+    Color? onPrimaryContainer,
+    //
     Color? secondary,
+    Color? onSecondary,
     Color? secondaryContainer,
+    Color? onSecondaryContainer,
+    //
     Color? tertiary,
+    Color? onTertiary,
     Color? tertiaryContainer,
+    Color? onTertiaryContainer,
+    //
     Color? error,
+    Color? onError,
+    //
     Color? surface,
+    Color? onSurface,
     Color? scaffoldBackground,
     Color? dialogBackground,
     Color? appBarBackground,
-    Color? onPrimary,
-    Color? onPrimaryContainer,
-    Color? onSecondary,
-    Color? onSecondaryContainer,
-    Color? onTertiary,
-    Color? onTertiaryContainer,
-    Color? onSurface,
-    Color? onError,
     Color? surfaceTint,
+    //
     FlexTabBarStyle? tabBarStyle,
     double? appBarElevation,
     double? bottomAppBarElevation,
@@ -7978,6 +7991,7 @@ class FlexColorScheme with Diagnosticable {
     FlexSubThemesData? subThemesData,
     bool? useMaterial3,
     Iterable<ThemeExtension<dynamic>>? extensions,
+    //
     @Deprecated('Use FlexColorScheme.surface instead. '
         'This property will be removed in a future release. It is deprecated '
         'because Flutter 3.22 deprecated this ColorScheme color.')
@@ -7988,28 +8002,34 @@ class FlexColorScheme with Diagnosticable {
     Color? onBackground,
   }) {
     return FlexColorScheme(
-      colorScheme: colorScheme ?? this.colorScheme,
       brightness: brightness ?? this.brightness,
+      colorScheme: colorScheme ?? this.colorScheme,
+      //
       primary: primary ?? this.primary,
+      onPrimary: onPrimary ?? this.onPrimary,
       primaryContainer: primaryContainer ?? this.primaryContainer,
+      onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
+      //
       secondary: secondary ?? this.secondary,
+      onSecondary: onSecondary ?? this.onSecondary,
       secondaryContainer: secondaryContainer ?? this.secondaryContainer,
+      onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
+      //
       tertiary: tertiary ?? this.tertiary,
+      onTertiary: onTertiary ?? this.onTertiary,
       tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
+      onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
+      //
       error: error ?? this.error,
+      onError: onError ?? this.onError,
+      //
       surface: surface ?? this.surface,
+      onSurface: onSurface ?? this.onSurface,
       scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
       appBarBackground: appBarBackground ?? this.appBarBackground,
       dialogBackground: dialogBackground ?? this.dialogBackground,
-      onPrimary: onPrimary ?? this.onPrimary,
-      onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
-      onSecondary: onSecondary ?? this.onSecondary,
-      onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
-      onTertiary: onTertiary ?? this.onTertiary,
-      onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
-      onSurface: onSurface ?? this.onSurface,
-      onError: onError ?? this.onError,
       surfaceTint: surfaceTint ?? this.surfaceTint,
+      //
       tabBarStyle: tabBarStyle ?? this.tabBarStyle,
       appBarElevation: appBarElevation ?? this.appBarElevation,
       bottomAppBarElevation:
@@ -8044,28 +8064,34 @@ class FlexColorScheme with Diagnosticable {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
     return other is FlexColorScheme &&
-        other.colorScheme == colorScheme &&
         other.brightness == brightness &&
+        other.colorScheme == colorScheme &&
+        //
         other.primary == primary &&
+        other.onPrimary == onPrimary &&
         other.primaryContainer == primaryContainer &&
+        other.onPrimaryContainer == onPrimaryContainer &&
+        //
         other.secondary == secondary &&
+        other.onSecondary == onSecondary &&
         other.secondaryContainer == secondaryContainer &&
+        other.onSecondaryContainer == onSecondaryContainer &&
+        //
         other.tertiary == tertiary &&
+        other.onTertiary == onTertiary &&
         other.tertiaryContainer == tertiaryContainer &&
+        other.onTertiaryContainer == onTertiaryContainer &&
+        //
         other.error == error &&
+        other.onError == onError &&
+        //
         other.surface == surface &&
+        other.onSurface == onSurface &&
         other.scaffoldBackground == scaffoldBackground &&
         other.dialogBackground == dialogBackground &&
         other.appBarBackground == appBarBackground &&
-        other.onPrimary == onPrimary &&
-        other.onPrimaryContainer == onPrimaryContainer &&
-        other.onSecondary == onSecondary &&
-        other.onSecondaryContainer == onSecondaryContainer &&
-        other.onTertiary == onTertiary &&
-        other.onTertiaryContainer == onTertiaryContainer &&
-        other.onSurface == onSurface &&
-        other.onError == onError &&
         other.surfaceTint == surfaceTint &&
+        //
         other.tabBarStyle == tabBarStyle &&
         other.appBarElevation == appBarElevation &&
         other.bottomAppBarElevation == bottomAppBarElevation &&
@@ -8091,28 +8117,34 @@ class FlexColorScheme with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hashAll(<Object?>[
-        colorScheme,
         brightness,
+        colorScheme,
+        //
         primary,
+        onPrimary,
         primaryContainer,
+        onPrimaryContainer,
+        //
         secondary,
+        onSecondary,
         secondaryContainer,
+        onSecondaryContainer,
+        //
         tertiary,
+        onTertiary,
         tertiaryContainer,
+        onTertiaryContainer,
+        //
         error,
+        onError,
+        //
         surface,
+        onSurface,
         scaffoldBackground,
         dialogBackground,
         appBarBackground,
-        onPrimary,
-        onPrimaryContainer,
-        onSecondary,
-        onSecondaryContainer,
-        onTertiary,
-        onTertiaryContainer,
-        onSurface,
-        onError,
         surfaceTint,
+        //
         tabBarStyle,
         appBarElevation,
         bottomAppBarElevation,
@@ -8139,29 +8171,35 @@ class FlexColorScheme with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
+    properties.add(EnumProperty<Brightness>('brightness', brightness));
     properties
         .add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
-    properties.add(EnumProperty<Brightness>('brightness', brightness));
+    //
     properties.add(ColorProperty('primary', primary));
+    properties.add(ColorProperty('onPrimary', onPrimary));
     properties.add(ColorProperty('primaryContainer', primaryContainer));
+    properties.add(ColorProperty('onPrimaryContainer', onPrimaryContainer));
+    //
     properties.add(ColorProperty('secondary', secondary));
+    properties.add(ColorProperty('onSecondary', onSecondary));
     properties.add(ColorProperty('secondaryContainer', secondaryContainer));
+    properties.add(ColorProperty('onSecondaryContainer', onSecondaryContainer));
+    //
     properties.add(ColorProperty('tertiary', tertiary));
+    properties.add(ColorProperty('onTertiary', onTertiary));
     properties.add(ColorProperty('tertiaryContainer', tertiaryContainer));
+    properties.add(ColorProperty('onTertiaryContainer', onTertiaryContainer));
+    //
     properties.add(ColorProperty('error', error));
+    properties.add(ColorProperty('onError', onError));
+    //
     properties.add(ColorProperty('surface', surface));
+    properties.add(ColorProperty('onSurface', onSurface));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('appBarBackground', appBarBackground));
     properties.add(ColorProperty('dialogBackground', dialogBackground));
-    properties.add(ColorProperty('onPrimary', onPrimary));
-    properties.add(ColorProperty('onPrimaryContainer', onPrimaryContainer));
-    properties.add(ColorProperty('onSecondary', onSecondary));
-    properties.add(ColorProperty('onSecondaryContainer', onSecondaryContainer));
-    properties.add(ColorProperty('onTertiary', onTertiary));
-    properties.add(ColorProperty('onTertiaryContainer', onTertiaryContainer));
-    properties.add(ColorProperty('onSurface', onSurface));
-    properties.add(ColorProperty('onError', onError));
     properties.add(ColorProperty('surfaceTint', surfaceTint));
+    //
     properties.add(EnumProperty<FlexTabBarStyle>('tabBarStyle', tabBarStyle));
     properties
         .add(DiagnosticsProperty<double>('appBarElevation', appBarElevation));
