@@ -16,17 +16,14 @@ enum FlexSurfaceMode {
   ///
   /// The blend level decreases on surfaces in this order:
   ///
-  /// * Surfaces & dialogs (1x)
+  /// * Surfaces & dialogs (2x)
   /// * Scaffold background (1/2x)
   ///
-  /// In combination with the blend level [FlexColorScheme.blendLevel], it
-  /// results in a style where scaffold background has a much lower blend
-  /// strength, 1/2x of blend level value and remains mostly un-tinted at
-  /// low blend levels. Surface uses the blend level value.
-  ///
   /// > **NOTE:** Since Flutter 3.22 deprecated the background color, this mode
-  /// > in FCS 8.0 and Flutter 3.22 and later is redundant, as it produces
-  /// > the same result as [levelSurfacesLowScaffold].
+  /// > in FCS 8.0 and Flutter 3.22, sets surface and dialog blends to 2x
+  /// > so that it represents the "high background" style as before, but done
+  /// > via surface. Without this breaking change this mode would produce the
+  /// > same result [levelSurfacesLowScaffold] and be redundant.
   highBackgroundLowScaffold,
 
   /// Decreasing blend level in order high surface, low scaffold.
@@ -59,10 +56,6 @@ enum FlexSurfaceMode {
   ///
   /// * Surfaces & dialogs (1x)
   /// * Scaffold (1/2x)
-  ///
-  /// > **NOTE:** Since Flutter 3.22 deprecated the background color, them mode
-  /// > [highBackgroundLowScaffold] will in FCS 8.0 and Flutter 3.22 produce
-  /// > the same result as this mode.
   levelSurfacesLowScaffold,
 
   /// Decreasing blend level in order very high scaffold, low surfaces.
