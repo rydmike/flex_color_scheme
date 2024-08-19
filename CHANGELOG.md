@@ -15,6 +15,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" style colors. How?
   * Will need to seed for these in the background to get usable colors for them automatically.
   * PARTIALLY DONE: Need a way to pass correct custom dark seed colors.
+    * IDEA: Add override key colors to KeyColors and use in dark mode code gen!
  
 * Consider what to do with surfaceTint removal. It is basically obsolete now in Flutter 3.22 and later. Convert it into "bring tints back"? 
 * Consider what to do with shadows back. More fine-grained control?
