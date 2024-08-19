@@ -7,6 +7,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_picker_inkwell.dart';
 import '../../shared/color_scheme_box.dart';
+import '../../shared/color_scheme_popup_menu.dart';
 import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
 import 'light_surface_mode_list_tile.dart';
@@ -20,44 +21,26 @@ class ColorBlendsSettings extends StatelessWidget {
   const ColorBlendsSettings(
     this.controller, {
     super.key,
-    // required this.allBlends,
   });
   final ThemeController controller;
-  // final bool allBlends;
 
-  String explainMode(final FlexSurfaceMode mode) {
-    switch (mode) {
-      case FlexSurfaceMode.level:
-        return 'Level blends\n'
-            'Surface 1x  Background 1x  Scaffold 1x\n';
-      case FlexSurfaceMode.highBackgroundLowScaffold:
-        return 'High background, low scaffold\n'
-            'Surface 1x  Background 3/2x  Scaffold 1/2x\n';
-      case FlexSurfaceMode.highSurfaceLowScaffold:
-        return 'High surface, low scaffold\n'
-            'Surface 3/2x  Background 1x  Scaffold 1/2x\n';
-      case FlexSurfaceMode.highScaffoldLowSurface:
-        return 'Very high scaffold, low surface\n'
-            'Surface 1/2x  Background 1x  Scaffold 3x\n';
-      case FlexSurfaceMode.highScaffoldLevelSurface:
-        return 'Very high scaffold, high background, level surface\n'
-            'Surface 1x  Background 2x  Scaffold 3x\n';
-      case FlexSurfaceMode.levelSurfacesLowScaffold:
-        return 'Level surface and background, low scaffold\n'
-            'Surface 1x  Background 1x  Scaffold 1/2x\n';
-      case FlexSurfaceMode.highScaffoldLowSurfaces:
-        return 'Very high scaffold, low surface and background\n'
-            'Surface 1/2x  Background 1/2x  Scaffold 3x\n';
-      case FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog:
-        return 'Tertiary container dialog, low scaffold\n'
-            'Surface 1x  Background 1x  Scaffold 1/2x\n'
-            'Dialog 1x blend of tertiary container color';
-      case FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog:
-        return 'Tertiary container dialog, very high scaffold\n'
-            'Surface 1/2x  Background 1/2x  Scaffold 3x\n'
-            'Dialog 1/2x blend of tertiary container color';
-      case FlexSurfaceMode.custom:
-        return '';
+  // Logic to get the effective default Dialog color label.
+  static String _scaffoldBackgroundDefault(
+    ThemeController controller,
+    bool isLight,
+  ) {
+    if (!controller.useFlexColorScheme) {
+      if (controller.useMaterial3) {
+        return 'default (surface)';
+      } else {
+        return isLight ? 'default (grey50)' : 'default (grey850)';
+      }
+    } else {
+      if (controller.useMaterial3) {
+        return 'default (surfaceContainerLowest)';
+      } else {
+        return 'default (surface)';
+      }
     }
   }
 
@@ -220,6 +203,21 @@ class ColorBlendsSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('Scaffold background color'),
+            labelForDefault: _scaffoldBackgroundDefault(controller, isLight),
+            index: controller.scaffoldBackgroundLightSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setScaffoldBackgroundLightSchemeColor(null);
+                    } else {
+                      controller.setScaffoldBackgroundLightSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
           SwitchListTileReveal(
             title: const Text('Plain white'),
             subtitleDense: true,
@@ -278,6 +276,21 @@ class ColorBlendsSettings extends StatelessWidget {
             },
           ),
         ] else ...<Widget>[
+          ColorSchemePopupMenu(
+            title: const Text('Scaffold background color'),
+            labelForDefault: _scaffoldBackgroundDefault(controller, isLight),
+            index: controller.scaffoldBackgroundDarkSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setScaffoldBackgroundDarkSchemeColor(null);
+                    } else {
+                      controller.setScaffoldBackgroundDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
           SwitchListTileReveal(
             title: const Text('True black'),
             subtitleDense: true,
