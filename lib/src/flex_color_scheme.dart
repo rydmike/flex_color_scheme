@@ -3018,7 +3018,7 @@ class FlexColorScheme with Diagnosticable {
           onPrimary: onColors.onPrimary,
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
-          // TODO(rydmike): Commented fixed & FixedDim are a none seed versions.
+          // TODO(rydmike): Commented fixed & FixedDim are none seed versions.
           //  They are experimental. They have issues, seeds are better.
           //  Keeping this here to maybe experiment with it more later and
           //  maybe offer it as an option in a future release.
@@ -3038,7 +3038,7 @@ class FlexColorScheme with Diagnosticable {
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
-          // TODO(rydmike): Commented fixed & FixedDim are a none seed versions.
+          // TODO(rydmike): Commented fixed & FixedDim are none seed versions.
           // secondaryFixed:
           //     effectiveColors.secondary.lighten(35).blend(Colors.white, 60),
           // secondaryFixedDim:
@@ -3055,7 +3055,7 @@ class FlexColorScheme with Diagnosticable {
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
-          // TODO(rydmike): Commented fixed & FixedDim are a none seed versions.
+          // TODO(rydmike): Commented fixed & FixedDim are none seed versions.
           // tertiaryFixed:
           //     effectiveColors.tertiary.lighten(35).blend(Colors.white, 60),
           // tertiaryFixedDim:
