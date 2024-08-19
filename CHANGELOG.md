@@ -181,6 +181,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Added ability to use custom seed key colors to `FlexKeyColors`.
 - Added support for error colors to `FlexKeyColors`.
+- Added direct color properties for `errorContainer` and `onErrorContainer` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API.  
 
 - Improved the theming logic for `Card` theme. 
   - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant for the default case at least. The Flutter theming limitation and impact are thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.

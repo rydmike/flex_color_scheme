@@ -522,6 +522,38 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
+    /// The color to use for input validation errors with less empahsis than
+    /// error.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? errorContainer,
+
+    /// A color that is clearly legible when drawn on [errorContainer] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [error] and [onError] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onErrorContainer,
+
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
     ///
@@ -1350,6 +1382,8 @@ extension FlexThemeData on ThemeData {
         //
         error: error,
         onError: onError,
+        errorContainer: errorContainer,
+        onErrorContainer: onErrorContainer,
         //
         surface: surface,
         onSurface: onSurface,
@@ -1859,6 +1893,38 @@ extension FlexThemeData on ThemeData {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
+
+    /// The color to use for input validation errors with less empahsis than
+    /// error.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? errorContainer,
+
+    /// A color that is clearly legible when drawn on [errorContainer] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [error] and [onError] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onErrorContainer,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -2686,6 +2752,8 @@ extension FlexThemeData on ThemeData {
         //
         error: error,
         onError: onError,
+        errorContainer: errorContainer,
+        onErrorContainer: onErrorContainer,
         //
         surface: surface,
         onSurface: onSurface,

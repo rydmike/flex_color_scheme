@@ -314,6 +314,8 @@ class FlexColorScheme with Diagnosticable {
     //
     this.error,
     this.onError,
+    this.errorContainer,
+    this.onErrorContainer,
     //
     this.surface,
     this.onSurface,
@@ -526,6 +528,17 @@ class FlexColorScheme with Diagnosticable {
   /// If null, the on color is derived from the brightness of the [error]
   /// color, and will be be black if it is light and white if it is dark.
   final Color? onError;
+
+  /// A color used for error elements needing less emphasis than [error].
+  final Color? errorContainer;
+
+  /// A color that's clearly legible when drawn on [errorContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [errorContainer] and [onErrorContainer] of at least 4.5:1 is
+  /// recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  final Color? onErrorContainer;
 
   /// The surface (background) color for widgets like [Card] and
   /// [BottomAppBar].
@@ -1794,6 +1807,38 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
+    /// The color to use for input validation errors with less empahsis than
+    /// error.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? errorContainer,
+
+    /// A color that is clearly legible when drawn on [errorContainer] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [error] and [onError] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onErrorContainer,
+
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
     ///
@@ -2622,7 +2667,7 @@ class FlexColorScheme with Diagnosticable {
       tertiary: tertiary ?? colorScheme?.tertiary,
       tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       error: error ?? colorScheme?.error,
-      errorContainer: colorScheme?.errorContainer,
+      errorContainer: errorContainer ?? colorScheme?.errorContainer,
     );
     // Swap legacy secondary and tertiary color if we use Material 3 and
     // we have swapping of legacy colors on and if the colors in used built-in
@@ -2874,7 +2919,9 @@ class FlexColorScheme with Diagnosticable {
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       onError: onError ?? seedScheme?.onError ?? colorScheme?.onError,
-      onErrorContainer: seedScheme?.onError ?? colorScheme?.onErrorContainer,
+      onErrorContainer: onErrorContainer ??
+          seedScheme?.onError ??
+          colorScheme?.onErrorContainer,
       primaryAlpha: alphaOnMain.primaryAlpha,
       primaryContainerAlpha: alphaOnValue.primaryContainerAlpha,
       secondaryAlpha: alphaOnMain.secondaryAlpha,
@@ -3107,15 +3154,35 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.light,
       // Primary colors for the application
       primary: effectiveColors.primary,
+      onPrimary: onColors.onPrimary,
       primaryContainer: effectiveColors.primaryContainer,
+      onPrimaryContainer: onColors.onPrimaryContainer,
       // The secondary colors for the application.
       secondary: effectiveColors.secondary,
       secondaryContainer: effectiveColors.secondaryContainer,
+      onSecondaryContainer: onColors.onSecondaryContainer,
+      onSecondary: onColors.onSecondary,
       // The tertiary colors for the application.
       tertiary: effectiveColors.tertiary,
+      onTertiary: onColors.onTertiary,
       tertiaryContainer: effectiveColors.tertiaryContainer,
+      onTertiaryContainer: onColors.onTertiaryContainer,
+      // Effective error color and null fallback.
+      error: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3LightError
+          : effectiveColors.error ?? FlexColor.materialLightError,
+      onError: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3LightOnError
+          : onColors.onError,
+      errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3LightErrorContainer
+          : effectiveColors.errorContainer,
+      onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3LightOnErrorContainer
+          : onColors.onErrorContainer,
       // Surface is used e.g. by Card and bottom appbar.
       surface: effectiveSurfaceColor,
+      onSurface: onColors.onSurface,
       // Color of the scaffold background.
       scaffoldBackground: effectiveScaffoldColor,
       // Color of dialog background elements, a passed in dialogBackground
@@ -3123,21 +3190,8 @@ class FlexColorScheme with Diagnosticable {
       dialogBackground: effectiveDialogBackground,
       // Set app bar background to effective background color.
       appBarBackground: effectiveAppBarColor,
-      // Effective error color and null fallback.
-      error: useMaterial3ErrorColors && !seed.useKeyColors
-          ? FlexColor.material3LightError
-          : effectiveColors.error ?? FlexColor.materialLightError,
-      onPrimary: onColors.onPrimary,
-      onPrimaryContainer: onColors.onPrimaryContainer,
-      onSecondary: onColors.onSecondary,
-      onSecondaryContainer: onColors.onSecondaryContainer,
-      onTertiary: onColors.onTertiary,
-      onTertiaryContainer: onColors.onTertiaryContainer,
-      onSurface: onColors.onSurface,
-      onError: useMaterial3ErrorColors && !seed.useKeyColors
-          ? FlexColor.material3LightOnError
-          : onColors.onError,
       surfaceTint: surfaceTint,
+      //
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: bottomAppBarElevation,
@@ -3772,6 +3826,38 @@ class FlexColorScheme with Diagnosticable {
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
+
+    /// The color to use for input validation errors with less empahsis than
+    /// error.
+    ///
+    /// When using the factory this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] or for this color defined when using a
+    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+    /// if a [colorScheme] was provided it will override the same color in it
+    /// as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? errorContainer,
+
+    /// A color that is clearly legible when drawn on [errorContainer] color.
+    ///
+    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+    /// [error] and [onError] is recommended. See
+    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    ///
+    /// When using this factory, this is an override color for the color that
+    /// would be used based on the corresponding color property defined in
+    /// [FlexSchemeColor] [colors] property or when using pre-defined color
+    /// scheme based [FlexScheme] and its [scheme] property, including any
+    /// used blend logic. If a [colorScheme] was provided with this
+    /// corresponding color defined, this color property will override the
+    /// same color in it as well.
+    ///
+    /// You can use this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
+    final Color? onErrorContainer,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -4601,7 +4687,7 @@ class FlexColorScheme with Diagnosticable {
       tertiary: tertiary ?? colorScheme?.tertiary,
       tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
       error: error ?? colorScheme?.error,
-      errorContainer: colorScheme?.errorContainer,
+      errorContainer: errorContainer ?? colorScheme?.errorContainer,
     );
     // Swap legacy secondary and tertiary color if we use Material 3 and
     // we have swapping of legacy colors on and if the colors in used built-in
@@ -4877,7 +4963,9 @@ class FlexColorScheme with Diagnosticable {
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       onError: onError ?? seedScheme?.onError ?? colorScheme?.onError,
-      onErrorContainer: seedScheme?.onError ?? colorScheme?.onErrorContainer,
+      onErrorContainer: onErrorContainer ??
+          seedScheme?.onError ??
+          colorScheme?.onErrorContainer,
       primaryAlpha: alphaOnMain.primaryAlpha,
       primaryContainerAlpha: alphaOnValue.primaryContainerAlpha,
       secondaryAlpha: alphaOnMain.secondaryAlpha,
@@ -4982,11 +5070,6 @@ class FlexColorScheme with Diagnosticable {
           onPrimaryFixed: schemeForFixedColors.onPrimaryFixed,
           onPrimaryFixedVariant: schemeForFixedColors.onPrimaryFixedVariant,
           //
-          // primaryFixed: schemeForFixedColors.primaryFixed,
-          // primaryFixedDim: schemeForFixedColors.primaryFixedDim,
-          // onPrimaryFixed: schemeForFixedColors.onPrimaryFixed,
-          // onPrimaryFixedVariant: schemeForFixedColors.onPrimaryFixedVariant,
-          //
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
@@ -5013,7 +5096,7 @@ class FlexColorScheme with Diagnosticable {
               : onColors.onError,
           errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkErrorContainer
-              : effectiveColors.errorContainer!,
+              : effectiveColors.errorContainer,
           onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkOnErrorContainer
               : onColors.onErrorContainer,
@@ -5090,16 +5173,36 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.dark,
       // Primary colors for the application
       primary: effectiveColors.primary,
+      onPrimary: onColors.onPrimary,
       primaryContainer: effectiveColors.primaryContainer,
+      onPrimaryContainer: onColors.onPrimaryContainer,
       // The secondary colors for the application.
       secondary: effectiveColors.secondary,
+      onSecondary: onColors.onSecondary,
       secondaryContainer: effectiveColors.secondaryContainer,
+      onSecondaryContainer: onColors.onSecondaryContainer,
       // Tertiary colors for the application.
       tertiary: effectiveColors.tertiary,
+      onTertiary: onColors.onTertiary,
       tertiaryContainer: effectiveColors.tertiaryContainer,
+      onTertiaryContainer: onColors.onTertiaryContainer,
+      // Effective error color and null fallback.
+      error: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3DarkError
+          : effectiveColors.error ?? FlexColor.materialDarkError,
+      onError: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3DarkOnError
+          : onColors.onError,
+      errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3DarkErrorContainer
+          : effectiveColors.errorContainer,
+      onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
+          ? FlexColor.material3DarkOnErrorContainer
+          : onColors.onErrorContainer,
       // Surface is used e.g. by Card and bottom appbar and in this
       // implementation also by dialogs.
       surface: effectiveSurfaceColor,
+      onSurface: onColors.onSurface,
       // If darkIsTrueBlack is set, we use black as default scaffold background,
       // otherwise provided value or if null effective scheme background.
       scaffoldBackground: effectiveScaffoldColor,
@@ -5109,21 +5212,8 @@ class FlexColorScheme with Diagnosticable {
       // Set app bar background to effective background color, but a passed
       // in appBarBackground will override it if provided.
       appBarBackground: effectiveAppBarColor,
-      // Effective error color and null fallback.
-      error: useMaterial3ErrorColors && !seed.useKeyColors
-          ? FlexColor.material3DarkError
-          : effectiveColors.error ?? FlexColor.materialDarkError,
-      onPrimary: onColors.onPrimary,
-      onPrimaryContainer: onColors.onPrimaryContainer,
-      onSecondary: onColors.onSecondary,
-      onSecondaryContainer: onColors.onSecondaryContainer,
-      onTertiary: onColors.onTertiary,
-      onTertiaryContainer: onColors.onTertiaryContainer,
-      onSurface: onColors.onSurface,
-      onError: useMaterial3ErrorColors && !seed.useKeyColors
-          ? FlexColor.material3DarkOnError
-          : onColors.onError,
       surfaceTint: surfaceTint,
+      //
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: bottomAppBarElevation,
@@ -7792,7 +7882,9 @@ class FlexColorScheme with Diagnosticable {
           colorScheme?.secondary ??
           usedPrimary,
       error: error ?? colorScheme?.error ?? errorFallback,
-      errorContainer: colorScheme?.errorContainer ?? errorContainerFallback,
+      errorContainer: errorContainer ??
+          colorScheme?.errorContainer ??
+          errorContainerFallback,
     );
     // Determine effective surface surface colors.
     final Color effectiveSurfaceColor = surface ??
@@ -7833,7 +7925,7 @@ class FlexColorScheme with Diagnosticable {
       onSurfaceVariant: colorScheme?.onSurfaceVariant,
       onInverseSurface: colorScheme?.onInverseSurface,
       onError: onError ?? colorScheme?.onError,
-      onErrorContainer: colorScheme?.onErrorContainer,
+      onErrorContainer: onErrorContainer ?? colorScheme?.onErrorContainer,
     );
     // Return the ColorScheme as a copyWith on original passed in colorScheme
     // if one was passed in, with all the effective properties overriding its
@@ -7883,6 +7975,14 @@ class FlexColorScheme with Diagnosticable {
         ) ??
         // No passed in ColorScheme, we create one with the effective
         // override properties, plus FlexColorScheme ColorScheme defaults.
+        // TODO(rydmike): If using raw FlexColorScheme() constructor, this does
+        //   not give us full ColorScheme, as it does not have all properties,
+        //   it is missing the fixed and fixedDims properties. We would
+        //   need to compute them without seeding to get them. When using the
+        //   the light and dark factories, they set all properties needed in
+        //   the colorScheme property, so this is not an issue. It is a bit
+        //   incomplete like this, but will not really be seen as the
+        //   raw constructor is not supposed to be used directly.
         ColorScheme(
           brightness: usedBrightness,
           primary: usedPrimary,
@@ -7963,6 +8063,8 @@ class FlexColorScheme with Diagnosticable {
     //
     Color? error,
     Color? onError,
+    Color? errorContainer,
+    Color? onErrorContainer,
     //
     Color? surface,
     Color? onSurface,
@@ -8022,6 +8124,8 @@ class FlexColorScheme with Diagnosticable {
       //
       error: error ?? this.error,
       onError: onError ?? this.onError,
+      errorContainer: errorContainer ?? this.errorContainer,
+      onErrorContainer: onErrorContainer ?? this.onErrorContainer,
       //
       surface: surface ?? this.surface,
       onSurface: onSurface ?? this.onSurface,
@@ -8084,6 +8188,8 @@ class FlexColorScheme with Diagnosticable {
         //
         other.error == error &&
         other.onError == onError &&
+        other.errorContainer == errorContainer &&
+        other.onErrorContainer == onErrorContainer &&
         //
         other.surface == surface &&
         other.onSurface == onSurface &&
@@ -8137,6 +8243,8 @@ class FlexColorScheme with Diagnosticable {
         //
         error,
         onError,
+        errorContainer,
+        onErrorContainer,
         //
         surface,
         onSurface,
@@ -8192,6 +8300,8 @@ class FlexColorScheme with Diagnosticable {
     //
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('onError', onError));
+    properties.add(ColorProperty('errorContainer', errorContainer));
+    properties.add(ColorProperty('onErrorContainer', onErrorContainer));
     //
     properties.add(ColorProperty('surface', surface));
     properties.add(ColorProperty('onSurface', onSurface));
