@@ -192,21 +192,22 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
  
-- Add [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. Also use them in Card settings page for card presentation.
-- Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
+- Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. We also use them in the "Card settings" page for card presentation.
 - Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF.
-- Add code gen for the new ColorScheme colors introduced in Flutter 3.22.
-- Add showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
-- Add showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
-- Add code gen for custom error colors in the Playground.
+- Added code gen for the new ColorScheme colors introduced in Flutter 3.22.
+- Added showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
+- Added showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
+- Added code gen for custom error colors in the Playground.
 - Make FSS seed options unavailable when an MCU variant is selected.
 - Add FFS seed option monochrome surfaces.
-- Show new surface colors in the playground in surface blends. Rename surface blends to surface colors.
-- On the "Component themes" panel added a toggle for setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply setting to Playground theme.  
-- The Switch panel now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
+- Show new surface colors in the playground in surface blends. Rename "Surface blends" settings panel to "Color Blends".
+- On the "Component Themes" panel added a toggle for setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply the setting to the Playground app's theme as well.  
+- The "Switch, Checkbox and Radio" settings panel now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface "Color Blends" panel, you can select a scheme color to use as the theme resulting Scaffold Background color. The selection is independent for light and dark theme mode.
-
-**CHANGE**
+- Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
+- Added support for code gen for the new MCU and FSS scheme variants
+  - For MCU based variants it uses `FlexColorScheme.variant` API with `FlexSchemeVariant` and for FSS based variants it uses `FlexColorScheme.tones` API with `FlexSchemeVariant` and its `tones` getter. The `FlexTones` modifiers only show up on FSS based variants with `FlexColorScheme.tones` API, as they are not available on `FlexColorScheme.variant` API.
+    **CHANGE**
 
 - Split FAB and Chip to separate panels.
 - Modified both HeaderCards background colors to work with new ColorScheme surface colors.
