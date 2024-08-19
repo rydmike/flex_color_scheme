@@ -2722,9 +2722,12 @@ class FlexColorScheme with Diagnosticable {
       // neutral variant tonal palette generation.
       neutralKey: surfaceTint,
       neutralVariantKey: surfaceTint,
-      // Use provided tones configuration or default one.
-      tones: tones,
-      variant: variant,
+      // Use provided tones or variant configuration or default one.
+      // Ensuring that we always used FlexSchemeVariant.chroma when only
+      // seeding for fixed and FixedDim colors, it is the one assured to fit
+      // best with none seeded colors.
+      tones: seed.useKeyColors ? tones : null,
+      variant: seed.useKeyColors ? variant : FlexSchemeVariant.chroma,
       surfaceTint: surfaceTint,
     );
     // Update effective main colors to seed colors, keeping configured
@@ -4770,11 +4773,12 @@ class FlexColorScheme with Diagnosticable {
       // neutral variant tonal palette generation.
       neutralKey: surfaceTint,
       neutralVariantKey: surfaceTint,
-      // Use provided tones configuration or the default one, which uses
-      // defaults that can produce same results as Flutter SDK,
-      // ColorScheme.fromSeed(color), when only primary color is used as key.
-      tones: tones,
-      variant: variant,
+      // Use provided tones or variant configuration or default one.
+      // Ensuring that we always used FlexSchemeVariant.chroma when only
+      // seeding for fixed and FixedDim colors, it is the one assured to fit
+      // best with none seeded colors.
+      tones: seed.useKeyColors ? tones : null,
+      variant: seed.useKeyColors ? variant : FlexSchemeVariant.chroma,
       surfaceTint: surfaceTint,
     );
     // Update effective main colors to seed colors, keeping configured
