@@ -2707,14 +2707,18 @@ class FlexColorScheme with Diagnosticable {
     // the fixed and fixedDim colors and must always use all key colors.
     seedScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.light,
-      primaryKey: effectiveColors.primary,
+      primaryKey: seed.keyPrimary ?? effectiveColors.primary,
       // If use secondary seed, use it with fromSeeds, otherwise undefined.
       secondaryKey: seed.useSecondary || !seed.useKeyColors
-          ? effectiveColors.secondary
+          ? seed.keySecondary ?? effectiveColors.secondary
           : null,
       // If use tertiary seed, use it with fromSeeds, otherwise undefined.
       tertiaryKey: seed.useTertiary || !seed.useKeyColors
-          ? effectiveColors.tertiary
+          ? seed.keyTertiary ?? effectiveColors.tertiary
+          : null,
+      // If use error seed, use it with fromSeeds, otherwise undefined.
+      errorKey: seed.useError || !seed.useKeyColors
+          ? seed.keyError ?? effectiveColors.error
           : null,
       // If a custom surface tint is used, use it also as key for neutral and
       // neutral variant tonal palette generation.
@@ -2746,8 +2750,10 @@ class FlexColorScheme with Diagnosticable {
             ? effectiveColors.tertiaryContainer
             : seedScheme.tertiaryContainer,
         appBarColor: effectiveColors.appBarColor,
-        error: seedScheme.error,
-        errorContainer: seedScheme.errorContainer,
+        error: seed.keepError ? effectiveColors.error : seedScheme.error,
+        errorContainer: seed.keepErrorContainer
+            ? effectiveColors.errorContainer
+            : seedScheme.errorContainer,
       );
     }
     // Store the seedScheme even if we do not use it, as we need it for
@@ -4735,6 +4741,8 @@ class FlexColorScheme with Diagnosticable {
       secondaryContainer: secondaryContainer ?? colorScheme?.secondaryContainer,
       tertiary: tertiary ?? colorScheme?.tertiary,
       tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
+      error: error ?? colorScheme?.error,
+      errorContainer: errorContainer ?? colorScheme?.errorContainer,
     );
     final FlexSchemeColor effectiveKeyColors = FlexSchemeColor.effective(
       withPassedColorsForKeys,
@@ -4748,14 +4756,18 @@ class FlexColorScheme with Diagnosticable {
     // the fixed and fixedDim colors and must always use all key colors.
     seedScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.dark,
-      primaryKey: effectiveKeyColors.primary,
+      primaryKey: seed.keyPrimary ?? effectiveKeyColors.primary,
       // If use secondary seed, use it with fromSeeds, otherwise undefined.
       secondaryKey: seed.useSecondary || !seed.useKeyColors
-          ? effectiveKeyColors.secondary
+          ? seed.keySecondary ?? effectiveKeyColors.secondary
           : null,
       // If use tertiary seed, use it with fromSeeds, otherwise undefined.
       tertiaryKey: seed.useTertiary || !seed.useKeyColors
-          ? effectiveKeyColors.tertiary
+          ? seed.keyTertiary ?? effectiveKeyColors.tertiary
+          : null,
+      // If use error seed, use it with fromSeeds, otherwise undefined.
+      errorKey: seed.useError || !seed.useKeyColors
+          ? seed.keyError ?? effectiveKeyColors.error
           : null,
       // If a custom surface tint is used, use it also as key for neutral and
       // neutral variant tonal palette generation.
