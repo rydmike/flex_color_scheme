@@ -17,7 +17,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * PARTIALLY DONE: Need a way to pass correct custom dark seed colors.
     * IDEA: Add override key colors to KeyColors and use in dark mode code gen!
       * CONSEQUENCE: If using overrides, we could make seed schemes without providing a scheme, colors or colorScheme!   
-    * ISSUE: Must always seed with all key colors, even if not used, to get all fixed colors.
  
 * Consider what to do with surfaceTint removal. It is basically obsolete now in Flutter 3.22 and later. Convert it into "bring tints back"? 
 * Consider what to do with shadows back. More fine-grained control?
