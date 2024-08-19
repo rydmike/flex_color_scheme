@@ -33,9 +33,6 @@ class ShowTonalPalette extends StatelessWidget {
       brightness: Brightness.light,
     );
 
-    // Type of palette to show.
-    // final FlexPaletteType paletteType = controller.paletteType;
-
     // Get the FlexTones setup
     final FlexTones tones = FlexSchemeVariant
         .values[controller.usedFlexToneSetup]
@@ -99,20 +96,16 @@ class ShowTonalPalette extends StatelessWidget {
             ? controller.surfaceTintLight?.value
             : controller.surfaceTintDark?.value,
         // Tone config details we get from active FlexTones.
-        primaryChroma: controller.useKeyColors ? tones.primaryChroma : 0,
-        primaryMinChroma: controller.useKeyColors ? tones.primaryMinChroma : 0,
-        secondaryChroma: controller.useKeyColors ? tones.secondaryChroma : 0,
-        secondaryMinChroma:
-            controller.useKeyColors ? tones.secondaryMinChroma : 0,
-        tertiaryChroma: controller.useKeyColors ? tones.tertiaryChroma : 0,
-        tertiaryMinChroma:
-            controller.useKeyColors ? tones.tertiaryMinChroma : 0,
-        tertiaryHueRotation:
-            controller.useKeyColors ? tones.tertiaryHueRotation : 0,
+        primaryChroma: tones.primaryChroma,
+        primaryMinChroma: tones.primaryMinChroma,
+        secondaryChroma: tones.secondaryChroma,
+        secondaryMinChroma: tones.secondaryMinChroma,
+        tertiaryChroma: tones.tertiaryChroma,
+        tertiaryMinChroma: tones.tertiaryMinChroma,
+        tertiaryHueRotation: tones.tertiaryHueRotation,
         // TODO(rydmike): Add custom error seed color support.
-        neutralChroma: controller.useKeyColors ? tones.neutralChroma : 0,
-        neutralVariantChroma:
-            controller.useKeyColors ? tones.neutralVariantChroma : 0,
+        neutralChroma: tones.neutralChroma,
+        neutralVariantChroma: tones.neutralVariantChroma,
         paletteType: FlexPaletteType.extended,
       );
 
@@ -140,12 +133,19 @@ class ShowTonalPalette extends StatelessWidget {
       children: <Widget>[
         const ListTileReveal(
           contentPadding: EdgeInsetsDirectional.only(end: 12),
-          title: Text('Palettes and tones'),
+          title: Text('Tonal color palettes'),
           subtitle: Text(
             'Tonal palettes and their tones are presented below in this '
             'order:\n'
-            'Primary, Secondary, Tertiary, Error, Neutral and Neutral '
-            'variant',
+            '  - Primary palette\n'
+            '  - Secondary palette\n'
+            '  - Tertiary palette\n'
+            '  - Error palette\n'
+            '  - Neutral palette\n'
+            '  - Neutral variant palette\n'
+            '\n'
+            'The light and dark mode colors are picked from these palettes '
+            'when using seed generated ColorSchemes.',
           ),
           // trailing: SelectPaletteType(controller: controller),
         ),
