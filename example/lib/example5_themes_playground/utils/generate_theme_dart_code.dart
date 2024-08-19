@@ -247,6 +247,17 @@ String generateThemeDartCode(ThemeController controller) {
           ? '    useM2StyleDividerInM3: ${controller.useM2StyleDividerInM3},\n'
           : '';
 
+  final String scaffoldBackgroundLightSchemeColor = controller
+              .scaffoldBackgroundLightSchemeColor !=
+          null
+      ? '    scaffoldBackgroundSchemeColor: ${controller.scaffoldBackgroundLightSchemeColor},\n'
+      : '';
+  final String scaffoldBackgroundDarkSchemeColor = controller
+              .scaffoldBackgroundDarkSchemeColor !=
+          null
+      ? '    scaffoldBackgroundSchemeColor: ${controller.scaffoldBackgroundDarkSchemeColor},\n'
+      : '';
+
   // Adaptive themes.
   final String adaptiveRemoveElevationTintLight = controller
                   .adaptiveRemoveElevationTintLight !=
@@ -747,10 +758,15 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Dialogs setup CODE
   //
-  final String dialogBackgroundSchemeColor = controller
-              .dialogBackgroundSchemeColor !=
+  final String dialogBackgroundLightSchemeColor = controller
+              .dialogBackgroundLightSchemeColor !=
           null
-      ? '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundSchemeColor},\n'
+      ? '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundLightSchemeColor},\n'
+      : '';
+  final String dialogBackgroundDarkSchemeColor = controller
+              .dialogBackgroundDarkSchemeColor !=
+          null
+      ? '    dialogBackgroundSchemeColor: ${controller.dialogBackgroundDarkSchemeColor},\n'
       : '';
   final String useInputDecoratorThemeInDialogs = controller
           .useInputDecoratorThemeInDialogs
@@ -1213,6 +1229,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tintedDisabledControls'
           '$blendOnLevelLight'
           '$blendLightOnColors'
+          '$scaffoldBackgroundLightSchemeColor'
           //
           '$blendLightTextTheme'
           '$useTextTheme'
@@ -1320,7 +1337,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tooltipSchemeColor'
           '$tooltipOpacity'
           //
-          '$dialogBackgroundSchemeColor'
+          '$dialogBackgroundLightSchemeColor'
           '$dialogElevation'
           '$dialogBorderRadius'
           '$adaptiveDialogRadius'
@@ -1435,6 +1452,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tintedDisabledControls'
           '$blendOnLevelDark'
           '$blendDarkOnColors'
+          '$scaffoldBackgroundDarkSchemeColor'
           //
           '$blendDarkTextTheme'
           '$useTextTheme'
@@ -1542,7 +1560,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tooltipSchemeColor'
           '$tooltipOpacity'
           //
-          '$dialogBackgroundSchemeColor'
+          '$dialogBackgroundDarkSchemeColor'
           '$dialogElevation'
           '$dialogBorderRadius'
           '$adaptiveDialogRadius'
@@ -1854,8 +1872,6 @@ String generateThemeDartCode(ThemeController controller) {
       '$applyToAllCupertino'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
-      '  // To use the Playground font, add GoogleFonts package and uncomment\n'
-      '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
       'darkTheme: FlexThemeData.dark(\n'
       '$darkScheme'
@@ -1880,8 +1896,6 @@ String generateThemeDartCode(ThemeController controller) {
       '$applyToAllCupertino'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
-      '  // To use the Playground font, add GoogleFonts package and uncomment\n'
-      '  // fontFamily: GoogleFonts.notoSans().fontFamily,\n'
       '),\n'
       '// If you do not have a themeMode switch, uncomment this line\n'
       '// to let the device system mode control the theme mode:\n'
