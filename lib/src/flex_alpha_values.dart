@@ -110,6 +110,22 @@ class FlexAlphaValues {
           dialogAlpha: blendLevel,
           scaffoldAlpha: blendLevel,
         );
+      // Result: Surfaces (2x) Scaffold (1/2x).
+      case FlexSurfaceMode.highBackgroundLowScaffold:
+        return FlexAlphaValues(
+          primaryAlpha: blendLevel,
+          primaryContainerAlpha: blendLevel * 2,
+          secondaryAlpha: blendLevel,
+          secondaryContainerAlpha: blendLevel * 2,
+          tertiaryAlpha: blendLevel,
+          tertiaryContainerAlpha: blendLevel * 2,
+          errorAlpha: blendLevel,
+          errorContainerAlpha: blendLevel * 2,
+          surfaceAlpha: blendLevel * 2,
+          inverseSurfaceAlpha: blendLevel,
+          dialogAlpha: blendLevel * 2,
+          scaffoldAlpha: blendLevel ~/ 2,
+        );
       // Result: Surfaces (3/2x) Scaffold (1/2x).
       case FlexSurfaceMode.highSurfaceLowScaffold:
         return FlexAlphaValues(
@@ -159,8 +175,6 @@ class FlexAlphaValues {
           scaffoldAlpha: blendLevel * 3,
         );
       // Result: Surfaces (1x) Scaffold (1/2x).
-      // TODO(rydmike): Deprecate enum value highBackgroundLowScaffold?
-      case FlexSurfaceMode.highBackgroundLowScaffold:
       case FlexSurfaceMode.levelSurfacesLowScaffold:
       case FlexSurfaceMode.levelSurfacesLowScaffoldVariantDialog:
         return FlexAlphaValues(
