@@ -1752,93 +1752,75 @@ String generateThemeDartCode(ThemeController controller) {
   if (useKeyColorsDark == '  keyColors: const FlexKeyColors(\n  ),\n') {
     useKeyColorsDark = '  keyColors: const FlexKeyColors(),\n';
   }
-  // TODO(rydmike): Fix code gen for tones and variants
-
+  //
+  // Codegen for Flex Tones and Variants.
+  //
   String flexTonesLight = '';
   String flexTonesDark = '';
   if (controller.useKeyColors) {
-    if (controller.usedFlexToneSetup == 1 &&
-        (controller.onMainsUseBWLight ||
-            controller.onSurfacesUseBWLight ||
-            controller.surfacesUseBWLight)) {
-      flexTonesLight = '  tones: FlexTones.material(Brightness.light)';
+    final String variantType =
+        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+            ? '  variant: '
+            : '  tones: ';
+    final String variantTypeTonesLight =
+        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+            ? ''
+            : '.tones(Brightness.light)';
+    final String variantTypeTonesDark =
+        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+            ? ''
+            : '.tones(Brightness.dark)';
+
+    if (controller.usedFlexToneSetup > 0) {
+      flexTonesLight = '${variantType}FlexSchemeVariant.'
+          '${FlexSchemeVariant.values[controller.usedFlexToneSetup].name}'
+          '$variantTypeTonesLight';
+      flexTonesDark = '${variantType}FlexSchemeVariant.'
+          '${FlexSchemeVariant.values[controller.usedFlexToneSetup].name}'
+          '$variantTypeTonesDark';
     }
-    if (controller.usedFlexToneSetup == 1 &&
-        (controller.onMainsUseBWDark ||
-            controller.onSurfacesUseBWDark ||
-            controller.surfacesUseBWDark)) {
-      flexTonesDark = '  tones: FlexTones.material(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 2) {
-      flexTonesLight = '  tones: FlexTones.soft(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.soft(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 3) {
-      flexTonesLight = '  tones: FlexTones.vivid(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.vivid(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 4) {
-      flexTonesLight = '  tones: FlexTones.vividSurfaces(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.vividSurfaces(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 5) {
-      flexTonesLight = '  tones: FlexTones.highContrast(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.highContrast(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 6) {
-      flexTonesLight = '  tones: FlexTones.ultraContrast(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.ultraContrast(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 7) {
-      flexTonesLight = '  tones: FlexTones.jolly(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.jolly(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 8) {
-      flexTonesLight = '  tones: FlexTones.vividBackground(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.vividBackground(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 9) {
-      flexTonesLight = '  tones: FlexTones.oneHue(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.oneHue(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 10) {
-      flexTonesLight = '  tones: FlexTones.candyPop(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.candyPop(Brightness.dark)';
-    }
-    if (controller.usedFlexToneSetup == 11) {
-      flexTonesLight = '  tones: FlexTones.chroma(Brightness.light)';
-      flexTonesDark = '  tones: FlexTones.chroma(Brightness.dark)';
-    }
+
+    final String monochromeSurfacesLight =
+        controller.useMonoSurfacesLight ? '\n    .monochromeSurfaces()' : '';
     final String onMainsUseBWLight =
-        controller.onMainsUseBWLight ? '.onMainsUseBW()' : '';
+        controller.onMainsUseBWLight ? '\n    .onMainsUseBW()' : '';
     final String onSurfacesUseBWLight =
-        controller.onSurfacesUseBWLight ? '.onSurfacesUseBW()' : '';
+        controller.onSurfacesUseBWLight ? '\n    .onSurfacesUseBW()' : '';
     final String surfacesUseBWLight =
-        controller.surfacesUseBWLight ? '.surfacesUseBW()' : '';
+        controller.surfacesUseBWLight ? '\n    .surfacesUseBW()' : '';
 
+    final String monochromeSurfacesDark =
+        controller.useMonoSurfacesDark ? '\n    .monochromeSurfaces()' : '';
     final String onMainsUseBWDark =
-        controller.onMainsUseBWDark ? '.onMainsUseBW()' : '';
+        controller.onMainsUseBWDark ? '\n    .onMainsUseBW()' : '';
     final String onSurfacesUseBWDark =
-        controller.onSurfacesUseBWDark ? '.onSurfacesUseBW()' : '';
+        controller.onSurfacesUseBWDark ? '\n    .onSurfacesUseBW()' : '';
     final String surfacesUseBWDark =
-        controller.surfacesUseBWDark ? '.surfacesUseBW()' : '';
+        controller.surfacesUseBWDark ? '\n    .surfacesUseBW()' : '';
 
-    flexTonesLight = '$flexTonesLight$onMainsUseBWLight$onSurfacesUseBWLight'
-        '$surfacesUseBWLight';
-    flexTonesDark = '$flexTonesDark$onMainsUseBWDark$onSurfacesUseBWDark'
-        '$surfacesUseBWDark';
-    if (controller.onMainsUseBWLight ||
-        controller.onSurfacesUseBWLight ||
-        controller.surfacesUseBWLight ||
-        controller.usedFlexToneSetup != 1) {
-      flexTonesLight = '$flexTonesLight,\n';
+    if (!FlexSchemeVariant
+        .values[controller.usedFlexToneSetup].isFlutterScheme) {
+      flexTonesLight =
+          '$flexTonesLight$monochromeSurfacesLight$onMainsUseBWLight$onSurfacesUseBWLight'
+          '$surfacesUseBWLight';
+      flexTonesDark =
+          '$flexTonesDark$monochromeSurfacesDark$onMainsUseBWDark$onSurfacesUseBWDark'
+          '$surfacesUseBWDark';
+      if (controller.useMonoSurfacesLight ||
+          controller.onMainsUseBWLight ||
+          controller.onSurfacesUseBWLight ||
+          controller.surfacesUseBWLight) {
+        flexTonesLight = '$flexTonesLight,';
+      }
+      if (controller.useMonoSurfacesDark ||
+          controller.onMainsUseBWDark ||
+          controller.onSurfacesUseBWDark ||
+          controller.surfacesUseBWDark) {
+        flexTonesDark = '$flexTonesDark,';
+      }
     }
-    if (controller.onMainsUseBWDark ||
-        controller.onSurfacesUseBWDark ||
-        controller.surfacesUseBWDark ||
-        controller.usedFlexToneSetup != 1) {
-      flexTonesDark = '$flexTonesDark,\n';
-    }
+    if (flexTonesLight != '') flexTonesLight = '$flexTonesLight\n';
+    if (flexTonesDark != '') flexTonesDark = '$flexTonesDark\n';
   }
 
   //
