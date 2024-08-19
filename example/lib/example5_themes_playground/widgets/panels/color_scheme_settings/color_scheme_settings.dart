@@ -105,19 +105,14 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
         ShowInputColorsSwitch(controller: controller),
         const Divider(height: 1),
-        if (_isFlutterScheme)
-          const ListTile(
-            title: Text('Additional options unavailable when using '
-                'MCU dynamic schemes'),
-            subtitle:
-                Text('Use a FSS FlexTones variant to enable options below'),
-          )
-        else
-          const ListTile(
-            title: Text('Additional options '
-                'available when using FSS FlexTones based variants'),
-            subtitle: Text('Settings are separate for light and dark mode'),
-          ),
+        ListTile(
+          title: const Text('Additional options '
+              'for FSS FlexTones scheme variants'),
+          subtitle: _isFlutterScheme
+              ? const Text(
+                  'Use a FSS FlexTones variant to enable options below')
+              : const Text('Settings are separate for light and dark mode'),
+        ),
         if (isLight) ...<Widget>[
           SwitchListTileReveal(
             title: const Text('Monochrome surfaces'),
@@ -245,7 +240,16 @@ class ColorSchemeSettings extends StatelessWidget {
                 : null,
           ),
         ],
-        // TODO(rydmike): Remove as not used 29.7.2023
+        ListTile(
+          title: const Text('Additional options '
+              'for Flutter MCU based scheme variants'),
+          subtitle: _isFlutterScheme
+              ? const Text(
+                  'Use a MCU Flex Scheme variant to enable options below')
+              : const Text('Settings are separate for light and dark mode'),
+        ),
+        // TODO(rydmike): Removed 29.7.2023, bring back the feature in V8.
+        //   Ned a way to make this work, we need colors in keys!
         //
         // if (!isLight && controller.schemeIndex ==
         // (AppColor.schemes.length - 1))
