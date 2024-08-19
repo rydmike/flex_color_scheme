@@ -47,8 +47,13 @@ class DialogSettings extends StatelessWidget {
     path: 'flutter/flutter/issues/131666',
   );
 
-  // The logic for the dialog radius label got to complex for inline ternary,
-  // breaking it out to a function.
+  static final Uri _fcsFlutterIssue148849 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/148849',
+  );
+
+  // Complex logic for the dialog radius label.
   static String _dialogRadiusLabel(ThemeController controller) {
     final bool useFCS =
         controller.useSubThemes && controller.useFlexColorScheme;
@@ -70,8 +75,7 @@ class DialogSettings extends StatelessWidget {
     }
   }
 
-  // The logic for the adaptive dialog radius label got to complex for inline
-  // ternary, breaking it out to a function.
+  // Complex logic for the adaptive dialog radius label.
   static String _adaptiveDialogRadiusLabel(ThemeController controller) {
     final bool useFCS =
         controller.useSubThemes && controller.useFlexColorScheme;
@@ -97,7 +101,7 @@ class DialogSettings extends StatelessWidget {
     return controller.useMaterial3 ? 'default 28' : 'default 4';
   }
 
-  // Some sick hairy logic to display the effective radius on time picker
+  // Complex logic to display the effective radius label on time picker
   // and date picker dialogs.
   static String _effectiveDialogRadiusLabel(
       ThemeController controller, double? radius) {
@@ -142,23 +146,53 @@ class DialogSettings extends StatelessWidget {
     return controller.useMaterial3 ? 'default 28' : 'default 4';
   }
 
+  // Logic to get the effective default Dialog color label.
+  static String _dialogBackgroundDefault(
+    ThemeController controller,
+    bool isLight,
+  ) {
+    if (!controller.useFlexColorScheme) {
+      if (controller.useMaterial3) {
+        // TODO(rydmike): Flutter 3.22...3.24 bug, Dialog gets
+        // theme.dialogBackgroundColor (which is surface in M3) instead of
+        // surfaceContainerHigh, but Date and Time picker use correct default.
+        // This is fixed in master, not yet landed in stable.
+        // Issue: https://github.com/flutter/flutter/issues/148849
+        return 'default (surfaceContainerHigh)';
+      } else {
+        return isLight
+            ? 'default (Alert & Date: white, Time: surface)'
+            : 'default (Alert & Date: grey800, Time: surface)';
+      }
+    } else {
+      if (controller.useMaterial3) {
+        return 'default (surfaceContainerHigh)';
+      } else {
+        return isLight
+            ? 'default (surface)'
+            : 'default (surface + elevation overlay)';
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final bool isLight = theme.brightness == Brightness.light;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String datePickerHeaderBackgroundDefault = controller
-                .dialogBackgroundSchemeColor ==
+                .dialogBackgroundLightSchemeColor ==
             null
         ? controller.useMaterial3
             ? 'default (surfaceContainerHigh)'
             : 'default (primary)'
         : controller.useMaterial3
             // ignore: lines_longer_than_80_chars
-            ? 'default (${SchemeColor.values[controller.dialogBackgroundSchemeColor!.index].name})'
+            ? 'default (${SchemeColor.values[controller.dialogBackgroundLightSchemeColor!.index].name})'
             : 'default (primary)';
 
     return Column(
@@ -181,24 +215,66 @@ class DialogSettings extends StatelessWidget {
               'the produced code.\n'),
         ),
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
-          title: const Text('Background color'),
-          labelForDefault: controller.useFlexColorScheme
-              ? 'default (surfaceContainerHigh)'
-              : useMaterial3
-                  ? 'default (surfaceContainerHigh)'
-                  : 'default (alert&date=surfaceContainerHigh) (time=surface)',
-          index: controller.dialogBackgroundSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setDialogBackgroundSchemeColor(null);
-                  } else {
-                    controller.setDialogBackgroundSchemeColor(
-                        SchemeColor.values[index]);
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Background color light mode'),
+            labelForDefault: _dialogBackgroundDefault(controller, isLight),
+            index: controller.dialogBackgroundLightSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setDialogBackgroundLightSchemeColor(null);
+                    } else {
+                      controller.setDialogBackgroundLightSchemeColor(
+                          SchemeColor.values[index]);
+                    }
                   }
-                }
-              : null,
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Background color dark mode'),
+            labelForDefault: _dialogBackgroundDefault(controller, isLight),
+            index: controller.dialogBackgroundDarkSchemeColor?.index ?? -1,
+            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setDialogBackgroundDarkSchemeColor(null);
+                    } else {
+                      controller.setDialogBackgroundDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          ),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.22 to 3.24 in M3 mode, the Dialog and '
+                      'thus AlertDialog gets Theme.dialogBackgroundColor, '
+                      'which is equal to surface color and not '
+                      'surfaceContainerHigh. TimePicker and DatePicker get '
+                      'the correct default surfaceContainerHigh. '
+                      'For more info see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue148849,
+                  text: 'issue #148849',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This is is fixed in the master channel, '
+                      'but has not landed in current stable (3.24.x).\n',
+                ),
+              ],
+            ),
+          ),
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -570,8 +646,8 @@ class DialogSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'In Flutter 3.13 the clock dial background uses '
-                      'wrong default background color in M3 mode. To see the '
-                      'issue turn off FCS in M3 mode. For more info see ',
+                      'wrong default background color in M3 mode. '
+                      'For more info see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -580,9 +656,9 @@ class DialogSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. FCS includes a correction for the issue in its '
-                      'default TimePicker theme. In Flutter 3.16 and later, '
-                      'the issue has also been fixed.\n',
+                  text: '. In Flutter 3.16 and later the issue has been fixed. '
+                      'FCS includes a correction for the issue in its default '
+                      'TimePicker theme for earlier Flutter versions.\n',
                 ),
               ],
             ),
