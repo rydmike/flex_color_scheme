@@ -152,6 +152,12 @@ class ThemeController with ChangeNotifier {
         Store.keyTooltipsMatchBackground, Store.defaultTooltipsMatchBackground);
     //
     // Surface and blend SETTINGS.
+    _scaffoldBackgroundLightSchemeColor = await _themeService.load(
+        Store.keyScaffoldBackgroundLightSchemeColor,
+        Store.defaultScaffoldBackgroundLightSchemeColor);
+    _scaffoldBackgroundDarkSchemeColor = await _themeService.load(
+        Store.keyScaffoldBackgroundDarkSchemeColor,
+        Store.defaultScaffoldBackgroundDarkSchemeColor);
     _surfaceModeLight = await _themeService.load(
         Store.keySurfaceModeLight, Store.defaultSurfaceModeLight);
     _surfaceModeDark = await _themeService.load(
@@ -747,9 +753,12 @@ class ThemeController with ChangeNotifier {
         Store.keyCardBorderRadius, Store.defaultCardBorderRadius);
     //
     // Dialog SETTINGS.
-    _dialogBackgroundSchemeColor = await _themeService.load(
-        Store.keyDialogBackgroundSchemeColor,
-        Store.defaultDialogBackgroundSchemeColor);
+    _dialogBackgroundLightSchemeColor = await _themeService.load(
+        Store.keyDialogBackgroundLightSchemeColor,
+        Store.defaultDialogBackgroundLightSchemeColor);
+    _dialogBackgroundDarkSchemeColor = await _themeService.load(
+        Store.keyDialogBackgroundDarkSchemeColor,
+        Store.defaultDialogBackgroundDarkSchemeColor);
     _datePickerHeaderBackgroundSchemeColor = await _themeService.load(
         Store.keyDatePickerHeaderBackgroundSchemeColor,
         Store.defaultDatePickerHeaderBackgroundSchemeColor);
@@ -898,6 +907,10 @@ class ThemeController with ChangeNotifier {
     setTooltipsMatchBackground(Store.defaultTooltipsMatchBackground, false);
     //
     // Surface and blend SETTINGS.
+    setScaffoldBackgroundLightSchemeColor(
+        Store.defaultScaffoldBackgroundLightSchemeColor, false);
+    setScaffoldBackgroundDarkSchemeColor(
+        Store.defaultScaffoldBackgroundDarkSchemeColor, false);
     setSurfaceModeLight(Store.defaultSurfaceModeLight, false);
     setSurfaceModeDark(Store.defaultSurfaceModeDark, false);
     setBlendLevel(Store.defaultBlendLevel, false);
@@ -1207,8 +1220,10 @@ class ThemeController with ChangeNotifier {
     setCardBorderRadius(Store.defaultCardBorderRadius, false);
     //
     // Dialog SETTINGS.
-    setDialogBackgroundSchemeColor(
-        Store.defaultDialogBackgroundSchemeColor, false);
+    setDialogBackgroundLightSchemeColor(
+        Store.defaultDialogBackgroundLightSchemeColor, false);
+    setDialogBackgroundDarkSchemeColor(
+        Store.defaultDialogBackgroundDarkSchemeColor, false);
     setDatePickerHeaderBackgroundSchemeColor(
         Store.defaultDatePickerHeaderBackgroundSchemeColor, false);
     setUseInputDecoratorThemeInDialogs(
@@ -2525,6 +2540,30 @@ class ThemeController with ChangeNotifier {
 
   // Surface and blend SETTINGS.
   // ===========================================================================
+
+  late SchemeColor? _scaffoldBackgroundLightSchemeColor;
+  SchemeColor? get scaffoldBackgroundLightSchemeColor =>
+      _scaffoldBackgroundLightSchemeColor;
+  void setScaffoldBackgroundLightSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _scaffoldBackgroundLightSchemeColor) return;
+    _scaffoldBackgroundLightSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyScaffoldBackgroundLightSchemeColor, value));
+  }
+
+  late SchemeColor? _scaffoldBackgroundDarkSchemeColor;
+  SchemeColor? get scaffoldBackgroundDarkSchemeColor =>
+      _scaffoldBackgroundDarkSchemeColor;
+  void setScaffoldBackgroundDarkSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _scaffoldBackgroundDarkSchemeColor) return;
+    _scaffoldBackgroundDarkSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyScaffoldBackgroundDarkSchemeColor, value));
+  }
 
   late FlexSurfaceMode _surfaceModeLight;
   FlexSurfaceMode get surfaceModeLight => _surfaceModeLight;
@@ -4801,14 +4840,28 @@ class ThemeController with ChangeNotifier {
   // Dialog SETTINGS.
   // ===========================================================================
 
-  late SchemeColor? _dialogBackgroundSchemeColor;
-  SchemeColor? get dialogBackgroundSchemeColor => _dialogBackgroundSchemeColor;
-  void setDialogBackgroundSchemeColor(SchemeColor? value,
+  late SchemeColor? _dialogBackgroundLightSchemeColor;
+  SchemeColor? get dialogBackgroundLightSchemeColor =>
+      _dialogBackgroundLightSchemeColor;
+  void setDialogBackgroundLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
-    if (value == _dialogBackgroundSchemeColor) return;
-    _dialogBackgroundSchemeColor = value;
+    if (value == _dialogBackgroundLightSchemeColor) return;
+    _dialogBackgroundLightSchemeColor = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyDialogBackgroundSchemeColor, value));
+    unawaited(
+        _themeService.save(Store.keyDialogBackgroundLightSchemeColor, value));
+  }
+
+  late SchemeColor? _dialogBackgroundDarkSchemeColor;
+  SchemeColor? get dialogBackgroundDarkSchemeColor =>
+      _dialogBackgroundDarkSchemeColor;
+  void setDialogBackgroundDarkSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _dialogBackgroundDarkSchemeColor) return;
+    _dialogBackgroundDarkSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyDialogBackgroundDarkSchemeColor, value));
   }
 
   late SchemeColor? _datePickerHeaderBackgroundSchemeColor;
