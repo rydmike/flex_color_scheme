@@ -319,9 +319,9 @@ class SurfaceColors extends StatelessWidget {
             ),
           ),
           //
-          // Shadow color and surface tint color presentation.
+          // Surface tint color presentation.
           RepaintBoundary(
-            key: const ValueKey<String>('surf shadow'),
+            key: const ValueKey<String>('surf tint'),
             child: SizedBox(
               width: boxWidth,
               height: boxHeight,
