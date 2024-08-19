@@ -150,6 +150,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Use blend level values also with main on colors, not
             // only with container and on surfaces.
             blendOnColors: controller.blendLightOnColors,
+            // Custom Scaffold background color.
+            scaffoldBackgroundSchemeColor:
+                controller.scaffoldBackgroundLightSchemeColor,
             // By default sub themes mode also opts in on using colored text for
             // the themed text. If you plan to put text on surfaces that are not
             // primary color tinted or primary colored, then you may need to
@@ -323,7 +326,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             tooltipOpacity: controller.tooltipOpacity,
             //
             // Dialog settings.
-            dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
+            dialogBackgroundSchemeColor:
+                controller.dialogBackgroundLightSchemeColor,
+            dialogElevation: controller.dialogElevation,
             dialogRadius: controller.dialogBorderRadius,
             adaptiveDialogRadius:
                 controller.adaptiveDialogRadius?.setting(controller.fakeIsWeb),
@@ -336,7 +341,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.datePickerHeaderBackgroundSchemeColor,
             //
             timePickerElementRadius: controller.timePickerElementRadius,
-            dialogElevation: controller.dialogElevation,
             // SnackBar settings.
             snackBarRadius: controller.snackBarBorderRadius,
             snackBarElevation: controller.snackBarElevation,
