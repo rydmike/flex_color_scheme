@@ -256,17 +256,29 @@ class Store {
   // Surface and blend SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the scaffoldBackgroundLightSchemeColor value.
+  static const String keyScaffoldBackgroundLightSchemeColor =
+      'scaffoldBackgroundLightSchemeColor';
+  // Default value for the scaffoldBackgroundLightSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultScaffoldBackgroundLightSchemeColor = null;
+
+  // Key used to read and save the scaffoldBackgroundDarkSchemeColor value.
+  static const String keyScaffoldBackgroundDarkSchemeColor =
+      'scaffoldBackgroundDarkSchemeColor';
+  // Default value for the scaffoldBackgroundDarkSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultScaffoldBackgroundDarkSchemeColor = null;
+
   // Key used to read and save the surfaceModeLight value.
   static const String keySurfaceModeLight = 'surfaceModeLight';
   // Default value for the surfaceModeLight, also used to reset settings.
-  static const FlexSurfaceMode defaultSurfaceModeLight =
-      FlexSurfaceMode.levelSurfacesLowScaffold;
+  static const FlexSurfaceMode defaultSurfaceModeLight = FlexSurfaceMode.level;
 
   // Key used to read and save the surfaceModeDark value.
   static const String keySurfaceModeDark = 'surfaceModeDark';
   // Default value for the surfaceModeDark, also used to reset settings.
-  static const FlexSurfaceMode defaultSurfaceModeDark =
-      FlexSurfaceMode.levelSurfacesLowScaffold;
+  static const FlexSurfaceMode defaultSurfaceModeDark = FlexSurfaceMode.level;
 
   // Key used to read and save the blendLevel value.
   static const String keyBlendLevel = 'blendLevel';
@@ -1663,12 +1675,19 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultCardBorderRadius = null;
 
-  // Key used to read and save the dialogBackgroundSchemeColor value.
-  static const String keyDialogBackgroundSchemeColor =
-      'dialogBackgroundSchemeColor';
-  // Default value for the dialogBackgroundSchemeColor, also used to
+  // Key used to read and save the dialogBackgroundLightSchemeColor value.
+  static const String keyDialogBackgroundLightSchemeColor =
+      'dialogBackgroundLightSchemeColor';
+  // Default value for the dialogBackgroundLightSchemeColor, also used to
   // reset settings.
-  static const SchemeColor? defaultDialogBackgroundSchemeColor = null;
+  static const SchemeColor? defaultDialogBackgroundLightSchemeColor = null;
+
+  // Key used to read and save the dialogBackgroundDarkSchemeColor value.
+  static const String keyDialogBackgroundDarkSchemeColor =
+      'dialogBackgroundDarkSchemeColor';
+  // Default value for the dialogBackgroundDarkSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDialogBackgroundDarkSchemeColor = null;
 
   // Key used to read and save the datePickerHeaderBackgroundSchemeColor value.
   static const String keyDatePickerHeaderBackgroundSchemeColor =
