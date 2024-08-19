@@ -2651,13 +2651,19 @@ class FlexColorScheme with Diagnosticable {
     ColorScheme? seedScheme;
 
     // Create a complete ColorScheme from active and effective seed colors.
+    // If config is not using key colors, we are only making this seed for
+    // the fixed and fixedDim colors and must always use all key colors.
     seedScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.light,
       primaryKey: effectiveColors.primary,
       // If use secondary seed, use it with fromSeeds, otherwise undefined.
-      secondaryKey: seed.useSecondary ? effectiveColors.secondary : null,
+      secondaryKey: seed.useSecondary || !seed.useKeyColors
+          ? effectiveColors.secondary
+          : null,
       // If use tertiary seed, use it with fromSeeds, otherwise undefined.
-      tertiaryKey: seed.useTertiary ? effectiveColors.tertiary : null,
+      tertiaryKey: seed.useTertiary || !seed.useKeyColors
+          ? effectiveColors.tertiary
+          : null,
       // If a custom surface tint is used, use it also as key for neutral and
       // neutral variant tonal palette generation.
       neutralKey: surfaceTint,
@@ -2958,15 +2964,34 @@ class FlexColorScheme with Diagnosticable {
           onPrimary: onColors.onPrimary,
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
+          // TODO(rydmike): Commented fixed & FixedDim are a none seed versions.
+          //  They are experimental. They have issues, seeds are better.
+          //  Keeping this here to maybe experiment with it more later and
+          //  maybe offer it as an option in a future release.
+          // primaryFixed:
+          //     effectiveColors.primary.lighten(35).blend(Colors.white, 60),
+          // primaryFixedDim:
+          //     effectiveColors.primary.lighten(15).blend(Colors.white, 55),
+          // onPrimaryFixed: effectiveColors.primary.darken(15),
+          // onPrimaryFixedVariant:
+          //     effectiveColors.primary.darken(20).blend(Colors.white, 10),
           primaryFixed: schemeForFixedColors.primaryFixed,
           primaryFixedDim: schemeForFixedColors.primaryFixedDim,
           onPrimaryFixed: schemeForFixedColors.onPrimaryFixed,
           onPrimaryFixedVariant: schemeForFixedColors.onPrimaryFixedVariant,
-          //
+
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
+          // TODO(rydmike): Commented fixed & FixedDim are a none seed versions.
+          // secondaryFixed:
+          //     effectiveColors.secondary.lighten(35).blend(Colors.white, 60),
+          // secondaryFixedDim:
+          //     effectiveColors.secondary.lighten(10).blend(Colors.white, 55),
+          // onSecondaryFixed: effectiveColors.secondary.darken(15),
+          // onSecondaryFixedVariant:
+          //     effectiveColors.secondary.darken(20).blend(Colors.white, 10),
           secondaryFixed: schemeForFixedColors.secondaryFixed,
           secondaryFixedDim: schemeForFixedColors.secondaryFixedDim,
           onSecondaryFixed: schemeForFixedColors.onSecondaryFixed,
@@ -2976,11 +3001,19 @@ class FlexColorScheme with Diagnosticable {
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
+          // TODO(rydmike): Commented fixed & FixedDim are a none seed versions.
+          // tertiaryFixed:
+          //     effectiveColors.tertiary.lighten(35).blend(Colors.white, 60),
+          // tertiaryFixedDim:
+          //     effectiveColors.tertiary.lighten(10).blend(Colors.white, 55),
+          // onTertiaryFixed: effectiveColors.tertiary.darken(15),
+          // onTertiaryFixedVariant:
+          //     effectiveColors.tertiary.darken(20).blend(Colors.white, 10),
           tertiaryFixed: schemeForFixedColors.tertiaryFixed,
           tertiaryFixedDim: schemeForFixedColors.tertiaryFixedDim,
           onTertiaryFixed: schemeForFixedColors.onTertiaryFixed,
           onTertiaryFixedVariant: schemeForFixedColors.onTertiaryFixedVariant,
-          //
+
           error: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3LightError
               : effectiveColors.error!,
@@ -4618,13 +4651,19 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.dark,
     );
     // Create a ColorScheme from active and effective seed key colors.
+    // If config is not using key colors, we are only making this seed for
+    // the fixed and fixedDim colors and must always use all key colors.
     seedScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.dark,
       primaryKey: effectiveKeyColors.primary,
       // If use secondary seed, use it with fromSeeds, otherwise undefined.
-      secondaryKey: seed.useSecondary ? effectiveKeyColors.secondary : null,
+      secondaryKey: seed.useSecondary || !seed.useKeyColors
+          ? effectiveKeyColors.secondary
+          : null,
       // If use tertiary seed, use it with fromSeeds, otherwise undefined.
-      tertiaryKey: seed.useTertiary ? effectiveKeyColors.tertiary : null,
+      tertiaryKey: seed.useTertiary || !seed.useKeyColors
+          ? effectiveKeyColors.tertiary
+          : null,
       // If a custom surface tint is used, use it also as key for neutral and
       // neutral variant tonal palette generation.
       neutralKey: surfaceTint,
@@ -4935,6 +4974,11 @@ class FlexColorScheme with Diagnosticable {
           primaryFixedDim: schemeForFixedColors.primaryFixedDim,
           onPrimaryFixed: schemeForFixedColors.onPrimaryFixed,
           onPrimaryFixedVariant: schemeForFixedColors.onPrimaryFixedVariant,
+          //
+          // primaryFixed: schemeForFixedColors.primaryFixed,
+          // primaryFixedDim: schemeForFixedColors.primaryFixedDim,
+          // onPrimaryFixed: schemeForFixedColors.onPrimaryFixed,
+          // onPrimaryFixedVariant: schemeForFixedColors.onPrimaryFixedVariant,
           //
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
