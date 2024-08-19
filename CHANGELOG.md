@@ -178,6 +178,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Added enhanced enum functions `data` and `colors` to the `FlexScheme` enum, that returns the predefined `FlexSchemeData` and `FlexSchemeColor` respectively, that are associated with a given enum value. This could be done already using the `FlexColor.schemes` map. This is a convenience API to be able to use e.g. `FlexColor.mango.data` to get the predefined `FlexSchemeData` for the `mango` enum scheme and e.g. `FlexColor.barossa.colors(Brightness.dark)` to get the pre-defined dark colors used for the `barossa` scheme colors. See feature request: https://github.com/rydmike/flex_color_scheme/issues/210
 
+
+- Added ability to use custom seed key colors to `FlexKeyColors`.
+- Added support for error colors to `FlexKeyColors`.
+
 - Improved the theming logic for `Card` theme. 
   - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant for the default case at least. The Flutter theming limitation and impact are thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
 
