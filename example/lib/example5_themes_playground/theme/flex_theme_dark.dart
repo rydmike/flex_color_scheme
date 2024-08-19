@@ -122,6 +122,17 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             tintedDisabledControls: controller.tintedDisabledControls,
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
+            // Custom Scaffold background color.
+            scaffoldBackgroundSchemeColor:
+                controller.scaffoldBackgroundDarkSchemeColor,
+            // Text theme settings.
+            blendTextTheme: controller.blendDarkTextTheme,
+            useTextTheme: controller.useTextTheme,
+            // Divider settings
+            useM2StyleDividerInM3: controller.useM2StyleDividerInM3,
+            // Outline default thickness settings.
+            thinBorderWidth: controller.thinBorderWidth,
+            thickBorderWidth: controller.thickBorderWidth,
             // Platform adaptive theming feature settings.
             adaptiveRemoveElevationTint: controller
                 .adaptiveRemoveElevationTintDark
@@ -141,14 +152,6 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 ?.setting(controller.fakeIsWeb, controller.useMaterial3),
             splashTypeAdaptive: controller.splashTypeAdaptive
                 ?.setting(controller.fakeIsWeb, controller.useMaterial3),
-            // Text theme settings.
-            blendTextTheme: controller.blendDarkTextTheme,
-            useTextTheme: controller.useTextTheme,
-            // Divider settings
-            useM2StyleDividerInM3: controller.useM2StyleDividerInM3,
-            // Outline default thickness settings.
-            thinBorderWidth: controller.thinBorderWidth,
-            thickBorderWidth: controller.thickBorderWidth,
             // Default radius for all widgets, if not null.
             defaultRadius: controller.defaultRadius,
             defaultRadiusAdaptive: controller.defaultRadiusAdaptive,
@@ -262,8 +265,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 : Duration(milliseconds: controller.tooltipShowDuration!),
             tooltipSchemeColor: controller.tooltipSchemeColor,
             tooltipOpacity: controller.tooltipOpacity,
+            //
             // Dialog settings.
-            dialogBackgroundSchemeColor: controller.dialogBackgroundSchemeColor,
+            dialogBackgroundSchemeColor:
+                controller.dialogBackgroundDarkSchemeColor,
+            dialogElevation: controller.dialogElevation,
             dialogRadius: controller.dialogBorderRadius,
             adaptiveDialogRadius:
                 controller.adaptiveDialogRadius?.setting(controller.fakeIsWeb),
