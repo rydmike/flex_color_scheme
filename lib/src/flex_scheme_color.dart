@@ -218,6 +218,7 @@ class FlexSchemeColor with Diagnosticable {
         swapOnMaterial3: swapOnMaterial3,
       );
     } else {
+      // Legacy support for FCS earlier than v5, where brightness was not used.
       return FlexSchemeColor(
         primary: primary,
         primaryContainer:
