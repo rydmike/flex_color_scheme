@@ -50,14 +50,6 @@ ThemeData themeDataDark(ThemeController controller) {
     // Copy/paste code for in the ThemesPlayground UI, and it represent the
     // effective scheme in the Playground app.
     colorScheme: colorScheme,
-    // Use the colorScheme to make a nicer light theme.
-    primaryColor: colorScheme.surface,
-    canvasColor: colorScheme.surface,
-    scaffoldBackgroundColor: colorScheme.surfaceContainerLowest,
-    cardColor: colorScheme.surface,
-    dividerColor: colorScheme.outlineVariant,
-    dialogBackgroundColor: colorScheme.surfaceContainer,
-    indicatorColor: colorScheme.onSurface,
     // To our ThemeData we also apply the visual density, typography, selected
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
@@ -66,7 +58,7 @@ ThemeData themeDataDark(ThemeController controller) {
         VisualDensityEnum.platform.setting(controller.platform),
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
-    applyElevationOverlayColor: true,
+    // applyElevationOverlayColor: true,
     typography: controller.useMaterial3
         ? Typography.material2021(
             platform: controller.platform ?? defaultTargetPlatform)
