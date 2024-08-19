@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 18, 2024**
+**Aug 19, 2024**
 
 ### PACKAGE
 
@@ -12,28 +12,26 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **CRITICAL TODOS**
 
-* Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color. 
-  * A solution for this is still WIP, but now the revised concept is clear.
-* Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
-  * Done: Test it!
 * Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" style colors. How?
   * Will need to seed for these in the background to get usable colors for them automatically. 
 * Consider what to do with surfaceTint removal. It is basically obsolete now in Flutter 3.22 and later. Convert it into "bring tints back"? 
 * Consider what to do with shadows back. More fine-grained control?
 * Flutter 3.22 broke +100 tests in FCS, review and fix them.
   * Get tests back to 100% coverage.
-* Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. All the remaining 492 deprecated `background`, `onBackground` and `surfaceVariant` hints have now been fixed.
-  * Done
 
+
+* Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
+  * DONE 
+* Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. All the remaining 492 deprecated `background`, `onBackground` and `surfaceVariant` hints have now been fixed.
+  * DONE
+* Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
+  * DONE
+ 
 **TODO**
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
   - Mostly done, but still need to remove past opinionated default on NavBar, NavigationRail and NavigationDrawer.
  
-- Add a SchemeColor for Scaffold background.
-  - FlexSubThemesData: SchemeColor? scaffoldBackgroundSchemeColor
-  - Store: keyScaffoldBackgroundSchemeColor, defaultScaffoldBackgroundSchemeColor
-  - ThemeController: SetScaffoldBackgroundSchemeColor, scaffoldBackgroundSchemeColor
 - Add TabBar theme property `tabAlignment`. 
   - FlexSubThemesData: TabAlignment? tabBarAlignment
   - Store: keyTabBarAlignment, defaultTabBarAlignment
@@ -92,9 +90,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** and later default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. All component themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 
-- Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` had far-reaching implications on styles created by FCS and there are many breaking style changes in this release due to this. Some might even be forgotten in the change-log. Here are the critical chnages caused by this breaking change in Flutter 3.22:
-  - Deprecated `background` and `onBackground` colors in `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories. They are not used anymore. User `surface` and `onSurface` colors instead.
+- Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` had far-reaching implications on styles created by FCS and there are many breaking style changes in this release due to this. Some might even be forgotten in the change-log. Here are the critical changes caused by this breaking change in Flutter 3.22:
+  - Deprecated `background` and `onBackground` colors in `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories. They are not used anymore. Use `surface` and `onSurface` colors instead.
   - Deprecated `background`, `onBackground`, `surfaceVariant` from `FlexSchemeOnColors` and  `FlexSchemeSurfaceColors`. They are no longer used and have no function. They were deprecated since the same colors were deprecated in `ColorScheme` in Flutter 3.22.
+  - Deprecated `surfaceVariantAlpha` and `backgroundAlpha` colors in `FlexAlphaValues`. They are not used anymore and have no function, use `surfaceAlpha` instead. They were deprecated since the colors they related to were deprecated in `ColorScheme` in Flutter 3.22.
+  - The `FlexSchemeSurfaceColors.blend` factory constructor produces slightly different blend result that in earlier versions. Because Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`, that were used in the blend calculation earlier. It is no longer possible to produce the same results as before, but the results are equivalent to previous design intent. With one exception, using `surfaceMode` with `FlexSurfaceMode.highBackgroundLowScaffold` sets surface and dialog blends to 2x instead of 1x, so that it represents the "high background" style as before, but done via surface. Without this breaking change, this mode would produce the same result `FlexSurfaceMode.levelSurfacesLowScaffold` and be redundant. 
   - The enum `SchemeColor` got support for all new colors in Flutter 3.22 colors. It also removed the above colors Flutter 3.22 deprecated. The order of the enum values has been modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value.
   - Property `systemNavBarStyle` in `FlexColorScheme.themedSystemNavigationBar` now defaults to `FlexSystemNavBarStyle.surface`, instead of `FlexSystemNavBarStyle.background`. Using `FlexSystemNavBarStyle.background` results in the color `Theme.of(context).colorScheme.surfaceContainerLow` being used, where it previously was `Theme.of(context).colorScheme.background`. This is because Flutter 3.22 deprecated `ColorSCheme.-background`.
   - The enum `FlexAppBarStyle` value `background` now results in the app bar using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in typical FCS configuration.
@@ -151,7 +151,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - `FlexSubThemes.segmentedButtonTheme` **uses** `FlexSubThemesData.segmentedButtonTextStyle` for its `textStyle`.  
   - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle` for its `contentTextStyle`.
  
+
 - Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
+- Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData..scaffoldBackgroundColor` use it as an override color if it is defined.
+
+
 - Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories.
 - Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
 
@@ -195,6 +199,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Show new surface colors in the playground in surface blends. Rename surface blends to surface colors.
 - On the "Component themes" panel added a toggle for setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply setting to Playground theme.  
 - The Switch panel now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
+- On the surface "Color Blends" panel, you can select a scheme color to use as the theme resulting Scaffold Background color. The selection is independent for light and dark theme mode.
 
 **CHANGE**
 
@@ -213,6 +218,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
 - Chore: Update issue resolution status texts for Dialogs.
 - Fixed that Card was not showing the correct default border radius in M2 mode when using FCS.
+- Fixed that applying dialog elevation in the Playground app's own dark mode theme was missing.
 
 **TODO PLAYGROUND AND EXAMPLES**
 
