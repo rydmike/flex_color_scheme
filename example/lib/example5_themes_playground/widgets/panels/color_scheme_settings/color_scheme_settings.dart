@@ -48,9 +48,8 @@ class ColorSchemeSettings extends StatelessWidget {
         FlexToneConfigPopupMenu(
           title: 'ColorScheme generation using $_seedType',
           flexToneName: _flexToneName,
-          index: controller.useKeyColors ? controller.usedFlexToneSetup : 0,
-          onChanged:
-              controller.useKeyColors ? controller.setUsedFlexToneSetup : null,
+          index: controller.usedFlexToneSetup,
+          onChanged: controller.setUsedFlexToneSetup,
         ),
         const SizedBox(height: 4),
         Padding(
