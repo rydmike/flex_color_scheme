@@ -107,6 +107,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // Integer used to control the level of primary color
     // surface blends applied to surfaces and backgrounds.
     blendLevel: controller.blendLevel,
+    // Which fixed and fixed dim style to use.
+    fixedColorStyle: controller.fixedColorStyle
+        ? FlexFixedColorStyle.seeded
+        : FlexFixedColorStyle.computed,
     // Enum used to select what AppBar style we use.
     appBarStyle: controller.appBarStyleLight,
     // Set background opacity on app bar.

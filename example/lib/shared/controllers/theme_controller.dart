@@ -201,6 +201,8 @@ class ThemeController with ChangeNotifier {
     // Material 3 and Seed ColorScheme SETTINGS.
     _useMaterial3 = await _themeService.load(
         Store.keyUseMaterial3, Store.defaultUseMaterial3);
+    _fixedColorStyle = await _themeService.load(
+        Store.keyFixedColorStyle, Store.defaultFixedColorStyle);
     _useKeyColors = await _themeService.load(
         Store.keyUseKeyColors, Store.defaultUseKeyColors);
     _useSecondary = await _themeService.load(
@@ -944,6 +946,7 @@ class ThemeController with ChangeNotifier {
     //
     // Material 3 and Seed ColorScheme SETTINGS.
     setUseMaterial3(Store.defaultUseMaterial3, false);
+    setFixedColorStyle(Store.defaultFixedColorStyle, false);
     setUseKeyColors(Store.defaultUseKeyColors, false);
     setUseSecondary(Store.defaultUseSecondary, false);
     setUseTertiary(Store.defaultUseTertiary, false);
@@ -2784,6 +2787,16 @@ class ThemeController with ChangeNotifier {
     _useMaterial3 = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseMaterial3, value));
+  }
+
+  late bool _fixedColorStyle;
+  bool get fixedColorStyle => _fixedColorStyle;
+  void setFixedColorStyle(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _fixedColorStyle) return;
+    _fixedColorStyle = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyFixedColorStyle, value));
   }
 
   late bool _useKeyColors;
@@ -5255,10 +5268,13 @@ class ThemeController with ChangeNotifier {
         light: FlexSchemeColor(
           primary: primaryLight,
           primaryContainer: primaryContainerLight,
+          primaryLightRef: primaryLight,
           secondary: secondaryLight,
           secondaryContainer: secondaryContainerLight,
+          secondaryLightRef: secondaryLight,
           tertiary: tertiaryLight,
           tertiaryContainer: tertiaryContainerLight,
+          tertiaryLightRef: tertiaryLight,
           appBarColor: secondaryContainerLight,
           error: errorLight,
           errorContainer: errorContainerLight,
@@ -5266,10 +5282,13 @@ class ThemeController with ChangeNotifier {
         dark: FlexSchemeColor(
           primary: primaryDark,
           primaryContainer: primaryContainerDark,
+          primaryLightRef: primaryLight,
           secondary: secondaryDark,
           secondaryContainer: secondaryContainerDark,
+          secondaryLightRef: secondaryLight,
           tertiary: tertiaryDark,
           tertiaryContainer: tertiaryContainerDark,
+          tertiaryLightRef: tertiaryLight,
           appBarColor: secondaryContainerDark,
           error: errorDark,
           errorContainer: errorContainerDark,

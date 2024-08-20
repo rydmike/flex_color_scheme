@@ -498,11 +498,9 @@ class DialogSettings extends StatelessWidget {
             'Turn OFF to use default M3 styles on text input fields '
             'in TimePicker and DatePicker dialogs.\n'
             '\n'
-            'NOTE: This feature is supported by DatePicker in Flutter 3.13. '
-            'However, the support is flawed, see known issues.\n'
-            '\n'
-            'Defaults to ON in the ThemesPlayground. In the FlexColorScheme '
-            'API it is undefined and thus OFF.\n',
+            'NOTE:\n'
+            'While this feature is supported by DatePicker in Flutter 3.13 and '
+            'later, the support is flawed. See known issues further below.\n',
           ),
           value: controller.useInputDecoratorThemeInDialogs &&
               controller.useSubThemes &&
