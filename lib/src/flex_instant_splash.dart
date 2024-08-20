@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-const Duration _kUnconfirmedSplashDuration = Duration(milliseconds: 10);
-const Duration _kSplashFadeDuration = Duration(milliseconds: 10);
+const Duration _kUnconfirmedSplashDuration = Duration(milliseconds: 20);
+const Duration _kSplashFadeDuration = Duration(milliseconds: 20);
 
 const double _kSplashInitialSize = 0.0; // logical pixels
 const double _kSplashConfirmedVelocity = 1000.0; // pixels per millisecond
