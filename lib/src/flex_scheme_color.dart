@@ -38,10 +38,13 @@ class FlexSchemeColor with Diagnosticable {
   const FlexSchemeColor({
     required this.primary,
     Color? primaryContainer,
+    this.primaryLightRef,
     required this.secondary,
     Color? secondaryContainer,
+    this.secondaryLightRef,
     Color? tertiary,
     Color? tertiaryContainer,
+    this.tertiaryLightRef,
     this.appBarColor,
     this.error,
     this.errorContainer,
@@ -62,6 +65,30 @@ class FlexSchemeColor with Diagnosticable {
   /// A color used for elements needing less emphasis than [primary].
   Color get primaryContainer => _primaryContainer ?? primary;
 
+  /// A reference to the primary color used in a light theme mode
+  /// [FlexSchemeColor].
+  ///
+  /// This color only needs to be provided in a [FlexSchemeColor] used for
+  /// dark mode colors. The [primaryLightRef] color value should be the same
+  /// color as the [primary] color in the light mode [FlexSchemeColor].
+  ///
+  /// In dark mode color schemes this reference color is used so that
+  /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
+  /// mode, for the [ColorScheme] colors [primaryFixed], [onPrimaryFixed],
+  /// [primaryFixedDim] and [onPrimaryFixedVariant].
+  ///
+  /// This color does not need to be provided in a [FlexSchemeColor] used for
+  /// light mode colors, as it is not used in light mode.
+  ///
+  /// If this color is not provided in a dark mode [FlexSchemeColor], the fixed
+  /// and fixedDim colors will be computed from the [primary] color. Typically
+  /// this [primary] is not the same color as in light mode, so the fixed dark
+  /// colors will then not match the fixed light mode colors. The design intent
+  /// of the fixed colors is that they should be identical in light and dark
+  /// mode. If you want this, you must provide the same color as in the light
+  /// mode [FlexSchemeColor.primary] for this color.
+  final Color? primaryLightRef;
+
   /// An accent color that, when used sparingly, calls attention to parts
   /// of your app.
   final Color secondary;
@@ -72,6 +99,30 @@ class FlexSchemeColor with Diagnosticable {
 
   /// A color used for elements needing less emphasis than [secondary].
   Color get secondaryContainer => _secondaryContainer ?? secondary;
+
+  /// A reference to the secondary color used in a light theme mode
+  /// [FlexSchemeColor].
+  ///
+  /// This color only needs to be provided in a [FlexSchemeColor] used for
+  /// dark mode colors. The [secondaryLightRef] color value should be the same
+  /// color as the [secondary] color in the light mode [FlexSchemeColor].
+  ///
+  /// In dark mode color schemes this reference color is used so that
+  /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
+  /// mode, for the [ColorScheme] colors [secondaryFixed], [onSecondaryFixed],
+  /// [secondaryFixedDim] and [onSecondaryFixedVariant].
+  ///
+  /// This color does not need to be provided in a [FlexSchemeColor] used for
+  /// light mode colors, as it is not used in light mode.
+  ///
+  /// If this color is not provided in a dark mode [FlexSchemeColor], the fixed
+  /// and fixedDim colors will be computed from the [secondary] color. Typically
+  /// this [secondary] is not the same color as in light mode, so the fixed dark
+  /// colors will then not match the fixed light mode colors. The design intent
+  /// of the fixed colors is that they should be identical in light and dark
+  /// mode. If you want this, you must provide the same color as in the light
+  /// mode [FlexSchemeColor.secondary] for this color.
+  final Color? secondaryLightRef;
 
   // A private color used as a contrasting accent that can balance [primary]
   // and [secondary] colors or bring heightened attention to an element,
@@ -89,6 +140,30 @@ class FlexSchemeColor with Diagnosticable {
 
   /// A private color used for elements needing less emphasis than [tertiary],
   Color get tertiaryContainer => _tertiaryContainer ?? _tertiary ?? secondary;
+
+  /// A reference to the tertiary color used in a light theme mode
+  /// [FlexSchemeColor].
+  ///
+  /// This color only needs to be provided in a [FlexSchemeColor] used for
+  /// dark mode colors. The [tertiaryLightRef] color value should be the same
+  /// color as the [tertiary] color in the light mode [FlexSchemeColor].
+  ///
+  /// In dark mode color schemes this reference color is used so that
+  /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
+  /// mode, for the [ColorScheme] colors [tertiaryFixed], [onTertiaryFixed],
+  /// [tertiaryFixedDim] and [onTertiaryFixedVariant].
+  ///
+  /// This color does not need to be provided in a [FlexSchemeColor] used for
+  /// light mode colors, as it is not used in light mode.
+  ///
+  /// If this color is not provided in a dark mode [FlexSchemeColor], the fixed
+  /// and fixedDim colors will be computed from the [tertiary] color. Typically
+  /// this [tertiary] is not the same color as in light mode, so the fixed dark
+  /// colors will then not match the fixed light mode colors. The design intent
+  /// of the fixed colors is that they should be identical in light and dark
+  /// mode. If you want this, you must provide the same color as in the light
+  /// mode [FlexSchemeColor.tertiary] for this color.
+  final Color? tertiaryLightRef;
 
   /// The color of the app bar.
   ///
@@ -164,10 +239,13 @@ class FlexSchemeColor with Diagnosticable {
   factory FlexSchemeColor.from({
     required Color primary,
     Color? primaryContainer,
+    Color? primaryLightRef,
     Color? secondary,
     Color? secondaryContainer,
+    Color? secondaryLightRef,
     Color? tertiary,
     Color? tertiaryContainer,
+    Color? tertiaryLightRef,
     Color? appBarColor,
     Color? error,
     Color? errorContainer,
@@ -179,14 +257,17 @@ class FlexSchemeColor with Diagnosticable {
         primary: primary,
         primaryContainer:
             primaryContainer ?? primary.lighten(20).blend(Colors.white, 60),
+        primaryLightRef: primaryLightRef,
         secondary: secondary ?? primary.darken().brighten(20),
         secondaryContainer: secondaryContainer ??
             secondary?.brighten(14).blend(Colors.white, 50) ??
             primary.darken().brighten(20).blend(Colors.white, 60),
+        secondaryLightRef: secondaryLightRef,
         tertiary: tertiary ?? primary.brighten(15),
         tertiaryContainer: tertiaryContainer ??
             tertiary?.brighten(18).blend(Colors.white, 50) ??
             primary.brighten(15).lighten(20).blend(Colors.white, 60),
+        tertiaryLightRef: tertiaryLightRef,
         appBarColor: appBarColor ??
             tertiary ??
             primary.brighten(15).lighten(20).blend(Colors.white, 60),
@@ -201,14 +282,17 @@ class FlexSchemeColor with Diagnosticable {
         primary: primary,
         primaryContainer:
             primaryContainer ?? primary.darken(5).blend(Colors.black, 55),
+        primaryLightRef: primaryLightRef,
         secondary: secondary ?? primary.darken().brighten(20),
         secondaryContainer: secondaryContainer ??
             secondary?.darken(25).blend(Colors.black, 50) ??
             primary.darken().brighten(20).blend(Colors.black, 40),
+        secondaryLightRef: secondaryLightRef,
         tertiary: tertiary ?? primary.brighten(15),
         tertiaryContainer: tertiaryContainer ??
             tertiary?.darken(15).blend(Colors.black, 60) ??
             primary.brighten(15).darken(20).blend(Colors.black, 30),
+        tertiaryLightRef: tertiaryLightRef,
         appBarColor: appBarColor ??
             tertiary ??
             primary.brighten(15).darken(20).blend(Colors.black, 30),
@@ -223,16 +307,19 @@ class FlexSchemeColor with Diagnosticable {
         primary: primary,
         primaryContainer:
             primaryContainer ?? primary.darken(kDarkenPrimaryContainer),
+        primaryLightRef: primaryLightRef,
         secondary: secondary ?? primary.darken(kDarkenSecondary),
         secondaryContainer: secondaryContainer ??
             secondary?.darken(kDarkenSecondaryContainerFromSecondary) ??
             primary.darken(kDarkenSecondaryContainer),
+        secondaryLightRef: secondaryLightRef,
         tertiary: tertiary ?? primary.lighten(kDarkenPrimaryContainer),
         tertiaryContainer: tertiaryContainer ??
             tertiary?.lighten(kDarkenSecondaryContainer) ??
             primary
                 .brighten(kDarkenSecondary * 2)
                 .lighten(kDarkenSecondaryContainer),
+        tertiaryLightRef: tertiaryLightRef,
         appBarColor: appBarColor ??
             tertiary ??
             secondary?.lighten(kDarkenPrimaryContainer) ??
@@ -299,8 +386,10 @@ class FlexSchemeColor with Diagnosticable {
         ? colors.copyWith(
             secondary: colors.tertiary,
             secondaryContainer: colors.tertiaryContainer,
+            secondaryLightRef: colors.tertiaryLightRef,
             tertiary: colors.secondary,
             tertiaryContainer: colors.secondaryContainer,
+            tertiaryLightRef: colors.secondaryLightRef,
           )
         : colors;
 
@@ -309,8 +398,10 @@ class FlexSchemeColor with Diagnosticable {
         ? fixColors.copyWith(
             primary: fixColors.secondary,
             primaryContainer: fixColors.secondaryContainer,
+            primaryLightRef: fixColors.secondaryLightRef,
             secondary: fixColors.primary,
             secondaryContainer: fixColors.primaryContainer,
+            secondaryLightRef: fixColors.primaryLightRef,
           )
         : fixColors;
 
@@ -440,10 +531,13 @@ class FlexSchemeColor with Diagnosticable {
       return FlexSchemeColor.from(
         primary: primaryContainer.blend(Colors.white, whiteBlend),
         primaryContainer: primary.blend(Colors.white, whiteBlend),
+        primaryLightRef: primaryLightRef,
         secondary: secondaryContainer.blend(Colors.white, whiteBlend),
         secondaryContainer: secondary.blend(Colors.white, whiteBlend),
+        secondaryLightRef: secondaryLightRef,
         tertiary: tertiaryContainer.blend(Colors.white, whiteBlend),
         tertiaryContainer: tertiary.blend(Colors.white, whiteBlend),
+        tertiaryLightRef: tertiaryLightRef,
         appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
         error: error?.blend(Colors.white, whiteBlend),
         errorContainer: errorContainer?.blend(Colors.white, whiteBlend),
@@ -503,10 +597,13 @@ class FlexSchemeColor with Diagnosticable {
     return FlexSchemeColor(
       primary: primary,
       primaryContainer: primaryContainer,
+      primaryLightRef: primaryLightRef,
       secondary: secondary,
       secondaryContainer: secondaryContainer,
+      secondaryLightRef: secondaryLightRef,
       tertiary: tertiary,
       tertiaryContainer: tertiaryContainer,
+      tertiaryLightRef: tertiaryLightRef,
       appBarColor: appBarColor,
       swapOnMaterial3: swapOnMaterial3,
     );
@@ -516,10 +613,13 @@ class FlexSchemeColor with Diagnosticable {
   FlexSchemeColor copyWith({
     final Color? primary,
     final Color? primaryContainer,
+    final Color? primaryLightRef,
     final Color? secondary,
     final Color? secondaryContainer,
+    final Color? secondaryLightRef,
     final Color? tertiary,
     final Color? tertiaryContainer,
+    final Color? tertiaryLightRef,
     final Color? appBarColor,
     final Color? error,
     final Color? errorContainer,
@@ -528,10 +628,13 @@ class FlexSchemeColor with Diagnosticable {
     return FlexSchemeColor(
       primary: primary ?? this.primary,
       primaryContainer: primaryContainer ?? this.primaryContainer,
+      primaryLightRef: primaryLightRef ?? this.primaryLightRef,
       secondary: secondary ?? this.secondary,
       secondaryContainer: secondaryContainer ?? this.secondaryContainer,
+      secondaryLightRef: secondaryLightRef ?? this.secondaryLightRef,
       tertiary: tertiary ?? this.tertiary,
       tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
+      tertiaryLightRef: tertiaryLightRef ?? this.tertiaryLightRef,
       appBarColor: appBarColor ?? this.appBarColor,
       error: error ?? this.error,
       errorContainer: errorContainer ?? this.errorContainer,
@@ -547,10 +650,13 @@ class FlexSchemeColor with Diagnosticable {
     return other is FlexSchemeColor &&
         other.primary == primary &&
         other.primaryContainer == primaryContainer &&
+        other.primaryLightRef == primaryLightRef &&
         other.secondary == secondary &&
         other.secondaryContainer == secondaryContainer &&
+        other.secondaryLightRef == secondaryLightRef &&
         other.tertiary == tertiary &&
         other.tertiaryContainer == tertiaryContainer &&
+        other.tertiaryLightRef == tertiaryLightRef &&
         other.appBarColor == appBarColor &&
         other.error == error &&
         other.errorContainer == errorContainer &&
@@ -562,10 +668,13 @@ class FlexSchemeColor with Diagnosticable {
   int get hashCode => Object.hash(
         primary,
         primaryContainer,
+        primaryLightRef,
         secondary,
         secondaryContainer,
+        secondaryLightRef,
         tertiary,
         tertiaryContainer,
+        tertiaryLightRef,
         appBarColor,
         error,
         errorContainer,
@@ -578,10 +687,13 @@ class FlexSchemeColor with Diagnosticable {
     super.debugFillProperties(properties);
     properties.add(ColorProperty('primary', primary));
     properties.add(ColorProperty('primaryContainer', primaryContainer));
+    properties.add(ColorProperty('primaryLightRef', primaryLightRef));
     properties.add(ColorProperty('secondary', secondary));
     properties.add(ColorProperty('secondaryContainer', secondaryContainer));
+    properties.add(ColorProperty('secondaryLightRef', secondaryLightRef));
     properties.add(ColorProperty('tertiary', tertiary));
     properties.add(ColorProperty('tertiaryContainer', tertiaryContainer));
+    properties.add(ColorProperty('tertiaryLightRef', tertiaryLightRef));
     properties.add(ColorProperty('appBarColor', appBarColor));
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('errorContainer', errorContainer));

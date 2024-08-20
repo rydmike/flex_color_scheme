@@ -18,6 +18,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
     * IDEA: Add override key colors to KeyColors and use in dark mode code gen!
       * DONE: work internally in Playground! But we need to know the light key colors in dark also when we do not seed! ==> DAMN!
         Where will we get them without putting them into FlexKeyColors?
+        * Added light mode ref colors to `FlexSchemeColor` 
       * CONSEQUENCE: If using overrides, we could make seed schemes without providing a scheme, colors or colorScheme! ==> ENABLE THIS ALSO!   
       * Still need code gen for custom colors fixed and fixedDim colors!
       * Add a toggle to do seeding via colorScheme using SeedColorScheme.fromSeeds.
@@ -186,6 +187,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added ability to use custom seed key colors to `FlexKeyColors`.
 - Added support for error colors to `FlexKeyColors`.
 - Added direct color properties for `errorContainer` and `onErrorContainer` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API.  
+- Added `Color` properties `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` to `FlexSchemeColor`. They are used to store references to the corresponding color in a `FlexSchemeColor` made for light mod in the dark mode `FlexSchemeColor`. This is used to create computed "fixed" and "fixedDim" colors for dark mode and the light mode `ColorScheme` that are identical in light and dark mode.
 
 - Improved the theming logic for `Card` theme. 
   - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant for the default case at least. The Flutter theming limitation and impact are thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
