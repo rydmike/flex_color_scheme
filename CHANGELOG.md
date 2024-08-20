@@ -190,6 +190,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `Color` properties `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` to `FlexSchemeColor`. They are used to store references to the corresponding color in a `FlexSchemeColor` made for light mod in the dark mode `FlexSchemeColor`. This is used to create computed "fixed" and "fixedDim" colors for dark mode and the light mode `ColorScheme` that are identical in light and dark mode.
 - Added light ref colors from all light mde light mode `FlexSchemeColor` to their dark mode equivalent.
 
+- Added `fixedColorStyle` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API. The property is an enum `FlexFixedColorStyle` that allows us to choose the style of the generated "fixed" and "fixedDim" colors when not using seed generated color schemes. 
+
 - Improved the theming logic for `Card` theme. 
   - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant for the default case at least. The Flutter theming limitation and impact are thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
 
