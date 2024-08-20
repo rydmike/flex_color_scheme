@@ -21,6 +21,7 @@ class UseKeyColorsButtons extends StatelessWidget {
       controller.useKeyColors,
       controller.useSecondary && controller.useKeyColors,
       controller.useTertiary && controller.useKeyColors,
+      controller.useError && controller.useKeyColors,
     ];
     return ToggleButtons(
       isSelected: isSelected,
@@ -33,6 +34,9 @@ class UseKeyColorsButtons extends StatelessWidget {
         }
         if (index == 2 && controller.useKeyColors) {
           controller.setUseTertiary(!controller.useTertiary);
+        }
+        if (index == 3 && controller.useKeyColors) {
+          controller.setUseError(!controller.useError);
         }
       },
       children: <Widget>[
@@ -69,6 +73,20 @@ class UseKeyColorsButtons extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Text('Tertiary', style: TextStyle(fontSize: 12)),
+            ),
+          ),
+        ),
+        Visibility(
+          visible: controller.useKeyColors,
+          maintainSize: true,
+          maintainState: true,
+          maintainAnimation: true,
+          child: const Tooltip(
+            message: 'Use light theme Error color\n'
+                'as key color to seed your ColorScheme',
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text('Error', style: TextStyle(fontSize: 12)),
             ),
           ),
         ),

@@ -207,24 +207,32 @@ class ThemeController with ChangeNotifier {
         Store.keyUseSecondary, Store.defaultUseSecondary);
     _useTertiary = await _themeService.load(
         Store.keyUseTertiary, Store.defaultUseTertiary);
+    _useError =
+        await _themeService.load(Store.keyUseError, Store.defaultUseError);
     _keepPrimary = await _themeService.load(
         Store.keyKeepPrimary, Store.defaultKeepPrimary);
     _keepSecondary = await _themeService.load(
         Store.keyKeepSecondary, Store.defaultKeepSecondary);
     _keepTertiary = await _themeService.load(
         Store.keyKeepTertiary, Store.defaultKeepTertiary);
+    _keepError =
+        await _themeService.load(Store.keyKeepError, Store.defaultKeepError);
     _keepPrimaryContainer = await _themeService.load(
         Store.keyKeepPrimaryContainer, Store.defaultKeepPrimaryContainer);
     _keepSecondaryContainer = await _themeService.load(
         Store.keyKeepSecondaryContainer, Store.defaultKeepSecondaryContainer);
     _keepTertiaryContainer = await _themeService.load(
         Store.keyKeepTertiaryContainer, Store.defaultKeepTertiaryContainer);
+    _keepErrorContainer = await _themeService.load(
+        Store.keyKeepErrorContainer, Store.defaultKeepErrorContainer);
     _keepDarkPrimary = await _themeService.load(
         Store.keyKeepDarkPrimary, Store.defaultKeepDarkPrimary);
     _keepDarkSecondary = await _themeService.load(
         Store.keyKeepDarkSecondary, Store.defaultKeepDarkSecondary);
     _keepDarkTertiary = await _themeService.load(
         Store.keyKeepDarkTertiary, Store.defaultKeepDarkTertiary);
+    _keepDarkError = await _themeService.load(
+        Store.keyKeepDarkError, Store.defaultKeepDarkError);
     _keepDarkPrimaryContainer = await _themeService.load(
         Store.keyKeepDarkPrimaryContainer,
         Store.defaultKeepDarkPrimaryContainer);
@@ -234,6 +242,8 @@ class ThemeController with ChangeNotifier {
     _keepDarkTertiaryContainer = await _themeService.load(
         Store.keyKeepDarkTertiaryContainer,
         Store.defaultKeepDarkTertiaryContainer);
+    _keepDarkErrorContainer = await _themeService.load(
+        Store.keyKeepDarkErrorContainer, Store.defaultKeepDarkErrorContainer);
     _usedFlexToneSetup = await _themeService.load(
         Store.keyUsedFlexToneSetup, Store.defaultUsedFlexToneSetup);
     _useM3ErrorColors = await _themeService.load(
@@ -937,19 +947,24 @@ class ThemeController with ChangeNotifier {
     setUseKeyColors(Store.defaultUseKeyColors, false);
     setUseSecondary(Store.defaultUseSecondary, false);
     setUseTertiary(Store.defaultUseTertiary, false);
+    setUseError(Store.defaultUseError, false);
     setKeepPrimary(Store.defaultKeepPrimary, false);
     setKeepSecondary(Store.defaultKeepSecondary, false);
     setKeepTertiary(Store.defaultKeepTertiary, false);
+    setKeepError(Store.defaultKeepError, false);
     setKeepPrimaryContainer(Store.defaultKeepPrimaryContainer, false);
     setKeepSecondaryContainer(Store.defaultKeepSecondaryContainer, false);
     setKeepTertiaryContainer(Store.defaultKeepTertiaryContainer, false);
+    setKeepErrorContainer(Store.defaultKeepErrorContainer, false);
     setKeepDarkPrimary(Store.defaultKeepDarkPrimary, false);
     setKeepDarkSecondary(Store.defaultKeepDarkSecondary, false);
     setKeepDarkTertiary(Store.defaultKeepDarkTertiary, false);
+    setKeepDarkError(Store.defaultKeepDarkError, false);
     setKeepDarkPrimaryContainer(Store.defaultKeepDarkPrimaryContainer, false);
     setKeepDarkSecondaryContainer(
         Store.defaultKeepDarkSecondaryContainer, false);
     setKeepDarkTertiaryContainer(Store.defaultKeepDarkTertiaryContainer, false);
+    setKeepDarkErrorContainer(Store.defaultKeepDarkErrorContainer, false);
     setUsedFlexToneSetup(Store.defaultUsedFlexToneSetup, false);
     setUseM3ErrorColors(Store.defaultUseM3ErrorColors, false);
     //
@@ -2801,6 +2816,16 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyUseTertiary, value));
   }
 
+  late bool _useError;
+  bool get useError => _useError;
+  void setUseError(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _useError) return;
+    _useError = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyUseError, value));
+  }
+
   late bool _keepPrimary;
   bool get keepPrimary => _keepPrimary;
   void setKeepPrimary(bool? value, [bool notify = true]) {
@@ -2829,6 +2854,16 @@ class ThemeController with ChangeNotifier {
     _keepTertiary = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyKeepTertiary, value));
+  }
+
+  late bool _keepError;
+  bool get keepError => _keepError;
+  void setKeepError(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _keepError) return;
+    _keepError = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyKeepError, value));
   }
 
   late bool _keepPrimaryContainer;
@@ -2861,6 +2896,16 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyKeepTertiaryContainer, value));
   }
 
+  late bool _keepErrorContainer;
+  bool get keepErrorContainer => _keepErrorContainer;
+  void setKeepErrorContainer(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _keepErrorContainer) return;
+    _keepErrorContainer = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyKeepErrorContainer, value));
+  }
+
   late bool _keepDarkPrimary;
   bool get keepDarkPrimary => _keepDarkPrimary;
   void setKeepDarkPrimary(bool? value, [bool notify = true]) {
@@ -2891,6 +2936,16 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyKeepDarkTertiary, value));
   }
 
+  late bool _keepDarkError;
+  bool get keepDarkError => _keepDarkError;
+  void setKeepDarkError(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _keepDarkError) return;
+    _keepDarkError = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyKeepDarkError, value));
+  }
+
   late bool _keepDarkPrimaryContainer;
   bool get keepDarkPrimaryContainer => _keepDarkPrimaryContainer;
   void setKeepDarkPrimaryContainer(bool? value, [bool notify = true]) {
@@ -2919,6 +2974,16 @@ class ThemeController with ChangeNotifier {
     _keepDarkTertiaryContainer = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyKeepDarkTertiaryContainer, value));
+  }
+
+  late bool _keepDarkErrorContainer;
+  bool get keepDarkErrorContainer => _keepDarkErrorContainer;
+  void setKeepDarkErrorContainer(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _keepDarkErrorContainer) return;
+    _keepDarkErrorContainer = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyKeepDarkErrorContainer, value));
   }
 
   late int _usedFlexToneSetup;

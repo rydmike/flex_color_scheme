@@ -395,6 +395,11 @@ class Store {
   // Default value for the useTertiary, also to reset settings.
   static const bool defaultUseTertiary = false;
 
+  // Key used to read and save the useError value.
+  static const String keyUseError = 'useError';
+  // Default value for the useError, also to reset settings.
+  static const bool defaultUseError = false;
+
   // Key used to read and save the keepPrimary value.
   static const String keyKeepPrimary = 'keepPrimary';
   // Default value for the keepPrimary, also to reset settings.
@@ -409,6 +414,11 @@ class Store {
   static const String keyKeepTertiary = 'keepTertiary';
   // Default value for the keepTertiary, also to reset settings.
   static const bool defaultKeepTertiary = false;
+
+  // Key used to read and save the keepError value.
+  static const String keyKeepError = 'keepError';
+  // Default value for the keepError, also to reset settings.
+  static const bool defaultKeepError = false;
 
   // Key used to read and save the keepPrimaryContainer value.
   static const String keyKeepPrimaryContainer = 'keepPrimaryContainer';
@@ -425,6 +435,11 @@ class Store {
   // Default value for the keepTertiaryContainer, also to reset settings.
   static const bool defaultKeepTertiaryContainer = false;
 
+  // Key used to read and save the keepErrorContainer value.
+  static const String keyKeepErrorContainer = 'keepErrorContainer';
+  // Default value for the keepErrorContainer, also to reset settings.
+  static const bool defaultKeepErrorContainer = false;
+
   // Key used to read and save the keepDarkPrimary value.
   static const String keyKeepDarkPrimary = 'keepDarkPrimary';
   // Default value for the keepDarkPrimary, also to reset settings.
@@ -439,6 +454,11 @@ class Store {
   static const String keyKeepDarkTertiary = 'keepDarkTertiary';
   // Default value for the keepDarkTertiary, also to reset settings.
   static const bool defaultKeepDarkTertiary = false;
+
+  // Key used to read and save the keepDarkError value.
+  static const String keyKeepDarkError = 'keepDarkError';
+  // Default value for the keepDarkError, also to reset settings.
+  static const bool defaultKeepDarkError = false;
 
   // Key used to read and save the keepDarkPrimaryContainer value.
   static const String keyKeepDarkPrimaryContainer = 'keepDarkPrimaryContainer';
@@ -457,8 +477,10 @@ class Store {
   // Default value for the keepDarkTertiaryContainer, also to reset settings.
   static const bool defaultKeepDarkTertiaryContainer = false;
 
-  // TODO(rydmike): Tech debt, refactor usedFlexToneSetup to use FlexTonesEnum.
-  // See for example keyAdaptiveRemoveElevationTintLight and AdaptiveTheme.
+  // Key used to read and save the keepDarkErrorContainer value.
+  static const String keyKeepDarkErrorContainer = 'keepDarkErrorContainer';
+  // Default value for the keepDarkErrorContainer, also to reset settings.
+  static const bool defaultKeepDarkErrorContainer = false;
 
   // Key used to read and save the usedFlexToneSetup value.
   // It is used to select different pre-made FlexTones configurations used

@@ -240,29 +240,32 @@ class AppColor {
   /// this explanation in different places so I tucked it in here.
   /// It could be placed anywhere as simple top level function too.
   static String explainUsedColors(ThemeController controller) {
+    final String errorExplanation = controller.useError
+        ? '. Additionally a given error color is used to seed the error palette'
+        : '';
     if (!controller.useKeyColors) {
       return 'Material 3 ColorScheme seeding from key colors is OFF and not '
           'used. The effective ColorScheme is based directly on the selected '
-          "pre-defined FlexColorScheme's colors";
+          'pre-defined FlexColorScheme colors';
     }
     if (!controller.useSecondary && !controller.useTertiary) {
       return 'Light scheme defined Primary color is used to generate '
           'the Colorscheme. '
           "This is like using Flutter's ColorScheme.fromSeed with the scheme "
-          'defined Primary color as seed color';
+          'defined Primary color as seed color$errorExplanation';
     }
     if (controller.useSecondary && !controller.useTertiary) {
       return 'Tonal palettes for the ColorScheme are made with light scheme '
           'defined Primary and Secondary colors as seed keys. Tertiary key '
-          'is computed from Primary color';
+          'is computed from Primary color$errorExplanation';
     }
     if (!controller.useSecondary && controller.useTertiary) {
       return 'Tonal palettes for the ColorScheme, are made with light scheme '
           'defined Primary and Tertiary colors as seed keys, Secondary key is '
-          'computed from Primary color';
+          'computed from Primary color$errorExplanation';
     }
     return 'Light scheme defined Primary, Secondary and Tertiary colors are '
         'used as key colors to generate tonal palettes that define '
-        'the ColorScheme';
+        'the ColorScheme$errorExplanation';
   }
 }

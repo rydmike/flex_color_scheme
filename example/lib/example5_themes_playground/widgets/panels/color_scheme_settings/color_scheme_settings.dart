@@ -20,14 +20,8 @@ class ColorSchemeSettings extends StatelessWidget {
   });
   final ThemeController controller;
 
-  String get _flexToneName {
-    if (controller.useKeyColors) {
-      return FlexSchemeVariant.values[controller.usedFlexToneSetup].variantName;
-    } else {
-      return FlexSchemeVariant.values[0].variantName;
-    }
-  }
-
+  String get _flexToneName =>
+      FlexSchemeVariant.values[controller.usedFlexToneSetup].variantName;
   bool get _isFlutterScheme =>
       FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme;
   String get _seedType => _isFlutterScheme ? 'MCU' : 'FSS';
@@ -46,8 +40,8 @@ class ColorSchemeSettings extends StatelessWidget {
         const SizedBox(height: 8),
         UseSeededColorSchemeSwitch(controller: controller),
         FlexToneConfigPopupMenu(
-          title: 'ColorScheme generation using $_seedType',
-          flexToneName: _flexToneName,
+          title: 'Scheme',
+          flexToneName: '$_flexToneName $_seedType',
           index: controller.usedFlexToneSetup,
           onChanged: controller.setUsedFlexToneSetup,
         ),
@@ -61,9 +55,9 @@ class ColorSchemeSettings extends StatelessWidget {
           title: const Text('Keep brand colors when using seeded scheme?'),
           dense: true,
           subtitle: const Text(
-            'With the switches on the colors below you can '
-            'lock primary, secondary, tertiary and their container colors to '
-            'their scheme input defined colors, instead of using the color '
+            'With the switches on the colors below you can lock primary, '
+            'secondary, tertiary, error and their container colors to '
+            'their scheme input defined colors instead of using the color '
             'from the seeded tonal palette. The switches have separate '
             'states for light and dark theme mode.\n',
           ),

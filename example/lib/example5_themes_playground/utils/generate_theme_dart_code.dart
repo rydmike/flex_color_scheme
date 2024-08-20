@@ -1683,6 +1683,8 @@ String generateThemeDartCode(ThemeController controller) {
   final String useTertiary = controller.useTertiary
       ? '    useTertiary: ${controller.useTertiary},\n'
       : '';
+  final String useError =
+      controller.useError ? '    useError: ${controller.useError},\n' : '';
   final String keepPrimary = controller.keepPrimary
       ? '    keepPrimary: ${controller.keepPrimary},\n'
       : '';
@@ -1692,6 +1694,8 @@ String generateThemeDartCode(ThemeController controller) {
   final String keepTertiary = controller.keepTertiary
       ? '    keepTertiary: ${controller.keepTertiary},\n'
       : '';
+  final String keepError =
+      controller.keepError ? '    keepError: ${controller.keepError},\n' : '';
   final String keepPrimaryContainer = controller.keepPrimaryContainer
       ? '    keepPrimaryContainer: ${controller.keepPrimaryContainer},\n'
       : '';
@@ -1701,6 +1705,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String keepTertiaryContainer = controller.keepTertiaryContainer
       ? '    keepTertiaryContainer: ${controller.keepTertiaryContainer},\n'
       : '';
+  final String keepErrorContainer = controller.keepErrorContainer
+      ? '    keepErrorContainer: ${controller.keepErrorContainer},\n'
+      : '';
   final String keepDarkPrimary = controller.keepDarkPrimary
       ? '    keepPrimary: ${controller.keepDarkPrimary},\n'
       : '';
@@ -1709,6 +1716,9 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String keepDarkTertiary = controller.keepDarkTertiary
       ? '    keepTertiary: ${controller.keepDarkTertiary},\n'
+      : '';
+  final String keepDarkError = controller.keepDarkError
+      ? '    keepError: ${controller.keepDarkError},\n'
       : '';
   final String keepDarkPrimaryContainer = controller.keepDarkPrimaryContainer
       ? '    keepPrimaryContainer: ${controller.keepDarkPrimaryContainer},\n'
@@ -1720,29 +1730,38 @@ String generateThemeDartCode(ThemeController controller) {
   final String keepDarkTertiaryContainer = controller.keepDarkTertiaryContainer
       ? '    keepTertiaryContainer: ${controller.keepDarkTertiaryContainer},\n'
       : '';
+  final String keepDarkErrorContainer = controller.keepDarkErrorContainer
+      ? '    keepErrorContainer: ${controller.keepDarkErrorContainer},\n'
+      : '';
 
   String useKeyColorsLight = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '$useSecondary'
           '$useTertiary'
+          '$useError'
           '$keepPrimary'
           '$keepSecondary'
           '$keepTertiary'
+          '$keepError'
           '$keepPrimaryContainer'
           '$keepSecondaryContainer'
           '$keepTertiaryContainer'
+          '$keepErrorContainer'
           '  ),\n'
       : '';
   String useKeyColorsDark = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '$useSecondary'
           '$useTertiary'
+          '$useError'
           '$keepDarkPrimary'
           '$keepDarkSecondary'
           '$keepDarkTertiary'
+          '$keepDarkError'
           '$keepDarkPrimaryContainer'
           '$keepDarkSecondaryContainer'
           '$keepDarkTertiaryContainer'
+          '$keepDarkErrorContainer'
           '  ),\n'
       : '';
   // Make a prettier version of the constructor if that is all we got.

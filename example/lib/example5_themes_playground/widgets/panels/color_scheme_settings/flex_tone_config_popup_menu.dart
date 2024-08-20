@@ -71,7 +71,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         contentPadding: contentPadding,
         title: Text('$title ${FlexSchemeVariant.values[index].variantName}'),
         subtitle: Text(
-          '$flexToneName setup:\n\n'
+          '$flexToneName scheme variant:\n\n'
           '${FlexSchemeVariant.values[index].configDetails}.\n'
           '\n'
           'With FSS based FlexTones, you can configure which tone from '
@@ -79,9 +79,9 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
           'Set limits on used CAM16 chroma values '
           'for the three colors used as keys for primary, '
           'secondary and tertiary TonalPalettes. '
-          'Here you can choose between the default Material-3 tone '
-          'mapping, plus ten other pre-defined custom FlexTones setups. With '
-          'the API you can make your own FlexTones configurations.\n',
+          'Here you can choose between the default Material-3 tone mapping, '
+          'plus eleven other pre-defined custom FlexTones setups. With '
+          'the API you can also make your own FlexTones configurations.\n',
         ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),

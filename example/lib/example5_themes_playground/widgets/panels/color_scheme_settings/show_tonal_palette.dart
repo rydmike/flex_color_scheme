@@ -50,6 +50,15 @@ class ShowTonalPalette extends StatelessWidget {
     final FlexSchemeVariant usedVariant =
         FlexSchemeVariant.values[controller.usedFlexToneSetup];
 
+    // But error input dark mode colors also when we use toDark
+    final FlexSchemeColor inputErrColor = isLight
+        ? AppColor.scheme(controller).light
+        : AppColor.scheme(controller).dark;
+
+    // Input errorColors
+    final Color inputErrorColor = inputErrColor.error ??
+        (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
+
     // Are we using a Flutter SDK scheme? Otherwise use FlexTone.
     if (usedVariant.isFlutterScheme) {
       // Get DynamicScheme tones if using Flutter SDK scheme.
@@ -58,9 +67,7 @@ class ShowTonalPalette extends StatelessWidget {
         primarySeedColor: colors.primary,
         secondarySeedColor: controller.useSecondary ? colors.secondary : null,
         tertiarySeedColor: controller.useTertiary ? colors.tertiary : null,
-        // TODO(rydmike): Add custom error seed color support.
-        // errorSeedColor:
-        //     controller.useErrorKey ? controller.errorSeedColor : null,
+        errorSeedColor: controller.useError ? inputErrorColor : null,
         neutralSeedColor:
             isLight ? controller.surfaceTintLight : controller.surfaceTintDark,
         neutralVariantSeedColor:
@@ -85,9 +92,10 @@ class ShowTonalPalette extends StatelessWidget {
       // Compute all the core Tonal Palettes.
       final FlexCorePalette palettes = FlexCorePalette.fromSeeds(
         primary: colors.primary.value,
-        // Pass in null if set to not secondary or tertiary colors seed keys.
+        // Pass in null if set to not secondary, tertiary or error seed keys.
         secondary: controller.useSecondary ? colors.secondary.value : null,
         tertiary: controller.useTertiary ? colors.tertiary.value : null,
+        error: controller.useError ? inputErrorColor.value : null,
         // If custom surfaceTint is not null, use it as key for neutrals.
         neutral: isLight
             ? controller.surfaceTintLight?.value
@@ -103,7 +111,8 @@ class ShowTonalPalette extends StatelessWidget {
         tertiaryChroma: tones.tertiaryChroma,
         tertiaryMinChroma: tones.tertiaryMinChroma,
         tertiaryHueRotation: tones.tertiaryHueRotation,
-        // TODO(rydmike): Add custom error seed color support.
+        errorChroma: tones.errorChroma,
+        errorMinChroma: tones.errorMinChroma,
         neutralChroma: tones.neutralChroma,
         neutralVariantChroma: tones.neutralVariantChroma,
         paletteType: FlexPaletteType.extended,
