@@ -205,6 +205,8 @@ extension FlexThemeData on ThemeData {
     /// requires creating a seeded ColorScheme even when a seed generated
     /// ColorScheme is not being used. This version may in some cases produce
     /// visually more appealing results.
+    ///
+    /// If not defined, defaults to [FlexFixedColorStyle.computed].
     final FlexFixedColorStyle? fixedColorStyle,
 
     /// Style used to define the themed color of the AppBar background color.
@@ -1607,6 +1609,8 @@ extension FlexThemeData on ThemeData {
     /// requires creating a seeded ColorScheme even when a seed generated
     /// ColorScheme is not being used. This version may in some cases produce
     /// visually more appealing results.
+    ///
+    /// If not defined, defaults to [FlexFixedColorStyle.computed].
     final FlexFixedColorStyle? fixedColorStyle,
 
     /// Style used to define the themed color of the [AppBar] background color.
