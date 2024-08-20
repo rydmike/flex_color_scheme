@@ -232,9 +232,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is ON.
 - Updated the presentation of `Switch`, `Checkbox`and `Radio` on their settings panel.
-- Changed the name of "Surface blends" settings panel to "**Color Blends**".
-- Changed the name of "Component Themes" settings panel to "**General Settings**".
+- Changed the name of the "Theme colors" settings panel to "**Input Colors**". 
+- Changed the name of the "Surface blends" settings panel to "**Color Blends**".
+- Changed the name of the "Component Themes" settings panel to "**General Settings**".
 - Changed the order of topic panels. The "General Settings", "Adaptive Theming" and "Shape Radius" panels now come before the color panels.
+- The feature "**Swap secondary and tertiary legacy colors in M3**" on the "**Input Colors**" settings panel is now OFF by default. The settings info expand explains when it is preferable to use it.
+- The feature "**"Use TextField's InputDecorationTheme in picker dialogs**" on the "**Dialog**" settings panel is now OFF by default.
 - Split "**FAB and Chip**" settings panels to separate panels.
 - Modified settings panel background and header colors, as well as theme selector buttons to use the new `ColorScheme` surface theme colors, instead of computing their own shades from theme.
 - Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
