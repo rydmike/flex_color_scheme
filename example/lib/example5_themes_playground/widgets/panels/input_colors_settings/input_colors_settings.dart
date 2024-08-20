@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/custom_theme_controls.dart';
@@ -16,9 +17,18 @@ class InputColorsSettings extends StatelessWidget {
   });
   final ThemeController controller;
 
+  static final Uri _fcsDocSchemeReference = Uri(
+    scheme: 'https',
+    host: 'docs.flexcolorscheme.com',
+    path: 'scheme_reference',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     final bool isLight = theme.brightness == Brightness.light;
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
@@ -73,18 +83,47 @@ class InputColorsSettings extends StatelessWidget {
               controller.useFlexColorScheme ? controller.setUsedColors : null,
         ),
         SwitchListTileReveal(
-          title: const Text('Swap secondary '
-              'and tertiary legacy colors in M3'),
+          title: const Text('Swap secondary and tertiary legacy colors in M3'),
           subtitleDense: true,
-          subtitle: const Text(
-            'Only applies when using M3, and only to built-in FCS M2 '
-            'designed schemes that benefit from this swap for a better fit '
-            'with the M3 color system design intent. '
-            'Prefer ON when using M3 and legacy FCS color schemes to get a '
-            'theme result with them, that is more in-line with M3 color '
-            'system color expectations. You can turn it OFF if that is not '
-            'important and also when using seeded ColorScheme, especially '
-            'if you do not use the secondary color as a seed key.\n',
+          subtitle: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text:
+                      'Only applies when using M3 and only to built-in FCS M2 '
+                      'designed schemes that benefit from this swap for a '
+                      'better fit with the M3 color system design intent.\n'
+                      '\n'
+                      'Prefer ON when using M3 and legacy FCS color schemes '
+                      'to get a theme result more in-line with the M3 color '
+                      'system color expectations. You can keep it OFF if this '
+                      'is not important to your design. When using a seed '
+                      'generated ColorScheme, especially if you do not use '
+                      'the secondary color as a seed key, you can well keep '
+                      'this setting OFF.\n'
+                      '\n'
+                      'Typically Schemes that have tertiary colors that are '
+                      'closer in Hue to the primary color than the secondary '
+                      'color is, will benefit from this swap. '
+                      'Some FCS schemes created originally for Material-2 '
+                      'color system design fall into this category. The ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsDocSchemeReference,
+                  text: 'FlexColorScheme scheme reference page',
+                ),
+                // _fcsChipUmbrellaIssue115364
+                TextSpan(
+                  style: spanTextStyle,
+                  text: ' shows which ones do so. It also documents with which '
+                      'originally for M2 designed schemes, you should avoid '
+                      'using the secondary color as a seed key color when '
+                      'generating a ColorScheme with the scheme.\n',
+                ),
+              ],
+            ),
           ),
           value: controller.swapLegacyColors && controller.useMaterial3,
           onChanged:
@@ -97,7 +136,7 @@ class InputColorsSettings extends StatelessWidget {
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
               'The above legacy M3 mode secondary and tertiary swap is done '
-              'first, it is enabled.\n',
+              'first, if it is enabled.\n',
             ),
             value: controller.swapLightColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -111,7 +150,7 @@ class InputColorsSettings extends StatelessWidget {
             subtitle: const Text(
               'Swap primary and secondary, and their container colors. '
               'The above legacy M3 mode secondary and tertiary swap is done '
-              'first, it is enabled.\n',
+              'first, if it is enabled.\n',
             ),
             value: controller.swapDarkColors && controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
@@ -138,7 +177,7 @@ class InputColorsSettings extends StatelessWidget {
               SwitchListTileReveal(
                 title: const Text('Computed dark swaps main and container'),
                 subtitleDense: true,
-                subtitle: const Text('Recommend to turn this one. When '
+                subtitle: const Text('Recommend to turn this ON. When '
                     'swapped, you can often use them as they are with no '
                     'white blend level, especially if the light colors '
                     'use M3 design intent.\n'),

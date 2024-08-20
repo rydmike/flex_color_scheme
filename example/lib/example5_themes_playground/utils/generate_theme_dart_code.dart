@@ -123,6 +123,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendLevel = controller.blendLevel > 0
       ? '  blendLevel: ${controller.blendLevel},\n'
       : '';
+  final String fixedColorStyle = controller.fixedColorStyle
+      ? '  fixedColorStyle: FlexFixedColorStyle.seeded,\n'
+      : '';
   final String usedColors = controller.usedColors != 6
       ? '  usedColors: ${controller.usedColors},\n'
       : '';
@@ -1853,6 +1856,7 @@ String generateThemeDartCode(ThemeController controller) {
       'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '$usedColors'
+      '$fixedColorStyle'
       '$surfaceModeLight'
       '$blendLevel'
       '$appBarStyleLight'
@@ -1877,6 +1881,7 @@ String generateThemeDartCode(ThemeController controller) {
       'darkTheme: FlexThemeData.dark(\n'
       '$darkScheme'
       '$usedColors'
+      '$fixedColorStyle'
       '$surfaceModeDark'
       '$blendLevelDark'
       '$appBarStyleDark'

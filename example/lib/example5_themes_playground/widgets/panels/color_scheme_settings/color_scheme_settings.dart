@@ -97,6 +97,26 @@ class ColorSchemeSettings extends StatelessWidget {
             ),
           ),
         ShowInputColorsSwitch(controller: controller),
+        SwitchListTileReveal(
+          title: const Text('Seed generated Fixed and FixedDim colors'),
+          subtitleDense: true,
+          subtitle: const Text(
+            'This setting applies when not using a seed generated color '
+            'scheme. '
+            'It offers you to choose between two styles, internal FCS none '
+            'seeded default or using seed generate versions also when not '
+            'seed generating the ColorSchme.\n'
+            '\n'
+            'OFF  Compute fixed and fixed dim color without seeding\n'
+            'ON   Always use seeded colors for fixed and fixed dim colors\n'
+            '\n'
+            'Fixed and fixed dim colors are used for colors that have '
+            'the same value in light and dark mode.\n',
+          ),
+          value: controller.fixedColorStyle || controller.useKeyColors,
+          onChanged:
+              controller.useKeyColors ? null : controller.setFixedColorStyle,
+        ),
         const Divider(height: 1),
         ListTile(
           title: const Text('Additional options '
