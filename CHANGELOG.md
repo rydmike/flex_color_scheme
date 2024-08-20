@@ -12,23 +12,17 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **CRITICAL TODOS**
 
-* Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors. How?
-  * Will need to seed for these in the background to get usable colors for them automatically.
-  * PARTIALLY DONE: Need a way to pass correct custom dark seed colors.
-    * IDEA: Add override key colors to KeyColors and use in dark mode code gen!
-      * DONE: work internally in Playground! But we need to know the light key colors in dark also when we do not seed! ==> DAMN!
-        Where will we get them without putting them into FlexKeyColors?
-        * Added light mode ref colors to `FlexSchemeColor` 
-      * CONSEQUENCE: If using overrides, we could make seed schemes without providing a scheme, colors or colorScheme! ==> ENABLE THIS ALSO!   
-      * Still need code gen for custom colors fixed and fixedDim colors!
-      * Add a toggle to do seeding via colorScheme using SeedColorScheme.fromSeeds.
- 
-* Consider what to do with surfaceTint removal. It is basically obsolete now in Flutter 3.22 and later. Convert it into "bring tints back"? 
-* Consider what to do with shadows back. More fine-grained control?
+
+* Consider what to do with surfaceTint removal.
+  * It is basically obsolete now in Flutter 3.22 and later. 
+  * Keep for now? Maybe add a "bring tints back" feature? 
+* Consider what to do with shadows back. 
+  * Keep and add more fine-grained control. Shadow color selection per component!
 * Flutter 3.22 broke +100 tests in FCS, review and fix them.
   * Get tests back to 100% coverage.
-
-
+* Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
+  * DONE
+  * This was tricky, big rework and new feature.
 * Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
   * DONE 
 * Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. All the remaining 492 deprecated `background`, `onBackground` and `surfaceVariant` hints have now been fixed.
@@ -127,7 +121,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `BottomSheet` background now defaults to `surfaceContainerLow` instead of `surface` with elevation tint. This breaking change was introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
 
 
-- The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`, In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and to align more with Flutter SDK defaults. If you had not configured these values before they defaulted to `true`. You now have to set them explicitly to `true` to get the same result as before when they were not configured.
+- The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and to align more with Flutter SDK defaults. If you had not configured these values before they defaulted to `true`. You now have to set them explicitly to `true` to get the same result as before when they were not configured.
 - The `FlexSubThemesData` properties `blendOnColors` now defaults to `false`. In previous versions it defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and to align more with Flutter defaults. If you had not configured this values before it defaulted to `true`. You now have to set it explicitly to `true` to get the same result as before when it was not configured.  Consider setting this property true in dark mode, and false in light theme mode, for a style that matches the Material-3 color design when not using seed generated `ColorScheme`.
 
 **CHANGE**
@@ -187,8 +181,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added ability to use custom seed key colors to `FlexKeyColors`.
 - Added support for error colors to `FlexKeyColors`.
 - Added direct color properties for `errorContainer` and `onErrorContainer` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API.  
-- Added `Color` properties `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` to `FlexSchemeColor`. They are used to store references to the corresponding color in a `FlexSchemeColor` made for light mod in the dark mode `FlexSchemeColor`. This is used to create computed "fixed" and "fixedDim" colors for dark mode and the light mode `ColorScheme` that are identical in light and dark mode.
-- Added light ref colors from all light mde light mode `FlexSchemeColor` to their dark mode equivalent.
+- Added `Color` properties `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` to `FlexSchemeColor`.
+  - They are used to store references to the corresponding color in a `FlexSchemeColor` made for light mod in the dark mode `FlexSchemeColor`. This is used to create computed "fixed" and "fixedDim" colors for dark mode and the light mode `ColorScheme` that are identical in light and dark mode.
+  - Made `FlexSchemeColor()`, `FlexSchemeColor.from()`, `FlexSchemeColor.effective()` and `FlexSchemeColor.toDark()` work correctly with the new `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` properties. 
+  - Used all main `light` color properties in `FlexSchemeData` static `FlexSchemeColor` color definitions, as **lightRef** colors in their `dark` mode equivalent FlexSchemeColor. That was 156 color values to add to the 52 dark `FlexSchemeColor` definitions.
 
 - Added `fixedColorStyle` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API. The property is an enum `FlexFixedColorStyle` that allows us to choose the style of the generated "fixed" and "fixedDim" colors when not using seed generated color schemes. 
 
