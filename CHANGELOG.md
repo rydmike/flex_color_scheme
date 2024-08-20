@@ -205,32 +205,45 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
  
-- Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. We also use them in the "Card settings" page for card presentation.
-- Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF.
-- Add support to enable using error color as a seed color for error tonal palette in the Playground. The tonal palette now also supports custom error color to generate tonals. 
-- Added error color and error container color locking to "ColorScheme" panel in Playground.  
-- Added code gen for the new ColorScheme colors introduced in Flutter 3.22.
-- Added showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
-- Added showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.
-- Added code gen for custom error colors in the Playground.
-- Make FSS seed options unavailable when an MCU variant is selected.
-- Add FFS seed option monochrome surfaces.
-- Show new surface colors in the playground in surface blends. Rename "Surface blends" settings panel to "Color Blends".
-- On the "Component Themes" panel added a toggle for setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply the setting to the Playground app's theme as well.  
-- The "Switch, Checkbox and Radio" settings panel now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
-- On the surface "Color Blends" panel, you can select a scheme color to use as the theme resulting Scaffold Background color. The selection is independent for light and dark theme mode.
-- Added support for selecting both MCU and FSS based seed generated ColorScheme variants.
-- Added support for code gen for the new MCU and FSS scheme variants
-  - For MCU based variants it uses `FlexColorScheme.variant` API with `FlexSchemeVariant` and for FSS based variants it uses `FlexColorScheme.tones` API with `FlexSchemeVariant` and its `tones` getter. The `FlexTones` modifiers only show up on FSS based variants with `FlexColorScheme.tones` API, as they are not available on `FlexColorScheme.variant` API.
-    **CHANGE**
+- Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. We also use them in the "**Card**" settings" panel for card presentation.
 
-- Split FAB and Chip to separate panels.
-- Modified both HeaderCards background colors to work with new ColorScheme surface colors.
+ 
+- Added customizable error colors to the custom scheme. Only used when "**Use Material3 error colors**" setting is OFF. Error color customization is available when using the custom scheme on "**Input Colors**" and "**ColorScheme**" settings panels.
+- Added using error color as a seed color for error tonal palette in the **ColorScheme**" settings panel. The tonal palette now also supports using custom error colors to generate its tonals. 
+- Added error color and error container color locking to "**ColorScheme**" settings panel.  
+- Added code gen for custom error colors.
+
+
+- Added code **ColorScheme** gen for all the new `ColorScheme` colors introduced in Flutter 3.22.
+- Added showing the new Flutter 3.22 `ColorScheme` colors in the "**Effective Colors**" panel.
+- Added showing the new Flutter 3.22 `ColorScheme` colors in the "**ColorScheme**" settings panel.
+- Added showing the new Flutter 3.22 `ColorScheme` surface colors in the "**Color Blends**" settings panel.
+
+
+- Added support for using MCU and FSS based seed generated `ColorScheme` variants using `FlexSchemeVariant`.
+- Added code gen for the new MCU and FSS scheme variants
+  - For MCU based variants it uses `FlexColorScheme.variant` API with `FlexSchemeVariant` and for FSS based variants it uses `FlexColorScheme.tones` API with `FlexSchemeVariant` and its `tones` getter. 
+  - The `FlexTones` modifiers only show up on FSS based variants with `FlexColorScheme.tones` API, as they are not available when using the `FlexColorScheme.variant` API.
+- Added the FFS seed option "Monochrome surfaces" introduced by package FlexSeedScheme 3.0.0.
+ 
+ 
+- Added an "**Apply ColorScheme to all Cupertino components**" setting to the "**Component Themes**" settings panel
+  - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply the setting to the Playground app's theme as well.  
+- In the "**Switch, Checkbox and Radio**" settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
+- On the surface "**Color Blends**" settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
+
+**CHANGE**
+
+- No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is ON.
+- Updated the presentation of `Switch`, `Checkbox`and `Radio` on their settings panel.
+- Rename "Surface blends" settings panel to "**Color Blends**" panel.
+- Split "**FAB and Chip**" settings panels to separate panels.
+- Modified settings panel background and header colors, as well as theme selector buttons to use the new `ColorScheme` surface theme colors, instead of computing their own shades from theme.
 - Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
 - The component theme settings "Use M2 style divider in M2, "Tinted disabled components" and "Tinted interaction" are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mode. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 - Update M3 default info for `BottomAppBar` to `surfaceContainer`.
-- No longer generates any code settings for `useMaterial3: true` value. It is the new default if ON and thus no longer explicitly added to the API code gen. 
+
 
 **FIX**
 
