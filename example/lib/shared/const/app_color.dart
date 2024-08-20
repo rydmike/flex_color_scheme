@@ -32,10 +32,13 @@ class AppColor {
   static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
     primary: Color(0xFFB1CFF5),
     primaryContainer: Color(0xFF3873BA),
+    primaryLightRef: Color(0xFF00296B),
     secondary: Color(0xFFFFD270),
     secondaryContainer: Color(0xFFD26900),
+    secondaryLightRef: Color(0xFFD26900),
     tertiary: Color(0xFFC9CBFC),
     tertiaryContainer: Color(0xFF535393),
+    tertiaryLightRef: Color(0xFF5C5C95),
     // A custom very dark blue, to match the dark theme mode
     appBarColor: Color(0xFF00102B),
     swapOnMaterial3: true,
@@ -77,6 +80,9 @@ class AppColor {
   );
   static final FlexSchemeColor _myScheme2Dark = FlexSchemeColor.from(
     primary: const Color(0xFF629F80),
+    primaryLightRef: _myScheme2Light.primary,
+    secondaryLightRef: _myScheme2Light.secondary,
+    tertiaryLightRef: _myScheme2Light.tertiary,
     brightness: Brightness.dark,
   );
 
