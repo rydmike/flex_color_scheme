@@ -2906,6 +2906,14 @@ class FlexColorScheme with Diagnosticable {
               ? null
               : seedScheme?.onTertiaryContainer) ??
           colorScheme?.onTertiaryContainer,
+      onError: onError ??
+          (seed.useKeyColors && seed.keepError ? null : seedScheme?.onError) ??
+          colorScheme?.onError,
+      onErrorContainer: onErrorContainer ??
+          (seed.useKeyColors && seed.keepErrorContainer
+              ? null
+              : seedScheme?.onErrorContainer) ??
+          colorScheme?.onErrorContainer,
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant:
           seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
@@ -2925,10 +2933,6 @@ class FlexColorScheme with Diagnosticable {
           onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
-      onError: onError ?? seedScheme?.onError ?? colorScheme?.onError,
-      onErrorContainer: onErrorContainer ??
-          seedScheme?.onErrorContainer ??
-          colorScheme?.onErrorContainer,
       primaryAlpha: alphaOnMain.primaryAlpha,
       primaryContainerAlpha: alphaOnValue.primaryContainerAlpha,
       secondaryAlpha: alphaOnMain.secondaryAlpha,
@@ -2993,6 +2997,8 @@ class FlexColorScheme with Diagnosticable {
           secondaryContainer: effectiveColors.secondaryContainer,
           tertiary: effectiveColors.tertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
+          error: effectiveColors.error,
+          errorContainer: effectiveColors.tertiaryContainer,
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
           // props further below.
@@ -4803,8 +4809,10 @@ class FlexColorScheme with Diagnosticable {
             ? effectiveColors.tertiaryContainer
             : seedScheme.tertiaryContainer,
         appBarColor: effectiveColors.appBarColor,
-        error: seedScheme.error,
-        errorContainer: seedScheme.errorContainer,
+        error: seed.keepError ? effectiveColors.error : seedScheme.error,
+        errorContainer: seed.keepErrorContainer
+            ? effectiveColors.errorContainer
+            : seedScheme.errorContainer,
       );
     }
     // Store the seedScheme even if we do not use it, as we need it for
@@ -4956,6 +4964,14 @@ class FlexColorScheme with Diagnosticable {
               ? null
               : seedScheme?.onTertiaryContainer) ??
           colorScheme?.onTertiaryContainer,
+      onError: onError ??
+          (seed.useKeyColors && seed.keepError ? null : seedScheme?.onError) ??
+          colorScheme?.onError,
+      onErrorContainer: onErrorContainer ??
+          (seed.useKeyColors && seed.keepErrorContainer
+              ? null
+              : seedScheme?.onErrorContainer) ??
+          colorScheme?.onErrorContainer,
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant:
           seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
@@ -4975,10 +4991,6 @@ class FlexColorScheme with Diagnosticable {
           onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
-      onError: onError ?? seedScheme?.onError ?? colorScheme?.onError,
-      onErrorContainer: onErrorContainer ??
-          seedScheme?.onErrorContainer ??
-          colorScheme?.onErrorContainer,
       primaryAlpha: alphaOnMain.primaryAlpha,
       primaryContainerAlpha: alphaOnValue.primaryContainerAlpha,
       secondaryAlpha: alphaOnMain.secondaryAlpha,
@@ -7924,8 +7936,12 @@ class FlexColorScheme with Diagnosticable {
       tertiaryContainer: colors.tertiaryContainer,
       surface: effectiveSurfaceColor,
       inverseSurface: effectiveInverseSurfaceColor,
+      //
       error: colors.error ?? errorFallback,
+      onError: onError ?? colorScheme?.onError,
       errorContainer: colors.errorContainer ?? errorContainerFallback,
+      onErrorContainer: onErrorContainer ?? colorScheme?.onErrorContainer,
+      //
       onPrimary: onPrimary ?? colorScheme?.onPrimary,
       onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
@@ -7937,8 +7953,6 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant: colorScheme?.onSurfaceVariant,
       onInverseSurface: colorScheme?.onInverseSurface,
-      onError: onError ?? colorScheme?.onError,
-      onErrorContainer: onErrorContainer ?? colorScheme?.onErrorContainer,
     );
     // Return the ColorScheme as a copyWith on original passed in colorScheme
     // if one was passed in, with all the effective properties overriding its
