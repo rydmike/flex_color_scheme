@@ -30,6 +30,7 @@ class HeaderCard extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     this.headerPadding,
     this.headingColor,
+    this.backgroundColor,
     this.elevation = 0,
     this.enabled = true,
     this.isOpen = true,
@@ -37,7 +38,6 @@ class HeaderCard extends StatelessWidget {
     this.duration = const Duration(milliseconds: 200),
     this.startStraight = false,
     this.endStraight = false,
-    this.color,
     this.child,
   });
 
@@ -98,6 +98,12 @@ class HeaderCard extends StatelessWidget {
   /// background color is computed.
   final Color? headingColor;
 
+  /// The background color of the [HeaderCard].
+  ///
+  /// If not defined, defaults to [ColorScheme.surfaceBright] in light theme
+  /// mode and to color [ColorScheme.surfaceDim] in dark mode.
+  final Color? backgroundColor;
+
   /// Elevation of the header card.
   ///
   /// Default to 0.
@@ -131,9 +137,6 @@ class HeaderCard extends StatelessWidget {
   /// Defaults to false.
   final bool endStraight;
 
-  /// Define this color to override that automatic adaptive background color.
-  final Color? color;
-
   /// The child to be revealed.
   final Widget? child;
 
@@ -145,12 +148,8 @@ class HeaderCard extends StatelessWidget {
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
     final Color cardColor =
-        color ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
-    // Compute a header color with fixed primary blend from the card color,
-    // if one was not provided
-    final Color headerColor = headingColor ??
-        Color.alphaBlend(
-            scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
+        backgroundColor ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
+    final Color headerColor = headingColor ?? scheme.surfaceContainer;
 
     final bool useHeading =
         title != null || subtitle != null || leading != null;

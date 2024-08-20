@@ -26,13 +26,14 @@ class HeaderCardStateful extends StatefulWidget {
     this.subtitle,
     this.margin = EdgeInsets.zero,
     this.headerPadding,
+    this.headingColor,
+    this.backgroundColor,
     this.elevation = 0,
     this.enabled = true,
     this.isOpen = true,
     this.duration = const Duration(milliseconds: 200),
     this.startStraight = false,
     this.endStraight = false,
-    this.color,
     this.child,
   });
 
@@ -67,6 +68,18 @@ class HeaderCardStateful extends StatefulWidget {
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
   final EdgeInsetsGeometry? headerPadding;
 
+  /// The background color for the header.
+  ///
+  /// If not provided, one that is slightly off from card color
+  /// background color is computed.
+  final Color? headingColor;
+
+  /// The background color of the [HeaderCardStateful].
+  ///
+  /// If not defined, defaults to [ColorScheme.surfaceBright] in light theme
+  /// mode and to color [ColorScheme.surfaceDim] in dark mode.
+  final Color? backgroundColor;
+
   /// Elevation of the header card.
   ///
   /// Default to 0.
@@ -92,9 +105,6 @@ class HeaderCardStateful extends StatefulWidget {
   ///
   /// Defaults to false.
   final bool endStraight;
-
-  /// Define this color to override that automatic adaptive background color.
-  final Color? color;
 
   /// The child to be revealed.
   final Widget? child;
@@ -131,11 +141,9 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
-    final Color cardColor =
-        widget.color ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
-    // Compute a header color with fixed primary blend from the card color,
-    final Color headerColor = Color.alphaBlend(
-        scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
+    final Color cardColor = widget.backgroundColor ??
+        (isLight ? scheme.surfaceBright : scheme.surfaceDim);
+    final Color headerColor = widget.headingColor ?? scheme.surfaceContainer;
 
     final bool useHeading = widget.title != null ||
         widget.subtitle != null ||

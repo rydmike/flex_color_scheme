@@ -329,13 +329,10 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color cardColor = theme.cardColor;
-
     final Color scaffoldBackground = theme.scaffoldBackgroundColor;
-
     final bool isLight = theme.brightness == Brightness.light;
-
-    final Color background = Color.alphaBlend(
-        scheme.surfaceTint.withAlpha(isLight ? 10 : 16), cardColor);
+    final Color background =
+        isLight ? scheme.surfaceContainerLow : scheme.surfaceContainerHigh;
     final Color iconColor =
         widget.item.group.color(context); //_onColor(background);
     final Color textColor = theme.colorScheme.onSurface.withAlpha(0xCC);
@@ -357,7 +354,6 @@ class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
             ? BorderSide(color: iconColor, width: borderWidth)
             : BorderSide(color: unselectedColor),
       );
-      // If
     } else {
       // If border was null, make one matching Card default, but with a
       // BorderSide, if it was not null, we leave it as it was, it means it
