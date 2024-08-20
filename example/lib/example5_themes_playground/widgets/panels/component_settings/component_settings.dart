@@ -199,7 +199,7 @@ class ComponentSettings extends StatelessWidget {
             '\n'
             'The ON state impacts ThemeData hover, focus, highlight and splash '
             'colors. Material-3 components implement their own interaction '
-            'effects via WidgetState color properties. This setting also styles '
+            'effects via WidgetState color properties. This also styles '
             'all Material components on component theme level. Most '
             'components are covered, a few cases may not be fully '
             'supported due to lack of support or issues in the Flutter '
