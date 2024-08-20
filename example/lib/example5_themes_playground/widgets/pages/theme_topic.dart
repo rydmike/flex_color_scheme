@@ -148,72 +148,12 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'rows of code to reproduce with the vanilla ThemeData factory.\n',
   ),
   ThemeTopic(
-    group: TopicGroup.colors,
-    heading: 'Input Colors',
-    buttonLabel: 'Input\nColors',
-    icon: Icons.palette_outlined,
-    info:
-        'Input Colors show the color values defined as inputs for the selected '
-        'color scheme. You can also use any predefined scheme as a starting '
-        'point for your own custom colors.\n',
-  ),
-  ThemeTopic(
-    group: TopicGroup.colors,
-    heading: 'ColorScheme',
-    buttonLabel: 'Color\nScheme',
-    icon: Icons.colorize_outlined,
-    info: 'In Material-3 color system, seed generated light and '
-        'dark mode ColorSchemes use the same key colors to generate six '
-        'tonal palettes. Light and dark ColorScheme colors, use the same '
-        'palettes, but different tones. This ensures that light and '
-        'dark modes are color matched with each other.\n'
-        '\n'
-        'To ensure that light and dark themes use identical tonal palettes, '
-        'FlexColorScheme uses the light mode colors '
-        'from built-in schemes to seed generate the ColorSchemes. '
-        'When using custom colors, you decide which colors you seed from in '
-        'light and dark mode separately.\n',
-  ),
-  ThemeTopic(
-    group: TopicGroup.colors,
-    heading: 'Color Blends',
-    buttonLabel: 'Color\nBlends',
-    icon: Icons.invert_colors_outlined,
-    info: 'Material-2 design demonstrated using surfaces with primary color '
-        'alpha-blends in dark mode. FlexColorScheme surface blends '
-        'provides this for both light and dark mode. '
-        'Material-3 design has a new color system where a hint of primary '
-        'color is also used on surfaces. It is done via its neutral tonal '
-        'palettes, that are shifted slightly towards the primary color.\n'
-        '\n'
-        'When using M3 seeded ColorSchemes, set blend level to zero to get the '
-        'pure M3 design. With surface blends, you can further strengthen the '
-        'M3 effect. You can vary blend levels by surface type in both M2 and '
-        'M3 mode, regardless of if you used seeded ColorScheme or not.\n'
-        '\n'
-        'Surface blend settings have separate control values in the '
-        'Playground for light and dark mode. Different values for blends in '
-        'light and dark mode are often a part of the desired design.\n',
-  ),
-  ThemeTopic(
-    group: TopicGroup.colors,
-    heading: 'Effective Colors',
-    buttonLabel: 'Effective\nColors',
-    icon: Icons.gradient_outlined,
-    info: 'The effective colors show the current effective colors in the '
-        "theme's ColorScheme, and also colors still defined directly in "
-        'ThemeData as well as important component theme colors. The info '
-        'expands also provides additional '
-        'background information about colors in Flutter, that are useful to '
-        'be aware of.',
-  ),
-  ThemeTopic(
     group: TopicGroup.components,
-    heading: 'Component Themes',
-    buttonLabel: 'Component\nThemes',
+    heading: 'General Settings',
+    buttonLabel: 'General\nSettings',
     icon: Icons.widgets_outlined,
     info: 'To use all theming features on FlexColorScheme you must enable '
-        'component sub-themes. If you are only here for the color '
+        'component (sub) themes. If you are only here for the color '
         'theming features, and intend to style your component themes yourself, '
         'you can turn OFF using component themes.\n'
         '\n'
@@ -223,8 +163,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         '\n'
         'When using Material-3, there are only a few nuance differences '
         'compared to default Material-3 styles, plus some minor fixes to a few '
-        'Flutter Material-3 specification deviations, that Flutter may also '
-        'fix in later versions.\n',
+        'Flutter Material-3 specification deviations.\n',
   ),
   ThemeTopic(
     group: TopicGroup.components,
@@ -254,8 +193,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         '\n'
         'Like platform adaptive widgets, and all other theme settings, the '
         'adaptive themed style is automatic and happens based on which '
-        'platform the themed app is running on. The native platform build and '
-        'using the app as a web app on same '
+        'platform the themed app is running on. A native platform build and '
+        'using the app as a web app build, on same '
         'platform can have different themed adaptive results.\n',
   ),
   ThemeTopic(
@@ -274,6 +213,69 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'Its main purpose is to enable using Squircle shapes on Apple '
         'platforms. It will be possible to use it on other platform too. '
         'Flutter SDK does not include the correct Apple Squricle shape.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.colors,
+    heading: 'Input Colors',
+    buttonLabel: 'Input\nColors',
+    icon: Icons.palette_outlined,
+    info:
+        'Input Colors show the color values defined as inputs for the selected '
+        'color scheme. You can also use any predefined scheme as a starting '
+        'point for your own custom colors.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.colors,
+    heading: 'ColorScheme',
+    buttonLabel: 'Color\nScheme',
+    icon: Icons.palette,
+    info: 'In Material-3 color system, seed generated light and '
+        'dark mode ColorSchemes use the same key colors to generate six '
+        'tonal palettes. Light and dark ColorScheme colors, use the same '
+        'palettes, but different tones. This ensures that light and '
+        'dark modes are color matched with each other.\n'
+        '\n'
+        'To ensure that light and dark themes use identical tonal palettes, '
+        'FlexColorScheme uses the light mode colors '
+        'from built-in schemes to seed generate the ColorSchemes. '
+        'When using custom colors, you decide which colors you seed from in '
+        'light and dark mode separately.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.colors,
+    heading: 'Color Blends',
+    buttonLabel: 'Color\nBlends',
+    icon: Icons.invert_colors_outlined,
+    info: 'Already Material-2 design used surfaces with primary color '
+        'alpha-blends in dark mode. FlexColorScheme color blends '
+        'provides this for both light and dark mode surfaces and allows you '
+        'to tune it to your preferences and design target.\n'
+        '\n'
+        'Material-3 design has a new color system where a hint of primary '
+        'color is also used on surfaces. It is done via its neutral tonal '
+        'palettes, that are shifted slightly towards the primary color.\n'
+        '\n'
+        'When using Material-3 seeded ColorSchemes, set blend level to zero to '
+        'get the pure Material-3 design. With higher blend level value, you '
+        'can strengthen the color tint using alpha blends. You can also vary '
+        'blend levels by surface type in both M2 and M3 mode. Blend mode and '
+        'level adjustments are also supported when using seed generated '
+        'ColorSchemes.\n'
+        '\n'
+        'Surface blend settings have separate control values in the '
+        'Playground for light and dark mode. Different values for blends in '
+        'light and dark mode, are often a part of the desired design.\n',
+  ),
+  ThemeTopic(
+    group: TopicGroup.colors,
+    heading: 'Effective Colors',
+    buttonLabel: 'Effective\nColors',
+    icon: Icons.gradient_outlined,
+    info: 'This panel displays the current colors in the active '
+        "theme's ColorScheme and colors still defined directly in "
+        'ThemeData, as well as important component theme colors. The info '
+        'expands below provides additional background information about the '
+        'colors in Flutter, that are useful to be aware of.',
   ),
   ThemeTopic(
     group: TopicGroup.controls,

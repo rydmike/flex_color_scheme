@@ -236,13 +236,16 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is ON.
 - Updated the presentation of `Switch`, `Checkbox`and `Radio` on their settings panel.
-- Rename "Surface blends" settings panel to "**Color Blends**" panel.
+- Changed the name of "Surface blends" settings panel to "**Color Blends**".
+- Changed the name of "Component Themes" settings panel to "**General Settings**".
+- Changed the order of topic panels. The "General Settings", "Adaptive Theming" and "Shape Radius" panels now come before the color panels.
 - Split "**FAB and Chip**" settings panels to separate panels.
 - Modified settings panel background and header colors, as well as theme selector buttons to use the new `ColorScheme` surface theme colors, instead of computing their own shades from theme.
 - Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
 - The component theme settings "Use M2 style divider in M2, "Tinted disabled components" and "Tinted interaction" are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mode. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 - Update M3 default info for `BottomAppBar` to `surfaceContainer`.
+  
 
 
 **FIX**
@@ -256,7 +259,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **TODO PLAYGROUND AND EXAMPLES**
 
-- Add set error colors also on ColorScheme panel? Now only possible on input colors.
 - Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switch?
 - Add info about Card theming issue to the Card settings screen. After filing the Flutter issue. 
