@@ -179,6 +179,34 @@ extension FlexThemeData on ThemeData {
     /// Defaults to 0.
     final int blendLevel = 0,
 
+    /// The style and method used to compute the fixed, fixedDim colors and
+    /// their on colors in a [ColorScheme] using the palettes provided main
+    /// light mode color.
+    ///
+    /// The main color should always be the light theme's [ColorScheme.primary],
+    /// [ColorScheme.secondary] or [ColorScheme.tertiary]. This means that a
+    /// dark mode theme needs to know what colors were used for the
+    /// light mode colors for [ColorScheme.primary], [ColorScheme.secondary] or
+    /// [ColorScheme.tertiary]. It is not a strict requirement, but necessary
+    /// if you want the fixed and fixedDim colors to follow the Material-3
+    /// guide's color system, where these colors are derived from the main light
+    /// color palette color and have same computed color values in dark mode.
+    ///
+    /// The two available options, offer different nuances for the fixed color
+    /// and fixedDim color generation.
+    ///
+    /// The computed [FlexFixedColorStyle.computed] is made with simpler color
+    /// math and uses same principles as [FlexSchemeColor.from] does when not
+    /// using seed generated ColorSchemes and it generates missing colors.
+    /// This version may fit better with the computed and not seed generated
+    /// ColorSchemes.
+    ///
+    /// The [FlexFixedColorStyle.seeded] version is bit more expensive as it
+    /// requires creating a seeded ColorScheme even when a seed generated
+    /// ColorScheme is not being used. This version may in some cases produce
+    /// visually more appealing results.
+    final FlexFixedColorStyle? fixedColorStyle,
+
     /// Style used to define the themed color of the AppBar background color.
     ///
     /// Defaults to null, which when [useMaterial3] is false results in
@@ -1357,6 +1385,7 @@ extension FlexThemeData on ThemeData {
         usedColors: usedColors,
         surfaceMode: surfaceMode,
         blendLevel: blendLevel,
+        fixedColorStyle: fixedColorStyle,
         //
         appBarStyle: appBarStyle,
         appBarOpacity: appBarOpacity,
@@ -1551,6 +1580,34 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to 0.
     final int blendLevel = 0,
+
+    /// The style and method used to compute the fixed, fixedDim colors and
+    /// their on colors in a [ColorScheme] using the palettes provided main
+    /// light mode color.
+    ///
+    /// The main color should always be the light theme's [ColorScheme.primary],
+    /// [ColorScheme.secondary] or [ColorScheme.tertiary]. This means that a
+    /// dark mode theme needs to know what colors were used for the
+    /// light mode colors for [ColorScheme.primary], [ColorScheme.secondary] or
+    /// [ColorScheme.tertiary]. It is not a strict requirement, but necessary
+    /// if you want the fixed and fixedDim colors to follow the Material-3
+    /// guide's color system, where these colors are derived from the main light
+    /// color palette color and have same computed color values in dark mode.
+    ///
+    /// The two available options, offer different nuances for the fixed color
+    /// and fixedDim color generation.
+    ///
+    /// The computed [FlexFixedColorStyle.computed] is made with simpler color
+    /// math and uses same principles as [FlexSchemeColor.from] does when not
+    /// using seed generated ColorSchemes and it generates missing colors.
+    /// This version may fit better with the computed and not seed generated
+    /// ColorSchemes.
+    ///
+    /// The [FlexFixedColorStyle.seeded] version is bit more expensive as it
+    /// requires creating a seeded ColorScheme even when a seed generated
+    /// ColorScheme is not being used. This version may in some cases produce
+    /// visually more appealing results.
+    final FlexFixedColorStyle? fixedColorStyle,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
@@ -2727,6 +2784,7 @@ extension FlexThemeData on ThemeData {
         usedColors: usedColors,
         surfaceMode: surfaceMode,
         blendLevel: blendLevel,
+        fixedColorStyle: fixedColorStyle,
         //
         appBarStyle: appBarStyle,
         appBarOpacity: appBarOpacity,
