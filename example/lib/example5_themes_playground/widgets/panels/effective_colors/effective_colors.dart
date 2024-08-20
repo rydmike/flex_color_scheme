@@ -7,7 +7,6 @@ import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/app/show_theme_data_colors.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../shared/component_colors_reveal.dart';
-import '../../shared/use_seeded_color_scheme_switch.dart';
 
 /// Used to show effective theme colors.
 ///
@@ -34,8 +33,6 @@ class EffectiveColors extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
-        UseSeededColorSchemeSwitch(controller: controller),
         const ListTileReveal(
           title: Text('ColorScheme colors'),
           subtitleDense: true,
@@ -52,7 +49,7 @@ class EffectiveColors extends StatelessWidget {
             'based colors. In M3 mode this migration is mostly done, '
             'but in M2 mode some components still use colors defined '
             'directly in ThemeData. Avoid using colors directly from '
-            'ThemeData going forward. See more info via the ThemeData info '
+            'ThemeData going forward. See more info in the ThemeData info '
             'expand below.\n',
           ),
         ),
@@ -82,9 +79,9 @@ class EffectiveColors extends StatelessWidget {
                   style: spanTextStyle,
                   text: '.\n'
                       '\n'
-                      'Some ThemeData colors still matter in Flutter 3.10 '
+                      'Some ThemeData colors still matter in Flutter 3.24 '
                       'and earlier. Some widgets depend on them for '
-                      'their default colors, especially when using M2. '
+                      'their default colors, especially when using Material-2. '
                       'FlexColorScheme keeps them in sync with ColorScheme to '
                       'produce an app with consistent colors on all widgets. '
                       'It will do so as long as the colors exist in ThemeData.'
