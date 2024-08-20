@@ -489,14 +489,21 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // Use key color based M3 ColorScheme.
     keyColors: FlexKeyColors(
       useKeyColors: controller.useKeyColors,
-      useSecondary: controller.useSecondary,
-      useTertiary: controller.useTertiary,
+      //
       keepPrimary: controller.keepPrimary,
-      keepSecondary: controller.keepSecondary,
-      keepTertiary: controller.keepTertiary,
       keepPrimaryContainer: controller.keepPrimaryContainer,
+      //
+      useSecondary: controller.useSecondary,
+      keepSecondary: controller.keepSecondary,
       keepSecondaryContainer: controller.keepSecondaryContainer,
+      //
+      useTertiary: controller.useTertiary,
+      keepTertiary: controller.keepTertiary,
       keepTertiaryContainer: controller.keepTertiaryContainer,
+      //
+      useError: controller.useError,
+      keepError: controller.keepError,
+      keepErrorContainer: controller.keepErrorContainer,
     ),
     // Use Material3 error colors with Material2 themes.
     useMaterial3ErrorColors: controller.useM3ErrorColors,

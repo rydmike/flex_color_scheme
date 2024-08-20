@@ -14,7 +14,7 @@ class ColorNameValue extends StatefulWidget {
     required this.color,
     required this.textColor,
     required this.label,
-    this.fontSize = 12,
+    this.fontSize = 10,
     this.tone,
     this.showTone = false,
     this.showInputColor = true,

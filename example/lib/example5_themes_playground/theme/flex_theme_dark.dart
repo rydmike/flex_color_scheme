@@ -94,6 +94,17 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
   final int flexScheme = controller.schemeIndex - 3;
   final bool useScheme = useBuiltIn && !controller.useToDarkMethod;
 
+  // Effective FlexSchemeColor depends on usedColors and swap.
+  // Note: For TonalPalette's we only use the light scheme as input!
+  final FlexSchemeData scheme = AppColor.scheme(controller);
+  final FlexSchemeColor keyColors = FlexSchemeColor.effective(
+    scheme.light,
+    controller.usedColors,
+    swapLegacy: controller.swapLegacyColors && scheme.light.swapOnMaterial3,
+    swapColors: controller.swapLightColors,
+    brightness: Brightness.light,
+  );
+
   return FlexColorScheme.dark(
     // Use scheme based config, when we are using a built-in `FlexScheme`
     // based schemes.
@@ -427,14 +438,24 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     // Use key color based M3 ColorScheme.
     keyColors: FlexKeyColors(
       useKeyColors: controller.useKeyColors,
-      useSecondary: controller.useSecondary,
-      useTertiary: controller.useTertiary,
+      // TODO(rydmike): Naive test of using key colors. Fix it!
+      keyPrimary: !useScheme ? keyColors.primary : null,
       keepPrimary: controller.keepDarkPrimary,
-      keepSecondary: controller.keepDarkSecondary,
-      keepTertiary: controller.keepDarkTertiary,
       keepPrimaryContainer: controller.keepDarkPrimaryContainer,
+      //
+      keySecondary: !useScheme ? keyColors.secondary : null,
+      useSecondary: controller.useSecondary,
+      keepSecondary: controller.keepDarkSecondary,
       keepSecondaryContainer: controller.keepDarkSecondaryContainer,
+      //
+      keyTertiary: !useScheme ? keyColors.tertiary : null,
+      useTertiary: controller.useTertiary,
+      keepTertiary: controller.keepDarkTertiary,
       keepTertiaryContainer: controller.keepDarkTertiaryContainer,
+      //
+      useError: controller.useError,
+      keepError: controller.keepDarkError,
+      keepErrorContainer: controller.keepDarkErrorContainer,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
     tones:

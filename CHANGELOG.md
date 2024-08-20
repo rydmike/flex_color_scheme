@@ -12,11 +12,15 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **CRITICAL TODOS**
 
-* Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" style colors. How?
+* Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors. How?
   * Will need to seed for these in the background to get usable colors for them automatically.
   * PARTIALLY DONE: Need a way to pass correct custom dark seed colors.
     * IDEA: Add override key colors to KeyColors and use in dark mode code gen!
-      * CONSEQUENCE: If using overrides, we could make seed schemes without providing a scheme, colors or colorScheme!   
+      * DONE: work internally in Playground! But we need to know the light key colors in dark also when we do not seed! ==> DAMN!
+        Where will we get them without putting them into FlexKeyColors?
+      * CONSEQUENCE: If using overrides, we could make seed schemes without providing a scheme, colors or colorScheme! ==> ENABLE THIS ALSO!   
+      * Still need code gen for custom colors fixed and fixedDim colors!
+      * Add a toggle to do seeding via colorScheme using SeedColorScheme.fromSeeds.
  
 * Consider what to do with surfaceTint removal. It is basically obsolete now in Flutter 3.22 and later. Convert it into "bring tints back"? 
 * Consider what to do with shadows back. More fine-grained control?
@@ -198,6 +202,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
  
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. We also use them in the "Card settings" page for card presentation.
 - Added customizable `errorColor` in Playground to the custom scheme. Only works when "Use Material3 error colors" is OFF.
+- Add support to enable using error color as a seed color for error tonal palette in the Playground. The tonal palette now also supports custom error color to generate tonals. 
+- Added error color and error container color locking to "ColorScheme" panel in Playground.  
 - Added code gen for the new ColorScheme colors introduced in Flutter 3.22.
 - Added showing new Flutter 3.22 ColorScheme colors in the Playground Effective Colors panel.
 - Added showing new Flutter 3.22 ColorScheme colors in the Playground ColorScheme panel.

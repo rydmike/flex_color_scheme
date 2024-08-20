@@ -47,7 +47,7 @@ class SchemeColors extends StatelessWidget {
 
     // Size of the color presentation boxes
     const double boxWidth = 150;
-    final double boxHeight = showInputColor ? 230 : 190;
+    final double boxHeight = showInputColor ? 200 : 170;
 
     // Theme values...
     final ThemeData theme = Theme.of(context);
@@ -62,6 +62,8 @@ class SchemeColors extends StatelessWidget {
     final Color secondaryContainer = colorScheme.secondaryContainer;
     final Color tertiary = colorScheme.tertiary;
     final Color tertiaryContainer = colorScheme.tertiaryContainer;
+    final Color error = colorScheme.error;
+    final Color errorContainer = colorScheme.errorContainer;
 
     // TODO(rydmike): Review tones everywhere! And colors! Need a helper?
     // See show_tonal_palette.dart for correct tones!
@@ -1261,18 +1263,47 @@ class SchemeColors extends StatelessWidget {
                         //   tc.setHoverTonalPalette(null);
                         // },
                         child: Material(
-                          color: colorScheme.error,
-                          child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv error ${colorScheme.error}'),
-                            color: colorScheme.error,
-                            textColor: colorScheme.onError,
-                            label: 'error',
-                            showInputColor: showInputColor,
-                            inputColor: inputErrorColor,
-                            inputTextColor: inputOnErrorColor,
-                            tone: tones.errorTone,
-                            showTone: showTones,
+                          color: error,
+                          child: ColorPickerInkWellDialog(
+                            color: error,
+                            onChanged: (Color color) {
+                              if (isLight) {
+                                tc.setErrorLight(color);
+                              } else {
+                                tc.setErrorDark(color);
+                              }
+                            },
+                            recentColors: tc.recentColors,
+                            onRecentColorsChanged: tc.setRecentColors,
+                            wasCancelled: (bool cancelled) {
+                              if (cancelled) {
+                                if (isLight) {
+                                  tc.setErrorLight(error);
+                                } else {
+                                  tc.setErrorDark(error);
+                                }
+                              }
+                            },
+                            enabled: isCustomTheme,
+                            child: ColorNameValue(
+                              key: ValueKey<String>('cnv error $error'),
+                              color: colorScheme.error,
+                              textColor: colorScheme.onError,
+                              label: 'error',
+                              showInputColor: showInputColor,
+                              inputColor: inputErrorColor,
+                              inputTextColor: inputOnErrorColor,
+                              tone: tones.errorTone,
+                              showTone: _locked(
+                                  isLight, !tc.keepError, !tc.keepDarkError),
+                              isLocked: _locked(
+                                  isLight, tc.keepError, tc.keepDarkError),
+                              onLocked: tc.useKeyColors && tc.useFlexColorScheme
+                                  ? isLight
+                                      ? tc.setKeepError
+                                      : tc.setKeepDarkError
+                                  : null,
+                            ),
                           ),
                         ),
                       ),
@@ -1332,18 +1363,48 @@ class SchemeColors extends StatelessWidget {
                         //   tc.setHoverTonalPalette(null);
                         // },
                         child: Material(
-                          color: colorScheme.errorContainer,
-                          child: ColorNameValue(
-                            key: ValueKey<String>('cnv errorContainer '
-                                '${colorScheme.errorContainer}'),
-                            color: colorScheme.errorContainer,
-                            textColor: colorScheme.onErrorContainer,
-                            label: 'error\u200BContainer',
-                            showInputColor: showInputColor,
-                            inputColor: inputErrorContainerColor,
-                            inputTextColor: inputOnErrorContainerColor,
-                            tone: tones.errorContainerTone,
-                            showTone: showTones,
+                          color: errorContainer,
+                          child: ColorPickerInkWellDialog(
+                            color: errorContainer,
+                            onChanged: (Color color) {
+                              if (isLight) {
+                                tc.setErrorContainerLight(color);
+                              } else {
+                                tc.setErrorContainerDark(color);
+                              }
+                            },
+                            recentColors: tc.recentColors,
+                            onRecentColorsChanged: tc.setRecentColors,
+                            wasCancelled: (bool cancelled) {
+                              if (cancelled) {
+                                if (isLight) {
+                                  tc.setErrorContainerLight(errorContainer);
+                                } else {
+                                  tc.setErrorContainerDark(errorContainer);
+                                }
+                              }
+                            },
+                            enabled: isCustomTheme,
+                            child: ColorNameValue(
+                              key: ValueKey<String>('cnv errorContainer '
+                                  '${colorScheme.errorContainer}'),
+                              color: colorScheme.errorContainer,
+                              textColor: colorScheme.onErrorContainer,
+                              label: 'error\u200BContainer',
+                              showInputColor: showInputColor,
+                              inputColor: inputErrorContainerColor,
+                              inputTextColor: inputOnErrorContainerColor,
+                              tone: tones.errorContainerTone,
+                              showTone: _locked(isLight, !tc.keepErrorContainer,
+                                  !tc.keepDarkErrorContainer),
+                              isLocked: _locked(isLight, tc.keepErrorContainer,
+                                  tc.keepDarkErrorContainer),
+                              onLocked: tc.useKeyColors && tc.useFlexColorScheme
+                                  ? isLight
+                                      ? tc.setKeepErrorContainer
+                                      : tc.setKeepDarkErrorContainer
+                                  : null,
+                            ),
                           ),
                         ),
                       ),
