@@ -313,7 +313,7 @@ class Store {
   // Key used to swap legacy M2 secondary and tertiary colors.
   static const String keySwapLegacyColors = 'swapLegacyColors';
   // Default value for the swapLegacyColors, also to reset settings.
-  static const bool defaultSwapLegacyColors = true;
+  static const bool defaultSwapLegacyColors = false;
 
   // Key used to read and save the swapLightColors value.
   static const String keySwapLightColors = 'swapLightColors';
@@ -379,6 +379,11 @@ class Store {
   static const String keyUseMaterial3 = 'useMaterial3';
   // Default value for the useMaterial3, also to reset settings.
   static const bool defaultUseMaterial3 = true;
+
+  // Key used to read and save the fixedColorStyle value.
+  static const String keyFixedColorStyle = 'fixedColorStyle';
+  // Default value for the useKeyColors, also to reset settings.
+  static const bool defaultFixedColorStyle = false;
 
   // Key used to read and save the useKeyColors value.
   static const String keyUseKeyColors = 'useKeyColors';
@@ -1723,7 +1728,7 @@ class Store {
       'useInputDecoratorThemeInDialogs';
   // Default value for the useInputDecoratorThemeInDialogs, also
   // used to reset settings.
-  static const bool defaultUseInputDecoratorThemeInDialogs = true;
+  static const bool defaultUseInputDecoratorThemeInDialogs = false;
 
   // Key used to read and save the adaptiveDialogRadius value.
   static const String keyAdaptiveDialogRadius = 'adaptiveDialogRadius';
