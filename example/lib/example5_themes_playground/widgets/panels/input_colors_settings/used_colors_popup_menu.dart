@@ -87,13 +87,20 @@ class UsedColorsPopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle txtStyle = theme.textTheme.labelLarge!;
+    final TextStyle txtStyle = theme.textTheme.labelMedium!;
     final bool enabled = onChanged != null;
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(
+        // minWidth: 500,
+        // maxWidth: 500,
+        maxHeight: 540,
+      ),
       tooltip: '',
       initialValue: index,
-      position: PopupMenuPosition.under,
       padding: EdgeInsets.zero,
       onSelected: onChanged,
       enabled: enabled,

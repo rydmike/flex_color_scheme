@@ -109,7 +109,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final bool useM3 = theme.useMaterial3;
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle txtStyle = theme.textTheme.labelLarge!;
+    final TextStyle txtStyle = theme.textTheme.labelMedium!;
     final bool enabled = onChanged != null;
     // Negative value, or index over range are used as null and default value.
     final bool useDefault = index < 0 || index >= FlexAppBarStyle.values.length;
@@ -118,6 +118,14 @@ class AppBarStylePopupMenu extends StatelessWidget {
         : _explainAppBarStyle(null, isLight, useM3);
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(
+        // minWidth: 500,
+        // maxWidth: 500,
+        maxHeight: 540,
+      ),
       initialValue: useDefault ? FlexAppBarStyle.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
