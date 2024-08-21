@@ -4552,10 +4552,11 @@ sealed class FlexSubThemes {
     /// Defines which [Theme] based [ColorScheme] based background color
     /// of [NavigationDrawer].
     ///
-    /// If not defined will default to [Drawer] theme
-    /// background color. If it is not defined, then Flutter default uses
-    /// uses surface color as default in M3, and background in M2.
-    /// FCS uses surface in both modes.
+    /// If it is not defined, FCS uses [surfaceContainerLow] color as default in
+    /// both M2 and M3 mode
+    ///
+    /// Flutter SDK default uses [surfaceContainerLow] color as default in M3,
+    /// and [ThemeData.canvasColor]] in M2.
     final SchemeColor? backgroundSchemeColor,
 
     /// Defines the width of [NavigationDrawer]'s indicator.
@@ -4616,8 +4617,8 @@ sealed class FlexSubThemes {
     // final bool tintInteract = useTintedInteraction ?? true;
 
     // Get selected background color, defaults to surface.
-    final Color backgroundColor =
-        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color backgroundColor = schemeColor(
+        backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme);
     final Color onBackGroundColorFallback = schemeColorPair(
         backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
     final Color onBackgroundColor = unselectedItemSchemeColor != null
