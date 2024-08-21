@@ -2306,9 +2306,12 @@ sealed class FlexSubThemes {
     /// Selects which color from the passed in [colorScheme] to use as
     /// [Drawer] background color.
     ///
-    /// If not defined, defaults to [SchemeColor.surface]. Flutter
-    /// SDK uses surface color as default in M3, and background in M2.
-    /// FCS uses surface in both modes.
+    /// If not defined, defaults to [SchemeColor.surfaceContainerLow]. Flutter
+    /// SDK uses surfaceContainerLow color as default in M3, and ThemeData's
+    /// canvasColor (which is Colors.grey[50] in light mode and
+    /// Colors.grey[850] in dark mode) in M2 mode.
+    ///
+    /// FCS uses surfaceContainerLow in both modes.
     final SchemeColor? backgroundSchemeColor,
 
     /// Corner radius of the [Drawer]'s visible edge.
@@ -2354,8 +2357,8 @@ sealed class FlexSubThemes {
   }) {
     final bool useM3 = useMaterial3 ?? true;
     // Get selected background color, defaults to surface.
-    final Color backgroundColor =
-        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+    final Color backgroundColor = schemeColor(
+        backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme);
 
     return DrawerThemeData(
       backgroundColor: backgroundColor,

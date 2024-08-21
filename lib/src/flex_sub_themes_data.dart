@@ -2489,7 +2489,10 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines the width of [Drawer] and [NavigationDrawer].
   ///
   /// If not defined, defaults to 304dp via Flutter SDK defaults for M2, for
-  /// [Drawer] widget. M3 spec has it at 360dp for [NavigationDrawer].
+  /// [Drawer] widget. M3 spec has it at 360dp for [NavigationDrawer], but
+  /// Flutter still uses 304dp as default in M3 mode.
+  ///
+  /// For more info see issue: https://github.com/flutter/flutter/issues/123380
   final double? drawerWidth;
 
   /// Defines the width of [NavigationDrawer]'s indicator.
@@ -2499,7 +2502,7 @@ class FlexSubThemesData with Diagnosticable {
   /// M3 padding spec around the indicator.
   ///
   /// If not defined, and [drawerWidth] is not defined it defaults to 336dp
-  /// via Flutter SDK defaults for M3/M2. The 336dp width values is derived
+  /// via Flutter SDK defaults for M3/M2. The 336dp width value is derived
   /// from the M3 padding spec of 12dp around both sides of the indicator.
   final double? drawerIndicatorWidth;
 
