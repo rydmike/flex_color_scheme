@@ -179,8 +179,14 @@ const double kNavigationDrawerM2Width = 304;
 
 /// The width of a Material 3 Drawer.
 ///
-/// From M3 spec https://m3.material.io/components/navigation-drawer/specs
-const double kNavigationDrawerM3Width = 360;
+/// The M3 spec https://m3.material.io/components/navigation-drawer/specs
+/// says the width should 360dp, but Flutter still uses M2 spec 304dp as
+/// default width.
+///
+/// FCS v8.0.0 was revised to default to 304 M2 width in M3 mode as well.
+/// Using 360dp is actually a bit too wide for most phones.
+/// For more info see issue: https://github.com/flutter/flutter/issues/123380
+const double kNavigationDrawerM3Width = kNavigationDrawerM2Width;
 
 /// The edge padding on start and end side of the indicator of
 /// the indicator in a Material 3 Drawer.

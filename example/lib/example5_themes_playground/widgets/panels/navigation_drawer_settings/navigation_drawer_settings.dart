@@ -66,7 +66,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.drawerBackgroundSchemeColor!).index].name})';
 
     final double derivedIndicatorWidth =
-        (controller.drawerWidth ?? (useMaterial3 ? 360 : 304)) - 2 * 12;
+        (controller.drawerWidth ?? (useMaterial3 ? 304 : 304)) - 2 * 12;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,10 +94,10 @@ class NavigationDrawerSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: controller.useFlexColorScheme
-              ? 'default (surface)'
+              ? 'default (surfaceContainerLow)'
               : useMaterial3
-                  ? 'default (surface)'
-                  : 'default (background)',
+                  ? 'default (surfaceContainerLow)'
+                  : 'default (ThemeData.canvasColor)',
           index: controller.drawerBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -230,7 +230,7 @@ class NavigationDrawerSettings extends StatelessWidget {
                 ? controller.drawerWidth == null ||
                         (controller.drawerWidth ?? 199) < 200
                     ? useMaterial3
-                        ? 'default 360'
+                        ? 'default 304'
                         : 'default 304'
                     : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
                 : useMaterial3
@@ -260,7 +260,7 @@ class NavigationDrawerSettings extends StatelessWidget {
                       ? controller.drawerWidth == null ||
                               (controller.drawerWidth ?? 199) < 200
                           ? useMaterial3
-                              ? 'default 360'
+                              ? 'default 304'
                               : 'default 304'
                           : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
                       : useMaterial3
@@ -290,18 +290,20 @@ class NavigationDrawerSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' it should be 360dp wide, while Material-2 is '
-                      '304dp in Flutter. '
+                  text: ' it should be 360 dp wide, while Material-2 is '
+                      '304 dp in Flutter. '
                       'Due to a bug in Flutter, it defaults to 304 dp in both '
-                      'modes in Flutter 3.7 and 3.10. '
-                      'FCS corrects this spec deviation in its defaults.\n'
+                      'modes in Flutter, at least up to version 3.24.\n'
                       '\n'
-                      'Please note that a 360 dp wide Drawer may be too wide '
+                      'FCS before version 8.0 corrected this spec deviation in '
+                      'its defaults, but version 8.0 now follows the Flutter '
+                      'SDK value of 304 dp in Material-3 mode as well.\n'
+                      '\n'
+                      'It does so because a 360 dp wide Drawer may be too wide '
                       'for smaller or older phones and the Drawer may '
-                      'cover the entire width of the phone. This may not be '
-                      'desired, if so adjust the width down. The 304 dp M2 '
-                      'spec width is not a bad choice in M3 either, maybe a '
-                      'bit wider but below 360dp. Please see ',
+                      'cover the entire width of the phone. This is not '
+                      'desired. The 304 dp M2 spec width is not a bad choice '
+                      'in M3 either. Please see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
