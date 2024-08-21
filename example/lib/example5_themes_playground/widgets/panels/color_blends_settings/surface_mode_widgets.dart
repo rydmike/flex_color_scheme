@@ -153,6 +153,14 @@ class SurfaceModePopupMenu extends StatelessWidget {
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(
+        // minWidth: 500,
+        // maxWidth: 500,
+        maxHeight: 540,
+      ),
       initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
@@ -195,7 +203,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
                 ),
                 subtitle: Text(
                   '(${FlexSurfaceMode.values[i].name})',
-                  style: txtStyle.copyWith(fontSize: 8.0),
+                  style: txtStyle.copyWith(fontSize: 9.0),
                 ),
               ),
             )

@@ -85,7 +85,7 @@ class TabBarStylePopupMenu extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useM3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
-    final TextStyle txtStyle = theme.textTheme.labelLarge!;
+    final TextStyle txtStyle = theme.textTheme.labelMedium!;
     final bool enabled = onChanged != null;
     // Negative value, or index over range are used as null and default value.
     final bool useDefault =
@@ -99,6 +99,14 @@ class TabBarStylePopupMenu extends StatelessWidget {
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(
+        // minWidth: 500,
+        // maxWidth: 500,
+        maxHeight: 540,
+      ),
       initialValue: useDefault ? FlexTabBarStyle.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,

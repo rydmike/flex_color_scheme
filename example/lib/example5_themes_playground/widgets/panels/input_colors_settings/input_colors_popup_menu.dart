@@ -33,6 +33,14 @@ class InputColorsPopupMenu extends StatelessWidget {
     final ColorScheme scheme = theme.colorScheme;
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(
+        // minWidth: 500,
+        // maxWidth: 500,
+        maxHeight: 540,
+      ),
       tooltip: '',
       initialValue: controller.schemeIndex,
       padding: EdgeInsets.zero,

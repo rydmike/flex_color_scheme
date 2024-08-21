@@ -305,7 +305,6 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       onHover: (bool value) {
         onHover?.call(value);
       },
-      hoverColor: Colors.transparent,
       onTap: enabled
           ? () async {
               // ignore: use_build_context_synchronously

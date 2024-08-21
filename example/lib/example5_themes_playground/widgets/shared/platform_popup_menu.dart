@@ -48,7 +48,7 @@ class PlatformPopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final Color iconColor = theme.colorScheme.primary;
-    final TextStyle txtStyle = theme.textTheme.labelLarge!;
+    final TextStyle txtStyle = theme.textTheme.labelMedium!;
 
     String subtitle;
     String platformLabel;
@@ -69,6 +69,14 @@ class PlatformPopupMenu extends StatelessWidget {
     final bool enabled = onChanged != null;
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(
+        // minWidth: 500,
+        // maxWidth: 500,
+        maxHeight: 540,
+      ),
       enabled: enabled,
       tooltip: '',
       padding: const EdgeInsets.all(10),
