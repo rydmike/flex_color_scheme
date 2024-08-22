@@ -1265,7 +1265,7 @@ class Store {
   // Key used to read and save the navigationRailOpacity value.
   static const String keyNavRailOpacity = 'navRailOpacity';
   // Default value for the navigationRailOpacity, also to reset settings.
-  static const double defaultNavRailOpacity = 1.0;
+  static const double? defaultNavRailOpacity = null;
 
   // Key used to read and save the navigationRailElevation value.
   static const String keyNavRailElevation = 'navigationRailElevation';
@@ -1293,14 +1293,14 @@ class Store {
   // Key used to read and save the navRailMuteUnselected value.
   static const String keyNavRailMuteUnselected = 'navRailMuteUnselected';
   // Default value for the navRailMuteUnselected, also used to reset settings.
-  static const bool defaultNavRailMuteUnselected = true;
+  static const bool defaultNavRailMuteUnselected = false;
 
   // Key used to read and save the navRailLabelType value.
   static const String keyNavRailLabelType = 'navRailLabelType';
   // Default value for the navRailLabelType, also used to
   // reset settings.
   static const NavigationRailLabelType defaultNavRailLabelType =
-      NavigationRailLabelType.all;
+      NavigationRailLabelType.none;
 
   // Key used to read and save the navRailUseIndicator value.
   static const String keyNavRailUseIndicator = 'navRailUseIndicator';

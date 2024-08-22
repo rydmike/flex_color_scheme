@@ -4746,60 +4746,49 @@ sealed class FlexSubThemes {
 
     /// Optional text style for the [NavigationRail] labels.
     ///
-    /// If [useFlutterDefaults] is false, the text style
-    /// [ThemeData.textTheme.labelMedium] will be used as base style for
-    /// the text style.
-    ///
-    /// If [useFlutterDefaults] is true, null will be passed to
-    /// [FlexSubThemes.navigationRailTheme] and along to theme creation, if all
-    /// labeling modifying properties (size and scheme color) are also null, it
-    /// will then be passed along as null, allowing it to remain undefined
-    /// and widget default behavior sets the default. If label size or scheme
-    /// is defined, a default TextStyle() will be created, if
-    /// [navigationRailLabelTextStyle] is undefined, that gets the requested
-    /// size and color applied.
-    ///
     /// The size and colors defined in any of the text size and color properties
-    /// are applied as overrides on the text style.
+    /// are applied as overrides on this text style.
     final TextStyle? labelTextStyle,
 
     /// The size of the text label on selected [NavigationRail] item.
     ///
     /// If defined, it overrides the font size on effective label TextStyle
-    /// on selected item, 12 is used as fallback if needed.
+    /// on selected item.
+    ///
+    /// If not defined, defaults to 12.
+    ///
+    /// This is the same size as default labelMedium in the text theme.
+    /// FCS uses this for both M2 and M3 mode. Flutter SDK uses 12 in M3 and
+    /// 16 in M23 from its bodyLarge text theme.
     final double? selectedLabelSize,
 
     /// The size of the text label on unselected [NavigationRail] items.
     ///
     /// If defined, it overrides the font size on effective label TextStyle
-    /// on unselected items, 12 is used as fallback if needed.
+    /// on selected item.
+    ///
+    /// If not defined, defaults to 12.
+    ///
+    /// This is the same size as default labelMedium in the text theme.
+    /// FCS uses this for both M2 and M3 mode. Flutter SDK uses 12 in M3 and
+    /// 16 in M23 from its bodyLarge text theme.
     final double? unselectedLabelSize,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationRail]'s selected label text color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If undefined, defaults to [SchemeColor.onSurface].
     ///
-    /// If undefined, defaults to [SchemeColor.primary].
-    ///
-    /// If [useFlutterDefaults] is true, and this property and all other
-    /// label modifying properties are undefined, including the text style,
-    /// the effective color will be [ColorScheme.primary] in M2 and
-    /// [ColorScheme.onSurface] in M3.
+    /// Flutter M2 default is primary, M3 default is onSurface.
     final SchemeColor? selectedLabelSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationRails]'s unselected label text color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If undefined, defaults to [SchemeColor.onSurface].
     ///
-    /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-    /// blend and opacity, if [mutedUnselectedLabel] is true.
-    ///
-    /// If [useFlutterDefaults] is true, and this property and all other
-    /// label modifying properties are undefined, including the text style,
-    /// the effective color will be [ColorScheme.onSurface] with opacity 64% in
-    /// M2 and [ColorScheme.onSurface] in M3.
+    /// Flutter M2 default is onSurface with opacity 0.64,
+    /// M3 default is onSurface.
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// If true, the unselected label in the [NavigationRail] use a more
@@ -4808,12 +4797,14 @@ sealed class FlexSubThemes {
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to true.
+    /// If undefined, defaults to false.
     final bool? mutedUnselectedLabel,
 
     /// The size of the icon on selected [NavigationRail] item.
     ///
     /// If undefined, it defaults to 24.
+    ///
+    /// Flutter M2 and M3 defaults are 24.
     final double? selectedIconSize,
 
     /// The size of the icon on unselected [NavigationRail] items.
@@ -4824,14 +4815,9 @@ sealed class FlexSubThemes {
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationRail]'s selected item icon color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If undefined, defaults to [SchemeColor.onSecondaryContainer].
     ///
-    /// If undefined, defaults to [SchemeColor.primary].
-    ///
-    /// If [useFlutterDefaults] is true, and this property and all other
-    /// icon modifying properties are undefined, the effective color will
-    /// also be [ColorScheme.primary] in M2 and
-    /// [ColorScheme.onSecondaryContainer] in M3.
+    /// Flutter M2 default is primary, M3 default is onSecondaryContainer.
     final SchemeColor? selectedIconSchemeColor,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
@@ -4839,23 +4825,22 @@ sealed class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-    /// blend and opacity,if [navigationRailMutedUnselectedLabel] is true.
+    /// If undefined, defaults to [SchemeColor.onSurfaceVariant],
+    /// adds an alpha blend and opacity,
+    /// if [navigationRailMutedUnselectedLabel] is true.
     ///
-    /// If [useFlutterDefaults] is true, and this property and all other
-    /// icon modifying properties are undefined,
-    /// the effective color will be [ColorScheme.onSurface] with 64% opacity
-    /// in M2 and [ColorScheme.onSurfaceVariant] in M3.
+    /// Flutter M2 default is primary, M3 default is onSecondaryContainer.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [NavigationRail] use a more muted
     /// color version of the color defined by
     /// [navigationBarUnselectedIconSchemeColor].
+    ///
     /// The muting is unselected color with
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to true.
+    /// If undefined, defaults to false.
     final bool? mutedUnselectedIcon,
 
     /// Whether or not the selected [NavigationRail] item should include a
@@ -4864,15 +4849,7 @@ sealed class FlexSubThemes {
     /// If `true`, adds a rounded [NavigationIndicator] behind the selected
     /// destination's icon.
     ///
-    /// The indicator's shape will be circular if [labelType] is
-    /// [NavigationRailLabelType.none], or a [StadiumBorder] if [labelType] is
-    /// [NavigationRailLabelType.all] or [NavigationRailLabelType.selected].
-    ///
-    /// If `undefined`, defaults to [NavigationRailThemeData.useIndicator].
-    /// If that is also undefined, then it defaults to [ThemeData.useMaterial3].
-    ///
-    /// Defaults to true. Can be set to null and then uses above default
-    /// widget behavior.
+    /// Defaults to true.
     final bool? useIndicator,
 
     /// Select which color from the theme [ColorScheme] to use as base for
@@ -4880,12 +4857,9 @@ sealed class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If undefined, defaults to [SchemeColor.primary], additionally
-    /// a default [navigationBarIndicatorOpacity] is applied.
+    /// If undefined, defaults to [SchemeColor.secondaryContainer].
     ///
-    /// If [useFlutterDefaults] true, and this property is undefined,
-    /// the effective background color will also be [ColorScheme.secondary]
-    /// with opacity 24% in M2 and [ColorScheme.secondaryContainer] in M3.
+    /// Flutter defaults to secondary in M2 and to secondaryContainer in M3.
     final SchemeColor? indicatorSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as background
@@ -4893,20 +4867,7 @@ sealed class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If undefined, defaults to [SchemeColor.background].
-    ///
-    /// If [useFlutterDefaults] true, and this property is undefined,
-    /// the effective background color will be [ColorScheme.surface].
-    ///
-    /// FlexColorScheme sets background defaults of [NavigationRail],
-    /// [NavigationBar] and [BottomNavigationBar] to [ColorScheme.background]
-    /// when it using opinionated component sub-themes.
-    /// Flutter SDK uses different colors on all three widgets. Our opinion is
-    /// that they should all default to using the same [ColorScheme] based
-    /// color. FlexColorScheme uses and recommends background color as this
-    /// default. The [ColorScheme.background] was chosen as it is the same that
-    /// the Drawer uses as well, so when using tinted backgrounds where surface
-    /// and background are different, they will still match.
+    /// If undefined, defaults to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
     /// NavigationRail background opacity.
@@ -4917,6 +4878,8 @@ sealed class FlexSubThemes {
     /// [NavigationRail] elevation.
     ///
     /// If undefined, defaults to [kNavigationRailElevation] = 0.
+    ///
+    /// This is default for Flutter SDK in both M2 and M3 mode as well.
     final double? elevation,
 
     /// Defines the layout and behavior of the labels for the
@@ -4932,9 +4895,6 @@ sealed class FlexSubThemes {
     /// When a navigation rail is [extended], the labels are always shown.
     ///
     /// If null, then the default behavior [NavigationRailLabelType.none].
-    ///
-    /// FlexColorScheme uses [NavigationRailLabelType.all] as default when it
-    /// uses this sub-theme.
     final NavigationRailLabelType? labelType,
 
     /// The vertical alignment for the group of [destinations] within the
@@ -4997,15 +4957,26 @@ sealed class FlexSubThemes {
     /// needed later.
     final int unselectedAlpha = kUnselectedAlphaBlend,
 
+    /// Overrides the default value of [NavigationRail]'s minimum width when it
+    /// is not extended.
+    ///
+    /// If not defined, defaults to M3 spec default value 80 dp.
+    ///
+    /// Flutter SDK uses 72 in M2 mode and 80 dp in M3 mode.
+    final double? minWidth,
+
+    /// Overrides the default value of [NavigationRail]'s minimum width when it
+    /// is extended.
+    ///
+    /// If not defined, defaults to M3 spec default value 256 dp.
+    ///
+    /// Flutter M2 and M3 use 256 dp as default.
+    final double? minExtendedWidth,
+
     /// A temporary flag used to opt-in to new Material 3 features.
     ///
     /// Use Material3 default style when properties are undefined and Flutter
     /// defaults are requested with `useFlutterDefaults` property.
-    ///
-    /// Defaults will still use FlexColorScheme's own opinionated
-    /// defaults values, unless `useFlutterDefaults` is also set to true. In
-    /// that case the Material 3 default will be used if `useMaterial3` is true,
-    /// and Material 2 defaults will be used if it is false.
     ///
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
@@ -5061,18 +5032,22 @@ sealed class FlexSubThemes {
         selectedLabelSize == null &&
         unselectedLabelSize == null &&
         selectedLabelSchemeColor == null &&
-        unselectedLabelSchemeColor == null;
+        unselectedLabelSchemeColor == null &&
+        !(mutedUnselectedLabel ?? false) &&
+        useM3;
 
     // Determine if we can even use default icon styles, only when all are null,
     // can we fall back to Flutter SDK default.
     final bool useDefaultIconTheme = selectedIconSize == null &&
         unselectedIconSize == null &&
         selectedIconSchemeColor == null &&
-        unselectedIconSchemeColor == null;
+        unselectedIconSchemeColor == null &&
+        !(mutedUnselectedIcon ?? false) &&
+        useM3;
 
-    // Get text color, defaults to primary.
+    // Get text color, defaults to onSurface.
     final Color labelColor = selectedLabelSchemeColor == null
-        ? colorScheme.primary
+        ? colorScheme.onSurface
         : schemeColor(selectedLabelSchemeColor, colorScheme);
 
     // Get unselected label color, defaults to onSurface.
@@ -5089,14 +5064,14 @@ sealed class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? labelSize;
 
-    // Get icon color, defaults to primary.
+    // Get icon color, defaults to onSecondaryContainer.
     final Color iconColor = selectedIconSchemeColor == null
-        ? colorScheme.primary
+        ? colorScheme.onSecondaryContainer
         : schemeColor(selectedIconSchemeColor, colorScheme);
 
-    // Get unselected icon color, defaults to onSurface.
+    // Get unselected icon color, defaults to onSurfaceVariant.
     final Color unselectedIconColor = unselectedIconSchemeColor == null
-        ? colorScheme.onSurface
+        ? colorScheme.onSurfaceVariant
         : schemeColor(unselectedIconSchemeColor, colorScheme);
 
     // Get effective icons sizes.
@@ -5105,32 +5080,29 @@ sealed class FlexSubThemes {
 
     // Effective indicator color.
     final Color effectiveIndicatorColor = schemeColor(
-            indicatorSchemeColor ??
-                (useM3
-                    ? SchemeColor.secondaryContainer
-                    : SchemeColor.secondary),
-            colorScheme)
-        .withAlpha(
-            indicatorAlpha ?? (useM3 ? 0xFF : kNavigationBarIndicatorAlpha));
+            indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme)
+        .withAlpha(indicatorAlpha ?? 0xFF);
 
     // Effective usage value for indicator.
-    final bool effectiveUseIndicator =
-        (useM3 && useIndicator == null) || (useIndicator ?? false);
+    final bool effectiveUseIndicator = useIndicator ?? true;
 
     // Background color, falls back to surfaceContainer.
-    final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme)
-        .withOpacity(opacity ?? 1.0);
+    final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
+            backgroundSchemeColor != SchemeColor.transparent
+        ? schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
+            .withOpacity(opacity ?? 1.0)
+        : schemeColor(
+            backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
     // Property order here as in NavigationRailThemeData
     return NavigationRailThemeData(
-      backgroundColor: backgroundSchemeColor == null ? null : backgroundColor,
+      backgroundColor: backgroundColor,
       elevation: elevation ?? kNavigationRailElevation,
       unselectedLabelTextStyle: useDefaultTextStyle
           ? null
           : textStyle.copyWith(
               fontSize: effectiveUnselectedLabelSize,
-              color: (mutedUnselectedLabel ?? true)
+              color: (mutedUnselectedLabel ?? false)
                   ? unselectedLabelColor
                       .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
@@ -5147,7 +5119,7 @@ sealed class FlexSubThemes {
           : IconThemeData(
               size: effectiveUnselectedIconSize,
               opacity: 1,
-              color: (mutedUnselectedIcon ?? true)
+              color: (mutedUnselectedIcon ?? false)
                   ? unselectedIconColor
                       .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
                       .withAlpha(unselectedAlpha)
@@ -5162,12 +5134,10 @@ sealed class FlexSubThemes {
             ),
       groupAlignment: groupAlignment,
       labelType: labelType,
-      // TODO(rydmike): This hack used to be needed, but is it still in > F3.7?
-      // Logic to avoid SDKs over eager asserts and get same result.
-      useIndicator: true,
-      indicatorColor: effectiveUseIndicator
-          ? effectiveIndicatorColor
-          : Colors.black.withAlpha(0x00),
+      minWidth: minWidth,
+      minExtendedWidth: minExtendedWidth,
+      useIndicator: effectiveUseIndicator,
+      indicatorColor: effectiveIndicatorColor,
       indicatorShape: indicatorRadius == null
           ? null
           : RoundedRectangleBorder(
