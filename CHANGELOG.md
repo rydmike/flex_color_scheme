@@ -127,6 +127,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter SDK defaults. If you had **NOT** configured these values before, they defaulted to `true`. You now have to set them explicitly to `true` to opt-in and get the same results as before, when they were not configured.
 - The `FlexSubThemesData` properties `blendOnColors` now defaults to `false`. In previous versions it defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter defaults. If you had **NOT** configured this values before, it defaulted to `true`. You now have to set it explicitly to `true` to get the same result as before, when it was not configured. Consider setting this property `true` in dark mode, and false in `light` theme mode, for a style that matches the Material-3 color design, when you are not using a seed generated `ColorScheme`. This setting has no effect when using a seed generated `ColorScheme`, as it generates blended/tinted onColors based on the seed algorithm, that overrides the effect of this setting. THis setting only emulates a similar effect for none seeded ColorSchemes.
 
+- TODO: ADD entry about all breaking changes in NavigationRail from its commit! 22.8.2024!
+
 **CHANGE**
 
 - Changed all internal usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.
@@ -270,7 +272,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - ADD: To IconButtons, add a text column explaining the type, as on the Chips panel.
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 - UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
-
+- CHANGE how ALL opacity sliders work! They should ALL work with default (null) color and opacity should be nullable! If Colors it is used on is null, it should use the default and apply opacity on it. It should not be required to select the same color as default and then apply opacity to it. NavigationRail is updated to follow this new pattern. Need bth Playground and in some cases sub-theme update.
 
 ## 7.3.1
 
