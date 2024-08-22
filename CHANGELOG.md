@@ -125,14 +125,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The produced `DrawerTheme` width now defaults to 304 dp in M3 mode. The [official M3 spec is 360 dp](M3 spec https://m3.material.io/components/navigation-drawer/specs), FCS was using it, but Flutter SDK has so far "declined" following the M3 spec on this point and still uses the older default 304 dp M2 spec. This older default is actually a better choice, so FCS has opted to revert to using it as default too. For more information about this and why 304 dp is better, see Flutter [issue #123380](https://github.com/flutter/flutter/issues/123380).  
  
 - The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter SDK defaults. If you had **NOT** configured these values before, they defaulted to `true`. You now have to set them explicitly to `true` to opt-in and get the same results as before, when they were not configured.
-- The `FlexSubThemesData` properties `blendOnColors` now defaults to `false`. In previous versions it defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter defaults. If you had **NOT** configured this values before, it defaulted to `true`. You now have to set it explicitly to `true` to get the same result as before, when it was not configured. Consider setting this property `true` in dark mode, and false in `light` theme mode, for a style that matches the Material-3 color design, when you are not using a seed generated `ColorScheme`. This setting has no effect when using a seed generated `ColorScheme`, as it generates blended/tinted onColors based on the seed algorithm, that overrides the effect of this setting. THis setting only emulates a similar effect for none seeded ColorSchemes.
+- The `FlexSubThemesData` properties `blendOnColors` now defaults to `false`. In previous versions it defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter defaults. If you had **NOT** configured this values before, it defaulted to `true`. You now have to set it explicitly to `true` to get the same result as before, when it was not configured. Consider setting this property `true` in dark mode, and false in `light` theme mode, for a style that matches the Material-3 color design, when you are not using a seed generated `ColorScheme`. This setting has no effect when using a seed generated `ColorScheme`, as it generates blended/tinted onColors based on the seed algorithm, that overrides the effect of this setting. This setting creates a similar effect for none seeded ColorSchemes.
+- The `FlexSubThemesData` properties `navigationRailMutedUnselectedLabel` and `navigationRailMutedUnselectedIcon` now default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and follow M3 design spec by default.
+
 
 - TODO: ADD entry about all breaking changes in NavigationRail from its commit! 22.8.2024!
 
-**CHANGE**
-
-- Changed all internal usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.
-- Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the updated `SchemeColor` and `ColorScheme`.
 
 **NEW**
 
@@ -193,9 +191,16 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Added `fixedColorStyle` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API. The property is an enum `FlexFixedColorStyle` that allows us to choose the style of the generated "fixed" and "fixedDim" colors when not using seed generated color schemes. 
 
-- Improved the theming logic for `Card` theme. 
-  - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for default and null radius value, it lets the widget default behavior do it, so we can keep the outline on `Card.outlined` variant for the default case at least. The Flutter theming limitation and impact are thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
+- Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`.
 
+
+**CHANGE**
+
+- Changed all internal usage of `MaterialStateProperty` and `MaterialState` to use new `WidgetStatePorperty` and `WidgetState` used in **Flutter 3.22** and later.
+- Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the updated `SchemeColor` and `ColorScheme`.
+
+- Improved the theming logic for `Card` theme.
+  - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for for  bot using default and null radius value, it keeps shape null and lets the widget default behavior be used, so we can keep the outline on `Card.outlined` variant for the default case at least. This Flutter theming limitation and impact is thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
 
 **FIX**
  
@@ -244,20 +249,26 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The feature "**Swap secondary and tertiary legacy colors in M3**" on the "**Input Colors**" settings panel is now OFF by default. The settings info expand explains when it is preferable to use it.
 - The feature "**"Use TextField's InputDecorationTheme in picker dialogs**" on the "**Dialog**" settings panel is now OFF by default.
 - Split "**FAB and Chip**" settings panels to separate panels.
-- Modified settings panel background and header colors, as well as theme selector buttons to use the new `ColorScheme` surface theme colors, instead of computing their own shades from theme.
-- Change surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
+- Modified settings panel background and header colors, as well as theme selector buttons to use suitable new `ColorScheme` surface theme colors, instead of computing their own shades from theme colors.
+- Changed surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
 - The component theme settings "Use M2 style divider in M2, "Tinted disabled components" and "Tinted interaction" are now OFF by default, matching the updated `FlexSubThemesData` defaults for these properties.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mode. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 - Update M3 default info for `BottomAppBar` to `surfaceContainer`.
-  
-
+- Improved the `Chip` presentation, by having them in own wraps per type and a column that explains names the Chip type with both Flutter and M3 naming 
+  - Flutter SDK ActionChip = M3 Assist Chip
+  - Flutter SDK FilterChip = M3 Filter Chip
+  - Flutter SDK InputChip = M3 InputChip
+  - Flutter SDK ChoiceChip = M3 Suggestion Chip
+- Improved `IconButton` presentation, by adding a text column explaining the type, as on the Chips panel.
+- Improved presentation of `Switch`, `Checkbox` and `Radio`, by using more orderly columns and spacing and explanation labels, similar style as on `Chip` and `IconButton`.  
+- Changed the style and speed of all popup menus. They are more compact with smaller font, and open under the ListTile you open them from, when there is room to do so. They also have no animation to open quickly and more desktop like, as this app is intended to be used primary on desktop. 
 
 **FIX**
 
 - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
 - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
-- Chore: Update issue resolution status texts for Dialogs.
+- Chore: Updated issue resolution status texts for Dialogs.
 - Fixed that Card was not showing the correct default border radius in M2 mode when using FCS.
 - Fixed that applying dialog elevation in the Playground app's own dark mode theme was missing.
 
@@ -269,7 +280,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Add UI and code gen for dense input decorator.
 - Add UI for content padding on input decorator.
 - Make Chips presentation even better (already improved a lot).
-- ADD: To IconButtons, add a text column explaining the type, as on the Chips panel.
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 - UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
 - CHANGE how ALL opacity sliders work! They should ALL work with default (null) color and opacity should be nullable! If Colors it is used on is null, it should use the default and apply opacity on it. It should not be required to select the same color as default and then apply opacity to it. NavigationRail is updated to follow this new pattern. Need bth Playground and in some cases sub-theme update.
