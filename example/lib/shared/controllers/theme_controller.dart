@@ -1409,23 +1409,23 @@ class ThemeController with ChangeNotifier {
     if (doNotify) notifyListeners();
   }
 
-  /// Set NavigationRail values to Flutter M3 defaults.
-  Future<void> setNavigationRailToM3([bool doNotify = true]) async {
-    setNavRailBackgroundSchemeColor(SchemeColor.surface, false);
-    setNavRailOpacity(1, false);
-    setNavRailElevation(null, false);
-    setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
-    setNavRailIndicatorOpacity(1, false);
-    setNavRailIndicatorBorderRadius(null, false);
-    setNavRailMuteUnselected(false, false);
-    setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
-    setNavRailSelectedLabelSchemeColor(SchemeColor.onSurface, false);
-    setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
-    setNavRailLabelType(NavigationRailLabelType.none, false);
-
-    // Only notify at end, if asked to do so, to do so is default.
-    if (doNotify) notifyListeners();
-  }
+  // /// Set NavigationRail values to Flutter M3 defaults.
+  // Future<void> setNavigationRailToM3([bool doNotify = true]) async {
+  //   setNavRailBackgroundSchemeColor(SchemeColor.surface, false);
+  //   setNavRailOpacity(1, false);
+  //   setNavRailElevation(null, false);
+  //   setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
+  //   setNavRailIndicatorOpacity(1, false);
+  //   setNavRailIndicatorBorderRadius(null, false);
+  //   setNavRailMuteUnselected(false, false);
+  //   setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
+  //   setNavRailSelectedLabelSchemeColor(SchemeColor.onSurface, false);
+  //   setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
+  //   setNavRailLabelType(NavigationRailLabelType.none, false);
+  //
+  //   // Only notify at end, if asked to do so, to do so is default.
+  //   if (doNotify) notifyListeners();
+  // }
 
   /// Set Playground settings and FCS theme to selected premade config.
   Future<void> setToPremade({int settingsId = 0}) async {
@@ -1458,7 +1458,6 @@ class ThemeController with ChangeNotifier {
       await setTextFieldToM3(false);
       // Set Navigators to M3
       await setNavigationBarToM3(false);
-      await setNavigationRailToM3(false);
       // Set tooltip to M3 like
       setTooltipRadius(4, false);
       setTooltipOpacity(0.9, false);
@@ -4254,10 +4253,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavRailBackgroundSchemeColor, value));
   }
 
-  late double _navRailOpacity;
-  double get navRailOpacity => _navRailOpacity;
+  late double? _navRailOpacity;
+  double? get navRailOpacity => _navRailOpacity;
   void setNavRailOpacity(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _navRailOpacity) return;
     _navRailOpacity = value;
     if (notify) notifyListeners();

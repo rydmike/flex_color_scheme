@@ -3056,7 +3056,7 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to true.
+  /// If undefined, defaults to false.
   final bool? navigationRailMutedUnselectedLabel;
 
   /// The size of the icon on selected [NavigationRail] item.
@@ -3103,7 +3103,7 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to true.
+  /// If undefined, defaults to false.
   final bool? navigationRailMutedUnselectedIcon;
 
   /// Whether or not the selected [NavigationRail] item should include a

@@ -1211,8 +1211,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailBackgroundSchemeColor: ${controller.navRailBackgroundSchemeColor},\n'
       : '';
   final String navigationRailOpacity = controller.navRailOpacity != 1 &&
+          controller.navRailOpacity != null &&
           !(controller.navRailBackgroundSchemeColor == null)
-      ? '    navigationRailOpacity: ${controller.navRailOpacity.toStringAsFixed(2)},\n'
+      ? '    navigationRailOpacity: ${controller.navRailOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationRailElevation = controller.navRailElevation != null &&
           controller.navRailElevation != 0
