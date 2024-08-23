@@ -22,7 +22,6 @@ class NavigationBarSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final bool useMaterial3 = theme.useMaterial3;
 
     // Logic for default elevation label.
     final String elevationDefaultLabel = controller.navBarElevation == null
