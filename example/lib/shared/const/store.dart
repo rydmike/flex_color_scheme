@@ -1025,7 +1025,7 @@ class Store {
   static const String keyBottomNavigationBarOpacity =
       'bottomNavigationBarOpacity';
   // Default value for the bottomNavigationBarOpacity, also to reset settings.
-  static const double defaultBottomNavigationBarOpacity = 1.0;
+  static const double? defaultBottomNavigationBarOpacity = null;
 
   // Key used to read and save the bottomNavigationBarElevation value.
   static const String keyBottomNavigationBarElevation =
