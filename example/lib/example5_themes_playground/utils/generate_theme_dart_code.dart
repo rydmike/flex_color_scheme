@@ -957,9 +957,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedLabel = controller
-              .bottomNavBarMuteUnselected ||
-          (controller.bottomNavBarSelectedSchemeColor == null &&
-              controller.bottomNavBarUnselectedSchemeColor == null)
+          .bottomNavBarMuteUnselected
       ? ''
       : '    bottomNavigationBarMutedUnselectedLabel: ${controller.bottomNavBarMuteUnselected},\n';
   final String bottomNavigationBarSelectedIconSchemeColor = controller
@@ -973,9 +971,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedIcon = controller
-              .bottomNavBarMuteUnselected ||
-          (controller.bottomNavBarSelectedSchemeColor == null &&
-              controller.bottomNavBarUnselectedSchemeColor == null)
+          .bottomNavBarMuteUnselected
       ? ''
       : '    bottomNavigationBarMutedUnselectedIcon: ${controller.bottomNavBarMuteUnselected},\n';
   final String bottomNavigationBarBackgroundSchemeColor = controller
@@ -986,8 +982,8 @@ String generateThemeDartCode(ThemeController controller) {
   final String bottomNavigationBarOpacity = controller
                   .bottomNavigationBarOpacity !=
               1 &&
-          !(controller.bottomNavBarBackgroundSchemeColor == null)
-      ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity.toStringAsFixed(2)},\n'
+          controller.bottomNavigationBarOpacity != null
+      ? '    bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String bottomNavigationBarElevation = controller
                   .bottomNavigationBarElevation !=
@@ -1207,8 +1203,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailBackgroundSchemeColor: ${controller.navRailBackgroundSchemeColor},\n'
       : '';
   final String navigationRailOpacity = controller.navRailOpacity != 1 &&
-          controller.navRailOpacity != null &&
-          !(controller.navRailBackgroundSchemeColor == null)
+          controller.navRailOpacity != null
       ? '    navigationRailOpacity: ${controller.navRailOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationRailElevation = controller.navRailElevation != null &&

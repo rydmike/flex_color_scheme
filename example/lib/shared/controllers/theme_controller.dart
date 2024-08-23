@@ -1409,24 +1409,6 @@ class ThemeController with ChangeNotifier {
     if (doNotify) notifyListeners();
   }
 
-  // /// Set NavigationRail values to Flutter M3 defaults.
-  // Future<void> setNavigationRailToM3([bool doNotify = true]) async {
-  //   setNavRailBackgroundSchemeColor(SchemeColor.surface, false);
-  //   setNavRailOpacity(1, false);
-  //   setNavRailElevation(null, false);
-  //   setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
-  //   setNavRailIndicatorOpacity(1, false);
-  //   setNavRailIndicatorBorderRadius(null, false);
-  //   setNavRailMuteUnselected(false, false);
-  //   setNavRailSelectedIconSchemeColor(SchemeColor.onSurface, false);
-  //   setNavRailSelectedLabelSchemeColor(SchemeColor.onSurface, false);
-  //   setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
-  //   setNavRailLabelType(NavigationRailLabelType.none, false);
-  //
-  //   // Only notify at end, if asked to do so, to do so is default.
-  //   if (doNotify) notifyListeners();
-  // }
-
   /// Set Playground settings and FCS theme to selected premade config.
   Future<void> setToPremade({int settingsId = 0}) async {
     //
@@ -3848,10 +3830,9 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyBottomNavBarBackgroundSchemeColor, value));
   }
 
-  late double _bottomNavigationBarOpacity;
-  double get bottomNavigationBarOpacity => _bottomNavigationBarOpacity;
+  late double? _bottomNavigationBarOpacity;
+  double? get bottomNavigationBarOpacity => _bottomNavigationBarOpacity;
   void setBottomNavigationBarOpacity(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _bottomNavigationBarOpacity) return;
     _bottomNavigationBarOpacity = value;
     if (notify) notifyListeners();
