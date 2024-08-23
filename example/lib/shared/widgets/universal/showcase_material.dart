@@ -5105,6 +5105,7 @@ class CardShowcase extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const CardTypesShowcase(cardWidth: 130),
+            const SizedBox(height: 8),
             if (explain)
               Padding(
                 padding:
