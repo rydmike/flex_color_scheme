@@ -790,7 +790,9 @@ sealed class FlexSubThemes {
     /// See [Material.surfaceTintColor] for more details.
     final Color? surfaceTintColor,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -1447,7 +1449,9 @@ sealed class FlexSubThemes {
     /// if needed it can be exposed. Feel free to make a PR or submit an issue.
     final Clip clipBehavior = Clip.antiAlias,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -1533,7 +1537,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -1836,7 +1842,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -2343,7 +2351,9 @@ sealed class FlexSubThemes {
     /// added later.
     final double? width,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -2526,7 +2536,9 @@ sealed class FlexSubThemes {
     /// also defined.
     final InteractiveInkFeatureFactory? splashFactory,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -2832,7 +2844,9 @@ sealed class FlexSubThemes {
     /// also defined.
     final InteractiveInkFeatureFactory? splashFactory,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -3044,7 +3058,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedInteraction,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -3415,7 +3431,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? tintedDisabled,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -4362,18 +4380,9 @@ sealed class FlexSubThemes {
     /// needed later.
     final int unselectedAlpha = kUnselectedAlphaBlend,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
-    ///
-    /// Use Material3 default style when properties are undefined and Flutter
-    /// defaults are requested with `useFlutterDefaults` property.
-    ///
-    /// This setting will override the default undefined background color, from
-    /// background color to surface with primary overlay at elevation 3.
-    ///
-    /// Other defaults will still use FlexColorScheme's own opinionated
-    /// defaults values, unless `useFlutterDefaults` is also set to true. In
-    /// that case the Material 3 default will be used if `useMaterial3` is true,
-    /// and Material 2 defaults will be used if it is false.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
@@ -4793,9 +4802,16 @@ sealed class FlexSubThemes {
 
     /// If true, the unselected label in the [NavigationRail] use a more
     /// muted color version of the color defined by
-    /// [unselectedLabelSchemeColor]. The muting is unselected color with
-    /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
-    /// and withAlpha([kUnselectedAlphaBlend]).
+    /// [unselectedLabelSchemeColor].
+    ///
+    /// The "muting" is done by using unselected [unselectedLabelSchemeColor]
+    /// color and applying:
+    ///
+    /// .blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+    ///
+    /// on on it
+    ///
+    /// .withAlpha([kUnselectedAlphaBlend]).
     ///
     /// If undefined, defaults to false.
     final bool? mutedUnselectedLabel,
@@ -4825,20 +4841,23 @@ sealed class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurfaceVariant],
-    /// adds an alpha blend and opacity,
-    /// if [navigationRailMutedUnselectedLabel] is true.
+    /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
     ///
-    /// Flutter M2 default is primary, M3 default is onSecondaryContainer.
+    /// Flutter M2 default is onSurface, M3 default is onSurfaceVariant.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [NavigationRail] use a more muted
     /// color version of the color defined by
     /// [navigationBarUnselectedIconSchemeColor].
     ///
-    /// The muting is unselected color with
-    /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
-    /// and withAlpha([kUnselectedAlphaBlend]).
+    /// The "muting" is done by using unselected [unselectedIconSchemeColor]
+    /// color and applying:
+    ///
+    /// .blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+    ///
+    /// on on it
+    ///
+    /// .withAlpha([kUnselectedAlphaBlend]).
     ///
     /// If undefined, defaults to false.
     final bool? mutedUnselectedIcon,
@@ -4850,6 +4869,8 @@ sealed class FlexSubThemes {
     /// destination's icon.
     ///
     /// Defaults to true.
+    ///
+    /// In Flutter defaults, the default is true in M3 and false in M2.
     final bool? useIndicator,
 
     /// Select which color from the theme [ColorScheme] to use as base for
@@ -4879,7 +4900,7 @@ sealed class FlexSubThemes {
     ///
     /// If undefined, defaults to [kNavigationRailElevation] = 0.
     ///
-    /// This is default for Flutter SDK in both M2 and M3 mode as well.
+    /// Elevation 0 is default for Flutter SDK in both M2 and M3 mode as well.
     final double? elevation,
 
     /// Defines the layout and behavior of the labels for the
@@ -4894,7 +4915,7 @@ sealed class FlexSubThemes {
     ///
     /// When a navigation rail is [extended], the labels are always shown.
     ///
-    /// If null, then the default behavior [NavigationRailLabelType.none].
+    /// If null, then the default behavior is [NavigationRailLabelType.none].
     final NavigationRailLabelType? labelType,
 
     /// The vertical alignment for the group of [destinations] within the
@@ -4973,10 +4994,9 @@ sealed class FlexSubThemes {
     /// Flutter M2 and M3 use 256 dp as default.
     final double? minExtendedWidth,
 
-    /// A temporary flag used to opt-in to new Material 3 features.
-    ///
-    /// Use Material3 default style when properties are undefined and Flutter
-    /// defaults are requested with `useFlutterDefaults` property.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// The M2/M3 SDK defaults will only be used for properties that are not
     /// defined, if defined they keep their defined values.
@@ -5021,7 +5041,7 @@ sealed class FlexSubThemes {
     @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
         'future version. FlexColorScheme in M3 mode now defaults to using '
         'Flutter defaults. For other configurations modify them as desired. '
-        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+        'In M2 mode FCS uses its opinionated defaults as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
     final bool useM3 = useMaterial3 ?? true;
@@ -5242,7 +5262,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -5550,7 +5572,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -5767,7 +5791,9 @@ sealed class FlexSubThemes {
     /// used instead.
     final WidgetStateProperty<TextStyle?>? textStyle,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -6037,7 +6063,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -6357,7 +6385,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useCupertinoStyle,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -6721,7 +6751,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedInteraction,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -6871,7 +6903,9 @@ sealed class FlexSubThemes {
     /// also defined.
     final InteractiveInkFeatureFactory? splashFactory,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -7125,7 +7159,9 @@ sealed class FlexSubThemes {
     /// [TextTheme.headline3].
     final TextStyle? hourMinuteTextStyle,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's
@@ -7454,7 +7490,9 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
-    /// A temporary flag used to opt-in to Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// If set to true, the theme will use Material3 default styles when
     /// properties are undefined, if false defaults will use FlexColorScheme's

@@ -1107,7 +1107,9 @@ class FlexColorScheme with Diagnosticable {
   /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
   final FlexSubThemesData? subThemesData;
 
-  /// A temporary flag used to opt-in to new SDK Material 3 features.
+  /// A temporary flag used to disable Material-3 design and use legacy
+  /// Material-2 design instead. Material-3 design is the default.
+  /// Material-2 will be deprecated in Flutter.
   ///
   /// Flutter SDK [useMaterial3] documentation:
   /// --------------------------------------------------------
@@ -2505,7 +2507,9 @@ class FlexColorScheme with Diagnosticable {
     /// can be overridden using attributes of this [cupertinoOverrideTheme].
     final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
 
-    /// A temporary flag used to opt-in to new SDK Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
@@ -4579,7 +4583,9 @@ class FlexColorScheme with Diagnosticable {
     /// can be overridden using attributes of this [cupertinoOverrideTheme].
     final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
 
-    /// A temporary flag used to opt-in to new SDK Material 3 features.
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
     ///
     /// Flutter SDK [useMaterial3] documentation:
     /// --------------------------------------------------------
