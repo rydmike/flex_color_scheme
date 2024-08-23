@@ -7642,7 +7642,6 @@ class FlexColorScheme with Diagnosticable {
                   : null,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
-              useMaterial3: useMaterial3,
               surfaceTintColor: removeNavBarTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
             )
@@ -7706,7 +7705,6 @@ class FlexColorScheme with Diagnosticable {
               indicatorRadius: subTheme.navigationRailIndicatorRadius,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
-              useMaterial3: useMaterial3,
             )
           : null,
       //
