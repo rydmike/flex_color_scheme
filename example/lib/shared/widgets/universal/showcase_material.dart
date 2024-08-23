@@ -2064,7 +2064,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
   bool filterSelected = true;
   bool inputSelected = true;
   bool choiceSelected = true;
-  bool showCheckmark = false;
+  bool showCheckmark = true;
   bool showAvatar = false;
 
   @override

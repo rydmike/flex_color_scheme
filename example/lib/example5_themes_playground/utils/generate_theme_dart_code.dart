@@ -1163,11 +1163,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailUnselectedLabelSchemeColor: ${controller.navRailUnselectedSchemeColor},\n'
       : '';
   final String navigationRailMutedUnselectedLabel = controller
-              .navRailMuteUnselected ||
-          (controller.navRailSelectedIconSchemeColor == null &&
-              controller.navRailUnselectedSchemeColor == null)
-      ? ''
-      : '    navigationRailMutedUnselectedLabel: ${controller.navRailMuteUnselected},\n';
+          .navRailMuteUnselected
+      ? '    navigationRailMutedUnselectedLabel: ${controller.navRailMuteUnselected},\n'
+      : '';
   final String navigationRailSelectedIconSchemeColor = controller
               .navRailSelectedIconSchemeColor !=
           null
@@ -1179,11 +1177,9 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailUnselectedIconSchemeColor: ${controller.navRailUnselectedSchemeColor},\n'
       : '';
   final String navigationRailMutedUnselectedIcon = controller
-              .navRailMuteUnselected ||
-          (controller.navRailSelectedIconSchemeColor == null &&
-              controller.navRailUnselectedSchemeColor == null)
-      ? ''
-      : '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n';
+          .navRailMuteUnselected
+      ? '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n'
+      : '';
   final String navigationRailUseIndicator = controller.navRailUseIndicator
       ? ''
       : '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';
@@ -1220,7 +1216,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationRailElevation: ${controller.navRailElevation!.toStringAsFixed(1)},\n'
       : '';
   final String navigationRailLabelType =
-      controller.navRailLabelType != NavigationRailLabelType.all
+      controller.navRailLabelType != NavigationRailLabelType.none
           ? '    navigationRailLabelType: ${controller.navRailLabelType},\n'
           : '';
   //
