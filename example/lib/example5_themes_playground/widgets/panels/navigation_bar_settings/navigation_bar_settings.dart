@@ -6,7 +6,6 @@ import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../dialogs/set_navigation_bar_to_m3_dialog.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
@@ -19,18 +18,6 @@ class NavigationBarSettings extends StatelessWidget {
   const NavigationBarSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  Future<void> _handleSetToM3(BuildContext context) async {
-    final bool? reset = await showDialog<bool?>(
-      context: context,
-      builder: (BuildContext context) {
-        return const SetNavigationBarToM3Dialog();
-      },
-    );
-    if (reset ?? false) {
-      await controller.setNavigationBarToM3();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -39,33 +26,35 @@ class NavigationBarSettings extends StatelessWidget {
 
     // Logic for default elevation label.
     final String elevationDefaultLabel = controller.navBarElevation == null
-        ? 'default 3'
+        ? controller.useMaterial3
+            ? 'default 3'
+            : 'default 0'
         : controller.navBarElevation!.toStringAsFixed(1);
 
     // Logic for background color label.
     String backgroundColorLabel() {
       if (controller.useMaterial3 &&
           controller.navBarBackgroundSchemeColor == null) {
-        return 'default (surface with elevation tint)';
+        return 'default (surfaceContainer)';
       }
       if (!controller.useSubThemes ||
           !controller.useFlexColorScheme ||
           (controller.navBarBackgroundSchemeColor == null)) {
-        return 'default (surface with onSurface overlay)';
+        return 'default (surface with onSurface overlay-3)';
       }
-      return 'default (surfaceVariant)';
+      return 'default (surfaceContainer)';
     }
 
     // Logic for indicator color label default value,
     // custom color selection overrides default label and value.
     String indicatorColorLabel() {
-      // Use FCS component default, primary.
+      // Use FCS component default, secondaryContainer.
       if (controller.useFlexColorScheme && controller.useSubThemes) {
-        return 'default (primary)';
+        return 'default (secondaryContainer)';
       }
       // Use M2 default color
       if (!controller.useMaterial3) {
-        return 'default (secondary)';
+        return 'default (secondary opacity 24%)';
       }
       // All other cases will use M3 style.
       return 'default (secondaryContainer)';
@@ -74,9 +63,9 @@ class NavigationBarSettings extends StatelessWidget {
     // Logic for selected icon color default value,
     // custom color selection overrides default label and value.
     String selectedIconColorLabel() {
-      // Use FCS component default, primary.
+      // Use FCS component default, onSurface.
       if (controller.useFlexColorScheme && controller.useSubThemes) {
-        return 'default (primary)';
+        return 'default (onSecondaryContainer)';
       }
       // Use M2 default color
       if (!controller.useMaterial3) {
@@ -89,9 +78,9 @@ class NavigationBarSettings extends StatelessWidget {
     // Logic for selected icon color default value,
     // custom color selection overrides default label and value.
     String selectedLabelColorLabel() {
-      // Use FCS component default, primary.
+      // Use FCS component default, onSecondaryContainer.
       if (controller.useFlexColorScheme && controller.useSubThemes) {
-        return 'default (primary)';
+        return 'default (onSurface)';
       }
       // Use M2 default color
       if (!controller.useMaterial3) {
@@ -101,19 +90,14 @@ class NavigationBarSettings extends StatelessWidget {
       return 'default (onSurface)';
     }
 
-    final bool muteUnselectedEnabled = controller.useSubThemes &&
-        controller.useFlexColorScheme &&
-        !(controller.navBarSelectedIconSchemeColor == null &&
-            controller.navBarUnselectedSchemeColor == null);
+    final bool muteUnselectedEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
     // Logic for unselected item color label default value,
     // custom color selection overrides default label and value.
     String unselectedItemColorLabel() {
       // Use FCS component default, onSurface with muted label.
-      if (controller.useFlexColorScheme &&
-          controller.useSubThemes &&
-          controller.navBarMuteUnselected &&
-          muteUnselectedEnabled) {
-        return 'default (onSurface, with blend & opacity)';
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
+        return 'default (onSurfaceVariant)';
       }
       // Use FCS component default, onSurface.
       if (!controller.useMaterial3) {
@@ -123,17 +107,17 @@ class NavigationBarSettings extends StatelessWidget {
       return 'default (onSurfaceVariant)';
     }
 
-    final bool navBarOpacityEnabled = controller.useSubThemes &&
-        controller.useFlexColorScheme &&
-        (controller.navBarBackgroundSchemeColor != null);
+    final bool navBarOpacityEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
     final double navBarOpacity =
-        navBarOpacityEnabled ? controller.navBarOpacity : 1;
-    final bool navBarHighlightOpacityEnabled = controller.useSubThemes &&
-        controller.useFlexColorScheme &&
-        !(controller.navBarIndicatorSchemeColor == null);
+        navBarOpacityEnabled ? (controller.navBarOpacity ?? -0.01) : -0.01;
+
+    final bool navBarHighlightOpacityEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
     final double navBarHighlightOpacity = navBarHighlightOpacityEnabled
         ? (controller.navBarIndicatorOpacity ?? -0.01)
         : -0.01;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -148,37 +132,11 @@ class NavigationBarSettings extends StatelessWidget {
             'and elevation 0. FCS M3 mode background is same as M3 default.\n',
           ),
         ),
-        Card(
-          elevation: 0,
-          shadowColor: Colors.transparent,
-          color: useMaterial3
-              ? theme.colorScheme.surfaceContainerHighest
-              : theme.colorScheme.onInverseSurface,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: NavigationBarShowcase(explain: false),
-          ),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: NavigationBarShowcase(explain: false),
         ),
         const SizedBox(height: 8),
-        ListTileReveal(
-          enabled: useMaterial3,
-          title: const Text('Use Material 3 default NavigationBar style?'),
-          subtitleDense: true,
-          subtitle: const Text('Updates settings below to match M3 default '
-              'values.\n'),
-          trailing: FilledButton(
-            onPressed: useMaterial3
-                ? () async {
-                    await _handleSetToM3(context);
-                  }
-                : null,
-            child: const Text('Set to M3'),
-          ),
-          onTap: () async {
-            await _handleSetToM3(context);
-          },
-        ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: backgroundColorLabel(),
@@ -198,13 +156,19 @@ class NavigationBarSettings extends StatelessWidget {
           enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
           subtitle: Slider(
+            min: -1,
             max: 100,
-            divisions: 100,
-            label: (navBarOpacity * 100).toStringAsFixed(0),
+            divisions: 101,
+            label: navBarOpacityEnabled
+                ? controller.navBarOpacity == null ||
+                        (controller.navBarOpacity ?? -1) < 0
+                    ? 'default 100%'
+                    : (navBarOpacity * 100).toStringAsFixed(0)
+                : 'default 100%',
             value: navBarOpacity * 100,
             onChanged: navBarOpacityEnabled
                 ? (double value) {
-                    controller.setNavBarOpacity(value / 100);
+                    controller.setNavBarOpacity(value < 0 ? null : value / 100);
                   }
                 : null,
           ),
@@ -218,7 +182,12 @@ class NavigationBarSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  '${(navBarOpacity * 100).toStringAsFixed(0)} %',
+                  navBarOpacityEnabled
+                      ? controller.navBarOpacity == null ||
+                              (controller.navBarOpacity ?? -1) < 0
+                          ? 'default 100%'
+                          : '${(navBarOpacity * 100).toStringAsFixed(0)} %'
+                      : 'default 100%',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -348,7 +317,7 @@ class NavigationBarSettings extends StatelessWidget {
             label: navBarHighlightOpacityEnabled
                 ? controller.navBarIndicatorOpacity == null ||
                         (controller.navBarIndicatorOpacity ?? -1) < 0
-                    ? 'default 24%'
+                    ? 'default 100%'
                     : (navBarHighlightOpacity * 100).toStringAsFixed(0)
                 : controller.useMaterial3
                     ? 'default 100%'
@@ -374,7 +343,7 @@ class NavigationBarSettings extends StatelessWidget {
                   navBarHighlightOpacityEnabled
                       ? controller.navBarIndicatorOpacity == null ||
                               (controller.navBarIndicatorOpacity ?? -1) < 0
-                          ? 'default 24%'
+                          ? 'default 100%'
                           // ignore: lines_longer_than_80_chars
                           : '${(navBarHighlightOpacity * 100).toStringAsFixed(0)} %'
                       : controller.useMaterial3

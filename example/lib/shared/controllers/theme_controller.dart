@@ -1389,26 +1389,6 @@ class ThemeController with ChangeNotifier {
     if (doNotify) notifyListeners();
   }
 
-  /// Set NavigationBar values to Flutter M3 defaults.
-  Future<void> setNavigationBarToM3([bool doNotify = true]) async {
-    setNavBarBackgroundSchemeColor(null, false);
-    setNavBarIndicatorOpacity(1, false);
-    setNavBarElevation(null, false);
-    setNavBarHeight(null, false);
-    setNavBarIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
-    setNavBarIndicatorOpacity(1, false);
-    setNavBarIndicatorBorderRadius(null, false);
-    setNavBarMuteUnselected(false, false);
-    setNavBarSelectedIconSchemeColor(SchemeColor.onSurface, false);
-    setNavBarSelectedLabelSchemeColor(SchemeColor.onSurface, false);
-    setNavBarUnselectedSchemeColor(SchemeColor.onSurface, false);
-    setNavBarLabelBehavior(
-        NavigationDestinationLabelBehavior.alwaysShow, false);
-
-    // Only notify at end, if asked to do so, to do so is default.
-    if (doNotify) notifyListeners();
-  }
-
   /// Set Playground settings and FCS theme to selected premade config.
   Future<void> setToPremade({int settingsId = 0}) async {
     //
@@ -1438,8 +1418,6 @@ class ThemeController with ChangeNotifier {
       setSnackBarElevation(6, false);
       // Set TextField to M3
       await setTextFieldToM3(false);
-      // Set Navigators to M3
-      await setNavigationBarToM3(false);
       // Set tooltip to M3 like
       setTooltipRadius(4, false);
       setTooltipOpacity(0.9, false);
@@ -4086,10 +4064,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavBarBackgroundSchemeColor, value));
   }
 
-  late double _navBarOpacity;
-  double get navBarOpacity => _navBarOpacity;
+  late double? _navBarOpacity;
+  double? get navBarOpacity => _navBarOpacity;
   void setNavBarOpacity(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _navBarOpacity) return;
     _navBarOpacity = value;
     if (notify) notifyListeners();
