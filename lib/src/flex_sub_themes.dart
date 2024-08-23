@@ -848,18 +848,7 @@ sealed class FlexSubThemes {
 
     /// Optional text style for the [BottomNavigationBar] labels.
     ///
-    /// If [useFlutterDefaults] is false, the text style
-    /// [FlexColorScheme.m3TextTheme.bodyMedium]
-    /// will be used as base style for the text style.
-    ///
-    /// If [useFlutterDefaults] is true, null will be passed to
-    /// [FlexSubThemes.bottomNavigationBar] and along to theme creation, if all
-    /// labeling modifying properties (size and scheme color) are also null, it
-    /// will then be passed along as null, allowing it to remain undefined
-    /// and widget default behavior sets the default. If label size or scheme
-    /// is defined, a default TextStyle() will be created, if
-    /// [bottomNavigationBarLabelTextStyle] is undefined, that gets th size and
-    /// color applied.
+    /// If not defined [bodyMedium] will be used as base style for the style.
     ///
     /// The size and colors defined in any of the text size and color properties
     /// are applied as overrides on the text style.
@@ -868,7 +857,9 @@ sealed class FlexSubThemes {
     /// The size of the text label on selected [BottomNavigationBar] item.
     ///
     /// If defined, it overrides the font size on effective label TextStyle
-    /// on selected item, 14 is used as fallback if needed.
+    /// on selected item
+    ///
+    /// Defaults to 14.
     final double? selectedLabelSize,
 
     /// The size of the text label on unselected [BottomNavigationBar] items.
@@ -878,33 +869,20 @@ sealed class FlexSubThemes {
     /// Smaller than 8dp is not legible on most screens.
     ///
     /// [BottomNavigationBar] uses this -2dp smaller font on the unselected
-    /// label as default, since it is so based on Material 2 spec. By assigning
+    /// label as default, since it is so based on Material-2 spec. By assigning
     /// same value as to selectedLabelSize, you can make them the same size.
     final double? unselectedLabelSize,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [BottomNavigationBar]'s selected label text color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// Defaults to [SchemeColor.primary].
-    ///
-    /// If [useFlutterDefaults] is true, and this property and all other
-    /// label modifying properties are undefined, including the text style,
-    /// the effective color will be [ColorScheme.primary] in light theme and
-    /// [ColorScheme.dark] theme mode.
+    /// If undefined, defaults to [SchemeColor.primary].
     final SchemeColor? selectedLabelSchemeColor,
 
     /// Select which color from the passed in [ColorScheme] to use for
     /// the [BottomNavigationBar]'s unselected items text color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If null, defaults to using [Theme]'s [ColorScheme.onSurface] via the
-    /// [NavigationRail]'s default un-themed behavior.
-    ///
-    /// FlexColorScheme will use [SchemeColor.onSurface] via [FlexSubThemesData]
-    /// property default.
+    /// If undefined, defaults to [ColorScheme.onSurface].
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// If true, the unselected labels in the [BottomNavigationBar] use a
@@ -912,6 +890,7 @@ sealed class FlexSubThemes {
     /// [unselectedLabelSchemeColor].
     ///
     /// If null, defaults to true.
+    /// This default is visually similar to the default styling of Material-2.
     final bool? mutedUnselectedLabel,
 
     /// The size of the icon on selected [BottomNavigationBar] item.
@@ -927,13 +906,7 @@ sealed class FlexSubThemes {
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [BottomNavigationBar]'s selected item icon color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
     /// If undefined, defaults to [SchemeColor.primary].
-    ///
-    /// If [useFlutterDefaults] is true, and this property and all other icon
-    /// modifying properties are undefined, the effective color will be
-    /// [ColorScheme.dark] in dark theme mode.
     final SchemeColor? selectedIconSchemeColor,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
@@ -941,49 +914,36 @@ sealed class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// Defaults to [SchemeColor.onSurface], and adds an alpha blend and
+    /// Defaults to [SchemeColor.onSurface] and adds an alpha blend and
     /// opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
     ///
-    /// If [useFlutterDefaults] is true, and this property and all other
-    /// icon modifying properties are undefined,
-    /// the effective color will be [ThemeData.unselectedWidgetColor]
-    /// which is [Colors.black54] in light mode and [Colors.white70] in dark.
+    /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
+    /// [Colors.black54] in light mode and [Colors.white70] in dark.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [BottomNavigationBar] use a more
     /// muted color version of the color defined by
     /// [bottomNavigationBarUnselectedIconSchemeColor].
+    ///
     /// The muting is unselected color with
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
     /// If undefined, defaults to true.
+    /// This default is visually similar to the default styling of Material-2.
     final bool? mutedUnselectedIcon,
 
     /// Select which color from the theme's [ColorScheme] to use as background
     /// color for the [BottomNavigationBar].
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If undefined, defaults to [SchemeColor.surface].
     ///
-    /// If undefined, defaults to [SchemeColor.background].
-    ///
-    /// If [useFlutterDefaults] true, and this property is undefined,
-    /// the effective background color will also be [ColorScheme.background].
-    ///
-    /// FlexColorScheme sets background defaults of [BottomNavigationBar],
-    /// [NavigationBar] and [BottomNavigationBar] to [SchemeColor.background]
-    /// when it is using component sub-themes.
-    /// Flutter SDK uses different colors on all three widgets. Our opinion is
-    /// that they should all default to using the same [ColorScheme] based
-    /// color. FlexColorScheme uses the background color as this default.
+    /// Flutter defaults to [ThemeData.canvasColor] from the [Material] widgets
+    /// default color. Typically this is same as [ColorScheme.surface], or it
+    /// should and will be, since [ColorScheme.background] is deprecated.
     final SchemeColor? backgroundSchemeColor,
 
     /// BottomNavigationBar background opacity.
-    ///
-    /// The opacity value is only applied when a none null value is selected
-    /// in [backgroundSchemeColor], it cannot be applied to the default
-    /// Flutter SDK background color available when backgroundSchemeColor is
-    /// null.
     ///
     /// If undefined, defaults to 1, fully opaque.
     final double? opacity,
@@ -1092,28 +1052,9 @@ sealed class FlexSubThemes {
         'In M2 mode it will use opinionated defaults as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
-    // Determine if we can even use default text styles, only when all are null,
-    // can we fall back to Flutter SDK default.
-    final bool useDefaultTextStyle = labelTextStyle == null &&
-        selectedLabelSize == null &&
-        unselectedLabelSize == null &&
-        selectedLabelSchemeColor == null &&
-        unselectedLabelSchemeColor == null;
-
-    // Determine if we can even use default icon styles, only when all are null,
-    // can we fall back to Flutter SDK default.
-    final bool useDefaultIconTheme = selectedIconSize == null &&
-        unselectedIconSize == null &&
-        selectedIconSchemeColor == null &&
-        unselectedIconSchemeColor == null;
-
-    // Get text color, defaults to primary in light and to secondary in dark.
+    // Get text color, defaults to primary.
     final Color labelColor = schemeColor(
-        selectedLabelSchemeColor ??
-            (colorScheme.brightness == Brightness.dark && useDefaultTextStyle
-                ? SchemeColor.secondary
-                : SchemeColor.primary),
-        colorScheme);
+        selectedLabelSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Get unselected label color, defaults to onSurface.
     final Color unselectedLabelColor = schemeColor(
@@ -1130,13 +1071,9 @@ sealed class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? math.max(labelSize - 2, 8);
 
-    // Get icon color, defaults to primary in light, and secondary in dark.
+    // Get icon color, defaults to primary.
     final Color iconColor = schemeColor(
-        selectedIconSchemeColor ??
-            (useDefaultIconTheme && colorScheme.brightness == Brightness.dark
-                ? SchemeColor.secondary
-                : SchemeColor.primary),
-        colorScheme);
+        selectedIconSchemeColor ?? SchemeColor.primary, colorScheme);
 
     // Get unselected icon color, defaults to onSurface.
     final Color unselectedIconColor = schemeColor(
@@ -1146,58 +1083,46 @@ sealed class FlexSubThemes {
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
 
-    // Background color, when using normal default, falls back to
-    // surfaceContainer.
-    final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme)
-        .withOpacity(opacity ?? 1.0);
+    // Background color, when using normal default, falls back to surface
+    final Color backgroundColor =
+        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
+            .withOpacity(opacity ?? 1.0);
 
     return BottomNavigationBarThemeData(
-      // TODO(rydmike): Check what default we should have on this.
-      backgroundColor: backgroundSchemeColor == null ? null : backgroundColor,
+      backgroundColor: backgroundColor,
       elevation: elevation ?? kBottomNavigationBarElevation,
-      unselectedIconTheme: useDefaultIconTheme
-          ? null
-          : IconThemeData(
-              size: effectiveUnselectedIconSize,
-              opacity: 1,
-              color: (mutedUnselectedIcon ?? true)
-                  ? unselectedIconColor
-                      .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
-                      .withAlpha(unselectedAlpha)
-                  : unselectedIconColor,
-            ),
-      selectedIconTheme: useDefaultIconTheme
-          ? null
-          : IconThemeData(
-              size: iconSize,
-              opacity: 1,
-              color: iconColor,
-            ),
-      selectedItemColor: useDefaultTextStyle ? null : labelColor,
-      unselectedItemColor: useDefaultTextStyle
-          ? null
-          : (mutedUnselectedLabel ?? true)
-              ? unselectedLabelColor
-                  .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
-                  .withAlpha(unselectedAlpha)
-              : unselectedLabelColor,
-      unselectedLabelStyle: useDefaultTextStyle
-          ? null
-          : textStyle.copyWith(
-              fontSize: effectiveUnselectedLabelSize,
-              color: (mutedUnselectedLabel ?? true)
-                  ? unselectedLabelColor
-                      .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
-                      .withAlpha(unselectedAlpha)
-                  : unselectedLabelColor,
-            ),
-      selectedLabelStyle: useDefaultTextStyle
-          ? null
-          : textStyle.copyWith(
-              fontSize: labelSize,
-              color: labelColor,
-            ),
+      unselectedIconTheme: IconThemeData(
+        size: effectiveUnselectedIconSize,
+        opacity: 1,
+        color: (mutedUnselectedIcon ?? true)
+            ? unselectedIconColor
+                .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
+                .withAlpha(unselectedAlpha)
+            : unselectedIconColor,
+      ),
+      selectedIconTheme: IconThemeData(
+        size: iconSize,
+        opacity: 1,
+        color: iconColor,
+      ),
+      selectedItemColor: labelColor,
+      unselectedItemColor: (mutedUnselectedLabel ?? true)
+          ? unselectedLabelColor
+              .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
+              .withAlpha(unselectedAlpha)
+          : unselectedLabelColor,
+      unselectedLabelStyle: textStyle.copyWith(
+        fontSize: effectiveUnselectedLabelSize,
+        color: (mutedUnselectedLabel ?? true)
+            ? unselectedLabelColor
+                .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
+                .withAlpha(unselectedAlpha)
+            : unselectedLabelColor,
+      ),
+      selectedLabelStyle: textStyle.copyWith(
+        fontSize: labelSize,
+        color: labelColor,
+      ),
       showSelectedLabels: showSelectedLabels,
       showUnselectedLabels: showUnselectedLabels,
       type: type,
