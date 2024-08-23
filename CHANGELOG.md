@@ -4,14 +4,20 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 21, 2024**
+**Aug 23, 2024**
+
+
+
 
 ### PACKAGE
 
-- Version 8.0.0 makes **FlexColorScheme** fully aligned and compatible with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. It introduced many breaking changes to the `ColorScheme` and default color mappings that Material components use.
+Version 8.0.0 makes **FlexColorScheme** fully aligned and compatible with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. Flutter introduced many breaking changes to the `ColorScheme` and default color mappings that Material components use. FlexColorScheme version 8 now allows you to use all the new colors introduced in Flutter 3.22. As before, with FCS you can get fully defined hand tuned ColorSchemes without using Material design's Material Color Utilities (MCU) package based seed-generated ColorSchemes.
+
+To seed generated ColorSchemes FCS adds support for all the Flutter SDK dynamic scheme variants; with a twist, you can use separate seed colors for each palette. Flutter SDK only allows you to seed from the theme's primary color and always uses computed values for secondary, tertiary palettes and fixed color for error. Surfaces and their tints are always tied to primary color as well. With FCS you do not have these limitations and you can even seed with multiple colors with Flutter's own scheme variants.
+
+FCS still has its own even more flexible `FlexTones` way of making seed generated ColorSchemes. Typically yo use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it you can define the chroma goals for each palette and define which tone is mapped to what ColorScheme color. An example of using it are the `FlexTones` modifiers. FCS v8 adds a new one called `monochromeSurfaces()`. This tones modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale surfaces instead of primary-tinted ones. 
 
 **CRITICAL TODOS**
-
 
 * Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later. 
@@ -33,7 +39,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **TODO**
 
 - Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
-  - Mostly done, but still need to remove past opinionated default on NavBar, NavigationRail and NavigationDrawer.
+  - Mostly done, but still need to remove past opinionated default on NavBar.
  
 - Add TabBar theme property `tabAlignment`. 
   - FlexSubThemesData: TabAlignment? tabBarAlignment
@@ -57,18 +63,22 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   - ThemeController: setDatePickerDividerSchemeColor, datePickerDividerSchemeColor
  
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
+
 - Add features for `Chip` theming.
   - Proper use of colors, blend as option, that is default in M2 only, but can be added in FCS M3.
   - Padding prop
   - Text styles sizing.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter.
 
+- InputDecorator: Internal, change InputDecorator theme to use only `border` and its WidgetState.
+- InputDecorator: Platform adaptive radius.
+
+
 **POTENTIAL TODOS or maybe push to version 8.1.0 or later**
 
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
 - Checkbox: Shape and border. 
-- InputDecorator: Internal, change InputDecorator theme to use only `border` and its WidgetState. 
-- InputDecorator: Platform adaptive radius. 
+
 - Not possible to use custom error colors with toDark generated schemes, maybe keep it so?
 - Schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
@@ -79,12 +89,15 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 - Some `ListTile` theming properties, which ones?
 - Some `SearchBar` theming features.
 - Some `SearchView` theming features.
-- Add fidelity for iOS adaptive AppBar (maybe).
+- Add fidelity for iOS adaptive AppBar.
 - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> Maybe, but prefer transparent instead, add guidance to docs about it.
-- Investigate:
-  - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
-  - Consider `TabBarStyle.universal` using the `primaryFixedDimcolor`? Or keep as is for now?
-  - BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. It also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? It would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
+
+
+**Investigate**
+
+- If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
+- Consider `TabBarStyle.universal` using the `primaryFixedDimcolor`? Or keep as is for now? Are they any better than current one?
+- BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. It also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? It would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
   
 **BREAKING**
 
@@ -124,21 +137,22 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - The produced `DrawerTheme` width now defaults to 304 dp in M3 mode. The [official M3 spec is 360 dp](M3 spec https://m3.material.io/components/navigation-drawer/specs), FCS was using it, but Flutter SDK has so far "declined" following the M3 spec on this point and still uses the older default 304 dp M2 spec. This older default is actually a better choice, so FCS has opted to revert to using it as default too. For more information about this and why 304 dp is better, see Flutter [issue #123380](https://github.com/flutter/flutter/issues/123380).  
  
-- The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter SDK defaults. If you had **NOT** configured these values before, they defaulted to `true`. You now have to set them explicitly to `true` to opt-in and get the same results as before, when they were not configured.
+- The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS to align it more with Flutter SDK default styles. If you had **NOT** configured these values before, they defaulted to `true`. You now have to set them explicitly to `true` to opt in and get the same results as you got before when they were not configured.
 - The `FlexSubThemesData` properties `blendOnColors` now defaults to `false`. In previous versions it defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter defaults. If you had **NOT** configured this values before, it defaulted to `true`. You now have to set it explicitly to `true` to get the same result as before, when it was not configured. Consider setting this property `true` in dark mode, and false in `light` theme mode, for a style that matches the Material-3 color design, when you are not using a seed generated `ColorScheme`. This setting has no effect when using a seed generated `ColorScheme`, as it generates blended/tinted onColors based on the seed algorithm, that overrides the effect of this setting. This setting creates a similar effect for none seeded ColorSchemes.
 - The `FlexSubThemesData` properties `navigationRailMutedUnselectedLabel` and `navigationRailMutedUnselectedIcon` now default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and follow M3 design spec by default.
 
 
-- TODO: ADD entry about all breaking changes in NavigationRail from its commit! 22.8.2024!
-
+- In `FlexSubThemes.navigationRailTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Properties `selectedLabelSchemeColor` and `unselectedLabelSchemeColor` default to `onSurface`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`. Property `labelType` now defaults to `NavigationRailLabelType.none` it was `NavigationRailLabelType.all`.
+  - All these changes were made to have fewer opinionated defaults in FCS and follow M3 design spec by default. Past FCS defaults were made before some M3 specs existed. In some cases earlier FCS versions also kept its opinionated defaults from M2 as defaults for its M3 default theme. 
 
 **NEW**
 
-- The const color definition class `FlexColor` got 24 new color values to support monochrome greyscale colors for all new surfaces and their on colors for light and dark mode. These are used as starting colors for the new surface colors in the in Flutter 3.22 updated and new Material-3 `colorScheme`, when seed generated `ColorScheme` is not used. The colors follow the naming convention `lightFlexSurface___` and `darkFlexSurface___`, plus their on and inverse versions.
+- The const color definition class `FlexColor` got 24 new color values to support monochrome greyscale colors for all new surfaces and their on colors for light and dark mode. These are used as starting colors for the new surface colors in the in Flutter 3.22 updated and new Material-3 `ColorScheme`, when a seed generated `ColorScheme` is not used. The colors follow the naming convention `lightFlexSurface___` and `darkFlexSurface___`, plus their on and inverse versions.
 
 - Added `black`, `white` and `transparent` as enum values to `SchemeColor`. These are not `ColorScheme` colors, **but** these colors can in many theming situations be useful instead of the ColorScheme based ones.
-  - The on color pair for black is white and wise versa. For transparent, it is `onSurface`. 
-
+  - The automatic on color pair for black is white and white for black. For transparent, it is `onSurface`. 
+- Added all the new surface colors in Flutter 3.22 to `FlexSchemeSurfaceColors`.
+- Added all the new on colors in Flutter 3.22 to `FlexSchemeOnColors`.
  
 - Added TextStyles for `FlexSubThemesData` so that:
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarToolbarTextStyle` for its `toolbarTextStyle`.
@@ -156,27 +170,34 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - `FlexSubThemes.toggleButtonsTheme` **uses** `FlexSubThemesData.toggleButtonsTextStyle` for its `textStyle`.
   - `FlexSubThemes.segmentedButtonTheme` **uses** `FlexSubThemesData.segmentedButtonTextStyle` for its `textStyle`.  
   - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle` for its `contentTextStyle`.
- 
+
+- Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
+- Added `useCupertinoStyle` property to `FlexSubThemes.switchTheme`.
+
 
 - Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
-- Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData..scaffoldBackgroundColor` use it as an override color if it is defined.
-
-
-- Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories.
-- Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
-
- 
-- Added all the new surface colors in Flutter 3.22 to `FlexSchemeSurfaceColors`.
-- Added all the new on colors in Flutter 3.22 to `FlexSchemeOnColors`.
- 
- 
-- Added `variant` a `FlexSchemeVariant` to `FlexColorsScheme` and `FlexThemeData` light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK added in version 3.22.2. 
-- Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`.
-- Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
-- Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`.
-- Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
 - Added `secondarySelectedSchemeColor` property to `FlexSubThemes.chipTheme`.
-- Added `useCupertinoStyle` property to `FlexSubThemes.switchTheme`.
+
+
+- Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
+- Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`.
+
+
+- Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
+- Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`.
+
+
+- Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`.
+
+
+- Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
+
+
+- Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factory constructors.
+
+
+- Added enum `variant` a `FlexSchemeVariant`, to `FlexColorsScheme` and `FlexThemeData` light and dark. This is used to define the variant of the seeded `ColorScheme`. It is an alternative to `tones` that also includes scheme seed variants that Flutter SDK added in version 3.22.2. 
+
 
 - Added enhanced enum functions `data` and `colors` to the `FlexScheme` enum, that returns the predefined `FlexSchemeData` and `FlexSchemeColor` respectively, that are associated with a given enum value. This could be done already using the `FlexColor.schemes` map. This is a convenience API to be able to use e.g. `FlexColor.mango.data` to get the predefined `FlexSchemeData` for the `mango` enum scheme and e.g. `FlexColor.barossa.colors(Brightness.dark)` to get the pre-defined dark colors used for the `barossa` scheme colors. See feature request: https://github.com/rydmike/flex_color_scheme/issues/210
 
@@ -191,7 +212,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Added `fixedColorStyle` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API. The property is an enum `FlexFixedColorStyle` that allows us to choose the style of the generated "fixed" and "fixedDim" colors when not using seed generated color schemes. 
 
-- Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`.
+
 
 
 **CHANGE**
