@@ -1079,8 +1079,9 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String navigationBarMutedUnselectedLabel = controller
           .navBarMuteUnselected
-      ? ''
-      : '    navigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n';
+      ? '    navigationBarMutedUnselectedLabel: ${controller.navBarMuteUnselected},\n'
+      : '';
+
   final String navigationBarSelectedIconSchemeColor = controller
               .navBarSelectedIconSchemeColor !=
           null
@@ -1093,8 +1094,9 @@ String generateThemeDartCode(ThemeController controller) {
       : '';
   final String navigationBarMutedUnselectedIcon = controller
           .navBarMuteUnselected
-      ? ''
-      : '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n';
+      ? '    navigationBarMutedUnselectedIcon: ${controller.navBarMuteUnselected},\n'
+      : '';
+
   final String navigationBarIndicatorSchemeColor = controller
               .navBarIndicatorSchemeColor !=
           null
@@ -1103,7 +1105,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String navigationBarIndicatorOpacity = controller
                   .navBarIndicatorOpacity !=
               null &&
-          !(controller.navBarIndicatorSchemeColor == null)
+          controller.navBarIndicatorOpacity != 1.0
       ? '    navigationBarIndicatorOpacity: ${controller.navBarIndicatorOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationBarIndicatorRadius = controller
@@ -1117,8 +1119,8 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    navigationBarBackgroundSchemeColor: ${controller.navBarBackgroundSchemeColor},\n'
       : '';
   final String navigationBarOpacity = controller.navBarOpacity != 1 &&
-          !(controller.navBarBackgroundSchemeColor == null)
-      ? '    navigationBarOpacity: ${controller.navBarOpacity.toStringAsFixed(2)},\n'
+          controller.navBarOpacity != null
+      ? '    navigationBarOpacity: ${controller.navBarOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String navigationBarElevation = controller.navBarElevation != null
       ? '    navigationBarElevation: ${controller.navBarElevation!.toStringAsFixed(1)},\n'

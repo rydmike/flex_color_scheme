@@ -1175,7 +1175,7 @@ class Store {
   // Key used to read and save the navBarOpacity value.
   static const String keyNavBarOpacity = 'navBarOpacity';
   // Default value for the navBarOpacity, also to reset settings.
-  static const double defaultNavBarOpacity = 1.0;
+  static const double? defaultNavBarOpacity = null;
 
   // Key used to read and save the navigationBarElevation value.
   static const String keyNavBarElevation = 'navigationBarElevation';
@@ -1208,7 +1208,7 @@ class Store {
   // Key used to read and save the navBarMuteUnselected value.
   static const String keyNavBarMuteUnselected = 'navBarMuteUnselected';
   // Default value for the navBarMuteUnselected, also used to reset settings.
-  static const bool defaultNavBarMuteUnselected = true;
+  static const bool defaultNavBarMuteUnselected = false;
 
   // Key used to read and save the navBarIndicatorSchemeColor value.
   static const String keyNavBarIndicatorSchemeColor =
