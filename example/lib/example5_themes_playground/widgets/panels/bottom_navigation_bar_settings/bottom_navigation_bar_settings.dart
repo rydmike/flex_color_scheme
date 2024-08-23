@@ -22,26 +22,17 @@ class BottomNavigationBarSettings extends StatelessWidget {
                     controller.bottomNavBarUnselectedSchemeColor == null))
         ? 'default (secondary)'
         : 'default (primary)';
-    final bool muteUnselectedEnabled = controller.useSubThemes &&
-        controller.useFlexColorScheme &&
-        !(controller.bottomNavBarSelectedSchemeColor == null &&
-            controller.bottomNavBarUnselectedSchemeColor == null);
+    final bool muteUnselectedEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
     final String labelForDefaultUnelectedItem =
-        (!controller.useFlexColorScheme ||
-                !controller.useSubThemes ||
-                (controller.bottomNavBarUnselectedSchemeColor == null &&
-                    controller.bottomNavBarUnselectedSchemeColor == null))
-            ? 'default (onSurface with opacity)'
-            : controller.bottomNavBarMuteUnselected && muteUnselectedEnabled
-                ? 'default (onSurface, blend & opacity)'
-                : isDark
-                    ? 'default (white70)'
-                    : 'default (black54)';
-    final bool navBarOpacityEnabled = controller.useSubThemes &&
-        controller.useFlexColorScheme &&
-        !(controller.bottomNavBarBackgroundSchemeColor == null);
-    final double navBarOpacity =
-        navBarOpacityEnabled ? controller.bottomNavigationBarOpacity : 1;
+        controller.useSubThemes && controller.useFlexColorScheme
+            ? 'default (onSurface)'
+            : 'default (ThemeData.unselectedWidgetColor)';
+    final bool navBarOpacityEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    final double navBarOpacity = navBarOpacityEnabled
+        ? (controller.bottomNavigationBarOpacity ?? -0.01)
+        : -0.01;
 
     // Logic for default elevation label.
     final String elevationDefaultLabel =
@@ -75,7 +66,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: 'default (background)',
+          labelForDefault:
+              controller.useSubThemes && controller.useFlexColorScheme
+                  ? 'default (surface)'
+                  : 'default (ThemeData.canvasColor)',
           index: controller.bottomNavBarBackgroundSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
@@ -92,13 +86,20 @@ class BottomNavigationBarSettings extends StatelessWidget {
           enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
           subtitle: Slider(
+            min: -1,
             max: 100,
-            divisions: 100,
-            label: (navBarOpacity * 100).toStringAsFixed(0),
+            divisions: 101,
+            label: navBarOpacityEnabled
+                ? controller.bottomNavigationBarOpacity == null ||
+                        (controller.bottomNavigationBarOpacity ?? -1) < 0
+                    ? 'default 100%'
+                    : (navBarOpacity * 100).toStringAsFixed(0)
+                : 'default 100%',
             value: navBarOpacity * 100,
             onChanged: navBarOpacityEnabled
                 ? (double value) {
-                    controller.setBottomNavigationBarOpacity(value / 100);
+                    controller.setBottomNavigationBarOpacity(
+                        value < 0 ? null : value / 100);
                   }
                 : null,
           ),
@@ -112,8 +113,12 @@ class BottomNavigationBarSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  // ignore: lines_longer_than_80_chars
-                  '${(navBarOpacity * 100).toStringAsFixed(0)} %',
+                  navBarOpacityEnabled
+                      ? controller.bottomNavigationBarOpacity == null ||
+                              (controller.bottomNavigationBarOpacity ?? -1) < 0
+                          ? 'default 100%'
+                          : '${(navBarOpacity * 100).toStringAsFixed(0)} %'
+                      : 'default 100%',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
