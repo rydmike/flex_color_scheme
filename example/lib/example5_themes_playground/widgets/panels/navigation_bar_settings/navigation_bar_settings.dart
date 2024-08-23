@@ -95,11 +95,11 @@ class NavigationBarSettings extends StatelessWidget {
     // Logic for unselected item color label default value,
     // custom color selection overrides default label and value.
     String unselectedItemColorLabel() {
-      // Use FCS component default, onSurface with muted label.
+      // Use FCS component default.
       if (controller.useFlexColorScheme && controller.useSubThemes) {
         return 'default (onSurfaceVariant)';
       }
-      // Use FCS component default, onSurface.
+      // Use M2 Flutter component default..
       if (!controller.useMaterial3) {
         return 'default (onSurface)';
       }

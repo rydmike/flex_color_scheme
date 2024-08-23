@@ -80,23 +80,16 @@ class NavigationRailSettings extends StatelessWidget {
     // Logic for unselected item color label default value,
     // custom color selection overrides default label and value.
     String unselectedItemColorLabel() {
-      // Use FCS component default, onSurface with muted label.
-      if (controller.useFlexColorScheme &&
-          controller.useSubThemes &&
-          controller.navRailMuteUnselected &&
-          muteUnselectedEnabled) {
-        return 'default (onSurface, with blend & opacity)';
+      // Use FCS component default.
+      if (controller.useFlexColorScheme && controller.useSubThemes) {
+        return 'default (onSurfaceVariant)';
       }
-      // Use FCS component default, onSurface.
-      if (!controller.useMaterial3) {
-        return 'default (onSurface, with opacity 64%)';
-      }
-      // Use M2 default, onSurface.
+      // Use M2 Flutter component default..
       if (!controller.useMaterial3) {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
-      return 'default (icon onSurfaceVariant, label onSurface)';
+      return 'default (onSurfaceVariant)';
     }
 
     final bool navRailOpacityEnabled =
