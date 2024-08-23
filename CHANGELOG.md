@@ -24,8 +24,10 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   * Keep for now? Maybe add a "bring tints back" feature? 
 * Consider what to do with shadows back. 
   * Keep and add more fine-grained control. Shadow color selection per component!
-* Flutter 3.22 broke +100 tests in FCS, review and fix them.
+* Flutter 3.22 broke +100 tests in FCS, review and fix them, after all updates.
   * Get tests back to 100% coverage.
+
+
 * Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
   * DONE
   * This was tricky, big rework and new feature.
@@ -35,11 +37,10 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   * DONE
 * Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
   * DONE
- 
+* Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
+  * DONE
+  
 **TODO**
-
-- Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
-  - Mostly done, but still need to remove past opinionated default on NavBar.
  
 - Add TabBar theme property `tabAlignment`. 
   - FlexSubThemesData: TabAlignment? tabBarAlignment
@@ -63,6 +64,7 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   - ThemeController: setDatePickerDividerSchemeColor, datePickerDividerSchemeColor
  
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
+  - This is an issue I wrote down a long time ago, have to take a new look at it.
 
 - Add features for `Chip` theming.
   - Proper use of colors, blend as option, that is default in M2 only, but can be added in FCS M3.
@@ -80,10 +82,12 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 - Checkbox: Shape and border. 
 
 - Not possible to use custom error colors with toDark generated schemes, maybe keep it so?
-- Schemes:
+- Add **NEW** color schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
   - Add ShadCn theme colors?
+
+
 - Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
 - Some `ListTile` theming properties, which ones?
@@ -308,7 +312,16 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Make Chips presentation even better (already improved a lot).
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 - UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
-- CHANGE how ALL opacity sliders work! They should ALL work with default (null) color and opacity should be nullable! If Colors it is used on is null, it should use the default and apply opacity on it. It should not be required to select the same color as default and then apply opacity to it. NavigationRail is updated to follow this new pattern. Need bth Playground and in some cases sub-theme update.
+- CHANGE how ALL opacity sliders work! They should ALL work with default (null) color and opacity should be nullable! If Colors it is used on is null, it should use the default and apply opacity on it. It should not be required to select the same color as default and then apply opacity to it. Needs both Playground update to store and controller and in some cases sub-theme updates.
+  - NavigationRail: DONE
+  - NavigationBar: DONE
+  - BottomNavigationBar: DONE
+  - InputDecorator: DONE
+  - Tooltip: TODO
+  - PopupMenuButton: TODO
+  - Menus: TODO
+  - AppBar: TODO
+  - TabBar: TODO
 
 ## 7.3.1
 
