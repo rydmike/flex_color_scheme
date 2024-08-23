@@ -142,10 +142,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - The `FlexSubThemesData` properties `navigationRailMutedUnselectedLabel` and `navigationRailMutedUnselectedIcon` now default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and follow M3 design spec by default.
-- In `FlexSubThemes.navigationRailTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Properties `selectedLabelSchemeColor` and `unselectedLabelSchemeColor` default to `onSurface`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`. Property `labelType` now defaults to `NavigationRailLabelType.none` it was `NavigationRailLabelType.all`.
+- In `FlexSubThemes.navigationRailTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Property `selectedLabelSchemeColor` defaults to `onSurface` and `unselectedLabelSchemeColor` default to `onSurfaceVariant`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`. Property `labelType` now defaults to `NavigationRailLabelType.none` it was `NavigationRailLabelType.all`.
   - All these changes were made to have fewer opinionated defaults in FCS and follow M3 design spec by default. Past FCS defaults were made before some M3 specs existed. In some cases, earlier FCS versions also kept its opinionated defaults from M2 as defaults for its M3 default theme. 
 
-- TODO: Add info about the updated `FlexSubThemes.navigationBarTheme`
+- The `FlexSubThemesData` properties `navigationBarMutedUnselectedLabel` and `navigationBarMutedUnselectedIcon` now default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and follow M3 design spec by default.
+- In `FlexSubThemes.navigationBarTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Property `selectedLabelSchemeColor` defaults to `onSurface` and `unselectedLabelSchemeColor` default to `onSurfaceVariant`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`.
+  - All these changes were made to have fewer opinionated defaults in FCS and follow M3 design spec by default. Past FCS defaults were made before some M3 specs existed. In some cases, earlier FCS versions also kept its opinionated defaults from M2 as defaults for its M3 default theme.
+  
 
 **NEW**
 
