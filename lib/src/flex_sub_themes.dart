@@ -2239,12 +2239,11 @@ sealed class FlexSubThemes {
     /// Selects which color from the passed in [colorScheme] to use as
     /// [Drawer] background color.
     ///
-    /// If not defined, defaults to [SchemeColor.surfaceContainerLow]. Flutter
-    /// SDK uses surfaceContainerLow color as default in M3, and ThemeData's
-    /// canvasColor (which is Colors.grey[50] in light mode and
-    /// Colors.grey[850] in dark mode) in M2 mode.
+    /// If not defined, defaults to [SchemeColor.surfaceContainerLow].
     ///
-    /// FCS uses surfaceContainerLow in both modes.
+    /// Flutter SDK uses surfaceContainerLow color as default in M3 and
+    /// ThemeData's canvasColor in M2 mode, which is Colors.grey[50] in
+    /// light mode and Colors.grey[850] in dark mode.
     final SchemeColor? backgroundSchemeColor,
 
     /// Corner radius of the [Drawer]'s visible edge.
@@ -2272,8 +2271,14 @@ sealed class FlexSubThemes {
 
     /// Themes the default width of the [Drawer].
     ///
-    /// Currently not available as a property in [FlexSubThemesData], may be
-    /// added later.
+    /// If not defined, defaults to 304dp via Flutter SDK defaults for both
+    /// M2 and M3.
+    ///
+    /// M3 spec has it at 360dp for [NavigationDrawer], but
+    /// Flutter still uses 304dp as default in M3 mode.
+    ///
+    /// For more info see issue:
+    /// https://github.com/flutter/flutter/issues/123380
     final double? width,
 
     /// A temporary flag used to disable Material-3 design and use legacy
@@ -4106,12 +4111,8 @@ sealed class FlexSubThemes {
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationBar]'s unselected label text color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-    /// blend and opacity, if [mutedUnselectedLabel] is true.
-    ///
-    /// If [useFlutterDefaults] is true, and this property and all other
-    /// label modifying properties are undefined, including the text style,
-    /// the effective color will be
+    /// If undefined, defaults to [SchemeColor.onSurfaceVariant], and adds an
+    /// alpha blend and opacity, if [mutedUnselectedLabel] is true
     ///
     /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
     /// [ColorScheme.onSurfaceVariant] in M3 mode.
@@ -4141,7 +4142,7 @@ sealed class FlexSubThemes {
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationBar]'s selected item icon color.
     ///
-    /// If undefined, defaults to [SchemeColor.primary].
+    /// If undefined, defaults to [SchemeColor.onSecondaryContainer].
     ///
     /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
     /// [ColorScheme.onSecondaryContainer] in M3.
@@ -4150,8 +4151,8 @@ sealed class FlexSubThemes {
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationBar]'s unselected item icon color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-    /// blend and opacity, if [mutedUnselectedIcon] is true.
+    /// If undefined, defaults to [SchemeColor.onSurfaceVariant], and adds an
+    /// alpha blend and opacity, if [mutedUnselectedIcon] is true.
     ///
     /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and to
     /// [ColorScheme.onSurfaceVariant] in M3 mode.
@@ -4179,8 +4180,6 @@ sealed class FlexSubThemes {
     /// Select which color from the theme's [ColorScheme] to use as background
     /// color for the [NavigationBar].
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
     /// If undefined, defaults to [SchemeColor.surfaceContainer]
     ///
     /// Flutter SDK defaults to surfaceContainer in M3 and in M2 mode to
@@ -4189,11 +4188,6 @@ sealed class FlexSubThemes {
     final SchemeColor? backgroundSchemeColor,
 
     /// NavigationBar background opacity.
-    ///
-    /// The opacity value is only applied when a none null value is selected
-    /// in [backgroundSchemeColor], it cannot be applied to the default
-    /// Flutter SDK background color available when backgroundSchemeColor is
-    /// null.
     ///
     /// If undefined, defaults to 1, fully opaque.
     final double? opacity,
@@ -4228,12 +4222,9 @@ sealed class FlexSubThemes {
     /// The alpha value used on selection color of the selection indicator on
     /// the [NavigationBar].
     ///
-    /// If not defined in M2 defaults to [kNavigationBarIndicatorAlpha],
-    /// which is 0x3D = 61 = 24%. In M3 alpha is 0xFF, or opacity 1.
+    /// If not defined, defaults to is 0xFF, or opacity 1.
     ///
-    /// The default is the same value as Widget SDK default behavior uses on its
-    /// used secondary color on its indicator color on the [NavigationBar] in
-    /// its M2 mode.
+    /// Flutter SDK uses 24% in M2 and 100% in M3,
     final int? indicatorAlpha,
 
     /// Border radius of the selection indicator on the [NavigationBar].
@@ -4430,7 +4421,7 @@ sealed class FlexSubThemes {
     /// both M2 and M3 mode
     ///
     /// Flutter SDK default uses [surfaceContainerLow] color as default in M3,
-    /// and [ThemeData.canvasColor]] in M2.
+    /// and [ThemeData.canvasColor] in M2.
     final SchemeColor? backgroundSchemeColor,
 
     /// Defines the width of [NavigationDrawer]'s indicator.
@@ -4706,8 +4697,6 @@ sealed class FlexSubThemes {
     /// Select which color from the passed in [ColorScheme] to use as base for
     /// the [NavigationRail]'s unselected items icon color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
     /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
     ///
     /// Flutter M2 default is onSurface, M3 default is onSurfaceVariant.
@@ -4742,8 +4731,6 @@ sealed class FlexSubThemes {
 
     /// Select which color from the theme [ColorScheme] to use as base for
     /// the selected [NavigationRails]'s highlighted item.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If undefined, defaults to [SchemeColor.secondaryContainer].
     ///
