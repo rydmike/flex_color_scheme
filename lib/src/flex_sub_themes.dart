@@ -4100,7 +4100,7 @@ sealed class FlexSubThemes {
     /// Select which color from the passed in [ColorScheme] to use as base for
     /// the [NavigationBar]'s label text color.
     ///
-    /// If undefined, defaults to [SchemeColor.primary].
+    /// If undefined, defaults to [SchemeColor.onSurface].
     final SchemeColor? selectedLabelSchemeColor,
 
     /// Select which color from the theme's [ColorScheme] to use as base for
@@ -4656,13 +4656,15 @@ sealed class FlexSubThemes {
     /// Flutter M2 default is primary, M3 default is onSurface.
     final SchemeColor? selectedLabelSchemeColor,
 
+    // TODO(rydmike): Report spec bug issue and add link
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationRails]'s unselected label text color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurface].
+    /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
     ///
     /// Flutter M2 default is onSurface with opacity 0.64,
-    /// M3 default is onSurface.
+    /// M3 default is onSurface. This is a spec BUG in Flutter's M3 defaults.
+    /// it should be onSurfaceVariant. See issue:
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// If true, the unselected label in the [NavigationRail] use a more
@@ -4916,9 +4918,9 @@ sealed class FlexSubThemes {
         ? colorScheme.onSurface
         : schemeColor(selectedLabelSchemeColor, colorScheme);
 
-    // Get unselected label color, defaults to onSurface.
+    // Get unselected label color, defaults to onSurfaceVariant.
     final Color unselectedLabelColor = unselectedLabelSchemeColor == null
-        ? colorScheme.onSurface
+        ? colorScheme.onSurfaceVariant
         : schemeColor(unselectedLabelSchemeColor, colorScheme);
 
     // Get text style, defaults to TextStyle(), we can use it since
