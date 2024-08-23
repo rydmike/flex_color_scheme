@@ -120,23 +120,6 @@ class NavigationRailSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        // ListTileReveal(
-        //     enabled: useMaterial3,
-        //    title: const Text('Use Material 3 default NavigationRail style?'),
-        //     subtitleDense: true,
-        //     subtitle: const Text('Update settings below to match M3 default '
-        //         'values.\n'),
-        //     trailing: FilledButton(
-        //       onPressed: useMaterial3
-        //           ? () async {
-        //               await _handleSetToM3(context);
-        //             }
-        //           : null,
-        //       child: const Text('Set to M3'),
-        //     ),
-        //     onTap: () async {
-        //       await _handleSetToM3(context);
-        //     }),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: !controller.useSubThemes ||
