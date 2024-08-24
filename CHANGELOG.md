@@ -316,8 +316,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - BottomNavigationBar: DONE
   - InputDecorator: DONE
   - Tooltip: DONE
-  - PopupMenuButton: TODO
-  - Menus: TODO
+  - PopupMenuButton: DONE
+  - Menus: DONE
   - AppBar: TODO
   - TabBar: TODO
 

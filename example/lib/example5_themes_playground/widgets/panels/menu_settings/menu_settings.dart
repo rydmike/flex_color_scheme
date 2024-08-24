@@ -31,10 +31,10 @@ class MenuSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    final bool menuOpacityEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
     final double menuOpacity =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.menuOpacity ?? 1
-            : 1;
+        menuOpacityEnabled ? (controller.menuOpacity ?? -0.01) : -0.01;
 
     final String menuBarDefault = controller.menuSchemeColor == null
         ? 'default (surfaceContainer)'
@@ -343,13 +343,19 @@ class MenuSettings extends StatelessWidget {
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Opacity of containers'),
           subtitle: Slider(
+            min: -1,
             max: 100,
-            divisions: 100,
-            label: (menuOpacity * 100).toStringAsFixed(0),
+            divisions: 101,
+            label: menuOpacityEnabled
+                ? controller.menuOpacity == null ||
+                        (controller.menuOpacity ?? -1) < 0
+                    ? 'default 100%'
+                    : (menuOpacity * 100).toStringAsFixed(0)
+                : 'default 100%',
             value: menuOpacity * 100,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: menuOpacityEnabled
                 ? (double value) {
-                    controller.setMenuOpacity(value / 100);
+                    controller.setMenuOpacity(value < 0 ? null : value / 100);
                   }
                 : null,
           ),
@@ -363,7 +369,12 @@ class MenuSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  '${(menuOpacity * 100).toStringAsFixed(0)} %',
+                  menuOpacityEnabled
+                      ? controller.menuOpacity == null ||
+                              (controller.menuOpacity ?? -1) < 0
+                          ? 'default 100%'
+                          : '${(menuOpacity * 100).toStringAsFixed(0)} %'
+                      : 'default 100%',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),

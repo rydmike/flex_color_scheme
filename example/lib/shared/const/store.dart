@@ -1677,7 +1677,7 @@ class Store {
   // Key used to read and save the popupMenuOpacity value.
   static const String keyPopupMenuOpacity = 'popupMenuOpacity';
   // Default value for the popupMenuOpacity, also used to reset settings.
-  static const double defaultPopupMenuOpacity = 1;
+  static const double? defaultPopupMenuOpacity = null;
 
   // Key used to read and save the popupMenuBorderRadius value.
   static const String keyPopupMenuBorderRadius = 'popupMenuBorderRadius';

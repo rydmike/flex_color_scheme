@@ -32,10 +32,11 @@ class PopupMenuButtonSettings extends StatelessWidget {
                 ? 'default 3'
                 : 'default 6'
             : '';
+
+    final bool popupOpacityEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
     final double popupOpacity =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.popupMenuOpacity
-            : 1;
+        popupOpacityEnabled ? (controller.popupMenuOpacity ?? -0.01) : -0.01;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,13 +97,20 @@ class PopupMenuButtonSettings extends StatelessWidget {
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Opacity of container'),
           subtitle: Slider(
+            min: -1,
             max: 100,
-            divisions: 100,
-            label: (popupOpacity * 100).toStringAsFixed(0),
+            divisions: 101,
+            label: popupOpacityEnabled
+                ? controller.popupMenuOpacity == null ||
+                        (controller.popupMenuOpacity ?? -1) < 0
+                    ? 'default 100%'
+                    : (popupOpacity * 100).toStringAsFixed(0)
+                : 'default 100%',
             value: popupOpacity * 100,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            onChanged: popupOpacityEnabled
                 ? (double value) {
-                    controller.setPopupMenuOpacity(value / 100);
+                    controller
+                        .setPopupMenuOpacity(value < 0 ? null : value / 100);
                   }
                 : null,
           ),
@@ -116,7 +124,12 @@ class PopupMenuButtonSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  '${(popupOpacity * 100).toStringAsFixed(0)} %',
+                  popupOpacityEnabled
+                      ? controller.popupMenuOpacity == null ||
+                              (controller.popupMenuOpacity ?? -1) < 0
+                          ? 'default 100%'
+                          : '${(popupOpacity * 100).toStringAsFixed(0)} %'
+                      : 'default 100%',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),

@@ -4824,10 +4824,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyPopupMenuSchemeColor, value));
   }
 
-  late double _popupMenuOpacity;
-  double get popupMenuOpacity => _popupMenuOpacity;
+  late double? _popupMenuOpacity;
+  double? get popupMenuOpacity => _popupMenuOpacity;
   void setPopupMenuOpacity(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _popupMenuOpacity) return;
     _popupMenuOpacity = value;
     if (notify) notifyListeners();
