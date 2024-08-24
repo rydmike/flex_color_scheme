@@ -4,9 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 23, 2024**
-
-
+**Aug 24, 2024**
 
 
 ### PACKAGE
@@ -152,7 +150,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `FlexSubThemesData` properties `navigationBarMutedUnselectedLabel` and `navigationBarMutedUnselectedIcon` now default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and follow M3 design spec by default.
 - In `FlexSubThemes.navigationBarTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Property `selectedLabelSchemeColor` defaults to `onSurface` and `unselectedLabelSchemeColor` default to `onSurfaceVariant`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`.
   - All these changes were made to have fewer opinionated defaults in FCS and follow M3 design spec by default. Past FCS defaults were made before some M3 specs existed. In some cases, earlier FCS versions also kept its opinionated defaults from M2 as defaults for its M3 default theme.
-  
+
 
 **NEW**
 
@@ -312,12 +310,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Make Chips presentation even better (already improved a lot).
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 - UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
-- CHANGE how ALL opacity sliders work! They should ALL work with default (null) color and opacity should be nullable! If Colors it is used on is null, it should use the default and apply opacity on it. It should not be required to select the same color as default and then apply opacity to it. Needs both Playground update to store and controller and in some cases sub-theme updates.
+- CHANGE how ALL opacity sliders work! They should ALL work with default (null) color and opacity should be nullable! If the SchemeColor it is used on is null, it should use the default and apply opacity on it. It should not be required to select the same color as default and then apply opacity to it. Needs both Playground update to store and controller and in some cases sub-theme updates.
   - NavigationRail: DONE
   - NavigationBar: DONE
   - BottomNavigationBar: DONE
   - InputDecorator: DONE
-  - Tooltip: TODO
+  - Tooltip: DONE
   - PopupMenuButton: TODO
   - Menus: TODO
   - AppBar: TODO

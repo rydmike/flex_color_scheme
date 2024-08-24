@@ -26,25 +26,52 @@ class TooltipProgressBarSettings extends StatelessWidget {
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     final bool isLight = theme.brightness == Brightness.light;
 
+    final bool tooltipOpacityEnabled =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    final double tooltipOpacity =
+        tooltipOpacityEnabled ? (controller.tooltipOpacity ?? -0.01) : -0.01;
+
+    final String opacityDefaultLabel = !controller.useFlexColorScheme
+        ? isLight
+            ? 'default (90%)'
+            : 'default (90%)'
+        : controller.useSubThemes && controller.tooltipSchemeColor != null
+            ? 'default (100%)'
+            : controller.tooltipsMatchBackground
+                ? controller.useSubThemes
+                    ? isLight
+                        ? 'default (95%)'
+                        : 'default (95%)'
+                    : isLight
+                        ? 'default (94%)'
+                        : 'default (93%)'
+                : controller.useSubThemes
+                    ? isLight
+                        ? 'default (95%)'
+                        : 'default (95%)'
+                    : isLight
+                        ? 'default (90%)'
+                        : 'default (90%)';
+
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
         ? isLight
-            ? 'default (Grey700 op90%)'
-            : 'default (White op90%)'
+            ? 'default (Grey700)'
+            : 'default (White)'
         : controller.tooltipsMatchBackground
             ? controller.useSubThemes
                 ? isLight
-                    ? 'default (Tinted White op95%)'
-                    : 'default (Tinted #111111 op95%)'
+                    ? 'default (Primary tinted white)'
+                    : 'default (Primary tinted #111111)'
                 : isLight
-                    ? 'default (#FCFCFC op94%)'
-                    : 'default (#444444 op93%)'
+                    ? 'default (#FCFCFC)'
+                    : 'default (#444444)'
             : controller.useSubThemes
                 ? isLight
-                    ? 'default (Tinted #111111 op95%)'
-                    : 'default (Tinted White op95%)'
+                    ? 'default (Primary tinted #111111)'
+                    : 'default (Primary tinted white)'
                 : isLight
-                    ? 'default (Grey700 op90%)'
-                    : 'default (White op90%)';
+                    ? 'default (Grey700)'
+                    : 'default (White)';
 
     final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
         ? controller.useSubThemes
@@ -62,7 +89,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           ),
           subtitleDense: true,
           subtitle: const Text(
-            'OFF theme mode inverted, common on Web\n'
+            "OFF theme mode inverted, common on Web. Android's default.\n"
             'ON theme mode brightness, like Windows\n',
           ),
           value: controller.tooltipsMatchBackground &&
@@ -96,24 +123,33 @@ class TooltipProgressBarSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ListTileReveal(
+          enabled: controller.useSubThemes,
+          title: const Text('Tooltip opacity'),
+          subtitleDense: true,
+          subtitle: const Text(
+            "Set to 90% to match Flutter's default in both M2 and M3 mode. "
+            'The correct M3 spec is 100% and using inverseSurface, but '
+            'Flutter at least up to 3.24, does not use the correct spec.\n',
+          ),
+        ),
         ListTile(
-          enabled: controller.useFlexColorScheme &&
-              controller.tooltipSchemeColor != null,
-          title: const Text('Tooltip opacity, try 85% to 98%'),
-          subtitle: Slider(
+          enabled: controller.useFlexColorScheme,
+          title: Slider(
+            min: -1,
             max: 100,
-            divisions: 100,
-            label: (controller.tooltipOpacity * 100).toStringAsFixed(0),
-            value: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.tooltipSchemeColor != null
-                ? controller.tooltipOpacity * 100
-                : 100,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.tooltipSchemeColor != null
+            divisions: 101,
+            label: tooltipOpacityEnabled
+                ? controller.tooltipOpacity == null ||
+                        (controller.tooltipOpacity ?? -1) < 0
+                    ? opacityDefaultLabel
+                    : (tooltipOpacity * 100).toStringAsFixed(0)
+                : opacityDefaultLabel,
+            value: tooltipOpacity * 100,
+            onChanged: tooltipOpacityEnabled
                 ? (double value) {
-                    controller.setTooltipOpacity(value / 100);
+                    controller
+                        .setTooltipOpacity(value < 0 ? null : value / 100);
                   }
                 : null,
           ),
@@ -127,9 +163,12 @@ class TooltipProgressBarSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  // ignore: lines_longer_than_80_chars
-                  '${(controller.useFlexColorScheme && controller.useSubThemes && controller.tooltipSchemeColor != null ? controller.tooltipOpacity * 100 : 100).toStringAsFixed(0)}'
-                  ' %',
+                  tooltipOpacityEnabled
+                      ? controller.tooltipOpacity == null ||
+                              (controller.tooltipOpacity ?? -1) < 0
+                          ? opacityDefaultLabel
+                          : '${(tooltipOpacity * 100).toStringAsFixed(0)} %'
+                      : opacityDefaultLabel,
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -142,8 +181,9 @@ class TooltipProgressBarSettings extends StatelessWidget {
           title: const Text('Tooltip radius'),
           subtitleDense: true,
           subtitle: const Text(
-            'Does not use the global border radius setting. '
-            'Avoid using large border radius on tooltip containers.\n',
+            'Does not use the global border radius setting.\n'
+            'Avoid using very large border radius on tooltip containers.\n'
+            'Set to 4dp to match Material design in both M2 and M3.',
           ),
         ),
         ListTile(
