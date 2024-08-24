@@ -5023,10 +5023,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyTooltipSchemeColor, value));
   }
 
-  late double _tooltipOpacity;
-  double get tooltipOpacity => _tooltipOpacity;
+  late double? _tooltipOpacity;
+  double? get tooltipOpacity => _tooltipOpacity;
   void setTooltipOpacity(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _tooltipOpacity) return;
     _tooltipOpacity = value;
     if (notify) notifyListeners();

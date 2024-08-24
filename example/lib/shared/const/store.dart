@@ -1805,7 +1805,7 @@ class Store {
   // Key used to read and save the tooltipOpacity value.
   static const String keyTooltipOpacity = 'tooltipOpacity';
   // Default value for the tooltipOpacity, also used to reset settings.
-  static const double defaultTooltipOpacity = 1.0;
+  static const double? defaultTooltipOpacity = null;
 
   // Custom surface tint color SETTINGS.
   // ===========================================================================
