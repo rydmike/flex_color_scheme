@@ -2066,17 +2066,14 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Tooltip background opacity.
   ///
-  /// Used by FlexColorScheme to modify the opacity on the effective
-  /// colorScheme.surface color used on the themed PopupMenu background color.
-  ///
-  /// If defined this overrides the opacity included via
+  /// If defined this overrides the default tooltip opacity included via
   /// [FlexColorScheme.tooltipsMatchBackground].
   ///
-  /// If not defined, defaults to FCS default opacity, see
-  /// [FlexColorScheme.tooltipsMatchBackground] for details.
+  /// If not defined, defaults to 95% if [tooltipSchemeColor] is not defined
+  /// and tooltip uses custom default color. If [tooltipSchemeColor] is defined
+  /// then defaults to 100%. Set a value to define it as usual.
   ///
-  /// If defined and [tooltipSchemeColor] is undefined (null), the
-  /// [tooltipOpacity] has no effect since it cannot act on undefined value.
+  /// See [FlexColorScheme.tooltipsMatchBackground] for additional details.
   final double? tooltipOpacity;
 
   /// Set to true to use the app overall app [InputDecoration] theme in
