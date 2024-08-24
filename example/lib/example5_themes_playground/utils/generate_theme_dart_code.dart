@@ -733,8 +733,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String popupMenuSchemeColor = controller.popupMenuSchemeColor != null
       ? '    popupMenuSchemeColor: ${controller.popupMenuSchemeColor},\n'
       : '';
-  final String popupMenuOpacity = controller.popupMenuOpacity != 1
-      ? '    popupMenuOpacity: ${controller.popupMenuOpacity.toStringAsFixed(2)},\n'
+  final String popupMenuOpacity = controller.popupMenuOpacity != 1 &&
+          controller.popupMenuOpacity != null
+      ? '    popupMenuOpacity: ${controller.popupMenuOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String alignedDropdown = controller.alignedDropdown
       ? '    alignedDropdown: ${controller.alignedDropdown},\n'
