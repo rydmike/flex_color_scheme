@@ -763,9 +763,9 @@ class FlexColorScheme with Diagnosticable {
   ///     - background: Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%.
   ///     - text: white
   ///
-  /// When using additional theming via sub-themes properties, its
-  /// properties will if used override background color, text color and
-  /// background opacity as well as border radius.
+  /// When using additional theming via sub-themes properties, used
+  /// properties will if used, override background color, text color as well
+  /// as border radius.
   final bool tooltipsMatchBackground;
 
   /// When `true`, the status bar on Android will be the same color as
@@ -6844,11 +6844,16 @@ class FlexColorScheme with Diagnosticable {
         return Color.getAlphaFromOpacity(subTheme.tooltipOpacity ?? 1);
       }
       if (useSubThemes && tooltipsMatchBackground) {
-        return 0xF2; // 95%
+        return Color.getAlphaFromOpacity(
+            subTheme.tooltipOpacity ?? 0.95); // 95% 0xF2
       }
       if (!useSubThemes && tooltipsMatchBackground) {
-        if (isDark) return 0xED; // 93%
-        return 0xF0; // 94%
+        if (isDark) {
+          // 0xED 93%
+          return Color.getAlphaFromOpacity(subTheme.tooltipOpacity ?? 0.93);
+        }
+        // 0xF0 94%
+        return Color.getAlphaFromOpacity(subTheme.tooltipOpacity ?? 0.94);
       }
       return null;
     }
