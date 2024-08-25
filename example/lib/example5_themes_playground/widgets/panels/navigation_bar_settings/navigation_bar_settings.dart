@@ -152,49 +152,49 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          enabled: navBarOpacityEnabled,
-          title: const Text('Background opacity'),
-          subtitle: Slider(
-            min: -1,
-            max: 100,
-            divisions: 101,
-            label: navBarOpacityEnabled
-                ? controller.navBarOpacity == null ||
-                        (controller.navBarOpacity ?? -1) < 0
-                    ? 'default 100%'
-                    : (navBarOpacity * 100).toStringAsFixed(0)
-                : 'default 100%',
-            value: navBarOpacity * 100,
-            onChanged: navBarOpacityEnabled
-                ? (double value) {
-                    controller.setNavBarOpacity(value < 0 ? null : value / 100);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'OPACITY',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  navBarOpacityEnabled
-                      ? controller.navBarOpacity == null ||
-                              (controller.navBarOpacity ?? -1) < 0
-                          ? 'default 100%'
-                          : '${(navBarOpacity * 100).toStringAsFixed(0)}%'
-                      : 'default 100%',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
+        // ListTile(
+        //   enabled: navBarOpacityEnabled,
+        //   title: const Text('Background opacity'),
+        //   subtitle: Slider(
+        //     min: -1,
+        //     max: 100,
+        //     divisions: 101,
+        //     label: navBarOpacityEnabled
+        //         ? controller.navBarOpacity == null ||
+        //                 (controller.navBarOpacity ?? -1) < 0
+        //             ? 'default 100%'
+        //             : (navBarOpacity * 100).toStringAsFixed(0)
+        //         : 'default 100%',
+        //     value: navBarOpacity * 100,
+        //     onChanged: navBarOpacityEnabled
+        //         ? (double value) {
+        //             controller.setNavBarOpacity(value < 0 ? null : value / 100);
+        //           }
+        //         : null,
+        //   ),
+        //   trailing: Padding(
+        //     padding: const EdgeInsetsDirectional.only(end: 5),
+        //     child: Column(
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: <Widget>[
+        //         Text(
+        //           'OPACITY',
+        //           style: theme.textTheme.bodySmall,
+        //         ),
+        //         Text(
+        //           navBarOpacityEnabled
+        //               ? controller.navBarOpacity == null ||
+        //                       (controller.navBarOpacity ?? -1) < 0
+        //                   ? 'default 100%'
+        //                   : '${(navBarOpacity * 100).toStringAsFixed(0)}%'
+        //               : 'default 100%',
+        //           style: theme.textTheme.bodySmall!
+        //               .copyWith(fontWeight: FontWeight.bold),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         SliderNullableDefault(
           enabled: navBarOpacityEnabled,
           title: const Text('Background opacity'),
@@ -206,7 +206,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueDisplayScale: 100,
           valueHeading: 'OPACITY',
           valueUnitLabel: '%',
-          valueDefaultLabel: 'default 100%',
+          valueDefaultLabel: 'default 100 %',
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,

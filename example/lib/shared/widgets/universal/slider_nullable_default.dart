@@ -171,7 +171,7 @@ class SliderNullableDefault extends StatelessWidget {
                               min * valueDisplayScale
                       ? valueDefaultLabel
                       // ignore: lines_longer_than_80_chars
-                      : '${(value! * valueDisplayScale).toStringAsFixed(valueDecimalPlaces)} %'
+                      : '${(value! * valueDisplayScale).toStringAsFixed(valueDecimalPlaces)}$valueUnitLabel'
                   : valueDefaultLabel,
               style: theme.textTheme.bodySmall!
                   .copyWith(fontWeight: FontWeight.bold),
