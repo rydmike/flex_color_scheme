@@ -304,7 +304,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switch?
-- Add info about Card theming issue to the Card settings screen. After filing the Flutter issue. 
 - Add UI and code gen for dense input decorator.
 - Add UI for content padding on input decorator.
 - Make Chips presentation even better (already improved a lot).
