@@ -152,7 +152,7 @@ class ButtonsSettings extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: elevatedButtonRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default\nstadium' : 'default\n4',
+              controller.useMaterial3 ? 'default\nstadium' : 'default\n4 dp',
         ),
         const Divider(),
         ColorSchemePopupMenu(
@@ -279,7 +279,7 @@ class ButtonsSettings extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: outlinedButtonRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default\nstadium' : 'default\n4',
+              controller.useMaterial3 ? 'default\nstadium' : 'default\n4 dp',
         ),
         Row(
           children: <Widget>[
