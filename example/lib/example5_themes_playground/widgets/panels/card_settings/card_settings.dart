@@ -40,8 +40,7 @@ class CardSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('Card info'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'In M2 mode default background color is theme.cardColor, '
             'which typically is set to colorScheme.surface.\n'
             'In M3 mode before Flutter 3.22 background defaults to '
@@ -66,8 +65,7 @@ class CardSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Component themes with border radius can have their radius '
             'overridden and changed individually. It then either '
             'overrides its default value or the set global radius default, '
@@ -135,7 +133,7 @@ class CardSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

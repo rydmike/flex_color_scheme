@@ -46,7 +46,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('BottomNavigationBar colors and styles'),
-          subtitle: Text(
+          subtitleReveal: Text(
             'Default SDK background color is theme canvasColor via Material. '
             'The canvasColor is typically colorScheme.background, elevation '
             'is 8. FCS sub-theme default is colorScheme.background and '
@@ -211,10 +211,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Mute unselected items'),
-          subtitleDense: true,
-          subtitle: const Text('Unselected icon and text are less bright. '
-              'Shared setting for icon and text in the Playground, but '
-              'separate properties are used by the API.\n'),
+          subtitleReveal:
+              const Text('Unselected icon and text are less bright. '
+                  'Shared setting for icon and text in the Playground, but '
+                  'separate properties are used by the API.\n'),
           value: muteUnselectedEnabled
               ? controller.bottomNavBarMuteUnselected
               : !muteUnselectedEnabled,
@@ -243,7 +243,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const ListTileReveal(
           dense: true,
           title: Text('More settings with the API'),
-          subtitle: Text(
+          subtitleReveal: Text(
             'With the API you can also set the font and icon size '
             'individually on selected and unselected items. Use '
             'FlexSubThemesData properties: '

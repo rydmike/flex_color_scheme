@@ -39,8 +39,7 @@ class ShapeRadiusSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Components shape'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'By default Material UI widgets with ShapeBorder use circular '
             'corners or half-circle stadium shapes, via the ShapeBorder '
             'called RoundedRectangleBorder and StadiumBorder. '
@@ -183,8 +182,7 @@ class ShapeRadiusSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Components border radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'By default, the border radius on all Material '
             'UI components in FCS follow the Material-3 design guide in M3 '
             'mode. The defaults used by FCS for Material-2 mode, are also '
@@ -280,8 +278,8 @@ class ShapeRadiusSettings extends StatelessWidget {
               controller.adaptiveRadius != AdaptiveTheme.off &&
               controller.adaptiveRadius != null,
           title: const Text('Adaptive border radius'),
-          subtitleDense: true,
-          subtitle: const Text('You can define a separate global border radius '
+          subtitleReveal: const Text(
+              'You can define a separate global border radius '
               'override that gets used adaptively on selected platforms. This '
               'is useful if you for example want to keep M3 design radius on '
               'for example Android platform, but want a less rounded border '
@@ -362,8 +360,7 @@ class ShapeRadiusSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Shape outline borders'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Some Material UI components like ToggleButtons, SegmentedButton, '
             'OutlinedButton and TextField use an outline border on their '
             'shape. With these '
@@ -380,8 +377,7 @@ class ShapeRadiusSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border width'),
-          subtitleDense: true,
-          subtitle: const Text('Default border width for InputDecorator, '
+          subtitleReveal: const Text('Default border width for InputDecorator, '
               'OutlinedButton, ToggleButtons and SegmentedButton.\n'),
         ),
         ListTile(
@@ -434,8 +430,7 @@ class ShapeRadiusSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Thick border width'),
-          subtitleDense: true,
-          subtitle: const Text('Default border width for focused '
+          subtitleReveal: const Text('Default border width for focused '
               'InputDecorator and pressed or error OutlinedButton.\n'),
         ),
         ListTile(

@@ -15,8 +15,7 @@ class ListTileSettings extends StatelessWidget {
         SizedBox(height: 8),
         ListTileReveal(
           title: Text('List tiles'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'There are many different types of ListTiles in Flutter. They '
             'are useful widgets for showing lists of items, for '
             'settings and options.\n'
@@ -42,8 +41,7 @@ class ListTileSettings extends StatelessWidget {
         Divider(),
         ListTileReveal(
           title: Text('ExpansionTile'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'No theming properties in current FCS version, only '
             'included to show it with current theme.\n',
           ),
@@ -52,8 +50,7 @@ class ListTileSettings extends StatelessWidget {
         Divider(),
         ListTileReveal(
           title: Text('ExpansionPanelList'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'No theming properties in current FCS version, only '
             'included to show it with current theme.\n',
           ),

@@ -52,7 +52,7 @@ class _PrimaryTextThemeSettingsState extends State<PrimaryTextThemeSettings> {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

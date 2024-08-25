@@ -43,8 +43,7 @@ class ThemeCode extends StatelessWidget {
         const SizedBox(height: 8),
         ListTileReveal(
           title: const Text('Copy the theme code'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
               'When you are happy with your theme design, you can copy the '
               'produced API configuration code. Paste it into your Flutter app '
               'and when used together with the FlexColorScheme package, your '
@@ -81,7 +80,8 @@ class ThemeCode extends StatelessWidget {
         const ListTileReveal(
           dense: true,
           title: Text('CodeTheme is a ThemeData ThemeExtension'),
-          subtitle: Text('The above colors have been added as a custom theme '
+          subtitleReveal: Text(
+              'The above colors have been added as a custom theme '
               'extension to ThemeData. Light and dark mode CodeTheme change '
               'with theme mode and is accessed via Theme.of(context). The '
               'extension colors are also using Material-3 color harmonization '

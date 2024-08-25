@@ -75,8 +75,7 @@ class SliderSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Tinted value indicator'),
-          subtitleDense: true,
-          subtitle: Text('Uses a scrim and opacity, to make it much '
+          subtitleReveal: Text('Uses a scrim and opacity, to make it much '
               '${isLight ? 'darker' : 'lighter'} than the selected color, '
               'it also and adds some slight opacity. By default the value '
               'indicator only shows up on a stepped Slider. You can change '
@@ -178,7 +177,7 @@ class SliderSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -209,7 +208,7 @@ class SliderSettings extends StatelessWidget {
         ListTileReveal(
           title: const Text('Known issues'),
           dense: true,
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

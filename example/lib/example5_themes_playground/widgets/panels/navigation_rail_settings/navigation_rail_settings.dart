@@ -224,8 +224,7 @@ class NavigationRailSettings extends StatelessWidget {
         SwitchListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Use selection indicator'),
-          subtitleDense: true,
-          subtitle: const Text('On by default when useMaterial3 '
+          subtitleReveal: const Text('On by default when useMaterial3 '
               'is true, turn OFF component themes to see this.\n'),
           value: controller.navRailUseIndicator &&
               controller.useSubThemes &&
@@ -463,8 +462,7 @@ class NavigationRailSettings extends StatelessWidget {
                     enabled: controller.useSubThemes &&
                         controller.useFlexColorScheme,
                     title: const Text('Mute unselected items'),
-                    subtitleDense: true,
-                    subtitle: const Text(
+                    subtitleReveal: const Text(
                         'Unselected icon and text are less bright. Shared '
                         'setting for icon and text, but separate properties '
                         'in API.\n'),
@@ -479,7 +477,7 @@ class NavigationRailSettings extends StatelessWidget {
                   const ListTileReveal(
                     dense: true,
                     title: Text('More settings with the API'),
-                    subtitle: Text(
+                    subtitleReveal: Text(
                       'With the API you can also set the font and icon size '
                       'individually on selected and unselected items. Use '
                       'FlexSubThemesData properties: '

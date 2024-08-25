@@ -87,8 +87,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           title: const Text(
             'Tooltip background brightness',
           ),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             "OFF theme mode inverted, common on Web. Android's default.\n"
             'ON theme mode brightness, like Windows\n',
           ),
@@ -126,8 +125,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes,
           title: const Text('Tooltip opacity'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             "Set to 90% to match Flutter's default in both M2 and M3 mode. "
             'The correct M3 spec is 100% and using inverseSurface, but '
             'Flutter at least up to 3.24, does not use the correct spec.\n',
@@ -179,8 +177,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Tooltip radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Does not use the global border radius setting.\n'
             'Avoid using very large border radius on tooltip containers.\n'
             'Set to 4dp to match Material design in both M2 and M3.',
@@ -326,10 +323,10 @@ class TooltipProgressBarSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTileReveal(
-          subtitleDense: true,
           title: Text('ProgressIndicator'),
-          subtitle: Text('Progress indicators in FCS currently only offer the '
-              'default theme and no customization.\n'),
+          subtitleReveal:
+              Text('Progress indicators in FCS currently only offer the '
+                  'default theme and no customization.\n'),
         ),
         const Padding(
           padding: EdgeInsets.all(16.0),
@@ -338,7 +335,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

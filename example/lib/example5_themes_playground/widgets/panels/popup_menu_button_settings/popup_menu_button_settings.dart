@@ -44,8 +44,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('PopupMenuButton'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'The PopupMenuButton can be used on any widget, it is typically '
             'used on an Icon, as below. Its implementation differs from newer '
             'Material-3 menu components. '
@@ -63,7 +62,8 @@ class PopupMenuButtonSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('Known limitations'),
           dense: true,
-          subtitle: Text('FCS themes foreground color by default to correct '
+          subtitleReveal: Text(
+              'FCS themes foreground color by default to correct '
               'contrast pair for selected background color. This works well '
               'if your PopupMenuItems only contain Text widgets. If they '
               'contain e.g. ListTiles, like the second PopupMenuButton above, '
@@ -140,8 +140,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Container radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Does not use the global border radius setting. '
             'Avoid using large border radius on menu container.\n',
           ),
@@ -249,9 +248,9 @@ class PopupMenuButtonSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('DropdownButton'),
-          subtitleDense: true,
-          subtitle: Text('An older Material-2 widget, it cannot be themed. '
-              'Consider using M3 DropdownMenu instead.\n'),
+          subtitleReveal:
+              Text('An older Material-2 widget, it cannot be themed. '
+                  'Consider using M3 DropdownMenu instead.\n'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
@@ -259,7 +258,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Match Dropdown width to parent width'),
-          subtitle: const Text('When ON the DropdownMenuButton and '
+          subtitleReveal: const Text('When ON the DropdownMenuButton and '
               'DropdownButtonFormField will match their width to the '
               "parent's button size. If OFF, they will be wider. Is OFF by "
               'default in the FlexColorScheme API, but ON by default in '
@@ -274,10 +273,10 @@ class PopupMenuButtonSettings extends StatelessWidget {
         ),
         const ListTileReveal(
           title: Text('DropdownButtonFormField'),
-          subtitleDense: true,
-          subtitle: Text('An older Material-2 widget, it uses the ThemeData '
-              'input decoration style if defined. In the Themes '
-              'Playground it is defined in the TextField panel.\n'),
+          subtitleReveal:
+              Text('An older Material-2 widget, it uses the ThemeData '
+                  'input decoration style if defined. In the Themes '
+                  'Playground it is defined in the TextField panel.\n'),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
@@ -286,7 +285,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

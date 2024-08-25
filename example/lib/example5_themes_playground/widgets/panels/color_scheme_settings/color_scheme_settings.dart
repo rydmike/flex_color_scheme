@@ -54,7 +54,7 @@ class ColorSchemeSettings extends StatelessWidget {
           enabled: controller.useKeyColors,
           title: const Text('Keep brand colors when using seeded scheme?'),
           dense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'With the switches on the colors below you can lock primary, '
             'secondary, tertiary, error and their container colors to '
             'their scheme input defined colors instead of using the color '
@@ -99,8 +99,7 @@ class ColorSchemeSettings extends StatelessWidget {
         ShowInputColorsSwitch(controller: controller),
         SwitchListTileReveal(
           title: const Text('Seed generated Fixed and FixedDim colors'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'This setting applies when not using a seed generated color '
             'scheme. '
             'It offers you to choose between two styles, internal FCS none '
@@ -129,8 +128,7 @@ class ColorSchemeSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           SwitchListTileReveal(
             title: const Text('Monochrome surfaces'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'All seed generated surface colors are pure greyscale with no '
               'color tint.\n',
             ),
@@ -143,8 +141,7 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Black & white main onColors'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Main colors are primary, secondary, tertiary, '
               'error, their container and fixed colors. Using black and white '
               'as onColors on the main colors may improve '
@@ -159,8 +156,7 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Black & white surface onColors'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Surface onColors are onSurface, onSurfaceVariant and '
               'onInverseSurface colors. Using black and white as onColors on '
               'all surfaces may improve contrast.\n',
@@ -174,8 +170,7 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('White surface'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Surface color uses tone 100 which is '
               'always white. You can add this modifier to any seed '
               'generation strategy. Surface blends will still mix in '
@@ -192,8 +187,7 @@ class ColorSchemeSettings extends StatelessWidget {
         ] else ...<Widget>[
           SwitchListTileReveal(
             title: const Text('Monochrome surfaces'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'All seed generated surface colors are pure greyscale with no '
               'color tint.\n',
             ),
@@ -206,8 +200,7 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Black & white main onColors'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Main colors are primary, secondary, tertiary, '
               'error, their container and fixed colors. Using black and white '
               'as onColors on the main colors may improve '
@@ -222,8 +215,7 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Black & white surface onColors'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Surface onColors are onSurface, onSurfaceVariant and '
               'onInverseSurface colors. Using black and white as onColors on '
               'all surfaces may improve contrast.\n',
@@ -237,8 +229,7 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Black surface'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Surface uses tone 0, which is always '
               'true black. You can add this modifier to any seed '
               'generation strategy. Surface blends will still mix in '

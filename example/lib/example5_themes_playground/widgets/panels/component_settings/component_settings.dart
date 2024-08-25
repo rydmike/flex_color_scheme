@@ -31,8 +31,7 @@ class ComponentSettings extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTileReveal(
           title: const Text('Use Material-3'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Turning this OFF switches your theme to use the legacy Material-2 '
             'styling of components. It is recommended to keep it ON and use '
             'Material-3.\n'
@@ -59,8 +58,7 @@ class ComponentSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Use FlexColorScheme theming'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'This is what you are here for so keep FlexColorScheme (FCS) '
             'theming ON.\n'
             '\n'
@@ -74,8 +72,7 @@ class ComponentSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Use component themes'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'If you are only here for color theming and want to do your own '
             'styling of components, turn this OFF.\n'
             '\n'
@@ -94,8 +91,7 @@ class ComponentSettings extends StatelessWidget {
         const Divider(),
         SwitchListTileReveal(
           title: const Text('Apply ColorScheme to all Cupertino components'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             "Keep this ON to apply the colors of this Material theme's  "
             'ColorScheme to '
             'all Cupertino components. You typically want this, and we '
@@ -117,8 +113,7 @@ class ComponentSettings extends StatelessWidget {
         const Divider(),
         SwitchListTileReveal(
           title: const Text('Use Material-2 style Divider in Material-3'),
-          subtitleDense: true,
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -160,8 +155,7 @@ class ComponentSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Tinted disabled components'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Disabled controls get a slight primary color '
             'tint or tint of its own color, if it is not primary colored. '
             'Keep OFF for Flutter grey defaults. Turn it ON for subtly more '
@@ -183,8 +177,7 @@ class ComponentSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Tinted interactions'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Hover, focus, highlight, pressed and splash '
             'colors get a slight primary color tint, or tint of its '
             'own color, if it is not primary colored.\n'

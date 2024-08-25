@@ -69,8 +69,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ListTileReveal(
           title: const Text('Theme following Android system navigation bar'),
-          subtitleDense: true,
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -193,8 +192,8 @@ class AndroidNavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('System navigation bar divider'),
-          subtitleDense: true,
-          subtitle: const Text('There is an extra system built-in scrim on '
+          subtitleReveal: const Text(
+              'There is an extra system built-in scrim on '
               'the system navigation bar when the divider is enabled.\n'
               '\n'
               'The divider is actually not a divider, it is another colored '

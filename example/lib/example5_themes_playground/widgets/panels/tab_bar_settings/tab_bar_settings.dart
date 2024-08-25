@@ -102,8 +102,7 @@ class TabBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('TabBar colors and styles'),
-          subtitleDense: true,
-          subtitle: Text('With component themes enabled you can select '
+          subtitleReveal: Text('With component themes enabled you can select '
               'scheme color for the tab items and indicator separately. '
               'Using TabBarStyle conveniently syncs the TabBar to active '
               'AppBar or surface theme, but this offers more '
@@ -478,8 +477,7 @@ class TabBarSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Remove bottom divider'),
-          subtitleDense: true,
-          subtitle: const Text('Removes the bottom divider on M3 TabBar, '
+          subtitleReveal: const Text('Removes the bottom divider on M3 TabBar, '
               'does not have any effect on M2 mode TabBar.\n'),
           value: controller.useFlexColorScheme &&
               controller.useSubThemes &&
@@ -497,7 +495,7 @@ class TabBarSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: Padding(
+          subtitleReveal: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: RichText(
               text: TextSpan(

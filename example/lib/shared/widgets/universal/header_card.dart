@@ -194,7 +194,8 @@ class HeaderCard extends StatelessWidget {
                   contentPadding: headerPadding,
                   leading: leading,
                   title: title,
-                  subtitle: info != null && info != '' ? Text(info!) : null,
+                  subtitleReveal:
+                      info != null && info != '' ? Text(info!) : null,
                   trailing: trailing ??
                       ((enabled && onTap != null)
                           ? ExpandIcon(

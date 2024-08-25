@@ -78,7 +78,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         enabled: !disabled,
         contentPadding: contentPadding,
         title: Text('$title ${FlexSchemeVariant.values[index].variantName}'),
-        subtitle: Text(
+        subtitleReveal: Text(
           '$flexToneName scheme variant:\n\n'
           '${FlexSchemeVariant.values[index].configDetails}.\n'
           '\n'

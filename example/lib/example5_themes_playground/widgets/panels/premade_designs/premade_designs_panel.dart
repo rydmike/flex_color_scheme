@@ -210,7 +210,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         UseSeededColorSchemeSwitch(controller: controller),
         SwitchListTileReveal(
           title: const Text('Confirm premade theme usage selection'),
-          subtitle: const Text('To toggle quickly between premade '
+          subtitleReveal: const Text('To toggle quickly between premade '
               'configurations, turn OFF this option. It is ON by default to '
               'prevent accidental activation of premade themes.'),
           value: controller.confirmPremade,
@@ -296,8 +296,7 @@ class SetupListTile extends StatelessWidget {
       textStyle: style,
       child: ListTileReveal(
         title: Text(title),
-        subtitleDense: true,
-        subtitle: Text(subtitle),
+        subtitleReveal: Text(subtitle),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 32.0),
           child: FilledButton(

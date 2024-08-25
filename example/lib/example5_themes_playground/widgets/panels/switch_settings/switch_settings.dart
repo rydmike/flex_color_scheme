@@ -57,11 +57,12 @@ class SwitchesSettings extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTileReveal(
           title: const Text('Unselected toggle is colored'),
-          subtitle: const Text('Applies to OFF state of Switch and unselected '
-              'state on checkbox and Radio.\n'
-              '\n'
-              'ON: Use main color on unselected toggle\n'
-              'OFF: Use default grey/surface style on unselected toggle\n'),
+          subtitleReveal:
+              const Text('Applies to OFF state of Switch and unselected '
+                  'state on checkbox and Radio.\n'
+                  '\n'
+                  'ON: Use main color on unselected toggle\n'
+                  'OFF: Use default grey/surface style on unselected toggle\n'),
           value: controller.unselectedToggleIsColored &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -106,10 +107,11 @@ class SwitchesSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Thumb size is fixed'),
-          subtitle: const Text('Turn ON to keep the Switch thumb the same '
-              'size when Switch is ON or OFF. Only available in Material-3 '
-              'mode. When on the Material-3 Switch looks even more like an '
-              'iOS Switch.\n'),
+          subtitleReveal:
+              const Text('Turn ON to keep the Switch thumb the same '
+                  'size when Switch is ON or OFF. Only available in Material-3 '
+                  'mode. When on the Material-3 Switch looks even more like an '
+                  'iOS Switch.\n'),
           value: controller.switchThumbFixedSize &&
               controller.useSubThemes &&
               controller.useFlexColorScheme &&
@@ -176,7 +178,7 @@ class SwitchesSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

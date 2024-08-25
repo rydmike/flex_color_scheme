@@ -86,8 +86,7 @@ class MenuSettings extends StatelessWidget {
         //
         const ListTileReveal(
           title: Text('DropdownMenu'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'The M3 DropdownMenu has a text entry used to optionally type '
             'select an option. Options can also be tap selected. In FCS '
             'the text entry style matches the defined TextField style.\n'
@@ -103,7 +102,7 @@ class MenuSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -144,8 +143,7 @@ class MenuSettings extends StatelessWidget {
         //
         const ListTileReveal(
           title: Text('MenuAnchor'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'The MenuAnchor can be used to attach a menu to any '
             'widget. It is based on same building blocks as the MenuBar, '
             'using SubMenuButton with MenuItemButton. It can have sub-menus '
@@ -167,8 +165,7 @@ class MenuSettings extends StatelessWidget {
         //
         const ListTileReveal(
           title: Text('MenuBar'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'The MenuBar is made up of SubMenuButtons that have '
             'MenuItemButtons. You can construct arbitrary deep nested '
             'sub-menus. Menu items can have keyboard shortcuts.\n'
@@ -198,8 +195,7 @@ class MenuSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Container radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'For an edge-to-edge MenuBar design, use 0 dp. '
             'The M3 guide shows MenuBar as edge-to-edge with no '
             'corner rounding, but Flutter defaults to 4 dp.\n',
@@ -299,8 +295,7 @@ class MenuSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
             title: const Text('Remove elevation shadow'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'The M3 guide depicts MenuBars with no shadow and optional '
               'elevation with tint. Flutter defaults has shadow in M3. To be '
               'able to use elevation with only elevation tint in M3, turn '
@@ -320,10 +315,10 @@ class MenuSettings extends StatelessWidget {
         //
         const ListTileReveal(
           title: Text('Menu container'),
-          subtitleDense: true,
-          subtitle: Text('Menu container theming properties are shared by '
-              'DropdownMenu, MenuAnchor and MenuBar. You can see applied '
-              'container styles when you open test menus above.\n'),
+          subtitleReveal:
+              Text('Menu container theming properties are shared by '
+                  'DropdownMenu, MenuAnchor and MenuBar. You can see applied '
+                  'container styles when you open test menus above.\n'),
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color of containers'),
@@ -385,8 +380,7 @@ class MenuSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Container radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Does not use the global border radius setting. '
             'Avoid using large border radius on menu container.\n',
           ),
@@ -733,8 +727,7 @@ class MenuSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('Menu item'),
-          subtitleDense: true,
-          subtitle: Text('Menu item style is used by SubmenuButton and '
+          subtitleReveal: Text('Menu item style is used by SubmenuButton and '
               'MenuItemButton, that are used in DropdownMenu, MenuAnchor and '
               'MenuBar. You can see the menu item theme styles applied '
               'when you open the test menus above.\n'),
@@ -802,8 +795,7 @@ class MenuSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Highlight radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Does not use the global border radius setting. '
             'Avoid using large border radius on menu container.\n',
           ),

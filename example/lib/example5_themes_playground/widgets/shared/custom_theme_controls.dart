@@ -55,8 +55,7 @@ class CustomThemeControls extends StatelessWidget {
           ),
           ListTileReveal(
             title: const Text('Copy these colors to the customizable scheme?'),
-            subtitleDense: true,
-            subtitle: const Text('When you copy a built-in color scheme '
+            subtitleReveal: const Text('When you copy a built-in color scheme '
                 'to the customizable ones, it becomes a starting point '
                 'for your own custom colors. Note that it is always '
                 'the input colors that are copied, not the effective '

@@ -20,8 +20,7 @@ class UseSeededColorSchemeSwitch extends StatelessWidget {
         : 'Select seed colors';
     return ListTileReveal(
       title: Text(explainSeed),
-      subtitleDense: true,
-      subtitle: Text('${AppColor.explainUsedColors(controller)}.\n'),
+      subtitleReveal: Text('${AppColor.explainUsedColors(controller)}.\n'),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 5.0),
         child: UseKeyColorsButtons(controller: controller),

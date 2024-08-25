@@ -32,8 +32,7 @@ class UseTinted3TextTheme extends StatelessWidget {
     return isLight
         ? SwitchListTileReveal(
             title: const Text('Tinted light TextTheme'),
-            subtitleDense: true,
-            subtitle: const Text(_describeTextTint),
+            subtitleReveal: const Text(_describeTextTint),
             value: controller.blendLightTextTheme &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,
@@ -43,8 +42,7 @@ class UseTinted3TextTheme extends StatelessWidget {
           )
         : SwitchListTileReveal(
             title: const Text('Tinted dark TextTheme'),
-            subtitleDense: true,
-            subtitle: const Text(_describeTextTint),
+            subtitleReveal: const Text(_describeTextTint),
             value: controller.blendDarkTextTheme &&
                 controller.useSubThemes &&
                 controller.useFlexColorScheme,

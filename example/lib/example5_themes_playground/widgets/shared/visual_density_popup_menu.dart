@@ -113,8 +113,7 @@ class VisualDensityPopupMenu extends StatelessWidget {
             Text(tileLabel),
           ],
         ),
-        subtitleDense: true,
-        subtitle: Column(
+        subtitleReveal: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (subtitle != null) subtitle!,

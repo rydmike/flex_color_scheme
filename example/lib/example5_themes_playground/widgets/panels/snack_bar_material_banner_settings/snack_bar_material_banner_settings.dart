@@ -57,17 +57,17 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('SnackBar'),
-          subtitleDense: true,
-          subtitle: Text('The SnackBar comes with two behaviors, fixed and '
-              'floating. When using M3, prefer using the floating '
-              'behavior.\n'),
+          subtitleReveal:
+              Text('The SnackBar comes with two behaviors, fixed and '
+                  'floating. When using M3, prefer using the floating '
+                  'behavior.\n'),
         ),
         const SizedBox(height: 8),
         const SnackBarShowcase(),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -234,8 +234,7 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('MaterialBanner'),
-          subtitleDense: true,
-          subtitle: Text('No theme settings in current version of '
+          subtitleReveal: Text('No theme settings in current version of '
               'FlexColorScheme. Only included here to demonstrates its style '
               'with current theme and used ColorScheme.\n'),
         ),

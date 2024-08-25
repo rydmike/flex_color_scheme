@@ -75,8 +75,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('Drawer'),
-          subtitleDense: true,
-          subtitle: Text('The Drawer comes in two variants, the vanilla '
+          subtitleReveal: Text('The Drawer comes in two variants, the vanilla '
               'Drawer, which is an empty Drawer container. You provide '
               'the content. Its theme also control how the '
               'NavigationDrawer looks, since the NavigationDrawer builds '
@@ -276,7 +275,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         ListTileReveal(
           title: const Text('Width issue'),
           dense: true,
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -322,8 +321,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('NavigationDrawer'),
-          subtitleDense: true,
-          subtitle: Text('The NavigationDrawer arrived with Flutter 3.7. '
+          subtitleReveal: Text('The NavigationDrawer arrived with Flutter 3.7. '
               'It provides an easy way to make a Material-3 specification '
               'matching Drawer with built-in top level navigation items '
               'and a selected destination indicator.\n'
@@ -534,7 +532,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
