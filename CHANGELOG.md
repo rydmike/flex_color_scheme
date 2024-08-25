@@ -317,8 +317,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - Tooltip: DONE
   - PopupMenuButton: DONE
   - Menus: DONE
-  - AppBar: TODO
-  - TabBar: TODO
+  - AppBar: TODO light + dark
+  - TabBar: TODO light + dark
 
 ## 7.3.1
 
