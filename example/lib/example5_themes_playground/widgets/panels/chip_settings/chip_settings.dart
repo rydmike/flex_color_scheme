@@ -6,6 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_nullable_default.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class ChipSettings extends StatelessWidget {
@@ -31,15 +32,19 @@ class ChipSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
 
     final String chipRadiusDefaultLabel =
         controller.chipBorderRadius == null && effectiveRadius == null
-            ? 'default 8'
+            ? 'default\n8 dp'
             : controller.chipBorderRadius == null &&
                     controller.defaultRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
+                ? 'global\n${effectiveRadius!.toStringAsFixed(0)} dp'
                 : '';
 
     // TODO(rydmike): Add choice chip SchemeColor selected color.
@@ -56,7 +61,7 @@ class ChipSettings extends StatelessWidget {
               ? 'default (surface)'
               : 'default (primary)',
           index: controller.chipSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setChipSchemeColor(null);
@@ -72,7 +77,7 @@ class ChipSettings extends StatelessWidget {
               ? 'default (secondaryContainer)'
               : 'default (none)',
           index: controller.chipSelectedSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setChipSelectedSchemeColor(null);
@@ -87,7 +92,7 @@ class ChipSettings extends StatelessWidget {
           title: const Text('Chip delete icon color'),
           labelForDefault: 'default (onSurface)',
           index: controller.chipDeleteIconSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setChipDeleteIconSchemeColor(null);
@@ -98,56 +103,21 @@ class ChipSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Border radius'),
-          subtitle: Slider(
-            min: -1,
-            max: 40,
-            divisions: 41,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.chipBorderRadius == null ||
-                        (controller.chipBorderRadius ?? -1) < 0
-                    ? chipRadiusDefaultLabel
-                    : (controller.chipBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.useMaterial3
-                    ? 'default 8'
-                    : 'stadium',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.chipBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setChipBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.chipBorderRadius == null ||
-                              (controller.chipBorderRadius ?? -1) < 0
-                          ? chipRadiusDefaultLabel
-                          : (controller.chipBorderRadius?.toStringAsFixed(0) ??
-                              '')
-                      : controller.useMaterial3
-                          ? 'default 8'
-                          : 'stadium',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.chipBorderRadius,
+          onChanged: controller.setChipBorderRadius,
+          min: 0,
+          max: 40,
+          divisions: 40,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: chipRadiusDefaultLabel,
+          valueDefaultDisabledLabel:
+              controller.useMaterial3 ? 'default\nstadium' : 'default\n4 dp',
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
