@@ -36,11 +36,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
       popUpAnimationStyle: AnimationStyle.noAnimation,
       position: PopupMenuPosition.under,
       offset: const Offset(0, -4),
-      constraints: const BoxConstraints(
-        minWidth: 350,
-        maxWidth: 350,
-        // maxHeight: 600,
-      ),
+      constraints: const BoxConstraints(minWidth: 350, maxWidth: 350),
       initialValue: disabled ? 0 : index,
       tooltip: '',
       padding: EdgeInsets.zero,

@@ -102,11 +102,7 @@ class TabBarStylePopupMenu extends StatelessWidget {
       popUpAnimationStyle: AnimationStyle.noAnimation,
       position: PopupMenuPosition.under,
       offset: const Offset(0, -4),
-      constraints: const BoxConstraints(
-        // minWidth: 500,
-        // maxWidth: 500,
-        maxHeight: 540,
-      ),
+      constraints: const BoxConstraints(maxHeight: 560),
       initialValue: useDefault ? FlexTabBarStyle.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
