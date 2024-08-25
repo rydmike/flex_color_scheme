@@ -54,7 +54,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
   }
 
   String _phoneInfo(int phoneIndex) {
-    final SimDevice di = Simulator.devices[phoneIndex];
+    final SimDevice di = SimulatorPopupMenu.devices[phoneIndex];
     final double resWidth = di.info.screenSize.width * di.info.pixelRatio;
     final double resHeight = di.info.screenSize.height * di.info.pixelRatio;
     return 'Device pixels ${di.info.screenSize.width.toStringAsFixed(0)}x'
@@ -80,7 +80,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: 45,
+              height: 34,
               child: TabBar(
                 indicatorColor: theme.colorScheme.primary,
                 labelColor: theme.colorScheme.primary,
@@ -101,50 +101,69 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
                 ],
               ),
             ),
-            ListTileReveal(
-              leading: IconButton(
-                icon: AnimatedRotation(
-                  turns: turns,
-                  duration: const Duration(milliseconds: 200),
-                  child: Icon(
-                    Icons.screen_rotation_outlined,
-                    color: theme.colorScheme.primary,
-                    size: 36,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  flex: 3,
+                  child: ListTileReveal(
+                    dense: true,
+                    leading: IconButton(
+                      icon: AnimatedRotation(
+                        turns: turns,
+                        duration: const Duration(milliseconds: 200),
+                        child: Icon(
+                          Icons.screen_rotation_outlined,
+                          color: theme.colorScheme.primary,
+                          size: 36,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          if (orientation == Orientation.portrait) {
+                            orientation = Orientation.landscape;
+                            turns = 3 / 8;
+                          } else {
+                            orientation = Orientation.portrait;
+                            turns = 1 / 8;
+                          }
+                        });
+                      },
+                    ),
+                    title: Text('${SimulatorPopupMenu.devices[device].name} ('
+                        // ignore: lines_longer_than_80_chars
+                        '${SimulatorPopupMenu.devices[device].info.identifier.platform.name})'),
+                    subtitleReveal: Text('${_phoneInfo(device)}\n'),
+                    trailing: SimulatorPopupMenu(
+                      index: device,
+                      onChanged: (int index) {
+                        setState(() {
+                          device = index;
+                          widget.controller.setSimulatorDeviceIndex(device);
+                        });
+                      },
+                    ),
                   ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    if (orientation == Orientation.portrait) {
-                      orientation = Orientation.landscape;
-                      turns = 3 / 8;
-                    } else {
-                      orientation = Orientation.portrait;
-                      turns = 1 / 8;
-                    }
-                  });
-                },
-              ),
-              title: Text('${Simulator.devices[device].name} ('
-                  '${Simulator.devices[device].info.identifier.platform.name}'
-                  ')'),
-              subtitleReveal: Text('${_phoneInfo(device)}\n'),
-              trailing: Simulator(
-                index: device,
-                onChanged: (int index) {
-                  setState(() {
-                    device = index;
-                    widget.controller.setSimulatorDeviceIndex(device);
-                  });
-                },
-              ),
-            ),
-            Slider(
-              min: 400,
-              max: 1600,
-              divisions: 100,
-              label: widget.controller.deviceSize.toStringAsFixed(0),
-              value: widget.controller.deviceSize,
-              onChanged: widget.controller.setDeviceSize,
+                const Padding(
+                  padding: EdgeInsets.only(top: 18.0),
+                  child: Text('Zoom'),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Slider(
+                      min: 400,
+                      max: 1600,
+                      divisions: 100,
+                      label: widget.controller.deviceSize.toStringAsFixed(0),
+                      value: widget.controller.deviceSize,
+                      onChanged: widget.controller.setDeviceSize,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Card(
               margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
@@ -217,7 +236,7 @@ class SimulatorFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DeviceFrame(
-      device: Simulator.devices[device].info,
+      device: SimulatorPopupMenu.devices[device].info,
       orientation: orientation,
       screen: Builder(
         builder: (BuildContext deviceContext) => MaterialApp(
@@ -263,8 +282,8 @@ class SimDevice {
 }
 
 /// Widget used to select used simulation device.
-class Simulator extends StatelessWidget {
-  const Simulator({
+class SimulatorPopupMenu extends StatelessWidget {
+  const SimulatorPopupMenu({
     super.key,
     required this.index,
     this.onChanged,
