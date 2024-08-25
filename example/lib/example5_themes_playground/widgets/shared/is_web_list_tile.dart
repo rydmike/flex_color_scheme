@@ -30,8 +30,8 @@ class IsWebListTile extends StatelessWidget {
     return ListTileReveal(
       dense: true,
       title: const Text('Mock web'),
-      subtitleDense: true,
-      subtitle: Text('Use this setting to test what your adaptive theme looks '
+      subtitleReveal: Text(
+          'Use this setting to test what your adaptive theme looks '
           'likes on web and none web platform, by mocking web or device usage '
           'status here in the Playground.\n\n'
           '${_explainLabelStyle(controller.fakeIsWeb)}.\n'),

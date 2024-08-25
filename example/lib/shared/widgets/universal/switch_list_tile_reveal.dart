@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// A custom [SwitchListTile] that has a built-in animated custom leading action
-/// as a part of [title] that reveals the [subtitle] when clicked.
+/// as a part of [title] that reveals the [subtitleReveal] when clicked.
 ///
 /// This is useful when a more compact look is desired where more information
 /// is provided as an optional user based reveal action. The purpose is to make
@@ -16,10 +16,11 @@ class SwitchListTileReveal extends StatefulWidget {
     required this.onChanged,
     this.title,
     this.subtitle,
+    this.subtitleReveal,
     this.contentPadding,
     this.onTap,
     this.dense,
-    this.subtitleDense,
+    this.revealDense,
     this.enabled = true,
     this.isOpen,
     this.duration = const Duration(milliseconds: 200),
@@ -56,10 +57,15 @@ class SwitchListTileReveal extends StatefulWidget {
   /// Typically a [Text] widget.
   final Widget? subtitle;
 
+  /// Additional content displayed below the subtitle in a reveal animation.
+  ///
+  /// Typically a [Text] widget.
+  final Widget? subtitleReveal;
+
   /// The [SwitchListTileReveal]'s internal padding.
   ///
   /// Insets a [SwitchListTileReveal]'s contents: its [title],
-  /// [subtitle] widgets.
+  /// [subtitleReveal] widgets.
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
   final EdgeInsetsGeometry? contentPadding;
@@ -79,13 +85,10 @@ class SwitchListTileReveal extends StatefulWidget {
   /// Dense list tiles default to a smaller height.
   final bool? dense;
 
-  /// Whether this list tile subtitle is dense.
+  /// Whether the used reveal part of the ListTile is dense.
   ///
-  /// Dense list tiles default to a smaller height. The subtitle is also dense
-  /// if dense is true.
-  ///
-  /// If not defined defaults to false.
-  final bool? subtitleDense;
+  /// If not defined, defaults to true.
+  final bool? revealDense;
 
   /// Set to true to open the info section of the ListTile, to false to close
   /// it.
@@ -134,30 +137,32 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               if (widget.title != null) widget.title!,
-              IconButton(
-                iconSize: 20,
-                // ignore: avoid_bool_literals_in_conditional_expressions
-                isSelected: widget.enabled ? _isOpen : false,
-                icon: const Icon(Icons.info_outlined),
-                selectedIcon: const Icon(Icons.info),
-                onPressed: widget.enabled ? _handleTap : null,
-              ),
+              if (widget.subtitleReveal != null && widget.enabled)
+                IconButton(
+                  iconSize: 20,
+                  // ignore: avoid_bool_literals_in_conditional_expressions
+                  isSelected: widget.enabled ? _isOpen : false,
+                  icon: const Icon(Icons.info_outlined),
+                  selectedIcon: const Icon(Icons.info),
+                  onPressed: widget.enabled ? _handleTap : null,
+                ),
             ],
           ),
+          subtitle: widget.subtitle,
         ),
         AnimatedSwitcher(
           duration: widget.duration,
           transitionBuilder: (Widget child, Animation<double> animation) {
             return SizeTransition(
               sizeFactor: animation,
+              axisAlignment: _isOpen ? 1 : -1,
               child: child,
             );
           },
-          child: (_isOpen && widget.subtitle != null && widget.enabled)
+          child: (_isOpen && widget.subtitleReveal != null && widget.enabled)
               ? ListTile(
-                  dense: (widget.dense ?? false) ||
-                      (widget.subtitleDense ?? false),
-                  subtitle: widget.subtitle,
+                  dense: widget.revealDense ?? true,
+                  subtitle: widget.subtitleReveal,
                   onTap: widget.enabled ? _handleTap : null,
                 )
               : const SizedBox.shrink(),

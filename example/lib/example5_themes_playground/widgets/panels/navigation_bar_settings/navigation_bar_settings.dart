@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_nullable_default.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
@@ -123,7 +124,7 @@ class NavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('NavigationBar colors and styles'),
-          subtitle: Text(
+          subtitleReveal: Text(
             'Default background color is surface with an onSurface overlay '
             'color in M2. In M3 default background color is surface with '
             'elevation 3, using M3 elevation tint. FlexColorScheme M2 theme '
@@ -185,7 +186,7 @@ class NavigationBarSettings extends StatelessWidget {
                       ? controller.navBarOpacity == null ||
                               (controller.navBarOpacity ?? -1) < 0
                           ? 'default 100%'
-                          : '${(navBarOpacity * 100).toStringAsFixed(0)} %'
+                          : '${(navBarOpacity * 100).toStringAsFixed(0)}%'
                       : 'default 100%',
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
@@ -193,6 +194,19 @@ class NavigationBarSettings extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        SliderNullableDefault(
+          enabled: navBarOpacityEnabled,
+          title: const Text('Background opacity'),
+          value: controller.navBarOpacity,
+          onChanged: controller.setNavBarOpacity,
+          min: 0,
+          max: 1,
+          divisions: 99,
+          valueDisplayScale: 100,
+          valueHeading: 'OPACITY',
+          valueUnitLabel: '%',
+          valueDefaultLabel: 'default 100%',
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -454,10 +468,10 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Mute unselected items'),
-          subtitleDense: true,
-          subtitle: const Text('Unselected icon and text are less bright. '
-              'Shared setting for icon and text, but separate properties '
-              'in the API.\n'),
+          subtitleReveal:
+              const Text('Unselected icon and text are less bright. '
+                  'Shared setting for icon and text, but separate properties '
+                  'in the API.\n'),
           value: controller.navBarMuteUnselected && muteUnselectedEnabled,
           onChanged:
               muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
@@ -518,7 +532,7 @@ class NavigationBarSettings extends StatelessWidget {
         const ListTileReveal(
           dense: true,
           title: Text('More settings with the API'),
-          subtitle: Text(
+          subtitleReveal: Text(
             'With the API you can also set the font and icon size individually '
             'on selected and unselected items. Use FlexSubThemesData '
             'properties: navigationBarSelectedLabelSize, '

@@ -143,7 +143,7 @@ class ShowTonalPalette extends StatelessWidget {
         const ListTileReveal(
           contentPadding: EdgeInsetsDirectional.only(end: 12),
           title: Text('Tonal color palettes'),
-          subtitle: Text(
+          subtitleReveal: Text(
             'Tonal palettes and their tones are presented below in this '
             'order:\n'
             '  - Primary palette\n'

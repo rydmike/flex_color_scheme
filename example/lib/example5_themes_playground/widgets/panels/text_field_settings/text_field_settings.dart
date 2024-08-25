@@ -170,8 +170,8 @@ class TextFieldSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ListTileReveal(
           title: const Text('Use Material 3 default TextField style?'),
-          subtitleDense: true,
-          subtitle: const Text('Update settings below to match M3 default '
+          subtitleReveal: const Text(
+              'Update settings below to match M3 default '
               'values. Also sets text selection style.\n'
               'Can also be used in M2 mode, but the result is different from '
               'when used in actual M3 mode.'),
@@ -187,8 +187,7 @@ class TextFieldSettings extends StatelessWidget {
         ),
         ListTileReveal(
           title: const Text('Reset TextField to FlexColorScheme defaults?'),
-          subtitleDense: true,
-          subtitle: const Text("Update settings to FlexColorScheme's own "
+          subtitleReveal: const Text("Update settings to FlexColorScheme's own "
               'opinionated default values. Also resets text selection style.\n'
               'The FCS defaults for M2 and M3 are different, the M3 mode '
               'defaults are very close to M3 defaults, but use a filled '
@@ -246,10 +245,10 @@ class TextFieldSettings extends StatelessWidget {
           ),
         SwitchListTileReveal(
           title: const Text('Use base color as background fill'),
-          subtitleDense: true,
-          subtitle: const Text('TIP: If you leave this OFF, you can still '
-              'theme the fill color and turn it ON using widget level '
-              "'filled: true' property, and wise versa.\n"),
+          subtitleReveal:
+              const Text('TIP: If you leave this OFF, you can still '
+                  'theme the fill color and turn it ON using widget level '
+                  "'filled: true' property, and wise versa.\n"),
           value: controller.inputDecoratorIsFilled &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
@@ -863,7 +862,7 @@ class TextFieldSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

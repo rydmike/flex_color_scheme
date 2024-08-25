@@ -43,7 +43,7 @@ class AppBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('AppBar colors and styles'),
-          subtitle: Text('With component themes enabled you can select a '
+          subtitleReveal: Text('With component themes enabled you can select a '
               'ColorScheme based color for the AppBar background color. '
               'Using AppBarStyle is convenient and does not require activating '
               'FlexColorScheme component themes, but activating them gives '
@@ -97,9 +97,9 @@ class AppBarSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('Opacity'),
-            subtitleDense: true,
-            subtitle: const Text('The themed opacity of the AppBar in dark '
-                'mode, try 85% to 98%\n'),
+            subtitleReveal:
+                const Text('The themed opacity of the AppBar in dark '
+                    'mode, try 85% to 98%\n'),
           ),
           ListTile(
             title: Slider(
@@ -153,9 +153,9 @@ class AppBarSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('Opacity'),
-            subtitleDense: true,
-            subtitle: const Text('The themed opacity of the AppBar in dark '
-                'mode, try 85% to 98%\n'),
+            subtitleReveal:
+                const Text('The themed opacity of the AppBar in dark '
+                    'mode, try 85% to 98%\n'),
           ),
           ListTile(
             title: Slider(
@@ -191,8 +191,7 @@ class AppBarSettings extends StatelessWidget {
         ],
         SwitchListTileReveal(
           title: const Text('One colored AppBar on Android'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'ON  No scrim on the top status bar\n'
             'OFF Use a two toned AppBar with a scrim on top status bar\n',
           ),
@@ -506,7 +505,7 @@ class AppBarSettings extends StatelessWidget {
         const ListTileReveal(
           dense: true,
           title: Text('AppBar background color'),
-          subtitle: Text('With component themes enabled you can select a '
+          subtitleReveal: Text('With component themes enabled you can select a '
               'ColorScheme based color for the AppBar background color.\n'
               '\n'
               'Using AppBarStyle is convenient and does not require activating '
@@ -525,7 +524,8 @@ class AppBarSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('AppBar platform adaptive settings'),
           // subtitleDense: true,
-          subtitle: Text('With platform adaptive settings you can modify theme '
+          subtitleReveal: Text(
+              'With platform adaptive settings you can modify theme '
               'properties to have a different response on selected platforms. '
               'You can select which platforms the platform adaptive value '
               'should be used on. While all other platforms not included '
@@ -588,7 +588,7 @@ class AppBarSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

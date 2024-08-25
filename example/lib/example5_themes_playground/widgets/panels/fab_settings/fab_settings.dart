@@ -62,8 +62,8 @@ class FabSettings extends StatelessWidget {
         SwitchListTileReveal(
           title: const Text('Use themed shape'),
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitleDense: true,
-          subtitle: const Text('OFF removes shape usage, making it use default '
+          subtitleReveal: const Text(
+              'OFF removes shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
               'setting.\n'),
           value: controller.fabUseShape &&
@@ -78,9 +78,9 @@ class FabSettings extends StatelessWidget {
               controller.useSubThemes &&
               controller.useFlexColorScheme,
           title: const Text('Always circular'),
-          subtitleDense: true,
-          subtitle: const Text('Turn on to always use circular and stadium '
-              'shaped FAB, also in Material 3.\n'),
+          subtitleReveal:
+              const Text('Turn on to always use circular and stadium '
+                  'shaped FAB, also in Material 3.\n'),
           value: controller.fabAlwaysCircular &&
               controller.fabUseShape &&
               controller.useSubThemes &&
@@ -164,7 +164,7 @@ class FabSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

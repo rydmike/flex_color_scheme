@@ -35,8 +35,7 @@ class EffectiveColors extends StatelessWidget {
       children: <Widget>[
         const ListTileReveal(
           title: Text('ColorScheme colors'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'The themed and effective ColorScheme colors '
             'are presented below in the order they appear in the '
             'ColorScheme class. Deprecated colors primaryVariant and '
@@ -60,8 +59,7 @@ class EffectiveColors extends StatelessWidget {
         ),
         ListTileReveal(
           title: const Text('ThemeData colors'),
-          subtitleDense: true,
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

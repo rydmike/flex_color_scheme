@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// A custom [ListTile] that has a built-in animated custom leading action
 /// after the [leading] widget built in as a part of [title] that
-/// reveals the [subtitle] when clicked.
+/// reveals the [subtitleReveal] when clicked.
 ///
 /// This is useful when a more compact look is desired where more information
 /// is provided as an optional user based reveal action. The purpose is to make
@@ -16,11 +16,12 @@ class ListTileReveal extends StatefulWidget {
     this.title,
     this.leading,
     this.subtitle,
+    this.subtitleReveal,
     this.trailing,
     this.contentPadding,
     this.onTap,
     this.dense,
-    this.subtitleDense,
+    this.revealDense,
     this.enabled = true,
     this.isOpen,
     this.duration = const Duration(milliseconds: 200),
@@ -44,6 +45,11 @@ class ListTileReveal extends StatefulWidget {
   /// Typically a [Text] widget.
   final Widget? subtitle;
 
+  /// Additional content displayed below the subtitle in a reveal animation.
+  ///
+  /// Typically a [Text] widget.
+  final Widget? subtitleReveal;
+
   /// A widget to display after the title.
   ///
   /// Typically an [Icon] widget.
@@ -57,7 +63,8 @@ class ListTileReveal extends StatefulWidget {
 
   /// The [ListTileReveal]'s internal padding.
   ///
-  /// Insets a [ListTileReveal]'s contents: its [leading], [title], [subtitle],
+  /// Insets a [ListTileReveal]'s contents: its [leading], [title],
+  /// [subtitleReveal],
   /// and [trailing] widgets.
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
@@ -78,13 +85,10 @@ class ListTileReveal extends StatefulWidget {
   /// Dense list tiles default to a smaller height.
   final bool? dense;
 
-  /// Whether this list tile subtitle is dense.
+  /// Whether the used reveal part of the ListTile is dense.
   ///
-  /// Dense list tiles default to a smaller height. The subtitle is also dense
-  /// if dense is true.
-  ///
-  /// If not defined defaults to false.
-  final bool? subtitleDense;
+  /// If not defined, defaults to true.
+  final bool? revealDense;
 
   /// Set to true to open the info section of the ListTile, to false to close
   /// it.
@@ -133,7 +137,7 @@ class _ListTileRevealState extends State<ListTileReveal> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               if (widget.title != null) widget.title!,
-              if (widget.subtitle != null && widget.enabled)
+              if (widget.subtitleReveal != null && widget.enabled)
                 IconButton(
                   iconSize: 20,
                   // ignore: avoid_bool_literals_in_conditional_expressions
@@ -144,6 +148,7 @@ class _ListTileRevealState extends State<ListTileReveal> {
                 ),
             ],
           ),
+          subtitle: widget.subtitle,
           trailing: widget.trailing,
           onTap: widget.enabled ? widget.onTap : null,
         ),
@@ -156,11 +161,10 @@ class _ListTileRevealState extends State<ListTileReveal> {
               child: child,
             );
           },
-          child: (_isOpen && widget.subtitle != null && widget.enabled)
+          child: (_isOpen && widget.subtitleReveal != null && widget.enabled)
               ? ListTile(
-                  dense: (widget.dense ?? false) ||
-                      (widget.subtitleDense ?? false),
-                  subtitle: widget.subtitle,
+                  dense: widget.revealDense ?? true,
+                  subtitle: widget.subtitleReveal,
                   onTap: widget.enabled ? _handleTap : null,
                 )
               : const SizedBox.shrink(),

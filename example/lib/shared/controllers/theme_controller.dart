@@ -541,6 +541,7 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavBarBackgroundSchemeColor);
     _navBarOpacity = await _themeService.load(
         Store.keyNavBarOpacity, Store.defaultNavBarOpacity);
+    _navBarOpacity = null;
     _navBarElevation = await _themeService.load(
         Store.keyNavBarElevation, Store.defaultNavigationBarElevation);
     _navBarHeight = await _themeService.load(

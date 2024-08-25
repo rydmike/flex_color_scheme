@@ -38,8 +38,7 @@ class IconButtonAvatarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('Icon, IconButton and CircleAvatar'),
-          subtitleDense: true,
-          subtitle: Text('Included to show their styles with '
+          subtitleReveal: Text('Included to show their styles with '
               'current theme and ColorScheme. '
               'These components have no adjustable theme properties in current '
               'version of FCS. Use "copyWith" on FCS returned ThemeData to '
@@ -48,9 +47,8 @@ class IconButtonAvatarSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTileReveal(
-          subtitleDense: true,
           title: Text('Icon'),
-          subtitle: Text('Icons by default use same foreground '
+          subtitleReveal: Text('Icons by default use same foreground '
               'color as active text theme. Some components change '
               'icon colors automatically when they use them, but '
               'not all do. Icon usage is very varied, it is '
@@ -63,9 +61,8 @@ class IconButtonAvatarSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTileReveal(
-          subtitleDense: true,
           title: Text('IconButton'),
-          subtitle: Text('IconButtons in FCS currently only offer the '
+          subtitleReveal: Text('IconButtons in FCS currently only offer the '
               'default theme and no customization. See known issues for '
               'explanation of why this limitation is used.\n'),
         ),
@@ -80,7 +77,7 @@ class IconButtonAvatarSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -144,9 +141,8 @@ class IconButtonAvatarSettings extends StatelessWidget {
         ),
         const Divider(),
         const ListTileReveal(
-          subtitleDense: true,
           title: Text('CircleAvatar'),
-          subtitle: Text('When using M2 mode, CircleAvatar uses legacy '
+          subtitleReveal: Text('When using M2 mode, CircleAvatar uses legacy '
               'ThemeData color primaryColorDark and primaryColorLight as '
               'default colors. FCS takes care of defining light and dark '
               'shades for these legacy ThemeData colors automatically based '

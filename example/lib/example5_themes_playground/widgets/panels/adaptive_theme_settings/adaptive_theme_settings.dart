@@ -27,8 +27,8 @@ class AdaptiveThemeSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('Platform adaptive behavior'),
-          // subtitleDense: true,
-          subtitle: Text('With platform adaptive settings you can modify theme '
+          subtitleReveal: Text(
+              'With platform adaptive settings you can modify theme '
               'properties to have a different response on selected platforms. '
               'You can select which platforms the platform adaptive value '
               'should be used on. All other platforms not included '

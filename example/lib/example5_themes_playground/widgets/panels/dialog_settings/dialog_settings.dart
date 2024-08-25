@@ -200,7 +200,7 @@ class DialogSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('Dialog'),
-          subtitle: Text('In Flutter M2 the default dialog background '
+          subtitleReveal: Text('In Flutter M2 the default dialog background '
               'color is surface for all Dialogs. In M3 mode '
               'they default to surfaceContainerHigh. FCS 8.0 and '
               'later uses surfaceContainerHigh in both M2 and M3 mode.'
@@ -250,7 +250,7 @@ class DialogSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -279,8 +279,7 @@ class DialogSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Elevation'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'The elevation adjusts elevation for default dialog and thus '
             'also AlertDialog. It also sets elevation for the the '
             'TimePickerDialog and DatePickerDialog to same value.\n',
@@ -340,8 +339,7 @@ class DialogSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Dialog border radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'This border radius adjusts radius for general Dialogs and thus '
             'also AlertDialog. By default in FlexColorScheme the border radius '
             'on the TimePickerDialog and DatePickerDialog also defaults to '
@@ -362,7 +360,6 @@ class DialogSettings extends StatelessWidget {
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitleDense: true,
           title: Slider(
             min: -1,
             max: 50,
@@ -418,8 +415,7 @@ class DialogSettings extends StatelessWidget {
               controller.adaptiveDialogRadius != AdaptiveTheme.off &&
               controller.adaptiveDialogRadius != null,
           title: const Text('Adaptive dialog border radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'You can define a separate Dialog border radius that gets used '
             'adaptively on selected platforms. This is useful if you '
             'for example want to keep M3 design Dialog radius on Android '
@@ -489,8 +485,7 @@ class DialogSettings extends StatelessWidget {
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text("Use TextField's InputDecorationTheme in picker "
               'dialogs'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'Turn ON to use the FlexColorScheme themed TextField '
             'InputDecoration style on time and date text entry fields in '
             'TimePicker and DatePicker dialogs.\n'
@@ -512,8 +507,7 @@ class DialogSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('TimePicker'),
-          subtitleDense: true,
-          subtitle: Text('Flutter 3.7 does not support '
+          subtitleReveal: Text('Flutter 3.7 does not support '
               'Material-3 styling of the TimePicker. FlexColorScheme adds '
               'M3 styling based on M3 specification already in Flutter 3.7 '
               'where it is supported by its theming capabilities. '
@@ -523,8 +517,7 @@ class DialogSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'TimePicker radius defaults to the general dialog radius in '
             'FlexColorScheme, including its platform adaptive radius settings '
             'defined above or in general border radius. '
@@ -534,7 +527,6 @@ class DialogSettings extends StatelessWidget {
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitleDense: true,
           title: Slider(
             min: -1,
             max: 50,
@@ -578,10 +570,10 @@ class DialogSettings extends StatelessWidget {
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text("Time input elements' border radius"),
-          subtitleDense: true,
-          subtitle: const Text('Time input elements do not use the global '
-              'radius override setting. '
-              'Avoid large border radius on the time input elements.\n'),
+          subtitleReveal:
+              const Text('Time input elements do not use the global '
+                  'radius override setting. '
+                  'Avoid large border radius on the time input elements.\n'),
         ),
         ListTile(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
@@ -638,7 +630,7 @@ class DialogSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -665,17 +657,16 @@ class DialogSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('DatePicker'),
-          subtitleDense: true,
-          subtitle: Text('Flutter 3.7 does not support any Material 3 styling '
-              'of the DatePicker, there is not even a theme for DatePicker '
-              'in Flutter 3.7. Flutter 3.10 adds theming and M3 support to '
-              'the DatePicker.\n'),
+          subtitleReveal:
+              Text('Flutter 3.7 does not support any Material 3 styling '
+                  'of the DatePicker, there is not even a theme for DatePicker '
+                  'in Flutter 3.7. Flutter 3.10 adds theming and M3 support to '
+                  'the DatePicker.\n'),
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Border radius'),
-          subtitleDense: true,
-          subtitle: const Text(
+          subtitleReveal: const Text(
             'DatePicker radius defaults to the general dialog radius in '
             'FlexColorScheme, including its platform adaptive radius settings '
             'defined above or in general border radius. '
@@ -685,7 +676,6 @@ class DialogSettings extends StatelessWidget {
         ),
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitleDense: true,
           title: Slider(
             min: -1,
             max: 50,
@@ -744,7 +734,7 @@ class DialogSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

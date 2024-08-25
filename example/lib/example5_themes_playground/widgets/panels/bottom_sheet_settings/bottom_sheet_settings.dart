@@ -51,8 +51,8 @@ class BottomSheetSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('BottomSheet'),
-          subtitleDense: true,
-          subtitle: Text('The BottomSheet comes in two variants, normal and '
+          subtitleReveal: Text(
+              'The BottomSheet comes in two variants, normal and '
               'modal version. Some of their properties can be themed '
               'individually, but not all of them. The border radius only has '
               'one the property shared by both variants.\n'),

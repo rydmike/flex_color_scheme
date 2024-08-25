@@ -61,8 +61,8 @@ class InputColorsSettings extends StatelessWidget {
         SwitchListTileReveal(
           enabled: controller.useFlexColorScheme && !controller.useKeyColors,
           title: const Text('Use Material 3 error colors'),
-          subtitleDense: true,
-          subtitle: const Text('Override scheme defined used legacy M2 error '
+          subtitleReveal: const Text(
+              'Override scheme defined used legacy M2 error '
               'colors and use M3 error colors instead. This applies when not '
               'using seeded ColorSchemes. Seed generated ColorSchemes always '
               'use M3 error colors. Newer built-in schemes also use the M3 '
@@ -84,8 +84,7 @@ class InputColorsSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Swap secondary and tertiary legacy colors in M3'),
-          subtitleDense: true,
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -132,8 +131,7 @@ class InputColorsSettings extends StatelessWidget {
         if (isLight)
           SwitchListTileReveal(
             title: const Text('Swap light primary and secondary'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Swap primary and secondary, and their container colors. '
               'The above legacy M3 mode secondary and tertiary swap is done '
               'first, if it is enabled.\n',
@@ -146,8 +144,7 @@ class InputColorsSettings extends StatelessWidget {
         else
           SwitchListTileReveal(
             title: const Text('Swap dark primary and secondary'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Swap primary and secondary, and their container colors. '
               'The above legacy M3 mode secondary and tertiary swap is done '
               'first, if it is enabled.\n',
@@ -163,9 +160,9 @@ class InputColorsSettings extends StatelessWidget {
             children: <Widget>[
               SwitchListTileReveal(
                 title: const Text('Compute dark theme'),
-                subtitleDense: true,
-                subtitle: const Text('Compute dark theme from light color '
-                    'values, instead of using predefined dark colors.\n'),
+                subtitleReveal:
+                    const Text('Compute dark theme from light color '
+                        'values, instead of using predefined dark colors.\n'),
                 value: controller.useToDarkMethod &&
                     controller.useFlexColorScheme &&
                     !controller.useKeyColors,
@@ -176,8 +173,7 @@ class InputColorsSettings extends StatelessWidget {
               ),
               SwitchListTileReveal(
                 title: const Text('Computed dark swaps main and container'),
-                subtitleDense: true,
-                subtitle: const Text('Recommend to turn this ON. When '
+                subtitleReveal: const Text('Recommend to turn this ON. When '
                     'swapped, you can often use them as they are with no '
                     'white blend level, especially if the light colors '
                     'use M3 design intent.\n'),
@@ -196,10 +192,10 @@ class InputColorsSettings extends StatelessWidget {
                     controller.useFlexColorScheme &&
                     !controller.useKeyColors,
                 title: const Text('White blend level'),
-                subtitleDense: true,
-                subtitle: const Text('Adjust white blend level to desaturate '
-                    'the the light mode colors to make them work better in '
-                    'your dark theme\n'),
+                subtitleReveal:
+                    const Text('Adjust white blend level to desaturate '
+                        'the the light mode colors to make them work better in '
+                        'your dark theme\n'),
               ),
               ListTile(
                 title: Slider(

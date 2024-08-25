@@ -35,7 +35,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('BottomAppBar'),
-          subtitle: Text('A BottomAppBar is typically used with '
+          subtitleReveal: Text('A BottomAppBar is typically used with '
               'Scaffold.bottomNavigationBar. '
               'Its elevation in FCS defaults to AppBar elevation in M2 mode, '
               'when using M3 it defaults to 3 and gets elevation tint.\n'),
@@ -173,7 +173,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         const ListTileReveal(
           dense: true,
           title: Text('Theming info'),
-          subtitle: Text('Flutter M2 mode older default color is '
+          subtitleReveal: Text('Flutter M2 mode older default color is '
               'ThemeData.bottomAppBarColor. '
               'This was deprecated in Flutter 3.7, now M2 mode uses '
               'surface color and elevation 8.\n'
@@ -192,7 +192,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
@@ -220,7 +220,8 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         //
         const ListTileReveal(
           title: Text('SearchBar'),
-          subtitle: Text('The SearchBar with SearchView is new in Flutter '
+          subtitleReveal: Text(
+              'The SearchBar with SearchView is new in Flutter '
               '3.10. A convenient way to create a search bar with a '
               'view is with the factory SearchAnchor.bar.\n'
               '\n'
@@ -231,7 +232,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

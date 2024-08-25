@@ -87,10 +87,10 @@ class SegmentedButtonsSettings extends StatelessWidget {
       children: <Widget>[
         const ListTileReveal(
           title: Text('ToggleButtons'),
-          subtitleDense: true,
-          subtitle: Text('By default ToggleButtons are themed to style and '
-              'height align with OutlinedButton and FilledButton, shown '
-              'here for comparison.\n'),
+          subtitleReveal:
+              Text('By default ToggleButtons are themed to style and '
+                  'height align with OutlinedButton and FilledButton, shown '
+                  'here for comparison.\n'),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -257,8 +257,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('SegmentedButton'),
-          subtitleDense: true,
-          subtitle: Text('Material 3, replacement for ToggleButtons. '
+          subtitleReveal: Text('Material 3, replacement for ToggleButtons. '
               'ToggleButtons may work better when using only icons and it is '
               'similarly styled by FCS sub themes. SegmentedButton '
               'is better if you also have text, and optionally also want '
@@ -451,7 +450,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
-          subtitle: RichText(
+          subtitleReveal: RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(

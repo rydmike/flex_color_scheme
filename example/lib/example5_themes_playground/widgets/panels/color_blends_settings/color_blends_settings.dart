@@ -86,8 +86,7 @@ class ColorBlendsSettings extends StatelessWidget {
           LightSurfaceModeListTile(controller: controller),
           const ListTileReveal(
             title: Text('Surface colors blend level'),
-            subtitleDense: true,
-            subtitle: Text(
+            subtitleReveal: Text(
               'Surface blend uses alpha blend, to mix in the surface '
               'tint color into all surface colors. The blend '
               'level is the used alpha value in an alpha blend. The mode '
@@ -143,8 +142,7 @@ class ColorBlendsSettings extends StatelessWidget {
           DarkSurfaceModeListTile(controller: controller),
           const ListTileReveal(
             title: Text('Surface colors blend level'),
-            subtitleDense: true,
-            subtitle: Text(
+            subtitleReveal: Text(
               'Surface blend uses alpha blend, to mix in the surface '
               'tint color into all surface colors. The blend '
               'level is the used alpha value in an alpha blend. The mode '
@@ -220,8 +218,7 @@ class ColorBlendsSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('Plain white'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'Plain white uses white Scaffold background color in all blend '
               'modes, other surfaces also become less blended.\n',
             ),
@@ -257,8 +254,7 @@ class ColorBlendsSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.surfaceTintLight != null,
             title: const Text('Use default blend and tint color'),
-            subtitleDense: true,
-            subtitle: const Text('Sets light theme mode custom blend and '
+            subtitleReveal: const Text('Sets light theme mode custom blend and '
                 'tint color back to primary color.\n'),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 5.0),
@@ -293,8 +289,7 @@ class ColorBlendsSettings extends StatelessWidget {
           ),
           SwitchListTileReveal(
             title: const Text('True black'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'For an ink black dark mode, use True Black. It uses a totally '
               'black Scaffold background in all blend modes, other surfaces '
               'also become less blended.\n',
@@ -331,8 +326,7 @@ class ColorBlendsSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.surfaceTintDark != null,
             title: const Text('Use default blend and tint color'),
-            subtitleDense: true,
-            subtitle: const Text('Sets dark theme mode custom blend and '
+            subtitleReveal: const Text('Sets dark theme mode custom blend and '
                 'tint color back to primary color.\n'),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 5.0),
@@ -353,8 +347,7 @@ class ColorBlendsSettings extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('Contrast Color Blends'),
-          subtitleDense: true,
-          subtitle: Text(
+          subtitleReveal: Text(
             'You can adjust alpha blends for on colors for surfaces and '
             'for the main and container colors.\n',
           ),
@@ -366,8 +359,7 @@ class ColorBlendsSettings extends StatelessWidget {
           SwitchListTileReveal(
             title: const Text('Main and container colors on color blending'),
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            subtitleDense: true,
-            subtitle:
+            subtitleReveal:
                 const Text('In M3 design, in light mode, only container colors '
                     'use color '
                     'pair tinted on color. Main colors use black or white. '
@@ -384,8 +376,7 @@ class ColorBlendsSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Contrast colors blend level'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'The contrasting on color blending mixes in '
               'its own main color, '
               'into the on color, when seed/M3 colors are not used. This '
@@ -442,8 +433,7 @@ class ColorBlendsSettings extends StatelessWidget {
           SwitchListTileReveal(
             title: const Text('Main and container colors on color blending'),
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
-            subtitleDense: true,
-            subtitle:
+            subtitleReveal:
                 const Text('In M3 design, in dark mode, both container and '
                     'main colors use color pair tinted on colors. '
                     'Set this to ON here to use blends for onPrimary, '
@@ -459,8 +449,7 @@ class ColorBlendsSettings extends StatelessWidget {
           ListTileReveal(
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             title: const Text('Contrast colors blend level'),
-            subtitleDense: true,
-            subtitle: const Text(
+            subtitleReveal: const Text(
               'The contrasting on color blending mixes in '
               'its own main color, '
               'into the on color, when seed/M3 colors are not used. This '

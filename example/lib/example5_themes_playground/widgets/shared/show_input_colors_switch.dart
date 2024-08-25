@@ -15,8 +15,7 @@ class ShowInputColorsSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return SwitchListTileReveal(
       title: const Text('Show input colors'),
-      subtitleDense: true,
-      subtitle:
+      subtitleReveal:
           const Text('Turn ON this option to show the FlexColorScheme scheme '
               'input color values. This shows the used color values '
               'before any input modifiers are used on them. This includes seed '
