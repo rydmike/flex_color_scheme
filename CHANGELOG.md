@@ -35,8 +35,13 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   * DONE
 * Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
   * DONE
+
+
 * Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
-  * DONE
+  * DONE - Mostly, some defaults are still opinionated, but they are now more aligned with Flutter defaults. 
+    * Tooltip and Snackbar will keep their opinionated defaults. They are easy enough to make default, and there is guidance in the Playground app how to do it.
+      * TODO: Add info on how the get M3 defaults to doc comments as well, if not present - check!
+    * InputDecorator, consider changing it to using M3 style as default and instead adding a button with one or maybe two examples of much nicer styles.
   
 **TODO**
  
