@@ -24,12 +24,8 @@ class NavigationBarSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
 
-    // Logic for default elevation label.
-    final String elevationDefaultLabel = controller.navBarElevation == null
-        ? controller.useMaterial3
-            ? 'default 3'
-            : 'default 0'
-        : controller.navBarElevation!.toStringAsFixed(1);
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     // Logic for background color label.
     String backgroundColorLabel() {
@@ -107,17 +103,6 @@ class NavigationBarSettings extends StatelessWidget {
       return 'default (onSurfaceVariant)';
     }
 
-    final bool navBarOpacityEnabled =
-        controller.useSubThemes && controller.useFlexColorScheme;
-    final double navBarOpacity =
-        navBarOpacityEnabled ? (controller.navBarOpacity ?? -0.01) : -0.01;
-
-    final bool navBarHighlightOpacityEnabled =
-        controller.useSubThemes && controller.useFlexColorScheme;
-    final double navBarHighlightOpacity = navBarHighlightOpacityEnabled
-        ? (controller.navBarIndicatorOpacity ?? -0.01)
-        : -0.01;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -141,7 +126,7 @@ class NavigationBarSettings extends StatelessWidget {
           title: const Text('Background color'),
           labelForDefault: backgroundColorLabel(),
           index: controller.navBarBackgroundSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setNavBarBackgroundSchemeColor(null);
@@ -152,164 +137,50 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        // ListTile(
-        //   enabled: navBarOpacityEnabled,
-        //   title: const Text('Background opacity'),
-        //   subtitle: Slider(
-        //     min: -1,
-        //     max: 100,
-        //     divisions: 101,
-        //     label: navBarOpacityEnabled
-        //         ? controller.navBarOpacity == null ||
-        //                 (controller.navBarOpacity ?? -1) < 0
-        //             ? 'default 100%'
-        //             : (navBarOpacity * 100).toStringAsFixed(0)
-        //         : 'default 100%',
-        //     value: navBarOpacity * 100,
-        //     onChanged: navBarOpacityEnabled
-        //         ? (double value) {
-        //             controller.setNavBarOpacity(value < 0 ? null : value / 100);
-        //           }
-        //         : null,
-        //   ),
-        //   trailing: Padding(
-        //     padding: const EdgeInsetsDirectional.only(end: 5),
-        //     child: Column(
-        //       crossAxisAlignment: CrossAxisAlignment.center,
-        //       children: <Widget>[
-        //         Text(
-        //           'OPACITY',
-        //           style: theme.textTheme.bodySmall,
-        //         ),
-        //         Text(
-        //           navBarOpacityEnabled
-        //               ? controller.navBarOpacity == null ||
-        //                       (controller.navBarOpacity ?? -1) < 0
-        //                   ? 'default 100%'
-        //                   : '${(navBarOpacity * 100).toStringAsFixed(0)}%'
-        //               : 'default 100%',
-        //           style: theme.textTheme.bodySmall!
-        //               .copyWith(fontWeight: FontWeight.bold),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
         SliderNullableDefault(
-          enabled: navBarOpacityEnabled,
+          enabled: enableControl,
           title: const Text('Background opacity'),
           value: controller.navBarOpacity,
           onChanged: controller.setNavBarOpacity,
           min: 0,
           max: 1,
-          divisions: 99,
+          divisions: 100,
           valueDisplayScale: 100,
+          valueDecimalPlaces: 0,
           valueHeading: 'OPACITY',
           valueUnitLabel: '%',
-          valueDefaultLabel: 'default 100 %',
+          valueDefaultLabel: 'default 100%',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Elevation'),
-          subtitle: Slider(
-            min: -1,
-            max: 24,
-            divisions: 25,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navBarElevation == null ||
-                        (controller.navBarElevation ?? -1) < 0
-                    ? elevationDefaultLabel
-                    : (controller.navBarElevation?.toStringAsFixed(1) ?? '')
-                : controller.useMaterial3
-                    ? 'default 3'
-                    : 'default 0',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navBarElevation ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setNavBarElevation(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'ELEV',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.navBarElevation == null ||
-                              (controller.navBarElevation ?? -1) < 0
-                          ? elevationDefaultLabel
-                          : (controller.navBarElevation?.toStringAsFixed(1) ??
-                              '')
-                      : controller.useMaterial3
-                          ? 'default 3'
-                          : 'default 0',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.navBarElevation,
+          onChanged: controller.setNavBarElevation,
+          min: 0,
+          max: 24,
+          divisions: 24,
+          valueHeading: 'ELEV',
+          valueDecimalPlaces: 0,
+          valueDefaultLabel:
+              controller.useMaterial3 ? 'default 3' : 'default 0',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Height'),
-          subtitle: Slider(
-            min: 54,
-            max: 100,
-            divisions: 46,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navBarHeight == null ||
-                        (controller.navBarHeight ?? 54) < 55
-                    ? 'default 80'
-                    : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
-                : 'default 80',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navBarHeight ?? 54
-                : 54,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setNavBarHeight(
-                        value < 55 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'HEIGHT',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.navBarHeight == null ||
-                              (controller.navBarHeight ?? 54) < 55
-                          ? 'default 80'
-                          : (controller.navBarHeight?.toStringAsFixed(0) ?? '')
-                      : 'default 80',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.navBarHeight,
+          onChanged: controller.setNavBarHeight,
+          min: 55,
+          max: 100,
+          divisions: 45,
+          valueHeading: 'HEIGHT',
+          valueDecimalPlaces: 0,
+          valueDefaultLabel: 'default 80',
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
           labelForDefault: indicatorColorLabel(),
           index: controller.navBarIndicatorSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setNavBarIndicatorSchemeColor(null);
@@ -320,111 +191,39 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          enabled: navBarHighlightOpacityEnabled,
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Selection indicator opacity'),
-          subtitle: Slider(
-            min: -1,
-            max: 100,
-            divisions: 101,
-            label: navBarHighlightOpacityEnabled
-                ? controller.navBarIndicatorOpacity == null ||
-                        (controller.navBarIndicatorOpacity ?? -1) < 0
-                    ? 'default 100%'
-                    : (navBarHighlightOpacity * 100).toStringAsFixed(0)
-                : controller.useMaterial3
-                    ? 'default 100%'
-                    : 'default 24%',
-            value: navBarHighlightOpacity * 100,
-            onChanged: navBarHighlightOpacityEnabled
-                ? (double value) {
-                    controller.setNavBarIndicatorOpacity(
-                        value < 0 ? null : value / 100);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'OPACITY',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  navBarHighlightOpacityEnabled
-                      ? controller.navBarIndicatorOpacity == null ||
-                              (controller.navBarIndicatorOpacity ?? -1) < 0
-                          ? 'default 100%'
-                          // ignore: lines_longer_than_80_chars
-                          : '${(navBarHighlightOpacity * 100).toStringAsFixed(0)} %'
-                      : controller.useMaterial3
-                          ? 'default 100%'
-                          : 'default 24%',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-              ],
-            ),
-          ),
+          value: controller.navBarIndicatorOpacity,
+          onChanged: controller.setNavBarIndicatorOpacity,
+          min: 0,
+          max: 1,
+          divisions: 100,
+          valueDisplayScale: 100,
+          valueDecimalPlaces: 0,
+          valueHeading: 'OPACITY',
+          valueUnitLabel: '%',
+          valueDefaultLabel: 'default 100%',
+          valueDefaultDisabledLabel:
+              controller.useMaterial3 ? 'default 100%' : 'default 24%',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Indicator border radius'),
-          subtitle: Slider(
-            min: -1,
-            max: 50,
-            divisions: 51,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navBarIndicatorBorderRadius == null ||
-                        (controller.navBarIndicatorBorderRadius ?? -1) < 0
-                    ? 'default (stadium)'
-                    : (controller.navBarIndicatorBorderRadius
-                            ?.toStringAsFixed(0) ??
-                        '')
-                : 'default (stadium)',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navBarIndicatorBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setNavBarIndicatorBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.navBarIndicatorBorderRadius == null ||
-                              (controller.navBarIndicatorBorderRadius ?? -1) < 0
-                          ? 'default (stadium)'
-                          : (controller.navBarIndicatorBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : 'default (stadium)',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.navBarIndicatorBorderRadius,
+          onChanged: controller.setNavBarIndicatorBorderRadius,
+          min: 0,
+          max: 50,
+          divisions: 50,
+          valueHeading: 'RADIUS',
+          valueDecimalPlaces: 0,
+          valueDefaultLabel: 'default stadium',
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected icon color'),
           labelForDefault: selectedIconColorLabel(),
           index: controller.navBarSelectedIconSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setNavBarSelectedIconSchemeColor(null);
@@ -439,7 +238,7 @@ class NavigationBarSettings extends StatelessWidget {
           title: const Text('Selected label color'),
           labelForDefault: selectedLabelColorLabel(),
           index: controller.navBarSelectedLabelSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setNavBarSelectedLabelSchemeColor(null);
@@ -455,7 +254,7 @@ class NavigationBarSettings extends StatelessWidget {
           subtitle: const Text('Label and icon, but own properties in API'),
           labelForDefault: unselectedItemColorLabel(),
           index: controller.navBarUnselectedSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setNavBarUnselectedSchemeColor(null);
@@ -487,9 +286,7 @@ class NavigationBarSettings extends StatelessWidget {
               'platforms. This setting has no impact in Material-2 mode.\n',
             ),
             index: controller.adaptiveRemoveNavigationBarTintLight?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
+            onChanged: enableControl && controller.useMaterial3
                 ? (int index) {
                     if (index < 0 || index >= AdaptiveTheme.values.length) {
                       controller.setAdaptiveRemoveNavigationBarTintLight(null);
@@ -509,9 +306,7 @@ class NavigationBarSettings extends StatelessWidget {
               'platforms. This setting has no impact in Material-2 mode.\n',
             ),
             index: controller.adaptiveRemoveNavigationBarTintDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
+            onChanged: enableControl && controller.useMaterial3
                 ? (int index) {
                     if (index < 0 || index >= AdaptiveTheme.values.length) {
                       controller.setAdaptiveRemoveNavigationBarTintDark(null);
