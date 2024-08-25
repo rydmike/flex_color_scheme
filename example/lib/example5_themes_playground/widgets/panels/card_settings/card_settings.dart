@@ -10,11 +10,10 @@ class CardSettings extends StatelessWidget {
   const CardSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  // TODO(rydmike): Create issue and add correct URL.
   static final Uri _fcsFlutterIssueCardTheme = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/issues/115827',
+    path: 'flutter/flutter/issues/153912',
   );
 
   @override
@@ -154,7 +153,7 @@ class CardSettings extends StatelessWidget {
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsFlutterIssueCardTheme,
-                  text: 'issue #CardTheme',
+                  text: 'issue #153912',
                 ),
                 TextSpan(
                   style: spanTextStyle,
