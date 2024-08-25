@@ -222,13 +222,13 @@ class SimulatorFrame extends StatelessWidget {
       screen: Builder(
         builder: (BuildContext deviceContext) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          // TODO(rydmike): Experiment, simulator app uses theme directly.
-          // Instead of theming simulator via inherited theme.of(context), let
-          // us try this version where use same theme function as the main app.
-          // It will be more costly, since now new theme is computed twice, but
-          // the advantage is that its change happens at the same time as main
+          // The simulator app uses the same theme definition directly.
+          // Instead of using it via inherited theme.of(context). This a bit
+          // more costly, since now the new theme is computed twice. The
+          // advantage is that its change happens at the same time as the main
           // app theme changes, and not after it has concluded its change. This
-          // feels "faster", or more concurrent and imo offers better UX.
+          // feels "faster", or more concurrent and imo offers better UX for
+          // this use case.
           theme: controller.useFlexColorScheme
               ? flexThemeLight(controller)
               : themeDataLight(controller),
@@ -404,6 +404,10 @@ class Simulator extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     final bool enabled = onChanged != null;
     return PopupMenuButton<int>(
+        popUpAnimationStyle: AnimationStyle.noAnimation,
+        position: PopupMenuPosition.under,
+        offset: const Offset(0, -2),
+        constraints: const BoxConstraints(maxHeight: 600),
         initialValue: index,
         tooltip: '',
         padding: EdgeInsets.zero,

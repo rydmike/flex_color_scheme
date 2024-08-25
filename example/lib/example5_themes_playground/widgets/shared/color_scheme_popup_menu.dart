@@ -46,11 +46,11 @@ class ColorSchemePopupMenu extends StatelessWidget {
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
       position: PopupMenuPosition.under,
-      offset: const Offset(0, -6),
+      offset: const Offset(0, -4),
       constraints: const BoxConstraints(
         minWidth: 260,
         maxWidth: 260,
-        maxHeight: 540,
+        maxHeight: 560,
       ),
       initialValue: useDefault ? SchemeColor.values.length : index,
       tooltip: '',

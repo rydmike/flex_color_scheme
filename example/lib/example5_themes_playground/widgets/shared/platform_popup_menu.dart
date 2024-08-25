@@ -72,11 +72,7 @@ class PlatformPopupMenu extends StatelessWidget {
       popUpAnimationStyle: AnimationStyle.noAnimation,
       position: PopupMenuPosition.under,
       offset: const Offset(0, -4),
-      constraints: const BoxConstraints(
-        // minWidth: 500,
-        // maxWidth: 500,
-        maxHeight: 540,
-      ),
+      constraints: const BoxConstraints(maxHeight: 540),
       enabled: enabled,
       tooltip: '',
       padding: const EdgeInsets.all(10),

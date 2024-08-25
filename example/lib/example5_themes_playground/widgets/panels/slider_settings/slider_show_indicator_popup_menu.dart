@@ -88,6 +88,10 @@ class SliderShowIndicatorPopupMenu extends StatelessWidget {
         theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(maxHeight: 560),
       initialValue: useDefault ? ShowValueIndicator.values.length : index,
       tooltip: '',
       padding: EdgeInsets.zero,
