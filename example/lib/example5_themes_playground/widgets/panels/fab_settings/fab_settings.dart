@@ -6,6 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_nullable_default.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -26,13 +27,17 @@ class FabSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
             effectiveRadius == null
-        ? 'default 16'
+        ? 'default\n16 dp'
         : controller.fabBorderRadius == null && controller.defaultRadius != null
-            ? 'global ${effectiveRadius!.toStringAsFixed(0)}'
+            ? 'global\n${effectiveRadius!.toStringAsFixed(0)} dp'
             : '';
 
     return Column(
@@ -45,7 +50,7 @@ class FabSettings extends StatelessWidget {
               ? 'default (primaryContainer)'
               : 'default (secondary)',
           index: controller.fabSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setFabSchemeColor(null);
@@ -61,7 +66,7 @@ class FabSettings extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Use themed shape'),
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: enableControl,
           subtitleReveal: const Text(
               'OFF removes shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
@@ -69,97 +74,43 @@ class FabSettings extends StatelessWidget {
           value: controller.fabUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setFabUseShape
-              : null,
+          onChanged: enableControl ? controller.setFabUseShape : null,
         ),
         SwitchListTileReveal(
-          enabled: controller.fabUseShape &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
+          enabled: enableControl && controller.fabUseShape,
           title: const Text('Always circular'),
           subtitleReveal:
               const Text('Turn on to always use circular and stadium '
-                  'shaped FAB, also in Material 3.\n'),
+                  'shaped FAB, also in Material-3.\n'),
           value: controller.fabAlwaysCircular &&
               controller.fabUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes &&
-                  controller.useFlexColorScheme &&
-                  controller.fabUseShape
+          onChanged: enableControl && controller.fabUseShape
               ? controller.setFabAlwaysCircular
               : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
+        SliderNullableDefault(
+          enabled: enableControl &&
               controller.fabUseShape &&
               !controller.fabAlwaysCircular,
           title: const Text('Border radius'),
-          subtitle: Slider(
-            min: -1,
-            max: 60,
-            divisions: 61,
-            label: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.fabUseShape &&
-                    !controller.fabAlwaysCircular
-                ? controller.fabBorderRadius == null ||
-                        (controller.fabBorderRadius ?? -1) < 0
-                    ? fabRadiusDefaultLabel
-                    : (controller.fabBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.fabAlwaysCircular && controller.fabUseShape
-                    ? 'circular'
-                    : controller.useMaterial3
-                        ? 'M3 rounded'
-                        : 'circular',
-            value: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.fabUseShape &&
-                    !controller.fabAlwaysCircular
-                ? controller.fabBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.fabUseShape &&
-                    !controller.fabAlwaysCircular
-                ? (double value) {
-                    controller.setFabBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes &&
-                          controller.useFlexColorScheme &&
-                          controller.fabUseShape &&
-                          !controller.fabAlwaysCircular
-                      ? controller.fabBorderRadius == null ||
-                              (controller.fabBorderRadius ?? -1) < 0
-                          ? fabRadiusDefaultLabel
-                          : (controller.fabBorderRadius?.toStringAsFixed(0) ??
-                              '')
-                      : controller.fabAlwaysCircular && controller.fabUseShape
-                          ? 'circular'
-                          : controller.useMaterial3
-                              ? 'M3 rounded'
-                              : 'circular',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.fabBorderRadius,
+          onChanged: controller.setFabBorderRadius,
+          min: 0,
+          max: 60,
+          divisions: 60,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: fabRadiusDefaultLabel,
+          valueDefaultDisabledLabel:
+              controller.fabAlwaysCircular && controller.fabUseShape
+                  ? 'circular'
+                  : controller.useMaterial3
+                      ? 'M3 rounded'
+                      : 'circular',
         ),
         ListTileReveal(
           dense: true,
