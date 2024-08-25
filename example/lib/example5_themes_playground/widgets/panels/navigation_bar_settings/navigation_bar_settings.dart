@@ -24,6 +24,7 @@ class NavigationBarSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
 
+    // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
@@ -50,7 +51,7 @@ class NavigationBarSettings extends StatelessWidget {
       }
       // Use M2 default color
       if (!controller.useMaterial3) {
-        return 'default (secondary opacity 24%)';
+        return 'default (secondary opacity 24 %)';
       }
       // All other cases will use M3 style.
       return 'default (secondaryContainer)';
@@ -148,8 +149,8 @@ class NavigationBarSettings extends StatelessWidget {
           valueDisplayScale: 100,
           valueDecimalPlaces: 0,
           valueHeading: 'OPACITY',
-          valueUnitLabel: '%',
-          valueDefaultLabel: 'default 100%',
+          valueUnitLabel: ' %',
+          valueDefaultLabel: 'default\n100 %',
         ),
         SliderNullableDefault(
           enabled: enableControl,
@@ -162,7 +163,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueHeading: 'ELEV',
           valueDecimalPlaces: 0,
           valueDefaultLabel:
-              controller.useMaterial3 ? 'default 3' : 'default 0',
+              controller.useMaterial3 ? 'default\n3' : 'default\n0',
         ),
         SliderNullableDefault(
           enabled: enableControl,
@@ -173,8 +174,9 @@ class NavigationBarSettings extends StatelessWidget {
           max: 100,
           divisions: 45,
           valueHeading: 'HEIGHT',
+          valueUnitLabel: ' dp',
           valueDecimalPlaces: 0,
-          valueDefaultLabel: 'default 80',
+          valueDefaultLabel: 'default\n80 dp',
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
@@ -202,10 +204,10 @@ class NavigationBarSettings extends StatelessWidget {
           valueDisplayScale: 100,
           valueDecimalPlaces: 0,
           valueHeading: 'OPACITY',
-          valueUnitLabel: '%',
-          valueDefaultLabel: 'default 100%',
+          valueUnitLabel: ' %',
+          valueDefaultLabel: 'default\n100 %',
           valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default 100%' : 'default 24%',
+              controller.useMaterial3 ? 'default\n100 %' : 'default\n24 %',
         ),
         SliderNullableDefault(
           enabled: enableControl,
@@ -216,6 +218,7 @@ class NavigationBarSettings extends StatelessWidget {
           max: 50,
           divisions: 50,
           valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
           valueDecimalPlaces: 0,
           valueDefaultLabel: 'default stadium',
         ),
