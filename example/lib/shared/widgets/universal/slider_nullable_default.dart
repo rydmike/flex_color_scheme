@@ -29,12 +29,13 @@ class SliderNullableDefault extends StatelessWidget {
     this.title,
     this.min = 0.0,
     this.max = 1.0,
-    this.divisions = 99,
-    this.valueDisplayScale = 100,
-    this.valueDecimalPlaces = 0,
+    this.divisions = 100,
+    this.valueDisplayScale = 1,
+    this.valueDecimalPlaces = 2,
     this.valueHeading,
     this.valueDefaultLabel = 'default',
     this.valueUnitLabel = '',
+    this.valueDefaultDisabledLabel,
   })  : assert(min < max, 'Min $min must be smaller than max $max'),
         assert(
             (value == null) || (value >= min && value <= max),
@@ -121,6 +122,13 @@ class SliderNullableDefault extends StatelessWidget {
   /// on the Slider, it is shown both in the label and the trailing value.
   final String valueDefaultLabel;
 
+  /// THe value to display when the value is disabled and null, meaning below
+  /// the min value, on the Slider, it is shown both in the label and the
+  /// trailing value.
+  ///
+  /// If not defined, defaults to the [valueDefaultLabel].
+  final String? valueDefaultDisabledLabel;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -145,8 +153,8 @@ class SliderNullableDefault extends StatelessWidget {
                 ? valueDefaultLabel
                 : (value! * valueDisplayScale)
                     .toStringAsFixed(valueDecimalPlaces)
-            : valueDefaultLabel,
-        value: value == null
+            : valueDefaultDisabledLabel ?? valueDefaultLabel,
+        value: value == null || !enabled
             ? effectiveMin * valueDisplayScale
             : value! * valueDisplayScale,
         onChanged: enabled
@@ -172,7 +180,7 @@ class SliderNullableDefault extends StatelessWidget {
                       ? valueDefaultLabel
                       // ignore: lines_longer_than_80_chars
                       : '${(value! * valueDisplayScale).toStringAsFixed(valueDecimalPlaces)}$valueUnitLabel'
-                  : valueDefaultLabel,
+                  : valueDefaultDisabledLabel ?? valueDefaultLabel,
               style: theme.textTheme.bodySmall!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
