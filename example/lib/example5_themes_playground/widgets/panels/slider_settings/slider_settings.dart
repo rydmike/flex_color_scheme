@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'slider_indicator_popup_menu.dart';
@@ -27,6 +28,10 @@ class SliderSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     final bool isLight = theme.brightness == Brightness.light;
     final String labelIndicatorDefault =
         controller.sliderBaseSchemeColor == null
@@ -46,7 +51,7 @@ class SliderSettings extends StatelessWidget {
           title: const Text('Main color'),
           labelForDefault: 'default (primary)',
           index: controller.sliderBaseSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setSliderBaseSchemeColor(null);
@@ -62,7 +67,7 @@ class SliderSettings extends StatelessWidget {
           labelForDefault: labelIndicatorDefault,
           colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
           index: controller.sliderIndicatorSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setSliderIndicatorSchemeColor(null);
@@ -80,9 +85,7 @@ class SliderSettings extends StatelessWidget {
               'it also and adds some slight opacity. By default the value '
               'indicator only shows up on a stepped Slider. You can change '
               'this behavior with the indicator visibility further below.\n'),
-          value: controller.sliderValueTinted &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
+          value: enableControl && controller.sliderValueTinted,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.setSliderValueTinted
               : null,
@@ -93,7 +96,7 @@ class SliderSettings extends StatelessWidget {
               ? 'default M3 (drop)'
               : 'default M2 (rectangular)',
           index: controller.sliderValueIndicatorType?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 ||
                       index >= FlexSliderIndicatorType.values.length) {
@@ -109,7 +112,7 @@ class SliderSettings extends StatelessWidget {
           title: const Text('Indicator visibility'),
           labelForDefault: 'Default (Only for discrete)',
           index: controller.sliderShowValueIndicator?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= ShowValueIndicator.values.length) {
                     controller.setSliderShowValueIndicator(null);
@@ -120,52 +123,19 @@ class SliderSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Track height'),
-          subtitle: Slider(
-            min: 0,
-            max: 14,
-            divisions: 14,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.sliderTrackHeight == null ||
-                        (controller.sliderTrackHeight ?? 0) <= 0
-                    ? 'default 4'
-                    : (controller.sliderTrackHeight?.toStringAsFixed(0) ?? '')
-                : 'default 4',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.sliderTrackHeight ?? 0
-                : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setSliderTrackHeight(
-                        value <= 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'HEIGHT',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.sliderTrackHeight == null ||
-                              (controller.sliderTrackHeight ?? 0) <= 0
-                          ? 'default 4'
-                          : (controller.sliderTrackHeight?.toStringAsFixed(0) ??
-                              '')
-                      : 'default 4',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.sliderTrackHeight,
+          onChanged: controller.setSliderTrackHeight,
+          min: 1,
+          max: 14,
+          divisions: 13,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'HEIGHT',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: 'default\n4 dp',
         ),
         const Divider(),
         const ListTile(title: Text('Slider')),
