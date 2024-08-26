@@ -6,7 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_nullable_default.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class SegmentedButtonsSettings extends StatelessWidget {
@@ -157,7 +157,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Border radius'),
           value: controller.toggleButtonsBorderRadius,
@@ -172,7 +172,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           valueDefaultLabel: toggleButtonsRadiusDefaultLabel,
           valueDefaultDisabledLabel: 'default\n0 dp',
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Border width'),
           value: controller.toggleButtonsBorderWidth,
@@ -280,7 +280,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Border radius'),
           value: controller.segmentedButtonBorderRadius,
@@ -296,7 +296,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           valueDefaultDisabledLabel: 'default\nstadium',
         ),
         //
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Border width'),
           value: controller.segmentedButtonBorderWidth,
