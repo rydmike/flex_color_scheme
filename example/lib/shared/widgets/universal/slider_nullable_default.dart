@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'list_tile_reveal.dart';
+
 /// A discrete [Slider] that is nullable.
 ///
 /// The Slider can be set to a [value] that is one step below the [min] value.
@@ -27,6 +29,9 @@ class SliderNullableDefault extends StatelessWidget {
     required this.onChanged,
     required this.enabled,
     this.title,
+    this.subtitleReveal,
+    this.dense,
+    this.revealDense,
     this.min = 0.0,
     this.max = 1.0,
     this.divisions = 100,
@@ -71,6 +76,23 @@ class SliderNullableDefault extends StatelessWidget {
   ///
   /// Typically a [Text] widget.
   final Widget? title;
+
+  /// Additional content displayed below the subtitle in a reveal animation.
+  ///
+  /// Typically a [Text] widget.
+  final Widget? subtitleReveal;
+
+  /// Whether this list tile is part of a vertically dense list.
+  ///
+  /// If this property is null then its value is based on [ListTileTheme.dense].
+  ///
+  /// Dense list tiles default to a smaller height.
+  final bool? dense;
+
+  /// Whether the used reveal part of the ListTile is dense.
+  ///
+  /// If not defined, defaults to true.
+  final bool? revealDense;
 
   /// The minimum value the user can select.
   ///
@@ -139,9 +161,12 @@ class SliderNullableDefault extends StatelessWidget {
     // to show default label and return null when selected.
     final double effectiveMin = min - step;
 
-    return ListTile(
+    return ListTileReveal(
       enabled: enabled,
+      dense: dense,
+      revealDense: revealDense,
       title: title,
+      subtitleReveal: subtitleReveal,
       subtitle: Slider(
         min: effectiveMin * valueDisplayScale,
         max: max * valueDisplayScale,
