@@ -10,7 +10,7 @@ import '../shared/widgets/app/show_sub_pages.dart';
 import '../shared/widgets/app/show_sub_theme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
 import '../shared/widgets/app/use_key_colors_buttons.dart';
-import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/responsive_center.dart';
 import '../shared/widgets/universal/showcase_material.dart';
 import 'widgets/theme_popup_menu.dart';
 
@@ -45,18 +45,19 @@ class HomePage extends StatelessWidget {
           // TODO(rydmike): INFO: Trick to move Popup to end of wrapped widget.
           // Wrapping the Scaffold in a Row, with an almost zero width SizedBox
           // before the Scaffold that is in an Expanded widget so it fills the
-          // available screen, causes the PopupMenu to open up right aligned on
-          // its ListTile child used as its activation button. Without this, it
-          // is always left aligned on the ListTile and would require a
-          // computed offset. This trick, or maybe a bit of a hack, does it
+          // available screen, causes the PopupmenuButton to open up right
+          // aligned on its ListTile child used as its activation button.
+          // Without this, it in this case is always left aligned on the
+          // ListTile and would require a computed offset t move it to the
+          // right side. This trick, or maybe a bit of a hack, does it
           // automatically. No idea why, just something I noticed by accident.
-          // Tested also in v7 of FCS, still works date (21.3.2023).
+          // Tested also in v8 example 4, still works date (26.8.2024).
           child: Scaffold(
             appBar: AppBar(
               title: Text(App.title(context)),
               actions: const <Widget>[AboutIconButton()],
             ),
-            body: PageBody(
+            body: ResponsiveCenter(
               constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
               child: ListView(
                 primary: true,

@@ -9,7 +9,7 @@ import '../widgets/app/about.dart';
 import '../widgets/app/show_color_scheme_colors.dart';
 import '../widgets/app/show_sub_theme_colors.dart';
 import '../widgets/app/show_theme_data_colors.dart';
-import '../widgets/universal/page_body.dart';
+import '../widgets/universal/responsive_center.dart';
 import '../widgets/universal/showcase_material.dart';
 import '../widgets/universal/theme_mode_switch.dart';
 
@@ -76,7 +76,7 @@ class _SubpageDemoState extends State<SubpageDemo> {
               ],
             ),
           ),
-          body: PageBody(
+          body: ResponsiveCenter(
             child: ScrollConfiguration(
               behavior: const DragScrollBehavior(),
               child: ListView(

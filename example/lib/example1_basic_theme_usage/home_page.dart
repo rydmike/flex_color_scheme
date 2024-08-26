@@ -5,7 +5,7 @@ import '../shared/const/app.dart';
 import '../shared/widgets/app/about.dart';
 import '../shared/widgets/app/show_color_scheme_colors.dart';
 import '../shared/widgets/app/show_theme_data_colors.dart';
-import '../shared/widgets/universal/page_body.dart';
+import '../shared/widgets/universal/responsive_center.dart';
 import '../shared/widgets/universal/showcase_material.dart';
 
 // -----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
           const AboutIconButton(),
         ],
       ),
-      body: PageBody(
+      body: ResponsiveCenter(
         constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(
           primary: true,
