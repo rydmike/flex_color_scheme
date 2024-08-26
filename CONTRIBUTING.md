@@ -36,6 +36,6 @@ We expect all contributors to follow our code of conduct, which promotes a respe
 
 ## License
 
-By contributing to flex_color_scheme, you agree that your contributions will be licensed under its [BSD 3-Clause License](https://github.com/rydmike/flex_color_scheme/blob/master/LICENSE).
+By contributing to **flex_color_scheme**, you agree that your contributions will be licensed under its [BSD 3-Clause License](https://github.com/rydmike/flex_color_scheme/blob/master/LICENSE).
 
 Thank you for your contribution! 🙏
