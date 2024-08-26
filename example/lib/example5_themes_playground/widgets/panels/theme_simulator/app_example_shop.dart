@@ -1034,7 +1034,7 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
                 style: footerStyle,
                 text: 'Built with Flutter ${App.flutterVersion}, '
                     'using ${App.packageName} '
-                    '${App.packageVersion}\n'
+                    '${App.version}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
                     'h:${height.toStringAsFixed(0)})\n\n',
               ),

@@ -42,11 +42,10 @@ class App {
   static const String versionMinor = '0';
   static const String versionPatch = '0-dev.1';
   static const String versionBuild = '01';
-  static const String version = '$versionMajor.$versionMinor.$versionPatch '
+  static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
-  static const String packageVersion =
-      '$versionMajor.$versionMinor.$versionPatch';
-  static const String packageVersionMinor = '$versionMajor.$versionMinor.x';
+  static const String version = '$versionMajor.$versionMinor.$versionPatch';
+  // static const String packageVersionMin = '$versionMajor.$versionMinor';
   static const String flutterVersion = 'stable 3.24.1 (canvaskit)';
   static const String copyright = '© 2020 - 2024';
   static const String author = 'Mike Rydstrom';
