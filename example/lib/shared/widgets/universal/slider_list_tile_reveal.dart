@@ -30,6 +30,7 @@ class SliderListTileReveal extends StatelessWidget {
     required this.onChanged,
     required this.enabled,
     this.title,
+    this.subtitle,
     this.subtitleReveal,
     this.dense,
     this.revealDense,
@@ -77,6 +78,11 @@ class SliderListTileReveal extends StatelessWidget {
   ///
   /// Typically a [Text] widget.
   final Widget? title;
+
+  /// Additional content displayed below the title.
+  ///
+  /// Typically a [Text] widget.
+  final Widget? subtitle;
 
   /// Additional content displayed below the subtitle in a reveal animation.
   ///
@@ -168,28 +174,34 @@ class SliderListTileReveal extends StatelessWidget {
       revealDense: revealDense,
       title: title,
       subtitleReveal: subtitleReveal,
-      subtitle: Slider(
-        min: effectiveMin * valueDisplayScale,
-        max: max * valueDisplayScale,
-        divisions: divisions + 1,
-        label: enabled
-            ? value == null ||
-                    (value ?? effectiveMin * valueDisplayScale) <
-                        min * valueDisplayScale
-                ? valueDefaultLabel
-                : (value! * valueDisplayScale)
-                    .toStringAsFixed(valueDecimalPlaces)
-            : valueDefaultDisabledLabel ?? valueDefaultLabel,
-        value: value == null || !enabled
-            ? effectiveMin * valueDisplayScale
-            : value! * valueDisplayScale,
-        onChanged: enabled
-            ? (double value) {
-                onChanged(value < min * valueDisplayScale
-                    ? null
-                    : value / valueDisplayScale);
-              }
-            : null,
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          if (subtitle != null) subtitle!,
+          Slider(
+            min: effectiveMin * valueDisplayScale,
+            max: max * valueDisplayScale,
+            divisions: divisions + 1,
+            label: enabled
+                ? value == null ||
+                        (value ?? effectiveMin * valueDisplayScale) <
+                            min * valueDisplayScale
+                    ? valueDefaultLabel
+                    : (value! * valueDisplayScale)
+                        .toStringAsFixed(valueDecimalPlaces)
+                : valueDefaultDisabledLabel ?? valueDefaultLabel,
+            value: value == null || !enabled
+                ? effectiveMin * valueDisplayScale
+                : value! * valueDisplayScale,
+            onChanged: enabled
+                ? (double value) {
+                    onChanged(value < min * valueDisplayScale
+                        ? null
+                        : value / valueDisplayScale);
+                  }
+                : null,
+          ),
+        ],
       ),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 5),
