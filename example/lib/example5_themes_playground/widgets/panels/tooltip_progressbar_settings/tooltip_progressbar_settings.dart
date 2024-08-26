@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_nullable_default.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -26,32 +27,31 @@ class TooltipProgressBarSettings extends StatelessWidget {
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     final bool isLight = theme.brightness == Brightness.light;
 
-    final bool tooltipOpacityEnabled =
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-    final double tooltipOpacity =
-        tooltipOpacityEnabled ? (controller.tooltipOpacity ?? -0.01) : -0.01;
 
     final String opacityDefaultLabel = !controller.useFlexColorScheme
         ? isLight
-            ? 'default (90%)'
-            : 'default (90%)'
+            ? 'default\n90 %'
+            : 'default\n90 %'
         : controller.useSubThemes && controller.tooltipSchemeColor != null
-            ? 'default (100%)'
+            ? 'default\n100 %'
             : controller.tooltipsMatchBackground
                 ? controller.useSubThemes
                     ? isLight
-                        ? 'default (95%)'
-                        : 'default (95%)'
+                        ? 'default\n95 %'
+                        : 'default\n95 %'
                     : isLight
-                        ? 'default (94%)'
-                        : 'default (93%)'
+                        ? 'default\n94 %'
+                        : 'default\n93 %'
                 : controller.useSubThemes
                     ? isLight
-                        ? 'default (95%)'
-                        : 'default (95%)'
+                        ? 'default\n95 %'
+                        : 'default\n95 %'
                     : isLight
-                        ? 'default (90%)'
-                        : 'default (90%)';
+                        ? 'default\n90 %'
+                        : 'default\n90 %';
 
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
         ? isLight
@@ -75,8 +75,8 @@ class TooltipProgressBarSettings extends StatelessWidget {
 
     final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
         ? controller.useSubThemes
-            ? 'default 8'
-            : 'default 4'
+            ? 'default\n8 dp'
+            : 'default\n4 dp'
         : '';
 
     return Column(
@@ -112,7 +112,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
               : const Text('Foreground pair used'),
           labelForDefault: toolTipDefaultColorLabel,
           index: controller.tooltipSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setTooltipSchemeColor(null);
@@ -122,204 +122,81 @@ class TooltipProgressBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTileReveal(
-          enabled: controller.useSubThemes,
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Tooltip opacity'),
           subtitleReveal: const Text(
             "Set to 90% to match Flutter's default in both M2 and M3 mode. "
             'The correct M3 spec is 100% and using inverseSurface, but '
             'Flutter at least up to 3.24, does not use the correct spec.\n',
           ),
+          value: controller.tooltipOpacity,
+          onChanged: controller.setTooltipOpacity,
+          min: 0,
+          max: 1,
+          divisions: 100,
+          valueDisplayScale: 100,
+          valueDecimalPlaces: 0,
+          valueHeading: 'OPACITY',
+          valueUnitLabel: ' %',
+          valueDefaultLabel: opacityDefaultLabel,
         ),
-        ListTile(
-          enabled: controller.useFlexColorScheme,
-          title: Slider(
-            min: -1,
-            max: 100,
-            divisions: 101,
-            label: tooltipOpacityEnabled
-                ? controller.tooltipOpacity == null ||
-                        (controller.tooltipOpacity ?? -1) < 0
-                    ? opacityDefaultLabel
-                    : (tooltipOpacity * 100).toStringAsFixed(0)
-                : opacityDefaultLabel,
-            value: tooltipOpacity * 100,
-            onChanged: tooltipOpacityEnabled
-                ? (double value) {
-                    controller
-                        .setTooltipOpacity(value < 0 ? null : value / 100);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'OPACITY',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  tooltipOpacityEnabled
-                      ? controller.tooltipOpacity == null ||
-                              (controller.tooltipOpacity ?? -1) < 0
-                          ? opacityDefaultLabel
-                          : '${(tooltipOpacity * 100).toStringAsFixed(0)} %'
-                      : opacityDefaultLabel,
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
-        ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Tooltip radius'),
           subtitleReveal: const Text(
-            'Does not use the global border radius setting.\n'
-            'Avoid using very large border radius on tooltip containers.\n'
+            'Does not use the global border radius setting. '
+            'Avoid using very large border radius on tooltip containers. '
             'Set to 4dp to match Material design in both M2 and M3.',
           ),
+          value: controller.tooltipRadius,
+          onChanged: controller.setTooltipRadius,
+          min: 0,
+          max: 40,
+          divisions: 40,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: tooltipDefaultRadiusLabel,
+          valueDefaultDisabledLabel: 'default\n4 dp',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: -1,
-            max: 30,
-            divisions: 31,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.tooltipRadius == null ||
-                        (controller.tooltipRadius ?? -1) < 0
-                    ? tooltipDefaultRadiusLabel
-                    : (controller.tooltipRadius?.toStringAsFixed(0) ?? '')
-                : 'default 4',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.tooltipRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setTooltipRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.tooltipRadius == null ||
-                              (controller.tooltipRadius ?? -1) < 0
-                          ? tooltipDefaultRadiusLabel
-                          : (controller.tooltipRadius?.toStringAsFixed(0) ?? '')
-                      : 'default 4',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
-        ListTile(
+        SliderNullableDefault(
+          enabled: enableControl,
           title: const Text('Wait duration before shown'),
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitle: Slider(
-            min: 0,
-            max: 2000,
-            divisions: 20,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.tooltipWaitDuration == null ||
-                        (controller.tooltipWaitDuration ?? 0) <= 0
-                    ? 'default 0'
-                    : (controller.tooltipWaitDuration.toString())
-                : 'default 0',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.tooltipWaitDuration?.toDouble() ?? 0
-                : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setTooltipWaitDuration(
-                        value <= 0 ? null : value.toInt());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'mSec',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.tooltipWaitDuration == null ||
-                              (controller.tooltipWaitDuration ?? 0) <= 0
-                          ? 'default 0'
-                          : (controller.tooltipWaitDuration?.toString() ?? '')
-                      : 'default 0',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.tooltipWaitDuration?.toDouble(),
+          onChanged: (double? value) {
+            controller.setTooltipWaitDuration(
+                value == null || value <= 0 ? null : value.toInt());
+          },
+          min: 100,
+          max: 2000,
+          divisions: 19,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'WAIT',
+          valueUnitLabel: ' ms',
+          valueDefaultLabel: 'default\n0 ms',
+          // valueDefaultDisabledLabel: 'default 0',
         ),
-        ListTile(
-          title: const Text('Show duration, after tap, long press or '
+        SliderNullableDefault(
+          enabled: enableControl,
+          title: const Text('Show duration, after tap/long press or '
               'mouse exit'),
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitle: Slider(
-            min: 0,
-            max: 2000,
-            divisions: 20,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.tooltipShowDuration == null ||
-                        (controller.tooltipShowDuration ?? 0) <= 0
-                    ? 'tap/long 1500\nmouse exit 100'
-                    : (controller.tooltipShowDuration.toString())
-                : 'tap/long 1500\nmouse exit 100',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.tooltipShowDuration?.toDouble() ?? 0
-                : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setTooltipShowDuration(
-                        value <= 0 ? null : value.toInt());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'mSec',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.tooltipShowDuration == null ||
-                              (controller.tooltipShowDuration ?? 0) <= 0
-                          ? 'tap/long 1500\nmouse exit 100'
-                          : (controller.tooltipShowDuration?.toString() ?? '')
-                      : 'tap/long 1500\nmouse exit 100',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.tooltipShowDuration?.toDouble(),
+          onChanged: (double? value) {
+            controller.setTooltipShowDuration(
+                value == null || value <= 0 ? null : value.toInt());
+          },
+          min: 100,
+          max: 2000,
+          divisions: 19,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'SHOW',
+          valueUnitLabel: ' ms',
+          valueDefaultLabel: 'tap 1500\nmouse 100',
+          // valueDefaultDisabledLabel: 'default 0',
         ),
         const Divider(),
         const ListTileReveal(
