@@ -192,6 +192,7 @@ class MenuSettings extends StatelessWidget {
                 }
               : null,
         ),
+          enabled: enableControl,
         ListTileReveal(
           enabled: controller.useSubThemes && controller.useFlexColorScheme,
           title: const Text('Container radius'),
