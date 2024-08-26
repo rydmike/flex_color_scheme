@@ -36,7 +36,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle txtStyle = theme.textTheme.labelMedium!;
+    final TextStyle txtStyle = theme.textTheme.labelLarge!;
     final bool enabled = onChanged != null;
     final bool useDefault = index < 0 || index >= SchemeColor.values.length;
     final String colorName = enabled && !useDefault
@@ -48,9 +48,9 @@ class ColorSchemePopupMenu extends StatelessWidget {
       position: PopupMenuPosition.under,
       offset: const Offset(0, -4),
       constraints: const BoxConstraints(
-        minWidth: 260,
-        maxWidth: 260,
-        maxHeight: 560,
+        minWidth: 280,
+        maxWidth: 280,
+        maxHeight: 600,
       ),
       initialValue: useDefault ? SchemeColor.values.length : index,
       tooltip: '',
