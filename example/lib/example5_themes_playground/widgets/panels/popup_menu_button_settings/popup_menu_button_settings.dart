@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -26,17 +27,16 @@ class PopupMenuButtonSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     final String popupMenuElevationDefaultLabel =
         controller.popupMenuElevation == null
             ? useMaterial3
-                ? 'default 3'
-                : 'default 6'
+                ? 'default\n3'
+                : 'default\n6'
             : '';
-
-    final bool popupOpacityEnabled =
-        controller.useSubThemes && controller.useFlexColorScheme;
-    final double popupOpacity =
-        popupOpacityEnabled ? (controller.popupMenuOpacity ?? -0.01) : -0.01;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +82,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
           labelForDefault:
               useMaterial3 ? 'default (surfaceContainer)' : 'default (surface)',
           index: controller.popupMenuSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setPopupMenuSchemeColor(null);
@@ -93,157 +93,52 @@ class PopupMenuButtonSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Opacity of container'),
-          subtitle: Slider(
-            min: -1,
-            max: 100,
-            divisions: 101,
-            label: popupOpacityEnabled
-                ? controller.popupMenuOpacity == null ||
-                        (controller.popupMenuOpacity ?? -1) < 0
-                    ? 'default 100%'
-                    : (popupOpacity * 100).toStringAsFixed(0)
-                : 'default 100%',
-            value: popupOpacity * 100,
-            onChanged: popupOpacityEnabled
-                ? (double value) {
-                    controller
-                        .setPopupMenuOpacity(value < 0 ? null : value / 100);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'OPACITY',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  popupOpacityEnabled
-                      ? controller.popupMenuOpacity == null ||
-                              (controller.popupMenuOpacity ?? -1) < 0
-                          ? 'default 100%'
-                          : '${(popupOpacity * 100).toStringAsFixed(0)} %'
-                      : 'default 100%',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.popupMenuOpacity,
+          onChanged: controller.setPopupMenuOpacity,
+          min: 0,
+          max: 1,
+          divisions: 100,
+          valueDisplayScale: 100,
+          valueDecimalPlaces: 0,
+          valueHeading: 'OPACITY',
+          valueUnitLabel: ' %',
+          valueDefaultLabel: 'default\n100 %',
         ),
-        ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Container radius'),
           subtitleReveal: const Text(
-            'Does not use the global border radius setting. '
-            'Avoid using large border radius on menu container.\n',
+            'Does not use the global border radius setting. Avoid using a very '
+            'large border radius on the popup menu container. At higher than '
+            '12 dp, the none clipped highlight will overflow the corners.\n',
           ),
+          value: controller.popupMenuBorderRadius,
+          onChanged: controller.setPopupMenuBorderRadius,
+          min: 0,
+          max: 12,
+          divisions: 12,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: 'default\n4 dp',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          subtitle: Slider(
-            min: -1,
-            max: 12,
-            divisions: 13,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.popupMenuBorderRadius == null ||
-                        (controller.popupMenuBorderRadius ?? -1) < 0
-                    ? 'default 4'
-                    : (controller.popupMenuBorderRadius?.toStringAsFixed(0) ??
-                        '')
-                : 'default 4',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.popupMenuBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setPopupMenuBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.popupMenuBorderRadius == null ||
-                              (controller.popupMenuBorderRadius ?? -1) < 0
-                          ? 'default 4'
-                          : (controller.popupMenuBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : 'default 4',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Elevation'),
-          subtitle: Slider(
-            min: -1,
-            max: 20,
-            divisions: 21,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.popupMenuElevation == null ||
-                        (controller.popupMenuElevation ?? -1) < 0
-                    ? popupMenuElevationDefaultLabel
-                    : (controller.popupMenuElevation?.toStringAsFixed(0) ?? '')
-                : useMaterial3
-                    ? 'default 3'
-                    : 'default 8',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.popupMenuElevation ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setPopupMenuElevation(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'ELEV',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.popupMenuElevation == null ||
-                              (controller.popupMenuElevation ?? -1) < 0
-                          ? popupMenuElevationDefaultLabel
-                          : (controller.popupMenuElevation
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3
-                          ? 'default 3'
-                          : 'default 8',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.popupMenuElevation,
+          onChanged: controller.setPopupMenuElevation,
+          min: 0,
+          max: 20,
+          divisions: 20,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'ELEV',
+          valueDefaultLabel: popupMenuElevationDefaultLabel,
+          valueDefaultDisabledLabel: useMaterial3 ? 'default\n3' : 'default\n8',
         ),
         const Divider(),
         const ListTileReveal(
