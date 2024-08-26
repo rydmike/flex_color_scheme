@@ -5,7 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_nullable_default.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
@@ -138,7 +138,7 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Background opacity'),
           value: controller.navBarOpacity,
@@ -152,7 +152,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueUnitLabel: ' %',
           valueDefaultLabel: 'default\n100 %',
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Elevation'),
           value: controller.navBarElevation,
@@ -165,7 +165,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueDefaultLabel:
               controller.useMaterial3 ? 'default\n3' : 'default\n0',
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Height'),
           value: controller.navBarHeight,
@@ -193,7 +193,7 @@ class NavigationBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Selection indicator opacity'),
           value: controller.navBarIndicatorOpacity,
@@ -209,7 +209,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueDefaultDisabledLabel:
               controller.useMaterial3 ? 'default\n100 %' : 'default\n24 %',
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Indicator border radius'),
           value: controller.navBarIndicatorBorderRadius,

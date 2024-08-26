@@ -6,7 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_nullable_default.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 // Settings for the standard Material buttons.
@@ -138,7 +138,7 @@ class ButtonsSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('ElevatedButton border radius'),
           value: controller.elevatedButtonBorderRadius,
@@ -178,7 +178,7 @@ class ButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: FilledButtonTonalShowcase(),
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('FilledButton border radius'),
           value: controller.filledButtonBorderRadius,
@@ -265,7 +265,7 @@ class ButtonsSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('OutlinedButton border radius'),
           value: controller.outlinedButtonBorderRadius,
@@ -284,7 +284,7 @@ class ButtonsSettings extends StatelessWidget {
         Row(
           children: <Widget>[
             Expanded(
-              child: SliderNullableDefault(
+              child: SliderListTileReveal(
                 enabled: enableControl,
                 title: const Text('Border width'),
                 value: controller.outlinedButtonBorderWidth,
@@ -301,7 +301,7 @@ class ButtonsSettings extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SliderNullableDefault(
+              child: SliderListTileReveal(
                 enabled: enableControl,
                 title: const Text('Pressed border width'),
                 value: controller.outlinedButtonPressedBorderWidth,
@@ -338,7 +338,7 @@ class ButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: TextButtonShowcase(),
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('TextButton border radius'),
           value: controller.textButtonBorderRadius,

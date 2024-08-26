@@ -6,7 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_nullable_default.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -90,7 +90,7 @@ class FabSettings extends StatelessWidget {
               ? controller.setFabAlwaysCircular
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl &&
               controller.fabUseShape &&
               !controller.fabAlwaysCircular,

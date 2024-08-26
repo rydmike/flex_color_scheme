@@ -5,7 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_nullable_default.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
@@ -122,7 +122,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
                 }
               : null,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Tooltip opacity'),
           subtitleReveal: const Text(
@@ -141,7 +141,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           valueUnitLabel: ' %',
           valueDefaultLabel: opacityDefaultLabel,
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Tooltip radius'),
           subtitleReveal: const Text(
@@ -161,7 +161,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           valueDefaultLabel: tooltipDefaultRadiusLabel,
           valueDefaultDisabledLabel: 'default\n4 dp',
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Wait duration before shown'),
           value: controller.tooltipWaitDuration?.toDouble(),
@@ -179,7 +179,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           valueDefaultLabel: 'default\n0 ms',
           // valueDefaultDisabledLabel: 'default 0',
         ),
-        SliderNullableDefault(
+        SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Show duration, after tap/long press or '
               'mouse exit'),

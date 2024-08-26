@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'list_tile_reveal.dart';
 
-/// A discrete [Slider] that is nullable.
+/// A discrete [Slider] that is nullable and uses [ListTileReveal] for title
+/// and additional expanded guide content.
 ///
 /// The Slider can be set to a [value] that is one step below the [min] value.
 /// When the Slider is set to this value, it instead of the set value
@@ -22,8 +23,8 @@ import 'list_tile_reveal.dart';
 ///
 /// This is a Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.
-class SliderNullableDefault extends StatelessWidget {
-  const SliderNullableDefault({
+class SliderListTileReveal extends StatelessWidget {
+  const SliderListTileReveal({
     super.key,
     this.value,
     required this.onChanged,
