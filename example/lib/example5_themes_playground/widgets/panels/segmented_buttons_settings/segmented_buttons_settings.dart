@@ -44,34 +44,34 @@ class SegmentedButtonsSettings extends StatelessWidget {
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String toggleButtonsRadiusDefaultLabel =
         controller.toggleButtonsBorderRadius == null && effectiveRadius == null
-            ? 'default\n40 dp'
+            ? '40 dp'
             : controller.toggleButtonsBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global\n${effectiveRadius.toStringAsFixed(0)} dp'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
     final String toggleBorderWidthDefaultLabel =
         controller.toggleButtonsBorderWidth == null &&
                 controller.thinBorderWidth == null
-            ? 'default\n1 dp'
+            ? '1 dp'
             : controller.toggleButtonsBorderWidth == null &&
                     controller.thinBorderWidth != null
-                ? 'global\n${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
                 : '';
     final String segmentedButtonsRadiusDefaultLabel =
         controller.segmentedButtonBorderRadius == null &&
                 effectiveRadius == null
-            ? 'default\nstadium'
+            ? 'stadium'
             : controller.segmentedButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global\n${effectiveRadius.toStringAsFixed(0)} \n'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
     final String segmentedBorderWidthDefaultLabel =
         controller.segmentedButtonBorderWidth == null &&
                 controller.thinBorderWidth == null
-            ? 'default\n1'
+            ? '1 dp'
             : controller.segmentedButtonBorderWidth == null &&
                     controller.thinBorderWidth != null
-                ? 'global\n${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
                 : '';
 
     final String segmentedUnselectedForegroundDefault = controller
@@ -170,7 +170,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: toggleButtonsRadiusDefaultLabel,
-          valueDefaultDisabledLabel: 'default\n0 dp',
+          valueDefaultDisabledLabel: '0 dp',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -184,7 +184,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           valueDecimalPlaces: 1,
           valueHeading: 'WIDTH',
           valueDefaultLabel: toggleBorderWidthDefaultLabel,
-          valueDefaultDisabledLabel: 'default\n1 dp',
+          valueDefaultDisabledLabel: '1 dp',
           valueUnitLabel: ' dp',
         ),
         const Divider(),
@@ -293,7 +293,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: segmentedButtonsRadiusDefaultLabel,
-          valueDefaultDisabledLabel: 'default\nstadium',
+          valueDefaultDisabledLabel: 'stadium',
         ),
         //
         SliderListTileReveal(
@@ -307,9 +307,9 @@ class SegmentedButtonsSettings extends StatelessWidget {
           valueDisplayScale: 1,
           valueDecimalPlaces: 1,
           valueHeading: 'WIDTH',
-          valueDefaultLabel: segmentedBorderWidthDefaultLabel,
-          valueDefaultDisabledLabel: 'default\n1 dp',
           valueUnitLabel: ' dp',
+          valueDefaultLabel: segmentedBorderWidthDefaultLabel,
+          valueDefaultDisabledLabel: '1 dp',
         ),
         ListTileReveal(
           dense: true,

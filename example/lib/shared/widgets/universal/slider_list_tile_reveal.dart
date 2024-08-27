@@ -215,10 +215,11 @@ class SliderListTileReveal extends StatelessWidget {
                   ? value == null ||
                           (value ?? effectiveMin * valueDisplayScale) <
                               min * valueDisplayScale
-                      ? valueDefaultLabel
+                      ? 'default\n$valueDefaultLabel'
                       // ignore: lines_longer_than_80_chars
                       : '${(value! * valueDisplayScale).toStringAsFixed(valueDecimalPlaces)}$valueUnitLabel'
-                  : valueDefaultDisabledLabel ?? valueDefaultLabel,
+                  // ignore: lines_longer_than_80_chars
+                  : 'default\n${valueDefaultDisabledLabel ?? valueDefaultLabel}',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodySmall!
                   .copyWith(fontWeight: FontWeight.bold),

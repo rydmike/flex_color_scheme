@@ -62,31 +62,30 @@ class TextFieldSettings extends StatelessWidget {
     final String unfocusedBorderDefaultLabel =
         controller.inputDecoratorBorderWidth == null &&
                 controller.thinBorderWidth == null
-            ? 'default\n1 dp'
+            ? '1 dp'
             : controller.inputDecoratorBorderWidth == null &&
                     controller.thinBorderWidth != null
-                ? 'global\n${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
                 : '';
-    final String focusedBorderDefaultLabel = controller
-                    .inputDecoratorFocusedBorderWidth ==
-                null &&
-            controller.thickBorderWidth == null
-        ? 'default\n2 dp'
-        : controller.inputDecoratorFocusedBorderWidth == null &&
-                controller.thickBorderWidth != null
-            ? 'global\n${controller.thickBorderWidth!.toStringAsFixed(1)} dp'
-            : '';
+    final String focusedBorderDefaultLabel =
+        controller.inputDecoratorFocusedBorderWidth == null &&
+                controller.thickBorderWidth == null
+            ? '2 dp'
+            : controller.inputDecoratorFocusedBorderWidth == null &&
+                    controller.thickBorderWidth != null
+                ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)} dp'
+                : '';
 
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String decoratorRadiusDefaultLabel =
         controller.inputDecoratorBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
-                ? 'default\n4 dp'
-                : 'default\n10 dp'
+                ? '4 dp'
+                : '10 dp'
             : controller.inputDecoratorBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global\n${effectiveRadius.toStringAsFixed(0)} dp'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
 
     // Default decorator alpha values and labels
@@ -99,7 +98,7 @@ class TextFieldSettings extends StatelessWidget {
     final String lightBackgroundLabel =
         enableControl && controller.inputDecoratorBackgroundAlphaLight != null
             ? '${controller.inputDecoratorBackgroundAlphaLight}'
-            : 'Default\n${defaultBackgroundAlpha.toInt()}';
+            : '${defaultBackgroundAlpha.toInt()}';
 
     final String lightBackgroundLabelOpacity =
         enableControl && controller.inputDecoratorBackgroundAlphaLight != null
@@ -111,8 +110,8 @@ class TextFieldSettings extends StatelessWidget {
         enableControl && controller.inputDecoratorBackgroundAlphaDark != null
             ? '${controller.inputDecoratorBackgroundAlphaDark}'
             : useMaterial3
-                ? 'Default\n255' // #FF = 255 = 100% Dark M3 default
-                : 'Default\n20'; // #14 = 20 = 7.84% Dark FCS own M2 default
+                ? '255' // #FF = 255 = 100% Dark M3 default
+                : '20'; // #14 = 20 = 7.84% Dark FCS own M2 default
 
     final String darkBackgroundLabelOpacity =
         enableControl && controller.inputDecoratorBackgroundAlphaDark != null
@@ -127,7 +126,7 @@ class TextFieldSettings extends StatelessWidget {
         : 0.5; // Dark FCS own default
 
     final String selectionLabelDefaultOpacity =
-        'default\n${(defaultSelectionOpacity * 100).toStringAsFixed(0)} %';
+        '${(defaultSelectionOpacity * 100).toStringAsFixed(0)} %';
     //
     final String baseDefaultLabelLightColor = controller
                 .inputDecoratorSchemeColorLight !=
@@ -454,7 +453,7 @@ class TextFieldSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: decoratorRadiusDefaultLabel,
-          valueDefaultDisabledLabel: 'default\n4 dp',
+          valueDefaultDisabledLabel: '4 dp',
         ),
         const Divider(),
         //
@@ -556,7 +555,7 @@ class TextFieldSettings extends StatelessWidget {
                 valueDecimalPlaces: 1,
                 valueHeading: 'WIDTH',
                 valueDefaultLabel: unfocusedBorderDefaultLabel,
-                valueDefaultDisabledLabel: 'default\n1 dp',
+                valueDefaultDisabledLabel: '1 dp',
                 valueUnitLabel: ' dp',
               ),
             ),
@@ -692,7 +691,7 @@ class TextFieldSettings extends StatelessWidget {
                   valueHeading: 'OPACITY',
                   valueUnitLabel: ' %',
                   valueDefaultLabel: selectionLabelDefaultOpacity,
-                  valueDefaultDisabledLabel: 'default\n40 %',
+                  valueDefaultDisabledLabel: '40 %',
                 ),
               ),
             ],
@@ -772,7 +771,7 @@ class TextFieldSettings extends StatelessWidget {
                   valueHeading: 'OPACITY',
                   valueUnitLabel: ' %',
                   valueDefaultLabel: selectionLabelDefaultOpacity,
-                  valueDefaultDisabledLabel: 'default\n40 %',
+                  valueDefaultDisabledLabel: '40 %',
                 ),
               ),
             ],

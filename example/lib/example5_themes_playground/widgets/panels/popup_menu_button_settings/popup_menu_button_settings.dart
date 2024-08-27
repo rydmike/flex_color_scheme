@@ -34,8 +34,8 @@ class PopupMenuButtonSettings extends StatelessWidget {
     final String popupMenuElevationDefaultLabel =
         controller.popupMenuElevation == null
             ? useMaterial3
-                ? 'default\n3'
-                : 'default\n6'
+                ? '3'
+                : '6'
             : '';
 
     return Column(
@@ -105,7 +105,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'OPACITY',
           valueUnitLabel: ' %',
-          valueDefaultLabel: 'default\n100 %',
+          valueDefaultLabel: '100 %',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -124,7 +124,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
-          valueDefaultLabel: 'default\n4 dp',
+          valueDefaultLabel: '4 dp',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -138,7 +138,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'ELEV',
           valueDefaultLabel: popupMenuElevationDefaultLabel,
-          valueDefaultDisabledLabel: useMaterial3 ? 'default\n3' : 'default\n8',
+          valueDefaultDisabledLabel: useMaterial3 ? '3' : '8',
         ),
         const Divider(),
         const ListTileReveal(
