@@ -150,7 +150,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'OPACITY',
           valueUnitLabel: ' %',
-          valueDefaultLabel: 'default\n100 %',
+          valueDefaultLabel: '100 %',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -162,8 +162,7 @@ class NavigationBarSettings extends StatelessWidget {
           divisions: 24,
           valueHeading: 'ELEV',
           valueDecimalPlaces: 0,
-          valueDefaultLabel:
-              controller.useMaterial3 ? 'default\n3' : 'default\n0',
+          valueDefaultLabel: controller.useMaterial3 ? '3' : '0',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -176,7 +175,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueHeading: 'HEIGHT',
           valueUnitLabel: ' dp',
           valueDecimalPlaces: 0,
-          valueDefaultLabel: 'default\n80 dp',
+          valueDefaultLabel: '80 dp',
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
@@ -205,9 +204,8 @@ class NavigationBarSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'OPACITY',
           valueUnitLabel: ' %',
-          valueDefaultLabel: 'default\n100 %',
-          valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default\n100 %' : 'default\n24 %',
+          valueDefaultLabel: '100 %',
+          valueDefaultDisabledLabel: controller.useMaterial3 ? '100 %' : '24 %',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -220,7 +218,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDecimalPlaces: 0,
-          valueDefaultLabel: 'default stadium',
+          valueDefaultLabel: 'stadium',
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected icon color'),

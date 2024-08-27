@@ -41,10 +41,10 @@ class ChipSettings extends StatelessWidget {
 
     final String chipRadiusDefaultLabel =
         controller.chipBorderRadius == null && effectiveRadius == null
-            ? 'default\n8 dp'
+            ? '8 dp'
             : controller.chipBorderRadius == null &&
                     controller.defaultRadius != null
-                ? 'global\n${effectiveRadius!.toStringAsFixed(0)} dp'
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
                 : '';
 
     // TODO(rydmike): Add choice chip SchemeColor selected color.
@@ -117,7 +117,7 @@ class ChipSettings extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: chipRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default\nstadium' : 'default\n4 dp',
+              controller.useMaterial3 ? '8 dp' : 'stadium',
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),

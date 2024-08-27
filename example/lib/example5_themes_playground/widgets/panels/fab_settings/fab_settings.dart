@@ -35,9 +35,9 @@ class FabSettings extends StatelessWidget {
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
             effectiveRadius == null
-        ? 'default\n16 dp'
+        ? '16 dp'
         : controller.fabBorderRadius == null && controller.defaultRadius != null
-            ? 'global\n${effectiveRadius!.toStringAsFixed(0)} dp'
+            ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
             : '';
 
     return Column(

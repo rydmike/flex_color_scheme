@@ -33,25 +33,25 @@ class TooltipProgressBarSettings extends StatelessWidget {
 
     final String opacityDefaultLabel = !controller.useFlexColorScheme
         ? isLight
-            ? 'default\n90 %'
-            : 'default\n90 %'
+            ? '90 %'
+            : '90 %'
         : controller.useSubThemes && controller.tooltipSchemeColor != null
-            ? 'default\n100 %'
+            ? '100 %'
             : controller.tooltipsMatchBackground
                 ? controller.useSubThemes
                     ? isLight
-                        ? 'default\n95 %'
-                        : 'default\n95 %'
+                        ? '95 %'
+                        : '95 %'
                     : isLight
-                        ? 'default\n94 %'
-                        : 'default\n93 %'
+                        ? '94 %'
+                        : '93 %'
                 : controller.useSubThemes
                     ? isLight
-                        ? 'default\n95 %'
-                        : 'default\n95 %'
+                        ? '95 %'
+                        : '95 %'
                     : isLight
-                        ? 'default\n90 %'
-                        : 'default\n90 %';
+                        ? '90 %'
+                        : '90 %';
 
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
         ? isLight
@@ -75,8 +75,8 @@ class TooltipProgressBarSettings extends StatelessWidget {
 
     final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
         ? controller.useSubThemes
-            ? 'default\n8 dp'
-            : 'default\n4 dp'
+            ? '8 dp'
+            : '4 dp'
         : '';
 
     return Column(
@@ -159,7 +159,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: tooltipDefaultRadiusLabel,
-          valueDefaultDisabledLabel: 'default\n4 dp',
+          valueDefaultDisabledLabel: '4 dp',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -176,12 +176,11 @@ class TooltipProgressBarSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'WAIT',
           valueUnitLabel: ' ms',
-          valueDefaultLabel: 'default\n0 ms',
-          // valueDefaultDisabledLabel: 'default 0',
+          valueDefaultLabel: '0 ms',
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('Show duration, after tap/long press or '
+          title: const Text('Show duration, after tap&long press or '
               'mouse exit'),
           value: controller.tooltipShowDuration?.toDouble(),
           onChanged: (double? value) {
@@ -195,8 +194,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'SHOW',
           valueUnitLabel: ' ms',
-          valueDefaultLabel: 'tap 1500\nmouse 100',
-          // valueDefaultDisabledLabel: 'default 0',
+          valueDefaultLabel: 'tap 1500 mouse 100',
         ),
         const Divider(),
         const ListTileReveal(

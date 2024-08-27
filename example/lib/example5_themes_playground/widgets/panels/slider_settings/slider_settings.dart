@@ -135,7 +135,7 @@ class SliderSettings extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'HEIGHT',
           valueUnitLabel: ' dp',
-          valueDefaultLabel: 'default\n4 dp',
+          valueDefaultLabel: '4 dp',
         ),
         const Divider(),
         const ListTile(title: Text('Slider')),

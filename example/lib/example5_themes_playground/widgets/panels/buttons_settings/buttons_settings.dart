@@ -40,58 +40,57 @@ class ButtonsSettings extends StatelessWidget {
     final String elevatedButtonRadiusDefaultLabel =
         controller.elevatedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
-                ? 'default\nstadium'
-                : 'default\n40 dp'
+                ? 'stadium'
+                : '40 dp'
             : controller.elevatedButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global\n${effectiveRadius.toStringAsFixed(0)} dp'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
     final String outlinedButtonRadiusDefaultLabel =
         controller.outlinedButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
-                ? 'default\nstadium'
-                : 'default\n40 dp'
+                ? 'stadium'
+                : '40 dp'
             : controller.outlinedButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global\n${effectiveRadius.toStringAsFixed(0)}'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String textButtonRadiusDefaultLabel =
         controller.textButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
-                ? 'default\nstadium'
-                : 'default\n40 dp'
+                ? 'stadium'
+                : '40 dp'
             : controller.textButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global\n${effectiveRadius.toStringAsFixed(0)} dp'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
     final String filledButtonRadiusDefaultLabel =
         controller.filledButtonBorderRadius == null && effectiveRadius == null
             ? controller.useMaterial3
-                ? 'default\nstadium'
-                : 'default\n40 dp'
+                ? 'stadium'
+                : '40 dp'
             : controller.filledButtonBorderRadius == null &&
                     effectiveRadius != null
-                ? 'global\n${effectiveRadius.toStringAsFixed(0)} dp'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
     final String outlinedBorderDefaultLabel =
         controller.outlinedButtonBorderWidth == null &&
                 controller.thinBorderWidth == null
-            ? 'default\n1 dp'
+            ? '1 dp'
             : controller.outlinedButtonBorderWidth == null &&
                     controller.thinBorderWidth != null
-                ? 'global\n${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
-                : 'default\n1 dp';
-    final String pressedOutlinedBorderDefaultLabel = controller
-                    .outlinedButtonPressedBorderWidth ==
-                null &&
-            controller.thickBorderWidth == null
-        ? useMaterial3
-            ? 'default\n1 dp'
-            : 'default\n2 dp'
-        : controller.outlinedButtonPressedBorderWidth == null &&
-                controller.thickBorderWidth != null
-            ? 'global\n${controller.thickBorderWidth!.toStringAsFixed(1)} dp'
-            : 'default\n1 dp';
+                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
+                : '1 dp';
+    final String pressedOutlinedBorderDefaultLabel =
+        controller.outlinedButtonPressedBorderWidth == null &&
+                controller.thickBorderWidth == null
+            ? useMaterial3
+                ? '1 dp'
+                : '2 dp'
+            : controller.outlinedButtonPressedBorderWidth == null &&
+                    controller.thickBorderWidth != null
+                ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)} dp'
+                : '1 dp';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +151,7 @@ class ButtonsSettings extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: elevatedButtonRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default\nstadium' : 'default\n4 dp',
+              controller.useMaterial3 ? 'stadium' : '4 dp',
         ),
         const Divider(),
         ColorSchemePopupMenu(
@@ -191,7 +190,7 @@ class ButtonsSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: filledButtonRadiusDefaultLabel,
-          valueDefaultDisabledLabel: 'default\nstadium',
+          valueDefaultDisabledLabel: 'stadium',
         ),
         ListTileReveal(
           dense: true,
@@ -279,7 +278,7 @@ class ButtonsSettings extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: outlinedButtonRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default\nstadium' : 'default\n4 dp',
+              controller.useMaterial3 ? 'stadium' : '4 dp',
         ),
         Row(
           children: <Widget>[
@@ -295,9 +294,9 @@ class ButtonsSettings extends StatelessWidget {
                 valueDisplayScale: 1,
                 valueDecimalPlaces: 1,
                 valueHeading: 'WIDTH',
-                valueDefaultLabel: outlinedBorderDefaultLabel,
-                valueDefaultDisabledLabel: 'default\n1 dp',
                 valueUnitLabel: ' dp',
+                valueDefaultLabel: outlinedBorderDefaultLabel,
+                valueDefaultDisabledLabel: '1 dp',
               ),
             ),
             Expanded(
@@ -312,9 +311,9 @@ class ButtonsSettings extends StatelessWidget {
                 valueDisplayScale: 1,
                 valueDecimalPlaces: 1,
                 valueHeading: 'WIDTH',
-                valueDefaultLabel: pressedOutlinedBorderDefaultLabel,
-                valueDefaultDisabledLabel: 'default\n1 dp',
                 valueUnitLabel: ' dp',
+                valueDefaultLabel: pressedOutlinedBorderDefaultLabel,
+                valueDefaultDisabledLabel: '1 dp',
               ),
             ),
           ],
@@ -352,7 +351,7 @@ class ButtonsSettings extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: textButtonRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default\nstadium' : 'default\n4 dp',
+              controller.useMaterial3 ? 'stadium' : '4 dp',
         ),
       ],
     );
