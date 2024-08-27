@@ -1843,12 +1843,12 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // Compose the final FlexThemeData code string, from all above fragments.
   //
-  final String code = '// Theme API config for FlexColorScheme v'
+  final String code = '// Theme setup for FlexColorScheme package v'
       '${App.versionMajor}.\n'
-      '// Use same major package version. If you use a lower minor version,\n'
-      '// some properties may not be supported. In that case, remove them\n'
-      '// after copying this theme to your app or upgrade to '
-      '${App.version}.\n'
+      '// Use same major flex_color_scheme package version. If you use a lower minor\n'
+      '// version, some properties may not be supported. In that case, remove them\n'
+      '// after copying this theme to your app or upgrade package to '
+      'version ${App.version}.\n'
       'theme: FlexThemeData.light(\n'
       '$lightScheme'
       '$usedColors'
@@ -1899,8 +1899,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
       '),\n'
-      '// If you do not have a themeMode switch, uncomment this line\n'
-      '// to let the device system mode control the theme mode:\n'
+      '// Uncomment to use device mode or add your own theme mode toggle.\n'
       '// themeMode: ThemeMode.system,\n';
   return code;
 }
