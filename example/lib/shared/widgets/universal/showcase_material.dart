@@ -2479,6 +2479,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDefaultDecoration =
+        Theme.of(context).inputDecorationTheme == const InputDecorationTheme();
+
     return RepaintBoundary(
       child: Column(
         children: <Widget>[
@@ -2499,7 +2502,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: _plainFieldController,
                   decoration: InputDecoration(
                     border: _forceOutlined ? const OutlineInputBorder() : null,
-                    filled: _forceFilled ? true : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
                     labelText: 'TextField',
                     errorText: _errorStatePlain
@@ -2515,7 +2518,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   enabled: false,
                   decoration: InputDecoration(
                     border: _forceOutlined ? const OutlineInputBorder() : null,
-                    filled: _forceFilled ? true : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
                     labelText: 'Disabled label',
                   ),
                 ),
@@ -2540,7 +2543,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: _withIconsController,
                   decoration: InputDecoration(
                     border: _forceOutlined ? const OutlineInputBorder() : null,
-                    filled: _forceFilled ? true : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
                     labelText: 'Icons',
                     prefixIcon: const Icon(Icons.search),
@@ -2558,7 +2561,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   enabled: false,
                   decoration: InputDecoration(
                     border: _forceOutlined ? const OutlineInputBorder() : null,
-                    filled: _forceFilled ? true : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
                     labelText: 'Disabled label',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: const Icon(Icons.info),
@@ -2576,7 +2579,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: _collapsedFieldController,
                   decoration: InputDecoration.collapsed(
                     border: _forceOutlined ? const OutlineInputBorder() : null,
-                    filled: _forceFilled ? true : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Collapsed',
                   ),
                 ),
@@ -2589,7 +2592,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: TextEditingController(text: 'Disabled entry'),
                   decoration: InputDecoration.collapsed(
                     border: _forceOutlined ? const OutlineInputBorder() : null,
-                    filled: _forceFilled ? true : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Collapsed TextField',
                   ),
                 ),
@@ -2608,7 +2611,10 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   subtitleReveal: const Text('This is not a theme toggle. It '
                       'sets the Decoration.filled to true on widget level. '
                       "Use it to see Flutter's default filled style when "
-                      'no theme is used.'),
+                      'no custom theme is used. This switch does nothing '
+                      'when a custom InputDecoration theme is active.'),
+                  enabled: isDefaultDecoration,
+                  allowRevealWhenDisabled: true,
                   value: _forceFilled,
                   onChanged: (bool value) {
                     setState(() {
@@ -2626,7 +2632,10 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   subtitleReveal: const Text('This is not a theme toggle. It '
                       'sets border to the default OutlineInputBorder() on '
                       "widget level. Use it to see Flutter's default outlined "
-                      'style when no theme is used.'),
+                      'style when no custom theme is used. This switch does '
+                      'nothing when a custom InputDecoration theme is active.'),
+                  enabled: isDefaultDecoration,
+                  allowRevealWhenDisabled: true,
                   value: _forceOutlined,
                   onChanged: (bool value) {
                     setState(() {
