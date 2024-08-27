@@ -4783,7 +4783,7 @@ class MaterialShowcase extends StatelessWidget {
   const MaterialShowcase({super.key, this.explain = false});
   final bool explain;
 
-  static const double _width = 160;
+  static const double _width = CardShowcase.width - 8;
   static const double _height = 100;
 
   @override
@@ -4795,6 +4795,7 @@ class MaterialShowcase extends StatelessWidget {
     );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+    final TextStyle labelSmall = theme.textTheme.labelSmall!;
 
     return RepaintBoundary(
       child: Column(
@@ -4823,8 +4824,8 @@ class MaterialShowcase extends StatelessWidget {
           const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
+            spacing: 12,
+            runSpacing: 12,
             children: <Widget>[
               SizedBox(
                 width: _width,
@@ -4841,7 +4842,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type canvas, elevation 1, default tint '
                           'and default shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -4865,7 +4866,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type canvas, elevation 1, '
                           'assigned surfaceTint and transparent shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -4889,7 +4890,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type canvas, elevation 1, '
                           'assigned surfaceTint and primary shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -4901,8 +4902,8 @@ class MaterialShowcase extends StatelessWidget {
           const SizedBox(height: 16),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
+            spacing: 12,
+            runSpacing: 12,
             children: <Widget>[
               SizedBox(
                 width: _width,
@@ -4919,7 +4920,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type canvas, elevation 6, default tint '
                           'and default shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -4943,7 +4944,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type canvas, elevation 6, '
                           'assigned surfaceTint and transparent shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -4967,7 +4968,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type canvas, elevation 6, '
                           'assigned surfaceTint and primary shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -4987,8 +4988,8 @@ class MaterialShowcase extends StatelessWidget {
           const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
+            spacing: 12,
+            runSpacing: 12,
             children: <Widget>[
               SizedBox(
                 width: _width,
@@ -5005,7 +5006,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type card, elevation 1, default tint '
                           'and default shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -5029,7 +5030,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type card, elevation 1, '
                           'assigned surfaceTint and transparent shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -5053,7 +5054,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type card, elevation 1, '
                           'assigned surfaceTint and primary shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -5065,8 +5066,8 @@ class MaterialShowcase extends StatelessWidget {
           const SizedBox(height: 16),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
+            spacing: 12,
+            runSpacing: 12,
             children: <Widget>[
               SizedBox(
                 width: _width,
@@ -5083,7 +5084,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type card, elevation 6, default tint '
                           'and default shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -5107,7 +5108,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type card, elevation 6, '
                           'assigned surfaceTint and transparent shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -5131,7 +5132,7 @@ class MaterialShowcase extends StatelessWidget {
                           'Material type card, elevation 6, '
                           'assigned surfaceTint and primary shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
@@ -5150,23 +5151,22 @@ class CardShowcase extends StatelessWidget {
   const CardShowcase({super.key, this.explain = false});
   final bool explain;
 
-  static const double _width = 160;
+  static const double width = 130;
   static const double _height = 100;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
-    );
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+    final TextStyle labelSmall = theme.textTheme.labelSmall!;
+
     return RepaintBoundary(
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const CardTypesShowcase(cardWidth: 130),
+            const CardTypesShowcase(cardWidth: width),
             const SizedBox(height: 8),
             if (explain)
               Padding(
@@ -5191,7 +5191,7 @@ class CardShowcase extends StatelessWidget {
               runSpacing: 8,
               children: <Widget>[
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 0,
@@ -5204,14 +5204,14 @@ class CardShowcase extends StatelessWidget {
                           'Card, elevation 0, default surfaceTint '
                           'and default shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         )),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 0,
@@ -5225,7 +5225,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 0, assigned surfaceTint and '
                             'default shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5233,7 +5233,7 @@ class CardShowcase extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 0,
@@ -5248,7 +5248,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 0, assigned surfaceTint and '
                             'transparent shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5264,7 +5264,7 @@ class CardShowcase extends StatelessWidget {
               runSpacing: 8,
               children: <Widget>[
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 1,
@@ -5277,14 +5277,14 @@ class CardShowcase extends StatelessWidget {
                           'Card, elevation 1, default surfaceTint '
                           'and default shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         )),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 1,
@@ -5298,7 +5298,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 1, assigned surfaceTint and '
                             'default shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5306,7 +5306,7 @@ class CardShowcase extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 1,
@@ -5321,7 +5321,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 1, assigned surfaceTint and '
                             'transparent shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5337,7 +5337,7 @@ class CardShowcase extends StatelessWidget {
               runSpacing: 8,
               children: <Widget>[
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 4,
@@ -5350,7 +5350,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 4, default surfaceTint '
                             'and default shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5358,7 +5358,7 @@ class CardShowcase extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 4,
@@ -5370,14 +5370,14 @@ class CardShowcase extends StatelessWidget {
                           'Card, elevation 4, assigned surfaceTint and '
                           'default shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 4,
@@ -5392,7 +5392,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 4, assigned surfaceTint and '
                             'transparent shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5408,7 +5408,7 @@ class CardShowcase extends StatelessWidget {
               runSpacing: 8,
               children: <Widget>[
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 10,
@@ -5421,7 +5421,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 10, default surfaceTint '
                             'and default shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5429,7 +5429,7 @@ class CardShowcase extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 10,
@@ -5443,7 +5443,7 @@ class CardShowcase extends StatelessWidget {
                             'Card, elevation 10, assigned surfaceTint and '
                             'default shadow',
                             textAlign: TextAlign.center,
-                            style: denseHeader,
+                            style: labelSmall,
                           ),
                         ),
                       ),
@@ -5451,7 +5451,7 @@ class CardShowcase extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: _width,
+                  width: width,
                   height: _height,
                   child: Card(
                     elevation: 10,
@@ -5466,7 +5466,7 @@ class CardShowcase extends StatelessWidget {
                           'Card, elevation 10, assigned surfaceTint and '
                           'transparent shadow',
                           textAlign: TextAlign.center,
-                          style: denseHeader,
+                          style: labelSmall,
                         )),
                       ),
                     ),
@@ -5483,11 +5483,11 @@ class CardTypesShowcase extends StatelessWidget {
   const CardTypesShowcase({
     super.key,
     this.cardWidth,
-    this.showThemedOutline = false,
+    this.showForcedOutlined = false,
   });
 
   final double? cardWidth;
-  final bool showThemedOutline;
+  final bool showForcedOutlined;
 
   static const double _cardWidth = 115;
 
@@ -5514,11 +5514,13 @@ class CardTypesShowcase extends StatelessWidget {
 
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
+      spacing: 8,
+      runSpacing: 8,
       children: <Widget>[
         SizedBox(
           width: cardWidth ?? _cardWidth,
           child: Card(
-            child: Container(
+            child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
               child: Column(
                 children: <Widget>[
@@ -5542,8 +5544,7 @@ class CardTypesShowcase extends StatelessWidget {
         SizedBox(
           width: cardWidth ?? _cardWidth,
           child: Card.filled(
-            elevation: 0,
-            child: Container(
+            child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
               child: Column(
                 children: <Widget>[
@@ -5567,12 +5568,6 @@ class CardTypesShowcase extends StatelessWidget {
         SizedBox(
           width: cardWidth ?? _cardWidth,
           child: Card.outlined(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: theme.colorScheme.outlineVariant),
-              borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            ),
-            borderOnForeground: false,
             child: Container(
               padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
               child: Column(
@@ -5594,13 +5589,17 @@ class CardTypesShowcase extends StatelessWidget {
             ),
           ),
         ),
-        if (showThemedOutline)
+        if (showForcedOutlined)
           SizedBox(
             width: cardWidth ?? _cardWidth,
             child: Card.outlined(
               elevation: 0,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: theme.colorScheme.outlineVariant),
+                borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+              ),
               borderOnForeground: false,
-              child: Container(
+              child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
                 child: Column(
                   children: <Widget>[
@@ -5614,7 +5613,7 @@ class CardTypesShowcase extends StatelessWidget {
                     const SizedBox(height: 20),
                     const Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text('Outlined theme'),
+                      child: Text('Outlined Forced'),
                     )
                   ],
                 ),
