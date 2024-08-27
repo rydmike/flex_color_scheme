@@ -22,6 +22,7 @@ class SwitchListTileReveal extends StatefulWidget {
     this.dense,
     this.revealDense,
     this.enabled = true,
+    this.allowRevealWhenDisabled = false,
     this.isOpen,
     this.duration = const Duration(milliseconds: 200),
   });
@@ -75,8 +76,11 @@ class SwitchListTileReveal extends StatefulWidget {
   /// Inoperative if [enabled] is false.
   final GestureTapCallback? onTap;
 
-  /// Whether this list tile and card operation is interactive.
+  /// Whether this list tile is interactive.
   final bool enabled;
+
+  /// Allow reveal action even when the list tile is disabled.
+  final bool allowRevealWhenDisabled;
 
   /// Whether this list tile is part of a vertically dense list.
   ///
@@ -131,20 +135,25 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
         SwitchListTile(
           dense: widget.dense,
           contentPadding: widget.contentPadding,
-          value: widget.value,
+          value: widget.value && widget.enabled,
           onChanged: widget.enabled ? widget.onChanged : null,
           title: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               if (widget.title != null) widget.title!,
-              if (widget.subtitleReveal != null && widget.enabled)
+              if (widget.subtitleReveal != null &&
+                  (widget.enabled || widget.allowRevealWhenDisabled))
                 IconButton(
                   iconSize: 20,
                   // ignore: avoid_bool_literals_in_conditional_expressions
-                  isSelected: widget.enabled ? _isOpen : false,
+                  isSelected: widget.enabled || widget.allowRevealWhenDisabled
+                      ? _isOpen
+                      : false,
                   icon: const Icon(Icons.info_outlined),
                   selectedIcon: const Icon(Icons.info),
-                  onPressed: widget.enabled ? _handleTap : null,
+                  onPressed: widget.enabled || widget.allowRevealWhenDisabled
+                      ? _handleTap
+                      : null,
                 ),
             ],
           ),
@@ -159,7 +168,9 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
               child: child,
             );
           },
-          child: (_isOpen && widget.subtitleReveal != null && widget.enabled)
+          child: (_isOpen &&
+                  widget.subtitleReveal != null &&
+                  (widget.enabled || widget.allowRevealWhenDisabled))
               ? ListTile(
                   dense: widget.revealDense ?? true,
                   subtitle: widget.subtitleReveal,
