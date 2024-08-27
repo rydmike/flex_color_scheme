@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import 'surface_mode_widgets.dart';
+import 'surface_mode_popup_menu.dart';
 
 /// Toggle the surface mode of the application for light theme mode.
 @immutable

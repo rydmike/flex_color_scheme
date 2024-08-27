@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import 'surface_mode_widgets.dart';
+import 'surface_mode_toggle_buttons.dart';
 
 class DarkSurfaceModeToggleButtons extends StatelessWidget {
   const DarkSurfaceModeToggleButtons({required this.controller, super.key});
