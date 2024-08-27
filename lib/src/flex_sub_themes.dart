@@ -3196,11 +3196,13 @@ sealed class FlexSubThemes {
     /// Selects which color from the passed in colorScheme to use for the border
     /// and fill color of the input decorator.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    /// You can give the border a separate color value by defining
-    /// [borderSchemeColor].
+    /// If not defined, in M3 mode border color defaults to primary and fill
+    /// color to surfaceContainerHighest. In M2 mode border and fill color both
+    /// default to primary.
     ///
-    /// If not defined, [colorScheme.primary] will be used.
+    /// The border [borderSchemeColor] can be used to define the
+    /// border color separately. It defaults to this color, if
+    /// [borderSchemeColor] is not defined, and this color is.
     final SchemeColor? baseSchemeColor,
 
     /// The decorated input fields corner border radius.
@@ -3289,7 +3291,11 @@ sealed class FlexSubThemes {
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
-    /// If not defined, [baseSchemeColor] will be used.
+    /// If not defined and [baseSchemeColor] is also not defined, then
+    /// in M3 and M2 mode, the border color defaults to primary.
+    ///
+    /// If not defined and [baseSchemeColor] is defined, it defaults
+    /// to the color given by [baseSchemeColor].
     final SchemeColor? borderSchemeColor,
 
     /// The border width when the input is selected.
