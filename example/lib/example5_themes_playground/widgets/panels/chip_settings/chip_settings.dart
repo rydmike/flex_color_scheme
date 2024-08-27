@@ -111,7 +111,6 @@ class ChipSettings extends StatelessWidget {
           min: 0,
           max: 40,
           divisions: 40,
-          valueDisplayScale: 1,
           valueDecimalPlaces: 0,
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',

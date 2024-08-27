@@ -131,7 +131,6 @@ class SliderSettings extends StatelessWidget {
           min: 1,
           max: 14,
           divisions: 13,
-          valueDisplayScale: 1,
           valueDecimalPlaces: 0,
           valueHeading: 'HEIGHT',
           valueUnitLabel: ' dp',

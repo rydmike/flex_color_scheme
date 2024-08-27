@@ -100,7 +100,6 @@ class FabSettings extends StatelessWidget {
           min: 0,
           max: 60,
           divisions: 60,
-          valueDisplayScale: 1,
           valueDecimalPlaces: 0,
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
