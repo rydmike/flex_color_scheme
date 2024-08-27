@@ -125,10 +125,7 @@ class CardSettings extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.all(16),
-          child: CardTypesShowcase(
-            cardWidth: 140,
-            showForcedOutlined: true,
-          ),
+          child: CardTypesShowcase(showForcedOutlined: true),
         ),
         ListTileReveal(
           dense: true,
@@ -159,14 +156,18 @@ class CardSettings extends StatelessWidget {
                       '\n'
                       'Due to this issue, if you theme the radius to anything '
                       'else above than 12 in M3 mode, be aware that you loose '
-                      'the Card.outlined variant, it will not have a border.\n'
-                      '\n'
+                      'the Card.outlined variant, it will not have a border. '
                       'The Outlined Forced version above is putting the border '
-                      'back on widget level\n.',
+                      'back on widget level.\n',
                 ),
               ],
             ),
           ),
+        ),
+        const Divider(),
+        const Padding(
+          padding: EdgeInsets.all(16),
+          child: CardShowcase(explain: true),
         ),
       ],
     );
