@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 
 class CardSettings extends StatelessWidget {
   const CardSettings(this.controller, {super.key});
@@ -23,13 +24,15 @@ class CardSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String cardRadiusDefaultLabel =
         controller.cardBorderRadius == null && effectiveRadius == null
-            ? controller.useMaterial3
-                ? 'default 12'
-                : 'default 4'
+            ? 'default 12'
             : controller.cardBorderRadius == null && effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
@@ -41,87 +44,31 @@ class CardSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('Card info'),
           subtitleReveal: Text(
-            'In M2 mode default background color is theme.cardColor, '
-            'which typically is set to colorScheme.surface.\n'
-            'In M3 mode before Flutter 3.22 background defaults to '
-            'surface color and it gets elevation based surfaceTint.\n'
-            'In M3 mode after Flutter 3.22 background defaults to '
-            'surfaceContainerLow color and it does not get elevation '
-            'based surfaceTint by default.\n'
-            'In M2 mode surfaceTint has no effect even if specified.\n'
-            'Card gets elevation shadow by default in M2 and M3 mode.'
-            '\n'
             'In Component Theme settings you can remove '
             'elevation tint from all widgets on desired platforms. '
             'In Flutter 3.22 and later this feature is not needed since '
             'elevation tints are removed by default.\n'
             '\n'
             'Cards still have elevation shadow in M3 mode as before. You '
-            'can remove the shadow from elevated Cards in M3 mode to make '
-            'only elevation tinted Cards by assigning Colors.transparent to '
-            'its shadowColor theme or widget property.\n',
+            'can remove the shadow from elevated Cards by assigning '
+            'Colors.transparent to its shadowColor theme or widget property.\n',
           ),
         ),
-        ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Border radius'),
-          subtitleReveal: const Text(
-            'Component themes with border radius can have their radius '
-            'overridden and changed individually. It then either '
-            'overrides its default value or the set global radius default, '
-            'depending on what is in use. The border radius for Cards default '
-            'to 12dp in M3 mode, and to 4dp in M2 mode.\n',
-          ),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: -1,
-            max: 40,
-            divisions: 41,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.cardBorderRadius == null ||
-                        (controller.cardBorderRadius ?? -1) < 0
-                    ? cardRadiusDefaultLabel
-                    : (controller.cardBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.useMaterial3
-                    ? 'default 12'
-                    : 'default 4',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.cardBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setCardBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.cardBorderRadius == null ||
-                              (controller.cardBorderRadius ?? -1) < 0
-                          ? cardRadiusDefaultLabel
-                          : (controller.cardBorderRadius?.toStringAsFixed(0) ??
-                              '')
-                      : controller.useMaterial3
-                          ? 'default 12'
-                          : 'default 4',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.cardBorderRadius,
+          onChanged: controller.setCardBorderRadius,
+          min: 0,
+          max: 40,
+          divisions: 40,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: cardRadiusDefaultLabel,
+          valueDefaultDisabledLabel:
+              controller.useMaterial3 ? 'default 12' : 'default 4',
         ),
         const Padding(
           padding: EdgeInsets.all(16),
