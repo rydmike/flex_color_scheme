@@ -273,7 +273,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **CHANGE**
 
-- No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is ON.
+- No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is **ON**.
+- As of version 8, the Playground now also defaults `useTextTheme` to null. This makes M2 and M3 mode use their respective mode-based typography by default. If you still make an M2 app, prefer using M3 typography and set it to `true`, like the Playground did before. M3 typography is much nicer than M2 typography. This is not a breaking API change, just a change in the default value used when you rest the Playground to its default values. Turn it **ON** in **TextTheme** settings, to get the same config as you did with a reset before. If you use Material-3, this Playground settings change has no impact on your theme result.
 - Updated the presentation of `Switch`, `Checkbox`and `Radio` on their settings panel.
 - Changed the name of the "Theme colors" settings panel to "**Input Colors**". 
 - Changed the name of the "Surface blends" settings panel to "**Color Blends**".
