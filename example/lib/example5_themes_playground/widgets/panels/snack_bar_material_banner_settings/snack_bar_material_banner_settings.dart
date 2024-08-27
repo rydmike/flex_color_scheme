@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class SnackBarMaterialBannerSettings extends StatelessWidget {
@@ -26,6 +27,10 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     final String snackDefaultColorLabel = isDark
         ? (controller.useSubThemes && controller.useFlexColorScheme)
@@ -102,110 +107,41 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius'),
-          subtitle: Slider(
-            min: -1,
-            max: 30,
-            divisions: 31,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.snackBarBorderRadius == null ||
-                        (controller.snackBarBorderRadius ?? -1) < 0
-                    ? 'default fix 0, float 4'
-                    : (controller.snackBarBorderRadius?.toStringAsFixed(0) ??
-                        '')
-                : 'default fix 0, float 4',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.snackBarBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setSnackBarBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.snackBarBorderRadius == null ||
-                              (controller.snackBarBorderRadius ?? -1) < 0
-                          ? 'default\nfix 0, float 4'
-                          : (controller.snackBarBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : 'default\nfix 0, float 4',
-                  style: theme.textTheme.bodySmall!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Radius'),
+          value: controller.snackBarBorderRadius,
+          onChanged: controller.setSnackBarBorderRadius,
+          min: 0,
+          max: 40,
+          divisions: 40,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: 'fixed 0, float 4',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Elevation'),
-          subtitle: Slider(
-            min: -1,
-            max: 20,
-            divisions: 21,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.snackBarElevation == null ||
-                        (controller.snackBarElevation ?? -1) < 0
-                    ? 'default 4'
-                    : (controller.snackBarElevation?.toStringAsFixed(0) ?? '')
-                : 'default 6',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.snackBarElevation ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setSnackBarElevation(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'ELEV',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.snackBarElevation == null ||
-                              (controller.snackBarElevation ?? -1) < 0
-                          ? 'default 4'
-                          : (controller.snackBarElevation?.toStringAsFixed(0) ??
-                              '')
-                      : 'default 6',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.snackBarElevation,
+          onChanged: controller.setSnackBarElevation,
+          min: 0,
+          max: 20,
+          divisions: 20,
+          valueDisplayScale: 1,
+          valueDecimalPlaces: 0,
+          valueHeading: 'ELEV',
+          // valueUnitLabel: ' dp',
+          valueDefaultLabel: '4',
+          valueDefaultDisabledLabel: '6',
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           subtitle: const Text('Set to inverseSurface for default M3 style'),
           labelForDefault: snackDefaultColorLabel,
           index: controller.snackBarSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setSnackBarSchemeColor(null);
@@ -220,7 +156,7 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
           title: const Text('Action button text color'),
           labelForDefault: snackActionDefaultColorLabel,
           index: controller.snackBarActionSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setSnackBarActionSchemeColor(null);
