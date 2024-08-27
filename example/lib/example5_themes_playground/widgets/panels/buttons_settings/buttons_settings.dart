@@ -140,7 +140,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('ElevatedButton border radius'),
+          title: const Text('Radius'),
           value: controller.elevatedButtonBorderRadius,
           onChanged: controller.setElevatedButtonBorderRadius,
           min: 0,
@@ -156,7 +156,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         const Divider(),
         ColorSchemePopupMenu(
-          labelForDefault: 'default (primary or secondaryContainer)',
+          labelForDefault: 'default (primary & secondaryContainer)',
           title: const Text('FilledButton color'),
           index: controller.filledButtonSchemeColor?.index ?? -1,
           onChanged: enableControl
@@ -180,7 +180,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('FilledButton border radius'),
+          title: const Text('Radius'),
           value: controller.filledButtonBorderRadius,
           onChanged: controller.setFilledButtonBorderRadius,
           min: 0,
@@ -267,7 +267,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('OutlinedButton border radius'),
+          title: const Text('Radius'),
           value: controller.outlinedButtonBorderRadius,
           onChanged: controller.setOutlinedButtonBorderRadius,
           min: 0,
@@ -340,7 +340,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('TextButton border radius'),
+          title: const Text('Radius'),
           value: controller.textButtonBorderRadius,
           onChanged: controller.setTextButtonBorderRadius,
           min: 0,

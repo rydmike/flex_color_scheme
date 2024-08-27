@@ -171,8 +171,8 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     buttonLabel: 'Adaptive\nTheming',
     icon: Icons.auto_fix_high,
     info: 'In Flutter, adaptive widgets refer to UI components that use a '
-        'different style or completely different platform native looking '
-        'component for each target platforms. Flutter only has a few '
+        'different style or a completely different platform native looking '
+        'component for a target platform. Flutter only has a few '
         'components that adapt between iOS and Android versions.\n'
         '\n'
         'In a similar manner, FlexColorScheme allows you to define platform '
@@ -187,9 +187,9 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         '\n'
         'The platform adaptive theme feature does not replace using platform '
         'adaptive widgets. It is useful if you for example want to use a '
-        'native looking Material-3 style on Android, but e.g. want to use a '
-        'more platform agnostic style for iOS, macOS and desktop and make '
-        'Material-3 widgets not look so out of place on these platforms.\n'
+        'native looking Material-3 style on Android, but e.g. want a '
+        'more platform agnostic style for iOS, macOS and desktop and theme '
+        'Material-3 widgets to not look so out of place on these platforms.\n'
         '\n'
         'Like platform adaptive widgets, and all other theme settings, the '
         'adaptive themed style is automatic and happens based on which '
