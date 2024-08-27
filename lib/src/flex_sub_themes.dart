@@ -1397,11 +1397,9 @@ sealed class FlexSubThemes {
     // that does not use a border. Which you want for the default elevated
     // one and filled one.
     //
-    // See issue:
-    // TODO(rydmike): File and add Card.outline theming issue link here.
-    final bool usesDefaultRadius = radius == null ||
-        (useM3 && radius == kCardRadius) ||
-        (!useM3 && radius == 4);
+    // See issue: https://github.com/flutter/flutter/issues/153912
+    final bool usesDefaultRadius =
+        (radius == null || (useM3 && radius == kCardRadius)) && useM3;
 
     return CardTheme(
       clipBehavior: clipBehavior,
@@ -1412,7 +1410,7 @@ sealed class FlexSubThemes {
           ? null
           : RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(radius),
+                Radius.circular(radius ?? kCardRadius),
               ),
             ),
     );
