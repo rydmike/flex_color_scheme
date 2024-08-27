@@ -5,6 +5,7 @@ import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class BottomSheetSettings extends StatelessWidget {
@@ -35,13 +36,16 @@ class BottomSheetSettings extends StatelessWidget {
                 ? 'default 2'
                 : 'default 8'
             : '';
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String sheetRadiusDefaultLabel = controller.bottomSheetBorderRadius ==
                 null &&
             effectiveRadius == null
-        ? 'default 28'
+        ? '28'
         : controller.bottomSheetBorderRadius == null && effectiveRadius != null
             ? 'global ${effectiveRadius.toStringAsFixed(0)}'
             : '';
@@ -57,58 +61,19 @@ class BottomSheetSettings extends StatelessWidget {
               'individually, but not all of them. The border radius only has '
               'one the property shared by both variants.\n'),
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius'),
-          subtitle: Slider(
-            min: -1,
-            max: 50,
-            divisions: 51,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.bottomSheetBorderRadius == null ||
-                        (controller.bottomSheetBorderRadius ?? -1) < 0
-                    ? sheetRadiusDefaultLabel
-                    : (controller.bottomSheetBorderRadius?.toStringAsFixed(0) ??
-                        '')
-                : useMaterial3
-                    ? 'default 28'
-                    : 'default 0',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.bottomSheetBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setBottomSheetBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.bottomSheetBorderRadius == null ||
-                              (controller.bottomSheetBorderRadius ?? -1) < 0
-                          ? sheetRadiusDefaultLabel
-                          : (controller.bottomSheetBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3
-                          ? 'default 28'
-                          : 'default 0',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Radius'),
+          value: controller.bottomSheetBorderRadius,
+          onChanged: controller.setBottomSheetBorderRadius,
+          min: 0,
+          max: 50,
+          divisions: 50,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: sheetRadiusDefaultLabel,
+          valueDefaultDisabledLabel: useMaterial3 ? '28' : '0',
         ),
         const Divider(),
         const ListTile(title: Text('Standard BottomSheet')),
