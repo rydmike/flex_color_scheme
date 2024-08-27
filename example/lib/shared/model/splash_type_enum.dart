@@ -101,7 +101,8 @@ enum SplashTypeEnum {
     label: 'InstantSplash',
     describe: 'A custom immediate ink splash effect. Uses an immediate '
         'highlight ink splash color feature whose origin starts at the '
-        'input touch point and expands from touch point using ZERO duration. '
+        'input touch point and expands from touch point using almost ZERO '
+        'duration. '
         'This creates an immediate splash effect, instead of an animated '
         'growing splash color based ink. Use this option for a more prominent '
         'click highlight than NoSplash.\n',
