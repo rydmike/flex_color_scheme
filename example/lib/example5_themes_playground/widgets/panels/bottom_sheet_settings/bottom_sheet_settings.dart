@@ -18,27 +18,16 @@ class BottomSheetSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
 
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     final String sheetDefaultColorLabel =
         controller.useSubThemes && controller.useFlexColorScheme
             ? 'default (surfaceContainerLow)'
             : useMaterial3
-                ? 'default (surface)'
+                ? 'default (surfaceContainerLow)'
                 : 'default (theme.canvasColor)';
-    final String sheetElevationDefaultLabel =
-        controller.bottomSheetElevation == null
-            ? useMaterial3
-                ? 'default 1'
-                : 'default 4'
-            : '';
-    final String sheetModalElevationDefaultLabel =
-        controller.bottomSheetModalElevation == null
-            ? useMaterial3
-                ? 'default 2'
-                : 'default 8'
-            : '';
-    // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
@@ -82,64 +71,24 @@ class BottomSheetSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: BottomSheetShowcase(),
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Elevation'),
-          subtitle: Slider(
-            min: -1,
-            max: 20,
-            divisions: 21,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.bottomSheetElevation == null ||
-                        (controller.bottomSheetElevation ?? -1) < 0
-                    ? sheetElevationDefaultLabel
-                    : (controller.bottomSheetElevation?.toStringAsFixed(0) ??
-                        '')
-                : useMaterial3
-                    ? 'default 1'
-                    : 'default 0',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.bottomSheetElevation ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setBottomSheetElevation(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'ELEV',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.bottomSheetElevation == null ||
-                              (controller.bottomSheetElevation ?? -1) < 0
-                          ? sheetElevationDefaultLabel
-                          : (controller.bottomSheetElevation
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3
-                          ? 'default 1'
-                          : 'default 0',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.bottomSheetElevation,
+          onChanged: controller.setBottomSheetElevation,
+          min: 0,
+          max: 20,
+          divisions: 20,
+          valueDecimalPlaces: 0,
+          valueHeading: 'ELEV',
+          valueDefaultLabel: useMaterial3 ? '1' : '4',
+          valueDefaultDisabledLabel: useMaterial3 ? '1' : '0',
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: sheetDefaultColorLabel,
           index: controller.bottomSheetSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setBottomSheetSchemeColor(null);
@@ -158,65 +107,24 @@ class BottomSheetSettings extends StatelessWidget {
           child: BottomSheetModalShowcase(),
         ),
         const SizedBox(height: 16),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Elevation'),
-          subtitle: Slider(
-            min: -1,
-            max: 20,
-            divisions: 21,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.bottomSheetModalElevation == null ||
-                        (controller.bottomSheetModalElevation ?? -1) < 0
-                    ? sheetModalElevationDefaultLabel
-                    : (controller.bottomSheetModalElevation
-                            ?.toStringAsFixed(0) ??
-                        '')
-                : useMaterial3
-                    ? 'default 1'
-                    : 'default 0',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.bottomSheetModalElevation ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setBottomSheetModalElevation(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'ELEV',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.bottomSheetModalElevation == null ||
-                              (controller.bottomSheetModalElevation ?? -1) < 0
-                          ? sheetModalElevationDefaultLabel
-                          : (controller.bottomSheetModalElevation
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3
-                          ? 'default 1'
-                          : 'default 0',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.bottomSheetModalElevation,
+          onChanged: controller.setBottomSheetModalElevation,
+          min: 0,
+          max: 20,
+          divisions: 20,
+          valueDecimalPlaces: 0,
+          valueHeading: 'ELEV',
+          valueDefaultLabel: useMaterial3 ? '2' : '8',
+          valueDefaultDisabledLabel: useMaterial3 ? '1' : '0',
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           labelForDefault: sheetDefaultColorLabel,
           index: controller.bottomSheetModalSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setBottomSheetModalSchemeColor(null);
