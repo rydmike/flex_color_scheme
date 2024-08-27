@@ -5228,7 +5228,8 @@ class CardShowcase extends StatelessWidget {
                   'surfaceContainerLow color,  it does not get elevation '
                   'based surfaceTint by default.\n'
                   'In M2 mode surfaceTint has no effect even if specified.\n'
-                  'Card gets elevation shadow by default in M2,  M3 mode.',
+                  'Card gets elevation shadow by default in both '
+                  'M2 and M3 mode.',
                   style: denseBody,
                 ),
               ),
