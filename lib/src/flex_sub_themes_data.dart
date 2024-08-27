@@ -1691,11 +1691,7 @@ class FlexSubThemesData with Diagnosticable {
   /// or as a handle to drag the cursor to a new location in the text.
   ///
   /// If not defined, defaults to [inputDecoratorSchemeColor] and if it is not
-  /// defined or set to [SchemeColor.primary], then FlexColorScheme (FCS)
-  /// sub-themes defaults to the opinionated selection of
-  /// [ThemeData.primaryColorDark], which in FCS is always a darker tone of
-  /// [colorScheme.primary]. Flutter SDK defaults to [colorScheme.primary], to
-  /// get the same result, use [SchemeColor.primary].
+  /// defined to [SchemeColor.primary] same as Flutter SDK default.
   final SchemeColor? inputSelectionHandleSchemeColor;
 
   /// Border radius value for [FloatingActionButton].

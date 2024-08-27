@@ -7909,21 +7909,6 @@ class FlexColorScheme with Diagnosticable {
               selectionHandleSchemeColor:
                   subTheme.inputSelectionHandleSchemeColor ??
                       subTheme.inputDecoratorSchemeColor,
-              // An FCS opinionated custom darker handle as default value, when
-              // we don't have selected inputSelectionHandleSchemeColor or when
-              // inputDecoratorSchemeColor has no selection or uses primary.
-              // This gives us previous primaryColorDark, when we have no
-              // selection as before, but one that uses
-              // inputSelectionHandleSchemeColor as first priority and also
-              // follows inputDecoratorSchemeColor when it is different from
-              // primary, where primaryColorDark, might not fit.
-              selectionHandleCustomColor:
-                  (subTheme.inputSelectionHandleSchemeColor != null) ||
-                          (subTheme.inputDecoratorSchemeColor != null &&
-                              subTheme.inputDecoratorSchemeColor !=
-                                  SchemeColor.primary)
-                      ? null
-                      : primaryColorDark,
             )
           : null,
       //
