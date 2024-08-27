@@ -707,7 +707,11 @@ class ShowcaseCard extends StatelessWidget {
         SizedBox(height: 8),
         Padding(
           padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-          child: CardShowcase(explain: true),
+          child: CardTypesShowcase(width: 115),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+          child: CardShowcase(width: 130, explain: true),
         ),
         Divider(height: 32),
         Padding(
@@ -716,7 +720,7 @@ class ShowcaseCard extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: MaterialShowcase(explain: true),
+          child: MaterialShowcase(width: 130 - 8, explain: true),
         ),
       ],
     );

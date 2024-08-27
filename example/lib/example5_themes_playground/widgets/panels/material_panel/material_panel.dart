@@ -14,15 +14,15 @@ class MaterialPanel extends StatelessWidget {
         SizedBox(height: 8),
         ListTileReveal(
           title: Text('Material'),
-          subtitleReveal: Text('Material can also specify surfaceTint color, '
-              'which is applied when Material is elevated, but only in '
-              'Material 3 mode.\n'),
+          subtitle: Text('The Material widget can also specify surfaceTint '
+              'color, which is applied when Material is elevated, but only in '
+              'Material-3 mode. It cannot be themed.\n'),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: MaterialShowcase(explain: false),
+          child: MaterialShowcase(),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 24),
       ],
     );
   }

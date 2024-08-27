@@ -373,7 +373,7 @@ class Cards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CardTypesShowcase();
+    return const CardTypesShowcase(width: 115);
   }
 }
 
