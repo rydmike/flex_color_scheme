@@ -127,7 +127,7 @@ class CardSettings extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: CardTypesShowcase(
             cardWidth: 140,
-            showThemedOutline: true,
+            showForcedOutlined: true,
           ),
         ),
         ListTileReveal(
@@ -139,13 +139,13 @@ class CardSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'You cannot theme the Card variants separately. If '
-                      'you change the border radius from the default radius '
-                      'the border outline will will be removed from the '
-                      'default themed Card.outline.\n'
+                      'you change the border radius from the default radius, '
+                      'the outline will be removed from the themed '
+                      'Card.outlined.\n'
                       '\n'
-                      'Same applies if you theme the Card background color, '
-                      'it will get used by all Card variants and you loose '
-                      'the different style. '
+                      'Same applies if you theme the Card background color or '
+                      'elevation, the defined values will get used by all Card '
+                      'variants and you loose their different styles. '
                       'See Flutter SDK ',
                 ),
                 LinkTextSpan(
@@ -158,11 +158,11 @@ class CardSettings extends StatelessWidget {
                   text: ' for more information.\n'
                       '\n'
                       'Due to this issue, if you theme the radius to anything '
-                      'other than 12 in M3 mode, be aware that you loose the '
-                      'Card.outlined variant, as it will not have a border.\n'
+                      'else above than 12 in M3 mode, be aware that you loose '
+                      'the Card.outlined variant, it will not have a border.\n'
                       '\n'
-                      'Likewise if you use a custom themed background color, '
-                      'all Card variants will get this color.\n ',
+                      'The Outlined Forced version above is putting the border '
+                      'back on widget level\n.',
                 ),
               ],
             ),
