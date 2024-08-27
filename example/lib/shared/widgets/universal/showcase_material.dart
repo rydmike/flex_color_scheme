@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'switch_list_tile_reveal.dart';
+
 /// Used to show the current theme on Material widgets.
 ///
 /// Use this widget to review your theme's impact on [ThemeData] and see
@@ -130,7 +132,7 @@ class ShowcaseMaterial extends StatelessWidget {
         //
         // TextField
         //
-        const Text('TextField with InputDecorator', style: headerStyle),
+        const Text('TextField', style: headerStyle),
         const SizedBox(height: 8),
         const TextFieldShowcase(),
         const SizedBox(height: 16),
@@ -2404,29 +2406,27 @@ class TextFieldShowcase extends StatefulWidget {
 }
 
 class _TextFieldShowcaseState extends State<TextFieldShowcase> {
-  late TextEditingController _textController1;
-  late TextEditingController _textController2;
-  late TextEditingController _textController3;
-  late TextEditingController _textController4;
-  bool _errorState1 = false;
-  bool _errorState2 = false;
-  bool _errorState3 = false;
+  late TextEditingController _plainFieldController;
+  late TextEditingController _withIconsController;
+  late TextEditingController _collapsedFieldController;
+  bool _errorStatePlain = false;
+  bool _errorStateWithIcons = false;
+  bool _forceFilled = false;
+  bool _forceOutlined = false;
 
   @override
   void initState() {
     super.initState();
-    _textController1 = TextEditingController();
-    _textController2 = TextEditingController();
-    _textController3 = TextEditingController();
-    _textController4 = TextEditingController();
+    _plainFieldController = TextEditingController();
+    _withIconsController = TextEditingController();
+    _collapsedFieldController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _textController1.dispose();
-    _textController2.dispose();
-    _textController3.dispose();
-    _textController4.dispose();
+    _plainFieldController.dispose();
+    _withIconsController.dispose();
+    _collapsedFieldController.dispose();
     super.dispose();
   }
 
@@ -2435,98 +2435,160 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
     return RepaintBoundary(
       child: Column(
         children: <Widget>[
-          TextField(
-            onChanged: (String text) {
-              setState(() {
-                if (text.contains('a') | text.isEmpty) {
-                  _errorState1 = false;
-                } else {
-                  _errorState1 = true;
-                }
-              });
-            },
-            key: const Key('TextField1'),
-            controller: _textController1,
-            decoration: InputDecoration(
-              hintText: 'Hint: Write something...',
-              labelText: 'Label: Underline border by default if not defined',
-              errorText: _errorState1
-                  ? "Any entry without an 'a' will trigger this error"
-                  : null,
-            ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: TextField(
+                  onChanged: (String text) {
+                    setState(() {
+                      if (text.contains('a') | text.isEmpty) {
+                        _errorStatePlain = false;
+                      } else {
+                        _errorStatePlain = true;
+                      }
+                    });
+                  },
+                  key: const Key('TextField1'),
+                  controller: _plainFieldController,
+                  decoration: InputDecoration(
+                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    filled: _forceFilled ? true : null,
+                    hintText: 'Write something...',
+                    labelText: 'Plain TextField',
+                    errorText: _errorStatePlain
+                        ? "Any entry without an 'a' will trigger this error"
+                        : null,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: TextField(
+                  controller: TextEditingController(),
+                  enabled: false,
+                  decoration: InputDecoration(
+                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    filled: _forceFilled ? true : null,
+                    labelText: 'Disabled label',
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
-          TextField(
-            onChanged: (String text) {
-              setState(() {
-                if (text.contains('a') | text.isEmpty) {
-                  _errorState2 = false;
-                } else {
-                  _errorState2 = true;
-                }
-              });
-            },
-            key: const Key('TextField2'),
-            controller: _textController2,
-            decoration: InputDecoration(
-              filled: true,
-              hintText: 'Hint: Write something...',
-              labelText: 'Label: Underline border by default if not defined, '
-                  'filled set true by Widget',
-              errorText: _errorState2
-                  ? "Any entry without an 'a' will trigger this error"
-                  : null,
-            ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: TextField(
+                  onChanged: (String text) {
+                    setState(() {
+                      if (text.contains('a') | text.isEmpty) {
+                        _errorStateWithIcons = false;
+                      } else {
+                        _errorStateWithIcons = true;
+                      }
+                    });
+                  },
+                  key: const Key('TextField2'),
+                  controller: _withIconsController,
+                  decoration: InputDecoration(
+                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    filled: _forceFilled ? true : null,
+                    hintText: 'Write something...',
+                    labelText: 'Icons TextField',
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: const Icon(Icons.info),
+                    errorText: _errorStateWithIcons
+                        ? "Any entry without an 'a' will trigger this error"
+                        : null,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: TextField(
+                  controller: TextEditingController(text: 'Disabled entry'),
+                  enabled: false,
+                  decoration: InputDecoration(
+                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    filled: _forceFilled ? true : null,
+                    labelText: 'Disabled label',
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: const Icon(Icons.info),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
-          TextField(
-            onChanged: (String text) {
-              setState(() {
-                if (text.contains('a') | text.isEmpty) {
-                  _errorState3 = false;
-                } else {
-                  _errorState3 = true;
-                }
-              });
-            },
-            key: const Key('TextField3'),
-            controller: _textController3,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: 'Hint: Write something...',
-              labelText: 'Label: Outline border set by Widget if not defined',
-              prefixIcon: const Icon(Icons.search),
-              suffixIcon: const Icon(Icons.info),
-              errorText: _errorState3
-                  ? "Any entry without an 'a' will trigger this error"
-                  : null,
-            ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: TextField(
+                  key: const Key('TextField3'),
+                  controller: _collapsedFieldController,
+                  decoration: InputDecoration.collapsed(
+                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    filled: _forceFilled ? true : null,
+                    hintText: 'Collapsed TextField',
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: TextField(
+                  key: const Key('TextField4'),
+                  enabled: false,
+                  controller: TextEditingController(text: 'Disabled entry'),
+                  decoration: InputDecoration.collapsed(
+                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    filled: _forceFilled ? true : null,
+                    hintText: 'Collapsed TextField',
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
-          TextField(
-            key: const Key('TextField4'),
-            controller: _textController4,
-            decoration: const InputDecoration.collapsed(
-              hintText: 'Hint: Collapsed TextField...',
-            ),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: TextEditingController(),
-            enabled: false,
-            decoration: const InputDecoration(
-              labelText: 'TextField - Disabled label',
-            ),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: TextEditingController(text: 'Disabled with text entry'),
-            enabled: false,
-            decoration: const InputDecoration(
-              labelText: 'TextField - Disabled label',
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: Icon(Icons.info),
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: SwitchListTileReveal(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                  dense: true,
+                  title: const Text('Filled'),
+                  subtitleReveal: const Text('This is not a theme toggle. It '
+                      'sets the Decoration.filled to true on widget level. '
+                      "Use it to see Flutter's default filled style when "
+                      'no theme is used.'),
+                  value: _forceFilled,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _forceFilled = value;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: SwitchListTileReveal(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                  dense: true,
+                  title: const Text('Outlined'),
+                  subtitleReveal: const Text('This is not a theme toggle. It '
+                      'sets border to the default OutlineInputBorder() on '
+                      "widget level. Use it to see Flutter's default outlined "
+                      'style when no theme is used.'),
+                  value: _forceOutlined,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _forceOutlined = value;
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
