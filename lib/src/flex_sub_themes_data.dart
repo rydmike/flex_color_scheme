@@ -1497,13 +1497,16 @@ class FlexSubThemesData with Diagnosticable {
   /// [kInputDecoratorM3Radius] = 4dp if [useMaterial3] is true.
   final double? inputDecoratorRadius;
 
-  /// Defines which [Theme] based [ColorScheme] based color the input decorator
-  /// uses as color for the border and fill color when they are used.
+  /// Defines which [Theme] based [ColorScheme] color the input decorator
+  /// uses as color for the border and for fill color when they are used.
   ///
-  /// If not defined it defaults to theme.colorScheme.primary color.
+  /// If not defined, in M3 mode border color defaults to primary and fill
+  /// color to surfaceContainerHighest. In M2 mode border and fill color both
+  /// default to primary.
   ///
   /// The border [inputDecoratorBorderSchemeColor] can be used to define the
-  /// border color separately, but it defaults to this color if not defined.
+  /// border color separately. It defaults to this color, if
+  /// [inputDecoratorBorderSchemeColor] is not defined, and this color is.
   final SchemeColor? inputDecoratorSchemeColor;
 
   /// The padding for the input decoration's container.
@@ -1565,10 +1568,15 @@ class FlexSubThemesData with Diagnosticable {
   /// border color separately, but it defaults to this color if not defined.
   final int? inputDecoratorBackgroundAlpha;
 
-  /// Defines which [Theme] based [ColorScheme] based color the input decorator
-  /// uses as color for the border color when they are used.
+  /// Defines which [Theme] based [ColorScheme] color the input decorator
+  /// uses as color for the border color when it is defined to be used.
   ///
-  /// If not defined it defaults to color given by [inputDecoratorSchemeColor].
+  ///
+  /// If not defined and [inputDecoratorSchemeColor] is also not defined, then
+  /// in M3 and M2 mode, the border color defaults to primary.
+  ///
+  /// If not defined and [inputDecoratorSchemeColor] is defined, it defaults
+  /// to the color given by [inputDecoratorSchemeColor].
   final SchemeColor? inputDecoratorBorderSchemeColor;
 
   /// Determines the type of border [InputDecorator] uses.
