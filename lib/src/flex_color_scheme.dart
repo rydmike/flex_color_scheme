@@ -3240,7 +3240,7 @@ class FlexColorScheme with Diagnosticable {
                   effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
         case null:
           // Style was null, if Opacity used, apply to use M2/M3 mode default.
-          if (appBarOpacity != null && appBarOpacity != 1.0) {
+          if (appBarOpacity != null) {
             effectiveAppBarColor = useMaterial3
                 ? effectiveSurfaceColor.withOpacity(appBarOpacity)
                 : effectiveColors.primary.withOpacity(appBarOpacity);
@@ -5344,7 +5344,7 @@ class FlexColorScheme with Diagnosticable {
                   effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
         case null:
           // Style was null, if Opacity used, apply to surface for M2 & M3 mode.
-          if (appBarOpacity != null && appBarOpacity != 1.0) {
+          if (appBarOpacity != null) {
             effectiveAppBarColor =
                 effectiveSurfaceColor.withOpacity(appBarOpacity);
           }
@@ -7192,19 +7192,15 @@ class FlexColorScheme with Diagnosticable {
               surfaceTintColor: noScrollUnder ? Colors.transparent : null,
             )
           : useMaterial3
-              ? (appBarElevation != null && appBarElevation != 0) ||
-                      !transparentStatusBar ||
-                      (appBarBackground != null)
-                  ? FlexSubThemes.appBarTheme(
-                      colorScheme: colorScheme,
-                      backgroundColor: effectiveAppBarBackgroundColor,
-                      foregroundColor: appBarForeground,
-                      elevation: appBarElevation,
-                      iconTheme: IconThemeData(color: appBarIconColor),
-                      actionsIconTheme: IconThemeData(color: appBarIconColor),
-                      systemOverlayStyle: systemOverlayStyle,
-                    )
-                  : null
+              ? FlexSubThemes.appBarTheme(
+                  colorScheme: colorScheme,
+                  backgroundColor: effectiveAppBarBackgroundColor,
+                  foregroundColor: appBarForeground,
+                  elevation: appBarElevation ?? 0,
+                  iconTheme: IconThemeData(color: appBarIconColor),
+                  actionsIconTheme: IconThemeData(color: appBarIconColor),
+                  systemOverlayStyle: systemOverlayStyle,
+                )
               : FlexSubThemes.appBarTheme(
                   colorScheme: colorScheme,
                   backgroundColor: effectiveAppBarBackgroundColor,
