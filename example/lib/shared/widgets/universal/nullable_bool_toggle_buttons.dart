@@ -35,15 +35,15 @@ class NullableBoolToggleButtons extends StatelessWidget {
             },
       children: const <Widget>[
         Tooltip(
-          message: 'OFF',
+          message: 'False',
           child: Icon(Icons.radio_button_unchecked_outlined),
         ),
         Tooltip(
-          message: 'Default (null)',
-          child: SizedBox(width: 28, height: 28),
+          message: 'Undefined (null)',
+          child: Icon(Icons.texture_outlined),
         ),
         Tooltip(
-          message: 'ON',
+          message: 'True',
           child: Icon(Icons.circle),
         ),
       ],
