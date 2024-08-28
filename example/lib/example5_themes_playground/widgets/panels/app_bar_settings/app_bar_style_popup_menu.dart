@@ -74,29 +74,26 @@ class AppBarStylePopupMenu extends StatelessWidget {
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return isLight ? 'Primary color (M2 default)' : 'Primary color';
+        return isLight ? 'primary (M2 default)' : 'primary';
       case FlexAppBarStyle.material:
-        return isLight
-            ? 'White (M2 light surface)'
-            : 'Dark (M2 default surface #121212)';
+        return isLight ? 'White (M2 spec)' : '#121212 (M2 spec)';
       case FlexAppBarStyle.surface:
-        return 'Surface color, with primary color blend';
+        return 'surface, with blend';
       case FlexAppBarStyle.background:
-        return 'Background uses SurfaceContainerLow, with primary color blend';
+        return 'surfaceContainerLow, with blend';
       case FlexAppBarStyle.scaffoldBackground:
-        return 'Scaffold background color, with primary color blend';
+        return 'scaffoldBackground, with blend';
       case FlexAppBarStyle.custom:
-        return 'Custom. Built-in schemes use tertiary color, '
-            'but you can use any color with the API';
+        return 'Custom (tertiary in this app)';
       case null:
         {
           if (useMaterial3) {
-            return 'Surface color (M3 default)';
+            return 'surface (M3 spec)';
           } else {
             if (isLight) {
-              return 'Primary color (M2 default)';
+              return 'primary (M2 spec)';
             } else {
-              return 'Dark (M2 default surface #121212)';
+              return '#121212 (M2 spec))';
             }
           }
         }
