@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/widgets/universal/flex_squircle.dart';
 import '../../../../shared/widgets/universal/flex_stadium_squircle.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/is_web_list_tile.dart';
@@ -24,13 +26,18 @@ class ShapeRadiusSettings extends StatelessWidget {
     final Color onShapeColor = theme.colorScheme.onPrimaryContainer;
 
     final bool useMaterial3 = theme.useMaterial3;
+
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     const double height = 90;
     const double width = 200;
 
-    final double radius =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.defaultRadius ?? (useMaterial3 ? 12 : 4)
-            : (useMaterial3 ? 12 : 4);
+    // Get effective platform default global radius.
+    // Used on the shapes presentation.
+    final double radius = App.effectiveRadius(controller) ??
+        (enableControl ? 12 : (useMaterial3 ? 12 : 4));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,9 +186,9 @@ class ShapeRadiusSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Divider(),
-        ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Components border radius'),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Default radius'),
           subtitleReveal: const Text(
             'By default, the border radius on all Material '
             'UI components in FCS follow the Material-3 design guide in M3 '
@@ -206,63 +213,24 @@ class ShapeRadiusSettings extends StatelessWidget {
             'FloatingActionButton can be included, but is not by default. '
             'The radius on these elements can still be themed, but only '
             'individually. The indicator on NavigationDrawer is button sized '
-            'and considered "large", it is thus included in the global border '
-            'radius override.',
+            'and considered "large", it is thus included in the global default '
+            'border radius setting.',
           ),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: -1,
-            max: 100,
-            divisions: 101,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.defaultRadius == null ||
-                        (controller.defaultRadius ?? -1) < 0
-                    ? 'M3 defaults'
-                    : (controller.defaultRadius?.toStringAsFixed(0) ?? '')
-                : useMaterial3
-                    ? 'M3 defaults'
-                    : 'M2 default 4',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.defaultRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDefaultRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.defaultRadius == null ||
-                              (controller.defaultRadius ?? -1) < 0
-                          ? 'M3 defaults'
-                          : (controller.defaultRadius?.toStringAsFixed(0) ?? '')
-                      : useMaterial3
-                          ? 'M3 defaults'
-                          : 'M2 default 4',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.defaultRadius,
+          onChanged: controller.setDefaultRadius,
+          min: 0,
+          max: 100,
+          divisions: 101,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: 'M3 values',
+          valueDefaultDisabledLabel: useMaterial3 ? 'M3 values' : '4 dp',
         ),
         AdaptiveThemePopupMenu(
-          title: const Text('Use platform adaptive border radius'),
+          title: const Text('Adaptive radius'),
           index: controller.adaptiveRadius?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= AdaptiveTheme.values.length) {
                     controller.setAdaptiveRadius(null);
@@ -272,83 +240,32 @@ class ShapeRadiusSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTileReveal(
-          enabled: controller.useSubThemes &&
-              controller.useFlexColorScheme &&
+        SliderListTileReveal(
+          enabled: enableControl &&
               controller.adaptiveRadius != AdaptiveTheme.off &&
               controller.adaptiveRadius != null,
-          title: const Text('Adaptive border radius'),
+          title: const Text('Adaptive radius'),
           subtitleReveal: const Text(
-              'You can define a separate global border radius '
-              'override that gets used adaptively on selected platforms. This '
-              'is useful if you for example want to keep M3 design radius on '
-              'for example Android platform, but want a less rounded border '
-              'radius design on other platforms.'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: -1,
-            max: 60,
-            divisions: 61,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.defaultRadiusAdaptive == null ||
-                        (controller.defaultRadiusAdaptive ?? -1) < 0 ||
-                        controller.adaptiveRadius == null ||
-                        controller.adaptiveRadius == AdaptiveTheme.off
-                    ? 'M3 defaults'
-                    : (controller.defaultRadiusAdaptive?.toStringAsFixed(0) ??
-                        '')
-                : useMaterial3
-                    ? 'M3 defaults'
-                    : 'M2 default 4',
-            value: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.adaptiveRadius != null &&
-                    controller.adaptiveRadius != AdaptiveTheme.off
-                ? controller.defaultRadiusAdaptive ?? -1
-                : -1,
-            onChanged: controller.useSubThemes &&
-                    controller.useFlexColorScheme &&
-                    controller.adaptiveRadius != null &&
-                    controller.adaptiveRadius != AdaptiveTheme.off
-                ? (double value) {
-                    controller.setDefaultRadiusAdaptive(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
+            'You can define a separate global border radius '
+            'override that gets used adaptively on selected platforms. This '
+            'is useful if you for example want to keep Material-3 design '
+            'radius on for the Android platform, but want another border '
+            'radius design on other platforms.',
           ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes &&
-                          controller.useFlexColorScheme &&
-                          controller.adaptiveRadius != null &&
-                          controller.adaptiveRadius != AdaptiveTheme.off
-                      ? controller.defaultRadiusAdaptive == null ||
-                              (controller.defaultRadiusAdaptive ?? -1) < 0
-                          ? 'M3 defaults'
-                          : (controller.defaultRadiusAdaptive
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3 ||
-                              (controller.useSubThemes &&
-                                  controller.useFlexColorScheme)
-                          ? 'M3 defaults'
-                          : 'M2 default 4',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.defaultRadiusAdaptive,
+          onChanged: controller.setDefaultRadiusAdaptive,
+          min: 0,
+          max: 100,
+          divisions: 101,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: 'M3 values',
+          valueDefaultDisabledLabel: !enableControl
+              ? useMaterial3
+                  ? 'M3 values'
+                  : '4 dp'
+              : 'OFF',
         ),
         PlatformPopupMenu(
           platform: controller.platform,
@@ -358,7 +275,7 @@ class ShapeRadiusSettings extends StatelessWidget {
         BackToActualPlatform(controller: controller),
         const Divider(),
         ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: enableControl,
           title: const Text('Shape outline borders'),
           subtitleReveal: const Text(
             'Some Material UI components like ToggleButtons, SegmentedButton, '
@@ -374,113 +291,48 @@ class ShapeRadiusSettings extends StatelessWidget {
             'can do that if you so desire.\n',
           ),
         ),
-        ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border width'),
-          subtitleReveal: const Text('Default border width for InputDecorator, '
-              'OutlinedButton, ToggleButtons and SegmentedButton.\n'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: 0,
-            max: 5,
-            divisions: 10,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth == null ||
-                        (controller.thinBorderWidth ?? 0) <= 0
-                    ? 'default 1'
-                    : (controller.thinBorderWidth?.toStringAsFixed(1) ?? '')
-                : 'default 1',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thinBorderWidth ?? 0
-                : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setThinBorderWidth(value <= 0 ? null : value);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'WIDTH',
-                  style: theme.textTheme.bodySmall,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                title: const Text('Standard width'),
+                subtitleReveal: const Text(
+                  'Standard border width used as default by InputDecorator, '
+                  'OutlinedButton, ToggleButtons and SegmentedButton.\n',
                 ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.thinBorderWidth == null ||
-                              (controller.thinBorderWidth ?? 0) < 0
-                          ? controller.useMaterial3
-                              ? 'default 1' // M3
-                              : 'default 1' // M2
-                          : (controller.thinBorderWidth?.toStringAsFixed(1) ??
-                              '')
-                      : 'default 1',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
+                value: controller.thinBorderWidth,
+                onChanged: controller.setThinBorderWidth,
+                min: 0.5,
+                max: 6,
+                divisions: 11,
+                valueDecimalPlaces: 1,
+                valueHeading: 'WIDTH',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '1 dp',
+              ),
             ),
-          ),
-        ),
-        ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Thick border width'),
-          subtitleReveal: const Text('Default border width for focused '
-              'InputDecorator and pressed or error OutlinedButton.\n'),
-        ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: Slider(
-            min: 0,
-            max: 5,
-            divisions: 10,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thickBorderWidth == null ||
-                        (controller.thickBorderWidth ?? 0) < 0
-                    ? useMaterial3
-                        ? 'default 1'
-                        : 'default 2'
-                    : (controller.thickBorderWidth?.toStringAsFixed(1) ?? '')
-                : 'default 1',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.thickBorderWidth ?? 0
-                : 0,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setThickBorderWidth(value <= 0 ? null : value);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'WIDTH',
-                  style: theme.textTheme.bodySmall,
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                title: const Text('Thicker width'),
+                subtitleReveal: const Text(
+                  'Thicker border width used as default by focused '
+                  'InputDecorator and pressed or error OutlinedButton.\n',
                 ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.thickBorderWidth == null ||
-                              (controller.thickBorderWidth ?? 0) <= 0
-                          ? useMaterial3
-                              ? 'default 1&2'
-                              : 'default 2'
-                          : (controller.thickBorderWidth?.toStringAsFixed(1) ??
-                              '')
-                      : 'default 1',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
+                value: controller.thickBorderWidth,
+                onChanged: controller.setThickBorderWidth,
+                min: 0.5,
+                max: 6,
+                divisions: 11,
+                valueDecimalPlaces: 1,
+                valueHeading: 'WIDTH',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '1 & 2 dp' : '2 dp',
+                valueDefaultDisabledLabel: '1 & 2 dp',
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );
