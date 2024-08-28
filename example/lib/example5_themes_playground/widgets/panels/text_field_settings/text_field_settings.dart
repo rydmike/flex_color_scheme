@@ -244,6 +244,8 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl,
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Opacity'),
                   subtitle: Text('Alpha as opacity is '
                       '$lightBackgroundLabelOpacity %'),
@@ -288,6 +290,8 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl,
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Opacity'),
                   subtitle: Text('Alpha as opacity is '
                       '$darkBackgroundLabelOpacity %'),
@@ -362,6 +366,8 @@ class TextFieldSettings extends StatelessWidget {
             if (isLight)
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Focused suffix icon'),
                   labelForDefault: useMaterial3
                       ? 'default (onSurface)'
@@ -386,6 +392,8 @@ class TextFieldSettings extends StatelessWidget {
             else
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Focused suffix icon'),
                   labelForDefault: useMaterial3
                       ? 'default (onSurface)'
@@ -415,43 +423,54 @@ class TextFieldSettings extends StatelessWidget {
         //
         // Border type and radius
         //
-        SwitchListTile(
-          title: const Text(
-            'Border type',
-          ),
-          subtitle: const Text(
-            'OFF underline  |  ON outline',
-          ),
-          value: controller.inputDecoratorBorderType ==
-                  FlexInputBorderType.outline &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: enableControl
-              ? (bool isOn) {
-                  if (isOn) {
-                    controller.setInputDecoratorBorderType(
-                        FlexInputBorderType.outline);
-                  } else {
-                    controller.setInputDecoratorBorderType(
-                        FlexInputBorderType.underline);
-                  }
-                }
-              : null,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: SwitchListTile(
+                title: const Text(
+                  'Border type',
+                ),
+                subtitle: const Text(
+                  'OFF underline  |  ON outline',
+                ),
+                value: controller.inputDecoratorBorderType ==
+                        FlexInputBorderType.outline &&
+                    controller.useSubThemes &&
+                    controller.useFlexColorScheme,
+                onChanged: enableControl
+                    ? (bool isOn) {
+                        if (isOn) {
+                          controller.setInputDecoratorBorderType(
+                              FlexInputBorderType.outline);
+                        } else {
+                          controller.setInputDecoratorBorderType(
+                              FlexInputBorderType.underline);
+                        }
+                      }
+                    : null,
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding:
+                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                enabled: enableControl,
+                title: const Text('Radius'),
+                value: controller.inputDecoratorBorderRadius,
+                onChanged: controller.setInputDecoratorBorderRadius,
+                min: 0,
+                max: 40,
+                divisions: 40,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: decoratorRadiusDefaultLabel,
+                valueDefaultDisabledLabel: '4 dp',
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Radius'),
-          value: controller.inputDecoratorBorderRadius,
-          onChanged: controller.setInputDecoratorBorderRadius,
-          min: 0,
-          max: 40,
-          divisions: 40,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: decoratorRadiusDefaultLabel,
-          valueDefaultDisabledLabel: '4 dp',
-        ),
+
         const Divider(),
         //
         // Border color and style
@@ -510,6 +529,8 @@ class TextFieldSettings extends StatelessWidget {
               ),
             Expanded(
               child: SwitchListTile(
+                contentPadding:
+                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                 title: const Text('Unfocused uses color'),
                 value: enableControl &&
                     controller.inputDecoratorUnfocusedBorderIsColored &&
@@ -540,6 +561,8 @@ class TextFieldSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
+                contentPadding:
+                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                 enabled: enableControl &&
                     controller.inputDecoratorUnfocusedHasBorder,
                 title: const Text('Unfocused border width'),
@@ -575,6 +598,8 @@ class TextFieldSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
+                contentPadding:
+                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                 enabled:
                     enableControl && controller.inputDecoratorFocusedHasBorder,
                 title: const Text('Border width'),
@@ -633,6 +658,8 @@ class TextFieldSettings extends StatelessWidget {
               ),
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Selection handles'),
                   labelForDefault: baseDefaultHandleLabelLightColor,
                   index:
@@ -674,6 +701,8 @@ class TextFieldSettings extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   enabled: enableControl,
                   title: const Text('Selection opacity'),
                   value: controller.inputSelectionLightOpacity,
@@ -713,6 +742,8 @@ class TextFieldSettings extends StatelessWidget {
               ),
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Selection handles'),
                   labelForDefault: baseDefaultHandleLabelDarkColor,
                   index:
@@ -754,6 +785,8 @@ class TextFieldSettings extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding:
+                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   enabled: enableControl,
                   title: const Text('Selection opacity'),
                   value: controller.inputSelectionDarkOpacity,
