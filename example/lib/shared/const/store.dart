@@ -733,12 +733,12 @@ class Store {
   // Key used to read and save the appBarOpacityLight value.
   static const String keyAppBarOpacityLight = 'appBarOpacity';
   // Default value for the appBarOpacityLight, also used to reset settings.
-  static const double defaultAppBarOpacityLight = 1.0;
+  static const double? defaultAppBarOpacityLight = null;
 
   // Key used to read and save the appBarOpacityDark value.
   static const String keyAppBarOpacityDark = 'appBarOpacityDark';
   // Default value for the appBarOpacityDark, also used to reset settings.
-  static const double defaultAppBarOpacityDark = 1.0;
+  static const double? defaultAppBarOpacityDark = null;
 
   // Key used to read and save the appBarElevationLight value.
   static const String keyAppBarElevationLight = 'appBarElevation';
