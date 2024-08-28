@@ -43,82 +43,89 @@ class ColorSchemePopupMenu extends StatelessWidget {
         ? SchemeColor.values[index].name
         : labelForDefault;
 
-    return PopupMenuButton<int>(
-      popUpAnimationStyle: AnimationStyle.noAnimation,
-      position: PopupMenuPosition.under,
-      offset: const Offset(0, -4),
-      constraints: const BoxConstraints(
-        minWidth: 280,
-        maxWidth: 280,
-        maxHeight: 600,
-      ),
-      initialValue: useDefault ? SchemeColor.values.length : index,
-      tooltip: '',
-      padding: EdgeInsets.zero,
-      onSelected: (int index) {
-        onChanged?.call(index >= SchemeColor.values.length ? -1 : index);
-      },
-      enabled: enabled,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i <= SchemeColor.values.length; i++)
-          PopupMenuItem<int>(
-            value: i,
-            child: ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              leading: ColorSchemeBox(
-                foregroundColor: i >= SchemeColor.values.length
-                    ? colorScheme.onSurface
-                    : FlexSubThemes.schemeColor(
-                        FlexSubThemes.onSchemeColor(SchemeColor.values[i]),
-                        colorScheme),
-                backgroundColor: i >= SchemeColor.values.length
-                    ? colorScheme.surface
-                    : FlexSubThemes.schemeColor(
-                        SchemeColor.values[i],
-                        colorScheme,
-                      ),
-                selected:
-                    i == index || (index < 0 && i == SchemeColor.values.length),
-                borderColor:
-                    i == index || (index < 0 && i == SchemeColor.values.length)
-                        ? theme.colorScheme.onSurface
-                        : theme.dividerColor,
-                defaultOption: i >= SchemeColor.values.length,
-              ),
-              title: i >= SchemeColor.values.length
-                  // If we are over enum length, make default label.
-                  ? Text(popupLabelDefault ?? labelForDefault, style: txtStyle)
-                  : Text(SchemeColor.values[i].name, style: txtStyle),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        scrollbarTheme: Theme.of(context).scrollbarTheme.copyWith(
+              thumbVisibility: WidgetStateProperty.all<bool>(true),
             ),
-          )
-      ],
-      child: ListTile(
-        // key: _listTileKey,
-        enabled: enabled,
-        contentPadding: contentPadding,
-        title: title,
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('$colorPrefix$colorName'),
-            if (subtitle != null) subtitle!,
-          ],
+      ),
+      child: PopupMenuButton<int>(
+        popUpAnimationStyle: AnimationStyle.noAnimation,
+        position: PopupMenuPosition.under,
+        offset: const Offset(0, -4),
+        constraints: const BoxConstraints(
+          minWidth: 280,
+          maxWidth: 280,
+          maxHeight: 600,
         ),
-        trailing: Padding(
-          padding: const EdgeInsetsDirectional.only(end: 5.0),
-          child: ColorSchemeBox(
-            foregroundColor: enabled && !useDefault
-                ? FlexSubThemes.schemeColor(
-                    FlexSubThemes.onSchemeColor(SchemeColor.values[index]),
-                    colorScheme)
-                : colorScheme.onSurface,
-            backgroundColor: enabled && !useDefault
-                ? FlexSubThemes.schemeColor(
-                    SchemeColor.values[index], colorScheme)
-                : colorScheme.surface,
-            borderColor: theme.dividerColor,
-            defaultOption: useDefault,
+        initialValue: useDefault ? 0 : index + 1,
+        tooltip: '',
+        padding: EdgeInsets.zero,
+        onSelected: (int index) {
+          onChanged?.call(index <= 0 ? -1 : index - 1);
+        },
+        enabled: enabled,
+        itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+          for (int i = 0; i <= SchemeColor.values.length; i++)
+            PopupMenuItem<int>(
+              value: i,
+              child: ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                leading: ColorSchemeBox(
+                  // foregroundColor: i >= SchemeColor.values.length
+                  foregroundColor: i <= 0
+                      ? colorScheme.onSurface
+                      : FlexSubThemes.schemeColor(
+                          FlexSubThemes.onSchemeColor(
+                              SchemeColor.values[i - 1]),
+                          colorScheme),
+                  // backgroundColor: i >= SchemeColor.values.length
+                  backgroundColor: i <= 0
+                      ? colorScheme.surface
+                      : FlexSubThemes.schemeColor(
+                          SchemeColor.values[i - 1],
+                          colorScheme,
+                        ),
+                  selected: i == index + 1 || (index < 0 && i == 0),
+                  borderColor: i == index + 1 || (index < 0 && i == 0)
+                      ? theme.colorScheme.onSurface
+                      : theme.dividerColor,
+                  defaultOption: i <= 0,
+                ),
+                title: i <= 0
+                    ? Text(popupLabelDefault ?? labelForDefault,
+                        style: txtStyle)
+                    : Text(SchemeColor.values[i - 1].name, style: txtStyle),
+              ),
+            )
+        ],
+        child: ListTile(
+          enabled: enabled,
+          contentPadding: contentPadding,
+          title: title,
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('$colorPrefix$colorName'),
+              if (subtitle != null) subtitle!,
+            ],
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5.0),
+            child: ColorSchemeBox(
+              foregroundColor: enabled && !useDefault
+                  ? FlexSubThemes.schemeColor(
+                      FlexSubThemes.onSchemeColor(SchemeColor.values[index]),
+                      colorScheme)
+                  : colorScheme.onSurface,
+              backgroundColor: enabled && !useDefault
+                  ? FlexSubThemes.schemeColor(
+                      SchemeColor.values[index], colorScheme)
+                  : colorScheme.surface,
+              borderColor: theme.dividerColor,
+              defaultOption: useDefault,
+            ),
           ),
         ),
       ),
@@ -127,7 +134,10 @@ class ColorSchemePopupMenu extends StatelessWidget {
 }
 
 // An experiment with popup menu on the icon instead of the ListTile..
-
+//
+// Not actively used, it was a test to see if it would be a better solution.
+// TODO(rydmike): Remove ColorSchemePopupMenuOnIconTest if not used later.
+//
 /// Widget used to select a ColorScheme based colors in example 5.
 ///
 /// Uses index out out of range of [SchemeColor] to represent and select
@@ -249,11 +259,13 @@ class ColorSchemePopupMenuOnIconTest extends StatelessWidget {
   }
 }
 
-// TODO(rydmike): Experimental new version of the ColorSchemePopupMenu.
-//   This is MenuAnchor based so it can open from tap point.
-//   It reopens in new position if tapped again.
-//   For now only used as a test on Buttons panel on ElevatedButton color.
-
+// Experimental new version of the ColorSchemePopupMenu.
+// This is MenuAnchor based so it can open from tap point.
+// It reopens in new position if tapped again.
+// For now only used as a test on Buttons panel on ElevatedButton color.
+// Not actively used, it was a test to see if it would be a better solution.
+// TODO(rydmike): Remove ColorSchemePopupMenuAnchor if not used later.
+//
 /// Widget used to select a ColorScheme based colors in example 5.
 ///
 /// Uses index out out of range of [SchemeColor] to represent and select
