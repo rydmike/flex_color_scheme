@@ -22,6 +22,7 @@ class ComponentSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
@@ -53,7 +54,7 @@ class ComponentSettings extends StatelessWidget {
             'You can toggle this setting ON and OFF to observe the differences '
             'when Material-3 and legacy Material-2 is being used.',
           ),
-          value: controller.useMaterial3,
+          value: useMaterial3,
           onChanged: controller.setUseMaterial3,
         ),
         SwitchListTileReveal(
@@ -145,11 +146,11 @@ class ComponentSettings extends StatelessWidget {
           ),
           value: controller.useM2StyleDividerInM3 &&
               controller.useSubThemes &&
-              controller.useMaterial3 &&
+              useMaterial3 &&
               controller.useFlexColorScheme,
           onChanged: controller.useSubThemes &&
                   controller.useFlexColorScheme &&
-                  controller.useMaterial3
+                  useMaterial3
               ? controller.setUseM2StyleDividerInM3
               : null,
         ),
