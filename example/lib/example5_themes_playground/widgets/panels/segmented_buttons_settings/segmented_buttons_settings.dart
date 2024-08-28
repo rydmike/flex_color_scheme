@@ -102,9 +102,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           child: ToggleButtonsShowcase(compareButtons: true),
         ),
         ColorSchemePopupMenu(
-          title: const Text('Main color'),
-          subtitle: const Text('Selected background color, also unselected '
-              'foreground color, if not defined.'),
+          title: const Text('Selected background color'),
           index: controller.toggleButtonsSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {

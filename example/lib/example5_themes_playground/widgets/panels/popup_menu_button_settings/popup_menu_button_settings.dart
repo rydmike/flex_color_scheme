@@ -31,13 +31,6 @@ class PopupMenuButtonSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
-    final String popupMenuElevationDefaultLabel =
-        controller.popupMenuElevation == null
-            ? useMaterial3
-                ? '3'
-                : '6'
-            : '';
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -77,66 +70,90 @@ class PopupMenuButtonSettings extends StatelessWidget {
               'are not very useful designs anyway, so it should not be a big '
               'limitation.'),
         ),
-        ColorSchemePopupMenu(
-          title: const Text('Background color of container'),
-          labelForDefault:
-              useMaterial3 ? 'default (surfaceContainer)' : 'default (surface)',
-          index: controller.popupMenuSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setPopupMenuSchemeColor(null);
-                  } else {
-                    controller
-                        .setPopupMenuSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenu(
+                title: const Text('Background color'),
+                labelForDefault: useMaterial3
+                    ? 'default (surfaceContainer)'
+                    : 'default (surface)',
+                index: controller.popupMenuSchemeColor?.index ?? -1,
+                onChanged: enableControl
+                    ? (int index) {
+                        if (index < 0 || index >= SchemeColor.values.length) {
+                          controller.setPopupMenuSchemeColor(null);
+                        } else {
+                          controller.setPopupMenuSchemeColor(
+                              SchemeColor.values[index]);
+                        }
+                      }
+                    : null,
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding:
+                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                enabled: enableControl,
+                title: const Text('Opacity'),
+                value: controller.popupMenuOpacity,
+                onChanged: controller.setPopupMenuOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Opacity of container'),
-          value: controller.popupMenuOpacity,
-          onChanged: controller.setPopupMenuOpacity,
-          min: 0,
-          max: 1,
-          divisions: 100,
-          valueDisplayScale: 100,
-          valueDecimalPlaces: 0,
-          valueHeading: 'OPACITY',
-          valueUnitLabel: ' %',
-          valueDefaultLabel: '100 %',
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Container radius'),
-          subtitleReveal: const Text(
-            'Does not use the global border radius setting. Avoid using a very '
-            'large border radius on the popup menu container. At higher than '
-            '12 dp, the none clipped highlight will overflow the corners.\n',
-          ),
-          value: controller.popupMenuBorderRadius,
-          onChanged: controller.setPopupMenuBorderRadius,
-          min: 0,
-          max: 12,
-          divisions: 12,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: '4 dp',
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Elevation'),
-          value: controller.popupMenuElevation,
-          onChanged: controller.setPopupMenuElevation,
-          min: 0,
-          max: 20,
-          divisions: 20,
-          valueDecimalPlaces: 0,
-          valueHeading: 'ELEV',
-          valueDefaultLabel: popupMenuElevationDefaultLabel,
-          valueDefaultDisabledLabel: useMaterial3 ? '3' : '8',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                title: const Text('Container radius'),
+                subtitleReveal: const Text(
+                  'Does not use the global border radius setting. Avoid using '
+                  'a large border radius on the popup menu container. '
+                  'At higher than 12 dp, the none clipped highlight will '
+                  'overflow the menu container corners.\n',
+                ),
+                value: controller.popupMenuBorderRadius,
+                onChanged: controller.setPopupMenuBorderRadius,
+                min: 0,
+                max: 12,
+                divisions: 12,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '4 dp',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding:
+                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                enabled: enableControl,
+                title: const Text('Elevation'),
+                value: controller.popupMenuElevation,
+                onChanged: controller.setPopupMenuElevation,
+                min: 0,
+                max: 20,
+                divisions: 20,
+                valueDecimalPlaces: 0,
+                valueHeading: 'ELEV',
+                valueDefaultLabel: useMaterial3 ? '3' : '6',
+                valueDefaultDisabledLabel: useMaterial3 ? '3' : '8',
+              ),
+            ),
+          ],
         ),
         const Divider(),
         const ListTileReveal(
