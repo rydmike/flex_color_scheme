@@ -33,6 +33,7 @@ class MenuSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
