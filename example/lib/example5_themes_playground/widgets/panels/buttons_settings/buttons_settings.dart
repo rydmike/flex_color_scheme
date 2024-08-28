@@ -154,7 +154,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         const Divider(),
         ColorSchemePopupMenu(
-          labelForDefault: 'default (primary & secondaryContainer)',
+          labelForDefault: 'default (primary and secondaryContainer)',
           title: const Text('FilledButton color'),
           index: controller.filledButtonSchemeColor?.index ?? -1,
           onChanged: enableControl
