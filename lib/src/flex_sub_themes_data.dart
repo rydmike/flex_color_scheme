@@ -1341,23 +1341,23 @@ class FlexSubThemesData with Diagnosticable {
   /// Controls if the Material-3 Switch uses an adaptive response to change its
   /// style to be more like the iOS or Cupertino Switch.
   ///
-  /// This style is different from using Switch.adaptive as it changes the
-  /// Material Switch on selected platforms to look like the iOS or Cupertino
-  /// Switch, but only when the app is run on these platforms. It does not
-  /// change the switch style on other platforms.
+  /// This style is different from using [Switch.adaptive] as it changes the
+  /// Material [Switch] on selected platforms to look a lot like the Flutter iOS
+  /// [CupertinoSwitch], but only when the app is run on platforms selected to
+  /// use this adaptive response.
   ///
   /// It does not use a constructor with own platform builder to change the
-  /// Switch to a CupertinoSwitch like [Switch.adaptive], it only uses a
-  /// different Switch theme on the selected platforms. The [Switch.adaptive]
-  /// constructor is the better choice if you want the exact CupertinoSwitch
+  /// Switch to a CupertinoSwitch like [Switch.adaptive], it uses a different
+  /// Switch theme on the selected platforms. The [Switch.adaptive]
+  /// constructor is more appropriate if you want the exact [CupertinoSwitch]
   /// style on Apple platforms.
   ///
   /// This feature is more like a light version of the adaptive switch style
   /// and it is not an exact match, only as close as we can make it
   /// when theming a Material Switch. It does have the advantage that you
   /// can have this adaptive response on more platforms than just Apple
-  /// platforms and it only requires theming the Switch, not changing the
-  /// Switch constructor.
+  /// platforms and it only requires theming the [Switch], not changing the
+  /// Switch constructor in your app.
   ///
   /// See class [FlexAdaptive] on how to configure the platform adaptive
   /// behavior. You may for example like the [FlexAdaptive.appleWeb]
@@ -1366,7 +1366,7 @@ class FlexSubThemesData with Diagnosticable {
   /// on iOS and macOS hosts.
   ///
   /// If activated and we are on platform where it is chosen to be used, only
-  /// the [switchSchemeColor] property of the Switch theming properties here
+  /// the [switchSchemeColor] property of the Switch theming properties
   /// will impact the style, other Switch theming properties will be ignored.
   ///
   /// This feature only has any impact when [useMaterial3] is true.
