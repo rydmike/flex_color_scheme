@@ -135,7 +135,7 @@ class App {
   /// letting it float and snap back.
   static const double pinnedSelector = 1090;
 
-  /// The width, and height of the scrolling panel buttons in Themes Playground
+  /// The width and height of the scrolling panel buttons in Themes Playground
   /// page view, and how much it shrinks when we go to phone size.
   ///
   /// The same shrunk sizes are reused in the compact view mode in larger
@@ -243,7 +243,8 @@ class App {
         controller.adaptiveDialogRadius ?? AdaptiveTheme.off;
     // Should we use adaptive radius or not?
     final bool adapt = adaptiveConfig.setting(isWeb).adapt(platform, isWeb);
-    // Return the effective platform default radius, may be null.
+    // Return the effective platform default radius, can be null for Flutter
+    // default values.
     return adapt ? adaptiveRadius : normalRadius;
   }
 
