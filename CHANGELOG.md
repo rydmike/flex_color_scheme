@@ -306,6 +306,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Chore: Updated issue resolution status texts for Dialogs.
 - Fixed that Card was not showing the correct default border radius in M2 mode when using FCS.
 - Fixed that applying dialog elevation in the Playground app's own dark mode theme was missing.
+- Fixed that enum `FlexAdaptive.setting` did not return `FlexAdaptive.appleWeb` did not return `AdaptiveTheme.appleWeb` for its value. Due to a bug, it returned `FlexAdaptive.apple`. This only impacted simulation of responsive themes for the Apple and Web response in the Playground app.
 
 **TODO PLAYGROUND AND EXAMPLES**
 
