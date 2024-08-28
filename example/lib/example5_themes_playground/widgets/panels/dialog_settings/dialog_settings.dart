@@ -233,86 +233,6 @@ class DialogSettings extends StatelessWidget {
               'background color, but you can change them individually in '
               'the produced code.\n'),
         ),
-        const SizedBox(height: 8),
-        if (isLight)
-          ColorSchemePopupMenu(
-            title: const Text('Background color light mode'),
-            labelForDefault: _dialogBackgroundDefault(controller, isLight),
-            index: controller.dialogBackgroundLightSchemeColor?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setDialogBackgroundLightSchemeColor(null);
-                    } else {
-                      controller.setDialogBackgroundLightSchemeColor(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          )
-        else
-          ColorSchemePopupMenu(
-            title: const Text('Background color dark mode'),
-            labelForDefault: _dialogBackgroundDefault(controller, isLight),
-            index: controller.dialogBackgroundDarkSchemeColor?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setDialogBackgroundDarkSchemeColor(null);
-                    } else {
-                      controller.setDialogBackgroundDarkSchemeColor(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          ),
-        ListTileReveal(
-          dense: true,
-          title: const Text('Known issues'),
-          subtitleReveal: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'In Flutter 3.22 to 3.24 in M3 mode, the Dialog and '
-                      'thus AlertDialog gets Theme.dialogBackgroundColor, '
-                      'which is equal to surface color and not '
-                      'surfaceContainerHigh. TimePicker and DatePicker get '
-                      'the correct default surfaceContainerHigh. '
-                      'For more info see ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue148849,
-                  text: 'issue #148849',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. This is is fixed in the master channel, '
-                      'but has not landed in current stable (3.24.x).\n',
-                ),
-              ],
-            ),
-          ),
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Elevation'),
-          subtitleReveal: const Text(
-            'The elevation adjusts elevation for default dialog and thus '
-            'also AlertDialog. It also sets elevation for the '
-            'TimePickerDialog and DatePickerDialog to the same value.\n',
-          ),
-          value: controller.dialogElevation,
-          onChanged: controller.setDialogElevation,
-          min: 0,
-          max: 30,
-          divisions: 30,
-          valueHeading: 'ELEV',
-          valueDecimalPlaces: 0,
-          valueDefaultLabel: '6',
-          valueDefaultDisabledLabel: useMaterial3 ? '6' : '24',
-        ),
         const AlertDialogShowcase(),
         SliderListTileReveal(
           enabled: enableControl,
@@ -405,26 +325,84 @@ class DialogSettings extends StatelessWidget {
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
         const Divider(),
-        SwitchListTileReveal(
-          enabled: enableControl,
-          title: const Text("Use TextField's InputDecorationTheme in picker "
-              'dialogs'),
-          subtitleReveal: const Text(
-            'Turn ON to use the FlexColorScheme themed TextField '
-            'InputDecoration style on time and date text entry fields in '
-            'TimePicker and DatePicker dialogs.\n'
-            '\n'
-            'Turn OFF to use default M3 styles on text input fields '
-            'in TimePicker and DatePicker dialogs.\n'
-            '\n'
-            'NOTE:\n'
-            'While this feature is supported by DatePicker in Flutter 3.13 and '
-            'later, the support is flawed. See known issues further below.\n',
+        if (isLight)
+          ColorSchemePopupMenu(
+            title: const Text('Background color light mode'),
+            labelForDefault: _dialogBackgroundDefault(controller, isLight),
+            index: controller.dialogBackgroundLightSchemeColor?.index ?? -1,
+            onChanged: enableControl
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setDialogBackgroundLightSchemeColor(null);
+                    } else {
+                      controller.setDialogBackgroundLightSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
+          )
+        else
+          ColorSchemePopupMenu(
+            title: const Text('Background color dark mode'),
+            labelForDefault: _dialogBackgroundDefault(controller, isLight),
+            index: controller.dialogBackgroundDarkSchemeColor?.index ?? -1,
+            onChanged: enableControl
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setDialogBackgroundDarkSchemeColor(null);
+                    } else {
+                      controller.setDialogBackgroundDarkSchemeColor(
+                          SchemeColor.values[index]);
+                    }
+                  }
+                : null,
           ),
-          value: enableControl && controller.useInputDecoratorThemeInDialogs,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setUseInputDecoratorThemeInDialogs
-              : null,
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitleReveal: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.22 to 3.24 in M3 mode, the Dialog and '
+                      'thus AlertDialog gets Theme.dialogBackgroundColor, '
+                      'which is equal to surface color and not '
+                      'surfaceContainerHigh. TimePicker and DatePicker get '
+                      'the correct default surfaceContainerHigh. '
+                      'For more info see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue148849,
+                  text: 'issue #148849',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This is is fixed in the master channel, '
+                      'but has not landed in current stable (3.24.x).\n',
+                ),
+              ],
+            ),
+          ),
+        ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Elevation'),
+          subtitleReveal: const Text(
+            'The elevation adjusts elevation for default dialog and thus '
+            'also AlertDialog. It also sets elevation for the '
+            'TimePickerDialog and DatePickerDialog to the same value.\n',
+          ),
+          value: controller.dialogElevation,
+          onChanged: controller.setDialogElevation,
+          min: 0,
+          max: 30,
+          divisions: 30,
+          valueHeading: 'ELEV',
+          valueDecimalPlaces: 0,
+          valueDefaultLabel: '6',
+          valueDefaultDisabledLabel: useMaterial3 ? '6' : '24',
         ),
         const Divider(),
         const ListTileReveal(
@@ -437,6 +415,7 @@ class DialogSettings extends StatelessWidget {
               'supported. In Flutter 3.10 the theming had some issues, '
               'see known issues further below.\n'),
         ),
+        const TimePickerDialogShowcase(),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Radius'),
@@ -460,7 +439,6 @@ class DialogSettings extends StatelessWidget {
             controller.timePickerDialogBorderRadius,
           ),
         ),
-        const TimePickerDialogShowcase(),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text("Time input elements' border radius"),
@@ -508,7 +486,28 @@ class DialogSettings extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(),
+        const Divider(height: 0),
+        SwitchListTileReveal(
+          enabled: enableControl,
+          title: const Text("Use TextField's InputDecorationTheme in Pickers "),
+          subtitleReveal: const Text(
+            'Turn ON to use the FlexColorScheme themed TextField '
+            'InputDecoration style on time and date text entry fields in '
+            'TimePicker and DatePicker dialogs.\n'
+            '\n'
+            'Turn OFF to use default M3 styles on text input fields '
+            'in TimePicker and DatePicker dialogs.\n'
+            '\n'
+            'NOTE:\n'
+            'While this feature is supported by DatePicker in Flutter 3.13 and '
+            'later, the support is flawed. See known issues further below.\n',
+          ),
+          value: enableControl && controller.useInputDecoratorThemeInDialogs,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+              ? controller.setUseInputDecoratorThemeInDialogs
+              : null,
+        ),
+        const Divider(height: 0),
         const ListTileReveal(
           title: Text('DatePicker'),
           subtitleReveal:
@@ -517,6 +516,7 @@ class DialogSettings extends StatelessWidget {
                   'in Flutter 3.7. Flutter 3.10 added theming and Material-3 '
                   'support to the DatePicker.\n'),
         ),
+        const DatePickerDialogShowcase(),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Border radius'),
@@ -540,59 +540,6 @@ class DialogSettings extends StatelessWidget {
             controller.timePickerDialogBorderRadius,
           ),
         ),
-        ListTileReveal(
-          enabled: enableControl,
-          title: const Text('Radius'),
-          subtitleReveal: const Text(
-            'DatePicker radius defaults to the general dialog radius in '
-            'FlexColorScheme, including its platform adaptive radius settings '
-            'defined above or in general border radius. '
-            'This is a themed override radius for the DatePicker dialog '
-            'that is applied on all platforms.\n',
-          ),
-        ),
-        ListTileReveal(
-          enabled: enableControl,
-          title: Slider(
-            min: -1,
-            max: 50,
-            divisions: 51,
-            label: _effectiveDateTimeRadiusLabel(
-              controller,
-              controller.datePickerDialogBorderRadius,
-            ),
-            value: enableControl
-                ? controller.datePickerDialogBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDatePickerDialogBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  _effectiveDateTimeRadiusLabel(
-                    controller,
-                    controller.datePickerDialogBorderRadius,
-                  ),
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const DatePickerDialogShowcase(),
         ColorSchemePopupMenu(
           title: const Text('Header background color'),
           labelForDefault: datePickerHeaderBackgroundDefault,
