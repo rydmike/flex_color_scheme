@@ -3663,8 +3663,6 @@ sealed class FlexSubThemes {
   }
 
   /// An opinionated [MenuBarThemeData] theme.
-  ///
-  /// Only offers scheme color and elevation theming at the moment.
   static MenuBarThemeData menuBarTheme({
     // Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
