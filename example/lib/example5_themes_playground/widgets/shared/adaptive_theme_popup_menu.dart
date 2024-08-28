@@ -18,12 +18,14 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
     this.title,
     this.subtitle,
     this.contentPadding,
+    this.valueDefaultLabel,
   });
   final int index;
   final ValueChanged<int>? onChanged;
   final Widget? title;
   final Widget? subtitle;
   final EdgeInsetsGeometry? contentPadding;
+  final String? valueDefaultLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
 
     final String tileLabel = !useDefault
         ? AdaptiveTheme.values[index].label
-        : 'Undefined (${AdaptiveTheme.off.label})';
+        : valueDefaultLabel ?? 'Default (${AdaptiveTheme.off.label})';
 
     final String styleDescribe = !useDefault
         ? AdaptiveTheme.values[index].describe
@@ -92,7 +94,8 @@ class AdaptiveThemePopupMenu extends StatelessWidget {
               title: i >= AdaptiveTheme.values.length
                   // If we reached max length make default label.
                   ? Text(
-                      'Undefined (${AdaptiveTheme.off.label})',
+                      valueDefaultLabel ??
+                          'Default (${AdaptiveTheme.off.label})',
                       style: txtStyle,
                     )
                   : Text(AdaptiveTheme.values[i].label, style: txtStyle),
