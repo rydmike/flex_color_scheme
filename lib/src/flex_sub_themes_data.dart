@@ -1950,7 +1950,7 @@ class FlexSubThemesData with Diagnosticable {
   /// The ColorScheme based color used as background color on [MenuBar],
   /// [MenuAnchor] and [DropDownMenu].
   ///
-  /// If not defined, defaults to theme.colorScheme.surface.
+  /// If not defined, defaults to surface.
   final SchemeColor? menuSchemeColor;
 
   /// Menu background opacity.
@@ -1984,7 +1984,11 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The border radius of the [MenuBar] container.
   ///
-  /// If not defined, defaults to 4 via Flutter SDK default.
+  /// If not defined, defaults to 4.
+  ///
+  /// Flutter SDK defaults to 4.0, but M3 spec does not show rounded corners
+  /// on MenuBar components, but as of Aug 28, 2024, there is no spec for it
+  /// either, see https://m3.material.io/components/menus/guidelines
   final double? menuBarRadius;
 
   /// The elevation of the [MenuBar] container.
@@ -1998,7 +2002,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The shadow color of the [MenuBar] container.
   ///
-  /// If not defined, defaults toe [ColorScheme.shadow] via Flutter SDK
+  /// If not defined, defaults to [ColorScheme.shadow] via Flutter SDK
   /// defaults and the [MenuBar] gets elevation shadow.
   final Color? menuBarShadowColor;
 
