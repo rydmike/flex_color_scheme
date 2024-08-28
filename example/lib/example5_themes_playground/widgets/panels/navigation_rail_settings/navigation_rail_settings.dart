@@ -12,21 +12,10 @@ class NavigationRailSettings extends StatelessWidget {
   const NavigationRailSettings(this.controller, {super.key});
   final ThemeController controller;
 
-  // Future<void> _handleSetToM3(BuildContext context) async {
-  //   final bool? reset = await showDialog<bool?>(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return const SetNavigationRailToM3Dialog();
-  //     },
-  //   );
-  //   if (reset ?? false) {
-  //     await controller.setNavigationRailToM3();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
 
     // Logic for indicator color label default value,
     // custom color selection overrides default label and value.
@@ -36,7 +25,7 @@ class NavigationRailSettings extends StatelessWidget {
         return 'default (secondaryContainer)';
       }
       // Use M2 default color
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (secondary)';
       }
       // All other cases will use M3 style.
@@ -51,7 +40,7 @@ class NavigationRailSettings extends StatelessWidget {
         return 'default (onSecondaryContainer)';
       }
       // Use M2 default color
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (primary)';
       }
       // All other cases will use M3 style.
@@ -66,7 +55,7 @@ class NavigationRailSettings extends StatelessWidget {
         return 'default (onSurface)';
       }
       // Use M2 default color
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (primary)';
       }
       // All other cases will use M3 style.
@@ -85,7 +74,7 @@ class NavigationRailSettings extends StatelessWidget {
         return 'default (onSurfaceVariant)';
       }
       // Use M2 Flutter component default..
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
@@ -262,7 +251,7 @@ class NavigationRailSettings extends StatelessWidget {
                         (controller.navRailIndicatorOpacity ?? -1) < 0
                     ? 'default 100%'
                     : (navRailIndicatorOpacity * 100).toStringAsFixed(0)
-                : controller.useMaterial3
+                : useMaterial3
                     ? 'default 100%'
                     : 'default 64%',
             value: navRailIndicatorOpacity * 100,
@@ -289,7 +278,7 @@ class NavigationRailSettings extends StatelessWidget {
                           ? 'default 100%'
                           // ignore: lines_longer_than_80_chars
                           : '${(navRailIndicatorOpacity * 100).toStringAsFixed(0)} %'
-                      : controller.useMaterial3
+                      : useMaterial3
                           ? 'default 100%'
                           : 'default 64%',
                   style: theme.textTheme.bodySmall!
@@ -314,12 +303,12 @@ class NavigationRailSettings extends StatelessWidget {
                     : (controller.navRailIndicatorBorderRadius
                             ?.toStringAsFixed(0) ??
                         '')
-                : !controller.useMaterial3 &&
+                : !useMaterial3 &&
                         controller.navRailLabelType ==
                             NavigationRailLabelType.none
                     ? 'default (circular)'
                     : 'default (stadium)',
-            value: !(!controller.useMaterial3 &&
+            value: !(!useMaterial3 &&
                         controller.navRailLabelType ==
                             NavigationRailLabelType.none) &&
                     controller.navRailUseIndicator &&
@@ -327,7 +316,7 @@ class NavigationRailSettings extends StatelessWidget {
                     controller.useFlexColorScheme
                 ? controller.navRailIndicatorBorderRadius ?? -1
                 : -1,
-            onChanged: !(!controller.useMaterial3 &&
+            onChanged: !(!useMaterial3 &&
                         controller.navRailLabelType ==
                             NavigationRailLabelType.none) &&
                     controller.navRailUseIndicator &&
@@ -349,7 +338,7 @@ class NavigationRailSettings extends StatelessWidget {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  !(!controller.useMaterial3 &&
+                  !(!useMaterial3 &&
                               controller.navRailLabelType ==
                                   NavigationRailLabelType.none) &&
                           controller.useSubThemes &&
@@ -361,7 +350,7 @@ class NavigationRailSettings extends StatelessWidget {
                           : (controller.navRailIndicatorBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : !controller.useMaterial3 &&
+                      : !useMaterial3 &&
                               controller.navRailLabelType ==
                                   NavigationRailLabelType.none
                           ? 'default (circular)'

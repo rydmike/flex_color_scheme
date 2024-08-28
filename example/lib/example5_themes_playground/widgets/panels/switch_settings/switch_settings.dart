@@ -27,29 +27,29 @@ class SwitchesSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     final String labelForDefaultColor =
-        (controller.useSubThemes || controller.useMaterial3) &&
+        (controller.useSubThemes || useMaterial3) &&
                 controller.useFlexColorScheme
             ? 'default (primary)'
-            : controller.useMaterial3
+            : useMaterial3
                 ? 'default (primary)'
                 : 'default (secondary)';
     final String labelForDefaultThumbColor =
-        (controller.useSubThemes || controller.useMaterial3) &&
+        (controller.useSubThemes || useMaterial3) &&
                 controller.useFlexColorScheme
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? 'default (primaryContainer)'
                 : 'default (primary)'
-            : controller.useMaterial3
+            : useMaterial3
                 ? 'default (primaryContainer)'
                 : 'default (secondary)';
 
-    final String explainThumb =
-        controller.useMaterial3 ? ' pressed/hovered/focused' : '';
+    final String explainThumb = useMaterial3 ? ' pressed/hovered/focused' : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,10 +115,10 @@ class SwitchesSettings extends StatelessWidget {
           value: controller.switchThumbFixedSize &&
               controller.useSubThemes &&
               controller.useFlexColorScheme &&
-              controller.useMaterial3,
+              useMaterial3,
           onChanged: controller.useSubThemes &&
                   controller.useFlexColorScheme &&
-                  controller.useMaterial3
+                  useMaterial3
               ? controller.setSwitchThumbFixedSize
               : null,
         ),
@@ -133,7 +133,7 @@ class SwitchesSettings extends StatelessWidget {
           index: controller.switchAdaptiveCupertinoLike?.index ?? -1,
           onChanged: controller.useFlexColorScheme &&
                   controller.useSubThemes &&
-                  controller.useMaterial3
+                  useMaterial3
               ? (int index) {
                   if (index < 0 || index >= AdaptiveTheme.values.length) {
                     controller.setSwitchAdaptiveCupertinoLike(null);
@@ -170,7 +170,7 @@ class SwitchesSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: CheckboxShowcase(),
         ),
-        if (!controller.useMaterial3)
+        if (!useMaterial3)
           const ListTile(
             dense: true,
             title: Text('Error state is not supported in M2 mode'),

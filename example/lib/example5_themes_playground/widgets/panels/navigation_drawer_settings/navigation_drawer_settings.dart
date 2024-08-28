@@ -121,7 +121,7 @@ class NavigationDrawerSettings extends StatelessWidget {
                         (controller.drawerBorderRadius ?? -1) < 0
                     ? drawerRadiusDefaultLabel
                     : (controller.drawerBorderRadius?.toStringAsFixed(0) ?? '')
-                : controller.useMaterial3
+                : useMaterial3
                     ? 'default 16'
                     : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -151,7 +151,7 @@ class NavigationDrawerSettings extends StatelessWidget {
                           : (controller.drawerBorderRadius
                                   ?.toStringAsFixed(0) ??
                               '')
-                      : controller.useMaterial3
+                      : useMaterial3
                           ? 'default 16'
                           : 'default 0',
                   style: theme.textTheme.bodySmall!

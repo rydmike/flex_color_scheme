@@ -20,6 +20,7 @@ class CardSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
@@ -66,8 +67,7 @@ class CardSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: cardRadiusDefaultLabel,
-          valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'default 12' : 'default 4',
+          valueDefaultDisabledLabel: useMaterial3 ? 'default 12' : 'default 4',
         ),
         const Padding(
           padding: EdgeInsets.all(16),

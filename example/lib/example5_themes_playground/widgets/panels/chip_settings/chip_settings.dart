@@ -28,6 +28,7 @@ class ChipSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
@@ -57,9 +58,8 @@ class ChipSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Chip blend color'),
-          labelForDefault: controller.useMaterial3
-              ? 'default (surface)'
-              : 'default (primary)',
+          labelForDefault:
+              useMaterial3 ? 'default (surface)' : 'default (primary)',
           index: controller.chipSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
@@ -73,9 +73,8 @@ class ChipSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected Chip color'),
-          labelForDefault: controller.useMaterial3
-              ? 'default (secondaryContainer)'
-              : 'default (none)',
+          labelForDefault:
+              useMaterial3 ? 'default (secondaryContainer)' : 'default (none)',
           index: controller.chipSelectedSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
@@ -115,8 +114,7 @@ class ChipSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: chipRadiusDefaultLabel,
-          valueDefaultDisabledLabel:
-              controller.useMaterial3 ? '8 dp' : 'stadium',
+          valueDefaultDisabledLabel: useMaterial3 ? '8 dp' : 'stadium',
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
