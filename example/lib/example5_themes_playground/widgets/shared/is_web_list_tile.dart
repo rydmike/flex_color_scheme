@@ -15,13 +15,14 @@ class IsWebListTile extends StatelessWidget {
   String _explainLabelStyle(final bool? isWeb) {
     switch (isWeb) {
       case true:
-        return 'Mock web platform set to true and used. '
-            'Actual web platform is $kIsWeb';
+        return 'Mock "kIsWeb" set to true and used. '
+            'Actual kIsWeb is $kIsWeb';
       case false:
-        return 'Mock web platform set to false. '
-            'Actual web platform is $kIsWeb';
+        return 'Mock "kIsWeb" set to false and used. '
+            'Actual kIsWeb is $kIsWeb';
       case null:
-        return 'Actual web platform is $kIsWeb and it is used';
+        return 'Mock "kIsWeb" set to null and '
+            'actual kIsWeb is $kIsWeb and used';
     }
   }
 
@@ -30,11 +31,11 @@ class IsWebListTile extends StatelessWidget {
     return ListTileReveal(
       dense: true,
       title: const Text('Mock web'),
-      subtitleReveal: Text(
+      subtitle: Text(_explainLabelStyle(controller.fakeIsWeb)),
+      subtitleReveal: const Text(
           'Use this setting to test what your adaptive theme looks '
           'likes on web and none web platform, by mocking web or device usage '
-          'status here in the Playground.\n\n'
-          '${_explainLabelStyle(controller.fakeIsWeb)}.\n'),
+          'status here in the Playground.\n'),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 5.0),
         child: IsWebToggleButtons(
