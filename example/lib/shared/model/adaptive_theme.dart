@@ -106,7 +106,7 @@ enum AdaptiveTheme {
       case AdaptiveTheme.apple:
         return FlexAdaptive.apple(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.appleWeb:
-        return FlexAdaptive.apple(overrideIsWeb: overrideIsWeb);
+        return FlexAdaptive.appleWeb(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.desktop:
         return FlexAdaptive.desktop(overrideIsWeb: overrideIsWeb);
       case AdaptiveTheme.iOSAndDesktop:
