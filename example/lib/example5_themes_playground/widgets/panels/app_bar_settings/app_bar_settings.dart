@@ -33,6 +33,7 @@ class AppBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final bool isLight = theme.brightness == Brightness.light;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
@@ -214,7 +215,7 @@ class AppBarSettings extends StatelessWidget {
                           (controller.appBarElevationLight ?? -0.5) < 0
                       ? 'default 0'
                       : controller.appBarElevationLight!.toStringAsFixed(1)
-                  : controller.useMaterial3
+                  : useMaterial3
                       ? 'default 0'
                       : 'default 4',
               value: controller.useFlexColorScheme
@@ -243,7 +244,7 @@ class AppBarSettings extends StatelessWidget {
                             ? 'default 0'
                             : controller.appBarElevationLight!
                                 .toStringAsFixed(1)
-                        : controller.useMaterial3
+                        : useMaterial3
                             ? 'default 0'
                             : 'default 4',
                     style: theme.textTheme.bodySmall!
@@ -256,7 +257,7 @@ class AppBarSettings extends StatelessWidget {
           ListTile(
             enabled: controller.useFlexColorScheme &&
                 controller.useSubThemes &&
-                controller.useMaterial3,
+                useMaterial3,
             title: const Text('Light mode scrolled under elevation'),
             subtitle: Slider(
               min: -0.5,
@@ -267,7 +268,7 @@ class AppBarSettings extends StatelessWidget {
                           (controller.appBarScrolledUnderElevationLight ??
                                   -0.5) <
                               0
-                      ? controller.useMaterial3
+                      ? useMaterial3
                           ? 'default 3'
                           : controller.useSubThemes
                               // ignore: lines_longer_than_80_chars
@@ -276,7 +277,7 @@ class AppBarSettings extends StatelessWidget {
                       : (controller.appBarScrolledUnderElevationLight
                               ?.toStringAsFixed(1) ??
                           '')
-                  : controller.useMaterial3
+                  : useMaterial3
                       ? 'default 3'
                       : !controller.useSubThemes
                           // ignore: lines_longer_than_80_chars
@@ -284,12 +285,12 @@ class AppBarSettings extends StatelessWidget {
                           : 'default 4',
               value: controller.useFlexColorScheme &&
                       controller.useSubThemes &&
-                      controller.useMaterial3
+                      useMaterial3
                   ? controller.appBarScrolledUnderElevationLight ?? -0.5
                   : -0.5,
               onChanged: controller.useFlexColorScheme &&
                       controller.useSubThemes &&
-                      controller.useMaterial3
+                      useMaterial3
                   ? (double value) {
                       controller.setAppBarScrolledUnderElevationLight(
                           value < 0 ? null : value);
@@ -312,17 +313,17 @@ class AppBarSettings extends StatelessWidget {
                                 (controller.appBarScrolledUnderElevationLight ??
                                         -0.5) <
                                     0
-                            ? controller.useMaterial3
+                            ? useMaterial3
                                 ? 'default 3'
                                 // ignore: lines_longer_than_80_chars
                                 : 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
-                            : !controller.useMaterial3
+                            : !useMaterial3
                                 // ignore: lines_longer_than_80_chars
                                 ? 'default ${(controller.appBarElevationLight ?? 0).toStringAsFixed(1)}'
                                 : controller.appBarScrolledUnderElevationLight
                                         ?.toStringAsFixed(1) ??
                                     ''
-                        : controller.useMaterial3
+                        : useMaterial3
                             ? 'default 3'
                             : !controller.useSubThemes
                                 // ignore: lines_longer_than_80_chars
@@ -339,7 +340,7 @@ class AppBarSettings extends StatelessWidget {
             title: const Text('Light mode background color'),
             labelForDefault: controller.useFlexColorScheme
                 ? 'default (AppBarStyle)'
-                : controller.useMaterial3
+                : useMaterial3
                     ? 'default (surface)'
                     : 'default (primary)',
             index: controller.appBarBackgroundSchemeColorLight?.index ?? -1,
@@ -367,7 +368,7 @@ class AppBarSettings extends StatelessWidget {
                           (controller.appBarElevationDark ?? -0.5) < 0
                       ? 'default 0'
                       : controller.appBarElevationDark!.toStringAsFixed(1)
-                  : controller.useMaterial3
+                  : useMaterial3
                       ? 'default 0'
                       : 'default 4',
               value: controller.useFlexColorScheme
@@ -395,7 +396,7 @@ class AppBarSettings extends StatelessWidget {
                                 (controller.appBarElevationDark ?? -0.5) < 0
                             ? 'default 0'
                             : controller.appBarElevationDark!.toStringAsFixed(1)
-                        : controller.useMaterial3
+                        : useMaterial3
                             ? 'default 0'
                             : 'default 4',
                     style: theme.textTheme.bodySmall!
@@ -417,7 +418,7 @@ class AppBarSettings extends StatelessWidget {
                           (controller.appBarScrolledUnderElevationDark ??
                                   -0.5) <
                               0
-                      ? controller.useMaterial3
+                      ? useMaterial3
                           ? 'default 3'
                           : controller.useSubThemes
                               // ignore: lines_longer_than_80_chars
@@ -426,7 +427,7 @@ class AppBarSettings extends StatelessWidget {
                       : (controller.appBarScrolledUnderElevationDark
                               ?.toStringAsFixed(1) ??
                           '')
-                  : controller.useMaterial3
+                  : useMaterial3
                       ? 'default 3'
                       : !controller.useSubThemes
                           // ignore: lines_longer_than_80_chars
@@ -434,12 +435,12 @@ class AppBarSettings extends StatelessWidget {
                           : 'default 4',
               value: controller.useFlexColorScheme &&
                       controller.useSubThemes &&
-                      controller.useMaterial3
+                      useMaterial3
                   ? controller.appBarScrolledUnderElevationDark ?? -0.5
                   : -0.5,
               onChanged: controller.useFlexColorScheme &&
                       controller.useSubThemes &&
-                      controller.useMaterial3
+                      useMaterial3
                   ? (double value) {
                       controller.setAppBarScrolledUnderElevationDark(
                           value < 0 ? null : value);
@@ -461,17 +462,17 @@ class AppBarSettings extends StatelessWidget {
                                 (controller.appBarScrolledUnderElevationDark ??
                                         -0.5) <
                                     0
-                            ? controller.useMaterial3
+                            ? useMaterial3
                                 ? 'default 3'
                                 // ignore: lines_longer_than_80_chars
                                 : 'default ${(controller.appBarElevationDark ?? 0).toStringAsFixed(1)}'
-                            : !controller.useMaterial3
+                            : !useMaterial3
                                 // ignore: lines_longer_than_80_chars
                                 ? 'default ${(controller.appBarElevationDark ?? 0).toStringAsFixed(1)}'
                                 : controller.appBarScrolledUnderElevationDark
                                         ?.toStringAsFixed(1) ??
                                     ''
-                        : controller.useMaterial3
+                        : useMaterial3
                             ? 'default 3'
                             : !controller.useSubThemes
                                 // ignore: lines_longer_than_80_chars
@@ -546,7 +547,7 @@ class AppBarSettings extends StatelessWidget {
             index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
-                    controller.useMaterial3
+                    useMaterial3
                 ? (int index) {
                     if (index < 0 || index >= AdaptiveTheme.values.length) {
                       controller.setAdaptiveAppBarScrollUnderOffLight(null);
@@ -566,7 +567,7 @@ class AppBarSettings extends StatelessWidget {
             index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
             onChanged: controller.useFlexColorScheme &&
                     controller.useSubThemes &&
-                    controller.useMaterial3
+                    useMaterial3
                 ? (int index) {
                     if (index < 0 || index >= AdaptiveTheme.values.length) {
                       controller.setAdaptiveAppBarScrollUnderOffDark(null);

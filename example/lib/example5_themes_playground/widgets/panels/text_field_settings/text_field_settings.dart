@@ -80,7 +80,7 @@ class TextFieldSettings extends StatelessWidget {
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String decoratorRadiusDefaultLabel =
         controller.inputDecoratorBorderRadius == null && effectiveRadius == null
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? '4 dp'
                 : '10 dp'
             : controller.inputDecoratorBorderRadius == null &&
@@ -225,7 +225,7 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   title: const Text('Color light mode'),
-                  labelForDefault: controller.useMaterial3
+                  labelForDefault: useMaterial3
                       ? 'default (surfaceContainerHighest)'
                       : 'default (primary)',
                   index: controller.inputDecoratorSchemeColorLight?.index ?? -1,
@@ -269,7 +269,7 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   title: const Text('Color dark mode'),
-                  labelForDefault: controller.useMaterial3
+                  labelForDefault: useMaterial3
                       ? 'default (surfaceVariant)'
                       : 'default (primary)',
                   index: controller.inputDecoratorSchemeColorDark?.index ?? -1,
@@ -313,7 +313,7 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   title: const Text('Focused prefix icon'),
-                  labelForDefault: controller.useMaterial3
+                  labelForDefault: useMaterial3
                       ? 'default (onSurface)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
@@ -337,7 +337,7 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   title: const Text('Focused prefix icon'),
-                  labelForDefault: controller.useMaterial3
+                  labelForDefault: useMaterial3
                       ? 'default (onSurface)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
@@ -363,7 +363,7 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   title: const Text('Focused suffix icon'),
-                  labelForDefault: controller.useMaterial3
+                  labelForDefault: useMaterial3
                       ? 'default (onSurface)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
@@ -387,7 +387,7 @@ class TextFieldSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   title: const Text('Focused suffix icon'),
-                  labelForDefault: controller.useMaterial3
+                  labelForDefault: useMaterial3
                       ? 'default (onSurface)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',

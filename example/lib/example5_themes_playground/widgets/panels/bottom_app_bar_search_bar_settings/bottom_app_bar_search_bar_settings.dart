@@ -25,6 +25,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final bool isLight = theme.brightness == Brightness.light;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
@@ -61,7 +62,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
               divisions: 41,
               label: !controller.useFlexColorScheme ||
                       controller.bottomAppBarElevationLight == null
-                  ? controller.useMaterial3
+                  ? useMaterial3
                       ? 'default 3'
                       : 'default 8'
                   : (controller.bottomAppBarElevationLight
@@ -89,7 +90,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                   Text(
                     !controller.useFlexColorScheme ||
                             controller.bottomAppBarElevationLight == null
-                        ? controller.useMaterial3
+                        ? useMaterial3
                             ? 'default 3'
                             : 'default 8'
                         : (controller.bottomAppBarElevationLight
@@ -112,7 +113,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
               divisions: 41,
               label: !controller.useFlexColorScheme ||
                       controller.bottomAppBarElevationDark == null
-                  ? controller.useMaterial3
+                  ? useMaterial3
                       ? 'default 3'
                       : 'default 8'
                   : (controller.bottomAppBarElevationDark?.toStringAsFixed(1) ??
@@ -139,7 +140,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
                   Text(
                     !controller.useFlexColorScheme ||
                             controller.bottomAppBarElevationDark == null
-                        ? controller.useMaterial3
+                        ? useMaterial3
                             ? 'default 3'
                             : 'default 8'
                         : (controller.bottomAppBarElevationDark
@@ -155,9 +156,8 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         ],
         ColorSchemePopupMenu(
           title: const Text('Background color for light and dark mode'),
-          labelForDefault: controller.useMaterial3
-              ? 'default (surfaceContainer)'
-              : 'default (surface)',
+          labelForDefault:
+              useMaterial3 ? 'default (surfaceContainer)' : 'default (surface)',
           index: controller.bottomAppBarSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {

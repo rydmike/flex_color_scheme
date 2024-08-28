@@ -46,14 +46,14 @@ class TabBarSettings extends StatelessWidget {
 
     // Logic for default indicator weight label.
     final String weightDefaultLabel = controller.tabBarIndicatorWeight == null
-        ? controller.useMaterial3
+        ? useMaterial3
             ? 'default 3'
             : 'default 2'
         : controller.tabBarIndicatorWeight!.toStringAsFixed(1);
     // Logic for default indicator top radius label.
     final String topRadiusDefaultLabel =
         controller.tabBarIndicatorTopRadius == null
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? 'default 3'
                 : 'default 0'
             : controller.tabBarIndicatorTopRadius!.toStringAsFixed(1);
@@ -67,7 +67,7 @@ class TabBarSettings extends StatelessWidget {
         return 'default (TabBarStyle)';
       }
       if (controller.tabBarItemSchemeColorLight != null) {
-        if (controller.useMaterial3) {
+        if (useMaterial3) {
           return 'default (onSurfaceVariant)';
         } else {
           // ignore: lines_longer_than_80_chars
@@ -87,7 +87,7 @@ class TabBarSettings extends StatelessWidget {
         return 'default (TabBarStyle)';
       }
       if (controller.tabBarItemSchemeColorDark != null) {
-        if (controller.useMaterial3) {
+        if (useMaterial3) {
           return 'default (onSurfaceVariant)';
         } else {
           // ignore: lines_longer_than_80_chars
@@ -187,11 +187,11 @@ class TabBarSettings extends StatelessWidget {
                   ? controller.tabBarUnselectedItemOpacityLight == null ||
                           (controller.tabBarUnselectedItemOpacityLight ?? -1) <
                               0
-                      ? controller.useMaterial3
+                      ? useMaterial3
                           ? 'default 100%'
                           : 'default 70%'
                       : (unselectedOpacityLight * 100).toStringAsFixed(0)
-                  : controller.useMaterial3
+                  : useMaterial3
                       ? 'default 100%'
                       : 'default 70%',
               value: unselectedOpacityLight * 100,
@@ -217,12 +217,12 @@ class TabBarSettings extends StatelessWidget {
                                 (controller.tabBarUnselectedItemOpacityLight ??
                                         -1) <
                                     0
-                            ? controller.useMaterial3
+                            ? useMaterial3
                                 ? 'default 100%'
                                 : 'default 70%'
                             // ignore: lines_longer_than_80_chars
                             : '${(unselectedOpacityLight * 100).toStringAsFixed(0)} %'
-                        : controller.useMaterial3
+                        : useMaterial3
                             ? 'default 100%'
                             : 'default 70%',
                     style: theme.textTheme.bodySmall!
@@ -291,11 +291,11 @@ class TabBarSettings extends StatelessWidget {
               label: unselectedDarkOpacityEnabled
                   ? controller.tabBarUnselectedItemOpacityDark == null ||
                           (controller.tabBarUnselectedItemOpacityDark ?? -1) < 0
-                      ? controller.useMaterial3
+                      ? useMaterial3
                           ? 'default 100%'
                           : 'default 70%'
                       : (unselectedOpacityDark * 100).toStringAsFixed(0)
-                  : controller.useMaterial3
+                  : useMaterial3
                       ? 'default 100%'
                       : 'default 70%',
               value: unselectedOpacityDark * 100,
@@ -321,12 +321,12 @@ class TabBarSettings extends StatelessWidget {
                                 (controller.tabBarUnselectedItemOpacityDark ??
                                         -1) <
                                     0
-                            ? controller.useMaterial3
+                            ? useMaterial3
                                 ? 'default 100%'
                                 : 'default 70%'
                             // ignore: lines_longer_than_80_chars
                             : '${(unselectedOpacityDark * 100).toStringAsFixed(0)} %'
-                        : controller.useMaterial3
+                        : useMaterial3
                             ? 'default 100%'
                             : 'default 70%',
                     style: theme.textTheme.bodySmall!
@@ -381,7 +381,7 @@ class TabBarSettings extends StatelessWidget {
                     ? weightDefaultLabel
                     : (controller.tabBarIndicatorWeight?.toStringAsFixed(1) ??
                         '')
-                : controller.useMaterial3
+                : useMaterial3
                     ? 'default 3'
                     : 'default 2',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -411,7 +411,7 @@ class TabBarSettings extends StatelessWidget {
                           : (controller.tabBarIndicatorWeight
                                   ?.toStringAsFixed(1) ??
                               '')
-                      : controller.useMaterial3
+                      : useMaterial3
                           ? 'default 3'
                           : 'default 2',
                   style: theme.textTheme.bodySmall!
@@ -435,7 +435,7 @@ class TabBarSettings extends StatelessWidget {
                     : (controller.tabBarIndicatorTopRadius
                             ?.toStringAsFixed(1) ??
                         '')
-                : controller.useMaterial3
+                : useMaterial3
                     ? 'default 3'
                     : 'default 0',
             value: controller.useSubThemes && controller.useFlexColorScheme
@@ -465,7 +465,7 @@ class TabBarSettings extends StatelessWidget {
                           : (controller.tabBarIndicatorTopRadius
                                   ?.toStringAsFixed(1) ??
                               '')
-                      : controller.useMaterial3
+                      : useMaterial3
                           ? 'default 3'
                           : 'default 0',
                   style: theme.textTheme.bodySmall!

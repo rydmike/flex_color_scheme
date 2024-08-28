@@ -22,6 +22,7 @@ class NavigationBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
@@ -30,8 +31,7 @@ class NavigationBarSettings extends StatelessWidget {
 
     // Logic for background color label.
     String backgroundColorLabel() {
-      if (controller.useMaterial3 &&
-          controller.navBarBackgroundSchemeColor == null) {
+      if (useMaterial3 && controller.navBarBackgroundSchemeColor == null) {
         return 'default (surfaceContainer)';
       }
       if (!controller.useSubThemes ||
@@ -50,7 +50,7 @@ class NavigationBarSettings extends StatelessWidget {
         return 'default (secondaryContainer)';
       }
       // Use M2 default color
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (secondary opacity 24 %)';
       }
       // All other cases will use M3 style.
@@ -65,7 +65,7 @@ class NavigationBarSettings extends StatelessWidget {
         return 'default (onSecondaryContainer)';
       }
       // Use M2 default color
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
@@ -80,7 +80,7 @@ class NavigationBarSettings extends StatelessWidget {
         return 'default (onSurface)';
       }
       // Use M2 default color
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
@@ -97,7 +97,7 @@ class NavigationBarSettings extends StatelessWidget {
         return 'default (onSurfaceVariant)';
       }
       // Use M2 Flutter component default..
-      if (!controller.useMaterial3) {
+      if (!useMaterial3) {
         return 'default (onSurface)';
       }
       // All other cases will use M3 style.
@@ -162,7 +162,7 @@ class NavigationBarSettings extends StatelessWidget {
           divisions: 24,
           valueHeading: 'ELEV',
           valueDecimalPlaces: 0,
-          valueDefaultLabel: controller.useMaterial3 ? '3' : '0',
+          valueDefaultLabel: useMaterial3 ? '3' : '0',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -205,7 +205,7 @@ class NavigationBarSettings extends StatelessWidget {
           valueHeading: 'OPACITY',
           valueUnitLabel: ' %',
           valueDefaultLabel: '100 %',
-          valueDefaultDisabledLabel: controller.useMaterial3 ? '100 %' : '24 %',
+          valueDefaultDisabledLabel: useMaterial3 ? '100 %' : '24 %',
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -287,7 +287,7 @@ class NavigationBarSettings extends StatelessWidget {
               'platforms. This setting has no impact in Material-2 mode.\n',
             ),
             index: controller.adaptiveRemoveNavigationBarTintLight?.index ?? -1,
-            onChanged: enableControl && controller.useMaterial3
+            onChanged: enableControl && useMaterial3
                 ? (int index) {
                     if (index < 0 || index >= AdaptiveTheme.values.length) {
                       controller.setAdaptiveRemoveNavigationBarTintLight(null);
@@ -307,7 +307,7 @@ class NavigationBarSettings extends StatelessWidget {
               'platforms. This setting has no impact in Material-2 mode.\n',
             ),
             index: controller.adaptiveRemoveNavigationBarTintDark?.index ?? -1,
-            onChanged: enableControl && controller.useMaterial3
+            onChanged: enableControl && useMaterial3
                 ? (int index) {
                     if (index < 0 || index >= AdaptiveTheme.values.length) {
                       controller.setAdaptiveRemoveNavigationBarTintDark(null);

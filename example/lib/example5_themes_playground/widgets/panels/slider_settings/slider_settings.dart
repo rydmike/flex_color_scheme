@@ -24,6 +24,7 @@ class SliderSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
@@ -35,7 +36,7 @@ class SliderSettings extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final String labelIndicatorDefault =
         controller.sliderBaseSchemeColor == null
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? controller.sliderValueTinted
                     ? 'primary'
                     : 'default (primary)'
@@ -92,9 +93,8 @@ class SliderSettings extends StatelessWidget {
         ),
         SliderIndicatorPopupMenu(
           title: const Text('Indicator type'),
-          labelForDefault: controller.useMaterial3
-              ? 'default M3 (drop)'
-              : 'default M2 (rectangular)',
+          labelForDefault:
+              useMaterial3 ? 'default M3 (drop)' : 'default M2 (rectangular)',
           index: controller.sliderValueIndicatorType?.index ?? -1,
           onChanged: enableControl
               ? (int index) {

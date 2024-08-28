@@ -39,7 +39,7 @@ class ButtonsSettings extends StatelessWidget {
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String elevatedButtonRadiusDefaultLabel =
         controller.elevatedButtonBorderRadius == null && effectiveRadius == null
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? 'stadium'
                 : '40 dp'
             : controller.elevatedButtonBorderRadius == null &&
@@ -48,7 +48,7 @@ class ButtonsSettings extends StatelessWidget {
                 : '';
     final String outlinedButtonRadiusDefaultLabel =
         controller.outlinedButtonBorderRadius == null && effectiveRadius == null
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? 'stadium'
                 : '40 dp'
             : controller.outlinedButtonBorderRadius == null &&
@@ -57,7 +57,7 @@ class ButtonsSettings extends StatelessWidget {
                 : '';
     final String textButtonRadiusDefaultLabel =
         controller.textButtonBorderRadius == null && effectiveRadius == null
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? 'stadium'
                 : '40 dp'
             : controller.textButtonBorderRadius == null &&
@@ -66,7 +66,7 @@ class ButtonsSettings extends StatelessWidget {
                 : '';
     final String filledButtonRadiusDefaultLabel =
         controller.filledButtonBorderRadius == null && effectiveRadius == null
-            ? controller.useMaterial3
+            ? useMaterial3
                 ? 'stadium'
                 : '40 dp'
             : controller.filledButtonBorderRadius == null &&
@@ -98,7 +98,7 @@ class ButtonsSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('ElevatedButton main color'),
-          subtitle: controller.useMaterial3
+          subtitle: useMaterial3
               ? const Text('Foreground color')
               : const Text('Background color'),
           index: controller.elevatedButtonSchemeColor?.index ?? -1,
@@ -119,10 +119,10 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('ElevatedButton secondary color'),
-          subtitle: controller.useMaterial3
+          subtitle: useMaterial3
               ? const Text('Background color')
               : const Text('Foreground color'),
-          labelForDefault: controller.useMaterial3
+          labelForDefault: useMaterial3
               ? 'default (surfaceContainerLow)'
               : 'default (onPrimary)',
           index: controller.elevatedButtonSecondarySchemeColor?.index ?? -1,
@@ -149,8 +149,7 @@ class ButtonsSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: elevatedButtonRadiusDefaultLabel,
-          valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'stadium' : '4 dp',
+          valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
         const Divider(),
         ColorSchemePopupMenu(
@@ -245,7 +244,7 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('OutlinedButton outline color'),
-          labelForDefault: controller.useMaterial3
+          labelForDefault: useMaterial3
               ? 'default (outline)'
               : controller.useSubThemes && controller.useFlexColorScheme
                   ? 'default (primary)'
@@ -274,8 +273,7 @@ class ButtonsSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: outlinedButtonRadiusDefaultLabel,
-          valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'stadium' : '4 dp',
+          valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
         Row(
           children: <Widget>[
@@ -344,8 +342,7 @@ class ButtonsSettings extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: textButtonRadiusDefaultLabel,
-          valueDefaultDisabledLabel:
-              controller.useMaterial3 ? 'stadium' : '4 dp',
+          valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
       ],
     );

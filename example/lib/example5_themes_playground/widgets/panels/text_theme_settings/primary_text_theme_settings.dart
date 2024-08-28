@@ -32,6 +32,7 @@ class _PrimaryTextThemeSettingsState extends State<PrimaryTextThemeSettings> {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

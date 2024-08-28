@@ -23,6 +23,7 @@ class FabSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
@@ -46,7 +47,7 @@ class FabSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('FloatingActionButton color'),
-          labelForDefault: controller.useMaterial3
+          labelForDefault: useMaterial3
               ? 'default (primaryContainer)'
               : 'default (secondary)',
           index: controller.fabSchemeColor?.index ?? -1,
@@ -107,7 +108,7 @@ class FabSettings extends StatelessWidget {
           valueDefaultDisabledLabel:
               controller.fabAlwaysCircular && controller.fabUseShape
                   ? 'circular'
-                  : controller.useMaterial3
+                  : useMaterial3
                       ? 'M3 rounded'
                       : 'circular',
         ),
