@@ -13,11 +13,14 @@ class UseMaterial3TextTheme extends StatelessWidget {
   String _explainLabelStyle(final bool? value) {
     switch (value) {
       case true:
-        return 'ON: Use M3 typography 2021 and text styles';
+        return 'Always use Material-3 typography 2021 and text styles '
+            '(useTextTheme: True)';
       case false:
-        return 'OFF: Use M2 typography 2018 and text styles';
+        return 'Always use Material-2 typography 2018 and text styles '
+            '(useTextTheme: False)';
       case null:
-        return 'DEFAULT: Use typography 2021 in M3 and 2018 in M2';
+        return 'Use typography 2021 in Material-3 and 2018 in Material-2 '
+            '(useTextTheme: Null) (Default)';
     }
   }
 
