@@ -32,6 +32,8 @@ class SliderListTileReveal extends StatelessWidget {
     this.title,
     this.subtitle,
     this.subtitleReveal,
+    this.contentPadding,
+    this.trailingWidth,
     this.dense,
     this.revealDense,
     this.min = 0.0,
@@ -88,6 +90,17 @@ class SliderListTileReveal extends StatelessWidget {
   ///
   /// Typically a [Text] widget.
   final Widget? subtitleReveal;
+
+  /// The [ListTileReveal]'s internal padding.
+  ///
+  /// Insets a [ListTileReveal]'s contents.
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
+  /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// If non-null, requires the trailing child to have exactly this width.
+  final double? trailingWidth;
 
   /// Whether this list tile is part of a vertically dense list.
   ///
@@ -170,6 +183,7 @@ class SliderListTileReveal extends StatelessWidget {
 
     return ListTileReveal(
       enabled: enabled,
+      contentPadding: contentPadding,
       dense: dense,
       revealDense: revealDense,
       title: title,
@@ -203,28 +217,32 @@ class SliderListTileReveal extends StatelessWidget {
           ),
         ],
       ),
-      trailing: Padding(
-        padding: const EdgeInsetsDirectional.only(end: 5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            if (valueHeading != null)
-              Text(valueHeading!, style: theme.textTheme.bodySmall),
-            Text(
-              enabled
-                  ? value == null ||
-                          (value ?? effectiveMin * valueDisplayScale) <
-                              min * valueDisplayScale
-                      ? 'default\n$valueDefaultLabel'
-                      // ignore: lines_longer_than_80_chars
-                      : '${(value! * valueDisplayScale).toStringAsFixed(valueDecimalPlaces)}$valueUnitLabel'
-                  // ignore: lines_longer_than_80_chars
-                  : 'default\n${valueDefaultDisabledLabel ?? valueDefaultLabel}',
-              textAlign: TextAlign.center,
-              style: theme.textTheme.bodySmall!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-          ],
+      trailing: SizedBox(
+        width: trailingWidth,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              if (valueHeading != null)
+                Text(valueHeading!, style: theme.textTheme.bodySmall),
+              Text(
+                enabled
+                    ? value == null ||
+                            (value ?? effectiveMin * valueDisplayScale) <
+                                min * valueDisplayScale
+                        ? 'default\n$valueDefaultLabel'
+                        // ignore: lines_longer_than_80_chars
+                        : '${(value! * valueDisplayScale).toStringAsFixed(valueDecimalPlaces)}$valueUnitLabel'
+                    // ignore: lines_longer_than_80_chars
+                    : 'default\n${valueDefaultDisabledLabel ?? valueDefaultLabel}',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodySmall!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );
