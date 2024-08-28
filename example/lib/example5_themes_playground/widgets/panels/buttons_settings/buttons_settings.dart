@@ -211,13 +211,15 @@ class ButtonsSettings extends StatelessWidget {
                   style: spanTextStyle,
                   text: '. Due to this issue, if you change theme color, the '
                       'FilledButton and FilledButton.tonal will get the same '
-                      'color. For same reason the tinted disable colors are '
+                      'color.\n'
+                      '\n'
+                      'For the same reason the tinted disable colors are '
                       'NOT set unless its main color is changed. If disabled '
                       'colors would be set, the different colors of the '
-                      'buttons will also be lost. Separate colors and border '
+                      'buttons would also be lost. Separate colors and border '
                       'radius for the two variants will be offered when the '
-                      'current limitation is removed. Go upvote the issue '
-                      'by giving it thumbs-up!\n',
+                      'current limitation is removed in Flutter. Go upvote '
+                      'the issue by giving it thumbs-up!\n',
                 ),
               ],
             ),
