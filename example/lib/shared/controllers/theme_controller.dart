@@ -3354,20 +3354,18 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyAppBarStyleDark, value));
   }
 
-  late double _appBarOpacityLight;
-  double get appBarOpacityLight => _appBarOpacityLight;
+  late double? _appBarOpacityLight;
+  double? get appBarOpacityLight => _appBarOpacityLight;
   void setAppBarOpacityLight(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _appBarOpacityLight) return;
     _appBarOpacityLight = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAppBarOpacityLight, value));
   }
 
-  late double _appBarOpacityDark;
-  double get appBarOpacityDark => _appBarOpacityDark;
+  late double? _appBarOpacityDark;
+  double? get appBarOpacityDark => _appBarOpacityDark;
   void setAppBarOpacityDark(double? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _appBarOpacityDark) return;
     _appBarOpacityDark = value;
     if (notify) notifyListeners();

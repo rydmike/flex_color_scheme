@@ -142,11 +142,13 @@ String generateThemeDartCode(ThemeController controller) {
               controller.appBarBackgroundSchemeColorDark != null)
       ? ''
       : '  appBarStyle: ${controller.appBarStyleDark},\n';
-  final String appBarOpacityLight = controller.appBarOpacityLight != 1
-      ? '  appBarOpacity: ${controller.appBarOpacityLight.toStringAsFixed(2)},\n'
+  final String appBarOpacityLight = controller.appBarOpacityLight != null &&
+          controller.appBarOpacityLight != 1
+      ? '  appBarOpacity: ${controller.appBarOpacityLight!.toStringAsFixed(2)},\n'
       : '';
-  final String appBarOpacityDark = controller.appBarOpacityDark != 1
-      ? '  appBarOpacity: ${controller.appBarOpacityDark.toStringAsFixed(2)},\n'
+  final String appBarOpacityDark = controller.appBarOpacityLight != null &&
+          controller.appBarOpacityDark != 1
+      ? '  appBarOpacity: ${controller.appBarOpacityDark!.toStringAsFixed(2)},\n'
       : '';
   final String transparentStatusBar = controller.transparentStatusBar
       ? ''
