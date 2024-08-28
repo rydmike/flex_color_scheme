@@ -3459,9 +3459,9 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                     Expanded(
                       child: Column(
                         children: <Widget>[
-                          SwitchListTile(
-                            title: const Text('Expand and collapse'),
-                            subtitle:
+                          SwitchListTileReveal(
+                            title: const Text('Expanded'),
+                            subtitleReveal:
                                 const Text('ON to expand  OFF to collapse\n'
                                     'Only used for local control of Rail '
                                     'presentation.'),
@@ -5227,16 +5227,30 @@ class CardShowcase extends StatelessWidget {
           children: <Widget>[
             if (explain)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 child: Text(
                   'In M2 mode default background color is theme.cardColor, '
-                  'which typically is set to colorScheme.surface.\n'
-                  'In M3 mode before Flutter 3.22 background defaults to '
-                  'surface color,  it gets elevation based surfaceTint.\n'
-                  'In M3 mode after Flutter 3.22 background defaults to '
-                  'surfaceContainerLow color,  it does not get elevation '
-                  'based surfaceTint by default.\n'
-                  'In M2 mode surfaceTint has no effect even if specified.\n'
+                  'which is typically set to colorScheme.surface.',
+                  style: denseBody,
+                ),
+              ),
+            if (explain)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                child: Text(
+                  'In M3 mode, before Flutter 3.22, its background defaults to '
+                  'surface color and it gets elevation based surfaceTint. '
+                  'After Flutter 3.22, the background defaults to '
+                  'surfaceContainerLow and it does not get any elevation '
+                  'based surfaceTint by default.',
+                  style: denseBody,
+                ),
+              ),
+            if (explain)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                child: Text(
+                  'In M2 mode surfaceTint has no effect, even if specified. '
                   'Card gets elevation shadow by default in both '
                   'M2 and M3 mode.',
                   style: denseBody,
