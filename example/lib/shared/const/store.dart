@@ -900,6 +900,12 @@ class Store {
   // We use NULL as default, on this nullable setting.
   static const Color? defaultTabBarDividerColor = null;
 
+  // Key used to read and save the tabBarTabAlignment value.
+  static const String keyTabBarTabAlignment = 'tabBarTabAlignment';
+  // Default value for the tabBarTabAlignment, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const TabAlignment? defaultTabBarTabAlignment = null;
+
   // Drawer SETTINGS.
   // ===========================================================================
 
