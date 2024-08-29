@@ -646,6 +646,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= SplashTypeEnum.values.length) return defaultValue;
         return SplashTypeEnum.values[value] as T;
       }
+      // T is TabAlignment is nullable value.
+      if (sameTypes<T, TabAlignment?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded TabAlignment?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= TabAlignment.values.length) return defaultValue;
+        return TabAlignment.values[value] as T;
+      }
+      // T is TabAlignment none nullable value.
+      if (sameTypes<T, TabAlignment>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded TabAlignment : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= TabAlignment.values.length) return defaultValue;
+        return TabAlignment.values[value] as T;
+      }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
       debugPrint(' Error message ...... : $e');
