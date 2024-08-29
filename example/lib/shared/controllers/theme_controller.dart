@@ -379,8 +379,12 @@ class ThemeController with ChangeNotifier {
         Store.defaultAppBarBackgroundSchemeColorDark);
     //
     // BottomAppBar SETTINGS.
-    _bottomAppBarSchemeColor = await _themeService.load(
-        Store.keyBottomAppBarSchemeColor, Store.defaultBottomAppBarSchemeColor);
+    _bottomAppBarSchemeColorLight = await _themeService.load(
+        Store.keyBottomAppBarSchemeColorLight,
+        Store.defaultBottomAppBarSchemeColorLight);
+    _bottomAppBarSchemeColorDark = await _themeService.load(
+        Store.keyBottomAppBarSchemeColorDark,
+        Store.defaultBottomAppBarSchemeColorDark);
     //
     // TabBar SETTINGS.
     _tabBarStyle = await _themeService.load(
@@ -1005,7 +1009,10 @@ class ThemeController with ChangeNotifier {
         Store.defaultAppBarBackgroundSchemeColorDark, false);
     //
     // BottomAppBar SETTINGS.
-    setBottomAppBarSchemeColor(Store.defaultBottomAppBarSchemeColor, false);
+    setBottomAppBarSchemeColorLight(
+        Store.defaultBottomAppBarSchemeColorLight, false);
+    setBottomAppBarSchemeColorDark(
+        Store.defaultBottomAppBarSchemeColorDark, false);
     //
     // TabBar SETTINGS.
     setTabBarStyle(Store.defaultTabBarStyle, false);
@@ -3469,13 +3476,25 @@ class ThemeController with ChangeNotifier {
   // BottomAppBar SETTINGS.
   // ===========================================================================
 
-  late SchemeColor? _bottomAppBarSchemeColor;
-  SchemeColor? get bottomAppBarSchemeColor => _bottomAppBarSchemeColor;
-  void setBottomAppBarSchemeColor(SchemeColor? value, [bool notify = true]) {
-    if (value == _bottomAppBarSchemeColor) return;
-    _bottomAppBarSchemeColor = value;
+  late SchemeColor? _bottomAppBarSchemeColorLight;
+  SchemeColor? get bottomAppBarSchemeColorLight =>
+      _bottomAppBarSchemeColorLight;
+  void setBottomAppBarSchemeColorLight(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _bottomAppBarSchemeColorLight) return;
+    _bottomAppBarSchemeColorLight = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyBottomAppBarSchemeColor, value));
+    unawaited(_themeService.save(Store.keyBottomAppBarSchemeColorLight, value));
+  }
+
+  late SchemeColor? _bottomAppBarSchemeColorDark;
+  SchemeColor? get bottomAppBarSchemeColorDark => _bottomAppBarSchemeColorDark;
+  void setBottomAppBarSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _bottomAppBarSchemeColorDark) return;
+    _bottomAppBarSchemeColorDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomAppBarSchemeColorDark, value));
   }
 
   // TabBar SETTINGS.

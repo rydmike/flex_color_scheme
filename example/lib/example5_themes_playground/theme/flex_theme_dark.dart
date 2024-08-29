@@ -294,7 +294,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             appBarScrolledUnderElevation:
                 controller.appBarScrolledUnderElevationDark,
             // BottomAppBarSettings.
-            bottomAppBarSchemeColor: controller.bottomAppBarSchemeColor,
+            bottomAppBarSchemeColor: controller.bottomAppBarSchemeColorDark,
             // TabBar settings.
             tabBarItemSchemeColor: controller.tabBarItemSchemeColorDark,
             tabBarUnselectedItemSchemeColor:

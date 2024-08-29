@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class BottomAppBarSearchBarSettings extends StatelessWidget {
@@ -30,6 +31,11 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -53,123 +59,67 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
-          ListTile(
+          SliderListTileReveal(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Light BottomAppBar elevation'),
-            subtitle: Slider(
-              min: -0.5,
-              max: 20,
-              divisions: 41,
-              label: !controller.useFlexColorScheme ||
-                      controller.bottomAppBarElevationLight == null
-                  ? useMaterial3
-                      ? 'default 3'
-                      : 'default 8'
-                  : (controller.bottomAppBarElevationLight
-                          ?.toStringAsFixed(1) ??
-                      ''),
-              value: controller.useFlexColorScheme
-                  ? controller.bottomAppBarElevationLight ?? -0.5
-                  : -0.5,
-              onChanged: controller.useFlexColorScheme
-                  ? (double value) {
-                      controller.setBottomAppBarElevationLight(
-                          value < 0 ? null : value);
+            title: const Text('Light elevation'),
+            value: controller.bottomAppBarElevationLight,
+            onChanged: controller.setBottomAppBarElevationLight,
+            min: 0,
+            max: 20,
+            divisions: 40,
+            valueHeading: 'ELEV',
+            valueDecimalPlaces: 1,
+            valueDefaultLabel: useMaterial3 ? '3' : '8',
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Light background color'),
+            labelForDefault: useMaterial3
+                ? 'default (surfaceContainer)'
+                : 'default (surface)',
+            index: controller.bottomAppBarSchemeColorLight?.index ?? -1,
+            onChanged: enableControl
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setBottomAppBarSchemeColorLight(null);
+                    } else {
+                      controller.setBottomAppBarSchemeColorLight(
+                          SchemeColor.values[index]);
                     }
-                  : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'ELEV',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Text(
-                    !controller.useFlexColorScheme ||
-                            controller.bottomAppBarElevationLight == null
-                        ? useMaterial3
-                            ? 'default 3'
-                            : 'default 8'
-                        : (controller.bottomAppBarElevationLight
-                                ?.toStringAsFixed(1) ??
-                            ''),
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
+                  }
+                : null,
           ),
         ] else ...<Widget>[
-          ListTile(
+          SliderListTileReveal(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark BottomAppBar elevation'),
-            subtitle: Slider(
-              min: -0.5,
-              max: 20,
-              divisions: 41,
-              label: !controller.useFlexColorScheme ||
-                      controller.bottomAppBarElevationDark == null
-                  ? useMaterial3
-                      ? 'default 3'
-                      : 'default 8'
-                  : (controller.bottomAppBarElevationDark?.toStringAsFixed(1) ??
-                      ''),
-              value: controller.useFlexColorScheme
-                  ? controller.bottomAppBarElevationDark ?? -0.5
-                  : -0.5,
-              onChanged: controller.useFlexColorScheme
-                  ? (double value) {
-                      controller.setBottomAppBarElevationDark(
-                          value < 0 ? null : value);
+            title: const Text('Dark elevation'),
+            value: controller.bottomAppBarElevationDark,
+            onChanged: controller.setBottomAppBarElevationDark,
+            min: 0,
+            max: 20,
+            divisions: 40,
+            valueHeading: 'ELEV',
+            valueDecimalPlaces: 1,
+            valueDefaultLabel: useMaterial3 ? '3' : '8',
+          ),
+          ColorSchemePopupMenu(
+            title: const Text('Dark background color'),
+            labelForDefault: useMaterial3
+                ? 'default (surfaceContainer)'
+                : 'default (surface)',
+            index: controller.bottomAppBarSchemeColorDark?.index ?? -1,
+            onChanged: enableControl
+                ? (int index) {
+                    if (index < 0 || index >= SchemeColor.values.length) {
+                      controller.setBottomAppBarSchemeColorDark(null);
+                    } else {
+                      controller.setBottomAppBarSchemeColorDark(
+                          SchemeColor.values[index]);
                     }
-                  : null,
-            ),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'ELEV',
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Text(
-                    !controller.useFlexColorScheme ||
-                            controller.bottomAppBarElevationDark == null
-                        ? useMaterial3
-                            ? 'default 3'
-                            : 'default 8'
-                        : (controller.bottomAppBarElevationDark
-                                ?.toStringAsFixed(1) ??
-                            ''),
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
+                  }
+                : null,
           ),
         ],
-        ColorSchemePopupMenu(
-          title: const Text('Background color for light and dark mode'),
-          labelForDefault:
-              useMaterial3 ? 'default (surfaceContainer)' : 'default (surface)',
-          index: controller.bottomAppBarSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setBottomAppBarSchemeColor(null);
-                  } else {
-                    controller
-                        .setBottomAppBarSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
+
         const ListTileReveal(
           dense: true,
           title: Text('Theming info'),
