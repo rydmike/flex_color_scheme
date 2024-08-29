@@ -381,3 +381,27 @@ class SplashTypeEnumAdapter extends TypeAdapter<SplashTypeEnum?> {
   @override
   int get typeId => 169;
 }
+
+/// A Hive data type adapter for enum [TabAlignment], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class TabAlignmentAdapter extends TypeAdapter<TabAlignment?> {
+  @override
+  TabAlignment? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= TabAlignment.values.length) {
+      return null;
+    } else {
+      return TabAlignment.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TabAlignment? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 170;
+}
