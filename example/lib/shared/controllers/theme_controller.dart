@@ -420,6 +420,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultTabBarIndicatorTopRadius);
     _tabBarDividerColor = await _themeService.load(
         Store.keyTabBarDividerColor, Store.defaultTabBarDividerColor);
+    _tabBarTabAlignment = await _themeService.load(
+        Store.keyTabBarTabAlignment, Store.defaultTabBarTabAlignment);
     //
     // Drawer SETTINGS.
     _drawerBorderRadius = await _themeService.load(
@@ -1037,6 +1039,7 @@ class ThemeController with ChangeNotifier {
     setTabBarIndicatorWeight(Store.defaultTabBarIndicatorWeight, false);
     setTabBarIndicatorTopRadius(Store.defaultTabBarIndicatorTopRadius, false);
     setTabBarDividerColor(Store.defaultTabBarDividerColor, false);
+    setTabBarTabAlignment(Store.defaultTabBarTabAlignment, false);
     //
     // Drawer SETTINGS.
     setDrawerBorderRadius(Store.defaultDrawerBorderRadius, false);
@@ -3634,6 +3637,15 @@ class ThemeController with ChangeNotifier {
     _tabBarDividerColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTabBarDividerColor, value));
+  }
+
+  late TabAlignment? _tabBarTabAlignment;
+  TabAlignment? get tabBarTabAlignment => _tabBarTabAlignment;
+  void setTabBarTabAlignment(TabAlignment? value, [bool notify = true]) {
+    if (value == _tabBarTabAlignment) return;
+    _tabBarTabAlignment = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTabBarTabAlignment, value));
   }
 
   // Drawer SETTINGS.
