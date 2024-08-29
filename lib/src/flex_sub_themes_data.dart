@@ -2482,6 +2482,7 @@ class FlexSubThemesData with Diagnosticable {
   /// not be drawn.
   final Color? tabBarDividerColor;
 
+  // TODO(rydmike): Open issue about using TabAlignment. Theme variant issue.
   /// Specifies the horizontal alignment of the tabs within a [TabBar].
   ///
   /// If [TabBar.isScrollable] is false, only [TabAlignment.fill] and
@@ -2500,6 +2501,30 @@ class FlexSubThemesData with Diagnosticable {
   /// If [TabBarTheme.tabAlignment] is null and [ThemeData.useMaterial3] is
   /// false, then [TabAlignment.center] is used if [isScrollable] is true,
   /// otherwise [TabAlignment.fill] is used.
+  ///
+  /// In M3 the default is [TabAlignment.startOffset] if [TabBar] property
+  /// [isScrollable] is true, if false the default is [TabAlignment.fill].
+  ///
+  /// In M2 the default is [TabAlignment.start] if [TabBar] property
+  /// [isScrollable] is true, if false the default is [TabAlignment.fill].
+  ///
+  /// **NOTE:**
+  ///
+  /// [TabAlignment.start] and [TabAlignment.startOffset] are only usable
+  /// when widget sets [TabBar.isScrollable] to true. If used when
+  /// [TabBar.isScrollable] is false, the [TabBar] will throw an exception
+  /// error.
+  ///
+  /// Likewise [TabAlignment.fill] is only usable when widgets sets
+  /// [TabBar.isScrollable] to false. If used when [TabBar.isScrollable] is
+  /// true, the [TabBar] will throw an exception error.
+  ///
+  /// Only universal theming option usable in a theme, other than widget
+  /// default behavior is [TabAlignment.center]. This is not a good
+  /// design setup. We need to be able to specify the themed alignment
+  /// for both scrollable and non-scrollable [TabBar]s so we can style them
+  /// with different alignments. That do not throw for the used [TabBar]
+  /// variant.
   final TabAlignment? tabBarTabAlignment;
 
   // TODO(rydmike): Add TabIndicatorAnimation when it lands in stable.
