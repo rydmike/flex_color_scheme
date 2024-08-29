@@ -46,10 +46,16 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 **TODO**
  
 - Add TabBar theme property `tabAlignment`. 
-  - FlexSubThemesData: TabAlignment? tabBarAlignment
-  - Store: keyTabBarAlignment, defaultTabBarAlignment
-  - ThemeController: SetTabBarAlignment, tabBarAlignment
- 
+  - FlexSubThemesData: TabAlignment? tabBarTabAlignment
+  - Store: keyTabBarTabAlignment, defaultTabBarTabAlignment
+  - ThemeController: setTabBarTabAlignment, tabBarTabAlignment
+
+// TODO When it lands in stable
+- Add TabBar theme property `indicatorAnimation`.
+  - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
+  - Store: keyTabBarIndicatorAnimation, defaultTabBarIndicatorAnimation
+  - ThemeController: setTabBarIndicatorAnimation, tabBarIndicatorAnimation
+  
 - AppBar: Option to decouple foreground/background colors.
   - FlexSubThemesData: SchemeColor? appBarForegroundSchemeColor
   - Store: keyAppBarForegroundSchemeColor, defaultAppBarForegroundSchemeColor
@@ -65,11 +71,6 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   - Store: keyInputDecoratorPrefixIconSchemeColor, defaultInputDecoratorPrefixIconSchemeColor
   - ThemeController: setInputDecoratorPrefixIconSchemeColor, inputDecoratorPrefixIconSchemeColor
 
-- DatePicker: Option to style and remove divider.
-  - FlexSubThemesData: SchemeColor? datePickerDividerSchemeColor
-  - Store: keyDatePickerDividerSchemeColor, defaultDatePickerDividerSchemeColor
-  - ThemeController: setDatePickerDividerSchemeColor, datePickerDividerSchemeColor
- 
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
   - This is an issue I wrote down a long time ago, have to take a new look at it.
 
