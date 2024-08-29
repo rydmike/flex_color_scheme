@@ -839,9 +839,15 @@ String generateThemeDartCode(ThemeController controller) {
   //
   // BottomAppBar setup CODE
   //
-  final String bottomAppBarSchemeColor = controller.bottomAppBarSchemeColor !=
+  final String bottomAppBarSchemeColorLight = controller
+              .bottomAppBarSchemeColorLight !=
           null
-      ? '    bottomAppBarSchemeColor: ${controller.bottomAppBarSchemeColor},\n'
+      ? '    bottomAppBarSchemeColor: ${controller.bottomAppBarSchemeColorLight},\n'
+      : '';
+  final String bottomAppBarSchemeColorDark = controller
+              .bottomAppBarSchemeColorDark !=
+          null
+      ? '    bottomAppBarSchemeColor: ${controller.bottomAppBarSchemeColorDark},\n'
       : '';
   //
   // TabBar setup CODE
@@ -1356,7 +1362,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$appBarBackgroundSchemeColorLight'
           '$appBarScrolledUnderElevationLight'
           //
-          '$bottomAppBarSchemeColor'
+          '$bottomAppBarSchemeColorLight'
           //
           '$tabBarItemSchemeColorLight'
           '$tabBarUnselectedItemSchemeColorLight'
@@ -1579,7 +1585,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$appBarBackgroundSchemeColorDark'
           '$appBarScrolledUnderElevationDark'
           //
-          '$bottomAppBarSchemeColor'
+          '$bottomAppBarSchemeColorDark'
           //
           '$tabBarItemSchemeColorDark'
           '$tabBarUnselectedItemSchemeColorDark'

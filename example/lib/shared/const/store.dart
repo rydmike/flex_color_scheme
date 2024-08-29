@@ -798,11 +798,19 @@ class Store {
   // BottomAppBar SETTINGS.
   // ===========================================================================
 
-  // Key used to read and save the bottomAppBarSchemeColor value.
-  static const String keyBottomAppBarSchemeColor = 'bottomAppBarSchemeColor';
-  // Default value for the bottomAppBarSchemeColor, also used to reset settings.
-  // We use NULL as default, on nullable settings.
-  static const SchemeColor? defaultBottomAppBarSchemeColor = null;
+  // Key used to read and save the bottomAppBarSchemeColorLight value.
+  static const String keyBottomAppBarSchemeColorLight =
+      'bottomAppBarSchemeColorLight';
+  // Default value for the bottomAppBarSchemeColorLight, also used to reset
+  // settings. We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomAppBarSchemeColorLight = null;
+
+  // Key used to read and save the bottomAppBarSchemeColorDark value.
+  static const String keyBottomAppBarSchemeColorDark =
+      'bottomAppBarSchemeColorDark';
+  // Default value for the bottomAppBarSchemeColorDark, also used to reset
+  // settings. We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultBottomAppBarSchemeColorDark = null;
 
   // TabBar SETTINGS.
   // ===========================================================================
