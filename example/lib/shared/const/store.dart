@@ -1735,6 +1735,13 @@ class Store {
   // reset settings.
   static const SchemeColor? defaultDatePickerHeaderBackgroundSchemeColor = null;
 
+  // Key used to read and save the datePickerDividerSchemeColor value.
+  static const String keyDatePickerDividerSchemeColor =
+      'datePickerDividerSchemeColor';
+  // Default value for the datePickerDividerSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDatePickerDividerSchemeColor = null;
+
   // Key used to read and save the useInputDecoratorThemeInDialogs value.
   static const String keyUseInputDecoratorThemeInDialogs =
       'useInputDecoratorThemeInDialogs';

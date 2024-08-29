@@ -555,6 +555,22 @@ class DialogSettings extends StatelessWidget {
                 }
               : null,
         ),
+        ColorSchemePopupMenu(
+          title: const Text('Divider color'),
+          labelForDefault:
+              useMaterial3 ? 'outlineVariant' : 'No Divider in build in M2',
+          index: controller.datePickerDividerSchemeColor?.index ?? -1,
+          onChanged: enableControl && useMaterial3
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setDatePickerDividerSchemeColor(null);
+                  } else {
+                    controller.setDatePickerDividerSchemeColor(
+                        SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),

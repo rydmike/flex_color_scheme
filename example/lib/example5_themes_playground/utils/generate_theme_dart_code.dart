@@ -796,6 +796,11 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    datePickerHeaderBackgroundSchemeColor: ${controller.datePickerHeaderBackgroundSchemeColor},\n'
       : '';
+  final String datePickerDividerSchemeColor = controller
+              .datePickerDividerSchemeColor !=
+          null
+      ? '    datePickerDividerSchemeColor: ${controller.datePickerDividerSchemeColor},\n'
+      : '';
   final String datePickerDialogRadius = controller
               .datePickerDialogBorderRadius !=
           null
@@ -1348,11 +1353,14 @@ String generateThemeDartCode(ThemeController controller) {
           '$dialogBorderRadius'
           '$adaptiveDialogRadius'
           '$dialogRadiusAdaptive'
-          '$datePickerDialogRadius'
+          '$useInputDecoratorThemeInDialogs'
+          //
           '$timePickerDialogRadius'
           '$timePickerElementRadius'
-          '$useInputDecoratorThemeInDialogs'
+          //
+          '$datePickerDialogRadius'
           '$datePickerHeaderBackgroundSchemeColor'
+          '$datePickerDividerSchemeColor'
           //
           '$snackBarRadius'
           '$snackBarElevation'
@@ -1571,11 +1579,14 @@ String generateThemeDartCode(ThemeController controller) {
           '$dialogBorderRadius'
           '$adaptiveDialogRadius'
           '$dialogRadiusAdaptive'
-          '$datePickerDialogRadius'
+          '$useInputDecoratorThemeInDialogs'
+          //
           '$timePickerDialogRadius'
           '$timePickerElementRadius'
-          '$useInputDecoratorThemeInDialogs'
+          //
+          '$datePickerDialogRadius'
           '$datePickerHeaderBackgroundSchemeColor'
+          '$datePickerDividerSchemeColor'
           //
           '$snackBarRadius'
           '$snackBarElevation'
