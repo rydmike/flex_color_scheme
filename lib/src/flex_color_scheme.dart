@@ -7187,7 +7187,6 @@ class FlexColorScheme with Diagnosticable {
               shadowColor: useShadow ? colorScheme.shadow : null,
               toolbarTextStyle: subTheme.appBarToolbarTextStyle,
               titleTextStyle: subTheme.appBarTitleTextStyle,
-
               // Surface tint on AppBar is removed via the scroll under setting.
               surfaceTintColor: noScrollUnder ? Colors.transparent : null,
             )
@@ -7431,6 +7430,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               headerBackgroundSchemeColor:
                   subTheme.datePickerHeaderBackgroundSchemeColor,
+              dividerSchemeColor: subTheme.datePickerDividerSchemeColor,
               elevation: subTheme.dialogElevation,
               radius: subTheme.datePickerDialogRadius ??
                   platformDialogRadius ??

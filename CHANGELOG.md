@@ -188,20 +188,24 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - `FlexSubThemes.segmentedButtonTheme` **uses** `FlexSubThemesData.segmentedButtonTextStyle` for its `textStyle`.  
   - `FlexSubThemes.snackBarTheme` **uses** `FlexSubThemesData.snackBarContentTextStyle` for its `contentTextStyle`.
 
-- Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
+
 - Added `useCupertinoStyle` property to `FlexSubThemes.switchTheme`.
+- Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
 
 
-- Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
 - Added `secondarySelectedSchemeColor` property to `FlexSubThemes.chipTheme`.
+- Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
 
 
-- Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
+- Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`.
+- Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
+
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`.
+- Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 
 
-- Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`.
+- Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
 
 
 - Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`.
@@ -276,6 +280,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In the "**Switch, Checkbox and Radio**" settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface "**Color Blends**" settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
 - Added separate controls and code gen for light and dark mode background color selection for the `BottomASppBar` on settings panel **BottomAppBar and SearchBar**.
+- Added divider color selection to **Dialogs** settings panel for the the DatePicker divider color. Setting it to transparent will hide the divider in M3 mode, in M2 mode the Divider does not exist.
 
 **CHANGE**
 

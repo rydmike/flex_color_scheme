@@ -330,6 +330,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.datePickerHeaderBackgroundSchemeColor,
     this.datePickerDialogRadius,
+    this.datePickerDividerSchemeColor,
     //
     this.timePickerDialogRadius,
     this.timePickerElementRadius,
@@ -2216,6 +2217,14 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/dialogs/specs
   final double? datePickerDialogRadius;
 
+  /// The color of the divider in the [DatePickerDialog].
+  ///
+  /// If not defined, defaults to [ColorScheme.outlineVariant] in M3. In M2
+  /// the divider does not exist in the [DatePickerDialog] build.
+  ///
+  /// Set it to [SchemeColor.transparent] to get rid of the divider in M3.
+  final SchemeColor? datePickerDividerSchemeColor;
+
   /// Border radius value for [TimePickerDialog].
   ///
   /// Specifying this border radius value for the [TimePickerDialog] overrides
@@ -3401,6 +3410,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     final SchemeColor? datePickerHeaderBackgroundSchemeColor,
     final double? datePickerDialogRadius,
+    final SchemeColor? datePickerDividerSchemeColor,
+    //
     final double? timePickerDialogRadius,
     final double? timePickerElementRadius,
     final TextStyle? timePickerDayPeriodTextStyle,
@@ -3765,6 +3776,8 @@ class FlexSubThemesData with Diagnosticable {
               this.datePickerHeaderBackgroundSchemeColor,
       datePickerDialogRadius:
           datePickerDialogRadius ?? this.datePickerDialogRadius,
+      datePickerDividerSchemeColor:
+          datePickerDividerSchemeColor ?? this.datePickerDividerSchemeColor,
       //
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
@@ -4175,6 +4188,7 @@ class FlexSubThemesData with Diagnosticable {
         other.datePickerHeaderBackgroundSchemeColor ==
             datePickerHeaderBackgroundSchemeColor &&
         other.datePickerDialogRadius == datePickerDialogRadius &&
+        other.datePickerDividerSchemeColor == datePickerDividerSchemeColor &&
         //
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.timePickerElementRadius == timePickerElementRadius &&
@@ -4498,6 +4512,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         datePickerHeaderBackgroundSchemeColor,
         datePickerDialogRadius,
+        datePickerDividerSchemeColor,
         //
         timePickerDialogRadius,
         timePickerElementRadius,
@@ -4904,6 +4919,8 @@ class FlexSubThemesData with Diagnosticable {
         datePickerHeaderBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'datePickerDialogRadius', datePickerDialogRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'datePickerDividerSchemeColor', datePickerDividerSchemeColor));
     //
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));

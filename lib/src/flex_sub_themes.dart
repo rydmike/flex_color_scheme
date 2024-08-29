@@ -1976,6 +1976,14 @@ sealed class FlexSubThemes {
     /// [FlexSubThemesData] to [SchemeColor.surface].
     final SchemeColor? backgroundSchemeColor,
 
+    /// The color of the divider in the [DatePickerDialog].
+    ///
+    /// If not defined, defaults to [ColorScheme.outlineVariant] in M3. In M2
+    /// the divider does not exist in the [DatePickerDialog] build.
+    ///
+    /// Set it to [SchemeColor.transparent] to get rid of the divider in M3.
+    final SchemeColor? dividerSchemeColor,
+
     /// Overrides the header's default background fill color.
     ///
     /// The dialog's header displays the currently selected date.
@@ -2105,10 +2113,15 @@ sealed class FlexSubThemes {
         ? null
         : schemeColorPair(headerBackgroundSchemeColor, colorScheme);
 
+    final Color? dividerColor = dividerSchemeColor == null
+        ? null
+        : schemeColor(dividerSchemeColor, colorScheme);
+
     return DatePickerThemeData(
       backgroundColor: background,
       headerBackgroundColor: headerBackgroundColor,
       headerForegroundColor: headerForegroundColor,
+      dividerColor: dividerColor,
       elevation: elevation ?? kDialogElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(

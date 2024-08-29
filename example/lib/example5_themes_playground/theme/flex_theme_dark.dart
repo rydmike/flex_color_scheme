@@ -281,8 +281,11 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             timePickerDialogRadius: controller.timePickerDialogBorderRadius,
             useInputDecoratorThemeInDialogs:
                 controller.useInputDecoratorThemeInDialogs,
+            //
             datePickerHeaderBackgroundSchemeColor:
                 controller.datePickerHeaderBackgroundSchemeColor,
+            datePickerDividerSchemeColor:
+                controller.datePickerDividerSchemeColor,
             // SnackBar settings.
             snackBarRadius: controller.snackBarBorderRadius,
             snackBarElevation: controller.snackBarElevation,
