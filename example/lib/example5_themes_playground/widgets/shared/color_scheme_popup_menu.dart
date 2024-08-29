@@ -54,8 +54,8 @@ class ColorSchemePopupMenu extends StatelessWidget {
         position: PopupMenuPosition.under,
         offset: const Offset(0, -4),
         constraints: const BoxConstraints(
-          minWidth: 280,
-          maxWidth: 280,
+          minWidth: 300,
+          maxWidth: 300,
           maxHeight: 600,
         ),
         initialValue: useDefault ? 0 : index + 1,
