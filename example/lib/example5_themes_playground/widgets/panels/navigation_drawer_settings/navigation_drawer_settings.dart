@@ -6,6 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class NavigationDrawerSettings extends StatelessWidget {
@@ -36,18 +37,22 @@ class NavigationDrawerSettings extends StatelessWidget {
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String drawerRadiusDefaultLabel =
         controller.drawerBorderRadius == null && effectiveRadius == null
-            ? 'default 16'
+            ? '16 dp'
             : controller.drawerBorderRadius == null && effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
     final String indicatorDefaultLabel =
         controller.drawerIndicatorBorderRadius == null &&
                 effectiveRadius == null
-            ? 'default (stadium)'
+            ? 'stadium'
             : controller.drawerIndicatorBorderRadius == null &&
                     effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
@@ -65,6 +70,8 @@ class NavigationDrawerSettings extends StatelessWidget {
         // ignore: lines_longer_than_80_chars
         : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.drawerBackgroundSchemeColor!).index].name})';
 
+    // Keeping the logic for the M2 different logic for width here, in case
+    // it is needed again in the future.
     final double derivedIndicatorWidth =
         (controller.drawerWidth ?? (useMaterial3 ? 304 : 304)) - 2 * 12;
 
@@ -92,13 +99,13 @@ class NavigationDrawerSettings extends StatelessWidget {
         const SizedBox(height: 16),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: controller.useFlexColorScheme
+          labelForDefault: enableControl
               ? 'default (surfaceContainerLow)'
               : useMaterial3
                   ? 'default (surfaceContainerLow)'
                   : 'default (ThemeData.canvasColor)',
           index: controller.drawerBackgroundSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setDrawerBackgroundSchemeColor(null);
@@ -109,168 +116,43 @@ class NavigationDrawerSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Border radius'),
-          subtitle: Slider(
-            min: -1,
-            max: 50,
-            divisions: 51,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerBorderRadius == null ||
-                        (controller.drawerBorderRadius ?? -1) < 0
-                    ? drawerRadiusDefaultLabel
-                    : (controller.drawerBorderRadius?.toStringAsFixed(0) ?? '')
-                : useMaterial3
-                    ? 'default 16'
-                    : 'default 0',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDrawerBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.drawerBorderRadius == null ||
-                              (controller.drawerBorderRadius ?? -1) < 0
-                          ? drawerRadiusDefaultLabel
-                          : (controller.drawerBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3
-                          ? 'default 16'
-                          : 'default 0',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Radius'),
+          value: controller.drawerBorderRadius,
+          onChanged: controller.setDrawerBorderRadius,
+          min: 0,
+          max: 50,
+          divisions: 50,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: drawerRadiusDefaultLabel,
+          valueDefaultDisabledLabel: useMaterial3 ? '16 dp' : '0 dp',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Elevation'),
-          subtitle: Slider(
-            min: -1,
-            max: 20,
-            divisions: 21,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerElevation == null ||
-                        (controller.drawerElevation ?? -1) < 0
-                    ? useMaterial3
-                        ? 'default 1'
-                        : 'default 16'
-                    : (controller.drawerElevation?.toStringAsFixed(0) ?? '')
-                : useMaterial3
-                    ? 'default 1'
-                    : 'default 16',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerElevation ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDrawerElevation(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'ELEV',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.drawerElevation == null ||
-                              (controller.drawerElevation ?? -1) < 0
-                          ? useMaterial3
-                              ? 'default 1'
-                              : 'default 16'
-                          : (controller.drawerElevation?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3
-                          ? 'default 1'
-                          : 'default 16',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.drawerElevation,
+          onChanged: controller.setDrawerElevation,
+          min: 0,
+          max: 20,
+          divisions: 20,
+          valueHeading: 'ELEV',
+          valueDecimalPlaces: 0,
+          valueDefaultLabel: useMaterial3 ? '1' : '16',
         ),
-        const SizedBox(height: 16),
-        // TODO(rydmike): Change M3 Drawer width default info when SDK is fixed.
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Width'),
-          subtitle: Slider(
-            min: 199,
-            max: 500,
-            divisions: 301,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerWidth == null ||
-                        (controller.drawerWidth ?? 199) < 200
-                    ? useMaterial3
-                        ? 'default 304'
-                        : 'default 304'
-                    : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
-                : useMaterial3
-                    ? 'default 304' // Should be 360, but is 304, SDK BUG.
-                    : 'default 304',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerWidth ?? 199
-                : 199,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDrawerWidth(
-                        value < 200 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'WIDTH',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.drawerWidth == null ||
-                              (controller.drawerWidth ?? 199) < 200
-                          ? useMaterial3
-                              ? 'default 304'
-                              : 'default 304'
-                          : (controller.drawerWidth?.toStringAsFixed(0) ?? '')
-                      : useMaterial3
-                          ? 'default 304' // Should be 360, but is 304, SDK BUG.
-                          : 'default 304',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.drawerWidth,
+          onChanged: controller.setDrawerWidth,
+          min: 200,
+          max: 500,
+          divisions: 300,
+          valueHeading: 'WIDTH',
+          valueDecimalPlaces: 0,
+          valueDefaultLabel: '304 dp',
         ),
         ListTileReveal(
           title: const Text('Width issue'),
@@ -335,7 +217,7 @@ class NavigationDrawerSettings extends StatelessWidget {
           title: const Text('Drawer indicator color'),
           labelForDefault: 'default (secondaryContainer)',
           index: controller.drawerIndicatorSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setDrawerIndicatorSchemeColor(null);
@@ -346,164 +228,52 @@ class NavigationDrawerSettings extends StatelessWidget {
                 }
               : null,
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Indicator opacity'),
-          subtitle: Slider(
-            min: -1,
-            max: 100,
-            divisions: 101,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerIndicatorOpacity == null ||
-                        (controller.drawerIndicatorOpacity ?? -1) < 0
-                    ? 'default (100%)'
-                    : (controller.drawerIndicatorOpacity! * 100)
-                        .toStringAsFixed(0)
-                : 'default (100%)',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerIndicatorOpacity != null
-                    ? controller.drawerIndicatorOpacity! * 100
-                    : -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDrawerIndicatorOpacity(
-                        value < 0 ? null : value / 100);
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'OPACITY',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.drawerIndicatorOpacity == null ||
-                              (controller.drawerIndicatorOpacity ?? -1) < 0
-                          ? 'default (100%)'
-                          // ignore: lines_longer_than_80_chars
-                          : '${(controller.drawerIndicatorOpacity! * 100).toStringAsFixed(0)}%'
-                      : 'default (100%)',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.drawerIndicatorOpacity,
+          onChanged: controller.setDrawerIndicatorOpacity,
+          min: 0,
+          max: 1,
+          divisions: 100,
+          valueDisplayScale: 100,
+          valueDecimalPlaces: 0,
+          valueHeading: 'OPACITY',
+          valueUnitLabel: ' %',
+          valueDefaultLabel: '100 %',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Indicator border radius'),
-          subtitle: Slider(
-            min: -1,
-            max: 50,
-            divisions: 51,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerIndicatorBorderRadius == null ||
-                        (controller.drawerIndicatorBorderRadius ?? -1) < 0
-                    ? indicatorDefaultLabel
-                    : (controller.drawerIndicatorBorderRadius
-                            ?.toStringAsFixed(0) ??
-                        '')
-                : 'default (stadium)',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerIndicatorBorderRadius ?? -1
-                : -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDrawerIndicatorBorderRadius(
-                        value < 0 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.drawerIndicatorBorderRadius == null ||
-                              (controller.drawerIndicatorBorderRadius ?? -1) < 0
-                          ? indicatorDefaultLabel
-                          : (controller.drawerIndicatorBorderRadius
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : 'default (stadium)',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Indicator radius'),
+          value: controller.drawerIndicatorBorderRadius,
+          onChanged: controller.setDrawerIndicatorBorderRadius,
+          min: 0,
+          max: 50,
+          divisions: 50,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: indicatorDefaultLabel,
+          valueDefaultDisabledLabel: 'stadium',
         ),
-        ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+        SliderListTileReveal(
+          enabled: enableControl,
           title: const Text('Indicator width'),
-          subtitle: Slider(
-            min: 199,
-            max: 500,
-            divisions: 301,
-            label: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerIndicatorWidth == null ||
-                        (controller.drawerIndicatorWidth ?? 199) < 200
-                    ? 'computed $derivedIndicatorWidth'
-                    : (controller.drawerIndicatorWidth?.toStringAsFixed(0) ??
-                        '')
-                : useMaterial3
-                    ? 'default ${360 - 2 * 12}'
-                    : 'default ${304 - 2 * 12}',
-            value: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.drawerIndicatorWidth ?? 199
-                : 199,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (double value) {
-                    controller.setDrawerIndicatorWidth(
-                        value < 200 ? null : value.roundToDouble());
-                  }
-                : null,
-          ),
-          trailing: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'WIDTH',
-                  style: theme.textTheme.bodySmall,
-                ),
-                Text(
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.drawerIndicatorWidth == null ||
-                              (controller.drawerIndicatorWidth ?? 199) < 200
-                          ? 'computed $derivedIndicatorWidth'
-                          : (controller.drawerIndicatorWidth
-                                  ?.toStringAsFixed(0) ??
-                              '')
-                      : useMaterial3
-                          ? 'default ${360 - 2 * 12}'
-                          : 'default ${304 - 2 * 12}',
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
+          value: controller.drawerIndicatorWidth,
+          onChanged: controller.setDrawerIndicatorWidth,
+          min: 200,
+          max: 500,
+          divisions: 300,
+          valueHeading: 'WIDTH',
+          valueDecimalPlaces: 0,
+          valueDefaultLabel: '${derivedIndicatorWidth.toStringAsFixed(0)} dp',
+          valueDefaultDisabledLabel: '${304 - 2 * 12} dp',
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
           labelForDefault: onIndicatorDefault,
           index: controller.drawerSelectedItemSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setDrawerSelectedItemSchemeColor(null);
@@ -518,7 +288,7 @@ class NavigationDrawerSettings extends StatelessWidget {
           title: const Text('Unselected item color'),
           labelForDefault: onBackgroundDefault,
           index: controller.drawerUnselectedItemSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
+          onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
                     controller.setDrawerUnselectedItemSchemeColor(null);
