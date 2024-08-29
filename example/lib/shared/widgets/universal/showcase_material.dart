@@ -4290,12 +4290,13 @@ class _ExpansionPanelListShowcaseState
       child: ExpansionPanelList(
         expansionCallback: (int index, bool isExpanded) {
           setState(() {
-            _items[index].isExpanded = !isExpanded;
+            _items[index].isExpanded = isExpanded;
           });
         },
         children:
             _items.map<ExpansionPanel>((ExpansionPanelShowcaseItems item) {
           return ExpansionPanel(
+            canTapOnHeader: true,
             headerBuilder: (BuildContext context, bool isExpanded) {
               return ListTile(
                 title: Text(item.headerValue),
