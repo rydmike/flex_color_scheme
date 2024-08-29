@@ -361,6 +361,9 @@ class FlexSubThemesData with Diagnosticable {
     this.tabBarIndicatorWeight,
     this.tabBarIndicatorTopRadius,
     this.tabBarDividerColor,
+    this.tabBarTabAlignment,
+    // TODO(rydmike): Add TabIndicatorAnimation when it lands in stable.
+    // this.tabBarIndicatorAnimation,
     //
     this.drawerRadius,
     this.drawerElevation,
@@ -2479,6 +2482,42 @@ class FlexSubThemesData with Diagnosticable {
   /// not be drawn.
   final Color? tabBarDividerColor;
 
+  /// Specifies the horizontal alignment of the tabs within a [TabBar].
+  ///
+  /// If [TabBar.isScrollable] is false, only [TabAlignment.fill] and
+  /// [TabAlignment.center] are supported. Otherwise an exception is thrown.
+  ///
+  /// If [TabBar.isScrollable] is true, only [TabAlignment.start],
+  /// [TabAlignment.startOffset], and [TabAlignment.center] are supported.
+  /// Otherwise an exception is thrown.
+  ///
+  /// If this is null, then the value of [TabBarTheme.tabAlignment] is used.
+  ///
+  /// If [TabBarTheme.tabAlignment] is null and [ThemeData.useMaterial3] is
+  /// true, then [TabAlignment.startOffset] is used if [isScrollable] is true,
+  /// otherwise [TabAlignment.fill] is used.
+  ///
+  /// If [TabBarTheme.tabAlignment] is null and [ThemeData.useMaterial3] is
+  /// false, then [TabAlignment.center] is used if [isScrollable] is true,
+  /// otherwise [TabAlignment.fill] is used.
+  final TabAlignment? tabBarTabAlignment;
+
+  // TODO(rydmike): Add TabIndicatorAnimation when it lands in stable.
+  // /// Specifies the animation behavior of the tab indicator in a [TabBar].
+  // ///
+  // /// If this is null, then the value of [TabBarTheme.indicatorAnimation] is
+  // /// used.
+  // /// If that is also null, then the tab indicator will animate linearly if
+  // /// the [indicatorSize] is [TabBarIndicatorSize.tab], otherwise it will
+  // /// animate with an elastic effect if the [indicatorSize] is
+  // /// [TabBarIndicatorSize.label].
+  // ///
+  // /// See also:
+  // ///
+  // ///  * [TabIndicatorAnimation], which specifies the animation behavior of
+  // ///  the tab indicator.
+  // final TabIndicatorAnimation? indicatorAnimation;
+
   /// Border radius value for [Drawer], also used by [NavigationDrawer].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -3441,6 +3480,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? tabBarIndicatorWeight,
     final double? tabBarIndicatorTopRadius,
     final Color? tabBarDividerColor,
+    final TabAlignment? tabBarTabAlignment,
     //
     final double? drawerRadius,
     final double? drawerElevation,
@@ -3827,6 +3867,7 @@ class FlexSubThemesData with Diagnosticable {
       tabBarIndicatorTopRadius:
           tabBarIndicatorTopRadius ?? this.tabBarIndicatorTopRadius,
       tabBarDividerColor: tabBarDividerColor ?? this.tabBarDividerColor,
+      tabBarTabAlignment: tabBarTabAlignment ?? this.tabBarTabAlignment,
       //
       drawerRadius: drawerRadius ?? this.drawerRadius,
       drawerElevation: drawerElevation ?? this.drawerElevation,
@@ -4220,6 +4261,7 @@ class FlexSubThemesData with Diagnosticable {
         other.tabBarIndicatorWeight == tabBarIndicatorWeight &&
         other.tabBarIndicatorTopRadius == tabBarIndicatorTopRadius &&
         other.tabBarDividerColor == tabBarDividerColor &&
+        other.tabBarTabAlignment == tabBarTabAlignment &&
         //
         other.drawerRadius == drawerRadius &&
         other.drawerElevation == drawerElevation &&
@@ -4543,6 +4585,7 @@ class FlexSubThemesData with Diagnosticable {
         tabBarIndicatorWeight,
         tabBarIndicatorTopRadius,
         tabBarDividerColor,
+        tabBarTabAlignment,
         //
         drawerRadius,
         drawerElevation,
@@ -4975,6 +5018,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>(
         'tabBarIndicatorTopRadius', tabBarIndicatorTopRadius));
     properties.add(ColorProperty('tabBarDividerColor', tabBarDividerColor));
+    properties.add(
+        EnumProperty<TabAlignment>('tabBarTabAlignment', tabBarTabAlignment));
     //
     properties.add(DiagnosticsProperty<double>('drawerRadius', drawerRadius));
     properties
