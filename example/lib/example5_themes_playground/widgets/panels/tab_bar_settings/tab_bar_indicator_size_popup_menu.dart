@@ -1,33 +1,88 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../shared/color_scheme_box.dart';
 
 /// Widget used to select used [TabBarIndicatorSize] using a popup menu.
-///
-/// Uses index out out of range of [TabBarIndicatorSize] to represent
-/// and select no selection of [TabBarIndicatorSize] which sets its
-/// value to null in parent, so we can use a selectable item as null input,
-/// to represent default value via no value definition.
 class TabBarIndicatorSizePopupMenu extends StatelessWidget {
   const TabBarIndicatorSizePopupMenu({
     super.key,
-    required this.index,
+    this.value,
     this.onChanged,
+    this.enabled = true,
     this.title,
     this.subtitle,
+    this.subtitleReveal,
     this.contentPadding,
-    this.labelForDefault = 'default (null)',
-    this.popupLabelDefault,
+    this.defaultLabel,
+    this.defaultDisabledLabel,
+    this.dense,
+    this.revealDense,
   });
-  final int index;
-  final ValueChanged<int>? onChanged;
-  final Widget? title;
-  final Widget? subtitle;
-  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
-  final String labelForDefault;
-  final String? popupLabelDefault;
 
-  String _explainTabSize(
+  /// The currently selected value for this popup.
+  ///
+  /// A null value represents the default value selection.
+  final TabBarIndicatorSize? value;
+
+  /// Called when a new value is selected.
+  ///
+  /// The default value selection calls this with null value.
+  /// The other with the choice corresponding to the selected enum value.
+  final ValueChanged<TabBarIndicatorSize?>? onChanged;
+
+  /// Whether this PopupMenu is enabled.
+  ///
+  /// Set to false to disable the popup, it will be displayed as disabled
+  /// along with the title and value trailing labels.
+  final bool enabled;
+
+  /// The main heading content of the Slider tile.
+  ///
+  /// Typically a [Text] widget.
+  final Widget? title;
+
+  /// Additional content displayed below the title.
+  ///
+  /// Typically a [Text] widget.
+  final Widget? subtitle;
+
+  /// Additional content displayed below the subtitle in a reveal animation.
+  ///
+  /// Typically a [Text] widget.
+  final Widget? subtitleReveal;
+
+  /// The [ListTileReveal]'s internal padding.
+  ///
+  /// Insets a [ListTileReveal]'s contents.
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
+  /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
+  final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
+
+  /// If not defined will use response from
+  /// _explainSelection(null, useMaterial3) as default value.
+  final String? defaultLabel;
+
+  /// Override for default selection display label when the control is
+  /// disabled.
+  ///
+  /// If not defined will use defaultLabel.
+  final String? defaultDisabledLabel;
+
+  /// Whether this list tile is part of a vertically dense list.
+  ///
+  /// If this property is null then its value is based on [ListTileTheme.dense].
+  ///
+  /// Dense list tiles default to a smaller height.
+  final bool? dense;
+
+  /// Whether the used reveal part of the ListTile is dense.
+  ///
+  /// If not defined, defaults to true.
+  final bool? revealDense;
+
+  String _explainSelection(
     final TabBarIndicatorSize? style,
     final bool useMaterial3,
   ) {
@@ -45,6 +100,10 @@ class TabBarIndicatorSizePopupMenu extends StatelessWidget {
 
   static const List<Widget> _tabBarWidget = <Widget>[
     Tooltip(
+      message: 'Default',
+      child: Icon(Icons.texture_outlined),
+    ),
+    Tooltip(
       message: 'Width equals entire tab',
       child: Icon(Icons.border_bottom_outlined),
     ),
@@ -52,25 +111,23 @@ class TabBarIndicatorSizePopupMenu extends StatelessWidget {
       message: 'Width equals label',
       child: Icon(Icons.format_underlined_outlined),
     ),
-    Tooltip(
-      message: 'Default',
-      child: Icon(Icons.texture_outlined),
-    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final bool useM3 = theme.useMaterial3;
+    final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelMedium!;
-    final bool enabled = onChanged != null;
-    // Negative value, or index over range are used as null and default value.
-    final bool useDefault =
-        index < 0 || index >= TabBarIndicatorSize.values.length || !enabled;
-    final String styleName = !useDefault
-        ? _explainTabSize(TabBarIndicatorSize.values[index], useM3)
-        : _explainTabSize(null, useM3);
+
+    final String defaultSelectionLabel =
+        (enabled ? null : defaultDisabledLabel) ??
+            defaultLabel ??
+            _explainSelection(null, useMaterial3);
+    final String selectionLabel = enabled && value != null
+        ? _explainSelection(value, useMaterial3)
+        : defaultSelectionLabel;
+
     final IconThemeData selectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
     final IconThemeData unSelectedIconTheme =
@@ -81,16 +138,12 @@ class TabBarIndicatorSizePopupMenu extends StatelessWidget {
       position: PopupMenuPosition.under,
       offset: const Offset(0, -4),
       constraints: const BoxConstraints(maxHeight: 560),
-      initialValue: useDefault ? TabBarIndicatorSize.values.length : index,
+      initialValue: !enabled || value == null ? 0 : value!.index + 1,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
-        // We return -1 for index that reached max length or any negative
-        // value will cause controller for a FlexAppBarStyle to be set to
-        // "null", we need to be able to do that to input "null" property
-        // value to FlexAppBarStyle configs.
         onChanged
-            ?.call(index >= TabBarIndicatorSize.values.length ? -1 : index);
+            ?.call(index == 0 ? null : TabBarIndicatorSize.values[index - 1]);
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
@@ -100,8 +153,7 @@ class TabBarIndicatorSizePopupMenu extends StatelessWidget {
             child: ListTile(
               dense: true,
               contentPadding: EdgeInsets.zero,
-              leading: index == i ||
-                      (index < 0 && i == TabBarIndicatorSize.values.length)
+              leading: (value?.index ?? -1) + 1 == i
                   ? IconTheme(
                       data: selectedIconTheme,
                       child: ColorSchemeBox(
@@ -118,14 +170,17 @@ class TabBarIndicatorSizePopupMenu extends StatelessWidget {
                         child: _tabBarWidget[i],
                       ),
                     ),
-              title: i >= TabBarIndicatorSize.values.length
-                  // If we reached max length make default label.
-                  ? Text(popupLabelDefault ?? labelForDefault, style: txtStyle)
-                  : Text(TabBarIndicatorSize.values[i].name, style: txtStyle),
+              title: i == 0
+                  // If first position use default label.
+                  ? Text(defaultSelectionLabel, style: txtStyle)
+                  : Text(TabBarIndicatorSize.values[i - 1].name,
+                      style: txtStyle),
             ),
           )
       ],
-      child: ListTile(
+      child: ListTileReveal(
+        dense: dense,
+        revealDense: revealDense,
         enabled: enabled,
         contentPadding: contentPadding,
         title: title,
@@ -133,9 +188,10 @@ class TabBarIndicatorSizePopupMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (subtitle != null) subtitle!,
-            Text(styleName),
+            Text(selectionLabel),
           ],
         ),
+        subtitleReveal: subtitleReveal,
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 10.0),
           child: IconTheme(
@@ -144,7 +200,7 @@ class TabBarIndicatorSizePopupMenu extends StatelessWidget {
               backgroundColor: scheme.primary,
               borderColor: Colors.transparent,
               child: _tabBarWidget[
-                  useDefault ? TabBarIndicatorSize.values.length : index],
+                  !enabled || value == null ? 0 : (value?.index ?? 0) + 1],
             ),
           ),
         ),

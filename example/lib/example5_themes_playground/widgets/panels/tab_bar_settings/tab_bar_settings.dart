@@ -252,19 +252,10 @@ class TabBarSettings extends StatelessWidget {
           )
         ],
         TabBarIndicatorSizePopupMenu(
+          enabled: enableControl,
           title: const Text('Indicator style'),
-          labelForDefault: useMaterial3 ? 'Default (label)' : 'Default (tab)',
-          index: controller.tabBarIndicatorSize?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= TabBarIndicatorSize.values.length) {
-                    controller.setTabBarIndicatorSize(null);
-                  } else {
-                    controller.setTabBarIndicatorSize(
-                        TabBarIndicatorSize.values[index]);
-                  }
-                }
-              : null,
+          value: controller.tabBarIndicatorSize,
+          onChanged: controller.setTabBarIndicatorSize,
         ),
         SliderListTileReveal(
           enabled: enableControl,
