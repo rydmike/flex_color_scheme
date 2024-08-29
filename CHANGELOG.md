@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Aug 28, 2024**
+**Aug 29, 2024**
 
 
 ### PACKAGE
@@ -13,7 +13,7 @@ Version 8.0.0 makes **FlexColorScheme** fully aligned and compatible with Flutte
 
 To seed generated ColorSchemes FCS adds support for all the Flutter SDK dynamic scheme variants; with a twist, you can use separate seed colors for each palette. Flutter SDK only allows you to seed from the theme's primary color and always uses computed values for secondary, tertiary palettes and fixed color for error. Surfaces and their tints are always tied to primary color as well. With FCS you do not have these limitations and you can even seed with multiple colors with Flutter's own scheme variants.
 
-FCS still has its own even more flexible `FlexTones` way of making seed generated ColorSchemes. Typically yo use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it you can define the chroma goals for each palette and define which tone is mapped to what ColorScheme color. An example of using it are the `FlexTones` modifiers. FCS v8 adds a new one called `monochromeSurfaces()`. This tones modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale surfaces instead of primary-tinted ones. 
+FCS still has its own even more flexible `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it you can define the chroma goals for each palette and define which tone is mapped to what ColorScheme color. An example of using it are the `FlexTones` modifiers. FCS v8 adds a new one called `monochromeSurfaces()`. This tones modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale surfaces instead of primary-tinted ones. 
 
 **CRITICAL TODOS**
 
@@ -49,18 +49,22 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   - FlexSubThemesData: TabAlignment? tabBarAlignment
   - Store: keyTabBarAlignment, defaultTabBarAlignment
   - ThemeController: SetTabBarAlignment, tabBarAlignment
+ 
 - AppBar: Option to decouple foreground/background colors.
   - FlexSubThemesData: SchemeColor? appBarForegroundSchemeColor
   - Store: keyAppBarForegroundSchemeColor, defaultAppBarForegroundSchemeColor
   - ThemeController: setAppBarForegroundSchemeColor, appBarForegroundSchemeColor
+
 - FAB: Option to decoupled foreground/background color.
   - FlexSubThemesData: SchemeColor? fabBackgroundSchemeColor
   - Store: keyFabBackgroundSchemeColor, defaultFabBackgroundSchemeColor
   - ThemeController: setFabBackgroundSchemeColor, fabBackgroundSchemeColor
+ 
 - InputDecorator: add inputDecoratorPrefixIconSchemeColor
   - FlexSubThemesData: SchemeColor? inputDecoratorPrefixIconSchemeColor
   - Store: keyInputDecoratorPrefixIconSchemeColor, defaultInputDecoratorPrefixIconSchemeColor
   - ThemeController: setInputDecoratorPrefixIconSchemeColor, inputDecoratorPrefixIconSchemeColor
+
 - DatePicker: Option to style and remove divider.
   - FlexSubThemesData: SchemeColor? datePickerDividerSchemeColor
   - Store: keyDatePickerDividerSchemeColor, defaultDatePickerDividerSchemeColor
@@ -271,6 +275,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply the setting to the Playground app's theme as well.  
 - In the "**Switch, Checkbox and Radio**" settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface "**Color Blends**" settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
+- Added separate controls and code gen for light and dark mode background color selection for the `BottomASppBar` on settings panel **BottomAppBar and SearchBar**.
 
 **CHANGE**
 
@@ -296,7 +301,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - Flutter SDK ChoiceChip = M3 Suggestion Chip
 - Improved `IconButton` presentation, by adding a text column explaining the type, as on the Chips panel.
 - Improved presentation of `Switch`, `Checkbox` and `Radio`, by using more orderly columns and spacing and explanation labels, similar style as on `Chip` and `IconButton`.  
-- Changed the style and speed of all popup menus. They are more compact with smaller font, and open under the ListTile you open them from, when there is room to do so. They also have no animation to open quickly and more desktop like, as this app is intended to be used primary on desktop. 
+- Changed the style and speed of all popup menus. They are more compact with smaller font, and open under the ListTile you open them from, when there is room to do so. They also have no animation to open quickly and more desktop like, as this app is intended to be used primary on desktop.
+- Changed the `SchemeColor` color selection popup menu `ColorSchemePopupMenu` to have the default color value listed first. It now also always shows the scrollbars.
+- Changed how ALL opacity sliders work! They now ALL work with default (null) color and opacity is nullable. Even if the SchemeColor it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default and to apply opacity anywhere.
+- Major internal refactor of ALL sliders used in the Playground. Made a convenience widget for Sliders with a null default value, en separate labels for disabled and null values. Now using this for all nullable Sliders in the Playground.
+
 
 **FIX**
 
@@ -308,7 +317,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed that applying dialog elevation in the Playground app's own dark mode theme was missing.
 - Fixed that enum `FlexAdaptive.setting` did not return `FlexAdaptive.appleWeb` did not return `AdaptiveTheme.appleWeb` for its value. Due to a bug, it returned `FlexAdaptive.apple`. This only impacted simulation of responsive themes for the Apple and Web response in the Playground app.
 
-**TODO PLAYGROUND AND EXAMPLES**
+**TODO THEMES PLAYGROUND AND OTHER EXAMPLES**
 
 - Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switch?
@@ -317,16 +326,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Make Chips presentation even better (already improved a lot).
 - ADD: High contrast theme in example 4 with tutorial update (commented placeholder added)
 - UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
-- CHANGE how ALL opacity sliders work! They should ALL work with default (null) color and opacity should be nullable! If the SchemeColor it is used on is null, it should use the default and apply opacity on it. It should not be required to select the same color as default and then apply opacity to it. Needs both Playground update to store and controller and in some cases sub-theme updates.
-  - NavigationRail: DONE
-  - NavigationBar: DONE
-  - BottomNavigationBar: DONE
-  - InputDecorator: DONE
-  - Tooltip: DONE
-  - PopupMenuButton: DONE
-  - Menus: DONE
-  - AppBar: TODO light + dark
-  - TabBar: TODO light + dark
+- CONSIDER changing all the other popup menus to like the `ColorSchemePopupMenu` have their default value listed first. THey are much shorter, so it is not as critical, but would be nicer.
+
 
 ## 7.3.1
 
