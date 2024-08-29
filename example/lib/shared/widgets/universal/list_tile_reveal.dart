@@ -139,13 +139,17 @@ class _ListTileRevealState extends State<ListTileReveal> {
             children: <Widget>[
               if (widget.title != null) widget.title!,
               if (widget.subtitleReveal != null && widget.enabled)
-                IconButton(
-                  iconSize: 20,
-                  // ignore: avoid_bool_literals_in_conditional_expressions
-                  isSelected: widget.enabled ? _isOpen : false,
-                  icon: const Icon(Icons.info_outlined),
-                  selectedIcon: const Icon(Icons.info),
-                  onPressed: widget.enabled ? _handleTap : null,
+                InkWell(
+                  onTap: widget.enabled ? _handleTap : null,
+                  borderRadius: BorderRadius.circular(28),
+                  child: SizedBox(
+                    width: 28,
+                    height: 28,
+                    child: Icon(
+                      _isOpen ? Icons.info : Icons.info_outlined,
+                      size: 18,
+                    ),
+                  ),
                 ),
             ],
           ),
