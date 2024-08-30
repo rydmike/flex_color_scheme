@@ -265,6 +265,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorBorderWidth,
     this.inputDecoratorFocusedBorderWidth,
     this.inputDecoratorPrefixIconSchemeColor,
+    this.inputDecoratorSuffixIconSchemeColor,
     //
     this.inputCursorSchemeColor,
     this.inputSelectionSchemeColor,
@@ -275,6 +276,7 @@ class FlexSubThemesData with Diagnosticable {
     this.fabUseShape = false,
     this.fabAlwaysCircular = false,
     this.fabSchemeColor,
+    this.fabForegroundSchemeColor,
     this.fabExtendedTextStyle,
     //
     this.chipRadius,
@@ -1665,6 +1667,12 @@ class FlexSubThemesData with Diagnosticable {
   /// [SchemeColor.onSurface] in FCS M3.
   final SchemeColor? inputDecoratorPrefixIconSchemeColor;
 
+  /// The icon color of the suffixIcon in a focused [InputDecoration].
+  ///
+  /// If not defined, defaults to [inputDecoratorSchemeColor] in FCS M2 and to
+  /// [SchemeColor.onSurface] in FCS M3.
+  final SchemeColor? inputDecoratorSuffixIconSchemeColor;
+
   /// The [SchemeColor] based color of the cursor in the text field.
   ///
   /// The cursor indicates the current location of text insertion point in
@@ -1756,11 +1764,18 @@ class FlexSubThemesData with Diagnosticable {
   final bool fabAlwaysCircular;
 
   /// Defines which [Theme] based [ColorScheme] based color the Floating
-  /// Action Buttons (FABs) use as their base color.
+  /// Action Button (FABs) use as its background color.
   ///
   /// If not defined, effective default is [ColorScheme.secondary] color in M2
   /// and [ColorScheme.primaryContainer] in M3 via Flutter theme defaults.
   final SchemeColor? fabSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the Floating
+  /// Action Button (FABs) uses as its foreground color.
+  ///
+  /// If not defined, effective default is the complement color to used
+  /// [fabSchemeColor].
+  final SchemeColor? fabForegroundSchemeColor;
 
   /// The text style for an extended [FloatingActionButton]'s label.
   final TextStyle? fabExtendedTextStyle;
@@ -3409,6 +3424,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? inputDecoratorBorderWidth,
     final double? inputDecoratorFocusedBorderWidth,
     final SchemeColor? inputDecoratorPrefixIconSchemeColor,
+    final SchemeColor? inputDecoratorSuffixIconSchemeColor,
     //
     final SchemeColor? inputCursorSchemeColor,
     final SchemeColor? inputSelectionSchemeColor,
@@ -3419,6 +3435,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? fabUseShape,
     final bool? fabAlwaysCircular,
     final SchemeColor? fabSchemeColor,
+    final SchemeColor? fabForegroundSchemeColor,
     final TextStyle? fabExtendedTextStyle,
     //
     final double? chipRadius,
@@ -3756,6 +3773,9 @@ class FlexSubThemesData with Diagnosticable {
       inputDecoratorPrefixIconSchemeColor:
           inputDecoratorPrefixIconSchemeColor ??
               this.inputDecoratorPrefixIconSchemeColor,
+      inputDecoratorSuffixIconSchemeColor:
+          inputDecoratorSuffixIconSchemeColor ??
+              this.inputDecoratorSuffixIconSchemeColor,
       //
       inputCursorSchemeColor:
           inputCursorSchemeColor ?? this.inputCursorSchemeColor,
@@ -3770,6 +3790,8 @@ class FlexSubThemesData with Diagnosticable {
       fabUseShape: fabUseShape ?? this.fabUseShape,
       fabAlwaysCircular: fabAlwaysCircular ?? this.fabAlwaysCircular,
       fabSchemeColor: fabSchemeColor ?? this.fabSchemeColor,
+      fabForegroundSchemeColor:
+          fabForegroundSchemeColor ?? this.fabForegroundSchemeColor,
       fabExtendedTextStyle: fabExtendedTextStyle ?? this.fabExtendedTextStyle,
       //
       chipRadius: chipRadius ?? this.chipRadius,
@@ -4183,6 +4205,8 @@ class FlexSubThemesData with Diagnosticable {
             inputDecoratorFocusedBorderWidth &&
         other.inputDecoratorPrefixIconSchemeColor ==
             inputDecoratorPrefixIconSchemeColor &&
+        other.inputDecoratorSuffixIconSchemeColor ==
+            inputDecoratorSuffixIconSchemeColor &&
         //
         other.inputCursorSchemeColor == inputCursorSchemeColor &&
         other.inputSelectionSchemeColor == inputSelectionSchemeColor &&
@@ -4194,6 +4218,7 @@ class FlexSubThemesData with Diagnosticable {
         other.fabUseShape == fabUseShape &&
         other.fabAlwaysCircular == fabAlwaysCircular &&
         other.fabSchemeColor == fabSchemeColor &&
+        other.fabForegroundSchemeColor == fabForegroundSchemeColor &&
         other.fabExtendedTextStyle == fabExtendedTextStyle &&
         //
         other.chipRadius == chipRadius &&
@@ -4514,6 +4539,7 @@ class FlexSubThemesData with Diagnosticable {
         inputDecoratorBorderWidth,
         inputDecoratorFocusedBorderWidth,
         inputDecoratorPrefixIconSchemeColor,
+        inputDecoratorSuffixIconSchemeColor,
         //
         inputCursorSchemeColor,
         inputSelectionSchemeColor,
@@ -4524,6 +4550,7 @@ class FlexSubThemesData with Diagnosticable {
         fabUseShape,
         fabAlwaysCircular,
         fabSchemeColor,
+        fabForegroundSchemeColor,
         fabExtendedTextStyle,
         //
         chipRadius,
@@ -4879,6 +4906,9 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'inputDecoratorPrefixIconSchemeColor',
         inputDecoratorPrefixIconSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'inputDecoratorSuffixIconSchemeColor',
+        inputDecoratorSuffixIconSchemeColor));
     //
     properties.add(EnumProperty<SchemeColor>(
         'inputCursorSchemeColor', inputCursorSchemeColor));
@@ -4894,6 +4924,8 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<bool>('fabAlwaysCircular', fabAlwaysCircular));
     properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'fabForegroundSchemeColor', fabForegroundSchemeColor));
     properties.add(DiagnosticsProperty<TextStyle>(
         'fabExtendedTextStyle', fabExtendedTextStyle));
     //
