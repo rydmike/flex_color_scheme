@@ -19,7 +19,7 @@ enum AdaptiveTheme {
     icon: Icons.radio_button_checked,
   ),
   apple(
-    label: 'Apple devices, no web',
+    label: 'Apple devices, no web usage',
     describe: 'The platform adaptive response is used on iOS and macOS '
         'device builds, but not on any platform with the web build, '
         'not even in browsers on iOS and macOS.\n'
@@ -31,7 +31,7 @@ enum AdaptiveTheme {
     icon: Icons.tablet_mac_outlined,
   ),
   appleWeb(
-    label: 'Apple devices and their web',
+    label: 'Apple devices and their web usage',
     describe: 'The platform adaptive response is used on iOS and macOS '
         'devices, also on web builds when used from iOS and macOS.\n'
         '\n'
@@ -44,7 +44,7 @@ enum AdaptiveTheme {
     icon: Icons.important_devices_outlined,
   ),
   desktop(
-    label: 'Desktops and their web',
+    label: 'Desktops and their web usage',
     describe: 'The platform adaptive response is used on all desktop '
         'operating system builds, also when using a web build of the app '
         'from a browser on all desktop operating systems.\n',
@@ -52,7 +52,7 @@ enum AdaptiveTheme {
     icon: Icons.desktop_mac_outlined,
   ),
   iOSAndDesktop(
-    label: 'Desktops plus iOS and their web',
+    label: 'Desktops, iOS and their web usage',
     describe: 'The platform adaptive response is used on all desktop '
         'operating system and iOS builds, '
         'including when using a web build of the app on them.\n'
@@ -78,7 +78,7 @@ enum AdaptiveTheme {
     icon: Icons.mobile_off_outlined,
   ),
   excludeWebAndroidFuchsia(
-    label: 'Exclude Android and Fuchsia, exclude all Web',
+    label: 'Exclude Android and Fuchsia, exclude all Web usage',
     describe: 'The platform adaptive response is used on all platforms, '
         'except on native Android and Fuchsia device builds. Web usage on '
         'all platforms also keep the none adaptive response.\n'
