@@ -92,7 +92,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
 
   /// If not defined will use response from
-  /// _explainSelection(null, useMaterial3) as default value.
+  /// _popupItemLabel(null, isLight, useMaterial3) as default value.
   final String? defaultLabel;
 
   /// Override for default selection display label when the control is
@@ -129,6 +129,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         (enabled ? null : defaultDisabledLabel) ??
             defaultLabel ??
             _popupItemLabel(null, useMaterial3);
+
     final String selectedPopupLabel = enabled && value != null
         ? _popupItemLabel(value, useMaterial3)
         : defaultSelectionValuePopupLabel;
