@@ -45,11 +45,6 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   
 **TODO**
  
-- Add TabBar theme property `tabAlignment`. 
-  - FlexSubThemesData: TabAlignment? tabBarTabAlignment
-  - Store: keyTabBarTabAlignment, defaultTabBarTabAlignment
-  - ThemeController: setTabBarTabAlignment, tabBarTabAlignment
-
 // TODO When it lands in stable
 - Add TabBar theme property `indicatorAnimation`.
   - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
@@ -210,6 +205,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`.
+
+
+- Added `tabAlignment` property to `FlexSubThemes.tabAlignment`.
+- Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
 
 
 - Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
