@@ -244,6 +244,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             fabUseShape: controller.fabUseShape,
             fabAlwaysCircular: controller.fabAlwaysCircular,
             fabSchemeColor: controller.fabSchemeColor,
+            fabForegroundSchemeColor: controller.fabForegroundSchemeColor,
             // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
             chipSelectedSchemeColor: controller.chipSelectedSchemeColor,

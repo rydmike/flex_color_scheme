@@ -45,26 +45,18 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   
 **TODO**
  
-// TODO When it lands in stable
-- Add TabBar theme property `indicatorAnimation`.
-  - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
-  - Store: keyTabBarIndicatorAnimation, defaultTabBarIndicatorAnimation
-  - ThemeController: setTabBarIndicatorAnimation, tabBarIndicatorAnimation
-  
 - AppBar: Option to decouple foreground/background colors.
   - FlexSubThemesData: SchemeColor? appBarForegroundSchemeColor
   - Store: keyAppBarForegroundSchemeColor, defaultAppBarForegroundSchemeColor
   - ThemeController: setAppBarForegroundSchemeColor, appBarForegroundSchemeColor
 
-- FAB: Option to decoupled foreground/background color.
-  - FlexSubThemesData: SchemeColor? fabBackgroundSchemeColor
-  - Store: keyFabBackgroundSchemeColor, defaultFabBackgroundSchemeColor
-  - ThemeController: setFabBackgroundSchemeColor, fabBackgroundSchemeColor
- 
+
 - InputDecorator: add inputDecoratorPrefixIconSchemeColor
   - FlexSubThemesData: SchemeColor? inputDecoratorPrefixIconSchemeColor
   - Store: keyInputDecoratorPrefixIconSchemeColor, defaultInputDecoratorPrefixIconSchemeColor
   - ThemeController: setInputDecoratorPrefixIconSchemeColor, inputDecoratorPrefixIconSchemeColor
+
+
 
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
   - This is an issue I wrote down a long time ago, have to take a new look at it.
@@ -81,14 +73,15 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 
 **POTENTIAL TODOS or maybe push to version 8.1.0 or later**
 
-- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
-- Checkbox: Shape and border. 
-
-- Not possible to use custom error colors with toDark generated schemes, maybe keep it so?
 - Add **NEW** color schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
   - Add ShadCn theme colors?
+
+- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
+- Checkbox: Shape and border.
+
+- Not possible to use custom error colors with toDark generated schemes, maybe keep it so?
 
 
 - Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
@@ -99,6 +92,11 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 - Add fidelity for iOS adaptive AppBar.
 - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> Maybe, but prefer transparent instead, add guidance to docs about it.
 
+
+- When it lands in stable, add TabBar theme property `indicatorAnimation`.
+  - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
+  - Store: keyTabBarIndicatorAnimation, defaultTabBarIndicatorAnimation
+  - ThemeController: setTabBarIndicatorAnimation, tabBarIndicatorAnimation
 
 **Investigate**
 
@@ -194,7 +192,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`.
-- Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
+- Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its color.
 
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`.
 - Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
@@ -208,7 +206,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added `tabAlignment` property to `FlexSubThemes.tabAlignment`.
-- Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
+- Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.tabBarTheme` use it for its. (TODO: Note about assert issue)
+
+
+- Added `foregroundSchemeColor` property to `FlexSubThemes.floatingActionButtonTheme`.
+- Added `fabForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.floatingActionButtonTheme` use it for its foreground color.
 
 
 - Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
@@ -279,8 +281,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply the setting to the Playground app's theme as well.  
 - In the "**Switch, Checkbox and Radio**" settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface "**Color Blends**" settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
-- Added separate controls and code gen for light and dark mode background color selection for the `BottomASppBar` on settings panel **BottomAppBar and SearchBar**.
-- Added divider color selection to **Dialogs** settings panel for the the DatePicker divider color. Setting it to transparent will hide the divider in M3 mode, in M2 mode the Divider does not exist.
+- Added separate controls and code gen for light and dark mode background color selection for the `BottomAppBar` on settings panel **BottomAppBar and SearchBar**.
+- Added divider color selection to **Dialogs** settings panel for the DatePicker divider color. Setting it to transparent will hide the divider in M3 mode, in M2 mode the Divider does not exist.
+- Added the ability to change tab alignment in the **TabBar** settings panel.
+- In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 
 **CHANGE**
 
