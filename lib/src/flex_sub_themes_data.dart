@@ -348,6 +348,7 @@ class FlexSubThemesData with Diagnosticable {
     this.snackBarContentTextStyle,
     //
     this.appBarBackgroundSchemeColor,
+    this.appBarForegroundSchemeColor,
     this.appBarCenterTitle,
     this.appBarScrolledUnderElevation,
     this.appBarToolbarTextStyle,
@@ -2373,6 +2374,24 @@ class FlexSubThemesData with Diagnosticable {
   /// ([appBarStyle) factory parameter.
   final SchemeColor? appBarBackgroundSchemeColor;
 
+  /// Defines which [Theme] based [ColorScheme] based color the [AppBar]
+  /// foreground uses.
+  ///
+  /// If not defined, it uses the onPair complement color to the
+  /// [appBarBackgroundSchemeColor]. If it is not defined, then
+  /// [AppBar] uses the default contrast color defined for
+  /// [FlexColorScheme.appBarBackground]. If made with [FlexColorScheme.light]
+  /// or [FlexColorScheme.dark], then the enum [FlexAppBarStyle] in property
+  /// [appBarStyle], is used to determine the [AppBar] color and background.
+  ///
+  /// The themed [AppBar] background color is typically determined by defined
+  /// [FlexAppBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
+  /// This property is an override that offers more quick config options by
+  /// allowing picking a color from the effective [ColorScheme] different from
+  /// options offered via [FlexColorScheme.light] and [FlexColorScheme.dark]
+  /// ([appBarStyle) factory parameter.
+  final SchemeColor? appBarForegroundSchemeColor;
+
   /// Whether the AppBar title should be centered.
   ///
   /// Overrides the default value of [AppBar.centerTitle] property in all
@@ -3507,6 +3526,7 @@ class FlexSubThemesData with Diagnosticable {
     final TextStyle? snackBarContentTextStyle,
     //
     final SchemeColor? appBarBackgroundSchemeColor,
+    final SchemeColor? appBarForegroundSchemeColor,
     final bool? appBarCenterTitle,
     final double? appBarScrolledUnderElevation,
     final TextStyle? appBarToolbarTextStyle,
@@ -3890,6 +3910,8 @@ class FlexSubThemesData with Diagnosticable {
       //
       appBarBackgroundSchemeColor:
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
+      appBarForegroundSchemeColor:
+          appBarForegroundSchemeColor ?? this.appBarForegroundSchemeColor,
       appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
       appBarScrolledUnderElevation:
           appBarScrolledUnderElevation ?? this.appBarScrolledUnderElevation,
@@ -4295,6 +4317,7 @@ class FlexSubThemesData with Diagnosticable {
         other.snackBarContentTextStyle == snackBarContentTextStyle &&
         //
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
+        other.appBarForegroundSchemeColor == appBarForegroundSchemeColor &&
         other.appBarCenterTitle == appBarCenterTitle &&
         other.appBarScrolledUnderElevation == appBarScrolledUnderElevation &&
         other.appBarToolbarTextStyle == appBarToolbarTextStyle &&
@@ -4622,6 +4645,7 @@ class FlexSubThemesData with Diagnosticable {
         snackBarContentTextStyle,
         //
         appBarBackgroundSchemeColor,
+        appBarForegroundSchemeColor,
         appBarCenterTitle,
         appBarScrolledUnderElevation,
         appBarToolbarTextStyle,
@@ -5048,6 +5072,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(EnumProperty<SchemeColor>(
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'appBarForegroundSchemeColor', appBarForegroundSchemeColor));
     properties
         .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
     properties.add(DiagnosticsProperty<double>(
