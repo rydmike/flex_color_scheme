@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import '../../../shared/widgets/universal/flex_icons.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 
-// A popup menu that allows us to select the Flutter platform we want to use.
-//
-// Does not actually change the platform, only the UI for the selection.
-// The actual selection is done via platform property in ThemeData.
+/// A popup menu that allows us to select the Flutter platform we want to use.
+///
+/// Does not actually change the platform, only the UI for the selection.
+/// The actual selection is done via platform property in ThemeData.
+///
+/// This PopupMenu is on purpose not using the EnumPopupMenu, as this one
+/// has a bit more own style, still it could maybe be reworked to use it.
 class PlatformPopupMenu extends StatelessWidget {
   const PlatformPopupMenu({
     super.key,
@@ -109,8 +112,10 @@ class PlatformPopupMenu extends StatelessWidget {
       ],
       child: ListTileReveal(
         dense: true,
+        revealDense: true,
         enabled: enabled,
-        title: Text('Test the platform response\n$platformLabel'),
+        title: const Text('Test the platform response'),
+        subtitle: Text(platformLabel),
         subtitleReveal: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
