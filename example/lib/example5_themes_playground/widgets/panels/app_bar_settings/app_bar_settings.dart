@@ -79,20 +79,11 @@ class AppBarSettings extends StatelessWidget {
               Expanded(
                 child: AppBarStylePopupMenu(
                   title: const Text('Light AppBarStyle'),
-                  labelForDefault: 'default',
-                  index: controller.appBarStyleLight?.index ?? -1,
-                  onChanged: controller.useFlexColorScheme &&
-                          controller.appBarBackgroundSchemeColorLight == null
-                      ? (int index) {
-                          if (index < 0 ||
-                              index >= FlexAppBarStyle.values.length) {
-                            controller.setAppBarStyleLight(null);
-                          } else {
-                            controller.setAppBarStyleLight(
-                                FlexAppBarStyle.values[index]);
-                          }
-                        }
-                      : null,
+                  // defaultLabel: 'default',
+                  enabled: controller.useFlexColorScheme &&
+                      controller.appBarBackgroundSchemeColorLight == null,
+                  value: controller.appBarStyleLight,
+                  onChanged: controller.setAppBarStyleLight,
                   // To access the custom color we defined for AppBars in this
                   // PopupMenu buttons widget, we have to pass it along, or the
                   // entire controller. We chose the color in this case. It is
@@ -106,6 +97,7 @@ class AppBarSettings extends StatelessWidget {
                   // show them as well on the PopupMenu button.
                   customAppBarColor:
                       AppColor.scheme(controller).light.appBarColor,
+                  isBlended: controller.blendLevel > 0,
                 ),
               ),
               Expanded(
@@ -138,22 +130,14 @@ class AppBarSettings extends StatelessWidget {
               Expanded(
                 child: AppBarStylePopupMenu(
                   title: const Text('Dark AppBarStyle'),
-                  labelForDefault: 'default',
-                  index: controller.appBarStyleDark?.index ?? -1,
-                  onChanged: controller.useFlexColorScheme &&
-                          controller.appBarBackgroundSchemeColorDark == null
-                      ? (int index) {
-                          if (index < 0 ||
-                              index >= FlexAppBarStyle.values.length) {
-                            controller.setAppBarStyleDark(null);
-                          } else {
-                            controller.setAppBarStyleDark(
-                                FlexAppBarStyle.values[index]);
-                          }
-                        }
-                      : null,
+                  // defaultLabel: 'default',
+                  enabled: controller.useFlexColorScheme &&
+                      controller.appBarBackgroundSchemeColorDark == null,
+                  value: controller.appBarStyleDark,
+                  onChanged: controller.setAppBarStyleDark,
                   customAppBarColor:
                       AppColor.scheme(controller).dark.appBarColor,
+                  isBlended: controller.blendLevelDark > 0,
                 ),
               ),
               Expanded(
