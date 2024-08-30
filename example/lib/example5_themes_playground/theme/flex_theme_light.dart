@@ -288,6 +288,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.inputDecoratorFocusedBorderWidth,
             inputDecoratorPrefixIconSchemeColor:
                 controller.inputDecoratorPrefixIconSchemeColor,
+            inputDecoratorSuffixIconSchemeColor:
+                controller.inputDecoratorSuffixIconSchemeColor,
             // TextSelection settings
             inputCursorSchemeColor: controller.inputCursorLightSchemeColor,
             inputSelectionSchemeColor:

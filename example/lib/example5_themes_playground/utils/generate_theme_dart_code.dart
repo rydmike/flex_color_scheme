@@ -630,6 +630,16 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    inputDecoratorPrefixIconSchemeColor: ${controller.inputDecoratorPrefixIconDarkSchemeColor},\n';
+  final String inputDecoratorSuffixIconSchemeColor = controller
+              .inputDecoratorSuffixIconSchemeColor ==
+          null
+      ? ''
+      : '    inputDecoratorSuffixIconSchemeColor: ${controller.inputDecoratorSuffixIconSchemeColor},\n';
+  final String inputDecoratorSuffixIconDarkSchemeColor = controller
+              .inputDecoratorSuffixIconDarkSchemeColor ==
+          null
+      ? ''
+      : '    inputDecoratorSuffixIconSchemeColor: ${controller.inputDecoratorSuffixIconDarkSchemeColor},\n';
   //
   // Text selection setup CODE.
   //
@@ -1326,6 +1336,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
           '$inputDecoratorPrefixIconSchemeColor'
+          '$inputDecoratorSuffixIconSchemeColor'
           //
           '$inputCursorLightSchemeColor'
           '$inputSelectionLightSchemeColor'
@@ -1554,6 +1565,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorFocusedHasBorder'
           '$inputDecoratorFocusedBorderWidth'
           '$inputDecoratorPrefixIconDarkSchemeColor'
+          '$inputDecoratorSuffixIconDarkSchemeColor'
           //
           '$inputCursorDarkSchemeColor'
           '$inputSelectionDarkSchemeColor'

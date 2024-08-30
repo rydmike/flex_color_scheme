@@ -648,12 +648,27 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultInputDecoratorPrefixIconSchemeColor = null;
 
+  // Key used to read and save the inputDecoratorSuffixIconSchemeColor value.
+  static const String keyInputDecoratorSuffixIconSchemeColor =
+      'inputDecoratorSuffixIconSchemeColor';
+  // Default value for the inputDecoratorSuffixIconSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorSuffixIconSchemeColor = null;
+
   // Key used to read and save inputDecoratorPrefixIconDarkSchemeColor value.
   static const String keyInputDecoratorPrefixIconDarkSchemeColor =
       'inputDecoratorPrefixIconDarkSchemeColor';
   // Default for the inputDecoratorPrefixIconDarkSchemeColor, reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultInputDecoratorPrefixIconDarkSchemeColor =
+      null;
+
+  // Key used to read and save inputDecoratorSuffixIconDarkSchemeColor value.
+  static const String keyInputDecoratorSuffixIconDarkSchemeColor =
+      'inputDecoratorSuffixIconDarkSchemeColor';
+  // Default for the inputDecoratorSuffixIconDarkSchemeColor, reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultInputDecoratorSuffixIconDarkSchemeColor =
       null;
 
   // TextSelection SETTINGS.

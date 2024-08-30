@@ -374,15 +374,15 @@ class TextFieldSettings extends StatelessWidget {
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
                   index:
-                      controller.inputDecoratorPrefixIconSchemeColor?.index ??
+                      controller.inputDecoratorSuffixIconSchemeColor?.index ??
                           -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {
                             controller
-                                .setInputDecoratorPrefixIconSchemeColor(null);
+                                .setInputDecoratorSuffixIconSchemeColor(null);
                           } else {
-                            controller.setInputDecoratorPrefixIconSchemeColor(
+                            controller.setInputDecoratorSuffixIconSchemeColor(
                                 SchemeColor.values[index]);
                           }
                         }
@@ -400,17 +400,17 @@ class TextFieldSettings extends StatelessWidget {
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
                   index: controller
-                          .inputDecoratorPrefixIconDarkSchemeColor?.index ??
+                          .inputDecoratorSuffixIconDarkSchemeColor?.index ??
                       -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {
                             controller
-                                .setInputDecoratorPrefixIconDarkSchemeColor(
+                                .setInputDecoratorSuffixIconDarkSchemeColor(
                                     null);
                           } else {
                             controller
-                                .setInputDecoratorPrefixIconDarkSchemeColor(
+                                .setInputDecoratorSuffixIconDarkSchemeColor(
                                     SchemeColor.values[index]);
                           }
                         }

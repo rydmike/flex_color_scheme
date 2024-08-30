@@ -3308,6 +3308,12 @@ sealed class FlexSubThemes {
     /// [SchemeColor.onSurface] in FCS M3.
     final SchemeColor? prefixIconSchemeColor,
 
+    /// The icon color of the suffixIcon in a focused [InputDecoration].
+    ///
+    /// If not defined, defaults to [inputDecoratorSchemeColor] in FCS M2 and to
+    /// [SchemeColor.onSurface] in FCS M3.
+    final SchemeColor? suffixIconSchemeColor,
+
     /// Selects which color from the passed in colorScheme to use as the border
     /// color of the input decorator.
     ///
@@ -3479,6 +3485,10 @@ sealed class FlexSubThemes {
     final Color prefixIconColor =
         schemeColor(prefixIconSchemeColor ?? prefixFallback, colorScheme);
 
+    // Has same fallback as prefix icon color.
+    final Color suffixIconColor =
+        schemeColor(suffixIconSchemeColor ?? prefixFallback, colorScheme);
+
     // Flutter SDK "magic" theme colors from ThemeData, with old M1/M2 roots.
     final Color hintColorM2 =
         isDark ? Colors.white60 : Colors.black.withAlpha(kTintHover); // 60%
@@ -3633,7 +3643,8 @@ sealed class FlexSubThemes {
               : colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
         if (states.contains(WidgetState.focused)) {
-          return useM3 ? colorScheme.onSurfaceVariant : baseColor;
+          return suffixIconColor;
+          // return useM3 ? colorScheme.onSurfaceVariant : baseColor;
         }
         return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
       }),
