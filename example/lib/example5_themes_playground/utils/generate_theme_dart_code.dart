@@ -912,6 +912,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String tabBarDividerColor = controller.tabBarDividerColor != null
       ? '    tabBarDividerColor: ${controller.tabBarDividerColor},\n'
       : '';
+  final String tabBarTabAlignment = controller.tabBarTabAlignment != null
+      ? '    tabBarTabAlignment: ${controller.tabBarTabAlignment},\n'
+      : '';
   //
   // Drawers setup CODE
   //
@@ -1380,6 +1383,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tabBarIndicatorWeight'
           '$tabBarIndicatorTopRadius'
           '$tabBarDividerColor'
+          '$tabBarTabAlignment'
           //
           '$drawerBorderRadius'
           '$drawerElevation'
@@ -1606,6 +1610,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tabBarIndicatorWeight'
           '$tabBarIndicatorTopRadius'
           '$tabBarDividerColor'
+          '$tabBarTabAlignment'
           //
           '$drawerBorderRadius'
           '$drawerElevation'

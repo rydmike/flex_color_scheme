@@ -309,6 +309,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             tabBarIndicatorWeight: controller.tabBarIndicatorWeight,
             tabBarIndicatorTopRadius: controller.tabBarIndicatorTopRadius,
             tabBarDividerColor: controller.tabBarDividerColor,
+            tabBarTabAlignment: controller.tabBarTabAlignment,
             // Drawer Settings.
             drawerRadius: controller.drawerBorderRadius,
             drawerElevation: controller.drawerElevation,

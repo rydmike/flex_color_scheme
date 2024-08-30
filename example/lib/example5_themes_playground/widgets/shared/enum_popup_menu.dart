@@ -7,12 +7,28 @@ import '../../../shared/model/visual_density_enum.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'color_scheme_box.dart';
 
-/// Widget used to select used [FlexTabBarStyle] using a popup menu.
+/// Widget used to select used an enum value of type [T] using a popup menu.
 ///
-/// Uses index out out of range of [FlexTabBarStyle] to represent
-/// and select no selection of [FlexTabBarStyle] which sets its
-/// value to null in parent, so we can use a selectable item as null input,
-/// to represent default value via no value definition.
+/// Returns null for the default selection, which is the first item in the
+/// popup menu. For other selections, it returns the corresponding enum value
+/// for the enum of type [T].
+///
+/// It contains custom icons and label usage for some enum types, but can be
+/// used for any enum type. If the enum type is not added, it will use the
+/// default label and icon for the enum type. This just indicates that the
+/// enum type needs to be added to the widget to get custom icons and labels.
+///
+/// The [EnumPopupMenu] can use passed in [defaultLabel] and
+/// [defaultDisabledLabel] if the built in ones are not suitable when more
+/// complex external conditions needs to set it.
+///
+/// The [subtitleReveal] is used to show an info icon that if presses
+/// uses reveal animation with a longer description of the feature and
+/// optionally value selected value.
+///
+/// The [EnumPopupMenu] has a dedicate [enabled] control, so setting callback
+/// to null is not needed to disable, it can be more easily controlled with
+/// the enabled flag.
 class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   const EnumPopupMenu({
     super.key,
@@ -291,6 +307,23 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           return 'Default (Only for discrete)';
       }
     }
+    if (T == TabAlignment && useLongLabel) {
+      switch (value) {
+        case TabAlignment.start:
+          return 'Aligned to the start\n'
+              'Only allowed when TabBar is scrollable';
+        case TabAlignment.startOffset:
+          return 'Aligned to start with 52dp offset\n'
+              'Only allowed when TabBar is scrollable';
+        case TabAlignment.fill:
+          return 'Stretched to fill the bar\n'
+              'Only allowed when TabBar is fixed';
+        case TabAlignment.center:
+          return 'Aligned to the center of the bar';
+        case null:
+          return 'Default (M3Only for discrete)';
+      }
+    }
     if (T == AdaptiveTheme) {
       final AdaptiveTheme? castValue = value as AdaptiveTheme?;
       return castValue?.label ?? 'Default (${AdaptiveTheme.off.label})';
@@ -391,6 +424,30 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         Tooltip(
           message: 'Never',
           child: Icon(Icons.block),
+        ),
+      ];
+    }
+    if (T == TabAlignment) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'start',
+          child: Icon(Icons.start_outlined),
+        ),
+        Tooltip(
+          message: 'startOffset',
+          child: Icon(Icons.space_bar_outlined),
+        ),
+        Tooltip(
+          message: 'fill',
+          child: Icon(Icons.view_column_outlined),
+        ),
+        Tooltip(
+          message: 'center',
+          child: Icon(Icons.horizontal_distribute_outlined),
         ),
       ];
     }
