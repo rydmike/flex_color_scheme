@@ -2955,6 +2955,13 @@ sealed class FlexSubThemes {
     /// color's contrast color pair in the passed in [colorScheme] property.
     final SchemeColor? backgroundSchemeColor,
 
+    /// Select which color from the passed in [colorScheme] parameter to use as
+    /// the floating action button foreground color.
+    ///
+    /// If not defined, effective default is the complement color to used
+    /// [backgroundSchemeColor].
+    final SchemeColor? foregroundSchemeColor,
+
     /// Corner radius of the [FloatingActionButton].
     ///
     /// If not defined, defaults to [kFabRadius] 16dp,
@@ -3018,9 +3025,17 @@ sealed class FlexSubThemes {
     final Color? background = backgroundSchemeColor == null
         ? null
         : schemeColor(backgroundSchemeColor, colorScheme);
-    final Color? foreground = backgroundSchemeColor == null
-        ? null
-        : schemeColorPair(backgroundSchemeColor, colorScheme);
+    final Color? foreground =
+        backgroundSchemeColor == null && foregroundSchemeColor == null
+            ? null
+            : foregroundSchemeColor != null
+                ? schemeColor(foregroundSchemeColor, colorScheme)
+                : schemeColorPair(
+                    backgroundSchemeColor ??
+                        (useM3
+                            ? SchemeColor.onPrimaryContainer
+                            : SchemeColor.onSecondary),
+                    colorScheme);
 
     final Color overlay = foreground ??
         (useM3 ? colorScheme.onPrimaryContainer : colorScheme.onSecondary);
