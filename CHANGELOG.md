@@ -50,7 +50,8 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   - Store: keyAppBarForegroundSchemeColor, defaultAppBarForegroundSchemeColor
   - ThemeController: setAppBarForegroundSchemeColor, appBarForegroundSchemeColor
 
-
+- AppBar add the center title prop that exists in FlexSubThemesData.
+- 
 
 
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
