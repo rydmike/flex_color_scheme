@@ -261,6 +261,36 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           return useMaterial3 ? 'Default (label)' : 'Default (tab)';
       }
     }
+    if (T == FlexSliderIndicatorType && useLongLabel) {
+      switch (value) {
+        case FlexSliderIndicatorType.rectangular:
+          return 'Rounded rectangle';
+        case FlexSliderIndicatorType.drop:
+          return 'Inverted drop';
+        case null:
+          {
+            if (useMaterial3) {
+              return 'Default (Inverted drop)';
+            } else {
+              return 'Default (Rounded rectangle)';
+            }
+          }
+      }
+    }
+    if (T == ShowValueIndicator && useLongLabel) {
+      switch (value) {
+        case ShowValueIndicator.onlyForDiscrete:
+          return 'Only for discrete';
+        case ShowValueIndicator.onlyForContinuous:
+          return 'Only for continuous';
+        case ShowValueIndicator.always:
+          return 'Show on all types';
+        case ShowValueIndicator.never:
+          return 'Never show';
+        case null:
+          return 'Default (Only for discrete)';
+      }
+    }
     if (T == AdaptiveTheme) {
       final AdaptiveTheme? castValue = value as AdaptiveTheme?;
       return castValue?.label ?? 'Default (${AdaptiveTheme.off.label})';
@@ -321,6 +351,46 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         Tooltip(
           message: 'Width equals label',
           child: Icon(Icons.format_underlined_outlined),
+        ),
+      ];
+    }
+    if (T == FlexSliderIndicatorType) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default indicator',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Rounded rectangular indicator',
+          child: Icon(Icons.assistant),
+        ),
+        Tooltip(
+          message: 'Inverted water drop',
+          child: Icon(Icons.pin_drop),
+        ),
+      ];
+    }
+    if (T == ShowValueIndicator) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default (discrete)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Discrete',
+          child: Icon(Icons.linear_scale),
+        ),
+        Tooltip(
+          message: 'Continuous',
+          child: Icon(Icons.horizontal_rule),
+        ),
+        Tooltip(
+          message: 'All',
+          child: Icon(Icons.done_outline),
+        ),
+        Tooltip(
+          message: 'Never',
+          child: Icon(Icons.block),
         ),
       ];
     }
