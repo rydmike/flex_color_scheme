@@ -7536,6 +7536,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.floatingActionButtonTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.fabSchemeColor,
+              foregroundSchemeColor: subTheme.fabForegroundSchemeColor,
               radius: subTheme.fabRadius ?? platformRadius,
               useShape: subTheme.fabUseShape,
               alwaysCircular: subTheme.fabAlwaysCircular,
