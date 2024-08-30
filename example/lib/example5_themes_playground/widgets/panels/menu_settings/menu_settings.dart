@@ -47,6 +47,7 @@ class MenuSettings extends StatelessWidget {
         // ignore: lines_longer_than_80_chars
         : 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name})';
 
+    // TODO(rydmike): FIX, this labels are not working correctly. Like FAB case.
     final String menuOnItemDefault = controller.menuSchemeColor == null
         ? 'default (onSurface)'
         // ignore: lines_longer_than_80_chars
@@ -280,8 +281,7 @@ class MenuSettings extends StatelessWidget {
                 title: const Text('Background color'),
                 labelForDefault: menuItemDefault,
                 index: controller.menuItemBackgroundSchemeColor?.index ?? -1,
-                onChanged: controller.useSubThemes &&
-                        controller.useFlexColorScheme
+                onChanged: enableControl
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
                           controller.setMenuItemBackgroundSchemeColor(null);
@@ -300,8 +300,7 @@ class MenuSettings extends StatelessWidget {
                 title: const Text('Foreground color'),
                 labelForDefault: menuOnItemDefault,
                 index: controller.menuItemForegroundSchemeColor?.index ?? -1,
-                onChanged: controller.useSubThemes &&
-                        controller.useFlexColorScheme
+                onChanged: enableControl
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
                           controller.setMenuItemForegroundSchemeColor(null);
@@ -324,8 +323,7 @@ class MenuSettings extends StatelessWidget {
                 labelForDefault: menuIndicatorDefault,
                 index:
                     controller.menuIndicatorBackgroundSchemeColor?.index ?? -1,
-                onChanged: controller.useSubThemes &&
-                        controller.useFlexColorScheme
+                onChanged: enableControl
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
                           controller
@@ -346,8 +344,7 @@ class MenuSettings extends StatelessWidget {
                 labelForDefault: menuOnIndicatorDefault,
                 index:
                     controller.menuIndicatorForegroundSchemeColor?.index ?? -1,
-                onChanged: controller.useSubThemes &&
-                        controller.useFlexColorScheme
+                onChanged: enableControl
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
                           controller
