@@ -8,8 +8,7 @@ import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
-import 'slider_indicator_popup_menu.dart';
-import 'slider_show_indicator_popup_menu.dart';
+import '../../shared/enum_popup_menu.dart';
 
 class SliderSettings extends StatelessWidget {
   const SliderSettings(this.controller, {super.key});
@@ -91,37 +90,19 @@ class SliderSettings extends StatelessWidget {
               ? controller.setSliderValueTinted
               : null,
         ),
-        SliderIndicatorPopupMenu(
+        EnumPopupMenu<FlexSliderIndicatorType>(
+          enabled: enableControl,
+          values: FlexSliderIndicatorType.values,
           title: const Text('Indicator type'),
-          labelForDefault:
-              useMaterial3 ? 'default M3 (drop)' : 'default M2 (rectangular)',
-          index: controller.sliderValueIndicatorType?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 ||
-                      index >= FlexSliderIndicatorType.values.length) {
-                    controller.setSliderValueIndicatorType(null);
-                  } else {
-                    controller.setSliderValueIndicatorType(
-                        FlexSliderIndicatorType.values[index]);
-                  }
-                }
-              : null,
+          value: controller.sliderValueIndicatorType,
+          onChanged: controller.setSliderValueIndicatorType,
         ),
-        SliderShowIndicatorPopupMenu(
+        EnumPopupMenu<ShowValueIndicator>(
+          enabled: enableControl,
+          values: ShowValueIndicator.values,
           title: const Text('Indicator visibility'),
-          labelForDefault: 'Default (Only for discrete)',
-          index: controller.sliderShowValueIndicator?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= ShowValueIndicator.values.length) {
-                    controller.setSliderShowValueIndicator(null);
-                  } else {
-                    controller.setSliderShowValueIndicator(
-                        ShowValueIndicator.values[index]);
-                  }
-                }
-              : null,
+          value: controller.sliderShowValueIndicator,
+          onChanged: controller.setSliderShowValueIndicator,
         ),
         SliderListTileReveal(
           enabled: enableControl,
