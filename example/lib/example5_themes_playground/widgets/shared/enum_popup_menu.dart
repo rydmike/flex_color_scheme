@@ -1,6 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../shared/model/adaptive_theme.dart';
+import '../../../shared/model/splash_type_enum.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'color_scheme_box.dart';
 
@@ -106,13 +108,13 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     final ColorScheme scheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelMedium!;
 
-    final String defaultSelectionLabel =
+    final String defaultSelectionValuePopupLabel =
         (enabled ? null : defaultDisabledLabel) ??
             defaultLabel ??
-            _explainSelection(null, useMaterial3);
-    final String selectionLabel = enabled && value != null
-        ? _explainSelection(value, useMaterial3)
-        : defaultSelectionLabel;
+            _popupItemLabel(null, useMaterial3);
+    final String selectedPopupLabel = enabled && value != null
+        ? _popupItemLabel(value, useMaterial3)
+        : defaultSelectionValuePopupLabel;
 
     final IconThemeData selectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
@@ -161,8 +163,11 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
                     ),
               title: i == 0
                   // If first position use default label.
-                  ? Text(defaultSelectionLabel, style: txtStyle)
-                  : Text(enumFromIndex(i - 1).name, style: txtStyle),
+                  ? Text(defaultSelectionValuePopupLabel, style: txtStyle)
+                  : Text(
+                      _popupItemLabel(
+                          enumFromIndex(i - 1), useMaterial3, false),
+                      style: txtStyle),
             ),
           )
       ],
@@ -176,7 +181,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (subtitle != null) subtitle!,
-            Text(selectionLabel),
+            Text(selectedPopupLabel),
           ],
         ),
         subtitleReveal: subtitleReveal,
@@ -206,12 +211,19 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     );
   }
 
-  // A label explaining the selection made in the popup menu.
-  //
-  // Need to add specifics per used enum type here.
-  // Will get usable `toString` defaults if the enum type is not added.
-  String _explainSelection(final T? value, final bool useMaterial3) {
-    if (T == FlexTabBarStyle) {
+  /// A label explaining the selection made in the popup menu.
+  ///
+  /// We must add specifics per used enum type here.
+  /// Will get usable `name` default if the enum type is not added.
+  ///
+  /// The useLongLabel flag is used when we want to have a longer custom
+  /// description of the selection in the ListTile subtitle. If false
+  /// we return a shorter `label`, if the enum defines one, or
+  /// just the `name`. Typically the short form is used in the
+  /// popup menu items and the long form in the ListTile subtitle.
+  String _popupItemLabel(final T? value, final bool useMaterial3,
+      [final bool useLongLabel = true]) {
+    if (T == FlexTabBarStyle && useLongLabel) {
       switch (value) {
         case FlexTabBarStyle.forAppBar:
           return 'Style: forAppbar\n'
@@ -236,7 +248,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
               : 'Default (forAppBar)';
       }
     }
-    if (T == TabBarIndicatorSize) {
+    if (T == TabBarIndicatorSize && useLongLabel) {
       switch (value) {
         case TabBarIndicatorSize.tab:
           return 'Size: tab\n'
@@ -248,8 +260,17 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           return useMaterial3 ? 'Default (label)' : 'Default (tab)';
       }
     }
-    // For an unknown enum type return its value as a default label.
-    return value.toString();
+    if (T == AdaptiveTheme) {
+      final AdaptiveTheme? castValue = value as AdaptiveTheme?;
+      return castValue?.label ?? 'Default (${AdaptiveTheme.off.label})';
+    }
+    if (T == SplashTypeEnum) {
+      final SplashTypeEnum? castValue = value as SplashTypeEnum?;
+      return castValue?.label ??
+          'Default (${SplashTypeEnum.defaultSplash.label})';
+    }
+    // For an unknown enum type, return its name as a default label.
+    return value?.name ?? '';
   }
 
   // A list of icons to use in the popup menu.
@@ -281,7 +302,6 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         ),
       ];
     }
-
     if (T == TabBarIndicatorSize) {
       return const <Widget>[
         Tooltip(
@@ -296,6 +316,32 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           message: 'Width equals label',
           child: Icon(Icons.format_underlined_outlined),
         ),
+      ];
+    }
+    if (T == AdaptiveTheme) {
+      return <Widget>[
+        Tooltip(
+          message: 'Default (${AdaptiveTheme.off.label})',
+          child: const Icon(Icons.texture_outlined),
+        ),
+        for (final AdaptiveTheme enumValue in AdaptiveTheme.values)
+          Tooltip(
+            message: enumValue.label,
+            child: Icon(enumValue.icon),
+          ),
+      ];
+    }
+    if (T == SplashTypeEnum) {
+      return <Widget>[
+        Tooltip(
+          message: 'Default (${SplashTypeEnum.defaultSplash.label})',
+          child: const Icon(Icons.texture_outlined),
+        ),
+        for (final SplashTypeEnum enumValue in SplashTypeEnum.values)
+          Tooltip(
+            message: enumValue.label,
+            child: Icon(enumValue.icon),
+          ),
       ];
     }
 
