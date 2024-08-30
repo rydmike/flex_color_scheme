@@ -51,11 +51,6 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   - ThemeController: setAppBarForegroundSchemeColor, appBarForegroundSchemeColor
 
 
-- InputDecorator: add inputDecoratorPrefixIconSchemeColor
-  - FlexSubThemesData: SchemeColor? inputDecoratorPrefixIconSchemeColor
-  - Store: keyInputDecoratorPrefixIconSchemeColor, defaultInputDecoratorPrefixIconSchemeColor
-  - ThemeController: setInputDecoratorPrefixIconSchemeColor, inputDecoratorPrefixIconSchemeColor
-
 
 
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
@@ -206,11 +201,15 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added `tabAlignment` property to `FlexSubThemes.tabAlignment`.
-- Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.tabBarTheme` use it for its. (TODO: Note about assert issue)
+- Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.tabBarTheme` use it for its. (TODO: Add note about assert issue, open issue in Flutter SDK)
 
 
 - Added `foregroundSchemeColor` property to `FlexSubThemes.floatingActionButtonTheme`.
 - Added `fabForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.floatingActionButtonTheme` use it for its foreground color.
+ 
+
+- Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemes.inputDecorationTheme`.
+- Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.inputDecorationTheme` use it for its color.
 
 
 - Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
@@ -285,6 +284,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added divider color selection to **Dialogs** settings panel for the DatePicker divider color. Setting it to transparent will hide the divider in M3 mode, in M2 mode the Divider does not exist.
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
+- To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
 
 **CHANGE**
 
