@@ -9,26 +9,74 @@ import '../../shared/color_scheme_box.dart';
 /// no selection of [FlexAppBarStyle] which sets its value to null in parent,
 /// so we can use a selectable item as null input, to represent default value
 /// via no value definition. A bit ugly/pragmatic approach.
+///
+/// This class is on purpose not using the EnumPopupMenu, since
+/// it has quite different logic and style than most of them.
 class AppBarStylePopupMenu extends StatelessWidget {
   const AppBarStylePopupMenu({
     super.key,
-    required this.index,
+    required this.value,
     this.onChanged,
+    this.enabled = true,
     this.title,
     this.subtitle,
     this.contentPadding,
-    this.labelForDefault = 'default (null)',
-    this.popupLabelDefault,
+    this.defaultLabel,
+    this.defaultDisabledLabel,
     this.customAppBarColor,
+    this.isBlended = false,
   });
-  final int index;
-  final ValueChanged<int>? onChanged;
+
+  /// The currently selected value for this popup.
+  ///
+  /// A null value represents the default value selection.
+  final FlexAppBarStyle? value;
+
+  /// Called when a new value is selected.
+  ///
+  /// The default value selection calls this with null value.
+  /// The other with the choice corresponding to the selected enum value.
+  final ValueChanged<FlexAppBarStyle?>? onChanged;
+
+  /// Whether this PopupMenu is enabled.
+  ///
+  /// Set to false to disable the popup, it will be displayed as disabled
+  /// along with the title and value trailing labels.
+  final bool enabled;
+
+  /// The main heading content of the Slider tile.
+  ///
+  /// Typically a [Text] widget.
   final Widget? title;
+
+  /// Additional content displayed below the title.
+  ///
+  /// Typically a [Text] widget.
   final Widget? subtitle;
+
+  /// The [ListTile]'s internal padding.
+  ///
+  /// Insets a [ListTile]'s contents.
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
+  /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
   final EdgeInsetsGeometry? contentPadding; // Defaults to 16.
-  final String labelForDefault;
-  final String? popupLabelDefault;
+
+  /// If not defined will use response from
+  /// _explainSelection(null, useMaterial3) as default value.
+  final String? defaultLabel;
+
+  /// Override for default selection display label when the control is
+  /// disabled.
+  ///
+  /// If not defined will use defaultLabel.
+  final String? defaultDisabledLabel;
+
+  /// The color usd when the custom style is selected.
   final Color? customAppBarColor;
+
+  /// Flag to say if the selected indicate if color blended is on or not.
+  final bool isBlended;
 
   Color _appBarStyleColor(
     final FlexAppBarStyle? style,
@@ -67,33 +115,36 @@ class AppBarStylePopupMenu extends StatelessWidget {
     }
   }
 
-  String _explainAppBarStyle(
+  String _popupItemLabel(
     final FlexAppBarStyle? style,
     final bool isLight,
     final bool useMaterial3,
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return isLight ? 'primary (M2 default)' : 'primary';
+        return isLight ? 'primary\n(M2 default)' : 'primary\n(M2 default)';
       case FlexAppBarStyle.material:
-        return isLight ? 'White (M2 spec)' : '#121212 (M2 spec)';
+        return isLight
+            ? 'white surface\n(M2 spec)'
+            : 'dark grey #121212\n(M2 spec)';
       case FlexAppBarStyle.surface:
-        return 'surface, with blend';
+        return 'surface${isBlended ? ', with blend\n' : ' '}(M3 spec)';
       case FlexAppBarStyle.background:
-        return 'surfaceContainerLow, with blend';
+        return 'surfaceContainerLow${isBlended ? ',\nwith blend' : ''}';
       case FlexAppBarStyle.scaffoldBackground:
-        return 'scaffoldBackground, with blend';
+        return 'scaffoldBackground${isBlended ? ',\nwith blend' : ''}';
       case FlexAppBarStyle.custom:
-        return 'Custom (tertiary in this app)';
+        return 'Custom\n(tertiary in this app)';
       case null:
         {
           if (useMaterial3) {
-            return 'surface (M3 spec)';
+            return 'Default (surface)${isBlended ? ',\n'
+                'with blend ' : '\n'}(M3 spec)';
           } else {
             if (isLight) {
-              return 'primary (M2 spec)';
+              return 'Default (primary)\n(M2 spec)';
             } else {
-              return '#121212 (M2 spec))';
+              return 'Default (dark grey)\n(#121212, M2 spec))';
             }
           }
         }
@@ -104,30 +155,29 @@ class AppBarStylePopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final bool useM3 = theme.useMaterial3;
+    final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelMedium!;
-    final bool enabled = onChanged != null;
-    // Negative value, or index over range are used as null and default value.
-    final bool useDefault = index < 0 || index >= FlexAppBarStyle.values.length;
-    final String styleName = !useDefault
-        ? _explainAppBarStyle(FlexAppBarStyle.values[index], isLight, useM3)
-        : _explainAppBarStyle(null, isLight, useM3);
+
+    final String defaultSelectionValuePopupLabel =
+        (enabled ? null : defaultDisabledLabel) ??
+            defaultLabel ??
+            _popupItemLabel(null, isLight, useMaterial3);
+
+    final String selectedPopupLabel = enabled && value != null
+        ? _popupItemLabel(value, isLight, useMaterial3)
+        : defaultSelectionValuePopupLabel;
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
       position: PopupMenuPosition.under,
       offset: const Offset(0, -4),
       constraints: const BoxConstraints(maxHeight: 560),
-      initialValue: useDefault ? FlexAppBarStyle.values.length : index,
+      initialValue: !enabled || value == null ? 0 : value!.index + 1,
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
-        // We return -1 for index that reached max length or any negative
-        // value will cause controller for a FlexAppBarStyle to be set to
-        // "null", we need to be able to do that to input "null" property
-        // value to FlexAppBarStyle configs.
-        onChanged?.call(index >= FlexAppBarStyle.values.length ? -1 : index);
+        onChanged?.call(index == 0 ? null : FlexAppBarStyle.values[index - 1]);
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
@@ -138,33 +188,34 @@ class AppBarStylePopupMenu extends StatelessWidget {
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
-                borderColor: i == index ||
-                        (index < 0 && i == FlexAppBarStyle.values.length)
+                borderColor: (value?.index ?? -1) + 1 == i
                     ? theme.colorScheme.onSurface
                     : theme.dividerColor,
-                selected: i == index ||
-                    (index < 0 && i == FlexAppBarStyle.values.length),
-                backgroundColor: i >= FlexAppBarStyle.values.length
+                selected: (value?.index ?? -1) + 1 == i,
+                backgroundColor: i == 0
                     ? _appBarStyleColor(
                         null,
                         colorScheme,
                         theme.scaffoldBackgroundColor,
                         isLight,
-                        useM3,
+                        useMaterial3,
                       )
                     : _appBarStyleColor(
-                        FlexAppBarStyle.values[i],
+                        FlexAppBarStyle.values[i - 1],
                         colorScheme,
                         theme.scaffoldBackgroundColor,
                         isLight,
-                        useM3,
+                        useMaterial3,
                       ),
                 defaultOption: i >= FlexAppBarStyle.values.length,
               ),
-              title: i >= FlexAppBarStyle.values.length
-                  // If we reached max length make default label.
-                  ? Text(popupLabelDefault ?? labelForDefault, style: txtStyle)
-                  : Text(FlexAppBarStyle.values[i].name, style: txtStyle),
+              title: i == 0
+                  // If first position use default label.
+                  ? Text(defaultSelectionValuePopupLabel, style: txtStyle)
+                  : Text(
+                      _popupItemLabel(
+                          FlexAppBarStyle.values[i - 1], isLight, useMaterial3),
+                      style: txtStyle),
             ),
           )
       ],
@@ -176,29 +227,31 @@ class AppBarStylePopupMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             if (subtitle != null) subtitle!,
-            Text(styleName),
+            Text(selectedPopupLabel),
           ],
         ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(
-            borderColor: theme.dividerColor,
-            backgroundColor: enabled && !useDefault
+            borderColor: !enabled || value == null
+                ? colorScheme.outline.withOpacity(enabled ? 1 : 0.5)
+                : colorScheme.outline,
+            backgroundColor: !enabled || value == null
                 ? _appBarStyleColor(
-                    FlexAppBarStyle.values[index],
-                    colorScheme,
-                    theme.scaffoldBackgroundColor,
-                    isLight,
-                    useM3,
-                  )
-                : _appBarStyleColor(
                     null,
                     colorScheme,
                     theme.scaffoldBackgroundColor,
                     isLight,
-                    useM3,
+                    useMaterial3,
+                  )
+                : _appBarStyleColor(
+                    value,
+                    colorScheme,
+                    theme.scaffoldBackgroundColor,
+                    isLight,
+                    useMaterial3,
                   ),
-            defaultOption: useDefault,
+            defaultOption: !enabled || value == null,
           ),
         ),
       ),
