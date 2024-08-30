@@ -7,9 +7,9 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
 
@@ -31,6 +31,10 @@ class SwitchesSettings extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     final String labelForDefaultColor =
         (controller.useSubThemes || useMaterial3) &&
@@ -122,27 +126,21 @@ class SwitchesSettings extends StatelessWidget {
               ? controller.setSwitchThumbFixedSize
               : null,
         ),
-        AdaptiveThemePopupMenu(
+        EnumPopupMenu<AdaptiveTheme>(
+          enabled: enableControl && controller.useMaterial3,
+          values: AdaptiveTheme.values,
           title: const Text('Make Material Switch look like iOS Switch'),
-          subtitle: const Text(
+          subtitleReveal: Text(
             'An adaptive theme response to to make the themed Material Switch '
             'look as close as possible to a CupertinoSwitch. '
             'This setting has no effect in Material-2 mode and is not '
-            'available in M2 mode.\n',
+            'available in M2 mode.\n'
+            '\n'
+            // ignore: lines_longer_than_80_chars
+            '${controller.switchAdaptiveCupertinoLike?.describe ?? AdaptiveTheme.off.describe}',
           ),
-          index: controller.switchAdaptiveCupertinoLike?.index ?? -1,
-          onChanged: controller.useFlexColorScheme &&
-                  controller.useSubThemes &&
-                  useMaterial3
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setSwitchAdaptiveCupertinoLike(null);
-                  } else {
-                    controller.setSwitchAdaptiveCupertinoLike(
-                        AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
+          value: controller.switchAdaptiveCupertinoLike,
+          onChanged: controller.setSwitchAdaptiveCupertinoLike,
         ),
         PlatformPopupMenu(
           platform: controller.platform,

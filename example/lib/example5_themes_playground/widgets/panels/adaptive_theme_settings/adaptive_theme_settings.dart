@@ -5,11 +5,10 @@ import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/model/splash_type_enum.dart';
 import '../../../../shared/model/visual_density_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
+import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
-import '../../shared/splash_type_popup_menu.dart';
 import '../../shared/visual_density_popup_menu.dart';
 
 // Panel used to control the adaptive theme settings.
@@ -21,6 +20,11 @@ class AdaptiveThemeSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -61,91 +65,76 @@ class AdaptiveThemeSettings extends StatelessWidget {
               : null,
         ),
         const Divider(),
-        SplashTypePopupMenu(
-          title: const Text('Ink splash effect'),
-          subtitle: const Text(
+        EnumPopupMenu<SplashTypeEnum>(
+          enabled: enableControl,
+          values: SplashTypeEnum.values,
+          title: const Text('Splash type'),
+          subtitleReveal: Text(
             'Defines the type of tap ink splash effect used on Material '
-            'UI components.\n',
+            'UI components.\n'
+            '\n'
+            // ignore: lines_longer_than_80_chars
+            '${controller.splashType?.describe ?? SplashTypeEnum.defaultSplash.describe}',
           ),
-          index: controller.splashType?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= SplashTypeEnum.values.length) {
-                    controller.setSplashType(null);
-                  } else {
-                    controller.setSplashType(SplashTypeEnum.values[index]);
-                  }
-                }
-              : null,
+          value: controller.splashType,
+          onChanged: controller.setSplashType,
         ),
-        SplashTypePopupMenu(
-          title: const Text('Adaptive ink splash effect'),
-          subtitle: const Text(
-            'Defines the type of tap ink splash effect used on Material '
-            'UI components when running on below selected platforms. When not '
-            'running on these platforms or if the platform adaptive ink '
-            'feature is OFF, the ink splash effect above is used.\n',
-          ),
-          index: controller.splashTypeAdaptive?.index ?? -1,
-          onChanged: controller.useFlexColorScheme &&
-                  controller.useSubThemes &&
-                  controller.adaptiveSplash != AdaptiveTheme.off &&
-                  controller.adaptiveSplash != null
-              ? (int index) {
-                  if (index < 0 || index >= SplashTypeEnum.values.length) {
-                    controller.setSplashTypeAdaptive(null);
-                  } else {
-                    controller
-                        .setSplashTypeAdaptive(SplashTypeEnum.values[index]);
-                  }
-                }
-              : null,
-        ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Use platform adaptive ink splash'),
-          subtitle: const Text(
+        EnumPopupMenu<AdaptiveTheme>(
+          enabled: enableControl,
+          values: AdaptiveTheme.values,
+          title: const Text('Use adaptive splash'),
+          subtitleReveal: Text(
             'An adaptive theme response used to select a different ink '
-            'splash effect on selected platforms.\n',
+            'splash effect on selected platforms.\n'
+            '\n'
+            // ignore: lines_longer_than_80_chars
+            '${controller.adaptiveSplash?.describe ?? AdaptiveTheme.off.describe}',
           ),
-          index: controller.adaptiveSplash?.index ?? -1,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveSplash(null);
-                  } else {
-                    controller.setAdaptiveSplash(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
+          value: controller.adaptiveSplash,
+          onChanged: controller.setAdaptiveSplash,
+        ),
+        EnumPopupMenu<SplashTypeEnum>(
+          enabled: enableControl &&
+              controller.adaptiveSplash != AdaptiveTheme.off &&
+              controller.adaptiveSplash != null,
+          values: SplashTypeEnum.values,
+          title: const Text('Adaptive splash'),
+          subtitleReveal: Text(
+            'Defines the type of tap ink splash effect response used on '
+            'Material UI components when running on selected platforms. When '
+            'not running on these platforms or if the platform adaptive ink '
+            'feature is OFF, the ink splash effect above is used.\n'
+            '\n'
+            // ignore: lines_longer_than_80_chars
+            '${controller.splashTypeAdaptive?.describe ?? SplashTypeEnum.defaultSplash.describe}',
+          ),
+          value: controller.splashTypeAdaptive,
+          onChanged: controller.setSplashTypeAdaptive,
         ),
         const Divider(),
         if (isLight) ...<Widget>[
-          AdaptiveThemePopupMenu(
+          EnumPopupMenu<AdaptiveTheme>(
+            enabled: enableControl && controller.useMaterial3,
+            values: AdaptiveTheme.values,
             title: const Text('Bring elevation shadows back'),
-            subtitle: const Text(
+            subtitleReveal: Text(
               'An adaptive theme response to bring elevation shadows back in '
               'Material-3 in light theme mode on selected platforms. '
               'Has no impact in Material-2 mode. '
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
-              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
+              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
+              '\n'
+              // ignore: lines_longer_than_80_chars
+              '${controller.adaptiveElevationShadowsBackLight?.describe ?? AdaptiveTheme.off.describe}',
             ),
-            index: controller.adaptiveElevationShadowsBackLight?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveElevationShadowsBackLight(null);
-                    } else {
-                      controller.setAdaptiveElevationShadowsBackLight(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
+            value: controller.adaptiveElevationShadowsBackLight,
+            onChanged: controller.setAdaptiveElevationShadowsBackLight,
           ),
-          AdaptiveThemePopupMenu(
+          EnumPopupMenu<AdaptiveTheme>(
+            enabled: enableControl && controller.useMaterial3,
+            values: AdaptiveTheme.values,
             title: const Text('Remove elevation tint'),
-            subtitle: const Text(
+            subtitleReveal: Text(
               'An adaptive theme response to remove elevation tint on elevated '
               'surfaces in Material-3 in dark theme mode on selected '
               'platforms. This is not recommended in dark mode, unless '
@@ -165,49 +154,37 @@ class AdaptiveThemeSettings extends StatelessWidget {
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
-              'want to keep it on even if otherwise removing tint.\n',
+              'want to keep it on even if otherwise removing tint.\n'
+              '\n'
+              // ignore: lines_longer_than_80_chars
+              '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveTheme.off.describe}',
             ),
-            index: controller.adaptiveRemoveElevationTintLight?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveRemoveElevationTintLight(null);
-                    } else {
-                      controller.setAdaptiveRemoveElevationTintLight(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
+            value: controller.adaptiveRemoveElevationTintLight,
+            onChanged: controller.setAdaptiveRemoveElevationTintLight,
           ),
         ] else ...<Widget>[
-          AdaptiveThemePopupMenu(
+          EnumPopupMenu<AdaptiveTheme>(
+            enabled: enableControl && controller.useMaterial3,
+            values: AdaptiveTheme.values,
             title: const Text('Bring elevation shadows back'),
-            subtitle: const Text(
+            subtitleReveal: Text(
               'An adaptive theme response to bring elevation shadows back in '
               'Material-3 in dark theme mode on selected platforms. '
               'Has no impact in Material-2 mode. '
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
-              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n',
+              'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
+              '\n'
+              // ignore: lines_longer_than_80_chars
+              '${controller.adaptiveElevationShadowsBackDark?.describe ?? AdaptiveTheme.off.describe}',
             ),
-            index: controller.adaptiveElevationShadowsBackDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveElevationShadowsBackDark(null);
-                    } else {
-                      controller.setAdaptiveElevationShadowsBackDark(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
+            value: controller.adaptiveElevationShadowsBackDark,
+            onChanged: controller.setAdaptiveElevationShadowsBackDark,
           ),
-          AdaptiveThemePopupMenu(
-            title: const Text('Remove elevation tint'),
-            subtitle: const Text(
+          EnumPopupMenu<AdaptiveTheme>(
+            enabled: enableControl && controller.useMaterial3,
+            values: AdaptiveTheme.values,
+            title: const Text('Remove elevation tint ENUM'),
+            subtitleReveal: Text(
               'An adaptive theme response to remove elevation tint on elevated '
               'surfaces in Material-3 in dark theme mode on selected '
               'platforms. This is not recommended in dark mode, unless '
@@ -227,21 +204,13 @@ class AdaptiveThemeSettings extends StatelessWidget {
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
-              'want to keep it on even if otherwise removing tint.\n',
+              'want to keep it on even if otherwise removing tint.\n'
+              '\n'
+              // ignore: lines_longer_than_80_chars
+              '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveTheme.off.describe}',
             ),
-            index: controller.adaptiveRemoveElevationTintDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    controller.useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveRemoveElevationTintDark(null);
-                    } else {
-                      controller.setAdaptiveRemoveElevationTintDark(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
+            value: controller.adaptiveRemoveElevationTintDark,
+            onChanged: controller.setAdaptiveRemoveElevationTintDark,
           ),
         ],
         const Divider(),

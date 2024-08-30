@@ -9,9 +9,9 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
 import 'app_bar_style_popup_menu.dart';
@@ -351,47 +351,38 @@ class AppBarSettings extends StatelessWidget {
               'the app in a web build on each platform. The selections here '
               'use built-in combinations, they cover most use cases.'),
         ),
-        if (isLight) ...<Widget>[
-          AdaptiveThemePopupMenu(
+        if (isLight)
+          EnumPopupMenu<AdaptiveTheme>(
+            enabled: enableControl && controller.useMaterial3,
+            values: AdaptiveTheme.values,
             title: const Text('Scroll under elevation tint removal'),
-            subtitle: const Text('Remove the AppBar scroll under tint '
-                'elevation effect in Material-3 light mode on selected '
-                'platforms. This setting has no effect in Material-2 mode.\n'),
-            index: controller.adaptiveAppBarScrollUnderOffLight?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveAppBarScrollUnderOffLight(null);
-                    } else {
-                      controller.setAdaptiveAppBarScrollUnderOffLight(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
-          ),
-        ] else ...<Widget>[
-          AdaptiveThemePopupMenu(
+            subtitleReveal: Text(
+              'Remove the AppBar scroll under tint '
+              'elevation effect in Material-3 light mode on selected '
+              'platforms. This setting has no effect in Material-2 mode.\n'
+              '\n'
+              // ignore: lines_longer_than_80_chars
+              '${controller.adaptiveAppBarScrollUnderOffLight?.describe ?? AdaptiveTheme.off.describe}',
+            ),
+            value: controller.adaptiveAppBarScrollUnderOffLight,
+            onChanged: controller.setAdaptiveAppBarScrollUnderOffLight,
+          )
+        else
+          EnumPopupMenu<AdaptiveTheme>(
+            enabled: enableControl && controller.useMaterial3,
+            values: AdaptiveTheme.values,
             title: const Text('Scroll under elevation tint removal'),
-            subtitle: const Text('Remove the AppBar scroll under tint '
-                'elevation effect in Material-3 dark mode on selected '
-                'platforms. This setting has no effect in Material-2 mode.\n'),
-            index: controller.adaptiveAppBarScrollUnderOffDark?.index ?? -1,
-            onChanged: controller.useFlexColorScheme &&
-                    controller.useSubThemes &&
-                    useMaterial3
-                ? (int index) {
-                    if (index < 0 || index >= AdaptiveTheme.values.length) {
-                      controller.setAdaptiveAppBarScrollUnderOffDark(null);
-                    } else {
-                      controller.setAdaptiveAppBarScrollUnderOffDark(
-                          AdaptiveTheme.values[index]);
-                    }
-                  }
-                : null,
+            subtitleReveal: Text(
+              'Remove the AppBar scroll under tint '
+              'elevation effect in Material-3 dark mode on selected '
+              'platforms. This setting has no effect in Material-2 mode.\n'
+              '\n'
+              // ignore: lines_longer_than_80_chars
+              '${controller.adaptiveAppBarScrollUnderOffDark?.describe ?? AdaptiveTheme.off.describe}',
+            ),
+            value: controller.adaptiveAppBarScrollUnderOffDark,
+            onChanged: controller.setAdaptiveAppBarScrollUnderOffDark,
           ),
-        ],
         PlatformPopupMenu(
           platform: controller.platform,
           onChanged: controller.setPlatform,
