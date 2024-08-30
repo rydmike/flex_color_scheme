@@ -1636,6 +1636,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultFabSchemeColor = null;
 
+  // Key used to read and save the fabForegroundSchemeColor value.
+  static const String keyFabForegroundSchemeColor = 'fabForegroundSchemeColor';
+  // Default value for the fabForegroundSchemeColor, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultFabForegroundSchemeColor = null;
+
   // Key used to read and save the chipSchemeColor value.
   static const String keyChipSchemeColor = 'chipSchemeColor';
   // Default value for the chipSchemeColor, also used to reset settings.
