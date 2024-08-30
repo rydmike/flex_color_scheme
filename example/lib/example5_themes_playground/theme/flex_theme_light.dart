@@ -304,6 +304,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             fabAlwaysCircular: controller.fabAlwaysCircular,
             fabRadius: controller.fabBorderRadius,
             fabSchemeColor: controller.fabSchemeColor,
+            fabForegroundSchemeColor: controller.fabForegroundSchemeColor,
             // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
             chipSelectedSchemeColor: controller.chipSelectedSchemeColor,

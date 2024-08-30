@@ -690,9 +690,14 @@ String generateThemeDartCode(ThemeController controller) {
           !controller.fabAlwaysCircular
       ? '    fabRadius: ${controller.fabBorderRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String fabSchemeColor = controller.fabSchemeColor == null
-      ? ''
-      : '    fabSchemeColor: ${controller.fabSchemeColor},\n';
+  final String fabSchemeColor = controller.fabSchemeColor != null
+      ? '    fabSchemeColor: ${controller.fabSchemeColor},\n'
+      : '';
+  final String fabForegroundSchemeColor = controller.fabForegroundSchemeColor !=
+          null
+      ? '    fabForegroundSchemeColor: ${controller.fabForegroundSchemeColor},\n'
+      : '';
+
   final String snackBarRadius = controller.snackBarBorderRadius != null
       ? '    snackBarRadius: ${controller.snackBarBorderRadius},\n'
       : '';
@@ -1331,6 +1336,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabAlwaysCircular'
           '$fabBorderRadius'
           '$fabSchemeColor'
+          '$fabForegroundSchemeColor'
           //
           '$chipSchemeColor'
           '$chipSelectedSchemeColor'
@@ -1558,6 +1564,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$fabAlwaysCircular'
           '$fabBorderRadius'
           '$fabSchemeColor'
+          '$fabForegroundSchemeColor'
           //
           '$chipSchemeColor'
           '$chipSelectedSchemeColor'

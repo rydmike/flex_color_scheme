@@ -32,6 +32,24 @@ class FabSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
+    final String fabDefaultLabel =
+        useMaterial3 ? 'default (primaryContainer)' : 'default (secondary)';
+
+    // TODO(rydmike): Way too messy, needs to be cleaned up.
+    final String fabOnDefaultLabel = controller.fabForegroundSchemeColor ==
+                null &&
+            controller.fabSchemeColor != null &&
+            enableControl
+        // ignore: lines_longer_than_80_chars
+        ? 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.fabSchemeColor!).index].name})'
+        : !enableControl
+            ? useMaterial3
+                ? 'default (onPrimaryContainer)'
+                : 'default (onSecondary)'
+            // ignore: lines_longer_than_80_chars
+            : controller.fabForegroundSchemeColor != null
+                ? '${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.fabForegroundSchemeColor!).index].name}'
+                : '';
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
@@ -46,10 +64,8 @@ class FabSettings extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
-          title: const Text('FloatingActionButton color'),
-          labelForDefault: useMaterial3
-              ? 'default (primaryContainer)'
-              : 'default (secondary)',
+          title: const Text('Background color'),
+          labelForDefault: fabDefaultLabel,
           index: controller.fabSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
@@ -57,6 +73,21 @@ class FabSettings extends StatelessWidget {
                     controller.setFabSchemeColor(null);
                   } else {
                     controller.setFabSchemeColor(SchemeColor.values[index]);
+                  }
+                }
+              : null,
+        ),
+        ColorSchemePopupMenu(
+          title: const Text('Foreground color'),
+          labelForDefault: fabOnDefaultLabel,
+          index: controller.fabForegroundSchemeColor?.index ?? -1,
+          onChanged: enableControl
+              ? (int index) {
+                  if (index < 0 || index >= SchemeColor.values.length) {
+                    controller.setFabForegroundSchemeColor(null);
+                  } else {
+                    controller
+                        .setFabForegroundSchemeColor(SchemeColor.values[index]);
                   }
                 }
               : null,
