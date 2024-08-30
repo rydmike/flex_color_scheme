@@ -730,6 +730,8 @@ class ThemeController with ChangeNotifier {
         Store.keyFabBorderRadius, Store.defaultFabBorderRadius);
     _fabSchemeColor = await _themeService.load(
         Store.keyFabSchemeColor, Store.defaultFabSchemeColor);
+    _fabForegroundSchemeColor = await _themeService.load(
+        Store.keyFabSchemeColor, Store.defaultFabForegroundSchemeColor);
     //
     // Chip Settings
     _chipSchemeColor = await _themeService.load(
@@ -1227,6 +1229,7 @@ class ThemeController with ChangeNotifier {
     setFabAlwaysCircular(Store.defaultFabAlwaysCircular, false);
     setFabBorderRadius(Store.defaultFabBorderRadius, false);
     setFabSchemeColor(Store.defaultFabSchemeColor, false);
+    setFabForegroundSchemeColor(Store.defaultFabForegroundSchemeColor, false);
     //
     // Chip SETTINGS.
     setChipSchemeColor(Store.defaultChipSchemeColor, false);
@@ -4769,6 +4772,15 @@ class ThemeController with ChangeNotifier {
     _fabSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyFabSchemeColor, value));
+  }
+
+  late SchemeColor? _fabForegroundSchemeColor;
+  SchemeColor? get fabForegroundSchemeColor => _fabForegroundSchemeColor;
+  void setFabForegroundSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _fabForegroundSchemeColor) return;
+    _fabForegroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyFabForegroundSchemeColor, value));
   }
 
   // Chip SETTINGS.
