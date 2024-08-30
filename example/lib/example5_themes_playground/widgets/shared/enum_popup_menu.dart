@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/model/adaptive_theme.dart';
 import '../../../shared/model/splash_type_enum.dart';
+import '../../../shared/model/visual_density_enum.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'color_scheme_box.dart';
 
@@ -269,6 +270,11 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
       return castValue?.label ??
           'Default (${SplashTypeEnum.defaultSplash.label})';
     }
+    if (T == VisualDensityEnum) {
+      final VisualDensityEnum? castValue = value as VisualDensityEnum?;
+      return castValue?.label ??
+          'Default (${VisualDensityEnum.platform.label})';
+    }
     // For an unknown enum type, return its name as a default label.
     return value?.name ?? '';
   }
@@ -338,6 +344,19 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           child: const Icon(Icons.texture_outlined),
         ),
         for (final SplashTypeEnum enumValue in SplashTypeEnum.values)
+          Tooltip(
+            message: enumValue.label,
+            child: Icon(enumValue.icon),
+          ),
+      ];
+    }
+    if (T == VisualDensityEnum) {
+      return <Widget>[
+        Tooltip(
+          message: 'Default (${VisualDensityEnum.platform.label})',
+          child: const Icon(Icons.texture_outlined),
+        ),
+        for (final VisualDensityEnum enumValue in VisualDensityEnum.values)
           Tooltip(
             message: enumValue.label,
             child: Icon(enumValue.icon),
