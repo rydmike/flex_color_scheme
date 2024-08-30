@@ -8,9 +8,9 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
 
@@ -266,22 +266,20 @@ class DialogSettings extends StatelessWidget {
           valueDefaultLabel: _dialogRadiusLabel(controller),
           valueDefaultDisabledLabel: useMaterial3 ? '28' : '4',
         ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Adaptive dialog radius'),
-          subtitle: const Text('Use an alternative dialog border radius on '
-              'selected platforms.\n'),
-          index: controller.adaptiveDialogRadius?.index ?? -1,
-          valueDefaultLabel: _adaptiveDialogModeLabel(controller),
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveDialogRadius(null);
-                  } else {
-                    controller
-                        .setAdaptiveDialogRadius(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
+        EnumPopupMenu<AdaptiveTheme>(
+          enabled: enableControl && controller.useMaterial3,
+          values: AdaptiveTheme.values,
+          title: const Text('Use adaptive radius'),
+          subtitleReveal: Text(
+            'Use an alternative dialog border radius on '
+            'selected platforms.\n'
+            '\n'
+            // ignore: lines_longer_than_80_chars
+            '${controller.adaptiveDialogRadius?.describe ?? AdaptiveTheme.off.describe}',
+          ),
+          defaultLabel: _adaptiveDialogModeLabel(controller),
+          value: controller.adaptiveDialogRadius,
+          onChanged: controller.setAdaptiveDialogRadius,
         ),
         SliderListTileReveal(
           enabled: enableControl &&

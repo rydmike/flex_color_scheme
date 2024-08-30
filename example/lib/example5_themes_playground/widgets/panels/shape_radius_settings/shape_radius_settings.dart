@@ -7,8 +7,8 @@ import '../../../../shared/widgets/universal/flex_squircle.dart';
 import '../../../../shared/widgets/universal/flex_stadium_squircle.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../shared/adaptive_theme_popup_menu.dart';
 import '../../shared/back_to_actual_platform.dart';
+import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
 
@@ -227,18 +227,15 @@ class ShapeRadiusSettings extends StatelessWidget {
           valueDefaultLabel: 'M3 values',
           valueDefaultDisabledLabel: useMaterial3 ? 'M3 values' : '4 dp',
         ),
-        AdaptiveThemePopupMenu(
-          title: const Text('Adaptive radius'),
-          index: controller.adaptiveRadius?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= AdaptiveTheme.values.length) {
-                    controller.setAdaptiveRadius(null);
-                  } else {
-                    controller.setAdaptiveRadius(AdaptiveTheme.values[index]);
-                  }
-                }
-              : null,
+        EnumPopupMenu<AdaptiveTheme>(
+          enabled: enableControl,
+          values: AdaptiveTheme.values,
+          title: const Text('Use adaptive radius'),
+          subtitleReveal: Text(
+            controller.adaptiveRadius?.describe ?? AdaptiveTheme.off.describe,
+          ),
+          value: controller.adaptiveRadius,
+          onChanged: controller.setAdaptiveRadius,
         ),
         SliderListTileReveal(
           enabled: enableControl &&
