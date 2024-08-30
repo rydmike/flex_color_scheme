@@ -115,9 +115,17 @@ class TabBarSettings extends StatelessWidget {
         EnumPopupMenu<FlexTabBarStyle>(
           values: FlexTabBarStyle.values,
           title: const Text('TabBarStyle'),
-          enabled: controller.useFlexColorScheme,
+          enabled: controller.useFlexColorScheme &&
+              controller.tabBarItemSchemeColorLight == null,
           value: controller.tabBarStyle,
           onChanged: controller.setTabBarStyle,
+        ),
+        EnumPopupMenu<TabAlignment>(
+          enabled: enableControl,
+          values: TabAlignment.values,
+          title: const Text('Tab alignment'),
+          value: controller.tabBarTabAlignment,
+          onChanged: controller.setTabBarTabAlignment,
         ),
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(
