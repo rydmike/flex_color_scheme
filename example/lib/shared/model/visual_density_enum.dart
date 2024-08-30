@@ -35,7 +35,7 @@ enum VisualDensityEnum {
     icon: Icons.crop_16_9_outlined,
   ),
   platform(
-    label: 'Platform adaptive',
+    label: 'Platform compact adaptive',
     describe: 'This VisualDensity is adaptive based on the current '
         'platform on which the framework is executing. If a density is not '
         'specified in ThemeData, Flutter SDK uses this setup by DEFAULT. This '
