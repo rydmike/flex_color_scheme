@@ -8,8 +8,7 @@ import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
-import 'tab_bar_indicator_size_popup_menu.dart';
-import 'tab_bar_style_popup_menu.dart';
+import '../../shared/enum_popup_menu.dart';
 
 class TabBarSettings extends StatelessWidget {
   const TabBarSettings(this.controller, {super.key});
@@ -113,20 +112,12 @@ class TabBarSettings extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        TabBarStylePopupMenu(
+        EnumPopupMenu<FlexTabBarStyle>(
+          values: FlexTabBarStyle.values,
           title: const Text('TabBarStyle'),
-          labelForDefault:
-              useMaterial3 ? 'Default (flutterDefault)' : 'Default (forAppBar)',
-          index: controller.tabBarStyle?.index ?? -1,
-          onChanged: controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= FlexTabBarStyle.values.length) {
-                    controller.setTabBarStyle(null);
-                  } else {
-                    controller.setTabBarStyle(FlexTabBarStyle.values[index]);
-                  }
-                }
-              : null,
+          enabled: controller.useFlexColorScheme,
+          value: controller.tabBarStyle,
+          onChanged: controller.setTabBarStyle,
         ),
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(
@@ -251,7 +242,8 @@ class TabBarSettings extends StatelessWidget {
                 : null,
           )
         ],
-        TabBarIndicatorSizePopupMenu(
+        EnumPopupMenu<TabBarIndicatorSize>(
+          values: TabBarIndicatorSize.values,
           enabled: enableControl,
           title: const Text('Indicator style'),
           value: controller.tabBarIndicatorSize,
