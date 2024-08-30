@@ -316,6 +316,12 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorPrefixIconDarkSchemeColor = await _themeService.load(
         Store.keyInputDecoratorPrefixIconDarkSchemeColor,
         Store.defaultInputDecoratorPrefixIconDarkSchemeColor);
+    _inputDecoratorSuffixIconSchemeColor = await _themeService.load(
+        Store.keyInputDecoratorSuffixIconSchemeColor,
+        Store.defaultInputDecoratorSuffixIconSchemeColor);
+    _inputDecoratorSuffixIconDarkSchemeColor = await _themeService.load(
+        Store.keyInputDecoratorSuffixIconDarkSchemeColor,
+        Store.defaultInputDecoratorSuffixIconDarkSchemeColor);
     //
     // TextSelection SETTINGS.
     _inputCursorLightSchemeColor = await _themeService.load(
@@ -1351,7 +1357,8 @@ class ThemeController with ChangeNotifier {
 
     setInputDecoratorPrefixIconSchemeColor(null, false);
     setInputDecoratorPrefixIconDarkSchemeColor(null, false);
-
+    setInputDecoratorSuffixIconSchemeColor(null, false);
+    setInputDecoratorSuffixIconDarkSchemeColor(null, false);
     // Only notify at end, if asked to do so, to do so is default.
     if (doNotify) notifyListeners();
   }
@@ -1387,6 +1394,10 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorPrefixIconSchemeColor, false);
     setInputDecoratorPrefixIconDarkSchemeColor(
         Store.defaultInputDecoratorPrefixIconDarkSchemeColor, false);
+    setInputDecoratorSuffixIconSchemeColor(
+        Store.defaultInputDecoratorSuffixIconSchemeColor, false);
+    setInputDecoratorSuffixIconDarkSchemeColor(
+        Store.defaultInputDecoratorSuffixIconDarkSchemeColor, false);
     //
     // TextSelection SETTINGS.
     setInputCursorLightSchemeColor(
@@ -3261,6 +3272,30 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(
         Store.keyInputDecoratorPrefixIconDarkSchemeColor, value));
+  }
+
+  late SchemeColor? _inputDecoratorSuffixIconSchemeColor;
+  SchemeColor? get inputDecoratorSuffixIconSchemeColor =>
+      _inputDecoratorSuffixIconSchemeColor;
+  void setInputDecoratorSuffixIconSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorSuffixIconSchemeColor) return;
+    _inputDecoratorSuffixIconSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputDecoratorSuffixIconSchemeColor, value));
+  }
+
+  late SchemeColor? _inputDecoratorSuffixIconDarkSchemeColor;
+  SchemeColor? get inputDecoratorSuffixIconDarkSchemeColor =>
+      _inputDecoratorSuffixIconDarkSchemeColor;
+  void setInputDecoratorSuffixIconDarkSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorSuffixIconDarkSchemeColor) return;
+    _inputDecoratorSuffixIconDarkSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyInputDecoratorSuffixIconDarkSchemeColor, value));
   }
 
   // TextSelection SETTINGS.

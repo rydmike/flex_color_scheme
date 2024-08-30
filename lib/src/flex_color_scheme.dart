@@ -6944,6 +6944,7 @@ class FlexColorScheme with Diagnosticable {
             fillColor: subTheme.inputDecoratorFillColor,
             backgroundAlpha: subTheme.inputDecoratorBackgroundAlpha,
             prefixIconSchemeColor: subTheme.inputDecoratorPrefixIconSchemeColor,
+            suffixIconSchemeColor: subTheme.inputDecoratorSuffixIconSchemeColor,
             focusedBorderWidth: subTheme.inputDecoratorFocusedBorderWidth ??
                 subTheme.thickBorderWidth,
             focusedHasBorder: subTheme.inputDecoratorFocusedHasBorder,
