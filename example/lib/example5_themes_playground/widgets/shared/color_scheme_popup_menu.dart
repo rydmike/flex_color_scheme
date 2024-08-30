@@ -88,7 +88,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
                   selected: i == index + 1 || (index < 0 && i == 0),
                   borderColor: i == index + 1 || (index < 0 && i == 0)
                       ? theme.colorScheme.onSurface
-                      : theme.dividerColor,
+                      : theme.colorScheme.outline,
                   defaultOption: i <= 0,
                 ),
                 title: i <= 0
@@ -116,12 +116,12 @@ class ColorSchemePopupMenu extends StatelessWidget {
                   ? FlexSubThemes.schemeColor(
                       FlexSubThemes.onSchemeColor(SchemeColor.values[index]),
                       colorScheme)
-                  : colorScheme.onSurface,
+                  : colorScheme.onSurface.withOpacity(enabled ? 1 : 0.5),
               backgroundColor: enabled && !useDefault
                   ? FlexSubThemes.schemeColor(
                       SchemeColor.values[index], colorScheme)
                   : colorScheme.surface,
-              borderColor: theme.dividerColor,
+              borderColor: colorScheme.outline.withOpacity(enabled ? 1 : 0.5),
               defaultOption: useDefault,
             ),
           ),
