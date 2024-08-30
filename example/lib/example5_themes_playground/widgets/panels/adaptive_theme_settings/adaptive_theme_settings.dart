@@ -9,7 +9,6 @@ import '../../shared/back_to_actual_platform.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
-import '../../shared/visual_density_popup_menu.dart';
 
 // Panel used to control the adaptive theme settings.
 class AdaptiveThemeSettings extends StatelessWidget {
@@ -44,25 +43,21 @@ class AdaptiveThemeSettings extends StatelessWidget {
               'the app in a web build on each platform. The selections here '
               'use built-in combinations, they cover most use cases.'),
         ),
-        VisualDensityPopupMenu(
+        EnumPopupMenu<VisualDensityEnum>(
+          enabled: controller.useFlexColorScheme,
+          values: VisualDensityEnum.values,
           title: const Text('VisualDensity'),
-          subtitle: const Text(
+          subtitleReveal: Text(
             'Defines the visual density of user interface components. '
             'Density, in the context of a UI, is the vertical and horizontal '
             '"compactness" of the components in the UI. It is without unit, '
-            'since it means different things to different UI components.\n',
+            'since it means different things to different UI components.\n'
+            '\n'
+            // ignore: lines_longer_than_80_chars
+            '${controller.usedVisualDensity?.describe ?? VisualDensityEnum.platform.describe}',
           ),
-          index: controller.usedVisualDensity?.index ?? -1,
-          onChanged: controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= VisualDensityEnum.values.length) {
-                    controller.setUsedVisualDensity(null);
-                  } else {
-                    controller
-                        .setUsedVisualDensity(VisualDensityEnum.values[index]);
-                  }
-                }
-              : null,
+          value: controller.usedVisualDensity,
+          onChanged: controller.setUsedVisualDensity,
         ),
         const Divider(),
         EnumPopupMenu<SplashTypeEnum>(
