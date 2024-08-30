@@ -308,9 +308,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Improved `IconButton` presentation, by adding a text column explaining the type, as on the Chips panel.
 - Improved presentation of `Switch`, `Checkbox` and `Radio`, by using more orderly columns and spacing and explanation labels, similar style as on `Chip` and `IconButton`.  
 - Changed the style and speed of all popup menus. They are more compact with smaller font, and open under the ListTile you open them from, when there is room to do so. They also have no animation to open quickly and more desktop like, as this app is intended to be used primary on desktop.
-- Changed the `SchemeColor` color selection popup menu `ColorSchemePopupMenu` to have the default color value listed first. It now also always shows the scrollbars.
-- Changed how ALL opacity sliders work! They now ALL work with default (null) color and opacity is nullable. Even if the SchemeColor it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default and to apply opacity anywhere.
-- Major internal refactor of ALL sliders used in the Playground. Made a convenience widget for Sliders with a null default value, en separate labels for disabled and null values. Now using this for all nullable Sliders in the Playground.
+- Changed the `SchemeColor` color selection popup menu `ColorSchemePopupMenu` to have the default color value listed first. It now also always shows the scrollbars. 
+  - TODO: Refactor it to use `SchemeColor?` nullable enum as input and callback, instead of int.
+- Created a generic `EnumPopupMenu<T extends Enum>` nullable popup menu with support for separate null and disabled defaults. It also has built in `ListTileReveal` for info reveals. 
+- Refactored all suitable popup menus to use the new `EnumPopupMenu`. 
+- Changed how ALL opacity sliders work! They now ALL work with default (null) color and opacity is nullable. Even if the `SchemeColor` it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default to apply opacity anywhere.
+- Major internal refactor of all Sliders used in the Playground. Converted the Sliders to custom composed `SliderListTileReveal`, a combo convenience widget for Sliders with a null default value, separate labels for disabled and null default values, and info `ListTileReveal`. 
 
 
 **FIX**
