@@ -383,6 +383,12 @@ class ThemeController with ChangeNotifier {
     _appBarBackgroundSchemeColorDark = await _themeService.load(
         Store.keyAppBarBackgroundSchemeColorDark,
         Store.defaultAppBarBackgroundSchemeColorDark);
+    _appBarBackgroundSchemeColorLight = await _themeService.load(
+        Store.keyAppBarBackgroundSchemeColorLight,
+        Store.defaultAppBarBackgroundSchemeColorLight);
+    _appBarBackgroundSchemeColorDark = await _themeService.load(
+        Store.keyAppBarBackgroundSchemeColorDark,
+        Store.defaultAppBarBackgroundSchemeColorDark);
     //
     // BottomAppBar SETTINGS.
     _bottomAppBarSchemeColorLight = await _themeService.load(
@@ -1021,6 +1027,10 @@ class ThemeController with ChangeNotifier {
         Store.defaultAppBarBackgroundSchemeColorLight, false);
     setAppBarBackgroundSchemeColorDark(
         Store.defaultAppBarBackgroundSchemeColorDark, false);
+    setAppBarForegroundSchemeColorLight(
+        Store.defaultAppBarForegroundSchemeColorLight, false);
+    setAppBarForegroundSchemeColorDark(
+        Store.defaultAppBarForegroundSchemeColorDark, false);
     //
     // BottomAppBar SETTINGS.
     setBottomAppBarSchemeColorLight(
@@ -3519,6 +3529,30 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(
         _themeService.save(Store.keyAppBarBackgroundSchemeColorDark, value));
+  }
+
+  late SchemeColor? _appBarForegroundSchemeColorLight;
+  SchemeColor? get appBarForegroundSchemeColorLight =>
+      _appBarForegroundSchemeColorLight;
+  void setAppBarForegroundSchemeColorLight(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _appBarForegroundSchemeColorLight) return;
+    _appBarForegroundSchemeColorLight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAppBarForegroundSchemeColorLight, value));
+  }
+
+  late SchemeColor? _appBarForegroundSchemeColorDark;
+  SchemeColor? get appBarForegroundSchemeColorDark =>
+      _appBarForegroundSchemeColorDark;
+  void setAppBarForegroundSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _appBarForegroundSchemeColorDark) return;
+    _appBarForegroundSchemeColorDark = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAppBarForegroundSchemeColorDark, value));
   }
 
   // BottomAppBar SETTINGS.

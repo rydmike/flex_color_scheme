@@ -810,6 +810,22 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultAppBarBackgroundSchemeColorDark = null;
 
+  // Key used to read and save the appBarForegroundSchemeColor value.
+  static const String keyAppBarForegroundSchemeColorLight =
+      'appBarForegroundSchemeColor';
+  // Default value for the appBarForegroundSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarForegroundSchemeColorLight = null;
+
+  // Key used to read and save the appBarForegroundSchemeColorDark value.
+  static const String keyAppBarForegroundSchemeColorDark =
+      'appBarForegroundSchemeColorDark';
+  // Default value for the appBarForegroundSchemeColorDark, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarForegroundSchemeColorDark = null;
+
   // BottomAppBar SETTINGS.
   // ===========================================================================
 
