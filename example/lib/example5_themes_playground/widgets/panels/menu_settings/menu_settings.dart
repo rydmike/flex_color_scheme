@@ -79,6 +79,12 @@ class MenuSettings extends StatelessWidget {
             // ignore: lines_longer_than_80_chars
             : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuIndicatorBackgroundSchemeColor!).index].name})';
 
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -98,6 +104,7 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
+                contentPadding: paddingStartColumn,
                 title: const Text('Color'),
                 labelForDefault: 'default (surfaceContainer)',
                 index: controller.menuSchemeColor?.index ?? -1,
@@ -117,8 +124,7 @@ class MenuSettings extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 title: const Text('Opacity'),
                 value: controller.menuOpacity,
                 onChanged: controller.setMenuOpacity,
@@ -139,6 +145,7 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
                 enabled: enableControl,
                 title: const Text('Radius'),
                 subtitleReveal: const Text(
@@ -163,9 +170,8 @@ class MenuSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
                 enabled: enableControl,
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                 title: const Text('Elevation'),
                 value: controller.menuElevation,
                 onChanged: controller.setMenuElevation,
@@ -189,9 +195,8 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: EdgeInsetsDirectional.only(
-                    start: 8, end: useMaterial3 ? 24 : 16),
-                trailingWidth: 58,
+                contentPadding: paddingStartColumn,
+                trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.menuPaddingStart,
                 onChanged: controller.setMenuPaddingStart,
@@ -206,9 +211,8 @@ class MenuSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
-                trailingWidth: 58,
+                contentPadding: paddingEndColumn,
+                trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.menuPaddingEnd,
                 onChanged: controller.setMenuPaddingEnd,
@@ -228,9 +232,8 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: EdgeInsetsDirectional.only(
-                    start: 8, end: useMaterial3 ? 24 : 16),
-                trailingWidth: 58,
+                contentPadding: paddingStartColumn,
+                trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.menuPaddingTop,
                 onChanged: controller.setMenuPaddingTop,
@@ -245,9 +248,8 @@ class MenuSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
-                trailingWidth: 58,
+                contentPadding: paddingEndColumn,
+                trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.menuPaddingBottom,
                 onChanged: controller.setMenuPaddingBottom,
@@ -278,6 +280,7 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
+                contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
                 labelForDefault: menuItemDefault,
                 index: controller.menuItemBackgroundSchemeColor?.index ?? -1,
@@ -295,8 +298,7 @@ class MenuSettings extends StatelessWidget {
             ),
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 title: const Text('Foreground color'),
                 labelForDefault: menuOnItemDefault,
                 index: controller.menuItemForegroundSchemeColor?.index ?? -1,
@@ -319,6 +321,7 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
+                contentPadding: paddingStartColumn,
                 title: const Text('Highlighted background'),
                 labelForDefault: menuIndicatorDefault,
                 index:
@@ -338,8 +341,7 @@ class MenuSettings extends StatelessWidget {
             ),
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 title: const Text('Highlighted foreground'),
                 labelForDefault: menuOnIndicatorDefault,
                 index:
@@ -479,6 +481,7 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
+                contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
                 labelForDefault: menuBarDefault,
                 index: controller.menuBarBackgroundSchemeColor?.index ?? -1,
@@ -497,8 +500,7 @@ class MenuSettings extends StatelessWidget {
             ),
             Expanded(
               child: SwitchListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 title: const Text('No shadow'),
                 subtitleReveal: const Text(
                   'The M3 guide depicts MenuBars with no shadow and optional '
@@ -523,6 +525,7 @@ class MenuSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
                 enabled: enableControl,
                 title: const Text('Radius'),
                 subtitleReveal: const Text(
@@ -545,9 +548,8 @@ class MenuSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
                 enabled: enableControl,
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                 title: const Text('Elevation'),
                 subtitleReveal: const Text(
                   'For an flat MenuBar design use 0 elevation. The Material-3 '
