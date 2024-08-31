@@ -31,6 +31,12 @@ class PopupMenuButtonSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -75,6 +81,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
+                contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
                 labelForDefault: useMaterial3
                     ? 'default (surfaceContainer)'
@@ -94,8 +101,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 enabled: enableControl,
                 title: const Text('Opacity'),
                 value: controller.popupMenuOpacity,
@@ -117,6 +123,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
                 enabled: enableControl,
                 title: const Text('Container radius'),
                 subtitleReveal: const Text(
@@ -138,8 +145,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 enabled: enableControl,
                 title: const Text('Elevation'),
                 value: controller.popupMenuElevation,
