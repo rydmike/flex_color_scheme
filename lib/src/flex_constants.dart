@@ -271,6 +271,9 @@ const int kFillColorAlphaDark = 0x14;
 /// Enabled border alpha value on border sides.
 ///
 /// Used on opt in sub-themes by [InputDecorator] in M2 mode.
+/// And when unfocused border uses color in M3 mode too. Creates a slight
+/// diff when it receives focus, even if unfocused color is based on
+/// a color used for focus. Error focus/unfocus color also uses this alpha.
 ///
 /// Value: 0xA7 = 167 = 65%
 const int kEnabledBorderAlpha = 0xA7;
