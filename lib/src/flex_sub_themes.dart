@@ -7212,6 +7212,7 @@ sealed class FlexSubThemes {
       ),
       //
       // TODO(rydmike): Fixes for clock dial background color issue in M3.
+      // TODO(rydmike): Remove in V8? It has been fixed in Flutter too.
       // https://github.com/flutter/flutter/issues/118657
       dialBackgroundColor: useM3 ? colorScheme.surfaceContainerHighest : null,
       dayPeriodColor: useM3
