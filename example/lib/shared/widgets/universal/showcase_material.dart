@@ -296,7 +296,7 @@ class ElevatedButtonShowcase extends StatelessWidget {
         runSpacing: 8,
         children: <Widget>[
           SizedBox(
-            width: 110,
+            width: 116,
             child: ElevatedButton(
               onPressed: () {},
               child: const Text('Elevated'),
@@ -311,7 +311,7 @@ class ElevatedButtonShowcase extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 110,
+            width: 117,
             child: ElevatedButton(
               onPressed: null,
               child: Text('Disabled'),
@@ -335,7 +335,7 @@ class FilledButtonShowcase extends StatelessWidget {
         runSpacing: 8,
         children: <Widget>[
           SizedBox(
-            width: 110,
+            width: 116,
             child: FilledButton(
               onPressed: () {},
               child: const Text('Filled'),
@@ -350,7 +350,7 @@ class FilledButtonShowcase extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 110,
+            width: 117,
             child: FilledButton(
               onPressed: null,
               child: Text('Disabled'),
@@ -374,7 +374,7 @@ class FilledButtonTonalShowcase extends StatelessWidget {
         runSpacing: 8,
         children: <Widget>[
           SizedBox(
-            width: 110,
+            width: 116,
             child: FilledButton.tonal(
               onPressed: () {},
               child: const Text('Tonal'),
@@ -389,7 +389,7 @@ class FilledButtonTonalShowcase extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 110,
+            width: 117,
             child: FilledButton.tonal(
               onPressed: null,
               child: Text('Disabled'),
@@ -413,7 +413,7 @@ class OutlinedButtonShowcase extends StatelessWidget {
         runSpacing: 8,
         children: <Widget>[
           SizedBox(
-            width: 110,
+            width: 116,
             child: OutlinedButton(
               onPressed: () {},
               child: const Text('Outlined'),
@@ -428,7 +428,7 @@ class OutlinedButtonShowcase extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 110,
+            width: 117,
             child: OutlinedButton(
               onPressed: null,
               child: Text('Disabled'),
@@ -452,7 +452,7 @@ class TextButtonShowcase extends StatelessWidget {
         runSpacing: 8,
         children: <Widget>[
           SizedBox(
-            width: 110,
+            width: 116,
             child: TextButton(
               onPressed: () {},
               child: const Text('Text'),
@@ -467,7 +467,7 @@ class TextButtonShowcase extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 110,
+            width: 117,
             child: TextButton(
               onPressed: null,
               child: Text('Disabled'),
