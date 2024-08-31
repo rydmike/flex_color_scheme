@@ -377,18 +377,20 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomAppBarElevationDark);
     _transparentStatusBar = await _themeService.load(
         Store.keyTransparentStatusBar, Store.defaultTransparentStatusBar);
+
     _appBarBackgroundSchemeColorLight = await _themeService.load(
         Store.keyAppBarBackgroundSchemeColorLight,
         Store.defaultAppBarBackgroundSchemeColorLight);
     _appBarBackgroundSchemeColorDark = await _themeService.load(
         Store.keyAppBarBackgroundSchemeColorDark,
         Store.defaultAppBarBackgroundSchemeColorDark);
-    _appBarBackgroundSchemeColorLight = await _themeService.load(
-        Store.keyAppBarBackgroundSchemeColorLight,
-        Store.defaultAppBarBackgroundSchemeColorLight);
-    _appBarBackgroundSchemeColorDark = await _themeService.load(
-        Store.keyAppBarBackgroundSchemeColorDark,
-        Store.defaultAppBarBackgroundSchemeColorDark);
+
+    _appBarForegroundSchemeColorLight = await _themeService.load(
+        Store.keyAppBarForegroundSchemeColorLight,
+        Store.defaultAppBarForegroundSchemeColorLight);
+    _appBarForegroundSchemeColorDark = await _themeService.load(
+        Store.keyAppBarForegroundSchemeColorDark,
+        Store.defaultAppBarForegroundSchemeColorDark);
     //
     // BottomAppBar SETTINGS.
     _bottomAppBarSchemeColorLight = await _themeService.load(

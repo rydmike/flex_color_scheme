@@ -169,7 +169,7 @@ class AppBarSettings extends StatelessWidget {
             if (isLight)
               Expanded(
                 child: ColorSchemePopupMenu(
-                  title: const Text('Color'),
+                  title: const Text('Background color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : useMaterial3
@@ -194,7 +194,7 @@ class AppBarSettings extends StatelessWidget {
             else
               Expanded(
                 child: ColorSchemePopupMenu(
-                  title: const Text('Color'),
+                  title: const Text('Background color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : 'default (surface)',
@@ -213,6 +213,73 @@ class AppBarSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+            if (isLight)
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  title: const Text('Foreground color'),
+                  labelForDefault: controller.useFlexColorScheme
+                      ? 'default (AppBarStyle)'
+                      : useMaterial3
+                          ? 'default (surface)'
+                          : 'default (primary)',
+                  index:
+                      controller.appBarForegroundSchemeColorLight?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller
+                                .setAppBarForegroundSchemeColorLight(null);
+                          } else {
+                            controller.setAppBarForegroundSchemeColorLight(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              )
+            else
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  title: const Text('Foreground color'),
+                  labelForDefault: controller.useFlexColorScheme
+                      ? 'default (AppBarStyle)'
+                      : 'default (surface)',
+                  index:
+                      controller.appBarForegroundSchemeColorDark?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller.setAppBarForegroundSchemeColorDark(null);
+                          } else {
+                            controller.setAppBarForegroundSchemeColorDark(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SwitchListTileReveal(
+                title: const Text('Remove scrim'),
+                subtitleReveal: const Text(
+                  'ON  No scrim on top status bar, as in Material-3 spec\n'
+                  'OFF Use a two toned AppBar with a scrim on top status bar\n'
+                  'This settings only applies to the Android platform.\n',
+                ),
+                value: controller.transparentStatusBar &&
+                    controller.useFlexColorScheme,
+                onChanged: controller.useFlexColorScheme
+                    ? controller.setTransparentStatusBar
+                    : null,
+              ),
+            ),
             Expanded(
               child: SwitchListTileReveal(
                 title: const Text('Remove scrim'),

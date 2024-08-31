@@ -3220,40 +3220,34 @@ class FlexColorScheme with Diagnosticable {
     if (effectiveAppBarColor == null) {
       switch (appBarStyle) {
         case FlexAppBarStyle.primary:
-          effectiveAppBarColor =
-              effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveColors.primary;
         case FlexAppBarStyle.material:
-          effectiveAppBarColor =
-              FlexColor.materialLightSurface.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = FlexColor.materialLightSurface;
         case FlexAppBarStyle.surface:
-          effectiveAppBarColor =
-              effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveSurfaceColor;
         case FlexAppBarStyle.background:
-          effectiveAppBarColor = effectiveSurfaceContainerLowColor
-              .withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveSurfaceContainerLowColor;
+
         case FlexAppBarStyle.scaffoldBackground:
-          effectiveAppBarColor =
-              effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveScaffoldColor;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
-              effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
-                  effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
+              effectiveColors.appBarColor ?? effectiveColors.primary;
         case null:
-          // Style was null, if Opacity used, apply to use M2/M3 mode default.
-          if (appBarOpacity != null) {
-            effectiveAppBarColor = useMaterial3
-                ? effectiveSurfaceColor.withOpacity(appBarOpacity)
-                : effectiveColors.primary.withOpacity(appBarOpacity);
-          }
+          effectiveAppBarColor =
+              useMaterial3 ? effectiveSurfaceColor : effectiveColors.primary;
       }
-      // The resulting effectiveAppBarColor may remain null if default values
-      // are used, used to avoid creating any AppBar theme in M3 mode if
-      // using no sub-theme and only default FCS.light direct AppBar properties.
     }
-
+    // As last step apply the factory opacity parameter value.
+    // The resulting effectiveAppBarColor is never null and always passed to the
+    // raw FlexColorScheme constructor.
+    if (appBarOpacity != null) {
+      effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
+    }
+    // The raw FlexColorScheme(), created by above complex .light factory.
     return FlexColorScheme(
       colorScheme: effectiveColorScheme,
-      // This is the light theme factory so we always set brightness to light.
+      // This is the light theme factory, always brightness light.
       brightness: Brightness.light,
       // Primary colors for the application
       primary: effectiveColors.primary,
@@ -3283,18 +3277,16 @@ class FlexColorScheme with Diagnosticable {
       onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3LightOnErrorContainer
           : onColors.onErrorContainer,
-      // Surface is used e.g. by Card and bottom appbar.
+      // Surface color with complex custom options applied.
       surface: effectiveSurfaceColor,
       onSurface: onColors.onSurface,
-      // Color of the scaffold background.
+      // Color of the scaffold background, with complex options applied.
       scaffoldBackground: effectiveScaffoldColor,
-      // Color of dialog background elements, a passed in dialogBackground
-      // color will override the factory style, if provided.
+      // Color of dialog background elements, with complex options applied.
       dialogBackground: effectiveDialogBackground,
-      // Set app bar background to effective background color.
+      // AppBar background color with its complicated custom options applied.
       appBarBackground: effectiveAppBarColor,
       surfaceTint: surfaceTint,
-      //
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: bottomAppBarElevation,
@@ -5324,39 +5316,33 @@ class FlexColorScheme with Diagnosticable {
     if (effectiveAppBarColor == null) {
       switch (appBarStyle) {
         case FlexAppBarStyle.primary:
-          effectiveAppBarColor =
-              effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveColors.primary;
         case FlexAppBarStyle.material:
-          effectiveAppBarColor =
-              FlexColor.materialDarkSurface.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = FlexColor.materialDarkSurface;
         case FlexAppBarStyle.surface:
-          effectiveAppBarColor =
-              effectiveSurfaceColor.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveSurfaceColor;
         case FlexAppBarStyle.background:
-          effectiveAppBarColor = effectiveSurfaceContainerLowColor
-              .withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveSurfaceContainerLowColor;
         case FlexAppBarStyle.scaffoldBackground:
-          effectiveAppBarColor =
-              effectiveScaffoldColor.withOpacity(appBarOpacity ?? 1.0);
+          effectiveAppBarColor = effectiveScaffoldColor;
         case FlexAppBarStyle.custom:
           effectiveAppBarColor =
-              effectiveColors.appBarColor?.withOpacity(appBarOpacity ?? 1.0) ??
-                  effectiveColors.primary.withOpacity(appBarOpacity ?? 1.0);
+              effectiveColors.appBarColor ?? effectiveColors.primary;
         case null:
-          // Style was null, if Opacity used, apply to surface for M2 & M3 mode.
-          if (appBarOpacity != null) {
-            effectiveAppBarColor =
-                effectiveSurfaceColor.withOpacity(appBarOpacity);
-          }
+          effectiveAppBarColor =
+              useMaterial3 ? effectiveSurfaceColor : effectiveColors.primary;
       }
-      // The resulting effectiveAppBarColor may remain null if default values
-      // are used, used to avoid creating any AppBar theme in M3 mode if
-      // using no sub-theme and only default FCS.light direct AppBar properties.
     }
-
+    // As last step apply the factory opacity parameter value.
+    // The resulting effectiveAppBarColor is never null and always passed to the
+    // raw FlexColorScheme constructor.
+    if (appBarOpacity != null) {
+      effectiveAppBarColor = effectiveSurfaceColor.withOpacity(appBarOpacity);
+    }
+    // The raw FlexColorScheme(), created by above complex .dark factory.
     return FlexColorScheme(
       colorScheme: effectiveColorScheme,
-      // This is the dark theme factory so we always set brightness to dark.
+      // This is the light theme factory, always brightness light.
       brightness: Brightness.dark,
       // Primary colors for the application
       primary: effectiveColors.primary,
@@ -5386,21 +5372,16 @@ class FlexColorScheme with Diagnosticable {
       onErrorContainer: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3DarkOnErrorContainer
           : onColors.onErrorContainer,
-      // Surface is used e.g. by Card and bottom appbar and in this
-      // implementation also by dialogs.
+      // Surface color with complex custom options applied.
       surface: effectiveSurfaceColor,
       onSurface: onColors.onSurface,
-      // If darkIsTrueBlack is set, we use black as default scaffold background,
-      // otherwise provided value or if null effective scheme background.
+      // Color of the scaffold background, with complex options applied.
       scaffoldBackground: effectiveScaffoldColor,
-      // Color of dialog background elements, a passed in dialogBackground
-      // color will override the factory style, if provided.
+      // Color of dialog background elements, with complex options applied.
       dialogBackground: effectiveDialogBackground,
-      // Set app bar background to effective background color, but a passed
-      // in appBarBackground will override it if provided.
+      // AppBar background color with its complicated custom options applied.
       appBarBackground: effectiveAppBarColor,
       surfaceTint: surfaceTint,
-      //
       tabBarStyle: tabBarStyle,
       appBarElevation: appBarElevation,
       bottomAppBarElevation: bottomAppBarElevation,
@@ -6626,16 +6607,18 @@ class FlexColorScheme with Diagnosticable {
         : colorScheme.primary.blend(Colors.white, 80);
 
     // AppBar background color:
-    // - If a color is passed in, that is used first. If light/dark factory
-    //   created a none default background or with transparency, this will
-    //   be the case
+    // - If a color is passed in, that is used first. The light/dark factory
+    //   always passes in a color, it may have opacity too. When the factories
+    //   are used as they should be, the other conditions are a bit moot, but we
+    //   are doing them anyway so things work as expected if somebody does not
+    //   use the factories.
     // - If we use sub-themes, with this raw constructor, we use its scheme
     //   based color.
     // - If neither was given and M2 we use the surface color in dark mode and
     //   primary color in light mode, the same logic that Flutter SDK
     //   ThemeData.from factory sets the AppBar background color in M2, in
     //   M3 we always use surface color.
-    final Color effectiveAppBarBackgroundColor = appBarBackground ??
+    final Color effectiveAppBarColor = appBarBackground ??
         (useSubThemes && subTheme.appBarBackgroundSchemeColor != null
             ? FlexSubThemes.schemeColor(
                 subTheme.appBarBackgroundSchemeColor!, colorScheme)
@@ -6644,23 +6627,58 @@ class FlexColorScheme with Diagnosticable {
                 : isDark
                     ? colorScheme.surface
                     : colorScheme.primary);
+
     final Brightness appBarBrightness =
-        ThemeData.estimateBrightnessForColor(effectiveAppBarBackgroundColor);
+        ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
+
+    // AppBar foreground get its scheme color if sub-themes are used, if no
+    // foreground specific color was given, but we still had a scheme based
+    // background color given, we use the scheme based background pair for
+    // the foreground color. If we are not using sub-themes, we use the
+    // colorScheme.onSurface color for the AppBar foreground color in M3 mode
+    // and also in dark mode in M2 mode. In light mode in M2 mode we use
+    // onPrimary.
     Color appBarForeground =
-        appBarBrightness == Brightness.dark ? Colors.white : Colors.black;
-    // Icons are slightly black  transparent in light mode! This per SDK.
-    Color appBarIconColor =
-        appBarBrightness == Brightness.dark ? Colors.white : Colors.black87;
-    // If we are using subThemes and blend text, use it for the AppBar text too.
+        useSubThemes && subTheme.appBarForegroundSchemeColor != null
+            ? FlexSubThemes.schemeColor(
+                subTheme.appBarForegroundSchemeColor!, colorScheme)
+            : useSubThemes && subTheme.appBarBackgroundSchemeColor != null
+                ? FlexSubThemes.schemeColorPair(
+                    subTheme.appBarBackgroundSchemeColor!, colorScheme)
+                : useMaterial3
+                    ? colorScheme.onSurface
+                    : isDark
+                        ? colorScheme.onSurface
+                        : colorScheme.onPrimary;
+
+    // M2 Icons are slightly black transparent in light mode!
+    // But white in dark mode. This per SDK, the constants are from Flutter.
+    Color appBarIconColor = appBarBrightness == Brightness.dark
+        ? kDefaultIconLightColor
+        : kDefaultIconDarkColor;
+    Color appBarActionIconColor = appBarIconColor;
+    // M3 does its defaults a bit differently.
+    if (useMaterial3) {
+      appBarIconColor = colorScheme.onSurface;
+      appBarActionIconColor = colorScheme.onSurfaceVariant;
+    }
+    // If we are using subThemes and blend text, use it for the AppBar text
+    // and icons as well.
     if (useSubThemes && subTheme.blendTextTheme) {
       if (appBarBrightness == Brightness.dark) {
         appBarForeground =
-            FlexColor.lightSurface.blend(effectiveAppBarBackgroundColor, 12);
+            FlexColor.lightSurface.blend(effectiveAppBarColor, 12);
+        appBarIconColor =
+            FlexColor.lightSurface.blend(effectiveAppBarColor, 12);
+        appBarActionIconColor =
+            FlexColor.lightSurface.blend(effectiveAppBarColor, 12);
       } else {
         appBarForeground =
-            FlexColor.darkSurface.blend(effectiveAppBarBackgroundColor, 12);
+            FlexColor.darkSurface.blend(effectiveAppBarColor, 12);
+        appBarIconColor = FlexColor.darkSurface.blend(effectiveAppBarColor, 12);
+        appBarActionIconColor =
+            FlexColor.darkSurface.blend(effectiveAppBarColor, 12);
       }
-      appBarIconColor = appBarForeground;
     }
 
     // The FlexColorScheme AppBar's customizable system UI overlay style.
@@ -6764,10 +6782,9 @@ class FlexColorScheme with Diagnosticable {
               : colorScheme.onSurface.withAlpha(0x99); // 60%
         case FlexTabBarStyle.forAppBar:
           return (appBarBrightness == Brightness.light &&
-                  (effectiveAppBarBackgroundColor == Colors.white ||
-                      effectiveAppBarBackgroundColor == colorScheme.surface ||
-                      effectiveAppBarBackgroundColor ==
-                          colorScheme.surfaceContainerLow))
+                  (effectiveAppBarColor == Colors.white ||
+                      effectiveAppBarColor == colorScheme.surface ||
+                      effectiveAppBarColor == colorScheme.surfaceContainerLow))
               ? colorScheme.onSurface.withAlpha(0x99) // 60%
               : tabBarStyleColor().withAlpha(0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
@@ -6861,10 +6878,10 @@ class FlexColorScheme with Diagnosticable {
     // Tooltip border radius value;
     double? tooltipBorderRadius() {
       if (!useSubThemes) return 4; // Flutter SDK default
-      return subTheme.tooltipRadius ?? kTooltipRadius; // FCS default
+      return subTheme.tooltipRadius ?? kTooltipRadius; // FCS default 8dp
     }
 
-    // FCS opinionated tinted semi transparent background color. Used as
+    // FCS opinionated tinted semi-transparent background color. Used as
     // background on SnackBar (default) and as an option on Slider value.
     Color tintedBackground({
       required Color background,
@@ -6927,7 +6944,7 @@ class FlexColorScheme with Diagnosticable {
     final bool tintedDisabled = useSubThemes && subTheme.tintedDisabledControls;
 
     // Make the effective input decoration theme, by using FCS sub themes
-    // if opted in, otherwise use pre v4 version as before. This decoration
+    // if opted in, otherwise use pre FCS v4 variant as before. This decoration
     // theme is also passed into the TimePickerTheme, and DropdownMenu so we
     // get the same style used on them too.
     final InputDecorationTheme? effectiveInputDecorationTheme = useSubThemes
@@ -7010,26 +7027,23 @@ class FlexColorScheme with Diagnosticable {
               ).withOpacity(subTheme.popupMenuOpacity!);
 
     // Return the ThemeData object defined by the FlexColorScheme
-    // properties and the designed opinionated theme design choices.
-    //
-    // The used properties are sorted in the same order they are in
-    // ThemeData factory. For sake of sanity, let's keep it that way.
+    // properties and its opinionated theme design choices.
     return ThemeData(
       // Some properties we just pass along to the standard ThemeData factory.
       // They are included in FlexColorScheme (FCS) so we do not have to
       // apply them via ThemeData copyWith separately for cases when we want
-      // to use them in a FlexColorSchemes, which might often be the case. Some
-      // of the values may be null and get defaults via the ThemeData() factory
-      // som might pass along given value, which we may have used internally
-      // in FlexColorScheme as well.
+      // to use them in a FlexColorScheme theme, which might often be the case.
+      // Some of the values may be null and get defaults via the ThemeData()
+      // factory, some might pass along given value, which we may have used
+      // internally in FlexColorScheme as well.
       //
       // Not all properties in ThemeData are included, if you need to modify
       // them, use copyWith on ThemeData returned by FCS.
 
       // GENERAL CONFIGURATION
-      //
+
       // Elevation overlay on dark material elevation is used on dark themes
-      // on surfaces when so requested in M2, applyElevationOverlayColor
+      // on surfaces when so requested in M2, because applyElevationOverlayColor
       // defaults to true in FlexColorScheme themes, but you can turn it off.
       // Flutter ThemeData.from ColorScheme based themes also uses this by
       // default, but older ThemeData factories do not use it by default.
@@ -7178,12 +7192,12 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.appBarTheme(
               colorScheme: colorScheme,
               centerTitle: subTheme.appBarCenterTitle,
-              backgroundColor: effectiveAppBarBackgroundColor,
+              backgroundColor: effectiveAppBarColor,
               foregroundColor: appBarForeground,
               elevation: appBarElevation ?? 0,
               scrolledUnderElevation: subTheme.appBarScrolledUnderElevation,
               iconTheme: IconThemeData(color: appBarIconColor),
-              actionsIconTheme: IconThemeData(color: appBarIconColor),
+              actionsIconTheme: IconThemeData(color: appBarActionIconColor),
               systemOverlayStyle: systemOverlayStyle,
               shadowColor: useShadow ? colorScheme.shadow : null,
               toolbarTextStyle: subTheme.appBarToolbarTextStyle,
@@ -7194,20 +7208,20 @@ class FlexColorScheme with Diagnosticable {
           : useMaterial3
               ? FlexSubThemes.appBarTheme(
                   colorScheme: colorScheme,
-                  backgroundColor: effectiveAppBarBackgroundColor,
+                  backgroundColor: effectiveAppBarColor,
                   foregroundColor: appBarForeground,
                   elevation: appBarElevation ?? 0,
                   iconTheme: IconThemeData(color: appBarIconColor),
-                  actionsIconTheme: IconThemeData(color: appBarIconColor),
+                  actionsIconTheme: IconThemeData(color: appBarActionIconColor),
                   systemOverlayStyle: systemOverlayStyle,
                 )
               : FlexSubThemes.appBarTheme(
                   colorScheme: colorScheme,
-                  backgroundColor: effectiveAppBarBackgroundColor,
+                  backgroundColor: effectiveAppBarColor,
                   foregroundColor: appBarForeground,
                   elevation: appBarElevation ?? 0,
                   iconTheme: IconThemeData(color: appBarIconColor),
-                  actionsIconTheme: IconThemeData(color: appBarIconColor),
+                  actionsIconTheme: IconThemeData(color: appBarActionIconColor),
                   systemOverlayStyle: systemOverlayStyle,
                 ),
       //
@@ -7976,14 +7990,14 @@ class FlexColorScheme with Diagnosticable {
 
   /// Returns the effective [ColorScheme] defined by your [FlexColorScheme].
   ///
-  /// After you have defined your Flex scheme with [FlexColorScheme] or one of
-  /// its recommended factories [FlexColorScheme.light], [FlexColorScheme.dark],
-  /// you can use the [toScheme] method to get the effective standard Flutter
+  /// After you have defined your [FlexColorScheme] with one of its recommended
+  /// factories [FlexColorScheme.light], [FlexColorScheme.dark], you can use
+  /// the [toScheme] method to get the effective standard Flutter
   /// [ColorScheme] object defined by your [FlexColorScheme] definition.
   ///
   /// While you can use use this returned color scheme in a standard
   /// [ThemeData.from] color scheme based theme factory to create a theme from
-  /// [FlexColorScheme], this is NOT the recommended way to make a
+  /// [FlexColorScheme], this is **NOT** the recommended way to make a
   /// fully [FlexColorScheme] based theme. Normally you want to use
   /// [FlexColorScheme.toTheme] to make your ThemeData when using
   /// FlexColorScheme. The [FlexColorScheme.toTheme] method uses
