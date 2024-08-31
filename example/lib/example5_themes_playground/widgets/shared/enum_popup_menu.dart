@@ -281,15 +281,15 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     if (T == FlexSliderIndicatorType && useLongLabel) {
       switch (value) {
         case FlexSliderIndicatorType.rectangular:
-          return 'Rounded rectangle';
+          return 'Rectangle (rounded)';
         case FlexSliderIndicatorType.drop:
-          return 'Inverted drop';
+          return 'Drop (inverted)';
         case null:
           {
             if (useMaterial3) {
-              return 'Default (Inverted drop)';
+              return 'Default (drop)';
             } else {
-              return 'Default (Rounded rectangle)';
+              return 'Default (rectangle)';
             }
           }
       }
