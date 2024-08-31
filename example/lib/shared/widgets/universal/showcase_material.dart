@@ -2501,7 +2501,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   key: const Key('TextField1'),
                   controller: _plainFieldController,
                   decoration: InputDecoration(
-                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
                     labelText: 'TextField',
@@ -2517,7 +2519,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: TextEditingController(),
                   enabled: false,
                   decoration: InputDecoration(
-                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     labelText: 'Disabled label',
                   ),
@@ -2542,7 +2546,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   key: const Key('TextField2'),
                   controller: _withIconsController,
                   decoration: InputDecoration(
-                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
                     labelText: 'Icons',
@@ -2560,7 +2566,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: TextEditingController(text: 'Entry'),
                   enabled: false,
                   decoration: InputDecoration(
-                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     labelText: 'Disabled label',
                     prefixIcon: const Icon(Icons.search),
@@ -2578,7 +2586,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   key: const Key('TextField3'),
                   controller: _collapsedFieldController,
                   decoration: InputDecoration.collapsed(
-                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Collapsed',
                   ),
@@ -2591,7 +2601,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   enabled: false,
                   controller: TextEditingController(text: 'Disabled entry'),
                   decoration: InputDecoration.collapsed(
-                    border: _forceOutlined ? const OutlineInputBorder() : null,
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Collapsed TextField',
                   ),
