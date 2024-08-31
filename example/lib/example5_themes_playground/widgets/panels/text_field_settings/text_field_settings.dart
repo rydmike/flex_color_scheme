@@ -156,6 +156,12 @@ class TextFieldSettings extends StatelessWidget {
         ? 'default (${SchemeColor.values[controller.inputDecoratorSchemeColorDark!.index].name})'
         : 'default (primary)';
 
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -222,9 +228,11 @@ class TextFieldSettings extends StatelessWidget {
         if (isLight)
           Row(
             children: <Widget>[
+              // 1st column light
               Expanded(
                 child: ColorSchemePopupMenu(
-                  title: const Text('Color light mode'),
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Color (light)'),
                   labelForDefault: useMaterial3
                       ? 'default (surfaceContainerHighest)'
                       : 'default (primary)',
@@ -241,11 +249,11 @@ class TextFieldSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+              // 2nd column light
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl,
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                  contentPadding: paddingEndColumn,
                   title: const Text('Opacity'),
                   subtitle: Text('Alpha as opacity is '
                       '$lightBackgroundLabelOpacity %'),
@@ -268,9 +276,11 @@ class TextFieldSettings extends StatelessWidget {
         else
           Row(
             children: <Widget>[
+              // 1st column dark
               Expanded(
                 child: ColorSchemePopupMenu(
-                  title: const Text('Color dark mode'),
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Color (dark)'),
                   labelForDefault: useMaterial3
                       ? 'default (surfaceVariant)'
                       : 'default (primary)',
@@ -287,11 +297,11 @@ class TextFieldSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+              // 2nd column dark
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl,
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                  contentPadding: paddingEndColumn,
                   title: const Text('Opacity'),
                   subtitle: Text('Alpha as opacity is '
                       '$darkBackgroundLabelOpacity %'),
@@ -311,149 +321,44 @@ class TextFieldSettings extends StatelessWidget {
               ),
             ],
           ),
-        Row(
-          children: <Widget>[
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  title: const Text('Focused prefix icon'),
-                  labelForDefault: useMaterial3
-                      ? 'default (onSurface)'
-                      // ignore: lines_longer_than_80_chars
-                      : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
-                  index:
-                      controller.inputDecoratorPrefixIconSchemeColor?.index ??
-                          -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputDecoratorPrefixIconSchemeColor(null);
-                          } else {
-                            controller.setInputDecoratorPrefixIconSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
-                ),
-              )
-            else
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  title: const Text('Focused prefix icon'),
-                  labelForDefault: useMaterial3
-                      ? 'default (onSurface)'
-                      // ignore: lines_longer_than_80_chars
-                      : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
-                  index: controller
-                          .inputDecoratorPrefixIconDarkSchemeColor?.index ??
-                      -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputDecoratorPrefixIconDarkSchemeColor(
-                                    null);
-                          } else {
-                            controller
-                                .setInputDecoratorPrefixIconDarkSchemeColor(
-                                    SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
-                ),
-              ),
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
-                  title: const Text('Focused suffix icon'),
-                  labelForDefault: useMaterial3
-                      ? 'default (onSurface)'
-                      // ignore: lines_longer_than_80_chars
-                      : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
-                  index:
-                      controller.inputDecoratorSuffixIconSchemeColor?.index ??
-                          -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputDecoratorSuffixIconSchemeColor(null);
-                          } else {
-                            controller.setInputDecoratorSuffixIconSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
-                ),
-              )
-            else
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
-                  title: const Text('Focused suffix icon'),
-                  labelForDefault: useMaterial3
-                      ? 'default (onSurface)'
-                      // ignore: lines_longer_than_80_chars
-                      : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
-                  index: controller
-                          .inputDecoratorSuffixIconDarkSchemeColor?.index ??
-                      -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputDecoratorSuffixIconDarkSchemeColor(
-                                    null);
-                          } else {
-                            controller
-                                .setInputDecoratorSuffixIconDarkSchemeColor(
-                                    SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
-                ),
-              ),
-          ],
-        ),
-        const Divider(),
+        const Divider(height: 0),
         //
         // Border type and radius
         //
         Row(
           children: <Widget>[
+            // 1st column light and dark
             Expanded(
-              child: SwitchListTile(
-                title: const Text(
-                  'Border type',
-                ),
-                subtitle: const Text(
-                  'OFF underline  |  ON outline',
-                ),
-                value: controller.inputDecoratorBorderType ==
-                        FlexInputBorderType.outline &&
-                    controller.useSubThemes &&
-                    controller.useFlexColorScheme,
-                onChanged: enableControl
-                    ? (bool isOn) {
-                        if (isOn) {
-                          controller.setInputDecoratorBorderType(
-                              FlexInputBorderType.outline);
-                        } else {
-                          controller.setInputDecoratorBorderType(
-                              FlexInputBorderType.underline);
-                        }
-                      }
-                    : null,
-              ),
+              child: ListTile(
+                  contentPadding: paddingStartColumn,
+                  enabled: enableControl,
+                  title: const Text('Border'),
+                  subtitle: controller.inputDecoratorBorderType ==
+                          FlexInputBorderType.outline
+                      ? const Text('Outlined')
+                      : const Text('Underlined'),
+                  onTap: () {
+                    if (controller.inputDecoratorBorderType ==
+                        FlexInputBorderType.outline) {
+                      controller.setInputDecoratorBorderType(
+                          FlexInputBorderType.underline);
+                    } else {
+                      controller.setInputDecoratorBorderType(
+                          FlexInputBorderType.outline);
+                    }
+                  },
+                  trailing: Padding(
+                    padding: const EdgeInsetsDirectional.only(end: 12),
+                    child: controller.inputDecoratorBorderType ==
+                            FlexInputBorderType.outline
+                        ? const Icon(Icons.border_outer_outlined, size: 36)
+                        : const Icon(Icons.border_bottom_outlined, size: 36),
+                  )),
             ),
+            // 2nd colum light and dark
             Expanded(
               child: SliderListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 enabled: enableControl,
                 title: const Text('Radius'),
                 value: controller.inputDecoratorBorderRadius,
@@ -470,17 +375,17 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ],
         ),
-
-        const Divider(),
         //
         // Border color and style
         //
         Row(
           children: <Widget>[
             if (isLight)
+              // 1st column light
               Expanded(
                 child: ColorSchemePopupMenu(
-                  title: const Text('Border light mode'),
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Color (light)'),
                   labelForDefault: baseDefaultLabelLightColor,
                   index:
                       controller.inputDecoratorBorderSchemeColorLight?.index ??
@@ -503,9 +408,11 @@ class TextFieldSettings extends StatelessWidget {
                 ),
               )
             else
+              // 1st column dark
               Expanded(
                 child: ColorSchemePopupMenu(
-                  title: const Text('Border dark mode'),
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Color (dark)'),
                   labelForDefault: baseDefaultLabelDarkColor,
                   index:
                       controller.inputDecoratorBorderSchemeColorDark?.index ??
@@ -527,10 +434,10 @@ class TextFieldSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+            // 2nd column light and dark
             Expanded(
               child: SwitchListTile(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 title: const Text('Unfocused uses color'),
                 value: enableControl &&
                     controller.inputDecoratorUnfocusedBorderIsColored &&
@@ -549,8 +456,10 @@ class TextFieldSettings extends StatelessWidget {
         //
         Row(
           children: <Widget>[
+            // 1st column light and dark
             Expanded(
               child: SwitchListTile(
+                contentPadding: paddingStartColumn,
                 title: const Text('Unfocused has border'),
                 value: enableControl &&
                     controller.inputDecoratorUnfocusedHasBorder,
@@ -559,10 +468,10 @@ class TextFieldSettings extends StatelessWidget {
                     : null,
               ),
             ),
+            // 2nd column light and dark
             Expanded(
               child: SliderListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 enabled: enableControl &&
                     controller.inputDecoratorUnfocusedHasBorder,
                 title: const Text('Unfocused border width'),
@@ -585,8 +494,10 @@ class TextFieldSettings extends StatelessWidget {
         //
         Row(
           children: <Widget>[
+            // 1st column light and dark
             Expanded(
               child: SwitchListTile(
+                contentPadding: paddingStartColumn,
                 title: const Text('Focused has border'),
                 value:
                     enableControl && controller.inputDecoratorFocusedHasBorder,
@@ -596,10 +507,10 @@ class TextFieldSettings extends StatelessWidget {
                         : null,
               ),
             ),
+            // 2nd column light and dark
             Expanded(
               child: SliderListTileReveal(
-                contentPadding:
-                    EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                contentPadding: paddingEndColumn,
                 enabled:
                     enableControl && controller.inputDecoratorFocusedHasBorder,
                 title: const Text('Border width'),
@@ -617,17 +528,130 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ],
         ),
+        const Divider(height: 0),
+        Row(
+          children: <Widget>[
+            // 1st column light
+            if (isLight)
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Focused prefix icon'),
+                  labelForDefault: useMaterial3
+                      ? 'default (onSurfaceVariant)'
+                      // ignore: lines_longer_than_80_chars
+                      : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
+                  index:
+                      controller.inputDecoratorPrefixIconSchemeColor?.index ??
+                          -1,
+                  onChanged: enableControl
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller
+                                .setInputDecoratorPrefixIconSchemeColor(null);
+                          } else {
+                            controller.setInputDecoratorPrefixIconSchemeColor(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              )
+            else
+              // 1st column dark
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Focused prefix icon'),
+                  labelForDefault: useMaterial3
+                      ? 'default (onSurfaceVariant)'
+                      // ignore: lines_longer_than_80_chars
+                      : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
+                  index: controller
+                          .inputDecoratorPrefixIconDarkSchemeColor?.index ??
+                      -1,
+                  onChanged: enableControl
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller
+                                .setInputDecoratorPrefixIconDarkSchemeColor(
+                                    null);
+                          } else {
+                            controller
+                                .setInputDecoratorPrefixIconDarkSchemeColor(
+                                    SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              ),
 
+            if (isLight)
+              // 2nd column light
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Focused suffix icon'),
+                  labelForDefault: useMaterial3
+                      ? 'default (onSurfaceVariant)'
+                      // ignore: lines_longer_than_80_chars
+                      : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
+                  index:
+                      controller.inputDecoratorSuffixIconSchemeColor?.index ??
+                          -1,
+                  onChanged: enableControl
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller
+                                .setInputDecoratorSuffixIconSchemeColor(null);
+                          } else {
+                            controller.setInputDecoratorSuffixIconSchemeColor(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              )
+            else
+              // 2nd column dark
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Focused suffix icon'),
+                  labelForDefault: useMaterial3
+                      ? 'default (onSurfaceVariant)'
+                      // ignore: lines_longer_than_80_chars
+                      : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
+                  index: controller
+                          .inputDecoratorSuffixIconDarkSchemeColor?.index ??
+                      -1,
+                  onChanged: enableControl
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller
+                                .setInputDecoratorSuffixIconDarkSchemeColor(
+                                    null);
+                          } else {
+                            controller
+                                .setInputDecoratorSuffixIconDarkSchemeColor(
+                                    SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              ),
+          ],
+        ),
+        const Divider(height: 0),
         //
         // Text Selection Style
         //
-        const Divider(),
         if (isLight)
-          const ListTile(title: Text('Light mode TextSelection style'))
+          const ListTile(title: Text('TextSelection style (light)'))
         else
-          const ListTile(title: Text('Dark mode TextSelection style')),
+          const ListTile(title: Text('TextSelection style (dark)')),
         const Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsetsDirectional.only(start: 16, end: 108),
           child: TextField(
             showCursor: true,
             decoration: InputDecoration(
@@ -639,8 +663,10 @@ class TextFieldSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           Row(
             children: <Widget>[
+              // 1st column light
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
                   labelForDefault: baseDefaultLabelLightColor,
                   index: controller.inputCursorLightSchemeColor?.index ?? -1,
@@ -656,10 +682,10 @@ class TextFieldSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+              // 2nd column light
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                  contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
                   labelForDefault: baseDefaultHandleLabelLightColor,
                   index:
@@ -682,8 +708,10 @@ class TextFieldSettings extends StatelessWidget {
           ),
           Row(
             children: <Widget>[
+              // 1st column light
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Selection'),
                   labelForDefault: baseDefaultLabelLightColor,
                   index: controller.inputSelectionLightSchemeColor?.index ?? -1,
@@ -699,10 +727,10 @@ class TextFieldSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+              // 2nd column light
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                  contentPadding: paddingEndColumn,
                   enabled: enableControl,
                   title: const Text('Selection opacity'),
                   value: controller.inputSelectionLightOpacity,
@@ -723,8 +751,10 @@ class TextFieldSettings extends StatelessWidget {
         ] else ...<Widget>[
           Row(
             children: <Widget>[
+              // 1st column dark
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
                   labelForDefault: baseDefaultLabelDarkColor,
                   index: controller.inputCursorDarkSchemeColor?.index ?? -1,
@@ -740,10 +770,10 @@ class TextFieldSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+              // 2nd column dark
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                  contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
                   labelForDefault: baseDefaultHandleLabelDarkColor,
                   index:
@@ -766,8 +796,10 @@ class TextFieldSettings extends StatelessWidget {
           ),
           Row(
             children: <Widget>[
+              // 1st column dark
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Selection'),
                   labelForDefault: baseDefaultLabelDarkColor,
                   index: controller.inputSelectionDarkSchemeColor?.index ?? -1,
@@ -783,10 +815,10 @@ class TextFieldSettings extends StatelessWidget {
                       : null,
                 ),
               ),
+              // 2nd column dark
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
+                  contentPadding: paddingEndColumn,
                   enabled: enableControl,
                   title: const Text('Selection opacity'),
                   value: controller.inputSelectionDarkOpacity,
