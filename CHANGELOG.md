@@ -18,19 +18,21 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 **CRITICAL TODOS**
 
 * Consider what to do with surfaceTint removal.
-  * It is basically obsolete now in Flutter 3.22 and later. 
-  * Keep for now? Maybe add a "bring tints back" feature? 
-* Consider what to do with shadows back. 
-  * Keep and add more fine-grained control. Shadow color selection per component!
+  * DONE
+  * It is basically obsolete now in Flutter 3.22 and later.
+  * Will keep it around for now. Add info about it.
+  * Maybe add a "bring tints back" feature? Nah, who wants that anyway?
+* Consider what to do with shadows back.
+  * Keep and add more fine-grained control.
+  * Later add shadow color selection per component.
 * Flutter 3.22 broke +100 tests in FCS, review and fix them, after all updates.
   * Get tests back to 100% coverage.
 
 
 * Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
-  * DONE
-  * This was tricky, big rework and new feature.
+  * DONE, this was tricky, big rework and new feature.
 * Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. Need a new approach not using the background color.
-  * DONE 
+  * DONE, it was very tricky to deal with this in FCS. 
 * Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. They have been fixed. All the remaining 492 deprecated `background`, `onBackground` and `surfaceVariant` hints have now been fixed.
   * DONE
 * Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
@@ -38,20 +40,18 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 
 
 * Consider more breaking default value changes to clean up the past opinionated API and make it fully aligned with Flutter's M3 defaults. Playground can keep its own defaults, but the package should align with Flutter's defaults.
-  * DONE - Mostly, some defaults are still opinionated, but they are now more aligned with Flutter defaults. 
-    * Tooltip and Snackbar will keep their opinionated defaults. They are easy enough to make default, and there is guidance in the Playground app how to do it.
-      * TODO: Add info on how the get M3 defaults to doc comments as well, if not present - check!
-    * InputDecorator, consider changing it to using M3 style as default and instead adding a button with one or maybe two examples of much nicer styles.
+  * DONE
+  * Mostly, some defaults are still opinionated, but they are now more aligned with Flutter defaults. 
+    * Tooltip and Snackbar will keep their opinionated defaults.
+      * They are easy enough to make default, and there is guidance in the Playground app how to do it.
+    * TODO: Add info on how the get M3 defaults to doc comments as well, if not present - check!
+    * InputDecorator: It is now mor M3 default, which is not so nice looking.
+      * TODO: Add: Two new buttons with optional config examples. Keep M3 and FCS options.
   
 **TODO**
  
-- AppBar: Option to decouple foreground/background colors.
-  - FlexSubThemesData: SchemeColor? appBarForegroundSchemeColor
-  - Store: keyAppBarForegroundSchemeColor, defaultAppBarForegroundSchemeColor
-  - ThemeController: setAppBarForegroundSchemeColor, appBarForegroundSchemeColor
-
-- AppBar add the center title prop that exists in FlexSubThemesData.
-- 
+- AppBar: Add the center title prop that exists in FlexSubThemesData, 1 prop needed.
+- AppBar: Add own colors for leading and actions icon colors, 2 props in FCS and 4 new props needed in Playground. 
 
 
 - Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
@@ -63,33 +63,31 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
   - Text styles sizing.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter.
 
-- InputDecorator: Internal, change InputDecorator theme to use only `border` and its WidgetState.
-- InputDecorator: Platform adaptive radius.
-
-
 **POTENTIAL TODOS or maybe push to version 8.1.0 or later**
 
 - Add **NEW** color schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
-  - Add ShadCn theme colors?
+  - Add Shadcn theme colors?
+
 
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
-- Checkbox: Shape and border.
-
 - Not possible to use custom error colors with toDark generated schemes, maybe keep it so?
 
 
+- InputDecorator: Platform adaptive radius.
 - Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
-- Some `ListTile` theming properties, which ones?
+
+- `Checkbox` shape and border.
+- Some `ListTile` theming properties.
 - Some `SearchBar` theming features.
 - Some `SearchView` theming features.
-- Add fidelity for iOS adaptive AppBar.
+- Add fidelity for iOS adaptive AppBar. There was a small thing mentioned in docs, look it up.
 - Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> Maybe, but prefer transparent instead, add guidance to docs about it.
 
 
-- When it lands in stable, add TabBar theme property `indicatorAnimation`.
+- Add TabBar theme property `indicatorAnimation`, When it lands in stable.
   - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
   - Store: keyTabBarIndicatorAnimation, defaultTabBarIndicatorAnimation
   - ThemeController: setTabBarIndicatorAnimation, tabBarIndicatorAnimation
@@ -97,7 +95,7 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 **Investigate**
 
 - If themed AppBar system overlay can now impact the system navigation bar settings. Implement convenience feature if it can.
-- Consider `TabBarStyle.universal` using the `primaryFixedDimcolor`? Or keep as is for now? Are they any better than current one?
+- Consider `TabBarStyle.universal` using the `primaryFixedDimcolor`? Or keep as is for now? Are they any better than the current one?
 - BottomSheet with no FSS and seeded Scheme in M2 mode, we get the same color on surface and surfaceBright, resulting in it not showing any diff in the presentation in M2 mode. It also has no default elevation in M2, which is M2 default, but it is dumb. Maybe add elevation in M2 defaults? It would help with the presentation, as the seeded Colorscheme result for MCU variants are what they are.
   
 **BREAKING**
@@ -213,6 +211,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.inputDecorationTheme` use it for its color.
 
 
+- Added `appBarForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.appBarTheme` use it for its color.
+
+
 - Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
 
 
@@ -244,7 +245,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the updated `SchemeColor` and `ColorScheme`.
 
 - Improved the theming logic for `Card` theme.
-  - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Now for for  bot using default and null radius value, it keeps shape null and lets the widget default behavior be used, so we can keep the outline on `Card.outlined` variant for the default case at least. This Flutter theming limitation and impact is thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
+  - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Both are now using default and null radius value, it keeps shape null and lets the widget default behavior be used, so we can keep the outline on `Card.outlined` variant for the default case at least. This Flutter theming limitation and impact is thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
+
+- Changed the `FlexSubThemes.inputDecoratorTheme` to use only `border` and its WidgetState for its theme. It offers more and nicer control over hover state than using the older legacy more limited border styles. Found a related Flutter SDK issue. Using themed `activeIndicatorBorder` and `outlineBorder` do not work at all, they should work, but everything must be done via `border` property to get the border style, this is a bit more involved API. It is a bug in how the decorator theme is used in Flutter, only the M3 default themes considers and uses themed `activeIndicatorBorder` and `outlineBorder`. 
+  - **TODO**: Report the issue to Flutter SDK and add a link to it here.    
 
 **FIX**
  
@@ -313,7 +317,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Improved presentation of `Switch`, `Checkbox` and `Radio`, by using more orderly columns and spacing and explanation labels, similar style as on `Chip` and `IconButton`.  
 - Changed the style and speed of all popup menus. They are more compact with smaller font, and open under the ListTile you open them from, when there is room to do so. They also have no animation to open quickly and more desktop like, as this app is intended to be used primary on desktop.
 - Changed the `SchemeColor` color selection popup menu `ColorSchemePopupMenu` to have the default color value listed first. It now also always shows the scrollbars. 
-  - TODO: Refactor it to use `SchemeColor?` nullable enum as input and callback, instead of int.
+  - **TODO**: Refactor it to use `SchemeColor?` nullable enum as input and callback, instead of int.
 - Created a generic `EnumPopupMenu<T extends Enum>` nullable popup menu with support for separate null and disabled defaults. It also has built in `ListTileReveal` for info reveals. 
 - Refactored all suitable popup menus to use the new `EnumPopupMenu`. 
 - Changed how ALL opacity sliders work! They now ALL work with default (null) color and opacity is nullable. Even if the `SchemeColor` it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default to apply opacity anywhere.

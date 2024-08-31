@@ -3310,7 +3310,7 @@ sealed class FlexSubThemes {
 
     /// The icon color of the suffixIcon in a focused [InputDecoration].
     ///
-    /// If not defined, defaults to [inputDecoratorSchemeColor] in FCS M2 and to
+    /// If not defined, defaults to [prefixIconSchemeColor] in FCS M2 and to
     /// [SchemeColor.onSurface] in FCS M3.
     final SchemeColor? suffixIconSchemeColor,
 
@@ -3416,6 +3416,8 @@ sealed class FlexSubThemes {
     final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = tintedInteractions ?? false;
     final bool tintDisable = tintedDisabled ?? false;
+    final bool isFilled = filled ?? true;
+
     // Used color scheme is for dark mode.
     final bool isDark = colorScheme.brightness == Brightness.dark;
 
@@ -3479,30 +3481,42 @@ sealed class FlexSubThemes {
             ? usedFillColor.darken(kInputDecoratorLightBgDarken)
             : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
-    // PrefixIconColor
-    final SchemeColor prefixFallback =
-        useM3 ? SchemeColor.onSurface : baseSchemeColor ?? SchemeColor.primary;
-    final Color prefixIconColor =
-        schemeColor(prefixIconSchemeColor ?? prefixFallback, colorScheme);
-
-    // Has same fallback as prefix icon color.
-    final Color suffixIconColor =
-        schemeColor(suffixIconSchemeColor ?? prefixFallback, colorScheme);
+    // Focused prefix iconColor defaults
+    final SchemeColor focusedIconDefault = useM3
+        ? SchemeColor.onSurfaceVariant
+        : baseSchemeColor ?? SchemeColor.primary;
+    // Effective focused prefix icon color.
+    final Color focusedPrefixIconColor =
+        schemeColor(prefixIconSchemeColor ?? focusedIconDefault, colorScheme);
+    // Effective focused suffix icon color.
+    final Color focusedSuffixIconColor =
+        schemeColor(suffixIconSchemeColor ?? focusedIconDefault, colorScheme);
 
     // Flutter SDK "magic" theme colors from ThemeData, with old M1/M2 roots.
     final Color hintColorM2 =
         isDark ? Colors.white60 : Colors.black.withAlpha(kTintHover); // 60%
-    final Color suffixIconColorM2 = isDark ? Colors.white70 : Colors.black45;
-    final Color disabledColorM2 = isDark ? Colors.white38 : Colors.black38;
+    final Color unfocusedIconDefaultM2 =
+        isDark ? Colors.white70 : Colors.black45;
+    final Color disabledDefaultM2 = isDark ? Colors.white38 : Colors.black38;
+    final Color disabledDefaultM3 =
+        colorScheme.onSurface.withAlpha(kAlphaDisabled);
+    final Color disabledDefault = useM3 ? disabledDefaultM3 : disabledDefaultM2;
 
     // Enabled border color.
-    final Color enabledBorder = unfocusedBorderIsColored
+    final Color enabledBorderColor = unfocusedBorderIsColored
         ? borderColor.withAlpha(kEnabledBorderAlpha)
         : useM3
-            ? borderType == FlexInputBorderType.underline
+            ? isFilled
                 ? colorScheme.onSurfaceVariant
                 : colorScheme.outline
             : colorScheme.onSurface.withAlpha(kAlphaDisabled);
+    // TODO(rydmike): Review M3 border hover, defaults are not very distinct.
+    // Enabled hovered border color.
+    final Color enabledHoveredBorderColor = unfocusedBorderIsColored
+        ? borderColor //.withAlpha(kEnabledBorderAlpha)
+        : isFilled
+            ? colorScheme.onSurface
+            : colorScheme.onSurfaceVariant; // .withAlpha(kAlphaDisabled);
 
     // Default border radius.
     final double effectiveRadius =
@@ -3512,29 +3526,30 @@ sealed class FlexSubThemes {
     final double unfocusedWidth = unfocusedBorderWidth ?? kThinBorderWidth;
     final double focusedWidth = focusedBorderWidth ?? kThickBorderWidth;
 
-    final InputBorder effectiveInputBorder =
-        borderType == FlexInputBorderType.underline
-            ? UnderlineInputBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(effectiveRadius),
-                  topRight: Radius.circular(effectiveRadius),
-                ),
-              )
-            : OutlineInputBorder(
-                gapPadding: gapPadding,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(effectiveRadius),
-                ),
-              );
+    final BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+      topLeft: Radius.circular(effectiveRadius),
+      topRight: Radius.circular(effectiveRadius),
+    );
+    final BorderRadius effectiveOutlineBorder =
+        BorderRadius.circular(effectiveRadius);
 
     return InputDecorationTheme(
       labelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return tintDisable
+              ? TextStyle(color: tintDisabledColor)
+              : TextStyle(
+                  color: colorScheme.onSurface.withAlpha(kAlphaDisabled));
+        }
         if (states.contains(WidgetState.error)) {
           if (states.contains(WidgetState.focused)) {
             return TextStyle(color: colorScheme.error);
           }
           if (states.contains(WidgetState.hovered)) {
-            return TextStyle(color: colorScheme.onErrorContainer);
+            // TODO(rydmike): Info: M3 default uses onErrorContainer.
+            // Excluding it, prefer suffix icon uses error color, opinionated.
+            // Maybe add option to choose between error and onErrorContainer?
+            return TextStyle(color: colorScheme.error);
           }
           return TextStyle(color: colorScheme.error);
         }
@@ -3544,12 +3559,7 @@ sealed class FlexSubThemes {
         if (states.contains(WidgetState.hovered)) {
           return TextStyle(color: colorScheme.onSurfaceVariant);
         }
-        if (states.contains(WidgetState.disabled)) {
-          return tintDisable
-              ? TextStyle(color: tintDisabledColor)
-              : TextStyle(
-                  color: colorScheme.onSurface.withAlpha(kAlphaDisabled));
-        }
+
         return TextStyle(
             color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
       }),
@@ -3562,13 +3572,17 @@ sealed class FlexSubThemes {
 
           if (states.contains(WidgetState.hovered)) {
             // TODO(rydmike): Info: M3 uses onErrorContainer.
-            // TextStyle(color: colorScheme.onErrorContainer)
             // Excluding it, prefer error as float label color, FCS opinionated.
+            // Maybe include with option to choose style?
             return TextStyle(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              color: colorScheme.error,
             );
           }
-          return TextStyle(color: colorScheme.error);
+          return TextStyle(
+            // TODO(rydmike): INFO: M3 error, with this we get a hover diff.
+            // Prefer this as a diff to the hover state.
+            color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+          );
         }
         if (states.contains(WidgetState.focused)) {
           return TextStyle(color: borderColor);
@@ -3579,10 +3593,7 @@ sealed class FlexSubThemes {
         if (states.contains(WidgetState.disabled)) {
           return tintDisable
               ? TextStyle(color: tintDisabledColor)
-              : TextStyle(
-                  color: useM3
-                      ? colorScheme.onSurface.withAlpha(kAlphaDisabled)
-                      : disabledColorM2);
+              : TextStyle(color: disabledDefault);
         }
         return TextStyle(
             color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2);
@@ -3602,102 +3613,232 @@ sealed class FlexSubThemes {
       hintStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
           return TextStyle(
-              color: tintDisable ? tintDisabledColor : disabledColorM2);
+              color: tintDisable ? tintDisabledColor : disabledDefault);
         }
-        return TextStyle(color: hintColorM2);
+        return TextStyle(
+          color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2,
+        );
       }),
       iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
-          return tintDisable
-              ? tintDisabledColor
-              : colorScheme.onSurface.withAlpha(kAlphaDisabled);
+          return tintDisable ? tintDisabledColor : disabledDefault;
         }
         if (states.contains(WidgetState.focused)) {
           return useM3 ? colorScheme.onSurfaceVariant : baseColor;
         }
-        return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+        return useM3 ? colorScheme.onSurfaceVariant : unfocusedIconDefaultM2;
       }),
       prefixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
-          return tintDisable
-              ? tintDisabledColor
-              : colorScheme.onSurface.withAlpha(kAlphaDisabled);
+          return tintDisable ? tintDisabledColor : disabledDefault;
         }
         if (states.contains(WidgetState.focused)) {
-          return prefixIconColor;
+          return focusedPrefixIconColor;
         }
-        return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+        return useM3 ? colorScheme.onSurfaceVariant : unfocusedIconDefaultM2;
       }),
       suffixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.error)) {
-          // TODO(rydmike): Info: M3 uses onErrorContainer.
-          // if (states.contains(WidgetState.hovered)) {
-          //   return colorScheme.onErrorContainer;
-          // }
-          // Excluding it, prefer suffix icon as error color, FCS opinionated.
+          if (states.contains(WidgetState.focused)) {
+            return colorScheme.error;
+          }
+          if (states.contains(WidgetState.hovered)) {
+            // TODO(rydmike): Info: M3 default uses onErrorContainer.
+            // Excluding it, prefer suffix icon uses error color, opinionated.
+            // Maybe add option to choose between error and onErrorContainer?
+            return colorScheme.error;
+          }
           return colorScheme.error;
         }
         if (states.contains(WidgetState.disabled)) {
-          return tintDisable
-              ? tintDisabledColor
-              : colorScheme.onSurface.withAlpha(kAlphaDisabled);
+          return tintDisable ? tintDisabledColor : disabledDefault;
         }
         if (states.contains(WidgetState.focused)) {
-          return suffixIconColor;
-          // return useM3 ? colorScheme.onSurfaceVariant : baseColor;
+          return focusedSuffixIconColor;
         }
-        return useM3 ? colorScheme.onSurfaceVariant : suffixIconColorM2;
+        return useM3 ? colorScheme.onSurfaceVariant : unfocusedIconDefaultM2;
       }),
       contentPadding: contentPadding,
       isDense: isDense ?? false,
-      filled: filled ?? true,
+      filled: isFilled,
       fillColor: usedFillColor,
       hoverColor: tintInteract ? tintedHover : null,
-      focusedBorder: effectiveInputBorder.copyWith(
-        borderSide: focusedHasBorder
-            ? BorderSide(
-                color: borderColor,
-                width: focusedWidth,
-              )
-            : BorderSide.none,
-      ),
-      enabledBorder: effectiveInputBorder.copyWith(
-        borderSide: unfocusedHasBorder
-            ? BorderSide(
-                color: enabledBorder,
-                width: unfocusedWidth,
-              )
-            : BorderSide.none,
-      ),
-      disabledBorder: effectiveInputBorder.copyWith(
-        borderSide: unfocusedHasBorder
-            ? BorderSide(
-                color: tintDisable
-                    ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                    : borderType == FlexInputBorderType.underline
-                        ? colorScheme.onSurface.withAlpha(kAlphaDisabled)
-                        : colorScheme.onSurface
-                            .withAlpha(kAlphaVeryLowDisabled),
-                width: unfocusedWidth,
-              )
-            : BorderSide.none,
-      ),
-      focusedErrorBorder: effectiveInputBorder.copyWith(
-        borderSide: focusedHasBorder
-            ? BorderSide(
-                color: colorScheme.error,
-                width: focusedWidth,
-              )
-            : BorderSide.none,
-      ),
-      errorBorder: effectiveInputBorder.copyWith(
-          borderSide: focusedHasBorder
-              ? BorderSide(
-                  color: colorScheme.error
-                      .withAlpha(useM3 ? 0xFF : kEnabledBorderAlpha),
-                  width: unfocusedWidth,
-                )
-              : BorderSide.none),
+      //
+      // Complex custom BORDER theming, now with hover effects.
+      //
+      border: borderType == FlexInputBorderType.underline
+          ? MaterialStateUnderlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              // TODO(rydmike): INFO: M3 uses onErrorContainer
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            // TODO(rydmike): INFO: M3 uses error
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
+            )
+          //
+          // The outline version
+          : MaterialStateOutlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return OutlineInputBorder(
+                      borderRadius: effectiveOutlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return OutlineInputBorder(
+                      borderRadius: effectiveOutlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              // TODO(rydmike): INFO: M3 uses onErrorContainer
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            // TODO(rydmike): INFO: M3 uses error
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return OutlineInputBorder(
+                  borderRadius: effectiveOutlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
+            ),
     );
   }
 
