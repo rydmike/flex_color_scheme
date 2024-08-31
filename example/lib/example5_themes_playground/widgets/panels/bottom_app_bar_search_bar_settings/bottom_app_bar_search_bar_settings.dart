@@ -61,7 +61,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           SliderListTileReveal(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Light elevation'),
+            title: const Text('Elevation (light)'),
             value: controller.bottomAppBarElevationLight,
             onChanged: controller.setBottomAppBarElevationLight,
             min: 0,
@@ -72,7 +72,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
             valueDefaultLabel: useMaterial3 ? '3' : '8',
           ),
           ColorSchemePopupMenu(
-            title: const Text('Light background color'),
+            title: const Text('Color (light)'),
             labelForDefault: useMaterial3
                 ? 'default (surfaceContainer)'
                 : 'default (surface)',
@@ -91,7 +91,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           SliderListTileReveal(
             enabled: controller.useFlexColorScheme,
-            title: const Text('Dark elevation'),
+            title: const Text('Elevation (dark)'),
             value: controller.bottomAppBarElevationDark,
             onChanged: controller.setBottomAppBarElevationDark,
             min: 0,
@@ -102,7 +102,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
             valueDefaultLabel: useMaterial3 ? '3' : '8',
           ),
           ColorSchemePopupMenu(
-            title: const Text('Dark background color'),
+            title: const Text('Color (dark)'),
             labelForDefault: useMaterial3
                 ? 'default (surfaceContainer)'
                 : 'default (surface)',
