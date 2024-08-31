@@ -46,9 +46,12 @@ class FabSettings extends StatelessWidget {
             ? useMaterial3
                 ? 'default (onPrimaryContainer)'
                 : 'default (onSecondary)'
-            // ignore: lines_longer_than_80_chars
             : controller.fabForegroundSchemeColor != null
-                ? '${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.fabForegroundSchemeColor!).index].name}'
+                ? SchemeColor
+                    .values[FlexSubThemes.onSchemeColor(
+                            controller.fabForegroundSchemeColor!)
+                        .index]
+                    .name
                 : '';
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);

@@ -146,7 +146,7 @@ String generateThemeDartCode(ThemeController controller) {
           controller.appBarOpacityLight != 1
       ? '  appBarOpacity: ${controller.appBarOpacityLight!.toStringAsFixed(2)},\n'
       : '';
-  final String appBarOpacityDark = controller.appBarOpacityLight != null &&
+  final String appBarOpacityDark = controller.appBarOpacityDark != null &&
           controller.appBarOpacityDark != 1
       ? '  appBarOpacity: ${controller.appBarOpacityDark!.toStringAsFixed(2)},\n'
       : '';
