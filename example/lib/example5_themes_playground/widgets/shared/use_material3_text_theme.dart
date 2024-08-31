@@ -31,7 +31,7 @@ class UseMaterial3TextTheme extends StatelessWidget {
       title: const Text('Typography and default TextTheme'),
       subtitle: Text(_explainLabelStyle(controller.useTextTheme)),
       trailing: Padding(
-        padding: const EdgeInsetsDirectional.only(end: 5.0),
+        padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(
           value: controller.useFlexColorScheme && controller.useSubThemes
               ? controller.useTextTheme
