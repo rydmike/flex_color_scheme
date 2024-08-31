@@ -44,6 +44,12 @@ class AppBarSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -78,6 +84,7 @@ class AppBarSettings extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: AppBarStylePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Light AppBarStyle'),
                   // defaultLabel: 'default',
                   enabled: controller.useFlexColorScheme &&
@@ -102,9 +109,8 @@ class AppBarSettings extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding: paddingEndColumn,
                   enabled: controller.useFlexColorScheme,
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Opacity'),
                   subtitleReveal:
                       const Text('The themed opacity of the AppBar in light '
@@ -129,8 +135,8 @@ class AppBarSettings extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: AppBarStylePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Dark AppBarStyle'),
-                  // defaultLabel: 'default',
                   enabled: controller.useFlexColorScheme &&
                       controller.appBarBackgroundSchemeColorDark == null,
                   value: controller.appBarStyleDark,
@@ -142,9 +148,8 @@ class AppBarSettings extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding: paddingEndColumn,
                   enabled: controller.useFlexColorScheme,
-                  contentPadding:
-                      EdgeInsetsDirectional.only(end: useMaterial3 ? 24 : 16),
                   title: const Text('Opacity'),
                   subtitleReveal:
                       const Text('The themed opacity of the AppBar in dark '
@@ -169,6 +174,7 @@ class AppBarSettings extends StatelessWidget {
             if (isLight)
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Background color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
@@ -194,6 +200,7 @@ class AppBarSettings extends StatelessWidget {
             else
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
                   title: const Text('Background color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
@@ -216,6 +223,7 @@ class AppBarSettings extends StatelessWidget {
             if (isLight)
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingEndColumn,
                   title: const Text('Foreground color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
@@ -241,6 +249,7 @@ class AppBarSettings extends StatelessWidget {
             else
               Expanded(
                 child: ColorSchemePopupMenu(
+                  contentPadding: paddingEndColumn,
                   title: const Text('Foreground color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
@@ -267,6 +276,7 @@ class AppBarSettings extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SwitchListTileReveal(
+                contentPadding: paddingStartColumn,
                 title: const Text('Remove scrim'),
                 subtitleReveal: const Text(
                   'ON  No scrim on top status bar, as in Material-3 spec\n'
@@ -282,6 +292,7 @@ class AppBarSettings extends StatelessWidget {
             ),
             Expanded(
               child: SwitchListTileReveal(
+                contentPadding: paddingEndColumn,
                 title: const Text('Remove scrim'),
                 subtitleReveal: const Text(
                   'ON  No scrim on top status bar, as in Material-3 spec\n'
@@ -321,6 +332,7 @@ class AppBarSettings extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding: paddingStartColumn,
                   enabled: controller.useFlexColorScheme,
                   title: const Text('Elevation'),
                   value: controller.appBarElevationLight,
@@ -336,6 +348,7 @@ class AppBarSettings extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding: paddingEndColumn,
                   enabled: enableControl && useMaterial3,
                   title: const Text('Scroll under'),
                   value: controller.appBarScrolledUnderElevationLight,
@@ -355,6 +368,7 @@ class AppBarSettings extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding: paddingStartColumn,
                   enabled: controller.useFlexColorScheme,
                   title: const Text('Elevation'),
                   value: controller.appBarElevationDark,
@@ -370,6 +384,7 @@ class AppBarSettings extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
+                  contentPadding: paddingEndColumn,
                   enabled: enableControl && useMaterial3,
                   title: const Text('Scroll under'),
                   value: controller.appBarScrolledUnderElevationDark,
