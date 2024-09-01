@@ -54,7 +54,7 @@ class AndroidNavigationBarSettings extends StatelessWidget {
       case FlexSystemNavBarStyle.transparent:
         return 'Fully transparent';
       case FlexSystemNavBarStyle.navigationBar:
-        return 'Themed NavigationBar background clor';
+        return 'Themed NavigationBar background color';
     }
   }
 
