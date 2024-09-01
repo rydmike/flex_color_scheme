@@ -143,7 +143,7 @@ enum FlexSystemNavBarStyle {
   /// background as it has with the system navigation bar, using same color
   /// and opacity as on the bottom navigation bar, creating one shared surface
   /// with same color and opacity on bottom navigation bar and the system
-  /// navigation bar. The package readme includes on example of this.
+  /// navigation bar. The package doc site includes an example of this.
   transparent,
 }
 
