@@ -192,6 +192,33 @@ class AndroidNavigationBarSettings extends StatelessWidget {
             }
           },
         ),
+
+        // Commented SegmentedButton version of the toggle
+        //
+        // const SizedBox(height: 8),
+        // ListTile(
+        //   title: const Text('Android system navigation bar style'),
+        //   subtitle: Text('Using themedSystemNavigationBar\n'
+        //       '${explainStyle(controller.sysNavBarStyle, isLight)}'),
+        // ),
+        // ListTile(
+        //   trailing: Padding(
+        //     padding: const EdgeInsetsDirectional.only(end: 4.0),
+        //     child: SystemNavBarStyleSegmentedButton(
+        //       style: controller.sysNavBarStyle,
+        //       onChanged: controller.setSysNavBarStyle,
+        //     ),
+        //   ),
+        //   onTap: () {
+        //     if (controller.sysNavBarStyle.index + 1 >=
+        //         FlexSystemNavBarStyle.values.length) {
+        //       controller.setSysNavBarStyle(FlexSystemNavBarStyle.values[0]);
+        //     } else {
+        //       controller.setSysNavBarStyle(FlexSystemNavBarStyle
+        //           .values[controller.sysNavBarStyle.index + 1]);
+        //     }
+        //   },
+        // ),
         SwitchListTileReveal(
           title: const Text('System navigation bar divider'),
           subtitleReveal: const Text(
