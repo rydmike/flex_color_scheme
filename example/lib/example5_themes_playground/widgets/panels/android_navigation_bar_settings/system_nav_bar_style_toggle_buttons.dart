@@ -14,7 +14,7 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    // final ColorScheme scheme = theme.colorScheme;
+    final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
 
     final List<bool> isSelected = <bool>[
@@ -23,6 +23,7 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
       style == FlexSystemNavBarStyle.background,
       style == FlexSystemNavBarStyle.scaffoldBackground,
       style == FlexSystemNavBarStyle.transparent,
+      style == FlexSystemNavBarStyle.navigationBar,
     ];
     return ToggleButtons(
       isSelected: isSelected,
@@ -37,23 +38,30 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
         ),
         Tooltip(
           message: 'Themed surface color',
-          child: Icon(Icons.lens, color: theme.colorScheme.surface.darken(5)),
+          child: Icon(Icons.lens, color: colorScheme.surface),
         ),
         Tooltip(
           message: 'Themed surfaceContainerLow color',
-          child: Icon(Icons.lens,
-              color: theme.colorScheme.surfaceContainerLow.darken(5)),
+          child: Icon(Icons.lens, color: colorScheme.surfaceContainerLow),
         ),
         Tooltip(
-          message: 'Themed scaffold background color',
+          message: 'Themed scaffoldBackground color',
           child: Icon(
             Icons.lens,
-            color: theme.scaffoldBackgroundColor.darken(5),
+            color: theme.scaffoldBackgroundColor,
           ),
         ),
         const Tooltip(
           message: 'Fully transparent',
           child: Icon(Icons.lens_outlined),
+        ),
+        Tooltip(
+          message: 'Themed NavigationBar background color',
+          child: Icon(
+            Icons.lens,
+            color: theme.navigationBarTheme.backgroundColor ??
+                colorScheme.surfaceContainer,
+          ),
         ),
       ],
     );
