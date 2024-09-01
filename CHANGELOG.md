@@ -58,18 +58,12 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODO**
  
-- AppBar: Add the center title prop that exists in FlexSubThemesData, 1 prop needed.
-- AppBar: Add own colors for leading and actions icon colors, 2 props in FCS and 4 new props needed in Playground. 
-
-
+- AppBar: Add own colors for leading and actions icon colors, TWO props in FCS and FOUR new props needed in the Playground. 
 - Add features for `Chip` theming.
   - Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
   - Padding prop
   - Text styles sizing.
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter.
-
-- Fix the `FlexThemeModeOptionButton` absorb pointer need, when not using onSelected.
-  - This is an issue I wrote down a long time ago, have to take a new look at it.
 
 
 **POTENTIAL TODOS or maybe push to version 8.1.0 or later**
@@ -298,6 +292,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
+- To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not in the Playground, now it is in the Playground too.
 
 **CHANGE**
 

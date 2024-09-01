@@ -68,7 +68,9 @@ class SwitchListTileReveal extends StatefulWidget {
   /// Insets a [SwitchListTileReveal]'s contents: its [title],
   /// [subtitleReveal] widgets.
   ///
-  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used.
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
+  /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
   final EdgeInsetsGeometry? contentPadding;
 
   /// Called when the user taps this list tile.

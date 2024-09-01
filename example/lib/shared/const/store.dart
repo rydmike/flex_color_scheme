@@ -794,6 +794,11 @@ class Store {
   // Default value for the transparentStatusBar, also used to reset settings.
   static const bool defaultTransparentStatusBar = true;
 
+  // Key used to read and save the appBarCenterTitle value.
+  static const String keyAppBarCenterTitle = 'appBarCenterTitle';
+  // Default value for the appBarCenterTitle, also used to reset settings.
+  static const bool? defaultAppBarCenterTitle = null;
+
   // Key used to read and save the appBarBackgroundSchemeColor value.
   static const String keyAppBarBackgroundSchemeColorLight =
       'appBarBackgroundSchemeColor';
