@@ -187,7 +187,7 @@ class MenuSettings extends StatelessWidget {
         ),
 
         ListTile(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: enableControl,
           title: const Text('Content padding'),
         ),
         Row(
