@@ -281,8 +281,25 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorBorderSchemeColorDark = await _themeService.load(
         Store.keyInputDecoratorBorderSchemeColorDark,
         Store.defaultInputDecoratorBorderSchemeColorDark);
+    //
     _inputDecoratorIsFilled = await _themeService.load(
         Store.keyInputDecoratorIsFilled, Store.defaultInputDecoratorIsFilled);
+    _inputDecoratorIsDense = await _themeService.load(
+        Store.keyInputDecoratorIsDense, Store.defaultInputDecoratorIsDense);
+    //
+    _inputDecoratorPaddingStart = await _themeService.load(
+        Store.keyInputDecoratorPaddingStart,
+        Store.defaultInputDecoratorPaddingStart);
+    _inputDecoratorPaddingEnd = await _themeService.load(
+        Store.keyInputDecoratorPaddingEnd,
+        Store.defaultInputDecoratorPaddingEnd);
+    _inputDecoratorPaddingTop = await _themeService.load(
+        Store.keyInputDecoratorPaddingTop,
+        Store.defaultInputDecoratorPaddingTop);
+    _inputDecoratorPaddingBottom = await _themeService.load(
+        Store.keyInputDecoratorPaddingBottom,
+        Store.defaultInputDecoratorPaddingBottom);
+    //
     _inputDecoratorBackgroundAlphaLight = await _themeService.load(
         Store.keyInputDecoratorBackgroundAlphaLight,
         Store.defaultInputDecoratorBackgroundAlphaLight);
@@ -1389,6 +1406,15 @@ class ThemeController with ChangeNotifier {
     setInputDecoratorBorderSchemeColorDark(
         Store.defaultInputDecoratorBorderSchemeColorDark, false);
     setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
+    setInputDecoratorIsDense(Store.defaultInputDecoratorIsDense, false);
+    //
+    setInputDecoratorPaddingStart(
+        Store.defaultInputDecoratorPaddingStart, false);
+    setInputDecoratorPaddingEnd(Store.defaultInputDecoratorPaddingEnd, false);
+    setInputDecoratorPaddingTop(Store.defaultInputDecoratorPaddingTop, false);
+    setInputDecoratorPaddingBottom(
+        Store.defaultInputDecoratorPaddingBottom, false);
+    //
     setInputDecoratorBackgroundAlphaLight(
         Store.defaultInputDecoratorBackgroundAlphaLight, false);
     setInputDecoratorBackgroundAlphaDark(
@@ -3164,6 +3190,52 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorIsFilled = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyInputDecoratorIsFilled, value));
+  }
+
+  late bool _inputDecoratorIsDense;
+  bool get inputDecoratorIsDense => _inputDecoratorIsDense;
+  void setInputDecoratorIsDense(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _inputDecoratorIsDense) return;
+    _inputDecoratorIsDense = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputDecoratorIsDense, value));
+  }
+
+  late double? _inputDecoratorPaddingStart;
+  double? get inputDecoratorPaddingStart => _inputDecoratorPaddingStart;
+  void setInputDecoratorPaddingStart(double? value, [bool notify = true]) {
+    if (value == _inputDecoratorPaddingStart) return;
+    _inputDecoratorPaddingStart = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputDecoratorPaddingStart, value));
+  }
+
+  late double? _inputDecoratorPaddingEnd;
+  double? get inputDecoratorPaddingEnd => _inputDecoratorPaddingEnd;
+  void setInputDecoratorPaddingEnd(double? value, [bool notify = true]) {
+    if (value == _inputDecoratorPaddingEnd) return;
+    _inputDecoratorPaddingEnd = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputDecoratorPaddingEnd, value));
+  }
+
+  late double? _inputDecoratorPaddingTop;
+  double? get inputDecoratorPaddingTop => _inputDecoratorPaddingTop;
+  void setInputDecoratorPaddingTop(double? value, [bool notify = true]) {
+    if (value == _inputDecoratorPaddingTop) return;
+    _inputDecoratorPaddingTop = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputDecoratorPaddingTop, value));
+  }
+
+  late double? _inputDecoratorPaddingBottom;
+  double? get inputDecoratorPaddingBottom => _inputDecoratorPaddingBottom;
+  void setInputDecoratorPaddingBottom(double? value, [bool notify = true]) {
+    if (value == _inputDecoratorPaddingBottom) return;
+    _inputDecoratorPaddingBottom = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyInputDecoratorPaddingBottom, value));
   }
 
   late int? _inputDecoratorBackgroundAlphaLight;

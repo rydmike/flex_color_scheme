@@ -581,6 +581,33 @@ class Store {
   // Default value for the inputDecoratorIsFilled, also used to reset settings.
   static const bool defaultInputDecoratorIsFilled = true;
 
+  // Key used to read and save the inputDecoratorIsDense value.
+  static const String keyInputDecoratorIsDense = 'inputDecoratorIsDense';
+  // Default value for the inputDecoratorIsDense, also used to reset settings.
+  static const bool defaultInputDecoratorIsDense = false;
+
+  // Key used to read and save the inputDecoratorPaddingStart value.
+  static const String keyInputDecoratorPaddingStart =
+      'inputDecoratorPaddingStart';
+  // Default value for the inputDecoratorPaddingStart, also reset settings.
+  static const double? defaultInputDecoratorPaddingStart = null;
+
+  // Key used to read and save the inputDecoratorPaddingEnd value.
+  static const String keyInputDecoratorPaddingEnd = 'inputDecoratorPaddingEnd';
+  // Default value for the inputDecoratorPaddingEnd, also reset settings.
+  static const double? defaultInputDecoratorPaddingEnd = null;
+
+  // Key used to read and save the inputDecoratorPaddingTop value.
+  static const String keyInputDecoratorPaddingTop = 'inputDecoratorPaddingTop';
+  // Default value for the inputDecoratorPaddingTop, also reset settings.
+  static const double? defaultInputDecoratorPaddingTop = null;
+
+  // Key used to read and save the inputDecoratorPaddingBottom value.
+  static const String keyInputDecoratorPaddingBottom =
+      'inputDecoratorPaddingBottom';
+  // Default value for the inputDecoratorPaddingBottom, also reset settings.
+  static const double? defaultInputDecoratorPaddingBottom = null;
+
   // Key used to read and save the inputDecoratorBackgroundAlphaLight value.
   static const String keyInputDecoratorBackgroundAlphaLight =
       'inputDecoratorBackgroundAlphaLight';
@@ -599,7 +626,7 @@ class Store {
   static const String keyInputDecoratorBorderType = 'inputDecoratorBorderType';
   // Default value for the inputDecoratorBorderType, also to reset settings.
   static const FlexInputBorderType defaultInputDecoratorBorderType =
-      FlexInputBorderType.outline;
+      FlexInputBorderType.underline;
 
   // Key used to read and save the inputDecoratorBorderRadius value.
   static const String keyInputDecoratorBorderRadius =
@@ -625,7 +652,7 @@ class Store {
       'inputDecoratorUnfocusedBorderIsColored';
   // Default value for the inputDecoratorUnfocusedBorderIsColored, also used to
   // reset settings.
-  static const bool defaultInputDecoratorUnfocusedBorderIsColored = true;
+  static const bool defaultInputDecoratorUnfocusedBorderIsColored = false;
 
   // Key used to read and save the inputDecoratorBorderWidth value.
   static const String keyInputDecoratorBorderWidth =

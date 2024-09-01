@@ -210,20 +210,20 @@ class TextFieldSettings extends StatelessWidget {
         ),
         const Divider(),
         SwitchListTileReveal(
+          enabled: enableControl,
           contentPadding: EdgeInsetsDirectional.only(
             start: 16,
             end: useMaterial3 ? 28 : 20,
           ),
           title: const Text('Background filled'),
-          subtitleReveal:
-              const Text('TIP: If you leave this OFF, you can still '
-                  'theme the fill color and turn it ON using widget level '
-                  "filled: true' property and it gets the themed fill "
-                  'style by default, but you can also use unfilled style.\n'),
-          value: enableControl && controller.inputDecoratorIsFilled,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setInputDecoratorIsFilled
-              : null,
+          subtitleReveal: const Text('If you leave this OFF, you can still '
+              'theme the fill color below and turn it ON by using the '
+              'widget level "filled: true" property and it gets the '
+              'themed fill style by default, but you can also use the not '
+              'filled style. It also works the other way around, leave it '
+              'ON and set to OFF on widget level when so needed.\n'),
+          value: controller.inputDecoratorIsFilled,
+          onChanged: controller.setInputDecoratorIsFilled,
         ),
         if (isLight)
           Row(
@@ -528,7 +528,7 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ],
         ),
-        const Divider(height: 0),
+        const Divider(),
         Row(
           children: <Widget>[
             // 1st column light
@@ -642,6 +642,109 @@ class TextFieldSettings extends StatelessWidget {
               ),
           ],
         ),
+        const Divider(),
+        //
+        // TextField Padding props
+        //
+        SwitchListTileReveal(
+          contentPadding: EdgeInsetsDirectional.only(
+            start: 16,
+            end: useMaterial3 ? 28 : 20,
+          ),
+          title: const Text('Dense TextField '),
+          subtitleReveal: const Text(
+            'A nice Flutter built in quick padding '
+            'style toggle to make the TextField more dense and use less '
+            'padding. Many prefer the dense less space wasting style.\n',
+          ),
+          value: controller.inputDecoratorIsDense,
+          onChanged: controller.setInputDecoratorIsDense,
+        ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Content padding'),
+          subtitleReveal: const Text(
+            'As soon as you set the "contentPadding" to any value, '
+            'you loose all the built-in logic Flutter has for padding the '
+            'TextField with its InputDecorator. This '
+            'may break some use cases. Usage caution is advised.\n',
+          ),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
+                trailingWidth: 52,
+                enabled: enableControl,
+                value: controller.inputDecoratorPaddingStart,
+                onChanged: controller.setInputDecoratorPaddingStart,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'START',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                trailingWidth: 60,
+                enabled: enableControl,
+                value: controller.inputDecoratorPaddingEnd,
+                onChanged: controller.setInputDecoratorPaddingEnd,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'END',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0',
+              ),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
+                trailingWidth: 52,
+                enabled: enableControl,
+                value: controller.inputDecoratorPaddingTop,
+                onChanged: controller.setInputDecoratorPaddingTop,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'TOP',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                trailingWidth: 60,
+                enabled: enableControl,
+                value: controller.inputDecoratorPaddingBottom,
+                onChanged: controller.setInputDecoratorPaddingBottom,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'BOTTOM',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0',
+              ),
+            ),
+          ],
+        ),
+        //
         const Divider(height: 0),
         //
         // Text Selection Style

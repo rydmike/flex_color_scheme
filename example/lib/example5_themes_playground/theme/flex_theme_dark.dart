@@ -218,6 +218,21 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             inputDecoratorBorderSchemeColor:
                 controller.inputDecoratorBorderSchemeColorDark,
             inputDecoratorIsFilled: controller.inputDecoratorIsFilled,
+            //
+            inputDecoratorIsDense: controller.inputDecoratorIsDense,
+            inputDecoratorContentPadding:
+                controller.inputDecoratorPaddingStart != null ||
+                        controller.inputDecoratorPaddingTop != null ||
+                        controller.inputDecoratorPaddingEnd != null ||
+                        controller.inputDecoratorPaddingBottom != null
+                    ? EdgeInsetsDirectional.fromSTEB(
+                        controller.inputDecoratorPaddingStart ?? 0,
+                        controller.inputDecoratorPaddingTop ?? 0,
+                        controller.inputDecoratorPaddingEnd ?? 0,
+                        controller.inputDecoratorPaddingBottom ?? 0,
+                      )
+                    : null,
+            //
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,
             inputDecoratorUnfocusedHasBorder:
