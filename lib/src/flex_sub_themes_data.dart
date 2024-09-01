@@ -1549,7 +1549,7 @@ class FlexSubThemesData with Diagnosticable {
   /// on sub-themes. Giving an opportunity to make the past always filled input
   /// decorator even less opinionated.
   ///
-  /// Defaults to true.
+  /// Defaults to false.
   final bool inputDecoratorIsFilled;
 
   /// Determines the color of the filled [InputDecorator].
@@ -1597,7 +1597,7 @@ class FlexSubThemesData with Diagnosticable {
   /// To change input decorator's border radius separately define
   /// [inputDecoratorRadius] that will then override [defaultRadius].
   ///
-  /// If undefined, defaults to [FlexInputBorderType.outline].
+  /// If undefined, defaults to [FlexInputBorderType.underline].
   final FlexInputBorderType? inputDecoratorBorderType;
 
   /// Determines if the [InputDecorator] focused state has a border.
@@ -1635,8 +1635,6 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Determines if the [InputDecorator] unfocused state has a colored border.
   ///
-  /// Defaults to true.
-  ///
   /// Applies to both outline and underline mode. Does not have any effect
   /// if [inputDecoratorUnfocusedHasBorder] is false.
   ///
@@ -1650,6 +1648,8 @@ class FlexSubThemesData with Diagnosticable {
   /// opacity.
   ///
   /// The unfocused border color selection also applies to it hovered state.
+  ///
+  /// Defaults to false.
   final bool inputDecoratorUnfocusedBorderIsColored;
 
   /// The border width of unfocused [InputDecoration] when it has a border.

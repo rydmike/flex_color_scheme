@@ -6987,7 +6987,7 @@ class FlexColorScheme with Diagnosticable {
     // theme is also passed into the TimePickerTheme, and DropdownMenu so we
     // get the same style used on them too.
     final InputDecorationTheme? effectiveInputDecorationTheme = useSubThemes
-        // FCS V4 and later sub-theme based input decorator use.
+        // FCS V4 and later component theme based input decorator use.
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,

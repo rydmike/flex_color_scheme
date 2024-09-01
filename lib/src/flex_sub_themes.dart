@@ -3233,15 +3233,17 @@ sealed class FlexSubThemes {
 
     /// The decorated input fields corner border radius.
     ///
-    /// If not defined, in Material 2 mode defaults to [kInputDecoratorRadius]
-    /// which is 16, in Material 3 mode it defaults to
+    /// If not defined, in Material-2 mode defaults to [kInputDecoratorRadius]
+    /// which is 16, in Material-3 mode it defaults to
     /// [kInputDecoratorM3Radius] which is 4, following the Material
     /// 3 design specification.
     final double? radius,
 
     /// Selects input border type.
     ///
-    /// If undefined, defaults to [FlexInputBorderType.outline].
+    /// If undefined, defaults to [FlexInputBorderType.underline].
+    ///
+    /// THe underline style is default in Flutter too.
     final FlexInputBorderType? borderType,
 
     /// The padding for the input decoration's container.
@@ -3280,7 +3282,7 @@ sealed class FlexSubThemes {
     /// [InputBorder.getOuterPath], which is filled if [filled] is
     /// true and bordered per the [border].
     ///
-    /// Defaults to true.
+    /// Defaults to false, like Flutter SDK does. Filled is nicer, try it.
     final bool? filled,
 
     /// An optional totally custom fill color used to fill the
@@ -3386,8 +3388,8 @@ sealed class FlexSubThemes {
     ///
     /// The unfocused border color selection also applies to it hovered state.
     ///
-    /// Defaults to true.
-    final bool unfocusedBorderIsColored = true,
+    /// Defaults to false.
+    final bool unfocusedBorderIsColored = false,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -3416,7 +3418,7 @@ sealed class FlexSubThemes {
     final bool useM3 = useMaterial3 ?? true;
     final bool tintInteract = tintedInteractions ?? false;
     final bool tintDisable = tintedDisabled ?? false;
-    final bool isFilled = filled ?? true;
+    final bool isFilled = filled ?? false;
 
     // Used color scheme is for dark mode.
     final bool isDark = colorScheme.brightness == Brightness.dark;
@@ -3666,7 +3668,8 @@ sealed class FlexSubThemes {
       //
       // Complex custom BORDER theming, now with hover effects.
       //
-      border: borderType == FlexInputBorderType.underline
+      border: (borderType ?? FlexInputBorderType.underline) ==
+              FlexInputBorderType.underline
           ? MaterialStateUnderlineInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
