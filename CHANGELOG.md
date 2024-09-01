@@ -138,7 +138,14 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls` and `defaultUseM2StyleDividerInM3` now all default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS to align it more with Flutter SDK default styles. If you had **NOT** configured these values before, they defaulted to `true`. You now have to set them explicitly to `true` to opt in and get the same results as you got before when they were not configured.
 - The `FlexSubThemesData` properties `blendOnColors` now defaults to `false`. In previous versions it defaulted to `true`. This change was made to have fewer opinionated defaults in FCS, to align it more with Flutter defaults. If you had **NOT** configured this values before, it defaulted to `true`. You now have to set it explicitly to `true` to get the same result as before, when it was not configured. Consider setting this property `true` in dark mode, and false in `light` theme mode, for a style that matches the Material-3 color design, when you are not using a seed generated `ColorScheme`. This setting has no effect when using a seed generated `ColorScheme`, as it generates blended/tinted onColors based on the seed algorithm, that overrides the effect of this setting. This setting creates a similar effect for none seeded ColorSchemes.
 
-- The `FlexSubThemesData` property `inputSelectionHandleSchemeColor` now defined, defaults to `inputDecoratorSchemeColor` and if it is not defined either, the effective text selection handles color result is `ColorScheme.primary`, same as Flutter SDK default. In previous versions, no definitions, resulted in `ThemeData.primaryColorDark` being used. This was changed in preparation of Flutter's planned deprecation of `primaryColorDark`.   
+
+- The `FlexSubThemesData` property `inputSelectionHandleSchemeColor` when not defined, defaults to `inputDecoratorSchemeColor` and if it is not defined either, the effective text selection handle color result is `ColorScheme.primary`, same as Flutter SDK default. In previous versions, no definitions, resulted in `ThemeData.primaryColorDark` being used. This was changed in preparation of Flutter's planned deprecation of `primaryColorDark`.   
+- The `FlexSubThemesData` property `inputDecoratorIsFilled` now default to `false` when undefined, like Flutter SDK does. Set it to `true` to get the same style it had with previous undefined value.
+- The `FlexSubThemesData` property `inputDecoratorBorderType` now default to `FlexInputBorderType.underline` when undefined, producing same default as Flutter SDK does. Set it to `FlexInputBorderType.outline` to get the same style it had with previous undefined value.
+- The `FlexSubThemesData` property `inputDecoratorUnfocusedBorderIsColored` now default to `false` when undefined, like Flutter SDK does. Set it to `true` to get the same style it had with previous undefined value.
+- In `FlexSubTheme.InputDecorationTheme` the following properties have new breaking default values: `filled` default to `false`, `borderType` default to `FlexInputBorderType.underline` and `unfocusedBorderIsColored` to `false`.
+
+
 
 - The `FlexSubThemesData` properties `navigationRailMutedUnselectedLabel` and `navigationRailMutedUnselectedIcon` now default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and follow Material-3 design spec by default.
 - In `FlexSubThemes.navigationRailTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Property `selectedLabelSchemeColor` defaults to `onSurface` and `unselectedLabelSchemeColor` default to `onSurfaceVariant`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`. Property `labelType` now defaults to `NavigationRailLabelType.none` it was `NavigationRailLabelType.all`.
@@ -293,6 +300,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not in the Playground, now it is in the Playground too.
+- To the **TextField** settings panel, added UI and code gen for dense input decorator and for custom content padding.
+
 
 **CHANGE**
 
@@ -325,7 +334,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Refactored all suitable popup menus to use the new `EnumPopupMenu`. 
 - Changed how ALL opacity sliders work! They now ALL work with default (null) color and opacity is nullable. Even if the `SchemeColor` it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default to apply opacity anywhere.
 - Major internal refactor of all Sliders used in the Playground. Converted the Sliders to custom composed `SliderListTileReveal`, a combo convenience widget for Sliders with a null default value, separate labels for disabled and null default values, and info `ListTileReveal`. 
-
+- Changed Playground default for the **TextField** settings panel. It now defaults to "Underline" style like Flutter SDK does and the new default in FCS is too. It also defaults to not using color on unfocused border, also like Flutter M3 default style is and also new default for FCS package. Making both Playground and FCS less opinionated in is default values. 
 
 **FIX**
 
@@ -341,8 +350,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switch?
-- Add UI and code gen for dense input decorator.
-- Add UI for content padding on input decorator.
 - Add a high contrast theme in example 4 with tutorial update (commented placeholder added)
 - UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
 - In the **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator. 
