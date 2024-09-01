@@ -866,6 +866,9 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    appBarScrolledUnderElevation: ${controller.appBarScrolledUnderElevationDark!.toStringAsFixed(1)},\n'
       : '';
+  final String appBarCenterTitle = controller.appBarCenterTitle != null
+      ? '    appBarCenterTitle: ${controller.appBarCenterTitle},\n'
+      : '';
   //
   // BottomAppBar setup CODE
   //
@@ -1400,6 +1403,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$appBarBackgroundSchemeColorLight'
           '$appBarForegroundSchemeColorLight'
           '$appBarScrolledUnderElevationLight'
+          '$appBarCenterTitle'
           //
           '$bottomAppBarSchemeColorLight'
           //
@@ -1630,6 +1634,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$appBarBackgroundSchemeColorDark'
           '$appBarForegroundSchemeColorDark'
           '$appBarScrolledUnderElevationDark'
+          '$appBarCenterTitle'
           //
           '$bottomAppBarSchemeColorDark'
           //

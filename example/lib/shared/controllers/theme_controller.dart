@@ -377,6 +377,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomAppBarElevationDark);
     _transparentStatusBar = await _themeService.load(
         Store.keyTransparentStatusBar, Store.defaultTransparentStatusBar);
+    _appBarCenterTitle = await _themeService.load(
+        Store.keyAppBarCenterTitle, Store.defaultAppBarCenterTitle);
 
     _appBarBackgroundSchemeColorLight = await _themeService.load(
         Store.keyAppBarBackgroundSchemeColorLight,
@@ -1025,6 +1027,7 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomAppBarElevationLight, false);
     setBottomAppBarElevationDark(Store.defaultBottomAppBarElevationDark, false);
     setTransparentStatusBar(Store.defaultTransparentStatusBar, false);
+    setAppBarCenterTitle(Store.defaultAppBarCenterTitle, false);
     setAppBarBackgroundSchemeColorLight(
         Store.defaultAppBarBackgroundSchemeColorLight, false);
     setAppBarBackgroundSchemeColorDark(
@@ -3507,6 +3510,15 @@ class ThemeController with ChangeNotifier {
     _transparentStatusBar = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTransparentStatusBar, value));
+  }
+
+  late bool? _appBarCenterTitle;
+  bool? get appBarCenterTitle => _appBarCenterTitle;
+  void setAppBarCenterTitle(bool? value, [bool notify = true]) {
+    if (value == _appBarCenterTitle) return;
+    _appBarCenterTitle = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyAppBarCenterTitle, value));
   }
 
   late SchemeColor? _appBarBackgroundSchemeColorLight;

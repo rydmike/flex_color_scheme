@@ -585,8 +585,6 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
             child: Scaffold(
               appBar: AppBar(
                 title: widget.title,
-                // We are using dynamic title content, we want it start aligned.
-                centerTitle: false,
                 actions: const <Widget>[AboutIconButton()],
                 // Some logic to show the implicit menu button on AppBar when
                 // there is no rail or menu.

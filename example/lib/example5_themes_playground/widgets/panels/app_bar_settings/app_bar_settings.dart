@@ -14,6 +14,7 @@ import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
 import '../../shared/platform_popup_menu.dart';
+import 'app_bar_center_title_toggle_buttons.dart';
 import 'app_bar_style_popup_menu.dart';
 
 class AppBarSettings extends StatelessWidget {
@@ -224,7 +225,7 @@ class AppBarSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
-                  title: const Text('Foreground color'),
+                  title: const Text('Title color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : useMaterial3
@@ -250,7 +251,7 @@ class AppBarSettings extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
-                  title: const Text('Foreground color'),
+                  title: const Text('Title color'),
                   labelForDefault: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : 'default (surface)',
@@ -275,19 +276,9 @@ class AppBarSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: SwitchListTileReveal(
+              child: AppBarCenterTitleToggleButtons(
+                controller: controller,
                 contentPadding: paddingStartColumn,
-                title: const Text('Remove scrim'),
-                subtitleReveal: const Text(
-                  'ON  No scrim on top status bar, as in Material-3 spec\n'
-                  'OFF Use a two toned AppBar with a scrim on top status bar\n'
-                  'This settings only applies to the Android platform.\n',
-                ),
-                value: controller.transparentStatusBar &&
-                    controller.useFlexColorScheme,
-                onChanged: controller.useFlexColorScheme
-                    ? controller.setTransparentStatusBar
-                    : null,
               ),
             ),
             Expanded(
