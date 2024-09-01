@@ -144,7 +144,33 @@ enum FlexSystemNavBarStyle {
   /// and opacity as on the bottom navigation bar, creating one shared surface
   /// with same color and opacity on bottom navigation bar and the system
   /// navigation bar. The package doc site includes an example of this.
+  ///
+  /// To see the effect of the opacity, the:
+  ///
+  /// * SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
+  ///
+  /// call has to be used. It is called automatically called by the
+  /// [FlexColorScheme.themedSystemNavigationBar] helper
+  /// when opacity is < 1 or this transparent option is used.
+  ///
+  /// Do note that this `SystemUiMode` mode may require layout
+  /// changes in your Flutter app in some use cases. A [SafeArea] may help
+  /// to add the required padding back.
   transparent,
+
+  /// Make the system navigation bar follow the default or the
+  /// themed background color of the [NavigationBar] component, if it is
+  /// defined.
+  ///
+  /// You can achieve a similar looking result by using the [transparent]
+  /// option, but this is an alternative that does not use opacity, it just
+  /// sets the color of the Android system navigation bar to the
+  /// [NavigationBar] background color.
+  ///
+  /// It has the advantage of not requiring to call:
+  ///
+  /// * SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
+  navigationBar,
 }
 
 /// Enum to select [TabBarTheme] preference in [FlexColorScheme] based themes.
@@ -5569,6 +5595,15 @@ class FlexColorScheme with Diagnosticable {
     /// This issue is a good source for more information on current state
     /// of transparent navigation bars in Flutter on Android:
     /// https://github.com/flutter/flutter/issues/90098.
+    ///
+    /// To see the effect of the opacity the:
+    ///
+    /// SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
+    ///
+    /// call has to be used. It is called automatically called by this helper
+    /// when opacity is < 1. Do note that this UI mode may require layout
+    /// changes in the Flutter app in some use cases. A SafeArea can often be
+    /// used to add some padding back.
     final double opacity = 1,
 
     /// Set this to true if you do not use a Material AppBar and want
@@ -5687,18 +5722,22 @@ class FlexColorScheme with Diagnosticable {
         ? Theme.of(context).brightness == Brightness.dark
         : nullContextBrightness == Brightness.dark;
     // Get the defined effective background color for the used style.
-    // This is not pretty, but wanted a final for the flexBackground.
     final Color flexBackground = (context != null)
-        ? systemNavBarStyle == FlexSystemNavBarStyle.system
-            ? (isDark ? Colors.black : Colors.white)
-            : systemNavBarStyle == FlexSystemNavBarStyle.background
-                ? Theme.of(context).colorScheme.surfaceContainerLow
-                : systemNavBarStyle == FlexSystemNavBarStyle.surface
-                    ? Theme.of(context).colorScheme.surface
-                    : systemNavBarStyle ==
-                            FlexSystemNavBarStyle.scaffoldBackground
-                        ? Theme.of(context).scaffoldBackgroundColor
-                        : Theme.of(context).scaffoldBackgroundColor
+        ? switch (systemNavBarStyle) {
+            FlexSystemNavBarStyle.system =>
+              isDark ? Colors.black : Colors.white,
+            FlexSystemNavBarStyle.background =>
+              Theme.of(context).colorScheme.surfaceContainerLow,
+            FlexSystemNavBarStyle.surface =>
+              Theme.of(context).colorScheme.surface,
+            FlexSystemNavBarStyle.scaffoldBackground =>
+              Theme.of(context).scaffoldBackgroundColor,
+            FlexSystemNavBarStyle.transparent =>
+              Theme.of(context).scaffoldBackgroundColor,
+            FlexSystemNavBarStyle.navigationBar =>
+              Theme.of(context).navigationBarTheme.backgroundColor ??
+                  Theme.of(context).colorScheme.surfaceContainer,
+          }
         : (isDark ? Colors.black : Colors.white);
     // If a systemNavigationBarColor color is given, it will always be used,
     // If it is not given, we use above flexBackground.

@@ -92,7 +92,7 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 - Add some `SearchBar` theming features.
 - Add some `SearchView` theming features.
 - Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOs like style when using Material AppBar. Consider adding them as a platform adaptive feature.
-- Add style `navigationBar` to enum `FlexSystemNavBarStyle` that would use the correct color for default or themed `NavigationBar` background color -> Maybe, but prefer transparent instead, add guidance to docs about it.
+
 - Add TabBar theme property `indicatorAnimation` when it lands in stable.
   - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
   - Store: keyTabBarIndicatorAnimation, defaultTabBarIndicatorAnimation
@@ -243,6 +243,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `fixedColorStyle` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API. The property is an enum `FlexFixedColorStyle` that allows us to choose the style of the generated "fixed" and "fixedDim" colors when not using seed generated color schemes. 
 
 
+- Added style `navigationBar` to enum `FlexSystemNavBarStyle` that use the color for default or themed `NavigationBar` background color on the system navigation bar helper.
+  - You can get a similar result with the transparent option. Using the `navigationBar` option does not require using the edge-to-edge config required when using transparent system navigation bar to see things behind it. The `transparent` option sets edge-to-edge mode behind the scenes when used. This can cause some layout changes that must be considered in the app design when used. This is an optional way to style the system navigation bar to match the app's themed `NavigationBar` background color, without using edge-to-edge Android screen mode.
 
 
 **CHANGE**
