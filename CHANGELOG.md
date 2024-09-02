@@ -32,6 +32,8 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
+* Update THIS LOG with contrast level addition, plus fixed and dim color changes.
+
 * Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * Also with all new features, get package tests back to 100% coverage.
 
@@ -353,6 +355,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Add a high contrast theme in example 4 with tutorial update (commented placeholder added)
 - UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
 - In the **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator. 
+- Audit and check the correctness of the effective component colors presentation in the **Effective Colors** panel.
+- Refactor:
+  - The ColorScheme color boxes
+  - Make a tones functions we can reuse where needed, at least three places.
+  - Refactor ColorSchemePopupMenu, make it like the other nullable enum popups.
 
 ## 7.3.1
 
