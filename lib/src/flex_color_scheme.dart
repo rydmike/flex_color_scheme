@@ -264,6 +264,19 @@ enum FlexFixedColorStyle {
   /// The [FlexSchemeVariant.chroma] is used for the seed generation, as it best
   /// matches the chromacity of target input color.
   seeded,
+
+  /// Seed generate the fixed colors, even when a seeded ColorScheme is not
+  /// used.
+  ///
+  /// Use a [SeedColorScheme.fromSeeds] to generate the fixed and fixedDim
+  /// colors and their on colors.
+  ///
+  /// The [FlexSchemeVariant.chroma] is used for the seed generation, as it best
+  /// matches the chromacity of target input color.
+  ///
+  /// Additionally the [FlexTones] modifier [FlexTones.higherContrastFixed]
+  /// is applied.
+  seededHighContrast,
 }
 
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
@@ -2808,8 +2821,8 @@ class FlexColorScheme with Diagnosticable {
     ColorScheme? seedScheme;
 
     // Compute a seeded scheme if we are using it or seeded fixed colors.
-    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) ==
-            FlexFixedColorStyle.seeded ||
+    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) !=
+            FlexFixedColorStyle.computed ||
         seed.useKeyColors) {
       // Create a complete ColorScheme from active and effective seed colors.
       // If config is not using key colors, we are only making this seed for
@@ -2842,11 +2855,15 @@ class FlexColorScheme with Diagnosticable {
         neutralKey: surfaceTint,
         neutralVariantKey: surfaceTint,
         // Use provided tones or variant configuration or default one.
-        // Ensuring that we always used FlexSchemeVariant.chroma when only
-        // seeding for fixed and FixedDim colors, it is the one assured to fit
+        // Ensuring that we always used FlexTones.chroma when only
+        // seeding for fixed and FixedDim colors, it is the one that will fit
         // best with none seeded colors.
-        tones: seed.useKeyColors ? tones : null,
-        variant: seed.useKeyColors ? variant : FlexSchemeVariant.chroma,
+        tones: seed.useKeyColors
+            ? tones
+            : FlexTones.chroma(Brightness.light).higherContrastFixed(
+                fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
+        variant: seed.useKeyColors ? variant : null,
+        contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
@@ -4900,8 +4917,8 @@ class FlexColorScheme with Diagnosticable {
     );
 
     // Compute a seeded scheme if we are using it or seeded fixed colors.
-    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) ==
-            FlexFixedColorStyle.seeded ||
+    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) !=
+            FlexFixedColorStyle.computed ||
         seed.useKeyColors) {
       // Create a ColorScheme from active and effective seed key colors.
       // If config is not using key colors, we are only making this seed for
@@ -4935,11 +4952,15 @@ class FlexColorScheme with Diagnosticable {
         neutralKey: surfaceTint,
         neutralVariantKey: surfaceTint,
         // Use provided tones or variant configuration or default one.
-        // Ensuring that we always used FlexSchemeVariant.chroma when only
-        // seeding for fixed and FixedDim colors, it is the one assured to fit
+        // Ensuring that we always used FlexTones.chroma when only
+        // seeding for fixed and FixedDim colors, it is the one that will fit
         // best with none seeded colors.
-        tones: seed.useKeyColors ? tones : null,
-        variant: seed.useKeyColors ? variant : FlexSchemeVariant.chroma,
+        tones: seed.useKeyColors
+            ? tones
+            : FlexTones.chroma(Brightness.dark).higherContrastFixed(
+                fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
+        variant: seed.useKeyColors ? variant : null,
+        contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
         surfaceTint: surfaceTint,
       );
       // Update effective main colors to seed colors, keeping configured
