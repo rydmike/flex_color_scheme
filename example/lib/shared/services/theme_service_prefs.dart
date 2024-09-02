@@ -668,6 +668,29 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= TabAlignment.values.length) return defaultValue;
         return TabAlignment.values[value] as T;
       }
+      // T is FlexFixedColorStyle is nullable value.
+      if (sameTypes<T, FlexFixedColorStyle?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexFixedColorStyle?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= FlexFixedColorStyle.values.length) return defaultValue;
+        return FlexFixedColorStyle.values[value] as T;
+      }
+      // T is FlexFixedColorStyle none nullable value.
+      if (sameTypes<T, FlexFixedColorStyle>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded FlexFixedColorStyle : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= TabAlignment.values.length) return defaultValue;
+        return TabAlignment.values[value] as T;
+      }
+      //
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
       debugPrint(' Error message ...... : $e');

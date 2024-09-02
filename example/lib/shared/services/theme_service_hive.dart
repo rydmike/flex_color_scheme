@@ -87,6 +87,7 @@ class ThemeServiceHive implements ThemeService {
     Hive.registerAdapter(VisualDensityEnumAdapter());
     Hive.registerAdapter(SplashTypeEnumAdapter());
     Hive.registerAdapter(TabAlignmentAdapter());
+    Hive.registerAdapter(FlexFixedColorStyleAdapter());
   }
 
   // ----------
