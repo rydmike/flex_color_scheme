@@ -131,6 +131,8 @@ class FlexKeyColors with Diagnosticable {
     this.useError = false,
     this.keepError = false,
     this.keepErrorContainer = false,
+    //
+    this.contrastLevel = 0.0,
   });
 
   /// Use a seed generated [ColorScheme] based on key colors.
@@ -403,6 +405,35 @@ class FlexKeyColors with Diagnosticable {
   /// Defaults to false.
   final bool keepErrorContainer;
 
+  /// The [contrastLevel] parameter indicates the contrast level between color
+  /// pairs, such as [primary] and [onPrimary]. The value 0.0 is the default
+  /// (normal) contrast; -1.0 is the lowest; 1.0 is the highest.
+  /// From Material Design guideline, the normal, medium and high contrast
+  /// options correspond to 0.0, 0.5 and 1.0 respectively.
+  ///
+  /// The [contrastLevel] property is only used when seed generating a
+  /// [ColorScheme] based on [FlexSeedScheme]'s [SeedColorScheme.fromSeeds]
+  /// when a scheme [variant] is used where its [FlexSchemeVariant.value],
+  /// [isFlutterScheme] it set to true. This corresponds to all the
+  /// [DynamicSchemeVariant]s in Flutter SDK.
+  ///
+  /// This [contrastLevel] is the same as the Flutter [contrastLevel] property
+  /// available in [ColorScheme.fromSeed]. As of 1.9.2024 still only available
+  /// in the master channel. It will land in next Flutter stable released
+  /// after Flutter 3.24.
+  ///
+  /// When using [tones] based seed generated schemes or [variant] is having
+  /// its [FlexSchemeVariant.value], [isFlutterScheme] it set to false,
+  /// the [contrastLevel] value is ignored.
+  ///
+  /// With [tones] based schemes, the contrast level can instead be set as
+  /// desired using custom [FlexTones] configurations. There are two
+  /// predefined higher contrast level tone mappings available as
+  /// [FlexTones.highContrast] and [FlexTones.ultraContrast], you can use them
+  /// as they are or as examples on how to create your own custom high
+  /// contrast tone mappings.
+  final double contrastLevel;
+
   /// Copy the object with one or more provided properties changed.
   FlexKeyColors copyWith({
     final bool? useKeyColors,
@@ -425,6 +456,8 @@ class FlexKeyColors with Diagnosticable {
     final bool? useError,
     final bool? keepError,
     final bool? keepErrorContainer,
+    //
+    final double? contrastLevel,
   }) {
     return FlexKeyColors(
       useKeyColors: useKeyColors ?? this.useKeyColors,
@@ -449,6 +482,8 @@ class FlexKeyColors with Diagnosticable {
       useError: useError ?? this.useError,
       keepError: keepError ?? this.keepError,
       keepErrorContainer: keepErrorContainer ?? this.keepErrorContainer,
+      //
+      contrastLevel: contrastLevel ?? this.contrastLevel,
     );
   }
 
@@ -477,7 +512,9 @@ class FlexKeyColors with Diagnosticable {
         other.keyError == keyError &&
         other.useError == useError &&
         other.keepError == keepError &&
-        other.keepErrorContainer == keepErrorContainer;
+        other.keepErrorContainer == keepErrorContainer &&
+        //
+        other.contrastLevel == contrastLevel;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -503,6 +540,8 @@ class FlexKeyColors with Diagnosticable {
         useError,
         keepError,
         keepErrorContainer,
+        //
+        contrastLevel,
       );
 
   /// Flutter debug properties override, includes toString.
@@ -533,5 +572,7 @@ class FlexKeyColors with Diagnosticable {
     properties.add(DiagnosticsProperty<bool>('keepError', keepError));
     properties.add(
         DiagnosticsProperty<bool>('keepErrorContainer', keepErrorContainer));
+    //
+    properties.add(DiagnosticsProperty<double>('contrastLevel', contrastLevel));
   }
 }
