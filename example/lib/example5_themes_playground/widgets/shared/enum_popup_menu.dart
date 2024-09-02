@@ -181,7 +181,8 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
                     ),
               title: i == 0
                   // If first position use default label.
-                  ? Text(defaultSelectionValuePopupLabel, style: txtStyle)
+                  ? Text(_popupItemLabel(null, useMaterial3, false),
+                      style: txtStyle)
                   : Text(
                       _popupItemLabel(
                           enumFromIndex(i - 1), useMaterial3, false),
@@ -241,44 +242,63 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   /// popup menu items and the long form in the ListTile subtitle.
   String _popupItemLabel(final T? value, final bool useMaterial3,
       [final bool useLongLabel = true]) {
-    if (T == FlexTabBarStyle && useLongLabel) {
+    if (T == FlexTabBarStyle) {
       switch (value) {
         case FlexTabBarStyle.forAppBar:
-          return 'Style: forAppbar\n'
-              'Works with themed AppBar background color. '
-              'FCS M2 default.';
+          return useLongLabel
+              ? 'Style: forAppbar\n'
+                  'Works with themed AppBar background color '
+                  '(FCS default for M2 mode)'
+              : 'Suitable for AppBar usage';
         case FlexTabBarStyle.forBackground:
-          return 'Style: forBackground\n'
-              'Works on surface colors, like scaffold '
-              'and surface colored AppBar.';
+          return useLongLabel
+              ? 'Style: forBackground\n'
+                  'Works on surface colors, like scaffold '
+                  'and surface colored AppBar'
+              : 'Suitable for surface colors usage';
         case FlexTabBarStyle.flutterDefault:
-          return 'Style: flutterDefault\n'
-              'In M2, works on primary color in '
-              'light mode and background color in dark mode. In M3 it '
-              'works on surface colors. FCS M3 default.';
+          return useLongLabel
+              ? useMaterial3
+                  ? 'Style: flutterDefault\n'
+                      'In M3, this style works on surface colors in light '
+                      'and dark mode (FCS default for M3)'
+                  : 'Style: flutterDefault\n'
+                      'In M2, this style works on primary color in '
+                      'light mode and surface colors in dark mode'
+              : 'Flutter SDK style';
         case FlexTabBarStyle.universal:
-          return 'Style: universal\n'
-              'Experimental style, has low contrast. '
-              'May change in future versions.';
+          return useLongLabel
+              ? 'Style: universal\n'
+                  'Experimental style, typically has too low contrast. '
+                  'May change in future versions'
+              : 'Universal style';
         case null:
-          return useMaterial3
-              ? 'Default (flutterDefault)'
-              : 'Default (forAppBar)';
+          return useLongLabel
+              ? useMaterial3
+                  ? 'Default uses the "flutterDefault" option in M3 mode'
+                  : 'Default uses the "forAppBar" option in M2 mode'
+              : useMaterial3
+                  ? 'Default (flutterDefault)'
+                  : 'Default (forAppBar)';
       }
     }
-    if (T == TabBarIndicatorSize && useLongLabel) {
+    if (T == TabBarIndicatorSize) {
       switch (value) {
         case TabBarIndicatorSize.tab:
-          return 'Size: tab\n'
-              'Indicator covers entire tab width';
+          return useLongLabel
+              ? 'Size: tab\n'
+                  'Indicator covers entire tab width'
+              : 'Covers entire tab';
         case TabBarIndicatorSize.label:
-          return 'Size: label\n'
-              'Indicator only spans width of the tab label';
+          return useLongLabel
+              ? 'Size: label\n'
+                  'Indicator only spans width of the tab label'
+              : 'Covers only label';
         case null:
-          return useMaterial3 ? 'Default (label)' : 'Default (tab)';
+          return useMaterial3 ? 'Default (only label)' : 'Default (entire tab)';
       }
     }
-    if (T == FlexSliderIndicatorType && useLongLabel) {
+    if (T == FlexSliderIndicatorType) {
       switch (value) {
         case FlexSliderIndicatorType.rectangular:
           return 'Rectangle (rounded)';
@@ -294,7 +314,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           }
       }
     }
-    if (T == ShowValueIndicator && useLongLabel) {
+    if (T == ShowValueIndicator) {
       switch (value) {
         case ShowValueIndicator.onlyForDiscrete:
           return 'Only for discrete';
@@ -308,7 +328,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           return 'Default (Only for discrete)';
       }
     }
-    if (T == TabAlignment && useLongLabel) {
+    if (T == TabAlignment) {
       switch (value) {
         case TabAlignment.start:
           return 'Aligned to the start\n'
@@ -322,7 +342,34 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         case TabAlignment.center:
           return 'Aligned to the center of the bar';
         case null:
-          return 'Default (M3Only for discrete)';
+          return 'Default\n'
+              'scrollable  M3 startOffset, M2 start\n'
+              'fixed          M3 and M2 fill';
+      }
+    }
+    if (T == FlexFixedColorStyle) {
+      switch (value) {
+        case FlexFixedColorStyle.computed:
+          return useLongLabel
+              ? 'Computed by FlexColorScheme (FCS)\n'
+                  'No seed generation, less expressive'
+              : 'Computed by FCS';
+        case FlexFixedColorStyle.seeded:
+          return useLongLabel
+              ? 'Seeded by FlexSeedScheme (FSS)\n'
+                  'M3 standard tones, chroma from main colors'
+              : 'Seeded by FSS';
+        case FlexFixedColorStyle.seededHighContrast:
+          return useLongLabel
+              ? 'Seeded by FlexSeedScheme (FSS)\n'
+                  'High contrast, chroma from main colors with '
+                  '.higherContrastFixed applied'
+              : 'Seeded high contrast by FSS';
+        case null:
+          return useLongLabel
+              ? 'Default (computed) by FlexColorScheme (FCS)\n'
+                  'No seed generation, less expressive'
+              : 'Default (computed)';
       }
     }
     if (T == AdaptiveTheme) {
@@ -340,7 +387,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           'Default (${VisualDensityEnum.platform.label})';
     }
     // For an unknown enum type, return its name as a default label.
-    return value?.name ?? '';
+    return value?.name ?? 'Default';
   }
 
   // A list of icons to use in the popup menu.
@@ -379,12 +426,12 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           child: Icon(Icons.texture_outlined),
         ),
         Tooltip(
-          message: 'Width equals entire tab',
-          child: Icon(Icons.border_bottom_outlined),
-        ),
-        Tooltip(
           message: 'Width equals label',
           child: Icon(Icons.format_underlined_outlined),
+        ),
+        Tooltip(
+          message: 'Width equals entire tab',
+          child: Icon(Icons.border_bottom_outlined),
         ),
       ];
     }
@@ -404,6 +451,27 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         ),
       ];
     }
+    if (T == FlexFixedColorStyle) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default (computed)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Computed (FCS)',
+          child: Icon(Icons.gradient_outlined),
+        ),
+        Tooltip(
+          message: 'Seeded (FSS)',
+          child: Icon(Icons.lens_blur_outlined),
+        ),
+        Tooltip(
+          message: 'Seeded higher contrast (FSS)',
+          child: Icon(Icons.contrast_outlined),
+        ),
+      ];
+    }
+    //
     if (T == ShowValueIndicator) {
       return const <Widget>[
         Tooltip(
