@@ -405,3 +405,27 @@ class TabAlignmentAdapter extends TypeAdapter<TabAlignment?> {
   @override
   int get typeId => 170;
 }
+
+/// A Hive data type adapter for enum [FlexFixedColorStyle], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class FlexFixedColorStyleAdapter extends TypeAdapter<FlexFixedColorStyle?> {
+  @override
+  FlexFixedColorStyle? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= FlexFixedColorStyle.values.length) {
+      return null;
+    } else {
+      return FlexFixedColorStyle.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, FlexFixedColorStyle? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 171;
+}
