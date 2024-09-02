@@ -267,6 +267,12 @@ class ThemeController with ChangeNotifier {
         Store.keySurfacesUseBWLight, Store.defaultSurfacesUseBWLight);
     _surfacesUseBWDark = await _themeService.load(
         Store.keySurfacesUseBWDark, Store.defaultSurfacesUseBWDark);
+    _higherContrastFixed = await _themeService.load(
+        Store.keyHigherContrastFixed, Store.defaultHigherContrastFixed);
+    _expressiveOnContainer = await _themeService.load(
+        Store.keyExpressiveOnContainer, Store.defaultExpressiveOnContainer);
+    _dynamicContrastLevel = await _themeService.load(
+        Store.keyDynamicContrastLevel, Store.defaultDynamicContrastLevel);
     //
     // InputDecorator SETTINGS.
     _inputDecoratorSchemeColorLight = await _themeService.load(
@@ -1025,6 +1031,10 @@ class ThemeController with ChangeNotifier {
     setOnSurfacesUseBWDark(Store.defaultOnSurfacesUseBWDark, false);
     setSurfacesUseBWLight(Store.defaultSurfacesUseBWLight, false);
     setSurfacesUseBWDark(Store.defaultSurfacesUseBWDark, false);
+    //
+    setHigherContrastFixed(Store.defaultHigherContrastFixed, false);
+    setExpressiveOnContainer(Store.defaultExpressiveOnContainer, false);
+    setDynamicContrastLevel(Store.defaultDynamicContrastLevel, false);
     //
     // InputDecorator SETTINGS.
     await setTextFieldToDefaults(false);
@@ -2821,10 +2831,9 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyUseMaterial3, value));
   }
 
-  late bool _fixedColorStyle;
-  bool get fixedColorStyle => _fixedColorStyle;
-  void setFixedColorStyle(bool? value, [bool notify = true]) {
-    if (value == null) return;
+  late FlexFixedColorStyle? _fixedColorStyle;
+  FlexFixedColorStyle? get fixedColorStyle => _fixedColorStyle;
+  void setFixedColorStyle(FlexFixedColorStyle? value, [bool notify = true]) {
     if (value == _fixedColorStyle) return;
     _fixedColorStyle = value;
     if (notify) notifyListeners();
@@ -3129,6 +3138,36 @@ class ThemeController with ChangeNotifier {
     _surfacesUseBWDark = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySurfacesUseBWDark, value));
+  }
+
+  late bool _higherContrastFixed;
+  bool get higherContrastFixed => _higherContrastFixed;
+  void setHigherContrastFixed(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _higherContrastFixed) return;
+    _higherContrastFixed = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyHigherContrastFixed, value));
+  }
+
+  late bool _expressiveOnContainer;
+  bool get expressiveOnContainer => _expressiveOnContainer;
+  void setExpressiveOnContainer(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _expressiveOnContainer) return;
+    _expressiveOnContainer = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyExpressiveOnContainer, value));
+  }
+
+  late double _dynamicContrastLevel;
+  double get dynamicContrastLevel => _dynamicContrastLevel;
+  void setDynamicContrastLevel(double? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _dynamicContrastLevel) return;
+    _dynamicContrastLevel = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyDynamicContrastLevel, value));
   }
 
   // InputDecorator SETTINGS.
