@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/list_tile_slider.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../shared/enum_popup_menu.dart';
 import '../../shared/show_input_colors_switch.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'flex_tone_config_popup_menu.dart';
@@ -30,6 +32,11 @@ class ColorSchemeSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
+
     // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
     // final bool showBlendInfo = ((isLight && controller.blendLevel > 0) ||
     //         (!isLight && controller.blendLevelDark > 0)) &&
@@ -97,24 +104,25 @@ class ColorSchemeSettings extends StatelessWidget {
             ),
           ),
         ShowInputColorsSwitch(controller: controller),
-        SwitchListTileReveal(
-          title: const Text('Seed generated Fixed and FixedDim colors'),
+        EnumPopupMenu<FlexFixedColorStyle>(
+          enabled: enableControl && !controller.useKeyColors,
+          values: FlexFixedColorStyle.values,
+          title: const Text('Fixed and FixedDim color style'),
           subtitleReveal: const Text(
             'This setting applies when not using a seed generated color '
             'scheme. '
-            'It offers you to choose between two styles, internal FCS none '
-            'seeded default or using seed generate versions also when not '
-            'seed generating the ColorSchme.\n'
-            '\n'
-            'OFF  Compute fixed and fixed dim color without seeding\n'
-            'ON   Always use seeded colors for fixed and fixed dim colors\n'
+            'It offers three styles. FCS computed fixed and fixedDim style, '
+            'these are not seed generated in HCT color space. Alternatively '
+            'two different seed generated versions can be used, the first one '
+            'called seeded uses the same tones as the M3 spec. The second '
+            'option uses tone that create fixed and fixedDim colors that '
+            'are brighter and have  more contrast.\n'
             '\n'
             'Fixed and fixed dim colors are used for colors that have '
             'the same value in light and dark mode.\n',
           ),
-          value: controller.fixedColorStyle || controller.useKeyColors,
-          onChanged:
-              controller.useKeyColors ? null : controller.setFixedColorStyle,
+          value: controller.fixedColorStyle,
+          onChanged: controller.setFixedColorStyle,
         ),
         const Divider(height: 1),
         ListTile(
@@ -125,21 +133,30 @@ class ColorSchemeSettings extends StatelessWidget {
                   'Use a FSS FlexTones variant to enable options below')
               : const Text('Settings are separate for light and dark mode'),
         ),
+        SwitchListTileReveal(
+          enabled: controller.useKeyColors && !_isFlutterScheme,
+          title: const Text('Higher contrast fixed and fixedDim'),
+          subtitleReveal: const Text(
+            'The seed generated fixed, onFixed, fixedDim and onFixedVariant '
+            'color palette tones use 92, 6, 84, 12 instead Material-3 '
+            'design specified 90, 10, 80, 30.\n',
+          ),
+          value: controller.higherContrastFixed,
+          onChanged: controller.setHigherContrastFixed,
+        ),
         if (isLight) ...<Widget>[
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('Monochrome surfaces'),
             subtitleReveal: const Text(
               'All seed generated surface colors are pure greyscale with no '
               'color tint.\n',
             ),
-            value: controller.useMonoSurfacesLight &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setUseMonoSurfacesLight
-                : null,
+            value: controller.useMonoSurfacesLight,
+            onChanged: controller.setUseMonoSurfacesLight,
           ),
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('Black & white main onColors'),
             subtitleReveal: const Text(
               'Main colors are primary, secondary, tertiary, '
@@ -147,28 +164,22 @@ class ColorSchemeSettings extends StatelessWidget {
               'as onColors on the main colors may improve '
               'contrast, it also makes the theme less color expressive.\n',
             ),
-            value: controller.onMainsUseBWLight &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setOnMainsUseBWLight
-                : null,
+            value: controller.onMainsUseBWLight,
+            onChanged: controller.setOnMainsUseBWLight,
           ),
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('Black & white surface onColors'),
             subtitleReveal: const Text(
               'Surface onColors are onSurface, onSurfaceVariant and '
               'onInverseSurface colors. Using black and white as onColors on '
               'all surfaces may improve contrast.\n',
             ),
-            value: controller.onSurfacesUseBWLight &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setOnSurfacesUseBWLight
-                : null,
+            value: controller.onSurfacesUseBWLight,
+            onChanged: controller.setOnSurfacesUseBWLight,
           ),
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('White surface'),
             subtitleReveal: const Text(
               'Surface color uses tone 100 which is '
@@ -177,28 +188,22 @@ class ColorSchemeSettings extends StatelessWidget {
               'blend color into surface, using selected blend strategy '
               'and level.\n',
             ),
-            value: controller.surfacesUseBWLight &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setSurfacesUseBWLight
-                : null,
+            value: controller.surfacesUseBWLight,
+            onChanged: controller.setSurfacesUseBWLight,
           ),
         ] else ...<Widget>[
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('Monochrome surfaces'),
             subtitleReveal: const Text(
               'All seed generated surface colors are pure greyscale with no '
               'color tint.\n',
             ),
-            value: controller.useMonoSurfacesDark &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setUseMonoSurfacesDark
-                : null,
+            value: controller.useMonoSurfacesDark,
+            onChanged: controller.setUseMonoSurfacesDark,
           ),
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('Black & white main onColors'),
             subtitleReveal: const Text(
               'Main colors are primary, secondary, tertiary, '
@@ -206,28 +211,22 @@ class ColorSchemeSettings extends StatelessWidget {
               'as onColors on the main colors may improve '
               'contrast, it also makes the theme less color expressive.\n',
             ),
-            value: controller.onMainsUseBWDark &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setOnMainsUseBWDark
-                : null,
+            value: controller.onMainsUseBWDark,
+            onChanged: controller.setOnMainsUseBWDark,
           ),
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('Black & white surface onColors'),
             subtitleReveal: const Text(
               'Surface onColors are onSurface, onSurfaceVariant and '
               'onInverseSurface colors. Using black and white as onColors on '
               'all surfaces may improve contrast.\n',
             ),
-            value: controller.onSurfacesUseBWDark &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setOnSurfacesUseBWDark
-                : null,
+            value: controller.onSurfacesUseBWDark,
+            onChanged: controller.setOnSurfacesUseBWDark,
           ),
           SwitchListTileReveal(
+            enabled: controller.useKeyColors && !_isFlutterScheme,
             title: const Text('Black surface'),
             subtitleReveal: const Text(
               'Surface uses tone 0, which is always '
@@ -236,12 +235,8 @@ class ColorSchemeSettings extends StatelessWidget {
               'blend color into surface, using selected blend strategy '
               'and level.\n',
             ),
-            value: controller.surfacesUseBWDark &&
-                controller.useKeyColors &&
-                !_isFlutterScheme,
-            onChanged: controller.useKeyColors && !_isFlutterScheme
-                ? controller.setSurfacesUseBWDark
-                : null,
+            value: controller.surfacesUseBWDark,
+            onChanged: controller.setSurfacesUseBWDark,
           ),
         ],
         ListTile(
@@ -252,7 +247,23 @@ class ColorSchemeSettings extends StatelessWidget {
                   'Use a MCU Flex Scheme variant to enable options below')
               : const Text('Settings are separate for light and dark mode'),
         ),
-        // TODO(rydmike): Removed 29.7.2023, bring back the feature in V8.
+        ListTileSlider(
+          enabled: controller.useKeyColors && _isFlutterScheme,
+          title: const Text('Contrast level'),
+          subtitle: const Text('Only available for MCU dynamic schemes.\n'
+              'Levels in M3 guide 0: Normal, 0.5: Medium, 1: High'),
+          min: -1,
+          max: 1,
+          divisions: 8,
+          valueDecimals: 2,
+          value: controller.useKeyColors && _isFlutterScheme
+              ? controller.dynamicContrastLevel
+              : 0,
+          onChanged: controller.setDynamicContrastLevel,
+          sliderLabel: 'Contrast',
+        ),
+
+        // TODO(rydmike): Removed 29.7.2023, maybe bring back the feature in V8.
         //   Ned a way to make this work, we need colors in keys!
         //
         // if (!isLight && controller.schemeIndex ==

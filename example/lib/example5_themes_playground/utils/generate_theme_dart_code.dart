@@ -123,9 +123,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendLevel = controller.blendLevel > 0
       ? '  blendLevel: ${controller.blendLevel},\n'
       : '';
-  final String fixedColorStyle = controller.fixedColorStyle
-      ? '  fixedColorStyle: FlexFixedColorStyle.seeded,\n'
-      : '';
+  final String fixedColorStyle =
+      controller.fixedColorStyle != null && !controller.useKeyColors
+          ? '  fixedColorStyle: ${controller.fixedColorStyle},\n'
+          : '';
   final String usedColors = controller.usedColors != 6
       ? '  usedColors: ${controller.usedColors},\n'
       : '';
@@ -1813,6 +1814,11 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    keepErrorContainer: ${controller.keepDarkErrorContainer},\n'
       : '';
 
+  final String contrastLevel = controller.dynamicContrastLevel != 0 &&
+          FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+      ? '    contrastLevel: ${controller.dynamicContrastLevel},\n'
+      : '';
+
   String useKeyColorsLight = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '$useSecondary'
@@ -1826,6 +1832,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepSecondaryContainer'
           '$keepTertiaryContainer'
           '$keepErrorContainer'
+          '$contrastLevel'
           '  ),\n'
       : '';
   String useKeyColorsDark = controller.useKeyColors
@@ -1841,6 +1848,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepDarkSecondaryContainer'
           '$keepDarkTertiaryContainer'
           '$keepDarkErrorContainer'
+          '$contrastLevel'
           '  ),\n'
       : '';
   // Make a prettier version of the constructor if that is all we got.

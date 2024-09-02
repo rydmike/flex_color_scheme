@@ -386,8 +386,8 @@ class Store {
 
   // Key used to read and save the fixedColorStyle value.
   static const String keyFixedColorStyle = 'fixedColorStyle';
-  // Default value for the useKeyColors, also to reset settings.
-  static const bool defaultFixedColorStyle = false;
+  // Default value for the fixedColorStyle, also to reset settings.
+  static const FlexFixedColorStyle? defaultFixedColorStyle = null;
 
   // Key used to read and save the useKeyColors value.
   static const String keyUseKeyColors = 'useKeyColors';
@@ -544,6 +544,21 @@ class Store {
   static const String keySurfacesUseBWDark = 'surfacesUseBWDark';
   // Default value for the onSurfacesUseBWDark, also to reset settings.
   static const bool defaultSurfacesUseBWDark = false;
+
+  // Key used to read and save the higherContrastFixed value.
+  static const String keyHigherContrastFixed = 'higherContrastFixed';
+  // Default value for the higherContrastFixed, also to reset settings.
+  static const bool defaultHigherContrastFixed = false;
+
+  // Key used to read and save the expressiveOnContainer value.
+  static const String keyExpressiveOnContainer = 'expressiveOnContainer';
+  // Default value for the expressiveOnContainer, also to reset settings.
+  static const bool defaultExpressiveOnContainer = false;
+
+  // Key used to read and save the dynamicContrastLevel value.
+  static const String keyDynamicContrastLevel = 'dynamicContrastLevel';
+  // Default value for the expressiveOnContainer, also to reset settings.
+  static const double defaultDynamicContrastLevel = 0;
 
   // InputDecorator SETTINGS.
   // ===========================================================================

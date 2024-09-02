@@ -103,9 +103,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     colors: !useScheme ? AppColor.scheme(controller).dark : null,
     usedColors: controller.usedColors,
     surfaceMode: controller.surfaceModeDark,
-    fixedColorStyle: controller.fixedColorStyle
-        ? FlexFixedColorStyle.seeded
-        : FlexFixedColorStyle.computed,
+    fixedColorStyle: controller.fixedColorStyle,
     blendLevel: controller.blendLevelDark,
     appBarStyle: controller.appBarStyleDark,
     appBarOpacity: controller.appBarOpacityDark,
@@ -469,6 +467,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
       useError: controller.useError,
       keepError: controller.keepDarkError,
       keepErrorContainer: controller.keepDarkErrorContainer,
+      //
+      contrastLevel: controller.dynamicContrastLevel,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
     tones:
@@ -476,6 +476,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             ? null
             : FlexSchemeVariant.values[controller.usedFlexToneSetup]
                 .tones(Brightness.dark)
+                .higherContrastFixed(controller.higherContrastFixed)
+                .expressiveOnContainer(controller.expressiveOnContainer)
                 .monochromeSurfaces(controller.useMonoSurfacesDark)
                 .onMainsUseBW(controller.onMainsUseBWDark)
                 .onSurfacesUseBW(controller.onSurfacesUseBWDark)

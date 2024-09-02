@@ -108,9 +108,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // surface blends applied to surfaces and backgrounds.
     blendLevel: controller.blendLevel,
     // Which fixed and fixed dim style to use.
-    fixedColorStyle: controller.fixedColorStyle
-        ? FlexFixedColorStyle.seeded
-        : FlexFixedColorStyle.computed,
+    fixedColorStyle: controller.fixedColorStyle,
     // Enum used to select what AppBar style we use.
     appBarStyle: controller.appBarStyleLight,
     // Set background opacity on app bar.
@@ -533,6 +531,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
       useError: controller.useError,
       keepError: controller.keepError,
       keepErrorContainer: controller.keepErrorContainer,
+      //
+      contrastLevel: controller.dynamicContrastLevel,
     ),
     // Use Material3 error colors with Material2 themes.
     useMaterial3ErrorColors: controller.useM3ErrorColors,
@@ -546,6 +546,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             ? null
             : FlexSchemeVariant.values[controller.usedFlexToneSetup]
                 .tones(Brightness.light)
+                .higherContrastFixed(controller.higherContrastFixed)
+                .expressiveOnContainer(controller.expressiveOnContainer)
                 .monochromeSurfaces(controller.useMonoSurfacesLight)
                 .onMainsUseBW(controller.onMainsUseBWLight)
                 .onSurfacesUseBW(controller.onSurfacesUseBWLight)
