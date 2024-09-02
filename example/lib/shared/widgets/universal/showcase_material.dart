@@ -167,6 +167,8 @@ class ShowcaseMaterial extends StatelessWidget {
         const SizedBox(height: 8),
         const SizedBox(height: 8),
         const TabBarForAppBarShowcase(explain: true),
+        const SizedBox(height: 16),
+        const TabBarScrollingForAppBarShowcase(),
         const SizedBox(height: 8),
         const TabBarForBackgroundShowcase(explain: true),
         const SizedBox(height: 16),
@@ -2981,8 +2983,14 @@ class TabBarForAppBarShowcase extends StatelessWidget {
                       ),
                     ],
                     title: const Text('TabBar in AppBar'),
-                    bottom: const TabBar(
-                      tabs: <Widget>[
+                    bottom: TabBar(
+                      tabAlignment: theme.tabBarTheme.tabAlignment ==
+                                  TabAlignment.start ||
+                              theme.tabBarTheme.tabAlignment ==
+                                  TabAlignment.startOffset
+                          ? TabAlignment.fill
+                          : null,
+                      tabs: const <Widget>[
                         Tab(
                           text: 'Chat',
                           icon: Badge(
@@ -2998,6 +3006,76 @@ class TabBarForAppBarShowcase extends StatelessWidget {
                           text: 'Folder',
                           icon: Icon(Icons.create_new_folder),
                         ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TabBarScrollingForAppBarShowcase extends StatelessWidget {
+  const TabBarScrollingForAppBarShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isDark = theme.brightness == Brightness.dark;
+    final bool useM3 = theme.useMaterial3;
+    final ColorScheme colorScheme = theme.colorScheme;
+    const int nrOfTabs = 40;
+
+    final Color effectiveTabBackground = theme.appBarTheme.backgroundColor ??
+        (isDark
+            ? colorScheme.surface
+            : useM3
+                ? colorScheme.surface
+                : colorScheme.primary);
+
+    return RepaintBoundary(
+      child: DefaultTabController(
+        length: nrOfTabs,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            MediaQuery.removePadding(
+              context: context,
+              removeBottom: true,
+              removeTop: true,
+              child: Material(
+                color: effectiveTabBackground,
+                child: SizedBox(
+                  height: 100,
+                  child: AppBar(
+                    leading: IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {},
+                    ),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {},
+                      ),
+                    ],
+                    title: const Text('Scrolling TabBar in AppBar'),
+                    bottom: TabBar(
+                      isScrollable: true,
+                      tabAlignment:
+                          theme.tabBarTheme.tabAlignment == TabAlignment.fill
+                              ? useM3
+                                  ? TabAlignment.startOffset
+                                  : TabAlignment.center
+                              : null,
+                      tabs: <Widget>[
+                        for (int i = 0; i < nrOfTabs; i++)
+                          useM3
+                              ? Tab(text: 'Tab label ${i + 1}')
+                              : Tab(text: 'TAB LABEL ${i + 1}'),
                       ],
                     ),
                   ),
@@ -3048,10 +3126,16 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
             ],
             Material(
               color: theme.colorScheme.surface,
-              child: const SizedBox(
+              child: SizedBox(
                 height: 70,
                 child: TabBar(
-                  tabs: <Widget>[
+                  tabAlignment:
+                      theme.tabBarTheme.tabAlignment == TabAlignment.start ||
+                              theme.tabBarTheme.tabAlignment ==
+                                  TabAlignment.startOffset
+                          ? TabAlignment.fill
+                          : null,
+                  tabs: const <Widget>[
                     Tab(
                       text: 'Chat',
                       icon: Badge(

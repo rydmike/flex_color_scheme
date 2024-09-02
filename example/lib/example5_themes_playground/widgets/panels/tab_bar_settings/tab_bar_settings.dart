@@ -106,6 +106,8 @@ class TabBarSettings extends StatelessWidget {
               children: <Widget>[
                 TabBarForAppBarShowcase(),
                 SizedBox(height: 16),
+                TabBarScrollingForAppBarShowcase(),
+                SizedBox(height: 16),
                 TabBarForBackgroundShowcase(explain: true),
               ],
             ),
@@ -124,6 +126,25 @@ class TabBarSettings extends StatelessWidget {
           enabled: enableControl,
           values: TabAlignment.values,
           title: const Text('Tab alignment'),
+          subtitleReveal: const Text('If any of your TabBar widgets are '
+              'scrollable only the TabBar alignment options "fill" and '
+              '"center" are valid values.\n'
+              'If any of your TabBar widgets are fixed, the common case, '
+              'only the TabBar alignment options "start", "startOffset" and '
+              '"center" are valid alignment values.\n'
+              '\n'
+              'If you theme to an alignment value that is not '
+              "valid by any of your TabBar widget's scrolling setting, those "
+              'TabBars will throw an exception !!!\n'
+              '\n'
+              'If you have both scrollable and fixed TabBar widgets '
+              'in your app, you can only theme to the "center" alignment or '
+              'leave it at default undefined, which causes Flutter to use '
+              'different default styles for fixed and scrollable variants.\n'
+              '\n'
+              'NOTE: The TabBar widgets presented in the Playground have '
+              'logic to ignore invalid TabAlignment values.\n'
+              'Hot take: Flutter should do that by default!\n'),
           value: controller.tabBarTabAlignment,
           onChanged: controller.setTabBarTabAlignment,
         ),

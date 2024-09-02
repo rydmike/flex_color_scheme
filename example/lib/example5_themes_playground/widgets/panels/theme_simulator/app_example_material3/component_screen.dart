@@ -1975,6 +1975,7 @@ class _TabsState extends State<Tabs> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final TabBarTheme tabTheme = Theme.of(context).tabBarTheme;
     return ComponentDecoration(
       label: 'Tabs',
       tooltipMessage: 'Use TabBar',
@@ -1986,6 +1987,10 @@ class _TabsState extends State<Tabs> with TickerProviderStateMixin {
           child: Scaffold(
             appBar: AppBar(
               bottom: TabBar(
+                tabAlignment: tabTheme.tabAlignment == TabAlignment.start ||
+                        tabTheme.tabAlignment == TabAlignment.startOffset
+                    ? TabAlignment.fill
+                    : null,
                 controller: _tabController,
                 tabs: const <Widget>[
                   Tab(
