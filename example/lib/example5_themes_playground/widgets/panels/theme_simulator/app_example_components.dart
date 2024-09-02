@@ -85,6 +85,7 @@ class _AppExampleComponentsState extends State<AppExampleComponents>
               });
             },
             isScrollable: true,
+            tabAlignment: TabAlignment.start,
             tabs: const <Widget>[
               Tab(text: 'Colors'),
               Tab(text: 'Buttons'),

@@ -82,6 +82,7 @@ class _ThemeSimulatorState extends State<ThemeSimulator>
             SizedBox(
               height: 34,
               child: TabBar(
+                tabAlignment: TabAlignment.fill,
                 indicatorColor: theme.colorScheme.primary,
                 labelColor: theme.colorScheme.primary,
                 unselectedLabelColor: theme.colorScheme.onSurface,
