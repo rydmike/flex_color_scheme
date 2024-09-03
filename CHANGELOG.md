@@ -32,7 +32,7 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
-* Update THIS LOG with contrast level addition, plus fixed and dim color changes.
+* Update THIS LOG with contrast level addition, plus fixed and dim color changes on PACKAGE level.
 
 * Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * Also with all new features, get package tests back to 100% coverage.
@@ -272,9 +272,15 @@ This version contains a lot of breaking changes due to updates in the Material-3
  
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. We also use them in the "**Card**" settings" panel for card presentation.
 
+
+- To the **ColorScheme** settings panel added four new options:
+  - Contrast level control for MCU based scheme variants. This feature is equivalent to the FSS based scheme variant contrast level control, and to in Flutter master channel available `contrastLevel` property in `ColorScheme.fromSeed`. It is used to control the contrast level of the generated scheme colors.
+  - Added a dropdown that allows choosing between three different variants for the `fixed`, `fìxedDim` and their on colors. When seed generated ColorScheme ism not being used.
+  - When using FSS based seed generated color schemes, you can keep the standard Material-3 based tones for the `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors to the Material-3 design specified values 90, 10, 80, 30 **or** and or opt-in on an alternative set 92, 6, 84, 12 that have higher contrast. 
+- The Material design spec for the tones colors for `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone 10 to 30 for **LIGHT** mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024). A flag was added where you can op-in on using them already now in FCS. It is not on by default. When it lands in stable Flutter, it will be made **ON** by default, but you will still be able to opt out of using. Flutter SDK and MCU will not contain such an opt-out feature. The new **on** colors for containers in light mode, make them more color expressive, but it also reduces their contrast level and accessibility.   
  
 - Added customizable error colors to the custom scheme. Only used when **Use Material3 error colors** setting is OFF. Error color customization is available when using the custom scheme on **Input Colors** and **ColorScheme** settings panels.
-- Added using error color as a seed color for error tonal palette in the **ColorScheme** settings panel. The tonal palette now also supports using custom error colors to generate its tonals. 
+- Added using error color as a seed color for error tonal palette in the **ColorScheme** settings panel. The tonal palette now also supports using a custom error color to generate its tonals. 
 - Added error color and error container color locking to the **ColorScheme** settings panel.  
 - Added code gen for custom error colors.
 
@@ -301,7 +307,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
-- To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not in the Playground, now it is in the Playground too.
+- To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
 - To the **TextField** settings panel, added UI and code gen for dense input decorator and for custom content padding.
 
 
