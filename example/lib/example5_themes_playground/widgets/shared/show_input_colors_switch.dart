@@ -14,6 +14,7 @@ class ShowInputColorsSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SwitchListTileReveal(
+      dense: true,
       title: const Text('Show input colors'),
       subtitleReveal:
           const Text('Turn ON this option to show the FlexColorScheme scheme '
