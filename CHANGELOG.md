@@ -106,7 +106,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** and later default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. All component themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
 
-- Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` colors had far-reaching, but mostl very subtle implications on styles created by FCS. There are many breaking minor style changes in this release due to this. Here are the critical changes caused by all these breaking changes in Flutter 3.22:
+- Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` colors had far-reaching, but typically still subtle implications on styles created by FCS. There are many breaking minor style changes in this release due to this. Here are the critical changes caused by all these breaking changes in Flutter 3.22:
   - Deprecated `background` and `onBackground` colors in `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factories. They are not used anymore. Use `surface` and `onSurface` colors instead.
   - Deprecated `background`, `onBackground`, `surfaceVariant` from `FlexSchemeOnColors` and `FlexSchemeSurfaceColors`. They are no longer used and have no function. They were deprecated since the same colors were deprecated in `ColorScheme` in Flutter 3.22.
   - Deprecated `surfaceVariantAlpha` and `backgroundAlpha` colors in `FlexAlphaValues`. They are not used anymore and have no function, use `surfaceAlpha` instead. They were deprecated since the colors they related to were deprecated in `ColorScheme` in Flutter 3.22.
@@ -160,13 +160,31 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
 
-- The const color definition class `FlexColor` got 24 new color values to support monochrome greyscale colors for all new surfaces and their on colors for light and dark mode. These are used as starting colors for the new surface colors in the in Flutter 3.22 updated and new Material-3 `ColorScheme`, when a seed generated `ColorScheme` is **NOT** used. The colors follow the naming convention `lightFlexSurface___` and `darkFlexSurface___`, plus their on and inverse versions.
+- The const color definition class `FlexColor` got 24 new color values to support monochrome greyscale colors for all new surfaces and their on colors for light and dark mode. These are used as starting colors for the new surface colors in the **Flutter 3.22** updated and new Material-3 `ColorScheme`, when a seed generated `ColorScheme` is **NOT** used. These colors follow the naming convention `lightFlexSurface___` and `darkFlexSurface___`, plus their on and inverse versions.
 
-- Added `black`, `white` and `transparent` as enum values to `SchemeColor`. These are not `ColorScheme` colors, **but** these colors can in many theming situations be useful instead of the ColorScheme based ones.
+- Added `black`, `white` and `transparent` as enum values to `SchemeColor`. These are not `ColorScheme` colors, **but** these colors can in many theming situations be useful instead of the `ColorScheme` based ones.
   - The automatic on color pair for black is white and white for black. For transparent, it is `onSurface`. 
 - Added all the new surface colors in Flutter 3.22 to `FlexSchemeSurfaceColors`.
 - Added all the new on colors in Flutter 3.22 to `FlexSchemeOnColors`.
  
+- The `FlexKeyColor` class got two new properties, `contrastLevel` and `useExpressiveOnContainerColors`. They are used to control seed generation results when using MCU based dynamic color scheme `variant`s. 
+
+  1) The `contrastLevel` is used to control the contrast level of MCU generated scheme colors. The `contrastLevel` parameter indicates the contrast level between color pairs, such as `primary` and `onPrimary`. The value 0.0 is the default, standard contrast; -1.0 is the lowest; 1.0 is the highest. From the Material-3 Design guideline, the standard, medium and high contrast options correspond to values 0.0, 0.5 and 1.0 respectively. 
+      - The `contrastLevel` property is only available when seed generating a `ColorScheme` using `FlexSeedScheme`'s `SeedColorScheme.fromSeeds` when a scheme `variant` is used where its `FlexSchemeVariant.value`, `isFlutterScheme` is true. This set corresponds to all the `DynamicSchemeVariant`s available in the Flutter SDK.
+      - The `contrastLevel` is the same as the Flutter `contrastLevel` property available in `ColorScheme.fromSeed`. As of Sep 3, 2024, this `contrastLevel` is still only available in the master channel. It will land in the next Flutter stable, released after Flutter 3.24. With FCS v8 you can use it already now.
+        > When using FSS `tones` based seed generated schemes or a `variant` having its `FlexSchemeVariant.value`, `isFlutterScheme` it set to `false`, the `contrastLevel` value is ignored. With `tones` based schemes, the contrast level can instead be defined as desired using custom `FlexTones` configurations. There are two predefined higher contrast level tone and chroma mappings available as `FlexTones.highContrast` and `FlexTones.ultraContrast`, you can use them as they are, or as examples of how to create your own custom high contrast tone mappings.
+ 
+  2) The boolean `useExpressiveOnContainerColors` is used to make the light theme mode colors `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` more color expressive, at the cost of their contrast level and accessibility. Defaults to `false` if undefined.
+
+     - The Material design spec for the tones used by the colors `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone **10** to **30** for **LIGHT** theme mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024). 
+     - Setting the `useExpressiveOnContainerColors` to `true` will make the colors use the new expressive tone. The expressive tone spec is not yet used in Flutter SDK, but is in the Material-3 design spec and also in MCU v 0.12.0. When this change lands in stable Flutter, it will be made **ON** by default in FCS too. You will still be able to opt out of using it. Flutter SDK and MCU will not contain such an opt-out feature.
+     - The new **on** color tones for containers in light mode make them more color expressive, but they also reduce their contrast level and accessibility. We recommend keeping them at the higher contrast level, by setting `useExpressiveOnContainerColors` to `false`. With it set to false, you will also keep this preference when the Flutter SDK defaults to using the expressive tones. 
+
+     - The `useExpressiveOnContainerColors` property is only available when seed generating a `ColorScheme` using `FlexSeedScheme`'s `SeedColorScheme.fromSeeds` when a scheme `variant` is used where its `FlexSchemeVariant.value`, `isFlutterScheme` it true. This set corresponds to all the `DynamicSchemeVariant`s available in the Flutter SDK. The `useExpressiveOnContainerColors` property is not available when using FSS `tones` based seed generated schemes or a `variant` having its `FlexSchemeVariant.value`, `isFlutterScheme` it set to `**false**`. 
+        > With `tones` based schemes the more color expressive on containers in light mode can be made with the `FlexTones` modifier `expressiveOnContainer()`. It has no effect if used on dark mode `FlexTones`.
+
+
+
 - Added TextStyles for `FlexSubThemesData` so that:
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarToolbarTextStyle` for its `toolbarTextStyle`.
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarTitleTextStyle` for its `titleTextStyle`.
@@ -274,18 +292,21 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - To the **ColorScheme** settings panel added four new options:
-  - Contrast level control for MCU based scheme variants. This feature is equivalent to the FSS based scheme variant contrast level control, and to in Flutter master channel available `contrastLevel` property in `ColorScheme.fromSeed`. It is used to control the contrast level of the generated scheme colors.
-  - Added a dropdown that allows choosing between three different variants for the `fixed`, `fìxedDim` and their on colors. When seed generated ColorScheme ism not being used.
+  - Contrast level control for MCU based scheme variants. This feature is equivalent to the FSS based scheme variant contrast level control. It is als available in the Flutter master channel as `contrastLevel` property in `ColorScheme.fromSeed`. It is used to control the contrast level of the generated scheme colors. It will most likely land in the next stable Flutter release after 3.24. With FCS v8 you can use it already now.
+  - Added a dropdown that allows choosing between three different variants for the  `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors, when a seed generated `ColorScheme` is **NOT** being used.
   - When using FSS based seed generated color schemes, you can keep the standard Material-3 based tones for the `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors to the Material-3 design specified values 90, 10, 80, 30 **or** and or opt-in on an alternative set 92, 6, 84, 12 that have higher contrast. 
-- The Material design spec for the tones colors for `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone 10 to 30 for **LIGHT** mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024). A flag was added where you can op-in on using them already now in FCS. It is not on by default. When it lands in stable Flutter, it will be made **ON** by default, but you will still be able to opt out of using. Flutter SDK and MCU will not contain such an opt-out feature. The new **on** colors for containers in light mode, make them more color expressive, but it also reduces their contrast level and accessibility.   
  
-- Added customizable error colors to the custom scheme. Only used when **Use Material3 error colors** setting is OFF. Error color customization is available when using the custom scheme on **Input Colors** and **ColorScheme** settings panels.
+- The Material design spec for the tones used by the colors `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone **10** to **30** for **LIGHT** theme mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024).
+  - A flag was added where you can opt in on using them already now in FCS. It is not on by default. When it lands in stable Flutter, it will be made **ON** by default, but you will still be able to opt out of using it. Flutter SDK and MCU will not contain such an opt-out feature. The new **on** colors for containers in light mode, make them more color expressive, but it also reduces their contrast level and accessibility. We prefer them to have higher contrast.   
+ 
+- Added customizable error colors to the custom scheme. Only available when **Use Material3 error colors** setting is OFF, when using the custom scheme on **Input Colors** and **ColorScheme** settings panels.
+
 - Added using error color as a seed color for error tonal palette in the **ColorScheme** settings panel. The tonal palette now also supports using a custom error color to generate its tonals. 
 - Added error color and error container color locking to the **ColorScheme** settings panel.  
 - Added code gen for custom error colors.
 
 
-- Added code **ColorScheme** gen for all the new `ColorScheme` colors introduced in Flutter 3.22.
+- Added **ColorScheme** code gen for all the new `ColorScheme` colors introduced in Flutter 3.22.
 - Added showing the new Flutter 3.22 `ColorScheme` colors in the **Effective Colors** panel.
 - Added showing the new Flutter 3.22 `ColorScheme` colors in the **ColorScheme** settings panel.
 - Added showing the new Flutter 3.22 `ColorScheme` surface colors in the **Color Blends** settings panel.
@@ -308,7 +329,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
-- To the **TextField** settings panel, added UI and code gen for dense input decorator and for custom content padding.
+- To the **TextField** settings panel added UI and code gen for dense input decorator and for custom content padding.
 
 
 **CHANGE**
@@ -342,7 +363,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Refactored all suitable popup menus to use the new `EnumPopupMenu`. 
 - Changed how ALL opacity sliders work! They now ALL work with default (null) color and opacity is nullable. Even if the `SchemeColor` it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default to apply opacity anywhere.
 - Major internal refactor of all Sliders used in the Playground. Converted the Sliders to custom composed `SliderListTileReveal`, a combo convenience widget for Sliders with a null default value, separate labels for disabled and null default values, and info `ListTileReveal`. 
-- Changed Playground default for the **TextField** settings panel. It now defaults to "Underline" style like Flutter SDK does and the new default in FCS is too. It also defaults to not using color on unfocused border, also like Flutter M3 default style is and also new default for FCS package. Making both Playground and FCS less opinionated in is default values. 
+- Changed Playground default for the **TextField** settings panel. It now defaults to "Underline" style like Flutter SDK does and the new default in FCS is too. It also defaults to not using color on the unfocused border, like Flutter M3 default style does. Making both Playground and FCS less opinionated in is default values. 
 
 **FIX**
 
