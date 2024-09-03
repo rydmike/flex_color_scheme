@@ -133,6 +133,7 @@ class FlexKeyColors with Diagnosticable {
     this.keepErrorContainer = false,
     //
     this.contrastLevel = 0.0,
+    this.useExpressiveOnContainerColors,
   });
 
   /// Use a seed generated [ColorScheme] based on key colors.
@@ -434,6 +435,51 @@ class FlexKeyColors with Diagnosticable {
   /// contrast tone mappings.
   final double contrastLevel;
 
+  /// The [useExpressiveOnContainerColors] is used to make the light theme
+  /// mode [ColorScheme] colors [onPrimaryContainer], [onSecondaryContainer],
+  /// [onTertiaryContainer] and [onErrorContainer] more color expressive.
+  ///
+  /// This comes at the cost of their contrast level and accessibility.
+  ///
+  /// Defaults to `false` if undefined.
+  ///
+  /// The Material design spec for the tones used by the colors
+  /// [onPrimaryContainer], [onSecondaryContainer], [onTertiaryContainer] and
+  /// [onErrorContainer] have changed from tone **10** to **30** for **LIGHT**
+  /// theme mode. This change will land in Flutter when the Material
+  /// Color Utilities (MCU) package is updated to at least 0.12.0.
+  /// This has not been done even in Flutter master (Sep 3, 2024).
+  ///
+  /// Setting the [useExpressiveOnContainerColors] to `true` will make the
+  /// colors use the new expressive tone. The expressive tone is not yet used
+  /// in the Flutter SDK, but is in the Material-3 design spec and also in
+  /// MCU v 0.12.0. When this change lands in stable Flutter, it will be made
+  /// `true` by default in FCS too when undefined. You you will still be able
+  /// to opt out of using it, by setting it `false`. Flutter SDK and MCU will
+  /// not contain such an opt-out feature.
+  ///
+  /// The new **on** color tones for containers in light mode make them more
+  /// color expressive, but they also reduce their contrast level and
+  /// accessibility. We recommend keeping them at the higher contrast level,
+  /// by setting [useExpressiveOnContainerColors] to `false`. With it set to
+  /// false, you will also keep this preference when the Flutter SDK
+  /// defaults to using the expressive tones.
+  ///
+  /// The [useExpressiveOnContainerColors] property is only available when
+  /// seed generating a [ColorScheme] using `FlexSeedScheme`'s
+  /// [SeedColorScheme.fromSeeds] when a scheme [variant] is used where
+  /// its [FlexSchemeVariant.value], [isFlutterScheme] is true. This set
+  /// corresponds to all the [DynamicSchemeVariant]s available in the Flutter
+  /// SDK. The [useExpressiveOnContainerColors] property is not available when
+  /// using FSS [tones] based seed generated schemes or a [variant] having its
+  /// [FlexSchemeVariant.value], [isFlutterScheme] it set to `**false**`.
+  ///
+  /// With [tones] based schemes the more color expressive on containers in
+  /// light mode can be made with the [FlexTones] modifier
+  /// [expressiveOnContainer], that can be applied to any **light** mode
+  /// [FlexTones]. It has no effect if used on a dark mode [FlexTones].
+  final bool? useExpressiveOnContainerColors;
+
   /// Copy the object with one or more provided properties changed.
   FlexKeyColors copyWith({
     final bool? useKeyColors,
@@ -458,6 +504,7 @@ class FlexKeyColors with Diagnosticable {
     final bool? keepErrorContainer,
     //
     final double? contrastLevel,
+    final bool? useExpressiveOnContainerColors,
   }) {
     return FlexKeyColors(
       useKeyColors: useKeyColors ?? this.useKeyColors,
@@ -484,6 +531,8 @@ class FlexKeyColors with Diagnosticable {
       keepErrorContainer: keepErrorContainer ?? this.keepErrorContainer,
       //
       contrastLevel: contrastLevel ?? this.contrastLevel,
+      useExpressiveOnContainerColors:
+          useExpressiveOnContainerColors ?? this.useExpressiveOnContainerColors,
     );
   }
 
@@ -514,7 +563,8 @@ class FlexKeyColors with Diagnosticable {
         other.keepError == keepError &&
         other.keepErrorContainer == keepErrorContainer &&
         //
-        other.contrastLevel == contrastLevel;
+        other.contrastLevel == contrastLevel &&
+        other.useExpressiveOnContainerColors == useExpressiveOnContainerColors;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -542,6 +592,7 @@ class FlexKeyColors with Diagnosticable {
         keepErrorContainer,
         //
         contrastLevel,
+        useExpressiveOnContainerColors,
       );
 
   /// Flutter debug properties override, includes toString.
@@ -574,5 +625,7 @@ class FlexKeyColors with Diagnosticable {
         DiagnosticsProperty<bool>('keepErrorContainer', keepErrorContainer));
     //
     properties.add(DiagnosticsProperty<double>('contrastLevel', contrastLevel));
+    properties.add(DiagnosticsProperty<bool>(
+        'useExpressiveOnContainerColors', useExpressiveOnContainerColors));
   }
 }
