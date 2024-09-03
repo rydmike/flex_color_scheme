@@ -2854,6 +2854,7 @@ class FlexColorScheme with Diagnosticable {
         // neutral variant tonal palette generation.
         neutralKey: surfaceTint,
         neutralVariantKey: surfaceTint,
+        surfaceTint: surfaceTint,
         // Use provided tones or variant configuration or default one.
         // Ensuring that we always used FlexTones.chroma when only
         // seeding for fixed and FixedDim colors, it is the one that will fit
@@ -2864,7 +2865,8 @@ class FlexColorScheme with Diagnosticable {
                 fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
         variant: seed.useKeyColors ? variant : null,
         contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
-        surfaceTint: surfaceTint,
+        useExpressiveOnContainerColors:
+            seed.useExpressiveOnContainerColors ?? false,
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined.
@@ -4951,6 +4953,7 @@ class FlexColorScheme with Diagnosticable {
         // neutral variant tonal palette generation.
         neutralKey: surfaceTint,
         neutralVariantKey: surfaceTint,
+        surfaceTint: surfaceTint,
         // Use provided tones or variant configuration or default one.
         // Ensuring that we always used FlexTones.chroma when only
         // seeding for fixed and FixedDim colors, it is the one that will fit
@@ -4961,7 +4964,8 @@ class FlexColorScheme with Diagnosticable {
                 fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
         variant: seed.useKeyColors ? variant : null,
         contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
-        surfaceTint: surfaceTint,
+        useExpressiveOnContainerColors:
+            seed.useExpressiveOnContainerColors ?? false,
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined. The main colors to keep
