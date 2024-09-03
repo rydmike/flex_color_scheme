@@ -1819,6 +1819,12 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    contrastLevel: ${controller.dynamicContrastLevel},\n'
       : '';
 
+  final String useExpressiveOnContainerColors = controller
+              .expressiveOnContainer &&
+          FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+      ? '    useExpressiveOnContainerColors: ${controller.expressiveOnContainer},\n'
+      : '';
+
   String useKeyColorsLight = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '$useSecondary'
@@ -1833,6 +1839,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepTertiaryContainer'
           '$keepErrorContainer'
           '$contrastLevel'
+          '$useExpressiveOnContainerColors'
           '  ),\n'
       : '';
   String useKeyColorsDark = controller.useKeyColors
@@ -1849,6 +1856,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepDarkTertiaryContainer'
           '$keepDarkErrorContainer'
           '$contrastLevel'
+          '$useExpressiveOnContainerColors'
           '  ),\n'
       : '';
   // Make a prettier version of the constructor if that is all we got.
@@ -1886,6 +1894,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$variantTypeTonesDark';
     }
 
+    final String expressiveOnContainer = controller.expressiveOnContainer
+        ? '\n    .expressiveOnContainer()'
+        : '';
+    final String higherContrastFixed =
+        controller.higherContrastFixed ? '\n    .higherContrastFixed()' : '';
     final String monochromeSurfacesLight =
         controller.useMonoSurfacesLight ? '\n    .monochromeSurfaces()' : '';
     final String onMainsUseBWLight =
@@ -1907,18 +1920,23 @@ String generateThemeDartCode(ThemeController controller) {
     if (!FlexSchemeVariant
         .values[controller.usedFlexToneSetup].isFlutterScheme) {
       flexTonesLight =
-          '$flexTonesLight$monochromeSurfacesLight$onMainsUseBWLight$onSurfacesUseBWLight'
+          '$flexTonesLight$expressiveOnContainer$higherContrastFixed'
+          '$monochromeSurfacesLight$onMainsUseBWLight$onSurfacesUseBWLight'
           '$surfacesUseBWLight';
-      flexTonesDark =
-          '$flexTonesDark$monochromeSurfacesDark$onMainsUseBWDark$onSurfacesUseBWDark'
+      flexTonesDark = '$flexTonesDark$expressiveOnContainer$higherContrastFixed'
+          '$monochromeSurfacesDark$onMainsUseBWDark$onSurfacesUseBWDark'
           '$surfacesUseBWDark';
-      if (controller.useMonoSurfacesLight ||
+      if (controller.expressiveOnContainer ||
+          controller.higherContrastFixed ||
+          controller.useMonoSurfacesLight ||
           controller.onMainsUseBWLight ||
           controller.onSurfacesUseBWLight ||
           controller.surfacesUseBWLight) {
         flexTonesLight = '$flexTonesLight,';
       }
-      if (controller.useMonoSurfacesDark ||
+      if (controller.expressiveOnContainer ||
+          controller.higherContrastFixed ||
+          controller.useMonoSurfacesDark ||
           controller.onMainsUseBWDark ||
           controller.onSurfacesUseBWDark ||
           controller.surfacesUseBWDark) {
