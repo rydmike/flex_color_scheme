@@ -32,8 +32,6 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
-* Update THIS LOG with contrast level addition, plus fixed and dim color changes on PACKAGE level.
-
 * Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * Also with all new features, get package tests back to 100% coverage.
 
@@ -68,7 +66,7 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
   - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter.
 
 
-**POTENTIAL TODOS or maybe push to version 8.1.0 or later**
+**POTENTIAL TODOS, but probably push to version 8.1.0 or later**
 
 - Add **NEW** color schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
@@ -84,7 +82,7 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
 
 - Add `Checkbox` shape and border.
-- Add some `ListTile` theming features.
+- Add some `ListTile` theming features. (Content padding!)
 - Add some `SearchBar` theming features.
 - Add some `SearchView` theming features.
 - Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOs like style when using Material AppBar. Consider adding them as a platform adaptive feature.
@@ -377,16 +375,18 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **TODO THEMES PLAYGROUND AND OTHER EXAMPLES**
 
-- Add an option to select used MaterialTapTargetSize in the Playground.
-  - Maybe also add it to icon theme only? Other places? Switch?
-- Add a high contrast theme in example 4 with tutorial update (commented placeholder added)
-- UPDATE the official Material-3 demo app in the Theme Simulator to its latest version. 
-- In the **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator. 
-- Audit and check the correctness of the effective component colors presentation in the **Effective Colors** panel.
+- Update the official Material-3 demo app in the Theme Simulator to its latest version.
+- In the **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
+- Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
 - Refactor:
   - The ColorScheme color boxes
   - Make a tones functions we can reuse where needed, at least three places.
   - Refactor ColorSchemePopupMenu, make it like the other nullable enum popups.
+
+
+- Maybe: Add an option to select used MaterialTapTargetSize in the Playground.
+  - Maybe also add it to icon theme only? Other places? Switch?
+- Add a high contrast theme in example 4 with tutorial update (commented placeholder added)
 
 ## 7.3.1
 
