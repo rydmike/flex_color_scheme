@@ -1923,7 +1923,7 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
-    /// The color to use for input validation errors with less empahsis than
+    /// The color to use for input validation errors with less emphasis than
     /// error.
     ///
     /// When using the factory this is an override color for the color that
@@ -3997,7 +3997,7 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onError,
 
-    /// The color to use for input validation errors with less empahsis than
+    /// The color to use for input validation errors with less emphasis than
     /// error.
     ///
     /// When using the factory this is an override color for the color that
