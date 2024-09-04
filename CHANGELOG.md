@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 3, 2024**
+**Sep 4, 2024**
 
 ### SUMMARY
 
@@ -28,27 +28,30 @@ FCS still has its own even more flexible `FlexTones` way of making seed generate
 
 FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. 
 
-### PACKAGE UPDATE DETAILS
+### PACKAGE CHANGES 
+
+This section contains a detailed list of changes introduced in FlexColorScheme version 8.0.0.
 
 **CRITICAL TODOS**
 
-* Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
+* **NOT STARTED**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
+  * New features and adapting FCS to Flutter 3.22 also introduced more breakage, review and fix them. 
   * Also with all new features, get package tests back to 100% coverage.
 
-* DONE: Consider what to do with surfaceTint removal.
+* **DONE**: Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later.
   * Will keep it around for now. Added info about it in its info reveal.
   * Maybe add a "bring tints back" feature? Nah, who wants that anyway?
-* DONE: Consider what to do with shadows back.
+* **DONE**: Consider what to do with shadows back.
   * Keep and add more fine-grained control later, via shadow color selection per component.
-* DONE: Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
+* **DONE**: Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
   * This was tricky, big rework and new feature.
-* DONE Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. 
+* **DONE**: Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. 
   * This was very tedious to deal with this in FCS. Need a new approach not using the background color. 
-* DONE: Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. The remaining 492 warnings were all the deprecated `background`, `onBackground` and `surfaceVariant` warnings.
-* DONE: Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
+* **DONE**: Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. The remaining 492 warnings were all the deprecated `background`, `onBackground` and `surfaceVariant` warnings.
+* **DONE**: Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
 
-* DONE: In Material-3 mode, consider more breaking default value changes to clean up the past opinionated API and make it more aligned with Flutter's Material-3 defaults. 
+* **DONE**: In Material-3 mode, consider more breaking default value changes to clean up the past opinionated API and make it more aligned with Flutter's Material-3 defaults. 
   * Old Material-2 mode will keep its opinionated default values that largely emulate Material-3 styles. This remains the FCS Material-2 mode design intent. However, FCS originally had many own styles for Material-3 mode defaults too, because they were made before the specs were available. These have gradually been removed to use actual Material-3 defaults instead as starting point.
   * The Playground will, where it makes sense, keep some of its own default settings, but the package should align with Flutter's Material-3 defaults when possible.
   * After the changes, some defaults still have subtle opinionated difference, but the majority are now using Flutter's Material-3 defaults, which are not always Material-3 spec-correct, mostly they are though. 
@@ -63,10 +66,10 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
   - Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
   - Padding prop
   - Text styles sizing.
-  - This feature still requires proper support in Flutter and more testing of the theme feature, maybe a new issue in Flutter to get full usable theming support in Flutter.
+  - This feature still requires proper support in Flutter and more testing of the theme feature. Maybe a new issue in Flutter to propose fully usable Chip theming support in Flutter.
 
 
-**POTENTIAL TODOS, but probably push to version 8.1.0 or later**
+**POTENTIAL TODOS, but maybe push some to version 8.1.0 or later**
 
 - Add **NEW** color schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
@@ -78,11 +81,11 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
 
 - InputDecorator: Platform adaptive radius.
-- Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
+- Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK. 
 
 
 - Add `Checkbox` shape and border.
-- Add some `ListTile` theming features. (Content padding!)
+- Add some `ListTile` theming features, eg at least `contentPadding`.
 - Add some `SearchBar` theming features.
 - Add some `SearchView` theming features.
 - Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOs like style when using Material AppBar. Consider adding them as a platform adaptive feature.
@@ -363,6 +366,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Major internal refactor of all Sliders used in the Playground. Converted the Sliders to custom composed `SliderListTileReveal`, a combo convenience widget for Sliders with a null default value, separate labels for disabled and null default values, and info `ListTileReveal`. 
 - Changed Playground default for the **TextField** settings panel. It now defaults to "Underline" style like Flutter SDK does and the new default in FCS is too. It also defaults to not using color on the unfocused border, like Flutter M3 default style does. Making both Playground and FCS less opinionated in is default values. 
 
+
+- Updated the official Material-3 demo app in the Theme Simulator to a version with the same look as the latest official version. The updated version now also uses the demo's new Sliver-based cached scrolling. The version is still a fork, with some tweaks to make it work when embedded into the Playground simulator and getting its theme from the Playground and not inside the demo app. The fork also has a denser two-column layout and different breakpoints. This so we in portrait mode can get two columns with Rail already on iPad Pro 11" and the expanded Rail on iPad Pro 12.9". 
+
+
 **FIX**
 
 - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
@@ -375,9 +382,15 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **TODO THEMES PLAYGROUND AND OTHER EXAMPLES**
 
-- Update the official Material-3 demo app in the Theme Simulator to its latest version.
-- In the **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
+- AppBar icon colors UI.
+- **Chip** settings panel.
+  - Secondary color and optional blend on base via level slider.
+  - Chip padding?
+  - Font size?
+  - Chip border?
+- **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
 - Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
+- Remove the optional staggered grid based UI. Only one UI to make app simpler. Does anybody use the staggered grid layout anyway?
 - Refactor:
   - The ColorScheme color boxes
   - Make a tones functions we can reuse where needed, at least three places.

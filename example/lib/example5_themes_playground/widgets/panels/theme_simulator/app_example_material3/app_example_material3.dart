@@ -392,6 +392,7 @@ class _NavigationTransitionState extends State<NavigationTransition> {
       extendBody: true,
       key: widget.scaffoldKey,
       appBar: widget.appBar,
+      backgroundColor: colorScheme.surface,
       body: Row(
         children: <Widget>[
           RailTransition(
