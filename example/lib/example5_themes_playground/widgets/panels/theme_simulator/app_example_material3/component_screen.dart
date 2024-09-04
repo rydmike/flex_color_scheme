@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../shared/utils/app_scroll_behavior.dart';
@@ -29,30 +30,49 @@ class FirstComponentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> children = <Widget>[
+      const Actions(),
+      colDivider,
+      const Communication(),
+      colDivider,
+      const Containment(),
+      if (!showSecondList) ...<Widget>[
+        colDivider,
+        Navigation(scaffoldKey: scaffoldKey),
+        colDivider,
+        const Selection(),
+        colDivider,
+        const TextInputs()
+      ],
+    ];
+    final List<double?> heights = List<double?>.filled(children.length, null);
     final EdgeInsets padding = MediaQuery.paddingOf(context);
+
     // Fully traverse this list before moving on.
     return FocusTraversalGroup(
       child: ScrollConfiguration(
         behavior: const DragScrollBehavior(),
-        child: ListView(
-          padding: showSecondList
-              ? EdgeInsetsDirectional.only(top: padding.top, end: smallSpacing)
-              : EdgeInsetsDirectional.only(
-                  top: padding.top, bottom: padding.bottom),
-          children: <Widget>[
-            const Actions(),
-            colDivider,
-            const Communication(),
-            colDivider,
-            const Containment(),
-            if (!showSecondList) ...<Widget>[
-              colDivider,
-              Navigation(scaffoldKey: scaffoldKey),
-              colDivider,
-              const Selection(),
-              colDivider,
-              const TextInputs()
-            ],
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverPadding(
+              padding: showSecondList
+                  ? EdgeInsetsDirectional.only(
+                      top: padding.top, end: smallSpacing)
+                  : EdgeInsetsDirectional.only(
+                      top: padding.top, bottom: padding.bottom),
+              sliver: SliverList(
+                delegate: BuildSlivers(
+                  heights: heights,
+                  builder: (BuildContext context, int index) {
+                    return _CacheHeight(
+                      heights: heights,
+                      index: index,
+                      child: children[index],
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -72,26 +92,134 @@ class SecondComponentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> children = <Widget>[
+      Navigation(scaffoldKey: scaffoldKey),
+      colDivider,
+      const Selection(),
+      colDivider,
+      const TextInputs(),
+    ];
+    final List<double?> heights = List<double?>.filled(children.length, null);
+
     final EdgeInsets padding = MediaQuery.paddingOf(context);
+
     // Fully traverse this list before moving on.
     return FocusTraversalGroup(
       child: ScrollConfiguration(
         behavior: const DragScrollBehavior(),
-        child: ListView(
-          padding: !showSecondList
-              ? const EdgeInsetsDirectional.only(end: smallSpacing)
-              : EdgeInsetsDirectional.only(
-                  top: padding.top, bottom: padding.bottom),
-          children: <Widget>[
-            Navigation(scaffoldKey: scaffoldKey),
-            colDivider,
-            const Selection(),
-            colDivider,
-            const TextInputs(),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverPadding(
+              padding: !showSecondList
+                  ? const EdgeInsetsDirectional.only(end: smallSpacing)
+                  : EdgeInsetsDirectional.only(
+                      top: padding.top, bottom: padding.bottom),
+              sliver: SliverList(
+                delegate: BuildSlivers(
+                  heights: heights,
+                  builder: (BuildContext context, int index) {
+                    return _CacheHeight(
+                      heights: heights,
+                      index: index,
+                      child: children[index],
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+// If the content of a CustomScrollView does not change, then it's
+// safe to cache the heights of each item as they are laid out. The
+// sum of the cached heights are returned by an override of
+// `SliverChildDelegate.estimateMaxScrollOffset`. The default version
+// of this method bases its estimate on the average height of the
+// visible items. The override ensures that the scrollbar thumb's
+// size, which depends on the max scroll offset, will shrink smoothly
+// as the contents of the list are exposed for the first time, and
+// then remain fixed.
+class _CacheHeight extends SingleChildRenderObjectWidget {
+  const _CacheHeight({
+    super.child,
+    required this.heights,
+    required this.index,
+  });
+
+  final List<double?> heights;
+  final int index;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    return _RenderCacheHeight(
+      heights: heights,
+      index: index,
+    );
+  }
+
+  @override
+  void updateRenderObject(
+      BuildContext context, _RenderCacheHeight renderObject) {
+    renderObject
+      ..heights = heights
+      ..index = index;
+  }
+}
+
+class _RenderCacheHeight extends RenderProxyBox {
+  _RenderCacheHeight({
+    required List<double?> heights,
+    required int index,
+  })  : _heights = heights,
+        _index = index,
+        super();
+
+  List<double?> _heights;
+  List<double?> get heights => _heights;
+  set heights(List<double?> value) {
+    if (value == _heights) {
+      return;
+    }
+    _heights = value;
+    markNeedsLayout();
+  }
+
+  int _index;
+  int get index => _index;
+  set index(int value) {
+    if (value == index) {
+      return;
+    }
+    _index = value;
+    markNeedsLayout();
+  }
+
+  @override
+  void performLayout() {
+    super.performLayout();
+    heights[index] = size.height;
+  }
+}
+
+// The heights information is used to override the `estimateMaxScrollOffset` and
+// provide a more accurate estimation for the max scroll offset.
+class BuildSlivers extends SliverChildBuilderDelegate {
+  BuildSlivers({
+    required NullableIndexedWidgetBuilder builder,
+    required this.heights,
+  }) : super(builder, childCount: heights.length);
+
+  final List<double?> heights;
+
+  @override
+  double? estimateMaxScrollOffset(int firstIndex, int lastIndex,
+      double leadingScrollOffset, double trailingScrollOffset) {
+    return heights
+        .reduce((double? sum, double? height) => (sum ?? 0) + (height ?? 0))!;
   }
 }
 
@@ -185,11 +313,11 @@ class Selection extends StatelessWidget {
         Checkboxes(),
         Chips(),
         DatePickers(),
+        TimePickers(),
         Menus(),
         Radios(),
         Sliders(),
         Switches(),
-        TimePickers(),
       ],
     );
   }
@@ -415,7 +543,7 @@ class _TextFieldsState extends State<TextFields> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _ClearButton(controller: _controllerFilled),
-                labelText: 'Filled',
+                labelText: 'Filled (themed border, widget fill)',
                 hintText: 'hint text',
                 helperText: 'supporting text',
                 filled: true,
@@ -474,7 +602,7 @@ class _TextFieldsState extends State<TextFields> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _ClearButton(controller: _controllerOutlined),
-                labelText: 'Outlined',
+                labelText: 'Outlined (Widget border, theme fill)',
                 hintText: 'hint text',
                 helperText: 'supporting text',
                 border: const OutlineInputBorder(),
@@ -2449,7 +2577,7 @@ class ComponentGroupDecoration extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.zero,
         elevation: 0,
-        color: theme.scaffoldBackgroundColor,
+        color: theme.colorScheme.surfaceContainerHighest.withAlpha(77),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: Center(
