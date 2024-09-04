@@ -873,6 +873,37 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultAppBarForegroundSchemeColorDark = null;
 
+  // Key used to read and save the appBarIconSchemeColor value.
+  static const String keyAppBarIconSchemeColorLight = 'appBarIconSchemeColor';
+  // Default value for the appBarIconSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarIconSchemeColorLight = null;
+
+  // Key used to read and save the appBarIconSchemeColorDark value.
+  static const String keyAppBarIconSchemeColorDark =
+      'appBarIconSchemeColorDark';
+  // Default value for the appBarIconSchemeColorDark, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarIconSchemeColorDark = null;
+
+  // Key used to read and save the appBarActionsIconSchemeColor value.
+  static const String keyAppBarActionsIconSchemeColorLight =
+      'appBarActionsIconSchemeColor';
+  // Default value for the appBarActionsIconSchemeColor, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarActionsIconSchemeColorLight = null;
+
+  // Key used to read and save the appBarActionsIconSchemeColorDark value.
+  static const String keyAppBarActionsIconSchemeColorDark =
+      'appBarActionsIconSchemeColorDark';
+  // Default value for the appBarActionsIconSchemeColorDark, also used to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultAppBarActionsIconSchemeColorDark = null;
+
   // BottomAppBar SETTINGS.
   // ===========================================================================
 

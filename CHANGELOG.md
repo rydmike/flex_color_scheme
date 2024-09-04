@@ -61,7 +61,8 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
   
 **TODO**
  
-- AppBar: Add own colors for leading and actions icon colors, TWO props in FCS and FOUR new props needed in the Playground. 
+- FIX: Default labels for AppBar and Fab colors
+- FIX: AppBar contrast color with old AppBarStyle (incorrect with primary and custom!)
 - Add features for `Chip` theming.
   - Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
   - Padding prop
@@ -239,7 +240,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.inputDecorationTheme` use it for its color.
 
 
-- Added `appBarForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.appBarTheme` use it for its color.
+- Added `appBarForegroundSchemeColor`, `appBarIconSchemeColor` and `appBarActionsIconSchemeColor` properties to `FlexSubThemesData` and made `FlexSubThemes.appBarTheme` use it for its colors on title, icon and actions.
 
 
 - Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
@@ -330,6 +331,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
+- To the **AppBar** settings panel, added title foreground color, leading icon and actions icon color settings.
 - To the **TextField** settings panel added UI and code gen for dense input decorator and for custom content padding.
 
 

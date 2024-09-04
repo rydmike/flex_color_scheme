@@ -6715,6 +6715,10 @@ class FlexColorScheme with Diagnosticable {
                         ? colorScheme.onSurface
                         : colorScheme.onPrimary;
 
+    // TODO(rydmike): The above misses the theme mode inverted primary/custom
+    // colors correct contrast. Figure a better way to deal with all the default
+    // contrast color for AppBar in all situations.
+
     // M2 Icons are slightly black transparent in light mode!
     // But white in dark mode. This per SDK, the constants are from Flutter.
     Color appBarIconColor = appBarBrightness == Brightness.dark
@@ -6725,6 +6729,32 @@ class FlexColorScheme with Diagnosticable {
     if (useMaterial3) {
       appBarIconColor = colorScheme.onSurface;
       appBarActionIconColor = colorScheme.onSurfaceVariant;
+    }
+    // if the appBarForeground color is using the default colors it gets when
+    // we useMaterial3 or not use then appBarIconColor and appBarActionIconColor
+    // should use above default, but if appBarForeground has any other color,
+    // it should be used.
+    if ((appBarForeground.withAlpha(0xFF) != colorScheme.onSurface &&
+            useMaterial3) ||
+        (appBarForeground.withAlpha(0xFF) != colorScheme.onPrimary &&
+            !useMaterial3 &&
+            !isDark) ||
+        (appBarForeground.withAlpha(0xFF) != colorScheme.onSurface &&
+            !useMaterial3 &&
+            isDark)) {
+      appBarIconColor = appBarForeground;
+      appBarActionIconColor = appBarForeground;
+    }
+    // Unless they have given override values in
+    // appBarIconSchemeColor and appBarActionsIconSchemeColor, then they should
+    // get those given colors.
+    if (useSubThemes && subTheme.appBarIconSchemeColor != null) {
+      appBarIconColor = FlexSubThemes.schemeColor(
+          subTheme.appBarIconSchemeColor!, colorScheme);
+    }
+    if (useSubThemes && subTheme.appBarActionsIconSchemeColor != null) {
+      appBarActionIconColor = FlexSubThemes.schemeColor(
+          subTheme.appBarActionsIconSchemeColor!, colorScheme);
     }
     // If we are using subThemes and blend text, use it for the AppBar text
     // and icons as well.
