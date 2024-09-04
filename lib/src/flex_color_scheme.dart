@@ -6718,6 +6718,7 @@ class FlexColorScheme with Diagnosticable {
     // TODO(rydmike): The above misses the theme mode inverted primary/custom
     // colors correct contrast. Figure a better way to deal with all the default
     // contrast color for AppBar in all situations.
+    // Opacity also screws it up.
 
     // M2 Icons are slightly black transparent in light mode!
     // But white in dark mode. This per SDK, the constants are from Flutter.
