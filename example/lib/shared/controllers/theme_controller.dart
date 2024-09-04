@@ -9,20 +9,6 @@ import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import '../services/theme_service.dart';
 
-/// Enum to indicate which palette we are using.
-///
-/// Used to show which TonalPalette a hovered color belongs to.
-/// Tucking this ChangeNotifier into the ThemeController is not really kosher
-/// it should be in its own Provider/Riverpod or Inherited widget.
-enum TonalPalettes {
-  primary,
-  secondary,
-  tertiary,
-  error,
-  neutral,
-  neutralVariant,
-}
-
 /// The ThemeController is used by many Widgets that users can interact with.
 ///
 /// Widgets can read user theme settings, set user theme settings and listen
@@ -416,6 +402,19 @@ class ThemeController with ChangeNotifier {
     _appBarForegroundSchemeColorDark = await _themeService.load(
         Store.keyAppBarForegroundSchemeColorDark,
         Store.defaultAppBarForegroundSchemeColorDark);
+
+    _appBarIconSchemeColorLight = await _themeService.load(
+        Store.keyAppBarIconSchemeColorLight,
+        Store.defaultAppBarIconSchemeColorLight);
+    _appBarIconSchemeColorDark = await _themeService.load(
+        Store.keyAppBarIconSchemeColorDark,
+        Store.defaultAppBarIconSchemeColorDark);
+    _appBarActionsIconSchemeColorLight = await _themeService.load(
+        Store.keyAppBarActionsIconSchemeColorLight,
+        Store.defaultAppBarActionsIconSchemeColorLight);
+    _appBarActionsIconSchemeColorDark = await _themeService.load(
+        Store.keyAppBarActionsIconSchemeColorDark,
+        Store.defaultAppBarActionsIconSchemeColorDark);
     //
     // BottomAppBar SETTINGS.
     _bottomAppBarSchemeColorLight = await _themeService.load(
@@ -1063,6 +1062,13 @@ class ThemeController with ChangeNotifier {
         Store.defaultAppBarForegroundSchemeColorLight, false);
     setAppBarForegroundSchemeColorDark(
         Store.defaultAppBarForegroundSchemeColorDark, false);
+    setAppBarIconSchemeColorLight(
+        Store.defaultAppBarIconSchemeColorLight, false);
+    setAppBarIconSchemeColorDark(Store.defaultAppBarIconSchemeColorDark, false);
+    setAppBarActionsIconSchemeColorLight(
+        Store.defaultAppBarActionsIconSchemeColorLight, false);
+    setAppBarActionsIconSchemeColorDark(
+        Store.defaultAppBarActionsIconSchemeColorDark, false);
     //
     // BottomAppBar SETTINGS.
     setBottomAppBarSchemeColorLight(
@@ -3680,6 +3686,48 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAppBarForegroundSchemeColorDark, value));
   }
 
+  late SchemeColor? _appBarIconSchemeColorLight;
+  SchemeColor? get appBarIconSchemeColorLight => _appBarIconSchemeColorLight;
+  void setAppBarIconSchemeColorLight(SchemeColor? value, [bool notify = true]) {
+    if (value == _appBarIconSchemeColorLight) return;
+    _appBarIconSchemeColorLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyAppBarIconSchemeColorLight, value));
+  }
+
+  late SchemeColor? _appBarIconSchemeColorDark;
+  SchemeColor? get appBarIconSchemeColorDark => _appBarIconSchemeColorDark;
+  void setAppBarIconSchemeColorDark(SchemeColor? value, [bool notify = true]) {
+    if (value == _appBarIconSchemeColorDark) return;
+    _appBarIconSchemeColorDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyAppBarIconSchemeColorDark, value));
+  }
+
+  late SchemeColor? _appBarActionsIconSchemeColorLight;
+  SchemeColor? get appBarActionsIconSchemeColorLight =>
+      _appBarActionsIconSchemeColorLight;
+  void setAppBarActionsIconSchemeColorLight(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _appBarActionsIconSchemeColorLight) return;
+    _appBarActionsIconSchemeColorLight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAppBarActionsIconSchemeColorLight, value));
+  }
+
+  late SchemeColor? _appBarActionsIconSchemeColorDark;
+  SchemeColor? get appBarActionsIconSchemeColorDark =>
+      _appBarActionsIconSchemeColorDark;
+  void setAppBarActionsIconSchemeColorDark(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _appBarActionsIconSchemeColorDark) return;
+    _appBarActionsIconSchemeColorDark = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyAppBarActionsIconSchemeColorDark, value));
+  }
+
   // BottomAppBar SETTINGS.
   // ===========================================================================
 
@@ -5576,39 +5624,4 @@ class ThemeController with ChangeNotifier {
   void setRecentColors(final List<Color> colors) {
     _recentColors = colors;
   }
-
-  // Helper ChangeNotifiers tucked into ThemeController.
-  // The ChangeNotifiers below should be in its own controller.
-  // Maybe that it is not is what started to cause issues on WEB builds?
-  // TODO(rydmike): Try own hover controller and see if it fixes the issue.
-
-  // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
-  // For some reason tone hover feature started causing issues in WEB release
-  // mode builds, but only in WEB release mode on both SKIA and HTML. No idea
-  // why that happens only on web release mode and not in its debug mode or
-  // any mode VM mode build.
-  // Removal of this feature has removed commented code in:
-  // - theme_controller.dart
-  // - scheme_colors.dart
-  // - show_tonal_palette.dart
-  // - color_scheme_settings.dart
-  // ------- Commented controller below ------
-
-  // // This is just a controller prop for hovered color on Colorscheme.
-  // Color? _hoverColor;
-  // Color? get hoverColor => _hoverColor;
-  // void setHoverColor(Color? value, [bool notify = true]) {
-  //   if (value == _hoverColor) return;
-  //   _hoverColor = value;
-  //   if (notify) notifyListeners();
-  // }
-  //
-  // // This is just a controller prop for hovered palette on Colorscheme.
-  // TonalPalettes? _hoverTonalPalette;
-  // TonalPalettes? get hoverTonalPalette => _hoverTonalPalette;
-  // void setHoverTonalPalette(TonalPalettes? value, [bool notify = true]) {
-  //   if (value == _hoverTonalPalette) return;
-  //   _hoverTonalPalette = value;
-  //   if (notify) notifyListeners();
-  // }
 }

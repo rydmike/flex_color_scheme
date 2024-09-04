@@ -349,6 +349,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.appBarBackgroundSchemeColor,
     this.appBarForegroundSchemeColor,
+    this.appBarIconSchemeColor,
+    this.appBarActionsIconSchemeColor,
     this.appBarCenterTitle,
     this.appBarScrolledUnderElevation,
     this.appBarToolbarTextStyle,
@@ -2380,17 +2382,26 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, it uses the onPair complement color to the
   /// [appBarBackgroundSchemeColor]. If it is not defined, then
   /// [AppBar] uses the default contrast color defined for
-  /// [FlexColorScheme.appBarBackground]. If made with [FlexColorScheme.light]
-  /// or [FlexColorScheme.dark], then the enum [FlexAppBarStyle] in property
-  /// [appBarStyle], is used to determine the [AppBar] color and background.
-  ///
-  /// The themed [AppBar] background color is typically determined by defined
-  /// [FlexAppBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
-  /// This property is an override that offers more quick config options by
-  /// allowing picking a color from the effective [ColorScheme] different from
-  /// options offered via [FlexColorScheme.light] and [FlexColorScheme.dark]
-  /// ([appBarStyle) factory parameter.
+  /// [FlexColorScheme.appBarBackground].
   final SchemeColor? appBarForegroundSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the [AppBar]
+  /// main icon uses as foreground color. The AppBar main icon is the one on
+  /// the start side of the AppBar.
+  ///
+  /// If not defined, it uses the [appBarForegroundSchemeColor], if it is
+  /// not defined either, it uses the onPair complement color to the
+  /// [appBarBackgroundSchemeColor].
+  final SchemeColor? appBarIconSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the [AppBar]
+  /// actions icons use as foreground color. The AppBar actions icons are the
+  /// ones on the end side of the AppBar.
+  ///
+  /// If not defined, they uses the [appBarForegroundSchemeColor], if it is
+  /// not defined either, they use the onPair complement color to the
+  /// [appBarBackgroundSchemeColor].
+  final SchemeColor? appBarActionsIconSchemeColor;
 
   /// Whether the AppBar title should be centered.
   ///
@@ -2913,7 +2924,7 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to falso.
+  /// If undefined, defaults to false.
   final bool? navigationBarMutedUnselectedLabel;
 
   /// The size of the icon on selected [NavigationBar] item.
@@ -3527,6 +3538,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     final SchemeColor? appBarBackgroundSchemeColor,
     final SchemeColor? appBarForegroundSchemeColor,
+    final SchemeColor? appBarIconSchemeColor,
+    final SchemeColor? appBarActionsIconSchemeColor,
     final bool? appBarCenterTitle,
     final double? appBarScrolledUnderElevation,
     final TextStyle? appBarToolbarTextStyle,
@@ -3912,6 +3925,10 @@ class FlexSubThemesData with Diagnosticable {
           appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
       appBarForegroundSchemeColor:
           appBarForegroundSchemeColor ?? this.appBarForegroundSchemeColor,
+      appBarIconSchemeColor:
+          appBarIconSchemeColor ?? this.appBarIconSchemeColor,
+      appBarActionsIconSchemeColor:
+          appBarActionsIconSchemeColor ?? this.appBarActionsIconSchemeColor,
       appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
       appBarScrolledUnderElevation:
           appBarScrolledUnderElevation ?? this.appBarScrolledUnderElevation,
@@ -4318,6 +4335,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.appBarBackgroundSchemeColor == appBarBackgroundSchemeColor &&
         other.appBarForegroundSchemeColor == appBarForegroundSchemeColor &&
+        other.appBarIconSchemeColor == appBarIconSchemeColor &&
+        other.appBarActionsIconSchemeColor == appBarActionsIconSchemeColor &&
         other.appBarCenterTitle == appBarCenterTitle &&
         other.appBarScrolledUnderElevation == appBarScrolledUnderElevation &&
         other.appBarToolbarTextStyle == appBarToolbarTextStyle &&
@@ -4646,6 +4665,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         appBarBackgroundSchemeColor,
         appBarForegroundSchemeColor,
+        appBarIconSchemeColor,
+        appBarActionsIconSchemeColor,
         appBarCenterTitle,
         appBarScrolledUnderElevation,
         appBarToolbarTextStyle,
@@ -5074,6 +5095,10 @@ class FlexSubThemesData with Diagnosticable {
         'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'appBarForegroundSchemeColor', appBarForegroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'appBarIconSchemeColor', appBarIconSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'appBarActionsIconSchemeColor', appBarActionsIconSchemeColor));
     properties
         .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
     properties.add(DiagnosticsProperty<double>(

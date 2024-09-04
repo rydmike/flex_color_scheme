@@ -874,6 +874,28 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    appBarForegroundSchemeColor: ${controller.appBarForegroundSchemeColorDark},\n'
       : '';
+
+  final String appBarIconSchemeColorLight = controller
+              .appBarIconSchemeColorLight !=
+          null
+      ? '    appBarIconSchemeColor: ${controller.appBarIconSchemeColorLight},\n'
+      : '';
+  final String appBarIconSchemeColorDark = controller
+              .appBarIconSchemeColorDark !=
+          null
+      ? '    appBarIconSchemeColor: ${controller.appBarIconSchemeColorDark},\n'
+      : '';
+  final String appBarActionsIconSchemeColorLight = controller
+              .appBarActionsIconSchemeColorLight !=
+          null
+      ? '    appBarActionsIconSchemeColor: ${controller.appBarActionsIconSchemeColorLight},\n'
+      : '';
+  final String appBarActionsIconSchemeColorDark = controller
+              .appBarActionsIconSchemeColorDark !=
+          null
+      ? '    appBarActionsIconSchemeColor: ${controller.appBarActionsIconSchemeColorDark},\n'
+      : '';
+
   final String appBarScrolledUnderElevationLight = controller
               .appBarScrolledUnderElevationLight !=
           null
@@ -1422,6 +1444,8 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$appBarBackgroundSchemeColorLight'
           '$appBarForegroundSchemeColorLight'
+          '$appBarIconSchemeColorLight'
+          '$appBarActionsIconSchemeColorLight'
           '$appBarScrolledUnderElevationLight'
           '$appBarCenterTitle'
           //
@@ -1655,6 +1679,8 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$appBarBackgroundSchemeColorDark'
           '$appBarForegroundSchemeColorDark'
+          '$appBarIconSchemeColorDark'
+          '$appBarActionsIconSchemeColorDark'
           '$appBarScrolledUnderElevationDark'
           '$appBarCenterTitle'
           //

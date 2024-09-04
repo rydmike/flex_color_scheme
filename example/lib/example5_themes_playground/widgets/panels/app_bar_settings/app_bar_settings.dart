@@ -169,6 +169,25 @@ class AppBarSettings extends StatelessWidget {
               ),
             ],
           ),
+        const ListTileReveal(
+          dense: true,
+          title: Text('AppBar color'),
+          subtitleReveal: Text('With component themes enabled you can select a '
+              'ColorScheme based color for the AppBar background color.\n'
+              '\n'
+              'Using AppBarStyle is an older API that does not require '
+              'activating '
+              'FlexColorScheme component themes. Using component themes '
+              'offers more choices. '
+              'Selecting a background color, overrides the older used '
+              'AppBarStyle property. Set it back '
+              'to default to use AppBarStyle again.\n'
+              '\n'
+              'Using AppBarStyle uniquely '
+              'offers Scaffold background color as AppBar color, which when '
+              'using surface blends can be different from ColorScheme '
+              'surface colors.\n'),
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -275,6 +294,107 @@ class AppBarSettings extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            if (isLight)
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Icon color'),
+                  labelForDefault: controller.useFlexColorScheme
+                      ? 'default (AppBarStyle)'
+                      : useMaterial3
+                          ? 'default (surface)'
+                          : 'default (primary)',
+                  index: controller.appBarIconSchemeColorLight?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller.setAppBarIconSchemeColorLight(null);
+                          } else {
+                            controller.setAppBarIconSchemeColorLight(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              )
+            else
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Icon color'),
+                  labelForDefault: controller.useFlexColorScheme
+                      ? 'default (AppBarStyle)'
+                      : 'default (surface)',
+                  index: controller.appBarIconSchemeColorDark?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller.setAppBarIconSchemeColorDark(null);
+                          } else {
+                            controller.setAppBarIconSchemeColorDark(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              ),
+            if (isLight)
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Actions icon color'),
+                  labelForDefault: controller.useFlexColorScheme
+                      ? 'default (AppBarStyle)'
+                      : useMaterial3
+                          ? 'default (surface)'
+                          : 'default (primary)',
+                  index:
+                      controller.appBarActionsIconSchemeColorLight?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller
+                                .setAppBarActionsIconSchemeColorLight(null);
+                          } else {
+                            controller.setAppBarActionsIconSchemeColorLight(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              )
+            else
+              Expanded(
+                child: ColorSchemePopupMenu(
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Title color'),
+                  labelForDefault: controller.useFlexColorScheme
+                      ? 'default (AppBarStyle)'
+                      : 'default (surface)',
+                  index:
+                      controller.appBarActionsIconSchemeColorDark?.index ?? -1,
+                  onChanged: controller.useSubThemes &&
+                          controller.useFlexColorScheme
+                      ? (int index) {
+                          if (index < 0 || index >= SchemeColor.values.length) {
+                            controller
+                                .setAppBarActionsIconSchemeColorDark(null);
+                          } else {
+                            controller.setAppBarActionsIconSchemeColorDark(
+                                SchemeColor.values[index]);
+                          }
+                        }
+                      : null,
+                ),
+              ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
             Expanded(
               child: AppBarCenterTitleToggleButtons(
                 controller: controller,
@@ -298,25 +418,6 @@ class AppBarSettings extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        const ListTileReveal(
-          dense: true,
-          title: Text('AppBar color'),
-          subtitleReveal: Text('With component themes enabled you can select a '
-              'ColorScheme based color for the AppBar background color.\n'
-              '\n'
-              'Using AppBarStyle is an older API that does not require '
-              'activating '
-              'FlexColorScheme component themes. Using component themes '
-              'offers more choices. '
-              'Selecting a background color, overrides the older used '
-              'AppBarStyle property. Set it back '
-              'to default to use AppBarStyle again.\n'
-              '\n'
-              'Using AppBarStyle uniquely '
-              'offers Scaffold background color as AppBar color, which when '
-              'using surface blends can be different from ColorScheme '
-              'surface colors.\n'),
         ),
         if (isLight)
           Row(

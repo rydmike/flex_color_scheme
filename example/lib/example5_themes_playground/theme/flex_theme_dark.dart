@@ -312,6 +312,9 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.appBarBackgroundSchemeColorDark,
             appBarForegroundSchemeColor:
                 controller.appBarForegroundSchemeColorDark,
+            appBarIconSchemeColor: controller.appBarIconSchemeColorDark,
+            appBarActionsIconSchemeColor:
+                controller.appBarActionsIconSchemeColorDark,
             appBarScrolledUnderElevation:
                 controller.appBarScrolledUnderElevationDark,
             appBarCenterTitle: controller.appBarCenterTitle,
