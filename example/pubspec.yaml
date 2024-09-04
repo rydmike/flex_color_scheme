@@ -40,7 +40,7 @@ dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^3.1.2
+  flex_seed_scheme: ^3.2.0
 
   # The Flutter SDK, by Google flutter.dev.
   flutter:
@@ -73,7 +73,7 @@ dependencies:
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.3.1
+  shared_preferences: ^2.3.2
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
@@ -100,7 +100,7 @@ flutter:
     # Google fonts, font assets
     - assets/google_fonts/
 
-  # Custom icon font package with only needed and used icons.
+  # Custom icon font package with only used icons.
   fonts:
     - family: FlexIcons
       fonts:
