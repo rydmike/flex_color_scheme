@@ -5,7 +5,6 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../dialogs/copy_scheme_to_custom_dialog.dart';
 import '../dialogs/reset_custom_colors_dialog.dart';
-import 'show_input_colors_switch.dart';
 
 class CustomThemeControls extends StatelessWidget {
   const CustomThemeControls({super.key, required this.controller});
@@ -46,15 +45,25 @@ class CustomThemeControls extends StatelessWidget {
       children: <Widget>[
         if (controller.schemeIndex !=
             (AppColor.schemes.length - 1)) ...<Widget>[
-          ListTile(
+          ListTileReveal(
             title: const Text('Use custom colors?'),
-            subtitle: const Text('Tap here to active customizable colors'),
+            subtitle: const Text('Active customizable colors'),
+            subtitleReveal: const Text('The last color scheme on the '
+                'Playground is customizable. This command just move you '
+                'to it and it is here to make it easier to discover this '
+                'feature\n'),
+            trailing: FilledButton(
+              onPressed: () async {
+                controller.setSchemeIndex(AppColor.schemes.length - 1);
+              },
+              child: const Text('Custom'),
+            ),
             onTap: () {
               controller.setSchemeIndex(AppColor.schemes.length - 1);
             },
           ),
           ListTileReveal(
-            title: const Text('Copy these colors to the customizable scheme?'),
+            title: const Text('Copy this scheme to the customizable colors?'),
             subtitleReveal: const Text('When you copy a built-in color scheme '
                 'to the customizable ones, it becomes a starting point '
                 'for your own custom colors. Note that it is always '
@@ -74,11 +83,11 @@ class CustomThemeControls extends StatelessWidget {
           )
         ] else ...<Widget>[
           const ListTile(
-            title: Text('These colors are customizable'),
-            subtitle: Text('Tap on the main colors above to modify them. You '
+            title: Text('Custom colors used'),
+            subtitle: Text('Tap on the colors to modify them. You '
                 'can copy/paste values to and from the color picker. It is '
                 'always the input colors that are modified, not the '
-                'resulting colors after effective color modifiers'),
+                'resulting colors after applied color modifiers'),
           ),
           ListTile(
             title: const Text('Reset custom colors to their defaults?'),
@@ -93,7 +102,6 @@ class CustomThemeControls extends StatelessWidget {
             },
           )
         ],
-        ShowInputColorsSwitch(controller: controller),
       ],
     );
   }
