@@ -84,8 +84,6 @@ class ThemeController with ChangeNotifier {
     _splashTypeAdaptive = await _themeService.load(
         Store.keySplashTypeAdaptive, Store.defaultSplashTypeAdaptive);
     //
-    _isLargeGridView = await _themeService.load(
-        Store.keyIsLargeGridView, Store.defaultIsLargeGridView);
     _compactMode = await _themeService.load(
         Store.keyCompactMode, Store.defaultCompactMode);
     _verticalMode = await _themeService.load(
@@ -2377,16 +2375,6 @@ class ThemeController with ChangeNotifier {
     _splashTypeAdaptive = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySplashTypeAdaptive, value));
-  }
-
-  late bool _isLargeGridView;
-  bool get isLargeGridView => _isLargeGridView;
-  void setLargeGridView(bool? value, [bool notify = true]) {
-    if (value == null) return;
-    if (value == _isLargeGridView) return;
-    _isLargeGridView = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyIsLargeGridView, value));
   }
 
   late bool _compactMode;

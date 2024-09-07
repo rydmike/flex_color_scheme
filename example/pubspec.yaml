@@ -46,11 +46,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Masonry grid layout package, by Romain Rastel.
-  # Used by the grid page view in the Playground.
-  # https://pub.dev/packages/flutter_staggered_grid_view
-  flutter_staggered_grid_view: ^0.7.0
-
   # SVG file drawing, used by Asset Images, by dnfield.dev.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg

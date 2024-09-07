@@ -283,10 +283,10 @@ class App {
     ),
     // Item 3
     ResponsiveMenuItems(
-      label: 'No sub themes',
-      labelSecondary: 'Use sub themes',
-      tooltip: 'Turn off sub themes',
-      tooltipSecondary: 'Turn on sub themes',
+      label: 'No component themes',
+      labelSecondary: 'Use component themes',
+      tooltip: 'Turn OFF component themes',
+      tooltipSecondary: 'Turn ON component themes',
       icon: Icons.subtitles_off_outlined,
       iconSecondary: Icons.subtitles_outlined,
     ),
@@ -304,15 +304,6 @@ class App {
     // Item 6
     ResponsiveMenuItems(
       dividerAbove: true,
-      label: 'Grid view',
-      labelSecondary: 'Page view',
-      tooltip: 'Set to grid view',
-      tooltipSecondary: 'Set to page view',
-      icon: Icons.calendar_view_month_outlined,
-      iconSecondary: Icons.view_array_outlined,
-    ),
-    // Item 7
-    ResponsiveMenuItems(
       label: 'Large UI',
       labelSecondary: 'Compact UI',
       tooltip: 'Set to large UI',
@@ -320,7 +311,7 @@ class App {
       icon: Icons.view_compact_alt_rounded,
       iconSecondary: Icons.view_compact_alt_outlined,
     ),
-    // Item 8
+    // Item 7
     ResponsiveMenuItems(
       label: 'Colors on top',
       labelSecondary: 'Colors on side',
@@ -330,18 +321,7 @@ class App {
       turns: 3,
       iconSecondary: Icons.view_sidebar,
     ),
-    // Item 9
-    ResponsiveMenuItems(
-      dividerAbove: true,
-      label: 'Expand all',
-      icon: Icons.open_in_full_outlined,
-    ),
-    // Item 10
-    ResponsiveMenuItems(
-      label: 'Close all',
-      icon: Icons.close_fullscreen_outlined,
-    ),
-    // Item 11
+    // Item 8
     ResponsiveMenuItems(
       dividerAbove: true,
       label: 'Reset settings',

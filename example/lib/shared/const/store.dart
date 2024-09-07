@@ -131,11 +131,6 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SplashTypeEnum? defaultSplashTypeAdaptive = null;
 
-  // Key used to read and save the isLargeGridView value.
-  static const String keyIsLargeGridView = 'isLargeGridView';
-  // Default value for the isLargeGridView, also used to reset settings.
-  static const bool defaultIsLargeGridView = false;
-
   // Key used to read and save the compactMode value.
   static const String keyCompactMode = 'compactMode';
   // Default value for the compactMode, also used to reset settings.
