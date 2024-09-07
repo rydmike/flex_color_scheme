@@ -42,8 +42,8 @@ class NoScrollbarBehavior extends DragScrollBehavior {
 /// Another alternative custom scroll behavior class.
 /// Using the Apple iOS bouncing scroll and over stretch.
 ///
-/// Currently not used in these apps, but experimented with it, for some other
-/// type of app it is quite cool.
+/// Currently not used in the example apps, but experimented with it, for
+/// some other type of app it may be useful.
 @immutable
 class AppleScrollBehavior extends ScrollBehavior {
   const AppleScrollBehavior();
