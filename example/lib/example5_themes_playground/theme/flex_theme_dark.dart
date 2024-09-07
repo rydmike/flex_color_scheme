@@ -481,7 +481,6 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             : FlexSchemeVariant.values[controller.usedFlexToneSetup]
                 .tones(Brightness.dark)
                 .higherContrastFixed(controller.higherContrastFixed)
-                .expressiveOnContainer(controller.expressiveOnContainer)
                 .monochromeSurfaces(controller.useMonoSurfacesDark)
                 .onMainsUseBW(controller.onMainsUseBWDark)
                 .onSurfacesUseBW(controller.onSurfacesUseBWDark)
