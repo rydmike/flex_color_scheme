@@ -198,9 +198,9 @@ class SwitchesSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information. FlexColorScheme 7.3 includes '
-                      'the needed changes to address this breaking change '
-                      'in Flutter 3.13.\n',
+                  text: ' for more information. FlexColorScheme 7.3 and later '
+                      'versions include the needed changes to address this '
+                      'minor breaking theming change in Flutter 3.13.\n',
                 ),
               ],
             ),
