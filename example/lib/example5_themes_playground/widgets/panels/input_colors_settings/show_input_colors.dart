@@ -60,7 +60,7 @@ class ShowInputColors extends StatelessWidget {
     final Color error = colorScheme.error;
     final Color errorContainer = colorScheme.errorContainer;
 
-    // Get controller input colors, if we are using the the to dark
+    // Get controller input colors, if we are using the to dark
     final FlexSchemeColor inputColor = isLight || controller.useToDarkMethod
         ? AppColor.scheme(controller).light
         : AppColor.scheme(controller).dark;
