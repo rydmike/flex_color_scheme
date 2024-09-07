@@ -5,6 +5,7 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/custom_theme_controls.dart';
+import '../../shared/show_input_colors_switch.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
 import 'input_colors_popup_menu.dart';
 import 'show_input_colors.dart';
@@ -50,12 +51,14 @@ class InputColorsSettings extends StatelessWidget {
             style: denseBody,
           ),
         ),
+        ShowInputColorsSwitch(controller: controller),
+        const Divider(),
         CustomThemeControls(controller: controller),
         const Divider(),
         const ListTile(
           title: Text('Color modifiers'),
           // subtitleDense: true,
-          subtitle: Text('Use these modifiers to change how the above colors '
+          subtitle: Text('Modifiers change how the input colors '
               'are used to create the effective ColorScheme'),
         ),
         SwitchListTileReveal(
@@ -89,24 +92,27 @@ class InputColorsSettings extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text:
-                      'Only applies when using M3 and only to built-in FCS M2 '
-                      'designed schemes that benefit from this swap for a '
-                      'better fit with the M3 color system design intent.\n'
+                  text: 'Only applies when using Material-3 mode and only to '
+                      'older built-in FCS Material-2 designed schemes that '
+                      'benefit from this swap for a better fit with the '
+                      'Material-3 color system design intent.\n'
                       '\n'
-                      'Prefer ON when using M3 and legacy FCS color schemes '
-                      'to get a theme result more in-line with the M3 color '
-                      'system color expectations. You can keep it OFF if this '
+                      'Prefer ON when using Material-3 and legacy FCS color '
+                      'schemes to get a scheme result in-line with the '
+                      'Material-3 color system design expectations. '
+                      'You can keep it OFF if this '
                       'is not important to your design. When using a seed '
                       'generated ColorScheme, especially if you do not use '
-                      'the secondary color as a seed key, you can well keep '
+                      'the secondary color as a seed key color, you can keep '
                       'this setting OFF.\n'
                       '\n'
-                      'Typically Schemes that have tertiary colors that are '
+                      'Typically schemes that have tertiary colors that are '
                       'closer in Hue to the primary color than the secondary '
-                      'color is, will benefit from this swap. '
+                      'color, will benefit from this swap. '
                       'Some FCS schemes created originally for Material-2 '
-                      'color system design fall into this category. The ',
+                      'color system design fall into this category.\n'
+                      '\n'
+                      'The ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -117,9 +123,12 @@ class InputColorsSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: ' shows which ones do so. It also documents with which '
-                      'originally for M2 designed schemes, you should avoid '
-                      'using the secondary color as a seed key color when '
-                      'generating a ColorScheme with the scheme.\n',
+                      'originally for Material-2 designed schemes, you '
+                      'should avoid using the secondary color as a seed key '
+                      'color when generating a ColorScheme with the scheme. '
+                      'This in case you want a resulting ColorScheme that '
+                      'adheres stringently to the Material-3 color system '
+                      'design intent.\n',
                 ),
               ],
             ),
