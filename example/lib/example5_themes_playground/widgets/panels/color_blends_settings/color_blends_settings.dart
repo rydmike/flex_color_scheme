@@ -435,8 +435,8 @@ class ColorBlendsSettings extends StatelessWidget {
             enabled: controller.useSubThemes && controller.useFlexColorScheme,
             subtitleReveal:
                 const Text('In M3 design, in dark mode, both container and '
-                    'main colors use color pair tinted on colors. '
-                    'Set this to ON here to use blends for onPrimary, '
+                    'main colors use color pair tinted on colors. Keep it '
+                    'ON to do so in dark mode and use blends for onPrimary, '
                     'onSecondary, onTertiary and onError, when seed '
                     'colors are NOT used.\n'),
             value: controller.blendDarkOnColors &&

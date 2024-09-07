@@ -156,8 +156,8 @@ class ShowTonalPalette extends StatelessWidget {
             'from these palettes and these fixed color tones when using seed '
             'generated ColorSchemes. The MCU based Flutter SDK dynamic schemes '
             'also use these palettes for their generated ColorSchemes, but '
-            'they may use color tones dynamically not included in the fixed '
-            'tones below.',
+            'they may use color tones dynamically, that are not included in '
+            'the fixed tones below.',
           ),
           // trailing: SelectPaletteType(controller: controller),
         ),
