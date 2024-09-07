@@ -78,7 +78,7 @@ class _SubpageDemoState extends State<SubpageDemo> {
           ),
           body: ResponsiveCenter(
             child: ScrollConfiguration(
-              behavior: const DragScrollBehavior(),
+              behavior: const NoScrollbarBehavior(),
               child: ListView(
                 primary: true,
                 padding: EdgeInsets.fromLTRB(
