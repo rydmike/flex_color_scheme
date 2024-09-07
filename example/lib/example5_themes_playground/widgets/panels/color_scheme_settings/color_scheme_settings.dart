@@ -161,21 +161,29 @@ class ColorSchemeSettings extends StatelessWidget {
             'a forced default in Flutter SDK.'
             '\n'
             'This feature is available in FCS for both MCU and FSS based '
-            'seed generated schemes, but its API implementation differs '
-            'You can watch the code generated to see the difference.\n ',
+            'seed generated schemes, but its API implementation differs. '
+            'When enabled, you can check the code generated on MCU and FSS '
+            'scheme variants when using a generated ColorScheme in light mode, '
+            'to see the difference.\n ',
           ),
           value: controller.expressiveOnContainer,
           onChanged: controller.setExpressiveOnContainer,
         ),
         const Divider(height: 1),
-        ListTile(
+        ListTileReveal(
           dense: true,
-          title: const Text('Additional options '
-              'for FSS FlexTones scheme variants'),
+          title: const Text('Additional tuning options for '
+              'FSS FlexTones scheme variants'),
           subtitle: !controller.useKeyColors || _isFlutterScheme
               ? const Text(
                   'Use a FSS FlexTones variant to enable options below')
-              : const Text('Settings are separate for light and dark mode'),
+              : const Text('Enable FlexTones modifiers to tune the result'),
+          subtitleReveal: !controller.useKeyColors || _isFlutterScheme
+              ? null
+              : const Text('Settings are separate for light and dark mode, '
+                  'except the higher contrast fixed and fixedDim option '
+                  'that must be same so that fixed scheme colors in light and '
+                  'dark mode remain "fixed" and identical.'),
         ),
         SwitchListTileReveal(
           enabled: controller.useKeyColors && !_isFlutterScheme,
@@ -332,12 +340,12 @@ class ColorSchemeSettings extends StatelessWidget {
         const Divider(height: 1),
         ListTile(
           dense: true,
-          title: const Text('Additional options '
+          title: const Text('Additional tuning options '
               'for Flutter MCU based scheme variants'),
           subtitle: !controller.useKeyColors || !_isFlutterScheme
               ? const Text(
-                  'Use a MCU Flex Scheme variant to enable options below')
-              : const Text('Setting value is the same for light and dark mode'),
+                  'Use a MCU scheme variant to enable contrast level tuning')
+              : const Text('Set value is the same for light and dark mode'),
         ),
         ListTileSlider(
           enabled: controller.useKeyColors && _isFlutterScheme,
