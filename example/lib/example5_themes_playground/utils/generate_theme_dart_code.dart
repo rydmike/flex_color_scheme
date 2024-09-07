@@ -1949,7 +1949,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$flexTonesLight$expressiveOnContainer$higherContrastFixed'
           '$monochromeSurfacesLight$onMainsUseBWLight$onSurfacesUseBWLight'
           '$surfacesUseBWLight';
-      flexTonesDark = '$flexTonesDark$expressiveOnContainer$higherContrastFixed'
+      flexTonesDark = '$flexTonesDark$higherContrastFixed'
           '$monochromeSurfacesDark$onMainsUseBWDark$onSurfacesUseBWDark'
           '$surfacesUseBWDark';
       if (controller.expressiveOnContainer ||
@@ -1960,8 +1960,7 @@ String generateThemeDartCode(ThemeController controller) {
           controller.surfacesUseBWLight) {
         flexTonesLight = '$flexTonesLight,';
       }
-      if (controller.expressiveOnContainer ||
-          controller.higherContrastFixed ||
+      if (controller.higherContrastFixed ||
           controller.useMonoSurfacesDark ||
           controller.onMainsUseBWDark ||
           controller.onSurfacesUseBWDark ||
