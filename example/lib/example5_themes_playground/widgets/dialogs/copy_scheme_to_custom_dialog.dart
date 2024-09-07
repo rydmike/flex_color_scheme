@@ -8,9 +8,9 @@ class CopySchemeToCustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Copy to custom scheme'),
-      content: const Text('Copy this color scheme to the customizable '
-          'scheme?\n\n'
+      title: const Text('Copy to custom colors?'),
+      content: const Text("Copy this color scheme's colors to the customizable "
+          'colors?\n\n'
           'Current customizable light and dark color scheme will be '
           'overwritten and set to the colors of this scheme.\n'
           'You will be able edit and make a custom scheme with these colors '
