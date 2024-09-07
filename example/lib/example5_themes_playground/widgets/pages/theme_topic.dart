@@ -590,7 +590,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     buttonLabel: 'Android\nSystem Nav',
     icon: Icons.android_outlined,
     info: 'The system navigation bar in Android is in newer versions '
-        'the swipe bar at the bottom of the screen used for swipe '
+        'a swipe bar at the bottom of the screen used for swipe '
         'gestures. In older versions it is made up of the 3 system '
         'navigation buttons. The system navigation area can be styled '
         'in Flutter, but not via themes.\n'
@@ -598,7 +598,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'The AnnotatedRegion widget can be used to style it. '
         'FlexColorScheme contains a helper called '
         '"FlexColorScheme.themedSystemNavigationBar" to make it '
-        'easy to style with a selected style that fits with a theme made '
+        'easy to style it with selected styles that fit with themes made '
         'by FlexColorColorScheme.\n',
   ),
   ThemeTopic(
