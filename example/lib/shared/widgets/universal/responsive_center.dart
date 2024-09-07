@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/app_scroll_behavior.dart';
+
 /// A layout with horizontally centered and max width constrained content.
 ///
 /// This type of layout is often used on web pages.
@@ -93,8 +95,7 @@ class ResponsiveCenter extends StatelessWidget {
             child: ConstrainedBox(
               constraints: constraints,
               child: ScrollConfiguration(
-                behavior:
-                    ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                behavior: const NoScrollbarBehavior(),
                 child: Padding(
                   padding: padding,
                   child: child,
