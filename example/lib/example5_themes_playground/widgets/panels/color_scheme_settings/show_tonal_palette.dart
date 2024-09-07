@@ -38,7 +38,7 @@ class ShowTonalPalette extends StatelessWidget {
         .values[controller.usedFlexToneSetup]
         .tones(brightness);
 
-    // List of ints that we need to draw the tonal palettes.
+    // Lists of ints that we need to draw the tonal palettes.
     List<int> primaryTonals = <int>[];
     List<int> secondaryTonals = <int>[];
     List<int> tertiaryTonals = <int>[];
@@ -73,7 +73,6 @@ class ShowTonalPalette extends StatelessWidget {
         neutralVariantSeedColor:
             isLight ? controller.surfaceTintLight : controller.surfaceTintDark,
         variant: usedVariant,
-        // TODO(rydmike): Add contrast level support
         contrastLevel: controller.dynamicContrastLevel,
         useExpressiveOnContainerColors: controller.expressiveOnContainer,
       );
@@ -153,8 +152,12 @@ class ShowTonalPalette extends StatelessWidget {
             '  - Neutral palette\n'
             '  - Neutral variant palette\n'
             '\n'
-            'The light and dark mode colors are picked from these palettes '
-            'when using seed generated ColorSchemes.',
+            'The FSS based light and dark mode ColorScheme colors are picked '
+            'from these palettes and these fixed color tones when using seed '
+            'generated ColorSchemes. The MCU based Flutter SDK dynamic schemes '
+            'also use these palettes for their generated ColorSchemes, but '
+            'they may use color tones dynamically not included in the fixed '
+            'tones below.',
           ),
           // trailing: SelectPaletteType(controller: controller),
         ),

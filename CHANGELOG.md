@@ -331,8 +331,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
-- To the **AppBar** settings panel, added title foreground color, leading icon and actions icon color settings.
+- To the **AppBar** settings panel, title foreground color, leading icon and actions icon color settings were added.
 - To the **TextField** settings panel added UI and code gen for dense input decorator and for custom content padding.
+- The Playground can show the used color tones also for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
 
 
 **CHANGE**
@@ -392,12 +393,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - Chip border?
 - **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
 - Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
-- Remove the optional staggered grid based UI. Only one UI to make app simpler. Does anybody use the staggered grid layout anyway?
+- Remove the optional staggered grid-based UI. Only one UI to make app simpler. Does anybody use the staggered grid layout anyway?
+- Figure out the default padding logics for the **TextField** settings panel. It should show the same as the Flutter SDK default, but it is not.
 - Refactor:
-  - The ColorScheme color boxes
-  - Make a tones functions we can reuse where needed, at least three places.
+  - The ColorScheme color boxes  
   - Refactor ColorSchemePopupMenu, make it like the other nullable enum popups.
 
+**ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset to the input values, not the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see a change in the effective theme, but if change theme modifiers, we no longer have the original input color.
 
 - Maybe: Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switch?

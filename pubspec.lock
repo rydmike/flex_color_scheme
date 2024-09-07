@@ -122,10 +122,10 @@ packages:
     dependency: "direct main"
     description:
       name: flex_seed_scheme
-      sha256: "86470c8dc470f55dd3e28a6d30e3253a1c176df32903263d7daeabfc0c77dbd4"
+      sha256: "7d97ba5c20f0e5cb1e3e2c17c865e1f797d129de31fc1f75d2dcce9470d6373c"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.0"
+    version: "3.3.0"
   flutter:
     dependency: "direct main"
     description: flutter
