@@ -13,7 +13,6 @@ import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
 import 'theme_topic.dart';
 import 'theme_topic_page.dart';
-import 'theme_topics_grid_page.dart';
 import 'theme_two_topics_page.dart';
 import 'theme_two_topics_vertical_page.dart';
 
@@ -60,17 +59,12 @@ class _HomePageState extends State<HomePage> {
     // Set enabled menu items.
     menuItemsEnabled =
         List<bool>.generate(App.menuItems.length, (int i) => true);
-    menuItemsEnabled[9] = widget.controller.isLargeGridView;
-    menuItemsEnabled[10] = widget.controller.isLargeGridView;
     menuItemsEnabled[3] = widget.controller.useFlexColorScheme;
 
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
         App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
-    menuItemsIconState[6] = widget.controller.isLargeGridView
-        ? ResponsiveMenuItemIconState.secondary
-        : ResponsiveMenuItemIconState.primary;
 
     // The panels can only be opened/closed on the large masonry grid view.
     // Since by default users will start with the page view, they will have
@@ -124,9 +118,6 @@ class _HomePageState extends State<HomePage> {
     final bool isBigDesktop =
         mediaSize.width > App.mediumDesktopWidthBreakpoint;
     final String materialType = theme.useMaterial3 ? 'M3 ' : 'M2 ';
-
-    // Disable vertical/horizontal setting when it has no effect.
-    menuItemsEnabled[8] = isBigDesktop && !widget.controller.isLargeGridView;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
@@ -211,40 +202,18 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }
-          // Toggle grid view mode true/false.
-          else if (index == 6) {
-            widget.controller
-                .setLargeGridView(!widget.controller.isLargeGridView);
-            menuItemsEnabled[9] = !menuItemsEnabled[9];
-            menuItemsEnabled[10] = !menuItemsEnabled[10];
-            updateMenuState(index);
-          }
           // Toggle compact/standard mode.
-          else if (index == 7) {
+          else if (index == 6) {
             widget.controller.setCompactMode(!widget.controller.compactMode);
             updateMenuState(index);
           }
           // Toggle horizontal/vertical mode.
-          else if (index == 8) {
+          else if (index == 7) {
             widget.controller.setVerticalMode(!widget.controller.verticalMode);
             updateMenuState(index);
           }
-          // Open all cards
-          else if (index == 9) {
-            for (int i = 0; i < isPanelOpen.length; i++) {
-              isPanelOpen[i] = true;
-            }
-            setState(() {});
-          }
-          // Close all cards
-          else if (index == 10) {
-            for (int i = 0; i < isPanelOpen.length; i++) {
-              isPanelOpen[i] = false;
-            }
-            setState(() {});
-          }
           // Reset theme settings.
-          else if (index == 11) {
+          else if (index == 8) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {
@@ -256,17 +225,11 @@ class _HomePageState extends State<HomePage> {
             }
           }
         },
-        body: widget.controller.isLargeGridView
-            ? ThemeTopicsGridPage(
-                controller: widget.controller,
-                isCardOpen: isPanelOpen,
-                toggleCard: togglePanelOpenClose,
-              )
-            : isBigDesktop
-                ? widget.controller.verticalMode
-                    ? ThemeTwoTopicsVerticalPage(controller: widget.controller)
-                    : ThemeTwoTopicsPage(controller: widget.controller)
-                : ThemeTopicPage(controller: widget.controller),
+        body: isBigDesktop
+            ? widget.controller.verticalMode
+                ? ThemeTwoTopicsVerticalPage(controller: widget.controller)
+                : ThemeTwoTopicsPage(controller: widget.controller)
+            : ThemeTopicPage(controller: widget.controller),
       ),
     );
   }
