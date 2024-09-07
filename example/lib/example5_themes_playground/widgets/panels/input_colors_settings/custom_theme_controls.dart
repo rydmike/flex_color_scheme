@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/const/app_color.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../dialogs/copy_scheme_to_custom_dialog.dart';
-import '../dialogs/reset_custom_colors_dialog.dart';
+import '../../../../shared/const/app_color.dart';
+import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../dialogs/copy_scheme_to_custom_dialog.dart';
+import '../../dialogs/reset_custom_colors_dialog.dart';
 
 class CustomThemeControls extends StatelessWidget {
   const CustomThemeControls({super.key, required this.controller});
@@ -47,10 +47,9 @@ class CustomThemeControls extends StatelessWidget {
             (AppColor.schemes.length - 1)) ...<Widget>[
           ListTileReveal(
             title: const Text('Use custom colors?'),
-            subtitle: const Text('Active customizable colors'),
-            subtitleReveal: const Text('The last color scheme on the '
-                'Playground is customizable. This command just move you '
-                'to it and it is here to make it easier to discover this '
+            subtitleReveal: const Text('The last color set in the Themes '
+                'Playground is customizable. This command just moves you '
+                'to it and is here to make it easier to discover this '
                 'feature\n'),
             trailing: FilledButton(
               onPressed: () async {
@@ -63,7 +62,7 @@ class CustomThemeControls extends StatelessWidget {
             },
           ),
           ListTileReveal(
-            title: const Text('Copy this scheme to the customizable colors?'),
+            title: const Text('Copy these colors to the custom colors?'),
             subtitleReveal: const Text('When you copy a built-in color scheme '
                 'to the customizable ones, it becomes a starting point '
                 'for your own custom colors. Note that it is always '
