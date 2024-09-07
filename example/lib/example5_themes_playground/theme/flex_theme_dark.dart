@@ -472,7 +472,6 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
       keepErrorContainer: controller.keepDarkErrorContainer,
       //
       contrastLevel: controller.dynamicContrastLevel,
-      useExpressiveOnContainerColors: controller.expressiveOnContainer,
     ),
     useMaterial3ErrorColors: controller.useM3ErrorColors,
     tones:
