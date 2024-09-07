@@ -74,8 +74,8 @@ class ShowTonalPalette extends StatelessWidget {
             isLight ? controller.surfaceTintLight : controller.surfaceTintDark,
         variant: usedVariant,
         // TODO(rydmike): Add contrast level support
-        // contrastLevel: controller.contrastLevel,
-        // useExpressiveOnContainerColors: controller.useExpressiveOn,
+        contrastLevel: controller.dynamicContrastLevel,
+        useExpressiveOnContainerColors: controller.expressiveOnContainer,
       );
 
       // Assign the tonals for the schemes to the int lists using tone indexes
