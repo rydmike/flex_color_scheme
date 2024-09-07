@@ -441,6 +441,10 @@ class FlexKeyColors with Diagnosticable {
   ///
   /// This comes at the cost of their contrast level and accessibility.
   ///
+  /// The value has no impact on dark mode [ColorScheme] colors. Expressive
+  /// onColors for container colors have always been used in dark mode in
+  /// Material-3 design and they have good contrast and accessibility.
+  ///
   /// Defaults to `false` if undefined.
   ///
   /// The Material design spec for the tones used by the colors
