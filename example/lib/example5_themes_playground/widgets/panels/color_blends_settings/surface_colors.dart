@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../utils/effective_flex_tones.dart';
 import '../../shared/color_name_value.dart';
 
 // Display all the surface colors in currently selected color scheme,
@@ -31,22 +32,11 @@ class SurfaceColors extends StatelessWidget {
     // Theme values...
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
 
-    // TODO(rydmike): Review tones everywhere! And colors! Need a helper?
-    // See show_tonal_palette.dart for correct tones!
+    // Get effective tones and chroma setup, for FSS and MCU based schemes.
+    final FlexTones tones = effectiveFlexTones(controller, context);
 
-    // Grab active tones and chroma setup.
-    final FlexTones tones = FlexSchemeVariant
-        .values[controller.usedFlexToneSetup]
-        .tones(theme.brightness)
-        .onMainsUseBW(isLight
-            ? controller.onMainsUseBWLight
-            : controller.onMainsUseBWDark)
-        .onSurfacesUseBW(isLight
-            ? controller.onSurfacesUseBWLight
-            : controller.onSurfacesUseBWDark);
     // Should we even show the tone? We show them only when, seeding is on.
     final bool showTones =
         controller.useKeyColors && controller.useFlexColorScheme;

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../utils/effective_flex_tones.dart';
 import '../../shared/color_name_value.dart';
 import '../../shared/color_picker_inkwell.dart';
 
@@ -65,21 +66,8 @@ class SchemeColors extends StatelessWidget {
     final Color error = colorScheme.error;
     final Color errorContainer = colorScheme.errorContainer;
 
-    // TODO(rydmike): Review tones everywhere! And colors! Need a helper?
-    // See show_tonal_palette.dart for correct tones!
-
-    // Grab active tones and chroma setup.
-    final FlexTones tones = FlexSchemeVariant.values[tc.usedFlexToneSetup]
-        .tones(theme.brightness)
-        .higherContrastFixed(tc.higherContrastFixed)
-        .expressiveOnContainer(tc.expressiveOnContainer)
-        .monochromeSurfaces(
-            isLight ? tc.useMonoSurfacesLight : tc.useMonoSurfacesDark)
-        .onMainsUseBW(isLight ? tc.onMainsUseBWLight : tc.onMainsUseBWDark)
-        .onSurfacesUseBW(
-            isLight ? tc.onSurfacesUseBWLight : tc.onSurfacesUseBWDark)
-        .surfacesUseBW(isLight ? tc.surfacesUseBWLight : tc.surfacesUseBWDark);
-    // Should we even show the tone? We show them only when, seeding is on.
+    // Get effective tones and chroma setup
+    final FlexTones tones = effectiveFlexTones(tc, context);
     final bool showTones = tc.useKeyColors && tc.useFlexColorScheme;
 
     // Get controller input colors, if we are using the the to dark
@@ -111,9 +99,8 @@ class SchemeColors extends StatelessWidget {
           width: 1,
         ),
       );
-      // If
     } else {
-      // If border was null, make one matching Card default, but with border
+      // Border was null, make one matching Card default, but with border
       // side, if it was not null, we leave it as it was.
       border ??= RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
