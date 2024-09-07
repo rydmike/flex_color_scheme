@@ -1882,7 +1882,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepDarkTertiaryContainer'
           '$keepDarkErrorContainer'
           '$contrastLevel'
-          '$useExpressiveOnContainerColors'
           '  ),\n'
       : '';
   // Make a prettier version of the constructor if that is all we got.
