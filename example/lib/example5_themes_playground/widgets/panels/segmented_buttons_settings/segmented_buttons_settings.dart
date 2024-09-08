@@ -80,110 +80,9 @@ class SegmentedButtonsSettings extends StatelessWidget {
                 ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
                 : '';
 
-    final String segmentedUnselectedForegroundDefault = controller
-                .segmentedButtonUnselectedSchemeColor ==
-            null
-        ? 'default (onSurface)'
-        // ignore: lines_longer_than_80_chars
-        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.segmentedButtonUnselectedSchemeColor!).index].name})';
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const ListTileReveal(
-          title: Text('ToggleButtons'),
-          subtitleReveal:
-              Text('By default ToggleButtons are themed to style and '
-                  'height align with OutlinedButton and FilledButton, shown '
-                  'here for comparison.\n'),
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-          child: ToggleButtonsShowcase(compareButtons: true),
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('Selected background color'),
-          value: controller.toggleButtonsSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setToggleButtonsSchemeColor(null);
-                  } else {
-                    controller
-                        .setToggleButtonsSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('Unselected foreground color'),
-          defaultLabel: enableControl &&
-                  controller.toggleButtonsUnselectedSchemeColor == null
-              // ignore: lines_longer_than_80_chars
-              ? 'default (${controller.toggleButtonsSchemeColor?.name ?? SchemeColor.primary.name})'
-              : 'default (primary)',
-          value: controller.toggleButtonsUnselectedSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setToggleButtonsUnselectedSchemeColor(null);
-                  } else {
-                    controller.setToggleButtonsUnselectedSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('Border color'),
-          defaultLabel: useMaterial3
-              ? 'default (outline)'
-              : enableControl &&
-                      controller.toggleButtonsBorderSchemeColor == null
-                  // ignore: lines_longer_than_80_chars
-                  ? 'default (${controller.toggleButtonsSchemeColor?.name ?? SchemeColor.primary.name})'
-                  : 'default (primary)',
-          value: controller.toggleButtonsBorderSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setToggleButtonsBorderSchemeColor(null);
-                  } else {
-                    controller.setToggleButtonsBorderSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Border radius'),
-          value: controller.toggleButtonsBorderRadius,
-          onChanged: controller.setToggleButtonsBorderRadius,
-          min: 0,
-          max: 40,
-          divisions: 40,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: toggleButtonsRadiusDefaultLabel,
-          valueDefaultDisabledLabel: '0 dp',
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Border width'),
-          value: controller.toggleButtonsBorderWidth,
-          onChanged: controller.setToggleButtonsBorderWidth,
-          min: 0.5,
-          max: 6,
-          divisions: 11,
-          valueDecimalPlaces: 1,
-          valueHeading: 'WIDTH',
-          valueDefaultLabel: toggleBorderWidthDefaultLabel,
-          valueDefaultDisabledLabel: '1 dp',
-          valueUnitLabel: ' dp',
-        ),
-        const Divider(),
         const ListTileReveal(
           title: Text('SegmentedButton'),
           subtitleReveal: Text('Material-3, replacement for ToggleButtons. '
@@ -196,83 +95,51 @@ class SegmentedButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: SegmentedButtonShowcase(),
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
           subtitle: const Text('Selected foreground automatically uses the '
               'color pair of used background color'),
-          defaultLabel: controller.useSubThemes && controller.useFlexColorScheme
-              ? useMaterial3
-                  ? 'default (secondaryContainer)'
-                  : 'default (primary)'
-              : 'default (secondaryContainer)',
-          value: controller.segmentedButtonSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSegmentedButtonSchemeColor(null);
-                  } else {
-                    controller.setSegmentedButtonSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'secondaryContainer',
+          defaultLabelM2: 'primary',
+          defaultDisabledLabel: 'secondaryContainer',
+          value: controller.segmentedButtonSchemeColor,
+          onChanged: controller.setSegmentedButtonSchemeColor,
         ),
-        ColorSchemePopupMenu(
-          title: const Text('Unselected button background color'),
-          defaultLabel: 'default (transparent)',
-          value: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSegmentedButtonUnselectedSchemeColor(null);
-                  } else {
-                    controller.setSegmentedButtonUnselectedSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
+          title: const Text('Unselected item background color'),
+          defaultLabel: 'transparent',
+          value: controller.segmentedButtonUnselectedSchemeColor,
+          onChanged: controller.setSegmentedButtonUnselectedSchemeColor,
         ),
-        ColorSchemePopupMenu(
-          title: const Text('Unselected button foreground color'),
-          defaultLabel: segmentedUnselectedForegroundDefault,
-          value: controller
-                  .segmentedButtonUnselectedForegroundSchemeColor?.index ??
-              -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller
-                        .setSegmentedButtonUnselectedForegroundSchemeColor(
-                            null);
-                  } else {
-                    controller
-                        .setSegmentedButtonUnselectedForegroundSchemeColor(
-                            SchemeColor.values[index]);
-                  }
-                }
-              : null,
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
+          title: const Text('Unselected item foreground color'),
+          defaultLabel: controller.segmentedButtonUnselectedSchemeColor == null
+              ? 'onSurface'
+              : SchemeColor
+                  .values[FlexSubThemes.onSchemeColor(
+                          controller.segmentedButtonUnselectedSchemeColor!)
+                      .index]
+                  .name,
+          defaultDisabledLabel: 'onSurface',
+          value: controller.segmentedButtonUnselectedForegroundSchemeColor,
+          onChanged:
+              controller.setSegmentedButtonUnselectedForegroundSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Border color'),
-          defaultLabel: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.segmentedButtonBorderSchemeColor == null
-                  ? useMaterial3
-                      ? 'default (outline)'
-                      : 'default (primary)'
-                  // ignore: lines_longer_than_80_chars
-                  : 'default (${controller.segmentedButtonSchemeColor?.name ?? SchemeColor.primary.name})'
-              : 'default (outline)',
-          value: controller.segmentedButtonBorderSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSegmentedButtonBorderSchemeColor(null);
-                  } else {
-                    controller.setSegmentedButtonBorderSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: controller.segmentedButtonBorderSchemeColor == null
+              ? useMaterial3
+                  ? 'outline'
+                  : 'primary'
+              : controller.segmentedButtonSchemeColor?.name ??
+                  SchemeColor.primary.name,
+          defaultDisabledLabel: 'outline',
+          value: controller.segmentedButtonBorderSchemeColor,
+          onChanged: controller.setSegmentedButtonBorderSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -357,7 +224,81 @@ class SegmentedButtonsSettings extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const Divider(),
+        const ListTileReveal(
+          title: Text('ToggleButtons'),
+          subtitleReveal:
+              Text('By default ToggleButtons in FCS are themed to style and '
+                  'height align with OutlinedButton and FilledButton, shown '
+                  'here for comparison. The ToggleButtons component is a '
+                  'a useful alternative for a compact icon button bar.\n'),
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+          child: ToggleButtonsShowcase(compareButtons: true),
+        ),
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
+          title: const Text('Selected background color'),
+          defaultLabel: 'primary',
+          defaultDisabledLabel: 'primary opacity 12%',
+          value: controller.toggleButtonsSchemeColor,
+          onChanged: controller.setToggleButtonsSchemeColor,
+        ),
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
+          title: const Text('Unselected foreground color'),
+          defaultLabel: enableControl &&
+                  controller.toggleButtonsUnselectedSchemeColor == null
+              ? controller.toggleButtonsSchemeColor?.name ??
+                  SchemeColor.primary.name
+              : 'primary',
+          defaultDisabledLabel: 'onSurface',
+          value: controller.toggleButtonsUnselectedSchemeColor,
+          onChanged: controller.setToggleButtonsUnselectedSchemeColor,
+        ),
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
+          title: const Text('Border color'),
+          defaultLabel: useMaterial3
+              ? 'outline'
+              : enableControl &&
+                      controller.toggleButtonsBorderSchemeColor == null
+                  ? controller.toggleButtonsSchemeColor?.name ??
+                      SchemeColor.primary.name
+                  : 'primary',
+          defaultDisabledLabel: 'onSurface opacity 12%',
+          value: controller.toggleButtonsBorderSchemeColor,
+          onChanged: controller.setToggleButtonsBorderSchemeColor,
+        ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Border radius'),
+          value: controller.toggleButtonsBorderRadius,
+          onChanged: controller.setToggleButtonsBorderRadius,
+          min: 0,
+          max: 40,
+          divisions: 40,
+          valueDecimalPlaces: 0,
+          valueHeading: 'RADIUS',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: toggleButtonsRadiusDefaultLabel,
+          valueDefaultDisabledLabel: '0 dp',
+        ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Border width'),
+          value: controller.toggleButtonsBorderWidth,
+          onChanged: controller.setToggleButtonsBorderWidth,
+          min: 0.5,
+          max: 6,
+          divisions: 11,
+          valueDecimalPlaces: 1,
+          valueHeading: 'WIDTH',
+          valueDefaultLabel: toggleBorderWidthDefaultLabel,
+          valueDefaultDisabledLabel: '1 dp',
+          valueUnitLabel: ' dp',
+        ),
       ],
     );
   }
