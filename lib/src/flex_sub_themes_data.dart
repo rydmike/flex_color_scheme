@@ -282,8 +282,8 @@ class FlexSubThemesData with Diagnosticable {
     this.chipRadius,
     this.chipSchemeColor,
     this.chipSelectedSchemeColor,
-    this.chipDeleteIconSchemeColor,
     this.chipSecondarySelectedSchemeColor,
+    this.chipDeleteIconSchemeColor,
     this.chipLabelStyle,
     this.chipSecondaryLabelStyle,
     //
@@ -1824,6 +1824,16 @@ class FlexSubThemesData with Diagnosticable {
   /// pass in [SchemeColor.primary].
   final SchemeColor? chipSelectedSchemeColor;
 
+  /// Defines which [Theme] based [ColorScheme] based color the selected
+  /// ChoiceChips use as their selected state color.
+  ///
+  /// The color scheme contrast pair color is used for text and icons, on the
+  /// [secondarySelectedSchemeColor]
+  ///
+  /// If not defined and [useMaterial3] is true, defaults to
+  /// [selectedSchemeColor].
+  final SchemeColor? chipSecondarySelectedSchemeColor;
+
   /// Defines which [Theme] based [ColorScheme] based color the Chips
   /// use as color of the delete icon.
   ///
@@ -1834,16 +1844,6 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined it defaults to effective theme based color from using
   /// [SchemeColor.onSurfaceVariant] same as Material-3 default.
   final SchemeColor? chipDeleteIconSchemeColor;
-
-  /// Defines which [Theme] based [ColorScheme] based color the selected
-  /// ChoiceChips use as their selected state color.
-  ///
-  /// The color scheme contrast pair color is used for text and icons, on the
-  /// [secondarySelectedSchemeColor]
-  ///
-  /// If not defined and [useMaterial3] is true, defaults to
-  /// [selectedSchemeColor].
-  final SchemeColor? chipSecondarySelectedSchemeColor;
 
   /// Overrides the default for [ChipAttributes.labelStyle],
   /// the style of the [DefaultTextStyle] that contains the
@@ -3471,8 +3471,8 @@ class FlexSubThemesData with Diagnosticable {
     final double? chipRadius,
     final SchemeColor? chipSchemeColor,
     final SchemeColor? chipSelectedSchemeColor,
-    final SchemeColor? chipDeleteIconSchemeColor,
     final SchemeColor? chipSecondarySelectedSchemeColor,
+    final SchemeColor? chipDeleteIconSchemeColor,
     final TextStyle? chipLabelStyle,
     final TextStyle? chipSecondaryLabelStyle,
     //
@@ -3831,10 +3831,10 @@ class FlexSubThemesData with Diagnosticable {
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
       chipSelectedSchemeColor:
           chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
-      chipDeleteIconSchemeColor:
-          chipDeleteIconSchemeColor ?? this.chipDeleteIconSchemeColor,
       chipSecondarySelectedSchemeColor: chipSecondarySelectedSchemeColor ??
           this.chipSecondarySelectedSchemeColor,
+      chipDeleteIconSchemeColor:
+          chipDeleteIconSchemeColor ?? this.chipDeleteIconSchemeColor,
       chipLabelStyle: chipLabelStyle ?? this.chipLabelStyle,
       chipSecondaryLabelStyle:
           chipSecondaryLabelStyle ?? this.chipSecondaryLabelStyle,
@@ -4263,9 +4263,9 @@ class FlexSubThemesData with Diagnosticable {
         other.chipRadius == chipRadius &&
         other.chipSchemeColor == chipSchemeColor &&
         other.chipSelectedSchemeColor == chipSelectedSchemeColor &&
-        other.chipDeleteIconSchemeColor == chipDeleteIconSchemeColor &&
         other.chipSecondarySelectedSchemeColor ==
             chipSecondarySelectedSchemeColor &&
+        other.chipDeleteIconSchemeColor == chipDeleteIconSchemeColor &&
         other.chipLabelStyle == chipLabelStyle &&
         other.chipSecondaryLabelStyle == chipSecondaryLabelStyle &&
         //
@@ -4598,8 +4598,8 @@ class FlexSubThemesData with Diagnosticable {
         chipRadius,
         chipSchemeColor,
         chipSelectedSchemeColor,
-        chipDeleteIconSchemeColor,
         chipSecondarySelectedSchemeColor,
+        chipDeleteIconSchemeColor,
         chipLabelStyle,
         chipSecondaryLabelStyle,
         //
@@ -4980,9 +4980,9 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'chipSelectedSchemeColor', chipSelectedSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
-        'chipDeleteIconSchemeColor', chipDeleteIconSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
         'chipSecondarySelectedSchemeColor', chipSecondarySelectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'chipDeleteIconSchemeColor', chipDeleteIconSchemeColor));
     properties
         .add(DiagnosticsProperty<TextStyle>('chipLabelStyle', chipLabelStyle));
     properties.add(DiagnosticsProperty<TextStyle>(
