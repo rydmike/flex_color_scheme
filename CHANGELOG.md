@@ -82,8 +82,12 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
 
 
 - InputDecorator: Platform adaptive radius.
+- InputDecorator: Default value info for padding props, depends on dens and M2/M3 mode and border type, complex.
+
+
 - Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK. 
 
+- Add `ToggleButtons` selected foreground and unselected background color props.
 
 - Add `Checkbox` shape and border.
 - Add some `ListTile` theming features, eg at least `contentPadding`.
