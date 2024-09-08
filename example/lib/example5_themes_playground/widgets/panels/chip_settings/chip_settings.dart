@@ -55,6 +55,7 @@ class ChipSettings extends StatelessWidget {
     // TODO(rydmike): Make the blend color vanilla background.
     // TODO(rydmike): Add blended background as optional toggle.
     // TODO(rydmike): Add Chip padding settings.
+    // TODO(rydmike): Add Chip font size settings.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
