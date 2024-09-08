@@ -185,7 +185,7 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
     final String usedLabelM2 = defaultLabelM2 ?? usedLabel;
     final String usedLabelDark = defaultLabelDark ?? usedLabel;
     final String usedLabelDarkM2 =
-        defaultLabelDarkM2 ?? defaultLabelM2 ?? usedLabelDark;
+        defaultLabelDarkM2 ?? defaultLabelM2 ?? defaultLabelDark ?? usedLabel;
 
     final String resolvedEnabledLabel = useMaterial3
         ? isLight
@@ -196,11 +196,20 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
             : usedLabelDarkM2;
 
     final String disabledLabel = defaultDisabledLabel ?? usedLabel;
-    final String disabledLabelDark = defaultDisabledLabelDark ?? disabledLabel;
-    final String disabledLabelM2 = defaultDisabledLabelM2 ?? disabledLabel;
+    final String disabledLabelDark = defaultDisabledLabelDark ??
+        defaultDisabledLabel ??
+        defaultLabelDark ??
+        usedLabel;
+    final String disabledLabelM2 = defaultDisabledLabelM2 ??
+        defaultDisabledLabel ??
+        defaultLabelM2 ??
+        usedLabel;
     final String disabledLabelDarkM2 = defaultDisabledLabelDarkM2 ??
         defaultDisabledLabelM2 ??
-        disabledLabelDark;
+        defaultDisabledLabelDark ??
+        defaultDisabledLabel ??
+        defaultLabelDark ??
+        usedLabel;
 
     final String resolvedDisabledLabel = useMaterial3
         ? isLight
@@ -268,7 +277,7 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
                   defaultOption: i <= 0,
                 ),
                 title: i <= 0
-                    ? Text(selectedLabel, style: txtStyle)
+                    ? Text(effectiveDefaultLabel, style: txtStyle)
                     : Text(SchemeColor.values[i - 1].name, style: txtStyle),
               ),
             )
