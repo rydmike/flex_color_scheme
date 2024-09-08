@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
@@ -48,6 +47,10 @@ class ChipSettings extends StatelessWidget {
                 ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
                 : '';
 
+    final String selectedM2Color = controller.chipSchemeColor == null
+        ? 'primary'
+        : controller.chipSchemeColor!.name;
+
     // TODO(rydmike): Add choice chip SchemeColor selected color.
     // TODO(rydmike): Make the blend color vanilla background.
     // TODO(rydmike): Add blended background as optional toggle.
@@ -56,51 +59,35 @@ class ChipSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Chip blend color'),
-          defaultLabel:
-              useMaterial3 ? 'default (surface)' : 'default (primary)',
-          value: controller.chipSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setChipSchemeColor(null);
-                  } else {
-                    controller.setChipSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'surface',
+          defaultLabelM2: 'primary with 80% surface alpha blend',
+          defaultDisabledLabelM2: 'Black opacity 12%',
+          defaultDisabledLabelDarkM2: 'White opacity 12%',
+          value: controller.chipSchemeColor,
+          onChanged: controller.setChipSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Selected Chip color'),
-          defaultLabel:
-              useMaterial3 ? 'default (secondaryContainer)' : 'default (none)',
-          value: controller.chipSelectedSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setChipSelectedSchemeColor(null);
-                  } else {
-                    controller
-                        .setChipSelectedSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'secondaryContainer',
+          defaultLabelM2: '$selectedM2Color with 59% surface alpha blend',
+          defaultDisabledLabelM2: 'Black opacity 24%',
+          defaultDisabledLabelDarkM2: 'White opacity 24%',
+          value: controller.chipSelectedSchemeColor,
+          onChanged: controller.setChipSelectedSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Chip delete icon color'),
-          defaultLabel: 'default (onSurface)',
-          value: controller.chipDeleteIconSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setChipDeleteIconSchemeColor(null);
-                  } else {
-                    controller.setChipDeleteIconSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'onSurfaceVariant',
+          // defaultLabelM2: 'primary with 80% surface alpha blend',
+          defaultDisabledLabelM2: 'Black opacity 87%',
+          defaultDisabledLabelDarkM2: 'White opacity 87%',
+          value: controller.chipDeleteIconSchemeColor,
+          onChanged: controller.setChipDeleteIconSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
