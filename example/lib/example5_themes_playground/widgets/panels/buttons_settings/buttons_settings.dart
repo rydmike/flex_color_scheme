@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
@@ -96,46 +95,26 @@ class ButtonsSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('ElevatedButton main color'),
-          subtitle: useMaterial3
-              ? const Text('Foreground color')
-              : const Text('Background color'),
-          value: controller.elevatedButtonSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setElevatedButtonSchemeColor(null);
-                  } else {
-                    controller.setElevatedButtonSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          colorPrefix: useMaterial3 ? 'Foreground color ' : 'Background color ',
+          defaultLabel: 'primary',
+          value: controller.elevatedButtonSchemeColor,
+          onChanged: controller.setElevatedButtonSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: ElevatedButtonShowcase(),
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('ElevatedButton secondary color'),
-          subtitle: useMaterial3
-              ? const Text('Background color')
-              : const Text('Foreground color'),
-          defaultLabel: useMaterial3
-              ? 'default (surfaceContainerLow)'
-              : 'default (onPrimary)',
-          value: controller.elevatedButtonSecondarySchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setElevatedButtonSecondarySchemeColor(null);
-                  } else {
-                    controller.setElevatedButtonSecondarySchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          colorPrefix: useMaterial3 ? 'Background color ' : 'Foreground color ',
+          defaultLabel: 'surfaceContainerLow',
+          defaultLabelM2: 'onPrimary',
+          value: controller.elevatedButtonSecondarySchemeColor,
+          onChanged: controller.setElevatedButtonSecondarySchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -152,20 +131,12 @@ class ButtonsSettings extends StatelessWidget {
           valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
         const Divider(),
-        ColorSchemePopupMenu(
-          defaultLabel: 'default (primary and secondaryContainer)',
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('FilledButton color'),
-          value: controller.filledButtonSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setFilledButtonSchemeColor(null);
-                  } else {
-                    controller
-                        .setFilledButtonSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primary and secondaryContainer',
+          value: controller.filledButtonSchemeColor,
+          onChanged: controller.setFilledButtonSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -226,42 +197,25 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('OutlinedButton foreground color'),
-          value: controller.outlinedButtonSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setOutlinedButtonSchemeColor(null);
-                  } else {
-                    controller.setOutlinedButtonSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primary',
+          value: controller.outlinedButtonSchemeColor,
+          onChanged: controller.setOutlinedButtonSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: OutlinedButtonShowcase(),
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('OutlinedButton outline color'),
-          defaultLabel: useMaterial3
-              ? 'default (outline)'
-              : controller.useSubThemes && controller.useFlexColorScheme
-                  ? 'default (primary)'
-                  : 'default (onSurface opacity 0.12)',
-          value: controller.outlinedButtonOutlineSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setOutlinedButtonOutlineSchemeColor(null);
-                  } else {
-                    controller.setOutlinedButtonOutlineSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'outline',
+          defaultLabelM2: 'primary',
+          defaultDisabledLabelM2: 'onSurface opacity 0.12',
+          value: controller.outlinedButtonOutlineSchemeColor,
+          onChanged: controller.setOutlinedButtonOutlineSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -314,19 +268,12 @@ class ButtonsSettings extends StatelessWidget {
           ],
         ),
         const Divider(),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('TextButton color'),
-          value: controller.textButtonSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setTextButtonSchemeColor(null);
-                  } else {
-                    controller
-                        .setTextButtonSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primary',
+          value: controller.textButtonSchemeColor,
+          onChanged: controller.setTextButtonSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
