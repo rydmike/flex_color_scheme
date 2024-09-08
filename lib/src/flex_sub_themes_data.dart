@@ -280,6 +280,7 @@ class FlexSubThemesData with Diagnosticable {
     this.fabExtendedTextStyle,
     //
     this.chipRadius,
+    this.chipBlendColors,
     this.chipSchemeColor,
     this.chipSelectedSchemeColor,
     this.chipSecondarySelectedSchemeColor,
@@ -1791,44 +1792,50 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/chips/specs
   final double? chipRadius;
 
-  /// Defines which [Theme] based [ColorScheme] based color the Chips
-  /// use as their base tint color.
+  /// Defines if the [chipSelectedSchemeColor] and [chipSelectedSchemeColor]
+  /// are alpha blended with the surface color.
   ///
-  /// The selected color is only used as base for the [Chip] colors, it also
-  /// uses alpha blend and opacity to create the effective Chip colors using
-  /// the selected scheme color as base.
+  /// If not defined, defaults to false in Material-3 mode and to true
+  /// in Material-2 mode.
   ///
-  /// If not defined it defaults to effective theme based color from using
-  /// [SchemeColor.primary], when [useMaterial3] is false.
-  ///
-  /// If [useMaterial3] is true, using a null [chipSchemeColor] will
-  /// result in M3 default Chip coloring being used without opacity and alpha
-  /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
-  /// pass in [SchemeColor.primary].
-  final SchemeColor? chipSchemeColor;
+  /// When true, the [chipSchemeColor] is alpha blended with the surface
+  /// color using [kChipBackgroundAlphaBlend] alpha blend value.
+  /// The [chipSelectedSchemeColor] is alpha blended with the surface color
+  /// using [kChipSelectedBackgroundAlphaBlend] alpha blend value.
+  final bool? chipBlendColors;
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
-  /// use as their selected color.
+  /// use as their background base color.
   ///
-  /// The selected color is used together with its pair color, onColor if normal
-  /// color was selected, and with normal color if onColor was selected
-  /// for contrast text icon color on selected chips.
+  /// If not defined and [useMaterial3] is true, it defaults
+  /// [SchemeColor.surface].
   ///
+  /// If not defined and [useMaterial3] is false, it defaults
+  /// [SchemeColor.primary] with a surface alpha blend of
+  /// [kChipBackgroundAlphaBlend] applied, if [blendColors] is true,
+  /// which it defaults to in Material-2 mode.
+  final SchemeColor? chipSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the selected Chips
+  /// use as their selected state color.
   ///
-  /// If not defined it defaults to effective theme based color from using
-  /// [SchemeColor.primary], when [useMaterial3] is false.
+  /// The color scheme contrast pair color is used for text and icons, on the
+  /// [selectedSchemeColor].
   ///
-  /// If [useMaterial3] is true, using a null [chipSchemeColor] will
-  /// result in M3 default Chip coloring being used without opacity and alpha
-  /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
-  /// pass in [SchemeColor.primary].
+  /// If not defined and [useMaterial3] is true, defaults to
+  /// [SchemeColor.secondaryContainer].
+  ///
+  /// If not defined and [useMaterial3] is false, defaults to
+  /// [SchemeColor.secondaryContainer] if [blendColors] is false.
+  /// If [blendColors] is true, defaults to [SchemeColor.primary] with
+  /// a surface alpha blend of [kChipSelectedBackgroundAlphaBlend] applied.
   final SchemeColor? chipSelectedSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the selected
-  /// ChoiceChips use as their selected state color.
+  /// [ChoiceChip] use as their selected state color.
   ///
   /// The color scheme contrast pair color is used for text and icons, on the
-  /// [secondarySelectedSchemeColor]
+  /// [secondarySelectedSchemeColor].
   ///
   /// If not defined and [useMaterial3] is true, defaults to
   /// [selectedSchemeColor].
@@ -3469,6 +3476,7 @@ class FlexSubThemesData with Diagnosticable {
     final TextStyle? fabExtendedTextStyle,
     //
     final double? chipRadius,
+    final bool? chipBlendColors,
     final SchemeColor? chipSchemeColor,
     final SchemeColor? chipSelectedSchemeColor,
     final SchemeColor? chipSecondarySelectedSchemeColor,
@@ -3828,6 +3836,7 @@ class FlexSubThemesData with Diagnosticable {
       fabExtendedTextStyle: fabExtendedTextStyle ?? this.fabExtendedTextStyle,
       //
       chipRadius: chipRadius ?? this.chipRadius,
+      chipBlendColors: chipBlendColors ?? this.chipBlendColors,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
       chipSelectedSchemeColor:
           chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
@@ -4261,6 +4270,7 @@ class FlexSubThemesData with Diagnosticable {
         other.fabExtendedTextStyle == fabExtendedTextStyle &&
         //
         other.chipRadius == chipRadius &&
+        other.chipBlendColors == chipBlendColors &&
         other.chipSchemeColor == chipSchemeColor &&
         other.chipSelectedSchemeColor == chipSelectedSchemeColor &&
         other.chipSecondarySelectedSchemeColor ==
@@ -4596,6 +4606,7 @@ class FlexSubThemesData with Diagnosticable {
         fabExtendedTextStyle,
         //
         chipRadius,
+        chipBlendColors,
         chipSchemeColor,
         chipSelectedSchemeColor,
         chipSecondarySelectedSchemeColor,
@@ -4975,6 +4986,8 @@ class FlexSubThemesData with Diagnosticable {
         'fabExtendedTextStyle', fabExtendedTextStyle));
     //
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
+    properties
+        .add(DiagnosticsProperty<bool>('chipBlendColors', chipBlendColors));
     properties
         .add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
