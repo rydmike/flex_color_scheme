@@ -32,27 +32,6 @@ class FabSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
-    final String fabDefaultLabel =
-        useMaterial3 ? 'default (primaryContainer)' : 'default (secondary)';
-
-    // TODO(rydmike): Way too messy, needs to be cleaned up.
-    final String fabOnDefaultLabel = controller.fabForegroundSchemeColor ==
-                null &&
-            controller.fabSchemeColor != null &&
-            enableControl
-        // ignore: lines_longer_than_80_chars
-        ? 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.fabSchemeColor!).index].name})'
-        : !enableControl
-            ? useMaterial3
-                ? 'default (onPrimaryContainer)'
-                : 'default (onSecondary)'
-            : controller.fabForegroundSchemeColor != null
-                ? SchemeColor
-                    .values[FlexSubThemes.onSchemeColor(
-                            controller.fabForegroundSchemeColor!)
-                        .index]
-                    .name
-                : '';
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
@@ -66,34 +45,30 @@ class FabSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
-          defaultLabel: fabDefaultLabel,
-          value: controller.fabSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setFabSchemeColor(null);
-                  } else {
-                    controller.setFabSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primaryContainer',
+          defaultLabelM2: 'secondary',
+          value: controller.fabSchemeColor,
+          onChanged: controller.setFabSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Foreground color'),
-          defaultLabel: fabOnDefaultLabel,
-          value: controller.fabForegroundSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setFabForegroundSchemeColor(null);
-                  } else {
-                    controller
-                        .setFabForegroundSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: controller.fabSchemeColor != null
+              ? SchemeColor
+                  .values[
+                      FlexSubThemes.onSchemeColor(controller.fabSchemeColor!)
+                          .index]
+                  .name
+              : useMaterial3
+                  ? 'onPrimaryContainer'
+                  : 'onSecondary',
+          defaultDisabledLabel: 'onPrimaryContainer',
+          defaultDisabledLabelM2: 'onSecondary',
+          value: controller.fabForegroundSchemeColor,
+          onChanged: controller.setFabForegroundSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
