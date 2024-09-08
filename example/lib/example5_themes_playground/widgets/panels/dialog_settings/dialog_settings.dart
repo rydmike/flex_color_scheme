@@ -326,8 +326,8 @@ class DialogSettings extends StatelessWidget {
         if (isLight)
           ColorSchemePopupMenu(
             title: const Text('Background color light mode'),
-            labelForDefault: _dialogBackgroundDefault(controller, isLight),
-            index: controller.dialogBackgroundLightSchemeColor?.index ?? -1,
+            defaultLabel: _dialogBackgroundDefault(controller, isLight),
+            value: controller.dialogBackgroundLightSchemeColor?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
@@ -342,8 +342,8 @@ class DialogSettings extends StatelessWidget {
         else
           ColorSchemePopupMenu(
             title: const Text('Background color dark mode'),
-            labelForDefault: _dialogBackgroundDefault(controller, isLight),
-            index: controller.dialogBackgroundDarkSchemeColor?.index ?? -1,
+            defaultLabel: _dialogBackgroundDefault(controller, isLight),
+            value: controller.dialogBackgroundDarkSchemeColor?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
@@ -540,8 +540,8 @@ class DialogSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Header background color'),
-          labelForDefault: datePickerHeaderBackgroundDefault,
-          index: controller.datePickerHeaderBackgroundSchemeColor?.index ?? -1,
+          defaultLabel: datePickerHeaderBackgroundDefault,
+          value: controller.datePickerHeaderBackgroundSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -555,9 +555,9 @@ class DialogSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Divider color'),
-          labelForDefault:
+          defaultLabel:
               useMaterial3 ? 'outlineVariant' : 'No Divider in build in M2',
-          index: controller.datePickerDividerSchemeColor?.index ?? -1,
+          value: controller.datePickerDividerSchemeColor?.index ?? -1,
           onChanged: enableControl && useMaterial3
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

@@ -73,10 +73,10 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Color (light)'),
-            labelForDefault: useMaterial3
+            defaultLabel: useMaterial3
                 ? 'default (surfaceContainer)'
                 : 'default (surface)',
-            index: controller.bottomAppBarSchemeColorLight?.index ?? -1,
+            value: controller.bottomAppBarSchemeColorLight?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
@@ -103,10 +103,10 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Color (dark)'),
-            labelForDefault: useMaterial3
+            defaultLabel: useMaterial3
                 ? 'default (surfaceContainer)'
                 : 'default (surface)',
-            index: controller.bottomAppBarSchemeColorDark?.index ?? -1,
+            value: controller.bottomAppBarSchemeColorDark?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {

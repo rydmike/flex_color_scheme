@@ -68,8 +68,8 @@ class FabSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: fabDefaultLabel,
-          index: controller.fabSchemeColor?.index ?? -1,
+          defaultLabel: fabDefaultLabel,
+          value: controller.fabSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -82,8 +82,8 @@ class FabSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Foreground color'),
-          labelForDefault: fabOnDefaultLabel,
-          index: controller.fabForegroundSchemeColor?.index ?? -1,
+          defaultLabel: fabOnDefaultLabel,
+          value: controller.fabForegroundSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
