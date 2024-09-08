@@ -1269,7 +1269,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.labelLarge!,
+          labelStyle: textTheme.labelLarge,
           useTintedDisable: false, // Default
           useMaterial3: false,
         ),
@@ -1310,7 +1310,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.labelLarge!,
+          labelStyle: textTheme.labelLarge,
           useTintedDisable: true,
           useMaterial3: false,
         ),
@@ -1352,7 +1352,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.labelLarge!,
+          labelStyle: textTheme.labelLarge,
           baseSchemeColor: SchemeColor.primary,
           // useMaterial3: true, // Default
         ),
@@ -1388,7 +1388,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.labelLarge!,
+          labelStyle: textTheme.labelLarge,
           baseSchemeColor: SchemeColor.primary,
           useTintedDisable: true,
           // useMaterial3: true, // Default
@@ -1426,7 +1426,7 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.labelLarge!,
+          labelStyle: textTheme.labelLarge,
           // useMaterial3: true, // default
         ),
         equals(
@@ -1448,7 +1448,7 @@ void main() {
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
-          labelStyle: textTheme.labelLarge!,
+          labelStyle: textTheme.labelLarge,
           useMaterial3: false,
         ),
         equals(
@@ -1490,7 +1490,7 @@ void main() {
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
-          labelStyle: textTheme.labelLarge!,
+          labelStyle: textTheme.labelLarge,
           useTintedDisable: true,
           useMaterial3: false,
         ),
