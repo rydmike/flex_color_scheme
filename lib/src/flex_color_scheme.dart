@@ -7502,18 +7502,15 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.chipTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
-              // TODO(rydmike): Review and test this fallback!
               selectedSchemeColor: subTheme.chipSelectedSchemeColor,
-              // TODO(rydmike): Temp fallback default to see its effect
               secondarySelectedSchemeColor:
-                  subTheme.chipSecondarySelectedSchemeColor ??
-                      SchemeColor.tertiary,
+                  subTheme.chipSecondarySelectedSchemeColor,
               deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
-              // TODO(rydmike): Review and test this fallback!
+              blendColors: subTheme.chipBlendColors,
               labelStyle:
                   subTheme.chipLabelStyle ?? effectiveTextTheme.labelLarge!,
-              // TODO(rydmike): Review and test this style!
-              secondaryLabelStyle: subTheme.chipSecondaryLabelStyle,
+              secondaryLabelStyle: subTheme.chipSecondaryLabelStyle ??
+                  effectiveTextTheme.labelLarge!,
               radius: subTheme.chipRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useTintedDisable: subTheme.tintedDisabledControls,
