@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_adaptive.dart';
@@ -1832,7 +1831,7 @@ class FlexSubThemesData with Diagnosticable {
   /// the selected scheme color as base.
   ///
   /// If not defined it defaults to effective theme based color from using
-  /// [SchemeColor.onSurface].
+  /// [SchemeColor.onSurfaceVariant] same as Material-3 default.
   final SchemeColor? chipDeleteIconSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the selected
