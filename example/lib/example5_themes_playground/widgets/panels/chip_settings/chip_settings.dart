@@ -7,6 +7,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import 'chip_blend_colors_toggle_buttons.dart';
 
 class ChipSettings extends StatelessWidget {
   const ChipSettings(this.controller, {super.key});
@@ -51,9 +52,7 @@ class ChipSettings extends StatelessWidget {
         ? 'primary'
         : controller.chipSchemeColor!.name;
 
-    // TODO(rydmike): Add choice chip SchemeColor selected color.
-    // TODO(rydmike): Make the blend color vanilla background.
-    // TODO(rydmike): Add blended background as optional toggle.
+    // TODO(rydmike): Correct the Chip's default labels!
     // TODO(rydmike): Add Chip padding settings.
     // TODO(rydmike): Add Chip font size settings.
     return Column(
@@ -62,7 +61,7 @@ class ChipSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenuNew(
           enabled: enableControl,
-          title: const Text('Chip blend color'),
+          title: const Text('Chip color'),
           defaultLabel: 'surface',
           defaultLabelM2: 'primary with 80% surface alpha blend',
           defaultDisabledLabelM2: 'Black opacity 12%',
@@ -80,6 +79,17 @@ class ChipSettings extends StatelessWidget {
           value: controller.chipSelectedSchemeColor,
           onChanged: controller.setChipSelectedSchemeColor,
         ),
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
+          title: const Text('Choice Chip selected color'),
+          defaultLabel: 'secondaryContainer',
+          defaultLabelM2: '$selectedM2Color with 59% surface alpha blend',
+          defaultDisabledLabelM2: 'Black opacity 24%',
+          defaultDisabledLabelDarkM2: 'White opacity 24%',
+          value: controller.chipSecondarySelectedSchemeColor,
+          onChanged: controller.setChipSecondarySelectedSchemeColor,
+        ),
+        ChipBlendColorsToggleButtons(controller: controller),
         ColorSchemePopupMenuNew(
           enabled: enableControl,
           title: const Text('Chip delete icon color'),

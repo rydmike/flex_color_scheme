@@ -62,7 +62,8 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
 **TODO**
  
 - FIX: Default labels for AppBar and Fab colors
-- FIX: AppBar contrast color with old AppBarStyle (incorrect with primary and custom!)
+- FIX: BUG!! AppBar contrast color with old AppBarStyle (incorrect with primary and custom!)
+- ADD: Chip changes to Chnagelog! See commit!
 - Add features for `Chip` theming.
   - Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
   - Padding prop

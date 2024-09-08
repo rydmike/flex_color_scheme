@@ -263,7 +263,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
             chipSelectedSchemeColor: controller.chipSelectedSchemeColor,
+            chipSecondarySelectedSchemeColor:
+                controller.chipSecondarySelectedSchemeColor,
             chipDeleteIconSchemeColor: controller.chipDeleteIconSchemeColor,
+            chipBlendColors: controller.chipBlendColors,
             chipRadius: controller.chipBorderRadius,
             // Card settings.
             cardRadius: controller.cardBorderRadius,
