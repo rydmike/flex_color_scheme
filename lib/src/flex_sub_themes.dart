@@ -1679,14 +1679,43 @@ sealed class FlexSubThemes {
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
+    /// Defines if the [baseSchemeColor] and [selectedSchemeColor] are
+    /// alpha blended with the surface color.
+    ///
+    /// If not defined, defaults to false in Material-3 mode and to true
+    /// in Material-2 mode.
+    ///
+    /// When true, the [baseSchemeColor] is alpha blended with the surface
+    /// color using [kChipBackgroundAlphaBlend] alpha blend value.
+    /// The [selectedSchemeColor] is alpha blended with the surface color
+    /// using [kChipSelectedBackgroundAlphaBlend] alpha blend value.
+    final bool? blendColors,
+
+    /// Defines which [Theme] based [ColorScheme] based color the Chips
+    /// use as their background base color.
+    ///
+    /// If not defined and [useMaterial3] is true, it defaults
+    /// [SchemeColor.surface].
+    ///
+    /// If not defined and [useMaterial3] is false, it defaults
+    /// [SchemeColor.primary] with a surface alpha blend of
+    /// [kChipBackgroundAlphaBlend] applied, if [blendColors] is true,
+    /// which it defaults to in Material-2 mode.
+    final SchemeColor? baseSchemeColor,
+
     /// Defines which [Theme] based [ColorScheme] based color the selected Chips
     /// use as their selected state color.
     ///
     /// The color scheme contrast pair color is used for text and icons, on the
-    /// [selectedSchemeColor]
+    /// [selectedSchemeColor].
     ///
     /// If not defined and [useMaterial3] is true, defaults to
     /// [SchemeColor.secondaryContainer].
+    ///
+    /// If not defined and [useMaterial3] is false, defaults to
+    /// [SchemeColor.secondaryContainer] if [blendColors] is false.
+    /// If [blendColors] is true, defaults to [SchemeColor.primary] with
+    /// a surface alpha blend of [kChipSelectedBackgroundAlphaBlend] applied.
     final SchemeColor? selectedSchemeColor,
 
     /// Defines which [Theme] based [ColorScheme] based color the selected
@@ -1698,22 +1727,6 @@ sealed class FlexSubThemes {
     /// If not defined and [useMaterial3] is true, defaults to
     /// [selectedSchemeColor].
     final SchemeColor? secondarySelectedSchemeColor,
-
-    /// Defines which [Theme] based [ColorScheme] based color the Chips
-    /// use as their color tint base color.
-    ///
-    /// The selected color is only used as base for the [Chip] colors, it also
-    /// uses alpha blend and opacity to create the effective Chip colors using
-    /// the selected scheme color as base.
-    ///
-    /// If not defined it defaults to effective theme based color from using
-    /// [SchemeColor.primary], when [useMaterial3] is false.
-    ///
-    /// If [useMaterial3] is true, using a null [chipSchemeColor] will
-    /// result in M3 default Chip coloring being used without opacity and alpha
-    /// blends. To get the same coloring for M3 as when [useMaterial3] is false,
-    /// pass in [SchemeColor.primary].
-    final SchemeColor? baseSchemeColor,
 
     /// Defines which [Theme] based [ColorScheme] based color the Chips
     /// use as color of the delete icon.
@@ -1735,7 +1748,7 @@ sealed class FlexSubThemes {
     ///
     /// This property applies to [ActionChip], [Chip],
     /// [FilterChip], [InputChip], [RawChip].
-    required final TextStyle labelStyle,
+    final TextStyle? labelStyle,
 
     /// Overrides the default for [ChoiceChip.labelStyle],
     /// the style of the [DefaultTextStyle] that contains the
@@ -1782,6 +1795,7 @@ sealed class FlexSubThemes {
     // Used to toggle between different defaults from M2 and M3.
     final bool useM3 = useMaterial3 ?? true;
     final bool tintDisable = useTintedDisable ?? false;
+    final bool blend = blendColors ?? !useM3;
 
     // Function used to increase icon color for selections resulting in poor
     // icon color.
@@ -1801,43 +1815,71 @@ sealed class FlexSubThemes {
       }
     }
 
+    // Function used to make a contrast color for blended background, we cannot
+    // be sure the blended colors contrast is OK, with its source onPair,
+    // so we need to compute one.
+    Color blendedContrast(Color color) {
+      if (ThemeData.estimateBrightnessForColor(color) == Brightness.light) {
+        return Colors.black87;
+      } else {
+        return Colors.white70;
+      }
+    }
+
     // TODO(rydmike): Monitor Chip issue #115364
     // https://github.com/flutter/flutter/issues/115364
-    //
-    // Flag for not using any defined color values in M3 mode, but instead
-    // falling back to M3 theme defaults, when using Material 3.
-    // We do this when no Scheme colors are selected to get the exact M3
-    // theme default. It is not possible due to SDK Chip theming issues
-    // and limitations to recreate the exact M3 Chip themes with any other
-    // theme colors than the default built-in ones.
-    final bool useM3Defaults = useM3 &&
-        baseSchemeColor == null &&
-        selectedSchemeColor == null &&
-        secondarySelectedSchemeColor == null;
 
-    // Get blend color, defaults to surface for M3 and to primary for M2.
-    final SchemeColor fallbackBlend =
-        useM3 ? SchemeColor.surface : SchemeColor.primary;
-    final Color blendColor =
-        schemeColor(baseSchemeColor ?? fallbackBlend, colorScheme);
-
+    // Get fallback color, defaults to surface for M3 and to primary for M2.
+    final SchemeColor fallbackSchemeColor = baseSchemeColor == null && blend
+        ? SchemeColor.primary
+        : useM3
+            ? SchemeColor.surface
+            : SchemeColor.primary;
+    Color backgroundColor =
+        schemeColor(baseSchemeColor ?? fallbackSchemeColor, colorScheme);
     // Selected color
     final SchemeColor fallbackSelected =
-        useM3 ? SchemeColor.secondaryContainer : SchemeColor.surface;
-    final Color selectedColor = useM3 || selectedSchemeColor != null
-        ? schemeColor(selectedSchemeColor ?? fallbackSelected, colorScheme)
-        : blendColor.blendAlpha(
-            colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
-    final Color onSelectedColor =
-        schemeColorPair(selectedSchemeColor ?? fallbackSelected, colorScheme);
-
+        useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary;
+    Color selectedColor =
+        schemeColor(selectedSchemeColor ?? fallbackSelected, colorScheme);
     // Secondary selected color
     final SchemeColor fallbackSecondarySelected =
         selectedSchemeColor ?? fallbackSelected;
-    final Color secondarySelectedColor = schemeColor(
+    Color secondarySelectedColor = schemeColor(
         secondarySelectedSchemeColor ?? fallbackSecondarySelected, colorScheme);
-    final Color onSecondarySelectedColor = schemeColorPair(
+
+    // Do all the blending of colors if blend is true.
+    if (blend) {
+      if (selectedSchemeColor == null) {
+        selectedColor = backgroundColor.blendAlpha(
+            colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      } else {
+        selectedColor = selectedColor.blendAlpha(
+            colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      }
+      if (secondarySelectedSchemeColor == null) {
+        secondarySelectedColor = backgroundColor.blendAlpha(
+            colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      } else {
+        secondarySelectedColor = secondarySelectedColor.blendAlpha(
+            colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      }
+      backgroundColor = backgroundColor.blendAlpha(
+          colorScheme.surface, kChipBackgroundAlphaBlend);
+    }
+
+    // Set the onColors
+    Color onBackgroundColor =
+        schemeColorPair(baseSchemeColor ?? fallbackSchemeColor, colorScheme);
+    Color onSelectedColor =
+        schemeColorPair(selectedSchemeColor ?? fallbackSelected, colorScheme);
+    Color onSecondarySelectedColor = schemeColorPair(
         secondarySelectedSchemeColor ?? fallbackSecondarySelected, colorScheme);
+    if (blend) {
+      onBackgroundColor = blendedContrast(onBackgroundColor);
+      onSelectedColor = blendedContrast(selectedColor);
+      onSecondarySelectedColor = blendedContrast(secondarySelectedColor);
+    }
 
     // The deleted icon color
     final Color deleteIconColor = schemeColor(
@@ -1849,72 +1891,66 @@ sealed class FlexSubThemes {
 
     // Icon color.
     final Color iconColor;
-    if (blendColor == colorScheme.surface ||
-        blendColor == colorScheme.surfaceContainerLowest ||
-        blendColor == colorScheme.surfaceContainerLow ||
-        blendColor == colorScheme.surfaceContainer ||
-        blendColor == colorScheme.surfaceContainerHigh ||
-        blendColor == colorScheme.surfaceContainerHighest ||
-        blendColor == colorScheme.surfaceDim ||
-        blendColor == colorScheme.surfaceBright) {
-      iconColor = selectedColor;
+    if (backgroundColor == colorScheme.surface ||
+        backgroundColor == colorScheme.surfaceContainerLowest ||
+        backgroundColor == colorScheme.surfaceContainerLow ||
+        backgroundColor == colorScheme.surfaceContainer ||
+        backgroundColor == colorScheme.surfaceContainerHigh ||
+        backgroundColor == colorScheme.surfaceContainerHighest ||
+        backgroundColor == colorScheme.surfaceDim ||
+        backgroundColor == colorScheme.surfaceBright) {
+      iconColor = onBackgroundColor;
     } else {
-      iconColor = blendColor;
+      iconColor = backgroundColor;
     }
-    // Text color, uses the foreground color for all chip styles.
+    // Text color, uses the onBackground.
     final TextStyle effectiveLabelStyle =
-        labelStyle.copyWith(color: colorScheme.onSurface);
+        (labelStyle ?? const TextStyle(fontSize: 14))
+            .copyWith(color: onBackgroundColor);
 
-    // TODO(rydmike): Figure out where I was going with this...
+    // TODO(rydmike): We need widget state to use this! Not supported.
     // Text color, uses the selected foreground color for selected chip styles.
     // final TextStyle effectiveSelectedLabelStyle =
-    //     labelStyle.copyWith(color: onSelectedColor);
+    //     effectiveLabelStyle.copyWith(color: onSelectedColor);
 
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveSecondarySelectedLabelStyle =
-        labelStyle.copyWith(color: onSecondarySelectedColor);
+        (labelStyle ?? const TextStyle())
+            .copyWith(color: onSecondarySelectedColor);
 
     return ChipThemeData(
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip], [RawChip], but NOT to ANY selected or disabled Chip.
-      backgroundColor: useM3Defaults
-          ? null
-          : blendColor.blendAlpha(
-              colorScheme.surface, kChipBackgroundAlphaBlend),
+      //   backgroundColor: useM3Defaults && !blend
+      backgroundColor: backgroundColor,
 
       // Applies to [Chip], [InputChip], [RawChip].
-      deleteIconColor: useM3Defaults && deleteIconSchemeColor == null
-          ? null
-          : deleteIconColor,
-
+      // deleteIconColor: useM3Defaults && deleteIconSchemeColor == null
+      deleteIconColor: deleteIconSchemeColor == null ? null : deleteIconColor,
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
       // Same formula as on FCS Elevated button and ToggleButtons.
-      disabledColor: useM3Defaults && !tintDisable
+      disabledColor: !tintDisable && useM3
           ? null
           : tintDisable
               ? tintedDisable(colorScheme.onSurface, tint)
                   .withAlpha(kAlphaVeryLowDisabled)
               : colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
-
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
-      selectedColor: useM3Defaults ? null : selectedColor,
-
+      selectedColor:
+          selectedSchemeColor == null && !blend ? null : selectedColor,
       // Applies to [ChoiceChip.selectedColor], if set it overrides the
       // [selectedColor], for ChoiceChips.
-      secondarySelectedColor: useM3Defaults ? null : secondarySelectedColor,
-
+      secondarySelectedColor: secondarySelectedSchemeColor == null && !blend
+          ? null
+          : secondarySelectedColor,
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
-      surfaceTintColor:
-          useM3Defaults ? surfaceTintColor : colorScheme.surfaceTint,
-
+      surfaceTintColor: surfaceTintColor,
       // Applies to [FilterChip], [InputChip], [RawChip].
       checkmarkColor: onSelectedColor,
-
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
       padding: useM3 ? null : const EdgeInsets.all(4),
-
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
       shape: useM3 && radius == null
@@ -1926,16 +1962,37 @@ sealed class FlexSubThemes {
             ),
 
       // Applies to [ActionChip], [Chip], [FilterChip], [InputChip], [RawChip].
-      labelStyle: useM3Defaults ? null : effectiveLabelStyle,
+      // If it needs different color fr selected and unselected state it cannot
+      // be themed correctly.
+      labelStyle: effectiveLabelStyle,
+      // To always get correct color for selected state text, we would need to
+      // use WidgetStateTextStyle, but it is not supported.
+      //
+      // WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+      //   if (states.contains(WidgetState.disabled)) {
+      //     return TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
+      //   }
+      //   if (states.contains(WidgetState.selected)) {
+      //     return effectiveSelectedLabelStyle;
+      //   }
+      //   return effectiveLabelStyle;
+      // }),
 
       // Applies to [ChoiceChip.labelStyle],
-      secondaryLabelStyle:
-          useM3Defaults ? null : effectiveSecondarySelectedLabelStyle,
+      secondaryLabelStyle: effectiveSecondarySelectedLabelStyle,
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
-      iconTheme: useM3Defaults
-          ? null
+      // iconTheme: useM3Defaults
+      //     ? null
+      //     : IconThemeData(
+      //         color: fixContrast(iconColor),
+      //         size: 18.0,
+      //       ),
+      iconTheme: baseSchemeColor == null || blend
+          ? const IconThemeData(
+              size: 18.0,
+            )
           : IconThemeData(
               color: fixContrast(iconColor),
               size: 18.0,
@@ -2074,7 +2131,7 @@ sealed class FlexSubThemes {
         ),
         floatingLabelStyle:
             WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
-          // These styles are copied for M# default, we are not going to test
+          // These styles are copied from M3 default, we are not going to test
           // them again.
           // coverage:ignore-start
           if (states.contains(WidgetState.disabled)) {
