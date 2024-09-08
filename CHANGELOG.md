@@ -69,7 +69,6 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
   - Text styles sizing.
   - This feature still requires proper support in Flutter and more testing of the theme feature. Maybe a new issue in Flutter to propose fully usable Chip theming support in Flutter.
 
-
 **POTENTIAL TODOS, but maybe push some to version 8.1.0 or later**
 
 - Add **NEW** color schemes:
@@ -162,6 +161,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The `FlexSubThemesData` properties `navigationBarMutedUnselectedLabel` and `navigationBarMutedUnselectedIcon` now default to `false`. In previous versions they defaulted to `true`. This change was made to have fewer opinionated defaults in FCS and follow Material-3 design spec by default.
 - In `FlexSubThemes.navigationBarTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Property `selectedLabelSchemeColor` defaults to `onSurface` and `unselectedLabelSchemeColor` default to `onSurfaceVariant`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`.
   - All these changes were made to have fewer opinionated defaults in FCS and follow Material-3 design spec by default. Past FCS defaults were made before some Material-3 specs existed. In some cases, earlier FCS versions also kept its opinionated defaults from Material-2 as defaults for its Material-3 default theme.
+
+
+- The `FlexSubThemesData` property `chipDeleteIconSchemeColor` now default to `SchemeColor.onSurfaceVariant`. In previous versions it defaulted to `SchemeColor.onSurface`. Likewise in `FlexSubThemes.chipTheme` the property `deleteIconSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. In previous versions it defaulted to `SchemeColor.onSurface`. This change was made to adjust to follow updated Material-3 spec defaults.
 
 
 **NEW**

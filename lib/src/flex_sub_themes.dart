@@ -1723,7 +1723,7 @@ sealed class FlexSubThemes {
     /// the selected scheme color as base.
     ///
     /// If not defined it defaults to effective theme based color from using
-    /// [SchemeColor.onSurface].
+    /// [SchemeColor.onSurfaceVariant] same as Material-3 default.
     final SchemeColor? deleteIconSchemeColor,
 
     /// Overrides the default for [ChipAttributes.labelStyle],
@@ -1841,7 +1841,7 @@ sealed class FlexSubThemes {
 
     // The deleted icon color
     final Color deleteIconColor = schemeColor(
-        deleteIconSchemeColor ?? SchemeColor.onSurface, colorScheme);
+        deleteIconSchemeColor ?? SchemeColor.onSurfaceVariant, colorScheme);
 
     // Using these tinted overlay variable in all themes for ease of
     // reasoning and duplication.
@@ -1865,7 +1865,7 @@ sealed class FlexSubThemes {
     final TextStyle effectiveLabelStyle =
         labelStyle.copyWith(color: colorScheme.onSurface);
 
-    // TODO(rydmike): Figure out whre I was going with this...
+    // TODO(rydmike): Figure out where I was going with this...
     // Text color, uses the selected foreground color for selected chip styles.
     // final TextStyle effectiveSelectedLabelStyle =
     //     labelStyle.copyWith(color: onSelectedColor);
