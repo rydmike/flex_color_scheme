@@ -1826,6 +1826,8 @@ sealed class FlexSubThemes {
       }
     }
 
+    // TODO(rydmike): M3 mode gets faulty Chips sizes.
+
     // TODO(rydmike): Monitor Chip issue #115364
     // https://github.com/flutter/flutter/issues/115364
 
