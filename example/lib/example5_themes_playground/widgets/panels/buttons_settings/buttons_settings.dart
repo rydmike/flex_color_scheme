@@ -101,7 +101,7 @@ class ButtonsSettings extends StatelessWidget {
           subtitle: useMaterial3
               ? const Text('Foreground color')
               : const Text('Background color'),
-          index: controller.elevatedButtonSchemeColor?.index ?? -1,
+          value: controller.elevatedButtonSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -122,10 +122,10 @@ class ButtonsSettings extends StatelessWidget {
           subtitle: useMaterial3
               ? const Text('Background color')
               : const Text('Foreground color'),
-          labelForDefault: useMaterial3
+          defaultLabel: useMaterial3
               ? 'default (surfaceContainerLow)'
               : 'default (onPrimary)',
-          index: controller.elevatedButtonSecondarySchemeColor?.index ?? -1,
+          value: controller.elevatedButtonSecondarySchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -153,9 +153,9 @@ class ButtonsSettings extends StatelessWidget {
         ),
         const Divider(),
         ColorSchemePopupMenu(
-          labelForDefault: 'default (primary and secondaryContainer)',
+          defaultLabel: 'default (primary and secondaryContainer)',
           title: const Text('FilledButton color'),
-          index: controller.filledButtonSchemeColor?.index ?? -1,
+          value: controller.filledButtonSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -228,7 +228,7 @@ class ButtonsSettings extends StatelessWidget {
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('OutlinedButton foreground color'),
-          index: controller.outlinedButtonSchemeColor?.index ?? -1,
+          value: controller.outlinedButtonSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -246,12 +246,12 @@ class ButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('OutlinedButton outline color'),
-          labelForDefault: useMaterial3
+          defaultLabel: useMaterial3
               ? 'default (outline)'
               : controller.useSubThemes && controller.useFlexColorScheme
                   ? 'default (primary)'
                   : 'default (onSurface opacity 0.12)',
-          index: controller.outlinedButtonOutlineSchemeColor?.index ?? -1,
+          value: controller.outlinedButtonOutlineSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -316,7 +316,7 @@ class ButtonsSettings extends StatelessWidget {
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('TextButton color'),
-          index: controller.textButtonSchemeColor?.index ?? -1,
+          value: controller.textButtonSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

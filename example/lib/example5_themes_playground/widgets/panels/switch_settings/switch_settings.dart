@@ -77,8 +77,8 @@ class SwitchesSettings extends StatelessWidget {
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('Switch color'),
-          labelForDefault: labelForDefaultColor,
-          index: controller.switchSchemeColor?.index ?? -1,
+          defaultLabel: labelForDefaultColor,
+          value: controller.switchSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -96,8 +96,8 @@ class SwitchesSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: Text('Switch ON state$explainThumb thumb color'),
-          labelForDefault: labelForDefaultThumbColor,
-          index: controller.switchThumbSchemeColor?.index ?? -1,
+          defaultLabel: labelForDefaultThumbColor,
+          value: controller.switchThumbSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -151,8 +151,8 @@ class SwitchesSettings extends StatelessWidget {
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('Checkbox color'),
-          labelForDefault: labelForDefaultColor,
-          index: controller.checkboxSchemeColor?.index ?? -1,
+          defaultLabel: labelForDefaultColor,
+          value: controller.checkboxSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -209,8 +209,8 @@ class SwitchesSettings extends StatelessWidget {
         const Divider(),
         ColorSchemePopupMenu(
           title: const Text('Radio color'),
-          labelForDefault: labelForDefaultColor,
-          index: controller.radioSchemeColor?.index ?? -1,
+          defaultLabel: labelForDefaultColor,
+          value: controller.radioSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

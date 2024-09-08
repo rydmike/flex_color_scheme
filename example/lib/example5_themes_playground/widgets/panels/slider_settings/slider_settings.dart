@@ -49,8 +49,8 @@ class SliderSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Main color'),
-          labelForDefault: 'default (primary)',
-          index: controller.sliderBaseSchemeColor?.index ?? -1,
+          defaultLabel: 'default (primary)',
+          value: controller.sliderBaseSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -64,9 +64,9 @@ class SliderSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Value indicator color'),
-          labelForDefault: labelIndicatorDefault,
+          defaultLabel: labelIndicatorDefault,
           colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
-          index: controller.sliderIndicatorSchemeColor?.index ?? -1,
+          value: controller.sliderIndicatorSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

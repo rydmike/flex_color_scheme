@@ -125,8 +125,8 @@ class NavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: backgroundColorLabel(),
-          index: controller.navBarBackgroundSchemeColor?.index ?? -1,
+          defaultLabel: backgroundColorLabel(),
+          value: controller.navBarBackgroundSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -179,8 +179,8 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
-          labelForDefault: indicatorColorLabel(),
-          index: controller.navBarIndicatorSchemeColor?.index ?? -1,
+          defaultLabel: indicatorColorLabel(),
+          value: controller.navBarIndicatorSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -222,8 +222,8 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected icon color'),
-          labelForDefault: selectedIconColorLabel(),
-          index: controller.navBarSelectedIconSchemeColor?.index ?? -1,
+          defaultLabel: selectedIconColorLabel(),
+          value: controller.navBarSelectedIconSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -237,8 +237,8 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected label color'),
-          labelForDefault: selectedLabelColorLabel(),
-          index: controller.navBarSelectedLabelSchemeColor?.index ?? -1,
+          defaultLabel: selectedLabelColorLabel(),
+          value: controller.navBarSelectedLabelSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -253,8 +253,8 @@ class NavigationBarSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Unselected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),
-          labelForDefault: unselectedItemColorLabel(),
-          index: controller.navBarUnselectedSchemeColor?.index ?? -1,
+          defaultLabel: unselectedItemColorLabel(),
+          value: controller.navBarUnselectedSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

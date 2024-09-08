@@ -99,12 +99,12 @@ class NavigationDrawerSettings extends StatelessWidget {
         const SizedBox(height: 16),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: enableControl
+          defaultLabel: enableControl
               ? 'default (surfaceContainerLow)'
               : useMaterial3
                   ? 'default (surfaceContainerLow)'
                   : 'default (ThemeData.canvasColor)',
-          index: controller.drawerBackgroundSchemeColor?.index ?? -1,
+          value: controller.drawerBackgroundSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -215,8 +215,8 @@ class NavigationDrawerSettings extends StatelessWidget {
         const SizedBox(height: 16),
         ColorSchemePopupMenu(
           title: const Text('Drawer indicator color'),
-          labelForDefault: 'default (secondaryContainer)',
-          index: controller.drawerIndicatorSchemeColor?.index ?? -1,
+          defaultLabel: 'default (secondaryContainer)',
+          value: controller.drawerIndicatorSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -271,8 +271,8 @@ class NavigationDrawerSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
-          labelForDefault: onIndicatorDefault,
-          index: controller.drawerSelectedItemSchemeColor?.index ?? -1,
+          defaultLabel: onIndicatorDefault,
+          value: controller.drawerSelectedItemSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -286,8 +286,8 @@ class NavigationDrawerSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected item color'),
-          labelForDefault: onBackgroundDefault,
-          index: controller.drawerUnselectedItemSchemeColor?.index ?? -1,
+          defaultLabel: onBackgroundDefault,
+          value: controller.drawerUnselectedItemSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

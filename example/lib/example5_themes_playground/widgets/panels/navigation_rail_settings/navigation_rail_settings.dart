@@ -88,8 +88,8 @@ class NavigationRailSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: 'default (surface)',
-          index: controller.navRailBackgroundSchemeColor?.index ?? -1,
+          defaultLabel: 'default (surface)',
+          value: controller.navRailBackgroundSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -137,8 +137,8 @@ class NavigationRailSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
-          labelForDefault: indicatorColorLabel(),
-          index: controller.navRailIndicatorSchemeColor?.index ?? -1,
+          defaultLabel: indicatorColorLabel(),
+          value: controller.navRailIndicatorSchemeColor?.index ?? -1,
           onChanged: enableControl && controller.navRailUseIndicator
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -215,8 +215,8 @@ class NavigationRailSettings extends StatelessWidget {
                 children: <Widget>[
                   ColorSchemePopupMenu(
                     title: const Text('Selected icon color'),
-                    labelForDefault: selectedIconColorLabel(),
-                    index:
+                    defaultLabel: selectedIconColorLabel(),
+                    value:
                         controller.navRailSelectedIconSchemeColor?.index ?? -1,
                     onChanged: enableControl
                         ? (int index) {
@@ -233,8 +233,8 @@ class NavigationRailSettings extends StatelessWidget {
                   ),
                   ColorSchemePopupMenu(
                     title: const Text('Selected label color'),
-                    labelForDefault: selectedLabelColorLabel(),
-                    index:
+                    defaultLabel: selectedLabelColorLabel(),
+                    value:
                         controller.navRailSelectedLabelSchemeColor?.index ?? -1,
                     onChanged: enableControl
                         ? (int index) {
@@ -253,8 +253,8 @@ class NavigationRailSettings extends StatelessWidget {
                     title: const Text('Unselected item color'),
                     subtitle:
                         const Text('Label and icon, but own properties in API'),
-                    labelForDefault: unselectedItemColorLabel(),
-                    index: controller.navRailUnselectedSchemeColor?.index ?? -1,
+                    defaultLabel: unselectedItemColorLabel(),
+                    value: controller.navRailUnselectedSchemeColor?.index ?? -1,
                     onChanged: enableControl
                         ? (int index) {
                             if (index < 0 ||

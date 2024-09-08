@@ -58,9 +58,9 @@ class ChipSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Chip blend color'),
-          labelForDefault:
+          defaultLabel:
               useMaterial3 ? 'default (surface)' : 'default (primary)',
-          index: controller.chipSchemeColor?.index ?? -1,
+          value: controller.chipSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -73,9 +73,9 @@ class ChipSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected Chip color'),
-          labelForDefault:
+          defaultLabel:
               useMaterial3 ? 'default (secondaryContainer)' : 'default (none)',
-          index: controller.chipSelectedSchemeColor?.index ?? -1,
+          value: controller.chipSelectedSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -89,8 +89,8 @@ class ChipSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Chip delete icon color'),
-          labelForDefault: 'default (onSurface)',
-          index: controller.chipDeleteIconSchemeColor?.index ?? -1,
+          defaultLabel: 'default (onSurface)',
+          value: controller.chipDeleteIconSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

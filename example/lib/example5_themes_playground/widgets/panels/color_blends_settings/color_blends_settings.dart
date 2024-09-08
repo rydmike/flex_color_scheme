@@ -24,31 +24,15 @@ class ColorBlendsSettings extends StatelessWidget {
   });
   final ThemeController controller;
 
-  // Logic to get the effective default Dialog color label.
-  static String _scaffoldBackgroundDefault(
-    ThemeController controller,
-    bool isLight,
-  ) {
-    if (!controller.useFlexColorScheme) {
-      if (controller.useMaterial3) {
-        return 'default (surface)';
-      } else {
-        return isLight ? 'default (grey50)' : 'default (grey850)';
-      }
-    } else {
-      if (controller.useMaterial3) {
-        return 'default (surfaceContainerLowest)';
-      } else {
-        return 'default (surface)';
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final ColorScheme colorScheme = theme.colorScheme;
+
+    // The most common logic for enabling Playground controls.
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     // Default color is in use, make a light label to use in custom color.
     final String defaultTintLightLabel =
@@ -201,20 +185,18 @@ class ColorBlendsSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
-          ColorSchemePopupMenu(
+          ColorSchemePopupMenuNew(
+            enabled: enableControl,
             title: const Text('Scaffold background color'),
-            labelForDefault: _scaffoldBackgroundDefault(controller, isLight),
-            index: controller.scaffoldBackgroundLightSchemeColor?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setScaffoldBackgroundLightSchemeColor(null);
-                    } else {
-                      controller.setScaffoldBackgroundLightSchemeColor(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+            defaultLabel: 'surfaceContainerLowest',
+            defaultLabelM2: 'surface',
+            defaultDisabledLabel: controller.useFlexColorScheme
+                ? 'surfaceContainerLowest'
+                : 'surface',
+            defaultDisabledLabelM2:
+                controller.useFlexColorScheme ? 'surface' : 'grey50',
+            value: controller.scaffoldBackgroundLightSchemeColor,
+            onChanged: controller.setScaffoldBackgroundLightSchemeColor,
           ),
           SwitchListTileReveal(
             title: const Text('Plain white'),
@@ -272,20 +254,18 @@ class ColorBlendsSettings extends StatelessWidget {
             },
           ),
         ] else ...<Widget>[
-          ColorSchemePopupMenu(
+          ColorSchemePopupMenuNew(
+            enabled: enableControl,
             title: const Text('Scaffold background color'),
-            labelForDefault: _scaffoldBackgroundDefault(controller, isLight),
-            index: controller.scaffoldBackgroundDarkSchemeColor?.index ?? -1,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setScaffoldBackgroundDarkSchemeColor(null);
-                    } else {
-                      controller.setScaffoldBackgroundDarkSchemeColor(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+            defaultLabel: 'surfaceContainerLowest',
+            defaultLabelM2: 'surface',
+            defaultDisabledLabel: controller.useFlexColorScheme
+                ? 'surfaceContainerLowest'
+                : 'surface',
+            defaultDisabledLabelM2:
+                controller.useFlexColorScheme ? 'surface' : 'grey850',
+            value: controller.scaffoldBackgroundDarkSchemeColor,
+            onChanged: controller.setScaffoldBackgroundDarkSchemeColor,
           ),
           SwitchListTileReveal(
             title: const Text('True black'),
@@ -358,7 +338,7 @@ class ColorBlendsSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           SwitchListTileReveal(
             title: const Text('Main and container colors on color blending'),
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: enableControl,
             subtitleReveal:
                 const Text('In M3 design, in light mode, only container colors '
                     'use color '
@@ -366,15 +346,11 @@ class ColorBlendsSettings extends StatelessWidget {
                     'Keep this OFF to do so. Set to ON to use blends with '
                     'onPrimary, onSecondary, onTertiary and onError, when seed '
                     'colors are NOT used.\n'),
-            value: controller.blendLightOnColors &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBlendLightOnColors
-                : null,
+            value: controller.blendLightOnColors,
+            onChanged: controller.setBlendLightOnColors,
           ),
           ListTileReveal(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: enableControl,
             title: const Text('Contrast colors blend level'),
             subtitleReveal: const Text(
               'The contrasting on color blending mixes in '
@@ -390,21 +366,18 @@ class ColorBlendsSettings extends StatelessWidget {
             ),
           ),
           ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: enableControl,
             title: Slider(
               min: 0,
               max: 40,
               divisions: 40,
               label: controller.blendOnLevel.toString(),
-              value: controller.useSubThemes && controller.useFlexColorScheme
-                  ? controller.blendOnLevel.toDouble()
-                  : 0,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? (double value) {
-                          controller.setBlendOnLevel(value.toInt());
-                        }
-                      : null,
+              value: enableControl ? controller.blendOnLevel.toDouble() : 0,
+              onChanged: enableControl
+                  ? (double value) {
+                      controller.setBlendOnLevel(value.toInt());
+                    }
+                  : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
@@ -432,22 +405,18 @@ class ColorBlendsSettings extends StatelessWidget {
         else ...<Widget>[
           SwitchListTileReveal(
             title: const Text('Main and container colors on color blending'),
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: enableControl,
             subtitleReveal:
                 const Text('In M3 design, in dark mode, both container and '
                     'main colors use color pair tinted on colors. Keep it '
                     'ON to do so in dark mode and use blends for onPrimary, '
                     'onSecondary, onTertiary and onError, when seed '
                     'colors are NOT used.\n'),
-            value: controller.blendDarkOnColors &&
-                controller.useSubThemes &&
-                controller.useFlexColorScheme,
-            onChanged: controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.setBlendDarkOnColors
-                : null,
+            value: controller.blendDarkOnColors,
+            onChanged: controller.setBlendDarkOnColors,
           ),
           ListTileReveal(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: enableControl,
             title: const Text('Contrast colors blend level'),
             subtitleReveal: const Text(
               'The contrasting on color blending mixes in '
@@ -463,21 +432,18 @@ class ColorBlendsSettings extends StatelessWidget {
             ),
           ),
           ListTile(
-            enabled: controller.useSubThemes && controller.useFlexColorScheme,
+            enabled: enableControl,
             title: Slider(
               min: 0,
               max: 40,
               divisions: 40,
               label: controller.blendOnLevelDark.toString(),
-              value: controller.useSubThemes && controller.useFlexColorScheme
-                  ? controller.blendOnLevelDark.toDouble()
-                  : 0,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? (double value) {
-                          controller.setBlendOnLevelDark(value.toInt());
-                        }
-                      : null,
+              value: enableControl ? controller.blendOnLevelDark.toDouble() : 0,
+              onChanged: enableControl
+                  ? (double value) {
+                      controller.setBlendOnLevelDark(value.toInt());
+                    }
+                  : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),

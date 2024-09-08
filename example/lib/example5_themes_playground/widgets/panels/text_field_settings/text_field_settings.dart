@@ -233,10 +233,10 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Color (light)'),
-                  labelForDefault: useMaterial3
+                  defaultLabel: useMaterial3
                       ? 'default (surfaceContainerHighest)'
                       : 'default (primary)',
-                  index: controller.inputDecoratorSchemeColorLight?.index ?? -1,
+                  value: controller.inputDecoratorSchemeColorLight?.index ?? -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {
@@ -281,10 +281,10 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Color (dark)'),
-                  labelForDefault: useMaterial3
+                  defaultLabel: useMaterial3
                       ? 'default (surfaceVariant)'
                       : 'default (primary)',
-                  index: controller.inputDecoratorSchemeColorDark?.index ?? -1,
+                  value: controller.inputDecoratorSchemeColorDark?.index ?? -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {
@@ -386,8 +386,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Color (light)'),
-                  labelForDefault: baseDefaultLabelLightColor,
-                  index:
+                  defaultLabel: baseDefaultLabelLightColor,
+                  value:
                       controller.inputDecoratorBorderSchemeColorLight?.index ??
                           -1,
                   onChanged: enableControl &&
@@ -413,8 +413,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Color (dark)'),
-                  labelForDefault: baseDefaultLabelDarkColor,
-                  index:
+                  defaultLabel: baseDefaultLabelDarkColor,
+                  value:
                       controller.inputDecoratorBorderSchemeColorDark?.index ??
                           -1,
                   onChanged: enableControl &&
@@ -537,11 +537,11 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Focused prefix icon'),
-                  labelForDefault: useMaterial3
+                  defaultLabel: useMaterial3
                       ? 'default (onSurfaceVariant)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
-                  index:
+                  value:
                       controller.inputDecoratorPrefixIconSchemeColor?.index ??
                           -1,
                   onChanged: enableControl
@@ -563,11 +563,11 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Focused prefix icon'),
-                  labelForDefault: useMaterial3
+                  defaultLabel: useMaterial3
                       ? 'default (onSurfaceVariant)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
-                  index: controller
+                  value: controller
                           .inputDecoratorPrefixIconDarkSchemeColor?.index ??
                       -1,
                   onChanged: enableControl
@@ -592,11 +592,11 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Focused suffix icon'),
-                  labelForDefault: useMaterial3
+                  defaultLabel: useMaterial3
                       ? 'default (onSurfaceVariant)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorLight?.name ?? 'primary'})',
-                  index:
+                  value:
                       controller.inputDecoratorSuffixIconSchemeColor?.index ??
                           -1,
                   onChanged: enableControl
@@ -618,11 +618,11 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Focused suffix icon'),
-                  labelForDefault: useMaterial3
+                  defaultLabel: useMaterial3
                       ? 'default (onSurfaceVariant)'
                       // ignore: lines_longer_than_80_chars
                       : 'default (${controller.inputDecoratorSchemeColorDark?.name ?? 'primary'})',
-                  index: controller
+                  value: controller
                           .inputDecoratorSuffixIconDarkSchemeColor?.index ??
                       -1,
                   onChanged: enableControl
@@ -771,8 +771,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
-                  labelForDefault: baseDefaultLabelLightColor,
-                  index: controller.inputCursorLightSchemeColor?.index ?? -1,
+                  defaultLabel: baseDefaultLabelLightColor,
+                  value: controller.inputCursorLightSchemeColor?.index ?? -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {
@@ -790,8 +790,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
-                  labelForDefault: baseDefaultHandleLabelLightColor,
-                  index:
+                  defaultLabel: baseDefaultHandleLabelLightColor,
+                  value:
                       controller.inputSelectionHandleLightSchemeColor?.index ??
                           -1,
                   onChanged: enableControl
@@ -816,8 +816,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Selection'),
-                  labelForDefault: baseDefaultLabelLightColor,
-                  index: controller.inputSelectionLightSchemeColor?.index ?? -1,
+                  defaultLabel: baseDefaultLabelLightColor,
+                  value: controller.inputSelectionLightSchemeColor?.index ?? -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {
@@ -859,8 +859,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
-                  labelForDefault: baseDefaultLabelDarkColor,
-                  index: controller.inputCursorDarkSchemeColor?.index ?? -1,
+                  defaultLabel: baseDefaultLabelDarkColor,
+                  value: controller.inputCursorDarkSchemeColor?.index ?? -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {
@@ -878,8 +878,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
-                  labelForDefault: baseDefaultHandleLabelDarkColor,
-                  index:
+                  defaultLabel: baseDefaultHandleLabelDarkColor,
+                  value:
                       controller.inputSelectionHandleDarkSchemeColor?.index ??
                           -1,
                   onChanged: enableControl
@@ -904,8 +904,8 @@ class TextFieldSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Selection'),
-                  labelForDefault: baseDefaultLabelDarkColor,
-                  index: controller.inputSelectionDarkSchemeColor?.index ?? -1,
+                  defaultLabel: baseDefaultLabelDarkColor,
+                  value: controller.inputSelectionDarkSchemeColor?.index ?? -1,
                   onChanged: enableControl
                       ? (int index) {
                           if (index < 0 || index >= SchemeColor.values.length) {

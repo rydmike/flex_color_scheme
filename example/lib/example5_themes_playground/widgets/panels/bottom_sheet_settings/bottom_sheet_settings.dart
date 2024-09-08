@@ -86,8 +86,8 @@ class BottomSheetSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: sheetDefaultColorLabel,
-          index: controller.bottomSheetSchemeColor?.index ?? -1,
+          defaultLabel: sheetDefaultColorLabel,
+          value: controller.bottomSheetSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -122,8 +122,8 @@ class BottomSheetSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: sheetDefaultColorLabel,
-          index: controller.bottomSheetModalSchemeColor?.index ?? -1,
+          defaultLabel: sheetDefaultColorLabel,
+          value: controller.bottomSheetModalSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

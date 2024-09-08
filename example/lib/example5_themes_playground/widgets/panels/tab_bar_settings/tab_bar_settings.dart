@@ -151,8 +151,8 @@ class TabBarSettings extends StatelessWidget {
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(
             title: const Text('Light selected item color'),
-            labelForDefault: 'default (TabBarStyle)',
-            index: controller.tabBarItemSchemeColorLight?.index ?? -1,
+            defaultLabel: 'default (TabBarStyle)',
+            value: controller.tabBarItemSchemeColorLight?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
@@ -166,8 +166,8 @@ class TabBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Light unselected items color'),
-            labelForDefault: unselectedLightLabel(),
-            index: controller.tabBarUnselectedItemSchemeColorLight?.index ?? -1,
+            defaultLabel: unselectedLightLabel(),
+            value: controller.tabBarUnselectedItemSchemeColorLight?.index ?? -1,
             onChanged: enableControl &&
                     controller.tabBarItemSchemeColorLight != null
                 ? (int index) {
@@ -196,8 +196,8 @@ class TabBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Light indicator color'),
-            labelForDefault: 'default (TabBarStyle)',
-            index: controller.tabBarIndicatorLight?.index ?? -1,
+            defaultLabel: 'default (TabBarStyle)',
+            value: controller.tabBarIndicatorLight?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
@@ -212,8 +212,8 @@ class TabBarSettings extends StatelessWidget {
         ] else ...<Widget>[
           ColorSchemePopupMenu(
             title: const Text('Dark selected item color'),
-            labelForDefault: 'default (TabBarStyle)',
-            index: controller.tabBarItemSchemeColorDark?.index ?? -1,
+            defaultLabel: 'default (TabBarStyle)',
+            value: controller.tabBarItemSchemeColorDark?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {
@@ -227,8 +227,8 @@ class TabBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Dark unselected items color'),
-            labelForDefault: unselectedDarkLabel(),
-            index: controller.tabBarUnselectedItemSchemeColorDark?.index ?? -1,
+            defaultLabel: unselectedDarkLabel(),
+            value: controller.tabBarUnselectedItemSchemeColorDark?.index ?? -1,
             onChanged: enableControl &&
                     controller.tabBarItemSchemeColorDark != null
                 ? (int index) {
@@ -257,8 +257,8 @@ class TabBarSettings extends StatelessWidget {
           ),
           ColorSchemePopupMenu(
             title: const Text('Dark indicator color'),
-            labelForDefault: 'default (TabBarStyle)',
-            index: controller.tabBarIndicatorDark?.index ?? -1,
+            defaultLabel: 'default (TabBarStyle)',
+            value: controller.tabBarIndicatorDark?.index ?? -1,
             onChanged: enableControl
                 ? (int index) {
                     if (index < 0 || index >= SchemeColor.values.length) {

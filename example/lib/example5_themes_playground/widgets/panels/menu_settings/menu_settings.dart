@@ -106,8 +106,8 @@ class MenuSettings extends StatelessWidget {
               child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 title: const Text('Color'),
-                labelForDefault: 'default (surfaceContainer)',
-                index: controller.menuSchemeColor?.index ?? -1,
+                defaultLabel: 'default (surfaceContainer)',
+                value: controller.menuSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
                     ? (int index) {
@@ -282,8 +282,8 @@ class MenuSettings extends StatelessWidget {
               child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
-                labelForDefault: menuItemDefault,
-                index: controller.menuItemBackgroundSchemeColor?.index ?? -1,
+                defaultLabel: menuItemDefault,
+                value: controller.menuItemBackgroundSchemeColor?.index ?? -1,
                 onChanged: enableControl
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
@@ -300,8 +300,8 @@ class MenuSettings extends StatelessWidget {
               child: ColorSchemePopupMenu(
                 contentPadding: paddingEndColumn,
                 title: const Text('Foreground color'),
-                labelForDefault: menuOnItemDefault,
-                index: controller.menuItemForegroundSchemeColor?.index ?? -1,
+                defaultLabel: menuOnItemDefault,
+                value: controller.menuItemForegroundSchemeColor?.index ?? -1,
                 onChanged: enableControl
                     ? (int index) {
                         if (index < 0 || index >= SchemeColor.values.length) {
@@ -323,8 +323,8 @@ class MenuSettings extends StatelessWidget {
               child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 title: const Text('Highlighted background'),
-                labelForDefault: menuIndicatorDefault,
-                index:
+                defaultLabel: menuIndicatorDefault,
+                value:
                     controller.menuIndicatorBackgroundSchemeColor?.index ?? -1,
                 onChanged: enableControl
                     ? (int index) {
@@ -343,8 +343,8 @@ class MenuSettings extends StatelessWidget {
               child: ColorSchemePopupMenu(
                 contentPadding: paddingEndColumn,
                 title: const Text('Highlighted foreground'),
-                labelForDefault: menuOnIndicatorDefault,
-                index:
+                defaultLabel: menuOnIndicatorDefault,
+                value:
                     controller.menuIndicatorForegroundSchemeColor?.index ?? -1,
                 onChanged: enableControl
                     ? (int index) {
@@ -483,8 +483,8 @@ class MenuSettings extends StatelessWidget {
               child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
-                labelForDefault: menuBarDefault,
-                index: controller.menuBarBackgroundSchemeColor?.index ?? -1,
+                defaultLabel: menuBarDefault,
+                value: controller.menuBarBackgroundSchemeColor?.index ?? -1,
                 onChanged: controller.useSubThemes &&
                         controller.useFlexColorScheme
                     ? (int index) {

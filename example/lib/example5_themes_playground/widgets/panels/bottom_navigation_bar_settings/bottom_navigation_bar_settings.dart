@@ -58,10 +58,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
         const SizedBox(height: 8),
         ColorSchemePopupMenu(
           title: const Text('Background color'),
-          labelForDefault: enableControl
+          defaultLabel: enableControl
               ? 'default (surface)'
               : 'default (ThemeData.canvasColor)',
-          index: controller.bottomNavBarBackgroundSchemeColor?.index ?? -1,
+          value: controller.bottomNavBarBackgroundSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -103,8 +103,8 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Selected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),
-          labelForDefault: labelForDefaultSelectedItem,
-          index: controller.bottomNavBarSelectedSchemeColor?.index ?? -1,
+          defaultLabel: labelForDefaultSelectedItem,
+          value: controller.bottomNavBarSelectedSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -119,8 +119,8 @@ class BottomNavigationBarSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Unselected item color'),
           subtitle: const Text('Label and icon, but own properties in API'),
-          labelForDefault: labelForDefaultUnelectedItem,
-          index: controller.bottomNavBarUnselectedSchemeColor?.index ?? -1,
+          defaultLabel: labelForDefaultUnelectedItem,
+          value: controller.bottomNavBarUnselectedSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

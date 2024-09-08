@@ -136,8 +136,8 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
         ColorSchemePopupMenu(
           title: const Text('Background color'),
           subtitle: const Text('Set to inverseSurface for default M3 style'),
-          labelForDefault: snackDefaultColorLabel,
-          index: controller.snackBarSchemeColor?.index ?? -1,
+          defaultLabel: snackDefaultColorLabel,
+          value: controller.snackBarSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -151,8 +151,8 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Action button text color'),
-          labelForDefault: snackActionDefaultColorLabel,
-          index: controller.snackBarActionSchemeColor?.index ?? -1,
+          defaultLabel: snackActionDefaultColorLabel,
+          value: controller.snackBarActionSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

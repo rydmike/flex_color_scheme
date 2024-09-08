@@ -110,8 +110,8 @@ class TooltipProgressBarSettings extends StatelessWidget {
           subtitle: controller.tooltipSchemeColor == null
               ? null
               : const Text('Foreground pair used'),
-          labelForDefault: toolTipDefaultColorLabel,
-          index: controller.tooltipSchemeColor?.index ?? -1,
+          defaultLabel: toolTipDefaultColorLabel,
+          value: controller.tooltipSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {

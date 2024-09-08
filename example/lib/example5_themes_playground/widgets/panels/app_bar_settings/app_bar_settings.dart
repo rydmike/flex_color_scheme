@@ -196,12 +196,12 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Background color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : useMaterial3
                           ? 'default (surface)'
                           : 'default (primary)',
-                  index:
+                  value:
                       controller.appBarBackgroundSchemeColorLight?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme
@@ -222,10 +222,10 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Background color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : 'default (surface)',
-                  index:
+                  value:
                       controller.appBarBackgroundSchemeColorDark?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme
@@ -245,12 +245,12 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Title color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : useMaterial3
                           ? 'default (surface)'
                           : 'default (primary)',
-                  index:
+                  value:
                       controller.appBarForegroundSchemeColorLight?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme
@@ -271,10 +271,10 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Title color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : 'default (surface)',
-                  index:
+                  value:
                       controller.appBarForegroundSchemeColorDark?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme
@@ -299,12 +299,12 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Icon color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : useMaterial3
                           ? 'default (surface)'
                           : 'default (primary)',
-                  index: controller.appBarIconSchemeColorLight?.index ?? -1,
+                  value: controller.appBarIconSchemeColorLight?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme
                       ? (int index) {
@@ -323,10 +323,10 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Icon color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : 'default (surface)',
-                  index: controller.appBarIconSchemeColorDark?.index ?? -1,
+                  value: controller.appBarIconSchemeColorDark?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme
                       ? (int index) {
@@ -345,12 +345,12 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Actions icon color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : useMaterial3
                           ? 'default (surface)'
                           : 'default (primary)',
-                  index:
+                  value:
                       controller.appBarActionsIconSchemeColorLight?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme
@@ -371,10 +371,10 @@ class AppBarSettings extends StatelessWidget {
                 child: ColorSchemePopupMenu(
                   contentPadding: paddingEndColumn,
                   title: const Text('Title color'),
-                  labelForDefault: controller.useFlexColorScheme
+                  defaultLabel: controller.useFlexColorScheme
                       ? 'default (AppBarStyle)'
                       : 'default (surface)',
-                  index:
+                  value:
                       controller.appBarActionsIconSchemeColorDark?.index ?? -1,
                   onChanged: controller.useSubThemes &&
                           controller.useFlexColorScheme

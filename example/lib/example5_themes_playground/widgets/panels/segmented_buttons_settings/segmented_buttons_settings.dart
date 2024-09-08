@@ -103,7 +103,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Selected background color'),
-          index: controller.toggleButtonsSchemeColor?.index ?? -1,
+          value: controller.toggleButtonsSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -117,12 +117,12 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected foreground color'),
-          labelForDefault: enableControl &&
+          defaultLabel: enableControl &&
                   controller.toggleButtonsUnselectedSchemeColor == null
               // ignore: lines_longer_than_80_chars
               ? 'default (${controller.toggleButtonsSchemeColor?.name ?? SchemeColor.primary.name})'
               : 'default (primary)',
-          index: controller.toggleButtonsUnselectedSchemeColor?.index ?? -1,
+          value: controller.toggleButtonsUnselectedSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -136,14 +136,14 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Border color'),
-          labelForDefault: useMaterial3
+          defaultLabel: useMaterial3
               ? 'default (outline)'
               : enableControl &&
                       controller.toggleButtonsBorderSchemeColor == null
                   // ignore: lines_longer_than_80_chars
                   ? 'default (${controller.toggleButtonsSchemeColor?.name ?? SchemeColor.primary.name})'
                   : 'default (primary)',
-          index: controller.toggleButtonsBorderSchemeColor?.index ?? -1,
+          value: controller.toggleButtonsBorderSchemeColor?.index ?? -1,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -200,13 +200,12 @@ class SegmentedButtonsSettings extends StatelessWidget {
           title: const Text('Background color'),
           subtitle: const Text('Selected foreground automatically uses the '
               'color pair of used background color'),
-          labelForDefault:
-              controller.useSubThemes && controller.useFlexColorScheme
-                  ? useMaterial3
-                      ? 'default (secondaryContainer)'
-                      : 'default (primary)'
-                  : 'default (secondaryContainer)',
-          index: controller.segmentedButtonSchemeColor?.index ?? -1,
+          defaultLabel: controller.useSubThemes && controller.useFlexColorScheme
+              ? useMaterial3
+                  ? 'default (secondaryContainer)'
+                  : 'default (primary)'
+              : 'default (secondaryContainer)',
+          value: controller.segmentedButtonSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -220,8 +219,8 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected button background color'),
-          labelForDefault: 'default (transparent)',
-          index: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
+          defaultLabel: 'default (transparent)',
+          value: controller.segmentedButtonUnselectedSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
@@ -235,8 +234,8 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Unselected button foreground color'),
-          labelForDefault: segmentedUnselectedForegroundDefault,
-          index: controller
+          defaultLabel: segmentedUnselectedForegroundDefault,
+          value: controller
                   .segmentedButtonUnselectedForegroundSchemeColor?.index ??
               -1,
           onChanged: enableControl
@@ -255,8 +254,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenu(
           title: const Text('Border color'),
-          labelForDefault: controller.useSubThemes &&
-                  controller.useFlexColorScheme
+          defaultLabel: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.segmentedButtonBorderSchemeColor == null
                   ? useMaterial3
                       ? 'default (outline)'
@@ -264,7 +262,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
                   // ignore: lines_longer_than_80_chars
                   : 'default (${controller.segmentedButtonSchemeColor?.name ?? SchemeColor.primary.name})'
               : 'default (outline)',
-          index: controller.segmentedButtonBorderSchemeColor?.index ?? -1,
+          value: controller.segmentedButtonBorderSchemeColor?.index ?? -1,
           onChanged: enableControl
               ? (int index) {
                   if (index < 0 || index >= SchemeColor.values.length) {
