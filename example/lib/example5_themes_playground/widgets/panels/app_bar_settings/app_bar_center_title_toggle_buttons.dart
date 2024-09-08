@@ -25,8 +25,7 @@ class AppBarCenterTitleToggleButtons extends StatelessWidget {
       case true:
         return 'Always center title (true)';
       case false:
-        return 'Never center title '
-            '(false)';
+        return 'Never center title (false)';
       case null:
         return 'Adaptive (null)';
     }
