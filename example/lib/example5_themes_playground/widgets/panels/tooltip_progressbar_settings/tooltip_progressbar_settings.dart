@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -55,23 +54,23 @@ class TooltipProgressBarSettings extends StatelessWidget {
 
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
         ? isLight
-            ? 'default (Grey700)'
-            : 'default (White)'
+            ? 'Grey700'
+            : 'White'
         : controller.tooltipsMatchBackground
             ? controller.useSubThemes
                 ? isLight
-                    ? 'default (Primary tinted white)'
-                    : 'default (Primary tinted #111111)'
+                    ? 'White + 4% primary alpha blend'
+                    : 'Dark grey #111111 + 16% primary alpha blend'
                 : isLight
-                    ? 'default (#FCFCFC)'
-                    : 'default (#444444)'
+                    ? 'Almost white #FCFCFC'
+                    : 'Grey #444444'
             : controller.useSubThemes
                 ? isLight
-                    ? 'default (Primary tinted #111111)'
-                    : 'default (Primary tinted white)'
+                    ? 'Dark grey #111111 + 45% primary alpha blend'
+                    : 'White + 39% primary alpha blend'
                 : isLight
-                    ? 'default (Grey700)'
-                    : 'default (White)';
+                    ? 'Grey700'
+                    : 'White';
 
     final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
         ? controller.useSubThemes
@@ -105,22 +104,15 @@ class TooltipProgressBarSettings extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           child: TooltipShowcase(),
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Tooltip background color'),
           subtitle: controller.tooltipSchemeColor == null
               ? null
-              : const Text('Foreground pair used'),
+              : const Text('Foreground pair used as foreground color'),
           defaultLabel: toolTipDefaultColorLabel,
-          value: controller.tooltipSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setTooltipSchemeColor(null);
-                  } else {
-                    controller.setTooltipSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          value: controller.tooltipSchemeColor,
+          onChanged: controller.setTooltipSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
