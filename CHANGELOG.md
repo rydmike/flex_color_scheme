@@ -401,15 +401,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - **Chip** settings panel.
   - DONE: Add secondary selected color 
   - DONE: Add optional blend toggle
-  - Chip padding?
-  - Font size?
-  - Chip border?
+  - Maybe: Chip padding, Font size, Chip outline
 - **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
 - Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
 - Figure out the default padding logics for the **TextField** settings panel. It should show the same as the Flutter SDK default, but it is not.
 - Refactor:    
   - DONE: Refactor ColorSchemePopupMenu, make it like the other nullable enum popups.
-  - Migrate all ColorScheme color boxes in all screens to use the new nullable enum popup.
+  - IN PROGRESS: Migrate all ColorScheme color boxes in all screens to use the new nullable enum popup.
 
 **ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset to the input values, not the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see a change in the effective theme, but if change theme modifiers, we no longer have the original input color.
 
