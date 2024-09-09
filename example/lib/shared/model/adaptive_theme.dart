@@ -25,7 +25,7 @@ enum AdaptiveTheme {
         'not even in browsers on iOS and macOS.\n'
         '\n'
         'Use this choice when you only want the platform adaptive response '
-        'on Apple device builds, but want to the keep the none adaptive '
+        'on Apple device builds, but want to keep the none adaptive '
         'response on all other platforms.\n',
     code: 'FlexAdaptive.apple()',
     icon: Icons.tablet_mac_outlined,
