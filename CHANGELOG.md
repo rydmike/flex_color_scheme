@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 4, 2024**
+**Sep 9, 2024**
 
 ### SUMMARY
 
@@ -14,7 +14,7 @@ Most APIs are still there and work as before, but a few may produce results that
 
 ### MIGRATION
 
-TODO: Add some info on this
+TODO: Add this section.
 
 ### BACKGROUND
 
@@ -63,7 +63,7 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
  
 - FIX: Default labels for AppBar and Fab colors
 - FIX: BUG!! AppBar contrast color with old AppBarStyle (incorrect with primary and custom!)
-- ADD: Chip changes to Chnagelog! See commit!
+- ADD: Chip changes to the changelog! See commit!
 - Add features for `Chip` theming.
   - Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
   - Padding prop
@@ -71,6 +71,21 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
   - This feature still requires proper support in Flutter and more testing of the theme feature. Maybe a new issue in Flutter to propose fully usable Chip theming support in Flutter.
 
 **POTENTIAL TODOS, but maybe push some to version 8.1.0 or later**
+
+- InputDecorator: Platform adaptive radius.
+- InputDecorator: Default value info for padding props, depends on dens and M2/M3 mode and border type, complex.
+
+
+- Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
+
+- Add `ToggleButtons` selected foreground and unselected background color props.
+
+- Add `Checkbox` shape and border.
+- Add some `ListTile` theming features, eg at least `contentPadding`.
+- Add some `SearchBar` theming features.
+- Add some `SearchView` theming features.
+- Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOs like style when using Material AppBar. Consider adding them as a platform adaptive feature.
+
 
 - Add **NEW** color schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
@@ -80,20 +95,6 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
 
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
 
-
-- InputDecorator: Platform adaptive radius.
-- InputDecorator: Default value info for padding props, depends on dens and M2/M3 mode and border type, complex.
-
-
-- Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK. 
-
-- Add `ToggleButtons` selected foreground and unselected background color props.
-
-- Add `Checkbox` shape and border.
-- Add some `ListTile` theming features, eg at least `contentPadding`.
-- Add some `SearchBar` theming features.
-- Add some `SearchView` theming features.
-- Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOs like style when using Material AppBar. Consider adding them as a platform adaptive feature.
 
 - Add TabBar theme property `indicatorAnimation` when it lands in stable.
   - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
@@ -283,7 +284,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Static functions `FlexSubThemes.schemeColor` and `FlexSubThemes.onSchemeColor` now support the updated `SchemeColor` and `ColorScheme`.
 
 - Improved the theming logic for `Card` theme.
-  - It now avoids issue (TODO: add the Flutter issue link here when issue has been filed) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Both are now using default and null radius value, it keeps shape null and lets the widget default behavior be used, so we can keep the outline on `Card.outlined` variant for the default case at least. This Flutter theming limitation and impact is thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
+  - It now avoids [issue #153912](https://github.com/flutter/flutter/issues/153912) when the Flutter default radius is used. This is done by not creating a shape theme when default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Both are now using default and null radius value, it keeps shape null and lets the widget default behavior be used, so we can keep the outline on `Card.outlined` variant for the default case at least. This Flutter theming limitation and impact is thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`.
 
 - Changed the `FlexSubThemes.inputDecoratorTheme` to use only `border` and its WidgetState for its theme. It offers more and nicer control over hover state than using the older legacy more limited border styles. Found a related Flutter SDK issue. Using themed `activeIndicatorBorder` and `outlineBorder` do not work at all, they should work, but everything must be done via `border` property to get the border style, this is a bit more involved API. It is a bug in how the decorator theme is used in Flutter, only the Material-3 default themes considers and uses themed `activeIndicatorBorder` and `outlineBorder`. 
   - **TODO**: Report the issue to Flutter SDK and add a link to it here.    
@@ -396,18 +397,19 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **TODO THEMES PLAYGROUND AND OTHER EXAMPLES**
 
-- AppBar icon colors UI.
+- DONE: AppBar icon colors UI.
 - **Chip** settings panel.
-  - Secondary color and optional blend on base via level slider.
+  - DONE: Add secondary selected color 
+  - DONE: Add optional blend toggle
   - Chip padding?
   - Font size?
   - Chip border?
 - **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
 - Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
 - Figure out the default padding logics for the **TextField** settings panel. It should show the same as the Flutter SDK default, but it is not.
-- Refactor:
-  - The ColorScheme color boxes  
-  - Refactor ColorSchemePopupMenu, make it like the other nullable enum popups.
+- Refactor:    
+  - DONE: Refactor ColorSchemePopupMenu, make it like the other nullable enum popups.
+  - Migrate all ColorScheme color boxes in all screens to use the new nullable enum popup.
 
 **ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset to the input values, not the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see a change in the effective theme, but if change theme modifiers, we no longer have the original input color.
 
