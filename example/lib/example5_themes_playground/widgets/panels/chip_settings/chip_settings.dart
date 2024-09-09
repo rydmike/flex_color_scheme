@@ -53,6 +53,7 @@ class ChipSettings extends StatelessWidget {
         : controller.chipSchemeColor!.name;
 
     // TODO(rydmike): Correct the Chip's default labels!
+    // TODO(rydmike): The Chip's default M3 paddings are now wrong, why?
     // TODO(rydmike): Add Chip padding settings.
     // TODO(rydmike): Add Chip font size settings.
     return Column(
