@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -36,23 +35,6 @@ class SwitchesSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
-    final String labelForDefaultColor =
-        (controller.useSubThemes || useMaterial3) &&
-                controller.useFlexColorScheme
-            ? 'default (primary)'
-            : useMaterial3
-                ? 'default (primary)'
-                : 'default (secondary)';
-    final String labelForDefaultThumbColor =
-        (controller.useSubThemes || useMaterial3) &&
-                controller.useFlexColorScheme
-            ? useMaterial3
-                ? 'default (primaryContainer)'
-                : 'default (primary)'
-            : useMaterial3
-                ? 'default (primaryContainer)'
-                : 'default (secondary)';
-
     final String explainThumb = useMaterial3 ? ' pressed/hovered/focused' : '';
 
     return Column(
@@ -75,39 +57,27 @@ class SwitchesSettings extends StatelessWidget {
               : null,
         ),
         const Divider(),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Switch color'),
-          defaultLabel: labelForDefaultColor,
-          value: controller.switchSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSwitchSchemeColor(null);
-                  } else {
-                    controller.setSwitchSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primary',
+          defaultDisabledLabelM2: 'secondary',
+          value: controller.switchSchemeColor,
+          onChanged: controller.setSwitchSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: SwitchShowcase(showCupertinoSwitches: true),
         ),
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: Text('Switch ON state$explainThumb thumb color'),
-          defaultLabel: labelForDefaultThumbColor,
-          value: controller.switchThumbSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSwitchThumbSchemeColor(null);
-                  } else {
-                    controller
-                        .setSwitchThumbSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primaryContainer',
+          defaultLabelM2: 'primary',
+          defaultDisabledLabelM2: 'secondary',
+          value: controller.switchThumbSchemeColor,
+          onChanged: controller.setSwitchThumbSchemeColor,
         ),
         SwitchListTileReveal(
           title: const Text('Thumb size is fixed'),
@@ -149,20 +119,13 @@ class SwitchesSettings extends StatelessWidget {
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
         const Divider(),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Checkbox color'),
-          defaultLabel: labelForDefaultColor,
-          value: controller.checkboxSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setCheckboxSchemeColor(null);
-                  } else {
-                    controller
-                        .setCheckboxSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primary',
+          defaultDisabledLabelM2: 'secondary',
+          value: controller.checkboxSchemeColor,
+          onChanged: controller.setCheckboxSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -207,19 +170,13 @@ class SwitchesSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Radio color'),
-          defaultLabel: labelForDefaultColor,
-          value: controller.radioSchemeColor?.index ?? -1,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setRadioSchemeColor(null);
-                  } else {
-                    controller.setRadioSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primary',
+          defaultDisabledLabelM2: 'secondary',
+          value: controller.radioSchemeColor,
+          onChanged: controller.setRadioSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
