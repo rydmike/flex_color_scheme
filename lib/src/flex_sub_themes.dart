@@ -5611,7 +5611,7 @@ sealed class FlexSubThemes {
     required final ColorScheme colorScheme,
 
     /// Selects which color from the passed in colorScheme to use as the main
-    /// color for the switch.
+    /// color for the radio button.
     ///
     /// All colors in the color scheme are not good choices, but some work well.
     ///
@@ -6585,6 +6585,7 @@ sealed class FlexSubThemes {
     // Material-3 mode theming.
     else {
       // Use a Cupertino style theme Material-3 Switch.
+      // TODO(rydmike): Check the track color, it looks a bit off.
       if (useCupertinoStyle ?? false) {
         return SwitchThemeData(
           thumbIcon:
