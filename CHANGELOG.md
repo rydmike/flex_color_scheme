@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 10, 2024**
+**Sep 11, 2024**
 
 ### SUMMARY
 
@@ -295,7 +295,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
  
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
    
-- Fixed that the Rectangular Slider value indicator did not default to primary in when undefined, as intended, only the Drop style indicator did.
+- Fixed that the Rectangular Slider value indicator did not default to `primary` color when undefined, as intended in FCS M2 and M3 mode. Only the Drop style indicator defaulted t primary. This came from the framework defaulting the rectangular one to a complex, opacity and alpha blended `onSurface` grey looking result.
 
 ### THEMES PLAYGROUND
 
