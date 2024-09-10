@@ -167,12 +167,18 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - All these changes were made to have fewer opinionated defaults in FCS and follow Material-3 design spec by default. Past FCS defaults were made before some Material-3 specs existed. In some cases, earlier FCS versions also kept its opinionated defaults from Material-2 as defaults for its Material-3 default theme.
 
 
+- The `FlexSubThemesData` property `drawerUnselectedItemSchemeColor` now default to `SchemeColor.onSurfaceVariant`, as on color pair default when any surface color is used as drawer background color. Previously it defaulted to `onSurface`. This was changed to use ase as Material-3 defaults.
+
+
+
 - The `FlexSubThemesData` property `chipDeleteIconSchemeColor` now default to `SchemeColor.onSurfaceVariant`. In previous versions it defaulted to `SchemeColor.onSurface`. Likewise in `FlexSubThemes.chipTheme` the property `deleteIconSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. In previous versions it defaulted to `SchemeColor.onSurface`. This change was made to adjust to follow updated Material-3 spec defaults.
 
 
 **NEW**
 
 - The const color definition class `FlexColor` got 24 new color values to support monochrome greyscale colors for all new surfaces and their on colors for light and dark mode. These are used as starting colors for the new surface colors in the **Flutter 3.22** updated and new Material-3 `ColorScheme`, when a seed generated `ColorScheme` is **NOT** used. These colors follow the naming convention `lightFlexSurface___` and `darkFlexSurface___`, plus their on and inverse versions.
+
+- Added named bool parameter `useOnSurfaceVariant` that defaults to `false`, to `FlexSubTheme.schemeColorPair()` and to `FlexSubTheme.onSchemeColor()`, when set to true, the on color `onSurfaceVariant` is returned instead for `onSurface` for all surface colors.
 
 - Added `black`, `white` and `transparent` as enum values to `SchemeColor`. These are not `ColorScheme` colors, **but** these colors can in many theming situations be useful instead of the `ColorScheme` based ones.
   - The automatic on color pair for black is white and white for black. For transparent, it is `onSurface`. 

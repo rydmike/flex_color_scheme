@@ -2669,7 +2669,11 @@ class FlexSubThemesData with Diagnosticable {
   /// uses as as its unselected item color.
   ///
   /// If undefined, defaults to correct contrast color pair for
-  /// [drawerBackgroundSchemeColor].
+  /// [drawerBackgroundSchemeColor], when [drawerSelectedItemSchemeColor] is
+  /// undefined, defaults to [SchemeColor.onSurfaceVariant].
+  ///
+  /// By default also uses [SchemeColor.onSurfaceVariant] as contrast color pair
+  /// for [drawerBackgroundSchemeColor] when it uses any surface color.
   final SchemeColor? drawerUnselectedItemSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color that the
