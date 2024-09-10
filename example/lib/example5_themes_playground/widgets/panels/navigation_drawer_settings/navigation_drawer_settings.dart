@@ -58,18 +58,6 @@ class NavigationDrawerSettings extends StatelessWidget {
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
 
-    final String onIndicatorDefault = controller.drawerIndicatorSchemeColor ==
-            null
-        ? 'default (onSecondaryContainer)'
-        // ignore: lines_longer_than_80_chars
-        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.drawerIndicatorSchemeColor!).index].name})';
-
-    final String onBackgroundDefault = controller.drawerBackgroundSchemeColor ==
-            null
-        ? 'default (onSurfaceVariant)'
-        // ignore: lines_longer_than_80_chars
-        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.drawerBackgroundSchemeColor!).index].name})';
-
     // Keeping the logic for the M2 different logic for width here, in case
     // it is needed again in the future.
     final double derivedIndicatorWidth =
@@ -97,24 +85,13 @@ class NavigationDrawerSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const DrawerShowcase(explain: false),
         const SizedBox(height: 16),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
-          defaultLabel: enableControl
-              ? 'default (surfaceContainerLow)'
-              : useMaterial3
-                  ? 'default (surfaceContainerLow)'
-                  : 'default (ThemeData.canvasColor)',
-          value: controller.drawerBackgroundSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setDrawerBackgroundSchemeColor(null);
-                  } else {
-                    controller.setDrawerBackgroundSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'surfaceContainerLow',
+          defaultDisabledLabelM2: 'canvasColor',
+          value: controller.drawerBackgroundSchemeColor,
+          onChanged: controller.setDrawerBackgroundSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -213,20 +190,12 @@ class NavigationDrawerSettings extends StatelessWidget {
         ),
         const NavigationDrawerShowcase(explain: false),
         const SizedBox(height: 16),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Drawer indicator color'),
-          defaultLabel: 'default (secondaryContainer)',
-          value: controller.drawerIndicatorSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setDrawerIndicatorSchemeColor(null);
-                  } else {
-                    controller.setDrawerIndicatorSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'secondaryContainer',
+          value: controller.drawerIndicatorSchemeColor,
+          onChanged: controller.setDrawerIndicatorSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -269,35 +238,34 @@ class NavigationDrawerSettings extends StatelessWidget {
           valueDefaultLabel: '${derivedIndicatorWidth.toStringAsFixed(0)} dp',
           valueDefaultDisabledLabel: '${304 - 2 * 12} dp',
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Selected item color'),
-          defaultLabel: onIndicatorDefault,
-          value: controller.drawerSelectedItemSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setDrawerSelectedItemSchemeColor(null);
-                  } else {
-                    controller.setDrawerSelectedItemSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: controller.drawerIndicatorSchemeColor == null
+              ? 'onSecondaryContainer'
+              : SchemeColor
+                  .values[FlexSubThemes.onSchemeColor(
+                          controller.drawerIndicatorSchemeColor!)
+                      .index]
+                  .name,
+          defaultDisabledLabel: 'onSecondaryContainer',
+          value: controller.drawerSelectedItemSchemeColor,
+          onChanged: controller.setDrawerSelectedItemSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Unselected item color'),
-          defaultLabel: onBackgroundDefault,
-          value: controller.drawerUnselectedItemSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setDrawerUnselectedItemSchemeColor(null);
-                  } else {
-                    controller.setDrawerUnselectedItemSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: controller.drawerBackgroundSchemeColor == null
+              ? 'onSurfaceVariant'
+              : SchemeColor
+                  .values[FlexSubThemes.onSchemeColor(
+                          controller.drawerBackgroundSchemeColor!,
+                          useOnSurfaceVariant: true)
+                      .index]
+                  .name,
+          defaultDisabledLabel: 'onSurfaceVariant',
+          value: controller.drawerUnselectedItemSchemeColor,
+          onChanged: controller.setDrawerUnselectedItemSchemeColor,
         ),
         ListTileReveal(
           dense: true,
