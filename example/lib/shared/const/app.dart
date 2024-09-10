@@ -28,7 +28,10 @@ class App {
   /// a const somewhere and no need to pass it around via a title prop either.
   /// Also used in the [showAppAboutDialog] About box as app name.
   static String title(BuildContext context) =>
-      (context as Element).findAncestorWidgetOfExactType<MaterialApp>()!.title;
+      (context as Element)
+          .findAncestorWidgetOfExactType<MaterialApp>()
+          ?.title ??
+      '';
 
   // When building new public web versions of the demos, make sure to
   // update this info with current versions used for the build, before
