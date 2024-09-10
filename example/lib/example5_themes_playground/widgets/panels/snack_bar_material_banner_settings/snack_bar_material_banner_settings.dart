@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -22,8 +21,6 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final bool useMaterial3 = theme.useMaterial3;
-    final bool isDark = theme.brightness == Brightness.dark;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
@@ -31,30 +28,6 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    final String snackDefaultColorLabel = isDark
-        ? (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (light primary, 93% opacity)'
-            : useMaterial3
-                ? 'default (inverseSurface)'
-                : 'default (onSurface)'
-        : (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (dark primary, 95% opacity)'
-            : useMaterial3
-                ? 'default (inverseSurface)'
-                : 'default (onSurface.op80%, alphaBlend surface)';
-
-    final String snackActionDefaultColorLabel = isDark
-        ? (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (inversePrimary)'
-            : useMaterial3
-                ? 'default (inversePrimary)'
-                : 'default (secondary)'
-        : (controller.useSubThemes && controller.useFlexColorScheme)
-            ? 'default (inversePrimary)'
-            : useMaterial3
-                ? 'default (inversePrimary)'
-                : 'default (secondary)';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,36 +106,27 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
           valueDefaultLabel: '4',
           valueDefaultDisabledLabel: '6',
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
-          subtitle: const Text('Set to inverseSurface for default M3 style'),
-          defaultLabel: snackDefaultColorLabel,
-          value: controller.snackBarSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSnackBarSchemeColor(null);
-                  } else {
-                    controller
-                        .setSnackBarSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          subtitleReveal:
+              const Text('Set to inverseSurface for default Material-3 style'),
+          defaultLabel: 'onSurface with 45% primary blend and 93% opacity',
+          defaultLabelDark: 'onSurface with 39% primary blend and 95% opacity',
+          defaultDisabledLabel: 'inverseSurface',
+          defaultDisabledLabelM2:
+              'onSurface opacity 80%, alpha blend with surface',
+          defaultDisabledLabelDarkM2: 'onSurface',
+          value: controller.snackBarSchemeColor,
+          onChanged: controller.setSnackBarSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Action button text color'),
-          defaultLabel: snackActionDefaultColorLabel,
-          value: controller.snackBarActionSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSnackBarActionSchemeColor(null);
-                  } else {
-                    controller.setSnackBarActionSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'inversePrimary',
+          defaultDisabledLabelM2: 'secondary',
+          value: controller.snackBarActionSchemeColor,
+          onChanged: controller.setSnackBarActionSchemeColor,
         ),
         const Divider(),
         const ListTileReveal(
