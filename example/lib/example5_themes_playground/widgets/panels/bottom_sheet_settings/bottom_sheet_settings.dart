@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
@@ -21,13 +20,6 @@ class BottomSheetSettings extends StatelessWidget {
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    final String sheetDefaultColorLabel =
-        controller.useSubThemes && controller.useFlexColorScheme
-            ? 'default (surfaceContainerLow)'
-            : useMaterial3
-                ? 'default (surfaceContainerLow)'
-                : 'default (theme.canvasColor)';
 
     // Get effective platform default global radius.
     final double? effectiveRadius = App.effectiveRadius(controller);
@@ -84,20 +76,13 @@ class BottomSheetSettings extends StatelessWidget {
           valueDefaultLabel: useMaterial3 ? '1' : '4',
           valueDefaultDisabledLabel: useMaterial3 ? '1' : '0',
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
-          defaultLabel: sheetDefaultColorLabel,
-          value: controller.bottomSheetSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setBottomSheetSchemeColor(null);
-                  } else {
-                    controller
-                        .setBottomSheetSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'surfaceContainerLow',
+          defaultDisabledLabelM2: 'theme.canvasColor',
+          value: controller.bottomSheetSchemeColor,
+          onChanged: controller.setBottomSheetSchemeColor,
         ),
         const Divider(),
         const ListTile(title: Text('Modal BottomSheet')),
@@ -120,20 +105,13 @@ class BottomSheetSettings extends StatelessWidget {
           valueDefaultLabel: useMaterial3 ? '2' : '8',
           valueDefaultDisabledLabel: useMaterial3 ? '1' : '0',
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
-          defaultLabel: sheetDefaultColorLabel,
-          value: controller.bottomSheetModalSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setBottomSheetModalSchemeColor(null);
-                  } else {
-                    controller.setBottomSheetModalSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'surfaceContainerLow',
+          defaultDisabledLabelM2: 'theme.canvasColor',
+          value: controller.bottomSheetModalSchemeColor,
+          onChanged: controller.setBottomSheetModalSchemeColor,
         ),
       ],
     );
