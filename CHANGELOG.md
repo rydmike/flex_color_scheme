@@ -295,6 +295,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
  
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
    
+- Fixed that the Rectangular Slider value indicator did not default to primary in when undefined, as intended, only the Drop style indicator did.
 
 ### THEMES PLAYGROUND
 

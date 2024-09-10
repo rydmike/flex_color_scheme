@@ -33,15 +33,17 @@ class SliderSettings extends StatelessWidget {
         controller.useSubThemes && controller.useFlexColorScheme;
 
     final bool isLight = theme.brightness == Brightness.light;
+    // TODO(rydmike): Verify defaults and add info on grey and opacity in M2.
+    // Check the M2 default intention, maybe grey for rectangular?
     final String labelIndicatorDefault =
         controller.sliderBaseSchemeColor == null
             ? useMaterial3
                 ? controller.sliderValueTinted
                     ? 'primary'
-                    : 'default (primary)'
+                    : 'primary'
                 : controller.sliderValueTinted
                     ? 'primary'
-                    : 'default (grey)'
+                    : 'grey'
             : '${controller.sliderBaseSchemeColor?.name}';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
