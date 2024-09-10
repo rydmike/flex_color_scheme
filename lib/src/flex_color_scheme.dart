@@ -6992,7 +6992,7 @@ class FlexColorScheme with Diagnosticable {
                 .withAlpha(0xED); // 93%
 
     // Effective and opinionated sliderValueIndicator color for themed Slider.
-    final Color? sliderValueIndicator = subTheme.sliderValueTinted
+    final Color sliderValueIndicator = subTheme.sliderValueTinted
         ? tintedBackground(
             background: colorScheme.onSurface,
             blend: FlexSubThemes.schemeColor(
@@ -7001,16 +7001,13 @@ class FlexColorScheme with Diagnosticable {
                     SchemeColor.primary,
                 colorScheme),
             brightness: colorScheme.brightness)
-        : subTheme.sliderIndicatorSchemeColor != null ||
-                subTheme.sliderBaseSchemeColor != null
-            ? FlexSubThemes.schemeColor(
-                subTheme.sliderIndicatorSchemeColor ??
-                    subTheme.sliderBaseSchemeColor ??
-                    SchemeColor.primary,
-                colorScheme)
-            : null;
+        : FlexSubThemes.schemeColor(
+            subTheme.sliderIndicatorSchemeColor ??
+                subTheme.sliderBaseSchemeColor ??
+                SchemeColor.primary,
+            colorScheme);
     final Color sliderValueStyleOnColor =
-        onColor((sliderValueIndicator ?? colorScheme.primary).withAlpha(0xFF));
+        onColor(sliderValueIndicator.withAlpha(0xFF));
     final TextStyle? sliderValueStyle =
         subTheme.sliderIndicatorSchemeColor != null ||
                 subTheme.sliderBaseSchemeColor != null
