@@ -421,7 +421,8 @@ sealed class FlexSubThemes {
 
   /// Returns the correct [SchemeColor] to be used as contrasting on
   /// [SchemeColor] pair for [SchemeColor] passed in via [value].
-  static SchemeColor onSchemeColor(SchemeColor value) {
+  static SchemeColor onSchemeColor(SchemeColor value,
+      {bool useOnSurfaceVariant = false}) {
     switch (value) {
       case SchemeColor.primary:
       case SchemeColor.surfaceTint:
@@ -489,11 +490,13 @@ sealed class FlexSubThemes {
       case SchemeColor.surfaceContainerHigh:
       case SchemeColor.surfaceContainerHighest:
       case SchemeColor.transparent:
-        return SchemeColor.onSurface;
+        return useOnSurfaceVariant
+            ? SchemeColor.onSurfaceVariant
+            : SchemeColor.onSurface;
       case SchemeColor.onSurface:
         return SchemeColor.surface;
       case SchemeColor.onSurfaceVariant:
-        return SchemeColor.surfaceContainerHighest;
+        return SchemeColor.surfaceContainerLowest;
       case SchemeColor.outline:
         return SchemeColor.surface;
       case SchemeColor.outlineVariant:
@@ -528,8 +531,12 @@ sealed class FlexSubThemes {
   ///
   /// For the extra colors, black is pair for white and wise versa and
   /// transparent is paired with onSurface.
-  static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme) =>
-      schemeColor(onSchemeColor(value), colorScheme);
+  static Color schemeColorPair(SchemeColor value, ColorScheme colorScheme,
+          {bool useOnSurfaceVariant = false}) =>
+      schemeColor(
+        onSchemeColor(value, useOnSurfaceVariant: useOnSurfaceVariant),
+        colorScheme,
+      );
 
   /// A factor used by tinted interactions to increase the alpha based
   /// opacity Material 3 baseline based opacity values for hover, focus and
@@ -4728,8 +4735,12 @@ sealed class FlexSubThemes {
     // Get selected background color, defaults to surface.
     final Color backgroundColor = schemeColor(
         backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme);
+
+    // Use onSurfaceVariant as contrast for all surface colors !!
     final Color onBackGroundColorFallback = schemeColorPair(
-        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+        backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme,
+        useOnSurfaceVariant: true);
+
     final Color onBackgroundColor = unselectedItemSchemeColor != null
         ? schemeColor(unselectedItemSchemeColor, colorScheme)
         : onBackGroundColorFallback;
