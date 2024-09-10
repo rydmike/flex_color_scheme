@@ -47,36 +47,21 @@ class SliderSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Main color'),
-          defaultLabel: 'default (primary)',
-          value: controller.sliderBaseSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSliderBaseSchemeColor(null);
-                  } else {
-                    controller
-                        .setSliderBaseSchemeColor(SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'primary',
+          defaultDisabledLabelM2: 'secondary',
+          value: controller.sliderBaseSchemeColor,
+          onChanged: controller.setSliderBaseSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Value indicator color'),
           defaultLabel: labelIndicatorDefault,
           colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
-          value: controller.sliderIndicatorSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setSliderIndicatorSchemeColor(null);
-                  } else {
-                    controller.setSliderIndicatorSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          value: controller.sliderIndicatorSchemeColor,
+          onChanged: controller.setSliderIndicatorSchemeColor,
         ),
         SwitchListTileReveal(
           title: const Text('Tinted value indicator'),
@@ -143,7 +128,10 @@ class SliderSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: '. The Slider does also not in Flutter 3.24 and '
+                      'earlier versions follow the correct Material-3 '
+                      'design. This is being worked on and a version that '
+                      'supports it is expected in a coming Flutter update.\n',
                 ),
               ],
             ),
@@ -164,8 +152,8 @@ class SliderSettings extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'The RangeSlider should behave and look like Slider '
-                      'in Material 3 mode. his design is not yet available in '
-                      'Flutter 3.10 and earlier. It can also not use the same '
+                      'in Material-3 mode. This design is not yet available in '
+                      'Flutter 3.24 and earlier. It can also not use the same '
                       'indicator classes as Slider. FCS applies existing drop '
                       'style as a better match with M3 than the rectangle in '
                       'M3 mode as default.\n'
