@@ -4,17 +4,19 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 9, 2024**
+**Sep 10, 2024**
 
 ### SUMMARY
 
 Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. Due to Flutter 3.22 breaking many past Material styles, introducing new colors to ColorScheme and deprecating 3 past ones, FlexColorScheme had to undergo major revision and also break many of its past styles and some older APIs.
 
-Most APIs are still there and work as before, but a few may produce results that differ slightly from past style, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals.
+Most APIs are still there and work as before, but a few produce results that differ slightly from past style, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in v8 but are still available, you will need top turn them ON explicitly to get the same results as before. The purpose of these default changes is to make FCS have less opinionated defaults and be aligned with Flutter's Material-3 design defaults.
 
 ### MIGRATION
 
-TODO: Add this section.
+TODO: Add most important highlights in this section.
+
+* The `useMaterial3` now defaults to `true` in `FlexColorScheme` and `FlexThemeData` constructors. Set it to `false` to explicitly use Material-2 theming. It defaulted to true before. Material-2 is still fully supported in FCS v8 and Flutter v3.24, but will eventually be deprecated in Flutter and when that happens also in FCS. With FlexColorScheme you can still use the preconfigured Material-3 mode setting that themes it to looks very similar to legacy Material-2.  
 
 ### BACKGROUND
 
@@ -27,10 +29,6 @@ To seed generated ColorSchemes FCS adds support for all the Flutter SDK dynamic 
 FCS still has its own even more flexible `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what ColorScheme color. An internal example of using them are the `FlexTones` modifiers. 
 
 FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. 
-
-### PACKAGE CHANGES 
-
-This section contains a detailed list of changes introduced in FlexColorScheme version 8.0.0.
 
 **CRITICAL TODOS**
 
@@ -105,6 +103,10 @@ This section contains a detailed list of changes introduced in FlexColorScheme v
 - It is currently not possible to use custom error colors with `toDark` computed schemes. Maybe keep it so?
 - Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
 
+
+### PACKAGE CHANGES
+
+This section contains a detailed list of all changes introduced in FlexColorScheme version 8.0.0.
   
 **BREAKING**
 
