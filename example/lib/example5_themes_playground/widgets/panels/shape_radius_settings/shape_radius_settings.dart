@@ -39,6 +39,12 @@ class ShapeRadiusSettings extends StatelessWidget {
     final double radius = App.effectiveRadius(controller) ??
         (enableControl ? 12 : (useMaterial3 ? 12 : 4));
 
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -186,46 +192,83 @@ class ShapeRadiusSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Divider(),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Default radius'),
-          subtitleReveal: const Text(
-            'By default, the border radius on all Material '
-            'UI components in FCS follow the Material-3 design guide in M3 '
-            'mode. The defaults used by FCS for Material-2 mode, are also '
-            'mostly Material-3 inspired.\n'
-            '\n'
-            'Radius specification in Material-3 design varies per component '
-            'type. '
-            'Material-2 specification used 4 dp on all components. To use M2 '
-            'specification, set this value to 4. '
-            'If you set a value, all major Material UI components will use '
-            'it as its border radius. You can also override used radius per '
-            'component, it will then use its own value, regardless of '
-            'what is defined here.\n'
-            '\n'
-            'Radius on very small elements, or components where changing it '
-            'to a high radius is a bad idea, are not included in this global '
-            'radius override. This includes PopupMenuButton, Menu, '
-            'MenuBar, SubmenuButton, MenuItemButton, ToolTip, the small '
-            'indicators on NavigationBar and '
-            'NavigationRail, as well as the SnackBar. The very distinct '
-            'FloatingActionButton can be included, but is not by default. '
-            'The radius on these elements can still be themed, but only '
-            'individually. The indicator on NavigationDrawer is button sized '
-            'and considered "large", it is thus included in the global default '
-            'border radius setting.',
-          ),
-          value: controller.defaultRadius,
-          onChanged: controller.setDefaultRadius,
-          min: 0,
-          max: 100,
-          divisions: 101,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: 'M3 values',
-          valueDefaultDisabledLabel: useMaterial3 ? 'M3 values' : '4 dp',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: paddingStartColumn,
+                title: const Text('Default radius'),
+                subtitleReveal: const Text(
+                  'By default, the border radius on all Material '
+                  'UI components in FCS follow the Material-3 design guide in '
+                  'M3 mode. The defaults used by FCS for Material-2 mode, are '
+                  'also mostly Material-3 inspired.\n'
+                  '\n'
+                  'Radius specification in Material-3 design varies per '
+                  'component type. Material-2 specification used 4 dp on all '
+                  'components. To use M2 specification, set this value to 4. '
+                  'If you set a value, all major Material UI components will '
+                  'use it as its border radius. You can also override used '
+                  'radius per component, it will then use its own value, '
+                  'regardless of what is defined here.\n'
+                  '\n'
+                  'Radius on very small elements, or components where changing '
+                  'it to a high radius is a bad idea, are not included in this '
+                  'global radius override. This includes PopupMenuButton, '
+                  'Menu, MenuBar, SubmenuButton, MenuItemButton, ToolTip, the '
+                  'small indicators on NavigationBar and NavigationRail, as '
+                  'well as the SnackBar. The very distinct '
+                  'FloatingActionButton can be included, but is not by '
+                  'default. The radius on these elements can still be themed, '
+                  'but only individually. The indicator on NavigationDrawer is '
+                  'button sized and considered "large", it is thus included in '
+                  'the global default border radius setting.',
+                ),
+                value: controller.defaultRadius,
+                onChanged: controller.setDefaultRadius,
+                min: 0,
+                max: 100,
+                divisions: 101,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: 'M3 values',
+                valueDefaultDisabledLabel: useMaterial3 ? 'M3 values' : '4 dp',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl &&
+                    controller.adaptiveRadius != AdaptiveTheme.off &&
+                    controller.adaptiveRadius != null,
+                title: const Text('Adaptive radius'),
+                subtitleReveal: const Text(
+                  'You can define a separate global border radius '
+                  'override that gets used adaptively on selected platforms. '
+                  'This is useful if you for example want to keep Material-3 '
+                  'design radius on for the Android platform, but want another '
+                  'border radius design on other platforms.',
+                ),
+                value: controller.defaultRadiusAdaptive,
+                onChanged: controller.setDefaultRadiusAdaptive,
+                min: 0,
+                max: 100,
+                divisions: 101,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: 'M3 values',
+                valueDefaultDisabledLabel: !enableControl
+                    ? useMaterial3
+                        ? 'M3 values'
+                        : '4 dp'
+                    : 'OFF',
+              ),
+            ),
+          ],
         ),
         EnumPopupMenu<AdaptiveTheme>(
           enabled: enableControl,
@@ -236,33 +279,6 @@ class ShapeRadiusSettings extends StatelessWidget {
           ),
           value: controller.adaptiveRadius,
           onChanged: controller.setAdaptiveRadius,
-        ),
-        SliderListTileReveal(
-          enabled: enableControl &&
-              controller.adaptiveRadius != AdaptiveTheme.off &&
-              controller.adaptiveRadius != null,
-          title: const Text('Adaptive radius'),
-          subtitleReveal: const Text(
-            'You can define a separate global border radius '
-            'override that gets used adaptively on selected platforms. This '
-            'is useful if you for example want to keep Material-3 design '
-            'radius on for the Android platform, but want another border '
-            'radius design on other platforms.',
-          ),
-          value: controller.defaultRadiusAdaptive,
-          onChanged: controller.setDefaultRadiusAdaptive,
-          min: 0,
-          max: 100,
-          divisions: 101,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: 'M3 values',
-          valueDefaultDisabledLabel: !enableControl
-              ? useMaterial3
-                  ? 'M3 values'
-                  : '4 dp'
-              : 'OFF',
         ),
         PlatformPopupMenu(
           platform: controller.platform,
@@ -289,10 +305,12 @@ class ShapeRadiusSettings extends StatelessWidget {
           ),
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
+                contentPadding: paddingStartColumn,
                 title: const Text('Standard width'),
                 subtitleReveal: const Text(
                   'Standard border width used as default by InputDecorator, '
@@ -311,6 +329,7 @@ class ShapeRadiusSettings extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
                 enabled: enableControl,
                 title: const Text('Thicker width'),
                 subtitleReveal: const Text(
