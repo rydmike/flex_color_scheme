@@ -22,66 +22,6 @@ class NavigationRailSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
-    // Logic for indicator color label default value,
-    // custom color selection overrides default label and value.
-    String indicatorColorLabel() {
-      // Use FCS component default, secondaryContainer.
-      if (enableControl) {
-        return 'default (secondaryContainer)';
-      }
-      // Use M2 default color
-      if (!useMaterial3) {
-        return 'default (secondary)';
-      }
-      // All other cases will use M3 style.
-      return 'default (secondaryContainer)';
-    }
-
-    // Logic for selected icon color label default value,
-    // custom color selection overrides default label and value.
-    String selectedIconColorLabel() {
-      // Use FCS component default, onSecondaryContainer.
-      if (enableControl) {
-        return 'default (onSecondaryContainer)';
-      }
-      // Use M2 default color
-      if (!useMaterial3) {
-        return 'default (primary)';
-      }
-      // All other cases will use M3 style.
-      return 'default (onSecondaryContainer)';
-    }
-
-    // Logic for selected icon color label default value,
-    // custom color selection overrides default label and value.
-    String selectedLabelColorLabel() {
-      // Use FCS component default, onSurface.
-      if (enableControl) {
-        return 'default (onSurface)';
-      }
-      // Use M2 default color
-      if (!useMaterial3) {
-        return 'default (primary)';
-      }
-      // All other cases will use M3 style.
-      return 'default (onSurface)';
-    }
-
-    // Logic for unselected item color label default value,
-    // custom color selection overrides default label and value.
-    String unselectedItemColorLabel() {
-      // Use FCS component default.
-      if (enableControl) {
-        return 'default (onSurfaceVariant)';
-      }
-      // Use M2 Flutter component default..
-      if (!useMaterial3) {
-        return 'default (onSurface)';
-      }
-      // All other cases will use M3 style.
-      return 'default (onSurfaceVariant)';
-    }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -129,26 +69,11 @@ class NavigationRailSettings extends StatelessWidget {
         ),
         ColorSchemePopupMenuNew(
           enabled: enableControl,
-          title: const Text('NEW Selection indicator color'),
+          title: const Text('Selection indicator color'),
           defaultLabel: 'secondaryContainer',
           defaultDisabledLabelM2: 'secondary',
           value: controller.navRailIndicatorSchemeColor,
           onChanged: controller.setNavRailIndicatorSchemeColor,
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('Selection indicator color'),
-          defaultLabel: indicatorColorLabel(),
-          value: controller.navRailIndicatorSchemeColor?.index ?? -1,
-          onChanged: enableControl && controller.navRailUseIndicator
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavRailIndicatorSchemeColor(null);
-                  } else {
-                    controller.setNavRailIndicatorSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
         ),
         SliderListTileReveal(
           enabled: enableControl && controller.navRailUseIndicator,
@@ -213,70 +138,55 @@ class NavigationRailSettings extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // TODO(rydmike): Make it use onPair to indicator?
                   ColorSchemePopupMenuNew(
                     enabled: enableControl,
-                    title: const Text('NEW Selected icon color'),
-                    defaultLabel: 'onSecondaryContainer',
+                    title: const Text('Selected icon color'),
+                    defaultLabel: controller.navRailIndicatorSchemeColor == null
+                        ? 'onSecondaryContainer'
+                        : SchemeColor
+                            .values[FlexSubThemes.onSchemeColor(
+                                    controller.navRailIndicatorSchemeColor!)
+                                .index]
+                            .name,
+                    defaultDisabledLabel: 'onSecondaryContainer',
                     defaultDisabledLabelM2: 'primary',
                     value: controller.navRailSelectedIconSchemeColor,
                     onChanged: controller.setNavRailSelectedIconSchemeColor,
                   ),
-                  ColorSchemePopupMenu(
-                    title: const Text('Selected icon color'),
-                    defaultLabel: selectedIconColorLabel(),
-                    value:
-                        controller.navRailSelectedIconSchemeColor?.index ?? -1,
-                    onChanged: enableControl
-                        ? (int index) {
-                            if (index < 0 ||
-                                index >= SchemeColor.values.length) {
-                              controller
-                                  .setNavRailSelectedIconSchemeColor(null);
-                            } else {
-                              controller.setNavRailSelectedIconSchemeColor(
-                                  SchemeColor.values[index]);
-                            }
-                          }
-                        : null,
+                  ColorSchemePopupMenuNew(
+                    enabled: enableControl,
+                    title: const Text('NEW Selected label color'),
+                    defaultLabel: controller.navRailBackgroundSchemeColor ==
+                            null
+                        ? 'onSurface'
+                        : SchemeColor
+                            .values[FlexSubThemes.onSchemeColor(
+                                    controller.navRailBackgroundSchemeColor!)
+                                .index]
+                            .name,
+                    defaultDisabledLabel: 'onSurface',
+                    defaultDisabledLabelM2: 'primary',
+                    value: controller.navRailSelectedIconSchemeColor,
+                    onChanged: controller.setNavRailSelectedIconSchemeColor,
                   ),
-                  // TODO(rydmike): Make it use onPair to surface?
-                  ColorSchemePopupMenu(
-                    title: const Text('Selected label color'),
-                    defaultLabel: selectedLabelColorLabel(),
-                    value:
-                        controller.navRailSelectedLabelSchemeColor?.index ?? -1,
-                    onChanged: enableControl
-                        ? (int index) {
-                            if (index < 0 ||
-                                index >= SchemeColor.values.length) {
-                              controller
-                                  .setNavRailSelectedLabelSchemeColor(null);
-                            } else {
-                              controller.setNavRailSelectedLabelSchemeColor(
-                                  SchemeColor.values[index]);
-                            }
-                          }
-                        : null,
-                  ),
-                  // TODO(rydmike): Make it use variant onPair to surfaces?
-                  ColorSchemePopupMenu(
+                  ColorSchemePopupMenuNew(
+                    enabled: enableControl,
                     title: const Text('Unselected item color'),
                     subtitle:
                         const Text('Label and icon, but own properties in API'),
-                    defaultLabel: unselectedItemColorLabel(),
-                    value: controller.navRailUnselectedSchemeColor?.index ?? -1,
-                    onChanged: enableControl
-                        ? (int index) {
-                            if (index < 0 ||
-                                index >= SchemeColor.values.length) {
-                              controller.setNavRailUnselectedSchemeColor(null);
-                            } else {
-                              controller.setNavRailUnselectedSchemeColor(
-                                  SchemeColor.values[index]);
-                            }
-                          }
-                        : null,
+                    defaultLabel: controller.navRailBackgroundSchemeColor ==
+                            null
+                        ? 'onSurfaceVariant'
+                        : SchemeColor
+                            .values[FlexSubThemes.onSchemeColor(
+                                    controller.navRailBackgroundSchemeColor!,
+                                    useOnSurfaceVariant: true)
+                                .index]
+                            .name,
+                    defaultDisabledLabel: 'onSurfaceVariant',
+                    defaultDisabledLabelM2: 'onSurface with 64% opacity',
+                    value: controller.navRailUnselectedSchemeColor,
+                    onChanged: controller.setNavRailUnselectedSchemeColor,
                   ),
                   SwitchListTileReveal(
                     enabled: enableControl,
