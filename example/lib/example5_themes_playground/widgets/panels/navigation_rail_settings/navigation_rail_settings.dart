@@ -86,20 +86,12 @@ class NavigationRailSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
-          defaultLabel: 'default (surface)',
-          value: controller.navRailBackgroundSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavRailBackgroundSchemeColor(null);
-                  } else {
-                    controller.setNavRailBackgroundSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          defaultLabel: 'surface',
+          value: controller.navRailBackgroundSchemeColor,
+          onChanged: controller.setNavRailBackgroundSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -134,6 +126,14 @@ class NavigationRailSettings extends StatelessWidget {
               'is true, turn OFF component themes to see this.\n'),
           value: enableControl && controller.navRailUseIndicator,
           onChanged: enableControl ? controller.setNavRailUseIndicator : null,
+        ),
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
+          title: const Text('NEW Selection indicator color'),
+          defaultLabel: 'secondaryContainer',
+          defaultDisabledLabelM2: 'secondary',
+          value: controller.navRailIndicatorSchemeColor,
+          onChanged: controller.setNavRailIndicatorSchemeColor,
         ),
         ColorSchemePopupMenu(
           title: const Text('Selection indicator color'),
@@ -213,6 +213,15 @@ class NavigationRailSettings extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  // TODO(rydmike): Make it use onPair to indicator?
+                  ColorSchemePopupMenuNew(
+                    enabled: enableControl,
+                    title: const Text('NEW Selected icon color'),
+                    defaultLabel: 'onSecondaryContainer',
+                    defaultDisabledLabelM2: 'primary',
+                    value: controller.navRailSelectedIconSchemeColor,
+                    onChanged: controller.setNavRailSelectedIconSchemeColor,
+                  ),
                   ColorSchemePopupMenu(
                     title: const Text('Selected icon color'),
                     defaultLabel: selectedIconColorLabel(),
@@ -231,6 +240,7 @@ class NavigationRailSettings extends StatelessWidget {
                           }
                         : null,
                   ),
+                  // TODO(rydmike): Make it use onPair to surface?
                   ColorSchemePopupMenu(
                     title: const Text('Selected label color'),
                     defaultLabel: selectedLabelColorLabel(),
@@ -249,6 +259,7 @@ class NavigationRailSettings extends StatelessWidget {
                           }
                         : null,
                   ),
+                  // TODO(rydmike): Make it use variant onPair to surfaces?
                   ColorSchemePopupMenu(
                     title: const Text('Unselected item color'),
                     subtitle:
