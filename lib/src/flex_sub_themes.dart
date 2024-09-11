@@ -4908,9 +4908,22 @@ sealed class FlexSubThemes {
     ///
     /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
     ///
-    /// Flutter M2 default is onSurface with opacity 0.64,
-    /// M3 default is onSurface. This is a spec BUG in Flutter's M3 defaults.
-    /// it should be onSurfaceVariant. See issue:
+    /// When undefined,if [backgroundSchemeColor] is
+    /// using any of the surface colors, the default on pair used will be
+    /// [SchemeColor.onSurfaceVariant],instead of [SchemeColor.onSurface]
+    /// that is the typical contrast color for surface colors.
+    /// This is to make the unselected labels and icons
+    /// look more muted.
+    ///
+    /// If other background colors are used, while this value is undefined,
+    /// their default contrasting on color will be used.
+    ///
+    /// Flutter Material-2 default is onSurface with opacity 0.64,
+    ///
+    /// In Flutter version 3.24 and earlier,
+    /// the Material-3 default is still also onSurface.
+    /// This is a spec BUG in Flutter's Material-3 defaults, it should be
+    /// onSurfaceVariant. See issue: <add new issue link here>
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// If true, the unselected label in the [NavigationRail] use a more
@@ -4944,9 +4957,14 @@ sealed class FlexSubThemes {
     /// Select which color from the theme's [ColorScheme] to use as base for
     /// the [NavigationRail]'s selected item icon color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSecondaryContainer].
+    /// If undefined, and [navigationRailIndicatorSchemeColor] is also
+    /// undefined, then defaults to [SchemeColor.onSecondaryContainer].
+    /// If undefined, but [navigationRailIndicatorSchemeColor] is defined, then
+    /// it default ot the contrast on color pair of the indicator color
+    /// [navigationRailIndicatorSchemeColor]
     ///
-    /// Flutter M2 default is primary, M3 default is onSecondaryContainer.
+    /// Flutter Material-2 default is primary, Material-3 default is
+    /// onSecondaryContainer.
     final SchemeColor? selectedIconSchemeColor,
 
     /// Select which color from the passed in [ColorScheme] to use as base for
@@ -4954,7 +4972,18 @@ sealed class FlexSubThemes {
     ///
     /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
     ///
-    /// Flutter M2 default is onSurface, M3 default is onSurfaceVariant.
+    /// When undefined,if [backgroundSchemeColor] is
+    /// using any of the surface colors, the default on pair used will be
+    /// [SchemeColor.onSurfaceVariant],instead of [SchemeColor.onSurface]
+    /// that is the typical contrast color for surface colors.
+    /// This is to make the unselected labels and icons
+    /// look more muted.
+    ///
+    /// If other background colors are used, while this value is undefined,
+    /// their default contrasting on color will be used.
+    ///
+    /// Flutter's Material-2 default is onSurface and in Material-3 it is
+    /// onSurfaceVariant.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [NavigationRail] use a more muted
@@ -5155,14 +5184,31 @@ sealed class FlexSubThemes {
         'In M2 mode FCS uses its opinionated defaults as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
+    // Background color, falls back to surface.
+    final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
+            backgroundSchemeColor != SchemeColor.transparent
+        ? schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
+            .withOpacity(opacity ?? 1.0)
+        : schemeColor(
+            backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    // Use onSurfaceVariant as contrast for all unselected on surface colors !!
+    final Color onVariantBackGroundColorFallback = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme,
+        useOnSurfaceVariant: true);
+
+    // Use onSurface as contrast for all selected on surface label colors !!
+    final Color onBackGroundColorFallback = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
     // Get text color, defaults to onSurface.
     final Color labelColor = selectedLabelSchemeColor == null
-        ? colorScheme.onSurface
+        ? onBackGroundColorFallback
         : schemeColor(selectedLabelSchemeColor, colorScheme);
 
     // Get unselected label color, defaults to onSurfaceVariant.
     final Color unselectedLabelColor = unselectedLabelSchemeColor == null
-        ? colorScheme.onSurfaceVariant
+        ? onVariantBackGroundColorFallback
         : schemeColor(unselectedLabelSchemeColor, colorScheme);
 
     // Get text style, defaults to TextStyle(), we can use it since
@@ -5174,14 +5220,18 @@ sealed class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? labelSize;
 
+    // Use color pair for indicator, as contrast for selected icon color.
+    final Color onIndicatorColorFallback = schemeColorPair(
+        indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme);
+
     // Get icon color, defaults to onSecondaryContainer.
     final Color iconColor = selectedIconSchemeColor == null
-        ? colorScheme.onSecondaryContainer
+        ? onIndicatorColorFallback
         : schemeColor(selectedIconSchemeColor, colorScheme);
 
     // Get unselected icon color, defaults to onSurfaceVariant.
     final Color unselectedIconColor = unselectedIconSchemeColor == null
-        ? colorScheme.onSurfaceVariant
+        ? onVariantBackGroundColorFallback
         : schemeColor(unselectedIconSchemeColor, colorScheme);
 
     // Get effective icons sizes.
@@ -5195,14 +5245,6 @@ sealed class FlexSubThemes {
 
     // Effective usage value for indicator.
     final bool effectiveUseIndicator = useIndicator ?? true;
-
-    // Background color, falls back to surfaceContainer.
-    final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
-            backgroundSchemeColor != SchemeColor.transparent
-        ? schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
-            .withOpacity(opacity ?? 1.0)
-        : schemeColor(
-            backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
     // Property order here as in NavigationRailThemeData
     return NavigationRailThemeData(

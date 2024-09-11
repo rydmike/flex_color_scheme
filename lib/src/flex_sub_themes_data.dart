@@ -3110,9 +3110,21 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
   ///
-  /// Flutter M2 default is onSurface with opacity 0.64,
-  /// M3 default is onSurface. This is a spec BUG in Flutter's M3 defaults.
-  /// it should be onSurfaceVariant. See issue:
+  /// When undefined,if [navigationRailBackgroundSchemeColor] is
+  /// using any of the surface colors, the default on pair used will be
+  /// [SchemeColor.onSurfaceVariant],instead of [SchemeColor.onSurface]
+  /// that is the typical contrast color for surface colors.
+  /// This is to make the unselected labels and icons
+  /// look more muted.
+  ///
+  /// If other background colors are used, while this value is undefined, their
+  /// default contrasting on color will be used.
+  ///
+  /// Flutter Material-2 default is onSurface with opacity 0.64,
+  /// In Flutter version 3.24 and earlier,
+  /// the Material-3 default is still also onSurface.
+  /// This is a spec BUG in Flutter's Material-3 defaults, it should be
+  /// onSurfaceVariant. See issue: <add new issue link here>
   final SchemeColor? navigationRailUnselectedLabelSchemeColor;
 
   /// If true, the unselected label in the [NavigationRail] use a more
@@ -3139,9 +3151,14 @@ class FlexSubThemesData with Diagnosticable {
   /// Select which color from the theme's [ColorScheme] to use as base for
   /// the [NavigationRail]'s selected item icon color.
   ///
-  /// If undefined, defaults to [SchemeColor.onSecondaryContainer].
+  /// If undefined, and [navigationRailIndicatorSchemeColor] is also
+  /// undefined, then defaults to [SchemeColor.onSecondaryContainer].
+  /// If undefined, but [navigationRailIndicatorSchemeColor] is defined, then
+  /// it default ot the contrast on color pair of the indicator color
+  /// [navigationRailIndicatorSchemeColor]
   ///
-  /// Flutter M2 default is primary, M3 default is onSecondaryContainer.
+  /// Flutter Material-2 default is primary, Material-3 default is
+  /// onSecondaryContainer.
   final SchemeColor? navigationRailSelectedIconSchemeColor;
 
   /// Select which color from the passed in [ColorScheme] to use as base for
@@ -3149,7 +3166,18 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
   ///
-  /// Flutter M2 default is onSurface, M3 default is onSurfaceVariant.
+  /// When undefined,if [navigationRailBackgroundSchemeColor] is
+  /// using any of the surface colors, the default on pair used will be
+  /// [SchemeColor.onSurfaceVariant],instead of [SchemeColor.onSurface]
+  /// that is the typical contrast color for surface colors.
+  /// This is to make the unselected labels and icons
+  /// look more muted.
+  ///
+  /// If other background colors are used, while this value is undefined, their
+  /// default contrasting on color will be used.
+  ///
+  /// Flutter's Material-2 default is onSurface and in Material-3 it is
+  /// onSurfaceVariant.
   final SchemeColor? navigationRailUnselectedIconSchemeColor;
 
   /// If true, the unselected icon in the [NavigationRail] use a more muted
@@ -3184,7 +3212,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to [SchemeColor.secondaryContainer].
   ///
-  /// Flutter defaults to secondary in M2 and to secondaryContainer in M3.
+  /// Flutter defaults to secondary in Material-2 and to secondaryContainer
+  /// in Material-3.
   final SchemeColor? navigationRailIndicatorSchemeColor;
 
   /// Opacity used on the [NavigationBar] indicator.
@@ -3354,7 +3383,7 @@ class FlexSubThemesData with Diagnosticable {
   /// prefer keeping this setting false.
   ///
   /// If undefined, defaults to false.
-  @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
+  @Deprecated('useFlutterDefaults is deprecated and will be removed in a '
       'future version. FlexColorScheme in M3 mode now defaults to using '
       'Flutter defaults. For other configurations modify them as desired. '
       'In M2 mode it will use opinionated defaults as long as M2 exists.')
