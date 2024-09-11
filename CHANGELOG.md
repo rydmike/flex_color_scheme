@@ -166,12 +166,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In `FlexSubThemes.navigationBarTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Property `selectedLabelSchemeColor` defaults to `onSurface` and `unselectedLabelSchemeColor` default to `onSurfaceVariant`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`.
   - All these changes were made to have fewer opinionated defaults in FCS and follow Material-3 design spec by default. Past FCS defaults were made before some Material-3 specs existed. In some cases, earlier FCS versions also kept its opinionated defaults from Material-2 as defaults for its Material-3 default theme.
 
-
-- The `FlexSubThemesData` property `drawerUnselectedItemSchemeColor` now default to `SchemeColor.onSurfaceVariant`, as on color pair default when any surface color is used as drawer background color. Previously it defaulted to `onSurface`. This was changed to use ase as Material-3 defaults.
-
-
-
 - The `FlexSubThemesData` property `chipDeleteIconSchemeColor` now default to `SchemeColor.onSurfaceVariant`. In previous versions it defaulted to `SchemeColor.onSurface`. Likewise in `FlexSubThemes.chipTheme` the property `deleteIconSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. In previous versions it defaulted to `SchemeColor.onSurface`. This change was made to adjust to follow updated Material-3 spec defaults.
+
+
+- The `FlexSubThemesData` property `drawerUnselectedItemSchemeColor` now default to `SchemeColor.onSurfaceVariant`, as on color pair default when any surface color is used as drawer background color. Previously it defaulted to `onSurface`. Likewise in `FlexSubThemes.navigationDrawerTheme` the property `unselectedItemSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. This was changed to use ase as Material-3 defaults.
+
+- TODO: Add info about these breaking changes (see commit)
+  - The `FlexSubThemesData` properties `navigationRailUnselectedLabelSchemeColor`, `navigationRailSelectedIconSchemeColor` and `navigationRailUnselectedIconSchemeColor`. Also add info about same changes in `FlexSubThemes`. Also info about fallback on pair colors.
 
 
 **NEW**
