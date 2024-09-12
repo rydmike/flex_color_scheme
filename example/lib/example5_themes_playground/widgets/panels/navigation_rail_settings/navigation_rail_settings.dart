@@ -155,7 +155,7 @@ class NavigationRailSettings extends StatelessWidget {
                   ),
                   ColorSchemePopupMenuNew(
                     enabled: enableControl,
-                    title: const Text('NEW Selected label color'),
+                    title: const Text('Selected label color'),
                     defaultLabel: controller.navRailBackgroundSchemeColor ==
                             null
                         ? 'onSurface'
