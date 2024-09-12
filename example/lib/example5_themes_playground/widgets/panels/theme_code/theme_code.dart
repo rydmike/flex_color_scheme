@@ -93,10 +93,11 @@ class ThemeCode extends StatelessWidget {
               'Material-3 color harmonization of custom theme colors in '
               'Flutter.\n'
               '\n'
-              'The used group colors for theme topic panels, are using the '
-              'same theme harmonization. When you change themes you will '
+              'The used icon colors for the theme topic buttons and icon on '
+              'Settings panels headers, are using the '
+              'same color harmonization. When you change themes you can '
               'notice that they also change color temperature to fit better '
-              'with selected theme\n'),
+              'with the ambient colors in the theme\n'),
         ),
         const SizedBox(height: 8),
       ],
