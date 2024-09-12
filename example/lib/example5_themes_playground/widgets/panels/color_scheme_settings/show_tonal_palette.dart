@@ -94,7 +94,7 @@ class ShowTonalPalette extends StatelessWidget {
       // Compute all the core Tonal Palettes.
       final FlexCorePalette palettes = FlexCorePalette.fromSeeds(
         primary: colors.primary.value,
-        // Pass in null if set to not secondary, tertiary or error seed keys.
+        // Null if set to not use secondary, tertiary or error seed keys.
         secondary: controller.useSecondary ? colors.secondary.value : null,
         tertiary: controller.useTertiary ? colors.tertiary.value : null,
         error: controller.useError ? inputErrorColor.value : null,
@@ -105,7 +105,7 @@ class ShowTonalPalette extends StatelessWidget {
         neutralVariant: isLight
             ? controller.surfaceTintLight?.value
             : controller.surfaceTintDark?.value,
-        // Tone config details we get from active FlexTones.
+        // The tone config details we get from the active FlexTones.
         primaryChroma: tones.primaryChroma,
         primaryMinChroma: tones.primaryMinChroma,
         secondaryChroma: tones.secondaryChroma,
