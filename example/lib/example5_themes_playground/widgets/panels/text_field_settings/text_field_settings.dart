@@ -225,28 +225,20 @@ class TextFieldSettings extends StatelessWidget {
           value: controller.inputDecoratorIsFilled,
           onChanged: controller.setInputDecoratorIsFilled,
         ),
+
         if (isLight)
           Row(
             children: <Widget>[
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
                   contentPadding: paddingStartColumn,
+                  enabled: enableControl,
                   title: const Text('Color (light)'),
-                  defaultLabel: useMaterial3
-                      ? 'default (surfaceContainerHighest)'
-                      : 'default (primary)',
-                  value: controller.inputDecoratorSchemeColorLight?.index ?? -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setInputDecoratorSchemeColorLight(null);
-                          } else {
-                            controller.setInputDecoratorSchemeColorLight(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultLabel: 'surfaceContainerHighest',
+                  defaultLabelM2: 'primary',
+                  value: controller.inputDecoratorSchemeColorLight,
+                  onChanged: controller.setInputDecoratorSchemeColorLight,
                 ),
               ),
               // 2nd column light
@@ -278,23 +270,14 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
                   contentPadding: paddingStartColumn,
+                  enabled: enableControl,
                   title: const Text('Color (dark)'),
-                  defaultLabel: useMaterial3
-                      ? 'default (surfaceVariant)'
-                      : 'default (primary)',
-                  value: controller.inputDecoratorSchemeColorDark?.index ?? -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setInputDecoratorSchemeColorDark(null);
-                          } else {
-                            controller.setInputDecoratorSchemeColorDark(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultLabel: 'surfaceVariant',
+                  defaultLabelM2: 'primary',
+                  value: controller.inputDecoratorSchemeColorDark,
+                  onChanged: controller.setInputDecoratorSchemeColorDark,
                 ),
               ),
               // 2nd column dark
@@ -383,55 +366,33 @@ class TextFieldSettings extends StatelessWidget {
             if (isLight)
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
                   contentPadding: paddingStartColumn,
+                  enabled: enableControl &&
+                      !(!controller.inputDecoratorFocusedHasBorder &&
+                          (!controller.inputDecoratorUnfocusedHasBorder ||
+                              !controller
+                                  .inputDecoratorUnfocusedBorderIsColored)),
                   title: const Text('Color (light)'),
                   defaultLabel: baseDefaultLabelLightColor,
-                  value:
-                      controller.inputDecoratorBorderSchemeColorLight?.index ??
-                          -1,
-                  onChanged: enableControl &&
-                          !(!controller.inputDecoratorFocusedHasBorder &&
-                              (!controller.inputDecoratorUnfocusedHasBorder ||
-                                  !controller
-                                      .inputDecoratorUnfocusedBorderIsColored))
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputDecoratorBorderSchemeColorLight(null);
-                          } else {
-                            controller.setInputDecoratorBorderSchemeColorLight(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  value: controller.inputDecoratorBorderSchemeColorLight,
+                  onChanged: controller.setInputDecoratorBorderSchemeColorLight,
                 ),
               )
             else
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
                   contentPadding: paddingStartColumn,
+                  enabled: enableControl &&
+                      !(!controller.inputDecoratorFocusedHasBorder &&
+                          (!controller.inputDecoratorUnfocusedHasBorder ||
+                              !controller
+                                  .inputDecoratorUnfocusedBorderIsColored)),
                   title: const Text('Color (dark)'),
                   defaultLabel: baseDefaultLabelDarkColor,
-                  value:
-                      controller.inputDecoratorBorderSchemeColorDark?.index ??
-                          -1,
-                  onChanged: enableControl &&
-                          !(!controller.inputDecoratorFocusedHasBorder &&
-                              (!controller.inputDecoratorUnfocusedHasBorder ||
-                                  !controller
-                                      .inputDecoratorUnfocusedBorderIsColored))
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputDecoratorBorderSchemeColorDark(null);
-                          } else {
-                            controller.setInputDecoratorBorderSchemeColorDark(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  value: controller.inputDecoratorBorderSchemeColorDark,
+                  onChanged: controller.setInputDecoratorBorderSchemeColorDark,
                 ),
               ),
             // 2nd column light and dark
@@ -451,6 +412,7 @@ class TextFieldSettings extends StatelessWidget {
             ),
           ],
         ),
+
         //
         // Unfocused border
         //
