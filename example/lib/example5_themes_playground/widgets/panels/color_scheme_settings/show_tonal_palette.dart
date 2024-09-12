@@ -20,6 +20,9 @@ class ShowTonalPalette extends StatelessWidget {
     final Brightness brightness = theme.brightness;
     final bool isLight = brightness == Brightness.light;
 
+    final bool useMonochrome = controller.useMonoSurfacesLight && isLight ||
+        controller.useMonoSurfacesDark && !isLight;
+
     final FlexSchemeData scheme = AppColor.scheme(controller);
 
     // Effective FlexSchemeColor depends on usedColors and swap.
@@ -112,8 +115,8 @@ class ShowTonalPalette extends StatelessWidget {
         tertiaryHueRotation: tones.tertiaryHueRotation,
         errorChroma: tones.errorChroma,
         errorMinChroma: tones.errorMinChroma,
-        neutralChroma: tones.neutralChroma,
-        neutralVariantChroma: tones.neutralVariantChroma,
+        neutralChroma: useMonochrome ? 0 : tones.neutralChroma,
+        neutralVariantChroma: useMonochrome ? 0 : tones.neutralVariantChroma,
         paletteType: FlexPaletteType.extended,
       );
 
