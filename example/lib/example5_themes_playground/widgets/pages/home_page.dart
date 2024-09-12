@@ -90,10 +90,10 @@ class _HomePageState extends State<HomePage> {
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
     menuItemsEnabled[3] = widget.controller.useFlexColorScheme;
-    menuItemsIconState[7] = widget.controller.compactMode
+    menuItemsIconState[6] = widget.controller.compactMode
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[8] = widget.controller.verticalMode
+    menuItemsIconState[7] = widget.controller.verticalMode
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
   }
