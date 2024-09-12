@@ -14,17 +14,28 @@ Most APIs are still there and work as before, but a few produce results that dif
 
 ### MIGRATION
 
-TODO: Add most important highlights in this section.
+The most critical changes to migrate from FelxColorScheme version 7 to version 8 listed below. For a full list of all changes, see the **PACKAGE CHANGES** chapter further bleow.
 
-* The `useMaterial3` now defaults to `true` in `FlexColorScheme` and `FlexThemeData` constructors. Set it to `false` to explicitly use Material-2 theming. It defaulted to true before. Material-2 is still fully supported in FCS v8 and Flutter v3.24, but will eventually be deprecated in Flutter and when that happens also in FCS. With FlexColorScheme you can still use the preconfigured Material-3 mode setting that themes it to looks very similar to legacy Material-2.  
+* The flag `useMaterial3` now defaults to `true` in `FlexColorScheme` and `FlexThemeData` constructors. Set it to `false` to explicitly use Material-2 theming. It defaulted to true before. Material-2 is still fully supported in FCS v8 and Flutter v3.24, but will eventually be deprecated in Flutter, when that happens, it will also happen in FCS. 
+  * **NOTE:** With the Themes Playground app, you can use a preconfigured Material-3 based theme, that looks very similar to legacy Material-2. This will be available also after Material-2 is deprecated in Flutter.  
+
+  
+* The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls`, `defaultUseM2StyleDividerInM3` and `blendOnColors` now all default to `false`. In previous versions they defaulted to `true`. If you before had not explicitly turned these properties `false`, they were all `true`by default. To get the same result as before in FCS V8, you now have to set these properties to `true`. This change was made to have fewer opinionated defaults in FCS to align it more with Flutter SDK default styles. 
+
+
+* Since `ColorScheme.background` color was deprecated in Flutter 3.22.0 we can no longer use it as a part of surface blends and its modes. For example, `surfaceMode` when used with `FlexSurfaceMode.highBackgroundLowScaffold` now sets surface and dialog blends to 2x instead of 1x, so that it represents the "high background" style as before, but done vai surface color. Without this breaking change, this mode would produce the same result `FlexSurfaceMode.levelSurfacesLowScaffold` and be redundant. 
+  * **NOTE:** You may want to check your surface mode and blends to see that they still look as you want them to, as they may have changed slightly depending on your configuration. We have tried to keep required changes subtle, you may not notice any difference, but it is good to check. These changes we forced by Flutter 3.22.0 deprecation of `ColorScheme` color `background`, `onBackground` and `surfaceVariant`.
+
+
+* The V8 release got many breaking changes that were on it forced via breaking changes in Flutter 3.22.0. Due to this, the release also uses this opportunity to clean up APIs with very opinionated defaults, like the ones mentioned above. There are additional smaller and subtle changes in defaults values, that align FCS to use the same color defaults from the new `ColorScheme` colors, that Flutter started using in version 3.22.0 as well. Yuo can find all the details further below in the **PACKAGE CHANGES** chapter.  
 
 ### BACKGROUND
 
 Flutter 3.22 introduced a large number of breaking changes to the `ColorScheme` and default color mappings that Flutter's Material components use. In total, the Flutter 3.22.0 release adjusted 249 of its own internal tests to accommodate for new Material-3 spec changes, that all broke past Flutter Material-3 component styles. For a reference to the broken and updated tests, see [this issue side comment](https://github.com/flutter/flutter/issues/130135#issuecomment-2308522312).
 
-FlexColorScheme v8 now allows you to use the new colors introduced in Flutter 3.22. As before, with FCS you can still get fully defined hand-tuned ColorSchemes without using Material design's Material Color Utilities (MCU) based seed-generated ColorSchemes. Typically, you want to use seed generated ColorSchemes with Material-3.
+FlexColorScheme V8 now allows you to use the new colors introduced in Flutter 3.22. As before, with FCS you can still get fully defined hand-tuned `ColorScheme`s without using Material-3 design's Material Color Utilities (MCU) based seed-generated ColorSchemes. Typically, you want to use seed generated ColorSchemes with Material-3.
 
-To seed generated ColorSchemes FCS adds support for all the Flutter SDK dynamic scheme variants. It also improves them by allowing you to use separate seed colors for each palette. Flutter SDK only allows you to seed from the theme's primary color and always uses computed values for secondary, tertiary palettes and a fixed color for the error palette. Surfaces and their tints are always tied to primary color as well. With FCS, you do not have these limitations, and you can seed with separate colors with Flutter's own scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones seed generated scheme variants. It now also brings this feature to Flutter's own dynamic scheme variants.
+To the seed generated `ColorScheme`s, FCS adds support for all the Flutter SDK dynamic scheme variants. It also improves them by allowing you to use separate seed colors for each palette. Flutter SDK only allows you to seed from the theme's primary color. It always uses computed values for secondary, tertiary palettes and a fixed color for the error palette. Surfaces and their tints are always tied to primary color as well. With FCS, you do not have these limitations, and you can seed with separate colors with Flutter's own scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones seed generated scheme variants. It now also brings this feature to Flutter's own dynamic scheme variants.
 
 FCS still has its own even more flexible `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what ColorScheme color. An internal example of using them are the `FlexTones` modifiers. 
 
@@ -76,13 +87,14 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
 
+
 - Add `ToggleButtons` selected foreground and unselected background color props.
 
 - Add `Checkbox` shape and border.
 - Add some `ListTile` theming features, eg at least `contentPadding`.
-- Add some `SearchBar` theming features.
-- Add some `SearchView` theming features.
-- Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOs like style when using Material AppBar. Consider adding them as a platform adaptive feature.
+- Add some `SearchBar` theming features, What? Shape and elevation?
+- Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue!
+- Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
 
 
 - Add **NEW** color schemes:
@@ -121,12 +133,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - Deprecated `surfaceVariantAlpha` and `backgroundAlpha` colors in `FlexAlphaValues`. They are not used anymore and have no function, use `surfaceAlpha` instead. They were deprecated since the colors they related to were deprecated in `ColorScheme` in Flutter 3.22.
   - The `FlexSchemeSurfaceColors.blend` factory constructor produces slightly different blend result than in earlier versions. Because Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`, that were used in the blend calculation earlier. It is no longer possible to produce the same results as before, but the results are equivalent to previous design intent. With one exception, using `surfaceMode` with `FlexSurfaceMode.highBackgroundLowScaffold` sets surface and dialog blends to 2x instead of 1x, so that it represents the "high background" style as before, but done via surface. Without this breaking change, this mode would produce the same result `FlexSurfaceMode.levelSurfacesLowScaffold` and be redundant. 
   - The enum `SchemeColor` got support for all the new colors in Flutter 3.22 `ColorScheme`. It also removed the colors Flutter 3.22 deprecated. The order of the enum values was modified. This will break usage that depends on the enum's index, for example, storage of the values for implementations that depend on the index value.
-  - Property `systemNavBarStyle` in `FlexColorScheme.themedSystemNavigationBar` now defaults to `FlexSystemNavBarStyle.surface`, instead of `FlexSystemNavBarStyle.background`. Using `FlexSystemNavBarStyle.background` results in the color `Theme.of(context).colorScheme.surfaceContainerLow` being used, where it previously was `Theme.of(context).colorScheme.background`. This is because Flutter 3.22 deprecated `ColorSCheme.-background`.
+  - Property `systemNavBarStyle` in `FlexColorScheme.themedSystemNavigationBar` now defaults to `FlexSystemNavBarStyle.surface`, instead of `FlexSystemNavBarStyle.background`. Using `FlexSystemNavBarStyle.background` results in the color `Theme.of(context).colorScheme.surfaceContainerLow` being used, where it previously was `Theme.of(context).colorScheme.background`. This is because Flutter 3.22 deprecated `ColorSCheme.background`.
   - The enum `FlexAppBarStyle` value `background` now results in the `AppBar` using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in a typical FCS configuration.
   - The enum `FlexSystemNavBarStyle` value `background` now results in the app bar using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in typical FCS configuration. 
 
 
-- The FCS legacy property `useFlutterDeaults` was deprecated. FlexColorScheme in Material-3 mode now defaults to using Flutter default styles. For other configurations, modify them as desired. In Material-2 mode, FCS continues to use its opinionated own defaults as before, as long as Material-2 exists.
+- Deprecated the FCS legacy property `useFlutterDeaults`. FlexColorScheme in Material-3 mode now defaults to using Flutter default styles. For other configurations, modify them as desired. In Material-2 mode, FCS continues to use its opinionated own defaults as before, as long as Material-2 exists.
 
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the **new** Material-3 default dark error color used in **Flutter 3.22**. 
 
@@ -166,13 +178,14 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In `FlexSubThemes.navigationBarTheme` the properties `mutedUnselectedLabel` and `mutedUnselectedIcon` now default to `false` if undefined. In previous versions they defaulted to `true`. Property `selectedLabelSchemeColor` defaults to `onSurface` and `unselectedLabelSchemeColor` default to `onSurfaceVariant`, they were `primary` before. Property `unselectedIconColor` now defaults to `onSurfaceVariant` it was `onSurface`. Property `selectedIconColor` now defaults to `onSecondaryContainer` it was `primary`.
   - All these changes were made to have fewer opinionated defaults in FCS and follow Material-3 design spec by default. Past FCS defaults were made before some Material-3 specs existed. In some cases, earlier FCS versions also kept its opinionated defaults from Material-2 as defaults for its Material-3 default theme.
 
+
 - The `FlexSubThemesData` property `chipDeleteIconSchemeColor` now default to `SchemeColor.onSurfaceVariant`. In previous versions it defaulted to `SchemeColor.onSurface`. Likewise in `FlexSubThemes.chipTheme` the property `deleteIconSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. In previous versions it defaulted to `SchemeColor.onSurface`. This change was made to adjust to follow updated Material-3 spec defaults.
 
 
 - The `FlexSubThemesData` property `drawerUnselectedItemSchemeColor` now default to `SchemeColor.onSurfaceVariant`, as on color pair default when any surface color is used as drawer background color. Previously it defaulted to `onSurface`. Likewise in `FlexSubThemes.navigationDrawerTheme` the property `unselectedItemSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. This was changed to use ase as Material-3 defaults.
 
-- TODO: Add info about these breaking changes (see commit)
-  - The `FlexSubThemesData` properties `navigationRailUnselectedLabelSchemeColor`, `navigationRailSelectedIconSchemeColor` and `navigationRailUnselectedIconSchemeColor`. Also add info about same changes in `FlexSubThemes`. Also info about fallback on pair colors.
+
+- The `FlexSubThemesData` properties `navigationRailUnselectedLabelSchemeColor` and `navigationRailUnselectedIconSchemeColor` now default t `onSurfaceVariant` (was `onSurface`). The `onSurfaceVariant` is used as on color pair default when any surface color is used as background color for the rail, if a none surface color is used as background scheme color, its contrast color pair is used as default for the labels and unselected icons. The `naviagtionselectedIconColorLabel` will if undefined, default to the contrast color pair for `navRailIndicatorSchemeColor`. These default behaviors result in less configuration in typical designs, while starting points defaults are the same as before and full configuration options are also available as before. The equivalent colors in `FlexSubThemes.navigationRailTheme` behave the same way.  
 
 
 **NEW**
@@ -357,9 +370,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **CHANGE**
 
 - The optional staggered grid-based Playground UI was removed.
-  - The rationale for removing it is to make the app simpler. Code wise the staggered grid view was a trivial demo.
-  - The staggered grid view was originally included in the Playground for its "example 5" tutorial intent. It was used to demonstrate how the same widget panels could be used in completely different app layout, just for Flutter tutorial purposes. The UI was not so brilliant and way to heavy to use on web builds, at least if you opened up all panels. 
-    - Did anybody use the staggered grid layout anyway anymore? Let me know if you miss it. Just so I know, but it is not coming back.
+  - The rationale for removing it is to make the app simpler. 
+  - The staggered grid view was originally included in the Playground for its "example 5" tutorial intent. It was used to demonstrate how the same widget panels could be used in a completely different app layout, for Flutter tutorial purposes. The UI was not so brilliant and way to heavy to use on web builds, at least if you opened up all panels. 
+    - Did anybody use the staggered grid layout anyway? Let me know if you miss it. Just so I know, but it is not coming back :)
 - No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is **ON**.
 - As of version 8, the Playground now also defaults `useTextTheme` to null. This makes Material-2 and Material-3 mode use their respective mode-based typography by default. If you still make a Material-2 app, prefer using Material-3 typography and set it to `true`, like the Playground did before. Material-3 typography is much nicer than Material-2 typography. This is not a breaking API change, just a change in the default value used when you rest the Playground to its default values. Turn it **ON** in **TextTheme** settings, to get the same config as you did with a reset before. If you use Material-3, this Playground settings change has no impact on your theme result.
 - Updated the presentation of `Switch`, `Checkbox`and `Radio` on their settings panel.
