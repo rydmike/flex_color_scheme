@@ -50,7 +50,7 @@ dependencies:
   #
   # Flutter does not expose the "@internal" annotation via foundation, to use it we need to
   # import the package.
-  meta: ^1.8.0
+  meta: ^1.9.0
 
 dev_dependencies:
   # Flutter test tools
