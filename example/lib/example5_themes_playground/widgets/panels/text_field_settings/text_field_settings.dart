@@ -139,20 +139,18 @@ class TextFieldSettings extends StatelessWidget {
                 .values[controller.inputDecoratorSchemeColorDark!.index].name
             : 'primary';
     //
-    final String baseDefaultHandleLabelLightColor = controller
-                    .inputDecoratorSchemeColorLight !=
-                null &&
-            controller.inputDecoratorSchemeColorLight != SchemeColor.primary
-        // ignore: lines_longer_than_80_chars
-        ? 'default (${SchemeColor.values[controller.inputDecoratorSchemeColorLight!.index].name})'
-        : 'default (primary)';
-    final String baseDefaultHandleLabelDarkColor = controller
-                    .inputDecoratorSchemeColorDark !=
-                null &&
-            controller.inputDecoratorSchemeColorDark != SchemeColor.primary
-        // ignore: lines_longer_than_80_chars
-        ? 'default (${SchemeColor.values[controller.inputDecoratorSchemeColorDark!.index].name})'
-        : 'default (primary)';
+    final String baseDefaultHandleLabelLightColor =
+        controller.inputDecoratorSchemeColorLight != null &&
+                controller.inputDecoratorSchemeColorLight != SchemeColor.primary
+            ? SchemeColor
+                .values[controller.inputDecoratorSchemeColorLight!.index].name
+            : 'primary';
+    final String baseDefaultHandleLabelDarkColor =
+        controller.inputDecoratorSchemeColorDark != null &&
+                controller.inputDecoratorSchemeColorDark != SchemeColor.primary
+            ? SchemeColor
+                .values[controller.inputDecoratorSchemeColorDark!.index].name
+            : 'primary';
 
     // Paddings for the two column control layouts.
     const EdgeInsetsDirectional paddingStartColumn =
@@ -698,43 +696,26 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
                   defaultLabel: baseDefaultLabelLightColor,
-                  value: controller.inputCursorLightSchemeColor?.index ?? -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setInputCursorLightSchemeColor(null);
-                          } else {
-                            controller.setInputCursorLightSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultDisabledLabel: 'primary',
+                  value: controller.inputCursorLightSchemeColor,
+                  onChanged: controller.setInputCursorLightSchemeColor,
                 ),
               ),
               // 2nd column light
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
                   defaultLabel: baseDefaultHandleLabelLightColor,
-                  value:
-                      controller.inputSelectionHandleLightSchemeColor?.index ??
-                          -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputSelectionHandleLightSchemeColor(null);
-                          } else {
-                            controller.setInputSelectionHandleLightSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultDisabledLabel: 'primary',
+                  value: controller.inputSelectionHandleLightSchemeColor,
+                  onChanged: controller.setInputSelectionHandleLightSchemeColor,
                 ),
               ),
             ],
@@ -744,21 +725,14 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Selection'),
                   defaultLabel: baseDefaultLabelLightColor,
-                  value: controller.inputSelectionLightSchemeColor?.index ?? -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setInputSelectionLightSchemeColor(null);
-                          } else {
-                            controller.setInputSelectionLightSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultDisabledLabel: 'primary',
+                  value: controller.inputSelectionLightSchemeColor,
+                  onChanged: controller.setInputSelectionLightSchemeColor,
                 ),
               ),
               // 2nd column light
@@ -788,43 +762,26 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
                   defaultLabel: baseDefaultLabelDarkColor,
-                  value: controller.inputCursorDarkSchemeColor?.index ?? -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setInputCursorDarkSchemeColor(null);
-                          } else {
-                            controller.setInputCursorDarkSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultDisabledLabel: 'primary',
+                  value: controller.inputCursorDarkSchemeColor,
+                  onChanged: controller.setInputCursorDarkSchemeColor,
                 ),
               ),
               // 2nd column dark
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
                   defaultLabel: baseDefaultHandleLabelDarkColor,
-                  value:
-                      controller.inputSelectionHandleDarkSchemeColor?.index ??
-                          -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setInputSelectionHandleDarkSchemeColor(null);
-                          } else {
-                            controller.setInputSelectionHandleDarkSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultDisabledLabel: 'primary',
+                  value: controller.inputSelectionHandleDarkSchemeColor,
+                  onChanged: controller.setInputSelectionHandleDarkSchemeColor,
                 ),
               ),
             ],
@@ -834,21 +791,14 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Selection'),
                   defaultLabel: baseDefaultLabelDarkColor,
-                  value: controller.inputSelectionDarkSchemeColor?.index ?? -1,
-                  onChanged: enableControl
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setInputSelectionDarkSchemeColor(null);
-                          } else {
-                            controller.setInputSelectionDarkSchemeColor(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultDisabledLabel: 'primary',
+                  value: controller.inputSelectionDarkSchemeColor,
+                  onChanged: controller.setInputSelectionDarkSchemeColor,
                 ),
               ),
               // 2nd column dark
