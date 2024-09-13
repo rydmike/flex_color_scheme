@@ -26,7 +26,7 @@ class SurfaceColors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Size of the color presentation boxes
-    const double boxWidth = 150;
+    const double boxWidth = 135;
     const double boxHeight = 160;
 
     // Theme values...

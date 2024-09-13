@@ -22,7 +22,7 @@ class OnColors extends StatelessWidget {
     // last index in out list of color schemes.
 
     // Size of the color presentation boxes
-    const double boxWidth = 150;
+    const double boxWidth = 135;
     const double boxHeight = 160;
 
     // Theme values...
