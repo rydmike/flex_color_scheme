@@ -173,7 +173,8 @@ class IntroductionPanel extends StatelessWidget {
               'the value will change and show the default '
               'for the used mode. The Playground also shows what the default '
               'values are in Flutter SDK in both Material-3 and Material-2 '
-              'mode, when FlexColorScheme or its sub-themes are not being used.'),
+              'mode, when FlexColorScheme or its sub-themes are not '
+              'being used.'),
         ),
         ListTile(
           subtitle: const Text(
