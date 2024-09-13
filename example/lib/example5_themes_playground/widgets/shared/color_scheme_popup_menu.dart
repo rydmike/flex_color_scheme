@@ -209,6 +209,7 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
         defaultDisabledLabelDark ??
         defaultDisabledLabel ??
         defaultLabelDark ??
+        defaultLabelM2 ??
         usedLabel;
 
     final String resolvedDisabledLabel = useMaterial3
