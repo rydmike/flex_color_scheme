@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 12, 2024**
+**Sep 14, 2024**
 
 ### SUMMARY
 
@@ -374,6 +374,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - The staggered grid view was originally included in the Playground for its "example 5" tutorial intent. It was used to demonstrate how the same widget panels could be used in a completely different app layout, for Flutter tutorial purposes. The UI was not so brilliant and way to heavy to use on web builds, at least if you opened up all panels. 
     - Did anybody use the staggered grid layout anyway? Let me know if you miss it. Just so I know, but it is not coming back :)
 - No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is **ON**.
+- The **Introduction** panel's content was updated.
 - As of version 8, the Playground now also defaults `useTextTheme` to null. This makes Material-2 and Material-3 mode use their respective mode-based typography by default. If you still make a Material-2 app, prefer using Material-3 typography and set it to `true`, like the Playground did before. Material-3 typography is much nicer than Material-2 typography. This is not a breaking API change, just a change in the default value used when you rest the Playground to its default values. Turn it **ON** in **TextTheme** settings, to get the same config as you did with a reset before. If you use Material-3, this Playground settings change has no impact on your theme result.
 - Updated the presentation of `Switch`, `Checkbox`and `Radio` on their settings panel.
 - Changed the name of the "Theme colors" settings panel to **Input Colors**. 
