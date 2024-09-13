@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -80,23 +79,14 @@ class PopupMenuButtonSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenu(
+              child: ColorSchemePopupMenuNew(
+                enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
-                defaultLabel: useMaterial3
-                    ? 'default (surfaceContainer)'
-                    : 'default (surface)',
-                value: controller.popupMenuSchemeColor?.index ?? -1,
-                onChanged: enableControl
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setPopupMenuSchemeColor(null);
-                        } else {
-                          controller.setPopupMenuSchemeColor(
-                              SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
+                defaultLabel: 'surfaceContainer',
+                defaultLabelM2: 'surface',
+                value: controller.popupMenuSchemeColor,
+                onChanged: controller.setPopupMenuSchemeColor,
               ),
             ),
             Expanded(
