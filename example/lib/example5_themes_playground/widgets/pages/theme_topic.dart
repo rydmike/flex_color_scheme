@@ -401,14 +401,15 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
   ),
   ThemeTopic(
     group: TopicGroup.inputs,
-    heading: 'DropdownMenu, MenuAnchor and MenuBar',
+    heading: 'Menus',
     buttonLabel: 'Menus',
     icon: Icons.segment,
-    info: 'Menus display a list of choices on a temporary surface.\n'
+    info: 'The DropdownMenu, MenuAnchor and MenuBar display '
+        'a list of choices on a temporary surface.\n'
         '\n'
-        'These menu components are new Material-3 design widgets in Flutter, '
-        'when applicable, prefer using them over other similar '
-        'legacy widgets.\n',
+        'These menu components are newer Material-3 design components in '
+        'Flutter. When applicable, prefer using them over other similar '
+        'legacy Material-2 components.\n',
   ),
   ThemeTopic(
     group: TopicGroup.bars,
