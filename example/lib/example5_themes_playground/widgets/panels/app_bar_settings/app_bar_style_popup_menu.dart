@@ -134,7 +134,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
       case FlexAppBarStyle.scaffoldBackground:
         return 'scaffoldBackground${isBlended ? ',\nwith blend' : ''}';
       case FlexAppBarStyle.custom:
-        return 'Custom\n(tertiary in this app)';
+        return 'Custom';
       case null:
         {
           if (useMaterial3) {
@@ -207,7 +207,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
                         isLight,
                         useMaterial3,
                       ),
-                defaultOption: i >= FlexAppBarStyle.values.length,
+                defaultOption: i == 0,
               ),
               title: i == 0
                   // If first position use default label.
