@@ -31,6 +31,12 @@ class IntroductionPanel extends StatelessWidget {
     path: 'known_issues',
   );
 
+  static final Uri _fcsDocsPlaygroundHistory = Uri(
+    scheme: 'https',
+    host: 'docs.flexcolorscheme.com',
+    path: 'playground_history',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -52,6 +58,22 @@ class IntroductionPanel extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
+        // Add more general info about the app here.
+        // What it the Themes Playground?
+        const ListTile(
+          subtitle: Text(
+            'Welcome to the FlexColorScheme Themes Playground. This is a '
+            'tool to help you design and experiment with themes for your '
+            'Flutter MaterialApp based applications. It is built using '
+            "'FlexColorScheme, a package that extends Flutter's theming "
+            'capabilities.\n'
+            '\n'
+            'With the Playground, you can interactively design your theme '
+            'and see the changes in real-time. The Playground is a '
+            'companion to the FlexColorScheme package, which you can use '
+            'to apply the themes you design here to your Flutter MaterialApp.',
+          ),
+        ),
         Padding(
           padding: listTilePadding,
           child: RichText(
@@ -77,10 +99,10 @@ class IntroductionPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' using Themes Playground, give it a read. It not '
-                      "'only explains this application and FlexColorScheme's "
-                      'API with tutorials, examples and an API guide, it also '
-                      'contains general Flutter theming guidance and advice.',
+                  text: ' the Themes Playground, give it a go. It also '
+                      'explains FlexColorScheme with tutorials, examples and '
+                      'an API guide. Additionally it also contains general '
+                      'Flutter theming guidance and advice.',
                 ),
               ],
             ),
@@ -133,11 +155,13 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const Divider(),
         const ListTile(
-          title: Text('FlexColorScheme theming'),
-          subtitle: Text('You can turn OFF FlexColorScheme to see what a '
-              'theme looks like when using the vanilla Flutter '
-              'ThemeData factory, using the same ColorScheme '
-              'as shown when FlexColorScheme is active.'),
+          title: Text('FlexColorScheme Theming'),
+          subtitle: Text(
+            'You can turn OFF FlexColorScheme to see what a '
+            'theme looks like when using the vanilla Flutter '
+            'ThemeData factory, using the same ColorScheme '
+            'as shown when FlexColorScheme is active.',
+          ),
         ),
         SwitchListTile(
           subtitle: const Text(
@@ -166,22 +190,25 @@ class IntroductionPanel extends StatelessWidget {
           ),
         ),
         const ListTile(
-          subtitle: Text('Like Flutter, FlexColorScheme uses different '
-              'theming defaults for properties in Material-3 and Material-2 '
-              'mode. If a value has not been set, the Playground will show '
-              'you what the default value is. When you toggle the mode, '
-              'the value will change and show the default '
-              'for the used mode. The Playground also shows what the default '
-              'values are in Flutter SDK in both Material-3 and Material-2 '
-              'mode, when FlexColorScheme or its sub-themes are not '
-              'being used.'),
+          subtitle: Text(
+            'Like Flutter, FlexColorScheme uses different '
+            'theming defaults for properties in Material-3 and Material-2 '
+            'mode. If a value has not been set, the Playground will show '
+            'you what the default value is. When you toggle the mode, '
+            'the value will change and show the default '
+            'for the used mode. The Playground also shows what the default '
+            'values are in Flutter SDK in both Material-3 and Material-2 '
+            'mode, when FlexColorScheme or its sub-themes are not '
+            'being used.',
+          ),
         ),
         ListTile(
           subtitle: const Text(
-              'Want to use the FlexColorScheme theme you configured here in '
-              'your Flutter app? Then Copy the setup code, paste it into your '
-              'Flutter app, import FlexColorScheme and your theme is done. '
-              'What you see in the Themes Playground is what you get.'),
+            'Want to use the FlexColorScheme theme you configured here in '
+            'your Flutter app? Then Copy the setup code, paste it into your '
+            'Flutter app, import FlexColorScheme and your theme is done. '
+            'What you see in the Themes Playground is what you get.',
+          ),
           trailing: FilledButton(
             onPressed: controller.useFlexColorScheme
                 ? () async {
@@ -198,38 +225,44 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const Divider(),
         SwitchListTile(
-          title: const Text('Material-3 design'),
+          title: const Text('Material-3 Design'),
           subtitle: const Text(
               'Flutter SDK and FlexColorScheme use Material-3 design '
-              'styled components by default.'),
+              'styled components by default. You can still turn it OFF '
+              'and use Material-2 design, but it is not recommended.'),
           value: controller.useMaterial3,
           onChanged: controller.setUseMaterial3,
         ),
         const ListTile(
-          title: Text('Material-2 will be deprecated'),
+          title: Text('Material-2 Deprecation?'),
           subtitle: Text(
-              'Legacy Material-2 support is still supported in Flutter 3.24 '
-              'and FCS V8, but it will eventually be deprecated and '
-              'removed from the Flutter SDK code-base. If you still use '
-              'Material-2, you should migrate to run your Flutter app '
-              'in Material-3 mode. '
-              'If you prefer the Material-2 style, using FlexColorScheme '
-              'and the Themes Playground, you can make a theme that is '
-              'based on Material-3, but looks very close to Material-2. There '
-              'is a premade design to demonstrate this in the '
-              'Playground. The Material-2 design is probably not something '
-              'to strive for anymore, but this demonstrates the flexibility '
-              "of Material-3 design's theming in Flutter, and the powerful "
-              'theming features available in the Themes Playground.'),
+            'Legacy Material-2 support is still supported in Flutter 3.24 '
+            'and FCS V8, but will be deprecated and eventually '
+            'removed from the Flutter SDK and FCS code-base. If you still use '
+            'Material-2, you should migrate to your Flutter app to use '
+            'Material-3 mode.\n'
+            '\n'
+            'If you prefer the Material-2 style, then with FlexColorScheme '
+            'and the Themes Playground you can make a theme that is '
+            'based on Material-3, but looks very close to Material-2. There '
+            'is a premade design to demonstrate this in the '
+            'Playground. The Material-2 design is perhaps not something '
+            'to strive for anymore, but this demonstrates the flexibility '
+            "of Material-3 design's theming in Flutter, and the powerful "
+            'theming features available in the Themes Playground.',
+          ),
         ),
+        const Divider(),
         const ListTile(
-          title: Text('Known issues'),
-          subtitle: Text('There are many known issues and theming '
-              'limitations in Flutter. In the Playground, you will find '
-              'information about the most common ones and limitations '
-              "presented next to each component's theming settings. "
-              'The issues are presented in an info expand like the one shown '
-              'below. You can view it by clicking on the small info icon.'),
+          title: Text('Flutter Theming Issues'),
+          subtitle: Text(
+            'There are many known issues and theming '
+            'limitations in Flutter. In the Themes Playground, you will '
+            'find information about common known ones and theming limitations, '
+            "presented next to each component's theme settings. "
+            'The issues are presented in an info expand, like the one shown '
+            'below. You can view it by clicking on the small info icon.',
+          ),
         ),
         ListTileReveal(
           dense: true,
@@ -240,10 +273,10 @@ class IntroductionPanel extends StatelessWidget {
                 TextSpan(
                   style: spanSmallTextStyle,
                   text: 'Info about known theming issues in Flutter are '
-                      'presented in component theming settings in this style. '
+                      'presented in component theme settings in this style. '
                       'You can also read more about Flutter '
                       'theming related issues in the FlexColorScheme docs. '
-                      'Key Flutter theming issues are ',
+                      'Important Flutter theming issues are ',
                 ),
                 LinkTextSpan(
                   style: linkSmallStyle,
@@ -253,6 +286,58 @@ class IntroductionPanel extends StatelessWidget {
                 TextSpan(
                   style: spanSmallTextStyle,
                   text: '.\n',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(),
+        const ListTile(
+          title: Text('Disclaimer'),
+          subtitle: Text(
+            'The tools FlexColorScheme and Themes Playground are provided as '
+            'is and no guarantees are made about their correctness, '
+            'reliability or suitability for any purpose. The tools are '
+            'provided for free and are open-source. They are developed as a '
+            'hobby-side-project, corrections and new features are provided as '
+            'time permits at best effort.\n'
+            '\n'
+            'FlexColorScheme and Themes Playground are not '
+            'official Google products and are not are not affiliated with '
+            'the Flutter or Material teams at Google.\n'
+            '\n'
+            'The Playground is provided as a convenience to help you design '
+            'themes for your Flutter applications using the FlexColorScheme '
+            'package. The Themes Playground was originally only designed to '
+            'be the last step in the FlexColorScheme tutorial, provided as '
+            'example-5. The Playground source is still provided as example-5 '
+            'in the FlexColorScheme repo. Over time the Playground grew into '
+            'more and became an interactive API configuration tool for '
+            'FlexColorScheme.',
+          ),
+        ),
+        Padding(
+          padding: listTilePadding,
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: "Due the the Playground's original intent and purpose "
+                      'it has a simple architecture that is not well suited to '
+                      'be developed into a direction that can provide all the '
+                      'features users are currently asking for. You can read '
+                      'more about the history and future of the Playground in '
+                      'the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsDocsPlaygroundHistory,
+                  text: 'documentation site here',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.',
                 ),
               ],
             ),
