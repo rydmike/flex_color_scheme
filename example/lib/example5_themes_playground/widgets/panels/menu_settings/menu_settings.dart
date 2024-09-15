@@ -37,21 +37,23 @@ class MenuSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
-    final String menuBarDefault = controller.menuSchemeColor == null
-        ? 'default (surfaceContainer)'
-        // ignore: lines_longer_than_80_chars
-        : 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name})';
+    final String menuDefault = controller.menuSchemeColor == null
+        ? 'surfaceContainer'
+        : SchemeColor.values[controller.menuSchemeColor!.index].name;
 
-    final String menuItemDefault = controller.menuSchemeColor == null
-        ? 'default (surfaceContainer)'
-        // ignore: lines_longer_than_80_chars
-        : 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name})';
-
-    // TODO(rydmike): FIX, this labels are not working correctly. Like FAB case.
-    final String menuOnItemDefault = controller.menuSchemeColor == null
-        ? 'default (onSurface)'
-        // ignore: lines_longer_than_80_chars
-        : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!).index].name})';
+    final String menuOnDefault = controller.menuSchemeColor == null &&
+            controller.menuItemBackgroundSchemeColor == null
+        ? 'onSurface'
+        : controller.menuItemBackgroundSchemeColor != null
+            ? SchemeColor
+                .values[FlexSubThemes.onSchemeColor(
+                        controller.menuItemBackgroundSchemeColor!)
+                    .index]
+                .name
+            : SchemeColor
+                .values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!)
+                    .index]
+                .name;
 
     final String overlayStyle = controller.interactionEffects
         ? ' with tinted overlay'
@@ -59,25 +61,34 @@ class MenuSettings extends StatelessWidget {
 
     final String menuIndicatorDefault = controller.menuSchemeColor == null &&
             controller.menuItemBackgroundSchemeColor == null
-        ? 'default (surface$overlayStyle)'
+        ? 'onSurface$overlayStyle'
         : controller.menuItemBackgroundSchemeColor == null
             // ignore: lines_longer_than_80_chars
-            ? 'default (${SchemeColor.values[controller.menuSchemeColor!.index].name}$overlayStyle)'
+            ? '${SchemeColor.values[controller.menuSchemeColor!.index].name}$overlayStyle'
             // ignore: lines_longer_than_80_chars
-            : 'default (${SchemeColor.values[controller.menuItemBackgroundSchemeColor!.index].name}$overlayStyle)';
+            : '${SchemeColor.values[controller.menuItemBackgroundSchemeColor!.index].name}$overlayStyle';
 
     final String menuOnIndicatorDefault = controller.menuSchemeColor == null &&
             controller.menuItemBackgroundSchemeColor == null &&
             controller.menuIndicatorBackgroundSchemeColor == null
-        ? 'default (onSurface)'
+        ? 'onSurface'
         : controller.menuIndicatorBackgroundSchemeColor == null
             ? controller.menuItemBackgroundSchemeColor == null
-                // ignore: lines_longer_than_80_chars
-                ? 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!).index].name})'
-                // ignore: lines_longer_than_80_chars
-                : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuItemBackgroundSchemeColor!).index].name})'
-            // ignore: lines_longer_than_80_chars
-            : 'default (${SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuIndicatorBackgroundSchemeColor!).index].name})';
+                ? SchemeColor
+                    .values[
+                        FlexSubThemes.onSchemeColor(controller.menuSchemeColor!)
+                            .index]
+                    .name
+                : SchemeColor
+                    .values[FlexSubThemes.onSchemeColor(
+                            controller.menuItemBackgroundSchemeColor!)
+                        .index]
+                    .name
+            : SchemeColor
+                .values[FlexSubThemes.onSchemeColor(
+                        controller.menuIndicatorBackgroundSchemeColor!)
+                    .index]
+                .name;
 
     // Paddings for the two column control layouts.
     const EdgeInsetsDirectional paddingStartColumn =
@@ -97,28 +108,19 @@ class MenuSettings extends StatelessWidget {
           subtitleReveal:
               Text('Menu container theming properties are shared by '
                   'DropdownMenu, MenuAnchor and MenuBar. You can see applied '
-                  'container styles when you open test menus above.\n'),
+                  'container styles when you open test menus.\n'),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenu(
+              child: ColorSchemePopupMenuNew(
+                enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Color'),
-                defaultLabel: 'default (surfaceContainer)',
-                value: controller.menuSchemeColor?.index ?? -1,
-                onChanged: controller.useSubThemes &&
-                        controller.useFlexColorScheme
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setMenuSchemeColor(null);
-                        } else {
-                          controller
-                              .setMenuSchemeColor(SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
+                defaultLabel: 'surfaceContainer',
+                value: controller.menuSchemeColor,
+                onChanged: controller.setMenuSchemeColor,
               ),
             ),
             Expanded(
@@ -279,39 +281,25 @@ class MenuSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenu(
+              child: ColorSchemePopupMenuNew(
+                enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
-                defaultLabel: menuItemDefault,
-                value: controller.menuItemBackgroundSchemeColor?.index ?? -1,
-                onChanged: enableControl
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setMenuItemBackgroundSchemeColor(null);
-                        } else {
-                          controller.setMenuItemBackgroundSchemeColor(
-                              SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
+                defaultLabel: menuDefault,
+                defaultDisabledLabel: 'surfaceContainer',
+                value: controller.menuItemBackgroundSchemeColor,
+                onChanged: controller.setMenuItemBackgroundSchemeColor,
               ),
             ),
             Expanded(
-              child: ColorSchemePopupMenu(
+              child: ColorSchemePopupMenuNew(
+                enabled: enableControl,
                 contentPadding: paddingEndColumn,
                 title: const Text('Foreground color'),
-                defaultLabel: menuOnItemDefault,
-                value: controller.menuItemForegroundSchemeColor?.index ?? -1,
-                onChanged: enableControl
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setMenuItemForegroundSchemeColor(null);
-                        } else {
-                          controller.setMenuItemForegroundSchemeColor(
-                              SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
+                defaultLabel: menuOnDefault,
+                defaultDisabledLabel: 'onSurface',
+                value: controller.menuItemForegroundSchemeColor,
+                onChanged: controller.setMenuItemForegroundSchemeColor,
               ),
             ),
           ],
@@ -320,43 +308,25 @@ class MenuSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenu(
+              child: ColorSchemePopupMenuNew(
+                enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Highlighted background'),
                 defaultLabel: menuIndicatorDefault,
-                value:
-                    controller.menuIndicatorBackgroundSchemeColor?.index ?? -1,
-                onChanged: enableControl
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller
-                              .setMenuIndicatorBackgroundSchemeColor(null);
-                        } else {
-                          controller.setMenuIndicatorBackgroundSchemeColor(
-                              SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
+                defaultDisabledLabel: 'onSurface$overlayStyle',
+                value: controller.menuIndicatorBackgroundSchemeColor,
+                onChanged: controller.setMenuIndicatorBackgroundSchemeColor,
               ),
             ),
             Expanded(
-              child: ColorSchemePopupMenu(
+              child: ColorSchemePopupMenuNew(
+                enabled: enableControl,
                 contentPadding: paddingEndColumn,
                 title: const Text('Highlighted foreground'),
                 defaultLabel: menuOnIndicatorDefault,
-                value:
-                    controller.menuIndicatorForegroundSchemeColor?.index ?? -1,
-                onChanged: enableControl
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller
-                              .setMenuIndicatorForegroundSchemeColor(null);
-                        } else {
-                          controller.setMenuIndicatorForegroundSchemeColor(
-                              SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
+                defaultDisabledLabel: 'onSurface',
+                value: controller.menuIndicatorForegroundSchemeColor,
+                onChanged: controller.setMenuIndicatorForegroundSchemeColor,
               ),
             ),
           ],
@@ -480,22 +450,14 @@ class MenuSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenu(
+              child: ColorSchemePopupMenuNew(
+                enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
-                defaultLabel: menuBarDefault,
-                value: controller.menuBarBackgroundSchemeColor?.index ?? -1,
-                onChanged: controller.useSubThemes &&
-                        controller.useFlexColorScheme
-                    ? (int index) {
-                        if (index < 0 || index >= SchemeColor.values.length) {
-                          controller.setMenuBarBackgroundSchemeColor(null);
-                        } else {
-                          controller.setMenuBarBackgroundSchemeColor(
-                              SchemeColor.values[index]);
-                        }
-                      }
-                    : null,
+                defaultLabel: menuDefault,
+                defaultDisabledLabel: 'surfaceContainer',
+                value: controller.menuBarBackgroundSchemeColor,
+                onChanged: controller.setMenuBarBackgroundSchemeColor,
               ),
             ),
             Expanded(
