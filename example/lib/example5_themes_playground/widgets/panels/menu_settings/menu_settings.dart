@@ -272,10 +272,12 @@ class MenuSettings extends StatelessWidget {
         //
         const ListTileReveal(
           title: Text('Menu items'),
-          subtitleReveal: Text('Menu item style is used by SubmenuButton and '
-              'MenuItemButton, that are used in DropdownMenu, MenuAnchor and '
-              'MenuBar. You can see the menu item theme styles applied '
-              'when you open the test menus.\n'),
+          subtitleReveal: Text(
+            'Menu item style is used by SubmenuButton and '
+            'MenuItemButton, that are used in DropdownMenu, MenuAnchor and '
+            'MenuBar. You can see the menu item theme styles applied '
+            'when you open the test menus.\n',
+          ),
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,

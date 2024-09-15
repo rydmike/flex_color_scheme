@@ -248,7 +248,11 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
         tooltip: '',
         padding: EdgeInsets.zero,
         onSelected: (int index) {
-          onChanged?.call(index == 0 ? null : SchemeColor.values[index - 1]);
+          // TODO(rydmike): Remove debugPrints when done testing.
+          debugPrint('ColorSchemePopupMenuNew index: $index');
+          debugPrint('ColorSchemePopupMenuNew enabled: $enabled');
+          onChanged?.call(
+              index == 0 || !enabled ? null : SchemeColor.values[index - 1]);
         },
         enabled: enabled,
         itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[

@@ -79,6 +79,9 @@ class AppBarSettings extends StatelessWidget {
             child: AppBarShowcase(),
           ),
         ),
+        // TODO(rydmike): Issue, does not get enabled when turning off subthemes
+        //  if sub-themes had and background color selected. FIX!!
+        // TODO(rydmike): We get wrong contrast color for prim style! FIX!
         if (isLight)
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +90,6 @@ class AppBarSettings extends StatelessWidget {
                 child: AppBarStylePopupMenu(
                   contentPadding: paddingStartColumn,
                   title: const Text('Light AppBarStyle'),
-                  // defaultLabel: 'default',
                   enabled: controller.useFlexColorScheme &&
                       controller.appBarBackgroundSchemeColorLight == null,
                   value: controller.appBarStyleLight,
@@ -172,25 +174,56 @@ class AppBarSettings extends StatelessWidget {
         const ListTileReveal(
           dense: true,
           title: Text('AppBar color'),
-          subtitleReveal: Text('With component themes enabled you can select a '
-              'ColorScheme based color for the AppBar background color.\n'
-              '\n'
-              'Using AppBarStyle is an older API that does not require '
-              'activating '
-              'FlexColorScheme component themes. Using component themes '
-              'offers more choices. '
-              'Selecting a background color, overrides the older used '
-              'AppBarStyle property. Set it back '
-              'to default to use AppBarStyle again.\n'
-              '\n'
-              'Using AppBarStyle uniquely '
-              'offers Scaffold background color as AppBar color, which when '
-              'using surface blends can be different from ColorScheme '
-              'surface colors.\n'),
+          subtitleReveal: Text(
+            'With component themes enabled you can select a '
+            'ColorScheme based color for the AppBar background color.\n'
+            '\n'
+            'Using AppBarStyle is an older API that does not require '
+            'activating '
+            'FlexColorScheme component themes. Using component themes '
+            'offers more choices. '
+            'Selecting a background color, overrides the older used '
+            'AppBarStyle property. Set it back '
+            'to default to use AppBarStyle again.\n'
+            '\n'
+            'Using AppBarStyle uniquely '
+            'offers Scaffold background color as AppBar color, which when '
+            'using surface blends can be different from ColorScheme '
+            'surface colors.\n',
+          ),
         ),
+        // TODO(rydmike): Incomplete migration to ColorSchemePopupMenuNew. Fix!
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            if (isLight)
+              Expanded(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Background color'),
+                  defaultLabel: 'AppBarStyle',
+                  defaultDisabledLabel:
+                      controller.useFlexColorScheme ? 'AppBarStyle' : 'surface',
+                  defaultDisabledLabelM2:
+                      controller.useFlexColorScheme ? 'AppBarStyle' : 'primary',
+                  value: controller.appBarBackgroundSchemeColorLight,
+                  onChanged: controller.setAppBarBackgroundSchemeColorLight,
+                ),
+              )
+            else
+              Expanded(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Background color'),
+                  defaultLabel: 'AppBarStyle',
+                  defaultDisabledLabel:
+                      controller.useFlexColorScheme ? 'AppBarStyle' : 'surface',
+                  value: controller.appBarBackgroundSchemeColorDark,
+                  onChanged: controller.setAppBarBackgroundSchemeColorDark,
+                ),
+              ),
             if (isLight)
               Expanded(
                 child: ColorSchemePopupMenu(
