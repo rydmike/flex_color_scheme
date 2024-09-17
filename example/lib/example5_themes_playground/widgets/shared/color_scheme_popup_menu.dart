@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 import 'color_scheme_box.dart';
 
-// TODO(rydmike): Refactor to be more like EnumPopupMenu.
-
 /// Widget used to select ColorScheme based colors via a SchemeColor enum.
 ///
 /// Uses null [value] of [SchemeColor] to represent and select
@@ -170,7 +168,7 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
   ///
   /// If false there is no such wrapping, the default label is used as is.
   ///
-  /// Default to true.
+  /// Defaults to true.
   final bool wrapWithDefaultLabel;
 
   @override
@@ -248,11 +246,7 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
         tooltip: '',
         padding: EdgeInsets.zero,
         onSelected: (int index) {
-          // TODO(rydmike): Remove debugPrints when done testing.
-          debugPrint('ColorSchemePopupMenuNew index: $index');
-          debugPrint('ColorSchemePopupMenuNew enabled: $enabled');
-          onChanged?.call(
-              index == 0 || !enabled ? null : SchemeColor.values[index - 1]);
+          onChanged?.call(index == 0 ? null : SchemeColor.values[index - 1]);
         },
         enabled: enabled,
         itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
