@@ -122,13 +122,14 @@ class AppBarStylePopupMenu extends StatelessWidget {
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return isLight ? 'primary\n(M2 default)' : 'primary\n(M2 default)';
+        return 'primary\n(M2 light default)';
       case FlexAppBarStyle.material:
         return isLight
-            ? 'white surface\n(M2 spec)'
-            : 'dark grey #121212\n(M2 spec)';
+            ? 'white\n(M2 light surface spec)'
+            : 'dark grey #121212\n(M2 dark spec  default)';
       case FlexAppBarStyle.surface:
-        return 'surface${isBlended ? ', with blend\n' : ' '}(M3 spec)';
+        return 'surface${isBlended ? ', with blend\n' : ' '}(M3 spec '
+            'and default)';
       case FlexAppBarStyle.background:
         return 'surfaceContainerLow${isBlended ? ',\nwith blend' : ''}';
       case FlexAppBarStyle.scaffoldBackground:
