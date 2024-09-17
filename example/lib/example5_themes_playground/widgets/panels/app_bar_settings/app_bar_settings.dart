@@ -51,6 +51,55 @@ class AppBarSettings extends StatelessWidget {
     final EdgeInsetsDirectional paddingEndColumn =
         EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
+    // TODO(rydmike): Still have issues and wrong results with default labels!
+    final String onAppBarStyleLight = switch (controller.appBarStyleLight) {
+      FlexAppBarStyle.primary => 'onPrimary',
+      FlexAppBarStyle.material ||
+      FlexAppBarStyle.surface ||
+      FlexAppBarStyle.background ||
+      FlexAppBarStyle.scaffoldBackground =>
+        'onSurface',
+      FlexAppBarStyle.custom => 'surface',
+      _ => useMaterial3 ? 'onSurface' : 'onPrimary',
+    };
+    final String onAppBarStyleDark = switch (controller.appBarStyleDark) {
+      FlexAppBarStyle.primary => 'onPrimary',
+      _ => 'onSurface',
+    };
+    final String leadingIconLight = switch (controller.appBarStyleLight) {
+      FlexAppBarStyle.primary => 'onPrimary',
+      FlexAppBarStyle.material ||
+      FlexAppBarStyle.surface ||
+      FlexAppBarStyle.background ||
+      FlexAppBarStyle.scaffoldBackground =>
+        'onSurface',
+      FlexAppBarStyle.custom => 'surface',
+      _ => useMaterial3 ? 'onSurface' : 'White',
+    };
+    final String actionIconLight = switch (controller.appBarStyleLight) {
+      FlexAppBarStyle.primary => 'onPrimary',
+      FlexAppBarStyle.material ||
+      FlexAppBarStyle.surface ||
+      FlexAppBarStyle.background ||
+      FlexAppBarStyle.scaffoldBackground =>
+        useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
+      FlexAppBarStyle.custom => 'surface',
+      _ => useMaterial3 ? 'onSurfaceVariant' : 'White',
+    };
+    final String leadingIconDark = switch (controller.appBarStyleDark) {
+      FlexAppBarStyle.primary => 'onPrimary',
+      FlexAppBarStyle.material ||
+      FlexAppBarStyle.surface ||
+      FlexAppBarStyle.background ||
+      FlexAppBarStyle.scaffoldBackground =>
+        useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
+      _ => useMaterial3 ? 'onSurface' : 'White',
+    };
+    final String actionIconDark = switch (controller.appBarStyleDark) {
+      FlexAppBarStyle.primary => 'onPrimary',
+      _ => useMaterial3 ? 'onSurfaceVariant' : 'White',
+    };
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -79,9 +128,6 @@ class AppBarSettings extends StatelessWidget {
             child: AppBarShowcase(),
           ),
         ),
-        // TODO(rydmike): Issue, does not get enabled when turning off subthemes
-        //  if sub-themes had and background color selected. FIX!!
-        // TODO(rydmike): We get wrong contrast color for prim style! FIX!
         if (isLight)
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +137,8 @@ class AppBarSettings extends StatelessWidget {
                   contentPadding: paddingStartColumn,
                   title: const Text('Light AppBarStyle'),
                   enabled: controller.useFlexColorScheme &&
-                      controller.appBarBackgroundSchemeColorLight == null,
+                      (controller.appBarBackgroundSchemeColorLight == null ||
+                          !controller.useSubThemes),
                   value: controller.appBarStyleLight,
                   onChanged: controller.setAppBarStyleLight,
                   // To access the custom color we defined for AppBars in this
@@ -141,7 +188,8 @@ class AppBarSettings extends StatelessWidget {
                   contentPadding: paddingStartColumn,
                   title: const Text('Dark AppBarStyle'),
                   enabled: controller.useFlexColorScheme &&
-                      controller.appBarBackgroundSchemeColorDark == null,
+                      (controller.appBarBackgroundSchemeColorDark == null ||
+                          !controller.useSubThemes),
                   value: controller.appBarStyleDark,
                   onChanged: controller.setAppBarStyleDark,
                   customAppBarColor:
@@ -186,13 +234,12 @@ class AppBarSettings extends StatelessWidget {
             'AppBarStyle property. Set it back '
             'to default to use AppBarStyle again.\n'
             '\n'
-            'Using AppBarStyle uniquely '
-            'offers Scaffold background color as AppBar color, which when '
-            'using surface blends can be different from ColorScheme '
-            'surface colors.\n',
+            'Using AppBarStyle has a nice extra feature, it offers using '
+            'the THemeDat.scaffoldBackgroundColor as AppBar background color, '
+            'which when using surface blends, can be different from any '
+            'ColorScheme surface based colors.\n',
           ),
         ),
-        // TODO(rydmike): Incomplete migration to ColorSchemePopupMenuNew. Fix!
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -226,100 +273,47 @@ class AppBarSettings extends StatelessWidget {
               ),
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
-                  title: const Text('Background color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : useMaterial3
-                          ? 'default (surface)'
-                          : 'default (primary)',
-                  value:
-                      controller.appBarBackgroundSchemeColorLight?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setAppBarBackgroundSchemeColorLight(null);
-                          } else {
-                            controller.setAppBarBackgroundSchemeColorLight(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Title color'),
+                  defaultLabel: controller.appBarBackgroundSchemeColorLight ==
+                          null
+                      ? onAppBarStyleLight
+                      : SchemeColor
+                          .values[FlexSubThemes.onSchemeColor(
+                                  controller.appBarBackgroundSchemeColorLight!)
+                              .index]
+                          .name,
+                  defaultDisabledLabel: controller.useFlexColorScheme
+                      ? onAppBarStyleLight
+                      : 'onSurface',
+                  defaultDisabledLabelM2: controller.useFlexColorScheme
+                      ? onAppBarStyleLight
+                      : 'onPrimary',
+                  value: controller.appBarForegroundSchemeColorLight,
+                  onChanged: controller.setAppBarForegroundSchemeColorLight,
                 ),
               )
             else
               Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
-                  title: const Text('Background color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : 'default (surface)',
-                  value:
-                      controller.appBarBackgroundSchemeColorDark?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setAppBarBackgroundSchemeColorDark(null);
-                          } else {
-                            controller.setAppBarBackgroundSchemeColorDark(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
-                ),
-              ),
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Title color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : useMaterial3
-                          ? 'default (surface)'
-                          : 'default (primary)',
-                  value:
-                      controller.appBarForegroundSchemeColorLight?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setAppBarForegroundSchemeColorLight(null);
-                          } else {
-                            controller.setAppBarForegroundSchemeColorLight(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
-                ),
-              )
-            else
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: paddingEndColumn,
-                  title: const Text('Title color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : 'default (surface)',
-                  value:
-                      controller.appBarForegroundSchemeColorDark?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setAppBarForegroundSchemeColorDark(null);
-                          } else {
-                            controller.setAppBarForegroundSchemeColorDark(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultLabel: controller.appBarBackgroundSchemeColorDark ==
+                          null
+                      ? onAppBarStyleDark
+                      : SchemeColor
+                          .values[FlexSubThemes.onSchemeColor(
+                                  controller.appBarBackgroundSchemeColorDark!)
+                              .index]
+                          .name,
+                  defaultDisabledLabel: controller.useFlexColorScheme
+                      ? onAppBarStyleDark
+                      : 'onSurface',
+                  value: controller.appBarForegroundSchemeColorDark,
+                  onChanged: controller.setAppBarForegroundSchemeColorDark,
                 ),
               ),
           ],
@@ -329,98 +323,95 @@ class AppBarSettings extends StatelessWidget {
           children: <Widget>[
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Icon color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : useMaterial3
-                          ? 'default (surface)'
-                          : 'default (primary)',
-                  value: controller.appBarIconSchemeColorLight?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setAppBarIconSchemeColorLight(null);
-                          } else {
-                            controller.setAppBarIconSchemeColorLight(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultLabel: controller.appBarBackgroundSchemeColorLight ==
+                          null
+                      ? leadingIconLight
+                      : SchemeColor
+                          .values[FlexSubThemes.onSchemeColor(
+                                  controller.appBarBackgroundSchemeColorLight!)
+                              .index]
+                          .name,
+                  defaultDisabledLabel: controller.useFlexColorScheme
+                      ? leadingIconLight
+                      : 'onSurface',
+                  defaultDisabledLabelM2: controller.useFlexColorScheme
+                      ? leadingIconLight
+                      : 'White',
+                  value: controller.appBarIconSchemeColorLight,
+                  onChanged: controller.setAppBarIconSchemeColorLight,
                 ),
               )
             else
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Icon color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : 'default (surface)',
-                  value: controller.appBarIconSchemeColorDark?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller.setAppBarIconSchemeColorDark(null);
-                          } else {
-                            controller.setAppBarIconSchemeColorDark(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultLabel: controller.appBarBackgroundSchemeColorDark ==
+                          null
+                      ? leadingIconDark
+                      : SchemeColor
+                          .values[FlexSubThemes.onSchemeColor(
+                                  controller.appBarBackgroundSchemeColorDark!)
+                              .index]
+                          .name,
+                  defaultDisabledLabel: controller.useFlexColorScheme
+                      ? leadingIconDark
+                      : 'onSurface',
+                  defaultDisabledLabelM2:
+                      controller.useFlexColorScheme ? leadingIconDark : 'White',
+                  value: controller.appBarIconSchemeColorDark,
+                  onChanged: controller.setAppBarIconSchemeColorDark,
                 ),
               ),
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Actions icon color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : useMaterial3
-                          ? 'default (surface)'
-                          : 'default (primary)',
-                  value:
-                      controller.appBarActionsIconSchemeColorLight?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setAppBarActionsIconSchemeColorLight(null);
-                          } else {
-                            controller.setAppBarActionsIconSchemeColorLight(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  defaultLabel: controller.appBarBackgroundSchemeColorLight ==
+                          null
+                      ? actionIconLight
+                      : SchemeColor
+                          .values[FlexSubThemes.onSchemeColor(
+                                  controller.appBarBackgroundSchemeColorLight!)
+                              .index]
+                          .name,
+                  defaultDisabledLabel: controller.useFlexColorScheme
+                      ? actionIconLight
+                      : 'onSurfaceVariant',
+                  defaultDisabledLabelM2:
+                      controller.useFlexColorScheme ? actionIconLight : 'white',
+                  value: controller.appBarActionsIconSchemeColorLight,
+                  onChanged: controller.setAppBarActionsIconSchemeColorLight,
                 ),
               )
             else
               Expanded(
-                child: ColorSchemePopupMenu(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
                   contentPadding: paddingEndColumn,
-                  title: const Text('Title color'),
-                  defaultLabel: controller.useFlexColorScheme
-                      ? 'default (AppBarStyle)'
-                      : 'default (surface)',
-                  value:
-                      controller.appBarActionsIconSchemeColorDark?.index ?? -1,
-                  onChanged: controller.useSubThemes &&
-                          controller.useFlexColorScheme
-                      ? (int index) {
-                          if (index < 0 || index >= SchemeColor.values.length) {
-                            controller
-                                .setAppBarActionsIconSchemeColorDark(null);
-                          } else {
-                            controller.setAppBarActionsIconSchemeColorDark(
-                                SchemeColor.values[index]);
-                          }
-                        }
-                      : null,
+                  title: const Text('Actions icon color'),
+                  defaultLabel: controller.appBarBackgroundSchemeColorDark ==
+                          null
+                      ? actionIconDark
+                      : SchemeColor
+                          .values[FlexSubThemes.onSchemeColor(
+                                  controller.appBarBackgroundSchemeColorDark!)
+                              .index]
+                          .name,
+                  defaultDisabledLabel: controller.useFlexColorScheme
+                      ? actionIconDark
+                      : 'onSurfaceVariant',
+                  defaultDisabledLabelM2:
+                      controller.useFlexColorScheme ? actionIconDark : 'White',
+                  value: controller.appBarActionsIconSchemeColorDark,
+                  onChanged: controller.setAppBarActionsIconSchemeColorDark,
                 ),
               ),
           ],
