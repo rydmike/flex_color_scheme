@@ -20,8 +20,8 @@ class SurfaceColors extends StatelessWidget {
       ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(final Color color, final Color bg) =>
-      _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
+  static Color _onColor(final Color color) =>
+      _isLight(color) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -282,7 +282,7 @@ class SurfaceColors extends StatelessWidget {
                           key: ValueKey<String>('sur scaffoldBackgroundColor '
                               '${theme.scaffoldBackgroundColor}'),
                           color: theme.scaffoldBackgroundColor,
-                          textColor: colorScheme.onSurface,
+                          textColor: _onColor(theme.scaffoldBackgroundColor),
                           label: 'Scaffold\nbackground',
                           tone: tones.surfaceTone,
                           showTone: false,
@@ -328,8 +328,7 @@ class SurfaceColors extends StatelessWidget {
                           key: ValueKey<String>('sur surfaceTint '
                               '${colorScheme.surfaceTint}'),
                           color: colorScheme.surfaceTint,
-                          textColor: _onColor(
-                              colorScheme.surfaceTint, colorScheme.surface),
+                          textColor: _onColor(colorScheme.surfaceTint),
                           label: 'surfaceTint',
                           tone: tones.surfaceTintTone,
                           showTone: showTones,
