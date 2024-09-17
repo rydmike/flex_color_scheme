@@ -158,13 +158,7 @@ class ColorSchemeSettings extends StatelessWidget {
             'produced color schemes, but will be when Flutter upgrades to '
             'Material Color Utilities 0.12.0. You can opt in on using it '
             'already here, or decide to not use it, even after it becomes '
-            'a forced default in Flutter SDK.'
-            '\n'
-            'This feature is available in FCS for both MCU and FSS based '
-            'seed generated schemes, but its API implementation differs. '
-            'When enabled, you can check the code generated on MCU and FSS '
-            'scheme variants when using a generated ColorScheme in light mode, '
-            'to see the difference.\n ',
+            'a forced default in Flutter SDK.\n',
           ),
           value: controller.expressiveOnContainer,
           onChanged: controller.setExpressiveOnContainer,
@@ -172,15 +166,14 @@ class ColorSchemeSettings extends StatelessWidget {
         const Divider(height: 1),
         ListTileReveal(
           dense: true,
-          title: const Text('Additional tuning options for '
-              'FSS FlexTones scheme variants'),
-          subtitle: !controller.useKeyColors || _isFlutterScheme
-              ? const Text(
-                  'Use a FSS FlexTones variant to enable options below')
-              : const Text('Enable FlexTones modifiers to tune the result'),
+          title: !controller.useKeyColors || _isFlutterScheme
+              ? const Text('Additional adjustments available '
+                  'when FSS FlexTones scheme variants are used')
+              : const Text('Adjust the FSS FlexTones seed generation result'),
           subtitleReveal: !controller.useKeyColors || _isFlutterScheme
               ? null
-              : const Text('Settings are separate for light and dark mode, '
+              : const Text('FSS FlexTones adjustments are separate for light '
+                  'and dark mode, '
                   'except the higher contrast fixed and fixedDim option '
                   'that must be same so that fixed scheme colors in light and '
                   'dark mode remain "fixed" and identical.'),
@@ -221,9 +214,9 @@ class ColorSchemeSettings extends StatelessWidget {
                   subtitleReveal: const Text(
                     'Surface color uses tone 100 which is '
                     'always white. You can add this modifier to any seed '
-                    'generation strategy. Surface blends will still mix in '
-                    'blend color into surface, using selected blend strategy '
-                    'and level.\n',
+                    'generation strategy. Surface blends are applied after '
+                    'this and will still mix in the blend color into surface, '
+                    'using selected blend strategy and level.\n',
                   ),
                   value: controller.surfacesUseBWLight,
                   onChanged: controller.setSurfacesUseBWLight,
@@ -238,12 +231,12 @@ class ColorSchemeSettings extends StatelessWidget {
                 child: SwitchListTileReveal(
                   contentPadding: paddingStartColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
-                  title: const Text('B & W main onColors'),
+                  title: const Text('B&W main onColors'),
                   subtitleReveal: const Text(
                     'Main colors are primary, secondary, tertiary, '
                     'error, their container and fixed colors. Using black and '
-                    'white as onColors on the main colors may improve '
-                    'contrast, it also makes the theme less color '
+                    'white as contrast colors on the main colors may improve '
+                    'their contrast, it also makes them less color '
                     'expressive.\n',
                   ),
                   value: controller.onMainsUseBWLight,
@@ -254,11 +247,12 @@ class ColorSchemeSettings extends StatelessWidget {
                 child: SwitchListTileReveal(
                   contentPadding: paddingEndColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
-                  title: const Text('B & W surface onColors'),
+                  title: const Text('B&W surface onColors'),
                   subtitleReveal: const Text(
-                    'Surface onColors are onSurface, onSurfaceVariant and '
+                    'Surface on colors are onSurface, onSurfaceVariant and '
                     'onInverseSurface colors. Using black and white as '
-                    'onColors on all surfaces may improve contrast.\n',
+                    'contrast colors on all surfaces will improve '
+                    'the contrast.\n',
                   ),
                   value: controller.onSurfacesUseBWLight,
                   onChanged: controller.setOnSurfacesUseBWLight,
@@ -308,7 +302,7 @@ class ColorSchemeSettings extends StatelessWidget {
                 child: SwitchListTileReveal(
                   contentPadding: paddingStartColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
-                  title: const Text('B & W main onColors'),
+                  title: const Text('B&W main onColors'),
                   subtitleReveal: const Text(
                     'Main colors are primary, secondary, tertiary, '
                     'error, their container and fixed colors. Using black and '
@@ -324,7 +318,7 @@ class ColorSchemeSettings extends StatelessWidget {
                 child: SwitchListTileReveal(
                   contentPadding: paddingEndColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
-                  title: const Text('B & W surface onColors'),
+                  title: const Text('B&W surface onColors'),
                   subtitleReveal: const Text(
                     'Surface onColors are onSurface, onSurfaceVariant and '
                     'onInverseSurface colors. Using black and white as '
