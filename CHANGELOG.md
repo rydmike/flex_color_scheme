@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 15, 2024**
+**Sep 18, 2024**
 
 ### SUMMARY
 
@@ -71,7 +71,6 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 **TODO**
  
 - FIX: Default labels for AppBar and Fab colors
-- FIX: BUG!! AppBar contrast color with old AppBarStyle (incorrect with primary and custom!)
 - ADD: Chip changes to the changelog! See commit!
 - Add features for `Chip` theming.
   - Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
