@@ -75,17 +75,22 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         contentPadding: contentPadding,
         title: Text('$title ${FlexSchemeVariant.values[index].variantName}'),
         subtitleReveal: Text(
-          '$flexToneName scheme variant:\n\n'
+          '$flexToneName scheme variant. '
+          '${FlexSchemeVariant.values[index].description}.\n'
+          '\n'
           '${FlexSchemeVariant.values[index].configDetails}.\n'
           '\n'
-          'With FSS based FlexTones, you can configure which tone from '
+          'Here you can choose between the default Material-3 seed generation '
+          "Tonal Spot or Flutter/MCU's eight other DynamicSchemeVariants, "
+          'plus twelve pre-defined FSS FlexTones seed generation setups.\n'
+          '\n'
+          'TIP:\n'
+          'With the FlexTones "tones" API you can make your own '
+          'FlexTones configurations and configure which tone from '
           'generated palettes each color in the ColorScheme use. '
-          'Set limits on used CAM16 chroma values '
-          'for the three colors used as keys for primary, '
-          'secondary and tertiary TonalPalettes. '
-          'Here you can choose between the default Material-3 tone mapping, '
-          'plus eleven other pre-defined custom FlexTones setups. With '
-          'the API you can also make your own FlexTones configurations.\n',
+          'Set limits on used chroma values for all six seed colors used as '
+          'seed keys for primary, secondary, tertiary, error, neutral and '
+          'neutral variant tonal palettes.\n',
         ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
