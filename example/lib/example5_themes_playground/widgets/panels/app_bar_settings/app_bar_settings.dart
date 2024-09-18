@@ -31,6 +31,11 @@ class AppBarSettings extends StatelessWidget {
     host: 'github.com',
     path: 'flutter/flutter/issues/123943',
   );
+  static final Uri _fcsFlutterIssue131042 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/131042',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -625,7 +630,22 @@ class AppBarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', this is fixed in Flutter 3.13 and later.\n',
+                  text: ', this is fixed in Flutter 3.13 and later.\n'
+                      '\n'
+                      'When you scroll under an AppBar the change to the '
+                      'elevation tint color is instant, it should be animated. '
+                      'The reason why this happens is described in ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue131042,
+                  text: 'issue #131042',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. The issue is still in effect in Flutter 3.24, '
+                      'FCS includes the fix mentioned in the '
+                      'issue to make the color change animated.\n',
                 ),
               ],
             ),
