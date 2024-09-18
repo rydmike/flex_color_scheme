@@ -358,6 +358,7 @@ class FlexSubThemesData with Diagnosticable {
     this.appBarTitleTextStyle,
     //
     this.bottomAppBarSchemeColor,
+    this.bottomAppBarHeight,
     //
     this.tabBarItemSchemeColor,
     this.tabBarUnselectedItemSchemeColor,
@@ -2436,6 +2437,8 @@ class FlexSubThemesData with Diagnosticable {
   /// property in all descendant [AppBar] widgets.
   final TextStyle? appBarTitleTextStyle;
 
+  // TODO(rydmike): Add bottomAppBarHeight Property!!
+
   /// Defines which [Theme] based [ColorScheme] based color the [BottomAppBar]
   /// uses as background color.
   ///
@@ -2444,6 +2447,12 @@ class FlexSubThemesData with Diagnosticable {
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
   final SchemeColor? bottomAppBarSchemeColor;
+
+  /// The double value used to indicate the height of the [BottomAppBar].
+  ///
+  /// In Material-2, the default value is the minimum in relation to content.
+  /// In Material-3, it is  80dp.
+  final double? bottomAppBarHeight;
 
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
@@ -3591,6 +3600,7 @@ class FlexSubThemesData with Diagnosticable {
     final TextStyle? appBarTitleTextStyle,
     //
     final SchemeColor? bottomAppBarSchemeColor,
+    final double? bottomAppBarHeight,
     //
     final SchemeColor? tabBarItemSchemeColor,
     final SchemeColor? tabBarUnselectedItemSchemeColor,
@@ -3986,6 +3996,7 @@ class FlexSubThemesData with Diagnosticable {
       //
       bottomAppBarSchemeColor:
           bottomAppBarSchemeColor ?? this.bottomAppBarSchemeColor,
+      bottomAppBarHeight: bottomAppBarHeight ?? this.bottomAppBarHeight,
       //
       tabBarItemSchemeColor:
           tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
@@ -4392,6 +4403,7 @@ class FlexSubThemesData with Diagnosticable {
         other.appBarTitleTextStyle == appBarTitleTextStyle &&
         //
         other.bottomAppBarSchemeColor == bottomAppBarSchemeColor &&
+        other.bottomAppBarHeight == bottomAppBarHeight &&
         //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
         other.tabBarUnselectedItemSchemeColor ==
@@ -4723,6 +4735,7 @@ class FlexSubThemesData with Diagnosticable {
         appBarTitleTextStyle,
         //
         bottomAppBarSchemeColor,
+        bottomAppBarHeight,
         //
         tabBarItemSchemeColor,
         tabBarUnselectedItemSchemeColor,
@@ -5162,6 +5175,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(EnumProperty<SchemeColor>(
         'bottomAppBarSchemeColor', bottomAppBarSchemeColor));
+    properties.add(
+        DiagnosticsProperty<double>('bottomAppBarHeight', bottomAppBarHeight));
     //
     properties.add(EnumProperty<SchemeColor>(
         'tabBarItemSchemeColor', tabBarItemSchemeColor));

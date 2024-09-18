@@ -7355,6 +7355,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.bottomAppBarTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.bottomAppBarSchemeColor,
+              height: subTheme.bottomAppBarHeight,
               elevation: bottomAppBarElevation,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
