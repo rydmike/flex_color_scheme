@@ -4970,8 +4970,10 @@ class FlexColorScheme with Diagnosticable {
                 fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
         variant: seed.useKeyColors ? variant : null,
         contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
-        useExpressiveOnContainerColors:
-            seed.useExpressiveOnContainerColors ?? false,
+        // This API only has any impact in light mode, as intended, we could
+        // call it with a give true value, but result will be same as false,
+        // only more compute, so it is always set to false.
+        useExpressiveOnContainerColors: false,
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined. The main colors to keep
