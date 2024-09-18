@@ -43,6 +43,10 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
+* **TODO**: The `toScheme` method must be updated. It has not been touched yet!
+  * Interesting that theming works well without it, but OK we are not using it
+  since internally FCS passes along a full `ColorScheme` to raw constructor.
+
 * **NOT STARTED**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also introduced more breakage, review and fix them. 
   * Also with all new features, get package tests back to 100% coverage.
@@ -90,7 +94,8 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 - Add `ToggleButtons` selected foreground and unselected background color props.
 
 - Add `Checkbox` shape and border.
-- Add some `ListTile` theming features, eg at least `contentPadding`.
+- Add some `ListTile` theming features, eg at least `contentPadding`. Maybe some font size and opacity?
+  - To get the M2 look in M3, which is actually nicer. Myabe also for samller text size in M3.
 - Add some `SearchBar` theming features, What? Shape and elevation?
 - Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue!
 - Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
