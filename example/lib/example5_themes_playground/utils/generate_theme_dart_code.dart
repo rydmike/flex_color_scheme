@@ -930,6 +930,9 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    bottomAppBarSchemeColor: ${controller.bottomAppBarSchemeColorDark},\n'
       : '';
+  final String bottomAppBarHeight = controller.bottomAppBarHeight != null
+      ? '    bottomAppBarHeight: ${controller.bottomAppBarHeight},\n'
+      : '';
   //
   // TabBar setup CODE
   //
@@ -1460,6 +1463,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$appBarCenterTitle'
           //
           '$bottomAppBarSchemeColorLight'
+          '$bottomAppBarHeight'
           //
           '$tabBarItemSchemeColorLight'
           '$tabBarUnselectedItemSchemeColorLight'
@@ -1697,6 +1701,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$appBarCenterTitle'
           //
           '$bottomAppBarSchemeColorDark'
+          '$bottomAppBarHeight'
           //
           '$tabBarItemSchemeColorDark'
           '$tabBarUnselectedItemSchemeColorDark'

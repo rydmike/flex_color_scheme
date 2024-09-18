@@ -814,18 +814,6 @@ class Store {
   // Default value for the appBarScrolledUnderElevationDark, reset settings.
   static const double? defaultAppBarScrolledUnderElevationDark = null;
 
-  // Key used to read and save the bottomAppBarElevation value.
-  static const String keyBottomAppBarElevationLight =
-      'bottomAppBarElevationLight';
-  // Default value for the bottomAppBarElevation, also used to reset settings.
-  static const double? defaultBottomAppBarElevationLight = null;
-
-  // Key used to read and save the bottomAppBarElevationDark value.
-  static const String keyBottomAppBarElevationDark =
-      'bottomAppBarElevationDark';
-  // Default value for the bottomAppBarElevationDark, also to reset settings.
-  static const double? defaultBottomAppBarElevationDark = null;
-
   // Key used to read and save the transparentStatusBar value.
   static const String keyTransparentStatusBar = 'transparentStatusBar';
   // Default value for the transparentStatusBar, also used to reset settings.
@@ -902,6 +890,18 @@ class Store {
   // BottomAppBar SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the bottomAppBarElevation value.
+  static const String keyBottomAppBarElevationLight =
+      'bottomAppBarElevationLight';
+  // Default value for the bottomAppBarElevation, also used to reset settings.
+  static const double? defaultBottomAppBarElevationLight = null;
+
+  // Key used to read and save the bottomAppBarElevationDark value.
+  static const String keyBottomAppBarElevationDark =
+      'bottomAppBarElevationDark';
+  // Default value for the bottomAppBarElevationDark, also to reset settings.
+  static const double? defaultBottomAppBarElevationDark = null;
+
   // Key used to read and save the bottomAppBarSchemeColorLight value.
   static const String keyBottomAppBarSchemeColorLight =
       'bottomAppBarSchemeColorLight';
@@ -915,6 +915,11 @@ class Store {
   // Default value for the bottomAppBarSchemeColorDark, also used to reset
   // settings. We use NULL as default, on nullable settings.
   static const SchemeColor? defaultBottomAppBarSchemeColorDark = null;
+
+  // Key used to read and save the bottomAppBarHeight value.
+  static const String keyBottomAppBarHeight = 'bottomAppBarHeight';
+  // Default value for the bottomAppBarHeight, also used to reset settings.
+  static const double? defaultBottomAppBarHeight = null;
 
   // TabBar SETTINGS.
   // ===========================================================================
