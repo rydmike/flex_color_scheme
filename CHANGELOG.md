@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 18, 2024**
+**Sep 19, 2024**
 
 ### SUMMARY
 
@@ -275,6 +275,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added `appBarForegroundSchemeColor`, `appBarIconSchemeColor` and `appBarActionsIconSchemeColor` properties to `FlexSubThemesData` and made `FlexSubThemes.appBarTheme` use it for its colors on title, icon and actions.
+
+
+- Added `appBarForegroundSchemeColor`, `appBarIconSchemeColor` and `appBarActionsIconSchemeColor` properties to `FlexSubThemesData` and made `FlexSubThemes.appBarTheme` use it for its colors on title, icon and actions.
+
+
+- Added `bottomAppBarHeight` property to `FlexSubThemesData` and made `FlexSubThemes.bottomAppBarTheme` use it as its `height` value.
 
 
 - Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
