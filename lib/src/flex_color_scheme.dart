@@ -6761,18 +6761,12 @@ class FlexColorScheme with Diagnosticable {
       appBarIconColor = colorScheme.onSurface;
       appBarActionIconColor = colorScheme.onSurfaceVariant;
     }
-    // if the appBarForeground color is using the default colors it gets when
-    // we useMaterial3 or not use then appBarIconColor and appBarActionIconColor
-    // should use above default, but if appBarForeground has any other color,
-    // it should be used.
-    if ((appBarForeground.withAlpha(0xFF) != colorScheme.onSurface &&
-            useMaterial3) ||
-        (appBarForeground.withAlpha(0xFF) != colorScheme.onPrimary &&
-            !useMaterial3 &&
-            !isDark) ||
-        (appBarForeground.withAlpha(0xFF) != colorScheme.onSurface &&
-            !useMaterial3 &&
-            isDark)) {
+    // if the appBarForeground color is using the default colors
+    // then appBarIconColor and appBarActionIconColor should use it as well,
+    // but otherwise they use their dault colors set above.
+    if (appBarForeground.withAlpha(0xFF) != colorScheme.onSurface &&
+        appBarForeground.withAlpha(0xFF) != colorScheme.onPrimary &&
+        appBarForeground.withAlpha(0xFF) != colorScheme.surface) {
       appBarIconColor = appBarForeground;
       appBarActionIconColor = appBarForeground;
     }
