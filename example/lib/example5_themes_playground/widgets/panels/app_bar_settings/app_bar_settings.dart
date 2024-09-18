@@ -51,52 +51,76 @@ class AppBarSettings extends StatelessWidget {
     final EdgeInsetsDirectional paddingEndColumn =
         EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
-    // TODO(rydmike): Still have issues and wrong results with default labels!
-    final String onAppBarStyleLight = switch (controller.appBarStyleLight) {
+    // Get the brightness need of current AppBar color, we need it
+    // for when the scaffold background color is used as AppBar color, since
+    // it can be whatever.
+    final Color currentAppBarColor = theme.appBarTheme.backgroundColor ??
+        (useMaterial3
+            ? theme.colorScheme.surface
+            : isLight
+                ? theme.colorScheme.surface
+                : theme.colorScheme.surface);
+    final Brightness appBarBrightness =
+        ThemeData.estimateBrightnessForColor(currentAppBarColor);
+    final bool appBarNeedsLight = appBarBrightness == Brightness.dark;
+
+    // Title on color defaults
+    final String titleLight = switch (controller.appBarStyleLight) {
       FlexAppBarStyle.primary => 'onPrimary',
       FlexAppBarStyle.material ||
       FlexAppBarStyle.surface ||
-      FlexAppBarStyle.background ||
-      FlexAppBarStyle.scaffoldBackground =>
+      FlexAppBarStyle.background =>
         'onSurface',
+      FlexAppBarStyle.scaffoldBackground =>
+        appBarNeedsLight ? 'surface' : 'onSurface',
       FlexAppBarStyle.custom => 'surface',
       _ => useMaterial3 ? 'onSurface' : 'onPrimary',
     };
-    final String onAppBarStyleDark = switch (controller.appBarStyleDark) {
+    final String titleDark = switch (controller.appBarStyleDark) {
       FlexAppBarStyle.primary => 'onPrimary',
+      FlexAppBarStyle.scaffoldBackground =>
+        appBarNeedsLight ? 'onSurface' : 'surface',
       _ => 'onSurface',
     };
+    // Leading icon on color defaults
     final String leadingIconLight = switch (controller.appBarStyleLight) {
       FlexAppBarStyle.primary => 'onPrimary',
       FlexAppBarStyle.material ||
       FlexAppBarStyle.surface ||
-      FlexAppBarStyle.background ||
+      FlexAppBarStyle.background =>
+        useMaterial3 ? 'onSurface' : 'Black opacity 87%',
       FlexAppBarStyle.scaffoldBackground =>
-        'onSurface',
+        appBarNeedsLight ? 'surface' : 'onSurface',
       FlexAppBarStyle.custom => 'surface',
       _ => useMaterial3 ? 'onSurface' : 'White',
-    };
-    final String actionIconLight = switch (controller.appBarStyleLight) {
-      FlexAppBarStyle.primary => 'onPrimary',
-      FlexAppBarStyle.material ||
-      FlexAppBarStyle.surface ||
-      FlexAppBarStyle.background ||
-      FlexAppBarStyle.scaffoldBackground =>
-        useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
-      FlexAppBarStyle.custom => 'surface',
-      _ => useMaterial3 ? 'onSurfaceVariant' : 'White',
     };
     final String leadingIconDark = switch (controller.appBarStyleDark) {
       FlexAppBarStyle.primary => 'onPrimary',
       FlexAppBarStyle.material ||
       FlexAppBarStyle.surface ||
-      FlexAppBarStyle.background ||
+      FlexAppBarStyle.background =>
+        useMaterial3 ? 'onSurface' : 'white',
       FlexAppBarStyle.scaffoldBackground =>
-        useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
+        appBarNeedsLight ? 'onSurface' : 'surface',
       _ => useMaterial3 ? 'onSurface' : 'White',
+    };
+    // Action icon on color defaults
+    final String actionIconLight = switch (controller.appBarStyleLight) {
+      FlexAppBarStyle.primary => 'onPrimary',
+      FlexAppBarStyle.material ||
+      FlexAppBarStyle.surface ||
+      FlexAppBarStyle.background =>
+        useMaterial3 ? 'onSurfaceVariant' : 'Black opacity 87%',
+      FlexAppBarStyle.scaffoldBackground =>
+        appBarNeedsLight ? 'surface' : 'onSurface',
+      FlexAppBarStyle.custom => 'surface',
+      _ => useMaterial3 ? 'onSurfaceVariant' : 'White',
     };
     final String actionIconDark = switch (controller.appBarStyleDark) {
       FlexAppBarStyle.primary => 'onPrimary',
+      FlexAppBarStyle.custom => 'surface',
+      FlexAppBarStyle.scaffoldBackground =>
+        appBarNeedsLight ? 'onSurface' : 'surface',
       _ => useMaterial3 ? 'onSurfaceVariant' : 'White',
     };
 
@@ -226,18 +250,17 @@ class AppBarSettings extends StatelessWidget {
             'With component themes enabled you can select a '
             'ColorScheme based color for the AppBar background color.\n'
             '\n'
-            'Using AppBarStyle is an older API that does not require '
-            'activating '
-            'FlexColorScheme component themes. Using component themes '
-            'offers more choices. '
-            'Selecting a background color, overrides the older used '
-            'AppBarStyle property. Set it back '
-            'to default to use AppBarStyle again.\n'
+            'The AppBarStyle is an older but convenient API that does not '
+            'require activating FlexColorScheme component themes and still '
+            'offering the most commonly use colors. '
+            'Using component themes offers even more choices. '
+            'Selecting a background color, overrides any used AppBarStyle '
+            'property value. Set it background scheme color back to default '
+            'to use AppBarStyle again.\n'
             '\n'
             'Using AppBarStyle has a nice extra feature, it offers using '
-            'the THemeDat.scaffoldBackgroundColor as AppBar background color, '
-            'which when using surface blends, can be different from any '
-            'ColorScheme surface based colors.\n',
+            'the ThemeData.scaffoldBackgroundColor as AppBar background color.'
+            '\n',
           ),
         ),
         Row(
@@ -279,18 +302,16 @@ class AppBarSettings extends StatelessWidget {
                   title: const Text('Title color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorLight ==
                           null
-                      ? onAppBarStyleLight
+                      ? titleLight
                       : SchemeColor
                           .values[FlexSubThemes.onSchemeColor(
                                   controller.appBarBackgroundSchemeColorLight!)
                               .index]
                           .name,
-                  defaultDisabledLabel: controller.useFlexColorScheme
-                      ? onAppBarStyleLight
-                      : 'onSurface',
-                  defaultDisabledLabelM2: controller.useFlexColorScheme
-                      ? onAppBarStyleLight
-                      : 'onPrimary',
+                  defaultDisabledLabel:
+                      controller.useFlexColorScheme ? titleLight : 'onSurface',
+                  defaultDisabledLabelM2:
+                      controller.useFlexColorScheme ? titleLight : 'onPrimary',
                   value: controller.appBarForegroundSchemeColorLight,
                   onChanged: controller.setAppBarForegroundSchemeColorLight,
                 ),
@@ -303,15 +324,14 @@ class AppBarSettings extends StatelessWidget {
                   title: const Text('Title color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorDark ==
                           null
-                      ? onAppBarStyleDark
+                      ? titleDark
                       : SchemeColor
                           .values[FlexSubThemes.onSchemeColor(
                                   controller.appBarBackgroundSchemeColorDark!)
                               .index]
                           .name,
-                  defaultDisabledLabel: controller.useFlexColorScheme
-                      ? onAppBarStyleDark
-                      : 'onSurface',
+                  defaultDisabledLabel:
+                      controller.useFlexColorScheme ? titleDark : 'onSurface',
                   value: controller.appBarForegroundSchemeColorDark,
                   onChanged: controller.setAppBarForegroundSchemeColorDark,
                 ),
