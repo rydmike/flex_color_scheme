@@ -52,6 +52,11 @@ dependencies:
   # import the package.
   meta: ^1.9.0
 
+dependency_overrides:
+  # TODO(rydmike): Update FSS Package and remove dev dep
+  flex_seed_scheme:
+    path: ../flex_seed_scheme
+
 dev_dependencies:
   # Flutter test tools
   flutter_test:
@@ -59,6 +64,7 @@ dev_dependencies:
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
   google_fonts: ^6.2.1
+
 
   # Test lib.
   test:

@@ -80,6 +80,7 @@ dependencies:
   url_launcher: ^6.3.0
 
 dependency_overrides:
+  # TODO(rydmike): Update FSS Package and remove dev dep
   flex_seed_scheme:
     path: ../../flex_seed_scheme
 
