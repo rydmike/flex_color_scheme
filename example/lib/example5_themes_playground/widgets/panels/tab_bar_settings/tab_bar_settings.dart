@@ -23,6 +23,7 @@ class TabBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
@@ -33,52 +34,96 @@ class TabBarSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
-    // Logic to enable unselected light opacity value
-    final bool unselectedLightOpacityEnabled =
-        enableControl && controller.tabBarItemSchemeColorLight != null;
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
-    // Logic to enable unselected dark opacity value
-    final bool unselectedDarkOpacityEnabled =
-        enableControl && controller.tabBarItemSchemeColorDark != null;
+    // Get the brightness need of current AppBar color, we need it
+    // for when the scaffold background color is used as AppBar color, since
+    // it can be whatever.
+    final Color currentAppBarColor = theme.appBarTheme.backgroundColor ??
+        (useMaterial3
+            ? theme.colorScheme.surface
+            : isLight
+                ? theme.colorScheme.surface
+                : theme.colorScheme.surface);
+    final Brightness appBarBrightness =
+        ThemeData.estimateBrightnessForColor(currentAppBarColor);
+
+    String opacityLabel() {
+      if (isLight && controller.tabBarItemSchemeColorLight != null) {
+        return '100%';
+      }
+      if (!isLight && controller.tabBarItemSchemeColorDark != null) {
+        return '100%';
+      }
+      switch (controller.tabBarStyle) {
+        case FlexTabBarStyle.flutterDefault:
+          return useMaterial3 ? '100%' : '70%';
+        case FlexTabBarStyle.forBackground:
+          return controller.useSubThemes ? '65%' : '60%';
+        case FlexTabBarStyle.forAppBar:
+          return (appBarBrightness == Brightness.light &&
+                  (currentAppBarColor == Colors.white ||
+                      currentAppBarColor == colorScheme.surface ||
+                      currentAppBarColor == colorScheme.surfaceContainerLow))
+              ? '60%'
+              : '70%';
+        case FlexTabBarStyle.universal:
+          return isLight ? '50%' : '70%';
+        case _:
+          return useMaterial3
+              ? '100%'
+              : (appBarBrightness == Brightness.light &&
+                      (currentAppBarColor == Colors.white ||
+                          currentAppBarColor == colorScheme.surface ||
+                          currentAppBarColor ==
+                              colorScheme.surfaceContainerLow))
+                  ? '60%'
+                  : '70%';
+      }
+    }
 
     // Logic for default unselected light mode default label
     String unselectedLightLabel() {
       if (!controller.useSubThemes || !controller.useFlexColorScheme) {
-        return 'default (TabBarStyle)';
+        return 'TabBarStyle';
       }
       if (controller.tabBarItemSchemeColorLight == null &&
           controller.tabBarUnselectedItemSchemeColorLight == null) {
-        return 'default (TabBarStyle)';
+        return 'TabBarStyle';
       }
       if (controller.tabBarItemSchemeColorLight != null) {
         if (useMaterial3) {
-          return 'default (onSurfaceVariant)';
+          return 'onSurfaceVariant';
         } else {
-          // ignore: lines_longer_than_80_chars
-          return 'default (${SchemeColor.values[controller.tabBarItemSchemeColorLight!.index].name})';
+          return SchemeColor
+              .values[controller.tabBarItemSchemeColorLight!.index].name;
         }
       }
-      return 'default (TabBarStyle)';
+      return 'TabBarStyle';
     }
 
     // Logic for default unselected light mode default label
     String unselectedDarkLabel() {
       if (!controller.useSubThemes || !controller.useFlexColorScheme) {
-        return 'default (TabBarStyle)';
+        return 'TabBarStyle';
       }
       if (controller.tabBarItemSchemeColorDark == null &&
           controller.tabBarUnselectedItemSchemeColorDark == null) {
-        return 'default (TabBarStyle)';
+        return 'TabBarStyle';
       }
       if (controller.tabBarItemSchemeColorDark != null) {
         if (useMaterial3) {
-          return 'default (onSurfaceVariant)';
+          return 'onSurfaceVariant';
         } else {
-          // ignore: lines_longer_than_80_chars
-          return 'default (${SchemeColor.values[controller.tabBarItemSchemeColorDark!.index].name})';
+          return SchemeColor
+              .values[controller.tabBarItemSchemeColorDark!.index].name;
         }
       }
-      return 'default (TabBarStyle)';
+      return 'TabBarStyle';
     }
 
     return Column(
@@ -118,7 +163,8 @@ class TabBarSettings extends StatelessWidget {
           values: FlexTabBarStyle.values,
           title: const Text('TabBarStyle'),
           enabled: controller.useFlexColorScheme &&
-              controller.tabBarItemSchemeColorLight == null,
+              ((isLight && controller.tabBarItemSchemeColorLight == null) ||
+                  (!isLight && controller.tabBarItemSchemeColorDark == null)),
           value: controller.tabBarStyle,
           onChanged: controller.setTabBarStyle,
         ),
@@ -144,165 +190,172 @@ class TabBarSettings extends StatelessWidget {
               '\n'
               'NOTE: The TabBar widgets presented in the Playground have '
               'logic to ignore invalid TabAlignment values.\n'
-              'Hot take: Flutter should do that by default!\n'),
+              'Hot take: Flutter should do this by default and not throw!\n'),
           value: controller.tabBarTabAlignment,
           onChanged: controller.setTabBarTabAlignment,
         ),
         if (isLight) ...<Widget>[
-          ColorSchemePopupMenu(
+          ColorSchemePopupMenuNew(
+            enabled: enableControl,
             title: const Text('Light selected item color'),
-            defaultLabel: 'default (TabBarStyle)',
-            value: controller.tabBarItemSchemeColorLight?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarItemSchemeColorLight(null);
-                    } else {
-                      controller.setTabBarItemSchemeColorLight(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+            defaultLabel: 'TabBarStyle',
+            value: controller.tabBarItemSchemeColorLight,
+            onChanged: controller.setTabBarItemSchemeColorLight,
           ),
-          ColorSchemePopupMenu(
-            title: const Text('Light unselected items color'),
-            defaultLabel: unselectedLightLabel(),
-            value: controller.tabBarUnselectedItemSchemeColorLight?.index ?? -1,
-            onChanged: enableControl &&
-                    controller.tabBarItemSchemeColorLight != null
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarUnselectedItemSchemeColorLight(null);
-                    } else {
-                      controller.setTabBarUnselectedItemSchemeColorLight(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Light unselected items color'),
+                  defaultLabel: unselectedLightLabel(),
+                  value: controller.tabBarUnselectedItemSchemeColorLight,
+                  onChanged: controller.setTabBarUnselectedItemSchemeColorLight,
+                ),
+              ),
+              Expanded(
+                child: SliderListTileReveal(
+                  enabled: enableControl, //unselectedLightOpacityEnabled,
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Opacity'),
+                  value: controller.tabBarUnselectedItemOpacityLight,
+                  onChanged: controller.setTabBarUnselectedItemOpacityLight,
+                  min: 0,
+                  max: 1,
+                  divisions: 100,
+                  valueDisplayScale: 100,
+                  valueDecimalPlaces: 0,
+                  valueHeading: 'OPACITY',
+                  valueUnitLabel: ' %',
+                  valueDefaultLabel: opacityLabel(),
+                ),
+              ),
+            ],
           ),
-          SliderListTileReveal(
-            enabled: unselectedLightOpacityEnabled,
-            title: const Text('Light unselected item opacity'),
-            value: controller.tabBarUnselectedItemOpacityLight,
-            onChanged: controller.setTabBarUnselectedItemOpacityLight,
-            min: 0,
-            max: 1,
-            divisions: 100,
-            valueDisplayScale: 100,
-            valueDecimalPlaces: 0,
-            valueHeading: 'OPACITY',
-            valueUnitLabel: ' %',
-            valueDefaultLabel: useMaterial3 ? '100%' : '70%',
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Light indicator color'),
+                  defaultLabel: 'TabBarStyle',
+                  value: controller.tabBarIndicatorLight,
+                  onChanged: controller.setTabBarIndicatorLight,
+                ),
+              ),
+              Expanded(
+                child: EnumPopupMenu<TabBarIndicatorSize>(
+                  values: TabBarIndicatorSize.values,
+                  enabled: enableControl,
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Indicator style'),
+                  value: controller.tabBarIndicatorSize,
+                  onChanged: controller.setTabBarIndicatorSize,
+                ),
+              ),
+            ],
           ),
-          ColorSchemePopupMenu(
-            title: const Text('Light indicator color'),
-            defaultLabel: 'default (TabBarStyle)',
-            value: controller.tabBarIndicatorLight?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarIndicatorLight(null);
-                    } else {
-                      controller
-                          .setTabBarIndicatorLight(SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          )
         ] else ...<Widget>[
-          ColorSchemePopupMenu(
+          ColorSchemePopupMenuNew(
+            enabled: enableControl,
             title: const Text('Dark selected item color'),
-            defaultLabel: 'default (TabBarStyle)',
-            value: controller.tabBarItemSchemeColorDark?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarItemSchemeColorDark(null);
-                    } else {
-                      controller.setTabBarItemSchemeColorDark(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+            defaultLabel: 'TabBarStyle',
+            value: controller.tabBarItemSchemeColorDark,
+            onChanged: controller.setTabBarItemSchemeColorDark,
           ),
-          ColorSchemePopupMenu(
-            title: const Text('Dark unselected items color'),
-            defaultLabel: unselectedDarkLabel(),
-            value: controller.tabBarUnselectedItemSchemeColorDark?.index ?? -1,
-            onChanged: enableControl &&
-                    controller.tabBarItemSchemeColorDark != null
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarUnselectedItemSchemeColorDark(null);
-                    } else {
-                      controller.setTabBarUnselectedItemSchemeColorDark(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Dark unselected items color'),
+                  defaultLabel: unselectedDarkLabel(),
+                  value: controller.tabBarUnselectedItemSchemeColorDark,
+                  onChanged: controller.setTabBarUnselectedItemSchemeColorDark,
+                ),
+              ),
+              Expanded(
+                child: SliderListTileReveal(
+                  enabled: enableControl, //unselectedDarkOpacityEnabled,
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Opacity'),
+                  value: controller.tabBarUnselectedItemOpacityDark,
+                  onChanged: controller.setTabBarUnselectedItemOpacityDark,
+                  min: 0,
+                  max: 1,
+                  divisions: 100,
+                  valueDisplayScale: 100,
+                  valueDecimalPlaces: 0,
+                  valueHeading: 'OPACITY',
+                  valueUnitLabel: ' %',
+                  valueDefaultLabel: opacityLabel(),
+                ),
+              ),
+            ],
           ),
-          SliderListTileReveal(
-            enabled: unselectedDarkOpacityEnabled,
-            title: const Text('Dark unselected item opacity'),
-            value: controller.tabBarUnselectedItemOpacityDark,
-            onChanged: controller.setTabBarUnselectedItemOpacityDark,
-            min: 0,
-            max: 1,
-            divisions: 100,
-            valueDisplayScale: 100,
-            valueDecimalPlaces: 0,
-            valueHeading: 'OPACITY',
-            valueUnitLabel: ' %',
-            valueDefaultLabel: useMaterial3 ? '100%' : '70%',
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: ColorSchemePopupMenuNew(
+                  enabled: enableControl,
+                  contentPadding: paddingStartColumn,
+                  title: const Text('Dark indicator color'),
+                  defaultLabel: 'TabBarStyle',
+                  value: controller.tabBarIndicatorDark,
+                  onChanged: controller.setTabBarIndicatorDark,
+                ),
+              ),
+              Expanded(
+                child: EnumPopupMenu<TabBarIndicatorSize>(
+                  values: TabBarIndicatorSize.values,
+                  enabled: enableControl,
+                  contentPadding: paddingEndColumn,
+                  title: const Text('Indicator style'),
+                  value: controller.tabBarIndicatorSize,
+                  onChanged: controller.setTabBarIndicatorSize,
+                ),
+              ),
+            ],
           ),
-          ColorSchemePopupMenu(
-            title: const Text('Dark indicator color'),
-            defaultLabel: 'default (TabBarStyle)',
-            value: controller.tabBarIndicatorDark?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setTabBarIndicatorDark(null);
-                    } else {
-                      controller
-                          .setTabBarIndicatorDark(SchemeColor.values[index]);
-                    }
-                  }
-                : null,
-          )
         ],
-        EnumPopupMenu<TabBarIndicatorSize>(
-          values: TabBarIndicatorSize.values,
-          enabled: enableControl,
-          title: const Text('Indicator style'),
-          value: controller.tabBarIndicatorSize,
-          onChanged: controller.setTabBarIndicatorSize,
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Indicator weight'),
-          value: controller.tabBarIndicatorWeight,
-          onChanged: controller.setTabBarIndicatorWeight,
-          min: 0,
-          max: 10,
-          divisions: 20,
-          valueDecimalPlaces: 1,
-          valueHeading: 'WEIGHT',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: useMaterial3 ? '3 dp' : '2 dp',
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Indicator top edge radius'),
-          value: controller.tabBarIndicatorTopRadius,
-          onChanged: controller.setTabBarIndicatorTopRadius,
-          min: 0,
-          max: 10,
-          divisions: 20,
-          valueDecimalPlaces: 1,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: useMaterial3 ? '3 dp' : '0 dp',
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: paddingStartColumn,
+                title: const Text('Indicator weight'),
+                value: controller.tabBarIndicatorWeight,
+                onChanged: controller.setTabBarIndicatorWeight,
+                min: 0,
+                max: 10,
+                divisions: 20,
+                valueDecimalPlaces: 1,
+                valueHeading: 'WEIGHT',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '3 dp' : '2 dp',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: paddingEndColumn,
+                title: const Text('Indicator top edge radius'),
+                value: controller.tabBarIndicatorTopRadius,
+                onChanged: controller.setTabBarIndicatorTopRadius,
+                min: 0,
+                max: 10,
+                divisions: 20,
+                valueDecimalPlaces: 1,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '3 dp' : '0 dp',
+              ),
+            ),
+          ],
         ),
         SwitchListTileReveal(
           title: const Text('Remove bottom divider'),
