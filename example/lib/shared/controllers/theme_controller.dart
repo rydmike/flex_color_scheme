@@ -376,12 +376,6 @@ class ThemeController with ChangeNotifier {
     _appBarScrolledUnderElevationDark = await _themeService.load(
         Store.keyAppBarScrolledUnderElevationDark,
         Store.defaultAppBarScrolledUnderElevationDark);
-    _bottomAppBarElevationLight = await _themeService.load(
-        Store.keyBottomAppBarElevationLight,
-        Store.defaultBottomAppBarElevationLight);
-    _bottomAppBarElevationDark = await _themeService.load(
-        Store.keyBottomAppBarElevationDark,
-        Store.defaultBottomAppBarElevationDark);
     _transparentStatusBar = await _themeService.load(
         Store.keyTransparentStatusBar, Store.defaultTransparentStatusBar);
     _appBarCenterTitle = await _themeService.load(
@@ -415,12 +409,21 @@ class ThemeController with ChangeNotifier {
         Store.defaultAppBarActionsIconSchemeColorDark);
     //
     // BottomAppBar SETTINGS.
+    _bottomAppBarElevationLight = await _themeService.load(
+        Store.keyBottomAppBarElevationLight,
+        Store.defaultBottomAppBarElevationLight);
+    _bottomAppBarElevationDark = await _themeService.load(
+        Store.keyBottomAppBarElevationDark,
+        Store.defaultBottomAppBarElevationDark);
+
     _bottomAppBarSchemeColorLight = await _themeService.load(
         Store.keyBottomAppBarSchemeColorLight,
         Store.defaultBottomAppBarSchemeColorLight);
     _bottomAppBarSchemeColorDark = await _themeService.load(
         Store.keyBottomAppBarSchemeColorDark,
         Store.defaultBottomAppBarSchemeColorDark);
+    _bottomAppBarHeight = await _themeService.load(
+        Store.keyBottomAppBarHeight, Store.defaultBottomAppBarHeight);
     //
     // TabBar SETTINGS.
     _tabBarStyle = await _themeService.load(
@@ -1052,9 +1055,6 @@ class ThemeController with ChangeNotifier {
         Store.defaultAppBarScrolledUnderElevationLight, false);
     setAppBarScrolledUnderElevationDark(
         Store.defaultAppBarScrolledUnderElevationDark, false);
-    setBottomAppBarElevationLight(
-        Store.defaultBottomAppBarElevationLight, false);
-    setBottomAppBarElevationDark(Store.defaultBottomAppBarElevationDark, false);
     setTransparentStatusBar(Store.defaultTransparentStatusBar, false);
     setAppBarCenterTitle(Store.defaultAppBarCenterTitle, false);
     setAppBarBackgroundSchemeColorLight(
@@ -1074,10 +1074,14 @@ class ThemeController with ChangeNotifier {
         Store.defaultAppBarActionsIconSchemeColorDark, false);
     //
     // BottomAppBar SETTINGS.
+    setBottomAppBarElevationLight(
+        Store.defaultBottomAppBarElevationLight, false);
+    setBottomAppBarElevationDark(Store.defaultBottomAppBarElevationDark, false);
     setBottomAppBarSchemeColorLight(
         Store.defaultBottomAppBarSchemeColorLight, false);
     setBottomAppBarSchemeColorDark(
         Store.defaultBottomAppBarSchemeColorDark, false);
+    setBottomAppBarHeight(Store.defaultBottomAppBarHeight, false);
     //
     // TabBar SETTINGS.
     setTabBarStyle(Store.defaultTabBarStyle, false);
@@ -3597,24 +3601,6 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAppBarScrolledUnderElevationDark, value));
   }
 
-  late double? _bottomAppBarElevationLight;
-  double? get bottomAppBarElevationLight => _bottomAppBarElevationLight;
-  void setBottomAppBarElevationLight(double? value, [bool notify = true]) {
-    if (value == _bottomAppBarElevationLight) return;
-    _bottomAppBarElevationLight = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyBottomAppBarElevationLight, value));
-  }
-
-  late double? _bottomAppBarElevationDark;
-  double? get bottomAppBarElevationDark => _bottomAppBarElevationDark;
-  void setBottomAppBarElevationDark(double? value, [bool notify = true]) {
-    if (value == _bottomAppBarElevationDark) return;
-    _bottomAppBarElevationDark = value;
-    if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyBottomAppBarElevationDark, value));
-  }
-
   late bool _transparentStatusBar;
   bool get transparentStatusBar => _transparentStatusBar;
   void setTransparentStatusBar(bool? value, [bool notify = true]) {
@@ -3727,6 +3713,24 @@ class ThemeController with ChangeNotifier {
   // BottomAppBar SETTINGS.
   // ===========================================================================
 
+  late double? _bottomAppBarElevationLight;
+  double? get bottomAppBarElevationLight => _bottomAppBarElevationLight;
+  void setBottomAppBarElevationLight(double? value, [bool notify = true]) {
+    if (value == _bottomAppBarElevationLight) return;
+    _bottomAppBarElevationLight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomAppBarElevationLight, value));
+  }
+
+  late double? _bottomAppBarElevationDark;
+  double? get bottomAppBarElevationDark => _bottomAppBarElevationDark;
+  void setBottomAppBarElevationDark(double? value, [bool notify = true]) {
+    if (value == _bottomAppBarElevationDark) return;
+    _bottomAppBarElevationDark = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomAppBarElevationDark, value));
+  }
+
   late SchemeColor? _bottomAppBarSchemeColorLight;
   SchemeColor? get bottomAppBarSchemeColorLight =>
       _bottomAppBarSchemeColorLight;
@@ -3746,6 +3750,15 @@ class ThemeController with ChangeNotifier {
     _bottomAppBarSchemeColorDark = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyBottomAppBarSchemeColorDark, value));
+  }
+
+  late double? _bottomAppBarHeight;
+  double? get bottomAppBarHeight => _bottomAppBarHeight;
+  void setBottomAppBarHeight(double? value, [bool notify = true]) {
+    if (value == _bottomAppBarHeight) return;
+    _bottomAppBarHeight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomAppBarHeight, value));
   }
 
   // TabBar SETTINGS.

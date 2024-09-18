@@ -173,8 +173,6 @@ class SliderListTileReveal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
     // The value of a discrete step.
     final double step = (max - min) / (divisions <= 0 ? 1 : divisions);
     // THe effective min value, one step below given min, this value is used
