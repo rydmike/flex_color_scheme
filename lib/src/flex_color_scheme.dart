@@ -6889,36 +6889,44 @@ class FlexColorScheme with Diagnosticable {
       }
     }
 
+    // TabBar unselected alpha based opacity, effective value;
+    final int? tabUnselected = subTheme.tabBarUnselectedItemOpacity == null
+        ? null
+        : Color.getAlphaFromOpacity(useMaterial3
+            ? subTheme.tabBarUnselectedItemOpacity ?? 1
+            : subTheme.tabBarUnselectedItemOpacity ?? 0.7);
+
     // Unselected TabBar color is based on FexTabBarStyle tabBarStyle.
     // The `flutterDefault` sets values corresponding to SDK Default behavior.
     Color unselectedTabColor() {
       switch (effectiveTabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
           return useMaterial3
-              ? colorScheme.onSurface
-              : tabBarStyleColor().withAlpha(0xB2); // 70%
+              ? colorScheme.onSurface.withAlpha(tabUnselected ?? 0xFF)
+              : tabBarStyleColor().withAlpha(tabUnselected ?? 0xB2); // 70%
         case FlexTabBarStyle.forBackground:
           return useSubThemes
               ? colorScheme.onSurface
                   .blendAlpha(colorScheme.primary,
                       kUnselectedBackgroundPrimaryAlphaBlend)
-                  .withAlpha(kUnselectedAlphaBlend)
-              : colorScheme.onSurface.withAlpha(0x99); // 60%
+                  .withAlpha(tabUnselected ?? kUnselectedAlphaBlend)
+              : colorScheme.onSurface.withAlpha(tabUnselected ?? 0x99); // 60%
         case FlexTabBarStyle.forAppBar:
           return (appBarBrightness == Brightness.light &&
                   (effectiveAppBarColor == Colors.white ||
                       effectiveAppBarColor == colorScheme.surface ||
                       effectiveAppBarColor == colorScheme.surfaceContainerLow))
-              ? colorScheme.onSurface.withAlpha(0x99) // 60%
-              : tabBarStyleColor().withAlpha(0xB2); // 70% alpha
+              ? colorScheme.onSurface.withAlpha(tabUnselected ?? 0x99) // 60%
+              : tabBarStyleColor()
+                  .withAlpha(tabUnselected ?? 0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
           return isDark
               ? colorScheme.primary
                   .blendAlpha(Colors.white, 0xE6) // 90%
-                  .withAlpha(0xB2) // 70% alpha
+                  .withAlpha(tabUnselected ?? 0xB2) // 70% alpha
               : colorScheme.primary
                   .blendAlpha(Colors.white, 0x7F)
-                  .withAlpha(0x7F); // 50%
+                  .withAlpha(tabUnselected ?? 0x7F); // 50%
       }
     }
 
