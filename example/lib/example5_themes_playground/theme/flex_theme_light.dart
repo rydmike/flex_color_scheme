@@ -554,7 +554,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             : FlexSchemeVariant.values[controller.usedFlexToneSetup]
                 .tones(Brightness.light)
                 .higherContrastFixed(controller.higherContrastFixed)
-                .expressiveOnContainer(controller.expressiveOnContainer)
                 .monochromeSurfaces(controller.useMonoSurfacesLight)
                 .onMainsUseBW(controller.onMainsUseBWLight)
                 .onSurfacesUseBW(controller.onSurfacesUseBWLight)
