@@ -430,13 +430,13 @@ class FlexColorScheme with Diagnosticable {
     this.useMaterial3 = true,
     this.extensions,
     //
-    @Deprecated('Use FlexColorScheme.surface instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use FlexColorScheme.surface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.background,
-    @Deprecated('Use FlexColorScheme.onSurface instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use FlexColorScheme.onSurface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.onBackground,
   })  : assert(appBarElevation == null || appBarElevation >= 0.0,
             'AppBar elevation must be >= 0 or null.'),
@@ -1263,9 +1263,9 @@ class FlexColorScheme with Diagnosticable {
   /// If no value is given, and if there is no [colorScheme] defined, it
   /// defaults to [FlexColor.materialLightBackground] if brightness is light,
   /// and to [FlexColor.materialDarkBackground] if brightness is dark.
-  @Deprecated('Use FlexColorScheme.surface instead. '
-      'This property will be removed in a future release. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color.')
+  @Deprecated('Use FlexColorScheme.surface instead. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final Color? background;
 
   /// A color that is clearly legible when drawn on background color.
@@ -1276,9 +1276,9 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// If null, the on color is derived from the brightness of the background
   /// color, and will be be black if it is light and white if it is dark.
-  @Deprecated('Use FlexColorScheme.onSurface instead. '
-      'This property will be removed in a future release. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color.')
+  @Deprecated('Use FlexColorScheme.onSurface instead. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final Color? onBackground;
 
   //****************************************************************************
@@ -2717,9 +2717,9 @@ class FlexColorScheme with Diagnosticable {
     /// same color in it as well.
     ///
     /// Defaults to null.
-    @Deprecated('Use surface instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use surface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? background,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -2738,9 +2738,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    @Deprecated('Use onSurface instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use onSurface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? onBackground,
   }) {
     // LIGHT: Check valid inputs
@@ -4797,9 +4797,9 @@ class FlexColorScheme with Diagnosticable {
     /// same color in it as well.
     ///
     /// Defaults to null.
-    @Deprecated('Use surface instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use surface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? background,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -4818,9 +4818,9 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    @Deprecated('Use background instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use background instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? onBackground,
   }) {
     // DARK: Check valid inputs
@@ -5932,6 +5932,9 @@ class FlexColorScheme with Diagnosticable {
   /// The used algorithm is identical to the same named function
   /// found in ColorTools in FlexColorPicker at
   /// https://pub.dev/packages/flex_color_picker.
+  @Deprecated('This function is no longer used by FlexColorScheme and will be '
+      'removed in FCS v9. You can still find this function in ColorTools '
+      'in package FlexColorPicker.')
   static MaterialColor createPrimarySwatch(final Color? color) {
     // Null default fallback is default material primary light color.
     final Color usedColor = color ?? FlexColor.materialLightPrimary;
@@ -8430,13 +8433,13 @@ class FlexColorScheme with Diagnosticable {
     bool? useMaterial3,
     Iterable<ThemeExtension<dynamic>>? extensions,
     //
-    @Deprecated('Use FlexColorScheme.surface instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use FlexColorScheme.surface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     Color? background,
-    @Deprecated('Use FlexColorScheme.onSurface instead. '
-        'This property will be removed in a future release. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color.')
+    @Deprecated('Use FlexColorScheme.onSurface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     Color? onBackground,
   }) {
     return FlexColorScheme(

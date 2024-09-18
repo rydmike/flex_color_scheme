@@ -43,10 +43,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     required this.scaffoldBackground,
     required this.dialogBackground,
     @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color, it has no function and should not be used.')
+        'deprecated the color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.surfaceVariant,
     @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color, it has no function and should not be used.')
+        'deprecated the color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.background,
   })  : _surfaceDim = surfaceDim,
         _surfaceBright = surfaceBright,
@@ -147,14 +149,16 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// A color variant of [surface] that can be used for differentiation against
   /// a component using [surface]. Defaults to [surface] as fallback.
   @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color, it has no function and should not be used.')
+      'deprecated the color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final Color? surfaceVariant;
 
   /// A color that typically appears behind scrollable content.
   ///
   /// The default background color of [Material] of type canvas.
   @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color, it has no function and should not be used.')
+      'deprecated the color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final Color? background;
 
   /// Create nuanced surface colors using pre-defined behavior via enum
@@ -362,10 +366,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     Color? scaffoldBackground,
     Color? dialogBackground,
     @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color, it has no function and should not be used.')
+        'deprecated the color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     Color? surfaceVariant,
     @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color, it has no function and should not be used.')
+        'deprecated the color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     Color? background,
   }) {
     return FlexSchemeSurfaceColors(

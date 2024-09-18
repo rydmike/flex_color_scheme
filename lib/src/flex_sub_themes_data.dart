@@ -449,10 +449,12 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailLabelType,
     this.navigationRailGroupAlignment,
     //
-    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
-        'future version. FlexColorScheme in M3 mode now defaults to using '
-        'Flutter defaults. For other configurations modify them as desired. '
-        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
+        'function and will be removed in v9. FlexColorScheme in M3 mode '
+        'defaults to using mostly Flutter defaults styles. '
+        'For other configurations modify the theme as desired. '
+        'In M2 mode FCS will continue to use its own opinionated defaults for '
+        'as long as M2 exists.')
     this.useFlutterDefaults,
   });
 
@@ -3383,10 +3385,12 @@ class FlexSubThemesData with Diagnosticable {
   /// prefer keeping this setting false.
   ///
   /// If undefined, defaults to false.
-  @Deprecated('useFlutterDefaults is deprecated and will be removed in a '
-      'future version. FlexColorScheme in M3 mode now defaults to using '
-      'Flutter defaults. For other configurations modify them as desired. '
-      'In M2 mode it will use opinionated defaults as long as M2 exists.')
+  @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
+      'function and will be removed in v9. FlexColorScheme in M3 mode '
+      'defaults to using mostly Flutter defaults styles. '
+      'For other configurations modify the theme as desired. '
+      'In M2 mode FCS will continue to use its own opinionated defaults for '
+      'as long as M2 exists.')
   final bool? useFlutterDefaults;
 
   /// Copy the object with one or more provided properties changed.
@@ -3677,10 +3681,12 @@ class FlexSubThemesData with Diagnosticable {
     final NavigationRailLabelType? navigationRailLabelType,
     final double? navigationRailGroupAlignment,
     //
-    @Deprecated('The useFlutterDefaults is deprecated and will be removed in a '
-        'future version. FlexColorScheme in M3 mode now defaults to using '
-        'Flutter defaults. For other configurations modify them as desired. '
-        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
+        'function and will be removed in v9. FlexColorScheme in M3 mode '
+        'defaults to using mostly Flutter defaults styles. '
+        'For other configurations modify the theme as desired. '
+        'In M2 mode FCS will continue to use its own opinionated defaults for '
+        'as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
     return FlexSubThemesData(

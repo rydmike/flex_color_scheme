@@ -35,10 +35,12 @@ class FlexAlphaValues {
     this.dialogAlpha = 0,
     this.scaffoldAlpha = 0,
     @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
-        '3.22 deprecated the color ColorScheme.surfaceVariant.')
+        '3.22 deprecated the color ColorScheme.surfaceVariant. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.surfaceVariantAlpha,
     @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
-        '3.22 deprecated the color ColorScheme.background.')
+        '3.22 deprecated the color ColorScheme.background. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.backgroundAlpha,
   });
 
@@ -80,12 +82,14 @@ class FlexAlphaValues {
 
   /// Alpha blend value for surfaceVariant color.
   @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
-      '3.22 deprecated the color ColorScheme.surfaceVariant.')
+      '3.22 deprecated the color ColorScheme.surfaceVariant. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final int? surfaceVariantAlpha;
 
   /// Alpha blend value for background color.
   @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
-      '3.22 deprecated the color ColorScheme.background.')
+      '3.22 deprecated the color ColorScheme.background. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final int? backgroundAlpha;
 
   /// Factory used to get alpha values for a given blend level and blend mode

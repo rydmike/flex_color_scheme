@@ -188,6 +188,7 @@ enum SchemeColor {
   /// Transparent color will be used.
   transparent,
 
+  // TODO(rydmike): Remove this commented code. Check braking notice about it.
   // /// The active theme's color scheme background color will be used.
   // @Deprecated('Use surface instead. '
   //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
@@ -1053,10 +1054,12 @@ sealed class FlexSubThemes {
     ///
     /// When muted unselected options are true, the difference to Flutter
     /// default for unselected items is subtle, FCS has a bit more contrast.
-    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
-        'future version. FlexColorScheme in M3 mode now defaults to using '
-        'Flutter defaults. For other configurations modify them as desired. '
-        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
+        'function and will be removed in v9. FlexColorScheme in M3 mode '
+        'defaults to using mostly Flutter defaults styles. '
+        'For other configurations modify the theme as desired. '
+        'In M2 mode FCS will continue to use its own opinionated defaults for '
+        'as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
     // Get text color, defaults to primary.
@@ -4517,7 +4520,7 @@ sealed class FlexSubThemes {
     ///
     /// If undefined, defaults to true.
     @Deprecated('The useMaterial3 flag no longer has any function in this '
-        'component theme and is deprecated')
+        'component theme and is deprecated here. It will be removed in v9')
     final bool? useMaterial3,
 
     /// Set to true to use Flutter SDK defaults for [NavigationBar]
@@ -4552,10 +4555,12 @@ sealed class FlexSubThemes {
     /// [navigationBarMutedUnselectedIcon] and
     /// [navigationBarMutedUnselectedLabel] are true respectively, this
     /// also applies to undefined color inputs.
-    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
-        'future version. FlexColorScheme in M3 mode now defaults to using '
-        'Flutter defaults. For other configurations modify them as desired. '
-        'In M2 mode it will use opinionated defaults as long as M2 exists.')
+    @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
+        'function and will be removed in v9. FlexColorScheme in M3 mode '
+        'defaults to using mostly Flutter defaults styles. '
+        'For other configurations modify the theme as desired. '
+        'In M2 mode FCS will continue to use its own opinionated defaults for '
+        'as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
     // Get text color, defaults to onSurface.
@@ -5141,7 +5146,7 @@ sealed class FlexSubThemes {
     ///
     /// If undefined, defaults to true.
     @Deprecated('The useMaterial3 flag no longer has any function in this '
-        'component theme and is deprecated')
+        'component theme and is deprecated. It will be removed in v9.')
     final bool? useMaterial3,
 
     /// Set to true to use Flutter SDK defaults for [NavigationRail]
@@ -5178,10 +5183,12 @@ sealed class FlexSubThemes {
     /// prefer keeping this setting false.
     ///
     /// Defaults to null.
-    @Deprecated('the useFlutterDefaults is deprecated and will be removed in a '
-        'future version. FlexColorScheme in M3 mode now defaults to using '
-        'Flutter defaults. For other configurations modify them as desired. '
-        'In M2 mode FCS uses its opinionated defaults as long as M2 exists.')
+    @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
+        'function and will be removed in v9. FlexColorScheme in M3 mode '
+        'defaults to using mostly Flutter defaults styles. '
+        'For other configurations modify the theme as desired. '
+        'In M2 mode FCS will continue to use its own opinionated defaults for '
+        'as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
     // Background color, falls back to surface.
