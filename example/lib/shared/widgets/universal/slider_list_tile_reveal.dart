@@ -226,7 +226,10 @@ class SliderListTileReveal extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (valueHeading != null)
-                Text(valueHeading!, style: theme.textTheme.bodySmall),
+                Text(
+                  valueHeading!,
+                  style: const TextStyle(fontSize: 12),
+                ),
               Text(
                 enabled
                     ? value == null ||
@@ -238,8 +241,10 @@ class SliderListTileReveal extends StatelessWidget {
                     // ignore: lines_longer_than_80_chars
                     : 'default\n${valueDefaultDisabledLabel ?? valueDefaultLabel}',
                 textAlign: TextAlign.center,
-                style: theme.textTheme.bodySmall!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
