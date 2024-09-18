@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -36,6 +35,8 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
+    // TODO(rydmike): Add height adjustment!
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -58,6 +59,18 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
+        SliderListTileReveal(
+          enabled: controller.useFlexColorScheme,
+          title: const Text('Height'),
+          value: controller.bottomAppBarHeight,
+          onChanged: controller.setBottomAppBarHeight,
+          min: 40,
+          max: 140,
+          divisions: 100,
+          valueHeading: 'HEIGHT',
+          valueDecimalPlaces: 1,
+          valueDefaultLabel: useMaterial3 ? '80' : 'content',
+        ),
         if (isLight) ...<Widget>[
           SliderListTileReveal(
             enabled: controller.useFlexColorScheme,
@@ -71,22 +84,13 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
             valueDecimalPlaces: 1,
             valueDefaultLabel: useMaterial3 ? '3' : '8',
           ),
-          ColorSchemePopupMenu(
+          ColorSchemePopupMenuNew(
+            enabled: enableControl,
             title: const Text('Color (light)'),
-            defaultLabel: useMaterial3
-                ? 'default (surfaceContainer)'
-                : 'default (surface)',
-            value: controller.bottomAppBarSchemeColorLight?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setBottomAppBarSchemeColorLight(null);
-                    } else {
-                      controller.setBottomAppBarSchemeColorLight(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+            defaultLabel: 'surfaceContainer',
+            defaultLabelM2: 'surface',
+            value: controller.bottomAppBarSchemeColorLight,
+            onChanged: controller.setBottomAppBarSchemeColorLight,
           ),
         ] else ...<Widget>[
           SliderListTileReveal(
@@ -101,22 +105,13 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
             valueDecimalPlaces: 1,
             valueDefaultLabel: useMaterial3 ? '3' : '8',
           ),
-          ColorSchemePopupMenu(
+          ColorSchemePopupMenuNew(
+            enabled: enableControl,
             title: const Text('Color (dark)'),
-            defaultLabel: useMaterial3
-                ? 'default (surfaceContainer)'
-                : 'default (surface)',
-            value: controller.bottomAppBarSchemeColorDark?.index ?? -1,
-            onChanged: enableControl
-                ? (int index) {
-                    if (index < 0 || index >= SchemeColor.values.length) {
-                      controller.setBottomAppBarSchemeColorDark(null);
-                    } else {
-                      controller.setBottomAppBarSchemeColorDark(
-                          SchemeColor.values[index]);
-                    }
-                  }
-                : null,
+            defaultLabel: 'surfaceContainer',
+            defaultLabelM2: 'surface',
+            value: controller.bottomAppBarSchemeColorDark,
+            onChanged: controller.setBottomAppBarSchemeColorDark,
           ),
         ],
 
