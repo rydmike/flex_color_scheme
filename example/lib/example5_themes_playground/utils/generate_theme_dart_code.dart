@@ -1857,9 +1857,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    contrastLevel: ${controller.dynamicContrastLevel},\n'
       : '';
 
-  final String useExpressiveOnContainerColors = controller
-              .expressiveOnContainer &&
-          FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme
+  final String useExpressiveOnContainerColors = controller.expressiveOnContainer
       ? '    useExpressiveOnContainerColors: ${controller.expressiveOnContainer},\n'
       : '';
 
@@ -1931,9 +1929,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$variantTypeTonesDark';
     }
 
-    final String expressiveOnContainer = controller.expressiveOnContainer
-        ? '\n    .expressiveOnContainer()'
-        : '';
     final String higherContrastFixed =
         controller.higherContrastFixed ? '\n    .higherContrastFixed()' : '';
     final String monochromeSurfacesLight =
@@ -1956,15 +1951,13 @@ String generateThemeDartCode(ThemeController controller) {
 
     if (!FlexSchemeVariant
         .values[controller.usedFlexToneSetup].isFlutterScheme) {
-      flexTonesLight =
-          '$flexTonesLight$expressiveOnContainer$higherContrastFixed'
+      flexTonesLight = '$flexTonesLight$higherContrastFixed'
           '$monochromeSurfacesLight$onMainsUseBWLight$onSurfacesUseBWLight'
           '$surfacesUseBWLight';
       flexTonesDark = '$flexTonesDark$higherContrastFixed'
           '$monochromeSurfacesDark$onMainsUseBWDark$onSurfacesUseBWDark'
           '$surfacesUseBWDark';
-      if (controller.expressiveOnContainer ||
-          controller.higherContrastFixed ||
+      if (controller.higherContrastFixed ||
           controller.useMonoSurfacesLight ||
           controller.onMainsUseBWLight ||
           controller.onSurfacesUseBWLight ||
