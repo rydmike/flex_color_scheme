@@ -6686,6 +6686,15 @@ class FlexColorScheme with Diagnosticable {
         ? colorScheme.primary.blend(Colors.black, 60)
         : colorScheme.primary.blend(Colors.white, 80);
 
+    //**************************************************************************
+    // APPBAR THEMING
+    //
+    // The logic for this is not in the sub-themes, since it has a legacy that
+    // it could be themed quite a bit with out enabling component themes
+    // in FCS. The colors for background, title and icons is a bit over
+    // complex, but it results in that very few props are required and it
+    // always delivers usable contrast colors with very few inputs by default.
+    //
     // AppBar background color:
     // - If a color is passed in, that is used first. The light/dark factory
     //   always passes in a color, it may have opacity too. When the factories
@@ -6847,6 +6856,12 @@ class FlexColorScheme with Diagnosticable {
       systemNavigationBarContrastEnforced: false,
     );
 
+    //**************************************************************************
+    // TABBAR THEMING
+    //
+    // The TabBar need AppBar styles as input for its theming options.
+    // so it is also handled inline.
+    //
     // Selected TabBar color is based on FlexTabBarStyle tabBarStyle.
     // The `flutterDefault` sets values corresponding to SDK Default behavior,
     // it can be used, but is not as useful as the `forAppBar` version which
