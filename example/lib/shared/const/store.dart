@@ -636,7 +636,7 @@ class Store {
   static const String keyInputDecoratorBorderType = 'inputDecoratorBorderType';
   // Default value for the inputDecoratorBorderType, also to reset settings.
   static const FlexInputBorderType defaultInputDecoratorBorderType =
-      FlexInputBorderType.underline;
+      FlexInputBorderType.outline;
 
   // Key used to read and save the inputDecoratorBorderRadius value.
   static const String keyInputDecoratorBorderRadius =
