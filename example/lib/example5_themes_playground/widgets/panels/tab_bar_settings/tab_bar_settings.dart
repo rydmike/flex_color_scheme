@@ -195,7 +195,7 @@ class TabBarSettings extends StatelessWidget {
           onChanged: controller.setTabBarTabAlignment,
         ),
         if (isLight) ...<Widget>[
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Light selected item color'),
             defaultLabel: 'TabBarStyle',
@@ -205,7 +205,7 @@ class TabBarSettings extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Light unselected items color'),
@@ -236,7 +236,7 @@ class TabBarSettings extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Light indicator color'),
@@ -258,7 +258,7 @@ class TabBarSettings extends StatelessWidget {
             ],
           ),
         ] else ...<Widget>[
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Dark selected item color'),
             defaultLabel: 'TabBarStyle',
@@ -268,7 +268,7 @@ class TabBarSettings extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Dark unselected items color'),
@@ -299,7 +299,7 @@ class TabBarSettings extends StatelessWidget {
           Row(
             children: <Widget>[
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Dark indicator color'),

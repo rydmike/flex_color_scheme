@@ -202,7 +202,7 @@ class DialogSettings extends StatelessWidget {
         const AlertDialogShowcase(),
 
         if (isLight)
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Background color light mode'),
             defaultLabel: 'surfaceContainerHigh',
@@ -214,7 +214,7 @@ class DialogSettings extends StatelessWidget {
             onChanged: controller.setDialogBackgroundLightSchemeColor,
           )
         else
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Background color light mode'),
             defaultLabel: 'surfaceContainerHigh',
@@ -516,7 +516,7 @@ class DialogSettings extends StatelessWidget {
             controller.timePickerDialogBorderRadius,
           ),
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Header background color'),
           defaultLabel: controller.dialogBackgroundLightSchemeColor == null
@@ -532,7 +532,7 @@ class DialogSettings extends StatelessWidget {
           value: controller.datePickerHeaderBackgroundSchemeColor,
           onChanged: controller.setDatePickerHeaderBackgroundSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl && useMaterial3,
           title: const Text('Divider color'),
           defaultLabel: 'outlineVariant',

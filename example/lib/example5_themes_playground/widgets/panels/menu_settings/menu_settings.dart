@@ -114,7 +114,7 @@ class MenuSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Color'),
@@ -283,7 +283,7 @@ class MenuSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),
@@ -294,7 +294,7 @@ class MenuSettings extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 enabled: enableControl,
                 contentPadding: paddingEndColumn,
                 title: const Text('Foreground color'),
@@ -310,7 +310,7 @@ class MenuSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Highlighted background'),
@@ -321,7 +321,7 @@ class MenuSettings extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 enabled: enableControl,
                 contentPadding: paddingEndColumn,
                 title: const Text('Highlighted foreground'),
@@ -452,7 +452,7 @@ class MenuSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),

@@ -76,7 +76,7 @@ class BottomSheetSettings extends StatelessWidget {
           valueDefaultLabel: useMaterial3 ? '1' : '4',
           valueDefaultDisabledLabel: useMaterial3 ? '1' : '0',
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           defaultLabel: 'surfaceContainerLow',
@@ -105,7 +105,7 @@ class BottomSheetSettings extends StatelessWidget {
           valueDefaultLabel: useMaterial3 ? '2' : '8',
           valueDefaultDisabledLabel: useMaterial3 ? '1' : '0',
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           defaultLabel: 'surfaceContainerLow',

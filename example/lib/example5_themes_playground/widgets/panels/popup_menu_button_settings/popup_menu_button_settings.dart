@@ -79,7 +79,7 @@ class PopupMenuButtonSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 enabled: enableControl,
                 contentPadding: paddingStartColumn,
                 title: const Text('Background color'),

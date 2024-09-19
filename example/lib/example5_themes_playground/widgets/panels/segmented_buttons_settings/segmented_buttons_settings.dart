@@ -95,7 +95,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: SegmentedButtonShowcase(),
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           subtitle: const Text('Selected foreground automatically uses the '
@@ -106,14 +106,14 @@ class SegmentedButtonsSettings extends StatelessWidget {
           value: controller.segmentedButtonSchemeColor,
           onChanged: controller.setSegmentedButtonSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Unselected item background color'),
           defaultLabel: 'transparent',
           value: controller.segmentedButtonUnselectedSchemeColor,
           onChanged: controller.setSegmentedButtonUnselectedSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Unselected item foreground color'),
           defaultLabel: controller.segmentedButtonUnselectedSchemeColor == null
@@ -128,7 +128,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           onChanged:
               controller.setSegmentedButtonUnselectedForegroundSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Border color'),
           defaultLabel: controller.segmentedButtonBorderSchemeColor == null
@@ -237,7 +237,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: ToggleButtonsShowcase(compareButtons: true),
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Selected background color'),
           defaultLabel: 'primary',
@@ -245,7 +245,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           value: controller.toggleButtonsSchemeColor,
           onChanged: controller.setToggleButtonsSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Unselected foreground color'),
           defaultLabel: enableControl &&
@@ -257,7 +257,7 @@ class SegmentedButtonsSettings extends StatelessWidget {
           value: controller.toggleButtonsUnselectedSchemeColor,
           onChanged: controller.setToggleButtonsUnselectedSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Border color'),
           defaultLabel: useMaterial3

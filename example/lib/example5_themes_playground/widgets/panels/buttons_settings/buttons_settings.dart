@@ -95,7 +95,7 @@ class ButtonsSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('ElevatedButton main color'),
           colorPrefix: useMaterial3 ? 'Foreground color ' : 'Background color ',
@@ -107,7 +107,7 @@ class ButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: ElevatedButtonShowcase(),
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('ElevatedButton secondary color'),
           colorPrefix: useMaterial3 ? 'Background color ' : 'Foreground color ',
@@ -131,7 +131,7 @@ class ButtonsSettings extends StatelessWidget {
           valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
         const Divider(),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('FilledButton color'),
           defaultLabel: 'primary and secondaryContainer',
@@ -197,7 +197,7 @@ class ButtonsSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('OutlinedButton foreground color'),
           defaultLabel: 'primary',
@@ -208,7 +208,7 @@ class ButtonsSettings extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: OutlinedButtonShowcase(),
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('OutlinedButton outline color'),
           defaultLabel: 'outline',
@@ -268,7 +268,7 @@ class ButtonsSettings extends StatelessWidget {
           ],
         ),
         const Divider(),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('TextButton color'),
           defaultLabel: 'primary',

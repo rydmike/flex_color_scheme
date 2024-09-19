@@ -85,7 +85,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         const SizedBox(height: 8),
         const DrawerShowcase(explain: false),
         const SizedBox(height: 16),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           defaultLabel: 'surfaceContainerLow',
@@ -190,7 +190,7 @@ class NavigationDrawerSettings extends StatelessWidget {
         ),
         const NavigationDrawerShowcase(explain: false),
         const SizedBox(height: 16),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Drawer indicator color'),
           defaultLabel: 'secondaryContainer',
@@ -238,7 +238,7 @@ class NavigationDrawerSettings extends StatelessWidget {
           valueDefaultLabel: '${derivedIndicatorWidth.toStringAsFixed(0)} dp',
           valueDefaultDisabledLabel: '${304 - 2 * 12} dp',
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Selected item color'),
           defaultLabel: controller.drawerIndicatorSchemeColor == null
@@ -252,7 +252,7 @@ class NavigationDrawerSettings extends StatelessWidget {
           value: controller.drawerSelectedItemSchemeColor,
           onChanged: controller.setDrawerSelectedItemSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Unselected item color'),
           defaultLabel: controller.drawerBackgroundSchemeColor == null
