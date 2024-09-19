@@ -35,6 +35,7 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
     this.subtitle,
     this.subtitleReveal,
     this.colorPrefix = '',
+    this.colorSuffix = '',
     this.contentPadding,
     this.dense,
     this.revealDense,
@@ -83,9 +84,15 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
 
   /// A prefix to the color name displayed in the subtitle of the selected item.
   ///
-  /// If provided, this text label is added to selected color value displayed
-  /// in the  subtitle of the selected item ListTile label.
+  /// If provided, this text label is added before the selected color value
+  /// displayed in the  subtitle of the selected item ListTile label.
   final String colorPrefix;
+
+  /// A suffix to the color name displayed in the subtitle of the selected item.
+  ///
+  /// If provided, this text label is added after the selected color value
+  /// displayed in the  subtitle of the selected item ListTile label.
+  final String colorSuffix;
 
   /// The [ListTileReveal]'s internal padding.
   ///
@@ -290,7 +297,7 @@ class ColorSchemePopupMenuNew extends StatelessWidget {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('$colorPrefix$selectedLabel'),
+              Text('$colorPrefix$selectedLabel$colorSuffix'),
               if (subtitle != null) subtitle!,
             ],
           ),
