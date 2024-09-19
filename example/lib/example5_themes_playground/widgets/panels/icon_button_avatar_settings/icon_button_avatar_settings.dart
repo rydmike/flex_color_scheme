@@ -109,8 +109,16 @@ class IconButtonAvatarSettings extends StatelessWidget {
                 TextSpan(
                     style: spanTextStyle,
                     text: ' and its referenced PR brought the new styled '
-                        'IconButton constructors to 3.10. These new '
-                        'IconButtons have the same theming limitation as the '
+                        'IconButton constructors to 3.10.\n'
+                        'In Flutter 3.3 and 3.7 you have to create these '
+                        'M3 IconButtons as custom widgets using styleFrom. '
+                        'There is example code showing how to do it correctly '
+                        'in the Flutter API docs for 3.3 and 3.7. It is '
+                        'tedious to construct them, but doable. The built-in '
+                        'constructors are available in Flutter 3.10.\n'
+                        '\n'
+                        'Theming the IconButtons is not recommended because '
+                        'they all have the same theming limitation as the '
                         'FilledButton. '
                         'For more information about this, see issue '),
                 LinkTextSpan(
@@ -120,16 +128,7 @@ class IconButtonAvatarSettings extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. In Flutter 3.3 and 3.7 you have to create these '
-                      'M3 IconButtons as custom widgets using styleFrom. '
-                      'There is example code showing how to do it correctly '
-                      'in the Flutter API docs for 3.3 and 3.7. It is '
-                      'tedious to construct them, but doable. The built-in '
-                      'constructors are available in Flutter 3.10, but '
-                      'theming them is not recommended due to above mentioned '
-                      'issue.\n'
-                      '\n'
-                      'Due to the above theming limitation, FCS is currently '
+                  text: '. Due to this, FCS is currently '
                       'not offering any color theming for the IconButton '
                       'variants. Their default styles are however quite '
                       'diverse and have usable default theme based '
