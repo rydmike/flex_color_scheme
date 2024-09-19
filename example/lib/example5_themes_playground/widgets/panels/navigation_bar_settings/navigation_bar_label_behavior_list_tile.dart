@@ -6,9 +6,18 @@ import '../../../../shared/widgets/universal/navigation_bar_label_behavior_toggl
 class NavigationBarLabelBehaviorListTile extends StatelessWidget {
   const NavigationBarLabelBehaviorListTile({
     required this.controller,
+    this.contentPadding,
     super.key,
   });
   final ThemeController controller;
+
+  /// The [ListTileReveal]'s internal padding.
+  ///
+  /// Insets a [ListTileReveal]'s contents.
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
+  /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
+  final EdgeInsetsGeometry? contentPadding;
 
   String _explainLabelStyle(NavigationDestinationLabelBehavior labelBehavior) {
     switch (labelBehavior) {
@@ -24,6 +33,7 @@ class NavigationBarLabelBehaviorListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: contentPadding,
       enabled: controller.useSubThemes && controller.useFlexColorScheme,
       title: const Text('Label behavior'),
       subtitle: Text(_explainLabelStyle(
