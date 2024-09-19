@@ -15,39 +15,29 @@ String generateThemeDartCode(ThemeController controller) {
   // If FlexColorsScheme is not in use, return a default M3/M2 ColorScheme based
   // theme as a starting point suggestion.
   if (!controller.useFlexColorScheme) {
-    // Are we using Typography 2021 or 2018? M3 defaults to Typo2021 so no need
-    // specify it, but M2 default to even older typ2014 if not specifying 2018.
-    final String usedTypography = controller.useMaterial3
-        ? ''
-        : '  typography: Typography.material2018(platform: defaultTargetPlatform),';
     if (controller.useMaterial3) {
       return '''
   // FlexColorScheme is not in use!
-  // Here is a default Material-3 starting point theme setup for you.
-  //
-  theme: ThemeData(    
-    useMaterial3: true,
-  $usedTypography 
-  ),
+  // Here is a default Material-3 starting point theme setup.
+  theme: ThemeData(),    
   darkTheme: ThemeData(
     brightness: Brightness.dark,
-    useMaterial3: true,
-  $usedTypography    
   ),
   themeMode: ThemeMode.system,''';
     } else {
       return '''
   // FlexColorScheme is not in use!
-  // Here is a default Material 2 starting point theme setup for you.
-  //
+  // Here is a default Material 2 starting point theme setup.
   theme: ThemeData(
-    colorScheme: const ColorScheme.light(),    
-  $usedTypography
+    useMaterial3: false,
+    colorScheme: const ColorScheme.light(),
+    Typography.material2018(platform: defaultTargetPlatform),    
   ),
-  darkTheme: ThemeData(    
+  darkTheme: ThemeData(
+    useMaterial3: false,    
     colorScheme: const ColorScheme.dark(),
     applyElevationOverlayColor: true,
-  $usedTypography  
+    Typography.material2018(platform: defaultTargetPlatform),  
   ),
   themeMode: ThemeMode.system,''';
     }
