@@ -185,7 +185,7 @@ class ColorBlendsSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Scaffold background color'),
             defaultLabel: 'surfaceContainerLowest',
@@ -254,7 +254,7 @@ class ColorBlendsSettings extends StatelessWidget {
             },
           ),
         ] else ...<Widget>[
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Scaffold background color'),
             defaultLabel: 'surfaceContainerLowest',

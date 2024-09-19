@@ -26,7 +26,7 @@ class NavigationRailSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           defaultLabel: 'surface',
@@ -67,7 +67,7 @@ class NavigationRailSettings extends StatelessWidget {
           value: enableControl && controller.navRailUseIndicator,
           onChanged: enableControl ? controller.setNavRailUseIndicator : null,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Selection indicator color'),
           defaultLabel: 'secondaryContainer',
@@ -138,7 +138,7 @@ class NavigationRailSettings extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ColorSchemePopupMenuNew(
+                  ColorSchemePopupMenu(
                     enabled: enableControl,
                     title: const Text('Selected icon color'),
                     defaultLabel: controller.navRailIndicatorSchemeColor == null
@@ -153,7 +153,7 @@ class NavigationRailSettings extends StatelessWidget {
                     value: controller.navRailSelectedIconSchemeColor,
                     onChanged: controller.setNavRailSelectedIconSchemeColor,
                   ),
-                  ColorSchemePopupMenuNew(
+                  ColorSchemePopupMenu(
                     enabled: enableControl,
                     title: const Text('Selected label color'),
                     defaultLabel: controller.navRailBackgroundSchemeColor ==
@@ -169,7 +169,7 @@ class NavigationRailSettings extends StatelessWidget {
                     value: controller.navRailSelectedIconSchemeColor,
                     onChanged: controller.setNavRailSelectedIconSchemeColor,
                   ),
-                  ColorSchemePopupMenuNew(
+                  ColorSchemePopupMenu(
                     enabled: enableControl,
                     title: const Text('Unselected item color'),
                     subtitle:

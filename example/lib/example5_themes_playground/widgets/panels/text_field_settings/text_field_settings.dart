@@ -228,7 +228,7 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   enabled: enableControl,
                   title: const Text('Background color (light)'),
@@ -269,7 +269,7 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   enabled: enableControl,
                   title: const Text('Background color (dark)'),
@@ -368,7 +368,7 @@ class TextFieldSettings extends StatelessWidget {
             if (isLight)
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   enabled: enableControl &&
                       !(!controller.inputDecoratorFocusedHasBorder &&
@@ -385,7 +385,7 @@ class TextFieldSettings extends StatelessWidget {
             else
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   enabled: enableControl &&
                       !(!controller.inputDecoratorFocusedHasBorder &&
@@ -503,7 +503,7 @@ class TextFieldSettings extends StatelessWidget {
             // 1st column light
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   enabled: enableControl,
                   title: const Text('Focused prefix icon'),
@@ -519,7 +519,7 @@ class TextFieldSettings extends StatelessWidget {
             else
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   contentPadding: paddingStartColumn,
                   enabled: enableControl,
                   title: const Text('Focused prefix icon'),
@@ -537,7 +537,7 @@ class TextFieldSettings extends StatelessWidget {
             if (isLight)
               // 2nd column light
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Focused suffix icon'),
@@ -553,7 +553,7 @@ class TextFieldSettings extends StatelessWidget {
             else
               // 2nd column dark
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Focused suffix icon'),
@@ -696,7 +696,7 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
@@ -708,7 +708,7 @@ class TextFieldSettings extends StatelessWidget {
               ),
               // 2nd column light
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
@@ -725,7 +725,7 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column light
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Selection'),
@@ -762,7 +762,7 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Cursor'),
@@ -774,7 +774,7 @@ class TextFieldSettings extends StatelessWidget {
               ),
               // 2nd column dark
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Selection handles'),
@@ -791,7 +791,7 @@ class TextFieldSettings extends StatelessWidget {
             children: <Widget>[
               // 1st column dark
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Selection'),

@@ -273,7 +273,7 @@ class AppBarSettings extends StatelessWidget {
           children: <Widget>[
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Background color'),
@@ -288,7 +288,7 @@ class AppBarSettings extends StatelessWidget {
               )
             else
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Background color'),
@@ -301,7 +301,7 @@ class AppBarSettings extends StatelessWidget {
               ),
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Title color'),
@@ -323,7 +323,7 @@ class AppBarSettings extends StatelessWidget {
               )
             else
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Title color'),
@@ -348,7 +348,7 @@ class AppBarSettings extends StatelessWidget {
           children: <Widget>[
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Icon color'),
@@ -372,7 +372,7 @@ class AppBarSettings extends StatelessWidget {
               )
             else
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingStartColumn,
                   title: const Text('Icon color'),
@@ -395,7 +395,7 @@ class AppBarSettings extends StatelessWidget {
               ),
             if (isLight)
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Actions icon color'),
@@ -418,7 +418,7 @@ class AppBarSettings extends StatelessWidget {
               )
             else
               Expanded(
-                child: ColorSchemePopupMenuNew(
+                child: ColorSchemePopupMenu(
                   enabled: enableControl,
                   contentPadding: paddingEndColumn,
                   title: const Text('Actions icon color'),

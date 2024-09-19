@@ -56,7 +56,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           subtitleReveal: const Text('In Material-2 dark mode, the bottom '
@@ -128,7 +128,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
           valueDefaultLabel: '3',
           valueDefaultDisabledLabel: '8',
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Selected item color'),
           subtitle: const Text('Label and icon, but separate API'),
@@ -136,7 +136,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
           value: controller.bottomNavBarSelectedSchemeColor,
           onChanged: controller.setBottomNavBarSelectedSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Unselected item color'),
           subtitle: const Text('Label and icon, but separate API'),

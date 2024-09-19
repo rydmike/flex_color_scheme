@@ -47,7 +47,7 @@ class SliderSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Main color'),
           defaultLabel: 'primary',
@@ -55,7 +55,7 @@ class SliderSettings extends StatelessWidget {
           value: controller.sliderBaseSchemeColor,
           onChanged: controller.setSliderBaseSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Value indicator color'),
           defaultLabel: labelIndicatorDefault,

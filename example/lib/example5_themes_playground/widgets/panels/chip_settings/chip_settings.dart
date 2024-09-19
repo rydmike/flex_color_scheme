@@ -60,7 +60,7 @@ class ChipSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Chip color'),
           defaultLabel: 'surface',
@@ -70,7 +70,7 @@ class ChipSettings extends StatelessWidget {
           value: controller.chipSchemeColor,
           onChanged: controller.setChipSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Selected Chip color'),
           defaultLabel: 'secondaryContainer',
@@ -80,7 +80,7 @@ class ChipSettings extends StatelessWidget {
           value: controller.chipSelectedSchemeColor,
           onChanged: controller.setChipSelectedSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Choice Chip selected color'),
           defaultLabel: 'secondaryContainer',
@@ -91,7 +91,7 @@ class ChipSettings extends StatelessWidget {
           onChanged: controller.setChipSecondarySelectedSchemeColor,
         ),
         ChipBlendColorsToggleButtons(controller: controller),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Chip delete icon color'),
           defaultLabel: 'onSurfaceVariant',

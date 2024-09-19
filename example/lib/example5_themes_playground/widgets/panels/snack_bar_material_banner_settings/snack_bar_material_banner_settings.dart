@@ -106,7 +106,7 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
           valueDefaultLabel: '4',
           valueDefaultDisabledLabel: '6',
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           subtitleReveal:
@@ -120,7 +120,7 @@ class SnackBarMaterialBannerSettings extends StatelessWidget {
           value: controller.snackBarSchemeColor,
           onChanged: controller.setSnackBarSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Action button text color'),
           defaultLabel: 'inversePrimary',

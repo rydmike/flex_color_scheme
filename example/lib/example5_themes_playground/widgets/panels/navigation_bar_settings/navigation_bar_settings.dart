@@ -59,7 +59,7 @@ class NavigationBarSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 enabled: enableControl,
                 title: const Text('Background color'),
@@ -129,7 +129,7 @@ class NavigationBarSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 enabled: enableControl,
                 title: const Text('Selection indicator color'),
@@ -191,7 +191,7 @@ class NavigationBarSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 enabled: enableControl,
                 title: const Text('Selected icon color'),
@@ -202,7 +202,7 @@ class NavigationBarSettings extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 contentPadding: paddingEndColumn,
                 enabled: enableControl,
                 title: const Text('Selected label color'),
@@ -217,7 +217,7 @@ class NavigationBarSettings extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ColorSchemePopupMenuNew(
+              child: ColorSchemePopupMenu(
                 contentPadding: paddingStartColumn,
                 enabled: enableControl,
                 title: const Text('Unselected item color'),

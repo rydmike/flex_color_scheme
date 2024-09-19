@@ -57,7 +57,7 @@ class SwitchesSettings extends StatelessWidget {
               : null,
         ),
         const Divider(),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Switch color'),
           defaultLabel: 'primary',
@@ -70,7 +70,7 @@ class SwitchesSettings extends StatelessWidget {
           child: SwitchShowcase(showCupertinoSwitches: true),
         ),
         const SizedBox(height: 8),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: Text('Switch ON state$explainThumb thumb color'),
           defaultLabel: 'primaryContainer',
@@ -119,7 +119,7 @@ class SwitchesSettings extends StatelessWidget {
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
         const Divider(),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Checkbox color'),
           defaultLabel: 'primary',
@@ -170,7 +170,7 @@ class SwitchesSettings extends StatelessWidget {
           ),
         ),
         const Divider(),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Radio color'),
           defaultLabel: 'primary',

@@ -45,7 +45,7 @@ class FabSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
           defaultLabel: 'primaryContainer',
@@ -53,7 +53,7 @@ class FabSettings extends StatelessWidget {
           value: controller.fabSchemeColor,
           onChanged: controller.setFabSchemeColor,
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Foreground color'),
           defaultLabel: controller.fabSchemeColor != null

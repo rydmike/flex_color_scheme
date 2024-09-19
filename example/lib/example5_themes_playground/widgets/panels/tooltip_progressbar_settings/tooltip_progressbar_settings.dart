@@ -104,7 +104,7 @@ class TooltipProgressBarSettings extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           child: TooltipShowcase(),
         ),
-        ColorSchemePopupMenuNew(
+        ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Tooltip background color'),
           subtitle: controller.tooltipSchemeColor == null

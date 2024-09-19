@@ -25,8 +25,8 @@ import 'color_scheme_box.dart';
 /// * disabled in M2 mode: [defaultDisabledLabelM2], if not provided uses
 ///   [defaultDisabledLabel].
 /// * disabled in M2 darkMode, if not provided uses [defaultDisabledLabelDark].
-class ColorSchemePopupMenuNew extends StatelessWidget {
-  const ColorSchemePopupMenuNew({
+class ColorSchemePopupMenu extends StatelessWidget {
+  const ColorSchemePopupMenu({
     super.key,
     this.value,
     this.onChanged,

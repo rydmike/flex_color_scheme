@@ -84,7 +84,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
             valueDecimalPlaces: 1,
             valueDefaultLabel: useMaterial3 ? '3' : '8',
           ),
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Color (light)'),
             defaultLabel: 'surfaceContainer',
@@ -105,7 +105,7 @@ class BottomAppBarSearchBarSettings extends StatelessWidget {
             valueDecimalPlaces: 1,
             valueDefaultLabel: useMaterial3 ? '3' : '8',
           ),
-          ColorSchemePopupMenuNew(
+          ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Color (dark)'),
             defaultLabel: 'surfaceContainer',
