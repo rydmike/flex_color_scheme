@@ -47,6 +47,10 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
   * Interesting that theming works well without it, but OK we are not using it
   since internally FCS passes along a full `ColorScheme` to raw constructor.
 
+* **TODO** Update the Switch adaptive iOS looks' OFF state color.
+
+* **TODO**: Add the respect monochrome seed option. First finalize it in FSS. Not default in API, but make it default in Playground. 
+
 * **NOT STARTED**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also introduced more breakage, review and fix them. 
   * Also with all new features, get package tests back to 100% coverage.
@@ -420,12 +424,18 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **TODO THEMES PLAYGROUND AND OTHER EXAMPLES**
 
+- Update ColorPicker to a new version with easier to discover entry field.
+- Check: Changelog status of DONE topics below and remove from here when documented. 
 - DONE: AppBar icon colors UI.
 - **Chip** settings panel.
   - DONE: Add secondary selected color 
   - DONE: Add optional blend toggle
   - Maybe: Chip padding, Font size, Chip outline
-- **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
+- **TextField settings panel**. Check that all new features are documented in log.
+  - Add default info about keep outline border in Playground, while API is underline.
+- Change Playground default for interaction tint, disabled tint, and divider style. API remains as is, but Playground default changes. 
+  
+- `TextField` settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
 - Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
 - Figure out the default padding logics for the **TextField** settings panel. It should show the same as the Flutter SDK default, but it is not.
 
