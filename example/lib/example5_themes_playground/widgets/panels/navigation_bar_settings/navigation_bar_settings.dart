@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -29,80 +28,11 @@ class NavigationBarSettings extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
-    // Logic for background color label.
-    String backgroundColorLabel() {
-      if (useMaterial3 && controller.navBarBackgroundSchemeColor == null) {
-        return 'default (surfaceContainer)';
-      }
-      if (!controller.useSubThemes ||
-          !controller.useFlexColorScheme ||
-          (controller.navBarBackgroundSchemeColor == null)) {
-        return 'default (surface with onSurface overlay-3)';
-      }
-      return 'default (surfaceContainer)';
-    }
-
-    // Logic for indicator color label default value,
-    // custom color selection overrides default label and value.
-    String indicatorColorLabel() {
-      // Use FCS component default, secondaryContainer.
-      if (controller.useFlexColorScheme && controller.useSubThemes) {
-        return 'default (secondaryContainer)';
-      }
-      // Use M2 default color
-      if (!useMaterial3) {
-        return 'default (secondary opacity 24 %)';
-      }
-      // All other cases will use M3 style.
-      return 'default (secondaryContainer)';
-    }
-
-    // Logic for selected icon color default value,
-    // custom color selection overrides default label and value.
-    String selectedIconColorLabel() {
-      // Use FCS component default, onSurface.
-      if (controller.useFlexColorScheme && controller.useSubThemes) {
-        return 'default (onSecondaryContainer)';
-      }
-      // Use M2 default color
-      if (!useMaterial3) {
-        return 'default (onSurface)';
-      }
-      // All other cases will use M3 style.
-      return 'default (onSecondaryContainer)';
-    }
-
-    // Logic for selected icon color default value,
-    // custom color selection overrides default label and value.
-    String selectedLabelColorLabel() {
-      // Use FCS component default, onSecondaryContainer.
-      if (controller.useFlexColorScheme && controller.useSubThemes) {
-        return 'default (onSurface)';
-      }
-      // Use M2 default color
-      if (!useMaterial3) {
-        return 'default (onSurface)';
-      }
-      // All other cases will use M3 style.
-      return 'default (onSurface)';
-    }
-
-    final bool muteUnselectedEnabled =
-        controller.useSubThemes && controller.useFlexColorScheme;
-    // Logic for unselected item color label default value,
-    // custom color selection overrides default label and value.
-    String unselectedItemColorLabel() {
-      // Use FCS component default.
-      if (controller.useFlexColorScheme && controller.useSubThemes) {
-        return 'default (onSurfaceVariant)';
-      }
-      // Use M2 Flutter component default..
-      if (!useMaterial3) {
-        return 'default (onSurface)';
-      }
-      // All other cases will use M3 style.
-      return 'default (onSurfaceVariant)';
-    }
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,11 +41,13 @@ class NavigationBarSettings extends StatelessWidget {
         const ListTileReveal(
           title: Text('NavigationBar colors and styles'),
           subtitleReveal: Text(
-            'Default background color is surface with an onSurface overlay '
-            'color in M2. In M3 default background color is surface with '
-            'elevation 3, using M3 elevation tint. FlexColorScheme M2 theme '
-            'default is color scheme background, with active surface blend '
-            'and elevation 0. FCS M3 mode background is same as M3 default.\n',
+            'Default background color in Material 2 is surface with an '
+            'onSurface overlay elevation color fixed to level 3. '
+            'In M3 default background color is surfaceContainer, no '
+            'elevation tint is used since Flutter 3.22. FlexColorScheme uses '
+            'surfaceContainer as default background color in both '
+            'Material-2 and Material-3 mode, since V8, when component themes '
+            'are enabled.\n',
           ),
         ),
         const Padding(
@@ -123,160 +55,194 @@ class NavigationBarSettings extends StatelessWidget {
           child: NavigationBarShowcase(explain: false),
         ),
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
-          title: const Text('Background color'),
-          defaultLabel: backgroundColorLabel(),
-          value: controller.navBarBackgroundSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarBackgroundSchemeColor(null);
-                  } else {
-                    controller.setNavBarBackgroundSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenuNew(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Background color'),
+                defaultLabel: 'surfaceContainer',
+                defaultDisabledLabelM2: 'surface with onSurface overlay-3',
+                value: controller.navBarBackgroundSchemeColor,
+                onChanged: controller.setNavBarBackgroundSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl,
+                title: const Text('Background opacity'),
+                value: controller.navBarOpacity,
+                onChanged: controller.setNavBarOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Background opacity'),
-          value: controller.navBarOpacity,
-          onChanged: controller.setNavBarOpacity,
-          min: 0,
-          max: 1,
-          divisions: 100,
-          valueDisplayScale: 100,
-          valueDecimalPlaces: 0,
-          valueHeading: 'OPACITY',
-          valueUnitLabel: ' %',
-          valueDefaultLabel: '100 %',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Elevation'),
+                value: controller.navBarElevation,
+                onChanged: controller.setNavBarElevation,
+                min: 0,
+                max: 24,
+                divisions: 24,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: useMaterial3 ? '3' : '0',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl,
+                title: const Text('Height'),
+                value: controller.navBarHeight,
+                onChanged: controller.setNavBarHeight,
+                min: 55,
+                max: 100,
+                divisions: 45,
+                valueHeading: 'HEIGHT',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '80 dp',
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Elevation'),
-          value: controller.navBarElevation,
-          onChanged: controller.setNavBarElevation,
-          min: 0,
-          max: 24,
-          divisions: 24,
-          valueHeading: 'ELEV',
-          valueDecimalPlaces: 0,
-          valueDefaultLabel: useMaterial3 ? '3' : '0',
+        const Divider(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenuNew(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Selection indicator color'),
+                defaultLabel: 'secondaryContainer',
+                defaultDisabledLabelM2: 'secondary opacity 24%',
+                value: controller.navBarIndicatorSchemeColor,
+                onChanged: controller.setNavBarIndicatorSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl,
+                title: const Text('Selection indicator opacity'),
+                value: controller.navBarIndicatorOpacity,
+                onChanged: controller.setNavBarIndicatorOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
+                valueDefaultDisabledLabel: useMaterial3 ? '100 %' : '24 %',
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Height'),
-          value: controller.navBarHeight,
-          onChanged: controller.setNavBarHeight,
-          min: 55,
-          max: 100,
-          divisions: 45,
-          valueHeading: 'HEIGHT',
-          valueUnitLabel: ' dp',
-          valueDecimalPlaces: 0,
-          valueDefaultLabel: '80 dp',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Indicator border radius'),
+                value: controller.navBarIndicatorBorderRadius,
+                onChanged: controller.setNavBarIndicatorBorderRadius,
+                min: 0,
+                max: 25,
+                divisions: 25,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: 'stadium',
+              ),
+            ),
+            Expanded(
+              child: NavigationBarLabelBehaviorListTile(
+                controller: controller,
+                contentPadding: paddingEndColumn,
+              ),
+            ),
+          ],
         ),
-        ColorSchemePopupMenu(
-          title: const Text('Selection indicator color'),
-          defaultLabel: indicatorColorLabel(),
-          value: controller.navBarIndicatorSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarIndicatorSchemeColor(null);
-                  } else {
-                    controller.setNavBarIndicatorSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+        const Divider(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenuNew(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Selected icon color'),
+                defaultLabel: 'onSecondaryContainer',
+                defaultDisabledLabelM2: 'onSurface',
+                value: controller.navBarSelectedIconSchemeColor,
+                onChanged: controller.setNavBarSelectedIconSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: ColorSchemePopupMenuNew(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl,
+                title: const Text('Selected label color'),
+                defaultLabel: 'onSurface',
+                value: controller.navBarSelectedLabelSchemeColor,
+                onChanged: controller.setNavBarSelectedLabelSchemeColor,
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Selection indicator opacity'),
-          value: controller.navBarIndicatorOpacity,
-          onChanged: controller.setNavBarIndicatorOpacity,
-          min: 0,
-          max: 1,
-          divisions: 100,
-          valueDisplayScale: 100,
-          valueDecimalPlaces: 0,
-          valueHeading: 'OPACITY',
-          valueUnitLabel: ' %',
-          valueDefaultLabel: '100 %',
-          valueDefaultDisabledLabel: useMaterial3 ? '100 %' : '24 %',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenuNew(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Unselected item color'),
+                subtitle: const Text('Label and icon, but separate API'),
+                defaultLabel: 'onSurfaceVariant',
+                defaultDisabledLabelM2: 'onSurface',
+                value: controller.navBarUnselectedSchemeColor,
+                onChanged: controller.setNavBarUnselectedSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: SwitchListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl,
+                title: const Text('Mute unselected items'),
+                subtitleReveal: const Text(
+                    'Unselected icon and text are less bright. '
+                    'Shared setting for icon and text, but separate properties '
+                    'in the API.\n'),
+                value: controller.navBarMuteUnselected,
+                onChanged: controller.setNavBarMuteUnselected,
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Indicator border radius'),
-          value: controller.navBarIndicatorBorderRadius,
-          onChanged: controller.setNavBarIndicatorBorderRadius,
-          min: 0,
-          max: 50,
-          divisions: 50,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDecimalPlaces: 0,
-          valueDefaultLabel: 'stadium',
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('Selected icon color'),
-          defaultLabel: selectedIconColorLabel(),
-          value: controller.navBarSelectedIconSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarSelectedIconSchemeColor(null);
-                  } else {
-                    controller.setNavBarSelectedIconSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('Selected label color'),
-          defaultLabel: selectedLabelColorLabel(),
-          value: controller.navBarSelectedLabelSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarSelectedLabelSchemeColor(null);
-                  } else {
-                    controller.setNavBarSelectedLabelSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
-        ColorSchemePopupMenu(
-          title: const Text('Unselected item color'),
-          subtitle: const Text('Label and icon, but own properties in API'),
-          defaultLabel: unselectedItemColorLabel(),
-          value: controller.navBarUnselectedSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setNavBarUnselectedSchemeColor(null);
-                  } else {
-                    controller.setNavBarUnselectedSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
-        ),
-        SwitchListTileReveal(
-          title: const Text('Mute unselected items'),
-          subtitleReveal:
-              const Text('Unselected icon and text are less bright. '
-                  'Shared setting for icon and text, but separate properties '
-                  'in the API.\n'),
-          value: controller.navBarMuteUnselected && muteUnselectedEnabled,
-          onChanged:
-              muteUnselectedEnabled ? controller.setNavBarMuteUnselected : null,
-        ),
-        NavigationBarLabelBehaviorListTile(controller: controller),
         const Divider(),
         if (isLight)
           EnumPopupMenu<AdaptiveTheme>(
@@ -316,7 +282,6 @@ class NavigationBarSettings extends StatelessWidget {
         ),
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
-        const Divider(),
         const ListTileReveal(
           dense: true,
           title: Text('More settings with the API'),
