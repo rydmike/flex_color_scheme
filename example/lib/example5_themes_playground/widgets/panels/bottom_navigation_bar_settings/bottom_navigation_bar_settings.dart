@@ -17,6 +17,7 @@ class BottomNavigationBarSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
+    final bool useMaterial3 = theme.useMaterial3;
 
     // The most common logic for enabling Playground controls.
     final bool enableControl =
@@ -26,11 +27,10 @@ class BottomNavigationBarSettings extends StatelessWidget {
             (!controller.useFlexColorScheme ||
                 (controller.bottomNavBarSelectedSchemeColor == null &&
                     controller.bottomNavBarUnselectedSchemeColor == null))
-        ? 'default (secondary)'
-        : 'default (primary)';
-    final String labelForDefaultUnelectedItem = enableControl
-        ? 'default (onSurface)'
-        : 'default (ThemeData.unselectedWidgetColor)';
+        ? 'secondary'
+        : 'primary';
+    final String labelForDefaultUnelectedItem =
+        enableControl ? 'onSurface' : 'ThemeData.unselectedWidgetColor';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,22 +56,50 @@ class BottomNavigationBarSettings extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Background color'),
-          defaultLabel: enableControl
-              ? 'default (surface)'
-              : 'default (ThemeData.canvasColor)',
-          value: controller.bottomNavBarBackgroundSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setBottomNavBarBackgroundSchemeColor(null);
-                  } else {
-                    controller.setBottomNavBarBackgroundSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          subtitleReveal: const Text('In Material-2 dark mode, the bottom '
+              'navigation background color gets an elevation overlay, making '
+              'the background color lighter the more it is elevated. This is '
+              'the correct behavior for elevated Material surfaces in dark '
+              'mode in Material-2. This is most likely where the now mostly '
+              'abandoned elevation tint in Material-3 got its inspiration.'
+              '\n'
+              'The elevation overlay only happens in Material-2 dark mode '
+              'when the `applyElevationOverlayColor` is set to true. In '
+              'vanilla ThemeData is is false by default, you are supposed to '
+              'set it to true when you use Material-2. FlexColorScheme sets '
+              'it to true by default, set it to false if you do not want the '
+              'elevation overlay in dark mode.\n'
+              '\n'
+              'Also notice that the elevation overlay is ONLY applied to '
+              'elevated Material surfaces when the background color of the '
+              'Material has a color value that equals ColorScheme.surface. '
+              'For any other color value, the elevation overlay is not '
+              'applied.\n'),
+          colorSuffix: isDark &&
+                  !useMaterial3 &&
+                  controller.bottomNavBarBackgroundSchemeColor ==
+                      SchemeColor.surface &&
+                  controller.bottomNavigationBarElevation != 0
+              ? ', with dark elevation overlay'
+              : '',
+          defaultLabel: 'surface',
+          defaultLabelDarkM2: controller.bottomNavigationBarElevation != 0
+              ? 'surface, with dark elevation overlay'
+              : 'surface',
+          defaultDisabledLabel:
+              !controller.useSubThemes && controller.useFlexColorScheme
+                  ? 'surface'
+                  : 'ThemeData.canvasColor',
+          defaultDisabledLabelDark: 'surface',
+          defaultDisabledLabelDarkM2:
+              !controller.useSubThemes && controller.useFlexColorScheme
+                  ? 'surface, with dark elevation overlay'
+                  : 'ThemeData.canvasColor, with dark elevation overlay',
+          value: controller.bottomNavBarBackgroundSchemeColor,
+          onChanged: controller.setBottomNavBarBackgroundSchemeColor,
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -100,37 +128,21 @@ class BottomNavigationBarSettings extends StatelessWidget {
           valueDefaultLabel: '3',
           valueDefaultDisabledLabel: '8',
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Selected item color'),
-          subtitle: const Text('Label and icon, but own properties in API'),
+          subtitle: const Text('Label and icon, but separate API'),
           defaultLabel: labelForDefaultSelectedItem,
-          value: controller.bottomNavBarSelectedSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setBottomNavBarSelectedSchemeColor(null);
-                  } else {
-                    controller.setBottomNavBarSelectedSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          value: controller.bottomNavBarSelectedSchemeColor,
+          onChanged: controller.setBottomNavBarSelectedSchemeColor,
         ),
-        ColorSchemePopupMenu(
+        ColorSchemePopupMenuNew(
+          enabled: enableControl,
           title: const Text('Unselected item color'),
-          subtitle: const Text('Label and icon, but own properties in API'),
+          subtitle: const Text('Label and icon, but separate API'),
           defaultLabel: labelForDefaultUnelectedItem,
-          value: controller.bottomNavBarUnselectedSchemeColor?.index ?? -1,
-          onChanged: enableControl
-              ? (int index) {
-                  if (index < 0 || index >= SchemeColor.values.length) {
-                    controller.setBottomNavBarUnselectedSchemeColor(null);
-                  } else {
-                    controller.setBottomNavBarUnselectedSchemeColor(
-                        SchemeColor.values[index]);
-                  }
-                }
-              : null,
+          value: controller.bottomNavBarUnselectedSchemeColor,
+          onChanged: controller.setBottomNavBarUnselectedSchemeColor,
         ),
         SwitchListTileReveal(
           title: const Text('Mute unselected items'),
