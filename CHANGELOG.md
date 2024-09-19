@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 19, 2024**
+**Sep 20, 2024**
 
 ### SUMMARY
 
@@ -74,50 +74,39 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODO**
  
-- FIX: Default labels for AppBar and Fab colors
+- Dependent on indicator and icon color selections for NavigationBar, as done in NavigationRail. See there.
+- Clean up some UI, consider adding more two colum controls where it makes sense to make it all compacter.
+  - Add info about this being primarily a desktop size app, no longer mobile optimized.
 - ADD: Chip changes to the changelog! See commit!
-- Add features for `Chip` theming.
-  - Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
+- ADD: More features for `Chip` theming.
+  - DONE: Proper use of colors, blend as option, that is default in Material-2 only, but can be added in FCS Material-3.
   - Padding prop
-  - Text styles sizing.
-  - This feature still requires proper support in Flutter and more testing of the theme feature. Maybe a new issue in Flutter to propose fully usable Chip theming support in Flutter.
+  - Font size, to enable making them smaller again, they are so big now by default.
+  - Chips theming still require proper support in Flutter and more testing of the theme feature. 
+    - Make a new issue and reference it.
 
 **POTENTIAL TODOS, but maybe push some to version 8.1.0 or later**
 
+- Shadow color selection per component.
+  - Create a logic unit control widget for it
+ 
 - InputDecorator: Platform adaptive radius.
 - InputDecorator: Default value info for padding props, depends on dens and M2/M3 mode and border type, complex.
-
-
 - Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
-
-
+ 
 - Add `ToggleButtons` selected foreground and unselected background color props.
-
 - Add `Checkbox` shape and border.
 - Add some `ListTile` theming features, eg at least `contentPadding`. Maybe some font size and opacity?
-  - To get the M2 look in M3, which is actually nicer. Myabe also for samller text size in M3.
+  - To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
 - Add some `SearchBar` theming features, What? Shape and elevation?
 - Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue!
 - Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
-
-
 - Add **NEW** color schemes:
   - Add a greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
   - Add Shadcn theme colors?
-
-
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of past only four colors.
 
-
-- Add TabBar theme property `indicatorAnimation` when it lands in stable.
-  - FlexSubThemesData: TabIndicatorAnimation? tabBarIndicatorAnimation
-  - Store: keyTabBarIndicatorAnimation, defaultTabBarIndicatorAnimation
-  - ThemeController: setTabBarIndicatorAnimation, tabBarIndicatorAnimation
-
-
-- It is currently not possible to use custom error colors with `toDark` computed schemes. Maybe keep it so?
-- Add from image color scheme generation to `FlexSeedScheme` and support in FCS and Playground.
 
 
 ### PACKAGE CHANGES
@@ -215,9 +204,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
      - The Material design spec for the tones used by the colors `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone **10** to **30** for **LIGHT** theme mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024). 
      - Setting the `useExpressiveOnContainerColors` to `true` will make the colors use the new expressive tone. The expressive tone spec is not yet used in Flutter SDK, but is in the Material-3 design spec and also in MCU v 0.12.0. When this change lands in stable Flutter, it will be made **ON** by default in FCS too. You will still be able to opt out of using it. Flutter SDK and MCU will not contain such an opt-out feature.
      - The new **on** color tones for containers in light mode make them more color expressive, but they also reduce their contrast level and accessibility. We recommend keeping them at the higher contrast level, by setting `useExpressiveOnContainerColors` to `false`. With it set to false, you will also keep this preference when the Flutter SDK defaults to using the expressive tones. 
-
-     - The `useExpressiveOnContainerColors` property is only available when seed generating a `ColorScheme` using `FlexSeedScheme`'s `SeedColorScheme.fromSeeds` when a scheme `variant` is used where its `FlexSchemeVariant.value`, `isFlutterScheme` it true. This set corresponds to all the `DynamicSchemeVariant`s available in the Flutter SDK. The `useExpressiveOnContainerColors` property is not available when using FSS `tones` based seed generated schemes or a `variant` having its `FlexSchemeVariant.value`, `isFlutterScheme` it set to `**false**`. 
-        > With `tones` based schemes the more color expressive on containers in light mode can be made with the `FlexTones` modifier `expressiveOnContainer()`. It has no effect if used on dark mode `FlexTones`.
 
 
 
@@ -418,6 +404,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Updated the official Material-3 demo app in the Theme Simulator to a version with the same look as the latest official version. The updated version now also uses the demo's new Sliver-based cached scrolling. The version is still a fork, with some tweaks to make it work when embedded into the Playground simulator and getting its theme from the Playground and not inside the demo app. The fork also has a denser two-column layout and different breakpoints. This so we in portrait mode can get two columns with Rail already on iPad Pro 11" and the expanded Rail on iPad Pro 12.9". 
 
+- All the Color selection popup menus, as all other multiple choice popup menus have been improved for better usability, they do not animate so they are quicker, the default option is always first. Their disabled states now communicate the default for their settings better when FCS is used, as well as when FCS is disabled. 
+  > **SIDENOTE:** The bulk of used popups components in the Playground are now using a shared a generic `EnumPopupMenu<T extends Enum>` that supports nullable enums and has built-in support for null and disabled defaults. It also has built-in `ListTileReveal` for info reveals. There are still a few special case popups that have some specialized features like `ColorSchemePopupMenu`. It needs to be able to communicate a large number of default color values for its color default labels, depending on active theme state, so it supports things like `defaultLabel`, `defaultLabelDark`, `defaultLabelM2`, `defaultLabelDarkM2`, `defaultDisabledLabel`, `defaultDisabledLabelDark`, `defaultDisabledLabelM2` and `defaultDisabledLabelDarkM2`. This refactoring was also preparation for adding more features as it makes it easier to add enum based props. Sadly the refactor and migration of the Playground to use these components took a long time and delayed the release at least two weeks. 
+
 
 **FIX**
 
@@ -439,9 +428,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - **TextField** settings panel, add some new preconfigured options with optional configuration examples of the input decorator.
 - Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
 - Figure out the default padding logics for the **TextField** settings panel. It should show the same as the Flutter SDK default, but it is not.
-- Refactor:    
-  - DONE: Refactor ColorSchemePopupMenu, make it like the other nullable enum popups.
-  - IN PROGRESS: Migrate all ColorScheme color boxes in all screens to use the new nullable enum popup.
 
 **ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset to the input values, not the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see a change in the effective theme, but if change theme modifiers, we no longer have the original input color.
 
