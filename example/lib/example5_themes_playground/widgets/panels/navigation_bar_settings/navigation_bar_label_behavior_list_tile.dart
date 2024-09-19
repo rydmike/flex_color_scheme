@@ -11,9 +11,9 @@ class NavigationBarLabelBehaviorListTile extends StatelessWidget {
   });
   final ThemeController controller;
 
-  /// The [ListTileReveal]'s internal padding.
+  /// The [ListTile]'s internal padding.
   ///
-  /// Insets a [ListTileReveal]'s contents.
+  /// Insets a [ListTile]'s contents.
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
   /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
