@@ -33,10 +33,6 @@ class ColorSchemeSettings extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
 
-    // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
-
     // Paddings for the two column control layouts.
     const EdgeInsetsDirectional paddingStartColumn =
         EdgeInsetsDirectional.only(start: 16, end: 8);
@@ -114,12 +110,12 @@ class ColorSchemeSettings extends StatelessWidget {
         const Padding(
           padding: EdgeInsetsDirectional.fromSTEB(16, 8, 24, 0),
           child: Text(
-            'Tune the none seeded ColorScheme',
+            'Adjust the none seeded ColorScheme',
             style: TextStyle(fontSize: 13),
           ),
         ),
         EnumPopupMenu<FlexFixedColorStyle>(
-          enabled: enableControl && !controller.useKeyColors,
+          enabled: controller.useFlexColorScheme && !controller.useKeyColors,
           values: FlexFixedColorStyle.values,
           title: const Text('Fixed and FixedDim color style'),
           subtitleReveal: const Text(
@@ -142,12 +138,14 @@ class ColorSchemeSettings extends StatelessWidget {
         const Padding(
           padding: EdgeInsetsDirectional.fromSTEB(16, 8, 24, 0),
           child: Text(
-            'Tune the seeded ColorScheme, both FSS and MCU based ones',
+            'Adjust the seeded ColorScheme',
             style: TextStyle(fontSize: 13),
           ),
         ),
         SwitchListTileReveal(
-          enabled: enableControl && controller.useKeyColors && isLight,
+          enabled: controller.useFlexColorScheme &&
+              controller.useKeyColors &&
+              isLight,
           title: const Text('Expressive onColors on containers in light mode'),
           subtitleReveal: const Text(
             'Use tone 30 instead of 10 for onColors on containers in light '
@@ -158,7 +156,10 @@ class ColorSchemeSettings extends StatelessWidget {
             'produced color schemes, but will be when Flutter upgrades to '
             'Material Color Utilities 0.12.0. You can opt in on using it '
             'already here, or decide to not use it, even after it becomes '
-            'a forced default in Flutter SDK.\n',
+            'a forced default in Flutter SDK.\n'
+            '\n'
+            'For MCU seed generated schemes this only has any impact when '
+            'contrast level is at the default value (0).\n',
           ),
           value: controller.expressiveOnContainer,
           onChanged: controller.setExpressiveOnContainer,
@@ -169,7 +170,7 @@ class ColorSchemeSettings extends StatelessWidget {
           title: !controller.useKeyColors || _isFlutterScheme
               ? const Text('Additional adjustments available '
                   'when FSS FlexTones scheme variants are used')
-              : const Text('Adjust the FSS FlexTones seed generation result'),
+              : const Text('Adjust the FSS FlexTones seeded ColorScheme'),
           subtitleReveal: !controller.useKeyColors || _isFlutterScheme
               ? null
               : const Text('FSS FlexTones adjustments are separate for light '
@@ -332,20 +333,39 @@ class ColorSchemeSettings extends StatelessWidget {
           ),
         ],
         const Divider(height: 1),
-        ListTile(
+        ListTileReveal(
           dense: true,
-          title: const Text('Additional tuning options '
-              'for Flutter MCU based scheme variants'),
+          title: const Text('Adjust the MCU based seeded ColorScheme'),
           subtitle: !controller.useKeyColors || !_isFlutterScheme
               ? const Text(
                   'Use a MCU scheme variant to enable contrast level tuning')
-              : const Text('Set value is the same for light and dark mode'),
+              : const Text(
+                  'Defined value is the same for light and dark mode.'),
+          subtitleReveal: const Text('Please be aware that using any other '
+              'contrast level than default (0) will make the fixed colors no '
+              'longer confirm to the Material-3 design specification that says '
+              'they should be the same color in light and dark mode.\n'
+              '\n'
+              'This is what the Material-3 accessibility contrast level '
+              'adjustment does to them. It is probably not what you want for '
+              'your design if you used them because they have the same color '
+              'values in light and dark mode. This design is still most likely '
+              'intentional, as the contrast level adjustment is designed to '
+              'allow you to easily create an optional more accessible version '
+              'of your theme by increasing the contrast. The '
+              'fixed colors do not have very high contrast ratios, so they '
+              'will need adjustment.\n'
+              '\n'
+              'When not using seeded color schemes or when using FSS FlexTones '
+              'based seed generated schemes, you have an option to use '
+              'higher contrast fixed colors, that are still fixed and same '
+              'in light and dark mode.\n'),
         ),
         ListTileSlider(
           enabled: controller.useKeyColors && _isFlutterScheme,
           title: const Text('Contrast level'),
-          subtitle: const Text('Only available for MCU dynamic schemes.\n'
-              'Levels in M3 guide 0: Normal, 0.5: Medium, 1: High'),
+          subtitle:
+              const Text('Levels in M3 guide 0: Normal, 0.5: Medium, 1: High'),
           min: -1,
           max: 1,
           divisions: 8,
