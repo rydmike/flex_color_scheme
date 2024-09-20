@@ -13,10 +13,10 @@ import '../panels/card_settings/card_settings.dart';
 import '../panels/chip_settings/chip_settings.dart';
 import '../panels/color_blends_settings/color_blends_settings.dart';
 import '../panels/color_scheme_settings/color_scheme_settings.dart';
-import '../panels/component_settings/component_settings.dart';
 import '../panels/dialog_settings/dialog_settings.dart';
 import '../panels/effective_colors/effective_colors.dart';
 import '../panels/fab_settings/fab_settings.dart';
+import '../panels/general_settings/general_settings.dart';
 import '../panels/icon_button_avatar_settings/icon_button_avatar_settings.dart';
 import '../panels/input_colors_settings/input_colors_settings.dart';
 import '../panels/introduction/introduction_panel.dart';
@@ -63,7 +63,7 @@ class ThemePanel extends StatelessWidget {
       ThemeSimulator(controller: controller),
       const WidgetShowcase(),
       ThemeCode(controller),
-      ComponentSettings(controller),
+      GeneralSettings(controller),
       AdaptiveThemeSettings(controller),
       ShapeRadiusSettings(controller),
       InputColorsSettings(controller),
