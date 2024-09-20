@@ -239,7 +239,7 @@ class IntroductionPanel extends StatelessWidget {
             'Legacy Material-2 support is still supported in Flutter 3.24 '
             'and FCS V8, but will be deprecated and eventually '
             'removed from the Flutter SDK and FCS code-base. If you still use '
-            'Material-2, you should migrate to your Flutter app to use '
+            'Material-2, you should migrate your Flutter app to use '
             'Material-3 mode.\n'
             '\n'
             'If you prefer the Material-2 style, then with FlexColorScheme '
@@ -300,16 +300,18 @@ class IntroductionPanel extends StatelessWidget {
             'reliability or suitability for any purpose. The tools are '
             'provided for free and are open-source. They are developed as a '
             'hobby-side-project, corrections and new features are provided as '
-            'time permits at best effort.\n'
+            'time permits and at best effort.\n'
             '\n'
             'FlexColorScheme and Themes Playground are not '
             'official Google products and are not are not affiliated with '
             'the Flutter or Material teams at Google.\n'
             '\n'
-            'The Playground is provided as a convenience to help you design '
-            'themes for your Flutter applications using the FlexColorScheme '
-            'package. The Themes Playground was originally only designed to '
-            'be the last step in the FlexColorScheme tutorial, provided as '
+            'The Playground is provided as a convenience tool to help you '
+            'quickly design complex custom Material themes for your Flutter '
+            'application, based on using the FlexColorScheme package as a '
+            'theme factory that makes Material ThemeData. The Themes '
+            'Playground was originally only designed and intended to '
+            'be the last step in the FlexColorScheme usage tutorial, found as '
             'example-5. The Playground source is still provided as example-5 '
             'in the FlexColorScheme repo. Over time the Playground grew into '
             'more and became an interactive API configuration tool for '
@@ -324,11 +326,11 @@ class IntroductionPanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: "Due the the Playground's original intent and purpose "
-                      'it has a simple architecture that is not well suited to '
-                      'be developed into a direction that can provide all the '
-                      'features users are currently asking for. You can read '
-                      'more about the history and future of the Playground in '
-                      'the ',
+                      'it has a simple architecture that is not so well suited '
+                      'to be developed into a direction that can provide all '
+                      'the features users are currently asking for. You can '
+                      'read more about the history and also future plans for '
+                      'the Playground in the ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
