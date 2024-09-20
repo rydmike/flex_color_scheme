@@ -198,7 +198,7 @@ class Store {
   // Key used to read and save the useM2StyleDividerInM3 value.
   static const String keyUseM2StyleDividerInM3 = 'useM2StyleDividerInM3';
   // Default value for the useM2StyleDividerInM3, also used to reset settings.
-  static const bool defaultUseM2StyleDividerInM3 = false;
+  static const bool defaultUseM2StyleDividerInM3 = true;
 
   // Key used to read and save the useAppFont value.
   static const String keyUseAppFont = 'useAppFont';
@@ -220,12 +220,12 @@ class Store {
   // Key used to read and save the interactionEffects value.
   static const String keyInteractionEffects = 'interactionEffects';
   // Default value for the interactionEffects, also used to reset settings.
-  static const bool defaultInteractionEffects = false;
+  static const bool defaultInteractionEffects = true;
 
   // Key used to read and save the tintedDisabledControls value.
   static const String keyTintedDisabledControls = 'tintedDisabledControls';
   // Default value for the tintedDisabledControls, also used to reset settings.
-  static const bool defaultTintedDisabledControls = false;
+  static const bool defaultTintedDisabledControls = true;
 
   // Key used to read and save the defaultRadius value.
   static const String keyDefaultRadius = 'defaultRadius';
