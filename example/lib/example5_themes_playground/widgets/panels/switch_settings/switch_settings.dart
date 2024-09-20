@@ -103,8 +103,8 @@ class SwitchesSettings extends StatelessWidget {
           subtitleReveal: Text(
             'An adaptive theme response to to make the themed Material Switch '
             'look as close as possible to a CupertinoSwitch. '
-            'This setting has no effect in Material-2 mode and is not '
-            'available in M2 mode.\n'
+            'This setting has no effect and is thus not available in '
+            'Material-2 mode.\n'
             '\n'
             // ignore: lines_longer_than_80_chars
             '${controller.switchAdaptiveCupertinoLike?.describe ?? AdaptiveTheme.off.describe}',
