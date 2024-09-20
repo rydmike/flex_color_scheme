@@ -8,13 +8,13 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ### SUMMARY
 
-Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. Due to Flutter 3.22 breaking many past Material styles, introducing new colors to ColorScheme and deprecating 3 past ones, FlexColorScheme had to undergo major revision and also break many of its past styles and some older APIs.
+Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. Due to Flutter 3.22 breaking many past Material styles, introducing new colors to `ColorScheme` and deprecating three colors, FlexColorScheme had to undergo major revision and also break many of its past styles and some older APIs.
 
-Most APIs are still there and work as before, but a few produce results that differ slightly from past style, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in v8 but are still available, you will need top turn them ON explicitly to get the same results as before. The purpose of these default changes is to make FCS have less opinionated defaults and be aligned with Flutter's Material-3 design defaults.
+Most APIs are still there and work as before, but a few produce results that differ slightly from past style, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in FCS V8 but are still available, you will need top turn them ON explicitly to get the same results as before. The purpose of these default changes is to make FCS have less opinionated defaults, and by default, be more aligned with Flutter's Material-3 design defaults. The Themes Playground app will still have some of its own opinionated defaults, done via default settings values, but the package defaults are now more aligned with Flutter's Material-3 defaults.
 
 ### MIGRATION
 
-The most critical changes to migrate from FelxColorScheme version 7 to version 8 listed below. For a full list of all changes, see the **PACKAGE CHANGES** chapter further bleow.
+The most critical changes to migrate from FlexColorScheme version 7 to version 8 are listed below. For a full list of all changes, see the **PACKAGE CHANGES** chapter further below.
 
 * The flag `useMaterial3` now defaults to `true` in `FlexColorScheme` and `FlexThemeData` constructors. Set it to `false` to explicitly use Material-2 theming. It defaulted to true before. Material-2 is still fully supported in FCS v8 and Flutter v3.24, but will eventually be deprecated in Flutter, when that happens, it will also happen in FCS. 
   * **NOTE:** With the Themes Playground app, you can use a preconfigured Material-3 based theme, that looks very similar to legacy Material-2. This will be available also after Material-2 is deprecated in Flutter.  
@@ -23,23 +23,23 @@ The most critical changes to migrate from FelxColorScheme version 7 to version 8
 * The `FlexSubThemesData` properties `interactionEffects`, `tintedDisabledControls`, `defaultUseM2StyleDividerInM3` and `blendOnColors` now all default to `false`. In previous versions they defaulted to `true`. If you before had not explicitly turned these properties `false`, they were all `true` by default. To get the same result as before in FCS V8, you now have to set these properties to `true`. This change was made to have fewer opinionated defaults in FCS to align it more with Flutter SDK default styles. 
 
 
-* Since `ColorScheme.background` color was deprecated in Flutter 3.22.0 we can no longer use it as a part of surface blends and its modes. For example, `surfaceMode` when used with `FlexSurfaceMode.highBackgroundLowScaffold` now sets surface and dialog blends to 2x instead of 1x, so that it represents the "high background" style as before, but done vai surface color. Without this breaking change, this mode would produce the same result `FlexSurfaceMode.levelSurfacesLowScaffold` and be redundant. 
-  * **NOTE:** You may want to check your surface mode and blends to see that they still look as you want them to, as they may have changed slightly depending on your configuration. We have tried to keep required changes subtle, you may not notice any difference, but it is good to check. These changes we forced by Flutter 3.22.0 deprecation of `ColorScheme` color `background`, `onBackground` and `surfaceVariant`.
+* Since `ColorScheme.background` color was deprecated in Flutter 3.22.0 we can no longer use it as a part of surface blends and its modes. For example, when `surfaceMode` is set to `FlexSurfaceMode.highBackgroundLowScaffold` it now uses surface and dialog blends set to 2x instead of 1x, so that it represents the "high background" style as before, but done via surface color. Without this breaking change, this mode would produce the same result as `FlexSurfaceMode.levelSurfacesLowScaffold` and be redundant. 
+  * **NOTE:** You may want to check your surface mode and blends to see that they still look as you want them to, as they may have changed slightly depending on your configuration. We have tried to keep required changes subtle, you may not notice any difference, but it is good to check. These changes we forced by Flutter 3.22.0 deprecation of `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`.
 
 
-* The V8 release got many breaking changes that were on it forced via breaking changes in Flutter 3.22.0. Due to this, the release also uses this opportunity to clean up APIs with very opinionated defaults, like the ones mentioned above. There are additional smaller and subtle changes in defaults values, that align FCS to use the same color defaults from the new `ColorScheme` colors, that Flutter started using in version 3.22.0 as well. Yuo can find all the details further below in the **PACKAGE CHANGES** chapter.  
+* The V8 release got many breaking changes forced via breaking changes in Flutter 3.22.0. Due to this, the release also uses this opportunity to clean up APIs with very opinionated defaults, like the ones mentioned above. There are additional smaller and subtle changes in defaults values, that align FCS to use the same color defaults from the new `ColorScheme` colors, that Flutter started using in version 3.22.0 as well. You can find all the details further below in the **PACKAGE CHANGES** chapter.  
 
 ### BACKGROUND
 
 Flutter 3.22 introduced a large number of breaking changes to the `ColorScheme` and default color mappings that Flutter's Material components use. In total, the Flutter 3.22.0 release adjusted 249 of its own internal tests to accommodate for new Material-3 spec changes, that all broke past Flutter Material-3 component styles. For a reference to the broken and updated tests, see [this issue side comment](https://github.com/flutter/flutter/issues/130135#issuecomment-2308522312).
 
-FlexColorScheme V8 now allows you to use the new colors introduced in Flutter 3.22. As before, with FCS you can still get fully defined hand-tuned `ColorScheme`s without using Material-3 design's Material Color Utilities (MCU) based seed-generated ColorSchemes. Typically, you want to use seed generated ColorSchemes with Material-3.
+FlexColorScheme V8 now allows you to use the new colors introduced in Flutter 3.22. As before, with FCS you can still get fully defined hand-tuned `ColorScheme`s without using Material-3 design's Material Color Utilities (MCU) based seed-generated ColorSchemes. Typically, you want to use seed generated ColorSchemes with Material-3, but it is nice to know you do not have to.
 
-To the seed generated `ColorScheme`s, FCS adds support for all the Flutter SDK dynamic scheme variants. It also improves them by allowing you to use separate seed colors for each palette. Flutter SDK only allows you to seed from the theme's primary color. It always uses computed values for secondary, tertiary palettes and a fixed color for the error palette. Surfaces and their tints are always tied to primary color as well. With FCS, you do not have these limitations, and you can seed with separate colors with Flutter's own scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones seed generated scheme variants. It now also brings this feature to Flutter's own dynamic scheme variants.
+To the seed generated `ColorScheme`s, FCS adds support for all the Flutter SDK dynamic scheme variants. It also improves them by allowing you to use separate seed colors for each palette. Flutter SDK only allows you to seed from the theme's primary color. It always uses computed values for secondary, tertiary palettes and a fixed color for the error palette. Surfaces and their tints are always tied to primary color as well. With FCS, you do not have these limitations, and you can seed with separate colors with Flutter's own dynamic scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones seed generated scheme variants. FCS now also brings this feature to Flutter's own dynamic scheme variants.
 
-FCS still has its own even more flexible `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what ColorScheme color. An internal example of using them are the `FlexTones` modifiers. 
+FCS as before, also have its own even configurable `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what `ColorScheme` color. An internal example of using them are the `FlexTones` modifiers. 
 
-FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. 
+FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. 
 
 **CRITICAL TODOS**
 
@@ -77,43 +77,41 @@ FlexColorScheme v8 adds three new `FlexTones` modifiers. The most useful one is 
 
   
 **TODO**
- 
-- TODO: Dependent on indicator and icon color selections for NavigationBar, as done in NavigationRail. See there.
-- TODO: Clean up some UI, consider adding more two colum controls where it makes sense to make it more compact.
-- TODO: Correct the Chip's default labels
+
+- TODO: Seeded color option to respect monochrome seed. First finalize it in FSS. Not default in API, but make it default in Playground.
+- TODO: InputDecorator: Platform adaptive radius.
+- TODO: InputDecorator: Playground: Default value info for padding props, depends on dense and M2/M3 mode and border type, complex.
+- TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
+- TODO: Playground: Clean up some UI, consider adding more two colum controls where it makes sense to make it more compact.
+- TODO: Playground: Correct the Chip's default labels
 - TODO: The Chip's default M3 paddings are now wrong, why?
 - TODO: Add Chip padding settings.
 - TODO: Add Chip font size settings.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
-- TODO: Add some `ListTile` theming features, eg at least `contentPadding`. Maybe some font size and opacity?
+- STARTED: Add some `ListTile` theming features, eg at least `contentPadding`. Maybe some font size and opacity?
   - To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
-- TODO: Add some `SearchBar` theming features, What? Shape and elevation?
-- TODO: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
+- STARTED: Add some `SearchBar` theming features, What? Shape and elevation?
+- STARTED: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
-
-
-**POTENTIAL TODOS - STRETCH GOALS, probably push some to version 8.1.0 or later**
-
-- Shadow color selection per component.
-  - Create a logic unit control widget for it
- 
-- InputDecorator: Platform adaptive radius.
-- InputDecorator: Default value info for padding props, depends on dens and M2/M3 mode and border type, complex.
-- Platform adaptive ShapeBorder configuration, including Squircle. Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
-
-- Add some DividerTheme features, eg thickness and totally custom color.
- 
-- Add `Checkbox` shape and border.
-- Add fidelity for iOS adaptive AppBar. There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
-- Add **NEW** color schemes:
+- TODO: Add some **NEW** color schemes:
   - Add black-and-white greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
 
-- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors.
+**POTENTIAL TODOS - STRETCH GOALS, will probably push some to a later version**
+
+- Shadow color selection per component.
+  - Create a custom convenience control widget for it.
+- Platform adaptive `ShapeBorder` configuration, including `Squircle`.
+  - Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
+- Add `Divider` theme features, e.g. thickness and totally custom color.
+- Add `Checkbox` shape and border.
+- Add fidelity for iOS adaptive `AppBar`.
+  - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
 
 **ALREADY DECIDED TO POSTPONE TO A LATER RELEASE**
 - Add all Shadcn theme colors.
 - Add Shadcn predefined prefs.
+- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
 
 ### PACKAGE CHANGES
 
@@ -291,7 +289,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added support for error colors to `FlexKeyColors`.
 - Added direct color properties for `errorContainer` and `onErrorContainer` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API.  
 - Added `Color` properties `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` to `FlexSchemeColor`.
-  - They are used to store references to the corresponding color in a `FlexSchemeColor` made for light mod in the dark mode `FlexSchemeColor`. This is used to create computed "fixed" and "fixedDim" colors for dark mode and the light mode `ColorScheme` that are identical in light and dark mode.
+  - They are used to store references to the corresponding color in a `FlexSchemeColor` made for light mode in the dark mode `FlexSchemeColor`. This is used to create computed "fixed" and "fixedDim" colors for dark mode and the light mode `ColorScheme` that are identical in light and dark mode.
   - Made `FlexSchemeColor()`, `FlexSchemeColor.from()`, `FlexSchemeColor.effective()` and `FlexSchemeColor.toDark()` work correctly with the new `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` properties. 
   - Used all main `light` color properties in `FlexSchemeData` static `FlexSchemeColor` color definitions, as **lightRef** colors in their `dark` mode equivalent FlexSchemeColor. That was 156 color values to add to the 52 dark `FlexSchemeColor` definitions.
 
@@ -317,24 +315,24 @@ This version contains a lot of breaking changes due to updates in the Material-3
  
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
    
-- Fixed that the Rectangular Slider value indicator did not default to `primary` color when undefined, as intended in FCS M2 and M3 mode. Only the Drop style indicator defaulted t primary. This came from the framework defaulting the rectangular one to a complex, opacity and alpha blended `onSurface` grey looking result.
+- Fixed that the Rectangular Slider value indicator did not default to `primary` color when undefined, as intended in FCS M2 and M3 mode. Only the Drop style indicator defaulted to primary. This came from the framework defaulting the old M2 rectangular indicator to a complex, opacity and alpha blended `onSurface` grey looking result.
 
 ### THEMES PLAYGROUND
 
 **NEW**
  
-- Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. We also use them in the "**Card**" settings" panel for card presentation.
+- Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
 
 
 - To the **ColorScheme** settings panel added four new options:
-  - Contrast level control for MCU based scheme variants. This feature is equivalent to the FSS based scheme variant contrast level control. It is als available in the Flutter master channel as `contrastLevel` property in `ColorScheme.fromSeed`. It is used to control the contrast level of the generated scheme colors. It will most likely land in the next stable Flutter release after 3.24. With FCS v8 you can use it already now.
+  - Contrast level control for MCU based scheme variants. This feature is equivalent to the FSS based scheme variant contrast level control. It is als available in the Flutter master channel as `contrastLevel` property in `ColorScheme.fromSeed`. It is used to control the contrast level of the generated scheme colors. It will most likely land in the next stable Flutter release after 3.24. With FCS V8 you can use it already now.
   - Added a dropdown that allows choosing between three different variants for the  `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors, when a seed generated `ColorScheme` is **NOT** being used.
   - When using FSS based seed generated color schemes, you can keep the standard Material-3 based tones for the `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors to the Material-3 design specified values 90, 10, 80, 30 **or** and or opt-in on an alternative set 92, 6, 84, 12 that have higher contrast. 
   - The Material design spec for the tones used by the colors `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone **10** to **30** for **LIGHT** theme mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024).
     - A flag was added where you can opt in on using them already now in FCS. It is not on by default. When it lands in stable Flutter, it will be made **ON** by default, but you will still be able to opt out of using it. Flutter SDK and MCU will not contain such an opt-out feature. The new **on** colors for containers in light mode, make them more color expressive, but it also reduces their contrast level and accessibility. We prefer them to have higher contrast.   
  
 
-- Added customizable error colors to the custom scheme. Only available when **Use Material3 error colors** setting is OFF, when using the custom scheme on **Input Colors** and **ColorScheme** settings panels.
+- Added customizable error colors to the custom scheme. Only available when **Use Material3 error colors** setting is **OFF**, when using the custom scheme on **Input Colors** and **ColorScheme** settings panels.
 
 - Added using error color as a seed color for error tonal palette in the **ColorScheme** settings panel. The tonal palette now also supports using a custom error color to generate its tonals. 
 - Added error color and error container color locking to the **ColorScheme** settings panel.  
@@ -351,11 +349,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added code gen for the new MCU and FSS scheme variants
   - For MCU based variants it uses `FlexColorScheme.variant` API with `FlexSchemeVariant` and for FSS based variants it uses `FlexColorScheme.tones` API with `FlexSchemeVariant` and its `tones` getter. 
   - The `FlexTones` modifiers only show up on FSS based variants with `FlexColorScheme.tones` API, as they are not available when using the `FlexColorScheme.variant` API.
-- Added the FFS seed option "Monochrome surfaces" introduced by package FlexSeedScheme 3.0.0.
+- Added the FFS seed option "Monochrome surfaces" introduced in package **FlexSeedScheme** 3.0.0.
  
  
 - Added an **Apply ColorScheme to all Cupertino components** setting to the **Component Themes** settings panel
-  - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and apply the setting to the Playground app's theme as well.  
+  - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and applies the setting to the Playground app's theme as well.  
 - In the **Switch, Checkbox and Radio** settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface **Color Blends** settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
 - Added separate controls and code gen for light and dark mode background color selection for the `BottomAppBar` on settings panel **BottomAppBar and SearchBar**.
@@ -388,11 +386,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The feature **Use TextField's InputDecorationTheme in picker dialogs** on the "**Dialog**" settings panel is now OFF by default.
 - Split the "FAB and Chip" settings panels to separate panels **FAB** and **Chip**.
 - Modified settings panel background and header colors, as well as theme selector buttons to use suitable new `ColorScheme` surface theme colors, instead of computing their own shades from theme colors.
-- Changed surface and on-color blends to default to 0. Blends are not used by default anymore in Playground.
-- The **General Setting** settings panel **Use Material-2 style divider in Material-2** **Tinted disabled components** and **Tinted interaction** are now **OFF** by default, matching the updated `FlexSubThemesData` defaults for these properties.
+- Changed surface and on-color blends to default to 0. Blends are not **ON** by default anymore in Playground. THe feature is still very cool and useful for many different design goals.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mode. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 - Update Material-3 default info for `BottomAppBar` to `surfaceContainer`.
-- Improved the `Chip` presentation, by having them in own wraps per type and a column that explains names the Chip type with both Flutter and Material-3 naming 
+- Improved the `Chip` presentation, by having them in own wraps per type and a column that names the Chip type with both Flutter and Material-3 naming 
   - Flutter SDK ActionChip = Material-3 Assist Chip
   - Flutter SDK FilterChip = Material-3 Filter Chip
   - Flutter SDK InputChip = Material-3 InputChip
