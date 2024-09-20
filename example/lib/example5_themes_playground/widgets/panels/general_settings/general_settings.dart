@@ -9,8 +9,8 @@ import '../../shared/component_colors_reveal.dart';
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //
 // Settings are available for border radius and a few other options.
-class ComponentSettings extends StatelessWidget {
-  const ComponentSettings(this.controller, {super.key});
+class GeneralSettings extends StatelessWidget {
+  const GeneralSettings(this.controller, {super.key});
   final ThemeController controller;
 
   static final Uri _fcsFlutterIssue117755 = Uri(
