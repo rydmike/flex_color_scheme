@@ -273,6 +273,7 @@ enum FlexSliderIndicatorType {
 ///   [floatingActionButtonTheme].
 /// * [IconButtonThemeData] for [IconButton] via [iconButtonTheme].
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
+/// * [ListTileThemeData] for [ListTile] via [listTileTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [menuBarTheme].
 /// * [MenuButtonThemeData] for [MenuButton] via [menuButtonTheme].
 /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
@@ -284,6 +285,8 @@ enum FlexSliderIndicatorType {
 /// * [OutlinedButtonThemeData] for [OutlinedButton] via [outlinedButtonTheme].
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
 /// * [RadioThemeData] for [Radio] via [radioTheme].
+/// * [SearchBarThemeData] for [SearchBar] via [searchBarTheme].
+/// * [SearchViewThemeData] for [SearchView] via [searchViewTheme].
 /// * [SegmentedButtonThemeData] for [SegmentedButton] via
 ///   [segmentedButtonTheme].
 /// * [SliderThemeData] for [Slider] via [sliderTheme].
@@ -5987,17 +5990,134 @@ sealed class FlexSubThemes {
     );
   }
 
-  // TODO(rydmike): Add SearchBarThemeData support.
   /// An opinionated [SearchBarThemeData] theme for the [SearchBar].
-  // static SearchBarThemeData searchBarThemeData() {
-  //   return const SearchBarThemeData();
-  // }
+  static SearchBarThemeData searchBarThemeData({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
 
-  // TODO(rydmike): Add SearchViewThemeData support.
+    /// Optional size constraints for the search bar.
+    ///
+    /// If null, the value of [SearchBarThemeData.constraints] will be used. If
+    /// this is also null, then the constraints defaults to:
+    /// ```dart
+    /// const BoxConstraints(minWidth: 360.0, maxWidth: 800.0, minHeight: 56.0)
+    /// ```
+    final BoxConstraints? constraints,
+
+    /// The elevation of the search bar's [Material].
+    ///
+    /// If null, default value is 6.0.
+    final WidgetStateProperty<double?>? elevation,
+
+    /// The search bar's background fill color.
+    ///
+    /// If null, the default value is [ColorScheme.surfaceContainerHigh].
+    final WidgetStateProperty<Color?>? backgroundColor,
+
+    /// The shadow color of the search bar's [Material].
+    ///
+    /// If null, the default value is [ColorScheme.shadow].
+    final WidgetStateProperty<Color?>? shadowColor,
+
+    /// The color and weight of the search bar's outline.
+    ///
+    /// This value is combined with [shape] to create a shape decorated
+    /// with an outline.
+    ///
+    /// If null, the search bar doesn't have a side by default.
+    final WidgetStateProperty<BorderSide?>? side,
+
+    /// The shape of the search bar's underlying [Material].
+    ///
+    /// This shape is combined with [side] to create a shape decorated
+    /// with an outline.
+    ///
+    /// If null, defaults to [StadiumBorder].
+    final WidgetStateProperty<OutlinedBorder?>? shape,
+
+    /// The padding between the search bar's boundary and its contents.
+    ///
+    /// If null, the value of [SearchBarThemeData.padding] will be used.
+    /// If this is also null, then the default value is 16.0 horizontally.
+    final WidgetStateProperty<EdgeInsetsGeometry?>? padding,
+
+    /// The style to use for the text being edited.
+    ///
+    /// If null, defaults to the `bodyLarge` text style from the current
+    /// [Theme]. The default text color is [ColorScheme.onSurface].
+    final WidgetStateProperty<TextStyle?>? textStyle,
+
+    /// The style to use for the [hintText].
+    ///
+    /// If null, the value of [textStyle] will be used. If this is also null,
+    /// defaults to the `bodyLarge` text style from the current [Theme].
+    /// The default text color is [ColorScheme.onSurfaceVariant].
+    final WidgetStateProperty<TextStyle?>? hintStyle,
+  }) {
+    return const SearchBarThemeData();
+  }
+
   /// An opinionated [SearchViewThemeData] theme for the [SearchBar].
-  // static SearchViewThemeData searchViewThemeData() {
-  //   return const SearchViewThemeData();
-  // }
+  static SearchViewThemeData searchViewThemeData({
+    /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// The search bar's background fill color.
+    ///
+    /// If null, the default value is [ColorScheme.surfaceContainerHigh].
+    final Color? backgroundColor,
+
+    /// The elevation of the search bar's [Material].
+    ///
+    /// If null, the default value is 6.0.
+    final double? elevation,
+
+    /// The color and weight of the search view's outline.
+    ///
+    /// This value is combined with [shape] to create a shape decorated
+    /// with an outline. This will be ignored if the view is full-screen.
+    ///
+    /// If null, the search view doesn't have a side by default.
+    final BorderSide? side,
+
+    /// The shape of the search view's underlying [Material].
+    ///
+    /// This shape is combined with [side] to create a shape decorated
+    /// with an outline.
+    ///
+    /// If null, then the default value is a rectangle shape for full-screen
+    /// mode and a [RoundedRectangleBorder] shape with a 28.0 radius otherwise.
+    final OutlinedBorder? shape,
+
+    /// The height of the search field on the search view.
+    ///
+    /// If null, the default value is 56.0.
+    final double? headerHeight,
+
+    /// The style to use for the text being edited on the search view.
+    ///
+    /// If null, defaults to the `bodyLarge` text style from the current
+    /// [Theme]. The default text color is [ColorScheme.onSurface].
+    final TextStyle? headerTextStyle,
+
+    /// Overrides the default value for [SearchAnchor.headerHintStyle].
+    final TextStyle? headerHintStyle,
+
+    /// The style to use for the [viewHintText] on the search view.
+    ///
+    /// If null, the value of [headerTextStyle] will be used. If this is
+    /// also null, defaults to the `bodyLarge` text style from the current
+    /// [Theme]. The default text color is [ColorScheme.onSurfaceVariant].
+    final BoxConstraints? constraints,
+
+    /// The color of the divider on the search view.
+    ///
+    /// If this property is null, then [SearchViewThemeData.dividerColor] is
+    /// used. If that is also null, the default value is [ColorScheme.outline].
+    final Color? dividerColor,
+  }) {
+    return const SearchViewThemeData();
+  }
 
   /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
   static SegmentedButtonThemeData segmentedButtonTheme({
