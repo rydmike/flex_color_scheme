@@ -80,15 +80,15 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
           '\n'
           '${FlexSchemeVariant.values[index].configDetails}.\n'
           '\n'
-          'Here you can choose between the default Material-3 seed generation '
+          'You can choose between the default Material-3 seed generation '
           "Tonal Spot or Flutter/MCU's eight other DynamicSchemeVariants, "
           'plus twelve pre-defined FSS FlexTones seed generation setups.\n'
           '\n'
           'TIP:\n'
-          'With the FlexTones "tones" API you can make your own '
-          'FlexTones configurations and configure which tone from '
-          'generated palettes each color in the ColorScheme use. '
-          'Set limits on used chroma values for all six seed colors used as '
+          'By using the FlexTones "tones" API, you can make your own '
+          'FlexTones definition and configure which tone from '
+          'generated palettes each color in the ColorScheme use. You can also '
+          'set limits on used chroma values for all six seed colors used as '
           'seed keys for primary, secondary, tertiary, error, neutral and '
           'neutral variant tonal palettes.\n',
         ),
