@@ -146,7 +146,7 @@ class ShowTonalPalette extends StatelessWidget {
           contentPadding: EdgeInsetsDirectional.only(end: 12),
           title: Text('Tonal color palettes'),
           subtitleReveal: Text(
-            'Tonal palettes and their tones are presented below in this '
+            'Tonal palettes and their tones below, are in this '
             'order:\n'
             '  - Primary palette\n'
             '  - Secondary palette\n'
@@ -156,11 +156,13 @@ class ShowTonalPalette extends StatelessWidget {
             '  - Neutral variant palette\n'
             '\n'
             'The FSS based light and dark mode ColorScheme colors are picked '
-            'from these palettes and these fixed color tones when using seed '
-            'generated ColorSchemes. The MCU based Flutter SDK dynamic schemes '
-            'also use these palettes for their generated ColorSchemes, but '
-            'they may use color tones dynamically, that are not included in '
-            'the fixed tones below.',
+            'from these palettes and these predefined color tones when using '
+            'seed generated ColorSchemes. The MCU based Flutter SDK dynamic '
+            'schemes also use these palettes for their generated ColorSchemes. '
+            'Typically their tones are also from this fixed list of tones, '
+            'but some of the dynamic schemes may use and create color '
+            'tones dynamically, that are not included in '
+            'the predefined tones below.',
           ),
           // trailing: SelectPaletteType(controller: controller),
         ),
