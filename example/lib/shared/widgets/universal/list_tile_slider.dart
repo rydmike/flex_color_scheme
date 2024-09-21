@@ -118,7 +118,7 @@ class ListTileSlider extends StatelessWidget {
         // For now using hard coded padding for sliderLabel.
         padding: const EdgeInsets.only(right: 8),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             if (sliderLabel != null) Text(sliderLabel!, style: style),
             Text(
