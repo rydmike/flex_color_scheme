@@ -10,12 +10,14 @@ import '../../shared/color_scheme_box.dart';
 class FlexToneConfigPopupMenu extends StatelessWidget {
   const FlexToneConfigPopupMenu({
     super.key,
+    this.enabled = true,
     required this.index,
     this.onChanged,
     this.title = '',
     this.flexToneName = '',
     this.contentPadding,
   });
+  final bool enabled;
   final int index;
   final ValueChanged<int>? onChanged;
   final String title;
@@ -30,7 +32,8 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     // Value less than 0, or index over range disables the control.
     final bool disabled = index < 0 ||
         index >= FlexSchemeVariant.values.length ||
-        onChanged == null;
+        onChanged == null ||
+        !enabled;
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,

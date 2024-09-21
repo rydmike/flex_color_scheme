@@ -8,6 +8,7 @@ import '../../../../shared/widgets/universal/list_tile_slider.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/show_input_colors_switch.dart';
+import '../../shared/surfaces_seed_blend_color.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'flex_tone_config_popup_menu.dart';
 import 'scheme_colors.dart';
@@ -49,30 +50,57 @@ class ColorSchemePanel extends StatelessWidget {
         const SizedBox(height: 8),
         UseSeededColorSchemeSwitch(controller: controller),
         FlexToneConfigPopupMenu(
+          enabled: controller.useKeyColors,
           title: 'Scheme',
           flexToneName: '$_flexToneName $_seedType',
           index: controller.usedFlexToneSetup,
           onChanged: controller.setUsedFlexToneSetup,
         ),
-        const SizedBox(height: 4),
+        if (isLight)
+          SurfacesSeedBlendColorLight(
+            controller,
+            dense: true,
+          )
+        else
+          SurfacesSeedBlendColorDark(
+            controller,
+            dense: true,
+          ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ShowTonalPalette(controller: controller),
         ),
-        ListTileReveal(
-          enabled: controller.useKeyColors,
-          title: const Text('Keep brand colors when using seeded scheme?'),
-          dense: true,
-          subtitleReveal: const Text(
-            'With the switches on the colors below you can lock primary, '
-            'secondary, tertiary, error and their container colors to '
-            'their scheme input defined colors instead of using the color '
-            'from the seeded tonal palette. The switches have separate '
-            'states for light and dark theme mode.\n',
-          ),
+        const SizedBox(height: 2),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ListTileReveal(
+                contentPadding: paddingStartColumn,
+                enabled: controller.useKeyColors,
+                title: controller.useKeyColors
+                    ? const Text('Keep input colors?')
+                    : const Text(' '),
+                dense: true,
+                subtitleReveal: const Text(
+                  'With the switches on the colors below you can lock primary, '
+                  'secondary, tertiary, error and their container colors to '
+                  'their scheme input defined colors instead of using the color '
+                  'from the seeded tonal palette. The switches have separate '
+                  'states for light and dark theme mode.\n',
+                ),
+              ),
+            ),
+            Expanded(
+              child: ShowInputColorsSwitch(
+                controller: controller,
+                contentPadding: paddingEndColumn,
+              ),
+            ),
+          ],
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 4),
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 2, 16, 4),
           child: SchemeColors(tc: controller),
         ),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))
@@ -89,6 +117,7 @@ class ColorSchemePanel extends StatelessWidget {
               style: theme.textTheme.labelSmall,
             ),
           ),
+
         if (controller.schemeIndex == (AppColor.schemes.length - 1))
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -105,28 +134,30 @@ class ColorSchemePanel extends StatelessWidget {
               style: theme.textTheme.labelSmall,
             ),
           ),
-        ShowInputColorsSwitch(controller: controller),
-        const Divider(height: 1),
+
+        const Divider(),
         const Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 24, 0),
+          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 24, 0),
           child: Text(
             'Adjust the none seeded ColorScheme',
             style: TextStyle(fontSize: 13),
           ),
         ),
         EnumPopupMenu<FlexFixedColorStyle>(
+          dense: true,
           enabled: controller.useFlexColorScheme && !controller.useKeyColors,
           values: FlexFixedColorStyle.values,
-          title: const Text('Fixed and FixedDim color style'),
+          title: const Text('Fixed colors'),
           subtitleReveal: const Text(
             'This setting applies when not using a seed generated color '
             'scheme. '
             'It offers three styles. FCS computed fixed and fixedDim style, '
             'these are not seed generated in HCT color space. Alternatively '
             'two different seed generated versions can be used, the first one '
-            'called seeded uses the same tones as the M3 spec. The second '
+            'called seeded by FSS, uses the same tones as the MCU spec. '
+            'The second '
             'option uses tone that create fixed and fixedDim colors that '
-            'are brighter and have  more contrast.\n'
+            'are brighter and have more contrast.\n'
             '\n'
             'Fixed and fixed dim colors are used for colors that have '
             'the same value in light and dark mode.\n',
@@ -143,22 +174,21 @@ class ColorSchemePanel extends StatelessWidget {
           ),
         ),
         SwitchListTileReveal(
-          enabled: controller.useFlexColorScheme &&
-              controller.useKeyColors &&
-              isLight,
-          title: const Text('Expressive onColors on containers in light mode'),
+          dense: true,
+          enabled: controller.useFlexColorScheme && controller.useKeyColors,
+          title: const Text('Expressive containers in LIGHT mode'),
           subtitleReveal: const Text(
             'Use tone 30 instead of 10 for onColors on containers in light '
             'mode. This is a new Material-3 spec standard. It is more color '
             'expressive, but reduces contrast.\n'
             '\n'
             'It is not yet used by Flutter SDK in ColorScheme.fromSeed '
-            'produced color schemes, but will be when Flutter upgrades to '
-            'Material Color Utilities 0.12.0. You can opt in on using it '
-            'already here, or decide to not use it, even after it becomes '
-            'a forced default in Flutter SDK.\n'
+            'produced ColorSchemes, but will be when Flutter upgrades to '
+            'Material Color Utilities (MCU) 0.12.0. You can opt in on using it '
+            'already, or decide not to use it, even after it becomes '
+            'a forced default and only option in Flutter SDK.\n'
             '\n'
-            'For MCU seed generated schemes this only has any impact when '
+            'For MCU seed generated schemes, this only has any impact when '
             'contrast level is at the default value (0).\n',
           ),
           value: controller.expressiveOnContainer,
@@ -168,9 +198,8 @@ class ColorSchemePanel extends StatelessWidget {
         ListTileReveal(
           dense: true,
           title: !controller.useKeyColors || _isFlutterScheme
-              ? const Text('Additional adjustments available '
-                  'when FSS FlexTones scheme variants are used')
-              : const Text('Adjust the FSS FlexTones seeded ColorScheme'),
+              ? const Text('Adjustments for FSS FlexTones scheme variants')
+              : const Text('Adjust the FSS seeded ColorScheme'),
           subtitleReveal: !controller.useKeyColors || _isFlutterScheme
               ? null
               : const Text('FSS FlexTones adjustments are separate for light '
@@ -180,6 +209,7 @@ class ColorSchemePanel extends StatelessWidget {
                   'dark mode remain "fixed" and identical.'),
         ),
         SwitchListTileReveal(
+          dense: true,
           enabled: controller.useKeyColors && !_isFlutterScheme,
           title: const Text('Higher contrast fixed and fixedDim'),
           subtitleReveal: const Text(
@@ -196,6 +226,7 @@ class ColorSchemePanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingStartColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('Monochrome surfaces'),
@@ -209,6 +240,7 @@ class ColorSchemePanel extends StatelessWidget {
               ),
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingEndColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('White surface'),
@@ -230,6 +262,7 @@ class ColorSchemePanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingStartColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('B&W main onColors'),
@@ -246,6 +279,7 @@ class ColorSchemePanel extends StatelessWidget {
               ),
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingEndColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('B&W surface onColors'),
@@ -267,6 +301,7 @@ class ColorSchemePanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingStartColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('Monochrome surfaces'),
@@ -280,6 +315,7 @@ class ColorSchemePanel extends StatelessWidget {
               ),
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingEndColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('Black surface'),
@@ -301,6 +337,7 @@ class ColorSchemePanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingStartColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('B&W main onColors'),
@@ -317,6 +354,7 @@ class ColorSchemePanel extends StatelessWidget {
               ),
               Expanded(
                 child: SwitchListTileReveal(
+                  dense: true,
                   contentPadding: paddingEndColumn,
                   enabled: controller.useKeyColors && !_isFlutterScheme,
                   title: const Text('B&W surface onColors'),
@@ -335,10 +373,9 @@ class ColorSchemePanel extends StatelessWidget {
         const Divider(height: 1),
         ListTileReveal(
           dense: true,
-          title: const Text('Adjust the MCU based seeded ColorScheme'),
+          title: const Text('Adjust the MCU seeded ColorScheme'),
           subtitle: !controller.useKeyColors || !_isFlutterScheme
-              ? const Text(
-                  'Use a MCU scheme variant to enable contrast level tuning')
+              ? const Text('Use a MCU scheme variant to enable contrast level')
               : const Text(
                   'Defined value is the same for light and dark mode.'),
           subtitleReveal: const Text('Please be aware that using any other '
@@ -362,6 +399,7 @@ class ColorSchemePanel extends StatelessWidget {
               'in light and dark mode.\n'),
         ),
         ListTileSlider(
+          dense: true,
           enabled: controller.useKeyColors && _isFlutterScheme,
           title: const Text('Contrast level'),
           subtitle:

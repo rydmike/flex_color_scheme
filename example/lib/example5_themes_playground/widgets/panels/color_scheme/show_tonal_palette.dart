@@ -63,7 +63,7 @@ class ShowTonalPalette extends StatelessWidget {
         (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
 
     // Are we using a Flutter SDK scheme? Otherwise use FlexTone.
-    if (usedVariant.isFlutterScheme) {
+    if (usedVariant.isFlutterScheme || !controller.useKeyColors) {
       // Get DynamicScheme tones if using Flutter SDK scheme.
       final DynamicScheme dynamicScheme = SeedColorScheme.buildDynamicScheme(
         brightness: brightness,
@@ -75,7 +75,9 @@ class ShowTonalPalette extends StatelessWidget {
             isLight ? controller.surfaceTintLight : controller.surfaceTintDark,
         neutralVariantSeedColor:
             isLight ? controller.surfaceTintLight : controller.surfaceTintDark,
-        variant: usedVariant,
+        variant: controller.useKeyColors
+            ? usedVariant
+            : FlexSchemeVariant.monochrome,
         contrastLevel: controller.dynamicContrastLevel,
         useExpressiveOnContainerColors: controller.expressiveOnContainer,
       );
@@ -146,8 +148,7 @@ class ShowTonalPalette extends StatelessWidget {
           contentPadding: EdgeInsetsDirectional.only(end: 12),
           title: Text('Tonal color palettes'),
           subtitleReveal: Text(
-            'Tonal palettes and their tones below, are in this '
-            'order:\n'
+            'Tonal palettes and their tones are shown in order:\n'
             '  - Primary palette\n'
             '  - Secondary palette\n'
             '  - Tertiary palette\n'
