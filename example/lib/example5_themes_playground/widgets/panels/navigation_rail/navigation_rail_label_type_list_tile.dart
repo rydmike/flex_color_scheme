@@ -6,9 +6,18 @@ import '../../../../shared/widgets/universal/navigation_rail_label_type_toggle_b
 class NavigationRailLabelBehaviorListTile extends StatelessWidget {
   const NavigationRailLabelBehaviorListTile({
     required this.controller,
+    this.contentPadding,
     super.key,
   });
   final ThemeController controller;
+
+  /// The [ListTile]'s internal padding.
+  ///
+  /// Insets a [ListTile]'s contents.
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
+  /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
+  final EdgeInsetsGeometry? contentPadding;
 
   String _explainLabelStyle(final NavigationRailLabelType labelStyle) {
     switch (labelStyle) {
@@ -24,8 +33,9 @@ class NavigationRailLabelBehaviorListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: contentPadding,
       enabled: controller.useSubThemes && controller.useFlexColorScheme,
-      title: const Text('Labels when rail is collapsed'),
+      title: const Text('Labels when collapsed'),
       subtitle: Text(_explainLabelStyle(
           controller.useSubThemes && controller.useFlexColorScheme
               ? controller.navRailLabelType
