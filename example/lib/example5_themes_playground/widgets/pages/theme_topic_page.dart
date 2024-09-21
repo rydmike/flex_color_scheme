@@ -7,11 +7,11 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/utils/colors_are_close.dart';
 import '../../../shared/widgets/universal/header_card.dart';
+import '../panels/theme_panel.dart';
 import '../shared/color_scheme_box.dart';
-import 'theme_color_selector.dart';
-import 'theme_panel.dart';
-import 'theme_topic.dart';
-import 'theme_topic_selector.dart';
+import 'model/theme_topic.dart';
+import 'widgets/theme_color_selector.dart';
+import 'widgets/theme_topic_selector.dart';
 
 // ignore_for_file: comment_references
 
@@ -26,7 +26,7 @@ const bool _debug = !kReleaseMode && false;
 ///
 /// It shows one or two panels at a time, in a single [PageView].
 /// This is a nice layout on mid size screen, like tablets,
-/// and it works really well on phones too as it features a sliver persistent
+/// and it works on phones too as it features a sliver persistent
 /// header delegate that scrolls away the topic panel selections.
 ///
 /// The vertical scrolling of the two side-by-side panels are a bit

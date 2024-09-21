@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import '../../../shared/const/app.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import 'theme_color_selector.dart';
-import 'theme_panel.dart';
-import 'theme_topic.dart';
-import 'theme_topic_selector.dart';
+import '../panels/theme_panel.dart';
+import 'model/theme_topic.dart';
+import 'widgets/theme_color_selector.dart';
+import 'widgets/theme_topic_selector.dart';
 
 // ignore_for_file: comment_references
 

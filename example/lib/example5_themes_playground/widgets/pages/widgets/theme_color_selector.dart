@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../../../shared/const/app.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/input_colors_settings/input_colors_selector.dart';
+import '../../../../shared/const/app.dart';
+import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/header_card.dart';
+import '../../panels/input_colors_settings/input_colors_selector.dart';
 
 /// Used to select used theme colors, can also turn ON/OFF FlexColorScheme
 /// and component themes.

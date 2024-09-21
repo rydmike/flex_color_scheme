@@ -11,7 +11,7 @@ import '../../utils/generate_colorscheme_dart_code.dart';
 import '../dialogs/dart_code_dialog_screen.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
-import 'theme_topic.dart';
+import 'model/theme_topic.dart';
 import 'theme_topic_page.dart';
 import 'theme_two_topics_page.dart';
 import 'theme_two_topics_vertical_page.dart';
