@@ -357,13 +357,12 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         case FlexFixedColorStyle.seeded:
           return useLongLabel
               ? 'Seeded by FlexSeedScheme (FSS)\n'
-                  'M3 standard tones, chroma from main colors'
+                  'Using MCU standard tones'
               : 'Seeded by FSS';
         case FlexFixedColorStyle.seededHighContrast:
           return useLongLabel
               ? 'Seeded by FlexSeedScheme (FSS)\n'
-                  'High contrast, chroma from main colors with '
-                  '.higherContrastFixed applied'
+                  'Using FSS high contrast tones'
               : 'Seeded high contrast by FSS';
         case null:
           return useLongLabel
