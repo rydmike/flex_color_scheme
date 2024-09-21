@@ -428,7 +428,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **TODO THEMES PLAYGROUND AND OTHER EXAMPLES**
 
 - Update ColorPicker to a new version with easier to discover entry field.
-- Check: Changelog status of DONE topics below and remove from here when documented. 
 - **Chip** settings panel.
   - Maybe: Chip padding, Font size, Chip outline
 - **TextField settings panel**. Check that all new features are documented in log.
