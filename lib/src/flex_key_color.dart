@@ -445,6 +445,20 @@ class FlexKeyColors with Diagnosticable {
   /// onColors for container colors have always been used in dark mode in
   /// Material-3 design and they have good contrast and accessibility.
   ///
+  /// Setting the [useExpressiveOnContainerColors] to `true` will make the
+  /// onContainer colors of all scheme variants and [FlexTones] based schemes
+  /// use the new expressive tone, if the currently used tone is 10. If a scheme
+  /// already uses an intentionally customized tone, the new expressive tone
+  /// will not be used for those tones, even when this settings is true.
+  ///
+  /// Schemes that contain such on container tones are:
+  /// - Fidelity
+  /// - Monochrome
+  /// - Content
+  /// - Ultra Contrast
+  /// - Candy pop
+  /// - Chroma
+  ///
   /// Defaults to `false` if undefined.
   ///
   /// The Material design spec for the tones used by the colors
@@ -454,8 +468,7 @@ class FlexKeyColors with Diagnosticable {
   /// Color Utilities (MCU) package is updated to at least 0.12.0.
   /// This has not been done even in Flutter master (Sep 3, 2024).
   ///
-  /// Setting the [useExpressiveOnContainerColors] to `true` will make the
-  /// colors use the new expressive tone. The expressive tone is not yet used
+  ///  The expressive tone is not yet used
   /// in the Flutter SDK, but is in the Material-3 design spec and also in
   /// MCU v 0.12.0. When this change lands in stable Flutter, it will be made
   /// `true` by default in FCS too when undefined. You you will still be able
@@ -468,20 +481,6 @@ class FlexKeyColors with Diagnosticable {
   /// by setting [useExpressiveOnContainerColors] to `false`. With it set to
   /// false, you will also keep this preference when the Flutter SDK
   /// defaults to using the expressive tones.
-  ///
-  /// The [useExpressiveOnContainerColors] property is only available when
-  /// seed generating a [ColorScheme] using `FlexSeedScheme`'s
-  /// [SeedColorScheme.fromSeeds] when a scheme [variant] is used where
-  /// its [FlexSchemeVariant.value], [isFlutterScheme] is true. This set
-  /// corresponds to all the [DynamicSchemeVariant]s available in the Flutter
-  /// SDK. The [useExpressiveOnContainerColors] property is not available when
-  /// using FSS [tones] based seed generated schemes or a [variant] having its
-  /// [FlexSchemeVariant.value], [isFlutterScheme] it set to `**false**`.
-  ///
-  /// With [tones] based schemes the more color expressive on containers in
-  /// light mode can be made with the [FlexTones] modifier
-  /// [expressiveOnContainer], that can be applied to any **light** mode
-  /// [FlexTones]. It has no effect if used on a dark mode [FlexTones].
   final bool? useExpressiveOnContainerColors;
 
   /// Copy the object with one or more provided properties changed.
