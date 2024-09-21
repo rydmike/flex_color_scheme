@@ -28,6 +28,7 @@ class ColorBlendsSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
+    final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme colorScheme = theme.colorScheme;
 
     // The most common logic for enabling Playground controls.
@@ -36,7 +37,7 @@ class ColorBlendsSettings extends StatelessWidget {
 
     // Default color is in use, make a light label to use in custom color.
     final String defaultTintLightLabel =
-        controller.surfaceTintLight == null ? ' primary (default):' : ':';
+        controller.surfaceTintLight == null ? 'Default primary ' : '';
     // Current light tint color
     final Color? previousTintLight = controller.surfaceTintLight;
     final Color effectiveTintLight =
@@ -49,7 +50,7 @@ class ColorBlendsSettings extends StatelessWidget {
     final String spaceLight = materialNameLight == '' ? '' : ' ';
     // Default color is in use, make a dark label to use in custom color.
     final String defaultTintDarkLabel =
-        controller.surfaceTintDark == null ? ' primary (default)' : '';
+        controller.surfaceTintDark == null ? 'Default primary ' : '';
     // Current dark tint color.
     final Color? previousTintDark = controller.surfaceTintDark;
     final Color effectiveTintDark =
@@ -75,16 +76,18 @@ class ColorBlendsSettings extends StatelessWidget {
               'tint color into all surface colors. The blend '
               'level is the used alpha value in an alpha blend. The mode '
               'changes used factor of this alpha blend value differently '
-              'for different surface colors and scaffold background colors.\n'
+              'for different surface colors and scaffold background color.\n'
               '\n'
-              'Blends also applies to surfaces when M3 seeded ColorSchemes are '
-              'used. Seed based M3 surfaces already include a touch of '
+              'Blends also applies to surfaces when seeded ColorSchemes are '
+              'used. Seed based surfaces already include a touch of '
               'primary color, you can make it stronger with surface blends. '
-              'To use default M3 surface color results, use blend level zero.\n'
+              'To use default seed generated surface color results, use '
+              'blend level zero.\n'
               '\n'
               'When using a surface blend mode with a high factor on Scaffold '
-              'background, the design intent is to not place any controls or '
-              'text on it directly, but to always use them on other surfaces '
+              'background, the design intent is typically to not place any '
+              'controls or text on it directly, but to always use them on '
+              'other surfaces '
               'with less surface tint, for example in Cards. The Scaffold '
               'background is then only used as a background color effect. If '
               'your app places controls directly on Scaffold, a high blend '
@@ -131,16 +134,18 @@ class ColorBlendsSettings extends StatelessWidget {
               'tint color into all surface colors. The blend '
               'level is the used alpha value in an alpha blend. The mode '
               'changes used factor of this alpha blend value differently '
-              'for different surface colors and scaffold background colors.\n'
+              'for different surface colors and scaffold background color.\n'
               '\n'
-              'Blends also applies to surfaces when M3 seeded ColorSchemes are '
-              'used. Seed based M3 surfaces already include a touch of '
+              'Blends also applies to surfaces when seeded ColorSchemes are '
+              'used. Seed based surfaces already include a touch of '
               'primary color, you can make it stronger with surface blends. '
-              'To use default M3 surface color results, use blend level zero.\n'
+              'To use default seed generated surface color results, use '
+              'blend level zero.\n'
               '\n'
               'When using a surface blend mode with a high factor on Scaffold '
-              'background, the design intent is to not place any controls or '
-              'text on it directly, but to always use them on other surfaces '
+              'background, the design intent is typically to not place any '
+              'controls or text on it directly, but to always use them on '
+              'other surfaces '
               'with less surface tint, for example in Cards. The Scaffold '
               'background is then only used as a background color effect. If '
               'your app places controls directly on Scaffold, a high blend '
@@ -185,28 +190,6 @@ class ColorBlendsSettings extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
-          ColorSchemePopupMenu(
-            enabled: enableControl,
-            title: const Text('Scaffold background color'),
-            defaultLabel: 'surfaceContainerLowest',
-            defaultLabelM2: 'surface',
-            defaultDisabledLabel: controller.useFlexColorScheme
-                ? 'surfaceContainerLowest'
-                : 'surface',
-            defaultDisabledLabelM2:
-                controller.useFlexColorScheme ? 'surface' : 'grey50',
-            value: controller.scaffoldBackgroundLightSchemeColor,
-            onChanged: controller.setScaffoldBackgroundLightSchemeColor,
-          ),
-          SwitchListTileReveal(
-            title: const Text('Plain white'),
-            subtitleReveal: const Text(
-              'Plain white uses white Scaffold background color in all blend '
-              'modes, other surfaces also become less blended.\n',
-            ),
-            value: controller.lightIsWhite,
-            onChanged: controller.setLightIsWhite,
-          ),
           ColorPickerInkWellDialog(
             color: controller.surfaceTintLight ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintLight,
@@ -218,11 +201,56 @@ class ColorBlendsSettings extends StatelessWidget {
               }
             },
             enabled: true,
-            child: ListTile(
-              title: const Text('Light blend and surface tint color'),
-              subtitle: Text('Color$defaultTintLightLabel '
-                  '$nameThatColorLight $materialNameLight$spaceLight'
-                  '#${effectiveTintLight.hexCode}'),
+            child: ListTileReveal(
+              title: const Text('Light surface blend and tint color'),
+              subtitle: Text('$defaultTintLightLabel'
+                  '#${effectiveTintLight.hexCode} '
+                  '$nameThatColorLight $materialNameLight$spaceLight'),
+              subtitleReveal: const Text(
+                'The surface blend and tint color is used as seed key color '
+                'for neutral and neutralVariant seed generated palettes.\n '
+                '\n'
+                'The FlexColorScheme surface blends use it '
+                'as the color to blend into surfaces using selected blend '
+                'level and blend mode.\n'
+                '\n'
+                'It is also set as surfaceTint color in the '
+                'ColorScheme, and thus used by legacy Material-3 '
+                'elevated tinted surfaces. Note that elevation '
+                'based surface tint is planned to be removed and no '
+                'longer really used after Flutter 3.22 in the framework, '
+                'except for the AppBar scroll under tint effect, that still '
+                'uses it in Flutter 3.22 and 3.24, but may also be removed '
+                'there later.\n'
+                '\n'
+                'The default color is ColorScheme '
+                'primary. There is rarely a need to change it. Primary '
+                'color tinted surfaces is usually what you want, if you '
+                'want tinted surfaces. To reduce tint, use low or '
+                'no surface blend level. For seed generated ColorSchemes, '
+                'choose a seed scheme variant with less tint in '
+                'neutrals. To remove tint from surface colors you '
+                'can use seed scheme modifiers.\n',
+              ),
+              leading: Tooltip(
+                message: controller.surfaceTintLight != null
+                    ? 'Reset to default,\nprimary color'
+                    : '',
+                child: IconButton.filled(
+                  isSelected: controller.surfaceTintLight != null,
+                  icon: Icon(Icons.refresh,
+                      color: controller.surfaceTintLight != null
+                          ? useMaterial3
+                              ? colorScheme.onPrimary
+                              : colorScheme.primary
+                          : null),
+                  onPressed: controller.surfaceTintLight != null
+                      ? () {
+                          controller.setSurfaceTintLight(null);
+                        }
+                      : null,
+                ),
+              ),
               trailing: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 5.0),
                 child: ColorSchemeBox(
@@ -233,50 +261,36 @@ class ColorBlendsSettings extends StatelessWidget {
               ),
             ),
           ),
-          ListTileReveal(
-            enabled: controller.surfaceTintLight != null,
-            title: const Text('Use default blend and tint color'),
-            subtitleReveal: const Text('Sets light theme mode custom blend and '
-                'tint color back to primary color.\n'),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 5.0),
-              child: FilledButton(
-                onPressed: controller.surfaceTintLight != null
-                    ? () {
-                        controller.setSurfaceTintLight(null);
-                      }
-                    : null,
-                child: const Text('Default'),
-              ),
-            ),
-            onTap: () {
-              controller.setSurfaceTintLight(null);
-            },
-          ),
-        ] else ...<Widget>[
           ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Scaffold background color'),
-            defaultLabel: 'surfaceContainerLowest',
-            defaultLabelM2: 'surface',
+            defaultLabel:
+                controller.lightIsWhite ? 'White' : 'surfaceContainerLowest',
+            defaultLabelM2: controller.lightIsWhite ? 'White' : 'surface',
             defaultDisabledLabel: controller.useFlexColorScheme
-                ? 'surfaceContainerLowest'
+                ? controller.lightIsWhite
+                    ? 'White'
+                    : 'surfaceContainerLowest'
                 : 'surface',
-            defaultDisabledLabelM2:
-                controller.useFlexColorScheme ? 'surface' : 'grey850',
-            value: controller.scaffoldBackgroundDarkSchemeColor,
-            onChanged: controller.setScaffoldBackgroundDarkSchemeColor,
+            defaultDisabledLabelM2: controller.useFlexColorScheme
+                ? controller.lightIsWhite
+                    ? 'White'
+                    : 'surface'
+                : 'grey50',
+            value: controller.scaffoldBackgroundLightSchemeColor,
+            onChanged: controller.setScaffoldBackgroundLightSchemeColor,
           ),
           SwitchListTileReveal(
-            title: const Text('True black'),
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Plain white'),
             subtitleReveal: const Text(
-              'For an ink black dark mode, use True Black. It uses a totally '
-              'black Scaffold background in all blend modes, other surfaces '
-              'also become less blended.\n',
+              'Plain white uses white Scaffold background color in all blend '
+              'modes, other surfaces also become less blended.\n',
             ),
-            value: controller.darkIsTrueBlack,
-            onChanged: controller.setDarkIsTrueBlack,
+            value: controller.lightIsWhite,
+            onChanged: controller.setLightIsWhite,
           ),
+        ] else ...<Widget>[
           ColorPickerInkWellDialog(
             color: controller.surfaceTintDark ?? colorScheme.primary,
             onChanged: controller.setSurfaceTintDark,
@@ -288,11 +302,56 @@ class ColorBlendsSettings extends StatelessWidget {
               }
             },
             enabled: true,
-            child: ListTile(
-              title: const Text('Dark blend and surface tint color'),
-              subtitle: Text('Color$defaultTintDarkLabel '
-                  '$nameThatColorDark $materialNameDark$spaceDark'
-                  '#${effectiveTintDark.hexCode}'),
+            child: ListTileReveal(
+              title: const Text('Dark surface blend and tint color'),
+              subtitle: Text('$defaultTintDarkLabel'
+                  '#${effectiveTintDark.hexCode} '
+                  '$nameThatColorDark $materialNameDark$spaceDark'),
+              subtitleReveal: const Text(
+                'The surface blend and tint color is used as seed key color '
+                'for neutral and neutralVariant seed generated palettes.\n '
+                '\n'
+                'The FlexColorScheme surface blends use it '
+                'as the color to blend into surfaces using selected blend '
+                'level and blend mode.\n'
+                '\n'
+                'It is also set as surfaceTint color in the '
+                'ColorScheme, and thus used by legacy Material-3 '
+                'elevated tinted surfaces. Note that elevation '
+                'based surface tint is planned to be removed and no '
+                'longer really used after Flutter 3.22 in the framework, '
+                'except for the AppBar scroll under tint effect, that still '
+                'uses it in Flutter 3.22 and 3.24, but may also be removed '
+                'there later.\n'
+                '\n'
+                'The default color is ColorScheme '
+                'primary. There is rarely a need to change it. Primary '
+                'color tinted surfaces is usually what you want, if you '
+                'want tinted surfaces. To reduce tint, use low or '
+                'no surface blend level. For seed generated ColorSchemes, '
+                'choose a seed scheme variant with less tint in '
+                'neutrals. To remove tint from surface colors you '
+                'can use seed scheme modifiers.\n',
+              ),
+              leading: Tooltip(
+                message: controller.surfaceTintDark != null
+                    ? 'Reset to default,\nprimary color'
+                    : '',
+                child: IconButton.filled(
+                  isSelected: controller.surfaceTintDark != null,
+                  icon: Icon(Icons.refresh,
+                      color: controller.surfaceTintDark != null
+                          ? useMaterial3
+                              ? colorScheme.onPrimary
+                              : colorScheme.primary
+                          : null),
+                  onPressed: controller.surfaceTintDark != null
+                      ? () {
+                          controller.setSurfaceTintDark(null);
+                        }
+                      : null,
+                ),
+              ),
               trailing: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 5.0),
                 child: ColorSchemeBox(
@@ -303,25 +362,34 @@ class ColorBlendsSettings extends StatelessWidget {
               ),
             ),
           ),
-          ListTileReveal(
-            enabled: controller.surfaceTintDark != null,
-            title: const Text('Use default blend and tint color'),
-            subtitleReveal: const Text('Sets dark theme mode custom blend and '
-                'tint color back to primary color.\n'),
-            trailing: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 5.0),
-              child: FilledButton(
-                onPressed: controller.surfaceTintDark != null
-                    ? () {
-                        controller.setSurfaceTintDark(null);
-                      }
-                    : null,
-                child: const Text('Default'),
-              ),
+          ColorSchemePopupMenu(
+            enabled: enableControl,
+            title: const Text('Scaffold background color'),
+            defaultLabel: 'surfaceContainerLowest',
+            defaultLabelM2: controller.darkIsTrueBlack ? 'Black' : 'surface',
+            defaultDisabledLabel: controller.useFlexColorScheme
+                ? controller.darkIsTrueBlack
+                    ? 'Black'
+                    : 'surfaceContainerLowest'
+                : 'surface',
+            defaultDisabledLabelM2: controller.useFlexColorScheme
+                ? controller.darkIsTrueBlack
+                    ? 'Black'
+                    : 'surface'
+                : 'grey850',
+            value: controller.scaffoldBackgroundDarkSchemeColor,
+            onChanged: controller.setScaffoldBackgroundDarkSchemeColor,
+          ),
+          SwitchListTileReveal(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('True black'),
+            subtitleReveal: const Text(
+              'For an ink black dark mode, use True Black. It uses a totally '
+              'black Scaffold background in all blend modes, other surfaces '
+              'also become less blended.\n',
             ),
-            onTap: () {
-              controller.setSurfaceTintDark(null);
-            },
+            value: controller.darkIsTrueBlack,
+            onChanged: controller.setDarkIsTrueBlack,
           ),
         ],
         const Divider(),
