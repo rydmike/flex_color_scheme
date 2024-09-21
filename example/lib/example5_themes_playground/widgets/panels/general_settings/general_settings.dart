@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
+import '../../../../shared/widgets/examples/show_sub_theme_colors.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/component_colors_reveal.dart';
 

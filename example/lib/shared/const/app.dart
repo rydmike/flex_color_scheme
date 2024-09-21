@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/theme_controller.dart';
 import '../model/adaptive_theme.dart';
-import '../widgets/app/responsive_scaffold.dart';
+import '../widgets/examples/responsive_scaffold.dart';
 
 // ignore_for_file: comment_references
 

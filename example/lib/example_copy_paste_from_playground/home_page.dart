@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../shared/const/app.dart';
-import '../shared/widgets/app/responsive_scaffold.dart';
-import '../shared/widgets/app/show_color_scheme_colors.dart';
-import '../shared/widgets/app/show_sub_pages.dart';
-import '../shared/widgets/app/show_theme_data_colors.dart';
+import '../shared/widgets/examples/responsive_scaffold.dart';
+import '../shared/widgets/examples/show_color_scheme_colors.dart';
+import '../shared/widgets/examples/show_sub_pages.dart';
+import '../shared/widgets/examples/show_theme_data_colors.dart';
 import '../shared/widgets/universal/header_card_stateful.dart';
 import '../shared/widgets/universal/responsive_center.dart';
 import '../shared/widgets/universal/showcase_material.dart';
