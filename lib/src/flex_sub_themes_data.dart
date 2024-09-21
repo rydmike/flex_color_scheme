@@ -177,7 +177,7 @@ class FlexSubThemesData with Diagnosticable {
     this.splashTypeAdaptive,
     //
     this.blendTextTheme = false,
-    this.useTextTheme,
+    this.useMaterial3Typography,
     this.useM2StyleDividerInM3 = false,
     //
     this.defaultRadius,
@@ -450,6 +450,10 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailLabelType,
     this.navigationRailGroupAlignment,
     //
+    @Deprecated('This property has been replaced by the more aptly named '
+        'useMaterial3Typography property and no longer has any function '
+        'in V8 and will be removed in v9.0.0.')
+    this.useTextTheme,
     @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
         'function and will be removed in v9. FlexColorScheme in M3 mode '
         'defaults to using mostly Flutter defaults styles. '
@@ -832,7 +836,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Determines if Material-3 TextTheme and Typography is used.
   ///
-  /// When opting in on using the sub-theming, this flag controls if the
+  /// When opting in on using component themes, this flag controls if the
   /// TextTheme will use the new Material-3 [Typography.material2021]
   /// as specified in the [Material-3 Design Guide](https://m3.material.io).
   ///
@@ -845,7 +849,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [Typography.material2018] in Material-3 mode.
   ///
   /// When using [FlexColorScheme] and [ThemeData.useMaterial3] is false and
-  /// sub themes are not used, then default typography is
+  /// component themes are not used, then default typography is
   /// [Typography.material2018]. Note that if [FlexColorScheme] is
   /// not used at all, and your [ThemeData] has [ThemeData.useMaterial3] false,
   /// then Flutter defaults to using very old poor [Typography.material2014].
@@ -854,19 +858,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
   /// like ThemeData. You apply and use them just as you would with ThemeData.
-  /// This text theme is just a custom predefined TextTheme.
+  /// This text theme is just a convenience Typography toggle.
   ///
   /// If you specify a custom [typography] to [FlexColorScheme] or
   /// [FlexThemeData], this property has no impact on used typography.
-  ///
-  /// This property was originally used in [FlexColorScheme] to opt-in on using
-  /// a custom text theme defined internally by [FlexColorScheme] to look like
-  /// the typography and text theme used in Material-3, before such a text theme
-  /// and typography existed in Flutter. When Flutter started providing M3
-  /// text theme and typography, this property was converted into toggle to opt
-  /// in and out of using the text theme. Typically, you do not want to
-  /// opt-out of it, but in M2 mode you may want to opt-in and set it to true.
-  final bool? useTextTheme;
+  final bool? useMaterial3Typography;
 
   /// Determines if M2 style opacity based divider is used in Material 3.
   ///
@@ -3306,7 +3302,52 @@ class FlexSubThemesData with Diagnosticable {
   /// The default is -1.0.
   final double? navigationRailGroupAlignment;
 
-  /// **DEPRECATED** No function anymore.
+  /// **DEPRECATED** and has no function anymore.
+  /// Use [useMaterial3Typography] instead.
+  ///
+  /// Determines if Material-3 TextTheme and Typography is used.
+  ///
+  /// When opting in on using the sub-theming, this flag controls if the
+  /// TextTheme will use the new Material-3 [Typography.material2021]
+  /// as specified in the [Material-3 Design Guide](https://m3.material.io).
+  ///
+  /// If not defined, and [ThemeData.useMaterial3] is true, then it defaults
+  /// to true. If not defined and [ThemeData.useMaterial3] is false, then it
+  /// defaults to false.
+  ///
+  /// This toggle works as an override toggle for using
+  /// [Typography.material2021] in Material-2 mode and for using
+  /// [Typography.material2018] in Material-3 mode.
+  ///
+  /// When using [FlexColorScheme] and [ThemeData.useMaterial3] is false and
+  /// component themes are not used, then default typography is
+  /// [Typography.material2018]. Note that if [FlexColorScheme] is
+  /// not used at all, and your [ThemeData] has [ThemeData.useMaterial3] false,
+  /// then Flutter defaults to using very old poor [Typography.material2014].
+  /// In such cases consider defining your typography manually to
+  /// [Typography.material2018] or why not even [Typography.material2021].
+  ///
+  /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
+  /// like ThemeData. You apply and use them just as you would with ThemeData.
+  /// This text theme is just a convenience Typography toggle.
+  ///
+  /// If you specify a custom [typography] to [FlexColorScheme] or
+  /// [FlexThemeData], this property has no impact on used typography.
+  ///
+  /// This property was originally used in [FlexColorScheme] to opt-in on using
+  /// a custom text theme defined internally by [FlexColorScheme] to look like
+  /// the typography and text theme used in Material-3, before such a text theme
+  /// and typography existed in Flutter. When Flutter started providing M3
+  /// text theme and typography, this property was converted into toggle to opt
+  /// in and out of using the text theme. Typically, you do not want to
+  /// opt-out of it, but in M2 mode you may want to opt-in and set it to true.
+  @Deprecated('This property has been replaced by the more aptly named '
+      'useMaterial3Typography property and no longer has any function '
+      'in V8 and will be removed in v9.0.0.')
+  final bool? useTextTheme;
+
+  /// **DEPRECATED** and has no function anymore.
+  ///
   /// Set to true to use Flutter SDK default component theme designs.
   ///
   /// Default to false.
@@ -3419,7 +3460,7 @@ class FlexSubThemesData with Diagnosticable {
     final FlexSplashType? splashTypeAdaptive,
     //
     final bool? blendTextTheme,
-    final bool? useTextTheme,
+    final bool? useMaterial3Typography,
     final bool? useM2StyleDividerInM3,
     //
     final double? defaultRadius,
@@ -3691,6 +3732,10 @@ class FlexSubThemesData with Diagnosticable {
     final NavigationRailLabelType? navigationRailLabelType,
     final double? navigationRailGroupAlignment,
     //
+    @Deprecated('This property has been replaced by the more aptly named '
+        'useMaterial3Typography property and no longer has any function '
+        'in V8 and will be removed in v9.0.0.')
+    final bool? useTextTheme,
     @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
         'function and will be removed in v9. FlexColorScheme in M3 mode '
         'defaults to using mostly Flutter defaults styles. '
@@ -3719,7 +3764,8 @@ class FlexSubThemesData with Diagnosticable {
       splashTypeAdaptive: splashTypeAdaptive ?? this.splashTypeAdaptive,
       //
       blendTextTheme: blendTextTheme ?? this.blendTextTheme,
-      useTextTheme: useTextTheme ?? this.useTextTheme,
+      useMaterial3Typography:
+          useMaterial3Typography ?? this.useMaterial3Typography,
       useM2StyleDividerInM3:
           useM2StyleDividerInM3 ?? this.useM2StyleDividerInM3,
       //
@@ -4202,7 +4248,7 @@ class FlexSubThemesData with Diagnosticable {
         other.splashTypeAdaptive == splashTypeAdaptive &&
         //
         other.blendTextTheme == blendTextTheme &&
-        other.useTextTheme == useTextTheme &&
+        other.useMaterial3Typography == useMaterial3Typography &&
         other.useM2StyleDividerInM3 == useM2StyleDividerInM3 &&
         //
         other.defaultRadius == defaultRadius &&
@@ -4555,7 +4601,7 @@ class FlexSubThemesData with Diagnosticable {
         splashTypeAdaptive,
         //
         blendTextTheme,
-        useTextTheme,
+        useMaterial3Typography,
         useM2StyleDividerInM3,
         //
         defaultRadius,
@@ -4853,7 +4899,8 @@ class FlexSubThemesData with Diagnosticable {
         EnumProperty<FlexSplashType>('splashTypeAdaptive', splashTypeAdaptive));
     //
     properties.add(DiagnosticsProperty<bool>('blendTextTheme', blendTextTheme));
-    properties.add(DiagnosticsProperty<bool>('useTextTheme', useTextTheme));
+    properties.add(DiagnosticsProperty<bool>(
+        'useMaterial3Typography', useMaterial3Typography));
     properties.add(DiagnosticsProperty<bool>(
         'useM2StyleDividerInM3', useM2StyleDividerInM3));
     //

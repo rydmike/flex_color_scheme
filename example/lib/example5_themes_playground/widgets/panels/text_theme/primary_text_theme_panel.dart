@@ -4,9 +4,9 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../shared/use_material3_text_theme.dart';
 import '../../shared/use_tinted_text_theme.dart';
 import 'use_app_font_switch_list_tile.dart';
+import 'use_material3_typography.dart';
 
 class PrimaryTextThemePanel extends StatefulWidget {
   const PrimaryTextThemePanel(this.controller, {super.key});
@@ -36,7 +36,7 @@ class _PrimaryTextThemePanelState extends State<PrimaryTextThemePanel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        UseMaterial3TextTheme(controller: widget.controller),
+        UseMaterial3Typography(controller: widget.controller),
         UseTinted3TextTheme(controller: widget.controller),
         const Divider(),
         UseAppFontSwitchLisTile(controller: widget.controller),

@@ -235,9 +235,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendDarkTextTheme = controller.blendDarkTextTheme
       ? '    blendTextTheme: ${controller.blendDarkTextTheme},\n'
       : '';
-  final String useTextTheme = controller.useTextTheme == null
-      ? ''
-      : '    useTextTheme: ${controller.useTextTheme},\n';
+  final String useMaterial3Typography = controller.useMaterial3Typography !=
+          null
+      ? '    useMaterial3Typography: ${controller.useMaterial3Typography},\n'
+      : '';
   final String useM2StyleDividerInM3 =
       controller.useM2StyleDividerInM3 && controller.useMaterial3
           ? '    useM2StyleDividerInM3: ${controller.useM2StyleDividerInM3},\n'
@@ -1315,7 +1316,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$scaffoldBackgroundLightSchemeColor'
           //
           '$blendLightTextTheme'
-          '$useTextTheme'
+          '$useMaterial3Typography'
           '$useM2StyleDividerInM3'
           //
           '$thinBorderWidth'
@@ -1553,7 +1554,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$scaffoldBackgroundDarkSchemeColor'
           //
           '$blendDarkTextTheme'
-          '$useTextTheme'
+          '$useMaterial3Typography'
           '$useM2StyleDividerInM3'
           //
           '$adaptiveSplash'

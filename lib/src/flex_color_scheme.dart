@@ -6318,11 +6318,13 @@ class FlexColorScheme with Diagnosticable {
     // M3 colorscheme for a correct style.
     Typography defaultTypography() {
       // ignore: use_if_null_to_convert_nulls_to_bools
-      if (useSubThemes && subTheme.useTextTheme == true) {
+      if (useSubThemes && subTheme.useMaterial3Typography == true) {
         return Typography.material2021(
             platform: effectivePlatform, colorScheme: colorScheme);
       }
-      if (useSubThemes && subTheme.useTextTheme == null && useMaterial3) {
+      if (useSubThemes &&
+          subTheme.useMaterial3Typography == null &&
+          useMaterial3) {
         return Typography.material2021(
             platform: effectivePlatform, colorScheme: colorScheme);
       }
