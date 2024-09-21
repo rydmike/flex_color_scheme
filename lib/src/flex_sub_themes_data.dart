@@ -477,7 +477,7 @@ class FlexSubThemesData with Diagnosticable {
   /// To get a color themed effect, set [interactionEffects] to true. The
   /// used tint color depends on the UI control's main themed color, or
   /// element color being used in a widget many colors. Not on surface or
-  /// onSurface colors, that to their defence in M3 mode contain a slight tint
+  /// onSurface colors, that to their defense in M3 mode contain a slight tint
   /// of primary color.
   ///
   /// This design makes all the interaction effects work with the UI components
@@ -905,7 +905,7 @@ class FlexSubThemesData with Diagnosticable {
   /// * [TimePickerDialog]
   /// * Older deprecated buttons using `ButtonThemeData`
   ///
-  /// For clarity the following small, or element roundings are not affect
+  /// For clarity the following small, or element borders are not affect
   /// by [defaultRadius] value, but may be set via own themes or properties.
   ///
   /// * Indicator on [NavigationBar], but can be set via
