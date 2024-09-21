@@ -3,10 +3,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../../../shared/const/app.dart';
-import '../../../shared/utils/app_scroll_behavior.dart';
-import '../../../shared/utils/colors_are_close.dart';
-import 'theme_topic.dart';
+import '../../../../shared/const/app.dart';
+import '../../../../shared/utils/app_scroll_behavior.dart';
+import '../../../../shared/utils/colors_are_close.dart';
+import '../model/theme_topic.dart';
 
 // ignore_for_file: comment_references
 
