@@ -7,14 +7,24 @@ class ShowInputColorsSwitch extends StatelessWidget {
   const ShowInputColorsSwitch({
     super.key,
     required this.controller,
+    this.contentPadding,
   });
 
   final ThemeController controller;
+
+  /// The [ListTile]'s internal padding.
+  ///
+  /// Insets a [ListTile]'s contents.
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
+  /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
+  final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
     return SwitchListTileReveal(
       dense: true,
+      contentPadding: contentPadding,
       title: const Text('Show input colors'),
       subtitleReveal:
           const Text('Turn ON this option to show the FlexColorScheme scheme '

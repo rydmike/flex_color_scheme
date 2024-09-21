@@ -36,9 +36,24 @@ class SurfacesSeedBlendColorLight extends StatelessWidget {
   const SurfacesSeedBlendColorLight(
     this.controller, {
     super.key,
+    this.enabled = true,
+    this.dense,
   });
 
   final ThemeController controller;
+
+  /// Whether this Popup is enabled.
+  ///
+  /// Set to false to disable the popup, it will be displayed as disabled
+  /// along with the title and value trailing labels.
+  final bool enabled;
+
+  /// Whether this list tile is part of a vertically dense list.
+  ///
+  /// If this property is null then its value is based on [ListTileTheme.dense].
+  ///
+  /// Dense list tiles default to a smaller height.
+  final bool? dense;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +85,12 @@ class SurfacesSeedBlendColorLight extends StatelessWidget {
           controller.setSurfaceTintLight(previousTintLight);
         }
       },
-      enabled: true,
+      enabled: enabled,
       child: ListTileReveal(
-        title: const Text('Light neutrals seed, surfaces blend and tint color'),
+        dense: dense,
+        enabled: enabled,
+        title:
+            const Text('Neutrals seed, surfaces blend and SurfaceTint color'),
         subtitle: Text('$defaultTintLightLabel'
             '#${effectiveTintLight.hexCode} '
             '$nameThatColorLight $materialNameLight$spaceLight'),
@@ -112,9 +130,24 @@ class SurfacesSeedBlendColorDark extends StatelessWidget {
   const SurfacesSeedBlendColorDark(
     this.controller, {
     super.key,
+    this.enabled = true,
+    this.dense,
   });
 
   final ThemeController controller;
+
+  /// Whether this Popup is enabled.
+  ///
+  /// Set to false to disable the popup, it will be displayed as disabled
+  /// along with the title and value trailing labels.
+  final bool enabled;
+
+  /// Whether this list tile is part of a vertically dense list.
+  ///
+  /// If this property is null then its value is based on [ListTileTheme.dense].
+  ///
+  /// Dense list tiles default to a smaller height.
+  final bool? dense;
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +178,12 @@ class SurfacesSeedBlendColorDark extends StatelessWidget {
           controller.setSurfaceTintDark(previousTintDark);
         }
       },
-      enabled: true,
+      enabled: enabled,
       child: ListTileReveal(
-        title: const Text('Dark neutrals seed, surfaces blend and tint color'),
+        enabled: enabled,
+        dense: dense,
+        title:
+            const Text('Neutrals seed, surfaces blend and SurfaceTint color'),
         subtitle: Text('$defaultTintDarkLabel'
             '#${effectiveTintDark.hexCode} '
             '$nameThatColorDark $materialNameDark$spaceDark'),
