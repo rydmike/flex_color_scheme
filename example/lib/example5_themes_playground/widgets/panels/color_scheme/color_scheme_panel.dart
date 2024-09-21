@@ -182,19 +182,23 @@ class ColorSchemePanel extends StatelessWidget {
             'mode. This is a new Material-3 spec standard. It is more color '
             'expressive, but reduces contrast.\n'
             '\n'
-            'It is not yet used by Flutter SDK in ColorScheme.fromSeed '
+            'This modifier only impacts scheme variants where the container '
+            'on colors uses tone 10. For scheme variants with an intentionally '
+            'custom tone for onColors for containers, this setting has no '
+            'no impact.\n'
+            '\n'
+            "This feature is not yet used by Flutter's ColorScheme.fromSeed "
             'produced ColorSchemes, but will be when Flutter upgrades to '
             'Material Color Utilities (MCU) 0.12.0. You can opt in on using it '
-            'already, or decide not to use it, even after it becomes '
-            'a forced default and only option in Flutter SDK.\n'
+            'already now, or decide not to use it. With FSS you will be able '
+            'to do so, even after it becomes a forced default and the only '
+            "option in Flutter's ColorScheme.fromSeed.\n"
             '\n'
             'For MCU seed generated schemes, this only has any impact when '
-            'contrast level is at the default value (0).\n'
+            'contrast level is at the default value (0), normal contrast.\n'
             '\n'
-            'For FSS seed generated schemes it will override on container '
-            'tones for all variants, also those that use customized light '
-            'tones with more contrast than tone 10. The B&W main onColors '
-            'modifier takes precedence over this setting.\n',
+            'The FFS seed generated schemes, the tones modifier '
+            '"B&W main onColors" will override this setting.\n',
           ),
           value: controller.expressiveOnContainer,
           onChanged: controller.setExpressiveOnContainer,
