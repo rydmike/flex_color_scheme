@@ -212,7 +212,7 @@ const List<Topic> themeTopics = <Topic>[
         'A later version may add platform adaptive shape type selection. '
         'Its main purpose is to enable using Squircle shapes on Apple '
         'platforms. It will be possible to use it on other platform too. '
-        'Flutter SDK does not include the correct Apple Squricle shape.\n',
+        'Flutter SDK does not include the correct Apple Squircle shape.\n',
   ),
   Topic(
     group: TopicGroup.colors,
@@ -444,13 +444,20 @@ const List<Topic> themeTopics = <Topic>[
   ),
   Topic(
     group: TopicGroup.bars,
-    heading: 'BottomAppBar and SearchBar',
-    buttonLabel: 'BottomApp \nSearchBar',
+    heading: 'SearchBar',
+    buttonLabel: 'SearchBar',
     icon: Icons.search,
-    info: 'A bottom app bar displays navigation and key actions at the '
-        'bottom of mobile screens. SearchBar allows users to enter a keyword '
-        'or phrase and get relevant information. It’s an alternative to '
+    info: 'A SearchBar allows users to enter a keyword '
+        'or phrase and get relevant information. It is an alternative to '
         'other forms of navigation.\n',
+  ),
+  Topic(
+    group: TopicGroup.bars,
+    heading: 'BottomAppBar',
+    buttonLabel: 'Bottom\nAppBar',
+    icon: Icons.video_label,
+    info: 'A bottom app bar displays navigation and key actions at the '
+        'bottom of mobile screens.\n',
   ),
   Topic(
     group: TopicGroup.navigation,
@@ -555,12 +562,12 @@ const List<Topic> themeTopics = <Topic>[
         'specific default typefaces. The Typography (2021) introduced with '
         'Material-3 is better than past Material-2 typography '
         '(2018 in Flutter) or even older (2014). Typography 2014 is the '
-        'default one used in Flutter when using M2 theme mode, even if 2018 is '
-        'the correct M2 typography. Few devs knew you had to specify it '
-        'separately to get correct Typography in M2 mode. In M3 mode you '
-        'automatically get the correct M3 Typography by default. '
-        'Recommend using the nicer and much better M3 Typography in both '
-        'M2 and M3 mode.\n'
+        'default one used in Flutter when using Material-2 theme mode, even '
+        'if 2018 is the correct Material-2 typography. Few knew you had to '
+        'specify it separately to get correct Typography in Material-2 mode. '
+        'In Material-3 mode you get the correct Material-3 Typography by '
+        'default. We recommend using the nicer and much better Material-3 '
+        'Typography in both M2 and M3 mode.\n'
         '\n'
         "Material's default type scale includes contrasting and flexible "
         'styles to support a wide range of use cases. You can modify '

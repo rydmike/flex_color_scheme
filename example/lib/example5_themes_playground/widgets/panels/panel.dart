@@ -28,6 +28,7 @@ import 'navigation_drawer/navigation_drawer_panel.dart';
 import 'navigation_rail/navigation_rail_panel.dart';
 import 'popup_menu_button/popup_menu_button_panel.dart';
 import 'premade_designs/premade_designs_panel.dart';
+import 'search_bar/search_bar_panel.dart';
 import 'segmented_buttons/segmented_buttons_panel.dart';
 import 'shape_radius/shape_radius_panel.dart';
 import 'sliders/sliders_panel.dart';
@@ -82,6 +83,7 @@ class Panel extends StatelessWidget {
       MenusPanel(controller),
       AppBarPanel(controller),
       TabBarPanel(controller),
+      SearchBarPanel(controller),
       BottomAppBarPanel(controller),
       BottomNavigationBarPanel(controller),
       NavigationBarPanel(controller),
