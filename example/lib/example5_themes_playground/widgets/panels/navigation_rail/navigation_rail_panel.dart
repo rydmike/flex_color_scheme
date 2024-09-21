@@ -22,95 +22,149 @@ class NavigationRailPanel extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
 
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Background color'),
-          defaultLabel: 'surface',
-          value: controller.navRailBackgroundSchemeColor,
-          onChanged: controller.setNavRailBackgroundSchemeColor,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenu(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Background color'),
+                defaultLabel: 'surface',
+                value: controller.navRailBackgroundSchemeColor,
+                onChanged: controller.setNavRailBackgroundSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl,
+                title: const Text('Opacity'),
+                value: controller.navRailOpacity,
+                onChanged: controller.setNavRailOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Opacity'),
-          value: controller.navRailOpacity,
-          onChanged: controller.setNavRailOpacity,
-          min: 0,
-          max: 1,
-          divisions: 100,
-          valueDisplayScale: 100,
-          valueDecimalPlaces: 0,
-          valueHeading: 'OPACITY',
-          valueUnitLabel: ' %',
-          valueDefaultLabel: '100 %',
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Elevation'),
+                value: controller.navRailElevation,
+                onChanged: controller.setNavRailElevation,
+                min: 0,
+                max: 24,
+                divisions: 24,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 1,
+                valueDefaultLabel: '0',
+              ),
+            ),
+            Expanded(
+              child: NavigationRailLabelBehaviorListTile(
+                controller: controller,
+                contentPadding: paddingEndColumn,
+              ),
+            ),
+          ],
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Elevation'),
-          value: controller.navRailElevation,
-          onChanged: controller.setNavRailElevation,
-          min: 0,
-          max: 24,
-          divisions: 24,
-          valueHeading: 'ELEV',
-          valueDecimalPlaces: 1,
-          valueDefaultLabel: '0',
+        const Divider(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SwitchListTileReveal(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Use selection indicator'),
+                subtitleReveal: const Text('On by default when useMaterial3 '
+                    'is true, turn OFF component themes to see this.\n'),
+                value: enableControl && controller.navRailUseIndicator,
+                onChanged:
+                    enableControl ? controller.setNavRailUseIndicator : null,
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl &&
+                    controller.navRailUseIndicator &&
+                    !(!useMaterial3 &&
+                        controller.navRailLabelType ==
+                            NavigationRailLabelType.none),
+                title: const Text('Radius'),
+                value: controller.navRailIndicatorBorderRadius,
+                onChanged: controller.setNavRailIndicatorBorderRadius,
+                min: 0,
+                max: 50,
+                divisions: 50,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: 'stadium',
+                valueDefaultDisabledLabel: !useMaterial3 &&
+                        controller.navRailLabelType ==
+                            NavigationRailLabelType.none
+                    ? 'circular'
+                    : 'stadium',
+              ),
+            ),
+          ],
         ),
-        SwitchListTileReveal(
-          enabled: enableControl,
-          title: const Text('Use selection indicator'),
-          subtitleReveal: const Text('On by default when useMaterial3 '
-              'is true, turn OFF component themes to see this.\n'),
-          value: enableControl && controller.navRailUseIndicator,
-          onChanged: enableControl ? controller.setNavRailUseIndicator : null,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenu(
+                contentPadding: paddingStartColumn,
+                enabled: enableControl,
+                title: const Text('Color'),
+                defaultLabel: 'secondaryContainer',
+                defaultDisabledLabelM2: 'secondary',
+                value: controller.navRailIndicatorSchemeColor,
+                onChanged: controller.setNavRailIndicatorSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                enabled: enableControl && controller.navRailUseIndicator,
+                title: const Text('Opacity'),
+                value: controller.navRailIndicatorOpacity,
+                onChanged: controller.setNavRailIndicatorOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
+                valueDefaultDisabledLabel: useMaterial3 ? '100 %' : '64 %',
+              ),
+            ),
+          ],
         ),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Selection indicator color'),
-          defaultLabel: 'secondaryContainer',
-          defaultDisabledLabelM2: 'secondary',
-          value: controller.navRailIndicatorSchemeColor,
-          onChanged: controller.setNavRailIndicatorSchemeColor,
-        ),
-        SliderListTileReveal(
-          enabled: enableControl && controller.navRailUseIndicator,
-          title: const Text('Selection indicator opacity'),
-          value: controller.navRailIndicatorOpacity,
-          onChanged: controller.setNavRailIndicatorOpacity,
-          min: 0,
-          max: 1,
-          divisions: 100,
-          valueDisplayScale: 100,
-          valueDecimalPlaces: 0,
-          valueHeading: 'OPACITY',
-          valueUnitLabel: ' %',
-          valueDefaultLabel: '100 %',
-          valueDefaultDisabledLabel: useMaterial3 ? '100 %' : '64 %',
-        ),
-        SliderListTileReveal(
-          enabled: enableControl &&
-              controller.navRailUseIndicator &&
-              !(!useMaterial3 &&
-                  controller.navRailLabelType == NavigationRailLabelType.none),
-          title: const Text('Indicator border radius'),
-          value: controller.navRailIndicatorBorderRadius,
-          onChanged: controller.setNavRailIndicatorBorderRadius,
-          min: 0,
-          max: 50,
-          divisions: 50,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: 'stadium',
-          valueDefaultDisabledLabel: !useMaterial3 &&
-                  controller.navRailLabelType == NavigationRailLabelType.none
-              ? 'circular'
-              : 'stadium',
-        ),
-        NavigationRailLabelBehaviorListTile(controller: controller),
+        const Divider(),
         Stack(
           children: <Widget>[
             Padding(
