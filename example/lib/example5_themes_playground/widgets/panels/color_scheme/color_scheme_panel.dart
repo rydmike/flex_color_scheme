@@ -56,6 +56,12 @@ class ColorSchemePanel extends StatelessWidget {
           index: controller.usedFlexToneSetup,
           onChanged: controller.setUsedFlexToneSetup,
         ),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ShowTonalPalette(controller: controller),
+        ),
+        const SizedBox(height: 4),
         if (isLight)
           SurfacesSeedBlendColorLight(
             controller,
@@ -66,11 +72,7 @@ class ColorSchemePanel extends StatelessWidget {
             controller,
             dense: true,
           ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ShowTonalPalette(controller: controller),
-        ),
-        const SizedBox(height: 2),
+
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -78,16 +80,14 @@ class ColorSchemePanel extends StatelessWidget {
               child: ListTileReveal(
                 contentPadding: paddingStartColumn,
                 enabled: controller.useKeyColors,
-                title: controller.useKeyColors
-                    ? const Text('Keep input colors?')
-                    : const Text(' '),
+                title: const Text('Keep input colors?'),
                 dense: true,
                 subtitleReveal: const Text(
                   'With the switches on the colors below you can lock primary, '
                   'secondary, tertiary, error and their container colors to '
-                  'their scheme input defined colors instead of using the color '
-                  'from the seeded tonal palette. The switches have separate '
-                  'states for light and dark theme mode.\n',
+                  'their scheme input defined colors, instead of using the '
+                  'color from the seeded tonal palette. The switches have '
+                  'separate states for light and dark theme mode.\n',
                 ),
               ),
             ),
@@ -100,7 +100,7 @@ class ColorSchemePanel extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 2, 16, 4),
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 16, 4),
           child: SchemeColors(tc: controller),
         ),
         if (controller.schemeIndex != (AppColor.schemes.length - 1))
@@ -189,7 +189,12 @@ class ColorSchemePanel extends StatelessWidget {
             'a forced default and only option in Flutter SDK.\n'
             '\n'
             'For MCU seed generated schemes, this only has any impact when '
-            'contrast level is at the default value (0).\n',
+            'contrast level is at the default value (0).\n'
+            '\n'
+            'For FSS seed generated schemes it will override on container '
+            'tones for all variants, also those that use customized light '
+            'tones with more contrast than tone 10. The B&W main onColors '
+            'modifier takes precedence over this setting.\n',
           ),
           value: controller.expressiveOnContainer,
           onChanged: controller.setExpressiveOnContainer,
@@ -197,9 +202,10 @@ class ColorSchemePanel extends StatelessWidget {
         const Divider(height: 1),
         ListTileReveal(
           dense: true,
-          title: !controller.useKeyColors || _isFlutterScheme
-              ? const Text('Adjustments for FSS FlexTones scheme variants')
-              : const Text('Adjust the FSS seeded ColorScheme'),
+          title: const Text('Adjust the FSS seeded ColorScheme'),
+          subtitle: _isFlutterScheme
+              ? const Text('Use a FSS scheme variant to enable modifiers')
+              : null,
           subtitleReveal: !controller.useKeyColors || _isFlutterScheme
               ? null
               : const Text('FSS FlexTones adjustments are separate for light '
@@ -376,8 +382,7 @@ class ColorSchemePanel extends StatelessWidget {
           title: const Text('Adjust the MCU seeded ColorScheme'),
           subtitle: !controller.useKeyColors || !_isFlutterScheme
               ? const Text('Use a MCU scheme variant to enable contrast level')
-              : const Text(
-                  'Defined value is the same for light and dark mode.'),
+              : const Text('Same value is used in light and dark mode'),
           subtitleReveal: const Text('Please be aware that using any other '
               'contrast level than default (0) will make the fixed colors no '
               'longer confirm to the Material-3 design specification that says '
@@ -402,8 +407,7 @@ class ColorSchemePanel extends StatelessWidget {
           dense: true,
           enabled: controller.useKeyColors && _isFlutterScheme,
           title: const Text('Contrast level'),
-          subtitle:
-              const Text('Levels in M3 guide 0: Normal, 0.5: Medium, 1: High'),
+          subtitle: const Text('Material spec (0=Normal  0.5=Medium  1=High)'),
           min: -1,
           max: 1,
           divisions: 8,
