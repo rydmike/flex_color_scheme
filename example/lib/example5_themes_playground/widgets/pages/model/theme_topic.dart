@@ -4,7 +4,7 @@ import '../../../theme/topic_theme.dart';
 
 // ignore_for_file: comment_references
 
-/// Used to groups ThemeTopics into related groups.
+/// Used to groups [Topic]s into related groups.
 enum TopicGroup {
   general,
   colors,
@@ -51,11 +51,11 @@ enum TopicGroup {
   }
 }
 
-/// A class to hold the heading data we need to display in our [ThemePanel]
+/// A class to hold the heading data we need to display in our [Panel]
 /// topic panels headers and selection buttons.
 @immutable
-class ThemeTopic {
-  const ThemeTopic({
+class Topic {
+  const Topic({
     required this.heading,
     String? buttonLabel,
     required this.icon,
@@ -74,8 +74,8 @@ class ThemeTopic {
   String get buttonLabel => _buttonLabel ?? heading;
 }
 
-const List<ThemeTopic> themeTopics = <ThemeTopic>[
-  ThemeTopic(
+const List<Topic> themeTopics = <Topic>[
+  Topic(
     group: TopicGroup.general,
     heading: 'Introduction',
     icon: Icons.info_outlined,
@@ -83,7 +83,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'of FlexColorScheme. Find a theme you like, experiment '
         'with surface blends and try Material 3\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.general,
     heading: 'Premade Designs',
     buttonLabel: 'Premade\nDesigns',
@@ -102,7 +102,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'to experience how these examples impact the design of the app '
         'and Material components.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.general,
     heading: 'Theme Simulator',
     buttonLabel: 'Theme\nSimulator',
@@ -120,7 +120,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'generated theme code with the FlexColorScheme package in your own '
         'application on a real device.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.general,
     heading: 'Widget Showcase',
     buttonLabel: 'Widget\nShowcase',
@@ -130,7 +130,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'applied to them. '
         'To style them, use component theme settings for each widget.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.general,
     heading: 'Theme Code',
     buttonLabel: 'Theme\nCode',
@@ -147,7 +147,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'needed. Some of its possible configurations would require over 2000 '
         'rows of code to reproduce with the vanilla ThemeData factory.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.components,
     heading: 'General Settings',
     buttonLabel: 'General\nSettings',
@@ -165,7 +165,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'compared to default Material-3 styles, plus some minor fixes to a few '
         'Flutter Material-3 specification deviations.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.components,
     heading: 'Adaptive Theming',
     buttonLabel: 'Adaptive\nTheming',
@@ -197,7 +197,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'using the app as a web app build, on same '
         'platform can have different themed adaptive results.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.components,
     heading: 'Shape and Radius',
     buttonLabel: 'Shape\nRadius',
@@ -214,7 +214,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'platforms. It will be possible to use it on other platform too. '
         'Flutter SDK does not include the correct Apple Squricle shape.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.colors,
     heading: 'Input Colors',
     buttonLabel: 'Input\nColors',
@@ -224,7 +224,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'color scheme. You can also use any predefined scheme as a starting '
         'point for your own custom colors.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.colors,
     heading: 'ColorScheme',
     buttonLabel: 'Color\nScheme',
@@ -241,7 +241,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'When using custom colors, you decide which colors you seed from in '
         'light and dark mode separately.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.colors,
     heading: 'Color Blends',
     buttonLabel: 'Color\nBlends',
@@ -266,7 +266,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'Playground for light and dark mode. Different values for blends in '
         'light and dark mode, are often a part of the desired design.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.colors,
     heading: 'Effective Colors',
     buttonLabel: 'Effective\nColors',
@@ -277,7 +277,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'expands below provides additional background information about the '
         'colors in Flutter, that are useful to be aware of.',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Buttons',
     buttonLabel: 'Buttons',
@@ -291,7 +291,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'They are quite versatile when it comes to their theming capabilities. '
         'With all the styles offered, they often also work well as they are.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Segmented Buttons',
     buttonLabel: 'Segmented\nbuttons',
@@ -309,7 +309,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'SegmentedButton makes all segments same size by default, each '
         'segment becomes large enough to fit the largest item.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Floating Action Button',
     buttonLabel: 'FAB',
@@ -323,7 +323,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'ColorScheme in M2 mode, it is recommended to use another themed '
         'color for the FAB than secondary color.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Chip',
     buttonLabel: 'Chip',
@@ -333,7 +333,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'mode, FCS M2 mode takes some inspiration from it, while also '
         'retaining some M2 style influences.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Switch, Checkbox and Radio',
     buttonLabel: 'Switch\nCheck Radio',
@@ -345,7 +345,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         '\n'
         'Radio buttons allow users to select one option from a set.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Icon, IconButton and CircleAvatar',
     buttonLabel: 'Icon\nAvatar',
@@ -354,7 +354,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'single tap. CircleAvatar is used to show a user image, users '
         'initials or a user avatar.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Tooltip and Progress Indicators',
     buttonLabel: 'Tooltip\nProgress',
@@ -364,7 +364,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'about the status of ongoing processes, such as loading an app or '
         'submitting a form.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.controls,
     heading: 'Slider',
     buttonLabel: 'Slider',
@@ -378,7 +378,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'need further customization of the Slider or extend '
         'its classes.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.inputs,
     heading: 'TextField',
     icon: Icons.pin_outlined,
@@ -387,7 +387,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'InputDecorator theme. It is a very complex theme, with mixed '
         'legacy and MaterialState properties.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.inputs,
     heading: 'PopupMenu and Dropdowns',
     buttonLabel: 'Popup\nDropdowns',
@@ -399,7 +399,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'well and can be themed. Consider using the new more versatile M3 menu '
         'components, like MenuAnchor, DropdownMenu and MenuBar.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.inputs,
     heading: 'Menus',
     buttonLabel: 'Menus',
@@ -411,7 +411,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'Flutter. When applicable, prefer using them over other similar '
         'legacy Material-2 components.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.bars,
     heading: 'AppBar',
     buttonLabel: 'AppBar',
@@ -423,7 +423,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'want Primary, Material2 surface, background, scaffoldBackground '
         'colors with their surfaceTint and blends, or use a custom color.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.bars,
     heading: 'TabBar',
     icon: Icons.tab_outlined,
@@ -442,7 +442,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'the FCS forAppBar style, the TabBar always fits with selected '
         'AppBar theme.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.bars,
     heading: 'BottomAppBar and SearchBar',
     buttonLabel: 'BottomApp \nSearchBar',
@@ -452,7 +452,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'or phrase and get relevant information. It’s an alternative to '
         'other forms of navigation.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.navigation,
     heading: 'BottomNavigationBar',
     buttonLabel: 'Bottom\nNavBar',
@@ -463,7 +463,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'navigation on phones in Material 2 design. In Material 3 it '
         'has been replaced with NavigationBar, prefer using it instead.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.navigation,
     heading: 'NavigationBar',
     buttonLabel: 'Navigation\nBar',
@@ -473,7 +473,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'used for top level destination '
         'navigation on phones in Material 3 design.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.navigation,
     heading: 'NavigationRail',
     buttonLabel: 'Navigation\nRail',
@@ -485,7 +485,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'color is colorScheme.surface. '
         'FlexColorScheme sub-theme default is colorScheme.background.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.navigation,
     heading: 'Drawer and NavigationDrawer',
     buttonLabel: 'Navigation\nDrawer',
@@ -494,13 +494,13 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'hidden side drawer. On desktop media sizes, a navigation drawer can '
         'also be used as pinned side menu.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.surfaces,
     heading: 'Dialogs',
     icon: Icons.branding_watermark_outlined,
     info: 'Dialogs provide important prompts in a user flow.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.surfaces,
     heading: 'BottomSheet',
     buttonLabel: 'BottomSheet',
@@ -508,7 +508,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     info: 'Bottom sheets are surfaces containing supplementary content, '
         'anchored to the bottom of the screen.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.surfaces,
     heading: 'SnackBar and MaterialBanner',
     buttonLabel: 'SnackBar\nBanner',
@@ -520,7 +520,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'the screen and typically used to provide more information on '
         'topics related to content in the application.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.surfaces,
     heading: 'Card',
     buttonLabel: 'Card',
@@ -528,7 +528,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     info: 'Cards contain content and actions that relate '
         'information about a subject.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.surfaces,
     heading: 'Material',
     buttonLabel: 'Material',
@@ -538,7 +538,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'behavior. Material is responsible for clipping, elevation '
         'and ink effects below its children.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.texts,
     heading: 'ListTile',
     buttonLabel: 'ListTile',
@@ -546,7 +546,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
     info: 'Lists tiles are often used in lists, with continuous, '
         'vertical indexes of text or images.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.texts,
     heading: 'TextTheme',
     buttonLabel: 'Text\nTheme',
@@ -574,7 +574,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'content text styles and considering adding them as theme '
         'extensions.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.texts,
     heading: 'PrimaryTextTheme',
     buttonLabel: 'Primary\nTextTheme',
@@ -585,7 +585,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'by default in dark theme mode. FlexColorScheme corrects this and '
         'makes it always work in dark mode as well.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.general,
     heading: 'Android System Navigation Bar',
     buttonLabel: 'Android\nSystem Nav',
@@ -602,7 +602,7 @@ const List<ThemeTopic> themeTopics = <ThemeTopic>[
         'easy to style it with selected styles that fit with themes made '
         'by FlexColorColorScheme.\n',
   ),
-  ThemeTopic(
+  Topic(
     group: TopicGroup.general,
     heading: 'Page Examples',
     buttonLabel: 'Page\nexamples',

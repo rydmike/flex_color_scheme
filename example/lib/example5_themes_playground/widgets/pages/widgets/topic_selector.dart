@@ -13,8 +13,8 @@ import '../model/theme_topic.dart';
 /// Horizontal panel selector of active theme topic to view.
 ///
 /// Used in phone, tablet, small and medium desktop view.
-class ThemeTopicSelectorHorizontal extends StatefulWidget {
-  const ThemeTopicSelectorHorizontal({
+class TopicSelectorHorizontal extends StatefulWidget {
+  const TopicSelectorHorizontal({
     super.key,
     required this.page,
     required this.onSelect,
@@ -27,12 +27,11 @@ class ThemeTopicSelectorHorizontal extends StatefulWidget {
   final double buttonWidth;
 
   @override
-  State<ThemeTopicSelectorHorizontal> createState() =>
-      _ThemeTopicSelectorHorizontalState();
+  State<TopicSelectorHorizontal> createState() =>
+      _TopicSelectorHorizontalState();
 }
 
-class _ThemeTopicSelectorHorizontalState
-    extends State<ThemeTopicSelectorHorizontal> {
+class _TopicSelectorHorizontalState extends State<TopicSelectorHorizontal> {
   late final ScrollController scrollController;
   late int selectedPage;
   late double scrollOffset;
@@ -57,7 +56,7 @@ class _ThemeTopicSelectorHorizontalState
   }
 
   @override
-  void didUpdateWidget(covariant ThemeTopicSelectorHorizontal oldWidget) {
+  void didUpdateWidget(covariant TopicSelectorHorizontal oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (selectedPage != widget.page) {
@@ -110,7 +109,7 @@ class _ThemeTopicSelectorHorizontalState
                           scrollDirection: Axis.horizontal,
                           itemCount: themeTopics.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return _ThemeTopicButton(
+                            return _TopicButton(
                               item: themeTopics[index],
                               onSelect: () {
                                 widget.onSelect(index);
@@ -140,10 +139,10 @@ class _ThemeTopicSelectorHorizontalState
 
 /// Vertical theme topic selector used in the two columns view.
 ///
-/// Used only on desktop views via [ThemeTwoTopicsPage] and
-/// [ThemeTwoTopicsVerticalPage].
-class ThemeTopicSelectorVertical extends StatefulWidget {
-  const ThemeTopicSelectorVertical({
+/// Used only on desktop views via [TwoTopicsPage] and
+/// [TwoTopicsVerticalPage].
+class TopicSelectorVertical extends StatefulWidget {
+  const TopicSelectorVertical({
     super.key,
     required this.page,
     required this.onSelect,
@@ -158,12 +157,10 @@ class ThemeTopicSelectorVertical extends StatefulWidget {
   final bool addTopPadding;
 
   @override
-  State<ThemeTopicSelectorVertical> createState() =>
-      _ThemeTopicSelectorVerticalState();
+  State<TopicSelectorVertical> createState() => _TopicSelectorVerticalState();
 }
 
-class _ThemeTopicSelectorVerticalState
-    extends State<ThemeTopicSelectorVertical> {
+class _TopicSelectorVerticalState extends State<TopicSelectorVertical> {
   late final ScrollController scrollController;
   late int selectedPage;
   late double scrollOffset;
@@ -199,7 +196,7 @@ class _ThemeTopicSelectorVerticalState
   }
 
   @override
-  void didUpdateWidget(covariant ThemeTopicSelectorVertical oldWidget) {
+  void didUpdateWidget(covariant TopicSelectorVertical oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
@@ -245,7 +242,7 @@ class _ThemeTopicSelectorVerticalState
                 padding: const EdgeInsets.only(bottom: buttonMargin),
                 child: SizedBox(
                   height: buttonHeight - buttonMargin - compactHeight,
-                  child: _ThemeTopicButton(
+                  child: _TopicButton(
                     item: themeTopics[index],
                     onSelect: () {
                       widget.onSelect(index);
@@ -269,9 +266,9 @@ class _ThemeTopicSelectorVerticalState
   }
 }
 
-/// A button with [ThemeTopic] button label and icon.
-class _ThemeTopicButton extends StatefulWidget {
-  const _ThemeTopicButton({
+/// A button with [Topic] button label and icon.
+class _TopicButton extends StatefulWidget {
+  const _TopicButton({
     required this.item,
     required this.selected,
     required this.onSelect,
@@ -280,7 +277,7 @@ class _ThemeTopicButton extends StatefulWidget {
     required this.width,
     this.buttonHorizontalMargin = 4,
   });
-  final ThemeTopic item;
+  final Topic item;
   final bool selected;
   final VoidCallback onSelect;
   final bool isCompact;
@@ -289,10 +286,10 @@ class _ThemeTopicButton extends StatefulWidget {
   final double buttonHorizontalMargin;
 
   @override
-  State<_ThemeTopicButton> createState() => _ThemeTopicButtonState();
+  State<_TopicButton> createState() => _TopicButtonState();
 }
 
-class _ThemeTopicButtonState extends State<_ThemeTopicButton> {
+class _TopicButtonState extends State<_TopicButton> {
   late final FocusNode _focusNode;
 
   @override

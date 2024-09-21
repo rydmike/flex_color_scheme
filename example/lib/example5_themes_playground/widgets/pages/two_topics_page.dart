@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import '../../../shared/const/app.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/theme_panel.dart';
+import '../panels/panel.dart';
 import 'model/theme_topic.dart';
 import 'widgets/theme_color_selector.dart';
-import 'widgets/theme_topic_selector.dart';
+import 'widgets/topic_selector.dart';
 
 // ignore_for_file: comment_references
 
@@ -18,7 +18,7 @@ import 'widgets/theme_topic_selector.dart';
 // I want to see in dev mode, unless it is too chatty.
 const bool _debug = !kReleaseMode && false;
 
-/// This is the two theme topics view of the Playground.
+/// This is the two topics view of the Playground.
 ///
 /// Used only on big desktops, when desktop size is over
 /// [App.mediumDesktopWidthBreakpoint] in width.
@@ -30,8 +30,8 @@ const bool _debug = !kReleaseMode && false;
 /// same [ThemeColorSelectorHeaderDelegate] that is used in the large masonry
 /// grid view.
 ///
-/// The used [VerticalThemePanelView]s are identical, they just use different
-/// index and have control that selects if the [ThemeTopicSelectorVertical]
+/// The used [VerticalPanelView]s are identical, they just use different
+/// index and have control that selects if the [TopicSelectorVertical]
 /// selector should be on the left o right side.
 ///
 /// One advantage with this scroll view is that the two sides scroll
@@ -40,18 +40,18 @@ const bool _debug = !kReleaseMode && false;
 ///
 /// This view was a quick rework of [ThemeTopicPage] to create a totally
 /// new layout by mostly re-using already existing parts in the app.
-class ThemeTwoTopicsPage extends StatefulWidget {
-  const ThemeTwoTopicsPage({
+class TwoTopicsPage extends StatefulWidget {
+  const TwoTopicsPage({
     super.key,
     required this.controller,
   });
   final ThemeController controller;
 
   @override
-  State<ThemeTwoTopicsPage> createState() => _ThemeTwoTopicsPageState();
+  State<TwoTopicsPage> createState() => _TwoTopicsPageState();
 }
 
-class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
+class _TwoTopicsPageState extends State<TwoTopicsPage>
     with TickerProviderStateMixin {
   late final ScrollController scrollController;
   late int previousSchemeIndex;
@@ -160,13 +160,13 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
           sliver: SliverFillRemaining(
             child: Row(
               children: <Widget>[
-                VerticalThemePanelView(
+                VerticalPanelView(
                   key: const ValueKey<String>('Left Panel'),
                   panel: controller.viewIndex,
                   onPanelChanged: controller.setViewIndex,
                   controller: controller,
                 ),
-                VerticalThemePanelView(
+                VerticalPanelView(
                   key: const ValueKey<String>('Right Panel'),
                   isRight: true,
                   panel: controller.sideViewIndex,
@@ -182,14 +182,14 @@ class _ThemeTwoTopicsPageState extends State<ThemeTwoTopicsPage>
   }
 }
 
-/// A [ThemePanel] wrapper that puts the content of our panels in a [Row]
-/// with a [ThemeTopicSelectorVertical] on the left or right of a [ThemePanel]
+/// A [Panel] wrapper that puts the content of our panels in a [Row]
+/// with a [TopicSelectorVertical] on the left or right of a [Panel]
 /// in a [ListView] inside a HeaderCard.
 ///
 /// The [isRight] property is used to control if the
-/// [ThemeTopicSelectorVertical] goes on left or right side of the [ThemePanel].
-class VerticalThemePanelView extends StatefulWidget {
-  const VerticalThemePanelView({
+/// [TopicSelectorVertical] goes on left or right side of the [Panel].
+class VerticalPanelView extends StatefulWidget {
+  const VerticalPanelView({
     super.key,
     required this.panel,
     this.isRight = false,
@@ -204,10 +204,10 @@ class VerticalThemePanelView extends StatefulWidget {
   final bool addTopPadding;
 
   @override
-  State<VerticalThemePanelView> createState() => _VerticalThemePanelViewState();
+  State<VerticalPanelView> createState() => _VerticalPanelViewState();
 }
 
-class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
+class _VerticalPanelViewState extends State<VerticalPanelView>
     with TickerProviderStateMixin {
   late final ScrollController scrollController;
 
@@ -275,7 +275,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
       child: Row(
         children: <Widget>[
           if (!widget.isRight)
-            ThemeTopicSelectorVertical(
+            TopicSelectorVertical(
               key: const ValueKey<String>('Left Selector'),
               page: widget.panel,
               onSelect: (int newIndex) {
@@ -313,7 +313,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
                       leading: Icon(themeTopics[widget.panel].icon,
                           color: iconColor),
                       info: themeTopics[widget.panel].info,
-                      child: ThemePanel(widget.panel, widget.controller),
+                      child: Panel(widget.panel, widget.controller),
                     ),
                   ),
                 ),
@@ -321,7 +321,7 @@ class _VerticalThemePanelViewState extends State<VerticalThemePanelView>
             ),
           ),
           if (widget.isRight)
-            ThemeTopicSelectorVertical(
+            TopicSelectorVertical(
               key: const ValueKey<String>('Right Selector'),
               page: widget.panel,
               onSelect: (int newIndex) {

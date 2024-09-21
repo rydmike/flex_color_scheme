@@ -7,11 +7,11 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/utils/app_scroll_behavior.dart';
 import '../../../shared/utils/colors_are_close.dart';
 import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/theme_panel.dart';
+import '../panels/panel.dart';
 import '../shared/color_scheme_box.dart';
 import 'model/theme_topic.dart';
 import 'widgets/theme_color_selector.dart';
-import 'widgets/theme_topic_selector.dart';
+import 'widgets/topic_selector.dart';
 
 // ignore_for_file: comment_references
 
@@ -22,7 +22,7 @@ import 'widgets/theme_topic_selector.dart';
 // I want to see in dev mode, unless it is too chatty.
 const bool _debug = !kReleaseMode && false;
 
-/// This is the single [ThemeTopic] PageView of the Playground.
+/// This is the single [Topic] PageView of the Playground.
 ///
 /// It shows one or two panels at a time, in a single [PageView].
 /// This is a nice layout on mid size screen, like tablets,
@@ -41,21 +41,20 @@ const bool _debug = !kReleaseMode && false;
 ///
 /// On bigger screens it shows two panels side-by-side, where the left secondary
 /// one can be selected via a popup menu. This is a bit cumbersome, but takes
-/// up very little space. See the [ThemeTwoTopicsPage] for one that features
+/// up very little space. See the [TwoTopicsPage] for one that features
 /// own vertical topic selectors for each panel.
-class ThemeTopicPage extends StatefulWidget {
-  const ThemeTopicPage({
+class TopicPage extends StatefulWidget {
+  const TopicPage({
     super.key,
     required this.controller,
   });
   final ThemeController controller;
 
   @override
-  State<ThemeTopicPage> createState() => _ThemeTopicPageState();
+  State<TopicPage> createState() => _TopicPageState();
 }
 
-class _ThemeTopicPageState extends State<ThemeTopicPage>
-    with TickerProviderStateMixin {
+class _TopicPageState extends State<TopicPage> with TickerProviderStateMixin {
   late final PageController pageController;
   late final ScrollController scrollController;
   late int previousPage;
@@ -142,7 +141,7 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
             SliverPersistentHeader(
               pinned: isPinned,
               floating: true,
-              delegate: _ThemeTopicSelectorHeaderDelegate(
+              delegate: _TopicSelectorHeaderDelegate(
                   vsync: this,
                   extent: headerExtent,
                   page: themeCtrl.viewIndex,
@@ -206,7 +205,7 @@ class _ThemeTopicPageState extends State<ThemeTopicPage>
   }
 }
 
-/// A [ThemePanel] wrapper that puts the content of them, in a [ListView]
+/// A [Panel] wrapper that puts the content of them, in a [ListView]
 /// inside a [HeaderCard].
 ///
 /// The view can show two panels side by side when the screen is wide enough,
@@ -275,7 +274,7 @@ class _ThemePanelView extends StatelessWidget {
                     info: themeTopics[leftPageIndex].info,
                     leading:
                         Icon(themeTopics[leftPageIndex].icon, color: iconColor),
-                    child: ThemePanel(leftPageIndex, controller),
+                    child: Panel(leftPageIndex, controller),
                   ),
                 ],
               ),
@@ -304,12 +303,12 @@ class _ThemePanelView extends StatelessWidget {
                       info: themeTopics[sideViewIndex].info,
                       leading: Icon(themeTopics[sideViewIndex].icon,
                           color: iconColor),
-                      trailing: _SelectSideThemePanelView(
+                      trailing: _SelectSidePanelView(
                         index: sideViewIndex,
                         onChanged: controller.setSideViewIndex,
                         iconColor: iconColor,
                       ),
-                      child: ThemePanel(sideViewIndex, controller),
+                      child: Panel(sideViewIndex, controller),
                     ),
                   ]),
             )
@@ -319,14 +318,14 @@ class _ThemePanelView extends StatelessWidget {
   }
 }
 
-/// [_ThemeTopicSelectorHeaderDelegate] for the used custom
+/// [_TopicSelectorHeaderDelegate] for the used custom
 /// [SliverPersistentHeader].
 ///
 /// Used to keep a part of our nested scroll view pinned to the top
 /// (in tablet desktop view), and floating on phone and snapping
 /// back when scrolling back just a bit.
-class _ThemeTopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _ThemeTopicSelectorHeaderDelegate({
+class _TopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
+  _TopicSelectorHeaderDelegate({
     required this.vsync,
     required this.extent,
     required this.page,
@@ -347,7 +346,7 @@ class _ThemeTopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return ThemeTopicSelectorHorizontal(
+    return TopicSelectorHorizontal(
       page: page,
       onSelect: onSelect,
       isCompact: isCompact,
@@ -373,10 +372,10 @@ class _ThemeTopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
       FloatingHeaderSnapConfiguration();
 }
 
-/// Widget used to select used side-by-side second [ThemePanel] using
+/// Widget used to select used side-by-side second [Panel] using
 /// a popup menu.
-class _SelectSideThemePanelView extends StatelessWidget {
-  const _SelectSideThemePanelView({
+class _SelectSidePanelView extends StatelessWidget {
+  const _SelectSidePanelView({
     required this.index,
     this.onChanged,
     required this.iconColor,
@@ -397,6 +396,14 @@ class _SelectSideThemePanelView extends StatelessWidget {
         theme.iconTheme.copyWith(color: iconColor);
 
     return PopupMenuButton<int>(
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -4),
+      constraints: const BoxConstraints(
+        minWidth: 320,
+        maxWidth: 320,
+        maxHeight: 640,
+      ),
       initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
