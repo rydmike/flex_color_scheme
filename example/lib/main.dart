@@ -383,7 +383,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // Use the Material3 text theme and typography. Defaults to null.
   // When null, the correct M2/M3 TextTheme and Typography for respective mode
   // is used. If true, M3 style is enforced, if false, M2 mode is enforced.
-  useTextTheme: true,
+  useMaterial3Typography: true,
 
   // Select input decorator type, only SDK options outline and underline
   // supported no, but custom ones may be added later.

@@ -181,9 +181,9 @@ class Store {
   // Default value for the showSchemeInput, also used to reset settings.
   static const bool defaultShowSchemeInput = false;
 
-  // Key used to read and save the useTextTheme value.
-  static const String keyUseTextTheme = 'useTextTheme';
-  // Default value for the useTextTheme, also used to reset settings.
+  // Key used to read and save the useMaterial3Typography value.
+  static const String keyUseMaterial3Typography = 'useMaterial3Typography';
+  // Default value for the useMaterial3Typography, also used to reset settings.
   //
   // The controller uses a nullable bool with different defaults in
   // M2 and M3 mode if it is set to null. The API uses null as default for this
@@ -193,7 +193,7 @@ class Store {
   // M3 mode use their respective mode typography by default. If you still make
   // an M2 app, prefer using M3 typography and set it true, like the
   // Playground did before, since it is much nicer than M2 Typography.
-  static const bool? defaultUseTextTheme = null;
+  static const bool? defaultUseMaterial3Typography = null;
 
   // Key used to read and save the useM2StyleDividerInM3 value.
   static const String keyUseM2StyleDividerInM3 = 'useM2StyleDividerInM3';

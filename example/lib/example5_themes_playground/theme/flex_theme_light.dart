@@ -162,9 +162,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Material3 has containers with matching on colors too, they work
             // great for contrast colored text, do use them too.
             blendTextTheme: controller.blendLightTextTheme,
-            // Opt in/out of the Material 3 style matched TextTheme geometry, or
-            // Typography, as it is called in Flutter SDK.
-            useTextTheme: controller.useTextTheme,
+            useMaterial3Typography: controller.useMaterial3Typography,
             // Divider settings
             useM2StyleDividerInM3: controller.useM2StyleDividerInM3,
             // Outline thickness theming

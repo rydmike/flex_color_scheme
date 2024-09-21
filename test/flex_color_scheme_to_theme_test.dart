@@ -4882,7 +4882,7 @@ void main() {
           scheme: FlexScheme.materialBaseline,
           useMaterial3: true,
           subThemesData: const FlexSubThemesData(
-              useTextTheme: true,
+              useMaterial3Typography: true,
               tabBarItemSchemeColor: SchemeColor.secondary));
       final ColorScheme scheme = fcs.toScheme;
       final ThemeData theme = fcs.toTheme;
@@ -5586,7 +5586,7 @@ void main() {
         textTheme: testText,
         primaryTextTheme: testText,
         subThemesData: const FlexSubThemesData(
-          useTextTheme: false,
+          useMaterial3Typography: false,
           blendTextTheme: true,
         ),
       );
@@ -5972,7 +5972,7 @@ void main() {
         textTheme: testText,
         primaryTextTheme: testText,
         subThemesData: const FlexSubThemesData(
-          useTextTheme: true,
+          useMaterial3Typography: true,
           blendTextTheme: true,
         ),
       );
@@ -6994,7 +6994,7 @@ void main() {
         textTheme: gTextTheme,
         primaryTextTheme: gTextTheme,
         subThemesData: const FlexSubThemesData(
-          useTextTheme: false,
+          useMaterial3Typography: false,
           blendTextTheme: true,
         ),
       );
@@ -7408,7 +7408,7 @@ void main() {
         textTheme: gTextTheme,
         primaryTextTheme: gTextTheme,
         subThemesData: const FlexSubThemesData(
-          useTextTheme: true,
+          useMaterial3Typography: true,
           blendTextTheme: true,
         ),
       );

@@ -137,6 +137,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Deprecated the FCS legacy property `useFlutterDefaults`. FlexColorScheme in Material-3 mode now defaults to using Flutter default styles. For other configurations, modify them as desired. In Material-2 mode, FCS continues to use its opinionated own defaults as before, as long as Material-2 exists.
 
+- Replaced the FCS legacy property `useTextTheme` with a more feature correctly named property `useMaterial3Typography`. Use it instead. The `useTextTheme` originally had another function in much older versions of FCS. Its name no longer represented its function, the new name does. If not defined, the default is `true` in Material-3 mode and `false` in Material-2 mode. If you still use Material-2, try setting this to true to get nicer typography in Material-2 mode.
+
 - The color `material3DarkOnErrorContainer` was changed from `Color(0xFFFFB4AB)` to `Color(0xFFFFDAD6)` to match the **new** Material-3 default dark error color used in **Flutter 3.22**. 
 
 - Dialog background color now defaults to `surfaceContainerHigh` with no elevation tint color in Material-3 mode, instead of `surface` with elevation tint. Breaking change introduced to match the breaking change in Material-3 defaults in Flutter 3.22.
@@ -380,13 +382,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
     - Did anybody use the staggered grid layout anyway? Let me know if you miss it. Just so I know, but it is not coming back :)
 - No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is **ON**.
 - The **Introduction** panel's content was updated.
-- As of version 8, the Playground now also defaults `useTextTheme` to null. This makes Material-2 and Material-3 mode use their respective mode-based typography by default. If you still make a Material-2 app, prefer using Material-3 typography and set it to `true`, like the Playground did before. Material-3 typography is much nicer than Material-2 typography. This is not a breaking API change, just a change in the default value used when you rest the Playground to its default values. Turn it **ON** in **TextTheme** settings, to get the same config as you did with a reset before. If you use Material-3, this Playground settings change has no impact on your theme result.
+- The Playground defaults the replacement for `useTextTheme`, the `useMaterial3Typography` to null. This makes Material-2 and Material-3 mode use their respective mode-based typography by default. If you still make a Material-2 app, prefer using Material-3 typography and set it to `true`, like the Playground did before. Material-3 typography is much nicer than Material-2 typography. This is not a breaking API change, just a change in the default value used when you rest the Playground to its default values. Turn it **ON** in **TextTheme** settings, to get the same config as you did with a reset before. If you use Material-3, this Playground settings change has no impact on your theme result.
 - Updated the presentation of `Switch`, `Checkbox`and `Radio` on their settings panel.
 - Changed the name of the "Theme colors" settings panel to **Input Colors**. 
 - Changed the name of the "Surface blends" settings panel to **Color Blends**.
 - Changed the name of the "Component Themes" settings panel to **General Settings**.
 - Changed the order of topic panels. The **General Settings**, **Adaptive Theming** and **Shape Radius** panels now come before the color panels.
-- The feature **Swap secondary and tertiary legacy colors in Material-3** on the **Input Colors** settings panel is now OFF by default. The settings info expand explains when it is preferable to use it.
+- The feature **Swap secondary and tertiary legacy colors in Material-3** on the **Input Colors** settings panel is now **OFF** by default. The settings info expand explains when it is preferable to use it.
 - The feature **Use TextField's InputDecorationTheme in picker dialogs** on the "**Dialog**" settings panel is now OFF by default.
 
 - Modified settings panel background and header colors, as well as theme selector buttons to use suitable new `ColorScheme` surface theme colors, instead of computing their own shades from theme colors.
