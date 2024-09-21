@@ -226,7 +226,7 @@ class SliderListTileReveal extends StatelessWidget {
               if (valueHeading != null)
                 Text(
                   valueHeading!,
-                  style: const TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 11),
                 ),
               Text(
                 enabled
@@ -240,7 +240,7 @@ class SliderListTileReveal extends StatelessWidget {
                     : 'default\n${valueDefaultDisabledLabel ?? valueDefaultLabel}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: FontWeight.bold,
                 ),
               ),
