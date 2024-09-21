@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import '../../../shared/const/app.dart';
 import '../../../shared/const/app_color.dart';
 import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/app/responsive_scaffold.dart';
+import '../../../shared/widgets/examples/responsive_scaffold.dart';
 import '../../../shared/widgets/universal/responsive_dialog.dart';
 import '../../utils/generate_colorscheme_dart_code.dart';
 import '../dialogs/dart_code_dialog_screen.dart';

@@ -5,9 +5,9 @@ import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/app/show_color_scheme_colors.dart';
-import '../../../../shared/widgets/app/show_sub_theme_colors.dart';
-import '../../../../shared/widgets/app/show_theme_data_colors.dart';
+import '../../../../shared/widgets/examples/show_color_scheme_colors.dart';
+import '../../../../shared/widgets/examples/show_sub_theme_colors.dart';
+import '../../../../shared/widgets/examples/show_theme_data_colors.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
 
