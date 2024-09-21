@@ -220,8 +220,8 @@ class NavigationRailPanel extends StatelessWidget {
                             .name,
                     defaultDisabledLabel: 'onSurface',
                     defaultDisabledLabelM2: 'primary',
-                    value: controller.navRailSelectedIconSchemeColor,
-                    onChanged: controller.setNavRailSelectedIconSchemeColor,
+                    value: controller.navRailSelectedLabelSchemeColor,
+                    onChanged: controller.setNavRailSelectedLabelSchemeColor,
                   ),
                   ColorSchemePopupMenu(
                     enabled: enableControl,
