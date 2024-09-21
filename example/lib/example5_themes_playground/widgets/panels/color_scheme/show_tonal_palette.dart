@@ -25,8 +25,8 @@ class ShowTonalPalette extends StatelessWidget {
 
     final FlexSchemeData scheme = AppColor.scheme(controller);
 
-    // Effective FlexSchemeColor depends on usedColors and swap.
-    // Note: For TonalPalette's we only use the light scheme as input!
+    // Effective FlexSchemeColor depends on usedColors and swaps.
+    // Note: For the TonalPalette's we only use the light scheme as input!
     final FlexSchemeColor colors = FlexSchemeColor.effective(
       scheme.light,
       controller.usedColors,
@@ -165,7 +165,6 @@ class ShowTonalPalette extends StatelessWidget {
             'tones dynamically, that are not included in '
             'the predefined tones below.',
           ),
-          // trailing: SelectPaletteType(controller: controller),
         ),
         TonalPaletteColors(
           name: 'Primary',
