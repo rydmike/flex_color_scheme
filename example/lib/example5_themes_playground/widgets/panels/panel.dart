@@ -45,12 +45,12 @@ import 'widget_showcase/widget_showcase.dart';
 // ignore_for_file: comment_references
 
 /// Used to select which one of all the theme topic panels in the
-/// Themes Playground is shown as content.
+/// Themes Playground is shown as content in a panel.
 ///
 /// The panels are used as content in the [PageView.builder] based view used
-/// by the [ThemeTopicPage] and in the [ThemeTwoTopicsPage].
-class ThemePanel extends StatelessWidget {
-  const ThemePanel(this.page, this.controller, {super.key});
+/// by the [TopicPage], the [TwoTopicsPage] and [].
+class Panel extends StatelessWidget {
+  const Panel(this.page, this.controller, {super.key});
   final int page;
   final ThemeController controller;
 

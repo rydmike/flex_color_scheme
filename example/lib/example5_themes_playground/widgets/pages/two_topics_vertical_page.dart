@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import '../../../shared/const/app.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../panels/input_colors_settings/input_colors_selector.dart';
-import 'theme_two_topics_page.dart';
+import 'two_topics_page.dart';
 
 // ignore_for_file: comment_references
 
-/// This is an alternative two theme topics view of the Playground.
+/// This is an alternative two topics view of the Playground.
 ///
 /// Used only on big desktops, when desktop size is over
 /// [App.mediumDesktopWidthBreakpoint] in width.
 ///
-/// This view no longer like the [ThemeTwoTopicsPage] keep the content of the
+/// This view no longer like the [TwoTopicsPage] keep the content of the
 /// page in [CustomScrollView] with a [SliverPersistentHeader]. This is a lot
 /// simpler view suitable for large media where everything is in a row with five
 /// different vertical lists in the row.
-class ThemeTwoTopicsVerticalPage extends StatelessWidget {
-  const ThemeTwoTopicsVerticalPage({
+class TwoTopicsVerticalPage extends StatelessWidget {
+  const TwoTopicsVerticalPage({
     super.key,
     required this.controller,
   });
@@ -27,14 +27,14 @@ class ThemeTwoTopicsVerticalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        VerticalThemePanelView(
+        VerticalPanelView(
           key: const ValueKey<String>('Left VPanel'),
           panel: controller.viewIndex,
           onPanelChanged: controller.setViewIndex,
           controller: controller,
           addTopPadding: true,
         ),
-        VerticalThemePanelView(
+        VerticalPanelView(
           key: const ValueKey<String>('Right VPanel'),
           isRight: true,
           panel: controller.sideViewIndex,

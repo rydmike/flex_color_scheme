@@ -12,9 +12,9 @@ import '../dialogs/dart_code_dialog_screen.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
 import 'model/theme_topic.dart';
-import 'theme_topic_page.dart';
-import 'theme_two_topics_page.dart';
-import 'theme_two_topics_vertical_page.dart';
+import 'topic_page.dart';
+import 'two_topics_page.dart';
+import 'two_topics_vertical_page.dart';
 
 /// Home Page for FlexColorScheme EXAMPLE 5 - Themes Playground.
 ///
@@ -227,9 +227,9 @@ class _HomePageState extends State<HomePage> {
         },
         body: isBigDesktop
             ? widget.controller.verticalMode
-                ? ThemeTwoTopicsVerticalPage(controller: widget.controller)
-                : ThemeTwoTopicsPage(controller: widget.controller)
-            : ThemeTopicPage(controller: widget.controller),
+                ? TwoTopicsVerticalPage(controller: widget.controller)
+                : TwoTopicsPage(controller: widget.controller)
+            : TopicPage(controller: widget.controller),
       ),
     );
   }
