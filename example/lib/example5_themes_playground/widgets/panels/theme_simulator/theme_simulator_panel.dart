@@ -74,6 +74,15 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final Color iconColor = theme.colorScheme.primary;
+
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
       child: Column(
@@ -108,45 +117,52 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
               children: <Widget>[
                 Expanded(
                   flex: 3,
-                  child: ListTileReveal(
-                    dense: true,
-                    leading: IconButton(
-                      icon: AnimatedRotation(
-                        turns: turns,
-                        duration: const Duration(milliseconds: 200),
-                        child: Icon(
-                          Icons.screen_rotation_outlined,
-                          color: theme.colorScheme.primary,
-                          size: 36,
+                  child: SimulatorPopupMenu(
+                    index: device,
+                    onChanged: (int index) {
+                      setState(() {
+                        device = index;
+                        widget.controller.setSimulatorDeviceIndex(device);
+                      });
+                    },
+                    child: ListTileReveal(
+                      contentPadding: paddingStartColumn,
+                      dense: true,
+                      leading: IconButton(
+                        icon: AnimatedRotation(
+                          turns: turns,
+                          duration: const Duration(milliseconds: 200),
+                          child: Icon(
+                            Icons.screen_rotation_outlined,
+                            color: theme.colorScheme.primary,
+                            size: 30,
+                          ),
                         ),
+                        onPressed: () {
+                          setState(() {
+                            if (orientation == Orientation.portrait) {
+                              orientation = Orientation.landscape;
+                              turns = 3 / 8;
+                            } else {
+                              orientation = Orientation.portrait;
+                              turns = 1 / 8;
+                            }
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          if (orientation == Orientation.portrait) {
-                            orientation = Orientation.landscape;
-                            turns = 3 / 8;
-                          } else {
-                            orientation = Orientation.portrait;
-                            turns = 1 / 8;
-                          }
-                        });
-                      },
-                    ),
-                    title: Text('${SimulatorPopupMenu.devices[device].name} ('
-                        // ignore: lines_longer_than_80_chars
-                        '${SimulatorPopupMenu.devices[device].info.identifier.platform.name})'),
-                    subtitleReveal: Text('${_phoneInfo(device)}\n'),
-                    trailing: SimulatorPopupMenu(
-                      index: device,
-                      onChanged: (int index) {
-                        setState(() {
-                          device = index;
-                          widget.controller.setSimulatorDeviceIndex(device);
-                        });
-                      },
+                      title: Text('${SimulatorPopupMenu.devices[device].name} ('
+                          // ignore: lines_longer_than_80_chars
+                          '${SimulatorPopupMenu.devices[device].info.identifier.platform.name})'),
+                      subtitleReveal: Text('${_phoneInfo(device)}\n'),
+                      trailing: Icon(
+                        SimulatorPopupMenu.devices[device].icon,
+                        size: SimulatorPopupMenu.devices[device].size,
+                        color: iconColor,
+                      ),
                     ),
                   ),
                 ),
+                const SizedBox(width: 8),
                 const Padding(
                   padding: EdgeInsets.only(top: 18.0),
                   child: Text('Zoom'),
@@ -289,9 +305,11 @@ class SimulatorPopupMenu extends StatelessWidget {
     super.key,
     required this.index,
     this.onChanged,
+    this.child,
   });
   final int index;
   final ValueChanged<int>? onChanged;
+  final Widget? child;
 
   static List<SimDevice> devices = <SimDevice>[
     //
@@ -425,44 +443,41 @@ class SimulatorPopupMenu extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     final bool enabled = onChanged != null;
     return PopupMenuButton<int>(
-        popUpAnimationStyle: AnimationStyle.noAnimation,
-        position: PopupMenuPosition.under,
-        offset: const Offset(0, -2),
-        constraints: const BoxConstraints(maxHeight: 600),
-        initialValue: index,
-        tooltip: '',
-        padding: EdgeInsets.zero,
-        onSelected: (int index) {
-          onChanged?.call(index);
-        },
-        splashRadius: 36,
-        enabled: enabled,
-        itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-              for (int i = 0; i < devices.length; i++)
-                PopupMenuItem<int>(
-                  value: i,
-                  child: ListTile(
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                    leading: index == i
-                        ? Icon(
-                            devices[i].icon,
-                            size: devices[i].size,
-                            color: iconColor,
-                          )
-                        : Icon(
-                            devices[i].icon,
-                            size: devices[i].size,
-                            color: unselectedIconColor,
-                          ),
-                    title: Text(devices[i].name, style: txtStyle),
-                  ),
-                )
-            ],
-        icon: Icon(
-          devices[index].icon,
-          size: devices[index].size,
-          color: iconColor,
-        ));
+      popUpAnimationStyle: AnimationStyle.noAnimation,
+      position: PopupMenuPosition.under,
+      offset: const Offset(0, -2),
+      constraints: const BoxConstraints(maxHeight: 600),
+      initialValue: index,
+      tooltip: '',
+      padding: EdgeInsets.zero,
+      onSelected: (int index) {
+        onChanged?.call(index);
+      },
+      splashRadius: 36,
+      enabled: enabled,
+      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+        for (int i = 0; i < devices.length; i++)
+          PopupMenuItem<int>(
+            value: i,
+            child: ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              leading: index == i
+                  ? Icon(
+                      devices[i].icon,
+                      size: devices[i].size,
+                      color: iconColor,
+                    )
+                  : Icon(
+                      devices[i].icon,
+                      size: devices[i].size,
+                      color: unselectedIconColor,
+                    ),
+              title: Text(devices[i].name, style: txtStyle),
+            ),
+          )
+      ],
+      child: child,
+    );
   }
 }
