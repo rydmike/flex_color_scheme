@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 20, 2024**
+**Sep 21, 2024**
 
 ### SUMMARY
 
@@ -320,7 +320,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 ### THEMES PLAYGROUND
 
 **NEW**
- 
+
+- Split the "FAB and Chip" settings panels to separate panels **FAB** and **Chip**. 
+- Split the "BottomAppBar and SearchBar" panels to separate panels **SearchBar** and **BottomAppBar**.
+
+
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
 
 
@@ -350,7 +354,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - For MCU based variants it uses `FlexColorScheme.variant` API with `FlexSchemeVariant` and for FSS based variants it uses `FlexColorScheme.tones` API with `FlexSchemeVariant` and its `tones` getter. 
   - The `FlexTones` modifiers only show up on FSS based variants with `FlexColorScheme.tones` API, as they are not available when using the `FlexColorScheme.variant` API.
 - Added the FFS seed option "Monochrome surfaces" introduced in package **FlexSeedScheme** 3.0.0.
- 
+
  
 - Added an **Apply ColorScheme to all Cupertino components** setting to the **Component Themes** settings panel
   - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and applies the setting to the Playground app's theme as well.  
@@ -363,7 +367,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
 - To the **AppBar** settings panel, title foreground color, leading icon and actions icon color settings were added.
-- To the **TextField** settings panel added UI and code gen for dense input decorator and for custom content padding.
+- To the **TextField** settings panel, added UI and code gen for dense input decorator and for custom content padding.
 - The **Chip** settings now include separate color for the `ChoiceChip (called Suggestion Chip in M3 design). The feature that blends the selected main overall Chip color was made optional. It is a useful feature due to the limited independent theme control over the Chips.  
 - The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
 
@@ -384,7 +388,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Changed the order of topic panels. The **General Settings**, **Adaptive Theming** and **Shape Radius** panels now come before the color panels.
 - The feature **Swap secondary and tertiary legacy colors in Material-3** on the **Input Colors** settings panel is now OFF by default. The settings info expand explains when it is preferable to use it.
 - The feature **Use TextField's InputDecorationTheme in picker dialogs** on the "**Dialog**" settings panel is now OFF by default.
-- Split the "FAB and Chip" settings panels to separate panels **FAB** and **Chip**.
+
 - Modified settings panel background and header colors, as well as theme selector buttons to use suitable new `ColorScheme` surface theme colors, instead of computing their own shades from theme colors.
 - Changed surface and on-color blends to default to 0. Blends are not **ON** by default anymore in Playground. THe feature is still very cool and useful for many different design goals.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mode. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.

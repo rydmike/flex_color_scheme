@@ -16,11 +16,6 @@ class BottomAppBarPanel extends StatelessWidget {
     host: 'github.com',
     path: 'flutter/flutter/pull/117082',
   );
-  static final Uri _fcsFlutterIssue126623 = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'flutter/flutter/issues/126623',
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +38,10 @@ class BottomAppBarPanel extends StatelessWidget {
           title: Text('BottomAppBar'),
           subtitleReveal: Text('A BottomAppBar is typically used with '
               'Scaffold.bottomNavigationBar. '
-              'Its elevation in FCS defaults to AppBar elevation in M2 mode, '
-              'when using M3 it defaults to 3 and gets elevation tint.\n'),
+              'Its elevation in FCS defaults to AppBar elevation in '
+              'Material-2 mode, when using Material-3 it defaults to 3, '
+              'but shadow defaults to transparent so the elevation '
+              'is not visible.\n'),
         ),
         const SizedBox(height: 8),
         Card(
@@ -112,20 +109,19 @@ class BottomAppBarPanel extends StatelessWidget {
             onChanged: controller.setBottomAppBarSchemeColorDark,
           ),
         ],
-
         const ListTileReveal(
           dense: true,
           title: Text('Theming info'),
-          subtitleReveal: Text('Flutter M2 mode older default color is '
-              'ThemeData.bottomAppBarColor. '
-              'This was deprecated in Flutter 3.7, now M2 mode uses '
-              'surface color and elevation 8.\n'
+          subtitleReveal: Text('Flutter Material-2 mode original default color '
+              'was ThemeData.bottomAppBarColor. '
+              'This was deprecated in Flutter 3.7. Now Material-2 mode '
+              'defaults to surface color and elevation 8.\n'
               '\n'
-              'In M3 mode, before Flutter 3.22 it defaults to '
-              'surface color, elevation 3, no shadow, but '
-              'with surface elevation tint. In Flutter 3.22 and later default '
-              'is surfaceContainer. The elevation is still 3, but surfaceTint '
-              'is transparent, so elevation has no visible impact.\n'
+              'In Material-3 mode, before Flutter 3.22 ,it defaulted to '
+              'surface color, elevation 3, no shadow, and using '
+              'surface elevation tint. In Flutter 3.22 and later, defaults '
+              'to surfaceContainer. The elevation is still 3, but surfaceTint '
+              'is transparent, so the elevation has no visible impact.\n'
               '\n'
               'The color of the items in a BottomAppBar cannot be themed. If '
               'you use a background color that requires other contrasting '
@@ -153,46 +149,6 @@ class BottomAppBarPanel extends StatelessWidget {
                   text: '. The fix is available in Flutter 3.10 '
                       'and later.\n',
                 ),
-              ],
-            ),
-          ),
-        ),
-        const Divider(),
-        //
-        // SearchBar
-        //
-        const ListTileReveal(
-          title: Text('SearchBar'),
-          subtitleReveal: Text(
-              'The SearchBar with SearchView is new in Flutter '
-              '3.10. A convenient way to create a search bar with a '
-              'view is with the factory SearchAnchor.bar.\n'
-              '\n'
-              'FCS does not provide any convenience theming features for '
-              'the search bar in current version, but may add some later.\n'),
-        ),
-        const SearchBarShowcase(),
-        ListTileReveal(
-          dense: true,
-          title: const Text('Known issues'),
-          subtitleReveal: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'The InputDecoration theme leeks through into '
-                      'SearchBar and SearchView. From the SearchView it cannot '
-                      'even be removed with a Theme wrapper. For more '
-                      'information, see ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue126623,
-                  text: 'issue #126623',
-                ),
-                TextSpan(
-                    style: spanTextStyle,
-                    text: '. This issue has been fixed in Flutter 3.13.\n '),
               ],
             ),
           ),
