@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 21, 2024**
+**Sep 22, 2024**
 
 ### SUMMARY
 
@@ -93,6 +93,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - STARTED: Add some `SearchBar` theming features, What? Shape and elevation?
 - STARTED: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
+- TODO: Non-seeded onSurface, onSurfaceVariant, inverseSurface and onInverseSurface colors should be modified. 
 - TODO: Add some **NEW** color schemes:
   - Add black-and-white greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
