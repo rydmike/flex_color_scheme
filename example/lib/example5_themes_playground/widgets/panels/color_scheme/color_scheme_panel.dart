@@ -169,18 +169,18 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
               values: FlexFixedColorStyle.values,
               title: const Text('Fixed colors'),
               subtitleReveal: const Text(
-                'This setting applies when not using a seed generated color '
-                'scheme. '
+                'This setting applies when not using seed generated '
+                'ColorSchemes. '
                 'It offers three styles. FCS computed fixed and fixedDim '
-                'style, these are not seed generated in HCT color space. '
+                'style, that is not seed generated in HCT color space. '
                 'Alternatively two different seed generated versions can be '
-                'used, the first one called seeded by FSS, uses the same '
-                'tones as the MCU spec. The second option uses tone that '
-                'create fixed and fixedDim colors that are brighter and have '
-                'more contrast.\n'
+                'used. The first one is called seeded by FSS, it uses the same '
+                'color tones as the MCU spec. The second option uses tones '
+                'that create fixed and fixedDim colors that are brighter and '
+                'have more contrast.\n'
                 '\n'
                 'Fixed and fixed dim colors are used for colors that have '
-                'the same value in light and dark mode.\n',
+                'the same color value in light and dark mode.\n',
               ),
               value: widget.controller.fixedColorStyle,
               onChanged: widget.controller.setFixedColorStyle,
