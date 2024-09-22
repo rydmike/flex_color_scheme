@@ -130,6 +130,7 @@ class FlexSchemeOnColors with Diagnosticable {
   /// The factory can also alpha blend the onColor, with each color using an
   /// optionally provided alpha blend level, that defaults to 0.
   factory FlexSchemeOnColors.from({
+    bool? useMaterial3,
     required Color primary,
     Color? primaryContainer,
     required Color secondary,
@@ -137,14 +138,8 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? tertiary,
     Color? tertiaryContainer,
     required Color surface,
-    Color? surfaceDim,
-    Color? surfaceBright,
-    Color? surfaceContainerLowest,
-    Color? surfaceContainerLow,
-    Color? surfaceContainer,
-    Color? surfaceContainerHigh,
-    Color? surfaceContainerHighest,
     Color? inverseSurface,
+    Color? surfaceTint,
     required Color error,
     Color? errorContainer,
     Color? onPrimary,
@@ -155,13 +150,6 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onTertiaryContainer,
     Color? onSurface,
     Color? onSurfaceVariant,
-    Color? onSurfaceDim,
-    Color? onSurfaceBright,
-    Color? onSurfaceContainerLowest,
-    Color? onSurfaceContainerLow,
-    Color? onSurfaceContainer,
-    Color? onSurfaceContainerHigh,
-    Color? onSurfaceContainerHighest,
     Color? onInverseSurface,
     Color? onError,
     Color? onErrorContainer,
@@ -172,7 +160,6 @@ class FlexSchemeOnColors with Diagnosticable {
     int tertiaryAlpha = 0,
     int tertiaryContainerAlpha = 0,
     int surfaceAlpha = 0,
-    int surfaceVariantAlpha = 0,
     int inverseSurfaceAlpha = 0,
     int errorAlpha = 0,
     int errorContainerAlpha = 0,
@@ -185,14 +172,23 @@ class FlexSchemeOnColors with Diagnosticable {
         'It no longer has any function in FCS v8 and will be removed in v9.')
     Color? onBackground,
     @Deprecated('This property was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color. '
+        'deprecated the related color. '
         'It no longer has any function in FCS v8 and will be removed in v9.')
     int backgroundAlpha = 0,
     @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
         'deprecated the color. '
         'It no longer has any function in FCS v8 and will be removed in v9.')
     Color? surfaceVariant,
+    @Deprecated('This property was deprecated in FCS 8.0 because Flutter 3.22 '
+        'deprecated the related color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
+    int surfaceVariantAlpha = 0,
   }) {
+    final bool useM3 = useMaterial3 ?? true;
+    // Use optional surfaceTint, with fallback to primary.
+    // Surface Tint is used onSurface, onSurfaceVariant and onInverseSurface
+    final Color usedSurfaceTint = surfaceTint ?? primary;
+
     // Check brightness of primary, secondary, error, surface and background
     // colors, then calculate appropriate colors for their onColors, if an
     // "on" color was not passed in, otherwise we just use its given color.
@@ -242,80 +238,45 @@ class FlexSchemeOnColors with Diagnosticable {
 
     final Color usedOnSurface = onSurface ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
-            ? Colors.white.blendAlpha(surface, surfaceAlpha)
-            : Colors.black.blendAlpha(surface, surfaceAlpha));
+            ? useM3
+                ? FlexColor.darkFlexOnSurface
+                    .blendAlpha(usedSurfaceTint.darken(10), surfaceAlpha)
+                : Colors.white
+                    .blendAlpha(usedSurfaceTint.darken(10), surfaceAlpha)
+            : useM3
+                ? FlexColor.lightFlexOnSurface
+                    .blendAlpha(usedSurfaceTint.lighten(24), surfaceAlpha)
+                : Colors.black
+                    .blendAlpha(usedSurfaceTint.lighten(24), surfaceAlpha));
+
     final Color usedOnSurfaceVariant = onSurfaceVariant ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
-            ? Colors.white.blendAlpha(surface, surfaceVariantAlpha)
-            : Colors.black.blendAlpha(surface, surfaceVariantAlpha));
-
-    final Color usedOnSurfaceDim = onSurfaceDim ??
-        (ThemeData.estimateBrightnessForColor(surfaceDim ?? surface) ==
-                Brightness.dark
-            ? Colors.white
-                .blendAlpha(surfaceDim ?? surface, surfaceVariantAlpha)
-            : Colors.black
-                .blendAlpha(surfaceDim ?? surface, surfaceVariantAlpha));
-
-    final Color usedOnSurfaceBright = onSurfaceBright ??
-        (ThemeData.estimateBrightnessForColor(surfaceBright ?? surface) ==
-                Brightness.dark
-            ? Colors.white
-                .blendAlpha(surfaceBright ?? surface, surfaceVariantAlpha)
-            : Colors.black
-                .blendAlpha(surfaceBright ?? surface, surfaceVariantAlpha));
-
-    final Color usedOnSurfaceContainerLowest = onSurfaceContainerLowest ??
-        (ThemeData.estimateBrightnessForColor(
-                    surfaceContainerLowest ?? surface) ==
-                Brightness.dark
-            ? Colors.white.blendAlpha(
-                surfaceContainerLowest ?? surface, surfaceVariantAlpha)
-            : Colors.black.blendAlpha(
-                surfaceContainerLowest ?? surface, surfaceVariantAlpha));
-
-    final Color usedOnSurfaceContainerLow = onSurfaceContainerLow ??
-        (ThemeData.estimateBrightnessForColor(surfaceContainerLow ?? surface) ==
-                Brightness.dark
-            ? Colors.white
-                .blendAlpha(surfaceContainerLow ?? surface, surfaceVariantAlpha)
-            : Colors.black.blendAlpha(
-                surfaceContainerLow ?? surface, surfaceVariantAlpha));
-
-    final Color usedOnSurfaceContainer = onSurfaceContainer ??
-        (ThemeData.estimateBrightnessForColor(surfaceContainer ?? surface) ==
-                Brightness.dark
-            ? Colors.white
-                .blendAlpha(surfaceContainer ?? surface, surfaceVariantAlpha)
-            : Colors.black
-                .blendAlpha(surfaceContainer ?? surface, surfaceVariantAlpha));
-
-    final Color usedOnSurfaceContainerHigh = onSurfaceContainerHigh ??
-        (ThemeData.estimateBrightnessForColor(
-                    surfaceContainerHigh ?? surface) ==
-                Brightness.dark
-            ? Colors.white.blendAlpha(
-                surfaceContainerHigh ?? surface, surfaceVariantAlpha)
-            : Colors.black.blendAlpha(
-                surfaceContainerHigh ?? surface, surfaceVariantAlpha));
-
-    final Color usedOnSurfaceContainerHighest = onSurfaceContainerHighest ??
-        (ThemeData.estimateBrightnessForColor(
-                    surfaceContainerHighest ?? surface) ==
-                Brightness.dark
-            ? Colors.white.blendAlpha(
-                surfaceContainerHighest ?? surface, surfaceVariantAlpha)
-            : Colors.black.blendAlpha(
-                surfaceContainerHighest ?? surface, surfaceVariantAlpha));
+            ? useM3
+                ? FlexColor.darkFlexOnSurfaceVariant
+                    .blendAlpha(usedSurfaceTint.darken(10), surfaceAlpha)
+                : Colors.white
+                    .blendAlpha(usedSurfaceTint.darken(10), surfaceAlpha)
+            : useM3
+                ? FlexColor.lightFlexOnSurfaceVariant
+                    .blendAlpha(usedSurfaceTint.lighten(24), surfaceAlpha)
+                : Colors.black
+                    .blendAlpha(usedSurfaceTint.lighten(24), surfaceAlpha));
 
     final Color invSurface = inverseSurface ??
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
-            ? Colors.white
-            : Colors.black);
+            ? useM3
+                ? FlexColor.darkFlexInverseSurface
+                : Colors.white
+            : useM3
+                ? FlexColor.lightFlexInverseSurface
+                : Colors.black);
+
     final Color usedOnInverseSurface = onInverseSurface ??
         (ThemeData.estimateBrightnessForColor(invSurface) == Brightness.dark
-            ? Colors.white.blendAlpha(invSurface, inverseSurfaceAlpha)
-            : Colors.black.blendAlpha(invSurface, inverseSurfaceAlpha));
+            ? FlexColor.lightFlexOnInverseSurface
+                .blendAlpha(usedSurfaceTint.lighten(24), inverseSurfaceAlpha)
+            : FlexColor.darkFlexOnInverseSurface
+                .blendAlpha(usedSurfaceTint.darken(10), inverseSurfaceAlpha));
 
     final Color usedOnError = onError ??
         (estimateErrorBrightness(error) == Brightness.dark
@@ -340,13 +301,6 @@ class FlexSchemeOnColors with Diagnosticable {
       onTertiaryContainer: usedOnTertiaryContainer,
       onSurface: usedOnSurface,
       onSurfaceVariant: usedOnSurfaceVariant,
-      onSurfaceDim: usedOnSurfaceDim,
-      onSurfaceBright: usedOnSurfaceBright,
-      onSurfaceContainerLowest: usedOnSurfaceContainerLowest,
-      onSurfaceContainerLow: usedOnSurfaceContainerLow,
-      onSurfaceContainer: usedOnSurfaceContainer,
-      onSurfaceContainerHigh: usedOnSurfaceContainerHigh,
-      onSurfaceContainerHighest: usedOnSurfaceContainerHighest,
       onInverseSurface: usedOnInverseSurface,
       onError: usedOnError,
       onErrorContainer: usedOnErrorContainer,

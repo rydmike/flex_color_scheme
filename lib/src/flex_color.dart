@@ -84,7 +84,7 @@ class FlexColor {
 
   /// None tinted neutral surface color used as FlexColor standard for light
   /// surface.
-  static const Color lightFlexSurface = Color(0xFFFEFEFE);
+  static const Color lightFlexSurface = Color(0xFFFCFCFC);
 
   /// None tinted neutral surfaceDim color used as FlexColor standard for light
   /// surfaceDim.
@@ -92,7 +92,7 @@ class FlexColor {
 
   /// None tinted neutral surfaceBright color used as FlexColor standard for
   /// light surfaceBright.
-  static const Color lightFlexSurfaceBright = Color(0xFFFEFEFE);
+  static const Color lightFlexSurfaceBright = Color(0xFFFDFDFD);
 
   /// None tinted neutral surfaceContainerLowest color used as FlexColor
   /// standard for light surfaceContainerLowest, white.
@@ -115,24 +115,32 @@ class FlexColor {
   static const Color lightFlexSurfaceContainerHighest = Color(0xFFE7E7E7);
 
   /// None tinted neutral onSurface color used as FlexColor standard for light
-  /// onSurface. Based on M3 monochrome tone 10.
-  static const Color lighFlexOnSurface = Color(0xFF1B1B1B);
+  /// onSurface. Based on M3 monochrome tone 5.
+  static const Color lightFlexOnSurface = Color(0xFF111111);
 
   /// None tinted neutral onSurfaceVariant color used as FlexColor standard for
-  /// light onSurfaceVariant. Based on M3 monochrome tone 30.
-  static const Color lighFlexOnSurfaceVariant = Color(0xFF474747);
+  /// light onSurfaceVariant. Based on M3 monochrome tone 24.
+  static const Color lightFlexOnSurfaceVariant = Color(0xFF393939);
 
   /// None tinted neutral inverseSurface color used as FlexColor standard for
-  /// light inverseSurface. Based on M3 monochrome tone 20.
-  static const Color lightFlexInverseSurface = Color(0xFF303030);
+  /// light inverseSurface. Based on M3 monochrome tone 17.
+  static const Color lightFlexInverseSurface = Color(0xFF2A2A2A);
 
   /// None tinted neutral onInverseSurface color used as FlexColor standard for
   /// light onInverseSurface. Based on M3 monochrome tone 95.
-  static const Color lighFlexOnInverseSurface = Color(0xFFF1F1F1);
+  static const Color lightFlexOnInverseSurface = Color(0xFFF1F1F1);
+
+  /// None tinted neutral outline color used as FlexColor standard for light
+  /// outline. Based on M3 monochrome tone 60.
+  static const Color lightFlexOutline = Color(0xFF919191);
+
+  /// None tinted neutral outline color used as FlexColor standard for light
+  /// outline. Based on M3 monochrome tone 84.
+  static const Color lightFlexOutlineVariant = Color(0xFFD1D1D1);
 
   /// None tinted neutral surface color used as FlexColor standard for dark
   /// surface.
-  static const Color darkFlexSurface = Color(0xFF060606);
+  static const Color darkFlexSurface = Color(0xFF080808);
 
   /// None tinted neutral surfaceDim color used as FlexColor standard for dark
   /// surfaceDim.
@@ -163,20 +171,28 @@ class FlexColor {
   static const Color darkFlexSurfaceContainerHighest = Color(0xFF282828);
 
   /// None tinted neutral onSurface color used as FlexColor standard for dark
-  /// onSurface. Based on M3 monochrome tone 90.
-  static const Color darkFlexOnSurface = Color(0xFFE2E2E2);
+  /// onSurface. Based on M3 monochrome tone 95.
+  static const Color darkFlexOnSurface = Color(0xFFF1F1F1);
 
   /// None tinted neutral onSurfaceVariant color used as FlexColor standard for
-  /// dark onSurfaceVariant. Based on M3 monochrome tone 80.
-  static const Color darkFlexOnSurfaceVariant = Color(0xFFC6C6C6);
+  /// dark onSurfaceVariant.
+  static const Color darkFlexOnSurfaceVariant = Color(0xFFCACACA);
 
   /// None tinted neutral inverseSurface color used as FlexColor standard for
-  /// dark inverseSurface. Based on M3 monochrome tone 90.
-  static const Color darkFlexInverseSurface = Color(0xFFE2E2E2);
+  /// dark inverseSurface. Based on M3 monochrome tone 92.
+  static const Color darkFlexInverseSurface = Color(0xFFE8E8E8);
 
   /// None tinted neutral onInverseSurface color used as FlexColor standard for
-  /// dark onInverseSurface. Based on M3 monochrome tone 20.
-  static const Color darkFlexOnInverseSurface = Color(0xFF303030);
+  /// dark onInverseSurface. Based on M3 monochrome tone 17.
+  static const Color darkFlexOnInverseSurface = Color(0xFF2A2A2A);
+
+  /// None tinted neutral outline color used as FlexColor standard for dark
+  /// outline. Based on M3 monochrome tone 70.
+  static const Color darkFlexOutline = Color(0xFF777777);
+
+  /// None tinted neutral outline color used as FlexColor standard for dark
+  /// outline.
+  static const Color darkFlexOutlineVariant = Color(0xFF414141);
 
   // The Material standard error colors for light and dark modes as defined by
   // https://material.io/design/color/the-color-system.html#color-theme-creation.

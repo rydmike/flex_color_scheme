@@ -58,7 +58,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 * **DONE**: Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later.
   * Will keep it around for now. Added info about it in its info reveal.
-  * Maybe add a "bring tints back" feature? Nah, who wants that anyway?
 * **DONE**: Consider what to do with shadows back.
   * Keep and add more fine-grained control later, via shadow color selection per component.
 * **DONE**: Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
@@ -72,7 +71,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   * Old Material-2 mode will keep its opinionated default values that largely emulate Material-3 styles. This remains the FCS Material-2 mode design intent. However, FCS originally had many own styles for Material-3 mode defaults too, because they were made before the specs were available. These have gradually been removed to use actual Material-3 defaults instead as starting point.
   * The Playground will, where it makes sense, keep some of its own default settings, but the package should align with Flutter's Material-3 defaults when possible.
   * After the changes, some defaults still have subtle opinionated difference, but the majority are now using Flutter's Material-3 defaults, which are not always Material-3 spec-correct, mostly they are though. 
-    * **Tooltip** and **Snackbar** will keep their opinionated defaults in FCS for now, because they offer a nice optional default style that is otherwise not available. It is straightforward to make them exactly like Material-3 default. There is guidance in the Playground app on how to do it via their info reveal buttons.
+    * **Tooltip** and **Snackbar** keep their opinionated defaults in FCS for now, because they offer a nice optional default style that is otherwise not available. It is straightforward to make them exactly like Material-3 default. There is guidance in the Playground app on how to do it via their info reveal buttons.
     * FCS default **InputDecorator** is now very close to Flutter's Material-3 default. The difference should now only be FCS's slight opinionated take on error hover states. Maybe later add a feature to get the default Material-3 style for them too. This is not possible with current props, but we could add them later.
 
   
@@ -82,18 +81,17 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: InputDecorator: Platform adaptive radius.
 - TODO: InputDecorator: Playground: Default value info for padding props, depends on dense and M2/M3 mode and border type, complex.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
-- TODO: Playground: Clean up some UI, consider adding more two colum controls where it makes sense to make it more compact.
+- TODO: Playground: Clean up some UI, consider adding more two column controls where it makes sense to make it more compact.
 - TODO: Playground: Correct the Chip's default labels
 - TODO: The Chip's default M3 paddings are now wrong, why?
 - TODO: Add Chip padding settings.
 - TODO: Add Chip font size settings.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
-- STARTED: Add some `ListTile` theming features, eg at least `contentPadding`. Maybe some font size and opacity?
+- STARTED: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity?
   - To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
 - STARTED: Add some `SearchBar` theming features, What? Shape and elevation?
 - STARTED: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
-- TODO: Non-seeded onSurface, onSurfaceVariant, inverseSurface and onInverseSurface colors should be modified. 
 - TODO: Add some **NEW** color schemes:
   - Add black-and-white greyscale prototyping theme to the `FlexScheme` enum and colors.
   - Add sepia theme to the `FlexScheme` enum and colors.
