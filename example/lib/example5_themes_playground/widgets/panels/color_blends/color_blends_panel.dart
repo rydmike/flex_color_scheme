@@ -21,6 +21,85 @@ class ColorBlendsPanel extends StatelessWidget {
   });
   final ThemeController controller;
 
+  static const String _blendInfo =
+      'Surface blend uses alpha blend, to mix in the surface '
+      'tint color into all surface colors. The blend '
+      'level is the used alpha blend value. The blend mode '
+      'changes a factor used on this alpha blend value differently '
+      'for different surface colors and scaffold background color.\n'
+      '\n'
+      'Blends also applies to surfaces when seeded ColorSchemes are '
+      'used. Seed based surfaces already include a primary color '
+      'tinted surface. You can make this stronger with surface blends. '
+      'To use default seed generated surface color results, keep '
+      'blend level at zero.\n'
+      '\n'
+      'When using a surface blend mode with a high factor on Scaffold '
+      'background, the design intent is typically to not place any '
+      'controls or text on it directly, but to always use them on '
+      'other surfaces '
+      'with less surface tint, for example in Cards. The Scaffold '
+      'background is then only used as a background color effect. If '
+      'your app places controls directly on Scaffold, a high blend '
+      'factor on Scaffold background color may not be a good fit. '
+      'Choose one where it has a lower color blend factor.\n';
+
+  static const String _scaffoldColorInfo =
+      'New in version 8 is that you can select any ColorScheme color '
+      'to be used as the Scaffold background color.\n'
+      'We recommend sticking to surface colors, but if you uses '
+      'ScaffoldBackground only as a background effect color, you can '
+      'now choose any ColorScheme color you like. White, Black and '
+      'transparent are also available. Transparent will only '
+      'show the background color of the parent widget, which in root '
+      'MaterialApp case is black, so you will not see the desktop '
+      'behind it.\n';
+
+  static const String _contrastBlendInfo =
+      'You can adjust alpha blends for contrasting ON colors for '
+      'surfaces, outline colors, for the main container colors and '
+      'optionally also the contrasting ON colors for the main colors.\n'
+      '\n'
+      'Unlike the surface color blends, these blends are not applied '
+      'to seed generated ColorSchemes.\n'
+      '\n'
+      'The setting is however available also when using seed colors. Because, '
+      'if you pin a main or container color in the seed generated scheme '
+      'to its source color, the blend setting will be used to compute its '
+      'onColor.\n'
+      '\n'
+      "A pinned color's hue may not be a part of the palette in the "
+      'generated ColorScheme, we can thus not use the seed generated '
+      'onColor as its onColor. It would require computing a '
+      'totally different palette, matching the pinned color, to use '
+      'the typically more color expressive seed generated ON color tones.\n'
+      'Because of this, the contrast blend level can be used for getting '
+      'more color expressive onColors for pinned colors when using '
+      'seed generated ColorSchemes. To do so, adjust the "Contrast colors '
+      'blend level" to a higher value. If you also turn on '
+      '"Main colors on color blending", they also get contrast '
+      'color blends. In Material-3 design it is only used in dark mode, but '
+      'you can try it light mode too, or keep it OFF in both light and '
+      'dark mode, all depending on your design goals.\n';
+
+  static const String _contrastBlendLevelInfo =
+      'The contrasting on color blending mixes in its own main color, '
+      'into the contrasting ON color. This is only done when a '
+      'seed generated color for the color in question is not used.\n'
+      '\n'
+      'This contrast blend level affects onSurface, onSurfaceVariant '
+      'and onInverseSurface, the outline colors and the on colors for '
+      'the main container colors.\n'
+      '\n'
+      'When the main on color blending switch is ON, it also affects '
+      'on colors for primary, secondary, tertiary and error.\n'
+      '\n'
+      'When seed generated colors are used, the on color contrast '
+      'color always gets its correct tonal palette on color, but if '
+      'a main or its container color is pinned to its input value, '
+      'the the computed blended on color contrast color version '
+      'defined here will be used instead.\n';
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -40,29 +119,7 @@ class ColorBlendsPanel extends StatelessWidget {
           LightSurfaceModeListTile(controller: controller),
           const ListTileReveal(
             title: Text('Surface colors blend level'),
-            subtitleReveal: Text(
-              'Surface blend uses alpha blend, to mix in the surface '
-              'tint color into all surface colors. The blend '
-              'level is the used alpha value in an alpha blend. The mode '
-              'changes used factor of this alpha blend value differently '
-              'for different surface colors and scaffold background color.\n'
-              '\n'
-              'Blends also applies to surfaces when seeded ColorSchemes are '
-              'used. Seed based surfaces already include a touch of '
-              'primary color, you can make it stronger with surface blends. '
-              'To use default seed generated surface color results, use '
-              'blend level zero.\n'
-              '\n'
-              'When using a surface blend mode with a high factor on Scaffold '
-              'background, the design intent is typically to not place any '
-              'controls or text on it directly, but to always use them on '
-              'other surfaces '
-              'with less surface tint, for example in Cards. The Scaffold '
-              'background is then only used as a background color effect. If '
-              'your app places controls directly on Scaffold, a high blend '
-              'factor on Scaffold background color may not be a good fit. '
-              'Choose one where it has a lower color blend factor.',
-            ),
+            subtitleReveal: Text(_blendInfo),
           ),
           ListTile(
             title: Slider(
@@ -98,29 +155,7 @@ class ColorBlendsPanel extends StatelessWidget {
           DarkSurfaceModeListTile(controller: controller),
           const ListTileReveal(
             title: Text('Surface colors blend level'),
-            subtitleReveal: Text(
-              'Surface blend uses alpha blend, to mix in the surface '
-              'tint color into all surface colors. The blend '
-              'level is the used alpha value in an alpha blend. The mode '
-              'changes used factor of this alpha blend value differently '
-              'for different surface colors and scaffold background color.\n'
-              '\n'
-              'Blends also applies to surfaces when seeded ColorSchemes are '
-              'used. Seed based surfaces already include a touch of '
-              'primary color, you can make it stronger with surface blends. '
-              'To use default seed generated surface color results, use '
-              'blend level zero.\n'
-              '\n'
-              'When using a surface blend mode with a high factor on Scaffold '
-              'background, the design intent is typically to not place any '
-              'controls or text on it directly, but to always use them on '
-              'other surfaces '
-              'with less surface tint, for example in Cards. The Scaffold '
-              'background is then only used as a background color effect. If '
-              'your app places controls directly on Scaffold, a high blend '
-              'factor on Scaffold background color may not be a good fit. '
-              'Choose one where it has a lower color blend factor.',
-            ),
+            subtitleReveal: Text(_blendInfo),
           ),
           ListTile(
             title: Slider(
@@ -163,6 +198,7 @@ class ColorBlendsPanel extends StatelessWidget {
           ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Scaffold background color'),
+            subtitleReveal: const Text(_scaffoldColorInfo),
             defaultLabel:
                 controller.lightIsWhite ? 'White' : 'surfaceContainerLowest',
             defaultLabelM2: controller.lightIsWhite ? 'White' : 'surface',
@@ -194,6 +230,7 @@ class ColorBlendsPanel extends StatelessWidget {
           ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Scaffold background color'),
+            subtitleReveal: const Text(_scaffoldColorInfo),
             defaultLabel: 'surfaceContainerLowest',
             defaultLabelM2: controller.darkIsTrueBlack ? 'Black' : 'surface',
             defaultDisabledLabel: controller.useFlexColorScheme
@@ -221,46 +258,37 @@ class ColorBlendsPanel extends StatelessWidget {
             onChanged: controller.setDarkIsTrueBlack,
           ),
         ],
-        const Divider(),
-        const ListTileReveal(
-          title: Text('Contrast Color Blends'),
-          subtitleReveal: Text(
-            'You can adjust alpha blends for on colors for surfaces and '
-            'for the main and container colors.\n',
-          ),
+        const SizedBox(height: 8),
+        const Divider(height: 1),
+        ListTileReveal(
+          title: const Text('Contrast Color Blends'),
+          subtitleReveal: const Text(_contrastBlendInfo),
+          tileColor: theme.colorScheme.surfaceContainer,
         ),
+        const Divider(height: 1),
+        const SizedBox(height: 8),
         //
         // Light mode widgets
         //
         if (isLight) ...<Widget>[
           SwitchListTileReveal(
-            title: const Text('Main and container colors on color blending'),
+            title: const Text('Main colors on color blending'),
             enabled: enableControl,
-            subtitleReveal:
-                const Text('In M3 design, in light mode, only container colors '
-                    'use color '
-                    'pair tinted on color. Main colors use black or white. '
-                    'Keep this OFF to do so. Set to ON to use blends with '
-                    'onPrimary, onSecondary, onTertiary and onError, when seed '
-                    'colors are NOT used.\n'),
+            subtitleReveal: const Text(
+              'In Material-3 design, in light mode, only container colors '
+              'use color pair tinted contrasting on colors. Main colors use '
+              'black or white. '
+              'Keep this setting OFF to do so. Set to ON to also use contrast '
+              'blends with onPrimary, onSecondary, onTertiary and onError, '
+              'when seed generated colors are NOT used.\n',
+            ),
             value: controller.blendLightOnColors,
             onChanged: controller.setBlendLightOnColors,
           ),
           ListTileReveal(
             enabled: enableControl,
             title: const Text('Contrast colors blend level'),
-            subtitleReveal: const Text(
-              'The contrasting on color blending mixes in '
-              'its own main color, '
-              'into the on color, when seed/M3 colors are not used. This '
-              'affects onContainers, onSurface and onBackground. When the '
-              'main on color blending switch is ON, it also affects on colors '
-              'for primary, secondary, tertiary and error.\n'
-              'When seed color is used, the on color contrast color always '
-              'gets its correct tonal palette on color, but if the main '
-              'color is locked to custom color, the computed blended on '
-              'color contrast color version will be used instead.\n',
-            ),
+            subtitleReveal: const Text(_contrastBlendLevelInfo),
           ),
           ListTile(
             enabled: enableControl,
@@ -301,32 +329,24 @@ class ColorBlendsPanel extends StatelessWidget {
         //
         else ...<Widget>[
           SwitchListTileReveal(
-            title: const Text('Main and container colors on color blending'),
+            title: const Text('Main colors on color blending'),
             enabled: enableControl,
-            subtitleReveal:
-                const Text('In M3 design, in dark mode, both container and '
-                    'main colors use color pair tinted on colors. Keep it '
-                    'ON to do so in dark mode and use blends for onPrimary, '
-                    'onSecondary, onTertiary and onError, when seed '
-                    'colors are NOT used.\n'),
+            subtitleReveal: const Text(
+              'In Material-3 design, in dark mode, both container and '
+              'main colors use color pair tinted contrasting on colors. '
+              'Keep this setting ON to do so in dark mode and use contrast '
+              'blends for onPrimary, '
+              'onSecondary, onTertiary and onError, when seed generated '
+              'colors are NOT used. You can of course turn it OFF in dark '
+              'mode too, if that style fits your design goal better.\n',
+            ),
             value: controller.blendDarkOnColors,
             onChanged: controller.setBlendDarkOnColors,
           ),
           ListTileReveal(
             enabled: enableControl,
             title: const Text('Contrast colors blend level'),
-            subtitleReveal: const Text(
-              'The contrasting on color blending mixes in '
-              'its own main color, '
-              'into the on color, when seed/M3 colors are not used. This '
-              'affects onContainers, onSurface and onBackground. When the '
-              'main on color blending switch is ON, it also affects on colors '
-              'for primary, secondary, tertiary and error.\n'
-              'When seed color is used, the on color contrast color always '
-              'gets its correct tonal palette on color, but if the main '
-              'color is locked to custom color, the computed blended on '
-              'color contrast color version will be used instead.\n',
-            ),
+            subtitleReveal: const Text(_contrastBlendLevelInfo),
           ),
           ListTile(
             enabled: enableControl,
@@ -367,7 +387,7 @@ class ColorBlendsPanel extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: OnColors(controller: controller),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
       ],
     );
   }
