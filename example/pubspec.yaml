@@ -40,7 +40,7 @@ dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^3.3.0
+  flex_seed_scheme: ^3.4.0
 
   # The Flutter SDK, by Google flutter.dev.
   flutter:
@@ -78,11 +78,6 @@ dependencies:
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
   url_launcher: ^6.3.0
-
-dependency_overrides:
-  # TODO(rydmike): Update FSS Package and remove dev dep
-  flex_seed_scheme:
-    path: ../../flex_seed_scheme
 
 dev_dependencies:
   flutter_test:
