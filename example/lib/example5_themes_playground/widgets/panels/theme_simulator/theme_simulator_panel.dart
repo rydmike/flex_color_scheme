@@ -74,14 +74,10 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final bool useMaterial3 = theme.useMaterial3;
     final Color iconColor = theme.colorScheme.primary;
-
     // Paddings for the two column control layouts.
     const EdgeInsetsDirectional paddingStartColumn =
         EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/controllers/tone_indicator_controller.dart';
 import '../../../utils/effective_flex_tones.dart';
 import '../../shared/color_name_value.dart';
 import '../../shared/color_picker_inkwell.dart';
@@ -16,9 +17,11 @@ class SchemeColors extends StatelessWidget {
   const SchemeColors({
     super.key,
     required this.tc,
+    required this.toneC,
   });
 
   final ThemeController tc;
+  final ToneIndicatorController toneC;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
   bool _isLight(final Color color) =>
@@ -158,15 +161,15 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(primary);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(primary);
+
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: primary,
                           child: ColorPickerInkWellDialog(
@@ -224,15 +227,15 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onPrimary);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onPrimary);
+
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onPrimary,
                           child: ColorNameValue(
@@ -269,14 +272,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        //   onEnter: (PointerEvent details) {
-                        //     tc.setHoverColor(primaryContainer);
-                        //     tc.setHoverTonalPalette(TonalPalettes.primary);
-                        //   },
-                        //   onExit: (PointerEvent details) {
-                        //     tc.setHoverColor(null);
-                        //     tc.setHoverTonalPalette(null);
-                        //   },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(primaryContainer);
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: primaryContainer,
                           child: ColorPickerInkWellDialog(
@@ -344,15 +347,15 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onPrimaryContainer);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onPrimaryContainer);
+
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onPrimaryContainer,
                           child: ColorNameValue(
@@ -389,14 +392,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.primaryFixed);
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.primaryFixed);
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.primaryFixed,
                           child: ColorNameValue(
@@ -414,14 +417,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.primaryFixed);
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onPrimaryFixed);
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onPrimaryFixed,
                           child: ColorNameValue(
@@ -457,14 +460,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.primaryFixedDim);
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.primaryFixedDim);
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.primaryFixedDim,
                           child: ColorNameValue(
@@ -482,14 +485,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //  tc.setHoverColor(colorScheme.onPrimaryFixedVariant);
-                        //  tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onPrimaryFixedVariant);
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onPrimaryFixedVariant,
                           child: ColorNameValue(
@@ -525,15 +528,15 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(secondary);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(secondary);
+
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: secondary,
                           child: ColorPickerInkWellDialog(
@@ -591,15 +594,15 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onSecondary);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onSecondary);
+
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onSecondary,
                           child: ColorNameValue(
@@ -636,15 +639,15 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(secondaryContainer);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(secondaryContainer);
+
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: secondaryContainer,
                           child: ColorPickerInkWellDialog(
@@ -712,15 +715,15 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onSecondaryContainer);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onSecondaryContainer);
+
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onSecondaryContainer,
                           child: ColorNameValue(
@@ -759,14 +762,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.secondaryFixed);
-                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.secondaryFixed);
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.secondaryFixed,
                           child: ColorNameValue(
@@ -784,14 +787,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.secondaryFixed);
-                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onSecondaryFixed);
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onSecondaryFixed,
                           child: ColorNameValue(
@@ -827,14 +830,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.secondaryFixedDim);
-                        //   tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.secondaryFixedDim);
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.secondaryFixedDim,
                           child: ColorNameValue(
@@ -852,14 +855,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //tc.setHoverColor(colorScheme.onSecondaryFixedVariant);
-                        //  tc.setHoverTonalPalette(TonalPalettes.secondary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onSecondaryFixedVariant);
+                          toneC.setPalette(TonalPalettes.secondary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onSecondaryFixedVariant,
                           child: ColorNameValue(
@@ -895,15 +898,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(tertiary);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(tertiary);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: tertiary,
                           child: ColorPickerInkWellDialog(
@@ -953,15 +955,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onTertiary);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onTertiary);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onTertiary,
                           child: ColorNameValue(
@@ -998,15 +999,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(tertiaryContainer);
-                        //
-                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(tertiaryContainer);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: tertiaryContainer,
                           child: ColorPickerInkWellDialog(
@@ -1064,14 +1064,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onTertiaryContainer);
-                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onTertiaryContainer);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onTertiaryContainer,
                           child: ColorNameValue(
@@ -1110,14 +1110,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.tertiaryFixed);
-                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.tertiaryFixed);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.tertiaryFixed,
                           child: ColorNameValue(
@@ -1135,14 +1135,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.tertiaryFixed);
-                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onTertiaryFixed);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onTertiaryFixed,
                           child: ColorNameValue(
@@ -1178,14 +1178,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.tertiaryFixedDim);
-                        //   tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.tertiaryFixedDim);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.tertiaryFixedDim,
                           child: ColorNameValue(
@@ -1203,14 +1203,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        // tc.setHoverColor(colorScheme.onTertiaryFixedVariant);
-                        //  tc.setHoverTonalPalette(TonalPalettes.tertiary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onTertiaryFixedVariant);
+                          toneC.setPalette(TonalPalettes.tertiary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onTertiaryFixedVariant,
                           child: ColorNameValue(
@@ -1246,14 +1246,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.error);
-                        //   tc.setHoverTonalPalette(TonalPalettes.error);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.error);
+                          toneC.setPalette(TonalPalettes.error);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: error,
                           child: ColorPickerInkWellDialog(
@@ -1303,14 +1303,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onError);
-                        //   tc.setHoverTonalPalette(TonalPalettes.error);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onError);
+                          toneC.setPalette(TonalPalettes.error);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onError,
                           child: ColorNameValue(
@@ -1346,14 +1346,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.errorContainer);
-                        //   tc.setHoverTonalPalette(TonalPalettes.error);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.errorContainer);
+                          toneC.setPalette(TonalPalettes.error);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: errorContainer,
                           child: ColorPickerInkWellDialog(
@@ -1404,14 +1404,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onErrorContainer);
-                        //   tc.setHoverTonalPalette(TonalPalettes.error);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onErrorContainer);
+                          toneC.setPalette(TonalPalettes.error);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onErrorContainer,
                           child: ColorNameValue(
@@ -1447,14 +1447,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.surface);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surface);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surface,
                           child: ColorNameValue(
@@ -1472,14 +1472,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onSurface);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onSurface);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onSurface,
                           child: ColorNameValue(
@@ -1515,14 +1515,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.surfaceDim);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceDim);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceDim,
                           child: ColorNameValue(
@@ -1540,14 +1540,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.surfaceBright);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceBright);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceBright,
                           child: ColorNameValue(
@@ -1583,14 +1583,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        // tc.setHoverColor(colorScheme.surfaceContainerLowest);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceContainerLowest);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceContainerLowest,
                           child: ColorNameValue(
@@ -1608,14 +1608,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.surfaceContainerLow);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceContainerLow);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceContainerLow,
                           child: ColorNameValue(
@@ -1651,14 +1651,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.surfaceContainer);
-                        //tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceContainer);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceContainer,
                           child: ColorNameValue(
@@ -1676,14 +1676,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onSurfaceVariant);
-                        //tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onSurfaceVariant);
+                          toneC.setPalette(TonalPalettes.neutralVariant);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onSurfaceVariant,
                           child: ColorNameValue(
@@ -1719,14 +1719,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        // tc.setHoverColor(colorScheme.surfaceContainerHigh);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceContainerHigh);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceContainerHigh,
                           child: ColorNameValue(
@@ -1744,14 +1744,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //tc.setHoverColor(colorScheme.surfaceContainerHighest);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceContainerHighest);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceContainerHighest,
                           child: ColorNameValue(
@@ -1787,14 +1787,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 3,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.inverseSurface);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.inverseSurface);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.inverseSurface,
                           child: ColorNameValue(
@@ -1812,14 +1812,14 @@ class SchemeColors extends StatelessWidget {
                     Expanded(
                       // flex: 2,
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.onInverseSurface);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.onInverseSurface);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.onInverseSurface,
                           child: ColorNameValue(
@@ -1854,14 +1854,14 @@ class SchemeColors extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.outline);
-                        //tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.outline);
+                          toneC.setPalette(TonalPalettes.neutralVariant);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.outline,
                           child: ColorNameValue(
@@ -1878,14 +1878,14 @@ class SchemeColors extends StatelessWidget {
                     ),
                     Expanded(
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.outlineVariant);
-                        //tc.setHoverTonalPalette(TonalPalettes.neutralVariant);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.outlineVariant);
+                          toneC.setPalette(TonalPalettes.neutralVariant);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.outlineVariant,
                           child: ColorNameValue(
@@ -1919,14 +1919,14 @@ class SchemeColors extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.shadow);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.shadow);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.shadow,
                           child: ColorNameValue(
@@ -1944,14 +1944,14 @@ class SchemeColors extends StatelessWidget {
                     const Divider(height: 1),
                     Expanded(
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.scrim);
-                        //   tc.setHoverTonalPalette(TonalPalettes.neutral);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.scrim);
+                          toneC.setPalette(TonalPalettes.neutral);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.scrim,
                           child: ColorNameValue(
@@ -1986,14 +1986,14 @@ class SchemeColors extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.inversePrimary);
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.inversePrimary);
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.inversePrimary,
                           child: ColorNameValue(
@@ -2010,14 +2010,14 @@ class SchemeColors extends StatelessWidget {
                     ),
                     Expanded(
                       child: MouseRegion(
-                        // onEnter: (PointerEvent details) {
-                        //   tc.setHoverColor(colorScheme.surfaceTint);
-                        //   tc.setHoverTonalPalette(TonalPalettes.primary);
-                        // },
-                        // onExit: (PointerEvent details) {
-                        //   tc.setHoverColor(null);
-                        //   tc.setHoverTonalPalette(null);
-                        // },
+                        onEnter: (PointerEvent details) {
+                          toneC.setHover(colorScheme.surfaceTint);
+                          toneC.setPalette(TonalPalettes.primary);
+                        },
+                        onExit: (PointerEvent details) {
+                          toneC.setHover(null);
+                          toneC.setPalette(null);
+                        },
                         child: Material(
                           color: colorScheme.surfaceTint,
                           child: ColorNameValue(
