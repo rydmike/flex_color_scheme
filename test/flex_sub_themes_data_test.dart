@@ -455,7 +455,7 @@ void main() {
           splashTypeAdaptive: FlexSplashType.instantSplash,
           //
           blendTextTheme: true,
-          useTextTheme: false,
+          useMaterial3Typography: false,
           useM2StyleDividerInM3: true,
           //
           defaultRadius: 14,
