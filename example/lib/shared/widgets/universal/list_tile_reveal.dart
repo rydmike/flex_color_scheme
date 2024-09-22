@@ -19,6 +19,7 @@ class ListTileReveal extends StatefulWidget {
     this.subtitleReveal,
     this.trailing,
     this.contentPadding,
+    this.tileColor,
     this.onTap,
     this.dense,
     this.revealDense,
@@ -70,6 +71,16 @@ class ListTileReveal extends StatefulWidget {
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used in M2
   /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
   final EdgeInsetsGeometry? contentPadding;
+
+  /// Defines the background color of `ListTileReveal` when `selected` is false.
+  ///
+  /// If this property is null and `selected` is false then
+  /// [ListTileThemeData.tileColor] is used. If that is also null and
+  /// `selected` is true, `selectedTileColor` is used.
+  ///
+  /// When that is also null, the [ListTileTheme.selectedTileColor] is
+  /// used, otherwise [Colors.transparent] is used.
+  final Color? tileColor;
 
   /// Called when the user taps this list tile.
   ///
@@ -130,6 +141,7 @@ class _ListTileRevealState extends State<ListTileReveal> {
     return Column(
       children: <Widget>[
         ListTile(
+          tileColor: widget.tileColor,
           enabled: widget.enabled,
           contentPadding: widget.contentPadding,
           leading: widget.leading,
