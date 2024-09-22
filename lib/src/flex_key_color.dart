@@ -435,6 +435,8 @@ class FlexKeyColors with Diagnosticable {
   /// contrast tone mappings.
   final double contrastLevel;
 
+  /// Use expressive on container colors for light mode.
+  ///
   /// The [useExpressiveOnContainerColors] is used to make the light theme
   /// mode [ColorScheme] colors [onPrimaryContainer], [onSecondaryContainer],
   /// [onTertiaryContainer] and [onErrorContainer] more color expressive.
@@ -464,22 +466,27 @@ class FlexKeyColors with Diagnosticable {
   /// The Material design spec for the tones used by the colors
   /// [onPrimaryContainer], [onSecondaryContainer], [onTertiaryContainer] and
   /// [onErrorContainer] have changed from tone **10** to **30** for **LIGHT**
-  /// theme mode. This change will land in Flutter when the Material
-  /// Color Utilities (MCU) package is updated to at least 0.12.0.
-  /// This has not been done even in Flutter master (Sep 3, 2024).
+  /// theme mode. It also sets the min `ContrastCurve` from
+  /// ContrastCurve(4.5, 7.0, 11.0, 21.0) to
+  /// ContrastCurve(3.0, 4.5, 7.0, 11.0), making min contrast for normal
+  /// contrast 4.5 instead of past 7.0.
   ///
-  ///  The expressive tone is not yet used
-  /// in the Flutter SDK, but is in the Material-3 design spec and also in
-  /// MCU v 0.12.0. When this change lands in stable Flutter, it will be made
+  /// The expressive light container tone is not yet used in the Flutter SDK
+  /// (Sep 22, 2024), but it is in the Material-3 design spec and also in
+  /// MCU v0.12.0. This is a breaking change in MCU 0.12.0 compared to 0.11.1
+  /// used in Flutter 3.24 and it will change the light mode color schemes
+  /// produced by all DynamicColor based Material color schemes.
+  ///
+  /// When this change lands in stable Flutter, it will be made
   /// `true` by default in FCS too when undefined. You you will still be able
   /// to opt out of using it, by setting it `false`. Flutter SDK and MCU will
-  /// not contain such an opt-out feature.
+  /// not contain such an opt-out feature. This
   ///
   /// The new **on** color tones for containers in light mode make them more
   /// color expressive, but they also reduce their contrast level and
   /// accessibility. We recommend keeping them at the higher contrast level,
   /// by setting [useExpressiveOnContainerColors] to `false`. With it set to
-  /// false, you will also keep this preference when the Flutter SDK
+  /// `false`, you will also keep this preference when Flutter SDK
   /// defaults to using the expressive tones.
   final bool? useExpressiveOnContainerColors;
 
