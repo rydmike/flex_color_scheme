@@ -101,8 +101,18 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color textButtonColor = theme.textButtonTheme.style?.foregroundColor
             ?.resolve(<WidgetState>{}) ??
         colorScheme.primary;
+    //
     final Color toggleButtonsColor =
         theme.toggleButtonsTheme.color ?? colorScheme.primary;
+    final Color segmentedButtonColor = theme
+            .segmentedButtonTheme.style?.backgroundColor
+            ?.resolve(<WidgetState>{WidgetState.selected}) ??
+        colorScheme.secondaryContainer;
+    final Color segmentedButtonForegroundColor = theme
+            .segmentedButtonTheme.style?.foregroundColor
+            ?.resolve(<WidgetState>{WidgetState.selected}) ??
+        colorScheme.onSecondaryContainer;
+    //
     final Color floatingActionButtonColor =
         theme.floatingActionButtonTheme.backgroundColor ??
             (theme.useMaterial3
@@ -113,8 +123,14 @@ class ShowSubThemeColors extends StatelessWidget {
             (useMaterial3
                 ? theme.colorScheme.onPrimaryContainer
                 : _onColor(floatingActionButtonColor, background));
-    final Color switchColor = theme.switchTheme.thumbColor
-            ?.resolve(<WidgetState>{WidgetState.selected}) ??
+    final Color chipColor =
+        theme.chipTheme.backgroundColor ?? colorScheme.primary;
+    //
+    final Color switchColor = (theme.useMaterial3
+            ? theme.switchTheme.trackColor
+                ?.resolve(<WidgetState>{WidgetState.selected})
+            : theme.switchTheme.thumbColor
+                ?.resolve(<WidgetState>{WidgetState.selected})) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
     final Color checkboxColor = theme.checkboxTheme.fillColor
             ?.resolve(<WidgetState>{WidgetState.selected}) ??
@@ -122,17 +138,14 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color radioColor = theme.radioTheme.fillColor
             ?.resolve(<WidgetState>{WidgetState.selected}) ??
         (theme.useMaterial3 ? colorScheme.primary : colorScheme.secondary);
+    //
     final Color circleAvatarColor = useMaterial3
         ? theme.colorScheme.primaryContainer
         : theme.primaryColorDark;
     final Color onCircleAvatarColor = useMaterial3
         ? theme.colorScheme.onPrimaryContainer
         : _onColor(circleAvatarColor, background);
-    final Color chipColor =
-        theme.chipTheme.backgroundColor ?? colorScheme.primary;
-    final Color inputDecoratorColor =
-        theme.inputDecorationTheme.focusColor?.withAlpha(0xFF) ??
-            colorScheme.primary;
+    //
     final Decoration? tooltipDecoration = theme.tooltipTheme.decoration;
     final Color tooltipColor = tooltipDecoration is BoxDecoration
         ? tooltipDecoration.color ??
@@ -142,31 +155,31 @@ class ShowSubThemeColors extends StatelessWidget {
         : (isDark
             ? Colors.white.withOpacity(0.9)
             : Colors.grey[700]!.withOpacity(0.9));
+
+    //
+    final Color inputDecoratorColor = theme.inputDecorationTheme.filled
+        ? theme.inputDecorationTheme.fillColor ??
+            (useMaterial3
+                ? colorScheme.surfaceContainerHighest
+                : isDark
+                    ? const Color(0x1AFFFFFF)
+                    : const Color(0x0A000000))
+        : Colors.transparent;
+    //
     final Color appBarColor = theme.appBarTheme.backgroundColor ??
         (isDark ? colorScheme.surface : colorScheme.primary);
     final Color tabBarColor = theme.tabBarTheme.labelColor ??
         (isDark ? colorScheme.onSurface : colorScheme.onPrimary);
-    final Color dialogColor =
-        theme.dialogTheme.backgroundColor ?? theme.dialogBackgroundColor;
-    final Color defaultSnackBackgroundColor = isDark
-        ? colorScheme.onSurface
-        : Color.alphaBlend(
-            colorScheme.onSurface.withOpacity(0.80), colorScheme.surface);
-    final Color snackBarColor =
-        theme.snackBarTheme.backgroundColor ?? defaultSnackBackgroundColor;
-    final Color snackForeground = theme.snackBarTheme.contentTextStyle?.color ??
-        (ThemeData.estimateBrightnessForColor(snackBarColor) == Brightness.light
-            ? Colors.black
-            : Colors.white);
+    //
     final Color bottomNavBarColor =
         theme.bottomNavigationBarTheme.backgroundColor ?? colorScheme.surface;
     final Color bottomNavBarItemColor =
         theme.bottomNavigationBarTheme.selectedItemColor ??
             (isDark ? colorScheme.secondary : colorScheme.primary);
+
     final Color navigationBarColor = theme.navigationBarTheme.backgroundColor ??
         (useMaterial3
-            ? ElevationOverlay.colorWithOverlay(
-                colorScheme.surface, colorScheme.primary, 3.0)
+            ? colorScheme.surfaceContainer
             : ElevationOverlay.colorWithOverlay(
                 colorScheme.surface, colorScheme.onSurface, 3.0));
     final Color navigationBarItemColor = theme.navigationBarTheme.iconTheme
@@ -189,6 +202,20 @@ class ShowSubThemeColors extends StatelessWidget {
             (useMaterial3
                 ? colorScheme.onSecondaryContainer
                 : colorScheme.secondary.withOpacity(.24));
+    //
+    final Color dialogColor =
+        theme.dialogTheme.backgroundColor ?? theme.dialogBackgroundColor;
+    final Color defaultSnackBackgroundColor = isDark
+        ? colorScheme.onSurface
+        : Color.alphaBlend(
+            colorScheme.onSurface.withOpacity(0.80), colorScheme.surface);
+    final Color snackBarColor =
+        theme.snackBarTheme.backgroundColor ?? defaultSnackBackgroundColor;
+    final Color snackForeground = theme.snackBarTheme.contentTextStyle?.color ??
+        (ThemeData.estimateBrightnessForColor(snackBarColor) == Brightness.light
+            ? Colors.black
+            : Colors.white);
+    //
     final Color textColor = theme.textTheme.titleMedium?.color ??
         (isDark ? Colors.white : Colors.black);
     final Color primTextColor = theme.primaryTextTheme.titleMedium?.color ??
@@ -251,9 +278,24 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: textButtonColor,
               ),
               ColorCard(
+                label: 'Segmented\nButton',
+                color: segmentedButtonColor,
+                textColor: segmentedButtonForegroundColor,
+              ),
+              ColorCard(
                 label: 'Toggle\nButtons',
                 color: toggleButtonsColor,
                 textColor: _onColor(toggleButtonsColor, background),
+              ),
+              ColorCard(
+                label: 'Floating\nAction\nButton',
+                color: floatingActionButtonColor,
+                textColor: onFloatingActionButtonColor,
+              ),
+              ColorCard(
+                label: 'Chip',
+                color: chipColor,
+                textColor: _onColor(chipColor, background),
               ),
               ColorCard(
                 label: 'Switch',
@@ -271,29 +313,19 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: _onColor(radioColor, background),
               ),
               ColorCard(
-                label: 'Floating\nAction\nButton',
-                color: floatingActionButtonColor,
-                textColor: onFloatingActionButtonColor,
-              ),
-              ColorCard(
                 label: 'Circle\nAvatar',
                 color: circleAvatarColor,
                 textColor: onCircleAvatarColor,
               ),
               ColorCard(
-                label: 'Chips',
-                color: chipColor,
-                textColor: _onColor(chipColor, background),
+                label: 'Tooltip',
+                color: tooltipColor,
+                textColor: _onColor(tooltipColor, background),
               ),
               ColorCard(
                 label: 'Input\nDecorator',
                 color: inputDecoratorColor,
                 textColor: _onColor(inputDecoratorColor, background),
-              ),
-              ColorCard(
-                label: 'Tooltip',
-                color: tooltipColor,
-                textColor: _onColor(tooltipColor, background),
               ),
               ColorCard(
                 label: 'AppBar',
@@ -309,16 +341,6 @@ class ShowSubThemeColors extends StatelessWidget {
                 label: 'TabBar\nIndicator',
                 color: theme.indicatorColor,
                 textColor: _onColor(theme.indicatorColor, background),
-              ),
-              ColorCard(
-                label: 'Dialog\nBackground',
-                color: dialogColor,
-                textColor: _onColor(dialogColor, background),
-              ),
-              ColorCard(
-                label: 'SnackBar\nBackground',
-                color: snackBarColor,
-                textColor: snackForeground,
               ),
               ColorCard(
                 label: 'Bottom\nNaviBar\nBackground',
@@ -361,6 +383,21 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: _onColor(navigationRailIndicatorColor, background),
               ),
               ColorCard(
+                label: 'Dialog\nBackground',
+                color: dialogColor,
+                textColor: _onColor(dialogColor, background),
+              ),
+              ColorCard(
+                label: 'SnackBar\nBackground',
+                color: snackBarColor,
+                textColor: snackForeground,
+              ),
+              ColorCard(
+                label: 'Card',
+                color: theme.cardColor,
+                textColor: colorScheme.onSurface,
+              ),
+              ColorCard(
                 label: 'Text\nTheme',
                 color: textColor,
                 textColor: _onColor(textColor, background),
@@ -369,11 +406,6 @@ class ShowSubThemeColors extends StatelessWidget {
                 label: 'PrimaryText\nTheme',
                 color: primTextColor,
                 textColor: _onColor(primTextColor, background),
-              ),
-              ColorCard(
-                label: 'Card',
-                color: theme.cardColor,
-                textColor: colorScheme.onSurface,
               ),
               ColorCard(
                 label: 'Disabled\nColor',
