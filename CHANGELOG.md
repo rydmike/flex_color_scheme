@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 22, 2024**
+**Sep 23, 2024**
 
 ### SUMMARY
 
@@ -43,15 +43,14 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
-* **TODO**: The `toScheme` method must be updated. It has not been touched yet!
-  * Interesting that theming works well without it, but OK we are not using it
-  since internally FCS passes along a full `ColorScheme` to raw constructor.
+* **STARTED**: Add the respect monochrome seed option.
+  * **DONE**: First finalize it in FSS.
+  * Not default in API, but make it default in Playground.
 
-* **TODO** Update the Switch adaptive iOS looks' OFF state color.
+* **TODO** Update the Switch adaptive iOS looks' OFF state color. 
+  * There are some minor deviations now. Flutter's iOS Switch has changed since I last dug up the colors for it.
 
-* **TODO**: Add the respect monochrome seed option. First finalize it in FSS. Not default in API, but make it default in Playground. 
-
-* **NOT STARTED**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
+* **TODO**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also introduced more breakage, review and fix them. 
   * Also with all new features, get package tests back to 100% coverage.
 
@@ -77,7 +76,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODO**
 
-- TODO: Seeded color option to respect monochrome seed. First finalize it in FSS. Not default in API, but make it default in Playground.
+* TODO: The `toScheme` method might need to be updated.
+  * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
 - TODO: InputDecorator: Platform adaptive radius.
 - TODO: InputDecorator: Playground: Default value info for padding props, depends on dense and M2/M3 mode and border type, complex.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
@@ -87,10 +87,10 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: Add Chip padding settings.
 - TODO: Add Chip font size settings.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
-- STARTED: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity?
+- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity?
   - To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
-- STARTED: Add some `SearchBar` theming features, What? Shape and elevation?
-- STARTED: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
+- **STARTED**: Add some `SearchBar` theming features, What? Shape and elevation?
+- **STARTED**: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
 - TODO: Add some **NEW** color schemes:
   - Add black-and-white greyscale prototyping theme to the `FlexScheme` enum and colors.
