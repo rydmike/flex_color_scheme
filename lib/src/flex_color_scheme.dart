@@ -2999,6 +2999,7 @@ class FlexColorScheme with Diagnosticable {
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
 
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
+      useMaterial3: useMaterial3,
       primary: effectiveColors.primary,
       primaryContainer: effectiveColors.primaryContainer,
       secondary: effectiveColors.secondary,
@@ -3006,13 +3007,7 @@ class FlexColorScheme with Diagnosticable {
       tertiary: effectiveColors.tertiary,
       tertiaryContainer: effectiveColors.tertiaryContainer,
       surface: inputSurface,
-      surfaceDim: surfaceSchemeColors.surfaceDim,
-      surfaceBright: surfaceSchemeColors.surfaceBright,
-      surfaceContainerLowest: surfaceSchemeColors.surfaceContainerLowest,
-      surfaceContainerLow: surfaceSchemeColors.surfaceContainerLow,
-      surfaceContainer: surfaceSchemeColors.surfaceContainer,
-      surfaceContainerHigh: surfaceSchemeColors.surfaceContainerHigh,
-      surfaceContainerHighest: surfaceSchemeColors.surfaceContainerHighest,
+      surfaceTint: blendColor,
       inverseSurface: surfaceSchemeColors.inverseSurface,
       error: effectiveColors.error!,
       errorContainer: effectiveColors.errorContainer,
@@ -3057,20 +3052,6 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant:
           seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
-      onSurfaceDim:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceBright:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerLowest:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerLow:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainer:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerHigh:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerHighest:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       primaryAlpha: alphaOnMain.primaryAlpha,
@@ -3237,9 +3218,10 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           //
-          outline: _outlineColor(Brightness.light, onColors.onSurface, 45),
-          outlineVariant:
-              _outlineColor(Brightness.light, onColors.onSurface, 75),
+          outline: _outlineColor(
+              Brightness.light, blendColor, alphaOnValue.surfaceAlpha),
+          outlineVariant: _outlineVariantColor(
+              Brightness.light, blendColor, alphaOnValue.surfaceAlpha),
           shadow: Colors.black,
           scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
@@ -5107,6 +5089,7 @@ class FlexColorScheme with Diagnosticable {
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
 
     final FlexSchemeOnColors onColors = FlexSchemeOnColors.from(
+      useMaterial3: useMaterial3,
       primary: effectiveColors.primary,
       primaryContainer: effectiveColors.primaryContainer,
       secondary: effectiveColors.secondary,
@@ -5114,14 +5097,7 @@ class FlexColorScheme with Diagnosticable {
       tertiary: effectiveColors.tertiary,
       tertiaryContainer: effectiveColors.tertiaryContainer,
       surface: inputSurface,
-      surfaceDim: surfaceSchemeColors.surfaceDim,
-      surfaceBright: surfaceSchemeColors.surfaceBright,
-      surfaceContainerLowest: surfaceSchemeColors.surfaceContainerLowest,
-      surfaceContainerLow: surfaceSchemeColors.surfaceContainerLow,
-      surfaceContainer: surfaceSchemeColors.surfaceContainer,
-      surfaceContainerHigh: surfaceSchemeColors.surfaceContainerHigh,
-      surfaceContainerHighest: surfaceSchemeColors.surfaceContainerHighest,
-      inverseSurface: surfaceSchemeColors.inverseSurface,
+      surfaceTint: blendColor,
       error: effectiveColors.error!,
       errorContainer: effectiveColors.errorContainer,
       onPrimary: onPrimary ??
@@ -5165,20 +5141,6 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant:
           seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
-      onSurfaceDim:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceBright:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerLowest:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerLow:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainer:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerHigh:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceContainerHighest:
-          onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
       onInverseSurface:
           seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       primaryAlpha: alphaOnMain.primaryAlpha,
@@ -5345,9 +5307,10 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           //
-          outline: _outlineColor(Brightness.dark, onColors.onSurface, 45),
-          outlineVariant:
-              _outlineColor(Brightness.dark, onColors.onSurface, 75),
+          outline: _outlineColor(
+              Brightness.dark, blendColor, alphaOnValue.surfaceAlpha),
+          outlineVariant: _outlineVariantColor(
+              Brightness.dark, blendColor, alphaOnValue.surfaceAlpha),
           shadow: Colors.black,
           scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
@@ -8313,8 +8276,8 @@ class FlexColorScheme with Diagnosticable {
           surface: effectiveSurfaceColor,
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
-          outline: _outlineColor(usedBrightness, onColors.onSurface, 45),
-          outlineVariant: _outlineColor(usedBrightness, onColors.onSurface, 75),
+          outline: _outlineColor(usedBrightness, usedPrimary, 0),
+          outlineVariant: _outlineVariantColor(usedBrightness, usedPrimary, 0),
           shadow: Colors.black,
           scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
@@ -8342,11 +8305,21 @@ class FlexColorScheme with Diagnosticable {
 
   /// FlexColorScheme default for outline color, when not using M3 seeds.
   static Color _outlineColor(
-      Brightness brightness, Color onBackground, int amount) {
+      Brightness brightness, Color blendColor, int alpha) {
     if (brightness == Brightness.light) {
-      return onBackground.lighten(amount);
+      return FlexColor.lightFlexOutline.blendAlpha(blendColor, alpha);
     } else {
-      return onBackground.darken(amount);
+      return FlexColor.darkFlexOutline.blendAlpha(blendColor, alpha);
+    }
+  }
+
+  /// FlexColorScheme default for outlineVariant color, when not using M3 seeds.
+  static Color _outlineVariantColor(
+      Brightness brightness, Color blendColor, int alpha) {
+    if (brightness == Brightness.light) {
+      return FlexColor.lightFlexOutlineVariant.blendAlpha(blendColor, alpha);
+    } else {
+      return FlexColor.darkFlexOutlineVariant.blendAlpha(blendColor, alpha);
     }
   }
 
