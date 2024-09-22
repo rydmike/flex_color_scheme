@@ -7162,7 +7162,8 @@ class FlexColorScheme with Diagnosticable {
       // TODO(rydmike): Monitor Flutter SDK deprecation of canvasColor.
       canvasColor: colorScheme.surface,
       // TODO(rydmike): Monitor Flutter SDK deprecation of cardColor.
-      cardColor: colorScheme.surface,
+      cardColor:
+          useMaterial3 ? colorScheme.surfaceContainerLow : colorScheme.surface,
       colorScheme: colorScheme,
       // TODO(rydmike): Monitor Flutter SDK deprecation of dialogBackgroundColor
       // If using dialog color not equal for ColorScheme.surface color, there
