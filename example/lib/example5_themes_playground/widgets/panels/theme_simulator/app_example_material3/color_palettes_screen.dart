@@ -401,6 +401,11 @@ class ColorSchemeView extends StatelessWidget {
               onColor: null,
             ),
             ColorChip(
+              label: 'outlineVariant',
+              color: colorScheme.outlineVariant,
+              onColor: null,
+            ),
+            ColorChip(
               label: 'shadow',
               color: colorScheme.shadow,
               onColor: null,
@@ -419,6 +424,11 @@ class ColorSchemeView extends StatelessWidget {
               label: 'inversePrimary',
               color: colorScheme.inversePrimary,
               onColor: colorScheme.primary,
+            ),
+            ColorChip(
+              label: 'scrim',
+              color: colorScheme.scrim,
+              onColor: null,
             ),
           ],
         ),
@@ -473,7 +483,9 @@ class ColorChip extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: <Widget>[
-            Expanded(child: Text(label, style: TextStyle(color: labelColor))),
+            Expanded(
+                child: Text(label,
+                    style: TextStyle(color: labelColor, fontSize: 11))),
           ],
         ),
       ),
