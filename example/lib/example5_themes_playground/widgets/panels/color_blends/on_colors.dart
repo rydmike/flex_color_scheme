@@ -15,6 +15,14 @@ class OnColors extends StatelessWidget {
 
   final ThemeController controller;
 
+  // Return true if the color is light, meaning it needs dark text for contrast.
+  bool _isLight(final Color color) =>
+      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
+
+  // On color used when a theme color property does not have a theme onColor.
+  Color _onColor(final Color color) =>
+      _isLight(color) ? Colors.black : Colors.white;
+
   @override
   Widget build(BuildContext context) {
     // Used to enable & disable color selection on the color boxes.
@@ -112,6 +120,85 @@ class OnColors extends StatelessWidget {
                           textColor: colorScheme.surfaceContainerHighest,
                           label: 'onSurface\u200BVariant',
                           tone: tones.onSurfaceVariantTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // InverseSurface colors presentation.
+          RepaintBoundary(
+            key: const ValueKey<String>('surf inverseSurface'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Material(
+                        color: colorScheme.onInverseSurface,
+                        child: ColorNameValue(
+                          key: ValueKey<String>('sur onInverseSurface '
+                              '${colorScheme.onInverseSurface}'),
+                          color: colorScheme.onInverseSurface,
+                          textColor: colorScheme.inverseSurface,
+                          label: 'onInverse\u200BSurface',
+                          tone: tones.onInverseSurfaceTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //
+          // Outline colors presentation.
+          RepaintBoundary(
+            key: const ValueKey<String>('outline'),
+            child: SizedBox(
+              width: boxWidth,
+              height: boxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Material(
+                        color: colorScheme.outline,
+                        child: ColorNameValue(
+                          key: ValueKey<String>(
+                              'cnv outline ${colorScheme.outline}'),
+                          color: colorScheme.outline,
+                          textColor: _onColor(colorScheme.outline),
+                          label: 'outline',
+                          tone: tones.outlineTone,
+                          showTone: showTones,
+                        ),
+                      ),
+                    ),
+                    const Divider(height: 1),
+                    Expanded(
+                      child: Material(
+                        color: colorScheme.outlineVariant,
+                        child: ColorNameValue(
+                          key: ValueKey<String>('cnv outlineVariant '
+                              '${colorScheme.outlineVariant}'),
+                          color: colorScheme.outlineVariant,
+                          textColor: _onColor(colorScheme.outlineVariant),
+                          label: 'outline\u200BVariant',
+                          tone: tones.outlineVariantTone,
                           showTone: showTones,
                         ),
                       ),
@@ -296,38 +383,6 @@ class OnColors extends StatelessWidget {
                           textColor: colorScheme.error,
                           label: 'onError',
                           tone: tones.onErrorTone,
-                          showTone: showTones,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          //
-          // InverseSurface colors presentation.
-          RepaintBoundary(
-            key: const ValueKey<String>('surf inversesurface'),
-            child: SizedBox(
-              width: boxWidth,
-              height: boxHeight,
-              child: Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Material(
-                        color: colorScheme.onInverseSurface,
-                        child: ColorNameValue(
-                          key: ValueKey<String>('sur onInverseSurface '
-                              '${colorScheme.onInverseSurface}'),
-                          color: colorScheme.onInverseSurface,
-                          textColor: colorScheme.inverseSurface,
-                          label: 'onInverse\u200BSurface',
-                          tone: tones.onInverseSurfaceTone,
                           showTone: showTones,
                         ),
                       ),
