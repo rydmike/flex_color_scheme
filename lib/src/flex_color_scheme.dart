@@ -7159,9 +7159,11 @@ class FlexColorScheme with Diagnosticable {
       // THEME DATA COLORS
       //
       brightness: colorScheme.brightness,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of canvasColor.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of legacy canvasColor.
       canvasColor: colorScheme.surface,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of cardColor.
+      // TODO(rydmike): Monitor Flutter SDK deprecation of legacy cardColor.
+      // In V8 we use surfaceContainerLow in M3 mode so it matches new cardTheme
+      // default after Flutter 3.22.0.
       cardColor:
           useMaterial3 ? colorScheme.surfaceContainerLow : colorScheme.surface,
       colorScheme: colorScheme,
