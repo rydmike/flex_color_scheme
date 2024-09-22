@@ -114,21 +114,6 @@ class SchemeColors extends StatelessWidget {
       );
     }
 
-    // TODO(rydmike): Removed tone hover indication feature 16.3.2023.
-    // For some reason tone hover feature started causing issues in WEB release
-    // mode builds, but only in WEB release mode on both SKIA and HTML. No idea
-    // why that happens only on web release mode and not in its debug mode or
-    // any mode VM mode build. JS compiler optimization bug in release mode
-    // is my  suspected cause.
-    //
-    // Removal of this feature has removed commented code in:
-    // - theme_controller.dart
-    // - scheme_colors.dart
-    // - show_tonal_palette.dart
-    // - color_scheme_settings.dart
-    // ----- Commented hover code are in all the MouseRegion's below
-    //       The MouseRegion's are still there, maybe remove them as well.
-
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains the ambient themed border radius.
     return Theme(
@@ -145,6 +130,14 @@ class SchemeColors extends StatelessWidget {
         spacing: 6,
         runSpacing: 6,
         children: <Widget>[
+          // TODO(rydmike): Refactor RepaintBoundary branch to a StatelessWidget
+          //  This represents the most complex version of this widget type,
+          //  it should also work for the simpler ones used on ColorBlends and
+          //  InputColors. The resulting widget will need a lot of props where
+          //  many can optional, but at least it will get flatter and simpler
+          //  to maintain. This is a classic lazy copy-paste job with code debt,
+          //  that should be refactored.
+
           //
           // Primary colors presentation
           RepaintBoundary(
