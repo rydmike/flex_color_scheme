@@ -417,6 +417,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Updated the official Material-3 demo app in the Theme Simulator to a version with the same look as the latest official version. The updated version now also uses the demo's new Sliver-based cached scrolling. The version is still a fork, with some tweaks to make it work when embedded into the Playground simulator and getting its theme from the Playground and not inside the demo app. The fork also has a denser two-column layout with different breakpoints. This was done so that we in **portrait mode** can get two columns with a `NavigationRail` already on iPad Pro 11" and the expanded Rail on iPad Pro 12.9".
 
+- In the *ColorScheme* panel, we brought back the ColorScheme color hover that highlights its color source tone in the Tonal Palette above. This feature existed before, but started causing issues on WEB builds and was removed 16.3.2023. It has now been brought back, and we will test if it works better now. It is a nice feature to see where the color comes from in the palette.
+
 **FIX**
 
 - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.

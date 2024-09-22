@@ -33,17 +33,17 @@ class TonalPaletteColors extends StatelessWidget {
   /// Type of palette displayed.
   final FlexPaletteType paletteType;
 
-  String _toneLabel(int index) {
-    return paletteType == FlexPaletteType.common
-        ? FlexTonalPalette.commonTones[index].toString()
-        : FlexTonalPalette.extendedTones[index].toString();
-  }
+  String _toneLabel(int index) => paletteType == FlexPaletteType.common
+      ? FlexTonalPalette.commonTones[index].toString()
+      : FlexTonalPalette.extendedTones[index].toString();
 
-  static Color _onColor(Color color) {
-    return ThemeData.estimateBrightnessForColor(color) == Brightness.light
-        ? Colors.black
-        : Colors.white;
-  }
+  static Color _onColor(Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light
+          ? Colors.black
+          : Colors.white;
+
+  static bool _isLight(Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +86,11 @@ class TonalPaletteColors extends StatelessWidget {
                         Center(
                           child: Icon(
                             Icons.circle,
-                            size: height,
+                            size: height - 6,
                             color: _onColor(
                               Color(tonalPalette[i]),
-                            ).withAlpha(0x33),
+                            ).withAlpha(
+                                _isLight(Color(tonalPalette[i])) ? 0x33 : 0x66),
                           ),
                         ),
                     ],
