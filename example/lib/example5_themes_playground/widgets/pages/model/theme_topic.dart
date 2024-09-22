@@ -243,7 +243,7 @@ const List<Topic> themeTopics = <Topic>[
   ),
   Topic(
     group: TopicGroup.colors,
-    heading: 'Color Blends',
+    heading: 'Surface Color Blends',
     buttonLabel: 'Color\nBlends',
     icon: Icons.invert_colors_outlined,
     info: 'Already Material-2 design used surfaces with primary color '
@@ -251,9 +251,14 @@ const List<Topic> themeTopics = <Topic>[
         'provides this for both light and dark mode surfaces and allows you '
         'to tune it to your preferences and design target.\n'
         '\n'
-        'Material-3 design has a new color system where a hint of primary '
+        'Material-3 design has a color system where a hint of primary '
         'color is also used on surfaces. It is done via its neutral tonal '
         'palettes, that are shifted slightly towards the primary color.\n'
+        '\n'
+        'FlexColorScheme provided surface color blends before Material-3 was '
+        'released. It is now useful as a way to make surface colors for '
+        'all the colors in a Material-3 ColorScheme, without using seed '
+        'generated ColorSchemes, by using different blend modes and levels.\n'
         '\n'
         'When using Material-3 seeded ColorSchemes, set blend level to zero to '
         'get the pure Material-3 design. With higher blend level value, you '
