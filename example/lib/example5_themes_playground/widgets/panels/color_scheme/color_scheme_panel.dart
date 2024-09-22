@@ -203,10 +203,16 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 'mode. This is a new Material-3 spec standard. It is more '
                 'color expressive, but reduces contrast.\n'
                 '\n'
-                'This modifier only impacts scheme variants where the '
-                'container on colors uses tone 10. For scheme variants with '
-                'an intentionally custom tone for onColors for containers, '
-                'this setting has no no impact.\n'
+                'This modifier only impacts light scheme variants where the '
+                'container on colors use tone 10. For scheme variants with '
+                'an intentionally custom tone for onColors on containers, '
+                'this setting has no impact. Such variants are:\n'
+                ' - Fidelity\n'
+                ' - Monochrome\n'
+                ' - Content\n'
+                ' - Ultra Contrast\n'
+                ' - Candy pop\n'
+                ' - Chroma\n'
                 '\n'
                 "This feature is not yet used by Flutter's "
                 'ColorScheme.fromSeed produced ColorSchemes, but will be when '
@@ -219,7 +225,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 'For MCU seed generated schemes, this only has any impact when '
                 'contrast level is at the default value (0), normal contrast.\n'
                 '\n'
-                'The FFS seed generated schemes, the tones modifier '
+                'When using FFS seed generated schemes, the tones modifier '
                 '"B&W main onColors" will override this setting.\n',
               ),
               value: widget.controller.expressiveOnContainer,
