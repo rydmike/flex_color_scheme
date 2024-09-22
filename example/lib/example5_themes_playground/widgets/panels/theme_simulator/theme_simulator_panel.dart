@@ -77,7 +77,7 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
     final Color iconColor = theme.colorScheme.primary;
     // Paddings for the two column control layouts.
     const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
+        EdgeInsetsDirectional.only(start: 16, end: 6);
 
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
@@ -108,6 +108,7 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
                 ],
               ),
             ),
+            const SizedBox(height: 4),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -160,27 +161,24 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
                 ),
                 const SizedBox(width: 8),
                 const Padding(
-                  padding: EdgeInsets.only(top: 18.0),
+                  padding: EdgeInsets.only(top: 14.0),
                   child: Text('Zoom'),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Slider(
-                      min: 400,
-                      max: 1600,
-                      divisions: 100,
-                      label: widget.controller.deviceSize.toStringAsFixed(0),
-                      value: widget.controller.deviceSize,
-                      onChanged: widget.controller.setDeviceSize,
-                    ),
+                  child: Slider(
+                    min: 400,
+                    max: 1600,
+                    divisions: 100,
+                    label: widget.controller.deviceSize.toStringAsFixed(0),
+                    value: widget.controller.deviceSize,
+                    onChanged: widget.controller.setDeviceSize,
                   ),
                 ),
               ],
             ),
             Card(
-              margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+              margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
               elevation: 0,
               color: theme.colorScheme.surfaceContainerHighest,
               child: ConstrainedBox(
