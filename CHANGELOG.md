@@ -82,8 +82,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: InputDecorator: Playground: Default value info for padding props, depends on dense and M2/M3 mode and border type, complex.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 - TODO: Playground: Clean up some UI, consider adding more two column controls where it makes sense to make it more compact.
-- TODO: Playground: Correct the Chip's default labels
-- TODO: The Chip's default M3 paddings are now wrong, why?
+- TODO: Playground: Correct the Chip's default label info.
+- TODO: The Chip's default M3 paddings are wrong, fix!
 - TODO: Add Chip padding settings.
 - TODO: Add Chip font size settings.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
@@ -435,7 +435,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - Maybe: Chip padding, Font size, Chip outline
 - **TextField settings panel**. Check that all new features are documented in log.
 - **TextField** settings panel, add some new pre-configured options with optional configuration examples of the input decorator.
-- Audit and fix the correctness of the effective component colors presentation in the **Effective Colors** panel.
 - Figure out the default padding logics for the **TextField** settings panel. It should show the same as the Flutter SDK default, this is not yet included in the presentation logic.
 
 **ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
