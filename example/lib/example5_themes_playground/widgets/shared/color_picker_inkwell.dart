@@ -282,6 +282,8 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       showColorName: true,
       showColorCode: true,
       colorCodeHasColor: true,
+      focusedEditHasNoColor: true,
+      showEditIconButton: true,
       customColorSwatchesAndNames: isLight
           ? ColorPickerInkWellDialog._lightSwatches
           : ColorPickerInkWellDialog._darkSwatches,
