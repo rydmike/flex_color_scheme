@@ -87,6 +87,7 @@ class ShowTonalPalette extends StatelessWidget {
             : FlexSchemeVariant.monochrome,
         contrastLevel: themController.dynamicContrastLevel,
         useExpressiveOnContainerColors: themController.expressiveOnContainer,
+        respectMonochromeSeed: !themController.useLegacyMonochromeSeedBehavior,
       );
 
       // Assign the tonals for the schemes to the int lists using tone indexes
@@ -127,6 +128,7 @@ class ShowTonalPalette extends StatelessWidget {
         neutralChroma: useMonochrome ? 0 : tones.neutralChroma,
         neutralVariantChroma: useMonochrome ? 0 : tones.neutralVariantChroma,
         paletteType: FlexPaletteType.extended,
+        respectMonochromeSeed: !themController.useLegacyMonochromeSeedBehavior,
       );
 
       // Assign the tonals for the schemes to the int lists.

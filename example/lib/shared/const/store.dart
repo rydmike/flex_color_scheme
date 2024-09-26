@@ -550,6 +550,12 @@ class Store {
   // Default value for the expressiveOnContainer, also to reset settings.
   static const bool defaultExpressiveOnContainer = false;
 
+  // Key used to read and save the useLegacyMonochromeSeedBehavior value.
+  static const String keyUseLegacyMonochromeSeedBehavior =
+      'useLegacyMonochromeSeedBehavior';
+  // Default value for useLegacyMonochromeSeedBehavior, also to reset settings.
+  static const bool defaultUseLegacyMonochromeSeedBehavior = false;
+
   // Key used to read and save the dynamicContrastLevel value.
   static const String keyDynamicContrastLevel = 'dynamicContrastLevel';
   // Default value for the expressiveOnContainer, also to reset settings.

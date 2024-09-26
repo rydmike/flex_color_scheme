@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 26, 2024**
+**Sep 27, 2024**
 
 ### SUMMARY
 
@@ -42,10 +42,6 @@ FCS as before, also have its own even configurable `FlexTones` way of making see
 FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. 
 
 **CRITICAL TODOS**
-
-* **STARTED**: Add the respect monochrome seed option.
-  * **DONE**: First finalize it in FSS.
-  * Not default in API, but make it default in Playground.
 
 * **TODO**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also introduced more breakage, review and fix them. 
@@ -194,7 +190,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added all the new surface colors in Flutter 3.22 to `FlexSchemeSurfaceColors`.
 - Added all the new on colors in Flutter 3.22 to `FlexSchemeOnColors`.
  
-- The `FlexKeyColor` class got two new properties, `contrastLevel` and `useExpressiveOnContainerColors`. They are used to control seed generation results when using MCU based dynamic color scheme `variant`s. 
+- The `FlexKeyColor` class got three new properties, `contrastLevel`, `useExpressiveOnContainerColors` and `useLegacyMonochromeSeedBehavior`. They are used to control seed generation results.
 
   1) The `contrastLevel` is used to control the contrast level of MCU generated scheme colors. The `contrastLevel` parameter indicates the contrast level between color pairs, such as `primary` and `onPrimary`. The value 0.0 is the default, standard contrast; -1.0 is the lowest; 1.0 is the highest. From the Material-3 Design guideline, the standard, medium and high contrast options correspond to values 0.0, 0.5 and 1.0 respectively. 
       - The `contrastLevel` property is only available when seed generating a `ColorScheme` using `FlexSeedScheme`'s `SeedColorScheme.fromSeeds` when a scheme `variant` is used where its `FlexSchemeVariant.value`, `isFlutterScheme` is true. This set corresponds to all the `DynamicSchemeVariant`s available in the Flutter SDK.
@@ -207,6 +203,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
      - Setting the `useExpressiveOnContainerColors` to `true` will make the colors use the new expressive tone. The expressive tone spec is not yet used in Flutter SDK, but is in the Material-3 design spec and also in MCU v 0.12.0. When this change lands in stable Flutter, it will be made **ON** by default in FCS too. You will still be able to opt out of using it. Flutter SDK and MCU will not contain such an opt-out feature.
      - The new **on** color tones for containers in light mode make them more color expressive, but they also reduce their contrast level and accessibility. We recommend keeping them at the higher contrast level, by setting `useExpressiveOnContainerColors` to `false`. With it set to false, you will also keep this preference when the Flutter SDK defaults to using the expressive tones. 
 
+  3) The boolean `useLegacyMonochromeSeedBehavior` is used for enabling the legacy behavior for monochrome seed colors
+     - With Flutter SDK and also FCS versions before 8.0.0, using a monochrome seed color or white color, resulted in a tonal palette with cyan color tones. Whereas a black seed color resulted in red like color tones. This is not very intuitive and not really expected or desired when using monochrome seed colors. In version 8.0.0 and later of FCS any monochrome RGB input value will result in the creation of a greyscale tonal palette for the palette using the monochrome seed color. An RGB monochrome value is one where Red, Green and Blue values are all equal.
+     - If you require the old style seed result for monochrome seed colors, set `useLegacyMonochromeSeedBehavior` to `true`.
+     - Defaults to `false`.
+     - Under the hood this setting is passed to `respectMonochromeSeed` in `SeedColorScheme.fromSeeds` in FlexSeedScheme's internal MCU fork, and sets it `!useLegacyMonochromeSeedBehavior`. In FSS this feature is opt-in and recommended to be used. Here, in FCS this setting is opt-out if not desired, and it is strongly recommended to use the new behavior. When using `useLegacyMonochromeSeedBehavior` with
+       > When using `useLegacyMonochromeSeedBehavior` with `DynamicSchemeVariant` variants `fidelity` or `content`, for some monochrome input colors they produce `primaryContainer` and `onPrimaryContainer` as well as `tertiaryContainer` and `onTertiaryContainer` color pairs, with low contrast. Consider using some other scheme variants with monochrome seed colors. All others work well with any monochrome seed color. This is just how the MCU `DynamicScheme`s `SchemeContent` and `SchemeFidelity` are defined in MCU. They also produce fairly low contrast for these color pairs with very dark seed colors. This behavior with MCU's `SchemeContent` and `SchemeFidelity` could be fixed in FlexSeedScheme's internal MCU fork, but we want to keep the result of these schemes consistent with MCU. 
 
 
 - Added TextStyles for `FlexSubThemesData` so that:
@@ -326,13 +328,14 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
 
 
-- To the **ColorScheme** settings panel added four new options:
-  - Contrast level control for MCU based scheme variants. This feature is equivalent to the FSS based scheme variant contrast level control. It is als available in the Flutter master channel as `contrastLevel` property in `ColorScheme.fromSeed`. It is used to control the contrast level of the generated scheme colors. It will most likely land in the next stable Flutter release after 3.24. With FCS V8 you can use it already now.
-  - Added a dropdown that allows choosing between three different variants for the  `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors, when a seed generated `ColorScheme` is **NOT** being used.
-  - When using FSS based seed generated color schemes, you can keep the standard Material-3 based tones for the `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors to the Material-3 design specified values 90, 10, 80, 30 **or** and or opt-in on an alternative set 92, 6, 84, 12 that have higher contrast. 
-  - The Material design spec for the tones used by the colors `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone **10** to **30** for **LIGHT** theme mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024).
-    - A flag was added where you can opt in on using them already now in FCS. It is not on by default. When it lands in stable Flutter, it will be made **ON** by default, but you will still be able to opt out of using it. Flutter SDK and MCU will not contain such an opt-out feature. The new **on** colors for containers in light mode, make them more color expressive, but it also reduces their contrast level and accessibility. We prefer them to have higher contrast.   
- 
+- The **ColorScheme** settings panel got **five** new settings:
+  1) **Contrast level** slider control for MCU based scheme variants. This feature is equivalent to the FSS based scheme variant contrast level control. It is als available in the Flutter master channel as `contrastLevel` property in `ColorScheme.fromSeed`. It is used to control the contrast level of the generated scheme colors. It will most likely land in the next stable Flutter release after 3.24. With FCS V8 you can use it already now.
+  2) A dropdown for **Fixed colors**, where you can choose between three different variants for the  `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors, when a seed generated `ColorScheme` is **NOT** being used.
+  3) A Switch for **Higher contrast fixed and fixedDim** colors. When using FSS based seed generated color schemes, you can keep the standard Material-3 based tones for the `fixed`, `onFixed`, `fixedDim` and `onFixedVariant` colors to the Material-3 design specified values 90, 10, 80, 30 **or** and or opt-in on an alternative set 92, 6, 84, 12 that have higher contrast. 
+  4) A Switch for **Expressive LIGHT containers**. The Material design spec for the tones used by the colors `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` have changed from tone **10** to **30** for **LIGHT** theme mode. This change will land in Flutter when the Material Color Utilities (MCU) package is updated to at least 0.12.0. This has not been done even in master (Sep 3, 2024).
+     - A toggle was added where you can opt in on using them already now in FCS. It is not ON by default. When it lands in stable Flutter, it will be made **ON** by default, but you will still be able to opt out of using it. Flutter SDK and MCU will not contain such an opt-out feature. The new **on** colors for containers in light mode, make them more color expressive, but it also reduces their contrast level and accessibility. We prefer them to have higher contrast.
+  5) A switch for using **Legacy monochrome seed behavior**. See package changes for an explanation of this feature. It is not recommended to turn this ON, but it is there if you need it for legacy seed behavior with monochrome input colors. The new default behavior for monochrome seed colors is much better, more intuitive and what it should always have been.
+
 
 - Added customizable error colors to the custom scheme. Only available when **Use Material3 error colors** setting is **OFF**, when using the custom scheme on **Input Colors** and **ColorScheme** settings panels.
 
@@ -341,7 +344,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added code gen for custom error colors.
 
 
-- Added **ColorScheme** code gen for all the new `ColorScheme` colors introduced in Flutter 3.22.
+- Added **ColorScheme** code generation for all the new `ColorScheme` colors introduced in Flutter 3.22.
 - Added showing the new Flutter 3.22 `ColorScheme` colors in the **Effective Colors** panel.
 - Added showing the new Flutter 3.22 `ColorScheme` colors in the **ColorScheme** settings panel.
 - Added showing the new Flutter 3.22 `ColorScheme` surface colors in the **Color Blends** settings panel.
