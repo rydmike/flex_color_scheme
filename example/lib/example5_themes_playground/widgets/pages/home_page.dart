@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
         mediaSize.height < App.phoneHeightBreakpoint;
     final bool isBigDesktop =
         mediaSize.width > App.mediumDesktopWidthBreakpoint;
-    final String materialType = theme.useMaterial3 ? 'M3 ' : 'M2 ';
+    // final String materialType = theme.useMaterial3 ? 'M3 ' : 'M2 ';
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
@@ -132,10 +132,8 @@ class _HomePageState extends State<HomePage> {
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: App.desktopWidthBreakpoint,
         title: isPhone
-            ? Text('$materialType '
-                '${AppColor.schemes[widget.controller.schemeIndex].name}')
-            : Text('${App.title(context)} '
-                '$materialType'
+            ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
+            : Text('${App.title(context)} - '
                 '${AppColor.schemes[widget.controller.schemeIndex].name}'),
         menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(

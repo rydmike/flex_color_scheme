@@ -57,7 +57,7 @@ class ThemeColorSelector extends StatelessWidget {
                         dense: isPhone,
                         title: isNarrow
                             ? const Text('M3')
-                            : const Text('Use Material3'),
+                            : const Text('Use Material-3'),
                         value: controller.useMaterial3,
                         onChanged: controller.setUseMaterial3,
                       ),
