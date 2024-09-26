@@ -80,8 +80,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: Add Chip padding settings.
 - TODO: Add Chip font size settings.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
-- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity?
-  - To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
+- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity? To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
 - **STARTED**: Add some `SearchBar` theming features, What? Shape and elevation?
 - **STARTED**: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
