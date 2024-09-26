@@ -255,6 +255,9 @@ class ThemeController with ChangeNotifier {
         Store.keyHigherContrastFixed, Store.defaultHigherContrastFixed);
     _expressiveOnContainer = await _themeService.load(
         Store.keyExpressiveOnContainer, Store.defaultExpressiveOnContainer);
+    _useLegacyMonochromeSeedBehavior = await _themeService.load(
+        Store.keyUseLegacyMonochromeSeedBehavior,
+        Store.defaultUseLegacyMonochromeSeedBehavior);
     _dynamicContrastLevel = await _themeService.load(
         Store.keyDynamicContrastLevel, Store.defaultDynamicContrastLevel);
     //
@@ -1039,6 +1042,8 @@ class ThemeController with ChangeNotifier {
     //
     setHigherContrastFixed(Store.defaultHigherContrastFixed, false);
     setExpressiveOnContainer(Store.defaultExpressiveOnContainer, false);
+    setUseLegacyMonochromeSeedBehavior(
+        Store.defaultUseLegacyMonochromeSeedBehavior, false);
     setDynamicContrastLevel(Store.defaultDynamicContrastLevel, false);
     //
     // InputDecorator SETTINGS.
@@ -3162,6 +3167,16 @@ class ThemeController with ChangeNotifier {
     if (value == null) return;
     if (value == _expressiveOnContainer) return;
     _expressiveOnContainer = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyExpressiveOnContainer, value));
+  }
+
+  late bool _useLegacyMonochromeSeedBehavior;
+  bool get useLegacyMonochromeSeedBehavior => _useLegacyMonochromeSeedBehavior;
+  void setUseLegacyMonochromeSeedBehavior(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _useLegacyMonochromeSeedBehavior) return;
+    _useLegacyMonochromeSeedBehavior = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyExpressiveOnContainer, value));
   }

@@ -539,6 +539,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
       //
       contrastLevel: controller.dynamicContrastLevel,
       useExpressiveOnContainerColors: controller.expressiveOnContainer,
+      useLegacyMonochromeSeedBehavior:
+          controller.useLegacyMonochromeSeedBehavior,
     ),
     // Use Material3 error colors with Material2 themes.
     useMaterial3ErrorColors: controller.useM3ErrorColors,

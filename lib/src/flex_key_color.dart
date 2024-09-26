@@ -134,6 +134,7 @@ class FlexKeyColors with Diagnosticable {
     //
     this.contrastLevel = 0.0,
     this.useExpressiveOnContainerColors,
+    this.useLegacyMonochromeSeedBehavior,
   });
 
   /// Use a seed generated [ColorScheme] based on key colors.
@@ -490,6 +491,46 @@ class FlexKeyColors with Diagnosticable {
   /// defaults to using the expressive tones.
   final bool? useExpressiveOnContainerColors;
 
+  /// Set this to `true` to use the legacy behavior for monochrome seed colors.
+  ///
+  /// With Flutter SDK and also FCS versions before 8.0.0, using a monochrome
+  /// seed color or white color, resulted in a tonal palette with cyan color
+  /// tones. Whereas a black seed color resulted in red like color tones. This
+  /// is not very intuitive and not really expected or desired when using
+  /// monochrome seed colors.
+  ///
+  /// In version 8.0.0 and later of FCS any monochrome RGB input value will
+  /// result in the creation of a greyscale tonal palette for the palette
+  /// using the monochrome seed color. An RGB monochrome value is one
+  /// where Red, Green and Blue values are all equal.
+  ///
+  /// If you require the old style seed result for monochrome seed colors,
+  /// set [useLegacyMonochromeSeedBehavior] to `true.
+  ///
+  /// Defaults to `false`.
+  ///
+  /// Under the hood this setting is passed to `respectMonochromeSeed` in
+  /// `SeedColorScheme.fromSeeds` in FlexSeedScheme's internal MCU fork, and
+  /// setting it to ![useLegacyMonochromeSeedBehavior]. In FSS this feature is
+  /// opt-in and recommended to be used. Here, in FCS this setting is opt-out
+  /// if not desired and it is strongly recommended to use the new behavior.
+  ///
+  /// **NOTE:**
+  ///
+  /// When using `useLegacyMonochromeSeedBehavior` with
+  /// `DynamicSchemeVariant` variants `fidelity` or `content`, for some
+  /// monochrome input colors they produce `primaryContainer` and
+  /// `onPrimaryContainer` as well as `tertiaryContainer` and
+  /// `onTertiaryContainer` color pairs, with low contrast. Consider using
+  /// some other scheme variants with monochrome seed colors. All others work
+  /// well with any monochrome seed color. This is just how the MCU
+  /// `DynamicScheme`s `SchemeContent` and `SchemeFidelity` are defined in MCU.
+  /// They also produce fairly low contrast for these color pairs with very
+  /// dark seed colors. This behavior with MCU's `SchemeContent` and
+  /// `SchemeFidelity` could be fixed in FlexSeedScheme's internal MCU fork,
+  /// but we want to keep the result of these schemes consistent with MCU.
+  final bool? useLegacyMonochromeSeedBehavior;
+
   /// Copy the object with one or more provided properties changed.
   FlexKeyColors copyWith({
     final bool? useKeyColors,
@@ -515,6 +556,7 @@ class FlexKeyColors with Diagnosticable {
     //
     final double? contrastLevel,
     final bool? useExpressiveOnContainerColors,
+    final bool? useLegacyMonochromeSeedBehavior,
   }) {
     return FlexKeyColors(
       useKeyColors: useKeyColors ?? this.useKeyColors,
@@ -543,6 +585,9 @@ class FlexKeyColors with Diagnosticable {
       contrastLevel: contrastLevel ?? this.contrastLevel,
       useExpressiveOnContainerColors:
           useExpressiveOnContainerColors ?? this.useExpressiveOnContainerColors,
+      useLegacyMonochromeSeedBehavior: useLegacyMonochromeSeedBehavior ??
+          this.useLegacyMonochromeSeedBehavior,
+      //
     );
   }
 
@@ -574,7 +619,10 @@ class FlexKeyColors with Diagnosticable {
         other.keepErrorContainer == keepErrorContainer &&
         //
         other.contrastLevel == contrastLevel &&
-        other.useExpressiveOnContainerColors == useExpressiveOnContainerColors;
+        other.useExpressiveOnContainerColors ==
+            useExpressiveOnContainerColors &&
+        other.useLegacyMonochromeSeedBehavior ==
+            useLegacyMonochromeSeedBehavior;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -603,6 +651,7 @@ class FlexKeyColors with Diagnosticable {
         //
         contrastLevel,
         useExpressiveOnContainerColors,
+        useLegacyMonochromeSeedBehavior,
       );
 
   /// Flutter debug properties override, includes toString.
@@ -637,5 +686,7 @@ class FlexKeyColors with Diagnosticable {
     properties.add(DiagnosticsProperty<double>('contrastLevel', contrastLevel));
     properties.add(DiagnosticsProperty<bool>(
         'useExpressiveOnContainerColors', useExpressiveOnContainerColors));
+    properties.add(DiagnosticsProperty<bool>(
+        'useLegacyMonochromeSeedBehavior', useLegacyMonochromeSeedBehavior));
   }
 }

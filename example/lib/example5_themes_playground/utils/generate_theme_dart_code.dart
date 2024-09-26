@@ -1857,6 +1857,11 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    useExpressiveOnContainerColors: ${controller.expressiveOnContainer},\n'
       : '';
 
+  final String useLegacyMonochromeSeedBehavior = controller
+          .useLegacyMonochromeSeedBehavior
+      ? '    useLegacyMonochromeSeedBehavior: ${controller.useLegacyMonochromeSeedBehavior},\n'
+      : '';
+
   String useKeyColorsLight = controller.useKeyColors
       ? '  keyColors: const FlexKeyColors(\n'
           '$useSecondary'
@@ -1872,6 +1877,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepErrorContainer'
           '$contrastLevel'
           '$useExpressiveOnContainerColors'
+          '$useLegacyMonochromeSeedBehavior'
           '  ),\n'
       : '';
   String useKeyColorsDark = controller.useKeyColors
@@ -1888,6 +1894,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$keepDarkTertiaryContainer'
           '$keepDarkErrorContainer'
           '$contrastLevel'
+          '$useLegacyMonochromeSeedBehavior'
           '  ),\n'
       : '';
   // Make a prettier version of the constructor if that is all we got.

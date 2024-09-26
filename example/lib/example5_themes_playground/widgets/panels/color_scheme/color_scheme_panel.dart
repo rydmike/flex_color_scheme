@@ -193,44 +193,84 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 style: TextStyle(fontSize: 13),
               ),
             ),
-            SwitchListTileReveal(
-              dense: true,
-              enabled: widget.controller.useFlexColorScheme &&
-                  widget.controller.useKeyColors,
-              title: const Text('Expressive containers in LIGHT mode'),
-              subtitleReveal: const Text(
-                'Use tone 30 instead of 10 for onColors on containers in light '
-                'mode. This is a new Material-3 spec standard. It is more '
-                'color expressive, but reduces contrast.\n'
-                '\n'
-                'This modifier only impacts light scheme variants where the '
-                'container on colors use tone 10. For scheme variants with '
-                'an intentionally custom tone for onColors on containers, '
-                'this setting has no impact. Such variants are:\n'
-                ' - Fidelity\n'
-                ' - Monochrome\n'
-                ' - Content\n'
-                ' - Ultra Contrast\n'
-                ' - Candy pop\n'
-                ' - Chroma\n'
-                '\n'
-                "This feature is not yet used by Flutter's "
-                'ColorScheme.fromSeed produced ColorSchemes, but will be when '
-                'Flutter upgrades to Material Color Utilities (MCU) 0.12.0. '
-                'You can opt in on using it already now, or decide not to '
-                'use it. With FSS you will be able to do so, even after it '
-                'becomes a forced default and the only '
-                "option in Flutter's ColorScheme.fromSeed.\n"
-                '\n'
-                'For MCU seed generated schemes, this only has any impact when '
-                'contrast level is at the default value (0), normal contrast.\n'
-                '\n'
-                'When using FFS seed generated schemes, the tones modifier '
-                '"B&W main onColors" will override this setting.\n',
-              ),
-              value: widget.controller.expressiveOnContainer,
-              onChanged: widget.controller.setExpressiveOnContainer,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: SwitchListTileReveal(
+                    contentPadding: paddingStartColumn,
+                    dense: true,
+                    enabled: widget.controller.useFlexColorScheme &&
+                        widget.controller.useKeyColors,
+                    title: const Text('Expressive LIGHT containers'),
+                    subtitleReveal: const Text(
+                      'Use tone 30 instead of 10 for onColors on containers in '
+                      'light mode. This is a new Material-3 spec standard. It '
+                      'is more color expressive, but reduces contrast.\n'
+                      '\n'
+                      'This modifier only impacts light scheme variants where '
+                      'the container on colors use tone 10. For scheme '
+                      'variants with an intentionally custom tone for onColors '
+                      'on containers, this setting has no impact. Such '
+                      'variants are:\n'
+                      ' - Fidelity\n'
+                      ' - Monochrome\n'
+                      ' - Content\n'
+                      ' - Ultra Contrast\n'
+                      ' - Candy pop\n'
+                      ' - Chroma\n'
+                      '\n'
+                      "This feature is not yet used by Flutter's "
+                      'ColorScheme.fromSeed produced ColorSchemes, but will be '
+                      'when Flutter upgrades to Material Color Utilities (MCU) '
+                      '0.12.0. You can opt in on using it already now, or '
+                      'decide not to use it. With FSS you will be able to do '
+                      'so, even after it becomes a forced default and the only '
+                      "option in Flutter's ColorScheme.fromSeed.\n"
+                      '\n'
+                      'For MCU seed generated schemes, this only has any '
+                      'impact when contrast level is at the default value (0), '
+                      'normal contrast.\n'
+                      '\n'
+                      'When using FFS seed generated schemes, the tones '
+                      'modifier "B&W main onColors" will override this '
+                      'setting.\n',
+                    ),
+                    value: widget.controller.expressiveOnContainer,
+                    onChanged: widget.controller.setExpressiveOnContainer,
+                  ),
+                ),
+                Expanded(
+                  child: SwitchListTileReveal(
+                    contentPadding: paddingEndColumn,
+                    dense: true,
+                    enabled: widget.controller.useFlexColorScheme &&
+                        widget.controller.useKeyColors,
+                    title: const Text('Legacy monochrome seed'),
+                    subtitleReveal: const Text(
+                      'With Flutter and also FCS versions before V8, using a '
+                      'monochrome seed color or white color, resulted in a '
+                      'tonal palette with cyan color tones. Whereas a black '
+                      'seed color resulted in red like color tones. This is '
+                      'not very intuitive and not really expected or desired '
+                      'when using monochrome seed colors.\n'
+                      '\n'
+                      'In V8 and later of FCS any monochrome RGB input value '
+                      'will result in the creation of a greyscale tonal '
+                      'palette for the palette using the monochrome seed '
+                      'color. An RGB monochrome value is one where Red, Green '
+                      'and Blue values are all equal. If you need the legacy '
+                      'style seed result for monochrome seed '
+                      'colors, then turn ON this setting.\n',
+                    ),
+                    value: widget.controller.useLegacyMonochromeSeedBehavior,
+                    onChanged:
+                        widget.controller.setUseLegacyMonochromeSeedBehavior,
+                  ),
+                ),
+              ],
             ),
+
             const Divider(height: 1),
             ListTileReveal(
               dense: true,
