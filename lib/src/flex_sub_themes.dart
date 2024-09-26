@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6810,6 +6812,11 @@ sealed class FlexSubThemes {
   }) {
     final bool useM3 = useMaterial3 ?? true;
 
+    // Currently only supporting normal contrast color for the mock
+    // adaptive Material themed like iOS Switch. We would need a context
+    // passed in to get hih contrast and elevated to resolve those colors.
+    const CupertinoDynamicColor cup = CupertinoColors.secondarySystemFill;
+
     // Get colorScheme brightness.
     final bool isLight = colorScheme.brightness == Brightness.light;
     // Get selected base color, and its pair, defaults to primary and onPrimary.
@@ -6923,37 +6930,54 @@ sealed class FlexSubThemes {
     // Material-3 mode theming.
     else {
       // Use a Cupertino style theme Material-3 Switch.
-      // TODO(rydmike): Check the track color, it looks a bit off.
       if (useCupertinoStyle ?? false) {
         return SwitchThemeData(
+          mouseCursor:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return SystemMouseCursors.basic;
+            }
+            return kIsWeb ? SystemMouseCursors.click : SystemMouseCursors.basic;
+          }),
+
           thumbIcon:
               WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
             return const Icon(Icons.minimize, color: Colors.transparent);
           }),
           trackOutlineColor:
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.focused)) {
+              // This color grabbed from adaptive CupertinoSwitch focused state.
+              return HSLColor.fromColor(baseColor.withOpacity(0.80))
+                  .withLightness(0.69)
+                  .withSaturation(0.835)
+                  .toColor();
+            }
             return Colors.transparent;
           }),
-          // TODO(rydmike): Add the iOS desktop focused track style!
+          // The actual CupertinoSwitch has ring outside the track, this
+          // ring is inside the track, but it is a color and style match.
           trackColor:
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.disabled)) {
               if (states.contains(WidgetState.selected)) {
                 return baseColor.withOpacity(0.5);
               }
-              return colorScheme.onSurface.withOpacity(0.07);
+              return isLight
+                  // Actual CupertinoSwitch wraps with Opacity(0.5) layer, this
+                  // cannot be done here. This color picked to match the look.
+                  ? cup.color.withOpacity(0.07)
+                  : cup.darkColor.withOpacity(0.16);
             }
             if (states.contains(WidgetState.selected)) {
               return baseColor;
             }
-            return colorScheme.surfaceContainerHighest;
+            return isLight ? cup.color : cup.darkColor;
           }),
           thumbColor:
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.disabled)) {
-              return isLight
-                  ? colorScheme.surface
-                  : colorScheme.onSurface.withOpacity(0.7);
+              return Colors.white.withOpacity(0.5);
             }
             return Colors.white;
           }),
@@ -6961,6 +6985,19 @@ sealed class FlexSubThemes {
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             return Colors.transparent;
           }),
+          // This is the width of the focused Cupertion oultine ring, but
+          // on an actual CupertinoSwitch it is outside the track and there
+          // is special code to handle it the CupertinoSwitch case, we cannot
+          // do that with a Theme on Material-3 Switch case, but it is style
+          // wise a good match.
+          trackOutlineWidth:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.focused)) {
+              return 3.5;
+            }
+            return 0;
+          }),
+          splashRadius: 0,
         );
       } else {
         // Use a generally themed Material-3 style Switch

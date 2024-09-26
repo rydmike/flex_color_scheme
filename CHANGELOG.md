@@ -47,9 +47,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   * **DONE**: First finalize it in FSS.
   * Not default in API, but make it default in Playground.
 
-* **TODO** Update the Switch adaptive iOS looks' OFF state color. 
-  * There are some minor deviations now. Flutter's iOS Switch has changed since I last dug up the colors for it.
-
 * **TODO**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also introduced more breakage, review and fix them. 
   * Also with all new features, get package tests back to 100% coverage.
