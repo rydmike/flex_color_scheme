@@ -281,7 +281,7 @@ class FlexColor {
   // https://material.io/design/color/the-color-system.html#color-theme-creation.
 
   /// English name of the standard Material theme.
-  static const String materialName = 'Material default';
+  static const String materialName = 'Material 2 default';
 
   /// English description of the standard Material theme.
   static const String materialDescription =

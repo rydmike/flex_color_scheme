@@ -258,40 +258,40 @@ class App {
     // Item 0
     ResponsiveMenuItems(
       dividerAbove: true,
-      label: 'Dark mode',
-      labelSecondary: 'Light mode',
+      label: 'Use dark mode',
+      labelSecondary: 'Use light mode',
       tooltip: 'Set to dark mode',
       tooltipSecondary: 'Set to light mode',
-      icon: Icons.bedtime,
-      iconSecondary: Icons.wb_sunny,
+      icon: Icons.wb_sunny,
+      iconSecondary: Icons.bedtime,
     ),
     // Item 1
     ResponsiveMenuItems(
-      label: 'Use Material 2',
-      labelSecondary: 'Use Material 3',
-      tooltip: 'Set to Material 2',
-      tooltipSecondary: 'Set to Material 3',
-      icon: Icons.looks_two_outlined,
-      iconSecondary: Icons.looks_3_outlined,
+      label: 'Use Material-2',
+      labelSecondary: 'Use Material-3',
+      tooltip: 'Set to Material-2',
+      tooltipSecondary: 'Set to Material-3',
+      icon: Icons.looks_3_outlined,
+      iconSecondary: Icons.looks_two_outlined,
     ),
     // Item 2
     ResponsiveMenuItems(
       dividerAbove: true,
-      label: 'No FlexColorScheme',
+      label: 'FlexColorScheme OFF',
       labelSecondary: 'Use FlexColorScheme',
       tooltip: 'Turn off FlexColorScheme',
       tooltipSecondary: 'Turn on FlexColorScheme',
-      icon: Icons.blur_off_outlined,
-      iconSecondary: Icons.blur_on_outlined,
+      icon: Icons.blur_on_outlined,
+      iconSecondary: Icons.blur_off_outlined,
     ),
     // Item 3
     ResponsiveMenuItems(
-      label: 'No component themes',
+      label: 'Component themes OFF',
       labelSecondary: 'Use component themes',
       tooltip: 'Turn OFF component themes',
       tooltipSecondary: 'Turn ON component themes',
-      icon: Icons.subtitles_off_outlined,
-      iconSecondary: Icons.subtitles_outlined,
+      icon: Icons.subtitles_outlined,
+      iconSecondary: Icons.subtitles_off_outlined,
     ),
     // Item 4
     ResponsiveMenuItems(
@@ -321,8 +321,9 @@ class App {
       tooltip: 'Colors on top\non large screens',
       tooltipSecondary: 'Colors on side\non large screens',
       icon: Icons.view_sidebar,
-      turns: 3,
+      // turns: 3,
       iconSecondary: Icons.view_sidebar,
+      turnsSecondary: 3,
     ),
     // Item 8
     ResponsiveMenuItems(
