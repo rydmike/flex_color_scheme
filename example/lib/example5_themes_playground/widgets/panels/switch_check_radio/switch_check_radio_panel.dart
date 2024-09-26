@@ -101,10 +101,12 @@ class SwitchCheckRadioPanel extends StatelessWidget {
           values: AdaptiveTheme.values,
           title: const Text('Make Material Switch look like iOS Switch'),
           subtitleReveal: Text(
-            'An adaptive theme response to to make the themed Material Switch '
-            'look as close as possible to a CupertinoSwitch. '
-            'This setting has no effect and is thus not available in '
-            'Material-2 mode.\n'
+            'An adaptive theme response to make the Material Switch '
+            'look as close as possible to a CupertinoSwitch by only using '
+            'available theming and to make this theme response platform '
+            'adaptive. '
+            'In Material-2 mode this setting has no effect and is thus not '
+            'available.\n'
             '\n'
             // ignore: lines_longer_than_80_chars
             '${controller.switchAdaptiveCupertinoLike?.describe ?? AdaptiveTheme.off.describe}',
