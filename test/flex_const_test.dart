@@ -99,8 +99,8 @@ void main() {
     test('FCT kNavigationDrawerM2Width is 304', () {
       expect(kNavigationDrawerM2Width, 304);
     });
-    test('FCT kNavigationDrawerM3Width is 360', () {
-      expect(kNavigationDrawerM3Width, 360);
+    test('FCT kNavigationDrawerM3Width is 304', () {
+      expect(kNavigationDrawerM3Width, 304);
     });
     test('FCT kNavigationDrawerIndicatorPadding is 12', () {
       expect(kNavigationDrawerIndicatorPadding, 12);
