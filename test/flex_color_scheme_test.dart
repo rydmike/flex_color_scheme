@@ -50,7 +50,7 @@ void main() {
     final FlexColorScheme fc1i = FlexColorScheme.light(
       scheme: FlexScheme.material,
       usedColors: 1,
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      surfaceMode: FlexSurfaceMode.level,
       blendLevel: 10,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -117,7 +117,7 @@ void main() {
     final FlexColorScheme fc3i = FlexColorScheme.dark(
       scheme: FlexScheme.material,
       usedColors: 1,
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
+      surfaceMode: FlexSurfaceMode.level,
       blendLevel: 10,
       appBarStyle: FlexAppBarStyle.background,
       tabBarStyle: FlexTabBarStyle.forBackground,
@@ -304,17 +304,17 @@ void main() {
       secondaryContainer: FlexColor.materialLightSecondaryContainer,
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-      surface: FlexColor.materialLightSurface,
+      surface: FlexColor.lightFlexSurface,
       error: FlexColor.materialLightError,
-      scaffoldBackground: FlexColor.materialLightBackground,
-      dialogBackground: FlexColor.materialLightBackground,
+      scaffoldBackground: FlexColor.lightFlexSurfaceContainerLowest,
+      dialogBackground: FlexColor.lightFlexSurfaceContainerHigh,
       onPrimary: Colors.white,
       onPrimaryContainer: Colors.black,
       onSecondary: Colors.black,
       onSecondaryContainer: Colors.black,
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
-      onSurface: Colors.black,
+      onSurface: FlexColor.lightFlexOnSurface,
       onError: Colors.white,
     );
     test(
@@ -330,7 +330,6 @@ void main() {
             m1e2.toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
-
     final FlexColorScheme m1e22 = FlexColorScheme.light(
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
@@ -338,18 +337,18 @@ void main() {
       secondaryContainer: FlexColor.materialLightSecondaryContainer,
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-      surface: FlexColor.materialLightSurface,
+      surface: FlexColor.lightFlexSurface,
       error: FlexColor.materialLightError,
-      scaffoldBackground: FlexColor.materialLightBackground,
-      appBarBackground: FlexColor.materialLightPrimary,
-      dialogBackground: FlexColor.materialLightBackground,
+      scaffoldBackground: FlexColor.lightFlexSurfaceContainerLowest,
+      appBarBackground: FlexColor.lightFlexSurface,
+      dialogBackground: FlexColor.lightFlexSurfaceContainerHigh,
       onPrimary: Colors.white,
       onPrimaryContainer: Colors.black,
       onSecondary: Colors.black,
       onSecondaryContainer: Colors.black,
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
-      onSurface: Colors.black,
+      onSurface: FlexColor.lightFlexOnSurface,
       onError: Colors.white,
     );
     test(
@@ -357,7 +356,7 @@ void main() {
         'EXPECT equality when made by matching .light() overrides.', () {
       expect(
           FlexColorScheme.light(
-            appBarStyle: FlexAppBarStyle.primary,
+            appBarStyle: FlexAppBarStyle.surface,
           ),
           equals(m1e22));
       // Expect toTheme from them to full-fill same condition.

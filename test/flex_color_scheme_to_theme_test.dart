@@ -5155,7 +5155,7 @@ void main() {
           equals(FlexColor.lightErrorContainer(FlexColor.materialLightError)));
       expect(theme.colorScheme.onErrorContainer, equals(Colors.black));
       expect(theme.colorScheme.surface, equals(FlexColor.materialLightSurface));
-      expect(theme.colorScheme.onSurface, equals(Colors.black));
+      expect(theme.colorScheme.onSurface, equals(FlexColor.lightFlexOnSurface));
       expect(theme.scaffoldBackgroundColor,
           equals(FlexColor.materialLightBackground));
       expect(
