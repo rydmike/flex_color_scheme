@@ -138,7 +138,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexKeyColors#00000(useKeyColors: true, useSecondary: false, useTertiary: false, keepPrimary: false, keepSecondary: false, keepTertiary: false, keepPrimaryContainer: false, keepSecondaryContainer: false, keepTertiaryContainer: false)'));
+              'FlexKeyColors#00000(useKeyColors: true, keyPrimary: null, keepPrimary: false, keepPrimaryContainer: false, keySecondary: null, useSecondary: false, keepSecondary: false, keepSecondaryContainer: false, keyTertiary: null, keyTertiary: false, keepTertiary: false, keepTertiaryContainer: false, keyError: null, keyError: false, keepError: false, keepErrorContainer: false, contrastLevel: 0.0, useExpressiveOnContainerColors: null, useLegacyMonochromeSeedBehavior: null)'));
     });
     test(
         'FKCS1.11: Test toStringShort implemented via debugFillProperties '
