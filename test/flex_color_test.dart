@@ -502,8 +502,8 @@ void main() {
     //
     // Material 2 default theme colors.
     //
-    test('FC5 colors Material default', () {
-      expect(FlexColor.materialName, 'Material default');
+    test('FC5 colors Material 2 default', () {
+      expect(FlexColor.materialName, 'Material 2 default');
     });
     test('FC5 colors Material default', () {
       expect(FlexColor.materialDescription,

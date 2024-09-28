@@ -26,16 +26,19 @@ void main() {
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimary,
         primaryContainer: FlexColor.materialDarkPrimaryContainer,
+        primaryLightRef: FlexColor.materialLightPrimary,
         secondary: FlexColor.materialDarkSecondary,
         secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+        secondaryLightRef: FlexColor.materialLightSecondary,
         tertiary: FlexColor.materialDarkTertiary,
         tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+        tertiaryLightRef: FlexColor.materialLightTertiary,
         appBarColor: FlexColor.materialDarkTertiary,
         error: FlexColor.materialDarkError,
         swapOnMaterial3: true,
       ),
     );
-    // m2, has same definition as m2.
+    // m2, has same definition as m1.
     const FlexSchemeData m2 = FlexSchemeData(
       name: FlexColor.materialName,
       description: FlexColor.materialDescription,
@@ -53,10 +56,13 @@ void main() {
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimary,
         primaryContainer: FlexColor.materialDarkPrimaryContainer,
+        primaryLightRef: FlexColor.materialLightPrimary,
         secondary: FlexColor.materialDarkSecondary,
         secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+        secondaryLightRef: FlexColor.materialLightSecondary,
         tertiary: FlexColor.materialDarkTertiary,
         tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+        tertiaryLightRef: FlexColor.materialLightTertiary,
         appBarColor: FlexColor.materialDarkTertiary,
         error: FlexColor.materialDarkError,
         swapOnMaterial3: true,
@@ -78,10 +84,13 @@ void main() {
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimary,
         primaryContainer: FlexColor.materialDarkPrimaryContainer,
+        primaryLightRef: FlexColor.materialLightPrimary,
         secondary: FlexColor.materialDarkSecondary,
         secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+        secondaryLightRef: FlexColor.materialLightSecondary,
         tertiary: FlexColor.materialDarkTertiary,
         tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+        tertiaryLightRef: FlexColor.materialLightTertiary,
         appBarColor: FlexColor.materialDarkTertiary,
         error: FlexColor.materialDarkError,
       ),
@@ -167,10 +176,12 @@ void main() {
       dark: FlexSchemeColor(
         primary: FlexColor.materialDarkPrimaryHc,
         primaryContainer: FlexColor.materialDarkPrimaryContainerHc,
+        primaryLightRef: FlexColor.materialLightPrimaryHc,
         secondary: FlexColor.materialDarkSecondaryHc,
         secondaryContainer: FlexColor.materialDarkSecondaryContainerHc,
-        tertiary: FlexColor.materialDarkTertiaryHc,
+        secondaryLightRef: FlexColor.materialLightSecondaryHc,
         tertiaryContainer: FlexColor.materialDarkTertiaryContainerHc,
+        tertiaryLightRef: FlexColor.materialLightTertiaryHc,
         appBarColor: FlexColor.materialDarkTertiaryHc,
         error: FlexColor.materialDarkErrorHc,
         swapOnMaterial3: true,
@@ -218,10 +229,13 @@ void main() {
           dark: const FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialDarkTertiary,
             error: FlexColor.materialDarkError,
             swapOnMaterial3: true,
@@ -250,7 +264,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeData#00000(name: "Material default", description: "Default Material 2 color theme, used in the design guide", light: FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xffcefaf8), tertiary: Color(0xff018786), tertiaryContainer: Color(0xffa4f1ef), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, swapOnMaterial3: true), dark: FlexSchemeColor#00000(primary: Color(0xffbb86fc), primaryContainer: Color(0xff6200ee), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff005047), tertiary: Color(0xff03dac6), tertiaryContainer: Color(0xff003e3e), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679), errorContainer: null, swapOnMaterial3: true))'));
+              'FlexSchemeData#00000(name: "Material 2 default", description: "Default Material 2 color theme, used in the design guide", light: FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), primaryLightRef: null, secondary: Color(0xff03dac6), secondaryContainer: Color(0xffcefaf8), secondaryLightRef: null, tertiary: Color(0xff018786), tertiaryContainer: Color(0xffa4f1ef), tertiaryLightRef: null, appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, swapOnMaterial3: true), dark: FlexSchemeColor#00000(primary: Color(0xffbb86fc), primaryContainer: Color(0xff6200ee), primaryLightRef: Color(0xff6200ee), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff005047), secondaryLightRef: Color(0xff03dac6), tertiary: Color(0xff03dac6), tertiaryContainer: Color(0xff003e3e), tertiaryLightRef: Color(0xff018786), appBarColor: Color(0xff03dac6), error: Color(0xffcf6679), errorContainer: null, swapOnMaterial3: true))'));
     });
     test(
         'FSD1.12: Test toStringShort implemented via debugFillProperties '
