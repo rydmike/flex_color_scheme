@@ -46,9 +46,12 @@ void main() {
         fcs.toTheme.tabBarTheme.labelColor,
         equals(fcs.toTheme.colorScheme.onSurfaceVariant),
       );
-      // We get onSurface as blend color for blended TextTheme in light mode.
+      // We get fixed blend color for blended TextTheme in light mode.
+      // It is more blended than the onSurface color in light mode, when
+      // onSurface is max blended.
       expect(
-        fcsScheme.onSurface.red > fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red >
+            fcs.toTheme.textTheme.displayLarge!.color!.red,
         equals(true),
       );
     });
@@ -83,9 +86,12 @@ void main() {
         fcs.toTheme.tabBarTheme.labelColor,
         equals(fcs.toTheme.colorScheme.onSurfaceVariant),
       );
-      // We get onSurface as blend color for blended TextTheme in dark mode.
+      // We get fixed blend color for blended TextTheme in dark mode.
+      // It is less blended than the onSurface color in dark mode, when
+      // onSurface is max blended.
       expect(
-        fcsScheme.onSurface.red < fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red <
+            fcs.toTheme.textTheme.displayLarge!.color!.red,
         equals(true),
       );
     });
@@ -306,7 +312,7 @@ void main() {
       );
       expect(
         fcsTheme.textSelectionTheme.selectionHandleColor,
-        equals(fcsTheme.primaryColorDark),
+        equals(fcsScheme.primary),
       );
     });
     test(
@@ -334,7 +340,7 @@ void main() {
       );
       expect(
         fcsTheme.textSelectionTheme.selectionHandleColor,
-        equals(fcsTheme.primaryColorDark),
+        equals(fcsScheme.primary),
       );
     });
     test(
