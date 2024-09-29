@@ -195,7 +195,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: SwitchListTileReveal(
                     contentPadding: paddingStartColumn,
