@@ -1790,8 +1790,8 @@ sealed class FlexSubThemes {
     /// Font size of the [secondaryLabelStyle].
     ///
     /// If defined, overrides the default font size used by either the
-    /// default font of the default [secondaryLabelStyle] or the font size of the
-    /// passed in [secondaryLabelStyle].
+    /// default font of the default [secondaryLabelStyle] or the font size of
+    /// the passed in [secondaryLabelStyle].
     ///
     /// If not defined, defaults to [fontSize].
     final double? secondaryFontSize,
@@ -1885,12 +1885,15 @@ sealed class FlexSubThemes {
         ? SchemeColor.primary
         : useM3
             ? SchemeColor.surface
-            : SchemeColor.primary;
+            : SchemeColor.primaryContainer;
     Color backgroundColor =
         schemeColor(baseSchemeColor ?? fallbackSchemeColor, colorScheme);
     // Selected color
-    final SchemeColor fallbackSelected =
-        useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary;
+    final SchemeColor fallbackSelected = useM3
+        ? SchemeColor.secondaryContainer
+        : blend
+            ? SchemeColor.primary
+            : SchemeColor.secondaryContainer;
     Color selectedColor =
         schemeColor(selectedSchemeColor ?? fallbackSelected, colorScheme);
     // Secondary selected color
@@ -2002,8 +2005,11 @@ sealed class FlexSubThemes {
                   .withAlpha(kAlphaVeryLowDisabled)
               : colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
-      selectedColor:
-          selectedSchemeColor == null && !blend ? null : selectedColor,
+      selectedColor: selectedSchemeColor == null && !blend
+          ? useM3
+              ? null
+              : selectedColor
+          : selectedColor,
       // Applies to [ChoiceChip.selectedColor], if set it overrides the
       // [selectedColor], for ChoiceChips.
       secondarySelectedColor: secondarySelectedSchemeColor == null && !blend
