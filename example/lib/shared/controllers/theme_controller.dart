@@ -790,6 +790,17 @@ class ThemeController with ChangeNotifier {
         Store.keyChipBlendColors, Store.defaultChipBlendColors);
     _chipBorderRadius = await _themeService.load(
         Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
+
+    _chipFontSize = await _themeService.load(
+        Store.keyChipFontSize, Store.defaultChipFontSize);
+    _chipPaddingStart = await _themeService.load(
+        Store.keyChipPaddingStart, Store.defaultChipPaddingStart);
+    _chipPaddingEnd = await _themeService.load(
+        Store.keyChipPaddingEnd, Store.defaultChipPaddingEnd);
+    _chipPaddingTop = await _themeService.load(
+        Store.keyChipPaddingTop, Store.defaultChipPaddingTop);
+    _chipPaddingBottom = await _themeService.load(
+        Store.keyChipPaddingBottom, Store.defaultChipPaddingBottom);
     //
     // SnackBar SETTINGS.
     _snackBarElevation = await _themeService.load(
@@ -1305,6 +1316,11 @@ class ThemeController with ChangeNotifier {
     setChipDeleteIconSchemeColor(Store.defaultChipDeleteIconSchemeColor, false);
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
     setChipBlendColors(Store.defaultChipBlendColors, false);
+    setChipFontSize(Store.defaultChipFontSize, false);
+    setChipPaddingStart(Store.defaultChipPaddingStart, false);
+    setChipPaddingEnd(Store.defaultChipPaddingEnd, false);
+    setChipPaddingTop(Store.defaultChipPaddingTop, false);
+    setChipPaddingBottom(Store.defaultChipPaddingBottom, false);
     //
     // SnackBar SETTINGS.
     setSnackBarElevation(Store.defaultSnackBarElevation, false);
@@ -5107,6 +5123,51 @@ class ThemeController with ChangeNotifier {
     _chipBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyChipBorderRadius, value));
+  }
+
+  late double? _chipFontSize;
+  double? get chipFontSize => _chipFontSize;
+  void setChipFontSize(double? value, [bool notify = true]) {
+    if (value == _chipFontSize) return;
+    _chipFontSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipFontSize, value));
+  }
+
+  late double? _chipPaddingStart;
+  double? get chipPaddingStart => _chipPaddingStart;
+  void setChipPaddingStart(double? value, [bool notify = true]) {
+    if (value == _chipPaddingStart) return;
+    _chipPaddingStart = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipPaddingStart, value));
+  }
+
+  late double? _chipPaddingEnd;
+  double? get chipPaddingEnd => _chipPaddingEnd;
+  void setChipPaddingEnd(double? value, [bool notify = true]) {
+    if (value == _chipPaddingEnd) return;
+    _chipPaddingEnd = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipPaddingEnd, value));
+  }
+
+  late double? _chipPaddingTop;
+  double? get chipPaddingTop => _chipPaddingTop;
+  void setChipPaddingTop(double? value, [bool notify = true]) {
+    if (value == _chipPaddingTop) return;
+    _chipPaddingTop = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipPaddingTop, value));
+  }
+
+  late double? _chipPaddingBottom;
+  double? get chipPaddingBottom => _chipPaddingBottom;
+  void setChipPaddingBottom(double? value, [bool notify = true]) {
+    if (value == _chipPaddingBottom) return;
+    _chipPaddingBottom = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipPaddingBottom, value));
   }
 
   // SnackBar SETTINGS.

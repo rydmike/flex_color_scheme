@@ -48,14 +48,21 @@ class ChipPanel extends StatelessWidget {
                 ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
                 : '';
 
-    final String selectedM2Color = controller.chipSchemeColor == null
+    final String selectedColor = controller.chipSchemeColor == null
         ? 'primary'
         : controller.chipSchemeColor!.name;
 
-    // TODO(rydmike): Correct the Chip's default labels!
-    // TODO(rydmike): The Chip's default M3 paddings are now wrong, why?
-    // TODO(rydmike): Add Chip padding settings.
-    // TODO(rydmike): Add Chip font size settings.
+    // Paddings for the two column control layouts.
+    const EdgeInsetsDirectional paddingStartColumn =
+        EdgeInsetsDirectional.only(start: 16, end: 8);
+    final EdgeInsetsDirectional paddingEndColumn =
+        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+
+    final bool useBlend =
+        // ignore: avoid_bool_literals_in_conditional_expressions
+        controller.chipBlendColors ?? (useMaterial3 ? false : true);
+
+    // TODO(rydmike): The Chip's default M3 height is wrong, why?
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -63,8 +70,12 @@ class ChipPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Chip color'),
-          defaultLabel: 'surface',
-          defaultLabelM2: 'primary with 80% surface alpha blend',
+          defaultLabel:
+              useBlend ? 'primary with 80% surface alpha blend' : 'surface',
+          defaultLabelM2: useBlend
+              ? 'primary with 80% surface alpha blend'
+              : 'primaryContainer',
+          defaultDisabledLabel: 'surface',
           defaultDisabledLabelM2: 'Black opacity 12%',
           defaultDisabledLabelDarkM2: 'White opacity 12%',
           value: controller.chipSchemeColor,
@@ -73,8 +84,10 @@ class ChipPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Selected Chip color'),
-          defaultLabel: 'secondaryContainer',
-          defaultLabelM2: '$selectedM2Color with 59% surface alpha blend',
+          defaultLabel: useBlend
+              ? '$selectedColor with 59% surface alpha blend'
+              : 'secondaryContainer',
+          defaultDisabledLabel: 'secondaryContainer',
           defaultDisabledLabelM2: 'Black opacity 24%',
           defaultDisabledLabelDarkM2: 'White opacity 24%',
           value: controller.chipSelectedSchemeColor,
@@ -83,8 +96,10 @@ class ChipPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Choice Chip selected color'),
-          defaultLabel: 'secondaryContainer',
-          defaultLabelM2: '$selectedM2Color with 59% surface alpha blend',
+          defaultLabel: useBlend
+              ? '$selectedColor with 59% surface alpha blend'
+              : 'secondaryContainer',
+          defaultDisabledLabel: 'secondaryContainer',
           defaultDisabledLabelM2: 'Black opacity 24%',
           defaultDisabledLabelDarkM2: 'White opacity 24%',
           value: controller.chipSecondarySelectedSchemeColor,
@@ -114,6 +129,98 @@ class ChipPanel extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: chipRadiusDefaultLabel,
           valueDefaultDisabledLabel: useMaterial3 ? '8 dp' : 'stadium',
+        ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Font size'),
+          value: controller.chipFontSize,
+          onChanged: controller.setChipFontSize,
+          min: 8,
+          max: 20,
+          divisions: 12,
+          valueDecimalPlaces: 0,
+          valueHeading: 'SIZE',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: '14',
+          valueDefaultDisabledLabel: useMaterial3 ? '14' : '16',
+        ),
+        ListTileReveal(
+          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          title: const Text('Padding'),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
+                trailingWidth: 52,
+                enabled: enableControl,
+                value: controller.chipPaddingStart,
+                onChanged: controller.setChipPaddingStart,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'START',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8' : '4',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                trailingWidth: 60,
+                enabled: enableControl,
+                value: controller.chipPaddingEnd,
+                onChanged: controller.setChipPaddingEnd,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'END',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8' : '4',
+              ),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingStartColumn,
+                trailingWidth: 52,
+                enabled: enableControl,
+                value: controller.chipPaddingTop,
+                onChanged: controller.setChipPaddingTop,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'TOP',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8' : '4',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: paddingEndColumn,
+                trailingWidth: 60,
+                enabled: enableControl,
+                value: controller.chipPaddingBottom,
+                onChanged: controller.setChipPaddingBottom,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'BOTTOM',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8' : '4',
+              ),
+            ),
+          ],
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),

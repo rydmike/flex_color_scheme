@@ -702,7 +702,7 @@ class TextFieldPanel extends StatelessWidget {
           onChanged: controller.setInputDecoratorIsDense,
         ),
         ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+          enabled: enableControl,
           title: const Text('Content padding'),
           subtitleReveal: const Text(
             'As soon as you set the "contentPadding" to any value, you '
