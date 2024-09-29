@@ -43,6 +43,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
+* **TODO**: Review and update premade designs in the Playground app.
+* **TODO**: Playground: Review and update use M3 and use FCS defaults feature. Add two more examples.
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
   * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
@@ -67,10 +69,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
     * FCS default **InputDecorator** is now very close to Flutter's Material-3 default. The difference should now only be FCS's slight opinionated take on error hover states. Maybe later add a feature to get the default Material-3 style for them too. This is not possible with current props, but we could add them later.
 
   
-**TODO**
+**TODOs**
 
-* TODO: Review and update premade designs in the Playground app.
-* TODO: Playground: Review and update use M3 and use FCS defaults feature. Add two more examples.
+
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
 - TODO: InputDecorator: Platform adaptive radius.
@@ -85,13 +86,13 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - **STARTED**: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
 
-**POTENTIAL TODOS - STRETCH GOALS, will probably push some to a later version**
+**POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
 
 - Shadow color selection per component.
   - Create a custom convenience control widget for it.
 - Platform adaptive `ShapeBorder` configuration, including `Squircle`.
   - Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
-- Add `Divider` theme features, e.g. thickness and totally custom color.
+- Add `Divider` theme features, e.g., thickness and totally custom color.
 - Add `Checkbox` shape and border.
 - Add fidelity for iOS adaptive `AppBar`.
   - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
@@ -299,6 +300,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added style `navigationBar` to enum `FlexSystemNavBarStyle` that use the color for default or themed `NavigationBar` background color on the system navigation bar helper.
   - You can get a similar result with the transparent option. Using the `navigationBar` option does not require using the edge-to-edge config required when using transparent system navigation bar to see things behind it. The `transparent` option sets edge-to-edge mode behind the scenes when used. This can cause some layout changes that must be considered in the app design when used. This is an optional way to style the system navigation bar to match the app's themed `NavigationBar` background color, without using edge-to-edge Android screen mode.
 
+- Added `ListTile` theming support to `FlexSubThemesData` and made corresponding `FlexSubThemes.listTileTheme` properties use them in `FlexColorScheme` as `ListTileTheme` theming properties.
+  - The following `FlexSubThemesData` properties were added: `listTileSelectedSchemeColor`, `listTileIconSchemeColor`, `listTileTextSchemeColor`, `listTileTitleTextStyle`, `listTileSubtitleTextStyle`, `listTileLeadingAndTrailingTextStyle`, `listTileTileSchemeColor`,   `listTileSelectedTileSchemeColor`, `listTileContentPadding`, `listTileHorizontalTitleGap`, `listTileMinVerticalPadding`, `listTileStyle`, `listTileTitleAlignment` and `listTileControlAffinity`.
 
 **CHANGE**
 

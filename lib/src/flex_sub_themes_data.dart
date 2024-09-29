@@ -272,6 +272,21 @@ class FlexSubThemesData with Diagnosticable {
     this.inputSelectionOpacity,
     this.inputSelectionHandleSchemeColor,
     //
+    this.listTileSelectedSchemeColor,
+    this.listTileIconSchemeColor,
+    this.listTileTextSchemeColor,
+    this.listTileTitleTextStyle,
+    this.listTileSubtitleTextStyle,
+    this.listTileLeadingAndTrailingTextStyle,
+    this.listTileTileSchemeColor,
+    this.listTileSelectedTileSchemeColor,
+    this.listTileContentPadding,
+    this.listTileHorizontalTitleGap,
+    this.listTileMinVerticalPadding,
+    this.listTileStyle,
+    this.listTileTitleAlignment,
+    this.listTileControlAffinity,
+    //
     this.fabRadius,
     this.fabUseShape = false,
     this.fabAlwaysCircular = false,
@@ -1708,6 +1723,139 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [inputDecoratorSchemeColor] and if it is not
   /// defined to [SchemeColor.primary] same as Flutter SDK default.
   final SchemeColor? inputSelectionHandleSchemeColor;
+
+  /// Defines the color used for icons and text when the [ListTile] is
+  /// selected.
+  ///
+  /// If not defined, defaults to [ColorScheme.primary].
+  final SchemeColor? listTileSelectedSchemeColor;
+
+  /// Defines the default color for ListTile [leading] and [trailing] icons.
+  ///
+  /// If this property is null and [selected] is false then this color is used.
+  ///
+  /// If null and [ThemeData.useMaterial3] is true,
+  /// [ColorScheme.onSurfaceVariant] is used, otherwise in M2 and if
+  /// [ThemeData.brightness] is [Brightness.light], [Colors.black54] is used,
+  /// and if [ThemeData.brightness] is [Brightness.dark], the value is null.
+  ///
+  /// If [selected] is true then [listTileSelectedSchemeColor] is used. If
+  /// it is null then [ColorScheme.primary] is used.
+  final SchemeColor? listTileIconSchemeColor;
+
+  /// Defines the text color for the [title], [subtitle], [leading], and
+  /// [trailing].
+  ///
+  /// If this property is null and [selected] is false then
+  /// [ListTileThemeData.textColor] is used. If that is also null then
+  /// default text color is used for the [title], [subtitle], [leading], and
+  /// [trailing]. Except for [subtitle], if [ThemeData.useMaterial3] is false,
+  /// [TextTheme.bodySmall] is used.
+  ///
+  /// If this property is null and [selected] is true then
+  /// [ListTileThemeData.selectedColor] is used. If that is also null
+  /// then [ColorScheme.primary] is used.
+  ///
+  /// If this color is a [WidgetStateColor] it will be resolved against
+  /// [WidgetState.selected] and [WidgetState.disabled] states.
+  final SchemeColor? listTileTextSchemeColor;
+
+  /// The text style for ListTile's [title].
+  ///
+  /// If this property is null, then [ListTileThemeData.titleTextStyle] is
+  /// used.
+  ///
+  /// If that is also null and [ThemeData.useMaterial3] is true,
+  /// [TextTheme.bodyLarge] with [ColorScheme.onSurface] will be used.
+  ///
+  /// Otherwise, If ListTile style is [ListTileStyle.list],
+  /// [TextTheme.titleMedium] will be used and if ListTile style
+  /// is [ListTileStyle.drawer], [TextTheme.bodyLarge] will be used.
+  final TextStyle? listTileTitleTextStyle;
+
+  /// The text style for ListTile's [subtitle].
+  ///
+  /// If this property is null, then [ListTileThemeData.subtitleTextStyle]
+  /// is used.
+  ///
+  /// If that is also null and [ThemeData.useMaterial3] is true,
+  /// [TextTheme.bodyMedium] with [ColorScheme.onSurfaceVariant] will be used,
+  /// otherwise [TextTheme.bodyMedium] with [TextTheme.bodySmall] color will
+  /// be used.
+  final TextStyle? listTileSubtitleTextStyle;
+
+  /// The text style for ListTile's [leading] and [trailing].
+  ///
+  /// If this property is null, then
+  /// [ListTileThemeData.leadingAndTrailingTextStyle] is used.
+  ///
+  /// If that is also null and [ThemeData.useMaterial3] is true,
+  /// [TextTheme.labelSmall] with [ColorScheme.onSurfaceVariant] will be used,
+  /// otherwise [TextTheme.bodyMedium] will be used.
+  final TextStyle? listTileLeadingAndTrailingTextStyle;
+
+  /// Defines the background color of `ListTile` when [selected] is false.
+  ///
+  /// If this property is null and [selected] is false then
+  /// [ListTileThemeData.tileColor] is used. If that is also null and
+  /// [selected] is true, [selectedTileColor] is used.
+  ///
+  /// When that is also null, the [ListTileTheme.selectedTileColor] is used,
+  /// otherwise [Colors.transparent] is used.
+  final SchemeColor? listTileTileSchemeColor;
+
+  /// Defines the background color of `ListTile` when [selected] is true.
+  ///
+  /// When the value if null, the [selectedTileColor] is set to
+  /// [ListTileTheme.selectedTileColor] if it's not null and to
+  /// [Colors.transparent] if it's null.
+  final SchemeColor? listTileSelectedTileSchemeColor;
+
+  /// The ListTile's title internal padding.
+  ///
+  /// Insets a [ListTile]'s contents: its [leading], [title], [subtitle],
+  /// and [trailing] widgets.
+  ///
+  ///
+  /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used, if
+  /// `useMaterial3` is `false`. If `useMaterial3` is `true` then
+  /// `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` is used.
+  final EdgeInsetsGeometry? listTileContentPadding;
+
+  /// The horizontal gap between the LitTile titles and the leading/trailing
+  /// widgets.
+  ///
+  /// If not defined, defaults to 16.
+  final double? listTileHorizontalTitleGap;
+
+  /// The minimum padding on the top and bottom of the title and subtitle
+  /// widgets on the ListTile.
+  ///
+  /// If not defined, defaults to 4.
+  final double? listTileMinVerticalPadding;
+
+  /// Defines the font used for the ListTile title.
+  ///
+  /// If this property is null then [ListTileThemeData.style] is used. If that
+  /// is also null then [ListTileStyle.list] is used.
+  final ListTileStyle? listTileStyle;
+
+  /// Defines how [ListTile.leading] and [ListTile.trailing] are
+  /// vertically aligned relative to the [ListTile]'s titles
+  /// ([ListTile.title] and [ListTile.subtitle]).
+  ///
+  /// If this property is null then [ListTileThemeData.titleAlignment]
+  /// is used. If that is also null then [ListTileTitleAlignment.threeLine]
+  /// is used.
+  final ListTileTitleAlignment? listTileTitleAlignment;
+
+  /// If specified, overrides the default value of
+  /// [CheckboxListTile.controlAffinity] or [ExpansionTile.controlAffinity]
+  /// or [SwitchListTile.controlAffinity] or [RadioListTile.controlAffinity].
+  ///
+  /// This property does not yet have any theming support in Flutter 3.24, but
+  /// probably coming in next release.
+  final ListTileControlAffinity? listTileControlAffinity;
 
   /// Border radius value for [FloatingActionButton].
   ///
@@ -3555,6 +3703,21 @@ class FlexSubThemesData with Diagnosticable {
     final double? inputSelectionOpacity,
     final SchemeColor? inputSelectionHandleSchemeColor,
     //
+    final SchemeColor? listTileSelectedSchemeColor,
+    final SchemeColor? listTileIconSchemeColor,
+    final SchemeColor? listTileTextSchemeColor,
+    final TextStyle? listTileTitleTextStyle,
+    final TextStyle? listTileSubtitleTextStyle,
+    final TextStyle? listTileLeadingAndTrailingTextStyle,
+    final SchemeColor? listTileTileSchemeColor,
+    final SchemeColor? listTileSelectedTileSchemeColor,
+    final EdgeInsetsGeometry? listTileContentPadding,
+    final double? listTileHorizontalTitleGap,
+    final double? listTileMinVerticalPadding,
+    final ListTileStyle? listTileStyle,
+    final ListTileTitleAlignment? listTileTitleAlignment,
+    final ListTileControlAffinity? listTileControlAffinity,
+    //
     final double? fabRadius,
     final bool? fabUseShape,
     final bool? fabAlwaysCircular,
@@ -3921,6 +4084,35 @@ class FlexSubThemesData with Diagnosticable {
           inputSelectionOpacity ?? this.inputSelectionOpacity,
       inputSelectionHandleSchemeColor: inputSelectionHandleSchemeColor ??
           this.inputSelectionHandleSchemeColor,
+      //
+      listTileSelectedSchemeColor:
+          listTileSelectedSchemeColor ?? this.listTileSelectedSchemeColor,
+      listTileIconSchemeColor:
+          listTileIconSchemeColor ?? this.listTileIconSchemeColor,
+      listTileTextSchemeColor:
+          listTileTextSchemeColor ?? this.listTileTextSchemeColor,
+      listTileTitleTextStyle:
+          listTileTitleTextStyle ?? this.listTileTitleTextStyle,
+      listTileSubtitleTextStyle:
+          listTileSubtitleTextStyle ?? this.listTileSubtitleTextStyle,
+      listTileLeadingAndTrailingTextStyle:
+          listTileLeadingAndTrailingTextStyle ??
+              this.listTileLeadingAndTrailingTextStyle,
+      listTileTileSchemeColor:
+          listTileTileSchemeColor ?? this.listTileTileSchemeColor,
+      listTileSelectedTileSchemeColor: listTileSelectedTileSchemeColor ??
+          this.listTileSelectedTileSchemeColor,
+      listTileContentPadding:
+          listTileContentPadding ?? this.listTileContentPadding,
+      listTileHorizontalTitleGap:
+          listTileHorizontalTitleGap ?? this.listTileHorizontalTitleGap,
+      listTileMinVerticalPadding:
+          listTileMinVerticalPadding ?? this.listTileMinVerticalPadding,
+      listTileStyle: listTileStyle ?? this.listTileStyle,
+      listTileTitleAlignment:
+          listTileTitleAlignment ?? this.listTileTitleAlignment,
+      listTileControlAffinity:
+          listTileControlAffinity ?? this.listTileControlAffinity,
       //
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
@@ -4358,6 +4550,23 @@ class FlexSubThemesData with Diagnosticable {
         other.inputSelectionHandleSchemeColor ==
             inputSelectionHandleSchemeColor &&
         //
+        other.listTileSelectedSchemeColor == listTileSelectedSchemeColor &&
+        other.listTileIconSchemeColor == listTileIconSchemeColor &&
+        other.listTileTextSchemeColor == listTileTextSchemeColor &&
+        other.listTileTitleTextStyle == listTileTitleTextStyle &&
+        other.listTileSubtitleTextStyle == listTileSubtitleTextStyle &&
+        other.listTileLeadingAndTrailingTextStyle ==
+            listTileLeadingAndTrailingTextStyle &&
+        other.listTileTileSchemeColor == listTileTileSchemeColor &&
+        other.listTileSelectedTileSchemeColor ==
+            listTileSelectedTileSchemeColor &&
+        other.listTileContentPadding == listTileContentPadding &&
+        other.listTileHorizontalTitleGap == listTileHorizontalTitleGap &&
+        other.listTileMinVerticalPadding == listTileMinVerticalPadding &&
+        other.listTileStyle == listTileStyle &&
+        other.listTileTitleAlignment == listTileTitleAlignment &&
+        other.listTileControlAffinity == listTileControlAffinity &&
+        //
         other.fabRadius == fabRadius &&
         other.fabUseShape == fabUseShape &&
         other.fabAlwaysCircular == fabAlwaysCircular &&
@@ -4694,6 +4903,21 @@ class FlexSubThemesData with Diagnosticable {
         inputSelectionSchemeColor,
         inputSelectionOpacity,
         inputSelectionHandleSchemeColor,
+        //
+        listTileSelectedSchemeColor,
+        listTileIconSchemeColor,
+        listTileTextSchemeColor,
+        listTileTitleTextStyle,
+        listTileSubtitleTextStyle,
+        listTileLeadingAndTrailingTextStyle,
+        listTileTileSchemeColor,
+        listTileSelectedTileSchemeColor,
+        listTileContentPadding,
+        listTileHorizontalTitleGap,
+        listTileMinVerticalPadding,
+        listTileStyle,
+        listTileTitleAlignment,
+        listTileControlAffinity,
         //
         fabRadius,
         fabUseShape,
@@ -5073,6 +5297,35 @@ class FlexSubThemesData with Diagnosticable {
         'inputSelectionOpacity', inputSelectionOpacity));
     properties.add(EnumProperty<SchemeColor>(
         'inputSelectionHandleSchemeColor', inputSelectionHandleSchemeColor));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'listTileSelectedSchemeColor', listTileSelectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'listTileIconSchemeColor', listTileIconSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'listTileTextSchemeColor', listTileTextSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'listTileTitleTextStyle', listTileTitleTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'listTileSubtitleTextStyle', listTileSubtitleTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'listTileLeadingAndTrailingTextStyle',
+        listTileLeadingAndTrailingTextStyle));
+    properties.add(EnumProperty<SchemeColor>(
+        'listTileTileSchemeColor', listTileTileSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'listTileSelectedTileSchemeColor', listTileSelectedTileSchemeColor));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
+        'listTileContentPadding', listTileContentPadding));
+    properties.add(DiagnosticsProperty<double>(
+        'listTileHorizontalTitleGap', listTileHorizontalTitleGap));
+    properties.add(DiagnosticsProperty<double>(
+        'listTileMinVerticalPadding', listTileMinVerticalPadding));
+    properties.add(EnumProperty<ListTileStyle>('listTileStyle', listTileStyle));
+    properties.add(EnumProperty<ListTileTitleAlignment>(
+        'listTileTitleAlignment', listTileTitleAlignment));
+    properties.add(EnumProperty<ListTileControlAffinity>(
+        'listTileControlAffinity', listTileControlAffinity));
     //
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
