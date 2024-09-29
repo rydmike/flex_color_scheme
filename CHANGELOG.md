@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 28, 2024**
+**Sep 29, 2024**
 
 ### SUMMARY
 
@@ -177,7 +177,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
 
-- Added three new `FlexScheme`s, called `black`, `grey` and `sepia`. They are primarily intended to be used as prototype phase color schemes that do not use colors. This can be useful for focusing on features and layout during the early development phase, keeping the discussion away from colors. The schemes can also be used as neutral baselines for custom color schemes, where only a few colors are overridden with custom colors.
+- Added three new `FlexScheme`s, called `blackWhite`, `greys` and `sepia`. They are primarily intended to be used as prototype phase color schemes that do not use colors. This can be useful for focusing on features and layout during the early development phase, keeping the discussion away from colors. The schemes can also be used as neutral baselines for custom color schemes, where only a few colors are overridden with custom colors.
 
 - The const color definition class `FlexColor` got 24 new color values to support monochrome greyscale colors for all new surfaces and their on colors for light and dark mode. These are used as starting colors for the new surface colors in the **Flutter 3.22** updated and new Material-3 `ColorScheme`, when a seed generated `ColorScheme` is **NOT** used. These colors follow the naming convention `lightFlexSurface___` and `darkFlexSurface___`, plus their on and inverse versions.
 
