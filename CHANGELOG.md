@@ -43,9 +43,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
-* **TODO**: Flutter 3.22 broke +100 tests in FCS 7.3.1, review and fix them after all updates.
-  * New features and adapting FCS to Flutter 3.22 also introduced more breakage, review and fix them. 
-  * Also with all new features, get package tests back to 100% coverage.
+* **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
+  * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
+  * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
 
 * **DONE**: Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later.
@@ -124,6 +124,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Deprecated the FCS legacy property `useFlutterDefaults`. FlexColorScheme in Material-3 mode now defaults to using Flutter default styles. For other configurations, modify them as desired. In Material-2 mode, FCS continues to use its opinionated own defaults as before, as long as Material-2 exists.
+
+- Deprecated the static function `FlexColorScheme.createPrimarySwatch`, it is no longer used by FlexColorScheme internally, it is now deprecated in FlexColorScheme and will go away in V9. After this, you will still be able to find this function in `ColorTools` in the package `flex_Color_picker`, where it will remain available.
 
 - Replaced the FCS legacy property `useTextTheme` with a more feature correctly named property `useMaterial3Typography`. Use it instead. The `useTextTheme` originally had another function in much older versions of FCS. Its name no longer represented its function, the new name does. If not defined, the default is `true` in Material-3 mode and `false` in Material-2 mode. If you still use Material-2, try setting this to true to get nicer typography in Material-2 mode.
 
