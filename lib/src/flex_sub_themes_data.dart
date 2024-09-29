@@ -302,6 +302,9 @@ class FlexSubThemesData with Diagnosticable {
     this.chipDeleteIconSchemeColor,
     this.chipLabelStyle,
     this.chipSecondaryLabelStyle,
+    this.chipFontSize,
+    this.chipSecondaryFontSize,
+    this.chipPadding,
     //
     this.cardRadius,
     this.cardElevation,
@@ -2008,6 +2011,10 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// This property applies to [ActionChip], [Chip],
   /// [FilterChip], [InputChip], [RawChip].
+  ///
+  ///
+  /// If not defined, defaults to `labelLarge` and if the default label large
+  /// does not have a size defined yet, then defaults to 14.
   final TextStyle? chipLabelStyle;
 
   /// Overrides the default for [ChoiceChip.labelStyle],
@@ -2016,7 +2023,40 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// This only has an effect on label widgets that respect the
   /// [DefaultTextStyle], such as [Text].
+  ///
+  /// If not defined, defaults to `labelLarge` and if the default label large
+  /// does not have a size defined yet, then defaults to 14.
   final TextStyle? chipSecondaryLabelStyle;
+
+  /// Chip font size of the [chipLabelStyle].
+  ///
+  /// If defined, overrides the default font size used by either the
+  /// default font of the default [chipLabelStyle] or the font size of the
+  /// passed in [chipLabelStyle].
+  ///
+  /// If not defined the default text style font sizes are used, but if they
+  /// did not have size defined, defaults 14.
+  final double? chipFontSize;
+
+  /// Chip font size of the [chipSecondaryFontSize].
+  ///
+  /// If defined, overrides the default font size used by either the
+  /// default font of the default [chipSecondaryLabelStyle] or the font size of
+  /// the passed in [chipSecondaryLabelStyle].
+  ///
+  /// If not defined, defaults to [chipFontSize].
+  final double? chipSecondaryFontSize;
+
+  /// Overrides the default for [ChipAttributes.padding],
+  /// the padding between the contents of the chip and the outside [shape].
+  ///
+  /// This property applies to [ActionChip], [Chip], [ChoiceChip],
+  /// [FilterChip], [InputChip], [RawChip].
+  ///
+  /// If not defined, defaults to EdgeInsets.symmetric(horizontal: 8) in
+  /// Material mode and to EdgeInsets.symmetric(horizontal: 4) in
+  /// Material2 mode.
+  final EdgeInsetsGeometry? chipPadding;
 
   /// Border radius value for [Card].
   ///
@@ -3733,6 +3773,9 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? chipDeleteIconSchemeColor,
     final TextStyle? chipLabelStyle,
     final TextStyle? chipSecondaryLabelStyle,
+    final double? chipFontSize,
+    final double? chipSecondaryFontSize,
+    final EdgeInsetsGeometry? chipPadding,
     //
     final double? cardRadius,
     final double? cardElevation,
@@ -4134,6 +4177,10 @@ class FlexSubThemesData with Diagnosticable {
       chipLabelStyle: chipLabelStyle ?? this.chipLabelStyle,
       chipSecondaryLabelStyle:
           chipSecondaryLabelStyle ?? this.chipSecondaryLabelStyle,
+      chipFontSize: chipFontSize ?? this.chipFontSize,
+      chipSecondaryFontSize:
+          chipSecondaryFontSize ?? this.chipSecondaryFontSize,
+      chipPadding: chipPadding ?? this.chipPadding,
       //
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
@@ -4583,6 +4630,9 @@ class FlexSubThemesData with Diagnosticable {
         other.chipDeleteIconSchemeColor == chipDeleteIconSchemeColor &&
         other.chipLabelStyle == chipLabelStyle &&
         other.chipSecondaryLabelStyle == chipSecondaryLabelStyle &&
+        other.chipFontSize == chipFontSize &&
+        other.chipSecondaryFontSize == chipSecondaryFontSize &&
+        other.chipPadding == chipPadding &&
         //
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
@@ -4934,6 +4984,9 @@ class FlexSubThemesData with Diagnosticable {
         chipDeleteIconSchemeColor,
         chipLabelStyle,
         chipSecondaryLabelStyle,
+        chipFontSize,
+        chipSecondaryFontSize,
+        chipPadding,
         //
         cardRadius,
         cardElevation,
@@ -5352,6 +5405,11 @@ class FlexSubThemesData with Diagnosticable {
         .add(DiagnosticsProperty<TextStyle>('chipLabelStyle', chipLabelStyle));
     properties.add(DiagnosticsProperty<TextStyle>(
         'chipSecondaryLabelStyle', chipSecondaryLabelStyle));
+    properties.add(DiagnosticsProperty<double>('chipFontSize', chipFontSize));
+    properties.add(DiagnosticsProperty<double>(
+        'chipSecondaryFontSize', chipSecondaryFontSize));
+    properties.add(
+        DiagnosticsProperty<EdgeInsetsGeometry>('chipPadding', chipPadding));
     //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
