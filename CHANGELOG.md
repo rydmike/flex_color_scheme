@@ -81,12 +81,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: InputDecorator: Platform adaptive radius.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
- 
-- TODO: Playground: Correct the Chip's default label info.
 - TODO: The Chip's default M3 height is wrong.
   - Default padding and fontSize are correct, **but** there is something odd going on with Chip default from the padding. Using the same font size (14) and padding (all 8), does not result in the same height as default M3. It becomes 4 dp lower. No idea yet why this happens, or if the M3 default render is even correct. Need to compare with specs and dig deeper.  
-- STARTED: Add Chip padding settings. Added to FCS, but no controls in Playground yet.
-- STARTED: Add Chip font size settings. Added to FCS, but no controls in Playground yet.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
 
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
@@ -106,12 +102,13 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 * **ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
 
+
 - Add an option to select used MaterialTapTargetSize in the Playground.
   - Maybe also add it to icon theme only? Other places? Switch?
 
 
-
 **ALREADY DECIDED TO POSTPONE TO A LATER RELEASE**
+
 - Add all Shadcn theme colors.
 - Add Shadcn predefined prefs.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
@@ -348,6 +345,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Split the "BottomAppBar and SearchBar" panels to separate panels **SearchBar** and **BottomAppBar**.
 
 
+
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
 
 
@@ -393,6 +391,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - To the **AppBar** settings panel, title foreground color, leading icon and actions icon color settings were added.
 - To the **TextField** settings panel, added UI and code gen for dense input decorator and for custom content padding.
 - The **Chip** settings now include separate color for the `ChoiceChip (called Suggestion Chip in M3 design). The feature that blends the selected main overall Chip color was made optional. It is a useful feature due to the limited independent theme control over the Chips.  
+- The **Chip** settings panel now includes font size and padding controls.
 - The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
 
 

@@ -752,6 +752,21 @@ String generateThemeDartCode(ThemeController controller) {
   final String chipBlendColors = controller.chipBlendColors != null
       ? '    chipBlendColors: ${controller.chipBlendColors},\n'
       : '';
+  final String chipFontSize = controller.chipFontSize != null
+      ? '    chipFontSize: ${controller.chipFontSize},\n'
+      : '';
+  final String chipPadding = controller.chipPaddingStart != null ||
+          controller.chipPaddingTop != null ||
+          controller.chipPaddingEnd != null ||
+          controller.chipPaddingBottom != null
+      ? '    chipPadding: ${EdgeInsetsDirectional.fromSTEB(
+          controller.chipPaddingStart ?? (controller.useMaterial3 ? 8 : 4),
+          controller.chipPaddingTop ?? (controller.useMaterial3 ? 8 : 4),
+          controller.chipPaddingEnd ?? (controller.useMaterial3 ? 8 : 4),
+          controller.chipPaddingBottom ?? (controller.useMaterial3 ? 8 : 4),
+        )},\n'
+      : '';
+
   final String chipBorderRadius = controller.chipBorderRadius != null
       ? '    chipRadius: ${controller.chipBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1412,6 +1427,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipDeleteIconSchemeColor'
           '$chipBlendColors'
           '$chipBorderRadius'
+          '$chipFontSize'
+          '$chipPadding'
           //
           '$cardBorderRadius'
           //
@@ -1650,6 +1667,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipDeleteIconSchemeColor'
           '$chipBlendColors'
           '$chipBorderRadius'
+          '$chipFontSize'
+          '$chipPadding'
           //
           '$cardBorderRadius'
           //

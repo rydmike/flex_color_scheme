@@ -1795,6 +1795,32 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultChipBorderRadius = null;
 
+  // Key used to read and save the chipFontSize value.
+  static const String keyChipFontSize = 'chipFontSize';
+  // Default value for the chipFontSize, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultChipFontSize = null;
+
+  // Key used to read and save the chipPaddingStart value.
+  static const String keyChipPaddingStart = 'chipPaddingStart';
+  // Default value for the chipPaddingStart, also reset settings.
+  static const double? defaultChipPaddingStart = null;
+
+  // Key used to read and save the chipPaddingEnd value.
+  static const String keyChipPaddingEnd = 'chipPaddingEnd';
+  // Default value for the chipPaddingEnd, also reset settings.
+  static const double? defaultChipPaddingEnd = null;
+
+  // Key used to read and save the chipPaddingTop value.
+  static const String keyChipPaddingTop = 'chipPaddingTop';
+  // Default value for the chipPaddingTop, also reset settings.
+  static const double? defaultChipPaddingTop = null;
+
+  // Key used to read and save the chipPaddingBottom value.
+  static const String keyChipPaddingBottom = 'chipPaddingBottom';
+  // Default value for the chipPaddingBottom, also reset settings.
+  static const double? defaultChipPaddingBottom = null;
+
   // Key used to read and save the snackBarBorderRadius value.
   static const String keySnackBarBorderRadius = 'snackBarBorderRadius';
   // Default value for the snackBarBorderRadius, also used to reset settings.

@@ -326,6 +326,22 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             chipDeleteIconSchemeColor: controller.chipDeleteIconSchemeColor,
             chipBlendColors: controller.chipBlendColors,
             chipRadius: controller.chipBorderRadius,
+            chipFontSize: controller.chipFontSize,
+            chipPadding: controller.chipPaddingStart != null ||
+                    controller.chipPaddingTop != null ||
+                    controller.chipPaddingEnd != null ||
+                    controller.chipPaddingBottom != null
+                ? EdgeInsetsDirectional.fromSTEB(
+                    controller.chipPaddingStart ??
+                        (controller.useMaterial3 ? 8 : 4),
+                    controller.chipPaddingTop ??
+                        (controller.useMaterial3 ? 8 : 4),
+                    controller.chipPaddingEnd ??
+                        (controller.useMaterial3 ? 8 : 4),
+                    controller.chipPaddingBottom ??
+                        (controller.useMaterial3 ? 8 : 4),
+                  )
+                : null,
             // Card settings.
             cardRadius: controller.cardBorderRadius,
             // PopupMenuButton settings.
