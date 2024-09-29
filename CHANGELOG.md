@@ -72,7 +72,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
 - TODO: InputDecorator: Platform adaptive radius.
-- TODO: InputDecorator: Playground: Default value info for padding props, depends on dense and M2/M3 mode and border type, complex.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 - TODO: Playground: Clean up some UI, consider adding more two column controls where it makes sense to make it more compact.
 - TODO: Playground: Correct the Chip's default label info.
