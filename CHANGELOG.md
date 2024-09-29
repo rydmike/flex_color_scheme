@@ -71,9 +71,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
-- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity? To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
-- **STARTED**: Add some `SearchBar` theming features, What? Shape and elevation?
-- **STARTED**: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
+- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity? To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3? Added a large number of supported properties to FCS package. Not yet added any controls to Playground.
+- **STARTED**: Add some `SearchBar` theming features. Placeholder added. What to add in Playground? Shape and elevation?
+- **STARTED**: Add some `SearchView` theming features. Placeholder added. What to add in Playground? Shape and elevation? Has variant theme issue! Report the issue!
 
 
 * TODO: The `toScheme` method might need to be updated.
@@ -83,9 +83,10 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
  
 - TODO: Playground: Correct the Chip's default label info.
-- TODO: The Chip's default M3 paddings are wrong, fix!
-- TODO: Add Chip padding settings.
-- TODO: Add Chip font size settings.
+- TODO: The Chip's default M3 height is wrong.
+  - Default padding and fontSize are correct, **but** there is something odd going on with Chip default from the padding. Using the same font size (14) and padding (all 8), does not result in the same height as default M3. It becomes 4 dp lower. No idea yet why this happens, or if the M3 default render is even correct. Need to compare with specs and dig deeper.  
+- STARTED: Add Chip padding settings. Added to FCS, but no controls in Playground yet.
+- STARTED: Add Chip font size settings. Added to FCS, but no controls in Playground yet.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
 
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
@@ -251,8 +252,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
 
 
-- Added `secondarySelectedSchemeColor` property to `FlexSubThemes.chipTheme`.
-- Added `chipSecondarySelectedSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use it for its color.
+- Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize` and `padding` properties to `FlexSubThemes.chipTheme`.
+- Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
 
 
 - Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`.
@@ -318,6 +319,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Added `ListTile` theming support to `FlexSubThemesData` and made corresponding `FlexSubThemes.listTileTheme` properties use them in `FlexColorScheme` as `ListTileTheme` theming properties.
   - The following `FlexSubThemesData` properties were added: `listTileSelectedSchemeColor`, `listTileIconSchemeColor`, `listTileTextSchemeColor`, `listTileTitleTextStyle`, `listTileSubtitleTextStyle`, `listTileLeadingAndTrailingTextStyle`, `listTileTileSchemeColor`,   `listTileSelectedTileSchemeColor`, `listTileContentPadding`, `listTileHorizontalTitleGap`, `listTileMinVerticalPadding`, `listTileStyle`, `listTileTitleAlignment` and `listTileControlAffinity`.
+
+
+
 
 **CHANGE**
 

@@ -1763,6 +1763,8 @@ sealed class FlexSubThemes {
     ///
     /// This property applies to [ActionChip], [Chip],
     /// [FilterChip], [InputChip], [RawChip].
+    ///
+    /// If not defined, the font size in the style defaults to 14.
     final TextStyle? labelStyle,
 
     /// Overrides the default for [ChoiceChip.labelStyle],
@@ -1771,7 +1773,39 @@ sealed class FlexSubThemes {
     ///
     /// This only has an effect on label widgets that respect the
     /// [DefaultTextStyle], such as [Text].
+    ///
+    /// If not defined, the font size in the style defaults to 14.
     final TextStyle? secondaryLabelStyle,
+
+    /// Font size of the [labelStyle].
+    ///
+    /// If defined, overrides the default font size used by either the
+    /// default font of the default [labelStyle] or the font size of the
+    /// passed in [labelStyle].
+    ///
+    /// If not defined the default text style font sizes are used, but if they
+    /// did not have size defined, defaults 14.
+    final double? fontSize,
+
+    /// Font size of the [secondaryLabelStyle].
+    ///
+    /// If defined, overrides the default font size used by either the
+    /// default font of the default [secondaryLabelStyle] or the font size of the
+    /// passed in [secondaryLabelStyle].
+    ///
+    /// If not defined, defaults to [fontSize].
+    final double? secondaryFontSize,
+
+    /// Overrides the default for [ChipAttributes.padding],
+    /// the padding between the contents of the chip and the outside [shape].
+    ///
+    /// This property applies to [ActionChip], [Chip], [ChoiceChip],
+    /// [FilterChip], [InputChip], [RawChip].
+    ///
+    /// If not defined, defaults to EdgeInsets.symmetric(horizontal: 8) in
+    /// Material mode and to EdgeInsets.symmetric(horizontal: 4) in
+    /// Material2 mode.
+    final EdgeInsetsGeometry? padding,
 
     /// Corner radius of the Chip.
     ///
@@ -1922,18 +1956,33 @@ sealed class FlexSubThemes {
     }
     // Text color, uses the onBackground.
     final TextStyle effectiveLabelStyle =
-        (labelStyle ?? const TextStyle(fontSize: 14))
-            .copyWith(color: onBackgroundColor);
+        (labelStyle ?? const TextStyle()).copyWith(
+      color: onBackgroundColor,
+      fontSize: fontSize ?? labelStyle?.fontSize ?? 14,
+    );
 
-    // TODO(rydmike): We need widget state to use this! Not supported.
+    // TODO(rydmike): Totally remove these debug prints
+    // debugPrint('effectiveLabelStyle: $effectiveLabelStyle');
+    // debugPrint(
+    //     'effectiveLabelStyle fontFamily: ${effectiveLabelStyle.fontFamily}');
+    // debugPrint(
+    //     'effectiveLabelStyle fontSize  : ${effectiveLabelStyle.fontSize}');
+
+    // TODO(rydmike): We need widget state to use this! Not supported. Issue!
     // Text color, uses the selected foreground color for selected chip styles.
     // final TextStyle effectiveSelectedLabelStyle =
     //     effectiveLabelStyle.copyWith(color: onSelectedColor);
 
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveSecondarySelectedLabelStyle =
-        (labelStyle ?? const TextStyle())
-            .copyWith(color: onSecondarySelectedColor);
+        (secondaryLabelStyle ?? labelStyle ?? const TextStyle()).copyWith(
+      color: onSecondarySelectedColor,
+      fontSize: secondaryFontSize ??
+          fontSize ??
+          secondaryLabelStyle?.fontSize ??
+          labelStyle?.fontSize ??
+          14,
+    );
 
     return ChipThemeData(
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
@@ -1967,7 +2016,7 @@ sealed class FlexSubThemes {
       checkmarkColor: onSelectedColor,
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
-      padding: useM3 ? null : const EdgeInsets.all(4),
+      padding: useM3 ? padding : padding ?? const EdgeInsets.all(4),
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
       shape: useM3 && radius == null
@@ -1982,6 +2031,8 @@ sealed class FlexSubThemes {
       // If it needs different color fr selected and unselected state it cannot
       // be themed correctly.
       labelStyle: effectiveLabelStyle,
+
+      // TODO(rydmike): We need widget state to use this! Not supported. Issue!
       // To always get correct color for selected state text, we would need to
       // use WidgetStateTextStyle, but it is not supported.
       //

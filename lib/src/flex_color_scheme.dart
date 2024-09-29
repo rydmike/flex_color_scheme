@@ -7503,9 +7503,12 @@ class FlexColorScheme with Diagnosticable {
               deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
               blendColors: subTheme.chipBlendColors,
               labelStyle:
-                  subTheme.chipLabelStyle ?? effectiveTextTheme.labelLarge!,
+                  subTheme.chipLabelStyle ?? effectiveTextTheme.labelLarge,
               secondaryLabelStyle: subTheme.chipSecondaryLabelStyle ??
-                  effectiveTextTheme.labelLarge!,
+                  effectiveTextTheme.labelLarge,
+              fontSize: subTheme.chipFontSize,
+              secondaryFontSize: subTheme.chipSecondaryFontSize,
+              padding: subTheme.chipPadding,
               radius: subTheme.chipRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useTintedDisable: subTheme.tintedDisabledControls,
