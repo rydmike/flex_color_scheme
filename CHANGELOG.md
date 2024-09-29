@@ -71,20 +71,26 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
+- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity? To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
+- **STARTED**: Add some `SearchBar` theming features, What? Shape and elevation?
+- **STARTED**: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
+
 
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
 - TODO: InputDecorator: Platform adaptive radius.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
+
+ 
 - TODO: Playground: Correct the Chip's default label info.
 - TODO: The Chip's default M3 paddings are wrong, fix!
 - TODO: Add Chip padding settings.
 - TODO: Add Chip font size settings.
 - TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
-- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity? To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3?
-- **STARTED**: Add some `SearchBar` theming features, What? Shape and elevation?
-- **STARTED**: Add some `SearchView` theming features. What? Shape and elevation? Has variant theme issue! Report the issue!
+
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
+- Example 4: Add a high contrast theme in example 4 with tutorial update (commented placeholder added)
+
 
 **POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
 
@@ -97,10 +103,20 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - Add fidelity for iOS adaptive `AppBar`.
   - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
 
+* **ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
+
+- Add an option to select used MaterialTapTargetSize in the Playground.
+  - Maybe also add it to icon theme only? Other places? Switch?
+
+
+
 **ALREADY DECIDED TO POSTPONE TO A LATER RELEASE**
 - Add all Shadcn theme colors.
 - Add Shadcn predefined prefs.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
+
+
+
 
 ### PACKAGE CHANGES
 
@@ -432,20 +448,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed that applying dialog elevation in the Playground app's own dark mode theme was missing.
 - Fixed that enum `FlexAdaptive.setting` value `FlexAdaptive.appleWeb` did not return `AdaptiveTheme.appleWeb` when selected, it returned `FlexAdaptive.apple`. This only impacted **simulation** of responsive themes for the Apple and Web response **in the Playground app**. Themes using this feature worked correctly. 
 
-**TODO THEMES PLAYGROUND AND OTHER EXAMPLES**
 
-- Update ColorPicker to a new version with easier to discover entry field.
-- **Chip** settings panel.
-  - Maybe: Chip padding, Font size, Chip outline
-- **TextField settings panel**. Check that all new features are documented in log.
-- **TextField** settings panel, add some new pre-configured options with optional configuration examples of the input decorator.
-- Figure out the default padding logics for the **TextField** settings panel. It should show the same as the Flutter SDK default, this is not yet included in the presentation logic.
-
-**ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
-
-- Maybe: Add an option to select used MaterialTapTargetSize in the Playground.
-  - Maybe also add it to icon theme only? Other places? Switch?
-- Add a high contrast theme in example 4 with tutorial update (commented placeholder added)
 
 ## 7.3.1
 
