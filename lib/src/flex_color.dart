@@ -3401,53 +3401,54 @@ class FlexColor {
   /// Deep orange M3 theme color for dark tertiary container color.
   static const Color deepOrangeM3DarkTertiaryContainer = Color(0xFF2F4F11);
 
-  /// English name of the black theme.
-  static const String blackName = 'Black and white';
+  /// English name of the black and white theme.
+  static const String blackWhiteName = 'Black and white';
 
-  /// English description of the black theme.
-  static const String blackDescription = 'Black and white based theme';
+  /// English description of the blackWhite theme.
+  static const String blackWhiteDescription = 'Black or white primary, '
+      'secondary and tertiary colors, with monochrome greys based theme';
 
   /// Black theme color for light primary color.
-  static const Color blackLightPrimary = Colors.black;
+  static const Color blackWhiteLightPrimary = Colors.black;
 
   /// Black theme color for light primary container color.
-  static const Color blackLightPrimaryContainer = Color(0xFFE0E0E0);
+  static const Color blackWhiteLightPrimaryContainer = Color(0xFFE0E0E0);
 
   /// Black theme color for light secondary color.
-  static const Color blackLightSecondary = Colors.black;
+  static const Color blackWhiteLightSecondary = Colors.black;
 
   /// Black theme color for light secondary container color.
-  static const Color blackLightSecondaryContainer = Color(0xFFE4E4E4);
+  static const Color blackWhiteLightSecondaryContainer = Color(0xFFE4E4E4);
 
   /// Black theme color for light tertiary color.
-  static const Color blackLightTertiary = Colors.black;
+  static const Color blackWhiteLightTertiary = Colors.black;
 
   /// Black theme color for light tertiary container color.
-  static const Color blackLightTertiaryContainer = Color(0xFFC9C9C9);
+  static const Color blackWhiteLightTertiaryContainer = Color(0xFFC9C9C9);
 
   /// Black theme color for dark primary color.
-  static const Color blackDarkPrimary = Colors.white;
+  static const Color blackWhiteDarkPrimary = Colors.white;
 
   /// Black theme color for dark primary container color.
-  static const Color blackDarkPrimaryContainer = Color(0xFF404040);
+  static const Color blackWhiteDarkPrimaryContainer = Color(0xFF404040);
 
   /// Black theme color for dark secondary color.
-  static const Color blackDarkSecondary = Colors.white;
+  static const Color blackWhiteDarkSecondary = Colors.white;
 
   /// Black theme color for dark secondary container color.
-  static const Color blackDarkSecondaryContainer = Color(0xFF474747);
+  static const Color blackWhiteDarkSecondaryContainer = Color(0xFF474747);
 
   /// Black theme color for dark tertiary color.
-  static const Color blackDarkTertiary = Colors.white;
+  static const Color blackWhiteDarkTertiary = Colors.white;
 
   /// Black theme color for dark tertiary container color.
-  static const Color blackDarkTertiaryContainer = Color(0xFF5E5E5E);
+  static const Color blackWhiteDarkTertiaryContainer = Color(0xFF5E5E5E);
 
   /// English name of the grey  theme.
   static const String greyName = 'Grey';
 
   /// English description of the grey  theme.
-  static const String greyDescription = 'A grey based theme';
+  static const String greyDescription = 'Monochrome greys based theme';
 
   /// Grey theme color for light primary color.
   static const Color greyLightPrimary = Color(0xFF131313);
@@ -3490,7 +3491,7 @@ class FlexColor {
 
   /// English description of the sepia  theme.
   static const String sepiaDescription =
-      'Sepia warm yellow tinted grey scale based theme';
+      'Sepia, a warm slight brown yellow tinted neutral theme';
 
   /// Sepia theme color for light primary color.
   static const Color sepiaLightPrimary = Color(0xFF413d32);
@@ -5132,38 +5133,38 @@ class FlexColor {
   );
 
   /// A Material 3 black based color scheme as FlexSchemeData.
-  static const FlexSchemeData black = FlexSchemeData(
-    name: blackName,
-    description: blackDescription,
+  static const FlexSchemeData blackWhite = FlexSchemeData(
+    name: blackWhiteName,
+    description: blackWhiteDescription,
     light: FlexSchemeColor(
-      primary: blackLightPrimary,
-      primaryContainer: blackLightPrimaryContainer,
-      secondary: blackLightSecondary,
-      secondaryContainer: blackLightSecondaryContainer,
-      tertiary: blackLightTertiary,
-      tertiaryContainer: blackLightTertiaryContainer,
-      appBarColor: blackLightTertiary,
+      primary: blackWhiteLightPrimary,
+      primaryContainer: blackWhiteLightPrimaryContainer,
+      secondary: blackWhiteLightSecondary,
+      secondaryContainer: blackWhiteLightSecondaryContainer,
+      tertiary: blackWhiteLightTertiary,
+      tertiaryContainer: blackWhiteLightTertiaryContainer,
+      appBarColor: blackWhiteLightTertiary,
       error: material3LightError,
       errorContainer: material3LightErrorContainer,
     ),
     dark: FlexSchemeColor(
-      primary: blackDarkPrimary,
-      primaryContainer: blackDarkPrimaryContainer,
-      primaryLightRef: blackLightPrimary,
-      secondary: blackDarkSecondary,
-      secondaryContainer: blackDarkSecondaryContainer,
-      secondaryLightRef: blackLightSecondary,
-      tertiary: blackDarkTertiary,
-      tertiaryContainer: blackDarkTertiaryContainer,
-      tertiaryLightRef: blackLightTertiary,
-      appBarColor: blackDarkTertiary,
+      primary: blackWhiteDarkPrimary,
+      primaryContainer: blackWhiteDarkPrimaryContainer,
+      primaryLightRef: blackWhiteLightPrimary,
+      secondary: blackWhiteDarkSecondary,
+      secondaryContainer: blackWhiteDarkSecondaryContainer,
+      secondaryLightRef: blackWhiteLightSecondary,
+      tertiary: blackWhiteDarkTertiary,
+      tertiaryContainer: blackWhiteDarkTertiaryContainer,
+      tertiaryLightRef: blackWhiteLightTertiary,
+      appBarColor: blackWhiteDarkTertiary,
       error: material3DarkError,
       errorContainer: material3DarkErrorContainer,
     ),
   );
 
   /// A Material 3 grey based color scheme as FlexSchemeData.
-  static const FlexSchemeData grey = FlexSchemeData(
+  static const FlexSchemeData greys = FlexSchemeData(
     name: greyName,
     description: greyDescription,
     light: FlexSchemeColor(
@@ -5329,8 +5330,8 @@ class FlexColor {
     FlexScheme.yellowM3: yellowM3,
     FlexScheme.orangeM3: orangeM3,
     FlexScheme.deepOrangeM3: deepOrangeM3,
-    FlexScheme.black: black,
-    FlexScheme.grey: grey,
+    FlexScheme.blackWhite: blackWhite,
+    FlexScheme.greys: greys,
     FlexScheme.sepia: sepia,
   };
 
@@ -5417,8 +5418,8 @@ class FlexColor {
     yellowM3,
     orangeM3,
     deepOrangeM3,
-    black,
-    grey,
+    blackWhite,
+    greys,
     sepia,
   ];
 }

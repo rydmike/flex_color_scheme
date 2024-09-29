@@ -182,13 +182,13 @@ enum FlexScheme {
   /// A deep orange based Material-3 colorscheme.
   deepOrangeM3,
 
-  /// A black and white based colorscheme.
-  black,
+  /// A black and white based colorscheme, with monochrome greys.
+  blackWhite,
 
-  /// A grey scale based colorscheme.
-  grey,
+  /// A monochrome grey scale based colorscheme.
+  greys,
 
-  /// A grey scale based colorscheme, with warm yellow tints.
+  /// Sepia, a warm slight brown yellow tinted neutral theme.
   sepia,
 
   /// Placeholder for adding a custom scheme. When this scheme
