@@ -3930,35 +3930,31 @@ sealed class FlexSubThemes {
     /// If not defined, defaults to [ColorScheme.primary].
     final SchemeColor? selectedSchemeColor,
 
-    /// Defines the default color for [leading] and [trailing] icons.
+    /// Defines the default color for ListTile [leading] and [trailing] icons.
     ///
-    /// If this property is null and [selected] is false then
-    /// [ListTileThemeData.iconColor]
-    /// is used. If that is also null and [ThemeData.useMaterial3] is true,
-    /// [ColorScheme.onSurfaceVariant]
-    /// is used, otherwise if [ThemeData.brightness] is [Brightness.light],
-    /// [Colors.black54] is used,
+    /// If this property is null and [selected] is false then this color is
+    /// used.
+    ///
+    /// If null and [ThemeData.useMaterial3] is true,
+    /// [ColorScheme.onSurfaceVariant] is used, otherwise in M2 and if
+    /// [ThemeData.brightness] is [Brightness.light], [Colors.black54] is used,
     /// and if [ThemeData.brightness] is [Brightness.dark], the value is null.
     ///
-    /// If this property is null and [selected] is true then
-    /// [ListTileThemeData.selectedColor]
-    /// is used. If that is also null then [ColorScheme.primary] is used.
-    ///
-    /// If this color is a [WidgetStateColor] it will be resolved against
-    /// [WidgetState.selected] and [WidgetState.disabled] states.
+    /// If [selected] is true then [selectedSchemeColor] is used. If
+    /// it is null then [ColorScheme.primary] is used.
     final SchemeColor? iconSchemeColor,
 
     /// Defines the text color for the [title], [subtitle], [leading], and
     /// [trailing].
     ///
     /// If this property is null and [selected] is false then
-    /// [ListTileThemeData.textColor] is used. If that is also null then
+    /// [textSchemeColor] is used. If that is also null then
     /// default text color is used for the [title], [subtitle], [leading], and
     /// [trailing]. Except for [subtitle], if [ThemeData.useMaterial3] is false,
     /// [TextTheme.bodySmall] is used.
     ///
     /// If this property is null and [selected] is true then
-    /// [ListTileThemeData.selectedColor] is used. If that is also null
+    /// [selectedSchemeColor is used. If that is also null
     /// then [ColorScheme.primary] is used.
     ///
     /// If this color is a [WidgetStateColor] it will be resolved against
@@ -4054,23 +4050,47 @@ sealed class FlexSubThemes {
     /// is used.
     final ListTileTitleAlignment? titleAlignment,
 
+    // TODO(rydmike): Add later, still only available in master in theming.
     /// If specified, overrides the default value of
     /// [CheckboxListTile.controlAffinity] or [ExpansionTile.controlAffinity]
     /// or [SwitchListTile.controlAffinity] or [RadioListTile.controlAffinity].
+    ///
+    /// This property does not yet have any theming support in Flutter 3.24, but
+    /// probably coming in next release.
     final ListTileControlAffinity? controlAffinity,
   }) {
     final Color selectedColor =
         schemeColor(selectedSchemeColor ?? SchemeColor.primary, colorScheme);
 
+    final Color? iconColor = iconSchemeColor == null
+        ? null
+        : schemeColor(iconSchemeColor, colorScheme);
+
+    final Color? textColor = textSchemeColor == null
+        ? null
+        : schemeColor(textSchemeColor, colorScheme);
+
+    final Color? tileColor = tileSchemeColor == null
+        ? null
+        : schemeColor(tileSchemeColor, colorScheme);
+
+    final Color? selectedTileColor = selectedTileSchemeColor == null
+        ? null
+        : schemeColor(selectedTileSchemeColor, colorScheme);
+
     return ListTileThemeData(
       selectedColor: selectedColor,
+      iconColor: iconColor,
+      textColor: textColor,
       titleTextStyle: titleTextStyle,
       subtitleTextStyle: subtitleTextStyle,
       leadingAndTrailingTextStyle: leadingAndTrailingTextStyle,
-      style: style,
+      tileColor: tileColor,
+      selectedTileColor: selectedTileColor,
       contentPadding: contentPadding,
       horizontalTitleGap: horizontalTitleGap,
       minVerticalPadding: minVerticalPadding,
+      style: style,
       titleAlignment: titleAlignment,
       // TODO(rydmike): Add later, still only available in master in theming.
       // controlAffinity: controlAffinity,

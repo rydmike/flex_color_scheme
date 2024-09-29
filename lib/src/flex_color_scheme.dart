@@ -7664,8 +7664,27 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // ListTileTheme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
-      listTileTheme: useSubThemes ? const ListTileThemeData() : null,
+      // ListTileTheme
+      listTileTheme: useSubThemes
+          ? FlexSubThemes.listTileTheme(
+              colorScheme: colorScheme,
+              selectedSchemeColor: subTheme.listTileSelectedSchemeColor,
+              iconSchemeColor: subTheme.listTileIconSchemeColor,
+              textSchemeColor: subTheme.listTileTextSchemeColor,
+              titleTextStyle: subTheme.listTileTitleTextStyle,
+              subtitleTextStyle: subTheme.listTileSubtitleTextStyle,
+              leadingAndTrailingTextStyle:
+                  subTheme.listTileLeadingAndTrailingTextStyle,
+              tileSchemeColor: subTheme.listTileTileSchemeColor,
+              selectedTileSchemeColor: subTheme.listTileSelectedTileSchemeColor,
+              contentPadding: subTheme.listTileContentPadding,
+              horizontalTitleGap: subTheme.listTileHorizontalTitleGap,
+              minVerticalPadding: subTheme.listTileMinVerticalPadding,
+              style: subTheme.listTileStyle,
+              titleAlignment: subTheme.listTileTitleAlignment,
+              controlAffinity: subTheme.listTileControlAffinity,
+            )
+          : null,
       //
       // MenuBar theme, used by MenuBar.
       menuBarTheme: useSubThemes
