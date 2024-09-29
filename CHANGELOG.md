@@ -398,7 +398,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 **CHANGE**
 
 - The optional staggered grid-based Playground UI was removed.
-  - The rationale for removing it is to make the app simpler. 
+  - The rationale for removing it is to simplify the app. 
   - The staggered grid view was originally included in the Playground for its "example 5" tutorial intent. It was used to demonstrate how the same widget panels could be used in a completely different app layout, for Flutter tutorial purposes. The UI was not so brilliant and way to heavy to use on web builds, at least if you opened up all panels. 
     - Did anybody use the staggered grid layout anyway? Let me know if you miss it. Just so I know, but it is not coming back :)
 - No longer generate any code for `useMaterial3: true` value. The FSS default is now `true` and we thus no longer explicitly need to add API code gen when the setting is **ON**.
