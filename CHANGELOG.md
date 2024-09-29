@@ -81,9 +81,10 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: InputDecorator: Platform adaptive radius.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
-- TODO: The Chip's default M3 height is wrong.
-  - Default padding and fontSize are correct, **but** there is something odd going on with Chip default from the padding. Using the same font size (14) and padding (all 8), does not result in the same height as default M3. It becomes 4 dp lower. No idea yet why this happens, or if the M3 default render is even correct. Need to compare with specs and dig deeper.  
-- TODO: Chips: Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
+- TODO: Chips
+  - ADD Icon size, needed when changing the font size to make it fit nicely.  
+  - Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
+  - Make a new Flutter issue: Chips in M3 should be 32 dp high, not 34 dp like now.
 
 - TODO: Add `ToggleButtons` selected foreground and unselected background color props.
 - Example 4: Add a high contrast theme in example 4 with tutorial update (commented placeholder added)

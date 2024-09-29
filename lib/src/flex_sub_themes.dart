@@ -1962,14 +1962,10 @@ sealed class FlexSubThemes {
         (labelStyle ?? const TextStyle()).copyWith(
       color: onBackgroundColor,
       fontSize: fontSize ?? labelStyle?.fontSize ?? 14,
+      // These two needed to match size of default M3.
+      letterSpacing: labelStyle?.letterSpacing ?? 0.1,
+      height: labelStyle?.height ?? 1.43,
     );
-
-    // TODO(rydmike): Totally remove these debug prints
-    // debugPrint('effectiveLabelStyle: $effectiveLabelStyle');
-    // debugPrint(
-    //     'effectiveLabelStyle fontFamily: ${effectiveLabelStyle.fontFamily}');
-    // debugPrint(
-    //     'effectiveLabelStyle fontSize  : ${effectiveLabelStyle.fontSize}');
 
     // TODO(rydmike): We need widget state to use this! Not supported. Issue!
     // Text color, uses the selected foreground color for selected chip styles.
@@ -1985,7 +1981,16 @@ sealed class FlexSubThemes {
           secondaryLabelStyle?.fontSize ??
           labelStyle?.fontSize ??
           14,
+      // These two needed to match size of default M3.
+      letterSpacing: secondaryLabelStyle?.letterSpacing ??
+          labelStyle?.letterSpacing ??
+          0.1,
+      height: secondaryLabelStyle?.height ?? labelStyle?.height ?? 1.43,
     );
+
+    // TODO(rydmike): Add icon size, needed when using smaller or bigger fonts.
+
+    // TODO(rydmike): M3 is 34dp high, should only be 32dp. Report Flutter bug!
 
     return ChipThemeData(
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],

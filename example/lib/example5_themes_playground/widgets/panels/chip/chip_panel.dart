@@ -62,7 +62,6 @@ class ChipPanel extends StatelessWidget {
         // ignore: avoid_bool_literals_in_conditional_expressions
         controller.chipBlendColors ?? (useMaterial3 ? false : true);
 
-    // TODO(rydmike): The Chip's default M3 height is wrong, why?
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
