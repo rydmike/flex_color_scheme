@@ -33,9 +33,9 @@ class CardPanel extends StatelessWidget {
     final double? effectiveRadius = App.effectiveRadius(controller);
     final String cardRadiusDefaultLabel =
         controller.cardBorderRadius == null && effectiveRadius == null
-            ? 'default 12'
+            ? '12 dp'
             : controller.cardBorderRadius == null && effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
+                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
 
     return Column(
@@ -67,7 +67,7 @@ class CardPanel extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: cardRadiusDefaultLabel,
-          valueDefaultDisabledLabel: useMaterial3 ? 'default 12' : 'default 4',
+          valueDefaultDisabledLabel: useMaterial3 ? '12 dp' : '4 dp',
         ),
         const Padding(
           padding: EdgeInsets.all(16),

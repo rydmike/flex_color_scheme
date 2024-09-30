@@ -64,7 +64,7 @@ class BottomAppBarPanel extends StatelessWidget {
           divisions: 100,
           valueHeading: 'HEIGHT',
           valueDecimalPlaces: 1,
-          valueDefaultLabel: useMaterial3 ? '80' : 'content',
+          valueDefaultLabel: useMaterial3 ? '80 dp' : 'content',
         ),
         if (isLight) ...<Widget>[
           SliderListTileReveal(

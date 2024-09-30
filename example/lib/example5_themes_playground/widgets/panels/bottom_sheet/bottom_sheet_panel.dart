@@ -26,9 +26,9 @@ class BottomSheetPanel extends StatelessWidget {
     final String sheetRadiusDefaultLabel = controller.bottomSheetBorderRadius ==
                 null &&
             effectiveRadius == null
-        ? '28'
+        ? '28 dp'
         : controller.bottomSheetBorderRadius == null && effectiveRadius != null
-            ? 'global ${effectiveRadius.toStringAsFixed(0)}'
+            ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
             : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class BottomSheetPanel extends StatelessWidget {
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
           valueDefaultLabel: sheetRadiusDefaultLabel,
-          valueDefaultDisabledLabel: useMaterial3 ? '28' : '0',
+          valueDefaultDisabledLabel: useMaterial3 ? '28 dp' : '0 dp',
         ),
         const Divider(),
         const ListTile(title: Text('Standard BottomSheet')),
