@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/widgets/universal/flex_squircle.dart';
 import '../../../../shared/widgets/universal/flex_stadium_squircle.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
@@ -36,7 +36,7 @@ class ShapeRadiusPanel extends StatelessWidget {
 
     // Get effective platform default global radius.
     // Used on the shapes presentation.
-    final double radius = App.effectiveRadius(controller) ??
+    final double radius = ThemeValues.effectiveRadius(controller) ??
         (enableControl ? 12 : (useMaterial3 ? 12 : 4));
 
     // Paddings for the two column control layouts.

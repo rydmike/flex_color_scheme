@@ -5,6 +5,7 @@ import '../../../../shared/const/app.dart';
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/app_scroll_behavior.dart';
+import '../../../theme/theme_values.dart';
 
 /// Horizontal color scheme selector of schemes in [AppColor.schemes].
 ///
@@ -234,14 +235,16 @@ class SchemeButtonsList extends StatelessWidget {
   final double phoneReduce;
   final ValueChanged<int> onSelect;
 
-  double _borderRadius(bool useMaterial3) => controller.useSubThemes &&
-          controller.useFlexColorScheme
-      // FCS default for Card is 12.
-      ? (controller.cardBorderRadius ?? App.effectiveRadius(controller) ?? 12)
-      // M3 or M2 default for Card.
-      : useMaterial3
-          ? 12
-          : 4;
+  double _borderRadius(bool useMaterial3) =>
+      controller.useSubThemes && controller.useFlexColorScheme
+          // FCS default for Card is 12.
+          ? (controller.cardBorderRadius ??
+              ThemeValues.effectiveRadius(controller) ??
+              12)
+          // M3 or M2 default for Card.
+          : useMaterial3
+              ? 12
+              : 4;
 
   @override
   Widget build(BuildContext context) {

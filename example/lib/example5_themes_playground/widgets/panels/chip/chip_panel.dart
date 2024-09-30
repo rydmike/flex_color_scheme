@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'chip_blend_colors_toggle_buttons.dart';
 
@@ -38,7 +38,7 @@ class ChipPanel extends StatelessWidget {
         controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
-    final double? effectiveRadius = App.effectiveRadius(controller);
+    final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
 
     final String chipRadiusDefaultLabel =
         controller.chipBorderRadius == null && effectiveRadius == null
