@@ -687,8 +687,78 @@ class ThemeServicePrefs implements ThemeService {
         }
         if (value == null) return defaultValue;
         if (value < 0) return defaultValue;
-        if (value >= TabAlignment.values.length) return defaultValue;
-        return TabAlignment.values[value] as T;
+        if (value >= FlexFixedColorStyle.values.length) return defaultValue;
+        return FlexFixedColorStyle.values[value] as T;
+      }
+      // T is ListTileStyle is nullable value.
+      if (sameTypes<T, ListTileStyle?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded ListTileStyle?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= ListTileStyle.values.length) return defaultValue;
+        return ListTileStyle.values[value] as T;
+      }
+      // T is ListTileStyle none nullable value.
+      if (sameTypes<T, ListTileStyle>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded ListTileStyle : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= ListTileStyle.values.length) return defaultValue;
+        return ListTileStyle.values[value] as T;
+      }
+      // T is ListTileTitleAlignment is nullable value.
+      if (sameTypes<T, ListTileTitleAlignment?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded ListTileTitleAlignment?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= ListTileTitleAlignment.values.length) return defaultValue;
+        return ListTileTitleAlignment.values[value] as T;
+      }
+      // T is ListTileTitleAlignment none nullable value.
+      if (sameTypes<T, ListTileTitleAlignment>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded ListTileTitleAlignment : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= ListTileTitleAlignment.values.length) return defaultValue;
+        return ListTileTitleAlignment.values[value] as T;
+      }
+      // T is ListTileControlAffinity is nullable value.
+      if (sameTypes<T, ListTileControlAffinity?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded ListTileControlAffinity?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= ListTileControlAffinity.values.length) return defaultValue;
+        return ListTileControlAffinity.values[value] as T;
+      }
+      // T is ListTileControlAffinity none nullable value.
+      if (sameTypes<T, ListTileControlAffinity>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded ListTileControlAffinity : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= ListTileControlAffinity.values.length) return defaultValue;
+        return ListTileControlAffinity.values[value] as T;
       }
       //
     } catch (e) {

@@ -87,6 +87,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
 - TODO: ListTile
+  - Add theme properties for `listTileTitleAlignment` and `listTileStyle`.
   - Potentially make a Flutter issue about minVerticalPadding when value is 4, it gets smaller than 0...3! Weird! Study the cause.
   
 - TODO: Chips
