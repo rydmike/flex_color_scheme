@@ -7,6 +7,7 @@ import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/visual_density_enum.dart';
 import 'code_theme.dart';
+import 'theme_values.dart';
 import 'topic_theme.dart';
 
 /// This function calls [flexColorSchemeDark] and uses
@@ -224,10 +225,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                         controller.inputDecoratorPaddingEnd != null ||
                         controller.inputDecoratorPaddingBottom != null
                     ? EdgeInsetsDirectional.fromSTEB(
-                        controller.inputDecoratorPaddingStart ?? 0,
-                        controller.inputDecoratorPaddingTop ?? 0,
-                        controller.inputDecoratorPaddingEnd ?? 0,
-                        controller.inputDecoratorPaddingBottom ?? 0,
+                        controller.inputDecoratorPaddingStart ??
+                            InpDecoDefault.start.padding(controller),
+                        controller.inputDecoratorPaddingTop ??
+                            InpDecoDefault.top.padding(controller),
+                        controller.inputDecoratorPaddingEnd ??
+                            InpDecoDefault.end.padding(controller),
+                        controller.inputDecoratorPaddingBottom ??
+                            InpDecoDefault.bottom.padding(controller),
                       )
                     : null,
             //
