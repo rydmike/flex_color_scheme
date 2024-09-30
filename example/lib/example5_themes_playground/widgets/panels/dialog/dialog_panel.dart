@@ -59,7 +59,7 @@ class DialogPanel extends StatelessWidget {
     final bool useFCS =
         controller.useSubThemes && controller.useFlexColorScheme;
     if (!useFCS) {
-      return controller.useMaterial3 ? '28' : '4';
+      return controller.useMaterial3 ? '28 dp' : '4 dp';
     }
     final bool useGlobalRadius =
         (controller.adaptiveDialogRadius == AdaptiveTheme.off ||
@@ -67,12 +67,12 @@ class DialogPanel extends StatelessWidget {
             controller.dialogBorderRadius == null;
     if (useGlobalRadius) {
       return controller.defaultRadius != null
-          ? 'global ${controller.defaultRadius!.toStringAsFixed(0)}'
-          : (controller.useMaterial3 ? '28' : '4');
+          ? 'global ${controller.defaultRadius!.toStringAsFixed(0)} dp'
+          : (controller.useMaterial3 ? '28 dp' : '4 dp');
     } else {
       return controller.dialogBorderRadius != null
           ? controller.dialogBorderRadius!.toStringAsFixed(0)
-          : (controller.useMaterial3 ? '28' : '4');
+          : (controller.useMaterial3 ? '28 dp' : '4 dp');
     }
   }
 
@@ -84,7 +84,7 @@ class DialogPanel extends StatelessWidget {
             controller.adaptiveRadius != null &&
             controller.dialogBorderRadius == null;
     if (useAdaptiveRadius) {
-      return 'Global (${controller.adaptiveRadius?.label ?? ''})';
+      return 'Global (${controller.adaptiveRadius?.label ?? ''} dp)';
     }
     return null;
   }
@@ -94,7 +94,7 @@ class DialogPanel extends StatelessWidget {
     final bool useFCS =
         controller.useSubThemes && controller.useFlexColorScheme;
     if (!useFCS) {
-      return controller.useMaterial3 ? '28' : '4';
+      return controller.useMaterial3 ? '28 dp' : '4 dp';
     }
     final bool useAdaptiveDialogRadius =
         controller.adaptiveDialogRadius != AdaptiveTheme.off &&
@@ -102,7 +102,7 @@ class DialogPanel extends StatelessWidget {
     if (useAdaptiveDialogRadius) {
       return controller.dialogBorderRadiusAdaptive != null
           ? controller.dialogBorderRadiusAdaptive!.toStringAsFixed(0)
-          : (controller.useMaterial3 ? '28' : '4');
+          : (controller.useMaterial3 ? '28 dp' : '4 dp');
     }
     final bool useAdaptiveRadius =
         controller.adaptiveRadius != AdaptiveTheme.off &&
@@ -110,8 +110,8 @@ class DialogPanel extends StatelessWidget {
             controller.dialogBorderRadius == null;
     if (useAdaptiveRadius) {
       return controller.defaultRadiusAdaptive != null
-          ? 'global ${controller.defaultRadiusAdaptive!.toStringAsFixed(0)}'
-          : (controller.useMaterial3 ? '28' : '4');
+          ? 'global ${controller.defaultRadiusAdaptive!.toStringAsFixed(0)} dp'
+          : (controller.useMaterial3 ? '28 dp' : '4 dp');
     }
     return 'OFF';
   }
@@ -123,7 +123,7 @@ class DialogPanel extends StatelessWidget {
     final bool useFCS =
         controller.useSubThemes && controller.useFlexColorScheme;
     if (!useFCS) {
-      return controller.useMaterial3 ? '28' : '4';
+      return controller.useMaterial3 ? '28 dp' : '4 dp';
     }
 
     // Use defaultRadiusAdaptive instead of defaultRadius?
@@ -155,10 +155,10 @@ class DialogPanel extends StatelessWidget {
       return radius.toStringAsFixed(0);
     } else {
       if (effectiveRadius != null) {
-        return 'dialog ${effectiveRadius.toStringAsFixed(0)}';
+        return 'dialog ${effectiveRadius.toStringAsFixed(0)} dp';
       }
     }
-    return controller.useMaterial3 ? '28' : '4';
+    return controller.useMaterial3 ? '28 dp' : '4 dp';
   }
 
   @override
@@ -313,7 +313,7 @@ class DialogPanel extends StatelessWidget {
                 valueHeading: 'RADIUS',
                 valueUnitLabel: ' dp',
                 valueDefaultLabel: _dialogRadiusLabel(controller),
-                valueDefaultDisabledLabel: useMaterial3 ? '28' : '4',
+                valueDefaultDisabledLabel: useMaterial3 ? '28 dp' : '4 dp',
               ),
             ),
             Expanded(
@@ -431,8 +431,8 @@ class DialogPanel extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
-          valueDefaultLabel: '8',
-          valueDefaultDisabledLabel: useMaterial3 ? '8' : '4',
+          valueDefaultLabel: '8 dp',
+          valueDefaultDisabledLabel: useMaterial3 ? '8 dp' : '4 dp',
         ),
         ListTileReveal(
           dense: true,
