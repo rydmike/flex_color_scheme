@@ -269,6 +269,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             chipBlendColors: controller.chipBlendColors,
             chipRadius: controller.chipBorderRadius,
             chipFontSize: controller.chipFontSize,
+            chipIconSize: controller.chipIconSize,
             chipPadding: controller.chipPaddingStart != null ||
                     controller.chipPaddingTop != null ||
                     controller.chipPaddingEnd != null ||

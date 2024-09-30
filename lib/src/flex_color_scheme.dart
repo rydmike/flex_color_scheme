@@ -7508,6 +7508,7 @@ class FlexColorScheme with Diagnosticable {
                   effectiveTextTheme.labelLarge,
               fontSize: subTheme.chipFontSize,
               secondaryFontSize: subTheme.chipSecondaryFontSize,
+              iconSize: subTheme.chipIconSize,
               padding: subTheme.chipPadding,
               radius: subTheme.chipRadius ?? platformRadius,
               surfaceTintColor: removeTint ? Colors.transparent : null,

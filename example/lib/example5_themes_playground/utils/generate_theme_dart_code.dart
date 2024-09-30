@@ -755,6 +755,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String chipFontSize = controller.chipFontSize != null
       ? '    chipFontSize: ${controller.chipFontSize},\n'
       : '';
+  final String chipIconSize = controller.chipIconSize != null
+      ? '    chipIconSize: ${controller.chipIconSize},\n'
+      : '';
   final String chipPadding = controller.chipPaddingStart != null ||
           controller.chipPaddingTop != null ||
           controller.chipPaddingEnd != null ||
@@ -1428,6 +1431,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipBlendColors'
           '$chipBorderRadius'
           '$chipFontSize'
+          '$chipIconSize'
           '$chipPadding'
           //
           '$cardBorderRadius'
@@ -1668,6 +1672,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipBlendColors'
           '$chipBorderRadius'
           '$chipFontSize'
+          '$chipIconSize'
           '$chipPadding'
           //
           '$cardBorderRadius'

@@ -82,7 +82,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
 - TODO: Chips
-  - ADD Icon size, needed when changing the font size to make it fit nicely.  
+  - Make a new Flutter issue: IconTheme size does not work in M3, in M2 close icon chnage but not check mark.  
   - Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
   - Make a new Flutter issue: Chips in M3 should be 32 dp high, not 34 dp like now.
 
@@ -250,8 +250,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
 
 
-- Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize` and `padding` properties to `FlexSubThemes.chipTheme`.
-- Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
+- Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize`, `ìconSize` and `padding` properties to `FlexSubThemes.chipTheme`.
+- Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize`, `chipIconSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
 
 
 - Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`.

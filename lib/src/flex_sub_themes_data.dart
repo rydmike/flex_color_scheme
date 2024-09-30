@@ -304,6 +304,7 @@ class FlexSubThemesData with Diagnosticable {
     this.chipSecondaryLabelStyle,
     this.chipFontSize,
     this.chipSecondaryFontSize,
+    this.chipIconSize,
     this.chipPadding,
     //
     this.cardRadius,
@@ -2047,6 +2048,11 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [chipFontSize].
   final double? chipSecondaryFontSize;
 
+  /// Icon size used by the [IconTheme] used by [Chip]s.
+  ///
+  /// If not defined defaults to 18.
+  final double? chipIconSize;
+
   /// Overrides the default for [ChipAttributes.padding],
   /// the padding between the contents of the chip and the outside [shape].
   ///
@@ -3775,6 +3781,7 @@ class FlexSubThemesData with Diagnosticable {
     final TextStyle? chipSecondaryLabelStyle,
     final double? chipFontSize,
     final double? chipSecondaryFontSize,
+    final double? chipIconSize,
     final EdgeInsetsGeometry? chipPadding,
     //
     final double? cardRadius,
@@ -4180,6 +4187,7 @@ class FlexSubThemesData with Diagnosticable {
       chipFontSize: chipFontSize ?? this.chipFontSize,
       chipSecondaryFontSize:
           chipSecondaryFontSize ?? this.chipSecondaryFontSize,
+      chipIconSize: chipIconSize ?? this.chipIconSize,
       chipPadding: chipPadding ?? this.chipPadding,
       //
       cardRadius: cardRadius ?? this.cardRadius,
@@ -4632,6 +4640,7 @@ class FlexSubThemesData with Diagnosticable {
         other.chipSecondaryLabelStyle == chipSecondaryLabelStyle &&
         other.chipFontSize == chipFontSize &&
         other.chipSecondaryFontSize == chipSecondaryFontSize &&
+        other.chipIconSize == chipIconSize &&
         other.chipPadding == chipPadding &&
         //
         other.cardRadius == cardRadius &&
@@ -4986,6 +4995,7 @@ class FlexSubThemesData with Diagnosticable {
         chipSecondaryLabelStyle,
         chipFontSize,
         chipSecondaryFontSize,
+        chipIconSize,
         chipPadding,
         //
         cardRadius,
@@ -5408,6 +5418,7 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<double>('chipFontSize', chipFontSize));
     properties.add(DiagnosticsProperty<double>(
         'chipSecondaryFontSize', chipSecondaryFontSize));
+    properties.add(DiagnosticsProperty<double>('chipIconSize', chipIconSize));
     properties.add(
         DiagnosticsProperty<EdgeInsetsGeometry>('chipPadding', chipPadding));
     //

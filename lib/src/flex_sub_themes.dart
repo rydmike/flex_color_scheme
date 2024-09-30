@@ -1796,6 +1796,11 @@ sealed class FlexSubThemes {
     /// If not defined, defaults to [fontSize].
     final double? secondaryFontSize,
 
+    /// Icon size used by the [IconTheme] used by [Chip]s.
+    ///
+    /// If not defined defaults to 18.
+    final double? iconSize,
+
     /// Overrides the default for [ChipAttributes.padding],
     /// the padding between the contents of the chip and the outside [shape].
     ///
@@ -1874,8 +1879,6 @@ sealed class FlexSubThemes {
         return Colors.white70;
       }
     }
-
-    // TODO(rydmike): M3 mode gets faulty Chips sizes.
 
     // TODO(rydmike): Monitor Chip issue #115364
     // https://github.com/flutter/flutter/issues/115364
@@ -1988,8 +1991,6 @@ sealed class FlexSubThemes {
       height: secondaryLabelStyle?.height ?? labelStyle?.height ?? 1.43,
     );
 
-    // TODO(rydmike): Add icon size, needed when using smaller or bigger fonts.
-
     // TODO(rydmike): M3 is 34dp high, should only be 32dp. Report Flutter bug!
 
     return ChipThemeData(
@@ -2062,19 +2063,13 @@ sealed class FlexSubThemes {
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
-      // iconTheme: useM3Defaults
-      //     ? null
-      //     : IconThemeData(
-      //         color: fixContrast(iconColor),
-      //         size: 18.0,
-      //       ),
       iconTheme: baseSchemeColor == null || blend
-          ? const IconThemeData(
-              size: 18.0,
+          ? IconThemeData(
+              size: iconSize ?? 18.0,
             )
           : IconThemeData(
               color: fixContrast(iconColor),
-              size: 18.0,
+              size: iconSize ?? 18.0,
             ),
     );
   }
