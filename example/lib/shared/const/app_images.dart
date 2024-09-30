@@ -1,7 +1,5 @@
 /// AppImages represents the images used in this app.
-class AppImages {
-  AppImages._();
-
+sealed class AppImages {
   // Constant references for all the bundled Undraw SVG image assets.
   static const String appInstallation = 'assets/images/App installation.svg';
   static const String apps = 'assets/images/Apps.svg';

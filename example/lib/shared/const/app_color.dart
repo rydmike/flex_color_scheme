@@ -7,11 +7,7 @@ import '../controllers/theme_controller.dart';
 ///
 /// Putting static const color data in their own class with only color values
 /// and data related to the colors is a common useful and convenient practice.
-class AppColor {
-  // This class is not meant to be instantiated or extended; this constructor
-  // prevents instantiation and extension.
-  AppColor._();
-
+sealed class AppColor {
   // Create a custom flex scheme color for a light theme.
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
     primary: Color(0xFF00296B),

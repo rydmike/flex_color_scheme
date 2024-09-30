@@ -17,11 +17,7 @@ import 'app_color.dart';
 // just adds extra complexity, forces us to use a type cast on the map content.
 // Yes it saves us from defining a const for the default vales, but I think
 // that is a simpler and more type safe way.
-class Store {
-  // This class is not meant to be instantiated or extended; this constructor
-  // prevents instantiation and extension.
-  Store._();
-
+sealed class Store {
   // GENERAL SETTINGS.
   // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
   // ===========================================================================
