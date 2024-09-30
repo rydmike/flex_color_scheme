@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 
 class CardPanel extends StatelessWidget {
   const CardPanel(this.controller, {super.key});
@@ -30,7 +30,7 @@ class CardPanel extends StatelessWidget {
         controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
-    final double? effectiveRadius = App.effectiveRadius(controller);
+    final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
     final String cardRadiusDefaultLabel =
         controller.cardBorderRadius == null && effectiveRadius == null
             ? '12 dp'
