@@ -429,3 +429,77 @@ class FlexFixedColorStyleAdapter extends TypeAdapter<FlexFixedColorStyle?> {
   @override
   int get typeId => 171;
 }
+
+/// A Hive data type adapter for enum [ListTileStyle], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class ListTileStyleAdapter extends TypeAdapter<ListTileStyle?> {
+  @override
+  ListTileStyle? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= ListTileStyle.values.length) {
+      return null;
+    } else {
+      return ListTileStyle.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ListTileStyle? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 172;
+}
+
+/// A Hive data type adapter for enum [ListTileTitleAlignment], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class ListTileTitleAlignmentAdapter
+    extends TypeAdapter<ListTileTitleAlignment?> {
+  @override
+  ListTileTitleAlignment? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= ListTileTitleAlignment.values.length) {
+      return null;
+    } else {
+      return ListTileTitleAlignment.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ListTileTitleAlignment? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 173;
+}
+
+/// A Hive data type adapter for enum [ListTileControlAffinity], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class ListTileControlAffinityAdapter
+    extends TypeAdapter<ListTileControlAffinity?> {
+  @override
+  ListTileControlAffinity? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= ListTileControlAffinity.values.length) {
+      return null;
+    } else {
+      return ListTileControlAffinity.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ListTileControlAffinity? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 174;
+}
