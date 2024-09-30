@@ -1801,6 +1801,12 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultChipFontSize = null;
 
+  // Key used to read and save the chipIconSize value.
+  static const String keyChipIconSize = 'chipIconSize';
+  // Default value for the chipIconSize, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultChipIconSize = null;
+
   // Key used to read and save the chipPaddingStart value.
   static const String keyChipPaddingStart = 'chipPaddingStart';
   // Default value for the chipPaddingStart, also reset settings.

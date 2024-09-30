@@ -790,9 +790,10 @@ class ThemeController with ChangeNotifier {
         Store.keyChipBlendColors, Store.defaultChipBlendColors);
     _chipBorderRadius = await _themeService.load(
         Store.keyChipBorderRadius, Store.defaultChipBorderRadius);
-
     _chipFontSize = await _themeService.load(
         Store.keyChipFontSize, Store.defaultChipFontSize);
+    _chipIconSize = await _themeService.load(
+        Store.keyChipIconSize, Store.defaultChipIconSize);
     _chipPaddingStart = await _themeService.load(
         Store.keyChipPaddingStart, Store.defaultChipPaddingStart);
     _chipPaddingEnd = await _themeService.load(
@@ -1317,6 +1318,7 @@ class ThemeController with ChangeNotifier {
     setChipBorderRadius(Store.defaultChipBorderRadius, false);
     setChipBlendColors(Store.defaultChipBlendColors, false);
     setChipFontSize(Store.defaultChipFontSize, false);
+    setChipIconSize(Store.defaultChipIconSize, false);
     setChipPaddingStart(Store.defaultChipPaddingStart, false);
     setChipPaddingEnd(Store.defaultChipPaddingEnd, false);
     setChipPaddingTop(Store.defaultChipPaddingTop, false);
@@ -5132,6 +5134,15 @@ class ThemeController with ChangeNotifier {
     _chipFontSize = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyChipFontSize, value));
+  }
+
+  late double? _chipIconSize;
+  double? get chipIconSize => _chipIconSize;
+  void setChipIconSize(double? value, [bool notify = true]) {
+    if (value == _chipIconSize) return;
+    _chipIconSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyChipIconSize, value));
   }
 
   late double? _chipPaddingStart;
