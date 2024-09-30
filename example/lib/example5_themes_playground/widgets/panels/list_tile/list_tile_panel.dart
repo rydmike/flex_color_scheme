@@ -44,7 +44,7 @@ class ListTilePanel extends StatelessWidget {
                 title: const Text('Icon color'),
                 defaultLabel: 'onSurfaceVariant',
                 defaultLabelM2: 'Black opacity 54%',
-                defaultLabelDarkM2: 'onSurface',
+                defaultLabelDarkM2: 'White',
                 value: controller.listTileIconSchemeColor,
                 onChanged: controller.setListTileIconSchemeColor,
               ),
