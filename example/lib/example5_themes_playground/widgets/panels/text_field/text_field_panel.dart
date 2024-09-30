@@ -1,13 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../dialogs/set_text_field_to_defaults_dialog.dart';
 import '../../dialogs/set_text_field_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
@@ -77,7 +77,7 @@ class TextFieldPanel extends StatelessWidget {
                 : '';
 
     // Get effective platform default global radius.
-    final double? effectiveRadius = App.effectiveRadius(controller);
+    final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
     final String decoratorRadiusDefaultLabel =
         controller.inputDecoratorBorderRadius == null && effectiveRadius == null
             ? useMaterial3
@@ -151,120 +151,6 @@ class TextFieldPanel extends StatelessWidget {
             ? SchemeColor
                 .values[controller.inputDecoratorSchemeColorDark!.index].name
             : 'primary';
-
-    // Input content padding logic, default is zero, true when collapsed used,
-    // but we do not really offer that option, but used as init values.
-    String defaultStartPadding = '0';
-    String defaultTopPadding = '0';
-    String defaultEndPadding = '0';
-    String defaultBottomPadding = '0';
-    // This complex logic is needed to show the default padding values for the
-    // the content padding. The values are taken from hard coded values
-    // in the `ìnput_decorator.dart` around lines 2396 to 2433 when this was
-    // written.
-    // There is also internal constraints in the `InputDecorator` impacting
-    // the effective padding, changing them from the defaults. So these default
-    // values are not used in all cases.
-    if (controller.inputDecoratorBorderType == FlexInputBorderType.underline) {
-      if (controller.inputDecoratorIsFilled) {
-        if (useMaterial3) {
-          if (controller.inputDecoratorIsDense) {
-            defaultStartPadding = '12';
-            defaultTopPadding = '4';
-            defaultEndPadding = '12';
-            defaultBottomPadding = '4';
-          } else {
-            defaultStartPadding = '12';
-            defaultTopPadding = '8';
-            defaultEndPadding = '12';
-            defaultBottomPadding = '8';
-          }
-          // Using Material2
-        } else {
-          if (controller.inputDecoratorIsDense) {
-            defaultStartPadding = '12';
-            defaultTopPadding = '8';
-            defaultEndPadding = '12';
-            defaultBottomPadding = '8';
-          } else {
-            defaultStartPadding = '12';
-            defaultTopPadding = '12';
-            defaultEndPadding = '12';
-            defaultBottomPadding = '12';
-          }
-        }
-        // The underline border type, is NOT filled.
-      } else {
-        if (useMaterial3) {
-          if (controller.inputDecoratorIsDense) {
-            defaultStartPadding = '0';
-            defaultTopPadding = '4';
-            defaultEndPadding = '0';
-            defaultBottomPadding = '4';
-          } else {
-            defaultStartPadding = '0';
-            defaultTopPadding = '8';
-            defaultEndPadding = '0';
-            defaultBottomPadding = '8';
-          }
-          // Using Material2
-        } else {
-          if (controller.inputDecoratorIsDense) {
-            defaultStartPadding = '0';
-            defaultTopPadding = '8';
-            defaultEndPadding = '0';
-            defaultBottomPadding = '8';
-          } else {
-            defaultStartPadding = '0';
-            defaultTopPadding = '12';
-            defaultEndPadding = '0';
-            defaultBottomPadding = '12';
-          }
-        }
-      }
-      // Using outline border type
-    } else {
-      if (useMaterial3) {
-        if (controller.inputDecoratorIsDense) {
-          defaultStartPadding = '12';
-          defaultTopPadding = '16';
-          defaultEndPadding = '12';
-          defaultBottomPadding = '8';
-        } else {
-          defaultStartPadding = '12';
-          defaultTopPadding = '20';
-          defaultEndPadding = '12';
-          defaultBottomPadding = '12';
-        }
-        // Using Material2
-      } else {
-        if (controller.inputDecoratorIsDense) {
-          defaultStartPadding = '12';
-          defaultTopPadding = '20';
-          defaultEndPadding = '12';
-          defaultBottomPadding = '12';
-        } else {
-          defaultStartPadding = '12';
-          defaultTopPadding = '24';
-          defaultEndPadding = '12';
-          defaultBottomPadding = '16';
-        }
-      }
-    }
-    // As soon as any padding prop is set, the default for all paddings go
-    // to zero, you will have to set them yourself to your desired values.
-    // But at least when not set, you can see the default values for the
-    // different combinations of settings and figure out something that might
-    // work well.
-    if (controller.inputDecoratorPaddingStart != null ||
-        controller.inputDecoratorPaddingEnd != null ||
-        controller.inputDecoratorPaddingTop != null ||
-        controller.inputDecoratorPaddingBottom != null) {
-      defaultTopPadding = '0';
-      defaultBottomPadding = '0';
-      defaultStartPadding = '0';
-      defaultEndPadding = '0';
-    }
 
     // Paddings for the two column control layouts.
     const EdgeInsetsDirectional paddingStartColumn =
@@ -688,6 +574,7 @@ class TextFieldPanel extends StatelessWidget {
         // TextField Padding props
         //
         SwitchListTileReveal(
+          enabled: enableControl,
           contentPadding: EdgeInsetsDirectional.only(
             start: 16,
             end: useMaterial3 ? 28 : 20,
@@ -705,11 +592,6 @@ class TextFieldPanel extends StatelessWidget {
           enabled: enableControl,
           title: const Text('Content padding'),
           subtitleReveal: const Text(
-            'As soon as you set the "contentPadding" to any value, you '
-            'loose all the built-in default logic Flutter has for padding the '
-            'TextField InputDecorator, and need to set usable values for '
-            'your design manually.\n'
-            '\n'
             'When you toggle M2/M3, filled, border type and dense TextField, '
             'the default Flutter content padding values are shown, if they are '
             'all left undefined. There are also internal constraints '
@@ -737,7 +619,7 @@ class TextFieldPanel extends StatelessWidget {
                 valueDecimalPlaces: 0,
                 valueHeading: 'START',
                 valueUnitLabel: ' dp',
-                valueDefaultLabel: defaultStartPadding,
+                valueDefaultLabel: InpDecoDefault.start.asLabel(controller),
               ),
             ),
             Expanded(
@@ -753,7 +635,7 @@ class TextFieldPanel extends StatelessWidget {
                 valueDecimalPlaces: 0,
                 valueHeading: 'END',
                 valueUnitLabel: ' dp',
-                valueDefaultLabel: defaultEndPadding,
+                valueDefaultLabel: InpDecoDefault.end.asLabel(controller),
               ),
             ),
           ],
@@ -774,7 +656,7 @@ class TextFieldPanel extends StatelessWidget {
                 valueDecimalPlaces: 0,
                 valueHeading: 'TOP',
                 valueUnitLabel: ' dp',
-                valueDefaultLabel: defaultTopPadding,
+                valueDefaultLabel: InpDecoDefault.top.asLabel(controller),
               ),
             ),
             Expanded(
@@ -790,22 +672,30 @@ class TextFieldPanel extends StatelessWidget {
                 valueDecimalPlaces: 0,
                 valueHeading: 'BOTTOM',
                 valueUnitLabel: ' dp',
-                valueDefaultLabel: defaultBottomPadding,
+                valueDefaultLabel: InpDecoDefault.bottom.asLabel(controller),
               ),
             ),
           ],
         ),
         //
+        const SizedBox(height: 8),
         const Divider(height: 0),
         //
         // Text Selection Style
         //
         if (isLight)
-          const ListTile(title: Text('TextSelection style (light)'))
+          ListTile(
+            title: const Text('TextSelection style (light)'),
+            tileColor: theme.colorScheme.surfaceContainer,
+          )
         else
-          const ListTile(title: Text('TextSelection style (dark)')),
+          ListTile(
+            title: const Text('TextSelection style (dark)'),
+            tileColor: theme.colorScheme.surfaceContainer,
+          ),
+        const Divider(height: 0),
         const Padding(
-          padding: EdgeInsetsDirectional.only(start: 16, end: 108),
+          padding: EdgeInsetsDirectional.only(start: 16, end: 108, top: 16),
           child: TextField(
             showCursor: true,
             decoration: InputDecoration(

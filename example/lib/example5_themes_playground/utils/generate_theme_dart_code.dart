@@ -6,6 +6,7 @@ import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_theme.dart';
+import '../theme/theme_values.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
 /// code for the theme held by ThemeController.
@@ -573,17 +574,18 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    inputDecoratorIsDense: ${controller.inputDecoratorIsDense},\n'
       : '';
 
-  final String inputDecoratorContentPadding =
-      controller.inputDecoratorPaddingStart != null ||
-              controller.inputDecoratorPaddingEnd != null ||
-              controller.inputDecoratorPaddingTop != null ||
-              controller.inputDecoratorPaddingBottom != null
-          ? '    inputDecoratorContentPadding: EdgeInsetsDirectional.fromSTEB('
-              '${controller.inputDecoratorPaddingStart ?? 0}, '
-              '${controller.inputDecoratorPaddingTop ?? 0}, '
-              '${controller.inputDecoratorPaddingEnd ?? 0}, '
-              '${controller.inputDecoratorPaddingBottom ?? 0}),\n'
-          : '';
+  final String inputDecoratorContentPadding = controller
+                  .inputDecoratorPaddingStart !=
+              null ||
+          controller.inputDecoratorPaddingEnd != null ||
+          controller.inputDecoratorPaddingTop != null ||
+          controller.inputDecoratorPaddingBottom != null
+      ? '    inputDecoratorContentPadding: EdgeInsetsDirectional.fromSTEB('
+          '${controller.inputDecoratorPaddingStart ?? InpDecoDefault.start.padding(controller)}, '
+          '${controller.inputDecoratorPaddingTop ?? InpDecoDefault.top.padding(controller)}, '
+          '${controller.inputDecoratorPaddingEnd ?? InpDecoDefault.end.padding(controller)}, '
+          '${controller.inputDecoratorPaddingBottom ?? InpDecoDefault.bottom.padding(controller)}),\n'
+      : '';
 
   final String inputDecoratorBackgroundAlphaLight = controller
               .inputDecoratorBackgroundAlphaLight ==
