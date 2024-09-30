@@ -695,6 +695,54 @@ String generateThemeDartCode(ThemeController controller) {
       : '    inputSelectionHandleSchemeColor: ${controller.inputSelectionHandleDarkSchemeColor},\n';
 
   //
+  // ListTile setup CODE
+  //
+  final String listTileSelectedSchemeColor = controller
+              .listTileSelectedSchemeColor !=
+          null
+      ? '    listTileSelectedSchemeColor: ${controller.listTileSelectedSchemeColor},\n'
+      : '';
+  final String listTileIconSchemeColor = controller.listTileIconSchemeColor !=
+          null
+      ? '    listTileIconSchemeColor: ${controller.listTileIconSchemeColor},\n'
+      : '';
+  final String listTileTextSchemeColor = controller.listTileTextSchemeColor !=
+          null
+      ? '    listTileTextSchemeColor: ${controller.listTileTextSchemeColor},\n'
+      : '';
+  final String listTileTileSchemeColor = controller.listTileTileSchemeColor !=
+          null
+      ? '    listTileTileSchemeColor: ${controller.listTileTileSchemeColor},\n'
+      : '';
+  final String listTileSelectedTileSchemeColor = controller
+              .listTileSelectedTileSchemeColor !=
+          null
+      ? '    listTileSelectedTileSchemeColor: ${controller.listTileSelectedTileSchemeColor},\n'
+      : '';
+  final String listTileContentPadding = controller.listTilePaddingStart !=
+              null ||
+          controller.listTilePaddingTop != null ||
+          controller.listTilePaddingEnd != null ||
+          controller.listTilePaddingBottom != null
+      ? '    listTileContentPadding: ${EdgeInsetsDirectional.fromSTEB(
+          controller.listTilePaddingStart ?? 16,
+          controller.listTilePaddingTop ?? 0,
+          controller.listTilePaddingEnd ?? (controller.useMaterial3 ? 24 : 16),
+          controller.listTilePaddingBottom ?? 0,
+        )},\n'
+      : '';
+
+  final String listTileHorizontalTitleGap = controller
+              .listTileHorizontalTitleGap !=
+          null
+      ? '    listTileHorizontalTitleGap: ${controller.listTileHorizontalTitleGap!.toStringAsFixed(1)},\n'
+      : '';
+  final String listTileMinVerticalPadding = controller
+              .listTileMinVerticalPadding !=
+          null
+      ? '    listTileMinVerticalPadding: ${controller.listTileMinVerticalPadding!.toStringAsFixed(1)},\n'
+      : '';
+  //
   // Fab and chip, snack, card, and popup setup CODE
   //
   final String fabUseShape = controller.fabUseShape
@@ -1418,6 +1466,15 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputSelectionLightOpacity'
           '$inputSelectionHandleLightSchemeColor'
           //
+          '$listTileSelectedSchemeColor'
+          '$listTileIconSchemeColor'
+          '$listTileTextSchemeColor'
+          '$listTileTileSchemeColor'
+          '$listTileSelectedTileSchemeColor'
+          '$listTileContentPadding'
+          '$listTileHorizontalTitleGap'
+          '$listTileMinVerticalPadding'
+          //
           '$fabUseShape'
           '$fabAlwaysCircular'
           '$fabBorderRadius'
@@ -1658,6 +1715,15 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputSelectionDarkSchemeColor'
           '$inputSelectionDarkOpacity'
           '$inputSelectionHandleDarkSchemeColor'
+          //
+          '$listTileSelectedSchemeColor'
+          '$listTileIconSchemeColor'
+          '$listTileTextSchemeColor'
+          '$listTileTileSchemeColor'
+          '$listTileSelectedTileSchemeColor'
+          '$listTileContentPadding'
+          '$listTileHorizontalTitleGap'
+          '$listTileMinVerticalPadding'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'

@@ -360,6 +360,35 @@ class ThemeController with ChangeNotifier {
         Store.keyInputSelectionHandleDarkSchemeColor,
         Store.defaultInputSelectionHandleDarkSchemeColor);
     //
+    // ListTile SETTINGS.
+    //
+    _listTileSelectedSchemeColor = await _themeService.load(
+        Store.keyListTileSelectedSchemeColor,
+        Store.defaultListTileSelectedSchemeColor);
+    _listTileIconSchemeColor = await _themeService.load(
+        Store.keyListTileIconSchemeColor, Store.defaultListTileIconSchemeColor);
+    _listTileTextSchemeColor = await _themeService.load(
+        Store.keyListTileTextSchemeColor, Store.defaultListTileTextSchemeColor);
+    _listTileTileSchemeColor = await _themeService.load(
+        Store.keyListTileTileSchemeColor, Store.defaultListTileTileSchemeColor);
+    _listTileSelectedTileSchemeColor = await _themeService.load(
+        Store.keyListTileSelectedTileSchemeColor,
+        Store.defaultListTileSelectedTileSchemeColor);
+    _listTilePaddingStart = await _themeService.load(
+        Store.keyListTilePaddingStart, Store.defaultListTilePaddingStart);
+    _listTilePaddingEnd = await _themeService.load(
+        Store.keyListTilePaddingEnd, Store.defaultListTilePaddingEnd);
+    _listTilePaddingTop = await _themeService.load(
+        Store.keyListTilePaddingTop, Store.defaultListTilePaddingTop);
+    _listTilePaddingBottom = await _themeService.load(
+        Store.keyListTilePaddingBottom, Store.defaultListTilePaddingBottom);
+    _listTileHorizontalTitleGap = await _themeService.load(
+        Store.keyListTileHorizontalTitleGap,
+        Store.defaultListTileHorizontalTitleGap);
+    _listTileMinVerticalPadding = await _themeService.load(
+        Store.keyListTileMinVerticalPadding,
+        Store.defaultListTileMinVerticalPadding);
+    //
     // AppBar SETTINGS.
     _appBarStyleLight = await _themeService.load(
         Store.keyAppBarStyleLight, Store.defaultAppBarStyleLight);
@@ -1060,6 +1089,23 @@ class ThemeController with ChangeNotifier {
     //
     // InputDecorator SETTINGS.
     await setTextFieldToDefaults(false);
+    //
+    // ListTile SETTINGS.
+    setListTileSelectedSchemeColor(
+        Store.defaultListTileSelectedSchemeColor, false);
+    setListTileIconSchemeColor(Store.defaultListTileIconSchemeColor, false);
+    setListTileTextSchemeColor(Store.defaultListTileTextSchemeColor, false);
+    setListTileTileSchemeColor(Store.defaultListTileTileSchemeColor, false);
+    setListTileSelectedTileSchemeColor(
+        Store.defaultListTileSelectedTileSchemeColor, false);
+    setListTilePaddingStart(Store.defaultListTilePaddingStart, false);
+    setListTilePaddingEnd(Store.defaultListTilePaddingEnd, false);
+    setListTilePaddingTop(Store.defaultListTilePaddingTop, false);
+    setListTilePaddingBottom(Store.defaultListTilePaddingBottom, false);
+    setListTileHorizontalTitleGap(
+        Store.defaultListTileHorizontalTitleGap, false);
+    setListTileMinVerticalPadding(
+        Store.defaultListTileMinVerticalPadding, false);
     //
     // AppBar SETTINGS.
     setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
@@ -3549,6 +3595,112 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(
         Store.keyInputSelectionHandleDarkSchemeColor, value));
+  }
+
+  // ListTile SETTINGS.
+  // ===========================================================================
+
+  late SchemeColor? _listTileSelectedSchemeColor;
+  SchemeColor? get listTileSelectedSchemeColor => _listTileSelectedSchemeColor;
+  void setListTileSelectedSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _listTileSelectedSchemeColor) return;
+    _listTileSelectedSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileSelectedSchemeColor, value));
+  }
+
+  late SchemeColor? _listTileIconSchemeColor;
+  SchemeColor? get listTileIconSchemeColor => _listTileIconSchemeColor;
+  void setListTileIconSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _listTileIconSchemeColor) return;
+    _listTileIconSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileIconSchemeColor, value));
+  }
+
+  late SchemeColor? _listTileTextSchemeColor;
+  SchemeColor? get listTileTextSchemeColor => _listTileTextSchemeColor;
+  void setListTileTextSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _listTileTextSchemeColor) return;
+    _listTileTextSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileTextSchemeColor, value));
+  }
+
+  late SchemeColor? _listTileTileSchemeColor;
+  SchemeColor? get listTileTileSchemeColor => _listTileTileSchemeColor;
+  void setListTileTileSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _listTileTileSchemeColor) return;
+    _listTileTileSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileTileSchemeColor, value));
+  }
+
+  late SchemeColor? _listTileSelectedTileSchemeColor;
+  SchemeColor? get listTileSelectedTileSchemeColor =>
+      _listTileSelectedTileSchemeColor;
+  void setListTileSelectedTileSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _listTileSelectedTileSchemeColor) return;
+    _listTileSelectedTileSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyListTileSelectedTileSchemeColor, value));
+  }
+
+  late double? _listTilePaddingStart;
+  double? get listTilePaddingStart => _listTilePaddingStart;
+  void setListTilePaddingStart(double? value, [bool notify = true]) {
+    if (value == _listTilePaddingStart) return;
+    _listTilePaddingStart = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTilePaddingStart, value));
+  }
+
+  late double? _listTilePaddingEnd;
+  double? get listTilePaddingEnd => _listTilePaddingEnd;
+  void setListTilePaddingEnd(double? value, [bool notify = true]) {
+    if (value == _listTilePaddingEnd) return;
+    _listTilePaddingEnd = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTilePaddingEnd, value));
+  }
+
+  late double? _listTilePaddingTop;
+  double? get listTilePaddingTop => _listTilePaddingTop;
+  void setListTilePaddingTop(double? value, [bool notify = true]) {
+    if (value == _listTilePaddingTop) return;
+    _listTilePaddingTop = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTilePaddingTop, value));
+  }
+
+  late double? _listTilePaddingBottom;
+  double? get listTilePaddingBottom => _listTilePaddingBottom;
+  void setListTilePaddingBottom(double? value, [bool notify = true]) {
+    if (value == _listTilePaddingBottom) return;
+    _listTilePaddingBottom = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTilePaddingBottom, value));
+  }
+
+  late double? _listTileHorizontalTitleGap;
+  double? get listTileHorizontalTitleGap => _listTileHorizontalTitleGap;
+  void setListTileHorizontalTitleGap(double? value, [bool notify = true]) {
+    if (value == _listTileHorizontalTitleGap) return;
+    _listTileHorizontalTitleGap = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileHorizontalTitleGap, value));
+  }
+
+  late double? _listTileMinVerticalPadding;
+  double? get listTileMinVerticalPadding => _listTileMinVerticalPadding;
+  void setListTileMinVerticalPadding(double? value, [bool notify = true]) {
+    if (value == _listTileMinVerticalPadding) return;
+    _listTileMinVerticalPadding = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileMinVerticalPadding, value));
   }
 
   // AppBar SETTINGS.

@@ -71,18 +71,26 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
-- **STARTED**: Add some `ListTile` theming features, e.g., at least `contentPadding`. Maybe some font size and opacity? To get the M2 look in M3, which is actually nicer. Maybe also for smaller text size in M3? Added a large number of supported properties to FCS package. Not yet added any controls to Playground.
 - **STARTED**: Add some `SearchBar` theming features. Placeholder added. What to add in Playground? Shape and elevation?
 - **STARTED**: Add some `SearchView` theming features. Placeholder added. What to add in Playground? Shape and elevation? Has variant theme issue! Report the issue!
 
 
+- TODO: Playground theme using fidelity improvement: Make all custom ListTile's use themed content padding. They override it now. Could get away with this when we did not adjust default, but with ListTile content padding available in theming we can no longer do that.
+
+- **FIX**: Dialog adaptive response seems broken, take a look at it. Maybe controller for global radius not being null anymore issue, after enum change.
+
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
 - TODO: InputDecorator: Platform adaptive radius.
+- TODO: InputDecorator: Padding, actually use defaults for none give values. Will be so much better, add theme controller functions for it.
+- TODO: InputDecorator: Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
+- TODO: ListTile
+  - Potentially make a Flutter issue about minVerticalPadding when value is 4, it gets smaller than 0...3! Weird! Study the cause.
+  
 - TODO: Chips
-  - Make a new Flutter issue: IconTheme size does not work in M3, in M2 close icon chnage but not check mark.  
+  - Make a new Flutter issue: IconTheme size does not work in M3, in M2 close icon changes, but not the check mark.  
   - Make a new Flutter issue: Chips theming still require proper support in Flutter, it is not there yet.
   - Make a new Flutter issue: Chips in M3 should be 32 dp high, not 34 dp like now.
 
@@ -393,6 +401,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - To the **TextField** settings panel, added UI and code gen for dense input decorator and for custom content padding.
 - The **Chip** settings now include separate color for the `ChoiceChip (called Suggestion Chip in M3 design). The feature that blends the selected main overall Chip color was made optional. It is a useful feature due to the limited independent theme control over the Chips.  
 - The **Chip** settings panel now includes font size and padding controls.
+- The **ListTile** settings panel now includes a large number of theming controls for ListTile theming.
 - The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
 
 
