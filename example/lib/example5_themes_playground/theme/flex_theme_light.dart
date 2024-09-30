@@ -308,6 +308,27 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             inputSelectionOpacity: controller.inputSelectionLightOpacity,
             inputSelectionHandleSchemeColor:
                 controller.inputSelectionHandleLightSchemeColor,
+            // ListTile settings.
+            listTileSelectedSchemeColor: controller.listTileSelectedSchemeColor,
+            listTileIconSchemeColor: controller.listTileIconSchemeColor,
+            listTileTextSchemeColor: controller.listTileTextSchemeColor,
+            listTileTileSchemeColor: controller.listTileTileSchemeColor,
+            listTileSelectedTileSchemeColor:
+                controller.listTileSelectedTileSchemeColor,
+            listTileContentPadding: controller.listTilePaddingStart != null ||
+                    controller.listTilePaddingTop != null ||
+                    controller.listTilePaddingEnd != null ||
+                    controller.listTilePaddingBottom != null
+                ? EdgeInsetsDirectional.fromSTEB(
+                    controller.listTilePaddingStart ?? 16,
+                    controller.listTilePaddingTop ?? 0,
+                    controller.listTilePaddingEnd ??
+                        (controller.useMaterial3 ? 24 : 16),
+                    controller.listTilePaddingBottom ?? 0,
+                  )
+                : null,
+            listTileHorizontalTitleGap: controller.listTileHorizontalTitleGap,
+            listTileMinVerticalPadding: controller.listTileMinVerticalPadding,
             // FAB settings.
             //
             // Set to false to keep using M2 style FAB and ignore

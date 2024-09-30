@@ -248,6 +248,27 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.inputDecoratorPrefixIconDarkSchemeColor,
             inputDecoratorSuffixIconSchemeColor:
                 controller.inputDecoratorSuffixIconDarkSchemeColor,
+            // ListTile settings.
+            listTileSelectedSchemeColor: controller.listTileSelectedSchemeColor,
+            listTileIconSchemeColor: controller.listTileIconSchemeColor,
+            listTileTextSchemeColor: controller.listTileTextSchemeColor,
+            listTileTileSchemeColor: controller.listTileTileSchemeColor,
+            listTileSelectedTileSchemeColor:
+                controller.listTileSelectedTileSchemeColor,
+            listTileContentPadding: controller.listTilePaddingStart != null ||
+                    controller.listTilePaddingTop != null ||
+                    controller.listTilePaddingEnd != null ||
+                    controller.listTilePaddingBottom != null
+                ? EdgeInsetsDirectional.fromSTEB(
+                    controller.listTilePaddingStart ?? 16,
+                    controller.listTilePaddingTop ?? 0,
+                    controller.listTilePaddingEnd ??
+                        (controller.useMaterial3 ? 24 : 16),
+                    controller.listTilePaddingBottom ?? 0,
+                  )
+                : null,
+            listTileHorizontalTitleGap: controller.listTileHorizontalTitleGap,
+            listTileMinVerticalPadding: controller.listTileMinVerticalPadding,
             // TextSelection settings
             inputCursorSchemeColor: controller.inputCursorDarkSchemeColor,
             inputSelectionSchemeColor: controller.inputSelectionDarkSchemeColor,

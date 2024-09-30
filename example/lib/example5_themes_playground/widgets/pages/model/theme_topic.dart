@@ -556,7 +556,12 @@ const List<Topic> themeTopics = <Topic>[
     buttonLabel: 'ListTile',
     icon: Icons.dns_outlined,
     info: 'Lists tiles are often used in lists, with continuous, '
-        'vertical indexes of text or images.\n',
+        'vertical indexes of text or images.\n'
+        'There are many different types of ListTiles in Flutter, often '
+        'useful for showing lists of items, for settings and options.\n'
+        '\n'
+        'Below a presentation of what all the different ListTile types '
+        'look like with current theme and colors applied.\n',
   ),
   Topic(
     group: TopicGroup.texts,

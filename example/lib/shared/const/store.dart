@@ -773,6 +773,70 @@ class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultInputSelectionHandleDarkSchemeColor = null;
 
+  // ListTile SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the listTileSelectedSchemeColor value.
+  static const String keyListTileSelectedSchemeColor =
+      'listTileSelectedSchemeColor';
+  // Default value for the listTileSelectedSchemeColor, also reset settings.
+  static const SchemeColor? defaultListTileSelectedSchemeColor = null;
+
+  // Key used to read and save the listTileIconSchemeColor value.
+  static const String keyListTileIconSchemeColor = 'listTileIconSchemeColor';
+  // Default value for the listTileIconSchemeColor, also reset settings.
+  static const SchemeColor? defaultListTileIconSchemeColor = null;
+
+  // Key used to read and save the listTileTextSchemeColor value.
+  static const String keyListTileTextSchemeColor = 'listTileTextSchemeColor';
+  // Default value for the listTileTextSchemeColor, also reset settings.
+  static const SchemeColor? defaultListTileTextSchemeColor = null;
+
+  // Key used to read and save the listTileTileSchemeColor value.
+  static const String keyListTileTileSchemeColor = 'listTileTileSchemeColor';
+  // Default value for the listTileTileSchemeColor, also reset settings.
+  static const SchemeColor? defaultListTileTileSchemeColor = null;
+
+  // Key used to read and save the listTileSelectedTileSchemeColor value.
+  static const String keyListTileSelectedTileSchemeColor =
+      'listTileSelectedTileSchemeColor';
+  // Default value for the listTileSelectedTileSchemeColor, also reset settings.
+  static const SchemeColor? defaultListTileSelectedTileSchemeColor = null;
+
+  // Key used to read and save the listTilePaddingStart value.
+  static const String keyListTilePaddingStart = 'listTilePaddingStart';
+  // Default value for the listTilePaddingStart, also reset settings.
+  static const double? defaultListTilePaddingStart = null;
+
+  // Key used to read and save the listTilePaddingEnd value.
+  static const String keyListTilePaddingEnd = 'listTilePaddingEnd';
+  // Default value for the listTilePaddingEnd, also reset settings.
+  static const double? defaultListTilePaddingEnd = null;
+
+  // Key used to read and save the listTilePaddingTop value.
+  static const String keyListTilePaddingTop = 'listTilePaddingTop';
+  // Default value for the listTilePaddingTop, also reset settings.
+  static const double? defaultListTilePaddingTop = null;
+
+  // Key used to read and save the listTilePaddingBottom value.
+  static const String keyListTilePaddingBottom = 'listTilePaddingBottom';
+  // Default value for the listTilePaddingBottom, also reset settings.
+  static const double? defaultListTilePaddingBottom = null;
+
+  // Key used to read and save the listTileHorizontalTitleGap value.
+  static const String keyListTileHorizontalTitleGap =
+      'listTileHorizontalTitleGap';
+  // Default value for the listTileHorizontalTitleGap, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultListTileHorizontalTitleGap = null;
+
+  // Key used to read and save the listTileMinVerticalPadding, value.
+  static const String keyListTileMinVerticalPadding =
+      'listTileMinVerticalPadding';
+  // Default value for the listTileMinVerticalPadding, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultListTileMinVerticalPadding = null;
+
   // AppBar SETTINGS.
   // ===========================================================================
 
