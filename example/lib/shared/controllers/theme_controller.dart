@@ -576,6 +576,18 @@ class ThemeController with ChangeNotifier {
     _bottomNavShowUnselectedLabels = await _themeService.load(
         Store.keyBottomNavShowUnselectedLabels,
         Store.defaultBottomNavShowUnselectedLabels);
+    _bottomNavigationBarSelectedLabelSize = await _themeService.load(
+        Store.keyBottomNavigationBarSelectedLabelSize,
+        Store.defaultBottomNavigationBarSelectedLabelSize);
+    _bottomNavigationBarUnselectedLabelSize = await _themeService.load(
+        Store.keyBottomNavigationBarUnselectedLabelSize,
+        Store.defaultBottomNavigationBarUnselectedLabelSize);
+    _bottomNavigationBarSelectedIconSize = await _themeService.load(
+        Store.keyBottomNavigationBarSelectedIconSize,
+        Store.defaultBottomNavigationBarSelectedIconSize);
+    _bottomNavigationBarUnselectedIconSize = await _themeService.load(
+        Store.keyBottomNavigationBarUnselectedIconSize,
+        Store.defaultBottomNavigationBarUnselectedIconSize);
     //
     // Menu, MenuBar and MenuButton SETTINGS.
     _menuRadius =
@@ -658,6 +670,18 @@ class ThemeController with ChangeNotifier {
     _adaptiveRemoveNavigationBarTintDark = await _themeService.load(
         Store.keyAdaptiveRemoveNavigationBarTintDark,
         Store.defaultAdaptiveRemoveNavigationBarTintDark);
+    _navigationBarSelectedLabelSize = await _themeService.load(
+        Store.keyNavigationBarSelectedLabelSize,
+        Store.defaultNavigationBarSelectedLabelSize);
+    _navigationBarUnselectedLabelSize = await _themeService.load(
+        Store.keyNavigationBarUnselectedLabelSize,
+        Store.defaultNavigationBarUnselectedLabelSize);
+    _navigationBarSelectedIconSize = await _themeService.load(
+        Store.keyNavigationBarSelectedIconSize,
+        Store.defaultNavigationBarSelectedIconSize);
+    _navigationBarUnselectedIconSize = await _themeService.load(
+        Store.keyNavigationBarUnselectedIconSize,
+        Store.defaultNavigationBarUnselectedIconSize);
     //
     // NavigationRail SETTINGS.
     _navRailBackgroundSchemeColor = await _themeService.load(
@@ -690,6 +714,18 @@ class ThemeController with ChangeNotifier {
     _navRailIndicatorBorderRadius = await _themeService.load(
         Store.keyNavRailIndicatorBorderRadius,
         Store.defaultNavRailIndicatorBorderRadius);
+    _navigationRailSelectedLabelSize = await _themeService.load(
+        Store.keyNavigationRailSelectedLabelSize,
+        Store.defaultNavigationRailSelectedLabelSize);
+    _navigationRailUnselectedLabelSize = await _themeService.load(
+        Store.keyNavigationRailUnselectedLabelSize,
+        Store.defaultNavigationRailUnselectedLabelSize);
+    _navigationRailSelectedIconSize = await _themeService.load(
+        Store.keyNavigationRailSelectedIconSize,
+        Store.defaultNavigationRailSelectedIconSize);
+    _navigationRailUnselectedIconSize = await _themeService.load(
+        Store.keyNavigationRailUnselectedIconSize,
+        Store.defaultNavigationRailUnselectedIconSize);
     //
     // Button SETTINGS.
     _textButtonSchemeColor = await _themeService.load(
@@ -1232,6 +1268,14 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomNavShowSelectedLabels, false);
     setBottomNavShowUnselectedLabels(
         Store.defaultBottomNavShowUnselectedLabels, false);
+    setBottomNavigationBarSelectedLabelSize(
+        Store.defaultBottomNavigationBarSelectedLabelSize, false);
+    setBottomNavigationBarUnselectedLabelSize(
+        Store.defaultBottomNavigationBarUnselectedLabelSize, false);
+    setBottomNavigationBarSelectedIconSize(
+        Store.defaultBottomNavigationBarSelectedIconSize, false);
+    setBottomNavigationBarUnselectedIconSize(
+        Store.defaultBottomNavigationBarUnselectedIconSize, false);
     //
     // Menu, MenuBar and MenuButton SETTINGS.
     setMenuRadius(Store.defaultMenuRadius, false);
@@ -1282,6 +1326,14 @@ class ThemeController with ChangeNotifier {
         Store.defaultAdaptiveRemoveNavigationBarTintLight, false);
     setAdaptiveRemoveNavigationBarTintDark(
         Store.defaultAdaptiveRemoveNavigationBarTintDark, false);
+    setNavigationBarSelectedLabelSize(
+        Store.defaultNavigationBarSelectedLabelSize, false);
+    setNavigationBarUnselectedLabelSize(
+        Store.defaultNavigationBarUnselectedLabelSize, false);
+    setNavigationBarSelectedIconSize(
+        Store.defaultNavigationBarSelectedIconSize, false);
+    setNavigationBarUnselectedIconSize(
+        Store.defaultNavigationBarUnselectedIconSize, false);
     //
     // NavigationRail SETTINGS.
     setNavRailBackgroundSchemeColor(
@@ -1302,6 +1354,14 @@ class ThemeController with ChangeNotifier {
     setNavRailIndicatorOpacity(Store.defaultNavRailIndicatorOpacity, false);
     setNavRailIndicatorBorderRadius(
         Store.defaultNavRailIndicatorBorderRadius, false);
+    setNavigationRailSelectedLabelSize(
+        Store.defaultNavigationRailSelectedLabelSize, false);
+    setNavigationRailUnselectedLabelSize(
+        Store.defaultNavigationRailUnselectedLabelSize, false);
+    setNavigationRailSelectedIconSize(
+        Store.defaultNavigationRailSelectedIconSize, false);
+    setNavigationRailUnselectedIconSize(
+        Store.defaultNavigationRailUnselectedIconSize, false);
     //
     // Button SETTINGS.
     setTextButtonSchemeColor(Store.defaultTextButtonSchemeColor, false);
@@ -4418,6 +4478,54 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyBottomNavShowUnselectedLabels, value));
   }
 
+  late double? _bottomNavigationBarSelectedLabelSize;
+  double? get bottomNavigationBarSelectedLabelSize =>
+      _bottomNavigationBarSelectedLabelSize;
+  void setBottomNavigationBarSelectedLabelSize(double? value,
+      [bool notify = true]) {
+    if (value == _bottomNavigationBarSelectedLabelSize) return;
+    _bottomNavigationBarSelectedLabelSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyBottomNavigationBarSelectedLabelSize, value));
+  }
+
+  late double? _bottomNavigationBarUnselectedLabelSize;
+  double? get bottomNavigationBarUnselectedLabelSize =>
+      _bottomNavigationBarUnselectedLabelSize;
+  void setBottomNavigationBarUnselectedLabelSize(double? value,
+      [bool notify = true]) {
+    if (value == _bottomNavigationBarUnselectedLabelSize) return;
+    _bottomNavigationBarUnselectedLabelSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyBottomNavigationBarUnselectedLabelSize, value));
+  }
+
+  late double? _bottomNavigationBarSelectedIconSize;
+  double? get bottomNavigationBarSelectedIconSize =>
+      _bottomNavigationBarSelectedIconSize;
+  void setBottomNavigationBarSelectedIconSize(double? value,
+      [bool notify = true]) {
+    if (value == _bottomNavigationBarSelectedIconSize) return;
+    _bottomNavigationBarSelectedIconSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyBottomNavigationBarSelectedIconSize, value));
+  }
+
+  late double? _bottomNavigationBarUnselectedIconSize;
+  double? get bottomNavigationBarUnselectedIconSize =>
+      _bottomNavigationBarUnselectedIconSize;
+  void setBottomNavigationBarUnselectedIconSize(double? value,
+      [bool notify = true]) {
+    if (value == _bottomNavigationBarUnselectedIconSize) return;
+    _bottomNavigationBarUnselectedIconSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyBottomNavigationBarUnselectedIconSize, value));
+  }
+
   // MenuBar and MenuButton SETTINGS.
   // ===========================================================================
 
@@ -4734,6 +4842,49 @@ class ThemeController with ChangeNotifier {
         Store.keyAdaptiveRemoveNavigationBarTintDark, value));
   }
 
+  late double? _navigationBarSelectedLabelSize;
+  double? get navigationBarSelectedLabelSize => _navigationBarSelectedLabelSize;
+  void setNavigationBarSelectedLabelSize(double? value, [bool notify = true]) {
+    if (value == _navigationBarSelectedLabelSize) return;
+    _navigationBarSelectedLabelSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationBarSelectedLabelSize, value));
+  }
+
+  late double? _navigationBarUnselectedLabelSize;
+  double? get navigationBarUnselectedLabelSize =>
+      _navigationBarUnselectedLabelSize;
+  void setNavigationBarUnselectedLabelSize(double? value,
+      [bool notify = true]) {
+    if (value == _navigationBarUnselectedLabelSize) return;
+    _navigationBarUnselectedLabelSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationBarUnselectedLabelSize, value));
+  }
+
+  late double? _navigationBarSelectedIconSize;
+  double? get navigationBarSelectedIconSize => _navigationBarSelectedIconSize;
+  void setNavigationBarSelectedIconSize(double? value, [bool notify = true]) {
+    if (value == _navigationBarSelectedIconSize) return;
+    _navigationBarSelectedIconSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationBarSelectedIconSize, value));
+  }
+
+  late double? _navigationBarUnselectedIconSize;
+  double? get navigationBarUnselectedIconSize =>
+      _navigationBarUnselectedIconSize;
+  void setNavigationBarUnselectedIconSize(double? value, [bool notify = true]) {
+    if (value == _navigationBarUnselectedIconSize) return;
+    _navigationBarUnselectedIconSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationBarUnselectedIconSize, value));
+  }
+
   // NavigationRail SETTINGS.
   // ===========================================================================
 
@@ -4857,6 +5008,51 @@ class ThemeController with ChangeNotifier {
     _navRailIndicatorBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyNavRailIndicatorBorderRadius, value));
+  }
+
+  late double? _navigationRailSelectedLabelSize;
+  double? get navigationRailSelectedLabelSize =>
+      _navigationRailSelectedLabelSize;
+  void setNavigationRailSelectedLabelSize(double? value, [bool notify = true]) {
+    if (value == _navigationRailSelectedLabelSize) return;
+    _navigationRailSelectedLabelSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationRailSelectedLabelSize, value));
+  }
+
+  late double? _navigationRailUnselectedLabelSize;
+  double? get navigationRailUnselectedLabelSize =>
+      _navigationRailUnselectedLabelSize;
+  void setNavigationRailUnselectedLabelSize(double? value,
+      [bool notify = true]) {
+    if (value == _navigationRailUnselectedLabelSize) return;
+    _navigationRailUnselectedLabelSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationRailUnselectedLabelSize, value));
+  }
+
+  late double? _navigationRailSelectedIconSize;
+  double? get navigationRailSelectedIconSize => _navigationRailSelectedIconSize;
+  void setNavigationRailSelectedIconSize(double? value, [bool notify = true]) {
+    if (value == _navigationRailSelectedIconSize) return;
+    _navigationRailSelectedIconSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationRailSelectedIconSize, value));
+  }
+
+  late double? _navigationRailUnselectedIconSize;
+  double? get navigationRailUnselectedIconSize =>
+      _navigationRailUnselectedIconSize;
+  void setNavigationRailUnselectedIconSize(double? value,
+      [bool notify = true]) {
+    if (value == _navigationRailUnselectedIconSize) return;
+    _navigationRailUnselectedIconSize = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationRailUnselectedIconSize, value));
   }
 
   // Button SETTINGS.

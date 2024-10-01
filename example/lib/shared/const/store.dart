@@ -1279,6 +1279,34 @@ sealed class Store {
   // Default value for bottomNavShowUnselectedLabels, also to reset settings.
   static const bool defaultBottomNavShowUnselectedLabels = true;
 
+  // Key used to read and save the bottomNavigationBarSelectedLabelSize value.
+  static const String keyBottomNavigationBarSelectedLabelSize =
+      'bottomNavigationBarSelectedLabelSize';
+  // Default value for the bottomNavigationBarSelectedLabelSize,
+  // also to reset settings.
+  static const double? defaultBottomNavigationBarSelectedLabelSize = null;
+
+  // Key used to read and save the bottomNavigationBarUnselectedLabelSize value.
+  static const String keyBottomNavigationBarUnselectedLabelSize =
+      'bottomNavigationBarUnselectedLabelSize';
+  // Default value for the bottomNavigationBarUnselectedLabelSize,
+  // also to reset settings.
+  static const double? defaultBottomNavigationBarUnselectedLabelSize = null;
+
+  // Key used to read and save the bottomNavigationBarSelectedIconSize value.
+  static const String keyBottomNavigationBarSelectedIconSize =
+      'bottomNavigationBarSelectedIconSize';
+  // Default value for the bottomNavigationBarSelectedIconSize,
+  // also to reset settings.
+  static const double? defaultBottomNavigationBarSelectedIconSize = null;
+
+  // Key used to read and save the bottomNavigationBarUnselectedIconSize value.
+  static const String keyBottomNavigationBarUnselectedIconSize =
+      'bottomNavigationBarUnselectedIconSize';
+  // Default value for the bottomNavigationBarUnselectedIconSize,
+  // also to reset settings.
+  static const double? defaultBottomNavigationBarUnselectedIconSize = null;
+
   // Menu, MenuBar and MenuButton SETTINGS.
   // ===========================================================================
 
@@ -1468,6 +1496,34 @@ sealed class Store {
   // We use NULL as default, on nullable settings.
   static const AdaptiveTheme? defaultAdaptiveRemoveNavigationBarTintDark = null;
 
+  // Key used to read and save the navigationBarSelectedLabelSize value.
+  static const String keyNavigationBarSelectedLabelSize =
+      'navigationBarSelectedLabelSize';
+  // Default value for the navigationBarSelectedLabelSize,
+  // also to reset settings.
+  static const double? defaultNavigationBarSelectedLabelSize = null;
+
+  // Key used to read and save the navigationBarUnselectedLabelSize value.
+  static const String keyNavigationBarUnselectedLabelSize =
+      'navigationBarUnselectedLabelSize';
+  // Default value for the navigationBarUnselectedLabelSize,
+  // also to reset settings.
+  static const double? defaultNavigationBarUnselectedLabelSize = null;
+
+  // Key used to read and save the navigationBarSelectedIconSize value.
+  static const String keyNavigationBarSelectedIconSize =
+      'navigationBarSelectedIconSize';
+  // Default value for the navigationBarSelectedIconSize,
+  // also to reset settings.
+  static const double? defaultNavigationBarSelectedIconSize = null;
+
+  // Key used to read and save the navigationBarUnselectedIconSize value.
+  static const String keyNavigationBarUnselectedIconSize =
+      'navigationBarUnselectedIconSize';
+  // Default value for the navigationBarUnselectedIconSize,
+  // also to reset settings.
+  static const double? defaultNavigationBarUnselectedIconSize = null;
+
   // NavigationRail SETTINGS.
   // ===========================================================================
 
@@ -1540,6 +1596,34 @@ sealed class Store {
       'navRailIndicatorBorderRadius';
   // Default value for the navRailIndicatorBorderRadius, also to reset settings.
   static const double? defaultNavRailIndicatorBorderRadius = null;
+
+  // Key used to read and save the navigationRailSelectedLabelSize value.
+  static const String keyNavigationRailSelectedLabelSize =
+      'navigationRailSelectedLabelSize';
+  // Default value for the navigationRailSelectedLabelSize,
+  // also to reset settings.
+  static const double? defaultNavigationRailSelectedLabelSize = null;
+
+  // Key used to read and save the navigationRailUnselectedLabelSize value.
+  static const String keyNavigationRailUnselectedLabelSize =
+      'navigationRailUnselectedLabelSize';
+  // Default value for the navigationRailUnselectedLabelSize,
+  // also to reset settings.
+  static const double? defaultNavigationRailUnselectedLabelSize = null;
+
+  // Key used to read and save the navigationRailSelectedIconSize value.
+  static const String keyNavigationRailSelectedIconSize =
+      'navigationRailSelectedIconSize';
+  // Default value for the navigationRailSelectedIconSize,
+  // also to reset settings.
+  static const double? defaultNavigationRailSelectedIconSize = null;
+
+  // Key used to read and save the navigationRailUnselectedIconSize value.
+  static const String keyNavigationRailUnselectedIconSize =
+      'navigationRailUnselectedIconSize';
+  // Default value for the navigationRailUnselectedIconSize,
+  // also to reset settings.
+  static const double? defaultNavigationRailUnselectedIconSize = null;
 
   // Button SETTINGS.
   // ===========================================================================
