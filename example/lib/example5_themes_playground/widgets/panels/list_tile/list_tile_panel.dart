@@ -5,6 +5,7 @@ import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/enum_popup_menu.dart';
 
 class ListTilePanel extends StatelessWidget {
   const ListTilePanel(this.controller, {super.key});
@@ -195,6 +196,33 @@ class ListTilePanel extends StatelessWidget {
                 valueHeading: 'PADDING',
                 valueUnitLabel: ' dp',
                 valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
+              ),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: EnumPopupMenu<ListTileStyle>(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                values: ListTileStyle.values,
+                title: const Text('Style'),
+                // defaultLabel: 'transparent',
+                value: controller.listTileStyle,
+                onChanged: controller.setListTileStyle,
+              ),
+            ),
+            Expanded(
+              child: EnumPopupMenu<ListTileTitleAlignment>(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: enableControl,
+                values: ListTileTitleAlignment.values,
+                title: const Text('Title alignment'),
+                // defaultLabel: 'transparent',
+                value: controller.listTileTitleAlignment,
+                onChanged: controller.setListTileTitleAlignment,
               ),
             ),
           ],
