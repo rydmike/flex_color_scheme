@@ -130,8 +130,8 @@ class AdaptiveThemePanel extends StatelessWidget {
             values: AdaptiveTheme.values,
             title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
-              'Platform adaptive theme response to remove elevation tint on'
-              ' elevated surfaces in Material-3 in light theme mode on '
+              'Platform adaptive theme response to remove elevation tint on '
+              'elevated surfaces in Material-3 in light theme mode on '
               'selected platforms.\n'
               '\n'
               'OBSOLETE: In Flutter version 3.22 and later, this feature is '
@@ -176,8 +176,8 @@ class AdaptiveThemePanel extends StatelessWidget {
             values: AdaptiveTheme.values,
             title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
-              'Platform adaptive theme response to remove elevation tint on'
-              ' elevated surfaces in Material-3 in dark theme mode on '
+              'Platform adaptive theme response to remove elevation tint on '
+              'elevated surfaces in Material-3 in dark theme mode on '
               'selected platforms.\n'
               '\n'
               'OBSOLETE: In Flutter version 3.22 and later, this feature is '
