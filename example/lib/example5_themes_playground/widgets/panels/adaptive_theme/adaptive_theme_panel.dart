@@ -5,6 +5,7 @@ import '../../../../shared/model/adaptive_theme.dart';
 import '../../../../shared/model/splash_type_enum.dart';
 import '../../../../shared/model/visual_density_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/is_web_list_tile.dart';
@@ -33,8 +34,8 @@ class AdaptiveThemePanel extends StatelessWidget {
           subtitleReveal: Text(
               'With platform adaptive settings you can modify theme '
               'properties to have a different response on selected platforms. '
-              'You can select which platforms the platform adaptive value '
-              'should be used on. All other platforms not included '
+              'Typically you can select which platforms the platform adaptive '
+              'value should be used on. All other platforms not included '
               'in this choice, will continue to use the none adaptive '
               'value or default behavior.\n'
               '\n'
@@ -60,19 +61,49 @@ class AdaptiveThemePanel extends StatelessWidget {
           onChanged: controller.setUsedVisualDensity,
         ),
         const Divider(),
-        EnumPopupMenu<SplashTypeEnum>(
-          enabled: enableControl,
-          values: SplashTypeEnum.values,
-          title: const Text('Splash type'),
-          subtitleReveal: Text(
-            'Defines the type of tap ink splash effect used on Material '
-            'UI components.\n'
-            '\n'
-            // ignore: lines_longer_than_80_chars
-            '${controller.splashType?.describe ?? SplashTypeEnum.defaultSplash.describe}',
-          ),
-          value: controller.splashType,
-          onChanged: controller.setSplashType,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: EnumPopupMenu<SplashTypeEnum>(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                values: SplashTypeEnum.values,
+                title: const Text('Splash type'),
+                subtitleReveal: Text(
+                  'Defines the type of tap ink splash effect used on Material '
+                  'UI components.\n'
+                  '\n'
+                  // ignore: lines_longer_than_80_chars
+                  '${controller.splashType?.describe ?? SplashTypeEnum.defaultSplash.describe}',
+                ),
+                value: controller.splashType,
+                onChanged: controller.setSplashType,
+              ),
+            ),
+            Expanded(
+              child: EnumPopupMenu<SplashTypeEnum>(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: enableControl &&
+                    controller.adaptiveSplash != AdaptiveTheme.off &&
+                    controller.adaptiveSplash != null,
+                values: SplashTypeEnum.values,
+                title: const Text('Adaptive splash'),
+                subtitleReveal: Text(
+                  'Defines the type of tap ink splash effect response used on '
+                  'Material UI components when running on selected platforms. '
+                  'When not running on these platforms or if the platform '
+                  'adaptive ink feature is OFF, the ink splash effect is '
+                  'used.\n'
+                  '\n'
+                  // ignore: lines_longer_than_80_chars
+                  '${controller.splashTypeAdaptive?.describe ?? SplashTypeEnum.defaultSplash.describe}',
+                ),
+                value: controller.splashTypeAdaptive,
+                onChanged: controller.setSplashTypeAdaptive,
+              ),
+            ),
+          ],
         ),
         EnumPopupMenu<AdaptiveTheme>(
           enabled: enableControl,
@@ -87,24 +118,6 @@ class AdaptiveThemePanel extends StatelessWidget {
           ),
           value: controller.adaptiveSplash,
           onChanged: controller.setAdaptiveSplash,
-        ),
-        EnumPopupMenu<SplashTypeEnum>(
-          enabled: enableControl &&
-              controller.adaptiveSplash != AdaptiveTheme.off &&
-              controller.adaptiveSplash != null,
-          values: SplashTypeEnum.values,
-          title: const Text('Adaptive splash'),
-          subtitleReveal: Text(
-            'Defines the type of tap ink splash effect response used on '
-            'Material UI components when running on selected platforms. When '
-            'not running on these platforms or if the platform adaptive ink '
-            'feature is OFF, the ink splash effect above is used.\n'
-            '\n'
-            // ignore: lines_longer_than_80_chars
-            '${controller.splashTypeAdaptive?.describe ?? SplashTypeEnum.defaultSplash.describe}',
-          ),
-          value: controller.splashTypeAdaptive,
-          onChanged: controller.setSplashTypeAdaptive,
         ),
         const Divider(),
         if (isLight) ...<Widget>[
