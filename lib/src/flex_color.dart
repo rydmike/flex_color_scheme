@@ -160,7 +160,7 @@ class FlexColor {
 
   /// None tinted neutral surfaceContainer color used as FlexColor standard for
   /// dark surfaceContainer.
-  static const Color darkFlexSurfaceContainer = Color(0xFF121212);
+  static const Color darkFlexSurfaceContainer = Color(0xFF151515);
 
   /// None tinted neutral surfaceContainerHigh color used as FlexColor standard
   /// for dark surfaceContainerHigh.
@@ -3451,7 +3451,7 @@ class FlexColor {
   static const String greyDescription = 'Monochrome grey color based theme';
 
   /// Grey theme color for light primary color.
-  static const Color greyLightPrimary = Color(0xFF131313);
+  static const Color greyLightPrimary = Color(0xFF202020);
 
   /// Grey theme color for light primary container color.
   static const Color greyLightPrimaryContainer = Color(0xFFD1D1D1);
@@ -3469,7 +3469,7 @@ class FlexColor {
   static const Color greyLightTertiaryContainer = Color(0xFFB9B9B9);
 
   /// Grey theme color for dark primary color.
-  static const Color greyDarkPrimary = Color(0xFFFCFCFC);
+  static const Color greyDarkPrimary = Color(0xFFF0F0F0);
 
   /// Grey theme color for dark primary container color.
   static const Color greyDarkPrimaryContainer = Color(0xFF474747);
@@ -3481,7 +3481,7 @@ class FlexColor {
   static const Color greyDarkSecondaryContainer = Color(0xFF505050);
 
   /// Grey theme color for dark tertiary color.
-  static const Color greyDarkTertiary = Color(0xFFF1F1F1);
+  static const Color greyDarkTertiary = Color(0xFFE2E2E2);
 
   /// Grey theme color for dark tertiary container color.
   static const Color greyDarkTertiaryContainer = Color(0xFF616161);
