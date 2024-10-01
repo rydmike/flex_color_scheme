@@ -1456,7 +1456,7 @@ String generateThemeDartCode(ThemeController controller) {
                   .navigationRailGroupAlignment !=
               null &&
           controller.navigationRailGroupAlignment != -1.0
-      ? '    navigationRailGroupAlignment: ${controller.navigationRailGroupAlignment!.toStringAsFixed(0)},\n'
+      ? '    navigationRailGroupAlignment: ${controller.navigationRailGroupAlignment!.toStringAsFixed(2)},\n'
       : '';
   final String navigationRailMinWidth = controller.navigationRailMinWidth !=
           null

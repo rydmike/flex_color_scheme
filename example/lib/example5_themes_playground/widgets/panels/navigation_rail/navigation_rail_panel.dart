@@ -379,7 +379,7 @@ class NavigationRailPanel extends StatelessWidget {
                     max: 1,
                     divisions: 40,
                     valueHeading: 'ALIGN',
-                    valueDecimalPlaces: 1,
+                    valueDecimalPlaces: 2,
                     valueDefaultLabel: '-1',
                   ),
                 ],
