@@ -7895,6 +7895,8 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.segmentedButtonTheme(
               colorScheme: colorScheme,
               selectedSchemeColor: subTheme.segmentedButtonSchemeColor,
+              selectedForegroundSchemeColor:
+                  subTheme.segmentedButtonSelectedForegroundSchemeColor,
               unselectedSchemeColor:
                   subTheme.segmentedButtonUnselectedSchemeColor,
               unselectedForegroundSchemeColor:
@@ -8061,6 +8063,8 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.toggleButtonsTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.toggleButtonsSchemeColor,
+              selectedForegroundSchemeColor:
+                  subTheme.toggleButtonsSelectedForegroundSchemeColor,
               unselectedSchemeColor:
                   subTheme.toggleButtonsUnselectedSchemeColor,
               borderSchemeColor: subTheme.toggleButtonsBorderSchemeColor,

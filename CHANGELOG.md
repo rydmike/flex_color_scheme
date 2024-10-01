@@ -254,50 +254,41 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - These are not available in the **Themes Playground**. Their purpose is that you can use them with the API to provide custom text styles for FCS styled components. You could do this in the past too, but you had to use rather complicated deep `copyWith` on the produced component themes. With these props you get access to direct `TextStyle` styling for these component properties in the FCS API too.
 
 
-- Added `useCupertinoStyle` property to `FlexSubThemes.switchTheme`.
-- Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
+- Added `useCupertinoStyle` property to `FlexSubThemes.switchTheme`. Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
 
 
-- Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize`, `ìconSize` and `padding` properties to `FlexSubThemes.chipTheme`.
-- Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize`, `chipIconSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
+- Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize`, `ìconSize` and `padding` properties to `FlexSubThemes.chipTheme`. Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize`, `chipIconSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
 
 
-- Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`.
-- Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its color.
-
-- Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`.
-- Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
+- Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`. Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its color.
+- Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 
 
-- Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`.
-- Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
+- Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
 
 
 - Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`.
 
 
-- Added `tabAlignment` property to `FlexSubThemes.tabAlignment`.
-- Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.tabBarTheme` use it for its. (TODO: Add a note about thrown assert, open an issue in Flutter SDK about it and suggest an alternative solution.)
+- Added `tabAlignment` property to `FlexSubThemes.tabAlignment`. Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.tabBarTheme` use it for its. (TODO: Add a note about thrown assert, open an issue in Flutter SDK about it and suggest an alternative solution.)
 
 
-- Added `foregroundSchemeColor` property to `FlexSubThemes.floatingActionButtonTheme`.
-- Added `fabForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.floatingActionButtonTheme` use it for its foreground color.
+- Added `foregroundSchemeColor` property to `FlexSubThemes.floatingActionButtonTheme`. Added `fabForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.floatingActionButtonTheme` use it for its foreground color.
  
 
-- Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemes.inputDecorationTheme`.
-- Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.inputDecorationTheme` use it for its color.
+- Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemes.inputDecorationTheme`. Added `toggleButtonsSelectedForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.segmentedButtonTheme` use it.
+
+- Added `selectedForegroundSchemeColor` property to `FlexSubThemes.segmentedButtonTheme`.
+- Added `segmentedButtonSelectedForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.segmentedButtonTheme` use it.
+- Added `selectedForegroundSchemeColor` property to `FlexSubThemes.toggleButtonsTheme`.
+- Added `toggleButtonsSelectedForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.toggleButtonsTheme` use it.
 
 
 - Added `appBarForegroundSchemeColor`, `appBarIconSchemeColor` and `appBarActionsIconSchemeColor` properties to `FlexSubThemesData` and made `FlexSubThemes.appBarTheme` use it for its colors on title, icon and actions.
-
-
-- Added `appBarForegroundSchemeColor`, `appBarIconSchemeColor` and `appBarActionsIconSchemeColor` properties to `FlexSubThemesData` and made `FlexSubThemes.appBarTheme` use it for its colors on title, icon and actions.
-
-
 - Added `bottomAppBarHeight` property to `FlexSubThemesData` and made `FlexSubThemes.bottomAppBarTheme` use it as its `height` value.
 
 
-- Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color if it is defined.
+- Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color, if it is defined.
 
 
 - Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factory constructors.

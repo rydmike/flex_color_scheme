@@ -218,6 +218,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.toggleButtonsRadius,
     this.toggleButtonsSchemeColor,
+    this.toggleButtonsSelectedForegroundSchemeColor,
     this.toggleButtonsUnselectedSchemeColor,
     this.toggleButtonsBorderSchemeColor,
     this.toggleButtonsBorderWidth,
@@ -225,6 +226,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.segmentedButtonRadius,
     this.segmentedButtonSchemeColor,
+    this.segmentedButtonSelectedForegroundSchemeColor,
     this.segmentedButtonUnselectedSchemeColor,
     this.segmentedButtonUnselectedForegroundSchemeColor,
     this.segmentedButtonBorderSchemeColor,
@@ -1208,9 +1210,14 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? toggleButtonsSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
-  /// [ToggleButtons] use as the foreground color for unselected toggle buttons.
+  /// [ToggleButtons] use as its selected item foreground theme color.
   ///
-  /// All colors in the color scheme are not good choices, but some work well.
+  /// If not defined, contrast color pair to [toggleButtonsSchemeColor] will
+  /// be used, which for its default value is onPrimary.
+  final SchemeColor? toggleButtonsSelectedForegroundSchemeColor;
+
+  /// Defines which [Theme] based [ColorScheme] based color the
+  /// [ToggleButtons] use as the foreground color for unselected toggle buttons.
   ///
   /// If not defined, [toggleButtonsSchemeColor] will be used as base.
   final SchemeColor? toggleButtonsUnselectedSchemeColor;
@@ -1250,16 +1257,25 @@ class FlexSubThemesData with Diagnosticable {
   /// foreground color becomes [SchemeColor.onSecondaryContainer].
   final SchemeColor? segmentedButtonSchemeColor;
 
+  /// Defines which [Theme] based [ColorScheme] based color a selected
+  /// [SegmentedButton] use as its foreground theme color.
+  ///
+  /// If not defined, contrast color pair to [segmentedButtonSchemeColor]
+  /// will be used.
+  final SchemeColor? segmentedButtonSelectedForegroundSchemeColor;
+
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [SegmentedButton] use as the background color for unselected buttons.
   ///
-  /// If not defined it defaults to [SchemeColor.surface].
+  /// If not defined it defaults to [SchemeColor.transparent].
   final SchemeColor? segmentedButtonUnselectedSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
   /// [SegmentedButton] use as the foreground color for unselected buttons.
   ///
-  /// If not defined it defaults to [SchemeColor.onSurface].
+  /// If not defined, contrast color pair to
+  /// [segmentedButtonUnselectedSchemeColor]
+  /// will be used, for transparent it is onSurface.
   final SchemeColor? segmentedButtonUnselectedForegroundSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the
@@ -3695,6 +3711,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? toggleButtonsRadius,
     final SchemeColor? toggleButtonsSchemeColor,
+    final SchemeColor? toggleButtonsSelectedForegroundSchemeColor,
     final SchemeColor? toggleButtonsUnselectedSchemeColor,
     final SchemeColor? toggleButtonsBorderSchemeColor,
     final double? toggleButtonsBorderWidth,
@@ -3702,6 +3719,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     final double? segmentedButtonRadius,
     final SchemeColor? segmentedButtonSchemeColor,
+    final SchemeColor? segmentedButtonSelectedForegroundSchemeColor,
     final SchemeColor? segmentedButtonUnselectedSchemeColor,
     final SchemeColor? segmentedButtonUnselectedForegroundSchemeColor,
     final SchemeColor? segmentedButtonBorderSchemeColor,
@@ -4037,6 +4055,9 @@ class FlexSubThemesData with Diagnosticable {
       toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
       toggleButtonsSchemeColor:
           toggleButtonsSchemeColor ?? this.toggleButtonsSchemeColor,
+      toggleButtonsSelectedForegroundSchemeColor:
+          toggleButtonsSelectedForegroundSchemeColor ??
+              this.toggleButtonsSelectedForegroundSchemeColor,
       toggleButtonsUnselectedSchemeColor: toggleButtonsUnselectedSchemeColor ??
           this.toggleButtonsUnselectedSchemeColor,
       toggleButtonsBorderSchemeColor:
@@ -4050,6 +4071,9 @@ class FlexSubThemesData with Diagnosticable {
           segmentedButtonRadius ?? this.segmentedButtonRadius,
       segmentedButtonSchemeColor:
           segmentedButtonSchemeColor ?? this.segmentedButtonSchemeColor,
+      segmentedButtonSelectedForegroundSchemeColor:
+          segmentedButtonSelectedForegroundSchemeColor ??
+              this.segmentedButtonSelectedForegroundSchemeColor,
       segmentedButtonUnselectedSchemeColor:
           segmentedButtonUnselectedSchemeColor ??
               this.segmentedButtonUnselectedSchemeColor,
@@ -4538,6 +4562,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.toggleButtonsRadius == toggleButtonsRadius &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
+        other.toggleButtonsSelectedForegroundSchemeColor ==
+            toggleButtonsSelectedForegroundSchemeColor &&
         other.toggleButtonsUnselectedSchemeColor ==
             toggleButtonsUnselectedSchemeColor &&
         other.toggleButtonsBorderSchemeColor ==
@@ -4547,6 +4573,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.segmentedButtonRadius == segmentedButtonRadius &&
         other.segmentedButtonSchemeColor == segmentedButtonSchemeColor &&
+        other.segmentedButtonSelectedForegroundSchemeColor ==
+            segmentedButtonSelectedForegroundSchemeColor &&
         other.segmentedButtonUnselectedSchemeColor ==
             segmentedButtonUnselectedSchemeColor &&
         other.segmentedButtonUnselectedForegroundSchemeColor ==
@@ -4909,6 +4937,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         toggleButtonsRadius,
         toggleButtonsSchemeColor,
+        toggleButtonsSelectedForegroundSchemeColor,
         toggleButtonsUnselectedSchemeColor,
         toggleButtonsBorderSchemeColor,
         toggleButtonsBorderWidth,
@@ -4916,6 +4945,7 @@ class FlexSubThemesData with Diagnosticable {
         //
         segmentedButtonRadius,
         segmentedButtonSchemeColor,
+        segmentedButtonSelectedForegroundSchemeColor,
         segmentedButtonUnselectedSchemeColor,
         segmentedButtonUnselectedForegroundSchemeColor,
         segmentedButtonBorderSchemeColor,
@@ -5256,6 +5286,9 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'toggleButtonsSchemeColor', toggleButtonsSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
+        'toggleButtonsSelectedForegroundSchemeColor',
+        toggleButtonsSelectedForegroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
         'toggleButtonsUnselectedSchemeColor',
         toggleButtonsUnselectedSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
@@ -5269,6 +5302,9 @@ class FlexSubThemesData with Diagnosticable {
         'segmentedButtonRadius', segmentedButtonRadius));
     properties.add(EnumProperty<SchemeColor>(
         'segmentedButtonSchemeColor', segmentedButtonSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'segmentedButtonSelectedForegroundSchemeColor',
+        segmentedButtonSelectedForegroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'segmentedButtonUnselectedSchemeColor',
         segmentedButtonUnselectedSchemeColor));
