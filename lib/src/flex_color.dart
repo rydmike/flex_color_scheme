@@ -3448,7 +3448,7 @@ class FlexColor {
   static const String greyName = 'Grey';
 
   /// English description of the grey  theme.
-  static const String greyDescription = 'Monochrome greys based theme';
+  static const String greyDescription = 'Monochrome grey color based theme';
 
   /// Grey theme color for light primary color.
   static const Color greyLightPrimary = Color(0xFF131313);
@@ -3457,13 +3457,13 @@ class FlexColor {
   static const Color greyLightPrimaryContainer = Color(0xFFD1D1D1);
 
   /// Grey theme color for light secondary color.
-  static const Color greyLightSecondary = Color(0xFF1F1F1F);
+  static const Color greyLightSecondary = Color(0xFF777777);
 
   /// Grey theme color for light secondary container color.
   static const Color greyLightSecondaryContainer = Color(0xFFC6C6C6);
 
   /// Grey theme color for light tertiary color.
-  static const Color greyLightTertiary = Color(0xFF353535);
+  static const Color greyLightTertiary = Color(0xFF454545);
 
   /// Grey theme color for light tertiary container color.
   static const Color greyLightTertiaryContainer = Color(0xFFB9B9B9);
@@ -3475,13 +3475,13 @@ class FlexColor {
   static const Color greyDarkPrimaryContainer = Color(0xFF474747);
 
   /// Grey theme color for dark secondary color.
-  static const Color greyDarkSecondary = Color(0xFFF3F3F3);
+  static const Color greyDarkSecondary = Color(0xFFC6C6C6);
 
   /// Grey theme color for dark secondary container color.
   static const Color greyDarkSecondaryContainer = Color(0xFF505050);
 
   /// Grey theme color for dark tertiary color.
-  static const Color greyDarkTertiary = Color(0xFFDADADA);
+  static const Color greyDarkTertiary = Color(0xFFF1F1F1);
 
   /// Grey theme color for dark tertiary container color.
   static const Color greyDarkTertiaryContainer = Color(0xFF616161);
