@@ -838,6 +838,24 @@ sealed class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultListTileMinVerticalPadding = null;
 
+  // Key used to read and save the listTileStyle value.
+  static const String keyListTileStyle = 'listTileStyle';
+  // Default value for the listTileStyle, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const ListTileStyle? defaultListTileStyle = null;
+
+  // Key used to read and save the listTileTitleAlignment value.
+  static const String keyListTileTitleAlignment = 'listTileTitleAlignment';
+  // Default value for the listTileTitleAlignment, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const ListTileTitleAlignment? defaultListTileTitleAlignment = null;
+
+  // Key used to read and save the listTileControlAffinity value.
+  static const String keyListTileControlAffinity = 'listTileControlAffinity';
+  // Default value for the listTileControlAffinity, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const ListTileControlAffinity? defaultListTileControlAffinity = null;
+
   // AppBar SETTINGS.
   // ===========================================================================
 
