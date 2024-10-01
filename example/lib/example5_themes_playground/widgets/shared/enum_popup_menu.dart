@@ -416,11 +416,11 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     if (T == MaterialTapTargetSize) {
       switch (value) {
         case MaterialTapTargetSize.padded:
-          return 'Padded (for touch UI)';
+          return 'Padded (for Mobile)';
         case MaterialTapTargetSize.shrinkWrap:
-          return 'ShrinkWrap (for mouse UI)';
+          return 'ShrinkWrap (for Desktop)';
         case null:
-          return 'Default (Adaptive: Mobiles=Padded Desktops=ShrinkWrap)';
+          return 'Default\nM:padded, D:shrinkWrap';
       }
     }
     if (T == AdaptiveTheme) {

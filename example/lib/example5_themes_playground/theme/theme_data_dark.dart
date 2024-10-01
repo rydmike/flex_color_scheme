@@ -56,6 +56,8 @@ ThemeData themeDataDark(ThemeController controller) {
     // in the Playground app.
     visualDensity: controller.usedVisualDensity?.setting(controller.platform) ??
         VisualDensityEnum.platform.setting(controller.platform),
+    // Use tap target size setting.
+    materialTapTargetSize: controller.tapTargetSize,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
     // applyElevationOverlayColor: true,

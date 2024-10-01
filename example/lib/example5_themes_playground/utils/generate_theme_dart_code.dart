@@ -103,6 +103,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String visualDensity = controller.usedVisualDensity != null
       ? '  visualDensity: ${controller.usedVisualDensity!.code},\n'
       : '';
+  final String materialTapTargetSize = controller.tapTargetSize != null
+      ? '  materialTapTargetSize: ${controller.tapTargetSize},\n'
+      : '';
   final String surfaceModeLight = controller.blendLevel > 0 &&
           controller.surfaceModeLight != FlexSurfaceMode.highScaffoldLowSurfaces
       ? '  surfaceMode: ${controller.surfaceModeLight},\n'
@@ -2101,6 +2104,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useM3ErrorColors'
       '$flexTonesLight'
       '$visualDensity'
+      '$materialTapTargetSize'
       '$applyToAllCupertino'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
@@ -2126,6 +2130,7 @@ String generateThemeDartCode(ThemeController controller) {
       '$useM3ErrorColors'
       '$flexTonesDark'
       '$visualDensity'
+      '$materialTapTargetSize'
       '$applyToAllCupertino'
       '$useMaterial3'
       '$swapLegacyOnMaterial3'
