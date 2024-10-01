@@ -242,11 +242,17 @@ class NavigationBarPanel extends StatelessWidget {
           EnumPopupMenu<AdaptiveTheme>(
             enabled: enableControl && controller.useMaterial3,
             values: AdaptiveTheme.values,
-            title: const Text('Remove elevation tint'),
+            title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
-              'An adaptive theme response to remove elevation tint on elevated '
-              'NavigationBar in Material-3 in light theme-mode on selected '
-              'platforms. This setting has no impact in Material-2 mode.\n'
+              'Platform adaptive theme response to remove elevation tint on '
+              'elevated NavigationBar in Material-3 in light theme-mode, on '
+              'selected platforms. This setting has no impact in Material-2 '
+              'mode.\n'
+              '\n'
+              'OBSOLETE: In Flutter version 3.22 and later, this feature is '
+              'no longer needed, as elevation tints are no longer used. '
+              'Keeping it around for now, but it is not useful in Flutter 3.22 '
+              'and later.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
               '${controller.adaptiveRemoveNavigationBarTintLight?.describe ?? AdaptiveTheme.off.describe}',
@@ -258,11 +264,17 @@ class NavigationBarPanel extends StatelessWidget {
           EnumPopupMenu<AdaptiveTheme>(
             enabled: enableControl && controller.useMaterial3,
             values: AdaptiveTheme.values,
-            title: const Text('Remove elevation tint'),
+            title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
-              'An adaptive theme response to remove elevation tint on elevated '
-              'NavigationBar in Material-3 in dark theme-mode on selected '
-              'platforms. This setting has no impact in Material-2 mode.\n'
+              'Platform adaptive theme response to remove elevation tint on '
+              'elevated NavigationBar in Material-3 in dark theme-mode on '
+              'selected platforms. This setting has no impact in Material-2 '
+              'mode.\n'
+              '\n'
+              'OBSOLETE: In Flutter version 3.22 and later, this feature is '
+              'no longer needed, as elevation tints are no longer used. '
+              'Keeping it around for now, but it is not useful in Flutter 3.22 '
+              'and later.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
               '${controller.adaptiveRemoveNavigationBarTintDark?.describe ?? AdaptiveTheme.off.describe}',

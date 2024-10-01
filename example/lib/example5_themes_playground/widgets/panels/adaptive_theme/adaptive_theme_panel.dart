@@ -128,35 +128,25 @@ class AdaptiveThemePanel extends StatelessWidget {
           EnumPopupMenu<AdaptiveTheme>(
             enabled: enableControl && controller.useMaterial3,
             values: AdaptiveTheme.values,
-            title: const Text('Remove elevation tint'),
+            title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
-              'An adaptive theme response to remove elevation tint on elevated '
-              'surfaces in Material-3 in light theme mode on selected '
-              'platforms.\n'
+              'Platform adaptive theme response to remove elevation tint on'
+              ' elevated surfaces in Material-3 in light theme mode on '
+              'selected platforms.\n'
               '\n'
-              'In Flutter version 3.22 and later this feature is not needed, '
-              'since elevation tints are now removed by default, which made '
-              'this feature kind of obsolete. Keeping it around for now, but '
-              'it is not useful in Flutter 3.22 and later. We could add a '
-              'bring surface tints back, but who wants that anyway? :)\n'
+              'OBSOLETE: In Flutter version 3.22 and later, this feature is '
+              'no longer needed, as elevation tints are no longer used. '
+              'Keeping it around for now, but it is not useful in Flutter 3.22 '
+              'and later. We could add a bring surface tints back feature, but '
+              'who wants that anyway? :)\n'
               '\n'
               'This setting has no impact in Material-2 mode.\n'
               '\n'
-              'Using this was never recommended in dark mode, unless '
-              'shadows are also brought back in Flutter prior to version 3.22. '
-              'However, even then it is a bad '
-              'idea since shadows are not very visible in dark mode. Recommend '
-              'keeping elevation tint in M3 mode in dark mode in Flutter '
-              'versions before to 3.22. You can '
-              'still bring shadows back in dark mode, it can further increase '
-              'elevation separation in dark mode.\n'
-              '\n'
-              'Feature applies to BottomAppBar, BottomSheet, Card, Chip, '
+              'Applies to BottomAppBar, BottomSheet, Card, Chip, '
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
-              'want to keep it on even if otherwise removing tint.\n'
-              '\n'
+              'want to keep it ON, even if otherwise removing elevation tint.\n'
               // ignore: lines_longer_than_80_chars
               '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveTheme.off.describe}',
             ),
@@ -184,17 +174,17 @@ class AdaptiveThemePanel extends StatelessWidget {
           EnumPopupMenu<AdaptiveTheme>(
             enabled: enableControl && controller.useMaterial3,
             values: AdaptiveTheme.values,
-            title: const Text('Remove elevation tint'),
+            title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
-              'An adaptive theme response to remove elevation tint on elevated '
-              'surfaces in Material-3 in dark theme mode on selected '
-              'platforms.\n'
+              'Platform adaptive theme response to remove elevation tint on'
+              ' elevated surfaces in Material-3 in dark theme mode on '
+              'selected platforms.\n'
               '\n'
-              'In Flutter version 3.22 and later this feature is not needed, '
-              'since elevation tints are now removed by default, which made '
-              'this feature kind of obsolete. Keeping it around for now, but '
-              'it is not useful in Flutter 3.22 and later. We could add a '
-              'bring surface tints back, but who wants that anyway? :)\n'
+              'OBSOLETE: In Flutter version 3.22 and later, this feature is '
+              'no longer needed, as elevation tints are no longer used. '
+              'Keeping it around for now, but it is not useful in Flutter 3.22 '
+              'and later. We could add a bring surface tints back feature, but '
+              'who wants that anyway? :)\n'
               '\n'
               'This setting has no impact in Material-2 mode.\n'
               '\n'
@@ -203,16 +193,15 @@ class AdaptiveThemePanel extends StatelessWidget {
               'However, even then it is a bad '
               'idea since shadows are not very visible in dark mode. Recommend '
               'keeping elevation tint in M3 mode in dark mode in Flutter '
-              'versions before to 3.22. You can '
-              'still bring shadows back in dark mode, it can further increase '
-              'elevation separation in dark mode.\n'
+              'versions before to 3.22. You can also bring shadows back in '
+              'dark mode, it may further increase elevation separation in '
+              'dark mode.\n'
               '\n'
-              'Feature applies to BottomAppBar, BottomSheet, Card, Chip, '
+              'Applies to BottomAppBar, BottomSheet, Card, Chip, '
               'DatePickerDialog, Dialog, Drawer, DropdownMenu, MenuBar, '
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
-              'want to keep it on even if otherwise removing tint.\n'
-              '\n'
+              'want to keep it ON, even if otherwise removing elevation tint.\n'
               // ignore: lines_longer_than_80_chars
               '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveTheme.off.describe}',
             ),
