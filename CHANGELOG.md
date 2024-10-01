@@ -117,7 +117,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - Add `Divider` theme features, e.g., thickness and totally custom color.
 - Add `Checkbox` shape and border.
 - Add all Shadcn theme colors.
-- Add Shadcn predefined prefs.
+- Add Shadcn like predefined config.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
 - InputDecorator: Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
 
