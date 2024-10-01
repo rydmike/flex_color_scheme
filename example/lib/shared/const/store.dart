@@ -33,6 +33,11 @@ sealed class Store {
   static const VisualDensityEnum defaultUsedVisualDensity =
       VisualDensityEnum.comfortablePlatform;
 
+  // Key used to read and save the TapTargetSize value.
+  static const String keyTapTargetSize = 'tapTargetSize';
+  // Default value for the TapTargetSize, also to reset settings.
+  static const MaterialTapTargetSize? defaultTapTargetSize = null;
+
   // Key used to read and save the useFlexColorScheme value.
   static const String keyUseFlexColorScheme = 'useFlexColorScheme';
   // Default value for the useFlexColorScheme, also to reset settings.
