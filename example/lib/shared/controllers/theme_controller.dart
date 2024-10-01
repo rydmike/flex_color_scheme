@@ -47,9 +47,9 @@ class ThemeController with ChangeNotifier {
     _themeMode =
         await _themeService.load(Store.keyThemeMode, Store.defaultThemeMode);
     _usedVisualDensity = await _themeService.load(
-        Store.keyThemeMode, Store.defaultUsedVisualDensity);
+        Store.keyUsedVisualDensity, Store.defaultUsedVisualDensity);
     _useFlexColorScheme = await _themeService.load(
-        Store.keyUsedVisualDensity, Store.defaultUseFlexColorScheme);
+        Store.keyUseFlexColorScheme, Store.defaultUseFlexColorScheme);
     _useSubThemes = await _themeService.load(
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
     _applyThemeToAllCupertino = await _themeService.load(
