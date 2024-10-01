@@ -3511,7 +3511,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
             child: ClipRect(
               child: OverflowBox(
                 alignment: AlignmentDirectional.topStart,
-                maxHeight: 1200,
+                maxHeight: 850,
                 child: Row(
                   children: <Widget>[
                     MediaQuery.removePadding(
@@ -3520,7 +3520,6 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                       removeTop: true,
                       child: NavigationRail(
                         extended: isExtended,
-                        minExtendedWidth: 150,
                         labelType:
                             isExtended ? NavigationRailLabelType.none : null,
                         selectedIndex: buttonIndex,

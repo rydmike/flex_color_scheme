@@ -287,7 +287,7 @@ class FlexSubThemesData with Diagnosticable {
     this.listTileMinVerticalPadding,
     this.listTileStyle,
     this.listTileTitleAlignment,
-    this.listTileControlAffinity, // Not in Playground
+    this.listTileControlAffinity, // Not in Playground, not in Flutter stable.
     //
     this.fabRadius,
     this.fabUseShape = false,
@@ -411,13 +411,13 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomSheetModalElevation,
     //
     this.bottomNavigationBarLabelTextStyle,
-    this.bottomNavigationBarSelectedLabelSize, // Not in Playground
-    this.bottomNavigationBarUnselectedLabelSize, // Not in Playground
+    this.bottomNavigationBarSelectedLabelSize,
+    this.bottomNavigationBarUnselectedLabelSize,
     this.bottomNavigationBarSelectedLabelSchemeColor,
     this.bottomNavigationBarUnselectedLabelSchemeColor,
     this.bottomNavigationBarMutedUnselectedLabel = true,
-    this.bottomNavigationBarSelectedIconSize, // Not in Playground
-    this.bottomNavigationBarUnselectedIconSize, // Not in Playground
+    this.bottomNavigationBarSelectedIconSize,
+    this.bottomNavigationBarUnselectedIconSize,
     this.bottomNavigationBarSelectedIconSchemeColor,
     this.bottomNavigationBarUnselectedIconSchemeColor,
     this.bottomNavigationBarMutedUnselectedIcon = true,
@@ -430,13 +430,13 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarLandscapeLayout,
     //
     this.navigationBarLabelTextStyle,
-    this.navigationBarSelectedLabelSize, // Not in Playground
-    this.navigationBarUnselectedLabelSize, // Not in Playground
+    this.navigationBarSelectedLabelSize,
+    this.navigationBarUnselectedLabelSize,
     this.navigationBarSelectedLabelSchemeColor,
     this.navigationBarUnselectedLabelSchemeColor,
     this.navigationBarMutedUnselectedLabel = false,
-    this.navigationBarSelectedIconSize, // Not in Playground
-    this.navigationBarUnselectedIconSize, // Not in Playground
+    this.navigationBarSelectedIconSize,
+    this.navigationBarUnselectedIconSize,
     this.navigationBarSelectedIconSchemeColor,
     this.navigationBarUnselectedIconSchemeColor,
     this.navigationBarMutedUnselectedIcon = false,
@@ -451,13 +451,13 @@ class FlexSubThemesData with Diagnosticable {
     this.adaptiveRemoveNavigationBarTint,
     //
     this.navigationRailLabelTextStyle,
-    this.navigationRailSelectedLabelSize, // Not in Playground
-    this.navigationRailUnselectedLabelSize, // Not in Playground
+    this.navigationRailSelectedLabelSize,
+    this.navigationRailUnselectedLabelSize,
     this.navigationRailSelectedLabelSchemeColor,
     this.navigationRailUnselectedLabelSchemeColor,
     this.navigationRailMutedUnselectedLabel = false,
-    this.navigationRailSelectedIconSize, // Not in Playground
-    this.navigationRailUnselectedIconSize, // Not in Playground
+    this.navigationRailSelectedIconSize,
+    this.navigationRailUnselectedIconSize,
     this.navigationRailSelectedIconSchemeColor,
     this.navigationRailUnselectedIconSchemeColor,
     this.navigationRailMutedUnselectedIcon = false,
@@ -469,9 +469,9 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailOpacity,
     this.navigationRailElevation,
     this.navigationRailLabelType,
-    this.navigationRailGroupAlignment, // Not in Playground
-    this.navigationRailMinWidth, // Not in Playground
-    this.navigationRailMinExtendedWidth, // Not in Playground
+    this.navigationRailGroupAlignment,
+    this.navigationRailMinWidth,
+    this.navigationRailMinExtendedWidth,
     //
     @Deprecated('This property has been replaced by the more aptly named '
         'useMaterial3Typography property and no longer has any function '
@@ -3306,13 +3306,13 @@ class FlexSubThemesData with Diagnosticable {
   /// The size of the text label on selected [NavigationRail] item.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on selected item, 11 is used as fallback if needed.
+  /// on selected item, 12 is used as fallback if needed.
   final double? navigationRailSelectedLabelSize;
 
   /// The size of the text label on unselected [NavigationRail] items.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on unselected items, 11 is used as fallback if needed.
+  /// on unselected items, 12 is used as fallback if needed.
   final double? navigationRailUnselectedLabelSize;
 
   /// Select which color from the theme's [ColorScheme] to use as base for

@@ -67,7 +67,7 @@ class NavigationBarPanel extends StatelessWidget {
               child: SliderListTileReveal(
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
-                title: const Text('Background opacity'),
+                title: const Text('Opacity'),
                 value: controller.navBarOpacity,
                 onChanged: controller.setNavBarOpacity,
                 min: 0,
@@ -126,7 +126,7 @@ class NavigationBarPanel extends StatelessWidget {
               child: ColorSchemePopupMenu(
                 contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
-                title: const Text('Selection indicator color'),
+                title: const Text('Indicator color'),
                 defaultLabel: 'secondaryContainer',
                 defaultDisabledLabelM2: 'secondary opacity 24%',
                 value: controller.navBarIndicatorSchemeColor,
@@ -137,7 +137,7 @@ class NavigationBarPanel extends StatelessWidget {
               child: SliderListTileReveal(
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
-                title: const Text('Selection indicator opacity'),
+                title: const Text('Opacity'),
                 value: controller.navBarIndicatorOpacity,
                 onChanged: controller.setNavBarIndicatorOpacity,
                 min: 0,
@@ -160,7 +160,7 @@ class NavigationBarPanel extends StatelessWidget {
               child: SliderListTileReveal(
                 contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
-                title: const Text('Indicator border radius'),
+                title: const Text('Radius'),
                 value: controller.navBarIndicatorBorderRadius,
                 onChanged: controller.setNavBarIndicatorBorderRadius,
                 min: 0,
@@ -238,6 +238,91 @@ class NavigationBarPanel extends StatelessWidget {
           ],
         ),
         const Divider(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                title: const Text('Selected label size'),
+                value: controller.navigationBarSelectedLabelSize,
+                onChanged: controller.setNavigationBarSelectedLabelSize,
+                min: 10,
+                max: 26,
+                divisions: 16,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' pt',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '12 pt',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: enableControl,
+                title: const Text('Unselected size'),
+                value: controller.navigationBarUnselectedLabelSize,
+                onChanged: controller.setNavigationBarUnselectedLabelSize,
+                min: 8,
+                max: 26,
+                divisions: 20,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' pt',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: controller.navigationBarSelectedLabelSize !=
+                        null
+                    // ignore: lines_longer_than_80_chars
+                    ? '${(controller.navigationBarSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
+                    : '12 pt',
+                valueDefaultDisabledLabel: '12 pt',
+              ),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                title: const Text('Selected icon size'),
+                value: controller.navigationBarSelectedIconSize,
+                onChanged: controller.setNavigationBarSelectedIconSize,
+                min: 14,
+                max: 50,
+                divisions: 36,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '24 dp',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: enableControl,
+                title: const Text('Unselected size'),
+                value: controller.navigationBarUnselectedIconSize,
+                onChanged: controller.setNavigationBarUnselectedIconSize,
+                min: 14,
+                max: 50,
+                divisions: 36,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: controller.navigationBarSelectedIconSize !=
+                        null
+                    // ignore: lines_longer_than_80_chars
+                    ? '${(controller.navigationBarSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
+                    : '24 dp',
+                valueDefaultDisabledLabel: '24 dp',
+              ),
+            ),
+          ],
+        ),
+        const Divider(),
         if (isLight)
           EnumPopupMenu<AdaptiveTheme>(
             enabled: enableControl && controller.useMaterial3,
@@ -288,18 +373,7 @@ class NavigationBarPanel extends StatelessWidget {
         ),
         IsWebListTile(controller: controller),
         BackToActualPlatform(controller: controller),
-        const ListTileReveal(
-          dense: true,
-          title: Text('More settings with the API'),
-          subtitleReveal: Text(
-            'With the API you can also set the font and icon size individually '
-            'on selected and unselected items. Use FlexSubThemesData '
-            'properties: navigationBarSelectedLabelSize, '
-            'navigationBarUnselectedLabelSize, '
-            'navigationBarSelectedIconSize and '
-            'navigationBarUnselectedIconSize.\n',
-          ),
-        ),
+        const SizedBox(height: 8),
       ],
     );
   }

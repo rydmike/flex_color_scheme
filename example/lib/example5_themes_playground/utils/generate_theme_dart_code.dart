@@ -1175,6 +1175,26 @@ String generateThemeDartCode(ThemeController controller) {
           .bottomNavShowUnselectedLabels
       ? ''
       : '    bottomNavigationBarShowUnselectedLabels: ${controller.bottomNavShowUnselectedLabels},\n';
+  final String bottomNavigationBarSelectedLabelSize = controller
+              .bottomNavigationBarSelectedLabelSize !=
+          null
+      ? '    bottomNavigationBarSelectedLabelSize: ${controller.bottomNavigationBarSelectedLabelSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String bottomNavigationBarUnselectedLabelSize = controller
+              .bottomNavigationBarUnselectedLabelSize !=
+          null
+      ? '    bottomNavigationBarUnselectedLabelSize: ${controller.bottomNavigationBarUnselectedLabelSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String bottomNavigationBarSelectedIconSize = controller
+              .bottomNavigationBarSelectedIconSize !=
+          null
+      ? '    bottomNavigationBarSelectedIconSize: ${controller.bottomNavigationBarSelectedIconSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String bottomNavigationBarUnselectedIconSize = controller
+              .bottomNavigationBarUnselectedIconSize !=
+          null
+      ? '    bottomNavigationBarUnselectedIconSize: ${controller.bottomNavigationBarUnselectedIconSize!.toStringAsFixed(0)},\n'
+      : '';
   //
   // Menu and MenuBar setup CODE
   //
@@ -1308,6 +1328,26 @@ String generateThemeDartCode(ThemeController controller) {
           NavigationDestinationLabelBehavior.alwaysShow
       ? '    navigationBarLabelBehavior: ${controller.navBarLabelBehavior},\n'
       : '';
+  final String navigationBarSelectedLabelSize = controller
+              .navigationBarSelectedLabelSize !=
+          null
+      ? '    navigationBarSelectedLabelSize: ${controller.navigationBarSelectedLabelSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationBarUnselectedLabelSize = controller
+              .navigationBarUnselectedLabelSize !=
+          null
+      ? '    navigationBarUnselectedLabelSize: ${controller.navigationBarUnselectedLabelSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationBarSelectedIconSize = controller
+              .navigationBarSelectedIconSize !=
+          null
+      ? '    navigationBarSelectedIconSize: ${controller.navigationBarSelectedIconSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationBarUnselectedIconSize = controller
+              .navigationBarUnselectedIconSize !=
+          null
+      ? '    navigationBarUnselectedIconSize: ${controller.navigationBarUnselectedIconSize!.toStringAsFixed(0)},\n'
+      : '';
   final String adaptiveRemoveNavigationBarTintLight = controller
                   .adaptiveRemoveNavigationBarTintLight !=
               null &&
@@ -1392,6 +1432,41 @@ String generateThemeDartCode(ThemeController controller) {
       controller.navRailLabelType != NavigationRailLabelType.none
           ? '    navigationRailLabelType: ${controller.navRailLabelType},\n'
           : '';
+  final String navigationRailSelectedLabelSize = controller
+              .navigationRailSelectedLabelSize !=
+          null
+      ? '    navigationRailSelectedLabelSize: ${controller.navigationRailSelectedLabelSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationRailUnselectedLabelSize = controller
+              .navigationRailUnselectedLabelSize !=
+          null
+      ? '    navigationRailUnselectedLabelSize: ${controller.navigationRailUnselectedLabelSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationRailSelectedIconSize = controller
+              .navigationRailSelectedIconSize !=
+          null
+      ? '    navigationRailSelectedIconSize: ${controller.navigationRailSelectedIconSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationRailUnselectedIconSize = controller
+              .navigationRailUnselectedIconSize !=
+          null
+      ? '    navigationRailUnselectedIconSize: ${controller.navigationRailUnselectedIconSize!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationRailGroupAlignment = controller
+                  .navigationRailGroupAlignment !=
+              null &&
+          controller.navigationRailGroupAlignment != -1.0
+      ? '    navigationRailGroupAlignment: ${controller.navigationRailGroupAlignment!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationRailMinWidth = controller.navigationRailMinWidth !=
+          null
+      ? '    navigationRailMinWidth: ${controller.navigationRailMinWidth!.toStringAsFixed(0)},\n'
+      : '';
+  final String navigationRailMinExtendedWidth = controller
+              .navigationRailMinExtendedWidth !=
+          null
+      ? '    navigationRailMinExtendedWidth: ${controller.navigationRailMinExtendedWidth!.toStringAsFixed(0)},\n'
+      : '';
   //
   // Compose the sub themes from above fragments.
   // Order attempts to be in same order as they appear in the large
@@ -1599,6 +1674,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarElevation'
           '$bottomNavigationBarShowSelectedLabels'
           '$bottomNavigationBarShowUnselectedLabels'
+          '$bottomNavigationBarSelectedLabelSize'
+          '$bottomNavigationBarUnselectedLabelSize'
+          '$bottomNavigationBarSelectedIconSize'
+          '$bottomNavigationBarUnselectedIconSize'
           //
           '$menuRadius'
           '$menuElevation'
@@ -1631,6 +1710,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
+          '$navigationBarSelectedLabelSize'
+          '$navigationBarUnselectedLabelSize'
+          '$navigationBarSelectedIconSize'
+          '$navigationBarUnselectedIconSize'
           '$adaptiveRemoveNavigationBarTintLight'
           //
           '$navigationRailSelectedLabelSchemeColor'
@@ -1647,6 +1730,13 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailOpacity'
           '$navigationRailElevation'
           '$navigationRailLabelType'
+          '$navigationRailSelectedLabelSize'
+          '$navigationRailUnselectedLabelSize'
+          '$navigationRailSelectedIconSize'
+          '$navigationRailUnselectedIconSize'
+          '$navigationRailGroupAlignment'
+          '$navigationRailMinWidth'
+          '$navigationRailMinExtendedWidth'
           //
           '  ),\n'
       : '';
@@ -1853,6 +1943,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomNavigationBarElevation'
           '$bottomNavigationBarShowSelectedLabels'
           '$bottomNavigationBarShowUnselectedLabels'
+          '$bottomNavigationBarSelectedLabelSize'
+          '$bottomNavigationBarUnselectedLabelSize'
+          '$bottomNavigationBarSelectedIconSize'
+          '$bottomNavigationBarUnselectedIconSize'
           //
           '$menuRadius'
           '$menuElevation'
@@ -1885,6 +1979,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationBarElevation'
           '$navigationBarHeight'
           '$navigationBarLabelBehavior'
+          '$navigationBarSelectedLabelSize'
+          '$navigationBarUnselectedLabelSize'
+          '$navigationBarSelectedIconSize'
+          '$navigationBarUnselectedIconSize'
           '$adaptiveRemoveNavigationBarTintDark'
           //
           '$navigationRailSelectedLabelSchemeColor'
@@ -1901,6 +1999,13 @@ String generateThemeDartCode(ThemeController controller) {
           '$navigationRailOpacity'
           '$navigationRailElevation'
           '$navigationRailLabelType'
+          '$navigationRailSelectedLabelSize'
+          '$navigationRailUnselectedLabelSize'
+          '$navigationRailSelectedIconSize'
+          '$navigationRailUnselectedIconSize'
+          '$navigationRailGroupAlignment'
+          '$navigationRailMinWidth'
+          '$navigationRailMinExtendedWidth'
           '  ),\n'
       : '';
   // Make a prettier version of the constructor if we have default one.

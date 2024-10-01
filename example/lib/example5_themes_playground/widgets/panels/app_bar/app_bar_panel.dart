@@ -646,6 +646,18 @@ class AppBarPanel extends StatelessWidget {
             ),
           ),
         ),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitleReveal: Text(
+            'With the API you can also set the text styles with '
+            'FlexSubThemesData properties:\n'
+            '\n'
+            '- appBarTitleTextStyle\n'
+            '- appBarToolbarTextStyle\n',
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }
