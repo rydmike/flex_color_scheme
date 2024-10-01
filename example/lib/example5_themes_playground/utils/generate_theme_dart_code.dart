@@ -581,10 +581,10 @@ String generateThemeDartCode(ThemeController controller) {
           controller.inputDecoratorPaddingTop != null ||
           controller.inputDecoratorPaddingBottom != null
       ? '    inputDecoratorContentPadding: EdgeInsetsDirectional.fromSTEB('
-          '${controller.inputDecoratorPaddingStart ?? InpDecoDefault.start.padding(controller)}, '
-          '${controller.inputDecoratorPaddingTop ?? InpDecoDefault.top.padding(controller)}, '
-          '${controller.inputDecoratorPaddingEnd ?? InpDecoDefault.end.padding(controller)}, '
-          '${controller.inputDecoratorPaddingBottom ?? InpDecoDefault.bottom.padding(controller)}),\n'
+          '${controller.inputDecoratorPaddingStart ?? DecoratorDefault.start.padding(controller)}, '
+          '${controller.inputDecoratorPaddingTop ?? DecoratorDefault.top.padding(controller)}, '
+          '${controller.inputDecoratorPaddingEnd ?? DecoratorDefault.end.padding(controller)}, '
+          '${controller.inputDecoratorPaddingBottom ?? DecoratorDefault.bottom.padding(controller)}),\n'
       : '';
 
   final String inputDecoratorBackgroundAlphaLight = controller

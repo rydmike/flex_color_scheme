@@ -91,7 +91,7 @@ sealed class ThemeValues {
 }
 
 // Enum helper to get the default padding values for the input decorator.
-enum InpDecoDefault {
+enum DecoratorDefault {
   start,
   top,
   end,
@@ -198,13 +198,13 @@ enum InpDecoDefault {
       }
     }
     switch (this) {
-      case InpDecoDefault.start:
+      case DecoratorDefault.start:
         return defaultStartPadding;
-      case InpDecoDefault.top:
+      case DecoratorDefault.top:
         return defaultTopPadding;
-      case InpDecoDefault.end:
+      case DecoratorDefault.end:
         return defaultEndPadding;
-      case InpDecoDefault.bottom:
+      case DecoratorDefault.bottom:
         return defaultBottomPadding;
     }
   }
