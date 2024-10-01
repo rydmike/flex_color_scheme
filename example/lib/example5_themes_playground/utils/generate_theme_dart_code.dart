@@ -432,6 +432,11 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    toggleButtonsSchemeColor: ${controller.toggleButtonsSchemeColor},\n';
+  final String toggleButtonsSelectedForegroundSchemeColor = controller
+              .toggleButtonsSelectedForegroundSchemeColor !=
+          null
+      ? '    toggleButtonsSelectedForegroundSchemeColor: ${controller.toggleButtonsSelectedForegroundSchemeColor},\n'
+      : '';
   final String toggleButtonsUnselectedSchemeColor = controller
               .toggleButtonsUnselectedSchemeColor ==
           null
@@ -459,6 +464,11 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '    segmentedButtonSchemeColor: ${controller.segmentedButtonSchemeColor},\n';
+  final String segmentedButtonSelectedForegroundSchemeColor = controller
+              .segmentedButtonSelectedForegroundSchemeColor !=
+          null
+      ? '    segmentedButtonSelectedForegroundSchemeColor: ${controller.segmentedButtonSelectedForegroundSchemeColor},\n'
+      : '';
   final String segmentedButtonUnselectedSchemeColor = controller
               .segmentedButtonUnselectedSchemeColor ==
           null
@@ -1431,12 +1441,14 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsSelectedForegroundSchemeColor'
           '$toggleButtonsUnselectedSchemeColor'
           '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
           //
           '$segmentedButtonBorderRadius'
           '$segmentedButtonSchemeColor'
+          '$segmentedButtonSelectedForegroundSchemeColor'
           '$segmentedButtonUnselectedSchemeColor'
           '$segmentedButtonUnselectedForegroundSchemeColor'
           '$segmentedButtonBorderSchemeColor'
@@ -1683,12 +1695,14 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$toggleButtonsBorderRadius'
           '$toggleButtonsSchemeColor'
+          '$toggleButtonsSelectedForegroundSchemeColor'
           '$toggleButtonsUnselectedSchemeColor'
           '$toggleButtonsBorderSchemeColor'
           '$toggleButtonsBorderWidth'
           //
           '$segmentedButtonBorderRadius'
           '$segmentedButtonSchemeColor'
+          '$segmentedButtonSelectedForegroundSchemeColor'
           '$segmentedButtonUnselectedSchemeColor'
           '$segmentedButtonUnselectedForegroundSchemeColor'
           '$segmentedButtonBorderSchemeColor'

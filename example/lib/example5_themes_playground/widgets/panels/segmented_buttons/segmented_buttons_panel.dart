@@ -95,38 +95,78 @@ class SegmentedButtonsPanel extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: SegmentedButtonShowcase(),
         ),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Background color'),
-          subtitle: const Text('Selected foreground automatically uses the '
-              'color pair of used background color'),
-          defaultLabel: 'secondaryContainer',
-          defaultLabelM2: 'primary',
-          defaultDisabledLabel: 'secondaryContainer',
-          value: controller.segmentedButtonSchemeColor,
-          onChanged: controller.setSegmentedButtonSchemeColor,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                title: const Text('Selected background'),
+                defaultLabel: 'secondaryContainer',
+                defaultLabelM2: 'primary',
+                defaultDisabledLabel: 'secondaryContainer',
+                value: controller.segmentedButtonSchemeColor,
+                onChanged: controller.setSegmentedButtonSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                title: const Text('Selected foreground'),
+                defaultLabel: controller.segmentedButtonSchemeColor == null
+                    ? useMaterial3
+                        ? 'onSecondaryContainer'
+                        : 'onPrimary'
+                    : SchemeColor
+                        .values[FlexSubThemes.onSchemeColor(
+                                controller.segmentedButtonSchemeColor!)
+                            .index]
+                        .name,
+                defaultDisabledLabel: 'onSecondaryContainer',
+                value: controller.segmentedButtonSelectedForegroundSchemeColor,
+                onChanged:
+                    controller.setSegmentedButtonSelectedForegroundSchemeColor,
+              ),
+            ),
+          ],
         ),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Unselected item background color'),
-          defaultLabel: 'transparent',
-          value: controller.segmentedButtonUnselectedSchemeColor,
-          onChanged: controller.setSegmentedButtonUnselectedSchemeColor,
-        ),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Unselected item foreground color'),
-          defaultLabel: controller.segmentedButtonUnselectedSchemeColor == null
-              ? 'onSurface'
-              : SchemeColor
-                  .values[FlexSubThemes.onSchemeColor(
-                          controller.segmentedButtonUnselectedSchemeColor!)
-                      .index]
-                  .name,
-          defaultDisabledLabel: 'onSurface',
-          value: controller.segmentedButtonUnselectedForegroundSchemeColor,
-          onChanged:
-              controller.setSegmentedButtonUnselectedForegroundSchemeColor,
+
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                title: const Text('Unselected background'),
+                defaultLabel: 'transparent',
+                value: controller.segmentedButtonUnselectedSchemeColor,
+                onChanged: controller.setSegmentedButtonUnselectedSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                title: const Text('Unselected foreground'),
+                defaultLabel:
+                    controller.segmentedButtonUnselectedSchemeColor == null
+                        ? 'onSurface'
+                        : SchemeColor
+                            .values[FlexSubThemes.onSchemeColor(controller
+                                    .segmentedButtonUnselectedSchemeColor!)
+                                .index]
+                            .name,
+                defaultDisabledLabel: 'onSurface',
+                value:
+                    controller.segmentedButtonUnselectedForegroundSchemeColor,
+                onChanged: controller
+                    .setSegmentedButtonUnselectedForegroundSchemeColor,
+              ),
+            ),
+          ],
         ),
         ColorSchemePopupMenu(
           enabled: enableControl,
@@ -141,35 +181,46 @@ class SegmentedButtonsPanel extends StatelessWidget {
           value: controller.segmentedButtonBorderSchemeColor,
           onChanged: controller.setSegmentedButtonBorderSchemeColor,
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Border radius'),
-          value: controller.segmentedButtonBorderRadius,
-          onChanged: controller.setSegmentedButtonBorderRadius,
-          min: 0,
-          max: 40,
-          divisions: 40,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: segmentedButtonsRadiusDefaultLabel,
-          valueDefaultDisabledLabel: 'stadium',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                title: const Text('Radius'),
+                value: controller.segmentedButtonBorderRadius,
+                onChanged: controller.setSegmentedButtonBorderRadius,
+                min: 0,
+                max: 40,
+                divisions: 40,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: segmentedButtonsRadiusDefaultLabel,
+                valueDefaultDisabledLabel: 'stadium',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                title: const Text('Width'),
+                value: controller.segmentedButtonBorderWidth,
+                onChanged: controller.setSegmentedButtonBorderWidth,
+                min: 0.5,
+                max: 6,
+                divisions: 11,
+                valueDecimalPlaces: 1,
+                valueHeading: 'WIDTH',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: segmentedBorderWidthDefaultLabel,
+                valueDefaultDisabledLabel: '1 dp',
+              ),
+            ),
+          ],
         ),
         //
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Border width'),
-          value: controller.segmentedButtonBorderWidth,
-          onChanged: controller.setSegmentedButtonBorderWidth,
-          min: 0.5,
-          max: 6,
-          divisions: 11,
-          valueDecimalPlaces: 1,
-          valueHeading: 'WIDTH',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: segmentedBorderWidthDefaultLabel,
-          valueDefaultDisabledLabel: '1 dp',
-        ),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -237,17 +288,46 @@ class SegmentedButtonsPanel extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: ToggleButtonsShowcase(compareButtons: true),
         ),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Selected background color'),
-          defaultLabel: 'primary',
-          defaultDisabledLabel: 'primary opacity 12%',
-          value: controller.toggleButtonsSchemeColor,
-          onChanged: controller.setToggleButtonsSchemeColor,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                title: const Text('Selected background'),
+                defaultLabel: 'primary',
+                defaultDisabledLabel: 'primary opacity 12%',
+                value: controller.toggleButtonsSchemeColor,
+                onChanged: controller.setToggleButtonsSchemeColor,
+              ),
+            ),
+            Expanded(
+              child: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                title: const Text('Selected foreground'),
+                defaultLabel: controller.toggleButtonsSchemeColor == null
+                    ? 'onPrimary'
+                    : SchemeColor
+                        .values[FlexSubThemes.onSchemeColor(
+                                controller.toggleButtonsSchemeColor!)
+                            .index]
+                        .name,
+                defaultDisabledLabel: 'primary opacity 12%',
+                value: controller.toggleButtonsSelectedForegroundSchemeColor,
+                onChanged:
+                    controller.setToggleButtonsSelectedForegroundSchemeColor,
+              ),
+            ),
+          ],
         ),
+
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Unselected foreground color'),
+          subtitleReveal: const Text('There is no setting in Flutter '
+              'ToggleButtons theme to set the unselected background color.\n'),
           defaultLabel: enableControl &&
                   controller.toggleButtonsUnselectedSchemeColor == null
               ? controller.toggleButtonsSchemeColor?.name ??
@@ -271,33 +351,44 @@ class SegmentedButtonsPanel extends StatelessWidget {
           value: controller.toggleButtonsBorderSchemeColor,
           onChanged: controller.setToggleButtonsBorderSchemeColor,
         ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Border radius'),
-          value: controller.toggleButtonsBorderRadius,
-          onChanged: controller.setToggleButtonsBorderRadius,
-          min: 0,
-          max: 40,
-          divisions: 40,
-          valueDecimalPlaces: 0,
-          valueHeading: 'RADIUS',
-          valueUnitLabel: ' dp',
-          valueDefaultLabel: toggleButtonsRadiusDefaultLabel,
-          valueDefaultDisabledLabel: '0 dp',
-        ),
-        SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Border width'),
-          value: controller.toggleButtonsBorderWidth,
-          onChanged: controller.setToggleButtonsBorderWidth,
-          min: 0.5,
-          max: 6,
-          divisions: 11,
-          valueDecimalPlaces: 1,
-          valueHeading: 'WIDTH',
-          valueDefaultLabel: toggleBorderWidthDefaultLabel,
-          valueDefaultDisabledLabel: '1 dp',
-          valueUnitLabel: ' dp',
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                title: const Text('Radius'),
+                value: controller.toggleButtonsBorderRadius,
+                onChanged: controller.setToggleButtonsBorderRadius,
+                min: 0,
+                max: 40,
+                divisions: 40,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: toggleButtonsRadiusDefaultLabel,
+                valueDefaultDisabledLabel: '0 dp',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                title: const Text('Width'),
+                value: controller.toggleButtonsBorderWidth,
+                onChanged: controller.setToggleButtonsBorderWidth,
+                min: 0.5,
+                max: 6,
+                divisions: 11,
+                valueDecimalPlaces: 1,
+                valueHeading: 'WIDTH',
+                valueDefaultLabel: toggleBorderWidthDefaultLabel,
+                valueDefaultDisabledLabel: '1 dp',
+                valueUnitLabel: ' dp',
+              ),
+            ),
+          ],
         ),
       ],
     );
