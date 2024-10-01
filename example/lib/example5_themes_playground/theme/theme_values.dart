@@ -1,5 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_theme.dart';
@@ -55,7 +56,38 @@ sealed class ThemeValues {
     return adapt ? adaptiveRadius : normalRadius;
   }
 
-  // static double? (ThemeController controller)
+  // Return ListTile content padding for a ListTile used in two column layout,
+  // for the first column, that respects the themed content padding and
+  // Material3 and Material2 padding logic.
+  static EdgeInsetsGeometry? tilePaddingStart(BuildContext context) {
+    final EdgeInsetsGeometry? padding =
+        Theme.of(context).listTileTheme.contentPadding;
+    if (padding == null) {
+      return const EdgeInsetsDirectional.only(start: 16, end: 8);
+    } else if (padding is EdgeInsetsDirectional) {
+      return EdgeInsetsDirectional.fromSTEB(
+          padding.start, padding.top, padding.end, padding.bottom / 2);
+    } else {
+      return padding;
+    }
+  }
+
+  // Return ListTile content padding for a ListTile used in two column layout,
+  // for the second column, that respects the themed content padding and
+  // Material3 and Material2 padding logic.
+  static EdgeInsetsGeometry? tilePaddingEnd(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final EdgeInsetsGeometry? padding = theme.listTileTheme.contentPadding;
+    if (padding == null) {
+      return EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
+    } else if (padding is EdgeInsetsDirectional) {
+      return EdgeInsetsDirectional.fromSTEB(
+          padding.start, padding.top, padding.end, padding.bottom / 2);
+    } else {
+      return padding;
+    }
+  }
 }
 
 // Enum helper to get the default padding values for the input decorator.
