@@ -390,6 +390,12 @@ class ThemeController with ChangeNotifier {
     _listTileMinVerticalPadding = await _themeService.load(
         Store.keyListTileMinVerticalPadding,
         Store.defaultListTileMinVerticalPadding);
+    _listTileStyle = await _themeService.load(
+        Store.keyListTileStyle, Store.defaultListTileStyle);
+    _listTileTitleAlignment = await _themeService.load(
+        Store.keyListTileTitleAlignment, Store.defaultListTileTitleAlignment);
+    _listTileControlAffinity = await _themeService.load(
+        Store.keyListTileControlAffinity, Store.defaultListTileControlAffinity);
     //
     // AppBar SETTINGS.
     _appBarStyleLight = await _themeService.load(
@@ -1109,6 +1115,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultListTileHorizontalTitleGap, false);
     setListTileMinVerticalPadding(
         Store.defaultListTileMinVerticalPadding, false);
+    setListTileStyle(Store.defaultListTileStyle, false);
+    setListTileTitleAlignment(Store.defaultListTileTitleAlignment, false);
+    setListTileControlAffinity(Store.defaultListTileControlAffinity, false);
     //
     // AppBar SETTINGS.
     setAppBarStyleLight(Store.defaultAppBarStyleLight, false);
@@ -3713,6 +3722,36 @@ class ThemeController with ChangeNotifier {
     _listTileMinVerticalPadding = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyListTileMinVerticalPadding, value));
+  }
+
+  late ListTileStyle? _listTileStyle;
+  ListTileStyle? get listTileStyle => _listTileStyle;
+  void setListTileStyle(ListTileStyle? value, [bool notify = true]) {
+    if (value == _listTileStyle) return;
+    _listTileStyle = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileStyle, value));
+  }
+
+  late ListTileTitleAlignment? _listTileTitleAlignment;
+  ListTileTitleAlignment? get listTileTitleAlignment => _listTileTitleAlignment;
+  void setListTileTitleAlignment(ListTileTitleAlignment? value,
+      [bool notify = true]) {
+    if (value == _listTileTitleAlignment) return;
+    _listTileTitleAlignment = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileTitleAlignment, value));
+  }
+
+  late ListTileControlAffinity? _listTileControlAffinity;
+  ListTileControlAffinity? get listTileControlAffinity =>
+      _listTileControlAffinity;
+  void setListTileControlAffinity(ListTileControlAffinity? value,
+      [bool notify = true]) {
+    if (value == _listTileControlAffinity) return;
+    _listTileControlAffinity = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyListTileControlAffinity, value));
   }
 
   // AppBar SETTINGS.
