@@ -74,7 +74,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - **STARTED**: Add some `SearchBar` theming features. Placeholder added. What to add in Playground? Shape and elevation?
 - **STARTED**: Add some `SearchView` theming features. Placeholder added. What to add in Playground? Shape and elevation? Has variant theme issue! Report the issue!
 
-- **FIX**: Dialog adaptive response seems broken, take a look at it. Maybe controller for global radius not being null anymore issue, after enum change.
+- **FIX**: Dialog platform adaptive response seems broken, take a look at it. Maybe controller for global radius not being null anymore issue, after enum change.
 
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
@@ -399,6 +399,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The **Chip** settings now include separate color for the `ChoiceChip (called Suggestion Chip in M3 design). The feature that blends the selected main overall Chip color was made optional. It is a useful feature due to the limited independent theme control over the Chips.  
 - The **Chip** settings panel now includes font size and padding controls.
 - The **ListTile** settings panel now includes a large number of theming controls for ListTile theming.
+- On the **Adaptive Theming** settings panel you can now also control the `MaterialTapTargetSize` setting.
 - The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
 
 
@@ -438,8 +439,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - In **Navigation Rail** panel settings, the "Labels when collapsed" defaults to "All items have labels". This means that `navigationRailLabelType: NavigationRailLabelType.all` is used by default in Playground generated `FlexSubThemesData()` passed to `subThemesData`, thus applying what was API default before. When you create a new theme with the Playground, you get same style as before. If you migrate from V7 you will need to set `NavigationRailLabelType.all` in yur old theme to get the same Rail style, if you had not defined it explicitly before. 
 
-- Changed how ALL opacity sliders work. They now all work with default (null) color and opacity is also nullable. Even if the `SchemeColor` it is used on is null, it will then use the default color and apply opacity on it. It is no longer required to select the same color as default to apply opacity anywhere.
-- Major internal refactor of all Sliders used in the Playground. Converted the Sliders to custom composed `SliderListTileReveal`, a combo convenience widget used for `Sliders` with a null default value. Also having separate labels for disabled and null default values, and a built info `ListTileReveal`.
+- Changed how ALL opacity sliders work. They now all work with default (null) color and opacity is also nullable. If the `SchemeColor` it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default to apply opacity anywhere.
+- Major internal refactor of all `Sliders` used in the Playground. Converted the Sliders to custom composed `SliderListTileReveal`, a combo convenience widget used for `Sliders` with a null default value. Also having separate labels for disabled and null default values, and a built info `ListTileReveal`.
 
 - Changed the style and speed of all popup menus. They are more compact with smaller font, and open under the ListTile you open them from, when there is room to do so. They also have no animation to open quickly and more desktop like, as this app is intended to be used primary on desktop. Their states now communicate the default for their settings better when FCS is used, as well as when FCS is disabled.
   > **DETAILS:** The bulk of used popups components in the Playground are now using a shared a generic `EnumPopupMenu<T extends Enum>`, based on `ListTile` and `PopupMenuButton` that now supports nullable enums and has built-in support for null selection and disabled defaults. It also has built-in `ListTileReveal` for info expand reveals. There are still a few special case popups that have some specialized features like `ColorSchemePopupMenu` but it is based on the same design. It needs to be able to communicate a large number of default color values for its color default labels, depending on active theme state, so it supports things like `defaultLabel`, `defaultLabelDark`, `defaultLabelM2`, `defaultLabelDarkM2`, `defaultDisabledLabel`, `defaultDisabledLabelDark`, `defaultDisabledLabelM2` and `defaultDisabledLabelDarkM2`. This refactoring was also in preparation for adding more features, as it makes it easier to add enum based props. Sadly the refactor and migration of the Playground to use these components took a long time and delayed the release at least two weeks, maybe more. Some snafus in shown default value labels may also exist concerning colors, due to this refactor.
@@ -453,7 +454,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.
 - Fixed [#200](https://github.com/rydmike/flex_color_scheme/issues/200) FAB config code for `fabSchemeColor: SchemeColor.secondary` selection was not generated.
 - Fixed [#222](https://github.com/rydmike/flex_color_scheme/issues/222) PersistentBottomSheetController's type in Example 5/Playground.
-- Chore: Updated issue resolution status texts for Dialogs.
 - Fixed that Card was not showing the correct default border radius in Material-2 mode when using FCS.
 - Fixed that applying dialog elevation in the Playground app's own dark mode theme was missing.
 - Fixed that enum `FlexAdaptive.setting` value `FlexAdaptive.appleWeb` did not return `AdaptiveTheme.appleWeb` when selected, it returned `FlexAdaptive.apple`. This only impacted **simulation** of responsive themes for the Apple and Web response **in the Playground app**. Themes using this feature worked correctly. 

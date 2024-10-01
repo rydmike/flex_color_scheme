@@ -29,6 +29,60 @@ class AdaptiveThemePanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: EnumPopupMenu<VisualDensityEnum>(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: controller.useFlexColorScheme,
+                values: VisualDensityEnum.values,
+                title: const Text('Visual density'),
+                subtitleReveal: Text(
+                  'Defines the visual density of user interface components. '
+                  'Density, in the context of a UI, is the vertical and '
+                  'horizontal "compactness" of the components in the UI. '
+                  'It is without unit, since it means different things to '
+                  'different UI components.\n'
+                  '\n'
+                  // ignore: lines_longer_than_80_chars
+                  '${controller.usedVisualDensity?.describe ?? VisualDensityEnum.platform.describe}',
+                ),
+                value: controller.usedVisualDensity,
+                onChanged: controller.setUsedVisualDensity,
+              ),
+            ),
+            Expanded(
+              child: EnumPopupMenu<MaterialTapTargetSize>(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: controller.useFlexColorScheme,
+                values: MaterialTapTargetSize.values,
+                title: const Text('Tap target size'),
+                subtitleReveal: const Text(
+                  'Configures the tap target and layout size of Material '
+                  'widgets.\n'
+                  '\n'
+                  'The "padded" selection makes minimum tap size 48x48 dp '
+                  'and is primarily intended for Mobile touch devices.\n'
+                  '\n'
+                  'The "shrinkWrap" selection keeps the tap target size '
+                  'same as the child size, and is primary intended for Desktop '
+                  'devices.\n'
+                  '\n'
+                  'Impacted Material widgets are:\n'
+                  'FloatingActionButton (only the mini one), '
+                  'OutlinedButton, TextButton, ElevatedButton, IconButton, '
+                  'showTimePicker, SnackBar, Chips, Radio, Switch '
+                  'and Checkbox.\n'
+                  '\n',
+                ),
+                value: controller.tapTargetSize,
+                onChanged: controller.setTapTargetSize,
+              ),
+            ),
+          ],
+        ),
+        const Divider(),
         const ListTileReveal(
           title: Text('Platform adaptive behavior'),
           subtitleReveal: Text(
@@ -44,23 +98,6 @@ class AdaptiveThemePanel extends StatelessWidget {
               'the app in a web build on each platform. The selections here '
               'use built-in combinations, they cover most use cases.'),
         ),
-        EnumPopupMenu<VisualDensityEnum>(
-          enabled: controller.useFlexColorScheme,
-          values: VisualDensityEnum.values,
-          title: const Text('VisualDensity'),
-          subtitleReveal: Text(
-            'Defines the visual density of user interface components. '
-            'Density, in the context of a UI, is the vertical and horizontal '
-            '"compactness" of the components in the UI. It is without unit, '
-            'since it means different things to different UI components.\n'
-            '\n'
-            // ignore: lines_longer_than_80_chars
-            '${controller.usedVisualDensity?.describe ?? VisualDensityEnum.platform.describe}',
-          ),
-          value: controller.usedVisualDensity,
-          onChanged: controller.setUsedVisualDensity,
-        ),
-        const Divider(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

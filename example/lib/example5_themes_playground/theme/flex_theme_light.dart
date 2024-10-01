@@ -616,6 +616,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // active mock platform for the fake default as well.
     visualDensity: controller.usedVisualDensity?.setting(controller.platform) ??
         VisualDensityEnum.platform.setting(controller.platform),
+    // Use tap target size setting.
+    materialTapTargetSize: controller.tapTargetSize,
     //
     // Custom font, modify in App class to change it.
     // For demonstration purposes the custom font is defined via Google fonts

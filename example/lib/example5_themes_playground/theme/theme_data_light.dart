@@ -50,17 +50,14 @@ ThemeData themeDataLight(ThemeController controller) {
     // Copy/paste code for in the ThemesPlayground UI, and it represent the
     // effective scheme in the Playground app.
     colorScheme: colorScheme,
-
-    // TODO(rydmike): Remove me!
-    // navigationRailTheme: NavigationRailThemeData(
-    //     useIndicator: true, labelType: NavigationRailLabelType.all),
-
     // To our ThemeData we also apply the visual density, typography, selected
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
     // in the Playground app.
     visualDensity: controller.usedVisualDensity?.setting(controller.platform) ??
         VisualDensityEnum.platform.setting(controller.platform),
+    // Use tap target size setting.
+    materialTapTargetSize: controller.tapTargetSize,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
     typography: controller.useMaterial3

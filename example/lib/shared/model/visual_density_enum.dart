@@ -40,7 +40,7 @@ enum VisualDensityEnum {
         'platform on which the framework is executing. If a density is not '
         'specified in ThemeData, Flutter SDK uses this setup by DEFAULT. This '
         'setting results in Standard density on platforms '
-        'Android, iOS and Fuchsia, while Windows, macOs and Linux get '
+        'Android, iOS and Fuchsia, while Windows, macOS and Linux get '
         'the Compact value.\n',
     code: 'VisualDensity.adaptivePlatformDensity',
     icon: Icons.calendar_view_day_outlined,
