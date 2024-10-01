@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class ListTilePanel extends StatelessWidget {
@@ -40,7 +41,7 @@ class ListTilePanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Icon color'),
                 defaultLabel: 'onSurfaceVariant',
                 defaultLabelM2: 'Black opacity 54%',
@@ -52,7 +53,7 @@ class ListTilePanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Text color'),
                 defaultLabel: 'Used text styles',
                 defaultLabelM2: 'Used text styles & subtitle bodySmall',
