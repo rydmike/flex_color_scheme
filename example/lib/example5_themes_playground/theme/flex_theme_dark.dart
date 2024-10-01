@@ -427,6 +427,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.bottomNavShowSelectedLabels,
             bottomNavigationBarShowUnselectedLabels:
                 controller.bottomNavShowUnselectedLabels,
+            bottomNavigationBarSelectedLabelSize:
+                controller.bottomNavigationBarSelectedLabelSize,
+            bottomNavigationBarUnselectedLabelSize:
+                controller.bottomNavigationBarUnselectedLabelSize,
+            bottomNavigationBarSelectedIconSize:
+                controller.bottomNavigationBarSelectedIconSize,
+            bottomNavigationBarUnselectedIconSize:
+                controller.bottomNavigationBarUnselectedIconSize,
             // Menu, MenuBar and MenuButton settings.
             menuRadius: controller.menuRadius,
             menuElevation: controller.menuElevation,
@@ -479,6 +487,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             adaptiveRemoveNavigationBarTint: controller
                 .adaptiveRemoveNavigationBarTintDark
                 ?.setting(controller.fakeIsWeb),
+            navigationBarSelectedLabelSize:
+                controller.navigationBarSelectedLabelSize,
+            navigationBarUnselectedLabelSize:
+                controller.navigationBarUnselectedLabelSize,
+            navigationBarSelectedIconSize:
+                controller.navigationBarSelectedIconSize,
+            navigationBarUnselectedIconSize:
+                controller.navigationBarUnselectedIconSize,
             // NavigationRail settings.
             navigationRailSelectedLabelSchemeColor:
                 controller.navRailSelectedLabelSchemeColor,
@@ -502,6 +518,19 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             navigationRailOpacity: controller.navRailOpacity,
             navigationRailElevation: controller.navRailElevation,
             navigationRailLabelType: controller.navRailLabelType,
+            navigationRailSelectedLabelSize:
+                controller.navigationRailSelectedLabelSize,
+            navigationRailUnselectedLabelSize:
+                controller.navigationRailUnselectedLabelSize,
+            navigationRailSelectedIconSize:
+                controller.navigationRailSelectedIconSize,
+            navigationRailUnselectedIconSize:
+                controller.navigationRailUnselectedIconSize,
+            navigationRailGroupAlignment:
+                controller.navigationRailGroupAlignment,
+            navigationRailMinWidth: controller.navigationRailMinWidth,
+            navigationRailMinExtendedWidth:
+                controller.navigationRailMinExtendedWidth,
           )
         : null,
     //

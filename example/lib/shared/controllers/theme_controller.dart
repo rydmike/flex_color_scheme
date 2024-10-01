@@ -726,6 +726,14 @@ class ThemeController with ChangeNotifier {
     _navigationRailUnselectedIconSize = await _themeService.load(
         Store.keyNavigationRailUnselectedIconSize,
         Store.defaultNavigationRailUnselectedIconSize);
+    _navigationRailGroupAlignment = await _themeService.load(
+        Store.keyNavigationRailGroupAlignment,
+        Store.defaultNavigationRailGroupAlignment);
+    _navigationRailMinWidth = await _themeService.load(
+        Store.keyNavigationRailMinWidth, Store.defaultNavigationRailMinWidth);
+    _navigationRailMinExtendedWidth = await _themeService.load(
+        Store.keyNavigationRailMinExtendedWidth,
+        Store.defaultNavigationRailMinExtendedWidth);
     //
     // Button SETTINGS.
     _textButtonSchemeColor = await _themeService.load(
@@ -1362,6 +1370,11 @@ class ThemeController with ChangeNotifier {
         Store.defaultNavigationRailSelectedIconSize, false);
     setNavigationRailUnselectedIconSize(
         Store.defaultNavigationRailUnselectedIconSize, false);
+    setNavigationRailGroupAlignment(
+        Store.defaultNavigationRailGroupAlignment, false);
+    setNavigationRailMinWidth(Store.defaultNavigationRailMinWidth, false);
+    setNavigationRailMinExtendedWidth(
+        Store.defaultNavigationRailMinExtendedWidth, false);
     //
     // Button SETTINGS.
     setTextButtonSchemeColor(Store.defaultTextButtonSchemeColor, false);
@@ -5053,6 +5066,34 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(
         _themeService.save(Store.keyNavigationRailUnselectedIconSize, value));
+  }
+
+  late double? _navigationRailGroupAlignment;
+  double? get navigationRailGroupAlignment => _navigationRailGroupAlignment;
+  void setNavigationRailGroupAlignment(double? value, [bool notify = true]) {
+    if (value == _navigationRailGroupAlignment) return;
+    _navigationRailGroupAlignment = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNavigationRailGroupAlignment, value));
+  }
+
+  late double? _navigationRailMinWidth;
+  double? get navigationRailMinWidth => _navigationRailMinWidth;
+  void setNavigationRailMinWidth(double? value, [bool notify = true]) {
+    if (value == _navigationRailMinWidth) return;
+    _navigationRailMinWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyNavigationRailMinWidth, value));
+  }
+
+  late double? _navigationRailMinExtendedWidth;
+  double? get navigationRailMinExtendedWidth => _navigationRailMinExtendedWidth;
+  void setNavigationRailMinExtendedWidth(double? value, [bool notify = true]) {
+    if (value == _navigationRailMinExtendedWidth) return;
+    _navigationRailMinExtendedWidth = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyNavigationRailMinExtendedWidth, value));
   }
 
   // Button SETTINGS.

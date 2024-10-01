@@ -101,8 +101,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
 
-- Shadow color selection per component.
-  - Create a custom convenience control widget for it.
+
 - Platform adaptive `ShapeBorder` configuration, including `Squircle`.
   - Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Add fidelity for iOS adaptive `AppBar`.
@@ -112,13 +111,15 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 
 **ALREADY DECIDED TO POSTPONE TO A LATER RELEASE**
-
+ 
+- Custom shadow color global and selection per component.
+  - Create a custom convenience control widget for it.
 - Add `Divider` theme features, e.g., thickness and totally custom color.
 - Add `Checkbox` shape and border.
 - Add all Shadcn theme colors.
 - Add Shadcn predefined prefs.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
-- TODO: InputDecorator: Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
+- InputDecorator: Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
 
 
 
@@ -431,6 +432,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In **General Settings**, the Playground by default turns **ON** the settings "Use Material-2 style Divider in Material-2", "Tinted disabled components" and "Tinted interaction". Corresponding to `FlexSubThemesData` for `useM2StyleDividerInM3`, `interactionEffects` and `tintedDisabledControls` being set to `true`. Their FCS API defaults are however `false`, to keep the API itself less opinionated. Before FCS v8, these API defaults were `true` as stated in breaking changes. The Playground thus keeps this past, already in API opinionated defaults, as its pre-configured defaults, but the defaults for the FCS API itself, in Material-3 mode, are much less opinionated now.
 
 - In **Navigation Rail** panel settings, the "Labels when collapsed" defaults to "All items have labels". This means that `navigationRailLabelType: NavigationRailLabelType.all` is used by default in Playground generated `FlexSubThemesData()` passed to `subThemesData`, thus applying what was API default before. When you create a new theme with the Playground, you get same style as before. If you migrate from V7 you will need to set `NavigationRailLabelType.all` in yur old theme to get the same Rail style, if you had not defined it explicitly before. 
+
+- The **NavigationRail** settings panel got controls for selected and unselected label size, as well as selected and unselected icon size. The panel now also has settings for collapsed and expanded rail widths and destination group alignment.
+
+- The **NavigationBar** settings panel got controls for selected and unselected label size, as well as selected and unselected icon size.
+
+- The **BottomNavigationBar** settings panel got controls for selected and unselected label size, as well as selected and unselected icon size. The `BottomNavigationBar` animates their size transitions as it is intended to use different sizes for selected and unselected item. The `NavigationBar`na d`NavigationRail` do not animate their item size changes, but you can still use it.
+
 
 - Changed how ALL opacity sliders work. They now all work with default (null) color and opacity is also nullable. If the `SchemeColor` it is used on is null, it will use the default color and apply opacity on it. It is no longer required to select the same color as default to apply opacity anywhere.
 - Major internal refactor of all `Sliders` used in the Playground. Converted the Sliders to custom composed `SliderListTileReveal`, a combo convenience widget used for `Sliders` with a null default value. Also having separate labels for disabled and null default values, and a built info `ListTileReveal`.

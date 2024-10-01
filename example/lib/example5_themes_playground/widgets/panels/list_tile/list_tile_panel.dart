@@ -272,6 +272,19 @@ class ListTilePanel extends StatelessWidget {
             ),
           ),
         ),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitleReveal: Text(
+            'With the API you can also set the text styles with '
+            'FlexSubThemesData properties:\n'
+            '\n'
+            '- listTileTitleTextStyle\n'
+            '- listTileSubtitleTextStyle\n'
+            '- listTileLeadingAndTrailingTextStyle\n',
+          ),
+        ),
+        const SizedBox(height: 8),
         const Divider(height: 1),
         const ListTileShowcase(),
         const Divider(height: 1),

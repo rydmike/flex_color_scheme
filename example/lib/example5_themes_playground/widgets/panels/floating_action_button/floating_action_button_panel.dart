@@ -121,6 +121,7 @@ class FloatingActionButtonPanel extends StatelessWidget {
                       ? 'M3 rounded'
                       : 'circular',
         ),
+        const Divider(),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -148,6 +149,17 @@ class FloatingActionButtonPanel extends StatelessWidget {
             ),
           ),
         ),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitleReveal: Text(
+            'With the API you can also set the text style with '
+            'FlexSubThemesData properties:\n'
+            '\n'
+            '- fabExtendedTextStyle\n',
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

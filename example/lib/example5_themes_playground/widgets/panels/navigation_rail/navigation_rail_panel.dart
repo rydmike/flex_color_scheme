@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -130,7 +129,7 @@ class NavigationRailPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
+                enabled: enableControl && controller.navRailUseIndicator,
                 title: const Text('Color'),
                 defaultLabel: 'secondaryContainer',
                 defaultDisabledLabelM2: 'secondary',
@@ -159,6 +158,91 @@ class NavigationRailPanel extends StatelessWidget {
           ],
         ),
         const Divider(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                title: const Text('Selected label size'),
+                value: controller.navigationRailSelectedLabelSize,
+                onChanged: controller.setNavigationRailSelectedLabelSize,
+                min: 10,
+                max: 26,
+                divisions: 16,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' pt',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '12 pt',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: enableControl,
+                title: const Text('Unselected size'),
+                value: controller.navigationRailUnselectedLabelSize,
+                onChanged: controller.setNavigationRailUnselectedLabelSize,
+                min: 8,
+                max: 26,
+                divisions: 20,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' pt',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: controller.navigationRailSelectedLabelSize !=
+                        null
+                    // ignore: lines_longer_than_80_chars
+                    ? '${(controller.navigationRailSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
+                    : '12 pt',
+                valueDefaultDisabledLabel: '12 pt',
+              ),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                title: const Text('Selected icon size'),
+                value: controller.navigationRailSelectedIconSize,
+                onChanged: controller.setNavigationRailSelectedIconSize,
+                min: 14,
+                max: 50,
+                divisions: 36,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '24 dp',
+              ),
+            ),
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: enableControl,
+                title: const Text('Unselected size'),
+                value: controller.navigationRailUnselectedIconSize,
+                onChanged: controller.setNavigationRailUnselectedIconSize,
+                min: 14,
+                max: 50,
+                divisions: 36,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: controller.navigationRailSelectedIconSize !=
+                        null
+                    // ignore: lines_longer_than_80_chars
+                    ? '${(controller.navigationRailSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
+                    : '24 dp',
+                valueDefaultDisabledLabel: '24 dp',
+              ),
+            ),
+          ],
+        ),
+        const Divider(),
         Stack(
           children: <Widget>[
             Padding(
@@ -182,7 +266,7 @@ class NavigationRailPanel extends StatelessWidget {
             ),
             NavigationRailShowcase(
               explain: false,
-              height: 700,
+              height: 850,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -251,18 +335,52 @@ class NavigationRailPanel extends StatelessWidget {
                         : null,
                   ),
                   const Divider(),
-                  const ListTileReveal(
-                    dense: true,
-                    title: Text('More settings with the API'),
-                    subtitleReveal: Text(
-                      'With the API you can also set the font and icon size '
-                      'individually on selected and unselected items. Use '
-                      'FlexSubThemesData properties: '
-                      'navigationRailSelectedLabelSize, '
-                      'navigationRailUnselectedLabelSize, '
-                      'navigationRailSelectedIconSize and '
-                      'navigationRailUnselectedIconSize.\n',
+                  SliderListTileReveal(
+                    enabled: enableControl,
+                    title: const Text('Rail width'),
+                    value: controller.navigationRailMinWidth,
+                    onChanged: controller.setNavigationRailMinWidth,
+                    min: 72,
+                    max: 150,
+                    divisions: 78,
+                    valueHeading: 'WIDTH',
+                    valueUnitLabel: ' dp',
+                    valueDecimalPlaces: 0,
+                    valueDefaultLabel: useMaterial3 ? '80 dp' : '72 dp',
+                  ),
+                  SliderListTileReveal(
+                    enabled: enableControl,
+                    title: const Text('Rail expanded width'),
+                    value: controller.navigationRailMinExtendedWidth,
+                    onChanged: controller.setNavigationRailMinExtendedWidth,
+                    min: 200,
+                    max: 400,
+                    divisions: 200,
+                    valueHeading: 'WIDTH',
+                    valueUnitLabel: ' dp',
+                    valueDecimalPlaces: 0,
+                    valueDefaultLabel: '256 dp',
+                  ),
+                  SliderListTileReveal(
+                    enabled: enableControl,
+                    title: const Text('Alignment'),
+                    subtitleReveal: const Text(
+                      'Vertical alignment for the item. The items are grouped '
+                      'together with the trailing widget, between the leading '
+                      'widget and the bottom of the rail. If alignment is '
+                      '-1.0, then the items are aligned to the top. If '
+                      'alignment is 0.0, then the items are aligned to '
+                      'the center. If alignment is 1.0, then the items are '
+                      'aligned to the bottom.\n',
                     ),
+                    value: controller.navigationRailGroupAlignment,
+                    onChanged: controller.setNavigationRailGroupAlignment,
+                    min: -1,
+                    max: 1,
+                    divisions: 40,
+                    valueHeading: 'ALIGN',
+                    valueDecimalPlaces: 1,
+                    valueDefaultLabel: '-1',
                   ),
                 ],
               ),

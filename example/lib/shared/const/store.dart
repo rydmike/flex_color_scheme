@@ -1625,6 +1625,26 @@ sealed class Store {
   // also to reset settings.
   static const double? defaultNavigationRailUnselectedIconSize = null;
 
+  // Key used to read and save the navigationRailGroupAlignment value.
+  static const String keyNavigationRailGroupAlignment =
+      'navigationRailGroupAlignment';
+  // Default value for the navigationRailGroupAlignment,
+  // also to reset settings.
+  static const double? defaultNavigationRailGroupAlignment = null;
+
+  // Key used to read and save the navigationRailMinWidth value.
+  static const String keyNavigationRailMinWidth = 'navigationRailMinWidth';
+  // Default value for the navigationRailMinWidth,
+  // also to reset settings.
+  static const double? defaultNavigationRailMinWidth = null;
+
+  // Key used to read and save the navigationRailMinExtendedWidth value.
+  static const String keyNavigationRailMinExtendedWidth =
+      'navigationRailMinExtendedWidth';
+  // Default value for the navigationRailMinExtendedWidth,
+  // also to reset settings.
+  static const double? defaultNavigationRailMinExtendedWidth = null;
+
   // Button SETTINGS.
   // ===========================================================================
 

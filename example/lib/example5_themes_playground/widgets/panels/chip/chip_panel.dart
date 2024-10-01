@@ -242,6 +242,7 @@ class ChipPanel extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
           child: ChipShowcase(showOptions: true),
         ),
+        const Divider(),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -288,6 +289,18 @@ class ChipPanel extends StatelessWidget {
             ),
           ),
         ),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitleReveal: Text(
+            'With the API you can also set the text styles with '
+            'FlexSubThemesData properties:\n'
+            '\n'
+            '- chipLabelStyle\n'
+            '- chipSecondaryLabelStyle\n',
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

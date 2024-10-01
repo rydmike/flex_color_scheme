@@ -137,6 +137,17 @@ class SnackBarMaterialBannerPanel extends StatelessWidget {
         ),
         const MaterialBannerShowcase(),
         const SizedBox(height: 8),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More settings with the API'),
+          subtitleReveal: Text(
+            'With the API you can also set the text styles with '
+            'FlexSubThemesData properties:\n'
+            '\n'
+            '- snackBarContentTextStyle\n',
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }

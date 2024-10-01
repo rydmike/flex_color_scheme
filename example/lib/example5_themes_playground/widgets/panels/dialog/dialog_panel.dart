@@ -595,7 +595,24 @@ class DialogPanel extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
+        const Divider(),
+        const ListTileReveal(
+          dense: true,
+          title: Text('More dialog theme settings with the API'),
+          subtitleReveal: Text(
+            'With the API you can also set the text styles with '
+            'FlexSubThemesData properties:\n'
+            '\n'
+            '- dialogTitleTextStyle\n'
+            '- dialogContentTextStyle\n'
+            '- timePickerDayPeriodTextStyle\n'
+            '- timePickerDialTextStyle\n'
+            '- timePickerHelpTextStyle\n'
+            '- timePickerHourMinuteTextStyle\n',
+          ),
+        ),
+        const SizedBox(height: 8),
       ],
     );
   }
