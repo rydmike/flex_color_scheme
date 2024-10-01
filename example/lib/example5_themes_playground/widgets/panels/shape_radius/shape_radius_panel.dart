@@ -22,15 +22,12 @@ class ShapeRadiusPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
     final Color shapeColor = theme.colorScheme.primaryContainer;
     final Color onShapeColor = theme.colorScheme.onPrimaryContainer;
-
-    final bool useMaterial3 = theme.useMaterial3;
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
     const double height = 90;
     const double width = 200;
 
@@ -38,12 +35,6 @@ class ShapeRadiusPanel extends StatelessWidget {
     // Used on the shapes presentation.
     final double radius = ThemeValues.effectiveRadius(controller) ??
         (enableControl ? 12 : (useMaterial3 ? 12 : 4));
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +189,7 @@ class ShapeRadiusPanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Default radius'),
                 subtitleReveal: const Text(
                   'By default, the border radius on all Material '
@@ -240,7 +231,7 @@ class ShapeRadiusPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl &&
                     controller.adaptiveRadius != AdaptiveTheme.off &&
                     controller.adaptiveRadius != null,
@@ -310,7 +301,7 @@ class ShapeRadiusPanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Standard width'),
                 subtitleReveal: const Text(
                   'Standard border width used as default by InputDecorator, '
@@ -329,7 +320,7 @@ class ShapeRadiusPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Thicker width'),
                 subtitleReveal: const Text(

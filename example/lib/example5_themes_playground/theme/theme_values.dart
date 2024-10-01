@@ -66,7 +66,7 @@ sealed class ThemeValues {
       return const EdgeInsetsDirectional.only(start: 16, end: 8);
     } else if (padding is EdgeInsetsDirectional) {
       return EdgeInsetsDirectional.fromSTEB(
-          padding.start, padding.top, padding.end, padding.bottom / 2);
+          padding.start, padding.top, padding.end / 2, padding.bottom / 2);
     } else {
       return padding;
     }
@@ -83,7 +83,7 @@ sealed class ThemeValues {
       return EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
     } else if (padding is EdgeInsetsDirectional) {
       return EdgeInsetsDirectional.fromSTEB(
-          padding.start, padding.top, padding.end, padding.bottom / 2);
+          padding.start / 2, padding.top, padding.end, padding.bottom);
     } else {
       return padding;
     }

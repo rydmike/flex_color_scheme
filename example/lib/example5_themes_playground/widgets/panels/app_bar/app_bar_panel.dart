@@ -9,6 +9,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
@@ -49,12 +50,6 @@ class AppBarPanel extends StatelessWidget {
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     // Get the brightness need of current AppBar color, we need it
     // for when the scaffold background color is used as AppBar color, since
@@ -163,7 +158,7 @@ class AppBarPanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: AppBarStylePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Light AppBarStyle'),
                   enabled: controller.useFlexColorScheme &&
                       (controller.appBarBackgroundSchemeColorLight == null ||
@@ -188,7 +183,7 @@ class AppBarPanel extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   enabled: controller.useFlexColorScheme,
                   title: const Text('Opacity'),
                   subtitleReveal:
@@ -214,7 +209,7 @@ class AppBarPanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: AppBarStylePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Dark AppBarStyle'),
                   enabled: controller.useFlexColorScheme &&
                       (controller.appBarBackgroundSchemeColorDark == null ||
@@ -228,7 +223,7 @@ class AppBarPanel extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   enabled: controller.useFlexColorScheme,
                   title: const Text('Opacity'),
                   subtitleReveal:
@@ -275,7 +270,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Background color'),
                   defaultLabel: 'AppBarStyle',
                   defaultDisabledLabel:
@@ -290,7 +285,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Background color'),
                   defaultLabel: 'AppBarStyle',
                   defaultDisabledLabel:
@@ -303,7 +298,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Title color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorLight ==
                           null
@@ -325,7 +320,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Title color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorDark ==
                           null
@@ -350,7 +345,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Icon color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorLight ==
                           null
@@ -374,7 +369,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Icon color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorDark ==
                           null
@@ -397,7 +392,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Actions icon color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorLight ==
                           null
@@ -420,7 +415,7 @@ class AppBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Actions icon color'),
                   defaultLabel: controller.appBarBackgroundSchemeColorDark ==
                           null
@@ -447,12 +442,12 @@ class AppBarPanel extends StatelessWidget {
             Expanded(
               child: AppBarCenterTitleToggleButtons(
                 controller: controller,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
               ),
             ),
             Expanded(
               child: SwitchListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Remove scrim'),
                 subtitleReveal: const Text(
                   'ON  No scrim on top status bar, as in Material-3 spec\n'
@@ -473,7 +468,7 @@ class AppBarPanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: controller.useFlexColorScheme,
                   title: const Text('Elevation'),
                   value: controller.appBarElevationLight,
@@ -489,7 +484,7 @@ class AppBarPanel extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   enabled: enableControl && useMaterial3,
                   title: const Text('Scroll under'),
                   value: controller.appBarScrolledUnderElevationLight,
@@ -509,7 +504,7 @@ class AppBarPanel extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: controller.useFlexColorScheme,
                   title: const Text('Elevation'),
                   value: controller.appBarElevationDark,
@@ -525,7 +520,7 @@ class AppBarPanel extends StatelessWidget {
               ),
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   enabled: enableControl && useMaterial3,
                   title: const Text('Scroll under'),
                   value: controller.appBarScrolledUnderElevationDark,

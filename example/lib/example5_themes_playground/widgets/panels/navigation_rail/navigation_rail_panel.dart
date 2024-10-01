@@ -6,6 +6,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import 'navigation_rail_label_type_list_tile.dart';
 
@@ -17,16 +18,9 @@ class NavigationRailPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +30,7 @@ class NavigationRailPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Background color'),
                 defaultLabel: 'surface',
@@ -46,7 +40,7 @@ class NavigationRailPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Opacity'),
                 value: controller.navRailOpacity,
@@ -67,7 +61,7 @@ class NavigationRailPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Elevation'),
                 value: controller.navRailElevation,
@@ -83,7 +77,7 @@ class NavigationRailPanel extends StatelessWidget {
             Expanded(
               child: NavigationRailLabelBehaviorListTile(
                 controller: controller,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
               ),
             ),
           ],
@@ -94,7 +88,7 @@ class NavigationRailPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SwitchListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Use selection indicator'),
                 subtitleReveal: const Text('On by default when useMaterial3 '
@@ -106,7 +100,7 @@ class NavigationRailPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl &&
                     controller.navRailUseIndicator &&
                     !(!useMaterial3 &&
@@ -135,7 +129,7 @@ class NavigationRailPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Color'),
                 defaultLabel: 'secondaryContainer',
@@ -146,7 +140,7 @@ class NavigationRailPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl && controller.navRailUseIndicator,
                 title: const Text('Opacity'),
                 value: controller.navRailIndicatorOpacity,

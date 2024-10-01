@@ -58,12 +58,6 @@ class NavigationDrawerPanel extends StatelessWidget {
                 ? 'global ${effectiveRadius.toStringAsFixed(0)}'
                 : '';
 
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
-
     // Keeping the logic for the M2 different logic for width here, in case
     // it is needed again in the future.
     final double derivedIndicatorWidth =
@@ -104,7 +98,7 @@ class NavigationDrawerPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Radius'),
                 value: controller.drawerBorderRadius,
@@ -121,7 +115,7 @@ class NavigationDrawerPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Elevation'),
                 value: controller.drawerElevation,
@@ -212,7 +206,7 @@ class NavigationDrawerPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Indicator color'),
                 defaultLabel: 'secondaryContainer',
@@ -222,7 +216,7 @@ class NavigationDrawerPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Opacity'),
                 value: controller.drawerIndicatorOpacity,
@@ -244,7 +238,7 @@ class NavigationDrawerPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Indicator radius'),
                 value: controller.drawerIndicatorBorderRadius,
@@ -261,7 +255,7 @@ class NavigationDrawerPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Width'),
                 value: controller.drawerIndicatorWidth,
@@ -282,7 +276,7 @@ class NavigationDrawerPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Selected item'),
                 defaultLabel: controller.drawerIndicatorSchemeColor == null
@@ -299,7 +293,7 @@ class NavigationDrawerPanel extends StatelessWidget {
             ),
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Unselected item'),
                 defaultLabel: controller.drawerBackgroundSchemeColor == null

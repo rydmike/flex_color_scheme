@@ -54,11 +54,9 @@ class TextFieldPanel extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
     final String unfocusedBorderDefaultLabel =
         controller.inputDecoratorBorderWidth == null &&
                 controller.thinBorderWidth == null
@@ -152,12 +150,6 @@ class TextFieldPanel extends StatelessWidget {
                 .values[controller.inputDecoratorSchemeColorDark!.index].name
             : 'primary';
 
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -229,7 +221,7 @@ class TextFieldPanel extends StatelessWidget {
               // 1st column light
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: enableControl,
                   title: const Text('Background color (light)'),
                   defaultLabel: 'surfaceContainerHighest',
@@ -243,7 +235,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Opacity'),
                   subtitle: Text('Alpha as opacity is '
                       '$lightBackgroundLabelOpacity %'),
@@ -270,7 +262,7 @@ class TextFieldPanel extends StatelessWidget {
               // 1st column dark
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: enableControl,
                   title: const Text('Background color (dark)'),
                   defaultLabel: 'surfaceContainerHighest',
@@ -284,7 +276,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Opacity'),
                   subtitle: Text('Alpha as opacity is '
                       '$darkBackgroundLabelOpacity %'),
@@ -314,7 +306,7 @@ class TextFieldPanel extends StatelessWidget {
             // 1st column light and dark
             Expanded(
               child: ListTile(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: enableControl,
                   title: const Text('Border'),
                   subtitle: controller.inputDecoratorBorderType ==
@@ -342,7 +334,7 @@ class TextFieldPanel extends StatelessWidget {
             // 2nd colum light and dark
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Radius'),
                 value: controller.inputDecoratorBorderRadius,
@@ -369,7 +361,7 @@ class TextFieldPanel extends StatelessWidget {
               // 1st column light
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: enableControl &&
                       !(!controller.inputDecoratorFocusedHasBorder &&
                           (!controller.inputDecoratorUnfocusedHasBorder ||
@@ -386,7 +378,7 @@ class TextFieldPanel extends StatelessWidget {
               // 1st column dark
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: enableControl &&
                       !(!controller.inputDecoratorFocusedHasBorder &&
                           (!controller.inputDecoratorUnfocusedHasBorder ||
@@ -402,7 +394,7 @@ class TextFieldPanel extends StatelessWidget {
             // 2nd column light and dark
             Expanded(
               child: SwitchListTile(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Unfocused uses color'),
                 value: enableControl &&
                     controller.inputDecoratorUnfocusedBorderIsColored &&
@@ -426,7 +418,7 @@ class TextFieldPanel extends StatelessWidget {
             // 1st column light and dark
             Expanded(
               child: SwitchListTile(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Unfocused has border'),
                 value: enableControl &&
                     controller.inputDecoratorUnfocusedHasBorder,
@@ -438,7 +430,7 @@ class TextFieldPanel extends StatelessWidget {
             // 2nd column light and dark
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl &&
                     controller.inputDecoratorUnfocusedHasBorder,
                 title: const Text('Unfocused border width'),
@@ -465,7 +457,7 @@ class TextFieldPanel extends StatelessWidget {
             // 1st column light and dark
             Expanded(
               child: SwitchListTile(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Focused has border'),
                 value:
                     enableControl && controller.inputDecoratorFocusedHasBorder,
@@ -478,7 +470,7 @@ class TextFieldPanel extends StatelessWidget {
             // 2nd column light and dark
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled:
                     enableControl && controller.inputDecoratorFocusedHasBorder,
                 title: const Text('Focused border width'),
@@ -504,7 +496,7 @@ class TextFieldPanel extends StatelessWidget {
             if (isLight)
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: enableControl,
                   title: const Text('Focused prefix icon'),
                   defaultLabel: 'onSurfaceVariant',
@@ -520,7 +512,7 @@ class TextFieldPanel extends StatelessWidget {
               // 1st column dark
               Expanded(
                 child: ColorSchemePopupMenu(
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   enabled: enableControl,
                   title: const Text('Focused prefix icon'),
                   defaultLabel: 'onSurfaceVariant',
@@ -539,7 +531,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Focused suffix icon'),
                   defaultLabel: 'onSurfaceVariant',
                   defaultLabelM2:
@@ -555,7 +547,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Focused suffix icon'),
                   defaultLabel: 'onSurfaceVariant',
                   defaultLabelM2:
@@ -575,10 +567,6 @@ class TextFieldPanel extends StatelessWidget {
         //
         SwitchListTileReveal(
           enabled: enableControl,
-          contentPadding: EdgeInsetsDirectional.only(
-            start: 16,
-            end: useMaterial3 ? 28 : 20,
-          ),
           title: const Text('Dense TextField '),
           subtitleReveal: const Text(
             'A nice Flutter built in quick padding '
@@ -608,7 +596,7 @@ class TextFieldPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.inputDecoratorPaddingStart,
@@ -624,7 +612,7 @@ class TextFieldPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.inputDecoratorPaddingEnd,
@@ -645,7 +633,7 @@ class TextFieldPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.inputDecoratorPaddingTop,
@@ -661,7 +649,7 @@ class TextFieldPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.inputDecoratorPaddingBottom,
@@ -712,7 +700,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Cursor'),
                   defaultLabel: baseDefaultLabelLightColor,
                   defaultDisabledLabel: 'primary',
@@ -724,7 +712,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Selection handles'),
                   defaultLabel: baseDefaultHandleLabelLightColor,
                   defaultDisabledLabel: 'primary',
@@ -741,7 +729,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Selection'),
                   defaultLabel: baseDefaultLabelLightColor,
                   defaultDisabledLabel: 'primary',
@@ -752,7 +740,7 @@ class TextFieldPanel extends StatelessWidget {
               // 2nd column light
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   enabled: enableControl,
                   title: const Text('Selection opacity'),
                   value: controller.inputSelectionLightOpacity,
@@ -778,7 +766,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Cursor'),
                   defaultLabel: baseDefaultLabelDarkColor,
                   defaultDisabledLabel: 'primary',
@@ -790,7 +778,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Selection handles'),
                   defaultLabel: baseDefaultHandleLabelDarkColor,
                   defaultDisabledLabel: 'primary',
@@ -807,7 +795,7 @@ class TextFieldPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Selection'),
                   defaultLabel: baseDefaultLabelDarkColor,
                   defaultDisabledLabel: 'primary',
@@ -818,7 +806,7 @@ class TextFieldPanel extends StatelessWidget {
               // 2nd column dark
               Expanded(
                 child: SliderListTileReveal(
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   enabled: enableControl,
                   title: const Text('Selection opacity'),
                   value: controller.inputSelectionDarkOpacity,
