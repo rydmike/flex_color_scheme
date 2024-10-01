@@ -48,6 +48,8 @@ class ThemeController with ChangeNotifier {
         await _themeService.load(Store.keyThemeMode, Store.defaultThemeMode);
     _usedVisualDensity = await _themeService.load(
         Store.keyUsedVisualDensity, Store.defaultUsedVisualDensity);
+    _tapTargetSize = await _themeService.load(
+        Store.keyTapTargetSize, Store.defaultTapTargetSize);
     _useFlexColorScheme = await _themeService.load(
         Store.keyUseFlexColorScheme, Store.defaultUseFlexColorScheme);
     _useSubThemes = await _themeService.load(
@@ -981,6 +983,7 @@ class ThemeController with ChangeNotifier {
     // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
     if (resetMode) setThemeMode(Store.defaultThemeMode, false);
     setUsedVisualDensity(Store.defaultUsedVisualDensity, false);
+    setTapTargetSize(Store.defaultTapTargetSize, false);
     setUseFlexColorScheme(Store.defaultUseFlexColorScheme, false);
     setUseSubThemes(Store.defaultUseSubThemes, false);
     setApplyThemeToAllCupertino(Store.defaultApplyThemeToAllCupertino, false);
@@ -2318,6 +2321,15 @@ class ThemeController with ChangeNotifier {
     _usedVisualDensity = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUsedVisualDensity, value));
+  }
+
+  late MaterialTapTargetSize? _tapTargetSize;
+  MaterialTapTargetSize? get tapTargetSize => _tapTargetSize;
+  void setTapTargetSize(MaterialTapTargetSize? value, [bool notify = true]) {
+    if (value == _tapTargetSize) return;
+    _tapTargetSize = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTapTargetSize, value));
   }
 
   late bool _useFlexColorScheme;
