@@ -503,3 +503,27 @@ class ListTileControlAffinityAdapter
   @override
   int get typeId => 174;
 }
+
+/// A Hive data type adapter for enum [MaterialTapTargetSize], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class MaterialTapTargetSizeAdapter extends TypeAdapter<MaterialTapTargetSize?> {
+  @override
+  MaterialTapTargetSize? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= MaterialTapTargetSize.values.length) {
+      return null;
+    } else {
+      return MaterialTapTargetSize.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, MaterialTapTargetSize? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 175;
+}
