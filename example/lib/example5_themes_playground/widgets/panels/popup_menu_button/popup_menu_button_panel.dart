@@ -6,6 +6,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class PopupMenuButtonPanel extends StatelessWidget {
@@ -25,16 +26,9 @@ class PopupMenuButtonPanel extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +75,7 @@ class PopupMenuButtonPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Background color'),
                 defaultLabel: 'surfaceContainer',
                 defaultLabelM2: 'surface',
@@ -91,7 +85,7 @@ class PopupMenuButtonPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Opacity'),
                 value: controller.popupMenuOpacity,
@@ -113,7 +107,7 @@ class PopupMenuButtonPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Container radius'),
                 subtitleReveal: const Text(
@@ -135,7 +129,7 @@ class PopupMenuButtonPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Elevation'),
                 value: controller.popupMenuElevation,

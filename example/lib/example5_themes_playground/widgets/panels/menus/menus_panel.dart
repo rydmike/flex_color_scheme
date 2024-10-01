@@ -7,6 +7,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 
 class MenusPanel extends StatelessWidget {
@@ -90,12 +91,6 @@ class MenusPanel extends StatelessWidget {
                     .index]
                 .name;
 
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -116,7 +111,7 @@ class MenusPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Color'),
                 defaultLabel: 'surfaceContainer',
                 value: controller.menuSchemeColor,
@@ -126,7 +121,7 @@ class MenusPanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Opacity'),
                 value: controller.menuOpacity,
                 onChanged: controller.setMenuOpacity,
@@ -147,7 +142,7 @@ class MenusPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Radius'),
                 subtitleReveal: const Text(
@@ -172,7 +167,7 @@ class MenusPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Elevation'),
                 value: controller.menuElevation,
@@ -197,7 +192,7 @@ class MenusPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.menuPaddingStart,
@@ -213,7 +208,7 @@ class MenusPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.menuPaddingEnd,
@@ -234,7 +229,7 @@ class MenusPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.menuPaddingTop,
@@ -250,7 +245,7 @@ class MenusPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.menuPaddingBottom,
@@ -285,7 +280,7 @@ class MenusPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Background color'),
                 defaultLabel: menuDefault,
                 defaultDisabledLabel: 'surfaceContainer',
@@ -296,7 +291,7 @@ class MenusPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Foreground color'),
                 defaultLabel: menuOnDefault,
                 defaultDisabledLabel: 'onSurface',
@@ -312,7 +307,7 @@ class MenusPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Highlighted background'),
                 defaultLabel: menuIndicatorDefault,
                 defaultDisabledLabel: 'onSurface$overlayStyle',
@@ -323,7 +318,7 @@ class MenusPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Highlighted foreground'),
                 defaultLabel: menuOnIndicatorDefault,
                 defaultDisabledLabel: 'onSurface',
@@ -454,7 +449,7 @@ class MenusPanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Background color'),
                 defaultLabel: menuDefault,
                 defaultDisabledLabel: 'surfaceContainer',
@@ -464,7 +459,7 @@ class MenusPanel extends StatelessWidget {
             ),
             Expanded(
               child: SwitchListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('No shadow'),
                 subtitleReveal: const Text(
                   'The M3 guide depicts MenuBars with no shadow and optional '
@@ -489,7 +484,7 @@ class MenusPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Radius'),
                 subtitleReveal: const Text(
@@ -512,7 +507,7 @@ class MenusPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Elevation'),
                 subtitleReveal: const Text(

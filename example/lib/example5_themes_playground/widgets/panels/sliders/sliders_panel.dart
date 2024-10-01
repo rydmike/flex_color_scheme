@@ -7,6 +7,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
 
@@ -27,11 +28,9 @@ class SlidersPanel extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
     final bool isLight = theme.brightness == Brightness.light;
     final String labelIndicatorDefault =
         controller.sliderBaseSchemeColor == null
@@ -43,12 +42,6 @@ class SlidersPanel extends StatelessWidget {
                     ? 'primary'
                     : 'grey [onSurface op60% alpha blended w. surface op90%]'
             : '${controller.sliderBaseSchemeColor?.name}';
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +60,7 @@ class SlidersPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Value indicator color'),
                 defaultLabel: labelIndicatorDefault,
@@ -78,7 +71,7 @@ class SlidersPanel extends StatelessWidget {
             ),
             Expanded(
               child: SwitchListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Tinted indicator'),
                 subtitleReveal: Text(
@@ -100,7 +93,7 @@ class SlidersPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: EnumPopupMenu<FlexSliderIndicatorType>(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 values: FlexSliderIndicatorType.values,
                 title: const Text('Indicator type'),
@@ -110,7 +103,7 @@ class SlidersPanel extends StatelessWidget {
             ),
             Expanded(
               child: EnumPopupMenu<ShowValueIndicator>(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 values: ShowValueIndicator.values,
                 title: const Text('Indicator visibility'),

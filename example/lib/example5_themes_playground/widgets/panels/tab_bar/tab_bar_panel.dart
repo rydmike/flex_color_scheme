@@ -7,6 +7,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
 
@@ -29,16 +30,9 @@ class TabBarPanel extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     // Get the brightness need of current AppBar color, we need it
     // for when the scaffold background color is used as AppBar color, since
@@ -207,7 +201,7 @@ class TabBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Light unselected items color'),
                   defaultLabel: unselectedLightLabel(),
                   value: controller.tabBarUnselectedItemSchemeColorLight,
@@ -217,7 +211,7 @@ class TabBarPanel extends StatelessWidget {
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl, //unselectedLightOpacityEnabled,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Opacity'),
                   value: controller.tabBarUnselectedItemOpacityLight,
                   onChanged: controller.setTabBarUnselectedItemOpacityLight,
@@ -238,7 +232,7 @@ class TabBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Light indicator color'),
                   defaultLabel: 'TabBarStyle',
                   value: controller.tabBarIndicatorLight,
@@ -249,7 +243,7 @@ class TabBarPanel extends StatelessWidget {
                 child: EnumPopupMenu<TabBarIndicatorSize>(
                   values: TabBarIndicatorSize.values,
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Indicator style'),
                   value: controller.tabBarIndicatorSize,
                   onChanged: controller.setTabBarIndicatorSize,
@@ -270,7 +264,7 @@ class TabBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Dark unselected items color'),
                   defaultLabel: unselectedDarkLabel(),
                   value: controller.tabBarUnselectedItemSchemeColorDark,
@@ -280,7 +274,7 @@ class TabBarPanel extends StatelessWidget {
               Expanded(
                 child: SliderListTileReveal(
                   enabled: enableControl, //unselectedDarkOpacityEnabled,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Opacity'),
                   value: controller.tabBarUnselectedItemOpacityDark,
                   onChanged: controller.setTabBarUnselectedItemOpacityDark,
@@ -301,7 +295,7 @@ class TabBarPanel extends StatelessWidget {
               Expanded(
                 child: ColorSchemePopupMenu(
                   enabled: enableControl,
-                  contentPadding: paddingStartColumn,
+                  contentPadding: ThemeValues.tilePaddingStart(context),
                   title: const Text('Dark indicator color'),
                   defaultLabel: 'TabBarStyle',
                   value: controller.tabBarIndicatorDark,
@@ -312,7 +306,7 @@ class TabBarPanel extends StatelessWidget {
                 child: EnumPopupMenu<TabBarIndicatorSize>(
                   values: TabBarIndicatorSize.values,
                   enabled: enableControl,
-                  contentPadding: paddingEndColumn,
+                  contentPadding: ThemeValues.tilePaddingEnd(context),
                   title: const Text('Indicator style'),
                   value: controller.tabBarIndicatorSize,
                   onChanged: controller.setTabBarIndicatorSize,
@@ -326,7 +320,7 @@ class TabBarPanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Indicator weight'),
                 value: controller.tabBarIndicatorWeight,
                 onChanged: controller.setTabBarIndicatorWeight,
@@ -342,7 +336,7 @@ class TabBarPanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Indicator top edge radius'),
                 value: controller.tabBarIndicatorTopRadius,
                 onChanged: controller.setTabBarIndicatorTopRadius,

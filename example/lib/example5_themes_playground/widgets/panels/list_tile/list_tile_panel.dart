@@ -14,16 +14,9 @@ class ListTilePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return Column(
       children: <Widget>[
@@ -70,7 +63,7 @@ class ListTilePanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Tile color'),
                 defaultLabel: 'transparent',
                 value: controller.listTileTileSchemeColor,
@@ -80,7 +73,7 @@ class ListTilePanel extends StatelessWidget {
             Expanded(
               child: ColorSchemePopupMenu(
                 enabled: enableControl,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Selected tile color'),
                 defaultLabel: 'transparent',
                 value: controller.listTileSelectedTileSchemeColor,
@@ -98,14 +91,14 @@ class ListTilePanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.listTilePaddingStart,
                 onChanged: controller.setListTilePaddingStart,
                 min: 0,
-                max: 40,
-                divisions: 40,
+                max: 50,
+                divisions: 50,
                 valueDecimalPlaces: 0,
                 valueHeading: 'START',
                 valueUnitLabel: ' dp',
@@ -114,14 +107,14 @@ class ListTilePanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.listTilePaddingEnd,
                 onChanged: controller.setListTilePaddingEnd,
                 min: 0,
-                max: 40,
-                divisions: 40,
+                max: 50,
+                divisions: 50,
                 valueDecimalPlaces: 0,
                 valueHeading: 'END',
                 valueUnitLabel: ' dp',
@@ -135,14 +128,14 @@ class ListTilePanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.listTilePaddingTop,
                 onChanged: controller.setListTilePaddingTop,
                 min: 0,
-                max: 40,
-                divisions: 40,
+                max: 50,
+                divisions: 50,
                 valueDecimalPlaces: 0,
                 valueHeading: 'TOP',
                 valueUnitLabel: ' dp',
@@ -151,14 +144,14 @@ class ListTilePanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.listTilePaddingBottom,
                 onChanged: controller.setListTilePaddingBottom,
                 min: 0,
-                max: 40,
-                divisions: 40,
+                max: 50,
+                divisions: 50,
                 valueDecimalPlaces: 0,
                 valueHeading: 'BOTTOM',
                 valueUnitLabel: ' dp',
@@ -173,14 +166,14 @@ class ListTilePanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 title: const Text('Horizontal title gap'),
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.listTileHorizontalTitleGap,
                 onChanged: controller.setListTileHorizontalTitleGap,
                 min: 0,
-                max: 40,
-                divisions: 40,
+                max: 50,
+                divisions: 50,
                 valueDecimalPlaces: 0,
                 valueHeading: 'GAP',
                 valueUnitLabel: ' dp',
@@ -190,14 +183,14 @@ class ListTilePanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 title: const Text('Min vertical padding'),
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.listTileMinVerticalPadding,
                 onChanged: controller.setListTileMinVerticalPadding,
                 min: 0,
-                max: 40,
-                divisions: 40,
+                max: 50,
+                divisions: 50,
                 valueDecimalPlaces: 0,
                 valueHeading: 'PADDING',
                 valueUnitLabel: ' dp',

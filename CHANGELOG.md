@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Sep 30, 2024**
+**Oct 1, 2024**
 
 ### SUMMARY
 
@@ -73,9 +73,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - **STARTED**: Add some `SearchBar` theming features. Placeholder added. What to add in Playground? Shape and elevation?
 - **STARTED**: Add some `SearchView` theming features. Placeholder added. What to add in Playground? Shape and elevation? Has variant theme issue! Report the issue!
-
-
-- TODO: Playground theme using fidelity improvement: Make all custom ListTile's use themed content padding. They override it now. Could get away with this when we did not adjust default, but with ListTile content padding available in theming we can no longer do that.
 
 - **FIX**: Dialog adaptive response seems broken, take a look at it. Maybe controller for global radius not being null anymore issue, after enum change.
 

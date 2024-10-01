@@ -7,6 +7,7 @@ import '../../../../shared/controllers/tone_indicator_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/list_tile_slider.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/show_input_colors_switch.dart';
 import '../../shared/surfaces_seed_blend_color.dart';
@@ -43,13 +44,6 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: theme.useMaterial3 ? 24 : 16);
-
     // Show blend info if blend is used and key colors are used.
     final bool showBlendInfo = ((isLight && widget.controller.blendLevel > 0) ||
             (!isLight && widget.controller.blendLevelDark > 0)) &&
@@ -95,7 +89,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
               children: <Widget>[
                 Expanded(
                   child: ListTileReveal(
-                    contentPadding: paddingStartColumn,
+                    contentPadding: ThemeValues.tilePaddingStart(context),
                     enabled: widget.controller.useKeyColors,
                     title: const Text('Keep input colors?'),
                     dense: true,
@@ -112,7 +106,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 Expanded(
                   child: ShowInputColorsSwitch(
                     controller: widget.controller,
-                    contentPadding: paddingEndColumn,
+                    contentPadding: ThemeValues.tilePaddingEnd(context),
                   ),
                 ),
               ],
@@ -198,7 +192,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
               children: <Widget>[
                 Expanded(
                   child: SwitchListTileReveal(
-                    contentPadding: paddingStartColumn,
+                    contentPadding: ThemeValues.tilePaddingStart(context),
                     dense: true,
                     enabled: widget.controller.useFlexColorScheme &&
                         widget.controller.useKeyColors,
@@ -242,7 +236,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 ),
                 Expanded(
                   child: SwitchListTileReveal(
-                    contentPadding: paddingEndColumn,
+                    contentPadding: ThemeValues.tilePaddingEnd(context),
                     dense: true,
                     enabled: widget.controller.useFlexColorScheme &&
                         widget.controller.useKeyColors,
@@ -307,7 +301,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingStartColumn,
+                      contentPadding: ThemeValues.tilePaddingStart(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('Monochrome surfaces'),
@@ -322,7 +316,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingEndColumn,
+                      contentPadding: ThemeValues.tilePaddingEnd(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('White surface'),
@@ -345,7 +339,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingStartColumn,
+                      contentPadding: ThemeValues.tilePaddingStart(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('B&W main onColors'),
@@ -363,7 +357,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingEndColumn,
+                      contentPadding: ThemeValues.tilePaddingEnd(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('B&W surface onColors'),
@@ -386,7 +380,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingStartColumn,
+                      contentPadding: ThemeValues.tilePaddingStart(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('Monochrome surfaces'),
@@ -401,7 +395,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingEndColumn,
+                      contentPadding: ThemeValues.tilePaddingEnd(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('Black surface'),
@@ -424,7 +418,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingStartColumn,
+                      contentPadding: ThemeValues.tilePaddingStart(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('B&W main onColors'),
@@ -442,7 +436,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   Expanded(
                     child: SwitchListTileReveal(
                       dense: true,
-                      contentPadding: paddingEndColumn,
+                      contentPadding: ThemeValues.tilePaddingEnd(context),
                       enabled:
                           widget.controller.useKeyColors && !_isFlutterScheme,
                       title: const Text('B&W surface onColors'),

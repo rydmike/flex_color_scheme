@@ -6,6 +6,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../../theme/theme_values.dart';
 import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
@@ -23,16 +24,9 @@ class NavigationBarPanel extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final bool isLight = theme.brightness == Brightness.light;
-
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +54,7 @@ class NavigationBarPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Background color'),
                 defaultLabel: 'surfaceContainer',
@@ -71,7 +65,7 @@ class NavigationBarPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Background opacity'),
                 value: controller.navBarOpacity,
@@ -93,7 +87,7 @@ class NavigationBarPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Elevation'),
                 value: controller.navBarElevation,
@@ -108,7 +102,7 @@ class NavigationBarPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Height'),
                 value: controller.navBarHeight,
@@ -130,7 +124,7 @@ class NavigationBarPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Selection indicator color'),
                 defaultLabel: 'secondaryContainer',
@@ -141,7 +135,7 @@ class NavigationBarPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Selection indicator opacity'),
                 value: controller.navBarIndicatorOpacity,
@@ -164,7 +158,7 @@ class NavigationBarPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Indicator border radius'),
                 value: controller.navBarIndicatorBorderRadius,
@@ -181,7 +175,7 @@ class NavigationBarPanel extends StatelessWidget {
             Expanded(
               child: NavigationBarLabelBehaviorListTile(
                 controller: controller,
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
               ),
             ),
           ],
@@ -192,7 +186,7 @@ class NavigationBarPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Selected icon color'),
                 defaultLabel: 'onSecondaryContainer',
@@ -203,7 +197,7 @@ class NavigationBarPanel extends StatelessWidget {
             ),
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Selected label color'),
                 defaultLabel: 'onSurface',
@@ -218,7 +212,7 @@ class NavigationBarPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ColorSchemePopupMenu(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Unselected item color'),
                 subtitle: const Text('Label and icon, but separate API'),
@@ -230,7 +224,7 @@ class NavigationBarPanel extends StatelessWidget {
             ),
             Expanded(
               child: SwitchListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Mute unselected items'),
                 subtitleReveal: const Text(

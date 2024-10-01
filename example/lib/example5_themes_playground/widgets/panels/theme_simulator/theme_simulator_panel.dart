@@ -8,6 +8,7 @@ import '../../../theme/flex_theme_dark.dart';
 import '../../../theme/flex_theme_light.dart';
 import '../../../theme/theme_data_dark.dart';
 import '../../../theme/theme_data_light.dart';
+import '../../../theme/theme_values.dart';
 import 'app_example_components.dart';
 import 'app_example_login.dart';
 import 'app_example_material3/app_example_material3.dart';
@@ -75,9 +76,6 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final Color iconColor = theme.colorScheme.primary;
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 6);
 
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
@@ -123,7 +121,7 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
                       });
                     },
                     child: ListTileReveal(
-                      contentPadding: paddingStartColumn,
+                      contentPadding: ThemeValues.tilePaddingStart(context),
                       dense: true,
                       leading: IconButton(
                         icon: AnimatedRotation(

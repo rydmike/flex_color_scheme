@@ -47,17 +47,9 @@ class ChipPanel extends StatelessWidget {
                     controller.defaultRadius != null
                 ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
                 : '';
-
     final String selectedColor = controller.chipSchemeColor == null
         ? 'primary'
         : controller.chipSchemeColor!.name;
-
-    // Paddings for the two column control layouts.
-    const EdgeInsetsDirectional paddingStartColumn =
-        EdgeInsetsDirectional.only(start: 16, end: 8);
-    final EdgeInsetsDirectional paddingEndColumn =
-        EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
-
     final bool useBlend =
         // ignore: avoid_bool_literals_in_conditional_expressions
         controller.chipBlendColors ?? (useMaterial3 ? false : true);
@@ -134,7 +126,7 @@ class ChipPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Font size'),
                 value: controller.chipFontSize,
@@ -151,7 +143,7 @@ class ChipPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Icon size'),
                 value: controller.chipIconSize,
@@ -177,7 +169,7 @@ class ChipPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.chipPaddingStart,
@@ -193,7 +185,7 @@ class ChipPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.chipPaddingEnd,
@@ -214,7 +206,7 @@ class ChipPanel extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingStartColumn,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 trailingWidth: 52,
                 enabled: enableControl,
                 value: controller.chipPaddingTop,
@@ -230,7 +222,7 @@ class ChipPanel extends StatelessWidget {
             ),
             Expanded(
               child: SliderListTileReveal(
-                contentPadding: paddingEndColumn,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 trailingWidth: 60,
                 enabled: enableControl,
                 value: controller.chipPaddingBottom,
