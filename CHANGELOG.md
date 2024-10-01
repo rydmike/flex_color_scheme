@@ -73,9 +73,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - **STARTED**: Add some `SearchBar` theming features. Placeholder added. 
 - **STARTED**: Add some `SearchView` theming features. Placeholder added. 
-- Make a new Flutter issue: The `SearchView`  has variant theme issue, gets shape in full screen.
+- Make a new **Flutter issue**: The `SearchView`  has variant theme issue, gets shape in full screen.
 
-- **FIX**: Dialog platform adaptive response seems broken, take a look at it. Maybe controller for global radius not being null anymore issue, after enum change.
+- **FIX**: Dialog platform adaptive response seems broken, take a look at it. Maybe controller for global radius not being null anymore issue after enum change.
 
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
@@ -83,21 +83,20 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
  
 - TODO: InputDecorator: 
   - Platform adaptive radius.
-  - Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
  
  
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
 
 - TODO: ListTile  
-  - Make a new Flutter issue: When minVerticalPadding is 4, it gets smaller than 0...3! Weird! Study the cause.
-  - Make a new Flutter issue: The ListTileStyle does not seem to work, study the cause. 
+  - Make a new **Flutter issue**: When minVerticalPadding is 4, it gets smaller than 0...3! Weird! Study the cause.
+  - Make a new **Flutter issue**: The ListTileStyle does not seem to work, study the cause. 
   - Update known ListTile issues in Playground.
   
 - TODO: Chips
-  - Make a new Flutter issue: IconTheme size does not work in M3, in M2 close icon changes, but not the check mark.
-  - Make a new Flutter issue: Chips theming still require proper support in Flutter, has severe variants issue.
-  - Make a new Flutter issue: Chips in M3 should be 32 dp, not 34 dp like now. 
+  - Make a new **Flutter issue**: IconTheme size does not work in M3, in M2 close icon changes, but not the check mark.
+  - Make a new **Flutter issue**: Chips theming still require proper support in Flutter, has severe variants issue.
+  - Make a new **Flutter issue**: Chips in M3 should be 32 dp, not 34 dp like now. 
   - Update known Chips issues in Playground.
 
 **POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
@@ -119,6 +118,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - Add all Shadcn theme colors.
 - Add Shadcn predefined prefs.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
+- TODO: InputDecorator: Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
 
 
 
