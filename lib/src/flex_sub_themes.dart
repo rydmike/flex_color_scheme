@@ -6209,19 +6209,27 @@ sealed class FlexSubThemes {
     /// Defines the background color for selected button, and
     /// it's onColor pair defines the foreground for selected button.
     ///
-    /// If not defined, [SchemeColor.secondaryContainer] will be used.
+    /// If not defined, secondaryContainer will be used.
     final SchemeColor? selectedSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the
+    /// foreground color for the selected [SegmentedButton].
+    ///
+    /// If not defined, contrast color pair to [selectedSchemeColor]
+    /// will be used.
+    final SchemeColor? selectedForegroundSchemeColor,
 
     /// Selects which color from the passed in colorScheme to use as the
     /// background color for unselected segmented button.
     ///
-    /// If not defined, [SchemeColor.surface] will be used.
+    /// If not defined, transparent will be used.
     final SchemeColor? unselectedSchemeColor,
 
     /// Selects which color from the passed in colorScheme to use as the
     /// foreground color for unselected segmented button.
     ///
-    /// If not defined, [SchemeColor.onSurface] will be used.
+    /// If not defined, contrast color pair to [unselectedSchemeColor]
+    /// will be used, for transparent it is onSurface.
     final SchemeColor? unselectedForegroundSchemeColor,
 
     /// Selects which color from the passed in colorScheme to use as the border
@@ -7957,7 +7965,7 @@ sealed class FlexSubThemes {
     required final ColorScheme colorScheme,
 
     /// Selects which color from the passed in colorScheme to use as the main
-    /// base color for the toggle buttons.
+    /// base color for the [ToggleButtons].
     ///
     /// Always defines the background color for selected button, and
     /// it's onColor pair defines the foreground for selected button.
@@ -7969,23 +7977,24 @@ sealed class FlexSubThemes {
     /// color base for the border color, in M3 and undefined borderSchemeColor
     /// results in [ColorScheme.outline] color being used.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
-    ///
-    /// If not defined, [SchemeColor.primary] will be used.
+    /// If not defined, primary will be used.
     final SchemeColor? baseSchemeColor,
 
     /// Selects which color from the passed in colorScheme to use as the
-    /// foreground color for unselected toggle buttons.
+    /// foreground color for the selected [ToggleButtons].
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// If not defined, contrast color pair to [baseSchemeColor] will be used,
+    /// which for its default value is onPrimary.
+    final SchemeColor? selectedForegroundSchemeColor,
+
+    /// Selects which color from the passed in colorScheme to use as the
+    /// foreground color for unselected [ToggleButtons].
     ///
     /// If not defined, [baseSchemeColor] will be used as base.
     final SchemeColor? unselectedSchemeColor,
 
     /// Selects which color from the passed in colorScheme to use as the border
     /// color for the toggle buttons.
-    ///
-    /// All colors in the color scheme are not good choices, but some work well.
     ///
     /// If not defined, [baseSchemeColor] will be used as base in M2, in M3
     /// [ColorScheme.outline] will be the effective result.
@@ -8062,19 +8071,24 @@ sealed class FlexSubThemes {
     final bool tintInteract = useTintedInteraction ?? false;
     final bool tintDisable = useTintedDisable ?? false;
     // Get selected color, defaults to primary.
-    final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
-    final Color baseColor = schemeColor(baseScheme, colorScheme);
-    final Color unselectedColor =
-        schemeColor(unselectedSchemeColor ?? baseScheme, colorScheme);
-    final Color onBaseColor = schemeColorPair(baseScheme, colorScheme);
-    final SchemeColor borderDefault = useM3 ? SchemeColor.outline : baseScheme;
+    final SchemeColor selectedBackgroundSchemeColor =
+        baseSchemeColor ?? SchemeColor.primary;
+    final Color selectedBackground =
+        schemeColor(selectedBackgroundSchemeColor, colorScheme);
+    final Color unselectedForeground = schemeColor(
+        unselectedSchemeColor ?? selectedBackgroundSchemeColor, colorScheme);
+    final Color selectedForeground = selectedForegroundSchemeColor != null
+        ? schemeColor(selectedForegroundSchemeColor, colorScheme)
+        : schemeColorPair(selectedBackgroundSchemeColor, colorScheme);
+    final SchemeColor borderDefault =
+        useM3 ? SchemeColor.outline : selectedBackgroundSchemeColor;
     final Color borderColor =
         schemeColor(borderSchemeColor ?? borderDefault, colorScheme);
 
     // Using these tinted overlay variable in all themes for ease of
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
-    final Color tint = baseColor;
+    final Color tint = selectedBackground;
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // Effective minimum button size.
@@ -8088,23 +8102,23 @@ sealed class FlexSubThemes {
     return ToggleButtonsThemeData(
       textStyle: textStyle,
       borderWidth: effectiveWidth,
-      selectedColor: onBaseColor,
-      color: unselectedColor,
-      fillColor: baseColor,
+      color: unselectedForeground,
+      selectedColor: selectedForeground,
+      fillColor: selectedBackground,
       borderColor: borderColor,
       selectedBorderColor: borderColor,
       hoverColor: tintInteract
           ? tintedHovered(overlay, tint, factor)
-          : baseColor.withAlpha(kAlphaHovered),
+          : selectedBackground.withAlpha(kAlphaHovered),
       focusColor: tintInteract
           ? tintedFocused(overlay, tint, factor)
-          : baseColor.withAlpha(kAlphaFocused),
+          : selectedBackground.withAlpha(kAlphaFocused),
       highlightColor: tintInteract
           ? tintedHighlight(overlay, tint, factor)
-          : baseColor.withAlpha(kAlphaHighlight),
+          : selectedBackground.withAlpha(kAlphaHighlight),
       splashColor: tintInteract
           ? tintedSplash(overlay, tint, factor)
-          : baseColor.withAlpha(kAlphaSplash),
+          : selectedBackground.withAlpha(kAlphaSplash),
       disabledColor: tintDisable
           ? tintedDisable(colorScheme.onSurface, tint)
               .withAlpha(kAlphaLowDisabled)
