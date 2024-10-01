@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
@@ -11,10 +13,19 @@ class ListTilePanel extends StatelessWidget {
   const ListTilePanel(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _lisTilePlaceholderIssue = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
@@ -226,6 +237,40 @@ class ListTilePanel extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitleReveal: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'The minVertical padding is lowest at 4 not at 0 '
+                      'This is a bug in Flutter SDK. For more information see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _lisTilePlaceholderIssue,
+                  text: 'issue #NNNNN',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. The ListTileStyle theme property has no effect, '
+                      'see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _lisTilePlaceholderIssue,
+                  text: 'issue #NNNNN',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
+                ),
+              ],
+            ),
+          ),
         ),
         const Divider(height: 1),
         const ListTileShowcase(),
