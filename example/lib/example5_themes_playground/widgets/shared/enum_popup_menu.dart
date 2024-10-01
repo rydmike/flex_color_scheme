@@ -371,6 +371,58 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
               : 'Default (computed)';
       }
     }
+    if (T == ListTileStyle) {
+      switch (value) {
+        case ListTileStyle.list:
+          return 'For lists (TextStyle.titleMedium)';
+        case ListTileStyle.drawer:
+          return 'For drawers (TextStyle.bodyLarge)';
+        case null:
+          return 'Default (usage based)';
+      }
+    }
+    if (T == ListTileTitleAlignment) {
+      switch (value) {
+        case ListTileTitleAlignment.threeLine:
+          return 'Three line';
+        case ListTileTitleAlignment.titleHeight:
+          return 'Title height';
+        case ListTileTitleAlignment.top:
+          return 'Top';
+        case ListTileTitleAlignment.center:
+          return 'center';
+        case ListTileTitleAlignment.bottom:
+          return 'Bottom';
+        case null:
+          if (useMaterial3) {
+            return 'Default (Three line)';
+          } else {
+            return 'Default (Title height)';
+          }
+      }
+    }
+    if (T == ListTileControlAffinity) {
+      switch (value) {
+        case ListTileControlAffinity.leading:
+          return 'Control on leading';
+        case ListTileControlAffinity.trailing:
+          return 'Control on trailing';
+        case ListTileControlAffinity.platform:
+          return 'Platform standard';
+        case null:
+          return 'Default (Platform standard)';
+      }
+    }
+    if (T == MaterialTapTargetSize) {
+      switch (value) {
+        case MaterialTapTargetSize.padded:
+          return 'Padded (for touch UI)';
+        case MaterialTapTargetSize.shrinkWrap:
+          return 'ShrinkWrap (for mouse UI)';
+        case null:
+          return 'Default (Adaptive: Mobiles=Padded Desktops=ShrinkWrap)';
+      }
+    }
     if (T == AdaptiveTheme) {
       final AdaptiveTheme? castValue = value as AdaptiveTheme?;
       return castValue?.label ?? 'Default (${AdaptiveTheme.off.label})';
@@ -516,6 +568,86 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         Tooltip(
           message: 'center',
           child: Icon(Icons.horizontal_distribute_outlined),
+        ),
+      ];
+    }
+    if (T == ListTileStyle) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default (usage based)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'list',
+          child: Icon(Icons.format_list_bulleted_outlined),
+        ),
+        Tooltip(
+          message: 'drawer',
+          child: Icon(Icons.list_outlined),
+        ),
+      ];
+    }
+    if (T == ListTileTitleAlignment) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'threeLine',
+          child: Icon(Icons.segment_outlined),
+        ),
+        Tooltip(
+          message: 'titleHeight',
+          child: Icon(Icons.align_vertical_top_outlined),
+        ),
+        Tooltip(
+          message: 'top',
+          child: Icon(Icons.vertical_align_top_outlined),
+        ),
+        Tooltip(
+          message: 'center',
+          child: Icon(Icons.vertical_align_center_outlined),
+        ),
+        Tooltip(
+          message: 'bottom',
+          child: Icon(Icons.vertical_align_bottom_outlined),
+        ),
+      ];
+    }
+    if (T == ListTileControlAffinity) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default (Platform standard)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'leading',
+          child: Icon(Icons.list_outlined),
+        ),
+        Tooltip(
+          message: 'trailing',
+          child: Icon(Icons.toc_outlined),
+        ),
+        Tooltip(
+          message: 'platform',
+          child: Icon(Icons.dns_outlined),
+        ),
+      ];
+    }
+    if (T == MaterialTapTargetSize) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'padded',
+          child: Icon(Icons.settings_overscan_outlined),
+        ),
+        Tooltip(
+          message: 'shrinkWrap',
+          child: Icon(Icons.fit_screen_outlined),
         ),
       ];
     }
