@@ -273,13 +273,13 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                         controller.inputDecoratorPaddingBottom != null
                     ? EdgeInsetsDirectional.fromSTEB(
                         controller.inputDecoratorPaddingStart ??
-                            InpDecoDefault.start.padding(controller),
+                            DecoratorDefault.start.padding(controller),
                         controller.inputDecoratorPaddingTop ??
-                            InpDecoDefault.top.padding(controller),
+                            DecoratorDefault.top.padding(controller),
                         controller.inputDecoratorPaddingEnd ??
-                            InpDecoDefault.end.padding(controller),
+                            DecoratorDefault.end.padding(controller),
                         controller.inputDecoratorPaddingBottom ??
-                            InpDecoDefault.bottom.padding(controller),
+                            DecoratorDefault.bottom.padding(controller),
                       )
                     : null,
             //
