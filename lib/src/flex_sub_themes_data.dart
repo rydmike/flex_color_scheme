@@ -469,7 +469,9 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailOpacity,
     this.navigationRailElevation,
     this.navigationRailLabelType,
-    this.navigationRailGroupAlignment,
+    this.navigationRailGroupAlignment, // Not in Playground
+    this.navigationRailMinWidth, // Not in Playground
+    this.navigationRailMinExtendedWidth, // Not in Playground
     //
     @Deprecated('This property has been replaced by the more aptly named '
         'useMaterial3Typography property and no longer has any function '
@@ -3512,6 +3514,22 @@ class FlexSubThemesData with Diagnosticable {
   /// The default is -1.0.
   final double? navigationRailGroupAlignment;
 
+  /// Overrides the default value of [NavigationRail]'s minimum width when it
+  /// is not extended.
+  ///
+  /// If not defined, defaults to M3 spec default value 80 dp.
+  ///
+  /// Flutter SDK uses 72 in M2 mode and 80 dp in M3 mode.
+  final double? navigationRailMinWidth;
+
+  /// Overrides the default value of [NavigationRail]'s minimum width when it
+  /// is extended.
+  ///
+  /// If not defined, defaults to M3 spec default value 256 dp.
+  ///
+  /// Flutter M2 and M3 use 256 dp as default.
+  final double? navigationRailMinExtendedWidth;
+
   /// **DEPRECATED** and has no function anymore.
   /// Use [useMaterial3Typography] instead.
   ///
@@ -3962,6 +3980,8 @@ class FlexSubThemesData with Diagnosticable {
     final double? navigationRailElevation,
     final NavigationRailLabelType? navigationRailLabelType,
     final double? navigationRailGroupAlignment,
+    final double? navigationRailMinWidth,
+    final double? navigationRailMinExtendedWidth,
     //
     @Deprecated('This property has been replaced by the more aptly named '
         'useMaterial3Typography property and no longer has any function '
@@ -4495,6 +4515,10 @@ class FlexSubThemesData with Diagnosticable {
           navigationRailLabelType ?? this.navigationRailLabelType,
       navigationRailGroupAlignment:
           navigationRailGroupAlignment ?? this.navigationRailGroupAlignment,
+      navigationRailMinWidth:
+          navigationRailMinWidth ?? this.navigationRailMinWidth,
+      navigationRailMinExtendedWidth:
+          navigationRailMinExtendedWidth ?? this.navigationRailMinExtendedWidth,
     );
   }
 
@@ -4876,7 +4900,9 @@ class FlexSubThemesData with Diagnosticable {
         other.navigationRailOpacity == navigationRailOpacity &&
         other.navigationRailElevation == navigationRailElevation &&
         other.navigationRailLabelType == navigationRailLabelType &&
-        other.navigationRailGroupAlignment == navigationRailGroupAlignment;
+        other.navigationRailGroupAlignment == navigationRailGroupAlignment &&
+        other.navigationRailMinWidth == navigationRailMinWidth &&
+        other.navigationRailMinExtendedWidth == navigationRailMinExtendedWidth;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
@@ -5187,6 +5213,8 @@ class FlexSubThemesData with Diagnosticable {
         navigationRailElevation,
         navigationRailLabelType,
         navigationRailGroupAlignment,
+        navigationRailMinWidth,
+        navigationRailMinExtendedWidth,
       ]);
 
   /// Flutter debug properties override, includes toString.
@@ -5780,5 +5808,9 @@ class FlexSubThemesData with Diagnosticable {
         'navigationRailLabelType', navigationRailLabelType));
     properties.add(DiagnosticsProperty<double>(
         'navigationRailGroupAlignment', navigationRailGroupAlignment));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationRailMinWidth', navigationRailMinWidth));
+    properties.add(DiagnosticsProperty<double>(
+        'navigationRailMinExtendedWidth', navigationRailMinExtendedWidth));
   }
 }

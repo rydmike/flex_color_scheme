@@ -264,10 +264,10 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
 
 
-- Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorContentPadding` property to `FlexSubThemesData`.
+- Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorContentPadding` property to `FlexSubThemesData` and made `FlexSubThemes.inputDecoratorTheme` use it.
 
 
-- Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`.
+- Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`. Added `navigationRailMinWidth` and `navigationRailMinExtendedWidth` properties to `FlexSubThemesData` and made `FlexSubThemes.navigationRailTheme` use them.
 
 
 - Added `tabAlignment` property to `FlexSubThemes.tabAlignment`. Added `tabBarTabAlignment` property to `FlexSubThemesData` and made `FlexSubThemes.tabBarTheme` use it for its. (TODO: Add a note about thrown assert, open an issue in Flutter SDK about it and suggest an alternative solution.)

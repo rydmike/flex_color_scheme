@@ -7825,6 +7825,8 @@ class FlexColorScheme with Diagnosticable {
               elevation: subTheme.navigationRailElevation,
               labelType: subTheme.navigationRailLabelType,
               groupAlignment: subTheme.navigationRailGroupAlignment,
+              minWidth: subTheme.navigationRailMinWidth,
+              minExtendedWidth: subTheme.navigationRailMinExtendedWidth,
               indicatorAlpha: subTheme.navigationRailIndicatorOpacity != null
                   ? Color.getAlphaFromOpacity(
                       subTheme.navigationRailIndicatorOpacity!)
