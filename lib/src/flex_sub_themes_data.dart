@@ -285,8 +285,8 @@ class FlexSubThemesData with Diagnosticable {
     this.listTileContentPadding,
     this.listTileHorizontalTitleGap,
     this.listTileMinVerticalPadding,
-    this.listTileStyle, // Not in Playground
-    this.listTileTitleAlignment, // Not in Playground
+    this.listTileStyle,
+    this.listTileTitleAlignment,
     this.listTileControlAffinity, // Not in Playground
     //
     this.fabRadius,
