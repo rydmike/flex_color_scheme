@@ -760,6 +760,30 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= ListTileControlAffinity.values.length) return defaultValue;
         return ListTileControlAffinity.values[value] as T;
       }
+      // T is MaterialTapTargetSize is nullable value.
+      if (sameTypes<T, MaterialTapTargetSize?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded MaterialTapTargetSize?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= MaterialTapTargetSize.values.length) return defaultValue;
+        return MaterialTapTargetSize.values[value] as T;
+      }
+      // T is MaterialTapTargetSize none nullable value.
+      if (sameTypes<T, MaterialTapTargetSize>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded MaterialTapTargetSize : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= MaterialTapTargetSize.values.length) return defaultValue;
+        return MaterialTapTargetSize.values[value] as T;
+      }
       //
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
