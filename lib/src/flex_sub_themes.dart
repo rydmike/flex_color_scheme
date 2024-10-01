@@ -6311,7 +6311,10 @@ sealed class FlexSubThemes {
     final SchemeColor selectedScheme = selectedSchemeColor ??
         (useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary);
     final Color selectedColor = schemeColor(selectedScheme, colorScheme);
-    final Color onSelectedColor = schemeColorPair(selectedScheme, colorScheme);
+
+    final Color onSelectedColor = selectedForegroundSchemeColor != null
+        ? schemeColor(selectedForegroundSchemeColor, colorScheme)
+        : schemeColorPair(selectedScheme, colorScheme);
 
     final Color unselectedColor =
         schemeColor(unselectedSchemeColor ?? SchemeColor.surface, colorScheme);

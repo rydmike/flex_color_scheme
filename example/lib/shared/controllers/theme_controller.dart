@@ -732,6 +732,9 @@ class ThemeController with ChangeNotifier {
     _toggleButtonsSchemeColor = await _themeService.load(
         Store.keyToggleButtonsSchemeColor,
         Store.defaultToggleButtonsSchemeColor);
+    _toggleButtonsSelectedForegroundSchemeColor = await _themeService.load(
+        Store.keyToggleButtonsSelectedForegroundSchemeColor,
+        Store.defaultToggleButtonsSelectedForegroundSchemeColor);
     _toggleButtonsUnselectedSchemeColor = await _themeService.load(
         Store.keyToggleButtonsUnselectedSchemeColor,
         Store.defaultToggleButtonsUnselectedSchemeColor);
@@ -748,6 +751,9 @@ class ThemeController with ChangeNotifier {
     _segmentedButtonSchemeColor = await _themeService.load(
         Store.keySegmentedButtonSchemeColor,
         Store.defaultSegmentedButtonSchemeColor);
+    _segmentedButtonSelectedForegroundSchemeColor = await _themeService.load(
+        Store.keySegmentedButtonSelectedForegroundSchemeColor,
+        Store.defaultSegmentedButtonSelectedForegroundSchemeColor);
     _segmentedButtonUnselectedSchemeColor = await _themeService.load(
         Store.keySegmentedButtonUnselectedSchemeColor,
         Store.defaultSegmentedButtonUnselectedSchemeColor);
@@ -1320,6 +1326,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultOutlinedButtonPressedBorderWidth, false);
     //
     setToggleButtonsSchemeColor(Store.defaultToggleButtonsSchemeColor, false);
+    setToggleButtonsSelectedForegroundSchemeColor(
+        Store.defaultToggleButtonsSelectedForegroundSchemeColor, false);
     setToggleButtonsUnselectedSchemeColor(
         Store.defaultToggleButtonsUnselectedSchemeColor, false);
     setToggleButtonsBorderSchemeColor(
@@ -1329,6 +1337,8 @@ class ThemeController with ChangeNotifier {
     //
     setSegmentedButtonSchemeColor(
         Store.defaultSegmentedButtonSchemeColor, false);
+    setSegmentedButtonSelectedForegroundSchemeColor(
+        Store.defaultSegmentedButtonSelectedForegroundSchemeColor, false);
     setSegmentedButtonUnselectedSchemeColor(
         Store.defaultSegmentedButtonUnselectedSchemeColor, false);
     setSegmentedButtonUnselectedForegroundSchemeColor(
@@ -4981,6 +4991,18 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyToggleButtonsSchemeColor, value));
   }
 
+  late SchemeColor? _toggleButtonsSelectedForegroundSchemeColor;
+  SchemeColor? get toggleButtonsSelectedForegroundSchemeColor =>
+      _toggleButtonsSelectedForegroundSchemeColor;
+  void setToggleButtonsSelectedForegroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _toggleButtonsSelectedForegroundSchemeColor) return;
+    _toggleButtonsSelectedForegroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyToggleButtonsSelectedForegroundSchemeColor, value));
+  }
+
   late SchemeColor? _toggleButtonsUnselectedSchemeColor;
   SchemeColor? get toggleButtonsUnselectedSchemeColor =>
       _toggleButtonsUnselectedSchemeColor;
@@ -5033,6 +5055,18 @@ class ThemeController with ChangeNotifier {
     _segmentedButtonSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySegmentedButtonSchemeColor, value));
+  }
+
+  late SchemeColor? _segmentedButtonSelectedForegroundSchemeColor;
+  SchemeColor? get segmentedButtonSelectedForegroundSchemeColor =>
+      _segmentedButtonSelectedForegroundSchemeColor;
+  void setSegmentedButtonSelectedForegroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _segmentedButtonSelectedForegroundSchemeColor) return;
+    _segmentedButtonSelectedForegroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keySegmentedButtonSelectedForegroundSchemeColor, value));
   }
 
   late SchemeColor? _segmentedButtonUnselectedSchemeColor;

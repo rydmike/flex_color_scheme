@@ -1642,6 +1642,15 @@ sealed class Store {
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultToggleButtonsSchemeColor = null;
 
+  // Key used to read and save toggleButtonsSelectedForegroundSchemeColor value.
+  static const String keyToggleButtonsSelectedForegroundSchemeColor =
+      'toggleButtonsSelectedForegroundSchemeColor';
+  // Default value for the toggleButtonsSelectedForegroundSchemeColor,
+  // also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor? defaultToggleButtonsSelectedForegroundSchemeColor =
+      null;
+
   // Key used to read and save the toggleButtonsUnselectedSchemeColor value.
   static const String keyToggleButtonsUnselectedSchemeColor =
       'toggleButtonsUnselectedSchemeColor';
@@ -1683,6 +1692,16 @@ sealed class Store {
   // reset settings.
   // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSegmentedButtonSchemeColor = null;
+
+  // Key used to read and save the
+  // segmentedButtonSelectedForegroundSchemeColor value.
+  static const String keySegmentedButtonSelectedForegroundSchemeColor =
+      'segmentedButtonSelectedForegroundSchemeColor';
+  // Default value for the segmentedButtonSelectedForegroundSchemeColor,
+  // also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const SchemeColor?
+      defaultSegmentedButtonSelectedForegroundSchemeColor = null;
 
   // Key used to read and save the segmentedButtonUnselectedSchemeColor value.
   static const String keySegmentedButtonUnselectedSchemeColor =

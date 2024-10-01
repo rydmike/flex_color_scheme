@@ -222,6 +222,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // ToggleButtons settings.
             toggleButtonsRadius: controller.toggleButtonsBorderRadius,
             toggleButtonsSchemeColor: controller.toggleButtonsSchemeColor,
+            toggleButtonsSelectedForegroundSchemeColor:
+                controller.toggleButtonsSelectedForegroundSchemeColor,
             toggleButtonsUnselectedSchemeColor:
                 controller.toggleButtonsUnselectedSchemeColor,
             toggleButtonsBorderSchemeColor:
@@ -230,6 +232,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // SegmentedButtons settings.
             segmentedButtonRadius: controller.segmentedButtonBorderRadius,
             segmentedButtonSchemeColor: controller.segmentedButtonSchemeColor,
+            segmentedButtonSelectedForegroundSchemeColor:
+                controller.segmentedButtonSelectedForegroundSchemeColor,
             segmentedButtonUnselectedSchemeColor:
                 controller.segmentedButtonUnselectedSchemeColor,
             segmentedButtonUnselectedForegroundSchemeColor:

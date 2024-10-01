@@ -100,8 +100,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   - Make a new Flutter issue: Chips in M3 should be 32 dp, not 34 dp like now. 
   - Update known Chips issues in Playground.
 
-- TODO: Add `ToggleButtons` selected foreground and unselected background color props.
-
 **POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
 
 - Shadow color selection per component.
@@ -382,18 +380,19 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and applies the setting to the Playground app's theme as well.  
 - In the **Switch, Checkbox and Radio** settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface **Color Blends** settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
-- Added separate controls and code gen for light and dark mode background color selection for the `BottomAppBar` on settings panel **BottomAppBar and SearchBar**.
+- Added separate controls and code gen for light and dark mode background color selection for the `BottomAppBar` on settings panel **BottomAppBar**.
 - Added divider color selection to **Dialogs** settings panel for the DatePicker divider color. Setting it to transparent will hide the divider in Material-3 mode, in Material-2 mode the Divider does not exist.
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 - To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
 - To the **AppBar** settings panel, title foreground color, leading icon and actions icon color settings were added.
-- To the **TextField** settings panel, added UI and code gen for dense input decorator and for custom content padding.
+- The **TextField** settings panel, got controls and code gen for dense input decorator and custom content padding.
 - The **Chip** settings now include separate color for the `ChoiceChip (called Suggestion Chip in M3 design). The feature that blends the selected main overall Chip color was made optional. It is a useful feature due to the limited independent theme control over the Chips.  
 - The **Chip** settings panel now includes font size and padding controls.
 - The **ListTile** settings panel now includes a large number of theming controls for ListTile theming.
 - On the **Adaptive Theming** settings panel you can now also control the `MaterialTapTargetSize` setting.
+- The **Segmented Buttons** settings panel now includes a control for selected foreground colors for both `SegementedButton` and `ToggleButtons`. 
 - The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
 
 
