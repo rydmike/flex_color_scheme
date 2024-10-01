@@ -747,6 +747,14 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    listTileMinVerticalPadding: ${controller.listTileMinVerticalPadding!.toStringAsFixed(1)},\n'
       : '';
+
+  final String listTileStyle = controller.listTileStyle != null
+      ? '    listTileStyle: ${controller.listTileStyle},\n'
+      : '';
+  final String listTileTitleAlignment = controller.listTileTitleAlignment !=
+          null
+      ? '    listTileTitleAlignment: ${controller.listTileTitleAlignment},\n'
+      : '';
   //
   // Fab and chip, snack, card, and popup setup CODE
   //
@@ -1479,6 +1487,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$listTileContentPadding'
           '$listTileHorizontalTitleGap'
           '$listTileMinVerticalPadding'
+          '$listTileStyle'
+          '$listTileTitleAlignment'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'
@@ -1729,6 +1739,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$listTileContentPadding'
           '$listTileHorizontalTitleGap'
           '$listTileMinVerticalPadding'
+          '$listTileStyle'
+          '$listTileTitleAlignment'
           //
           '$fabUseShape'
           '$fabAlwaysCircular'

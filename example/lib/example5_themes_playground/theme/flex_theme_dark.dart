@@ -274,6 +274,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 : null,
             listTileHorizontalTitleGap: controller.listTileHorizontalTitleGap,
             listTileMinVerticalPadding: controller.listTileMinVerticalPadding,
+            listTileStyle: controller.listTileStyle,
+            listTileTitleAlignment: controller.listTileTitleAlignment,
             // TextSelection settings
             inputCursorSchemeColor: controller.inputCursorDarkSchemeColor,
             inputSelectionSchemeColor: controller.inputSelectionDarkSchemeColor,

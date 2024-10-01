@@ -334,6 +334,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 : null,
             listTileHorizontalTitleGap: controller.listTileHorizontalTitleGap,
             listTileMinVerticalPadding: controller.listTileMinVerticalPadding,
+            listTileStyle: controller.listTileStyle,
+            listTileTitleAlignment: controller.listTileTitleAlignment,
             // FAB settings.
             //
             // Set to false to keep using M2 style FAB and ignore
