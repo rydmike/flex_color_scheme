@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -96,9 +96,9 @@ class SwitchCheckRadioPanel extends StatelessWidget {
               ? controller.setSwitchThumbFixedSize
               : null,
         ),
-        EnumPopupMenu<AdaptiveTheme>(
+        EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl && controller.useMaterial3,
-          values: AdaptiveTheme.values,
+          values: AdaptiveResponse.values,
           title: const Text('Make Material Switch look like iOS Switch'),
           subtitleReveal: Text(
             'An adaptive theme response to make the Material Switch '
@@ -109,7 +109,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
             'available.\n'
             '\n'
             // ignore: lines_longer_than_80_chars
-            '${controller.switchAdaptiveCupertinoLike?.describe ?? AdaptiveTheme.off.describe}',
+            '${controller.switchAdaptiveCupertinoLike?.describe ?? AdaptiveResponse.off.describe}',
           ),
           value: controller.switchAdaptiveCupertinoLike,
           onChanged: controller.setSwitchAdaptiveCupertinoLike,

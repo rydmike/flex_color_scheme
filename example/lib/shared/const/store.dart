@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../model/adaptive_theme.dart';
+import '../model/adaptive_response.dart';
 import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import 'app_color.dart';
@@ -66,7 +66,7 @@ sealed class Store {
   // Default value for the adaptiveRemoveElevationTintLight,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintLight = null;
+  static const AdaptiveResponse? defaultAdaptiveRemoveElevationTintLight = null;
 
   // Key used to read and save the adaptiveElevationShadowsBackLight value.
   static const String keyAdaptiveElevationShadowsBackLight =
@@ -74,7 +74,8 @@ sealed class Store {
   // Default value for the adaptiveElevationShadowsBackLight,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackLight = null;
+  static const AdaptiveResponse? defaultAdaptiveElevationShadowsBackLight =
+      null;
 
   // Key used to read and save the adaptiveAppBarScrollUnderOffLight value.
   static const String keyAdaptiveAppBarScrollUnderOffLight =
@@ -82,7 +83,8 @@ sealed class Store {
   // Default value for the adaptiveAppBarScrollUnderOffLight,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffLight = null;
+  static const AdaptiveResponse? defaultAdaptiveAppBarScrollUnderOffLight =
+      null;
 
   // Key used to read and save the adaptiveRemoveElevationTintDark value.
   static const String keyAdaptiveRemoveElevationTintDark =
@@ -90,7 +92,7 @@ sealed class Store {
   // Default value for the adaptiveRemoveElevationTintDark,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveRemoveElevationTintDark = null;
+  static const AdaptiveResponse? defaultAdaptiveRemoveElevationTintDark = null;
 
   // Key used to read and save the adaptiveElevationShadowsBackDark value.
   static const String keyAdaptiveElevationShadowsBackDark =
@@ -98,7 +100,7 @@ sealed class Store {
   // Default value for the adaptiveElevationShadowsBackDark,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveElevationShadowsBackDark = null;
+  static const AdaptiveResponse? defaultAdaptiveElevationShadowsBackDark = null;
 
   // Key used to read and save the adaptiveAppBarScrollUnderOffDark value.
   static const String keyAdaptiveAppBarScrollUnderOffDark =
@@ -106,19 +108,19 @@ sealed class Store {
   // Default value for the adaptiveAppBarScrollUnderOffDark,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveAppBarScrollUnderOffDark = null;
+  static const AdaptiveResponse? defaultAdaptiveAppBarScrollUnderOffDark = null;
 
   // Key used to read and save the adaptiveRadius value.
   static const String keyAdaptiveRadius = 'adaptiveRadius';
   // Default value for the adaptiveRadius, also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveRadius = null;
+  static const AdaptiveResponse? defaultAdaptiveRadius = null;
 
   // Key used to read and save the adaptiveSplashType value.
   static const String keyAdaptiveSplash = 'adaptiveSplash';
   // Default value for the adaptiveSplashType, also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveSplash = null;
+  static const AdaptiveResponse? defaultAdaptiveSplash = null;
 
   // Key used to read and save the splashType value.
   static const String keySplashType = 'splashType';
@@ -1485,7 +1487,7 @@ sealed class Store {
   // Default value for the adaptiveRemoveNavigationBarTintLight,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveRemoveNavigationBarTintLight =
+  static const AdaptiveResponse? defaultAdaptiveRemoveNavigationBarTintLight =
       null;
 
   // Key used to read and save the adaptiveRemoveNavigationBarTintDark value.
@@ -1494,7 +1496,8 @@ sealed class Store {
   // Default value for the adaptiveRemoveNavigationBarTintDark,
   // also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveRemoveNavigationBarTintDark = null;
+  static const AdaptiveResponse? defaultAdaptiveRemoveNavigationBarTintDark =
+      null;
 
   // Key used to read and save the navigationBarSelectedLabelSize value.
   static const String keyNavigationBarSelectedLabelSize =
@@ -1879,7 +1882,7 @@ sealed class Store {
   static const String keySwitchAdaptiveCupertinoLike =
       'switchAdaptiveCupertinoLike';
   // Default value for the switchThumbFixedSize, also used to reset settings.
-  static const AdaptiveTheme? defaultSwitchAdaptiveCupertinoLike = null;
+  static const AdaptiveResponse? defaultSwitchAdaptiveCupertinoLike = null;
 
   // Key used to read and save the checkboxSchemeColor value.
   static const String keyCheckboxSchemeColor = 'checkboxSchemeColor';
@@ -2131,7 +2134,7 @@ sealed class Store {
   static const String keyAdaptiveDialogRadius = 'adaptiveDialogRadius';
   // Default value for the adaptiveDialogRadius, also to reset settings.
   // We use NULL as default, on nullable settings.
-  static const AdaptiveTheme? defaultAdaptiveDialogRadius = null;
+  static const AdaptiveResponse? defaultAdaptiveDialogRadius = null;
 
   // Key used to read and save the dialogBorderRadius value.
   static const String keyDialogBorderRadius = 'dialogBorderRadius';

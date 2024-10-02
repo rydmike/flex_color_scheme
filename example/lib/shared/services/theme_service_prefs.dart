@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../model/adaptive_theme.dart';
+import '../model/adaptive_response.dart';
 import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import '../utils/same_types.dart';
@@ -559,26 +559,26 @@ class ThemeServicePrefs implements ThemeService {
         return TabBarIndicatorSize.values[value] as T;
       }
       // T is AdaptiveTheme is nullable value.
-      if (sameTypes<T, AdaptiveTheme?>()) {
+      if (sameTypes<T, AdaptiveResponse?>()) {
         final int? value = _prefs.getInt(key);
         if (_debug) {
           debugPrint('SharedPrefs loaded AdaptiveTheme?: $key as $value');
         }
         if (value == null) return defaultValue;
         if (value < 0) return null as T;
-        if (value >= AdaptiveTheme.values.length) return defaultValue;
-        return AdaptiveTheme.values[value] as T;
+        if (value >= AdaptiveResponse.values.length) return defaultValue;
+        return AdaptiveResponse.values[value] as T;
       }
       // T is AdaptiveTheme none nullable value.
-      if (sameTypes<T, AdaptiveTheme>()) {
+      if (sameTypes<T, AdaptiveResponse>()) {
         final int? value = _prefs.getInt(key);
         if (_debug) {
           debugPrint('SharedPrefs loaded AdaptiveTheme : $key as $value');
         }
         if (value == null) return defaultValue;
         if (value < 0) return defaultValue;
-        if (value >= AdaptiveTheme.values.length) return defaultValue;
-        return AdaptiveTheme.values[value] as T;
+        if (value >= AdaptiveResponse.values.length) return defaultValue;
+        return AdaptiveResponse.values[value] as T;
       }
       // T is FlexPaletteType is nullable value.
       if (sameTypes<T, FlexPaletteType?>()) {

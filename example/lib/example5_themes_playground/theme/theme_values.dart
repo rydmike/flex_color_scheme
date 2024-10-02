@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/adaptive_theme.dart';
+import '../../shared/model/adaptive_response.dart';
 
 /// A sealed class that holds some static theming helper functions.
 sealed class ThemeValues {
@@ -23,8 +23,8 @@ sealed class ThemeValues {
     // Get fake web platform
     final bool? isWeb = controller.fakeIsWeb;
     // Get Adaptive Settings usage.
-    final AdaptiveTheme adaptiveConfig =
-        controller.adaptiveRadius ?? AdaptiveTheme.off;
+    final AdaptiveResponse adaptiveConfig =
+        controller.adaptiveRsponseRadius ?? AdaptiveResponse.off;
     // Should we use adaptive radius or not?
     final bool adapt = adaptiveConfig.setting(isWeb).adapt(platform, isWeb);
     // Return the effective platform default radius, may be null.
@@ -47,8 +47,8 @@ sealed class ThemeValues {
     // Get fake web platform
     final bool? isWeb = controller.fakeIsWeb;
     // Get Adaptive Settings usage.
-    final AdaptiveTheme adaptiveConfig =
-        controller.adaptiveDialogRadius ?? AdaptiveTheme.off;
+    final AdaptiveResponse adaptiveConfig =
+        controller.adaptiveResponseDialogRadius ?? AdaptiveResponse.off;
     // Should we use adaptive radius or not?
     final bool adapt = adaptiveConfig.setting(isWeb).adapt(platform, isWeb);
     // Return the effective platform default radius, can be null for Flutter

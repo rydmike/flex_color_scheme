@@ -23,7 +23,7 @@ import 'list_tile_reveal.dart';
 ///
 /// This is a Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.
-class SliderListTileReveal extends StatelessWidget {
+class SliderListTileReveal extends StatefulWidget {
   const SliderListTileReveal({
     super.key,
     this.value,
@@ -172,72 +172,92 @@ class SliderListTileReveal extends StatelessWidget {
   final String? valueDefaultDisabledLabel;
 
   @override
+  State<SliderListTileReveal> createState() => _SliderListTileRevealState();
+}
+
+class _SliderListTileRevealState extends State<SliderListTileReveal> {
+  @override
+  // void didUpdateWidget(covariant SliderListTileReveal oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   if (oldWidget.enabled != widget.enabled) {
+  //     if (!widget.enabled) {
+  //       // If the slider is disabled, set the value to null.
+  //       widget.onChanged(null);
+  //     }
+  //   }
+  // }
+
+  @override
   Widget build(BuildContext context) {
     // The value of a discrete step.
-    final double step = (max - min) / (divisions <= 0 ? 1 : divisions);
+    final double step = (widget.max - widget.min) /
+        (widget.divisions <= 0 ? 1 : widget.divisions);
     // THe effective min value, one step below given min, this value is used
     // to show default label and return null when selected.
-    final double effectiveMin = min - step;
+    final double effectiveMin = widget.min - step;
 
     return ListTileReveal(
-      enabled: enabled,
-      contentPadding: contentPadding,
-      dense: dense,
-      revealDense: revealDense,
-      title: title,
-      subtitleReveal: subtitleReveal,
+      enabled: widget.enabled,
+      contentPadding: widget.contentPadding,
+      dense: widget.dense,
+      revealDense: widget.revealDense,
+      title: widget.title,
+      subtitleReveal: widget.subtitleReveal,
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if (subtitle != null) subtitle!,
+          if (widget.subtitle != null) widget.subtitle!,
           Slider(
-            min: effectiveMin * valueDisplayScale,
-            max: max * valueDisplayScale,
-            divisions: divisions + 1,
-            label: enabled
-                ? value == null ||
-                        (value ?? effectiveMin * valueDisplayScale) <
-                            min * valueDisplayScale
-                    ? valueDefaultLabel
-                    : (value! * valueDisplayScale)
-                        .toStringAsFixed(valueDecimalPlaces)
-                : valueDefaultDisabledLabel ?? valueDefaultLabel,
-            value: value == null || !enabled
-                ? effectiveMin * valueDisplayScale
-                : value! * valueDisplayScale,
-            onChanged: enabled
+            min: effectiveMin * widget.valueDisplayScale,
+            max: widget.max * widget.valueDisplayScale,
+            divisions: widget.divisions + 1,
+            label: widget.enabled
+                ? widget.value == null ||
+                        (widget.value ??
+                                effectiveMin * widget.valueDisplayScale) <
+                            widget.min * widget.valueDisplayScale
+                    ? widget.valueDefaultLabel
+                    : (widget.value! * widget.valueDisplayScale)
+                        .toStringAsFixed(widget.valueDecimalPlaces)
+                : widget.valueDefaultDisabledLabel ?? widget.valueDefaultLabel,
+            value: widget.value == null || !widget.enabled
+                ? effectiveMin * widget.valueDisplayScale
+                : widget.value! * widget.valueDisplayScale,
+            onChanged: widget.enabled
                 ? (double value) {
-                    onChanged(value < min * valueDisplayScale
-                        ? null
-                        : value / valueDisplayScale);
+                    widget.onChanged(
+                        value < widget.min * widget.valueDisplayScale
+                            ? null
+                            : value / widget.valueDisplayScale);
                   }
                 : null,
           ),
         ],
       ),
       trailing: SizedBox(
-        width: trailingWidth,
+        width: widget.trailingWidth,
         child: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if (valueHeading != null)
+              if (widget.valueHeading != null)
                 Text(
-                  valueHeading!,
+                  widget.valueHeading!,
                   style: const TextStyle(fontSize: 11),
                 ),
               Text(
-                enabled
-                    ? value == null ||
-                            (value ?? effectiveMin * valueDisplayScale) <
-                                min * valueDisplayScale
-                        ? 'default\n$valueDefaultLabel'
+                widget.enabled
+                    ? widget.value == null ||
+                            (widget.value ??
+                                    effectiveMin * widget.valueDisplayScale) <
+                                widget.min * widget.valueDisplayScale
+                        ? 'default\n${widget.valueDefaultLabel}'
                         // ignore: lines_longer_than_80_chars
-                        : '${(value! * valueDisplayScale).toStringAsFixed(valueDecimalPlaces)}$valueUnitLabel'
+                        : '${(widget.value! * widget.valueDisplayScale).toStringAsFixed(widget.valueDecimalPlaces)}${widget.valueUnitLabel}'
                     // ignore: lines_longer_than_80_chars
-                    : 'default\n${valueDefaultDisabledLabel ?? valueDefaultLabel}',
+                    : 'default\n${widget.valueDefaultDisabledLabel ?? widget.valueDefaultLabel}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 11,

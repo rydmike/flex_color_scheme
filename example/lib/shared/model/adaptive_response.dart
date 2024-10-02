@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-enum AdaptiveTheme {
+enum AdaptiveResponse {
   off(
     label: 'Off',
     describe: 'A platform adaptive response is not used.\n',
@@ -91,7 +91,7 @@ enum AdaptiveTheme {
     icon: Icons.no_cell_outlined,
   );
 
-  const AdaptiveTheme({
+  const AdaptiveResponse({
     required this.label,
     required this.describe,
     required this.code,
@@ -105,21 +105,21 @@ enum AdaptiveTheme {
 
   FlexAdaptive setting([bool? overrideIsWeb]) {
     switch (this) {
-      case AdaptiveTheme.off:
+      case AdaptiveResponse.off:
         return FlexAdaptive.off(overrideIsWeb: overrideIsWeb);
-      case AdaptiveTheme.all:
+      case AdaptiveResponse.all:
         return FlexAdaptive.all(overrideIsWeb: overrideIsWeb);
-      case AdaptiveTheme.apple:
+      case AdaptiveResponse.apple:
         return FlexAdaptive.apple(overrideIsWeb: overrideIsWeb);
-      case AdaptiveTheme.appleWeb:
+      case AdaptiveResponse.appleWeb:
         return FlexAdaptive.appleWeb(overrideIsWeb: overrideIsWeb);
-      case AdaptiveTheme.desktop:
+      case AdaptiveResponse.desktop:
         return FlexAdaptive.desktop(overrideIsWeb: overrideIsWeb);
-      case AdaptiveTheme.iOSAndDesktop:
+      case AdaptiveResponse.iOSAndDesktop:
         return FlexAdaptive.iOSAndDesktop(overrideIsWeb: overrideIsWeb);
-      case AdaptiveTheme.excludeAndroidFuchsia:
+      case AdaptiveResponse.excludeAndroidFuchsia:
         return FlexAdaptive.excludeAndroidFuchsia(overrideIsWeb: overrideIsWeb);
-      case AdaptiveTheme.excludeWebAndroidFuchsia:
+      case AdaptiveResponse.excludeWebAndroidFuchsia:
         return FlexAdaptive.excludeWebAndroidFuchsia(
             overrideIsWeb: overrideIsWeb);
     }

@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../shared/model/adaptive_theme.dart';
+import '../../../shared/model/adaptive_response.dart';
 import '../../../shared/model/splash_type_enum.dart';
 import '../../../shared/model/visual_density_enum.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
@@ -423,9 +423,9 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           return 'Default\nM:padded, D:shrinkWrap';
       }
     }
-    if (T == AdaptiveTheme) {
-      final AdaptiveTheme? castValue = value as AdaptiveTheme?;
-      return castValue?.label ?? 'Default (${AdaptiveTheme.off.label})';
+    if (T == AdaptiveResponse) {
+      final AdaptiveResponse? castValue = value as AdaptiveResponse?;
+      return castValue?.label ?? 'Default (${AdaptiveResponse.off.label})';
     }
     if (T == SplashTypeEnum) {
       final SplashTypeEnum? castValue = value as SplashTypeEnum?;
@@ -651,13 +651,13 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         ),
       ];
     }
-    if (T == AdaptiveTheme) {
+    if (T == AdaptiveResponse) {
       return <Widget>[
         Tooltip(
-          message: 'Default (${AdaptiveTheme.off.label})',
+          message: 'Default (${AdaptiveResponse.off.label})',
           child: const Icon(Icons.texture_outlined),
         ),
-        for (final AdaptiveTheme enumValue in AdaptiveTheme.values)
+        for (final AdaptiveResponse enumValue in AdaptiveResponse.values)
           Tooltip(
             message: enumValue.label,
             child: Icon(enumValue.icon),

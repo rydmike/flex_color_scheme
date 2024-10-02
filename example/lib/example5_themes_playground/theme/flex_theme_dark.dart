@@ -146,9 +146,9 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 .adaptiveAppBarScrollUnderOffDark
                 ?.setting(controller.fakeIsWeb),
             adaptiveRadius:
-                controller.adaptiveRadius?.setting(controller.fakeIsWeb),
-            adaptiveSplash:
-                controller.adaptiveSplash?.setting(controller.fakeIsWeb),
+                controller.adaptiveRsponseRadius?.setting(controller.fakeIsWeb),
+            adaptiveSplash: controller.adaptiveResponseSplash
+                ?.setting(controller.fakeIsWeb),
             //
             splashType: controller.splashType
                 ?.setting(controller.fakeIsWeb, controller.useMaterial3),
@@ -342,8 +342,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.dialogBackgroundDarkSchemeColor,
             dialogElevation: controller.dialogElevation,
             dialogRadius: controller.dialogBorderRadius,
-            adaptiveDialogRadius:
-                controller.adaptiveDialogRadius?.setting(controller.fakeIsWeb),
+            adaptiveDialogRadius: controller.adaptiveResponseDialogRadius
+                ?.setting(controller.fakeIsWeb),
             dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
             datePickerDialogRadius: controller.datePickerDialogBorderRadius,
             timePickerDialogRadius: controller.timePickerDialogBorderRadius,
