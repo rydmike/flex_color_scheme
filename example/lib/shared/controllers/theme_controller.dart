@@ -4,7 +4,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../const/store.dart';
-import '../model/adaptive_theme.dart';
+import '../model/adaptive_response.dart';
 import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import '../services/theme_service.dart';
@@ -76,10 +76,10 @@ class ThemeController with ChangeNotifier {
     _adaptiveAppBarScrollUnderOffDark = await _themeService.load(
         Store.keyAdaptiveAppBarScrollUnderOffDark,
         Store.defaultAdaptiveAppBarScrollUnderOffDark);
-    _adaptiveRadius = await _themeService.load(
+    _adaptiveResponseRadius = await _themeService.load(
         Store.keyAdaptiveRadius, Store.defaultAdaptiveRadius);
     //
-    _adaptiveSplash = await _themeService.load(
+    _adaptiveResponseSplash = await _themeService.load(
         Store.keyAdaptiveSplash, Store.defaultAdaptiveSplash);
     _splashType =
         await _themeService.load(Store.keySplashType, Store.defaultSplashType);
@@ -936,7 +936,7 @@ class ThemeController with ChangeNotifier {
     _useInputDecoratorThemeInDialogs = await _themeService.load(
         Store.keyUseInputDecoratorThemeInDialogs,
         Store.defaultUseInputDecoratorThemeInDialogs);
-    _adaptiveDialogRadius = await _themeService.load(
+    _adaptiveResponseDialogRadius = await _themeService.load(
         Store.keyAdaptiveDialogRadius, Store.defaultAdaptiveDialogRadius);
     _dialogBorderRadius = await _themeService.load(
         Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
@@ -1056,9 +1056,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultAdaptiveElevationShadowsBackDark, false);
     setAdaptiveAppBarScrollUnderOffDark(
         Store.defaultAdaptiveAppBarScrollUnderOffDark, false);
-    setAdaptiveRadius(Store.defaultAdaptiveRadius, false);
+    setAdaptiveResponseRadius(Store.defaultAdaptiveRadius, false);
     //
-    setAdaptiveSplash(Store.defaultAdaptiveSplash, false);
+    setAdaptiveResponseSplash(Store.defaultAdaptiveSplash, false);
     setSplashType(Store.defaultSplashType, false);
     setSplashTypeAdaptive(Store.defaultSplashTypeAdaptive, false);
     //
@@ -1495,7 +1495,7 @@ class ThemeController with ChangeNotifier {
     //
     setUseInputDecoratorThemeInDialogs(
         Store.defaultUseInputDecoratorThemeInDialogs, false);
-    setAdaptiveDialogRadius(Store.defaultAdaptiveDialogRadius, false);
+    setAdaptiveResponseDialogRadius(Store.defaultAdaptiveDialogRadius, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
     setDialogBorderRadiusAdaptive(
         Store.defaultDialogBorderRadiusAdaptive, false);
@@ -1852,12 +1852,12 @@ class ThemeController with ChangeNotifier {
       setBlendOnLevel(0, false);
       setBlendOnLevelDark(0, false);
       // Elevation tint and shadows, we keep it in dark mode.
-      setAdaptiveRemoveElevationTintLight(AdaptiveTheme.all, false);
-      setAdaptiveElevationShadowsBackLight(AdaptiveTheme.all, false);
-      setAdaptiveAppBarScrollUnderOffLight(AdaptiveTheme.all, false);
-      setAdaptiveRemoveElevationTintDark(AdaptiveTheme.off, false);
-      setAdaptiveElevationShadowsBackDark(AdaptiveTheme.all, false);
-      setAdaptiveAppBarScrollUnderOffDark(AdaptiveTheme.all, false);
+      setAdaptiveRemoveElevationTintLight(AdaptiveResponse.all, false);
+      setAdaptiveElevationShadowsBackLight(AdaptiveResponse.all, false);
+      setAdaptiveAppBarScrollUnderOffLight(AdaptiveResponse.all, false);
+      setAdaptiveRemoveElevationTintDark(AdaptiveResponse.off, false);
+      setAdaptiveElevationShadowsBackDark(AdaptiveResponse.all, false);
+      setAdaptiveAppBarScrollUnderOffDark(AdaptiveResponse.all, false);
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(false, false);
@@ -2102,7 +2102,8 @@ class ThemeController with ChangeNotifier {
       // The default radius to default for standard and 10 for adaptive.
       setDefaultRadius(null, false);
       setDefaultRadiusAdaptive(10, false);
-      setAdaptiveRadius(AdaptiveTheme.excludeWebAndroidFuchsia, false);
+      setAdaptiveResponseRadius(
+          AdaptiveResponse.excludeWebAndroidFuchsia, false);
       // Legacy swap OFF.
       setSwapLegacyColors(false, false);
       // Set blend modes and levels.
@@ -2127,15 +2128,15 @@ class ThemeController with ChangeNotifier {
       // mode on all platforms, they are barely visible there anyway but
       // may help with contrast a bit.
       setAdaptiveRemoveElevationTintLight(
-          AdaptiveTheme.excludeWebAndroidFuchsia, false);
+          AdaptiveResponse.excludeWebAndroidFuchsia, false);
       setAdaptiveElevationShadowsBackLight(
-          AdaptiveTheme.excludeWebAndroidFuchsia, false);
+          AdaptiveResponse.excludeWebAndroidFuchsia, false);
       setAdaptiveAppBarScrollUnderOffLight(
-          AdaptiveTheme.excludeWebAndroidFuchsia, false);
-      setAdaptiveRemoveElevationTintDark(AdaptiveTheme.off, false);
-      setAdaptiveElevationShadowsBackDark(AdaptiveTheme.all, false);
+          AdaptiveResponse.excludeWebAndroidFuchsia, false);
+      setAdaptiveRemoveElevationTintDark(AdaptiveResponse.off, false);
+      setAdaptiveElevationShadowsBackDark(AdaptiveResponse.all, false);
       setAdaptiveAppBarScrollUnderOffDark(
-          AdaptiveTheme.excludeWebAndroidFuchsia, false);
+          AdaptiveResponse.excludeWebAndroidFuchsia, false);
       // Text theme blends
       setBlendLightTextTheme(false, false);
       setBlendDarkTextTheme(false, false);
@@ -2454,10 +2455,10 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyApplyThemeToAllCupertino, value));
   }
 
-  late AdaptiveTheme? _adaptiveRemoveElevationTintLight;
-  AdaptiveTheme? get adaptiveRemoveElevationTintLight =>
+  late AdaptiveResponse? _adaptiveRemoveElevationTintLight;
+  AdaptiveResponse? get adaptiveRemoveElevationTintLight =>
       _adaptiveRemoveElevationTintLight;
-  void setAdaptiveRemoveElevationTintLight(AdaptiveTheme? value,
+  void setAdaptiveRemoveElevationTintLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveElevationTintLight) return;
     _adaptiveRemoveElevationTintLight = value;
@@ -2466,10 +2467,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveRemoveElevationTintLight, value));
   }
 
-  late AdaptiveTheme? _adaptiveElevationShadowsBackLight;
-  AdaptiveTheme? get adaptiveElevationShadowsBackLight =>
+  late AdaptiveResponse? _adaptiveElevationShadowsBackLight;
+  AdaptiveResponse? get adaptiveElevationShadowsBackLight =>
       _adaptiveElevationShadowsBackLight;
-  void setAdaptiveElevationShadowsBackLight(AdaptiveTheme? value,
+  void setAdaptiveElevationShadowsBackLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveElevationShadowsBackLight) return;
     _adaptiveElevationShadowsBackLight = value;
@@ -2478,10 +2479,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveElevationShadowsBackLight, value));
   }
 
-  late AdaptiveTheme? _adaptiveAppBarScrollUnderOffLight;
-  AdaptiveTheme? get adaptiveAppBarScrollUnderOffLight =>
+  late AdaptiveResponse? _adaptiveAppBarScrollUnderOffLight;
+  AdaptiveResponse? get adaptiveAppBarScrollUnderOffLight =>
       _adaptiveAppBarScrollUnderOffLight;
-  void setAdaptiveAppBarScrollUnderOffLight(AdaptiveTheme? value,
+  void setAdaptiveAppBarScrollUnderOffLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveAppBarScrollUnderOffLight) return;
     _adaptiveAppBarScrollUnderOffLight = value;
@@ -2490,10 +2491,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveAppBarScrollUnderOffLight, value));
   }
 
-  late AdaptiveTheme? _adaptiveRemoveElevationTintDark;
-  AdaptiveTheme? get adaptiveRemoveElevationTintDark =>
+  late AdaptiveResponse? _adaptiveRemoveElevationTintDark;
+  AdaptiveResponse? get adaptiveRemoveElevationTintDark =>
       _adaptiveRemoveElevationTintDark;
-  void setAdaptiveRemoveElevationTintDark(AdaptiveTheme? value,
+  void setAdaptiveRemoveElevationTintDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveElevationTintDark) return;
     _adaptiveRemoveElevationTintDark = value;
@@ -2502,10 +2503,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveRemoveElevationTintDark, value));
   }
 
-  late AdaptiveTheme? _adaptiveElevationShadowsBackDark;
-  AdaptiveTheme? get adaptiveElevationShadowsBackDark =>
+  late AdaptiveResponse? _adaptiveElevationShadowsBackDark;
+  AdaptiveResponse? get adaptiveElevationShadowsBackDark =>
       _adaptiveElevationShadowsBackDark;
-  void setAdaptiveElevationShadowsBackDark(AdaptiveTheme? value,
+  void setAdaptiveElevationShadowsBackDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveElevationShadowsBackDark) return;
     _adaptiveElevationShadowsBackDark = value;
@@ -2514,10 +2515,10 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveElevationShadowsBackDark, value));
   }
 
-  late AdaptiveTheme? _adaptiveAppBarScrollUnderOffDark;
-  AdaptiveTheme? get adaptiveAppBarScrollUnderOffDark =>
+  late AdaptiveResponse? _adaptiveAppBarScrollUnderOffDark;
+  AdaptiveResponse? get adaptiveAppBarScrollUnderOffDark =>
       _adaptiveAppBarScrollUnderOffDark;
-  void setAdaptiveAppBarScrollUnderOffDark(AdaptiveTheme? value,
+  void setAdaptiveAppBarScrollUnderOffDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveAppBarScrollUnderOffDark) return;
     _adaptiveAppBarScrollUnderOffDark = value;
@@ -2526,20 +2527,22 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyAdaptiveAppBarScrollUnderOffDark, value));
   }
 
-  late AdaptiveTheme? _adaptiveRadius;
-  AdaptiveTheme? get adaptiveRadius => _adaptiveRadius;
-  void setAdaptiveRadius(AdaptiveTheme? value, [bool notify = true]) {
-    if (value == _adaptiveRadius) return;
-    _adaptiveRadius = value;
+  late AdaptiveResponse? _adaptiveResponseRadius;
+  AdaptiveResponse? get adaptiveRsponseRadius => _adaptiveResponseRadius;
+  void setAdaptiveResponseRadius(AdaptiveResponse? value,
+      [bool notify = true]) {
+    if (value == _adaptiveResponseRadius) return;
+    _adaptiveResponseRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAdaptiveRadius, value));
   }
 
-  late AdaptiveTheme? _adaptiveSplash;
-  AdaptiveTheme? get adaptiveSplash => _adaptiveSplash;
-  void setAdaptiveSplash(AdaptiveTheme? value, [bool notify = true]) {
-    if (value == _adaptiveSplash) return;
-    _adaptiveSplash = value;
+  late AdaptiveResponse? _adaptiveResponseSplash;
+  AdaptiveResponse? get adaptiveResponseSplash => _adaptiveResponseSplash;
+  void setAdaptiveResponseSplash(AdaptiveResponse? value,
+      [bool notify = true]) {
+    if (value == _adaptiveResponseSplash) return;
+    _adaptiveResponseSplash = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAdaptiveSplash, value));
   }
@@ -4831,10 +4834,10 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyNavBarLabelBehavior, value));
   }
 
-  late AdaptiveTheme? _adaptiveRemoveNavigationBarTintLight;
-  AdaptiveTheme? get adaptiveRemoveNavigationBarTintLight =>
+  late AdaptiveResponse? _adaptiveRemoveNavigationBarTintLight;
+  AdaptiveResponse? get adaptiveRemoveNavigationBarTintLight =>
       _adaptiveRemoveNavigationBarTintLight;
-  void setAdaptiveRemoveNavigationBarTintLight(AdaptiveTheme? value,
+  void setAdaptiveRemoveNavigationBarTintLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveNavigationBarTintLight) return;
     _adaptiveRemoveNavigationBarTintLight = value;
@@ -4843,10 +4846,10 @@ class ThemeController with ChangeNotifier {
         Store.keyAdaptiveRemoveNavigationBarTintLight, value));
   }
 
-  late AdaptiveTheme? _adaptiveRemoveNavigationBarTintDark;
-  AdaptiveTheme? get adaptiveRemoveNavigationBarTintDark =>
+  late AdaptiveResponse? _adaptiveRemoveNavigationBarTintDark;
+  AdaptiveResponse? get adaptiveRemoveNavigationBarTintDark =>
       _adaptiveRemoveNavigationBarTintDark;
-  void setAdaptiveRemoveNavigationBarTintDark(AdaptiveTheme? value,
+  void setAdaptiveRemoveNavigationBarTintDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveNavigationBarTintDark) return;
     _adaptiveRemoveNavigationBarTintDark = value;
@@ -5401,10 +5404,10 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keySwitchThumbFixedSize, value));
   }
 
-  late AdaptiveTheme? _switchAdaptiveCupertinoLike;
-  AdaptiveTheme? get switchAdaptiveCupertinoLike =>
+  late AdaptiveResponse? _switchAdaptiveCupertinoLike;
+  AdaptiveResponse? get switchAdaptiveCupertinoLike =>
       _switchAdaptiveCupertinoLike;
-  void setSwitchAdaptiveCupertinoLike(AdaptiveTheme? value,
+  void setSwitchAdaptiveCupertinoLike(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _switchAdaptiveCupertinoLike) return;
     _switchAdaptiveCupertinoLike = value;
@@ -5813,11 +5816,13 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyUseInputDecoratorThemeInDialogs, value));
   }
 
-  late AdaptiveTheme? _adaptiveDialogRadius;
-  AdaptiveTheme? get adaptiveDialogRadius => _adaptiveDialogRadius;
-  void setAdaptiveDialogRadius(AdaptiveTheme? value, [bool notify = true]) {
-    if (value == _adaptiveDialogRadius) return;
-    _adaptiveDialogRadius = value;
+  late AdaptiveResponse? _adaptiveResponseDialogRadius;
+  AdaptiveResponse? get adaptiveResponseDialogRadius =>
+      _adaptiveResponseDialogRadius;
+  void setAdaptiveResponseDialogRadius(AdaptiveResponse? value,
+      [bool notify = true]) {
+    if (value == _adaptiveResponseDialogRadius) return;
+    _adaptiveResponseDialogRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyAdaptiveDialogRadius, value));
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/model/splash_type_enum.dart';
 import '../../../../shared/model/visual_density_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
@@ -122,8 +122,8 @@ class AdaptiveThemePanel extends StatelessWidget {
               child: EnumPopupMenu<SplashTypeEnum>(
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl &&
-                    controller.adaptiveSplash != AdaptiveTheme.off &&
-                    controller.adaptiveSplash != null,
+                    controller.adaptiveResponseSplash != AdaptiveResponse.off &&
+                    controller.adaptiveResponseSplash != null,
                 values: SplashTypeEnum.values,
                 title: const Text('Adaptive splash'),
                 subtitleReveal: Text(
@@ -142,25 +142,25 @@ class AdaptiveThemePanel extends StatelessWidget {
             ),
           ],
         ),
-        EnumPopupMenu<AdaptiveTheme>(
+        EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl,
-          values: AdaptiveTheme.values,
+          values: AdaptiveResponse.values,
           title: const Text('Use adaptive splash'),
           subtitleReveal: Text(
             'An adaptive theme response used to select a different ink '
             'splash effect on selected platforms.\n'
             '\n'
             // ignore: lines_longer_than_80_chars
-            '${controller.adaptiveSplash?.describe ?? AdaptiveTheme.off.describe}',
+            '${controller.adaptiveResponseSplash?.describe ?? AdaptiveResponse.off.describe}',
           ),
-          value: controller.adaptiveSplash,
-          onChanged: controller.setAdaptiveSplash,
+          value: controller.adaptiveResponseSplash,
+          onChanged: controller.setAdaptiveResponseSplash,
         ),
         const Divider(),
         if (isLight) ...<Widget>[
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Bring elevation shadows back'),
             subtitleReveal: Text(
               'An adaptive theme response to bring elevation shadows back in '
@@ -170,14 +170,14 @@ class AdaptiveThemePanel extends StatelessWidget {
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveElevationShadowsBackLight?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveElevationShadowsBackLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveElevationShadowsBackLight,
             onChanged: controller.setAdaptiveElevationShadowsBackLight,
           ),
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
               'Platform adaptive theme response to remove elevation tint on '
@@ -198,15 +198,15 @@ class AdaptiveThemePanel extends StatelessWidget {
               'separate tint removal setting for the NavigationBar, as you may '
               'want to keep it ON, even if otherwise removing elevation tint.\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveElevationTintLight,
             onChanged: controller.setAdaptiveRemoveElevationTintLight,
           ),
         ] else ...<Widget>[
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Bring elevation shadows back'),
             subtitleReveal: Text(
               'An adaptive theme response to bring elevation shadows back in '
@@ -216,14 +216,14 @@ class AdaptiveThemePanel extends StatelessWidget {
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveElevationShadowsBackDark?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveElevationShadowsBackDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveElevationShadowsBackDark,
             onChanged: controller.setAdaptiveElevationShadowsBackDark,
           ),
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
               'Platform adaptive theme response to remove elevation tint on '
@@ -253,7 +253,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'separate tint removal setting for the NavigationBar, as you may '
               'want to keep it ON, even if otherwise removing elevation tint.\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveElevationTintDark,
             onChanged: controller.setAdaptiveRemoveElevationTintDark,

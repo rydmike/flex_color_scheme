@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -63,8 +63,8 @@ class DialogPanel extends StatelessWidget {
       return controller.useMaterial3 ? '28 dp' : '4 dp';
     }
     final bool useGlobalRadius =
-        (controller.adaptiveDialogRadius == AdaptiveTheme.off ||
-                controller.adaptiveDialogRadius == null) &&
+        (controller.adaptiveResponseDialogRadius == AdaptiveResponse.off ||
+                controller.adaptiveResponseDialogRadius == null) &&
             controller.dialogBorderRadius == null;
     if (useGlobalRadius) {
       return controller.defaultRadius != null
@@ -81,11 +81,11 @@ class DialogPanel extends StatelessWidget {
   static String? _adaptiveDialogModeLabel(ThemeController controller) {
     if (!controller.useSubThemes && !controller.useFlexColorScheme) return null;
     final bool useAdaptiveRadius =
-        controller.adaptiveRadius != AdaptiveTheme.off &&
-            controller.adaptiveRadius != null &&
+        controller.adaptiveRsponseRadius != AdaptiveResponse.off &&
+            controller.adaptiveRsponseRadius != null &&
             controller.dialogBorderRadius == null;
     if (useAdaptiveRadius) {
-      return 'Global (${controller.adaptiveRadius?.label ?? ''} dp)';
+      return 'Global (${controller.adaptiveRsponseRadius?.label ?? ''} dp)';
     }
     return null;
   }
@@ -98,16 +98,16 @@ class DialogPanel extends StatelessWidget {
       return controller.useMaterial3 ? '28 dp' : '4 dp';
     }
     final bool useAdaptiveDialogRadius =
-        controller.adaptiveDialogRadius != AdaptiveTheme.off &&
-            controller.adaptiveDialogRadius != null;
+        controller.adaptiveResponseDialogRadius != AdaptiveResponse.off &&
+            controller.adaptiveResponseDialogRadius != null;
     if (useAdaptiveDialogRadius) {
       return controller.dialogBorderRadiusAdaptive != null
           ? controller.dialogBorderRadiusAdaptive!.toStringAsFixed(0)
           : (controller.useMaterial3 ? '28 dp' : '4 dp');
     }
     final bool useAdaptiveRadius =
-        controller.adaptiveRadius != AdaptiveTheme.off &&
-            controller.adaptiveRadius != null &&
+        controller.adaptiveRsponseRadius != AdaptiveResponse.off &&
+            controller.adaptiveRsponseRadius != null &&
             controller.dialogBorderRadius == null;
     if (useAdaptiveRadius) {
       return controller.defaultRadiusAdaptive != null
@@ -129,7 +129,7 @@ class DialogPanel extends StatelessWidget {
 
     // Use defaultRadiusAdaptive instead of defaultRadius?
     final FlexAdaptive adaptiveRadius =
-        controller.adaptiveRadius?.setting(controller.fakeIsWeb) ??
+        controller.adaptiveRsponseRadius?.setting(controller.fakeIsWeb) ??
             const FlexAdaptive.off();
     // Get the correct platform default radius.
     final double? platformRadius = adaptiveRadius.adapt(controller.platform)
@@ -137,9 +137,10 @@ class DialogPanel extends StatelessWidget {
         : controller.defaultRadius;
 
     // Use adaptive dialog radius?
-    final FlexAdaptive adaptiveDialogRadius =
-        controller.adaptiveDialogRadius?.setting(controller.fakeIsWeb) ??
-            const FlexAdaptive.off();
+    final FlexAdaptive adaptiveDialogRadius = controller
+            .adaptiveResponseDialogRadius
+            ?.setting(controller.fakeIsWeb) ??
+        const FlexAdaptive.off();
     // Get the effective used adaptive dialog default radius.
     final double? platformDialogRadius =
         adaptiveDialogRadius == const FlexAdaptive.off() &&
@@ -314,8 +315,9 @@ class DialogPanel extends StatelessWidget {
               child: SliderListTileReveal(
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl &&
-                    controller.adaptiveDialogRadius != AdaptiveTheme.off &&
-                    controller.adaptiveDialogRadius != null,
+                    controller.adaptiveResponseDialogRadius !=
+                        AdaptiveResponse.off &&
+                    controller.adaptiveResponseDialogRadius != null,
                 title: const Text('Adaptive radius'),
                 subtitleReveal: const Text(
                   'You can define a separate Dialog border radius that gets '
@@ -335,11 +337,7 @@ class DialogPanel extends StatelessWidget {
                   'component themes. If you think it is too round, '
                   'try e.g. 16dp.\n',
                 ),
-                value: enableControl &&
-                        controller.adaptiveDialogRadius != AdaptiveTheme.off &&
-                        controller.adaptiveDialogRadius != null
-                    ? controller.dialogBorderRadiusAdaptive
-                    : null,
+                value: controller.dialogBorderRadiusAdaptive,
                 onChanged: controller.setDialogBorderRadiusAdaptive,
                 min: 0,
                 max: 50,
@@ -352,20 +350,20 @@ class DialogPanel extends StatelessWidget {
             ),
           ],
         ),
-        EnumPopupMenu<AdaptiveTheme>(
+        EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl && controller.useMaterial3,
-          values: AdaptiveTheme.values,
+          values: AdaptiveResponse.values,
           title: const Text('Use adaptive radius'),
           subtitleReveal: Text(
             'Use an alternative dialog border radius on '
             'selected platforms.\n'
             '\n'
             // ignore: lines_longer_than_80_chars
-            '${controller.adaptiveDialogRadius?.describe ?? AdaptiveTheme.off.describe}',
+            '${controller.adaptiveResponseDialogRadius?.describe ?? AdaptiveResponse.off.describe}',
           ),
           defaultLabel: _adaptiveDialogModeLabel(controller),
-          value: controller.adaptiveDialogRadius,
-          onChanged: controller.setAdaptiveDialogRadius,
+          value: controller.adaptiveResponseDialogRadius,
+          onChanged: controller.setAdaptiveResponseDialogRadius,
         ),
 
         PlatformPopupMenu(

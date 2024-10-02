@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app_color.dart';
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -554,9 +554,9 @@ class AppBarPanel extends StatelessWidget {
               'use built-in combinations, they cover most use cases.'),
         ),
         if (isLight)
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Scroll under elevation tint removal'),
             subtitleReveal: Text(
               'Remove the AppBar scroll under tint '
@@ -564,15 +564,15 @@ class AppBarPanel extends StatelessWidget {
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveAppBarScrollUnderOffLight?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveAppBarScrollUnderOffLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveAppBarScrollUnderOffLight,
             onChanged: controller.setAdaptiveAppBarScrollUnderOffLight,
           )
         else
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Scroll under elevation tint removal'),
             subtitleReveal: Text(
               'Remove the AppBar scroll under tint '
@@ -580,7 +580,7 @@ class AppBarPanel extends StatelessWidget {
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveAppBarScrollUnderOffDark?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveAppBarScrollUnderOffDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveAppBarScrollUnderOffDark,
             onChanged: controller.setAdaptiveAppBarScrollUnderOffDark,

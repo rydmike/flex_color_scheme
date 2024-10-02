@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../model/adaptive_theme.dart';
+import '../model/adaptive_response.dart';
 import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 
@@ -286,23 +286,23 @@ class TabBarIndicatorSizeAdapter extends TypeAdapter<TabBarIndicatorSize?> {
   int get typeId => 165;
 }
 
-/// A Hive data type adapter for enum [AdaptiveTheme], nullable.
+/// A Hive data type adapter for enum [AdaptiveResponse], nullable.
 ///
 /// Handles storing <null> value as -1 and returns anything out of enum
 /// index range as null value.
-class AdaptiveThemeAdapter extends TypeAdapter<AdaptiveTheme?> {
+class AdaptiveThemeAdapter extends TypeAdapter<AdaptiveResponse?> {
   @override
-  AdaptiveTheme? read(BinaryReader reader) {
+  AdaptiveResponse? read(BinaryReader reader) {
     final int index = reader.readInt();
-    if (index < 0 || index >= AdaptiveTheme.values.length) {
+    if (index < 0 || index >= AdaptiveResponse.values.length) {
       return null;
     } else {
-      return AdaptiveTheme.values[index];
+      return AdaptiveResponse.values[index];
     }
   }
 
   @override
-  void write(BinaryWriter writer, AdaptiveTheme? obj) {
+  void write(BinaryWriter writer, AdaptiveResponse? obj) {
     writer.writeInt(obj?.index ?? -1);
   }
 

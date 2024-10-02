@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/adaptive_theme.dart';
+import '../../shared/model/adaptive_response.dart';
 import '../theme/theme_values.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
@@ -263,50 +263,52 @@ String generateThemeDartCode(ThemeController controller) {
   final String adaptiveRemoveElevationTintLight = controller
                   .adaptiveRemoveElevationTintLight !=
               null &&
-          controller.adaptiveRemoveElevationTintLight != AdaptiveTheme.off &&
+          controller.adaptiveRemoveElevationTintLight != AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveRemoveElevationTint: ${controller.adaptiveRemoveElevationTintLight!.code},\n'
       : '';
   final String adaptiveElevationShadowsBackLight = controller
                   .adaptiveElevationShadowsBackLight !=
               null &&
-          controller.adaptiveElevationShadowsBackLight != AdaptiveTheme.off &&
+          controller.adaptiveElevationShadowsBackLight !=
+              AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveElevationShadowsBack: ${controller.adaptiveElevationShadowsBackLight!.code},\n'
       : '';
   final String adaptiveAppBarScrollUnderOffLight = controller
                   .adaptiveAppBarScrollUnderOffLight !=
               null &&
-          controller.adaptiveAppBarScrollUnderOffLight != AdaptiveTheme.off &&
+          controller.adaptiveAppBarScrollUnderOffLight !=
+              AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveAppBarScrollUnderOff: ${controller.adaptiveAppBarScrollUnderOffLight!.code},\n'
       : '';
   final String adaptiveRemoveElevationTintDark = controller
                   .adaptiveRemoveElevationTintDark !=
               null &&
-          controller.adaptiveRemoveElevationTintDark != AdaptiveTheme.off &&
+          controller.adaptiveRemoveElevationTintDark != AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveRemoveElevationTint: ${controller.adaptiveRemoveElevationTintDark!.code},\n'
       : '';
   final String adaptiveElevationShadowsBackDark = controller
                   .adaptiveElevationShadowsBackDark !=
               null &&
-          controller.adaptiveElevationShadowsBackDark != AdaptiveTheme.off &&
+          controller.adaptiveElevationShadowsBackDark != AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveElevationShadowsBack: ${controller.adaptiveElevationShadowsBackDark!.code},\n'
       : '';
   final String adaptiveAppBarScrollUnderOffDark = controller
                   .adaptiveAppBarScrollUnderOffDark !=
               null &&
-          controller.adaptiveAppBarScrollUnderOffDark != AdaptiveTheme.off &&
+          controller.adaptiveAppBarScrollUnderOffDark != AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveAppBarScrollUnderOff: ${controller.adaptiveAppBarScrollUnderOffDark!.code},\n'
       : '';
 
   // Splash type settings
-  final String adaptiveSplash = controller.adaptiveSplash != null &&
-          controller.adaptiveSplash != AdaptiveTheme.off
-      ? '    adaptiveSplash: ${controller.adaptiveSplash!.code},\n'
+  final String adaptiveSplash = controller.adaptiveResponseSplash != null &&
+          controller.adaptiveResponseSplash != AdaptiveResponse.off
+      ? '    adaptiveSplash: ${controller.adaptiveResponseSplash!.code},\n'
       : '';
   final String splashType = controller.splashType != null
       ? '    splashType: ${controller.splashType!.code},\n'
@@ -319,14 +321,14 @@ String generateThemeDartCode(ThemeController controller) {
   final String defaultRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String adaptiveRadius = controller.adaptiveRadius != null &&
-          controller.adaptiveRadius != AdaptiveTheme.off
-      ? '    adaptiveRadius: ${controller.adaptiveRadius!.code},\n'
+  final String adaptiveRadius = controller.adaptiveRsponseRadius != null &&
+          controller.adaptiveRsponseRadius != AdaptiveResponse.off
+      ? '    adaptiveRadius: ${controller.adaptiveRsponseRadius!.code},\n'
       : '';
   final String defaultRadiusAdaptive = controller.defaultRadiusAdaptive !=
               null &&
-          controller.adaptiveRadius != null &&
-          controller.adaptiveRadius != AdaptiveTheme.off
+          controller.adaptiveRsponseRadius != null &&
+          controller.adaptiveRsponseRadius != AdaptiveResponse.off
       ? '    defaultRadiusAdaptive: ${controller.defaultRadiusAdaptive!.toStringAsFixed(1)},\n'
       : '';
   // Shape border widths
@@ -511,7 +513,7 @@ String generateThemeDartCode(ThemeController controller) {
   final String switchAdaptiveCupertinoLike = controller
                   .switchAdaptiveCupertinoLike !=
               null &&
-          controller.switchAdaptiveCupertinoLike != AdaptiveTheme.off &&
+          controller.switchAdaptiveCupertinoLike != AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    switchAdaptiveCupertinoLike: ${controller.switchAdaptiveCupertinoLike!.code},\n'
       : '';
@@ -902,14 +904,15 @@ String generateThemeDartCode(ThemeController controller) {
   final String dialogBorderRadius = controller.dialogBorderRadius != null
       ? '    dialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String adaptiveDialogRadius = controller.adaptiveDialogRadius != null &&
-          controller.adaptiveDialogRadius != AdaptiveTheme.off
-      ? '    adaptiveDialogRadius: ${controller.adaptiveDialogRadius!.code},\n'
+  final String adaptiveDialogRadius = controller.adaptiveResponseDialogRadius !=
+              null &&
+          controller.adaptiveResponseDialogRadius != AdaptiveResponse.off
+      ? '    adaptiveDialogRadius: ${controller.adaptiveResponseDialogRadius!.code},\n'
       : '';
   final String dialogRadiusAdaptive = controller.dialogBorderRadiusAdaptive !=
               null &&
-          controller.adaptiveDialogRadius != null &&
-          controller.adaptiveDialogRadius != AdaptiveTheme.off
+          controller.adaptiveResponseDialogRadius != null &&
+          controller.adaptiveResponseDialogRadius != AdaptiveResponse.off
       ? '    dialogRadiusAdaptive: ${controller.dialogBorderRadiusAdaptive!.toStringAsFixed(1)},\n'
       : '';
   final String datePickerHeaderBackgroundSchemeColor = controller
@@ -1352,14 +1355,15 @@ String generateThemeDartCode(ThemeController controller) {
                   .adaptiveRemoveNavigationBarTintLight !=
               null &&
           controller.adaptiveRemoveNavigationBarTintLight !=
-              AdaptiveTheme.off &&
+              AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveRemoveNavigationBarTint: ${controller.adaptiveRemoveNavigationBarTintLight!.code},\n'
       : '';
   final String adaptiveRemoveNavigationBarTintDark = controller
                   .adaptiveRemoveNavigationBarTintDark !=
               null &&
-          controller.adaptiveRemoveNavigationBarTintDark != AdaptiveTheme.off &&
+          controller.adaptiveRemoveNavigationBarTintDark !=
+              AdaptiveResponse.off &&
           controller.useMaterial3
       ? '    adaptiveRemoveNavigationBarTint: ${controller.adaptiveRemoveNavigationBarTintDark!.code},\n'
       : '';

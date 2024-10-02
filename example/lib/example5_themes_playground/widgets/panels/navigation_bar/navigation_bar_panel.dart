@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
@@ -324,9 +324,9 @@ class NavigationBarPanel extends StatelessWidget {
         ),
         const Divider(),
         if (isLight)
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
               'Platform adaptive theme response to remove elevation tint on '
@@ -340,15 +340,15 @@ class NavigationBarPanel extends StatelessWidget {
               'and later.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveRemoveNavigationBarTintLight?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveRemoveNavigationBarTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveNavigationBarTintLight,
             onChanged: controller.setAdaptiveRemoveNavigationBarTintLight,
           )
         else
-          EnumPopupMenu<AdaptiveTheme>(
+          EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
-            values: AdaptiveTheme.values,
+            values: AdaptiveResponse.values,
             title: const Text('Remove elevation tint (obsolete)'),
             subtitleReveal: Text(
               'Platform adaptive theme response to remove elevation tint on '
@@ -362,7 +362,7 @@ class NavigationBarPanel extends StatelessWidget {
               'and later.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
-              '${controller.adaptiveRemoveNavigationBarTintDark?.describe ?? AdaptiveTheme.off.describe}',
+              '${controller.adaptiveRemoveNavigationBarTintDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveNavigationBarTintDark,
             onChanged: controller.setAdaptiveRemoveNavigationBarTintDark,

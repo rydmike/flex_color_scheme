@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_theme.dart';
+import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/widgets/universal/flex_squircle.dart';
 import '../../../../shared/widgets/universal/flex_stadium_squircle.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
@@ -233,8 +233,8 @@ class ShapeRadiusPanel extends StatelessWidget {
               child: SliderListTileReveal(
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl &&
-                    controller.adaptiveRadius != AdaptiveTheme.off &&
-                    controller.adaptiveRadius != null,
+                    controller.adaptiveRsponseRadius != AdaptiveResponse.off &&
+                    controller.adaptiveRsponseRadius != null,
                 title: const Text('Adaptive radius'),
                 subtitleReveal: const Text(
                   'You can define a separate global border radius '
@@ -261,15 +261,16 @@ class ShapeRadiusPanel extends StatelessWidget {
             ),
           ],
         ),
-        EnumPopupMenu<AdaptiveTheme>(
+        EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl,
-          values: AdaptiveTheme.values,
+          values: AdaptiveResponse.values,
           title: const Text('Use adaptive radius'),
           subtitleReveal: Text(
-            controller.adaptiveRadius?.describe ?? AdaptiveTheme.off.describe,
+            controller.adaptiveRsponseRadius?.describe ??
+                AdaptiveResponse.off.describe,
           ),
-          value: controller.adaptiveRadius,
-          onChanged: controller.setAdaptiveRadius,
+          value: controller.adaptiveRsponseRadius,
+          onChanged: controller.setAdaptiveResponseRadius,
         ),
         PlatformPopupMenu(
           platform: controller.platform,
