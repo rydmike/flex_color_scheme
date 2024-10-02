@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Oct 1, 2024**
+**Oct 3, 2024**
 
 ### SUMMARY
 
@@ -75,7 +75,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - **STARTED**: Add some `SearchView` theming features. Placeholder added. 
 - Make a new **Flutter issue**: The `SearchView`  has variant theme issue, gets shape in full screen.
 
-- **FIX**: Dialog platform adaptive response seems broken, take a look at it. Maybe controller for global radius not being null anymore issue after enum change.
 
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
