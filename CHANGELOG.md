@@ -71,6 +71,12 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
+- NEXT TODO: InputDecorator:
+  - Platform adaptive radius.
+
+- TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
+
+
 - **STARTED**: Add some `SearchBar` theming features. Placeholder added. 
 - **STARTED**: Add some `SearchView` theming features. Placeholder added. 
 - Make a new **Flutter issue**: The `SearchView`  has variant theme issue, gets shape in full screen.
@@ -79,27 +85,11 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 * TODO: The `toScheme` method might need to be updated.
   * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
 
- 
-- TODO: InputDecorator: 
-  - Platform adaptive radius.
- 
- 
-- TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
+- TODO: Study and potential report, if not already existing, 13 found Flutter SDK theming issues. Add the GitHub links to known issue expands where relevant.
 
-- TODO: ListTile  
-  - Make a new **Flutter issue**: When minVerticalPadding is 4, it gets smaller than 0...3! Weird! Study the cause.
-  - Make a new **Flutter issue**: The ListTileStyle does not seem to work, study the cause. 
-  - Update known ListTile issues in Playground.
-  
-- TODO: Chips
-  - Make a new **Flutter issue**: IconTheme size does not work in M3, in M2 close icon changes, but not the check mark.
-  - Make a new **Flutter issue**: Chips theming still require proper support in Flutter, has severe variants issue.
-  - Make a new **Flutter issue**: Chips in M3 should be 32 dp, not 34 dp like now. 
-  - Update known Chips issues in Playground.
 
 **POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
-
 
 - Platform adaptive `ShapeBorder` configuration, including `Squircle`.
   - Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
