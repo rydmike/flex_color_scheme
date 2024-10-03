@@ -9,11 +9,9 @@ import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
-import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
-import '../../shared/is_web_list_tile.dart';
-import '../../shared/platform_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 
 class DialogPanel extends StatelessWidget {
   const DialogPanel(this.controller, {super.key});
@@ -365,13 +363,7 @@ class DialogPanel extends StatelessWidget {
           value: controller.adaptiveResponseDialogRadius,
           onChanged: controller.setAdaptiveResponseDialogRadius,
         ),
-
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        IsWebListTile(controller: controller),
-        BackToActualPlatform(controller: controller),
+        TestAdaptiveResponse(controller),
         const Divider(),
         const ListTileReveal(
           title: Text('TimePicker'),

@@ -1038,7 +1038,6 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
               });
             },
           ),
-          // Add some expand actions for access to mock functionality.
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             transitionBuilder: (Widget child, Animation<double> animation) {

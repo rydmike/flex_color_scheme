@@ -449,6 +449,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - In the *ColorScheme* panel, we brought back the ColorScheme color hover that highlights its color source tone in the Tonal Palette above. This feature existed before, but started causing issues on WEB builds and was removed 16.3.2023. It has now been brought back, and we will test if it works better now. It is a nice feature to see where the color comes from in the palette.
 
+- The controls to test settings for platform adaptive responses are now hidden behind an expanding `ListTile`. This is used on every panel where the controls exist. It is intended to make the UI less cluttered, the controls are not used so often.
+
 **FIX**
 
 - Fixed [#188](https://github.com/rydmike/flex_color_scheme/issues/188) add info about theme simulator being an approximation.

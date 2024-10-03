@@ -7,10 +7,8 @@ import '../../../../shared/widgets/universal/flex_stadium_squircle.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
-import '../../shared/back_to_actual_platform.dart';
 import '../../shared/enum_popup_menu.dart';
-import '../../shared/is_web_list_tile.dart';
-import '../../shared/platform_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //
@@ -272,12 +270,7 @@ class ShapeRadiusPanel extends StatelessWidget {
           value: controller.adaptiveRsponseRadius,
           onChanged: controller.setAdaptiveResponseRadius,
         ),
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        IsWebListTile(controller: controller),
-        BackToActualPlatform(controller: controller),
+        TestAdaptiveResponse(controller),
         const Divider(),
         ListTileReveal(
           enabled: enableControl,
