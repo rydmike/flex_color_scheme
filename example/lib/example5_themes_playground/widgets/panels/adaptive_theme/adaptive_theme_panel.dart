@@ -6,10 +6,8 @@ import '../../../../shared/model/splash_type_enum.dart';
 import '../../../../shared/model/visual_density_enum.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
-import '../../shared/back_to_actual_platform.dart';
 import '../../shared/enum_popup_menu.dart';
-import '../../shared/is_web_list_tile.dart';
-import '../../shared/platform_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 
 // Panel used to control the adaptive theme settings.
 class AdaptiveThemePanel extends StatelessWidget {
@@ -260,17 +258,16 @@ class AdaptiveThemePanel extends StatelessWidget {
           ),
         ],
         const Divider(),
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        IsWebListTile(controller: controller),
-        BackToActualPlatform(controller: controller),
         const ListTile(
-            dense: true,
-            title: Text('You can find additional platform adaptive '
-                'theme settings under Shape Radius, Switch, AppBar, '
-                'NavigationBar and Dialogs.'))
+          dense: true,
+          title: Text('You can find additional platform adaptive '
+              'theme settings under Shape Radius, Switch, AppBar, '
+              'NavigationBar and Dialogs. The below expand with controls '
+              'to test the adaptive response is present on every settings '
+              'panel that has a platform adaptive property.'),
+        ),
+        TestAdaptiveResponse(controller),
+        const SizedBox(height: 8),
       ],
     );
   }

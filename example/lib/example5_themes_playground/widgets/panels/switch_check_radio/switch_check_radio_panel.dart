@@ -6,11 +6,9 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
-import '../../shared/is_web_list_tile.dart';
-import '../../shared/platform_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 
 // Panel used to configure sub themes on Switch, Checkbox and Radio widgets.
 class SwitchCheckRadioPanel extends StatelessWidget {
@@ -114,12 +112,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
           value: controller.switchAdaptiveCupertinoLike,
           onChanged: controller.setSwitchAdaptiveCupertinoLike,
         ),
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        IsWebListTile(controller: controller),
-        BackToActualPlatform(controller: controller),
+        TestAdaptiveResponse(controller),
         const Divider(),
         ColorSchemePopupMenu(
           enabled: enableControl,

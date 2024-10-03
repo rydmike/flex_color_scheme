@@ -114,8 +114,7 @@ class PlatformPopupMenu extends StatelessWidget {
         dense: true,
         revealDense: true,
         enabled: enabled,
-        title: const Text('Test the platform response'),
-        subtitle: Text(platformLabel),
+        title: Text(platformLabel),
         subtitleReveal: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

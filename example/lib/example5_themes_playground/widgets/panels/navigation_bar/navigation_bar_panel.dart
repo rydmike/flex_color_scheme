@@ -7,11 +7,9 @@ import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
-import '../../shared/back_to_actual_platform.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
-import '../../shared/is_web_list_tile.dart';
-import '../../shared/platform_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 import 'navigation_bar_label_behavior_list_tile.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
@@ -367,12 +365,7 @@ class NavigationBarPanel extends StatelessWidget {
             value: controller.adaptiveRemoveNavigationBarTintDark,
             onChanged: controller.setAdaptiveRemoveNavigationBarTintDark,
           ),
-        PlatformPopupMenu(
-          platform: controller.platform,
-          onChanged: controller.setPlatform,
-        ),
-        IsWebListTile(controller: controller),
-        BackToActualPlatform(controller: controller),
+        TestAdaptiveResponse(controller),
         const SizedBox(height: 8),
       ],
     );
