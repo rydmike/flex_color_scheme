@@ -860,7 +860,8 @@ class ThemeController with ChangeNotifier {
     _fabSchemeColor = await _themeService.load(
         Store.keyFabSchemeColor, Store.defaultFabSchemeColor);
     _fabForegroundSchemeColor = await _themeService.load(
-        Store.keyFabSchemeColor, Store.defaultFabForegroundSchemeColor);
+        Store.keyFabForegroundSchemeColor,
+        Store.defaultFabForegroundSchemeColor);
     //
     // Chip Settings
     _chipSchemeColor = await _themeService.load(
