@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -187,7 +188,13 @@ class NavigationBarPanel extends StatelessWidget {
                 contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
                 title: const Text('Selected icon color'),
-                defaultLabel: 'onSecondaryContainer',
+                defaultLabel: controller.navBarIndicatorSchemeColor == null
+                    ? 'onSecondaryContainer'
+                    : SchemeColor
+                        .values[FlexSubThemes.onSchemeColor(
+                                controller.navBarIndicatorSchemeColor!)
+                            .index]
+                        .name,
                 defaultDisabledLabelM2: 'onSurface',
                 value: controller.navBarSelectedIconSchemeColor,
                 onChanged: controller.setNavBarSelectedIconSchemeColor,
@@ -198,7 +205,14 @@ class NavigationBarPanel extends StatelessWidget {
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
                 title: const Text('Selected label color'),
-                defaultLabel: 'onSurface',
+                defaultLabel: controller.navBarBackgroundSchemeColor == null
+                    ? 'onSurface'
+                    : SchemeColor
+                        .values[FlexSubThemes.onSchemeColor(
+                                controller.navBarBackgroundSchemeColor!)
+                            .index]
+                        .name,
+                defaultDisabledLabel: 'onSurface',
                 value: controller.navBarSelectedLabelSchemeColor,
                 onChanged: controller.setNavBarSelectedLabelSchemeColor,
               ),
@@ -214,7 +228,15 @@ class NavigationBarPanel extends StatelessWidget {
                 enabled: enableControl,
                 title: const Text('Unselected item color'),
                 subtitle: const Text('Label and icon, but separate API'),
-                defaultLabel: 'onSurfaceVariant',
+                defaultLabel: controller.navBarBackgroundSchemeColor == null
+                    ? 'onSurfaceVariant'
+                    : SchemeColor
+                        .values[FlexSubThemes.onSchemeColor(
+                                controller.navBarBackgroundSchemeColor!,
+                                useOnSurfaceVariant: true)
+                            .index]
+                        .name,
+                defaultDisabledLabel: 'onSurfaceVariant',
                 defaultDisabledLabelM2: 'onSurface',
                 value: controller.navBarUnselectedSchemeColor,
                 onChanged: controller.setNavBarUnselectedSchemeColor,

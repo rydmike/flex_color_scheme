@@ -4596,17 +4596,29 @@ sealed class FlexSubThemes {
     /// on unselected items, 12 is used as fallback if needed.
     final double? unselectedLabelSize,
 
-    /// Select which color from the passed in [ColorScheme] to use as base for
+    /// Select which color from the passed in [ColorScheme] to use for
     /// the [NavigationBar]'s label text color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurface].
+    /// When undefined, if [backgroundSchemeColor] is defined, its
+    /// contrasting on color will be used, if it is also undefined
+    /// [SchemeColor.onSurface] will be used.
+    ///
+    /// Flutter is default is onSurface.
     final SchemeColor? selectedLabelSchemeColor,
 
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to for
     /// the [NavigationBar]'s unselected label text color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurfaceVariant], and adds an
-    /// alpha blend and opacity, if [mutedUnselectedLabel] is true
+    /// When undefined, if [backgroundSchemeColor] is
+    /// using any of the surface colors, the default on pair used will be
+    /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+    /// that is the typical contrast color for surface colors.
+    /// This is to make the unselected labels and icons look more muted.
+    ///
+    /// If other [backgroundSchemeColor] colors are used,
+    /// while this value is undefined, their default contrasting onColor will
+    /// be used. If the [backgroundSchemeColor] is also undefined,
+    /// then this defaults to [SchemeColor.onSurfaceVariant].
     ///
     /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
     /// [ColorScheme.onSurfaceVariant] in M3 mode.
@@ -4614,7 +4626,7 @@ sealed class FlexSubThemes {
 
     /// If true, the unselected label in the [NavigationBar] use a more
     /// muted color version of the color defined by
-    /// [navigationBarUnselectedLabelSchemeColor].
+    /// [unselectedLabelSchemeColor].
     ///
     /// The muting is unselected color with
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
@@ -4633,20 +4645,32 @@ sealed class FlexSubThemes {
     /// If null, defaults to [selectedIconSize].
     final double? unselectedIconSize,
 
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to use for
     /// the [NavigationBar]'s selected item icon color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSecondaryContainer].
+    /// If undefined, and [indicatorSchemeColor] is also
+    /// undefined, then defaults to [SchemeColor.onSecondaryContainer].
+    /// If undefined, but [indicatorSchemeColor] is defined, then
+    /// it defaults to the contrast onColor pair of the indicator color
+    /// [indicatorSchemeColor]
     ///
     /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
     /// [ColorScheme.onSecondaryContainer] in M3.
     final SchemeColor? selectedIconSchemeColor,
 
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to use for
     /// the [NavigationBar]'s unselected item icon color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurfaceVariant], and adds an
-    /// alpha blend and opacity, if [mutedUnselectedIcon] is true.
+    /// When undefined, if [backgroundSchemeColor] is
+    /// using any of the surface colors, the default on pair used will be
+    /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+    /// that is the typical contrast color for surface colors.
+    /// This is to make the unselected labels and icons look more muted.
+    ///
+    /// If other [backgroundSchemeColor] colors are used,
+    /// while this value is undefined, their default contrasting onColor will
+    /// be used. If the [backgroundSchemeColor] is also undefined,
+    /// then this defaults to [SchemeColor.onSurfaceVariant].
     ///
     /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and to
     /// [ColorScheme.onSurfaceVariant] in M3 mode.
@@ -4803,14 +4827,34 @@ sealed class FlexSubThemes {
         'as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
-    // Get text color, defaults to onSurface.
-    final Color labelColor = schemeColor(
-        selectedLabelSchemeColor ?? SchemeColor.onSurface, colorScheme);
+    // Background color, when using normal default, falls back to
+    // surfaceContainer.
+    final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
+            backgroundSchemeColor != SchemeColor.transparent
+        ? schemeColor(backgroundSchemeColor ?? SchemeColor.surfaceContainer,
+                colorScheme)
+            .withOpacity(opacity ?? 1.0)
+        : schemeColor(
+            backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme);
 
-    // Get unselected label color, defaults to colorScheme.onSurfaceVariant
-    final Color unselectedLabelColor = schemeColor(
-        unselectedLabelSchemeColor ?? SchemeColor.onSurfaceVariant,
-        colorScheme);
+    // Use onSurface as contrast for all selected on surface label colors !!
+    final Color onBackGroundColorFallback = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    // Use onSurfaceVariant as contrast for all unselected on surface colors !!
+    final Color onVariantBackGroundColorFallback = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme,
+        useOnSurfaceVariant: true);
+
+    // Get text color, defaults to onSurface.
+    final Color labelColor = selectedLabelSchemeColor == null
+        ? onBackGroundColorFallback
+        : schemeColor(selectedLabelSchemeColor, colorScheme);
+
+    // Get unselected label color, defaults to onSurfaceVariant.
+    final Color unselectedLabelColor = unselectedLabelSchemeColor == null
+        ? onVariantBackGroundColorFallback
+        : schemeColor(unselectedLabelSchemeColor, colorScheme);
 
     // Get text style, defaults to TextStyle(), we can use it since
     // size and color are applied to is separately.
@@ -4821,24 +4865,23 @@ sealed class FlexSubThemes {
     final double effectiveUnselectedLabelSize =
         unselectedLabelSize ?? labelSize;
 
-    // Get icon color, default to onSecondaryContainer.
-    final Color iconColor = schemeColor(
-        selectedIconSchemeColor ?? SchemeColor.onSecondaryContainer,
-        colorScheme);
+    // Use color pair for indicator, as contrast for selected icon color.
+    final Color onIndicatorColorFallback = schemeColorPair(
+        indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme);
+
+    // Get icon color, defaults to onSecondaryContainer.
+    final Color iconColor = selectedIconSchemeColor == null
+        ? onIndicatorColorFallback
+        : schemeColor(selectedIconSchemeColor, colorScheme);
 
     // Get unselected icon color, defaults to onSurfaceVariant.
-    final Color unselectedIconColor = schemeColor(
-        unselectedIconSchemeColor ?? SchemeColor.onSurfaceVariant, colorScheme);
+    final Color unselectedIconColor = unselectedIconSchemeColor == null
+        ? onVariantBackGroundColorFallback
+        : schemeColor(unselectedIconSchemeColor, colorScheme);
 
     // Get effective icons sizes.
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
-
-    // Background color, when using normal default, falls back to
-    // surfaceContainer.
-    final Color backgroundColor = schemeColor(
-            backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme)
-        .withOpacity(opacity ?? 1.0);
 
     // Indicator color, when using normal default, falls back to
     // secondaryContainer.
@@ -5139,32 +5182,32 @@ sealed class FlexSubThemes {
     /// 16 in M23 from its bodyLarge text theme.
     final double? unselectedLabelSize,
 
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to use for
     /// the [NavigationRail]'s selected label text color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurface].
+    /// When undefined, if [backgroundSchemeColor] is defined, its
+    /// contrasting on color will be used, if it is also undefined
+    /// [SchemeColor.onSurface] will be used.
     ///
     /// Flutter M2 default is primary, M3 default is onSurface.
     final SchemeColor? selectedLabelSchemeColor,
 
     // TODO(rydmike): Report spec bug issue and add link
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to use for
     /// the [NavigationRails]'s unselected label text color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
-    ///
-    /// When undefined,if [backgroundSchemeColor] is
+    /// When undefined, if [backgroundSchemeColor] is
     /// using any of the surface colors, the default on pair used will be
-    /// [SchemeColor.onSurfaceVariant],instead of [SchemeColor.onSurface]
+    /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
     /// that is the typical contrast color for surface colors.
-    /// This is to make the unselected labels and icons
-    /// look more muted.
+    /// This is to make the unselected labels and icons look more muted.
     ///
-    /// If other background colors are used, while this value is undefined,
-    /// their default contrasting on color will be used.
+    /// If other [backgroundSchemeColor] colors are used,
+    /// while this value is undefined, their default contrasting onColor will
+    /// be used. If the [backgroundSchemeColor] is also undefined,
+    /// then this defaults to [SchemeColor.onSurfaceVariant].
     ///
     /// Flutter Material-2 default is onSurface with opacity 0.64,
-    ///
     /// In Flutter version 3.24 and earlier,
     /// the Material-3 default is still also onSurface.
     /// This is a spec BUG in Flutter's Material-3 defaults, it should be
@@ -5199,41 +5242,39 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to [selectedIconSize].
     final double? unselectedIconSize,
 
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to use for
     /// the [NavigationRail]'s selected item icon color.
     ///
-    /// If undefined, and [navigationRailIndicatorSchemeColor] is also
+    /// If undefined, and [indicatorSchemeColor] is also
     /// undefined, then defaults to [SchemeColor.onSecondaryContainer].
-    /// If undefined, but [navigationRailIndicatorSchemeColor] is defined, then
-    /// it default ot the contrast on color pair of the indicator color
-    /// [navigationRailIndicatorSchemeColor]
+    /// If undefined, but [indicatorSchemeColor] is defined, then
+    /// it defaults to the contrast onColor pair of the indicator color
+    /// [indicatorSchemeColor]
     ///
     /// Flutter Material-2 default is primary, Material-3 default is
     /// onSecondaryContainer.
     final SchemeColor? selectedIconSchemeColor,
 
-    /// Select which color from the passed in [ColorScheme] to use as base for
+    /// Select which color from the passed in [ColorScheme] to use for
     /// the [NavigationRail]'s unselected items icon color.
     ///
-    /// If undefined, defaults to [SchemeColor.onSurfaceVariant].
-    ///
-    /// When undefined,if [backgroundSchemeColor] is
+    /// When undefined, if [backgroundSchemeColor] is
     /// using any of the surface colors, the default on pair used will be
-    /// [SchemeColor.onSurfaceVariant],instead of [SchemeColor.onSurface]
+    /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
     /// that is the typical contrast color for surface colors.
-    /// This is to make the unselected labels and icons
-    /// look more muted.
+    /// This is to make the unselected labels and icons look more muted.
     ///
-    /// If other background colors are used, while this value is undefined,
-    /// their default contrasting on color will be used.
+    /// If other [backgroundSchemeColor] colors are used,
+    /// while this value is undefined, their default contrasting onColor will
+    /// be used. If the [backgroundSchemeColor] is also undefined,
+    /// then this defaults to [SchemeColor.onSurfaceVariant].
     ///
     /// Flutter's Material-2 default is onSurface and in Material-3 it is
     /// onSurfaceVariant.
     final SchemeColor? unselectedIconSchemeColor,
 
     /// If true, the unselected icon in the [NavigationRail] use a more muted
-    /// color version of the color defined by
-    /// [navigationBarUnselectedIconSchemeColor].
+    /// color version of the color defined by [unselectedIconSchemeColor].
     ///
     /// The "muting" is done by using unselected [unselectedIconSchemeColor]
     /// color and applying:
@@ -5439,14 +5480,14 @@ sealed class FlexSubThemes {
         : schemeColor(
             backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
+    // Use onSurface as contrast for all selected on surface label colors !!
+    final Color onBackGroundColorFallback = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
     // Use onSurfaceVariant as contrast for all unselected on surface colors !!
     final Color onVariantBackGroundColorFallback = schemeColorPair(
         backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme,
         useOnSurfaceVariant: true);
-
-    // Use onSurface as contrast for all selected on surface label colors !!
-    final Color onBackGroundColorFallback = schemeColorPair(
-        backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
     // Get text color, defaults to onSurface.
     final Color labelColor = selectedLabelSchemeColor == null
