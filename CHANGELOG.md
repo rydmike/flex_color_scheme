@@ -72,19 +72,21 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
-- TODO NEXT: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
+- TODO **IN PROGRESS**: BottomNavigationBar and NavigationBar: Playground: Colors should fall into place from just a background change, and selected icon color from indicator color on NavigationBar. See NavigationRail implementation in FlexSubThemes.
+  - Playground default value updates for NavigationBar and BottomNavigationBar.
+  - Update doc comments to document these defaults.
+  - Add to breaking changes.
 
 
 - **STARTED**: Add some `SearchBar` theming features. Placeholder added. 
 - **STARTED**: Add some `SearchView` theming features. Placeholder added. 
-- Make a new **Flutter issue**: The `SearchView`  has variant theme issue, gets shape in full screen.
 
 
-* TODO: The `toScheme` method might need to be updated.
-  * Theming works as intended without it, and it works with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS passes along a full ready `ColorScheme` to the raw constructor.
+* TODO: The `toScheme` method may need some updates.
+  * Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
 
 
-- TODO: Study and potential report, if not already existing, 13 found Flutter SDK theming issues. Add the GitHub links to known issue expands where relevant.
+- TODO: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
 
 
 **POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
