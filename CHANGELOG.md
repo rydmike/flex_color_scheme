@@ -44,7 +44,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **CRITICAL TODOS**
 
 * **TODO**: Review and update premade designs in the Playground app.
-* **TODO**: Playground: Review and update use M3 and use FCS defaults feature for **TextField**. Add two more examples, FCS style (from FCS M2 style) and a "nice" dense one with only focused border.
+* **TODO**: Playground: Review and update use M3 and use FCS defaults feature for **TextField**. Add two more examples, FCS style (from FCS M2 style) and a "nice" dense one with only focused having a border.
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
   * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
@@ -72,41 +72,33 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
-- TODO **IN PROGRESS**: BottomNavigationBar and NavigationBar: Playground: Colors should fall into place from just a background change, and selected icon color from indicator color on NavigationBar. See NavigationRail implementation in FlexSubThemes.
-  - Playground default value updates for NavigationBar and BottomNavigationBar.
-  - Update doc comments to document these defaults.
-  - Add to breaking changes.
+- **STARTED**: Add `SearchView` theming features.
+- **STARTED**: Add `SearchBar` theming features. 
 
 
-- **STARTED**: Add some `SearchBar` theming features. Placeholder added. 
-- **STARTED**: Add some `SearchView` theming features. Placeholder added. 
+- **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
 
 
-* TODO: The `toScheme` method may need some updates.
-  * Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
+- **MINOR KNOWN ISSUES**
+  - The `toScheme` method may need some updates for raw `FlexColorScheme?` constructor.
+    - Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
+
+  - Cancel input colors from custom theme get reset to active ColorScheme, not to input values.
+    - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
 
 
-- TODO: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
+**DECIDED TO POSTPONE TO A LATER RELEASE**
 
-
-**POTENTIAL TODOS - STRETCH GOALS, probably push some to a later version**
-
-- Platform adaptive `ShapeBorder` configuration, including `Squircle`.
-  - Big maybe, probably push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Add fidelity for iOS adaptive `AppBar`.
-  - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Consider adding them as a platform adaptive feature.
-
-* **ISSUE**: The cancel input colors from custom theme get reset to active ColorScheme, not to input values. This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
-
-
-**ALREADY DECIDED TO POSTPONE TO A LATER RELEASE**
- 
+  - There were some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Look it up and consider adding them as a platform adaptive feature.
+- Platform adaptive `ShapeBorder` configuration, including `Squircle`.
+  - Maybe even push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Custom shadow color global and selection per component.
   - Create a custom convenience control widget for it.
 - Add `Divider` theme features, e.g., thickness and totally custom color.
 - Add `Checkbox` shape and border.
-- Add all Shadcn theme colors.
-- Add Shadcn like predefined config.
+- Add all **Shadcn** theme colors.
+- Add a **Shadcn** look-alike predefined Material components based theme config. It will of course not be exact, but it will look much less opinionated than vanilla Material-3.
 - Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
 - InputDecorator: Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
 
@@ -185,9 +177,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - The `FlexSubThemesData` property `drawerUnselectedItemSchemeColor` now default to `SchemeColor.onSurfaceVariant`, as on color pair default when any surface color is used as drawer background color. Previously it defaulted to `onSurface`. Likewise in `FlexSubThemes.navigationDrawerTheme` the property `unselectedItemSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. This was changed to use ase as Material-3 defaults.
 
+- The `FlexSubThemesData` properties `navigationRailUnselectedLabelSchemeColor` and `navigationRailUnselectedIconSchemeColor` now default to `onSurfaceVariant` (was `onSurface`). The `onSurfaceVariant` is used as on color pair default when any surface color is used as background color for the rail, if a none surface color is used as background scheme color, its contrast color pair is used as default for the labels and unselected icons. The `navigationRailSelectedIconSchemeColor` will if undefined, default to the contrast color pair for `navigationRailIndicatorSchemeColor`. These default behaviors result in less configuration in typical designs, while starting points defaults are the same as before and full configuration options are also available as before. The equivalent colors in `FlexSubThemes.navigationRailTheme` behave the same way.  
 
-- The `FlexSubThemesData` properties `navigationRailUnselectedLabelSchemeColor` and `navigationRailUnselectedIconSchemeColor` now default t `onSurfaceVariant` (was `onSurface`). The `onSurfaceVariant` is used as on color pair default when any surface color is used as background color for the rail, if a none surface color is used as background scheme color, its contrast color pair is used as default for the labels and unselected icons. The `navigationRailSelectedIconSchemeColor` will if undefined, default to the contrast color pair for `navRailIndicatorSchemeColor`. These default behaviors result in less configuration in typical designs, while starting points defaults are the same as before and full configuration options are also available as before. The equivalent colors in `FlexSubThemes.navigationRailTheme` behave the same way.  
+- The `FlexSubThemesData` properties `navigationBarUnselectedLabelSchemeColor` and `navigationBarUnselectedIconSchemeColor` now default to `onSurfaceVariant` (was `onSurface`). The `onSurfaceVariant` is used as on color pair default when any surface color is used as background color for the rail, if a none surface color is used as background scheme color, its contrast color pair is used as default for the labels and unselected icons. The `navigationBarSelectedIconSchemeColor` will if undefined, default to the contrast color pair for `navigationBarIndicatorSchemeColor`. These default behaviors result in less configuration in typical designs, while starting points defaults are the same as before and full configuration options are also available as before. The equivalent colors in `FlexSubThemes.navigationBarTheme` behave the same way.
 
+- The `FlexSubThemesData` properties `bottomNavigationBarUnselectedLabelSchemeColor` and `bottomNavigationBarUnselectedIconSchemeColor` now default to `onSurfaceVariant` (was `onSurface`). The `onSurfaceVariant` is used as on color pair default when any surface color is used as background color for the rail, if a none surface color is used as background scheme color, its contrast color pair is used as default for the labels and unselected icons. These default behaviors result in less configuration in typical designs, while starting points defaults are the same as before and full configuration options are also available as before. The equivalent colors in `FlexSubThemes.bottomNavigationBar` behave the same way.
 
 **NEW**
 

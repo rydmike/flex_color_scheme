@@ -3011,21 +3011,28 @@ class FlexSubThemesData with Diagnosticable {
   /// same value as to selectedLabelSize, you can make them the same size.
   final double? bottomNavigationBarUnselectedLabelSize;
 
-  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// Select which color from the theme's [ColorScheme] to use for
   /// the [BottomNavigationBar]'s selected label text color.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If undefined, defaults to [SchemeColor.primary].
   final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor;
 
-  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// Select which color from the theme's [ColorScheme] to use for
   /// the [BottomNavigationBar]'s unselected label text color.
   ///
-  /// All colors in the color scheme are not good choices, but some work well.
+  /// When undefined, if [bottomNavigationBarBackgroundSchemeColor] is
+  /// using any of the surface colors, the default on pair used will be
+  /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+  /// that is the typical contrast color for surface colors.
+  /// This is to make the unselected labels and icons look more muted.
   ///
-  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-  /// blend and opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
+  /// If other [bottomNavigationBarBackgroundSchemeColor] colors are used,
+  /// while this value is undefined, their default contrasting onColor will
+  /// be used. If the [bottomNavigationBarBackgroundSchemeColor] is also
+  /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
+  ///
+  /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
+  /// [Colors.black54] in light mode and [Colors.white70] in dark.
   final SchemeColor? bottomNavigationBarUnselectedLabelSchemeColor;
 
   /// If true, the unselected label in the [BottomNavigationBar] use a more
@@ -3049,7 +3056,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to [bottomNavigationBarSelectedIconSize].
   final double? bottomNavigationBarUnselectedIconSize;
 
-  /// Select which color from the theme's [ColorScheme] to use as base for
+  /// Select which color from the theme's [ColorScheme] to use for
   /// the [BottomNavigationBar]'s selected item icon color.
   ///
   /// All colors in the color scheme are not good choices, but some work well.
@@ -3061,13 +3068,22 @@ class FlexSubThemesData with Diagnosticable {
   /// [ColorScheme.primary] in light and [ColorScheme.dark] in dark theme mode.
   final SchemeColor? bottomNavigationBarSelectedIconSchemeColor;
 
-  /// Select which color from the passed in [ColorScheme] to use as base for
+  /// Select which color from the passed in [ColorScheme] to use for
   /// the [BottomNavigationBar]'s unselected items icon color.
   ///
-  /// All colors in the color scheme are not good choices, but some work well.
+  /// When undefined, if [bottomNavigationBarBackgroundSchemeColor] is
+  /// using any of the surface colors, the default on pair used will be
+  /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+  /// that is the typical contrast color for surface colors.
+  /// This is to make the unselected labels and icons look more muted.
   ///
-  /// If undefined, defaults to [SchemeColor.onSurface], and adds an alpha
-  /// blend and opacity,if [bottomNavigationBarMutedUnselectedLabel] is true.
+  /// If other [bottomNavigationBarBackgroundSchemeColor] colors are used,
+  /// while this value is undefined, their default contrasting onColor will
+  /// be used. If the [bottomNavigationBarBackgroundSchemeColor] is also
+  /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
+  ///
+  /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
+  /// [Colors.black54] in light mode and [Colors.white70] in dark.
   final SchemeColor? bottomNavigationBarUnselectedIconSchemeColor;
 
   /// If true, the unselected icon in the [BottomNavigationBar] use a more muted
