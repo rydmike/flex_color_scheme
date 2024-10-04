@@ -44,14 +44,15 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **CRITICAL TODOS**
 
 * **TODO**: Review and update premade designs in the Playground app.
-* **TODO**: Playground: Review and update use M3 and use FCS defaults feature. Add two more examples.
+* **TODO**: Playground: Review and update use M3 and use FCS defaults feature for **TextField**. Add two more examples, FCS style (from FCS M2 style) and a "nice" dense one with only focused border.
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
   * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
 
+
 * **DONE**: Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later.
-  * Will keep it around for now. Added info about it in its info reveal.
+  * Will keep it around for now, but added info about it being obsolete in Flutter 3.22 or later, in its info-expand.
 * **DONE**: Consider what to do with shadows back.
   * Keep and add more fine-grained control later, via shadow color selection per component.
 * **DONE**: Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
@@ -65,13 +66,13 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   * Old Material-2 mode will keep its opinionated default values that largely emulate Material-3 styles. This remains the FCS Material-2 mode design intent. However, FCS originally had many own styles for Material-3 mode defaults too, because they were made before the specs were available. These have gradually been removed to use actual Material-3 defaults instead as starting point.
   * The Playground will, where it makes sense, keep some of its own default settings, but the package should align with Flutter's Material-3 defaults when possible.
   * After the changes, some defaults still have subtle opinionated difference, but the majority are now using Flutter's Material-3 defaults, which are not always Material-3 spec-correct, mostly they are though. 
-    * **Tooltip** and **Snackbar** keep their opinionated defaults in FCS for now, because they offer a nice optional default style that is otherwise not available. It is straightforward to make them exactly like Material-3 default. There is guidance in the Playground app on how to do it via their info reveal buttons.
+    * **Tooltip** and **Snackbar** keep their opinionated defaults in FCS for now, because they offer a nice optional default style that is otherwise not available. It is straightforward to make them exactly like Material-3 default. There is guidance in the Playground app on how to do this via their info reveal buttons.
     * FCS default **InputDecorator** is now very close to Flutter's Material-3 default. The difference should now only be FCS's slight opinionated take on error hover states. Maybe later add a feature to get the default Material-3 style for them too. This is not possible with current props, but we could add them later.
 
   
 **TODOs**
 
-- TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
+- TODO NEXT: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
 
 - **STARTED**: Add some `SearchBar` theming features. Placeholder added. 
