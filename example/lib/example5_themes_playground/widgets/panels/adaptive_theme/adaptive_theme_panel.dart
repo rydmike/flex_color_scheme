@@ -258,15 +258,16 @@ class AdaptiveThemePanel extends StatelessWidget {
           ),
         ],
         const Divider(),
+        TestAdaptiveResponse(controller),
+        const Divider(),
         const ListTile(
           dense: true,
           title: Text('You can find additional platform adaptive '
-              'theme settings under Shape Radius, Switch, AppBar, '
-              'NavigationBar and Dialogs. The below expand with controls '
-              'to test the adaptive response is present on every settings '
-              'panel that has a platform adaptive property.'),
+              'theme settings under Shape Radius, Switch, TextField, AppBar, '
+              'NavigationBar and Dialogs. The above controls used '
+              'to test the adaptive response are present on all settings '
+              'panels that have platform adaptive properties.'),
         ),
-        TestAdaptiveResponse(controller),
         const SizedBox(height: 8),
       ],
     );
