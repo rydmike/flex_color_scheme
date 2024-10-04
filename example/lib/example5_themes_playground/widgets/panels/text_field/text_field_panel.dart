@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -11,6 +12,8 @@ import '../../../theme/theme_values.dart';
 import '../../dialogs/set_text_field_to_defaults_dialog.dart';
 import '../../dialogs/set_text_field_to_m3_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/enum_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 
 class TextFieldPanel extends StatelessWidget {
   const TextFieldPanel(this.controller, {super.key});
@@ -44,6 +47,47 @@ class TextFieldPanel extends StatelessWidget {
     if (reset ?? false) {
       await controller.setTextFieldToDefaults();
     }
+  }
+
+  // Complex logic for the adaptive InputDecorator radius label.
+  static String? _adaptiveDecoratorModeLabel(ThemeController controller) {
+    if (!controller.useSubThemes && !controller.useFlexColorScheme) return null;
+    final bool useAdaptiveRadius =
+        controller.adaptiveResponseRadius != AdaptiveResponse.off &&
+            controller.adaptiveResponseRadius != null &&
+            controller.inputDecoratorBorderRadius == null;
+    if (useAdaptiveRadius) {
+      return 'Global (${controller.adaptiveResponseRadius?.label ?? ''})';
+    }
+    return null;
+  }
+
+  // Complex logic for the adaptive decorator radius label.
+  static String _adaptiveDecoratorRadiusLabel(ThemeController controller) {
+    final bool useFCS =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    if (!useFCS) {
+      return '4 dp';
+    }
+    final bool useAdaptiveInputDecoratorRadius =
+        controller.adaptiveResponseInputDecoratorRadius !=
+                AdaptiveResponse.off &&
+            controller.adaptiveResponseInputDecoratorRadius != null;
+    if (useAdaptiveInputDecoratorRadius) {
+      return controller.inputDecoratorBorderRadiusAdaptive != null
+          ? controller.inputDecoratorBorderRadiusAdaptive!.toStringAsFixed(0)
+          : '4 dp';
+    }
+    final bool useAdaptiveRadius =
+        controller.adaptiveResponseRadius != AdaptiveResponse.off &&
+            controller.adaptiveResponseRadius != null &&
+            controller.inputDecoratorBorderRadius == null;
+    if (useAdaptiveRadius) {
+      return controller.defaultRadiusAdaptive != null
+          ? 'global ${controller.defaultRadiusAdaptive!.toStringAsFixed(0)} dp'
+          : '4 dp';
+    }
+    return 'OFF';
   }
 
   @override
@@ -306,37 +350,62 @@ class TextFieldPanel extends StatelessWidget {
             // 1st column light and dark
             Expanded(
               child: ListTile(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: enableControl,
-                  title: const Text('Border'),
-                  subtitle: controller.inputDecoratorBorderType ==
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                title: const Text('Border'),
+                subtitle: controller.inputDecoratorBorderType ==
+                        FlexInputBorderType.outline
+                    ? const Text('Outlined')
+                    : const Text('Underlined'),
+                onTap: () {
+                  if (controller.inputDecoratorBorderType ==
+                      FlexInputBorderType.outline) {
+                    controller.setInputDecoratorBorderType(
+                        FlexInputBorderType.underline);
+                  } else {
+                    controller.setInputDecoratorBorderType(
+                        FlexInputBorderType.outline);
+                  }
+                },
+                trailing: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  child: controller.inputDecoratorBorderType ==
                           FlexInputBorderType.outline
-                      ? const Text('Outlined')
-                      : const Text('Underlined'),
-                  onTap: () {
-                    if (controller.inputDecoratorBorderType ==
-                        FlexInputBorderType.outline) {
-                      controller.setInputDecoratorBorderType(
-                          FlexInputBorderType.underline);
-                    } else {
-                      controller.setInputDecoratorBorderType(
-                          FlexInputBorderType.outline);
-                    }
-                  },
-                  trailing: Padding(
-                    padding: const EdgeInsetsDirectional.only(end: 12),
-                    child: controller.inputDecoratorBorderType ==
-                            FlexInputBorderType.outline
-                        ? const Icon(Icons.border_outer_outlined, size: 36)
-                        : const Icon(Icons.border_bottom_outlined, size: 36),
-                  )),
+                      ? const Icon(Icons.border_outer_outlined, size: 36)
+                      : const Icon(Icons.border_bottom_outlined, size: 36),
+                ),
+              ),
             ),
             // 2nd colum light and dark
             Expanded(
-              child: SliderListTileReveal(
+              child: EnumPopupMenu<AdaptiveResponse>(
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl,
-                title: const Text('Radius'),
+                values: AdaptiveResponse.values,
+                title: const Text('Adaptive response'),
+                subtitleReveal: Text(
+                  'Use an alternative InputDecorator border radius on '
+                  'selected platforms.\n'
+                  '\n'
+                  // ignore: lines_longer_than_80_chars
+                  '${controller.adaptiveResponseInputDecoratorRadius?.describe ?? AdaptiveResponse.off.describe}',
+                ),
+                defaultLabel: _adaptiveDecoratorModeLabel(controller),
+                value: controller.adaptiveResponseInputDecoratorRadius,
+                onChanged: controller.setAdaptiveResponseInputDecoratorRadius,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // 1st column light and dark
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                enabled: enableControl,
+                title: const Text('Border radius'),
                 value: controller.inputDecoratorBorderRadius,
                 onChanged: controller.setInputDecoratorBorderRadius,
                 min: 0,
@@ -349,8 +418,31 @@ class TextFieldPanel extends StatelessWidget {
                 valueDefaultDisabledLabel: '4 dp',
               ),
             ),
+            // 2nd colum light and dark adaptive radius
+            Expanded(
+              child: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                enabled: enableControl &&
+                    controller.adaptiveResponseInputDecoratorRadius !=
+                        AdaptiveResponse.off &&
+                    controller.adaptiveResponseInputDecoratorRadius != null,
+                title: const Text('Adaptive radius'),
+                value: controller.inputDecoratorBorderRadiusAdaptive,
+                onChanged: controller.setInputDecoratorBorderRadiusAdaptive,
+                min: 0,
+                max: 40,
+                divisions: 40,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: _adaptiveDecoratorRadiusLabel(controller),
+                valueDefaultDisabledLabel: '4 dp',
+              ),
+            ),
           ],
         ),
+        TestAdaptiveResponse(controller),
+        const Divider(),
         //
         // Border color and style
         //

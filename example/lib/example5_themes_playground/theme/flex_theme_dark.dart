@@ -145,9 +145,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             adaptiveAppBarScrollUnderOff: controller
                 .adaptiveAppBarScrollUnderOffDark
                 ?.setting(controller.fakeIsWeb),
-            adaptiveRadius:
-                controller.adaptiveRsponseRadius?.setting(controller.fakeIsWeb),
+            adaptiveRadius: controller.adaptiveResponseRadius
+                ?.setting(controller.fakeIsWeb),
             adaptiveSplash: controller.adaptiveResponseSplash
+                ?.setting(controller.fakeIsWeb),
+            adaptiveDialogRadius: controller.adaptiveResponseDialogRadius
+                ?.setting(controller.fakeIsWeb),
+            adaptiveInputDecoratorRadius: controller
+                .adaptiveResponseInputDecoratorRadius
                 ?.setting(controller.fakeIsWeb),
             //
             splashType: controller.splashType
@@ -242,6 +247,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             //
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,
+            inputDecoratorRadiusAdaptive:
+                controller.inputDecoratorBorderRadiusAdaptive,
             inputDecoratorUnfocusedHasBorder:
                 controller.inputDecoratorUnfocusedHasBorder,
             inputDecoratorBackgroundAlpha:
@@ -342,8 +349,6 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.dialogBackgroundDarkSchemeColor,
             dialogElevation: controller.dialogElevation,
             dialogRadius: controller.dialogBorderRadius,
-            adaptiveDialogRadius: controller.adaptiveResponseDialogRadius
-                ?.setting(controller.fakeIsWeb),
             dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
             datePickerDialogRadius: controller.datePickerDialogBorderRadius,
             timePickerDialogRadius: controller.timePickerDialogBorderRadius,

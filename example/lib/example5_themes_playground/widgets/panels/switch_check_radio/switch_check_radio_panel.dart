@@ -82,8 +82,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
           subtitleReveal:
               const Text('Turn ON to keep the Switch thumb the same '
                   'size when Switch is ON or OFF. Only available in Material-3 '
-                  'mode. When on the Material-3 Switch looks even more like an '
-                  'iOS Switch.\n'),
+                  'mode.\n'),
           value: controller.switchThumbFixedSize &&
               controller.useSubThemes &&
               controller.useFlexColorScheme &&
@@ -102,7 +101,10 @@ class SwitchCheckRadioPanel extends StatelessWidget {
             'An adaptive theme response to make the Material Switch '
             'look as close as possible to a CupertinoSwitch by only using '
             'available theming and to make this theme response platform '
-            'adaptive. '
+            'adaptive. This feature has the advantage over Switch.adaptive '
+            'that it can use another theme color than primary and it can have '
+            'the adaptive response on other than Apple platforms.\n'
+            '\n'
             'In Material-2 mode this setting has no effect and is thus not '
             'available.\n'
             '\n'

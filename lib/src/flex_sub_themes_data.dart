@@ -171,6 +171,8 @@ class FlexSubThemesData with Diagnosticable {
     this.adaptiveElevationShadowsBack,
     this.adaptiveAppBarScrollUnderOff,
     this.adaptiveRadius,
+    this.adaptiveDialogRadius,
+    this.adaptiveInputDecoratorRadius,
     //
     this.adaptiveSplash,
     this.splashType,
@@ -253,6 +255,7 @@ class FlexSubThemesData with Diagnosticable {
     this.sliderTrackHeight,
     //
     this.inputDecoratorRadius,
+    this.inputDecoratorRadiusAdaptive,
     this.inputDecoratorSchemeColor,
     this.inputDecoratorContentPadding,
     this.inputDecoratorIsDense,
@@ -344,7 +347,6 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipOpacity,
     //
     this.useInputDecoratorThemeInDialogs,
-    this.adaptiveDialogRadius,
     this.dialogRadius,
     this.dialogRadiusAdaptive,
     this.dialogElevation,
@@ -796,6 +798,60 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, defaults to [FlexAdaptive.off].
   final FlexAdaptive? adaptiveRadius;
+
+  /// Controls if the [dialogRadiusAdaptive] is used instead of [dialogRadius]
+  /// on configured platforms.
+  ///
+  /// With this feature you can have another configured border radius on
+  /// all dialogs, based on another [ShapeBorder], than the one you have
+  /// defined in [dialogRadius].
+  ///
+  /// If you keep [dialogRadius] undefined and define [dialogRadiusAdaptive],
+  /// you can get the Material-3 default radius on platforms not included in
+  /// your [adaptiveDialogRadius] and use the [dialogRadiusAdaptive] radius on
+  /// all dialogs in the platforms included in the [adaptiveDialogRadius]
+  /// configuration.
+  ///
+  /// For example for iOS you may want to try 13dp as border radius on dialogs,
+  /// which according to some WEB sources is an approximation used in HIG.
+  /// Flutter uses 14dp on its iOS styled [CupertinoAlertDialog], you can try
+  /// that as well.
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example use the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that keeps used [dialogRadius] value on Android and
+  /// Fuchsia platforms, and also when the app is run in a web browser on these
+  /// platforms, but uses the [dialogRadiusAdaptive] value on other platforms,
+  /// like iOS, desktop and their web usage.
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveDialogRadius;
+
+  /// Controls if the [inputDecoratorRadiusAdaptive] is used instead of
+  /// [inputDecoratorRadius] on configured platforms.
+  ///
+  /// With this feature you can have another configured border radius on
+  /// all text fields, based on another [ShapeBorder] ,than the one you have
+  /// defined in [inputDecoratorRadius].
+  ///
+  /// If you keep [inputDecoratorRadius] undefined and define
+  /// [inputDecoratorRadiusAdaptive], you can get the Material-3 default radius
+  /// on platforms not included in your [adaptiveInputDecoratorRadius] and use
+  /// the [inputDecoratorRadiusAdaptive] radius on all dialogs in the platforms
+  /// included in the [adaptiveDialogRadius] configuration.
+  ///
+  /// For example for iOS you may want to try 6 dp as border radius on text
+  /// fields, for a more platform agnostic look.
+  ///
+  /// See class [FlexAdaptive] on how to configure the platform adaptive
+  /// behavior. You may for example use the [FlexAdaptive.iOSAndDesktop]
+  /// for a configuration that keeps used [inputDecoratorRadius] value on
+  /// Android and Fuchsia platforms, and also when the app is run in a web
+  /// browser on these platforms, but uses the [inputDecoratorRadiusAdaptive]
+  /// value on other platforms, like iOS, desktop and their web usage.
+  ///
+  /// If not defined, defaults to [FlexAdaptive.off].
+  final FlexAdaptive? adaptiveInputDecoratorRadius;
 
   /// Controls if the [splashTypeAdaptive] is used instead of [splashType]
   /// on configured platforms.
@@ -1536,12 +1592,27 @@ class FlexSubThemesData with Diagnosticable {
   /// If undefined, defaults to 4 dp via Flutter SDK defaults.
   final double? sliderTrackHeight;
 
-  /// Border radius value for [InputDecoration].
+  /// The border radius value for themed [InputDecoration].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
   /// [kInputDecoratorRadius] = 10dp if [useMaterial3] is false and to
   /// [kInputDecoratorM3Radius] = 4dp if [useMaterial3] is true.
   final double? inputDecoratorRadius;
+
+  /// The [inputDecoratorRadiusAdaptive] has the same definition and usage as
+  /// [inputDecoratorRadius], but is used as decorator radius on platforms
+  /// as configured by [adaptiveInputDecoratorRadius].
+  ///
+  /// If you keep [inputDecoratorRadius] null for M3 default, try setting
+  /// [inputDecoratorRadiusAdaptive] to 6 dp and
+  /// [adaptiveInputDecoratorRadius] to [FlexAdaptive.iOSAndDesktop], for a
+  /// more platform agnostic design on other platforms than Android and Fuchsia.
+  ///
+  /// If not defined, and [defaultRadiusAdaptive], [defaultRadius] and
+  /// [inputDecoratorRadius] are undefined, defaults to
+  /// [kInputDecoratorRadius] = 10dp if [useMaterial3] is false and to
+  /// [kInputDecoratorM3Radius] = 4dp if [useMaterial3] is true.
+  final double? inputDecoratorRadiusAdaptive;
 
   /// Defines which [Theme] based [ColorScheme] color the input decorator
   /// uses as color for the border and for fill color when they are used.
@@ -2333,34 +2404,6 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to false.
   final bool? useInputDecoratorThemeInDialogs;
 
-  /// Controls if the [dialogRadiusAdaptive] is used instead of [dialogRadius]
-  /// on configured platforms.
-  ///
-  /// With this feature you can have another configured border radius on
-  /// all dialogs with based on another [ShapeBorder] than the one you have
-  /// defined in [dialogRadius].
-  ///
-  /// If you keep [dialogRadius] undefined and define [dialogRadiusAdaptive],
-  /// you can get the M3 default radius on platforms not included in
-  /// your [adaptiveDialogRadius] and use the [dialogRadiusAdaptive] radius on
-  /// all dialogs in the platforms included in the [adaptiveDialogRadius]
-  /// configuration.
-  ///
-  /// For example for iOS you may want to try 13dp as border radius on dialogs,
-  /// which according to some WEB sources is an approximation used in HIG.
-  /// Flutter uses 14dp on its iOS styled [CupertinoAlertDialog], you can try
-  /// that as well.
-  ///
-  /// See class [FlexAdaptive] on how to configure the platform adaptive
-  /// behavior. You may for example use the [FlexAdaptive.iOSAndDesktop]
-  /// for a configuration that keeps used [dialogRadius] value on Android and
-  /// Fuchsia platforms, and also when the app is run in a web browser on these
-  /// platforms, but uses the [dialogRadiusAdaptive] value on other platforms,
-  /// like iOS, desktop and their web usage.
-  ///
-  /// If not defined, defaults to [FlexAdaptive.off].
-  final FlexAdaptive? adaptiveDialogRadius;
-
   /// Border radius value for [Dialog].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -2368,19 +2411,19 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/dialogs/specs
   final double? dialogRadius;
 
-  /// The [defaultRadiusAdaptive] has the same definition and usage
+  /// The [dialogRadiusAdaptive] has the same definition and usage
   /// [dialogRadius], but is used as default radius on platforms as configured
-  /// by [adaptiveRadius].
+  /// by [adaptiveDialogRadius].
   ///
-  /// If you keep [defaultRadius] null for M3 default, try setting
-  /// [defaultRadiusAdaptive] to 10 dp and [adaptiveRadius] to
+  /// If you keep [dialogRadius] null for M3 default, try setting
+  /// [dialogRadiusAdaptive] to 12 dp and [adaptiveDialogRadius] to
   /// [FlexAdaptive.iOSAndDesktop], for a more platform agnostic design on
   /// other platforms and Android and Fuchsia.
   ///
   /// Defaults to null, M3 defaults are used per widget.
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kDialogRadius] 28dp, based on M3 Specification
-  /// https://m3.material.io/components/dialogs/specs
+  /// If not defined and [dialogRadius], [defaultRadiusAdaptive] and
+  /// [defaultRadius] are undefined, defaults to [kDialogRadius] 28dp,
+  /// based on M3 specification https://m3.material.io/components/dialogs/specs
   final double? dialogRadiusAdaptive;
 
   /// Elevation of [Dialog].
@@ -3682,6 +3725,8 @@ class FlexSubThemesData with Diagnosticable {
     final FlexAdaptive? adaptiveElevationShadowsBack,
     final FlexAdaptive? adaptiveAppBarScrollUnderOff,
     final FlexAdaptive? adaptiveRadius,
+    final FlexAdaptive? adaptiveDialogRadius,
+    final FlexAdaptive? adaptiveInputDecoratorRadius,
     //
     final FlexAdaptive? adaptiveSplash,
     final FlexSplashType? splashType,
@@ -3764,6 +3809,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? sliderTrackHeight,
     //
     final double? inputDecoratorRadius,
+    final double? inputDecoratorRadiusAdaptive,
     final SchemeColor? inputDecoratorSchemeColor,
     final EdgeInsetsGeometry? inputDecoratorContentPadding,
     final bool? inputDecoratorIsDense,
@@ -3855,7 +3901,6 @@ class FlexSubThemesData with Diagnosticable {
     final double? tooltipOpacity,
     //
     final bool? useInputDecoratorThemeInDialogs,
-    final FlexAdaptive? adaptiveDialogRadius,
     final double? dialogRadius,
     final double? dialogRadiusAdaptive,
     final double? dialogElevation,
@@ -4009,6 +4054,9 @@ class FlexSubThemesData with Diagnosticable {
       adaptiveAppBarScrollUnderOff:
           adaptiveAppBarScrollUnderOff ?? this.adaptiveAppBarScrollUnderOff,
       adaptiveRadius: adaptiveRadius ?? this.adaptiveRadius,
+      adaptiveDialogRadius: adaptiveDialogRadius ?? this.adaptiveDialogRadius,
+      adaptiveInputDecoratorRadius:
+          adaptiveInputDecoratorRadius ?? this.adaptiveInputDecoratorRadius,
       //
       adaptiveSplash: adaptiveSplash ?? this.adaptiveSplash,
       splashType: splashType ?? this.splashType,
@@ -4136,6 +4184,8 @@ class FlexSubThemesData with Diagnosticable {
       sliderTrackHeight: sliderTrackHeight ?? this.sliderTrackHeight,
       //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
+      inputDecoratorRadiusAdaptive:
+          inputDecoratorRadiusAdaptive ?? this.inputDecoratorRadiusAdaptive,
       inputDecoratorSchemeColor:
           inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
       inputDecoratorContentPadding:
@@ -4276,7 +4326,6 @@ class FlexSubThemesData with Diagnosticable {
       //
       useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ??
           this.useInputDecoratorThemeInDialogs,
-      adaptiveDialogRadius: adaptiveDialogRadius ?? this.adaptiveDialogRadius,
       dialogRadius: dialogRadius ?? this.dialogRadius,
       dialogRadiusAdaptive: dialogRadiusAdaptive ?? this.dialogRadiusAdaptive,
       dialogElevation: dialogElevation ?? this.dialogElevation,
@@ -4537,6 +4586,8 @@ class FlexSubThemesData with Diagnosticable {
         other.adaptiveElevationShadowsBack == adaptiveElevationShadowsBack &&
         other.adaptiveAppBarScrollUnderOff == adaptiveAppBarScrollUnderOff &&
         other.adaptiveRadius == adaptiveRadius &&
+        other.adaptiveDialogRadius == adaptiveDialogRadius &&
+        other.adaptiveInputDecoratorRadius == adaptiveInputDecoratorRadius &&
         //
         other.adaptiveSplash == adaptiveSplash &&
         other.splashType == splashType &&
@@ -4628,6 +4679,7 @@ class FlexSubThemesData with Diagnosticable {
         other.sliderTrackHeight == sliderTrackHeight &&
         //
         other.inputDecoratorRadius == inputDecoratorRadius &&
+        other.inputDecoratorRadiusAdaptive == inputDecoratorRadiusAdaptive &&
         other.inputDecoratorSchemeColor == inputDecoratorSchemeColor &&
         other.inputDecoratorContentPadding == inputDecoratorContentPadding &&
         other.inputDecoratorIsDense == inputDecoratorIsDense &&
@@ -4733,7 +4785,6 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.useInputDecoratorThemeInDialogs ==
             useInputDecoratorThemeInDialogs &&
-        other.adaptiveDialogRadius == adaptiveDialogRadius &&
         other.dialogRadius == dialogRadius &&
         other.dialogRadiusAdaptive == dialogRadiusAdaptive &&
         other.dialogElevation == dialogElevation &&
@@ -4917,6 +4968,8 @@ class FlexSubThemesData with Diagnosticable {
         adaptiveElevationShadowsBack,
         adaptiveAppBarScrollUnderOff,
         adaptiveRadius,
+        adaptiveDialogRadius,
+        adaptiveInputDecoratorRadius,
         //
         adaptiveSplash,
         splashType,
@@ -4998,6 +5051,7 @@ class FlexSubThemesData with Diagnosticable {
         sliderTrackHeight,
         //
         inputDecoratorRadius,
+        inputDecoratorRadiusAdaptive,
         inputDecoratorSchemeColor,
         inputDecoratorContentPadding,
         inputDecoratorIsDense,
@@ -5089,7 +5143,6 @@ class FlexSubThemesData with Diagnosticable {
         tooltipOpacity,
         //
         useInputDecoratorThemeInDialogs,
-        adaptiveDialogRadius,
         dialogRadius,
         dialogRadiusAdaptive,
         dialogElevation,
@@ -5236,9 +5289,13 @@ class FlexSubThemesData with Diagnosticable {
         'adaptiveAppBarScrollUnderOff', adaptiveAppBarScrollUnderOff));
     properties.add(
         DiagnosticsProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
+        'adaptiveDialogRadius', adaptiveDialogRadius));
+    properties.add(DiagnosticsProperty<FlexAdaptive>(
+        'adaptiveInputDecoratorRadius', adaptiveInputDecoratorRadius));
+    //
     properties.add(
         DiagnosticsProperty<FlexAdaptive>('adaptiveSplash', adaptiveSplash));
-    //
     properties.add(EnumProperty<FlexSplashType>('splashType', splashType));
     properties.add(
         EnumProperty<FlexSplashType>('splashTypeAdaptive', splashTypeAdaptive));
@@ -5382,6 +5439,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(DiagnosticsProperty<double>(
         'inputDecoratorRadius', inputDecoratorRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'inputDecoratorRadiusAdaptive', inputDecoratorRadiusAdaptive));
     properties.add(EnumProperty<SchemeColor>(
         'inputDecoratorSchemeColor', inputDecoratorSchemeColor));
     properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
@@ -5543,8 +5602,6 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(DiagnosticsProperty<bool>(
         'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'adaptiveDialogRadius', adaptiveDialogRadius));
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
     properties.add(DiagnosticsProperty<double>(
         'dialogRadiusAdaptive', dialogRadiusAdaptive));

@@ -321,14 +321,14 @@ String generateThemeDartCode(ThemeController controller) {
   final String defaultRadius = controller.defaultRadius != null
       ? '    defaultRadius: ${controller.defaultRadius!.toStringAsFixed(1)},\n'
       : '';
-  final String adaptiveRadius = controller.adaptiveRsponseRadius != null &&
-          controller.adaptiveRsponseRadius != AdaptiveResponse.off
-      ? '    adaptiveRadius: ${controller.adaptiveRsponseRadius!.code},\n'
+  final String adaptiveRadius = controller.adaptiveResponseRadius != null &&
+          controller.adaptiveResponseRadius != AdaptiveResponse.off
+      ? '    adaptiveRadius: ${controller.adaptiveResponseRadius!.code},\n'
       : '';
   final String defaultRadiusAdaptive = controller.defaultRadiusAdaptive !=
               null &&
-          controller.adaptiveRsponseRadius != null &&
-          controller.adaptiveRsponseRadius != AdaptiveResponse.off
+          controller.adaptiveResponseRadius != null &&
+          controller.adaptiveResponseRadius != AdaptiveResponse.off
       ? '    defaultRadiusAdaptive: ${controller.defaultRadiusAdaptive!.toStringAsFixed(1)},\n'
       : '';
   // Shape border widths
@@ -616,10 +616,21 @@ String generateThemeDartCode(ThemeController controller) {
           FlexInputBorderType.outline
       ? '    inputDecoratorBorderType: ${controller.inputDecoratorBorderType},\n'
       : '';
-  final String inputDecoratorBorderRadius = controller
-              .inputDecoratorBorderRadius !=
+  final String adaptiveInputDecoratorRadius = controller
+                  .adaptiveResponseInputDecoratorRadius !=
+              null &&
+          controller.adaptiveResponseInputDecoratorRadius !=
+              AdaptiveResponse.off
+      ? '    adaptiveInputDecoratorRadius: ${controller.adaptiveResponseInputDecoratorRadius!.code},\n'
+      : '';
+  final String inputDecoratorRadius = controller.inputDecoratorBorderRadius !=
           null
       ? '    inputDecoratorRadius: ${controller.inputDecoratorBorderRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String inputDecoratorRadiusAdaptive = controller
+              .inputDecoratorBorderRadiusAdaptive !=
+          null
+      ? '    inputDecoratorRadiusAdaptive: ${controller.inputDecoratorBorderRadiusAdaptive!.toStringAsFixed(1)},\n'
       : '';
   final String inputDecoratorUnfocusedHasBorder = controller
           .inputDecoratorUnfocusedHasBorder
@@ -901,7 +912,7 @@ String generateThemeDartCode(ThemeController controller) {
           .useInputDecoratorThemeInDialogs
       ? '    useInputDecoratorThemeInDialogs: ${controller.useInputDecoratorThemeInDialogs},\n'
       : '';
-  final String dialogBorderRadius = controller.dialogBorderRadius != null
+  final String dialogRadius = controller.dialogBorderRadius != null
       ? '    dialogRadius: ${controller.dialogBorderRadius!.toStringAsFixed(1)},\n'
       : '';
   final String adaptiveDialogRadius = controller.adaptiveResponseDialogRadius !=
@@ -1497,9 +1508,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$adaptiveRemoveElevationTintLight'
           '$adaptiveElevationShadowsBackLight'
           '$adaptiveAppBarScrollUnderOffLight'
+          '$adaptiveRadius'
+          '$adaptiveDialogRadius'
+          '$adaptiveInputDecoratorRadius'
           //
           '$defaultRadius'
-          '$adaptiveRadius'
           '$defaultRadiusAdaptive'
           //
           '$textButtonBorderRadius'
@@ -1556,7 +1569,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBackgroundAlphaLight'
           '$inputDecoratorBorderSchemeColorLight'
           '$inputDecoratorBorderType'
-          '$inputDecoratorBorderRadius'
+          '$inputDecoratorRadius'
+          '$inputDecoratorRadiusAdaptive'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           '$inputDecoratorBorderWidth'
@@ -1613,8 +1627,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$dialogBackgroundLightSchemeColor'
           '$dialogElevation'
-          '$dialogBorderRadius'
-          '$adaptiveDialogRadius'
+          '$dialogRadius'
           '$dialogRadiusAdaptive'
           '$useInputDecoratorThemeInDialogs'
           //
@@ -1763,9 +1776,11 @@ String generateThemeDartCode(ThemeController controller) {
           '$adaptiveRemoveElevationTintDark'
           '$adaptiveElevationShadowsBackDark'
           '$adaptiveAppBarScrollUnderOffDark'
+          '$adaptiveRadius'
+          '$adaptiveDialogRadius'
+          '$adaptiveInputDecoratorRadius'
           //
           '$defaultRadius'
-          '$adaptiveRadius'
           '$defaultRadiusAdaptive'
           //
           '$thinBorderWidth'
@@ -1825,7 +1840,8 @@ String generateThemeDartCode(ThemeController controller) {
           '$inputDecoratorBackgroundAlphaDark'
           '$inputDecoratorBorderSchemeColorDark'
           '$inputDecoratorBorderType'
-          '$inputDecoratorBorderRadius'
+          '$inputDecoratorRadius'
+          '$inputDecoratorRadiusAdaptive'
           '$inputDecoratorUnfocusedHasBorder'
           '$inputDecoratorUnfocusedBorderIsColored'
           '$inputDecoratorBorderWidth'
@@ -1882,8 +1898,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$dialogBackgroundDarkSchemeColor'
           '$dialogElevation'
-          '$dialogBorderRadius'
-          '$adaptiveDialogRadius'
+          '$dialogRadius'
           '$dialogRadiusAdaptive'
           '$useInputDecoratorThemeInDialogs'
           //

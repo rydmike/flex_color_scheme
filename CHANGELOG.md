@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Oct 3, 2024**
+**Oct 4, 2024**
 
 ### SUMMARY
 
@@ -70,9 +70,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
   
 **TODOs**
-
-- NEXT TODO: InputDecorator:
-  - Platform adaptive radius.
 
 - TODO: NavigationBar: Playground: Selected Icon color default should depend on indicator color. See NavigationRail implementation.
 
@@ -249,10 +246,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`. Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its color.
+
+
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
-
-
 - Added `contentPadding` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorContentPadding` property to `FlexSubThemesData` and made `FlexSubThemes.inputDecoratorTheme` use it.
+- Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemes.inputDecorationTheme`. Added `toggleButtonsSelectedForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.segmentedButtonTheme` use it.
+- Added `adaptiveInputDecoratorRadius` and `inputDecoratorRadiusAdaptive` properties to `FlexSubThemesData`. They are used to select platform(s) to an alternative border radius response for the input decorator, for the selected platform(s).
 
 
 - Added `minWidth` and `minExtendedWidth` to `FlexSubThemes.navigationRailTheme`. Added `navigationRailMinWidth` and `navigationRailMinExtendedWidth` properties to `FlexSubThemesData` and made `FlexSubThemes.navigationRailTheme` use them.
@@ -263,8 +262,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Added `foregroundSchemeColor` property to `FlexSubThemes.floatingActionButtonTheme`. Added `fabForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.floatingActionButtonTheme` use it for its foreground color.
  
-
-- Added `inputDecoratorSuffixIconSchemeColor` property to `FlexSubThemes.inputDecorationTheme`. Added `toggleButtonsSelectedForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.segmentedButtonTheme` use it.
 
 - Added `selectedForegroundSchemeColor` property to `FlexSubThemes.segmentedButtonTheme`.
 - Added `segmentedButtonSelectedForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.segmentedButtonTheme` use it.
@@ -374,10 +371,11 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added divider color selection to **Dialogs** settings panel for the DatePicker divider color. Setting it to transparent will hide the divider in Material-3 mode, in Material-2 mode the Divider does not exist.
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
-- To **TextField** settings panel, added the ability to change the changed the focused suffix icon color.
+
+- To **TextField** settings panel, added the ability to change the focused suffix icon color. The **TextField** also got controls for dense input decorator and custom content padding, as well as for using a platform adaptive border radius.
+
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
 - To the **AppBar** settings panel, title foreground color, leading icon and actions icon color settings were added.
-- The **TextField** settings panel, got controls and code gen for dense input decorator and custom content padding.
 - The **Chip** settings now include separate color for the `ChoiceChip (called Suggestion Chip in M3 design). The feature that blends the selected main overall Chip color was made optional. It is a useful feature due to the limited independent theme control over the Chips.  
 - The **Chip** settings panel now includes font size and padding controls.
 - The **ListTile** settings panel now includes a large number of theming controls for ListTile theming.
@@ -416,7 +414,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Improved presentation of `Switch`, `Checkbox` and `Radio`, by using more orderly columns and spacing and explanation labels, similar style as on `Chip` and `IconButton`.  
 
 
-- The Playground default for the **TextField** settings panel is still using "Outline" and filled as default, not "Underline" and filled style like Flutter SDK does. The FCS API defaults to underline, only the Playground comes with a slightly opinionated nicer default. Playground **TextField** default along with FCS API was changed to not using color on the unfocused border, like Flutter M3 and M2 default style does. Making both Playground and FCS API less opinionated in its default values in this case. 
+- The Playground default for the **TextField** settings panel is still using "Outline" and filled as default, not "Underline" and filled style like Flutter SDK does. The FCS API defaults to underline, only the Playground comes with a slightly opinionated nicer default. Playground **TextField** default, along with FCS API was changed to not using color on the unfocused border, like Flutter M3 and M2 default style does. Making both Playground and FCS API less opinionated in its default values in this case. 
 
 - In **General Settings**, the Playground by default turns **ON** the settings "Use Material-2 style Divider in Material-2", "Tinted disabled components" and "Tinted interaction". Corresponding to `FlexSubThemesData` for `useM2StyleDividerInM3`, `interactionEffects` and `tintedDisabledControls` being set to `true`. Their FCS API defaults are however `false`, to keep the API itself less opinionated. Before FCS v8, these API defaults were `true` as stated in breaking changes. The Playground thus keeps this past, already in API opinionated defaults, as its pre-configured defaults, but the defaults for the FCS API itself, in Material-3 mode, are much less opinionated now.
 

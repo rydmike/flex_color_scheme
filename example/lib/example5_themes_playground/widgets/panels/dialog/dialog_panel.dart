@@ -79,11 +79,11 @@ class DialogPanel extends StatelessWidget {
   static String? _adaptiveDialogModeLabel(ThemeController controller) {
     if (!controller.useSubThemes && !controller.useFlexColorScheme) return null;
     final bool useAdaptiveRadius =
-        controller.adaptiveRsponseRadius != AdaptiveResponse.off &&
-            controller.adaptiveRsponseRadius != null &&
+        controller.adaptiveResponseRadius != AdaptiveResponse.off &&
+            controller.adaptiveResponseRadius != null &&
             controller.dialogBorderRadius == null;
     if (useAdaptiveRadius) {
-      return 'Global (${controller.adaptiveRsponseRadius?.label ?? ''} dp)';
+      return 'Global (${controller.adaptiveResponseRadius?.label ?? ''})';
     }
     return null;
   }
@@ -104,8 +104,8 @@ class DialogPanel extends StatelessWidget {
           : (controller.useMaterial3 ? '28 dp' : '4 dp');
     }
     final bool useAdaptiveRadius =
-        controller.adaptiveRsponseRadius != AdaptiveResponse.off &&
-            controller.adaptiveRsponseRadius != null &&
+        controller.adaptiveResponseRadius != AdaptiveResponse.off &&
+            controller.adaptiveResponseRadius != null &&
             controller.dialogBorderRadius == null;
     if (useAdaptiveRadius) {
       return controller.defaultRadiusAdaptive != null
@@ -127,7 +127,7 @@ class DialogPanel extends StatelessWidget {
 
     // Use defaultRadiusAdaptive instead of defaultRadius?
     final FlexAdaptive adaptiveRadius =
-        controller.adaptiveRsponseRadius?.setting(controller.fakeIsWeb) ??
+        controller.adaptiveResponseRadius?.setting(controller.fakeIsWeb) ??
             const FlexAdaptive.off();
     // Get the correct platform default radius.
     final double? platformRadius = adaptiveRadius.adapt(controller.platform)
@@ -349,9 +349,9 @@ class DialogPanel extends StatelessWidget {
           ],
         ),
         EnumPopupMenu<AdaptiveResponse>(
-          enabled: enableControl && controller.useMaterial3,
+          enabled: enableControl,
           values: AdaptiveResponse.values,
-          title: const Text('Use adaptive radius'),
+          title: const Text('Adaptive response'),
           subtitleReveal: Text(
             'Use an alternative dialog border radius on '
             'selected platforms.\n'

@@ -533,24 +533,7 @@ class AppBarPanel extends StatelessWidget {
               ),
             ],
           ),
-
         const Divider(),
-        const ListTileReveal(
-          title: Text('Platform adaptive settings'),
-          // subtitleDense: true,
-          subtitleReveal: Text(
-              'With platform adaptive settings you can modify theme '
-              'properties to have a different response on selected platforms. '
-              'You can select which platforms the platform adaptive value '
-              'should be used on. While all other platforms not included '
-              'in this choice, will continue to use the none adaptive '
-              'value or default behavior.\n'
-              '\n'
-              'Using the API you can customize which platform an adaptive '
-              'feature is used on, including separate definitions when using '
-              'the app in a web build on each platform. The selections here '
-              'use built-in combinations, they cover most use cases.'),
-        ),
         if (isLight)
           EnumPopupMenu<AdaptiveResponse>(
             enabled: enableControl && controller.useMaterial3,
@@ -558,7 +541,7 @@ class AppBarPanel extends StatelessWidget {
             title: const Text('Scroll under elevation tint removal'),
             subtitleReveal: Text(
               'Remove the AppBar scroll under tint '
-              'elevation effect in Material-3 light mode on selected '
+              'elevation effect in Material-3 LIGHT mode on selected '
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
               // ignore: lines_longer_than_80_chars
@@ -574,7 +557,7 @@ class AppBarPanel extends StatelessWidget {
             title: const Text('Scroll under elevation tint removal'),
             subtitleReveal: Text(
               'Remove the AppBar scroll under tint '
-              'elevation effect in Material-3 dark mode on selected '
+              'elevation effect in Material-3 DARK mode on selected '
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
               // ignore: lines_longer_than_80_chars

@@ -654,6 +654,23 @@ sealed class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultInputDecoratorBorderRadius = null;
 
+  // Key used to read and save the inputDecoratorBorderRadiusAdaptive value.
+  static const String keyInputDecoratorBorderRadiusAdaptive =
+      'inputDecoratorBorderRadiusAdaptive';
+  // Default value for the inputDecoratorBorderRadiusAdaptive,
+  // also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultInputDecoratorBorderRadiusAdaptive = null;
+
+  // Key used to read and save the adaptiveResponseInputDecoratorRadius value.
+  static const String keyAdaptiveResponseInputDecoratorRadius =
+      'adaptiveResponseInputDecoratorRadius';
+  // Default value for the adaptiveResponseInputDecoratorRadius, also to
+  // reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveResponse? defaultAdaptiveResponseInputDecoratorRadius =
+      null;
+
   // Key used to read and save the inputDecoratorUnfocusedHasBorder value.
   static const String keyInputDecoratorUnfocusedHasBorder =
       'inputDecoratorUnfocusedHasBorder';
@@ -2130,12 +2147,6 @@ sealed class Store {
   // used to reset settings.
   static const bool defaultUseInputDecoratorThemeInDialogs = false;
 
-  // Key used to read and save the adaptiveDialogRadius value.
-  static const String keyAdaptiveDialogRadius = 'adaptiveDialogRadius';
-  // Default value for the adaptiveDialogRadius, also to reset settings.
-  // We use NULL as default, on nullable settings.
-  static const AdaptiveResponse? defaultAdaptiveDialogRadius = null;
-
   // Key used to read and save the dialogBorderRadius value.
   static const String keyDialogBorderRadius = 'dialogBorderRadius';
   // Default value for the dialogBorderRadius, also used to reset settings.
@@ -2148,6 +2159,13 @@ sealed class Store {
   // Default value for the dialogBorderRadiusAdaptive, also to reset settings.
   // We use NULL as default, on nullable settings.
   static const double? defaultDialogBorderRadiusAdaptive = null;
+
+  // Key used to read and save the adaptiveResponseDialogRadius value.
+  static const String keyAdaptiveResponseDialogRadius =
+      'adaptiveResponseDialogRadius';
+  // Default value for the adaptiveResponseDialogRadius, also to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const AdaptiveResponse? defaultAdaptiveResponseDialogRadius = null;
 
   // Key used to read and save the timePickerDialogBorderRadius value.
   static const String keyTimePickerDialogBorderRadius =
