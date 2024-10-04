@@ -188,8 +188,11 @@ class ShapeRadiusPanel extends StatelessWidget {
               child: SliderListTileReveal(
                 enabled: enableControl,
                 contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Default radius'),
+                title: const Text('Global radius'),
                 subtitleReveal: const Text(
+                  'The global default radius used by most components with a '
+                  'shape.\n'
+                  '\n'
                   'By default, the border radius on all Material '
                   'UI components in FCS follow the Material-3 design guide in '
                   'M3 mode. The defaults used by FCS for Material-2 mode, are '
@@ -231,8 +234,8 @@ class ShapeRadiusPanel extends StatelessWidget {
               child: SliderListTileReveal(
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 enabled: enableControl &&
-                    controller.adaptiveRsponseRadius != AdaptiveResponse.off &&
-                    controller.adaptiveRsponseRadius != null,
+                    controller.adaptiveResponseRadius != AdaptiveResponse.off &&
+                    controller.adaptiveResponseRadius != null,
                 title: const Text('Adaptive radius'),
                 subtitleReveal: const Text(
                   'You can define a separate global border radius '
@@ -262,12 +265,12 @@ class ShapeRadiusPanel extends StatelessWidget {
         EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl,
           values: AdaptiveResponse.values,
-          title: const Text('Use adaptive radius'),
+          title: const Text('Adaptive response'),
           subtitleReveal: Text(
-            controller.adaptiveRsponseRadius?.describe ??
+            controller.adaptiveResponseRadius?.describe ??
                 AdaptiveResponse.off.describe,
           ),
-          value: controller.adaptiveRsponseRadius,
+          value: controller.adaptiveResponseRadius,
           onChanged: controller.setAdaptiveResponseRadius,
         ),
         TestAdaptiveResponse(controller),

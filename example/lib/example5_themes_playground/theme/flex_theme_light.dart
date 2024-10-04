@@ -179,9 +179,14 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             adaptiveAppBarScrollUnderOff: controller
                 .adaptiveAppBarScrollUnderOffLight
                 ?.setting(controller.fakeIsWeb),
-            adaptiveRadius:
-                controller.adaptiveRsponseRadius?.setting(controller.fakeIsWeb),
+            adaptiveRadius: controller.adaptiveResponseRadius
+                ?.setting(controller.fakeIsWeb),
             adaptiveSplash: controller.adaptiveResponseSplash
+                ?.setting(controller.fakeIsWeb),
+            adaptiveDialogRadius: controller.adaptiveResponseDialogRadius
+                ?.setting(controller.fakeIsWeb),
+            adaptiveInputDecoratorRadius: controller
+                .adaptiveResponseInputDecoratorRadius
                 ?.setting(controller.fakeIsWeb),
             //
             splashType: controller.splashType
@@ -292,6 +297,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Underline or outline border type?
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,
+            inputDecoratorRadiusAdaptive:
+                controller.inputDecoratorBorderRadiusAdaptive,
             // Only want a border when the text input has focus
             // or error, then set this to false. By default it always
             // has a border of selected style, but thinner.
@@ -400,8 +407,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.dialogBackgroundLightSchemeColor,
             dialogElevation: controller.dialogElevation,
             dialogRadius: controller.dialogBorderRadius,
-            adaptiveDialogRadius: controller.adaptiveResponseDialogRadius
-                ?.setting(controller.fakeIsWeb),
             dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
             datePickerDialogRadius: controller.datePickerDialogBorderRadius,
             timePickerDialogRadius: controller.timePickerDialogBorderRadius,

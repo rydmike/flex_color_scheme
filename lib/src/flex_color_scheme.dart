@@ -7039,6 +7039,21 @@ class FlexColorScheme with Diagnosticable {
     // Use tinted disabled color?
     final bool tintedDisabled = useSubThemes && subTheme.tintedDisabledControls;
 
+    // Default decorator radius.
+    final double defaultDecoratorRadius =
+        useMaterial3 ? kInputDecoratorM3Radius : kInputDecoratorRadius;
+    // Use adaptive dialog radius?
+    final FlexAdaptive adaptiveInputDecoratorRadius =
+        subTheme.adaptiveInputDecoratorRadius ?? const FlexAdaptive.off();
+    // Get the effective used adaptive dialog default radius.
+    final double? platformInputDecoratorRadius = adaptiveInputDecoratorRadius ==
+                const FlexAdaptive.off() &&
+            subTheme.inputDecoratorRadius == null
+        ? null
+        : adaptiveInputDecoratorRadius.adapt(effectivePlatform)
+            ? subTheme.inputDecoratorRadiusAdaptive ?? defaultDecoratorRadius
+            : subTheme.inputDecoratorRadius ?? defaultDecoratorRadius;
+
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre FCS v4 variant as before. This decoration
     // theme is also passed into the TimePickerTheme, and DropdownMenu so we
@@ -7049,7 +7064,7 @@ class FlexColorScheme with Diagnosticable {
             colorScheme: colorScheme,
             baseSchemeColor: subTheme.inputDecoratorSchemeColor,
             borderSchemeColor: subTheme.inputDecoratorBorderSchemeColor,
-            radius: subTheme.inputDecoratorRadius ?? platformRadius,
+            radius: platformInputDecoratorRadius ?? platformRadius,
             borderType: subTheme.inputDecoratorBorderType,
             contentPadding: subTheme.inputDecoratorContentPadding,
             isDense: subTheme.inputDecoratorIsDense,

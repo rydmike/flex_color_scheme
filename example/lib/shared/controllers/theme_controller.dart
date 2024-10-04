@@ -307,6 +307,12 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorBorderRadius = await _themeService.load(
         Store.keyInputDecoratorBorderRadius,
         Store.defaultInputDecoratorBorderRadius);
+    _inputDecoratorBorderRadiusAdaptive = await _themeService.load(
+        Store.keyInputDecoratorBorderRadiusAdaptive,
+        Store.defaultInputDecoratorBorderRadius);
+    _adaptiveResponseInputDecoratorRadius = await _themeService.load(
+        Store.keyAdaptiveResponseInputDecoratorRadius,
+        Store.defaultAdaptiveResponseInputDecoratorRadius);
     _inputDecoratorUnfocusedHasBorder = await _themeService.load(
         Store.keyInputDecoratorUnfocusedHasBorder,
         Store.defaultInputDecoratorUnfocusedHasBorder);
@@ -938,7 +944,8 @@ class ThemeController with ChangeNotifier {
         Store.keyUseInputDecoratorThemeInDialogs,
         Store.defaultUseInputDecoratorThemeInDialogs);
     _adaptiveResponseDialogRadius = await _themeService.load(
-        Store.keyAdaptiveDialogRadius, Store.defaultAdaptiveDialogRadius);
+        Store.keyAdaptiveResponseDialogRadius,
+        Store.defaultAdaptiveResponseDialogRadius);
     _dialogBorderRadius = await _themeService.load(
         Store.keyDialogBorderRadius, Store.defaultDialogBorderRadius);
     _dialogBorderRadiusAdaptive = await _themeService.load(
@@ -1496,7 +1503,8 @@ class ThemeController with ChangeNotifier {
     //
     setUseInputDecoratorThemeInDialogs(
         Store.defaultUseInputDecoratorThemeInDialogs, false);
-    setAdaptiveResponseDialogRadius(Store.defaultAdaptiveDialogRadius, false);
+    setAdaptiveResponseDialogRadius(
+        Store.defaultAdaptiveResponseDialogRadius, false);
     setDialogBorderRadius(Store.defaultDialogBorderRadius, false);
     setDialogBorderRadiusAdaptive(
         Store.defaultDialogBorderRadiusAdaptive, false);
@@ -1613,6 +1621,10 @@ class ThemeController with ChangeNotifier {
     setInputDecoratorBorderType(Store.defaultInputDecoratorBorderType, false);
     setInputDecoratorBorderRadius(
         Store.defaultInputDecoratorBorderRadius, false);
+    setInputDecoratorBorderRadiusAdaptive(
+        Store.defaultInputDecoratorBorderRadiusAdaptive, false);
+    setAdaptiveResponseInputDecoratorRadius(
+        Store.defaultAdaptiveResponseInputDecoratorRadius, false);
     setInputDecoratorUnfocusedHasBorder(
         Store.defaultInputDecoratorUnfocusedHasBorder, false);
     setInputDecoratorFocusedHasBorder(
@@ -2529,7 +2541,7 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveResponseRadius;
-  AdaptiveResponse? get adaptiveRsponseRadius => _adaptiveResponseRadius;
+  AdaptiveResponse? get adaptiveResponseRadius => _adaptiveResponseRadius;
   void setAdaptiveResponseRadius(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveResponseRadius) return;
@@ -3510,6 +3522,30 @@ class ThemeController with ChangeNotifier {
     _inputDecoratorBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyInputDecoratorBorderRadius, value));
+  }
+
+  late double? _inputDecoratorBorderRadiusAdaptive;
+  double? get inputDecoratorBorderRadiusAdaptive =>
+      _inputDecoratorBorderRadiusAdaptive;
+  void setInputDecoratorBorderRadiusAdaptive(double? value,
+      [bool notify = true]) {
+    if (value == _inputDecoratorBorderRadiusAdaptive) return;
+    _inputDecoratorBorderRadiusAdaptive = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyInputDecoratorBorderRadiusAdaptive, value));
+  }
+
+  late AdaptiveResponse? _adaptiveResponseInputDecoratorRadius;
+  AdaptiveResponse? get adaptiveResponseInputDecoratorRadius =>
+      _adaptiveResponseInputDecoratorRadius;
+  void setAdaptiveResponseInputDecoratorRadius(AdaptiveResponse? value,
+      [bool notify = true]) {
+    if (value == _adaptiveResponseInputDecoratorRadius) return;
+    _adaptiveResponseInputDecoratorRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyAdaptiveResponseInputDecoratorRadius, value));
   }
 
   late bool _inputDecoratorUnfocusedHasBorder;
@@ -5825,7 +5861,7 @@ class ThemeController with ChangeNotifier {
     if (value == _adaptiveResponseDialogRadius) return;
     _adaptiveResponseDialogRadius = value;
     if (notify) notifyListeners();
-    unawaited(_themeService.save(Store.keyAdaptiveDialogRadius, value));
+    unawaited(_themeService.save(Store.keyAdaptiveResponseDialogRadius, value));
   }
 
   late double? _dialogBorderRadius;

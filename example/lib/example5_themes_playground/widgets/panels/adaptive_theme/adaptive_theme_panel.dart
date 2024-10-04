@@ -27,6 +27,22 @@ class AdaptiveThemePanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
+        const ListTileReveal(
+          title: Text('Platform adaptive response'),
+          subtitleReveal: Text(
+              'With platform adaptive settings you can modify theme '
+              'properties to have a different response on selected platforms.\n'
+              '\n'
+              'You select which platforms the platform adaptive '
+              'value should be used on. All other platforms not included '
+              'in this choice, will continue to use the none adaptive '
+              'value or default behavior.\n'
+              '\n'
+              'With the API you can customize which platform an adaptive '
+              'response is used on, including separate definitions when using '
+              'the app in a web build on each platform. The selections here '
+              'use built-in combinations, they cover typical use cases.'),
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -81,21 +97,6 @@ class AdaptiveThemePanel extends StatelessWidget {
           ],
         ),
         const Divider(),
-        const ListTileReveal(
-          title: Text('Platform adaptive behavior'),
-          subtitleReveal: Text(
-              'With platform adaptive settings you can modify theme '
-              'properties to have a different response on selected platforms. '
-              'Typically you can select which platforms the platform adaptive '
-              'value should be used on. All other platforms not included '
-              'in this choice, will continue to use the none adaptive '
-              'value or default behavior.\n'
-              '\n'
-              'Using the API you can customize which platform an adaptive '
-              'feature is used on, including separate definitions when using '
-              'the app in a web build on each platform. The selections here '
-              'use built-in combinations, they cover most use cases.'),
-        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -143,7 +144,7 @@ class AdaptiveThemePanel extends StatelessWidget {
         EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl,
           values: AdaptiveResponse.values,
-          title: const Text('Use adaptive splash'),
+          title: const Text('Adaptive response'),
           subtitleReveal: Text(
             'An adaptive theme response used to select a different ink '
             'splash effect on selected platforms.\n'
