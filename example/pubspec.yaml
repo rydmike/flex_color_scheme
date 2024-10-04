@@ -80,6 +80,11 @@ dependencies:
   url_launcher: ^6.3.0
 
 dev_dependencies:
+  # Flutter launcher icons package, by Mark O'Sullivan.
+  # https://pub.dev/packages/flutter_launcher_icons
+  flutter_launcher_icons: ^0.14.1
+
+  # Flutter test package, by Google flutter.dev.
   flutter_test:
     sdk: flutter
 
