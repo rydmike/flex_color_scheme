@@ -30,8 +30,6 @@ class BottomNavigationBarPanel extends StatelessWidget {
                     controller.bottomNavBarUnselectedSchemeColor == null))
         ? 'secondary'
         : 'primary';
-    final String labelForDefaultUnelectedItem =
-        enableControl ? 'onSurface' : 'ThemeData.unselectedWidgetColor';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,7 +169,16 @@ class BottomNavigationBarPanel extends StatelessWidget {
                 contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Unselected item color'),
                 subtitle: const Text('Label and icon, but separate API'),
-                defaultLabel: labelForDefaultUnelectedItem,
+                defaultLabel: controller.bottomNavBarBackgroundSchemeColor ==
+                        null
+                    ? 'onSurfaceVariant'
+                    : SchemeColor
+                        .values[FlexSubThemes.onSchemeColor(
+                                controller.bottomNavBarBackgroundSchemeColor!,
+                                useOnSurfaceVariant: true)
+                            .index]
+                        .name,
+                defaultDisabledLabel: 'ThemeData.unselectedWidgetColor',
                 value: controller.bottomNavBarUnselectedSchemeColor,
                 onChanged: controller.setBottomNavBarUnselectedSchemeColor,
               ),

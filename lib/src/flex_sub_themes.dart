@@ -886,16 +886,28 @@ sealed class FlexSubThemes {
     /// same value as to selectedLabelSize, you can make them the same size.
     final double? unselectedLabelSize,
 
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to use for
     /// the [BottomNavigationBar]'s selected label text color.
     ///
     /// If undefined, defaults to [SchemeColor.primary].
     final SchemeColor? selectedLabelSchemeColor,
 
-    /// Select which color from the passed in [ColorScheme] to use for
-    /// the [BottomNavigationBar]'s unselected items text color.
+    /// Select which color from the theme's [ColorScheme] to use for
+    /// the [BottomNavigationBar]'s unselected label text color.
     ///
-    /// If undefined, defaults to [ColorScheme.onSurface].
+    /// When undefined, if [backgroundSchemeColor] is
+    /// using any of the surface colors, the default on pair used will be
+    /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+    /// that is the typical contrast color for surface colors.
+    /// This is to make the unselected labels and icons look more muted.
+    ///
+    /// If other [backgroundSchemeColor] colors are used,
+    /// while this value is undefined, their default contrasting onColor will
+    /// be used. If the [backgroundSchemeColor] is also
+    /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
+    ///
+    /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
+    /// [Colors.black54] in light mode and [Colors.white70] in dark.
     final SchemeColor? unselectedLabelSchemeColor,
 
     /// If true, the unselected labels in the [BottomNavigationBar] use a
@@ -916,7 +928,7 @@ sealed class FlexSubThemes {
     /// If undefined, defaults to [selectedIconSize].
     final double? unselectedIconSize,
 
-    /// Select which color from the theme's [ColorScheme] to use as base for
+    /// Select which color from the theme's [ColorScheme] to use for
     /// the [BottomNavigationBar]'s selected item icon color.
     ///
     /// If undefined, defaults to [SchemeColor.primary].
@@ -925,10 +937,16 @@ sealed class FlexSubThemes {
     /// Select which color from the passed in [ColorScheme] to use as base for
     /// the [BottomNavigationBar]'s unselected items icon color.
     ///
-    /// All colors in the color scheme are not good choices, but some work well.
+    /// When undefined, if [backgroundSchemeColor] is
+    /// using any of the surface colors, the default on pair used will be
+    /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+    /// that is the typical contrast color for surface colors.
+    /// This is to make the unselected labels and icons look more muted.
     ///
-    /// Defaults to [SchemeColor.onSurface] and adds an alpha blend and
-    /// opacity, if [bottomNavigationBarMutedUnselectedLabel] is true.
+    /// If other [backgroundSchemeColor] colors are used,
+    /// while this value is undefined, their default contrasting onColor will
+    /// be used. If the [backgroundSchemeColor] is also
+    /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
     ///
     /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
     /// [Colors.black54] in light mode and [Colors.white70] in dark.
@@ -1067,13 +1085,27 @@ sealed class FlexSubThemes {
         'as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
+    // Background color, when using normal default, falls back to surface
+    final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
+            backgroundSchemeColor != SchemeColor.transparent
+        ? schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
+            .withOpacity(opacity ?? 1.0)
+        : schemeColor(
+            backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
+
+    // Use onSurfaceVariant as contrast for all unselected on surface colors !!
+    final Color onVariantBackGroundColorFallback = schemeColorPair(
+        backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme,
+        useOnSurfaceVariant: true);
+
     // Get text color, defaults to primary.
     final Color labelColor = schemeColor(
         selectedLabelSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    // Get unselected label color, defaults to onSurface.
-    final Color unselectedLabelColor = schemeColor(
-        unselectedLabelSchemeColor ?? SchemeColor.onSurface, colorScheme);
+    // Get unselected label color, defaults to onSurfaceVariant.
+    final Color unselectedLabelColor = unselectedLabelSchemeColor == null
+        ? onVariantBackGroundColorFallback
+        : schemeColor(unselectedLabelSchemeColor, colorScheme);
 
     // Get selected text style, defaults to TextStyle(), we can use it since
     // size and color are applied to is separately.
@@ -1090,18 +1122,14 @@ sealed class FlexSubThemes {
     final Color iconColor = schemeColor(
         selectedIconSchemeColor ?? SchemeColor.primary, colorScheme);
 
-    // Get unselected icon color, defaults to onSurface.
-    final Color unselectedIconColor = schemeColor(
-        unselectedIconSchemeColor ?? SchemeColor.onSurface, colorScheme);
+    // Get unselected icon color, defaults to onSurfaceVariant.
+    final Color unselectedIconColor = unselectedIconSchemeColor == null
+        ? onVariantBackGroundColorFallback
+        : schemeColor(unselectedIconSchemeColor, colorScheme);
 
     // Get effective icons sizes.
     final double iconSize = selectedIconSize ?? 24;
     final double effectiveUnselectedIconSize = unselectedIconSize ?? iconSize;
-
-    // Background color, when using normal default, falls back to surface
-    final Color backgroundColor =
-        schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
-            .withOpacity(opacity ?? 1.0);
 
     return BottomNavigationBarThemeData(
       backgroundColor: backgroundColor,
