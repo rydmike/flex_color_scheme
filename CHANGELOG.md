@@ -76,6 +76,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - **STARTED**: Add `SearchBar` theming features. 
 
 
+- **TODO**: Add TextStyles for `SearchView`, `SearchBar` and `DatePickerDialog` themes, that are not in the Playground, but offered in the API.
+
+
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
 
 
