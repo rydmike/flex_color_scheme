@@ -1147,9 +1147,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarUnselectedLabelSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedLabel = controller
-          .bottomNavBarMuteUnselected
-      ? ''
-      : '    bottomNavigationBarMutedUnselectedLabel: ${controller.bottomNavBarMuteUnselected},\n';
+              .bottomNavBarMuteUnselected !=
+          null
+      ? '    bottomNavigationBarMutedUnselectedLabel: ${controller.bottomNavBarMuteUnselected},\n'
+      : '';
   final String bottomNavigationBarSelectedIconSchemeColor = controller
               .bottomNavBarSelectedSchemeColor !=
           null
@@ -1161,9 +1162,10 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    bottomNavigationBarUnselectedIconSchemeColor: ${controller.bottomNavBarUnselectedSchemeColor},\n'
       : '';
   final String bottomNavigationBarMutedUnselectedIcon = controller
-          .bottomNavBarMuteUnselected
-      ? ''
-      : '    bottomNavigationBarMutedUnselectedIcon: ${controller.bottomNavBarMuteUnselected},\n';
+              .bottomNavBarMuteUnselected !=
+          null
+      ? '    bottomNavigationBarMutedUnselectedIcon: ${controller.bottomNavBarMuteUnselected},\n'
+      : '';
   final String bottomNavigationBarBackgroundSchemeColor = controller
               .bottomNavBarBackgroundSchemeColor !=
           null

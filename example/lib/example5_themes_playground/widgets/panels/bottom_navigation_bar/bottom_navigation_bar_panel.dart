@@ -5,9 +5,9 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import 'bottom_bar_mute_unselected_toggle_buttons.dart';
 
 // Panel used to control the sub-theme for BottomNavigationBar.
 class BottomNavigationBarPanel extends StatelessWidget {
@@ -171,7 +171,9 @@ class BottomNavigationBarPanel extends StatelessWidget {
                 subtitle: const Text('Label and icon, but separate API'),
                 defaultLabel: controller.bottomNavBarBackgroundSchemeColor ==
                         null
-                    ? 'onSurfaceVariant'
+                    ? useMaterial3
+                        ? 'onSurfaceVariant'
+                        : 'onSurface'
                     : SchemeColor
                         .values[FlexSubThemes.onSchemeColor(
                                 controller.bottomNavBarBackgroundSchemeColor!,
@@ -184,16 +186,9 @@ class BottomNavigationBarPanel extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SwitchListTileReveal(
-                enabled: enableControl,
+              child: BottomBarMuteUnselectedToggleButtons(
+                controller: controller,
                 contentPadding: ThemeValues.tilePaddingEnd(context),
-                title: const Text('Mute unselected items'),
-                subtitleReveal: const Text(
-                    'Unselected icon and text are less bright. '
-                    'Shared setting for icon and text in the Playground, but '
-                    'separate properties are used by the API.\n'),
-                value: controller.bottomNavBarMuteUnselected,
-                onChanged: controller.setBottomNavBarMuteUnselected,
               ),
             ),
           ],
