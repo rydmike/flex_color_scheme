@@ -129,6 +129,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - The enum `FlexAppBarStyle` value `background` now results in the `AppBar` using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in a typical FCS configuration.
   - The enum `FlexSystemNavBarStyle` value `background` now results in the app bar using the `surfaceContainerLow` color instead of `background`. This breaking change was introduced because of the breaking change in Material-3 in Flutter 3.22 where the color `background` was deprecated. The new color is kind of the best match for the old `background` color in typical FCS configuration. 
 
+- Breaking rename: All helper component themes in `FlexSubThemes` ended with `Theme`, as designed, except `FlexSubThemes.bottomNavigationBar`. This mistake is now corrected, it was renamed to `FlexSubThemes.bottomNavigationBarTheme`. The old version is deprecated and passes its props through to the renamed version. The old and wrong named one will be removed in version 9.0.0. 
 
 - Deprecated the FCS legacy property `useFlutterDefaults`. FlexColorScheme in Material-3 mode now defaults to using Flutter default styles. For other configurations, modify them as desired. In Material-2 mode, FCS continues to use its opinionated own defaults as before, as long as Material-2 exists.
 
