@@ -258,7 +258,7 @@ enum FlexSliderIndicatorType {
 /// * [AppBarTheme] for [AppBar] via [appBarTheme].
 /// * [BottomAppBarTheme] for [BottomAppBar] via [bottomAppBarTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-///   [bottomNavigationBar].
+///   [bottomNavigationBarTheme].
 /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
 /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
 /// * [CardTheme] for [Card] via [cardTheme].
@@ -318,7 +318,7 @@ sealed class FlexSubThemes {
   ///
   /// - [TextField] in [FlexSubThemes.inputDecorationTheme]
   /// - [TabBar] indicator color
-  /// - [BottomNavigationBar] in [FlexSubThemes.bottomNavigationBar]
+  /// - [BottomNavigationBar] in [FlexSubThemes.bottomNavigationBarTheme]
   /// - [NavigationBar] in [FlexSubThemes.navigationBarTheme]
   /// - [ChipThemeData] from [FlexSubThemes.chipTheme].
   /// - [FloatingActionButton] from [FlexSubThemes.floatingActionButtonTheme]
@@ -854,7 +854,7 @@ sealed class FlexSubThemes {
   /// [colorScheme] to style the bottom navigation bar.
   ///
   /// Background [opacity] can be set.
-  static BottomNavigationBarThemeData bottomNavigationBar({
+  static BottomNavigationBarThemeData bottomNavigationBarTheme({
     /// Typically you would pass the same [ColorScheme] that is also used in
     /// your [ThemeData] definition.
     required final ColorScheme colorScheme,

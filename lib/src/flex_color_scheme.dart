@@ -1083,7 +1083,7 @@ class FlexColorScheme with Diagnosticable {
   /// * [BottomAppBarTheme] for [BottomAppBar] via
   ///   [FlexSubThemes.bottomAppBarTheme].
   /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-  ///   [FlexSubThemes.bottomNavigationBar].
+  ///   [FlexSubThemes.bottomNavigationBarTheme].
   /// * [BottomSheetThemeData] for [BottomSheet] via
   ///   [FlexSubThemes.bottomSheetTheme].
   /// * [ButtonThemeData] for old deprecated buttons, via
@@ -7369,7 +7369,7 @@ class FlexColorScheme with Diagnosticable {
       // customize its appearance as done below. The none sub-themes using
       // option further below if the past pre-version 4 default.
       bottomNavigationBarTheme: useSubThemes
-          ? FlexSubThemes.bottomNavigationBar(
+          ? FlexSubThemes.bottomNavigationBarTheme(
               colorScheme: colorScheme,
               labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle ??
                   effectiveTextTheme.bodyMedium,

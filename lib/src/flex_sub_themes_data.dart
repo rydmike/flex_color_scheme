@@ -98,7 +98,7 @@ import 'flex_sub_themes.dart';
 /// * [BottomAppBarTheme] for [BottomAppBar] via
 ///   [FlexSubThemes.bottomAppBarTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-///   [FlexSubThemes.bottomNavigationBar].
+///   [FlexSubThemes.bottomNavigationBarTheme].
 /// * [BottomSheetThemeData] for [BottomSheet] via
 ///   [FlexSubThemes.bottomSheetTheme].
 /// * [ButtonThemeData] for old deprecated buttons, via
