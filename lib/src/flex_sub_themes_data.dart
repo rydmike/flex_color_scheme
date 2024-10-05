@@ -436,12 +436,12 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationBarUnselectedLabelSize,
     this.navigationBarSelectedLabelSchemeColor,
     this.navigationBarUnselectedLabelSchemeColor,
-    this.navigationBarMutedUnselectedLabel = false,
+    this.navigationBarMutedUnselectedLabel,
     this.navigationBarSelectedIconSize,
     this.navigationBarUnselectedIconSize,
     this.navigationBarSelectedIconSchemeColor,
     this.navigationBarUnselectedIconSchemeColor,
-    this.navigationBarMutedUnselectedIcon = false,
+    this.navigationBarMutedUnselectedIcon,
     this.navigationBarIndicatorSchemeColor,
     this.navigationBarIndicatorOpacity,
     this.navigationBarIndicatorRadius,
@@ -457,13 +457,13 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailUnselectedLabelSize,
     this.navigationRailSelectedLabelSchemeColor,
     this.navigationRailUnselectedLabelSchemeColor,
-    this.navigationRailMutedUnselectedLabel = false,
+    this.navigationRailMutedUnselectedLabel,
     this.navigationRailSelectedIconSize,
     this.navigationRailUnselectedIconSize,
     this.navigationRailSelectedIconSchemeColor,
     this.navigationRailUnselectedIconSchemeColor,
-    this.navigationRailMutedUnselectedIcon = false,
-    this.navigationRailUseIndicator = true,
+    this.navigationRailMutedUnselectedIcon,
+    this.navigationRailUseIndicator,
     this.navigationRailIndicatorSchemeColor,
     this.navigationRailIndicatorOpacity,
     this.navigationRailIndicatorRadius,
@@ -3508,11 +3508,10 @@ class FlexSubThemesData with Diagnosticable {
   /// [NavigationRailLabelType.none], or a [StadiumBorder] if [labelType] is
   /// [NavigationRailLabelType.all] or [NavigationRailLabelType.selected].
   ///
-  /// If `undefined`, defaults to [NavigationRailThemeData.useIndicator].
-  /// If that is also undefined, then it defaults to [ThemeData.useMaterial3].
+  /// If undefined, defaults to [ThemeData.useMaterial3]. Indicator is used by
+  /// default in Material-3 but not in Material-2 mode.
   ///
-  /// Defaults to true. Can be set to null and then uses above default
-  /// widget behavior.
+  /// This logic is used by Flutter defaults as well.
   final bool? navigationRailUseIndicator;
 
   /// Select which color from the theme [ColorScheme] to use for

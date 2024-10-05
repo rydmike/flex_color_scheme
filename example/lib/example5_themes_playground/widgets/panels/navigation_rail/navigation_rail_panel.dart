@@ -89,9 +89,10 @@ class NavigationRailPanel extends StatelessWidget {
               child: SwitchListTileReveal(
                 contentPadding: ThemeValues.tilePaddingStart(context),
                 enabled: enableControl,
-                title: const Text('Use selection indicator'),
-                subtitleReveal: const Text('On by default when useMaterial3 '
-                    'is true, turn OFF component themes to see this.\n'),
+                title: const Text('Use indicator'),
+                subtitleReveal: const Text('On by default in Material-3 '
+                    'and off in Material-2. Turn OFF component themes '
+                    'to see this and toggle M2/M3 mode.\n'),
                 value: enableControl && controller.navRailUseIndicator,
                 onChanged:
                     enableControl ? controller.setNavRailUseIndicator : null,
