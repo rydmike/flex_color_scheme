@@ -7403,6 +7403,7 @@ class FlexColorScheme with Diagnosticable {
               landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
+              useMaterial3: useMaterial3,
             )
           : useMaterial3
               ? null

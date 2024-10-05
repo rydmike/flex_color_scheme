@@ -904,7 +904,9 @@ sealed class FlexSubThemes {
     /// If other [backgroundSchemeColor] colors are used,
     /// while this value is undefined, their default contrasting onColor will
     /// be used. If the [backgroundSchemeColor] is also
-    /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
+    /// undefined, then in Material-3 this defaults to
+    /// [SchemeColor.onSurfaceVariant] and in Material-2 to
+    /// [SchemeColor.onSurface].
     ///
     /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
     /// [Colors.black54] in light mode and [Colors.white70] in dark.
@@ -914,8 +916,11 @@ sealed class FlexSubThemes {
     /// more muted color version of the color defined by
     /// [unselectedLabelSchemeColor].
     ///
-    /// If null, defaults to true.
-    /// This default is visually similar to the default styling of Material-2.
+    /// If undefined, defaults to true in Material-2 and to false in Material-3.
+    ///
+    /// When true, this is visually similar to the default styling used in
+    /// Material-2, but it is on purpose not an exact match, it is bit more
+    /// color expressive.
     final bool? mutedUnselectedLabel,
 
     /// The size of the icon on selected [BottomNavigationBar] item.
@@ -946,7 +951,9 @@ sealed class FlexSubThemes {
     /// If other [backgroundSchemeColor] colors are used,
     /// while this value is undefined, their default contrasting onColor will
     /// be used. If the [backgroundSchemeColor] is also
-    /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
+    /// undefined, then in Material-3 this defaults to
+    /// [SchemeColor.onSurfaceVariant] and in Material-2 to
+    /// [SchemeColor.onSurface].
     ///
     /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
     /// [Colors.black54] in light mode and [Colors.white70] in dark.
@@ -960,8 +967,11 @@ sealed class FlexSubThemes {
     /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
     /// and withAlpha([kUnselectedAlphaBlend]).
     ///
-    /// If undefined, defaults to true.
-    /// This default is visually similar to the default styling of Material-2.
+    /// If undefined, defaults to true in Material-2 and to false in Material-3.
+    ///
+    /// When true, this is visually similar to the default styling used in
+    /// Material-2, but it is on purpose not an exact match, it is bit more
+    /// color expressive.
     final bool? mutedUnselectedIcon,
 
     /// Select which color from the theme's [ColorScheme] to use as background
@@ -1049,6 +1059,20 @@ sealed class FlexSubThemes {
     /// needed later.
     final int unselectedAlpha = kUnselectedAlphaBlend,
 
+    /// A temporary flag used to disable Material-3 design and use legacy
+    /// Material-2 design instead. Material-3 design is the default.
+    /// Material-2 will be deprecated in Flutter.
+    ///
+    /// If set to true, the theme will use Material3 default styles when
+    /// properties are undefined, if false defaults will use FlexColorScheme's
+    /// own opinionated default values.
+    ///
+    /// The M2/M3 defaults will only be used for properties that are not
+    /// defined, if defined they keep their defined values.
+    ///
+    /// If undefined, defaults to true.
+    final bool? useMaterial3,
+
     /// Set to true to use Flutter SDK defaults for [BottomNavigationBar]
     /// theme when its color, size and text style properties are undefined,
     /// instead of using [FlexColorScheme]'s own defaults.
@@ -1085,6 +1109,8 @@ sealed class FlexSubThemes {
         'as long as M2 exists.')
     final bool? useFlutterDefaults,
   }) {
+    final bool useM3 = useMaterial3 ?? true;
+
     // Background color, when using normal default, falls back to surface
     final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
             backgroundSchemeColor != SchemeColor.transparent
@@ -1096,7 +1122,7 @@ sealed class FlexSubThemes {
     // Use onSurfaceVariant as contrast for all unselected on surface colors !!
     final Color onVariantBackGroundColorFallback = schemeColorPair(
         backgroundSchemeColor ?? SchemeColor.surfaceContainerLow, colorScheme,
-        useOnSurfaceVariant: true);
+        useOnSurfaceVariant: useM3);
 
     // Get text color, defaults to primary.
     final Color labelColor = schemeColor(
@@ -1137,7 +1163,7 @@ sealed class FlexSubThemes {
       unselectedIconTheme: IconThemeData(
         size: effectiveUnselectedIconSize,
         opacity: 1,
-        color: (mutedUnselectedIcon ?? true)
+        color: (mutedUnselectedIcon ?? !useM3)
             ? unselectedIconColor
                 .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
                 .withAlpha(unselectedAlpha)
@@ -1149,14 +1175,14 @@ sealed class FlexSubThemes {
         color: iconColor,
       ),
       selectedItemColor: labelColor,
-      unselectedItemColor: (mutedUnselectedLabel ?? true)
+      unselectedItemColor: (mutedUnselectedLabel ?? !useM3)
           ? unselectedLabelColor
               .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
               .withAlpha(unselectedAlpha)
           : unselectedLabelColor,
       unselectedLabelStyle: textStyle.copyWith(
         fontSize: effectiveUnselectedLabelSize,
-        color: (mutedUnselectedLabel ?? true)
+        color: (mutedUnselectedLabel ?? !useM3)
             ? unselectedLabelColor
                 .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
                 .withAlpha(unselectedAlpha)

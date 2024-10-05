@@ -1284,7 +1284,7 @@ sealed class Store {
   static const String keyBottomNavBarMuteUnselected =
       'bottomNavBarMuteUnselected';
   // Default value for the bottomNavBarMuteUnselected, also to reset settings.
-  static const bool defaultBottomNavBarMuteUnselected = true;
+  static const bool? defaultBottomNavBarMuteUnselected = null;
 
   // Key used to read and save the bottomNavShowSelectedLabels value.
   static const String keyBottomNavShowSelectedLabels =

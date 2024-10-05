@@ -4500,10 +4500,9 @@ class ThemeController with ChangeNotifier {
         _themeService.save(Store.keyBottomNavBarUnselectedSchemeColor, value));
   }
 
-  late bool _bottomNavBarMuteUnselected;
-  bool get bottomNavBarMuteUnselected => _bottomNavBarMuteUnselected;
+  late bool? _bottomNavBarMuteUnselected;
+  bool? get bottomNavBarMuteUnselected => _bottomNavBarMuteUnselected;
   void setBottomNavBarMuteUnselected(bool? value, [bool notify = true]) {
-    if (value == null) return;
     if (value == _bottomNavBarMuteUnselected) return;
     _bottomNavBarMuteUnselected = value;
     if (notify) notifyListeners();

@@ -417,12 +417,12 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomNavigationBarUnselectedLabelSize,
     this.bottomNavigationBarSelectedLabelSchemeColor,
     this.bottomNavigationBarUnselectedLabelSchemeColor,
-    this.bottomNavigationBarMutedUnselectedLabel = true,
+    this.bottomNavigationBarMutedUnselectedLabel,
     this.bottomNavigationBarSelectedIconSize,
     this.bottomNavigationBarUnselectedIconSize,
     this.bottomNavigationBarSelectedIconSchemeColor,
     this.bottomNavigationBarUnselectedIconSchemeColor,
-    this.bottomNavigationBarMutedUnselectedIcon = true,
+    this.bottomNavigationBarMutedUnselectedIcon,
     this.bottomNavigationBarBackgroundSchemeColor,
     this.bottomNavigationBarOpacity,
     this.bottomNavigationBarElevation,
@@ -3029,7 +3029,9 @@ class FlexSubThemesData with Diagnosticable {
   /// If other [bottomNavigationBarBackgroundSchemeColor] colors are used,
   /// while this value is undefined, their default contrasting onColor will
   /// be used. If the [bottomNavigationBarBackgroundSchemeColor] is also
-  /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
+  /// undefined, then in Material-3 this defaults to
+  /// [SchemeColor.onSurfaceVariant] and in Material-2 to
+  /// [SchemeColor.onSurface].
   ///
   /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
   /// [Colors.black54] in light mode and [Colors.white70] in dark.
@@ -3043,7 +3045,11 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to true.
+  /// If undefined, defaults to true in Material-2 and to false in Material-3.
+  ///
+  /// When true, this is visually similar to the default styling used in
+  /// Material-2, but it is on purpose not an exact match, it is bit more
+  /// color expressive.
   final bool? bottomNavigationBarMutedUnselectedLabel;
 
   /// The size of the icon on selected [BottomNavigationBar] item.
@@ -3080,7 +3086,9 @@ class FlexSubThemesData with Diagnosticable {
   /// If other [bottomNavigationBarBackgroundSchemeColor] colors are used,
   /// while this value is undefined, their default contrasting onColor will
   /// be used. If the [bottomNavigationBarBackgroundSchemeColor] is also
-  /// undefined, then this defaults to [SchemeColor.onSurfaceVariant].
+  /// undefined, then in Material-3 this defaults to
+  /// [SchemeColor.onSurfaceVariant] and in Material-2 to
+  /// [SchemeColor.onSurface].
   ///
   /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
   /// [Colors.black54] in light mode and [Colors.white70] in dark.
@@ -3094,7 +3102,11 @@ class FlexSubThemesData with Diagnosticable {
   /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
-  /// If undefined, defaults to true.
+  /// If undefined, defaults to true in Material-2 and to false in Material-3.
+  ///
+  /// When true, this is visually similar to the default styling used in
+  /// Material-2, but it is on purpose not an exact match, it is bit more
+  /// color expressive.
   final bool? bottomNavigationBarMutedUnselectedIcon;
 
   /// Select which color from the theme's [ColorScheme] to use as background
