@@ -8368,4 +8368,59 @@ sealed class FlexSubThemes {
       showDuration: showDuration,
     );
   }
+
+  /// Deprecated, use [bottomNavigationBarTheme] instead.
+  @Deprecated('Use FlexSubThemes.bottomNavigationBarTheme instead. This '
+      'function has been renamed to use the correct name that all other '
+      'component theme helpers use, ending with "Theme". This deprecated '
+      'pass-through version will be removed in FlexColorScheme 9.0.0.')
+  static BottomNavigationBarThemeData bottomNavigationBar({
+    required final ColorScheme colorScheme,
+    final TextStyle? labelTextStyle,
+    final double? selectedLabelSize,
+    final double? unselectedLabelSize,
+    final SchemeColor? selectedLabelSchemeColor,
+    final SchemeColor? unselectedLabelSchemeColor,
+    final bool? mutedUnselectedLabel,
+    final double? selectedIconSize,
+    final double? unselectedIconSize,
+    final SchemeColor? selectedIconSchemeColor,
+    final SchemeColor? unselectedIconSchemeColor,
+    final bool? mutedUnselectedIcon,
+    final SchemeColor? backgroundSchemeColor,
+    final double? opacity,
+    final double? elevation,
+    final bool? showSelectedLabels,
+    final bool? showUnselectedLabels,
+    final BottomNavigationBarType? type,
+    final BottomNavigationBarLandscapeLayout? landscapeLayout,
+    final int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
+    final int unselectedAlpha = kUnselectedAlphaBlend,
+    final bool? useFlutterDefaults,
+  }) {
+    return bottomNavigationBarTheme(
+      colorScheme: colorScheme,
+      labelTextStyle: labelTextStyle,
+      selectedLabelSize: selectedLabelSize,
+      unselectedLabelSize: unselectedLabelSize,
+      selectedLabelSchemeColor: selectedLabelSchemeColor,
+      unselectedLabelSchemeColor: unselectedLabelSchemeColor,
+      mutedUnselectedLabel: mutedUnselectedLabel,
+      selectedIconSize: selectedIconSize,
+      unselectedIconSize: unselectedIconSize,
+      selectedIconSchemeColor: selectedIconSchemeColor,
+      unselectedIconSchemeColor: unselectedIconSchemeColor,
+      mutedUnselectedIcon: mutedUnselectedIcon,
+      backgroundSchemeColor: backgroundSchemeColor,
+      opacity: opacity,
+      elevation: elevation,
+      showSelectedLabels: showSelectedLabels,
+      showUnselectedLabels: showUnselectedLabels,
+      type: type,
+      landscapeLayout: landscapeLayout,
+      unselectedAlphaBlend: unselectedAlphaBlend,
+      unselectedAlpha: unselectedAlpha,
+      useFlutterDefaults: useFlutterDefaults,
+    );
+  }
 }
