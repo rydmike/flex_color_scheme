@@ -5585,9 +5585,6 @@ sealed class FlexSubThemes {
             indicatorSchemeColor ?? SchemeColor.secondaryContainer, colorScheme)
         .withAlpha(indicatorAlpha ?? 0xFF);
 
-    // Effective usage value for indicator.
-    final bool effectiveUseIndicator = useIndicator ?? true;
-
     // Property order here as in NavigationRailThemeData
     return NavigationRailThemeData(
       backgroundColor: backgroundColor,
@@ -5622,7 +5619,7 @@ sealed class FlexSubThemes {
       labelType: labelType,
       minWidth: minWidth,
       minExtendedWidth: minExtendedWidth,
-      useIndicator: effectiveUseIndicator,
+      useIndicator: useIndicator,
       indicatorColor: effectiveIndicatorColor,
       indicatorShape: indicatorRadius == null
           ? null

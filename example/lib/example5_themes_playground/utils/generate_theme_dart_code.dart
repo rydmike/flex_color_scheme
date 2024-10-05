@@ -1411,9 +1411,8 @@ String generateThemeDartCode(ThemeController controller) {
           .navRailMuteUnselected
       ? '    navigationRailMutedUnselectedIcon: ${controller.navRailMuteUnselected},\n'
       : '';
-  final String navigationRailUseIndicator = controller.navRailUseIndicator
-      ? ''
-      : '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';
+  final String navigationRailUseIndicator =
+      '    navigationRailUseIndicator: ${controller.navRailUseIndicator},\n';
   final String navigationRailIndicatorSchemeColor = controller
                   .navRailIndicatorSchemeColor !=
               null &&
