@@ -82,6 +82,8 @@ dependencies:
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.
   # https://pub.dev/packages/flutter_launcher_icons
+  # Maybe consider trying this one instead:
+  # https://pub.dev/packages/icons_launcher
   flutter_launcher_icons: ^0.14.1
 
   # Flutter test package, by Google flutter.dev.
