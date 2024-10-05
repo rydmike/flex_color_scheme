@@ -82,7 +82,7 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme),
+        FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
         equals(
           const BottomNavigationBarThemeData(),
         ),
@@ -99,7 +99,7 @@ void main() {
         brightness: Brightness.dark,
       );
       expect(
-        FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme),
+        FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
         equals(
           const BottomNavigationBarThemeData(),
         ),
@@ -112,7 +112,7 @@ void main() {
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.bottomNavigationBar(
+        FlexSubThemes.bottomNavigationBarTheme(
           colorScheme: colorScheme,
           // useFlutterDefaults: false, <<- Expect this to be default
         ),
@@ -141,7 +141,7 @@ void main() {
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
-        FlexSubThemes.bottomNavigationBar(
+        FlexSubThemes.bottomNavigationBarTheme(
           colorScheme: colorScheme,
           elevation: 2,
           // useFlutterDefaults: false, <<- Expect this to be default
@@ -171,7 +171,7 @@ void main() {
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
-        FlexSubThemes.bottomNavigationBar(
+        FlexSubThemes.bottomNavigationBarTheme(
           colorScheme: colorScheme,
           selectedLabelSchemeColor: SchemeColor.secondary,
           selectedIconSchemeColor: SchemeColor.secondaryContainer,
