@@ -340,6 +340,24 @@ class FlexSubThemesData with Diagnosticable {
     this.menuIndicatorForegroundSchemeColor,
     this.menuIndicatorRadius,
     //
+    this.searchBarBackgroundSchemeColor,
+    this.searchViewBackgroundSchemeColor,
+    this.searchBarElevation,
+    this.searchViewElevation,
+    this.searchBarRadius,
+    this.searchViewRadius,
+    this.searchViewHeaderHeight,
+    this.searchBarTextStyle, // Not in Playground
+    this.searchViewHeaderTextStyle, // Not in Playground
+    this.searchBarHintStyle, // Not in Playground
+    this.searchViewHeaderHintStyle, // Not in Playground
+    this.searchViewDividerColor,
+    this.searchBarShadowColor, // Not in Playground
+    this.searchBarTextCapitalization, // Not in Playground
+    this.searchBarPadding, // Not in Playground
+    this.searchBarConstraints, // Not in Playground
+    this.searchViewConstraints, // Not in Playground
+    //
     this.tooltipRadius,
     this.tooltipWaitDuration,
     this.tooltipShowDuration,
@@ -2357,6 +2375,116 @@ class FlexSubThemesData with Diagnosticable {
   /// default behavior.
   final double? menuIndicatorRadius;
 
+  /// The search bar's background fill color.
+  ///
+  /// If null, the default value is `surfaceContainerHigh`.
+  final SchemeColor? searchBarBackgroundSchemeColor;
+
+  /// The search view's background fill color.
+  ///
+  /// If null, the default value is `surfaceContainerHigh`.
+  final SchemeColor? searchViewBackgroundSchemeColor;
+
+  /// The elevation of the search bar's [Material].
+  ///
+  /// If null, default value is 6.0.
+  final double? searchBarElevation;
+
+  /// The elevation of the search bar's [Material].
+  ///
+  /// If null, default value is 6.0.
+  final double? searchViewElevation;
+
+  /// The border radius of the search bar's underlying [Material].
+  ///
+  /// If not defined defaults to Stadium shape.
+  final double? searchBarRadius;
+
+  /// The border radius of the search view's underlying [Material].
+  ///
+  /// If not defined defaults to 28.0.
+  /// If in full screen defaults to 0.
+  final double? searchViewRadius;
+
+  /// The height of the search field on the search view.
+  ///
+  /// If null, the default value is 56.0.
+  final double? searchViewHeaderHeight;
+
+  /// The style to use for the text being edited in the search bar.
+  ///
+  /// If null, defaults to the `bodyLarge` text style from the current
+  /// [Theme]. The default text color is [ColorScheme.onSurface].
+  final WidgetStateProperty<TextStyle?>? searchBarTextStyle;
+
+  /// The style to use for the text being edited in the search view.
+  ///
+  /// If null, defaults to the `bodyLarge` text style from the current
+  /// [Theme]. The default text color is [ColorScheme.onSurface].
+  final TextStyle? searchViewHeaderTextStyle;
+
+  /// The style to use for the [hintText] in the search bar.
+  ///
+  /// If null, defaults to `bodyLarge` text style from the current [Theme].
+  /// The default text color is [ColorScheme.onSurfaceVariant].
+  final WidgetStateProperty<TextStyle?>? searchBarHintStyle;
+
+  /// The style to use for the [hintText] in the search view.
+  ///
+  /// If null, defaults to `bodyLarge` text style from the current [Theme].
+  /// The default text color is [ColorScheme.onSurfaceVariant].
+  final TextStyle? searchViewHeaderHintStyle;
+
+  /// The color of the divider on the search view.
+  ///
+  /// If this property is null, the default value is
+  /// [ThemeData.dividerTheme.color] if it is null, then the default value is
+  /// [ColorScheme.outline].
+  final Color? searchViewDividerColor;
+
+  /// The shadow color of the search bar's [Material].
+  ///
+  /// If null, the default value is [ColorScheme.shadow].
+  final Color? searchBarShadowColor;
+
+  /// Configures how the platform keyboard will select an uppercase or
+  /// lowercase keyboard for the search bar input field.
+  ///
+  /// Only supports text keyboards, other keyboard types will ignore this
+  /// configuration. Capitalization is locale-aware.
+  ///
+  /// If not defined, defaults to [TextCapitalization.none]
+  final TextCapitalization? searchBarTextCapitalization;
+
+  /// The padding between the search bar's boundary and its contents.
+  ///
+  /// If null, then the default value is 16.0 horizontally.
+  final EdgeInsetsGeometry? searchBarPadding;
+
+  /// Optional size constraints for the search bar.
+  ///
+  /// If null, the value of [SearchBarThemeData.constraints] will be used. If
+  /// this is also null, then the constraints defaults to:
+  ///
+  /// ```dart
+  /// const BoxConstraints(minWidth: 360.0, maxWidth: 800.0, minHeight: 56.0)
+  /// ```
+  final BoxConstraints? searchBarConstraints;
+
+  /// Optional size constraints for the search view.
+  ///
+  /// By default, the search view has the same width as the anchor and is 2/3
+  /// the height of the screen. If the width and height of the view are within
+  /// the [viewConstraints], the view will show its default size. Otherwise,
+  /// the size of the view will be constrained by this property.
+  ///
+  /// If null, the constraints defaults to:
+  ///
+  /// ```dart
+  /// const BoxConstraints(minWidth: 360.0, minHeight: 240.0)
+  /// ```
+  final BoxConstraints? searchViewConstraints;
+
   /// Border radius value for [Tooltips].
   ///
   /// If not defined and, defaults to [kTooltipRadius].
@@ -3932,6 +4060,24 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tooltipSchemeColor,
     final double? tooltipOpacity,
     //
+    final SchemeColor? searchBarBackgroundSchemeColor,
+    final SchemeColor? searchViewBackgroundSchemeColor,
+    final double? searchBarElevation,
+    final double? searchViewElevation,
+    final double? searchBarRadius,
+    final double? searchViewRadius,
+    final double? searchViewHeaderHeight,
+    final WidgetStateProperty<TextStyle?>? searchBarTextStyle,
+    final TextStyle? searchViewHeaderTextStyle,
+    final WidgetStateProperty<TextStyle?>? searchBarHintStyle,
+    final TextStyle? searchViewHeaderHintStyle,
+    final Color? searchViewDividerColor,
+    final Color? searchBarShadowColor,
+    final TextCapitalization? searchBarTextCapitalization,
+    final EdgeInsetsGeometry? searchBarPadding,
+    final BoxConstraints? searchBarConstraints,
+    final BoxConstraints? searchViewConstraints,
+    //
     final bool? useInputDecoratorThemeInDialogs,
     final double? dialogRadius,
     final double? dialogRadiusAdaptive,
@@ -4355,6 +4501,32 @@ class FlexSubThemesData with Diagnosticable {
       tooltipShowDuration: tooltipShowDuration ?? this.tooltipShowDuration,
       tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
       tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
+      //
+      searchBarBackgroundSchemeColor:
+          searchBarBackgroundSchemeColor ?? this.searchBarBackgroundSchemeColor,
+      searchViewBackgroundSchemeColor: searchViewBackgroundSchemeColor ??
+          this.searchViewBackgroundSchemeColor,
+      searchBarElevation: searchBarElevation ?? this.searchBarElevation,
+      searchViewElevation: searchViewElevation ?? this.searchViewElevation,
+      searchBarRadius: searchBarRadius ?? this.searchBarRadius,
+      searchViewRadius: searchViewRadius ?? this.searchViewRadius,
+      searchViewHeaderHeight:
+          searchViewHeaderHeight ?? this.searchViewHeaderHeight,
+      searchBarTextStyle: searchBarTextStyle ?? this.searchBarTextStyle,
+      searchViewHeaderTextStyle:
+          searchViewHeaderTextStyle ?? this.searchViewHeaderTextStyle,
+      searchBarHintStyle: searchBarHintStyle ?? this.searchBarHintStyle,
+      searchViewHeaderHintStyle:
+          searchViewHeaderHintStyle ?? this.searchViewHeaderHintStyle,
+      searchViewDividerColor:
+          searchViewDividerColor ?? this.searchViewDividerColor,
+      searchBarShadowColor: searchBarShadowColor ?? this.searchBarShadowColor,
+      searchBarTextCapitalization:
+          searchBarTextCapitalization ?? this.searchBarTextCapitalization,
+      searchBarPadding: searchBarPadding ?? this.searchBarPadding,
+      searchBarConstraints: searchBarConstraints ?? this.searchBarConstraints,
+      searchViewConstraints:
+          searchViewConstraints ?? this.searchViewConstraints,
       //
       useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ??
           this.useInputDecoratorThemeInDialogs,
@@ -4815,6 +4987,26 @@ class FlexSubThemesData with Diagnosticable {
         other.tooltipSchemeColor == tooltipSchemeColor &&
         other.tooltipOpacity == tooltipOpacity &&
         //
+        other.searchBarBackgroundSchemeColor ==
+            searchBarBackgroundSchemeColor &&
+        other.searchViewBackgroundSchemeColor ==
+            searchViewBackgroundSchemeColor &&
+        other.searchBarElevation == searchBarElevation &&
+        other.searchViewElevation == searchViewElevation &&
+        other.searchBarRadius == searchBarRadius &&
+        other.searchViewRadius == searchViewRadius &&
+        other.searchViewHeaderHeight == searchViewHeaderHeight &&
+        other.searchBarTextStyle == searchBarTextStyle &&
+        other.searchViewHeaderTextStyle == searchViewHeaderTextStyle &&
+        other.searchBarHintStyle == searchBarHintStyle &&
+        other.searchViewHeaderHintStyle == searchViewHeaderHintStyle &&
+        other.searchViewDividerColor == searchViewDividerColor &&
+        other.searchBarShadowColor == searchBarShadowColor &&
+        other.searchBarTextCapitalization == searchBarTextCapitalization &&
+        other.searchBarPadding == searchBarPadding &&
+        other.searchBarConstraints == searchBarConstraints &&
+        other.searchViewConstraints == searchViewConstraints &&
+        //
         other.useInputDecoratorThemeInDialogs ==
             useInputDecoratorThemeInDialogs &&
         other.dialogRadius == dialogRadius &&
@@ -5173,6 +5365,24 @@ class FlexSubThemesData with Diagnosticable {
         tooltipShowDuration,
         tooltipSchemeColor,
         tooltipOpacity,
+        //
+        searchBarBackgroundSchemeColor,
+        searchViewBackgroundSchemeColor,
+        searchBarElevation,
+        searchViewElevation,
+        searchBarRadius,
+        searchViewRadius,
+        searchViewHeaderHeight,
+        searchBarTextStyle,
+        searchViewHeaderTextStyle,
+        searchBarHintStyle,
+        searchViewHeaderHintStyle,
+        searchViewDividerColor,
+        searchBarShadowColor,
+        searchBarTextCapitalization,
+        searchBarPadding,
+        searchBarConstraints,
+        searchViewConstraints,
         //
         useInputDecoratorThemeInDialogs,
         dialogRadius,
@@ -5631,6 +5841,40 @@ class FlexSubThemesData with Diagnosticable {
         EnumProperty<SchemeColor>('tooltipSchemeColor', tooltipSchemeColor));
     properties
         .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'searchBarBackgroundSchemeColor', searchBarBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'searchViewBackgroundSchemeColor', searchViewBackgroundSchemeColor));
+    properties.add(
+        DiagnosticsProperty<double>('searchBarElevation', searchBarElevation));
+    properties.add(DiagnosticsProperty<double>(
+        'searchViewElevation', searchViewElevation));
+    properties
+        .add(DiagnosticsProperty<double>('searchBarRadius', searchBarRadius));
+    properties
+        .add(DiagnosticsProperty<double>('searchViewRadius', searchViewRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'searchViewHeaderHeight', searchViewHeaderHeight));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
+        'searchBarTextStyle', searchBarTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'searchViewHeaderTextStyle', searchViewHeaderTextStyle));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
+        'searchBarHintStyle', searchBarHintStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>(
+        'searchViewHeaderHintStyle', searchViewHeaderHintStyle));
+    properties
+        .add(ColorProperty('searchViewDividerColor', searchViewDividerColor));
+    properties.add(ColorProperty('searchBarShadowColor', searchBarShadowColor));
+    properties.add(EnumProperty<TextCapitalization>(
+        'searchBarTextCapitalization', searchBarTextCapitalization));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
+        'searchBarPadding', searchBarPadding));
+    properties.add(DiagnosticsProperty<BoxConstraints>(
+        'searchBarConstraints', searchBarConstraints));
+    properties.add(DiagnosticsProperty<BoxConstraints>(
+        'searchViewConstraints', searchViewConstraints));
     //
     properties.add(DiagnosticsProperty<bool>(
         'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
