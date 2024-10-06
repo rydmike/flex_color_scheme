@@ -2886,84 +2886,69 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
     final TextStyle denseBody = theme.textTheme.bodyMedium!
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
-    return Theme(
-      data: Theme.of(context).copyWith(
-        inputDecorationTheme: const InputDecorationTheme(
-          border: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          focusedErrorBorder: InputBorder.none,
-          filled: false,
-        ),
-      ),
-      child: Builder(builder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              if (widget.explain) ...<Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                  child: Text(
-                    'SearchBar',
-                    style: denseHeader,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                  child: Text(
-                    'The M3 SearchBar can in some use cases be used instead '
-                    'of an AppBar or BottomAppBar.',
-                    style: denseBody,
-                  ),
-                ),
-              ],
-              SearchAnchor.bar(
-                isFullScreen: widget.isFullScreen,
-                barHintText: 'Search colors',
-                barTrailing: <Widget>[
-                  Tooltip(
-                    message: 'Voice search',
-                    child: IconButton(
-                      isSelected: isMicOn,
-                      onPressed: () {
-                        setState(() {
-                          isMicOn = !isMicOn;
-                        });
-                      },
-                      icon: const Icon(Icons.mic_off),
-                      selectedIcon: const Icon(Icons.mic),
-                    ),
-                  )
-                ],
-                suggestionsBuilder:
-                    (BuildContext context, SearchController controller) {
-                  if (controller.text.isEmpty) {
-                    if (searchHistory.isNotEmpty) {
-                      return getHistoryList(controller);
-                    }
-                    return <Widget>[
-                      const Center(
-                        child: Text('No search history.',
-                            style: TextStyle(color: Colors.grey)),
-                      )
-                    ];
-                  }
-                  return getSuggestions(controller);
-                },
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          if (widget.explain) ...<Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              child: Text(
+                'SearchBar',
+                style: denseHeader,
               ),
-              const SizedBox(height: 20),
-              if (selectedColor == null)
-                const Text('Select a color')
-              else
-                Text('Last selected color is $selectedColor')
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+              child: Text(
+                'The M3 SearchBar can in some use cases be used instead '
+                'of an AppBar or BottomAppBar.',
+                style: denseBody,
+              ),
+            ),
+          ],
+          SearchAnchor.bar(
+            isFullScreen: widget.isFullScreen,
+            barHintText: 'Search colors',
+            barTrailing: <Widget>[
+              Tooltip(
+                message: 'Voice search',
+                child: IconButton(
+                  isSelected: isMicOn,
+                  onPressed: () {
+                    setState(() {
+                      isMicOn = !isMicOn;
+                    });
+                  },
+                  icon: const Icon(Icons.mic_off),
+                  selectedIcon: const Icon(Icons.mic),
+                ),
+              )
             ],
+            suggestionsBuilder:
+                (BuildContext context, SearchController controller) {
+              if (controller.text.isEmpty) {
+                if (searchHistory.isNotEmpty) {
+                  return getHistoryList(controller);
+                }
+                return <Widget>[
+                  const Center(
+                    child: Text('No search history.',
+                        style: TextStyle(color: Colors.grey)),
+                  )
+                ];
+              }
+              return getSuggestions(controller);
+            },
           ),
-        );
-      }),
+          const SizedBox(height: 20),
+          if (selectedColor == null)
+            const Text('Select a color')
+          else
+            Text('Last selected color is $selectedColor')
+        ],
+      ),
     );
   }
 }
