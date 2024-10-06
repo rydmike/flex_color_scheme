@@ -2221,6 +2221,68 @@ sealed class FlexSubThemes {
 
     /// Overrides the default value of [Dialog.surfaceTintColor].
     final Color? surfaceTintColor,
+
+    /// Overrides the header's default headline text style.
+    ///
+    /// The dialog's header displays the currently selected date.
+    ///
+    /// The [TextStyle.color] of the [headerHeadlineStyle] is not used,
+    /// [headerForegroundColor] is used instead.
+    final TextStyle? headerHeadlineStyle,
+
+    /// Overrides the header's default help text style.
+    ///
+    /// The help text (also referred to as "supporting text" in the Material
+    /// spec) is usually a prompt to the user at the top of the header
+    /// (i.e. 'Select date').
+    ///
+    /// The [TextStyle.color] of the [headerHelpStyle] is not used,
+    /// [headerForegroundColor] is used instead.
+    ///
+    /// See also:
+    ///   [DatePickerDialog.helpText], which specifies the help text.
+    final TextStyle? headerHelpStyle,
+
+    /// Overrides the default text style used for the row of weekday
+    /// labels at the top of the date picker grid.
+    final TextStyle? weekdayStyle,
+
+    /// Overrides the default text style used for each individual day
+    /// label in the grid of the date picker.
+    ///
+    /// The [TextStyle.color] of the [dayStyle] is not used,
+    /// [dayForegroundColor] is used instead.
+    final TextStyle? dayStyle,
+
+    /// Overrides the default text style used to paint each of the year
+    /// entries in the year selector of the date picker.
+    ///
+    /// The [TextStyle.color] of the [yearStyle] is not used,
+    /// [yearForegroundColor] is used instead.
+    final TextStyle? yearStyle,
+
+    /// Overrides the default text style used for the headline text in
+    /// the header of a full screen [DateRangePickerDialog].
+    ///
+    /// The dialog's header displays the currently selected date range.
+    ///
+    /// The [TextStyle.color] of [rangePickerHeaderHeadlineStyle] is not used,
+    /// [rangePickerHeaderForegroundColor] is used instead.
+    final TextStyle? rangePickerHeaderHeadlineStyle,
+
+    /// Overrides the default text style used for the help text of the
+    /// header of a full screen [DateRangePickerDialog].
+    ///
+    /// The help text (also referred to as "supporting text" in the Material
+    /// spec) is usually a prompt to the user at the top of the header
+    /// (i.e. 'Select date').
+    ///
+    /// The [TextStyle.color] of the [rangePickerHeaderHelpStyle] is not used,
+    /// [rangePickerHeaderForegroundColor] is used instead.
+    ///
+    /// See also:
+    ///   [DateRangePickerDialog.helpText], which specifies the help text.
+    final TextStyle? rangePickerHeaderHelpStyle,
   }) {
     InputDecorationTheme datePickerDefaultInputDecorationTheme() {
       const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(4.0));
@@ -2322,6 +2384,13 @@ sealed class FlexSubThemes {
           // input decorator does not work due to this:
           // https://github.com/flutter/flutter/pull/128950#issuecomment-1657177393
           : datePickerDefaultInputDecorationTheme(),
+      headerHeadlineStyle: headerHeadlineStyle,
+      headerHelpStyle: headerHelpStyle,
+      weekdayStyle: weekdayStyle,
+      dayStyle: dayStyle,
+      yearStyle: yearStyle,
+      rangePickerHeaderHeadlineStyle: rangePickerHeaderHeadlineStyle,
+      rangePickerHeaderHelpStyle: rangePickerHeaderHelpStyle,
     );
   }
 

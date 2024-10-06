@@ -375,6 +375,13 @@ class FlexSubThemesData with Diagnosticable {
     this.datePickerHeaderBackgroundSchemeColor,
     this.datePickerDialogRadius,
     this.datePickerDividerSchemeColor,
+    this.datePickerHeaderHeadlineStyle, // Not in Playground
+    this.datePickerHeaderHelpStyle, // Not in Playground
+    this.datePickerWeekdayStyle, // Not in Playground
+    this.datePickerDayStyle, // Not in Playground
+    this.datePickerYearStyle, // Not in Playground
+    this.datePickerRangePickerHeaderHeadlineStyle, // Not in Playground
+    this.datePickerRangePickerHeaderHelpStyle, // Not in Playground
     //
     this.timePickerDialogRadius,
     this.timePickerElementRadius,
@@ -2635,6 +2642,62 @@ class FlexSubThemesData with Diagnosticable {
   /// Set it to [SchemeColor.transparent] to get rid of the divider in M3.
   final SchemeColor? datePickerDividerSchemeColor;
 
+  /// Overrides the date picker header's default headline text style.
+  ///
+  /// The dialog's header displays the currently selected date.
+  ///
+  /// The [TextStyle.color] of the [datePickerHeaderHeadlineStyle] is not used,
+  /// header foreground color is used instead.
+  final TextStyle? datePickerHeaderHeadlineStyle;
+
+  /// Overrides the date picker header's default help text style.
+  ///
+  /// The help text (also referred to as "supporting text" in the Material
+  /// spec) is usually a prompt to the user at the top of the header
+  /// (i.e. 'Select date').
+  ///
+  /// The [TextStyle.color] of the [datePickerHeaderHelpStyle] is not used,
+  /// header foreground color is used instead.
+  final TextStyle? datePickerHeaderHelpStyle;
+
+  /// Overrides the default text style used for the row of weekday
+  /// labels at the top of the date picker grid.
+  final TextStyle? datePickerWeekdayStyle;
+
+  /// Overrides the default text style used for each individual day
+  /// label in the grid of the date picker.
+  ///
+  /// The [TextStyle.color] of the [datePickerDayStyle] is not used,
+  /// day foreground color is used instead.
+  final TextStyle? datePickerDayStyle;
+
+  /// Overrides the default text style used to paint each of the year
+  /// entries in the year selector of the date picker.
+  ///
+  /// The [TextStyle.color] of the [datePickerYearStyle] is not used,
+  /// year foreground color is used instead.
+  final TextStyle? datePickerYearStyle;
+
+  /// Overrides the default text style used for the headline text in
+  /// the header of a full screen [DateRangePickerDialog].
+  ///
+  /// The dialog's header displays the currently selected date range.
+  ///
+  /// The [TextStyle.color] of [datePickerRangePickerHeaderHeadlineStyle] is
+  /// not used, range picker Header ForegroundColor is used instead.
+  final TextStyle? datePickerRangePickerHeaderHeadlineStyle;
+
+  /// Overrides the default text style used for the help text of the
+  /// header of a full screen [DateRangePickerDialog].
+  ///
+  /// The help text (also referred to as "supporting text" in the Material
+  /// spec) is usually a prompt to the user at the top of the header
+  /// (i.e. 'Select date').
+  ///
+  /// The [TextStyle.color] of the [datePickerRangePickerHeaderHelpStyle] is
+  /// not used, the range picker Header ForegroundColor is used instead.
+  final TextStyle? datePickerRangePickerHeaderHelpStyle;
+
   /// Border radius value for [TimePickerDialog].
   ///
   /// Specifying this border radius value for the [TimePickerDialog] overrides
@@ -4089,6 +4152,13 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? datePickerHeaderBackgroundSchemeColor,
     final double? datePickerDialogRadius,
     final SchemeColor? datePickerDividerSchemeColor,
+    final TextStyle? datePickerHeaderHeadlineStyle,
+    final TextStyle? datePickerHeaderHelpStyle,
+    final TextStyle? datePickerWeekdayStyle,
+    final TextStyle? datePickerDayStyle,
+    final TextStyle? datePickerYearStyle,
+    final TextStyle? datePickerRangePickerHeaderHeadlineStyle,
+    final TextStyle? datePickerRangePickerHeaderHelpStyle,
     //
     final double? timePickerDialogRadius,
     final double? timePickerElementRadius,
@@ -4546,6 +4616,20 @@ class FlexSubThemesData with Diagnosticable {
           datePickerDialogRadius ?? this.datePickerDialogRadius,
       datePickerDividerSchemeColor:
           datePickerDividerSchemeColor ?? this.datePickerDividerSchemeColor,
+      datePickerHeaderHeadlineStyle:
+          datePickerHeaderHeadlineStyle ?? this.datePickerHeaderHeadlineStyle,
+      datePickerHeaderHelpStyle:
+          datePickerHeaderHelpStyle ?? this.datePickerHeaderHelpStyle,
+      datePickerWeekdayStyle:
+          datePickerWeekdayStyle ?? this.datePickerWeekdayStyle,
+      datePickerDayStyle: datePickerDayStyle ?? this.datePickerDayStyle,
+      datePickerYearStyle: datePickerYearStyle ?? this.datePickerYearStyle,
+      datePickerRangePickerHeaderHeadlineStyle:
+          datePickerRangePickerHeaderHeadlineStyle ??
+              this.datePickerRangePickerHeaderHeadlineStyle,
+      datePickerRangePickerHeaderHelpStyle:
+          datePickerRangePickerHeaderHelpStyle ??
+              this.datePickerRangePickerHeaderHelpStyle,
       //
       timePickerDialogRadius:
           timePickerDialogRadius ?? this.timePickerDialogRadius,
@@ -5020,6 +5104,15 @@ class FlexSubThemesData with Diagnosticable {
             datePickerHeaderBackgroundSchemeColor &&
         other.datePickerDialogRadius == datePickerDialogRadius &&
         other.datePickerDividerSchemeColor == datePickerDividerSchemeColor &&
+        other.datePickerHeaderHeadlineStyle == datePickerHeaderHeadlineStyle &&
+        other.datePickerHeaderHelpStyle == datePickerHeaderHelpStyle &&
+        other.datePickerWeekdayStyle == datePickerWeekdayStyle &&
+        other.datePickerDayStyle == datePickerDayStyle &&
+        other.datePickerYearStyle == datePickerYearStyle &&
+        other.datePickerRangePickerHeaderHeadlineStyle ==
+            datePickerRangePickerHeaderHeadlineStyle &&
+        other.datePickerRangePickerHeaderHelpStyle ==
+            datePickerRangePickerHeaderHelpStyle &&
         //
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.timePickerElementRadius == timePickerElementRadius &&
@@ -5395,6 +5488,13 @@ class FlexSubThemesData with Diagnosticable {
         datePickerHeaderBackgroundSchemeColor,
         datePickerDialogRadius,
         datePickerDividerSchemeColor,
+        datePickerHeaderHeadlineStyle,
+        datePickerHeaderHelpStyle,
+        datePickerWeekdayStyle,
+        datePickerDayStyle,
+        datePickerYearStyle,
+        datePickerRangePickerHeaderHeadlineStyle,
+        datePickerRangePickerHeaderHelpStyle,
         //
         timePickerDialogRadius,
         timePickerElementRadius,
@@ -5897,6 +5997,22 @@ class FlexSubThemesData with Diagnosticable {
         'datePickerDialogRadius', datePickerDialogRadius));
     properties.add(EnumProperty<SchemeColor>(
         'datePickerDividerSchemeColor', datePickerDividerSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'datePickerHeaderHeadlineStyle', datePickerHeaderHeadlineStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'datePickerHeaderHelpStyle', datePickerHeaderHelpStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'datePickerWeekdayStyle', datePickerWeekdayStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'datePickerDayStyle', datePickerDayStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'datePickerYearStyle', datePickerYearStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'datePickerRangePickerHeaderHeadlineStyle',
+        datePickerRangePickerHeaderHeadlineStyle));
+    properties.add(DiagnosticsProperty<TextStyle>(
+        'datePickerRangePickerHeaderHelpStyle',
+        datePickerRangePickerHeaderHelpStyle));
     //
     properties.add(DiagnosticsProperty<double>(
         'timePickerDialogRadius', timePickerDialogRadius));

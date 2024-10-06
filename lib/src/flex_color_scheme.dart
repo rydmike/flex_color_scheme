@@ -7561,6 +7561,16 @@ class FlexColorScheme with Diagnosticable {
               useInputDecoratorTheme: subTheme.useInputDecoratorThemeInDialogs,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              //
+              headerHeadlineStyle: subTheme.datePickerHeaderHeadlineStyle,
+              headerHelpStyle: subTheme.datePickerHeaderHeadlineStyle,
+              weekdayStyle: subTheme.datePickerWeekdayStyle,
+              dayStyle: subTheme.datePickerDayStyle,
+              yearStyle: subTheme.datePickerYearStyle,
+              rangePickerHeaderHeadlineStyle:
+                  subTheme.datePickerRangePickerHeaderHeadlineStyle,
+              rangePickerHeaderHelpStyle:
+                  subTheme.datePickerRangePickerHeaderHelpStyle,
             )
           : null,
       //
@@ -7927,6 +7937,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.searchViewBackgroundSchemeColor,
               elevation: subTheme.searchViewElevation,
+              // TODO(rydmike): Add platform radius? Try it.
               radius: subTheme.searchViewRadius, // ?? platformRadius,
               headerHeight: subTheme.searchViewHeaderHeight,
               dividerColor: subTheme.searchViewDividerColor,

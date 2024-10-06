@@ -73,7 +73,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **TODOs**
 
 - **TODO** Add some controls for `SearchView` and `SearchBar` to the Playground app.
-- **TODO**: Add TextStyles for `DatePickerDialog` themes, that are not in the Playground, but offered in the API.
 
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
@@ -226,6 +225,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - `FlexSubThemes.appBarTheme` **uses** `FlexSubThemesData.appBarTitleTextStyle` for its `titleTextStyle`.
   - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipLabelStyle` for its `labelStyle`.
   - `FlexSubThemes.chipTheme` **uses** `FlexSubThemesData.chipSecondaryLabelStyle` for its `secondaryLabelStyle`.
+  - `FlexSubThemes.datePickerTheme` **uses** `FlexSubThemesData.datePickerHeaderHeadlineStyle` for its `headerHeadlineStyle`.
+  - `FlexSubThemes.datePickerTheme` **uses** `FlexSubThemesData.datePickerHeaderHelpStyle` for its `headerHelpStyle`.
+  - `FlexSubThemes.datePickerTheme` **uses** `FlexSubThemesData.datePickerWeekdayStyle` for its `weekdayStyle`.
+  - `FlexSubThemes.datePickerTheme` **uses** `FlexSubThemesData.datePickerDayStyle` for its `dayStyle`.
+  - `FlexSubThemes.datePickerTheme` **uses** `FlexSubThemesData.datePickerYearStyle` for its `yearStyle`.
+  - `FlexSubThemes.datePickerTheme` **uses** `FlexSubThemesData.datePickerRangePickerHeaderHeadlineStyle` for its `rangePickerHeaderHeadlineStyle`.
+  - `FlexSubThemes.datePickerTheme` **uses** `FlexSubThemesData.datePickerRangePickerHeaderHelpStyle` for its `rangePickerHeaderHelpStyle`.
   - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogTitleTextStyle` for its `titleTextStyle`.
   - `FlexSubThemes.dialogTheme` **uses** `FlexSubThemesData.dialogContentTextStyle` for its `contentTextStyle`.
   - `FlexSubThemes.floatingActionButtonTheme` **uses** `FlexSubThemesData.fabExtendedTextStyle` for its `extendedTextStyle`.
