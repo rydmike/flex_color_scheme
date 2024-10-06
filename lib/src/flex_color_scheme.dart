@@ -7918,7 +7918,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.searchBarBackgroundSchemeColor,
               elevation: subTheme.searchBarElevation,
-              shadowColor: subTheme.menuBarShadowColor,
+              shadowColor: subTheme.searchBarShadowColor,
               radius: subTheme.searchBarRadius ??
                   (subTheme.searchUseGlobalShape ? platformRadius : null),
               padding: subTheme.searchBarPadding,
