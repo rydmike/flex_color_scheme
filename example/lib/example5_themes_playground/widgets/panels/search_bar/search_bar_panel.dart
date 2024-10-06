@@ -112,9 +112,9 @@ class SearchBarPanel extends StatelessWidget {
                 enabled: enableControl,
                 contentPadding: ThemeValues.tilePaddingEnd(context),
                 subtitleReveal: const Text(
-                    'If ON the SearchBar and SearchView radius will use the '
-                    'global border radius and its platform adaptive setting '
-                    'if a radius has not been defined.\n'),
+                    'If ON the SearchBar and SearchView will use the '
+                    'global border radius or its platform adaptive radius, '
+                    'if radius is at the default value here.\n'),
                 value: controller.searchUseGlobalShape,
                 onChanged: controller.setSearchUseGlobalShape,
               ),
