@@ -49,7 +49,7 @@ class SearchBarPanel extends StatelessWidget {
           dense: true,
           subtitleReveal: const Text(
               'This is NOT a theming property! It is a toggle that enables '
-              'you to test the fullscreen SearchView instead, '
+              'you to test the fullscreen SearchView, instead '
               'of the default one opening under the SearchBar.\n'),
           value: controller.searchIsFullScreen,
           onChanged: controller.setSearchIsFullScreen,
