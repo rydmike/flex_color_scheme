@@ -7902,11 +7902,39 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // searchBarTheme: NOT YET DEFINED BY FCS. USE: .copyWith
-      searchBarTheme: useSubThemes ? const SearchBarThemeData() : null,
+      // searchBar Theme.
+      searchBarTheme: useSubThemes
+          ? FlexSubThemes.searchBarTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.searchBarBackgroundSchemeColor,
+              elevation: subTheme.searchBarElevation,
+              shadowColor: subTheme.menuBarShadowColor,
+              // TODO(rydmike): Add platform radius? Try it.
+              radius: subTheme.searchBarRadius, // ?? platformRadius,
+              padding: subTheme.searchBarPadding,
+              textStyle: subTheme.searchBarTextStyle,
+              hintStyle: subTheme.searchBarHintStyle,
+              textCapitalization: subTheme.searchBarTextCapitalization,
+              constraints: subTheme.searchBarConstraints,
+              tintedInteractions: subTheme.interactionEffects,
+              tintedDisabled: subTheme.tintedDisabledControls,
+            )
+          : null,
       //
-      // searchViewTheme: NOT YET DEFINED BY FCS. USE: .copyWith
-      searchViewTheme: useSubThemes ? const SearchViewThemeData() : null,
+      // searchView Theme.
+      searchViewTheme: useSubThemes
+          ? FlexSubThemes.searchViewTheme(
+              colorScheme: colorScheme,
+              backgroundSchemeColor: subTheme.searchViewBackgroundSchemeColor,
+              elevation: subTheme.searchViewElevation,
+              radius: subTheme.searchViewRadius, // ?? platformRadius,
+              headerHeight: subTheme.searchViewHeaderHeight,
+              dividerColor: subTheme.searchViewDividerColor,
+              headerTextStyle: subTheme.searchViewHeaderTextStyle,
+              headerHintStyle: subTheme.searchViewHeaderHintStyle,
+              constraints: subTheme.searchViewConstraints,
+            )
+          : null,
       //
       // SegmentedButton Theme.
       segmentedButtonTheme: useSubThemes

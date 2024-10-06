@@ -346,6 +346,14 @@ const int kTintPressed = 0xA5;
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaPressed = 0x1F;
 
+/// The amount of alpha based opacity used on tinted input pressed effect,
+/// like SearchBar.
+///
+/// Same value as used on pressed opacity on controls in M3, given as alpha.
+///
+/// Value: 0x19 = 25 = 10% = 0.1
+const int kAlphaInputPressed = 0x19;
+
 /// The amount of alpha blend used on tinted splash effect that is blended
 /// into overlay color.
 ///

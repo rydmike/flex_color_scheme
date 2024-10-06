@@ -72,11 +72,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
-- **STARTED**: Add `SearchView` theming features.
-- **STARTED**: Add `SearchBar` theming features. 
-
-
-- **TODO**: Add TextStyles for `SearchView`, `SearchBar` and `DatePickerDialog` themes, that are not in the Playground, but offered in the API.
+- **TODO** Add some controls for `SearchView` and `SearchBar` to the Playground app.
+- **TODO**: Add TextStyles for `DatePickerDialog` themes, that are not in the Playground, but offered in the API.
 
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
@@ -303,10 +300,13 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added style `navigationBar` to enum `FlexSystemNavBarStyle` that use the color for default or themed `NavigationBar` background color on the system navigation bar helper.
   - You can get a similar result with the transparent option. Using the `navigationBar` option does not require using the edge-to-edge config required when using transparent system navigation bar to see things behind it. The `transparent` option sets edge-to-edge mode behind the scenes when used. This can cause some layout changes that must be considered in the app design when used. This is an optional way to style the system navigation bar to match the app's themed `NavigationBar` background color, without using edge-to-edge Android screen mode.
 
+
 - Added `ListTile` theming support to `FlexSubThemesData` and made corresponding `FlexSubThemes.listTileTheme` properties use them in `FlexColorScheme` as `ListTileTheme` theming properties.
   - The following `FlexSubThemesData` properties were added: `listTileSelectedSchemeColor`, `listTileIconSchemeColor`, `listTileTextSchemeColor`, `listTileTitleTextStyle`, `listTileSubtitleTextStyle`, `listTileLeadingAndTrailingTextStyle`, `listTileTileSchemeColor`,   `listTileSelectedTileSchemeColor`, `listTileContentPadding`, `listTileHorizontalTitleGap`, `listTileMinVerticalPadding`, `listTileStyle`, `listTileTitleAlignment` and `listTileControlAffinity`.
 
 
+- Added `SearchBar` and `SearchView` theming support to `FlexSubThemesData` and made corresponding `FlexSubThemes.searchBarTheme` and `FlexSubThemes.searchViewTheme` properties use them in `FlexColorScheme` as `SearchBarThemeData` and `SearchViewThemeData` theming properties.
+  - The following `FlexSubThemesData` properties were added: `searchBarBackgroundSchemeColor`, `searchViewBackgroundSchemeColor`, `searchBarElevation`, `searchViewElevation`, `searchBarRadius`, `searchViewRadius`, `searchViewHeaderHeight`, `searchBarTextStyle`, `searchViewHeaderTextStyle`, `searchBarHintStyle`, `searchViewHeaderHintStyle`, `searchViewDividerColor`, `searchBarShadowColor`, `searchBarTextCapitalization`, `searchBarPadding`, `searchBarConstraints` and `searchViewConstraints`.
 
 
 **CHANGE**
