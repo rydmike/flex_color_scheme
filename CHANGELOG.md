@@ -44,7 +44,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **CRITICAL TODOS**
 
 * **TODO**: Review and update premade designs in the Playground app.
-* **TODO**: Playground: Review and update use M3 and use FCS defaults feature for **TextField**. Add two more examples, FCS style (from FCS M2 style) and a "nice" dense one with only focused having a border.
+* **TODO**: Playground: Review and update use M3 and FCS defaults feature for **TextField**. Add two more examples, FCS style (from FCS M2 style) and a "nice" dense one with only focused having a border.
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
   * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
