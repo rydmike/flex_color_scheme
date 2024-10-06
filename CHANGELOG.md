@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Oct 6, 2024**
+**Oct 7, 2024**
 
 ### SUMMARY
 
@@ -72,11 +72,11 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
-- **TODO** Add foreground color to `SearchView` and `SearchBar` theme.
-- **TODO** Fix `SearchBar` and `SearchView` tinted interactions.
+- **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
+- **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
 
 
-- **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
+- **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
 
 - **MINOR KNOWN ISSUES**
