@@ -232,10 +232,12 @@ class ButtonsPanel extends StatelessWidget {
           valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context),
                 title: const Text('Border width'),
                 value: controller.outlinedButtonBorderWidth,
                 onChanged: controller.setOutlinedButtonBorderWidth,
@@ -252,6 +254,7 @@ class ButtonsPanel extends StatelessWidget {
             Expanded(
               child: SliderListTileReveal(
                 enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context),
                 title: const Text('Pressed border width'),
                 value: controller.outlinedButtonPressedBorderWidth,
                 onChanged: controller.setOutlinedButtonPressedBorderWidth,
