@@ -346,6 +346,7 @@ class FlexSubThemesData with Diagnosticable {
     this.searchViewElevation,
     this.searchBarRadius,
     this.searchViewRadius,
+    this.searchUseGlobalShape = false,
     this.searchViewHeaderHeight,
     this.searchBarTextStyle, // Not in Playground
     this.searchViewHeaderTextStyle, // Not in Playground
@@ -2413,6 +2414,16 @@ class FlexSubThemesData with Diagnosticable {
   /// If in full screen defaults to 0.
   final double? searchViewRadius;
 
+  /// Use global shape theming on SearchBar and SearchView.
+  ///
+  /// When [searchUseGlobalShape] is `true`, and if either [searchBarRadius] or
+  /// [searchViewRadius] properties are not to defined the global shape and
+  /// radius are used as their default.
+  ///
+  /// Defaults to false, global radius [defaultRadius] or
+  /// [defaultRadiusAdaptive] are not used.
+  final bool searchUseGlobalShape;
+
   /// The height of the search field on the search view.
   ///
   /// If null, the default value is 56.0.
@@ -4129,6 +4140,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? searchViewElevation,
     final double? searchBarRadius,
     final double? searchViewRadius,
+    final bool? searchUseGlobalShape,
     final double? searchViewHeaderHeight,
     final WidgetStateProperty<TextStyle?>? searchBarTextStyle,
     final TextStyle? searchViewHeaderTextStyle,
@@ -4580,6 +4592,7 @@ class FlexSubThemesData with Diagnosticable {
       searchViewElevation: searchViewElevation ?? this.searchViewElevation,
       searchBarRadius: searchBarRadius ?? this.searchBarRadius,
       searchViewRadius: searchViewRadius ?? this.searchViewRadius,
+      searchUseGlobalShape: searchUseGlobalShape ?? this.searchUseGlobalShape,
       searchViewHeaderHeight:
           searchViewHeaderHeight ?? this.searchViewHeaderHeight,
       searchBarTextStyle: searchBarTextStyle ?? this.searchBarTextStyle,
@@ -5079,6 +5092,7 @@ class FlexSubThemesData with Diagnosticable {
         other.searchViewElevation == searchViewElevation &&
         other.searchBarRadius == searchBarRadius &&
         other.searchViewRadius == searchViewRadius &&
+        other.searchUseGlobalShape == searchUseGlobalShape &&
         other.searchViewHeaderHeight == searchViewHeaderHeight &&
         other.searchBarTextStyle == searchBarTextStyle &&
         other.searchViewHeaderTextStyle == searchViewHeaderTextStyle &&
@@ -5465,6 +5479,7 @@ class FlexSubThemesData with Diagnosticable {
         searchViewElevation,
         searchBarRadius,
         searchViewRadius,
+        searchUseGlobalShape,
         searchViewHeaderHeight,
         searchBarTextStyle,
         searchViewHeaderTextStyle,
@@ -5954,6 +5969,8 @@ class FlexSubThemesData with Diagnosticable {
         .add(DiagnosticsProperty<double>('searchBarRadius', searchBarRadius));
     properties
         .add(DiagnosticsProperty<double>('searchViewRadius', searchViewRadius));
+    properties
+        .add(DiagnosticsProperty<bool>('searchUseShape', searchUseGlobalShape));
     properties.add(DiagnosticsProperty<double>(
         'searchViewHeaderHeight', searchViewHeaderHeight));
     properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(

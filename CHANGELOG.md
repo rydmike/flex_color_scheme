@@ -72,7 +72,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   
 **TODOs**
 
-- **TODO** Add some controls for `SearchView` and `SearchBar` to the Playground app.
+- **TODO** Add foreground color to `SearchView` and `SearchBar` theme.
+- **TODO** Fix `SearchBar` and `SearchView` tinted interactions.
 
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and they are issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands and doc comments and code TODOs where relevant.
@@ -312,7 +313,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added `SearchBar` and `SearchView` theming support to `FlexSubThemesData` and made corresponding `FlexSubThemes.searchBarTheme` and `FlexSubThemes.searchViewTheme` properties use them in `FlexColorScheme` as `SearchBarThemeData` and `SearchViewThemeData` theming properties.
-  - The following `FlexSubThemesData` properties were added: `searchBarBackgroundSchemeColor`, `searchViewBackgroundSchemeColor`, `searchBarElevation`, `searchViewElevation`, `searchBarRadius`, `searchViewRadius`, `searchViewHeaderHeight`, `searchBarTextStyle`, `searchViewHeaderTextStyle`, `searchBarHintStyle`, `searchViewHeaderHintStyle`, `searchViewDividerColor`, `searchBarShadowColor`, `searchBarTextCapitalization`, `searchBarPadding`, `searchBarConstraints` and `searchViewConstraints`.
+  - The following `FlexSubThemesData` properties were added: `searchBarBackgroundSchemeColor`, `searchViewBackgroundSchemeColor`, `searchBarElevation`, `searchViewElevation`, `searchBarRadius`, `searchViewRadius`, `searchViewHeaderHeight`, `searchBarTextStyle`, `searchViewHeaderTextStyle`, `searchBarHintStyle`, `searchViewHeaderHintStyle`, `searchViewDividerColor`, `searchBarShadowColor`, `searchBarTextCapitalization`, `searchBarPadding`, `searchBarConstraints`, `searchViewConstraints` and `searchUseGlobalShape`.
 
 
 **CHANGE**
@@ -389,6 +390,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The **Chip** settings now include separate color for the `ChoiceChip (called Suggestion Chip in M3 design). The feature that blends the selected main overall Chip color was made optional. It is a useful feature due to the limited independent theme control over the Chips.  
 - The **Chip** settings panel now includes font size and padding controls.
 - The **ListTile** settings panel now includes a large number of theming controls for ListTile theming.
+- The **SearchBar** settings panel now includes theming controls for SearchBar and SearchView theming.
 - On the **Adaptive Theming** settings panel you can now also control the `MaterialTapTargetSize` setting.
 - The **Segmented Buttons** settings panel now includes a control for selected foreground colors for both `SegementedButton` and `ToggleButtons`. 
 - The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.

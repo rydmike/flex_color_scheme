@@ -1277,6 +1277,38 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    menuIndicatorRadius: ${controller.menuIndicatorRadius!.toStringAsFixed(1)},\n'
       : '';
   //
+  // SearchBar and SearchView setup CODE
+  //
+  final String searchBarBackgroundSchemeColor = controller
+              .searchBackgroundSchemeColor !=
+          null
+      ? '    searchBarBackgroundSchemeColor: ${controller.searchBackgroundSchemeColor!},\n'
+      : '';
+  final String searchViewBackgroundSchemeColor = controller
+              .searchBackgroundSchemeColor !=
+          null
+      ? '    searchViewBackgroundSchemeColor: ${controller.searchBackgroundSchemeColor!},\n'
+      : '';
+  final String searchBarElevation = controller.searchElevation != null
+      ? '    searchBarElevation: ${controller.searchElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String searchViewElevation = controller.searchElevation != null
+      ? '    searchViewElevation: ${controller.searchElevation!.toStringAsFixed(1)},\n'
+      : '';
+  final String searchBarRadius = controller.searchRadius != null
+      ? '    searchBarRadius: ${controller.searchRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String searchViewRadius = controller.searchRadius != null
+      ? '    searchViewRadius: ${controller.searchRadius!.toStringAsFixed(1)},\n'
+      : '';
+  final String searchViewHeaderHeight = controller.searchViewHeaderHeight !=
+          null
+      ? '    searchViewHeaderHeight: ${controller.searchViewHeaderHeight!.toStringAsFixed(1)},\n'
+      : '';
+  final String searchUseShape = controller.searchUseGlobalShape
+      ? '    searchUseShape: ${controller.searchUseGlobalShape},\n'
+      : '';
+  //
   // NavigationBar setup CODE
   //
   final String navigationBarSelectedLabelSchemeColor = controller
@@ -1714,6 +1746,15 @@ String generateThemeDartCode(ThemeController controller) {
           '$menuIndicatorForegroundSchemeColor'
           '$menuIndicatorRadius'
           //
+          '$searchBarBackgroundSchemeColor'
+          '$searchViewBackgroundSchemeColor'
+          '$searchBarElevation'
+          '$searchViewElevation'
+          '$searchBarRadius'
+          '$searchViewRadius'
+          '$searchViewHeaderHeight'
+          '$searchUseShape'
+          //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
           '$navigationBarMutedUnselectedLabel'
@@ -1984,6 +2025,15 @@ String generateThemeDartCode(ThemeController controller) {
           '$menuIndicatorBackgroundSchemeColor'
           '$menuIndicatorForegroundSchemeColor'
           '$menuIndicatorRadius'
+          //
+          '$searchBarBackgroundSchemeColor'
+          '$searchViewBackgroundSchemeColor'
+          '$searchBarElevation'
+          '$searchViewElevation'
+          '$searchBarRadius'
+          '$searchViewRadius'
+          '$searchViewHeaderHeight'
+          '$searchUseShape'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
