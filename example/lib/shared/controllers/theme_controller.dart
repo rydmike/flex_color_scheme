@@ -638,6 +638,21 @@ class ThemeController with ChangeNotifier {
     _menuIndicatorRadius = await _themeService.load(
         Store.keyMenuIndicatorRadius, Store.defaultMenuIndicatorRadius);
     //
+    // SearchView and SearchBar SETTINGS.
+    _searchBackgroundSchemeColor = await _themeService.load(
+        Store.keySearchBackgroundSchemeColor,
+        Store.defaultSearchBackgroundSchemeColor);
+    _searchElevation = await _themeService.load(
+        Store.keySearchElevation, Store.defaultSearchElevation);
+    _searchRadius = await _themeService.load(
+        Store.keySearchRadius, Store.defaultSearchRadius);
+    _searchViewHeaderHeight = await _themeService.load(
+        Store.keySearchViewHeaderHeight, Store.defaultSearchViewHeaderHeight);
+    _searchUseGlobalShape = await _themeService.load(
+        Store.keySearchUseGlobalShape, Store.defaultSearchUseGlobalShape);
+    _searchIsFullScreen = await _themeService.load(
+        Store.keySearchIsFullScreen, Store.defaultSearchIsFullScreen);
+    //
     // NavigationBar SETTINGS.
     _navBarBackgroundSchemeColor = await _themeService.load(
         Store.keyNavBarBackgroundSchemeColor,
@@ -1318,6 +1333,15 @@ class ThemeController with ChangeNotifier {
     setMenuIndicatorForegroundSchemeColor(
         Store.defaultMenuIndicatorForegroundSchemeColor, false);
     setMenuIndicatorRadius(Store.defaultMenuIndicatorRadius, false);
+    //
+    // SearchView and SearchBar SETTINGS.
+    setSearchBackgroundSchemeColor(
+        Store.defaultSearchBackgroundSchemeColor, false);
+    setSearchElevation(Store.defaultSearchElevation, false);
+    setSearchRadius(Store.defaultSearchRadius, false);
+    setSearchViewHeaderHeight(Store.defaultSearchViewHeaderHeight, false);
+    setSearchUseGlobalShape(Store.defaultSearchUseGlobalShape, false);
+    setSearchIsFullScreen(Store.defaultSearchUseGlobalShape, false);
     //
     // NavigationBar SETTINGS.
     setNavBarBackgroundSchemeColor(
@@ -4746,6 +4770,66 @@ class ThemeController with ChangeNotifier {
     _menuIndicatorRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyMenuIndicatorRadius, value));
+  }
+
+  // SearchView and SearchBar SETTINGS.
+  // ===========================================================================
+
+  late SchemeColor? _searchBackgroundSchemeColor;
+  SchemeColor? get searchBackgroundSchemeColor => _searchBackgroundSchemeColor;
+  void setSearchBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _searchBackgroundSchemeColor) return;
+    _searchBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySearchBackgroundSchemeColor, value));
+  }
+
+  late double? _searchElevation;
+  double? get searchElevation => _searchElevation;
+  void setSearchElevation(double? value, [bool notify = true]) {
+    if (value == _searchElevation) return;
+    _searchElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySearchElevation, value));
+  }
+
+  late double? _searchRadius;
+  double? get searchRadius => _searchRadius;
+  void setSearchRadius(double? value, [bool notify = true]) {
+    if (value == _searchRadius) return;
+    _searchRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySearchRadius, value));
+  }
+
+  late double? _searchViewHeaderHeight;
+  double? get searchViewHeaderHeight => _searchViewHeaderHeight;
+  void setSearchViewHeaderHeight(double? value, [bool notify = true]) {
+    if (value == _searchViewHeaderHeight) return;
+    _searchViewHeaderHeight = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySearchViewHeaderHeight, value));
+  }
+
+  late bool _searchUseGlobalShape;
+  bool get searchUseGlobalShape => _searchUseGlobalShape;
+  void setSearchUseGlobalShape(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _searchUseGlobalShape) return;
+    _searchUseGlobalShape = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySearchUseGlobalShape, value));
+  }
+
+  late bool _searchIsFullScreen;
+  bool get searchIsFullScreen => _searchIsFullScreen;
+  void setSearchIsFullScreen(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _searchIsFullScreen) return;
+    _searchIsFullScreen = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySearchIsFullScreen, value));
   }
 
   // NavigationBar SETTINGS.

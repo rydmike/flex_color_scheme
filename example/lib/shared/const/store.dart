@@ -1425,6 +1425,41 @@ sealed class Store {
   // Default value for the menuIndicatorRadius, also reset settings.
   static const double? defaultMenuIndicatorRadius = null;
 
+  // SearchView and SearchBar SETTINGS.
+  // ===========================================================================
+
+  // Key used to read and save the searchBackgroundSchemeColor value.
+  static const String keySearchBackgroundSchemeColor =
+      'searchBackgroundSchemeColor';
+  // Default value for the searchBackgroundSchemeColor,
+  // also used to reset settings.
+  static const SchemeColor? defaultSearchBackgroundSchemeColor = null;
+
+  // Key used to read and save the searchElevation value.
+  static const String keySearchElevation = 'searchElevation';
+  // Default value for the searchElevation, also reset settings.
+  static const double? defaultSearchElevation = null;
+
+  // Key used to read and save the searchRadius value.
+  static const String keySearchRadius = 'searchRadius';
+  // Default value for the searchRadius, also reset settings.
+  static const double? defaultSearchRadius = null;
+
+  // Key used to read and save the searchViewHeaderHeight value.
+  static const String keySearchViewHeaderHeight = 'searchViewHeaderHeight';
+  // Default value for the searchViewHeaderHeight, also reset settings.
+  static const double? defaultSearchViewHeaderHeight = null;
+
+  // Key used to read and save the searchUseGlobalShape value.
+  static const String keySearchUseGlobalShape = 'searchUseGlobalShape';
+  // Default value for the searchUseGlobalShape, also to reset settings.
+  static const bool defaultSearchUseGlobalShape = false;
+
+  // Key used to read and save the searchIsFullScreen value.
+  static const String keySearchIsFullScreen = 'searchIsFullScreen';
+  // Default value for the searchIsFullScreen, also to reset settings.
+  static const bool defaultSearchIsFullScreen = false;
+
   // NavigationBar SETTINGS.
   // ===========================================================================
 

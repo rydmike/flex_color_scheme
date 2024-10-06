@@ -454,7 +454,10 @@ const List<Topic> themeTopics = <Topic>[
     icon: Icons.search,
     info: 'A SearchBar allows users to enter a keyword '
         'or phrase and get relevant information. It is an alternative to '
-        'other forms of navigation.\n',
+        'other forms of navigation.\n'
+        'The SearchBar and SearchView were added in Flutter '
+        '3.10. A convenient way to create a SearchBar with a '
+        'SearchView is by using the factory SearchAnchor.bar\n',
   ),
   Topic(
     group: TopicGroup.bars,

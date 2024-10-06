@@ -527,6 +527,17 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             menuIndicatorForegroundSchemeColor:
                 controller.menuIndicatorForegroundSchemeColor,
             menuIndicatorRadius: controller.menuIndicatorRadius,
+            // SearchView and SearchBar settings.
+            searchBarBackgroundSchemeColor:
+                controller.searchBackgroundSchemeColor,
+            searchViewBackgroundSchemeColor:
+                controller.searchBackgroundSchemeColor,
+            searchBarElevation: controller.searchElevation,
+            searchViewElevation: controller.searchElevation,
+            searchBarRadius: controller.searchRadius,
+            searchViewRadius: controller.searchRadius,
+            searchViewHeaderHeight: controller.searchViewHeaderHeight,
+            searchUseGlobalShape: controller.searchUseGlobalShape,
             // NavigationBar settings.
             navigationBarSelectedLabelSchemeColor:
                 controller.navBarSelectedLabelSchemeColor,

@@ -7919,8 +7919,8 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.searchBarBackgroundSchemeColor,
               elevation: subTheme.searchBarElevation,
               shadowColor: subTheme.menuBarShadowColor,
-              // TODO(rydmike): Add platform radius? Try it.
-              radius: subTheme.searchBarRadius, // ?? platformRadius,
+              radius: subTheme.searchBarRadius ??
+                  (subTheme.searchUseGlobalShape ? platformRadius : null),
               padding: subTheme.searchBarPadding,
               textStyle: subTheme.searchBarTextStyle,
               hintStyle: subTheme.searchBarHintStyle,
@@ -7937,8 +7937,8 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.searchViewBackgroundSchemeColor,
               elevation: subTheme.searchViewElevation,
-              // TODO(rydmike): Add platform radius? Try it.
-              radius: subTheme.searchViewRadius, // ?? platformRadius,
+              radius: subTheme.searchViewRadius ??
+                  (subTheme.searchUseGlobalShape ? platformRadius : null),
               headerHeight: subTheme.searchViewHeaderHeight,
               dividerColor: subTheme.searchViewDividerColor,
               headerTextStyle: subTheme.searchViewHeaderTextStyle,
