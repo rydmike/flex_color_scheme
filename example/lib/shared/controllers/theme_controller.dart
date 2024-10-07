@@ -1591,73 +1591,113 @@ class ThemeController with ChangeNotifier {
 
   /// Set TextField values to Flutter M3 defaults.
   Future<void> setTextFieldToM3([bool doNotify = true]) async {
-    setInputDecoratorSchemeColorLight(null, false);
-    setInputDecoratorSchemeColorDark(null, false);
+    // Start with setting everything to defaults, without notify
+    await setTextFieldToDefaults(false);
 
-    setInputDecoratorBorderSchemeColorLight(null, false);
-    setInputDecoratorBorderSchemeColorDark(null, false);
-
-    setInputDecoratorBackgroundAlphaDark(null, false);
-    setInputDecoratorBackgroundAlphaLight(null, false);
-    setInputDecoratorIsFilled(true, false);
-
-    setInputDecoratorBorderRadius(null, false);
+    // Only the border type is different from Playground defaults in M3 mode.
     setInputDecoratorBorderType(FlexInputBorderType.underline, false);
-    setInputDecoratorBorderWidth(null, false);
-    setInputDecoratorFocusedBorderWidth(null, false);
-    setInputDecoratorBorderRadius(null, false);
-    setInputDecoratorFocusedHasBorder(true, false);
-    setInputDecoratorUnfocusedHasBorder(true, false);
-    setInputDecoratorUnfocusedBorderIsColored(false, false);
 
-    setInputDecoratorPrefixIconSchemeColor(null, false);
-    setInputDecoratorPrefixIconDarkSchemeColor(null, false);
-    setInputDecoratorSuffixIconSchemeColor(null, false);
-    setInputDecoratorSuffixIconDarkSchemeColor(null, false);
+    // Only notify at end, if asked to do so, to do so is default.
+    if (doNotify) notifyListeners();
+  }
+
+  /// Set TextField values to Playground Outlined.
+  Future<void> setTextFieldToPlaygroundOutlined([bool doNotify = true]) async {
+    // Start with setting everything to defaults, without notify
+    await setTextFieldToDefaults(false);
+    // Overall color
+    setInputDecoratorSchemeColorLight(SchemeColor.primary, false);
+    setInputDecoratorSchemeColorDark(SchemeColor.primary, false);
+    setInputDecoratorBackgroundAlphaLight(7, false);
+    setInputDecoratorBackgroundAlphaDark(40, false);
+    setInputDecoratorIsFilled(true, false);
+    // Border and radius
+    setInputDecoratorBorderType(FlexInputBorderType.outline, false);
+    setInputDecoratorBorderSchemeColorLight(SchemeColor.primary, false);
+    setInputDecoratorBorderSchemeColorDark(SchemeColor.primary, false);
+    setInputDecoratorBorderRadius(8, false);
+    setInputDecoratorUnfocusedHasBorder(true, false);
+    setInputDecoratorUnfocusedBorderIsColored(true, false);
+    setInputDecoratorBorderWidth(1, false);
+    setInputDecoratorFocusedBorderWidth(2.0, false);
+    // Icon colors
+    setInputDecoratorPrefixIconSchemeColor(
+        SchemeColor.onPrimaryFixedVariant, false);
+    setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor.primaryFixed, false);
+    setInputDecoratorSuffixIconSchemeColor(SchemeColor.primary, false);
+    setInputDecoratorSuffixIconDarkSchemeColor(SchemeColor.primary, false);
+    // Custom padding
+    setInputDecoratorPaddingTop(16, false);
+    setInputDecoratorPaddingBottom(12, false);
+    // Only notify at end, if asked to do so, to do so is default.
+    if (doNotify) notifyListeners();
+  }
+
+  /// Set TextField values to Playground Focused Dense no focused outlined.
+  Future<void> setTextFieldToPlaygroundDense([bool doNotify = true]) async {
+    // Start with setting everything to defaults, without notify
+    await setTextFieldToDefaults(false);
+    // Overall color
+    setInputDecoratorSchemeColorLight(SchemeColor.primary, false);
+    setInputDecoratorSchemeColorDark(SchemeColor.primary, false);
+    setInputDecoratorBackgroundAlphaLight(14, false);
+    setInputDecoratorBackgroundAlphaDark(45, false);
+    setInputDecoratorIsFilled(true, false);
+    // Border and radius
+    setInputDecoratorBorderType(FlexInputBorderType.outline, false);
+    setInputDecoratorBorderSchemeColorLight(SchemeColor.primary, false);
+    setInputDecoratorBorderSchemeColorDark(SchemeColor.primary, false);
+    setInputDecoratorBorderRadius(10, false);
+    setInputDecoratorUnfocusedHasBorder(false, false);
+    setInputDecoratorFocusedBorderWidth(1.0, false);
+    // Icon colors
+    setInputDecoratorPrefixIconSchemeColor(
+        SchemeColor.onPrimaryFixedVariant, false);
+    setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor.primaryFixed, false);
+    // A dense text field
+    setInputDecoratorIsDense(true, false);
     // Only notify at end, if asked to do so, to do so is default.
     if (doNotify) notifyListeners();
   }
 
   /// Set TextField values to FlexColorScheme defaults.
   Future<void> setTextFieldToDefaults([bool doNotify = true]) async {
+    // Using the same order as widgets are on screen to make easier to
+    // see we got them all.
+
+    // Background and opacity
+    setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
     setInputDecoratorSchemeColorLight(
         Store.defaultInputDecoratorSchemeColorLight, false);
     setInputDecoratorSchemeColorDark(
         Store.defaultInputDecoratorSchemeColorDark, false);
-    setInputDecoratorBorderSchemeColorLight(
-        Store.defaultInputDecoratorBorderSchemeColorLight, false);
-    setInputDecoratorBorderSchemeColorDark(
-        Store.defaultInputDecoratorBorderSchemeColorDark, false);
-    setInputDecoratorIsFilled(Store.defaultInputDecoratorIsFilled, false);
-    setInputDecoratorIsDense(Store.defaultInputDecoratorIsDense, false);
-    //
-    setInputDecoratorPaddingStart(
-        Store.defaultInputDecoratorPaddingStart, false);
-    setInputDecoratorPaddingEnd(Store.defaultInputDecoratorPaddingEnd, false);
-    setInputDecoratorPaddingTop(Store.defaultInputDecoratorPaddingTop, false);
-    setInputDecoratorPaddingBottom(
-        Store.defaultInputDecoratorPaddingBottom, false);
-    //
     setInputDecoratorBackgroundAlphaLight(
         Store.defaultInputDecoratorBackgroundAlphaLight, false);
     setInputDecoratorBackgroundAlphaDark(
         Store.defaultInputDecoratorBackgroundAlphaDark, false);
+    // Border type and radius
     setInputDecoratorBorderType(Store.defaultInputDecoratorBorderType, false);
+    setAdaptiveResponseInputDecoratorRadius(
+        Store.defaultAdaptiveResponseInputDecoratorRadius, false);
     setInputDecoratorBorderRadius(
         Store.defaultInputDecoratorBorderRadius, false);
     setInputDecoratorBorderRadiusAdaptive(
         Store.defaultInputDecoratorBorderRadiusAdaptive, false);
-    setAdaptiveResponseInputDecoratorRadius(
-        Store.defaultAdaptiveResponseInputDecoratorRadius, false);
-    setInputDecoratorUnfocusedHasBorder(
-        Store.defaultInputDecoratorUnfocusedHasBorder, false);
-    setInputDecoratorFocusedHasBorder(
-        Store.defaultInputDecoratorFocusedHasBorder, false);
+    // Border color and focused border usage
+    setInputDecoratorBorderSchemeColorLight(
+        Store.defaultInputDecoratorBorderSchemeColorLight, false);
+    setInputDecoratorBorderSchemeColorDark(
+        Store.defaultInputDecoratorBorderSchemeColorDark, false);
     setInputDecoratorUnfocusedBorderIsColored(
         Store.defaultInputDecoratorUnfocusedBorderIsColored, false);
+    setInputDecoratorUnfocusedHasBorder(
+        Store.defaultInputDecoratorUnfocusedHasBorder, false);
     setInputDecoratorBorderWidth(Store.defaultInputDecoratorBorderWidth, false);
+    setInputDecoratorFocusedHasBorder(
+        Store.defaultInputDecoratorFocusedHasBorder, false);
     setInputDecoratorFocusedBorderWidth(
         Store.defaultInputDecoratorFocusedBorderWidth, false);
+    // Prefix and suffix icon colors
     setInputDecoratorPrefixIconSchemeColor(
         Store.defaultInputDecoratorPrefixIconSchemeColor, false);
     setInputDecoratorPrefixIconDarkSchemeColor(
@@ -1666,24 +1706,31 @@ class ThemeController with ChangeNotifier {
         Store.defaultInputDecoratorSuffixIconSchemeColor, false);
     setInputDecoratorSuffixIconDarkSchemeColor(
         Store.defaultInputDecoratorSuffixIconDarkSchemeColor, false);
+    // Dense and padding
+    setInputDecoratorIsDense(Store.defaultInputDecoratorIsDense, false);
+    setInputDecoratorPaddingStart(
+        Store.defaultInputDecoratorPaddingStart, false);
+    setInputDecoratorPaddingEnd(Store.defaultInputDecoratorPaddingEnd, false);
+    setInputDecoratorPaddingTop(Store.defaultInputDecoratorPaddingTop, false);
+    setInputDecoratorPaddingBottom(
+        Store.defaultInputDecoratorPaddingBottom, false);
     //
     // TextSelection SETTINGS.
     setInputCursorLightSchemeColor(
         Store.defaultInputCursorLightSchemeColor, false);
-    setInputSelectionLightSchemeColor(
-        Store.defaultInputSelectionLightSchemeColor, false);
-    setInputSelectionLightOpacity(
-        Store.defaultInputSelectionLightOpacity, false);
-    setInputSelectionHandleLightSchemeColor(
-        Store.defaultInputSelectionHandleLightSchemeColor, false);
-    //
     setInputCursorDarkSchemeColor(
         Store.defaultInputCursorDarkSchemeColor, false);
-    setInputSelectionDarkSchemeColor(
-        Store.defaultInputSelectionDarkSchemeColor, false);
-    setInputSelectionDarkOpacity(Store.defaultInputSelectionDarkOpacity, false);
+    setInputSelectionHandleLightSchemeColor(
+        Store.defaultInputSelectionHandleLightSchemeColor, false);
     setInputSelectionHandleDarkSchemeColor(
         Store.defaultInputSelectionHandleDarkSchemeColor, false);
+    setInputSelectionLightSchemeColor(
+        Store.defaultInputSelectionLightSchemeColor, false);
+    setInputSelectionDarkSchemeColor(
+        Store.defaultInputSelectionDarkSchemeColor, false);
+    setInputSelectionLightOpacity(
+        Store.defaultInputSelectionLightOpacity, false);
+    setInputSelectionDarkOpacity(Store.defaultInputSelectionDarkOpacity, false);
     //
     // Only notify at end, if asked to do so, to do so is default.
     if (doNotify) notifyListeners();
@@ -1696,7 +1743,8 @@ class ThemeController with ChangeNotifier {
     //
     // First reset all settings to defaults so we start with a clean slate.
     // But we do not change theme mode, we keep it. Also we will not notify
-    // any listeners yet, we do that once when all settings have been set.
+    // any listeners yet, we do that when all settings have been set.
+    //
     // If there is no matching settings ID, settings are just rest to defaults.
     await resetAllToDefaults(resetMode: false, doNotify: false);
 

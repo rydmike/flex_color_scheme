@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Oct 7, 2024**
+**Oct 8, 2024**
 
 ### SUMMARY
 
@@ -44,7 +44,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **CRITICAL TODOS**
 
 * **TODO**: Review and update premade designs in the Playground app.
-* **TODO**: Playground: Review and update use M3 and FCS defaults feature for **TextField**. Add two more examples, FCS style (from FCS M2 style) and a "nice" dense one with only focused having a border.
+  * Should be mostly OK, but maybe tune adaptive responsive layouts and TextField for some examples, and also elevation and radius for SearchBar.
+  
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
   * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
@@ -73,7 +74,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **TODOs**
 
 - **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
+- **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
 - **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
+- **TODO**: Add responsive one-two column switch for current two column field layouts. It can be a bit tight on small screens, so let's make it responsive after all. I was planning to not do it, but it is necessary. 
 
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
@@ -87,10 +90,10 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
     - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
 
 
-**DECIDED TO POSTPONE TO A LATER RELEASE**
+**DECIDED TO POSTPONE TO A LATER RELEASE TO GET THIS ONE OUT**
 
-- Add fidelity for iOS adaptive `AppBar`.
-  - There were some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Look it up and consider adding them as a platform adaptive feature.
+- Add some minor fidelity for iOS adaptive `AppBar`.
+  - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Look it up and consider adding them as a platform adaptive feature.
 - Platform adaptive `ShapeBorder` configuration, including `Squircle`.
   - Maybe even push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Custom shadow color global and selection per component.
@@ -383,7 +386,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 
-- To **TextField** settings panel, added the ability to change the focused suffix icon color. The **TextField** also got controls for dense input decorator and custom content padding, as well as for using a platform adaptive border radius.
+- To **TextField** settings panel, added the ability to change the focused suffix icon color. The **TextField** also got controls for dense input decorator and custom content padding, as well as for using a platform adaptive border radius. It also has two new pre-made design examples. In addition to selecting Material-3 default and Playground defaults, you can no also used "Colored outline" and "Dense, no focused border" as design examples or TextField starting configuration points.
 
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
 - To the **AppBar** settings panel, title foreground color, leading icon and actions icon color settings were added.

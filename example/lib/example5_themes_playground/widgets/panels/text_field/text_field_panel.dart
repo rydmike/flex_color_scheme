@@ -10,7 +10,9 @@ import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
 import '../../dialogs/set_text_field_to_defaults_dialog.dart';
+import '../../dialogs/set_text_field_to_dense_dialog.dart';
 import '../../dialogs/set_text_field_to_m3_dialog.dart';
+import '../../dialogs/set_text_field_to_outlined_dialog.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/test_adaptive_response.dart';
@@ -46,6 +48,30 @@ class TextFieldPanel extends StatelessWidget {
     );
     if (reset ?? false) {
       await controller.setTextFieldToDefaults();
+    }
+  }
+
+  Future<void> _handleSetToOutlined(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetTextFieldToOutlinedDialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setTextFieldToPlaygroundOutlined();
+    }
+  }
+
+  Future<void> _handleSetToDense(BuildContext context) async {
+    final bool? reset = await showDialog<bool?>(
+      context: context,
+      builder: (BuildContext context) {
+        return const SetTextFieldToDenseDialog();
+      },
+    );
+    if (reset ?? false) {
+      await controller.setTextFieldToPlaygroundDense();
     }
   }
 
@@ -198,40 +224,108 @@ class TextFieldPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ListTileReveal(
-          title: const Text('Use Material 3 default TextField style?'),
-          subtitleReveal: const Text(
-              'Update settings below to match M3 default '
-              'values. Also sets text selection style.\n'
-              'Can also be used in M2 mode, but the result is different from '
-              'when used in actual M3 mode.'),
-          trailing: FilledButton(
-            onPressed: () async {
-              await _handleSetToM3(context);
-            },
-            child: const Text('Set to M3'),
-          ),
-          onTap: () async {
-            await _handleSetToM3(context);
-          },
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                title: const Text('Material-3 defaults'),
+                subtitleReveal: const Text(
+                    'Update settings to match Material-3 default '
+                    'style. Also sets text selection style.\n'
+                    'Can also be used in Material-2 mode, but the result is '
+                    'different from when used in actual M3 mode.'),
+                trailing: IconButton(
+                  isSelected: true,
+                  onPressed: () async {
+                    await _handleSetToM3(context);
+                  },
+                  icon: const Icon(Icons.refresh),
+                ),
+                onTap: () async {
+                  await _handleSetToM3(context);
+                },
+              ),
+            ),
+            Expanded(
+              child: ListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                title: const Text('Playground defaults'),
+                subtitleReveal: const Text(
+                    "Update settings to Playground's own "
+                    'default values. Also resets text selection '
+                    'style.\n'
+                    'The defaults for Material-2 and Material-3 are slightly '
+                    'different, the Material-3 mode defaults are very close '
+                    'to Material defaults, but use a filled outline style.'),
+                trailing: IconButton(
+                  isSelected: true,
+                  onPressed: () async {
+                    await _handleSetToDefaults(context);
+                  },
+                  icon: const Icon(Icons.refresh),
+                ),
+                onTap: () async {
+                  await _handleSetToDefaults(context);
+                },
+              ),
+            ),
+          ],
         ),
-        ListTileReveal(
-          title: const Text('Reset TextField to FlexColorScheme defaults?'),
-          subtitleReveal: const Text("Update settings to FlexColorScheme's own "
-              'opinionated default values. Also resets text selection style.\n'
-              'The FCS defaults for M2 and M3 are different, the M3 mode '
-              'defaults are very close to M3 defaults, but use a filled '
-              'outline style.'),
-          trailing: FilledButton(
-            onPressed: () async {
-              await _handleSetToDefaults(context);
-            },
-            child: const Text('Defaults'),
-          ),
-          onTap: () async {
-            await _handleSetToDefaults(context);
-          },
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context),
+                title: const Text('Colored outline'),
+                subtitleReveal: const Text(
+                  'Update settings to an example with colored '
+                  'outlined border and primary opacity background '
+                  'color. Also use custom colors on prefix and suffix '
+                  'icons, and less padding. Used colors and opacities '
+                  'varies between light and dark mode.',
+                ),
+                trailing: IconButton(
+                  isSelected: true,
+                  onPressed: () async {
+                    await _handleSetToOutlined(context);
+                  },
+                  icon: const Icon(Icons.refresh),
+                ),
+                onTap: () async {
+                  await _handleSetToOutlined(context);
+                },
+              ),
+            ),
+            Expanded(
+              child: ListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context),
+                title: const Text('Dense, no focused border'),
+                subtitleReveal: const Text(
+                  'Update settings to an example with dense field, no '
+                  'focused border and '
+                  'a colored outlined border and primary opacity background '
+                  'color. Also use custom colors on prefix and suffix '
+                  'icons. Used colors and opacities '
+                  'varies between light and dark mode.',
+                ),
+                trailing: IconButton(
+                  isSelected: true,
+                  onPressed: () async {
+                    await _handleSetToDense(context);
+                  },
+                  icon: const Icon(Icons.refresh),
+                ),
+                onTap: () async {
+                  await _handleSetToDense(context);
+                },
+              ),
+            ),
+          ],
         ),
+        const Divider(),
         Padding(
           padding: EdgeInsetsDirectional.only(
             start: 16,
