@@ -250,8 +250,11 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       elevation: 0,
       hasBorder: true,
       borderRadius: 4,
-      wheelDiameter: 195,
+      wheelDiameter: 200,
+      wheelWidth: 18,
       wheelHasBorder: false,
+      wheelSquarePadding: 6,
+      wheelSquareBorderRadius: 4,
       pickersEnabled: const <ColorPickerType, bool>{
         ColorPickerType.both: false,
         ColorPickerType.primary: true,
@@ -315,7 +318,7 @@ class ColorPickerInkWellDialog extends StatelessWidget {
                 insetPadding: const EdgeInsets.all(16),
                 barrierColor: Colors.black.withOpacity(0.05),
                 constraints: const BoxConstraints(
-                  minHeight: 560,
+                  minHeight: 570,
                   minWidth: 450,
                   maxWidth: 450,
                 ),
