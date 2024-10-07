@@ -596,10 +596,10 @@ String generateThemeDartCode(ThemeController controller) {
           controller.inputDecoratorPaddingTop != null ||
           controller.inputDecoratorPaddingBottom != null
       ? '    inputDecoratorContentPadding: EdgeInsetsDirectional.fromSTEB('
-          '${controller.inputDecoratorPaddingStart ?? DecoratorDefault.start.padding(controller)}, '
-          '${controller.inputDecoratorPaddingTop ?? DecoratorDefault.top.padding(controller)}, '
-          '${controller.inputDecoratorPaddingEnd ?? DecoratorDefault.end.padding(controller)}, '
-          '${controller.inputDecoratorPaddingBottom ?? DecoratorDefault.bottom.padding(controller)}),\n'
+          '${controller.inputDecoratorPaddingStart?.toStringAsFixed(0) ?? DecoratorDefault.start.padding(controller).toStringAsFixed(0)}, '
+          '${controller.inputDecoratorPaddingTop?.toStringAsFixed(0) ?? DecoratorDefault.top.padding(controller).toStringAsFixed(0)}, '
+          '${controller.inputDecoratorPaddingEnd?.toStringAsFixed(0) ?? DecoratorDefault.end.padding(controller).toStringAsFixed(0)}, '
+          '${controller.inputDecoratorPaddingBottom?.toStringAsFixed(0) ?? DecoratorDefault.bottom.padding(controller).toStringAsFixed(0)}),\n'
       : '';
 
   final String inputDecoratorBackgroundAlphaLight = controller
@@ -752,12 +752,11 @@ String generateThemeDartCode(ThemeController controller) {
           controller.listTilePaddingTop != null ||
           controller.listTilePaddingEnd != null ||
           controller.listTilePaddingBottom != null
-      ? '    listTileContentPadding: ${EdgeInsetsDirectional.fromSTEB(
-          controller.listTilePaddingStart ?? 16,
-          controller.listTilePaddingTop ?? 0,
-          controller.listTilePaddingEnd ?? (controller.useMaterial3 ? 24 : 16),
-          controller.listTilePaddingBottom ?? 0,
-        )},\n'
+      ? '    listTileContentPadding: EdgeInsetsDirectional.fromSTEB('
+          '${(controller.listTilePaddingStart ?? 16).toStringAsFixed(0)}, '
+          '${(controller.listTilePaddingTop ?? 0).toStringAsFixed(0)}, '
+          '${(controller.listTilePaddingEnd ?? (controller.useMaterial3 ? 24 : 16)).toStringAsFixed(0)}, '
+          '${(controller.listTilePaddingBottom ?? 0).toStringAsFixed(0)}),\n'
       : '';
 
   final String listTileHorizontalTitleGap = controller
@@ -846,12 +845,12 @@ String generateThemeDartCode(ThemeController controller) {
           controller.chipPaddingTop != null ||
           controller.chipPaddingEnd != null ||
           controller.chipPaddingBottom != null
-      ? '    chipPadding: ${EdgeInsetsDirectional.fromSTEB(
-          controller.chipPaddingStart ?? (controller.useMaterial3 ? 8 : 4),
-          controller.chipPaddingTop ?? (controller.useMaterial3 ? 8 : 4),
-          controller.chipPaddingEnd ?? (controller.useMaterial3 ? 8 : 4),
-          controller.chipPaddingBottom ?? (controller.useMaterial3 ? 8 : 4),
-        )},\n'
+      ? '    chipPadding: EdgeInsetsDirectional.fromSTEB('
+          '${(controller.chipPaddingStart ?? (controller.useMaterial3 ? 8 : 4)).toStringAsFixed(0)}, '
+          '${(controller.chipPaddingTop ?? (controller.useMaterial3 ? 8 : 4)).toStringAsFixed(0)}, '
+          '${(controller.chipPaddingEnd ?? (controller.useMaterial3 ? 8 : 4)).toStringAsFixed(0)}, '
+          '${(controller.chipPaddingBottom ?? (controller.useMaterial3 ? 8 : 4)).toStringAsFixed(0)}'
+          '),\n'
       : '';
 
   final String chipBorderRadius = controller.chipBorderRadius != null
