@@ -77,7 +77,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
 - **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
 - **TODO**: Add responsive one-two column switch for current two column field layouts. It can be a bit tight on small screens, so let's make it responsive after all. I was planning to not do it, but it is necessary. 
-
+- **TODO**: Feature to copy theme code as a Flutter theme file.
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
