@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-/// Dialog to confirm if user wants to set TextField to M3.
-class SetTextFieldToM3Dialog extends StatelessWidget {
-  const SetTextFieldToM3Dialog({super.key});
+/// Dialog to confirm if user wants to set TextField to Outlined example.
+class SetTextFieldToDenseDialog extends StatelessWidget {
+  const SetTextFieldToDenseDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Set TextField to Material-3?'),
-      content: const Text('Set the text field settings to values that '
-          'match Material-3 defaults?'),
+      title: const Text('Set TextField to Dense?'),
+      content: const Text('Set the text field settings to an example '
+          'using dense text field and no outline border?'),
       actions: <Widget>[
         TextButton(
             onPressed: () {
@@ -20,7 +20,7 @@ class SetTextFieldToM3Dialog extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pop(true);
             },
-            child: const Text('Set to M3')),
+            child: const Text('Set to dense')),
       ],
     );
   }
