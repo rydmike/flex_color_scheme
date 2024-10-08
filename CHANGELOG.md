@@ -75,7 +75,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
 - **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
-- **TODO**: Feature to copy theme code as a Flutter theme file.
+
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
@@ -338,10 +338,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
 
-- On each theme settings panel, many controls no appear in tw columns to reduce the need to scroll so much on wider media and see more controls on the same screen. The layout is panel width responsive and controls will be in one column as before on smaller media.
+- On each theme settings panel, many controls now appear in two columns to reduce the need to scroll so much on wider media and see more controls on the same screen. The layout is panel width responsive and controls will be in one column as before on smaller media.
 - Split the "FAB and Chip" settings panels to separate panels **FAB** and **Chip**. 
 - Split the "BottomAppBar and SearchBar" panels to separate panels **SearchBar** and **BottomAppBar**.
 
+- The **Theme Code** view panel now has a toggle that allows you to generate the configured code for the theme as input suitable for a separate app theme file. It has static getters that you can use in your `MaterialApp`'s `theme` and `darkTheme`. 
+   >**TIP:** You can modify this file and e.g., pass in controller that contains user-configurable settings for theme configuration properties and generate the theme on the fly in your app. This way you can let the user configure the theme in your app, a few props anyway. This is basically what the Playground app does with all theming properties. That is why you can see the result and impact of defined theme in the Playground app itself, as you modify the desired theme configuration in the app. 
 
 
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.

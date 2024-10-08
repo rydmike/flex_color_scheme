@@ -48,6 +48,11 @@ sealed class Store {
   // Default value for the useSubThemes, also used to reset settings.
   static const bool defaultUseSubThemes = true;
 
+  // Key used to read and save the codeForFile value.
+  static const String keyCodeForFile = 'codeForFile';
+  // Default value for the codeForFile, also used to reset settings.
+  static const bool defaultCodeForFile = false;
+
   // Key used to read and save the applyThemeToAllCupertino value.
   //
   // This setting is used to by the Playground to define:
