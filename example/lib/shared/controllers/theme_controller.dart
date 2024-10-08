@@ -1858,7 +1858,7 @@ class ThemeController with ChangeNotifier {
       setUseSecondary(true, false);
       setUseTertiary(true, false);
       setKeepPrimary(true, false);
-      setUsedFlexToneSetup(7, false); // <== Jolly config.
+      setUsedFlexToneSetup(16, false); // <== Jolly config.
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
@@ -1922,6 +1922,9 @@ class ThemeController with ChangeNotifier {
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
       setNavRailIndicatorBorderRadius(12, false);
+      // SearchBar
+      setSearchUseGlobalShape(true, false);
+      setSearchElevation(1, false);
     }
     // 4) Material 3 does M2
     else if (settingsId == 4) {
@@ -2020,6 +2023,9 @@ class ThemeController with ChangeNotifier {
       setNavRailUnselectedSchemeColor(SchemeColor.onSurface, false);
       setNavRailIndicatorSchemeColor(SchemeColor.secondary, false);
       setNavRailMuteUnselected(true, false);
+      // ListTile
+      setListTileMinVerticalPadding(4, false);
+      setListTilePaddingEnd(16, false);
     }
     // 5) High contrast
     else if (settingsId == 5) {
@@ -2036,7 +2042,7 @@ class ThemeController with ChangeNotifier {
       setUseKeyColors(true, false);
       setUseSecondary(true, false);
       setUseTertiary(true, false);
-      setUsedFlexToneSetup(6, false); // <== Ultra contrast.
+      setUsedFlexToneSetup(15, false); // <== Ultra contrast.
       setKeepPrimary(true, false);
       setKeepSecondary(true, false);
       setKeepTertiary(true, false);
@@ -2044,6 +2050,8 @@ class ThemeController with ChangeNotifier {
       setOnMainsUseBWDark(false, false);
       setOnSurfacesUseBWLight(true, false);
       setOnSurfacesUseBWDark(false, false);
+      setUseMonoSurfacesLight(true, false);
+      setUseMonoSurfacesDark(true, false);
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
@@ -2108,8 +2116,11 @@ class ThemeController with ChangeNotifier {
       setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
+      // SearchBar
+      setSearchUseGlobalShape(true, false);
+      setSearchElevation(3, false);
     }
-    // 6) One shade
+    // 6) One hue
     else if (settingsId == 6) {
       // Legacy swap
       setSwapLegacyColors(false, false);
@@ -2125,7 +2136,7 @@ class ThemeController with ChangeNotifier {
       setUseKeyColors(true, false);
       setUseSecondary(true, false);
       setUseTertiary(true, false);
-      setUsedFlexToneSetup(9, false); // One hue
+      setUsedFlexToneSetup(18, false); // <-- One hue
       setKeepPrimary(true, false);
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
@@ -2181,6 +2192,9 @@ class ThemeController with ChangeNotifier {
       setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
+      // SearchBar
+      setSearchUseGlobalShape(true, false);
+      setSearchElevation(2, false);
     }
     // 7) Platform adaptive.
     else if (settingsId == 7) {
@@ -2298,6 +2312,9 @@ class ThemeController with ChangeNotifier {
       setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
+      // SearchBar
+      setSearchUseGlobalShape(true, false);
+      setSearchElevation(4, false);
     }
     // 8) Colorful Scaffold.
     else if (settingsId == 8) {
@@ -2306,8 +2323,8 @@ class ThemeController with ChangeNotifier {
       // Set blend modes and levels.
       setSurfaceModeLight(FlexSurfaceMode.highScaffoldLowSurface, false);
       setSurfaceModeDark(FlexSurfaceMode.highScaffoldLowSurface, false);
-      setBlendLevel(10, false);
-      setBlendLevelDark(15, false);
+      setBlendLevel(20, false);
+      setBlendLevelDark(30, false);
       setBlendLightOnColors(true, false);
       setBlendDarkOnColors(true, false);
       setBlendOnLevel(20, false);
@@ -2316,7 +2333,7 @@ class ThemeController with ChangeNotifier {
       setUseKeyColors(true, false);
       setUseSecondary(false, false);
       setUseTertiary(true, false);
-      setUsedFlexToneSetup(1, false); // M3 default.
+      setUsedFlexToneSetup(20, false); // <-- Chroma scheme.
       setKeepPrimary(true, false);
       setKeepTertiary(true, false);
       setKeepDarkPrimary(true, true);
@@ -2385,6 +2402,9 @@ class ThemeController with ChangeNotifier {
       setNavRailSelectedLabelSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorSchemeColor(SchemeColor.primary, false);
       setNavRailIndicatorOpacity(1.0, false);
+      // SearchBar
+      setSearchUseGlobalShape(true, false);
+      setSearchElevation(1, false);
     }
     // 9) Computed theme
     else if (settingsId == 9) {
@@ -2458,6 +2478,9 @@ class ThemeController with ChangeNotifier {
           SchemeColor.onSecondaryContainer, false);
       setNavRailIndicatorSchemeColor(SchemeColor.secondaryContainer, false);
       setNavRailIndicatorOpacity(1.0, false);
+      // SearchBar
+      setSearchUseGlobalShape(true, false);
+      setSearchElevation(1, false);
     }
     // All settings have been modified, now notify listeners.
     notifyListeners();

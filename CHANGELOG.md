@@ -43,9 +43,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS**
 
-* **TODO**: Review and update premade designs in the Playground app.
-  * Should be mostly OK, but maybe tune adaptive responsive layouts and TextField for some examples, and also elevation and radius for SearchBar.
-  
+- **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
+- **TODO**: Fix AppBarStyle primary (dark in light) does not set icon contrast correct.
+
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
   * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
@@ -75,16 +75,14 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
 - **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
-- **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
-- **TODO**: Fix AppBarStyle primary (dark in light) does not set icon contrast correct.
 - **TODO**: Feature to copy theme code as a Flutter theme file.
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
 
 - **MINOR KNOWN ISSUES**
-  - The `toScheme` method may need some updates for raw `FlexColorScheme?` constructor.
-    - Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, as FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
+  - The `toScheme` method may need some updates for the raw `FlexColorScheme?` constructor.
+    - Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
 
   - Cancel input colors from custom theme get reset to active ColorScheme, not to input values.
     - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.

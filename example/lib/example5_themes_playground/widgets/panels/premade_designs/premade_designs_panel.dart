@@ -4,6 +4,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../shared/test_adaptive_response.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 
 /// A panel with ready premade design we can click on to use.
@@ -32,12 +33,13 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Themes Playground default',
           seeded: false,
-          subtitle: 'Set settings to their Themes Playground defaults. In '
-              'Material 2 mode the FCS default setup is quite opinionated, it '
-              'mimics M3 in M2 mode. The M3 mode is mostly M3 style, '
-              'with some minor tweaks. The NavigationBar and Rail use '
-              'primary colored selected items with opacity based indicators, '
-              'inspired from M2.',
+          subtitle: 'Set settings to their Playground defaults. In '
+              'Material-2 mode the default setup is quite opinionated, it '
+              'mimics Material-3 in Material-2 mode. In Material-3 mode the '
+              'Playground defaults are 98% Material-3 default styles, '
+              'with some minor tweaks on Tooltip and SnackBar, as well as '
+              'InputDecorator hovered error labelStyle. It uses error instead '
+              'of onErrorContainer. ',
           settingsId: 0,
           controller: controller,
         ),
@@ -46,9 +48,11 @@ class PremadeDesignsPanel extends StatelessWidget {
           title: 'Material 3 default',
           seeded: true,
           subtitle: 'Set Playground settings to a configuration that '
-              'matches the Material 3 design defaults. Seeded color scheme is '
-              'activated using the default Flutter Material 3 seeded '
-              'ColorScheme algorithm.',
+              'matches the Material-3 design defaults. Seeded color scheme is '
+              'activated using the default Flutter Material-3 '
+              'DynamicSchemeVariant TonalSpot setting, with only one key color '
+              'used to generate the ColorScheme, from the primary light '
+              'mode input color.',
           settingsId: 1,
           controller: controller,
         ),
@@ -82,11 +86,12 @@ class PremadeDesignsPanel extends StatelessWidget {
         ),
         const Divider(),
         SetupListTile(
-          title: 'Material 3 does M2',
+          title: 'Material-3 does M2',
           seeded: false,
-          subtitle: 'Shows how you can emulate Material 2 styles in Material 3 '
-              'mode, with M3 components. It does not use surface blends or '
-              'seeded ColorScheme since it is not used in M2. '
+          subtitle: 'Shows how you can emulate Material-2 styles in Material-3 '
+              'mode, with Material-3 components. It does not use surface '
+              'blends or seeded ColorScheme since it is not used in '
+              'Material-2.\n'
               'It removes elevation tint in light mode, but keeps it in dark '
               'where it is useful and sort of exist in M2 as well. It brings '
               'back elevation shadows in both light and dark mode, if they '
@@ -108,15 +113,16 @@ class PremadeDesignsPanel extends StatelessWidget {
               'colors in light mode. It has very high surface blends, but '
               'since true-black and plain-white setting is used, it is not '
               'very visible and we get an ink black scaffold in dark mode and '
-              'plain white one in light mode. This theme shows how to '
-              'configure a very high contrast version of any used input '
+              'plain white one in light mode. It also uses monochrome surface '
+              'colors with now primary color in neutrals. This theme shows '
+              'how to configure a very high contrast version of any used input '
               'colors, usable for accessibility.',
           settingsId: 5,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
-          title: 'One shade',
+          title: 'One hue',
           seeded: true,
           subtitle: 'This theme limits input colors to only the primary color. '
               'It uses the "One Hue" seed generation choice to create '
@@ -125,7 +131,7 @@ class PremadeDesignsPanel extends StatelessWidget {
               'FlexColorScheme computes all colors based on the primary '
               'input color. This is done by setting "usedColors" to one. '
               'The primary color is also locked in and as used as a fixed '
-              'brand color even with seeded color schemes. Need a theme where '
+              'brand color even with seeded ColorSchemes. Need a theme where '
               'primary light theme must have a fixed brand color and '
               'want the rest of theme to be nice color shades derived from it? '
               'This delivers it!',
@@ -171,34 +177,36 @@ class PremadeDesignsPanel extends StatelessWidget {
               'the scaffold background color, and primary color on navigators, '
               'with filled TextField using primary opacity and rounded '
               'corners. Has tinted TextTheme and tinted interactions. Seed '
-              'generated ColorScheme is ON, with primary and tertiary keys '
-              'used. Primary and tertiary colors are locked to their given '
+              'generated ColorScheme is ON, using the "Chroma" strategy that '
+              'respect the chroma in each used key color and targets it. '
+              'It has primary and tertiary keys enabled. '
+              'Primary and tertiary colors are locked to their given '
               'design values in light mode, but only primary is locked in '
-              'dark mode. '
+              'dark mode.\n'
               'Using high blend on scaffold requires that UI '
               'widgets are placed in containers with lower blend, e.g. Cards. '
               'The theme simulator apps Components and Material do this, as '
               'does the Playground app itself. This design is more common on '
               'desktop sized WEB apps. Earlier Playground versions defaulted '
-              'to this design. It can look impactful on desktop WEB apps, but '
-              'it requires extra care to use it, especially on phone sized '
+              'to this design. It can look impactful on desktop and WEB apps, '
+              'but requires extra care to use it, especially on phone sized '
               'apps. This example also work well if you turn OFF seeded color '
-              'scheme, it becomes less color tinted then.',
+              'scheme.',
           settingsId: 8,
           controller: controller,
         ),
         const Divider(),
         SetupListTile(
-          title: 'Computed dark theme',
+          title: 'Computed theme',
           seeded: false,
           subtitle: 'This theme is not seeded, but still uses only three input '
               'colors, primary, secondary and tertiary colors from light '
               'theme mode and computes all other colors, including all dark '
-              'mode colors. If '
-              "you don't want to use seeded colors and only want to specify "
+              'mode colors. If you do not want to use a seed generated '
+              'ColorScheme and only want to specify '
               'the main light theme colors, primary, secondary and tertiary, '
-              'maybe 3 brand colors, and create '
-              'a full M3 ColorScheme based on them, this is an optional way. '
+              'maybe they are your three brand colors, and create '
+              'a full ColorScheme based on them, this is a way to do so. '
               'Obviously the dark theme does not have the same fidelity as '
               'hand tuned dark mode colors, but it is a quick and easy way '
               'to get a dark mode theme without defining its colors when not '
@@ -209,10 +217,11 @@ class PremadeDesignsPanel extends StatelessWidget {
         const Divider(),
         UseSeededColorSchemeSwitch(controller: controller),
         SwitchListTileReveal(
-          title: const Text('Confirm premade theme usage selection'),
+          title: const Text('Confirm selection?'),
           subtitleReveal: const Text('To toggle quickly between premade '
               'configurations, turn OFF this option. It is ON by default to '
-              'prevent accidental activation of premade themes.'),
+              'prevent accidental activation of premade themes that will '
+              'overwrite you current theme settings when activated.'),
           value: controller.confirmPremade,
           onChanged: controller.setConfirmPremade,
         ),
@@ -228,7 +237,7 @@ class PremadeDesignsPanel extends StatelessWidget {
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _materialDocs,
-                  text: 'Material 3 design guide',
+                  text: 'Material-3 design guide',
                 ),
                 TextSpan(
                   style: spanTextStyle,
@@ -238,6 +247,9 @@ class PremadeDesignsPanel extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        TestAdaptiveResponse(controller),
+        const SizedBox(height: 16),
       ],
     );
   }
