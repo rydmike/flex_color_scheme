@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -79,48 +80,44 @@ class SearchBarPanel extends StatelessWidget {
           valueHeading: 'ELEV',
           valueDefaultLabel: '6',
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Radius'),
-                subtitleReveal: const Text(
-                  'The SearchBar default is Stadium shaped '
-                  'and the default SearchView is 28dp. In the Playground there '
-                  'is currently only one control for the radius, but they are '
-                  'separate in the FlexColorScheme API, you can see this '
-                  'in the generated code too.\n',
-                ),
-                value: controller.searchRadius,
-                onChanged: controller.setSearchRadius,
-                min: 0,
-                max: 40,
-                divisions: 40,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: defaultLabel,
-                valueDefaultDisabledLabel: 'Stadium/28dp',
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Radius'),
+              subtitleReveal: const Text(
+                'The SearchBar default is Stadium shaped '
+                'and the default SearchView is 28dp. In the Playground there '
+                'is currently only one control for the radius, but they are '
+                'separate in the FlexColorScheme API, you can see this '
+                'in the generated code too.\n',
               ),
+              value: controller.searchRadius,
+              onChanged: controller.setSearchRadius,
+              min: 0,
+              max: 40,
+              divisions: 40,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: defaultLabel,
+              valueDefaultDisabledLabel: 'Stadium/28dp',
             ),
-            Expanded(
-              child: SwitchListTileReveal(
-                title: const Text('Use global'),
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                subtitleReveal: const Text(
-                    'If ON the SearchBar and SearchView will use the '
-                    'global border radius or its platform adaptive radius, '
-                    'if radius is at the default value here.\n'),
-                value: controller.searchUseGlobalShape,
-                onChanged: controller.setSearchUseGlobalShape,
-              ),
+            lastWidget: SwitchListTileReveal(
+              title: const Text('Use global'),
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              subtitleReveal:
+                  const Text('If ON the SearchBar and SearchView will use the '
+                      'global border radius or its platform adaptive radius, '
+                      'if radius is at the default value here.\n'),
+              value: controller.searchUseGlobalShape,
+              onChanged: controller.setSearchUseGlobalShape,
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('SearchView header height'),
