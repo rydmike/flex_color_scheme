@@ -2120,6 +2120,10 @@ class _ChipShowcaseState extends State<ChipShowcase> {
   bool showCheckmark = true;
   bool showAvatar = false;
 
+  static const RoundedRectangleBorder _tileShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+  );
+
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
@@ -2422,7 +2426,8 @@ class _ChipShowcaseState extends State<ChipShowcase> {
           if (widget.showOptions)
             SwitchListTile(
               dense: true,
-              contentPadding: EdgeInsets.zero,
+              shape: _tileShape,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 6),
               title: const Text('Show checkmark when selected'),
               value: showCheckmark,
               onChanged: (bool value) {
@@ -2434,7 +2439,8 @@ class _ChipShowcaseState extends State<ChipShowcase> {
           if (widget.showOptions)
             SwitchListTile(
               dense: true,
-              contentPadding: EdgeInsets.zero,
+              shape: _tileShape,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 6),
               title: const Text('Show optional avatar'),
               value: showAvatar,
               onChanged: (bool value) {
@@ -2464,6 +2470,10 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
   bool _errorStateWithIcons = false;
   bool _forceFilled = false;
   bool _forceOutlined = false;
+
+  static const RoundedRectangleBorder _tileShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+  );
 
   @override
   void initState() {
@@ -2621,8 +2631,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
             children: <Widget>[
               Expanded(
                 child: SwitchListTileReveal(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 6),
                   dense: true,
+                  shape: _tileShape,
                   title: const Text('Filled'),
                   subtitleReveal: const Text('This is not a theme toggle. It '
                       'sets the Decoration.filled to true on widget level. '
@@ -2642,8 +2653,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
               const SizedBox(width: 16),
               Expanded(
                 child: SwitchListTileReveal(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 6),
                   dense: true,
+                  shape: _tileShape,
                   title: const Text('Outlined'),
                   subtitleReveal: const Text('This is not a theme toggle. It '
                       'sets border to the default OutlineInputBorder() on '
