@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -271,83 +272,79 @@ class DialogPanel extends StatelessWidget {
           valueDefaultDisabledLabel: useMaterial3 ? '6' : '24',
         ),
         const Divider(),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Radius'),
-                subtitleReveal: const Text(
-                  'This border radius adjusts radius for general Dialogs and '
-                  'thus also AlertDialog. By default in FlexColorScheme the '
-                  'border radius on the TimePickerDialog and DatePickerDialog '
-                  'also defaults to this radius if not defined separately.\n'
-                  '\n'
-                  'The Flutter default border radius in M2 mode is 4dp and M3 '
-                  'mode it is 28dp. FlexColorScheme defaults to 28dp in both '
-                  'M2 and M3 when using its component themes. If you think it '
-                  'is too round, try e.g. 16dp.\n'
-                  '\n'
-                  'If you use adaptive radius on the global default radius, '
-                  'and keep this dialog radius at default value and the dialog '
-                  'adaptive radius OFF, the Dialogs gets the effective value '
-                  'of the global radius value and any used adaptive response. '
-                  'The dialog radius settings and its platform adaptive '
-                  'response will override any global setting when activated.\n',
-                ),
-                value: controller.dialogBorderRadius,
-                onChanged: controller.setDialogBorderRadius,
-                min: 0,
-                max: 50,
-                divisions: 50,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: _dialogRadiusLabel(controller),
-                valueDefaultDisabledLabel: useMaterial3 ? '28 dp' : '4 dp',
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Radius'),
+              subtitleReveal: const Text(
+                'This border radius adjusts radius for general Dialogs and '
+                'thus also AlertDialog. By default in FlexColorScheme the '
+                'border radius on the TimePickerDialog and DatePickerDialog '
+                'also defaults to this radius if not defined separately.\n'
+                '\n'
+                'The Flutter default border radius in M2 mode is 4dp and M3 '
+                'mode it is 28dp. FlexColorScheme defaults to 28dp in both '
+                'M2 and M3 when using its component themes. If you think it '
+                'is too round, try e.g. 16dp.\n'
+                '\n'
+                'If you use adaptive radius on the global default radius, '
+                'and keep this dialog radius at default value and the dialog '
+                'adaptive radius OFF, the Dialogs gets the effective value '
+                'of the global radius value and any used adaptive response. '
+                'The dialog radius settings and its platform adaptive '
+                'response will override any global setting when activated.\n',
               ),
+              value: controller.dialogBorderRadius,
+              onChanged: controller.setDialogBorderRadius,
+              min: 0,
+              max: 50,
+              divisions: 50,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: _dialogRadiusLabel(controller),
+              valueDefaultDisabledLabel: useMaterial3 ? '28 dp' : '4 dp',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl &&
-                    controller.adaptiveResponseDialogRadius !=
-                        AdaptiveResponse.off &&
-                    controller.adaptiveResponseDialogRadius != null,
-                title: const Text('Adaptive radius'),
-                subtitleReveal: const Text(
-                  'You can define a separate Dialog border radius that gets '
-                  'used adaptively on selected platforms. This is useful if '
-                  'you for example want to keep M3 design Dialog radius on the '
-                  'Android platform, but want a less rounded design on other '
-                  'platforms.\n'
-                  '\n'
-                  'With the API you can define which platforms an adaptive '
-                  'feature is used on, including separate definitions when '
-                  'using the app in a web build on each platform. Presented '
-                  'options are using built-in preconfigured constructors, they '
-                  'cover typical use cases.\n'
-                  '\n'
-                  'The default border radius in M2 mode is 4dp and M3 mode it '
-                  'is 28dp. FCS defaults to 28dp in both M2 and M3 when using '
-                  'component themes. If you think it is too round, '
-                  'try e.g. 16dp.\n',
-                ),
-                value: controller.dialogBorderRadiusAdaptive,
-                onChanged: controller.setDialogBorderRadiusAdaptive,
-                min: 0,
-                max: 50,
-                divisions: 50,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: _adaptiveDialogRadiusLabel(controller),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl &&
+                  controller.adaptiveResponseDialogRadius !=
+                      AdaptiveResponse.off &&
+                  controller.adaptiveResponseDialogRadius != null,
+              title: const Text('Adaptive radius'),
+              subtitleReveal: const Text(
+                'You can define a separate Dialog border radius that gets '
+                'used adaptively on selected platforms. This is useful if '
+                'you for example want to keep M3 design Dialog radius on the '
+                'Android platform, but want a less rounded design on other '
+                'platforms.\n'
+                '\n'
+                'With the API you can define which platforms an adaptive '
+                'feature is used on, including separate definitions when '
+                'using the app in a web build on each platform. Presented '
+                'options are using built-in preconfigured constructors, they '
+                'cover typical use cases.\n'
+                '\n'
+                'The default border radius in M2 mode is 4dp and M3 mode it '
+                'is 28dp. FCS defaults to 28dp in both M2 and M3 when using '
+                'component themes. If you think it is too round, '
+                'try e.g. 16dp.\n',
               ),
+              value: controller.dialogBorderRadiusAdaptive,
+              onChanged: controller.setDialogBorderRadiusAdaptive,
+              min: 0,
+              max: 50,
+              divisions: 50,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: _adaptiveDialogRadiusLabel(controller),
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl,
           values: AdaptiveResponse.values,
