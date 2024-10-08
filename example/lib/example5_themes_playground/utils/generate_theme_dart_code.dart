@@ -1304,8 +1304,8 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    searchViewHeaderHeight: ${controller.searchViewHeaderHeight!.toStringAsFixed(1)},\n'
       : '';
-  final String searchUseShape = controller.searchUseGlobalShape
-      ? '    searchUseShape: ${controller.searchUseGlobalShape},\n'
+  final String searchUseGlobalShape = controller.searchUseGlobalShape
+      ? '    searchUseGlobalShape: ${controller.searchUseGlobalShape},\n'
       : '';
   //
   // NavigationBar setup CODE
@@ -1752,7 +1752,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$searchBarRadius'
           '$searchViewRadius'
           '$searchViewHeaderHeight'
-          '$searchUseShape'
+          '$searchUseGlobalShape'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
@@ -2032,7 +2032,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$searchBarRadius'
           '$searchViewRadius'
           '$searchViewHeaderHeight'
-          '$searchUseShape'
+          '$searchUseGlobalShape'
           //
           '$navigationBarSelectedLabelSchemeColor'
           '$navigationBarUnselectedLabelSchemeColor'
@@ -2279,6 +2279,7 @@ String generateThemeDartCode(ThemeController controller) {
   //
   final String code = controller.codeForFile
       ? "import 'package:flex_color_scheme/flex_color_scheme.dart';\n"
+          "import 'package:flutter/cupertino.dart';\n"
           "import 'package:flutter/material.dart';\n"
           '/// The [AppTheme] defines light and dark themes for the app.\n'
           '///\n'
