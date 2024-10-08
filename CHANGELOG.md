@@ -77,7 +77,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
 - **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
 - **TODO**: Fix AppBarStyle primary (dark in light) does not set icon contrast correct.
-- **TODO**: Add responsive one-two column switch for current two column field layouts. It can be a bit tight on small screens, so let's make it responsive after all. I was planning to not do it, but it is necessary. 
 - **TODO**: Feature to copy theme code as a Flutter theme file.
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
@@ -341,6 +340,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 **NEW**
 
+- On each theme settings panel, many controls no appear in tw columns to reduce the need to scroll so much on wider media and see more controls on the same screen. The layout is panel width responsive and controls will be in one column as before on smaller media.
 - Split the "FAB and Chip" settings panels to separate panels **FAB** and **Chip**. 
 - Split the "BottomAppBar and SearchBar" panels to separate panels **SearchBar** and **BottomAppBar**.
 
@@ -387,7 +387,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 
-- To **TextField** settings panel, added the ability to change the focused suffix icon color. The **TextField** also got controls for dense input decorator and custom content padding, as well as for using a platform adaptive border radius. It also has two new pre-made design examples. In addition to selecting Material-3 default and Playground defaults, you can no also used "Colored outline" and "Dense, no focused border" as design examples or TextField starting configuration points.
+- To **TextField** settings panel, added the ability to change the focused suffix icon color. The **TextField** also got controls for dense input decorator and custom content padding, as well as for using a platform adaptive border radius. It also has two new pre-made design examples. In addition to selecting Material-3 default and Playground defaults, you can now also use "Colored outline" and "Dense, no focused border" as design examples or as `TextField` starting configuration points.
 
 - To **AppBar** settings panel, added the **Center title** setting to control if the title is centered or not. This API has been available in FCS since v6, but not offered in the Playground, now it is in the Playground too.
 - To the **AppBar** settings panel, title foreground color, leading icon and actions icon color settings were added.
@@ -418,7 +418,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The feature **Use TextField's InputDecorationTheme in picker dialogs** on the "**Dialog**" settings panel is now OFF by default.
 
 - Modified settings panel background and header colors, as well as theme selector buttons to use suitable new `ColorScheme` surface theme colors, instead of computing their own shades from theme colors.
-- Changed surface and on-color blends to default to 0. Blends are not **ON** by default anymore in Playground. THe feature is still very cool and useful for many different design goals.
+- Changed surface and on-color blends to default to 0. Blends are not **ON** by default anymore in Playground. The feature is still very cool and useful for many different design goals.
 - Adjusted the code gen for surface colors setting "Main and container colors on color blending" to handle the new `FlexSubThemesData.blendOnColors` default being `false` instead of `true`. The Playground still by default sets `blendOnColors` to `true` for dark mode and defaults to `false` for light mode. This is done to mimic seed generated `ColorScheme` behavior, when not using seed generated colors.
 - Update Material-3 default info for `BottomAppBar` to `surfaceContainer`.
 - Improved the `Chip` presentation, by having them in own wraps per type and a column that names the Chip type with both Flutter and Material-3 naming 
