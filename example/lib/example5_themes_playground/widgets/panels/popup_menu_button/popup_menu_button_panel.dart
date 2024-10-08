@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -69,82 +70,74 @@ class PopupMenuButtonPanel extends StatelessWidget {
               'are not very useful designs anyway, so it should not be a big '
               'limitation.'),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ColorSchemePopupMenu(
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Background color'),
-                defaultLabel: 'surfaceContainer',
-                defaultLabelM2: 'surface',
-                value: controller.popupMenuSchemeColor,
-                onChanged: controller.setPopupMenuSchemeColor,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Background color'),
+              defaultLabel: 'surfaceContainer',
+              defaultLabelM2: 'surface',
+              value: controller.popupMenuSchemeColor,
+              onChanged: controller.setPopupMenuSchemeColor,
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Opacity'),
-                value: controller.popupMenuOpacity,
-                onChanged: controller.setPopupMenuOpacity,
-                min: 0,
-                max: 1,
-                divisions: 100,
-                valueDisplayScale: 100,
-                valueDecimalPlaces: 0,
-                valueHeading: 'OPACITY',
-                valueUnitLabel: ' %',
-                valueDefaultLabel: '100 %',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Opacity'),
+              value: controller.popupMenuOpacity,
+              onChanged: controller.setPopupMenuOpacity,
+              min: 0,
+              max: 1,
+              divisions: 100,
+              valueDisplayScale: 100,
+              valueDecimalPlaces: 0,
+              valueHeading: 'OPACITY',
+              valueUnitLabel: ' %',
+              valueDefaultLabel: '100 %',
             ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Container radius'),
-                subtitleReveal: const Text(
-                  'Does not use the global border radius setting. Avoid using '
-                  'a large border radius on the popup menu container. '
-                  'At higher than 12 dp, the none clipped highlight will '
-                  'overflow the menu container corners.\n',
-                ),
-                value: controller.popupMenuBorderRadius,
-                onChanged: controller.setPopupMenuBorderRadius,
-                min: 0,
-                max: 12,
-                divisions: 12,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: '4 dp',
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Container radius'),
+              subtitleReveal: const Text(
+                'Does not use the global border radius setting. Avoid using '
+                'a large border radius on the popup menu container. '
+                'At higher than 12 dp, the none clipped highlight will '
+                'overflow the menu container corners.\n',
               ),
+              value: controller.popupMenuBorderRadius,
+              onChanged: controller.setPopupMenuBorderRadius,
+              min: 0,
+              max: 12,
+              divisions: 12,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: '4 dp',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Elevation'),
-                value: controller.popupMenuElevation,
-                onChanged: controller.setPopupMenuElevation,
-                min: 0,
-                max: 20,
-                divisions: 20,
-                valueDecimalPlaces: 0,
-                valueHeading: 'ELEV',
-                valueDefaultLabel: useMaterial3 ? '3' : '6',
-                valueDefaultDisabledLabel: useMaterial3 ? '3' : '8',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Elevation'),
+              value: controller.popupMenuElevation,
+              onChanged: controller.setPopupMenuElevation,
+              min: 0,
+              max: 20,
+              divisions: 20,
+              valueDecimalPlaces: 0,
+              valueHeading: 'ELEV',
+              valueDefaultLabel: useMaterial3 ? '3' : '6',
+              valueDefaultDisabledLabel: useMaterial3 ? '3' : '8',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         const Divider(),
         const ListTileReveal(
           title: Text('DropdownButton'),
