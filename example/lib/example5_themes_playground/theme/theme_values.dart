@@ -60,7 +60,11 @@ sealed class ThemeValues {
   // Return ListTile content padding for a ListTile used in two column layout,
   // for the first column, that respects the themed content padding and
   // Material3 and Material2 padding logic.
-  static EdgeInsetsGeometry? tilePaddingStart(BuildContext context) {
+  static EdgeInsetsGeometry? tilePaddingStart(BuildContext context,
+      [bool isRow = true]) {
+    // If padding is for a single ListTile, return null.
+    if (!isRow) return null;
+    // Else return the padding for the ListTile in the first/start column.
     final EdgeInsetsGeometry? padding =
         Theme.of(context).listTileTheme.contentPadding;
     if (padding == null) {
@@ -76,7 +80,11 @@ sealed class ThemeValues {
   // Return ListTile content padding for a ListTile used in two column layout,
   // for the second column, that respects the themed content padding and
   // Material3 and Material2 padding logic.
-  static EdgeInsetsGeometry? tilePaddingEnd(BuildContext context) {
+  static EdgeInsetsGeometry? tilePaddingEnd(BuildContext context,
+      [bool isRow = true]) {
+    // If padding is for a single ListTile, return null.
+    if (!isRow) return null;
+    // Else return the padding for the ListTile in the second/end column.
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
     final EdgeInsetsGeometry? padding = theme.listTileTheme.contentPadding;
