@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
@@ -93,43 +94,39 @@ class NavigationDrawerPanel extends StatelessWidget {
         const SizedBox(height: 8),
         const DrawerShowcase(explain: false),
         const SizedBox(height: 16),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Radius'),
-                value: controller.drawerBorderRadius,
-                onChanged: controller.setDrawerBorderRadius,
-                min: 0,
-                max: 50,
-                divisions: 50,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: drawerRadiusDefaultLabel,
-                valueDefaultDisabledLabel: useMaterial3 ? '16 dp' : '0 dp',
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Radius'),
+              value: controller.drawerBorderRadius,
+              onChanged: controller.setDrawerBorderRadius,
+              min: 0,
+              max: 50,
+              divisions: 50,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: drawerRadiusDefaultLabel,
+              valueDefaultDisabledLabel: useMaterial3 ? '16 dp' : '0 dp',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Elevation'),
-                value: controller.drawerElevation,
-                onChanged: controller.setDrawerElevation,
-                min: 0,
-                max: 20,
-                divisions: 20,
-                valueHeading: 'ELEV',
-                valueDecimalPlaces: 0,
-                valueDefaultLabel: useMaterial3 ? '1' : '16',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Elevation'),
+              value: controller.drawerElevation,
+              onChanged: controller.setDrawerElevation,
+              min: 0,
+              max: 20,
+              divisions: 20,
+              valueHeading: 'ELEV',
+              valueDecimalPlaces: 0,
+              valueDefaultLabel: useMaterial3 ? '1' : '16',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Width'),
@@ -201,116 +198,104 @@ class NavigationDrawerPanel extends StatelessWidget {
         ),
         const NavigationDrawerShowcase(explain: false),
         const SizedBox(height: 16),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ColorSchemePopupMenu(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Indicator color'),
-                defaultLabel: 'secondaryContainer',
-                value: controller.drawerIndicatorSchemeColor,
-                onChanged: controller.setDrawerIndicatorSchemeColor,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Indicator color'),
+              defaultLabel: 'secondaryContainer',
+              value: controller.drawerIndicatorSchemeColor,
+              onChanged: controller.setDrawerIndicatorSchemeColor,
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Opacity'),
-                value: controller.drawerIndicatorOpacity,
-                onChanged: controller.setDrawerIndicatorOpacity,
-                min: 0,
-                max: 1,
-                divisions: 100,
-                valueDisplayScale: 100,
-                valueDecimalPlaces: 0,
-                valueHeading: 'OPACITY',
-                valueUnitLabel: ' %',
-                valueDefaultLabel: '100 %',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Opacity'),
+              value: controller.drawerIndicatorOpacity,
+              onChanged: controller.setDrawerIndicatorOpacity,
+              min: 0,
+              max: 1,
+              divisions: 100,
+              valueDisplayScale: 100,
+              valueDecimalPlaces: 0,
+              valueHeading: 'OPACITY',
+              valueUnitLabel: ' %',
+              valueDefaultLabel: '100 %',
             ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Indicator radius'),
-                value: controller.drawerIndicatorBorderRadius,
-                onChanged: controller.setDrawerIndicatorBorderRadius,
-                min: 0,
-                max: 50,
-                divisions: 50,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: indicatorDefaultLabel,
-                valueDefaultDisabledLabel: 'stadium',
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Indicator radius'),
+              value: controller.drawerIndicatorBorderRadius,
+              onChanged: controller.setDrawerIndicatorBorderRadius,
+              min: 0,
+              max: 50,
+              divisions: 50,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: indicatorDefaultLabel,
+              valueDefaultDisabledLabel: 'stadium',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Width'),
-                value: controller.drawerIndicatorWidth,
-                onChanged: controller.setDrawerIndicatorWidth,
-                min: 200,
-                max: 500,
-                divisions: 300,
-                valueHeading: 'WIDTH',
-                valueDecimalPlaces: 0,
-                valueDefaultLabel:
-                    '${derivedIndicatorWidth.toStringAsFixed(0)} dp',
-                valueDefaultDisabledLabel: '${304 - 2 * 12} dp',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Width'),
+              value: controller.drawerIndicatorWidth,
+              onChanged: controller.setDrawerIndicatorWidth,
+              min: 200,
+              max: 500,
+              divisions: 300,
+              valueHeading: 'WIDTH',
+              valueDecimalPlaces: 0,
+              valueDefaultLabel:
+                  '${derivedIndicatorWidth.toStringAsFixed(0)} dp',
             ),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: ColorSchemePopupMenu(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Selected item'),
-                defaultLabel: controller.drawerIndicatorSchemeColor == null
-                    ? 'onSecondaryContainer'
-                    : SchemeColor
-                        .values[FlexSubThemes.onSchemeColor(
-                                controller.drawerIndicatorSchemeColor!)
-                            .index]
-                        .name,
-                defaultDisabledLabel: 'onSecondaryContainer',
-                value: controller.drawerSelectedItemSchemeColor,
-                onChanged: controller.setDrawerSelectedItemSchemeColor,
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Selected item'),
+              defaultLabel: controller.drawerIndicatorSchemeColor == null
+                  ? 'onSecondaryContainer'
+                  : SchemeColor
+                      .values[FlexSubThemes.onSchemeColor(
+                              controller.drawerIndicatorSchemeColor!)
+                          .index]
+                      .name,
+              defaultDisabledLabel: 'onSecondaryContainer',
+              value: controller.drawerSelectedItemSchemeColor,
+              onChanged: controller.setDrawerSelectedItemSchemeColor,
             ),
-            Expanded(
-              child: ColorSchemePopupMenu(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Unselected item'),
-                defaultLabel: controller.drawerBackgroundSchemeColor == null
-                    ? 'onSurfaceVariant'
-                    : SchemeColor
-                        .values[FlexSubThemes.onSchemeColor(
-                                controller.drawerBackgroundSchemeColor!,
-                                useOnSurfaceVariant: true)
-                            .index]
-                        .name,
-                defaultDisabledLabel: 'onSurfaceVariant',
-                value: controller.drawerUnselectedItemSchemeColor,
-                onChanged: controller.setDrawerUnselectedItemSchemeColor,
-              ),
+            lastWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Unselected item'),
+              defaultLabel: controller.drawerBackgroundSchemeColor == null
+                  ? 'onSurfaceVariant'
+                  : SchemeColor
+                      .values[FlexSubThemes.onSchemeColor(
+                              controller.drawerBackgroundSchemeColor!,
+                              useOnSurfaceVariant: true)
+                          .index]
+                      .name,
+              defaultDisabledLabel: 'onSurfaceVariant',
+              value: controller.drawerUnselectedItemSchemeColor,
+              onChanged: controller.setDrawerUnselectedItemSchemeColor,
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
