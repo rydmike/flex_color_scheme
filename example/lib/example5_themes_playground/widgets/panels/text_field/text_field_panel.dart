@@ -5,6 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -224,61 +225,55 @@ class TextFieldPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Material-3 defaults'),
-                subtitleReveal: const Text(
-                    'Update settings to match Material-3 default '
-                    'style. Also sets text selection style.\n'
-                    'Can also be used in Material-2 mode, but the result is '
-                    'different from when used in actual M3 mode.'),
-                trailing: IconButton(
-                  isSelected: true,
-                  onPressed: () async {
-                    await _handleSetToM3(context);
-                  },
-                  icon: const Icon(Icons.refresh),
-                ),
-                onTap: () async {
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Material-3 defaults'),
+              subtitleReveal:
+                  const Text('Update settings to match Material-3 default '
+                      'style. Also sets text selection style.\n'
+                      'Can also be used in Material-2 mode, but the result is '
+                      'different from when used in actual M3 mode.'),
+              trailing: IconButton(
+                isSelected: true,
+                onPressed: () async {
                   await _handleSetToM3(context);
                 },
+                icon: const Icon(Icons.refresh),
               ),
+              onTap: () async {
+                await _handleSetToM3(context);
+              },
             ),
-            Expanded(
-              child: ListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                title: const Text('Playground defaults'),
-                subtitleReveal: const Text(
-                    "Update settings to Playground's own "
-                    'default values. Also resets text selection '
-                    'style.\n'
-                    'The defaults for Material-2 and Material-3 are slightly '
-                    'different, the Material-3 mode defaults are very close '
-                    'to Material defaults, but use a filled outline style.'),
-                trailing: IconButton(
-                  isSelected: true,
-                  onPressed: () async {
-                    await _handleSetToDefaults(context);
-                  },
-                  icon: const Icon(Icons.refresh),
-                ),
-                onTap: () async {
+            lastWidget: ListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              title: const Text('Playground defaults'),
+              subtitleReveal: const Text("Update settings to Playground's own "
+                  'default values. Also resets text selection '
+                  'style.\n'
+                  'The defaults for Material-2 and Material-3 are slightly '
+                  'different, the Material-3 mode defaults are very close '
+                  'to Material defaults, but use a filled outline style.'),
+              trailing: IconButton(
+                isSelected: true,
+                onPressed: () async {
                   await _handleSetToDefaults(context);
                 },
+                icon: const Icon(Icons.refresh),
               ),
+              onTap: () async {
+                await _handleSetToDefaults(context);
+              },
             ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
                 title: const Text('Colored outline'),
                 subtitleReveal: const Text(
                   'Update settings to an example with colored '
@@ -298,10 +293,8 @@ class TextFieldPanel extends StatelessWidget {
                   await _handleSetToOutlined(context);
                 },
               ),
-            ),
-            Expanded(
-              child: ListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
+              lastWidget: ListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
                 title: const Text('Dense, no focused border'),
                 subtitleReveal: const Text(
                   'Update settings to an example with dense field, no '
@@ -322,8 +315,9 @@ class TextFieldPanel extends StatelessWidget {
                   await _handleSetToDense(context);
                 },
               ),
-            ),
-          ],
+              isRow: isRow,
+            );
+          },
         ),
         const Divider(),
         Padding(
@@ -353,400 +347,350 @@ class TextFieldPanel extends StatelessWidget {
         ),
 
         if (isLight)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // 1st column light
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: enableControl,
-                  title: const Text('Background color (light)'),
-                  defaultLabel: 'surfaceContainerHighest',
-                  defaultLabelM2: 'primary',
-                  defaultDisabledLabelM2: '#0A000000: 4% black',
-                  value: controller.inputDecoratorSchemeColorLight,
-                  onChanged: controller.setInputDecoratorSchemeColorLight,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Background color (light)'),
+                defaultLabel: 'surfaceContainerHighest',
+                defaultLabelM2: 'primary',
+                defaultDisabledLabelM2: '#0A000000: 4% black',
+                value: controller.inputDecoratorSchemeColorLight,
+                onChanged: controller.setInputDecoratorSchemeColorLight,
               ),
-              // 2nd column light
-              Expanded(
-                child: SliderListTileReveal(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Opacity'),
-                  subtitle: Text('Alpha as opacity is '
-                      '$lightBackgroundLabelOpacity %'),
-                  value:
-                      controller.inputDecoratorBackgroundAlphaLight?.toDouble(),
-                  onChanged: (double? value) {
-                    controller.setInputDecoratorBackgroundAlphaLight(
-                        value == null || value < 0 ? null : value.toInt());
-                  },
-                  min: 0,
-                  max: 255,
-                  divisions: 255,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'ALPHA',
-                  valueDefaultLabel: lightBackgroundLabel,
-                ),
-              )
-            ],
-          )
+              lastWidget: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Opacity'),
+                subtitle: Text('Alpha as opacity is '
+                    '$lightBackgroundLabelOpacity %'),
+                value:
+                    controller.inputDecoratorBackgroundAlphaLight?.toDouble(),
+                onChanged: (double? value) {
+                  controller.setInputDecoratorBackgroundAlphaLight(
+                      value == null || value < 0 ? null : value.toInt());
+                },
+                min: 0,
+                max: 255,
+                divisions: 255,
+                valueDecimalPlaces: 0,
+                valueHeading: 'ALPHA',
+                valueDefaultLabel: lightBackgroundLabel,
+              ),
+              isRow: isRow,
+            );
+          })
         else
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // 1st column dark
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: enableControl,
-                  title: const Text('Background color (dark)'),
-                  defaultLabel: 'surfaceContainerHighest',
-                  defaultLabelM2: 'primary',
-                  defaultDisabledLabelM2: '#1AFFFFFF: 10% white',
-                  value: controller.inputDecoratorSchemeColorDark,
-                  onChanged: controller.setInputDecoratorSchemeColorDark,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Background color (dark)'),
+                defaultLabel: 'surfaceContainerHighest',
+                defaultLabelM2: 'primary',
+                defaultDisabledLabelM2: '#1AFFFFFF: 10% white',
+                value: controller.inputDecoratorSchemeColorDark,
+                onChanged: controller.setInputDecoratorSchemeColorDark,
               ),
-              // 2nd column dark
-              Expanded(
-                child: SliderListTileReveal(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Opacity'),
-                  subtitle: Text('Alpha as opacity is '
-                      '$darkBackgroundLabelOpacity %'),
-                  value:
-                      controller.inputDecoratorBackgroundAlphaDark?.toDouble(),
-                  onChanged: (double? value) {
-                    controller.setInputDecoratorBackgroundAlphaDark(
-                        value == null || value < 0 ? null : value.toInt());
-                  },
-                  min: 0,
-                  max: 255,
-                  divisions: 255,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'ALPHA',
-                  valueDefaultLabel: darkBackgroundLabel,
-                ),
+              lastWidget: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Opacity'),
+                subtitle: Text('Alpha as opacity is '
+                    '$darkBackgroundLabelOpacity %'),
+                value: controller.inputDecoratorBackgroundAlphaDark?.toDouble(),
+                onChanged: (double? value) {
+                  controller.setInputDecoratorBackgroundAlphaDark(
+                      value == null || value < 0 ? null : value.toInt());
+                },
+                min: 0,
+                max: 255,
+                divisions: 255,
+                valueDecimalPlaces: 0,
+                valueHeading: 'ALPHA',
+                valueDefaultLabel: darkBackgroundLabel,
               ),
-            ],
-          ),
+              isRow: isRow,
+            );
+          }),
         const Divider(height: 0),
         //
         // Border type and radius
         //
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // 1st column light and dark
-            Expanded(
-              child: ListTile(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Border'),
-                subtitle: controller.inputDecoratorBorderType ==
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Border'),
+              subtitle: controller.inputDecoratorBorderType ==
+                      FlexInputBorderType.outline
+                  ? const Text('Outlined')
+                  : const Text('Underlined'),
+              onTap: () {
+                if (controller.inputDecoratorBorderType ==
+                    FlexInputBorderType.outline) {
+                  controller.setInputDecoratorBorderType(
+                      FlexInputBorderType.underline);
+                } else {
+                  controller
+                      .setInputDecoratorBorderType(FlexInputBorderType.outline);
+                }
+              },
+              trailing: Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: controller.inputDecoratorBorderType ==
                         FlexInputBorderType.outline
-                    ? const Text('Outlined')
-                    : const Text('Underlined'),
-                onTap: () {
-                  if (controller.inputDecoratorBorderType ==
-                      FlexInputBorderType.outline) {
-                    controller.setInputDecoratorBorderType(
-                        FlexInputBorderType.underline);
-                  } else {
-                    controller.setInputDecoratorBorderType(
-                        FlexInputBorderType.outline);
-                  }
-                },
-                trailing: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12),
-                  child: controller.inputDecoratorBorderType ==
-                          FlexInputBorderType.outline
-                      ? const Icon(Icons.border_outer_outlined, size: 36)
-                      : const Icon(Icons.border_bottom_outlined, size: 36),
-                ),
+                    ? const Icon(Icons.border_outer_outlined, size: 36)
+                    : const Icon(Icons.border_bottom_outlined, size: 36),
               ),
             ),
-            // 2nd colum light and dark
-            Expanded(
-              child: EnumPopupMenu<AdaptiveResponse>(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                values: AdaptiveResponse.values,
-                title: const Text('Adaptive response'),
-                subtitleReveal: Text(
-                  'Use an alternative InputDecorator border radius on '
-                  'selected platforms.\n'
-                  '\n'
-                  // ignore: lines_longer_than_80_chars
-                  '${controller.adaptiveResponseInputDecoratorRadius?.describe ?? AdaptiveResponse.off.describe}',
-                ),
-                defaultLabel: _adaptiveDecoratorModeLabel(controller),
-                value: controller.adaptiveResponseInputDecoratorRadius,
-                onChanged: controller.setAdaptiveResponseInputDecoratorRadius,
+            lastWidget: EnumPopupMenu<AdaptiveResponse>(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              values: AdaptiveResponse.values,
+              title: const Text('Adaptive response'),
+              subtitleReveal: Text(
+                'Use an alternative InputDecorator border radius on '
+                'selected platforms.\n'
+                '\n'
+                // ignore: lines_longer_than_80_chars
+                '${controller.adaptiveResponseInputDecoratorRadius?.describe ?? AdaptiveResponse.off.describe}',
               ),
+              defaultLabel: _adaptiveDecoratorModeLabel(controller),
+              value: controller.adaptiveResponseInputDecoratorRadius,
+              onChanged: controller.setAdaptiveResponseInputDecoratorRadius,
             ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // 1st column light and dark
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Border radius'),
-                value: controller.inputDecoratorBorderRadius,
-                onChanged: controller.setInputDecoratorBorderRadius,
-                min: 0,
-                max: 40,
-                divisions: 40,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: decoratorRadiusDefaultLabel,
-                valueDefaultDisabledLabel: '4 dp',
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            isRow: isRow,
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Border radius'),
+              value: controller.inputDecoratorBorderRadius,
+              onChanged: controller.setInputDecoratorBorderRadius,
+              min: 0,
+              max: 40,
+              divisions: 40,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: decoratorRadiusDefaultLabel,
+              valueDefaultDisabledLabel: '4 dp',
             ),
-            // 2nd colum light and dark adaptive radius
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl &&
-                    controller.adaptiveResponseInputDecoratorRadius !=
-                        AdaptiveResponse.off &&
-                    controller.adaptiveResponseInputDecoratorRadius != null,
-                title: const Text('Adaptive radius'),
-                value: controller.inputDecoratorBorderRadiusAdaptive,
-                onChanged: controller.setInputDecoratorBorderRadiusAdaptive,
-                min: 0,
-                max: 40,
-                divisions: 40,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: _adaptiveDecoratorRadiusLabel(controller),
-                valueDefaultDisabledLabel: '4 dp',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl &&
+                  controller.adaptiveResponseInputDecoratorRadius !=
+                      AdaptiveResponse.off &&
+                  controller.adaptiveResponseInputDecoratorRadius != null,
+              title: const Text('Adaptive radius'),
+              value: controller.inputDecoratorBorderRadiusAdaptive,
+              onChanged: controller.setInputDecoratorBorderRadiusAdaptive,
+              min: 0,
+              max: 40,
+              divisions: 40,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: _adaptiveDecoratorRadiusLabel(controller),
+              valueDefaultDisabledLabel: '4 dp',
             ),
-          ],
-        ),
+          );
+        }),
         TestAdaptiveResponse(controller),
         const Divider(),
         //
         // Border color and style
         //
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (isLight)
-              // 1st column light
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: enableControl &&
-                      !(!controller.inputDecoratorFocusedHasBorder &&
-                          (!controller.inputDecoratorUnfocusedHasBorder ||
-                              !controller
-                                  .inputDecoratorUnfocusedBorderIsColored)),
-                  title: const Text('Border color (light)'),
-                  defaultLabel: baseDefaultLabelLightColor,
-                  defaultDisabledLabel: 'primary',
-                  value: controller.inputDecoratorBorderSchemeColorLight,
-                  onChanged: controller.setInputDecoratorBorderSchemeColorLight,
-                ),
-              )
-            else
-              // 1st column dark
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: enableControl &&
-                      !(!controller.inputDecoratorFocusedHasBorder &&
-                          (!controller.inputDecoratorUnfocusedHasBorder ||
-                              !controller
-                                  .inputDecoratorUnfocusedBorderIsColored)),
-                  title: const Text('Border color (dark)'),
-                  defaultDisabledLabel: 'primary',
-                  defaultLabel: baseDefaultLabelDarkColor,
-                  value: controller.inputDecoratorBorderSchemeColorDark,
-                  onChanged: controller.setInputDecoratorBorderSchemeColorDark,
-                ),
-              ),
-            // 2nd column light and dark
-            Expanded(
-              child: SwitchListTile(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                title: const Text('Unfocused uses color'),
-                value: enableControl &&
-                    controller.inputDecoratorUnfocusedBorderIsColored &&
-                    controller.inputDecoratorUnfocusedHasBorder,
-                onChanged: controller.useSubThemes &&
-                        controller.inputDecoratorUnfocusedHasBorder &&
-                        controller.useFlexColorScheme
-                    ? controller.setInputDecoratorUnfocusedBorderIsColored
-                    : null,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: isLight
+                // 1st column light
+                ? ColorSchemePopupMenu(
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled: enableControl &&
+                        !(!controller.inputDecoratorFocusedHasBorder &&
+                            (!controller.inputDecoratorUnfocusedHasBorder ||
+                                !controller
+                                    .inputDecoratorUnfocusedBorderIsColored)),
+                    title: const Text('Border color (light)'),
+                    defaultLabel: baseDefaultLabelLightColor,
+                    defaultDisabledLabel: 'primary',
+                    value: controller.inputDecoratorBorderSchemeColorLight,
+                    onChanged:
+                        controller.setInputDecoratorBorderSchemeColorLight,
+                  )
+                // 1st column dark
+                : ColorSchemePopupMenu(
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled: enableControl &&
+                        !(!controller.inputDecoratorFocusedHasBorder &&
+                            (!controller.inputDecoratorUnfocusedHasBorder ||
+                                !controller
+                                    .inputDecoratorUnfocusedBorderIsColored)),
+                    title: const Text('Border color (dark)'),
+                    defaultDisabledLabel: 'primary',
+                    defaultLabel: baseDefaultLabelDarkColor,
+                    value: controller.inputDecoratorBorderSchemeColorDark,
+                    onChanged:
+                        controller.setInputDecoratorBorderSchemeColorDark,
+                  ),
+            lastWidget: SwitchListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              title: const Text('Unfocused uses color'),
+              value: enableControl &&
+                  controller.inputDecoratorUnfocusedBorderIsColored &&
+                  controller.inputDecoratorUnfocusedHasBorder,
+              onChanged: controller.useSubThemes &&
+                      controller.inputDecoratorUnfocusedHasBorder &&
+                      controller.useFlexColorScheme
+                  ? controller.setInputDecoratorUnfocusedBorderIsColored
+                  : null,
             ),
-          ],
-        ),
-
+            isRow: isRow,
+          );
+        }),
         //
         // Unfocused border
         //
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // 1st column light and dark
-            Expanded(
-              child: SwitchListTile(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Unfocused has border'),
-                value: enableControl &&
-                    controller.inputDecoratorUnfocusedHasBorder,
-                onChanged: enableControl
-                    ? controller.setInputDecoratorUnfocusedHasBorder
-                    : null,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SwitchListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Unfocused has border'),
+              value:
+                  enableControl && controller.inputDecoratorUnfocusedHasBorder,
+              onChanged: enableControl
+                  ? controller.setInputDecoratorUnfocusedHasBorder
+                  : null,
             ),
-            // 2nd column light and dark
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl &&
-                    controller.inputDecoratorUnfocusedHasBorder,
-                title: const Text('Unfocused border width'),
-                value: controller.inputDecoratorBorderWidth,
-                onChanged: controller.setInputDecoratorBorderWidth,
-                min: 0.5,
-                max: 6,
-                divisions: 11,
-                valueDecimalPlaces: 1,
-                valueHeading: 'WIDTH',
-                valueDefaultLabel: unfocusedBorderDefaultLabel,
-                valueDefaultDisabledLabel: '1 dp',
-                valueUnitLabel: ' dp',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled:
+                  enableControl && controller.inputDecoratorUnfocusedHasBorder,
+              title: const Text('Unfocused border width'),
+              value: controller.inputDecoratorBorderWidth,
+              onChanged: controller.setInputDecoratorBorderWidth,
+              min: 0.5,
+              max: 6,
+              divisions: 11,
+              valueDecimalPlaces: 1,
+              valueHeading: 'WIDTH',
+              valueDefaultLabel: unfocusedBorderDefaultLabel,
+              valueDefaultDisabledLabel: '1 dp',
+              valueUnitLabel: ' dp',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         //
         // Focused border
         //
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // 1st column light and dark
-            Expanded(
-              child: SwitchListTile(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Focused has border'),
-                value:
-                    enableControl && controller.inputDecoratorFocusedHasBorder,
-                onChanged:
-                    controller.useSubThemes && controller.useFlexColorScheme
-                        ? controller.setInputDecoratorFocusedHasBorder
-                        : null,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SwitchListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Focused has border'),
+              value: enableControl && controller.inputDecoratorFocusedHasBorder,
+              onChanged:
+                  controller.useSubThemes && controller.useFlexColorScheme
+                      ? controller.setInputDecoratorFocusedHasBorder
+                      : null,
             ),
-            // 2nd column light and dark
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled:
-                    enableControl && controller.inputDecoratorFocusedHasBorder,
-                title: const Text('Focused border width'),
-                value: controller.inputDecoratorFocusedBorderWidth,
-                onChanged: controller.setInputDecoratorFocusedBorderWidth,
-                min: 0.5,
-                max: 6,
-                divisions: 11,
-                valueDecimalPlaces: 1,
-                valueHeading: 'WIDTH',
-                valueDefaultLabel: focusedBorderDefaultLabel,
-                valueDefaultDisabledLabel: '2 dp',
-                valueUnitLabel: ' dp',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled:
+                  enableControl && controller.inputDecoratorFocusedHasBorder,
+              title: const Text('Focused border width'),
+              value: controller.inputDecoratorFocusedBorderWidth,
+              onChanged: controller.setInputDecoratorFocusedBorderWidth,
+              min: 0.5,
+              max: 6,
+              divisions: 11,
+              valueDecimalPlaces: 1,
+              valueHeading: 'WIDTH',
+              valueDefaultLabel: focusedBorderDefaultLabel,
+              valueDefaultDisabledLabel: '2 dp',
+              valueUnitLabel: ' dp',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         const Divider(),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // 1st column light
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: enableControl,
-                  title: const Text('Focused prefix icon'),
-                  defaultLabel: 'onSurfaceVariant',
-                  defaultLabelM2:
-                      controller.inputDecoratorSchemeColorLight?.name ??
-                          'primary',
-                  defaultDisabledLabelM2: 'primary',
-                  value: controller.inputDecoratorPrefixIconSchemeColor,
-                  onChanged: controller.setInputDecoratorPrefixIconSchemeColor,
-                ),
-              )
-            else
-              // 1st column dark
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: enableControl,
-                  title: const Text('Focused prefix icon'),
-                  defaultLabel: 'onSurfaceVariant',
-                  defaultLabelM2:
-                      controller.inputDecoratorSchemeColorDark?.name ??
-                          'primary',
-                  defaultDisabledLabelM2: 'primary',
-                  value: controller.inputDecoratorPrefixIconDarkSchemeColor,
-                  onChanged:
-                      controller.setInputDecoratorPrefixIconDarkSchemeColor,
-                ),
-              ),
-
-            if (isLight)
-              // 2nd column light
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Focused suffix icon'),
-                  defaultLabel: 'onSurfaceVariant',
-                  defaultLabelM2:
-                      controller.inputDecoratorSchemeColorLight?.name ??
-                          'primary',
-                  defaultDisabledLabelM2: 'primary',
-                  value: controller.inputDecoratorSuffixIconSchemeColor,
-                  onChanged: controller.setInputDecoratorSuffixIconSchemeColor,
-                ),
-              )
-            else
-              // 2nd column dark
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Focused suffix icon'),
-                  defaultLabel: 'onSurfaceVariant',
-                  defaultLabelM2:
-                      controller.inputDecoratorSchemeColorDark?.name ??
-                          'primary',
-                  defaultDisabledLabelM2: 'primary',
-                  value: controller.inputDecoratorSuffixIconDarkSchemeColor,
-                  onChanged:
-                      controller.setInputDecoratorSuffixIconDarkSchemeColor,
-                ),
-              ),
-          ],
-        ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: isLight
+                // 1st column light
+                ? ColorSchemePopupMenu(
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled: enableControl,
+                    title: const Text('Focused prefix icon'),
+                    defaultLabel: 'onSurfaceVariant',
+                    defaultLabelM2:
+                        controller.inputDecoratorSchemeColorLight?.name ??
+                            'primary',
+                    defaultDisabledLabelM2: 'primary',
+                    value: controller.inputDecoratorPrefixIconSchemeColor,
+                    onChanged:
+                        controller.setInputDecoratorPrefixIconSchemeColor,
+                  )
+                // 1st column dark
+                : ColorSchemePopupMenu(
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled: enableControl,
+                    title: const Text('Focused prefix icon'),
+                    defaultLabel: 'onSurfaceVariant',
+                    defaultLabelM2:
+                        controller.inputDecoratorSchemeColorDark?.name ??
+                            'primary',
+                    defaultDisabledLabelM2: 'primary',
+                    value: controller.inputDecoratorPrefixIconDarkSchemeColor,
+                    onChanged:
+                        controller.setInputDecoratorPrefixIconDarkSchemeColor,
+                  ),
+            lastWidget: isLight
+                // 2nd column light
+                ? ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    title: const Text('Focused suffix icon'),
+                    defaultLabel: 'onSurfaceVariant',
+                    defaultLabelM2:
+                        controller.inputDecoratorSchemeColorLight?.name ??
+                            'primary',
+                    defaultDisabledLabelM2: 'primary',
+                    value: controller.inputDecoratorSuffixIconSchemeColor,
+                    onChanged:
+                        controller.setInputDecoratorSuffixIconSchemeColor,
+                  )
+                // 2nd column dark
+                : ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    title: const Text('Focused suffix icon'),
+                    defaultLabel: 'onSurfaceVariant',
+                    defaultLabelM2:
+                        controller.inputDecoratorSchemeColorDark?.name ??
+                            'primary',
+                    defaultDisabledLabelM2: 'primary',
+                    value: controller.inputDecoratorSuffixIconDarkSchemeColor,
+                    onChanged:
+                        controller.setInputDecoratorSuffixIconDarkSchemeColor,
+                  ),
+            isRow: isRow,
+          );
+        }),
         const Divider(),
         //
         // TextField Padding props
@@ -777,80 +721,72 @@ class TextFieldPanel extends StatelessWidget {
             'feel free to experiment.\n',
           ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                trailingWidth: 52,
-                enabled: enableControl,
-                value: controller.inputDecoratorPaddingStart,
-                onChanged: controller.setInputDecoratorPaddingStart,
-                min: 0,
-                max: 32,
-                divisions: 32,
-                valueDecimalPlaces: 0,
-                valueHeading: 'START',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: DecoratorDefault.start.asLabel(controller),
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              trailingWidth: 52,
+              enabled: enableControl,
+              value: controller.inputDecoratorPaddingStart,
+              onChanged: controller.setInputDecoratorPaddingStart,
+              min: 0,
+              max: 32,
+              divisions: 32,
+              valueDecimalPlaces: 0,
+              valueHeading: 'START',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: DecoratorDefault.start.asLabel(controller),
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                trailingWidth: 60,
-                enabled: enableControl,
-                value: controller.inputDecoratorPaddingEnd,
-                onChanged: controller.setInputDecoratorPaddingEnd,
-                min: 0,
-                max: 32,
-                divisions: 32,
-                valueDecimalPlaces: 0,
-                valueHeading: 'END',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: DecoratorDefault.end.asLabel(controller),
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              trailingWidth: 60,
+              enabled: enableControl,
+              value: controller.inputDecoratorPaddingEnd,
+              onChanged: controller.setInputDecoratorPaddingEnd,
+              min: 0,
+              max: 32,
+              divisions: 32,
+              valueDecimalPlaces: 0,
+              valueHeading: 'END',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: DecoratorDefault.end.asLabel(controller),
             ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                trailingWidth: 52,
-                enabled: enableControl,
-                value: controller.inputDecoratorPaddingTop,
-                onChanged: controller.setInputDecoratorPaddingTop,
-                min: 0,
-                max: 32,
-                divisions: 32,
-                valueDecimalPlaces: 0,
-                valueHeading: 'TOP',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: DecoratorDefault.top.asLabel(controller),
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              trailingWidth: 52,
+              enabled: enableControl,
+              value: controller.inputDecoratorPaddingTop,
+              onChanged: controller.setInputDecoratorPaddingTop,
+              min: 0,
+              max: 32,
+              divisions: 32,
+              valueDecimalPlaces: 0,
+              valueHeading: 'TOP',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: DecoratorDefault.top.asLabel(controller),
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                trailingWidth: 60,
-                enabled: enableControl,
-                value: controller.inputDecoratorPaddingBottom,
-                onChanged: controller.setInputDecoratorPaddingBottom,
-                min: 0,
-                max: 32,
-                divisions: 32,
-                valueDecimalPlaces: 0,
-                valueHeading: 'BOTTOM',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: DecoratorDefault.bottom.asLabel(controller),
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              trailingWidth: 60,
+              enabled: enableControl,
+              value: controller.inputDecoratorPaddingBottom,
+              onChanged: controller.setInputDecoratorPaddingBottom,
+              min: 0,
+              max: 32,
+              divisions: 32,
+              valueDecimalPlaces: 0,
+              valueHeading: 'BOTTOM',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: DecoratorDefault.bottom.asLabel(controller),
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         //
         const SizedBox(height: 8),
         const Divider(height: 0),
@@ -879,137 +815,113 @@ class TextFieldPanel extends StatelessWidget {
           ),
         ),
         if (isLight) ...<Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // 1st column light
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Cursor'),
-                  defaultLabel: baseDefaultLabelLightColor,
-                  defaultDisabledLabel: 'primary',
-                  value: controller.inputCursorLightSchemeColor,
-                  onChanged: controller.setInputCursorLightSchemeColor,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Cursor'),
+                defaultLabel: baseDefaultLabelLightColor,
+                defaultDisabledLabel: 'primary',
+                value: controller.inputCursorLightSchemeColor,
+                onChanged: controller.setInputCursorLightSchemeColor,
               ),
-              // 2nd column light
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Selection handles'),
-                  defaultLabel: baseDefaultHandleLabelLightColor,
-                  defaultDisabledLabel: 'primary',
-                  value: controller.inputSelectionHandleLightSchemeColor,
-                  onChanged: controller.setInputSelectionHandleLightSchemeColor,
-                ),
+              lastWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selection handles'),
+                defaultLabel: baseDefaultHandleLabelLightColor,
+                defaultDisabledLabel: 'primary',
+                value: controller.inputSelectionHandleLightSchemeColor,
+                onChanged: controller.setInputSelectionHandleLightSchemeColor,
               ),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // 1st column light
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Selection'),
-                  defaultLabel: baseDefaultLabelLightColor,
-                  defaultDisabledLabel: 'primary',
-                  value: controller.inputSelectionLightSchemeColor,
-                  onChanged: controller.setInputSelectionLightSchemeColor,
-                ),
+              isRow: isRow,
+            );
+          }),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selection'),
+                defaultLabel: baseDefaultLabelLightColor,
+                defaultDisabledLabel: 'primary',
+                value: controller.inputSelectionLightSchemeColor,
+                onChanged: controller.setInputSelectionLightSchemeColor,
               ),
-              // 2nd column light
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  enabled: enableControl,
-                  title: const Text('Selection opacity'),
-                  value: controller.inputSelectionLightOpacity,
-                  onChanged: controller.setInputSelectionLightOpacity,
-                  min: 0,
-                  max: 1,
-                  divisions: 100,
-                  valueDisplayScale: 100,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'OPACITY',
-                  valueUnitLabel: ' %',
-                  valueDefaultLabel: selectionLabelDefaultOpacity,
-                  valueDefaultDisabledLabel: '40 %',
-                ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selection opacity'),
+                value: controller.inputSelectionLightOpacity,
+                onChanged: controller.setInputSelectionLightOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: selectionLabelDefaultOpacity,
+                valueDefaultDisabledLabel: '40 %',
               ),
-            ],
-          ),
+              isRow: isRow,
+            );
+          }),
         ] else ...<Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // 1st column dark
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Cursor'),
-                  defaultLabel: baseDefaultLabelDarkColor,
-                  defaultDisabledLabel: 'primary',
-                  value: controller.inputCursorDarkSchemeColor,
-                  onChanged: controller.setInputCursorDarkSchemeColor,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Cursor'),
+                defaultLabel: baseDefaultLabelDarkColor,
+                defaultDisabledLabel: 'primary',
+                value: controller.inputCursorDarkSchemeColor,
+                onChanged: controller.setInputCursorDarkSchemeColor,
               ),
-              // 2nd column dark
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Selection handles'),
-                  defaultLabel: baseDefaultHandleLabelDarkColor,
-                  defaultDisabledLabel: 'primary',
-                  value: controller.inputSelectionHandleDarkSchemeColor,
-                  onChanged: controller.setInputSelectionHandleDarkSchemeColor,
-                ),
+              lastWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selection handles'),
+                defaultLabel: baseDefaultHandleLabelDarkColor,
+                defaultDisabledLabel: 'primary',
+                value: controller.inputSelectionHandleDarkSchemeColor,
+                onChanged: controller.setInputSelectionHandleDarkSchemeColor,
               ),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // 1st column dark
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Selection'),
-                  defaultLabel: baseDefaultLabelDarkColor,
-                  defaultDisabledLabel: 'primary',
-                  value: controller.inputSelectionDarkSchemeColor,
-                  onChanged: controller.setInputSelectionDarkSchemeColor,
-                ),
+              isRow: isRow,
+            );
+          }),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selection'),
+                defaultLabel: baseDefaultLabelDarkColor,
+                defaultDisabledLabel: 'primary',
+                value: controller.inputSelectionDarkSchemeColor,
+                onChanged: controller.setInputSelectionDarkSchemeColor,
               ),
-              // 2nd column dark
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  enabled: enableControl,
-                  title: const Text('Selection opacity'),
-                  value: controller.inputSelectionDarkOpacity,
-                  onChanged: controller.setInputSelectionDarkOpacity,
-                  min: 0,
-                  max: 1,
-                  divisions: 100,
-                  valueDisplayScale: 100,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'OPACITY',
-                  valueUnitLabel: ' %',
-                  valueDefaultLabel: selectionLabelDefaultOpacity,
-                  valueDefaultDisabledLabel: '40 %',
-                ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selection opacity'),
+                value: controller.inputSelectionDarkOpacity,
+                onChanged: controller.setInputSelectionDarkOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: selectionLabelDefaultOpacity,
+                valueDefaultDisabledLabel: '40 %',
               ),
-            ],
-          ),
+              isRow: isRow,
+            );
+          }),
         ],
         //
         // Known issues
@@ -1033,10 +945,11 @@ class TextFieldPanel extends StatelessWidget {
                   text: 'selectionHandleColor property',
                 ),
                 TextSpan(
-                    style: spanTextStyle,
-                    text: ' for more information. consider making an '
-                        'improvement proposal issue in the Flutter '
-                        'repo if you want this to change.\n'),
+                  style: spanTextStyle,
+                  text: ' for more information. consider making an '
+                      'improvement proposal issue in the Flutter '
+                      'repo if you want this to change.\n',
+                ),
               ],
             ),
           ),
