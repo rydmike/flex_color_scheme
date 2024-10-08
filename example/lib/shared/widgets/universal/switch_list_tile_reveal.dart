@@ -20,6 +20,7 @@ class SwitchListTileReveal extends StatefulWidget {
     this.contentPadding,
     this.onTap,
     this.dense,
+    this.shape,
     this.revealDense,
     this.enabled = true,
     this.allowRevealWhenDisabled = false,
@@ -91,6 +92,9 @@ class SwitchListTileReveal extends StatefulWidget {
   /// Dense list tiles default to a smaller height.
   final bool? dense;
 
+  /// The shape of the ListTile.
+  final ShapeBorder? shape;
+
   /// Whether the used reveal part of the ListTile is dense.
   ///
   /// If not defined, defaults to true.
@@ -136,6 +140,7 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
       children: <Widget>[
         SwitchListTile(
           dense: widget.dense,
+          shape: widget.shape,
           contentPadding: widget.contentPadding,
           value: widget.value && widget.enabled,
           onChanged: widget.enabled ? widget.onChanged : null,
