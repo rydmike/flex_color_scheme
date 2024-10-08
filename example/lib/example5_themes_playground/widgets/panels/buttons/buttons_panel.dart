@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
@@ -231,45 +232,41 @@ class ButtonsPanel extends StatelessWidget {
           valueDefaultLabel: outlinedButtonRadiusDefaultLabel,
           valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Border width'),
-                value: controller.outlinedButtonBorderWidth,
-                onChanged: controller.setOutlinedButtonBorderWidth,
-                min: 0.5,
-                max: 6,
-                divisions: 11,
-                valueDecimalPlaces: 1,
-                valueHeading: 'WIDTH',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: outlinedBorderDefaultLabel,
-                valueDefaultDisabledLabel: '1 dp',
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Border width'),
+              value: controller.outlinedButtonBorderWidth,
+              onChanged: controller.setOutlinedButtonBorderWidth,
+              min: 0.5,
+              max: 6,
+              divisions: 11,
+              valueDecimalPlaces: 1,
+              valueHeading: 'WIDTH',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: outlinedBorderDefaultLabel,
+              valueDefaultDisabledLabel: '1 dp',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                title: const Text('Pressed border width'),
-                value: controller.outlinedButtonPressedBorderWidth,
-                onChanged: controller.setOutlinedButtonPressedBorderWidth,
-                min: 0.5,
-                max: 6,
-                divisions: 11,
-                valueDecimalPlaces: 1,
-                valueHeading: 'WIDTH',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: pressedOutlinedBorderDefaultLabel,
-                valueDefaultDisabledLabel: '1 dp',
-              ),
+            lastWidget: SliderListTileReveal(
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              title: const Text('Pressed width'),
+              value: controller.outlinedButtonPressedBorderWidth,
+              onChanged: controller.setOutlinedButtonPressedBorderWidth,
+              min: 0.5,
+              max: 6,
+              divisions: 11,
+              valueDecimalPlaces: 1,
+              valueHeading: 'WIDTH',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: pressedOutlinedBorderDefaultLabel,
+              valueDefaultDisabledLabel: '1 dp',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         const Divider(),
         ColorSchemePopupMenu(
           enabled: enableControl,
