@@ -6,6 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_response.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -151,96 +152,87 @@ class AppBarPanel extends StatelessWidget {
           ),
         ),
         if (isLight)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: AppBarStylePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Light AppBarStyle'),
-                  enabled: controller.useFlexColorScheme &&
-                      (controller.appBarBackgroundSchemeColorLight == null ||
-                          !controller.useSubThemes),
-                  value: controller.appBarStyleLight,
-                  onChanged: controller.setAppBarStyleLight,
-                  // To access the custom color we defined for AppBars in this
-                  // PopupMenu buttons widget, we have to pass it along, or the
-                  // entire controller. We chose the color in this case. It is
-                  // not carried with the theme, so we cannot get it from there
-                  // in the widget. FlexColorScheme knows the color when
-                  // you make a theme with it. This color is used to show the
-                  // correct color on the AppBar custom color option for the not
-                  // built-in custom color scheme.
-                  // In our examples we only actually have a custom app bar
-                  // color in the three custom color examples, and we want to
-                  // show them as well on the PopupMenu button.
-                  customAppBarColor:
-                      AppColor.scheme(controller).light.appBarColor,
-                  isBlended: controller.blendLevel > 0,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: AppBarStylePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Light AppBarStyle'),
+                enabled: controller.useFlexColorScheme &&
+                    (controller.appBarBackgroundSchemeColorLight == null ||
+                        !controller.useSubThemes),
+                value: controller.appBarStyleLight,
+                onChanged: controller.setAppBarStyleLight,
+                // To access the custom color we defined for AppBars in this
+                // PopupMenu buttons widget, we have to pass it along, or the
+                // entire controller. We chose the color in this case. It is
+                // not carried with the theme, so we cannot get it from there
+                // in the widget. FlexColorScheme knows the color when
+                // you make a theme with it. This color is used to show the
+                // correct color on the AppBar custom color option for the not
+                // built-in custom color scheme.
+                // In our examples we only actually have a custom app bar
+                // color in the three custom color examples, and we want to
+                // show them as well on the PopupMenu button.
+                customAppBarColor:
+                    AppColor.scheme(controller).light.appBarColor,
+                isBlended: controller.blendLevel > 0,
               ),
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  enabled: controller.useFlexColorScheme,
-                  title: const Text('Opacity'),
-                  subtitleReveal:
-                      const Text('The themed opacity of the AppBar in light '
-                          'mode, try 85% to 98%\n'),
-                  value: controller.appBarOpacityLight,
-                  onChanged: controller.setAppBarOpacityLight,
-                  min: 0,
-                  max: 1,
-                  divisions: 100,
-                  valueDisplayScale: 100,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'OPACITY',
-                  valueUnitLabel: ' %',
-                  valueDefaultLabel: '100 %',
-                ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: controller.useFlexColorScheme,
+                title: const Text('Opacity'),
+                subtitleReveal:
+                    const Text('The themed opacity of the AppBar in light '
+                        'mode, try 85% to 98%\n'),
+                value: controller.appBarOpacityLight,
+                onChanged: controller.setAppBarOpacityLight,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
               ),
-            ],
-          )
+              isRow: isRow,
+            );
+          })
         else
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                child: AppBarStylePopupMenu(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Dark AppBarStyle'),
-                  enabled: controller.useFlexColorScheme &&
-                      (controller.appBarBackgroundSchemeColorDark == null ||
-                          !controller.useSubThemes),
-                  value: controller.appBarStyleDark,
-                  onChanged: controller.setAppBarStyleDark,
-                  customAppBarColor:
-                      AppColor.scheme(controller).dark.appBarColor,
-                  isBlended: controller.blendLevelDark > 0,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: AppBarStylePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Dark AppBarStyle'),
+                enabled: controller.useFlexColorScheme &&
+                    (controller.appBarBackgroundSchemeColorDark == null ||
+                        !controller.useSubThemes),
+                value: controller.appBarStyleDark,
+                onChanged: controller.setAppBarStyleDark,
+                customAppBarColor: AppColor.scheme(controller).dark.appBarColor,
+                isBlended: controller.blendLevelDark > 0,
               ),
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  enabled: controller.useFlexColorScheme,
-                  title: const Text('Opacity'),
-                  subtitleReveal:
-                      const Text('The themed opacity of the AppBar in dark '
-                          'mode, try 85% to 98%\n'),
-                  value: controller.appBarOpacityDark,
-                  onChanged: controller.setAppBarOpacityDark,
-                  min: 0,
-                  max: 1,
-                  divisions: 100,
-                  valueDisplayScale: 100,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'OPACITY',
-                  valueUnitLabel: ' %',
-                  valueDefaultLabel: '100 %',
-                ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: controller.useFlexColorScheme,
+                title: const Text('Opacity'),
+                subtitleReveal:
+                    const Text('The themed opacity of the AppBar in dark '
+                        'mode, try 85% to 98%\n'),
+                value: controller.appBarOpacityDark,
+                onChanged: controller.setAppBarOpacityDark,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
               ),
-            ],
-          ),
+              isRow: isRow,
+            );
+          }),
         const ListTileReveal(
           dense: true,
           title: Text('AppBar color'),
@@ -261,278 +253,260 @@ class AppBarPanel extends StatelessWidget {
             '\n',
           ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Background color'),
-                  defaultLabel: 'AppBarStyle',
-                  defaultDisabledLabel:
-                      controller.useFlexColorScheme ? 'AppBarStyle' : 'surface',
-                  defaultDisabledLabelM2:
-                      controller.useFlexColorScheme ? 'AppBarStyle' : 'primary',
-                  value: controller.appBarBackgroundSchemeColorLight,
-                  onChanged: controller.setAppBarBackgroundSchemeColorLight,
-                ),
-              )
-            else
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Background color'),
-                  defaultLabel: 'AppBarStyle',
-                  defaultDisabledLabel:
-                      controller.useFlexColorScheme ? 'AppBarStyle' : 'surface',
-                  value: controller.appBarBackgroundSchemeColorDark,
-                  onChanged: controller.setAppBarBackgroundSchemeColorDark,
-                ),
-              ),
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Title color'),
-                  defaultLabel: controller.appBarBackgroundSchemeColorLight ==
-                          null
-                      ? titleLight
-                      : SchemeColor
-                          .values[FlexSubThemes.onSchemeColor(
-                                  controller.appBarBackgroundSchemeColorLight!)
-                              .index]
-                          .name,
-                  defaultDisabledLabel:
-                      controller.useFlexColorScheme ? titleLight : 'onSurface',
-                  defaultDisabledLabelM2:
-                      controller.useFlexColorScheme ? titleLight : 'onPrimary',
-                  value: controller.appBarForegroundSchemeColorLight,
-                  onChanged: controller.setAppBarForegroundSchemeColorLight,
-                ),
-              )
-            else
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Title color'),
-                  defaultLabel: controller.appBarBackgroundSchemeColorDark ==
-                          null
-                      ? titleDark
-                      : SchemeColor
-                          .values[FlexSubThemes.onSchemeColor(
-                                  controller.appBarBackgroundSchemeColorDark!)
-                              .index]
-                          .name,
-                  defaultDisabledLabel:
-                      controller.useFlexColorScheme ? titleDark : 'onSurface',
-                  value: controller.appBarForegroundSchemeColorDark,
-                  onChanged: controller.setAppBarForegroundSchemeColorDark,
-                ),
-              ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Icon color'),
-                  defaultLabel: controller.appBarBackgroundSchemeColorLight ==
-                          null
-                      ? leadingIconLight
-                      : SchemeColor
-                          .values[FlexSubThemes.onSchemeColor(
-                                  controller.appBarBackgroundSchemeColorLight!)
-                              .index]
-                          .name,
-                  defaultDisabledLabel: controller.useFlexColorScheme
-                      ? leadingIconLight
-                      : 'onSurface',
-                  defaultDisabledLabelM2: controller.useFlexColorScheme
-                      ? leadingIconLight
-                      : 'White',
-                  value: controller.appBarIconSchemeColorLight,
-                  onChanged: controller.setAppBarIconSchemeColorLight,
-                ),
-              )
-            else
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Icon color'),
-                  defaultLabel: controller.appBarBackgroundSchemeColorDark ==
-                          null
-                      ? leadingIconDark
-                      : SchemeColor
-                          .values[FlexSubThemes.onSchemeColor(
-                                  controller.appBarBackgroundSchemeColorDark!)
-                              .index]
-                          .name,
-                  defaultDisabledLabel: controller.useFlexColorScheme
-                      ? leadingIconDark
-                      : 'onSurface',
-                  defaultDisabledLabelM2:
-                      controller.useFlexColorScheme ? leadingIconDark : 'White',
-                  value: controller.appBarIconSchemeColorDark,
-                  onChanged: controller.setAppBarIconSchemeColorDark,
-                ),
-              ),
-            if (isLight)
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Actions icon color'),
-                  defaultLabel: controller.appBarBackgroundSchemeColorLight ==
-                          null
-                      ? actionIconLight
-                      : SchemeColor
-                          .values[FlexSubThemes.onSchemeColor(
-                                  controller.appBarBackgroundSchemeColorLight!)
-                              .index]
-                          .name,
-                  defaultDisabledLabel: controller.useFlexColorScheme
-                      ? actionIconLight
-                      : 'onSurfaceVariant',
-                  defaultDisabledLabelM2:
-                      controller.useFlexColorScheme ? actionIconLight : 'white',
-                  value: controller.appBarActionsIconSchemeColorLight,
-                  onChanged: controller.setAppBarActionsIconSchemeColorLight,
-                ),
-              )
-            else
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Actions icon color'),
-                  defaultLabel: controller.appBarBackgroundSchemeColorDark ==
-                          null
-                      ? actionIconDark
-                      : SchemeColor
-                          .values[FlexSubThemes.onSchemeColor(
-                                  controller.appBarBackgroundSchemeColorDark!)
-                              .index]
-                          .name,
-                  defaultDisabledLabel: controller.useFlexColorScheme
-                      ? actionIconDark
-                      : 'onSurfaceVariant',
-                  defaultDisabledLabelM2:
-                      controller.useFlexColorScheme ? actionIconDark : 'White',
-                  value: controller.appBarActionsIconSchemeColorDark,
-                  onChanged: controller.setAppBarActionsIconSchemeColorDark,
-                ),
-              ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: AppBarCenterTitleToggleButtons(
-                controller: controller,
-                contentPadding: ThemeValues.tilePaddingStart(context),
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: isLight
+                ? ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    title: const Text('Background color'),
+                    defaultLabel: 'AppBarStyle',
+                    defaultDisabledLabel: controller.useFlexColorScheme
+                        ? 'AppBarStyle'
+                        : 'surface',
+                    defaultDisabledLabelM2: controller.useFlexColorScheme
+                        ? 'AppBarStyle'
+                        : 'primary',
+                    value: controller.appBarBackgroundSchemeColorLight,
+                    onChanged: controller.setAppBarBackgroundSchemeColorLight,
+                  )
+                : ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    title: const Text('Background color'),
+                    defaultLabel: 'AppBarStyle',
+                    defaultDisabledLabel: controller.useFlexColorScheme
+                        ? 'AppBarStyle'
+                        : 'surface',
+                    value: controller.appBarBackgroundSchemeColorDark,
+                    onChanged: controller.setAppBarBackgroundSchemeColorDark,
+                  ),
+            lastWidget: isLight
+                ? ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    title: const Text('Title color'),
+                    defaultLabel:
+                        controller.appBarBackgroundSchemeColorLight == null
+                            ? titleLight
+                            : SchemeColor
+                                .values[FlexSubThemes.onSchemeColor(controller
+                                        .appBarBackgroundSchemeColorLight!)
+                                    .index]
+                                .name,
+                    defaultDisabledLabel: controller.useFlexColorScheme
+                        ? titleLight
+                        : 'onSurface',
+                    defaultDisabledLabelM2: controller.useFlexColorScheme
+                        ? titleLight
+                        : 'onPrimary',
+                    value: controller.appBarForegroundSchemeColorLight,
+                    onChanged: controller.setAppBarForegroundSchemeColorLight,
+                  )
+                : ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    title: const Text('Title color'),
+                    defaultLabel: controller.appBarBackgroundSchemeColorDark ==
+                            null
+                        ? titleDark
+                        : SchemeColor
+                            .values[FlexSubThemes.onSchemeColor(
+                                    controller.appBarBackgroundSchemeColorDark!)
+                                .index]
+                            .name,
+                    defaultDisabledLabel:
+                        controller.useFlexColorScheme ? titleDark : 'onSurface',
+                    value: controller.appBarForegroundSchemeColorDark,
+                    onChanged: controller.setAppBarForegroundSchemeColorDark,
+                  ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: isLight
+                ? ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    title: const Text('Icon color'),
+                    defaultLabel:
+                        controller.appBarBackgroundSchemeColorLight == null
+                            ? leadingIconLight
+                            : SchemeColor
+                                .values[FlexSubThemes.onSchemeColor(controller
+                                        .appBarBackgroundSchemeColorLight!)
+                                    .index]
+                                .name,
+                    defaultDisabledLabel: controller.useFlexColorScheme
+                        ? leadingIconLight
+                        : 'onSurface',
+                    defaultDisabledLabelM2: controller.useFlexColorScheme
+                        ? leadingIconLight
+                        : 'White',
+                    value: controller.appBarIconSchemeColorLight,
+                    onChanged: controller.setAppBarIconSchemeColorLight,
+                  )
+                : ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    title: const Text('Icon color'),
+                    defaultLabel: controller.appBarBackgroundSchemeColorDark ==
+                            null
+                        ? leadingIconDark
+                        : SchemeColor
+                            .values[FlexSubThemes.onSchemeColor(
+                                    controller.appBarBackgroundSchemeColorDark!)
+                                .index]
+                            .name,
+                    defaultDisabledLabel: controller.useFlexColorScheme
+                        ? leadingIconDark
+                        : 'onSurface',
+                    defaultDisabledLabelM2: controller.useFlexColorScheme
+                        ? leadingIconDark
+                        : 'White',
+                    value: controller.appBarIconSchemeColorDark,
+                    onChanged: controller.setAppBarIconSchemeColorDark,
+                  ),
+            lastWidget: isLight
+                ? ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    title: const Text('Actions icon color'),
+                    defaultLabel:
+                        controller.appBarBackgroundSchemeColorLight == null
+                            ? actionIconLight
+                            : SchemeColor
+                                .values[FlexSubThemes.onSchemeColor(controller
+                                        .appBarBackgroundSchemeColorLight!)
+                                    .index]
+                                .name,
+                    defaultDisabledLabel: controller.useFlexColorScheme
+                        ? actionIconLight
+                        : 'onSurfaceVariant',
+                    defaultDisabledLabelM2: controller.useFlexColorScheme
+                        ? actionIconLight
+                        : 'white',
+                    value: controller.appBarActionsIconSchemeColorLight,
+                    onChanged: controller.setAppBarActionsIconSchemeColorLight,
+                  )
+                : ColorSchemePopupMenu(
+                    enabled: enableControl,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    title: const Text('Actions icon color'),
+                    defaultLabel: controller.appBarBackgroundSchemeColorDark ==
+                            null
+                        ? actionIconDark
+                        : SchemeColor
+                            .values[FlexSubThemes.onSchemeColor(
+                                    controller.appBarBackgroundSchemeColorDark!)
+                                .index]
+                            .name,
+                    defaultDisabledLabel: controller.useFlexColorScheme
+                        ? actionIconDark
+                        : 'onSurfaceVariant',
+                    defaultDisabledLabelM2: controller.useFlexColorScheme
+                        ? actionIconDark
+                        : 'White',
+                    value: controller.appBarActionsIconSchemeColorDark,
+                    onChanged: controller.setAppBarActionsIconSchemeColorDark,
+                  ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: AppBarCenterTitleToggleButtons(
+              controller: controller,
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
             ),
-            Expanded(
-              child: SwitchListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                title: const Text('Remove scrim'),
-                subtitleReveal: const Text(
-                  'ON  No scrim on top status bar, as in Material-3 spec\n'
-                  'OFF Use a two toned AppBar with a scrim on top status bar\n'
-                  'This settings only applies to the Android platform.\n',
-                ),
-                value: controller.transparentStatusBar &&
-                    controller.useFlexColorScheme,
-                onChanged: controller.useFlexColorScheme
-                    ? controller.setTransparentStatusBar
-                    : null,
+            lastWidget: SwitchListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              title: const Text('Remove scrim'),
+              subtitleReveal: const Text(
+                'ON  No scrim on top status bar, as in Material-3 spec\n'
+                'OFF Use a two toned AppBar with a scrim on top status bar\n'
+                'This settings only applies to the Android platform.\n',
               ),
+              value: controller.transparentStatusBar &&
+                  controller.useFlexColorScheme,
+              onChanged: controller.useFlexColorScheme
+                  ? controller.setTransparentStatusBar
+                  : null,
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         if (isLight)
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: controller.useFlexColorScheme,
-                  title: const Text('Elevation'),
-                  value: controller.appBarElevationLight,
-                  onChanged: controller.setAppBarElevationLight,
-                  min: 0,
-                  max: 20,
-                  divisions: 40,
-                  valueHeading: 'ELEV',
-                  valueDecimalPlaces: 1,
-                  valueDefaultLabel: '0',
-                  valueDefaultDisabledLabel: useMaterial3 ? '0' : '4',
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: controller.useFlexColorScheme,
+                title: const Text('Elevation'),
+                value: controller.appBarElevationLight,
+                onChanged: controller.setAppBarElevationLight,
+                min: 0,
+                max: 20,
+                divisions: 40,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 1,
+                valueDefaultLabel: '0',
+                valueDefaultDisabledLabel: useMaterial3 ? '0' : '4',
               ),
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  enabled: enableControl && useMaterial3,
-                  title: const Text('Scroll under'),
-                  value: controller.appBarScrolledUnderElevationLight,
-                  onChanged: controller.setAppBarScrolledUnderElevationLight,
-                  min: 0,
-                  max: 20,
-                  divisions: 40,
-                  valueHeading: 'ELEV',
-                  valueDecimalPlaces: 1,
-                  valueDefaultLabel: '3',
-                ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl && useMaterial3,
+                title: const Text('Scroll under'),
+                value: controller.appBarScrolledUnderElevationLight,
+                onChanged: controller.setAppBarScrolledUnderElevationLight,
+                min: 0,
+                max: 20,
+                divisions: 40,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 1,
+                valueDefaultLabel: '3',
               ),
-            ],
-          )
+              isRow: isRow,
+            );
+          })
         else
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  enabled: controller.useFlexColorScheme,
-                  title: const Text('Elevation'),
-                  value: controller.appBarElevationDark,
-                  onChanged: controller.setAppBarElevationDark,
-                  min: 0,
-                  max: 20,
-                  divisions: 40,
-                  valueHeading: 'ELEV',
-                  valueDecimalPlaces: 1,
-                  valueDefaultLabel: '0',
-                  valueDefaultDisabledLabel: useMaterial3 ? '0' : '4',
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: controller.useFlexColorScheme,
+                title: const Text('Elevation'),
+                value: controller.appBarElevationDark,
+                onChanged: controller.setAppBarElevationDark,
+                min: 0,
+                max: 20,
+                divisions: 40,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 1,
+                valueDefaultLabel: '0',
+                valueDefaultDisabledLabel: useMaterial3 ? '0' : '4',
               ),
-              Expanded(
-                child: SliderListTileReveal(
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  enabled: enableControl && useMaterial3,
-                  title: const Text('Scroll under'),
-                  value: controller.appBarScrolledUnderElevationDark,
-                  onChanged: controller.setAppBarScrolledUnderElevationDark,
-                  min: 0,
-                  max: 20,
-                  divisions: 40,
-                  valueHeading: 'ELEV',
-                  valueDecimalPlaces: 1,
-                  valueDefaultLabel: '3',
-                ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl && useMaterial3,
+                title: const Text('Scroll under'),
+                value: controller.appBarScrolledUnderElevationDark,
+                onChanged: controller.setAppBarScrolledUnderElevationDark,
+                min: 0,
+                max: 20,
+                divisions: 40,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 1,
+                valueDefaultLabel: '3',
               ),
-            ],
-          ),
+              isRow: isRow,
+            );
+          }),
         const Divider(),
         if (isLight)
           EnumPopupMenu<AdaptiveResponse>(
