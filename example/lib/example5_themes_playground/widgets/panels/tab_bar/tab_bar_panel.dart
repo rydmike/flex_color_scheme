@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -196,61 +197,55 @@ class TabBarPanel extends StatelessWidget {
             value: controller.tabBarItemSchemeColorLight,
             onChanged: controller.setTabBarItemSchemeColorLight,
           ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Light unselected items color'),
-                  defaultLabel: unselectedLightLabel(),
-                  value: controller.tabBarUnselectedItemSchemeColorLight,
-                  onChanged: controller.setTabBarUnselectedItemSchemeColorLight,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Light unselected items color'),
+                defaultLabel: unselectedLightLabel(),
+                value: controller.tabBarUnselectedItemSchemeColorLight,
+                onChanged: controller.setTabBarUnselectedItemSchemeColorLight,
               ),
-              Expanded(
-                child: SliderListTileReveal(
-                  enabled: enableControl, //unselectedLightOpacityEnabled,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Opacity'),
-                  value: controller.tabBarUnselectedItemOpacityLight,
-                  onChanged: controller.setTabBarUnselectedItemOpacityLight,
-                  min: 0,
-                  max: 1,
-                  divisions: 100,
-                  valueDisplayScale: 100,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'OPACITY',
-                  valueUnitLabel: ' %',
-                  valueDefaultLabel: opacityLabel(),
-                ),
+              lastWidget: SliderListTileReveal(
+                enabled: enableControl, //unselectedLightOpacityEnabled,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Opacity'),
+                value: controller.tabBarUnselectedItemOpacityLight,
+                onChanged: controller.setTabBarUnselectedItemOpacityLight,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: opacityLabel(),
               ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Light indicator color'),
-                  defaultLabel: 'TabBarStyle',
-                  value: controller.tabBarIndicatorLight,
-                  onChanged: controller.setTabBarIndicatorLight,
-                ),
+              isRow: isRow,
+            );
+          }),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Light indicator color'),
+                defaultLabel: 'TabBarStyle',
+                value: controller.tabBarIndicatorLight,
+                onChanged: controller.setTabBarIndicatorLight,
               ),
-              Expanded(
-                child: EnumPopupMenu<TabBarIndicatorSize>(
-                  values: TabBarIndicatorSize.values,
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Indicator style'),
-                  value: controller.tabBarIndicatorSize,
-                  onChanged: controller.setTabBarIndicatorSize,
-                ),
+              lastWidget: EnumPopupMenu<TabBarIndicatorSize>(
+                values: TabBarIndicatorSize.values,
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Indicator style'),
+                value: controller.tabBarIndicatorSize,
+                onChanged: controller.setTabBarIndicatorSize,
               ),
-            ],
-          ),
+              isRow: isRow,
+            );
+          }),
         ] else ...<Widget>[
           ColorSchemePopupMenu(
             enabled: enableControl,
@@ -259,98 +254,89 @@ class TabBarPanel extends StatelessWidget {
             value: controller.tabBarItemSchemeColorDark,
             onChanged: controller.setTabBarItemSchemeColorDark,
           ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Dark unselected items color'),
-                  defaultLabel: unselectedDarkLabel(),
-                  value: controller.tabBarUnselectedItemSchemeColorDark,
-                  onChanged: controller.setTabBarUnselectedItemSchemeColorDark,
-                ),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Dark unselected items color'),
+                defaultLabel: unselectedDarkLabel(),
+                value: controller.tabBarUnselectedItemSchemeColorDark,
+                onChanged: controller.setTabBarUnselectedItemSchemeColorDark,
               ),
-              Expanded(
-                child: SliderListTileReveal(
-                  enabled: enableControl, //unselectedDarkOpacityEnabled,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Opacity'),
-                  value: controller.tabBarUnselectedItemOpacityDark,
-                  onChanged: controller.setTabBarUnselectedItemOpacityDark,
-                  min: 0,
-                  max: 1,
-                  divisions: 100,
-                  valueDisplayScale: 100,
-                  valueDecimalPlaces: 0,
-                  valueHeading: 'OPACITY',
-                  valueUnitLabel: ' %',
-                  valueDefaultLabel: opacityLabel(),
-                ),
+              lastWidget: SliderListTileReveal(
+                enabled: enableControl, //unselectedDarkOpacityEnabled,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Opacity'),
+                value: controller.tabBarUnselectedItemOpacityDark,
+                onChanged: controller.setTabBarUnselectedItemOpacityDark,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: opacityLabel(),
               ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: ColorSchemePopupMenu(
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingStart(context),
-                  title: const Text('Dark indicator color'),
-                  defaultLabel: 'TabBarStyle',
-                  value: controller.tabBarIndicatorDark,
-                  onChanged: controller.setTabBarIndicatorDark,
-                ),
+              isRow: isRow,
+            );
+          }),
+          ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Dark indicator color'),
+                defaultLabel: 'TabBarStyle',
+                value: controller.tabBarIndicatorDark,
+                onChanged: controller.setTabBarIndicatorDark,
               ),
-              Expanded(
-                child: EnumPopupMenu<TabBarIndicatorSize>(
-                  values: TabBarIndicatorSize.values,
-                  enabled: enableControl,
-                  contentPadding: ThemeValues.tilePaddingEnd(context),
-                  title: const Text('Indicator style'),
-                  value: controller.tabBarIndicatorSize,
-                  onChanged: controller.setTabBarIndicatorSize,
-                ),
+              lastWidget: EnumPopupMenu<TabBarIndicatorSize>(
+                values: TabBarIndicatorSize.values,
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Indicator style'),
+                value: controller.tabBarIndicatorSize,
+                onChanged: controller.setTabBarIndicatorSize,
               ),
-            ],
-          ),
+              isRow: isRow,
+            );
+          }),
         ],
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                title: const Text('Indicator weight'),
-                value: controller.tabBarIndicatorWeight,
-                onChanged: controller.setTabBarIndicatorWeight,
-                min: 0,
-                max: 10,
-                divisions: 20,
-                valueDecimalPlaces: 1,
-                valueHeading: 'WEIGHT',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: useMaterial3 ? '3 dp' : '2 dp',
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Indicator weight'),
+              value: controller.tabBarIndicatorWeight,
+              onChanged: controller.setTabBarIndicatorWeight,
+              min: 0,
+              max: 10,
+              divisions: 20,
+              valueDecimalPlaces: 1,
+              valueHeading: 'WEIGHT',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: useMaterial3 ? '3 dp' : '2 dp',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                enabled: enableControl,
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                title: const Text('Indicator top edge radius'),
-                value: controller.tabBarIndicatorTopRadius,
-                onChanged: controller.setTabBarIndicatorTopRadius,
-                min: 0,
-                max: 10,
-                divisions: 20,
-                valueDecimalPlaces: 1,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: useMaterial3 ? '3 dp' : '0 dp',
-              ),
+            lastWidget: SliderListTileReveal(
+              enabled: enableControl,
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              title: const Text('Indicator top edge radius'),
+              value: controller.tabBarIndicatorTopRadius,
+              onChanged: controller.setTabBarIndicatorTopRadius,
+              min: 0,
+              max: 10,
+              divisions: 20,
+              valueDecimalPlaces: 1,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: useMaterial3 ? '3 dp' : '0 dp',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         SwitchListTileReveal(
           title: const Text('Remove bottom divider'),
           subtitleReveal: const Text('Removes the bottom divider on M3 TabBar, '
