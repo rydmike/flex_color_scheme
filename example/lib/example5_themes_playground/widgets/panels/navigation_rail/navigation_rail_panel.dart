@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -25,224 +26,203 @@ class NavigationRailPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: ColorSchemePopupMenu(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Background color'),
-                defaultLabel: 'surface',
-                value: controller.navRailBackgroundSchemeColor,
-                onChanged: controller.setNavRailBackgroundSchemeColor,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Background color'),
+              defaultLabel: 'surface',
+              value: controller.navRailBackgroundSchemeColor,
+              onChanged: controller.setNavRailBackgroundSchemeColor,
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Opacity'),
-                value: controller.navRailOpacity,
-                onChanged: controller.setNavRailOpacity,
-                min: 0,
-                max: 1,
-                divisions: 100,
-                valueDisplayScale: 100,
-                valueDecimalPlaces: 0,
-                valueHeading: 'OPACITY',
-                valueUnitLabel: ' %',
-                valueDefaultLabel: '100 %',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Opacity'),
+              value: controller.navRailOpacity,
+              onChanged: controller.setNavRailOpacity,
+              min: 0,
+              max: 1,
+              divisions: 100,
+              valueDisplayScale: 100,
+              valueDecimalPlaces: 0,
+              valueHeading: 'OPACITY',
+              valueUnitLabel: ' %',
+              valueDefaultLabel: '100 %',
             ),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Elevation'),
-                value: controller.navRailElevation,
-                onChanged: controller.setNavRailElevation,
-                min: 0,
-                max: 24,
-                divisions: 24,
-                valueHeading: 'ELEV',
-                valueDecimalPlaces: 1,
-                valueDefaultLabel: '0',
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Elevation'),
+              value: controller.navRailElevation,
+              onChanged: controller.setNavRailElevation,
+              min: 0,
+              max: 24,
+              divisions: 24,
+              valueHeading: 'ELEV',
+              valueDecimalPlaces: 1,
+              valueDefaultLabel: '0',
             ),
-            Expanded(
-              child: NavigationRailLabelBehaviorListTile(
-                controller: controller,
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-              ),
+            lastWidget: NavigationRailLabelBehaviorListTile(
+              controller: controller,
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         const Divider(),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SwitchListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Use indicator'),
-                subtitleReveal: const Text('On by default in Material-3 '
-                    'and off in Material-2. Turn OFF component themes '
-                    'to see this and toggle M2/M3 mode.\n'),
-                value: enableControl && controller.navRailUseIndicator,
-                onChanged:
-                    enableControl ? controller.setNavRailUseIndicator : null,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SwitchListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Use indicator'),
+              subtitleReveal: const Text('On by default in Material-3 '
+                  'and off in Material-2. Turn OFF component themes '
+                  'to see this and toggle M2/M3 mode.\n'),
+              value: enableControl && controller.navRailUseIndicator,
+              onChanged:
+                  enableControl ? controller.setNavRailUseIndicator : null,
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl &&
-                    controller.navRailUseIndicator &&
-                    !(!useMaterial3 &&
-                        controller.navRailLabelType ==
-                            NavigationRailLabelType.none),
-                title: const Text('Radius'),
-                value: controller.navRailIndicatorBorderRadius,
-                onChanged: controller.setNavRailIndicatorBorderRadius,
-                min: 0,
-                max: 50,
-                divisions: 50,
-                valueDecimalPlaces: 0,
-                valueHeading: 'RADIUS',
-                valueUnitLabel: ' dp',
-                valueDefaultLabel: 'stadium',
-                valueDefaultDisabledLabel: !useMaterial3 &&
-                        controller.navRailLabelType ==
-                            NavigationRailLabelType.none
-                    ? 'circular'
-                    : 'stadium',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl &&
+                  controller.navRailUseIndicator &&
+                  !(!useMaterial3 &&
+                      controller.navRailLabelType ==
+                          NavigationRailLabelType.none),
+              title: const Text('Radius'),
+              value: controller.navRailIndicatorBorderRadius,
+              onChanged: controller.setNavRailIndicatorBorderRadius,
+              min: 0,
+              max: 50,
+              divisions: 50,
+              valueDecimalPlaces: 0,
+              valueHeading: 'RADIUS',
+              valueUnitLabel: ' dp',
+              valueDefaultLabel: 'stadium',
+              valueDefaultDisabledLabel: !useMaterial3 &&
+                      controller.navRailLabelType ==
+                          NavigationRailLabelType.none
+                  ? 'circular'
+                  : 'stadium',
             ),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: ColorSchemePopupMenu(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl && controller.navRailUseIndicator,
-                title: const Text('Color'),
-                defaultLabel: 'secondaryContainer',
-                defaultDisabledLabelM2: 'secondary',
-                value: controller.navRailIndicatorSchemeColor,
-                onChanged: controller.setNavRailIndicatorSchemeColor,
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl && controller.navRailUseIndicator,
+              title: const Text('Color'),
+              defaultLabel: 'secondaryContainer',
+              defaultDisabledLabelM2: 'secondary',
+              value: controller.navRailIndicatorSchemeColor,
+              onChanged: controller.setNavRailIndicatorSchemeColor,
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl && controller.navRailUseIndicator,
-                title: const Text('Opacity'),
-                value: controller.navRailIndicatorOpacity,
-                onChanged: controller.setNavRailIndicatorOpacity,
-                min: 0,
-                max: 1,
-                divisions: 100,
-                valueDisplayScale: 100,
-                valueDecimalPlaces: 0,
-                valueHeading: 'OPACITY',
-                valueUnitLabel: ' %',
-                valueDefaultLabel: '100 %',
-                valueDefaultDisabledLabel: useMaterial3 ? '100 %' : '64 %',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl && controller.navRailUseIndicator,
+              title: const Text('Opacity'),
+              value: controller.navRailIndicatorOpacity,
+              onChanged: controller.setNavRailIndicatorOpacity,
+              min: 0,
+              max: 1,
+              divisions: 100,
+              valueDisplayScale: 100,
+              valueDecimalPlaces: 0,
+              valueHeading: 'OPACITY',
+              valueUnitLabel: ' %',
+              valueDefaultLabel: '100 %',
+              valueDefaultDisabledLabel: useMaterial3 ? '100 %' : '64 %',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         const Divider(),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Selected label size'),
-                value: controller.navigationRailSelectedLabelSize,
-                onChanged: controller.setNavigationRailSelectedLabelSize,
-                min: 10,
-                max: 26,
-                divisions: 16,
-                valueHeading: 'SIZE',
-                valueUnitLabel: ' pt',
-                valueDecimalPlaces: 0,
-                valueDefaultLabel: '12 pt',
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Selected label size'),
+              value: controller.navigationRailSelectedLabelSize,
+              onChanged: controller.setNavigationRailSelectedLabelSize,
+              min: 10,
+              max: 26,
+              divisions: 16,
+              valueHeading: 'SIZE',
+              valueUnitLabel: ' pt',
+              valueDecimalPlaces: 0,
+              valueDefaultLabel: '12 pt',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Unselected size'),
-                value: controller.navigationRailUnselectedLabelSize,
-                onChanged: controller.setNavigationRailUnselectedLabelSize,
-                min: 8,
-                max: 26,
-                divisions: 20,
-                valueHeading: 'SIZE',
-                valueUnitLabel: ' pt',
-                valueDecimalPlaces: 0,
-                valueDefaultLabel: controller.navigationRailSelectedLabelSize !=
-                        null
-                    // ignore: lines_longer_than_80_chars
-                    ? '${(controller.navigationRailSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
-                    : '12 pt',
-                valueDefaultDisabledLabel: '12 pt',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Unselected size'),
+              value: controller.navigationRailUnselectedLabelSize,
+              onChanged: controller.setNavigationRailUnselectedLabelSize,
+              min: 8,
+              max: 26,
+              divisions: 20,
+              valueHeading: 'SIZE',
+              valueUnitLabel: ' pt',
+              valueDecimalPlaces: 0,
+              valueDefaultLabel: controller.navigationRailSelectedLabelSize !=
+                      null
+                  // ignore: lines_longer_than_80_chars
+                  ? '${(controller.navigationRailSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
+                  : '12 pt',
+              valueDefaultDisabledLabel: '12 pt',
             ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Selected icon size'),
-                value: controller.navigationRailSelectedIconSize,
-                onChanged: controller.setNavigationRailSelectedIconSize,
-                min: 14,
-                max: 50,
-                divisions: 36,
-                valueHeading: 'SIZE',
-                valueUnitLabel: ' dp',
-                valueDecimalPlaces: 0,
-                valueDefaultLabel: '24 dp',
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Selected icon size'),
+              value: controller.navigationRailSelectedIconSize,
+              onChanged: controller.setNavigationRailSelectedIconSize,
+              min: 14,
+              max: 50,
+              divisions: 36,
+              valueHeading: 'SIZE',
+              valueUnitLabel: ' dp',
+              valueDecimalPlaces: 0,
+              valueDefaultLabel: '24 dp',
             ),
-            Expanded(
-              child: SliderListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Unselected size'),
-                value: controller.navigationRailUnselectedIconSize,
-                onChanged: controller.setNavigationRailUnselectedIconSize,
-                min: 14,
-                max: 50,
-                divisions: 36,
-                valueHeading: 'SIZE',
-                valueUnitLabel: ' dp',
-                valueDecimalPlaces: 0,
-                valueDefaultLabel: controller.navigationRailSelectedIconSize !=
-                        null
-                    // ignore: lines_longer_than_80_chars
-                    ? '${(controller.navigationRailSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
-                    : '24 dp',
-                valueDefaultDisabledLabel: '24 dp',
-              ),
+            lastWidget: SliderListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Unselected size'),
+              value: controller.navigationRailUnselectedIconSize,
+              onChanged: controller.setNavigationRailUnselectedIconSize,
+              min: 14,
+              max: 50,
+              divisions: 36,
+              valueHeading: 'SIZE',
+              valueUnitLabel: ' dp',
+              valueDecimalPlaces: 0,
+              valueDefaultLabel: controller.navigationRailSelectedIconSize !=
+                      null
+                  // ignore: lines_longer_than_80_chars
+                  ? '${(controller.navigationRailSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
+                  : '24 dp',
+              valueDefaultDisabledLabel: '24 dp',
             ),
-          ],
-        ),
+            isRow: isRow,
+          );
+        }),
         const Divider(),
         Stack(
           children: <Widget>[
