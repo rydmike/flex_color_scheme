@@ -5068,7 +5068,7 @@ class MaterialShowcase extends StatelessWidget {
           ],
           Text('Material type canvas', style: denseHeader),
           Text(
-            'Default background color is theme canvasColor,,  '
+            'Default background color is theme canvasColor, '
             'theme canvasColor is set to theme colorScheme surface. The '
             'color canvasColor will be deprecated in Flutter.',
             style: denseBody,
@@ -5091,8 +5091,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material canvas, elevation 1, default surfaceTint, '
-                          'default shadow',
+                          'Material canvas,\nelevation 1,\ndefault surfaceTint,'
+                          '\ndefault shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5115,8 +5115,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material canvas, elevation 1, '
-                          'primary surfaceTint, transparent shadow',
+                          'Material canvas,\nelevation 1,\n'
+                          'primary surfaceTint,\ntransparent shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5139,8 +5139,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material canvas, elevation 1, '
-                          'primary surfaceTint, primary shadow',
+                          'Material canvas,\n elevation 1,\n '
+                          'primary surfaceTint,\nprimary shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5169,8 +5169,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material canvas, elevation 6, default surfaceTint, '
-                          'default shadow',
+                          'Material canvas,\nelevation 6,\n'
+                          'default surfaceTint,\ndefault shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5193,8 +5193,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material canvas, elevation 6, '
-                          'primary surfaceTint, transparent shadow',
+                          'Material canvas,\nelevation 6,\n'
+                          'primary surfaceTint,\ntransparent shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5217,8 +5217,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material canvas, elevation 6, '
-                          'primary surfaceTint, primary shadow',
+                          'Material canvas,\nelevation 6,\n '
+                          'primary surfaceTint,\nprimary shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5232,7 +5232,7 @@ class MaterialShowcase extends StatelessWidget {
           const SizedBox(height: 32),
           Text('Material card', style: denseHeader),
           Text(
-            'Default background color is theme cardColor,,  '
+            'Default background color is theme cardColor, '
             'theme cardColor is set to theme colorScheme surface. The '
             'color cardColor will be deprecated in Flutter.',
             style: denseBody,
@@ -5255,8 +5255,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material card, elevation 1, default surfaceTint, '
-                          'default shadow',
+                          'Material card,\nelevation 1,\n'
+                          'default surfaceTint,\ndefault shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5279,8 +5279,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material card, elevation 1, '
-                          'primary surfaceTint, transparent shadow',
+                          'Material card,\nelevation 1,\n'
+                          'primary surfaceTint,\ntransparent shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5303,8 +5303,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material card, elevation 1, '
-                          'primary surfaceTint, primary shadow',
+                          'Material card,\nelevation 1,\n'
+                          'primary surfaceTint,\nprimary shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5333,8 +5333,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material card, elevation 6, default surfaceTint, '
-                          'default shadow',
+                          'Material card,\nelevation 6,\n'
+                          'default surfaceTint,\ndefault shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5357,8 +5357,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material card, elevation 6, '
-                          'primary surfaceTint, transparent shadow',
+                          'Material card,\nelevation 6,\n'
+                          'primary surfaceTint,\ntransparent shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5381,8 +5381,8 @@ class MaterialShowcase extends StatelessWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          'Material card, elevation 6, '
-                          'primary surfaceTint, primary shadow',
+                          'Material card,\nelevation 6,\n'
+                          'primary surfaceTint,\nprimary shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
                         ),
@@ -5466,7 +5466,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                             child: Text(
-                          'Card, elevation 0, default surfaceTint '
+                          'Card elevation 0,\ndefault surfaceTint\n'
                           'and default shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
@@ -5487,7 +5487,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 0, assigned surfaceTint,  '
+                            'Card elevation 0,\nwith surfaceTint,\n'
                             'default shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5510,7 +5510,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 0, assigned surfaceTint,  '
+                            'Card elevation 0,\nwith surfaceTint,\n'
                             'transparent shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5539,7 +5539,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                             child: Text(
-                          'Card, elevation 1, default surfaceTint '
+                          'Card elevation 1,\ndefault surfaceTint\n'
                           'and default shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
@@ -5560,7 +5560,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 1, assigned surfaceTint,  '
+                            'Card elevation 1,\nwith surfaceTint,\n'
                             'default shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5583,7 +5583,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 1, assigned surfaceTint,  '
+                            'Card elevation 1,\nwith surfaceTint,\n'
                             'transparent shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5612,7 +5612,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 4, default surfaceTint '
+                            'Card elevation 4,\ndefault surfaceTint\n'
                             'and default shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5632,7 +5632,7 @@ class CardShowcase extends StatelessWidget {
                       height: 60,
                       child: Center(
                         child: Text(
-                          'Card, elevation 4, assigned surfaceTint,  '
+                          'Card elevation 4,\nwith surfaceTint,\n'
                           'default shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
@@ -5654,7 +5654,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 4, assigned surfaceTint,  '
+                            'Card elevation 4,\nwith surfaceTint,\n'
                             'transparent shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5683,7 +5683,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 10, default surfaceTint '
+                            'Card elevation 10,\ndefault surfaceTint\n'
                             'and default shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5705,7 +5705,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Card, elevation 10, assigned surfaceTint,  '
+                            'Card elevation 10,\nwith surfaceTint,\n'
                             'default shadow',
                             textAlign: TextAlign.center,
                             style: labelSmall,
@@ -5728,7 +5728,7 @@ class CardShowcase extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                             child: Text(
-                          'Card, elevation 10, assigned surfaceTint,  '
+                          'Card elevation 10,\nwith surfaceTint,\n'
                           'transparent shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
