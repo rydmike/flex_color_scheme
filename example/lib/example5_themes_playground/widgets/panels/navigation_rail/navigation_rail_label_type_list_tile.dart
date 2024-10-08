@@ -22,11 +22,11 @@ class NavigationRailLabelBehaviorListTile extends StatelessWidget {
   String _explainLabelStyle(final NavigationRailLabelType labelStyle) {
     switch (labelStyle) {
       case NavigationRailLabelType.none:
-        return 'Items have no labels';
+        return 'No labels';
       case NavigationRailLabelType.selected:
-        return 'Only selected item has a label';
+        return 'Only selected';
       case NavigationRailLabelType.all:
-        return 'All items have labels';
+        return 'All';
     }
   }
 
