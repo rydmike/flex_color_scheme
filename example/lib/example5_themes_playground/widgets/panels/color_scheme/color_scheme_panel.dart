@@ -6,6 +6,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/controllers/tone_indicator_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/list_tile_slider.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
 import '../../shared/enum_popup_menu.dart';
@@ -83,13 +84,13 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 widget.controller,
                 dense: true,
               ),
-
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: ListTileReveal(
-                    contentPadding: ThemeValues.tilePaddingStart(context),
+            ResponsiveTwoWidgets(
+              builder: (BuildContext context, bool isRow) {
+                return RowOrColumn(
+                  isRow: isRow,
+                  firstWidget: ListTileReveal(
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
                     enabled: widget.controller.useKeyColors,
                     title: const Text('Keep input colors?'),
                     dense: true,
@@ -102,14 +103,12 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                       'separate states for light and dark theme mode.\n',
                     ),
                   ),
-                ),
-                Expanded(
-                  child: ShowInputColorsSwitch(
+                  lastWidget: ShowInputColorsSwitch(
                     controller: widget.controller,
-                    contentPadding: ThemeValues.tilePaddingEnd(context),
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
                   ),
-                ),
-              ],
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 16, 4),
@@ -187,84 +186,79 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 style: TextStyle(fontSize: 13),
               ),
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: SwitchListTileReveal(
-                    contentPadding: ThemeValues.tilePaddingStart(context),
-                    dense: true,
-                    enabled: widget.controller.useFlexColorScheme &&
-                        widget.controller.useKeyColors,
-                    title: const Text('Expressive LIGHT containers'),
-                    subtitleReveal: const Text(
-                      'Use tone 30 instead of 10 for onColors on containers in '
-                      'light mode. This is a new Material-3 spec standard. It '
-                      'is more color expressive, but reduces contrast.\n'
-                      '\n'
-                      'This modifier only impacts light scheme variants where '
-                      'the container on colors use tone 10. For scheme '
-                      'variants with an intentionally custom tone for onColors '
-                      'on containers, this setting has no impact. Such '
-                      'variants are:\n'
-                      ' - Fidelity\n'
-                      ' - Monochrome\n'
-                      ' - Content\n'
-                      ' - Ultra Contrast\n'
-                      ' - Candy pop\n'
-                      ' - Chroma\n'
-                      '\n'
-                      "This feature is not yet used by Flutter's "
-                      'ColorScheme.fromSeed produced ColorSchemes, but will be '
-                      'when Flutter upgrades to Material Color Utilities (MCU) '
-                      '0.12.0. You can opt in on using it already now, or '
-                      'decide not to use it. With FSS you will be able to do '
-                      'so, even after it becomes a forced default and the only '
-                      "option in Flutter's ColorScheme.fromSeed.\n"
-                      '\n'
-                      'For MCU seed generated schemes, this only has any '
-                      'impact when contrast level is at the default value (0), '
-                      'normal contrast.\n'
-                      '\n'
-                      'When using FFS seed generated schemes, the tones '
-                      'modifier "B&W main onColors" will override this '
-                      'setting.\n',
-                    ),
-                    value: widget.controller.expressiveOnContainer,
-                    onChanged: widget.controller.setExpressiveOnContainer,
+            ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+              return RowOrColumn(
+                isRow: isRow,
+                firstWidget: SwitchListTileReveal(
+                  contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                  dense: true,
+                  enabled: widget.controller.useFlexColorScheme &&
+                      widget.controller.useKeyColors,
+                  title: const Text('Expressive containers'),
+                  subtitleReveal: const Text(
+                    'Use tone 30 instead of 10 for onColors on containers in '
+                    'LIGHT mode. This is a new Material-3 spec standard. It '
+                    'is more color expressive, but reduces contrast.\n'
+                    '\n'
+                    'This modifier ONLY impacts LIGHT scheme variants where '
+                    'the container on colors use tone 10. For scheme '
+                    'variants with an intentionally custom tone for onColors '
+                    'on containers, this setting has no impact. Such '
+                    'variants are:\n'
+                    ' - Fidelity\n'
+                    ' - Monochrome\n'
+                    ' - Content\n'
+                    ' - Ultra Contrast\n'
+                    ' - Candy pop\n'
+                    ' - Chroma\n'
+                    '\n'
+                    "This feature is not yet used by Flutter's "
+                    'ColorScheme.fromSeed produced ColorSchemes, but will be '
+                    'when Flutter upgrades to Material Color Utilities (MCU) '
+                    '0.12.0. You can opt in on using it already now, or '
+                    'decide not to use it. With FSS you will be able to do '
+                    'so, even after it becomes a forced default and the only '
+                    "option in Flutter's ColorScheme.fromSeed.\n"
+                    '\n'
+                    'For MCU seed generated schemes, this only has any '
+                    'impact when contrast level is at the default value (0), '
+                    'normal contrast.\n'
+                    '\n'
+                    'When using FFS seed generated schemes, the tones '
+                    'modifier "B&W main onColors" will override this '
+                    'setting.\n',
                   ),
+                  value: widget.controller.expressiveOnContainer,
+                  onChanged: widget.controller.setExpressiveOnContainer,
                 ),
-                Expanded(
-                  child: SwitchListTileReveal(
-                    contentPadding: ThemeValues.tilePaddingEnd(context),
-                    dense: true,
-                    enabled: widget.controller.useFlexColorScheme &&
-                        widget.controller.useKeyColors,
-                    title: const Text('Legacy monochrome seed'),
-                    subtitleReveal: const Text(
-                      'With Flutter and also FCS versions before V8, using a '
-                      'monochrome seed color or white color, resulted in a '
-                      'tonal palette with cyan color tones. Whereas a black '
-                      'seed color resulted in red like color tones. This is '
-                      'not very intuitive and not really expected or desired '
-                      'when using monochrome seed colors.\n'
-                      '\n'
-                      'In V8 and later of FCS any monochrome RGB input value '
-                      'will result in the creation of a greyscale tonal '
-                      'palette for the palette using the monochrome seed '
-                      'color. An RGB monochrome value is one where Red, Green '
-                      'and Blue values are all equal. If you need the legacy '
-                      'style seed result for monochrome seed '
-                      'colors, then turn ON this setting.\n',
-                    ),
-                    value: widget.controller.useLegacyMonochromeSeedBehavior,
-                    onChanged:
-                        widget.controller.setUseLegacyMonochromeSeedBehavior,
+                lastWidget: SwitchListTileReveal(
+                  contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                  dense: true,
+                  enabled: widget.controller.useFlexColorScheme &&
+                      widget.controller.useKeyColors,
+                  title: const Text('Legacy monochrome seed'),
+                  subtitleReveal: const Text(
+                    'With Flutter and also FCS versions before V8, using a '
+                    'monochrome seed color or white color, resulted in a '
+                    'tonal palette with cyan color tones. Whereas a black '
+                    'seed color resulted in red like color tones. This is '
+                    'not very intuitive and not really expected or desired '
+                    'when using monochrome seed colors.\n'
+                    '\n'
+                    'In V8 and later of FCS any monochrome RGB input value '
+                    'will result in the creation of a greyscale tonal '
+                    'palette for the palette using the monochrome seed '
+                    'color. An RGB monochrome value is one where Red, Green '
+                    'and Blue values are all equal. If you need the legacy '
+                    'style seed result for monochrome seed '
+                    'colors, then turn ON this setting.\n',
                   ),
+                  value: widget.controller.useLegacyMonochromeSeedBehavior,
+                  onChanged:
+                      widget.controller.setUseLegacyMonochromeSeedBehavior,
                 ),
-              ],
-            ),
-
+              );
+            }),
             const Divider(height: 1),
             ListTileReveal(
               dense: true,
@@ -295,162 +289,150 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
               onChanged: widget.controller.setHigherContrastFixed,
             ),
             if (isLight) ...<Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingStart(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('Monochrome surfaces'),
-                      subtitleReveal: const Text(
-                        'All seed generated surface colors are pure greyscale '
-                        'with no color tint.\n',
-                      ),
-                      value: widget.controller.useMonoSurfacesLight,
-                      onChanged: widget.controller.setUseMonoSurfacesLight,
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+                return RowOrColumn(
+                  isRow: isRow,
+                  firstWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('Monochrome surfaces'),
+                    subtitleReveal: const Text(
+                      'All seed generated surface colors are pure greyscale '
+                      'with no color tint.\n',
                     ),
+                    value: widget.controller.useMonoSurfacesLight,
+                    onChanged: widget.controller.setUseMonoSurfacesLight,
                   ),
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingEnd(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('White surface'),
-                      subtitleReveal: const Text(
-                        'Surface color uses tone 100 which is '
-                        'always white. You can add this modifier to any seed '
-                        'generation strategy. Surface blends are applied after '
-                        'this and will still mix in the blend color into '
-                        'surface, using selected blend strategy and level.\n',
-                      ),
-                      value: widget.controller.surfacesUseBWLight,
-                      onChanged: widget.controller.setSurfacesUseBWLight,
+                  lastWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('White surface'),
+                    subtitleReveal: const Text(
+                      'Surface color uses tone 100 which is '
+                      'always white. You can add this modifier to any seed '
+                      'generation strategy. Surface blends are applied after '
+                      'this and will still mix in the blend color into '
+                      'surface, using selected blend strategy and level.\n',
                     ),
+                    value: widget.controller.surfacesUseBWLight,
+                    onChanged: widget.controller.setSurfacesUseBWLight,
                   ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingStart(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('B&W main onColors'),
-                      subtitleReveal: const Text(
-                        'Main colors are primary, secondary, tertiary, '
-                        'error, their container and fixed colors. Using black '
-                        'and white as contrast colors on the main colors may '
-                        'improve their contrast, it also makes them less '
-                        'color expressive.\n',
-                      ),
-                      value: widget.controller.onMainsUseBWLight,
-                      onChanged: widget.controller.setOnMainsUseBWLight,
+                );
+              }),
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+                return RowOrColumn(
+                  isRow: isRow,
+                  firstWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('B&W main onColors'),
+                    subtitleReveal: const Text(
+                      'Main colors are primary, secondary, tertiary, '
+                      'error, their container and fixed colors. Using black '
+                      'and white as contrast colors on the main colors may '
+                      'improve their contrast, it also makes them less '
+                      'color expressive.\n',
                     ),
+                    value: widget.controller.onMainsUseBWLight,
+                    onChanged: widget.controller.setOnMainsUseBWLight,
                   ),
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingEnd(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('B&W surface onColors'),
-                      subtitleReveal: const Text(
-                        'Surface on colors are onSurface, onSurfaceVariant and '
-                        'onInverseSurface colors. Using black and white as '
-                        'contrast colors on all surfaces will improve '
-                        'the contrast.\n',
-                      ),
-                      value: widget.controller.onSurfacesUseBWLight,
-                      onChanged: widget.controller.setOnSurfacesUseBWLight,
+                  lastWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('B&W surface onColors'),
+                    subtitleReveal: const Text(
+                      'Surface on colors are onSurface, onSurfaceVariant and '
+                      'onInverseSurface colors. Using black and white as '
+                      'contrast colors on all surfaces will improve '
+                      'the contrast.\n',
                     ),
+                    value: widget.controller.onSurfacesUseBWLight,
+                    onChanged: widget.controller.setOnSurfacesUseBWLight,
                   ),
-                ],
-              ),
+                );
+              }),
             ] else ...<Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingStart(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('Monochrome surfaces'),
-                      subtitleReveal: const Text(
-                        'All seed generated surface colors are pure greyscale '
-                        'with no color tint.\n',
-                      ),
-                      value: widget.controller.useMonoSurfacesDark,
-                      onChanged: widget.controller.setUseMonoSurfacesDark,
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+                return RowOrColumn(
+                  isRow: isRow,
+                  firstWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('Monochrome surfaces'),
+                    subtitleReveal: const Text(
+                      'All seed generated surface colors are pure greyscale '
+                      'with no color tint.\n',
                     ),
+                    value: widget.controller.useMonoSurfacesDark,
+                    onChanged: widget.controller.setUseMonoSurfacesDark,
                   ),
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingEnd(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('Black surface'),
-                      subtitleReveal: const Text(
-                        'Surface uses tone 0, which is always '
-                        'true black. You can add this modifier to any seed '
-                        'generation strategy. Surface blends will still mix in '
-                        'blend color into surface, using selected blend '
-                        'strategy and level.\n',
-                      ),
-                      value: widget.controller.surfacesUseBWDark,
-                      onChanged: widget.controller.setSurfacesUseBWDark,
+                  lastWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('Black surface'),
+                    subtitleReveal: const Text(
+                      'Surface uses tone 0, which is always '
+                      'true black. You can add this modifier to any seed '
+                      'generation strategy. Surface blends will still mix in '
+                      'blend color into surface, using selected blend '
+                      'strategy and level.\n',
                     ),
+                    value: widget.controller.surfacesUseBWDark,
+                    onChanged: widget.controller.setSurfacesUseBWDark,
                   ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingStart(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('B&W main onColors'),
-                      subtitleReveal: const Text(
-                        'Main colors are primary, secondary, tertiary, '
-                        'error, their container and fixed colors. Using black '
-                        'and white as onColors on the main colors may improve '
-                        'contrast, it also makes the theme less color '
-                        'expressive.\n',
-                      ),
-                      value: widget.controller.onMainsUseBWDark,
-                      onChanged: widget.controller.setOnMainsUseBWDark,
+                );
+              }),
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+                return RowOrColumn(
+                  isRow: isRow,
+                  firstWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('B&W main onColors'),
+                    subtitleReveal: const Text(
+                      'Main colors are primary, secondary, tertiary, '
+                      'error, their container and fixed colors. Using black '
+                      'and white as onColors on the main colors may improve '
+                      'contrast, it also makes the theme less color '
+                      'expressive.\n',
                     ),
+                    value: widget.controller.onMainsUseBWDark,
+                    onChanged: widget.controller.setOnMainsUseBWDark,
                   ),
-                  Expanded(
-                    child: SwitchListTileReveal(
-                      dense: true,
-                      contentPadding: ThemeValues.tilePaddingEnd(context),
-                      enabled:
-                          widget.controller.useKeyColors && !_isFlutterScheme,
-                      title: const Text('B&W surface onColors'),
-                      subtitleReveal: const Text(
-                        'Surface onColors are onSurface, onSurfaceVariant and '
-                        'onInverseSurface colors. Using black and white as '
-                        'onColors on all surfaces may improve contrast.\n',
-                      ),
-                      value: widget.controller.onSurfacesUseBWDark,
-                      onChanged: widget.controller.setOnSurfacesUseBWDark,
+                  lastWidget: SwitchListTileReveal(
+                    dense: true,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    enabled:
+                        widget.controller.useKeyColors && !_isFlutterScheme,
+                    title: const Text('B&W surface onColors'),
+                    subtitleReveal: const Text(
+                      'Surface onColors are onSurface, onSurfaceVariant and '
+                      'onInverseSurface colors. Using black and white as '
+                      'onColors on all surfaces may improve contrast.\n',
                     ),
+                    value: widget.controller.onSurfacesUseBWDark,
+                    onChanged: widget.controller.setOnSurfacesUseBWDark,
                   ),
-                ],
-              ),
+                );
+              }),
             ],
             const Divider(height: 1),
             ListTileReveal(
