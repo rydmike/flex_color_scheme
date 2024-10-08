@@ -79,6 +79,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
+- **FIX**: NavRail Alignment slider, make it not pass via null if possible. We can give a fake none null prop for it.
 
 - **MINOR KNOWN ISSUES**
   - The `toScheme` method may need some updates for the raw `FlexColorScheme?` constructor.
