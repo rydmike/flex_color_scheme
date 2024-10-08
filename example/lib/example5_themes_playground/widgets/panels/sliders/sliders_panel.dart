@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
@@ -55,65 +56,56 @@ class SlidersPanel extends StatelessWidget {
           value: controller.sliderBaseSchemeColor,
           onChanged: controller.setSliderBaseSchemeColor,
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ColorSchemePopupMenu(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                title: const Text('Value indicator color'),
-                defaultLabel: labelIndicatorDefault,
-                colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
-                value: controller.sliderIndicatorSchemeColor,
-                onChanged: controller.setSliderIndicatorSchemeColor,
-              ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Value indicator color'),
+              defaultLabel: labelIndicatorDefault,
+              colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
+              value: controller.sliderIndicatorSchemeColor,
+              onChanged: controller.setSliderIndicatorSchemeColor,
             ),
-            Expanded(
-              child: SwitchListTileReveal(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                title: const Text('Tinted indicator'),
-                subtitleReveal: Text(
-                  'Uses a scrim and opacity, to make it much '
-                  '${isLight ? 'darker' : 'lighter'} than the selected color, '
-                  'it also and adds some slight opacity. By default the value '
-                  'indicator only shows up on a stepped Slider. You can change '
-                  'this behavior with the indicator visibility further '
-                  'below.\n',
-                ),
-                value: controller.sliderValueTinted,
-                onChanged: controller.setSliderValueTinted,
+            lastWidget: SwitchListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Tinted indicator'),
+              subtitleReveal: Text(
+                'Uses a scrim and opacity, to make it much '
+                '${isLight ? 'darker' : 'lighter'} than the selected color, '
+                'it also and adds some slight opacity. By default the value '
+                'indicator only shows up on a stepped Slider. You can change '
+                'this behavior with the indicator visibility further '
+                'below.\n',
               ),
+              value: controller.sliderValueTinted,
+              onChanged: controller.setSliderValueTinted,
             ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: EnumPopupMenu<FlexSliderIndicatorType>(
-                contentPadding: ThemeValues.tilePaddingStart(context),
-                enabled: enableControl,
-                values: FlexSliderIndicatorType.values,
-                title: const Text('Indicator type'),
-                value: controller.sliderValueIndicatorType,
-                onChanged: controller.setSliderValueIndicatorType,
-              ),
+            isRow: isRow,
+          );
+        }),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: EnumPopupMenu<FlexSliderIndicatorType>(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              values: FlexSliderIndicatorType.values,
+              title: const Text('Indicator type'),
+              value: controller.sliderValueIndicatorType,
+              onChanged: controller.setSliderValueIndicatorType,
             ),
-            Expanded(
-              child: EnumPopupMenu<ShowValueIndicator>(
-                contentPadding: ThemeValues.tilePaddingEnd(context),
-                enabled: enableControl,
-                values: ShowValueIndicator.values,
-                title: const Text('Indicator visibility'),
-                value: controller.sliderShowValueIndicator,
-                onChanged: controller.setSliderShowValueIndicator,
-              ),
+            lastWidget: EnumPopupMenu<ShowValueIndicator>(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              values: ShowValueIndicator.values,
+              title: const Text('Indicator visibility'),
+              value: controller.sliderShowValueIndicator,
+              onChanged: controller.setSliderShowValueIndicator,
             ),
-          ],
-        ),
-
+            isRow: isRow,
+          );
+        }),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Track height'),
