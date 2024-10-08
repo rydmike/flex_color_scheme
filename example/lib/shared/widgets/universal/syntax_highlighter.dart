@@ -177,6 +177,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
     'part',
     'rethrow',
     'return',
+    'sealed',
     'set',
     'static',
     'super',

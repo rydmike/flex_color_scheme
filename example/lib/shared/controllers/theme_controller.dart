@@ -54,6 +54,8 @@ class ThemeController with ChangeNotifier {
         Store.keyUseFlexColorScheme, Store.defaultUseFlexColorScheme);
     _useSubThemes = await _themeService.load(
         Store.keyUseSubThemes, Store.defaultUseSubThemes);
+    _codeForFile = await _themeService.load(
+        Store.keyCodeForFile, Store.defaultCodeForFile);
     _applyThemeToAllCupertino = await _themeService.load(
         Store.keyApplyThemeToAllCupertino,
         Store.defaultApplyThemeToAllCupertino);
@@ -1940,10 +1942,8 @@ class ThemeController with ChangeNotifier {
       setBlendOnLevel(0, false);
       setBlendOnLevelDark(0, false);
       // Elevation tint and shadows, we keep it in dark mode.
-      setAdaptiveRemoveElevationTintLight(AdaptiveResponse.all, false);
       setAdaptiveElevationShadowsBackLight(AdaptiveResponse.all, false);
       setAdaptiveAppBarScrollUnderOffLight(AdaptiveResponse.all, false);
-      setAdaptiveRemoveElevationTintDark(AdaptiveResponse.off, false);
       setAdaptiveElevationShadowsBackDark(AdaptiveResponse.all, false);
       setAdaptiveAppBarScrollUnderOffDark(AdaptiveResponse.all, false);
       // Effects: M2 Divider, interaction effects, tinted disable.
@@ -2226,13 +2226,10 @@ class ThemeController with ChangeNotifier {
       // is very useful there. We also add elevation shadows back in dark
       // mode on all platforms, they are barely visible there anyway but
       // may help with contrast a bit.
-      setAdaptiveRemoveElevationTintLight(
-          AdaptiveResponse.excludeWebAndroidFuchsia, false);
       setAdaptiveElevationShadowsBackLight(
           AdaptiveResponse.excludeWebAndroidFuchsia, false);
       setAdaptiveAppBarScrollUnderOffLight(
           AdaptiveResponse.excludeWebAndroidFuchsia, false);
-      setAdaptiveRemoveElevationTintDark(AdaptiveResponse.off, false);
       setAdaptiveElevationShadowsBackDark(AdaptiveResponse.all, false);
       setAdaptiveAppBarScrollUnderOffDark(
           AdaptiveResponse.excludeWebAndroidFuchsia, false);
@@ -2551,6 +2548,16 @@ class ThemeController with ChangeNotifier {
     _useSubThemes = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyUseSubThemes, value));
+  }
+
+  late bool _codeForFile;
+  bool get codeForFile => _codeForFile;
+  void setCodeForFile(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _codeForFile) return;
+    _codeForFile = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyCodeForFile, value));
   }
 
   late bool _applyThemeToAllCupertino;

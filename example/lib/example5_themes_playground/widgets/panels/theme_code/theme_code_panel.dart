@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/syntax_highlighter.dart';
+import '../../../theme/theme_values.dart';
 import '../../../utils/generate_theme_dart_code.dart';
 import 'show_code_theme_colors.dart';
 
@@ -41,23 +44,41 @@ class ThemeCodePanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ListTileReveal(
-          title: const Text('Copy the theme code'),
-          subtitleReveal: const Text(
-              'When you are happy with your theme design, you can copy the '
-              'produced API configuration code. Paste it into your Flutter app '
-              'and when used together with the FlexColorScheme package, your '
-              'app gets the same theme.\n'),
-          trailing: FilledButton(
-            onPressed: () {
-              unawaited(_handleCopyCode(context, code));
-            },
-            child: const Text('Copy'),
-          ),
-          onTap: () {
-            unawaited(_handleCopyCode(context, code));
-          },
-        ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ListTileReveal(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              title: const Text('Copy theme code'),
+              subtitleReveal: const Text(
+                'When you are happy with your theme design, you can copy the '
+                'produced API configuration code. Paste it into your Flutter '
+                'app and when used together with the FlexColorScheme package, '
+                'your app gets the same theme.\n',
+              ),
+              trailing: FilledButton(
+                onPressed: () {
+                  unawaited(_handleCopyCode(context, code));
+                },
+                child: const Text('Copy'),
+              ),
+              onTap: () {
+                unawaited(_handleCopyCode(context, code));
+              },
+            ),
+            lastWidget: SwitchListTileReveal(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              title: const Text('Separate file'),
+              subtitleReveal: const Text(
+                'Turn ON to get theme definitions '
+                'intended for a separate file instead of using the '
+                'theme definitions in your MaterialApp setup directly.\n',
+              ),
+              value: controller.codeForFile,
+              onChanged: controller.setCodeForFile,
+            ),
+            isRow: isRow,
+          );
+        }),
         const Divider(height: 1),
         Padding(
           padding: const EdgeInsets.all(16),
