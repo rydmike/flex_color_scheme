@@ -1,20 +1,25 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
+import '../../const/app_color.dart';
+import '../../controllers/theme_controller.dart';
 
 /// Popup used to change the used FlexSchemeData index in the theme controller
 /// and via that the selected active theme.
+///
+/// This widget is used by example 4 "All theme"s and example 5 "Playground".
+/// Example 4 uses it with includeCustomizableScheme set to false.
 class InputColorsPopupMenu extends StatelessWidget {
   const InputColorsPopupMenu({
     super.key,
     required this.controller,
     this.contentPadding,
+    this.includeCustomizableScheme = true,
   });
   final ThemeController controller;
   // Defaults to 16, like ListTile does.
   final EdgeInsetsGeometry? contentPadding;
+  final bool includeCustomizableScheme;
 
   double _borderRadius(bool useMaterial3) =>
       controller.useSubThemes && controller.useFlexColorScheme
@@ -31,6 +36,7 @@ class InputColorsPopupMenu extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
+    final int removeCustom = includeCustomizableScheme ? 0 : 1;
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
@@ -42,7 +48,7 @@ class InputColorsPopupMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       onSelected: controller.setSchemeIndex,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < AppColor.schemes.length; i++)
+        for (int i = 0; i < AppColor.schemes.length - removeCustom; i++)
           PopupMenuItem<int>(
             value: i,
             child: ListTile(

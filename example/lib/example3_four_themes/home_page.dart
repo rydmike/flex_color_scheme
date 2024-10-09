@@ -15,8 +15,8 @@ import 'widgets/theme_select_buttons.dart';
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 3 - Four Themes
 //
-// The content of the HomePage below is not relevant for using FlexColorScheme
-// based application theming. The critical parts are in the MaterialApp
+// The content of the HomePage below is not important for using FlexColorScheme
+// based application theming. The key parts are in the MaterialApp
 // theme definitions. The HomePage contains UI to visually show what the
 // defined example looks like in an application and with commonly used Widgets.
 // -----------------------------------------------------------------------------
@@ -50,12 +50,12 @@ class HomePage extends StatelessWidget {
             const Text(
               'FlexColorScheme example 3 shows how to use three built-in '
               'color schemes, plus one custom color scheme as selectable '
-              'themes in an application.\n'
-              'The example uses primary color alpha blended surface colors. '
-              'Widget component theming is ON. You can '
-              'turn it OFF to use default widget themes. '
-              'Key color generated ColorSchemes can be enabled.\n'
-              'A theme showcase displays the resulting theme using '
+              'themes in an application. '
+              'It uses primary color alpha blended surface colors. '
+              'Customized component themes are enabled, but you can '
+              'turn them OFF to use default component themes. '
+              'Key color seed generated ColorSchemes can be enabled. '
+              'A Widget Showcase displays the resulting theme using '
               'common Material widgets. Settings are persisted.',
             ),
             const SizedBox(height: 8),
@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 8),
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('Use Material 3'),
+                      title: const Text('Use Material-3'),
                       value: controller.useMaterial3,
                       onChanged: controller.setUseMaterial3,
                     ),
@@ -111,14 +111,14 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 8),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: const Text('Use input colors as keys '
-                          'for the ColorScheme'),
+                      title: const Text('Seed generated ColorScheme'),
                       subtitle: Text(AppColor.explainUsedColors(controller)),
                     ),
-                    // const SizedBox(height: 4),
+                    // Only Playground uses the error key color.
                     ListTile(
                       trailing: UseKeyColorsButtons(
                         controller: controller,
+                        showErrorButton: false,
                       ),
                     ),
                     // Show all active colors in ThemeData, these will all be
@@ -129,8 +129,12 @@ class HomePage extends StatelessWidget {
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Use component themes'),
-                      subtitle:
-                          const Text('Enable opinionated widget sub themes'),
+                      subtitle: const Text('Enable component themes. '
+                          'They are not customized in this example. FCS M3 '
+                          'component themes look mostly same as default M3, '
+                          'but in M2 mode, FCS defaults are very opinionated '
+                          'and look more like M3 defaults than M2 '
+                          'defaults.'),
                       value: controller.useSubThemes,
                       onChanged: controller.setUseSubThemes,
                     ),
@@ -138,9 +142,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            const Divider(),
-            Text('Theme Showcase', style: headlineMedium),
+            const SizedBox(height: 16),
+            Text('Widget Showcase', style: headlineMedium),
             const SizedBox(height: 8),
             const ShowcaseMaterial(),
           ],

@@ -12,8 +12,8 @@ import '../shared/widgets/universal/showcase_material.dart';
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 2 - Custom Theme
 //
-// The content of the HomePage below is not relevant for using FlexColorScheme
-// based application theming. The critical parts are in the above MaterialApp
+// The content of the HomePage below is not important for using FlexColorScheme
+// based application theming. The key parts are in the MaterialApp
 // theme definitions. The HomePage contains UI to visually show what the
 // defined example looks like in an application and with commonly used Widgets.
 //
@@ -95,9 +95,8 @@ class HomePage extends StatelessWidget {
               value: controller.useSubThemes,
               onChanged: controller.setUseSubThemes,
             ),
-            const SizedBox(height: 8),
-            const Divider(),
-            Text('Theme Showcase', style: headlineMedium),
+            const SizedBox(height: 16),
+            Text('Widget Showcase', style: headlineMedium),
             const SizedBox(height: 8),
             const ShowcaseMaterial(),
           ],

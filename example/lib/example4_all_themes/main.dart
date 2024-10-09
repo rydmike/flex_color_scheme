@@ -29,7 +29,7 @@ import 'home_page.dart';
 //
 // The Google font Noto Sans is used to show how to use custom fonts.
 //
-// A theme showcase widget shows the theme with several common Material widgets.
+// A Widget showcase widget shows the theme with common Material widgets.
 //
 // A ThemeService and ThemeController is used to manage our
 // theme settings. This follows the example architecture you get when you
@@ -103,7 +103,7 @@ class DemoApp extends StatelessWidget {
             // We moved the definition of the list of color schemes to use into
             // a separate static class and list. We use the theme controller
             // to change the index of used color scheme from the list.
-            colors: AppColor.customSchemes[themeController.schemeIndex].light,
+            colors: AppColor.schemes[themeController.schemeIndex].light,
             // Here we use another surface blend mode, where the scaffold
             // background gets a strong blend. This type is commonly used
             // on web/desktop when you wrap content on the scaffold in a
@@ -162,6 +162,9 @@ class DemoApp extends StatelessWidget {
               keepSecondary: themeController.keepSecondary,
               keepTertiary: themeController.keepTertiary,
             ),
+            // Used ColorScheme seed generation variant.
+            variant:
+                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
             // In this example we use the values for visual density and font
             // from a single static source, so we can change it easily there.
             visualDensity: App.visualDensity,
@@ -177,7 +180,7 @@ class DemoApp extends StatelessWidget {
           darkTheme: FlexThemeData.dark(
             tertiary: FlexColor.greenDarkPrimary,
             useMaterial3: themeController.useMaterial3,
-            colors: AppColor.customSchemes[themeController.schemeIndex].dark,
+            colors: AppColor.schemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // We go with a slightly stronger blend in dark mode.
             blendLevel: 7,
@@ -190,6 +193,9 @@ class DemoApp extends StatelessWidget {
               keepSecondary: themeController.keepDarkSecondary,
               keepTertiary: themeController.keepDarkTertiary,
             ),
+            // Used ColorScheme seed generation variant.
+            variant:
+                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
             subThemesData: themeController.useSubThemes
                 ? FlexSubThemesData(
                     defaultRadius: themeController.defaultRadius,
@@ -206,7 +212,7 @@ class DemoApp extends StatelessWidget {
           // using current scheme index.
           highContrastTheme: FlexThemeData.light(
             useMaterial3: themeController.useMaterial3,
-            colors: AppColor.customSchemes[themeController.schemeIndex].light,
+            colors: AppColor.schemes[themeController.schemeIndex].light,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             blendLevel: 2,
             appBarElevation: 0.5,
@@ -235,7 +241,7 @@ class DemoApp extends StatelessWidget {
           highContrastDarkTheme: FlexThemeData.dark(
             tertiary: FlexColor.greenDarkPrimary,
             useMaterial3: themeController.useMaterial3,
-            colors: AppColor.customSchemes[themeController.schemeIndex].dark,
+            colors: AppColor.schemes[themeController.schemeIndex].dark,
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             blendLevel: 7,
             appBarElevation: 0.5,
