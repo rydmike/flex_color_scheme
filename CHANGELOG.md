@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Oct 8, 2024**
+**Oct 9, 2024**
 
 ### SUMMARY
 
@@ -27,19 +27,19 @@ The most critical changes to migrate from FlexColorScheme version 7 to version 8
   * **NOTE:** You may want to check your surface mode and blends to see that they still look as you want them to, as they may have changed slightly depending on your configuration. We have tried to keep required changes subtle, you may not notice any difference, but it is good to check. These changes we forced by Flutter 3.22.0 deprecation of `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`.
 
 
-* This major release got many breaking changes forced via breaking changes in Flutter 3.22.0. Due to this, the release also uses this opportunity to clean up APIs with opinionated defaults, like the ones mentioned above. There are additional smaller and subtle changes in defaults values, that align FCS to use the same color defaults from the new `ColorScheme` colors, that Flutter started using in version 3.22.0 as well. You can find all the details further below in the **PACKAGE CHANGES** chapter.  
+* This major release has many breaking changes forced via breaking changes in Flutter 3.22.0. Due to this, the release also uses this opportunity to clean up APIs with opinionated defaults, like the ones mentioned above. There are additional smaller and more subtle changes in defaults values, that align FCS to use the same color defaults from the new `ColorScheme` colors, that Flutter started using in version 3.22.0 as well. You can find all the details below in the **PACKAGE CHANGES** chapter.  
 
 ### BACKGROUND
 
 Flutter 3.22 introduced a large number of breaking changes to the `ColorScheme` and default color mappings that Flutter's Material components use. In total, the Flutter 3.22.0 release adjusted 249 of its own internal tests to accommodate for new Material-3 spec changes, that all broke past Flutter Material-3 component styles. For a reference to the broken and updated tests, see [this issue side comment](https://github.com/flutter/flutter/issues/130135#issuecomment-2308522312).
 
-FlexColorScheme V8 now allows you to use the new colors introduced in Flutter 3.22. As before, with FCS you can still get fully defined hand-tuned `ColorScheme`s without using Material-3 design's Material Color Utilities (MCU) based seed-generated ColorSchemes. Typically, you want to use seed generated ColorSchemes with Material-3, but it is nice to know you do not have to.
+FlexColorScheme V8 now allows you to use the new colors introduced in Flutter 3.22. As before, with FCS you can get fully defined hand-tuned `ColorScheme`s without using Material-3 design's Material Color Utilities (MCU) based seed-generated ColorSchemes. You may prefer to use seed generated ColorSchemes with Material-3, but it is nice to know you do not have to.
 
-To the seed generated `ColorScheme`s, FCS adds support for all the Flutter SDK dynamic scheme variants. It also improves them by allowing you to use separate seed colors for each palette. Flutter SDK only allows you to seed from the theme's primary color. It always uses computed values for secondary, tertiary palettes and a fixed color for the error palette. Surfaces and their tints are always tied to primary color as well. With FCS, you do not have these limitations, and you can seed with separate colors with Flutter's own dynamic scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones seed generated scheme variants. FCS now also brings this feature to Flutter's own dynamic scheme variants.
+To the seed generated `ColorScheme`s, FCS adds support for all the Flutter `DynamicSchemeVariant` seed generated variants. It also improves them by allowing you to use separate seed colors for each palette. With Flutter's `ColorScheme.fromSeed`, you can only seed with one color, the primary color. The resulting `ColorScheme` always uses computed values for **secondary** and **tertiary** palettes, plus a hard coded fixed color for the **error** palette seeding. **Surfaces** colors are always tied to primary color as well and inlcude a hint of primary color. With FCS, you do not have these limitations, you can seed with separate colors for each palette with even with Flutter's own dynamic scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones, seed generated scheme variants. FCS now brings this feature to Flutter's own dynamic scheme variants as well.
 
-FCS as before, also have its own even configurable `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what `ColorScheme` color. An internal example of using them are the `FlexTones` modifiers. 
+As before, FCS also has its own even configurable `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what `ColorScheme` color. An internal example of using them, is the implementation of `FlexTones` modifiers. 
 
-FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. 
+FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. Check the API docs for more details.
 
 **CRITICAL TODOS**
 
@@ -53,7 +53,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 * **DONE**: Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later.
-  * Will keep it around for now, but added info about it being obsolete in Flutter 3.22 or later, in its info-expand.
+  * Will keep it around for now, but added info about it being obsolete in Flutter 3.22 or later, in its info-expands.
 * **DONE**: Consider what to do with shadows back.
   * Keep and add more fine-grained control later, via shadow color selection per component.
 * **DONE**: Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
