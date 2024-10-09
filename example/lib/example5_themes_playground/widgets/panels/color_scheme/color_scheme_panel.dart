@@ -146,7 +146,6 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   style: theme.textTheme.labelSmall,
                 ),
               ),
-
             const Divider(),
             const Padding(
               padding: EdgeInsetsDirectional.fromSTEB(16, 0, 24, 0),

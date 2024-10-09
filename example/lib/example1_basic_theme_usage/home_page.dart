@@ -11,8 +11,8 @@ import '../shared/widgets/universal/showcase_material.dart';
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 1 - Basic Theme Usage
 //
-// The content of the HomePage below is not relevant for using FlexColorScheme
-// based application theming. The critical parts are in the MaterialApp
+// The content of the HomePage below is not important for using FlexColorScheme
+// based application theming. The key parts are in the MaterialApp
 // theme definitions. The HomePage contains UI to visually show what the
 // defined example looks like in an application and with commonly used Widgets.
 // -----------------------------------------------------------------------------
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               onUseMaterial3Changed(!useMaterial3);
             },
-            tooltip: '"Switch to Material ${useMaterial3 ? 2 : 3}',
+            tooltip: 'Switch to Material-${useMaterial3 ? 2 : 3}',
           ),
           const AboutIconButton(),
         ],
@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
             const Text(
               'FlexColorScheme example 1 shows how to use a selected '
               'predefined color scheme for light and dark theme mode, and '
-              'switch between the modes. A theme showcase displays the '
+              'switch between the modes. The Widget showcase displays the '
               'resulting theme using common Material widgets. Settings '
               'are not persisted',
             ),
@@ -93,9 +93,8 @@ class HomePage extends StatelessWidget {
             // deprecated in Flutter SDK, for more info see
             // https://github.com/flutter/flutter/issues/91772
             const ShowThemeDataColors(),
-            const SizedBox(height: 8),
-            const Divider(),
-            Text('Theme Showcase', style: headlineMedium),
+            const SizedBox(height: 16),
+            Text('Widget Showcase', style: headlineMedium),
             const SizedBox(height: 8),
             const ShowcaseMaterial(),
           ],

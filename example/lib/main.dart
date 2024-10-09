@@ -220,7 +220,7 @@ const FlexKeyColors _keyColors = FlexKeyColors(
   useKeyColors: false, // <-- set to true enable M3 seeded ColorScheme.
   useSecondary: true,
   useTertiary: true,
-  keepPrimary: false, // <-- Keep defined value, do not use the seeded result.
+  keepPrimary: true, // <-- Keep defined value, do not use the seeded result.
   keepPrimaryContainer: false,
   keepSecondary: false,
   keepSecondaryContainer: false,
@@ -301,10 +301,11 @@ const FlexKeyColors _keyColors = FlexKeyColors(
 // * FlexTones.soft
 // * FlexTones.vivid
 // * FlexTones.highContrast
+// * FlexTones.chroma
 //
 // You can swap in them in below to try slightly different styles on generated
-// seeded ColorScheme. The `FlexTones.vivid` for example, keeps the chroma as is
-// in key colors for secondary and tertiary, and will thus produce a seeded
+// seeded ColorScheme. The `FlexTones.chroma` for example, keeps the chroma as
+// is in key colors for secondary and tertiary, and will thus produce a seeded
 // ColorScheme that is closer to the provided key/seed colors, than the Flutter
 // SDK M3 spec version does.
 final FlexTones _flexTonesLight = FlexTones.material(Brightness.light);
@@ -323,19 +324,13 @@ const TextTheme _textTheme = TextTheme(
   labelSmall: TextStyle(fontSize: 11, letterSpacing: 0.5),
 );
 
-// FlexColorScheme before version 4 used a `surfaceStyle` property to
-// define the surface color blend mode. Version 4, deprecated `surfaceStyle`
-// and introduced `surfaceMode` and `blendLevel`. In version 5 the old
-// `surfaceStyle` has been removed, thus in version 5 you have to change to
-// using `surfaceMode` and `blendLevel` if you have not done so already.
-//
 // The `surfaceMode` takes `FlexSurfaceMode` that is used to select the used
 // strategy for blending primary color into different surface colors.
 const FlexSurfaceMode _surfaceMode = FlexSurfaceMode.highBackgroundLowScaffold;
 
 // The alpha blend level strength can be defined separately from the
 // SurfaceMode strategy, and has 40 alpha blend level strengths.
-const int _blendLevel = 20;
+const int _blendLevel = 8;
 
 // The `useSubThemes` sets weather you want to opt-in or not on additional
 // opinionated sub-theming. By default FlexColorScheme as before does very
@@ -413,10 +408,11 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // //
   // fabSchemeColor: SchemeColor.secondaryContainer,
 
-  // Select the ColorScheme color used by Chips as their base color
-  // Primary is default so no need to set that, used here as placeholder to
-  // enable easy selection of other options.
-  chipSchemeColor: SchemeColor.primary,
+  // Set some custom colors used by Chips.
+  chipSchemeColor: SchemeColor.surfaceContainerHighest,
+  chipSelectedSchemeColor: SchemeColor.tertiaryContainer,
+  chipSecondarySelectedSchemeColor: SchemeColor.primaryContainer,
+  chipBlendColors: false,
 
   // Elevations have easy override values as well.
   elevatedButtonElevation: 1,
@@ -458,7 +454,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // // does not need any opacity.
   // navigationBarIndicatorOpacity: 1,
   // // Select the ColorScheme color used for [NavigationBar]'s background.
-  // navigationBarBackgroundSchemeColor: SchemeColor.background,
+  // navigationBarBackgroundSchemeColor: SchemeColor.surfaceContainerHigh,
   // // When set to true [NavigationBar] unselected icons use a more muted
   // // version of color defined by [navigationBarUnselectedIconSchemeColor].
   // navigationBarMutedUnselectedIcon: true,
@@ -911,7 +907,8 @@ class _HomePageState extends State<HomePage> {
                   style: headlineMedium.copyWith(color: brandColor)),
               const Text(
                 'This is FlexColorScheme developers Hot Reload '
-                'Playground. It has property values that you can modify and '
+                'Playground. It has a large number of property values '
+                'configured and documented, that you can modify and '
                 'hot reload the app to try different options and features.',
               ),
               const SizedBox(height: 8),
@@ -950,7 +947,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 8),
               const ShowSubPages(),
               const Divider(),
-              Text('Theme Showcase', style: headlineMedium),
+              Text('Widget Showcase', style: headlineMedium),
               const SizedBox(height: 8),
               const ShowcaseMaterial(),
             ],

@@ -116,7 +116,7 @@ sealed class AppColor {
   static const Color customTertiaryDark = Color(0xFF86D2E1);
   static const Color customTertiaryContainerDark = Color(0xFF004E59);
 
-  // Used by example 4, the "All themes" demo.
+  // Used by example 4, the "All themes" and example 5, the Themes Playground.
   //
   // Finally we create a list with all color schemes we will use. Starting with
   // our custom schemes, since normally when we make custom schemes, those are
@@ -263,7 +263,7 @@ sealed class AppColor {
     }
     if (!controller.useSecondary && controller.useTertiary) {
       return 'Tonal palettes for the ColorScheme, are made with light scheme '
-          'defined Primary and Tertiary colors as seed keys, Secondary key is '
+          'defined Primary and Tertiary colors as seed keys. Secondary key is '
           'computed from Primary color$errorExplanation';
     }
     return 'Light scheme defined Primary, Secondary and Tertiary colors are '

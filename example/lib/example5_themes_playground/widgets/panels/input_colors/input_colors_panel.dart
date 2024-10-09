@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/examples/input_colors_popup_menu.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/show_input_colors_switch.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
 import 'custom_theme_controls.dart';
-import 'input_colors_popup_menu.dart';
 import 'show_input_colors.dart';
 import 'used_colors_popup_menu.dart';
 
