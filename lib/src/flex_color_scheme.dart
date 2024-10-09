@@ -2313,9 +2313,9 @@ class FlexColorScheme with Diagnosticable {
     /// predefined [FlexTones] configurations. However, with [variant] you can
     /// only select one of the predefined configurations, and not make custom
     /// configurations like you can with [FlexTones]. Additionally you cannot
-    /// use the [FlexTones] modifiers [onMainsUseBW], [onSurfacesUseBW] and
-    /// [surfacesUseBW], since the only operate on the [FlexTones]
-    /// configurations passed in to [tones].
+    /// use the [FlexTones] modifiers [monochromeSurfaces], [onMainsUseBW],
+    /// [onSurfacesUseBW] and [surfacesUseBW], since the only operate on the
+    /// [FlexTones] configurations passed in to [tones].
     final FlexSchemeVariant? variant,
 
     /// The density value for specifying the compactness of various UI
@@ -4376,9 +4376,9 @@ class FlexColorScheme with Diagnosticable {
     /// predefined [FlexTones] configurations. However, with [variant] you can
     /// only select one of the predefined configurations, and not make custom
     /// configurations like you can with [FlexTones]. Additionally you cannot
-    /// use the [FlexTones] modifiers [onMainsUseBW], [onSurfacesUseBW] and
-    /// [surfacesUseBW], since the only operate on the [FlexTones]
-    /// configurations passed in to [tones].
+    /// use the [FlexTones] modifiers [monochromeSurfaces], [onMainsUseBW],
+    /// [onSurfacesUseBW] and [surfacesUseBW], since the only operate on the
+    /// [FlexTones] configurations passed in to [tones].
     final FlexSchemeVariant? variant,
 
     /// The density value for specifying the compactness of various UI
