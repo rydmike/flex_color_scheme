@@ -62,6 +62,10 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
 - **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
+- **TODO**: Add blend base color configuration for blended ScaffoldBackground color. It is currently locked to `surfaceContainerLowest` in M3 and `surface` in M2. 
+  - The purpose is to be able to select the scaffold base, also used as blend input, from all new surface colors, as well as white in light theme and black in dark theme.
+  - We could then use `surfaceContainerLowest` as default in M2 as well, since you can st it to past surface if that is preferred, for same style as before. The diffs are quite subtle though.
+   
 - **TODO**: More work on Chips. Have a few more things to try with them. Their theming is hopeless.
 - **TODO**: Review and maybe adjust the tints for the tinted text theme option a bit.
 - **TODO**: Study and potentially report **13 found new Flutter SDK theming issues**. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
