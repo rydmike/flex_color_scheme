@@ -347,12 +347,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
       inverseSurface: surface.inverseSurface.blendAlpha(
           blendColor.inverseSurface,
           alphaValue.inverseSurfaceAlpha ~/ surfaceVariantBlendDivide),
-      dialogBackground: surface.dialogBackground.blendAlpha(
-          blendColor.dialogBackground,
-          alphaValue.dialogAlpha ~/ surfaceVariantBlendDivide),
       scaffoldBackground: surface.scaffoldBackground.blendAlpha(
           blendColor.scaffoldBackground,
           alphaValue.scaffoldAlpha ~/ surfaceVariantBlendDivide),
+      dialogBackground: surface.dialogBackground.blendAlpha(
+          blendColor.dialogBackground,
+          alphaValue.dialogAlpha ~/ surfaceVariantBlendDivide),
     );
   }
 
