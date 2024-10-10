@@ -50,7 +50,7 @@ class ColorBlendsPanel extends StatelessWidget {
       '\n'
       'Setting this color will override any blended Scaffold background and '
       'also plain white and true black setting part that makes the scaffold '
-      'white or black, the other parts of them will remain in effect. '
+      'white or black, the other parts of their impacts will remain in effect. '
       'You will see the effective color on the Scaffold background '
       'color box above.\n'
       '\n'
