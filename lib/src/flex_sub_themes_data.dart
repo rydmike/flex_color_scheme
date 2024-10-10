@@ -1381,14 +1381,21 @@ class FlexSubThemesData with Diagnosticable {
   final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle;
 
   /// Defines which [Theme] based [ColorScheme] color, that the color
-  /// [ThemeData.scaffoldBackgroundColor] will use as its starting theme color
-  /// when not using a seed generated [ColorScheme].
+  /// [ThemeData.scaffoldBackgroundColor] will use as override color.
   ///
-  /// The select [SchemeColor] starting color may be further modified by the
-  /// [surfaceMode] and [blendLevel] properties, and by [lightIsWhite] in light
-  /// mode, and [darkIsTrueBlack] in dark mode.
+  /// Defining this color will override any blended Scaffold background and
+  /// also [lightIsWhite] in light mode, and [darkIsTrueBlack] in dark mode,
+  /// the other parts of their impacts  will remain in effect. '
   ///
-  /// Defaults to null, which results in the following default color results:
+  /// Recommend sticking to surface colors, but if ScaffoldBackground is
+  /// only as a background effect color, it is feasible to use any ColorScheme
+  /// color you like. White, Black and transparent are also available.
+  /// Transparent will only show the background color of the parent widget,
+  /// which in root MaterialApp case is black, so you will not see the desktop
+  ///  behind
+  ///
+  /// Defaults to null, the color depends on other FlexColorScheme settings,
+  /// but is no blends are used, the starting point values are:
   ///
   /// Defaults in Material-2 mode are equal to Material-2 spec:
   /// - Light mode: [FlexColor.materialLightScaffoldBackground] (0xFFFFFFFF)
