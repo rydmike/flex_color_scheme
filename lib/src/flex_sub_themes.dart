@@ -6321,16 +6321,36 @@ sealed class FlexSubThemes {
     final Color onBackgroundColor = schemeColorPair(
         backgroundSchemeColor ?? SchemeColor.surfaceContainerHigh, colorScheme);
 
-    // TODO(rydmike): This tint probably does not give a lot of tint.
-    // Should we use surfaceTint or e.g. just primary?
-    // We could use primary if background is any of the surface colors and
-    // only otherwise its contrast pair, that should work.
-
-    // Using these tinted overlay variables in all themes for ease of
-    // reasoning and duplication.
-    final Color overlay = backgroundColor;
-    final Color tint = onBackgroundColor;
-    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
+    // The logic below is used to give a nice tinted interaction and disable
+    // color regardless of how we customize the foreground and background
+    // of the search bar.
+    final bool isLight = colorScheme.brightness == Brightness.light;
+    // Get brightness of the SearchBar background color.
+    final bool buttonBgIsLight =
+        ThemeData.estimateBrightnessForColor(backgroundColor) ==
+            Brightness.light;
+    // For tint color use the one that is more likely to give a colored effect.
+    final Color tint = isLight
+        ? buttonBgIsLight
+            ? onBackgroundColor
+            : backgroundColor
+        : buttonBgIsLight
+            ? backgroundColor
+            : onBackgroundColor;
+    // The reverse color is used for overlay
+    final Color overlay = isLight
+        ? buttonBgIsLight
+            ? backgroundColor
+            : onBackgroundColor
+        : buttonBgIsLight
+            ? onBackgroundColor
+            : backgroundColor;
+    // We use surface mode tint factor, if it is light theme and background
+    // is light OR if it is a dark theme and background is dark.
+    final bool surfaceMode =
+        (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
+    final double factor =
+        _tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
 
     return SearchBarThemeData(
       backgroundColor: backgroundSchemeColor != null
