@@ -54,6 +54,26 @@ class BottomAppBarPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
+        if (isLight)
+          ColorSchemePopupMenu(
+            enabled: enableControl,
+            title: const Text('Color (light)'),
+            defaultLabel: 'surfaceContainer',
+            defaultLabelM2: 'surface',
+            defaultDisabledLabelM2: 'White',
+            value: controller.bottomAppBarSchemeColorLight,
+            onChanged: controller.setBottomAppBarSchemeColorLight,
+          )
+        else
+          ColorSchemePopupMenu(
+            enabled: enableControl,
+            title: const Text('Color (dark)'),
+            defaultLabel: 'surfaceContainer',
+            defaultLabelM2: 'surface with elev-overlay',
+            defaultDisabledLabelM2: 'Grey[800]',
+            value: controller.bottomAppBarSchemeColorDark,
+            onChanged: controller.setBottomAppBarSchemeColorDark,
+          ),
         SliderListTileReveal(
           enabled: controller.useFlexColorScheme,
           title: const Text('Height'),
@@ -79,14 +99,6 @@ class BottomAppBarPanel extends StatelessWidget {
             valueDecimalPlaces: 1,
             valueDefaultLabel: useMaterial3 ? '3' : '8',
           ),
-          ColorSchemePopupMenu(
-            enabled: enableControl,
-            title: const Text('Color (light)'),
-            defaultLabel: 'surfaceContainer',
-            defaultLabelM2: 'surface',
-            value: controller.bottomAppBarSchemeColorLight,
-            onChanged: controller.setBottomAppBarSchemeColorLight,
-          ),
         ] else ...<Widget>[
           SliderListTileReveal(
             enabled: controller.useFlexColorScheme,
@@ -99,14 +111,6 @@ class BottomAppBarPanel extends StatelessWidget {
             valueHeading: 'ELEV',
             valueDecimalPlaces: 1,
             valueDefaultLabel: useMaterial3 ? '3' : '8',
-          ),
-          ColorSchemePopupMenu(
-            enabled: enableControl,
-            title: const Text('Color (dark)'),
-            defaultLabel: 'surfaceContainer',
-            defaultLabelM2: 'surface',
-            value: controller.bottomAppBarSchemeColorDark,
-            onChanged: controller.setBottomAppBarSchemeColorDark,
           ),
         ],
         const ListTileReveal(
