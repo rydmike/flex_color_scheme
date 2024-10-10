@@ -2897,8 +2897,6 @@ class FlexSubThemesData with Diagnosticable {
   /// property in all descendant [AppBar] widgets.
   final TextStyle? appBarTitleTextStyle;
 
-  // TODO(rydmike): Add bottomAppBarHeight Property!!
-
   /// Defines which [Theme] based [ColorScheme] based color the [BottomAppBar]
   /// uses as background color.
   ///
@@ -2906,12 +2904,15 @@ class FlexSubThemesData with Diagnosticable {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level.
+  ///
+  /// If not defined, defaults to `surfaceContainer` in Material-3 mode
+  /// and to `surface`in Material-2 mode.
   final SchemeColor? bottomAppBarSchemeColor;
 
   /// The double value used to indicate the height of the [BottomAppBar].
   ///
   /// In Material-2, the default value is the minimum in relation to content.
-  /// In Material-3, it is  80dp.
+  /// In Material-3, it is 80dp.
   final double? bottomAppBarHeight;
 
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
