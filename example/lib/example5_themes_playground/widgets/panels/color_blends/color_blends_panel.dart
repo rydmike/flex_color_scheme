@@ -217,7 +217,6 @@ class ColorBlendsPanel extends StatelessWidget {
             title: const Text('Scaffold background override'),
             subtitleReveal: const Text(_scaffoldColorInfo),
             defaultLabel: 'not used',
-            defaultLabelM2: controller.lightIsWhite ? 'White' : 'surface',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.lightIsWhite
                     ? 'White'
@@ -249,7 +248,6 @@ class ColorBlendsPanel extends StatelessWidget {
             title: const Text('Scaffold background override'),
             subtitleReveal: const Text(_scaffoldColorInfo),
             defaultLabel: 'not used',
-            defaultLabelM2: controller.darkIsTrueBlack ? 'Black' : 'surface',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.darkIsTrueBlack
                     ? 'Black'
