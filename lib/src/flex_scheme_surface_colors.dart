@@ -189,11 +189,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// The the blend level strength used for the mode.
     final int blendLevel = 0,
 
-    /// An int divisor for surface variant used to reduce its blend strength.
+    /// An int divisor used to reduce blend strength.
     ///
-    /// FlexColorScheme passes in 2 when seed ColorSchemes are used to lessen
-    /// the blend on all surface colors so they get less blend, since they
-    /// already have a strong start blend when using seeded ColorSchemes.
+    /// This was used as a divisor for surfaceVariant color in versions
+    /// before V8, but since surfaceVariant color is removed it is no longer
+    /// used internally. The default value 1 is always used. Might deprecated
+    /// this property later.
     final int surfaceVariantBlendDivide = 1,
 
     /// The colors used to blend into surfaces when using `surfaceMode` mode
