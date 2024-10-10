@@ -2918,7 +2918,6 @@ class FlexColorScheme with Diagnosticable {
       useMaterial3: useMaterial3,
       surfaceMode: surfaceMode ?? FlexSurfaceMode.level,
       blendLevel: blendLevel,
-      surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
       schemeColors: effectiveColors,
       blendColors: FlexSchemeSurfaceColors(
         surface: blendColor,
@@ -3234,13 +3233,7 @@ class FlexColorScheme with Diagnosticable {
 
     // Determine the effective scaffold background color.
     final Color effectiveScaffoldColor = scaffoldBackground ??
-        (lightIsWhite
-            ? Colors.white
-            : subTheme.scaffoldBackgroundSchemeColor != null
-                ? FlexSubThemes.schemeColor(
-                    subTheme.scaffoldBackgroundSchemeColor!,
-                    effectiveColorScheme)
-                : surfaceSchemeColors.scaffoldBackground);
+        (lightIsWhite ? Colors.white : surfaceSchemeColors.scaffoldBackground);
 
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
@@ -5009,7 +5002,6 @@ class FlexColorScheme with Diagnosticable {
       brightness: Brightness.dark,
       surfaceMode: surfaceMode ?? FlexSurfaceMode.level,
       blendLevel: blendLevel,
-      surfaceVariantBlendDivide: seed.useKeyColors ? 2 : 1,
       schemeColors: effectiveColors,
       blendColors: FlexSchemeSurfaceColors(
         surface: blendColor,
@@ -6642,6 +6634,20 @@ class FlexColorScheme with Diagnosticable {
     final TextTheme effectiveTextTheme = defText;
     final TextTheme effectivePrimaryTextTheme = defPrimaryText;
 
+    // TODO(rydmike): In M3 we need to tint via onSurface and onSurfaceVariant!
+    // The text theme tinting has changed in M3, default theme sets text colors
+    // via onSurface and onSurfaceVariant, overriding the default colors the
+    // used text style from the text theme has! This is not done in M2 mode.
+    // Need to think about how to address this so we still get tinted fonts
+    // when so requested in FCS. Most likely have to pass the correctly tinted
+    // text style to each component theme. BIG changes needed!
+    Color? onSurfaceBlendedTextStyle;
+    Color? onSurfaceVariantBlendedTextStyle;
+    if (useSubThemes && subTheme.blendTextTheme) {
+      onSurfaceBlendedTextStyle = effectiveTextTheme.titleLarge?.color;
+      onSurfaceVariantBlendedTextStyle = effectiveTextTheme.displayLarge?.color;
+    }
+
     // Custom computed shades from primary color using alpha blends works well
     // for these rarely used colors that are on deprecation path in Flutter SDK.
     // https://github.com/flutter/flutter/issues/91772
@@ -6708,18 +6714,18 @@ class FlexColorScheme with Diagnosticable {
       } else if (effectiveAppBarColor.withAlpha(0xFF) == colorScheme.primary) {
         return colorScheme.onPrimary;
       } else if (isDark && appBarNeedsLight) {
-        return colorScheme.onSurface;
+        return onSurfaceBlendedTextStyle ?? colorScheme.onSurface;
       } else if (isDark && !appBarNeedsLight) {
         return colorScheme.surface;
       } else if (!isDark && appBarNeedsLight) {
         return colorScheme.surface;
       } else {
-        return colorScheme.onSurface;
+        return onSurfaceBlendedTextStyle ?? colorScheme.onSurface;
       }
     }
 
     // Use the logic function for the correct AppBar default foreground color.
-    Color appBarForeground = appBarForegroundColor();
+    final Color appBarForeground = appBarForegroundColor();
     // M2 Icons are slightly black transparent in light mode!
     // But white in dark mode. This per SDK, the constants are from Flutter.
     Color appBarIconColor =
@@ -6727,12 +6733,13 @@ class FlexColorScheme with Diagnosticable {
     Color appBarActionIconColor = appBarIconColor;
     // M3 does its defaults a bit differently.
     if (useMaterial3) {
-      appBarIconColor = colorScheme.onSurface;
-      appBarActionIconColor = colorScheme.onSurfaceVariant;
+      appBarIconColor = onSurfaceBlendedTextStyle ?? colorScheme.onSurface;
+      appBarActionIconColor =
+          onSurfaceVariantBlendedTextStyle ?? colorScheme.onSurfaceVariant;
     }
-    // if the appBarForeground color is using the default colors
-    // then appBarIconColor and appBarActionIconColor should use it as well,
-    // but otherwise they use their dault colors set above.
+    // If the appBarForeground color is NOT using the default colors
+    // then appBarIconColor and appBarActionIconColor should use them as well,
+    // but otherwise they use their default colors set above.
     if (appBarForeground.withAlpha(0xFF) != colorScheme.onSurface &&
         appBarForeground.withAlpha(0xFF) != colorScheme.onPrimary &&
         appBarForeground.withAlpha(0xFF) != colorScheme.surface) {
@@ -6750,25 +6757,6 @@ class FlexColorScheme with Diagnosticable {
       appBarActionIconColor = FlexSubThemes.schemeColor(
           subTheme.appBarActionsIconSchemeColor!, colorScheme);
     }
-    // If we are using subThemes and blend text, use it for the AppBar text
-    // and icons as well.
-    if (useSubThemes && subTheme.blendTextTheme) {
-      if (appBarNeedsLight) {
-        appBarForeground =
-            FlexColor.lightSurface.blend(effectiveAppBarColor, 12);
-        appBarIconColor =
-            FlexColor.lightSurface.blend(effectiveAppBarColor, 12);
-        appBarActionIconColor =
-            FlexColor.lightSurface.blend(effectiveAppBarColor, 12);
-      } else {
-        appBarForeground =
-            FlexColor.darkSurface.blend(effectiveAppBarColor, 12);
-        appBarIconColor = FlexColor.darkSurface.blend(effectiveAppBarColor, 12);
-        appBarActionIconColor =
-            FlexColor.darkSurface.blend(effectiveAppBarColor, 12);
-      }
-    }
-
     // The FlexColorScheme AppBar's customizable system UI overlay style.
     // This refers to the top status bar on Android and iOS. Some features
     // only apply to Android. These settings have no effect on other platforms
@@ -6846,10 +6834,14 @@ class FlexColorScheme with Diagnosticable {
         case FlexTabBarStyle.forAppBar:
           return appBarNeedsLight ? Colors.white : Colors.black87;
         case FlexTabBarStyle.universal:
-          // TODO(rydmike): Chore: Better FlexTabBarStyle.universal algo?
+          // TODO(rydmike): Better FlexTabBarStyle.universal algo?
           //   Maybe try a contrasting color from tonal palettes? Might work if
           //   using seeded color scheme, but not necessarily otherwise.
           //   Maybe try the new fixed colors in Flutter 3.22 ColorScheme?
+          //   There is no universal colors that will fit all AppBar colors,
+          //   Proper contrast are always needed, if they conflict per location
+          //   It is not possible to have a universal color that fits both needs
+          //   while still having good contrast on both.
           return isDark
               ? colorScheme.primary.blendAlpha(Colors.white, 0xE6) // 90%
               : colorScheme.primary.blendAlpha(Colors.white, 0xB2); // 50%
@@ -7176,6 +7168,7 @@ class FlexColorScheme with Diagnosticable {
       // THEME DATA COLORS
       //
       brightness: colorScheme.brightness,
+      colorScheme: colorScheme,
       // TODO(rydmike): Monitor Flutter SDK deprecation of legacy canvasColor.
       canvasColor: colorScheme.surface,
       // TODO(rydmike): Monitor Flutter SDK deprecation of legacy cardColor.
@@ -7183,7 +7176,6 @@ class FlexColorScheme with Diagnosticable {
       // default after Flutter 3.22.0.
       cardColor:
           useMaterial3 ? colorScheme.surfaceContainerLow : colorScheme.surface,
-      colorScheme: colorScheme,
       // TODO(rydmike): Monitor Flutter SDK deprecation of dialogBackgroundColor
       // If using dialog color not equal for ColorScheme.surface color, there
       // will be no elevation overlay color in dark M2 mode, even if so
@@ -7264,10 +7256,21 @@ class FlexColorScheme with Diagnosticable {
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of scaffoldBackground.
       // See: https://github.com/flutter/flutter/issues/91772
+      // The scaffoldBackgroundSchemeColor is an override for everything.
+      // If it is provided, it is used as is. The scaffoldBackground contains
+      // blended background color for the scaffold if used, when made by
+      // FlexColorScheme light/dark factory, it is never null from the
+      // factories, it will be at least the same as as the fallback defaults.
+      // If this is created via a raw constructor it is whatever is passed in
+      // to it. If nothing was give to raw constructor's scaffoldBackground,
+      // the defaults depend on used Material mode M2 or M3.
       scaffoldBackgroundColor: subTheme.scaffoldBackgroundSchemeColor != null
           ? FlexSubThemes.schemeColor(
               subTheme.scaffoldBackgroundSchemeColor!, colorScheme)
-          : scaffoldBackground ?? colorScheme.surface,
+          : scaffoldBackground ??
+              (useMaterial3
+                  ? colorScheme.surfaceContainerLowest
+                  : colorScheme.surface),
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of secondaryHeaderColor
       // See: https://github.com/flutter/flutter/issues/91772
