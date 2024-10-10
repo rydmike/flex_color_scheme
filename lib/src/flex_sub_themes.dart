@@ -769,9 +769,8 @@ sealed class FlexSubThemes {
     /// Selects which color from the passed in colorScheme to use as the
     /// background color for the [BottomAppBar].
     ///
-    /// If not defined, [colorScheme.surface] will be used via default widget
-    /// widget behavior for M3 mode and explicitly defined as used color in
-    /// the created [BottomAppBarTheme] in M2 mode.
+    /// If not defined, [colorScheme.surfaceContainer] will be used via default
+    /// widget behavior for M3 mode and explicitly set to [surface] for M2 mode.
     final SchemeColor? backgroundSchemeColor,
 
     /// Overrides the default value for [BottomAppBar.elevation].
@@ -818,15 +817,10 @@ sealed class FlexSubThemes {
     final bool? useMaterial3,
   }) {
     final bool useM3 = useMaterial3 ?? true;
-    // Effective color, if null, keep null for M3 defaults via widget.
+    // Effective color, if null, keep null for M3 defaults via widget, but
+    // set to surface for M2 mode.
     final Color backgroundColor =
         schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
-
-    // TODO(rydmike): BottomAppBar color defaults to null only when using M3.
-    // Due to Theme.Data.bottomAppBarColor being deprecated in Flutter SDK,
-    // but still being used in default M2 for widget we have to create a
-    // sub-theme with a background color in M2 when it is null, also the
-    // dark mode default for M2 is horrific.
     final Color? effectiveColor =
         backgroundSchemeColor == null && useM3 ? null : backgroundColor;
 
