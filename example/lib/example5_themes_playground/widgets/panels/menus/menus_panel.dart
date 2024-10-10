@@ -21,6 +21,12 @@ class MenusPanel extends StatelessWidget {
     path: 'flutter/flutter/issues/123736',
   );
 
+  static final Uri _dropNotFollowTextPR = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/154667',
+  );
+
   static final Uri _menuLeadingIconIssue131350 = Uri(
     scheme: 'https',
     host: 'github.com',
@@ -355,10 +361,29 @@ class MenusPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Another issue is using leading icons on both menu '
+                  text: '. This has been fixed in master, but has not yet '
+                      'landed in Flutter 3.24.\n'
+                      '\n'
+                      'There are three reported '
+                      'issues about the DropdownMenu not following the '
+                      'input field correctly. A FIX PR that references these '
+                      'issues can be found here ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _dropNotFollowTextPR,
+                  text: 'PR #154667',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This FIX PR, that also links the issues, '
+                      'has landed in master, but not yet in Flutter 3.24.\n'
+                      '\n'
+                      'Another issue was using leading icons on both menu '
                       'input field and the items as show in the above example. '
-                      'The widget above actually uses a style work around to '
-                      'do that. You can read more about this issue and also '
+                      'They did not align correctly. This has been fixed in '
+                      'Flutter 3.22 and later. You can read more about this '
+                      'past issue and also '
                       'find links to many other DropdownMenu issues in \n',
                 ),
                 LinkTextSpan(
