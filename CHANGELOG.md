@@ -72,9 +72,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **MINOR KNOWN ISSUES**
  
-  - Playground: NavRail Alignment slider, make it not pass via null to effective Playground theme, even if it is and can be null.
-    - We can give a "zero" for null in the theme, but keep null prop in settings. Then we will never pass a null theme to Playground for it and always have it start from zero, so operating the alignment slider looks nicer in the Playground.
-   
   - The `toScheme` method may need some updates for the raw `FlexColorScheme?` constructor.
     - Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
 
