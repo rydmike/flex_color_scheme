@@ -426,7 +426,8 @@ class TextFieldPanel extends StatelessWidget {
               enabled: enableControl,
               title: const Text('Border'),
               subtitle: controller.inputDecoratorBorderType ==
-                      FlexInputBorderType.outline
+                          FlexInputBorderType.outline &&
+                      enableControl
                   ? const Text('Outlined')
                   : const Text('Underlined'),
               onTap: () {
@@ -442,7 +443,8 @@ class TextFieldPanel extends StatelessWidget {
               trailing: Padding(
                 padding: const EdgeInsetsDirectional.only(end: 12),
                 child: controller.inputDecoratorBorderType ==
-                        FlexInputBorderType.outline
+                            FlexInputBorderType.outline &&
+                        enableControl
                     ? const Icon(Icons.border_outer_outlined, size: 36)
                     : const Icon(Icons.border_bottom_outlined, size: 36),
               ),
