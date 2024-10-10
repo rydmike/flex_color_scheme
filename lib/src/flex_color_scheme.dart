@@ -279,6 +279,55 @@ enum FlexFixedColorStyle {
   seededHighContrast,
 }
 
+/// Base color used as [Themedata.scaffoldBackgroundColor] in a theme
+/// produced by [FlexColorScheme.light] and [FlexColorScheme.dark] factories.
+///
+/// The used base color is modified by used [surfaceMode] and [blendLevel]
+/// in the [FlexColorScheme] factory constructors.
+///
+/// By using different base colors you can create alpha blended scaffold
+/// background colors with even more variation as they are mixed with the
+/// blend color but start at different base colors.
+///
+/// If you do not want to get any blend in the Scaffold background color, but
+/// otherwise want to use surface blends with [blendLevel] > 0, you can
+/// set the `FlexSubThemesData(scaffoldBackgroundSchemeColor)` to any
+/// [SchemeColor]. Setting this property overrides all scaffold background
+/// color definitions, and always uses the selected color as is.
+enum FlexScaffoldBaseColor {
+  /// The lowest color always uses [Colors.white] in light theme mode and
+  /// [Colors.black] in dark theme mode.
+  lowest,
+
+  /// The active theme's color scheme surface color will be used.
+  surface,
+
+  /// The active theme's color scheme  onSurface color will be used.
+  onSurface,
+
+  /// The active theme's color scheme surfaceDim color will be used.
+  surfaceDim,
+
+  /// The active theme's color scheme surfaceBright color will be used.
+  surfaceBright,
+
+  /// The active theme's color scheme surfaceContainerLowest color will be used.
+  surfaceContainerLowest,
+
+  /// The active theme's color scheme surfaceContainerLow color will be used.
+  surfaceContainerLow,
+
+  /// The active theme's color scheme surfaceContainer color will be used.
+  surfaceContainer,
+
+  /// The active theme's color scheme surfaceContainerHigh color will be used.
+  surfaceContainerHigh,
+
+  /// The active theme's color scheme surfaceContainerHighest color will
+  /// be used.
+  surfaceContainerHighest,
+}
+
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
 /// colors. Get the resulting [ThemeData] with the [toTheme] method.
 ///
