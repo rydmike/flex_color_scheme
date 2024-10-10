@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1 - WIP
 
-**Oct 9, 2024**
+**Oct 10, 2024**
 
 ### SUMMARY
 
@@ -41,22 +41,56 @@ As before, FCS also has its own even configurable `FlexTones` way of making seed
 
 FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. Check the API docs for more details.
 
-**CRITICAL TODOS**
+**CRITICAL TODOS BEFORE STABLE RELEASE**
 
-- **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
+* **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
+
+
+* **TODO**: The `TextTheme` color style usage by components has changed in M3, causing issues with the tinted or blended `TextTheme` style (setting: `FlexSubThemesData(blendTextTheme: true)`) in FCS when using Material-3 mode. 
+  * Default component themes now typically set text colors using `onSurface` and `onSurfaceVariant`, overriding the default colors the used `TextStyle`s from the ambient default `TextTheme` has. This is typically not done in Material-2 mode and was not in early Material-3 mode component defaults either. 
+  * The result is that while the FCS blended `TextTheme` is still correctly tinted when so configured, it is rarely seen, since most components typically override the default `TextStyles` colors in the default TextTheme, with `onSurface` and `onSurfaceVariant` colors. The more tinted `TextStyle` colors from the tinted default `TextTheme` are thus not used by components and thus not really seen anywhere in the resulting app, thus breaking the FCS design intent of this feature.
+  * The only solution will be to pass the tinted `TextStyle`s to each component theme. Meaning that quite BIG changes are required. 
+  * We must review every component theme and see which tinted text style to pass in to each text style property it has, sometimes for default icon colors too. 
+  * Also need to have an even more tinted, or at least less contrasty, version for when `onSurfaceVariant` is used as an override, to keep the design intent. The tinted color used for the three biggest `TextStyle`s is potentially already suitable for this, as it is already less contrasty by current tint/blend design we can tune it a bit if needed.
+  * Fixing this feature will further postpone the final V8 release. 
+  * May release a dev release without this fix, to get something out soonish.
+
 
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
   * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
+  * Will release 8.0.0-dev release without all test fixes and updates to them, to test the release WEB build and offer it as early access.
+
+**LESS CRITICAL TODOs**
+
+- **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
+- **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
+- **TODO**: More work on Chips. Have a few more things to try with them. Their theming is hopeless.
+- **TODO**: Review and maybe adjust the tints for the tinted text theme option a bit.
+- **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
 
+**MINOR KNOWN ISSUES**
+ 
+  - Playground: NavRail Alignment slider, make it not pass via null to effective Playground theme, even if it is and can be null.
+    - We can give a "zero" for null in the theme, but keep null prop in settings. Then we will never pass a null theme to Playground for it and always have it start from zero, so operating the alignment slider looks nicer in the Playground.
+   
+  - The `toScheme` method may need some updates for the raw `FlexColorScheme?` constructor.
+    - Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
+
+  - Playground: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
+    - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
+    
+
+**DONE CRITICAL TODOS**
+ 
 * **DONE**: Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later.
   * Will keep it around for now, but added info about it being obsolete in Flutter 3.22 or later, in its info-expands.
 * **DONE**: Consider what to do with shadows back.
   * Keep and add more fine-grained control later, via shadow color selection per component.
 * **DONE**: Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
-  * This was tricky, big rework and new feature.
+  * This was tricky, big rework and new features.
 * **DONE**: Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. 
   * This was very tedious to deal with this in FCS. Need a new approach not using the background color. 
 * **DONE**: Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. The remaining 492 warnings were all the deprecated `background`, `onBackground` and `surfaceVariant` warnings.
@@ -69,27 +103,18 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
     * **Tooltip** and **Snackbar** keep their opinionated defaults in FCS for now, because they offer a nice optional default style that is otherwise not available. It is straightforward to make them exactly like Material-3 default. There is guidance in the Playground app on how to do this via their info reveal buttons.
     * FCS default **InputDecorator** is now very close to Flutter's Material-3 default. The difference should now only be FCS's slight opinionated take on error hover states. Maybe later add a feature to get the default Material-3 style for them too. This is not possible with current props, but we could add them later.
 
-  
-**TODOs**
+* **DONE**: Add a large number of new theming features. 
 
-- **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
-- **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
+* **DONE**: Add threw new slightly different baseline monochrome schemes. Great for protyping with color distractions or as baseline schemes to add custom colors to. 
 
-- **TODO**: Review and maybe adjust the tinted text theme setting.
-- **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
+* **DONE**: Add support for all the new Flutter `DynamicSchemeVariant` seed generated variants, with the twist that it can also use separate seed colors for each palette.
 
-- **FIX**: NavRail Alignment slider, make it not pass via null if possible. We can give a fake none null prop for it.
+* **PLUS**: A lot of other new features and improvements, see the full list further below. 
 
-- **MINOR KNOWN ISSUES**
-  - The `toScheme` method may need some updates for the raw `FlexColorScheme?` constructor.
-    - Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
+**DECIDED TO POSTPONE TO A LATER RELEASE TO GET V8 OUT THIS YEAR**
 
-  - Cancel input colors from custom theme get reset to active ColorScheme, not to input values.
-    - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
-
-
-**DECIDED TO POSTPONE TO A LATER RELEASE TO GET THIS ONE OUT**
-
+- Make a WASM release build of the Themes Playground app. 
+  - Must figure out new hosting and CI setup to it. Currently used GitHub Pages, apparently do not support Flutter WASM builds. So this will have to wait for a later release when I have time to look into all this.
 - Add some minor fidelity for iOS adaptive `AppBar`.
   - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Look it up and consider adding them as a platform adaptive feature.
 - Platform adaptive `ShapeBorder` configuration, including `Squircle`.
