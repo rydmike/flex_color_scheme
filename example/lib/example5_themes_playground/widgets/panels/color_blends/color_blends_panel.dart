@@ -46,8 +46,15 @@ class ColorBlendsPanel extends StatelessWidget {
 
   static const String _scaffoldColorInfo =
       'New in version 8 is that you can select any ColorScheme color '
-      'to be used as the Scaffold background color.\n'
-      'We recommend sticking to surface colors, but if you uses '
+      'to be used as the Scaffold background override color.\n'
+      '\n'
+      'Setting this color will override any blended Scaffold background and '
+      'also plain white and true black setting part that makes the scaffold '
+      'white or black, the other parts of them will remain in effect. '
+      'You will see the effective color on the Scaffold background '
+      'color box above.\n'
+      '\n'
+      'We recommend sticking to surface colors, but if you use '
       'ScaffoldBackground only as a background effect color, you can '
       'now choose any ColorScheme color you like. White, Black and '
       'transparent are also available. Transparent will only '
@@ -195,12 +202,21 @@ class ColorBlendsPanel extends StatelessWidget {
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
           SurfacesSeedBlendColorLight(controller),
+          SwitchListTileReveal(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('Plain white'),
+            subtitleReveal: const Text(
+              'Plain white uses white Scaffold background color in all blend '
+              'modes, other surfaces also become less blended.\n',
+            ),
+            value: controller.lightIsWhite,
+            onChanged: controller.setLightIsWhite,
+          ),
           ColorSchemePopupMenu(
             enabled: enableControl,
-            title: const Text('Scaffold background color'),
+            title: const Text('Scaffold background override'),
             subtitleReveal: const Text(_scaffoldColorInfo),
-            defaultLabel:
-                controller.lightIsWhite ? 'White' : 'surfaceContainerLowest',
+            defaultLabel: 'not used',
             defaultLabelM2: controller.lightIsWhite ? 'White' : 'surface',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.lightIsWhite
@@ -215,23 +231,24 @@ class ColorBlendsPanel extends StatelessWidget {
             value: controller.scaffoldBackgroundLightSchemeColor,
             onChanged: controller.setScaffoldBackgroundLightSchemeColor,
           ),
-          SwitchListTileReveal(
-            enabled: controller.useFlexColorScheme,
-            title: const Text('Plain white'),
-            subtitleReveal: const Text(
-              'Plain white uses white Scaffold background color in all blend '
-              'modes, other surfaces also become less blended.\n',
-            ),
-            value: controller.lightIsWhite,
-            onChanged: controller.setLightIsWhite,
-          ),
         ] else ...<Widget>[
           SurfacesSeedBlendColorDark(controller),
+          SwitchListTileReveal(
+            enabled: controller.useFlexColorScheme,
+            title: const Text('True black'),
+            subtitleReveal: const Text(
+              'For an ink black dark mode, use True Black. It uses a totally '
+              'black Scaffold background in all blend modes, other surfaces '
+              'also become less blended.\n',
+            ),
+            value: controller.darkIsTrueBlack,
+            onChanged: controller.setDarkIsTrueBlack,
+          ),
           ColorSchemePopupMenu(
             enabled: enableControl,
-            title: const Text('Scaffold background color'),
+            title: const Text('Scaffold background override'),
             subtitleReveal: const Text(_scaffoldColorInfo),
-            defaultLabel: 'surfaceContainerLowest',
+            defaultLabel: 'not used',
             defaultLabelM2: controller.darkIsTrueBlack ? 'Black' : 'surface',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.darkIsTrueBlack
@@ -245,17 +262,6 @@ class ColorBlendsPanel extends StatelessWidget {
                 : 'grey850',
             value: controller.scaffoldBackgroundDarkSchemeColor,
             onChanged: controller.setScaffoldBackgroundDarkSchemeColor,
-          ),
-          SwitchListTileReveal(
-            enabled: controller.useFlexColorScheme,
-            title: const Text('True black'),
-            subtitleReveal: const Text(
-              'For an ink black dark mode, use True Black. It uses a totally '
-              'black Scaffold background in all blend modes, other surfaces '
-              'also become less blended.\n',
-            ),
-            value: controller.darkIsTrueBlack,
-            onChanged: controller.setDarkIsTrueBlack,
           ),
         ],
         const SizedBox(height: 8),
