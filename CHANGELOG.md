@@ -37,14 +37,13 @@ FlexColorScheme V8 now allows you to use the new colors introduced in Flutter 3.
 
 To the seed generated `ColorScheme`s, FCS adds support for all the Flutter `DynamicSchemeVariant` seed generated variants. It also improves them by allowing you to use separate seed colors for each palette. With Flutter's `ColorScheme.fromSeed`, you can only seed with one color, the primary color. The resulting `ColorScheme` always uses computed values for **secondary** and **tertiary** palettes, plus a hard coded fixed color for the **error** palette seeding. **Surfaces** colors are always tied to primary color as well and inlcude a hint of primary color. With FCS, you do not have these limitations, you can seed with separate colors for each palette with even with Flutter's own dynamic scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones, seed generated scheme variants. FCS now brings this feature to Flutter's own dynamic scheme variants as well.
 
-As before, FCS also has its own even configurable `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what `ColorScheme` color. An internal example of using them, is the implementation of `FlexTones` modifiers. 
+As before, FCS also has its own even configurable `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what `ColorScheme` color. An internal example of using them is the implementation of `FlexTones` modifiers. 
 
 FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. Check the API docs for more details.
 
 **CRITICAL TODOS**
 
 - **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
-- **TODO**: Fix AppBarStyle primary (dark in light) does not set icon contrast correct.
 
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
@@ -76,7 +75,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 - **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
 - **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
 
-
+- **TODO**: Review and maybe adjust the tinted text theme setting.
 - **TODO**: Study and potentially report 13 found new Flutter SDK theming issues. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
 - **FIX**: NavRail Alignment slider, make it not pass via null if possible. We can give a fake none null prop for it.
@@ -97,6 +96,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   - Maybe even push to V9 and/or wait for Flutter to support Squircle in SDK.
 - Custom shadow color global and selection per component.
   - Create a custom convenience control widget for it.
+- Adjustable TextTheme tinting? Allow you to dial it in to your liking manually.
 - Add `Divider` theme features, e.g., thickness and totally custom color.
 - Add `Checkbox` shape and border.
 - Add all **Shadcn** theme colors.
@@ -283,7 +283,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `bottomAppBarHeight` property to `FlexSubThemesData` and made `FlexSubThemes.bottomAppBarTheme` use it as its `height` value.
 
 
-- Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color, if it is defined.
+- Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color, if it is defined. Setting `scaffoldBackgroundSchemeColor` will override any blended background or true black or plain white setting.
 
 
 - Added `cupertinoOverrideTheme` to `FlexColorScheme` constructor and to `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light` and `FlexThemeData.dark` factory constructors.
