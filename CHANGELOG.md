@@ -43,9 +43,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **CRITICAL TODOS BEFORE STABLE RELEASE**
 
-* **TODO**: Fix `SearchBar` and `SearchView` tinted interactions.
-
-
 * **TODO**: The `TextTheme` color style usage by components has changed in M3, causing issues with the tinted or blended `TextTheme` style (setting: `FlexSubThemesData(blendTextTheme: true)`) in FCS when using Material-3 mode. 
   * Default component themes now typically set text colors using `onSurface` and `onSurfaceVariant`, overriding the default colors the used `TextStyle`s from the ambient default `TextTheme` has. This is typically not done in Material-2 mode and was not in early Material-3 mode component defaults either. 
   * The result is that while the FCS blended `TextTheme` is still correctly tinted when so configured, it is rarely seen, since most components typically override the default `TextStyles` colors in the default TextTheme, with `onSurface` and `onSurfaceVariant` colors. The more tinted `TextStyle` colors from the tinted default `TextTheme` are thus not used by components and thus not really seen anywhere in the resulting app, thus breaking the FCS design intent of this feature.
