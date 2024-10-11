@@ -426,7 +426,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - In the **Switch, Checkbox and Radio** settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface **Color Blends** settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
 - Added separate controls and code gen for light and dark mode background color selection for the `BottomAppBar` on settings panel **BottomAppBar**.
-- Added divider color selection to **Dialogs** settings panel for the DatePicker divider color. Setting it to transparent will hide the divider in Material-3 mode, in Material-2 mode the Divider does not exist.
+- Added divider color selection to **Dialogs** settings panel for the **DatePicker** divider color. Setting it to transparent will hide the divider in Material-3 mode, in Material-2 mode the Divider does not exist. Also added feature to allow selection of DatePicker header foreground color independently of the used background color. Previously it always used the contrast pair of the background color, which is still the default it you do not select a custom foreground color.  
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 

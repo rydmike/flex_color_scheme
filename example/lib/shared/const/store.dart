@@ -2173,6 +2173,13 @@ sealed class Store {
   // reset settings.
   static const SchemeColor? defaultDatePickerHeaderBackgroundSchemeColor = null;
 
+  // Key used to read and save the datePickerHeaderForegroundSchemeColor value.
+  static const String keyDatePickerHeaderForegroundSchemeColor =
+      'datePickerHeaderForegroundSchemeColor';
+  // Default value for the datePickerHeaderForegroundSchemeColor, also used to
+  // reset settings.
+  static const SchemeColor? defaultDatePickerHeaderForegroundSchemeColor = null;
+
   // Key used to read and save the datePickerDividerSchemeColor value.
   static const String keyDatePickerDividerSchemeColor =
       'datePickerDividerSchemeColor';

@@ -953,6 +953,9 @@ class ThemeController with ChangeNotifier {
     _datePickerHeaderBackgroundSchemeColor = await _themeService.load(
         Store.keyDatePickerHeaderBackgroundSchemeColor,
         Store.defaultDatePickerHeaderBackgroundSchemeColor);
+    _datePickerHeaderForegroundSchemeColor = await _themeService.load(
+        Store.keyDatePickerHeaderForegroundSchemeColor,
+        Store.defaultDatePickerHeaderForegroundSchemeColor);
     _datePickerDividerSchemeColor = await _themeService.load(
         Store.keyDatePickerDividerSchemeColor,
         Store.defaultDatePickerDividerSchemeColor);
@@ -1524,6 +1527,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultDialogBackgroundDarkSchemeColor, false);
     setDatePickerHeaderBackgroundSchemeColor(
         Store.defaultDatePickerHeaderBackgroundSchemeColor, false);
+    setDatePickerHeaderForegroundSchemeColor(
+        Store.defaultDatePickerHeaderForegroundSchemeColor, false);
     setDatePickerDividerSchemeColor(
         Store.defaultDatePickerDividerSchemeColor, false);
     //
@@ -5990,6 +5995,18 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(
         Store.keyDatePickerHeaderBackgroundSchemeColor, value));
+  }
+
+  late SchemeColor? _datePickerHeaderForegroundSchemeColor;
+  SchemeColor? get datePickerHeaderForegroundSchemeColor =>
+      _datePickerHeaderForegroundSchemeColor;
+  void setDatePickerHeaderForegroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _datePickerHeaderForegroundSchemeColor) return;
+    _datePickerHeaderForegroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyDatePickerHeaderForegroundSchemeColor, value));
   }
 
   late SchemeColor? _datePickerDividerSchemeColor;

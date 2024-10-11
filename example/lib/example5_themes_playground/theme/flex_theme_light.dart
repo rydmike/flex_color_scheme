@@ -415,6 +415,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             //
             datePickerHeaderBackgroundSchemeColor:
                 controller.datePickerHeaderBackgroundSchemeColor,
+            datePickerHeaderForegroundSchemeColor:
+                controller.datePickerHeaderForegroundSchemeColor,
             datePickerDividerSchemeColor:
                 controller.datePickerDividerSchemeColor,
             //
