@@ -7604,6 +7604,8 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               headerBackgroundSchemeColor:
                   subTheme.datePickerHeaderBackgroundSchemeColor,
+              headerForegroundSchemeColor:
+                  subTheme.datePickerHeaderForegroundSchemeColor,
               dividerSchemeColor: subTheme.datePickerDividerSchemeColor,
               elevation: subTheme.dialogElevation,
               radius: subTheme.datePickerDialogRadius ??

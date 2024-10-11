@@ -296,7 +296,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize`, `ìconSize` and `padding` properties to `FlexSubThemes.chipTheme`. Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize`, `chipIconSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
 
 
-- Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`. Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its color.
+- Added `headerForegroundSchemeColor` property to `FlexSubThemes.datePickerTheme`. Added `datePickerHeaderForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its header foreground color.
+- Added `dividerSchemeColor` property to `FlexSubThemes.datePickerTheme`. Added `datePickerDividerSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its divider color.
 
 
 - Added `isDense` property to `FlexSubThemes.inputDecoratorTheme`. Added `inputDecoratorIsDense` property to `FlexSubThemesData`.
