@@ -374,6 +374,7 @@ class FlexSubThemesData with Diagnosticable {
     this.dialogContentTextStyle, // Not in Playground
     //
     this.datePickerHeaderBackgroundSchemeColor,
+    this.datePickerHeaderForegroundSchemeColor,
     this.datePickerDialogRadius,
     this.datePickerDividerSchemeColor,
     this.datePickerHeaderHeadlineStyle, // Not in Playground
@@ -2629,12 +2630,26 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The background color of the header in a [DatePickerDialog].
   ///
-  /// If not defined, default to [ColorScheme.primary] in M2 and to
-  /// [ColorScheme.surface] in M3.
+  /// If not defined, default to [ColorScheme.primary] in Material-2 and to
+  /// [ColorScheme.surfaceContainerHigh] in Material-3.
   ///
   /// The foreground color automatically defaults to the correct contrast pair
   /// for used [SchemeColor].
   final SchemeColor? datePickerHeaderBackgroundSchemeColor;
+
+  /// Defines the foreground color of the header in a [DatePickerDialog],
+  /// used for text labels and icons.
+  ///
+  /// The dialog's header displays the currently selected date.
+  ///
+  /// This is used instead of the [TextStyle.color] property of
+  /// [headerHeadlineStyle] and [headerHelpStyle].
+  ///
+  /// If not defined, defaults to correct contrast pair for the used
+  /// [headerBackgroundSchemeColor], with a preference to
+  /// [SchemeColor.onSurfaceVariant] if any surface color is used as the
+  /// background color.
+  final SchemeColor? datePickerHeaderForegroundSchemeColor;
 
   /// Border radius value for [DatePickerDialog].
   ///
@@ -2665,7 +2680,7 @@ class FlexSubThemesData with Diagnosticable {
   /// The dialog's header displays the currently selected date.
   ///
   /// The [TextStyle.color] of the [datePickerHeaderHeadlineStyle] is not used,
-  /// header foreground color is used instead.
+  /// the [datePickerHeaderForegroundSchemeColor] is used instead.
   final TextStyle? datePickerHeaderHeadlineStyle;
 
   /// Overrides the date picker header's default help text style.
@@ -2675,7 +2690,7 @@ class FlexSubThemesData with Diagnosticable {
   /// (i.e. 'Select date').
   ///
   /// The [TextStyle.color] of the [datePickerHeaderHelpStyle] is not used,
-  /// header foreground color is used instead.
+  /// the [datePickerHeaderForegroundSchemeColor] is used instead.
   final TextStyle? datePickerHeaderHelpStyle;
 
   /// Overrides the default text style used for the row of weekday
@@ -4170,6 +4185,7 @@ class FlexSubThemesData with Diagnosticable {
     final TextStyle? dialogContentTextStyle,
     //
     final SchemeColor? datePickerHeaderBackgroundSchemeColor,
+    final SchemeColor? datePickerHeaderForegroundSchemeColor,
     final double? datePickerDialogRadius,
     final SchemeColor? datePickerDividerSchemeColor,
     final TextStyle? datePickerHeaderHeadlineStyle,
@@ -4633,6 +4649,9 @@ class FlexSubThemesData with Diagnosticable {
       datePickerHeaderBackgroundSchemeColor:
           datePickerHeaderBackgroundSchemeColor ??
               this.datePickerHeaderBackgroundSchemeColor,
+      datePickerHeaderForegroundSchemeColor:
+          datePickerHeaderForegroundSchemeColor ??
+              this.datePickerHeaderForegroundSchemeColor,
       datePickerDialogRadius:
           datePickerDialogRadius ?? this.datePickerDialogRadius,
       datePickerDividerSchemeColor:
@@ -5124,6 +5143,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.datePickerHeaderBackgroundSchemeColor ==
             datePickerHeaderBackgroundSchemeColor &&
+        other.datePickerHeaderForegroundSchemeColor ==
+            datePickerHeaderForegroundSchemeColor &&
         other.datePickerDialogRadius == datePickerDialogRadius &&
         other.datePickerDividerSchemeColor == datePickerDividerSchemeColor &&
         other.datePickerHeaderHeadlineStyle == datePickerHeaderHeadlineStyle &&
@@ -5509,6 +5530,7 @@ class FlexSubThemesData with Diagnosticable {
         dialogContentTextStyle,
         //
         datePickerHeaderBackgroundSchemeColor,
+        datePickerHeaderForegroundSchemeColor,
         datePickerDialogRadius,
         datePickerDividerSchemeColor,
         datePickerHeaderHeadlineStyle,
@@ -6018,6 +6040,9 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<SchemeColor>(
         'datePickerHeaderBackgroundSchemeColor',
         datePickerHeaderBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'datePickerHeaderForegroundSchemeColor',
+        datePickerHeaderForegroundSchemeColor));
     properties.add(DiagnosticsProperty<double>(
         'datePickerDialogRadius', datePickerDialogRadius));
     properties.add(EnumProperty<SchemeColor>(

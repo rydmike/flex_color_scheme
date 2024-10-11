@@ -2100,7 +2100,7 @@ sealed class FlexSubThemes {
     );
   }
 
-  /// An opinionated [DatePickerThemeData].
+  /// A slightly opinionated [DatePickerThemeData] helper for FlexColorScheme.
   static DatePickerThemeData datePickerTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2108,10 +2108,13 @@ sealed class FlexSubThemes {
     /// Dialog background color.
     ///
     /// If null and [backgroundSchemeColor] is also null, then it
-    /// gets default via Dialog's default null theme behavior.
+    /// gets default via Dialog's default null theme behavior,
+    /// which is [surfaceContainerHigh]
+    /// in Material-3 mode and in Material-2 mode in light theme
+    /// [Colors.white] and in a dark theme [Colors.grey800].
     ///
     /// If [backgroundSchemeColor] is defined, it will override any color
-    /// passed in here.
+    /// give to [backgroundColor].
     ///
     /// Can be used to make a custom themed dialog with own background color,
     /// even after the [ThemeData.dialogBackgroundColor] property is
@@ -2124,35 +2127,29 @@ sealed class FlexSubThemes {
     ///
     /// If not defined, then the passed in [backgroundColor] will be used,
     /// which may be null too and dialog then falls back to Flutter SDK default
-    /// value for TimePickerDialog, which is [colorScheme.surface].
-    ///
-    /// FlexColorScheme sub-theming uses this property to match the background
-    /// color of this dialog to other standard dialogs. It sets it via
-    /// [FlexSubThemesData] to [SchemeColor.surface].
+    /// value for DatePickerDialog, which is [surfaceContainerHigh]
+    /// in Material-3 mode and in Material-2 mode in light theme
+    /// [Colors.white] and in a dark theme [Colors.grey800].
     final SchemeColor? backgroundSchemeColor,
 
     /// The color of the divider in the [DatePickerDialog].
     ///
-    /// If not defined, defaults to [ColorScheme.outlineVariant] in M3. In M2
-    /// the divider does not exist in the [DatePickerDialog] build.
+    /// If not defined, defaults to [ColorScheme.outlineVariant] in Material-3.
+    /// In Material-2 the divider does not exist in the [DatePickerDialog]
+    /// build.
     ///
-    /// Set it to [SchemeColor.transparent] to get rid of the divider in M3.
+    /// Use [SchemeColor.transparent] to remove the divider in Material-3.
     final SchemeColor? dividerSchemeColor,
 
-    /// Overrides the header's default background fill color.
+    /// Defines the header's default background fill color.
     ///
     /// The dialog's header displays the currently selected date.
     ///
-    /// Defaults to primary in Material-2 and to surface in Material-3.
-    ///
-    /// The foreground color will use the correct contrast pair for selected
-    /// [SchemeColor]
+    /// Defaults to [surfaceContainerHigh] in Material-3 and Material-2 mode
+    /// to [primary] in light mode and to [surface] in dark mode.
     final SchemeColor? headerBackgroundSchemeColor,
 
-    /// Selects which color from the passed in colorScheme to use as the dialog
-    /// foreground color.
-    ///
-    /// Overrides the header's default color used for text labels and icons.
+    /// Defines the header's default color used for text labels and icons.
     ///
     /// The dialog's header displays the currently selected date.
     ///
@@ -2160,7 +2157,7 @@ sealed class FlexSubThemes {
     /// [headerHeadlineStyle] and [headerHelpStyle].
     ///
     /// If not defined, defaults to correct contrast pair for the used
-    /// [headerBackgroundSchemeColor], with a fallback to
+    /// [headerBackgroundSchemeColor], with a preference to
     /// [SchemeColor.onSurfaceVariant] if any surface color is used as the
     /// background color.
     final SchemeColor? headerForegroundSchemeColor,
@@ -2385,8 +2382,16 @@ sealed class FlexSubThemes {
     /// picker. It defaults to the ambient locale provided by [Localizations].
     final Locale? locale,
   }) {
+    // This InputDecorationTheme is here to help work around this issue:
+    // https://github.com/flutter/flutter/issues/131666
+    // It is reasonably successful in fixing the issue, but it is not perfect.
     InputDecorationTheme datePickerDefaultInputDecorationTheme() {
       const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(4.0));
+      // The input decoration theme is used to style the input fields in the
+      // date picker dialog. This matches the default input decoration theme
+      // used by the date picker dialog.
+      // TODO(rydmike): Check that Flutter's defaults have not changed.
+      // If it has the changes are probably subtle enough to not matter for now.
       return InputDecorationTheme(
         filled: false,
         hoverColor: colorScheme.brightness == Brightness.dark
