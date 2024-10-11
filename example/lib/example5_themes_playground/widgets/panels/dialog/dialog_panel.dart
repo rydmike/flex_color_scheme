@@ -162,6 +162,48 @@ class DialogPanel extends StatelessWidget {
     return controller.useMaterial3 ? '28 dp' : '4 dp';
   }
 
+  // TODO(rydmike): Check the defaults info for _datePickerHeaderBackground
+  // Complex logic for the date picker default Header background color.
+  static String _datePickerHeaderBackground(
+      ThemeController controller, bool isLight) {
+    final bool useFCS =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    if (!useFCS ||
+        (controller.dialogBackgroundLightSchemeColor == null && isLight) ||
+        (controller.dialogBackgroundDarkSchemeColor == null && !isLight)) {
+      return controller.useMaterial3
+          ? 'surfaceContainerHigh'
+          : isLight
+              ? 'primary'
+              : 'surface';
+    }
+    if (isLight) {
+      return SchemeColor
+          .values[controller.dialogBackgroundLightSchemeColor!.index].name;
+    } else {
+      return SchemeColor
+          .values[controller.dialogBackgroundDarkSchemeColor!.index].name;
+    }
+  }
+
+  // Complex logic for the date picker default Header foreground color.
+  static String _datePickerHeaderForeground(
+      ThemeController controller, bool isLight) {
+    final bool useFCS =
+        controller.useSubThemes && controller.useFlexColorScheme;
+    if (!useFCS ||
+        (controller.dialogBackgroundLightSchemeColor == null && isLight) ||
+        (controller.dialogBackgroundDarkSchemeColor == null && !isLight)) {
+      return controller.useMaterial3
+          ? 'onSurfaceVariant'
+          : isLight
+              ? 'onPrimary'
+              : 'onSurface';
+    }
+    // TODO(rydmike): Add the defaults info for _datePickerHeaderForeground
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -210,7 +252,7 @@ class DialogPanel extends StatelessWidget {
         else
           ColorSchemePopupMenu(
             enabled: enableControl,
-            title: const Text('Background color light mode'),
+            title: const Text('Background color dark mode'),
             defaultLabel: 'surfaceContainerHigh',
             defaultLabelM2: 'surface',
             defaultLabelDarkM2: 'surface + elevation overlay',
@@ -497,22 +539,43 @@ class DialogPanel extends StatelessWidget {
             controller.timePickerDialogBorderRadius,
           ),
         ),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Header background color'),
-          defaultLabel: controller.dialogBackgroundLightSchemeColor == null
-              ? 'surfaceContainerHigh'
-              : SchemeColor
-                  .values[controller.dialogBackgroundLightSchemeColor!.index]
-                  .name,
-          defaultLabelM2: 'primary',
-          defaultLabelDarkM2: 'surface',
-          defaultDisabledLabel: 'surfaceContainerHigh',
-          defaultDisabledLabelM2: 'primary',
-          defaultDisabledLabelDarkM2: 'surface',
-          value: controller.datePickerHeaderBackgroundSchemeColor,
-          onChanged: controller.setDatePickerHeaderBackgroundSchemeColor,
-        ),
+        // TODO(rydmike): Fix the defaults info for both!
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            isRow: isRow,
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Header background'),
+              defaultLabel: _datePickerHeaderBackground(controller, isLight),
+              // defaultLabelM2: 'primary',
+              // defaultLabelDarkM2: 'surface',
+              // defaultDisabledLabel: 'surfaceContainerHigh',
+              // defaultDisabledLabelM2: 'primary',
+              // defaultDisabledLabelDarkM2: 'surface',
+              value: controller.datePickerHeaderBackgroundSchemeColor,
+              onChanged: controller.setDatePickerHeaderBackgroundSchemeColor,
+            ),
+            lastWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              title: const Text('Header foreground'),
+              defaultLabel: controller.dialogBackgroundLightSchemeColor == null
+                  ? 'onSurfaceVariant'
+                  : SchemeColor
+                      .values[
+                          controller.dialogBackgroundLightSchemeColor!.index]
+                      .name,
+              defaultLabelM2: 'onPrimary',
+              defaultLabelDarkM2: 'onSurface',
+              defaultDisabledLabel: 'onSurfaceVariant',
+              defaultDisabledLabelM2: 'onPrimary',
+              defaultDisabledLabelDarkM2: 'onSurface',
+              value: controller.datePickerHeaderForegroundSchemeColor,
+              onChanged: controller.setDatePickerHeaderForegroundSchemeColor,
+            ),
+          );
+        }),
         ColorSchemePopupMenu(
           enabled: enableControl && useMaterial3,
           title: const Text('Divider color'),

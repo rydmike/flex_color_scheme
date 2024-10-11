@@ -930,6 +930,11 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    datePickerHeaderBackgroundSchemeColor: ${controller.datePickerHeaderBackgroundSchemeColor},\n'
       : '';
+  final String datePickerHeaderForegroundSchemeColor = controller
+              .datePickerHeaderForegroundSchemeColor !=
+          null
+      ? '    datePickerHeaderForegroundSchemeColor: ${controller.datePickerHeaderForegroundSchemeColor},\n'
+      : '';
   final String datePickerDividerSchemeColor = controller
               .datePickerDividerSchemeColor !=
           null
@@ -1668,6 +1673,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$datePickerDialogRadius'
           '$datePickerHeaderBackgroundSchemeColor'
+          '$datePickerHeaderForegroundSchemeColor'
           '$datePickerDividerSchemeColor'
           //
           '$snackBarRadius'
@@ -1948,6 +1954,7 @@ String generateThemeDartCode(ThemeController controller) {
           //
           '$datePickerDialogRadius'
           '$datePickerHeaderBackgroundSchemeColor'
+          '$datePickerHeaderForegroundSchemeColor'
           '$datePickerDividerSchemeColor'
           //
           '$snackBarRadius'
