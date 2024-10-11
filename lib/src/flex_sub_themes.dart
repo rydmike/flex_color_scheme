@@ -12,7 +12,7 @@ import 'flex_extensions.dart';
 // ignore_for_file: comment_references
 
 /// Enum used to select the type of border used on by the input decorator in
-
+/// [FlexSubThemes.inputDecorationTheme].
 enum FlexInputBorderType {
   /// Used to select [OutlineInputBorder] as input decorator in
   /// [FlexSubThemes.inputDecorationTheme].
@@ -22,8 +22,6 @@ enum FlexInputBorderType {
   /// [FlexSubThemes.inputDecorationTheme].
   underline,
 }
-
-/// Enum used to select the type of built-in value indicator used by [Slider].
 
 /// Enum used to described which color from the active theme's 30
 /// [ColorScheme] colors, should be used for by color properties available in
@@ -189,29 +187,17 @@ enum SchemeColor {
 
   /// Transparent color will be used.
   transparent,
-
-  // TODO(rydmike): Remove this commented code. Check braking notice about it.
-  // /// The active theme's color scheme background color will be used.
-  // @Deprecated('Use surface instead. '
-  //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
-  // background,
-  //
-  // /// The active theme's color scheme onBackground color will be used.
-  // @Deprecated('Use onSurface instead. '
-  //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
-  // onBackground,
-  //
-  // /// The active theme's color scheme surfaceVariant color will be used.
-  // @Deprecated('Use surfaceContainerHighest instead. '
-  //     'This feature was deprecated in v 2.0.0 and Flutter 3.22.')
-  // surfaceVariant,
 }
 
-/// [FlexSubThemes.inputDecorationTheme].
+/// Enum used to select the type of built-in value indicator used by [Slider].
 ///
-/// The current two options included Material 2 default
-/// [RectangularSliderValueIndicatorShape] and Material 3 default
+/// The current two options included are Material-2 default
+/// [RectangularSliderValueIndicatorShape] and Material-3 default
 /// [DropSliderValueIndicatorShape].
+///
+/// The current implementation of the drop in Flutter, at least up and until
+/// version 3.24, does not match the official Material-3 specification.
+/// More options will be added when they are supported in Flutter.
 ///
 /// This enum is used by [FlexSubThemes.sliderTheme].
 enum FlexSliderIndicatorType {
@@ -2018,7 +2004,7 @@ sealed class FlexSubThemes {
       height: labelStyle?.height ?? 1.43,
     );
 
-    // TODO(rydmike): We need widget state to use this! Not supported. Issue!
+    // TODO(rydmike): We need widget state to use this! Not supported. Issue?
     // Text color, uses the selected foreground color for selected chip styles.
     // final TextStyle effectiveSelectedLabelStyle =
     //     effectiveLabelStyle.copyWith(color: onSelectedColor);
@@ -2039,7 +2025,7 @@ sealed class FlexSubThemes {
       height: secondaryLabelStyle?.height ?? labelStyle?.height ?? 1.43,
     );
 
-    // TODO(rydmike): M3 is 34dp high, should only be 32dp. Report Flutter bug!
+    // TODO(rydmike): M3 is 34dp high, should only be 32dp. Report issue?
 
     return ChipThemeData(
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
@@ -2092,7 +2078,7 @@ sealed class FlexSubThemes {
       // be themed correctly.
       labelStyle: effectiveLabelStyle,
 
-      // TODO(rydmike): We need widget state to use this! Not supported. Issue!
+      // TODO(rydmike): We need widget state to use this! Not supported. Issue?
       // To always get correct color for selected state text, we would need to
       // use WidgetStateTextStyle, but it is not supported.
       //
