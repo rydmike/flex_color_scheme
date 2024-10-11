@@ -65,7 +65,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   - We could then use `surfaceContainerLowest` as default in M2 as well, since you can st it to past surface if that is preferred, for same style as before. The diffs are quite subtle though.
 
 - **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
-- **TODO**: Add color props for the DatePicker, the TextStyles need them if used. Will not be in Playground, only in PKG API for now, like all the text styles.
+
    
 - **TODO**: More work on Chips. Have a few more things to try with them. Their theming is hopeless.
 - **TODO**: Review and maybe adjust the tints for the tinted text theme option a bit.
@@ -104,7 +104,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 * **DONE**: Add a large number of new theming features. 
 
-* **DONE**: Add threw new slightly different baseline monochrome schemes. Great for protyping with color distractions or as baseline schemes to add custom colors to. 
+* **DONE**: Add three new slightly different baseline monochrome schemes. Great for prototyping without color distractions, or to as baseline schemes to add custom colors to. 
 
 * **DONE**: Add support for all the new Flutter `DynamicSchemeVariant` seed generated variants, with the twist that it can also use separate seed colors for each palette.
 
@@ -114,6 +114,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - Make a WASM release build of the Themes Playground app. 
   - Must figure out new hosting and CI setup to it. Currently used GitHub Pages, apparently do not support Flutter WASM builds. So this will have to wait for a later release when I have time to look into all this.
+- Add and expose more props for TimePicker theming.
+- Expose more color props for the DatePicker theming. The TextStyles need them if used. Support for this is prepared in `FlexSubThemes` but not yet added to `FlexSubThemesData` or the Playground app. Most of the properties will not be in the Playground app, but may be added to the package later smaller incremental updates.
 - Add some minor fidelity for iOS adaptive `AppBar`.
   - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Look it up and consider adding them as a platform adaptive feature.
 - Platform adaptive `ShapeBorder` configuration, including `Squircle`.
