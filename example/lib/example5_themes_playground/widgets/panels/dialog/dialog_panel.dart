@@ -162,7 +162,6 @@ class DialogPanel extends StatelessWidget {
     return controller.useMaterial3 ? '28 dp' : '4 dp';
   }
 
-  // TODO(rydmike): Check the defaults info for _datePickerHeaderBackground
   // Complex logic for the date picker default Header background color.
   static String _datePickerHeaderBackground(
       ThemeController controller, bool isLight) {
@@ -170,7 +169,8 @@ class DialogPanel extends StatelessWidget {
         controller.useSubThemes && controller.useFlexColorScheme;
     if (!useFCS ||
         (controller.dialogBackgroundLightSchemeColor == null && isLight) ||
-        (controller.dialogBackgroundDarkSchemeColor == null && !isLight)) {
+        (controller.dialogBackgroundDarkSchemeColor == null && !isLight) ||
+        (!controller.useMaterial3)) {
       return controller.useMaterial3
           ? 'surfaceContainerHigh'
           : isLight
@@ -193,15 +193,37 @@ class DialogPanel extends StatelessWidget {
         controller.useSubThemes && controller.useFlexColorScheme;
     if (!useFCS ||
         (controller.dialogBackgroundLightSchemeColor == null && isLight) ||
-        (controller.dialogBackgroundDarkSchemeColor == null && !isLight)) {
+        (controller.dialogBackgroundDarkSchemeColor == null && !isLight) ||
+        (!controller.useMaterial3 &&
+            controller.datePickerHeaderBackgroundSchemeColor == null)) {
       return controller.useMaterial3
           ? 'onSurfaceVariant'
           : isLight
               ? 'onPrimary'
               : 'onSurface';
     }
-    // TODO(rydmike): Add the defaults info for _datePickerHeaderForeground
-    return '';
+    if (isLight && controller.datePickerHeaderForegroundSchemeColor == null) {
+      return SchemeColor
+          .values[FlexSubThemes.onSchemeColor(
+                  controller.dialogBackgroundLightSchemeColor!,
+                  useOnSurfaceVariant: true)
+              .index]
+          .name;
+    } else if (!isLight &&
+        controller.datePickerHeaderForegroundSchemeColor == null) {
+      return SchemeColor
+          .values[FlexSubThemes.onSchemeColor(
+                  controller.dialogBackgroundDarkSchemeColor!,
+                  useOnSurfaceVariant: true)
+              .index]
+          .name;
+    }
+    return SchemeColor
+        .values[FlexSubThemes.onSchemeColor(
+                controller.datePickerHeaderBackgroundSchemeColor!,
+                useOnSurfaceVariant: true)
+            .index]
+        .name;
   }
 
   @override
@@ -539,7 +561,6 @@ class DialogPanel extends StatelessWidget {
             controller.timePickerDialogBorderRadius,
           ),
         ),
-        // TODO(rydmike): Fix the defaults info for both!
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(
             isRow: isRow,
@@ -548,11 +569,6 @@ class DialogPanel extends StatelessWidget {
               enabled: enableControl,
               title: const Text('Header background'),
               defaultLabel: _datePickerHeaderBackground(controller, isLight),
-              // defaultLabelM2: 'primary',
-              // defaultLabelDarkM2: 'surface',
-              // defaultDisabledLabel: 'surfaceContainerHigh',
-              // defaultDisabledLabelM2: 'primary',
-              // defaultDisabledLabelDarkM2: 'surface',
               value: controller.datePickerHeaderBackgroundSchemeColor,
               onChanged: controller.setDatePickerHeaderBackgroundSchemeColor,
             ),
@@ -560,17 +576,7 @@ class DialogPanel extends StatelessWidget {
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               title: const Text('Header foreground'),
-              defaultLabel: controller.dialogBackgroundLightSchemeColor == null
-                  ? 'onSurfaceVariant'
-                  : SchemeColor
-                      .values[
-                          controller.dialogBackgroundLightSchemeColor!.index]
-                      .name,
-              defaultLabelM2: 'onPrimary',
-              defaultLabelDarkM2: 'onSurface',
-              defaultDisabledLabel: 'onSurfaceVariant',
-              defaultDisabledLabelM2: 'onPrimary',
-              defaultDisabledLabelDarkM2: 'onSurface',
+              defaultLabel: _datePickerHeaderForeground(controller, isLight),
               value: controller.datePickerHeaderForegroundSchemeColor,
               onChanged: controller.setDatePickerHeaderForegroundSchemeColor,
             ),
