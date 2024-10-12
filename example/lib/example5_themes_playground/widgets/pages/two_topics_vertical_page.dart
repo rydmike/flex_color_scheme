@@ -4,6 +4,7 @@ import '../../../shared/const/app.dart';
 import '../../../shared/controllers/theme_controller.dart';
 import '../panels/input_colors/input_colors_selector.dart';
 import 'two_topics_page.dart';
+import 'widgets/vertical_panel_view.dart';
 
 // ignore_for_file: comment_references
 
