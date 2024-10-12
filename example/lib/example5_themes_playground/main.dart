@@ -118,7 +118,7 @@ class PlaygroundApp extends StatelessWidget {
             // the theme settings that will cause themes above to change and
             // rebuild the entire look of the app based on modified theme.
             //
-            // There are more than 270 properties in the controller that can
+            // There are more than 360 properties in the controller that can
             // be used to control the two light and dark mode themes.
             // Every time one of them is modified, the themed app is rebuilt
             // with the new ThemeData applied.
