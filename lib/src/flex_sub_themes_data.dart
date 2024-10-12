@@ -235,6 +235,7 @@ class FlexSubThemesData with Diagnosticable {
     this.segmentedButtonBorderWidth,
     this.segmentedButtonTextStyle, // Not in Playground
     //
+    this.scaffoldBackgroundBaseColor,
     this.scaffoldBackgroundSchemeColor,
     this.materialButtonSchemeColor,
     //
@@ -1380,6 +1381,23 @@ class FlexSubThemesData with Diagnosticable {
   /// [segmentedButtonSchemeColor] and [unselectedForegroundSchemeColor] are
   /// used instead.
   final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle;
+
+  /// Base color used as [Themedata.scaffoldBackgroundColor] in a theme
+  /// produced by [FlexColorScheme.light] and [FlexColorScheme.dark] factories.
+  ///
+  /// The used base color is modified by used [surfaceMode] and [blendLevel]
+  /// in the [FlexColorScheme] factory constructors.
+  ///
+  /// By using different base colors you can create alpha blended scaffold
+  /// background colors with even more variation, as they are mixed with the
+  /// blend color, but start at different base colors.
+  ///
+  /// If you do not want to get any blend in the Scaffold background color, but
+  /// otherwise want to use surface blends with [blendLevel] > 0, you can
+  /// set the `FlexSubThemesData(scaffoldBackgroundSchemeColor)` to any
+  /// [SchemeColor]. Setting this property overrides all scaffold background
+  /// color definitions, and always uses the selected color as is.
+  final FlexScaffoldBaseColor? scaffoldBackgroundBaseColor;
 
   /// Defines which [Theme] based [ColorScheme] color, that the color
   /// [ThemeData.scaffoldBackgroundColor] will use as override color.
@@ -4046,6 +4064,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? segmentedButtonBorderWidth,
     final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle,
     //
+    final FlexScaffoldBaseColor? scaffoldBackgroundBaseColor,
     final SchemeColor? scaffoldBackgroundSchemeColor,
     final SchemeColor? materialButtonSchemeColor,
     //
@@ -4439,6 +4458,8 @@ class FlexSubThemesData with Diagnosticable {
       segmentedButtonTextStyle:
           segmentedButtonTextStyle ?? this.segmentedButtonTextStyle,
       //
+      scaffoldBackgroundBaseColor:
+          scaffoldBackgroundBaseColor ?? this.scaffoldBackgroundBaseColor,
       scaffoldBackgroundSchemeColor:
           scaffoldBackgroundSchemeColor ?? this.scaffoldBackgroundSchemeColor,
       materialButtonSchemeColor:
@@ -4987,6 +5008,7 @@ class FlexSubThemesData with Diagnosticable {
         other.segmentedButtonBorderWidth == segmentedButtonBorderWidth &&
         other.segmentedButtonTextStyle == segmentedButtonTextStyle &&
         //
+        other.scaffoldBackgroundBaseColor == scaffoldBackgroundBaseColor &&
         other.scaffoldBackgroundSchemeColor == scaffoldBackgroundSchemeColor &&
         other.materialButtonSchemeColor == materialButtonSchemeColor &&
         //
@@ -5391,6 +5413,7 @@ class FlexSubThemesData with Diagnosticable {
         segmentedButtonBorderWidth,
         segmentedButtonTextStyle,
         //
+        scaffoldBackgroundBaseColor,
         scaffoldBackgroundSchemeColor,
         materialButtonSchemeColor,
         //
@@ -5790,6 +5813,8 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
         'segmentedButtonTextStyle', segmentedButtonTextStyle));
     //
+    properties.add(EnumProperty<FlexScaffoldBaseColor>(
+        'scaffoldBackgroundBaseColor', scaffoldBackgroundBaseColor));
     properties.add(EnumProperty<SchemeColor>(
         'scaffoldBackgroundSchemeColor', scaffoldBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
