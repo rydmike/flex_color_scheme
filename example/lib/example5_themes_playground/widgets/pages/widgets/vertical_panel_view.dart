@@ -123,8 +123,8 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
             // The content is always fixed and known amount of widgets, but
             // always a single child, so a ListView is not needed, trying the
             // the SingleChildScrollView instead. Which for use cases
-            // with only a few items, or just one, like this case might be
-            // faster. This test trail started Oct 12, 2024.
+            // with only a few items, or just one, like this case, may be
+            // faster. This test started Oct 12, 2024.
             child: SingleChildScrollView(
               primary: false,
               controller: scrollController,
