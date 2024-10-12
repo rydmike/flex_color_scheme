@@ -527,3 +527,27 @@ class MaterialTapTargetSizeAdapter extends TypeAdapter<MaterialTapTargetSize?> {
   @override
   int get typeId => 175;
 }
+
+/// A Hive data type adapter for enum [FlexScaffoldBaseColor], nullable.
+///
+/// Handles storing <null> value as -1 and returns anything out of enum
+/// index range as null value.
+class FlexScaffoldBaseColorAdapter extends TypeAdapter<FlexScaffoldBaseColor?> {
+  @override
+  FlexScaffoldBaseColor? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= FlexScaffoldBaseColor.values.length) {
+      return null;
+    } else {
+      return FlexScaffoldBaseColor.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, FlexScaffoldBaseColor? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 176;
+}

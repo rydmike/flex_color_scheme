@@ -784,6 +784,30 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= MaterialTapTargetSize.values.length) return defaultValue;
         return MaterialTapTargetSize.values[value] as T;
       }
+      // T is FlexScaffoldBaseColor is nullable value.
+      if (sameTypes<T, FlexScaffoldBaseColor?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded FlexScaffoldBaseColor?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= FlexScaffoldBaseColor.values.length) return defaultValue;
+        return FlexScaffoldBaseColor.values[value] as T;
+      }
+      // T is FlexScaffoldBaseColor none nullable value.
+      if (sameTypes<T, FlexScaffoldBaseColor>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded FlexScaffoldBaseColor : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= FlexScaffoldBaseColor.values.length) return defaultValue;
+        return FlexScaffoldBaseColor.values[value] as T;
+      }
       //
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
