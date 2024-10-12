@@ -273,6 +273,7 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
 
     return Expanded(
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (!widget.isRight)
             TopicSelectorVertical(
@@ -293,7 +294,13 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
               addTopPadding: widget.addTopPadding,
             ),
           Expanded(
-            child: ListView(
+            // TODO(rydmike): Evaluating SingleChildScrollView vs ListView
+            // The content is always fixed and known amount of widgets, but
+            // always a single child, so a ListView is not needed, trying the
+            // the SingleChildScrollView instead. Which for uses cases
+            // with only a few items, or just one, like this case might be
+            // faster. This test trail started Oct 12, 2024.
+            child: SingleChildScrollView(
               primary: false,
               controller: scrollController,
               physics: const ClampingScrollPhysics(),
@@ -303,21 +310,19 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
                 widget.isRight ? 4 : margins / 2,
                 margins + bottomPadding,
               ),
-              children: <Widget>[
-                ScaleTransition(
-                  scale: scaleAnimation,
-                  child: FadeTransition(
-                    opacity: fadeAnimation,
-                    child: HeaderCard(
-                      title: Text(themeTopics[widget.panel].heading),
-                      leading: Icon(themeTopics[widget.panel].icon,
-                          color: iconColor),
-                      info: themeTopics[widget.panel].info,
-                      child: Panel(widget.panel, widget.controller),
-                    ),
+              child: ScaleTransition(
+                scale: scaleAnimation,
+                child: FadeTransition(
+                  opacity: fadeAnimation,
+                  child: HeaderCard(
+                    title: Text(themeTopics[widget.panel].heading),
+                    leading:
+                        Icon(themeTopics[widget.panel].icon, color: iconColor),
+                    info: themeTopics[widget.panel].info,
+                    child: Panel(widget.panel, widget.controller),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
           if (widget.isRight)
