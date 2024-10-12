@@ -302,9 +302,6 @@ enum FlexScaffoldBaseColor {
   /// The active theme's color scheme surface color will be used.
   surface,
 
-  /// The active theme's color scheme  onSurface color will be used.
-  onSurface,
-
   /// The active theme's color scheme surfaceDim color will be used.
   surfaceDim,
 
@@ -325,7 +322,34 @@ enum FlexScaffoldBaseColor {
 
   /// The active theme's color scheme surfaceContainerHighest color will
   /// be used.
-  surfaceContainerHighest,
+  surfaceContainerHighest;
+
+  /// Return the Color corresponding to the enum value.
+  Color color(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool isLight = scheme.brightness == Brightness.light;
+
+    switch (this) {
+      case FlexScaffoldBaseColor.lowest:
+        return isLight ? Colors.white : Colors.black;
+      case FlexScaffoldBaseColor.surface:
+        return scheme.surface;
+      case FlexScaffoldBaseColor.surfaceDim:
+        return scheme.surfaceDim;
+      case FlexScaffoldBaseColor.surfaceBright:
+        return scheme.surfaceBright;
+      case FlexScaffoldBaseColor.surfaceContainerLowest:
+        return scheme.surfaceContainerLowest;
+      case FlexScaffoldBaseColor.surfaceContainerLow:
+        return scheme.surfaceContainerLow;
+      case FlexScaffoldBaseColor.surfaceContainer:
+        return scheme.surfaceContainer;
+      case FlexScaffoldBaseColor.surfaceContainerHigh:
+        return scheme.surfaceContainerHigh;
+      case FlexScaffoldBaseColor.surfaceContainerHighest:
+        return scheme.surfaceContainerHighest;
+    }
+  }
 }
 
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
