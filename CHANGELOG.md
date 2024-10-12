@@ -60,7 +60,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **LESS CRITICAL TODOs**
 
-- **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
 - **TODO**: More work on Chips. Have a few more things to try with them. Their theming is hopeless.
 - **TODO**: Review and maybe adjust the tints for the tinted text theme option a bit.
 - **TODO**: Study and potentially report **13 found new Flutter SDK theming issues**. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.

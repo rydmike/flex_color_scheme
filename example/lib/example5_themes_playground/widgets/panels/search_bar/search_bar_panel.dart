@@ -60,6 +60,18 @@ class SearchBarPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
+          subtitleReveal: const Text('If you use background color with '
+              'reverse contrast need to surface colors, you will need '
+              'to define custom text themes for different TextStyle '
+              'properties in FlexSubThemesData: searchBarTextStyle, '
+              'searchBarHintStyle, searchViewHeaderTextStyle and '
+              'searchViewHeaderHintStyle with working contrast style. '
+              'Additionally the leading and trailing icon colors cannot be '
+              'themed, so you will need to give them '
+              'correct colors on widget level.\n'
+              '\n'
+              'Recommend using background colors with a brightness that '
+              'default icon and text theme contrast color work on.\n'),
           defaultLabel: 'surfaceContainerHigh',
           value: controller.searchBackgroundSchemeColor,
           onChanged: controller.setSearchBackgroundSchemeColor,
