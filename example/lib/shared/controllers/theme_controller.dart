@@ -140,6 +140,12 @@ class ThemeController with ChangeNotifier {
         Store.keyTooltipsMatchBackground, Store.defaultTooltipsMatchBackground);
     //
     // Surface and blend SETTINGS.
+    _scaffoldBackgroundLightBaseColor = await _themeService.load(
+        Store.keyScaffoldBackgroundLightBaseColor,
+        Store.defaultScaffoldBackgroundLightBaseColor);
+    _scaffoldBackgroundDarkBaseColor = await _themeService.load(
+        Store.keyScaffoldBackgroundDarkBaseColor,
+        Store.defaultScaffoldBackgroundDarkBaseColor);
     _scaffoldBackgroundLightSchemeColor = await _themeService.load(
         Store.keyScaffoldBackgroundLightSchemeColor,
         Store.defaultScaffoldBackgroundLightSchemeColor);
@@ -1107,6 +1113,10 @@ class ThemeController with ChangeNotifier {
     setTooltipsMatchBackground(Store.defaultTooltipsMatchBackground, false);
     //
     // Surface and blend SETTINGS.
+    setScaffoldBackgroundLightBaseColor(
+        Store.defaultScaffoldBackgroundLightBaseColor, false);
+    setScaffoldBackgroundDarkBaseColor(
+        Store.defaultScaffoldBackgroundDarkBaseColor, false);
     setScaffoldBackgroundLightSchemeColor(
         Store.defaultScaffoldBackgroundLightSchemeColor, false);
     setScaffoldBackgroundDarkSchemeColor(
@@ -2902,6 +2912,30 @@ class ThemeController with ChangeNotifier {
 
   // Surface and blend SETTINGS.
   // ===========================================================================
+
+  late FlexScaffoldBaseColor? _scaffoldBackgroundLightBaseColor;
+  FlexScaffoldBaseColor? get scaffoldBackgroundLightBaseColor =>
+      _scaffoldBackgroundLightBaseColor;
+  void setScaffoldBackgroundLightBaseColor(FlexScaffoldBaseColor? value,
+      [bool notify = true]) {
+    if (value == _scaffoldBackgroundLightBaseColor) return;
+    _scaffoldBackgroundLightBaseColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyScaffoldBackgroundLightBaseColor, value));
+  }
+
+  late FlexScaffoldBaseColor? _scaffoldBackgroundDarkBaseColor;
+  FlexScaffoldBaseColor? get scaffoldBackgroundDarkBaseColor =>
+      _scaffoldBackgroundDarkBaseColor;
+  void setScaffoldBackgroundDarkBaseColor(FlexScaffoldBaseColor? value,
+      [bool notify = true]) {
+    if (value == _scaffoldBackgroundDarkBaseColor) return;
+    _scaffoldBackgroundDarkBaseColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyScaffoldBackgroundDarkBaseColor, value));
+  }
 
   late SchemeColor? _scaffoldBackgroundLightSchemeColor;
   SchemeColor? get scaffoldBackgroundLightSchemeColor =>

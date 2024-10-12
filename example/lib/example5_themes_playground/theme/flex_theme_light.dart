@@ -154,6 +154,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // only with container and on surfaces.
             blendOnColors: controller.blendLightOnColors,
             // Custom Scaffold background color.
+            scaffoldBackgroundBaseColor:
+                controller.scaffoldBackgroundLightBaseColor,
             scaffoldBackgroundSchemeColor:
                 controller.scaffoldBackgroundLightSchemeColor,
             // By default sub themes mode also opts in on using colored text for
