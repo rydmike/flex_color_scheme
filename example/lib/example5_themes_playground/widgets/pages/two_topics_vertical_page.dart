@@ -27,6 +27,7 @@ class TwoTopicsVerticalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         VerticalPanelView(
           key: const ValueKey<String>('Left VPanel'),
