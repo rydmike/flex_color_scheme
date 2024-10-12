@@ -295,9 +295,10 @@ enum FlexFixedColorStyle {
 /// [SchemeColor]. Setting this property overrides all scaffold background
 /// color definitions, and always uses the selected color as is.
 enum FlexScaffoldBaseColor {
-  /// The lowest color always uses [Colors.white] in light theme mode and
-  /// [Colors.black] in dark theme mode.
-  lowest,
+  /// The [lowestBase] color always uses [Colors.white] in light theme mode and
+  /// [Colors.black] in dark theme mode, regardless of what colors the various
+  /// ColorScheme surface colors uses.
+  lowestBase,
 
   /// The active theme's color scheme surface color will be used.
   surface,
@@ -330,7 +331,7 @@ enum FlexScaffoldBaseColor {
     final bool isLight = scheme.brightness == Brightness.light;
 
     switch (this) {
-      case FlexScaffoldBaseColor.lowest:
+      case FlexScaffoldBaseColor.lowestBase:
         return isLight ? Colors.white : Colors.black;
       case FlexScaffoldBaseColor.surface:
         return scheme.surface;
