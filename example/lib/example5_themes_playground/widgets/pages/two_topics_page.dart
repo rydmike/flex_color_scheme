@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/const/app.dart';
 import '../../../shared/controllers/theme_controller.dart';
-import 'widgets/theme_color_selector.dart';
+import 'widgets/theme_color_selector_header_delegate.dart';
 import 'widgets/topic_selector.dart';
 import 'widgets/vertical_panel_view.dart';
 
