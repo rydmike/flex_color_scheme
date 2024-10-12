@@ -259,6 +259,17 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    scaffoldBackgroundSchemeColor: ${controller.scaffoldBackgroundDarkSchemeColor},\n'
       : '';
 
+  final String scaffoldBackgroundLightBaseColor = controller
+              .scaffoldBackgroundLightBaseColor !=
+          null
+      ? '    scaffoldBackgroundBaseColor: ${controller.scaffoldBackgroundLightBaseColor},\n'
+      : '';
+  final String scaffoldBackgroundDarkBaseColor = controller
+              .scaffoldBackgroundDarkBaseColor !=
+          null
+      ? '    scaffoldBackgroundBaseColor: ${controller.scaffoldBackgroundDarkBaseColor},\n'
+      : '';
+
   // Adaptive themes.
   final String adaptiveRemoveElevationTintLight = controller
                   .adaptiveRemoveElevationTintLight !=
@@ -1529,6 +1540,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tintedDisabledControls'
           '$blendOnLevelLight'
           '$blendLightOnColors'
+          '$scaffoldBackgroundLightBaseColor'
           '$scaffoldBackgroundLightSchemeColor'
           //
           '$blendLightTextTheme'
@@ -1810,6 +1822,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tintedDisabledControls'
           '$blendOnLevelDark'
           '$blendDarkOnColors'
+          '$scaffoldBackgroundDarkBaseColor'
           '$scaffoldBackgroundDarkSchemeColor'
           //
           '$blendDarkTextTheme'

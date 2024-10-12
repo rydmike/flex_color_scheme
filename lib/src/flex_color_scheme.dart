@@ -326,29 +326,86 @@ enum FlexScaffoldBaseColor {
   surfaceContainerHighest;
 
   /// Return the Color corresponding to the enum value.
-  Color color(BuildContext context) {
-    final ColorScheme scheme = Theme.of(context).colorScheme;
-    final bool isLight = scheme.brightness == Brightness.light;
+  Color color(
+    ColorScheme? scheme, {
+    Brightness brightness = Brightness.light,
+    bool? useMaterial3,
+  }) {
+    final bool isLight = scheme == null
+        ? brightness == Brightness.light
+        : scheme.brightness == Brightness.light;
 
     switch (this) {
       case FlexScaffoldBaseColor.lowestBase:
         return isLight ? Colors.white : Colors.black;
       case FlexScaffoldBaseColor.surface:
-        return scheme.surface;
+        return scheme?.surface ??
+            (isLight
+                ? useMaterial3 ?? true
+                    ? FlexColor.lightFlexSurface
+                    : FlexColor.materialLightScaffoldBackground
+                : useMaterial3 ?? true
+                    ? FlexColor.darkFlexSurface
+                    : FlexColor.materialDarkScaffoldBackground);
       case FlexScaffoldBaseColor.surfaceDim:
-        return scheme.surfaceDim;
+        return scheme?.surfaceDim ??
+            (isLight
+                ? FlexColor.lightFlexSurfaceDim
+                : FlexColor.darkFlexSurfaceDim);
       case FlexScaffoldBaseColor.surfaceBright:
-        return scheme.surfaceBright;
+        return scheme?.surfaceBright ??
+            (isLight
+                ? FlexColor.lightFlexSurfaceBright
+                : FlexColor.darkFlexSurfaceBright);
       case FlexScaffoldBaseColor.surfaceContainerLowest:
-        return scheme.surfaceContainerLowest;
+        return scheme?.surfaceContainerLowest ??
+            (isLight
+                ? FlexColor.lightFlexSurfaceContainerLowest
+                : FlexColor.darkFlexSurfaceContainerLowest);
       case FlexScaffoldBaseColor.surfaceContainerLow:
-        return scheme.surfaceContainerLow;
+        return scheme?.surfaceContainerLow ??
+            (isLight
+                ? FlexColor.lightFlexSurfaceContainerLow
+                : FlexColor.darkFlexSurfaceContainerLow);
       case FlexScaffoldBaseColor.surfaceContainer:
-        return scheme.surfaceContainer;
+        return scheme?.surfaceContainer ??
+            (isLight
+                ? FlexColor.lightFlexSurfaceContainer
+                : FlexColor.darkFlexSurfaceContainer);
       case FlexScaffoldBaseColor.surfaceContainerHigh:
-        return scheme.surfaceContainerHigh;
+        return scheme?.surfaceContainerHigh ??
+            (isLight
+                ? FlexColor.lightFlexSurfaceContainerHigh
+                : FlexColor.darkFlexSurfaceContainerHigh);
       case FlexScaffoldBaseColor.surfaceContainerHighest:
-        return scheme.surfaceContainerHighest;
+        return scheme?.surfaceContainerHighest ??
+            (isLight
+                ? FlexColor.lightFlexSurfaceContainerHighest
+                : FlexColor.darkFlexSurfaceContainerHighest);
+    }
+  }
+
+  /// Return the name of the enum value.
+  String name(bool isLight) {
+    switch (this) {
+      case FlexScaffoldBaseColor.lowestBase:
+        return isLight ? 'Lowest base (White)' : 'Lowest base (Black)';
+      case FlexScaffoldBaseColor.surface:
+        return 'Surface';
+      case FlexScaffoldBaseColor.surfaceDim:
+        return 'Surface dim';
+      case FlexScaffoldBaseColor.surfaceBright:
+        return 'Surface bright';
+      case FlexScaffoldBaseColor.surfaceContainerLowest:
+        return 'Surface container lowest';
+      case FlexScaffoldBaseColor.surfaceContainerLow:
+        return 'Surface container low';
+      case FlexScaffoldBaseColor.surfaceContainer:
+        return 'Surface container';
+      case FlexScaffoldBaseColor.surfaceContainerHigh:
+        return 'Surface container high';
+      case FlexScaffoldBaseColor.surfaceContainerHighest:
+        return 'Surface container highest';
     }
   }
 }
@@ -2993,6 +3050,7 @@ class FlexColorScheme with Diagnosticable {
       surfaceMode: surfaceMode ?? FlexSurfaceMode.level,
       blendLevel: blendLevel,
       schemeColors: effectiveColors,
+      scaffoldBaseColor: subTheme.scaffoldBackgroundBaseColor,
       blendColors: FlexSchemeSurfaceColors(
         surface: blendColor,
         surfaceDim: blendColor,
@@ -3021,9 +3079,13 @@ class FlexColorScheme with Diagnosticable {
               dialogBackground: useMaterial3
                   ? seedScheme.surfaceContainerHigh
                   : seedScheme.surface,
-              scaffoldBackground: useMaterial3
-                  ? seedScheme.surfaceContainerLowest
-                  : seedScheme.surface,
+              scaffoldBackground: subTheme.scaffoldBackgroundBaseColor?.color(
+                    seedScheme,
+                    useMaterial3: useMaterial3,
+                  ) ??
+                  (useMaterial3
+                      ? seedScheme.surfaceContainerLowest
+                      : seedScheme.surface),
             )
           // Colorscheme surfaces are used as starting point for blended ones.
           : colorScheme != null
@@ -3040,9 +3102,14 @@ class FlexColorScheme with Diagnosticable {
                   dialogBackground: useMaterial3
                       ? colorScheme.surfaceContainerHigh
                       : colorScheme.surface,
-                  scaffoldBackground: useMaterial3
-                      ? colorScheme.surfaceContainerLowest
-                      : colorScheme.surface,
+                  scaffoldBackground:
+                      subTheme.scaffoldBackgroundBaseColor?.color(
+                            colorScheme,
+                            useMaterial3: useMaterial3,
+                          ) ??
+                          (useMaterial3
+                              ? colorScheme.surfaceContainerLowest
+                              : colorScheme.surface),
                 )
               : null,
     );
@@ -5077,6 +5144,7 @@ class FlexColorScheme with Diagnosticable {
       surfaceMode: surfaceMode ?? FlexSurfaceMode.level,
       blendLevel: blendLevel,
       schemeColors: effectiveColors,
+      scaffoldBaseColor: subTheme.scaffoldBackgroundBaseColor,
       blendColors: FlexSchemeSurfaceColors(
         surface: blendColor,
         surfaceDim: blendColor,
@@ -5105,9 +5173,13 @@ class FlexColorScheme with Diagnosticable {
               dialogBackground: useMaterial3
                   ? seedScheme.surfaceContainerHigh
                   : seedScheme.surface,
-              scaffoldBackground: useMaterial3
-                  ? seedScheme.surfaceContainerLowest
-                  : seedScheme.surface,
+              scaffoldBackground: subTheme.scaffoldBackgroundBaseColor?.color(
+                    seedScheme,
+                    useMaterial3: useMaterial3,
+                  ) ??
+                  (useMaterial3
+                      ? seedScheme.surfaceContainerLowest
+                      : seedScheme.surface),
             )
           // Colorscheme surfaces are used as starting point for blended ones.
           : colorScheme != null
@@ -5124,9 +5196,14 @@ class FlexColorScheme with Diagnosticable {
                   dialogBackground: useMaterial3
                       ? colorScheme.surfaceContainerHigh
                       : colorScheme.surface,
-                  scaffoldBackground: useMaterial3
-                      ? colorScheme.surfaceContainerLowest
-                      : colorScheme.surface,
+                  scaffoldBackground:
+                      subTheme.scaffoldBackgroundBaseColor?.color(
+                            colorScheme,
+                            useMaterial3: useMaterial3,
+                          ) ??
+                          (useMaterial3
+                              ? colorScheme.surfaceContainerLowest
+                              : colorScheme.surface),
                 )
               : null,
     );

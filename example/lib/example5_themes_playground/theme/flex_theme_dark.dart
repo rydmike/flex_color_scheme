@@ -125,6 +125,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             blendOnLevel: controller.blendOnLevelDark,
             blendOnColors: controller.blendDarkOnColors,
             // Custom Scaffold background color.
+            scaffoldBackgroundBaseColor:
+                controller.scaffoldBackgroundDarkBaseColor,
             scaffoldBackgroundSchemeColor:
                 controller.scaffoldBackgroundDarkSchemeColor,
             // Text theme settings.

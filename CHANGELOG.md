@@ -60,13 +60,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **LESS CRITICAL TODOs**
 
-- **IN PROGRESS**: Add blend base color configuration for blended ScaffoldBackground color. It is currently locked to `surfaceContainerLowest` in M3 and `surface` in M2.
-  - The purpose is to be able to select the scaffold base, also used as blend input, from all new surface colors, as well as white in light theme and black in dark theme.
-  - We could then use `surfaceContainerLowest` as default in M2 as well, since you can st it to past surface if that is preferred, for same style as before. The diffs are quite subtle though.
-
 - **TODO**: Add foreground color to `SearchView` and `SearchBar` theme.
-
-   
 - **TODO**: More work on Chips. Have a few more things to try with them. Their theming is hopeless.
 - **TODO**: Review and maybe adjust the tints for the tinted text theme option a bit.
 - **TODO**: Study and potentially report **13 found new Flutter SDK theming issues**. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
@@ -325,6 +319,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `bottomAppBarHeight` property to `FlexSubThemesData` and made `FlexSubThemes.bottomAppBarTheme` use it as its `height` value.
 
 
+- Added `scaffoldBackgroundBaseColor` property to `FlexSubThemesData`. It is a `FlexScaffoldBaseColor` enum that can be used to select the base color used as `Themedata.scaffoldBackgroundColor` in a theme. The selected base color is modified by used `surfaceMode` and `blendLevel`] in the `FlexColorScheme`'s `light` and `dark` factory constructors.
 - Added `scaffoldBackgroundSchemeColor` property to `FlexSubThemesData` and made `ThemeData.scaffoldBackgroundColor` use it as an override color, if it is defined. Setting `scaffoldBackgroundSchemeColor` will override any blended background or true black or plain white setting.
 
 
@@ -388,8 +383,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The **Theme Code** view panel now has a toggle that allows you to generate the configured code for the theme as input suitable for a separate app theme file. It has static getters that you can use in your `MaterialApp`'s `theme` and `darkTheme`. 
    >**TIP:** You can modify this file and e.g., pass in controller that contains user-configurable settings for theme configuration properties and generate the theme on the fly in your app. This way you can let the user configure the theme in your app, a few props anyway. This is basically what the Playground app does with all theming properties. That is why you can see the result and impact of defined theme in the Playground app itself, as you modify the desired theme configuration in the app. 
 
-
-- Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
+- On the surface **Color Blends** settings panel, you can choose which surface color the scaffold background color will use as its starting point surface color and as base for the blend level and mode. You can also select any ColorScheme color and use it as an override for the scaffold background color. This will override any blended color result as well as the plain white and true black settings.
 
 
 - The **ColorScheme** settings panel got **five** new settings:
@@ -402,7 +396,6 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added customizable error colors to the custom scheme. Only available when **Use Material3 error colors** setting is **OFF**, when using the custom scheme on **Input Colors** and **ColorScheme** settings panels.
-
 - Added using error color as a seed color for error tonal palette in the **ColorScheme** settings panel. The tonal palette now also supports using a custom error color to generate its tonal palette. 
 - Added error color and error container color locking to the **ColorScheme** settings panel.  
 - Added code gen for custom error colors.
@@ -415,18 +408,18 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 
 - Added support for using MCU and FSS based seed generated `ColorScheme` variants using `FlexSchemeVariant`.
-- Added code gen for the new MCU and FSS scheme variants
+- Added code generation for the new MCU and FSS scheme variants.
   - For MCU based variants it uses `FlexColorScheme.variant` API with `FlexSchemeVariant` and for FSS based variants it uses `FlexColorScheme.tones` API with `FlexSchemeVariant` and its `tones` getter. 
   - The `FlexTones` modifiers only show up on FSS based variants with `FlexColorScheme.tones` API, as they are not available when using the `FlexColorScheme.variant` API.
 - Added the FFS seed option "Monochrome surfaces" introduced in package **FlexSeedScheme** 3.0.0.
 
- 
+
 - Added an **Apply ColorScheme to all Cupertino components** setting to the **Component Themes** settings panel
   - It toggles setting `cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true)` and generate code for it and applies the setting to the Playground app's theme as well.  
 - In the **Switch, Checkbox and Radio** settings panel, the **Switch** now has a platform adaptive theme setting for theming the Material `Switch` to look close to the iOS `CupertinoSwitch`.
 - On the surface **Color Blends** settings panel, you can now select a scheme color to use as the theme resulting **Scaffold Background** color. The selection is independent for light and dark theme mode.
 - Added separate controls and code gen for light and dark mode background color selection for the `BottomAppBar` on settings panel **BottomAppBar**.
-- Added divider color selection to **Dialogs** settings panel for the **DatePicker** divider color. Setting it to transparent will hide the divider in Material-3 mode, in Material-2 mode the Divider does not exist. Also added feature to allow selection of DatePicker header foreground color independently of the used background color. Previously it always used the contrast pair of the background color, which is still the default it you do not select a custom foreground color.  
+- Added divider color selection to **Dialogs** settings panel for the **DatePicker** divider color. Setting it to transparent will hide the divider in Material-3 mode, in Material-2 mode the Divider does not exist. Also added feature to allow selection of DatePicker header foreground color independently of the used background color. Previously it always used the contrast pair of the background color, which is still the default if you do not select a custom foreground color.  
 - Added the ability to change tab alignment in the **TabBar** settings panel.
 - In the **Floating Action Button** settings panel, added the ability to change the foreground color of FAB to something that is not its automatic on-color pair.
 
@@ -439,8 +432,12 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - The **ListTile** settings panel now includes a large number of theming controls for ListTile theming.
 - The **SearchBar** settings panel now includes theming controls for SearchBar and SearchView theming.
 - On the **Adaptive Theming** settings panel you can now also control the `MaterialTapTargetSize` setting.
-- The **Segmented Buttons** settings panel now includes a control for selected foreground colors for both `SegementedButton` and `ToggleButtons`. 
+- The **Segmented Buttons** settings panel now includes a control for selected foreground colors for both `SegementedButton` and `ToggleButtons`.
+- Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
+
+ 
 - The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
+
 
 
 **CHANGE**

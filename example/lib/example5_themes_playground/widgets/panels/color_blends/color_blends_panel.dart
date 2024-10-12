@@ -4,6 +4,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/scaffold_base_popup_menu.dart';
 import '../../shared/surfaces_seed_blend_color.dart';
 import 'dark_surface_mode_list_tile.dart';
 import 'dark_surface_mode_popup_menu.dart';
@@ -44,12 +45,32 @@ class ColorBlendsPanel extends StatelessWidget {
       'factor on Scaffold background color may not be a good fit. '
       'Choose one where it has a lower color blend factor.\n';
 
-  static const String _scaffoldColorInfo =
-      'New in version 8 is that you can select any ColorScheme color '
-      'to be used as the Scaffold background override color.\n'
+  static const String _scaffoldBaseInfo =
+      'You can select a base color to be used as the Scaffold background, '
+      'that is also used as input to the surface blending. In previous '
+      'versions it was fixed to default surface color, which are different '
+      'for Material-2 and Material-3 mode.\n'
+      '\n'
+      'The different base color selections allow you to have a more variation '
+      'in how the background looks with different surface blend levels. You '
+      'can also use White color as starting point in light theme mode and '
+      'Black color in dark theme mode.\n '
+      '\n'
+      'That starting base blend color now defaults to '
+      'surfaceContainerLowest in Material-3 mode and to surface in Material-2 '
+      'mode.\n'
+      '\n'
+      'If you use surface blends, but want the scaffold background color to '
+      'use a fixed color, you can select select a fixed '
+      '"Scaffold background override" color further below.\n';
+
+  static const String _scaffoldColorOverrideInfo =
+      'You can select any ColorScheme color '
+      'to be used as Scaffold background override color.\n'
       '\n'
       'Setting this color will override any blended Scaffold background and '
-      'also plain white and true black setting part that makes the scaffold '
+      'also the "Plain white" and "True black" setting part that makes the '
+      'scaffold background color '
       'white or black, the other parts of their impacts will remain in effect. '
       'You will see the effective color on the Scaffold background '
       'color box above.\n'
@@ -202,6 +223,15 @@ class ColorBlendsPanel extends StatelessWidget {
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
           SurfacesSeedBlendColorLight(controller),
+          ScaffoldBasePopupMenu(
+            enabled: enableControl,
+            title: const Text('Scaffold blend base'),
+            subtitleReveal: const Text(_scaffoldBaseInfo),
+            defaultLabel: 'surfaceContainerLowest',
+            defaultLabelM2: 'surface',
+            value: controller.scaffoldBackgroundLightBaseColor,
+            onChanged: controller.setScaffoldBackgroundLightBaseColor,
+          ),
           SwitchListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('Plain white'),
@@ -215,7 +245,7 @@ class ColorBlendsPanel extends StatelessWidget {
           ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Scaffold background override'),
-            subtitleReveal: const Text(_scaffoldColorInfo),
+            subtitleReveal: const Text(_scaffoldColorOverrideInfo),
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.lightIsWhite
@@ -232,6 +262,15 @@ class ColorBlendsPanel extends StatelessWidget {
           ),
         ] else ...<Widget>[
           SurfacesSeedBlendColorDark(controller),
+          ScaffoldBasePopupMenu(
+            enabled: enableControl,
+            title: const Text('Scaffold blend base'),
+            subtitleReveal: const Text(_scaffoldBaseInfo),
+            defaultLabel: 'surfaceContainerLowest',
+            defaultLabelM2: 'surface',
+            value: controller.scaffoldBackgroundDarkBaseColor,
+            onChanged: controller.setScaffoldBackgroundDarkBaseColor,
+          ),
           SwitchListTileReveal(
             enabled: controller.useFlexColorScheme,
             title: const Text('True black'),
@@ -246,7 +285,7 @@ class ColorBlendsPanel extends StatelessWidget {
           ColorSchemePopupMenu(
             enabled: enableControl,
             title: const Text('Scaffold background override'),
-            subtitleReveal: const Text(_scaffoldColorInfo),
+            subtitleReveal: const Text(_scaffoldColorOverrideInfo),
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.darkIsTrueBlack

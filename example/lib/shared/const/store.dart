@@ -263,6 +263,22 @@ sealed class Store {
   // Surface and blend SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the scaffoldBackgroundLightBaseColor value.
+  static const String keyScaffoldBackgroundLightBaseColor =
+      'scaffoldBackgroundLightBaseColor';
+  // Default value for the scaffoldBackgroundLightBaseColor, also used to
+  // reset settings.
+  static const FlexScaffoldBaseColor? defaultScaffoldBackgroundLightBaseColor =
+      null;
+
+  // Key used to read and save the scaffoldBackgroundDarkBaseColor value.
+  static const String keyScaffoldBackgroundDarkBaseColor =
+      'scaffoldBackgroundDarkBaseColor';
+  // Default value for the scaffoldBackgroundDarkBaseColor, also used to
+  // reset settings.
+  static const FlexScaffoldBaseColor? defaultScaffoldBackgroundDarkBaseColor =
+      null;
+
   // Key used to read and save the scaffoldBackgroundLightSchemeColor value.
   static const String keyScaffoldBackgroundLightSchemeColor =
       'scaffoldBackgroundLightSchemeColor';

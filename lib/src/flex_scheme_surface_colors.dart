@@ -1,11 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../flex_color_scheme.dart';
 import 'flex_alpha_values.dart';
-import 'flex_color.dart';
-import 'flex_extensions.dart';
-import 'flex_scheme_color.dart';
-import 'flex_surface_mode.dart';
 
 // ignore_for_file: comment_references
 
@@ -224,6 +221,9 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// `surfaceMode` defines surface starting colors otherwise.
     final FlexSchemeSurfaceColors? surfaceColors,
 
+    /// The base color for the scaffold background.
+    final FlexScaffoldBaseColor? scaffoldBaseColor,
+
     /// Flag indicating if surface default starting colors are for
     /// Material-3 or legacy Material-2.
     final bool useMaterial3 = true,
@@ -245,6 +245,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // colors are used as fallback colors.
     final FlexSchemeColor scheme = schemeColors ??
         (isLight ? FlexColor.material.light : FlexColor.material.dark);
+    // The scaffold base Color, if null use default.
+    final FlexScaffoldBaseColor scaffoldBase = scaffoldBaseColor ??
+        (useMaterial3
+            ? FlexScaffoldBaseColor.surfaceContainerLowest
+            : FlexScaffoldBaseColor.surface);
+
     // The color that should be blended into each surface, defaults to primary
     // color for all surfaces.
     FlexSchemeSurfaceColors blendColor = blendColors ??
@@ -288,9 +294,11 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 inverseSurface: useMaterial3
                     ? FlexColor.lightFlexInverseSurface
                     : FlexColor.darkFlexSurface,
-                scaffoldBackground: useMaterial3
-                    ? FlexColor.lightFlexSurfaceContainerLowest
-                    : FlexColor.materialLightScaffoldBackground,
+                scaffoldBackground: scaffoldBase.color(
+                  null,
+                  brightness: brightness,
+                  useMaterial3: useMaterial3,
+                ),
                 dialogBackground: useMaterial3
                     ? FlexColor.lightFlexSurfaceContainerHigh
                     : FlexColor.materialLightSurface,
@@ -311,9 +319,11 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                 inverseSurface: useMaterial3
                     ? FlexColor.darkFlexInverseSurface
                     : FlexColor.lightFlexSurface,
-                scaffoldBackground: useMaterial3
-                    ? FlexColor.darkFlexSurfaceContainerLowest
-                    : FlexColor.materialDarkScaffoldBackground,
+                scaffoldBackground: scaffoldBase.color(
+                  null,
+                  brightness: brightness,
+                  useMaterial3: useMaterial3,
+                ),
                 dialogBackground: useMaterial3
                     ? FlexColor.darkFlexSurfaceContainerHigh
                     : FlexColor.materialDarkSurface,
