@@ -12,7 +12,7 @@ import '../dialogs/dart_code_dialog_screen.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
 import 'model/theme_topic.dart';
-import 'topic_page.dart';
+import 'one_or_two_topic_page_view.dart';
 import 'two_topics_page.dart';
 import 'two_topics_vertical_page.dart';
 
@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage> {
             ? widget.controller.verticalMode
                 ? TwoTopicsVerticalPage(controller: widget.controller)
                 : TwoTopicsPage(controller: widget.controller)
-            : TopicPage(controller: widget.controller),
+            : OneOrTwoTopicPageView(controller: widget.controller),
       ),
     );
   }

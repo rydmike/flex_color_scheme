@@ -22,7 +22,7 @@ import 'widgets/topic_selector.dart';
 // I want to see in dev mode, unless it is too chatty.
 const bool _debug = !kReleaseMode && false;
 
-/// This is the single [Topic] PageView of the Playground.
+/// This is the one or two [Topic] PageView of the Playground.
 ///
 /// It shows one or two panels at a time, in a single [PageView].
 /// This is a nice layout on mid size screen, like tablets,
@@ -35,26 +35,28 @@ const bool _debug = !kReleaseMode && false;
 /// a) They are in the same PageView.
 /// b) They are in the same sliver custom scroll scroll view
 ///
-/// Despite this they do scroll semin independently as the one that has nothing
-/// more to scroll, will say put showing most of its content while the other
+/// Despite this they do scroll semi independently as the one that has nothing
+/// more to scroll, will stay put showing most of its content while the other
 /// side still scroll ups.
 ///
 /// On bigger screens it shows two panels side-by-side, where the left secondary
 /// one can be selected via a popup menu. This is a bit cumbersome, but takes
 /// up very little space. See the [TwoTopicsPage] for one that features
-/// own vertical topic selectors for each panel.
-class TopicPage extends StatefulWidget {
-  const TopicPage({
+/// own vertical topic selectors for each panel. Which gets used on bigger
+/// screens.
+class OneOrTwoTopicPageView extends StatefulWidget {
+  const OneOrTwoTopicPageView({
     super.key,
     required this.controller,
   });
   final ThemeController controller;
 
   @override
-  State<TopicPage> createState() => _TopicPageState();
+  State<OneOrTwoTopicPageView> createState() => _OneOrTwoTopicPageViewState();
 }
 
-class _TopicPageState extends State<TopicPage> with TickerProviderStateMixin {
+class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
+    with TickerProviderStateMixin {
   late final PageController pageController;
   late final ScrollController scrollController;
   late int previousPage;
