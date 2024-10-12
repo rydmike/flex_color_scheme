@@ -286,8 +286,8 @@ enum FlexFixedColorStyle {
 /// in the [FlexColorScheme] factory constructors.
 ///
 /// By using different base colors you can create alpha blended scaffold
-/// background colors with even more variation as they are mixed with the
-/// blend color but start at different base colors.
+/// background colors with even more variation, as they are mixed with the
+/// blend color, but start at different base colors.
 ///
 /// If you do not want to get any blend in the Scaffold background color, but
 /// otherwise want to use surface blends with [blendLevel] > 0, you can
