@@ -254,6 +254,7 @@ class _ThemePanelView extends StatelessWidget {
       // We get double implicit scrollbars and that causes issues with the
       // scroll controller, this removes it, we don't need one here.
       return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ScrollConfiguration(
             behavior: const NoScrollbarBehavior(),
@@ -261,24 +262,28 @@ class _ThemePanelView extends StatelessWidget {
             // vertically as a part of the NestedScroll view the PageView is
             // included in, but by itself. We need the ListView to allow
             // its page content to grow beyond the visible page.
+            // TODO(rydmike): Evaluating SingleChildScrollView vs ListView
+            // The content is always fixed and known amount of widgets, but
+            // always a single child, so a ListView is not needed, trying the
+            // the SingleChildScrollView instead. Which for use cases
+            // with only a few items, or just one, like this case, may be
+            // faster. This test started Oct 12, 2024.
             child: Expanded(
-              child: ListView(
+              child: SingleChildScrollView(
                 padding: EdgeInsetsDirectional.fromSTEB(
                   margins,
                   0,
                   showSecondPage ? 0 : margins,
                   margins + bottomPadding,
                 ),
-                children: <Widget>[
-                  HeaderCard(
-                    endStraight: showSecondPage,
-                    title: Text(themeTopics[leftPageIndex].heading),
-                    info: themeTopics[leftPageIndex].info,
-                    leading:
-                        Icon(themeTopics[leftPageIndex].icon, color: iconColor),
-                    child: Panel(leftPageIndex, controller),
-                  ),
-                ],
+                child: HeaderCard(
+                  endStraight: showSecondPage,
+                  title: Text(themeTopics[leftPageIndex].heading),
+                  info: themeTopics[leftPageIndex].info,
+                  leading:
+                      Icon(themeTopics[leftPageIndex].icon, color: iconColor),
+                  child: Panel(leftPageIndex, controller),
+                ),
               ),
             ),
           ),
@@ -289,30 +294,29 @@ class _ThemePanelView extends StatelessWidget {
             ),
           if (showSecondPage)
             Expanded(
-              child: ListView(
-                  controller: ScrollController(),
-                  primary: false,
-                  padding: EdgeInsetsDirectional.fromSTEB(
-                    0,
-                    0,
-                    margins,
-                    margins + bottomPadding,
+              child: SingleChildScrollView(
+                controller: ScrollController(),
+                primary: false,
+                padding: EdgeInsetsDirectional.fromSTEB(
+                  0,
+                  0,
+                  margins,
+                  margins + bottomPadding,
+                ),
+                child: HeaderCard(
+                  startStraight: true,
+                  title: Text(themeTopics[sideViewIndex].heading),
+                  info: themeTopics[sideViewIndex].info,
+                  leading:
+                      Icon(themeTopics[sideViewIndex].icon, color: iconColor),
+                  trailing: _SelectSidePanelView(
+                    index: sideViewIndex,
+                    onChanged: controller.setSideViewIndex,
+                    iconColor: iconColor,
                   ),
-                  children: <Widget>[
-                    HeaderCard(
-                      startStraight: true,
-                      title: Text(themeTopics[sideViewIndex].heading),
-                      info: themeTopics[sideViewIndex].info,
-                      leading: Icon(themeTopics[sideViewIndex].icon,
-                          color: iconColor),
-                      trailing: _SelectSidePanelView(
-                        index: sideViewIndex,
-                        onChanged: controller.setSideViewIndex,
-                        iconColor: iconColor,
-                      ),
-                      child: Panel(sideViewIndex, controller),
-                    ),
-                  ]),
+                  child: Panel(sideViewIndex, controller),
+                ),
+              ),
             )
         ],
       );
