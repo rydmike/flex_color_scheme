@@ -28,9 +28,9 @@ class IconButtonAvatarPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
         .copyWith(color: theme.colorScheme.onSurfaceVariant);
-    final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
@@ -85,20 +85,22 @@ class IconButtonAvatarPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'The new M3 style toggleable IconButtons, shown '
+                  text: 'The Material-3 style toggleable IconButtons, shown '
                       'above and in the ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsM3IconButtonGuide,
-                  text: 'M3 guide here',
+                  text: 'Material-3 guide here',
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', are available via own constructors in Flutter 3.10. '
+                  text: ', are available via own constructors in already in '
+                      'Flutter 3.10. '
                       'With current IconButton theming, only one '
-                      'style is offered and thus only one of the M3 styles '
-                      'can be made with theming, the default styles are '
+                      'style is offered and thus only one of the Material-3 '
+                      'styles '
+                      'can be made with theming. The default styles are '
                       'therefore kept as they are.\n'
                       '\n'
                       'The constructors for above IconButtons are not '

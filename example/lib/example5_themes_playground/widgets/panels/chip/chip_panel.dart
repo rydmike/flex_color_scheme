@@ -30,9 +30,9 @@ class ChipPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
         .copyWith(color: theme.colorScheme.onSurfaceVariant);
-    final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
