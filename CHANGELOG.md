@@ -63,7 +63,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
     - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
     
 
-**DONE CRITICAL TODOS**
+**COMPLETED CRITICAL CHANGES**
  
 * **DONE**: Consider what to do with surfaceTint removal.
   * It is basically obsolete now in Flutter 3.22 and later.
@@ -78,7 +78,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 * **DONE**: Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
 
 * **DONE**: In Material-3 mode, consider more breaking default value changes to clean up the past opinionated API and make it more aligned with Flutter's Material-3 defaults. 
-  * Old Material-2 mode will keep its opinionated default values that largely emulate Material-3 styles. This remains the FCS Material-2 mode design intent. However, FCS originally had many own styles for Material-3 mode defaults too, because they were made before the specs were available. These have gradually been removed to use actual Material-3 defaults instead as starting point.
+  * Old Material-2 mode will keep its opinionated default values that largely emulate Material-3 styles. This remains the FCS Material-2 mode design intent. However, FCS originally had many own styles for Material-3 mode defaults too, because they were made before the specs were available. These have gradually been removed to use actual Material-3 defaults instead as its starting point.
   * The Playground will, where it makes sense, keep some of its own default settings, but the package should align with Flutter's Material-3 defaults when possible.
   * After the changes, some defaults still have subtle opinionated difference, but the majority are now using Flutter's Material-3 defaults, which are not always Material-3 spec-correct, mostly they are though. 
     * **Tooltip** and **Snackbar** keep their opinionated defaults in FCS for now, because they offer a nice optional default style that is otherwise not available. It is straightforward to make them exactly like Material-3 default. There is guidance in the Playground app on how to do this via their info reveal buttons.
