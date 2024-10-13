@@ -1,4 +1,7 @@
-# This GitHub action runs on a release, when the GitHub repo is "published".
+# This GitHub Action is for DEV build and WEB deploy!!
+# This GitHub action typically runs on a release, when the GitHub repo is
+#  "published", but it is only activated manually by setting required triggers.
+#
 # This workflow:
 #  - Installs dart and flutter
 #  - Uses flutter stable channel.
@@ -9,21 +12,29 @@
 #  - Show outdated packages, just added for info.
 #  - Verify that dart format is used by all committed code, fails if not.
 #    Controversial but pub.dev penalizes you if dart format is not used.
-#  - Run all tests with coverage.
-#  - Upload code coverage output to Codecov for analysis.
 #  - Build Playground only, use these steps:
 #    - Flutter clean.
 #    - Flutter build web app, in release mode and with canvaskit renderer.
-#    - Deploy each built Web App to GitHub pages.
-name: Deploy_Playground
+#    - Deploy to GitHub pages.
+# For dev releases, the workflow excludes running test and uploading code
+# coverage data.
+name: Deploy_Dev
 on:
   push:
     branches: [none]
     paths-ignore:
      - "**.md"
+  pull_request:
+    branches: [none]
+    paths-ignore:
+      - "**.md"
+  release:
+    branches: [version-8-0-0]
+    types: [published]
+
 jobs:
   flutter_tests:
-    name: "Analyze and test package, then build and deploy Playground only"
+    name: "Analyze and test package, then build and deploy 5 web apps"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -45,26 +56,19 @@ jobs:
         run: flutter pub outdated
       - name: "Verify that Dart formatting is used, fail if not"
         run: dart format --output=none --set-exit-if-changed .
-      - name: "Test package FlexColorScheme with coverage"
-        run: flutter test --coverage
-      - name: "Upload test coverage to Codecov"
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: coverage/lcov.info
 
       # Example 5 Themes playground - Build and deploy
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-5 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-latest/" --release -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-dev/" --release -t lib/example5_themes_playground/main.dart
       - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/themesplayground-latest'
+          destination_folder: 'flexcolorscheme/themesplayground-dev'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
