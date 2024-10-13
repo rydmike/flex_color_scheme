@@ -2278,23 +2278,9 @@ String generateThemeDartCode(ThemeController controller) {
       flexTonesDark = '$flexTonesDark$higherContrastFixed'
           '$monochromeSurfacesDark$onMainsUseBWDark$onSurfacesUseBWDark'
           '$surfacesUseBWDark';
-      if (controller.higherContrastFixed ||
-          controller.useMonoSurfacesLight ||
-          controller.onMainsUseBWLight ||
-          controller.onSurfacesUseBWLight ||
-          controller.surfacesUseBWLight) {
-        flexTonesLight = '$flexTonesLight,';
-      }
-      if (controller.higherContrastFixed ||
-          controller.useMonoSurfacesDark ||
-          controller.onMainsUseBWDark ||
-          controller.onSurfacesUseBWDark ||
-          controller.surfacesUseBWDark) {
-        flexTonesDark = '$flexTonesDark,';
-      }
     }
-    if (flexTonesLight != '') flexTonesLight = '$flexTonesLight\n';
-    if (flexTonesDark != '') flexTonesDark = '$flexTonesDark\n';
+    if (flexTonesLight != '') flexTonesLight = '$flexTonesLight,\n';
+    if (flexTonesDark != '') flexTonesDark = '$flexTonesDark,\n';
   }
 
   //
@@ -2375,7 +2361,6 @@ String generateThemeDartCode(ThemeController controller) {
           '$swapLegacyOnMaterial3'
           '  );\n'
           '}\n'
-          '\n'
       : '// Theme setup for FlexColorScheme package v${App.versionMajor}.\n'
           '// Use same major flex_color_scheme package version. If you use a\n'
           '// lower minor version, some properties may not be supported.\n'
