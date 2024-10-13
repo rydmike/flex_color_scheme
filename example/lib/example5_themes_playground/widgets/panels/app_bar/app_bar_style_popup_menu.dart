@@ -122,30 +122,29 @@ class AppBarStylePopupMenu extends StatelessWidget {
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
-        return 'primary\n(M2 light default)';
+        return 'Primary\n(M2 light default)';
       case FlexAppBarStyle.material:
         return isLight
-            ? 'white\n(M2 light surface spec)'
-            : 'dark grey #121212\n(M2 dark spec  default)';
+            ? 'Material white\n(M2 light spec)'
+            : 'Material #121212\n(M2 dark spec)';
       case FlexAppBarStyle.surface:
-        return 'surface${isBlended ? ', with blend\n' : ' '}(M3 spec '
-            'and default)';
+        return 'Surface${isBlended ? '\nwith blend (M3 spec)' : ''}';
       case FlexAppBarStyle.background:
-        return 'surfaceContainerLow${isBlended ? ',\nwith blend' : ''}';
+        return 'SurfaceContainerLow${isBlended ? '\nwith blend' : ''}';
       case FlexAppBarStyle.scaffoldBackground:
-        return 'scaffoldBackground${isBlended ? ',\nwith blend' : ''}';
+        return 'ScaffoldBackground${isBlended ? '\nwith blend' : ''}';
       case FlexAppBarStyle.custom:
         return 'Custom';
       case null:
         {
           if (useMaterial3) {
-            return 'Default (surface)${isBlended ? ',\n'
+            return 'Default (surface)${isBlended ? '\n'
                 'with blend ' : '\n'}(M3 spec)';
           } else {
             if (isLight) {
-              return 'Default (primary)\n(M2 spec)';
+              return 'Default primary\n(M2 spec)';
             } else {
-              return 'Default (dark grey)\n(#121212, M2 spec))';
+              return 'Default #121212\n(M2 spec)';
             }
           }
         }

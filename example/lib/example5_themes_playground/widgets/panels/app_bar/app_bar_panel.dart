@@ -90,21 +90,21 @@ class AppBarPanel extends StatelessWidget {
       FlexAppBarStyle.material ||
       FlexAppBarStyle.surface ||
       FlexAppBarStyle.background =>
-        useMaterial3 ? 'onSurface' : 'Black opacity 87%',
+        'onSurface',
       FlexAppBarStyle.scaffoldBackground =>
         appBarNeedsLight ? 'surface' : 'onSurface',
       FlexAppBarStyle.custom => 'surface',
-      _ => useMaterial3 ? 'onSurface' : 'White',
+      _ => useMaterial3 ? 'onSurface' : 'onPrimary',
     };
     final String leadingIconDark = switch (controller.appBarStyleDark) {
       FlexAppBarStyle.primary => 'onPrimary',
       FlexAppBarStyle.material ||
       FlexAppBarStyle.surface ||
       FlexAppBarStyle.background =>
-        useMaterial3 ? 'onSurface' : 'white',
+        'onSurface',
       FlexAppBarStyle.scaffoldBackground =>
         appBarNeedsLight ? 'onSurface' : 'surface',
-      _ => useMaterial3 ? 'onSurface' : 'White',
+      _ => 'onSurface',
     };
     // Action icon on color defaults
     final String actionIconLight = switch (controller.appBarStyleLight) {
@@ -112,18 +112,24 @@ class AppBarPanel extends StatelessWidget {
       FlexAppBarStyle.material ||
       FlexAppBarStyle.surface ||
       FlexAppBarStyle.background =>
-        useMaterial3 ? 'onSurfaceVariant' : 'Black opacity 87%',
-      FlexAppBarStyle.scaffoldBackground =>
-        appBarNeedsLight ? 'surface' : 'onSurface',
+        useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
+      FlexAppBarStyle.scaffoldBackground => appBarNeedsLight
+          ? 'surface'
+          : useMaterial3
+              ? 'onSurfaceVariant'
+              : 'onSurface',
       FlexAppBarStyle.custom => 'surface',
-      _ => useMaterial3 ? 'onSurfaceVariant' : 'White',
+      _ => useMaterial3 ? 'onSurfaceVariant' : 'onPrimary',
     };
     final String actionIconDark = switch (controller.appBarStyleDark) {
       FlexAppBarStyle.primary => 'onPrimary',
       FlexAppBarStyle.custom => 'surface',
-      FlexAppBarStyle.scaffoldBackground =>
-        appBarNeedsLight ? 'onSurface' : 'surface',
-      _ => useMaterial3 ? 'onSurfaceVariant' : 'White',
+      FlexAppBarStyle.scaffoldBackground => appBarNeedsLight
+          ? useMaterial3
+              ? 'onSurfaceVariant'
+              : 'onSurface'
+          : 'surface',
+      _ => useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
     };
 
     return Column(

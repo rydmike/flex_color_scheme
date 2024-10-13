@@ -3373,7 +3373,12 @@ class FlexColorScheme with Diagnosticable {
         );
 
     // Determine the effective scaffold background color.
-    final Color effectiveScaffoldColor = scaffoldBackground ??
+    final Color effectiveScaffoldColor = (useSubThemes &&
+                subTheme.scaffoldBackgroundSchemeColor != null
+            ? FlexSubThemes.schemeColor(
+                subTheme.scaffoldBackgroundSchemeColor!, effectiveColorScheme)
+            : null) ??
+        scaffoldBackground ??
         (lightIsWhite ? Colors.white : surfaceSchemeColors.scaffoldBackground);
 
     // Determine the effective AppBar color:
@@ -5467,14 +5472,15 @@ class FlexColorScheme with Diagnosticable {
 
     // If darkIsTrueBlack is set, we use black as default scaffold background,
     // otherwise provided value or if null effective scheme background.
-    final Color effectiveScaffoldColor = scaffoldBackground ??
+    final Color effectiveScaffoldColor = (useSubThemes &&
+                subTheme.scaffoldBackgroundSchemeColor != null
+            ? FlexSubThemes.schemeColor(
+                subTheme.scaffoldBackgroundSchemeColor!, effectiveColorScheme)
+            : null) ??
+        scaffoldBackground ??
         (darkIsTrueBlack
             ? Colors.black
-            : subTheme.scaffoldBackgroundSchemeColor != null
-                ? FlexSubThemes.schemeColor(
-                    subTheme.scaffoldBackgroundSchemeColor!,
-                    effectiveColorScheme)
-                : surfaceSchemeColors.scaffoldBackground);
+            : surfaceSchemeColors.scaffoldBackground);
 
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
@@ -6921,21 +6927,25 @@ class FlexColorScheme with Diagnosticable {
     final Color appBarForeground = appBarForegroundColor();
     // M2 Icons are slightly black transparent in light mode!
     // But white in dark mode. This per SDK, the constants are from Flutter.
-    Color appBarIconColor =
-        appBarNeedsLight ? kDefaultIconLightColor : kDefaultIconDarkColor;
-    Color appBarActionIconColor = appBarIconColor;
-    // M3 does its defaults a bit differently.
-    if (useMaterial3) {
-      appBarIconColor = colorScheme.onSurface;
-      appBarActionIconColor = colorScheme.onSurfaceVariant;
-    }
+    Color appBarIconColor = colorScheme.onSurface;
+    Color appBarActionIconColor =
+        useMaterial3 ? colorScheme.onSurfaceVariant : colorScheme.onSurface;
+
     // If the appBarForeground color is NOT using the default colors
-    // then appBarIconColor and appBarActionIconColor should use them as well,
-    // but otherwise they use their default colors set above.
-    if (appBarForeground.withAlpha(0xFF) != colorScheme.onSurface &&
-        appBarForeground.withAlpha(0xFF) != colorScheme.onPrimary &&
-        appBarForeground.withAlpha(0xFF) != colorScheme.surface) {
+    // then appBarIconColor and appBarActionIconColor should use them as well
+    // if they are not customized, otherwise they use default colors set above.
+    if (effectiveAppBarColor.withAlpha(0xFF) == colorScheme.primary ||
+        appBarForeground.withAlpha(0xFF) == colorScheme.surface ||
+        (useSubThemes &&
+            subTheme.appBarBackgroundSchemeColor != null &&
+            subTheme.appBarIconSchemeColor == null)) {
       appBarIconColor = appBarForeground;
+    }
+    if (effectiveAppBarColor.withAlpha(0xFF) == colorScheme.primary ||
+        appBarForeground.withAlpha(0xFF) == colorScheme.surface ||
+        (useSubThemes &&
+            subTheme.appBarBackgroundSchemeColor != null &&
+            subTheme.appBarActionsIconSchemeColor == null)) {
       appBarActionIconColor = appBarForeground;
     }
     // Unless they have given override values in
