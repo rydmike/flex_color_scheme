@@ -33,11 +33,11 @@ You can also opt in on using FlexColorScheme's component theme customization fea
   </tr>
 </table>
 
-When you opt in on using the component themes in Material-2 mode, the border radius on components default to the Material-3 more rounded design. In Material-3, the radius varies by widget type, as specified by the [Material-3 Guide](https://m3.material.io/). You can keep this or set the shared global widget radius to a value you prefer. You can also set the themed border radius per widget and override the defaults or the global radius value you defined. 
+When you enable component themes in Material-2 mode, the border radius on components default to the Material-3 more rounded design. In Material-3, the radius varies by widget type, as specified by the [Material-3 Guide](https://m3.material.io/). You can keep this or set the shared global widget radius to a value you prefer. You can also set the themed border radius per widget and override the defaults or the global radius value you defined. 
 
 ### Material-3
 
-As in Flutter's `ThemeData`, Material-3 mode is enabled by default in **FlexColorScheme** V8 and later. The Material-3 mode component theming defaults are far less opinionated than Material-2 defaults. **FlexColorScheme** V8 and later use Material-3 defaults as starting point for its component themes and seeded `ColorScheme` generation. It has many quick settings to customize Material-3 to fit your application's design goals.
+As in Flutter's `ThemeData`, Material-3 mode is enabled by default in **FlexColorScheme** V8 and later. The Material-3 mode component theme defaults are far less opinionated than the Material-2 defaults. In **FlexColorScheme** V8 and later, enabling component themes use almost only Material-3 defaults as starting points for component styles and seeded `ColorScheme` generation. With the large number of component theme settings, you can quickly customize Material-3 to fit your application's design goals.
 
 Since Flutter **3.7 and later**, using Material-3 design is production ready. Some minor issues may always exist. Please refer to the FlexColorScheme docs [known issues](https://docs.flexcolorscheme.com/known_issues) chapter for more information on the status of known **theming** issues in Flutter, and to which versions they apply.
 
