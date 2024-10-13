@@ -4,9 +4,9 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../shared/use_tinted_text_theme.dart';
 import 'use_app_font_switch_list_tile.dart';
 import 'use_material3_typography.dart';
+import 'use_tinted_text_theme.dart';
 
 class PrimaryTextThemePanel extends StatefulWidget {
   const PrimaryTextThemePanel(this.controller, {super.key});

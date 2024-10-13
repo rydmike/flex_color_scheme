@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../shared/use_tinted_text_theme.dart';
 import 'use_app_font_switch_list_tile.dart';
 import 'use_material3_typography.dart';
+import 'use_tinted_text_theme.dart';
 
 class TextThemePanel extends StatefulWidget {
   const TextThemePanel(this.controller, {super.key});

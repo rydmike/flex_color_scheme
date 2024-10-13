@@ -939,6 +939,20 @@ sealed class FlexSubThemes {
     /// [Colors.black54] in light mode and [Colors.white70] in dark.
     final SchemeColor? unselectedIconSchemeColor,
 
+    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+    // An alternative unselected item color.
+    //
+    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
+    // before its normal default fallbacks.
+    //
+    // The color is typically used to provide the color created by blended or
+    // tinted text theme, when it is being used by FlexColorScheme as an
+    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
+    //
+    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
+    // a blended TextTheme is being used.
+    // final Color? altUnselectedColor,
+
     /// If true, the unselected icon in the [BottomNavigationBar] use a more
     /// muted color version of the color defined by
     /// [bottomNavigationBarUnselectedIconSchemeColor].
@@ -4398,9 +4412,11 @@ sealed class FlexSubThemes {
       selectedColor: selectedColor,
       iconColor: iconColor,
       textColor: textColor,
+      //
       titleTextStyle: titleTextStyle,
       subtitleTextStyle: subtitleTextStyle,
       leadingAndTrailingTextStyle: leadingAndTrailingTextStyle,
+      //
       tileColor: tileColor,
       selectedTileColor: selectedTileColor,
       contentPadding: contentPadding,
@@ -4883,6 +4899,21 @@ sealed class FlexSubThemes {
     /// [ColorScheme.onSurfaceVariant] in M3 mode.
     final SchemeColor? unselectedLabelSchemeColor,
 
+    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+    //
+    // An alternative unselected item color.
+    //
+    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
+    // before its normal default fallbacks.
+    //
+    // The color is typically used to provide the color created by blended or
+    // tinted text theme, when it is being used by FlexColorScheme as an
+    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
+    //
+    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
+    // a blended TextTheme is being used.
+    // final Color? altUnselectedColor,
+
     /// If true, the unselected label in the [NavigationBar] use a more
     /// muted color version of the color defined by
     /// [unselectedLabelSchemeColor].
@@ -5269,6 +5300,21 @@ sealed class FlexSubThemes {
     /// [backgroundSchemeColor].
     final SchemeColor? unselectedItemSchemeColor,
 
+    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+    //
+    // An alternative unselected item color.
+    //
+    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
+    // before its normal default fallbacks.
+    //
+    // The color is typically used to provide the color created by blended or
+    // tinted text theme, when it is being used by FlexColorScheme as an
+    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
+    //
+    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
+    // a blended TextTheme is being used.
+    // final Color? altUnselectedColor,
+
     /// Overrides the default value of [NavigationDrawer.shadowColor].
     final Color? shadowColor,
 
@@ -5472,6 +5518,21 @@ sealed class FlexSubThemes {
     /// This is a spec BUG in Flutter's Material-3 defaults, it should be
     /// onSurfaceVariant. See issue: <add new issue link here>
     final SchemeColor? unselectedLabelSchemeColor,
+
+    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+    //
+    // An alternative unselected item color.
+    //
+    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
+    // before its normal default fallbacks.
+    //
+    // The color is typically used to provide the color created by blended or
+    // tinted text theme, when it is being used by FlexColorScheme as an
+    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
+    //
+    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
+    // a blended TextTheme is being used.
+    // final Color? altUnselectedColor,
 
     /// If true, the unselected label in the [NavigationRail] use a more
     /// muted color version of the color defined by

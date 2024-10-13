@@ -385,15 +385,16 @@ sealed class Store {
   // Default value for the blendDarkOnColors, also to reset settings.
   static const bool defaultBlendDarkOnColors = true;
 
-  // Key used to read and save the blendLightTextTheme value.
-  static const String keyBlendLightTextTheme = 'blendLightTextTheme';
-  // Default value for the blendLightTextTheme, also to reset settings.
-  static const bool defaultBlendLightTextTheme = false;
-
-  // Key used to read and save the blendDarkTextTheme value.
-  static const String keyBlendDarkTextTheme = 'blendDarkTextTheme';
-  // Default value for the blendDarkTextTheme, also to reset settings.
-  static const bool defaultBlendDarkTextTheme = false;
+  // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+  // // Key used to read and save the blendLightTextTheme value.
+  // static const String keyBlendLightTextTheme = 'blendLightTextTheme';
+  // // Default value for the blendLightTextTheme, also to reset settings.
+  // static const bool defaultBlendLightTextTheme = false;
+  //
+  // // Key used to read and save the blendDarkTextTheme value.
+  // static const String keyBlendDarkTextTheme = 'blendDarkTextTheme';
+  // // Default value for the blendDarkTextTheme, also to reset settings.
+  // static const bool defaultBlendDarkTextTheme = false;
 
   // Material 3 and Seed ColorScheme SETTINGS.
   // ===========================================================================

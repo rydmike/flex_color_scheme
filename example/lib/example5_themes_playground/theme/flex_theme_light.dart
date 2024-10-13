@@ -164,7 +164,8 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // turn this off, or make custom text themes for those surfaces.
             // Material3 has containers with matching on colors too, they work
             // great for contrast colored text, do use them too.
-            blendTextTheme: controller.blendLightTextTheme,
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: controller.blendLightTextTheme,
             useMaterial3Typography: controller.useMaterial3Typography,
             // Divider settings
             useM2StyleDividerInM3: controller.useM2StyleDividerInM3,

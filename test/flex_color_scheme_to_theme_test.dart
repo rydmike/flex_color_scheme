@@ -5587,7 +5587,8 @@ void main() {
         primaryTextTheme: testText,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: false,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -5777,8 +5778,9 @@ void main() {
         textTheme: testText,
         primaryTextTheme: testText,
         subThemesData: const FlexSubThemesData(
-          blendTextTheme: true,
-        ),
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: true,
+            ),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -5973,7 +5975,8 @@ void main() {
         primaryTextTheme: testText,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: true,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -6165,7 +6168,10 @@ void main() {
         useMaterial3: true,
         textTheme: testText,
         primaryTextTheme: testText,
-        subThemesData: const FlexSubThemesData(blendTextTheme: true),
+        subThemesData: const FlexSubThemesData(
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: true,
+            ),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -6601,7 +6607,10 @@ void main() {
         useMaterial3: true,
         textTheme: tLText,
         primaryTextTheme: tDText,
-        subThemesData: const FlexSubThemesData(blendTextTheme: true),
+        subThemesData: const FlexSubThemesData(
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: true,
+            ),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -6790,7 +6799,10 @@ void main() {
         useMaterial3: true,
         textTheme: tDText,
         primaryTextTheme: tLText,
-        subThemesData: const FlexSubThemesData(blendTextTheme: true),
+        subThemesData: const FlexSubThemesData(
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: true,
+            ),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -6995,7 +7007,8 @@ void main() {
         primaryTextTheme: gTextTheme,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: false,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -7199,8 +7212,9 @@ void main() {
         textTheme: gTextTheme,
         primaryTextTheme: gTextTheme,
         subThemesData: const FlexSubThemesData(
-          blendTextTheme: true,
-        ),
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: true,
+            ),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -7409,7 +7423,8 @@ void main() {
         primaryTextTheme: gTextTheme,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: true,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -7615,7 +7630,10 @@ void main() {
         useMaterial3: true,
         textTheme: gTextTheme,
         primaryTextTheme: gTextTheme,
-        subThemesData: const FlexSubThemesData(blendTextTheme: true),
+        subThemesData: const FlexSubThemesData(
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: true,
+            ),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;

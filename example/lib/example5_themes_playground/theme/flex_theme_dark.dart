@@ -130,7 +130,8 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             scaffoldBackgroundSchemeColor:
                 controller.scaffoldBackgroundDarkSchemeColor,
             // Text theme settings.
-            blendTextTheme: controller.blendDarkTextTheme,
+            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
+            // blendTextTheme: controller.blendDarkTextTheme,
             useMaterial3Typography: controller.useMaterial3Typography,
             // Divider settings
             useM2StyleDividerInM3: controller.useM2StyleDividerInM3,

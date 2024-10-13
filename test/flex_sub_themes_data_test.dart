@@ -17,7 +17,8 @@ void main() {
       interactionEffects: true,
       tintedDisabledControls: true,
       blendOnColors: true,
-      blendTextTheme: false,
+      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+      // blendTextTheme: false,
       useM2StyleDividerInM3: false,
       unselectedToggleIsColored: false,
       sliderValueTinted: false,
@@ -41,7 +42,8 @@ void main() {
       interactionEffects: true,
       tintedDisabledControls: true,
       blendOnColors: true,
-      blendTextTheme: false,
+      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+      // blendTextTheme: false,
       useM2StyleDividerInM3: false,
       unselectedToggleIsColored: false,
       sliderValueTinted: false,
@@ -66,7 +68,8 @@ void main() {
       interactionEffects: false,
       tintedDisabledControls: false,
       blendOnColors: true,
-      blendTextTheme: false,
+      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+      // blendTextTheme: false,
       useM2StyleDividerInM3: true,
       unselectedToggleIsColored: true,
       sliderValueTinted: true,
@@ -186,7 +189,8 @@ void main() {
       splashType: FlexSplashType.inkRipple,
       splashTypeAdaptive: FlexSplashType.instantSplash,
       //
-      blendTextTheme: true,
+      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+      // blendTextTheme: true,
       useMaterial3Typography: false,
       useM2StyleDividerInM3: true,
       //

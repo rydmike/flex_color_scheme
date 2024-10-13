@@ -28,7 +28,8 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -68,7 +69,8 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -108,7 +110,8 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -145,7 +148,8 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -180,7 +184,8 @@ void main() {
         ),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondary,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -202,7 +207,8 @@ void main() {
         appBarBackground: const Color(0xFF3DA3C2),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondary,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -223,7 +229,8 @@ void main() {
         ),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.tertiary,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -245,7 +252,8 @@ void main() {
         appBarBackground: const Color(0xFF30454C),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.tertiary,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -268,7 +276,8 @@ void main() {
           navigationRailIndicatorSchemeColor: SchemeColor.onTertiary,
           navigationBarIndicatorOpacity: 0.8,
           navigationBarIndicatorSchemeColor: SchemeColor.primaryContainer,
-          blendTextTheme: true,
+          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
