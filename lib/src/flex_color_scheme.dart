@@ -6527,256 +6527,261 @@ class FlexColorScheme with Diagnosticable {
     // always get correct contrast color to be used on primary color.
     defPrimaryText = defPrimaryText.merge(pPrimTextTheme);
 
+    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+    //  Keeping it around for a while in case we can bring it back later.
+    //
     // We are using sub themes and blend colors on text themes. If surfaces and
     // background are not set to use blends, the effect will be slightly
     // different, a bit less colorful, but only very marginally.
-    if (useSubThemes && subTheme.blendTextTheme) {
-      // Calculate colors for the different TextStyles, color blend strength are
-      // inline with opacities on the 2014/2018 typographies.
-      // For main text theme we are using surface tint instead of primary,
-      // normally it defaults to primary, but if it is customized we should base
-      // tinted text theme on it instead.
-      Color blendText(Color? color, int blend, int alpha) {
-        final Color baseColor = color ?? (isDark ? Colors.white : Colors.black);
-        return baseColor.blend(colorScheme.surfaceTint, blend).withAlpha(alpha);
-      }
+    //
+    // if (useSubThemes && subTheme.blendTextTheme) {
+    //   // Calculate colors for the different TextStyles, color blend strength are
+    //   // inline with opacities on the 2014/2018 typographies.
+    //   // For main text theme we are using surface tint instead of primary,
+    //   // normally it defaults to primary, but if it is customized we should base
+    //   // tinted text theme on it instead.
+    //   Color blendText(Color? color, int blend, int alpha) {
+    //  final Color baseColor = color ?? (isDark ? Colors.white : Colors.black);
+    //  return baseColor.blend(colorScheme.surfaceTint, blend).withAlpha(alpha);
+    //   }
+    //
+    //   // The tinted text theme is based of white/black, but if a custom color
+    //   // was provided, it is based of it and tinted with surfaceTint.
+    //   final Color cDisplayLarge = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.displayLarge?.color, kHiDarkTextBlend,
+    //           kHiDarkTextAlpha) // 92%
+    //       : blendText(pTextTheme?.displayLarge?.color, kHiLightTextBlend,
+    //           kHiLightTextAlpha); // 85%
+    //   final Color cDisplayMedium = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.displayMedium?.color, kHiDarkTextBlend,
+    //           kHiDarkTextAlpha) // 92%
+    //       : blendText(pTextTheme?.displayMedium?.color, kHiLightTextBlend,
+    //           kHiLightTextAlpha); // 85%
+    //   final Color cDisplaySmall = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.displaySmall?.color, kHiDarkTextBlend,
+    //           kHiDarkTextAlpha) // 92%
+    //       : blendText(pTextTheme?.displaySmall?.color, kHiLightTextBlend,
+    //           kHiLightTextAlpha); // 85%
+    //   //
+    //   final Color cHeadlineLarge = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.headlineLarge?.color, kHiDarkTextBlend,
+    //           kHiDarkTextAlpha) // 92%
+    //       : blendText(pTextTheme?.headlineLarge?.color, kHiLightTextBlend,
+    //           kHiLightTextAlpha); // 85%
+    //   final Color cHeadlineMedium = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.headlineMedium?.color, kHiDarkTextBlend,
+    //           kHiDarkTextAlpha) // 92%
+    //       : blendText(pTextTheme?.headlineMedium?.color, kHiLightTextBlend,
+    //           kHiLightTextAlpha); // 85%
+    //   final Color cHeadlineSmall = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.headlineSmall?.color, kMedDarkTextBlend,
+    //           kMedDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.headlineSmall?.color, kMedLightTextBlend,
+    //           kMedLightTextAlpha); // 96%
+    //   //
+    //   final Color cTitleLarge = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.titleLarge?.color, kMedDarkTextBlend,
+    //           kMedDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.titleLarge?.color, kMedLightTextBlend,
+    //           kMedLightTextAlpha); // 96%
+    //   final Color cTitleMedium = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.titleMedium?.color, kMedDarkTextBlend,
+    //           kMedDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.titleMedium?.color, kMedLightTextBlend,
+    //           kMedLightTextAlpha); // 96%
+    //   final Color cTitleSmall = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.titleSmall?.color, kLoDarkTextBlend,
+    //           kLoDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.titleSmall?.color, kLoLightTextBlend,
+    //           kLoLightTextAlpha); // 100%
+    //   //
+    //   final Color cBodyLarge = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.bodyLarge?.color, kMedDarkTextBlend,
+    //           kMedDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.bodyLarge?.color, kMedLightTextBlend,
+    //           kMedLightTextAlpha); // 96%
+    //   final Color cBodyMedium = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.bodyMedium?.color, kMedDarkTextBlend,
+    //           kMedDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.bodyMedium?.color, kMedLightTextBlend,
+    //           kMedLightTextAlpha); // 96%
+    //   final Color cBodySmall = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.bodySmall?.color, kHiDarkTextBlend,
+    //           kHiDarkTextAlpha) // 92%
+    //       : blendText(pTextTheme?.bodySmall?.color, kHiLightTextBlend,
+    //           kHiLightTextAlpha); // 85%
+    //   //
+    //   final Color cLabelLarge = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.labelLarge?.color, kMedDarkTextBlend,
+    //           kMedDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.labelLarge?.color, kMedLightTextBlend,
+    //           kMedLightTextAlpha); // 96%
+    //   final Color cLabelMedium = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.labelMedium?.color, kLoDarkTextBlend,
+    //           kLoDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.labelMedium?.color, kLoLightTextBlend,
+    //           kLoLightTextAlpha); // 100%
+    //   final Color cLabelSmall = isDark // SDK dark 70%, light 54%
+    //       ? blendText(pTextTheme?.labelSmall?.color, kLoDarkTextBlend,
+    //           kLoDarkTextAlpha) // 100%
+    //       : blendText(pTextTheme?.labelSmall?.color, kLoLightTextBlend,
+    //           kLoLightTextAlpha); // 100%
+    //
+    //   // Apply the computed colors. With this opt-in style, text gets a hint
+    //   // of primary and less opacity than defaults. The primary tint may
+    //   // not work so well if you need to put text on a completely different
+    //   // colored container than the background color. Which is why this
+    //   // feature can be opted out of.
+    //   // M3 has separate on colors for all colorscheme colors that can also
+    //   // be used for color matched text on each container color.
+    //   // This slightly primary colored default text works very well for the
+    // //slight primary colored M3 "neutral" surface colors that by default have
+    //   // a primary tint too.
+    //   defText = defText.copyWith(
+    //     // The textHiOpacity color style group.
+    //     displayLarge: defText.displayLarge!.copyWith(color: cDisplayLarge),
+    //   displayMedium: defText.displayMedium!.copyWith(color: cDisplayMedium),
+    //     displaySmall: defText.displaySmall!.copyWith(color: cDisplaySmall),
+    //   headlineLarge: defText.headlineLarge!.copyWith(color: cHeadlineLarge),
+    //     headlineMedium:
+    //         defText.headlineMedium!.copyWith(color: cHeadlineMedium),
+    //     bodySmall: defText.bodySmall!.copyWith(color: cBodySmall),
+    //     // The textMediumOpacity color style group.
+    //   headlineSmall: defText.headlineSmall!.copyWith(color: cHeadlineSmall),
+    //     titleLarge: defText.titleLarge!.copyWith(color: cTitleLarge),
+    //     titleMedium: defText.titleMedium!.copyWith(color: cTitleMedium),
+    //     bodyLarge: defText.bodyLarge!.copyWith(color: cBodyLarge),
+    //     bodyMedium: defText.bodyMedium!.copyWith(color: cBodyMedium),
+    //     labelLarge: defText.labelLarge!.copyWith(color: cLabelLarge),
+    //     // The textNoOpacity color style group.
+    //     titleSmall: defText.titleSmall!.copyWith(color: cTitleSmall),
+    //     labelMedium: defText.labelMedium!.copyWith(color: cLabelMedium),
+    //     labelSmall: defText.labelSmall!.copyWith(color: cLabelSmall),
+    //   );
 
-      // The tinted text theme is based of white/black, but if a custom color
-      // was provided, it is based of it and tinted with surfaceTint.
-      final Color cDisplayLarge = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.displayLarge?.color, kHiDarkTextBlend,
-              kHiDarkTextAlpha) // 92%
-          : blendText(pTextTheme?.displayLarge?.color, kHiLightTextBlend,
-              kHiLightTextAlpha); // 85%
-      final Color cDisplayMedium = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.displayMedium?.color, kHiDarkTextBlend,
-              kHiDarkTextAlpha) // 92%
-          : blendText(pTextTheme?.displayMedium?.color, kHiLightTextBlend,
-              kHiLightTextAlpha); // 85%
-      final Color cDisplaySmall = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.displaySmall?.color, kHiDarkTextBlend,
-              kHiDarkTextAlpha) // 92%
-          : blendText(pTextTheme?.displaySmall?.color, kHiLightTextBlend,
-              kHiLightTextAlpha); // 85%
-      //
-      final Color cHeadlineLarge = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.headlineLarge?.color, kHiDarkTextBlend,
-              kHiDarkTextAlpha) // 92%
-          : blendText(pTextTheme?.headlineLarge?.color, kHiLightTextBlend,
-              kHiLightTextAlpha); // 85%
-      final Color cHeadlineMedium = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.headlineMedium?.color, kHiDarkTextBlend,
-              kHiDarkTextAlpha) // 92%
-          : blendText(pTextTheme?.headlineMedium?.color, kHiLightTextBlend,
-              kHiLightTextAlpha); // 85%
-      final Color cHeadlineSmall = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.headlineSmall?.color, kMedDarkTextBlend,
-              kMedDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.headlineSmall?.color, kMedLightTextBlend,
-              kMedLightTextAlpha); // 96%
-      //
-      final Color cTitleLarge = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.titleLarge?.color, kMedDarkTextBlend,
-              kMedDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.titleLarge?.color, kMedLightTextBlend,
-              kMedLightTextAlpha); // 96%
-      final Color cTitleMedium = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.titleMedium?.color, kMedDarkTextBlend,
-              kMedDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.titleMedium?.color, kMedLightTextBlend,
-              kMedLightTextAlpha); // 96%
-      final Color cTitleSmall = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.titleSmall?.color, kLoDarkTextBlend,
-              kLoDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.titleSmall?.color, kLoLightTextBlend,
-              kLoLightTextAlpha); // 100%
-      //
-      final Color cBodyLarge = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.bodyLarge?.color, kMedDarkTextBlend,
-              kMedDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.bodyLarge?.color, kMedLightTextBlend,
-              kMedLightTextAlpha); // 96%
-      final Color cBodyMedium = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.bodyMedium?.color, kMedDarkTextBlend,
-              kMedDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.bodyMedium?.color, kMedLightTextBlend,
-              kMedLightTextAlpha); // 96%
-      final Color cBodySmall = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.bodySmall?.color, kHiDarkTextBlend,
-              kHiDarkTextAlpha) // 92%
-          : blendText(pTextTheme?.bodySmall?.color, kHiLightTextBlend,
-              kHiLightTextAlpha); // 85%
-      //
-      final Color cLabelLarge = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.labelLarge?.color, kMedDarkTextBlend,
-              kMedDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.labelLarge?.color, kMedLightTextBlend,
-              kMedLightTextAlpha); // 96%
-      final Color cLabelMedium = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.labelMedium?.color, kLoDarkTextBlend,
-              kLoDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.labelMedium?.color, kLoLightTextBlend,
-              kLoLightTextAlpha); // 100%
-      final Color cLabelSmall = isDark // SDK dark 70%, light 54%
-          ? blendText(pTextTheme?.labelSmall?.color, kLoDarkTextBlend,
-              kLoDarkTextAlpha) // 100%
-          : blendText(pTextTheme?.labelSmall?.color, kLoLightTextBlend,
-              kLoLightTextAlpha); // 100%
+    // // Calculate colors for different TextStyles, color blend strength are
+    //   // inline with opacities on the 2014/2018 typographies.
+    //   // For main text theme we are using surface tint instead of primary,
+    // // normally it defaults to primary, but if customized we should base
+    //   // tinted text theme on it instead.
+    //   Color blendPrimText(Color? color, int blend, int alpha) {
+    //     final Color baseColor =
+    //         color ?? (primaryIsDark ? Colors.white : Colors.black);
+    //     return baseColor.blend(colorScheme.primary, blend).withAlpha(alpha);
+    //   }
+    //
+    //   // The tinted text theme is based of white/black, but if a custom color
+    //   // was provided, it is based of it and tinted with surfaceTint.
+    //   final Color cPrimDisplayLarge = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.displayLarge?.color,
+    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
+    //       : blendPrimText(pPrimTextTheme?.displayLarge?.color,
+    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
+    //   final Color cPrimDisplayMedium = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.displayMedium?.color,
+    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
+    //       : blendPrimText(pPrimTextTheme?.displayMedium?.color,
+    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
+    //   final Color cPrimDisplaySmall = primaryIsDark // SDK dark70%, light54%
+    //       ? blendPrimText(pPrimTextTheme?.displaySmall?.color,
+    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
+    //       : blendPrimText(pPrimTextTheme?.displaySmall?.color,
+    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
+    //   //
+    //   final Color cPrimHeadlineLarge = primaryIsDark //SDK dark70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.headlineLarge?.color,
+    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
+    //       : blendPrimText(pPrimTextTheme?.headlineLarge?.color,
+    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
+    //   final Color cPrimHeadlineMedium = primaryIsDark //SDK dark70%, light54%
+    //       ? blendPrimText(pPrimTextTheme?.headlineMedium?.color,
+    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
+    //       : blendPrimText(pPrimTextTheme?.headlineMedium?.color,
+    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
+    //   final Color cPrimHeadlineSmall = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.headlineSmall?.color,
+    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.headlineSmall?.color,
+    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
+    //   //
+    //   final Color cPrimTitleLarge = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.titleLarge?.color,
+    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.titleLarge?.color,
+    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
+    //   final Color cPrimTitleMedium = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.titleMedium?.color,
+    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.titleMedium?.color,
+    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
+    //   final Color cPrimTitleSmall = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.titleSmall?.color,
+    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.titleSmall?.color,
+    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
+    //   //
+    //   final Color cPrimBodyLarge = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.bodyLarge?.color,
+    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.bodyLarge?.color,
+    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
+    //   final Color cPrimBodyMedium = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.bodyMedium?.color,
+    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.bodyMedium?.color,
+    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
+    //   final Color cPrimBodySmall = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.bodySmall?.color,
+    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 92%
+    //       : blendPrimText(pPrimTextTheme?.bodySmall?.color,
+    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
+    //   //
+    //   final Color cPrimLabelLarge = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.labelLarge?.color,
+    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.labelLarge?.color,
+    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
+    //   final Color cPrimLabelMedium = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.labelMedium?.color,
+    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.labelMedium?.color,
+    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
+    //   final Color cPrimLabelSmall = primaryIsDark // SDK dark 70%, light 54%
+    //       ? blendPrimText(pPrimTextTheme?.labelSmall?.color,
+    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
+    //       : blendPrimText(pPrimTextTheme?.labelSmall?.color,
+    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
+    //   // Equivalent blend text styles for primary text theme.
+    //   defPrimaryText = defPrimaryText.copyWith(
+    //     // The primeHiOpacity color style group.
+    //     displayLarge:
+    //         defPrimaryText.displayLarge!.copyWith(color: cPrimDisplayLarge),
+    //     displayMedium:
+    //       defPrimaryText.displayMedium!.copyWith(color: cPrimDisplayMedium),
+    //     displaySmall:
+    //         defPrimaryText.displaySmall!.copyWith(color: cPrimDisplaySmall),
+    //     headlineLarge:
+    //       defPrimaryText.headlineLarge!.copyWith(color: cPrimHeadlineLarge),
+    //     headlineMedium:
+    //      defPrimaryText.headlineMedium!.copyWith(color: cPrimHeadlineMedium),
+    //     bodySmall: defPrimaryText.bodySmall!.copyWith(color: cPrimBodySmall),
+    //     // The primeMediumOpacity color style group.
+    //     headlineSmall:
+    //        defPrimaryText.headlineSmall!.copyWith(color: cPrimHeadlineSmall),
+    //  titleLarge: defPrimaryText.titleLarge!.copyWith(color: cPrimTitleLarge),
+    //     titleMedium:
+    //         defPrimaryText.titleMedium!.copyWith(color: cPrimTitleMedium),
+    //     bodyLarge: defPrimaryText.bodyLarge!.copyWith(color: cPrimBodyLarge),
+    //  bodyMedium: defPrimaryText.bodyMedium!.copyWith(color: cPrimBodyMedium),
+    //  labelLarge: defPrimaryText.labelLarge!.copyWith(color: cPrimLabelLarge),
+    //     // The primeNoOpacity color style group.
+    //  titleSmall: defPrimaryText.titleSmall!.copyWith(color: cPrimTitleSmall),
+    //     labelMedium:
+    //         defPrimaryText.labelMedium!.copyWith(color: cPrimLabelMedium),
+    //  labelSmall: defPrimaryText.labelSmall!.copyWith(color: cPrimLabelSmall),
+    //   );
+    // }
 
-      // Apply the computed colors. With this opt-in style, text gets a hint
-      // of primary and less opacity than defaults. The primary tint may
-      // not work so well if you need to put text on a completely different
-      // colored container than the background color. Which is why this
-      // feature can be opted out of.
-      // M3 has separate on colors for all colorscheme colors that can also
-      // be used for color matched text on each container color.
-      // This slightly primary colored default text works very well for the
-      // slight primary colored M3 "neutral" surface colors that by default have
-      // a primary tint too.
-      defText = defText.copyWith(
-        // The textHiOpacity color style group.
-        displayLarge: defText.displayLarge!.copyWith(color: cDisplayLarge),
-        displayMedium: defText.displayMedium!.copyWith(color: cDisplayMedium),
-        displaySmall: defText.displaySmall!.copyWith(color: cDisplaySmall),
-        headlineLarge: defText.headlineLarge!.copyWith(color: cHeadlineLarge),
-        headlineMedium:
-            defText.headlineMedium!.copyWith(color: cHeadlineMedium),
-        bodySmall: defText.bodySmall!.copyWith(color: cBodySmall),
-        // The textMediumOpacity color style group.
-        headlineSmall: defText.headlineSmall!.copyWith(color: cHeadlineSmall),
-        titleLarge: defText.titleLarge!.copyWith(color: cTitleLarge),
-        titleMedium: defText.titleMedium!.copyWith(color: cTitleMedium),
-        bodyLarge: defText.bodyLarge!.copyWith(color: cBodyLarge),
-        bodyMedium: defText.bodyMedium!.copyWith(color: cBodyMedium),
-        labelLarge: defText.labelLarge!.copyWith(color: cLabelLarge),
-        // The textNoOpacity color style group.
-        titleSmall: defText.titleSmall!.copyWith(color: cTitleSmall),
-        labelMedium: defText.labelMedium!.copyWith(color: cLabelMedium),
-        labelSmall: defText.labelSmall!.copyWith(color: cLabelSmall),
-      );
-
-      // Calculate colors for the different TextStyles, color blend strength are
-      // inline with opacities on the 2014/2018 typographies.
-      // For main text theme we are using surface tint instead of primary,
-      // normally it defaults to primary, but if it is customized we should base
-      // tinted text theme on it instead.
-      Color blendPrimText(Color? color, int blend, int alpha) {
-        final Color baseColor =
-            color ?? (primaryIsDark ? Colors.white : Colors.black);
-        return baseColor.blend(colorScheme.primary, blend).withAlpha(alpha);
-      }
-
-      // The tinted text theme is based of white/black, but if a custom color
-      // was provided, it is based of it and tinted with surfaceTint.
-      final Color cPrimDisplayLarge = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.displayLarge?.color,
-              kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-          : blendPrimText(pPrimTextTheme?.displayLarge?.color,
-              kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-      final Color cPrimDisplayMedium = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.displayMedium?.color,
-              kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-          : blendPrimText(pPrimTextTheme?.displayMedium?.color,
-              kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-      final Color cPrimDisplaySmall = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.displaySmall?.color,
-              kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-          : blendPrimText(pPrimTextTheme?.displaySmall?.color,
-              kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-      //
-      final Color cPrimHeadlineLarge = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.headlineLarge?.color,
-              kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-          : blendPrimText(pPrimTextTheme?.headlineLarge?.color,
-              kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-      final Color cPrimHeadlineMedium = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.headlineMedium?.color,
-              kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-          : blendPrimText(pPrimTextTheme?.headlineMedium?.color,
-              kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-      final Color cPrimHeadlineSmall = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.headlineSmall?.color,
-              kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.headlineSmall?.color,
-              kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-      //
-      final Color cPrimTitleLarge = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.titleLarge?.color,
-              kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.titleLarge?.color,
-              kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-      final Color cPrimTitleMedium = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.titleMedium?.color,
-              kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.titleMedium?.color,
-              kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-      final Color cPrimTitleSmall = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.titleSmall?.color,
-              kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.titleSmall?.color,
-              kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-      //
-      final Color cPrimBodyLarge = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.bodyLarge?.color,
-              kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.bodyLarge?.color,
-              kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-      final Color cPrimBodyMedium = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.bodyMedium?.color,
-              kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.bodyMedium?.color,
-              kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-      final Color cPrimBodySmall = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.bodySmall?.color,
-              kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 92%
-          : blendPrimText(pPrimTextTheme?.bodySmall?.color,
-              kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-      //
-      final Color cPrimLabelLarge = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.labelLarge?.color,
-              kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.labelLarge?.color,
-              kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-      final Color cPrimLabelMedium = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.labelMedium?.color,
-              kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.labelMedium?.color,
-              kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-      final Color cPrimLabelSmall = primaryIsDark // SDK dark 70%, light 54%
-          ? blendPrimText(pPrimTextTheme?.labelSmall?.color,
-              kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-          : blendPrimText(pPrimTextTheme?.labelSmall?.color,
-              kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-      // Equivalent blend text styles for primary text theme.
-      defPrimaryText = defPrimaryText.copyWith(
-        // The primeHiOpacity color style group.
-        displayLarge:
-            defPrimaryText.displayLarge!.copyWith(color: cPrimDisplayLarge),
-        displayMedium:
-            defPrimaryText.displayMedium!.copyWith(color: cPrimDisplayMedium),
-        displaySmall:
-            defPrimaryText.displaySmall!.copyWith(color: cPrimDisplaySmall),
-        headlineLarge:
-            defPrimaryText.headlineLarge!.copyWith(color: cPrimHeadlineLarge),
-        headlineMedium:
-            defPrimaryText.headlineMedium!.copyWith(color: cPrimHeadlineMedium),
-        bodySmall: defPrimaryText.bodySmall!.copyWith(color: cPrimBodySmall),
-        // The primeMediumOpacity color style group.
-        headlineSmall:
-            defPrimaryText.headlineSmall!.copyWith(color: cPrimHeadlineSmall),
-        titleLarge: defPrimaryText.titleLarge!.copyWith(color: cPrimTitleLarge),
-        titleMedium:
-            defPrimaryText.titleMedium!.copyWith(color: cPrimTitleMedium),
-        bodyLarge: defPrimaryText.bodyLarge!.copyWith(color: cPrimBodyLarge),
-        bodyMedium: defPrimaryText.bodyMedium!.copyWith(color: cPrimBodyMedium),
-        labelLarge: defPrimaryText.labelLarge!.copyWith(color: cPrimLabelLarge),
-        // The primeNoOpacity color style group.
-        titleSmall: defPrimaryText.titleSmall!.copyWith(color: cPrimTitleSmall),
-        labelMedium:
-            defPrimaryText.labelMedium!.copyWith(color: cPrimLabelMedium),
-        labelSmall: defPrimaryText.labelSmall!.copyWith(color: cPrimLabelSmall),
-      );
-    }
     // Assigning results to effective text themes. In older versions a merge
     // of original text themes were done here, but that is incorrect. It should
     // be earlier above, where it is now. In principle we could use the "def"
@@ -6785,6 +6790,7 @@ class FlexColorScheme with Diagnosticable {
     final TextTheme effectiveTextTheme = defText;
     final TextTheme effectivePrimaryTextTheme = defPrimaryText;
 
+    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
     // TODO(rydmike): In M3 we need to tint via onSurface and onSurfaceVariant!
     // The text theme tinting has changed in M3, default theme sets text colors
     // via onSurface and onSurfaceVariant, overriding the default colors the
@@ -6792,12 +6798,48 @@ class FlexColorScheme with Diagnosticable {
     // Need to think about how to address this so we still get tinted fonts
     // when so requested in FCS. Most likely have to pass the correctly tinted
     // text style to each component theme. BIG changes needed!
-    Color? onSurfaceBlendedTextStyle;
-    Color? onSurfaceVariantBlendedTextStyle;
-    if (useSubThemes && subTheme.blendTextTheme) {
-      onSurfaceBlendedTextStyle = effectiveTextTheme.titleLarge?.color;
-      onSurfaceVariantBlendedTextStyle = effectiveTextTheme.displayLarge?.color;
-    }
+    //
+    // Color? onSurfaceBlendedTextStyle;
+    // Color? onSurfaceVariantBlendedTextStyle;
+    // final bool blendTT = useSubThemes && subTheme.blendTextTheme;
+    // if (blendTT) {
+    //   onSurfaceBlendedTextStyle = effectiveTextTheme.titleLarge?.color;
+    //   onSurfaceVariantBlendedTextStyle =
+    //     effectiveTextTheme.displayLarge?.color;
+    // }
+
+    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
+    // These text style are made to be passed in to component, or so called
+    // sub-themes to force them to use the blended text theme. See issue:
+    // TODO(rydmike): Add link to issue when I have created it.
+    // final TextStyle subBodyLarge = blendTT
+    //     ? effectiveTextTheme.bodyLarge!
+    //         .copyWith(color: onSurfaceBlendedTextStyle, fontSize: 16)
+    //     : effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16);
+    // final TextStyle subBodyLargeV = blendTT
+    //     ? effectiveTextTheme.bodyLarge!
+    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 16)
+    //     : effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16);
+    // final WidgetStateProperty<TextStyle> subBodyLargeWSP = blendTT
+    //     ? WidgetStatePropertyAll<TextStyle>(effectiveTextTheme.bodyLarge!
+    //         .copyWith(color: onSurfaceBlendedTextStyle, fontSize: 16))
+    //     : WidgetStatePropertyAll<TextStyle>(
+    //         effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16));
+    // final WidgetStateProperty<TextStyle> subBodyLargeWSPV = blendTT
+    //     ? WidgetStatePropertyAll<TextStyle>(effectiveTextTheme.bodyLarge!
+    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 16))
+    //     : WidgetStatePropertyAll<TextStyle>(
+    //         effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16));
+    // final TextStyle subBodyMediumV = blendTT
+    //     ? effectiveTextTheme.bodyMedium!
+    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 14)
+    //     : effectiveTextTheme.bodyMedium!.copyWith(fontSize: 14);
+    // final TextStyle subLabelSmallV = blendTT
+    //     ? effectiveTextTheme.labelSmall!.copyWith(
+    //         color: onSurfaceVariantBlendedTextStyle,
+    //         fontSize: useMaterial3 ? 11 : 10)
+    //     : effectiveTextTheme.labelSmall!
+    //         .copyWith(fontSize: useMaterial3 ? 11 : 10);
 
     // Custom computed shades from primary color using alpha blends works well
     // for these rarely used colors that are on deprecation path in Flutter SDK.
@@ -6865,13 +6907,13 @@ class FlexColorScheme with Diagnosticable {
       } else if (effectiveAppBarColor.withAlpha(0xFF) == colorScheme.primary) {
         return colorScheme.onPrimary;
       } else if (isDark && appBarNeedsLight) {
-        return onSurfaceBlendedTextStyle ?? colorScheme.onSurface;
+        return colorScheme.onSurface;
       } else if (isDark && !appBarNeedsLight) {
         return colorScheme.surface;
       } else if (!isDark && appBarNeedsLight) {
         return colorScheme.surface;
       } else {
-        return onSurfaceBlendedTextStyle ?? colorScheme.onSurface;
+        return colorScheme.onSurface;
       }
     }
 
@@ -6884,9 +6926,8 @@ class FlexColorScheme with Diagnosticable {
     Color appBarActionIconColor = appBarIconColor;
     // M3 does its defaults a bit differently.
     if (useMaterial3) {
-      appBarIconColor = onSurfaceBlendedTextStyle ?? colorScheme.onSurface;
-      appBarActionIconColor =
-          onSurfaceVariantBlendedTextStyle ?? colorScheme.onSurfaceVariant;
+      appBarIconColor = colorScheme.onSurface;
+      appBarActionIconColor = colorScheme.onSurfaceVariant;
     }
     // If the appBarForeground color is NOT using the default colors
     // then appBarIconColor and appBarActionIconColor should use them as well,
@@ -7555,6 +7596,8 @@ class FlexColorScheme with Diagnosticable {
               showUnselectedLabels:
                   subTheme.bottomNavigationBarShowUnselectedLabels,
               landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
+              // TODO(rydmike): Part of deprecation of blendTextTheme.
+              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
@@ -7857,10 +7900,12 @@ class FlexColorScheme with Diagnosticable {
               selectedSchemeColor: subTheme.listTileSelectedSchemeColor,
               iconSchemeColor: subTheme.listTileIconSchemeColor,
               textSchemeColor: subTheme.listTileTextSchemeColor,
+              //
               titleTextStyle: subTheme.listTileTitleTextStyle,
               subtitleTextStyle: subTheme.listTileSubtitleTextStyle,
               leadingAndTrailingTextStyle:
                   subTheme.listTileLeadingAndTrailingTextStyle,
+              //
               tileSchemeColor: subTheme.listTileTileSchemeColor,
               selectedTileSchemeColor: subTheme.listTileSelectedTileSchemeColor,
               contentPadding: subTheme.listTileContentPadding,
@@ -7929,6 +7974,8 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.navigationBarSelectedLabelSchemeColor,
               unselectedLabelSchemeColor:
                   subTheme.navigationBarUnselectedLabelSchemeColor,
+              // TODO(rydmike): Part of deprecation of blendTextTheme.
+              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               mutedUnselectedLabel: subTheme.navigationBarMutedUnselectedLabel,
               selectedIconSize: subTheme.navigationBarSelectedIconSize,
               unselectedIconSize: subTheme.navigationBarUnselectedIconSize,
@@ -7973,6 +8020,8 @@ class FlexColorScheme with Diagnosticable {
               selectedItemSchemeColor: subTheme.drawerSelectedItemSchemeColor,
               unselectedItemSchemeColor:
                   subTheme.drawerUnselectedItemSchemeColor,
+              // TODO(rydmike): Part of deprecation of blendTextTheme.
+              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               textStyle: effectiveTextTheme.bodyLarge,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
@@ -7998,6 +8047,8 @@ class FlexColorScheme with Diagnosticable {
                   subTheme.navigationRailSelectedIconSchemeColor,
               unselectedIconSchemeColor:
                   subTheme.navigationRailUnselectedIconSchemeColor,
+              // TODO(rydmike): Part of deprecation of blendTextTheme.
+              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               mutedUnselectedIcon: subTheme.navigationRailMutedUnselectedIcon,
               useIndicator: subTheme.navigationRailUseIndicator,
               indicatorSchemeColor: subTheme.navigationRailIndicatorSchemeColor,

@@ -2,9 +2,9 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.0.0-dev.1 - WIP
+## 8.0.0-dev.1
 
-**Oct 12, 2024**
+**Oct 13, 2024**
 
 ### SUMMARY
 
@@ -35,23 +35,13 @@ Flutter 3.22 introduced a large number of breaking changes to the `ColorScheme` 
 
 FlexColorScheme V8 now allows you to use the new colors introduced in Flutter 3.22. As before, with FCS you can get fully defined hand-tuned `ColorScheme`s without using Material-3 design's Material Color Utilities (MCU) based seed-generated ColorSchemes. You may prefer to use seed generated ColorSchemes with Material-3, but it is nice to know you do not have to.
 
-To the seed generated `ColorScheme`s, FCS adds support for all the Flutter `DynamicSchemeVariant` seed generated variants. It also improves them by allowing you to use separate seed colors for each palette. With Flutter's `ColorScheme.fromSeed`, you can only seed with one color, the primary color. The resulting `ColorScheme` always uses computed values for **secondary** and **tertiary** palettes, plus a hard coded fixed color for the **error** palette seeding. **Surfaces** colors are always tied to primary color as well and inlcude a hint of primary color. With FCS, you do not have these limitations, you can seed with separate colors for each palette with even with Flutter's own dynamic scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones, seed generated scheme variants. FCS now brings this feature to Flutter's own dynamic scheme variants as well.
+To the seed generated `ColorScheme`s, FCS adds support for all the Flutter `DynamicSchemeVariant` seed generated variants. It also improves them by allowing you to use separate seed colors for each palette. With Flutter's `ColorScheme.fromSeed`, you can only seed with one color, the primary color. The resulting `ColorScheme` always uses computed values for **secondary** and **tertiary** palettes, plus a hard coded fixed color for the **error** palette seeding. **Surfaces** colors are always tied to primary color as well and include a hint of primary color. With FCS, you do not have these limitations, you can seed with separate colors for each palette with even with Flutter's own dynamic scheme variants. This was always possible with FlexColorScheme and its FlexSeedScheme (FSS) based FlexTones, seed generated scheme variants. FCS now brings this feature to Flutter's own dynamic scheme variants as well.
 
 As before, FCS also has its own even configurable `FlexTones` way of making seed generated ColorSchemes. Typically, you use predefined `FlexTones`, but you can also create your own `FlexTones` configurations. With it, you can define the chroma goals for each palette and define which tone is mapped to what `ColorScheme` color. An internal example of using them is the implementation of `FlexTones` modifiers. 
 
 FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. Check the API docs for more details.
 
 **CRITICAL TODOS BEFORE STABLE RELEASE**
-
-* **TODO**: The `TextTheme` color style usage by components has changed in M3, causing issues with the tinted or blended `TextTheme` style (setting: `FlexSubThemesData(blendTextTheme: true)`) in FCS when using Material-3 mode. 
-  * Default component themes now typically set text colors using `onSurface` and `onSurfaceVariant`, overriding the default colors the used `TextStyle`s from the ambient default `TextTheme` has. This is typically not done in Material-2 mode and was not in early Material-3 mode component defaults either. 
-  * The result is that while the FCS blended `TextTheme` is still correctly tinted when so configured, it is rarely seen, since most components typically override the default `TextStyles` colors in the default TextTheme, with `onSurface` and `onSurfaceVariant` colors. The more tinted `TextStyle` colors from the tinted default `TextTheme` are thus not used by components and thus not really seen anywhere in the resulting app, thus breaking the FCS design intent of this feature.
-  * The only solution will be to pass the tinted `TextStyle`s to each component theme. Meaning that quite BIG changes are required. 
-  * We must review every component theme and see which tinted text style to pass in to each text style property it has, sometimes for default icon colors too. 
-  * Also need to have an even more tinted, or at least less contrasty, version for when `onSurfaceVariant` is used as an override, to keep the design intent. The tinted color used for the three biggest `TextStyle`s is potentially already suitable for this, as it is already less contrasty by current tint/blend design we can tune it a bit if needed.
-  * Fixing this feature will further postpone the final V8 release. 
-  * May release a dev release without this fix, to get something out soonish.
-
 
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
@@ -61,16 +51,15 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **LESS CRITICAL TODOs**
 
 - **TODO**: More work on Chips. Have a few more things to try with them. Their theming is hopeless.
-- **TODO**: Review and maybe adjust the tints for the tinted text theme option a bit.
-- **TODO**: Study and potentially report **13 found new Flutter SDK theming issues**. Report if not already existing, and if they are still issues after check on master using a simple reproduction sample. Add the GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
+- **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still issues after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
 
 **MINOR KNOWN ISSUES**
  
-  - The `toScheme` method may need some updates for the raw `FlexColorScheme?` constructor.
-    - Theming works as intended without this update with light/dark factories. This update would only be for a better raw constructor result, which is not supposed to be used directly anyway. Via factories all is OK, FCS as before, passes along a full ready `ColorScheme` to the raw constructor.
+  - **Package**: The `toScheme` method **may** need some updates for the raw `FlexColorScheme?` constructor to not provide surprises
+    - Theming and `toScheme` works as intended with light/dark factories. This update would only be for a better raw constructor result. The raw constructor is not supposed to be used directly, so any gaps are not really that relevant.
 
-  - Playground: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
+  - **Playground**: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
     - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
     
 
@@ -130,9 +119,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 This section contains a detailed list of all changes introduced in FlexColorScheme version 8.0.0.
   
-**BREAKING**
+**BREAKING CHANGES**
 
-This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme ib Flutter 3.22. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS is no more aligned with Flutter's Material-3 theming defaults, by typically using them as starting points in the default Material-3 mode. Material-2 mode is still supported, it has its own opinionated defaults as before.
+This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme in Flutter 3.22. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS is now more aligned with Flutter's Material-3 theming defaults, by typically using them as starting points in the default Material-3 mode. Material-2 mode is still supported, it has its own opinionated defaults as before.
 
 - The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** and later default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. All component themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
 
@@ -151,6 +140,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Breaking rename: All helper component themes in `FlexSubThemes` ended with `Theme`, as designed, except `FlexSubThemes.bottomNavigationBar`. This mistake is now corrected, it was renamed to `FlexSubThemes.bottomNavigationBarTheme`. The old version is deprecated and passes its props through to the renamed version. The old and wrong named one will be removed in version 9.0.0. 
 
+- Deprecated `FlexSubthemesData.blendTextTheme`, it no longer has any function. See topic _"Why is Tinted TextTheme deprecated"_ further below for more information,
 
 - Deprecated the FCS legacy property `useFlutterDefaults`. FlexColorScheme in Material-3 mode now defaults to using Flutter default styles. For other configurations, modify them as desired. In Material-2 mode, FCS continues to use its opinionated own defaults as before, as long as Material-2 exists.
 
@@ -370,6 +360,20 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Fixed [#198 AppBar color issue when using seed generated scheme with key color locked](https://github.com/rydmike/flex_color_scheme/issues/198).
    
 - Fixed that the Rectangular Slider value indicator did not default to `primary` color when undefined, as intended in FCS M2 and M3 mode. Only the Drop style indicator defaulted to primary. This came from the framework defaulting the old M2 rectangular indicator to a complex, opacity and alpha blended `onSurface` grey looking result.
+
+### Why is Tinted TextTheme deprecated?
+
+The `blendTextTheme` feature was originally made before Material-3s TextTheme was available, before it was fully known how it was going to be implemented. It was an approximation of the TextStyles that could be seen in early versions of Material-3 images. Since the actual Material-3 TextTheme is available, the tinted TextTheme feature is no longer required. While the FCS tinted TextTheme did provide an alternative version of the actual tint used in Material-3, but the differences were quite subtle. Additionally, recent changes in Flutter make using it very verbose and complicated. Why it does so, is explained below.
+    
+In Material-3 Typography 2021, the TextTheme and all styles in it are fully opaque and use onSurface as color on all TextStyles. In a seed generated ColorScheme, the text becomes primary tinted, because the onSurface color by default has subtle primary tint. With FCS you can modify the onSurface to black or white to avoid this, if so preferred.
+    
+In Material-2 Typography 2018 and 2014, some TextStyles in their TextThemes use partially transparent white or black colors, making them appear tinted when placed on lightly colored backgrounds. Such TextStyles also have lower contrast. If the Material-3 default text theme is used on background colors that are tinted with a color that deviates a lot in hue from the hue used as tint color by the TextTheme, it may not fit it so well. The Material-2 opacity-based text styles do not have this limitation. It is unknown why Material-3 switched to a fixed tint color instead of using the opacity-based approach used in Material-2, that is more universally usable on backgrounds with different tint colors.
+    
+In Material-3, some component themes override the default color the of the default TextTheme TextStyles they use with onSurfaceVariant. This color has slightly more tint and lower contrast than onSurface. This is used for elements that should have less emphasis. Many default Material-3 components also override the color in default TextTheme TextStyles they use with onSurface color, that it actually already has in a default TextTheme. These two overrides causes whatever color the default TextTheme TextStyles have, to be overridden by these ColorScheme colors. Resulting in that any custom-colored TextTheme is not getting used by such Material-3 components and that the custom colors from the meticulously colored custom TextTheme, are rarely visible anywhere in a Material-3 application. Material-2 component themes do not do this, nor did older Flutter versions of Material-3 component themes do this.
+    
+An issue has been raised explaining the challenges this newer approach in Flutter causes when using custom colored text themes. If this issue is addressed, the tinted TextTheme feature in FCS may be brought back, if it is a requested feature. 
+
+In current Flutter versions, using a custom tinted TextTheme is rather pointless. You can do it, but is not enough to just define the TextTheme. You also have to pass each tinted TextStyle it has to the appropriate TextStyles in ALL component themes that override its colors, for it to have any effect. It is typically not worth the effort.
 
 ### THEMES PLAYGROUND
 
