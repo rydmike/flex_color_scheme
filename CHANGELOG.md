@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.1
 
-**Oct 13, 2024**
+**Oct 14, 2024**
 
 ### SUMMARY
 
@@ -41,16 +41,13 @@ As before, FCS also has its own even configurable `FlexTones` way of making seed
 
 FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. Check the API docs for more details.
 
-**CRITICAL TODOS BEFORE STABLE RELEASE**
+**TODOS BEFORE STABLE RELEASE**
 
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
-  * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 295 tests are broken.
-  * Update all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
-  * Will release 8.0.0-dev release without all test fixes and updates to them, to test the release WEB build and offer it as early access.
+  * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 309 tests of 2097 are broken.
+  * Update and review all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
+  * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and offer them as early access.
 
-**LESS CRITICAL TODOs**
-
-- **TODO**: More work on Chips. Have a few more things to try with them. Their theming is hopeless.
 - **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still issues after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
 
 
