@@ -169,7 +169,7 @@ sealed class App {
   static final TextStyle notoSansBold =
       GoogleFonts.notoSans(fontWeight: FontWeight.w700);
   static TextTheme? get textTheme => TextTheme(
-        displayLarge: notoSansRegular, // Regular is default
+        displayLarge: notoSansBold, // Regular is default
         displayMedium: notoSansRegular, // Regular is default
         displaySmall: notoSansRegular, // Regular is default
         headlineLarge: notoSansRegular, // Regular is default
@@ -193,15 +193,17 @@ sealed class App {
     required ThemeController controller,
     Color? color,
   }) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
     if (controller.useAppFont) {
-      return notoSansBold
-          .merge(Theme.of(context).textTheme.bodyMedium)
-          .copyWith(color: color);
+      return textTheme.displayLarge!.copyWith(
+        color: color ?? textTheme.bodyMedium!.color,
+        fontSize: textTheme.bodyMedium!.fontSize,
+      );
     } else {
-      return Theme.of(context).textTheme.bodyMedium!.copyWith(
-            fontWeight: FontWeight.bold,
-            color: color,
-          );
+      return textTheme.bodyMedium!.copyWith(
+        fontWeight: FontWeight.bold,
+        color: color,
+      );
     }
   }
 
