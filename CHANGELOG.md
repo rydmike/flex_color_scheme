@@ -140,7 +140,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - Breaking rename: All helper component themes in `FlexSubThemes` ended with `Theme`, as designed, except `FlexSubThemes.bottomNavigationBar`. This mistake is now corrected, it was renamed to `FlexSubThemes.bottomNavigationBarTheme`. The old version is deprecated and passes its props through to the renamed version. The old and wrong named one will be removed in version 9.0.0. 
 
-- Deprecated `FlexSubthemesData.blendTextTheme`, it no longer has any function. See topic _"Why is Tinted TextTheme deprecated"_ further below for more information,
+- Deprecated `FlexSubThemesData.blendTextTheme`, it no longer has any function. See topic _"Why is blendTextTheme deprecated?"_ further below for more information,
 
 - Deprecated the FCS legacy property `useFlutterDefaults`. FlexColorScheme in Material-3 mode now defaults to using Flutter default styles. For other configurations, modify them as desired. In Material-2 mode, FCS continues to use its opinionated own defaults as before, as long as Material-2 exists.
 
@@ -276,7 +276,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Added `useCupertinoStyle` property to `FlexSubThemes.switchTheme`. Added `switchAdaptiveCupertinoLike` property to `FlexSubThemesData` and made `FlexSubThemes.switchTheme` use it.
 
 
-- Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize`, `ìconSize` and `padding` properties to `FlexSubThemes.chipTheme`. Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize`, `chipIconSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
+- Added `secondarySelectedSchemeColor`, `fontSize`, `secondaryFontSize`, `iconSize` and `padding` properties to `FlexSubThemes.chipTheme`. Added `chipSecondarySelectedSchemeColor`, `chipFontSize`, `chipSecondaryFontSize`, `chipIconSize` and `chipPadding` properties to `FlexSubThemesData` and made `FlexSubThemes.chipTheme` use them.
 
 
 - Added `headerForegroundSchemeColor` property to `FlexSubThemes.datePickerTheme`. Added `datePickerHeaderForegroundSchemeColor` property to `FlexSubThemesData` and made `FlexSubThemes.datePickerTheme` use it for its header foreground color.
@@ -361,7 +361,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
    
 - Fixed that the Rectangular Slider value indicator did not default to `primary` color when undefined, as intended in FCS M2 and M3 mode. Only the Drop style indicator defaulted to primary. This came from the framework defaulting the old M2 rectangular indicator to a complex, opacity and alpha blended `onSurface` grey looking result.
 
-### Why is Tinted TextTheme deprecated?
+#### Why is blendedTextTheme deprecated?
 
 The `blendTextTheme` feature was originally made before Material-3s TextTheme was available, before it was fully known how it was going to be implemented. It was an approximation of the TextStyles that could be seen in early versions of Material-3 images. Since the actual Material-3 TextTheme is available, the tinted TextTheme feature is no longer required. While the FCS tinted TextTheme did provide an alternative version of the actual tint used in Material-3, but the differences were quite subtle. Additionally, recent changes in Flutter make using it very verbose and complicated. Why it does so, is explained below.
     
@@ -373,7 +373,7 @@ In Material-3, some component themes override the default color the of the defau
     
 An issue has been raised explaining the challenges this newer approach in Flutter causes when using custom colored text themes. If this issue is addressed, the tinted TextTheme feature in FCS may be brought back, if it is a requested feature. 
 
-In current Flutter versions, using a custom tinted TextTheme is rather pointless. You can do it, but is not enough to just define the TextTheme. You also have to pass each tinted TextStyle it has to the appropriate TextStyles in ALL component themes that override its colors, for it to have any effect. It is typically not worth the effort.
+In current Flutter versions, using a custom-tinted TextTheme is rather pointless. You can do it, but is not enough to just define the TextTheme. You also have to pass each tinted TextStyle it has to the appropriate TextStyles in ALL component themes that override its colors, for it to have any effect. It is typically not worth the effort.
 
 ### THEMES PLAYGROUND
 
@@ -435,7 +435,7 @@ In current Flutter versions, using a custom tinted TextTheme is rather pointless
 - The **ListTile** settings panel now includes a large number of theming controls for ListTile theming.
 - The **SearchBar** settings panel now includes theming controls for SearchBar and SearchView theming.
 - On the **Adaptive Theming** settings panel you can now also control the `MaterialTapTargetSize` setting.
-- The **Segmented Buttons** settings panel now includes a control for selected foreground colors for both `SegementedButton` and `ToggleButtons`.
+- The **Segmented Buttons** settings panel now includes a control for selected foreground colors for both `SegmentedButton` and `ToggleButtons`.
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
 
  
