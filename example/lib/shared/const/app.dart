@@ -2,7 +2,6 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/theme_controller.dart';
 import '../widgets/examples/responsive_scaffold.dart';
 
 // ignore_for_file: comment_references
@@ -169,7 +168,7 @@ sealed class App {
   static final TextStyle notoSansBold =
       GoogleFonts.notoSans(fontWeight: FontWeight.w700);
   static TextTheme? get textTheme => TextTheme(
-        displayLarge: notoSansBold, // Regular is default
+        displayLarge: notoSansRegular, // Regular is default
         displayMedium: notoSansRegular, // Regular is default
         displaySmall: notoSansRegular, // Regular is default
         headlineLarge: notoSansRegular, // Regular is default
@@ -185,28 +184,6 @@ sealed class App {
         labelMedium: notoSansMedium, // Medium is default
         labelSmall: notoSansMedium, // Medium is default
       );
-
-  // TODO(rydmike): Bold font experiment, only used on intro panel as a test.
-  // Get a bold text style, used as link style.
-  static TextStyle fontBold12({
-    required BuildContext context,
-    required ThemeController controller,
-    Color? color,
-  }) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    if (controller.useAppFont) {
-      return textTheme.displayLarge!.copyWith(
-        color: color ?? textTheme.bodyMedium!.color,
-        fontSize: textTheme.bodyMedium!.fontSize,
-        fontWeight: FontWeight.bold,
-      );
-    } else {
-      return textTheme.bodyMedium!.copyWith(
-        fontWeight: FontWeight.bold,
-        color: color,
-      );
-    }
-  }
 
   /// Defining the visual density here to so we can change it in one spot when
   /// we want to try different options.
