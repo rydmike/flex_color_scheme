@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
@@ -46,8 +47,12 @@ class IntroductionPanel extends StatelessWidget {
       fontWeight: FontWeight.bold,
     );
     final TextStyle spanSmallTextStyle = theme.textTheme.bodySmall!;
-    final TextStyle linkSmallStyle = theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
+    // TODO(rydmike): Bold font experiment
+    final TextStyle linkSmallStyle = App.fontBold12(
+        context: context,
+        controller: controller,
+        color: theme.colorScheme.primary);
 
     final EdgeInsetsGeometry listTilePadding = theme.useMaterial3
         ? const EdgeInsetsDirectional.only(
