@@ -34,9 +34,12 @@ class NavigationDrawerPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
-    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
+        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
+      color: theme.colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
 
     // The most common logic for enabling Playground controls.
     final bool enableControl =

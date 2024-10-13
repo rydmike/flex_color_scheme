@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
@@ -41,10 +40,11 @@ class IntroductionPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
-        .copyWith(color: theme.textTheme.bodySmall!.color);
-    final TextStyle linkStyle =
-        App.notoSansBold.copyWith(color: theme.colorScheme.primary);
-
+        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
+      color: theme.colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
     final TextStyle spanSmallTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkSmallStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
