@@ -198,6 +198,7 @@ sealed class App {
       return textTheme.displayLarge!.copyWith(
         color: color ?? textTheme.bodyMedium!.color,
         fontSize: textTheme.bodyMedium!.fontSize,
+        fontWeight: FontWeight.bold,
       );
     } else {
       return textTheme.bodyMedium!.copyWith(
