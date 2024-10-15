@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.2
 
-**Oct 14, 2024**
+**Oct 16, 2024**
 
 ### SUMMARY
 
@@ -44,8 +44,10 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **TODOS BEFORE STABLE RELEASE**
 
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
-  * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. Currently, 309 tests of 2097 are broken.
-  * Update and review all tests. Add tests for new features. Get the FCS package back to 100% test coverage.
+  * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. 
+  * Update and review all tests.
+    * **Test fix status**: Start 309 -> 279 tests of 2103 test are broken.
+    * Add tests for new features. Get the FCS package back to 100% test coverage.
   * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and offer them as early access.
 
 - **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still issues after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
