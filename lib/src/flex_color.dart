@@ -201,9 +201,15 @@ class FlexColor {
   /// Material 2 standard light error color.
   static const Color materialLightError = Color(0xFFB00020);
 
-  /// Light error container color computer from give light error color.
+  /// Material 2 standard light on error color.
+  static const Color materialLightOnError = Colors.white;
+
+  /// Light error container color computer from given light error color.
   static Color lightErrorContainer(Color lightError) =>
       lightError.brighten(25).blend(const Color(0xFFFFFFFF), 80);
+
+  /// Material 2 standard light on error container color.
+  static const Color materialLightOnErrorContainer = Colors.black;
 
   /// Material 3 standard light error color.
   ///
@@ -234,8 +240,14 @@ class FlexColor {
   /// Material 2 standard dark error color.
   static const Color materialDarkError = Color(0xFFCF6679);
 
+  /// Material 2 standard dark on error color.
+  static const Color materialDarkOnError = Colors.black;
+
   /// Dark error container color computed from given dark error color.
   static Color darkErrorContainer(Color darkError) => darkError.darken(15);
+
+  /// Material 2 standard dark on error container color.
+  static const Color materialDarkOnErrorContainer = Colors.white;
 
   /// Material 3 standard dark error color.
   ///
