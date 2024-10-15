@@ -2239,7 +2239,7 @@ class ThemeController with ChangeNotifier {
       setUseSecondary(true, false);
       setUseTertiary(true, false);
       setKeepPrimary(true, false);
-      setUsedFlexToneSetup(7, false); // <== Jolly config.
+      setUsedFlexToneSetup(19, false); // <-- Candy pop scheme.
       // Effects: M2 Divider, interaction effects, tinted disable.
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
