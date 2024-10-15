@@ -50,10 +50,11 @@ void main() {
       // We get fixed blend color for blended TextTheme in light mode.
       // It is more blended than the onSurface color in light mode, when
       // onSurface is max blended.
+      // Oct 15, 2024: Since blendTextTheme is deprecated, this test is: false
       expect(
         fcsScheme.onSurface.red >
             fcs.toTheme.textTheme.displayLarge!.color!.red,
-        equals(true),
+        equals(false),
       );
     });
     test(
@@ -91,10 +92,11 @@ void main() {
       // We get fixed blend color for blended TextTheme in dark mode.
       // It is less blended than the onSurface color in dark mode, when
       // onSurface is max blended.
+      // Oct 15, 2024: Since blendTextTheme is deprecated, this test is: false
       expect(
         fcsScheme.onSurface.red <
             fcs.toTheme.textTheme.displayLarge!.color!.red,
-        equals(true),
+        equals(false),
       );
     });
     test(
