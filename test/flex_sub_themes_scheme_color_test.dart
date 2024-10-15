@@ -22,11 +22,8 @@ void main() {
   const Color onError = Color(0xFFE2CFCF);
   const Color errorContainer = Color(0xFFD68888);
   const Color onErrorContainer = Color(0xFF422626);
-  const Color background = Color(0xFFE4E5E9);
-  const Color onBackground = Color(0xFF2B2B2D);
   const Color surface = Color(0xFFD0D7F2);
   const Color onSurface = Color(0xFF26282D);
-  const Color surfaceVariant = Color(0xFFB9C4F1);
   const Color onSurfaceVariant = Color(0xFF22252D);
   const Color outline = Color(0xFF020F34);
   const Color outlineVariant = Color(0xFF0D5937);
@@ -358,22 +355,22 @@ void main() {
     });
     test(
         'FST.sCP-22: GIVEN SchemeColor.onSurfaceVariant '
-        'EXPECT surfaceVariant color to be returned', () {
+        'EXPECT surface color to be returned', () {
       expect(
           FlexSubThemes.schemeColorPair(SchemeColor.onSurfaceVariant, scheme),
-          equals(surfaceVariant));
+          equals(surface));
     });
     test(
         'FST.sCP-23: GIVEN SchemeColor.outline '
-        'EXPECT background color to be returned', () {
+        'EXPECT surface color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.outline, scheme),
-          equals(background));
+          equals(surface));
     });
     test(
         'FST.sCP-24: GIVEN SchemeColor.outlineVariant '
-        'EXPECT onBackground color to be returned', () {
+        'EXPECT onSurface color to be returned', () {
       expect(FlexSubThemes.schemeColorPair(SchemeColor.outlineVariant, scheme),
-          equals(onBackground));
+          equals(onSurface));
     });
     test(
         'FST.sCP-25: GIVEN SchemeColor.shadow '
