@@ -21,7 +21,7 @@
 name: Deploy_Dev
 on:
   push:
-    branches: [version-8-0-0]
+    branches: [none]
     paths-ignore:
      - "**.md"
   pull_request:
