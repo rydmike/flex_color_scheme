@@ -293,7 +293,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.lightFlexSurfaceContainerHighest,
                 inverseSurface: useMaterial3
                     ? FlexColor.lightFlexInverseSurface
-                    : FlexColor.darkFlexSurface,
+                    : FlexColor.materialDarkSurface,
                 scaffoldBackground: scaffoldBase.color(
                   null,
                   brightness: brightness,
@@ -318,7 +318,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
                     FlexColor.darkFlexSurfaceContainerHighest,
                 inverseSurface: useMaterial3
                     ? FlexColor.darkFlexInverseSurface
-                    : FlexColor.lightFlexSurface,
+                    : FlexColor.materialLightSurface,
                 scaffoldBackground: scaffoldBase.color(
                   null,
                   brightness: brightness,
