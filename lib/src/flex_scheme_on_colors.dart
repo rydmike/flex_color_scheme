@@ -266,17 +266,23 @@ class FlexSchemeOnColors with Diagnosticable {
         (ThemeData.estimateBrightnessForColor(surface) == Brightness.dark
             ? useM3
                 ? FlexColor.darkFlexInverseSurface
-                : Colors.white
+                : FlexColor.materialLightSurface
             : useM3
                 ? FlexColor.lightFlexInverseSurface
-                : Colors.black);
+                : FlexColor.materialDarkSurface);
 
     final Color usedOnInverseSurface = onInverseSurface ??
         (ThemeData.estimateBrightnessForColor(invSurface) == Brightness.dark
-            ? FlexColor.lightFlexOnInverseSurface
-                .blendAlpha(usedSurfaceTint.lighten(24), inverseSurfaceAlpha)
-            : FlexColor.darkFlexOnInverseSurface
-                .blendAlpha(usedSurfaceTint.darken(10), inverseSurfaceAlpha));
+            ? useM3
+                ? FlexColor.lightFlexOnInverseSurface.blendAlpha(
+                    usedSurfaceTint.lighten(24), inverseSurfaceAlpha)
+                : FlexColor.materialLightSurface
+                    .blendAlpha(invSurface, inverseSurfaceAlpha)
+            : useM3
+                ? FlexColor.darkFlexOnInverseSurface
+                    .blendAlpha(usedSurfaceTint.darken(10), inverseSurfaceAlpha)
+                : FlexColor.materialDarkSurface
+                    .blendAlpha(invSurface, inverseSurfaceAlpha));
 
     final Color usedOnError = onError ??
         (estimateErrorBrightness(error) == Brightness.dark
