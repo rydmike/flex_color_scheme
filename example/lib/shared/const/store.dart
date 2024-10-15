@@ -221,7 +221,7 @@ sealed class Store {
   // Key used to read and save the schemeIndex value.
   static const String keySchemeIndex = 'schemeIndex';
   // Default value for the schemeIndex, also used to reset settings.
-  // Defaults to 35, in examples 4 & 5 where this is used it will make
+  // Defaults 40, in examples 4 & 5 where this is used it will make
   // the default theme based on the [FlexColor.materialBaseline] color scheme.
   static const int defaultSchemeIndex = 40;
 
