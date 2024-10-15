@@ -236,6 +236,7 @@ class FlexSubThemesData with Diagnosticable {
     //
     this.scaffoldBackgroundBaseColor,
     this.scaffoldBackgroundSchemeColor,
+    //
     this.materialButtonSchemeColor,
     //
     this.switchSchemeColor,
@@ -266,7 +267,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorBorderType,
     this.inputDecoratorFocusedHasBorder = true,
     this.inputDecoratorUnfocusedHasBorder = true,
-    this.inputDecoratorUnfocusedBorderIsColored = true,
+    this.inputDecoratorUnfocusedBorderIsColored,
     this.inputDecoratorBorderWidth,
     this.inputDecoratorFocusedBorderWidth,
     this.inputDecoratorPrefixIconSchemeColor,
@@ -366,6 +367,7 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipOpacity,
     //
     this.useInputDecoratorThemeInDialogs,
+    //
     this.dialogRadius,
     this.dialogRadiusAdaptive,
     this.dialogElevation,
@@ -1937,8 +1939,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// The unfocused border color selection also applies to it hovered state.
   ///
-  /// Defaults to false.
-  final bool inputDecoratorUnfocusedBorderIsColored;
+  /// If undefined, defaults to false.
+  final bool? inputDecoratorUnfocusedBorderIsColored;
 
   /// The border width of unfocused [InputDecoration] when it has a border.
   ///

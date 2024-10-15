@@ -3792,8 +3792,8 @@ sealed class FlexSubThemes {
     ///
     /// The unfocused border color selection also applies to it hovered state.
     ///
-    /// Defaults to false.
-    final bool unfocusedBorderIsColored = false,
+    /// If undefined, defaults to false.
+    final bool? unfocusedBorderIsColored,
 
     /// Defines if the theme uses tinted interaction effects.
     ///
@@ -3909,7 +3909,7 @@ sealed class FlexSubThemes {
     final Color disabledDefault = useM3 ? disabledDefaultM3 : disabledDefaultM2;
 
     // Enabled border color.
-    final Color enabledBorderColor = unfocusedBorderIsColored
+    final Color enabledBorderColor = unfocusedBorderIsColored ?? false
         ? borderColor.withAlpha(kEnabledBorderAlpha)
         : useM3
             ? isFilled
@@ -3918,7 +3918,7 @@ sealed class FlexSubThemes {
             : colorScheme.onSurface.withAlpha(kAlphaDisabled);
     // TODO(rydmike): Review M3 border hover, defaults are not very distinct.
     // Enabled hovered border color.
-    final Color enabledHoveredBorderColor = unfocusedBorderIsColored
+    final Color enabledHoveredBorderColor = unfocusedBorderIsColored ?? false
         ? borderColor //.withAlpha(kEnabledBorderAlpha)
         : isFilled
             ? colorScheme.onSurface
