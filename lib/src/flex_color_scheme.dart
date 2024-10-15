@@ -8424,12 +8424,35 @@ class FlexColorScheme with Diagnosticable {
             ? FlexColor.materialDarkPrimary
             : FlexColor.materialLightPrimary);
 
-    // Get default fallback error color.
-    final Color errorFallback =
-        isDark ? FlexColor.materialDarkError : FlexColor.materialLightError;
+    // Get default fallback error colors.
+    final Color errorFallback = isDark
+        ? useMaterial3
+            ? FlexColor.material3DarkError
+            : FlexColor.materialDarkError
+        : useMaterial3
+            ? FlexColor.material3LightError
+            : FlexColor.materialLightError;
+    final Color onErrorFallback = isDark
+        ? useMaterial3
+            ? FlexColor.material3DarkOnError
+            : FlexColor.materialDarkOnError
+        : useMaterial3
+            ? FlexColor.material3LightOnError
+            : FlexColor.materialLightOnError;
     final Color errorContainerFallback = isDark
-        ? FlexColor.darkErrorContainer(FlexColor.materialDarkError)
-        : FlexColor.lightErrorContainer(FlexColor.materialLightError);
+        ? useMaterial3
+            ? FlexColor.material3DarkErrorContainer
+            : FlexColor.darkErrorContainer(FlexColor.materialDarkError)
+        : useMaterial3
+            ? FlexColor.material3LightErrorContainer
+            : FlexColor.lightErrorContainer(FlexColor.materialLightError);
+    final Color onErrorContainerFallback = isDark
+        ? useMaterial3
+            ? FlexColor.material3DarkErrorContainer
+            : FlexColor.materialDarkOnErrorContainer
+        : useMaterial3
+            ? FlexColor.material3LightOnErrorContainer
+            : FlexColor.materialLightOnErrorContainer;
 
     // Determine effective primary, secondary and tertiary colors, depending
     // on passed in properties as highest priority, then colorScheme values.
@@ -8466,12 +8489,20 @@ class FlexColorScheme with Diagnosticable {
     final Color effectiveSurfaceColor = surface ??
         colorScheme?.surface ??
         (isDark
-            ? FlexColor.materialDarkSurface
-            : FlexColor.materialLightSurface);
+            ? useMaterial3
+                ? FlexColor.darkFlexSurface
+                : FlexColor.materialDarkSurface
+            : useMaterial3
+                ? FlexColor.lightFlexSurface
+                : FlexColor.materialLightSurface);
     final Color effectiveInverseSurfaceColor = colorScheme?.inverseSurface ??
         (isDark
-            ? FlexColor.materialLightSurface
-            : FlexColor.materialDarkSurface);
+            ? useMaterial3
+                ? FlexColor.darkFlexInverseSurface
+                : FlexColor.materialLightSurface
+            : useMaterial3
+                ? FlexColor.lightFlexInverseSurface
+                : FlexColor.materialDarkSurface);
     // Check brightness of primary, secondary, error, surface and background
     // colors, and returns appropriate computed colors for their onColors if an
     // onColor for it was was not passed in, or no colorScheme with them were
@@ -8489,9 +8520,11 @@ class FlexColorScheme with Diagnosticable {
       inverseSurface: effectiveInverseSurfaceColor,
       //
       error: colors.error ?? errorFallback,
-      onError: onError ?? colorScheme?.onError,
+      onError: onError ?? colorScheme?.onError ?? onErrorFallback,
       errorContainer: colors.errorContainer ?? errorContainerFallback,
-      onErrorContainer: onErrorContainer ?? colorScheme?.onErrorContainer,
+      onErrorContainer: onErrorContainer ??
+          colorScheme?.onErrorContainer ??
+          onErrorContainerFallback,
       //
       onPrimary: onPrimary ?? colorScheme?.onPrimary,
       onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
@@ -8504,6 +8537,7 @@ class FlexColorScheme with Diagnosticable {
       onSurface: onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant: colorScheme?.onSurfaceVariant,
       onInverseSurface: colorScheme?.onInverseSurface,
+      useMaterial3: useMaterial3,
     );
     // Return the ColorScheme as a copyWith on original passed in colorScheme
     // if one was passed in, with all the effective properties overriding its
