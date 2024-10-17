@@ -145,4 +145,27 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(' Save value ......... : $value');
     }
   }
+
+  @override
+  Map<String, dynamic> getAll() {
+    return _hiveBox
+        .toMap()
+        // ignore: always_specify_types
+        .map((key, value) => MapEntry(key.toString(), value));
+  }
+
+  @override
+  Future<void> putAll(
+    Map<String, dynamic> values, {
+    bool clearExisting = true,
+  }) async {
+    if (clearExisting) {
+      await _hiveBox.clear();
+    }
+
+    return _hiveBox.putAll(values);
+  }
+
+  @override
+  bool get supportsExportImport => true;
 }
