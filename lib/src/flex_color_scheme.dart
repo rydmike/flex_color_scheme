@@ -386,7 +386,7 @@ enum FlexScaffoldBaseColor {
   }
 
   /// Return the name of the enum value.
-  String name(bool isLight) {
+  String getName(bool isLight) {
     switch (this) {
       case FlexScaffoldBaseColor.lowestBase:
         return isLight ? 'Lowest base (White)' : 'Lowest base (Black)';

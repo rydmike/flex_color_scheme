@@ -231,7 +231,7 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
         wrapWithDefaultLabel ? 'default ($resolvedLabel)' : resolvedLabel;
 
     final String selectedLabel = enabled && value != null
-        ? value?.name(isLight) ?? ''
+        ? value?.getName(isLight) ?? ''
         : effectiveDefaultLabel;
 
     return Theme(
@@ -282,7 +282,7 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
                 ),
                 title: i <= 0
                     ? Text(effectiveDefaultLabel, style: txtStyle)
-                    : Text(FlexScaffoldBaseColor.values[i - 1].name(isLight),
+                    : Text(FlexScaffoldBaseColor.values[i - 1].getName(isLight),
                         style: txtStyle),
               ),
             )
