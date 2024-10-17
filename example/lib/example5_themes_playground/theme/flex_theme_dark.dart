@@ -90,9 +90,13 @@ ThemeData flexThemeDark(ThemeController controller) {
 /// the almost identical `flexColorSchemeLight` function. Please see it for
 /// more tutorial comments.
 FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
+  // Using a built-in scheme or one of the custom colors in the demo?
   final bool useBuiltIn = controller.schemeIndex > 2 &&
       controller.schemeIndex < AppColor.schemes.length - 1;
+  // Get the enum index of scheme
   final int flexScheme = controller.schemeIndex - 3;
+  // If we use the useToDarkMethod, we should not use the scheme, but instead
+  // use the colors property so we can create a dark theme from the light one.
   final bool useScheme = useBuiltIn && !controller.useToDarkMethod;
 
   return FlexColorScheme.dark(
@@ -102,6 +106,16 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     // Switch to using `FlexSchemeColor` when using 3 first custom schemes or
     // the last one that is customizable.
     colors: !useScheme ? AppColor.scheme(controller).dark : null,
+
+    // TODO(rydmike): DEBUGGING: Remove
+    // primary: Colors.blue,
+    // primaryLightRef: Colors.blue,
+    // secondary: Colors.pink[200],
+    // secondaryLightRef: Colors.pink,
+    // tertiary: Colors.orange[200],
+    // tertiaryLightRef: Colors.orange,
+
+    // Used number of colors from the selected input FlexColorScheme based theme
     usedColors: controller.usedColors,
     surfaceMode: controller.surfaceModeDark,
     fixedColorStyle: controller.fixedColorStyle,
@@ -119,19 +133,25 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     //
     subThemesData: controller.useSubThemes
         ? FlexSubThemesData(
-            // Overall effect settings.
+            // Want color themed disable hover, focus, highlight and
+            // splash colors? Then keep this one on.
             interactionEffects: controller.interactionEffects,
+            // Tinted disabled controls.
             tintedDisabledControls: controller.tintedDisabledControls,
+            // Blend level for on colors for on colors, primary
+            // secondary and tertiary and their containers.
             blendOnLevel: controller.blendOnLevelDark,
+            // Use blend level values also with main on colors, not
+            // only with container and on surfaces.
             blendOnColors: controller.blendDarkOnColors,
             // Custom Scaffold background color.
             scaffoldBackgroundBaseColor:
                 controller.scaffoldBackgroundDarkBaseColor,
             scaffoldBackgroundSchemeColor:
                 controller.scaffoldBackgroundDarkSchemeColor,
-            // Text theme settings.
             // TODO(rydmike): Commented as part of blendTextTheme deprecation.
             // blendTextTheme: controller.blendDarkTextTheme,
+            // Used typography.
             useMaterial3Typography: controller.useMaterial3Typography,
             // Divider settings
             useM2StyleDividerInM3: controller.useM2StyleDividerInM3,
@@ -162,7 +182,14 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 ?.setting(controller.fakeIsWeb, controller.useMaterial3),
             splashTypeAdaptive: controller.splashTypeAdaptive
                 ?.setting(controller.fakeIsWeb, controller.useMaterial3),
-            // Default radius for all widgets, if not null.
+            // Value to adjust themed border radius on widgets with
+            // an adjustable corner rounding, this one is very handy.
+            // If null, it defaults to Material 3 design guide
+            // values, when available: https://m3.material.io/
+            // If you give it value, "all" Flutter built-in widgets
+            // supporting border radius will use the give radius.
+            // Border radius can be customized per widget too, it overrides
+            // the M3 default and global default setting.
             defaultRadius: controller.defaultRadius,
             defaultRadiusAdaptive: controller.defaultRadiusAdaptive,
             // TextButton settings.
@@ -216,6 +243,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             //
             checkboxSchemeColor: controller.checkboxSchemeColor,
             radioSchemeColor: controller.radioSchemeColor,
+            // Style of unselected switch/checkbox/radio.
             unselectedToggleIsColored: controller.unselectedToggleIsColored,
             // Slider settings.
             sliderBaseSchemeColor: controller.sliderBaseSchemeColor,
@@ -248,18 +276,24 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                       )
                     : null,
             //
+            inputDecoratorBackgroundAlpha:
+                controller.inputDecoratorBackgroundAlphaDark,
+            // Underline or outline border type?
             inputDecoratorBorderType: controller.inputDecoratorBorderType,
             inputDecoratorRadius: controller.inputDecoratorBorderRadius,
             inputDecoratorRadiusAdaptive:
                 controller.inputDecoratorBorderRadiusAdaptive,
+            // Only want a border when the text input has focus
+            // or error, then set this to false. By default it always
+            // has a border of selected style, but thinner.
             inputDecoratorUnfocusedHasBorder:
                 controller.inputDecoratorUnfocusedHasBorder,
-            inputDecoratorBackgroundAlpha:
-                controller.inputDecoratorBackgroundAlphaDark,
-            inputDecoratorFocusedHasBorder:
-                controller.inputDecoratorFocusedHasBorder,
+            // Want to use uncolored border/underline when unfocused,
+            // set this to false
             inputDecoratorUnfocusedBorderIsColored:
                 controller.inputDecoratorUnfocusedBorderIsColored,
+            inputDecoratorFocusedHasBorder:
+                controller.inputDecoratorFocusedHasBorder,
             inputDecoratorBorderWidth: controller.inputDecoratorBorderWidth,
             inputDecoratorFocusedBorderWidth:
                 controller.inputDecoratorFocusedBorderWidth,
@@ -267,6 +301,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.inputDecoratorPrefixIconDarkSchemeColor,
             inputDecoratorSuffixIconSchemeColor:
                 controller.inputDecoratorSuffixIconDarkSchemeColor,
+            // TextSelection settings
+            inputCursorSchemeColor: controller.inputCursorDarkSchemeColor,
+            inputSelectionSchemeColor: controller.inputSelectionDarkSchemeColor,
+            inputSelectionOpacity: controller.inputSelectionDarkOpacity,
+            inputSelectionHandleSchemeColor:
+                controller.inputSelectionHandleDarkSchemeColor,
             // ListTile settings.
             listTileSelectedSchemeColor: controller.listTileSelectedSchemeColor,
             listTileIconSchemeColor: controller.listTileIconSchemeColor,
@@ -290,13 +330,10 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             listTileMinVerticalPadding: controller.listTileMinVerticalPadding,
             listTileStyle: controller.listTileStyle,
             listTileTitleAlignment: controller.listTileTitleAlignment,
-            // TextSelection settings
-            inputCursorSchemeColor: controller.inputCursorDarkSchemeColor,
-            inputSelectionSchemeColor: controller.inputSelectionDarkSchemeColor,
-            inputSelectionOpacity: controller.inputSelectionDarkOpacity,
-            inputSelectionHandleSchemeColor:
-                controller.inputSelectionHandleDarkSchemeColor,
             // FAB settings.
+            // Set to false to keep using M2 style FAB and ignore
+            // M3 type default and global radius on the FAB, it thus
+            // remains circular or stadium shaped in extended mode.
             fabRadius: controller.fabBorderRadius,
             fabUseShape: controller.fabUseShape,
             fabAlwaysCircular: controller.fabAlwaysCircular,
@@ -346,24 +383,26 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 : Duration(milliseconds: controller.tooltipShowDuration!),
             tooltipSchemeColor: controller.tooltipSchemeColor,
             tooltipOpacity: controller.tooltipOpacity,
-            //
-            // Dialog settings.
+            // General Dialog settings.
+            dialogRadius: controller.dialogBorderRadius,
+            dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
             dialogBackgroundSchemeColor:
                 controller.dialogBackgroundDarkSchemeColor,
             dialogElevation: controller.dialogElevation,
-            dialogRadius: controller.dialogBorderRadius,
-            dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
-            datePickerDialogRadius: controller.datePickerDialogBorderRadius,
-            timePickerDialogRadius: controller.timePickerDialogBorderRadius,
+            // Dialog input decorator for TimePicker and DatePicker.
             useInputDecoratorThemeInDialogs:
                 controller.useInputDecoratorThemeInDialogs,
-            //
+            // Dialog DatePicker settings.
+            datePickerDialogRadius: controller.datePickerDialogBorderRadius,
             datePickerHeaderBackgroundSchemeColor:
                 controller.datePickerHeaderBackgroundSchemeColor,
             datePickerHeaderForegroundSchemeColor:
                 controller.datePickerHeaderForegroundSchemeColor,
             datePickerDividerSchemeColor:
                 controller.datePickerDividerSchemeColor,
+            // Dialog TimePicker settings.
+            timePickerDialogRadius: controller.timePickerDialogBorderRadius,
+            timePickerElementRadius: controller.timePickerElementRadius,
             // SnackBar settings.
             snackBarRadius: controller.snackBarBorderRadius,
             snackBarElevation: controller.snackBarElevation,
@@ -456,13 +495,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
               controller.menuPaddingEnd ?? 0,
               controller.menuPaddingBottom ?? 0,
             ),
-            //
+            // MenuBar Settings
             menuBarBackgroundSchemeColor:
                 controller.menuBarBackgroundSchemeColor,
             menuBarRadius: controller.menuBarRadius,
             menuBarElevation: controller.menuBarElevation,
             menuBarShadowColor: controller.menuBarShadowColor,
-            //
+            // MenuItem Settings
             menuItemBackgroundSchemeColor:
                 controller.menuItemBackgroundSchemeColor,
             menuItemForegroundSchemeColor:
