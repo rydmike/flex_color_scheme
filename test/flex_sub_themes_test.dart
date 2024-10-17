@@ -82,7 +82,10 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
+        FlexSubThemes.bottomNavigationBarTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ),
         equals(
           const BottomNavigationBarThemeData(),
         ),
@@ -99,7 +102,10 @@ void main() {
         brightness: Brightness.dark,
       );
       expect(
-        FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
+        FlexSubThemes.bottomNavigationBarTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ),
         equals(
           const BottomNavigationBarThemeData(),
         ),
@@ -115,6 +121,7 @@ void main() {
         FlexSubThemes.bottomNavigationBarTheme(
           colorScheme: colorScheme,
           // useFlutterDefaults: false, <<- Expect this to be default
+          useMaterial3: false,
         ),
         equals(
           const BottomNavigationBarThemeData(
@@ -145,6 +152,7 @@ void main() {
           colorScheme: colorScheme,
           elevation: 2,
           // useFlutterDefaults: false, <<- Expect this to be default
+          useMaterial3: false,
         ),
         equals(
           const BottomNavigationBarThemeData(
@@ -9138,7 +9146,10 @@ void main() {
       const ColorScheme colorScheme = ColorScheme.light();
       final VisualDensity visualDensity = VisualDensity.adaptivePlatformDensity;
       expect(
-        FlexSubThemes.toggleButtonsTheme(colorScheme: colorScheme),
+        FlexSubThemes.toggleButtonsTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ),
         equals(
           ToggleButtonsThemeData(
             borderWidth: 1,
@@ -9175,6 +9186,7 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           borderWidth: 2,
+          useMaterial3: false,
         ),
         equals(
           ToggleButtonsThemeData(
