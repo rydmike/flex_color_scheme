@@ -6610,4 +6610,19 @@ class ThemeController with ChangeNotifier {
   void setRecentColors(final List<Color> colors) {
     _recentColors = colors;
   }
+
+  /// Check if we can import/export the theme data
+  bool canImportExportThemeData() {
+    return _themeService.supportsExportImport;
+  }
+
+  /// Export saved theme settings from local data
+  Map<String, dynamic> exportSavedThemeData() {
+    return _themeService.getAll();
+  }
+
+  /// Import saved theme settings to local data
+  Future<void> importSavedThemeData(Map<String, dynamic> data) {
+    return _themeService.putAll(data);
+  }
 }
