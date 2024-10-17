@@ -54,8 +54,7 @@ Future<void> main() async {
   //
   // The ThemeServiceHive constructor requires a box name, the others do not.
   // The box name is just a file name for the file that stores the settings.
-  final ThemeService themeService =
-      ThemeServiceHive('flex_color_scheme_v5_box_5');
+  final ThemeService themeService = ThemeServiceHive('flex_color_scheme_v8');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
