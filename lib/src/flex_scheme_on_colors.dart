@@ -402,8 +402,8 @@ class FlexSchemeOnColors with Diagnosticable {
         other.onSurfaceContainerLowest == onSurfaceContainerLowest &&
         other.onSurfaceContainerLow == onSurfaceContainerLow &&
         other.onSurfaceContainer == onSurfaceContainer &&
-        other.onSurfaceContainerHigh == onSurfaceContainerHighest &&
-        other.onSurfaceContainerHighest == onSurface &&
+        other.onSurfaceContainerHigh == onSurfaceContainerHigh &&
+        other.onSurfaceContainerHighest == onSurfaceContainerHighest &&
         other.onInverseSurface == onInverseSurface &&
         other.onError == onError &&
         other.onErrorContainer == onErrorContainer;
