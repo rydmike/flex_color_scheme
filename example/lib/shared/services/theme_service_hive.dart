@@ -116,6 +116,10 @@ class ThemeServiceHive implements ThemeService {
       debugPrint(' Error message ...... : $e');
       debugPrint(' Store key .......... : $key');
       debugPrint(' defaultValue ....... : $defaultValue');
+      if (e is HiveError && e.message.contains('missing type adapter')) {
+        // Skip the offending key
+        debugPrint(' Missing type adapter : SKIP and return default');
+      }
       // If something goes wrong we return the default value.
       return defaultValue;
     }
