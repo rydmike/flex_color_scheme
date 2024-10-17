@@ -100,6 +100,7 @@ void main() {
       secondary: FlexColor.materialLightSecondary,
       surface: FlexColor.materialLightSurface,
       error: FlexColor.materialLightError,
+      useMaterial3: false,
     );
     test(
         'FSOC1.04: GIVEN a FlexSchemeOnColors created from default Material '
@@ -138,6 +139,7 @@ void main() {
           inverseSurface: FlexColor.materialDarkSurface,
           error: FlexColor.materialLightError,
           errorContainer: FlexColor.materialLightError,
+          useMaterial3: false,
         ),
         const FlexSchemeOnColors(
           onPrimary: Color(0xffffffff),
@@ -220,6 +222,7 @@ void main() {
       onSurface: const Color(0xFFCCCCCC),
       onError: const Color(0xFFAAAAAA),
       onErrorContainer: const Color(0xFFAA346A),
+      useMaterial3: false,
     );
 
     test(
@@ -254,6 +257,7 @@ void main() {
       inverseSurface: FlexColor.materialDarkSurface,
       error: FlexColor.materialLightError,
       errorContainer: FlexColor.materialLightError,
+      useMaterial3: false,
     );
 
     test(
@@ -288,6 +292,7 @@ void main() {
       inverseSurface: FlexColor.materialDarkSurface,
       error: const Color(0xffedb4b4),
       errorContainer: const Color(0xff812424),
+      useMaterial3: false,
     );
 
     test(
@@ -325,7 +330,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeOnColors#00000(onPrimary: Color(0xffffffff), onPrimaryContainer: Color(0xffffffff), onSecondary: Color(0xff000000), onSecondaryContainer: Color(0xff000000), onTertiary: Color(0xffffffff), onTertiaryContainer: Color(0xff000000), onSurface: Color(0xff000000), onSurfaceVariant: Color(0xff000000), onInverseSurface: Color(0xffffffff), onBackground: Color(0xff000000), onError: Color(0xff000000), onErrorContainer: Color(0xffffffff))'));
+              'FlexSchemeOnColors#00000(onPrimary: Color(0xffffffff), onPrimaryContainer: Color(0xffffffff), onSecondary: Color(0xff000000), onSecondaryContainer: Color(0xff000000), onTertiary: Color(0xffffffff), onTertiaryContainer: Color(0xff000000), onSurface: Color(0xff000000), onSurfaceVariant: Color(0xff000000), onSurfaceDim: null, onSurfaceBright: null, onSurfaceContainerLowest: null, onSurfaceContainerLow: null, onSurfaceContainer: null, onSurfaceContainerHigh: null, onSurfaceContainerHighest: null, onInverseSurface: Color(0xffffffff), onError: Color(0xff000000), onErrorContainer: Color(0xffffffff))'));
     });
     test(
         'FSOC1.07: Test toStringShort implemented via debugFillProperties '

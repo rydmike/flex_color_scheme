@@ -596,9 +596,9 @@ void main() {
     );
     final FlexColorScheme m4PassSchemeDark = FlexColorScheme.dark(
       colors: m3Baseline,
-      // We need to pass a color scheme with same primary color as in light that
+      // Must pass a color scheme with same primary color as in light that
       // will be used as seed color for to get desired/expected result.
-      colorScheme: keySchemeDark.copyWith(primary: keySchemeLight.primary),
+      colorScheme: keySchemeDark.copyWith(primary: m3BaseSeed),
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
       keyColors: const FlexKeyColors(
@@ -660,7 +660,8 @@ void main() {
       // will be used as seed color for to get desired/expected result.
       colorScheme: keySchemeDark,
       primary: FlexColor.sakuraDarkPrimary,
-      // The only main prop that matter is the seed key, these wont do anything.
+      // The only main prop that matter is the "primary" seed key, these
+      // wont do anything.
       primaryContainer: FlexColor.sakuraDarkPrimaryContainer,
       secondary: FlexColor.sakuraDarkSecondary,
       secondaryContainer: FlexColor.sakuraDarkSecondaryContainer,
@@ -708,6 +709,10 @@ void main() {
         equals(ColorScheme.fromSeed(
           seedColor: FlexColor.sakuraDarkPrimary,
           brightness: Brightness.dark,
+        ).copyWith(
+          background: const Color(0xff181115),
+          onBackground: const Color(0xffeddfe4),
+          surfaceVariant: const Color(0xff181115),
         )),
       );
     });
