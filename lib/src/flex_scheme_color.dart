@@ -387,7 +387,7 @@ class FlexSchemeColor with Diagnosticable {
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
 
     // Swap legacy M2 designed secondary and tertiary colors.
-    final FlexSchemeColor fixColors = swapLegacy
+    final FlexSchemeColor swapLegacyColors = swapLegacy
         ? colors.copyWith(
             secondary: colors.tertiary,
             secondaryContainer: colors.tertiaryContainer,
@@ -400,15 +400,15 @@ class FlexSchemeColor with Diagnosticable {
 
     // Swap primary and secondary colors, using legacy fixColors.
     final FlexSchemeColor effectiveColors = swapColors
-        ? fixColors.copyWith(
-            primary: fixColors.secondary,
-            primaryContainer: fixColors.secondaryContainer,
-            primaryLightRef: fixColors.secondaryLightRef,
-            secondary: fixColors.primary,
-            secondaryContainer: fixColors.primaryContainer,
-            secondaryLightRef: fixColors.primaryLightRef,
+        ? swapLegacyColors.copyWith(
+            primary: swapLegacyColors.secondary,
+            primaryContainer: swapLegacyColors.secondaryContainer,
+            primaryLightRef: swapLegacyColors.secondaryLightRef,
+            secondary: swapLegacyColors.primary,
+            secondaryContainer: swapLegacyColors.primaryContainer,
+            secondaryLightRef: swapLegacyColors.primaryLightRef,
           )
-        : fixColors;
+        : swapLegacyColors;
 
     if (brightness == Brightness.light) {
       return effectiveColors.copyWith(
