@@ -55,6 +55,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **MINOR KNOWN ISSUES**
  
+  - When using computed dark and swap main and container feature, the fixed colors should not swap main and container, they should keep light order for computation of fixed colors.  
+
   - **Package**: The `toScheme` method **may** need some updates for the raw `FlexColorScheme?` constructor to not provide surprises
     - Theming and `toScheme` works as intended with light/dark factories. This update would only be for a better raw constructor result. The raw constructor is not supposed to be used directly, so any gaps are not really that relevant.
 
