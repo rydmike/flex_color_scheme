@@ -89,8 +89,8 @@ class FlexSchemeColor with Diagnosticable {
   /// mode [FlexSchemeColor.primary] for this color.
   final Color? primaryLightRef;
 
-  /// An accent color that, when used sparingly, calls attention to parts
-  /// of your app.
+  /// A support color to primary, with less emphasis than primary, often of
+  /// same hue as primary, but does not have to be.
   final Color secondary;
 
   // A private color used for elements needing less emphasis than [secondary],
