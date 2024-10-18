@@ -55,7 +55,7 @@ void main() {
       expect(
           FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
+            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine)));
     });
     test(
@@ -76,7 +76,7 @@ void main() {
       expect(
         FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.light(scheme: FlexScheme.material)
+          FlexThemeData.light(scheme: FlexScheme.materialBaseline)
               .toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -102,7 +102,7 @@ void main() {
         'no params.', () {
       expect(
         FlexThemeData.light(
-          colors: FlexColor.schemes[FlexScheme.material]!.light,
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
@@ -117,6 +117,7 @@ void main() {
         'no parameters.', () {
       expect(
         FlexColorScheme.dark(
+          useMaterial3: false,
           colors: const FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
@@ -128,7 +129,8 @@ void main() {
           ),
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
+          FlexThemeData.dark(useMaterial3: false)
+              .toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
