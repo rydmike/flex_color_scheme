@@ -3418,7 +3418,7 @@ class FlexColor {
 
   /// English description of the blackWhite theme.
   static const String blackWhiteDescription = 'Black or white primary, '
-      'secondary and tertiary colors, with monochrome greys based theme';
+      'secondary and tertiary colors, with monochrome grey containers';
 
   /// Black theme color for light primary color.
   static const Color blackWhiteLightPrimary = Colors.black;
@@ -3460,7 +3460,7 @@ class FlexColor {
   static const String greyName = 'Grey';
 
   /// English description of the grey  theme.
-  static const String greyDescription = 'Monochrome grey color based theme';
+  static const String greyDescription = 'Monochrome grey colors based theme';
 
   /// Grey theme color for light primary color.
   static const Color greyLightPrimary = Color(0xFF202020);
