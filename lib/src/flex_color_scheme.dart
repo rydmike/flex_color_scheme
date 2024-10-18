@@ -1573,7 +1573,8 @@ class FlexColorScheme with Diagnosticable {
     /// To create custom color schemes use the [colors] property. If both
     /// [colors] and [scheme] are specified, the scheme defined by
     /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material].
+    /// [FlexScheme.material] if [useMaterial3] is false, and to
+    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
     final FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
@@ -2892,8 +2893,9 @@ class FlexColorScheme with Diagnosticable {
     // behavior to match past default behavior.
     final FlexKeyColors seed =
         keyColors ?? const FlexKeyColors(useKeyColors: false);
-    // Fallback value for scheme is default material scheme.
-    final FlexScheme flexScheme = scheme ?? FlexScheme.material;
+    // Fallback value for scheme is default material scheme, based on mode.
+    final FlexScheme flexScheme = scheme ??
+        (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
@@ -3644,7 +3646,8 @@ class FlexColorScheme with Diagnosticable {
     /// To create custom color schemes use the [colors] property. If both
     /// [colors] and [scheme] are specified, the scheme defined by
     /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material].
+    /// [FlexScheme.material] if [useMaterial3] is false, and to
+    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
     final FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
@@ -4963,8 +4966,9 @@ class FlexColorScheme with Diagnosticable {
     // behavior to match past default behavior.
     final FlexKeyColors seed =
         keyColors ?? const FlexKeyColors(useKeyColors: false);
-    // Fallback value for scheme is default material scheme.
-    final FlexScheme flexScheme = scheme ?? FlexScheme.material;
+    // Fallback value for scheme is default material scheme, based on mode.
+    final FlexScheme flexScheme = scheme ??
+        (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.dark;

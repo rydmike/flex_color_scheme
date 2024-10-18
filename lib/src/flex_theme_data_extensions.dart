@@ -70,7 +70,8 @@ extension FlexThemeData on ThemeData {
     /// To create custom color schemes use the [colors] property. If both
     /// [colors] and [scheme] are specified, the scheme defined by
     /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material].
+    /// [FlexScheme.material] if [useMaterial3] is false, and to
+    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
     final FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
@@ -1476,7 +1477,8 @@ extension FlexThemeData on ThemeData {
     /// To create custom color schemes use the [colors] property. If both
     /// [colors] and [scheme] are specified, the scheme defined by
     /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material].
+    /// [FlexScheme.material] if [useMaterial3] is false, and to
+    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
     final FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
