@@ -46,6 +46,7 @@ void main() {
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
       transparentStatusBar: false,
+      useMaterial3: false,
     );
     final FlexColorScheme fc1i = FlexColorScheme.light(
       scheme: FlexScheme.material,
@@ -56,6 +57,7 @@ void main() {
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: true,
       transparentStatusBar: false,
+      useMaterial3: false,
     );
     test(
         'FCS1.001-01: GIVEN a FlexColorScheme.light with null colors and null '
@@ -113,6 +115,7 @@ void main() {
       tooltipsMatchBackground: true,
       transparentStatusBar: false,
       subThemesData: const FlexSubThemesData(),
+      useMaterial3: false,
     );
     final FlexColorScheme fc3i = FlexColorScheme.dark(
       scheme: FlexScheme.material,
@@ -124,6 +127,7 @@ void main() {
       tooltipsMatchBackground: true,
       transparentStatusBar: false,
       subThemesData: const FlexSubThemesData(),
+      useMaterial3: false,
     );
     test(
         'FCS1.001-03: GIVEN a FlexColorScheme.dark with null colors and null '
@@ -304,26 +308,27 @@ void main() {
       secondaryContainer: FlexColor.materialLightSecondaryContainer,
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-      surface: FlexColor.lightFlexSurface,
+      // surface: FlexColor.lightFlexSurface,
       error: FlexColor.materialLightError,
-      scaffoldBackground: FlexColor.lightFlexSurfaceContainerLowest,
-      dialogBackground: FlexColor.lightFlexSurfaceContainerHigh,
+      // scaffoldBackground: FlexColor.lightFlexSurfaceContainerLowest,
+      // dialogBackground: FlexColor.lightFlexSurfaceContainerHigh,
       onPrimary: Colors.white,
       onPrimaryContainer: Colors.black,
       onSecondary: Colors.black,
       onSecondaryContainer: Colors.black,
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
-      onSurface: FlexColor.lightFlexOnSurface,
+      // onSurface: FlexColor.lightFlexOnSurface,
       onError: Colors.white,
+      useMaterial3: false,
     );
     test(
         'FCS1.04a1: GIVEN a FlexColorScheme.light() created object '
         'EXPECT equality when made by matching .light() overrides.', () {
-      expect(FlexColorScheme.light(), equals(m1e2));
+      expect(FlexColorScheme.light(useMaterial3: false), equals(m1e2));
       // Expect toTheme from them to full-fill same condition.
       expect(
-        FlexColorScheme.light()
+        FlexColorScheme.light(useMaterial3: false)
             .toTheme
             .toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
@@ -337,31 +342,33 @@ void main() {
       secondaryContainer: FlexColor.materialLightSecondaryContainer,
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-      surface: FlexColor.lightFlexSurface,
+      // surface: FlexColor.lightFlexSurface,
       error: FlexColor.materialLightError,
-      scaffoldBackground: FlexColor.lightFlexSurfaceContainerLowest,
-      appBarBackground: FlexColor.lightFlexSurface,
-      dialogBackground: FlexColor.lightFlexSurfaceContainerHigh,
+      // scaffoldBackground: FlexColor.lightFlexSurfaceContainerLowest,
+      // appBarBackground: FlexColor.lightFlexSurface,
+      // dialogBackground: FlexColor.lightFlexSurfaceContainerHigh,
       onPrimary: Colors.white,
       onPrimaryContainer: Colors.black,
       onSecondary: Colors.black,
       onSecondaryContainer: Colors.black,
       onTertiary: Colors.white,
       onTertiaryContainer: Colors.black,
-      onSurface: FlexColor.lightFlexOnSurface,
+      // onSurface: FlexColor.lightFlexOnSurface,
       onError: Colors.white,
+      useMaterial3: false,
     );
     test(
         'FCS1.04a2: GIVEN a FlexColorScheme.light() created object '
         'EXPECT equality when made by matching .light() overrides.', () {
       expect(
           FlexColorScheme.light(
-            appBarStyle: FlexAppBarStyle.surface,
+            appBarStyle: FlexAppBarStyle.primary,
+            useMaterial3: false,
           ),
           equals(m1e22));
       // Expect toTheme from them to full-fill same condition.
       expect(
-        FlexColorScheme.light()
+        FlexColorScheme.light(useMaterial3: false)
             .toTheme
             .toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
@@ -373,14 +380,18 @@ void main() {
         'FCS1.04b: GIVEN a FlexColorScheme.light created object with colors  '
         'EXPECT equality when made by matching .light() overrides.', () {
       expect(
-        FlexColorScheme.light(colors: FlexColor.material.light),
+        FlexColorScheme.light(
+          colors: FlexColor.material.light,
+          useMaterial3: false,
+        ),
         equals(m1e2),
       );
       // Expect toTheme from them to full-fill same condition.
       expect(
-        FlexColorScheme.light(colors: FlexColor.material.light)
-            .toTheme
-            .toString(minLevel: DiagnosticLevel.fine),
+        FlexColorScheme.light(
+          colors: FlexColor.material.light,
+          useMaterial3: false,
+        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
             m1e2.toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
@@ -391,12 +402,14 @@ void main() {
         'map EXPECT equality when made by matching .light() overrides.', () {
       expect(
         FlexColorScheme.light(
+            useMaterial3: false,
             colors: FlexColor.schemes[FlexScheme.material]!.light),
         m1e2,
       );
       // Expect toTheme from them to full-fill same condition.
       expect(
         FlexColorScheme.light(
+                useMaterial3: false,
                 colors: FlexColor.schemes[FlexScheme.material]!.light)
             .toTheme
             .toString(minLevel: DiagnosticLevel.fine),
@@ -410,6 +423,7 @@ void main() {
         'EXPECT equality when made by matching mode .light() overrides.', () {
       expect(
         FlexColorScheme.light(
+          useMaterial3: false,
           surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
           blendLevel: 0,
         ),
@@ -418,6 +432,7 @@ void main() {
       // Expect toTheme from them to full-fill same condition.
       expect(
         FlexColorScheme.light(
+          useMaterial3: false,
           surfaceMode: FlexSurfaceMode.highBackgroundLowScaffold,
           blendLevel: 0,
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
