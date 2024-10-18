@@ -372,8 +372,8 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onPrimaryContainer,
 
-    /// An accent color that, when used sparingly, calls attention to parts
-    /// of your app.
+    /// A support color to primary, with less emphasis than primary, often of
+    /// same hue as primary, but does not have to be.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
@@ -1720,8 +1720,39 @@ extension FlexThemeData on ThemeData {
     /// This override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
+    /// In dark mode, if you provide an override Color value for [primary] you
+    /// should also provide a value for [primaryLightRef] to ensure that the
+    /// fixed colors can be computed correctly when not using seed generated
+    /// ColorSchemes and setting [fixedColorStyle] to default.
+    ///
     /// Defaults to null.
     final Color? primary,
+
+    /// If you specify an override color for [primary], you should also specify
+    /// an override for the [primaryLightRef] color when not using a seed
+    /// generated ColorSchemes and setting [fixedColorStyle] to default.
+    ///
+    /// This color is used to compute the [primaryFixed], [primaryFixedDim],
+    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
+    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+    /// the default [FlexFixedColorStyle.computed] value.
+    ///
+    /// The [primaryLightRef] should have the same color value as the
+    /// primary color has in your light theme, regardless of where it is
+    /// specified.
+    ///
+    /// If you are always using a seed generated ColorScheme, and your [primary]
+    /// override is already the key color your want to use, you do not need to
+    /// also specify a [primaryLightRef], but if you do, it will be used as
+    /// seed before the [primary] color. This gives you the option to use a
+    /// given color for dark none seeded primary and giving the light mode
+    /// primary color for [primaryLightRef], so that when you use seeding
+    /// the same seed color as in light mode is used and we get the same tonal
+    /// palette for the primary palette in both light and dark mode, you
+    /// typically want this. But if you always seed and use overrides, you
+    /// can give the light  mode primary color as the primary override in dark
+    /// mode too and skip the [primaryLightRef] override.
+    final Color? primaryLightRef,
 
     /// A color that is clearly legible when drawn on [primary] color.
     ///
@@ -1778,8 +1809,8 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onPrimaryContainer,
 
-    /// An accent color that, when used sparingly, calls attention to parts
-    /// of your app.
+    /// A support color to primary, with less emphasis than primary, often of
+    /// same hue as primary, but does not have to be.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
@@ -1794,8 +1825,40 @@ extension FlexThemeData on ThemeData {
     /// The override color is included and affected by factory properties
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
+    /// In dark mode, if you provide an override Color value for [secondary] you
+    /// should also provide a value for [secondaryLightRef] to ensure that the
+    /// fixed colors can be computed correctly when not using seed generated
+    /// ColorSchemes and setting [fixedColorStyle] to default.
+    ///
     /// Defaults to null.
     final Color? secondary,
+
+    /// If you specify an override color for [secondary], you should also
+    /// specify an override for the [secondaryLightRef] color when not using a
+    /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
+    ///
+    /// This color is used to compute the [secondaryFixed], [secondaryFixedDim],
+    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
+    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+    /// the default [FlexFixedColorStyle.computed] value.
+    ///
+    /// The [secondaryLightRef] should have the same color value as the
+    /// secondary color has in your light theme, regardless of where it is
+    /// specified.
+    ///
+    /// If you are always using a seed generated ColorScheme, and your
+    /// [secondary] override is already the key color your want to use, you
+    /// do not need to also specify a [secondaryLightRef], but if you do, it
+    /// will be used as seed before the [secondary] color. This gives you
+    /// the option to use a given color for dark none seeded secondary
+    /// and giving the light mode secondary color for [secondaryLightRef],
+    /// so that when you use seeding the same seed color as in light mode
+    /// is used and we get the same tonal palette for the secondary palette
+    /// in both light and dark mode, you typically want this. But if you
+    /// always seed and use overrides, you can give the light mode
+    /// secondary color as the secondary override in dark
+    /// mode too and skip the [secondaryLightRef] override.
+    final Color? secondaryLightRef,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -1869,8 +1932,40 @@ extension FlexThemeData on ThemeData {
     /// The override color is included and affected by factory properties
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
+    /// In dark mode, if you provide an override Color value for [tertiary] you
+    /// should also provide a value for [tertiaryLightRef] to ensure that the
+    /// fixed colors can be computed correctly when not using seed generated
+    /// ColorSchemes and setting [fixedColorStyle] to default.
+    ///
     /// Defaults to null.
     final Color? tertiary,
+
+    /// If you specify an override color for [tertiary], you should also
+    /// specify an override for the [tertiaryLightRef] color when not using a
+    /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
+    ///
+    /// This color is used to compute the [tertiaryFixed], [tertiaryFixedDim],
+    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
+    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+    /// the default [FlexFixedColorStyle.computed] value.
+    ///
+    /// The [tertiaryLightRef] should have the same color value as the
+    /// tertiary color has in your light theme, regardless of where it is
+    /// specified.
+    ///
+    /// If you are always using a seed generated ColorScheme, and your
+    /// [tertiary] override is already the key color your want to use, you
+    /// do not need to also specify a [tertiaryLightRef], but if you do, it
+    /// will be used as seed before the [tertiary] color. This gives you
+    /// the option to use a given color for dark none seeded tertiary
+    /// and giving the light mode tertiary color for [tertiaryLightRef],
+    /// so that when you use seeding the same seed color as in light mode
+    /// is used and we get the same tonal palette for the tertiary palette
+    /// in both light and dark mode, you typically want this. But if you
+    /// always seed and use overrides, you can give the light mode
+    /// tertiary color as the tertiary override in dark
+    /// mode too and skip the [tertiaryLightRef] override.
+    final Color? tertiaryLightRef,
 
     /// A color that's clearly legible when drawn on [tertiary].
     ///
@@ -2804,16 +2899,19 @@ extension FlexThemeData on ThemeData {
         tabBarStyle: tabBarStyle,
         //
         primary: primary,
+        primaryLightRef: primaryLightRef,
         onPrimary: onPrimary,
         primaryContainer: primaryContainer,
         onPrimaryContainer: onPrimaryContainer,
         //
         secondary: secondary,
+        secondaryLightRef: secondaryLightRef,
         onSecondary: onSecondary,
         secondaryContainer: secondaryContainer,
         onSecondaryContainer: onSecondaryContainer,
         //
         tertiary: tertiary,
+        tertiaryLightRef: tertiaryLightRef,
         onTertiary: onTertiary,
         tertiaryContainer: tertiaryContainer,
         onTertiaryContainer: onTertiaryContainer,
