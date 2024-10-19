@@ -654,8 +654,8 @@ class FlexColorScheme with Diagnosticable {
   /// [ColorScheme.onPrimary].
   final Color? onPrimaryContainer;
 
-  /// An accent color that, when used sparingly, calls attention to parts
-  /// of your application.
+  /// A support color to primary, with less emphasis than primary, often of
+  /// same hue as primary, but does not have to be.
   ///
   /// If not defined, and if there is no [colorScheme] defined, the default
   /// result will be [primary] color.
@@ -1573,7 +1573,8 @@ class FlexColorScheme with Diagnosticable {
     /// To create custom color schemes use the [colors] property. If both
     /// [colors] and [scheme] are specified, the scheme defined by
     /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material].
+    /// [FlexScheme.material] if [useMaterial3] is false, and to
+    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
     final FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
@@ -1873,8 +1874,8 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onPrimaryContainer,
 
-    /// An accent color that, when used sparingly, calls attention to parts
-    /// of your app.
+    /// A support color to primary, with less emphasis than primary, often of
+    /// same hue as primary, but does not have to be.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
@@ -2892,8 +2893,9 @@ class FlexColorScheme with Diagnosticable {
     // behavior to match past default behavior.
     final FlexKeyColors seed =
         keyColors ?? const FlexKeyColors(useKeyColors: false);
-    // Fallback value for scheme is default material scheme.
-    final FlexScheme flexScheme = scheme ?? FlexScheme.material;
+    // Fallback value for scheme is default material scheme, based on mode.
+    final FlexScheme flexScheme = scheme ??
+        (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
@@ -2942,7 +2944,6 @@ class FlexColorScheme with Diagnosticable {
       swapColors: swapColors,
       brightness: Brightness.light,
     );
-
     // ColorScheme to hold our seeded scheme colors, it will be made null
     // if we do not use M3 key based seeded tonal palette ColorScheme.
     // However, we need to create it even if we do not use a seeded ColorScheme,
@@ -2961,23 +2962,17 @@ class FlexColorScheme with Diagnosticable {
       seedScheme = SeedColorScheme.fromSeeds(
         brightness: Brightness.light,
         primaryKey: !seed.useKeyColors
-            ? effectiveColors.primaryLightRef ?? effectiveColors.primary
-            : seed.keyPrimary ??
-                effectiveColors.primaryLightRef ??
-                effectiveColors.primary,
+            ? effectiveColors.primary
+            : seed.keyPrimary ?? effectiveColors.primary,
         secondaryKey: !seed.useKeyColors
-            ? effectiveColors.secondaryLightRef ?? effectiveColors.secondary
+            ? effectiveColors.secondary
             : seed.useSecondary
-                ? seed.keySecondary ??
-                    effectiveColors.secondaryLightRef ??
-                    effectiveColors.secondary
+                ? seed.keySecondary ?? effectiveColors.secondary
                 : null,
         tertiaryKey: !seed.useKeyColors
-            ? effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary
+            ? effectiveColors.tertiary
             : seed.useTertiary
-                ? seed.keyTertiary ??
-                    effectiveColors.tertiaryLightRef ??
-                    effectiveColors.tertiary
+                ? seed.keyTertiary ?? effectiveColors.tertiary
                 : null,
         // If use error seed, use it with fromSeeds, otherwise undefined.
         errorKey: seed.useError ? seed.keyError ?? effectiveColors.error : null,
@@ -3247,11 +3242,11 @@ class FlexColorScheme with Diagnosticable {
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
 
     // Get the effective light ref colors.
-    final Color primaryLightRef =
+    final Color effectivePrimaryLightRef =
         effectiveColors.primaryLightRef ?? effectiveColors.primary;
-    final Color secondaryLightRef =
+    final Color effectiveSecondaryLightRef =
         effectiveColors.secondaryLightRef ?? effectiveColors.secondary;
-    final Color tertiaryLightRef =
+    final Color effectiveTertiaryLightRef =
         effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary;
 
     // Compute the effective ColorScheme based on all selection options.
@@ -3299,41 +3294,41 @@ class FlexColorScheme with Diagnosticable {
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
           primaryFixed: schemeForFixedColors?.primaryFixed ??
-              _fixedColor(primaryLightRef),
+              _fixedColor(effectivePrimaryLightRef),
           primaryFixedDim: schemeForFixedColors?.primaryFixedDim ??
-              _fixedDimColor(primaryLightRef),
+              _fixedDimColor(effectivePrimaryLightRef),
           onPrimaryFixed: schemeForFixedColors?.onPrimaryFixed ??
-              _onFixedColor(primaryLightRef),
+              _onFixedColor(effectivePrimaryLightRef),
           onPrimaryFixedVariant: schemeForFixedColors?.onPrimaryFixedVariant ??
-              _onFixedVariantColor(primaryLightRef),
+              _onFixedVariantColor(effectivePrimaryLightRef),
 
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
           secondaryFixed: schemeForFixedColors?.secondaryFixed ??
-              _fixedColor(secondaryLightRef),
+              _fixedColor(effectiveSecondaryLightRef),
           secondaryFixedDim: schemeForFixedColors?.secondaryFixedDim ??
-              _fixedDimColor(secondaryLightRef),
+              _fixedDimColor(effectiveSecondaryLightRef),
           onSecondaryFixed: schemeForFixedColors?.onSecondaryFixed ??
-              _onFixedColor(secondaryLightRef),
+              _onFixedColor(effectiveSecondaryLightRef),
           onSecondaryFixedVariant:
               schemeForFixedColors?.onSecondaryFixedVariant ??
-                  _onFixedVariantColor(secondaryLightRef),
+                  _onFixedVariantColor(effectiveSecondaryLightRef),
 
           tertiary: effectiveColors.tertiary,
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
           tertiaryFixed: schemeForFixedColors?.tertiaryFixed ??
-              _fixedColor(tertiaryLightRef),
+              _fixedColor(effectiveTertiaryLightRef),
           tertiaryFixedDim: schemeForFixedColors?.tertiaryFixedDim ??
-              _fixedDimColor(tertiaryLightRef),
+              _fixedDimColor(effectiveTertiaryLightRef),
           onTertiaryFixed: schemeForFixedColors?.onTertiaryFixed ??
-              _onFixedColor(tertiaryLightRef),
+              _onFixedColor(effectiveTertiaryLightRef),
           onTertiaryFixedVariant:
               schemeForFixedColors?.onTertiaryFixedVariant ??
-                  _onFixedVariantColor(tertiaryLightRef),
+                  _onFixedVariantColor(effectiveTertiaryLightRef),
 
           error: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3LightError
@@ -3644,7 +3639,8 @@ class FlexColorScheme with Diagnosticable {
     /// To create custom color schemes use the [colors] property. If both
     /// [colors] and [scheme] are specified, the scheme defined by
     /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material].
+    /// [FlexScheme.material] if [useMaterial3] is false, and to
+    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
     final FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
@@ -3886,8 +3882,39 @@ class FlexColorScheme with Diagnosticable {
     /// This override color is included and affected by factory
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
+    /// In dark mode, if you provide an override Color value for [primary] you
+    /// should also provide a value for [primaryLightRef] to ensure that the
+    /// fixed colors can be computed correctly when not using seed generated
+    /// ColorSchemes and setting [fixedColorStyle] to default.
+    ///
     /// Defaults to null.
     final Color? primary,
+
+    /// If you specify an override color for [primary], you should also specify
+    /// an override for the [primaryLightRef] color when not using a seed
+    /// generated ColorSchemes and setting [fixedColorStyle] to default.
+    ///
+    /// This color is used to compute the [primaryFixed], [primaryFixedDim],
+    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
+    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+    /// the default [FlexFixedColorStyle.computed] value.
+    ///
+    /// The [primaryLightRef] should have the same color value as the
+    /// primary color has in your light theme, regardless of where it is
+    /// specified.
+    ///
+    /// If you are always using a seed generated ColorScheme, and your [primary]
+    /// override is already the key color your want to use, you do not need to
+    /// also specify a [primaryLightRef], but if you do, it will be used as
+    /// seed before the [primary] color. This gives you the option to use a
+    /// given color for dark none seeded primary and giving the light mode
+    /// primary color for [primaryLightRef], so that when you use seeding
+    /// the same seed color as in light mode is used and we get the same tonal
+    /// palette for the primary palette in both light and dark mode, you
+    /// typically want this. But if you always seed and use overrides, you
+    /// can give the light  mode primary color as the primary override in dark
+    /// mode too and skip the [primaryLightRef] override.
+    final Color? primaryLightRef,
 
     /// A color that is clearly legible when drawn on [primary] color.
     ///
@@ -3944,8 +3971,8 @@ class FlexColorScheme with Diagnosticable {
     /// color that this scheme color gets via the factory behavior.
     final Color? onPrimaryContainer,
 
-    /// An accent color that, when used sparingly, calls attention to parts
-    /// of your app.
+    /// A support color to primary, with less emphasis than primary, often of
+    /// same hue as primary, but does not have to be.
     ///
     /// When using the factory this is an override color for the color that
     /// would be used based on the corresponding color property defined in
@@ -3960,8 +3987,40 @@ class FlexColorScheme with Diagnosticable {
     /// The override color is included and affected by factory properties
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
+    /// In dark mode, if you provide an override Color value for [secondary] you
+    /// should also provide a value for [secondaryLightRef] to ensure that the
+    /// fixed colors can be computed correctly when not using seed generated
+    /// ColorSchemes and setting [fixedColorStyle] to default.
+    ///
     /// Defaults to null.
     final Color? secondary,
+
+    /// If you specify an override color for [secondary], you should also
+    /// specify an override for the [secondaryLightRef] color when not using a
+    /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
+    ///
+    /// This color is used to compute the [secondaryFixed], [secondaryFixedDim],
+    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
+    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+    /// the default [FlexFixedColorStyle.computed] value.
+    ///
+    /// The [secondaryLightRef] should have the same color value as the
+    /// secondary color has in your light theme, regardless of where it is
+    /// specified.
+    ///
+    /// If you are always using a seed generated ColorScheme, and your
+    /// [secondary] override is already the key color your want to use, you
+    /// do not need to also specify a [secondaryLightRef], but if you do, it
+    /// will be used as seed before the [secondary] color. This gives you
+    /// the option to use a given color for dark none seeded secondary
+    /// and giving the light mode secondary color for [secondaryLightRef],
+    /// so that when you use seeding the same seed color as in light mode
+    /// is used and we get the same tonal palette for the secondary palette
+    /// in both light and dark mode, you typically want this. But if you
+    /// always seed and use overrides, you can give the light mode
+    /// secondary color as the secondary override in dark
+    /// mode too and skip the [secondaryLightRef] override.
+    final Color? secondaryLightRef,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -4035,8 +4094,40 @@ class FlexColorScheme with Diagnosticable {
     /// The override color is included and affected by factory properties
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
+    /// In dark mode, if you provide an override Color value for [tertiary] you
+    /// should also provide a value for [tertiaryLightRef] to ensure that the
+    /// fixed colors can be computed correctly when not using seed generated
+    /// ColorSchemes and setting [fixedColorStyle] to default.
+    ///
     /// Defaults to null.
     final Color? tertiary,
+
+    /// If you specify an override color for [tertiary], you should also
+    /// specify an override for the [tertiaryLightRef] color when not using a
+    /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
+    ///
+    /// This color is used to compute the [tertiaryFixed], [tertiaryFixedDim],
+    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
+    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+    /// the default [FlexFixedColorStyle.computed] value.
+    ///
+    /// The [tertiaryLightRef] should have the same color value as the
+    /// tertiary color has in your light theme, regardless of where it is
+    /// specified.
+    ///
+    /// If you are always using a seed generated ColorScheme, and your
+    /// [tertiary] override is already the key color your want to use, you
+    /// do not need to also specify a [tertiaryLightRef], but if you do, it
+    /// will be used as seed before the [tertiary] color. This gives you
+    /// the option to use a given color for dark none seeded tertiary
+    /// and giving the light mode tertiary color for [tertiaryLightRef],
+    /// so that when you use seeding the same seed color as in light mode
+    /// is used and we get the same tonal palette for the tertiary palette
+    /// in both light and dark mode, you typically want this. But if you
+    /// always seed and use overrides, you can give the light mode
+    /// tertiary color as the tertiary override in dark
+    /// mode too and skip the [tertiaryLightRef] override.
+    final Color? tertiaryLightRef,
 
     /// A color that's clearly legible when drawn on [tertiary].
     ///
@@ -4958,13 +5049,15 @@ class FlexColorScheme with Diagnosticable {
         'AppBar elevation must be >= 0 or null.');
     assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
         'Bottom AppBar elevation must be null or must be >= 0.');
+
     // Use color seeding based on passed in keyColors or make one where
     // it is not used, if one was not defined, since we want that as default
     // behavior to match past default behavior.
     final FlexKeyColors seed =
         keyColors ?? const FlexKeyColors(useKeyColors: false);
-    // Fallback value for scheme is default material scheme.
-    final FlexScheme flexScheme = scheme ?? FlexScheme.material;
+    // Fallback value for scheme is default material scheme, based on mode.
+    final FlexScheme flexScheme = scheme ??
+        (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
     // If colors was null, we used the scheme based value.
     final FlexSchemeColor flexColors =
         colors ?? FlexColor.schemesWithCustom[flexScheme]!.dark;
@@ -4975,6 +5068,56 @@ class FlexColorScheme with Diagnosticable {
     final FlexSubThemesData subTheme =
         subThemesData ?? const FlexSubThemesData();
 
+    // In debug mode warn to console about missing LightRef colors when they
+    // used in a combo that may require them.
+    if (kDebugMode) {
+      if (primary != null &&
+          primaryLightRef == null &&
+          ((!seed.useKeyColors &&
+                  (fixedColorStyle ?? FlexFixedColorStyle.computed) ==
+                      FlexFixedColorStyle.computed) ||
+              seed.useKeyColors)) {
+        debugPrint('FlexColorScheme WARNING: primaryLightRef is null, but '
+            'primary is defined, primaryLightRef may be needed. '
+            'Set primaryLightRef to the same color '
+            'as primary in your LIGHT theme mode setup to get correct values '
+            'for "fixed" colors for your dark ColorScheme or to seed with '
+            'same color as your light theme primary. If primary is already '
+            'set to same color as light mode primary and it is only used as '
+            'seed in dark mode, defining primaryLightRef is not necessary.');
+      }
+      if (secondary != null &&
+          secondaryLightRef == null &&
+          ((!seed.useKeyColors &&
+                  (fixedColorStyle ?? FlexFixedColorStyle.computed) ==
+                      FlexFixedColorStyle.computed) ||
+              seed.useKeyColors)) {
+        debugPrint('FlexColorScheme WARNING: secondaryLightRef is null, but '
+            'secondary is defined, secondaryLightRef may be needed. '
+            'Set secondaryLightRef to the same color '
+            'as secondary in your LIGHT theme mode setup to get correct values '
+            'for "fixed" colors for your dark ColorScheme or to seed with '
+            'same color as your light theme secondary. If secondary is already '
+            'set to same color as light mode secondary and it is only used as '
+            'seed in dark mode, defining secondaryLightRef is not necessary.');
+      }
+      if (tertiary != null &&
+          tertiaryLightRef == null &&
+          ((!seed.useKeyColors &&
+                  (fixedColorStyle ?? FlexFixedColorStyle.computed) ==
+                      FlexFixedColorStyle.computed) ||
+              seed.useKeyColors)) {
+        debugPrint('FlexColorScheme WARNING: tertiaryLightRef is null, but '
+            'tertiary is defined, tertiaryLightRef may be needed. '
+            'Set tertiaryLightRef to the same color '
+            'as tertiary in your LIGHT theme mode setup to get correct values '
+            'for "fixed" colors for your dark ColorScheme or to seed with '
+            'same color as your light theme tertiary. If tertiary is already '
+            'set to same color as light mode tertiary and it is only used as '
+            'seed in dark mode, defining tertiaryLightRef is not necessary.');
+      }
+    }
+
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them. Doing it here
     // gets also correct effective and swap behavior on directly passed in
@@ -4982,17 +5125,20 @@ class FlexColorScheme with Diagnosticable {
     final FlexSchemeColor withPassedColors = flexColors.copyWith(
       primary: primary ?? colorScheme?.primary,
       primaryContainer: primaryContainer ?? colorScheme?.primaryContainer,
+      primaryLightRef: primaryLightRef ?? primary,
       secondary: secondary ?? colorScheme?.secondary,
       secondaryContainer: secondaryContainer ?? colorScheme?.secondaryContainer,
+      secondaryLightRef: secondaryLightRef ?? secondary,
       tertiary: tertiary ?? colorScheme?.tertiary,
       tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
+      tertiaryLightRef: tertiaryLightRef ?? tertiary,
       error: error ?? colorScheme?.error,
       errorContainer: errorContainer ?? colorScheme?.errorContainer,
     );
-    // Swap legacy secondary and tertiary color if we use Material 3 and
-    // we have swapping of legacy colors on and if the colors in used built-in
+    // Swap legacy secondary and tertiary color if we use Material-3 and
+    // we have swapping of legacy colors ON and if the colors in used built-in
     // scheme has flag [swapOnMaterial3] set that tells it benefits from doing
-    // this. Additionally we should only do this if we have not passed a custom
+    // this. Additionally, we should only do this if we have not passed a custom
     // ColorScheme, nor secondary or tertiary colors directly.
     final bool swapLegacy = useMaterial3 &&
         swapLegacyOnMaterial3 &&
@@ -5002,7 +5148,7 @@ class FlexColorScheme with Diagnosticable {
         tertiary == null &&
         tertiaryContainer == null &&
         colorScheme == null;
-    // First cut of effective FlexSchemeColor depends on colors, usedColors
+    // First cut of the effective FlexSchemeColor depends on colors, usedColors
     // and swapLegacy and swap. When we use Brightness.dark, we also guarantee
     // that we have colors on effectiveColors.error and errorContainer, they
     // are guaranteed to no longer be null after this call.
@@ -5021,30 +5167,6 @@ class FlexColorScheme with Diagnosticable {
     // Those colors are hard to compute without using the seed algo and would
     // be wrong.
     ColorScheme? seedScheme;
-
-    // Build effective input key seed colors as we built the normal colors.
-    // We will need the scheme enum light color as input, for dark tonal when
-    // we use seed with built in schemes in dark mode.
-    final FlexSchemeColor flexKeyColors =
-        colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
-    // Get effective light color with same rules as the dark colors.
-    final FlexSchemeColor withPassedColorsForKeys = flexKeyColors.copyWith(
-      primary: primary ?? colorScheme?.primary,
-      primaryContainer: primaryContainer ?? colorScheme?.primaryContainer,
-      secondary: secondary ?? colorScheme?.secondary,
-      secondaryContainer: secondaryContainer ?? colorScheme?.secondaryContainer,
-      tertiary: tertiary ?? colorScheme?.tertiary,
-      tertiaryContainer: tertiaryContainer ?? colorScheme?.tertiaryContainer,
-      error: error ?? colorScheme?.error,
-      errorContainer: errorContainer ?? colorScheme?.errorContainer,
-    );
-    final FlexSchemeColor effectiveKeyColors = FlexSchemeColor.effective(
-      withPassedColorsForKeys,
-      usedColors,
-      swapLegacy: swapLegacy,
-      swapColors: swapColors,
-      brightness: Brightness.dark,
-    );
 
     // Compute a seeded scheme if we are using it or seeded fixed colors.
     if ((fixedColorStyle ?? FlexFixedColorStyle.computed) !=
@@ -5076,7 +5198,7 @@ class FlexColorScheme with Diagnosticable {
                 : null,
         // If use error seed, use it with fromSeeds, otherwise undefined.
         errorKey:
-            seed.useError ? seed.keyError ?? effectiveKeyColors.error : null,
+            seed.useError ? (seed.keyError ?? effectiveColors.error) : null,
         // If a custom surface tint is used, use it also as key for neutral and
         // neutral variant tonal palette generation.
         neutralKey: surfaceTint,
@@ -5346,11 +5468,11 @@ class FlexColorScheme with Diagnosticable {
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
 
     // Get the effective light ref colors.
-    final Color primaryLightRef =
+    final Color effectivePrimaryLightRef =
         effectiveColors.primaryLightRef ?? effectiveColors.primary;
-    final Color secondaryLightRef =
+    final Color effectiveSecondaryLightRef =
         effectiveColors.secondaryLightRef ?? effectiveColors.secondary;
-    final Color tertiaryLightRef =
+    final Color effectiveTertiaryLightRef =
         effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary;
 
     // Compute the effective ColorScheme based on all selection options.
@@ -5397,41 +5519,41 @@ class FlexColorScheme with Diagnosticable {
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
           primaryFixed: schemeForFixedColors?.primaryFixed ??
-              _fixedColor(primaryLightRef),
+              _fixedColor(effectivePrimaryLightRef),
           primaryFixedDim: schemeForFixedColors?.primaryFixedDim ??
-              _fixedDimColor(primaryLightRef),
+              _fixedDimColor(effectivePrimaryLightRef),
           onPrimaryFixed: schemeForFixedColors?.onPrimaryFixed ??
-              _onFixedColor(primaryLightRef),
+              _onFixedColor(effectivePrimaryLightRef),
           onPrimaryFixedVariant: schemeForFixedColors?.onPrimaryFixedVariant ??
-              _onFixedVariantColor(primaryLightRef),
+              _onFixedVariantColor(effectivePrimaryLightRef),
           //
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
           secondaryFixed: schemeForFixedColors?.secondaryFixed ??
-              _fixedColor(secondaryLightRef),
+              _fixedColor(effectiveSecondaryLightRef),
           secondaryFixedDim: schemeForFixedColors?.secondaryFixedDim ??
-              _fixedDimColor(secondaryLightRef),
+              _fixedDimColor(effectiveSecondaryLightRef),
           onSecondaryFixed: schemeForFixedColors?.onSecondaryFixed ??
-              _onFixedColor(secondaryLightRef),
+              _onFixedColor(effectiveSecondaryLightRef),
           onSecondaryFixedVariant:
               schemeForFixedColors?.onSecondaryFixedVariant ??
-                  _onFixedVariantColor(secondaryLightRef),
+                  _onFixedVariantColor(effectiveSecondaryLightRef),
           //
           tertiary: effectiveColors.tertiary,
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
           tertiaryFixed: schemeForFixedColors?.tertiaryFixed ??
-              _fixedColor(tertiaryLightRef),
+              _fixedColor(effectiveTertiaryLightRef),
           tertiaryFixedDim: schemeForFixedColors?.tertiaryFixedDim ??
-              _fixedDimColor(tertiaryLightRef),
+              _fixedDimColor(effectiveTertiaryLightRef),
           onTertiaryFixed: schemeForFixedColors?.onTertiaryFixed ??
-              _onFixedColor(tertiaryLightRef),
+              _onFixedColor(effectiveTertiaryLightRef),
           onTertiaryFixedVariant:
               schemeForFixedColors?.onTertiaryFixedVariant ??
-                  _onFixedVariantColor(tertiaryLightRef),
+                  _onFixedVariantColor(effectiveTertiaryLightRef),
           //
           error: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkError

@@ -92,15 +92,21 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
   final int flexScheme = controller.schemeIndex - 3;
 
   return FlexColorScheme.light(
-    // Use controller to get current scheme colors, use custom "colors"
-    // property only if we use an index where we have custom colors in use.
-    colors: !useBuiltIn ? AppColor.scheme(controller).light : null,
-    // Otherwise use built-in scheme based property. We could
-    // use only the colors property, but then we do no see the
-    // correct keyColor behavior in dark mode, with built-in.
-    // Also a good test of that factory works as designed.
+    // Use scheme based config, when we are using a built-in `FlexScheme`
+    // based schemes. We could use only the colors property, but then we do
+    // no see the correct keyColor behavior in dark mode, with built-in
+    // schemes. Also a good test of that factory works as designed.
     // The source code gen also uses this logic.
     scheme: useBuiltIn ? FlexScheme.values[flexScheme] : null,
+    // Switch to using `FlexSchemeColor` when using 3 first custom schemes or
+    // the last one that is customizable.
+    colors: !useBuiltIn ? AppColor.scheme(controller).light : null,
+
+    // TODO(rydmike): DEBUGGING: Remove
+    // primary: Colors.blue,
+    // secondary: Colors.pink,
+    // tertiary: Colors.orange,
+
     // Used number of colors from the selected input FlexColorScheme based theme
     usedColors: controller.usedColors,
     // Use controller to select surface mode
@@ -158,14 +164,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.scaffoldBackgroundLightBaseColor,
             scaffoldBackgroundSchemeColor:
                 controller.scaffoldBackgroundLightSchemeColor,
-            // By default sub themes mode also opts in on using colored text for
-            // the themed text. If you plan to put text on surfaces that are not
-            // primary color tinted or primary colored, then you may need to
-            // turn this off, or make custom text themes for those surfaces.
-            // Material3 has containers with matching on colors too, they work
-            // great for contrast colored text, do use them too.
             // TODO(rydmike): Commented as part of blendTextTheme deprecation.
             // blendTextTheme: controller.blendLightTextTheme,
+            // Used typography.
             useMaterial3Typography: controller.useMaterial3Typography,
             // Divider settings
             useM2StyleDividerInM3: controller.useM2StyleDividerInM3,
@@ -196,18 +197,16 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 ?.setting(controller.fakeIsWeb, controller.useMaterial3),
             splashTypeAdaptive: controller.splashTypeAdaptive
                 ?.setting(controller.fakeIsWeb, controller.useMaterial3),
-            //
             // Value to adjust themed border radius on widgets with
             // an adjustable corner rounding, this one is very handy.
             // If null, it defaults to Material 3 design guide
             // values, when available: https://m3.material.io/
             // If you give it value, "all" Flutter built-in widgets
             // supporting border radius will use the give radius.
+            // Border radius can be customized per widget too, it overrides
+            // the M3 default and global default setting.
             defaultRadius: controller.defaultRadius,
             defaultRadiusAdaptive: controller.defaultRadiusAdaptive,
-            // Border radius can be customized per widget too, it overrides
-            // M3 default and global default setting.
-            //
             // TextButton settings.
             textButtonRadius: controller.textButtonBorderRadius,
             textButtonSchemeColor: controller.textButtonSchemeColor,
@@ -351,7 +350,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             listTileStyle: controller.listTileStyle,
             listTileTitleAlignment: controller.listTileTitleAlignment,
             // FAB settings.
-            //
             // Set to false to keep using M2 style FAB and ignore
             // M3 type default and global radius on the FAB, it thus
             // remains circular or stadium shaped in extended mode.
@@ -404,25 +402,25 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 : Duration(milliseconds: controller.tooltipShowDuration!),
             tooltipSchemeColor: controller.tooltipSchemeColor,
             tooltipOpacity: controller.tooltipOpacity,
-            //
-            // Dialog settings.
+            // General Dialog settings.
+            dialogRadius: controller.dialogBorderRadius,
+            dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
             dialogBackgroundSchemeColor:
                 controller.dialogBackgroundLightSchemeColor,
             dialogElevation: controller.dialogElevation,
-            dialogRadius: controller.dialogBorderRadius,
-            dialogRadiusAdaptive: controller.dialogBorderRadiusAdaptive,
-            datePickerDialogRadius: controller.datePickerDialogBorderRadius,
-            timePickerDialogRadius: controller.timePickerDialogBorderRadius,
+            // Dialog input decorator for TimePicker and DatePicker.
             useInputDecoratorThemeInDialogs:
                 controller.useInputDecoratorThemeInDialogs,
-            //
+            // Dialog DatePicker settings.
+            datePickerDialogRadius: controller.datePickerDialogBorderRadius,
             datePickerHeaderBackgroundSchemeColor:
                 controller.datePickerHeaderBackgroundSchemeColor,
             datePickerHeaderForegroundSchemeColor:
                 controller.datePickerHeaderForegroundSchemeColor,
             datePickerDividerSchemeColor:
                 controller.datePickerDividerSchemeColor,
-            //
+            // Dialog TimePicker settings.
+            timePickerDialogRadius: controller.timePickerDialogBorderRadius,
             timePickerElementRadius: controller.timePickerElementRadius,
             // SnackBar settings.
             snackBarRadius: controller.snackBarBorderRadius,
@@ -516,13 +514,13 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
               controller.menuPaddingEnd ?? 0,
               controller.menuPaddingBottom ?? 0,
             ),
-            //
+            // MenuBar Settings
             menuBarBackgroundSchemeColor:
                 controller.menuBarBackgroundSchemeColor,
             menuBarRadius: controller.menuBarRadius,
             menuBarElevation: controller.menuBarElevation,
             menuBarShadowColor: controller.menuBarShadowColor,
-            //
+            // MenuItem Settings
             menuItemBackgroundSchemeColor:
                 controller.menuItemBackgroundSchemeColor,
             menuItemForegroundSchemeColor:

@@ -46,7 +46,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. 
   * Update and review all tests.
-    * **Test fix status**: Start 309 -> 279 tests of 2103 test are broken.
+    * **Test fix status**: 
+      * Start 309 -> 279 -> 266 -> 276 tests 
+      * of 2103 -> 2175 test are broken.
     * Add tests for new features. Get the FCS package back to 100% test coverage.
   * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and offer them as early access.
 
@@ -55,8 +57,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **MINOR KNOWN ISSUES**
  
-  - **Package**: The `toScheme` method **may** need some updates for the raw `FlexColorScheme?` constructor to not provide surprises
-    - Theming and `toScheme` works as intended with light/dark factories. This update would only be for a better raw constructor result. The raw constructor is not supposed to be used directly, so any gaps are not really that relevant.
+  - When using, computed dark and swap main and container feature, the fixed colors should not swap main and container, they should keep light order for computation of fixed colors.  
 
   - **Playground**: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
     - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
@@ -122,7 +123,8 @@ This section contains a detailed list of all changes introduced in FlexColorSche
 
 This version contains a lot of breaking changes due to updates in the Material-3 ColorScheme in Flutter 3.22. At the same time, this release uses the forced breaking change to clean up some older APIs. FCS is now more aligned with Flutter's Material-3 theming defaults, by typically using them as starting points in the default Material-3 mode. Material-2 mode is still supported, it has its own opinionated defaults as before.
 
-- The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** and later default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. All component themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true.
+- The `ThemeData` flag `useMaterial3` is now **true by default** to align with **Flutter 3.16.0** and later default for ThemeData. To continue using Material-2 theming, set `useMaterial3` to false. All component themes in `FlexSubThemes` that have a `useMaterial3` property now also default to true. 
+- Keeping to Material-3 defaults, in the theme factories `light` and `dark`, if `scheme` is undefined it now defaults to `FlexScheme.materialBaseline` the Material-3 baseline scheme, when `useMaterial3` is true. If `useMaterial3` is false and `scheme`is undefined, it defaults to `FlexScheme.material`, the default Material-2 theme, as before. 
 
 
 - Removed **ALL** references to in Flutter 3.22 deprecated `ColorScheme` colors `background`, `onBackground` and `surfaceVariant`. They are not used in FCS anymore. The `background` color was critical for FCS surface blending, it is now handled differently. The removal of these `ColorScheme` colors had far-reaching, but typically still subtle implications on styles created by FCS. There are many breaking minor style changes in this release due to this. Here are the critical changes caused by all these breaking changes in Flutter 3.22:
@@ -329,6 +331,9 @@ This version contains a lot of breaking changes due to updates in the Material-3
   - Used all main `light` color properties in `FlexSchemeData` static `FlexSchemeColor` color definitions, as **lightRef** colors in their `dark` mode equivalent FlexSchemeColor. That was 156 color values to add to the 52 dark `FlexSchemeColor` definitions.
 
 - Added `fixedColorStyle` to `FlexColorScheme`, `FlexColorScheme.light`, `FlexColorScheme.dark`, `FlexThemeData.light`, `FlexThemeData.dark`. It was required to support custom error container colors in the `FlexKeyColors` API. The property is an enum `FlexFixedColorStyle`, that allows us to choose the style of the generated "fixed" and "fixedDim" colors when not using seed generated color schemes. 
+
+
+- Added `Color` properties `primaryLightRef`, `secondaryLightRef` and `tertiaryLightRef` to `FlexColorScheme.dark` and `FlexThemeData.dark`. If you use the override colors `primary`, `secondary` or `tertiary` and are not using seeded ColorScheme, you need them to provide the correct light mode reference colors for computing fixed colors that will match the light mode fixed colors, for that it is required to know what the light mode colors are. If you are seeding and use the overrides, and will switch between seeded and not seeded, you can provide the override for the not seeded values in `primary`, `secondary` or `tertiary`, and the ref to their seed colors from light mode, in the light ref colors. If you always seed when using the overrides, you can also provide the seed colors in the `primary`, `secondary` or `tertiary` overrides, the light refs fall through to these colors in that cases if not provided during seeding.
 
 
 - Added style `navigationBar` to enum `FlexSystemNavBarStyle` that use the color for default or themed `NavigationBar` background color on the system navigation bar helper.
