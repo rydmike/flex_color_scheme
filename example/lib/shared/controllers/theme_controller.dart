@@ -1008,16 +1008,25 @@ class ThemeController with ChangeNotifier {
         Store.keySurfaceTintDark, Store.defaultSurfaceTintDark);
     //
     // Custom color SETTINGS.
+    _customUsesDarkColorsForSeed = await _themeService.load(
+        Store.keyCustomUsesDarkColorsForSeed,
+        Store.defaultCustomUsesDarkColorsForSeed);
     _primaryLight = await _themeService.load(
         Store.keyPrimaryLight, Store.defaultPrimaryLight);
+    _primaryLightRef = await _themeService.load(
+        Store.keyPrimaryLightRef, Store.defaultPrimaryLightRef);
     _primaryContainerLight = await _themeService.load(
         Store.keyPrimaryContainerLight, Store.defaultPrimaryContainerLight);
     _secondaryLight = await _themeService.load(
         Store.keySecondaryLight, Store.defaultSecondaryLight);
+    _secondaryLightRef = await _themeService.load(
+        Store.keySecondaryLightRef, Store.defaultSecondaryLightRef);
     _secondaryContainerLight = await _themeService.load(
         Store.keySecondaryContainerLight, Store.defaultSecondaryContainerLight);
     _tertiaryLight = await _themeService.load(
         Store.keyTertiaryLight, Store.defaultTertiaryLight);
+    _tertiaryLightRef = await _themeService.load(
+        Store.keyTertiaryLightRef, Store.defaultTertiaryLightRef);
     _tertiaryContainerLight = await _themeService.load(
         Store.keyTertiaryContainerLight, Store.defaultTertiaryContainerLight);
     _errorLight =
@@ -1026,14 +1035,20 @@ class ThemeController with ChangeNotifier {
         Store.keyErrorContainerLight, Store.defaultErrorContainerLight);
     _primaryDark = await _themeService.load(
         Store.keyPrimaryDark, Store.defaultPrimaryDark);
+    _primaryDarkRef = await _themeService.load(
+        Store.keyPrimaryDarkRef, Store.defaultPrimaryDarkRef);
     _primaryContainerDark = await _themeService.load(
         Store.keyPrimaryContainerDark, Store.defaultPrimaryContainerDark);
     _secondaryDark = await _themeService.load(
         Store.keySecondaryDark, Store.defaultSecondaryDark);
+    _secondaryDarkRef = await _themeService.load(
+        Store.keySecondaryDarkRef, Store.defaultSecondaryDarkRef);
     _secondaryContainerDark = await _themeService.load(
         Store.keySecondaryContainerDark, Store.defaultSecondaryContainerDark);
     _tertiaryDark = await _themeService.load(
         Store.keyTertiaryDark, Store.defaultTertiaryDark);
+    _tertiaryDarkRef = await _themeService.load(
+        Store.keyTertiaryDarkRef, Store.defaultTertiaryDarkRef);
     _tertiaryContainerDark = await _themeService.load(
         Store.keyTertiaryContainerDark, Store.defaultTertiaryContainerDark);
     _errorDark =
@@ -1103,6 +1118,9 @@ class ThemeController with ChangeNotifier {
     setUseM2StyleDividerInM3(Store.defaultUseM2StyleDividerInM3, false);
     setUseAppFont(Store.defaultUseAppFont, false);
     setUsedScheme(Store.defaultUsedScheme, false);
+    setCustomUsesDarkColorsForSeed(
+        Store.defaultCustomUsesDarkColorsForSeed, false);
+
     if (resetMode) setSchemeIndex(Store.defaultSchemeIndex, false);
     setInteractionEffects(Store.defaultInteractionEffects, false);
     setTintedDisabledControls(Store.defaultTintedDisabledControls, false);
@@ -1590,18 +1608,24 @@ class ThemeController with ChangeNotifier {
   /// only called once, weh all updates have been made.
   Future<void> resetCustomColorsToDefaults() async {
     setPrimaryLight(Store.defaultPrimaryLight, false);
+    setPrimaryLightRef(Store.defaultPrimaryLightRef, false);
     setPrimaryContainerLight(Store.defaultPrimaryContainerLight, false);
     setSecondaryLight(Store.defaultSecondaryLight, false);
+    setSecondaryLightRef(Store.defaultSecondaryLightRef, false);
     setSecondaryContainerLight(Store.defaultSecondaryContainerLight, false);
     setTertiaryLight(Store.defaultTertiaryLight, false);
+    setTertiaryLightRef(Store.defaultTertiaryLightRef, false);
     setTertiaryContainerLight(Store.defaultTertiaryContainerLight, false);
     setErrorLight(Store.defaultErrorLight, false);
     setErrorContainerLight(Store.defaultErrorContainerLight, false);
     setPrimaryDark(Store.defaultPrimaryDark, false);
+    setPrimaryDarkRef(Store.defaultPrimaryDarkRef, false);
     setPrimaryContainerDark(Store.defaultPrimaryContainerDark, false);
     setSecondaryDark(Store.defaultSecondaryDark, false);
+    setSecondaryDarkRef(Store.defaultSecondaryDarkRef, false);
     setSecondaryContainerDark(Store.defaultSecondaryContainerDark, false);
     setTertiaryDark(Store.defaultTertiaryDark, false);
+    setTertiaryDarkRef(Store.defaultTertiaryDarkRef, false);
     setTertiaryContainerDark(Store.defaultTertiaryContainerDark, false);
     setErrorDark(Store.defaultErrorDark, false);
     setErrorContainerDark(Store.defaultErrorContainerDark, false);
@@ -6213,14 +6237,50 @@ class ThemeController with ChangeNotifier {
   // Custom color SETTINGS.
   // ===========================================================================
 
+  late bool _customUsesDarkColorsForSeed;
+  bool get customUsesDarkColorsForSeed => _customUsesDarkColorsForSeed;
+  void setCustomUsesDarkColorsForSeed(bool? value, [bool notify = true]) {
+    if (value == null) return;
+    if (value == _customUsesDarkColorsForSeed) return;
+    _customUsesDarkColorsForSeed = value;
+    if (_customUsesDarkColorsForSeed) {
+      // setPrimaryLightRef(null, false);
+      // setSecondaryLightRef(null, false);
+      // setTertiaryLightRef(null, false);
+      setPrimaryDarkRef(null, false);
+      setSecondaryDarkRef(null, false);
+      setTertiaryDarkRef(null, false);
+    } else {
+      // setPrimaryLightRef(primaryLight, false);
+      // setSecondaryLightRef(secondaryLight, false);
+      // setTertiaryLightRef(tertiaryLight, false);
+      setPrimaryDarkRef(primaryLight, false);
+      setSecondaryDarkRef(secondaryLight, false);
+      setTertiaryDarkRef(tertiaryLight, false);
+    }
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyCustomUsesDarkColorsForSeed, value));
+  }
+
   late Color _primaryLight;
   Color get primaryLight => _primaryLight;
   void setPrimaryLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _primaryLight) return;
     _primaryLight = value;
+    setPrimaryLightRef(value, false);
+    if (!customUsesDarkColorsForSeed) setPrimaryDarkRef(value, false);
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyPrimaryLight, value));
+  }
+
+  late Color? _primaryLightRef;
+  Color? get primaryLightRef => _primaryLightRef;
+  void setPrimaryLightRef(Color? value, [bool notify = true]) {
+    if (value == _primaryLightRef) return;
+    _primaryLightRef = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyPrimaryLightRef, value));
   }
 
   late Color _primaryContainerLight;
@@ -6239,8 +6299,19 @@ class ThemeController with ChangeNotifier {
     if (value == null) return;
     if (value == _secondaryLight) return;
     _secondaryLight = value;
+    setSecondaryLightRef(value, false);
+    if (!customUsesDarkColorsForSeed) setSecondaryDarkRef(value, false);
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySecondaryLight, value));
+  }
+
+  late Color? _secondaryLightRef;
+  Color? get secondaryLightRef => _secondaryLightRef;
+  void setSecondaryLightRef(Color? value, [bool notify = true]) {
+    if (value == _secondaryLightRef) return;
+    _secondaryLightRef = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySecondaryLightRef, value));
   }
 
   late Color _secondaryContainerLight;
@@ -6258,9 +6329,20 @@ class ThemeController with ChangeNotifier {
   void setTertiaryLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _tertiaryLight) return;
+    setTertiaryLightRef(value, false);
+    if (!customUsesDarkColorsForSeed) setTertiaryDarkRef(value, false);
     _tertiaryLight = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTertiaryLight, value));
+  }
+
+  late Color? _tertiaryLightRef;
+  Color? get tertiaryLightRef => _tertiaryLightRef;
+  void setTertiaryLightRef(Color? value, [bool notify = true]) {
+    if (value == _tertiaryLightRef) return;
+    _tertiaryLightRef = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTertiaryLightRef, value));
   }
 
   late Color _tertiaryContainerLight;
@@ -6303,6 +6385,15 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyPrimaryDark, value));
   }
 
+  late Color? _primaryDarkRef;
+  Color? get primaryDarkRef => _primaryDarkRef;
+  void setPrimaryDarkRef(Color? value, [bool notify = true]) {
+    if (value == _primaryDarkRef) return;
+    _primaryDarkRef = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyPrimaryDarkRef, value));
+  }
+
   late Color _primaryContainerDark;
   Color get primaryContainerDark => _primaryContainerDark;
   void setPrimaryContainerDark(Color? value, [bool notify = true]) {
@@ -6323,6 +6414,15 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keySecondaryDark, value));
   }
 
+  late Color? _secondaryDarkRef;
+  Color? get secondaryDarkRef => _secondaryDarkRef;
+  void setSecondaryDarkRef(Color? value, [bool notify = true]) {
+    if (value == _secondaryDarkRef) return;
+    _secondaryDarkRef = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySecondaryDarkRef, value));
+  }
+
   late Color _secondaryContainerDark;
   Color get secondaryContainerDark => _secondaryContainerDark;
   void setSecondaryContainerDark(Color? value, [bool notify = true]) {
@@ -6341,6 +6441,15 @@ class ThemeController with ChangeNotifier {
     _tertiaryDark = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyTertiaryDark, value));
+  }
+
+  late Color? _tertiaryDarkRef;
+  Color? get tertiaryDarkRef => _tertiaryDarkRef;
+  void setTertiaryDarkRef(Color? value, [bool notify = true]) {
+    if (value == _tertiaryDarkRef) return;
+    _tertiaryDarkRef = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTertiaryDarkRef, value));
   }
 
   late Color _tertiaryContainerDark;
@@ -6380,13 +6489,13 @@ class ThemeController with ChangeNotifier {
         light: FlexSchemeColor(
           primary: primaryLight,
           primaryContainer: primaryContainerLight,
-          primaryLightRef: primaryLight,
+          primaryLightRef: primaryLightRef,
           secondary: secondaryLight,
           secondaryContainer: secondaryContainerLight,
-          secondaryLightRef: secondaryLight,
-          tertiary: tertiaryLight,
+          secondaryLightRef: secondaryLightRef,
+          tertiary: tertiaryLightRef,
           tertiaryContainer: tertiaryContainerLight,
-          tertiaryLightRef: tertiaryLight,
+          tertiaryLightRef: tertiaryLightRef,
           appBarColor: secondaryContainerLight,
           error: errorLight,
           errorContainer: errorContainerLight,
@@ -6394,13 +6503,13 @@ class ThemeController with ChangeNotifier {
         dark: FlexSchemeColor(
           primary: primaryDark,
           primaryContainer: primaryContainerDark,
-          primaryLightRef: primaryLight,
+          primaryLightRef: primaryDarkRef,
           secondary: secondaryDark,
           secondaryContainer: secondaryContainerDark,
-          secondaryLightRef: secondaryLight,
+          secondaryLightRef: secondaryDarkRef,
           tertiary: tertiaryDark,
           tertiaryContainer: tertiaryContainerDark,
-          tertiaryLightRef: tertiaryLight,
+          tertiaryLightRef: tertiaryDarkRef,
           appBarColor: secondaryContainerDark,
           error: errorDark,
           errorContainer: errorContainerDark,
@@ -6411,19 +6520,40 @@ class ThemeController with ChangeNotifier {
   void setCustomScheme(FlexSchemeData scheme) {
     // Don't notify listeners while setting new values for each value.
     setPrimaryLight(scheme.light.primary, false);
+    setPrimaryLightRef(scheme.light.primaryLightRef, false);
     setPrimaryContainerLight(scheme.light.primaryContainer, false);
+    //
     setSecondaryLight(scheme.light.secondary, false);
+    setSecondaryLightRef(scheme.light.secondaryLightRef, false);
     setSecondaryContainerLight(scheme.light.secondaryContainer, false);
+    //
     setTertiaryLight(scheme.light.tertiary, false);
+    setTertiaryLightRef(scheme.light.tertiaryLightRef, false);
     setTertiaryContainerLight(scheme.light.tertiaryContainer, false);
+    //
     setErrorLight(scheme.light.error, false);
     setErrorContainerLight(scheme.light.errorContainer, false);
     //
     setPrimaryDark(scheme.dark.primary, false);
+    if (customUsesDarkColorsForSeed) {
+      setPrimaryDarkRef(null, false);
+    } else {
+      setPrimaryDarkRef(scheme.light.primary, false);
+    }
     setPrimaryContainerDark(scheme.dark.primaryContainer, false);
     setSecondaryDark(scheme.dark.secondary, false);
+    if (customUsesDarkColorsForSeed) {
+      setSecondaryDarkRef(null, false);
+    } else {
+      setSecondaryDarkRef(scheme.light.secondary, false);
+    }
     setSecondaryContainerDark(scheme.dark.secondaryContainer, false);
     setTertiaryDark(scheme.dark.tertiary, false);
+    if (customUsesDarkColorsForSeed) {
+      setTertiaryDarkRef(null, false);
+    } else {
+      setTertiaryDarkRef(scheme.light.tertiary, false);
+    }
     setTertiaryContainerDark(scheme.dark.tertiaryContainer, false);
     setErrorDark(scheme.dark.error, false);
     setErrorContainerDark(scheme.dark.errorContainer, false);

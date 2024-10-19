@@ -5174,7 +5174,7 @@ class FlexColorScheme with Diagnosticable {
         seed.useKeyColors) {
       // Create a ColorScheme from active and effective seed key colors.
       // If config is not using key colors, we are only making this seed for
-      // the fixed and fixedDim colors, they must always use all key colors.
+      // the fixed and fixedDim colors, then we must always use all key colors.
       seedScheme = SeedColorScheme.fromSeeds(
         brightness: Brightness.dark,
         primaryKey: !seed.useKeyColors

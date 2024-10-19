@@ -1833,7 +1833,8 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: true,
         ),
-        equals(DrawerThemeData(backgroundColor: colorScheme.surface)),
+        equals(
+            DrawerThemeData(backgroundColor: colorScheme.surfaceContainerLow)),
       );
       expect(
         FlexSubThemes.drawerTheme(
@@ -1842,7 +1843,7 @@ void main() {
           radius: 8,
         ),
         equals(DrawerThemeData(
-          backgroundColor: colorScheme.surface,
+          backgroundColor: colorScheme.surfaceContainerLow,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadiusDirectional.horizontal(
               end: Radius.circular(8),
@@ -1861,7 +1862,7 @@ void main() {
           useMaterial3: false,
         ),
         equals(DrawerThemeData(
-          backgroundColor: colorScheme.surface,
+          backgroundColor: colorScheme.surfaceContainerLow,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadiusDirectional.horizontal(
               end: Radius.circular(kDrawerRadius),
@@ -1881,7 +1882,7 @@ void main() {
           radius: 7,
         ),
         equals(DrawerThemeData(
-          backgroundColor: colorScheme.surface,
+          backgroundColor: colorScheme.surfaceContainerLow,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadiusDirectional.horizontal(
               end: Radius.circular(7),

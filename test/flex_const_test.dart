@@ -33,65 +33,71 @@ void main() {
     test('FCT kDarkenSecondaryVariant is 14', () {
       expect(kDarkenSecondaryContainer, 14);
     });
-    test('FCT kDrawerRadius is 16', () {
-      expect(kDrawerRadius, 16);
-    });
-    test('FCT kFabRadius is 16', () {
-      expect(kFabRadius, 16);
-    });
-    test('FCT kChipRadius is 8', () {
-      expect(kChipRadius, 8);
-    });
-    test('FCT kButtonRadius is 40', () {
-      expect(kButtonRadius, 40);
-    });
-    test('FCT kInputDecoratorRadius is 10', () {
-      expect(kInputDecoratorRadius, 10);
-    });
-    test('FCT kInputDecoratorM3Radius is 4', () {
-      expect(kInputDecoratorM3Radius, 4);
-    });
+    //
+    // ---------------
+    // Component defaults, typically elevation and radius.
+    //
+    // Tested in alphabetical order.
+    // ---------------
+    //
     test('FCT kBottomSheetBorderRadius is 28', () {
       expect(kBottomSheetBorderRadius, 28);
     });
-    test('FCT kDialogRadius is 28', () {
-      expect(kDialogRadius, 28);
+    test('FCT kBottomNavigationBarElevation is 3.0', () {
+      expect(kBottomNavigationBarElevation, 3.0);
     });
-    test('FCT kCardRadius is 12', () {
-      expect(kCardRadius, 12);
-    });
-    test('FCT kTimeElementRadius is 8', () {
-      expect(kTimeElementRadius, 8);
-    });
-    test('FCT kTooltipRadius is 8', () {
-      expect(kTooltipRadius, 8);
-    });
-    test('FCT kElevatedButtonElevation is 1', () {
-      expect(kElevatedButtonElevation, 1);
-    });
-    test('FCT kPopupMenuElevation is 3', () {
-      expect(kPopupMenuM3Elevation, 3);
-    });
-    test('FCT kPopupMenuElevationFCS is 6', () {
-      expect(kPopupMenuM2Elevation, 6);
-    });
-    test('FCT kDialogElevation is 6', () {
-      expect(kDialogElevation, 6);
-    });
+
     test('FCT kBottomSheetElevation is 1', () {
       expect(kBottomSheetElevation, 1);
-    });
-    test('FCT kBottomSheetModalElevation is 2', () {
-      expect(kBottomSheetModalElevation, 2);
     });
     test('FCT kBottomSheetElevationM2 is 4', () {
       expect(kBottomSheetElevationM2, 4);
     });
+
+    test('FCT kBottomSheetModalElevation is 2', () {
+      expect(kBottomSheetModalElevation, 2);
+    });
+
     test('FCT kBottomSheetModalElevationM2 is 8', () {
       expect(kBottomSheetModalElevationM2, 8);
     });
-    test('FCT kBottomNavigationBarElevation is 3.0', () {
-      expect(kBottomNavigationBarElevation, 3.0);
+
+    test('FCT kButtonMinSize is Size(40,40)', () {
+      expect(kButtonMinSize, const Size(40, 40));
+    });
+    test('FCT kButtonPadding is horizontal 16', () {
+      expect(kButtonPadding, const EdgeInsets.symmetric(horizontal: 16));
+    });
+    test('FCT kButtonRadius is 40', () {
+      expect(kButtonRadius, 40);
+    });
+
+    test('FCT kCardRadius is 12', () {
+      expect(kCardRadius, 12);
+    });
+    test('FCT kChipRadius is 8', () {
+      expect(kChipRadius, 8);
+    });
+    test('FCT kDialogElevation is 6', () {
+      expect(kDialogElevation, 6);
+    });
+    test('FCT kDialogRadius is 28', () {
+      expect(kDialogRadius, 28);
+    });
+    test('FCT kDrawerRadius is 16', () {
+      expect(kDrawerRadius, 16);
+    });
+    test('FCT kElevatedButtonElevation is 1', () {
+      expect(kElevatedButtonElevation, 1);
+    });
+    test('FCT kFabRadius is 16', () {
+      expect(kFabRadius, 16);
+    });
+    test('FCT kInputDecoratorM3Radius is 4', () {
+      expect(kInputDecoratorM3Radius, 4);
+    });
+    test('FCT kInputDecoratorRadius is 10', () {
+      expect(kInputDecoratorRadius, 10);
     });
     test('FCT kNavigationBarIndicatorAlpha is 0x3D', () {
       expect(kNavigationBarIndicatorAlpha, 0x3D);
@@ -108,14 +114,14 @@ void main() {
     test('FCT kNavigationRailElevation is 0', () {
       expect(kNavigationRailElevation, 0);
     });
+    test('FCT kPopupMenuElevation is 3', () {
+      expect(kPopupMenuM3Elevation, 3);
+    });
+    test('FCT kPopupMenuElevationFCS is 6', () {
+      expect(kPopupMenuM2Elevation, 6);
+    });
     test('FCT kSnackBarElevation is 4', () {
       expect(kSnackBarElevation, 4);
-    });
-    test('FCT kButtonMinSize is Size(40,40)', () {
-      expect(kButtonMinSize, const Size(40, 40));
-    });
-    test('FCT kButtonPadding is horizontal 16', () {
-      expect(kButtonPadding, const EdgeInsets.symmetric(horizontal: 16));
     });
     test('FCT kThickBorderWidth is 2', () {
       expect(kThickBorderWidth, 2);
@@ -123,7 +129,14 @@ void main() {
     test('FCT kThinBorderWidth is 1', () {
       expect(kThinBorderWidth, 1);
     });
+    test('FCT kTimeElementRadius is 8', () {
+      expect(kTimeElementRadius, 8);
+    });
+    test('FCT kTooltipRadius is 8', () {
+      expect(kTooltipRadius, 8);
+    });
     //
+    // -------------
     // Alpha, opacity and blend values
     //
     test('FCT kFillColorAlphaLight is 0x0D', () {
@@ -168,6 +181,10 @@ void main() {
     test('FCT kAlphaPressed is 0x1F', () {
       expect(kAlphaPressed, 0x1F);
     });
+    test('FCT kAlphaInputPressed is 0x19 - New in V8', () {
+      expect(kAlphaInputPressed, 0x19);
+    });
+
     test('FCT kTintSplash is 0xA5', () {
       expect(kTintSplash, 0xA5);
     });
@@ -232,6 +249,7 @@ void main() {
       expect(kInputDecoratorDarkBgLighten, 5);
     });
     // New in FCS 7.1.1
+    // Blended text theme values, deprecated in V8, but keeping consts around.
     test('FCT kHiLightTextBlend is 20', () {
       expect(kHiLightTextBlend, 20);
     });

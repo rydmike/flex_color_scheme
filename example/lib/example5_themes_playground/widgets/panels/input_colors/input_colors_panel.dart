@@ -5,8 +5,10 @@ import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/examples/input_colors_popup_menu.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../shared/custom_uses_dark_colors_for_seed_switch.dart';
 import '../../shared/show_input_colors_switch.dart';
 import '../../shared/theme_mode_switch_list_tile.dart';
+import '../../shared/use_seeded_color_scheme_switch.dart';
 import 'custom_theme_controls.dart';
 import 'show_input_colors.dart';
 import 'used_colors_popup_menu.dart';
@@ -241,6 +243,13 @@ class InputColorsPanel extends StatelessWidget {
             ],
           ),
         ),
+        const ListTile(
+          dense: true,
+          subtitle: Text('See ColorScheme for more seed generation settings'),
+        ),
+        UseSeededColorSchemeSwitch(controller: controller),
+        CustomUsesDarkColorsForSeedSwitch(controller: controller),
+        const SizedBox(height: 8),
       ],
     );
   }

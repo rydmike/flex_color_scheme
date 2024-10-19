@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.2
 
-**Oct 17, 2024**
+**Oct 20, 2024**
 
 ### SUMMARY
 
@@ -57,64 +57,9 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **MINOR KNOWN ISSUES**
  
-  - When using, computed dark and swap main and container feature, the fixed colors should not swap main and container, they should keep light order for computation of fixed colors.  
-
   - **Playground**: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
     - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
     
-
-**COMPLETED CRITICAL CHANGES**
- 
-* **DONE**: Consider what to do with surfaceTint removal.
-  * It is basically obsolete now in Flutter 3.22 and later.
-  * Will keep it around for now, but added info about it being obsolete in Flutter 3.22 or later, in its info-expands.
-* **DONE**: Consider what to do with shadows back.
-  * Keep and add more fine-grained control later, via shadow color selection per component.
-* **DONE**: Generate full ColorScheme in Themes Playground, also when not seeding. Need all "fixed" and "fixedDim" colors.
-  * This was tricky, big rework and new features.
-* **DONE**: Figure out how to handle background not existing in ColorScheme; it was critical in FCS for its surface blends. 
-  * This was very tedious to deal with this in FCS. Need a new approach not using the background color. 
-* **DONE**: Flutter 3.22 created +2000 deprecation hints in FCS, mostly `MaterialState` to `WidgetState` related deprecations. The remaining 492 warnings were all the deprecated `background`, `onBackground` and `surfaceVariant` warnings.
-* **DONE**: Pass through of all new ColorScheme colors, not used directly by FCS if a ColorScheme is passed in.
-
-* **DONE**: In Material-3 mode, consider more breaking default value changes to clean up the past opinionated API and make it more aligned with Flutter's Material-3 defaults. 
-  * Old Material-2 mode will keep its opinionated default values that largely emulate Material-3 styles. This remains the FCS Material-2 mode design intent. However, FCS originally had many own styles for Material-3 mode defaults too, because they were made before the specs were available. These have gradually been removed to use actual Material-3 defaults instead as its starting point.
-  * The Playground will, where it makes sense, keep some of its own default settings, but the package should align with Flutter's Material-3 defaults when possible.
-  * After the changes, some defaults still have subtle opinionated difference, but the majority are now using Flutter's Material-3 defaults, which are not always Material-3 spec-correct, mostly they are though. 
-    * **Tooltip** and **Snackbar** keep their opinionated defaults in FCS for now, because they offer a nice optional default style that is otherwise not available. It is straightforward to make them exactly like Material-3 default. There is guidance in the Playground app on how to do this via their info reveal buttons.
-    * FCS default **InputDecorator** is now very close to Flutter's Material-3 default. The difference should now only be FCS's slight opinionated take on error hover states. Maybe later add a feature to get the default Material-3 style for them too. This is not possible with current props, but we could add them later.
-
-* **DONE**: Add a large number of new theming features. 
-
-* **DONE**: Add three new slightly different baseline monochrome schemes. Great for prototyping without color distractions, or to as baseline schemes to add custom colors to. 
-
-* **DONE**: Add support for all the new Flutter `DynamicSchemeVariant` seed generated variants, with the twist that it can also use separate seed colors for each palette.
-
-* **PLUS**: A lot of other new features and improvements, see the full list further below. 
-
-**DECIDED TO POSTPONE TO A LATER RELEASE TO GET V8 OUT THIS YEAR**
-
-- Make a WASM release build of the Themes Playground app. 
-  - Must figure out new hosting and CI setup to it. Currently used GitHub Pages, apparently do not support Flutter WASM builds. So this will have to wait for a later release when I have time to look into all this.
-- Add and expose more props for TimePicker theming.
-- Expose more color props for the DatePicker theming. The TextStyles need them if used. Support for this is prepared in `FlexSubThemes` but not yet added to `FlexSubThemesData` or the Playground app. Most of the properties will not be in the Playground app, but may be added to the package later smaller incremental updates.
-- Add some minor fidelity for iOS adaptive `AppBar`.
-  - There are some props mentioned in Flutter docs to improve AppBar iOS like style when using Material AppBar. Look it up and consider adding them as a platform adaptive feature.
-- Platform adaptive `ShapeBorder` configuration, including `Squircle`.
-  - Maybe even push to V9 and/or wait for Flutter to support Squircle in SDK.
-- Custom shadow color global and selection per component.
-  - Create a custom convenience control widget for it.
-- Adjustable TextTheme tinting? Allow you to dial it in to your liking manually.
-- Add `Divider` theme features, e.g., thickness and totally custom color.
-- Add `Checkbox` shape and border.
-- Add all **Shadcn** theme colors.
-- Add a **Shadcn** look-alike predefined Material components based theme config. It will of course not be exact, but it will look much less opinionated than vanilla Material-3.
-- Option of `FlexThemeModeOptionButton` and `FlexThemeModeSwitch` that show the six main theme colors, instead of only four colors like now.
-- InputDecorator: Add all input decorator theme TextStyle properties to `FlexSubThemes.inputDecorator` and `FlexSubThemesData`. Will not be in the Playground, only in the package.
-
-
-
-
 ### PACKAGE CHANGES
 
 This section contains a detailed list of all changes introduced in FlexColorScheme version 8.0.0.
