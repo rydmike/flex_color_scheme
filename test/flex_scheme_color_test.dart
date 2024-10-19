@@ -18,16 +18,17 @@ void main() {
     const FlexSchemeColor m1 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
+      primaryLightRef: FlexColor.materialLightPrimary,
       secondary: FlexColor.materialLightSecondary,
+      secondaryLightRef: FlexColor.materialLightSecondary,
       tertiary: FlexColor.materialLightTertiary,
+      tertiaryLightRef: FlexColor.materialLightTertiary,
       appBarColor: FlexColor.materialLightTertiary,
       error: FlexColor.materialLightError,
     );
     const FlexSchemeColor m1v = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
-      // primaryVariant: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
-      // secondaryVariant: FlexColor.materialLightTertiary,
       appBarColor: FlexColor.materialLightTertiary,
       error: FlexColor.materialLightError,
     );
@@ -39,8 +40,11 @@ void main() {
     const FlexSchemeColor m2 = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
+      primaryLightRef: FlexColor.materialLightPrimary,
       secondary: FlexColor.materialLightSecondary,
+      secondaryLightRef: FlexColor.materialLightSecondary,
       tertiary: FlexColor.materialLightTertiary,
+      tertiaryLightRef: FlexColor.materialLightTertiary,
       appBarColor: FlexColor.materialLightTertiary,
       error: FlexColor.materialLightError,
     );
@@ -116,10 +120,13 @@ void main() {
         m3.copyWith(
           primary: FlexColor.materialLightPrimary,
           primaryContainer: FlexColor.materialLightPrimaryContainer,
+          primaryLightRef: FlexColor.materialLightPrimary,
           secondary: FlexColor.materialLightSecondary,
           secondaryContainer: FlexColor.materialLightSecondary,
+          secondaryLightRef: FlexColor.materialLightSecondary,
           tertiary: FlexColor.materialLightTertiary,
           tertiaryContainer: FlexColor.materialLightTertiary,
+          tertiaryLightRef: FlexColor.materialLightTertiary,
           appBarColor: FlexColor.materialLightTertiary,
           error: FlexColor.materialLightError,
         ),
@@ -140,10 +147,13 @@ void main() {
           const FlexSchemeColor(
             primary: Color(0xff6200ee),
             primaryContainer: Color(0xff4d00bb),
+            primaryLightRef: Color(0xff6200ee),
             secondary: Color(0xff5800d5),
             secondaryContainer: Color(0xff4500a7),
+            secondaryLightRef: Color(0xff5800d5),
             tertiary: Color(0xff7d22ff),
             tertiaryContainer: Color(0xffa561ff),
+            tertiaryLightRef: Color(0xff7d22ff),
             appBarColor: Color(0xff7d22ff),
           ));
     });
@@ -189,10 +199,13 @@ void main() {
           m1.copyWith(
             primary: Colors.white,
             primaryContainer: Colors.white,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: Colors.white,
             secondaryContainer: Colors.white,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: Colors.white,
             tertiaryContainer: Colors.white,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: Colors.white,
             error: Colors.white,
             errorContainer: Colors.white,
@@ -226,10 +239,13 @@ void main() {
           const FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: Color(0xff4d00bb),
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: Color(0xff02a898),
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: Color(0xff7d22ff),
             tertiaryContainer: Color(0xffa561ff),
+            tertiaryLightRef: Color(0xff7d22ff),
             appBarColor: Color(0xff14fce6),
             error: null,
             errorContainer: null,
@@ -248,10 +264,13 @@ void main() {
           const FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: Color(0xff4d00bb),
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: Color(0xff02a898),
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialLightTertiary,
             tertiaryContainer: Color(0xff02cecc),
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialLightTertiary,
             error: null,
             errorContainer: null,
@@ -270,10 +289,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: const Color(0xffd7bbff),
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: const Color(0xff8033ee),
             secondaryContainer: const Color(0xffccadf8),
+            secondaryLightRef: const Color(0xff8033ee),
             tertiary: const Color(0xff8826ff),
             tertiaryContainer: const Color(0xffe5d1ff),
+            tertiaryLightRef: const Color(0xff8826ff),
             appBarColor: const Color(0xffe5d1ff),
             error: FlexColor.materialLightError,
             errorContainer:
@@ -294,10 +316,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: const Color(0xffd7bbff),
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: const Color(0xff92fef4),
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: const Color(0xff8826ff),
             tertiaryContainer: const Color(0xffe5d1ff),
+            tertiaryLightRef: const Color(0xff8826ff),
             appBarColor: const Color(0xffe5d1ff),
             error: FlexColor.materialLightError,
             errorContainer:
@@ -319,10 +344,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: const Color(0xff92fef4),
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: const Color(0xff8826ff),
             tertiaryContainer: const Color(0xffe5d1ff),
+            tertiaryLightRef: const Color(0xff8826ff),
             appBarColor: const Color(0xffe5d1ff),
             error: FlexColor.materialLightError,
             errorContainer:
@@ -345,10 +373,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: FlexColor.materialLightSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: const Color(0xff8826ff),
             tertiaryContainer: const Color(0xffe5d1ff),
+            tertiaryLightRef: const Color(0xff8826ff),
             appBarColor: const Color(0xffe5d1ff),
             error: FlexColor.materialLightError,
             errorContainer:
@@ -373,10 +404,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: FlexColor.materialLightSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialLightTertiary,
             tertiaryContainer: const Color(0xff96d9d9),
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialLightTertiary,
             error: FlexColor.materialLightError,
             errorContainer:
@@ -401,10 +435,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: FlexColor.materialLightSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialLightTertiary,
             tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialLightTertiary,
             error: FlexColor.materialLightError,
             errorContainer:
@@ -430,10 +467,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialLightPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialLightSecondary,
             secondaryContainer: FlexColor.materialLightSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialLightTertiary,
             tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: Colors.white,
             error: FlexColor.materialLightError,
             errorContainer:
@@ -453,10 +493,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: const Color(0xff4e3171),
+            primaryLightRef: FlexColor.materialDarkPrimary,
             secondary: const Color(0xffd287ff),
             secondaryContainer: const Color(0xff7e5199),
+            secondaryLightRef: const Color(0xffd287ff),
             tertiary: const Color(0xffe1acff),
             tertiaryContainer: const Color(0xff8331b3),
+            tertiaryLightRef: const Color(0xffe1acff),
             appBarColor: const Color(0xff8331b3),
             error: FlexColor.materialDarkError,
             errorContainer:
@@ -477,16 +520,17 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: const Color(0xff4e3171),
+            primaryLightRef: FlexColor.materialDarkPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: const Color(0xff002e2a),
+            secondaryLightRef: FlexColor.materialDarkSecondary,
             tertiary: const Color(0xffe1acff),
             tertiaryContainer: const Color(0xff8331b3),
+            tertiaryLightRef: const Color(0xffe1acff),
             appBarColor: const Color(0xff8331b3),
             error: FlexColor.materialDarkError,
             errorContainer:
                 FlexColor.darkErrorContainer(FlexColor.materialDarkError),
-            // primaryVariant: const Color(0xff4a3564),
-            // secondaryVariant: const Color(0xffe1acff),
           ));
     });
 
@@ -504,10 +548,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialDarkPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: const Color(0xff002e2a),
+            secondaryLightRef: FlexColor.materialDarkSecondary,
             tertiary: const Color(0xffe1acff),
             tertiaryContainer: const Color(0xff8331b3),
+            tertiaryLightRef: const Color(0xffe1acff),
             appBarColor: const Color(0xff8331b3),
             error: FlexColor.materialDarkError,
             errorContainer:
@@ -530,10 +577,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialDarkPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialDarkSecondary,
             tertiary: const Color(0xffe1acff),
             tertiaryContainer: const Color(0xff8331b3),
+            tertiaryLightRef: const Color(0xffe1acff),
             appBarColor: const Color(0xff8331b3),
             error: FlexColor.materialDarkError,
             errorContainer:
@@ -557,10 +607,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialDarkPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialDarkSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: const Color(0xff003933),
+            tertiaryLightRef: FlexColor.materialDarkTertiary,
             appBarColor: FlexColor.materialDarkTertiary,
             error: FlexColor.materialDarkError,
             errorContainer:
@@ -585,10 +638,13 @@ void main() {
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialDarkPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialDarkSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialDarkTertiary,
             appBarColor: FlexColor.materialDarkTertiary,
             error: FlexColor.materialDarkError,
             errorContainer:
@@ -604,20 +660,26 @@ void main() {
           FlexSchemeColor.from(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,
+            primaryLightRef: FlexColor.materialLightPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: Colors.black,
           ),
           FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: Colors.black,
             error: FlexColor.materialDarkError,
             errorContainer:
@@ -629,14 +691,18 @@ void main() {
     final FlexSchemeColor m1Full = FlexSchemeColor(
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
+      primaryLightRef: FlexColor.materialDarkPrimary,
       secondary: FlexColor.materialLightSecondary,
       secondaryContainer: FlexColor.blueLightSecondaryContainer,
+      secondaryLightRef: FlexColor.materialDarkSecondary,
       tertiary: FlexColor.materialLightTertiary,
       tertiaryContainer: FlexColor.blueLightTertiaryContainer,
+      tertiaryLightRef: FlexColor.materialDarkTertiary,
       appBarColor: Colors.white,
       error: FlexColor.materialLightError,
       errorContainer:
           FlexColor.lightErrorContainer(FlexColor.materialLightError),
+      swapOnMaterial3: true,
     );
 
     test(
@@ -664,6 +730,8 @@ void main() {
         FlexSchemeColor.effective(m1Full, 4),
         m1Full.copyWith(
           tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Full.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Full.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
@@ -681,6 +749,8 @@ void main() {
           secondaryContainer:
               m1Full.secondary.darken(kDarkenSecondaryContainerFromSecondary),
           tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Full.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Full.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
@@ -699,6 +769,8 @@ void main() {
           secondaryContainer:
               m1Full.secondary.darken(kDarkenSecondaryContainerFromSecondary),
           tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Full.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Full.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
@@ -715,8 +787,11 @@ void main() {
         m1Full.copyWith(
           primaryContainer: m1Full.primary.darken(kDarkenPrimaryContainer),
           secondary: m1Full.primary.darken(kDarkenSecondary),
+          secondaryLightRef: m1Full.primaryLightRef!.darken(kDarkenSecondary),
           secondaryContainer: m1Full.primary.darken(kDarkenSecondaryContainer),
           tertiary: m1Full.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Full.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Full.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
@@ -770,6 +845,7 @@ void main() {
         FlexSchemeColor.effective(m1Full, 4, brightness: Brightness.light),
         m1Full.copyWith(
           tertiary: m1Full.primary.brighten(15),
+          tertiaryLightRef: m1Full.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1Full.primary.brighten(15).lighten(20).blend(Colors.white, 60),
         ),
@@ -787,6 +863,7 @@ void main() {
           secondaryContainer:
               m1Full.secondary.brighten(14).blend(Colors.white, 50),
           tertiary: m1Full.primary.brighten(15),
+          tertiaryLightRef: m1Full.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1Full.primary.brighten(15).lighten(20).blend(Colors.white, 60),
         ),
@@ -805,6 +882,7 @@ void main() {
           secondaryContainer:
               m1Full.secondary.brighten(14).blend(Colors.white, 50),
           tertiary: m1Full.primary.brighten(15),
+          tertiaryLightRef: m1Full.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1Full.primary.brighten(15).lighten(20).blend(Colors.white, 60),
         ),
@@ -821,9 +899,11 @@ void main() {
         m1Full.copyWith(
           primaryContainer: m1Full.primary.lighten(20).blend(Colors.white, 60),
           secondary: m1Full.primary.darken().brighten(20),
+          secondaryLightRef: m1Full.primaryLightRef!.darken().brighten(20),
           secondaryContainer:
               m1Full.primary.darken().brighten(20).blend(Colors.white, 60),
           tertiary: m1Full.primary.brighten(15),
+          tertiaryLightRef: m1Full.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1Full.primary.brighten(15).lighten(20).blend(Colors.white, 60),
         ),
@@ -853,13 +933,17 @@ void main() {
     final FlexSchemeColor m1FullD = FlexSchemeColor(
       primary: FlexColor.materialDarkPrimary,
       primaryContainer: FlexColor.materialDarkPrimaryContainer,
-      secondary: FlexColor.materialDarkSecondary,
-      secondaryContainer: FlexColor.blueDarkSecondaryContainer,
-      tertiary: FlexColor.materialDarkTertiary,
-      tertiaryContainer: FlexColor.blueDarkTertiaryContainer,
+      primaryLightRef: FlexColor.materialLightPrimary,
+      secondary: FlexColor.blueDarkPrimary,
+      secondaryContainer: FlexColor.blueDarkPrimaryContainer,
+      secondaryLightRef: FlexColor.blueLightPrimary,
+      tertiary: FlexColor.amberLightPrimary,
+      tertiaryContainer: FlexColor.amberLightTertiaryContainer,
+      tertiaryLightRef: FlexColor.amberDarkPrimary,
       appBarColor: Colors.black,
       error: FlexColor.materialDarkError,
       errorContainer: FlexColor.darkErrorContainer(FlexColor.materialDarkError),
+      swapOnMaterial3: true,
     );
 
     test(
@@ -894,6 +978,7 @@ void main() {
         FlexSchemeColor.effective(m1FullD, 4, brightness: Brightness.dark),
         m1FullD.copyWith(
           tertiary: m1FullD.primary.brighten(15),
+          tertiaryLightRef: m1FullD.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1FullD.primary.brighten(15).darken(20).blend(Colors.black, 30),
         ),
@@ -911,6 +996,7 @@ void main() {
           secondaryContainer:
               m1FullD.secondary.darken(25).blend(Colors.black, 50),
           tertiary: m1FullD.primary.brighten(15),
+          tertiaryLightRef: m1FullD.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1FullD.primary.brighten(15).darken(20).blend(Colors.black, 30),
         ),
@@ -929,6 +1015,7 @@ void main() {
           secondaryContainer:
               m1FullD.secondary.darken(25).blend(Colors.black, 50),
           tertiary: m1FullD.primary.brighten(15),
+          tertiaryLightRef: m1FullD.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1FullD.primary.brighten(15).darken(20).blend(Colors.black, 30),
         ),
@@ -945,9 +1032,11 @@ void main() {
         m1FullD.copyWith(
           primaryContainer: m1FullD.primary.darken(5).blend(Colors.black, 55),
           secondary: m1FullD.primary.darken().brighten(20),
+          secondaryLightRef: m1FullD.primaryLightRef!.darken().brighten(20),
           secondaryContainer:
               m1FullD.primary.darken().brighten(20).blend(Colors.black, 40),
           tertiary: m1FullD.primary.brighten(15),
+          tertiaryLightRef: m1FullD.primaryLightRef!.brighten(15),
           tertiaryContainer:
               m1FullD.primary.brighten(15).darken(20).blend(Colors.black, 30),
         ),
@@ -972,16 +1061,19 @@ void main() {
     });
 
     final FlexSchemeColor m1SwapLegacy = FlexSchemeColor(
-      primary: FlexColor.materialLightPrimary,
-      primaryContainer: FlexColor.materialLightPrimaryContainer, // -> SecVar
-      secondary: FlexColor.materialLightTertiary, // -> primVar
-      secondaryContainer: FlexColor.blueLightTertiaryContainer,
-      tertiary: FlexColor.materialLightSecondary,
-      tertiaryContainer: FlexColor.blueLightSecondaryContainer,
-      appBarColor: Colors.white,
-      error: FlexColor.materialLightError,
-      errorContainer:
-          FlexColor.lightErrorContainer(FlexColor.materialLightError),
+      primary: FlexColor.materialDarkPrimary,
+      primaryContainer: FlexColor.materialDarkPrimaryContainer,
+      primaryLightRef: FlexColor.materialLightPrimary,
+      secondary: FlexColor.amberLightPrimary,
+      secondaryContainer: FlexColor.amberLightTertiaryContainer,
+      secondaryLightRef: FlexColor.amberDarkPrimary,
+      tertiary: FlexColor.blueDarkPrimary,
+      tertiaryContainer: FlexColor.blueDarkPrimaryContainer,
+      tertiaryLightRef: FlexColor.blueLightPrimary,
+      appBarColor: Colors.black,
+      error: FlexColor.materialDarkError,
+      errorContainer: FlexColor.darkErrorContainer(FlexColor.materialDarkError),
+      swapOnMaterial3: true,
     );
 
     test(
@@ -996,16 +1088,18 @@ void main() {
     });
 
     final FlexSchemeColor m1SwapLegacyAndSwapColors = FlexSchemeColor(
-      primary: FlexColor.materialLightTertiary,
-      primaryContainer: FlexColor.blueLightTertiaryContainer,
-      secondary: FlexColor.materialLightPrimary,
-      secondaryContainer: FlexColor.materialLightPrimaryContainer,
-      tertiary: FlexColor.materialLightSecondary,
-      tertiaryContainer: FlexColor.blueLightSecondaryContainer,
-      appBarColor: Colors.white,
-      error: FlexColor.materialLightError,
-      errorContainer:
-          FlexColor.lightErrorContainer(FlexColor.materialLightError),
+      primary: FlexColor.materialDarkPrimary,
+      primaryContainer: FlexColor.materialDarkPrimaryContainer,
+      primaryLightRef: FlexColor.materialLightPrimary,
+      secondary: FlexColor.amberLightPrimary,
+      secondaryContainer: FlexColor.amberLightTertiaryContainer,
+      secondaryLightRef: FlexColor.blueDarkPrimary,
+      tertiary: FlexColor.amberDarkPrimary,
+      tertiaryContainer: FlexColor.blueLightPrimaryContainer,
+      tertiaryLightRef: FlexColor.blueLightPrimary,
+      appBarColor: Colors.black,
+      error: FlexColor.materialDarkError,
+      errorContainer: FlexColor.darkErrorContainer(FlexColor.materialDarkError),
     );
 
     test(
@@ -1151,7 +1245,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff03dac6), tertiary: Color(0xff018786), tertiaryContainer: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, swapOnMaterial3: false)'));
+              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), primaryLightRef: Color(0xff6200ee), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff03dac6), secondaryLightRef: Color(0xff03dac6), tertiary: Color(0xff018786), tertiaryContainer: Color(0xff018786), tertiaryLightRef: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, swapOnMaterial3: false)'));
     });
     test(
         'FSC1.37: Test toStringShort implemented via debugFillProperties '
