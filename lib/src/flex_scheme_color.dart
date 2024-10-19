@@ -68,9 +68,13 @@ class FlexSchemeColor with Diagnosticable {
   /// A reference to the primary color used in a light theme mode
   /// [FlexSchemeColor].
   ///
-  /// This color only needs to be provided in a [FlexSchemeColor] used for
-  /// dark mode colors. The [primaryLightRef] color value should be the same
+  /// This color typically only needs to be provided in a [FlexSchemeColor] used
+  /// for dark mode colors. The [primaryLightRef] color value should be the same
   /// color as the [primary] color in the light mode [FlexSchemeColor].
+  /// If you intend to use the [toDark] to compute dark mode colors from a light
+  /// mode [FlexSchemeColor], you should also define the [primaryLightRef]
+  /// color in order to keep the **fixed** colors identical in light and
+  /// dark mode, when using the [toDark] method.
   ///
   /// In dark mode color schemes this reference color is used so that
   /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
@@ -103,9 +107,13 @@ class FlexSchemeColor with Diagnosticable {
   /// A reference to the secondary color used in a light theme mode
   /// [FlexSchemeColor].
   ///
-  /// This color only needs to be provided in a [FlexSchemeColor] used for
-  /// dark mode colors. The [secondaryLightRef] color value should be the same
-  /// color as the [secondary] color in the light mode [FlexSchemeColor].
+  /// This color typically only needs to be provided in a [FlexSchemeColor] used
+  /// for dark mode colors. The [secondaryLightRef] color value should be the
+  /// same color as the [secondary] color in the light mode [FlexSchemeColor].
+  /// If you intend to use the [toDark] to compute dark mode colors from a light
+  /// mode [FlexSchemeColor], you should also define the [secondaryLightRef]
+  /// color in order to keep the **fixed** colors identical in light and
+  /// dark mode, when using the [toDark] method.
   ///
   /// In dark mode color schemes this reference color is used so that
   /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
@@ -144,9 +152,13 @@ class FlexSchemeColor with Diagnosticable {
   /// A reference to the tertiary color used in a light theme mode
   /// [FlexSchemeColor].
   ///
-  /// This color only needs to be provided in a [FlexSchemeColor] used for
-  /// dark mode colors. The [tertiaryLightRef] color value should be the same
-  /// color as the [tertiary] color in the light mode [FlexSchemeColor].
+  /// This color typically only needs to be provided in a [FlexSchemeColor] used
+  /// for dark mode colors. The [tertiaryLightRef] color value should be the
+  /// same color as the [tertiary] color in the light mode [FlexSchemeColor].
+  /// If you intend to use the [toDark] to compute dark mode colors from a light
+  /// mode [FlexSchemeColor], you should also define the [tertiaryLightRef]
+  /// color in order to keep the **fixed** colors identical in light and
+  /// dark mode, when using the [toDark] method.
   ///
   /// In dark mode color schemes this reference color is used so that
   /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
@@ -557,21 +569,25 @@ class FlexSchemeColor with Diagnosticable {
   /// light mode to dark mode. For primary light mode color with low saturation,
   /// a white blend of 20...30% often also produces nice results.
   ///
-  /// In a Material 3 dark theme, the primary should be lighter than dark
+  /// In a Material-3 dark theme, the primary should be lighter than dark
   /// container. Set [swapColors] to true, to use the main color as container
   /// color and container as main color, when computing the theme with toDark.
+  /// When using a light theme scheme that adheres to the Material-3 color
+  /// roles, this swap may often be a good first approach to getting a decent
+  /// dark version of the light scheme. You can often even keep [whiteBlend]
+  /// at 0%, or close to it, when [swapColors] is true.
   FlexSchemeColor toDark([int whiteBlend = 35, bool swapColors = false]) {
     if (swapColors) {
       return FlexSchemeColor.from(
         primary: primaryContainer.blend(Colors.white, whiteBlend),
         primaryContainer: primary.blend(Colors.white, whiteBlend),
-        primaryLightRef: primary,
+        primaryLightRef: primaryLightRef,
         secondary: secondaryContainer.blend(Colors.white, whiteBlend),
         secondaryContainer: secondary.blend(Colors.white, whiteBlend),
-        secondaryLightRef: secondary,
+        secondaryLightRef: secondaryLightRef,
         tertiary: tertiaryContainer.blend(Colors.white, whiteBlend),
         tertiaryContainer: tertiary.blend(Colors.white, whiteBlend),
-        tertiaryLightRef: tertiary,
+        tertiaryLightRef: tertiaryLightRef,
         appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
         error: error?.blend(Colors.white, whiteBlend),
         errorContainer: errorContainer?.blend(Colors.white, whiteBlend),
@@ -581,13 +597,13 @@ class FlexSchemeColor with Diagnosticable {
       return FlexSchemeColor.from(
         primary: primary.blend(Colors.white, whiteBlend),
         primaryContainer: primaryContainer.blend(Colors.white, whiteBlend),
-        primaryLightRef: primary,
+        primaryLightRef: primaryLightRef,
         secondary: secondary.blend(Colors.white, whiteBlend),
         secondaryContainer: secondaryContainer.blend(Colors.white, whiteBlend),
-        secondaryLightRef: secondary,
+        secondaryLightRef: secondaryLightRef,
         tertiary: tertiary.blend(Colors.white, whiteBlend),
         tertiaryContainer: tertiaryContainer.blend(Colors.white, whiteBlend),
-        tertiaryLightRef: tertiary,
+        tertiaryLightRef: tertiaryLightRef,
         appBarColor: appBarColor?.blend(Colors.white, whiteBlend),
         error: error?.blend(Colors.white, whiteBlend),
         errorContainer: errorContainer?.blend(Colors.white, whiteBlend),
