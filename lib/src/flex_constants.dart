@@ -350,6 +350,7 @@ const int kAlphaPressed = 0x1F;
 /// like SearchBar.
 ///
 /// Same value as used on pressed opacity on controls in M3, given as alpha.
+/// This value was added in Version 8.0.0.
 ///
 /// Value: 0x19 = 25 = 10% = 0.1
 const int kAlphaInputPressed = 0x19;
@@ -483,7 +484,11 @@ const int kInputDecoratorLightBgDarken = 3;
 /// Value: 3
 const int kInputDecoratorDarkBgLighten = 5;
 
-// The v7.1 Blended TextTheme magic values moved to constants
+// The v7.1 Blended TextTheme magic values moved to constants.
+// Blended text themes were deprecated in version 8.0.0.
+// Keeping the constants around, no need to remove them, they are not used
+// anymore, but they are still here for reference, will be tree shaken
+// away by the compiler if they are not referenced.
 // -----------------------------------------------------------------------------
 
 // Normal TextTheme
