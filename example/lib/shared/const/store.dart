@@ -2321,10 +2321,22 @@ sealed class Store {
   // Custom color SETTINGS.
   // ===========================================================================
 
+  // Key used to read and save the customUsesDarkColorsForSeed value.
+  static const String keyCustomUsesDarkColorsForSeed =
+      'customUsesDarkColorsForSeed';
+  // Default value for the customUsesDarkColorsForSeed, also
+  // used to reset settings.
+  static const bool defaultCustomUsesDarkColorsForSeed = false;
+
   // Key used to read and save the primaryLight color value.
   static const String keyPrimaryLight = 'primaryLight';
   // Default value for the primaryLight color, also to reset settings.
   static const Color defaultPrimaryLight = AppColor.customPrimaryLight;
+
+  // Key used to read and save the primaryLightRef color value.
+  static const String keyPrimaryLightRef = 'primaryLightRef';
+  // Default value for the primaryLightRef color, also to reset settings.
+  static const Color defaultPrimaryLightRef = AppColor.customPrimaryLight;
 
   // Key used to read and save the primaryContainerLight color value.
   static const String keyPrimaryContainerLight = 'primaryContainerLight';
@@ -2332,14 +2344,19 @@ sealed class Store {
   static const Color defaultPrimaryContainerLight =
       AppColor.customPrimaryContainerLight;
 
-  // Key used to read and save the secondaryLight color value.
+  // Key used to read and save the secondaryLightRef color value.
   static const String keySecondaryLight = 'secondaryLight';
   // Default value for the secondaryLight color, also to reset settings.
   static const Color defaultSecondaryLight = AppColor.customSecondaryLight;
 
+  // Key used to read and save the secondaryLightRef color value.
+  static const String keySecondaryLightRef = 'secondaryLightRef';
+  // Default value for the secondaryLightRef color, also to reset settings.
+  static const Color defaultSecondaryLightRef = AppColor.customSecondaryLight;
+
   // Key used to read and save the secondaryContainerLight color value.
   static const String keySecondaryContainerLight = 'secondaryContainerLight';
-  // Default value for the secondaryLight color, also to reset settings.
+  // Default value for the secondaryLightRef color, also to reset settings.
   static const Color defaultSecondaryContainerLight =
       AppColor.customSecondaryContainerLight;
 
@@ -2347,6 +2364,11 @@ sealed class Store {
   static const String keyTertiaryLight = 'tertiaryLight';
   // Default value for the tertiaryLight color, also to reset settings.
   static const Color defaultTertiaryLight = AppColor.customTertiaryLight;
+
+  // Key used to read and save the tertiaryLightRef color value.
+  static const String keyTertiaryLightRef = 'tertiaryLightRef';
+  // Default value for the tertiaryLightRef color, also to reset settings.
+  static const Color defaultTertiaryLightRef = AppColor.customTertiaryLight;
 
   // Key used to read and save the tertiaryContainerLight color value.
   static const String keyTertiaryContainerLight = 'tertiaryContainerLight';
@@ -2370,6 +2392,11 @@ sealed class Store {
   // Default value for the primaryDark color, also to reset settings.
   static const Color defaultPrimaryDark = AppColor.customPrimaryDark;
 
+  // Key used to read and save the primaryDarkRef color value.
+  static const String keyPrimaryDarkRef = 'primaryDarkRef';
+  // Default value for the primaryDarkRef color, also to reset settings.
+  static const Color defaultPrimaryDarkRef = AppColor.customPrimaryLight;
+
   // Key used to read and save the primaryContainerDark color value.
   static const String keyPrimaryContainerDark = 'primaryContainerDark';
   // Default value for the primaryDark color, also to reset settings.
@@ -2381,6 +2408,11 @@ sealed class Store {
   // Default value for the secondaryDark color, also to reset settings.
   static const Color defaultSecondaryDark = AppColor.customSecondaryDark;
 
+  // Key used to read and save the secondaryDarkRef color value.
+  static const String keySecondaryDarkRef = 'secondaryDarkRef';
+  // Default value for the secondaryDarkRef color, also to reset settings.
+  static const Color defaultSecondaryDarkRef = AppColor.customSecondaryLight;
+
   // Key used to read and save the secondaryContainerDark color value.
   static const String keySecondaryContainerDark = 'secondaryContainerDark';
   // Default value for the secondaryDark color, also to reset settings.
@@ -2391,6 +2423,11 @@ sealed class Store {
   static const String keyTertiaryDark = 'tertiaryDark';
   // Default value for the tertiaryDark color, also to reset settings.
   static const Color defaultTertiaryDark = AppColor.customTertiaryDark;
+
+  // Key used to read and save the tertiaryDarkRef color value.
+  static const String keyTertiaryDarkRef = 'tertiaryDarkRef';
+  // Default value for the tertiaryDarkRef color, also to reset settings.
+  static const Color defaultTertiaryDarkRef = AppColor.customTertiaryLight;
 
   // Key used to read and save the tertiaryContainerDark color value.
   static const String keyTertiaryContainerDark = 'tertiaryContainerDark';

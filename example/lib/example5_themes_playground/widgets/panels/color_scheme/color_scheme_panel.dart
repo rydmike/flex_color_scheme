@@ -9,6 +9,7 @@ import '../../../../shared/widgets/universal/list_tile_slider.dart';
 import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
+import '../../shared/custom_uses_dark_colors_for_seed_switch.dart';
 import '../../shared/enum_popup_menu.dart';
 import '../../shared/show_input_colors_switch.dart';
 import '../../shared/surfaces_seed_blend_color.dart';
@@ -65,7 +66,6 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
               index: widget.controller.usedFlexToneSetup,
               onChanged: widget.controller.setUsedFlexToneSetup,
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ShowTonalPalette(
@@ -130,7 +130,6 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   style: theme.textTheme.labelSmall,
                 ),
               ),
-
             if (widget.controller.schemeIndex == (AppColor.schemes.length - 1))
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -258,6 +257,7 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 ),
               );
             }),
+            CustomUsesDarkColorsForSeedSwitch(controller: widget.controller),
             const Divider(height: 1),
             ListTileReveal(
               dense: true,
@@ -478,26 +478,6 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
               onChanged: widget.controller.setDynamicContrastLevel,
               sliderLabel: 'Contrast',
             ),
-            // TODO(rydmike): Removed 29.7.2023, maybe bring it back later.
-            //   Ned a way to make this work, we need colors in keys!
-            //
-            // if (!isLight && controller.schemeIndex ==
-            // (AppColor.schemes.length - 1))
-            //   SwitchListTileReveal(
-            //      dense: true,
-            //  title: const Text('Custom dark scheme uses its own key colors'),
-            //       subtitle: const Text(
-            //      'Turn ON to use its dark input colors as seed keys for the '
-            //         'dark theme. This option is only available when using a '
-            //         'custom dark scheme.\n',
-            //       ),
-            //       value: controller.useDarkColorsForSeed &&
-            //           controller.useKeyColors &&
-            //           controller.schemeIndex == AppColor.schemes.length - 1,
-            //       onChanged: controller.useKeyColors &&
-            //            controller.schemeIndex == AppColor.schemes.length - 1
-            //           ? controller.setUseDarkColorsForSeed
-            //           : null),
           ],
         );
       },

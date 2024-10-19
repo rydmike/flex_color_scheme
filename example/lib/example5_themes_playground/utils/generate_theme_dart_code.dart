@@ -51,44 +51,103 @@ String generateThemeDartCode(ThemeController controller) {
   // Using a built-in scheme or one of the custom colors in the demo?
   final bool useBuiltIn = controller.schemeIndex > 2 &&
       controller.schemeIndex < AppColor.schemes.length - 1;
-  final String lightScheme = useBuiltIn
+  final bool useCustom = controller.schemeIndex == AppColor.schemes.length - 1;
+  String lightScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
           '    primary: ${scheme.light.primary},\n'
           '    primaryContainer: ${scheme.light.primaryContainer},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
           '    secondary: ${scheme.light.secondary},\n'
           '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
           '    tertiary: ${scheme.light.tertiary},\n'
           '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
           '    appBarColor: ${scheme.light.appBarColor},\n'
           '    error: ${scheme.light.error},\n'
           '    errorContainer: ${scheme.light.errorContainer},\n'
           '  ),\n';
+  if (useCustom) {
+    lightScheme = '  colors: const FlexSchemeColor( // Custom\n'
+        '    primary: ${controller.primaryLight},\n'
+        '    primaryContainer: ${controller.primaryContainerLight},\n'
+        '    primaryLightRef: ${controller.primaryLightRef},\n'
+        '    secondary: ${controller.secondaryLight},\n'
+        '    secondaryContainer: ${controller.secondaryContainerLight},\n'
+        '    secondaryLightRef: ${controller.secondaryLightRef},\n'
+        '    tertiary: ${controller.tertiaryLight},\n'
+        '    tertiaryContainer: ${controller.tertiaryContainerLight},\n'
+        '    tertiaryLightRef: ${controller.tertiaryLightRef},\n'
+        '    appBarColor: ${scheme.light.appBarColor},\n'
+        '    error: ${controller.errorLight},\n'
+        '    errorContainer: ${controller.errorContainerLight},\n'
+        '  ),\n';
+  }
   String darkScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
           '    primary: ${scheme.dark.primary},\n'
           '    primaryContainer: ${scheme.dark.primaryContainer},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
           '    secondary: ${scheme.dark.secondary},\n'
           '    secondaryContainer: ${scheme.dark.secondaryContainer},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
           '    tertiary: ${scheme.dark.tertiary},\n'
           '    tertiaryContainer: ${scheme.dark.tertiaryContainer},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
           '    appBarColor: ${scheme.dark.appBarColor},\n'
           '    error: ${scheme.dark.error},\n'
           '    errorContainer: ${scheme.dark.errorContainer},\n'
           '  ),\n';
-  if (controller.useToDarkMethod && !useBuiltIn && !controller.useKeyColors) {
-    darkScheme = '  colors: const FlexSchemeColor(\n'
-        '    primary: ${scheme.light.primary},\n'
-        '    primaryContainer: ${scheme.light.primaryContainer},\n'
-        '    secondary: ${scheme.light.secondary},\n'
-        '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
-        '    tertiary: ${scheme.light.tertiary},\n'
-        '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
+  if (useCustom) {
+    darkScheme = '  colors: const FlexSchemeColor( // Custom\n'
+        '    primary: ${controller.primaryDark},\n'
+        '    primaryContainer: ${controller.primaryContainerDark},\n'
+        '    primaryLightRef: ${controller.primaryDarkRef},\n'
+        '    secondary: ${controller.secondaryDark},\n'
+        '    secondaryContainer: ${controller.secondaryContainerDark},\n'
+        '    secondaryLightRef: ${controller.secondaryDarkRef},\n'
+        '    tertiary: ${controller.tertiaryDark},\n'
+        '    tertiaryContainer: ${controller.tertiaryContainerDark},\n'
+        '    tertiaryLightRef: ${controller.tertiaryDarkRef},\n'
         '    appBarColor: ${scheme.light.appBarColor},\n'
-        '    error: ${scheme.light.error},\n'
-        '    errorContainer: ${scheme.light.errorContainer},\n'
-        '  ).defaultError.toDark(${controller.darkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
+        '    error: ${controller.errorDark},\n'
+        '    errorContainer: ${controller.errorContainerDark},\n'
+        '  ),\n';
+  }
+  if (controller.useToDarkMethod && !useBuiltIn && !controller.useKeyColors) {
+    if (useCustom) {
+      darkScheme = '  colors: const FlexSchemeColor(\n'
+          '    primary: ${scheme.dark.primary},\n'
+          '    primaryContainer: ${scheme.dark.primaryContainer},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
+          '    secondary: ${scheme.dark.secondary},\n'
+          '    secondaryContainer: ${scheme.dark.secondaryContainer},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
+          '    tertiary: ${scheme.dark.tertiary},\n'
+          '    tertiaryContainer: ${scheme.dark.tertiaryContainer},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
+          '    appBarColor: ${scheme.dark.appBarColor},\n'
+          '    error: ${scheme.dark.error},\n'
+          '    errorContainer: ${scheme.dark.errorContainer},\n'
+          '  ).defaultError.toDark(${controller.darkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
+    } else {
+      darkScheme = '  colors: const FlexSchemeColor(\n'
+          '    primary: ${scheme.light.primary},\n'
+          '    primaryContainer: ${scheme.light.primaryContainer},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
+          '    secondary: ${scheme.light.secondary},\n'
+          '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
+          '    tertiary: ${scheme.light.tertiary},\n'
+          '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
+          '    appBarColor: ${scheme.light.appBarColor},\n'
+          '    error: ${scheme.light.error},\n'
+          '    errorContainer: ${scheme.light.errorContainer},\n'
+          '  ).defaultError.toDark(${controller.darkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
+    }
   }
   if (controller.useToDarkMethod && useBuiltIn && !controller.useKeyColors) {
     darkScheme =
