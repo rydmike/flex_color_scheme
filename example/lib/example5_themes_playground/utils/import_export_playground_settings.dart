@@ -1,14 +1,13 @@
-// ignore_for_file: lines_longer_than_80_chars
 import 'dart:convert';
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../shared/const/app.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_response.dart';
 import '../../shared/model/splash_type_enum.dart';
 import '../../shared/model/visual_density_enum.dart';
-import 'version.dart';
 
 /// Common keys used in serialisation/deserialisation
 enum JsonKeys {
@@ -53,8 +52,9 @@ enum JsonKeys {
 Future<String> exportPlaygroundSettings(ThemeController controller) async {
   final Map<String, dynamic> themeData = controller.exportSavedThemeData();
 
-  // This may be useful in the future, e.g., to handle migrations when importing an older version
-  themeData[JsonKeys.playgroundVersion.key] = await getVersion();
+  // This may be useful in the future, e.g., to handle migrations when
+  // importing an older version
+  themeData[JsonKeys.playgroundVersion.key] = App.version;
 
   final String data = JsonEncoder.withIndent(
     '    ',
@@ -120,8 +120,8 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
         } else if (object is VisualDensityEnum) {
           dartType = JsonKeys.typeEnumVisualDensity.key;
         } else {
-          debugPrint(
-              'Unhandled enum type ${object.runtimeType} with value ${object.name}');
+          debugPrint('Unhandled enum type ${object.runtimeType} '
+              'with value ${object.name}');
         }
 
         if (dartType != null) {
@@ -290,7 +290,7 @@ Future<void> importPlaygroundSettings(
 
   return controller
       .importSavedThemeData(data)
-      .then((value) => controller.loadAll());
+      .then((void value) => controller.loadAll());
 }
 
 bool _equalsIgnoreCase(String? string1, String? string2) {

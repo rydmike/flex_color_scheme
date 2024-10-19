@@ -144,8 +144,9 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                     contentPadding:
                         ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Export playground theme'),
-                    subtitleReveal: const Text(
-                        'Export theme settings, which can later be re-imported here.'),
+                    subtitleReveal:
+                        const Text('Export theme settings, which can later '
+                            'be re-imported here.'),
                     trailing: FilledButton(
                       onPressed: () {
                         unawaited(_handleExportPlaygroundTheme(context));
@@ -161,7 +162,8 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                         ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Import playground theme'),
                     subtitleReveal: const Text(
-                        'Import theme settings exported previously from the below input.'),
+                        'Import theme settings exported previously from '
+                        'the below input.'),
                     trailing: FilledButton(
                       onPressed: () {
                         _handleImportPlaygroundTheme(context);
@@ -190,8 +192,8 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
             ],
           false => <Widget>[
               const Card(
-                child: Text(
-                    'Playground theme not supported with current storage solution.'),
+                child: Text('Playground theme not supported with '
+                    'current storage solution.'),
               ),
             ],
         }
@@ -203,21 +205,24 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
     try {
       final String data = await exportPlaygroundSettings(widget.controller);
       exportPlaygroundTexteditingController.text = data;
-      unawaited(_handleCopyCode(context, data));
+      if (context.mounted) unawaited(_handleCopyCode(context, data));
     } on Exception catch (error, stackTrace) {
       debugPrintStack(
         label: 'Error exporting playground theme data: $error',
         stackTrace: stackTrace,
       );
-      final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          behavior: SnackBarBehavior.floating,
-          width: width,
-          content: Text('Unable to export playground settings, $error'),
-          duration: const Duration(milliseconds: 2000),
-        ),
-      );
+      if (context.mounted) {
+        final double? width =
+            MediaQuery.sizeOf(context).width > 800 ? 700 : null;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            behavior: SnackBarBehavior.floating,
+            width: width,
+            content: Text('Unable to export playground settings, $error'),
+            duration: const Duration(milliseconds: 2000),
+          ),
+        );
+      }
     }
   }
 
