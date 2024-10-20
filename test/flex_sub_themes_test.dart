@@ -87,7 +87,20 @@ void main() {
           useMaterial3: false,
         ),
         equals(
-          const BottomNavigationBarThemeData(),
+          const BottomNavigationBarThemeData(
+            backgroundColor: Color(0xfff8faf0),
+            elevation: 3.0,
+            selectedIconTheme: IconThemeData(
+                size: 24.0, color: Color(0xff446732), opacity: 1.0),
+            unselectedIconTheme: IconThemeData(
+                size: 24.0, color: Color(0xa5191d16), opacity: 1.0),
+            selectedItemColor: Color(0xff446732),
+            unselectedItemColor: Color(0xa5191d16),
+            selectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xff446732), fontSize: 14.0),
+            unselectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xa5191d16), fontSize: 12.0),
+          ),
         ),
       );
     });
@@ -104,10 +117,23 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBarTheme(
           colorScheme: colorScheme,
-          useMaterial3: false,
+          useMaterial3: true,
         ),
         equals(
-          const BottomNavigationBarThemeData(),
+          const BottomNavigationBarThemeData(
+            backgroundColor: Color(0xff11140e),
+            elevation: 3.0,
+            selectedIconTheme: IconThemeData(
+                size: 24.0, color: Color(0xffaad291), opacity: 1.0),
+            unselectedIconTheme: IconThemeData(
+                size: 24.0, color: Color(0xffc3c8bb), opacity: 1.0),
+            selectedItemColor: Color(0xffaad291),
+            unselectedItemColor: Color(0xffc3c8bb),
+            selectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xffaad291), fontSize: 14.0),
+            unselectedLabelStyle: TextStyle(
+                inherit: true, color: Color(0xffc3c8bb), fontSize: 12.0),
+          ),
         ),
       );
     });
@@ -120,7 +146,6 @@ void main() {
       expect(
         FlexSubThemes.bottomNavigationBarTheme(
           colorScheme: colorScheme,
-          // useFlutterDefaults: false, <<- Expect this to be default
           useMaterial3: false,
         ),
         equals(
@@ -151,7 +176,6 @@ void main() {
         FlexSubThemes.bottomNavigationBarTheme(
           colorScheme: colorScheme,
           elevation: 2,
-          // useFlutterDefaults: false, <<- Expect this to be default
           useMaterial3: false,
         ),
         equals(
@@ -5055,7 +5079,7 @@ void main() {
       );
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.surface.withOpacity(0.8)),
+        equals(colorScheme.surfaceContainer.withOpacity(0.8)),
       );
       expect(
         menu.style!.padding?.resolve(<WidgetState>{}),
@@ -5075,7 +5099,7 @@ void main() {
       );
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceContainerHighest),
+        equals(colorScheme.surfaceContainer),
       );
       menu = FlexSubThemes.menuTheme(
           colorScheme: colorScheme,
@@ -5325,7 +5349,7 @@ void main() {
       );
       expect(
         m.backgroundColor,
-        equals(colorScheme.surface),
+        equals(colorScheme.surfaceContainerLow),
       );
       expect(
         m.indicatorColor,
@@ -5341,7 +5365,7 @@ void main() {
       );
       expect(
         m.labelTextStyle!.resolve(<WidgetState>{})?.color,
-        equals(colorScheme.onSurface),
+        equals(colorScheme.onSurfaceVariant),
       );
       expect(
         m.iconTheme!.resolve(<WidgetState>{WidgetState.selected})?.color,
@@ -5349,7 +5373,7 @@ void main() {
       );
       expect(
         m.iconTheme!.resolve(<WidgetState>{})?.color,
-        equals(colorScheme.onSurface),
+        equals(colorScheme.onSurfaceVariant),
       );
       m = FlexSubThemes.navigationDrawerTheme(
         colorScheme: colorScheme,
@@ -7063,7 +7087,8 @@ void main() {
             thumbColor: Color(0xff6200ee),
             disabledThumbColor: Color(0xff9e9e9e),
             overlayColor: Color(0x00000000),
-            valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            valueIndicatorShape: DropSliderValueIndicatorShape(),
+            rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
           ).toString(minLevel: DiagnosticLevel.debug),
         ),
       );
@@ -7096,7 +7121,8 @@ void main() {
             disabledThumbColor: Color(0xff9e9e9e),
             overlayColor: Color(0x00000000),
             valueIndicatorColor: Color(0xff342342),
-            valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            valueIndicatorShape: DropSliderValueIndicatorShape(),
+            rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
             valueIndicatorTextStyle:
                 TextStyle(inherit: true, color: Color(0x1fffffff)),
           ).toString(minLevel: DiagnosticLevel.debug),
