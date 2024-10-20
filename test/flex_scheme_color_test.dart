@@ -692,12 +692,12 @@ void main() {
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       primaryLightRef: FlexColor.materialDarkPrimary,
-      secondary: FlexColor.materialLightSecondary,
-      secondaryContainer: FlexColor.blueLightSecondaryContainer,
-      secondaryLightRef: FlexColor.materialDarkSecondary,
-      tertiary: FlexColor.materialLightTertiary,
-      tertiaryContainer: FlexColor.blueLightTertiaryContainer,
-      tertiaryLightRef: FlexColor.materialDarkTertiary,
+      secondary: FlexColor.blueDarkPrimary,
+      secondaryContainer: FlexColor.blueDarkPrimaryContainer,
+      secondaryLightRef: FlexColor.blueLightPrimary,
+      tertiary: FlexColor.amberLightPrimary,
+      tertiaryContainer: FlexColor.amberLightTertiaryContainer,
+      tertiaryLightRef: FlexColor.amberDarkPrimary,
       appBarColor: Colors.white,
       error: FlexColor.materialLightError,
       errorContainer:
@@ -1061,18 +1061,19 @@ void main() {
     });
 
     final FlexSchemeColor m1SwapLegacy = FlexSchemeColor(
-      primary: FlexColor.materialDarkPrimary,
-      primaryContainer: FlexColor.materialDarkPrimaryContainer,
-      primaryLightRef: FlexColor.materialLightPrimary,
+      primary: FlexColor.materialLightPrimary,
+      primaryContainer: FlexColor.materialLightPrimaryContainer,
+      primaryLightRef: FlexColor.materialDarkPrimary,
       secondary: FlexColor.amberLightPrimary,
       secondaryContainer: FlexColor.amberLightTertiaryContainer,
       secondaryLightRef: FlexColor.amberDarkPrimary,
       tertiary: FlexColor.blueDarkPrimary,
       tertiaryContainer: FlexColor.blueDarkPrimaryContainer,
       tertiaryLightRef: FlexColor.blueLightPrimary,
-      appBarColor: Colors.black,
-      error: FlexColor.materialDarkError,
-      errorContainer: FlexColor.darkErrorContainer(FlexColor.materialDarkError),
+      appBarColor: Colors.white,
+      error: FlexColor.materialLightError,
+      errorContainer:
+          FlexColor.lightErrorContainer(FlexColor.materialLightError),
       swapOnMaterial3: true,
     );
 
@@ -1088,18 +1089,20 @@ void main() {
     });
 
     final FlexSchemeColor m1SwapLegacyAndSwapColors = FlexSchemeColor(
-      primary: FlexColor.materialDarkPrimary,
-      primaryContainer: FlexColor.materialDarkPrimaryContainer,
-      primaryLightRef: FlexColor.materialLightPrimary,
-      secondary: FlexColor.amberLightPrimary,
-      secondaryContainer: FlexColor.amberLightTertiaryContainer,
-      secondaryLightRef: FlexColor.blueDarkPrimary,
-      tertiary: FlexColor.amberDarkPrimary,
-      tertiaryContainer: FlexColor.blueLightPrimaryContainer,
+      primary: FlexColor.amberLightPrimary,
+      primaryContainer: FlexColor.amberLightTertiaryContainer,
+      primaryLightRef: FlexColor.amberDarkPrimary,
+      secondary: FlexColor.materialLightPrimary,
+      secondaryContainer: FlexColor.materialLightPrimaryContainer,
+      secondaryLightRef: FlexColor.materialDarkPrimary,
+      tertiary: FlexColor.blueDarkPrimary,
+      tertiaryContainer: FlexColor.blueDarkPrimaryContainer,
       tertiaryLightRef: FlexColor.blueLightPrimary,
-      appBarColor: Colors.black,
-      error: FlexColor.materialDarkError,
-      errorContainer: FlexColor.darkErrorContainer(FlexColor.materialDarkError),
+      appBarColor: Colors.white,
+      error: FlexColor.materialLightError,
+      errorContainer:
+          FlexColor.lightErrorContainer(FlexColor.materialLightError),
+      swapOnMaterial3: true,
     );
 
     test(
@@ -1115,16 +1118,20 @@ void main() {
     });
 
     final FlexSchemeColor m1Swap = FlexSchemeColor(
-      primary: FlexColor.materialLightSecondary,
-      primaryContainer: FlexColor.blueLightSecondaryContainer,
+      primary: FlexColor.blueDarkPrimary,
+      primaryContainer: FlexColor.blueDarkPrimaryContainer,
+      primaryLightRef: FlexColor.blueLightPrimary,
       secondary: FlexColor.materialLightPrimary,
-      secondaryContainer: FlexColor.materialLightPrimaryContainer, // -> SecVar
-      tertiary: FlexColor.materialLightTertiary, // -> primVar
-      tertiaryContainer: FlexColor.blueLightTertiaryContainer,
+      secondaryContainer: FlexColor.materialLightPrimaryContainer,
+      secondaryLightRef: FlexColor.materialDarkPrimary,
+      tertiary: FlexColor.amberLightPrimary,
+      tertiaryContainer: FlexColor.amberLightTertiaryContainer,
+      tertiaryLightRef: FlexColor.amberDarkPrimary,
       appBarColor: Colors.white,
       error: FlexColor.materialLightError,
       errorContainer:
           FlexColor.lightErrorContainer(FlexColor.materialLightError),
+      swapOnMaterial3: true,
     );
 
     test(
@@ -1159,6 +1166,8 @@ void main() {
         FlexSchemeColor.effective(m1Full, 4, swapColors: true),
         m1Swap.copyWith(
           tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Swap.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Swap.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
@@ -1179,6 +1188,8 @@ void main() {
           secondaryContainer:
               m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
           tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Swap.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Swap.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
@@ -1200,6 +1211,8 @@ void main() {
               m1Swap.secondary.darken(kDarkenSecondaryContainerFromSecondary),
           //
           tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Swap.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Swap.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
@@ -1221,9 +1234,12 @@ void main() {
           primaryContainer: m1Swap.primary.darken(kDarkenPrimaryContainer),
           //
           secondary: m1Swap.primary.darken(kDarkenSecondary),
+          secondaryLightRef: m1Swap.primaryLightRef!.darken(kDarkenSecondary),
           secondaryContainer: m1Swap.primary.darken(kDarkenSecondaryContainer),
           //
           tertiary: m1Swap.primary.lighten(kDarkenPrimaryContainer),
+          tertiaryLightRef:
+              m1Swap.primaryLightRef!.lighten(kDarkenPrimaryContainer),
           tertiaryContainer: m1Swap.primary
               .brighten(kDarkenSecondary * 2)
               .lighten(kDarkenSecondaryContainer),
