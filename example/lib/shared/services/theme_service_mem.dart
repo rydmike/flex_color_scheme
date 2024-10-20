@@ -51,4 +51,10 @@ class ThemeServiceMem implements ThemeService {
 
   @override
   bool get supportsExportImport => false;
+
+  /// Clear all stored values.
+  @override
+  Future<void> clearAll() async {
+    throw UnimplementedError();
+  }
 }

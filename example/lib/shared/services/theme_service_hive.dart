@@ -146,10 +146,24 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
+  // TODO(rydmike): Remove commented unfiltered version of getAll.
+  // @override
+  // Map<String, dynamic> getAll() {
+  //   // Do not add a MapEntry is the dynamic value is null.
+  //   return _hiveBox.toMap().map((dynamic key, dynamic value) =>
+  //       MapEntry<String, dynamic>(key.toString(), value));
+  // }
+
   @override
   Map<String, dynamic> getAll() {
-    return _hiveBox.toMap().map((dynamic key, dynamic value) =>
-        MapEntry<String, dynamic>(key.toString(), value));
+    // Filter out entries where the value is null.
+    final Map<String, dynamic> result = <String, dynamic>{};
+    for (final MapEntry<dynamic, dynamic> entry in _hiveBox.toMap().entries) {
+      if (entry.value != null) {
+        result[entry.key.toString()] = entry.value;
+      }
+    }
+    return result;
   }
 
   @override
@@ -166,4 +180,10 @@ class ThemeServiceHive implements ThemeService {
 
   @override
   bool get supportsExportImport => true;
+
+  /// Clear all stored values.
+  @override
+  Future<void> clearAll() async {
+    await _hiveBox.clear();
+  }
 }
