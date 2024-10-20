@@ -52,6 +52,7 @@ sealed class App {
     host: 'pub.dev',
     path: 'packages/flex_color_scheme',
   );
+  static const String exportInfo = 'Themes Playground data exported ';
 
   /// The max dp width used for layout content on the screen in the available
   /// body area.
