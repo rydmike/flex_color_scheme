@@ -23,4 +23,7 @@ abstract class ThemeService {
 
   /// If we can export the playground theme using this storage
   bool get supportsExportImport;
+
+  /// Clear all stored values.
+  Future<void> clearAll();
 }
