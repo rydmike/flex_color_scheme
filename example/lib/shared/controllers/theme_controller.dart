@@ -1083,8 +1083,12 @@ class ThemeController with ChangeNotifier {
     bool resetMode = true,
     // If false, notifyListeners is not called.
     bool doNotify = true,
+    // If true, all local data is deleted before settings are reset.
+    bool deleteLocalData = false,
   }) async {
-    //
+    // Clear the storage service
+    if (deleteLocalData) await _themeService.clearAll();
+
     // GENERAL SETTINGS.
     // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
     if (resetMode) setThemeMode(Store.defaultThemeMode, false);
