@@ -8,7 +8,7 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/examples/responsive_scaffold.dart';
 import '../../../shared/widgets/universal/responsive_dialog.dart';
 import '../../utils/generate_colorscheme_dart_code.dart';
-import '../dialogs/dart_code_dialog_screen.dart';
+import '../dialogs/dart_code_dialog.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
 import 'model/theme_topic.dart';
@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage> {
             final String code = generateColorSchemeDartCode(widget.controller);
             await showResponsiveDialog<void>(
               context: context,
-              child: DartCodeDialogScreen(
+              child: DartCodeDialog(
                 dialogHeader: 'Copy light and dark ColorScheme code',
                 copyMessage: 'ColorScheme code copied to the clipboard!',
                 code: code,

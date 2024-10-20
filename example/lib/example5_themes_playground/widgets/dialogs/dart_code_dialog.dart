@@ -9,8 +9,8 @@ import '../../../shared/widgets/universal/syntax_highlighter.dart';
 /// Show the code for the currently configured FlexColorScheme theme setup.
 ///
 /// Used by the dialog `showCopySetupCodeDialog` to show the code .
-class DartCodeDialogScreen extends StatelessWidget {
-  const DartCodeDialogScreen({
+class DartCodeDialog extends StatelessWidget {
+  const DartCodeDialog({
     super.key,
     required this.dialogHeader,
     required this.copyMessage,
