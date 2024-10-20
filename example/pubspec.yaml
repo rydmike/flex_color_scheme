@@ -60,6 +60,11 @@ dependencies:
   # https://pub.dev/packages/hive
   hive: ^2.2.3
 
+  # Internationalization package, by Google dart.dev.
+  # Used only for date time string formatting in example 5.
+  # https://pub.dev/packages/intl
+  intl: ^0.19.0
+
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
