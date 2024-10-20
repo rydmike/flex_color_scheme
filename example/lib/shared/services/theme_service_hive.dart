@@ -148,10 +148,8 @@ class ThemeServiceHive implements ThemeService {
 
   @override
   Map<String, dynamic> getAll() {
-    return _hiveBox
-        .toMap()
-        // ignore: always_specify_types
-        .map((key, value) => MapEntry(key.toString(), value));
+    return _hiveBox.toMap().map((dynamic key, dynamic value) =>
+        MapEntry<String, dynamic>(key.toString(), value));
   }
 
   @override
