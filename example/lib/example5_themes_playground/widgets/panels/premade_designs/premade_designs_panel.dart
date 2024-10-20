@@ -4,6 +4,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import '../../dialogs/set_theme_to_premade_dialog.dart';
 import '../../shared/test_adaptive_response.dart';
 import '../../shared/use_seeded_color_scheme_switch.dart';
 
@@ -322,33 +323,6 @@ class SetupListTile extends StatelessWidget {
           await _handleSetToPreMade(context, title);
         },
       ),
-    );
-  }
-}
-
-/// Dialog to confirm if user wants to set theme to a premade setup.
-class SetThemeToPremadeDialog extends StatelessWidget {
-  const SetThemeToPremadeDialog({super.key, required this.selectedOption});
-  final String selectedOption;
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Use "$selectedOption" theme?'),
-      content: const Text('Your current configuration will be overwritten, '
-          'but custom colors will be kept.'),
-      actions: <Widget>[
-        TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Cancel')),
-        TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Use theme')),
-      ],
     );
   }
 }
