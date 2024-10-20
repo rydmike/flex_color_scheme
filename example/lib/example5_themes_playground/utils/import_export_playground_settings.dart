@@ -9,7 +9,7 @@ import '../../shared/model/adaptive_response.dart';
 import '../../shared/model/splash_type_enum.dart';
 import '../../shared/model/visual_density_enum.dart';
 
-/// Common keys used in serialisation/deserialisation
+/// Common JsonKeys used in serialisation and deserialization.
 enum JsonKeys {
   dartType(key: 'dart_type'),
   playgroundVersion(key: 'playground_version'),
@@ -48,19 +48,16 @@ enum JsonKeys {
   const JsonKeys({required this.key});
 }
 
-/// A function that exports the theme playground settings to JSON
+/// A function that exports the theme playground settings to JSON.
 Future<String> exportPlaygroundSettings(ThemeController controller) async {
   final Map<String, dynamic> themeData = controller.exportSavedThemeData();
-
   // This may be useful in the future, e.g., to handle migrations when
   // importing an older version
   themeData[JsonKeys.playgroundVersion.key] = App.version;
-
   final String data = JsonEncoder.withIndent(
     '    ',
     (dynamic object) {
       /// Custom converter for types that can't be serialised
-
       if (object is Color) {
         return <String, String>{
           JsonKeys.dartType.key: JsonKeys.typeColor.key,
@@ -68,7 +65,6 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
         };
       } else if (object is Enum) {
         String? dartType;
-
         if (object is AdaptiveResponse) {
           dartType = JsonKeys.typeEnumAdaptiveResponse.key;
         } else if (object is FlexAppBarStyle) {
@@ -120,10 +116,9 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
         } else if (object is VisualDensityEnum) {
           dartType = JsonKeys.typeEnumVisualDensity.key;
         } else {
-          debugPrint('Unhandled enum type ${object.runtimeType} '
-              'with value ${object.name}');
+          debugPrint("Unhandled enum type '${object.runtimeType}' "
+              "with value '${object.name}'");
         }
-
         if (dartType != null) {
           return <String, String>{
             JsonKeys.dartType.key: dartType,
@@ -135,7 +130,6 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
       return object;
     },
   ).convert(themeData);
-
   return data;
 }
 
@@ -146,22 +140,19 @@ Future<void> importPlaygroundSettings(
 }) {
   final Map<String, dynamic> json =
       jsonDecode(settings) as Map<String, dynamic>;
-
   final Map<String, dynamic> data = <String, dynamic>{};
-
   for (final MapEntry<String, dynamic> item in json.entries) {
     if (_equalsIgnoreCase(item.key, JsonKeys.playgroundVersion.key)) {
       continue;
     }
-
     dynamic mapped;
-
     if (item.value is Map) {
-      final String dartType = item.value[JsonKeys.dartType.key] as String;
-      final dynamic value = item.value[JsonKeys.value.key];
-
+      final String dartType =
+          (item.value as Map<String, dynamic>)[JsonKeys.dartType.key] as String;
+      final dynamic value =
+          (item.value as Map<String, dynamic>)[JsonKeys.value.key];
       if (_equalsIgnoreCase(dartType, JsonKeys.typeColor.key)) {
-        mapped = Color(int.parse("0x${value.replaceAll("#", "")}"));
+        mapped = Color(int.parse("0x${(value as String).replaceAll("#", "")}"));
       } else if (_equalsIgnoreCase(
           dartType, JsonKeys.typeEnumAdaptiveResponse.key)) {
         mapped = AdaptiveResponse.values.firstWhere(
@@ -275,19 +266,17 @@ Future<void> importPlaygroundSettings(
             (VisualDensityEnum element) =>
                 _equalsIgnoreCase(element.name, value as String));
       } else {
-        debugPrint('Unhandled type $dartType with value $value');
+        debugPrint("Unhandled type '$dartType' with value '$value'");
       }
     } else {
       mapped = item.value;
     }
-
     if (mapped == null) {
-      debugPrint('mapped value null. Skipping.');
+      debugPrint("The 'mapped' value was null, skipped.");
     } else {
       data[item.key] = mapped;
     }
   }
-
   return controller
       .importSavedThemeData(data)
       .then((void value) => controller.loadAll());
