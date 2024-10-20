@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../shared/const/app.dart';
 import '../../shared/controllers/theme_controller.dart';
@@ -12,6 +14,7 @@ import '../../shared/model/visual_density_enum.dart';
 /// Common JsonKeys used in serialisation and deserialization.
 enum JsonKeys {
   dartType(key: 'dart_type'),
+  playgroundData(key: 'playground_data'),
   playgroundVersion(key: 'playground_version'),
   typeColor(key: 'color'),
   typeEnumAdaptiveResponse(key: 'enum_adaptive_response'),
@@ -40,20 +43,28 @@ enum JsonKeys {
   typeEnumTabBarIndicatorSize(key: 'enum_tabbar_indicator_size'),
   typeEnumThemeModeColor(key: 'enum_theme_mode'),
   typeEnumVisualDensity(key: 'enum_visual_density'),
-
   value(key: 'value');
 
   final String key;
-
   const JsonKeys({required this.key});
 }
 
 /// A function that exports the theme playground settings to JSON.
 Future<String> exportPlaygroundSettings(ThemeController controller) async {
-  final Map<String, dynamic> themeData = controller.exportSavedThemeData();
+  final Map<String, dynamic> themeData = <String, dynamic>{};
+
+  // Date time now formatted as string dd.MM.yyyy HH:mm:ss
+  final String exportDate =
+      DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+  // Add info about JSON file and export date time.
+  themeData[JsonKeys.playgroundData.key] = App.exportInfo + exportDate;
   // This may be useful in the future, e.g., to handle migrations when
   // importing an older version
   themeData[JsonKeys.playgroundVersion.key] = App.version;
+
+  // Add all persisted settings in the ThemeData controller.
+  themeData.addAll(controller.exportSavedThemeData());
+
   final String data = JsonEncoder.withIndent(
     '    ',
     (dynamic object) {
@@ -134,14 +145,19 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
 }
 
 /// A function that imports the saved theme playground settings from JSON
-Future<void> importPlaygroundSettings(
+Future<String> importPlaygroundSettings(
   ThemeController controller, {
   required String settings,
-}) {
+}) async {
+  String resultLog = '';
+
   final Map<String, dynamic> json =
       jsonDecode(settings) as Map<String, dynamic>;
   final Map<String, dynamic> data = <String, dynamic>{};
   for (final MapEntry<String, dynamic> item in json.entries) {
+    if (_equalsIgnoreCase(item.key, JsonKeys.playgroundData.key)) {
+      continue;
+    }
     if (_equalsIgnoreCase(item.key, JsonKeys.playgroundVersion.key)) {
       continue;
     }
@@ -266,20 +282,40 @@ Future<void> importPlaygroundSettings(
             (VisualDensityEnum element) =>
                 _equalsIgnoreCase(element.name, value as String));
       } else {
-        debugPrint("Unhandled type '$dartType' with value '$value'");
+        resultLog += "Unhandled type '$dartType' with value "
+            "'$value' for key '${item.key}'\n";
+        if (kDebugMode) {
+          debugPrint("Unhandled type '$dartType' with value "
+              "'$value' for key '${item.key}'");
+        }
       }
     } else {
       mapped = item.value;
     }
     if (mapped == null) {
-      debugPrint("The 'mapped' value was null, skipped.");
+      resultLog += "The 'mapped' value was null, skipped.\n";
+      if (kDebugMode) debugPrint("The 'mapped' value was null, skipped.");
     } else {
       data[item.key] = mapped;
     }
   }
-  return controller
-      .importSavedThemeData(data)
-      .then((void value) => controller.loadAll());
+  // Date time now formatted as string dd.MM.yyyy HH:mm:ss
+  final String importDate =
+      DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+  if (resultLog.isNotEmpty) {
+    resultLog = 'Imported with issues $importDate\n$resultLog';
+  } else {
+    resultLog = 'Imported successfully $importDate';
+  }
+
+  await controller.importSavedThemeData(data);
+  await controller.loadAll();
+  return resultLog;
+
+  // return controller.importSavedThemeData(data).then((void value) {
+  //   controller.loadAll();
+  //   return resultLog;
+  // });
 }
 
 bool _equalsIgnoreCase(String? string1, String? string2) {

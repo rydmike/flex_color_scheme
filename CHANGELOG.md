@@ -12,6 +12,8 @@ Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BRE
 
 Most APIs are still there and work as before, but a few produce results that differ slightly from past ones, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in FCS V8, but previous values are still available. You will need to enable them explicitly to get the same results as before. The purpose of these default value changes is to make FCS have less opinionated defaults, and be more aligned with Flutter's Material-3 design defaults. The **Themes Playground** app will still have some of its own opinionated defaults, done via default settings values the app uses in its default configuration, but the package Material-3 default starting points, are now much more aligned with Flutter's Material-3 defaults.
 
+In the **Themes Playground** you can now export and import settings to a JSON file, and import them back into the Playground later. This is a great way to save your theme settings for later re-use. The exported JSON contains all the internal controller settings values you have configured in the Playground app, that are needed to restore a given configuration state. This feature was contributed by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257), thank you!
+
 ### MIGRATION
 
 The most critical changes to migrate from FlexColorScheme V7 to V8 are listed below. For a full list of all breaking changes, see **PACKAGE CHANGES** and the **BREAKING** part further below.
@@ -44,7 +46,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 **TODOS BEFORE STABLE RELEASE**
 
 * **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
-  * New features and adapting FCS to Flutter 3.22 also intentionally introduced more breakage. 
+  * New features and adapting FCS to Flutter 3.22 also broke many tests. 
   * Update and review all tests.
     * **Test fix status**: 
       * Start 309 -> 279 -> 266 -> 276 tests 
@@ -52,13 +54,13 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
     * Add tests for new features. Get the FCS package back to 100% test coverage.
   * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and offer them as early access.
 
-- **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still issues after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground and to package doc comments and code TODOs where relevant.
+- **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still valid after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground app and to package doc comments, as well as code TODOs where relevant.
 
 
 **MINOR KNOWN ISSUES**
  
   - **Playground**: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
-    - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. While this kind of buggy behavior is a bit easier to understand visually, it does change the underlying input color to the scheme and not back to its input it had when we cancel. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can more easily observe this bug.
+    - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. It now changes the underlying input color to the scheme and not back to the input value it had when we cancel color editing. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can easily observe this bug. This bug is not new, it has existed a long time.
     
 ### PACKAGE CHANGES
 
@@ -328,12 +330,16 @@ In current Flutter versions, using a custom-tinted TextTheme is rather pointless
 
 **NEW**
 
+- The **Theme Code** view panel now has a toggle that allows you to generate the configured code for the theme as input suitable for a separate app theme file. It has static getters that you can use in your `MaterialApp`'s `theme` and `darkTheme`.
+  >**TIP:** You can modify this file and e.g., pass in controller that contains user-configurable settings for theme configuration properties and generate the theme on the fly in your app. This way you can let the user configure the theme in your app, a few props anyway. This is basically what the Playground app does with all theming properties. That is why you can see the result and impact of defined theme in the Playground app itself, as you modify the desired theme configuration in the app.
+ 
+- The **Theme Code** view got a long asked for feature, Themes Playground settings export and import! You can now export your configured theme settings to a JSON file and import them back into the Playground later. This is a great way to save your theme settings for later use or to share them with others. The exported JSON file contains all the internal controller settings values you have configured in the Playground that are needed to restore a given configuration state.
+  - This Themes Playground feature was contributed by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257). Thank you!  
+
 - On each theme settings panel, many controls now appear in two columns to reduce the need to scroll so much on wider media and see more controls on the same screen. The layout is panel width responsive and controls will be in one column as before on smaller media.
 - Split the "FAB and Chip" settings panels to separate panels **FAB** and **Chip**. 
 - Split the "BottomAppBar and SearchBar" panels to separate panels **SearchBar** and **BottomAppBar**.
 
-- The **Theme Code** view panel now has a toggle that allows you to generate the configured code for the theme as input suitable for a separate app theme file. It has static getters that you can use in your `MaterialApp`'s `theme` and `darkTheme`. 
-   >**TIP:** You can modify this file and e.g., pass in controller that contains user-configurable settings for theme configuration properties and generate the theme on the fly in your app. This way you can let the user configure the theme in your app, a few props anyway. This is basically what the Playground app does with all theming properties. That is why you can see the result and impact of defined theme in the Playground app itself, as you modify the desired theme configuration in the app. 
 
 - On the surface **Color Blends** settings panel, you can choose which surface color the scaffold background color will use as its starting point surface color and as base for the blend level and mode. You can also select any ColorScheme color and use it as an override for the scaffold background color. This will override any blended color result as well as the plain white and true black settings.
 
