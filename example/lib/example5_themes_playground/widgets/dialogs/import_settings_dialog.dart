@@ -10,7 +10,7 @@ class ImportSettingsDialog extends StatelessWidget {
       title: const Text('Import Playground Settings'),
       content: const Text('Import the settings from the staging area?\n'
           '\n'
-          'You current configuration will be overwritten, and replaced\n'
+          'You current configuration will be overwritten and replaced\n'
           'with the settings from the staging area.'),
       actions: <Widget>[
         TextButton(
