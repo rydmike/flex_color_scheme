@@ -61,6 +61,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
  
   - **Playground**: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
     - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. It now changes the underlying input color to the scheme and not back to the input value it had when we cancel color editing. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can easily observe this bug. This bug is not new, it has existed a long time.
+  - Check to toDark impact on theme thumbs, also with swaps
+  - Check custom theme uses own seed impact on thumb and generally once more too.
     
 ### PACKAGE CHANGES
 
