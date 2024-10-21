@@ -201,7 +201,7 @@ void main() {
         FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexThemeData.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -227,7 +227,7 @@ void main() {
       expect(
         FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.dark(scheme: FlexScheme.material)
+          FlexThemeData.dark(scheme: FlexScheme.materialBaseline)
               .toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -253,7 +253,7 @@ void main() {
         'no params.', () {
       expect(
         FlexThemeData.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
@@ -363,14 +363,14 @@ void main() {
     //**************************************************************************
     test(
         'FTD1.03: GIVEN a FlexThemeData.raw theme with Material3 scheme light '
-        'colors EXPECT appbar theme color to be primary color.', () {
-      expect(themeLight.appBarTheme.backgroundColor, null);
+        'colors EXPECT appbar theme color to be white color.', () {
+      expect(themeLight.appBarTheme.backgroundColor, const Color(0xffffffff));
     });
 
     test(
         'FTD1.04: GIVEN a FlexThemeData.raw theme with Material3 scheme dark '
         'colors EXPECT appbar theme color to be surface color.', () {
-      expect(themeDark.appBarTheme.backgroundColor, null);
+      expect(themeDark.appBarTheme.backgroundColor, const Color(0xff121212));
     });
 
     test(
@@ -484,40 +484,40 @@ void main() {
     test(
         'FTD1.18: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT appbar theme elevation null in M3.', () {
-      expect(tLightL.appBarTheme.elevation, null);
+        'EXPECT appbar theme elevation 0 in M3.', () {
+      expect(tLightL.appBarTheme.elevation, 0.0);
     });
     test(
         'FTD1.19: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT appbar theme elevation null in M3.', () {
-      expect(tDarkL.appBarTheme.elevation, null);
+        'EXPECT appbar theme elevation 0 in M3.', () {
+      expect(tDarkL.appBarTheme.elevation, 0.0);
     });
 
     test(
         'FTD1.2: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT surface Color(0xfffcfbfe).', () {
-      expect(tLightL.colorScheme.surface, const Color(0xfffcfbfe));
+        'EXPECT surface Color(0xfff9f8fb).', () {
+      expect(tLightL.colorScheme.surface, const Color(0xfff9f8fb));
     });
     test(
         'FTD1.21: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT surface Color(0xff131214).', () {
-      expect(tDarkL.colorScheme.surface, const Color(0xff131214));
+        'EXPECT surface Color(0xff0a090b).', () {
+      expect(tDarkL.colorScheme.surface, const Color(0xff0a090b));
     });
 
     test(
         'FTD1.22: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT background Color(0xfffcfbfe).', () {
-      expect(tLightL.colorScheme.surface, const Color(0xfffcfbfe));
+        'EXPECT background Color(0xfff9f8fb).', () {
+      expect(tLightL.colorScheme.surface, const Color(0xfff9f8fb));
     });
     test(
         'FTD1.23: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT background Color(0xff131214).', () {
-      expect(tDarkL.colorScheme.surface, const Color(0xff131214));
+        'EXPECT background Color(0xff0a090b).', () {
+      expect(tDarkL.colorScheme.surface, const Color(0xff0a090b));
     });
 
     test(
@@ -529,8 +529,8 @@ void main() {
     test(
         'FTD1.25: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
-        'EXPECT scaffold background Color(0xff131214).', () {
-      expect(tDarkL.scaffoldBackgroundColor, const Color(0xff131214));
+        'EXPECT scaffold background Color(0xff030304).', () {
+      expect(tDarkL.scaffoldBackgroundColor, const Color(0xff030304));
     });
 
     test(
@@ -632,25 +632,25 @@ void main() {
     test(
         'FTD1.36: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
-        'EXPECT surface Color(0xfff8f5fe).', () {
-      expect(tLightM.colorScheme.surface, const Color(0xfff8f5fe));
+        'EXPECT surface Color(0xffefe8fa).', () {
+      expect(tLightM.colorScheme.surface, const Color(0xffefe8fa));
     });
     test(
         'FTD1.37: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexSurface.medium EXPECT surface Color(0xff17151a).', () {
-      expect(tDarkM.colorScheme.surface, const Color(0xff17151a));
+        'WITH FlexSurface.medium EXPECT surface Color(0xff16111b).', () {
+      expect(tDarkM.colorScheme.surface, const Color(0xff16111b));
     });
     test(
-        'FTD1.38: GIVEN a FlexThemeData.light theme FROM scheme "material" '
+        'FTD1.38L: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
-        'EXPECT background Color(0xfff3eefc).', () {
-      expect(tLightM.colorScheme.surface, const Color(0xfff3eefc));
+        'EXPECT background Color(0xffefe8fa).', () {
+      expect(tLightM.colorScheme.surface, const Color(0xffefe8fa));
     });
     test(
-        'FTD1.24: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
+        'FTD1.38D: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
-        'EXPECT background Color(0xff1a161d).', () {
-      expect(tDarkM.colorScheme.surface, const Color(0xff1a161d));
+        'EXPECT background Color(0xff16111b).', () {
+      expect(tDarkM.colorScheme.surface, const Color(0xff16111b));
     });
 
     test(
@@ -663,8 +663,8 @@ void main() {
     test(
         'FTD1.40: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
-        'background Color(0xff151416).', () {
-      expect(tDarkM.scaffoldBackgroundColor, const Color(0xff151416));
+        'background Color(0xff040305).', () {
+      expect(tDarkM.scaffoldBackgroundColor, const Color(0xff040305));
     });
 
     test(
@@ -758,38 +758,38 @@ void main() {
     test(
         'FTD1.51: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
-        'EXPECT surface Color(0xfff3eefc).', () {
-      expect(tLightS.colorScheme.surface, const Color(0xfff3eefc));
+        'EXPECT surface Color(0xfff2edfb).', () {
+      expect(tLightS.colorScheme.surface, const Color(0xfff2edfb));
     });
     test(
         'FTD1.52: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
-        'EXPECT surface Color(0xff1a161d).', () {
-      expect(tDarkS.colorScheme.surface, const Color(0xff1a161d));
+        'EXPECT surface Color(0xff120f16).', () {
+      expect(tDarkS.colorScheme.surface, const Color(0xff120f16));
     });
     test(
         'FTD1.53: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
-        'EXPECT background Color(0xfff3eefc).', () {
-      expect(tLightS.colorScheme.surface, const Color(0xfff3eefc));
+        'EXPECT background Color(0xfff2edfb).', () {
+      expect(tLightS.colorScheme.surface, const Color(0xfff2edfb));
     });
     test(
         'FTD1.54: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
-        'EXPECT background Color(0xff1a161d).', () {
-      expect(tDarkS.colorScheme.surface, const Color(0xff1a161d));
+        'EXPECT background Color(0xff120f16).', () {
+      expect(tDarkS.colorScheme.surface, const Color(0xff120f16));
     });
     test(
         'FTD1.55: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
-        'EXPECT scaffold background Color(0xffc6a3f7).', () {
-      expect(tLightS.scaffoldBackgroundColor, const Color(0xffc6a3f7));
+        'EXPECT scaffold background Color(0xffc7a5f9).', () {
+      expect(tLightS.scaffoldBackgroundColor, const Color(0xffc7a5f9));
     });
     test(
         'FTD1.56: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
-        'EXPECT scaffold background Color(0xff4c3963).', () {
-      expect(tDarkS.scaffoldBackgroundColor, const Color(0xff4c3963));
+        'EXPECT scaffold background Color(0xff422f59).', () {
+      expect(tDarkS.scaffoldBackgroundColor, const Color(0xff422f59));
     });
     test(
         'FTD1.57: GIVEN a FlexThemeData.light theme FROM scheme "material" '
@@ -862,13 +862,15 @@ void main() {
         'FTD1.63: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tLightH.appBarTheme.backgroundColor, tLightH.colorScheme.surface);
+      expect(tLightH.appBarTheme.backgroundColor,
+          tLightH.colorScheme.surfaceContainerLow);
     });
     test(
         'FTD1.64: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tDarkH.appBarTheme.backgroundColor, tDarkH.colorScheme.surface);
+      expect(tDarkH.appBarTheme.backgroundColor,
+          tDarkH.colorScheme.surfaceContainerLow);
     });
     test(
         'FTD1.65: GIVEN a FlexThemeData.light theme FROM scheme "material" '
@@ -883,38 +885,38 @@ void main() {
     test(
         'FTD1.67: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
-        'EXPECT surface Color(0xfff0e9fb).', () {
-      expect(tLightH.colorScheme.surface, const Color(0xfff0e9fb));
+        'EXPECT surface Color(0xffefe8fa).', () {
+      expect(tLightH.colorScheme.surface, const Color(0xffefe8fa));
     });
     test(
         'FTD1.68: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
-        'EXPECT surface Color(0xff1d1922).', () {
-      expect(tDarkH.colorScheme.surface, const Color(0xff1d1922));
+        'EXPECT surface Color(0xff16111b).', () {
+      expect(tDarkH.colorScheme.surface, const Color(0xff16111b));
     });
     test(
         'FTD1.69: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
-        'EXPECT background Color(0xfff0e9fb).', () {
-      expect(tLightH.colorScheme.surface, const Color(0xfff0e9fb));
+        'EXPECT background Color(0xffefe8fa).', () {
+      expect(tLightH.colorScheme.surface, const Color(0xffefe8fa));
     });
     test(
         'FTD1.70: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
-        'EXPECT background Color(0xff1d1922).', () {
-      expect(tDarkH.colorScheme.surface, const Color(0xff1d1922));
+        'EXPECT background Color(0xff16111b).', () {
+      expect(tDarkH.colorScheme.surface, const Color(0xff16111b));
     });
     test(
         'FTD1.71: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
-        'EXPECT scaffold background Color(0xffb485f5).', () {
-      expect(tLightH.scaffoldBackgroundColor, const Color(0xffb485f5));
+        'EXPECT scaffold background Color(0xffb587f7).', () {
+      expect(tLightH.scaffoldBackgroundColor, const Color(0xffb587f7));
     });
     test(
         'FTD1.72: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT scaffold background Color(0xff60477f).', () {
-      expect(tDarkH.scaffoldBackgroundColor, const Color(0xff60477f));
+      expect(tDarkH.scaffoldBackgroundColor, const Color(0xff583f77));
     });
     test(
         'FTD1.73: GIVEN a FlexThemeData.light theme FROM scheme "material" '
@@ -2350,7 +2352,7 @@ void main() {
         FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
+            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -2361,11 +2363,11 @@ void main() {
         'to be equal.', () {
       expect(
         FlexThemeData.light(
-          colors: FlexColor.schemes[FlexScheme.material]!.light,
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
+            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -2379,7 +2381,7 @@ void main() {
             .toTheme
             .toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.light(scheme: FlexScheme.material)
+          FlexThemeData.light(scheme: FlexScheme.materialBaseline)
               .toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -2390,11 +2392,11 @@ void main() {
         'scheme FlexColorScheme.light FlexScheme.material.', () {
       expect(
         FlexThemeData.light(
-          colors: FlexColor.schemes[FlexScheme.material]!.light,
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
-            scheme: FlexScheme.material,
+            scheme: FlexScheme.materialBaseline,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -2405,7 +2407,7 @@ void main() {
         'no params.', () {
       expect(
           FlexThemeData.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
+            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
           ).toString(minLevel: DiagnosticLevel.fine),
           equalsIgnoringHashCodes(FlexColorScheme.light()
               .toTheme
@@ -2419,18 +2421,22 @@ void main() {
         'dark scheme with no parameters.', () {
       expect(
         FlexThemeData.dark(
+          useMaterial3: false,
           colors: const FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialDarkTertiary,
           ),
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexColorScheme.dark()
+          FlexColorScheme.dark(useMaterial3: false)
               .toTheme
               .toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -2444,6 +2450,7 @@ void main() {
         'FlexColorScheme.light(swapColors: true)', () {
       expect(
         FlexThemeData.light(
+          useMaterial3: false,
           colors: const FlexSchemeColor(
             primary: FlexColor.materialLightSecondary,
             primaryContainer: FlexColor.materialLightSecondaryContainer,
@@ -2456,6 +2463,7 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
+            useMaterial3: false,
             swapColors: true,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -2469,18 +2477,23 @@ void main() {
         'FlexThemeData.dark(swapColors: true)', () {
       expect(
         FlexThemeData.dark(
+          useMaterial3: false,
           colors: const FlexSchemeColor(
             primary: FlexColor.materialDarkSecondary,
             primaryContainer: FlexColor.materialDarkSecondaryContainer,
+            primaryLightRef: FlexColor.materialLightSecondary,
             secondary: FlexColor.materialDarkPrimary,
             secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+            secondaryLightRef: FlexColor.materialLightPrimary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialDarkTertiary,
           ),
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.dark(
+            useMaterial3: false,
             swapColors: true,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -2495,7 +2508,7 @@ void main() {
         FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexThemeData.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -2522,7 +2535,7 @@ void main() {
       expect(
         FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.dark(scheme: FlexScheme.material)
+          FlexThemeData.dark(scheme: FlexScheme.materialBaseline)
               .toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -2533,10 +2546,10 @@ void main() {
         'FlexColorScheme.dark FlexScheme.material.', () {
       expect(
         FlexThemeData.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(FlexColorScheme.dark(
-          scheme: FlexScheme.material,
+          scheme: FlexScheme.materialBaseline,
         ).toTheme.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
@@ -2546,7 +2559,7 @@ void main() {
         'FlexThemeData.dark and no params.', () {
       expect(
         FlexColorScheme.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
@@ -2585,8 +2598,9 @@ void main() {
     );
     test(
         'FTD3.11 Light: GIVEN a FlexThemeData.light with null appBarStyle '
-        'and using M3 EXPECT app bar background null ', () {
-      expect(tLAppBarNullM3.appBarTheme.backgroundColor, equals(null));
+        'and using M3 EXPECT app bar background 0xfffcfcfc ', () {
+      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
+          equals(const Color(0xfffcfcfc)));
     });
     final ThemeData tDAppBarNullM3 = FlexThemeData.dark(
       scheme: FlexScheme.flutterDash,
@@ -2595,8 +2609,9 @@ void main() {
     );
     test(
         'FTD3.11 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
-        ' using M3 EXPECT app bar background null ', () {
-      expect(tDAppBarNullM3.appBarTheme.backgroundColor, equals(null));
+        ' using M3 EXPECT app bar background 0xff080808 ', () {
+      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
+          equals(const Color(0xff080808)));
     });
 
     // Test swapLegacyOnMaterial3 when using Material 3 - No swap result
