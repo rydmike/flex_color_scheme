@@ -1964,7 +1964,10 @@ void main() {
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
@@ -2034,7 +2037,7 @@ void main() {
       );
     });
     test(
-        'ElevatedButton 12.3 secondary: GIVEN a default '
+        'ElevatedButton 12.3 M2 secondary: GIVEN a default '
         'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as base color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -2044,6 +2047,7 @@ void main() {
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
@@ -2096,7 +2100,7 @@ void main() {
       );
     });
     test(
-        'ElevatedButton 12.3 secondary-onBase: GIVEN a default '
+        'ElevatedButton 12.3 M2 secondary-onBase: GIVEN a default '
         'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as onBase color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -2106,6 +2110,7 @@ void main() {
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
           onBaseSchemeColor: SchemeColor.secondary,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
@@ -2158,7 +2163,7 @@ void main() {
       );
     });
     test(
-        'ElevatedButton 12.4 M2-states: Does '
+        'ElevatedButton 12.4 M2 states: Does '
         'ElevatedButton have right Material 2 states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF42AEE7),
@@ -2166,10 +2171,10 @@ void main() {
       );
       // Disabled foreground, default, M2
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       // Disabled foreground, custom, M2, with tint
@@ -2178,45 +2183,44 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           useTintedDisable: true,
+          useMaterial3: false,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.secondary)),
       );
       // Selected foreground, M2
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.onPrimary),
       );
       // Selected foreground, custom color, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(
-                colorScheme: colorScheme,
-                baseSchemeColor: SchemeColor.secondary)
-            .style!
-            .foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: false,
+        ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.onSecondary),
       );
       // Selected foreground, custom colors, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(
-                colorScheme: colorScheme,
-                baseSchemeColor: SchemeColor.secondary,
-                onBaseSchemeColor: SchemeColor.tertiary)
-            .style!
-            .foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          onBaseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: false,
+        ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.tertiary),
       );
       // Disabled background, M2, default
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .backgroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled)),
       );
       expect(
@@ -2224,30 +2228,32 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           useTintedDisable: true,
+          useMaterial3: false,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(
                 colorScheme.onSurface, colorScheme.secondary)
             .withAlpha(kAlphaVeryLowDisabled)),
       );
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .backgroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
       // Overlay color states
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
         equals(colorScheme.onSecondary.withAlpha(kAlphaHovered)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
           useTintedInteraction: true,
+          useMaterial3: false,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
         equals(
           FlexSubThemes.tintedHovered(
@@ -2255,47 +2261,49 @@ void main() {
         ),
       );
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
         equals(colorScheme.onSecondary.withAlpha(kAlphaFocused)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
           useTintedInteraction: true,
+          useMaterial3: false,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
         equals(FlexSubThemes.tintedFocused(
             colorScheme.onPrimary, colorScheme.primary, 5.0)),
       );
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.pressed}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         equals(colorScheme.onSecondary.withAlpha(kAlphaPressed)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
           useTintedInteraction: true,
+          useMaterial3: false,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         equals(FlexSubThemes.tintedPressed(
             colorScheme.onPrimary, colorScheme.primary, 5.0)),
       );
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(Colors.transparent),
       );
       expect(
-        FlexSubThemes.elevatedButtonTheme(colorScheme: colorScheme)
-            .style!
-            .overlayColor!
-            .resolve(<WidgetState>{}),
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.overlayColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
     });
@@ -2549,19 +2557,20 @@ void main() {
       );
     });
     test(
-        'ElevatedButton 12.6 custom-1: GIVEN a '
+        'ElevatedButton 12.6 M2 custom-1: GIVEN a '
         'custom FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.elevatedButtonTheme(
-                colorScheme: colorScheme,
-                elevation: 1,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                minButtonSize: const Size(50, 50),
-                radius: 10)
-            .toString(),
+          colorScheme: colorScheme,
+          elevation: 1,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          minButtonSize: const Size(50, 50),
+          radius: 10,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
@@ -2614,21 +2623,22 @@ void main() {
       );
     });
     test(
-        'ElevatedButton 12.7 custom-2: GIVEN a custom '
+        'ElevatedButton 12.7 M2 custom-2: GIVEN a custom '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.elevatedButtonTheme(
-                colorScheme: colorScheme,
-                baseSchemeColor: SchemeColor.tertiary,
-                onBaseSchemeColor: SchemeColor.secondary,
-                elevation: 1,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                minButtonSize: const Size(55, 55),
-                radius: 12)
-            .toString(),
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          onBaseSchemeColor: SchemeColor.secondary,
+          elevation: 1,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          minButtonSize: const Size(55, 55),
+          radius: 12,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
@@ -2820,7 +2830,10 @@ void main() {
         'EXPECT equal to FilledButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.filledButtonTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.filledButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           FilledButtonThemeData(
             style: ButtonStyle(
@@ -2847,6 +2860,7 @@ void main() {
         FlexSubThemes.filledButtonTheme(
           colorScheme: colorScheme,
           backgroundSchemeColor: SchemeColor.secondary,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           FilledButtonThemeData(
@@ -6439,16 +6453,18 @@ void main() {
       );
       // Disabled colors
       expect(
-        FlexSubThemes.radioTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.grey.shade400),
       );
       // Selected radio fill
       expect(
-        FlexSubThemes.radioTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
       // Default states
@@ -6456,6 +6472,7 @@ void main() {
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).fillColor!.resolve(<WidgetState>{}),
         equals(colorScheme.primary.withAlpha(0xDD)),
       );
@@ -6463,6 +6480,7 @@ void main() {
       expect(
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
           // unselectedIsColored: false,  <- False by default
         ).fillColor!.resolve(<WidgetState>{}),
         equals(Colors.black54),
@@ -6531,16 +6549,18 @@ void main() {
       );
       // Disabled colors
       expect(
-        FlexSubThemes.radioTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.grey.shade800),
       );
       // Selected radio fill
       expect(
-        FlexSubThemes.radioTheme(colorScheme: colorScheme)
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.radioTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).fillColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
       // Default states
@@ -6548,6 +6568,7 @@ void main() {
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).fillColor!.resolve(<WidgetState>{}),
         equals(colorScheme.primary.withAlpha(0xDD)),
       );
@@ -6555,6 +6576,7 @@ void main() {
       expect(
         FlexSubThemes.radioTheme(
           colorScheme: colorScheme,
+          useMaterial3: false,
           // unselectedIsColored: false, <- False by default
         ).fillColor!.resolve(<WidgetState>{}),
         equals(Colors.white70),
@@ -6844,6 +6866,7 @@ void main() {
       SegmentedButtonThemeData m = FlexSubThemes.segmentedButtonTheme(
         colorScheme: colorScheme,
         borderWidth: 2,
+        useMaterial3: false,
       );
       expect(
         m.style?.minimumSize?.resolve(<WidgetState>{}),
@@ -8383,7 +8406,10 @@ void main() {
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.textButtonTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.textButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           TextButtonThemeData(
             style: ButtonStyle(
@@ -8410,6 +8436,7 @@ void main() {
         FlexSubThemes.textButtonTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           TextButtonThemeData(
