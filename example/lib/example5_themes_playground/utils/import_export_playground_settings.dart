@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../shared/const/app.dart';
+import '../../shared/const/store.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_response.dart';
 import '../../shared/model/splash_type_enum.dart';
@@ -151,6 +152,21 @@ Future<String> importPlaygroundSettings(
 }) async {
   String resultLog = '';
 
+  // If the settings import is longer than 20000 characters, it is too long,
+  // we do not have that long settings in valid exports, log the error and
+  // return.
+  // Note: No idea how long it can become, this number is just based on trial
+  // and error, last limited tested with valid one that failed was 10000.
+  // So doubled it to be on the safe side.
+  if (settings.length > 20000) {
+    resultLog += 'The imported JSON is too long, probably not valid. '
+        'Import FAILED.';
+    if (kDebugMode) {
+      debugPrint('The settings string is too long, skipped. Import FAILED.');
+    }
+    return resultLog;
+  }
+
   final Map<String, dynamic> json =
       jsonDecode(settings) as Map<String, dynamic>;
   final Map<String, dynamic> data = <String, dynamic>{};
@@ -161,6 +177,25 @@ Future<String> importPlaygroundSettings(
     if (_equalsIgnoreCase(item.key, JsonKeys.playgroundVersion.key)) {
       continue;
     }
+    // If the item.key is not in Store.storageKeys, it is not a valid key
+    // log the error and skip the key.
+    if (!Store.storageKeys.contains(item.key)) {
+      resultLog += "Key '${item.key}' is not a valid key, skipped.\n";
+      if (kDebugMode) {
+        debugPrint("Key '${item.key}' is not a valid key, skipped.");
+      }
+      continue;
+    }
+    // If item.value is longer than 100 characters, it is too long, we do not
+    // have that long strings in valid values, log the error and skip the key.
+    if (item.value.toString().length > 100) {
+      resultLog += "Value for key '${item.key}' is too long, skipped.\n";
+      if (kDebugMode) {
+        debugPrint("Value for key '${item.key}' is too long, skipped.");
+      }
+      continue;
+    }
+
     dynamic mapped;
     if (item.value is Map) {
       final String dartType =
@@ -307,7 +342,6 @@ Future<String> importPlaygroundSettings(
   } else {
     resultLog = 'Imported successfully $importDate';
   }
-
   await controller.importSavedThemeData(data);
   await controller.loadAll();
   return resultLog;
