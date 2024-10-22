@@ -143,7 +143,8 @@ void main() {
 
     // Default value tests ...
     test(
-        'FSSC1.16aM2: GIVEN a light FlexSchemeSurfaceColors.blend created object '
+        'FSSC1.16aM2: GIVEN a light FlexSchemeSurfaceColors.blend created '
+        'object '
         'EXPECT equality with Material 2 light surface colors.', () {
       expect(
         FlexSchemeSurfaceColors.blend(useMaterial3: false),
@@ -163,7 +164,8 @@ void main() {
       );
     });
     test(
-        'FSSC1.16aM3: GIVEN a light FlexSchemeSurfaceColors.blend created object '
+        'FSSC1.16aM3: GIVEN a light FlexSchemeSurfaceColors.blend '
+        'created object '
         'EXPECT equality with Material 2 light surface colors.', () {
       expect(
         FlexSchemeSurfaceColors.blend(useMaterial3: true),
@@ -878,7 +880,8 @@ void main() {
       );
     });
     test(
-        'FSSC1.37M2: GIVEN a light FlexSchemeSurfaceColors.blend created object '
+        'FSSC1.37M2: GIVEN a light FlexSchemeSurfaceColors.blend '
+        'created object '
         'with surface mode levelSurfacesLowScaffoldVariantDialog and level 20 '
         'EXPECT equality when made by matching light defined colors.', () {
       expect(
