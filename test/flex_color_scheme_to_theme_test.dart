@@ -2806,24 +2806,26 @@ void main() {
     // AppBar test null style, not using M3.
     test(
         'FCS7.97 Light: GIVEN a FlexColorScheme.light with null appBarStyle '
-        'and using M3 EXPECT app bar background null ', () {
+        'and using M3 EXPECT app bar background Color(0xfffcfcfc) ', () {
       final ThemeData theme = FlexColorScheme.light(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
         useMaterial3: true,
       ).toTheme;
-      expect(theme.appBarTheme.backgroundColor, equals(null));
+      expect(
+          theme.appBarTheme.backgroundColor, equals(const Color(0xfffcfcfc)));
     });
     // AppBar test null style, using M3.
     test(
         'FCS7.97 Dark: GIVEN a FlexColorScheme.dark with null appBarStyle and '
-        ' using M3 EXPECT app bar background null ', () {
+        ' using M3 EXPECT app bar background Color(0xff080808) ', () {
       final ThemeData theme = FlexColorScheme.dark(
         scheme: FlexScheme.flutterDash,
         // appBarStyle: null, // Default value
         useMaterial3: true,
       ).toTheme;
-      expect(theme.appBarTheme.backgroundColor, equals(null));
+      expect(
+          theme.appBarTheme.backgroundColor, equals(const Color(0xff080808)));
     });
     // AppBar test null style, not using M3.
     test(
@@ -3017,11 +3019,11 @@ void main() {
       ).toTheme;
       expect(
         theme.bottomSheetTheme.backgroundColor,
-        equals(theme.colorScheme.surface),
+        equals(theme.colorScheme.surfaceContainerLow),
       );
       expect(
         theme.bottomSheetTheme.modalBackgroundColor,
-        equals(theme.colorScheme.surface),
+        equals(theme.colorScheme.surfaceContainerLow),
       );
       expect(
         theme.bottomSheetTheme.elevation,
