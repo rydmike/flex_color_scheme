@@ -17,9 +17,9 @@ FlexTones effectiveFlexTones(ThemeController controller, BuildContext context) {
   final FlexSchemeColor colors = FlexSchemeColor.effective(
     scheme.light,
     controller.usedColors,
-    swapLegacy: controller.swapLegacyColors && scheme.light.swapOnMaterial3,
-    swapColors: (isLight && controller.swapLightColors) ||
-        (!isLight && controller.swapDarkColors),
+    swapLegacy: controller.swapLegacyColorsInM3 && scheme.light.swapOnMaterial3,
+    swapColors: (isLight && controller.swapPrimaryAndSecondaryLightColors) ||
+        (!isLight && controller.swapPrimaryAndSecondaryDarkColors),
     brightness: Brightness.light,
   );
 

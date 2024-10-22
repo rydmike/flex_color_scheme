@@ -53,10 +53,10 @@ class _SubpageDemoState extends State<SubpageDemo> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: widget.controller?.sysNavBarStyle ??
+        systemNavBarStyle: widget.controller?.systemNavBarStyle ??
             FlexSystemNavBarStyle.background,
-        useDivider: widget.controller?.useSysNavDivider ?? false,
-        opacity: widget.controller?.sysNavBarOpacity ?? 1,
+        useDivider: widget.controller?.useSystemNavBarDivider ?? false,
+        opacity: widget.controller?.systemNavBarOpacity ?? 1,
       ),
       child: DefaultTabController(
         length: 3,

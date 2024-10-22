@@ -65,7 +65,7 @@ class AndroidNavigationBarPanel extends StatelessWidget {
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
-    final double navBarOpacity = controller.sysNavBarOpacity;
+    final double navBarOpacity = controller.systemNavBarOpacity;
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -131,21 +131,21 @@ class AndroidNavigationBarPanel extends StatelessWidget {
         ),
         ListTile(
           enabled:
-              controller.sysNavBarStyle != FlexSystemNavBarStyle.transparent,
+              controller.systemNavBarStyle != FlexSystemNavBarStyle.transparent,
           title: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
-            value:
-                controller.sysNavBarStyle == FlexSystemNavBarStyle.transparent
-                    ? 0
-                    : navBarOpacity * 100,
-            onChanged:
-                controller.sysNavBarStyle != FlexSystemNavBarStyle.transparent
-                    ? (double value) {
-                        controller.setSysBarOpacity(value / 100);
-                      }
-                    : null,
+            value: controller.systemNavBarStyle ==
+                    FlexSystemNavBarStyle.transparent
+                ? 0
+                : navBarOpacity * 100,
+            onChanged: controller.systemNavBarStyle !=
+                    FlexSystemNavBarStyle.transparent
+                ? (double value) {
+                    controller.setSystemNavBarOpacity(value / 100);
+                  }
+                : null,
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 5),
@@ -158,7 +158,8 @@ class AndroidNavigationBarPanel extends StatelessWidget {
                 ),
                 Text(
                   // ignore: lines_longer_than_80_chars
-                  controller.sysNavBarStyle == FlexSystemNavBarStyle.transparent
+                  controller.systemNavBarStyle ==
+                          FlexSystemNavBarStyle.transparent
                       ? '0 %'
                       : '${(navBarOpacity * 100).toStringAsFixed(0)} %',
                   textAlign: TextAlign.center,
@@ -175,23 +176,23 @@ class AndroidNavigationBarPanel extends StatelessWidget {
         ListTile(
           title: const Text('Android system navigation bar style'),
           subtitle: Text('Using themedSystemNavigationBar\n'
-              '${explainStyle(controller.sysNavBarStyle, isLight)}'),
+              '${explainStyle(controller.systemNavBarStyle, isLight)}'),
         ),
         ListTile(
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 4.0),
             child: SystemNavBarStyleToggleButtons(
-              style: controller.sysNavBarStyle,
-              onChanged: controller.setSysNavBarStyle,
+              style: controller.systemNavBarStyle,
+              onChanged: controller.setSystemNavBarStyle,
             ),
           ),
           onTap: () {
-            if (controller.sysNavBarStyle.index + 1 >=
+            if (controller.systemNavBarStyle.index + 1 >=
                 FlexSystemNavBarStyle.values.length) {
-              controller.setSysNavBarStyle(FlexSystemNavBarStyle.values[0]);
+              controller.setSystemNavBarStyle(FlexSystemNavBarStyle.values[0]);
             } else {
-              controller.setSysNavBarStyle(FlexSystemNavBarStyle
-                  .values[controller.sysNavBarStyle.index + 1]);
+              controller.setSystemNavBarStyle(FlexSystemNavBarStyle
+                  .values[controller.systemNavBarStyle.index + 1]);
             }
           },
         ),
@@ -206,8 +207,8 @@ class AndroidNavigationBarPanel extends StatelessWidget {
               'navigation bar that is one pixel taller than the foreground '
               'bar. This then also becomes a scrim when using transparent '
               'color on the foreground.\n'),
-          value: controller.useSysNavDivider,
-          onChanged: controller.setUseSysNavDivider,
+          value: controller.useSystemNavBarDivider,
+          onChanged: controller.setUseSystemNavBarDivider,
         ),
       ],
     );

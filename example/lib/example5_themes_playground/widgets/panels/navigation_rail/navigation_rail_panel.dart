@@ -33,15 +33,15 @@ class NavigationRailPanel extends StatelessWidget {
               enabled: enableControl,
               title: const Text('Background color'),
               defaultLabel: 'surface',
-              value: controller.navRailBackgroundSchemeColor,
-              onChanged: controller.setNavRailBackgroundSchemeColor,
+              value: controller.navigationRailBackgroundSchemeColor,
+              onChanged: controller.setNavigationRailBackgroundSchemeColor,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               title: const Text('Opacity'),
-              value: controller.navRailOpacity,
-              onChanged: controller.setNavRailOpacity,
+              value: controller.navigationRailOpacity,
+              onChanged: controller.setNavigationRailOpacity,
               min: 0,
               max: 1,
               divisions: 100,
@@ -60,8 +60,8 @@ class NavigationRailPanel extends StatelessWidget {
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               enabled: enableControl,
               title: const Text('Elevation'),
-              value: controller.navRailElevation,
-              onChanged: controller.setNavRailElevation,
+              value: controller.navigationRailElevation,
+              onChanged: controller.setNavigationRailElevation,
               min: 0,
               max: 24,
               divisions: 24,
@@ -86,20 +86,21 @@ class NavigationRailPanel extends StatelessWidget {
               subtitleReveal: const Text('On by default in Material-3 '
                   'and off in Material-2. Turn OFF component themes '
                   'to see this and toggle M2/M3 mode.\n'),
-              value: enableControl && controller.navRailUseIndicator,
-              onChanged:
-                  enableControl ? controller.setNavRailUseIndicator : null,
+              value: enableControl && controller.navigationRailUseIndicator,
+              onChanged: enableControl
+                  ? controller.setNavigationRailUseIndicator
+                  : null,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl &&
-                  controller.navRailUseIndicator &&
+                  controller.navigationRailUseIndicator &&
                   !(!useMaterial3 &&
-                      controller.navRailLabelType ==
+                      controller.navigationRailLabelType ==
                           NavigationRailLabelType.none),
               title: const Text('Radius'),
-              value: controller.navRailIndicatorBorderRadius,
-              onChanged: controller.setNavRailIndicatorBorderRadius,
+              value: controller.navigationRailIndicatorBorderRadius,
+              onChanged: controller.setNavigationRailIndicatorBorderRadius,
               min: 0,
               max: 50,
               divisions: 50,
@@ -108,7 +109,7 @@ class NavigationRailPanel extends StatelessWidget {
               valueUnitLabel: ' dp',
               valueDefaultLabel: 'stadium',
               valueDefaultDisabledLabel: !useMaterial3 &&
-                      controller.navRailLabelType ==
+                      controller.navigationRailLabelType ==
                           NavigationRailLabelType.none
                   ? 'circular'
                   : 'stadium',
@@ -120,19 +121,19 @@ class NavigationRailPanel extends StatelessWidget {
           return RowOrColumn(
             firstWidget: ColorSchemePopupMenu(
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl && controller.navRailUseIndicator,
+              enabled: enableControl && controller.navigationRailUseIndicator,
               title: const Text('Color'),
               defaultLabel: 'secondaryContainer',
               defaultDisabledLabelM2: 'secondary',
-              value: controller.navRailIndicatorSchemeColor,
-              onChanged: controller.setNavRailIndicatorSchemeColor,
+              value: controller.navigationRailIndicatorSchemeColor,
+              onChanged: controller.setNavigationRailIndicatorSchemeColor,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl && controller.navRailUseIndicator,
+              enabled: enableControl && controller.navigationRailUseIndicator,
               title: const Text('Opacity'),
-              value: controller.navRailIndicatorOpacity,
-              onChanged: controller.setNavRailIndicatorOpacity,
+              value: controller.navigationRailIndicatorOpacity,
+              onChanged: controller.setNavigationRailIndicatorOpacity,
               min: 0,
               max: 1,
               divisions: 100,
@@ -254,52 +255,58 @@ class NavigationRailPanel extends StatelessWidget {
                   ColorSchemePopupMenu(
                     enabled: enableControl,
                     title: const Text('Selected icon color'),
-                    defaultLabel: controller.navRailIndicatorSchemeColor == null
-                        ? 'onSecondaryContainer'
-                        : SchemeColor
-                            .values[FlexSubThemes.onSchemeColor(
-                                    controller.navRailIndicatorSchemeColor!)
-                                .index]
-                            .name,
+                    defaultLabel:
+                        controller.navigationRailIndicatorSchemeColor == null
+                            ? 'onSecondaryContainer'
+                            : SchemeColor
+                                .values[FlexSubThemes.onSchemeColor(controller
+                                        .navigationRailIndicatorSchemeColor!)
+                                    .index]
+                                .name,
                     defaultDisabledLabel: 'onSecondaryContainer',
                     defaultDisabledLabelM2: 'primary',
-                    value: controller.navRailSelectedIconSchemeColor,
-                    onChanged: controller.setNavRailSelectedIconSchemeColor,
+                    value: controller.navigationRailSelectedIconSchemeColor,
+                    onChanged:
+                        controller.setNavigationRailSelectedIconSchemeColor,
                   ),
                   ColorSchemePopupMenu(
                     enabled: enableControl,
                     title: const Text('Selected label color'),
-                    defaultLabel: controller.navRailBackgroundSchemeColor ==
-                            null
-                        ? 'onSurface'
-                        : SchemeColor
-                            .values[FlexSubThemes.onSchemeColor(
-                                    controller.navRailBackgroundSchemeColor!)
-                                .index]
-                            .name,
+                    defaultLabel:
+                        controller.navigationRailBackgroundSchemeColor == null
+                            ? 'onSurface'
+                            : SchemeColor
+                                .values[FlexSubThemes.onSchemeColor(controller
+                                        .navigationRailBackgroundSchemeColor!)
+                                    .index]
+                                .name,
                     defaultDisabledLabel: 'onSurface',
                     defaultDisabledLabelM2: 'primary',
-                    value: controller.navRailSelectedLabelSchemeColor,
-                    onChanged: controller.setNavRailSelectedLabelSchemeColor,
+                    value: controller.navigationRailSelectedLabelSchemeColor,
+                    onChanged:
+                        controller.setNavigationRailSelectedLabelSchemeColor,
                   ),
                   ColorSchemePopupMenu(
                     enabled: enableControl,
                     title: const Text('Unselected item color'),
                     subtitle:
                         const Text('Label and icon, but own properties in API'),
-                    defaultLabel: controller.navRailBackgroundSchemeColor ==
+                    defaultLabel: controller
+                                .navigationRailBackgroundSchemeColor ==
                             null
                         ? 'onSurfaceVariant'
                         : SchemeColor
                             .values[FlexSubThemes.onSchemeColor(
-                                    controller.navRailBackgroundSchemeColor!,
+                                    controller
+                                        .navigationRailBackgroundSchemeColor!,
                                     useOnSurfaceVariant: true)
                                 .index]
                             .name,
                     defaultDisabledLabel: 'onSurfaceVariant',
                     defaultDisabledLabelM2: 'onSurface with 64% opacity',
-                    value: controller.navRailUnselectedSchemeColor,
-                    onChanged: controller.setNavRailUnselectedSchemeColor,
+                    value: controller.navigationRailUnselectedItemSchemeColor,
+                    onChanged:
+                        controller.setNavigationRailUnselectedItemSchemeColor,
                   ),
                   SwitchListTileReveal(
                     enabled: enableControl,
@@ -309,10 +316,10 @@ class NavigationRailPanel extends StatelessWidget {
                         'setting for icon and text, but separate properties '
                         'in API.\n'),
                     value: enableControl
-                        ? controller.navRailMuteUnselected
+                        ? controller.navigationRailMuteUnselectedItem
                         : !enableControl,
                     onChanged: enableControl
-                        ? controller.setNavRailMuteUnselected
+                        ? controller.setNavigationRailMuteUnselectedItem
                         : null,
                   ),
                   const Divider(),

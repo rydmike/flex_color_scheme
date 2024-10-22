@@ -27,8 +27,10 @@ class BottomNavigationBarPanel extends StatelessWidget {
 
     final String labelForDefaultSelectedItem = isDark &&
             (!controller.useFlexColorScheme ||
-                (controller.bottomNavBarSelectedSchemeColor == null &&
-                    controller.bottomNavBarUnselectedSchemeColor == null))
+                (controller.bottomNavigationBarSelectedItemSchemeColor ==
+                        null &&
+                    controller.bottomNavigationBarUnselectedItemSchemeColor ==
+                        null))
         ? 'secondary'
         : 'primary';
 
@@ -85,7 +87,7 @@ class BottomNavigationBarPanel extends StatelessWidget {
                   'elevation overlay is not applied.\n'),
               colorSuffix: isDark &&
                       !useMaterial3 &&
-                      controller.bottomNavBarBackgroundSchemeColor ==
+                      controller.bottomNavigationBarBackgroundSchemeColor ==
                           SchemeColor.surface &&
                       controller.bottomNavigationBarElevation != 0
                   ? ', with dark elevation overlay'
@@ -103,8 +105,8 @@ class BottomNavigationBarPanel extends StatelessWidget {
                   !controller.useSubThemes && controller.useFlexColorScheme
                       ? 'surface, with dark elevation overlay'
                       : 'ThemeData.canvasColor, with dark elevation overlay',
-              value: controller.bottomNavBarBackgroundSchemeColor,
-              onChanged: controller.setBottomNavBarBackgroundSchemeColor,
+              value: controller.bottomNavigationBarBackgroundSchemeColor,
+              onChanged: controller.setBottomNavigationBarBackgroundSchemeColor,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
@@ -132,8 +134,9 @@ class BottomNavigationBarPanel extends StatelessWidget {
               title: const Text('Selected item color'),
               subtitle: const Text('Label and icon, but separate API'),
               defaultLabel: labelForDefaultSelectedItem,
-              value: controller.bottomNavBarSelectedSchemeColor,
-              onChanged: controller.setBottomNavBarSelectedSchemeColor,
+              value: controller.bottomNavigationBarSelectedItemSchemeColor,
+              onChanged:
+                  controller.setBottomNavigationBarSelectedItemSchemeColor,
             ),
             lastWidget: SliderListTileReveal(
               enabled: enableControl,
@@ -160,8 +163,9 @@ class BottomNavigationBarPanel extends StatelessWidget {
               title: const Text('Unselected item color'),
               subtitle: const Text('Label and icon, but separate API'),
               defaultLabel: useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
-              value: controller.bottomNavBarUnselectedSchemeColor,
-              onChanged: controller.setBottomNavBarUnselectedSchemeColor,
+              value: controller.bottomNavigationBarUnselectedItemSchemeColor,
+              onChanged:
+                  controller.setBottomNavigationBarUnselectedItemSchemeColor,
             ),
             lastWidget: BottomBarMuteUnselectedToggleButtons(
               controller: controller,
@@ -175,19 +179,21 @@ class BottomNavigationBarPanel extends StatelessWidget {
             firstWidget: SwitchListTile(
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               title: const Text('Show selected labels'),
-              value: enableControl && controller.bottomNavShowSelectedLabels,
+              value: enableControl &&
+                  controller.bottomNavigationBarShowSelectedLabels,
               onChanged:
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBottomNavShowSelectedLabels
+                      ? controller.setBottomNavigationBarShowSelectedLabels
                       : null,
             ),
             lastWidget: SwitchListTile(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               title: const Text('Show unselected labels'),
-              value: enableControl && controller.bottomNavShowUnselectedLabels,
+              value: enableControl &&
+                  controller.bottomNavigationBarShowUnselectedLabels,
               onChanged:
                   controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBottomNavShowUnselectedLabels
+                      ? controller.setBottomNavigationBarShowUnselectedLabels
                       : null,
             ),
             isRow: isRow,

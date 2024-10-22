@@ -87,9 +87,9 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
   void initState() {
     super.initState();
     pageController = PageController(
-      initialPage: widget.controller.viewIndex,
+      initialPage: widget.controller.topicIndexStartSide,
     );
-    previousPage = widget.controller.viewIndex;
+    previousPage = widget.controller.topicIndexStartSide;
     scrollController =
         ScrollController(debugLabel: 'PanelViewScrollController');
     scaleController.value = 1.0;
@@ -146,7 +146,7 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
               delegate: _TopicSelectorHeaderDelegate(
                   vsync: this,
                   extent: headerExtent,
-                  page: themeCtrl.viewIndex,
+                  page: themeCtrl.topicIndexStartSide,
                   previousPage: previousPage,
                   isCompact: isCompact,
                   buttonWidth: buttonWidth,
@@ -156,8 +156,8 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
                         previousPage = index;
                       });
                     }
-                    if (themeCtrl.viewIndex != index) {
-                      themeCtrl.setViewIndex(index);
+                    if (themeCtrl.topicIndexStartSide != index) {
+                      themeCtrl.setTopicIndexStartSide(index);
                       // This is a handmade scale and fade up animation
                       // when user taps on ThemeTopic, we use this instead
                       // of animating to the page with the page controller.
@@ -170,7 +170,7 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
                       fadeController.value = 0.2;
                       scaleController.forward();
                       fadeController.forward();
-                      pageController.jumpToPage(themeCtrl.viewIndex);
+                      pageController.jumpToPage(themeCtrl.topicIndexStartSide);
                     }
                   }),
             ),
@@ -188,9 +188,9 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
           itemCount: themeTopics.length,
           onPageChanged: (int pageIndex) {
             setState(() {
-              previousPage = themeCtrl.viewIndex;
+              previousPage = themeCtrl.topicIndexStartSide;
             });
-            themeCtrl.setViewIndex(pageIndex);
+            themeCtrl.setTopicIndexStartSide(pageIndex);
           },
           itemBuilder: (BuildContext context, int pageIndex) {
             return ScaleTransition(
@@ -244,7 +244,7 @@ class _ThemePanelView extends StatelessWidget {
     final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     final double bottomPadding = mediaPadding.bottom;
 
-    final int sideViewIndex = controller.sideViewIndex;
+    final int sideViewIndex = controller.topicIndexEndSide;
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       // A custom breakpoint, when the layout width is larger than breakpoint
@@ -311,7 +311,7 @@ class _ThemePanelView extends StatelessWidget {
                       Icon(themeTopics[sideViewIndex].icon, color: iconColor),
                   trailing: _SelectSidePanelView(
                     index: sideViewIndex,
-                    onChanged: controller.setSideViewIndex,
+                    onChanged: controller.setTopicIndexEndSide,
                     iconColor: iconColor,
                   ),
                   child: Panel(sideViewIndex, controller),

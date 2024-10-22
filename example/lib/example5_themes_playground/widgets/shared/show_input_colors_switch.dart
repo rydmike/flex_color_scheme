@@ -42,8 +42,8 @@ class ShowInputColorsSwitch extends StatelessWidget {
               'If ON, scheme input color values show the colors before '
               'input modifiers, and the surrounding '
               "color is the effective theme's ColorScheme.\n"),
-      value: controller.showSchemeInput,
-      onChanged: controller.setShowSchemeInput,
+      value: controller.showSchemeInputColors,
+      onChanged: controller.setShowSchemeInputColors,
     );
   }
 }

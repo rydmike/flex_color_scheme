@@ -184,7 +184,7 @@ class AppBarPanel extends StatelessWidget {
                 // show them as well on the PopupMenu button.
                 customAppBarColor:
                     AppColor.scheme(controller).light.appBarColor,
-                isBlended: controller.blendLevel > 0,
+                isBlended: controller.blendLevelLight > 0,
               ),
               lastWidget: SliderListTileReveal(
                 contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
@@ -441,10 +441,10 @@ class AppBarPanel extends StatelessWidget {
                 'OFF Use a two toned AppBar with a scrim on top status bar\n'
                 'This settings only applies to the Android platform.\n',
               ),
-              value: controller.transparentStatusBar &&
+              value: controller.appBarTransparentStatusBar &&
                   controller.useFlexColorScheme,
               onChanged: controller.useFlexColorScheme
-                  ? controller.setTransparentStatusBar
+                  ? controller.setAppBarTransparentStatusBar
                   : null,
             ),
             isRow: isRow,

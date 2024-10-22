@@ -47,9 +47,10 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     // Show blend info if blend is used and key colors are used.
-    final bool showBlendInfo = ((isLight && widget.controller.blendLevel > 0) ||
-            (!isLight && widget.controller.blendLevelDark > 0)) &&
-        widget.controller.useKeyColors;
+    final bool showBlendInfo =
+        ((isLight && widget.controller.blendLevelLight > 0) ||
+                (!isLight && widget.controller.blendLevelDark > 0)) &&
+            widget.controller.useKeyColors;
 
     return ListenableBuilder(
       listenable: toneController,

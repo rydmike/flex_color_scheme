@@ -57,15 +57,15 @@ class NavigationBarPanel extends StatelessWidget {
               title: const Text('Background color'),
               defaultLabel: 'surfaceContainer',
               defaultDisabledLabelM2: 'surface with onSurface overlay-3',
-              value: controller.navBarBackgroundSchemeColor,
-              onChanged: controller.setNavBarBackgroundSchemeColor,
+              value: controller.navigationBarBackgroundSchemeColor,
+              onChanged: controller.setNavigationBarBackgroundSchemeColor,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               title: const Text('Opacity'),
-              value: controller.navBarOpacity,
-              onChanged: controller.setNavBarOpacity,
+              value: controller.navigationBarOpacity,
+              onChanged: controller.setNavigationBarOpacity,
               min: 0,
               max: 1,
               divisions: 100,
@@ -84,8 +84,8 @@ class NavigationBarPanel extends StatelessWidget {
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               enabled: enableControl,
               title: const Text('Elevation'),
-              value: controller.navBarElevation,
-              onChanged: controller.setNavBarElevation,
+              value: controller.navigationBarElevation,
+              onChanged: controller.setNavigationBarElevation,
               min: 0,
               max: 24,
               divisions: 24,
@@ -97,8 +97,8 @@ class NavigationBarPanel extends StatelessWidget {
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               title: const Text('Height'),
-              value: controller.navBarHeight,
-              onChanged: controller.setNavBarHeight,
+              value: controller.navigationBarHeight,
+              onChanged: controller.setNavigationBarHeight,
               min: 55,
               max: 100,
               divisions: 45,
@@ -119,15 +119,15 @@ class NavigationBarPanel extends StatelessWidget {
               title: const Text('Indicator color'),
               defaultLabel: 'secondaryContainer',
               defaultDisabledLabelM2: 'secondary opacity 24%',
-              value: controller.navBarIndicatorSchemeColor,
-              onChanged: controller.setNavBarIndicatorSchemeColor,
+              value: controller.navigationBarIndicatorSchemeColor,
+              onChanged: controller.setNavigationBarIndicatorSchemeColor,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               title: const Text('Opacity'),
-              value: controller.navBarIndicatorOpacity,
-              onChanged: controller.setNavBarIndicatorOpacity,
+              value: controller.navigationBarIndicatorOpacity,
+              onChanged: controller.setNavigationBarIndicatorOpacity,
               min: 0,
               max: 1,
               divisions: 100,
@@ -147,8 +147,8 @@ class NavigationBarPanel extends StatelessWidget {
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               enabled: enableControl,
               title: const Text('Radius'),
-              value: controller.navBarIndicatorBorderRadius,
-              onChanged: controller.setNavBarIndicatorBorderRadius,
+              value: controller.navigationBarIndicatorBorderRadius,
+              onChanged: controller.setNavigationBarIndicatorBorderRadius,
               min: 0,
               max: 25,
               divisions: 25,
@@ -171,31 +171,32 @@ class NavigationBarPanel extends StatelessWidget {
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               enabled: enableControl,
               title: const Text('Selected icon color'),
-              defaultLabel: controller.navBarIndicatorSchemeColor == null
+              defaultLabel: controller.navigationBarIndicatorSchemeColor == null
                   ? 'onSecondaryContainer'
                   : SchemeColor
                       .values[FlexSubThemes.onSchemeColor(
-                              controller.navBarIndicatorSchemeColor!)
+                              controller.navigationBarIndicatorSchemeColor!)
                           .index]
                       .name,
               defaultDisabledLabelM2: 'onSurface',
-              value: controller.navBarSelectedIconSchemeColor,
-              onChanged: controller.setNavBarSelectedIconSchemeColor,
+              value: controller.navigationBarSelectedIconSchemeColor,
+              onChanged: controller.setNavigationBarSelectedIconSchemeColor,
             ),
             lastWidget: ColorSchemePopupMenu(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               title: const Text('Selected label color'),
-              defaultLabel: controller.navBarBackgroundSchemeColor == null
+              defaultLabel: controller.navigationBarBackgroundSchemeColor ==
+                      null
                   ? 'onSurface'
                   : SchemeColor
                       .values[FlexSubThemes.onSchemeColor(
-                              controller.navBarBackgroundSchemeColor!)
+                              controller.navigationBarBackgroundSchemeColor!)
                           .index]
                       .name,
               defaultDisabledLabel: 'onSurface',
-              value: controller.navBarSelectedLabelSchemeColor,
-              onChanged: controller.setNavBarSelectedLabelSchemeColor,
+              value: controller.navigationBarSelectedLabelSchemeColor,
+              onChanged: controller.setNavigationBarSelectedLabelSchemeColor,
             ),
             isRow: isRow,
           );
@@ -207,18 +208,19 @@ class NavigationBarPanel extends StatelessWidget {
               enabled: enableControl,
               title: const Text('Unselected item color'),
               subtitle: const Text('Label and icon, but separate API'),
-              defaultLabel: controller.navBarBackgroundSchemeColor == null
+              defaultLabel: controller.navigationBarBackgroundSchemeColor ==
+                      null
                   ? 'onSurfaceVariant'
                   : SchemeColor
                       .values[FlexSubThemes.onSchemeColor(
-                              controller.navBarBackgroundSchemeColor!,
+                              controller.navigationBarBackgroundSchemeColor!,
                               useOnSurfaceVariant: true)
                           .index]
                       .name,
               defaultDisabledLabel: 'onSurfaceVariant',
               defaultDisabledLabelM2: 'onSurface',
-              value: controller.navBarUnselectedSchemeColor,
-              onChanged: controller.setNavBarUnselectedSchemeColor,
+              value: controller.navigationBarUnselectedItemSchemeColor,
+              onChanged: controller.setNavigationBarUnselectedItemSchemeColor,
             ),
             lastWidget: SwitchListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
@@ -228,8 +230,8 @@ class NavigationBarPanel extends StatelessWidget {
                   'Unselected icon and text are less bright. '
                   'Shared setting for icon and text, but separate properties '
                   'in the API.\n'),
-              value: controller.navBarMuteUnselected,
-              onChanged: controller.setNavBarMuteUnselected,
+              value: controller.navigationBarMuteUnselectedItem,
+              onChanged: controller.setNavigationBarMuteUnselectedItem,
             ),
             isRow: isRow,
           );

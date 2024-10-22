@@ -37,7 +37,8 @@ class BottomBarMuteUnselectedToggleButtons extends StatelessWidget {
       contentPadding: contentPadding,
       enabled: controller.useFlexColorScheme && controller.useSubThemes,
       title: const Text('Muted'),
-      subtitle: Text(_explainLabelStyle(controller.bottomNavBarMuteUnselected)),
+      subtitle: Text(
+          _explainLabelStyle(controller.bottomNavigationBarMuteUnselectedItem)),
       subtitleReveal: const Text('When undefined (null), unselected items are '
           'muted in M2 mode, but not in M3 mode. In M3 mode unselected items '
           'default to onSurfaceVariant, which already is a bit muted as a '
@@ -49,20 +50,20 @@ class BottomBarMuteUnselectedToggleButtons extends StatelessWidget {
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(
           value: controller.useFlexColorScheme && controller.useSubThemes
-              ? controller.bottomNavBarMuteUnselected
+              ? controller.bottomNavigationBarMuteUnselectedItem
               : null,
           onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? controller.setBottomNavBarMuteUnselected
+              ? controller.setBottomNavigationBarMuteUnselectedItem
               : null,
         ),
       ),
       onTap: () {
-        if (controller.bottomNavBarMuteUnselected == false) {
-          controller.setBottomNavBarMuteUnselected(null);
-        } else if (controller.bottomNavBarMuteUnselected == null) {
-          controller.setBottomNavBarMuteUnselected(true);
+        if (controller.bottomNavigationBarMuteUnselectedItem == false) {
+          controller.setBottomNavigationBarMuteUnselectedItem(null);
+        } else if (controller.bottomNavigationBarMuteUnselectedItem == null) {
+          controller.setBottomNavigationBarMuteUnselectedItem(true);
         } else {
-          controller.setBottomNavBarMuteUnselected(false);
+          controller.setBottomNavigationBarMuteUnselectedItem(false);
         }
       },
     );

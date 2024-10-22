@@ -122,9 +122,9 @@ class _HomePageState extends State<HomePage> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: widget.controller.sysNavBarStyle,
-        useDivider: widget.controller.useSysNavDivider,
-        opacity: widget.controller.sysNavBarOpacity,
+        systemNavBarStyle: widget.controller.systemNavBarStyle,
+        useDivider: widget.controller.useSystemNavBarDivider,
+        opacity: widget.controller.systemNavBarOpacity,
       ),
       child: ResponsiveScaffold(
         extendBodyBehindAppBar: true,

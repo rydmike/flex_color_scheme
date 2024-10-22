@@ -54,7 +54,7 @@ ThemeData themeDataDark(ThemeController controller) {
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
     // in the Playground app.
-    visualDensity: controller.usedVisualDensity?.setting(controller.platform) ??
+    visualDensity: controller.visualDensity?.setting(controller.platform) ??
         VisualDensityEnum.platform.setting(controller.platform),
     // Use tap target size setting.
     materialTapTargetSize: controller.tapTargetSize,

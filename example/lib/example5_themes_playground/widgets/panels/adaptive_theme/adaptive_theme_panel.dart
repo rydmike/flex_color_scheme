@@ -60,10 +60,10 @@ class AdaptiveThemePanel extends StatelessWidget {
                 'different UI components.\n'
                 '\n'
                 // ignore: lines_longer_than_80_chars
-                '${controller.usedVisualDensity?.describe ?? VisualDensityEnum.platform.describe}',
+                '${controller.visualDensity?.describe ?? VisualDensityEnum.platform.describe}',
               ),
-              value: controller.usedVisualDensity,
-              onChanged: controller.setUsedVisualDensity,
+              value: controller.visualDensity,
+              onChanged: controller.setVisualDensity,
             ),
             lastWidget: EnumPopupMenu<MaterialTapTargetSize>(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),

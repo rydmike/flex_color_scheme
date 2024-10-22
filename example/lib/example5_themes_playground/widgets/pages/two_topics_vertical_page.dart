@@ -31,16 +31,16 @@ class TwoTopicsVerticalPage extends StatelessWidget {
       children: <Widget>[
         VerticalPanelView(
           key: const ValueKey<String>('Left VPanel'),
-          panel: controller.viewIndex,
-          onPanelChanged: controller.setViewIndex,
+          panel: controller.topicIndexStartSide,
+          onPanelChanged: controller.setTopicIndexStartSide,
           controller: controller,
           addTopPadding: true,
         ),
         VerticalPanelView(
           key: const ValueKey<String>('Right VPanel'),
           isRight: true,
-          panel: controller.sideViewIndex,
-          onPanelChanged: controller.setSideViewIndex,
+          panel: controller.topicIndexEndSide,
+          onPanelChanged: controller.setTopicIndexEndSide,
           controller: controller,
           addTopPadding: true,
         ),

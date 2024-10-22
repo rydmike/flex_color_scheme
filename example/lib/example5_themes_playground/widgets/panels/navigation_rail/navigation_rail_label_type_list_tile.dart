@@ -38,24 +38,26 @@ class NavigationRailLabelBehaviorListTile extends StatelessWidget {
       title: const Text('Labels when collapsed'),
       subtitle: Text(_explainLabelStyle(
           controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.navRailLabelType
+              ? controller.navigationRailLabelType
               : NavigationRailLabelType.none)),
       trailing: NavigationRailLabelTypeToggleButtons(
         style: controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navRailLabelType
+            ? controller.navigationRailLabelType
             : NavigationRailLabelType.none,
         onChanged: controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.setNavRailLabelType
+            ? controller.setNavigationRailLabelType
             : null,
       ),
       onTap: () {
-        if (controller.navRailLabelType == NavigationRailLabelType.none) {
-          controller.setNavRailLabelType(NavigationRailLabelType.selected);
-        } else if (controller.navRailLabelType ==
+        if (controller.navigationRailLabelType ==
+            NavigationRailLabelType.none) {
+          controller
+              .setNavigationRailLabelType(NavigationRailLabelType.selected);
+        } else if (controller.navigationRailLabelType ==
             NavigationRailLabelType.selected) {
-          controller.setNavRailLabelType(NavigationRailLabelType.all);
+          controller.setNavigationRailLabelType(NavigationRailLabelType.all);
         } else {
-          controller.setNavRailLabelType(NavigationRailLabelType.none);
+          controller.setNavigationRailLabelType(NavigationRailLabelType.none);
         }
       },
     );

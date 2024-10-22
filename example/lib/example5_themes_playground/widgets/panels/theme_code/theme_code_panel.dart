@@ -222,8 +222,8 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                 'intended for a separate file instead of using the '
                 'theme definitions in your MaterialApp setup directly.\n',
               ),
-              value: widget.controller.codeForFile,
-              onChanged: widget.controller.setCodeForFile,
+              value: widget.controller.generateCodeForOwnFile,
+              onChanged: widget.controller.setGenerateCodeForOwnFile,
             ),
             isRow: isRow,
           );

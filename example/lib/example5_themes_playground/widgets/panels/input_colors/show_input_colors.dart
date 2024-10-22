@@ -35,10 +35,10 @@ class ShowInputColors extends StatelessWidget {
     final bool isCustomTheme =
         (AppColor.schemes.length - 1) == controller.schemeIndex;
     // Are colors swapped?
-    final bool swapLight = controller.swapLightColors;
-    final bool swapDark = controller.swapDarkColors;
+    final bool swapLight = controller.swapPrimaryAndSecondaryLightColors;
+    final bool swapDark = controller.swapPrimaryAndSecondaryDarkColors;
     // Show the input color values
-    final bool showInputColor = controller.showSchemeInput;
+    final bool showInputColor = controller.showSchemeInputColors;
 
     // Size of theme color presentation boxes
     const double boxWidth = 135;
@@ -135,12 +135,12 @@ class ShowInputColors extends StatelessWidget {
                     onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller.setSecondaryLight(color)
-                            : controller.setPrimaryLight(color);
+                            ? controller.setCustomSecondaryLight(color)
+                            : controller.setCustomPrimaryLight(color);
                       } else {
                         swapDark
-                            ? controller.setSecondaryDark(color)
-                            : controller.setPrimaryDark(color);
+                            ? controller.setCustomSecondaryDark(color)
+                            : controller.setCustomPrimaryDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -149,12 +149,12 @@ class ShowInputColors extends StatelessWidget {
                       if (cancelled) {
                         if (isLight) {
                           swapLight
-                              ? controller.setSecondaryLight(primary)
-                              : controller.setPrimaryLight(primary);
+                              ? controller.setCustomSecondaryLight(primary)
+                              : controller.setCustomPrimaryLight(primary);
                         } else {
                           swapDark
-                              ? controller.setSecondaryDark(primary)
-                              : controller.setPrimaryDark(primary);
+                              ? controller.setCustomSecondaryDark(primary)
+                              : controller.setCustomPrimaryDark(primary);
                         }
                       }
                     },
@@ -191,12 +191,12 @@ class ShowInputColors extends StatelessWidget {
                     onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller.setSecondaryContainerLight(color)
-                            : controller.setPrimaryContainerLight(color);
+                            ? controller.setCustomSecondaryContainerLight(color)
+                            : controller.setCustomPrimaryContainerLight(color);
                       } else {
                         swapDark
-                            ? controller.setSecondaryContainerDark(color)
-                            : controller.setPrimaryContainerDark(color);
+                            ? controller.setCustomSecondaryContainerDark(color)
+                            : controller.setCustomPrimaryContainerDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -205,16 +205,16 @@ class ShowInputColors extends StatelessWidget {
                       if (cancelled) {
                         if (isLight) {
                           swapLight
-                              ? controller
-                                  .setSecondaryContainerLight(primaryContainer)
-                              : controller
-                                  .setPrimaryContainerLight(primaryContainer);
+                              ? controller.setCustomSecondaryContainerLight(
+                                  primaryContainer)
+                              : controller.setCustomPrimaryContainerLight(
+                                  primaryContainer);
                         } else {
                           swapDark
-                              ? controller
-                                  .setSecondaryContainerDark(primaryContainer)
-                              : controller
-                                  .setPrimaryContainerDark(primaryContainer);
+                              ? controller.setCustomSecondaryContainerDark(
+                                  primaryContainer)
+                              : controller.setCustomPrimaryContainerDark(
+                                  primaryContainer);
                         }
                       }
                     },
@@ -252,12 +252,12 @@ class ShowInputColors extends StatelessWidget {
                     onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller.setPrimaryLight(color)
-                            : controller.setSecondaryLight(color);
+                            ? controller.setCustomPrimaryLight(color)
+                            : controller.setCustomSecondaryLight(color);
                       } else {
                         swapDark
-                            ? controller.setPrimaryDark(color)
-                            : controller.setSecondaryDark(color);
+                            ? controller.setCustomPrimaryDark(color)
+                            : controller.setCustomSecondaryDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -266,12 +266,12 @@ class ShowInputColors extends StatelessWidget {
                       if (cancelled) {
                         if (isLight) {
                           swapLight
-                              ? controller.setPrimaryLight(secondary)
-                              : controller.setSecondaryLight(secondary);
+                              ? controller.setCustomPrimaryLight(secondary)
+                              : controller.setCustomSecondaryLight(secondary);
                         } else {
                           swapDark
-                              ? controller.setPrimaryDark(secondary)
-                              : controller.setSecondaryDark(secondary);
+                              ? controller.setCustomPrimaryDark(secondary)
+                              : controller.setCustomSecondaryDark(secondary);
                         }
                       }
                     },
@@ -308,12 +308,13 @@ class ShowInputColors extends StatelessWidget {
                     onChanged: (Color color) {
                       if (isLight) {
                         swapLight
-                            ? controller.setPrimaryContainerLight(color)
-                            : controller.setSecondaryContainerLight(color);
+                            ? controller.setCustomPrimaryContainerLight(color)
+                            : controller
+                                .setCustomSecondaryContainerLight(color);
                       } else {
                         swapDark
-                            ? controller.setPrimaryContainerDark(color)
-                            : controller.setSecondaryContainerDark(color);
+                            ? controller.setCustomPrimaryContainerDark(color)
+                            : controller.setCustomSecondaryContainerDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -322,15 +323,15 @@ class ShowInputColors extends StatelessWidget {
                       if (cancelled) {
                         if (isLight) {
                           swapLight
-                              ? controller
-                                  .setPrimaryContainerLight(secondaryContainer)
-                              : controller.setSecondaryContainerLight(
+                              ? controller.setCustomPrimaryContainerLight(
+                                  secondaryContainer)
+                              : controller.setCustomSecondaryContainerLight(
                                   secondaryContainer);
                         } else {
                           swapDark
-                              ? controller
-                                  .setPrimaryContainerDark(secondaryContainer)
-                              : controller.setSecondaryContainerDark(
+                              ? controller.setCustomPrimaryContainerDark(
+                                  secondaryContainer)
+                              : controller.setCustomSecondaryContainerDark(
                                   secondaryContainer);
                         }
                       }
@@ -368,9 +369,9 @@ class ShowInputColors extends StatelessWidget {
                     color: tertiary,
                     onChanged: (Color color) {
                       if (isLight) {
-                        controller.setTertiaryLight(color);
+                        controller.setCustomTertiaryLight(color);
                       } else {
-                        controller.setTertiaryDark(color);
+                        controller.setCustomTertiaryDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -378,9 +379,9 @@ class ShowInputColors extends StatelessWidget {
                     wasCancelled: (bool cancelled) {
                       if (cancelled) {
                         if (isLight) {
-                          controller.setTertiaryLight(tertiary);
+                          controller.setCustomTertiaryLight(tertiary);
                         } else {
-                          controller.setTertiaryDark(tertiary);
+                          controller.setCustomTertiaryDark(tertiary);
                         }
                       }
                     },
@@ -416,9 +417,9 @@ class ShowInputColors extends StatelessWidget {
                     color: tertiaryContainer,
                     onChanged: (Color color) {
                       if (isLight) {
-                        controller.setTertiaryContainerLight(color);
+                        controller.setCustomTertiaryContainerLight(color);
                       } else {
-                        controller.setTertiaryContainerDark(color);
+                        controller.setCustomTertiaryContainerDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -426,11 +427,11 @@ class ShowInputColors extends StatelessWidget {
                     wasCancelled: (bool cancelled) {
                       if (cancelled) {
                         if (isLight) {
-                          controller
-                              .setTertiaryContainerLight(tertiaryContainer);
+                          controller.setCustomTertiaryContainerLight(
+                              tertiaryContainer);
                         } else {
-                          controller
-                              .setTertiaryContainerDark(tertiaryContainer);
+                          controller.setCustomTertiaryContainerDark(
+                              tertiaryContainer);
                         }
                       }
                     },
@@ -467,9 +468,9 @@ class ShowInputColors extends StatelessWidget {
                     color: error,
                     onChanged: (Color color) {
                       if (isLight) {
-                        controller.setErrorLight(color);
+                        controller.setCustomErrorLight(color);
                       } else {
-                        controller.setErrorDark(color);
+                        controller.setCustomErrorDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -477,9 +478,9 @@ class ShowInputColors extends StatelessWidget {
                     wasCancelled: (bool cancelled) {
                       if (cancelled) {
                         if (isLight) {
-                          controller.setErrorLight(error);
+                          controller.setCustomErrorLight(error);
                         } else {
-                          controller.setErrorDark(error);
+                          controller.setCustomErrorDark(error);
                         }
                       }
                     },
@@ -515,9 +516,9 @@ class ShowInputColors extends StatelessWidget {
                     color: errorContainer,
                     onChanged: (Color color) {
                       if (isLight) {
-                        controller.setErrorContainerLight(color);
+                        controller.setCustomErrorContainerLight(color);
                       } else {
-                        controller.setErrorContainerDark(color);
+                        controller.setCustomErrorContainerDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -525,9 +526,11 @@ class ShowInputColors extends StatelessWidget {
                     wasCancelled: (bool cancelled) {
                       if (cancelled) {
                         if (isLight) {
-                          controller.setErrorContainerLight(errorContainer);
+                          controller
+                              .setCustomErrorContainerLight(errorContainer);
                         } else {
-                          controller.setErrorContainerDark(errorContainer);
+                          controller
+                              .setCustomErrorContainerDark(errorContainer);
                         }
                       }
                     },
