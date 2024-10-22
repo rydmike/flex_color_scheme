@@ -168,9 +168,10 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
                     min: 400,
                     max: 1600,
                     divisions: 100,
-                    label: widget.controller.deviceSize.toStringAsFixed(0),
-                    value: widget.controller.deviceSize,
-                    onChanged: widget.controller.setDeviceSize,
+                    label:
+                        widget.controller.simulatorViewZoom.toStringAsFixed(0),
+                    value: widget.controller.simulatorViewZoom,
+                    onChanged: widget.controller.setSimulatorViewZoom,
                   ),
                 ),
               ],
@@ -181,7 +182,7 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
               color: theme.colorScheme.surfaceContainerHighest,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: widget.controller.deviceSize,
+                  maxHeight: widget.controller.simulatorViewZoom,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),

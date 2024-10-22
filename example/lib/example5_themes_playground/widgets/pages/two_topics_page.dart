@@ -160,15 +160,15 @@ class _TwoTopicsPageState extends State<TwoTopicsPage>
               children: <Widget>[
                 VerticalPanelView(
                   key: const ValueKey<String>('Left Panel'),
-                  panel: controller.viewIndex,
-                  onPanelChanged: controller.setViewIndex,
+                  panel: controller.topicIndexStartSide,
+                  onPanelChanged: controller.setTopicIndexStartSide,
                   controller: controller,
                 ),
                 VerticalPanelView(
                   key: const ValueKey<String>('Right Panel'),
                   isRight: true,
-                  panel: controller.sideViewIndex,
-                  onPanelChanged: controller.setSideViewIndex,
+                  panel: controller.topicIndexEndSide,
+                  onPanelChanged: controller.setTopicIndexEndSide,
                   controller: controller,
                 ),
               ],

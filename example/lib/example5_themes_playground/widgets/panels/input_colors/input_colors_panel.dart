@@ -135,9 +135,10 @@ class InputColorsPanel extends StatelessWidget {
               ],
             ),
           ),
-          value: controller.swapLegacyColors && controller.useMaterial3,
-          onChanged:
-              controller.useMaterial3 ? controller.setSwapLegacyColors : null,
+          value: controller.swapLegacyColorsInM3 && controller.useMaterial3,
+          onChanged: controller.useMaterial3
+              ? controller.setSwapLegacyColorsInM3
+              : null,
         ),
         if (isLight)
           SwitchListTileReveal(
@@ -147,9 +148,10 @@ class InputColorsPanel extends StatelessWidget {
               'The above legacy M3 mode secondary and tertiary swap is done '
               'first, if it is enabled.\n',
             ),
-            value: controller.swapLightColors && controller.useFlexColorScheme,
+            value: controller.swapPrimaryAndSecondaryLightColors &&
+                controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
-                ? controller.setSwapLightColors
+                ? controller.setSwapPrimaryAndSecondaryLightColors
                 : null,
           )
         else
@@ -160,9 +162,10 @@ class InputColorsPanel extends StatelessWidget {
               'The above legacy M3 mode secondary and tertiary swap is done '
               'first, if it is enabled.\n',
             ),
-            value: controller.swapDarkColors && controller.useFlexColorScheme,
+            value: controller.swapPrimaryAndSecondaryDarkColors &&
+                controller.useFlexColorScheme,
             onChanged: controller.useFlexColorScheme
-                ? controller.setSwapDarkColors
+                ? controller.setSwapPrimaryAndSecondaryDarkColors
                 : null,
           ),
         Visibility(
@@ -212,13 +215,13 @@ class InputColorsPanel extends StatelessWidget {
                 title: Slider(
                   max: 100,
                   divisions: 100,
-                  label: controller.darkMethodLevel.toString(),
-                  value: controller.darkMethodLevel.toDouble(),
+                  label: controller.toDarkMethodLevel.toString(),
+                  value: controller.toDarkMethodLevel.toDouble(),
                   onChanged: controller.useToDarkMethod &&
                           controller.useFlexColorScheme &&
                           !controller.useKeyColors
                       ? (double value) {
-                          controller.setDarkMethodLevel(value.floor());
+                          controller.setToDarkMethodLevel(value.floor());
                         }
                       : null,
                 ),
@@ -232,7 +235,7 @@ class InputColorsPanel extends StatelessWidget {
                         style: theme.textTheme.bodySmall,
                       ),
                       Text(
-                        '${controller.darkMethodLevel} %',
+                        '${controller.toDarkMethodLevel} %',
                         style: theme.textTheme.bodySmall!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),

@@ -122,13 +122,13 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     blendLevel: controller.blendLevelDark,
     appBarStyle: controller.appBarStyleDark,
     appBarOpacity: controller.appBarOpacityDark,
-    transparentStatusBar: controller.transparentStatusBar,
+    transparentStatusBar: controller.appBarTransparentStatusBar,
     appBarElevation: controller.appBarElevationDark,
     bottomAppBarElevation: controller.bottomAppBarElevationDark,
     tabBarStyle: controller.tabBarStyle,
-    darkIsTrueBlack: controller.darkIsTrueBlack,
-    swapLegacyOnMaterial3: controller.swapLegacyColors,
-    swapColors: controller.swapDarkColors,
+    darkIsTrueBlack: controller.scaffoldDarkIsTrueBlack,
+    swapLegacyOnMaterial3: controller.swapLegacyColorsInM3,
+    swapColors: controller.swapPrimaryAndSecondaryDarkColors,
     tooltipsMatchBackground: controller.tooltipsMatchBackground,
     //
     subThemesData: controller.useSubThemes
@@ -334,11 +334,12 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             // Set to false to keep using M2 style FAB and ignore
             // M3 type default and global radius on the FAB, it thus
             // remains circular or stadium shaped in extended mode.
-            fabRadius: controller.fabBorderRadius,
-            fabUseShape: controller.fabUseShape,
-            fabAlwaysCircular: controller.fabAlwaysCircular,
-            fabSchemeColor: controller.fabSchemeColor,
-            fabForegroundSchemeColor: controller.fabForegroundSchemeColor,
+            fabRadius: controller.floatingActionButtonBorderRadius,
+            fabUseShape: controller.floatingActionButtonUseShape,
+            fabAlwaysCircular: controller.floatingActionButtonAlwaysCircular,
+            fabSchemeColor: controller.floatingActionButtonSchemeColor,
+            fabForegroundSchemeColor:
+                controller.floatingActionButtonForegroundSchemeColor,
             // Chip settings.
             chipSchemeColor: controller.chipSchemeColor,
             chipSelectedSchemeColor: controller.chipSelectedSchemeColor,
@@ -456,26 +457,26 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             bottomSheetModalElevation: controller.bottomSheetModalElevation,
             // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:
-                controller.bottomNavBarSelectedSchemeColor,
+                controller.bottomNavigationBarSelectedItemSchemeColor,
             bottomNavigationBarUnselectedLabelSchemeColor:
-                controller.bottomNavBarUnselectedSchemeColor,
+                controller.bottomNavigationBarUnselectedItemSchemeColor,
             bottomNavigationBarMutedUnselectedLabel:
-                controller.bottomNavBarMuteUnselected,
+                controller.bottomNavigationBarMuteUnselectedItem,
             bottomNavigationBarSelectedIconSchemeColor:
-                controller.bottomNavBarSelectedSchemeColor,
+                controller.bottomNavigationBarSelectedItemSchemeColor,
             bottomNavigationBarUnselectedIconSchemeColor:
-                controller.bottomNavBarUnselectedSchemeColor,
+                controller.bottomNavigationBarUnselectedItemSchemeColor,
             bottomNavigationBarMutedUnselectedIcon:
-                controller.bottomNavBarMuteUnselected,
+                controller.bottomNavigationBarMuteUnselectedItem,
             bottomNavigationBarBackgroundSchemeColor:
-                controller.bottomNavBarBackgroundSchemeColor,
+                controller.bottomNavigationBarBackgroundSchemeColor,
             bottomNavigationBarOpacity: controller.bottomNavigationBarOpacity,
             bottomNavigationBarElevation:
                 controller.bottomNavigationBarElevation,
             bottomNavigationBarShowSelectedLabels:
-                controller.bottomNavShowSelectedLabels,
+                controller.bottomNavigationBarShowSelectedLabels,
             bottomNavigationBarShowUnselectedLabels:
-                controller.bottomNavShowUnselectedLabels,
+                controller.bottomNavigationBarShowUnselectedLabels,
             bottomNavigationBarSelectedLabelSize:
                 controller.bottomNavigationBarSelectedLabelSize,
             bottomNavigationBarUnselectedLabelSize:
@@ -524,26 +525,29 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             searchUseGlobalShape: controller.searchUseGlobalShape,
             // NavigationBar settings.
             navigationBarSelectedLabelSchemeColor:
-                controller.navBarSelectedLabelSchemeColor,
+                controller.navigationBarSelectedLabelSchemeColor,
             navigationBarUnselectedLabelSchemeColor:
-                controller.navBarUnselectedSchemeColor,
-            navigationBarMutedUnselectedLabel: controller.navBarMuteUnselected,
+                controller.navigationBarUnselectedItemSchemeColor,
+            navigationBarMutedUnselectedLabel:
+                controller.navigationBarMuteUnselectedItem,
             navigationBarSelectedIconSchemeColor:
-                controller.navBarSelectedIconSchemeColor,
+                controller.navigationBarSelectedIconSchemeColor,
             navigationBarUnselectedIconSchemeColor:
-                controller.navBarUnselectedSchemeColor,
-            navigationBarMutedUnselectedIcon: controller.navBarMuteUnselected,
+                controller.navigationBarUnselectedItemSchemeColor,
+            navigationBarMutedUnselectedIcon:
+                controller.navigationBarMuteUnselectedItem,
             navigationBarIndicatorSchemeColor:
-                controller.navBarIndicatorSchemeColor,
-            navigationBarIndicatorOpacity: controller.navBarIndicatorOpacity,
+                controller.navigationBarIndicatorSchemeColor,
+            navigationBarIndicatorOpacity:
+                controller.navigationBarIndicatorOpacity,
             navigationBarIndicatorRadius:
-                controller.navBarIndicatorBorderRadius,
+                controller.navigationBarIndicatorBorderRadius,
             navigationBarBackgroundSchemeColor:
-                controller.navBarBackgroundSchemeColor,
-            navigationBarOpacity: controller.navBarOpacity,
-            navigationBarElevation: controller.navBarElevation,
-            navigationBarHeight: controller.navBarHeight,
-            navigationBarLabelBehavior: controller.navBarLabelBehavior,
+                controller.navigationBarBackgroundSchemeColor,
+            navigationBarOpacity: controller.navigationBarOpacity,
+            navigationBarElevation: controller.navigationBarElevation,
+            navigationBarHeight: controller.navigationBarHeight,
+            navigationBarLabelBehavior: controller.navigationBarLabelBehavior,
             adaptiveRemoveNavigationBarTint: controller
                 .adaptiveRemoveNavigationBarTintDark
                 ?.setting(controller.fakeIsWeb),
@@ -557,27 +561,29 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.navigationBarUnselectedIconSize,
             // NavigationRail settings.
             navigationRailSelectedLabelSchemeColor:
-                controller.navRailSelectedLabelSchemeColor,
+                controller.navigationRailSelectedLabelSchemeColor,
             navigationRailUnselectedLabelSchemeColor:
-                controller.navRailUnselectedSchemeColor,
+                controller.navigationRailUnselectedItemSchemeColor,
             navigationRailMutedUnselectedLabel:
-                controller.navRailMuteUnselected,
+                controller.navigationRailMuteUnselectedItem,
             navigationRailSelectedIconSchemeColor:
-                controller.navRailSelectedIconSchemeColor,
+                controller.navigationRailSelectedIconSchemeColor,
             navigationRailUnselectedIconSchemeColor:
-                controller.navRailUnselectedSchemeColor,
-            navigationRailMutedUnselectedIcon: controller.navRailMuteUnselected,
-            navigationRailUseIndicator: controller.navRailUseIndicator,
+                controller.navigationRailUnselectedItemSchemeColor,
+            navigationRailMutedUnselectedIcon:
+                controller.navigationRailMuteUnselectedItem,
+            navigationRailUseIndicator: controller.navigationRailUseIndicator,
             navigationRailIndicatorSchemeColor:
-                controller.navRailIndicatorSchemeColor,
-            navigationRailIndicatorOpacity: controller.navRailIndicatorOpacity,
+                controller.navigationRailIndicatorSchemeColor,
+            navigationRailIndicatorOpacity:
+                controller.navigationRailIndicatorOpacity,
             navigationRailIndicatorRadius:
-                controller.navRailIndicatorBorderRadius,
+                controller.navigationRailIndicatorBorderRadius,
             navigationRailBackgroundSchemeColor:
-                controller.navRailBackgroundSchemeColor,
-            navigationRailOpacity: controller.navRailOpacity,
-            navigationRailElevation: controller.navRailElevation,
-            navigationRailLabelType: controller.navRailLabelType,
+                controller.navigationRailBackgroundSchemeColor,
+            navigationRailOpacity: controller.navigationRailOpacity,
+            navigationRailElevation: controller.navigationRailElevation,
+            navigationRailLabelType: controller.navigationRailLabelType,
             navigationRailSelectedLabelSize:
                 controller.navigationRailSelectedLabelSize,
             navigationRailUnselectedLabelSize:
@@ -643,7 +649,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     // null default of VisualDensity.adaptivePlatformDensity based on
     // VisualDensityEnum.platform.setting where we can use the Playground
     // active mock platform for the fake default as well.
-    visualDensity: controller.usedVisualDensity?.setting(controller.platform) ??
+    visualDensity: controller.visualDensity?.setting(controller.platform) ??
         VisualDensityEnum.platform.setting(controller.platform),
     // Use tap target size setting.
     materialTapTargetSize: controller.tapTargetSize,

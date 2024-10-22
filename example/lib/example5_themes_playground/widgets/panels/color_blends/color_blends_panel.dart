@@ -154,10 +154,10 @@ class ColorBlendsPanel extends StatelessWidget {
               min: 0,
               max: 40,
               divisions: 40,
-              label: controller.blendLevel.toString(),
-              value: controller.blendLevel.toDouble(),
+              label: controller.blendLevelLight.toString(),
+              value: controller.blendLevelLight.toDouble(),
               onChanged: (double value) {
-                controller.setBlendLevel(value.toInt());
+                controller.setBlendLevelLight(value.toInt());
               },
             ),
             trailing: Padding(
@@ -170,7 +170,7 @@ class ColorBlendsPanel extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    '${controller.blendLevel}',
+                    '${controller.blendLevelLight}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -239,8 +239,8 @@ class ColorBlendsPanel extends StatelessWidget {
               'Plain white uses white Scaffold background color in all blend '
               'modes, other surfaces also become less blended.\n',
             ),
-            value: controller.lightIsWhite,
-            onChanged: controller.setLightIsWhite,
+            value: controller.scaffoldLightIsWhite,
+            onChanged: controller.setScaffoldLightIsWhite,
           ),
           ColorSchemePopupMenu(
             enabled: enableControl,
@@ -248,12 +248,12 @@ class ColorBlendsPanel extends StatelessWidget {
             subtitleReveal: const Text(_scaffoldColorOverrideInfo),
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
-                ? controller.lightIsWhite
+                ? controller.scaffoldLightIsWhite
                     ? 'White'
                     : 'surfaceContainerLowest'
                 : 'surface',
             defaultDisabledLabelM2: controller.useFlexColorScheme
-                ? controller.lightIsWhite
+                ? controller.scaffoldLightIsWhite
                     ? 'White'
                     : 'surface'
                 : 'grey50',
@@ -279,8 +279,8 @@ class ColorBlendsPanel extends StatelessWidget {
               'black Scaffold background in all blend modes, other surfaces '
               'also become less blended.\n',
             ),
-            value: controller.darkIsTrueBlack,
-            onChanged: controller.setDarkIsTrueBlack,
+            value: controller.scaffoldDarkIsTrueBlack,
+            onChanged: controller.setScaffoldDarkIsTrueBlack,
           ),
           ColorSchemePopupMenu(
             enabled: enableControl,
@@ -288,12 +288,12 @@ class ColorBlendsPanel extends StatelessWidget {
             subtitleReveal: const Text(_scaffoldColorOverrideInfo),
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
-                ? controller.darkIsTrueBlack
+                ? controller.scaffoldDarkIsTrueBlack
                     ? 'Black'
                     : 'surfaceContainerLowest'
                 : 'surface',
             defaultDisabledLabelM2: controller.useFlexColorScheme
-                ? controller.darkIsTrueBlack
+                ? controller.scaffoldDarkIsTrueBlack
                     ? 'Black'
                     : 'surface'
                 : 'grey850',
@@ -339,11 +339,12 @@ class ColorBlendsPanel extends StatelessWidget {
               min: 0,
               max: 40,
               divisions: 40,
-              label: controller.blendOnLevel.toString(),
-              value: enableControl ? controller.blendOnLevel.toDouble() : 0,
+              label: controller.blendOnLevelLight.toString(),
+              value:
+                  enableControl ? controller.blendOnLevelLight.toDouble() : 0,
               onChanged: enableControl
                   ? (double value) {
-                      controller.setBlendOnLevel(value.toInt());
+                      controller.setBlendOnLevelLight(value.toInt());
                     }
                   : null,
             ),
@@ -358,7 +359,7 @@ class ColorBlendsPanel extends StatelessWidget {
                   ),
                   Text(
                     // ignore: lines_longer_than_80_chars
-                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevel : ""}',
+                    '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelLight : ""}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),

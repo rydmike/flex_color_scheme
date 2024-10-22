@@ -38,27 +38,27 @@ class NavigationBarLabelBehaviorListTile extends StatelessWidget {
       title: const Text('Label behavior'),
       subtitle: Text(_explainLabelStyle(
           controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.navBarLabelBehavior
+              ? controller.navigationBarLabelBehavior
               : NavigationDestinationLabelBehavior.alwaysShow)),
       trailing: NavigationBarLabelBehaviorToggleButtons(
         labelBehavior: controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navBarLabelBehavior
+            ? controller.navigationBarLabelBehavior
             : NavigationDestinationLabelBehavior.alwaysShow,
         onChanged: controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.setNavBarLabelBehavior
+            ? controller.setNavigationBarLabelBehavior
             : null,
       ),
       onTap: () {
-        if (controller.navBarLabelBehavior ==
+        if (controller.navigationBarLabelBehavior ==
             NavigationDestinationLabelBehavior.alwaysHide) {
-          controller.setNavBarLabelBehavior(
+          controller.setNavigationBarLabelBehavior(
               NavigationDestinationLabelBehavior.onlyShowSelected);
-        } else if (controller.navBarLabelBehavior ==
+        } else if (controller.navigationBarLabelBehavior ==
             NavigationDestinationLabelBehavior.onlyShowSelected) {
-          controller.setNavBarLabelBehavior(
+          controller.setNavigationBarLabelBehavior(
               NavigationDestinationLabelBehavior.alwaysShow);
         } else {
-          controller.setNavBarLabelBehavior(
+          controller.setNavigationBarLabelBehavior(
               NavigationDestinationLabelBehavior.alwaysHide);
         }
       },

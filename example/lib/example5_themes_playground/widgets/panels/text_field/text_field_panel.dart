@@ -645,9 +645,9 @@ class TextFieldPanel extends StatelessWidget {
                         controller.inputDecoratorSchemeColorLight?.name ??
                             'primary',
                     defaultDisabledLabelM2: 'primary',
-                    value: controller.inputDecoratorPrefixIconSchemeColor,
+                    value: controller.inputDecoratorPrefixIconLightSchemeColor,
                     onChanged:
-                        controller.setInputDecoratorPrefixIconSchemeColor,
+                        controller.setInputDecoratorPrefixIconLightSchemeColor,
                   )
                 // 1st column dark
                 : ColorSchemePopupMenu(
@@ -675,9 +675,9 @@ class TextFieldPanel extends StatelessWidget {
                         controller.inputDecoratorSchemeColorLight?.name ??
                             'primary',
                     defaultDisabledLabelM2: 'primary',
-                    value: controller.inputDecoratorSuffixIconSchemeColor,
+                    value: controller.inputDecoratorSuffixIconLightSchemeColor,
                     onChanged:
-                        controller.setInputDecoratorSuffixIconSchemeColor,
+                        controller.setInputDecoratorSuffixIconLightSchemeColor,
                   )
                 // 2nd column dark
                 : ColorSchemePopupMenu(

@@ -36,12 +36,14 @@ class FloatingActionButtonPanel extends StatelessWidget {
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
-    final String fabRadiusDefaultLabel = controller.fabBorderRadius == null &&
-            effectiveRadius == null
-        ? '16 dp'
-        : controller.fabBorderRadius == null && controller.defaultRadius != null
-            ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
-            : '';
+    final String fabRadiusDefaultLabel =
+        controller.floatingActionButtonBorderRadius == null &&
+                effectiveRadius == null
+            ? '16 dp'
+            : controller.floatingActionButtonBorderRadius == null &&
+                    controller.defaultRadius != null
+                ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
+                : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,25 +54,25 @@ class FloatingActionButtonPanel extends StatelessWidget {
           title: const Text('Background color'),
           defaultLabel: 'primaryContainer',
           defaultLabelM2: 'secondary',
-          value: controller.fabSchemeColor,
-          onChanged: controller.setFabSchemeColor,
+          value: controller.floatingActionButtonSchemeColor,
+          onChanged: controller.setFloatingActionButtonSchemeColor,
         ),
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Foreground color'),
-          defaultLabel: controller.fabSchemeColor != null
+          defaultLabel: controller.floatingActionButtonSchemeColor != null
               ? SchemeColor
-                  .values[
-                      FlexSubThemes.onSchemeColor(controller.fabSchemeColor!)
-                          .index]
+                  .values[FlexSubThemes.onSchemeColor(
+                          controller.floatingActionButtonSchemeColor!)
+                      .index]
                   .name
               : useMaterial3
                   ? 'onPrimaryContainer'
                   : 'onSecondary',
           defaultDisabledLabel: 'onPrimaryContainer',
           defaultDisabledLabelM2: 'onSecondary',
-          value: controller.fabForegroundSchemeColor,
-          onChanged: controller.setFabForegroundSchemeColor,
+          value: controller.floatingActionButtonForegroundSchemeColor,
+          onChanged: controller.setFloatingActionButtonForegroundSchemeColor,
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -83,32 +85,33 @@ class FloatingActionButtonPanel extends StatelessWidget {
               'OFF removes shape usage, making it use default '
               'style, regardless of global border radius setting or own radius '
               'setting.\n'),
-          value: controller.fabUseShape &&
+          value: controller.floatingActionButtonUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
-          onChanged: enableControl ? controller.setFabUseShape : null,
+          onChanged:
+              enableControl ? controller.setFloatingActionButtonUseShape : null,
         ),
         SwitchListTileReveal(
-          enabled: enableControl && controller.fabUseShape,
+          enabled: enableControl && controller.floatingActionButtonUseShape,
           title: const Text('Always circular'),
           subtitleReveal:
               const Text('Turn on to always use circular and stadium '
                   'shaped FAB, also in Material-3.\n'),
-          value: controller.fabAlwaysCircular &&
-              controller.fabUseShape &&
+          value: controller.floatingActionButtonAlwaysCircular &&
+              controller.floatingActionButtonUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
-          onChanged: enableControl && controller.fabUseShape
-              ? controller.setFabAlwaysCircular
+          onChanged: enableControl && controller.floatingActionButtonUseShape
+              ? controller.setFloatingActionButtonAlwaysCircular
               : null,
         ),
         SliderListTileReveal(
           enabled: enableControl &&
-              controller.fabUseShape &&
-              !controller.fabAlwaysCircular,
+              controller.floatingActionButtonUseShape &&
+              !controller.floatingActionButtonAlwaysCircular,
           title: const Text('Border radius'),
-          value: controller.fabBorderRadius,
-          onChanged: controller.setFabBorderRadius,
+          value: controller.floatingActionButtonBorderRadius,
+          onChanged: controller.setFloatingActionButtonBorderRadius,
           min: 0,
           max: 60,
           divisions: 60,
@@ -117,7 +120,8 @@ class FloatingActionButtonPanel extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: fabRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.fabAlwaysCircular && controller.fabUseShape
+              controller.floatingActionButtonAlwaysCircular &&
+                      controller.floatingActionButtonUseShape
                   ? 'circular'
                   : useMaterial3
                       ? 'M3 rounded'

@@ -34,9 +34,10 @@ class ShowTonalPalette extends StatelessWidget {
       scheme.light,
       themController.usedColors,
       swapLegacy:
-          themController.swapLegacyColors && scheme.light.swapOnMaterial3,
-      swapColors: (isLight && themController.swapLightColors) ||
-          (!isLight && themController.swapDarkColors),
+          themController.swapLegacyColorsInM3 && scheme.light.swapOnMaterial3,
+      swapColors:
+          (isLight && themController.swapPrimaryAndSecondaryLightColors) ||
+              (!isLight && themController.swapPrimaryAndSecondaryDarkColors),
       brightness: Brightness.light,
     );
 

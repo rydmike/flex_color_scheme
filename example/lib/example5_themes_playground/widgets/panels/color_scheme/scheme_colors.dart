@@ -43,11 +43,11 @@ class SchemeColors extends StatelessWidget {
     // last index in out list of color schemes.
     final bool isCustomTheme = (AppColor.schemes.length - 1) == tc.schemeIndex;
     // Are colors swapped?
-    final bool swapLight = tc.swapLightColors;
-    final bool swapDark = tc.swapDarkColors;
+    final bool swapLight = tc.swapPrimaryAndSecondaryLightColors;
+    final bool swapDark = tc.swapPrimaryAndSecondaryDarkColors;
 
     // Show the input color values
-    final bool showInputColor = tc.showSchemeInput;
+    final bool showInputColor = tc.showSchemeInputColors;
 
     // Size of the color presentation boxes
     const double boxWidth = 135;
@@ -170,12 +170,12 @@ class SchemeColors extends StatelessWidget {
                             onChanged: (Color color) {
                               if (isLight) {
                                 swapLight
-                                    ? tc.setSecondaryLight(color)
-                                    : tc.setPrimaryLight(color);
+                                    ? tc.setCustomSecondaryLight(color)
+                                    : tc.setCustomPrimaryLight(color);
                               } else {
                                 swapDark
-                                    ? tc.setSecondaryDark(color)
-                                    : tc.setPrimaryDark(color);
+                                    ? tc.setCustomSecondaryDark(color)
+                                    : tc.setCustomPrimaryDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -184,12 +184,12 @@ class SchemeColors extends StatelessWidget {
                               if (cancelled) {
                                 if (isLight) {
                                   swapLight
-                                      ? tc.setSecondaryLight(primary)
-                                      : tc.setPrimaryLight(primary);
+                                      ? tc.setCustomSecondaryLight(primary)
+                                      : tc.setCustomPrimaryLight(primary);
                                 } else {
                                   swapDark
-                                      ? tc.setSecondaryDark(primary)
-                                      : tc.setPrimaryDark(primary);
+                                      ? tc.setCustomSecondaryDark(primary)
+                                      : tc.setCustomPrimaryDark(primary);
                                 }
                               }
                             },
@@ -280,12 +280,12 @@ class SchemeColors extends StatelessWidget {
                             onChanged: (Color color) {
                               if (isLight) {
                                 swapLight
-                                    ? tc.setSecondaryContainerLight(color)
-                                    : tc.setPrimaryContainerLight(color);
+                                    ? tc.setCustomSecondaryContainerLight(color)
+                                    : tc.setCustomPrimaryContainerLight(color);
                               } else {
                                 swapDark
-                                    ? tc.setSecondaryContainerDark(color)
-                                    : tc.setPrimaryContainerDark(color);
+                                    ? tc.setCustomSecondaryContainerDark(color)
+                                    : tc.setCustomPrimaryContainerDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -294,15 +294,15 @@ class SchemeColors extends StatelessWidget {
                               if (cancelled) {
                                 if (isLight) {
                                   swapLight
-                                      ? tc.setSecondaryContainerLight(
+                                      ? tc.setCustomSecondaryContainerLight(
                                           primaryContainer)
-                                      : tc.setPrimaryContainerLight(
+                                      : tc.setCustomPrimaryContainerLight(
                                           primaryContainer);
                                 } else {
                                   swapDark
-                                      ? tc.setSecondaryContainerDark(
+                                      ? tc.setCustomSecondaryContainerDark(
                                           primaryContainer)
-                                      : tc.setPrimaryContainerDark(
+                                      : tc.setCustomPrimaryContainerDark(
                                           primaryContainer);
                                 }
                               }
@@ -537,12 +537,12 @@ class SchemeColors extends StatelessWidget {
                             onChanged: (Color color) {
                               if (isLight) {
                                 swapLight
-                                    ? tc.setPrimaryLight(color)
-                                    : tc.setSecondaryLight(color);
+                                    ? tc.setCustomPrimaryLight(color)
+                                    : tc.setCustomSecondaryLight(color);
                               } else {
                                 swapDark
-                                    ? tc.setPrimaryDark(color)
-                                    : tc.setSecondaryDark(color);
+                                    ? tc.setCustomPrimaryDark(color)
+                                    : tc.setCustomSecondaryDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -551,12 +551,12 @@ class SchemeColors extends StatelessWidget {
                               if (cancelled) {
                                 if (isLight) {
                                   swapLight
-                                      ? tc.setPrimaryLight(secondary)
-                                      : tc.setSecondaryLight(secondary);
+                                      ? tc.setCustomPrimaryLight(secondary)
+                                      : tc.setCustomSecondaryLight(secondary);
                                 } else {
                                   swapDark
-                                      ? tc.setPrimaryDark(secondary)
-                                      : tc.setSecondaryDark(secondary);
+                                      ? tc.setCustomPrimaryDark(secondary)
+                                      : tc.setCustomSecondaryDark(secondary);
                                 }
                               }
                             },
@@ -648,12 +648,13 @@ class SchemeColors extends StatelessWidget {
                             onChanged: (Color color) {
                               if (isLight) {
                                 swapLight
-                                    ? tc.setPrimaryContainerLight(color)
-                                    : tc.setSecondaryContainerLight(color);
+                                    ? tc.setCustomPrimaryContainerLight(color)
+                                    : tc.setCustomSecondaryContainerLight(
+                                        color);
                               } else {
                                 swapDark
-                                    ? tc.setPrimaryContainerDark(color)
-                                    : tc.setSecondaryContainerDark(color);
+                                    ? tc.setCustomPrimaryContainerDark(color)
+                                    : tc.setCustomSecondaryContainerDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -662,15 +663,15 @@ class SchemeColors extends StatelessWidget {
                               if (cancelled) {
                                 if (isLight) {
                                   swapLight
-                                      ? tc.setPrimaryContainerLight(
+                                      ? tc.setCustomPrimaryContainerLight(
                                           secondaryContainer)
-                                      : tc.setSecondaryContainerLight(
+                                      : tc.setCustomSecondaryContainerLight(
                                           secondaryContainer);
                                 } else {
                                   swapDark
-                                      ? tc.setPrimaryContainerDark(
+                                      ? tc.setCustomPrimaryContainerDark(
                                           secondaryContainer)
-                                      : tc.setSecondaryContainerDark(
+                                      : tc.setCustomSecondaryContainerDark(
                                           secondaryContainer);
                                 }
                               }
@@ -905,9 +906,9 @@ class SchemeColors extends StatelessWidget {
                             color: tertiary,
                             onChanged: (Color color) {
                               if (isLight) {
-                                tc.setTertiaryLight(color);
+                                tc.setCustomTertiaryLight(color);
                               } else {
-                                tc.setTertiaryDark(color);
+                                tc.setCustomTertiaryDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -915,9 +916,9 @@ class SchemeColors extends StatelessWidget {
                             wasCancelled: (bool cancelled) {
                               if (cancelled) {
                                 if (isLight) {
-                                  tc.setTertiaryLight(tertiary);
+                                  tc.setCustomTertiaryLight(tertiary);
                                 } else {
-                                  tc.setTertiaryDark(tertiary);
+                                  tc.setCustomTertiaryDark(tertiary);
                                 }
                               }
                             },
@@ -1006,9 +1007,9 @@ class SchemeColors extends StatelessWidget {
                             color: tertiaryContainer,
                             onChanged: (Color color) {
                               if (isLight) {
-                                tc.setTertiaryContainerLight(color);
+                                tc.setCustomTertiaryContainerLight(color);
                               } else {
-                                tc.setTertiaryContainerDark(color);
+                                tc.setCustomTertiaryContainerDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -1016,10 +1017,10 @@ class SchemeColors extends StatelessWidget {
                             wasCancelled: (bool cancelled) {
                               if (cancelled) {
                                 if (isLight) {
-                                  tc.setTertiaryContainerLight(
+                                  tc.setCustomTertiaryContainerLight(
                                       tertiaryContainer);
                                 } else {
-                                  tc.setTertiaryContainerDark(
+                                  tc.setCustomTertiaryContainerDark(
                                       tertiaryContainer);
                                 }
                               }
@@ -1253,9 +1254,9 @@ class SchemeColors extends StatelessWidget {
                             color: error,
                             onChanged: (Color color) {
                               if (isLight) {
-                                tc.setErrorLight(color);
+                                tc.setCustomErrorLight(color);
                               } else {
-                                tc.setErrorDark(color);
+                                tc.setCustomErrorDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -1263,9 +1264,9 @@ class SchemeColors extends StatelessWidget {
                             wasCancelled: (bool cancelled) {
                               if (cancelled) {
                                 if (isLight) {
-                                  tc.setErrorLight(error);
+                                  tc.setCustomErrorLight(error);
                                 } else {
-                                  tc.setErrorDark(error);
+                                  tc.setCustomErrorDark(error);
                                 }
                               }
                             },
@@ -1353,9 +1354,9 @@ class SchemeColors extends StatelessWidget {
                             color: errorContainer,
                             onChanged: (Color color) {
                               if (isLight) {
-                                tc.setErrorContainerLight(color);
+                                tc.setCustomErrorContainerLight(color);
                               } else {
-                                tc.setErrorContainerDark(color);
+                                tc.setCustomErrorContainerDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -1363,9 +1364,11 @@ class SchemeColors extends StatelessWidget {
                             wasCancelled: (bool cancelled) {
                               if (cancelled) {
                                 if (isLight) {
-                                  tc.setErrorContainerLight(errorContainer);
+                                  tc.setCustomErrorContainerLight(
+                                      errorContainer);
                                 } else {
-                                  tc.setErrorContainerDark(errorContainer);
+                                  tc.setCustomErrorContainerDark(
+                                      errorContainer);
                                 }
                               }
                             },

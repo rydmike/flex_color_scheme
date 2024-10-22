@@ -225,14 +225,14 @@ sealed class AppColor {
               ? controller.customScheme.dark
               : controller.useToDarkMethod
                   ? controller.customScheme.light.defaultError.toDark(
-                      controller.darkMethodLevel,
+                      controller.toDarkMethodLevel,
                       controller.toDarkSwapPrimaryAndContainer)
                   : null);
     }
     return schemes[index].copyWith(
         dark: controller.useToDarkMethod
             ? schemes[index].light.defaultError.toDark(
-                controller.darkMethodLevel,
+                controller.toDarkMethodLevel,
                 controller.toDarkSwapPrimaryAndContainer)
             : null);
   }
