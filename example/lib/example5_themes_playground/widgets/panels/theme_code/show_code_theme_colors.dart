@@ -97,13 +97,6 @@ class ShowCodeThemeColors extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              'CodeTheme Colors',
-              style: theme.textTheme.titleMedium,
-            ),
-          ),
           Wrap(
             alignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.center,

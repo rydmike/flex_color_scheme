@@ -229,8 +229,9 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
           );
         }),
         const Divider(height: 1),
+        const SizedBox(height: 8),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SelectableText.rich(
             TextSpan(
               style: GoogleFonts.firaMono(fontSize: 12),
@@ -242,32 +243,35 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
             ),
           ),
         ),
-        const Divider(height: 1),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: ShowCodeThemeColors(),
-        ),
+        // const Divider(height: 1),
         const ListTileReveal(
-          dense: true,
-          title: Text('CodeTheme is a ThemeData ThemeExtension'),
-          subtitleReveal: Text(
-            'The above colors have been added as a custom theme '
-            'extension to ThemeData. Light and dark mode CodeTheme change '
-            'with theme mode and is accessed via Theme.of(context). The '
-            'extension colors are also using Material-3 color harmonization '
-            'with active theme. When you change theme you can see that '
-            'these semantic CodeTheme colors are often automatically '
-            'slightly adjusted towards the overall theme colors. '
-            'This CodeTheme is used as a ThemeExtension example in the '
-            'Themes Playground app. It also demonstrates how to use '
-            'Material-3 color harmonization of custom theme colors in '
-            'Flutter.\n'
-            '\n'
-            'The used icon colors for the theme topic buttons and icon on '
-            'Settings panels headers, are using the '
-            'same color harmonization. When you change themes you can '
-            'notice that they also change color temperature to fit better '
-            'with the ambient colors in the theme\n',
+          revealDense: true,
+          title: Text('Code colors is a ThemeExtension'),
+          subtitleReveal: Column(
+            children: <Widget>[
+              Text(
+                'The code highlight colors have been added as a custom theme '
+                'extension to ThemeData. Light and dark mode CodeTheme change '
+                'with theme mode and is accessed via Theme.of(context). The '
+                'extension colors also use Material-3 color harmonization '
+                'with active theme. When you change theme you can see that '
+                'these semantic CodeTheme colors below are often automatically '
+                'slightly adjusted towards the overall theme colors.\n'
+                '\n'
+                'This CodeTheme is used as a ThemeExtension example in the '
+                'Themes Playground app. It also demonstrates how to use '
+                'Material-3 color harmonization of custom theme colors in '
+                'Flutter.\n',
+              ),
+              ShowCodeThemeColors(),
+              Text(
+                '\nThe used icon colors for the theme topic buttons and icon '
+                'on Settings panel headers, are also using Material-3 '
+                'color harmonization. When you change the app theme you can '
+                'notice that they also change color temperature to fit better '
+                'with the ambient colors in the theme\n',
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 16),
@@ -277,6 +281,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
               const Divider(height: 1),
               ListTileReveal(
                 title: const Text('Export and Import Playground Settings'),
+                leading: const Icon(Icons.data_object),
                 subtitleReveal: Text(
                   'With this feature you can export '
                   'the current theme settings from the Themes Playground '
