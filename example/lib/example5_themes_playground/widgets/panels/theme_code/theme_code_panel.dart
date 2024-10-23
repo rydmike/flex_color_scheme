@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
@@ -32,12 +35,34 @@ class ThemeCodePanel extends StatefulWidget {
 }
 
 class _ThemeCodePanelState extends State<ThemeCodePanel> {
-  String playgroundConfig = '';
-  String resultLog = '';
+  late String playgroundConfig;
+  late String shareUrl;
+  late String resultLog;
 
   @override
   void initState() {
     super.initState();
+    playgroundConfig = '';
+    shareUrl = '';
+    resultLog = '';
+  }
+
+  static String _compressJsonString(String jsonString) {
+    final List<int> jsonBytes = utf8.encode(jsonString);
+    final List<int>? compressedBytes =
+        GZipEncoder().encode(Uint8List.fromList(jsonBytes));
+    return base64Encode(compressedBytes ?? <int>[0]);
+  }
+
+  // Handle Make URL
+  Future<void> _handleMakeUrl(final String inputConfig) async {
+    if (inputConfig.isNotEmpty) {
+      final String compressedConfig = _compressJsonString(inputConfig);
+      final String url = '${App.playgroundURL}?config=$compressedConfig';
+      setState(() {
+        shareUrl = url;
+      });
+    }
   }
 
   // Handle delete storage event.
@@ -52,6 +77,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
       await widget.controller.resetAllToDefaults(deleteLocalData: true);
       setState(() {
         playgroundConfig = '';
+        shareUrl = '';
       });
     }
   }
@@ -116,6 +142,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
         );
         setState(() {
           playgroundConfig = data;
+          shareUrl = '';
         });
       }
     } on Exception catch (error, stackTrace) {
@@ -329,6 +356,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                     },
                   ),
                   lastWidget: ListTileReveal(
+                    enabled: playgroundConfig.isNotEmpty,
                     dense: true,
                     contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
                     title: const Text('Copy settings'),
@@ -421,6 +449,69 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                     enabled: playgroundConfig.isNotEmpty,
                     contentPadding:
                         ThemeValues.tilePaddingStart(context, isRow),
+                    title: const Text('Make shareable URL'),
+                    subtitleReveal: const Text(
+                      'This takes the exported settings JSON string from the '
+                      'staging area below and creates a link URL with the same '
+                      'settings that can be shared.\n',
+                    ),
+                    trailing: IconButton(
+                      icon: const Tooltip(
+                        message: 'Make URL',
+                        child: Icon(Icons.ios_share),
+                      ),
+                      onPressed: () async {
+                        await _handleMakeUrl(playgroundConfig);
+                        setState(() {});
+                      },
+                    ),
+                    onTap: () async {
+                      await _handleMakeUrl(playgroundConfig);
+                      setState(() {});
+                    },
+                  ),
+                  lastWidget: ListTileReveal(
+                    enabled: shareUrl.isNotEmpty,
+                    dense: true,
+                    contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                    title: const Text('Copy share URL'),
+                    subtitleReveal: const Text(
+                      'Copy the share URL created to the clipbaord, it may '
+                      'be quite long, some browsers may not support it.',
+                    ),
+                    trailing: Tooltip(
+                      message: 'Copy URL',
+                      child: IconButton(
+                        onPressed: () {
+                          unawaited(_handleCopyEvent(
+                            context,
+                            shareUrl,
+                            'Themes Playground settings share link copied '
+                            'to the clipboard!',
+                          ));
+                        },
+                        icon: const Icon(Icons.copy),
+                      ),
+                    ),
+                    onTap: () {
+                      unawaited(_handleCopyEvent(
+                        context,
+                        shareUrl,
+                        'Themes Playground setting share link copied '
+                        'to the clipboard!',
+                      ));
+                    },
+                  ),
+                  isRow: isRow,
+                );
+              }),
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+                return RowOrColumn(
+                  firstWidget: ListTileReveal(
+                    dense: true,
+                    enabled: playgroundConfig.isNotEmpty,
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Clear staging area'),
                     subtitleReveal: const Text(
                       'This action only clears the staging area below '
@@ -436,12 +527,14 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       onPressed: () {
                         setState(() {
                           playgroundConfig = '';
+                          shareUrl = '';
                         });
                       },
                     ),
                     onTap: () {
                       setState(() {
                         playgroundConfig = '';
+                        shareUrl = '';
                       });
                     },
                   ),
@@ -479,26 +572,45 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Card(
                   margin: EdgeInsets.zero,
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: playgroundConfig.isEmpty
-                            ? const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Text(
-                                    'Staging import/export area is empty',
-                                  ),
-                                ),
-                              )
-                            : SelectableText(
-                                playgroundConfig,
-                                style: GoogleFonts.firaMono(fontSize: 11)
-                                    .copyWith(color: theme.colorScheme.primary),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        if (playgroundConfig.isEmpty)
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Text(
+                                'Staging import/export area is empty',
                               ),
-                      ),
-                    ],
+                            ),
+                          )
+                        else ...<Widget>[
+                          if (shareUrl.isNotEmpty) ...<Widget>[
+                            const Text('\nShareable settings URL'),
+                            Text(
+                              shareUrl,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.firaMono(
+                                fontSize: 11,
+                              ).copyWith(
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                            const Text('\nExported settings JSON data'),
+                          ],
+                          SelectableText(
+                            playgroundConfig,
+                            style: GoogleFonts.firaMono(
+                              fontSize: 11,
+                            ).copyWith(
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
                   ),
                 ),
               ),
