@@ -6,11 +6,15 @@ import 'package:google_fonts/google_fonts.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_hive.dart';
+import 'router.dart';
 import 'theme/flex_theme_dark.dart';
 import 'theme/flex_theme_light.dart';
 import 'theme/theme_data_dark.dart';
 import 'theme/theme_data_light.dart';
 import 'widgets/pages/home_page.dart';
+
+// if (dart.library.html) 'web_query_handler.dart'
+// if (dart.library.io) 'vm_query_handler.dart';
 
 /// FlexColorScheme EXAMPLE 5 - Themes Playground
 ///
@@ -79,16 +83,34 @@ Future<void> main() async {
   runApp(PlaygroundApp(controller: themeController));
 }
 
-class PlaygroundApp extends StatelessWidget {
+/// The main app widget, it uses a ListenableBuilder to listen to the
+/// ThemeController. When the controller notifies its listeners, the
+/// MaterialApp is rebuilt with the new theme settings.
+class PlaygroundApp extends StatefulWidget {
   const PlaygroundApp({super.key, required this.controller});
   final ThemeController controller;
+
+  @override
+  State<PlaygroundApp> createState() => _PlaygroundAppState();
+}
+
+class _PlaygroundAppState extends State<PlaygroundApp> {
+  late final MyRouterDelegate routerDelegate;
+  late final MyRouteInformationParser routeInformationParser;
+
+  @override
+  void initState() {
+    super.initState();
+    routerDelegate = MyRouterDelegate(controller: widget.controller);
+    routeInformationParser = MyRouteInformationParser();
+  }
 
   @override
   Widget build(BuildContext context) {
     // Whenever the theme controller notifies the listenable in the
     // ListenableBuilder, the MaterialApp is rebuilt.
     return ListenableBuilder(
-      listenable: controller,
+      listenable: widget.controller,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -97,14 +119,16 @@ class PlaygroundApp extends StatelessWidget {
           // ThemeData or standard SDK ThemeData. It also
           // controls all the configuration parameters used to define the
           // FlexColorScheme object that produces the ThemeData object.
-          theme: controller.useFlexColorScheme
-              ? flexThemeLight(controller)
-              : themeDataLight(controller),
-          darkTheme: controller.useFlexColorScheme
-              ? flexThemeDark(controller)
-              : themeDataDark(controller),
+          theme: widget.controller.useFlexColorScheme
+              ? flexThemeLight(widget.controller)
+              : themeDataLight(widget.controller),
+          darkTheme: widget.controller.useFlexColorScheme
+              ? flexThemeDark(widget.controller)
+              : themeDataDark(widget.controller),
           // Use the dark/light theme based on controller setting.
-          themeMode: controller.themeMode,
+          themeMode: widget.controller.themeMode,
+          // routerDelegate: routerDelegate,
+          // routeInformationParser: routeInformationParser,
           home: GestureDetector(
             // This allows us to un-focus a widget, typically a TextField
             // with focus by tapping somewhere outside it. It is no longer
@@ -124,7 +148,7 @@ class PlaygroundApp extends StatelessWidget {
             // The code that one need to use the same theme is also updated
             // interactively for each change when the code gen panel is
             // in view.
-            child: HomePage(controller: controller),
+            child: HomePage(controller: widget.controller),
           ),
         );
       },

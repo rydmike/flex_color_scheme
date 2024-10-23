@@ -52,7 +52,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
       * At start 309, and now 117 tests 
       * of at start total 2103 tests and now of 2182 total tests are broken.
     * Add tests for new features. Get the FCS package back to 100% test coverage.
-  * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and offer them as early access.
+  * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and to offer early access to V8 and try new features.
 
 - **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still valid after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground app and to package doc comments, as well as code TODOs where relevant.
 
