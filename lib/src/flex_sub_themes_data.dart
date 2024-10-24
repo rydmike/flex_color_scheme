@@ -1239,11 +1239,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Used as default by [OutlinedButton], [ToggleButtons] and [InputDecorator].
   ///
-  /// If undefined and [ThemeData.useMaterial3] is false,
-  /// defaults to [kThinBorderWidth] = 1.
-  ///
-  /// If undefined and [ThemeData.useMaterial3] is true,
-  /// defaults to [kThinBorderWidth] = 1.
+  /// If undefined defaults to [kThinBorderWidth] = 1.
   final double? thinBorderWidth;
 
   /// Border radius override value for [TextButton].
