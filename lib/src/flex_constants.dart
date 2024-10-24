@@ -310,15 +310,20 @@ const int kUnselectedAlphaBlend = 0xA5;
 /// The amount of alpha blend used on tinted hover effect that is blended
 /// into overlay color.
 ///
-/// Value: 0x99 = 153 = 60%
-const int kTintHover = 0x99;
+/// Value: 0xB2 = 178 = 69.8%
+const int kTintHover = 0xB2;
 
-/// The amount of alpha based opacity used on tinted hover effect.
+/// The amount of alpha based opacity used on standard hover effect.
 ///
 /// Same value as used on Hover opacity on controls in M3, given as alpha.
 ///
 /// Value: 0x14 = 20 = 8%
 const int kAlphaHovered = 0x14;
+
+/// The amount of alpha based opacity used on tinted hover effect.
+///
+/// Value: 0x11 = 17 = 6.7%
+const int kAlphaTintedHovered = 0x11;
 
 /// The amount of alpha blend used on tinted highlight effect that is blended
 /// into overlay color.
@@ -326,12 +331,17 @@ const int kAlphaHovered = 0x14;
 /// Value: 0xA5 = 165 = 65%
 const int kTintHighlight = 0xA5;
 
-/// The amount of alpha based opacity used on tinted highlight effect.
+/// The amount of alpha based opacity used on standard highlight effect.
 ///
 /// Same value as used on Hover opacity on controls in M3, given as alpha.
 ///
 /// Value: 0x14 = 20 = 8%
 const int kAlphaHighlight = 0x14;
+
+/// The amount of alpha based opacity used on tinted highlight effect.
+///
+/// Value: 0x0F = 15 = 5.9%
+const int kAlphaTintedHighlight = 0x0F;
 
 /// The amount of alpha blend used on tinted pressed effect that is blended
 /// into overlay color.
@@ -339,12 +349,17 @@ const int kAlphaHighlight = 0x14;
 /// Value: 0xA5 = 165 = 65%
 const int kTintPressed = 0xA5;
 
-/// The amount of alpha based opacity used on tinted pressed effect.
+/// The amount of alpha based opacity used on standard pressed effect.
 ///
 /// Same value as used on pressed opacity on controls in M3, given as alpha.
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaPressed = 0x1F;
+
+/// The amount of alpha based opacity used on tinted pressed effect.
+///
+/// Value: 0x10 = 16 = 6.3%
+const int kAlphaTintPressed = 0x10;
 
 /// The amount of alpha based opacity used on tinted input pressed effect,
 /// like SearchBar.
@@ -361,12 +376,17 @@ const int kAlphaInputPressed = 0x19;
 /// Value: 0xA5 = 165 = 65%
 const int kTintSplash = 0xA5;
 
-/// The amount of alpha based opacity used on tinted splash effect.
+/// The amount of alpha based opacity used on standard splash effect.
 ///
 /// Same value as used on pressed opacity on controls in M3, given as alpha.
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaSplash = 0x1F;
+
+/// The amount of alpha based opacity used on tinted splash effect.
+///
+/// Value: 0x10 = 16 = 6.3%
+const int kAlphaTintSplash = 0x10;
 
 /// The amount of alpha blend used on tinted focus effect that is blended
 /// into overlay color.
@@ -374,12 +394,17 @@ const int kAlphaSplash = 0x1F;
 /// Value: 0xB2 = 178 = 70%
 const int kTintFocus = 0xB2;
 
-/// The amount of alpha based opacity used on tinted focus effect.
+/// The amount of alpha based opacity used on standard focus effect.
 ///
 /// Same value as used on focused opacity on controls in M3, given as alpha.
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaFocused = 0x1F;
+
+/// The amount of alpha based opacity used on tinted focus effect.
+///
+/// Value: 0x1C = 28 = 11%
+const int kAlphaTintFocused = 0x1C;
 
 /// The amount of alpha blend used on tinted disabled effect that is blended
 /// into overlay color.

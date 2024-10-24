@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.2
 
-**Oct 22, 2024**
+**Oct 24, 2024**
 
 ### SUMMARY
 
@@ -161,6 +161,8 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 - The `FlexSubThemesData` property `drawerUnselectedItemSchemeColor` now default to `SchemeColor.onSurfaceVariant`, as on color pair default when any surface color is used as drawer background color. Previously it defaulted to `onSurface`. Likewise in `FlexSubThemes.navigationDrawerTheme` the property `unselectedItemSchemeColor` now defaults to `SchemeColor.onSurfaceVariant` if undefined. This was changed to use ase as Material-3 defaults.
 
+
+- Minor style breaking, the tinted interactions were slightly modified. They are now a bit less pronounced and also have a bit less gray in them.
 
 **NEW**
 

@@ -161,13 +161,16 @@ void main() {
       expect(kUnselectedAlphaBlend, 0xA5);
     });
     //
-    // New FCS V7 constants
+    // Tint constants
     //
-    test('FCT kTintHover is 0x99', () {
-      expect(kTintHover, 0x99);
+    test('FCT kTintHover is 0xB2', () {
+      expect(kTintHover, 0xB2);
     });
     test('FCT kAlphaHover is 0x14', () {
       expect(kAlphaHovered, 0x14);
+    });
+    test('FCT kAlphaTintedHovered is 0x11', () {
+      expect(kAlphaTintedHovered, 0x11);
     });
     test('FCT kTintHighlight is 0xA5', () {
       expect(kTintHighlight, 0xA5);
@@ -175,11 +178,17 @@ void main() {
     test('FCT kAlphaHighlight is 0x14', () {
       expect(kAlphaHighlight, 0x14);
     });
+    test('FCT kAlphaTintedHighlight is 0x0F', () {
+      expect(kAlphaTintedHighlight, 0x0F);
+    });
     test('FCT kTintPressed is 0xA5', () {
       expect(kTintPressed, 0xA5);
     });
     test('FCT kAlphaPressed is 0x1F', () {
       expect(kAlphaPressed, 0x1F);
+    });
+    test('FCT kAlphaTintPressed is 0x10', () {
+      expect(kAlphaTintPressed, 0x10);
     });
     test('FCT kAlphaInputPressed is 0x19 - New in V8', () {
       expect(kAlphaInputPressed, 0x19);
@@ -191,11 +200,17 @@ void main() {
     test('FCT kAlphaSplash is 0x1F', () {
       expect(kAlphaSplash, 0x1F);
     });
+    test('FCT kAlphaTintSplash is 0x10', () {
+      expect(kAlphaTintSplash, 0x10);
+    });
     test('FCT kTintFocus is 0xB2', () {
       expect(kTintFocus, 0xB2);
     });
     test('FCT kAlphaFocus is 0x1F', () {
       expect(kAlphaFocused, 0x1F);
+    });
+    test('FCT kAlphaTintFocused is 0x1C', () {
+      expect(kAlphaTintFocused, 0x1C);
     });
     test('FCT kTintDisabled is 0x66', () {
       expect(kTintDisabled, 0x66);
