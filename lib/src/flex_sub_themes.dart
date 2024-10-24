@@ -8594,8 +8594,7 @@ sealed class FlexSubThemes {
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
     // Effective border width.
-    final double effectiveWidth =
-        borderWidth ?? (useM3 ? 1.0 : kThinBorderWidth);
+    final double effectiveWidth = borderWidth ?? kThinBorderWidth;
     // Effective visual density.
     final VisualDensity usedVisualDensity =
         visualDensity ?? VisualDensity.adaptivePlatformDensity;
