@@ -566,9 +566,10 @@ sealed class FlexSubThemes {
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedHovered(Color overlay, Color tint, [double factor = 1]) {
-    // Starting kAlphaHover 0x14=20=8%, same as M3 opacity on hover.
-    final int usedAlpha = (kAlphaHovered * factor).round().clamp(0x00, 0xFF);
-    // Tint color alpha blend into overlay kTintHover  0x99=153= 60%
+    // Used kAlphaTintedHighlight 0x11 = 17 = 6.7%
+    final int usedAlpha =
+        (kAlphaTintedHovered * factor).round().clamp(0x00, 0xFF);
+    // Tint color alpha blend into overlay kTintHover 0xB2 = 178 = 69.8%
     return overlay.blendAlpha(tint, kTintHover).withAlpha(usedAlpha);
   }
 
@@ -577,8 +578,9 @@ sealed class FlexSubThemes {
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedHighlight(Color overlay, Color tint, [double factor = 1]) {
-    // Starting kAlphaHighlight 0x14 = 20 = 8%, same as M3 opacity on hover.
-    final int usedAlpha = (kAlphaHighlight * factor).round().clamp(0x00, 0xFF);
+    // Used kAlphaTintedHighlight 0x0F = 15 = 5.9%
+    final int usedAlpha =
+        (kAlphaTintedHighlight * factor).round().clamp(0x00, 0xFF);
     // Tint color alpha blend into overlay kTintHighlight 0xA5 = 165 = 65%
     return overlay.blendAlpha(tint, kTintHighlight).withAlpha(usedAlpha);
   }
@@ -588,8 +590,8 @@ sealed class FlexSubThemes {
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedSplash(Color overlay, Color tint, [double factor = 1]) {
-    // Starting kAlphaSplash 0x1F = 31 = 12.16%, same as M3 opacity on pressed.
-    final int usedAlpha = (kAlphaSplash * factor).round().clamp(0x00, 0xFF);
+    // Used kAlphaTintSplash 0x10 = 16 = 6.3%
+    final int usedAlpha = (kAlphaTintSplash * factor).round().clamp(0x00, 0xFF);
     // Tint color alpha blend into overlay kTintSplash 0xA5 = 165 = 65%
     return overlay.blendAlpha(tint, kTintSplash).withAlpha(usedAlpha);
   }
@@ -599,8 +601,9 @@ sealed class FlexSubThemes {
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedPressed(Color overlay, Color tint, [double factor = 1]) {
-    // Starting kAlphaPressed 0x1F = 31 = 12.16%, same as M3 opacity on pressed.
-    final int usedAlpha = (kAlphaPressed * factor).round().clamp(0x00, 0xFF);
+    // Used kAlphaTintPressed 0x10 = 16 = 6.3%
+    final int usedAlpha =
+        (kAlphaTintPressed * factor).round().clamp(0x00, 0xFF);
     // Tint color alpha blend into overlay kTintPressed 0xA5 = 165 = 65%
     return overlay.blendAlpha(tint, kTintPressed).withAlpha(usedAlpha);
   }
@@ -610,8 +613,9 @@ sealed class FlexSubThemes {
   /// Typically the primary color is the color used as tint base.
   /// The tint effect is different for light and dark mode.
   static Color tintedFocused(Color overlay, Color tint, [double factor = 1]) {
-    // Starting kAlphaFocus 0x1F = 31 = 12.16%, same as M3 opacity on focus.
-    final int usedAlpha = (kAlphaFocused * factor).round().clamp(0x00, 0xFF);
+    // Used kAlphaTintFocused 0x1C = 28 = 11%
+    final int usedAlpha =
+        (kAlphaTintFocused * factor).round().clamp(0x00, 0xFF);
     // Tint color alpha blend into overlay kTintFocus 0xB2 = 178 = 70%.
     return overlay.blendAlpha(tint, kTintFocus).withAlpha(usedAlpha);
   }
