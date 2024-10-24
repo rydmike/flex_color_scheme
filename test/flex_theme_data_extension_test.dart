@@ -121,10 +121,13 @@ void main() {
           colors: const FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
             appBarColor: FlexColor.materialDarkTertiary,
           ),
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
@@ -142,16 +145,21 @@ void main() {
       expect(
         FlexThemeData.light(
           swapColors: true,
+          useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
+            useMaterial3: false,
             colors: const FlexSchemeColor(
               primary: FlexColor.materialLightSecondary,
               primaryContainer: FlexColor.materialLightSecondaryContainer,
+              primaryLightRef: FlexColor.materialLightSecondary,
               secondary: FlexColor.materialLightPrimary,
               secondaryContainer: FlexColor.materialLightPrimaryContainer,
+              secondaryLightRef: FlexColor.materialLightPrimary,
               tertiaryContainer: FlexColor.materialLightTertiaryContainer,
               tertiary: FlexColor.materialLightTertiary,
+              tertiaryLightRef: FlexColor.materialLightTertiary,
               appBarColor: FlexColor.materialDarkTertiary,
             ),
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
@@ -166,16 +174,21 @@ void main() {
       expect(
         FlexThemeData.dark(
           swapColors: true,
+          useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.dark(
+            useMaterial3: false,
             colors: const FlexSchemeColor(
               primary: FlexColor.materialDarkSecondary,
               primaryContainer: FlexColor.materialDarkSecondaryContainer,
+              primaryLightRef: FlexColor.materialLightSecondary,
               secondary: FlexColor.materialDarkPrimary,
               secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+              secondaryLightRef: FlexColor.materialLightPrimary,
               tertiary: FlexColor.materialDarkTertiary,
               tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+              tertiaryLightRef: FlexColor.materialLightTertiary,
               appBarColor: FlexColor.materialDarkTertiary,
             ),
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
@@ -263,6 +276,7 @@ void main() {
 
     // themeLight = Default material M3 light scheme colors.
     final ThemeData themeLight = const FlexColorScheme(
+      useMaterial3: false,
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
@@ -273,8 +287,86 @@ void main() {
       surface: FlexColor.materialLightSurface,
       error: FlexColor.materialLightError,
     ).toTheme;
+
+    const ColorScheme lightRawScheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: Color(0xff6200ee),
+      onPrimary: Color(0xffffffff),
+      primaryContainer: Color(0xffbb86fc),
+      onPrimaryContainer: Color(0xff000000),
+      primaryFixed: Color(0xff6200ee),
+      primaryFixedDim: Color(0xff6200ee),
+      onPrimaryFixed: Color(0xffffffff),
+      onPrimaryFixedVariant: Color(0xffffffff),
+      secondary: Color(0xff03dac6),
+      onSecondary: Color(0xff000000),
+      secondaryContainer: Color(0xffcefaf8),
+      onSecondaryContainer: Color(0xff000000),
+      secondaryFixed: Color(0xff03dac6),
+      secondaryFixedDim: Color(0xff03dac6),
+      onSecondaryFixed: Color(0xff000000),
+      onSecondaryFixedVariant: Color(0xff000000),
+      tertiary: Color(0xff018786),
+      onTertiary: Color(0xffffffff),
+      tertiaryContainer: Color(0xffa4f1ef),
+      onTertiaryContainer: Color(0xff000000),
+      tertiaryFixed: Color(0xff018786),
+      tertiaryFixedDim: Color(0xff018786),
+      onTertiaryFixed: Color(0xffffffff),
+      onTertiaryFixedVariant: Color(0xffffffff),
+      error: Color(0xffb00020),
+      onError: Color(0xffffffff),
+      errorContainer: Color(0xfffcd8df),
+      onErrorContainer: Color(0xff000000),
+      surface: Color(0xffffffff),
+      onSurface: Color(0xff000000),
+      surfaceDim: Color(0xffffffff),
+      surfaceBright: Color(0xffffffff),
+      surfaceContainerLowest: Color(0xffffffff),
+      surfaceContainerLow: Color(0xffffffff),
+      surfaceContainer: Color(0xffffffff),
+      surfaceContainerHigh: Color(0xffffffff),
+      surfaceContainerHighest: Color(0xffffffff),
+      onSurfaceVariant: Color(0xff000000),
+      outline: Color(0xff919191),
+      outlineVariant: Color(0xffd1d1d1),
+      shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
+      inverseSurface: Color(0xff121212),
+      onInverseSurface: Color(0xffffffff),
+      inversePrimary: Color(0xffda99ff),
+      surfaceTint: Color(0xff6200ee),
+      // background: Color(0xffffffff),
+      // onBackground: Color(0xff000000),
+      // surfaceVariant: Color(0xffffffff),
+    );
+    test(
+        'FTD1.01-string: '
+        'GIVEN a FlexThemeData.raw theme with Material3 scheme light'
+        ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
+        () {
+      expect(
+        themeLight.colorScheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          lightRawScheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
+
+    test(
+        'FTD1.01-object: '
+        'GIVEN a FlexThemeData.raw theme with Material3 scheme light'
+        ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
+        () {
+      expect(
+        themeLight.colorScheme,
+        lightRawScheme,
+      );
+    });
+
     // themeDark = Default material M3 dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
+      useMaterial3: false,
       brightness: Brightness.dark,
       primary: FlexColor.materialDarkPrimary,
       primaryContainer: FlexColor.materialDarkPrimaryContainer,
@@ -286,85 +378,85 @@ void main() {
       error: FlexColor.materialDarkError,
     ).toTheme;
 
+    const ColorScheme darkRawScheme = ColorScheme(
+      brightness: Brightness.dark,
+      primary: Color(0xffbb86fc),
+      onPrimary: Color(0xff000000),
+      primaryContainer: Color(0xff6200ee),
+      onPrimaryContainer: Color(0xffffffff),
+      primaryFixed: Color(0xffbb86fc),
+      primaryFixedDim: Color(0xffbb86fc),
+      onPrimaryFixed: Color(0xff000000),
+      onPrimaryFixedVariant: Color(0xff000000),
+      secondary: Color(0xff03dac6),
+      onSecondary: Color(0xff000000),
+      secondaryContainer: Color(0xff005047),
+      onSecondaryContainer: Color(0xffffffff),
+      secondaryFixed: Color(0xff03dac6),
+      secondaryFixedDim: Color(0xff03dac6),
+      onSecondaryFixed: Color(0xff000000),
+      onSecondaryFixedVariant: Color(0xff000000),
+      tertiary: Color(0xff03dac6),
+      onTertiary: Color(0xff000000),
+      tertiaryContainer: Color(0xff003e3e),
+      onTertiaryContainer: Color(0xffffffff),
+      tertiaryFixed: Color(0xff03dac6),
+      tertiaryFixedDim: Color(0xff03dac6),
+      onTertiaryFixed: Color(0xff000000),
+      onTertiaryFixedVariant: Color(0xff000000),
+      error: Color(0xffcf6679),
+      onError: Color(0xff000000),
+      errorContainer: Color(0xffb1384e),
+      onErrorContainer: Color(0xffffffff),
+      surface: Color(0xff121212),
+      onSurface: Color(0xffffffff),
+      surfaceDim: Color(0xff121212),
+      surfaceBright: Color(0xff121212),
+      surfaceContainerLowest: Color(0xff121212),
+      surfaceContainerLow: Color(0xff121212),
+      surfaceContainer: Color(0xff121212),
+      surfaceContainerHigh: Color(0xff121212),
+      surfaceContainerHighest: Color(0xff121212),
+      onSurfaceVariant: Color(0xffffffff),
+      outline: Color(0xff777777),
+      outlineVariant: Color(0xff414141),
+      shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
+      inverseSurface: Color(0xffffffff),
+      onInverseSurface: Color(0xff121212),
+      inversePrimary: Color(0xff5a4570),
+      surfaceTint: Color(0xffbb86fc),
+      // background: Color(0xff121212),
+      // onBackground: Color(0xffffffff),
+      // surfaceVariant: Color(0xff121212),
+    );
+
     test(
-        'FTD1.01: GIVEN a FlexThemeData.raw theme with Material3 scheme light'
-        ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
-        () {
-      expect(
-          themeLight.colorScheme,
-          const ColorScheme(
-            brightness: Brightness.light,
-            primary: Color(0xff6200ee),
-            onPrimary: Color(0xffffffff),
-            primaryContainer: Color(0xffbb86fc),
-            onPrimaryContainer: Color(0xff000000),
-            secondary: Color(0xff03dac6),
-            onSecondary: Color(0xff000000),
-            secondaryContainer: Color(0xFFCEFAF8),
-            onSecondaryContainer: Color(0xff000000),
-            tertiary: Color(0xff018786),
-            onTertiary: Color(0xffffffff),
-            tertiaryContainer: Color(0xffa4f1ef),
-            onTertiaryContainer: Color(0xff000000),
-            error: Color(0xffb00020),
-            onError: Color(0xffffffff),
-            errorContainer: Color(0xfffcd8df),
-            onErrorContainer: Color(0xff000000),
-            surface: Color(0xffffffff),
-            onSurface: Color(0xff000000),
-            onSurfaceVariant: Color(0xff000000),
-            outline: Color(0xFF737373),
-            outlineVariant: Color(0xFFBFBFBF),
-            shadow: Color(0xff000000),
-            scrim: Color(0xff000000),
-            inverseSurface: Color(0xff121212),
-            onInverseSurface: Color(0xffffffff),
-            inversePrimary: Color(0xffda99ff),
-          ));
-    });
-    test(
-        'FTD1.02: GIVEN a FlexColorScheme theme with Material3 scheme dark '
+        'FTD1.02-string: '
+        'GIVEN a FlexColorScheme theme with Material3 scheme dark '
         'colors EXPECT .colorScheme equality with raw ColorScheme dark().', () {
       expect(
-          themeDark.colorScheme,
-          const ColorScheme(
-            brightness: Brightness.dark,
-            primary: Color(0xffbb86fc),
-            onPrimary: Color(0xff000000),
-            primaryContainer: Color(0xff6200ee),
-            onPrimaryContainer: Color(0xffffffff),
-            secondary: Color(0xff03dac6),
-            onSecondary: Color(0xff000000),
-            secondaryContainer: Color(0xff005047),
-            onSecondaryContainer: Color(0xffffffff),
-            tertiary: Color(0xff03dac6),
-            onTertiary: Color(0xff000000),
-            tertiaryContainer: Color(0xff003e3e),
-            onTertiaryContainer: Color(0xffffffff),
-            error: Color(0xffcf6679),
-            onError: Color(0xff000000),
-            errorContainer: Color(0xffb1384e),
-            onErrorContainer: Color(0xffffffff),
-            surface: Color(0xff121212),
-            onSurface: Color(0xffffffff),
-            onSurfaceVariant: Color(0xffffffff),
-            outline: Color(0xFF8C8C8C),
-            outlineVariant: Color(0xFF404040),
-            shadow: Color(0xff000000),
-            scrim: Color(0xff000000),
-            inverseSurface: Color(0xffffffff),
-            onInverseSurface: Color(0xff000000),
-            inversePrimary: Color(0xff5a4570),
-          ));
+        themeDark.colorScheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          darkRawScheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
+
+    test(
+        'FTD1.02-object: '
+        'GIVEN a FlexColorScheme theme with Material3 scheme dark '
+        'colors EXPECT .colorScheme equality with raw ColorScheme dark().', () {
+      expect(themeDark.colorScheme, darkRawScheme);
     });
 
     //**************************************************************************
     // Test defaults and null input resulting in expected theme values.
     //**************************************************************************
     test(
-        'FTD1.03: GIVEN a FlexThemeData.raw theme with Material3 scheme light '
-        'colors EXPECT appbar theme color to be white color.', () {
-      expect(themeLight.appBarTheme.backgroundColor, const Color(0xffffffff));
+        'FTD1.03: GIVEN a FlexThemeData.raw theme with Material2 scheme light '
+        'colors EXPECT appbar theme color to be primary color.', () {
+      expect(themeLight.appBarTheme.backgroundColor, const Color(0xff6200ee));
     });
 
     test(
@@ -379,10 +471,10 @@ void main() {
       expect(themeLight.visualDensity, VisualDensity.standard);
     });
     test(
-        'FTD1.06: GIVEN a FlexThemeData.raw theme with null Typography input '
-        'EXPECT Typography.material2021.', () {
+        'FTD1.06: GIVEN FlexThemeData.raw M2 theme with null Typography input '
+        'EXPECT Typography.material2018.', () {
       expect(themeLight.typography,
-          Typography.material2021(platform: defaultTargetPlatform));
+          Typography.material2018(platform: defaultTargetPlatform));
     });
 
     //**************************************************************************
@@ -1126,7 +1218,10 @@ void main() {
     // Default light TextTheme equality verification.
     //
     // Flex default TextTheme light
-    final TextTheme fLightT = FlexThemeData.light().textTheme;
+    final TextTheme fLightT = FlexThemeData.light(
+      scheme: FlexScheme.material,
+      onSurface: Colors.black,
+    ).textTheme;
     // Should be same as a light ThemeData textTheme with Typography 2018
     final TextTheme nLightT =
         ThemeData(typography: Typography.material2021()).textTheme;
@@ -1139,7 +1234,11 @@ void main() {
     // Default light Primary TextTheme equality verification.
     //
     // Flex default TextTheme light
-    final TextTheme fLightP = FlexThemeData.light().primaryTextTheme;
+    final TextTheme fLightP = FlexThemeData.light(
+      scheme: FlexScheme.material,
+      onSurface: Colors.black,
+      surface: Colors.white,
+    ).primaryTextTheme;
     // Should be same as a light ThemeData textTheme with Typography 2018
     final TextTheme nLightP =
         ThemeData(typography: Typography.material2021()).primaryTextTheme;
@@ -1151,7 +1250,10 @@ void main() {
       expect(fLightP, equals(nLightP));
     });
     // Default dark TextTheme equality verification.
-    final TextTheme fDarkT = FlexThemeData.dark().textTheme;
+    final TextTheme fDarkT = FlexThemeData.dark(
+      scheme: FlexScheme.material,
+      onSurface: Colors.white,
+    ).textTheme;
     final TextTheme nDarkT = ThemeData(
       brightness: Brightness.dark,
       typography: Typography.material2021(),

@@ -49,8 +49,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   * New features and adapting FCS to Flutter 3.22 also broke many tests. 
   * Update and review all tests.
     * **Test fix status**: 
-      * At start 309, and now 117 tests 
-      * of at start total 2103 tests and now of 2182 total tests are broken.
+      * At start 309, and now 108 tests 
+      * of at start total 2103 tests and now of 2189 total tests are broken.
     * Add tests for new features. Get the FCS package back to 100% test coverage.
   * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and to offer early access to V8 and try new features.
 
