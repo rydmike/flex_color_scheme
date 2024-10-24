@@ -164,6 +164,7 @@ Future<String> importPlaygroundSettings(
     if (kDebugMode) {
       debugPrint('The settings string is too long, skipped. Import FAILED.');
     }
+    controller.setImportErrorLog(resultLog);
     return resultLog;
   }
 
@@ -342,14 +343,10 @@ Future<String> importPlaygroundSettings(
   } else {
     resultLog = 'Imported successfully $importDate';
   }
+  controller.setImportErrorLog(resultLog);
   await controller.importSavedThemeData(data);
   await controller.loadAll();
   return resultLog;
-
-  // return controller.importSavedThemeData(data).then((void value) {
-  //   controller.loadAll();
-  //   return resultLog;
-  // });
 }
 
 bool _equalsIgnoreCase(String? string1, String? string2) {

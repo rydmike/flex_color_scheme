@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,11 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../shared/controllers/theme_controller.dart';
 import '../shared/services/theme_service.dart';
 import '../shared/services/theme_service_hive.dart';
-import 'router.dart';
 import 'theme/flex_theme_dark.dart';
 import 'theme/flex_theme_light.dart';
 import 'theme/theme_data_dark.dart';
 import 'theme/theme_data_light.dart';
+import 'utils/query_params/query_params_settings.dart';
 import 'widgets/pages/home_page.dart';
 
 // if (dart.library.html) 'web_query_handler.dart'
@@ -95,14 +97,12 @@ class PlaygroundApp extends StatefulWidget {
 }
 
 class _PlaygroundAppState extends State<PlaygroundApp> {
-  late final MyRouterDelegate routerDelegate;
-  late final MyRouteInformationParser routeInformationParser;
+  late Map<String, String> queryParameters;
 
   @override
   void initState() {
     super.initState();
-    routerDelegate = MyRouterDelegate(controller: widget.controller);
-    routeInformationParser = MyRouteInformationParser();
+    queryParameters = <String, String>{};
   }
 
   @override
@@ -148,7 +148,20 @@ class _PlaygroundAppState extends State<PlaygroundApp> {
             // The code that one need to use the same theme is also updated
             // interactively for each change when the code gen panel is
             // in view.
-            child: HomePage(controller: widget.controller),
+            child: QueryParamsSettings(
+                builder: (BuildContext context, Map<String, String> params) {
+              debugPrint('**** QueryParamsSettings builder: $params');
+              if (params.isNotEmpty && params != queryParameters) {
+                debugPrint('**** QueryParamsSettings params changed! Import!!');
+                queryParameters = params;
+                unawaited(ThemeController.importFromQueryParams(
+                  context,
+                  queryParameters,
+                  widget.controller,
+                ));
+              }
+              return HomePage(controller: widget.controller);
+            }),
           ),
         );
       },

@@ -37,21 +37,19 @@ class ThemeCodePanel extends StatefulWidget {
 class _ThemeCodePanelState extends State<ThemeCodePanel> {
   late String playgroundConfig;
   late String shareUrl;
-  late String resultLog;
 
   @override
   void initState() {
     super.initState();
     playgroundConfig = '';
     shareUrl = '';
-    resultLog = '';
   }
 
   static String _compressJsonString(String jsonString) {
     final List<int> jsonBytes = utf8.encode(jsonString);
     final List<int>? compressedBytes =
         GZipEncoder().encode(Uint8List.fromList(jsonBytes));
-    return base64Encode(compressedBytes ?? <int>[0]);
+    return base64UrlEncode(compressedBytes ?? <int>[0]);
   }
 
   // Handle Make URL
@@ -169,11 +167,11 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
   Future<void> _handleImportPlaygroundTheme(BuildContext context) async {
     try {
       if (playgroundConfig.isNotEmpty) {
-        resultLog = await importPlaygroundSettings(
+        final String result = await importPlaygroundSettings(
           widget.controller,
           settings: playgroundConfig,
         );
-        setState(() {});
+        widget.controller.setImportErrorLog(result);
       }
     } on Exception catch (error, stackTrace) {
       debugPrintStack(
@@ -183,9 +181,8 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
       // Date time now formatted as string dd.MM.yyyy HH:mm:ss
       final String importDate =
           DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
-      setState(() {
-        resultLog = 'Failed to decode JSON at $importDate, error:\n$error';
-      });
+      widget.controller.setImportErrorLog(
+          'Failed to decode JSON at $importDate, error:\n$error');
       if (context.mounted) {
         final double? width =
             MediaQuery.sizeOf(context).width > 800 ? 700 : null;
@@ -320,7 +317,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                   '\n'
                   'Latest import log is shown below:\n'
                   '\n'
-                  '$resultLog',
+                  '${widget.controller.importErrorLog}',
                 ),
                 tileColor: theme.colorScheme.surfaceContainer,
               ),
