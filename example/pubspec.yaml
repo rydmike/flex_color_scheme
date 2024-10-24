@@ -70,6 +70,7 @@ dependencies:
   # https://pub.dev/packages/intl
   intl: ^0.19.0
 
+
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
@@ -88,6 +89,11 @@ dependencies:
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
   url_launcher: ^6.3.1
+
+  # Used for url queary param extraction in Playground
+  # Replaces dart:html, support WASM. Package by Google dart.dev.
+  # https://pub.dev/packages/web
+  web: ^1.1.0
 
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.

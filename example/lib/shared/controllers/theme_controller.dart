@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
 
+import 'package:archive/archive.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import '../../example5_themes_playground/utils/import_export_playground_settings.dart';
 import '../const/store.dart';
 import '../model/adaptive_response.dart';
 import '../model/splash_type_enum.dart';
@@ -2594,8 +2598,10 @@ class ThemeController with ChangeNotifier {
 
   // Private value, getter and setter for the ThemeMode
   late ThemeMode _themeMode;
+
   // Getter for the current ThemeMode.
   ThemeMode get themeMode => _themeMode;
+
   // Set and persist new ThemeMode value.
   void setThemeMode(ThemeMode? value, [bool notify = true]) {
     // No work if null value passed.
@@ -2614,7 +2620,9 @@ class ThemeController with ChangeNotifier {
   // not be further explained, property names correspond to equivalent
   // FlexColorScheme properties.
   late VisualDensityEnum? _visualDensity;
+
   VisualDensityEnum? get visualDensity => _visualDensity;
+
   void setVisualDensity(VisualDensityEnum? value, [bool notify = true]) {
     if (value == _visualDensity) return;
     _visualDensity = value;
@@ -2623,7 +2631,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late MaterialTapTargetSize? _tapTargetSize;
+
   MaterialTapTargetSize? get tapTargetSize => _tapTargetSize;
+
   void setTapTargetSize(MaterialTapTargetSize? value, [bool notify = true]) {
     if (value == _tapTargetSize) return;
     _tapTargetSize = value;
@@ -2632,7 +2642,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useFlexColorScheme;
+
   bool get useFlexColorScheme => _useFlexColorScheme;
+
   void setUseFlexColorScheme(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useFlexColorScheme) return;
@@ -2642,7 +2654,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useSubThemes;
+
   bool get useSubThemes => _useSubThemes;
+
   void setUseSubThemes(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useSubThemes) return;
@@ -2652,7 +2666,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _generateCodeForOwnFile;
+
   bool get generateCodeForOwnFile => _generateCodeForOwnFile;
+
   void setGenerateCodeForOwnFile(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _generateCodeForOwnFile) return;
@@ -2662,7 +2678,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _applyThemeToAllCupertino;
+
   bool get applyThemeToAllCupertino => _applyThemeToAllCupertino;
+
   void setApplyThemeToAllCupertino(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _applyThemeToAllCupertino) return;
@@ -2672,8 +2690,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveRemoveElevationTintLight;
+
   AdaptiveResponse? get adaptiveRemoveElevationTintLight =>
       _adaptiveRemoveElevationTintLight;
+
   void setAdaptiveRemoveElevationTintLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveElevationTintLight) return;
@@ -2684,8 +2704,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveElevationShadowsBackLight;
+
   AdaptiveResponse? get adaptiveElevationShadowsBackLight =>
       _adaptiveElevationShadowsBackLight;
+
   void setAdaptiveElevationShadowsBackLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveElevationShadowsBackLight) return;
@@ -2696,8 +2718,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveAppBarScrollUnderOffLight;
+
   AdaptiveResponse? get adaptiveAppBarScrollUnderOffLight =>
       _adaptiveAppBarScrollUnderOffLight;
+
   void setAdaptiveAppBarScrollUnderOffLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveAppBarScrollUnderOffLight) return;
@@ -2708,8 +2732,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveRemoveElevationTintDark;
+
   AdaptiveResponse? get adaptiveRemoveElevationTintDark =>
       _adaptiveRemoveElevationTintDark;
+
   void setAdaptiveRemoveElevationTintDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveElevationTintDark) return;
@@ -2720,8 +2746,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveElevationShadowsBackDark;
+
   AdaptiveResponse? get adaptiveElevationShadowsBackDark =>
       _adaptiveElevationShadowsBackDark;
+
   void setAdaptiveElevationShadowsBackDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveElevationShadowsBackDark) return;
@@ -2732,8 +2760,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveAppBarScrollUnderOffDark;
+
   AdaptiveResponse? get adaptiveAppBarScrollUnderOffDark =>
       _adaptiveAppBarScrollUnderOffDark;
+
   void setAdaptiveAppBarScrollUnderOffDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveAppBarScrollUnderOffDark) return;
@@ -2744,7 +2774,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveResponseRadius;
+
   AdaptiveResponse? get adaptiveResponseRadius => _adaptiveResponseRadius;
+
   void setAdaptiveResponseRadius(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveResponseRadius) return;
@@ -2754,7 +2786,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveResponseSplash;
+
   AdaptiveResponse? get adaptiveResponseSplash => _adaptiveResponseSplash;
+
   void setAdaptiveResponseSplash(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveResponseSplash) return;
@@ -2764,7 +2798,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SplashTypeEnum? _splashType;
+
   SplashTypeEnum? get splashType => _splashType;
+
   void setSplashType(SplashTypeEnum? value, [bool notify = true]) {
     if (value == _splashType) return;
     _splashType = value;
@@ -2773,7 +2809,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SplashTypeEnum? _splashTypeAdaptive;
+
   SplashTypeEnum? get splashTypeAdaptive => _splashTypeAdaptive;
+
   void setSplashTypeAdaptive(SplashTypeEnum? value, [bool notify = true]) {
     if (value == _splashTypeAdaptive) return;
     _splashTypeAdaptive = value;
@@ -2782,7 +2820,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _compactMode;
+
   bool get compactMode => _compactMode;
+
   void setCompactMode(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _compactMode) return;
@@ -2792,7 +2832,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _verticalMode;
+
   bool get verticalMode => _verticalMode;
+
   void setVerticalMode(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _verticalMode) return;
@@ -2802,7 +2844,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _confirmPremade;
+
   bool get confirmPremade => _confirmPremade;
+
   void setConfirmPremade(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _confirmPremade) return;
@@ -2812,7 +2856,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _topicIndexStartSide;
+
   int get topicIndexStartSide => _topicIndexStartSide;
+
   void setTopicIndexStartSide(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _topicIndexStartSide) return;
@@ -2822,7 +2868,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _topicIndexEndSide;
+
   int get topicIndexEndSide => _topicIndexEndSide;
+
   void setTopicIndexEndSide(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _topicIndexEndSide) return;
@@ -2832,7 +2880,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _simulatorDeviceIndex;
+
   int get simulatorDeviceIndex => _simulatorDeviceIndex;
+
   void setSimulatorDeviceIndex(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _simulatorDeviceIndex) return;
@@ -2842,7 +2892,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _simulatorAppIndex;
+
   int get simulatorAppIndex => _simulatorAppIndex;
+
   void setSimulatorAppIndex(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _simulatorAppIndex) return;
@@ -2852,7 +2904,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _simulatorComponentsIndex;
+
   int get simulatorComponentsIndex => _simulatorComponentsIndex;
+
   void setSimulatorComponentsIndex(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _simulatorComponentsIndex) return;
@@ -2862,7 +2916,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double _simulatorViewZoom;
+
   double get simulatorViewZoom => _simulatorViewZoom;
+
   void setSimulatorViewZoom(double? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _simulatorViewZoom) return;
@@ -2872,7 +2928,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _showSchemeInputColors;
+
   bool get showSchemeInputColors => _showSchemeInputColors;
+
   void setShowSchemeInputColors(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _showSchemeInputColors) return;
@@ -2882,7 +2940,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool? _useMaterial3Typography;
+
   bool? get useMaterial3Typography => _useMaterial3Typography;
+
   void setUseMaterial3Typography(bool? value, [bool notify = true]) {
     if (value == _useMaterial3Typography) return;
     _useMaterial3Typography = value;
@@ -2891,7 +2951,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useM2StyleDividerInM3;
+
   bool get useM2StyleDividerInM3 => _useM2StyleDividerInM3;
+
   void setUseM2StyleDividerInM3(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useM2StyleDividerInM3) return;
@@ -2901,7 +2963,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useAppFont;
+
   bool get useAppFont => _useAppFont;
+
   void setUseAppFont(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useAppFont) return;
@@ -2911,7 +2975,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexScheme _usedScheme;
+
   FlexScheme get usedScheme => _usedScheme;
+
   void setUsedScheme(FlexScheme? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _usedScheme) return;
@@ -2921,7 +2987,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _schemeIndex;
+
   int get schemeIndex => _schemeIndex;
+
   void setSchemeIndex(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _schemeIndex) return;
@@ -2931,7 +2999,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _interactionEffects;
+
   bool get interactionEffects => _interactionEffects;
+
   void setInteractionEffects(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _interactionEffects) return;
@@ -2941,7 +3011,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _tintedDisabledControls;
+
   bool get tintedDisabledControls => _tintedDisabledControls;
+
   void setTintedDisabledControls(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _tintedDisabledControls) return;
@@ -2951,7 +3023,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _defaultRadius;
+
   double? get defaultRadius => _defaultRadius;
+
   void setDefaultRadius(double? value, [bool notify = true]) {
     if (value == _defaultRadius) return;
     _defaultRadius = value;
@@ -2960,7 +3034,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _defaultRadiusAdaptive;
+
   double? get defaultRadiusAdaptive => _defaultRadiusAdaptive;
+
   void setDefaultRadiusAdaptive(double? value, [bool notify = true]) {
     if (value == _defaultRadiusAdaptive) return;
     _defaultRadiusAdaptive = value;
@@ -2969,7 +3045,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _thinBorderWidth;
+
   double? get thinBorderWidth => _thinBorderWidth;
+
   void setThinBorderWidth(double? value, [bool notify = true]) {
     if (value == _thinBorderWidth) return;
     _thinBorderWidth = value;
@@ -2978,7 +3056,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _thickBorderWidth;
+
   double? get thickBorderWidth => _thickBorderWidth;
+
   void setThickBorderWidth(double? value, [bool notify = true]) {
     if (value == _thickBorderWidth) return;
     _thickBorderWidth = value;
@@ -2987,7 +3067,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _tooltipsMatchBackground;
+
   bool get tooltipsMatchBackground => _tooltipsMatchBackground;
+
   void setTooltipsMatchBackground(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _tooltipsMatchBackground) return;
@@ -3000,8 +3082,10 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late FlexScaffoldBaseColor? _scaffoldBackgroundLightBaseColor;
+
   FlexScaffoldBaseColor? get scaffoldBackgroundLightBaseColor =>
       _scaffoldBackgroundLightBaseColor;
+
   void setScaffoldBackgroundLightBaseColor(FlexScaffoldBaseColor? value,
       [bool notify = true]) {
     if (value == _scaffoldBackgroundLightBaseColor) return;
@@ -3012,8 +3096,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexScaffoldBaseColor? _scaffoldBackgroundDarkBaseColor;
+
   FlexScaffoldBaseColor? get scaffoldBackgroundDarkBaseColor =>
       _scaffoldBackgroundDarkBaseColor;
+
   void setScaffoldBackgroundDarkBaseColor(FlexScaffoldBaseColor? value,
       [bool notify = true]) {
     if (value == _scaffoldBackgroundDarkBaseColor) return;
@@ -3024,8 +3110,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _scaffoldBackgroundLightSchemeColor;
+
   SchemeColor? get scaffoldBackgroundLightSchemeColor =>
       _scaffoldBackgroundLightSchemeColor;
+
   void setScaffoldBackgroundLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _scaffoldBackgroundLightSchemeColor) return;
@@ -3036,8 +3124,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _scaffoldBackgroundDarkSchemeColor;
+
   SchemeColor? get scaffoldBackgroundDarkSchemeColor =>
       _scaffoldBackgroundDarkSchemeColor;
+
   void setScaffoldBackgroundDarkSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _scaffoldBackgroundDarkSchemeColor) return;
@@ -3048,7 +3138,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexSurfaceMode _surfaceModeLight;
+
   FlexSurfaceMode get surfaceModeLight => _surfaceModeLight;
+
   void setSurfaceModeLight(FlexSurfaceMode? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _surfaceModeLight) return;
@@ -3058,7 +3150,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexSurfaceMode _surfaceModeDark;
+
   FlexSurfaceMode get surfaceModeDark => _surfaceModeDark;
+
   void setSurfaceModeDark(FlexSurfaceMode? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _surfaceModeDark) return;
@@ -3068,7 +3162,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _blendLevelLight;
+
   int get blendLevelLight => _blendLevelLight;
+
   void setBlendLevelLight(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _blendLevelLight) return;
@@ -3078,7 +3174,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _blendLevelDark;
+
   int get blendLevelDark => _blendLevelDark;
+
   void setBlendLevelDark(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _blendLevelDark) return;
@@ -3088,7 +3186,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _blendOnLevelLight;
+
   int get blendOnLevelLight => _blendOnLevelLight;
+
   void setBlendOnLevelLight(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _blendOnLevelLight) return;
@@ -3098,7 +3198,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _blendOnLevelDark;
+
   int get blendOnLevelDark => _blendOnLevelDark;
+
   void setBlendOnLevelDark(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _blendOnLevelDark) return;
@@ -3108,7 +3210,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _usedColors;
+
   int get usedColors => _usedColors;
+
   void setUsedColors(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _usedColors) return;
@@ -3118,7 +3222,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _swapLegacyColorsInM3;
+
   bool get swapLegacyColorsInM3 => _swapLegacyColorsInM3;
+
   void setSwapLegacyColorsInM3(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _swapLegacyColorsInM3) return;
@@ -3128,8 +3234,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _swapPrimaryAndSecondaryLightColors;
+
   bool get swapPrimaryAndSecondaryLightColors =>
       _swapPrimaryAndSecondaryLightColors;
+
   void setSwapPrimaryAndSecondaryLightColors(bool? value,
       [bool notify = true]) {
     if (value == null) return;
@@ -3141,8 +3249,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _swapPrimaryAndSecondaryDarkColors;
+
   bool get swapPrimaryAndSecondaryDarkColors =>
       _swapPrimaryAndSecondaryDarkColors;
+
   void setSwapPrimaryAndSecondaryDarkColors(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _swapPrimaryAndSecondaryDarkColors) return;
@@ -3153,7 +3263,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _scaffoldLightIsWhite;
+
   bool get scaffoldLightIsWhite => _scaffoldLightIsWhite;
+
   void setScaffoldLightIsWhite(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _scaffoldLightIsWhite) return;
@@ -3163,7 +3275,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _scaffoldDarkIsTrueBlack;
+
   bool get scaffoldDarkIsTrueBlack => _scaffoldDarkIsTrueBlack;
+
   void setScaffoldDarkIsTrueBlack(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _scaffoldDarkIsTrueBlack) return;
@@ -3173,7 +3287,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useToDarkMethod;
+
   bool get useToDarkMethod => _useToDarkMethod;
+
   void setUseToDarkMethod(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useToDarkMethod) return;
@@ -3183,7 +3299,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _toDarkSwapPrimaryAndContainer;
+
   bool get toDarkSwapPrimaryAndContainer => _toDarkSwapPrimaryAndContainer;
+
   void setToDarkSwapPrimaryAndContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _toDarkSwapPrimaryAndContainer) return;
@@ -3194,7 +3312,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _toDarkMethodLevel;
+
   int get toDarkMethodLevel => _toDarkMethodLevel;
+
   void setToDarkMethodLevel(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _toDarkMethodLevel) return;
@@ -3205,7 +3325,9 @@ class ThemeController with ChangeNotifier {
 
   // On color blending ON/OFF
   late bool _blendLightOnColors;
+
   bool get blendLightOnColors => _blendLightOnColors;
+
   void setBlendLightOnColors(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _blendLightOnColors) return;
@@ -3215,7 +3337,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _blendDarkOnColors;
+
   bool get blendDarkOnColors => _blendDarkOnColors;
+
   void setBlendDarkOnColors(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _blendDarkOnColors) return;
@@ -3250,7 +3374,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late bool _useMaterial3;
+
   bool get useMaterial3 => _useMaterial3;
+
   void setUseMaterial3(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useMaterial3) return;
@@ -3260,7 +3386,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexFixedColorStyle? _fixedColorStyle;
+
   FlexFixedColorStyle? get fixedColorStyle => _fixedColorStyle;
+
   void setFixedColorStyle(FlexFixedColorStyle? value, [bool notify = true]) {
     if (value == _fixedColorStyle) return;
     _fixedColorStyle = value;
@@ -3269,7 +3397,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useKeyColors;
+
   bool get useKeyColors => _useKeyColors;
+
   void setUseKeyColors(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useKeyColors) return;
@@ -3279,7 +3409,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useSecondary;
+
   bool get useSecondary => _useSecondary;
+
   void setUseSecondary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useSecondary) return;
@@ -3289,7 +3421,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useTertiary;
+
   bool get useTertiary => _useTertiary;
+
   void setUseTertiary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useTertiary) return;
@@ -3299,7 +3433,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useError;
+
   bool get useError => _useError;
+
   void setUseError(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useError) return;
@@ -3309,7 +3445,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepPrimary;
+
   bool get keepPrimary => _keepPrimary;
+
   void setKeepPrimary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepPrimary) return;
@@ -3319,7 +3457,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepSecondary;
+
   bool get keepSecondary => _keepSecondary;
+
   void setKeepSecondary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepSecondary) return;
@@ -3329,7 +3469,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepTertiary;
+
   bool get keepTertiary => _keepTertiary;
+
   void setKeepTertiary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepTertiary) return;
@@ -3339,7 +3481,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepError;
+
   bool get keepError => _keepError;
+
   void setKeepError(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepError) return;
@@ -3349,7 +3493,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepPrimaryContainer;
+
   bool get keepPrimaryContainer => _keepPrimaryContainer;
+
   void setKeepPrimaryContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepPrimaryContainer) return;
@@ -3359,7 +3505,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepSecondaryContainer;
+
   bool get keepSecondaryContainer => _keepSecondaryContainer;
+
   void setKeepSecondaryContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepSecondaryContainer) return;
@@ -3369,7 +3517,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepTertiaryContainer;
+
   bool get keepTertiaryContainer => _keepTertiaryContainer;
+
   void setKeepTertiaryContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepTertiaryContainer) return;
@@ -3379,7 +3529,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepErrorContainer;
+
   bool get keepErrorContainer => _keepErrorContainer;
+
   void setKeepErrorContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepErrorContainer) return;
@@ -3389,7 +3541,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkPrimary;
+
   bool get keepDarkPrimary => _keepDarkPrimary;
+
   void setKeepDarkPrimary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkPrimary) return;
@@ -3399,7 +3553,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkSecondary;
+
   bool get keepDarkSecondary => _keepDarkSecondary;
+
   void setKeepDarkSecondary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkSecondary) return;
@@ -3409,7 +3565,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkTertiary;
+
   bool get keepDarkTertiary => _keepDarkTertiary;
+
   void setKeepDarkTertiary(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkTertiary) return;
@@ -3419,7 +3577,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkError;
+
   bool get keepDarkError => _keepDarkError;
+
   void setKeepDarkError(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkError) return;
@@ -3429,7 +3589,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkPrimaryContainer;
+
   bool get keepDarkPrimaryContainer => _keepDarkPrimaryContainer;
+
   void setKeepDarkPrimaryContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkPrimaryContainer) return;
@@ -3439,7 +3601,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkSecondaryContainer;
+
   bool get keepDarkSecondaryContainer => _keepDarkSecondaryContainer;
+
   void setKeepDarkSecondaryContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkSecondaryContainer) return;
@@ -3449,7 +3613,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkTertiaryContainer;
+
   bool get keepDarkTertiaryContainer => _keepDarkTertiaryContainer;
+
   void setKeepDarkTertiaryContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkTertiaryContainer) return;
@@ -3459,7 +3625,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _keepDarkErrorContainer;
+
   bool get keepDarkErrorContainer => _keepDarkErrorContainer;
+
   void setKeepDarkErrorContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _keepDarkErrorContainer) return;
@@ -3469,7 +3637,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int _usedFlexToneSetup;
+
   int get usedFlexToneSetup => _usedFlexToneSetup;
+
   void setUsedFlexToneSetup(int? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _usedFlexToneSetup) return;
@@ -3479,7 +3649,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useM3ErrorColors;
+
   bool get useM3ErrorColors => _useM3ErrorColors;
+
   void setUseM3ErrorColors(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useM3ErrorColors) return;
@@ -3489,7 +3661,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useMonoSurfacesLight;
+
   bool get useMonoSurfacesLight => _useMonoSurfacesLight;
+
   void setUseMonoSurfacesLight(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useMonoSurfacesLight) return;
@@ -3499,7 +3673,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useMonoSurfacesDark;
+
   bool get useMonoSurfacesDark => _useMonoSurfacesDark;
+
   void setUseMonoSurfacesDark(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useMonoSurfacesDark) return;
@@ -3509,7 +3685,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _onMainsUseBWLight;
+
   bool get onMainsUseBWLight => _onMainsUseBWLight;
+
   void setOnMainsUseBWLight(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _onMainsUseBWLight) return;
@@ -3519,7 +3697,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _onMainsUseBWDark;
+
   bool get onMainsUseBWDark => _onMainsUseBWDark;
+
   void setOnMainsUseBWDark(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _onMainsUseBWDark) return;
@@ -3529,7 +3709,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _onSurfacesUseBWLight;
+
   bool get onSurfacesUseBWLight => _onSurfacesUseBWLight;
+
   void setOnSurfacesUseBWLight(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _onSurfacesUseBWLight) return;
@@ -3539,7 +3721,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _onSurfacesUseBWDark;
+
   bool get onSurfacesUseBWDark => _onSurfacesUseBWDark;
+
   void setOnSurfacesUseBWDark(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _onSurfacesUseBWDark) return;
@@ -3549,7 +3733,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _surfacesUseBWLight;
+
   bool get surfacesUseBWLight => _surfacesUseBWLight;
+
   void setSurfacesUseBWLight(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _surfacesUseBWLight) return;
@@ -3559,7 +3745,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _surfacesUseBWDark;
+
   bool get surfacesUseBWDark => _surfacesUseBWDark;
+
   void setSurfacesUseBWDark(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _surfacesUseBWDark) return;
@@ -3569,7 +3757,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _higherContrastFixed;
+
   bool get higherContrastFixed => _higherContrastFixed;
+
   void setHigherContrastFixed(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _higherContrastFixed) return;
@@ -3579,7 +3769,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _expressiveOnContainer;
+
   bool get expressiveOnContainer => _expressiveOnContainer;
+
   void setExpressiveOnContainer(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _expressiveOnContainer) return;
@@ -3589,7 +3781,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useLegacyMonochromeSeedBehavior;
+
   bool get useLegacyMonochromeSeedBehavior => _useLegacyMonochromeSeedBehavior;
+
   void setUseLegacyMonochromeSeedBehavior(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useLegacyMonochromeSeedBehavior) return;
@@ -3599,7 +3793,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double _dynamicContrastLevel;
+
   double get dynamicContrastLevel => _dynamicContrastLevel;
+
   void setDynamicContrastLevel(double? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _dynamicContrastLevel) return;
@@ -3612,8 +3808,10 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _inputDecoratorSchemeColorLight;
+
   SchemeColor? get inputDecoratorSchemeColorLight =>
       _inputDecoratorSchemeColorLight;
+
   void setInputDecoratorSchemeColorLight(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorSchemeColorLight) return;
@@ -3624,8 +3822,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputDecoratorSchemeColorDark;
+
   SchemeColor? get inputDecoratorSchemeColorDark =>
       _inputDecoratorSchemeColorDark;
+
   void setInputDecoratorSchemeColorDark(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorSchemeColorDark) return;
@@ -3636,8 +3836,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputDecoratorBorderSchemeColorLight;
+
   SchemeColor? get inputDecoratorBorderSchemeColorLight =>
       _inputDecoratorBorderSchemeColorLight;
+
   void setInputDecoratorBorderSchemeColorLight(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorBorderSchemeColorLight) return;
@@ -3648,8 +3850,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputDecoratorBorderSchemeColorDark;
+
   SchemeColor? get inputDecoratorBorderSchemeColorDark =>
       _inputDecoratorBorderSchemeColorDark;
+
   void setInputDecoratorBorderSchemeColorDark(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorBorderSchemeColorDark) return;
@@ -3660,7 +3864,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _inputDecoratorIsFilled;
+
   bool get inputDecoratorIsFilled => _inputDecoratorIsFilled;
+
   void setInputDecoratorIsFilled(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _inputDecoratorIsFilled) return;
@@ -3670,7 +3876,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _inputDecoratorIsDense;
+
   bool get inputDecoratorIsDense => _inputDecoratorIsDense;
+
   void setInputDecoratorIsDense(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _inputDecoratorIsDense) return;
@@ -3680,7 +3888,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorPaddingStart;
+
   double? get inputDecoratorPaddingStart => _inputDecoratorPaddingStart;
+
   void setInputDecoratorPaddingStart(double? value, [bool notify = true]) {
     if (value == _inputDecoratorPaddingStart) return;
     _inputDecoratorPaddingStart = value;
@@ -3689,7 +3899,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorPaddingEnd;
+
   double? get inputDecoratorPaddingEnd => _inputDecoratorPaddingEnd;
+
   void setInputDecoratorPaddingEnd(double? value, [bool notify = true]) {
     if (value == _inputDecoratorPaddingEnd) return;
     _inputDecoratorPaddingEnd = value;
@@ -3698,7 +3910,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorPaddingTop;
+
   double? get inputDecoratorPaddingTop => _inputDecoratorPaddingTop;
+
   void setInputDecoratorPaddingTop(double? value, [bool notify = true]) {
     if (value == _inputDecoratorPaddingTop) return;
     _inputDecoratorPaddingTop = value;
@@ -3707,7 +3921,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorPaddingBottom;
+
   double? get inputDecoratorPaddingBottom => _inputDecoratorPaddingBottom;
+
   void setInputDecoratorPaddingBottom(double? value, [bool notify = true]) {
     if (value == _inputDecoratorPaddingBottom) return;
     _inputDecoratorPaddingBottom = value;
@@ -3716,8 +3932,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late int? _inputDecoratorBackgroundAlphaLight;
+
   int? get inputDecoratorBackgroundAlphaLight =>
       _inputDecoratorBackgroundAlphaLight;
+
   void setInputDecoratorBackgroundAlphaLight(int? value, [bool notify = true]) {
     if (value == _inputDecoratorBackgroundAlphaLight) return;
     _inputDecoratorBackgroundAlphaLight = value;
@@ -3727,8 +3945,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late int? _inputDecoratorBackgroundAlphaDark;
+
   int? get inputDecoratorBackgroundAlphaDark =>
       _inputDecoratorBackgroundAlphaDark;
+
   void setInputDecoratorBackgroundAlphaDark(int? value, [bool notify = true]) {
     if (value == _inputDecoratorBackgroundAlphaDark) return;
     _inputDecoratorBackgroundAlphaDark = value;
@@ -3738,7 +3958,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexInputBorderType _inputDecoratorBorderType;
+
   FlexInputBorderType get inputDecoratorBorderType => _inputDecoratorBorderType;
+
   void setInputDecoratorBorderType(FlexInputBorderType? value,
       [bool notify = true]) {
     if (value == null) return;
@@ -3749,7 +3971,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorBorderRadius;
+
   double? get inputDecoratorBorderRadius => _inputDecoratorBorderRadius;
+
   void setInputDecoratorBorderRadius(double? value, [bool notify = true]) {
     if (value == _inputDecoratorBorderRadius) return;
     _inputDecoratorBorderRadius = value;
@@ -3758,8 +3982,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorBorderRadiusAdaptive;
+
   double? get inputDecoratorBorderRadiusAdaptive =>
       _inputDecoratorBorderRadiusAdaptive;
+
   void setInputDecoratorBorderRadiusAdaptive(double? value,
       [bool notify = true]) {
     if (value == _inputDecoratorBorderRadiusAdaptive) return;
@@ -3770,8 +3996,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveResponseInputDecoratorRadius;
+
   AdaptiveResponse? get adaptiveResponseInputDecoratorRadius =>
       _adaptiveResponseInputDecoratorRadius;
+
   void setAdaptiveResponseInputDecoratorRadius(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveResponseInputDecoratorRadius) return;
@@ -3782,8 +4010,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _inputDecoratorUnfocusedHasBorder;
+
   bool get inputDecoratorUnfocusedHasBorder =>
       _inputDecoratorUnfocusedHasBorder;
+
   void setInputDecoratorUnfocusedHasBorder(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _inputDecoratorUnfocusedHasBorder) return;
@@ -3794,7 +4024,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _inputDecoratorFocusedHasBorder;
+
   bool get inputDecoratorFocusedHasBorder => _inputDecoratorFocusedHasBorder;
+
   void setInputDecoratorFocusedHasBorder(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _inputDecoratorFocusedHasBorder) return;
@@ -3805,8 +4037,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _inputDecoratorUnfocusedBorderIsColored;
+
   bool get inputDecoratorUnfocusedBorderIsColored =>
       _inputDecoratorUnfocusedBorderIsColored;
+
   void setInputDecoratorUnfocusedBorderIsColored(bool? value,
       [bool notify = true]) {
     if (value == null) return;
@@ -3818,7 +4052,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorBorderWidth;
+
   double? get inputDecoratorBorderWidth => _inputDecoratorBorderWidth;
+
   void setInputDecoratorBorderWidth(double? value, [bool notify = true]) {
     if (value == _inputDecoratorBorderWidth) return;
     _inputDecoratorBorderWidth = value;
@@ -3827,8 +4063,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputDecoratorFocusedBorderWidth;
+
   double? get inputDecoratorFocusedBorderWidth =>
       _inputDecoratorFocusedBorderWidth;
+
   void setInputDecoratorFocusedBorderWidth(double? value,
       [bool notify = true]) {
     if (value == _inputDecoratorFocusedBorderWidth) return;
@@ -3839,8 +4077,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputDecoratorPrefixIconLightSchemeColor;
+
   SchemeColor? get inputDecoratorPrefixIconLightSchemeColor =>
       _inputDecoratorPrefixIconLightSchemeColor;
+
   void setInputDecoratorPrefixIconLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorPrefixIconLightSchemeColor) return;
@@ -3851,8 +4091,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputDecoratorPrefixIconDarkSchemeColor;
+
   SchemeColor? get inputDecoratorPrefixIconDarkSchemeColor =>
       _inputDecoratorPrefixIconDarkSchemeColor;
+
   void setInputDecoratorPrefixIconDarkSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorPrefixIconDarkSchemeColor) return;
@@ -3863,8 +4105,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputDecoratorSuffixIconLightSchemeColor;
+
   SchemeColor? get inputDecoratorSuffixIconLightSchemeColor =>
       _inputDecoratorSuffixIconLightSchemeColor;
+
   void setInputDecoratorSuffixIconLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorSuffixIconLightSchemeColor) return;
@@ -3875,8 +4119,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputDecoratorSuffixIconDarkSchemeColor;
+
   SchemeColor? get inputDecoratorSuffixIconDarkSchemeColor =>
       _inputDecoratorSuffixIconDarkSchemeColor;
+
   void setInputDecoratorSuffixIconDarkSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputDecoratorSuffixIconDarkSchemeColor) return;
@@ -3890,7 +4136,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _inputCursorLightSchemeColor;
+
   SchemeColor? get inputCursorLightSchemeColor => _inputCursorLightSchemeColor;
+
   void setInputCursorLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputCursorLightSchemeColor) return;
@@ -3900,8 +4148,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputSelectionLightSchemeColor;
+
   SchemeColor? get inputSelectionLightSchemeColor =>
       _inputSelectionLightSchemeColor;
+
   void setInputSelectionLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputSelectionLightSchemeColor) return;
@@ -3912,7 +4162,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputSelectionLightOpacity;
+
   double? get inputSelectionLightOpacity => _inputSelectionLightOpacity;
+
   void setInputSelectionLightOpacity(double? value, [bool notify = true]) {
     if (value == _inputSelectionLightOpacity) return;
     _inputSelectionLightOpacity = value;
@@ -3921,8 +4173,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputSelectionHandleLightSchemeColor;
+
   SchemeColor? get inputSelectionHandleLightSchemeColor =>
       _inputSelectionHandleLightSchemeColor;
+
   void setInputSelectionHandleLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputSelectionHandleLightSchemeColor) return;
@@ -3933,7 +4187,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputCursorDarkSchemeColor;
+
   SchemeColor? get inputCursorDarkSchemeColor => _inputCursorDarkSchemeColor;
+
   void setInputCursorDarkSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _inputCursorDarkSchemeColor) return;
     _inputCursorDarkSchemeColor = value;
@@ -3942,8 +4198,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputSelectionDarkSchemeColor;
+
   SchemeColor? get inputSelectionDarkSchemeColor =>
       _inputSelectionDarkSchemeColor;
+
   void setInputSelectionDarkSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputSelectionDarkSchemeColor) return;
@@ -3954,7 +4212,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _inputSelectionDarkOpacity;
+
   double? get inputSelectionDarkOpacity => _inputSelectionDarkOpacity;
+
   void setInputSelectionDarkOpacity(double? value, [bool notify = true]) {
     if (value == _inputSelectionDarkOpacity) return;
     _inputSelectionDarkOpacity = value;
@@ -3963,8 +4223,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _inputSelectionHandleDarkSchemeColor;
+
   SchemeColor? get inputSelectionHandleDarkSchemeColor =>
       _inputSelectionHandleDarkSchemeColor;
+
   void setInputSelectionHandleDarkSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _inputSelectionHandleDarkSchemeColor) return;
@@ -3978,7 +4240,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _listTileSelectedSchemeColor;
+
   SchemeColor? get listTileSelectedSchemeColor => _listTileSelectedSchemeColor;
+
   void setListTileSelectedSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _listTileSelectedSchemeColor) return;
@@ -3988,7 +4252,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _listTileIconSchemeColor;
+
   SchemeColor? get listTileIconSchemeColor => _listTileIconSchemeColor;
+
   void setListTileIconSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _listTileIconSchemeColor) return;
     _listTileIconSchemeColor = value;
@@ -3997,7 +4263,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _listTileTextSchemeColor;
+
   SchemeColor? get listTileTextSchemeColor => _listTileTextSchemeColor;
+
   void setListTileTextSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _listTileTextSchemeColor) return;
     _listTileTextSchemeColor = value;
@@ -4006,7 +4274,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _listTileTileSchemeColor;
+
   SchemeColor? get listTileTileSchemeColor => _listTileTileSchemeColor;
+
   void setListTileTileSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _listTileTileSchemeColor) return;
     _listTileTileSchemeColor = value;
@@ -4015,8 +4285,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _listTileSelectedTileSchemeColor;
+
   SchemeColor? get listTileSelectedTileSchemeColor =>
       _listTileSelectedTileSchemeColor;
+
   void setListTileSelectedTileSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _listTileSelectedTileSchemeColor) return;
@@ -4027,7 +4299,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _listTilePaddingStart;
+
   double? get listTilePaddingStart => _listTilePaddingStart;
+
   void setListTilePaddingStart(double? value, [bool notify = true]) {
     if (value == _listTilePaddingStart) return;
     _listTilePaddingStart = value;
@@ -4036,7 +4310,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _listTilePaddingEnd;
+
   double? get listTilePaddingEnd => _listTilePaddingEnd;
+
   void setListTilePaddingEnd(double? value, [bool notify = true]) {
     if (value == _listTilePaddingEnd) return;
     _listTilePaddingEnd = value;
@@ -4045,7 +4321,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _listTilePaddingTop;
+
   double? get listTilePaddingTop => _listTilePaddingTop;
+
   void setListTilePaddingTop(double? value, [bool notify = true]) {
     if (value == _listTilePaddingTop) return;
     _listTilePaddingTop = value;
@@ -4054,7 +4332,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _listTilePaddingBottom;
+
   double? get listTilePaddingBottom => _listTilePaddingBottom;
+
   void setListTilePaddingBottom(double? value, [bool notify = true]) {
     if (value == _listTilePaddingBottom) return;
     _listTilePaddingBottom = value;
@@ -4063,7 +4343,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _listTileHorizontalTitleGap;
+
   double? get listTileHorizontalTitleGap => _listTileHorizontalTitleGap;
+
   void setListTileHorizontalTitleGap(double? value, [bool notify = true]) {
     if (value == _listTileHorizontalTitleGap) return;
     _listTileHorizontalTitleGap = value;
@@ -4072,7 +4354,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _listTileMinVerticalPadding;
+
   double? get listTileMinVerticalPadding => _listTileMinVerticalPadding;
+
   void setListTileMinVerticalPadding(double? value, [bool notify = true]) {
     if (value == _listTileMinVerticalPadding) return;
     _listTileMinVerticalPadding = value;
@@ -4081,7 +4365,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late ListTileStyle? _listTileStyle;
+
   ListTileStyle? get listTileStyle => _listTileStyle;
+
   void setListTileStyle(ListTileStyle? value, [bool notify = true]) {
     if (value == _listTileStyle) return;
     _listTileStyle = value;
@@ -4090,7 +4376,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late ListTileTitleAlignment? _listTileTitleAlignment;
+
   ListTileTitleAlignment? get listTileTitleAlignment => _listTileTitleAlignment;
+
   void setListTileTitleAlignment(ListTileTitleAlignment? value,
       [bool notify = true]) {
     if (value == _listTileTitleAlignment) return;
@@ -4100,8 +4388,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late ListTileControlAffinity? _listTileControlAffinity;
+
   ListTileControlAffinity? get listTileControlAffinity =>
       _listTileControlAffinity;
+
   void setListTileControlAffinity(ListTileControlAffinity? value,
       [bool notify = true]) {
     if (value == _listTileControlAffinity) return;
@@ -4114,7 +4404,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late FlexAppBarStyle? _appBarStyleLight;
+
   FlexAppBarStyle? get appBarStyleLight => _appBarStyleLight;
+
   void setAppBarStyleLight(FlexAppBarStyle? value, [bool notify = true]) {
     // if (value == null) return;
     if (value == _appBarStyleLight) return;
@@ -4124,7 +4416,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexAppBarStyle? _appBarStyleDark;
+
   FlexAppBarStyle? get appBarStyleDark => _appBarStyleDark;
+
   void setAppBarStyleDark(FlexAppBarStyle? value, [bool notify = true]) {
     // if (value == null) return;
     if (value == _appBarStyleDark) return;
@@ -4134,7 +4428,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _appBarOpacityLight;
+
   double? get appBarOpacityLight => _appBarOpacityLight;
+
   void setAppBarOpacityLight(double? value, [bool notify = true]) {
     if (value == _appBarOpacityLight) return;
     _appBarOpacityLight = value;
@@ -4143,7 +4439,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _appBarOpacityDark;
+
   double? get appBarOpacityDark => _appBarOpacityDark;
+
   void setAppBarOpacityDark(double? value, [bool notify = true]) {
     if (value == _appBarOpacityDark) return;
     _appBarOpacityDark = value;
@@ -4152,7 +4450,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _appBarElevationLight;
+
   double? get appBarElevationLight => _appBarElevationLight;
+
   void setAppBarElevationLight(double? value, [bool notify = true]) {
     if (value == _appBarElevationLight) return;
     _appBarElevationLight = value;
@@ -4161,7 +4461,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _appBarElevationDark;
+
   double? get appBarElevationDark => _appBarElevationDark;
+
   void setAppBarElevationDark(double? value, [bool notify = true]) {
     if (value == _appBarElevationDark) return;
     _appBarElevationDark = value;
@@ -4170,8 +4472,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _appBarScrolledUnderElevationLight;
+
   double? get appBarScrolledUnderElevationLight =>
       _appBarScrolledUnderElevationLight;
+
   void setAppBarScrolledUnderElevationLight(double? value,
       [bool notify = true]) {
     if (value == _appBarScrolledUnderElevationLight) return;
@@ -4182,8 +4486,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _appBarScrolledUnderElevationDark;
+
   double? get appBarScrolledUnderElevationDark =>
       _appBarScrolledUnderElevationDark;
+
   void setAppBarScrolledUnderElevationDark(double? value,
       [bool notify = true]) {
     if (value == _appBarScrolledUnderElevationDark) return;
@@ -4194,7 +4500,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _appBarTransparentStatusBar;
+
   bool get appBarTransparentStatusBar => _appBarTransparentStatusBar;
+
   void setAppBarTransparentStatusBar(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _appBarTransparentStatusBar) return;
@@ -4204,7 +4512,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool? _appBarCenterTitle;
+
   bool? get appBarCenterTitle => _appBarCenterTitle;
+
   void setAppBarCenterTitle(bool? value, [bool notify = true]) {
     if (value == _appBarCenterTitle) return;
     _appBarCenterTitle = value;
@@ -4213,8 +4523,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarBackgroundSchemeColorLight;
+
   SchemeColor? get appBarBackgroundSchemeColorLight =>
       _appBarBackgroundSchemeColorLight;
+
   void setAppBarBackgroundSchemeColorLight(SchemeColor? value,
       [bool notify = true]) {
     if (value == _appBarBackgroundSchemeColorLight) return;
@@ -4225,8 +4537,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarBackgroundSchemeColorDark;
+
   SchemeColor? get appBarBackgroundSchemeColorDark =>
       _appBarBackgroundSchemeColorDark;
+
   void setAppBarBackgroundSchemeColorDark(SchemeColor? value,
       [bool notify = true]) {
     if (value == _appBarBackgroundSchemeColorDark) return;
@@ -4237,8 +4551,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarForegroundSchemeColorLight;
+
   SchemeColor? get appBarForegroundSchemeColorLight =>
       _appBarForegroundSchemeColorLight;
+
   void setAppBarForegroundSchemeColorLight(SchemeColor? value,
       [bool notify = true]) {
     if (value == _appBarForegroundSchemeColorLight) return;
@@ -4249,8 +4565,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarForegroundSchemeColorDark;
+
   SchemeColor? get appBarForegroundSchemeColorDark =>
       _appBarForegroundSchemeColorDark;
+
   void setAppBarForegroundSchemeColorDark(SchemeColor? value,
       [bool notify = true]) {
     if (value == _appBarForegroundSchemeColorDark) return;
@@ -4261,7 +4579,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarIconSchemeColorLight;
+
   SchemeColor? get appBarIconSchemeColorLight => _appBarIconSchemeColorLight;
+
   void setAppBarIconSchemeColorLight(SchemeColor? value, [bool notify = true]) {
     if (value == _appBarIconSchemeColorLight) return;
     _appBarIconSchemeColorLight = value;
@@ -4270,7 +4590,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarIconSchemeColorDark;
+
   SchemeColor? get appBarIconSchemeColorDark => _appBarIconSchemeColorDark;
+
   void setAppBarIconSchemeColorDark(SchemeColor? value, [bool notify = true]) {
     if (value == _appBarIconSchemeColorDark) return;
     _appBarIconSchemeColorDark = value;
@@ -4279,8 +4601,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarActionsIconSchemeColorLight;
+
   SchemeColor? get appBarActionsIconSchemeColorLight =>
       _appBarActionsIconSchemeColorLight;
+
   void setAppBarActionsIconSchemeColorLight(SchemeColor? value,
       [bool notify = true]) {
     if (value == _appBarActionsIconSchemeColorLight) return;
@@ -4291,8 +4615,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _appBarActionsIconSchemeColorDark;
+
   SchemeColor? get appBarActionsIconSchemeColorDark =>
       _appBarActionsIconSchemeColorDark;
+
   void setAppBarActionsIconSchemeColorDark(SchemeColor? value,
       [bool notify = true]) {
     if (value == _appBarActionsIconSchemeColorDark) return;
@@ -4306,7 +4632,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late double? _bottomAppBarElevationLight;
+
   double? get bottomAppBarElevationLight => _bottomAppBarElevationLight;
+
   void setBottomAppBarElevationLight(double? value, [bool notify = true]) {
     if (value == _bottomAppBarElevationLight) return;
     _bottomAppBarElevationLight = value;
@@ -4315,7 +4643,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomAppBarElevationDark;
+
   double? get bottomAppBarElevationDark => _bottomAppBarElevationDark;
+
   void setBottomAppBarElevationDark(double? value, [bool notify = true]) {
     if (value == _bottomAppBarElevationDark) return;
     _bottomAppBarElevationDark = value;
@@ -4324,8 +4654,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _bottomAppBarSchemeColorLight;
+
   SchemeColor? get bottomAppBarSchemeColorLight =>
       _bottomAppBarSchemeColorLight;
+
   void setBottomAppBarSchemeColorLight(SchemeColor? value,
       [bool notify = true]) {
     if (value == _bottomAppBarSchemeColorLight) return;
@@ -4335,7 +4667,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _bottomAppBarSchemeColorDark;
+
   SchemeColor? get bottomAppBarSchemeColorDark => _bottomAppBarSchemeColorDark;
+
   void setBottomAppBarSchemeColorDark(SchemeColor? value,
       [bool notify = true]) {
     if (value == _bottomAppBarSchemeColorDark) return;
@@ -4345,7 +4679,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomAppBarHeight;
+
   double? get bottomAppBarHeight => _bottomAppBarHeight;
+
   void setBottomAppBarHeight(double? value, [bool notify = true]) {
     if (value == _bottomAppBarHeight) return;
     _bottomAppBarHeight = value;
@@ -4357,7 +4693,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late FlexTabBarStyle? _tabBarStyle;
+
   FlexTabBarStyle? get tabBarStyle => _tabBarStyle;
+
   void setTabBarStyle(FlexTabBarStyle? value, [bool notify = true]) {
     if (value == _tabBarStyle) return;
     _tabBarStyle = value;
@@ -4366,7 +4704,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _tabBarIndicatorLight;
+
   SchemeColor? get tabBarIndicatorLight => _tabBarIndicatorLight;
+
   void setTabBarIndicatorLight(SchemeColor? value, [bool notify = true]) {
     if (value == _tabBarIndicatorLight) return;
     _tabBarIndicatorLight = value;
@@ -4375,7 +4715,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _tabBarIndicatorDark;
+
   SchemeColor? get tabBarIndicatorDark => _tabBarIndicatorDark;
+
   void setTabBarIndicatorDark(SchemeColor? value, [bool notify = true]) {
     if (value == _tabBarIndicatorDark) return;
     _tabBarIndicatorDark = value;
@@ -4384,7 +4726,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _tabBarItemSchemeColorLight;
+
   SchemeColor? get tabBarItemSchemeColorLight => _tabBarItemSchemeColorLight;
+
   void setTabBarItemSchemeColorLight(SchemeColor? value, [bool notify = true]) {
     if (value == _tabBarItemSchemeColorLight) return;
     _tabBarItemSchemeColorLight = value;
@@ -4393,7 +4737,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _tabBarItemSchemeColorDark;
+
   SchemeColor? get tabBarItemSchemeColorDark => _tabBarItemSchemeColorDark;
+
   void setTabBarItemSchemeColorDark(SchemeColor? value, [bool notify = true]) {
     if (value == _tabBarItemSchemeColorDark) return;
     _tabBarItemSchemeColorDark = value;
@@ -4402,8 +4748,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _tabBarUnselectedItemSchemeColorLight;
+
   SchemeColor? get tabBarUnselectedItemSchemeColorLight =>
       _tabBarUnselectedItemSchemeColorLight;
+
   void setTabBarUnselectedItemSchemeColorLight(SchemeColor? value,
       [bool notify = true]) {
     if (value == _tabBarUnselectedItemSchemeColorLight) return;
@@ -4414,8 +4762,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _tabBarUnselectedItemSchemeColorDark;
+
   SchemeColor? get tabBarUnselectedItemSchemeColorDark =>
       _tabBarUnselectedItemSchemeColorDark;
+
   void setTabBarUnselectedItemSchemeColorDark(SchemeColor? value,
       [bool notify = true]) {
     if (value == _tabBarUnselectedItemSchemeColorDark) return;
@@ -4426,8 +4776,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _tabBarUnselectedItemOpacityLight;
+
   double? get tabBarUnselectedItemOpacityLight =>
       _tabBarUnselectedItemOpacityLight;
+
   void setTabBarUnselectedItemOpacityLight(double? value,
       [bool notify = true]) {
     if (value == _tabBarUnselectedItemOpacityLight) return;
@@ -4438,8 +4790,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _tabBarUnselectedItemOpacityDark;
+
   double? get tabBarUnselectedItemOpacityDark =>
       _tabBarUnselectedItemOpacityDark;
+
   void setTabBarUnselectedItemOpacityDark(double? value, [bool notify = true]) {
     if (value == _tabBarUnselectedItemOpacityDark) return;
     _tabBarUnselectedItemOpacityDark = value;
@@ -4449,7 +4803,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late TabBarIndicatorSize? _tabBarIndicatorSize;
+
   TabBarIndicatorSize? get tabBarIndicatorSize => _tabBarIndicatorSize;
+
   void setTabBarIndicatorSize(TabBarIndicatorSize? value,
       [bool notify = true]) {
     if (value == _tabBarIndicatorSize) return;
@@ -4459,7 +4815,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _tabBarIndicatorWeight;
+
   double? get tabBarIndicatorWeight => _tabBarIndicatorWeight;
+
   void setTabBarIndicatorWeight(double? value, [bool notify = true]) {
     if (value == _tabBarIndicatorWeight) return;
     _tabBarIndicatorWeight = value;
@@ -4468,7 +4826,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _tabBarIndicatorTopRadius;
+
   double? get tabBarIndicatorTopRadius => _tabBarIndicatorTopRadius;
+
   void setTabBarIndicatorTopRadius(double? value, [bool notify = true]) {
     if (value == _tabBarIndicatorTopRadius) return;
     _tabBarIndicatorTopRadius = value;
@@ -4477,7 +4837,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _tabBarDividerColor;
+
   Color? get tabBarDividerColor => _tabBarDividerColor;
+
   void setTabBarDividerColor(Color? value, [bool notify = true]) {
     if (value == _tabBarDividerColor) return;
     _tabBarDividerColor = value;
@@ -4486,7 +4848,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late TabAlignment? _tabBarTabAlignment;
+
   TabAlignment? get tabBarTabAlignment => _tabBarTabAlignment;
+
   void setTabBarTabAlignment(TabAlignment? value, [bool notify = true]) {
     if (value == _tabBarTabAlignment) return;
     _tabBarTabAlignment = value;
@@ -4498,7 +4862,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late double? _drawerBorderRadius;
+
   double? get drawerBorderRadius => _drawerBorderRadius;
+
   void setDrawerBorderRadius(double? value, [bool notify = true]) {
     if (value == _drawerBorderRadius) return;
     _drawerBorderRadius = value;
@@ -4507,7 +4873,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _drawerElevation;
+
   double? get drawerElevation => _drawerElevation;
+
   void setDrawerElevation(double? value, [bool notify = true]) {
     if (value == _drawerElevation) return;
     _drawerElevation = value;
@@ -4516,7 +4884,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _drawerBackgroundSchemeColor;
+
   SchemeColor? get drawerBackgroundSchemeColor => _drawerBackgroundSchemeColor;
+
   void setDrawerBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _drawerBackgroundSchemeColor) return;
@@ -4526,7 +4896,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _drawerWidth;
+
   double? get drawerWidth => _drawerWidth;
+
   void setDrawerWidth(double? value, [bool notify = true]) {
     if (value == _drawerWidth) return;
     _drawerWidth = value;
@@ -4535,7 +4907,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _drawerIndicatorWidth;
+
   double? get drawerIndicatorWidth => _drawerIndicatorWidth;
+
   void setDrawerIndicatorWidth(double? value, [bool notify = true]) {
     if (value == _drawerIndicatorWidth) return;
     _drawerIndicatorWidth = value;
@@ -4544,7 +4918,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _drawerIndicatorBorderRadius;
+
   double? get drawerIndicatorBorderRadius => _drawerIndicatorBorderRadius;
+
   void setDrawerIndicatorBorderRadius(double? value, [bool notify = true]) {
     if (value == _drawerIndicatorBorderRadius) return;
     _drawerIndicatorBorderRadius = value;
@@ -4553,7 +4929,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _drawerIndicatorSchemeColor;
+
   SchemeColor? get drawerIndicatorSchemeColor => _drawerIndicatorSchemeColor;
+
   void setDrawerIndicatorSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _drawerIndicatorSchemeColor) return;
     _drawerIndicatorSchemeColor = value;
@@ -4562,7 +4940,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _drawerIndicatorOpacity;
+
   double? get drawerIndicatorOpacity => _drawerIndicatorOpacity;
+
   void setDrawerIndicatorOpacity(double? value, [bool notify = true]) {
     if (value == _drawerIndicatorOpacity) return;
     _drawerIndicatorOpacity = value;
@@ -4571,8 +4951,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _drawerSelectedItemSchemeColor;
+
   SchemeColor? get drawerSelectedItemSchemeColor =>
       _drawerSelectedItemSchemeColor;
+
   void setDrawerSelectedItemSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _drawerSelectedItemSchemeColor) return;
@@ -4583,8 +4965,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _drawerUnselectedItemSchemeColor;
+
   SchemeColor? get drawerUnselectedItemSchemeColor =>
       _drawerUnselectedItemSchemeColor;
+
   void setDrawerUnselectedItemSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _drawerUnselectedItemSchemeColor) return;
@@ -4598,7 +4982,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _bottomSheetSchemeColor;
+
   SchemeColor? get bottomSheetSchemeColor => _bottomSheetSchemeColor;
+
   void setBottomSheetSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _bottomSheetSchemeColor) return;
     _bottomSheetSchemeColor = value;
@@ -4607,7 +4993,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomSheetElevation;
+
   double? get bottomSheetElevation => _bottomSheetElevation;
+
   void setBottomSheetElevation(double? value, [bool notify = true]) {
     if (value == _bottomSheetElevation) return;
     _bottomSheetElevation = value;
@@ -4616,7 +5004,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _bottomSheetModalSchemeColor;
+
   SchemeColor? get bottomSheetModalSchemeColor => _bottomSheetModalSchemeColor;
+
   void setBottomSheetModalSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _bottomSheetModalSchemeColor) return;
@@ -4626,7 +5016,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomSheetModalElevation;
+
   double? get bottomSheetModalElevation => _bottomSheetModalElevation;
+
   void setBottomSheetModalElevation(double? value, [bool notify = true]) {
     if (value == _bottomSheetModalElevation) return;
     _bottomSheetModalElevation = value;
@@ -4635,7 +5027,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomSheetBorderRadius;
+
   double? get bottomSheetBorderRadius => _bottomSheetBorderRadius;
+
   void setBottomSheetBorderRadius(double? value, [bool notify = true]) {
     if (value == _bottomSheetBorderRadius) return;
     _bottomSheetBorderRadius = value;
@@ -4647,7 +5041,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late FlexSystemNavBarStyle _systemNavBarStyle;
+
   FlexSystemNavBarStyle get systemNavBarStyle => _systemNavBarStyle;
+
   void setSystemNavBarStyle(FlexSystemNavBarStyle? value,
       [bool notify = true]) {
     if (value == null) return;
@@ -4658,7 +5054,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double _systemNavBarOpacity;
+
   double get systemNavBarOpacity => _systemNavBarOpacity;
+
   void setSystemNavBarOpacity(double? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _systemNavBarOpacity) return;
@@ -4668,7 +5066,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useSystemNavBarDivider;
+
   bool get useSystemNavBarDivider => _useSystemNavBarDivider;
+
   void setUseSystemNavBarDivider(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useSystemNavBarDivider) return;
@@ -4681,8 +5081,10 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _bottomNavigationBarBackgroundSchemeColor;
+
   SchemeColor? get bottomNavigationBarBackgroundSchemeColor =>
       _bottomNavigationBarBackgroundSchemeColor;
+
   void setBottomNavigationBarBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarBackgroundSchemeColor) return;
@@ -4693,7 +5095,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomNavigationBarOpacity;
+
   double? get bottomNavigationBarOpacity => _bottomNavigationBarOpacity;
+
   void setBottomNavigationBarOpacity(double? value, [bool notify = true]) {
     if (value == _bottomNavigationBarOpacity) return;
     _bottomNavigationBarOpacity = value;
@@ -4702,7 +5106,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomNavigationBarElevation;
+
   double? get bottomNavigationBarElevation => _bottomNavigationBarElevation;
+
   void setBottomNavigationBarElevation(double? value, [bool notify = true]) {
     if (value == _bottomNavigationBarElevation) return;
     _bottomNavigationBarElevation = value;
@@ -4711,8 +5117,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _bottomNavigationBarSelectedItemSchemeColor;
+
   SchemeColor? get bottomNavigationBarSelectedItemSchemeColor =>
       _bottomNavigationBarSelectedItemSchemeColor;
+
   void setBottomNavigationBarSelectedItemSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarSelectedItemSchemeColor) return;
@@ -4723,8 +5131,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _bottomNavigationBarUnselectedItemSchemeColor;
+
   SchemeColor? get bottomNavigationBarUnselectedItemSchemeColor =>
       _bottomNavigationBarUnselectedItemSchemeColor;
+
   void setBottomNavigationBarUnselectedItemSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarUnselectedItemSchemeColor) return;
@@ -4735,8 +5145,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool? _bottomNavigationBarMuteUnselectedItem;
+
   bool? get bottomNavigationBarMuteUnselectedItem =>
       _bottomNavigationBarMuteUnselectedItem;
+
   void setBottomNavigationBarMuteUnselectedItem(bool? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarMuteUnselectedItem) return;
@@ -4747,8 +5159,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _bottomNavigationBarShowSelectedLabels;
+
   bool get bottomNavigationBarShowSelectedLabels =>
       _bottomNavigationBarShowSelectedLabels;
+
   void setBottomNavigationBarShowSelectedLabels(bool? value,
       [bool notify = true]) {
     if (value == null) return;
@@ -4760,8 +5174,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _bottomNavigationBarShowUnselectedLabels;
+
   bool get bottomNavigationBarShowUnselectedLabels =>
       _bottomNavigationBarShowUnselectedLabels;
+
   void setBottomNavigationBarShowUnselectedLabels(bool? value,
       [bool notify = true]) {
     if (value == null) return;
@@ -4773,8 +5189,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomNavigationBarSelectedLabelSize;
+
   double? get bottomNavigationBarSelectedLabelSize =>
       _bottomNavigationBarSelectedLabelSize;
+
   void setBottomNavigationBarSelectedLabelSize(double? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarSelectedLabelSize) return;
@@ -4785,8 +5203,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomNavigationBarUnselectedLabelSize;
+
   double? get bottomNavigationBarUnselectedLabelSize =>
       _bottomNavigationBarUnselectedLabelSize;
+
   void setBottomNavigationBarUnselectedLabelSize(double? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarUnselectedLabelSize) return;
@@ -4797,8 +5217,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomNavigationBarSelectedIconSize;
+
   double? get bottomNavigationBarSelectedIconSize =>
       _bottomNavigationBarSelectedIconSize;
+
   void setBottomNavigationBarSelectedIconSize(double? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarSelectedIconSize) return;
@@ -4809,8 +5231,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _bottomNavigationBarUnselectedIconSize;
+
   double? get bottomNavigationBarUnselectedIconSize =>
       _bottomNavigationBarUnselectedIconSize;
+
   void setBottomNavigationBarUnselectedIconSize(double? value,
       [bool notify = true]) {
     if (value == _bottomNavigationBarUnselectedIconSize) return;
@@ -4824,7 +5248,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late double? _menuRadius;
+
   double? get menuRadius => _menuRadius;
+
   void setMenuRadius(double? value, [bool notify = true]) {
     if (value == _menuRadius) return;
     _menuRadius = value;
@@ -4833,7 +5259,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuElevation;
+
   double? get menuElevation => _menuElevation;
+
   void setMenuElevation(double? value, [bool notify = true]) {
     if (value == _menuElevation) return;
     _menuElevation = value;
@@ -4842,7 +5270,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuOpacity;
+
   double? get menuOpacity => _menuOpacity;
+
   void setMenuOpacity(double? value, [bool notify = true]) {
     if (value == _menuOpacity) return;
     _menuOpacity = value;
@@ -4851,7 +5281,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuPaddingStart;
+
   double? get menuPaddingStart => _menuPaddingStart;
+
   void setMenuPaddingStart(double? value, [bool notify = true]) {
     if (value == _menuPaddingStart) return;
     _menuPaddingStart = value;
@@ -4860,7 +5292,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuPaddingEnd;
+
   double? get menuPaddingEnd => _menuPaddingEnd;
+
   void setMenuPaddingEnd(double? value, [bool notify = true]) {
     if (value == _menuPaddingEnd) return;
     _menuPaddingEnd = value;
@@ -4869,7 +5303,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuPaddingTop;
+
   double? get menuPaddingTop => _menuPaddingTop;
+
   void setMenuPaddingTop(double? value, [bool notify = true]) {
     if (value == _menuPaddingTop) return;
     _menuPaddingTop = value;
@@ -4878,7 +5314,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuPaddingBottom;
+
   double? get menuPaddingBottom => _menuPaddingBottom;
+
   void setMenuPaddingBottom(double? value, [bool notify = true]) {
     if (value == _menuPaddingBottom) return;
     _menuPaddingBottom = value;
@@ -4887,7 +5325,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _menuSchemeColor;
+
   SchemeColor? get menuSchemeColor => _menuSchemeColor;
+
   void setMenuSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _menuSchemeColor) return;
     _menuSchemeColor = value;
@@ -4896,8 +5336,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _menuBarBackgroundSchemeColor;
+
   SchemeColor? get menuBarBackgroundSchemeColor =>
       _menuBarBackgroundSchemeColor;
+
   void setMenuBarBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _menuBarBackgroundSchemeColor) return;
@@ -4907,7 +5349,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuBarRadius;
+
   double? get menuBarRadius => _menuBarRadius;
+
   void setMenuBarRadius(double? value, [bool notify = true]) {
     if (value == _menuBarRadius) return;
     _menuBarRadius = value;
@@ -4916,7 +5360,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuBarElevation;
+
   double? get menuBarElevation => _menuBarElevation;
+
   void setMenuBarElevation(double? value, [bool notify = true]) {
     if (value == _menuBarElevation) return;
     _menuBarElevation = value;
@@ -4925,7 +5371,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _menuBarShadowColor;
+
   Color? get menuBarShadowColor => _menuBarShadowColor;
+
   void setMenuBarShadowColor(Color? value, [bool notify = true]) {
     if (value == _menuBarShadowColor) return;
     _menuBarShadowColor = value;
@@ -4934,8 +5382,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _menuItemBackgroundSchemeColor;
+
   SchemeColor? get menuItemBackgroundSchemeColor =>
       _menuItemBackgroundSchemeColor;
+
   void setMenuItemBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _menuItemBackgroundSchemeColor) return;
@@ -4946,8 +5396,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _menuItemForegroundSchemeColor;
+
   SchemeColor? get menuItemForegroundSchemeColor =>
       _menuItemForegroundSchemeColor;
+
   void setMenuItemForegroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _menuItemForegroundSchemeColor) return;
@@ -4958,8 +5410,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _menuIndicatorBackgroundSchemeColor;
+
   SchemeColor? get menuIndicatorBackgroundSchemeColor =>
       _menuIndicatorBackgroundSchemeColor;
+
   void setMenuIndicatorBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _menuIndicatorBackgroundSchemeColor) return;
@@ -4970,8 +5424,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _menuIndicatorForegroundSchemeColor;
+
   SchemeColor? get menuIndicatorForegroundSchemeColor =>
       _menuIndicatorForegroundSchemeColor;
+
   void setMenuIndicatorForegroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _menuIndicatorForegroundSchemeColor) return;
@@ -4982,7 +5438,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _menuIndicatorRadius;
+
   double? get menuIndicatorRadius => _menuIndicatorRadius;
+
   void setMenuIndicatorRadius(double? value, [bool notify = true]) {
     if (value == _menuIndicatorRadius) return;
     _menuIndicatorRadius = value;
@@ -4994,7 +5452,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _searchBackgroundSchemeColor;
+
   SchemeColor? get searchBackgroundSchemeColor => _searchBackgroundSchemeColor;
+
   void setSearchBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _searchBackgroundSchemeColor) return;
@@ -5004,7 +5464,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _searchElevation;
+
   double? get searchElevation => _searchElevation;
+
   void setSearchElevation(double? value, [bool notify = true]) {
     if (value == _searchElevation) return;
     _searchElevation = value;
@@ -5013,7 +5475,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _searchRadius;
+
   double? get searchRadius => _searchRadius;
+
   void setSearchRadius(double? value, [bool notify = true]) {
     if (value == _searchRadius) return;
     _searchRadius = value;
@@ -5022,7 +5486,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _searchViewHeaderHeight;
+
   double? get searchViewHeaderHeight => _searchViewHeaderHeight;
+
   void setSearchViewHeaderHeight(double? value, [bool notify = true]) {
     if (value == _searchViewHeaderHeight) return;
     _searchViewHeaderHeight = value;
@@ -5031,7 +5497,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _searchUseGlobalShape;
+
   bool get searchUseGlobalShape => _searchUseGlobalShape;
+
   void setSearchUseGlobalShape(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _searchUseGlobalShape) return;
@@ -5041,7 +5509,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _searchIsFullScreen;
+
   bool get searchIsFullScreen => _searchIsFullScreen;
+
   void setSearchIsFullScreen(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _searchIsFullScreen) return;
@@ -5054,8 +5524,10 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _navigationBarBackgroundSchemeColor;
+
   SchemeColor? get navigationBarBackgroundSchemeColor =>
       _navigationBarBackgroundSchemeColor;
+
   void setNavigationBarBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationBarBackgroundSchemeColor) return;
@@ -5066,7 +5538,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarOpacity;
+
   double? get navigationBarOpacity => _navigationBarOpacity;
+
   void setNavigationBarOpacity(double? value, [bool notify = true]) {
     if (value == _navigationBarOpacity) return;
     _navigationBarOpacity = value;
@@ -5075,7 +5549,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarElevation;
+
   double? get navigationBarElevation => _navigationBarElevation;
+
   void setNavigationBarElevation(double? value, [bool notify = true]) {
     if (value == _navigationBarElevation) return;
     _navigationBarElevation = value;
@@ -5084,7 +5560,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarHeight;
+
   double? get navigationBarHeight => _navigationBarHeight;
+
   void setNavigationBarHeight(double? value, [bool notify = true]) {
     if (value == _navigationBarHeight) return;
     _navigationBarHeight = value;
@@ -5093,8 +5571,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationBarSelectedIconSchemeColor;
+
   SchemeColor? get navigationBarSelectedIconSchemeColor =>
       _navigationBarSelectedIconSchemeColor;
+
   void setNavigationBarSelectedIconSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationBarSelectedIconSchemeColor) return;
@@ -5105,8 +5585,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationBarSelectedLabelSchemeColor;
+
   SchemeColor? get navigationBarSelectedLabelSchemeColor =>
       _navigationBarSelectedLabelSchemeColor;
+
   void setNavigationBarSelectedLabelSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationBarSelectedLabelSchemeColor) return;
@@ -5117,8 +5599,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationBarUnselectedItemSchemeColor;
+
   SchemeColor? get navigationBarUnselectedItemSchemeColor =>
       _navigationBarUnselectedItemSchemeColor;
+
   void setNavigationBarUnselectedItemSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationBarUnselectedItemSchemeColor) return;
@@ -5129,7 +5613,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _navigationBarMuteUnselectedItem;
+
   bool get navigationBarMuteUnselectedItem => _navigationBarMuteUnselectedItem;
+
   void setNavigationBarMuteUnselectedItem(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _navigationBarMuteUnselectedItem) return;
@@ -5140,8 +5626,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationBarIndicatorSchemeColor;
+
   SchemeColor? get navigationBarIndicatorSchemeColor =>
       _navigationBarIndicatorSchemeColor;
+
   void setNavigationBarIndicatorSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationBarIndicatorSchemeColor) return;
@@ -5152,7 +5640,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarIndicatorOpacity;
+
   double? get navigationBarIndicatorOpacity => _navigationBarIndicatorOpacity;
+
   void setNavigationBarIndicatorOpacity(double? value, [bool notify = true]) {
     if (value == _navigationBarIndicatorOpacity) return;
     _navigationBarIndicatorOpacity = value;
@@ -5162,8 +5652,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarIndicatorBorderRadius;
+
   double? get navigationBarIndicatorBorderRadius =>
       _navigationBarIndicatorBorderRadius;
+
   void setNavigationBarIndicatorBorderRadius(double? value,
       [bool notify = true]) {
     if (value == _navigationBarIndicatorBorderRadius) return;
@@ -5174,8 +5666,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late NavigationDestinationLabelBehavior _navigationBarLabelBehavior;
+
   NavigationDestinationLabelBehavior get navigationBarLabelBehavior =>
       _navigationBarLabelBehavior;
+
   void setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior value,
       [bool notify = true]) {
     if (value == _navigationBarLabelBehavior) return;
@@ -5185,8 +5679,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveRemoveNavigationBarTintLight;
+
   AdaptiveResponse? get adaptiveRemoveNavigationBarTintLight =>
       _adaptiveRemoveNavigationBarTintLight;
+
   void setAdaptiveRemoveNavigationBarTintLight(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveNavigationBarTintLight) return;
@@ -5197,8 +5693,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveRemoveNavigationBarTintDark;
+
   AdaptiveResponse? get adaptiveRemoveNavigationBarTintDark =>
       _adaptiveRemoveNavigationBarTintDark;
+
   void setAdaptiveRemoveNavigationBarTintDark(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveRemoveNavigationBarTintDark) return;
@@ -5209,7 +5707,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarSelectedLabelSize;
+
   double? get navigationBarSelectedLabelSize => _navigationBarSelectedLabelSize;
+
   void setNavigationBarSelectedLabelSize(double? value, [bool notify = true]) {
     if (value == _navigationBarSelectedLabelSize) return;
     _navigationBarSelectedLabelSize = value;
@@ -5219,8 +5719,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarUnselectedLabelSize;
+
   double? get navigationBarUnselectedLabelSize =>
       _navigationBarUnselectedLabelSize;
+
   void setNavigationBarUnselectedLabelSize(double? value,
       [bool notify = true]) {
     if (value == _navigationBarUnselectedLabelSize) return;
@@ -5231,7 +5733,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarSelectedIconSize;
+
   double? get navigationBarSelectedIconSize => _navigationBarSelectedIconSize;
+
   void setNavigationBarSelectedIconSize(double? value, [bool notify = true]) {
     if (value == _navigationBarSelectedIconSize) return;
     _navigationBarSelectedIconSize = value;
@@ -5241,8 +5745,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationBarUnselectedIconSize;
+
   double? get navigationBarUnselectedIconSize =>
       _navigationBarUnselectedIconSize;
+
   void setNavigationBarUnselectedIconSize(double? value, [bool notify = true]) {
     if (value == _navigationBarUnselectedIconSize) return;
     _navigationBarUnselectedIconSize = value;
@@ -5255,8 +5761,10 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _navigationRailBackgroundSchemeColor;
+
   SchemeColor? get navigationRailBackgroundSchemeColor =>
       _navigationRailBackgroundSchemeColor;
+
   void setNavigationRailBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationRailBackgroundSchemeColor) return;
@@ -5267,7 +5775,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailOpacity;
+
   double? get navigationRailOpacity => _navigationRailOpacity;
+
   void setNavigationRailOpacity(double? value, [bool notify = true]) {
     if (value == _navigationRailOpacity) return;
     _navigationRailOpacity = value;
@@ -5276,7 +5786,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailElevation;
+
   double? get navigationRailElevation => _navigationRailElevation;
+
   void setNavigationRailElevation(double? value, [bool notify = true]) {
     if (value == _navigationRailElevation) return;
     _navigationRailElevation = value;
@@ -5285,8 +5797,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationRailSelectedIconSchemeColor;
+
   SchemeColor? get navigationRailSelectedIconSchemeColor =>
       _navigationRailSelectedIconSchemeColor;
+
   void setNavigationRailSelectedIconSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationRailSelectedIconSchemeColor) return;
@@ -5297,8 +5811,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationRailSelectedLabelSchemeColor;
+
   SchemeColor? get navigationRailSelectedLabelSchemeColor =>
       _navigationRailSelectedLabelSchemeColor;
+
   void setNavigationRailSelectedLabelSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationRailSelectedLabelSchemeColor) return;
@@ -5309,8 +5825,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationRailUnselectedItemSchemeColor;
+
   SchemeColor? get navigationRailUnselectedItemSchemeColor =>
       _navigationRailUnselectedItemSchemeColor;
+
   void setNavigationRailUnselectedItemSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationRailUnselectedItemSchemeColor) return;
@@ -5321,8 +5839,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _navigationRailMuteUnselectedItem;
+
   bool get navigationRailMuteUnselectedItem =>
       _navigationRailMuteUnselectedItem;
+
   void setNavigationRailMuteUnselectedItem(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _navigationRailMuteUnselectedItem) return;
@@ -5333,8 +5853,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late NavigationRailLabelType _navigationRailLabelType;
+
   NavigationRailLabelType get navigationRailLabelType =>
       _navigationRailLabelType;
+
   void setNavigationRailLabelType(NavigationRailLabelType value,
       [bool notify = true]) {
     if (value == _navigationRailLabelType) return;
@@ -5344,7 +5866,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _navigationRailUseIndicator;
+
   bool get navigationRailUseIndicator => _navigationRailUseIndicator;
+
   void setNavigationRailUseIndicator(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _navigationRailUseIndicator) return;
@@ -5354,8 +5878,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _navigationRailIndicatorSchemeColor;
+
   SchemeColor? get navigationRailIndicatorSchemeColor =>
       _navigationRailIndicatorSchemeColor;
+
   void setNavigationRailIndicatorSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _navigationRailIndicatorSchemeColor) return;
@@ -5366,7 +5892,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailIndicatorOpacity;
+
   double? get navigationRailIndicatorOpacity => _navigationRailIndicatorOpacity;
+
   void setNavigationRailIndicatorOpacity(double? value, [bool notify = true]) {
     if (value == _navigationRailIndicatorOpacity) return;
     _navigationRailIndicatorOpacity = value;
@@ -5376,8 +5904,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailIndicatorBorderRadius;
+
   double? get navigationRailIndicatorBorderRadius =>
       _navigationRailIndicatorBorderRadius;
+
   void setNavigationRailIndicatorBorderRadius(double? value,
       [bool notify = true]) {
     if (value == _navigationRailIndicatorBorderRadius) return;
@@ -5388,8 +5918,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailSelectedLabelSize;
+
   double? get navigationRailSelectedLabelSize =>
       _navigationRailSelectedLabelSize;
+
   void setNavigationRailSelectedLabelSize(double? value, [bool notify = true]) {
     if (value == _navigationRailSelectedLabelSize) return;
     _navigationRailSelectedLabelSize = value;
@@ -5399,8 +5931,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailUnselectedLabelSize;
+
   double? get navigationRailUnselectedLabelSize =>
       _navigationRailUnselectedLabelSize;
+
   void setNavigationRailUnselectedLabelSize(double? value,
       [bool notify = true]) {
     if (value == _navigationRailUnselectedLabelSize) return;
@@ -5411,7 +5945,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailSelectedIconSize;
+
   double? get navigationRailSelectedIconSize => _navigationRailSelectedIconSize;
+
   void setNavigationRailSelectedIconSize(double? value, [bool notify = true]) {
     if (value == _navigationRailSelectedIconSize) return;
     _navigationRailSelectedIconSize = value;
@@ -5421,8 +5957,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailUnselectedIconSize;
+
   double? get navigationRailUnselectedIconSize =>
       _navigationRailUnselectedIconSize;
+
   void setNavigationRailUnselectedIconSize(double? value,
       [bool notify = true]) {
     if (value == _navigationRailUnselectedIconSize) return;
@@ -5433,7 +5971,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailGroupAlignment;
+
   double? get navigationRailGroupAlignment => _navigationRailGroupAlignment;
+
   void setNavigationRailGroupAlignment(double? value, [bool notify = true]) {
     if (value == _navigationRailGroupAlignment) return;
     _navigationRailGroupAlignment = value;
@@ -5442,7 +5982,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailMinWidth;
+
   double? get navigationRailMinWidth => _navigationRailMinWidth;
+
   void setNavigationRailMinWidth(double? value, [bool notify = true]) {
     if (value == _navigationRailMinWidth) return;
     _navigationRailMinWidth = value;
@@ -5451,7 +5993,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _navigationRailMinExtendedWidth;
+
   double? get navigationRailMinExtendedWidth => _navigationRailMinExtendedWidth;
+
   void setNavigationRailMinExtendedWidth(double? value, [bool notify = true]) {
     if (value == _navigationRailMinExtendedWidth) return;
     _navigationRailMinExtendedWidth = value;
@@ -5464,7 +6008,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _textButtonSchemeColor;
+
   SchemeColor? get textButtonSchemeColor => _textButtonSchemeColor;
+
   void setTextButtonSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _textButtonSchemeColor) return;
     _textButtonSchemeColor = value;
@@ -5473,7 +6019,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _textButtonBorderRadius;
+
   double? get textButtonBorderRadius => _textButtonBorderRadius;
+
   void setTextButtonBorderRadius(double? value, [bool notify = true]) {
     if (value == _textButtonBorderRadius) return;
     _textButtonBorderRadius = value;
@@ -5482,7 +6030,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _filledButtonSchemeColor;
+
   SchemeColor? get filledButtonSchemeColor => _filledButtonSchemeColor;
+
   void setFilledButtonSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _filledButtonSchemeColor) return;
     _filledButtonSchemeColor = value;
@@ -5491,7 +6041,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _filledButtonBorderRadius;
+
   double? get filledButtonBorderRadius => _filledButtonBorderRadius;
+
   void setFilledButtonBorderRadius(double? value, [bool notify = true]) {
     if (value == _filledButtonBorderRadius) return;
     _filledButtonBorderRadius = value;
@@ -5500,7 +6052,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _elevatedButtonSchemeColor;
+
   SchemeColor? get elevatedButtonSchemeColor => _elevatedButtonSchemeColor;
+
   void setElevatedButtonSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _elevatedButtonSchemeColor) return;
     _elevatedButtonSchemeColor = value;
@@ -5509,8 +6063,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _elevatedButtonSecondarySchemeColor;
+
   SchemeColor? get elevatedButtonSecondarySchemeColor =>
       _elevatedButtonSecondarySchemeColor;
+
   void setElevatedButtonSecondarySchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _elevatedButtonSecondarySchemeColor) return;
@@ -5521,7 +6077,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _elevatedButtonBorderRadius;
+
   double? get elevatedButtonBorderRadius => _elevatedButtonBorderRadius;
+
   void setElevatedButtonBorderRadius(double? value, [bool notify = true]) {
     if (value == _elevatedButtonBorderRadius) return;
     _elevatedButtonBorderRadius = value;
@@ -5530,7 +6088,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _outlinedButtonSchemeColor;
+
   SchemeColor? get outlinedButtonSchemeColor => _outlinedButtonSchemeColor;
+
   void setOutlinedButtonSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _outlinedButtonSchemeColor) return;
     _outlinedButtonSchemeColor = value;
@@ -5539,8 +6099,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _outlinedButtonOutlineSchemeColor;
+
   SchemeColor? get outlinedButtonOutlineSchemeColor =>
       _outlinedButtonOutlineSchemeColor;
+
   void setOutlinedButtonOutlineSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _outlinedButtonOutlineSchemeColor) return;
@@ -5551,7 +6113,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _outlinedButtonBorderRadius;
+
   double? get outlinedButtonBorderRadius => _outlinedButtonBorderRadius;
+
   void setOutlinedButtonBorderRadius(double? value, [bool notify = true]) {
     if (value == _outlinedButtonBorderRadius) return;
     _outlinedButtonBorderRadius = value;
@@ -5560,7 +6124,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _outlinedButtonBorderWidth;
+
   double? get outlinedButtonBorderWidth => _outlinedButtonBorderWidth;
+
   void setOutlinedButtonBorderWidth(double? value, [bool notify = true]) {
     if (value == _outlinedButtonBorderWidth) return;
     _outlinedButtonBorderWidth = value;
@@ -5569,8 +6135,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _outlinedButtonPressedBorderWidth;
+
   double? get outlinedButtonPressedBorderWidth =>
       _outlinedButtonPressedBorderWidth;
+
   void setOutlinedButtonPressedBorderWidth(double? value,
       [bool notify = true]) {
     if (value == _outlinedButtonPressedBorderWidth) return;
@@ -5584,7 +6152,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _toggleButtonsSchemeColor;
+
   SchemeColor? get toggleButtonsSchemeColor => _toggleButtonsSchemeColor;
+
   void setToggleButtonsSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _toggleButtonsSchemeColor) return;
     _toggleButtonsSchemeColor = value;
@@ -5593,8 +6163,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _toggleButtonsSelectedForegroundSchemeColor;
+
   SchemeColor? get toggleButtonsSelectedForegroundSchemeColor =>
       _toggleButtonsSelectedForegroundSchemeColor;
+
   void setToggleButtonsSelectedForegroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _toggleButtonsSelectedForegroundSchemeColor) return;
@@ -5605,8 +6177,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _toggleButtonsUnselectedSchemeColor;
+
   SchemeColor? get toggleButtonsUnselectedSchemeColor =>
       _toggleButtonsUnselectedSchemeColor;
+
   void setToggleButtonsUnselectedSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _toggleButtonsUnselectedSchemeColor) return;
@@ -5617,8 +6191,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _toggleButtonsBorderSchemeColor;
+
   SchemeColor? get toggleButtonsBorderSchemeColor =>
       _toggleButtonsBorderSchemeColor;
+
   void setToggleButtonsBorderSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _toggleButtonsBorderSchemeColor) return;
@@ -5629,7 +6205,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _toggleButtonsBorderRadius;
+
   double? get toggleButtonsBorderRadius => _toggleButtonsBorderRadius;
+
   void setToggleButtonsBorderRadius(double? value, [bool notify = true]) {
     if (value == _toggleButtonsBorderRadius) return;
     _toggleButtonsBorderRadius = value;
@@ -5638,7 +6216,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _toggleButtonsBorderWidth;
+
   double? get toggleButtonsBorderWidth => _toggleButtonsBorderWidth;
+
   void setToggleButtonsBorderWidth(double? value, [bool notify = true]) {
     if (value == _toggleButtonsBorderWidth) return;
     _toggleButtonsBorderWidth = value;
@@ -5650,7 +6230,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _segmentedButtonSchemeColor;
+
   SchemeColor? get segmentedButtonSchemeColor => _segmentedButtonSchemeColor;
+
   void setSegmentedButtonSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _segmentedButtonSchemeColor) return;
     _segmentedButtonSchemeColor = value;
@@ -5659,8 +6241,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _segmentedButtonSelectedForegroundSchemeColor;
+
   SchemeColor? get segmentedButtonSelectedForegroundSchemeColor =>
       _segmentedButtonSelectedForegroundSchemeColor;
+
   void setSegmentedButtonSelectedForegroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _segmentedButtonSelectedForegroundSchemeColor) return;
@@ -5671,8 +6255,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _segmentedButtonUnselectedSchemeColor;
+
   SchemeColor? get segmentedButtonUnselectedSchemeColor =>
       _segmentedButtonUnselectedSchemeColor;
+
   void setSegmentedButtonUnselectedSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _segmentedButtonUnselectedSchemeColor) return;
@@ -5683,8 +6269,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _segmentedButtonUnselectedForegroundSchemeColor;
+
   SchemeColor? get segmentedButtonUnselectedForegroundSchemeColor =>
       _segmentedButtonUnselectedForegroundSchemeColor;
+
   void setSegmentedButtonUnselectedForegroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _segmentedButtonUnselectedForegroundSchemeColor) return;
@@ -5695,8 +6283,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _segmentedButtonBorderSchemeColor;
+
   SchemeColor? get segmentedButtonBorderSchemeColor =>
       _segmentedButtonBorderSchemeColor;
+
   void setSegmentedButtonBorderSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _segmentedButtonBorderSchemeColor) return;
@@ -5707,7 +6297,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _segmentedButtonBorderRadius;
+
   double? get segmentedButtonBorderRadius => _segmentedButtonBorderRadius;
+
   void setSegmentedButtonBorderRadius(double? value, [bool notify = true]) {
     if (value == _segmentedButtonBorderRadius) return;
     _segmentedButtonBorderRadius = value;
@@ -5716,7 +6308,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _segmentedButtonBorderWidth;
+
   double? get segmentedButtonBorderWidth => _segmentedButtonBorderWidth;
+
   void setSegmentedButtonBorderWidth(double? value, [bool notify = true]) {
     if (value == _segmentedButtonBorderWidth) return;
     _segmentedButtonBorderWidth = value;
@@ -5728,7 +6322,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late bool _unselectedToggleIsColored;
+
   bool get unselectedToggleIsColored => _unselectedToggleIsColored;
+
   void setUnselectedToggleIsColored(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _unselectedToggleIsColored) return;
@@ -5738,7 +6334,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _switchSchemeColor;
+
   SchemeColor? get switchSchemeColor => _switchSchemeColor;
+
   void setSwitchSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _switchSchemeColor) return;
     _switchSchemeColor = value;
@@ -5747,7 +6345,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _switchThumbSchemeColor;
+
   SchemeColor? get switchThumbSchemeColor => _switchThumbSchemeColor;
+
   void setSwitchThumbSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _switchThumbSchemeColor) return;
     _switchThumbSchemeColor = value;
@@ -5756,7 +6356,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _switchThumbFixedSize;
+
   bool get switchThumbFixedSize => _switchThumbFixedSize;
+
   void setSwitchThumbFixedSize(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _switchThumbFixedSize) return;
@@ -5766,8 +6368,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _switchAdaptiveCupertinoLike;
+
   AdaptiveResponse? get switchAdaptiveCupertinoLike =>
       _switchAdaptiveCupertinoLike;
+
   void setSwitchAdaptiveCupertinoLike(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _switchAdaptiveCupertinoLike) return;
@@ -5777,7 +6381,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _checkboxSchemeColor;
+
   SchemeColor? get checkboxSchemeColor => _checkboxSchemeColor;
+
   void setCheckboxSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _checkboxSchemeColor) return;
     _checkboxSchemeColor = value;
@@ -5786,7 +6392,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _radioSchemeColor;
+
   SchemeColor? get radioSchemeColor => _radioSchemeColor;
+
   void setRadioSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _radioSchemeColor) return;
     _radioSchemeColor = value;
@@ -5798,7 +6406,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _sliderBaseSchemeColor;
+
   SchemeColor? get sliderBaseSchemeColor => _sliderBaseSchemeColor;
+
   void setSliderBaseSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _sliderBaseSchemeColor) return;
     _sliderBaseSchemeColor = value;
@@ -5807,7 +6417,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _sliderIndicatorSchemeColor;
+
   SchemeColor? get sliderIndicatorSchemeColor => _sliderIndicatorSchemeColor;
+
   void setSliderIndicatorSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _sliderIndicatorSchemeColor) return;
     _sliderIndicatorSchemeColor = value;
@@ -5816,7 +6428,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _sliderValueTinted;
+
   bool get sliderValueTinted => _sliderValueTinted;
+
   void setSliderValueTinted(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _sliderValueTinted) return;
@@ -5826,8 +6440,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late FlexSliderIndicatorType? _sliderValueIndicatorType;
+
   FlexSliderIndicatorType? get sliderValueIndicatorType =>
       _sliderValueIndicatorType;
+
   void setSliderValueIndicatorType(FlexSliderIndicatorType? value,
       [bool notify = true]) {
     if (value == _sliderValueIndicatorType) return;
@@ -5837,7 +6453,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late ShowValueIndicator? _sliderShowValueIndicator;
+
   ShowValueIndicator? get sliderShowValueIndicator => _sliderShowValueIndicator;
+
   void setSliderShowValueIndicator(ShowValueIndicator? value,
       [bool notify = true]) {
     if (value == _sliderShowValueIndicator) return;
@@ -5847,7 +6465,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _sliderTrackHeight;
+
   double? get sliderTrackHeight => _sliderTrackHeight;
+
   void setSliderTrackHeight(double? value, [bool notify = true]) {
     if (value == _sliderTrackHeight) return;
     _sliderTrackHeight = value;
@@ -5859,7 +6479,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late bool _floatingActionButtonUseShape;
+
   bool get floatingActionButtonUseShape => _floatingActionButtonUseShape;
+
   void setFloatingActionButtonUseShape(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _floatingActionButtonUseShape) return;
@@ -5869,8 +6491,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _floatingActionButtonAlwaysCircular;
+
   bool get floatingActionButtonAlwaysCircular =>
       _floatingActionButtonAlwaysCircular;
+
   void setFloatingActionButtonAlwaysCircular(bool? value,
       [bool notify = true]) {
     if (value == null) return;
@@ -5882,8 +6506,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _floatingActionButtonBorderRadius;
+
   double? get floatingActionButtonBorderRadius =>
       _floatingActionButtonBorderRadius;
+
   void setFloatingActionButtonBorderRadius(double? value,
       [bool notify = true]) {
     if (value == _floatingActionButtonBorderRadius) return;
@@ -5894,8 +6520,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _floatingActionButtonSchemeColor;
+
   SchemeColor? get floatingActionButtonSchemeColor =>
       _floatingActionButtonSchemeColor;
+
   void setFloatingActionButtonSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _floatingActionButtonSchemeColor) return;
@@ -5906,8 +6534,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _floatingActionButtonForegroundSchemeColor;
+
   SchemeColor? get floatingActionButtonForegroundSchemeColor =>
       _floatingActionButtonForegroundSchemeColor;
+
   void setFloatingActionButtonForegroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _floatingActionButtonForegroundSchemeColor) return;
@@ -5921,7 +6551,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _chipSchemeColor;
+
   SchemeColor? get chipSchemeColor => _chipSchemeColor;
+
   void setChipSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _chipSchemeColor) return;
     _chipSchemeColor = value;
@@ -5930,7 +6562,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _chipSelectedSchemeColor;
+
   SchemeColor? get chipSelectedSchemeColor => _chipSelectedSchemeColor;
+
   void setChipSelectedSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _chipSelectedSchemeColor) return;
     _chipSelectedSchemeColor = value;
@@ -5939,8 +6573,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _chipSecondarySelectedSchemeColor;
+
   SchemeColor? get chipSecondarySelectedSchemeColor =>
       _chipSecondarySelectedSchemeColor;
+
   void setChipSecondarySelectedSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _chipSecondarySelectedSchemeColor) return;
@@ -5951,7 +6587,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _chipDeleteIconSchemeColor;
+
   SchemeColor? get chipDeleteIconSchemeColor => _chipDeleteIconSchemeColor;
+
   void setChipDeleteIconSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _chipDeleteIconSchemeColor) return;
     _chipDeleteIconSchemeColor = value;
@@ -5960,7 +6598,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool? _chipBlendColors;
+
   bool? get chipBlendColors => _chipBlendColors;
+
   void setChipBlendColors(bool? value, [bool notify = true]) {
     if (value == _chipBlendColors) return;
     _chipBlendColors = value;
@@ -5969,7 +6609,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _chipBorderRadius;
+
   double? get chipBorderRadius => _chipBorderRadius;
+
   void setChipBorderRadius(double? value, [bool notify = true]) {
     if (value == _chipBorderRadius) return;
     _chipBorderRadius = value;
@@ -5978,7 +6620,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _chipFontSize;
+
   double? get chipFontSize => _chipFontSize;
+
   void setChipFontSize(double? value, [bool notify = true]) {
     if (value == _chipFontSize) return;
     _chipFontSize = value;
@@ -5987,7 +6631,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _chipIconSize;
+
   double? get chipIconSize => _chipIconSize;
+
   void setChipIconSize(double? value, [bool notify = true]) {
     if (value == _chipIconSize) return;
     _chipIconSize = value;
@@ -5996,7 +6642,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _chipPaddingStart;
+
   double? get chipPaddingStart => _chipPaddingStart;
+
   void setChipPaddingStart(double? value, [bool notify = true]) {
     if (value == _chipPaddingStart) return;
     _chipPaddingStart = value;
@@ -6005,7 +6653,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _chipPaddingEnd;
+
   double? get chipPaddingEnd => _chipPaddingEnd;
+
   void setChipPaddingEnd(double? value, [bool notify = true]) {
     if (value == _chipPaddingEnd) return;
     _chipPaddingEnd = value;
@@ -6014,7 +6664,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _chipPaddingTop;
+
   double? get chipPaddingTop => _chipPaddingTop;
+
   void setChipPaddingTop(double? value, [bool notify = true]) {
     if (value == _chipPaddingTop) return;
     _chipPaddingTop = value;
@@ -6023,7 +6675,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _chipPaddingBottom;
+
   double? get chipPaddingBottom => _chipPaddingBottom;
+
   void setChipPaddingBottom(double? value, [bool notify = true]) {
     if (value == _chipPaddingBottom) return;
     _chipPaddingBottom = value;
@@ -6035,7 +6689,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late double? _snackBarElevation;
+
   double? get snackBarElevation => _snackBarElevation;
+
   void setSnackBarElevation(double? value, [bool notify = true]) {
     if (value == _snackBarElevation) return;
     _snackBarElevation = value;
@@ -6044,7 +6700,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _snackBarBorderRadius;
+
   double? get snackBarBorderRadius => _snackBarBorderRadius;
+
   void setSnackBarBorderRadius(double? value, [bool notify = true]) {
     if (value == _snackBarBorderRadius) return;
     _snackBarBorderRadius = value;
@@ -6053,7 +6711,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _snackBarSchemeColor;
+
   SchemeColor? get snackBarSchemeColor => _snackBarSchemeColor;
+
   void setSnackBarSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _snackBarSchemeColor) return;
     _snackBarSchemeColor = value;
@@ -6062,7 +6722,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _snackBarActionSchemeColor;
+
   SchemeColor? get snackBarActionSchemeColor => _snackBarActionSchemeColor;
+
   void setSnackBarActionSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _snackBarActionSchemeColor) return;
     _snackBarActionSchemeColor = value;
@@ -6074,7 +6736,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _popupMenuSchemeColor;
+
   SchemeColor? get popupMenuSchemeColor => _popupMenuSchemeColor;
+
   void setPopupMenuSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _popupMenuSchemeColor) return;
     _popupMenuSchemeColor = value;
@@ -6083,7 +6747,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _popupMenuOpacity;
+
   double? get popupMenuOpacity => _popupMenuOpacity;
+
   void setPopupMenuOpacity(double? value, [bool notify = true]) {
     if (value == _popupMenuOpacity) return;
     _popupMenuOpacity = value;
@@ -6092,7 +6758,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _popupMenuBorderRadius;
+
   double? get popupMenuBorderRadius => _popupMenuBorderRadius;
+
   void setPopupMenuBorderRadius(double? value, [bool notify = true]) {
     if (value == _popupMenuBorderRadius) return;
     _popupMenuBorderRadius = value;
@@ -6101,7 +6769,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _popupMenuElevation;
+
   double? get popupMenuElevation => _popupMenuElevation;
+
   void setPopupMenuElevation(double? value, [bool notify = true]) {
     if (value == _popupMenuElevation) return;
     _popupMenuElevation = value;
@@ -6110,7 +6780,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _alignedDropdown;
+
   bool get alignedDropdown => _alignedDropdown;
+
   void setAlignedDropdown(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _alignedDropdown) return;
@@ -6120,7 +6792,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _cardBorderRadius;
+
   double? get cardBorderRadius => _cardBorderRadius;
+
   void setCardBorderRadius(double? value, [bool notify = true]) {
     if (value == _cardBorderRadius) return;
     _cardBorderRadius = value;
@@ -6132,8 +6806,10 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late SchemeColor? _dialogBackgroundLightSchemeColor;
+
   SchemeColor? get dialogBackgroundLightSchemeColor =>
       _dialogBackgroundLightSchemeColor;
+
   void setDialogBackgroundLightSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _dialogBackgroundLightSchemeColor) return;
@@ -6144,8 +6820,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _dialogBackgroundDarkSchemeColor;
+
   SchemeColor? get dialogBackgroundDarkSchemeColor =>
       _dialogBackgroundDarkSchemeColor;
+
   void setDialogBackgroundDarkSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _dialogBackgroundDarkSchemeColor) return;
@@ -6156,8 +6834,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _datePickerHeaderBackgroundSchemeColor;
+
   SchemeColor? get datePickerHeaderBackgroundSchemeColor =>
       _datePickerHeaderBackgroundSchemeColor;
+
   void setDatePickerHeaderBackgroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _datePickerHeaderBackgroundSchemeColor) return;
@@ -6168,8 +6848,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _datePickerHeaderForegroundSchemeColor;
+
   SchemeColor? get datePickerHeaderForegroundSchemeColor =>
       _datePickerHeaderForegroundSchemeColor;
+
   void setDatePickerHeaderForegroundSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _datePickerHeaderForegroundSchemeColor) return;
@@ -6180,8 +6862,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _datePickerDividerSchemeColor;
+
   SchemeColor? get datePickerDividerSchemeColor =>
       _datePickerDividerSchemeColor;
+
   void setDatePickerDividerSchemeColor(SchemeColor? value,
       [bool notify = true]) {
     if (value == _datePickerDividerSchemeColor) return;
@@ -6191,7 +6875,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late bool _useInputDecoratorThemeInDialogs;
+
   bool get useInputDecoratorThemeInDialogs => _useInputDecoratorThemeInDialogs;
+
   void setUseInputDecoratorThemeInDialogs(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _useInputDecoratorThemeInDialogs) return;
@@ -6202,8 +6888,10 @@ class ThemeController with ChangeNotifier {
   }
 
   late AdaptiveResponse? _adaptiveResponseDialogRadius;
+
   AdaptiveResponse? get adaptiveResponseDialogRadius =>
       _adaptiveResponseDialogRadius;
+
   void setAdaptiveResponseDialogRadius(AdaptiveResponse? value,
       [bool notify = true]) {
     if (value == _adaptiveResponseDialogRadius) return;
@@ -6213,7 +6901,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _dialogBorderRadius;
+
   double? get dialogBorderRadius => _dialogBorderRadius;
+
   void setDialogBorderRadius(double? value, [bool notify = true]) {
     if (value == _dialogBorderRadius) return;
     _dialogBorderRadius = value;
@@ -6222,7 +6912,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _dialogBorderRadiusAdaptive;
+
   double? get dialogBorderRadiusAdaptive => _dialogBorderRadiusAdaptive;
+
   void setDialogBorderRadiusAdaptive(double? value, [bool notify = true]) {
     if (value == _dialogBorderRadiusAdaptive) return;
     _dialogBorderRadiusAdaptive = value;
@@ -6231,7 +6923,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _timePickerDialogBorderRadius;
+
   double? get timePickerDialogBorderRadius => _timePickerDialogBorderRadius;
+
   void setTimePickerDialogBorderRadius(double? value, [bool notify = true]) {
     if (value == _timePickerDialogBorderRadius) return;
     _timePickerDialogBorderRadius = value;
@@ -6240,7 +6934,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _timePickerElementRadius;
+
   double? get timePickerElementRadius => _timePickerElementRadius;
+
   void setTimePickerElementRadius(double? value, [bool notify = true]) {
     if (value == _timePickerElementRadius) return;
     _timePickerElementRadius = value;
@@ -6249,7 +6945,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _datePickerDialogBorderRadius;
+
   double? get datePickerDialogBorderRadius => _datePickerDialogBorderRadius;
+
   void setDatePickerDialogBorderRadius(double? value, [bool notify = true]) {
     if (value == _datePickerDialogBorderRadius) return;
     _datePickerDialogBorderRadius = value;
@@ -6258,7 +6956,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _dialogElevation;
+
   double? get dialogElevation => _dialogElevation;
+
   void setDialogElevation(double? value, [bool notify = true]) {
     if (value == _dialogElevation) return;
     _dialogElevation = value;
@@ -6270,7 +6970,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late double? _tooltipRadius;
+
   double? get tooltipRadius => _tooltipRadius;
+
   void setTooltipRadius(double? value, [bool notify = true]) {
     if (value == _tooltipRadius) return;
     _tooltipRadius = value;
@@ -6279,7 +6981,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int? _tooltipWaitDuration;
+
   int? get tooltipWaitDuration => _tooltipWaitDuration;
+
   void setTooltipWaitDuration(int? value, [bool notify = true]) {
     if (value == _tooltipWaitDuration) return;
     _tooltipWaitDuration = value;
@@ -6288,7 +6992,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late int? _tooltipShowDuration;
+
   int? get tooltipShowDuration => _tooltipShowDuration;
+
   void setTooltipShowDuration(int? value, [bool notify = true]) {
     if (value == _tooltipShowDuration) return;
     _tooltipShowDuration = value;
@@ -6297,7 +7003,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late SchemeColor? _tooltipSchemeColor;
+
   SchemeColor? get tooltipSchemeColor => _tooltipSchemeColor;
+
   void setTooltipSchemeColor(SchemeColor? value, [bool notify = true]) {
     if (value == _tooltipSchemeColor) return;
     _tooltipSchemeColor = value;
@@ -6306,7 +7014,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late double? _tooltipOpacity;
+
   double? get tooltipOpacity => _tooltipOpacity;
+
   void setTooltipOpacity(double? value, [bool notify = true]) {
     if (value == _tooltipOpacity) return;
     _tooltipOpacity = value;
@@ -6318,7 +7028,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late Color? _surfaceTintLight;
+
   Color? get surfaceTintLight => _surfaceTintLight;
+
   void setSurfaceTintLight(Color? value, [bool notify = true]) {
     if (value == _surfaceTintLight) return;
     _surfaceTintLight = value;
@@ -6327,7 +7039,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _surfaceTintDark;
+
   Color? get surfaceTintDark => _surfaceTintDark;
+
   void setSurfaceTintDark(Color? value, [bool notify = true]) {
     if (value == _surfaceTintDark) return;
     _surfaceTintDark = value;
@@ -6339,7 +7053,9 @@ class ThemeController with ChangeNotifier {
   // ===========================================================================
 
   late bool _customUsesDarkColorsForSeed;
+
   bool get customUsesDarkColorsForSeed => _customUsesDarkColorsForSeed;
+
   void setCustomUsesDarkColorsForSeed(bool? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customUsesDarkColorsForSeed) return;
@@ -6358,7 +7074,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customPrimaryLight;
+
   Color get customPrimaryLight => _customPrimaryLight;
+
   void setCustomPrimaryLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customPrimaryLight) return;
@@ -6370,7 +7088,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _customPrimaryLightRef;
+
   Color? get customPrimaryLightRef => _customPrimaryLightRef;
+
   void setCustomPrimaryLightRef(Color? value, [bool notify = true]) {
     if (value == _customPrimaryLightRef) return;
     _customPrimaryLightRef = value;
@@ -6379,7 +7099,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customPrimaryContainerLight;
+
   Color get customPrimaryContainerLight => _customPrimaryContainerLight;
+
   void setCustomPrimaryContainerLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customPrimaryContainerLight) return;
@@ -6389,7 +7111,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customSecondaryLight;
+
   Color get customSecondaryLight => _customSecondaryLight;
+
   void setCustomSecondaryLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customSecondaryLight) return;
@@ -6401,7 +7125,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _customSecondaryLightRef;
+
   Color? get customSecondaryLightRef => _customSecondaryLightRef;
+
   void setCustomSecondaryLightRef(Color? value, [bool notify = true]) {
     if (value == _customSecondaryLightRef) return;
     _customSecondaryLightRef = value;
@@ -6410,7 +7136,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customSecondaryContainerLight;
+
   Color get customSecondaryContainerLight => _customSecondaryContainerLight;
+
   void setCustomSecondaryContainerLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customSecondaryContainerLight) return;
@@ -6421,7 +7149,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customTertiaryLight;
+
   Color get customTertiaryLight => _customTertiaryLight;
+
   void setCustomTertiaryLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customTertiaryLight) return;
@@ -6433,7 +7163,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _customTertiaryLightRef;
+
   Color? get customTertiaryLightRef => _customTertiaryLightRef;
+
   void setCustomTertiaryLightRef(Color? value, [bool notify = true]) {
     if (value == _customTertiaryLightRef) return;
     _customTertiaryLightRef = value;
@@ -6442,7 +7174,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customTertiaryContainerLight;
+
   Color get customTertiaryContainerLight => _customTertiaryContainerLight;
+
   void setCustomTertiaryContainerLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customTertiaryContainerLight) return;
@@ -6452,7 +7186,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customErrorLight;
+
   Color get customErrorLight => _customErrorLight;
+
   void setCustomErrorLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customErrorLight) return;
@@ -6462,7 +7198,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customErrorContainerLight;
+
   Color get customErrorContainerLight => _customErrorContainerLight;
+
   void setCustomErrorContainerLight(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customErrorContainerLight) return;
@@ -6472,7 +7210,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customPrimaryDark;
+
   Color get customPrimaryDark => _customPrimaryDark;
+
   void setCustomPrimaryDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customPrimaryDark) return;
@@ -6482,7 +7222,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _customPrimaryDarkRef;
+
   Color? get customPrimaryDarkRef => _customPrimaryDarkRef;
+
   void setCustomPrimaryDarkRef(Color? value, [bool notify = true]) {
     if (value == _customPrimaryDarkRef) return;
     _customPrimaryDarkRef = value;
@@ -6491,7 +7233,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customPrimaryContainerDark;
+
   Color get customPrimaryContainerDark => _customPrimaryContainerDark;
+
   void setCustomPrimaryContainerDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customPrimaryContainerDark) return;
@@ -6501,7 +7245,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customSecondaryDark;
+
   Color get customSecondaryDark => _customSecondaryDark;
+
   void setCustomSecondaryDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customSecondaryDark) return;
@@ -6511,7 +7257,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _customSecondaryDarkRef;
+
   Color? get customSecondaryDarkRef => _customSecondaryDarkRef;
+
   void setCustomSecondaryDarkRef(Color? value, [bool notify = true]) {
     if (value == _customSecondaryDarkRef) return;
     _customSecondaryDarkRef = value;
@@ -6520,7 +7268,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customSecondaryContainerDark;
+
   Color get customSecondaryContainerDark => _customSecondaryContainerDark;
+
   void setCustomSecondaryContainerDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customSecondaryContainerDark) return;
@@ -6530,7 +7280,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customTertiaryDark;
+
   Color get customTertiaryDark => _customTertiaryDark;
+
   void setCustomTertiaryDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customTertiaryDark) return;
@@ -6540,7 +7292,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color? _customTertiaryDarkRef;
+
   Color? get customTertiaryDarkRef => _customTertiaryDarkRef;
+
   void setCustomTertiaryDarkRef(Color? value, [bool notify = true]) {
     if (value == _customTertiaryDarkRef) return;
     _customTertiaryDarkRef = value;
@@ -6549,7 +7303,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customTertiaryContainerDark;
+
   Color get customTertiaryContainerDark => _customTertiaryContainerDark;
+
   void setCustomTertiaryContainerDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customTertiaryContainerDark) return;
@@ -6559,7 +7315,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customErrorDark;
+
   Color get customErrorDark => _customErrorDark;
+
   void setCustomErrorDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customErrorDark) return;
@@ -6569,7 +7327,9 @@ class ThemeController with ChangeNotifier {
   }
 
   late Color _customErrorContainerDark;
+
   Color get customErrorContainerDark => _customErrorContainerDark;
+
   void setCustomErrorContainerDark(Color? value, [bool notify = true]) {
     if (value == null) return;
     if (value == _customErrorContainerDark) return;
@@ -6675,7 +7435,9 @@ class ThemeController with ChangeNotifier {
   /// This is OK to be in ThemeController, if this is changed, the entire app
   /// theme must update too, and yes it is a part of ThemeData.
   late TargetPlatform? _platform;
+
   TargetPlatform? get platform => _platform;
+
   void setPlatform(TargetPlatform? value, [bool notify = true]) {
     if (value == _platform) return;
     _platform = value;
@@ -6687,7 +7449,9 @@ class ThemeController with ChangeNotifier {
   // theming properties and will use mock web input to them instead of
   // actual kIsWeb.
   late bool? _fakeIsWeb;
+
   bool? get fakeIsWeb => _fakeIsWeb;
+
   void setFakeIsWeb(bool? value, [bool notify = true]) {
     if (value == _fakeIsWeb) return;
     _fakeIsWeb = value;
@@ -6701,10 +7465,20 @@ class ThemeController with ChangeNotifier {
   // This is OK to be in ThemeController, these colors change as we change
   // custom colors for the theme, that needs to update the entire app anyway.
   List<Color> _recentColors = <Color>[];
+
   List<Color> get recentColors => _recentColors;
+
   // ignore: use_setters_to_change_properties
   void setRecentColors(final List<Color> colors) {
     _recentColors = colors;
+  }
+
+  // Import error log text.
+  String _importErrorLog = '';
+  String get importErrorLog => _importErrorLog;
+  void setImportErrorLog(String value, [bool notify = true]) {
+    _importErrorLog = value;
+    if (notify) notifyListeners();
   }
 
   /// Check if we can import/export the theme data
@@ -6720,5 +7494,57 @@ class ThemeController with ChangeNotifier {
   /// Import saved theme settings to local data
   Future<void> importSavedThemeData(Map<String, dynamic> data) {
     return _themeService.putAll(data);
+  }
+
+  static String _decompressJsonString(String compressedString) {
+    try {
+      final Uint8List compressedBytes = base64Decode(compressedString);
+      final List<int> decompressedBytes =
+          GZipDecoder().decodeBytes(compressedBytes);
+      return utf8.decode(decompressedBytes);
+    } catch (e) {
+      return 'error: $e';
+    }
+  }
+
+  /// Handle URL query params import
+  static Future<void> importFromQueryParams(BuildContext context,
+      Map<String, String> queryParams, ThemeController controller) async {
+    final String? encodedData = queryParams['config'];
+    final String? errorData = queryParams['error'];
+    // Check if we had errors in Settings config query params.
+    if (errorData != null && errorData.isNotEmpty) {
+      controller.setImportErrorLog(errorData);
+      return;
+    }
+    // Check if we have Settings config query params.
+    if (encodedData != null && encodedData.isNotEmpty) {
+      final String playgroundConfig = _decompressJsonString(encodedData);
+      // We have an error if the string starts with 'error'.
+      if (playgroundConfig.startsWith('error')) {
+        controller.setImportErrorLog(
+            'Error decoding compressed query parameter, $playgroundConfig');
+        if (context.mounted) {
+          final double? width =
+              MediaQuery.sizeOf(context).width > 800 ? 700 : null;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              width: width,
+              content: const Text('Unable to load settings from given url!'),
+              duration: const Duration(milliseconds: 2000),
+            ),
+          );
+        }
+        // No obvious error try to import settings, it can still
+        // if JSON keys are wrong, too long etc...
+        else {
+          await importPlaygroundSettings(
+            controller,
+            settings: playgroundConfig,
+          );
+        }
+      }
+    }
   }
 }
