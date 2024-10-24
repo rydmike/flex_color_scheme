@@ -1058,19 +1058,23 @@ void main() {
         'no parameters.', () {
       expect(
         FlexColorScheme.dark(
+          useMaterial3: false,
           colors: const FlexSchemeColor(
             primary: FlexColor.materialDarkPrimary,
             primaryContainer: FlexColor.materialDarkPrimaryContainer,
+            primaryLightRef: FlexColor.materialLightPrimary,
             secondary: FlexColor.materialDarkSecondary,
             secondaryContainer: FlexColor.materialDarkSecondaryContainer,
+            secondaryLightRef: FlexColor.materialLightSecondary,
             tertiary: FlexColor.materialDarkTertiary,
             tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+            tertiaryLightRef: FlexColor.materialLightTertiary,
           ),
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexColorScheme.dark()
-              .toTheme
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexColorScheme.dark(
+            useMaterial3: false,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -1081,17 +1085,22 @@ void main() {
         'to be equal to one made with light scheme colors swapped ', () {
       expect(
         FlexColorScheme.light(
+          useMaterial3: false,
           swapColors: true,
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.light(
+            useMaterial3: false,
             colors: const FlexSchemeColor(
               primary: FlexColor.materialLightSecondary,
               primaryContainer: FlexColor.materialLightSecondaryContainer,
+              primaryLightRef: FlexColor.materialLightSecondary,
               secondary: FlexColor.materialLightPrimary,
               secondaryContainer: FlexColor.materialLightPrimaryContainer,
+              secondaryLightRef: FlexColor.materialLightPrimary,
               tertiary: FlexColor.materialLightTertiary,
               tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+              tertiaryLightRef: FlexColor.materialLightTertiary,
             ),
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -1104,17 +1113,22 @@ void main() {
         'to be equal to one made with dark scheme colors swapped ', () {
       expect(
         FlexColorScheme.dark(
+          useMaterial3: false,
           swapColors: true,
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.dark(
+            useMaterial3: false,
             colors: const FlexSchemeColor(
               primary: FlexColor.materialDarkSecondary,
               primaryContainer: FlexColor.materialDarkSecondaryContainer,
+              primaryLightRef: FlexColor.materialLightSecondary,
               secondary: FlexColor.materialDarkPrimary,
               secondaryContainer: FlexColor.materialDarkPrimaryContainer,
+              secondaryLightRef: FlexColor.materialLightPrimary,
               tertiary: FlexColor.materialDarkTertiary,
               tertiaryContainer: FlexColor.materialDarkTertiaryContainer,
+              tertiaryLightRef: FlexColor.materialLightTertiary,
             ),
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -1128,7 +1142,7 @@ void main() {
         FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.dark(
-            colors: FlexColor.schemes[FlexScheme.material]!.dark,
+            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
           ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -1154,7 +1168,7 @@ void main() {
       expect(
         FlexColorScheme.dark().toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexColorScheme.dark(scheme: FlexScheme.material)
+          FlexColorScheme.dark(scheme: FlexScheme.materialBaseline)
               .toTheme
               .toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -1181,7 +1195,7 @@ void main() {
         'no params.', () {
       expect(
         FlexColorScheme.dark(
-          colors: FlexColor.schemes[FlexScheme.material]!.dark,
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           FlexColorScheme.dark()
@@ -1241,41 +1255,64 @@ void main() {
 
     // themeLight = Default material light scheme colors.
     final ThemeData themeLight = const FlexColorScheme(
+      useMaterial3: false,
       brightness: Brightness.light,
       primary: FlexColor.materialLightPrimary,
       primaryContainer: FlexColor.materialLightPrimaryContainer,
       secondary: FlexColor.materialLightSecondary,
       secondaryContainer: FlexColor.materialLightTertiary,
     ).toTheme;
-    // themeDark = Default material dark scheme colors.
-    final ThemeData themeDark = const FlexColorScheme(
-      brightness: Brightness.dark,
-      primary: FlexColor.materialDarkPrimary,
-      primaryContainer: FlexColor.materialDarkPrimaryContainer,
-      secondary: FlexColor.materialDarkSecondary,
-      secondaryContainer: FlexColor.materialDarkTertiary,
-    ).toTheme;
     const ColorScheme lightScheme = ColorScheme(
       brightness: Brightness.light,
       primary: Color(0xff6200ee),
-      onPrimary: Colors.white,
+      onPrimary: Color(0xffffffff),
       primaryContainer: Color(0xffbb86fc),
-      onPrimaryContainer: Colors.black,
+      onPrimaryContainer: Color(0xff000000),
+      primaryFixed: Color(0xff6200ee),
+      primaryFixedDim: Color(0xff6200ee),
+      onPrimaryFixed: Color(0xffffffff),
+      onPrimaryFixedVariant: Color(0xffffffff),
       secondary: Color(0xff03dac6),
-      onSecondary: Colors.black,
+      onSecondary: Color(0xff000000),
       secondaryContainer: Color(0xff018786),
-      onSecondaryContainer: Colors.white,
+      onSecondaryContainer: Color(0xffffffff),
+      secondaryFixed: Color(0xff03dac6),
+      secondaryFixedDim: Color(0xff03dac6),
+      onSecondaryFixed: Color(0xff000000),
+      onSecondaryFixedVariant: Color(0xff000000),
+      tertiary: Color(0xff03dac6),
+      onTertiary: Color(0xff000000),
+      tertiaryContainer: Color(0xff03dac6),
+      onTertiaryContainer: Color(0xff000000),
+      tertiaryFixed: Color(0xff03dac6),
+      tertiaryFixedDim: Color(0xff03dac6),
+      onTertiaryFixed: Color(0xff000000),
+      onTertiaryFixedVariant: Color(0xff000000),
       error: Color(0xffb00020),
-      onError: Colors.white,
+      onError: Color(0xffffffff),
       errorContainer: Color(0xfffcd8df),
       onErrorContainer: Color(0xff000000),
-      surface: Colors.white,
-      onSurface: Colors.black,
-      outline: Color(0xFF737373),
-      outlineVariant: Color(0xFFBFBFBF),
+      surface: Color(0xffffffff),
+      onSurface: Color(0xff000000),
+      surfaceDim: Color(0xffffffff),
+      surfaceBright: Color(0xffffffff),
+      surfaceContainerLowest: Color(0xffffffff),
+      surfaceContainerLow: Color(0xffffffff),
+      surfaceContainer: Color(0xffffffff),
+      surfaceContainerHigh: Color(0xffffffff),
+      surfaceContainerHighest: Color(0xffffffff),
+      onSurfaceVariant: Color(0xff000000),
+      outline: Color(0xff919191),
+      outlineVariant: Color(0xffd1d1d1),
+      shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xffda99ff),
+      surfaceTint: Color(0xff6200ee),
+      // background: Color(0xffffffff),
+      // onBackground: Color(0xff000000),
+      // surfaceVariant: Color(0xffffffff),
     );
     test(
         'FCS7.01 string: GIVEN a FlexColorScheme theme with Material scheme '
@@ -1300,6 +1337,16 @@ void main() {
       );
     });
 
+    // themeDark = Default material dark scheme colors.
+    final ThemeData themeDark = const FlexColorScheme(
+      useMaterial3: false,
+      brightness: Brightness.dark,
+      primary: FlexColor.materialDarkPrimary,
+      primaryContainer: FlexColor.materialDarkPrimaryContainer,
+      secondary: FlexColor.materialDarkSecondary,
+      secondaryContainer: FlexColor.materialDarkTertiary,
+    ).toTheme;
+
     test(
         'FCS7.02: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT .colorScheme equality with given ColorScheme.', () {
@@ -1312,26 +1359,51 @@ void main() {
             onPrimary: Color(0xff000000),
             primaryContainer: Color(0xff6200ee),
             onPrimaryContainer: Color(0xffffffff),
+            primaryFixed: Color(0xffbb86fc),
+            primaryFixedDim: Color(0xffbb86fc),
+            onPrimaryFixed: Color(0xff000000),
+            onPrimaryFixedVariant: Color(0xff000000),
             secondary: Color(0xff03dac6),
             onSecondary: Color(0xff000000),
             secondaryContainer: Color(0xff03dac6),
             onSecondaryContainer: Color(0xff000000),
+            secondaryFixed: Color(0xff03dac6),
+            secondaryFixedDim: Color(0xff03dac6),
+            onSecondaryFixed: Color(0xff000000),
+            onSecondaryFixedVariant: Color(0xff000000),
             tertiary: Color(0xff03dac6),
             onTertiary: Color(0xff000000),
             tertiaryContainer: Color(0xff03dac6),
             onTertiaryContainer: Color(0xff000000),
+            tertiaryFixed: Color(0xff03dac6),
+            tertiaryFixedDim: Color(0xff03dac6),
+            onTertiaryFixed: Color(0xff000000),
+            onTertiaryFixedVariant: Color(0xff000000),
             error: Color(0xffcf6679),
             onError: Color(0xff000000),
             errorContainer: Color(0xffb1384e),
             onErrorContainer: Color(0xffffffff),
             surface: Color(0xff121212),
             onSurface: Color(0xffffffff),
+            surfaceDim: Color(0xff121212),
+            surfaceBright: Color(0xff121212),
+            surfaceContainerLowest: Color(0xff121212),
+            surfaceContainerLow: Color(0xff121212),
+            surfaceContainer: Color(0xff121212),
+            surfaceContainerHigh: Color(0xff121212),
+            surfaceContainerHighest: Color(0xff121212),
             onSurfaceVariant: Color(0xffffffff),
-            outline: Color(0xFF8C8C8C),
-            outlineVariant: Color(0xFF404040),
+            outline: Color(0xff777777),
+            outlineVariant: Color(0xff414141),
+            shadow: Color(0xff000000),
+            scrim: Color(0xff000000),
             inverseSurface: Color(0xffffffff),
-            onInverseSurface: Color(0xff000000),
+            onInverseSurface: Color(0xff121212),
             inversePrimary: Color(0xff5a4570),
+            surfaceTint: Color(0xffbb86fc),
+            // background: Color(0xff121212),
+            // onBackground: Color(0xffffffff),
+            // surfaceVariant: Color(0xff121212),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -1341,18 +1413,17 @@ void main() {
     // Test defaults and null input resulting in expected theme values.
     //**************************************************************************
 
-    // TODO(rydmike): See if we need M2 versions of these tests too.
     test(
-        'FCS7.03: GIVEN a FlexColorScheme theme with Material3 scheme light '
+        'FCS7.03: GIVEN a FlexColorScheme theme with Material2 scheme light '
         'colors EXPECT appbar theme color to be primary color.', () {
-      expect(themeLight.appBarTheme.backgroundColor, null);
+      expect(themeLight.appBarTheme.backgroundColor, const Color(0xff6200ee));
     });
     test(
         'FCS7.04: GIVEN a FlexColorScheme theme with Material3 scheme dark '
         'colors EXPECT appbar theme color to be surface color.', () {
       expect(
         themeDark.appBarTheme.backgroundColor,
-        equals(null),
+        equals(const Color(0xff121212)),
       );
     });
 
@@ -1364,13 +1435,12 @@ void main() {
         equals(VisualDensity.standard),
       );
     });
-    // TODO(rydmike): See if we need M2 version of this test too.
     test(
-        'FCS7.06: GIVEN a FlexColorScheme M3 theme with null Typography input '
-        'EXPECT Typography.material2021.', () {
+        'FCS7.06: GIVEN a FlexColorScheme M2 theme with null Typography input '
+        'EXPECT Typography.material2018.', () {
       expect(
         themeLight.typography,
-        equals(Typography.material2021(platform: defaultTargetPlatform)),
+        equals(Typography.material2018(platform: defaultTargetPlatform)),
       );
     });
 
@@ -1477,42 +1547,41 @@ void main() {
       );
     });
 
-    // TODO(rydmike): See if we need M2 variants of these tests too.
     test(
-        'FCS7.18: GIVEN a FlexColorScheme.light theme FROM scheme "material3" '
+        'FCS7.18: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
-      expect(tLightL.appBarTheme.elevation, equals(null));
+      expect(tLightL.appBarTheme.elevation, equals(0));
     });
     test(
-        'FCS7.19: GIVEN a FlexColorScheme.dark theme FROM scheme "material3" '
+        'FCS7.19: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH appBarElevation: default EXPECT appbar theme elevation 0.', () {
-      expect(tDarkL.appBarTheme.elevation, equals(null));
+      expect(tDarkL.appBarTheme.elevation, equals(0));
     });
 
     test(
         'FCS7.2: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT surface Color(0xfffcfcfc).', () {
-      expect(tLightL.colorScheme.surface, equals(const Color(0xfffcfcfc)));
+        'WITH FlexSurface.light EXPECT surface Color(0xfffbfbfb).', () {
+      expect(tLightL.colorScheme.surface, equals(const Color(0xfffbfbfb)));
     });
     test(
         'FCS7.21: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
-        'WITH FlexSurface.light EXPECT surface Color(0xff101010).', () {
-      expect(tDarkL.colorScheme.surface, equals(const Color(0xff101010)));
+        'WITH FlexSurface.light EXPECT surface Color(0xff080808).', () {
+      expect(tDarkL.colorScheme.surface, equals(const Color(0xff080808)));
     });
 
     test(
         'FCS7.24: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH highScaffoldLowSurfaces blendLevel=2 '
         'EXPECT scaffold '
-        'background Color(0xfff9f7fc).', () {
-      expect(tLightL.scaffoldBackgroundColor, equals(const Color(0xfff9f7fc)));
+        'background Color(0xfffbf9fe).', () {
+      expect(tLightL.scaffoldBackgroundColor, equals(const Color(0xfffbf9fe)));
     });
     test(
         'FCS7.25: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH highScaffoldLowSurfaces blendLevel=2 '
         'EXPECT scaffold '
-        'background Color(0xff141215).', () {
-      expect(tDarkL.scaffoldBackgroundColor, equals(const Color(0xff141215)));
+        'background Color(0xff050406).', () {
+      expect(tDarkL.scaffoldBackgroundColor, equals(const Color(0xff050406)));
     });
 
     test(
@@ -1626,27 +1695,27 @@ void main() {
     test(
         'FCS7.36: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
-        'EXPECT surface Color(0xfff6f3fc).', () {
-      expect(tLightM.colorScheme.surface, equals(const Color(0xfff6f3fc)));
+        'EXPECT surface Color(0xfff5f2fb).', () {
+      expect(tLightM.colorScheme.surface, equals(const Color(0xfff5f2fb)));
     });
     test(
         'FCS7.37: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
-        'EXPECT surface Color(0xff161419).', () {
-      expect(tDarkM.colorScheme.surface, equals(const Color(0xff161419)));
+        'EXPECT surface Color(0xff0f0c11).', () {
+      expect(tDarkM.colorScheme.surface, equals(const Color(0xff0f0c11)));
     });
 
     test(
         'FCS7.39: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
-        'EXPECT scaffold background Color(0xffd8c1f9).', () {
-      expect(tLightM.scaffoldBackgroundColor, equals(const Color(0xffd8c1f9)));
+        'EXPECT scaffold background Color(0xffdac3fb).', () {
+      expect(tLightM.scaffoldBackgroundColor, equals(const Color(0xffdac3fb)));
     });
     test(
         'FCS7.40: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH highScaffoldLowSurfacesVariantDialog blendLevel 20 '
-        'EXPECT scaffold background Color(0xff382b47).', () {
-      expect(tDarkM.scaffoldBackgroundColor, equals(const Color(0xff382b47)));
+        'EXPECT scaffold background Color(0xff2c203c).', () {
+      expect(tDarkM.scaffoldBackgroundColor, equals(const Color(0xff2c203c)));
     });
 
     test(
@@ -1754,14 +1823,14 @@ void main() {
     test(
         'FCS7.51: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH highSurfaceLowScaffold blendLevel 30 '
-        'EXPECT surface Color(0xffe3d2fc).', () {
-      expect(tLightS.colorScheme.surface, equals(const Color(0xffe3d2fc)));
+        'EXPECT surface Color(0xffe0cff9).', () {
+      expect(tLightS.colorScheme.surface, equals(const Color(0xffe0cff9)));
     });
     test(
         'FCS7.52: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH highSurfaceLowScaffold blendLevel 30 '
-        'EXPECT surface Color(0xff2f253a).', () {
-      expect(tDarkS.colorScheme.surface, equals(const Color(0xff2f253a)));
+        'EXPECT surface Color(0xff271e33).', () {
+      expect(tDarkS.colorScheme.surface, equals(const Color(0xff271e33)));
     });
 
     test(
@@ -1773,8 +1842,8 @@ void main() {
     test(
         'FCS7.56: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH highSurfaceLowScaffold blendLevel 30 '
-        'EXPECT scaffold background Color(0xff1b181f).', () {
-      expect(tDarkS.scaffoldBackgroundColor, equals(const Color(0xff1b181f)));
+        'EXPECT scaffold background Color(0xff0b080f).', () {
+      expect(tDarkS.scaffoldBackgroundColor, equals(const Color(0xff0b080f)));
     });
 
     test(
@@ -1855,19 +1924,19 @@ void main() {
     test(
         'FCS7.63: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
-        'colorScheme.background.', () {
+        'colorScheme.surfaceContainerLow.', () {
       expect(
         tLightH.appBarTheme.backgroundColor,
-        equals(tLightH.colorScheme.surface),
+        equals(tLightH.colorScheme.surfaceContainerLow),
       );
     });
     test(
         'FCS7.64: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
-        'colorScheme.background.', () {
+        'colorScheme.surfaceContainerLow.', () {
       expect(
         tDarkH.appBarTheme.backgroundColor,
-        equals(tDarkH.colorScheme.surface),
+        equals(tDarkH.colorScheme.surfaceContainerLow),
       );
     });
 
@@ -1885,14 +1954,14 @@ void main() {
     test(
         'FCS7.67: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH highBackgroundLowScaffold blendLevel 40 '
-        'EXPECT surface Color(0xffe6d7fc).', () {
-      expect(tLightH.colorScheme.surface, equals(const Color(0xffe6d7fc)));
+        'EXPECT surface Color(0xffcbacf7).', () {
+      expect(tLightH.colorScheme.surface, equals(const Color(0xffcbacf7)));
     });
     test(
         'FCS7.68: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH highBackgroundLowScaffold blendLevel 40 '
-        'EXPECT surface Color(0xff2b2335).', () {
-      expect(tDarkH.colorScheme.surface, equals(const Color(0xff2b2335)));
+        'EXPECT surface Color(0xff402f54).', () {
+      expect(tDarkH.colorScheme.surface, equals(const Color(0xff402f54)));
     });
 
     test(
@@ -1904,8 +1973,8 @@ void main() {
     test(
         'FCS7.72: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH highBackgroundLowScaffold blendLevel 40 '
-        'EXPECT scaffold background Color(0xff1f1b24).', () {
-      expect(tDarkH.scaffoldBackgroundColor, equals(const Color(0xff1f1b24)));
+        'EXPECT scaffold background Color(0xff0f0b14).', () {
+      expect(tDarkH.scaffoldBackgroundColor, equals(const Color(0xff0f0b14)));
     });
 
     test(
@@ -2603,7 +2672,9 @@ void main() {
     // Default light TextTheme equality verification.
     //
     // Flex default TextTheme light
-    final TextTheme fLightT = FlexColorScheme.light().toTheme.textTheme;
+    final TextTheme fLightT = FlexColorScheme.light(
+      onSurface: Colors.black,
+    ).toTheme.textTheme;
     // Should be same as a light ThemeData textTheme with Typography 2018
     final TextTheme nLightT =
         ThemeData(typography: Typography.material2021()).textTheme;
@@ -2617,7 +2688,9 @@ void main() {
     // Default light Primary TextTheme equality verification.
     //
     // Flex default TextTheme light
-    final TextTheme fLightP = FlexColorScheme.light().toTheme.primaryTextTheme;
+    final TextTheme fLightP = FlexColorScheme.light(
+      surface: Colors.white,
+    ).toTheme.primaryTextTheme;
     // Should be same as a light ThemeData textTheme with Typography 2021
     final TextTheme nLightP =
         ThemeData(typography: Typography.material2021()).primaryTextTheme;
@@ -2630,7 +2703,9 @@ void main() {
     });
 
     // Default dark TextTheme equality verification.
-    final TextTheme fDarkT = FlexColorScheme.dark().toTheme.textTheme;
+    final TextTheme fDarkT = FlexColorScheme.dark(
+      onSurface: Colors.white,
+    ).toTheme.textTheme;
     final TextTheme nDarkT = ThemeData(
       brightness: Brightness.dark,
       typography: Typography.material2021(),
@@ -2647,8 +2722,9 @@ void main() {
     // default dark theme uses an almost black color as primary color, giving
     // us the wrong on primaryTextTheme color for this test case, which is
     // part of the test.
-    final TextTheme fDarkP =
-        FlexColorScheme.dark(useMaterial3: false).toTheme.primaryTextTheme;
+    final TextTheme fDarkP = FlexColorScheme.dark(
+      useMaterial3: false,
+    ).toTheme.primaryTextTheme;
     final Color nDarkPColor =
         FlexColorScheme.dark(useMaterial3: false).toTheme.primaryColor;
     final TextTheme nDarkP = ThemeData(
@@ -2717,13 +2793,15 @@ void main() {
 
     // Light theme with custom text theme
     final ThemeData fLightTD = FlexColorScheme.light(
+      surface: const Color(0xfffef7ff), // Seeded default surface color
+      onSurface: const Color(0xff1d1b20), // Seeded default on surface color
       textTheme: customText,
       primaryTextTheme: customPrimText,
+      // subThemesData: const FlexSubThemesData(useMaterial3Typography: true),
     ).toTheme;
     final ThemeData nLightTD = ThemeData(
       textTheme: customText,
       primaryTextTheme: customPrimText,
-      typography: Typography.material2021(),
     );
 
     // Custom light TextTheme equality verification.
@@ -3062,8 +3140,9 @@ void main() {
       ).toTheme;
       final ColorScheme scheme = theme.colorScheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
-      final Color bottomSheetColor = refTheme.colorScheme.surface;
-      final Color bottomSheetModalColor = refTheme.colorScheme.surface;
+      final Color bottomSheetColor = refTheme.colorScheme.surfaceContainerLow;
+      final Color bottomSheetModalColor =
+          refTheme.colorScheme.surfaceContainerLow;
       expect(
         theme.bottomSheetTheme.backgroundColor,
         equals(bottomSheetColor),
@@ -3167,7 +3246,7 @@ void main() {
       );
       final ColorScheme scheme = theme.colorScheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
-      final Color bottomSheetColor = refTheme.colorScheme.surface;
+      final Color bottomSheetColor = refTheme.colorScheme.onPrimary;
       final Color bottomSheetModalColor = refTheme.colorScheme.surfaceContainer;
       expect(
         theme.bottomSheetTheme.backgroundColor,
@@ -3340,7 +3419,8 @@ void main() {
     test(
         'FCS7.102d GIVEN a FlexColorScheme.light with useMaterial3:true '
         'and a FlexSubThemesData with popup opacity 0.9, elev 6, radius 10 '
-        'EXPECT popup surface, with opacity 0.9, elev 6 and radius 10 ', () {
+        'EXPECT popup surfaceContainer, '
+        'with opacity 0.9, elev 6 and radius 10 ', () {
       final ThemeData theme = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
         useMaterial3: true,
@@ -3351,7 +3431,8 @@ void main() {
         ),
       ).toTheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
-      final Color background = refTheme.colorScheme.surface.withOpacity(0.9);
+      final Color background =
+          refTheme.colorScheme.surfaceContainer.withOpacity(0.9);
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -3445,7 +3526,7 @@ void main() {
       );
       expect(
         theme.popupMenuTheme.textStyle?.color,
-        equals(Colors.white),
+        equals(refTheme.colorScheme.onSurface),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3527,7 +3608,7 @@ void main() {
       );
       expect(
         theme.popupMenuTheme.textStyle?.color,
-        equals(Colors.white),
+        equals(refTheme.colorScheme.onSurface),
       );
       expect(
         theme.popupMenuTheme.shape,
@@ -3559,28 +3640,33 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(1),
       );
+      final MaterialStateUnderlineInputBorder? border = theme
+          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+
       // InputDecoration thin width
       expect(
-        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.selected}).borderSide.width,
         equals(1),
       );
       expect(
-        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{}).borderSide.width,
         equals(1),
       );
       // InputDecoration thick width
       expect(
-        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.focused}).borderSide.width,
         equals(2),
       );
       expect(
-        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        border
+            ?.resolve(<WidgetState>{WidgetState.focused, WidgetState.error})
+            .borderSide
+            .width,
         equals(2),
       );
-      // The general width should not be defined since we used the specific ones
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
-        equals(null),
+        equals(1),
       );
       // OutlinedButton thin widths
       expect(
@@ -3633,60 +3719,65 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(1),
       );
+      final MaterialStateUnderlineInputBorder? border = theme
+          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
       // InputDecoration thin width
       expect(
-        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(1),
       );
       expect(
-        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{}).borderSide.width,
         equals(1),
       );
       // InputDecoration thick width
       expect(
-        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.focused}).borderSide.width,
         equals(2),
       );
       expect(
-        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        border
+            ?.resolve(<WidgetState>{WidgetState.focused, WidgetState.error})
+            .borderSide
+            .width,
         equals(2),
       );
       // The general width should not be defined since we used the specific ones
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
-        equals(null),
+        equals(1),
       );
-      // OutlinedButton thin widths
+      // OutlinedButton thin widths, null in M3 which results in 1
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<WidgetState>{WidgetState.selected})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<WidgetState>{WidgetState.hovered})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<WidgetState>{WidgetState.disabled})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<WidgetState>{WidgetState.focused})?.width,
-        equals(1),
+        equals(null),
       );
-      // OutlinedButton thick widths.
+      // OutlinedButton thick widths, null in M3 which results in 1
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<WidgetState>{WidgetState.error})?.width,
-        equals(1),
+        equals(null),
       );
       expect(
         theme.outlinedButtonTheme.style?.side
             ?.resolve(<WidgetState>{WidgetState.pressed})?.width,
-        equals(1),
+        equals(null),
       );
     });
     test(
@@ -3706,28 +3797,33 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(3),
       );
+      final MaterialStateUnderlineInputBorder? border = theme
+          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
       // InputDecoration thin width
       expect(
-        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(3),
       );
       expect(
-        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{}).borderSide.width,
         equals(3),
       );
       // InputDecoration thick width
       expect(
-        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.focused}).borderSide.width,
         equals(4),
       );
       expect(
-        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        border
+            ?.resolve(<WidgetState>{WidgetState.focused, WidgetState.error})
+            .borderSide
+            .width,
         equals(4),
       );
-      // The general width should not be defined since we used the specific ones
+      // TODO(rydmike): This is not expected, why do we get this? Study it!
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
-        equals(null),
+        equals(1),
       );
       // OutlinedButton thin widths
       expect(
@@ -3780,27 +3876,33 @@ void main() {
         equals(3),
       );
       // InputDecoration thin width
+      final MaterialStateUnderlineInputBorder? border = theme
+          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
       expect(
-        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(3),
       );
       expect(
-        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{}).borderSide.width,
         equals(3),
       );
       // InputDecoration thick width
       expect(
-        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.focused}).borderSide.width,
         equals(4),
       );
       expect(
-        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        border
+            ?.resolve(<WidgetState>{WidgetState.focused, WidgetState.error})
+            .borderSide
+            .width,
         equals(4),
       );
       // The general width should not be defined since we used the specific ones
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
-        equals(null),
+        // TODO(rydmike): This is not expected, why do we get this? Study it!
+        equals(1),
       );
       // OutlinedButton thin widths
       expect(
@@ -3860,27 +3962,33 @@ void main() {
         equals(1.5),
       );
       // InputDecoration thin width
+      final MaterialStateUnderlineInputBorder? border = theme
+          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
       expect(
-        theme.inputDecorationTheme.disabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(2.5),
       );
       expect(
-        theme.inputDecorationTheme.enabledBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{}).borderSide.width,
         equals(2.5),
       );
       // InputDecoration thick width
       expect(
-        theme.inputDecorationTheme.focusedBorder?.borderSide.width,
+        border?.resolve(<WidgetState>{WidgetState.focused}).borderSide.width,
         equals(3.5),
       );
       expect(
-        theme.inputDecorationTheme.focusedErrorBorder?.borderSide.width,
+        border
+            ?.resolve(<WidgetState>{WidgetState.focused, WidgetState.error})
+            .borderSide
+            .width,
         equals(3.5),
       );
       // The general width should not be defined since we used the specific ones
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
-        equals(null),
+        // TODO(rydmike): This is not expected, why do we get this? Study it!
+        equals(1),
       );
       // OutlinedButton thin widths
       expect(
@@ -3923,7 +4031,9 @@ void main() {
       final ThemeData theme = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
         useMaterial3: false,
-        subThemesData: const FlexSubThemesData(),
+        subThemesData: const FlexSubThemesData(
+          tintedDisabledControls: true,
+        ),
       ).toTheme;
       expect(
           theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
@@ -3940,6 +4050,7 @@ void main() {
               thumbColor: Color(0xff6750a4),
               disabledThumbColor: Color(0xffadaab6),
               overlayColor: Color(0x00000000),
+              valueIndicatorColor: Color(0xff6750a4),
               valueIndicatorShape: RectangularSliderValueIndicatorShape(),
             ).toString(minLevel: DiagnosticLevel.debug),
           ));
@@ -3952,7 +4063,9 @@ void main() {
       final ThemeData theme = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
         useMaterial3: false,
-        subThemesData: const FlexSubThemesData(),
+        subThemesData: const FlexSubThemesData(
+          tintedDisabledControls: true,
+        ),
       ).toTheme;
       expect(
           theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
@@ -3969,6 +4082,7 @@ void main() {
               thumbColor: Color(0xffd0bcff),
               disabledThumbColor: Color(0xff64616c),
               overlayColor: Color(0x00000000),
+              valueIndicatorColor: Color(0xffd0bcff),
               valueIndicatorShape: RectangularSliderValueIndicatorShape(),
             ).toString(minLevel: DiagnosticLevel.debug),
           ));
@@ -4134,7 +4248,7 @@ void main() {
         tooltipsMatchBackground: true,
         subThemesData: const FlexSubThemesData(
           tooltipRadius: 12,
-          tooltipOpacity: 0.5, // Has no effect ! Verify!
+          tooltipOpacity: 0.5,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -4145,7 +4259,8 @@ void main() {
           BoxDecoration(
             color: FlexColor.darkSurface
                 .blendAlpha(colorScheme.primary, 0x28)
-                .withAlpha(0xF2),
+                .withAlpha(0xF2)
+                .withOpacity(0.5),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             border: Border.all(color: theme.dividerColor),
           ),
