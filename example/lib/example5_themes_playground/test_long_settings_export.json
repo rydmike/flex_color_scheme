@@ -1,12 +1,10 @@
 {
-  "playground_data": "Themes Playground TEST file exported 22.10.2024 21:41:42",
+  "playground_data": "Themes Playground data exported 26.10.2024 18:56:34",
   "playground_version": "8.0.0-dev.2",
   "adaptiveAppBarScrollUnderOffDark": {
     "dart_type": "enum_adaptive_response",
     "value": "all"
   },
-  "badKey": "bad",
-  "badKeyToo": "bad key too",
   "adaptiveAppBarScrollUnderOffLight": {
     "dart_type": "enum_adaptive_response",
     "value": "excludeWebAndroidFuchsia"
@@ -56,8 +54,8 @@
     "value": "primary"
   },
   "appBarCenterTitle": false,
-  "appBarElevationDark": 0.0,
-  "appBarElevationLight": 0.0,
+  "appBarElevationDark": 0,
+  "appBarElevationLight": 0,
   "appBarForegroundSchemeColorDark": {
     "dart_type": "enum_scheme_color",
     "value": "primaryFixedDim"
@@ -66,8 +64,8 @@
     "dart_type": "enum_scheme_color",
     "value": "secondaryContainer"
   },
-  "appBarScrolledUnderElevationDark": 3.0,
-  "appBarScrolledUnderElevationLight": 1.0,
+  "appBarScrolledUnderElevationDark": 3,
+  "appBarScrolledUnderElevationLight": 1,
   "appBarStyleDark": {
     "dart_type": "enum_flex_appbar_style",
     "value": "background"
@@ -82,8 +80,8 @@
   "blendOnLevelDark": 6,
   "blendOnLevelLight": 6,
   "bottomAppBarElevationDark": 3.0000000000000004,
-  "bottomAppBarElevationLight": 5.0,
-  "bottomAppBarHeight": 71.0,
+  "bottomAppBarElevationLight": 5,
+  "bottomAppBarHeight": 71,
   "bottomAppBarSchemeColorLight": {
     "dart_type": "enum_scheme_color",
     "value": "onPrimary"
@@ -93,17 +91,89 @@
     "value": "primaryFixed"
   },
   "bottomNavigationBarMuteUnselectedItem": false,
-  "bottomNavigationBarSelectedIconSize": 27.0,
-  "bottomNavigationBarSelectedLabelSize": 12.0,
-  "bottomNavigationBarUnselectedIconSize": 19.0,
+  "bottomNavigationBarSelectedIconSize": 27,
+  "bottomNavigationBarSelectedLabelSize": 12,
+  "bottomNavigationBarUnselectedIconSize": 19,
   "bottomNavigationBarUnselectedLabelSize": 9.799999999999999,
-  "bottomSheetBorderRadius": 14.0,
-  "bottomSheetElevation": 4.0,
-  "bottomSheetModalElevation": 4.0,
-  "cardBorderRadius": 12.0,
+  "bottomSheetBorderRadius": 14,
+  "bottomSheetElevation": 4,
+  "bottomSheetModalElevation": 4,
+  "cardBorderRadius": 12,
   "chipSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primaryContainer"
+  },
+  "customPrimaryContainerDark": {
+    "dart_type": "color",
+    "value": "FF205107"
+  },
+  "customPrimaryContainerLight": {
+    "dart_type": "color",
+    "value": "FFB7F397"
+  },
+  "customPrimaryDark": {
+    "dart_type": "color",
+    "value": "FF9CD67D"
+  },
+  "customPrimaryDarkRef": {
+    "dart_type": "color",
+    "value": "FF386A20"
+  },
+  "customPrimaryLight": {
+    "dart_type": "color",
+    "value": "FF386A20"
+  },
+  "customPrimaryLightRef": {
+    "dart_type": "color",
+    "value": "FF386A20"
+  },
+  "customSecondaryContainerDark": {
+    "dart_type": "color",
+    "value": "FF3E4A36"
+  },
+  "customSecondaryContainerLight": {
+    "dart_type": "color",
+    "value": "FFD9E7CB"
+  },
+  "customSecondaryDark": {
+    "dart_type": "color",
+    "value": "FFBDCBB0"
+  },
+  "customSecondaryDarkRef": {
+    "dart_type": "color",
+    "value": "FF55624C"
+  },
+  "customSecondaryLight": {
+    "dart_type": "color",
+    "value": "FF55624C"
+  },
+  "customSecondaryLightRef": {
+    "dart_type": "color",
+    "value": "FF55624C"
+  },
+  "customTertiaryContainerDark": {
+    "dart_type": "color",
+    "value": "FF1E4E4F"
+  },
+  "customTertiaryContainerLight": {
+    "dart_type": "color",
+    "value": "FFA8EFF0"
+  },
+  "customTertiaryDark": {
+    "dart_type": "color",
+    "value": "FFA0CFD0"
+  },
+  "customTertiaryDarkRef": {
+    "dart_type": "color",
+    "value": "FF19686A"
+  },
+  "customTertiaryLight": {
+    "dart_type": "color",
+    "value": "FF19686A"
+  },
+  "customTertiaryLightRef": {
+    "dart_type": "color",
+    "value": "FF19686A"
   },
   "datePickerDialogBorderRadius": 6.000000000000001,
   "datePickerDividerSchemeColor": {
@@ -114,19 +184,19 @@
     "dart_type": "enum_scheme_color",
     "value": "primaryFixed"
   },
-  "defaultRadius": 8.0,
-  "defaultRadiusAdaptive": 12.0,
-  "dialogBorderRadius": 18.0,
-  "dialogBorderRadiusAdaptive": 12.0,
-  "dialogElevation": 8.0,
-  "drawerBorderRadius": 18.0,
-  "drawerElevation": 10.0,
+  "defaultRadius": 8,
+  "defaultRadiusAdaptive": 12,
+  "dialogBorderRadius": 18,
+  "dialogBorderRadiusAdaptive": 12,
+  "dialogElevation": 8,
+  "drawerBorderRadius": 18,
+  "drawerElevation": 10,
   "drawerIndicatorOpacity": 0.77,
   "drawerIndicatorSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "drawerWidth": 316.0,
+  "drawerWidth": 316,
   "elevatedButtonSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primaryFixed"
@@ -150,7 +220,7 @@
   },
   "inputDecoratorBackgroundAlphaDark": 45,
   "inputDecoratorBackgroundAlphaLight": 14,
-  "inputDecoratorBorderRadius": 10.0,
+  "inputDecoratorBorderRadius": 10,
   "inputDecoratorBorderSchemeColorDark": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
@@ -159,12 +229,12 @@
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "inputDecoratorFocusedBorderWidth": 1.0,
+  "inputDecoratorFocusedBorderWidth": 1,
   "inputDecoratorIsDense": true,
-  "inputDecoratorPaddingBottom": 12.0,
-  "inputDecoratorPaddingEnd": 9.0,
-  "inputDecoratorPaddingStart": 7.0,
-  "inputDecoratorPaddingTop": 8.0,
+  "inputDecoratorPaddingBottom": 12,
+  "inputDecoratorPaddingEnd": 9,
+  "inputDecoratorPaddingStart": 7,
+  "inputDecoratorPaddingTop": 8,
   "inputDecoratorPrefixIconDarkSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primaryFixed"
@@ -184,30 +254,30 @@
   "inputDecoratorUnfocusedHasBorder": false,
   "interactionEffects": true,
   "keepPrimary": true,
-  "listTileHorizontalTitleGap": 5.0,
+  "listTileHorizontalTitleGap": 5,
   "listTileIconSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "onSurface"
   },
   "listTileMinVerticalPadding": 6.000000000000001,
-  "listTilePaddingBottom": 3.0,
-  "listTilePaddingEnd": 5.0,
-  "listTilePaddingStart": 8.0,
-  "listTilePaddingTop": 7.0,
+  "listTilePaddingBottom": 3,
+  "listTilePaddingEnd": 5,
+  "listTilePaddingStart": 8,
+  "listTilePaddingTop": 7,
   "listTileTextSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "menuBarElevation": 1.0,
-  "menuBarRadius": 0.0,
+  "menuBarElevation": 1,
+  "menuBarRadius": 0,
   "menuBarShadowColor": {
     "dart_type": "color",
     "value": "00000000"
   },
-  "menuElevation": 3.0,
-  "menuRadius": 6.0,
-  "navigationBarElevation": 1.0,
-  "navigationBarHeight": 70.0,
+  "menuElevation": 3,
+  "menuRadius": 6,
+  "navigationBarElevation": 1,
+  "navigationBarHeight": 70,
   "navigationBarIndicatorOpacity": 0.74,
   "navigationBarIndicatorSchemeColor": {
     "dart_type": "enum_scheme_color",
@@ -226,46 +296,46 @@
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "navigationBarUnselectedIconSize": 22.0,
+  "navigationBarUnselectedIconSize": 22,
   "navigationBarUnselectedLabelSize": 10.7,
   "navigationRailBackgroundSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "surface"
   },
-  "navigationRailElevation": 0.0,
+  "navigationRailElevation": 0,
   "navigationRailGroupAlignment": -0.7000000000000001,
-  "navigationRailIndicatorOpacity": 1.0,
+  "navigationRailIndicatorOpacity": 1,
   "navigationRailIndicatorSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "navigationRailMinExtendedWidth": 201.0,
-  "navigationRailMinWidth": 86.0,
+  "navigationRailMinExtendedWidth": 201,
+  "navigationRailMinWidth": 86,
   "navigationRailSelectedIconSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "onPrimary"
   },
-  "navigationRailSelectedIconSize": 21.0,
+  "navigationRailSelectedIconSize": 21,
   "navigationRailSelectedLabelSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "navigationRailSelectedLabelSize": 12.0,
-  "navigationRailUnselectedIconSize": 20.0,
+  "navigationRailSelectedLabelSize": 12,
+  "navigationRailUnselectedIconSize": 20,
   "navigationRailUnselectedLabelSize": 9.799999999999999,
   "onMainsUseBWDark": true,
   "onMainsUseBWLight": true,
   "onSurfacesUseBWDark": true,
   "onSurfacesUseBWLight": true,
-  "outlinedButtonBorderRadius": 4.0,
+  "outlinedButtonBorderRadius": 4,
   "outlinedButtonBorderWidth": 0.5,
   "outlinedButtonOutlineSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
   "outlinedButtonPressedBorderWidth": 1.5,
-  "popupMenuBorderRadius": 8.0,
-  "popupMenuElevation": 6.0,
+  "popupMenuBorderRadius": 8,
+  "popupMenuElevation": 6,
   "popupMenuOpacity": 0.89,
   "scaffoldBackgroundDarkBaseColor": {
     "dart_type": "enum_flex_scaffold_base_color",
@@ -281,12 +351,12 @@
   },
   "scaffoldDarkIsTrueBlack": true,
   "scaffoldLightIsWhite": true,
-  "schemeIndex": 53,
+  "schemeIndex": 58,
   "searchElevation": 6.000000000000001,
   "searchRadius": 6.000000000000001,
   "searchUseGlobalShape": true,
-  "searchViewHeaderHeight": 57.0,
-  "segmentedButtonBorderRadius": 10.0,
+  "searchViewHeaderHeight": 57,
+  "segmentedButtonBorderRadius": 10,
   "segmentedButtonBorderSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
@@ -306,8 +376,9 @@
   },
   "showSchemeInputColors": true,
   "simulatorAppIndex": 1,
+  "simulatorComponentsIndex": 4,
   "simulatorDeviceIndex": 0,
-  "simulatorViewZoom": 868.0,
+  "simulatorViewZoom": 1084,
   "sliderBaseSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "secondary"
@@ -316,14 +387,14 @@
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "sliderTrackHeight": 7.0,
+  "sliderTrackHeight": 7,
   "sliderValueTinted": true,
   "snackBarBackgroundSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
   },
-  "snackBarBorderRadius": 4.0,
-  "snackBarElevation": 2.0,
+  "snackBarBorderRadius": 4,
+  "snackBarElevation": 2,
   "snackBarSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "secondary"
@@ -373,10 +444,10 @@
     "value": "light"
   },
   "thinBorderWidth": 0.5,
-  "timePickerDialogBorderRadius": 3.0,
-  "timePickerElementRadius": 10.0,
+  "timePickerDialogBorderRadius": 3,
+  "timePickerElementRadius": 10,
   "tintedDisabledControls": true,
-  "toggleButtonsBorderRadius": 5.0,
+  "toggleButtonsBorderRadius": 5,
   "toggleButtonsBorderSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "primary"
@@ -395,7 +466,7 @@
     "value": "onSecondaryContainer"
   },
   "tooltipOpacity": 0.95,
-  "tooltipRadius": 4.0,
+  "tooltipRadius": 4,
   "tooltipShowDuration": 100,
   "tooltipWaitDuration": 200,
   "tooltipsMatchBackground": true,
