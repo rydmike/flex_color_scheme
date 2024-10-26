@@ -42,7 +42,7 @@ sealed class App {
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
   // static const String packageVersionMin = '$versionMajor.$versionMinor';
-  static const String flutterVersion = 'stable 3.24.3 (canvaskit)';
+  static const String flutterVersion = 'stable 3.24.4 (canvaskit)';
   static const String copyright = '© 2020 - 2024';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
