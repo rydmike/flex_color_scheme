@@ -137,31 +137,24 @@ class _PlaygroundAppState extends State<PlaygroundApp> {
             // want it on them too and to unfocus other widgets with focus
             // on desktop too.
             onTap: () => FocusScope.of(context).unfocus(),
-            // Pass the controller to the HomePage where we use it to change
-            // the theme settings that will cause themes above to change and
-            // rebuild the entire look of the app based on modified theme.
-            //
-            // There are more than 360 properties in the controller that can
-            // be used to control the two light and dark mode themes.
-            // Every time one of them is modified, the themed app is rebuilt
-            // with the new ThemeData applied.
-            // The code that one need to use the same theme is also updated
-            // interactively for each change when the code gen panel is
-            // in view.
+            // The QueryParamsSettings widget listens to query parameters
+            // on the browser URL, grabs them, decodes them and imports
+            // the settings to the theme controller.
             child: QueryParamsSettings(
-                builder: (BuildContext context, Map<String, String> params) {
-              debugPrint('**** QueryParamsSettings builder: $params');
-              if (params.isNotEmpty && params != queryParameters) {
-                debugPrint('**** QueryParamsSettings params changed! Import!!');
-                queryParameters = params;
-                unawaited(ThemeController.importFromQueryParams(
-                  context,
-                  queryParameters,
-                  widget.controller,
-                ));
-              }
-              return HomePage(controller: widget.controller);
-            }),
+              controller: widget.controller,
+              // Pass the the controller to the HomePage where we use it to
+              // change theme settings that causes themes above to change and
+              // rebuild the entire look of the app based on modified theme.
+              //
+              // There are more than 360 properties in the controller that can
+              // be used to control the two light and dark mode themes.
+              // Every time one of them is modified, the themed app is rebuilt
+              // with the new ThemeData applied.
+              // The API code that one need to use the same theme with
+              // FlexColorScheme is also updated interactively for each
+              // change when the code gen panel is in view.
+              child: HomePage(controller: widget.controller),
+            ),
           ),
         );
       },

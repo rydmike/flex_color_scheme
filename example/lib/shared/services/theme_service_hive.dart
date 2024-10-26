@@ -146,14 +146,6 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
-  // TODO(rydmike): Remove commented unfiltered version of getAll.
-  // @override
-  // Map<String, dynamic> getAll() {
-  //   // Do not add a MapEntry is the dynamic value is null.
-  //   return _hiveBox.toMap().map((dynamic key, dynamic value) =>
-  //       MapEntry<String, dynamic>(key.toString(), value));
-  // }
-
   @override
   Map<String, dynamic> getAll() {
     // Filter out entries where the value is null.
