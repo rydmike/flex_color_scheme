@@ -12,7 +12,7 @@ Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BRE
 
 Most APIs are still there and work as before, but a few produce results that differ slightly from past ones, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in FCS V8, but previous values are still available. You will need to enable them explicitly to get the same results as before. The purpose of these default value changes is to make FCS have less opinionated defaults, and be more aligned with Flutter's Material-3 design defaults. The **Themes Playground** app will still have some of its own opinionated defaults, done via default settings values the app uses in its default configuration, but the package Material-3 default starting points, are now much more aligned with Flutter's Material-3 defaults.
 
-In the **Themes Playground** you can now export and import settings to a JSON file, and import them back into the Playground later. This is a great way to save your theme settings for later re-use. The exported JSON contains all the internal controller settings values you have configured in the Playground app, that are needed to restore a given configuration state. This feature was a nice contribution by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257), thank you! 
+In the **Themes Playground** you can now export and import settings to a JSON file, and import them back into the Playground later. This is a great way to save your theme settings for later re-use. The exported JSON contains all the internal controller settings values you have configured in the Playground app, that are needed to restore a given configuration state. This **Playground** feature was a nice contribution by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257), thank you! 
 This contributed feature got enhanced with more error handling and a slightly refined UI to make it production ready. It can now be tried for the first time in the 8.0.0-dev.2 release and build. As a further enhancement of the JSON export feature, the **Themes Playground** app also got the ability to convert the exported settings JSON config to a shareable URL. You can now share Playground settings with other Flutter developers. 
 
 
@@ -48,12 +48,13 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 **TODOS BEFORE STABLE RELEASE**
 
-* **TODO**: Flutter 3.22 broke +150 tests in FCS 7.3.1, review and fix them after all updates.
+* **TODO**: Flutter 3.22 broke +300 tests in FCS 7.3.1, review and fix them after all updates.
   * New features and adapting FCS to Flutter 3.22 also broke many tests. 
   * Update and review all tests.
     * **Test fix status**: 
-      * At start 309, and now 60 tests 
-      * of at start total 2103 tests and now of 2189 total tests are broken.
+      * At quality assurance start, 309 tests to fix
+      * Now **59** tests remain to fix. 
+      * Of at start total 2103 tests, and now **2189** total tests.
       * Coverage is now at 94%.
     * Add tests for new features. Get the FCS package back to 100% test coverage.
   * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and to offer early access to V8 and try new features.
@@ -322,17 +323,17 @@ This version contains a lot of breaking changes due to updates in the Material-3
 
 #### Why is blendedTextTheme deprecated?
 
-The `blendTextTheme` feature was originally made before Material-3's TextTheme was available, before it was fully known how it was going to be implemented. It was an approximation of the TextStyles that could be seen in early versions of Material-3 images. Since the actual Material-3 TextTheme is available, the tinted TextTheme feature is no longer required. While the FCS tinted TextTheme did provide an alternative version of the actual tint used in Material-3, the differences were quite subtle. Additionally, recent changes in Flutter make using it very verbose and complicated. Why it does so, is explained in detail below.
+The `blendTextTheme` feature was originally made before Material-3's TextTheme was available, before it was fully known how it was going to be implemented. It was an approximation of the TextStyles that could be seen in early versions of Material-3 images. Since the actual Material-3 TextTheme is available, the tinted TextTheme feature is no longer required. While the FCS tinted TextTheme did provide an alternative version of the actual tint used in Material-3, the differences were quite subtle. Additionally, recent changes in Flutter make using it very verbose and complicated. Why it does so is explained in detail below.
     
-In Material-3 Typography 2021, the TextTheme and all styles in it are fully opaque and use onSurface as color on all TextStyles. In a seed generated ColorScheme, the text styles become primary color tinted, because the onSurface color by default has subtle primary tint. With FCS you can modify the onSurface to black or white to avoid this, if so preferred.
+In Material-3 Typography 2021, the TextTheme and all styles in it are fully opaque and use onSurface as color on all TextStyles. In a seed generated ColorScheme, the text styles become primary color tinted, because the onSurface color by default has subtle primary tint. With FCS, you can modify the onSurface to black or white to avoid this, if so preferred.
     
 In Material-2 Typography 2018 and 2014, some TextStyles in their TextThemes use partially transparent white or black colors, making them appear tinted when placed on lightly colored backgrounds. Such TextStyles also have lower contrast. If the Material-3 default text theme is used on background colors that are tinted with a color that deviates a lot in hue from the hue used as tint color by the TextTheme, it may not fit it so well. The Material-2 opacity-based text styles do not have this limitation. It is unknown why Material-3 switched to a fixed tint color instead of using the opacity-based approach used in Material-2, that is more universally usable on backgrounds with different tint colors.
     
 In Material-3, some component themes override the default color of the default TextTheme TextStyles they use with `onSurfaceVariant`. This color has slightly more tint and lower contrast than the default `onSurface`. This is used for elements in components that should have less emphasis. Many default Material-3 components also override the color in default TextTheme TextStyles they use with `ColorScheme.onSurface` color, that it actually already has in a default TextTheme. These two overrides results in that whatever color the default TextTheme TextStyles have, they will be overridden by these `ColorScheme` colors. Resulting in that any custom-colored `TextTheme`and its `TextStyle`s are not getting used by such Material-3 components and that the custom colors from the meticulously colored custom `TextTheme`, are rarely visible anywhere in a Material-3 application. Material-2 component themes do not do this, nor did older Flutter versions of Material-3 component themes do this.
     
-An issue has been raised explaining the challenges this newer approach in Flutter causes when using custom colored text themes. If this issue is addressed, the tinted TextTheme feature in FCS may be brought back, if it is a requested feature. 
+An issue has been raised explaining the challenges this newer approach in Flutter causes when using custom colored text themes. If this issue is addressed, the tinted TextTheme feature in FCS may be brought back if it is a requested feature. 
 
-In current Flutter versions, using a custom-tinted TextTheme is rather pointless. You can do it, but is not enough to just define the TextTheme. You also have to pass each tinted TextStyle it has to the appropriate TextStyles in ALL component themes that override its colors, for it to have any effect. It is typically not worth the effort.
+In current Flutter versions, using a custom-tinted TextTheme is rather pointless. You can, but it is not enough to define the TextTheme. You also have to pass each tinted TextStyle it has to the appropriate TextStyles in ALL component themes that override its colors, for it to have any effect. It is typically not worth the effort.
 
 ### THEMES PLAYGROUND
 
@@ -438,7 +439,7 @@ In current Flutter versions, using a custom-tinted TextTheme is rather pointless
 - Improved presentation of `Switch`, `Checkbox` and `Radio`, by using more orderly columns and spacing and explanation labels, similar style as on `Chip` and `IconButton`.  
 
 
-- The Playground default for the **TextField** settings panel is still using "Outline" and filled as default, not "Underline" and filled style like Flutter SDK does. The FCS API defaults to underline, only the Playground comes with a slightly opinionated nicer default. Playground **TextField** default, along with FCS API was changed to not using color on the unfocused border, like Flutter M3 and M2 default style does. Making both Playground and FCS API less opinionated in its default values in this case. 
+- The Playground default for the **TextField** settings panel is still using "Outline" and filled as default, not "Underline" and filled style like Flutter SDK does. The FCS API defaults to underline, only the Playground comes with a slightly opinionated nicer default. Playground **TextField** default, along with FCS API, it was changed to not using color on the unfocused border, like Flutter M3 and M2 default styles do. Making both Playground and FCS API less opinionated in its default values in this case. 
 
 - In **General Settings**, the Playground by default turns **ON** the settings "Use Material-2 style Divider in Material-2", "Tinted disabled components" and "Tinted interaction". Corresponding to `FlexSubThemesData` for `useM2StyleDividerInM3`, `interactionEffects` and `tintedDisabledControls` being set to `true`. Their FCS API defaults are however `false`, to keep the API itself less opinionated. Before FCS v8, these API defaults were `true` as stated in breaking changes. The Playground thus keeps this past, already in API opinionated defaults, as its pre-configured defaults, but the defaults for the FCS API itself, in Material-3 mode, are much less opinionated now.
 
@@ -896,7 +897,7 @@ The **Themes Playground** application has been updated to include most of the ne
 * On **Surface blends**: 
   - Changed surface blend mode defaults to values that are more mobile design-friendly. No API change involved. API defaults are the same as before, changes only affect the Playground app defaults. 
     - Previously used **Playground** default values were intended for desktop and tablet designs, where controls and text are placed on containers with a lower surface blend, like the **Cards** used in the Themes Playground app itself. While one can make a responsive app, that uses this design nicely from mobile to tablet and desktop sizes, most mobile only apps are not designed so. Using Playground defaults that produce a nice theme for more typical mobile designs, will help new FlexColorScheme and Themes Playground users, configure nice themes even quicker.
-  - The blend mode control now also has a popup menu that always shows all surface blend modes, also in smaller UI. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
+  - The blend mode control now also has a popup menu that always shows all surface blend modes, also in smaller media. On smaller devices the `ToggleButtons` control, as before, only shows popular options.
 
 * Other **new controllable properties** and features:
   - **AppBar** theming can now use themed `scaffoldBackground` color as its themed background color. This is useful for matching the AppBar color exactly to the Scaffold background color, when Scaffold background uses different surface blends than the theme's ColorScheme surface or background colors.
