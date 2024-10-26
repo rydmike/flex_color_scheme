@@ -6,6 +6,13 @@ import 'package:web/web.dart' as web;
 
 import 'query_params_handler_interface.dart';
 
+// Set the bool flag to true to show debug prints. Even if it is forgotten
+// to set it to false, debug prints will not show in release builds.
+// The handy part is that if it gets in the way in debugging, it is an easy
+// toggle to turn it off here too. Often I just leave them true if it is one
+// I want to see in dev mode, unless it is too chatty.
+const bool _debug = !kReleaseMode && true;
+
 /// The query params handler for Dart Web builds
 ///
 /// This implementation listens to URL changes and calls the provided callback
@@ -45,7 +52,7 @@ class QueryParamsHandler implements QueryParamsHandlerInterface {
       final Uri uri = Uri.parse(location.href);
       return uri.queryParameters;
     } catch (e) {
-      if (kDebugMode) debugPrint('Playground URL query param error: $e');
+      if (_debug) debugPrint('Playground URL query param error: $e');
       return <String, String>{'error': 'Playground URL query param error: $e'};
     }
   }
@@ -59,8 +66,9 @@ class QueryParamsHandler implements QueryParamsHandlerInterface {
   void clearQueryParams() {
     final web.Location location = web.window.location;
     final Uri uri = Uri.parse(location.href);
-    uri.queryParameters.clear();
-    web.window.history.replaceState(null, '', uri.toString());
+    final Uri newUri = uri.replace(queryParameters: <String, String>{});
+    if (_debug) debugPrint('QueryParamsHandler clearing query params: $newUri');
+    web.window.history.replaceState(null, '', newUri.toString());
   }
 
   @override

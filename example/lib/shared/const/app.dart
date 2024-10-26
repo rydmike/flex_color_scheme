@@ -48,7 +48,7 @@ sealed class App {
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';
   static const String playgroundURL =
-      'https://rydmike.com/flexcolorscheme/themesplayground-dev';
+      'https://rydmike.com/flexcolorscheme/themesplayground-dev/';
   static final Uri packageUri = Uri(
     scheme: 'https',
     host: 'pub.dev',

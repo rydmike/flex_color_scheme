@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.2
 
-**Oct 25, 2024**
+**Oct 26, 2024**
 
 ### SUMMARY
 
@@ -12,7 +12,10 @@ Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BRE
 
 Most APIs are still there and work as before, but a few produce results that differ slightly from past ones, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in FCS V8, but previous values are still available. You will need to enable them explicitly to get the same results as before. The purpose of these default value changes is to make FCS have less opinionated defaults, and be more aligned with Flutter's Material-3 design defaults. The **Themes Playground** app will still have some of its own opinionated defaults, done via default settings values the app uses in its default configuration, but the package Material-3 default starting points, are now much more aligned with Flutter's Material-3 defaults.
 
-In the **Themes Playground** you can now export and import settings to a JSON file, and import them back into the Playground later. This is a great way to save your theme settings for later re-use. The exported JSON contains all the internal controller settings values you have configured in the Playground app, that are needed to restore a given configuration state. This feature was contributed by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257), thank you!
+In the **Themes Playground** you can now export and import settings to a JSON file, and import them back into the Playground later. This is a great way to save your theme settings for later re-use. The exported JSON contains all the internal controller settings values you have configured in the Playground app, that are needed to restore a given configuration state. This feature was a nice contribution by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257), thank you! 
+This contributed feature got enhanced with more error handling and a slightly refined UI to make it production ready. It can now be tried for the first time in the 8.0.0-dev.2 release and build. As a further enhancement of the JSON export feature, the **Themes Playground** app also got the ability to convert the exported settings JSON config to a shareable URL. You can now share Playground settings with other Flutter developers. 
+
+
 
 ### MIGRATION
 
@@ -338,8 +341,10 @@ In current Flutter versions, using a custom-tinted TextTheme is rather pointless
 - The **Theme Code** view panel now has a toggle that allows you to generate the configured code for the theme as input suitable for a separate app theme file. It has static getters that you can use in your `MaterialApp`'s `theme` and `darkTheme`.
   >**TIP:** You can modify this file and e.g., pass in controller that contains user-configurable settings for theme configuration properties and generate the theme on the fly in your app. This way you can let the user configure the theme in your app, a few props anyway. This is basically what the Playground app does with all theming properties. That is why you can see the result and impact of defined theme in the Playground app itself, as you modify the desired theme configuration in the app.
  
-- The **Theme Code** view got a long asked for feature, Themes Playground settings export and import! You can now export your configured theme settings to a JSON file and import them back into the Playground later. This is a great way to save your theme settings for later use or to share them with others. The exported JSON file contains all the internal controller settings values you have configured in the Playground that are needed to restore a given configuration state.
-  - This Themes Playground feature was contributed by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257). Thank you!  
+- The **Theme Code** view got a long asked for feature, Themes Playground settings export and import! You can now export your configured theme settings to a JSON file and import them back into the Playground later. This is a great way to save your theme settings for later use or to share them with others. The exported JSON file contains all the internal controller settings values you have configured in the Playground that are needed to restore a given configuration state. This Playground feature was contributed by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257). Thank you! 
+- The contributed feature got enhanced with more error handling and a slightly refined UI to make it production ready. It can now be tried for the first time in the 8.0.0-dev.2 release and build. 
+- As a further enhancement of the JSON export feature, the **Themes Playground** app also got the ability to convert the exported settings JSON config to a shareable URL. You can now share Playground settings with other Flutter developers.
+
 
 - On each theme settings panel, many controls now appear in two columns to reduce the need to scroll so much on wider media and see more controls on the same screen. The layout is panel width responsive and controls will be in one column as before on smaller media.
 - Split the "FAB and Chip" settings panels to separate panels **FAB** and **Chip**. 

@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../example5_themes_playground/utils/import_export_playground_settings.dart';
 import '../const/store.dart';
@@ -12,6 +13,13 @@ import '../model/adaptive_response.dart';
 import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import '../services/theme_service.dart';
+
+// Set the bool flag to true to show debug prints. Even if it is forgotten
+// to set it to false, debug prints will not show in release builds.
+// The handy part is that if it gets in the way in debugging, it is an easy
+// toggle to turn it off here too. Often I just leave them true if it is one
+// I want to see in dev mode, unless it is too chatty.
+const bool _debug = !kReleaseMode && true;
 
 /// The ThemeController is used by many Widgets that users can interact with.
 ///
@@ -7496,23 +7504,30 @@ class ThemeController with ChangeNotifier {
     return _themeService.putAll(data);
   }
 
+  // Decompress the JSON compressed query param string to a JSON string.
+  //
+  // The compressed string is compressed with GZip and then base64 encoded.
   static String _decompressJsonString(String compressedString) {
+    if (_debug) debugPrint('EXEC _decompressJsonString: $compressedString');
     try {
       final Uint8List compressedBytes = base64Decode(compressedString);
       final List<int> decompressedBytes =
           GZipDecoder().decodeBytes(compressedBytes);
       return utf8.decode(decompressedBytes);
     } catch (e) {
+      if (_debug) debugPrint('** ERROR _decompressJsonString: $e');
       return 'error: $e';
     }
   }
 
   /// Handle URL query params import
-  static Future<void> importFromQueryParams(BuildContext context,
+  static Future<void> importFromQueryParams(
       Map<String, String> queryParams, ThemeController controller) async {
     final String? encodedData = queryParams['config'];
     final String? errorData = queryParams['error'];
-    // Check if we had errors in Settings config query params.
+
+    if (_debug) debugPrint('EXEC importFromQueryParams, with $encodedData');
+    // Check if we had errors in encoded into passed in query params.
     if (errorData != null && errorData.isNotEmpty) {
       controller.setImportErrorLog(errorData);
       return;
@@ -7520,30 +7535,24 @@ class ThemeController with ChangeNotifier {
     // Check if we have Settings config query params.
     if (encodedData != null && encodedData.isNotEmpty) {
       final String playgroundConfig = _decompressJsonString(encodedData);
+      if (_debug) debugPrint('** IMPORT settings: $playgroundConfig');
       // We have an error if the string starts with 'error'.
       if (playgroundConfig.startsWith('error')) {
+        // Date time now formatted as string dd.MM.yyyy HH:mm:ss
+        final String importDate =
+            DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
         controller.setImportErrorLog(
-            'Error decoding compressed query parameter, $playgroundConfig');
-        if (context.mounted) {
-          final double? width =
-              MediaQuery.sizeOf(context).width > 800 ? 700 : null;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              behavior: SnackBarBehavior.floating,
-              width: width,
-              content: const Text('Unable to load settings from given url!'),
-              duration: const Duration(milliseconds: 2000),
-            ),
-          );
-        }
-        // No obvious error try to import settings, it can still
-        // if JSON keys are wrong, too long etc...
-        else {
-          await importPlaygroundSettings(
-            controller,
-            settings: playgroundConfig,
-          );
-        }
+            'Error decoding url at $importDate: $playgroundConfig', false);
+      } else {
+        // }
+        // No obvious errors try to import settings, it can still have errors
+        // if JSON keys are wrong, too long etc, but this is handled in
+        // importPlaygroundSettings.
+        if (_debug) debugPrint('** CALL importPlaygroundSettings');
+        await importPlaygroundSettings(
+          controller,
+          settings: playgroundConfig,
+        );
       }
     }
   }

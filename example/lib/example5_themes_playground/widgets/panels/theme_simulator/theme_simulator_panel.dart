@@ -67,6 +67,12 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    tabController.index = widget.controller.simulatorAppIndex;
+  }
+
+  @override
   void dispose() {
     tabController.dispose();
     super.dispose();

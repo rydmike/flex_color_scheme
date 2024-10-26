@@ -12,6 +12,13 @@ import '../../shared/model/adaptive_response.dart';
 import '../../shared/model/splash_type_enum.dart';
 import '../../shared/model/visual_density_enum.dart';
 
+// Set the bool flag to true to show debug prints. Even if it is forgotten
+// to set it to false, debug prints will not show in release builds.
+// The handy part is that if it gets in the way in debugging, it is an easy
+// toggle to turn it off here too. Often I just leave them true if it is one
+// I want to see in dev mode, unless it is too chatty.
+const bool _debug = !kReleaseMode && true;
+
 /// Common JsonKeys used in serialisation and deserialization.
 enum JsonKeys {
   dartType(key: 'dart_type'),
@@ -128,8 +135,10 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
         } else if (object is VisualDensityEnum) {
           dartType = JsonKeys.typeEnumVisualDensity.key;
         } else {
-          debugPrint("Unhandled enum type '${object.runtimeType}' "
-              "with value '${object.name}'");
+          if (_debug) {
+            debugPrint("Unhandled enum type '${object.runtimeType}' "
+                "with value '${object.name}'");
+          }
         }
         if (dartType != null) {
           return <String, String>{
@@ -145,12 +154,14 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
   return data;
 }
 
-/// A function that imports the saved theme playground settings from JSON
+/// A function that imports the saved theme playground settings from JSON.
 Future<String> importPlaygroundSettings(
   ThemeController controller, {
   required String settings,
 }) async {
   String resultLog = '';
+
+  if (_debug) debugPrint('EXEC importPlaygroundSettings with:\n$settings');
 
   // If the settings import is longer than 20000 characters, it is too long,
   // we do not have that long settings in valid exports, log the error and
@@ -159,17 +170,24 @@ Future<String> importPlaygroundSettings(
   // and error, last limited tested with valid one that failed was 10000.
   // So doubled it to be on the safe side.
   if (settings.length > 20000) {
-    resultLog += 'The imported JSON is too long, probably not valid. '
-        'Import FAILED.';
-    if (kDebugMode) {
-      debugPrint('The settings string is too long, skipped. Import FAILED.');
-    }
+    resultLog += 'The settings JSON is too long, probably invalid. No import!';
+    if (_debug) debugPrint('Settings JSON too long => INVALID, no import!');
     controller.setImportErrorLog(resultLog);
     return resultLog;
   }
+  Map<String, dynamic> json = <String, dynamic>{};
 
-  final Map<String, dynamic> json =
-      jsonDecode(settings) as Map<String, dynamic>;
+  try {
+    json = jsonDecode(settings) as Map<String, dynamic>;
+  } catch (e) {
+    final String importDate =
+        DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+    resultLog += 'Settings JSON decode $importDate error: $e ';
+    if (_debug) debugPrint('Settings JSON decode $importDate error: $e');
+    controller.setImportErrorLog(resultLog, false);
+    return resultLog;
+  }
+
   final Map<String, dynamic> data = <String, dynamic>{};
   for (final MapEntry<String, dynamic> item in json.entries) {
     if (_equalsIgnoreCase(item.key, JsonKeys.playgroundData.key)) {
@@ -182,18 +200,14 @@ Future<String> importPlaygroundSettings(
     // log the error and skip the key.
     if (!Store.storageKeys.contains(item.key)) {
       resultLog += "Key '${item.key}' is not a valid key, skipped.\n";
-      if (kDebugMode) {
-        debugPrint("Key '${item.key}' is not a valid key, skipped.");
-      }
+      if (_debug) debugPrint("Key '${item.key}' is not a valid key, skipped.");
       continue;
     }
     // If item.value is longer than 100 characters, it is too long, we do not
     // have that long strings in valid values, log the error and skip the key.
     if (item.value.toString().length > 100) {
-      resultLog += "Value for key '${item.key}' is too long, skipped.\n";
-      if (kDebugMode) {
-        debugPrint("Value for key '${item.key}' is too long, skipped.");
-      }
+      resultLog += "Value for key '${item.key}' was too long, skipped.\n";
+      if (_debug) debugPrint("Value for key '${item.key}' too long, skipped.");
       continue;
     }
 
@@ -320,7 +334,7 @@ Future<String> importPlaygroundSettings(
       } else {
         resultLog += "Unhandled type '$dartType' with value "
             "'$value' for key '${item.key}'\n";
-        if (kDebugMode) {
+        if (_debug) {
           debugPrint("Unhandled type '$dartType' with value "
               "'$value' for key '${item.key}'");
         }
@@ -330,7 +344,7 @@ Future<String> importPlaygroundSettings(
     }
     if (mapped == null) {
       resultLog += "The 'mapped' value was null, skipped.\n";
-      if (kDebugMode) debugPrint("The 'mapped' value was null, skipped.");
+      if (_debug) debugPrint("The 'mapped' value was null, skipped.");
     } else {
       data[item.key] = mapped;
     }
@@ -343,7 +357,7 @@ Future<String> importPlaygroundSettings(
   } else {
     resultLog = 'Imported successfully $importDate';
   }
-  controller.setImportErrorLog(resultLog);
+  controller.setImportErrorLog(resultLog, false);
   await controller.importSavedThemeData(data);
   await controller.loadAll();
   return resultLog;
