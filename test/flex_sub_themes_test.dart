@@ -4976,7 +4976,7 @@ void main() {
       );
       expect(
         m3.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceContainerHighest),
+        equals(Colors.transparent),
       );
       // Overlay color
       expect(
@@ -4986,7 +4986,7 @@ void main() {
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.pressed}),
         equals(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.primary, 1)),
+            colorScheme.surfaceContainer, colorScheme.primary, 1)),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{WidgetState.selected}),
@@ -4995,7 +4995,7 @@ void main() {
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.selected}),
         equals(FlexSubThemes.tintedSplash(
-            colorScheme.surface, colorScheme.primary, 1)),
+            colorScheme.surfaceContainer, colorScheme.primary, 1)),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{WidgetState.focused}),
@@ -5004,7 +5004,7 @@ void main() {
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.focused}),
         equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1)),
+            colorScheme.surfaceContainer, colorScheme.primary, 1)),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{WidgetState.hovered}),
@@ -5013,7 +5013,7 @@ void main() {
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.hovered}),
         equals(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1)),
+            colorScheme.surfaceContainer, colorScheme.primary, 1)),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{}),
