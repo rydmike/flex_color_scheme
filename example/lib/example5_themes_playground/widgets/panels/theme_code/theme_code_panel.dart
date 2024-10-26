@@ -242,9 +242,13 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               title: const Text('Separate file'),
               subtitleReveal: const Text(
-                'Turn ON to get theme definitions '
-                'intended for a separate file instead of using the '
-                'theme definitions in your MaterialApp setup directly.\n',
+                'Keep ON to get theme definitions '
+                'intended for a separate file, instead of using the '
+                'theme definitions in your MaterialApp setup directly.\n'
+                '\n'
+                'Turn OFF to get the theme definitions in same format as '
+                'versions before V8, that are intended to be used directly '
+                'in your MaterialApp setup.\n',
               ),
               value: widget.controller.generateCodeForOwnFile,
               onChanged: widget.controller.setGenerateCodeForOwnFile,
