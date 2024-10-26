@@ -119,6 +119,9 @@ sealed class App {
   /// Edge insets and margins for big desktop breakpoint size.
   static const double edgeInsetsBigDesktop = 24;
 
+  /// The maximum width for an AlertDialog.
+  static const double maxAlertDialogWidth = 400;
+
   /// Responsive insets based on width.
   ///
   /// The width may be from LayoutBuilder or

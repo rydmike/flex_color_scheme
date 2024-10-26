@@ -51,7 +51,7 @@ sealed class Store {
   // Key used to read and save the generateCodeForOwnFile value.
   static const String keyGenerateCodeForOwnFile = 'generateCodeForOwnFile';
   // Default value for the generateCodeForOwnFile, also used to reset settings.
-  static const bool defaultGenerateCodeForFile = false;
+  static const bool defaultGenerateCodeForFile = true;
 
   // Key used to read and save the applyThemeToAllCupertino value.
   //

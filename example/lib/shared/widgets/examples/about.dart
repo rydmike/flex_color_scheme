@@ -78,36 +78,38 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
-        child: RichText(
-          text: TextSpan(
-            children: <TextSpan>[
-              TextSpan(
-                style: aboutTextStyle,
-                text: 'The ${App.title(context)} application demonstrates '
-                    'features\n'
-                    'of the ${App.packageName} Flutter theming package.\n\n'
-                    'To learn more, check out the package on ',
-              ),
-              LinkTextSpan(
-                style: linkStyle,
-                uri: App.packageUri,
-                text: 'pub.dev',
-              ),
-              TextSpan(
-                style: aboutTextStyle,
-                text: '.\n'
-                    'It also includes the source code of this application.\n'
-                    '\n',
-              ),
-              TextSpan(
-                style: footerStyle,
-                text: 'Built with Flutter ${App.flutterVersion}, '
-                    'using ${App.packageName} '
-                    '${App.version}\n'
-                    'Media size (w:${width.toStringAsFixed(0)}, '
-                    'h:${height.toStringAsFixed(0)})\n\n',
-              ),
-            ],
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: App.maxAlertDialogWidth),
+          child: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: aboutTextStyle,
+                  text: 'The ${App.title(context)} application demonstrates '
+                      'features '
+                      'of the ${App.packageName} Flutter theming package.\n\n'
+                      'To learn more, check out the package on ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: App.packageUri,
+                  text: 'pub.dev',
+                ),
+                TextSpan(
+                  style: aboutTextStyle,
+                  text: '. It also includes the source code '
+                      'of this application.\n\n',
+                ),
+                TextSpan(
+                  style: footerStyle,
+                  text: 'Built with Flutter ${App.flutterVersion}, '
+                      'using ${App.packageName} '
+                      '${App.version}. '
+                      'Media size (w:${width.toStringAsFixed(0)}, '
+                      'h:${height.toStringAsFixed(0)})\n\n',
+                ),
+              ],
+            ),
           ),
         ),
       ),

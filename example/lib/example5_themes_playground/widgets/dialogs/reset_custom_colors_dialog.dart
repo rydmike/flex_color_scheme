@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/const/app.dart';
+
 /// Dialog to confirm if user wants to reset the current custom colors.
 class ResetCustomColorsDialog extends StatelessWidget {
   const ResetCustomColorsDialog({super.key});
@@ -7,9 +9,12 @@ class ResetCustomColorsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Reset custom colors'),
-      content: const Text('Set custom color definitions back to their '
-          'default values?'),
+      title: const Text('Reset Custom Colors?'),
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: App.maxAlertDialogWidth),
+        child: const Text('Set custom color definitions back to their '
+            'default values?'),
+      ),
       actions: <Widget>[
         TextButton(
             onPressed: () {
