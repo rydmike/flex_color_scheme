@@ -771,7 +771,9 @@ class Breakpoint {
     if ((columnSpace == null || columnSpace == 1) &&
         (minColumnSize == null ||
             minColumnSize <= 137 / 2 ||
-            minColumnSize > 8192)) return effectiveColumns;
+            minColumnSize > 8192)) {
+      return effectiveColumns;
+    }
 
     // If columnSpace input was invalid, we use 1
     int? usedColumnSpace = columnSpace;
