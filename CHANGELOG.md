@@ -2,9 +2,9 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.0.0-dev.2
+## 8.0.0-dev.3
 
-**Oct 26, 2024**
+**Oct 30, 2024**
 
 ### SUMMARY
 
@@ -53,7 +53,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   * Update and review all tests.
     * **Test fix status**: 
       * At quality assurance start, 309 tests to fix
-      * Now **59** tests remain to fix. 
+      * Now **45** tests remain to fix. 
       * Of at start total 2103 tests, and now **2189** total tests.
       * Coverage is now at 94%.
     * Add tests for new features. Get the FCS package back to 100% test coverage.
@@ -61,14 +61,6 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
 
 - **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still valid after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground app and to package doc comments, as well as code TODOs where relevant.
 
-
-**MINOR KNOWN ISSUES**
- 
-  - **Playground**: Cancelling input colors from custom theme get reset to active ColorScheme, not to input values.
-    - This is a bug in the Playground app. It should reset them to the input values, not to the active ColorScheme values. It now changes the underlying input color to the scheme and not back to the input value it had when we cancel color editing. We do not see this faulty change in the effective theme, but if we change theme modifiers, we no longer have the original input color. If we show the input colors, we can easily observe this bug. This bug is not new, it has existed a long time.
-  - Check to toDark impact on theme thumbs, also with swaps
-  - Check custom theme uses own seed impact on thumb and generally once more too.
-    
 ### PACKAGE CHANGES
 
 This section contains a detailed list of all changes introduced in FlexColorScheme version 8.0.0.
