@@ -5679,7 +5679,9 @@ void main() {
         'equal to OutlinedButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.outlinedButtonTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.outlinedButtonTheme(
+                colorScheme: colorScheme, useMaterial3: false)
+            .toString(),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: ButtonStyle(
@@ -5842,6 +5844,7 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           outlineSchemeColor: SchemeColor.tertiary,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
@@ -6011,6 +6014,7 @@ void main() {
       final OutlinedButtonThemeData button = FlexSubThemes.outlinedButtonTheme(
         colorScheme: colorScheme,
         baseSchemeColor: SchemeColor.primary,
+        useMaterial3: false,
       );
       // Disabled foreground
       expect(
@@ -6088,6 +6092,7 @@ void main() {
         outlineSchemeColor: SchemeColor.primaryContainer,
         useTintedDisable: true,
         useTintedInteraction: true,
+        useMaterial3: false,
       );
       final Color overlay = colorScheme.surface;
       final Color tint = colorScheme.tertiary;
@@ -7418,7 +7423,7 @@ void main() {
     // FlexSubThemes Switch tests
     // -------------------------------------------------------------------------
     test(
-        'Switch FST29.1 light: GIVEN a light default '
+        'Switch FST29.1 light: GIVEN a light default M2 '
         'FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -7426,7 +7431,10 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme).toString(),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
             thumbColor: WidgetStateProperty.resolveWith<Color>(
@@ -7492,13 +7500,17 @@ void main() {
       // Disabled colors
       // Disabled thumb colors
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(Colors.grey.shade400),
@@ -7507,6 +7519,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
@@ -7519,6 +7532,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           FlexSubThemes.tintedDisable(
@@ -7531,6 +7545,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           FlexSubThemes.tintedDisable(
@@ -7539,60 +7554,75 @@ void main() {
         ),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.black12),
       );
       // Selected background
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary.withAlpha(0x70)),
       );
       // Interaction states - Using test with Opacity based SDK values on
       // purpose, to confirm results match alpha based ones used by FCS.
       // Non tinted interactions
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.pressed}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         equals(colorScheme.onSurface.withOpacity(0.12)),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
         equals(colorScheme.onSurface.withOpacity(0.08)),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
         equals(colorScheme.onSurface.withOpacity(0.12)),
       );
       // Non tinted interactions - selected
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
         equals(colorScheme.primary.withOpacity(0.12)),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
         equals(colorScheme.primary.withOpacity(0.08)),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
         equals(colorScheme.primary.withOpacity(0.12)),
@@ -7600,31 +7630,37 @@ void main() {
       // Tinted interactions
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme, useTintedInteraction: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.pressed}),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         equals(FlexSubThemes.tintedPressed(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme, useTintedInteraction: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
         equals(FlexSubThemes.tintedHovered(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme, useTintedInteraction: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.focused}),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
         equals(FlexSubThemes.tintedFocused(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme, useTintedInteraction: true)
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: false,
+        )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
         equals(FlexSubThemes.tintedPressed(
@@ -7632,7 +7668,10 @@ void main() {
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme, useTintedInteraction: true)
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: false,
+        )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
         equals(FlexSubThemes.tintedHovered(
@@ -7640,7 +7679,10 @@ void main() {
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme, useTintedInteraction: true)
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: false,
+        )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
         equals(FlexSubThemes.tintedFocused(
@@ -7649,15 +7691,17 @@ void main() {
 
       // Default states
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .thumbColor!
-            .resolve(<WidgetState>{}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{}),
         equals(Colors.grey.shade50),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
         equals(colorScheme.primary.withAlpha(0x50)),
       );
@@ -7666,6 +7710,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           unselectedIsColored: false,
+          useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
         equals(kSwitchM2LightTrackColor),
       );
@@ -7682,6 +7727,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
@@ -7747,13 +7793,17 @@ void main() {
       );
       // Disabled colors
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.grey.shade800),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(Colors.grey.shade800),
@@ -7762,6 +7812,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
@@ -7774,6 +7825,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedDisable: true,
+          useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           FlexSubThemes.tintedDisable(
@@ -7782,35 +7834,40 @@ void main() {
         ),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(Colors.white10),
       );
       // Selected background
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary.withAlpha(0x80)),
       );
       // Default states
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .thumbColor!
-            .resolve(<WidgetState>{}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{}),
         equals(Colors.grey.shade400),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
         equals(colorScheme.primary.withAlpha(0x65)),
       );
@@ -7819,6 +7876,7 @@ void main() {
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           unselectedIsColored: false,
+          useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
         equals(Colors.white30),
       );
@@ -7837,6 +7895,7 @@ void main() {
           baseSchemeColor: SchemeColor.tertiary,
           splashRadius: 30,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
@@ -8027,9 +8086,10 @@ void main() {
       );
       // Selected track color
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary.withAlpha(0x70)),
       );
       // Pressed color
@@ -8910,7 +8970,7 @@ void main() {
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
     test(
-        'TimePicker FST33.1 default: GIVEN a default '
+        'TimePicker FST33.1 default: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -8921,6 +8981,7 @@ void main() {
         FlexSubThemes.timePickerTheme(
           colorScheme: colorScheme,
           useInputDecoratorTheme: true,
+          useMaterial3: false,
         ),
         equals(
           TimePickerThemeData(
@@ -8950,7 +9011,7 @@ void main() {
     });
 
     test(
-        'TimePicker FST33.2 scheme-based: GIVEN a default '
+        'TimePicker FST33.2 scheme-based: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -8961,6 +9022,7 @@ void main() {
           backgroundSchemeColor: SchemeColor.tertiary,
           inputDecorationTheme: const InputDecorationTheme(),
           useInputDecoratorTheme: true,
+          useMaterial3: false,
         ),
         equals(
           TimePickerThemeData(
@@ -8992,7 +9054,7 @@ void main() {
     });
 
     test(
-        'TimePicker FST33.3 background-a: GIVEN a default '
+        'TimePicker FST33.3 background-a: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -9002,6 +9064,7 @@ void main() {
           backgroundColor: const Color(0xFFDDDDDD),
           inputDecorationTheme: const InputDecorationTheme(filled: true),
           useInputDecoratorTheme: true,
+          useMaterial3: false,
         ),
         equals(
           TimePickerThemeData(
@@ -9047,6 +9110,7 @@ void main() {
           inputDecorationTheme: const InputDecorationTheme(filled: true),
           elementRadius: 12,
           useInputDecoratorTheme: true,
+          useMaterial3: false,
         ),
         equals(
           TimePickerThemeData(
