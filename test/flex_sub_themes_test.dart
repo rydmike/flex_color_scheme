@@ -1389,7 +1389,10 @@ void main() {
         'FlexSubTheme.chipTheme(M3 no-null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
       expect(
@@ -1398,40 +1401,40 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            labelStyle: textTheme.labelLarge!.copyWith(
+            labelStyle: const TextStyle().copyWith(
+              color: colorScheme.onSurfaceVariant,
               fontSize: 14,
               letterSpacing: 0.1,
               height: 1.43,
             ),
-            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+            secondaryLabelStyle: const TextStyle().copyWith(
+              color: colorScheme.onSecondaryContainer,
               fontSize: 14,
               letterSpacing: 0.1,
               height: 1.43,
             ),
             backgroundColor: colorScheme.surface,
-            // deleteIconColor: colorScheme.onSurfaceVariant,
-            // disabledColor: const Color(0x1f000000),
-            // selectedColor: colorScheme.secondaryContainer,
-            // secondarySelectedColor: colorScheme.secondaryContainer,
-            // checkmarkColor: colorScheme.onSurfaceVariant,
+            checkmarkColor: colorScheme.onSecondaryContainer,
             iconTheme: const IconThemeData(
-              // color: Color(0xff6200ee),
               size: 18.0,
             ),
           ),
         ),
       );
     });
-    // ChipThemeData:<ChipThemeData#b11be(backgroundColor: Color(0xffdfccfb), deleteIconColor: Color(0xff000000), disabledColor: Color(0x1f000000), selectedColor: Color(0xff03dac6), secondarySelectedColor: Color(0xff03dac6), surfaceTintColor: Color(0xff6200ee), checkMarkColor: Color(0xff000000), iconTheme: IconThemeData#c0d1d(size: 18.0, color: Color(0xff6200ee)))>
-    // ChipThemeData:<ChipThemeData#bd1ff(backgroundColor: Color(0xffffffff), checkMarkColor: Color(0xff000000), labelStyle: TextStyle(inherit: true, color: Color(0xff000000), size: 14.0, letterSpacing: 0.1, height: 1.4x), secondaryLabelStyle: TextStyle(inherit: true, color: Color(0xff000000), size: 14.0, letterSpacing: 0.1, height: 1.4x), iconTheme: IconThemeData#957cb(size: 18.0))>
     test(
         'Chip FST8.4 M3: GIVEN a '
         'FlexSubTheme.chipTheme(M3 no-null scheme with disable tint) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1442,21 +1445,27 @@ void main() {
         ),
         equals(
           ChipThemeData(
-            labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x1f01574f),
-            selectedColor: const Color(0xff03dac6),
-            secondarySelectedColor: const Color(0xff03dac6),
-            surfaceTintColor: const Color(0xff6200ee),
-            checkmarkColor: const Color(0xff000000),
-            iconTheme: const IconThemeData(
-              color: Color(0xff6200ee),
-              size: 18.0,
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onPrimary,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
             ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSecondaryContainer,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            backgroundColor: colorScheme.primary,
+            checkmarkColor: colorScheme.onSecondaryContainer,
+            iconTheme: IconThemeData(
+              size: 18.0,
+              color: colorScheme.primary,
+            ),
+            disabledColor: FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface, colorScheme.secondaryContainer)
+                .withAlpha(kAlphaVeryLowDisabled),
           ),
         ),
       );
@@ -1468,17 +1477,33 @@ void main() {
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
           seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
+      final TextTheme textTheme = Typography.material2021(
+              platform: TargetPlatform.android, colorScheme: colorScheme)
+          .black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
           labelStyle: textTheme.labelLarge,
-          // useMaterial3: true, // default
         ),
         equals(
           ChipThemeData(
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSurfaceVariant,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSecondaryContainer,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            backgroundColor: colorScheme.surface,
             checkmarkColor: colorScheme.onSecondaryContainer,
+            iconTheme: const IconThemeData(
+              size: 18.0,
+            ),
           ),
         ),
       );
@@ -1488,7 +1513,8 @@ void main() {
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Secondary EXPECT equal to ChipThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
       expect(
@@ -1496,29 +1522,25 @@ void main() {
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
           labelStyle: textTheme.labelLarge,
-          useMaterial3: false,
         ),
         equals(
           ChipThemeData(
-            padding: const EdgeInsets.all(4),
-            labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            backgroundColor: const Color(0xffccf7f3),
-            deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x1f000000),
-            selectedColor: const Color(0xff97efe7),
-            secondarySelectedColor: const Color(0xff97efe7),
-            surfaceTintColor: const Color(0xff6200ee),
-            checkmarkColor: const Color(0xff000000),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSecondary,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
             ),
-            iconTheme: const IconThemeData(
-              color: Color(0xff015c54),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSecondaryContainer,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            backgroundColor: colorScheme.secondary,
+            checkmarkColor: colorScheme.onSecondaryContainer,
+            iconTheme: IconThemeData(
+              color: colorScheme.secondary,
               size: 18.0,
             ),
           ),
@@ -1528,42 +1550,43 @@ void main() {
     test(
         'Chip FST8.7: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
-        'Secondary and disable tint EXPECT equal to ChipThemeData() version '
+        'Tertiary and disable tint EXPECT equal to ChipThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.secondary,
+          baseSchemeColor: SchemeColor.tertiary,
           labelStyle: textTheme.labelLarge,
           useTintedDisable: true,
-          useMaterial3: false,
+          // useMaterial3: false,
         ),
         equals(
           ChipThemeData(
-            padding: const EdgeInsets.all(4),
-            labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            backgroundColor: const Color(0xffccf7f3),
-            deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x1f3c5f5c),
-            selectedColor: const Color(0xff97efe7),
-            secondarySelectedColor: const Color(0xff97efe7),
-            surfaceTintColor: const Color(0xff6200ee),
-            checkmarkColor: const Color(0xff000000),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onTertiary,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
             ),
-            iconTheme: const IconThemeData(
-              color: Color(0xff015c54),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSecondaryContainer,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            backgroundColor: colorScheme.tertiary,
+            checkmarkColor: colorScheme.onSecondaryContainer,
+            iconTheme: IconThemeData(
+              color: colorScheme.tertiary,
               size: 18.0,
             ),
+            disabledColor: FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface, colorScheme.secondaryContainer)
+                .withAlpha(kAlphaVeryLowDisabled),
           ),
         ),
       );
