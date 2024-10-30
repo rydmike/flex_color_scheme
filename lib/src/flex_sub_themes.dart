@@ -5889,7 +5889,7 @@ sealed class FlexSubThemes {
       labelType: labelType,
       minWidth: minWidth,
       minExtendedWidth: minExtendedWidth,
-      useIndicator: useIndicator,
+      useIndicator: useIndicator ?? true,
       indicatorColor: effectiveIndicatorColor,
       indicatorShape: indicatorRadius == null
           ? null
