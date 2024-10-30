@@ -1970,10 +1970,12 @@ sealed class FlexSubThemes {
     }
 
     // Set the onColors
-    Color onBackgroundColor =
-        schemeColorPair(baseSchemeColor ?? fallbackSchemeColor, colorScheme);
-    Color onSelectedColor =
-        schemeColorPair(selectedSchemeColor ?? fallbackSelected, colorScheme);
+    Color onBackgroundColor = schemeColorPair(
+        baseSchemeColor ?? fallbackSchemeColor, colorScheme,
+        useOnSurfaceVariant: true);
+    Color onSelectedColor = schemeColorPair(
+        selectedSchemeColor ?? fallbackSelected, colorScheme,
+        useOnSurfaceVariant: true);
     Color onSecondarySelectedColor = schemeColorPair(
         secondarySelectedSchemeColor ?? fallbackSecondarySelected, colorScheme);
     if (blend) {
