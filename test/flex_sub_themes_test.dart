@@ -3542,16 +3542,46 @@ void main() {
         'InputDecoration FST16.1 light: GIVEN a M2 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
+
+      const bool useM3 = false;
+      const bool tintDisable = true;
+      const bool tintInteract = true;
+      const double? radius = null;
+      const double unfocusedWidth = 1.0;
+      const double focusedWidth = 2.0;
+      const bool unfocusedHasBorder = true;
+      const bool focusedHasBorder = true;
+      final Color borderColor = colorScheme.primary;
+      final Color enabledBorderColor = colorScheme.outline;
+      final Color enabledHoveredBorderColor = colorScheme.primary;
+      const double effectiveRadius =
+          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+        topLeft: Radius.circular(effectiveRadius),
+        topRight: Radius.circular(effectiveRadius),
+      );
+      const int effectiveAlpha = kFillColorAlphaLight;
+      final Color usedFillColor = Color.alphaBlend(
+          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+      final Color usedHover =
+          ThemeData.estimateBrightnessForColor(usedFillColor) ==
+                  Brightness.light
+              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
-          tintedDisabled: true,
-          tintedInteractions: true,
-          useMaterial3: false,
+          tintedDisabled: tintDisable,
+          tintedInteractions: tintInteract,
+          useMaterial3: useM3,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -3653,44 +3683,91 @@ void main() {
               }
               return Colors.black45;
             }),
-            filled: true,
-            fillColor: const Color(0xfff6f2fe),
-            hoverColor: const Color(0xffece4fd),
-            focusColor: null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary.withAlpha(0xA7),
-                width: 1,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                width: 1,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error.withAlpha(0xA7),
-                width: 1,
-              ),
+            filled: false,
+            fillColor: usedFillColor,
+            hoverColor: usedHover,
+            border: MaterialStateUnderlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
             ),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -3701,18 +3778,47 @@ void main() {
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
+
+      const bool useM3 = false;
+      const bool tintDisable = true;
+      const bool tintInteract = true;
+      const double? radius = null;
+      const double unfocusedWidth = 1.0;
+      const double focusedWidth = 2.0;
+      const bool unfocusedHasBorder = true;
+      const bool focusedHasBorder = true;
+      final Color borderColor = colorScheme.primary;
+      final Color enabledBorderColor = colorScheme.outline;
+      final Color enabledHoveredBorderColor = colorScheme.primary;
+      const double effectiveRadius =
+          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+        topLeft: Radius.circular(effectiveRadius),
+        topRight: Radius.circular(effectiveRadius),
+      );
+      const int effectiveAlpha = kFillColorAlphaLight;
+      final Color usedFillColor = Color.alphaBlend(
+          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+      final Color usedHover =
+          ThemeData.estimateBrightnessForColor(usedFillColor) ==
+                  Brightness.light
+              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
           unfocusedBorderIsColored: false,
-          tintedDisabled: true,
-          tintedInteractions: true,
-          useMaterial3: false,
+          tintedDisabled: tintDisable,
+          tintedInteractions: tintInteract,
+          useMaterial3: useM3,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -3814,44 +3920,91 @@ void main() {
               }
               return Colors.black45;
             }),
-            filled: true,
-            fillColor: const Color(0xfff6f2fe),
-            hoverColor: const Color(0xffece4fd),
-            focusColor: null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.onSurface.withOpacity(0.38),
-                width: 1,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                width: 1,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error.withAlpha(0xA7),
-                width: 1,
-              ),
+            filled: false,
+            fillColor: usedFillColor,
+            hoverColor: usedHover,
+            border: MaterialStateUnderlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
             ),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
