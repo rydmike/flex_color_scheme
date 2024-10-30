@@ -1308,24 +1308,29 @@ void main() {
         equals(
           ChipThemeData(
             padding: const EdgeInsets.all(4),
-            labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: Colors.black87,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: Colors.black87,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
             backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x1f000000),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
-            checkmarkColor: const Color(0xff000000),
-            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: Colors.black87,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
             ),
             iconTheme: const IconThemeData(
-              color: Color(0xff6200ee),
               size: 18.0,
             ),
           ),
@@ -1349,24 +1354,30 @@ void main() {
         equals(
           ChipThemeData(
             padding: const EdgeInsets.all(4),
-            labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: Colors.black87,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: Colors.black87,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
             backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff000000),
             disabledColor: const Color(0x1f4c3c63),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
-            checkmarkColor: const Color(0xff000000),
-            surfaceTintColor: const Color(0xff6200ee),
+            checkmarkColor: Colors.black87,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
             ),
             iconTheme: const IconThemeData(
-              color: Color(0xff6200ee),
+              // color: Color(0xff6200ee),
               size: 18.0,
             ),
           ),
@@ -1384,31 +1395,35 @@ void main() {
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
-          labelStyle: textTheme.labelLarge,
-          baseSchemeColor: SchemeColor.primary,
-          // useMaterial3: true, // Default
         ),
         equals(
           ChipThemeData(
-            labelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            secondaryLabelStyle:
-                textTheme.labelLarge!.copyWith(color: const Color(0xff000000)),
-            backgroundColor: const Color(0xffdfccfb),
-            deleteIconColor: const Color(0xff000000),
-            disabledColor: const Color(0x1f000000),
-            selectedColor: const Color(0xff03dac6),
-            secondarySelectedColor: const Color(0xff03dac6),
-            surfaceTintColor: const Color(0xff6200ee),
-            checkmarkColor: const Color(0xff000000),
+            labelStyle: textTheme.labelLarge!.copyWith(
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            backgroundColor: colorScheme.surface,
+            // deleteIconColor: colorScheme.onSurfaceVariant,
+            // disabledColor: const Color(0x1f000000),
+            // selectedColor: colorScheme.secondaryContainer,
+            // secondarySelectedColor: colorScheme.secondaryContainer,
+            // checkmarkColor: colorScheme.onSurfaceVariant,
             iconTheme: const IconThemeData(
-              color: Color(0xff6200ee),
+              // color: Color(0xff6200ee),
               size: 18.0,
             ),
           ),
         ),
       );
     });
+    // ChipThemeData:<ChipThemeData#b11be(backgroundColor: Color(0xffdfccfb), deleteIconColor: Color(0xff000000), disabledColor: Color(0x1f000000), selectedColor: Color(0xff03dac6), secondarySelectedColor: Color(0xff03dac6), surfaceTintColor: Color(0xff6200ee), checkMarkColor: Color(0xff000000), iconTheme: IconThemeData#c0d1d(size: 18.0, color: Color(0xff6200ee)))>
+    // ChipThemeData:<ChipThemeData#bd1ff(backgroundColor: Color(0xffffffff), checkMarkColor: Color(0xff000000), labelStyle: TextStyle(inherit: true, color: Color(0xff000000), size: 14.0, letterSpacing: 0.1, height: 1.4x), secondaryLabelStyle: TextStyle(inherit: true, color: Color(0xff000000), size: 14.0, letterSpacing: 0.1, height: 1.4x), iconTheme: IconThemeData#957cb(size: 18.0))>
     test(
         'Chip FST8.4 M3: GIVEN a '
         'FlexSubTheme.chipTheme(M3 no-null scheme with disable tint) '
@@ -3501,7 +3516,7 @@ void main() {
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
     test(
-        'InputDecoration FST16.1 light: GIVEN a '
+        'InputDecoration FST16.1 light: GIVEN a M2 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3513,6 +3528,7 @@ void main() {
           colorScheme: colorScheme,
           tintedDisabled: true,
           tintedInteractions: true,
+          useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -3658,7 +3674,7 @@ void main() {
       );
     });
     test(
-        'InputDecoration FST16.2 light: GIVEN a '
+        'InputDecoration FST16.2 light: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
@@ -3673,6 +3689,7 @@ void main() {
           unfocusedBorderIsColored: false,
           tintedDisabled: true,
           tintedInteractions: true,
+          useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -3818,7 +3835,7 @@ void main() {
       );
     });
     test(
-        'InputDecoration FST16.3 dark: GIVEN a '
+        'InputDecoration FST16.3 dark: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -3830,6 +3847,7 @@ void main() {
           colorScheme: colorScheme,
           tintedDisabled: true,
           tintedInteractions: true,
+          useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -3971,7 +3989,7 @@ void main() {
       );
     });
     test(
-        'InputDecoration FST16.4 dark: GIVEN a default '
+        'InputDecoration FST16.4 dark: GIVEN a default M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
@@ -3986,6 +4004,7 @@ void main() {
           unfocusedBorderIsColored: false,
           tintedDisabled: true,
           tintedInteractions: true,
+          useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -5134,30 +5153,61 @@ void main() {
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme =
+          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final TextTheme textTheme = Typography.material2021(
+              platform: TargetPlatform.android, colorScheme: colorScheme)
+          .black;
       expect(
-        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme),
-        equals(
-          const NavigationBarThemeData(
+        FlexSubThemes.navigationBarTheme(colorScheme: colorScheme).toString(),
+        equalsIgnoringHashCodes(
+          NavigationBarThemeData(
             height: null,
             elevation: null,
             labelBehavior: null,
-            backgroundColor: null,
-            indicatorColor: null,
-            labelTextStyle: null,
-            iconTheme: null,
-          ),
+            backgroundColor: colorScheme.surfaceContainer,
+            indicatorColor: colorScheme.secondaryContainer,
+            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return textTheme.labelMedium!.copyWith(
+                    color: colorScheme.onSurface,
+                    fontSize: 12,
+                  );
+                }
+                return textTheme.labelMedium!.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                  fontSize: 12,
+                );
+              },
+            ),
+            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return IconThemeData(
+                    size: 24,
+                    color: colorScheme.onSurface,
+                  );
+                }
+                return IconThemeData(
+                    size: 24, color: colorScheme.onSurfaceVariant);
+              },
+            ),
+          ).toString(),
         ),
       );
     });
+
     test(
         'NavigationBar FST21.2 custom1: GIVEN a custom1 '
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      final TextTheme textTheme =
-          Typography.material2021(platform: TargetPlatform.android).black;
+      final ColorScheme colorScheme =
+          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final TextTheme textTheme = Typography.material2021(
+              platform: TargetPlatform.android, colorScheme: colorScheme)
+          .black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
@@ -5184,7 +5234,7 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             elevation: 3,
-            backgroundColor: colorScheme.surface.withOpacity(0.9),
+            backgroundColor: colorScheme.surfaceContainer.withOpacity(0.9),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
             indicatorShape: const RoundedRectangleBorder(
@@ -5256,9 +5306,11 @@ void main() {
         'FlexSubTheme.navigationBarTheme() in M2 settings '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      final TextTheme textTheme =
-          Typography.material2021(platform: TargetPlatform.android).black;
+      final ColorScheme colorScheme =
+          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final TextTheme textTheme = Typography.material2021(
+              platform: TargetPlatform.android, colorScheme: colorScheme)
+          .black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
@@ -5284,7 +5336,6 @@ void main() {
         navBarTheme.toString(),
         equalsIgnoringHashCodes(
           NavigationBarThemeData(
-            elevation: 3,
             height: 80,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             backgroundColor: colorScheme.error.withOpacity(0.9),
@@ -5456,16 +5507,36 @@ void main() {
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme =
+          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
         ),
         equals(
-          const NavigationRailThemeData(
+          NavigationRailThemeData(
+            backgroundColor: colorScheme.surface,
             elevation: 0,
+            selectedLabelTextStyle: TextStyle(
+              fontSize: 12,
+              color: colorScheme.onSurface,
+            ),
+            unselectedLabelTextStyle: TextStyle(
+              fontSize: 12,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            selectedIconTheme: IconThemeData(
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            indicatorColor: colorScheme.secondaryContainer,
             useIndicator: true,
-            indicatorColor: Color(0x00000000),
           ),
         ),
       );
@@ -5475,43 +5546,77 @@ void main() {
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       expect(
         FlexSubThemes.navigationRailTheme(colorScheme: colorScheme),
         equals(
-          const NavigationRailThemeData(
+          NavigationRailThemeData(
+            backgroundColor: colorScheme.surface,
             elevation: 0,
+            selectedLabelTextStyle: TextStyle(
+              fontSize: 12,
+              color: colorScheme.onSurface,
+            ),
+            unselectedLabelTextStyle: TextStyle(
+              fontSize: 12,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            selectedIconTheme: IconThemeData(
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            indicatorColor: colorScheme.secondaryContainer,
             useIndicator: true,
-            indicatorColor: Color(0x00000000),
           ),
         ),
       );
     });
     test(
         'NavigationRail FST22.4 light-flutter default: GIVEN a default '
-        'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
+        'FlexSubTheme.navigationRailTheme() with opacity '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme =
+          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
-          // useFlutterDefaults: false // <<- Assumed as default,
+          opacity: 0.5,
+          useIndicator: false,
         ),
         equals(
-          const NavigationRailThemeData(
+          NavigationRailThemeData(
+            backgroundColor: colorScheme.surface.withOpacity(0.5),
             elevation: 0,
-            useIndicator: true,
-            indicatorColor: Color(0x00000000),
-            backgroundColor: Color(0xffffffff),
-            unselectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xa5000000), fontSize: 12.0),
             selectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xff6200ee), fontSize: 12.0),
-            unselectedIconTheme: IconThemeData(
-                color: Color(0xa5000000), opacity: 1.0, size: 24.0),
+              fontSize: 12,
+              color: colorScheme.onSurface,
+            ),
+            unselectedLabelTextStyle: TextStyle(
+              fontSize: 12,
+              color: colorScheme.onSurfaceVariant,
+            ),
             selectedIconTheme: IconThemeData(
-                color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            indicatorColor: colorScheme.secondaryContainer,
+            useIndicator: false,
           ),
         ),
       );
@@ -5521,36 +5626,55 @@ void main() {
         'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
-          // useFlutterDefaults: false // <<- Assumed as default,
+          opacity: 0.8,
+          useIndicator: false,
         ),
         equals(
-          const NavigationRailThemeData(
+          NavigationRailThemeData(
+            backgroundColor: colorScheme.surface.withOpacity(0.8),
             elevation: 0,
-            useIndicator: true,
-            indicatorColor: Color(0x00000000),
-            backgroundColor: Color(0xff121212),
-            unselectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xa5ffffff), fontSize: 12.0),
             selectedLabelTextStyle: TextStyle(
-                inherit: true, color: Color(0xffbb86fc), fontSize: 12.0),
-            unselectedIconTheme: IconThemeData(
-                color: Color(0xa5ffffff), opacity: 1.0, size: 24.0),
+              fontSize: 12,
+              color: colorScheme.onSurface,
+            ),
+            unselectedLabelTextStyle: TextStyle(
+              fontSize: 12,
+              color: colorScheme.onSurfaceVariant,
+            ),
             selectedIconTheme: IconThemeData(
-                color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 24,
+              opacity: 1,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            indicatorColor: colorScheme.secondaryContainer,
+            useIndicator: false,
           ),
         ),
       );
     });
+// Expected: NavigationRailThemeData:<NavigationRailThemeData#0b503(backgroundColor: Color(0x80141218), elevation: 1.0, unselectedLabelTextStyle: TextStyle(inherit: true, color: Color(0x45e6e0e9), size: 12.0), selectedLabelTextStyle: TextStyle(inherit: true, color: Color(0xffcbc2db), size: 12.0), unselectedIconTheme: IconThemeData#552d9(size: 24.0, color: Color(0x45efb8c8), opacity: 1.0), selectedIconTheme: IconThemeData#5db58(size: 24.0, color: Color(0xff4a4458), opacity: 1.0), groupAlignment: 0.0, labelType: NavigationRailLabelType.all, useIndicator: true, indicatorColor: Color(0x00000000), indicatorShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(13.0)))>
+//   Actual: NavigationRailThemeData:<NavigationRailThemeData#20fcf(backgroundColor: Color(0x80141218), elevation: 1.0, unselectedLabelTextStyle: TextStyle(inherit: true, color: Color(0x45e6e0e9), size: 12.0), selectedLabelTextStyle: TextStyle(inherit: true, color: Color(0xffcbc2db), size: 12.0), unselectedIconTheme: IconThemeData#552d9(size: 24.0, color: Color(0x45efb8c8), opacity: 1.0), selectedIconTheme: IconThemeData#5db58(size: 24.0, color: Color(0xff4a4458), opacity: 1.0), groupAlignment: 0.0, labelType: NavigationRailLabelType.all, useIndicator: true, indicatorColor: Color(0xff4a4458), indicatorShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(13.0)))>
     test(
         'NavigationRail FST22.6 custom: GIVEN a custom '
         'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
@@ -5601,7 +5725,7 @@ void main() {
                 Radius.circular(13),
               ),
             ),
-            indicatorColor: const Color(0x00000000),
+            indicatorColor: colorScheme.secondaryContainer,
             labelType: NavigationRailLabelType.all,
             groupAlignment: 0,
           ),
@@ -5613,7 +5737,10 @@ void main() {
         'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values Icons Size test', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
@@ -5626,6 +5753,7 @@ void main() {
           mutedUnselectedLabel: true,
           unselectedIconSize: 30,
           selectedIconSize: 32,
+          indicatorSchemeColor: SchemeColor.primaryFixed,
           elevation: 1,
           opacity: 0.5,
           unselectedAlphaBlend: 0xFA,
@@ -5660,7 +5788,7 @@ void main() {
               opacity: 1,
             ),
             useIndicator: true,
-            indicatorColor: const Color(0x00000000),
+            indicatorColor: colorScheme.primaryFixed,
             labelType: NavigationRailLabelType.all,
             groupAlignment: 0,
           ),
