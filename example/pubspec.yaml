@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.0.0-dev.2
+version: 8.0.0-dev.3
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -54,7 +54,9 @@ dependencies:
   # SVG file drawing, used by Asset Images, by dnfield.dev.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.0.10+1
+  # Temp change to: https://pub.dev/packages/flutter_svg_plus for WASM support.
+  # flutter_svg: ^2.0.10+1
+  flutter_svg_plus: ^2.0.13
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
@@ -74,7 +76,7 @@ dependencies:
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.1.4
+  path_provider: ^2.1.5
 
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
