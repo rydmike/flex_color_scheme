@@ -485,33 +485,59 @@ void main() {
 
     const ColorScheme hcDarkWithLight = ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xff0000ba),
+      primary: Color(0xffaaaaaa),
       onPrimary: Color(0xffaaaaaa),
       primaryContainer: Color(0xffaaaaaa),
       onPrimaryContainer: Color(0xffaaaaaa),
       secondary: Color(0xff66fff9),
       onSecondary: Color(0xffaaaaaa),
+      secondaryContainer: Color(0xffaaaaaa),
+      onSecondaryContainer: Color(0xffaaaaaa),
       tertiary: Color(0xffaaaaaa),
       onTertiary: Color(0xffaaaaaa),
+      tertiaryContainer: Color(0xffaaaaaa),
+      onTertiaryContainer: Color(0xffaaaaaa),
       error: Color(0xffaaaaaa),
       onError: Color(0xffaaaaaa),
-      surface: Color(0xffaaaaaa),
-      onSurface: Color(0xffaaaaaa),
+      errorContainer: Color(0xffaaaaaa),
+      onErrorContainer: Color(0xffaaaaaa),
+      surface: Color(0xffffffff),
+      onSurface: Color(0xff000000),
       // Light colors that will be created by light scheme defaults
       // but cannot be overridden via passed in properties to raw constructor.
-      errorContainer: Color(0xfff1d8d8),
-      onErrorContainer: Color(0xff000000),
+
+      primaryFixed: Color(0xffbfbff8),
+      primaryFixedDim: Color(0xff8c8ceb),
+      onPrimaryFixed: Color(0xff00003e),
+      onPrimaryFixedVariant: Color(0xff000050),
+      secondaryFixed: Color(0xffc0f3f1),
+      secondaryFixedDim: Color(0xff9dece9),
+      onSecondaryFixed: Color(0xff002827),
+      onSecondaryFixedVariant: Color(0xff005c58),
+      tertiaryFixed: Color(0xffbfeeed),
+      tertiaryFixedDim: Color(0xff8cdbdb),
+      onTertiaryFixed: Color(0xff001b1b),
+      onTertiaryFixedVariant: Color(0xff002c2c),
+      surfaceDim: Color(0xffe0e0e0),
+      surfaceBright: Color(0xfffdfdfd),
+      surfaceContainerLowest: Color(0xffffffff),
+      surfaceContainerLow: Color(0xfff8f8f8),
+      surfaceContainer: Color(0xfff3f3f3),
+      surfaceContainerHigh: Color(0xffededed),
+      surfaceContainerHighest: Color(0xffe7e7e7),
       onSurfaceVariant: Color(0xff000000),
-      outline: Color(0xFF737373),
-      outlineVariant: Color(0xFFBFBFBF),
+      outline: Color(0xff919191),
+      outlineVariant: Color(0xffd1d1d1),
       shadow: Color(0xff000000),
       scrim: Color(0xff000000),
       inverseSurface: Color(0xff121212),
       onInverseSurface: Color(0xffffffff),
       inversePrimary: Color(0xff9999ff),
+      surfaceTint: Color(0xff0000ba),
     );
 
     const FlexColorScheme hcLightWithLight = FlexColorScheme(
+      useMaterial3: false,
       colorScheme: hcDarkWithLight,
       brightness: Brightness.light,
       primary: Color(0xff0000ba),
@@ -520,7 +546,7 @@ void main() {
       onPrimaryContainer: Color(0xff000000),
       secondary: Color(0xff66fff9),
       onSecondary: Color(0xff000000),
-      secondaryContainer: Color(0xFFC8F9F7),
+      secondaryContainer: Color(0xffc8f9f7),
       onSecondaryContainer: Color(0xff000000),
       tertiary: Color(0xff018786),
       onTertiary: Color(0xffffffff),
@@ -528,6 +554,8 @@ void main() {
       onTertiaryContainer: Color(0xff000000),
       error: Color(0xff790000),
       onError: Color(0xffffffff),
+      errorContainer: Color(0xfff1d8d8),
+      onErrorContainer: Color(0xff000000),
       surface: Color(0xffffffff),
       onSurface: Color(0xff000000),
     );
@@ -926,50 +954,55 @@ void main() {
       );
     });
 
-    test(
-        'FCS7.20RawL String: GIVEN FlexColorScheme() made with min required '
-        'light params that equals default Material light scheme '
-        'EXPECT its ColorScheme to be equal to one made with light scheme with '
-        'no parameters.', () {
-      expect(
-          const FlexColorScheme(
-            brightness: Brightness.light,
-            primary: FlexColor.materialLightPrimary,
-            primaryContainer: FlexColor.materialLightPrimaryContainer,
-            secondary: FlexColor.materialLightSecondary,
-            secondaryContainer: FlexColor.materialLightSecondaryContainer,
-            tertiary: FlexColor.materialLightTertiary,
-            tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(FlexColorScheme.light(
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
-    });
+    // TODO(rydmike): These past test cases are not valid anymore in V8.
+    // The RAW constructor cannot produce same theme and scheme as basic
+    // factory constructors in V8 anymore.
+    //
+    // test(
+    //     'FCS7.20RawL String: GIVEN FlexColorScheme() made with min required '
+    //     'light params that equals default Material light scheme '
+    //     'EXPECT its ColorScheme to be equal to one made with light scheme with '
+    //     'no parameters.', () {
+    //   expect(
+    //       const FlexColorScheme(
+    //         brightness: Brightness.light,
+    //         primary: FlexColor.materialLightPrimary,
+    //         primaryContainer: FlexColor.materialLightPrimaryContainer,
+    //         secondary: FlexColor.materialLightSecondary,
+    //         secondaryContainer: FlexColor.materialLightSecondaryContainer,
+    //         tertiary: FlexColor.materialLightTertiary,
+    //         tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+    //         useMaterial3: false,
+    //       ).toScheme.toString(minLevel: DiagnosticLevel.fine),
+    //       equalsIgnoringHashCodes(FlexColorScheme.light(
+    //         useMaterial3: false,
+    //       ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
+    // });
+    //
+    // test(
+    //     'FCS7.21RawL: GIVEN FlexColorScheme() made with min required light '
+    //     'params that equals default Material light scheme '
+    //     'EXPECT its ThemeData to be equal to one made with light scheme with '
+    //     'no parameters.', () {
+    //   expect(
+    //     const FlexColorScheme(
+    //       brightness: Brightness.light,
+    //       primary: FlexColor.materialLightPrimary,
+    //       primaryContainer: FlexColor.materialLightPrimaryContainer,
+    //       secondary: FlexColor.materialLightSecondary,
+    //       secondaryContainer: FlexColor.materialLightSecondaryContainer,
+    //       tertiary: FlexColor.materialLightTertiary,
+    //       tertiaryContainer: FlexColor.materialLightTertiaryContainer,
+    //       useMaterial3: false,
+    //     ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+    //     equalsIgnoringHashCodes(
+    //       FlexColorScheme.light(
+    //         useMaterial3: false,
+    //       ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+    //     ),
+    //   );
+    // });
 
-    test(
-        'FCS7.21RawL: GIVEN FlexColorScheme() made with min required light '
-        'params that equals default Material light scheme '
-        'EXPECT its ThemeData to be equal to one made with light scheme with '
-        'no parameters.', () {
-      expect(
-        const FlexColorScheme(
-          brightness: Brightness.light,
-          primary: FlexColor.materialLightPrimary,
-          primaryContainer: FlexColor.materialLightPrimaryContainer,
-          secondary: FlexColor.materialLightSecondary,
-          secondaryContainer: FlexColor.materialLightSecondaryContainer,
-          tertiary: FlexColor.materialLightTertiary,
-          tertiaryContainer: FlexColor.materialLightTertiaryContainer,
-          useMaterial3: false,
-        ).toTheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          FlexColorScheme.light(
-            useMaterial3: false,
-          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
-      );
-    });
     test(
         'FCS7.22DefL: GIVEN FlexColorScheme.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
