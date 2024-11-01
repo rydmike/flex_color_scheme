@@ -53,7 +53,7 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   * Update and review all tests.
     * **Test fix status**: 
       * At quality assurance start, 309 tests to fix.
-      * Now **23** tests remain to be fixed. 
+      * Now **15** tests remain to be fixed. 
       * Of at start total 2103 tests, and now **2242** total tests.
       * Coverage is now at 95%.
     * Add more tests for the new features. Get the FCS package back to 100% test coverage.
