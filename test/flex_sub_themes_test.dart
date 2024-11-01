@@ -1393,8 +1393,6 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -3794,6 +3792,7 @@ void main() {
       const double focusedWidth = 2.0;
       const bool unfocusedHasBorder = true;
       const bool focusedHasBorder = true;
+      const bool unfocusedBorderIsColored = false;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
       final Color enabledHoveredBorderColor = colorScheme.primary;
@@ -3815,7 +3814,7 @@ void main() {
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
-          unfocusedBorderIsColored: false,
+          unfocusedBorderIsColored: unfocusedBorderIsColored,
           tintedDisabled: tintDisable,
           tintedInteractions: tintInteract,
           useMaterial3: useM3,
@@ -4014,16 +4013,48 @@ void main() {
         'InputDecoration FST16.3 dark: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.dark,
+      );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
+
+      const bool useM3 = false;
+      const bool tintDisable = true;
+      const bool tintInteract = true;
+      const double? radius = null;
+      const double unfocusedWidth = 1.0;
+      const double focusedWidth = 2.0;
+      const bool unfocusedHasBorder = true;
+      const bool focusedHasBorder = true;
+      const bool unfocusedBorderIsColored = true;
+      final Color borderColor = colorScheme.primary;
+      final Color enabledBorderColor = colorScheme.outline;
+      final Color enabledHoveredBorderColor = colorScheme.primary;
+      const double effectiveRadius =
+          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+        topLeft: Radius.circular(effectiveRadius),
+        topRight: Radius.circular(effectiveRadius),
+      );
+      const int effectiveAlpha = kFillColorAlphaDark;
+      final Color usedFillColor = Color.alphaBlend(
+          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+      final Color usedHover =
+          ThemeData.estimateBrightnessForColor(usedFillColor) ==
+                  Brightness.light
+              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
-          tintedDisabled: true,
-          tintedInteractions: true,
-          useMaterial3: false,
+          unfocusedBorderIsColored: unfocusedBorderIsColored,
+          tintedDisabled: tintDisable,
+          tintedInteractions: tintInteract,
+          useMaterial3: useM3,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -4049,7 +4080,7 @@ void main() {
                   color: tintDisabledColor,
                 );
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             floatingLabelStyle:
                 WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
@@ -4071,23 +4102,27 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             helperStyle:
                 WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             hintStyle:
                 WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
@@ -4121,44 +4156,91 @@ void main() {
               }
               return Colors.white70;
             }),
-            filled: true,
-            fillColor: const Color(0xff1f1b24),
-            hoverColor: const Color(0xff2c2633),
-            focusColor: null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary.withAlpha(0xA7),
-                width: 1,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                width: 1,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error.withAlpha(0xA7),
-                width: 1,
-              ),
+            filled: false,
+            fillColor: usedFillColor,
+            hoverColor: usedHover,
+            border: MaterialStateUnderlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
             ),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -4169,18 +4251,48 @@ void main() {
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.dark();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.dark,
+      );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
 
+      const bool useM3 = false;
+      const bool tintDisable = true;
+      const bool tintInteract = true;
+      const double? radius = null;
+      const double unfocusedWidth = 1.0;
+      const double focusedWidth = 2.0;
+      const bool unfocusedHasBorder = true;
+      const bool focusedHasBorder = true;
+      const bool unfocusedBorderIsColored = false;
+      final Color borderColor = colorScheme.primary;
+      final Color enabledBorderColor = colorScheme.outline;
+      final Color enabledHoveredBorderColor = colorScheme.primary;
+      const double effectiveRadius =
+          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+        topLeft: Radius.circular(effectiveRadius),
+        topRight: Radius.circular(effectiveRadius),
+      );
+      const int effectiveAlpha = kFillColorAlphaDark;
+      final Color usedFillColor = Color.alphaBlend(
+          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+      final Color usedHover =
+          ThemeData.estimateBrightnessForColor(usedFillColor) ==
+                  Brightness.light
+              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
-          unfocusedBorderIsColored: false,
-          tintedDisabled: true,
-          tintedInteractions: true,
-          useMaterial3: false,
+          unfocusedBorderIsColored: unfocusedBorderIsColored,
+          tintedDisabled: tintDisable,
+          tintedInteractions: tintInteract,
+          useMaterial3: useM3,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -4206,7 +4318,7 @@ void main() {
                   color: tintDisabledColor,
                 );
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             floatingLabelStyle:
                 WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
@@ -4232,7 +4344,7 @@ void main() {
                   color: tintDisabledColor,
                 );
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             helperStyle:
                 WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
@@ -4241,14 +4353,14 @@ void main() {
                   color: tintDisabledColor,
                 );
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             hintStyle:
                 WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
-              return const TextStyle(color: Colors.white60);
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
@@ -4282,44 +4394,91 @@ void main() {
               }
               return Colors.white70;
             }),
-            filled: true,
-            fillColor: const Color(0xff1f1b24),
-            hoverColor: const Color(0xff2c2633),
-            focusColor: null,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.primary,
-                width: 2,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.onSurface.withOpacity(0.38),
-                width: 1,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                width: 1,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              borderSide: BorderSide(
-                color: colorScheme.error.withAlpha(0xA7),
-                width: 1,
-              ),
+            filled: false,
+            fillColor: usedFillColor,
+            hoverColor: usedHover,
+            border: MaterialStateUnderlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
             ),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -4327,8 +4486,10 @@ void main() {
     });
     test(
         'InputDecoration FST16.5 states: Does Decorator '
-        'have right material states', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+        'have right material states in M2', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+      );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
@@ -4338,6 +4499,7 @@ void main() {
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             tintedDisabled: true,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
             WidgetState.error,
@@ -4350,30 +4512,33 @@ void main() {
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
             WidgetState.error,
             WidgetState.hovered,
           }),
           equals(
-            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+            TextStyle(color: colorScheme.error),
           ));
       // Floating label unfocused error style
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
             WidgetState.error,
           }),
           equals(
-            TextStyle(color: colorScheme.error),
+            TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
           ));
       // Floating label disabled style
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
             tintedDisabled: true,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
             WidgetState.disabled,
@@ -4385,29 +4550,63 @@ void main() {
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{}),
           equals(
-            TextStyle(color: Colors.black.withAlpha(0x99)),
+            TextStyle(color: Colors.black.withAlpha(kTintHover)),
           ));
     });
     test(
-        'InputDecoration FST16.6 light: GIVEN a default '
+        'InputDecoration FST16.6 light: GIVEN a default M2 '
         'FlexSubTheme.inputDecorationTheme(borderType: '
-        'FlexInputBorderType.underline, usedSchemeColor: '
+        'FlexInputBorderType.outline, usedSchemeColor: '
         'FlexUsedColor.secondary, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
-      const ColorScheme colorScheme = ColorScheme.light();
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.secondary);
+
+      const bool useM3 = false;
+      const bool tintDisable = true;
+      const bool tintInteract = true;
+      const double? radius = null;
+      const double unfocusedWidth = 1.0;
+      const double focusedWidth = 2.0;
+      const bool unfocusedHasBorder = true;
+      const bool focusedHasBorder = true;
+      final Color borderColor = colorScheme.secondary;
+      final Color enabledBorderColor = colorScheme.outline;
+      final Color enabledHoveredBorderColor = colorScheme.secondary;
+      const double effectiveRadius =
+          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+        topLeft: Radius.circular(effectiveRadius),
+        topRight: Radius.circular(effectiveRadius),
+      );
+      final BorderRadius effectiveOutlineBorder =
+          BorderRadius.circular(effectiveRadius);
+      const int effectiveAlpha = kFillColorAlphaLight;
+      final Color usedFillColor = Color.alphaBlend(
+          colorScheme.secondary.withAlpha(effectiveAlpha), colorScheme.surface);
+      final Color usedHover =
+          ThemeData.estimateBrightnessForColor(usedFillColor) ==
+                  Brightness.light
+              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
           baseSchemeColor: SchemeColor.secondary,
-          borderType: FlexInputBorderType.underline,
+          borderType: FlexInputBorderType.outline,
           tintedDisabled: true,
           tintedInteractions: true,
+          useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -4429,7 +4628,9 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
@@ -4453,14 +4654,18 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
             helperStyle:
                 WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
@@ -4503,61 +4708,93 @@ void main() {
               }
               return Colors.black45;
             }),
-            filled: true,
-            fillColor: const Color(0xfff2fdfc),
-            hoverColor: const Color(0xffe5fbf9),
-            focusColor: null,
-            focusedBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.secondary,
-                width: 2,
-              ),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.secondary.withAlpha(0xA7),
-                width: 1,
-              ),
-            ),
-            disabledBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.secondary
-                    .blendAlpha(colorScheme.onSurface, 0xCC)
-                    .withAlpha(0x26),
-                width: 1,
-              ),
-            ),
-            focusedErrorBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.error,
-                width: 2,
-              ),
-            ),
-            errorBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-              borderSide: BorderSide(
-                color: colorScheme.error.withAlpha(0xA7),
-                width: 1,
-              ),
+            filled: false,
+            fillColor: usedFillColor,
+            hoverColor: usedHover,
+            border: MaterialStateOutlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return OutlineInputBorder(
+                      borderRadius: effectiveOutlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return OutlineInputBorder(
+                      borderRadius: effectiveOutlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              // TODO(rydmike): INFO: M3 uses onErrorContainer
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            // TODO(rydmike): INFO: M3 uses error
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return OutlineInputBorder(
+                    borderRadius: effectiveOutlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return OutlineInputBorder(
+                  borderRadius: effectiveOutlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
             ),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
@@ -4577,8 +4814,9 @@ void main() {
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
-            borderType: FlexInputBorderType.underline,
+            borderType: FlexInputBorderType.outline,
             tintedDisabled: true,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
             WidgetState.error,
@@ -4591,32 +4829,35 @@ void main() {
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
-            borderType: FlexInputBorderType.underline,
+            borderType: FlexInputBorderType.outline,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
             WidgetState.error,
             WidgetState.hovered,
           }),
           equals(
-            TextStyle(color: colorScheme.error.withAlpha(0xA7)),
+            TextStyle(color: colorScheme.error),
           ));
       // Floating label unfocused error style
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
-            borderType: FlexInputBorderType.underline,
+            borderType: FlexInputBorderType.outline,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
             WidgetState.error,
           }),
           equals(
-            TextStyle(color: colorScheme.error),
+            TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
           ));
       // Floating label disabled style
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
-            borderType: FlexInputBorderType.underline,
+            borderType: FlexInputBorderType.outline,
+            useMaterial3: false,
             tintedDisabled: true,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{
@@ -4629,11 +4870,12 @@ void main() {
       expect(
           (FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
-            borderType: FlexInputBorderType.underline,
+            borderType: FlexInputBorderType.outline,
+            useMaterial3: false,
           ).floatingLabelStyle as WidgetStateTextStyle?)!
               .resolve(<WidgetState>{}),
           equals(
-            TextStyle(color: Colors.black.withAlpha(0x99)),
+            TextStyle(color: Colors.black.withAlpha(kTintHover)),
           ));
       //
       // Various v7 new theme combinations.
@@ -4657,7 +4899,8 @@ void main() {
         ),
       );
       expect(
-        m.enabledBorder,
+        (m.border as MaterialStateOutlineInputBorder?)!
+            .resolve(<WidgetState>{}),
         equals(
           OutlineInputBorder(
             gapPadding: 4,
@@ -4707,7 +4950,7 @@ void main() {
           WidgetState.error,
           WidgetState.hovered,
         }),
-        equals(TextStyle(color: colorScheme.onErrorContainer)),
+        equals(TextStyle(color: colorScheme.error)),
       );
       expect(
         (m.labelStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{
@@ -4781,11 +5024,12 @@ void main() {
       expect(
         (m.hintStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(const TextStyle(color: Colors.black38)),
+        equals(
+            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
       );
       expect(
         (m.hintStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{}),
-        equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
       );
       //
       // iconColor
@@ -4813,7 +5057,7 @@ void main() {
       expect(
         (m.prefixIconColor as WidgetStateColor?)!
             .resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurface),
+        equals(colorScheme.onSurfaceVariant),
       );
       expect(
         (m.prefixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
@@ -4843,7 +5087,8 @@ void main() {
       //
       // borders
       expect(
-        m.enabledBorder,
+        (m.border as MaterialStateUnderlineInputBorder?)!
+            .resolve(<WidgetState>{}),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
@@ -4851,7 +5096,7 @@ void main() {
               topRight: Radius.circular(4),
             ),
             borderSide: BorderSide(
-              color: colorScheme.onSurfaceVariant,
+              color: colorScheme.outline,
               width: 3,
             ),
           ),
@@ -5840,8 +6085,6 @@ void main() {
         ),
       );
     });
-// Expected: NavigationRailThemeData:<NavigationRailThemeData#0b503(backgroundColor: Color(0x80141218), elevation: 1.0, unselectedLabelTextStyle: TextStyle(inherit: true, color: Color(0x45e6e0e9), size: 12.0), selectedLabelTextStyle: TextStyle(inherit: true, color: Color(0xffcbc2db), size: 12.0), unselectedIconTheme: IconThemeData#552d9(size: 24.0, color: Color(0x45efb8c8), opacity: 1.0), selectedIconTheme: IconThemeData#5db58(size: 24.0, color: Color(0xff4a4458), opacity: 1.0), groupAlignment: 0.0, labelType: NavigationRailLabelType.all, useIndicator: true, indicatorColor: Color(0x00000000), indicatorShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(13.0)))>
-//   Actual: NavigationRailThemeData:<NavigationRailThemeData#20fcf(backgroundColor: Color(0x80141218), elevation: 1.0, unselectedLabelTextStyle: TextStyle(inherit: true, color: Color(0x45e6e0e9), size: 12.0), selectedLabelTextStyle: TextStyle(inherit: true, color: Color(0xffcbc2db), size: 12.0), unselectedIconTheme: IconThemeData#552d9(size: 24.0, color: Color(0x45efb8c8), opacity: 1.0), selectedIconTheme: IconThemeData#5db58(size: 24.0, color: Color(0xff4a4458), opacity: 1.0), groupAlignment: 0.0, labelType: NavigationRailLabelType.all, useIndicator: true, indicatorColor: Color(0xff4a4458), indicatorShape: RoundedRectangleBorder(BorderSide(width: 0.0, style: none), BorderRadius.circular(13.0)))>
     test(
         'NavigationRail FST22.6 custom: GIVEN a custom '
         'FlexSubTheme.navigationRailTheme() '
