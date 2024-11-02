@@ -1,5 +1,4 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -13,7 +12,7 @@ void main() {
   // same result as matching one with default constructor.
   //****************************************************************************
   group('FCS7: WITH FlexColorScheme ', () {
-    debugDefaultTargetPlatformOverride = null;
+    // debugDefaultTargetPlatformOverride = null;
 
     const Color m3BaseSeed = Color(0xFF6750A4);
     final FlexSchemeColor m3Baseline =
