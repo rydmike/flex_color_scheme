@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.0.0-dev.3
 
-**Nov 1, 2024**
+**Nov 2, 2024**
 
 ### SUMMARY
 
@@ -53,8 +53,8 @@ FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is 
   * Update and review all tests.
     * **Test fix status**: 
       * At quality assurance start, 309 tests to fix.
-      * Now **10** tests remain to be fixed. 
-      * Of at start total 2103 tests, and now **2241** total tests.
+      * Now **5** tests remain to be fixed. 
+      * Of at start total 2103 tests, and now **2243** total tests.
       * Coverage is now at 95%.
     * Add more tests for the new features. Get the FCS package back to 100% test coverage.
   * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and to offer early access to V8 and try new features.
