@@ -1979,7 +1979,7 @@ sealed class FlexSubThemes {
     Color onSecondarySelectedColor = schemeColorPair(
         secondarySelectedSchemeColor ?? fallbackSecondarySelected, colorScheme);
     if (blend) {
-      onBackgroundColor = blendedContrast(onBackgroundColor);
+      onBackgroundColor = blendedContrast(backgroundColor);
       onSelectedColor = blendedContrast(selectedColor);
       onSecondarySelectedColor = blendedContrast(secondarySelectedColor);
     }
