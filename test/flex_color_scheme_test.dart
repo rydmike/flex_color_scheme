@@ -2260,6 +2260,48 @@ void main() {
       );
     });
 
+    testWidgets(
+        'FCS6.10L: GIVEN A LIGHT theme with defined background colors AND '
+        'un-themedSystemNavigationBar WITH NO divider and '
+        'systemNavBarStyle: FlexSystemNavBarStyle.navigationBar '
+        'EXPECT colorScheme.surfaceContainer colored system navbar, '
+        'with no visible divider.', (WidgetTester tester) async {
+      const Color seedColor = Color(0xFF1577C7);
+
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              brightness: Brightness.light,
+              seedColor: seedColor,
+            ),
+            scaffoldBackgroundColor: const Color(0xFF050C0E),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.navigationBar,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
+                  systemNavigationBarColor:
+                      Theme.of(context).colorScheme.surfaceContainer,
+                  systemNavigationBarDividerColor: Colors.transparent,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
     // Tests for dark mode
 
     testWidgets(
@@ -2782,6 +2824,47 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).navigationBarTheme.backgroundColor,
+                  systemNavigationBarDividerColor: Colors.transparent,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+    testWidgets(
+        'FCS6.10D: GIVEN A DARK theme with defined background colors AND '
+        'un-themedSystemNavigationBar WITH NO divider and '
+        'systemNavBarStyle: FlexSystemNavBarStyle.navigationBar '
+        'EXPECT colorScheme.surfaceContainer colored system navbar, '
+        'with no visible divider.', (WidgetTester tester) async {
+      const Color seedColor = Color(0xFF1577C7);
+
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              brightness: Brightness.dark,
+              seedColor: seedColor,
+            ),
+            scaffoldBackgroundColor: const Color(0xFF050C0E),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.navigationBar,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
+                  systemNavigationBarColor:
+                      Theme.of(context).colorScheme.surfaceContainer,
                   systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
