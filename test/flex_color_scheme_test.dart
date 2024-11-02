@@ -1736,7 +1736,7 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
 
     testWidgets(
-        'FCS5.01La: GIVEN A light theme with defined background colors AND '
+        'FCS6.01La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.system '
         'EXPECT white system navbar, with NO divider.',
@@ -1774,7 +1774,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.01Lb: GIVEN A light theme with defined background colors AND '
+        'FCS6.01Lb: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH useDivider:false '
         'systemNavBarStyle: FlexSystemNavBarStyle.system divider:false '
         'EXPECT white system navbar, with no visible divider.',
@@ -1813,7 +1813,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.02La: GIVEN A light theme with defined background colors AND '
+        'FCS6.02La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
         'EXPECT scaffoldBackground system navbar, with NO divider.',
@@ -1852,7 +1852,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.02Lb: GIVEN A light theme with defined background colors AND '
+        'FCS6.02Lb: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH useDivider:false '
         'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
         'EXPECT scaffoldBackground system navbar, with no visible divider.',
@@ -1892,7 +1892,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.03La: GIVEN A light theme with defined background colors AND '
+        'FCS6.03La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar, with NO divider.',
@@ -1931,7 +1931,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.03Lb: GIVEN A light theme with defined background colors AND '
+        'FCS6.03Lb: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH useDivider:false '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar, with no visible divider.',
@@ -1971,7 +1971,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.04La: GIVEN A light theme with defined background colors AND '
+        'FCS6.04La: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.background '
         'EXPECT background colored system navbar, with NO divider.',
@@ -2010,7 +2010,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.04Lb: GIVEN A light theme with defined background colors AND '
+        'FCS6.04Lb: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH useDivider:false '
         'systemNavBarStyle: FlexSystemNavBarStyle.background '
         'EXPECT background colored system navbar, with no visible divider.',
@@ -2050,7 +2050,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.05L: GIVEN A light theme with defined background colors AND '
+        'FCS6.05L: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH divider and '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar, with divider.',
@@ -2090,7 +2090,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.06L: GIVEN A light theme with defined background colors AND '
+        'FCS6.06L: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH divider and opacity 0.5 and '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar with 0.5 opacity , with divider.',
@@ -2133,7 +2133,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.07L: GIVEN A light theme with defined background colors AND '
+        'FCS6.07L: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH NO divider and opacity 0.5 and '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar with 0.5 opacity, with no '
@@ -2174,7 +2174,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.08L: GIVEN A light theme with defined background colors AND '
+        'FCS6.08L: GIVEN A light theme with defined background colors AND '
         'themedSystemNavigationBar WITH NO divider and '
         'systemNavBarStyle: FlexSystemNavBarStyle.transparent and opacity:0.5 '
         'EXPECT scaffoldBackground colored system navbar with 0.01 opacity, '
@@ -2215,10 +2215,55 @@ void main() {
       );
     });
 
+    testWidgets(
+        'FCS6.09L: GIVEN A light theme with defined background colors AND '
+        'themedSystemNavigationBar WITH NO divider and '
+        'systemNavBarStyle: FlexSystemNavBarStyle.navigationBar '
+        'EXPECT navigationBarTheme.backgroundColor colored system navbar, '
+        'with no visible divider.', (WidgetTester tester) async {
+      const Color seedColor = Color(0xFF1577C7);
+      const Color navBarColor = Color(0xFFA7C2D5);
+
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: seedColor,
+            ),
+            scaffoldBackgroundColor: const Color(0xFFE3F2FD),
+            navigationBarTheme: const NavigationBarThemeData(
+              backgroundColor: navBarColor,
+            ),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.navigationBar,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
+                  systemNavigationBarColor:
+                      Theme.of(context).navigationBarTheme.backgroundColor,
+                  systemNavigationBarDividerColor: Colors.transparent,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                  systemNavigationBarContrastEnforced: false,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
     // Tests for dark mode
 
     testWidgets(
-        'FCS5.01Da: GIVEN A dark theme with defined background colors AND '
+        'FCS6.01Da: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.system '
         'EXPECT black system navbar, with NO divider.',
@@ -2256,7 +2301,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.01Db: GIVEN A dark theme with defined background colors AND '
+        'FCS6.01Db: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH useDivider: false '
         'systemNavBarStyle: FlexSystemNavBarStyle.system '
         'EXPECT black system navbar, with no visible divider.',
@@ -2295,7 +2340,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.02Da: GIVEN A dark theme with defined background colors AND '
+        'FCS6.02Da: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
         'EXPECT scaffoldBackground system navbar, with NO divider.',
@@ -2334,7 +2379,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.02Db: GIVEN A dark theme with defined background colors AND '
+        'FCS6.02Db: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH useDivider: false '
         'systemNavBarStyle: FlexSystemNavBarStyle.scaffoldBackground '
         'EXPECT scaffoldBackground system navbar, with no visible divider.',
@@ -2374,7 +2419,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.03Da: GIVEN A dark theme with defined background colors AND '
+        'FCS6.03Da: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar, with NO divider.',
@@ -2414,7 +2459,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.03Db: GIVEN A dark theme with defined background colors AND '
+        'FCS6.03Db: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar, with no visible divider.',
@@ -2455,7 +2500,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.04Da: GIVEN A dark theme with defined background colors AND '
+        'FCS6.04Da: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.background '
         'EXPECT background colored system navbar, with NO divider.',
@@ -2495,7 +2540,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.04Db: GIVEN A dark theme with defined background colors AND '
+        'FCS6.04Db: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH '
         'systemNavBarStyle: FlexSystemNavBarStyle.background '
         'EXPECT background colored system navbar, with no visible divider.',
@@ -2536,7 +2581,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.05D: GIVEN A dark theme with defined background colors AND '
+        'FCS6.05D: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH divider and '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar, with divider.',
@@ -2577,7 +2622,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.06D: GIVEN A dark theme with defined background colors AND '
+        'FCS6.06D: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH divider and opacity 0.5 and '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar and divider with 0.5 opacity.',
@@ -2621,7 +2666,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.07D: GIVEN A dark theme with defined background colors AND '
+        'FCS6.07D: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH NO divider and opacity 0.5 and '
         'systemNavBarStyle: FlexSystemNavBarStyle.surface '
         'EXPECT surface colored system navbar with 0.5 opacity, with no '
@@ -2663,7 +2708,7 @@ void main() {
     });
 
     testWidgets(
-        'FCS5.08D: GIVEN A dark theme with defined background colors AND '
+        'FCS6.08D: GIVEN A dark theme with defined background colors AND '
         'themedSystemNavigationBar WITH NO divider and '
         'systemNavBarStyle: FlexSystemNavBarStyle.transparent and opacity:0.5 '
         'EXPECT scaffoldBackground colored system navbar with 0.01 opacity, '
@@ -2691,6 +2736,52 @@ void main() {
                   systemStatusBarContrastEnforced: false,
                   systemNavigationBarColor:
                       Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                  systemNavigationBarDividerColor: Colors.transparent,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                  systemNavigationBarContrastEnforced: false,
+                ),
+              );
+              // The builder function must return a widget.
+              return const Placeholder();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets(
+        'FCS6.09D: GIVEN A DARK theme with defined background colors AND '
+        'themedSystemNavigationBar WITH NO divider and '
+        'systemNavBarStyle: FlexSystemNavBarStyle.navigationBar '
+        'EXPECT navigationBarTheme.backgroundColor colored system navbar, '
+        'with no visible divider.', (WidgetTester tester) async {
+      const Color seedColor = Color(0xFF1577C7);
+      const Color navBarColor = Color(0xFF051318);
+
+      await tester.pumpWidget(
+        Theme(
+          data: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              brightness: Brightness.dark,
+              seedColor: seedColor,
+            ),
+            scaffoldBackgroundColor: const Color(0xFF050C0E),
+            navigationBarTheme: const NavigationBarThemeData(
+              backgroundColor: navBarColor,
+            ),
+          ),
+          child: Builder(
+            builder: (BuildContext context) {
+              expect(
+                FlexColorScheme.themedSystemNavigationBar(
+                  context,
+                  systemNavBarStyle: FlexSystemNavBarStyle.navigationBar,
+                  useDivider: false,
+                ),
+                SystemUiOverlayStyle(
+                  systemStatusBarContrastEnforced: false,
+                  systemNavigationBarColor:
+                      Theme.of(context).navigationBarTheme.backgroundColor,
                   systemNavigationBarDividerColor: Colors.transparent,
                   systemNavigationBarIconBrightness: Brightness.light,
                   systemNavigationBarContrastEnforced: false,
