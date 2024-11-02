@@ -8,7 +8,7 @@ void main() {
   // For more information. Tests are added here to cover the usage gap to
   // see if it might change one day.
 
-  group('Test ThemeData Equality', () {
+  group('ThemeData Equality Check basics', () {
     final ThemeData themeA = ThemeData.from(
       colorScheme: const ColorScheme.dark(),
     ).copyWith(
@@ -30,6 +30,42 @@ void main() {
         themeA,
         equals(themeB),
       );
+    });
+    test('Same ThemeData() empty factory is equal', () {
+      final ThemeData td1 = ThemeData();
+      final ThemeData td2 = ThemeData();
+      expect(td1, equals(td2));
+    });
+  });
+  group('ThemeData equality checks, component themes', () {
+    test('Same ThemeData with AppBar elevation theme is equal', () {
+      final ThemeData td1 = ThemeData(
+        appBarTheme: const AppBarTheme(elevation: 0),
+      );
+      final ThemeData td2 = ThemeData(
+        appBarTheme: const AppBarTheme(elevation: 0),
+      );
+      expect(td1, equals(td2));
+    });
+    // TODO(rydmike): This test is failing equality test, but it should not.
+    //  This will be fixed when Flutter stops usings callback for WidgetState
+    //  properties. This test is here to monitor that and will fail when
+    //  Flutter has moved to this new feature:
+    //  Related issue: https://github.com/flutter/flutter/issues/89127
+    //  And new feature PR: https://github.com/flutter/flutter/pull/154695
+    test('Same ThemeData with TextButtonThemeData styleFrom theme is NOT equal',
+        () {
+      final ThemeData td1 = ThemeData(
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(elevation: 1),
+        ),
+      );
+      final ThemeData td2 = ThemeData(
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(elevation: 1),
+        ),
+      );
+      expect(td1, isNot(td2));
     });
   });
 }
