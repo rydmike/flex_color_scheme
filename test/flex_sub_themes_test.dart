@@ -4,6 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  double tintAlphaFactor(Color color, Brightness mode,
+      [bool surfaceMode = false]) {
+    if (mode == Brightness.light) {
+      return surfaceMode
+          ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? 1.5
+              : 4.0
+          : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? 5.0
+              : 2.0;
+    } else {
+      return surfaceMode
+          ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? 5.0
+              : 2.0
+          : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+              ? 5.0
+              : 4.0;
+    }
+  }
+
   //****************************************************************************
   // FlexSubTheme unit tests.
   //
@@ -251,6 +272,24 @@ void main() {
               size: 27,
               opacity: 1,
             ),
+          ),
+        ),
+      );
+    });
+    test(
+        'BottomNavigationBar FST3.6: Given a deprecated bottomNavigationBar '
+        'EXPECT bottomNavigationBarTheme', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      expect(
+        FlexSubThemes.bottomNavigationBarTheme(
+          colorScheme: colorScheme,
+        ),
+        equals(
+          FlexSubThemes.bottomNavigationBar(
+            colorScheme: colorScheme,
           ),
         ),
       );
@@ -1589,14 +1628,125 @@ void main() {
         ),
       );
     });
+    test(
+        'Chip FST8.8: GIVEN a '
+        'FlexSubTheme.chipTheme() with usedSchemeColor '
+        'Tertiary, selectedSchemeColor, secondarySelectedSchemeColor and '
+        'disable tint EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          selectedSchemeColor: SchemeColor.tertiaryContainer,
+          secondarySelectedSchemeColor: SchemeColor.secondaryContainer,
+          labelStyle: textTheme.labelLarge,
+          useTintedDisable: true,
+          // blendColors: true,
+        ),
+        equals(
+          ChipThemeData(
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onTertiary,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSecondaryContainer,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            selectedColor: colorScheme.tertiaryContainer,
+            secondarySelectedColor: colorScheme.secondaryContainer,
+            backgroundColor: colorScheme.tertiary,
+            checkmarkColor: colorScheme.onTertiaryContainer,
+            iconTheme: IconThemeData(
+              color: colorScheme.tertiary,
+              size: 18.0,
+            ),
+            disabledColor: FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface, colorScheme.tertiaryContainer)
+                .withAlpha(kAlphaVeryLowDisabled),
+          ),
+        ),
+      );
+    });
+    test(
+        'Chip FST8.9: GIVEN a '
+        'FlexSubTheme.chipTheme() with blend and usedSchemeColor '
+        'Tertiary, selectedSchemeColor, secondarySelectedSchemeColor and '
+        'disable tint EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
+      final Color backgroundColor = colorScheme.tertiary
+          .blendAlpha(colorScheme.surface, kChipBackgroundAlphaBlend);
+      const Color onBackgroundColor = Colors.black87;
+      final Color selectedColor = colorScheme.tertiaryContainer
+          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      const Color onSelectedColor = Colors.black87;
+      final Color secondarySelectedColor = colorScheme.secondaryContainer
+          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      const Color onSecondarySelectedColor = Colors.black87;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.tertiary,
+          selectedSchemeColor: SchemeColor.tertiaryContainer,
+          secondarySelectedSchemeColor: SchemeColor.secondaryContainer,
+          labelStyle: textTheme.labelLarge,
+          useTintedDisable: true,
+          blendColors: true,
+        ),
+        equals(
+          ChipThemeData(
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: onBackgroundColor,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: onSecondarySelectedColor,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            selectedColor: selectedColor,
+            secondarySelectedColor: secondarySelectedColor,
+            backgroundColor: backgroundColor,
+            checkmarkColor: onSelectedColor,
+            iconTheme: const IconThemeData(
+              // color: colorScheme.tertiary,
+              size: 18.0,
+            ),
+            disabledColor: FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface, selectedColor)
+                .withAlpha(kAlphaVeryLowDisabled),
+          ),
+        ),
+      );
+    });
   });
   group('WITH: FlexSubTheme.datePickerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes DatePicker tests
     // -------------------------------------------------------------------------
     test(
-        'Dialog FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
-        'EXPECT equal to DialogTheme() version with same values', () {
+        'DatePicker FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
+        'EXPECT equal to DatePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.datePickerTheme(
@@ -1617,10 +1767,10 @@ void main() {
       );
     });
     test(
-        'Dialog FST9a.2 background-based-a: GIVEN a '
+        'DatePicker FST9a.2 background-based-a: GIVEN a '
         'FlexSubTheme.datePickerTheme with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
-        'EXPECT equal to DialogTheme with backgroundColor', () {
+        'EXPECT equal to DatePickerThemeData with backgroundColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.datePickerTheme(
@@ -1644,10 +1794,10 @@ void main() {
       );
     });
     test(
-        'Dialog FST9a.3 background-based-b: GIVEN a '
+        'DatePicker FST9a.3 background-based-b: GIVEN a '
         'FlexSubTheme.datePickerTheme '
         'with no backgroundSchemeColor and backgroundColor '
-        'EXPECT equal to DialogTheme with backgroundColor', () {
+        'EXPECT equal to DatePickerThemeData with backgroundColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.datePickerTheme(
@@ -1671,9 +1821,9 @@ void main() {
       );
     });
     test(
-        'Dialog FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+        'DatePicker FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
         'with backgroundSchemeColor and no backgroundColor '
-        'EXPECT equal to DialogTheme with backgroundSchemeColor', () {
+        'EXPECT equal to DatePickerThemeData with backgroundSchemeColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.datePickerTheme(
@@ -1697,10 +1847,10 @@ void main() {
       );
     });
     test(
-        'Dialog FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+        'DatePicker FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
         'with backgroundSchemeColor and backgroundColor nad header '
         'background '
-        'EXPECT equal to DialogTheme with backgroundSchemeColor and '
+        'EXPECT equal to DatePickerThemeData with backgroundSchemeColor and '
         'header background and header foreground contrast ', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -1728,8 +1878,9 @@ void main() {
       );
     });
     test(
-        'Dialog FST9a.5 custom: GIVEN a custom FlexSubTheme.datePickerTheme '
-        'EXPECT equal to DialogTheme() version with same values', () {
+        'DatePicker FST9a.5 custom: GIVEN a custom '
+        'FlexSubTheme.datePickerTheme '
+        'EXPECT equal to DatePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
       expect(
         FlexSubThemes.datePickerTheme(
@@ -1751,7 +1902,200 @@ void main() {
         ),
       );
     });
+    test(
+        'DatePicker FST9a.6 custom: GIVEN a custom '
+        'FlexSubTheme.datePickerTheme with light ColorScheme '
+        'EXPECT equal to DatePickerThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        brightness: Brightness.light,
+        seedColor: const Color(0xFF16D797),
+      );
+      const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(4.0));
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          elevation: 4,
+          radius: 6,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: false,
+          dividerSchemeColor: SchemeColor.secondary,
+          headerForegroundSchemeColor: SchemeColor.secondaryContainer,
+          headerBackgroundSchemeColor: SchemeColor.onSecondaryContainer,
+        ),
+        equals(
+          DatePickerThemeData(
+            elevation: 4,
+            dividerColor: colorScheme.secondary,
+            headerForegroundColor: colorScheme.secondaryContainer,
+            headerBackgroundColor: colorScheme.onSecondaryContainer,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              filled: false,
+              hoverColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withOpacity(0.04)
+                  : Colors.black.withOpacity(0.04),
+              focusColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withOpacity(0.12)
+                  : Colors.black.withOpacity(0.12),
+              border: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.primary, width: 1),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.outline, width: 1),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.error, width: 1),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.primary, width: 2),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.error, width: 2),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(
+                    color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+              ),
+              floatingLabelStyle:
+                  WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+                // These styles are copied from M3 default, we are not
+                // going to test them again.
+                // coverage:ignore-start
+                if (states.contains(WidgetState.disabled)) {
+                  return TextStyle(
+                      color: colorScheme.onSurface.withOpacity(0.38));
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.hovered)) {
+                    return TextStyle(color: colorScheme.onErrorContainer);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return TextStyle(color: colorScheme.error);
+                  }
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return TextStyle(color: colorScheme.onSurfaceVariant);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return TextStyle(color: colorScheme.primary);
+                }
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+                // coverage:ignore-end
+              }),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'DatePicker FST9a.6 custom: GIVEN a custom '
+        'FlexSubTheme.datePickerTheme with dark ColorScheme '
+        'EXPECT equal to DatePickerThemeData() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: const Color(0xFF16D797),
+      );
+      const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(4.0));
+      expect(
+        FlexSubThemes.datePickerTheme(
+          colorScheme: colorScheme,
+          elevation: 4,
+          radius: 6,
+          inputDecorationTheme: null,
+          useInputDecoratorTheme: false,
+          dividerSchemeColor: SchemeColor.secondary,
+          headerForegroundSchemeColor: SchemeColor.secondaryContainer,
+          headerBackgroundSchemeColor: SchemeColor.onSecondaryContainer,
+        ),
+        equals(
+          DatePickerThemeData(
+            elevation: 4,
+            dividerColor: colorScheme.secondary,
+            headerForegroundColor: colorScheme.secondaryContainer,
+            headerBackgroundColor: colorScheme.onSecondaryContainer,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(6),
+              ),
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              filled: false,
+              hoverColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withOpacity(0.04)
+                  : Colors.black.withOpacity(0.04),
+              focusColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withOpacity(0.12)
+                  : Colors.black.withOpacity(0.12),
+              border: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.primary, width: 1),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.outline, width: 1),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.error, width: 1),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.primary, width: 2),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(color: colorScheme.error, width: 2),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: defaultRadius,
+                borderSide: BorderSide(
+                    color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+              ),
+              floatingLabelStyle:
+                  WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+                // These styles are copied from M3 default,
+                // we are not going to test them again.
+                // coverage:ignore-start
+                if (states.contains(WidgetState.disabled)) {
+                  return TextStyle(
+                      color: colorScheme.onSurface.withOpacity(0.38));
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.hovered)) {
+                    return TextStyle(color: colorScheme.onErrorContainer);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return TextStyle(color: colorScheme.error);
+                  }
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return TextStyle(color: colorScheme.onSurfaceVariant);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return TextStyle(color: colorScheme.primary);
+                }
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+                // coverage:ignore-end
+              }),
+            ),
+          ),
+        ),
+      );
+    });
   });
+
   group('WITH: FlexSubTheme.dialogTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Dialog tests
@@ -1986,6 +2330,14 @@ void main() {
       expect(
         m.menuStyle!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
+      );
+      final DropdownMenuThemeData m2 = DropdownMenuThemeData(
+          menuStyle: MenuStyle(
+              surfaceTintColor:
+                  WidgetStatePropertyAll<Color>(colorScheme.surfaceContainer)));
+      expect(
+        m2.menuStyle!.surfaceTintColor!.resolve(<WidgetState>{}),
+        equals(colorScheme.surfaceContainer),
       );
     });
   });
@@ -3458,6 +3810,35 @@ void main() {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(32),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+    test(
+        'FAB FST14.9: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+        'EXPECT equal to FloatingActionButtonThemeData() version '
+        'with same values', () {
+      const ColorScheme colorScheme = ColorScheme.light();
+      expect(
+        FlexSubThemes.floatingActionButtonTheme(
+          colorScheme: colorScheme,
+          backgroundSchemeColor: SchemeColor.onPrimary,
+          foregroundSchemeColor: SchemeColor.secondary,
+          radius: 24,
+          useTintedInteraction: true,
+        ),
+        equals(
+          FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.onPrimary,
+            foregroundColor: colorScheme.secondary,
+            focusColor: const Color(0x38b2f3ed),
+            hoverColor: const Color(0x22b2f3ed),
+            splashColor: const Color(0x20a6f1ea),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(24),
               ),
             ),
           ),
@@ -5209,6 +5590,66 @@ void main() {
       expect(
         (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
         equals(Colors.black45),
+      );
+    });
+  });
+  group('WITH: FlexSubTheme.listTileTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes listTileTheme tests
+    // -------------------------------------------------------------------------
+    test(
+        'ListTile FST17.1: GIVEN a default FlexSubTheme.listTileTheme() '
+        'ListTileThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final ListTileThemeData listTheme = FlexSubThemes.listTileTheme(
+        colorScheme: colorScheme,
+      );
+      expect(
+        listTheme,
+        equals(
+          ListTileThemeData(selectedColor: colorScheme.primary),
+        ),
+      );
+    });
+    test(
+        'ListTile FST17.2: GIVEN a custom FlexSubTheme.listTileTheme() '
+        'ListTileThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final ListTileThemeData listTheme = FlexSubThemes.listTileTheme(
+        colorScheme: colorScheme,
+        selectedSchemeColor: SchemeColor.tertiary,
+        iconSchemeColor: SchemeColor.primaryFixed,
+        textSchemeColor: SchemeColor.secondary,
+        tileSchemeColor: SchemeColor.surfaceContainer,
+        selectedTileSchemeColor: SchemeColor.surfaceContainerHighest,
+        contentPadding: const EdgeInsets.all(10),
+        horizontalTitleGap: 16,
+        minVerticalPadding: 5,
+        style: ListTileStyle.drawer,
+        titleAlignment: ListTileTitleAlignment.center,
+      );
+      expect(
+        listTheme,
+        equals(
+          ListTileThemeData(
+            selectedColor: colorScheme.tertiary,
+            iconColor: colorScheme.primaryFixed,
+            textColor: colorScheme.secondary,
+            tileColor: colorScheme.surfaceContainer,
+            selectedTileColor: colorScheme.surfaceContainerHighest,
+            contentPadding: const EdgeInsets.all(10),
+            horizontalTitleGap: 16,
+            minVerticalPadding: 5,
+            style: ListTileStyle.drawer,
+            titleAlignment: ListTileTitleAlignment.center,
+          ),
+        ),
       );
     });
   });
@@ -7402,6 +7843,250 @@ void main() {
       );
     });
   });
+  group('WITH: FlexSubTheme.searchBarTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes searchBarTheme tests
+    // -------------------------------------------------------------------------
+    test(
+        'SearchBar FST25SB.1: GIVEN a default FlexSubTheme.searchBarTheme() '
+        'SearchBarThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final SearchBarThemeData searchBarTheme = FlexSubThemes.searchBarTheme(
+        colorScheme: colorScheme,
+      );
+      final SearchBarThemeData m = SearchBarThemeData(
+        elevation: const WidgetStatePropertyAll<double?>(null),
+        shadowColor: const WidgetStatePropertyAll<Color?>(null),
+        padding: const WidgetStatePropertyAll<EdgeInsetsGeometry?>(null),
+        overlayColor:
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled);
+          }
+          if (states.contains(WidgetState.pressed)) {
+            return colorScheme.onSurface.withAlpha(kAlphaInputPressed);
+          }
+          if (states.contains(WidgetState.hovered)) {
+            return colorScheme.onSurface.withAlpha(kAlphaHovered);
+          }
+          return Colors.transparent;
+        }),
+      );
+
+      expect(
+        searchBarTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          m.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+      //
+      // overlayColor color
+      expect(
+        searchBarTheme.overlayColor
+            ?.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled)),
+      );
+      expect(
+        searchBarTheme.overlayColor
+            ?.resolve(<WidgetState>{WidgetState.pressed}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaInputPressed)),
+      );
+      expect(
+        searchBarTheme.overlayColor
+            ?.resolve(<WidgetState>{WidgetState.hovered}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
+      );
+      expect(
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{}),
+        equals(Colors.transparent),
+      );
+    });
+    test(
+        'SearchBar FST25SB.2: GIVEN a custom FlexSubTheme.searchBarTheme() '
+        'SearchBarThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+
+      const bool tintDisable = true;
+      const bool tintInteract = true;
+      final SearchBarThemeData searchBarTheme = FlexSubThemes.searchBarTheme(
+        colorScheme: colorScheme,
+        backgroundSchemeColor: SchemeColor.surfaceContainer,
+        shadowColor: colorScheme.shadow,
+        elevation: 4,
+        radius: 10,
+        padding: const EdgeInsets.all(8),
+        tintedDisabled: tintDisable,
+        tintedInteractions: tintInteract,
+        constraints: const BoxConstraints(
+          minWidth: 400.0,
+          maxWidth: 700.0,
+          minHeight: 60.0,
+        ),
+      );
+
+      final Color backgroundColor = colorScheme.surfaceContainer;
+      final Color onBackgroundColor = colorScheme.onSurface;
+      final bool isLight = colorScheme.brightness == Brightness.light;
+      // Get brightness of the SearchBar background color.
+      final bool buttonBgIsLight =
+          ThemeData.estimateBrightnessForColor(backgroundColor) ==
+              Brightness.light;
+      // For tint color use the one that is more likely to give a colored effect
+      final Color tint = isLight
+          ? buttonBgIsLight
+              ? onBackgroundColor
+              : backgroundColor
+          : buttonBgIsLight
+              ? backgroundColor
+              : onBackgroundColor;
+      // The reverse color is used for overlay
+      final Color overlay = isLight
+          ? buttonBgIsLight
+              ? backgroundColor
+              : onBackgroundColor
+          : buttonBgIsLight
+              ? onBackgroundColor
+              : backgroundColor;
+      final bool surfaceMode =
+          (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
+      final double factor =
+          tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
+
+      final SearchBarThemeData m = SearchBarThemeData(
+        backgroundColor: WidgetStatePropertyAll<Color?>(backgroundColor),
+        elevation: const WidgetStatePropertyAll<double?>(4),
+        shadowColor: WidgetStatePropertyAll<Color?>(colorScheme.shadow),
+        shape: const WidgetStatePropertyAll<OutlinedBorder?>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+        ),
+        padding: const WidgetStatePropertyAll<EdgeInsetsGeometry?>(
+          EdgeInsets.all(8),
+        ),
+        constraints: const BoxConstraints(
+          minWidth: 400.0,
+          maxWidth: 700.0,
+          minHeight: 60.0,
+        ),
+        overlayColor:
+            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            if (tintDisable) {
+              return FlexSubThemes.tintedDisable(
+                      colorScheme.onSurface, backgroundColor)
+                  .withAlpha(kAlphaUltraLowDisabled);
+            }
+          }
+          if (states.contains(WidgetState.pressed)) {
+            if (tintInteract) {
+              return FlexSubThemes.tintedPressed(backgroundColor, tint, factor);
+            }
+          }
+          if (states.contains(WidgetState.hovered)) {
+            if (tintInteract) {
+              return FlexSubThemes.tintedHovered(overlay, tint, factor);
+            }
+          }
+          return Colors.transparent;
+        }),
+      );
+      expect(
+        searchBarTheme.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          m.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+      //
+      // overlayColor color
+      expect(
+        searchBarTheme.overlayColor
+            ?.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(
+            FlexSubThemes.tintedDisable(colorScheme.onSurface, backgroundColor)
+                .withAlpha(kAlphaUltraLowDisabled)),
+      );
+      expect(
+        searchBarTheme.overlayColor
+            ?.resolve(<WidgetState>{WidgetState.pressed}),
+        equals(FlexSubThemes.tintedPressed(backgroundColor, tint, factor)),
+      );
+      expect(
+        searchBarTheme.overlayColor
+            ?.resolve(<WidgetState>{WidgetState.hovered}),
+        equals(FlexSubThemes.tintedHovered(overlay, tint, factor)),
+      );
+      expect(
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{}),
+        equals(Colors.transparent),
+      );
+    });
+  });
+  group('WITH: FlexSubTheme.searchViewTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes searchViewTheme tests
+    // -------------------------------------------------------------------------
+    test(
+        'SearchView FST25SV.1: GIVEN a default FlexSubTheme.searchViewTheme() '
+        'SearchViewThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final SearchViewThemeData listTheme = FlexSubThemes.searchViewTheme(
+        colorScheme: colorScheme,
+      );
+      expect(
+        listTheme,
+        equals(
+          SearchViewThemeData(
+            backgroundColor: colorScheme.surfaceContainerHigh,
+          ),
+        ),
+      );
+    });
+    test(
+        'SearchView FST25SV.2: GIVEN a custom FlexSubTheme.searchViewTheme() '
+        'SearchViewThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final SearchViewThemeData searchTheme = FlexSubThemes.searchViewTheme(
+        colorScheme: colorScheme,
+        backgroundSchemeColor: SchemeColor.surfaceContainer,
+        elevation: 4,
+        radius: 10,
+        headerHeight: 50,
+        dividerColor: colorScheme.onSurface,
+        constraints: const BoxConstraints(minWidth: 400.0, minHeight: 500.0),
+      );
+      expect(
+        searchTheme,
+        equals(
+          SearchViewThemeData(
+            backgroundColor: colorScheme.surfaceContainer,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            headerHeight: 50,
+            elevation: 4,
+            dividerColor: colorScheme.onSurface,
+            constraints: const BoxConstraints(
+              minWidth: 400.0,
+              minHeight: 500.0,
+            ),
+          ),
+        ),
+      );
+    });
+  });
   group('WITH: FlexSubTheme.segmentedButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes segmentedButtonTheme tests
@@ -7588,12 +8273,17 @@ void main() {
       m = FlexSubThemes.segmentedButtonTheme(
         colorScheme: colorScheme,
         selectedSchemeColor: SchemeColor.tertiary,
+        selectedForegroundSchemeColor: SchemeColor.tertiaryContainer,
         unselectedSchemeColor: SchemeColor.primaryContainer,
         unselectedForegroundSchemeColor: SchemeColor.onSecondaryContainer,
         borderSchemeColor: SchemeColor.primaryContainer,
         useTintedInteraction: false,
         useTintedDisable: true,
         useMaterial3: true,
+      );
+      expect(
+        m.style?.foregroundColor?.resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.tertiaryContainer),
       );
       //
       // overlayColor color
@@ -9938,6 +10628,7 @@ void main() {
           radius: 16,
           borderWidth: 1.5,
           baseSchemeColor: SchemeColor.secondary,
+          selectedForegroundSchemeColor: SchemeColor.secondaryContainer,
           unselectedSchemeColor: SchemeColor.tertiary,
           borderSchemeColor: SchemeColor.error,
           useTintedDisable: true,
@@ -9947,7 +10638,7 @@ void main() {
         equals(
           ToggleButtonsThemeData(
             borderWidth: 1.5,
-            selectedColor: colorScheme.onSecondary,
+            selectedColor: colorScheme.secondaryContainer,
             color: colorScheme.tertiary,
             fillColor: colorScheme.secondary,
             borderColor: colorScheme.error,
