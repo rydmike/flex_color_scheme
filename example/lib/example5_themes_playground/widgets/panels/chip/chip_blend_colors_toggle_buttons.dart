@@ -42,14 +42,20 @@ class ChipBlendColorsToggleButtons extends StatelessWidget {
       enabled: controller.useFlexColorScheme && controller.useSubThemes,
       title: const Text('Blend chip color'),
       subtitle: Text(_explainLabelStyle(controller.chipBlendColors)),
-      subtitleReveal: const Text('When true, the selected chip color is '
-          'blended with surface color using a fixed alpha blend value. It '
-          'also creates a blended Selected chip color, if it has not been '
-          'defined using the selected Chip color by also blending it with '
-          'surface color, but using a higher alpha blend value.\n'
-          '\n'
-          'If not defined, default to true in Material-2 mode and to false '
-          ' in Material-3 mode.\n'),
+      subtitleReveal: const Text(
+        'When true, the selected chip color is '
+        'blended with surface color using a fixed alpha blend value. It '
+        'also creates a blended Selected chip color, if it has not been '
+        'defined using the selected Chip color by also blending it with '
+        'surface color, but using a higher alpha blend value.\n'
+        '\n'
+        'If not defined, default to true in Material-2 mode and to false '
+        ' in Material-3 mode.\n'
+        '\n'
+        'The blended style option was added to give more styling options '
+        'that also work within the constraints of the current Chip theming '
+        'limitations. See known issues further below for more info.\n',
+      ),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(

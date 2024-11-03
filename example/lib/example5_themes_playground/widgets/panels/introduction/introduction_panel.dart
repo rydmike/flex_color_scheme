@@ -66,8 +66,8 @@ class IntroductionPanel extends StatelessWidget {
           subtitle: Text(
             'Welcome to the FlexColorScheme Themes Playground. This is a '
             'tool to help you design and experiment with themes for your '
-            'Flutter MaterialApp based applications. It is built using '
-            "'FlexColorScheme, a package that extends Flutter's theming "
+            'Flutter MaterialApp based applications. It uses '
+            "FlexColorScheme, a package that extends Flutter's theming "
             'capabilities.\n'
             '\n'
             'With the Playground, you can interactively design your theme '
@@ -83,12 +83,12 @@ class IntroductionPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Check out the FlexColorScheme ',
+                  text: 'Check out the ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _fcsDocs,
-                  text: 'documentation site',
+                  text: 'FlexColorScheme documentation site',
                 ),
                 TextSpan(
                   style: spanTextStyle,
@@ -112,8 +112,8 @@ class IntroductionPanel extends StatelessWidget {
         ),
         const ListTile(
           subtitle: Text(
-            'An interesting feature of this application is that it does NOT '
-            'adjust any individual widget properties for its styling. '
+            'An interesting feature of this Playground is that it does NOT '
+            'adjust any individual widget properties for its own styling. '
             "As you design your theme, this application's theme is also "
             'adjusted interactively and all Flutter '
             "widgets in it change, as the application's overall theme is "
