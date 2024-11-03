@@ -1,5 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -1360,7 +1362,7 @@ void main() {
               height: 1.43,
             ),
             backgroundColor: const Color(0xffdfccfb),
-            disabledColor: const Color(0x1f000000),
+            disabledColor: Color(0xffdfccfb).withAlpha(kAlphaLowDisabled),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
             checkmarkColor: Colors.black87,
@@ -1370,6 +1372,7 @@ void main() {
               ),
             ),
             iconTheme: const IconThemeData(
+              color: Colors.black87,
               size: 18.0,
             ),
           ),
@@ -1406,7 +1409,9 @@ void main() {
               height: 1.43,
             ),
             backgroundColor: const Color(0xffdfccfb),
-            disabledColor: const Color(0x1f4c3c63),
+            disabledColor: FlexSubThemes.tintedDisable(
+                    const Color(0xffdfccfb), const Color(0xffbe96f8))
+                .withAlpha(kAlphaLowDisabled),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
             checkmarkColor: Colors.black87,
@@ -1416,7 +1421,7 @@ void main() {
               ),
             ),
             iconTheme: const IconThemeData(
-              // color: Color(0xff6200ee),
+              color: Colors.black87,
               size: 18.0,
             ),
           ),
@@ -1452,7 +1457,8 @@ void main() {
             ),
             backgroundColor: colorScheme.surface,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: const IconThemeData(
+            iconTheme: IconThemeData(
+              color: colorScheme.onSurfaceVariant,
               size: 18.0,
             ),
           ),
@@ -1496,13 +1502,13 @@ void main() {
             ),
             backgroundColor: colorScheme.primary,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               size: 18.0,
-              color: colorScheme.primary,
+              color: Colors.white70,
             ),
             disabledColor: FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, colorScheme.secondaryContainer)
-                .withAlpha(kAlphaVeryLowDisabled),
+                    colorScheme.primary, colorScheme.secondaryContainer)
+                .withAlpha(kAlphaLowDisabled),
           ),
         ),
       );
@@ -1538,7 +1544,8 @@ void main() {
             ),
             backgroundColor: colorScheme.surface,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: const IconThemeData(
+            iconTheme: IconThemeData(
+              color: colorScheme.onSurfaceVariant,
               size: 18.0,
             ),
           ),
@@ -1574,10 +1581,11 @@ void main() {
               letterSpacing: 0.1,
               height: 1.43,
             ),
+            disabledColor: colorScheme.secondary.withAlpha(kAlphaLowDisabled),
             backgroundColor: colorScheme.secondary,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: IconThemeData(
-              color: colorScheme.secondary,
+            iconTheme: const IconThemeData(
+              color: Colors.white70,
               size: 18.0,
             ),
           ),
@@ -1617,13 +1625,13 @@ void main() {
             ),
             backgroundColor: colorScheme.tertiary,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: IconThemeData(
-              color: colorScheme.tertiary,
+            iconTheme: const IconThemeData(
+              color: Colors.white70,
               size: 18.0,
             ),
             disabledColor: FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, colorScheme.secondaryContainer)
-                .withAlpha(kAlphaVeryLowDisabled),
+                    colorScheme.tertiary, colorScheme.secondaryContainer)
+                .withAlpha(kAlphaLowDisabled),
           ),
         ),
       );
@@ -1668,13 +1676,13 @@ void main() {
             secondarySelectedColor: colorScheme.secondaryContainer,
             backgroundColor: colorScheme.tertiary,
             checkmarkColor: colorScheme.onTertiaryContainer,
-            iconTheme: IconThemeData(
-              color: colorScheme.tertiary,
+            iconTheme: const IconThemeData(
+              color: Colors.white70,
               size: 18.0,
             ),
             disabledColor: FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, colorScheme.tertiaryContainer)
-                .withAlpha(kAlphaVeryLowDisabled),
+                    colorScheme.tertiary, colorScheme.tertiaryContainer)
+                .withAlpha(kAlphaLowDisabled),
           ),
         ),
       );
@@ -1729,12 +1737,69 @@ void main() {
             backgroundColor: backgroundColor,
             checkmarkColor: onSelectedColor,
             iconTheme: const IconThemeData(
-              // color: colorScheme.tertiary,
+              color: Colors.black87,
               size: 18.0,
             ),
-            disabledColor: FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, selectedColor)
-                .withAlpha(kAlphaVeryLowDisabled),
+            disabledColor:
+                FlexSubThemes.tintedDisable(backgroundColor, selectedColor)
+                    .withAlpha(kAlphaLowDisabled),
+          ),
+        ),
+      );
+    });
+    test(
+        'Chip FST8.10: GIVEN a '
+        'FlexSubTheme.chipTheme() with usedSchemeColor '
+        'tertiary, selectedSchemeColor, '
+        'secondarySelectedSchemeColor and '
+        'NO disable tint EXPECT equal to ChipThemeData() version '
+        'with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
+      expect(
+        FlexSubThemes.chipTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.surfaceContainer,
+          selectedSchemeColor: SchemeColor.tertiaryContainer,
+          secondarySelectedSchemeColor: SchemeColor.secondaryContainer,
+          labelStyle: textTheme.labelLarge,
+          useTintedDisable: false,
+          blendColors: false,
+          useMaterial3: false,
+        ),
+        equals(
+          ChipThemeData(
+            labelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSurfaceVariant,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            secondaryLabelStyle: textTheme.labelLarge!.copyWith(
+              color: colorScheme.onSecondaryContainer,
+              fontSize: 14,
+              letterSpacing: 0.1,
+              height: 1.43,
+            ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(kChipRadius),
+              ),
+            ),
+            padding: const EdgeInsets.all(4),
+            selectedColor: colorScheme.tertiaryContainer,
+            secondarySelectedColor: colorScheme.secondaryContainer,
+            backgroundColor: colorScheme.surfaceContainer,
+            checkmarkColor: colorScheme.onTertiaryContainer,
+            iconTheme: IconThemeData(
+              color: colorScheme.onSurfaceVariant,
+              size: 18.0,
+            ),
+            disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
           ),
         ),
       );
@@ -3918,7 +3983,7 @@ void main() {
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
     test(
-        'InputDecoration FST16.1 light: GIVEN a M2 '
+        'InputDecoration FST16.1-M2 light: GIVEN a M2 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -4063,6 +4128,245 @@ void main() {
               return Colors.black45;
             }),
             filled: false,
+            fillColor: usedFillColor,
+            hoverColor: usedHover,
+            border: MaterialStateUnderlineInputBorder.resolveWith(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: tintDisable
+                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
+                                : colorScheme.onSurface
+                                    .withAlpha(kAlphaVeryLowDisabled),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.error)) {
+                  if (states.contains(WidgetState.focused)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: focusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: focusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return UnderlineInputBorder(
+                      borderRadius: effectiveUnderlineBorder,
+                      borderSide: unfocusedHasBorder
+                          ? BorderSide(
+                              color: colorScheme.error,
+                              width: unfocusedWidth,
+                            )
+                          : BorderSide.none,
+                    );
+                  }
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: colorScheme.error
+                                .withAlpha(kEnabledBorderAlpha),
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: focusedHasBorder
+                        ? BorderSide(
+                            color: borderColor,
+                            width: focusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return UnderlineInputBorder(
+                    borderRadius: effectiveUnderlineBorder,
+                    borderSide: unfocusedHasBorder
+                        ? BorderSide(
+                            color: enabledHoveredBorderColor,
+                            width: unfocusedWidth,
+                          )
+                        : BorderSide.none,
+                  );
+                }
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: unfocusedHasBorder
+                      ? BorderSide(
+                          color: enabledBorderColor,
+                          width: unfocusedWidth,
+                        )
+                      : BorderSide.none,
+                );
+              },
+            ),
+          ).toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
+    test(
+        'InputDecoration FST16.1-M3 light: GIVEN a M3 '
+        'FlexSubThemes.inputDecorationTheme(tintedDisabled: true, filled) '
+        'EXPECT equal to InputDecorationTheme() version with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      // Tinted disabled colors
+      final Color tintDisabledColor = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
+
+      const bool useM3 = true;
+      const bool tintDisable = true;
+      const bool tintInteract = true;
+      const bool isFilled = true;
+      const double? radius = null;
+      const double unfocusedWidth = 1.0;
+      const double focusedWidth = 2.0;
+      const bool unfocusedHasBorder = true;
+      const bool focusedHasBorder = true;
+      final Color borderColor = colorScheme.primary;
+      final Color enabledBorderColor = colorScheme.onSurfaceVariant;
+      final Color enabledHoveredBorderColor = colorScheme.primary;
+      const double effectiveRadius =
+          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+        topLeft: Radius.circular(effectiveRadius),
+        topRight: Radius.circular(effectiveRadius),
+      );
+      const int effectiveAlpha = 0xFF;
+      final Color usedFillColor = Color.alphaBlend(
+          colorScheme.surfaceContainerHighest.withAlpha(effectiveAlpha),
+          colorScheme.surface);
+      final Color usedHover =
+          ThemeData.estimateBrightnessForColor(usedFillColor) ==
+                  Brightness.light
+              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+
+      final InputDecorationTheme m = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        tintedDisabled: tintDisable,
+        tintedInteractions: tintInteract,
+        filled: isFilled,
+        useMaterial3: useM3,
+      );
+      expect(
+        m.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          InputDecorationTheme(
+            labelStyle:
+                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.error)) {
+                if (states.contains(WidgetState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return TextStyle(color: colorScheme.onErrorContainer);
+                }
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(WidgetState.disabled)) {
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
+            }),
+            floatingLabelStyle:
+                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.error)) {
+                if (states.contains(WidgetState.focused)) {
+                  return TextStyle(color: colorScheme.error);
+                }
+                if (states.contains(WidgetState.hovered)) {
+                  return TextStyle(
+                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                  );
+                }
+                return TextStyle(color: colorScheme.error);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return TextStyle(color: colorScheme.primary);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return TextStyle(color: colorScheme.onSurfaceVariant);
+              }
+              if (states.contains(WidgetState.disabled)) {
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
+            }),
+            helperStyle:
+                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return TextStyle(
+                  color: tintDisabledColor,
+                );
+              }
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
+            }),
+            hintStyle:
+                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return TextStyle(color: tintDisabledColor);
+              }
+              return TextStyle(color: Colors.black.withAlpha(0xCC));
+            }),
+            iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return tintDisabledColor;
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurfaceVariant;
+              }
+              return colorScheme.onSurfaceVariant;
+            }),
+            prefixIconColor:
+                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return tintDisabledColor;
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurfaceVariant;
+              }
+              return colorScheme.onSurfaceVariant;
+            }),
+            suffixIconColor:
+                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+              if (states.contains(WidgetState.error)) {
+                return colorScheme.error;
+              }
+              if (states.contains(WidgetState.disabled)) {
+                return tintDisabledColor;
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurfaceVariant;
+              }
+              return colorScheme.onSurfaceVariant;
+            }),
+            filled: isFilled,
             fillColor: usedFillColor,
             hoverColor: usedHover,
             border: MaterialStateUnderlineInputBorder.resolveWith(
@@ -5259,8 +5563,7 @@ void main() {
             TextStyle(color: Colors.black.withAlpha(kTintHover)),
           ));
       //
-      // Various v7 new theme combinations.
-      //
+      // Outline M3 case
       InputDecorationTheme m = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
         borderType: FlexInputBorderType.outline,
@@ -5279,6 +5582,8 @@ void main() {
               colorScheme.surface),
         ),
       );
+      //
+      // Outline border default
       expect(
         (m.border as MaterialStateOutlineInputBorder?)!
             .resolve(<WidgetState>{}),
@@ -5293,6 +5598,125 @@ void main() {
           ),
         ),
       );
+      // Outline border disabled (not tinted)
+      expect(
+        (m.border as MaterialStateOutlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.disabled}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      // Outline border error
+      expect(
+        (m.border as MaterialStateOutlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.error}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      // Outline border error, focused
+      expect(
+        (m.border as MaterialStateOutlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: 4,
+            ),
+          ),
+        ),
+      );
+      // Outline border error, hovered
+      expect(
+        (m.border as MaterialStateOutlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      // Outline border focused
+      expect(
+        (m.border as MaterialStateOutlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.focused}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              color: colorScheme.primary,
+              width: 4,
+            ),
+          ),
+        ),
+      );
+      // Outline border focused
+      expect(
+        (m.border as MaterialStateOutlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.hovered}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderSide: BorderSide(
+              color: colorScheme.onSurfaceVariant,
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      //
+      // Outline M3 case -tinted disabled
+      m = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        borderType: FlexInputBorderType.outline,
+        backgroundAlpha: 0xAA,
+        fillColor: colorScheme.secondaryContainer,
+        unfocusedBorderIsColored: false,
+        unfocusedHasBorder: true,
+        unfocusedBorderWidth: 3,
+        focusedBorderWidth: 4,
+        tintedDisabled: true,
+        useMaterial3: true,
+      );
+
+      // Border
+      // Underline border disabled (tinted)
+      final Color tintDisable = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.secondaryContainer);
+      final OutlineInputBorder ulAct1 = (m.border
+              as MaterialStateOutlineInputBorder?)!
+          .resolve(<WidgetState>{WidgetState.disabled}) as OutlineInputBorder;
+      final OutlineInputBorder ulExp1 = OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
+        borderSide: BorderSide(
+          color: tintDisable.withAlpha(kAlphaLowDisabled),
+          width: 3,
+        ),
+      );
+      expect(ulAct1.borderSide.color, equals(ulExp1.borderSide.color));
+      expect(ulAct1.borderSide.width, equals(ulExp1.borderSide.width));
+      expect(ulAct1, equals(ulExp1));
+      //
+      //
+      // Underline border case
       m = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
         borderType: FlexInputBorderType.underline,
@@ -5453,6 +5877,16 @@ void main() {
       );
       expect(
         (m.suffixIconColor as WidgetStateColor?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(colorScheme.error),
+      );
+      expect(
+        (m.suffixIconColor as WidgetStateColor?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(colorScheme.error),
+      );
+      expect(
+        (m.suffixIconColor as WidgetStateColor?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
@@ -5466,7 +5900,7 @@ void main() {
         equals(colorScheme.onSurfaceVariant),
       );
       //
-      // borders
+      // Underline border default
       expect(
         (m.border as MaterialStateUnderlineInputBorder?)!
             .resolve(<WidgetState>{}),
@@ -5478,6 +5912,108 @@ void main() {
             ),
             borderSide: BorderSide(
               color: colorScheme.outline,
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      // Underline border disabled (not tinted)
+      expect(
+        (m.border as MaterialStateUnderlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.disabled}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      // Underline border error
+      expect(
+        (m.border as MaterialStateUnderlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.error}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      // Underline border error, focused
+      expect(
+        (m.border as MaterialStateUnderlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: 4,
+            ),
+          ),
+        ),
+      );
+      // Underline border error, hovered
+      expect(
+        (m.border as MaterialStateUnderlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.error,
+              width: 3,
+            ),
+          ),
+        ),
+      );
+      // Underline border focused
+      expect(
+        (m.border as MaterialStateUnderlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.focused}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.primary,
+              width: 4,
+            ),
+          ),
+        ),
+      );
+      // Underline border focused
+      expect(
+        (m.border as MaterialStateUnderlineInputBorder?)!
+            .resolve(<WidgetState>{WidgetState.hovered}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              topRight: Radius.circular(4),
+            ),
+            borderSide: BorderSide(
+              color: colorScheme.onSurfaceVariant,
               width: 3,
             ),
           ),
@@ -5495,6 +6031,28 @@ void main() {
         tintedInteractions: true,
         useMaterial3: false,
       );
+      // Border
+      // Underline border disabled (tinted)
+      final Color tintDisabledColor2 = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
+      final UnderlineInputBorder ulAct = (m.border
+              as MaterialStateUnderlineInputBorder?)!
+          .resolve(<WidgetState>{WidgetState.disabled}) as UnderlineInputBorder;
+      final UnderlineInputBorder ulExp = UnderlineInputBorder(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(kInputDecoratorRadius),
+          topRight: Radius.circular(kInputDecoratorRadius),
+        ),
+        borderSide: BorderSide(
+          color: tintDisabledColor2.withAlpha(kAlphaLowDisabled),
+          width: 3,
+        ),
+      );
+      expect(ulAct.borderSide.color, equals(ulExp.borderSide.color));
+      expect(ulAct.borderSide.width, equals(ulExp.borderSide.width));
+      expect(ulAct, equals(ulExp));
+      //
+      // Label style
       expect(
         (m.labelStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{
           WidgetState.disabled,
@@ -5764,6 +6322,15 @@ void main() {
         useTintedInteraction: true,
         useTintedDisable: true,
       );
+      final MenuButtonThemeData m5 = FlexSubThemes.menuButtonTheme(
+        colorScheme: colorScheme,
+        foregroundSchemeColor: SchemeColor.onSurfaceVariant,
+        backgroundSchemeColor: SchemeColor.surfaceContainer,
+        indicatorBackgroundSchemeColor: SchemeColor.primary,
+        radius: 11,
+        useTintedInteraction: true,
+        useTintedDisable: true,
+      );
       // No animation duration on menu buttons, this is a fix for issue:
       // https://github.com/flutter/flutter/issues/123615
       expect(
@@ -5779,6 +6346,11 @@ void main() {
         m2.style!.foregroundColor?.resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.primary)),
+      );
+      expect(
+        m5.style!.foregroundColor?.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurfaceVariant, colorScheme.primary)),
       );
       expect(
         m1.style!.foregroundColor?.resolve(<WidgetState>{WidgetState.pressed}),
@@ -5809,6 +6381,11 @@ void main() {
         m2.style!.iconColor?.resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.primary)),
+      );
+      expect(
+        m5.style!.iconColor?.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurfaceVariant, colorScheme.primary)),
       );
       expect(
         m1.style!.iconColor?.resolve(<WidgetState>{WidgetState.pressed}),
@@ -7640,6 +8217,7 @@ void main() {
         splashRadius: 30,
         unselectedIsColored: false,
         useTintedDisable: true,
+        useMaterial3: false,
       );
       expect(
         m.fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
@@ -7751,6 +8329,13 @@ void main() {
       expect(
         m.fillColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.disabled}),
+        equals(
+          FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.tertiary),
+        ),
+      );
+      expect(
+        m.fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           FlexSubThemes.tintedDisable(
               colorScheme.onSurface, colorScheme.tertiary),
@@ -9546,6 +10131,137 @@ void main() {
           useMaterial3: true,
         ).trackColor!.resolve(<WidgetState>{}),
         equals(colorScheme.primary.withAlpha(0x33)),
+      );
+    });
+
+    test(
+        'Switch FST29.7 LIGHT Cupertino-like Switch: '
+        'Does Switch have right states?', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
+      final SwitchThemeData switchTheme = FlexSubThemes.switchTheme(
+        colorScheme: colorScheme,
+        useCupertinoStyle: true,
+      );
+      // Thumb Icons - hidden icon.
+      final Icon? usedIcon = switchTheme.thumbIcon?.resolve(<WidgetState>{});
+      expect(
+        usedIcon!.icon,
+        equals(Icons.minimize),
+      );
+      expect(
+        usedIcon.color,
+        equals(Colors.transparent),
+      );
+      // Disabled thumb colors
+      expect(
+        switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(Colors.white.withOpacity(0.5)),
+      );
+      // All other thumb colors
+      expect(
+        switchTheme.thumbColor!.resolve(<WidgetState>{}),
+        equals(Colors.white),
+      );
+      // Track colors
+      const CupertinoDynamicColor cup = CupertinoColors.secondarySystemFill;
+      expect(
+        switchTheme.trackColor!.resolve(<WidgetState>{}),
+        equals(cup.color),
+      );
+      // Disabled selected track colors
+      expect(
+        switchTheme.trackColor!
+            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        equals(colorScheme.primary.withOpacity(0.5)),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(cup.color.withOpacity(0.07)),
+      );
+      // Track outline color focused
+      expect(
+        switchTheme.trackOutlineColor!
+            .resolve(<WidgetState>{WidgetState.focused}),
+        equals(HSLColor.fromColor(colorScheme.primary.withOpacity(0.80))
+            .withLightness(0.69)
+            .withSaturation(0.835)
+            .toColor()),
+      );
+      // Track outline color all other cases
+      expect(
+        switchTheme.trackOutlineColor!.resolve(<WidgetState>{}),
+        equals(Colors.transparent),
+      );
+      // Track outline width focused
+      expect(
+        switchTheme.trackOutlineWidth!
+            .resolve(<WidgetState>{WidgetState.focused}),
+        equals(3.5),
+      );
+      // Track outline width all other cases
+      expect(
+        switchTheme.trackOutlineWidth!.resolve(<WidgetState>{}),
+        equals(0),
+      );
+      // Overlay color
+      expect(
+        switchTheme.overlayColor!.resolve(<WidgetState>{}),
+        equals(Colors.transparent),
+      );
+      // The mouseCursor style
+      expect(
+        switchTheme.mouseCursor!.resolve(<WidgetState>{}),
+        equals(kIsWeb ? SystemMouseCursors.click : SystemMouseCursors.basic),
+      );
+      // The mouseCursor disabled
+      expect(
+        switchTheme.mouseCursor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(SystemMouseCursors.basic),
+      );
+      // Zero splash radius
+      expect(
+        switchTheme.splashRadius,
+        equals(0),
+      );
+    });
+    test(
+        'Switch FST29.7 DARK Cupertino-like Switch: '
+        'Does Switch have right states?', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.dark,
+      );
+      final SwitchThemeData switchTheme = FlexSubThemes.switchTheme(
+        colorScheme: colorScheme,
+        useCupertinoStyle: true,
+      );
+      // Track colors
+      const CupertinoDynamicColor cup = CupertinoColors.secondarySystemFill;
+      expect(
+        switchTheme.trackColor!.resolve(<WidgetState>{}),
+        equals(cup.darkColor),
+      );
+      // Disabled selected track colors
+      expect(
+        switchTheme.trackColor!
+            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        equals(colorScheme.primary.withOpacity(0.5)),
+      );
+      expect(
+        switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(cup.darkColor.withOpacity(0.16)),
+      );
+      // Track outline color focused
+      expect(
+        switchTheme.trackOutlineColor!
+            .resolve(<WidgetState>{WidgetState.focused}),
+        equals(HSLColor.fromColor(colorScheme.primary.withOpacity(0.80))
+            .withLightness(0.69)
+            .withSaturation(0.835)
+            .toColor()),
       );
     });
   });

@@ -46,21 +46,6 @@ As before, FCS also has its own even configurable `FlexTones` way of making seed
 
 FlexColorScheme V8 adds three new `FlexTones` modifiers. The most useful one is called `monochromeSurfaces()`. This tone modifier makes the surface shades of any used `FlexTones` configuration use monochrome greyscale shades for the surface and surface variant palettes. It thus gives us greyscale colors for **ALL** surfaces, instead of primary-tinted ones. It can be applied to any `FlexTones` seed generated scheme variant. The other new modifiers are `expressiveOnContainer()` and `higherContrastFixed()`. Check the API docs for more details.
 
-**TODOS BEFORE STABLE RELEASE**
-
-* **TODO**: Flutter 3.22 broke +300 tests in FCS 7.3.1, review and fix them after all updates.
-  * New features and adapting FCS to Flutter 3.22 also broke many tests. 
-  * Update and review all tests.
-    * **Test fix status**: 
-      * At quality assurance start, 309 tests to fix.
-      * Now finally, ZERO tests remain to be fixed. 
-      * Of at start total 2103 tests, and now **2279** total tests.
-      * Coverage is now at **98%**.
-    * Add more tests for the new features. Get the FCS package back to 100% test coverage.
-  * Will release 8.0.0-dev releases without all test fixes and updates to them, to test the release WEB build and to offer early access to V8 and try new features.
-
-- **TODO**: Study and potentially report **14 found new Flutter SDK theming issues**. Report if not already existing and if they are still valid after check on master using a simple reproduction sample. Add issue GitHub links to known issue expands in the Playground app and to package doc comments, as well as code TODOs where relevant.
-
 ### PACKAGE CHANGES
 
 This section contains a detailed list of all changes introduced in FlexColorScheme version 8.0.0.
