@@ -4,9 +4,6 @@
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-> This is the **README** for the **FlexColorScheme** package dev release 8.0.0-dev.2. It has its own dev release of the [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-dev). No new API changes are planned for the stable 8.0.0 release. The package is undergoing QA testing before its stable release. For more information, please visit the [**documentation site**](https://docs.flexcolorscheme.com/) or read the detailed [**changelog**](https://pub.dev/packages/flex_color_scheme/versions/8.0.0-dev.2/changelog).
-
-
 Use **FlexColorScheme** to make beautiful Flutter Material Design themes. Apply optional surface blends, and use Material-3 seeded generated ColorSchemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated ones. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from many pre-made designs or make your own. You can also use easy-to-configure component themes.
 
 <table>
@@ -165,25 +162,25 @@ The Playground app is also the last step in the package tutorial series. The [tu
 
 There are **Theme Playground** version builds corresponding to the last major releases of the **FlexColorScheme** package available. For Version 7 there are also Playground builds for the different minor releases.
 
-You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7, you should prefer to match the minor version too.
+You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7 and 8, you should prefer to match the minor version too.
 
-| Name      | Version       | Link                                                        |
-|-----------|---------------|-------------------------------------------------------------| 
-| V8 beta   | V8.0.0-dev.2  | https://rydmike.com/flexcolorscheme/themesplayground-dev    | 
-| V7 latest | V7.3.1        | https://rydmike.com/flexcolorscheme/themesplayground-latest |
-| V7.2      | V7.2.0        | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
-| V7.1      | V7.1.2        | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
-| V7.0      | V7.0.5        | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
-| V6        | V6.1.1        | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
-| V5        | V5.1.0        | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
-| V4        | V4.2.0        | https://rydmike.com/flexcolorschemeV4Tut5                   |
+| Name  | Version | Link                                                         |
+|-------|---------|--------------------------------------------------------------| 
+| V8.0  | V8.0.0  | https://rydmike.com/flexcolorscheme/themesplayground-latest  | 
+| V7.3  | V7.3.1  | https://rydmike.com/flexcolorscheme/themesplayground-v7-3    |
+| V7.2  | V7.2.0  | https://rydmike.com/flexcolorscheme/themesplayground-v7-2    |
+| V7.1  | V7.1.2  | https://rydmike.com/flexcolorscheme/themesplayground-v7-1    |
+| V7.0  | V7.0.5  | https://rydmike.com/flexcolorscheme/themesplayground-v7      |
+| V6    | V6.1.1  | https://rydmike.com/flexcolorscheme/themesplayground-v6      |
+| V5    | V5.1.0  | https://rydmike.com/flexcolorscheme/themesplayground-v5      |
+| V4    | V4.2.0  | https://rydmike.com/flexcolorschemeV4Tut5                    |
 
 
 > **NOTE!**  
 > If you use a higher version of a WEB build and try to load a lower version again with the same browser, it will most likely fail and not load. This happens because older and newer builds run on the same domain and share the same browser local storage file. This allows newer versions to load data configured in older versions. However, older versions may not understand some data stored and inserted by the newer versions and they will fail. You can get the web build for an older version to start again by clearing stored browser data:  
 >"Settings" → "Delete browsing data..." → "Cookies and other site data".  
 > You do of course lose any config you had used then. This issue could be fixed, but would require updating rebuilding the old builds and there are currently no plans to do so.  
-> Version 8.0.0-dev.2 and later uses a new local storage name to avoid this issue, so it will not conflict with V7 and older versions. There are few storage settings in V8 that are backwards compatible anyway.
+> Version 8.0.0 and later uses a new local storage name to avoid this issue, so it will not conflict with V7 and older versions. There are few storage settings in V8 that are backwards compatible anyway.
 > 
 
 You can also build Windows, macOS or Linux desktop versions of the **Themes Playground**, it is highly recommended, as it runs much smoother and nicer than the WEB build. The **Themes Playground** app is bundled with the package GitHub repository as **Example 5**. If you need a Themes Playground companion build for a specific older FlexColorScheme version, you can download a ZIP bundle from the GitHub repo for any past [release here](https://github.com/rydmike/flex_color_scheme/releases).
