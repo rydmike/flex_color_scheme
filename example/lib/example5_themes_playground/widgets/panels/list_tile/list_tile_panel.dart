@@ -227,26 +227,28 @@ class ListTilePanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'The minVertical padding is lowest at 4 not at 0 '
-                      'This is a bug in Flutter SDK. For more information see ',
+                      'This may be a bug in Flutter SDK. It will be studied '
+                      'and reported as an ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _lisTilePlaceholderIssue,
-                  text: 'issue #NNNNN',
+                  text: 'issue',
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. The ListTileStyle theme property has no effect, '
-                      'see ',
+                  text: ' if it is. The ListTileStyle theme property has no '
+                      'effect, this may also be a bug in Flutter SDK. It will '
+                      'be studied and reported as an ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
                   uri: _lisTilePlaceholderIssue,
-                  text: 'issue #NNNNN',
+                  text: 'issue',
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: ' if it is one.\n',
                 ),
               ],
             ),
