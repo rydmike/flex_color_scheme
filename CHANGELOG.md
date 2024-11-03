@@ -2,24 +2,23 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.0.0-dev.3
+## 8.0.0
 
-**Nov 2, 2024**
+**Nov 3, 2024**
 
 ### SUMMARY
 
-Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in Flutter version 3.22. Due to Flutter 3.22 breaking many past Material styles, introducing new colors to `ColorScheme` and deprecating three colors, FlexColorScheme had to undergo major revision and also break many of its past styles and some older APIs.
+Version 8.0.0 makes **FlexColorScheme** fully aligned with Flutter's **MAJOR BREAKING** Material-3 theming changes introduced in **Flutter version 3.22**. Due to Flutter 3.22 breaking many past Material styles, introducing new colors to `ColorScheme` and deprecating three colors, FlexColorScheme had to undergo major revision and also break many of its past styles and some older APIs.
 
-Most APIs are still there and work as before, but a few produce results that differ slightly from past ones, just like Flutter 3.22 also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in FCS V8, but previous values are still available. You will need to enable them explicitly to get the same results as before. The purpose of these default value changes is to make FCS have less opinionated defaults, and be more aligned with Flutter's Material-3 design defaults. The **Themes Playground** app will still have some of its own opinionated defaults, done via default settings values the app uses in its default configuration, but the package Material-3 default starting points, are now much more aligned with Flutter's Material-3 defaults.
+Most APIs are still there and work as before, but a few produce results that differ slightly from past ones, just like **Flutter 3.22** also does over previous versions. Generally, the upgrade should be smooth, but you may need to review the produced theme result to see that you don't get any changes that don't fit with your design goals. Some past defaults have changed in FCS V8, but previous settings are still available. However, you will need to enable them explicitly to get the same results as before. The purpose of these default value changes is to make FCS have less opinionated defaults, and be more aligned with Flutter's Material-3 design defaults. The **Themes Playground** app will still have some of its own opinionated defaults, done via default settings values the app uses in its default configuration, but the package Material-3 default starting points are now much more aligned with Flutter's Material-3 defaults.
 
-In the **Themes Playground** you can now export and import settings to a JSON file, and import them back into the Playground later. This is a great way to save your theme settings for later re-use. The exported JSON contains all the internal controller settings values you have configured in the Playground app, that are needed to restore a given configuration state. This **Playground** feature was a nice contribution by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257), thank you! 
-This contributed feature got enhanced with more error handling and a slightly refined UI to make it production ready. It can now be tried for the first time in the 8.0.0-dev.2 release and build. As a further enhancement of the JSON export feature, the **Themes Playground** app also got the ability to convert the exported settings JSON config to a shareable URL. You can now share Playground settings with other Flutter developers. 
+In the **Themes Playground** you can now export and import settings to a JSON file, and import them back into the Playground later. This is a great way to save your theme settings for later re-use. The exported JSON contains all the internal controller settings values you have configured in the Playground app, that are needed to restore a given configuration state. This **Playground** feature was a nice contribution by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257), thank you! This contributed feature got enhanced with more error handling and a slightly refined UI to make it production ready. As a further enhancement of the JSON export feature, the **Themes Playground** app also got the ability to convert the exported settings JSON config to a shareable URL. You can now share Playground settings with other Flutter developers. 
 
 
 
 ### MIGRATION
 
-The most critical changes to migrate from FlexColorScheme V7 to V8 are listed below. For a full list of all breaking changes, see **PACKAGE CHANGES** and the **BREAKING** part further below.
+The most critical changes to migrate from **FlexColorScheme V7 to V8** are listed below. For a full list of all breaking changes, see **PACKAGE CHANGES** and the **BREAKING** part further below.
 
 * The flag `useMaterial3` now defaults to `true` in `FlexColorScheme` and `FlexThemeData` constructors. Set it to `false` to explicitly use Material-2 theming. It defaulted to true before. Material-2 is still fully supported in FCS v8 and Flutter v3.24, but will eventually be deprecated in Flutter, when that happens, it will also happen in FCS. 
   >With the **Themes Playground** app, you can use a pre-configured Material-3 based theme that looks very similar to legacy Material-2 design. This will continue to be available also after Material-2 is deprecated in Flutter.  
@@ -289,8 +288,7 @@ This version contains a lot of breaking changes due to updates in the Material-3
 - Improved the theming logic for `Card` theme.
   - It now avoids [issue #153912](https://github.com/flutter/flutter/issues/153912), but **only** when the Flutter default radius is used. This is done by not creating a shape theme when the default radius is used and using the default created one instead. This will keep the outline for the default radius theme cases. Previously FCS Card theme created a shape with the default radius. Both cases are now using default and null radius value, it keeps shape null and lets the widget default behavior be used, so we can keep the outline on `Card.outlined` variant for the default case at least. This Flutter theming limitation and impact is thus now the same in FCS, as it is with vanilla Flutter `ThemeData` and its `CardTheme`. It is still broken as mentioned in the above issue, but that is a Flutter theming issue and limitation that FCS cannot fix.
 
-- Changed the `FlexSubThemes.inputDecoratorTheme` to use only `border` and its **WidgetState** for its theme. It offers more and nicer control over hover state than using the older legacy more limited border styles. Found a related Flutter SDK issue. Using themed `activeIndicatorBorder` and `outlineBorder` do not work at all, they should work, but everything must be done via `border` property to get the border style, this is a bit more involved API. It is a bug in how the decorator theme is used in Flutter, only the Material-3 default themes considers and uses themed `activeIndicatorBorder` and `outlineBorder`. 
-  - **TODO**: Report the issue to Flutter SDK and add a link to it here.    
+- Changed the `FlexSubThemes.inputDecoratorTheme` to use only `border` and its **WidgetState** for its theme. It offers more and nicer control over hover state than using the older legacy more limited border styles. 
 
 **FIX**
  
@@ -320,7 +318,7 @@ In current Flutter versions, using a custom-tinted TextTheme is rather pointless
   >**TIP:** You can modify this file and e.g., pass in controller that contains user-configurable settings for theme configuration properties and generate the theme on the fly in your app. This way you can let the user configure the theme in your app, a few props anyway. This is basically what the Playground app does with all theming properties. That is why you can see the result and impact of defined theme in the Playground app itself, as you modify the desired theme configuration in the app.
  
 - The **Theme Code** view got a long asked for feature, Themes Playground settings export and import! You can now export your configured theme settings to a JSON file and import them back into the Playground later. This is a great way to save your theme settings for later use or to share them with others. The exported JSON file contains all the internal controller settings values you have configured in the Playground that are needed to restore a given configuration state. This Playground feature was contributed by GitHub user [@akiller](https://github.com/akiller) in [!PR 257](https://github.com/rydmike/flex_color_scheme/pull/257). Thank you! 
-- The contributed feature got enhanced with more error handling and a slightly refined UI to make it production ready. It can now be tried for the first time in the 8.0.0-dev.2 release and build. 
+- The contributed feature got enhanced with more error handling and a slightly refined UI to make it production ready. 
 - As a further enhancement of the JSON export feature, the **Themes Playground** app also got the ability to convert the exported settings JSON config to a shareable URL. You can now share Playground settings with other Flutter developers.
 
 
