@@ -274,7 +274,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
         // const Divider(height: 1),
         const ListTileReveal(
           revealDense: true,
-          title: Text('Code colors is a ThemeExtension'),
+          title: Text('Code highlight colors as a ThemeExtension'),
           subtitleReveal: Column(
             children: <Widget>[
               Text(
