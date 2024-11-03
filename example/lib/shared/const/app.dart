@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,15 +35,22 @@ sealed class App {
   static const String packageName = 'FlexColor\u{00AD}Scheme';
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
+  static const bool isRunningWithWasm =
+      bool.fromEnvironment('dart.tool.dart2wasm');
+  static const String buildType = isRunningWithWasm
+      ? ', Web-WASM'
+      : kIsWeb
+          ? ', Web-JS'
+          : ', native VM';
   static const String versionMajor = '8';
   static const String versionMinor = '0';
-  static const String versionPatch = '0-dev.3';
+  static const String versionPatch = '0';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
   // static const String packageVersionMin = '$versionMajor.$versionMinor';
-  static const String flutterVersion = 'stable 3.24.4 (canvaskit)';
+  static const String flutterVersion = 'stable 3.24.4 (canvaskit$buildType)';
   static const String copyright = '© 2020 - 2024';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
