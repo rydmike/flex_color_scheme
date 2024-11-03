@@ -1895,24 +1895,6 @@ sealed class FlexSubThemes {
     final bool tintDisable = useTintedDisable ?? false;
     final bool blend = blendColors ?? !useM3;
 
-    // Function used to increase icon color for selections resulting in poor
-    // icon color.
-    // Color fixContrast(Color color) {
-    //   if (colorScheme.brightness == Brightness.light) {
-    //     if (ThemeData.estimateBrightnessForColor(color) == Brightness.light) {
-    //       return color.darken(25);
-    //     } else {
-    //       return color;
-    //     }
-    //   } else {
-    //     if (ThemeData.estimateBrightnessForColor(color) == Brightness.dark) {
-    //       return color.lighten(25);
-    //     } else {
-    //       return color;
-    //     }
-    //   }
-    // }
-
     // Function used to make a contrast color for blended background, we cannot
     // be sure the blended colors contrast is OK, with its source onPair,
     // so we need to compute one.
@@ -2125,7 +2107,7 @@ sealed class FlexSubThemes {
       // use WidgetStateTextStyle, but it is not supported. Docs says it should
       // be, but it does not work. Issue?
       //
-      // labelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+      //labelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
       //   if (states.contains(WidgetState.disabled)) {
       //     return baseLabelStyle.copyWith(
       //         color: colorScheme.onSurface.withOpacity(0.38));

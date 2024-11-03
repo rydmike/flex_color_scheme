@@ -1362,7 +1362,7 @@ void main() {
               height: 1.43,
             ),
             backgroundColor: const Color(0xffdfccfb),
-            disabledColor: Color(0xffdfccfb).withAlpha(kAlphaLowDisabled),
+            disabledColor: const Color(0xffdfccfb).withAlpha(kAlphaLowDisabled),
             selectedColor: const Color(0xffbe96f8),
             secondarySelectedColor: const Color(0xffbe96f8),
             checkmarkColor: Colors.black87,
@@ -4000,13 +4000,10 @@ void main() {
       const double? radius = null;
       const double unfocusedWidth = 1.0;
       const double focusedWidth = 2.0;
-      const bool unfocusedHasBorder = true;
-      const bool focusedHasBorder = true;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
       final Color enabledHoveredBorderColor = colorScheme.primary;
-      const double effectiveRadius =
-          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
@@ -4135,81 +4132,63 @@ void main() {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.focused)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: focusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: focusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: focusedWidth,
+                      ),
                     );
                   }
                   if (states.contains(WidgetState.hovered)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: unfocusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: unfocusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: unfocusedWidth,
+                      ),
                     );
                   }
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: focusedHasBorder
-                        ? BorderSide(
-                            color: borderColor,
-                            width: focusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: borderColor,
+                      width: focusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: enabledHoveredBorderColor,
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: enabledHoveredBorderColor,
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
-                  borderSide: unfocusedHasBorder
-                      ? BorderSide(
-                          color: enabledBorderColor,
-                          width: unfocusedWidth,
-                        )
-                      : BorderSide.none,
+                  borderSide: BorderSide(
+                    color: enabledBorderColor,
+                    width: unfocusedWidth,
+                  ),
                 );
               },
             ),
@@ -4236,13 +4215,10 @@ void main() {
       const double? radius = null;
       const double unfocusedWidth = 1.0;
       const double focusedWidth = 2.0;
-      const bool unfocusedHasBorder = true;
-      const bool focusedHasBorder = true;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.onSurfaceVariant;
       final Color enabledHoveredBorderColor = colorScheme.primary;
-      const double effectiveRadius =
-          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const double effectiveRadius = radius ?? kInputDecoratorM3Radius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
@@ -4374,81 +4350,63 @@ void main() {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.focused)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: focusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: focusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: focusedWidth,
+                      ),
                     );
                   }
                   if (states.contains(WidgetState.hovered)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: unfocusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: unfocusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: unfocusedWidth,
+                      ),
                     );
                   }
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: focusedHasBorder
-                        ? BorderSide(
-                            color: borderColor,
-                            width: focusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: borderColor,
+                      width: focusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: enabledHoveredBorderColor,
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: enabledHoveredBorderColor,
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
-                  borderSide: unfocusedHasBorder
-                      ? BorderSide(
-                          color: enabledBorderColor,
-                          width: unfocusedWidth,
-                        )
-                      : BorderSide.none,
+                  borderSide: BorderSide(
+                    color: enabledBorderColor,
+                    width: unfocusedWidth,
+                  ),
                 );
               },
             ),
@@ -4475,14 +4433,11 @@ void main() {
       const double? radius = null;
       const double unfocusedWidth = 1.0;
       const double focusedWidth = 2.0;
-      const bool unfocusedHasBorder = true;
-      const bool focusedHasBorder = true;
       const bool unfocusedBorderIsColored = false;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
       final Color enabledHoveredBorderColor = colorScheme.primary;
-      const double effectiveRadius =
-          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
@@ -4612,81 +4567,63 @@ void main() {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.focused)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: focusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: focusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: focusedWidth,
+                      ),
                     );
                   }
                   if (states.contains(WidgetState.hovered)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: unfocusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: unfocusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: unfocusedWidth,
+                      ),
                     );
                   }
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: focusedHasBorder
-                        ? BorderSide(
-                            color: borderColor,
-                            width: focusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: borderColor,
+                      width: focusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: enabledHoveredBorderColor,
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: enabledHoveredBorderColor,
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
-                  borderSide: unfocusedHasBorder
-                      ? BorderSide(
-                          color: enabledBorderColor,
-                          width: unfocusedWidth,
-                        )
-                      : BorderSide.none,
+                  borderSide: BorderSide(
+                    color: enabledBorderColor,
+                    width: unfocusedWidth,
+                  ),
                 );
               },
             ),
@@ -4712,14 +4649,11 @@ void main() {
       const double? radius = null;
       const double unfocusedWidth = 1.0;
       const double focusedWidth = 2.0;
-      const bool unfocusedHasBorder = true;
-      const bool focusedHasBorder = true;
       const bool unfocusedBorderIsColored = true;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
       final Color enabledHoveredBorderColor = colorScheme.primary;
-      const double effectiveRadius =
-          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
@@ -4849,81 +4783,63 @@ void main() {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.focused)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: focusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: focusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: focusedWidth,
+                      ),
                     );
                   }
                   if (states.contains(WidgetState.hovered)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: unfocusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: unfocusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: unfocusedWidth,
+                      ),
                     );
                   }
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: focusedHasBorder
-                        ? BorderSide(
-                            color: borderColor,
-                            width: focusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: borderColor,
+                      width: focusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: enabledHoveredBorderColor,
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: enabledHoveredBorderColor,
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
-                  borderSide: unfocusedHasBorder
-                      ? BorderSide(
-                          color: enabledBorderColor,
-                          width: unfocusedWidth,
-                        )
-                      : BorderSide.none,
+                  borderSide: BorderSide(
+                    color: enabledBorderColor,
+                    width: unfocusedWidth,
+                  ),
                 );
               },
             ),
@@ -4950,14 +4866,11 @@ void main() {
       const double? radius = null;
       const double unfocusedWidth = 1.0;
       const double focusedWidth = 2.0;
-      const bool unfocusedHasBorder = true;
-      const bool focusedHasBorder = true;
       const bool unfocusedBorderIsColored = false;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
       final Color enabledHoveredBorderColor = colorScheme.primary;
-      const double effectiveRadius =
-          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+      const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
@@ -5087,81 +5000,63 @@ void main() {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.focused)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: focusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: focusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: focusedWidth,
+                      ),
                     );
                   }
                   if (states.contains(WidgetState.hovered)) {
                     return UnderlineInputBorder(
                       borderRadius: effectiveUnderlineBorder,
-                      borderSide: unfocusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: unfocusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: unfocusedWidth,
+                      ),
                     );
                   }
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: focusedHasBorder
-                        ? BorderSide(
-                            color: borderColor,
-                            width: focusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: borderColor,
+                      width: focusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: enabledHoveredBorderColor,
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: enabledHoveredBorderColor,
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
-                  borderSide: unfocusedHasBorder
-                      ? BorderSide(
-                          color: enabledBorderColor,
-                          width: unfocusedWidth,
-                        )
-                      : BorderSide.none,
+                  borderSide: BorderSide(
+                    color: enabledBorderColor,
+                    width: unfocusedWidth,
+                  ),
                 );
               },
             ),
@@ -5256,23 +5151,13 @@ void main() {
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.secondary);
 
-      const bool useM3 = false;
-      const bool tintDisable = true;
-      const bool tintInteract = true;
       const double? radius = null;
       const double unfocusedWidth = 1.0;
       const double focusedWidth = 2.0;
-      const bool unfocusedHasBorder = true;
-      const bool focusedHasBorder = true;
       final Color borderColor = colorScheme.secondary;
       final Color enabledBorderColor = colorScheme.outline;
       final Color enabledHoveredBorderColor = colorScheme.secondary;
-      const double effectiveRadius =
-          radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
-      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
-        topLeft: Radius.circular(effectiveRadius),
-        topRight: Radius.circular(effectiveRadius),
-      );
+      const double effectiveRadius = radius ?? kInputDecoratorRadius;
       final BorderRadius effectiveOutlineBorder =
           BorderRadius.circular(effectiveRadius);
       const int effectiveAlpha = kFillColorAlphaLight;
@@ -5401,83 +5286,65 @@ void main() {
                 if (states.contains(WidgetState.disabled)) {
                   return OutlineInputBorder(
                     borderRadius: effectiveOutlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.focused)) {
                     return OutlineInputBorder(
                       borderRadius: effectiveOutlineBorder,
-                      borderSide: focusedHasBorder
-                          ? BorderSide(
-                              color: colorScheme.error,
-                              width: focusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        color: colorScheme.error,
+                        width: focusedWidth,
+                      ),
                     );
                   }
                   if (states.contains(WidgetState.hovered)) {
                     return OutlineInputBorder(
                       borderRadius: effectiveOutlineBorder,
-                      borderSide: unfocusedHasBorder
-                          ? BorderSide(
-                              // TODO(rydmike): INFO: M3 uses onErrorContainer
-                              color: colorScheme.error,
-                              width: unfocusedWidth,
-                            )
-                          : BorderSide.none,
+                      borderSide: BorderSide(
+                        // TODO(rydmike): INFO: M3 uses onErrorContainer
+                        color: colorScheme.error,
+                        width: unfocusedWidth,
+                      ),
                     );
                   }
                   return OutlineInputBorder(
                     borderRadius: effectiveOutlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            // TODO(rydmike): INFO: M3 uses error
-                            color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      // TODO(rydmike): INFO: M3 uses error
+                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.focused)) {
                   return OutlineInputBorder(
                     borderRadius: effectiveOutlineBorder,
-                    borderSide: focusedHasBorder
-                        ? BorderSide(
-                            color: borderColor,
-                            width: focusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: borderColor,
+                      width: focusedWidth,
+                    ),
                   );
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return OutlineInputBorder(
                     borderRadius: effectiveOutlineBorder,
-                    borderSide: unfocusedHasBorder
-                        ? BorderSide(
-                            color: enabledHoveredBorderColor,
-                            width: unfocusedWidth,
-                          )
-                        : BorderSide.none,
+                    borderSide: BorderSide(
+                      color: enabledHoveredBorderColor,
+                      width: unfocusedWidth,
+                    ),
                   );
                 }
                 return OutlineInputBorder(
                   borderRadius: effectiveOutlineBorder,
-                  borderSide: unfocusedHasBorder
-                      ? BorderSide(
-                          color: enabledBorderColor,
-                          width: unfocusedWidth,
-                        )
-                      : BorderSide.none,
+                  borderSide: BorderSide(
+                    color: enabledBorderColor,
+                    width: unfocusedWidth,
+                  ),
                 );
               },
             ),
