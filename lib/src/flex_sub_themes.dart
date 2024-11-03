@@ -1897,21 +1897,21 @@ sealed class FlexSubThemes {
 
     // Function used to increase icon color for selections resulting in poor
     // icon color.
-    Color fixContrast(Color color) {
-      if (colorScheme.brightness == Brightness.light) {
-        if (ThemeData.estimateBrightnessForColor(color) == Brightness.light) {
-          return color.darken(25);
-        } else {
-          return color;
-        }
-      } else {
-        if (ThemeData.estimateBrightnessForColor(color) == Brightness.dark) {
-          return color.lighten(25);
-        } else {
-          return color;
-        }
-      }
-    }
+    // Color fixContrast(Color color) {
+    //   if (colorScheme.brightness == Brightness.light) {
+    //     if (ThemeData.estimateBrightnessForColor(color) == Brightness.light) {
+    //       return color.darken(25);
+    //     } else {
+    //       return color;
+    //     }
+    //   } else {
+    //     if (ThemeData.estimateBrightnessForColor(color) == Brightness.dark) {
+    //       return color.lighten(25);
+    //     } else {
+    //       return color;
+    //     }
+    //   }
+    // }
 
     // Function used to make a contrast color for blended background, we cannot
     // be sure the blended colors contrast is OK, with its source onPair,
@@ -1943,6 +1943,7 @@ sealed class FlexSubThemes {
             : SchemeColor.secondaryContainer;
     Color selectedColor =
         schemeColor(selectedSchemeColor ?? fallbackSelected, colorScheme);
+
     // Secondary selected color
     final SchemeColor fallbackSecondarySelected =
         selectedSchemeColor ?? fallbackSelected;
@@ -1993,22 +1994,13 @@ sealed class FlexSubThemes {
     final Color tint = selectedColor;
 
     // Icon color.
-    final Color iconColor;
-    if (backgroundColor == colorScheme.surface ||
-        backgroundColor == colorScheme.surfaceContainerLowest ||
-        backgroundColor == colorScheme.surfaceContainerLow ||
-        backgroundColor == colorScheme.surfaceContainer ||
-        backgroundColor == colorScheme.surfaceContainerHigh ||
-        backgroundColor == colorScheme.surfaceContainerHighest ||
-        backgroundColor == colorScheme.surfaceDim ||
-        backgroundColor == colorScheme.surfaceBright) {
-      iconColor = onBackgroundColor;
-    } else {
-      iconColor = backgroundColor;
+    Color iconColor = onBackgroundColor;
+    if (iconColor != colorScheme.onSurfaceVariant) {
+      iconColor = blendedContrast(backgroundColor);
     }
+    //
     // Text color, uses the onBackground.
-    final TextStyle effectiveLabelStyle =
-        (labelStyle ?? const TextStyle()).copyWith(
+    final TextStyle baseLabelStyle = (labelStyle ?? const TextStyle()).copyWith(
       color: onBackgroundColor,
       fontSize: fontSize ?? labelStyle?.fontSize ?? 14,
       // These two needed to match size of default M3.
@@ -2019,7 +2011,7 @@ sealed class FlexSubThemes {
     // TODO(rydmike): We need widget state to use this! Not supported. Issue?
     // Text color, uses the selected foreground color for selected chip styles.
     // final TextStyle effectiveSelectedLabelStyle =
-    //     effectiveLabelStyle.copyWith(color: onSelectedColor);
+    //     baseLabelStyle.copyWith(color: onSelectedColor);
 
     // Text color, uses the foreground color for all chip styles.
     final TextStyle effectiveSecondarySelectedLabelStyle =
@@ -2040,28 +2032,66 @@ sealed class FlexSubThemes {
     // TODO(rydmike): M3 is 34dp high, should only be 32dp. Report issue?
 
     return ChipThemeData(
+      // TODO(rydmike): This works, but it overrides secondarySelectedColor.
+      //  Raise issue! We cannot use due to that, but it would be nice
+      //  if we could fro creating better disabled color.
+      //
+      // color: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      //   if (states.contains(WidgetState.selected) &&
+      //       states.contains(WidgetState.disabled)) {
+      //     return !tintDisable && useM3
+      //         ? null
+      //         : tintDisable
+      //             ? tintedDisable(colorScheme.onSurface, tint)
+      //                 .withAlpha(kAlphaVeryLowDisabled)
+      //             : colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+      //   }
+      //   if (states.contains(WidgetState.disabled)) {
+      //     return !tintDisable && useM3
+      //         ? null
+      //         : tintDisable
+      //             ? tintedDisable(colorScheme.onSurface, tint)
+      //                 .withAlpha(kAlphaVeryLowDisabled)
+      //             : colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+      //   }
+      //   if (states.contains(WidgetState.selected)) {
+      //     return selectedSchemeColor == null && !blend
+      //         ? useM3
+      //             ? null
+      //             : selectedColor
+      //         : selectedColor;
+      //   }
+      //   return backgroundColor;
+      // }),
+
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip], [RawChip], but NOT to ANY selected or disabled Chip.
-      //   backgroundColor: useM3Defaults && !blend
       backgroundColor: backgroundColor,
 
       // Applies to [Chip], [InputChip], [RawChip].
-      // deleteIconColor: useM3Defaults && deleteIconSchemeColor == null
       deleteIconColor: deleteIconSchemeColor == null ? null : deleteIconColor,
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
       // Same formula as on FCS Elevated button and ToggleButtons.
-      disabledColor: !tintDisable && useM3
+      disabledColor: !tintDisable &&
+              useM3 &&
+              onBackgroundColor == colorScheme.onSurfaceVariant
           ? null
-          : tintDisable
-              ? tintedDisable(colorScheme.onSurface, tint)
-                  .withAlpha(kAlphaVeryLowDisabled)
-              : colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+          : onBackgroundColor == colorScheme.onSurfaceVariant
+              ? tintDisable
+                  ? tintedDisable(colorScheme.onSurface, tint)
+                      .withAlpha(kAlphaLowDisabled)
+                  : colorScheme.onSurface.withAlpha(kAlphaLowDisabled)
+              : tintDisable
+                  ? tintedDisable(backgroundColor, tint)
+                      .withAlpha(kAlphaLowDisabled)
+                  : backgroundColor.withAlpha(kAlphaLowDisabled),
       // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
       selectedColor: selectedSchemeColor == null && !blend
           ? useM3
               ? null
               : selectedColor
           : selectedColor,
+
       // Applies to [ChoiceChip.selectedColor], if set it overrides the
       // [selectedColor], for ChoiceChips.
       secondarySelectedColor: secondarySelectedSchemeColor == null && !blend
@@ -2088,20 +2118,22 @@ sealed class FlexSubThemes {
       // Applies to [ActionChip], [Chip], [FilterChip], [InputChip], [RawChip].
       // If it needs different color fr selected and unselected state it cannot
       // be themed correctly.
-      labelStyle: effectiveLabelStyle,
+      labelStyle: baseLabelStyle,
 
       // TODO(rydmike): We need widget state to use this! Not supported. Issue?
       // To always get correct color for selected state text, we would need to
-      // use WidgetStateTextStyle, but it is not supported.
+      // use WidgetStateTextStyle, but it is not supported. Docs says it should
+      // be, but it does not work. Issue?
       //
-      // WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+      // labelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
       //   if (states.contains(WidgetState.disabled)) {
-      //     return TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
+      //     return baseLabelStyle.copyWith(
+      //         color: colorScheme.onSurface.withOpacity(0.38));
       //   }
       //   if (states.contains(WidgetState.selected)) {
-      //     return effectiveSelectedLabelStyle;
+      //     return baseLabelStyle.copyWith(color: onSelectedColor);
       //   }
-      //   return effectiveLabelStyle;
+      //   return baseLabelStyle;
       // }),
 
       // Applies to [ChoiceChip.labelStyle],
@@ -2109,14 +2141,10 @@ sealed class FlexSubThemes {
 
       // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
       // [InputChip] and [RawChip].
-      iconTheme: baseSchemeColor == null || blend
-          ? IconThemeData(
-              size: iconSize ?? 18.0,
-            )
-          : IconThemeData(
-              color: fixContrast(iconColor),
-              size: iconSize ?? 18.0,
-            ),
+      iconTheme: IconThemeData(
+        size: iconSize ?? 18,
+        color: iconColor,
+      ),
     );
   }
 
@@ -4640,7 +4668,7 @@ sealed class FlexSubThemes {
       style: ButtonStyle(
         textStyle: textStyle,
         // MenuButtons text and background changes should not animate.
-        // If tey do we get this issue:
+        // If they do we get this issue:
         // https://github.com/flutter/flutter/issues/123615
         // We do not want that. This Duration fixes the issue.
         animationDuration: Duration.zero,
@@ -7516,7 +7544,7 @@ sealed class FlexSubThemes {
     }
     // Material-3 mode theming.
     else {
-      // Use a Cupertino style theme Material-3 Switch.
+      // Use a Cupertino style themed Material-3 Switch.
       if (useCupertinoStyle ?? false) {
         return SwitchThemeData(
           mouseCursor:
@@ -7552,7 +7580,7 @@ sealed class FlexSubThemes {
               }
               return isLight
                   // Actual CupertinoSwitch wraps with Opacity(0.5) layer, this
-                  // cannot be done here. This color picked to match the look.
+                  // cannot be done here. This is picked to match the look.
                   ? cup.color.withOpacity(0.07)
                   : cup.darkColor.withOpacity(0.16);
             }
@@ -7572,7 +7600,7 @@ sealed class FlexSubThemes {
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             return Colors.transparent;
           }),
-          // This is the width of the focused Cupertion oultine ring, but
+          // This is the width of the focused Cupertino outline ring, but
           // on an actual CupertinoSwitch it is outside the track and there
           // is special code to handle it the CupertinoSwitch case, we cannot
           // do that with a Theme on Material-3 Switch case, but it is style
