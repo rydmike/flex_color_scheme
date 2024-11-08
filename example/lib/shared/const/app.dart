@@ -38,7 +38,7 @@ sealed class App {
   static const bool isRunningWithWasm =
       bool.fromEnvironment('dart.tool.dart2wasm');
   static const String buildType = isRunningWithWasm
-      ? ', Web-WASM'
+      ? ', Web-WASM-GC'
       : kIsWeb
           ? ', Web-JS'
           : ', native VM';
