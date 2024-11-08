@@ -36,11 +36,13 @@ class ThemeServiceMem implements ThemeService {
   @override
   Future<void> save<T>(String key, T value) async {}
 
+  /// Get all stored key-value paris from the mem storage.
   @override
   Map<String, dynamic> getAll() {
     throw UnimplementedError();
   }
 
+  /// Put all key-value pairs into the Mem storage.
   @override
   Future<void> putAll(
     Map<String, dynamic> values, {
@@ -49,6 +51,7 @@ class ThemeServiceMem implements ThemeService {
     throw UnimplementedError();
   }
 
+  /// This implementation does not supports export and import of stored values.
   @override
   bool get supportsExportImport => false;
 

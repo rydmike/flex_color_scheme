@@ -51,27 +51,25 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # SVG file drawing, used by Asset Images, by dnfield.dev.
+  # SVG file drawing, used by Asset Images, by dnfield.dev, now Google.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg
-  # Temp change to: https://pub.dev/packages/flutter_svg_plus for WASM support.
-  # flutter_svg: ^2.0.10+1
-  flutter_svg_plus: ^2.0.13
+  flutter_svg: ^2.0.14
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
   google_fonts: ^6.2.1
 
-  # Hive local storage, by Simon Leir.
+  # Hive local storage, originally by Simon Leir.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
-  # https://pub.dev/packages/hive
-  hive: ^2.2.3
+  # This is a community fork that supports WASM-GC.
+  # hive: ^2.2.3 # Original Hive package
+  hive_ce: ^2.7.0+1
 
   # Internationalization package, by Google dart.dev.
   # Used only for date time string formatting in example 5.
   # https://pub.dev/packages/intl
   intl: ^0.19.0
-
 
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.

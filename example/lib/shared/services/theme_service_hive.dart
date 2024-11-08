@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 import '../utils/app_data_dir/app_data_dir.dart';
 import 'theme_service.dart';
@@ -146,6 +146,7 @@ class ThemeServiceHive implements ThemeService {
     }
   }
 
+  /// Get all stored key-value paris from the SharedPreferences storage.
   @override
   Map<String, dynamic> getAll() {
     // Filter out entries where the value is null.
@@ -158,6 +159,7 @@ class ThemeServiceHive implements ThemeService {
     return result;
   }
 
+  /// Put all key-value pairs into the Hive storage.
   @override
   Future<void> putAll(
     Map<String, dynamic> values, {
@@ -170,6 +172,7 @@ class ThemeServiceHive implements ThemeService {
     return _hiveBox.putAll(values);
   }
 
+  /// This implementation supports export and import of stored values.
   @override
   bool get supportsExportImport => true;
 

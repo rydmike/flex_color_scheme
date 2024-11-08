@@ -1014,11 +1014,13 @@ class ThemeServicePrefs implements ThemeService {
     }
   }
 
+  /// Get all stored key-value paris from the shared prefs storage.
   @override
   Map<String, dynamic> getAll() {
     throw UnimplementedError();
   }
 
+  /// Put all key-value pairs into the SharedPreferences storage.
   @override
   Future<void> putAll(
     Map<String, dynamic> values, {
@@ -1027,6 +1029,7 @@ class ThemeServicePrefs implements ThemeService {
     throw UnimplementedError();
   }
 
+  /// This implementation does not supports export and import of stored values.
   @override
   bool get supportsExportImport => false;
 

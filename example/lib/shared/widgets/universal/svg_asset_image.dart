@@ -2,7 +2,7 @@ import 'dart:async' show Future;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg_plus/flutter_svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 /// Displays an Undraw SVG image provided in the applications asset bundle.
 ///
