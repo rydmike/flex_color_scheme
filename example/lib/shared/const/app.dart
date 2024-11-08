@@ -33,8 +33,8 @@ sealed class App {
   //
   // The name of the package this app demonstrates.
   static const String packageName = 'FlexColor\u{00AD}Scheme';
-  // Version of the WEB build, usually same as package, but it also has a
-  // build numbers.
+
+  // Check if this is a Web-WASM build, Web-JS build or native VM build.
   static const bool isRunningWithWasm =
       bool.fromEnvironment('dart.tool.dart2wasm');
   static const String buildType = isRunningWithWasm
@@ -42,9 +42,11 @@ sealed class App {
       : kIsWeb
           ? ', Web-JS'
           : ', native VM';
+  // Version of the WEB build, usually same as package, but it also has a
+  // build numbers.
   static const String versionMajor = '8';
   static const String versionMinor = '0';
-  static const String versionPatch = '0';
+  static const String versionPatch = '1';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
