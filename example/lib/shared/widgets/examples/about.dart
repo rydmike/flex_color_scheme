@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/app.dart';
@@ -106,7 +107,10 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
                       'using ${App.packageName} '
                       '${App.version}. '
                       'Media size (w:${width.toStringAsFixed(0)}, '
-                      'h:${height.toStringAsFixed(0)})\n\n',
+                      'h:${height.toStringAsFixed(0)})\n'
+                      'kReleaseMode: $kReleaseMode '
+                      'kProfileMode: $kProfileMode '
+                      'kDebugMode: $kDebugMode.',
                 ),
               ],
             ),
