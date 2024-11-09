@@ -130,7 +130,7 @@ sealed class App {
   static const double edgeInsetsBigDesktop = 24;
 
   /// The maximum width for an AlertDialog.
-  static const double maxAlertDialogWidth = 400;
+  static const double maxAlertDialogWidth = 410;
 
   /// Responsive insets based on width.
   ///
