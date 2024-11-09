@@ -62,9 +62,10 @@ dependencies:
 
   # Hive local storage, originally by Simon Leir.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
-  # This is a community fork that supports WASM-GC.
   # hive: ^2.2.3 # Original Hive package
+  # This is a community fork that supports WASM-GC.
   hive_ce: ^2.7.0+1
+  # path: ../../hive_ce/hive  # Use this to test a local copy of hive_ce
 
   # Internationalization package, by Google dart.dev.
   # Used only for date time string formatting in example 5.
