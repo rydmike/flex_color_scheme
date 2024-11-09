@@ -115,7 +115,7 @@ class ThemeServiceHive implements ThemeService {
       }
       // Add workaround for hive WASM returning double instead of int, when
       // values saved were int.
-      // See issue: https://github.com/lamnhan066/hive/issues/2
+      // See issue: https://github.com/IO-Design-Team/hive_ce/issues/46
       if (App.isRunningWithWasm &&
           gotValue != null &&
           (gotValue is double) &&
