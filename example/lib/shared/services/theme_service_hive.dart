@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive_ce/hive.dart';
 
+import '../const/app.dart';
 import '../utils/app_data_dir/app_data_dir.dart';
 import 'theme_service.dart';
 import 'theme_service_hive_adapters.dart';
@@ -10,7 +11,7 @@ import 'theme_service_hive_adapters.dart';
 // The handy part is that if it gets in the way in debugging, it is an easy
 // toggle to turn it off here too. Often I just leave them true if it is one
 // I want to see in dev mode, unless it is too chatty.
-const bool _debug = !kReleaseMode && true;
+const bool _debug = !kReleaseMode || true;
 
 /// A [ThemeService] implementation that stores and retrieves theme settings
 /// locally using the package Hive: https://pub.dev/packages/hive
@@ -105,12 +106,30 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<T> load<T>(String key, T defaultValue) async {
     try {
-      final T loaded = _hiveBox.get(key, defaultValue: defaultValue) as T;
+      final dynamic gotValue = _hiveBox.get(key, defaultValue: defaultValue);
       if (_debug) {
-        debugPrint('Hive type   : $key as ${defaultValue.runtimeType}');
-        debugPrint('Hive loaded : $key as $loaded with ${loaded.runtimeType}');
+        debugPrint('Hive LOAD _______________');
+        debugPrint(' Type expected: $key as ${defaultValue.runtimeType}');
+        debugPrint(' Type loaded  : $key as ${gotValue.runtimeType}');
+        debugPrint(' Value loaded : $gotValue');
       }
-      return loaded;
+      // Add workaround for hive WASM returning double instead of int, when
+      // values saved were int.
+      // See issue: https://github.com/lamnhan066/hive/issues/2
+      if (App.isRunningWithWasm &&
+          gotValue != null &&
+          (gotValue is double) &&
+          (defaultValue is int || defaultValue is int?)) {
+        final T loaded = gotValue.round() as T;
+        if (_debug) {
+          debugPrint('   WASM Error : Expected int got double, '
+              'returning as int: $loaded');
+        }
+        return loaded;
+      } else {
+        final T loaded = gotValue as T;
+        return loaded;
+      }
     } catch (e) {
       debugPrint('Hive load (get) ERROR');
       debugPrint(' Error message ...... : $e');
@@ -135,8 +154,9 @@ class ThemeServiceHive implements ThemeService {
     try {
       await _hiveBox.put(key, value);
       if (_debug) {
-        debugPrint('Hive type   : $key as ${value.runtimeType}');
-        debugPrint('Hive saved  : $key as $value');
+        debugPrint('Hive SAVE _______________');
+        debugPrint(' Type  : $key as ${value.runtimeType}');
+        debugPrint(' Value : $key as $value');
       }
     } catch (e) {
       debugPrint('Hive save (put) ERROR');
