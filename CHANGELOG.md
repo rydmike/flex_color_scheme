@@ -10,7 +10,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **FIX** 
 
-- Fixed the version constraint. The V8 package is **only** compatible with Flutter 3.24.0 and later. It was intended to be compatible with Flutter 3.22.0 and later, but a theming API that is only available in Flutter version 3.24.0 and later made it into the release. If you need a release of version 8 that is also compatible with Flutter 3.22.x, you can use version 8.0.1-dev.3.22 of the package. The package release is identical to this release, but excludes the API not available in Flutter 3.22.0.  
+- Fixed the version constraint. The V8 package is **only** compatible with Flutter 3.24.0 and later. It was intended to be compatible with Flutter 3.22.0 and later, but a theming API that is only available in Flutter version 3.24.0 and later made it into the release. If you need a release of version 8 that is also compatible with Flutter 3.22.x, you can use [version 8.0.1-dev.3.22](https://pub.dev/packages/flex_color_scheme/versions/8.0.1-dev.3.22) of the package. That package release is identical to this release, but excludes the API not available in Flutter 3.22.0.  
 
 
 ### Themes Playground

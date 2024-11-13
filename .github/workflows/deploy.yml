@@ -16,7 +16,7 @@
 #    - Flutter clean.
 #    - Flutter build web app, in release mode and with canvaskit renderer.
 #    - Deploy each built Web App to GitHub pages.
-name: Deploy_Web
+name: Deploy
 on:
   push:
     branches: [none]
@@ -130,7 +130,7 @@ jobs:
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-5 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-latest/" --no-tree-shake-icons --release -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-latest/" --release -t lib/example5_themes_playground/main.dart
       - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:

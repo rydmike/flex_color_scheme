@@ -18,7 +18,7 @@
 #    - Deploy to GitHub pages.
 # For dev releases, the workflow excludes running test and uploading code
 # coverage data.
-name: Deploy_Dev
+name: Deploy_Dev_Playground
 on:
   push:
     branches: [none]

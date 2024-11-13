@@ -96,8 +96,6 @@ dependencies:
   # https://pub.dev/packages/web
   web: ^1.1.0
 
-dependency_overrides:
-  meta: ^1.14.0
 
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.
