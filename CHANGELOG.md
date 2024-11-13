@@ -10,7 +10,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **FIX** 
 
-- This is a special release of FlexColorScheme version, it is identical to release 8.0.1, but it removes the `locale` API from the `InputDecorationTheme` to keep it compatible with Flutter 3.22.x. If you use Flutter 3.24 or later, you should use the 8.0.0 or later release instead. 
+- This is a special release of **FlexColorScheme** version 8, it is identical to release 8.0.1, but it removes the `locale` API from the `InputDecorationTheme` to keep version 8 compatible with Flutter 3.22.x. If you use Flutter 3.24 or later, you should use the 8.0.0 or later releases instead. 
 
 
 ### Themes Playground

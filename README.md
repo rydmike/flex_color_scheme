@@ -6,6 +6,8 @@
 
 Use **FlexColorScheme** to make beautiful Flutter Material Design themes. Apply optional surface blends, and use Material-3 seeded generated ColorSchemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated ones. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from many pre-made designs or make your own. You can also use easy-to-configure component themes.
 
+>**NOTE:** This is a special release of **FlexColorScheme** version 8, it is identical to release 8.0.1, but it removes the `locale` API from the `InputDecorationTheme` to keep version 8 compatible with Flutter 3.22.x. If you use Flutter 3.24 or later, you should use the 8.0.0 or later releases instead.
+
 <table>
   <tr>
     <td><img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/fcs-v5-l-37.png" alt="Dash light" width="220"/></td>
