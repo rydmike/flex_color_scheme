@@ -15,8 +15,13 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ### Themes Playground
 
+**NEW**
+ 
 - Added a quick share button on the side menu. It exports the Playground settings to JSON, makes a URL of it and copies the result to the clip board in one go. Ready to be shared where needed.
-- Changes to the Playground make it possible to compile it to a Web WASM-GC build. The Playground WASM build is still experimental and not yet published anywhere.
+ 
+**CHANGE**
+
+- Made changes to the Playground to make it possible to compile it to a Web WASM-GC build. The Playground WASM build is still experimental and not yet published anywhere.
 
 
 ## 8.0.0
