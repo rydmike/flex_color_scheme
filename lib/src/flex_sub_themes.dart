@@ -2556,6 +2556,7 @@ sealed class FlexSubThemes {
       //
       cancelButtonStyle: cancelButtonStyle,
       confirmButtonStyle: confirmButtonStyle,
+      // This API is supported in Flutter 3.24.0 and later.
       locale: locale,
     );
   }

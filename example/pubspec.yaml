@@ -4,7 +4,7 @@ version: 8.0.1
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.22.0'
+  flutter: '>=3.24.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -95,6 +95,9 @@ dependencies:
   # Replaces dart:html, support WASM. Package by Google dart.dev.
   # https://pub.dev/packages/web
   web: ^1.1.0
+
+dependency_overrides:
+  meta: ^1.14.0
 
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.
