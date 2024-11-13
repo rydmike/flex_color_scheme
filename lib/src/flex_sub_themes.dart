@@ -2410,6 +2410,9 @@ sealed class FlexSubThemes {
 
     /// An optional [locale] argument can be used to set the locale for the date
     /// picker. It defaults to the ambient locale provided by [Localizations].
+    ///
+    /// This API has no function in this release of FlexColorScheme, it is
+    /// only available in the none dev release 8.0.0 and later.
     final Locale? locale,
   }) {
     // This InputDecorationTheme is here to help work around this issue:
@@ -2556,8 +2559,9 @@ sealed class FlexSubThemes {
       //
       cancelButtonStyle: cancelButtonStyle,
       confirmButtonStyle: confirmButtonStyle,
-      // This API is supported in Flutter 3.24.0 and later.
-      locale: locale,
+      // This API is supported in Flutter 3.24.0 and later, it is commented
+      // out fer the Flutter 3.22 support in this release.
+      // locale: locale,
     );
   }
 

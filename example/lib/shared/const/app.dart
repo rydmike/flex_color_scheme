@@ -46,7 +46,7 @@ sealed class App {
   // build numbers.
   static const String versionMajor = '8';
   static const String versionMinor = '0';
-  static const String versionPatch = '1';
+  static const String versionPatch = '1-dev.3.22';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
