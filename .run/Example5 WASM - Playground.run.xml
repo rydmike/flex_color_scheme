@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Example5 WASM - Playground" type="FlutterRunConfigurationType" factoryName="Flutter">
-    <option name="additionalArgs" value="--wasm --release" />
+    <option name="additionalArgs" value="--wasm --debug" />
     <option name="filePath" value="$PROJECT_DIR$/example/lib/example5_themes_playground/main.dart" />
     <method v="2" />
   </configuration>
