@@ -2,6 +2,23 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.0.1
+
+**Nov 13, 2024**
+
+### Package
+
+**FIX** 
+
+- Fixed the version constraint. The V8 package is **only** compatible with Flutter 3.24.0 and later. It was intended to be compatible with Flutter 3.22.0 and later, but a theming API that is only available in Flutter version 3.24.0 and later made it into the release. If you need a release of version 8 that is also compatible with Flutter 3.22.x, you can use version 8.0.1-dev.3.22 of the package. The package release is identical to this release, but excludes the API not available in Flutter 3.22.0.  
+
+
+### Themes Playground
+
+- Added a quick share button on the side menu. It exports the Playground settings to JSON, makes a URL of it and copies the result to the clip board in one go. Ready to be shared where needed.
+- Changes to the Playground make it possible to compile it to a Web WASM-GC build. The Playground WASM build is still experimental and not yet published anywhere.
+
+
 ## 8.0.0
 
 **Nov 3, 2024**
