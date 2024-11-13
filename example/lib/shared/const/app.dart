@@ -288,7 +288,13 @@ sealed class App {
     // Item 8
     ResponsiveMenuItems(
       dividerAbove: true,
-      label: 'Reset settings',
+      label: 'Share config',
+      tooltip: 'Share Playground configuration',
+      icon: Icons.ios_share,
+    ),
+    // Item 9
+    ResponsiveMenuItems(
+      label: 'Reset config',
       icon: Icons.replay_outlined,
       dividerBelow: true,
     ),

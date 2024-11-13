@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,8 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/examples/responsive_scaffold.dart';
 import '../../../shared/widgets/universal/responsive_dialog.dart';
 import '../../utils/generate_colorscheme_dart_code.dart';
+import '../../utils/import_export_playground_settings.dart';
+import '../../utils/share_settings.dart';
 import '../dialogs/dart_code_dialog.dart';
 import '../dialogs/reset_settings_dialog.dart';
 import '../dialogs/show_copy_setup_code_dialog.dart';
@@ -210,8 +214,28 @@ class _HomePageState extends State<HomePage> {
             widget.controller.setVerticalMode(!widget.controller.verticalMode);
             updateMenuState(index);
           }
-          // Reset theme settings.
+          // Make shareable URL
           else if (index == 8) {
+            // Steps:
+            // 1. Convert settings to JSON.
+            final String jsonSetting =
+                await exportPlaygroundSettings(widget.controller);
+            // 2. Compress the JSON String and make URL.
+            final String url = await ShareSettings.makeUrl(jsonSetting);
+            // 3. Copy the URL to the clipboard.
+            if (context.mounted) {
+              unawaited(
+                ShareSettings.copyToClipboardWithSnackBarInfo(
+                  context,
+                  url,
+                  'Playground settings share link copied '
+                  'to the clipboard. Paste it where you want to share it!',
+                ),
+              );
+            }
+          }
+          // Reset theme settings.
+          else if (index == 9) {
             final bool? reset = await showDialog<bool?>(
               context: context,
               builder: (BuildContext context) {

@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:archive/archive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../shared/const/app.dart';
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
@@ -16,6 +13,7 @@ import '../../../../shared/widgets/universal/syntax_highlighter.dart';
 import '../../../theme/theme_values.dart';
 import '../../../utils/generate_theme_dart_code.dart';
 import '../../../utils/import_export_playground_settings.dart';
+import '../../../utils/share_settings.dart';
 import '../../dialogs/delete_settings_data.dart';
 import '../../dialogs/import_settings_dialog.dart';
 import 'show_code_theme_colors.dart';
@@ -43,24 +41,6 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
     super.initState();
     playgroundConfig = '';
     shareUrl = '';
-  }
-
-  static String _compressJsonString(String jsonString) {
-    final List<int> jsonBytes = utf8.encode(jsonString);
-    final List<int>? compressedBytes =
-        GZipEncoder().encode(Uint8List.fromList(jsonBytes));
-    return base64UrlEncode(compressedBytes ?? <int>[0]);
-  }
-
-  // Handle Make URL
-  Future<void> _handleMakeUrl(final String inputConfig) async {
-    if (inputConfig.isNotEmpty) {
-      final String compressedConfig = _compressJsonString(inputConfig);
-      final String url = '${App.playgroundURL}?config=$compressedConfig';
-      setState(() {
-        shareUrl = url;
-      });
-    }
   }
 
   // Handle delete storage event.
@@ -93,27 +73,6 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
     }
   }
 
-  // Handle clipboard copy event.
-  //
-  // Shows a snackbar with a message and copies the data to the clipboard.
-  Future<void> _handleCopyEvent(
-    BuildContext context,
-    String clipBoardData,
-    String message,
-  ) async {
-    final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
-    final ClipboardData data = ClipboardData(text: clipBoardData);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        width: width,
-        content: Text(message),
-        duration: const Duration(milliseconds: 2000),
-      ),
-    );
-    await Clipboard.setData(data);
-  }
-
   // Handle clipboard paste event.
   //
   // Copies plain text from the clipboard and set it as the playgroundConfig.
@@ -132,7 +91,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
       final String data = await exportPlaygroundSettings(widget.controller);
       if (context.mounted) {
         unawaited(
-          _handleCopyEvent(
+          ShareSettings.copyToClipboardWithSnackBarInfo(
             context,
             data,
             'Themes Playground configuration copied to the clipboard!',
@@ -221,7 +180,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                 message: 'Copy code',
                 child: IconButton(
                   onPressed: () {
-                    unawaited(_handleCopyEvent(
+                    unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
                       context,
                       code,
                       'FlexColorScheme setup code copied to the clipboard!',
@@ -231,7 +190,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                 ),
               ),
               onTap: () {
-                unawaited(_handleCopyEvent(
+                unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
                   context,
                   code,
                   'FlexColorScheme setup code copied to the clipboard!',
@@ -370,7 +329,8 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       message: 'Copy settings',
                       child: IconButton(
                         onPressed: () {
-                          unawaited(_handleCopyEvent(
+                          unawaited(
+                              ShareSettings.copyToClipboardWithSnackBarInfo(
                             context,
                             playgroundConfig,
                             'Themes Playground configuration copied to the '
@@ -381,7 +341,7 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       ),
                     ),
                     onTap: () {
-                      unawaited(_handleCopyEvent(
+                      unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
                         context,
                         playgroundConfig,
                         'Themes Playground configuration copied to the '
@@ -459,15 +419,16 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                     trailing: IconButton(
                       icon: const Tooltip(
                         message: 'Make URL',
-                        child: Icon(Icons.ios_share),
+                        child: Icon(Icons.link),
                       ),
                       onPressed: () async {
-                        await _handleMakeUrl(playgroundConfig);
+                        shareUrl =
+                            await ShareSettings.makeUrl(playgroundConfig);
                         setState(() {});
                       },
                     ),
                     onTap: () async {
-                      await _handleMakeUrl(playgroundConfig);
+                      shareUrl = await ShareSettings.makeUrl(playgroundConfig);
                       setState(() {});
                     },
                   ),
@@ -475,16 +436,21 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                     enabled: shareUrl.isNotEmpty,
                     dense: true,
                     contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-                    title: const Text('Copy share URL'),
+                    title: const Text('Copy URL'),
                     subtitleReveal: const Text(
                       'Copy the share URL created to the clipbaord, it may '
-                      'be quite long, some browsers may not support it.',
+                      'be quite long, some browsers may not support it. You '
+                      'can also use the "Share config" button on the '
+                      'side menu, to export settings, make a shareable '
+                      'URL and copy it to the clipboard in one go, then '
+                      'just paste it somewhere to share it.\n',
                     ),
                     trailing: Tooltip(
                       message: 'Copy URL',
                       child: IconButton(
                         onPressed: () {
-                          unawaited(_handleCopyEvent(
+                          unawaited(
+                              ShareSettings.copyToClipboardWithSnackBarInfo(
                             context,
                             shareUrl,
                             'Themes Playground settings share link copied '
@@ -495,10 +461,10 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       ),
                     ),
                     onTap: () {
-                      unawaited(_handleCopyEvent(
+                      unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
                         context,
                         shareUrl,
-                        'Themes Playground setting share link copied '
+                        'Themes Playground settings share link copied '
                         'to the clipboard!',
                       ));
                     },
