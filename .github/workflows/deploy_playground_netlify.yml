@@ -49,8 +49,10 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
+          netlify-config-path: './example/netlify.toml'
           publish-dir: './example/build/web'
           production-branch: main
+          production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy to Netlify from GitHub Actions"
           enable-pull-request-comment: true
