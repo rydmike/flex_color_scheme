@@ -23,7 +23,7 @@ jobs:
     name: "Analyze and test package, then build and deploy Playground only"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v2
         with:
@@ -45,7 +45,7 @@ jobs:
       - name: "Themes playground START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "Themes playground WEB WASM-GC release build"
-        run: cd example && flutter build web --wasm --release --base-href "/themesplayground/" -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --wasm --release -t lib/example5_themes_playground/main.dart
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
