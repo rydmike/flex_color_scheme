@@ -1,53 +1,7 @@
 # Global headers for all paths and domains
-[[
-headers
-]]
-for = "/*"
-[
-headers.values
-]
-Cross-Origin-Embedder-Policy = "require-corp"
-Cross-Origin-Opener-Policy = "same-origin"
-# Add additional security headers
-X-Frame-Options = "DENY"
-X-Content-Type-Options = "nosniff"
-Referrer-Policy = "strict-origin-when-cross-origin"
-Permissions-Policy = "interest-cohort=()"
-
-# Specific headers for WASM files
-[[
-headers
-]]
-for = "/*.wasm"
-[
-headers.values
-]
-Content-Type = "application/wasm"
-
-# Specific configuration for the custom domain
-[[
-redirects
-]]
-from = "https://playground.flexcolorscheme.com/*"
-to = "/index.html"
-status = 200
-force = true
-headers = {Cross-Origin-Embedder-Policy = "require-corp", Cross-Origin-Opener-Policy = "same-origin"}
-
-# Specific configuration for the Netlify domain
-[[
-redirects
-]]
-from = "https://themesplayground.netlify.app/*"
-to = "/index.html"
-status = 200
-force = true
-headers = {Cross-Origin-Embedder-Policy = "require-corp", Cross-Origin-Opener-Policy = "same-origin"}
-
-# Fallback redirect for SPA
-[[
-redirects
-]]
-from = "/*"
-to = "/index.html"
-status = 200
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Content-Security-Policy = "upgrade-insecure-requests"
