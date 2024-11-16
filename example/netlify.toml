@@ -4,9 +4,3 @@
   [headers.values]
     Cross-Origin-Embedder-Policy = "require-corp"
     Cross-Origin-Opener-Policy = "same-origin"
-    Content-Security-Policy = "upgrade-insecure-requests"
-
-[[headers]]
-for = "/*.wasm"
-  [headers.values]
-    Content-Type = "application/wasm"
