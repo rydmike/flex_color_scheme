@@ -47,11 +47,11 @@ jobs:
       - name: "Themes playground WEB WASM-GC release build"
         run: cd example && flutter build web --wasm --release -t lib/example5_themes_playground/main.dart
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2.0
+        uses: nwtgck/actions-netlify@v3.0
         with:
           netlify-config-path: './example/netlify.toml'
           publish-dir: './example/build/web'
-          production-branch: main
+          production-branch: master
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy to Netlify from GitHub Actions"
