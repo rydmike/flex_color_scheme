@@ -2,7 +2,7 @@
 #
 # This workflow:
 #  - Installs dart and flutter
-#  - Uses latest flutter stable channel.
+#  - Uses the latest flutter stable channel.
 #    Consider setting up a matrix later with beta and dev included too.
 #  - Enables flutter web
 #  - Gets package dependencies
