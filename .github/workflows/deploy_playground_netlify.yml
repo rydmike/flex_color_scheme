@@ -42,17 +42,17 @@ jobs:
         run: flutter pub outdated
 
       # Themes playground - Build and deploy to Netlify
-      - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
+      - name: "Themes playground START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
-      - name: "EXAMPLE-5 WEB release build"
-        run: cd example && flutter build web --wasm --release -t lib/example5_themes_playground/main.dart
+      - name: "Themes playground WEB WASM-GC release build"
+        run: cd example && flutter build web --wasm --release --base-href "/themesplayground/" -t lib/example5_themes_playground/main.dart
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
           publish-dir: './example/build/web'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
+          deploy-message: "Deploy to Netlify from GitHub Actions"
           enable-pull-request-comment: true
           enable-commit-comment: true
           overwrites-pull-request-comment: true

@@ -1,38 +1,4 @@
-[[
-headers
-]]
-for = "/*"
-[
-headers.values
-]
-Cross-Origin-Embedder-Policy = "require-corp"
-Cross-Origin-Opener-Policy = "same-origin"
-
-[[
-headers
-]]
+[[headers]]
 for = "/*.wasm"
-[
-headers.values
-]
+[headers.values]
 Content-Type = "application/wasm"
-
-[[
-headers
-]]
-for = "/main.dart.js"
-[
-headers.values
-]
-Cross-Origin-Embedder-Policy = "require-corp"
-Cross-Origin-Opener-Policy = "same-origin"
-
-[[
-headers
-]]
-for = "/flutter.js"
-[
-headers.values
-]
-Cross-Origin-Embedder-Policy = "require-corp"
-Cross-Origin-Opener-Policy = "same-origin"
