@@ -52,7 +52,7 @@ jobs:
           publish-dir: './example/build/web'
           production-branch: master
           production-deploy: true
-          # netlify-config-path: './example/netlify.toml'
+          netlify-config-path: './example/netlify.toml'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy to Netlify from GitHub Actions"
           enable-pull-request-comment: true
