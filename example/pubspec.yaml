@@ -54,7 +54,7 @@ dependencies:
   # SVG file drawing, used by Asset Images, by dnfield.dev, now Google.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.0.14
+  flutter_svg: ^2.0.16
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
