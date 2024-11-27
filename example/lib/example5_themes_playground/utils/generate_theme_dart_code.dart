@@ -6,6 +6,7 @@ import '../../shared/const/app.dart';
 import '../../shared/const/app_color.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_response.dart';
+import '../../shared/utils/color_string.dart';
 import '../theme/theme_values.dart';
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
@@ -55,97 +56,97 @@ String generateThemeDartCode(ThemeController controller) {
   String lightScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
-          '    primary: ${scheme.light.primary},\n'
-          '    primaryContainer: ${scheme.light.primaryContainer},\n'
-          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
-          '    secondary: ${scheme.light.secondary},\n'
-          '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
-          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
-          '    tertiary: ${scheme.light.tertiary},\n'
-          '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
-          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
-          '    appBarColor: ${scheme.light.appBarColor},\n'
-          '    error: ${scheme.light.error},\n'
-          '    errorContainer: ${scheme.light.errorContainer},\n'
+          '    primary: ${scheme.light.primary.toColorString()},\n'
+          '    primaryContainer: ${scheme.light.primaryContainer.toColorString()},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef.toColorString()},\n'
+          '    secondary: ${scheme.light.secondary.toColorString()},\n'
+          '    secondaryContainer: ${scheme.light.secondaryContainer.toColorString()},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef.toColorString()},\n'
+          '    tertiary: ${scheme.light.tertiary.toColorString()},\n'
+          '    tertiaryContainer: ${scheme.light.tertiaryContainer.toColorString()},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef.toColorString()},\n'
+          '    appBarColor: ${scheme.light.appBarColor.toColorString()},\n'
+          '    error: ${scheme.light.error.toColorString()},\n'
+          '    errorContainer: ${scheme.light.errorContainer.toColorString()},\n'
           '  ),\n';
   if (useCustom) {
     lightScheme = '  colors: const FlexSchemeColor( // Custom\n'
-        '    primary: ${controller.customPrimaryLight},\n'
-        '    primaryContainer: ${controller.customPrimaryContainerLight},\n'
-        '    primaryLightRef: ${controller.customPrimaryLightRef},\n'
-        '    secondary: ${controller.customSecondaryLight},\n'
-        '    secondaryContainer: ${controller.customSecondaryContainerLight},\n'
-        '    secondaryLightRef: ${controller.customSecondaryLightRef},\n'
-        '    tertiary: ${controller.customTertiaryLight},\n'
-        '    tertiaryContainer: ${controller.customTertiaryContainerLight},\n'
-        '    tertiaryLightRef: ${controller.customTertiaryLightRef},\n'
-        '    appBarColor: ${scheme.light.appBarColor},\n'
-        '    error: ${controller.customErrorLight},\n'
-        '    errorContainer: ${controller.customErrorContainerLight},\n'
+        '    primary: ${controller.customPrimaryLight.toColorString()},\n'
+        '    primaryContainer: ${controller.customPrimaryContainerLight.toColorString()},\n'
+        '    primaryLightRef: ${controller.customPrimaryLightRef.toColorString()},\n'
+        '    secondary: ${controller.customSecondaryLight.toColorString()},\n'
+        '    secondaryContainer: ${controller.customSecondaryContainerLight.toColorString()},\n'
+        '    secondaryLightRef: ${controller.customSecondaryLightRef.toColorString()},\n'
+        '    tertiary: ${controller.customTertiaryLight.toColorString()},\n'
+        '    tertiaryContainer: ${controller.customTertiaryContainerLight.toColorString()},\n'
+        '    tertiaryLightRef: ${controller.customTertiaryLightRef.toColorString()},\n'
+        '    appBarColor: ${scheme.light.appBarColor.toColorString()},\n'
+        '    error: ${controller.customErrorLight.toColorString()},\n'
+        '    errorContainer: ${controller.customErrorContainerLight.toColorString()},\n'
         '  ),\n';
   }
   String darkScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
-          '    primary: ${scheme.dark.primary},\n'
-          '    primaryContainer: ${scheme.dark.primaryContainer},\n'
-          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
-          '    secondary: ${scheme.dark.secondary},\n'
-          '    secondaryContainer: ${scheme.dark.secondaryContainer},\n'
-          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
-          '    tertiary: ${scheme.dark.tertiary},\n'
-          '    tertiaryContainer: ${scheme.dark.tertiaryContainer},\n'
-          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
-          '    appBarColor: ${scheme.dark.appBarColor},\n'
-          '    error: ${scheme.dark.error},\n'
-          '    errorContainer: ${scheme.dark.errorContainer},\n'
+          '    primary: ${scheme.dark.primary.toColorString()},\n'
+          '    primaryContainer: ${scheme.dark.primaryContainer.toColorString()},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef.toColorString()},\n'
+          '    secondary: ${scheme.dark.secondary.toColorString()},\n'
+          '    secondaryContainer: ${scheme.dark.secondaryContainer.toColorString()},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef.toColorString()},\n'
+          '    tertiary: ${scheme.dark.tertiary.toColorString()},\n'
+          '    tertiaryContainer: ${scheme.dark.tertiaryContainer.toColorString()},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef.toColorString()},\n'
+          '    appBarColor: ${scheme.dark.appBarColor.toColorString()},\n'
+          '    error: ${scheme.dark.error.toColorString()},\n'
+          '    errorContainer: ${scheme.dark.errorContainer.toColorString()},\n'
           '  ),\n';
   if (useCustom) {
     darkScheme = '  colors: const FlexSchemeColor( // Custom\n'
-        '    primary: ${controller.customPrimaryDark},\n'
-        '    primaryContainer: ${controller.customPrimaryContainerDark},\n'
-        '    primaryLightRef: ${controller.customPrimaryDarkRef},\n'
-        '    secondary: ${controller.customSecondaryDark},\n'
-        '    secondaryContainer: ${controller.customSecondaryContainerDark},\n'
-        '    secondaryLightRef: ${controller.customSecondaryDarkRef},\n'
-        '    tertiary: ${controller.customTertiaryDark},\n'
-        '    tertiaryContainer: ${controller.customTertiaryContainerDark},\n'
-        '    tertiaryLightRef: ${controller.customTertiaryDarkRef},\n'
-        '    appBarColor: ${scheme.light.appBarColor},\n'
-        '    error: ${controller.customErrorDark},\n'
-        '    errorContainer: ${controller.customErrorContainerDark},\n'
+        '    primary: ${controller.customPrimaryDark.toColorString()},\n'
+        '    primaryContainer: ${controller.customPrimaryContainerDark.toColorString()},\n'
+        '    primaryLightRef: ${controller.customPrimaryDarkRef.toColorString()},\n'
+        '    secondary: ${controller.customSecondaryDark.toColorString()},\n'
+        '    secondaryContainer: ${controller.customSecondaryContainerDark.toColorString()},\n'
+        '    secondaryLightRef: ${controller.customSecondaryDarkRef.toColorString()},\n'
+        '    tertiary: ${controller.customTertiaryDark.toColorString()},\n'
+        '    tertiaryContainer: ${controller.customTertiaryContainerDark.toColorString()},\n'
+        '    tertiaryLightRef: ${controller.customTertiaryDarkRef.toColorString()},\n'
+        '    appBarColor: ${scheme.light.appBarColor.toColorString()},\n'
+        '    error: ${controller.customErrorDark.toColorString()},\n'
+        '    errorContainer: ${controller.customErrorContainerDark.toColorString()},\n'
         '  ),\n';
   }
   if (controller.useToDarkMethod && !useBuiltIn && !controller.useKeyColors) {
     if (useCustom) {
       darkScheme = '  colors: const FlexSchemeColor(\n'
-          '    primary: ${scheme.dark.primary},\n'
-          '    primaryContainer: ${scheme.dark.primaryContainer},\n'
-          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
-          '    secondary: ${scheme.dark.secondary},\n'
-          '    secondaryContainer: ${scheme.dark.secondaryContainer},\n'
-          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
-          '    tertiary: ${scheme.dark.tertiary},\n'
-          '    tertiaryContainer: ${scheme.dark.tertiaryContainer},\n'
-          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
-          '    appBarColor: ${scheme.dark.appBarColor},\n'
-          '    error: ${scheme.dark.error},\n'
-          '    errorContainer: ${scheme.dark.errorContainer},\n'
+          '    primary: ${scheme.dark.primary.toColorString()},\n'
+          '    primaryContainer: ${scheme.dark.primaryContainer.toColorString()},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef.toColorString()},\n'
+          '    secondary: ${scheme.dark.secondary.toColorString()},\n'
+          '    secondaryContainer: ${scheme.dark.secondaryContainer.toColorString()},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef.toColorString()},\n'
+          '    tertiary: ${scheme.dark.tertiary.toColorString()},\n'
+          '    tertiaryContainer: ${scheme.dark.tertiaryContainer.toColorString()},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef.toColorString()},\n'
+          '    appBarColor: ${scheme.dark.appBarColor.toColorString()},\n'
+          '    error: ${scheme.dark.error.toColorString()},\n'
+          '    errorContainer: ${scheme.dark.errorContainer.toColorString()},\n'
           '  ).defaultError.toDark(${controller.toDarkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
     } else {
       darkScheme = '  colors: const FlexSchemeColor(\n'
-          '    primary: ${scheme.light.primary},\n'
-          '    primaryContainer: ${scheme.light.primaryContainer},\n'
-          '    primaryLightRef: ${scheme.light.primaryLightRef},\n'
-          '    secondary: ${scheme.light.secondary},\n'
-          '    secondaryContainer: ${scheme.light.secondaryContainer},\n'
-          '    secondaryLightRef: ${scheme.light.secondaryLightRef},\n'
-          '    tertiary: ${scheme.light.tertiary},\n'
-          '    tertiaryContainer: ${scheme.light.tertiaryContainer},\n'
-          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef},\n'
-          '    appBarColor: ${scheme.light.appBarColor},\n'
-          '    error: ${scheme.light.error},\n'
-          '    errorContainer: ${scheme.light.errorContainer},\n'
+          '    primary: ${scheme.light.primary.toColorString()},\n'
+          '    primaryContainer: ${scheme.light.primaryContainer.toColorString()},\n'
+          '    primaryLightRef: ${scheme.light.primaryLightRef.toColorString()},\n'
+          '    secondary: ${scheme.light.secondary.toColorString()},\n'
+          '    secondaryContainer: ${scheme.light.secondaryContainer.toColorString()},\n'
+          '    secondaryLightRef: ${scheme.light.secondaryLightRef.toColorString()},\n'
+          '    tertiary: ${scheme.light.tertiary.toColorString()},\n'
+          '    tertiaryContainer: ${scheme.light.tertiaryContainer.toColorString()},\n'
+          '    tertiaryLightRef: ${scheme.light.tertiaryLightRef.toColorString()},\n'
+          '    appBarColor: ${scheme.light.appBarColor.toColorString()},\n'
+          '    error: ${scheme.light.error.toColorString()},\n'
+          '    errorContainer: ${scheme.light.errorContainer.toColorString()},\n'
           '  ).defaultError.toDark(${controller.toDarkMethodLevel}, ${controller.toDarkSwapPrimaryAndContainer}),\n';
     }
   }
@@ -257,10 +258,10 @@ String generateThemeDartCode(ThemeController controller) {
           ? '  useMaterial3ErrorColors: ${controller.useM3ErrorColors},\n'
           : '';
   final String tintLightColor = controller.surfaceTintLight != null
-      ? '  surfaceTint: const ${controller.surfaceTintLight},\n'
+      ? '  surfaceTint: const ${controller.surfaceTintLight.toColorString()},\n'
       : '';
   final String tintDarkColor = controller.surfaceTintDark != null
-      ? '  surfaceTint: const ${controller.surfaceTintDark},\n'
+      ? '  surfaceTint: const ${controller.surfaceTintDark.toColorString()},\n'
       : '';
   // Do we apply Cupertino to all components?
   final String applyToAllCupertino = controller.applyThemeToAllCupertino
@@ -1161,7 +1162,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    tabBarIndicatorTopRadius: ${controller.tabBarIndicatorTopRadius},\n'
       : '';
   final String tabBarDividerColor = controller.tabBarDividerColor != null
-      ? '    tabBarDividerColor: ${controller.tabBarDividerColor},\n'
+      ? '    tabBarDividerColor: ${controller.tabBarDividerColor.toColorString()},\n'
       : '';
   final String tabBarTabAlignment = controller.tabBarTabAlignment != null
       ? '    tabBarTabAlignment: ${controller.tabBarTabAlignment},\n'
@@ -1328,7 +1329,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '    menuBarElevation: ${controller.menuBarElevation!.toStringAsFixed(1)},\n'
       : '';
   final String menuBarShadowColor = controller.menuBarShadowColor != null
-      ? '    menuBarShadowColor: ${controller.menuBarShadowColor},\n'
+      ? '    menuBarShadowColor: ${controller.menuBarShadowColor.toColorString()},\n'
       : '';
   //
   final String menuItemBackgroundSchemeColor = controller
