@@ -1,4 +1,5 @@
-# RydMike LINTER Preferences v2.2.0
+# RydMike LINTER Preferences v2.3.0
+# TODO(rydmike): Review and publish this v2.3.0 updated version.
 #
 # Get this file here: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
@@ -10,6 +11,7 @@
 # sheet: https://docs.google.com/spreadsheets/d/1Nc1gFjmCOMubWZD7f2E4fLhWN7LYaOE__tsA7bf2NjA
 #
 # Versions used for comparison:
+# TODO(rydmike): Update the used comparisons to their latest version.
 #
 # Core           v3.0.0     : https://pub.dev/packages/lints
 # Recommended    v3.0.0     : https://pub.dev/packages/lints
@@ -541,6 +543,28 @@ linter:
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     do_not_use_environment: false
 
+    # DO document lint ignores.
+    #
+    # https://dart.dev/tools/linter-rules/document_ignores
+    #
+    # Document ignore comments.
+    #
+    # RydMike: THis is good, but putting it false for now, as it is triggered a lot
+    # in code bases that did not do this. Consider keeping it on for new projects.
+    #
+    # Other known linters use:
+    #
+    # Core           disabled : https://pub.dev/packages/lints
+    # Recommended    disabled : https://pub.dev/packages/lints
+    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart disabled : https://pub.dev/packages/effective_dart
+    # Lint           disabled : https://pub.dev/packages/lint
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
+    # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    document_ignores: false
+
     # DO Use Flutter TO-DO format.
     #
     # https://dart.dev/tools/linter-rules/flutter_style_todos.html
@@ -651,6 +675,28 @@ linter:
     # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     omit_local_variable_types: false
+
+    # TODO(rydmike): This rule is not yet available on Flutter stable channel. Add later.
+    # CONSIDER omitting obvious type annotations for local variables.
+    #
+    # https://dart.dev/tools/linter-rules/omit_obvious_local_variable_types
+    #
+    # Conflicts with 'always_specify_types' that is used, so then we can't have this rule either,
+    # besides we like being verbose and specific. Why and when would omitting the type for local
+    # variables be a good thing anyway, be specific, is our take on this.
+    #
+    # Other known linters use:
+    #
+    # Core           disabled : https://pub.dev/packages/lints
+    # Recommended    disabled : https://pub.dev/packages/lints
+    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart disabled : https://pub.dev/packages/effective_dart
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    # Lint           ? : https://pub.dev/packages/lint
+    # VG Analysis    ? : https://pub.dev/packages/very_good_analysis
+    # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    # omit_obvious_local_variable_types: false
 
     # PREFER asserts with a message string.
     #
@@ -852,7 +898,7 @@ linter:
     # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     #   PACKAGE:     enabled  : By commenting it out. (My default, I start with this)
     #   APPLICATION: disabled : With false value. (But usually uncomment the false value if it is an app)
-    # public_member_api_docs: false
+    public_member_api_docs: false
 
     # DO use trailing commas for all function calls and declarations unless the function call or
     # definition, from the start of the function name up to the closing parenthesis,
