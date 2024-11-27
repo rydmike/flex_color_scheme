@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive_ce/hive.dart';
 
-import '../const/app.dart';
 import '../utils/app_data_dir/app_data_dir.dart';
 import 'theme_service.dart';
 import 'theme_service_hive_adapters.dart';
@@ -113,23 +112,8 @@ class ThemeServiceHive implements ThemeService {
         debugPrint(' Type loaded  : $key as ${gotValue.runtimeType}');
         debugPrint(' Value loaded : $gotValue');
       }
-      // Add workaround for hive WASM returning double instead of int, when
-      // values saved were int.
-      // See issue: https://github.com/IO-Design-Team/hive_ce/issues/46
-      if (App.isRunningWithWasm &&
-          gotValue != null &&
-          (gotValue is double) &&
-          (defaultValue is int || defaultValue is int?)) {
-        final T loaded = gotValue.round() as T;
-        if (_debug) {
-          debugPrint('   WASM Error : Expected int got double, '
-              'returning as int: $loaded');
-        }
-        return loaded;
-      } else {
-        final T loaded = gotValue as T;
-        return loaded;
-      }
+      final T loaded = gotValue as T;
+      return loaded;
     } catch (e) {
       debugPrint('Hive load (get) ERROR');
       debugPrint(' Error message ...... : $e');
