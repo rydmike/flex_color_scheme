@@ -31,7 +31,7 @@ enum FlexThemeModeButtonOrder {
 /// included in the option toggle button for each theme mode.
 ///
 /// They scheme colors for each button will be in the order:
-/// ```
+/// ```text
 /// | Primary           | Secondary       |
 /// | Primary container | Tertiary        |
 /// ```

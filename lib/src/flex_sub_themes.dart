@@ -1082,7 +1082,7 @@ sealed class FlexSubThemes {
     /// When all required properties are undefined and flag is false or true,
     /// the effective default styles for undefined inputs become:
     ///
-    /// ```
+    /// ```text
     ///                    FCS defaults   Flutter defaults
     /// useFlutterDefaults false          true
     /// - background       background     background
@@ -5105,7 +5105,7 @@ sealed class FlexSubThemes {
     /// When all required properties are undefined and flag is false or true,
     /// the effective default styles for undefined inputs become:
     ///
-    /// ```
+    /// ```text
     ///                    FCS defaults   M2 defaults       useMaterial3:true
     /// useFlutterDefaults false          true              true
     /// results in:
@@ -5777,7 +5777,7 @@ sealed class FlexSubThemes {
     ///
     /// Differences when flag is false versus true are:
     ///
-    /// ```
+    /// ```text
     ///                    FCS defaults    M2 defaults      useMaterial3:true
     /// useFlutterDefaults false           true             true
     /// results in:

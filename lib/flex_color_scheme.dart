@@ -1,5 +1,5 @@
 /// A library to help you make beautiful color scheme based themes for Flutter.
-library flex_color_scheme;
+library;
 
 /// Export FlexSeedScheme package API, except Cam16.
 ///

@@ -3800,7 +3800,7 @@ class FlexSubThemesData with Diagnosticable {
   /// In Flutter version 3.24 and earlier,
   /// the Material-3 default is still also onSurface.
   /// This is a spec BUG in Flutter's Material-3 defaults, it should be
-  /// onSurfaceVariant. See issue: <add new issue link here>
+  /// onSurfaceVariant. See issue: add new issue link here
   final SchemeColor? navigationRailUnselectedLabelSchemeColor;
 
   /// If true, the unselected label in the [NavigationRail] use a more
@@ -4040,7 +4040,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Impact on [BottomNavigationBarThemeData] sub-theming:
   ///
-  /// ```
+  /// ```text
   ///                    FCS defaults   Flutter defaults
   /// useFlutterDefaults false          true
   /// - background       background     background
@@ -4060,7 +4060,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Impact on [NavigationBarThemeData] sub-theming:
   ///
-  /// ```
+  /// ```text
   ///                    FCS defaults   M2 defaults       useMaterial3:true
   /// useFlutterDefaults false          true              true
   /// results in:
@@ -4083,7 +4083,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Impact on [NavigationRailThemeData] sub-theming:
   ///
-  /// ```
+  /// ```text
   ///                    FCS defaults    Flutter defaults
   /// useFlutterDefaults false           true
   /// - background       background      surface
