@@ -210,11 +210,12 @@ packages:
   hive_ce:
     dependency: "direct main"
     description:
-      name: hive_ce
-      sha256: ab1b79ce8d479cd3a8f9b90fe70219f368ca846f86eb4a1e84f4f11483cef65f
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.7.0+1"
+      path: hive
+      ref: main
+      resolved-ref: f7472d99c1504a122f394024c0a09a04b91c54dc
+      url: "https://github.com/rydmike/hive_ce.git"
+    source: git
+    version: "2.8.0+2"
   http:
     dependency: transitive
     description:
@@ -536,10 +537,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_linux
-      sha256: e2b9622b4007f97f504cd64c0128309dfb978ae66adbe944125ed9e1750f06af
+      sha256: "4e9ba368772369e3e08f231d2301b4ef72b9ff87c31192ef471b380ef29a4935"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.1"
   url_launcher_macos:
     dependency: transitive
     description:
