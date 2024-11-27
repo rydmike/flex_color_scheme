@@ -207,8 +207,8 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
   }
 }
 
-/// A [Panel] wrapper that puts the content of them, in a [ListView]
-/// inside a [HeaderCard].
+/// A [Panel] wrapper that puts the content of them, in a [ListView] or as
+/// later changed to a [SingleChildScrollView] inside a [HeaderCard].
 ///
 /// The view can show two panels side by side when the screen is wide enough,
 /// the second panel is selected with a popup menu.
