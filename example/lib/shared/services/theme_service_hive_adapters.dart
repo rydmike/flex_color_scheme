@@ -110,7 +110,7 @@ class FlexAppBarStyleAdapter extends TypeAdapter<FlexAppBarStyle> {
 
 /// A Hive data type adapter for enum [FlexTabBarStyle], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class FlexTabBarStyleAdapter extends TypeAdapter<FlexTabBarStyle?> {
   @override
@@ -151,7 +151,7 @@ class FlexSystemNavBarStyleAdapter extends TypeAdapter<FlexSystemNavBarStyle> {
 
 /// A Hive data type adapter for enum [SchemeColor], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class FlexSchemeColorAdapter extends TypeAdapter<SchemeColor?> {
   @override
@@ -211,7 +211,7 @@ class NavigationRailLabelTypeAdapter
 
 /// A Hive data type adapter for enum [FlexSliderIndicatorType], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class FlexSliderIndicatorTypeAdapter
     extends TypeAdapter<FlexSliderIndicatorType?> {
@@ -236,7 +236,7 @@ class FlexSliderIndicatorTypeAdapter
 
 /// A Hive data type adapter for enum [ShowValueIndicator], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class ShowValueIndicatorAdapter extends TypeAdapter<ShowValueIndicator?> {
   @override
@@ -264,7 +264,7 @@ class ShowValueIndicatorAdapter extends TypeAdapter<ShowValueIndicator?> {
 
 /// A Hive data type adapter for enum [TabBarIndicatorSize], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class TabBarIndicatorSizeAdapter extends TypeAdapter<TabBarIndicatorSize?> {
   @override
@@ -288,7 +288,7 @@ class TabBarIndicatorSizeAdapter extends TypeAdapter<TabBarIndicatorSize?> {
 
 /// A Hive data type adapter for enum [AdaptiveResponse], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class AdaptiveThemeAdapter extends TypeAdapter<AdaptiveResponse?> {
   @override
@@ -312,7 +312,7 @@ class AdaptiveThemeAdapter extends TypeAdapter<AdaptiveResponse?> {
 
 /// A Hive data type adapter for enum [FlexPaletteType], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class FlexPaletteTypeAdapter extends TypeAdapter<FlexPaletteType?> {
   @override
@@ -336,7 +336,7 @@ class FlexPaletteTypeAdapter extends TypeAdapter<FlexPaletteType?> {
 
 /// A Hive data type adapter for enum [VisualDensityEnum], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class VisualDensityEnumAdapter extends TypeAdapter<VisualDensityEnum?> {
   @override
@@ -360,7 +360,7 @@ class VisualDensityEnumAdapter extends TypeAdapter<VisualDensityEnum?> {
 
 /// A Hive data type adapter for enum [SplashTypeEnum], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class SplashTypeEnumAdapter extends TypeAdapter<SplashTypeEnum?> {
   @override
@@ -384,7 +384,7 @@ class SplashTypeEnumAdapter extends TypeAdapter<SplashTypeEnum?> {
 
 /// A Hive data type adapter for enum [TabAlignment], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class TabAlignmentAdapter extends TypeAdapter<TabAlignment?> {
   @override
@@ -408,7 +408,7 @@ class TabAlignmentAdapter extends TypeAdapter<TabAlignment?> {
 
 /// A Hive data type adapter for enum [FlexFixedColorStyle], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class FlexFixedColorStyleAdapter extends TypeAdapter<FlexFixedColorStyle?> {
   @override
@@ -432,7 +432,7 @@ class FlexFixedColorStyleAdapter extends TypeAdapter<FlexFixedColorStyle?> {
 
 /// A Hive data type adapter for enum [ListTileStyle], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class ListTileStyleAdapter extends TypeAdapter<ListTileStyle?> {
   @override
@@ -456,7 +456,7 @@ class ListTileStyleAdapter extends TypeAdapter<ListTileStyle?> {
 
 /// A Hive data type adapter for enum [ListTileTitleAlignment], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class ListTileTitleAlignmentAdapter
     extends TypeAdapter<ListTileTitleAlignment?> {
@@ -481,7 +481,7 @@ class ListTileTitleAlignmentAdapter
 
 /// A Hive data type adapter for enum [ListTileControlAffinity], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class ListTileControlAffinityAdapter
     extends TypeAdapter<ListTileControlAffinity?> {
@@ -506,7 +506,7 @@ class ListTileControlAffinityAdapter
 
 /// A Hive data type adapter for enum [MaterialTapTargetSize], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class MaterialTapTargetSizeAdapter extends TypeAdapter<MaterialTapTargetSize?> {
   @override
@@ -530,7 +530,7 @@ class MaterialTapTargetSizeAdapter extends TypeAdapter<MaterialTapTargetSize?> {
 
 /// A Hive data type adapter for enum [FlexScaffoldBaseColor], nullable.
 ///
-/// Handles storing <null> value as -1 and returns anything out of enum
+/// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
 class FlexScaffoldBaseColorAdapter extends TypeAdapter<FlexScaffoldBaseColor?> {
   @override
