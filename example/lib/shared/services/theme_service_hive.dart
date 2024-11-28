@@ -10,7 +10,7 @@ import 'theme_service_hive_adapters.dart';
 // The handy part is that if it gets in the way in debugging, it is an easy
 // toggle to turn it off here too. Often I just leave them true if it is one
 // I want to see in dev mode, unless it is too chatty.
-const bool _debug = !kReleaseMode || true;
+const bool _debug = !kReleaseMode && false;
 
 /// A [ThemeService] implementation that stores and retrieves theme settings
 /// locally using the package Hive: https://pub.dev/packages/hive
