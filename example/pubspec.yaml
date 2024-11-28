@@ -30,7 +30,10 @@ dependencies:
   # Simulated device frames package by aloisdeniel.com.
   # Used by the theme simulator in the Playground.
   # https://pub.dev/packages/device_frame
-  device_frame: ^1.2.0
+  # device_frame: ^1.2.0
+  # Original no longer well maintained, using fork:
+  # https://pub:dev/packages/device_frame_plus:
+  device_frame_plus: ^1.2.2+1
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used for color selection in the Playground to make customized color schemes.
@@ -45,7 +48,7 @@ dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^3.4.0
+  flex_seed_scheme: ^3.4.1
 
   # The Flutter SDK, by Google flutter.dev.
   flutter:
@@ -76,7 +79,7 @@ dependencies:
   # Internationalization package, by Google dart.dev.
   # Used only for date time string formatting in example 5.
   # https://pub.dev/packages/intl
-  intl: ^0.19.0
+  intl: ^0.20.1
 
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
@@ -122,7 +125,7 @@ flutter:
     # images contains all different resolutions:
     # mdpi (1.0x), hdpi (1.5x), xhdpi (2.0x), xxhdpi (3.0x), xxxhdpi (4.0x)
     - assets/images/
-    - assets/images/ud_verified.svg
+    #- assets/images/ud_verified.svg
     # Google fonts, font assets
     - assets/google_fonts/
 
