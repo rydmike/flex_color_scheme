@@ -70,7 +70,7 @@ String generateThemeDartCode(ThemeController controller) {
           '    errorContainer: ${scheme.light.errorContainer.toColorString()},\n'
           '  ),\n';
   if (useCustom) {
-    lightScheme = '  colors: const FlexSchemeColor( // Custom\n'
+    lightScheme = '  colors: const FlexSchemeColor( // Custom colors\n'
         '    primary: ${controller.customPrimaryLight.toColorString()},\n'
         '    primaryContainer: ${controller.customPrimaryContainerLight.toColorString()},\n'
         '    primaryLightRef: ${controller.customPrimaryLightRef.toColorString()},\n'
@@ -102,7 +102,7 @@ String generateThemeDartCode(ThemeController controller) {
           '    errorContainer: ${scheme.dark.errorContainer.toColorString()},\n'
           '  ),\n';
   if (useCustom) {
-    darkScheme = '  colors: const FlexSchemeColor( // Custom\n'
+    darkScheme = '  colors: const FlexSchemeColor( // Custom colors\n'
         '    primary: ${controller.customPrimaryDark.toColorString()},\n'
         '    primaryContainer: ${controller.customPrimaryContainerDark.toColorString()},\n'
         '    primaryLightRef: ${controller.customPrimaryDarkRef.toColorString()},\n'
