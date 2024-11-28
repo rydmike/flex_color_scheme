@@ -1,8 +1,6 @@
 {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "configurations": [
-    
-
         {
             "name": "flex_color_scheme",
             "request": "launch",
@@ -51,11 +49,21 @@
             "program": "lib/example4_all_themes/main.dart"
         },
         {
-            "name": "Example 5 - Themes Playground",
+            "name": "Example 5 - JS Themes Playground",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
             "program": "lib/example5_themes_playground/main.dart"
+        },
+        {
+            "name": "Example 5 - WASM Themes Playground",
+            "cwd": "example",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/example5_themes_playground/main.dart",
+            "args": [
+                "--wasm"
+            ]
         }
     ]
 }
