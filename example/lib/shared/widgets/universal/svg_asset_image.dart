@@ -50,9 +50,10 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
   late String svgString;
 
   Future<SvgPicture> _coloredUndrawImage(bool load, Color color) async {
+    // Convert the color to a HEX RGB string without the alpha value.
+    final String valueString =
+        color.value.toRadixString(16).padLeft(8, '0').substring(2);
     if (load) assetSvgString = await rootBundle.loadString(widget.assetName);
-    String valueString = color.toString().split('(0x')[1].split(')')[0];
-    valueString = valueString.substring(2, valueString.length);
     // Find the default image 'theme' color in the Undraw SVG, and replace
     // the color with another color string value we want to use instead.
     // We store the original bundle asset and change colors on the original
