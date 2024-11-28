@@ -1,4 +1,4 @@
-import 'package:device_frame/device_frame.dart';
+import 'package:device_frame_plus/device_frame_plus.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -330,12 +330,20 @@ class SimulatorPopupMenu extends StatelessWidget {
       size: 30,
     ),
     SimDevice(
+      info: Devices.ios.iPhone12,
+      size: 26,
+    ),
+    SimDevice(
       info: Devices.ios.iPhone12Mini,
       size: 22,
     ),
     SimDevice(
       info: Devices.ios.iPhoneSE,
       size: 20,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone14Pro,
+      size: 26,
     ),
     //
     // iPads here
@@ -380,6 +388,11 @@ class SimulatorPopupMenu extends StatelessWidget {
       info: Devices.android.samsungGalaxyA50,
       icon: Icons.smartphone_outlined,
       size: 28,
+    ),
+    SimDevice(
+      info: Devices.android.pixel4,
+      icon: Icons.smartphone_outlined,
+      size: 26,
     ),
     SimDevice(
       info: Devices.android.onePlus8Pro,
