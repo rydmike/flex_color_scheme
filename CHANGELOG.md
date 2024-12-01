@@ -2,6 +2,20 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.0.2
+
+**Dec 1, 2024**
+
+### Package
+
+**FIX**
+
+* Changelog for version 8.0.0 says and intended this: 
+  > "The `FlexSubThemesData` property `inputDecoratorIsFilled` now default to `false` when undefined, like Flutter SDK does. 
+  > Set it to `true` to get the same style it had with previous undefined value."
+
+  Due to a bug, this was not the case. This release fixes the bug and the property now defaults to `false` when undefined, as intended and documented in version 8.0.0 changelog. FIX: https://github.com/rydmike/flex_color_scheme/issues/265 
+
 ## 8.0.1
 
 **Nov 13, 2024**

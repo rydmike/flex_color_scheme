@@ -260,7 +260,7 @@ class FlexSubThemesData with Diagnosticable {
     this.inputDecoratorSchemeColor,
     this.inputDecoratorContentPadding,
     this.inputDecoratorIsDense,
-    this.inputDecoratorIsFilled = true,
+    this.inputDecoratorIsFilled,
     this.inputDecoratorFillColor,
     this.inputDecoratorBackgroundAlpha,
     this.inputDecoratorBorderSchemeColor,
@@ -1835,8 +1835,8 @@ class FlexSubThemesData with Diagnosticable {
   /// on sub-themes. Giving an opportunity to make the past always filled input
   /// decorator even less opinionated.
   ///
-  /// Defaults to false.
-  final bool inputDecoratorIsFilled;
+  /// Defaults to false, if not defined.
+  final bool? inputDecoratorIsFilled;
 
   /// Determines the color of the filled [InputDecorator].
   ///

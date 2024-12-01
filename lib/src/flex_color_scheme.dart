@@ -7409,7 +7409,7 @@ class FlexColorScheme with Diagnosticable {
             // Kept for backwards defaults compatibility. Only used when not
             // using opinionated component sub-themes in M2 mode.
             : InputDecorationTheme(
-                filled: subTheme.inputDecoratorIsFilled,
+                filled: subTheme.inputDecoratorIsFilled ?? true,
                 fillColor: isDark
                     ? colorScheme.primary.withAlpha(0x0F) // 6%
                     : colorScheme.primary.withAlpha(0x09), // 3.5%
