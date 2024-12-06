@@ -10,7 +10,7 @@ import 'theme_service_hive_adapters.dart';
 // The handy part is that if it gets in the way in debugging, it is an easy
 // toggle to turn it off here too. Often I just leave them true if it is one
 // I want to see in dev mode, unless it is too chatty.
-const bool _debug = !kReleaseMode && false;
+const bool _debug = !kReleaseMode && true;
 
 /// A [ThemeService] implementation that stores and retrieves theme settings
 /// locally using the package Hive: https://pub.dev/packages/hive
@@ -105,15 +105,14 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<T> load<T>(String key, T defaultValue) async {
     try {
-      final dynamic gotValue = _hiveBox.get(key, defaultValue: defaultValue);
+      final dynamic value = _hiveBox.get(key, defaultValue: defaultValue);
       if (_debug) {
         debugPrint('Hive LOAD _______________');
         debugPrint(' Type expected: $key as ${defaultValue.runtimeType}');
-        debugPrint(' Type loaded  : $key as ${gotValue.runtimeType}');
-        debugPrint(' Value loaded : $gotValue');
+        debugPrint(' Type loaded  : $key as ${value.runtimeType}');
+        debugPrint(' Value loaded : $value');
       }
-      final T loaded = gotValue as T;
-      return loaded;
+      return value as T;
     } catch (e) {
       debugPrint('Hive load (get) ERROR');
       debugPrint(' Error message ...... : $e');
