@@ -69,7 +69,7 @@ dependencies:
   # This is a community fork that supports WASM-GC, by using package:web and
   # dart:js_interop.
   hive_ce: # ^2.8.0
-    # path: ../hive_ce/hive
+    #path: ../../hive_ce/hive
     # Temporarily used from a fixed fork until the official package is updated.
     git:
       url: https://github.com/rydmike/hive_ce.git
@@ -111,7 +111,7 @@ dev_dependencies:
   # https://pub.dev/packages/flutter_launcher_icons
   # Maybe consider trying this one instead:
   # https://pub.dev/packages/icons_launcher
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.2
 
   # Flutter test package, by Google flutter.dev.
   flutter_test:
