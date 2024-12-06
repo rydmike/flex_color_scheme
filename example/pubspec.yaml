@@ -68,13 +68,13 @@ dependencies:
   # hive: ^2.2.3 # Original Hive package
   # This is a community fork that supports WASM-GC, by using package:web and
   # dart:js_interop.
-  hive_ce: # ^2.8.0
+  hive_ce: ^2.8.0
     #path: ../../hive_ce/hive
     # Temporarily used from a fixed fork until the official package is updated.
-    git:
-      url: https://github.com/rydmike/hive_ce.git
-      ref: main
-      path: hive/
+    #git:
+    #  url: https://github.com/rydmike/hive_ce.git
+    #  ref: main
+    #  path: hive/
 
   # Internationalization package, by Google dart.dev.
   # Used only for date time string formatting in example 5.

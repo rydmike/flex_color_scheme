@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive_ce/hive.dart';
 
+import '../const/app.dart';
 import '../utils/app_data_dir/app_data_dir.dart';
+import '../utils/same_types.dart';
 import 'theme_service.dart';
 import 'theme_service_hive_adapters.dart';
 
@@ -105,14 +107,32 @@ class ThemeServiceHive implements ThemeService {
   @override
   Future<T> load<T>(String key, T defaultValue) async {
     try {
-      final dynamic value = _hiveBox.get(key, defaultValue: defaultValue);
+      final dynamic value = await _hiveBox.get(key, defaultValue: defaultValue);
       if (_debug) {
         debugPrint('Hive LOAD _______________');
-        debugPrint(' Type expected: $key as ${defaultValue.runtimeType}');
-        debugPrint(' Type loaded  : $key as ${value.runtimeType}');
-        debugPrint(' Value loaded : $value');
+        debugPrint(' Store key     : $key');
+        debugPrint(' Type expected : $T');
+        debugPrint(' Stored value  : $value');
+        debugPrint(' Stored type   : ${value.runtimeType}');
+        debugPrint(' Default value : $defaultValue');
+        debugPrint(' Default type  : ${defaultValue.runtimeType}');
       }
-      return value as T;
+      // Add workaround for Hive WASM returning double instead of int, when
+      // values saved to IndexedDb were int.
+      // See issue: https://github.com/IO-Design-Team/hive_ce/issues/46
+      if (App.isRunningWithWasm &&
+          value != null &&
+          (value is double) &&
+          (sameTypes<T, int?>() || sameTypes<T, int>())) {
+        final T loaded = value.round() as T;
+        if (_debug) {
+          debugPrint(' ** WASM Issue : Expected int but got double, '
+              'returning as int: $loaded');
+        }
+        return loaded;
+      } else {
+        return value as T;
+      }
     } catch (e) {
       debugPrint('Hive load (get) ERROR');
       debugPrint(' Error message ...... : $e');

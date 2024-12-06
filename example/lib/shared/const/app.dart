@@ -47,7 +47,7 @@ sealed class App {
   static const String versionMajor = '8';
   static const String versionMinor = '0';
   static const String versionPatch = '2';
-  static const String versionBuild = '01';
+  static const String versionBuild = '02';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
@@ -57,10 +57,9 @@ sealed class App {
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';
+  static const String playgroundURL = 'https://playground.flexcolorscheme.com/';
   // static const String playgroundURL =
-  //     'https://playground.flexcolorscheme.com/';
-  static const String playgroundURL =
-      'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
+  //     'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
 
   static final Uri packageUri = Uri(
     scheme: 'https',

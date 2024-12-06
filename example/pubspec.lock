@@ -210,11 +210,10 @@ packages:
   hive_ce:
     dependency: "direct main"
     description:
-      path: hive
-      ref: main
-      resolved-ref: f5d367b6c6b6a8a4bc3b23252e84353ab781197a
-      url: "https://github.com/rydmike/hive_ce.git"
-    source: git
+      name: hive_ce
+      sha256: "2d66fa89a3e33e6d95edcf6c75409cf8f6442ab46229c9baf423af479f532e99"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.8.0+2"
   http:
     dependency: transitive

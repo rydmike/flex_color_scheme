@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// Use same major flex_color_scheme package version. If you use a
 /// lower minor version, some properties may not be supported.
 /// In that case, remove them after copying this theme to your
-/// app or upgrade package to version 8.0.0-dev.1.
+/// app or upgrade package to version 8.0.2.
 ///
 /// Use in [MaterialApp] like this:
 ///
@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 ///  darkTheme: AppTheme.dark,
 ///  :
 /// );
-sealed class AppTheme {
+abstract final class AppTheme {
   // The defined light theme.
   static ThemeData light = FlexThemeData.light(
     scheme: FlexScheme.sakura,
