@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.0.2
+version: 8.1.0
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.24.0'
+  flutter: '>=3.27.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -15,7 +15,7 @@ dependencies:
   # Provides encoders and decoders for various archive and compression
   # formats such as zip, tar, bzip2, gzip, and zlib. (by loki3d.com)
   # https://pub.dev/packages/archive
-  archive: ^3.6.1
+  archive: ^4.0.1
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.
@@ -111,7 +111,10 @@ dev_dependencies:
   # https://pub.dev/packages/flutter_launcher_icons
   # Maybe consider trying this one instead:
   # https://pub.dev/packages/icons_launcher
-  flutter_launcher_icons: ^0.14.2
+  # Incompatible with archive: ^4.0.1, but don't need to make any new
+  # launcher icons for now, so we can just comment it out and add later
+  # again if needed.
+  # flutter_launcher_icons: ^0.14.2
 
   # Flutter test package, by Google flutter.dev.
   flutter_test:

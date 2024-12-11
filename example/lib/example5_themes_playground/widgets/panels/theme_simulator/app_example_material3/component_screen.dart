@@ -2103,13 +2103,12 @@ class _TabsState extends State<Tabs> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // Current TabBar API in stable channel version: 3.24.4
-    final TabBarTheme tabTheme = Theme.of(context).tabBarTheme;
-    // The above current API in stable is broken in beta, meaning in coming
-    // next stable, it will not even compile!
-
+    // Current TabBar API in previous stable channel version: 3.24.5
+    // final TabBarTheme tabTheme = Theme.of(context).tabBarTheme;
+    // The above current API in stable 3.24.5 is broken in
+    // stable 3.27.0 see issue: https://github.com/flutter/flutter/issues/160018
     // New TabBar API in latest beta channel version: 3.27.0-0.2.pre
-    // final TabBarThemeData tabTheme = Theme.of(context).tabBarTheme;
+    final TabBarThemeData tabTheme = Theme.of(context).tabBarTheme;
 
     return ComponentDecoration(
       label: 'Tabs',

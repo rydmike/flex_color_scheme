@@ -676,7 +676,6 @@ linter:
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     omit_local_variable_types: false
 
-    # TODO(rydmike): This rule is not yet available on Flutter stable channel. Add later.
     # CONSIDER omitting obvious type annotations for local variables.
     #
     # https://dart.dev/tools/linter-rules/omit_obvious_local_variable_types
@@ -696,7 +695,7 @@ linter:
     # Lint           ? : https://pub.dev/packages/lint
     # VG Analysis    ? : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    # omit_obvious_local_variable_types: false
+    omit_obvious_local_variable_types: false
 
     # PREFER asserts with a message string.
     #
