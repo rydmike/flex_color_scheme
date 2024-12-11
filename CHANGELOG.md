@@ -2,6 +2,15 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.1.0 WIP/DRAFT
+
+**Dec 12, 2024**
+
+**PACKAGE**
+
+* First prep for Flutter 3.27.0 update with new Color features that supports wide gamut. In total, 350 deprecations will have to be replaced with the new Color features.
+
+
 ## 8.0.2
 
 **Dec 1, 2024**

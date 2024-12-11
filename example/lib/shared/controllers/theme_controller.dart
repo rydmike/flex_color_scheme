@@ -7512,7 +7512,7 @@ class ThemeController with ChangeNotifier {
     try {
       final Uint8List compressedBytes = base64Decode(compressedString);
       final List<int> decompressedBytes =
-          GZipDecoder().decodeBytes(compressedBytes);
+          const GZipDecoder().decodeBytes(compressedBytes);
       return utf8.decode(decompressedBytes);
     } catch (e) {
       if (_debug) debugPrint('** ERROR _decompressJsonString: $e');
