@@ -38,26 +38,28 @@ sealed class App {
   static const bool isRunningWithWasm =
       bool.fromEnvironment('dart.tool.dart2wasm');
   static const String buildType = isRunningWithWasm
-      ? ', Web-WASM-GC'
+      ? ', WasmGC'
       : kIsWeb
-          ? ', Web-JS'
+          ? ', JS'
           : ', native VM';
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '8';
   static const String versionMinor = '1';
   static const String versionPatch = '0';
-  static const String versionBuild = '01-beta';
+  static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
-  // static const String packageVersionMin = '$versionMajor.$versionMinor';
   static const String flutterVersion = 'stable 3.27.0 (canvaskit$buildType)';
   static const String copyright = '© 2020 - 2024';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';
+  // URL for Netlify hosting build.
+  // This will be the only one later when WASM works OK.
   static const String playgroundURL = 'https://playground.flexcolorscheme.com/';
+  // URL for GitHub pages build.
   // static const String playgroundURL =
   //     'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
 
