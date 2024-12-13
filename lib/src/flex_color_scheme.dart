@@ -5069,7 +5069,7 @@ class FlexColorScheme with Diagnosticable {
         subThemesData ?? const FlexSubThemesData();
 
     // In debug mode warn to console about missing LightRef colors when they
-    // used in a combo that may require them.
+    // are used in a combo that may require them.
     if (kDebugMode) {
       if (primary != null &&
           primaryLightRef == null &&
