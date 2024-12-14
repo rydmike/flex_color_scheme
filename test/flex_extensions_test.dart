@@ -212,7 +212,7 @@ void main() {
       expect(col1.blend(black, 100), black);
     });
     test('FCE4a.10: GIVEN $col1.blend(white, 40) EXPECT $col3.', () {
-      expect(col1.blend(white, 40), col3);
+      expect(col1.blend(white, 40), isSameColorAs(col3));
     });
   });
 
@@ -258,7 +258,7 @@ void main() {
       expect(col1.blendAlpha(black, 255), black);
     });
     test('FCE4a.10: GIVEN $col1.blendAlpha(white, 0x66) EXPECT $col3.', () {
-      expect(col1.blendAlpha(white, 0x66), col3);
+      expect(col1.blendAlpha(white, 0x66), isSameColorAs(col3));
     });
   });
 
