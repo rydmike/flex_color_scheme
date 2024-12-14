@@ -882,7 +882,7 @@ class ThemeController with ChangeNotifier {
     _checkboxSchemeColor = await _themeService.load(
         Store.keyCheckboxSchemeColor, Store.defaultCheckboxSchemeColor);
     _radioSchemeColor = await _themeService.load(
-        Store.keySliderBaseSchemeColor, Store.defaultRadioSchemeColor);
+        Store.keyRadioSchemeColor, Store.defaultRadioSchemeColor);
     //
     // Slider SETTINGS.
     _sliderBaseSchemeColor = await _themeService.load(
