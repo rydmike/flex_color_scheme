@@ -183,7 +183,7 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
               ],
             ),
             Card(
-              margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
               elevation: 0,
               color: theme.colorScheme.surfaceContainerHighest,
               child: ConstrainedBox(
