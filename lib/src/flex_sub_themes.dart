@@ -2016,7 +2016,7 @@ abstract final class FlexSubThemes {
     return ChipThemeData(
       // TODO(rydmike): This works, but it overrides secondarySelectedColor.
       //  Raise issue! We cannot use due to that, but it would be nice
-      //  if we could fro creating better disabled color.
+      //  if we could for creating a better disabled color.
       //
       // color: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
       //   if (states.contains(WidgetState.selected) &&
@@ -4002,7 +4002,7 @@ abstract final class FlexSubThemes {
             );
           }
           return TextStyle(
-            // TODO(rydmike): INFO: M3 error, with this we get a hover diff.
+            // TODO(rydmike): Info: M3 error, with this we get a hover diff.
             // Prefer this as a diff to the hover state.
             color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
           );
@@ -4124,7 +4124,7 @@ abstract final class FlexSubThemes {
                       borderRadius: effectiveUnderlineBorder,
                       borderSide: unfocusedHasBorder
                           ? BorderSide(
-                              // TODO(rydmike): INFO: M3 uses onErrorContainer
+                              // TODO(rydmike): Info: M3 uses onErrorContainer
                               color: colorScheme.error,
                               width: unfocusedWidth,
                             )
@@ -4135,7 +4135,7 @@ abstract final class FlexSubThemes {
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: unfocusedHasBorder
                         ? BorderSide(
-                            // TODO(rydmike): INFO: M3 uses error
+                            // TODO(rydmike): Info: M3 uses error
                             color: colorScheme.error
                                 .withAlpha(kEnabledBorderAlpha),
                             width: unfocusedWidth,
@@ -4211,7 +4211,7 @@ abstract final class FlexSubThemes {
                       borderRadius: effectiveOutlineBorder,
                       borderSide: unfocusedHasBorder
                           ? BorderSide(
-                              // TODO(rydmike): INFO: M3 uses onErrorContainer
+                              // TODO(rydmike): Info: M3 uses onErrorContainer
                               color: colorScheme.error,
                               width: unfocusedWidth,
                             )
@@ -4222,7 +4222,7 @@ abstract final class FlexSubThemes {
                     borderRadius: effectiveOutlineBorder,
                     borderSide: unfocusedHasBorder
                         ? BorderSide(
-                            // TODO(rydmike): INFO: M3 uses error
+                            // TODO(rydmike): Info: M3 uses error
                             color: colorScheme.error
                                 .withAlpha(kEnabledBorderAlpha),
                             width: unfocusedWidth,
@@ -4397,13 +4397,9 @@ abstract final class FlexSubThemes {
     /// is used.
     final ListTileTitleAlignment? titleAlignment,
 
-    // TODO(rydmike): Add later, still only available in master in theming.
     /// If specified, overrides the default value of
     /// [CheckboxListTile.controlAffinity] or [ExpansionTile.controlAffinity]
     /// or [SwitchListTile.controlAffinity] or [RadioListTile.controlAffinity].
-    ///
-    /// This property does not yet have any theming support in Flutter 3.24, but
-    /// probably coming in next release.
     final ListTileControlAffinity? controlAffinity,
   }) {
     final Color selectedColor =
@@ -4441,8 +4437,7 @@ abstract final class FlexSubThemes {
       minVerticalPadding: minVerticalPadding,
       style: style,
       titleAlignment: titleAlignment,
-      // TODO(rydmike): Add later, still only available in master in theming.
-      // controlAffinity: controlAffinity,
+      controlAffinity: controlAffinity,
     );
   }
 
@@ -8413,11 +8408,8 @@ abstract final class FlexSubThemes {
           Radius.circular(elementRadius ?? kTimeElementRadius),
         ),
       ),
-      //
-      // TODO(rydmike): Fixes for clock dial background color issue in M3.
-      // TODO(rydmike): Remove in V8? It has been fixed in Flutter too.
-      // https://github.com/flutter/flutter/issues/118657
-      dialBackgroundColor: useM3 ? colorScheme.surfaceContainerHighest : null,
+      // TODO(rydmike): Add theming for dialBackgroundColor
+      // dialBackgroundColor: ,
       dayPeriodColor: useM3
           ? WidgetStateColor.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.selected)) {

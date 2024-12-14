@@ -101,12 +101,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // Switch to using `FlexSchemeColor` when using 3 first custom schemes or
     // the last one that is customizable.
     colors: !useBuiltIn ? AppColor.scheme(controller).light : null,
-
-    // TODO(rydmike): DEBUGGING: Remove
-    // primary: Colors.blue,
-    // secondary: Colors.pink,
-    // tertiary: Colors.orange,
-
     // Used number of colors from the selected input FlexColorScheme based theme
     usedColors: controller.usedColors,
     // Use controller to select surface mode

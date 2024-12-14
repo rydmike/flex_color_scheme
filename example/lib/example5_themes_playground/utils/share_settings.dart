@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 
 import '../../shared/const/app.dart';
 
-/// Util helpers for making a URL for sharing settings.
-sealed class ShareSettings {
+/// A container class with helpers for making a URL for sharing settings.
+abstract final class ShareSettings {
   // Compress JSON string
   static String _compressJsonString(String jsonString) {
     final List<int> jsonBytes = utf8.encode(jsonString);
@@ -17,7 +17,7 @@ sealed class ShareSettings {
     return base64UrlEncode(compressedBytes);
   }
 
-  /// Make URL for sharing settings Playground settings.
+  /// Make URL for sharing Playground settings.
   ///
   /// Takes a JSON string [jsonString] with the playground settings
   /// and compresses it to a URL safe string.

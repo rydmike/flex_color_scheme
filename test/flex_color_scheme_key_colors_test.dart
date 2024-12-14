@@ -570,7 +570,7 @@ void main() {
       brightness: Brightness.light,
     ).copyWith(
         // TODO(rydmike): Monitor change when Flutter goes to MCU 12
-        // These values are off by one now, rounding diff! Investigate later.
+        // These values are off by one now, rounding diff!? Investigate later.
         onPrimaryContainer: const Color(0xff211047),
         onPrimaryFixed: const Color(0xff211047),
         secondary: const Color(0xff625b70),

@@ -149,13 +149,6 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
         return const TypographyScreen();
       case ScreenSelected.elevation:
         return const ElevationScreen();
-      // TODO(rydmike): Check this and remove commented code.
-      // ignore: no_default_cases
-      // default:
-      //   return FirstComponentList(
-      //       showNavBottomBar: showNavBarExample,
-      //       scaffoldKey: scaffoldKey,
-      //       showSecondList: showMediumSizeLayout || showLargeSizeLayout);
     }
   }
 

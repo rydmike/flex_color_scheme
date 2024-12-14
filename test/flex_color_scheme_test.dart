@@ -27,8 +27,8 @@ void main() {
       expect(fcsDefault.toScheme, equals(fcsMaterialLight.toScheme));
       // Expect toTheme to be equal
       // TODO(rydmike): toString on ThemeData match, but not ThemeData.
-      // This is repeated for many test cases. It seems like ThemeData
-      // equality comparison cannot be guaranteed when using sub-themes that
+      // This is repeated for many test cases. It is because ThemeData
+      // equality comparison is broken when using sub-themes that
       // uses MaterialState or MaterialStateProperty.
       expect(
           fcsDefault.toTheme.toString(minLevel: DiagnosticLevel.fine),
@@ -247,8 +247,8 @@ void main() {
     });
     // Expect toTheme from them to full-fill same condition.
     // TODO(rydmike): toString on ThemeData equals, but not ThemeData.
-    //   This is repeated for many test cases. It seems like ThemeData
-    //   equality comparison cannot be guaranteed when using sub-themes that
+    //   This is repeated for many test cases. It is because ThemeData
+    //   equality comparison is broken when using sub-themes that
     //   uses MaterialState or MaterialStateProperty.
     //   Investigate first what SDK ThemeData tests do, if they even attempt
     //   it. This is commented for now:
@@ -256,7 +256,7 @@ void main() {
     //   expect(m1.toTheme == m2.toTheme, true);
     //
     //   Instead we test isNot below to see if this ever changes, if it does
-    //   we can start doing the test on THemeData object instead of its
+    //   we can start doing the test on ThemeData object instead of its
     //   toString where the test works.
     test(
         'FCS1.02a: GIVEN none identical FlexColorScheme objects '

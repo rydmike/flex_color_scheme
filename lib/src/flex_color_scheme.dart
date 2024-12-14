@@ -7100,7 +7100,7 @@ class FlexColorScheme with Diagnosticable {
       statusBarIconBrightness:
           appBarNeedsLight ? Brightness.light : Brightness.dark,
 
-      // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issue.
+      // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issues.
       // It would be useful if we could set system navbar properties too and not
       // only status bar properties. While it might be odd to do so, it
       // seems even more odd that a part of the SystemUiOverlayStyle has
@@ -7513,7 +7513,6 @@ class FlexColorScheme with Diagnosticable {
           (useMaterial3
               ? colorScheme.surfaceContainerHigh
               : colorScheme.surface),
-      // TODO(rydmike): Monitor Flutter SDK deprecation of disabledColor.
       // Disabled color uses a different style when using tinted disabled.
       // effects, if not opted in same as before v4.0.0 = ThemeData default.
       disabledColor: tintedDisabled
@@ -7528,22 +7527,21 @@ class FlexColorScheme with Diagnosticable {
       // Special theming on hover, focus, highlight and splash, if opting in on
       // tintedInteractions, otherwise use ThemeData defaults by passing in null
       // and letting it assign its values.
-      // TODO(rydmike): Monitor Flutter SDK deprecation of focusColor.
+      // Based on comment in issue #91772 the interaction colors below and
+      // disabledColor are not on an imminent deprecation path, but they may be
+      // added to it later.
       focusColor: tintedInteractions
           ? FlexSubThemes.tintedFocused(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of highlightColor.
       highlightColor: tintedInteractions
           ? FlexSubThemes.tintedHighlight(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of hoverColor
       hoverColor: tintedInteractions
           ? FlexSubThemes.tintedHovered(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of splashColor
       splashColor: tintedInteractions
           ? FlexSubThemes.tintedSplash(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
@@ -7559,6 +7557,7 @@ class FlexColorScheme with Diagnosticable {
               subTheme.tabBarIndicatorSchemeColor!, colorScheme),
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
+      // See: https://github.com/flutter/flutter/issues/91772
       primaryColor: colorScheme.primary,
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColorDark.
       // See: https://github.com/flutter/flutter/issues/91772
@@ -8714,7 +8713,8 @@ class FlexColorScheme with Diagnosticable {
         ) ??
         // No passed in ColorScheme, we create one with the effective
         // override properties, plus FlexColorScheme ColorScheme defaults.
-        // TODO(rydmike): If using raw FlexColorScheme() constructor, this does
+        // TODO(rydmike): Improve raw FlexColorScheme() constructor.
+        //   If using as  raw FlexColorScheme() constructor, this does
         //   not give us full ColorScheme, as it does not have all properties,
         //   it is missing the fixed and fixedDims properties. We would
         //   need to compute them without seeding to get them. When using the

@@ -32,11 +32,11 @@ void main() {
         ThemeData,
       );
     });
+    // Expect toTheme to be equal
     // TODO(rydmike): toString on ThemeData match, but not ThemeData.
-    //   This is repeated for many test cases. It seems like ThemeData
-    //   equality comparison cannot be guaranteed when using sub-themes that
-    //   uses MaterialState or MaterialStateProperty. Maybe report this.
-    //   Investigate first what SDK ThemeData tests do, if they even attempt it.
+    // This is repeated for many test cases. It is because ThemeData
+    // equality comparison is broken when using sub-themes that
+    // uses MaterialState or MaterialStateProperty.
     test(
         'FTD1.00DefL1: GIVEN FlexColorScheme.light().toTheme '
         'EXPECT its ThemeData to be equal to FlexThemeData.light().', () {
@@ -572,7 +572,7 @@ void main() {
       expect(tDarkL.appBarTheme.backgroundColor, tDarkL.colorScheme.surface);
     });
 
-    // TODO(rydmike): See if we need M2 test fo these two!
+    // TODO(rydmike): See if we need M2 test of these two as well.
     test(
         'FTD1.18: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '

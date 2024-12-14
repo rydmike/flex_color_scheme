@@ -56,7 +56,6 @@ class IntroductionPanel extends StatelessWidget {
             start: 16.0, end: 24.0, top: 8, bottom: 8)
         : const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 
-    // TODO(rydmike): Make one more review of the intro text.
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
