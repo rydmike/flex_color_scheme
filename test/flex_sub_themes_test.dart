@@ -495,7 +495,7 @@ void main() {
       expect(
         FlexSubThemes.cardTheme(),
         equals(
-          const CardTheme(clipBehavior: Clip.antiAlias),
+          const CardThemeData(clipBehavior: Clip.antiAlias),
         ),
       );
     });
@@ -509,7 +509,7 @@ void main() {
           radius: 1,
         ),
         equals(
-          const CardTheme(
+          const CardThemeData(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 2,
             shape: RoundedRectangleBorder(
@@ -2173,7 +2173,7 @@ void main() {
       expect(
         FlexSubThemes.dialogTheme(),
         equals(
-          const DialogTheme(
+          const DialogThemeData(
             elevation: 6,
             actionsPadding:
                 EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
@@ -2197,7 +2197,7 @@ void main() {
             backgroundColor: const Color(0xFF343476),
             backgroundSchemeColor: SchemeColor.tertiary),
         equals(
-          const DialogTheme(
+          const DialogThemeData(
             backgroundColor: Color(0xFF343476),
             elevation: 6,
             actionsPadding:
@@ -2223,7 +2223,7 @@ void main() {
           backgroundSchemeColor: null,
         ),
         equals(
-          const DialogTheme(
+          const DialogThemeData(
             backgroundColor: Color(0xFFDDDDDD),
             elevation: 6,
             actionsPadding:
@@ -2249,7 +2249,7 @@ void main() {
           backgroundSchemeColor: SchemeColor.tertiary,
         ),
         equals(
-          DialogTheme(
+          DialogThemeData(
             backgroundColor: colorScheme.tertiary,
             actionsPadding:
                 const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
@@ -2274,7 +2274,7 @@ void main() {
               const EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
         ),
         equals(
-          const DialogTheme(
+          const DialogThemeData(
             elevation: 10,
             actionsPadding:
                 EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
