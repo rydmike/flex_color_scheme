@@ -3260,7 +3260,7 @@ class FlexColorScheme with Diagnosticable {
           tertiary: effectiveColors.tertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           error: effectiveColors.error,
-          errorContainer: effectiveColors.tertiaryContainer,
+          errorContainer: effectiveColors.errorContainer,
           // We made a seeded color scheme, we use it as given but set
           // override values for props we have not handled via FCS direct
           // props further below.
