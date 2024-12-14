@@ -234,7 +234,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
           padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(
             borderColor: !enabled || value == null
-                ? colorScheme.outline.withOpacity(enabled ? 1 : 0.5)
+                ? colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5)
                 : colorScheme.outline,
             backgroundColor: !enabled || value == null
                 ? _appBarStyleColor(

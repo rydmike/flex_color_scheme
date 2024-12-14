@@ -246,7 +246,7 @@ void main() {
         equals(
           BottomNavigationBarThemeData(
             elevation: 1,
-            backgroundColor: colorScheme.surface.withOpacity(0.5),
+            backgroundColor: colorScheme.surface.withValues(alpha: 0.5),
             landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
             selectedItemColor: colorScheme.secondary,
             selectedIconTheme: IconThemeData(
@@ -586,24 +586,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withOpacity(0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return Colors.transparent;
               },
@@ -1071,24 +1071,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withOpacity(0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return Colors.transparent;
               },
@@ -1301,24 +1301,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.tertiary.withOpacity(0.08);
+                    return colorScheme.tertiary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.tertiary.withOpacity(0.12);
+                    return colorScheme.tertiary.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.tertiary.withOpacity(0.12);
+                  return colorScheme.tertiary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return Colors.transparent;
               },
@@ -2001,11 +2001,11 @@ void main() {
             inputDecorationTheme: InputDecorationTheme(
               filled: false,
               hoverColor: colorScheme.brightness == Brightness.dark
-                  ? Colors.white.withOpacity(0.04)
-                  : Colors.black.withOpacity(0.04),
+                  ? Colors.white.withValues(alpha: 0.04)
+                  : Colors.black.withValues(alpha: 0.04),
               focusColor: colorScheme.brightness == Brightness.dark
-                  ? Colors.white.withOpacity(0.12)
-                  : Colors.black.withOpacity(0.12),
+                  ? Colors.white.withValues(alpha: 0.12)
+                  : Colors.black.withValues(alpha: 0.12),
               border: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(color: colorScheme.primary, width: 1),
@@ -2029,7 +2029,8 @@ void main() {
               disabledBorder: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(
-                    color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+                    color: colorScheme.onSurface.withValues(alpha: 0.12),
+                    width: 1),
               ),
               floatingLabelStyle:
                   WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
@@ -2038,7 +2039,7 @@ void main() {
                 // coverage:ignore-start
                 if (states.contains(WidgetState.disabled)) {
                   return TextStyle(
-                      color: colorScheme.onSurface.withOpacity(0.38));
+                      color: colorScheme.onSurface.withValues(alpha: 0.38));
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.hovered)) {
@@ -2097,11 +2098,11 @@ void main() {
             inputDecorationTheme: InputDecorationTheme(
               filled: false,
               hoverColor: colorScheme.brightness == Brightness.dark
-                  ? Colors.white.withOpacity(0.04)
-                  : Colors.black.withOpacity(0.04),
+                  ? Colors.white.withValues(alpha: 0.04)
+                  : Colors.black.withValues(alpha: 0.04),
               focusColor: colorScheme.brightness == Brightness.dark
-                  ? Colors.white.withOpacity(0.12)
-                  : Colors.black.withOpacity(0.12),
+                  ? Colors.white.withValues(alpha: 0.12)
+                  : Colors.black.withValues(alpha: 0.12),
               border: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(color: colorScheme.primary, width: 1),
@@ -2125,7 +2126,8 @@ void main() {
               disabledBorder: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(
-                    color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+                    color: colorScheme.onSurface.withValues(alpha: 0.12),
+                    width: 1),
               ),
               floatingLabelStyle:
                   WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
@@ -2134,7 +2136,7 @@ void main() {
                 // coverage:ignore-start
                 if (states.contains(WidgetState.disabled)) {
                   return TextStyle(
-                      color: colorScheme.onSurface.withOpacity(0.38));
+                      color: colorScheme.onSurface.withValues(alpha: 0.38));
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.hovered)) {
@@ -2771,7 +2773,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Disabled foreground, tinted M3
       expect(
@@ -2791,7 +2793,7 @@ void main() {
           baseSchemeColor: SchemeColor.secondary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Selected foreground, M3
       expect(
@@ -2828,7 +2830,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // Disabled background, tinted M3
       expect(
@@ -2849,7 +2851,7 @@ void main() {
           onBaseSchemeColor: SchemeColor.tertiary,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // Disabled background, tinted M3, only onBase given
       expect(
@@ -2888,7 +2890,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2907,7 +2909,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2926,7 +2928,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -3216,27 +3218,27 @@ void main() {
               foregroundColor:
                   WidgetStateProperty.resolveWith((Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withOpacity(0.38);
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
                 }
                 return colorScheme.tertiary;
               }),
               backgroundColor:
                   WidgetStateProperty.resolveWith((Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return colorScheme.secondary;
               }),
               overlayColor:
                   WidgetStateProperty.resolveWith((Set<WidgetState> states) {
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.tertiary.withOpacity(0.08);
+                  return colorScheme.tertiary.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.tertiary.withOpacity(0.12);
+                  return colorScheme.tertiary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.tertiary.withOpacity(0.12);
+                  return colorScheme.tertiary.withValues(alpha: 0.12);
                 }
                 return null;
               }),
@@ -3330,7 +3332,7 @@ void main() {
               backgroundColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.38);
+                    return colorScheme.onSurface.withValues(alpha: 0.38);
                   }
                   return colorScheme.secondary;
                 },
@@ -3338,7 +3340,7 @@ void main() {
               foregroundColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.38);
+                    return colorScheme.onSurface.withValues(alpha: 0.38);
                   }
                   return colorScheme.onSecondary;
                 },
@@ -3349,13 +3351,13 @@ void main() {
               // overlayColor: WidgetStateProperty.resolveWith<Color?>(
               //   (Set<WidgetState> states) {
               //     if (states.contains(WidgetState.hovered)) {
-              //       return colorScheme.onSecondary.withOpacity(0.08);
+              //       return colorScheme.onSecondary.withValues(alpha: 0.08);
               //     }
               //     if (states.contains(WidgetState.focused)) {
-              //       return colorScheme.onSecondary.withOpacity(0.12);
+              //       return colorScheme.onSecondary.withValues(alpha: 0.12);
               //     }
               //     if (states.contains(WidgetState.pressed)) {
-              //       return colorScheme.onSecondary.withOpacity(0.12);
+              //       return colorScheme.onSecondary.withValues(alpha: 0.12);
               //     }
               //     return null;
               //   },
@@ -3401,12 +3403,12 @@ void main() {
       expect(
         button.style!.backgroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Default state
       expect(
@@ -3423,17 +3425,17 @@ void main() {
       // expect(
       //   button.style!.overlayColor!
       //       .resolve(<WidgetState>{WidgetState.hovered}),
-      //   equals(colorScheme.onPrimary.withOpacity(0.08)),
+      //   equals(colorScheme.onPrimary.withValues(alpha: 0.08)),
       // );
       // expect(
       //   button.style!.overlayColor!
       //       .resolve(<WidgetState>{WidgetState.focused}),
-      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      //   equals(colorScheme.onPrimary.withValues(alpha: 0.12)),
       // );
       // expect(
       //   button.style?.overlayColor!
       //       .resolve(<WidgetState>{WidgetState.pressed}),
-      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      //   equals(colorScheme.onPrimary.withValues(alpha: 0.12)),
       // );
       // expect(
       //   button.style!.overlayColor!
@@ -3513,12 +3515,12 @@ void main() {
       expect(
         button.style!.backgroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Default state
       expect(
@@ -3535,17 +3537,17 @@ void main() {
       // expect(
       //   button.style!.overlayColor!
       //       .resolve(<WidgetState>{WidgetState.hovered}),
-      //   equals(colorScheme.onPrimary.withOpacity(0.08)),
+      //   equals(colorScheme.onPrimary.withValues(alpha: 0.08)),
       // );
       // expect(
       //   button.style!.overlayColor!
       //       .resolve(<WidgetState>{WidgetState.focused}),
-      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      //   equals(colorScheme.onPrimary.withValues(alpha: 0.12)),
       // );
       // expect(
       //   button.style!.overlayColor!
       //       .resolve(<WidgetState>{WidgetState.pressed}),
-      //   equals(colorScheme.onPrimary.withOpacity(0.12)),
+      //   equals(colorScheme.onPrimary.withValues(alpha: 0.12)),
       // );
       // expect(
       //   button.style!.overlayColor!
@@ -6418,7 +6420,7 @@ void main() {
       );
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceContainer.withOpacity(0.8)),
+        equals(colorScheme.surfaceContainer.withValues(alpha: 0.8)),
       );
       expect(
         menu.style!.padding?.resolve(<WidgetState>{}),
@@ -6446,7 +6448,7 @@ void main() {
           opacity: 0.9);
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
-        equals(colorScheme.secondaryContainer.withOpacity(0.9)),
+        equals(colorScheme.secondaryContainer.withValues(alpha: 0.9)),
       );
     });
   });
@@ -6540,7 +6542,8 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             elevation: 3,
-            backgroundColor: colorScheme.surfaceContainer.withOpacity(0.9),
+            backgroundColor:
+                colorScheme.surfaceContainer.withValues(alpha: 0.9),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
             indicatorShape: const RoundedRectangleBorder(
@@ -6644,7 +6647,7 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            backgroundColor: colorScheme.error.withOpacity(0.9),
+            backgroundColor: colorScheme.error.withValues(alpha: 0.9),
             indicatorColor: colorScheme.secondary.withAlpha(0x3D),
             labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
               (Set<WidgetState> states) {
@@ -6772,7 +6775,7 @@ void main() {
       );
       expect(
         m.indicatorColor,
-        equals(colorScheme.primary.withOpacity(0.95)),
+        equals(colorScheme.primary.withValues(alpha: 0.95)),
       );
       expect(
         m.indicatorSize,
@@ -6901,7 +6904,7 @@ void main() {
         ),
         equals(
           NavigationRailThemeData(
-            backgroundColor: colorScheme.surface.withOpacity(0.5),
+            backgroundColor: colorScheme.surface.withValues(alpha: 0.5),
             elevation: 0,
             selectedLabelTextStyle: TextStyle(
               fontSize: 12,
@@ -6944,7 +6947,7 @@ void main() {
         ),
         equals(
           NavigationRailThemeData(
-            backgroundColor: colorScheme.surface.withOpacity(0.8),
+            backgroundColor: colorScheme.surface.withValues(alpha: 0.8),
             elevation: 0,
             selectedLabelTextStyle: TextStyle(
               fontSize: 12,
@@ -7000,7 +7003,7 @@ void main() {
         equals(
           NavigationRailThemeData(
             elevation: 1,
-            backgroundColor: colorScheme.surface.withOpacity(0.5),
+            backgroundColor: colorScheme.surface.withValues(alpha: 0.5),
             selectedIconTheme: IconThemeData(
               color: colorScheme.secondaryContainer,
               size: 24,
@@ -7068,7 +7071,7 @@ void main() {
         equals(
           NavigationRailThemeData(
             elevation: 1,
-            backgroundColor: colorScheme.surface.withOpacity(0.5),
+            backgroundColor: colorScheme.surface.withValues(alpha: 0.5),
             selectedIconTheme: IconThemeData(
               color: colorScheme.secondaryContainer,
               size: 32,
@@ -7193,7 +7196,7 @@ void main() {
               foregroundColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.38);
+                    return colorScheme.onSurface.withValues(alpha: 0.38);
                   }
                   return colorScheme.primaryContainer;
                 },
@@ -7201,13 +7204,13 @@ void main() {
               overlayColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primaryContainer.withOpacity(0.08);
+                    return colorScheme.primaryContainer.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primaryContainer.withOpacity(0.12);
+                    return colorScheme.primaryContainer.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primaryContainer.withOpacity(0.12);
+                    return colorScheme.primaryContainer.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 },
@@ -7302,13 +7305,13 @@ void main() {
               overlayColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.secondary.withOpacity(0.08);
+                    return colorScheme.secondary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.secondary.withOpacity(0.12);
+                    return colorScheme.secondary.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.secondary.withOpacity(0.12);
+                    return colorScheme.secondary.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 },
@@ -7336,7 +7339,7 @@ void main() {
                     );
                   }
                   return BorderSide(
-                    color: colorScheme.tertiary.withOpacity(0.12),
+                    color: colorScheme.tertiary.withValues(alpha: 0.12),
                     width: 1.5,
                   );
                 },
@@ -7359,7 +7362,7 @@ void main() {
       final WidgetStateProperty<Color?> foregroundColor =
           WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
-          return colorScheme.onSurface.withOpacity(0.38);
+          return colorScheme.onSurface.withValues(alpha: 0.38);
         }
         return colorScheme.secondary;
       });
@@ -7367,13 +7370,13 @@ void main() {
       final WidgetStateProperty<Color?> overlayColor =
           WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.hovered)) {
-          return colorScheme.secondary.withOpacity(0.08);
+          return colorScheme.secondary.withValues(alpha: 0.08);
         }
         if (states.contains(WidgetState.focused)) {
-          return colorScheme.secondary.withOpacity(0.12);
+          return colorScheme.secondary.withValues(alpha: 0.12);
         }
         if (states.contains(WidgetState.pressed)) {
-          return colorScheme.secondary.withOpacity(0.12);
+          return colorScheme.secondary.withValues(alpha: 0.12);
         }
         return null;
       });
@@ -7382,7 +7385,7 @@ void main() {
           WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
           return BorderSide(
-            color: colorScheme.onSurface.withOpacity(0.12),
+            color: colorScheme.onSurface.withValues(alpha: 0.12),
             width: 1,
           );
         }
@@ -7452,7 +7455,7 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
@@ -7466,15 +7469,15 @@ void main() {
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.outlinedButtonTheme(
@@ -7487,7 +7490,7 @@ void main() {
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
-            color: colorScheme.onSurface.withOpacity(0.12), width: 1)),
+            color: colorScheme.onSurface.withValues(alpha: 0.12), width: 1)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
@@ -7606,7 +7609,7 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
@@ -7616,15 +7619,15 @@ void main() {
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -7635,7 +7638,7 @@ void main() {
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
-            color: colorScheme.onSurface.withOpacity(0.12), width: 1.0)),
+            color: colorScheme.onSurface.withValues(alpha: 0.12), width: 1.0)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
@@ -7680,7 +7683,7 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
@@ -7690,15 +7693,15 @@ void main() {
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.tertiary.withOpacity(0.08)),
+        equals(colorScheme.tertiary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.tertiary.withOpacity(0.12)),
+        equals(colorScheme.tertiary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.tertiary.withOpacity(0.12)),
+        equals(colorScheme.tertiary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -7709,7 +7712,7 @@ void main() {
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
-          color: colorScheme.onSurface.withOpacity(0.12),
+          color: colorScheme.onSurface.withValues(alpha: 0.12),
           width: 2.0,
         )),
       );
@@ -7855,24 +7858,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withOpacity(0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return Colors.transparent;
               },
@@ -7951,24 +7954,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withOpacity(0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return Colors.transparent;
               },
@@ -8052,24 +8055,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withOpacity(0.12);
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return Colors.transparent;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withOpacity(0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return Colors.transparent;
               },
@@ -9153,24 +9156,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return null;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return null;
               },
@@ -9272,21 +9275,21 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.onSurface.withOpacity(0.08)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.08)),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // Non tinted interactions - selected
       expect(
@@ -9296,7 +9299,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9305,7 +9308,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9314,7 +9317,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       // Tinted interactions
       expect(
@@ -9447,24 +9450,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return null;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return null;
               },
@@ -9616,24 +9619,24 @@ void main() {
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withOpacity(0.08);
+                    return colorScheme.primary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withOpacity(0.12);
+                    return colorScheme.primary.withValues(alpha: 0.12);
                   }
                   return null;
                 }
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withOpacity(0.08);
+                  return colorScheme.onSurface.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withOpacity(0.12);
+                  return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return null;
               },
@@ -9696,7 +9699,7 @@ void main() {
       );
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         switchTheme.trackOutlineColor!.resolve(<WidgetState>{}),
@@ -9717,16 +9720,16 @@ void main() {
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.surfaceContainerHighest.withOpacity(0.12)),
+        equals(colorScheme.surfaceContainerHighest.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.trackOutlineColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9803,15 +9806,15 @@ void main() {
       // Overlay colors
       expect(
         switchTheme.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.onSurface.withOpacity(0.08)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.08)),
       );
       expect(
         switchTheme.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurface.withOpacity(0.12)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // trackColor
       expect(
@@ -9850,17 +9853,17 @@ void main() {
       expect(
         switchTheme.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         switchTheme.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.selected}),
@@ -10025,7 +10028,7 @@ void main() {
       // Disabled thumb colors
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(Colors.white.withOpacity(0.5)),
+        equals(Colors.white.withValues(alpha: 0.5)),
       );
       // All other thumb colors
       expect(
@@ -10042,17 +10045,17 @@ void main() {
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(colorScheme.primary.withOpacity(0.5)),
+        equals(colorScheme.primary.withValues(alpha: 0.5)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(cup.color.withOpacity(0.07)),
+        equals(cup.color.withValues(alpha: 0.07)),
       );
       // Track outline color focused
       expect(
         switchTheme.trackOutlineColor!
             .resolve(<WidgetState>{WidgetState.focused}),
-        equals(HSLColor.fromColor(colorScheme.primary.withOpacity(0.80))
+        equals(HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
             .withLightness(0.69)
             .withSaturation(0.835)
             .toColor()),
@@ -10115,17 +10118,17 @@ void main() {
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(colorScheme.primary.withOpacity(0.5)),
+        equals(colorScheme.primary.withValues(alpha: 0.5)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(cup.darkColor.withOpacity(0.16)),
+        equals(cup.darkColor.withValues(alpha: 0.16)),
       );
       // Track outline color focused
       expect(
         switchTheme.trackOutlineColor!
             .resolve(<WidgetState>{WidgetState.focused}),
-        equals(HSLColor.fromColor(colorScheme.primary.withOpacity(0.80))
+        equals(HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
             .withLightness(0.69)
             .withSaturation(0.835)
             .toColor()),
@@ -10334,7 +10337,7 @@ void main() {
               foregroundColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withOpacity(0.38);
+                    return colorScheme.onSurface.withValues(alpha: 0.38);
                   }
                   return colorScheme.secondary;
                 },
@@ -10342,13 +10345,13 @@ void main() {
               overlayColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.secondary.withOpacity(0.08);
+                    return colorScheme.secondary.withValues(alpha: 0.08);
                   }
                   if (states.contains(WidgetState.focused)) {
-                    return colorScheme.secondary.withOpacity(0.12);
+                    return colorScheme.secondary.withValues(alpha: 0.12);
                   }
                   if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.secondary.withOpacity(0.12);
+                    return colorScheme.secondary.withValues(alpha: 0.12);
                   }
                   return null;
                 },
@@ -10393,7 +10396,7 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
@@ -10403,15 +10406,15 @@ void main() {
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -10481,7 +10484,7 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withOpacity(0.38)),
+        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
@@ -10491,15 +10494,15 @@ void main() {
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withOpacity(0.08)),
+        equals(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withOpacity(0.12)),
+        equals(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -10751,7 +10754,7 @@ void main() {
           textSelection,
           equals(TextSelectionThemeData(
             cursorColor: colorScheme.primary,
-            selectionColor: colorScheme.primary.withOpacity(0.4),
+            selectionColor: colorScheme.primary.withValues(alpha: 0.4),
             selectionHandleColor: colorScheme.primary,
           )));
       //
@@ -10766,7 +10769,7 @@ void main() {
           textSelection,
           equals(TextSelectionThemeData(
             cursorColor: colorScheme.tertiary,
-            selectionColor: colorScheme.secondary.withOpacity(0.3),
+            selectionColor: colorScheme.secondary.withValues(alpha: 0.3),
             selectionHandleColor: colorScheme.onPrimaryContainer,
           )));
       textSelection = FlexSubThemes.textSelectionTheme(
@@ -10780,7 +10783,7 @@ void main() {
           textSelection,
           equals(TextSelectionThemeData(
             cursorColor: colorScheme.tertiary,
-            selectionColor: colorScheme.secondary.withOpacity(0.4),
+            selectionColor: colorScheme.secondary.withValues(alpha: 0.4),
             selectionHandleColor: const Color(0xFFEEDDCC),
           )));
     });

@@ -659,19 +659,19 @@ void main() {
         'FTD1.30: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.material '
-        'EXPECT TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).',
-        () {
+        'EXPECT TabBarTheme.unselectedLabelColor '
+        'onSurface.withValues(alpha: 0.6).', () {
       expect(tLightL.tabBarTheme.unselectedLabelColor,
-          tLightL.colorScheme.onSurface.withOpacity(0.6));
+          tLightL.colorScheme.onSurface.withValues(alpha: 0.6));
     });
     test(
         'FTD1.31: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary '
-        'EXPECT TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)',
-        () {
+        'EXPECT TabBarTheme.unselectedLabelColor '
+        'onSurface.withValues(alpha: 0.6)', () {
       expect(tDarkL.tabBarTheme.unselectedLabelColor,
-          tDarkL.colorScheme.onSurface.withOpacity(0.6));
+          tDarkL.colorScheme.onSurface.withValues(alpha: 0.6));
     });
 
     //**************************************************************************
@@ -787,9 +787,10 @@ void main() {
     test(
         'FTD1.45: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
+        () {
       expect(tLightM.tabBarTheme.unselectedLabelColor,
-          tLightM.colorScheme.onSurface.withOpacity(0.6));
+          tLightM.colorScheme.onSurface.withValues(alpha: 0.6));
     });
     test(
         'FTD1.46: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
@@ -1037,16 +1038,18 @@ void main() {
     test(
         'FTD1.77: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
+        () {
       expect(tLightH.tabBarTheme.unselectedLabelColor,
-          tLightH.colorScheme.onSurface.withOpacity(0.6));
+          tLightH.colorScheme.onSurface.withValues(alpha: 0.6));
     });
     test(
         'FTD1.78: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6)',
+        () {
       expect(tDarkH.tabBarTheme.unselectedLabelColor,
-          tDarkH.colorScheme.onSurface.withOpacity(0.6));
+          tDarkH.colorScheme.onSurface.withValues(alpha: 0.6));
     });
 
     //**************************************************************************

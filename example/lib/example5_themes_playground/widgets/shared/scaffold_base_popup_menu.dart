@@ -306,14 +306,15 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
             child: ColorSchemeBox(
               foregroundColor: enabled
                   ? colorScheme.onSurface
-                  : colorScheme.onSurface.withOpacity(enabled ? 1 : 0.5),
+                  : colorScheme.onSurface.withValues(alpha: enabled ? 1 : 0.5),
               backgroundColor: enabled && value != null
                   ? value!.color(
                       colorScheme,
                       useMaterial3: useMaterial3,
                     )
                   : colorScheme.surface,
-              borderColor: colorScheme.outline.withOpacity(enabled ? 1 : 0.5),
+              borderColor:
+                  colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
               defaultOption: value == null,
             ),
           ),

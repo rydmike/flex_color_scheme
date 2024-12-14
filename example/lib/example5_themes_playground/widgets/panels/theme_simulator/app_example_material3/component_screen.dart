@@ -1289,24 +1289,24 @@ ButtonStyle enabledFilledButtonStyle(bool selected, ColorScheme colors) {
   return IconButton.styleFrom(
     foregroundColor: selected ? colors.onPrimary : colors.primary,
     backgroundColor: selected ? colors.primary : colors.surfaceContainerHighest,
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
-    disabledBackgroundColor: colors.onSurface.withOpacity(0.12),
+    disabledForegroundColor: colors.onSurface.withValues(alpha: 0.38),
+    disabledBackgroundColor: colors.onSurface.withValues(alpha: 0.12),
     hoverColor: selected
-        ? colors.onPrimary.withOpacity(0.08)
-        : colors.primary.withOpacity(0.08),
+        ? colors.onPrimary.withValues(alpha: 0.08)
+        : colors.primary.withValues(alpha: 0.08),
     focusColor: selected
-        ? colors.onPrimary.withOpacity(0.12)
-        : colors.primary.withOpacity(0.12),
+        ? colors.onPrimary.withValues(alpha: 0.12)
+        : colors.primary.withValues(alpha: 0.12),
     highlightColor: selected
-        ? colors.onPrimary.withOpacity(0.12)
-        : colors.primary.withOpacity(0.12),
+        ? colors.onPrimary.withValues(alpha: 0.12)
+        : colors.primary.withValues(alpha: 0.12),
   );
 }
 
 ButtonStyle disabledFilledButtonStyle(bool selected, ColorScheme colors) {
   return IconButton.styleFrom(
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
-    disabledBackgroundColor: colors.onSurface.withOpacity(0.12),
+    disabledForegroundColor: colors.onSurface.withValues(alpha: 0.38),
+    disabledBackgroundColor: colors.onSurface.withValues(alpha: 0.12),
   );
 }
 
@@ -1317,21 +1317,21 @@ ButtonStyle enabledFilledTonalButtonStyle(bool selected, ColorScheme colors) {
     backgroundColor:
         selected ? colors.secondaryContainer : colors.surfaceContainerHighest,
     hoverColor: selected
-        ? colors.onSecondaryContainer.withOpacity(0.08)
-        : colors.onSurfaceVariant.withOpacity(0.08),
+        ? colors.onSecondaryContainer.withValues(alpha: 0.08)
+        : colors.onSurfaceVariant.withValues(alpha: 0.08),
     focusColor: selected
-        ? colors.onSecondaryContainer.withOpacity(0.12)
-        : colors.onSurfaceVariant.withOpacity(0.12),
+        ? colors.onSecondaryContainer.withValues(alpha: 0.12)
+        : colors.onSurfaceVariant.withValues(alpha: 0.12),
     highlightColor: selected
-        ? colors.onSecondaryContainer.withOpacity(0.12)
-        : colors.onSurfaceVariant.withOpacity(0.12),
+        ? colors.onSecondaryContainer.withValues(alpha: 0.12)
+        : colors.onSurfaceVariant.withValues(alpha: 0.12),
   );
 }
 
 ButtonStyle disabledFilledTonalButtonStyle(bool selected, ColorScheme colors) {
   return IconButton.styleFrom(
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
-    disabledBackgroundColor: colors.onSurface.withOpacity(0.12),
+    disabledForegroundColor: colors.onSurface.withValues(alpha: 0.38),
+    disabledBackgroundColor: colors.onSurface.withValues(alpha: 0.12),
   );
 }
 
@@ -1339,14 +1339,14 @@ ButtonStyle enabledOutlinedButtonStyle(bool selected, ColorScheme colors) {
   return IconButton.styleFrom(
     backgroundColor: selected ? colors.inverseSurface : null,
     hoverColor: selected
-        ? colors.onInverseSurface.withOpacity(0.08)
-        : colors.onSurfaceVariant.withOpacity(0.08),
+        ? colors.onInverseSurface.withValues(alpha: 0.08)
+        : colors.onSurfaceVariant.withValues(alpha: 0.08),
     focusColor: selected
-        ? colors.onInverseSurface.withOpacity(0.12)
-        : colors.onSurfaceVariant.withOpacity(0.12),
+        ? colors.onInverseSurface.withValues(alpha: 0.12)
+        : colors.onSurfaceVariant.withValues(alpha: 0.12),
     highlightColor: selected
-        ? colors.onInverseSurface.withOpacity(0.12)
-        : colors.onSurface.withOpacity(0.12),
+        ? colors.onInverseSurface.withValues(alpha: 0.12)
+        : colors.onSurface.withValues(alpha: 0.12),
     side: BorderSide(color: colors.outline),
   ).copyWith(
     foregroundColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
@@ -1363,10 +1363,12 @@ ButtonStyle enabledOutlinedButtonStyle(bool selected, ColorScheme colors) {
 
 ButtonStyle disabledOutlinedButtonStyle(bool selected, ColorScheme colors) {
   return IconButton.styleFrom(
-    disabledForegroundColor: colors.onSurface.withOpacity(0.38),
+    disabledForegroundColor: colors.onSurface.withValues(alpha: 0.38),
     disabledBackgroundColor:
-        selected ? colors.onSurface.withOpacity(0.12) : null,
-    side: selected ? null : BorderSide(color: colors.outline.withOpacity(0.12)),
+        selected ? colors.onSurface.withValues(alpha: 0.12) : null,
+    side: selected
+        ? null
+        : BorderSide(color: colors.outline.withValues(alpha: 0.12)),
   );
 }
 
@@ -2314,7 +2316,8 @@ class _MenusState extends State<Menus> {
               ),
               Icon(
                 selectedIcon?.icon,
-                color: selectedColor?.color ?? Colors.grey.withOpacity(0.5),
+                color:
+                    selectedColor?.color ?? Colors.grey.withValues(alpha: 0.5),
               )
             ],
           ),

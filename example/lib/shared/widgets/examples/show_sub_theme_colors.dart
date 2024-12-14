@@ -150,11 +150,11 @@ class ShowSubThemeColors extends StatelessWidget {
     final Color tooltipColor = tooltipDecoration is BoxDecoration
         ? tooltipDecoration.color ??
             (isDark
-                ? Colors.white.withOpacity(0.9)
-                : Colors.grey[700]!.withOpacity(0.9))
+                ? Colors.white.withValues(alpha: 0.9)
+                : Colors.grey[700]!.withValues(alpha: 0.9))
         : (isDark
-            ? Colors.white.withOpacity(0.9)
-            : Colors.grey[700]!.withOpacity(0.9));
+            ? Colors.white.withValues(alpha: 0.9)
+            : Colors.grey[700]!.withValues(alpha: 0.9));
 
     //
     final Color inputDecoratorColor = theme.inputDecorationTheme.filled
@@ -191,7 +191,7 @@ class ShowSubThemeColors extends StatelessWidget {
         theme.navigationBarTheme.indicatorColor ??
             (useMaterial3
                 ? colorScheme.secondaryContainer
-                : colorScheme.secondary.withOpacity(.24));
+                : colorScheme.secondary.withValues(alpha: .24));
     final Color navigationRailColor =
         theme.navigationRailTheme.backgroundColor ?? colorScheme.surface;
     final Color navigationRailItemColor = theme
@@ -201,14 +201,14 @@ class ShowSubThemeColors extends StatelessWidget {
         theme.navigationRailTheme.indicatorColor ??
             (useMaterial3
                 ? colorScheme.onSecondaryContainer
-                : colorScheme.secondary.withOpacity(.24));
+                : colorScheme.secondary.withValues(alpha: .24));
     //
     final Color dialogColor =
         theme.dialogTheme.backgroundColor ?? theme.dialogBackgroundColor;
     final Color defaultSnackBackgroundColor = isDark
         ? colorScheme.onSurface
         : Color.alphaBlend(
-            colorScheme.onSurface.withOpacity(0.80), colorScheme.surface);
+            colorScheme.onSurface.withValues(alpha: 0.80), colorScheme.surface);
     final Color snackBarColor =
         theme.snackBarTheme.backgroundColor ?? defaultSnackBackgroundColor;
     final Color snackForeground = theme.snackBarTheme.contentTextStyle?.color ??
