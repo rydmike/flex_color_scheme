@@ -268,6 +268,7 @@ class _ThemePanelView extends StatelessWidget {
             // the SingleChildScrollView instead. Which for use cases
             // with only a few items, or just one, like this case, may be
             // faster. This test started Oct 12, 2024.
+            // EDIT: Dec 14, 2024: SingleChildScrollView is a bit faster here.
             child: Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsetsDirectional.fromSTEB(

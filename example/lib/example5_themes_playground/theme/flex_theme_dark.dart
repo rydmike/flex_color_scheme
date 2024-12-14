@@ -106,15 +106,6 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
     // Switch to using `FlexSchemeColor` when using 3 first custom schemes or
     // the last one that is customizable.
     colors: !useScheme ? AppColor.scheme(controller).dark : null,
-
-    // TODO(rydmike): DEBUGGING: Remove
-    // primary: Colors.blue,
-    // primaryLightRef: Colors.blue,
-    // secondary: Colors.pink[200],
-    // secondaryLightRef: Colors.pink,
-    // tertiary: Colors.orange[200],
-    // tertiaryLightRef: Colors.orange,
-
     // Used number of colors from the selected input FlexColorScheme based theme
     usedColors: controller.usedColors,
     surfaceMode: controller.surfaceModeDark,

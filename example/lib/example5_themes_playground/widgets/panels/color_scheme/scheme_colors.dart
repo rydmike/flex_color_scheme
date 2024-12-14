@@ -134,11 +134,10 @@ class SchemeColors extends StatelessWidget {
           //  This represents the most complex version of this widget type,
           //  it should also work for the simpler ones used on ColorBlends and
           //  InputColors. The resulting widget will need a lot of props where
-          //  many can optional, but at least it will get flatter and simpler
+          //  many can be optional, but at least it will get flatter and simpler
           //  to maintain. This is a classic lazy copy-paste job with code debt,
           //  that should be refactored.
 
-          //
           // Primary colors presentation
           RepaintBoundary(
             key: const ValueKey<String>('primary'),

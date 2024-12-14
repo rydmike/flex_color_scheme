@@ -31,11 +31,11 @@ void main() {
           ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
     });
 
+    // Expect toTheme to be equal
     // TODO(rydmike): toString on ThemeData match, but not ThemeData.
-    //   This is repeated for many test cases. It seems like ThemeData
-    //   equality comparison cannot be guaranteed when using sub-themes that
-    //   uses WidgetState or WidgetStateProperty. Maybe report this.
-    //   Investigate first what SDK ThemeData test do, if they even attempt it.
+    // This is repeated for many test cases. It is because ThemeData
+    // equality comparison is broken when using sub-themes that
+    // uses MaterialState or MaterialStateProperty.
     test(
         'FCS7.01-Default-Light: GIVEN FlexColorScheme.light() made with light '
         'brightness '

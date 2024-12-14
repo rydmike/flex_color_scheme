@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_response.dart';
 
-/// An abstract final class that holds some static theming helper functions.
+/// A class container that holds static theming helper functions.
 abstract final class ThemeValues {
   /// Return the correct platform effective global border radius setting.
   ///
@@ -30,32 +30,6 @@ abstract final class ThemeValues {
     // Return the effective platform default radius, may be null.
     return adapt ? adaptiveRadius : normalRadius;
   }
-
-  // TODO(rydmike): This is no longer used. Remove it after a while.
-  /// Return the correct platform effective dialog border radius setting.
-  ///
-  /// Depends on platform, its mock version and web and its mock version
-  /// and config for if standard or adaptive radius is used on this
-  /// mocked platform and mocked web, or actual ones.
-  // static double? effectiveDialogRadius(ThemeController controller) {
-  //   // Get standard border radius value
-  //   final double? normalRadius = controller.dialogBorderRadius;
-  //   // Get adaptive border radius value
-  //   final double? adaptiveRadius = controller.dialogBorderRadiusAdaptive;
-  //   // Get effective platform
-  //   final TargetPlatform platform =
-  //       controller.platform ?? defaultTargetPlatform;
-  //   // Get fake web platform
-  //   final bool? isWeb = controller.fakeIsWeb;
-  //   // Get Adaptive Settings usage.
-  //   final AdaptiveResponse adaptiveConfig =
-  //       controller.adaptiveResponseDialogRadius ?? AdaptiveResponse.off;
-  //   // Should we use adaptive radius or not?
-  //   final bool adapt = adaptiveConfig.setting(isWeb).adapt(platform, isWeb);
-  //   // Return the effective platform default radius, can be null for Flutter
-  //   // default values.
-  //   return adapt ? adaptiveRadius : normalRadius;
-  // }
 
   // Return ListTile content padding for a ListTile used in two column layout,
   // for the first column, that respects the themed content padding and
