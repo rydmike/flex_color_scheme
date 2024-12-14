@@ -14,7 +14,7 @@ sealed class ShareSettings {
     final List<int> jsonBytes = utf8.encode(jsonString);
     final List<int> compressedBytes =
         const GZipEncoder().encode(Uint8List.fromList(jsonBytes));
-    return base64UrlEncode(compressedBytes ?? <int>[0]);
+    return base64UrlEncode(compressedBytes);
   }
 
   /// Make URL for sharing settings Playground settings.
