@@ -605,6 +605,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String sliderBaseSchemeColor = controller.sliderBaseSchemeColor == null
       ? ''
       : '    sliderBaseSchemeColor: ${controller.sliderBaseSchemeColor},\n';
+  final String sliderThumbSchemeColor = controller.sliderThumbSchemeColor ==
+          null
+      ? ''
+      : '    sliderThumbSchemeColor: ${controller.sliderThumbSchemeColor},\n';
   final String sliderIndicatorSchemeColor = controller
               .sliderIndicatorSchemeColor ==
           null
@@ -1673,6 +1677,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$unselectedIsColored'
           //
           '$sliderBaseSchemeColor'
+          '$sliderThumbSchemeColor'
           '$sliderIndicatorSchemeColor'
           '$sliderValueTinted'
           '$sliderValueIndicatorType'
@@ -1956,6 +1961,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$unselectedIsColored'
           //
           '$sliderBaseSchemeColor'
+          '$sliderThumbSchemeColor'
           '$sliderIndicatorSchemeColor'
           '$sliderValueTinted'
           '$sliderValueIndicatorType'

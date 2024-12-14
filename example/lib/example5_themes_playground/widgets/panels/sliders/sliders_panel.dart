@@ -25,7 +25,7 @@ class SlidersPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final bool useMaterial3 = theme.useMaterial3;
+    // final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!
         .copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
@@ -36,29 +36,43 @@ class SlidersPanel extends StatelessWidget {
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
     final bool isLight = theme.brightness == Brightness.light;
+    final String labelThumbDefault = controller.sliderBaseSchemeColor == null
+        ? 'primary'
+        : '${controller.sliderBaseSchemeColor?.name}';
     final String labelIndicatorDefault =
-        controller.sliderBaseSchemeColor == null
-            ? useMaterial3
-                ? controller.sliderValueTinted
-                    ? 'primary'
-                    : 'primary'
-                : controller.sliderValueTinted
-                    ? 'primary'
-                    : 'grey [onSurface op60% alpha blended w. surface op90%]'
-            : '${controller.sliderBaseSchemeColor?.name}';
+        controller.sliderBaseSchemeColor == null &&
+                controller.sliderThumbSchemeColor == null
+            ? 'primary'
+            : controller.sliderThumbSchemeColor == null
+                ? '${controller.sliderBaseSchemeColor?.name}'
+                : '${controller.sliderThumbSchemeColor?.name}';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        ColorSchemePopupMenu(
-          enabled: enableControl,
-          title: const Text('Main color'),
-          defaultLabel: 'primary',
-          defaultDisabledLabelM2: 'secondary',
-          value: controller.sliderBaseSchemeColor,
-          onChanged: controller.setSliderBaseSchemeColor,
-        ),
+
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Main color'),
+              defaultLabel: 'primary',
+              value: controller.sliderBaseSchemeColor,
+              onChanged: controller.setSliderBaseSchemeColor,
+            ),
+            lastWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Thumb color'),
+              defaultLabel: labelThumbDefault,
+              value: controller.sliderThumbSchemeColor,
+              onChanged: controller.setSliderThumbSchemeColor,
+            ),
+            isRow: isRow,
+          );
+        }),
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(
             firstWidget: ColorSchemePopupMenu(
@@ -66,6 +80,8 @@ class SlidersPanel extends StatelessWidget {
               enabled: enableControl,
               title: const Text('Value indicator color'),
               defaultLabel: labelIndicatorDefault,
+              defaultDisabledLabelM2:
+                  'grey [onSurface op60% alpha blended w. surface op90%]',
               colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
               value: controller.sliderIndicatorSchemeColor,
               onChanged: controller.setSliderIndicatorSchemeColor,
