@@ -237,7 +237,7 @@ class IntroductionPanel extends StatelessWidget {
         const ListTile(
           title: Text('Material-2 Deprecation?'),
           subtitle: Text(
-            'Legacy Material-2 support is still supported in Flutter 3.24 '
+            'Legacy Material-2 support is still supported in Flutter 3.27 '
             'and FCS V8, but will be deprecated and eventually '
             'removed from the Flutter SDK and FCS code-base. If you still use '
             'Material-2, you should migrate your Flutter app to use '
@@ -304,7 +304,7 @@ class IntroductionPanel extends StatelessWidget {
             'time permits and at best effort.\n'
             '\n'
             'FlexColorScheme and Themes Playground are not '
-            'official Google products and are not are not affiliated with '
+            'official Google products and are not affiliated with '
             'the Flutter or Material teams at Google.\n'
             '\n'
             'The Playground is provided as a convenience tool to help you '
@@ -315,8 +315,8 @@ class IntroductionPanel extends StatelessWidget {
             'be the last step in the FlexColorScheme usage tutorial, found as '
             'example-5. The Playground source is still provided as example-5 '
             'in the FlexColorScheme repo. Over time the Playground grew into '
-            'more and became an interactive API configuration tool for '
-            'FlexColorScheme.',
+            'something much more and became an interactive API configuration '
+            'tool for FlexColorScheme.',
           ),
         ),
         Padding(
