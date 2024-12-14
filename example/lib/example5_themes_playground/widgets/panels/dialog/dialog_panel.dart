@@ -261,7 +261,6 @@ class DialogPanel extends StatelessWidget {
               'the produced code.\n'),
         ),
         const AlertDialogShowcase(),
-
         if (isLight)
           ColorSchemePopupMenu(
             enabled: enableControl,
@@ -286,11 +285,6 @@ class DialogPanel extends StatelessWidget {
             value: controller.dialogBackgroundDarkSchemeColor,
             onChanged: controller.setDialogBackgroundDarkSchemeColor,
           ),
-        // TODO(rydmike): Flutter 3.22...3.24 bug, follow issue. Dialog gets
-        // theme.dialogBackgroundColor (which is surface in M3) instead of
-        // surfaceContainerHigh, but Date and Time picker use correct default.
-        // This is fixed in master, not yet landed in stable.
-        // Issue: https://github.com/flutter/flutter/issues/148849
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -300,9 +294,9 @@ class DialogPanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'In Flutter 3.22 to 3.24 in M3 mode, the Dialog and '
-                      'thus AlertDialog gets Theme.dialogBackgroundColor, '
+                      'thus also AlertDialog use Theme.dialogBackgroundColor, '
                       'which is equal to surface color and not '
-                      'surfaceContainerHigh. TimePicker and DatePicker get '
+                      'surfaceContainerHigh. TimePicker and DatePicker use '
                       'the correct default surfaceContainerHigh. '
                       'For more info see ',
                 ),
@@ -313,8 +307,7 @@ class DialogPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This is is fixed in the master channel, '
-                      'but has not landed in current stable (3.24.x).\n',
+                  text: '. This is is fixed in Flutter 3.27.\n',
                 ),
               ],
             ),
