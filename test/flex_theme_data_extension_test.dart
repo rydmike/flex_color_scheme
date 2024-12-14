@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'test_color_scheme_equality.dart';
+
 void main() {
   //****************************************************************************
   // FlexThemeData unit tests.
@@ -340,25 +342,13 @@ void main() {
       // onBackground: Color(0xff000000),
       // surfaceVariant: Color(0xffffffff),
     );
-    test(
-        'FTD1.01-string: '
-        'GIVEN a FlexThemeData.raw theme with Material3 scheme light'
-        ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
-        () {
-      expect(
-        themeLight.colorScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          lightRawScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
-      );
-    });
 
     test(
-        'FTD1.01-object: '
+        'FTD1.01-scheme-props: '
         'GIVEN a FlexThemeData.raw theme with Material3 scheme light'
         ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
         () {
-      expect(
+      testColorSchemeEquality(
         themeLight.colorScheme,
         lightRawScheme,
       );
@@ -426,28 +416,13 @@ void main() {
       onInverseSurface: Color(0xff121212),
       inversePrimary: Color(0xff5a4570),
       surfaceTint: Color(0xffbb86fc),
-      // background: Color(0xff121212),
-      // onBackground: Color(0xffffffff),
-      // surfaceVariant: Color(0xff121212),
     );
 
     test(
-        'FTD1.02-string: '
+        'FTD1.02-scheme-props: '
         'GIVEN a FlexColorScheme theme with Material3 scheme dark '
         'colors EXPECT .colorScheme equality with raw ColorScheme dark().', () {
-      expect(
-        themeDark.colorScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          darkRawScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
-      );
-    });
-
-    test(
-        'FTD1.02-object: '
-        'GIVEN a FlexColorScheme theme with Material3 scheme dark '
-        'colors EXPECT .colorScheme equality with raw ColorScheme dark().', () {
-      expect(themeDark.colorScheme, darkRawScheme);
+      testColorSchemeEquality(themeDark.colorScheme, darkRawScheme);
     });
 
     //**************************************************************************

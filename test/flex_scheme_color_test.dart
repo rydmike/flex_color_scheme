@@ -3,6 +3,8 @@ import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'test_flex_scheme__color_equality.dart';
+
 // ignore_for_file: avoid_redundant_argument_values
 
 void main() {
@@ -281,7 +283,7 @@ void main() {
         'FSC1.11-light-1: GIVEN a FlexSchemeColor.from primary '
         'for M3 style (bright) '
         'EXPECT primary as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
@@ -307,7 +309,7 @@ void main() {
         'FSC1.11-light-2: GIVEN a FlexSchemeColor.from primary and secondary '
         'for M3 style (bright) '
         'EXPECT primary and secondary as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
@@ -334,7 +336,7 @@ void main() {
         'FSC1.11-light-3: GIVEN a FlexSchemeColor.from primary, secondary '
         'and primaryContainer for M3 style (bright) '
         'EXPECT them as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
@@ -362,7 +364,7 @@ void main() {
         'FSC1.11-light-4: GIVEN a FlexSchemeColor.from primary, secondary '
         'and primaryContainer + secondaryContainer for M3 style (bright) '
         'EXPECT them as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
@@ -392,7 +394,7 @@ void main() {
         'primaryContainer, secondaryContainer and tertiary for M3 style '
         '(bright) '
         'EXPECT them as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.light,
             primary: FlexColor.materialLightPrimary,
@@ -485,7 +487,7 @@ void main() {
         'FSC1.11-dark-1: GIVEN a FlexSchemeColor.from primary  '
         'for M3 style (dark) '
         'EXPECT primary as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,
@@ -511,7 +513,7 @@ void main() {
         'FSC1.11-dark-2: GIVEN a FlexSchemeColor.from primary and secondary '
         'for M3 style (dark) '
         'EXPECT them as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,
@@ -538,7 +540,7 @@ void main() {
         'FSC1.11-dark-3: GIVEN a FlexSchemeColor.from primary and secondary '
         'plus primaryContainer for M3 style (dark) '
         'EXPECT them as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,
@@ -566,7 +568,7 @@ void main() {
         'FSC1.11-dark-4: GIVEN a FlexSchemeColor.from primary and secondary '
         'plus primaryContainer and secondaryContainer for M3 style (dark) '
         'EXPECT them as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,
@@ -595,7 +597,7 @@ void main() {
         'FSC1.11-dark-5: GIVEN a FlexSchemeColor.from primary, secondary, '
         'primaryContainer, secondaryContainer and tertiary for M3 style (dark) '
         'EXPECT them as given, others M3 computed.', () {
-      expect(
+      testFlexSchemeColorEquality(
           FlexSchemeColor.from(
             brightness: Brightness.dark,
             primary: FlexColor.materialDarkPrimary,

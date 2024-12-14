@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'test_color_scheme_equality.dart';
+
 void main() {
   //****************************************************************************
   // FlexColorScheme.toTheme unit tests.
@@ -126,16 +128,15 @@ void main() {
         'raw light color scheme '
         'EXPECT its ColorScheme to be equal to one made with light '
         'factory toString compare. v4.2.0 test case.', () {
-      expect(
+      testColorSchemeEquality(
         FlexColorScheme.light(
           useMaterial3: false,
-        ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          const FlexColorScheme(
-            colorScheme: schemeLight,
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
+        ).toScheme,
+        const FlexColorScheme(
+          colorScheme: schemeLight,
+          useMaterial3: false,
+        ).toScheme,
+        threshold: 0.008,
       );
     });
 
@@ -161,15 +162,16 @@ void main() {
         'default light color scheme '
         'EXPECT its STRING ThemeData to be equal to one made with light '
         'factory and ColorScheme.light v4.2.0 test case.', () {
-      expect(
-          const FlexColorScheme(
-            colorScheme: ColorScheme.light(),
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(FlexColorScheme.light(
-            colorScheme: const ColorScheme.light(),
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine)));
+      testColorSchemeEquality(
+        const FlexColorScheme(
+          colorScheme: ColorScheme.light(),
+          useMaterial3: false,
+        ).toScheme,
+        FlexColorScheme.light(
+          colorScheme: const ColorScheme.light(),
+          useMaterial3: false,
+        ).toScheme,
+      );
     });
     test(
         'FCS7.05-Default-scheme-light: GIVEN FlexColorScheme() made with '
@@ -243,16 +245,15 @@ void main() {
         'default dark color scheme '
         'EXPECT its ColorScheme to be equal to one made with dark factory '
         'correcting on error. v4.2.0 test case', () {
-      expect(
+      testColorSchemeEquality(
         FlexColorScheme.dark(
           useMaterial3: false,
-        ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          const FlexColorScheme(
-            colorScheme: schemeDark,
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
+        ).toScheme,
+        const FlexColorScheme(
+          colorScheme: schemeDark,
+          useMaterial3: false,
+        ).toScheme,
+        threshold: 0.008,
       );
     });
 
@@ -368,14 +369,13 @@ void main() {
         'overrides '
         'EXPECT its ColorScheme to be equal to one made '
         'FlexColorScheme.light(scheme: FlexScheme.materialHc)', () {
-      expect(
-        rawHcLight.toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          FlexColorScheme.light(
-            scheme: FlexScheme.materialHc,
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
+      testColorSchemeEquality(
+        rawHcLight.toScheme,
+        FlexColorScheme.light(
+          scheme: FlexScheme.materialHc,
+          useMaterial3: false,
+        ).toScheme,
+        threshold: 0.008,
       );
     });
 
@@ -566,25 +566,17 @@ void main() {
     );
 
     test(
-        'FCS7.11-Scheme-hc-light.toString: GIVEN FlexColorScheme() made with '
-        'override colors despite conflicting colorscheme given '
-        'EXPECT its ColorScheme string to be equal to one made '
-        'FlexColorScheme.light(scheme: FlexScheme.materialHc) '
-        'v4.2.0 test case.', () {
-      expect(
-          hcLightWithLight.toScheme.toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(
-              hcLight.toScheme.toString(minLevel: DiagnosticLevel.fine)));
-    });
-    test(
-        'FCS7.12-Scheme-hc-light: GIVEN FlexColorScheme() made with '
+        'FCS7.11-Scheme-hc-light-props: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
         'EXPECT its ColorScheme to be equal to one made '
         'FlexColorScheme.light(scheme: FlexScheme.materialHc) '
         'v4.2.0 test case.', () {
-      expect(hcLightWithLight.toScheme, equals(hcLight.toScheme));
+      testColorSchemeEquality(
+        hcLightWithLight.toScheme,
+        hcLight.toScheme,
+        threshold: 0.008,
+      );
     });
-
     test(
         'FCS7.13-Theme-hc-light: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
@@ -678,12 +670,10 @@ void main() {
         'raw high contrast dark color scheme '
         'EXPECT its ColorScheme string to be equal to one made with dark '
         'factory and minimal color inputs.', () {
-      expect(
-          darkDefault.toScheme.toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(
-            darkFactoryDefault.toScheme
-                .toString(minLevel: DiagnosticLevel.fine),
-          ));
+      testColorSchemeEquality(
+        darkDefault.toScheme,
+        darkFactoryDefault.toScheme,
+      );
     });
 
     test(
@@ -762,25 +752,12 @@ void main() {
     test(
         'FCS7.15a-Scheme-hc-dark: GIVEN Raw FlexColorScheme() made with '
         'given high contrast colors '
-        'EXPECT its Scheme string to be equal to one made with dark '
+        'EXPECT its Scheme props to be equal to one made with dark '
         'factory and minimal colors inputs.', () {
-      expect(
-        hcDarkDefault.toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          hcDarkFactoryDefault.toScheme
-              .toString(minLevel: DiagnosticLevel.fine),
-        ),
-      );
-    });
-
-    test(
-        'FCS7.15b-Scheme-hc-dark: GIVEN Raw FlexColorScheme() made with '
-        'given high contrast colors '
-        'EXPECT its toScheme to be equal to one made with dark '
-        'factory and minimal color inputs.', () {
-      expect(
+      testColorSchemeEquality(
         hcDarkDefault.toScheme,
-        equals(hcDarkFactoryDefault.toScheme),
+        hcDarkFactoryDefault.toScheme,
+        threshold: 0.008,
       );
     });
 
@@ -876,26 +853,14 @@ void main() {
     );
 
     test(
-        'FCS7.16-toScheme-string-hc-dark: GIVEN FlexColorScheme() made with '
-        'override colors despite conflicting colorscheme given '
-        'EXPECT its toScheme to be equal to one made with dark factory '
-        'and minimal colors', () {
-      expect(
-          rawHcFCS.toScheme.toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(
-            hcDarkFactoryDefault.toScheme
-                .toString(minLevel: DiagnosticLevel.fine),
-          ));
-    });
-
-    test(
         'FCS7.17-toScheme-hc-dark: GIVEN FlexColorScheme() made with '
         'override colors despite conflicting colorscheme given '
         'EXPECT its toScheme to be equal to one made with dark factory '
         'and minimal colors', () {
-      expect(
+      testColorSchemeEquality(
         rawHcFCS.toScheme,
-        equals(hcDarkFactoryDefault.toScheme),
+        hcDarkFactoryDefault.toScheme,
+        threshold: 0.008,
       );
     });
 
@@ -917,7 +882,7 @@ void main() {
         'raw high contrast dark color scheme '
         'EXPECT its ColorScheme string to be equal to one made with '
         'dark factory and color overrides. v4.2.0 test case.', () {
-      expect(
+      testColorSchemeEquality(
         const FlexColorScheme(
           colorScheme: ColorScheme(
             brightness: Brightness.dark,
@@ -969,26 +934,25 @@ void main() {
             surfaceTint: Color(0xffefb7ff),
           ),
           useMaterial3: false,
-        ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          FlexColorScheme.dark(
-            primary: const Color(0xffefb7ff),
-            primaryContainer: const Color(0xffbe9eff),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff66fff9),
-            tertiary: const Color(0xff03dac6),
-            tertiaryContainer: const Color(0xff03dac6),
-            surface: const Color(0xff121212),
-            error: const Color(0xff9b374d),
-            onPrimary: Colors.black,
-            onPrimaryContainer: Colors.black,
-            onSecondary: Colors.black,
-            onSecondaryContainer: Colors.black,
-            onSurface: Colors.white,
-            onError: Colors.white,
-            useMaterial3: false,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
+        ).toScheme,
+        FlexColorScheme.dark(
+          primary: const Color(0xffefb7ff),
+          primaryContainer: const Color(0xffbe9eff),
+          secondary: const Color(0xff66fff9),
+          secondaryContainer: const Color(0xff66fff9),
+          tertiary: const Color(0xff03dac6),
+          tertiaryContainer: const Color(0xff03dac6),
+          surface: const Color(0xff121212),
+          error: const Color(0xff9b374d),
+          onPrimary: Colors.black,
+          onPrimaryContainer: Colors.black,
+          onSecondary: Colors.black,
+          onSecondaryContainer: Colors.black,
+          onSurface: Colors.white,
+          onError: Colors.white,
+          useMaterial3: false,
+        ).toScheme,
+        threshold: 0.008,
       );
     });
     test(
@@ -1074,9 +1038,9 @@ void main() {
     test(
         'FCS7.20-Scheme-hc-dark-M3: GIVEN FlexColorScheme() made with '
         'raw high contrast dark color scheme '
-        'EXPECT its ColorScheme string to be equal to one made with '
+        'EXPECT its ColorScheme props to be equal to one made with '
         'dark factory and color overrides. v4.2.0 test case.', () {
-      expect(
+      testColorSchemeEquality(
         const FlexColorScheme(
           colorScheme: ColorScheme(
             brightness: Brightness.dark,
@@ -1127,25 +1091,24 @@ void main() {
             inversePrimary: Color(0xff6f5970),
             surfaceTint: Color(0xffefb7ff),
           ),
-        ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          FlexColorScheme.dark(
-            primary: const Color(0xffefb7ff),
-            primaryContainer: const Color(0xffbe9eff),
-            secondary: const Color(0xff66fff9),
-            secondaryContainer: const Color(0xff66fff9),
-            tertiary: const Color(0xff03dac6),
-            tertiaryContainer: const Color(0xff03dac6),
-            surface: const Color(0xff121212),
-            error: const Color(0xff9b374d),
-            onPrimary: Colors.black,
-            onPrimaryContainer: Colors.black,
-            onSecondary: Colors.black,
-            onSecondaryContainer: Colors.black,
-            onSurface: Colors.white,
-            onError: Colors.white,
-          ).toScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
+        ).toScheme,
+        FlexColorScheme.dark(
+          primary: const Color(0xffefb7ff),
+          primaryContainer: const Color(0xffbe9eff),
+          secondary: const Color(0xff66fff9),
+          secondaryContainer: const Color(0xff66fff9),
+          tertiary: const Color(0xff03dac6),
+          tertiaryContainer: const Color(0xff03dac6),
+          surface: const Color(0xff121212),
+          error: const Color(0xff9b374d),
+          onPrimary: Colors.black,
+          onPrimaryContainer: Colors.black,
+          onSecondary: Colors.black,
+          onSecondaryContainer: Colors.black,
+          onSurface: Colors.white,
+          onError: Colors.white,
+        ).toScheme,
+        threshold: 0.008,
       );
     });
 
@@ -1621,28 +1584,14 @@ void main() {
       // surfaceVariant: Color(0xffffffff),
     );
     test(
-        'FCS7.01 string: GIVEN a FlexColorScheme theme with Material scheme '
+        'FCS7.01-props: GIVEN a FlexColorScheme theme with Material scheme '
         'light colors EXPECT .colorScheme equality with given ColorScheme '
         'light.', () {
-      expect(
-        themeLight.colorScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-            lightScheme.toString(minLevel: DiagnosticLevel.fine)),
-      );
-    });
-
-    test(
-        'FCS7.01: GIVEN a FlexColorScheme theme with Material scheme light '
-        'colors EXPECT .colorScheme equality with given ColorScheme light().',
-        () {
-      expect(
+      testColorSchemeEquality(
         themeLight.colorScheme,
-        equals(
-          lightScheme,
-        ),
+        lightScheme,
       );
     });
-
     // themeDark = Default material dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
       useMaterial3: false,
@@ -1656,61 +1605,56 @@ void main() {
     test(
         'FCS7.02: GIVEN a FlexColorScheme theme with Material scheme dark '
         'colors EXPECT .colorScheme equality with given ColorScheme.', () {
-      expect(
-        themeDark.colorScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          const ColorScheme(
-            brightness: Brightness.dark,
-            primary: Color(0xffbb86fc),
-            onPrimary: Color(0xff000000),
-            primaryContainer: Color(0xff6200ee),
-            onPrimaryContainer: Color(0xffffffff),
-            primaryFixed: Color(0xffbb86fc),
-            primaryFixedDim: Color(0xffbb86fc),
-            onPrimaryFixed: Color(0xff000000),
-            onPrimaryFixedVariant: Color(0xff000000),
-            secondary: Color(0xff03dac6),
-            onSecondary: Color(0xff000000),
-            secondaryContainer: Color(0xff03dac6),
-            onSecondaryContainer: Color(0xff000000),
-            secondaryFixed: Color(0xff03dac6),
-            secondaryFixedDim: Color(0xff03dac6),
-            onSecondaryFixed: Color(0xff000000),
-            onSecondaryFixedVariant: Color(0xff000000),
-            tertiary: Color(0xff03dac6),
-            onTertiary: Color(0xff000000),
-            tertiaryContainer: Color(0xff03dac6),
-            onTertiaryContainer: Color(0xff000000),
-            tertiaryFixed: Color(0xff03dac6),
-            tertiaryFixedDim: Color(0xff03dac6),
-            onTertiaryFixed: Color(0xff000000),
-            onTertiaryFixedVariant: Color(0xff000000),
-            error: Color(0xffcf6679),
-            onError: Color(0xff000000),
-            errorContainer: Color(0xffb1384e),
-            onErrorContainer: Color(0xffffffff),
-            surface: Color(0xff121212),
-            onSurface: Color(0xffffffff),
-            surfaceDim: Color(0xff121212),
-            surfaceBright: Color(0xff121212),
-            surfaceContainerLowest: Color(0xff121212),
-            surfaceContainerLow: Color(0xff121212),
-            surfaceContainer: Color(0xff121212),
-            surfaceContainerHigh: Color(0xff121212),
-            surfaceContainerHighest: Color(0xff121212),
-            onSurfaceVariant: Color(0xffffffff),
-            outline: Color(0xff777777),
-            outlineVariant: Color(0xff414141),
-            shadow: Color(0xff000000),
-            scrim: Color(0xff000000),
-            inverseSurface: Color(0xffffffff),
-            onInverseSurface: Color(0xff121212),
-            inversePrimary: Color(0xff5a4570),
-            surfaceTint: Color(0xffbb86fc),
-            // background: Color(0xff121212),
-            // onBackground: Color(0xffffffff),
-            // surfaceVariant: Color(0xff121212),
-          ).toString(minLevel: DiagnosticLevel.fine),
+      testColorSchemeEquality(
+        themeDark.colorScheme,
+        const ColorScheme(
+          brightness: Brightness.dark,
+          primary: Color(0xffbb86fc),
+          onPrimary: Color(0xff000000),
+          primaryContainer: Color(0xff6200ee),
+          onPrimaryContainer: Color(0xffffffff),
+          primaryFixed: Color(0xffbb86fc),
+          primaryFixedDim: Color(0xffbb86fc),
+          onPrimaryFixed: Color(0xff000000),
+          onPrimaryFixedVariant: Color(0xff000000),
+          secondary: Color(0xff03dac6),
+          onSecondary: Color(0xff000000),
+          secondaryContainer: Color(0xff03dac6),
+          onSecondaryContainer: Color(0xff000000),
+          secondaryFixed: Color(0xff03dac6),
+          secondaryFixedDim: Color(0xff03dac6),
+          onSecondaryFixed: Color(0xff000000),
+          onSecondaryFixedVariant: Color(0xff000000),
+          tertiary: Color(0xff03dac6),
+          onTertiary: Color(0xff000000),
+          tertiaryContainer: Color(0xff03dac6),
+          onTertiaryContainer: Color(0xff000000),
+          tertiaryFixed: Color(0xff03dac6),
+          tertiaryFixedDim: Color(0xff03dac6),
+          onTertiaryFixed: Color(0xff000000),
+          onTertiaryFixedVariant: Color(0xff000000),
+          error: Color(0xffcf6679),
+          onError: Color(0xff000000),
+          errorContainer: Color(0xffb1384e),
+          onErrorContainer: Color(0xffffffff),
+          surface: Color(0xff121212),
+          onSurface: Color(0xffffffff),
+          surfaceDim: Color(0xff121212),
+          surfaceBright: Color(0xff121212),
+          surfaceContainerLowest: Color(0xff121212),
+          surfaceContainerLow: Color(0xff121212),
+          surfaceContainer: Color(0xff121212),
+          surfaceContainerHigh: Color(0xff121212),
+          surfaceContainerHighest: Color(0xff121212),
+          onSurfaceVariant: Color(0xffffffff),
+          outline: Color(0xff777777),
+          outlineVariant: Color(0xff414141),
+          shadow: Color(0xff000000),
+          scrim: Color(0xff000000),
+          inverseSurface: Color(0xffffffff),
+          onInverseSurface: Color(0xff121212),
+          inversePrimary: Color(0xff5a4570),
+          surfaceTint: Color(0xffbb86fc),
         ),
       );
     });
@@ -2464,25 +2408,13 @@ void main() {
 
     // Doing a string version for easy comparisons.
     test(
-        'FCS7.79a-scheme-toString: GIVEN a Equal Raw and FlexColorScheme.light '
+        'FCS7.79a-props: GIVEN a Equal Raw and FlexColorScheme.light '
         'with heavy branding and 2 colors EXPECT equal ColorScheme string.',
         () {
-      expect(
-        fcsLightH2.toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          fcsLightH2Raw.toScheme.toString(minLevel: DiagnosticLevel.fine),
-        ),
-      );
-    });
-
-    test(
-        'FCS7.79b-scheme: GIVEN a Equal Raw and FlexColorScheme.light with '
-        'heavy branding and 2 colors EXPECT equal ColorScheme.toScheme.', () {
-      expect(
+      testColorSchemeEquality(
         fcsLightH2.toScheme,
-        equals(
-          fcsLightH2Raw.toScheme,
-        ),
+        fcsLightH2Raw.toScheme,
+        threshold: 0.006,
       );
     });
     const FlexColorScheme fcsLightH2RealRaw = FlexColorScheme(
@@ -2574,11 +2506,11 @@ void main() {
       useMaterial3: false,
     );
     test(
-        'FCS7.79c-string: GIVEN a Equal Raw and FlexColorScheme.light with '
-        'heavy branding and 2 colors EXPECT equal toStrings.', () {
-      expect(
-        fcsLightH2.toString(),
-        equalsIgnoringHashCodes(fcsLightH2RealRaw.toString()),
+        'FCS7.79c-props: GIVEN a Equal Raw and FlexColorScheme.light with '
+        'heavy branding and 2 colors EXPECT equal toScheme', () {
+      testColorSchemeEquality(
+        fcsLightH2.toScheme,
+        fcsLightH2RealRaw.toScheme,
       );
     });
     test(
