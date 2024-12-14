@@ -558,7 +558,7 @@ void main() {
         'EXPECT color is Color(0xfffcd8df)', () {
       expect(
         FlexColor.lightErrorContainer(FlexColor.materialLightError),
-        equals(const Color(0xfffcd8df)),
+        isSameColorAs(const Color(0xfffcd8df)),
       );
     });
     test('FC5 colors materialLightOnErrorContainer is black', () {

@@ -2773,7 +2773,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Disabled foreground, tinted M3
       expect(
@@ -2783,7 +2783,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
+        isSameColorAs(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.primary)),
       );
       // Disabled foreground, custom, M3
@@ -2793,7 +2793,7 @@ void main() {
           baseSchemeColor: SchemeColor.secondary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Selected foreground, M3
       expect(
@@ -2802,7 +2802,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       // Selected foreground, custom color, M3
       expect(
@@ -2811,7 +2811,7 @@ void main() {
           baseSchemeColor: SchemeColor.secondary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.secondary),
+        isSameColorAs(colorScheme.secondary),
       );
       // Selected foreground, custom colors, M3
       expect(
@@ -2821,7 +2821,7 @@ void main() {
           onBaseSchemeColor: SchemeColor.tertiary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.secondary),
+        isSameColorAs(colorScheme.secondary),
       );
       // Disabled background, M3
       expect(
@@ -2830,7 +2830,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // Disabled background, tinted M3
       expect(
@@ -2840,7 +2840,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
+        isSameColorAs(FlexSubThemes.tintedDisable(
                 colorScheme.onSurface, colorScheme.primary)
             .withAlpha(kAlphaVeryLowDisabled)),
       );
@@ -2851,7 +2851,7 @@ void main() {
           onBaseSchemeColor: SchemeColor.tertiary,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // Disabled background, tinted M3, only onBase given
       expect(
@@ -2861,7 +2861,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
+        isSameColorAs(FlexSubThemes.tintedDisable(
                 colorScheme.onSurface, colorScheme.primary)
             .withAlpha(kAlphaVeryLowDisabled)),
       );
@@ -2881,7 +2881,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.surface),
+        isSameColorAs(colorScheme.surface),
       );
       // Overlay color states
       expect(
@@ -2890,7 +2890,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2898,7 +2898,7 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedHovered(
               colorScheme.surface, colorScheme.primary, 1.5),
         ),
@@ -2909,7 +2909,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2917,7 +2917,7 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedFocused(
               colorScheme.surface, colorScheme.primary, 1.5),
         ),
@@ -2928,7 +2928,7 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2936,7 +2936,7 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: true,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedPressed(
               colorScheme.surface, colorScheme.primary, 1.5),
         ),
@@ -3403,21 +3403,21 @@ void main() {
       expect(
         button.style!.backgroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Default state
       expect(
         button.style!.backgroundColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.onPrimary),
+        isSameColorAs(colorScheme.onPrimary),
       );
       // No custom Overlay unless tinted version is used!
       // Temp design due to: https://github.com/flutter/flutter/issues/118063
@@ -3515,21 +3515,21 @@ void main() {
       expect(
         button.style!.backgroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Default state
       expect(
         button.style!.backgroundColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.onPrimary),
+        isSameColorAs(colorScheme.onPrimary),
       );
       // No custom Overlay unless tinted version is used!
       // Temp design due to: https://github.com/flutter/flutter/issues/118063
@@ -7455,29 +7455,29 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.outlinedButtonTheme(
@@ -7609,25 +7609,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -7683,25 +7683,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.tertiary),
+        isSameColorAs(colorScheme.tertiary),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.tertiary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.tertiary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.tertiary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.tertiary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.tertiary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.tertiary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -9196,7 +9196,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(Colors.grey.shade400),
+        isSameColorAs(Colors.grey.shade400),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9205,7 +9205,7 @@ void main() {
         )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(Colors.grey.shade400),
+        isSameColorAs(Colors.grey.shade400),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9215,7 +9215,7 @@ void main() {
         )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
               colorScheme.onSurface, colorScheme.primary),
         ),
@@ -9226,7 +9226,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
                   colorScheme.onSurface, colorScheme.primary)
               .withAlpha(kAlphaLowDisabled),
@@ -9239,7 +9239,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
                   colorScheme.onSurface, colorScheme.primary)
               .withAlpha(kAlphaVeryLowDisabled),
@@ -9250,7 +9250,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(Colors.black12),
+        isSameColorAs(Colors.black12),
       );
       // Selected background
       expect(
@@ -9258,14 +9258,14 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x70)),
       );
       // Interaction states - Using test with Opacity based SDK values on
       // purpose, to confirm results match alpha based ones used by FCS.
@@ -9275,21 +9275,21 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.08)),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // Non tinted interactions - selected
       expect(
@@ -9299,7 +9299,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9308,7 +9308,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.primary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9317,7 +9317,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       // Tinted interactions
       expect(
@@ -9326,7 +9326,7 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
+        isSameColorAs(FlexSubThemes.tintedPressed(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9335,7 +9335,7 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
+        isSameColorAs(FlexSubThemes.tintedHovered(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9344,7 +9344,7 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
+        isSameColorAs(FlexSubThemes.tintedFocused(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9355,7 +9355,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
+        isSameColorAs(FlexSubThemes.tintedPressed(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9366,7 +9366,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
+        isSameColorAs(FlexSubThemes.tintedHovered(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9377,7 +9377,7 @@ void main() {
         )
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
+        isSameColorAs(FlexSubThemes.tintedFocused(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
 
@@ -9387,7 +9387,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{}),
-        equals(Colors.grey.shade50),
+        isSameColorAs(Colors.grey.shade50),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9395,7 +9395,7 @@ void main() {
           unselectedIsColored: true,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.primary.withAlpha(0x50)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x50)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -9404,7 +9404,7 @@ void main() {
           unselectedIsColored: false,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
-        equals(kSwitchM2LightTrackColor),
+        isSameColorAs(kSwitchM2LightTrackColor),
       );
     });
 
@@ -9489,7 +9489,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(Colors.grey.shade800),
+        isSameColorAs(Colors.grey.shade800),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9498,7 +9498,7 @@ void main() {
         )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(Colors.grey.shade800),
+        isSameColorAs(Colors.grey.shade800),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9508,7 +9508,7 @@ void main() {
         )
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
               colorScheme.onSurface, colorScheme.primary),
         ),
@@ -9519,7 +9519,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
                   colorScheme.onSurface, colorScheme.primary)
               .withAlpha(kAlphaLowDisabled),
@@ -9530,7 +9530,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(Colors.white10),
+        isSameColorAs(Colors.white10),
       );
       // Selected background
       expect(
@@ -9538,14 +9538,14 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary.withAlpha(0x80)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x80)),
       );
       // Default states
       expect(
@@ -9553,7 +9553,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).thumbColor!.resolve(<WidgetState>{}),
-        equals(Colors.grey.shade400),
+        isSameColorAs(Colors.grey.shade400),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9561,7 +9561,7 @@ void main() {
           unselectedIsColored: true,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.primary.withAlpha(0x65)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x65)),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -9570,7 +9570,7 @@ void main() {
           unselectedIsColored: false,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
-        equals(Colors.white30),
+        isSameColorAs(Colors.white30),
       );
     });
     test(
@@ -9695,15 +9695,15 @@ void main() {
       expect(
         switchTheme.thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(colorScheme.surface),
+        isSameColorAs(colorScheme.surface),
       );
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         switchTheme.trackOutlineColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.outline),
+        isSameColorAs(colorScheme.outline),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9711,7 +9711,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
               colorScheme.onSurface, colorScheme.primary),
         ),
@@ -9720,16 +9720,17 @@ void main() {
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.surfaceContainerHighest.withValues(alpha: 0.12)),
+        isSameColorAs(
+            colorScheme.surfaceContainerHighest.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.trackOutlineColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9739,7 +9740,7 @@ void main() {
         )
             .trackColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
               colorScheme.onSurface, colorScheme.primary),
         ),
@@ -9750,7 +9751,7 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).trackOutlineColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(
+        isSameColorAs(
           FlexSubThemes.tintedDisable(
               colorScheme.onSurface, colorScheme.primary),
         ),
@@ -9760,21 +9761,21 @@ void main() {
       expect(
         switchTheme.thumbColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.primaryContainer),
+        isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
         switchTheme.thumbColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.primaryContainer),
+        isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
         switchTheme.thumbColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.primaryContainer),
+        isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.onPrimary),
+        isSameColorAs(colorScheme.onPrimary),
       );
       // Selected track color
       expect(
@@ -9782,22 +9783,22 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary.withAlpha(0x70)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x70)),
       );
       // Pressed color
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.onSurfaceVariant),
+        isSameColorAs(colorScheme.onSurfaceVariant),
       );
       // Hovered color
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.onSurfaceVariant),
+        isSameColorAs(colorScheme.onSurfaceVariant),
       );
       // Focused color
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurfaceVariant),
+        isSameColorAs(colorScheme.onSurfaceVariant),
       );
 
       // Interaction states - Using test with Opacity based SDK values on
@@ -9806,68 +9807,68 @@ void main() {
       // Overlay colors
       expect(
         switchTheme.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.08)),
       );
       expect(
         switchTheme.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       // trackColor
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.surfaceContainerHighest),
+        isSameColorAs(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.surfaceContainerHighest),
+        isSameColorAs(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.surfaceContainerHighest),
+        isSameColorAs(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceContainerHighest),
+        isSameColorAs(colorScheme.surfaceContainerHighest),
       );
 
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       // Non tinted interactions - selected
       expect(
         switchTheme.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.primary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         switchTheme.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       // Tinted interactions
       // Overlay color
@@ -9878,7 +9879,7 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
+        isSameColorAs(FlexSubThemes.tintedPressed(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9888,7 +9889,7 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
+        isSameColorAs(FlexSubThemes.tintedHovered(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9898,7 +9899,7 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
+        isSameColorAs(FlexSubThemes.tintedFocused(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9908,7 +9909,7 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
+        isSameColorAs(FlexSubThemes.tintedPressed(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9918,7 +9919,7 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
+        isSameColorAs(FlexSubThemes.tintedHovered(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
       expect(
@@ -9928,7 +9929,7 @@ void main() {
                 useMaterial3: true)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
+        isSameColorAs(FlexSubThemes.tintedFocused(
             colorScheme.surface, colorScheme.primary, 1.5)),
       );
 
@@ -9941,7 +9942,7 @@ void main() {
                 useMaterial3: true)
             .trackColor!
             .resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withAlpha(0x33)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9950,7 +9951,7 @@ void main() {
                 useMaterial3: true)
             .trackColor!
             .resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withAlpha(0x33)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9959,7 +9960,7 @@ void main() {
                 useMaterial3: true)
             .trackColor!
             .resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withAlpha(0x33)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9968,21 +9969,21 @@ void main() {
                 useMaterial3: true)
             .trackColor!
             .resolve(<WidgetState>{}),
-        equals(colorScheme.primary.withAlpha(0x33)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
 
       // Default states
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.outline),
+        isSameColorAs(colorScheme.outline),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceContainerHighest),
+        isSameColorAs(colorScheme.surfaceContainerHighest),
       );
       expect(
         switchTheme.trackOutlineColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.outline),
+        isSameColorAs(colorScheme.outline),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -9991,7 +9992,7 @@ void main() {
           unselectedIsColored: false,
           useMaterial3: true,
         ).trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.surfaceContainerHighest),
+        isSameColorAs(colorScheme.surfaceContainerHighest),
       );
       // Default state for trackColor when unselectedIsColored, is true
       expect(
@@ -10000,7 +10001,7 @@ void main() {
           unselectedIsColored: true,
           useMaterial3: true,
         ).trackColor!.resolve(<WidgetState>{}),
-        equals(colorScheme.primary.withAlpha(0x33)),
+        isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
     });
 
@@ -10028,18 +10029,18 @@ void main() {
       // Disabled thumb colors
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(Colors.white.withValues(alpha: 0.5)),
+        isSameColorAs(Colors.white.withValues(alpha: 0.5)),
       );
       // All other thumb colors
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{}),
-        equals(Colors.white),
+        isSameColorAs(Colors.white),
       );
       // Track colors
       const CupertinoDynamicColor cup = CupertinoColors.secondarySystemFill;
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{}),
-        equals(cup.color),
+        isSameColorAs(cup.color),
       );
       // Disabled selected track colors
       expect(
@@ -10049,16 +10050,17 @@ void main() {
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(cup.color.withValues(alpha: 0.07)),
+        isSameColorAs(cup.color.withValues(alpha: 0.07)),
       );
       // Track outline color focused
       expect(
         switchTheme.trackOutlineColor!
             .resolve(<WidgetState>{WidgetState.focused}),
-        equals(HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
-            .withLightness(0.69)
-            .withSaturation(0.835)
-            .toColor()),
+        isSameColorAs(
+            HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
+                .withLightness(0.69)
+                .withSaturation(0.835)
+                .toColor()),
       );
       // Track outline color all other cases
       expect(
@@ -10112,26 +10114,27 @@ void main() {
       const CupertinoDynamicColor cup = CupertinoColors.secondarySystemFill;
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{}),
-        equals(cup.darkColor),
+        isSameColorAs(cup.darkColor),
       );
       // Disabled selected track colors
       expect(
         switchTheme.trackColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(colorScheme.primary.withValues(alpha: 0.5)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.5)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(cup.darkColor.withValues(alpha: 0.16)),
+        isSameColorAs(cup.darkColor.withValues(alpha: 0.16)),
       );
       // Track outline color focused
       expect(
         switchTheme.trackOutlineColor!
             .resolve(<WidgetState>{WidgetState.focused}),
-        equals(HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
-            .withLightness(0.69)
-            .withSaturation(0.835)
-            .toColor()),
+        isSameColorAs(
+            HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
+                .withLightness(0.69)
+                .withSaturation(0.835)
+                .toColor()),
       );
     });
   });
@@ -10154,23 +10157,23 @@ void main() {
       );
       expect(
         m.dividerColor,
-        equals(colorScheme.outline),
+        isSameColorAs(colorScheme.outline),
       );
       // Overlay color
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.tertiary.withAlpha(kAlphaHovered)),
+        isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaHovered)),
       );
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.tertiary.withAlpha(kAlphaFocused)),
+        isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaFocused)),
       );
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.tertiary.withAlpha(kAlphaPressed)),
+        isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaPressed)),
       );
       expect(
         m.overlayColor?.resolve(<WidgetState>{WidgetState.selected}),
@@ -10178,15 +10181,15 @@ void main() {
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
+        isSameColorAs(colorScheme.onSurface.withAlpha(kAlphaHovered)),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurface.withAlpha(kAlphaFocused)),
+        isSameColorAs(colorScheme.onSurface.withAlpha(kAlphaFocused)),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.tertiary.withAlpha(kAlphaPressed)),
+        isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaPressed)),
       );
       expect(
         m.overlayColor?.resolve(<WidgetState>{}),
@@ -10203,17 +10206,17 @@ void main() {
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.primary.withAlpha(kAlphaHovered)),
+        isSameColorAs(colorScheme.primary.withAlpha(kAlphaHovered)),
       );
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.primary.withAlpha(kAlphaFocused)),
+        isSameColorAs(colorScheme.primary.withAlpha(kAlphaFocused)),
       );
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.primary.withAlpha(kAlphaPressed)),
+        isSameColorAs(colorScheme.primary.withAlpha(kAlphaPressed)),
       );
       expect(
         m.overlayColor?.resolve(<WidgetState>{WidgetState.selected}),
@@ -10221,15 +10224,15 @@ void main() {
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withAlpha(kAlphaHovered)),
+        isSameColorAs(colorScheme.primary.withAlpha(kAlphaHovered)),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withAlpha(kAlphaFocused)),
+        isSameColorAs(colorScheme.primary.withAlpha(kAlphaFocused)),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withAlpha(kAlphaPressed)),
+        isSameColorAs(colorScheme.primary.withAlpha(kAlphaPressed)),
       );
       expect(
         m.overlayColor?.resolve(<WidgetState>{}),
@@ -10245,17 +10248,17 @@ void main() {
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(colorScheme.secondary.withAlpha(kAlphaHovered)),
+        isSameColorAs(colorScheme.secondary.withAlpha(kAlphaHovered)),
       );
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(colorScheme.secondary.withAlpha(kAlphaFocused)),
+        isSameColorAs(colorScheme.secondary.withAlpha(kAlphaFocused)),
       );
       expect(
         m.overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(colorScheme.secondary.withAlpha(kAlphaPressed)),
+        isSameColorAs(colorScheme.secondary.withAlpha(kAlphaPressed)),
       );
       expect(
         m.overlayColor?.resolve(<WidgetState>{WidgetState.selected}),
@@ -10263,15 +10266,15 @@ void main() {
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
+        isSameColorAs(colorScheme.onSurface.withAlpha(kAlphaHovered)),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.onSurface.withAlpha(kAlphaFocused)),
+        isSameColorAs(colorScheme.onSurface.withAlpha(kAlphaFocused)),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.secondary.withAlpha(kAlphaPressed)),
+        isSameColorAs(colorScheme.secondary.withAlpha(kAlphaPressed)),
       );
       expect(
         m.overlayColor?.resolve(<WidgetState>{}),
@@ -10396,25 +10399,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -10441,25 +10444,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.tertiary),
+        isSameColorAs(colorScheme.tertiary),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
+        isSameColorAs(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
+        isSameColorAs(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
+        isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!
@@ -10484,25 +10487,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(colorScheme.onSurface.withValues(alpha: 0.38)),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primary),
+        isSameColorAs(colorScheme.primary),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(colorScheme.primary.withValues(alpha: 0.08)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(colorScheme.primary.withValues(alpha: 0.12)),
+        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
         button.style!.overlayColor!
@@ -10541,25 +10544,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primaryContainer),
+        isSameColorAs(colorScheme.primaryContainer),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 4.0)),
+        isSameColorAs(FlexSubThemes.tintedHovered(overlay, tint, 4.0)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 4.0)),
+        isSameColorAs(FlexSubThemes.tintedFocused(overlay, tint, 4.0)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 4.0)),
+        isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 4.0)),
       );
       expect(
         button.style!.overlayColor!
@@ -10594,25 +10597,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.tertiary),
+        isSameColorAs(colorScheme.tertiary),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
+        isSameColorAs(FlexSubThemes.tintedHovered(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
+        isSameColorAs(FlexSubThemes.tintedFocused(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
+        isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
       );
       expect(
         button.style!.overlayColor!
@@ -10647,7 +10650,7 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
         button.style!.foregroundColor!
@@ -10657,15 +10660,15 @@ void main() {
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 2)),
+        isSameColorAs(FlexSubThemes.tintedHovered(overlay, tint, 2)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 2)),
+        isSameColorAs(FlexSubThemes.tintedFocused(overlay, tint, 2)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 2)),
+        isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 2)),
       );
       expect(
         button.style!.overlayColor!
@@ -10701,25 +10704,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        equals(colorScheme.primaryContainer),
+        isSameColorAs(colorScheme.primaryContainer),
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(overlay, tint, 5)),
+        isSameColorAs(FlexSubThemes.tintedHovered(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(overlay, tint, 5)),
+        isSameColorAs(FlexSubThemes.tintedFocused(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(overlay, tint, 5)),
+        isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 5)),
       );
       expect(
         button.style!.overlayColor!

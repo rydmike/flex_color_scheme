@@ -225,7 +225,7 @@ void main() {
       // error color used in the design guide. At the same time it verifies
       // that the here used "white blend" method is the one referred to in the
       // design guide.
-      expect(m1.toDark(40).error, FlexColor.materialDarkError);
+      expect(m1.toDark(40).error, isSameColorAs(FlexColor.materialDarkError));
     });
 
     test(
@@ -1261,7 +1261,7 @@ void main() {
           //
           equalsIgnoringHashCodes(
               // ignore: lines_longer_than_80_chars
-              'FlexSchemeColor#00000(primary: Color(0xff6200ee), primaryContainer: Color(0xffbb86fc), primaryLightRef: Color(0xff6200ee), secondary: Color(0xff03dac6), secondaryContainer: Color(0xff03dac6), secondaryLightRef: Color(0xff03dac6), tertiary: Color(0xff018786), tertiaryContainer: Color(0xff018786), tertiaryLightRef: Color(0xff018786), appBarColor: Color(0xff018786), error: Color(0xffb00020), errorContainer: null, swapOnMaterial3: false)'));
+              'FlexSchemeColor#0034c(primary: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), primaryContainer: Color(alpha: 1.0000, red: 0.7333, green: 0.5255, blue: 0.9882, colorSpace: ColorSpace.sRGB), primaryLightRef: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), secondary: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), secondaryContainer: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), secondaryLightRef: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), tertiary: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryContainer: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryLightRef: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), appBarColor: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), error: Color(alpha: 1.0000, red: 0.6902, green: 0.0000, blue: 0.1255, colorSpace: ColorSpace.sRGB), errorContainer: null, swapOnMaterial3: false)'));
     });
     test(
         'FSC1.37: Test toStringShort implemented via debugFillProperties '

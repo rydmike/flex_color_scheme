@@ -288,11 +288,11 @@ void main() {
       final ThemeData fcsTheme = fcs.toTheme;
       expect(
         fcsTheme.navigationRailTheme.indicatorColor,
-        equals(fcsScheme.onTertiary.withValues(alpha: 0.5)),
+        isSameColorAs(fcsScheme.onTertiary.withValues(alpha: 0.5)),
       );
       expect(
         fcsTheme.navigationBarTheme.indicatorColor,
-        equals(fcsScheme.primaryContainer.withValues(alpha: 0.8)),
+        isSameColorAs(fcsScheme.primaryContainer.withValues(alpha: 0.8)),
       );
     });
     //
@@ -319,11 +319,11 @@ void main() {
       );
       expect(
         fcsTheme.textSelectionTheme.selectionColor,
-        equals(fcsScheme.primary.withValues(alpha: 0.3)),
+        isSameColorAs(fcsScheme.primary.withValues(alpha: 0.3)),
       );
       expect(
         fcsTheme.textSelectionTheme.selectionHandleColor,
-        equals(fcsScheme.primary),
+        isSameColorAs(fcsScheme.primary),
       );
     });
     test(
@@ -343,15 +343,15 @@ void main() {
       final ThemeData fcsTheme = fcs.toTheme;
       expect(
         fcsTheme.textSelectionTheme.cursorColor,
-        equals(fcsScheme.primary),
+        isSameColorAs(fcsScheme.primary),
       );
       expect(
         fcsTheme.textSelectionTheme.selectionColor,
-        equals(fcsScheme.primary.withValues(alpha: 0.5)),
+        isSameColorAs(fcsScheme.primary.withValues(alpha: 0.5)),
       );
       expect(
         fcsTheme.textSelectionTheme.selectionHandleColor,
-        equals(fcsScheme.primary),
+        isSameColorAs(fcsScheme.primary),
       );
     });
     test(
@@ -372,15 +372,15 @@ void main() {
       final ThemeData fcsTheme = fcs.toTheme;
       expect(
         fcsTheme.textSelectionTheme.cursorColor,
-        equals(fcsScheme.tertiary),
+        isSameColorAs(fcsScheme.tertiary),
       );
       expect(
         fcsTheme.textSelectionTheme.selectionColor,
-        equals(fcsScheme.tertiary.withValues(alpha: 0.3)),
+        isSameColorAs(fcsScheme.tertiary.withValues(alpha: 0.3)),
       );
       expect(
         fcsTheme.textSelectionTheme.selectionHandleColor,
-        equals(fcsScheme.tertiary),
+        isSameColorAs(fcsScheme.tertiary),
       );
     });
     test(
@@ -401,15 +401,15 @@ void main() {
       final ThemeData fcsTheme = fcs.toTheme;
       expect(
         fcsTheme.textSelectionTheme.cursorColor,
-        equals(fcsScheme.secondary),
+        isSameColorAs(fcsScheme.secondary),
       );
       expect(
         fcsTheme.textSelectionTheme.selectionColor,
-        equals(fcsScheme.onPrimaryContainer.withValues(alpha: 0.35)),
+        isSameColorAs(fcsScheme.onPrimaryContainer.withValues(alpha: 0.35)),
       );
       expect(
         fcsTheme.textSelectionTheme.selectionHandleColor,
-        equals(fcsScheme.onTertiaryContainer),
+        isSameColorAs(fcsScheme.onTertiaryContainer),
       );
     });
     //

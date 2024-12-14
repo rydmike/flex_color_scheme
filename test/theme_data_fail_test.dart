@@ -47,13 +47,13 @@ void main() {
       );
       expect(td1, equals(td2));
     });
-    // TODO(rydmike): This test is failing equality test, but it should not.
-    //  This will be fixed when Flutter stops usings callback for WidgetState
-    //  properties. This test is here to monitor that and will fail when
-    //  Flutter has moved to this new feature:
-    //  Related issue: https://github.com/flutter/flutter/issues/89127
-    //  And new feature PR: https://github.com/flutter/flutter/pull/154695
-    test('Same ThemeData with TextButtonThemeData styleFrom theme is NOT equal',
+    // This test was fixed in Flutter 3.27.0 when it stopped stops using
+    // callback for WidgetState  properties.
+    // Flutter has moved to this new feature:
+    // Related issue: https://github.com/flutter/flutter/issues/89127
+    // And new feature PR: https://github.com/flutter/flutter/pull/154695
+    // Time to start exploring this fromMap feature in all FCS component themes!
+    test('Same ThemeData with TextButtonThemeData styleFrom theme is equal',
         () {
       final ThemeData td1 = ThemeData(
         textButtonTheme: TextButtonThemeData(
@@ -65,7 +65,7 @@ void main() {
           style: TextButton.styleFrom(elevation: 1),
         ),
       );
-      expect(td1, isNot(td2));
+      expect(td1, equals(td2));
     });
   });
 }

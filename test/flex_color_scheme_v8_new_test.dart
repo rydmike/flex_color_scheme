@@ -14,53 +14,53 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.primaryFixed,
-        equals(const Color(0xFFDDD7EB)),
+        isSameColorAs(const Color(0xFFDDD7EB)),
       );
       expect(
         theme.colorScheme.onPrimaryFixed,
-        equals(const Color(0xFF2B2145)),
+        isSameColorAs(const Color(0xFF2B2145)),
       );
       expect(
         theme.colorScheme.primaryFixedDim,
-        equals(const Color(0xFFBBB1D8)),
+        isSameColorAs(const Color(0xFFBBB1D8)),
       );
       expect(
         theme.colorScheme.onPrimaryFixedVariant,
-        equals(const Color(0xFF332851)),
+        isSameColorAs(const Color(0xFF332851), threshold: 0.005),
       );
       //
       expect(
         theme.colorScheme.secondaryFixed,
-        equals(const Color(0xFFDCDAE1)),
+        isSameColorAs(const Color(0xFFDCDAE1)),
       );
       expect(
         theme.colorScheme.onSecondaryFixed,
-        equals(const Color(0xFF232129)),
+        isSameColorAs(const Color(0xFF232129)),
       );
       expect(
         theme.colorScheme.secondaryFixedDim,
-        equals(const Color(0xFFBCB8C3)),
+        isSameColorAs(const Color(0xFFBCB8C3), threshold: 0.007),
       );
       expect(
         theme.colorScheme.onSecondaryFixedVariant,
-        equals(const Color(0xFF2C2933)),
+        isSameColorAs(const Color(0xFF2C2933)),
       );
       //
       expect(
         theme.colorScheme.tertiaryFixed,
-        equals(const Color(0xFFE4D7DB)),
+        isSameColorAs(const Color(0xFFE4D7DB)),
       );
       expect(
         theme.colorScheme.onTertiaryFixed,
-        equals(const Color(0xFF2E1E23)),
+        isSameColorAs(const Color(0xFF2E1E23)),
       );
       expect(
         theme.colorScheme.tertiaryFixedDim,
-        equals(const Color(0xFFC9B4BB)),
+        isSameColorAs(const Color(0xFFC9B4BB)),
       );
       expect(
         theme.colorScheme.onTertiaryFixedVariant,
-        equals(const Color(0xFF39252C)),
+        isSameColorAs(const Color(0xFF39252C)),
       );
     });
     test(
@@ -73,53 +73,53 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.primaryFixed,
-        equals(const Color(0xFFDDD7EB)),
+        isSameColorAs(const Color(0xFFDDD7EB)),
       );
       expect(
         theme.colorScheme.onPrimaryFixed,
-        equals(const Color(0xFF2B2145)),
+        isSameColorAs(const Color(0xFF2B2145)),
       );
       expect(
         theme.colorScheme.primaryFixedDim,
-        equals(const Color(0xFFBBB1D8)),
+        isSameColorAs(const Color(0xFFBBB1D8)),
       );
       expect(
         theme.colorScheme.onPrimaryFixedVariant,
-        equals(const Color(0xFF332851)),
+        isSameColorAs(const Color(0xFF332851)),
       );
       //
       expect(
         theme.colorScheme.secondaryFixed,
-        equals(const Color(0xFFDCDAE1)),
+        isSameColorAs(const Color(0xFFDCDAE1)),
       );
       expect(
         theme.colorScheme.onSecondaryFixed,
-        equals(const Color(0xFF232129)),
+        isSameColorAs(const Color(0xFF232129)),
       );
       expect(
         theme.colorScheme.secondaryFixedDim,
-        equals(const Color(0xFFBCB8C3)),
+        isSameColorAs(const Color(0xFFBCB8C3), threshold: 0.007),
       );
       expect(
         theme.colorScheme.onSecondaryFixedVariant,
-        equals(const Color(0xFF2C2933)),
+        isSameColorAs(const Color(0xFF2C2933)),
       );
       //
       expect(
         theme.colorScheme.tertiaryFixed,
-        equals(const Color(0xFFE4D7DB)),
+        isSameColorAs(const Color(0xFFE4D7DB)),
       );
       expect(
         theme.colorScheme.onTertiaryFixed,
-        equals(const Color(0xFF2E1E23)),
+        isSameColorAs(const Color(0xFF2E1E23)),
       );
       expect(
         theme.colorScheme.tertiaryFixedDim,
-        equals(const Color(0xFFC9B4BB)),
+        isSameColorAs(const Color(0xFFC9B4BB)),
       );
       expect(
         theme.colorScheme.onTertiaryFixedVariant,
-        equals(const Color(0xFF39252C)),
+        isSameColorAs(const Color(0xFF39252C)),
       );
     });
     test(
@@ -132,53 +132,53 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.primaryFixed,
-        equals(const Color(0xFFE9DDFF)),
+        isSameColorAs(const Color(0xFFE9DDFF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixed,
-        equals(const Color(0xFF22005D)),
+        isSameColorAs(const Color(0xFF22005D)),
       );
       expect(
         theme.colorScheme.primaryFixedDim,
-        equals(const Color(0xFFCFBCFF)),
+        isSameColorAs(const Color(0xFFCFBCFF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixedVariant,
-        equals(const Color(0xFF4F378A)),
+        isSameColorAs(const Color(0xFF4F378A)),
       );
       //
       expect(
         theme.colorScheme.secondaryFixed,
-        equals(const Color(0xFFE8DEF9)),
+        isSameColorAs(const Color(0xFFE8DEF9)),
       );
       expect(
         theme.colorScheme.onSecondaryFixed,
-        equals(const Color(0xFF1E192B)),
+        isSameColorAs(const Color(0xFF1E192B)),
       );
       expect(
         theme.colorScheme.secondaryFixedDim,
-        equals(const Color(0xFFCCC2DC)),
+        isSameColorAs(const Color(0xFFCCC2DC)),
       );
       expect(
         theme.colorScheme.onSecondaryFixedVariant,
-        equals(const Color(0xFF4A4358)),
+        isSameColorAs(const Color(0xFF4A4358)),
       );
       //
       expect(
         theme.colorScheme.tertiaryFixed,
-        equals(const Color(0xFFFFD9E3)),
+        isSameColorAs(const Color(0xFFFFD9E3)),
       );
       expect(
         theme.colorScheme.onTertiaryFixed,
-        equals(const Color(0xFF31111D)),
+        isSameColorAs(const Color(0xFF31111D)),
       );
       expect(
         theme.colorScheme.tertiaryFixedDim,
-        equals(const Color(0xFFEEB8C8)),
+        isSameColorAs(const Color(0xFFEEB8C8)),
       );
       expect(
         theme.colorScheme.onTertiaryFixedVariant,
-        equals(const Color(0xFF633B48)),
+        isSameColorAs(const Color(0xFF633B48)),
       );
     });
     test(
@@ -191,53 +191,53 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.primaryFixed,
-        equals(const Color(0xFFE9DDFF)),
+        isSameColorAs(const Color(0xFFE9DDFF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixed,
-        equals(const Color(0xFF22005D)),
+        isSameColorAs(const Color(0xFF22005D)),
       );
       expect(
         theme.colorScheme.primaryFixedDim,
-        equals(const Color(0xFFCFBCFF)),
+        isSameColorAs(const Color(0xFFCFBCFF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixedVariant,
-        equals(const Color(0xFF4F378A)),
+        isSameColorAs(const Color(0xFF4F378A)),
       );
       //
       expect(
         theme.colorScheme.secondaryFixed,
-        equals(const Color(0xFFE8DEF9)),
+        isSameColorAs(const Color(0xFFE8DEF9)),
       );
       expect(
         theme.colorScheme.onSecondaryFixed,
-        equals(const Color(0xFF1E192B)),
+        isSameColorAs(const Color(0xFF1E192B)),
       );
       expect(
         theme.colorScheme.secondaryFixedDim,
-        equals(const Color(0xFFCCC2DC)),
+        isSameColorAs(const Color(0xFFCCC2DC)),
       );
       expect(
         theme.colorScheme.onSecondaryFixedVariant,
-        equals(const Color(0xFF4A4358)),
+        isSameColorAs(const Color(0xFF4A4358)),
       );
       //
       expect(
         theme.colorScheme.tertiaryFixed,
-        equals(const Color(0xFFFFD9E3)),
+        isSameColorAs(const Color(0xFFFFD9E3)),
       );
       expect(
         theme.colorScheme.onTertiaryFixed,
-        equals(const Color(0xFF31111D)),
+        isSameColorAs(const Color(0xFF31111D)),
       );
       expect(
         theme.colorScheme.tertiaryFixedDim,
-        equals(const Color(0xFFEEB8C8)),
+        isSameColorAs(const Color(0xFFEEB8C8)),
       );
       expect(
         theme.colorScheme.onTertiaryFixedVariant,
-        equals(const Color(0xFF633B48)),
+        isSameColorAs(const Color(0xFF633B48)),
       );
     });
     test(
@@ -250,53 +250,53 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.primaryFixed,
-        equals(const Color(0xFFEEE4FF)),
+        isSameColorAs(const Color(0xFFEEE4FF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixed,
-        equals(const Color(0xFF190048)),
+        isSameColorAs(const Color(0xFF190048)),
       );
       expect(
         theme.colorScheme.primaryFixedDim,
-        equals(const Color(0xFFD9CAFF)),
+        isSameColorAs(const Color(0xFFD9CAFF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixedVariant,
-        equals(const Color(0xFF260661)),
+        isSameColorAs(const Color(0xFF260661)),
       );
       //
       expect(
         theme.colorScheme.secondaryFixed,
-        equals(const Color(0xFFEEE4FE)),
+        isSameColorAs(const Color(0xFFEEE4FE)),
       );
       expect(
         theme.colorScheme.onSecondaryFixed,
-        equals(const Color(0xFF161023)),
+        isSameColorAs(const Color(0xFF161023)),
       );
       expect(
         theme.colorScheme.secondaryFixedDim,
-        equals(const Color(0xFFD7CDE7)),
+        isSameColorAs(const Color(0xFFD7CDE7)),
       );
       expect(
         theme.colorScheme.onSecondaryFixedVariant,
-        equals(const Color(0xFF221D2F)),
+        isSameColorAs(const Color(0xFF221D2F)),
       );
       //
       expect(
         theme.colorScheme.tertiaryFixed,
-        equals(const Color(0xFFFFE1E8)),
+        isSameColorAs(const Color(0xFFFFE1E8)),
       );
       expect(
         theme.colorScheme.onTertiaryFixed,
-        equals(const Color(0xFF270915)),
+        isSameColorAs(const Color(0xFF270915)),
       );
       expect(
         theme.colorScheme.tertiaryFixedDim,
-        equals(const Color(0xFFFAC3D3)),
+        isSameColorAs(const Color(0xFFFAC3D3)),
       );
       expect(
         theme.colorScheme.onTertiaryFixedVariant,
-        equals(const Color(0xFF361521)),
+        isSameColorAs(const Color(0xFF361521)),
       );
     });
     test(
@@ -309,53 +309,53 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.primaryFixed,
-        equals(const Color(0xFFEEE4FF)),
+        isSameColorAs(const Color(0xFFEEE4FF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixed,
-        equals(const Color(0xFF190048)),
+        isSameColorAs(const Color(0xFF190048)),
       );
       expect(
         theme.colorScheme.primaryFixedDim,
-        equals(const Color(0xFFD9CAFF)),
+        isSameColorAs(const Color(0xFFD9CAFF)),
       );
       expect(
         theme.colorScheme.onPrimaryFixedVariant,
-        equals(const Color(0xFF260661)),
+        isSameColorAs(const Color(0xFF260661)),
       );
       //
       expect(
         theme.colorScheme.secondaryFixed,
-        equals(const Color(0xFFEEE4FE)),
+        isSameColorAs(const Color(0xFFEEE4FE)),
       );
       expect(
         theme.colorScheme.onSecondaryFixed,
-        equals(const Color(0xFF161023)),
+        isSameColorAs(const Color(0xFF161023)),
       );
       expect(
         theme.colorScheme.secondaryFixedDim,
-        equals(const Color(0xFFD7CDE7)),
+        isSameColorAs(const Color(0xFFD7CDE7)),
       );
       expect(
         theme.colorScheme.onSecondaryFixedVariant,
-        equals(const Color(0xFF221D2F)),
+        isSameColorAs(const Color(0xFF221D2F)),
       );
       //
       expect(
         theme.colorScheme.tertiaryFixed,
-        equals(const Color(0xFFFFE1E8)),
+        isSameColorAs(const Color(0xFFFFE1E8)),
       );
       expect(
         theme.colorScheme.onTertiaryFixed,
-        equals(const Color(0xFF270915)),
+        isSameColorAs(const Color(0xFF270915)),
       );
       expect(
         theme.colorScheme.tertiaryFixedDim,
-        equals(const Color(0xFFFAC3D3)),
+        isSameColorAs(const Color(0xFFFAC3D3)),
       );
       expect(
         theme.colorScheme.onTertiaryFixedVariant,
-        equals(const Color(0xFF361521)),
+        isSameColorAs(const Color(0xFF361521)),
       );
     });
   });
@@ -369,7 +369,7 @@ void main() {
       // Test FlexScaffoldBaseColor.lowestBase
       expect(
         FlexScaffoldBaseColor.lowestBase.color(null),
-        equals(Colors.white),
+        isSameColorAs(Colors.white),
       );
       expect(
         FlexScaffoldBaseColor.lowestBase.color(
@@ -377,7 +377,7 @@ void main() {
           brightness: Brightness.light,
           useMaterial3: true,
         ),
-        equals(Colors.white),
+        isSameColorAs(Colors.white),
       );
       expect(
         FlexScaffoldBaseColor.lowestBase.color(
@@ -385,7 +385,7 @@ void main() {
           brightness: Brightness.light,
           useMaterial3: false,
         ),
-        equals(Colors.white),
+        isSameColorAs(Colors.white),
       );
       expect(
         FlexScaffoldBaseColor.lowestBase.getName(true),
@@ -394,7 +394,7 @@ void main() {
       // Test FlexScaffoldBaseColor.surface
       expect(
         FlexScaffoldBaseColor.surface.color(null),
-        equals(FlexColor.lightFlexSurface),
+        isSameColorAs(FlexColor.lightFlexSurface),
       );
       expect(
         FlexScaffoldBaseColor.surface.color(
@@ -402,7 +402,7 @@ void main() {
           brightness: Brightness.light,
           useMaterial3: true,
         ),
-        equals(FlexColor.lightFlexSurface),
+        isSameColorAs(FlexColor.lightFlexSurface),
       );
       expect(
         FlexScaffoldBaseColor.surface.color(
@@ -410,11 +410,11 @@ void main() {
           brightness: Brightness.light,
           useMaterial3: false,
         ),
-        equals(FlexColor.materialLightScaffoldBackground),
+        isSameColorAs(FlexColor.materialLightScaffoldBackground),
       );
       expect(
         FlexScaffoldBaseColor.surface.color(scheme),
-        equals(scheme.surface),
+        isSameColorAs(scheme.surface),
       );
       expect(
         FlexScaffoldBaseColor.surface.getName(true),
@@ -423,7 +423,7 @@ void main() {
       // Test FlexScaffoldBaseColor.surfaceDim
       expect(
         FlexScaffoldBaseColor.surfaceDim.color(null),
-        equals(FlexColor.lightFlexSurfaceDim),
+        isSameColorAs(FlexColor.lightFlexSurfaceDim),
       );
       expect(
         FlexScaffoldBaseColor.surfaceDim.color(
@@ -431,7 +431,7 @@ void main() {
           brightness: Brightness.light,
           useMaterial3: true,
         ),
-        equals(FlexColor.lightFlexSurfaceDim),
+        isSameColorAs(FlexColor.lightFlexSurfaceDim),
       );
       expect(
         FlexScaffoldBaseColor.surfaceDim.color(
@@ -439,11 +439,11 @@ void main() {
           brightness: Brightness.light,
           useMaterial3: false,
         ),
-        equals(FlexColor.lightFlexSurfaceDim),
+        isSameColorAs(FlexColor.lightFlexSurfaceDim),
       );
       expect(
         FlexScaffoldBaseColor.surfaceDim.color(scheme),
-        equals(scheme.surfaceDim),
+        isSameColorAs(scheme.surfaceDim),
       );
       expect(
         FlexScaffoldBaseColor.surfaceDim.getName(true),
@@ -452,7 +452,7 @@ void main() {
       // Test FlexScaffoldBaseColor.surfaceBright
       expect(
         FlexScaffoldBaseColor.surfaceBright.color(null),
-        equals(FlexColor.lightFlexSurfaceBright),
+        isSameColorAs(FlexColor.lightFlexSurfaceBright),
       );
       expect(
         FlexScaffoldBaseColor.surfaceBright.color(
@@ -934,59 +934,59 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.error,
-        equals(error),
+        isSameColorAs(error),
       );
       expect(
         theme.colorScheme.errorContainer,
-        equals(errorContainer),
+        isSameColorAs(errorContainer),
       );
       expect(
         theme.colorScheme.onPrimaryContainer,
-        equals(const Color(0xFF554500)),
+        isSameColorAs(const Color(0xFF554500)),
       );
       expect(
         theme.colorScheme.onSecondaryContainer,
-        equals(const Color(0xFF54442A)),
+        isSameColorAs(const Color(0xFF54442A)),
       );
       expect(
         theme.colorScheme.onTertiaryContainer,
-        equals(const Color(0xFF594319)),
+        isSameColorAs(const Color(0xFF594319)),
       );
       expect(
         theme.scaffoldBackgroundColor,
-        equals(theme.colorScheme.surfaceDim),
+        isSameColorAs(theme.colorScheme.surfaceDim),
       );
       expect(
         theme.dialogBackgroundColor,
-        equals(theme.colorScheme.surfaceContainerHigh),
+        isSameColorAs(theme.colorScheme.surfaceContainerHigh),
       );
       expect(
         theme.disabledColor,
-        equals(const Color(0x612C2505)),
+        isSameColorAs(const Color(0x612C2505)),
       );
       expect(
         theme.hoverColor,
-        equals(const Color(0x114E4009)),
+        isSameColorAs(const Color(0x114E4009)),
       );
       expect(
         theme.focusColor,
-        equals(const Color(0x1C4E4009)),
+        isSameColorAs(const Color(0x1C4E4009)),
       );
       expect(
         theme.highlightColor,
-        equals(const Color(0x0F483C08)),
+        isSameColorAs(const Color(0x0F483C08)),
       );
       expect(
         theme.splashColor,
-        equals(const Color(0x10483C08)),
+        isSameColorAs(const Color(0x10483C08)),
       );
       expect(
         theme.appBarTheme.actionsIconTheme!.color,
-        equals(theme.colorScheme.tertiary),
+        isSameColorAs(theme.colorScheme.tertiary),
       );
       expect(
         theme.appBarTheme.iconTheme!.color,
-        equals(theme.colorScheme.tertiaryContainer),
+        isSameColorAs(theme.colorScheme.tertiaryContainer),
       );
     });
     test(
@@ -1025,59 +1025,59 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.colorScheme.error,
-        equals(error),
+        isSameColorAs(error),
       );
       expect(
         theme.colorScheme.errorContainer,
-        equals(errorContainer),
+        isSameColorAs(errorContainer),
       );
       expect(
         theme.colorScheme.onPrimaryContainer,
-        equals(const Color(0xFFFCE186)),
+        isSameColorAs(const Color(0xFFFCE186)),
       );
       expect(
         theme.colorScheme.onSecondaryContainer,
-        equals(const Color(0xFFF8DFBB)),
+        isSameColorAs(const Color(0xFFF8DFBB)),
       );
       expect(
         theme.colorScheme.onTertiaryContainer,
-        equals(const Color(0xFFFFDEA8)),
+        isSameColorAs(const Color(0xFFFFDEA8)),
       );
       expect(
         theme.scaffoldBackgroundColor,
-        equals(theme.colorScheme.surfaceBright),
+        isSameColorAs(theme.colorScheme.surfaceBright),
       );
       expect(
         theme.dialogBackgroundColor,
-        equals(theme.colorScheme.surfaceContainerHigh),
+        isSameColorAs(theme.colorScheme.surfaceContainerHigh),
       );
       expect(
         theme.disabledColor,
-        equals(const Color(0x61F1E7C5)),
+        isSameColorAs(const Color(0x61F1E7C5)),
       );
       expect(
         theme.hoverColor,
-        equals(const Color(0x11E7D699)),
+        isSameColorAs(const Color(0x11E7D699)),
       );
       expect(
         theme.focusColor,
-        equals(const Color(0x1CE7D699)),
+        isSameColorAs(const Color(0x1CE7D699)),
       );
       expect(
         theme.highlightColor,
-        equals(const Color(0x0FE9D9A1)),
+        isSameColorAs(const Color(0x0FE9D9A1)),
       );
       expect(
         theme.splashColor,
-        equals(const Color(0x10E9D9A1)),
+        isSameColorAs(const Color(0x10E9D9A1)),
       );
       expect(
         theme.appBarTheme.actionsIconTheme!.color,
-        equals(theme.colorScheme.primary),
+        isSameColorAs(theme.colorScheme.primary),
       );
       expect(
         theme.appBarTheme.iconTheme!.color,
-        equals(theme.colorScheme.secondary),
+        isSameColorAs(theme.colorScheme.secondary),
       );
     });
     test(
