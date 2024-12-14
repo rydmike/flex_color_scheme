@@ -52,8 +52,8 @@ void main() {
       // onSurface is max blended.
       // Oct 15, 2024: Since blendTextTheme is deprecated, this test is: false
       expect(
-        fcsScheme.onSurface.red >
-            fcs.toTheme.textTheme.displayLarge!.color!.red,
+        fcsScheme.onSurface.red8bit >
+            fcs.toTheme.textTheme.displayLarge!.color!.red8bit,
         equals(false),
       );
     });
@@ -94,8 +94,8 @@ void main() {
       // onSurface is max blended.
       // Oct 15, 2024: Since blendTextTheme is deprecated, this test is: false
       expect(
-        fcsScheme.onSurface.red <
-            fcs.toTheme.textTheme.displayLarge!.color!.red,
+        fcsScheme.onSurface.red8bit <
+            fcs.toTheme.textTheme.displayLarge!.color!.red8bit,
         equals(false),
       );
     });
@@ -133,7 +133,7 @@ void main() {
       );
       // We get onSurface as blend color for blended TextTheme
       expect(
-        fcsScheme.onSurface.red <= fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red8bit <= fcsScheme.onSurface.red8bit,
         equals(true),
       );
     });
@@ -171,7 +171,7 @@ void main() {
       );
       // We get onSurface as blend color for blended TextTheme
       expect(
-        fcsScheme.onSurface.red >= fcsScheme.onSurface.red,
+        fcsScheme.onSurface.red8bit >= fcsScheme.onSurface.red8bit,
         equals(true),
       );
     });

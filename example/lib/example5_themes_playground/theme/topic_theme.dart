@@ -1,4 +1,4 @@
-import 'package:flex_seed_scheme/flex_seed_scheme.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// A [ThemeExtension] for semantic theme topic group color properties.
@@ -97,7 +97,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
   /// A color harmonized topic theme, based on [brightness] where colors
   /// are harmonized towards a given [sourceColor].
   factory TopicTheme.harmonized(Color sourceColor, Brightness brightness) {
-    final int sourceColorValue = sourceColor.value;
+    final int sourceColorValue = sourceColor.value32bit;
 
     // Fallback color value that can be used for all colors in both modes.
     // This use case should never happen when TopicTheme is setup correctly.
@@ -115,55 +115,55 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
         Blend.harmonize(
           // As used used in this app we could bang the color, instead of using
           // a fallback, but this is safer generally.
-          topicTheme.generalColor?.value ?? fallbackValue,
+          topicTheme.generalColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       colorsColor: Color(
         Blend.harmonize(
-          topicTheme.colorsColor?.value ?? fallbackValue,
+          topicTheme.colorsColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       componentsColor: Color(
         Blend.harmonize(
-          topicTheme.componentsColor?.value ?? fallbackValue,
+          topicTheme.componentsColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       controlsColor: Color(
         Blend.harmonize(
-          topicTheme.controlsColor?.value ?? fallbackValue,
+          topicTheme.controlsColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       inputsColor: Color(
         Blend.harmonize(
-          topicTheme.inputsColor?.value ?? fallbackValue,
+          topicTheme.inputsColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       barsColor: Color(
         Blend.harmonize(
-          topicTheme.barsColor?.value ?? fallbackValue,
+          topicTheme.barsColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       navigationColor: Color(
         Blend.harmonize(
-          topicTheme.navigationColor?.value ?? fallbackValue,
+          topicTheme.navigationColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       surfacesColor: Color(
         Blend.harmonize(
-          topicTheme.surfacesColor?.value ?? fallbackValue,
+          topicTheme.surfacesColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       textsColor: Color(
         Blend.harmonize(
-          topicTheme.textsColor?.value ?? fallbackValue,
+          topicTheme.textsColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),

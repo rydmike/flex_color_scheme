@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +77,7 @@ class RandomColor {
     }
 
     final MaterialColor finishedColor =
-        MaterialColor(baseColor.value, <int, Color>{
+        MaterialColor(baseColor.value32bit, <int, Color>{
       50: getLighterColor(5),
       100: getLighterColor(4),
       200: getLighterColor(3),

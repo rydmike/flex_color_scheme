@@ -1,5 +1,6 @@
 import 'dart:async' show Future;
 
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -52,7 +53,7 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
   Future<SvgPicture> _coloredUndrawImage(bool load, Color color) async {
     // Convert the color to a HEX RGB string without the alpha value.
     final String valueString =
-        color.value.toRadixString(16).padLeft(8, '0').substring(2);
+        color.value32bit.toRadixString(16).padLeft(8, '0').substring(2);
     if (load) assetSvgString = await rootBundle.loadString(widget.assetName);
     // Find the default image 'theme' color in the Undraw SVG, and replace
     // the color with another color string value we want to use instead.
