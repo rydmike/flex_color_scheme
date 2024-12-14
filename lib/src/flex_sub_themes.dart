@@ -1406,7 +1406,7 @@ abstract final class FlexSubThemes {
   ///
   /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
   /// defaults to [kCardElevation] = 0.
-  static CardTheme cardTheme({
+  static CardThemeData cardTheme({
     /// Corner radius
     ///
     /// If not defined, defaults to [kCardRadius] 12dp,
@@ -1465,7 +1465,7 @@ abstract final class FlexSubThemes {
     final bool usesDefaultRadius =
         (radius == null || (useM3 && radius == kCardRadius)) && useM3;
 
-    return CardTheme(
+    return CardThemeData(
       clipBehavior: clipBehavior,
       elevation: elevation,
       shadowColor: shadowColor,
@@ -2569,7 +2569,7 @@ abstract final class FlexSubThemes {
   ///
   /// The default radius follows Material M3 guide
   /// [specification](https://m3.material.io/components/dialogs/specs).
-  static DialogTheme dialogTheme({
+  static DialogThemeData dialogTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     final ColorScheme? colorScheme,
 
@@ -2644,7 +2644,7 @@ abstract final class FlexSubThemes {
             ? backgroundColor // might be null, then SDK theme defaults.
             : schemeColor(backgroundSchemeColor, colorScheme);
 
-    return DialogTheme(
+    return DialogThemeData(
       elevation: elevation ?? kDialogElevation,
       backgroundColor: background,
       actionsPadding: actionsPadding ??
