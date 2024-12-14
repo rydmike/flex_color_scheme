@@ -22,6 +22,11 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   
 **CHANGE**
   * **Slider**: Minor color fidelity change to the Slider's thumb overlay color, it now uses Material-3 default for none tinted overlay. The M3 spec default is tinted as well, so the difference to when using FlexColorScheme's tinted interactions via `FlexSubThemesData(interactionEffects: true)` is now negligible for the Slider's default thumb overlay color.
+  * Migrated `FlexSubThemes.cardTheme` and `FlexSubThemes.dialogTheme` to use normalized component themes and return `CardThemeData` and `DialogThemeData` instead of `CardTheme`and `DialogTheme`. This is in-line with changes in Flutter 3.27.0. 
+
+**FIX**
+
+* BUG: Locked errorContainer used tertiaryContainer, corrected to use errorContainer.
 
 ### Themes Playground
 
