@@ -7029,6 +7029,12 @@ sealed class FlexSubThemes {
     /// If not defined, [colorScheme.primary] will be used.
     final SchemeColor? baseSchemeColor,
 
+    /// Selects which color from the passed in colorScheme to use as the thumb
+    /// color for the Slider.
+    ///
+    /// If not defined, [baseSchemeColor] will be used.
+    final SchemeColor? thumbSchemeColor,
+
     /// The height of the [Slider] track.
     ///
     /// If not defined, defaults to 4 via Flutter SDK defaults.
@@ -7095,6 +7101,10 @@ sealed class FlexSubThemes {
     final Color onBaseColor =
         schemeColorPair(baseSchemeColor ?? SchemeColor.primary, colorScheme);
 
+    final Color thumbColor = schemeColor(
+        thumbSchemeColor ?? baseSchemeColor ?? SchemeColor.primary,
+        colorScheme);
+
     // Using these tinted overlay variable in all themes for ease of
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
@@ -7120,42 +7130,49 @@ sealed class FlexSubThemes {
         WidgetStateColor.resolveWith((Set<WidgetState> states) {
           if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
-            return colorScheme.primary.withAlpha(kAlphaHovered);
+            return thumbColor.withAlpha(kAlphaHovered);
           }
           if (states.contains(WidgetState.focused)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
-            return colorScheme.primary.withAlpha(kAlphaFocused);
+            return thumbColor.withAlpha(kAlphaFocused);
           }
           if (states.contains(WidgetState.dragged)) {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
-            return colorScheme.primary.withAlpha(kAlphaFocused);
+            return thumbColor.withAlpha(kAlphaFocused);
           }
           return Colors.transparent;
         });
 
     final SliderComponentShape indicatorShape = effectiveIndicatorShape();
 
+    // TODO(rydmike): Fidelity review of M3 theme for Slider.
     return SliderThemeData(
       trackHeight: trackHeight,
       activeTrackColor: baseColor,
       inactiveTrackColor: baseColor.withAlpha(kAlphaLowDisabled),
+      // TODO(rydmike): Add secondaryActiveTrackColor
+      //
       disabledActiveTrackColor: tintDisable
           ? tintedDisable(colorScheme.onSurface, baseColor)
           : colorScheme.onSurface.withAlpha(kAlphaMediumDisabled),
       disabledInactiveTrackColor:
           colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+      // TODO(rydmike): Add disabledSecondaryActiveTrackColor
+      //
       activeTickMarkColor: onBaseColor.withAlpha(kAlphaSliderTickMark),
       inactiveTickMarkColor: baseColor.withAlpha(kAlphaSliderTickMark),
       disabledActiveTickMarkColor: onBaseColor.withAlpha(kAlphaVeryLowDisabled),
       disabledInactiveTickMarkColor:
           colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
-      thumbColor: baseColor,
+      //
+      thumbColor: thumbColor,
       disabledThumbColor: tintDisable
           ? Color.alphaBlend(tintedDisable(colorScheme.onSurface, baseColor),
               colorScheme.surface)
           : Color.alphaBlend(colorScheme.onSurface.withAlpha(kAlphaDisabled),
               colorScheme.surface),
       overlayColor: overlayColor(),
+      //
       showValueIndicator: showValueIndicator,
       valueIndicatorColor: valueIndicatorColor,
       valueIndicatorShape: indicatorShape,

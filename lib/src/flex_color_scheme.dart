@@ -7317,12 +7317,14 @@ class FlexColorScheme with Diagnosticable {
             background: colorScheme.onSurface,
             blend: FlexSubThemes.schemeColor(
                 subTheme.sliderIndicatorSchemeColor ??
+                    subTheme.sliderThumbSchemeColor ??
                     subTheme.sliderBaseSchemeColor ??
                     SchemeColor.primary,
                 colorScheme),
             brightness: colorScheme.brightness)
         : FlexSubThemes.schemeColor(
             subTheme.sliderIndicatorSchemeColor ??
+                subTheme.sliderThumbSchemeColor ??
                 subTheme.sliderBaseSchemeColor ??
                 SchemeColor.primary,
             colorScheme);
@@ -7330,6 +7332,7 @@ class FlexColorScheme with Diagnosticable {
         onColor(sliderValueIndicator.withAlpha(0xFF));
     final TextStyle? sliderValueStyle =
         subTheme.sliderIndicatorSchemeColor != null ||
+                subTheme.sliderThumbSchemeColor != null ||
                 subTheme.sliderBaseSchemeColor != null
             ? effectiveTextTheme.labelMedium!
                 .copyWith(color: sliderValueStyleOnColor)
@@ -8313,6 +8316,7 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.sliderTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.sliderBaseSchemeColor,
+              thumbSchemeColor: subTheme.sliderThumbSchemeColor,
               trackHeight: subTheme.sliderTrackHeight,
               valueIndicatorColor: sliderValueIndicator,
               valueIndicatorTextStyle: sliderValueStyle,
