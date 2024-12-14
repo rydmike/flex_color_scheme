@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../controllers/theme_controller.dart';
 
-/// Static App color schemes used in examples 4 & 5.
+/// A container class with custom application color schemes used in the
+/// examples 4 and 5.
 ///
-/// Putting static const color data in their own class with only color values
-/// and data related to the colors is a common useful and convenient practice.
-sealed class AppColor {
+/// It also contains helper functions to explain used colors.
+abstract final class AppColor {
   // Create a custom flex scheme color for a light theme.
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
     primary: Color(0xFF00296B),

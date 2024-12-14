@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_response.dart';
 
-/// A sealed class that holds some static theming helper functions.
-sealed class ThemeValues {
+/// An abstract final class that holds some static theming helper functions.
+abstract final class ThemeValues {
   /// Return the correct platform effective global border radius setting.
   ///
   /// Depends on platform, its mock version and web and its mock version
