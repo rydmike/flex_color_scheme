@@ -7816,6 +7816,14 @@ sealed class FlexSubThemes {
     /// variant.
     final TabAlignment? tabAlignment,
 
+    /// Specifies the animation behavior of the tab indicator in a [TabBar].
+    ///
+    /// If not defined, the tab indicator will animate linearly if
+    /// the [indicatorSize] is [TabBarIndicatorSize.tab], otherwise it will
+    /// animate with an elastic effect if the [indicatorSize] is
+    /// [TabBarIndicatorSize.label].
+    final TabIndicatorAnimation? indicatorAnimation,
+
     /// The top left and right corner radius of the underline border
     /// indicator on the [TabBar].
     ///
@@ -7890,6 +7898,7 @@ sealed class FlexSubThemes {
       //
       indicatorSize: indicatorSize ??
           (useM3 ? TabBarIndicatorSize.label : TabBarIndicatorSize.tab),
+      indicatorAnimation: indicatorAnimation,
       indicatorColor: indicatorColor,
       indicator: (indicatorWeight != null || indicatorTopRadius != null)
           ? indicator
