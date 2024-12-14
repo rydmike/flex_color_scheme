@@ -199,8 +199,8 @@ class _ProductScreenState extends State<ProductScreen> {
         ? theme.colorScheme.surfaceContainerHighest
         : theme.colorScheme.onSurface;
     final Color iconColor = isLight
-        ? theme.colorScheme.secondary.withOpacity(0.8)
-        : theme.colorScheme.secondaryContainer.withOpacity(0.8);
+        ? theme.colorScheme.secondary.withValues(alpha: 0.8)
+        : theme.colorScheme.secondaryContainer.withValues(alpha: 0.8);
     final List<Widget> imagePreviews = product.imageUrls
         .map(
           (String url) => Padding(
@@ -603,8 +603,8 @@ class ProductImage extends StatelessWidget {
         ? theme.colorScheme.surfaceContainerHighest
         : theme.colorScheme.onSurface;
     final Color iconColor = isLight
-        ? theme.colorScheme.secondary.withOpacity(0.8)
-        : theme.colorScheme.secondaryContainer.withOpacity(0.8);
+        ? theme.colorScheme.secondary.withValues(alpha: 0.8)
+        : theme.colorScheme.secondaryContainer.withValues(alpha: 0.8);
     return AspectRatio(
       aspectRatio: .95,
       child: ColoredBox(

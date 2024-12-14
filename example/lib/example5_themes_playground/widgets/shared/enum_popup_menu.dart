@@ -139,7 +139,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     final IconThemeData unSelectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.primary);
     final IconThemeData unSelectedTrailingIconTheme = theme.iconTheme
-        .copyWith(color: scheme.onSurface.withOpacity(enabled ? 1 : 0.5));
+        .copyWith(color: scheme.onSurface.withValues(alpha: enabled ? 1 : 0.5));
 
     final List<Widget> iconWidgets = _popupIcons(values);
 
@@ -212,7 +212,8 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
                   child: ColorSchemeBox(
                     foregroundColor: scheme.onSurface,
                     backgroundColor: scheme.surface,
-                    borderColor: scheme.outline.withOpacity(enabled ? 1 : 0.5),
+                    borderColor:
+                        scheme.outline.withValues(alpha: enabled ? 1 : 0.5),
                     child: iconWidgets[0],
                   ),
                 )

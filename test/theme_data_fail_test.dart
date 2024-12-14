@@ -12,13 +12,13 @@ void main() {
     final ThemeData themeA = ThemeData.from(
       colorScheme: const ColorScheme.dark(),
     ).copyWith(
-        focusColor: Colors.black.withOpacity(0.3),
-        hoverColor: Colors.black.withOpacity(0.5));
+        focusColor: Colors.black.withValues(alpha: 0.3),
+        hoverColor: Colors.black.withValues(alpha: 0.5));
     final ThemeData themeB = ThemeData.from(
       colorScheme: const ColorScheme.dark(),
     ).copyWith(
-        focusColor: Colors.black.withOpacity(0.3),
-        hoverColor: Colors.black.withOpacity(0.5));
+        focusColor: Colors.black.withValues(alpha: 0.3),
+        hoverColor: Colors.black.withValues(alpha: 0.5));
     test('Expect equal ThemeData to have toString equality', () {
       expect(
         themeA.toString(),

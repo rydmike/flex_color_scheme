@@ -3410,7 +3410,8 @@ class FlexColorScheme with Diagnosticable {
     // The resulting effectiveAppBarColor is never null and always passed to the
     // raw FlexColorScheme constructor.
     if (appBarOpacity != null) {
-      effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
+      effectiveAppBarColor =
+          effectiveAppBarColor.withValues(alpha: appBarOpacity);
     }
     // The raw FlexColorScheme(), created by above complex .light factory.
     return FlexColorScheme(
@@ -5639,7 +5640,8 @@ class FlexColorScheme with Diagnosticable {
     // The resulting effectiveAppBarColor is never null and always passed to the
     // raw FlexColorScheme constructor.
     if (appBarOpacity != null) {
-      effectiveAppBarColor = effectiveAppBarColor.withOpacity(appBarOpacity);
+      effectiveAppBarColor =
+          effectiveAppBarColor.withValues(alpha: appBarOpacity);
     }
     // The raw FlexColorScheme(), created by above complex .dark factory.
     return FlexColorScheme(
@@ -6052,12 +6054,12 @@ class FlexColorScheme with Diagnosticable {
       // Requested a divider, but have no given color, use defaults.
       if (systemNavigationBarDividerColor == null) {
         dividerColor = isDark
-            ? const Color(0xFF2C2C2C).withOpacity(dividerOpacity)
-            : const Color(0xFFDDDDDD).withOpacity(dividerOpacity);
+            ? const Color(0xFF2C2C2C).withValues(alpha: dividerOpacity)
+            : const Color(0xFFDDDDDD).withValues(alpha: dividerOpacity);
       } // We should have a divider, with a given color.
       else {
         dividerColor =
-            systemNavigationBarDividerColor.withOpacity(dividerOpacity);
+            systemNavigationBarDividerColor.withValues(alpha: dividerOpacity);
       }
     }
 
@@ -6098,7 +6100,8 @@ class FlexColorScheme with Diagnosticable {
         : invertStatusIcons
             ? appBarBrightness
             : null;
-    final Color sysNavigationBarColor = background.withOpacity(usedOpacity);
+    final Color sysNavigationBarColor =
+        background.withValues(alpha: usedOpacity);
     final Color sysNavigationBarDividerColor =
         invertStatusIcons ? Colors.transparent : dividerColor;
     final Brightness systemNavigationBarIconBrightness = invertStatusIcons
@@ -7449,12 +7452,13 @@ class FlexColorScheme with Diagnosticable {
         : subTheme.popupMenuSchemeColor == null
             ? useMaterial3
                 ? colorScheme.surfaceContainer
-                    .withOpacity(subTheme.popupMenuOpacity!)
-                : colorScheme.surface.withOpacity(subTheme.popupMenuOpacity!)
+                    .withValues(alpha: subTheme.popupMenuOpacity)
+                : colorScheme.surface
+                    .withValues(alpha: subTheme.popupMenuOpacity)
             : FlexSubThemes.schemeColor(
                 subTheme.popupMenuSchemeColor!,
                 colorScheme,
-              ).withOpacity(subTheme.popupMenuOpacity!);
+              ).withValues(alpha: subTheme.popupMenuOpacity);
 
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and its opinionated theme design choices.

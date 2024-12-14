@@ -1925,20 +1925,22 @@ void main() {
     test(
         'FCS7.30: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
+        () {
       expect(
           tLightL.tabBarTheme.unselectedLabelColor,
           equals(
-            tLightL.colorScheme.onSurface.withOpacity(0.6),
+            tLightL.colorScheme.onSurface.withValues(alpha: 0.6),
           ));
     });
     test(
         'FCS7.31: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6)',
+        () {
       expect(
         tDarkL.tabBarTheme.unselectedLabelColor,
-        equals(tDarkL.colorScheme.onSurface.withOpacity(0.6)),
+        equals(tDarkL.colorScheme.onSurface.withValues(alpha: 0.6)),
       );
     });
 
@@ -2053,10 +2055,11 @@ void main() {
     test(
         'FCS7.45: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
+        () {
       expect(
         tLightM.tabBarTheme.unselectedLabelColor,
-        equals(tLightM.colorScheme.onSurface.withOpacity(0.6)),
+        equals(tLightM.colorScheme.onSurface.withValues(alpha: 0.6)),
       );
     });
     test(
@@ -2318,22 +2321,24 @@ void main() {
     test(
         'FCS7.77: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6).', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
+        () {
       expect(
         tLightH.tabBarTheme.unselectedLabelColor,
         equals(
-          tLightH.colorScheme.onSurface.withOpacity(0.6),
+          tLightH.colorScheme.onSurface.withValues(alpha: 0.6),
         ),
       );
     });
     test(
         'FCS7.78: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withOpacity(0.6)', () {
+        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6)',
+        () {
       expect(
         tDarkH.tabBarTheme.unselectedLabelColor,
         equals(
-          tDarkH.colorScheme.onSurface.withOpacity(0.6),
+          tDarkH.colorScheme.onSurface.withValues(alpha: 0.6),
         ),
       );
     });
@@ -3774,7 +3779,7 @@ void main() {
       ).toTheme;
       expect(
         theme.popupMenuTheme.color,
-        equals(theme.colorScheme.surface.withOpacity(0.95)),
+        equals(theme.colorScheme.surface.withValues(alpha: 0.95)),
       );
       expect(
         theme.popupMenuTheme.elevation,
@@ -3812,7 +3817,7 @@ void main() {
       ).toTheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
       final Color background =
-          refTheme.colorScheme.surfaceContainer.withOpacity(0.9);
+          refTheme.colorScheme.surfaceContainer.withValues(alpha: 0.9);
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -3855,7 +3860,7 @@ void main() {
       ).toTheme;
       expect(
         theme.popupMenuTheme.color,
-        equals(theme.colorScheme.primaryContainer.withOpacity(0.98)),
+        equals(theme.colorScheme.primaryContainer.withValues(alpha: 0.98)),
       );
       expect(
         theme.popupMenuTheme.elevation,
@@ -3895,7 +3900,7 @@ void main() {
       ).toTheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: theme.colorScheme);
       final Color background =
-          refTheme.colorScheme.surfaceContainer.withOpacity(0.8);
+          refTheme.colorScheme.surfaceContainer.withValues(alpha: 0.8);
       expect(
         theme.popupMenuTheme.color,
         equals(background),
@@ -4640,7 +4645,7 @@ void main() {
             color: FlexColor.darkSurface
                 .blendAlpha(colorScheme.primary, 0x28)
                 .withAlpha(0xF2)
-                .withOpacity(0.5),
+                .withValues(alpha: 0.5),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             border: Border.all(color: theme.dividerColor),
           ),
@@ -4940,7 +4945,7 @@ void main() {
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
         theme.appBarTheme.backgroundColor,
-        equals(colorScheme.surface.withOpacity(0.5)),
+        equals(colorScheme.surface.withValues(alpha: 0.5)),
       );
     });
     test(
@@ -4956,7 +4961,7 @@ void main() {
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
         theme.appBarTheme.backgroundColor,
-        equals(colorScheme.primary.withOpacity(0.5)),
+        equals(colorScheme.primary.withValues(alpha: 0.5)),
       );
     });
     test(
@@ -4972,7 +4977,7 @@ void main() {
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
         theme.appBarTheme.backgroundColor,
-        equals(colorScheme.surface.withOpacity(0.5)),
+        equals(colorScheme.surface.withValues(alpha: 0.5)),
       );
     });
     test(
@@ -4988,7 +4993,7 @@ void main() {
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
         theme.appBarTheme.backgroundColor,
-        equals(colorScheme.surface.withOpacity(0.5)),
+        equals(colorScheme.surface.withValues(alpha: 0.5)),
       );
     });
     test(
@@ -5008,7 +5013,7 @@ void main() {
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
         theme.appBarTheme.backgroundColor,
-        equals(colorScheme.primary.withOpacity(0.5)),
+        equals(colorScheme.primary.withValues(alpha: 0.5)),
       );
     });
     test(
@@ -5028,7 +5033,7 @@ void main() {
       final ColorScheme colorScheme = fcs.toScheme;
       expect(
         theme.appBarTheme.backgroundColor,
-        equals(colorScheme.primary.withOpacity(0.6)),
+        equals(colorScheme.primary.withValues(alpha: 0.6)),
       );
     });
     test(
@@ -5508,7 +5513,7 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.tabBarTheme.unselectedLabelColor,
-        equals(scheme.tertiary.withOpacity(0.7)),
+        equals(scheme.tertiary.withValues(alpha: 0.7)),
       );
     });
     test(
@@ -5526,7 +5531,7 @@ void main() {
       final ThemeData theme = fcs.toTheme;
       expect(
         theme.tabBarTheme.unselectedLabelColor,
-        equals(scheme.tertiaryContainer.withOpacity(0.45)),
+        equals(scheme.tertiaryContainer.withValues(alpha: 0.45)),
       );
     });
   });

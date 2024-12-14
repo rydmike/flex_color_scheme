@@ -4820,8 +4820,8 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
     final Color defaultBackgroundColor = isLight
         ? useMaterial3
             ? colorScheme.inverseSurface
-            : Color.alphaBlend(
-                colorScheme.onSurface.withOpacity(0.80), colorScheme.surface)
+            : Color.alphaBlend(colorScheme.onSurface.withValues(alpha: 0.80),
+                colorScheme.surface)
         : colorScheme.onSurface;
     final Color snackBackground =
         theme.snackBarTheme.backgroundColor ?? defaultBackgroundColor;

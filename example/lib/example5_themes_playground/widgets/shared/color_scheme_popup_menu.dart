@@ -307,12 +307,13 @@ class ColorSchemePopupMenu extends StatelessWidget {
                   ? FlexSubThemes.schemeColor(
                       FlexSubThemes.onSchemeColor(value ?? SchemeColor.primary),
                       colorScheme)
-                  : colorScheme.onSurface.withOpacity(enabled ? 1 : 0.5),
+                  : colorScheme.onSurface.withValues(alpha: enabled ? 1 : 0.5),
               backgroundColor: enabled && value != null
                   ? FlexSubThemes.schemeColor(
                       value ?? SchemeColor.primary, colorScheme)
                   : colorScheme.surface,
-              borderColor: colorScheme.outline.withOpacity(enabled ? 1 : 0.5),
+              borderColor:
+                  colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
               defaultOption: value == null,
             ),
           ),

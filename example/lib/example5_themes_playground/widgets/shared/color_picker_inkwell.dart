@@ -316,7 +316,7 @@ class ColorPickerInkWellDialog extends StatelessWidget {
               if (await colorPicker.showPickerDialog(
                 context,
                 insetPadding: const EdgeInsets.all(16),
-                barrierColor: Colors.black.withOpacity(0.05),
+                barrierColor: Colors.black.withValues(alpha: 0.05),
                 constraints: const BoxConstraints(
                   minHeight: 570,
                   minWidth: 450,

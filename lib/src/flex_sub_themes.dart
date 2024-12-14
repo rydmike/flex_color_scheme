@@ -1113,7 +1113,7 @@ abstract final class FlexSubThemes {
     final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
             backgroundSchemeColor != SchemeColor.transparent
         ? schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
-            .withOpacity(opacity ?? 1.0)
+            .withValues(alpha: opacity ?? 1.0)
         : schemeColor(
             backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
@@ -2110,7 +2110,7 @@ abstract final class FlexSubThemes {
       //labelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
       //   if (states.contains(WidgetState.disabled)) {
       //     return baseLabelStyle.copyWith(
-      //         color: colorScheme.onSurface.withOpacity(0.38));
+      //         color: colorScheme.onSurface.withValues(alpha: 0.38));
       //   }
       //   if (states.contains(WidgetState.selected)) {
       //     return baseLabelStyle.copyWith(color: onSelectedColor);
@@ -2425,11 +2425,11 @@ abstract final class FlexSubThemes {
       return InputDecorationTheme(
         filled: false,
         hoverColor: colorScheme.brightness == Brightness.dark
-            ? Colors.white.withOpacity(0.04)
-            : Colors.black.withOpacity(0.04),
+            ? Colors.white.withValues(alpha: 0.04)
+            : Colors.black.withValues(alpha: 0.04),
         focusColor: colorScheme.brightness == Brightness.dark
-            ? Colors.white.withOpacity(0.12)
-            : Colors.black.withOpacity(0.12),
+            ? Colors.white.withValues(alpha: 0.12)
+            : Colors.black.withValues(alpha: 0.12),
         border: OutlineInputBorder(
           borderRadius: defaultRadius,
           borderSide: BorderSide(color: colorScheme.primary, width: 1),
@@ -2453,7 +2453,7 @@ abstract final class FlexSubThemes {
         disabledBorder: OutlineInputBorder(
           borderRadius: defaultRadius,
           borderSide: BorderSide(
-              color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+              color: colorScheme.onSurface.withValues(alpha: 0.12), width: 1),
         ),
         floatingLabelStyle:
             WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
@@ -2461,7 +2461,8 @@ abstract final class FlexSubThemes {
           // them again.
           // coverage:ignore-start
           if (states.contains(WidgetState.disabled)) {
-            return TextStyle(color: colorScheme.onSurface.withOpacity(0.38));
+            return TextStyle(
+                color: colorScheme.onSurface.withValues(alpha: 0.38));
           }
           if (states.contains(WidgetState.error)) {
             if (states.contains(WidgetState.hovered)) {
@@ -3537,7 +3538,7 @@ abstract final class FlexSubThemes {
             //           .withAlpha(kAlphaVeryLowDisabled);
             //     }
             //     if (states.contains(WidgetState.selected)) {
-            //       return colorScheme.onSurface.withOpacity(0.12);
+            //       return colorScheme.onSurface.withValues(alpha: 0.12);
             //     }
             //     return Colors.transparent;
             //   }
@@ -3554,7 +3555,7 @@ abstract final class FlexSubThemes {
                 if (tintDisable) {
                   return tintedDisable(colorScheme.onSurface, tint);
                 }
-                // return colorScheme.onSurface.withOpacity(0.38);
+                // return colorScheme.onSurface.withValues(alpha: 0.38);
               }
               // if (states.contains(WidgetState.selected)) {
               //   return colorScheme.onInverseSurface;
@@ -4796,9 +4797,9 @@ abstract final class FlexSubThemes {
     // Get effective background color.
     final Color? backgroundColor = backgroundSchemeColor != null
         ? schemeColor(backgroundSchemeColor, colorScheme)
-            .withOpacity(opacity ?? 1.0)
+            .withValues(alpha: opacity ?? 1.0)
         : opacity != null
-            ? colorScheme.surfaceContainer.withOpacity(opacity)
+            ? colorScheme.surfaceContainer.withValues(alpha: opacity)
             : null;
 
     final bool allDefaults = backgroundSchemeColor == null &&
@@ -5135,7 +5136,7 @@ abstract final class FlexSubThemes {
             backgroundSchemeColor != SchemeColor.transparent
         ? schemeColor(backgroundSchemeColor ?? SchemeColor.surfaceContainer,
                 colorScheme)
-            .withOpacity(opacity ?? 1.0)
+            .withValues(alpha: opacity ?? 1.0)
         : schemeColor(
             backgroundSchemeColor ?? SchemeColor.surfaceContainer, colorScheme);
 
@@ -5416,7 +5417,7 @@ abstract final class FlexSubThemes {
 
     return NavigationDrawerThemeData(
       backgroundColor: backgroundColor,
-      indicatorColor: indicatorColor.withOpacity(indicatorOpacity ?? 1.0),
+      indicatorColor: indicatorColor.withValues(alpha: indicatorOpacity ?? 1.0),
       indicatorSize: indicatorSize,
       surfaceTintColor: surfaceTintColor,
       shadowColor: shadowColor,
@@ -5808,7 +5809,7 @@ abstract final class FlexSubThemes {
     final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
             backgroundSchemeColor != SchemeColor.transparent
         ? schemeColor(backgroundSchemeColor ?? SchemeColor.surface, colorScheme)
-            .withOpacity(opacity ?? 1.0)
+            .withValues(alpha: opacity ?? 1.0)
         : schemeColor(
             backgroundSchemeColor ?? SchemeColor.surface, colorScheme);
 
@@ -7558,7 +7559,7 @@ abstract final class FlexSubThemes {
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.focused)) {
               // This color grabbed from adaptive CupertinoSwitch focused state.
-              return HSLColor.fromColor(baseColor.withOpacity(0.80))
+              return HSLColor.fromColor(baseColor.withValues(alpha: 0.80))
                   .withLightness(0.69)
                   .withSaturation(0.835)
                   .toColor();
@@ -7571,13 +7572,13 @@ abstract final class FlexSubThemes {
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.disabled)) {
               if (states.contains(WidgetState.selected)) {
-                return baseColor.withOpacity(0.5);
+                return baseColor.withValues(alpha: 0.5);
               }
               return isLight
                   // Actual CupertinoSwitch wraps with Opacity(0.5) layer, this
                   // cannot be done here. This is picked to match the look.
-                  ? cup.color.withOpacity(0.07)
-                  : cup.darkColor.withOpacity(0.16);
+                  ? cup.color.withValues(alpha: 0.07)
+                  : cup.darkColor.withValues(alpha: 0.16);
             }
             if (states.contains(WidgetState.selected)) {
               return baseColor;
@@ -7587,7 +7588,7 @@ abstract final class FlexSubThemes {
           thumbColor:
               WidgetStateProperty.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.disabled)) {
-              return Colors.white.withOpacity(0.5);
+              return Colors.white.withValues(alpha: 0.5);
             }
             return Colors.white;
           }),
@@ -8287,11 +8288,11 @@ abstract final class FlexSubThemes {
           } else if (states.contains(WidgetState.hovered)) {
             const double hoverOpacity = 0.08;
             overlayColor =
-                colorScheme.onPrimaryContainer.withOpacity(hoverOpacity);
+                colorScheme.onPrimaryContainer.withValues(alpha: hoverOpacity);
           } else if (states.contains(WidgetState.focused)) {
             const double focusOpacity = 0.12;
             overlayColor =
-                colorScheme.onPrimaryContainer.withOpacity(focusOpacity);
+                colorScheme.onPrimaryContainer.withValues(alpha: focusOpacity);
           }
           return Color.alphaBlend(overlayColor, colorScheme.primaryContainer);
         } else {
@@ -8300,10 +8301,12 @@ abstract final class FlexSubThemes {
             overlayColor = colorScheme.onSurface;
           } else if (states.contains(WidgetState.hovered)) {
             const double hoverOpacity = 0.08;
-            overlayColor = colorScheme.onSurface.withOpacity(hoverOpacity);
+            overlayColor =
+                colorScheme.onSurface.withValues(alpha: hoverOpacity);
           } else if (states.contains(WidgetState.focused)) {
             const double focusOpacity = 0.12;
-            overlayColor = colorScheme.onSurface.withOpacity(focusOpacity);
+            overlayColor =
+                colorScheme.onSurface.withValues(alpha: focusOpacity);
           }
           return Color.alphaBlend(
               overlayColor, colorScheme.surfaceContainerHighest);
@@ -8318,8 +8321,8 @@ abstract final class FlexSubThemes {
         contentPadding: EdgeInsets.zero,
         filled: true,
         hoverColor: colorScheme.brightness == Brightness.dark
-            ? Colors.white.withOpacity(0.04)
-            : Colors.black.withOpacity(0.04),
+            ? Colors.white.withValues(alpha: 0.04)
+            : Colors.black.withValues(alpha: 0.04),
         fillColor: defaultHourMinuteColor(),
         focusColor: colorScheme.primaryContainer,
         enabledBorder: const OutlineInputBorder(
@@ -8341,7 +8344,7 @@ abstract final class FlexSubThemes {
         disabledBorder: OutlineInputBorder(
           borderRadius: defaultRadius,
           borderSide: BorderSide(
-              color: colorScheme.onSurface.withOpacity(0.12), width: 1),
+              color: colorScheme.onSurface.withValues(alpha: 0.12), width: 1),
         ),
         errorStyle: const TextStyle(fontSize: 0, height: 0),
       );
