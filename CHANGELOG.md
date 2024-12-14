@@ -2,17 +2,32 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.1.0 WIP/DRAFT
+## 8.1.0 WIP
 
-**Dec 13, 2024**
+**Dec 14, 2024**
 
-**PACKAGE**
+### Package
+
 
 * First prep for Flutter 3.27.0 update with new Color features that supports wide gamut. In total, 350 deprecations will have to be replaced with the new Color features.
 
-**PLAYGROUND**
+**NEW**
 
-* Increased allowed max Slider track height from 14 to 40.
+* Added theming properties for Slider thumb color.
+  * `FlexSubThemesData` got the property `sliderThumbSchemeColor`.
+  * `FlexSubThemes.sliderTheme` got the property `thumbSchemeColor`.
+
+**CHANGE**
+  * Slider
+    * Minor color fidelity change to the Slider's thumb overlay color, it now uses Material-3 default for none tinted overlay. The M3 spec default is tinted as well, so the difference to when using FlexColorScheme's tinted interactions via `FlexSubThemesData(interactionEffects: true)` is now negligible for the Slider's default thumb overlay color.
+
+### Themes Playground
+
+**NEW**
+
+**CHANGE**
+
+* Slider: Increased Playground allowed max Slider track height from 14 to 40.
 
 
 ## 8.0.2

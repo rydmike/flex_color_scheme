@@ -249,6 +249,7 @@ class FlexSubThemesData with Diagnosticable {
     this.unselectedToggleIsColored = false,
     //
     this.sliderBaseSchemeColor,
+    this.sliderThumbSchemeColor,
     this.sliderIndicatorSchemeColor,
     this.sliderValueTinted = false,
     this.sliderValueIndicatorType,
@@ -1722,12 +1723,19 @@ class FlexSubThemesData with Diagnosticable {
   /// ambient theme's primary color.
   final SchemeColor? sliderBaseSchemeColor;
 
+  /// The ColorScheme based color used on the [Slider]'s thumb color.
+  ///
+  /// If not defined, the [Slider] thumb defaults to using the
+  /// [sliderBaseSchemeColor].
+  final SchemeColor? sliderThumbSchemeColor;
+
   /// The ColorScheme based color used on the [Slider] indicator color.
   ///
   /// If not defined, the [Slider] theme defaults in M2 mode to a dark grey in
   /// light mode, and a light grey in dark mode. In M3 mode it uses the
-  /// [sliderBaseSchemeColor] as its color if not defined, defaulting to
-  /// primary color if neither is defined.
+  /// [sliderThumbSchemeColor] as its color if not defined and then to
+  /// [sliderBaseSchemeColor], and defaulting to primary color if
+  /// neither is defined.
   final SchemeColor? sliderIndicatorSchemeColor;
 
   /// If true, the value indicator becomes a tinted high contrast version of
@@ -1736,7 +1744,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Default to false.
   final bool sliderValueTinted;
 
-  // TODO(rydmike): RangeSlider to use real M3 style drop when supported.
+  // TODO(rydmike): RangeSlider to use real M3 style when supported.
   /// Enum used to select the type of built-in value indicator used by
   /// [Slider].
   ///
@@ -4202,6 +4210,7 @@ class FlexSubThemesData with Diagnosticable {
     final bool? unselectedToggleIsColored,
     //
     final SchemeColor? sliderBaseSchemeColor,
+    final SchemeColor? sliderThumbSchemeColor,
     final SchemeColor? sliderIndicatorSchemeColor,
     final bool? sliderValueTinted,
     final FlexSliderIndicatorType? sliderValueIndicatorType,
@@ -4604,6 +4613,8 @@ class FlexSubThemesData with Diagnosticable {
       //
       sliderBaseSchemeColor:
           sliderBaseSchemeColor ?? this.sliderBaseSchemeColor,
+      sliderThumbSchemeColor:
+          sliderThumbSchemeColor ?? this.sliderThumbSchemeColor,
       sliderIndicatorSchemeColor:
           sliderIndicatorSchemeColor ?? this.sliderIndicatorSchemeColor,
       sliderValueTinted: sliderValueTinted ?? this.sliderValueTinted,
@@ -5148,6 +5159,7 @@ class FlexSubThemesData with Diagnosticable {
         other.unselectedToggleIsColored == unselectedToggleIsColored &&
         //
         other.sliderBaseSchemeColor == sliderBaseSchemeColor &&
+        other.sliderThumbSchemeColor == sliderThumbSchemeColor &&
         other.sliderIndicatorSchemeColor == sliderIndicatorSchemeColor &&
         other.sliderValueTinted == sliderValueTinted &&
         other.sliderValueIndicatorType == sliderValueIndicatorType &&
@@ -5554,6 +5566,7 @@ class FlexSubThemesData with Diagnosticable {
         unselectedToggleIsColored,
         //
         sliderBaseSchemeColor,
+        sliderThumbSchemeColor,
         sliderIndicatorSchemeColor,
         sliderValueTinted,
         sliderValueIndicatorType,
@@ -5967,6 +5980,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(EnumProperty<SchemeColor>(
         'sliderBaseSchemeColor', sliderBaseSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'sliderThumbSchemeColor', sliderThumbSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'sliderIndicatorSchemeColor', sliderIndicatorSchemeColor));
     properties
