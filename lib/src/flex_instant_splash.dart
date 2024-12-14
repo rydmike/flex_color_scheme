@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'flex_extensions.dart';
+
 const Duration _kUnconfirmedSplashDuration = Duration(milliseconds: 20);
 const Duration _kSplashFadeDuration = Duration(milliseconds: 20);
 
@@ -93,7 +95,7 @@ class FlexInstantSplash extends InteractiveInkFeature {
       ..addListener(controller.markNeedsPaint)
       ..addStatusListener(_handleAlphaStatusChanged);
     _alpha = _alphaController!.drive(IntTween(
-      begin: color.alpha,
+      begin: color.alpha8bit,
       end: 0,
     ));
 

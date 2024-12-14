@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+
 /// Function to check if two colors are visually close to each other.
 bool colorsAreClose(Color a, Color b, bool isLight) {
-  final int dR = a.red - b.red;
-  final int dG = a.green - b.green;
-  final int dB = a.blue - b.blue;
+  final int dR = a.red8bit - b.red8bit;
+  final int dG = a.green8bit - b.green8bit;
+  final int dB = a.blue8bit - b.blue8bit;
   // Calculating orthogonal distance between colors should take the
   // square root as well, but we don't need that extra compute step.
   // We just need a number to represents some relative closeness of the

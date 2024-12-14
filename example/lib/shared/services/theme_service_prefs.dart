@@ -947,20 +947,20 @@ class ThemeServicePrefs implements ThemeService {
           }
           return;
         } else {
-          await _prefs.setInt(key, (value as Color).value);
+          await _prefs.setInt(key, (value as Color).value32bit);
           if (_debug) {
-            debugPrint(
-                'SharedPrefs saved type Color?   : $key as ${value.value}');
+            debugPrint('SharedPrefs saved type '
+                'Color?   : $key as ${value.value32bit}');
           }
           return;
         }
       }
       // Save a none nullable Color value.
       if (sameTypes<T, Color>()) {
-        await _prefs.setInt(key, (value as Color).value);
+        await _prefs.setInt(key, (value as Color).value32bit);
         if (_debug) {
           debugPrint(
-              'SharedPrefs saved type Color    : $key as ${value.value}');
+              'SharedPrefs saved type Color    : $key as ${value.value32bit}');
         }
         return;
       }

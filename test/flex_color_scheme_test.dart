@@ -1109,7 +1109,7 @@ void main() {
         'FCS4.02: GIVEN color: $col '
         'EXPECT Color(swatch.value) equal to $col', () {
       expect(
-        Color(FlexColorScheme.createPrimarySwatch(col).value),
+        Color(FlexColorScheme.createPrimarySwatch(col).value32bit),
         equals(col),
       );
     });

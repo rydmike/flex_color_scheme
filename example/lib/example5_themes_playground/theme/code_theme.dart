@@ -1,4 +1,4 @@
-import 'package:flex_seed_scheme/flex_seed_scheme.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// A [ThemeExtension] for code highlight color properties used by code viewer.
@@ -90,7 +90,7 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
   /// A harmonized code view color theme, based on [brightness] where colors
   /// are harmonized towards a given [sourceColor].
   factory CodeTheme.harmonized(Color sourceColor, Brightness brightness) {
-    final int sourceColorValue = sourceColor.value;
+    final int sourceColorValue = sourceColor.value32bit;
 
     // Fallback color value that can be used for all colors in both modes.
     // This use case should never happen when CodeTheme is setup correctly.
@@ -109,49 +109,49 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
         Blend.harmonize(
           // As used used in this app we could bang the color, instead of using
           // a fallback, but this is safer generally.
-          codeTheme.baseColor?.value ?? fallbackValue,
+          codeTheme.baseColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       numberColor: Color(
         Blend.harmonize(
-          codeTheme.numberColor?.value ?? fallbackValue,
+          codeTheme.numberColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       commentColor: Color(
         Blend.harmonize(
-          codeTheme.commentColor?.value ?? fallbackValue,
+          codeTheme.commentColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       keywordColor: Color(
         Blend.harmonize(
-          codeTheme.keywordColor?.value ?? fallbackValue,
+          codeTheme.keywordColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       stringColor: Color(
         Blend.harmonize(
-          codeTheme.stringColor?.value ?? fallbackValue,
+          codeTheme.stringColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       punctuationColor: Color(
         Blend.harmonize(
-          codeTheme.punctuationColor?.value ?? fallbackValue,
+          codeTheme.punctuationColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       classColor: Color(
         Blend.harmonize(
-          codeTheme.classColor?.value ?? fallbackValue,
+          codeTheme.classColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),
       constantColor: Color(
         Blend.harmonize(
-          codeTheme.constantColor?.value ?? fallbackValue,
+          codeTheme.constantColor?.value32bit ?? fallbackValue,
           sourceColorValue,
         ),
       ),

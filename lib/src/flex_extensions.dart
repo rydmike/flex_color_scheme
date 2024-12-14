@@ -34,10 +34,10 @@ extension FlexColorExtensions on Color {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     final Color color = Color.fromARGB(
-      alpha,
-      math.max(0, math.min(255, red - (255 * -(amount / 100)).round())),
-      math.max(0, math.min(255, green - (255 * -(amount / 100)).round())),
-      math.max(0, math.min(255, blue - (255 * -(amount / 100)).round())),
+      alpha8bit,
+      math.max(0, math.min(255, red8bit - (255 * -(amount / 100)).round())),
+      math.max(0, math.min(255, green8bit - (255 * -(amount / 100)).round())),
+      math.max(0, math.min(255, blue8bit - (255 * -(amount / 100)).round())),
     );
     return color;
   }
@@ -228,14 +228,14 @@ extension FlexColorExtensions on Color {
 
   /// Return uppercase Flutter style hex code string of the color.
   String get hexCode {
-    return value.toRadixString(16).toUpperCase().padLeft(8, '0');
+    return value32bit.toRadixString(16).toUpperCase().padLeft(8, '0');
   }
 
   /// Return uppercase RGB hex code string, with # and no alpha value.
   /// This format is often used in APIs and in CSS color values..
   String get hex {
     // ignore: lines_longer_than_80_chars
-    return '#${value.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
+    return '#${value32bit.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
   }
 }
 
