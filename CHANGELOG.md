@@ -13,21 +13,22 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **NEW**
 
-* Added theming properties for Slider thumb color.
+* **Slider**: Added theming properties for Slider thumb color.
   * `FlexSubThemesData` got the property `sliderThumbSchemeColor`.
   * `FlexSubThemes.sliderTheme` got the property `thumbSchemeColor`.
 
 **CHANGE**
-  * Slider
-    * Minor color fidelity change to the Slider's thumb overlay color, it now uses Material-3 default for none tinted overlay. The M3 spec default is tinted as well, so the difference to when using FlexColorScheme's tinted interactions via `FlexSubThemesData(interactionEffects: true)` is now negligible for the Slider's default thumb overlay color.
+  * **Slider**: Minor color fidelity change to the Slider's thumb overlay color, it now uses Material-3 default for none tinted overlay. The M3 spec default is tinted as well, so the difference to when using FlexColorScheme's tinted interactions via `FlexSubThemesData(interactionEffects: true)` is now negligible for the Slider's default thumb overlay color.
 
 ### Themes Playground
 
 **NEW**
 
+* **Slider**: On the Slider panel added a scheme color selector for the Slider thumb color.
+
 **CHANGE**
 
-* Slider: Increased Playground allowed max Slider track height from 14 to 40.
+* **Slider**: Increased Playground allowed max Slider track height from 14 to 40.
 
 
 ## 8.0.2

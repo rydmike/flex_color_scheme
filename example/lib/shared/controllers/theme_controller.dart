@@ -887,6 +887,8 @@ class ThemeController with ChangeNotifier {
     // Slider SETTINGS.
     _sliderBaseSchemeColor = await _themeService.load(
         Store.keySliderBaseSchemeColor, Store.defaultSliderBaseSchemeColor);
+    _sliderThumbSchemeColor = await _themeService.load(
+        Store.keySliderThumbSchemeColor, Store.defaultSliderThumbSchemeColor);
     _sliderIndicatorSchemeColor = await _themeService.load(
         Store.keySliderIndicatorSchemeColor,
         Store.defaultSliderIndicatorSchemeColor);
@@ -1549,6 +1551,7 @@ class ThemeController with ChangeNotifier {
     //
     // Slider SETTINGS.
     setSliderBaseSchemeColor(Store.defaultSliderBaseSchemeColor, false);
+    setSliderThumbSchemeColor(Store.defaultSliderThumbSchemeColor, false);
     setSliderIndicatorSchemeColor(
         Store.defaultSliderIndicatorSchemeColor, false);
     setSliderValueTinted(Store.defaultSliderValueTinted, false);
@@ -6422,6 +6425,17 @@ class ThemeController with ChangeNotifier {
     _sliderBaseSchemeColor = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySliderBaseSchemeColor, value));
+  }
+
+  late SchemeColor? _sliderThumbSchemeColor;
+
+  SchemeColor? get sliderThumbSchemeColor => _sliderThumbSchemeColor;
+
+  void setSliderThumbSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _sliderThumbSchemeColor) return;
+    _sliderThumbSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderThumbSchemeColor, value));
   }
 
   late SchemeColor? _sliderIndicatorSchemeColor;

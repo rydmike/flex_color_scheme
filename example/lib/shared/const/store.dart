@@ -2009,8 +2009,12 @@ sealed class Store {
   // Key used to read and save the sliderBaseSchemeColor value.
   static const String keySliderBaseSchemeColor = 'sliderBaseSchemeColor';
   // Default value for the sliderBaseSchemeColor, also used to reset settings.
-  // We use NULL as default, on nullable settings.
   static const SchemeColor? defaultSliderBaseSchemeColor = null;
+
+  // Key used to read and save the sliderThumbSchemeColor value.
+  static const String keySliderThumbSchemeColor = 'sliderThumbSchemeColor';
+  // Default value for the sliderThumbSchemeColor, also used to reset settings.
+  static const SchemeColor? defaultSliderThumbSchemeColor = null;
 
   // Key used to read and save the sliderIndicatorSchemeColor value.
   static const String keySliderIndicatorSchemeColor =
@@ -2817,6 +2821,7 @@ sealed class Store {
     keyCheckboxSchemeColor,
     keyRadioSchemeColor,
     keySliderBaseSchemeColor,
+    keySliderThumbSchemeColor,
     keySliderIndicatorSchemeColor,
     keySliderValueTinted,
     keySliderValueIndicatorType,
