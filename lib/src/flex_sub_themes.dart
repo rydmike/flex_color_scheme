@@ -215,10 +215,10 @@ enum FlexSliderIndicatorType {
   drop,
 }
 
-/// Static sub-theme helpers used by widget component theming in
-/// [FlexColorScheme].
+/// A class container with static sub-theme helper functions used by
+/// component theming in [FlexColorScheme].
 ///
-/// [FlexSubThemes] offers optional opinionated static theme helpers. You can
+/// [FlexSubThemes] offers optional opinionated component theme helpers. You can
 /// change many properties of the opt-in setup by defining custom
 /// configuration values in the [FlexSubThemesData] configuration class,
 /// and passing it to the [FlexColorScheme.subThemesData] property.
@@ -295,7 +295,7 @@ enum FlexSliderIndicatorType {
 /// [FlexColorScheme] and [FlexSubThemesData] as it is a more secondary level.
 /// It was decided to keep their APIs public as the may also be useful for
 /// other theming solutions.
-sealed class FlexSubThemes {
+abstract final class FlexSubThemes {
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
   /// corresponding to the [SchemeColor] enum selection in [value].
   ///

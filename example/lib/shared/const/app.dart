@@ -7,13 +7,14 @@ import '../widgets/examples/responsive_scaffold.dart';
 
 // ignore_for_file: comment_references
 
-/// App static functions and constants used in the example applications.
+/// App static container class with functions and constants used in by
+/// example applications.
 ///
 /// In a real app you probably prefer putting these into different static
-/// classes that serves your application's usage. For these examples I
+/// classes that serves your application's usage. For these examples we
 /// put them all in the same class, except the colors that are in their
 /// own class.
-sealed class App {
+abstract final class App {
   /// Returns the title of the MaterialApp.
   ///
   /// Used to set title on pages to

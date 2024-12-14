@@ -6,7 +6,7 @@ import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import 'app_color.dart';
 
-// A simple const class for holding storage keys and default value for each
+// A class container for holding storage keys and default value for each
 // stored key-value pair.
 //
 // These constants are used by the ThemeController, that uses them
@@ -17,7 +17,7 @@ import 'app_color.dart';
 // just adds extra complexity, forces us to use a type cast on the map content.
 // Yes it saves us from defining a const for the default vales, but I think
 // that is a simpler and more type safe way.
-sealed class Store {
+abstract final class Store {
   // GENERAL SETTINGS.
   // ThemeMode, use FlexColorScheme and sub-themes, current scheme, view, etc.
   // ===========================================================================
