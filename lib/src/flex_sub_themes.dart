@@ -6055,7 +6055,7 @@ abstract final class FlexSubThemes {
           if (tintDisable) {
             return tintedDisable(colorScheme.onSurface, baseColor);
           }
-          return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+          return colorScheme.onSurface.withValues(alpha: kAlphaDisabledFloat);
         }
         return baseColor;
       });
@@ -6063,15 +6063,15 @@ abstract final class FlexSubThemes {
       overlayColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.hovered)) {
           if (tintInteract) return tintedHovered(overlay, tint, factor);
-          return baseColor.withAlpha(kAlphaHovered);
+          return baseColor.withValues(alpha: kAlphaHoveredFloat);
         }
         if (states.contains(WidgetState.focused)) {
           if (tintInteract) return tintedFocused(overlay, tint, factor);
-          return baseColor.withAlpha(kAlphaFocused);
+          return baseColor.withValues(alpha: kAlphaFocusedFloat);
         }
         if (states.contains(WidgetState.pressed)) {
           if (tintInteract) return tintedPressed(overlay, tint, factor);
-          return baseColor.withAlpha(kAlphaPressed);
+          return baseColor.withValues(alpha: kAlphaPressedFloat);
         }
         return null;
       });
@@ -6090,12 +6090,13 @@ abstract final class FlexSubThemes {
           if (tintDisable) {
             return BorderSide(
               color: tintedDisable(colorScheme.onSurface, outlineColor)
-                  .withAlpha(kAlphaLowDisabled),
+                  .withValues(alpha: kAlphaLowDisabledFloat),
               width: normalWidth,
             );
           }
           return BorderSide(
-            color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+            color: colorScheme.onSurface
+                .withValues(alpha: kAlphaVeryLowDisabledFloat),
             width: normalWidth,
           );
         }
