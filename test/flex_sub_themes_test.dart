@@ -4019,6 +4019,7 @@ void main() {
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
 
+      const bool filled = false;
       const bool useM3 = false;
       const bool tintDisable = true;
       const bool tintInteract = true;
@@ -4033,9 +4034,30 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const int effectiveAlpha = kFillColorAlphaLight;
-      final Color usedFillColor = Color.alphaBlend(
-          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+
+      // Get effective alpha value for background fill color.
+      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary)
+          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+
+      // Effective used fill color, can also be a totally custom color value.
+      final Color usedFillColor =
+          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return tintDisabledUltraLowColor;
+        }
+        return Color.alphaBlend(
+          colorScheme.primary.withValues(alpha: effectiveAlpha),
+          colorScheme.surface,
+        );
+      });
+
+      // debugPrint('Test effectiveAlpha : $kFillColorAlphaLightFloat');
+      // debugPrint('Test usedFillColor  : $usedFillColor');
+      // debugPrint('Test primary        : ${colorScheme.primary}');
+      // debugPrint('Test surface        : ${colorScheme.surface}');
+
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
@@ -4045,9 +4067,9 @@ void main() {
       expect(
         FlexSubThemes.inputDecorationTheme(
           colorScheme: colorScheme,
-          tintedDisabled: tintDisable,
-          tintedInteractions: tintInteract,
-          useMaterial3: useM3,
+          tintedDisabled: tintDisable, // true
+          tintedInteractions: tintInteract, // true
+          useMaterial3: useM3, // false
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
@@ -4149,7 +4171,7 @@ void main() {
               }
               return Colors.black45;
             }),
-            filled: false,
+            filled: filled,
             fillColor: usedFillColor,
             hoverColor: usedHover,
             border: MaterialStateUnderlineInputBorder.resolveWith(
@@ -4467,9 +4489,22 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const int effectiveAlpha = kFillColorAlphaLight;
-      final Color usedFillColor = Color.alphaBlend(
-          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      // Get effective alpha value for background fill color.
+      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary)
+          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // Effective used fill color, can also be a totally custom color value.
+      final Color usedFillColor =
+          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return tintDisabledUltraLowColor;
+        }
+        return Color.alphaBlend(
+          colorScheme.primary.withValues(alpha: effectiveAlpha),
+          colorScheme.surface,
+        );
+      });
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
@@ -4683,9 +4718,22 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const int effectiveAlpha = kFillColorAlphaDark;
-      final Color usedFillColor = Color.alphaBlend(
-          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+      const double effectiveAlpha = kFillColorAlphaDarkFloat;
+      // Get effective alpha value for background fill color.
+      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary)
+          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // Effective used fill color, can also be a totally custom color value.
+      final Color usedFillColor =
+          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return tintDisabledUltraLowColor;
+        }
+        return Color.alphaBlend(
+          colorScheme.primary.withValues(alpha: effectiveAlpha),
+          colorScheme.surface,
+        );
+      });
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
@@ -4900,9 +4948,22 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const int effectiveAlpha = kFillColorAlphaDark;
-      final Color usedFillColor = Color.alphaBlend(
-          colorScheme.primary.withAlpha(effectiveAlpha), colorScheme.surface);
+      const double effectiveAlpha = kFillColorAlphaDarkFloat;
+      // Get effective alpha value for background fill color.
+      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary)
+          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // Effective used fill color, can also be a totally custom color value.
+      final Color usedFillColor =
+          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return tintDisabledUltraLowColor;
+        }
+        return Color.alphaBlend(
+          colorScheme.primary.withValues(alpha: effectiveAlpha),
+          colorScheme.surface,
+        );
+      });
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
@@ -5185,9 +5246,22 @@ void main() {
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
       final BorderRadius effectiveOutlineBorder =
           BorderRadius.circular(effectiveRadius);
-      const int effectiveAlpha = kFillColorAlphaLight;
-      final Color usedFillColor = Color.alphaBlend(
-          colorScheme.secondary.withAlpha(effectiveAlpha), colorScheme.surface);
+      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      // Get effective alpha value for background fill color.
+      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+              colorScheme.onSurface, colorScheme.primary)
+          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // Effective used fill color, can also be a totally custom color value.
+      final Color usedFillColor =
+          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return tintDisabledUltraLowColor;
+        }
+        return Color.alphaBlend(
+          colorScheme.secondary.withValues(alpha: effectiveAlpha),
+          colorScheme.surface,
+        );
+      });
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
@@ -5599,7 +5673,7 @@ void main() {
       final OutlineInputBorder ulExp1 = OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(
-          color: tintDisable.withAlpha(kAlphaLowDisabled),
+          color: tintDisable.withValues(alpha: kAlphaLowDisabledFloat),
           width: 3,
         ),
       );
@@ -5936,7 +6010,7 @@ void main() {
           topRight: Radius.circular(kInputDecoratorRadius),
         ),
         borderSide: BorderSide(
-          color: tintDisabledColor2.withAlpha(kAlphaLowDisabled),
+          color: tintDisabledColor2.withValues(alpha: kAlphaLowDisabledFloat),
           width: 3,
         ),
       );

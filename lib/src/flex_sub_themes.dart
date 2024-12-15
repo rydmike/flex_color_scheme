@@ -3860,20 +3860,21 @@ abstract final class FlexSubThemes {
         borderSchemeColor ?? baseSchemeColor ?? SchemeColor.primary,
         colorScheme);
 
-    // Get effective alpha value for background color.
-    final int effectiveAlpha = backgroundAlpha?.clamp(0, 255) ??
-        (useM3
-            ? 0xFF
-            : isDark
-                ? kFillColorAlphaDark
-                : kFillColorAlphaLight);
-
     // Tinted disabled colors
     final Color tintDisabledColor =
         tintedDisable(colorScheme.onSurface, fillColor ?? baseColor);
     final Color tintDisabledUltraLowColor =
         tintedDisable(colorScheme.onSurface, fillColor ?? baseColor)
-            .withAlpha(kAlphaUltraLowDisabled);
+            .withValues(alpha: kAlphaUltraLowDisabledFloat);
+
+    // Get effective alpha value for background fill color.
+    final double effectiveAlpha = (backgroundAlpha?.clamp(0, 255) ??
+            (useM3
+                ? 0xFF
+                : isDark
+                    ? kFillColorAlphaDark
+                    : kFillColorAlphaLight)) /
+        255;
 
     // Effective used fill color, can also be a totally custom color value.
     // These alpha blends remove the actual opacity and create a none opaque
@@ -3883,22 +3884,37 @@ abstract final class FlexSubThemes {
     // the hover effect, which is also actually not transparent.
     final Color usedFillColor = fillColor != null
         ? Color.alphaBlend(
-            fillColor.withAlpha(effectiveAlpha), colorScheme.surface)
+            fillColor.withValues(alpha: effectiveAlpha), colorScheme.surface)
         : WidgetStateColor.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.disabled)) {
               return tintDisable
                   ? tintDisabledUltraLowColor
-                  : colorScheme.onSurface
-                      .withAlpha(kAlphaUltraLowDisabled); // M3 spec, 4%, 0x0A
+                  : colorScheme.onSurface.withValues(
+                      alpha: kAlphaUltraLowDisabledFloat,
+                    ); // M3 spec, 4%, 0x0A
             }
             return baseSchemeColor == null && useM3
                 ? Color.alphaBlend(
                     colorScheme.surfaceContainerHighest
-                        .withAlpha(effectiveAlpha),
-                    colorScheme.surface)
+                        .withValues(alpha: effectiveAlpha),
+                    colorScheme.surface,
+                  )
                 : Color.alphaBlend(
-                    baseColor.withAlpha(effectiveAlpha), colorScheme.surface);
+                    baseColor.withValues(alpha: effectiveAlpha),
+                    colorScheme.surface,
+                  );
           });
+
+    // debugPrint('\nTheme effectiveAlpha: $effectiveAlpha');
+    // debugPrint(
+    //     'Theme expected Fill : ${Color.alphaBlend(baseColor.withValues(alpha: effectiveAlpha), colorScheme.surface)}');
+    // debugPrint('Theme usedFillColor : $usedFillColor');
+    // debugPrint('Theme disabledFill  : $tintDisabledUltraLowColor');
+    // debugPrint(
+    //     'Theme variant Fill  : ${Color.alphaBlend(colorScheme.surfaceContainerHighest.withValues(alpha: effectiveAlpha), colorScheme.surface)}');
+    // debugPrint('Theme baseColor     : $baseColor');
+    // debugPrint('Theme surface       : ${colorScheme.surface}');
+    // debugPrint('Theme fillColor     : $fillColor');
 
     // A custom lighter and darker version of the effective background
     // color on the input decorator as hover color. This is a different formula
@@ -3923,23 +3939,24 @@ abstract final class FlexSubThemes {
         schemeColor(suffixIconSchemeColor ?? focusedIconDefault, colorScheme);
 
     // Flutter SDK "magic" theme colors from ThemeData, with old M1/M2 roots.
-    final Color hintColorM2 =
-        isDark ? Colors.white60 : Colors.black.withAlpha(kTintHover); // 60%
+    final Color hintColorM2 = isDark
+        ? Colors.white60
+        : Colors.black.withValues(alpha: kTintHoverFloat); // 60%
     final Color unfocusedIconDefaultM2 =
         isDark ? Colors.white70 : Colors.black45;
     final Color disabledDefaultM2 = isDark ? Colors.white38 : Colors.black38;
     final Color disabledDefaultM3 =
-        colorScheme.onSurface.withAlpha(kAlphaDisabled);
+        colorScheme.onSurface.withValues(alpha: kAlphaDisabledFloat);
     final Color disabledDefault = useM3 ? disabledDefaultM3 : disabledDefaultM2;
 
     // Enabled border color.
     final Color enabledBorderColor = unfocusedBorderIsColored ?? false
-        ? borderColor.withAlpha(kEnabledBorderAlpha)
+        ? borderColor.withValues(alpha: kEnabledBorderAlphaFloat)
         : useM3
             ? isFilled
                 ? colorScheme.onSurfaceVariant
                 : colorScheme.outline
-            : colorScheme.onSurface.withAlpha(kAlphaDisabled);
+            : colorScheme.onSurface.withValues(alpha: kAlphaDisabledFloat);
     // TODO(rydmike): Review M3 border hover, defaults are not very distinct.
     // Enabled hovered border color.
     final Color enabledHoveredBorderColor = unfocusedBorderIsColored ?? false
@@ -3969,7 +3986,8 @@ abstract final class FlexSubThemes {
           return tintDisable
               ? TextStyle(color: tintDisabledColor)
               : TextStyle(
-                  color: colorScheme.onSurface.withAlpha(kAlphaDisabled));
+                  color: colorScheme.onSurface
+                      .withValues(alpha: kAlphaDisabledFloat));
         }
         if (states.contains(WidgetState.error)) {
           if (states.contains(WidgetState.focused)) {
@@ -4011,7 +4029,8 @@ abstract final class FlexSubThemes {
           return TextStyle(
             // TODO(rydmike): Info: M3 error, with this we get a hover diff.
             // Prefer this as a diff to the hover state.
-            color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+            color:
+                colorScheme.error.withValues(alpha: kEnabledBorderAlphaFloat),
           );
         }
         if (states.contains(WidgetState.focused)) {
@@ -4034,7 +4053,8 @@ abstract final class FlexSubThemes {
               ? TextStyle(color: tintDisabledColor)
               : TextStyle(
                   color: useM3
-                      ? colorScheme.onSurface.withAlpha(kAlphaDisabled)
+                      ? colorScheme.onSurface
+                          .withValues(alpha: kAlphaDisabledFloat)
                       : Colors.transparent);
         }
         return TextStyle(
@@ -4106,9 +4126,10 @@ abstract final class FlexSubThemes {
                     borderSide: unfocusedHasBorder
                         ? BorderSide(
                             color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
+                                ? tintDisabledColor.withValues(
+                                    alpha: kAlphaLowDisabledFloat)
+                                : colorScheme.onSurface.withValues(
+                                    alpha: kAlphaVeryLowDisabledFloat),
                             width: unfocusedWidth,
                           )
                         : BorderSide.none,
@@ -4144,7 +4165,7 @@ abstract final class FlexSubThemes {
                         ? BorderSide(
                             // TODO(rydmike): Info: M3 uses error
                             color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
+                                .withValues(alpha: kEnabledBorderAlphaFloat),
                             width: unfocusedWidth,
                           )
                         : BorderSide.none,
@@ -4193,9 +4214,10 @@ abstract final class FlexSubThemes {
                     borderSide: unfocusedHasBorder
                         ? BorderSide(
                             color: tintDisable
-                                ? tintDisabledColor.withAlpha(kAlphaLowDisabled)
-                                : colorScheme.onSurface
-                                    .withAlpha(kAlphaVeryLowDisabled),
+                                ? tintDisabledColor.withValues(
+                                    alpha: kAlphaLowDisabledFloat)
+                                : colorScheme.onSurface.withValues(
+                                    alpha: kAlphaVeryLowDisabledFloat),
                             width: unfocusedWidth,
                           )
                         : BorderSide.none,
@@ -4231,7 +4253,7 @@ abstract final class FlexSubThemes {
                         ? BorderSide(
                             // TODO(rydmike): Info: M3 uses error
                             color: colorScheme.error
-                                .withAlpha(kEnabledBorderAlpha),
+                                .withValues(alpha: kEnabledBorderAlphaFloat),
                             width: unfocusedWidth,
                           )
                         : BorderSide.none,
