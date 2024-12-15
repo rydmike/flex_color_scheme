@@ -540,7 +540,7 @@ abstract final class FlexSubThemes {
   /// well because the overlay color is also alpha blend colored. This extra
   /// factor is used for interaction effects on colored widgets, when
   /// using interactions on surface colors a lower factor is used.
-  static double tintAlphaFactor(Color color, Brightness mode,
+  static double _tintAlphaFactor(Color color, Brightness mode,
       [bool surfaceMode = false]) {
     if (mode == Brightness.light) {
       return surfaceMode
@@ -1368,7 +1368,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
@@ -1557,7 +1557,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness, true);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     return CheckboxThemeData(
       splashRadius: splashRadius,
@@ -2968,7 +2968,7 @@ abstract final class FlexSubThemes {
     final bool surfaceMode =
         (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
     final double factor =
-        tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
+        _tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
 
     // We are using FCS M2 buttons, styled in M3 fashion by FCS.
     if (!useM3) {
@@ -3243,7 +3243,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = foreground;
     final Color tint = background;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     WidgetStateProperty<Color?>? backgroundColor;
     WidgetStateProperty<Color?>? foregroundColor;
@@ -3470,7 +3470,7 @@ abstract final class FlexSubThemes {
     final Color tint = background ??
         (useM3 ? colorScheme.primaryContainer : colorScheme.secondary);
 
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     return FloatingActionButtonThemeData(
       extendedTextStyle: extendedTextStyle,
@@ -3526,7 +3526,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = background;
     final Color tint = foreground;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness, false);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, false);
 
     // TODO(rydmike): Conditional tintInteract and tintDisabled due to issue.
     // See https://github.com/flutter/flutter/issues/123829
@@ -3904,17 +3904,6 @@ abstract final class FlexSubThemes {
                     colorScheme.surface,
                   );
           });
-
-    // debugPrint('\nTheme effectiveAlpha: $effectiveAlpha');
-    // debugPrint(
-    //     'Theme expected Fill : ${Color.alphaBlend(baseColor.withValues(alpha: effectiveAlpha), colorScheme.surface)}');
-    // debugPrint('Theme usedFillColor : $usedFillColor');
-    // debugPrint('Theme disabledFill  : $tintDisabledUltraLowColor');
-    // debugPrint(
-    //     'Theme variant Fill  : ${Color.alphaBlend(colorScheme.surfaceContainerHighest.withValues(alpha: effectiveAlpha), colorScheme.surface)}');
-    // debugPrint('Theme baseColor     : $baseColor');
-    // debugPrint('Theme surface       : ${colorScheme.surface}');
-    // debugPrint('Theme fillColor     : $fillColor');
 
     // A custom lighter and darker version of the effective background
     // color on the input decorator as hover color. This is a different formula
@@ -6065,7 +6054,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // Default outline widths.
     final double normalWidth = outlineWidth ?? kThinBorderWidth;
@@ -6371,7 +6360,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness, true);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     return RadioThemeData(
       splashRadius: splashRadius,
@@ -6595,7 +6584,7 @@ abstract final class FlexSubThemes {
     final bool surfaceMode =
         (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
     final double factor =
-        tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
+        _tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
 
     return SearchBarThemeData(
       backgroundColor: backgroundSchemeColor != null
@@ -6870,7 +6859,7 @@ abstract final class FlexSubThemes {
     final bool selectedSurfaceMode =
         (isLight && selectedBgIsLight) || (!isLight && !selectedBgIsLight);
     final double factor =
-        tintAlphaFactor(tint, colorScheme.brightness, selectedSurfaceMode);
+        _tintAlphaFactor(tint, colorScheme.brightness, selectedSurfaceMode);
 
     final Color unOverlay = unselectedColor;
     final Color unTint = unselectedSchemeColor == null ||
@@ -6886,7 +6875,7 @@ abstract final class FlexSubThemes {
     final bool unSelectedSurfaceMode =
         (isLight && unSelectedBgIsLight) || (!isLight && !unSelectedBgIsLight);
     final double unFactor =
-        tintAlphaFactor(unTint, colorScheme.brightness, unSelectedSurfaceMode);
+        _tintAlphaFactor(unTint, colorScheme.brightness, unSelectedSurfaceMode);
 
     final Color disableTint = unselectedSchemeColor == null ||
             unselectedSchemeColor == SchemeColor.surface
@@ -7134,7 +7123,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness, true);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     SliderComponentShape effectiveIndicatorShape() {
       if (valueIndicatorType == null) {
@@ -7474,7 +7463,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness, true);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     // Get selected thumb color, and its pair, defaults to
     // M2: primary and onPrimary.
@@ -8053,7 +8042,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = baseColor;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness, true);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
     // We only define theme props for foregroundColor and overlayColor, if we
     // have some settings the default widget behavior does not handle.
@@ -8652,7 +8641,7 @@ abstract final class FlexSubThemes {
     // reasoning and duplication.
     final Color overlay = colorScheme.surface;
     final Color tint = selectedBackground;
-    final double factor = tintAlphaFactor(tint, colorScheme.brightness);
+    final double factor = _tintAlphaFactor(tint, colorScheme.brightness);
 
     // Effective minimum button size.
     final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
