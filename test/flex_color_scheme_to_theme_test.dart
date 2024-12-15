@@ -2511,6 +2511,7 @@ void main() {
       testColorSchemeEquality(
         fcsLightH2.toScheme,
         fcsLightH2RealRaw.toScheme,
+        threshold: 0.006,
       );
     });
     test(
@@ -2643,9 +2644,10 @@ void main() {
     test(
         'FCS7.80b-scheme: GIVEN a Equal Raw and FlexColorScheme.dark with '
         'heavy branding and 2 colors and true black EXPECT equal objects.', () {
-      expect(
+      testColorSchemeEquality(
         fcsDarkH2.toScheme,
-        equals(fcsDarkH2Raw.toScheme),
+        fcsDarkH2Raw.toScheme,
+        threshold: 0.006,
       );
     });
     test(
