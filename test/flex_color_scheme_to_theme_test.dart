@@ -2267,7 +2267,8 @@ void main() {
       brightness: Brightness.light,
       primary: const Color(0xffcd5758),
       onPrimary: const Color(0xffffffff),
-      primaryContainer: const Color(0xfff4dbdb),
+      primaryContainer:
+          const Color(0xffcd5758).lighten(20).blend(Colors.white, 60),
       onPrimaryContainer: const Color(0xff000000),
       primaryFixed: _fixedColor(const Color(0xffcd5758)),
       primaryFixedDim: _fixedDimColor(const Color(0xffcd5758)),
@@ -2295,7 +2296,7 @@ void main() {
       onTertiaryFixedVariant: _onFixedVariantColor(const Color(0xfff37d7e)),
       error: const Color(0xff790000),
       onError: const Color(0xffffffff),
-      surface: const Color(0xfffcf5f5),
+      surface: surf.surface,
       onSurface: const Color(0xff000000),
       surfaceDim: surf.surfaceDim,
       surfaceBright: surf.surfaceBright,
@@ -2312,7 +2313,7 @@ void main() {
       outlineVariant: const Color(0xffd1d1d1),
       shadow: const Color(0xff000000),
       scrim: const Color(0xff000000),
-      inverseSurface: const Color(0xff1d1616),
+      inverseSurface: surf.inverseSurface,
       onInverseSurface: const Color(0xffffffff),
       inversePrimary: const Color(0xfffff0f0),
     );
@@ -2325,7 +2326,8 @@ void main() {
         blendLevel: 0,
         primary: const Color(0xffcd5758),
         onPrimary: const Color(0xffffffff),
-        primaryContainer: const Color(0xfff4dbdb),
+        primaryContainer:
+            const Color(0xffcd5758).lighten(20).blend(Colors.white, 60),
         onPrimaryContainer: const Color(0xff000000),
         secondary: const Color(0xff57c8d3),
         onSecondary: const Color(0xff000000),
@@ -2341,7 +2343,7 @@ void main() {
         onTertiaryContainer: const Color(0xff000000),
         error: const Color(0xff790000),
         onError: const Color(0xffffffff),
-        surface: const Color(0xfffcf5f5),
+        surface: surf.surface,
         onSurface: const Color(0xff000000),
         //
         tabBarStyle: FlexTabBarStyle.forBackground,
@@ -2367,14 +2369,15 @@ void main() {
       testColorSchemeEquality(
         fcsLightH2.toScheme,
         fcsLightH2Raw.toScheme,
-        threshold: 0.002,
+        threshold: 0.000,
       );
     });
     final FlexColorScheme fcsLightH2RealRaw = FlexColorScheme(
       colorScheme: realRawSchemeLight,
       primary: const Color(0xffcd5758),
       onPrimary: const Color(0xffffffff),
-      primaryContainer: const Color(0xfff4dbdb),
+      primaryContainer:
+          const Color(0xffcd5758).lighten(20).blend(Colors.white, 60),
       onPrimaryContainer: const Color(0xff000000),
       secondary: const Color(0xff57c8d3),
       onSecondary: const Color(0xff000000),
@@ -2390,13 +2393,15 @@ void main() {
       onTertiaryContainer: const Color(0xff000000),
       error: const Color(0xff790000),
       onError: const Color(0xffffffff),
-      surface: const Color(0xfffcf5f5),
+      errorContainer: FlexColor.lightErrorContainer(const Color(0xff790000)),
+      onErrorContainer: const Color(0xff000000),
+      surface: surf.surface,
       onSurface: const Color(0xff000000),
       //
       brightness: Brightness.light,
       tabBarStyle: FlexTabBarStyle.forBackground,
-      appBarBackground: const Color(0xfff5eeee),
-      dialogBackground: const Color(0xfffcf5f5),
+      appBarBackground: surf.surfaceContainerLow, //const Color(0xfff5eeee),
+      dialogBackground: surf.surfaceContainerLowest, //const Color(0xfffcf5f5),
       scaffoldBackground: surf.scaffoldBackground, // const Color(0xffedc3c4),
       appBarElevation: null,
       bottomAppBarElevation: null,
@@ -2418,7 +2423,7 @@ void main() {
       testColorSchemeEquality(
         fcsLightH2.toScheme,
         fcsLightH2RealRaw.toScheme,
-        threshold: 0.003,
+        threshold: 0.000,
       );
     });
     test(
