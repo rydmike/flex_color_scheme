@@ -105,7 +105,7 @@ extension FlexColorExtensions on Color {
     if (amount <= 0) return this;
     // Blend amounts >= 100 results in the input Color.
     if (amount >= 100) return input;
-    return Color.alphaBlend(input.withAlpha(255 * amount ~/ 100), this);
+    return Color.alphaBlend(input.withValues(alpha: amount / 100), this);
   }
 
   /// Blend in the given input Color with an alpha value.
@@ -125,7 +125,7 @@ extension FlexColorExtensions on Color {
     if (alpha <= 0) return this;
     // Blend amounts >= 255 results in the input Color.
     if (alpha >= 255) return input;
-    return Color.alphaBlend(input.withAlpha(alpha), this);
+    return Color.alphaBlend(input.withValues(alpha: alpha / 255), this);
   }
 
   /// The [getShadeColor] extension is used to make a color darker or lighter,
