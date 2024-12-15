@@ -7455,29 +7455,29 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+        colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        isSameColorAs(colorScheme.primary),
+        colorScheme.primary,
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
-        isSameColorAs(colorScheme.primary),
+        colorScheme.primary,
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
+        colorScheme.primary.withValues(alpha: 0x14 / 255),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
+        colorScheme.primary.withValues(alpha: 0x1F / 255),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
+        colorScheme.primary.withValues(alpha: 0x1F / 255),
       );
       expect(
         FlexSubThemes.outlinedButtonTheme(
@@ -7489,8 +7489,11 @@ void main() {
       // Border side states
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-            color: colorScheme.onSurface.withValues(alpha: 0.12), width: 1)),
+        equals(
+          BorderSide(
+              color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
+              width: 1),
+        ),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
@@ -7609,7 +7612,7 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+        colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
         button.style!.foregroundColor!
@@ -7619,15 +7622,15 @@ void main() {
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
+        colorScheme.primary.withValues(alpha: 0x14 / 255),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
+        colorScheme.primary.withValues(alpha: 0x1F / 255),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
+        colorScheme.primary.withValues(alpha: 0x1F / 255),
       );
       expect(
         button.style!.overlayColor!
@@ -7638,7 +7641,8 @@ void main() {
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
-            color: colorScheme.onSurface.withValues(alpha: 0.12), width: 1.0)),
+            color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
+            width: 1.0)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
@@ -7683,25 +7687,25 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+        colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
-        isSameColorAs(colorScheme.tertiary),
+        colorScheme.tertiary,
       );
       // Overlay color states
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        isSameColorAs(colorScheme.tertiary.withValues(alpha: 0.08)),
+        colorScheme.tertiary.withValues(alpha: 0x14 / 255),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        isSameColorAs(colorScheme.tertiary.withValues(alpha: 0.12)),
+        colorScheme.tertiary.withValues(alpha: 0x1F / 255),
       );
       expect(
         button.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        isSameColorAs(colorScheme.tertiary.withValues(alpha: 0.12)),
+        colorScheme.tertiary.withValues(alpha: 0x1F / 255),
       );
       expect(
         button.style!.overlayColor!
@@ -7712,7 +7716,7 @@ void main() {
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(BorderSide(
-          color: colorScheme.onSurface.withValues(alpha: 0.12),
+          color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
           width: 2.0,
         )),
       );
