@@ -7570,7 +7570,7 @@ void main() {
         equals(BorderSide(
             color: FlexSubThemes.tintedDisable(
                     colorScheme.onSurface, colorScheme.primaryContainer)
-                .withAlpha(kAlphaLowDisabled),
+                .withValues(alpha: kAlphaLowDisabledFloat),
             width: 1)),
       );
       expect(
