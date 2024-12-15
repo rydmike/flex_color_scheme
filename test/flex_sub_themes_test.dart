@@ -3909,8 +3909,7 @@ void main() {
 
       final Color overlay = colorScheme.secondary;
       final Color tint = colorScheme.onPrimary;
-      final double factor =
-          FlexSubThemes.tintAlphaFactor(tint, colorScheme.brightness);
+      final double factor = tintAlphaFactor(tint, colorScheme.brightness);
       expect(
         FlexSubThemes.floatingActionButtonTheme(
           colorScheme: colorScheme,
