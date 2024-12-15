@@ -1339,6 +1339,14 @@ void main() {
       const ColorScheme colorScheme = ColorScheme.light();
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
+
+      final Color backgroundColor = colorScheme.primaryContainer
+          .blendAlpha(colorScheme.surface, kChipBackgroundAlphaBlend);
+      final Color selectedColor = colorScheme.primaryContainer
+          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color secondarySelectedColor = colorScheme.primaryContainer
+          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1361,10 +1369,11 @@ void main() {
               letterSpacing: 0.1,
               height: 1.43,
             ),
-            backgroundColor: const Color(0xffdfccfb),
-            disabledColor: const Color(0xffdfccfb).withAlpha(kAlphaLowDisabled),
-            selectedColor: const Color(0xffbe96f8),
-            secondarySelectedColor: const Color(0xffbe96f8),
+            backgroundColor: backgroundColor,
+            disabledColor:
+                backgroundColor.withValues(alpha: kAlphaLowDisabledFloat),
+            selectedColor: selectedColor,
+            secondarySelectedColor: secondarySelectedColor,
             checkmarkColor: Colors.black87,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -1386,6 +1395,14 @@ void main() {
       const ColorScheme colorScheme = ColorScheme.light();
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
+
+      final Color backgroundColor = colorScheme.primaryContainer
+          .blendAlpha(colorScheme.surface, kChipBackgroundAlphaBlend);
+      final Color selectedColor = colorScheme.primaryContainer
+          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color secondarySelectedColor = colorScheme.primaryContainer
+          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1408,12 +1425,12 @@ void main() {
               letterSpacing: 0.1,
               height: 1.43,
             ),
-            backgroundColor: const Color(0xffdfccfb),
-            disabledColor: FlexSubThemes.tintedDisable(
-                    const Color(0xffdfccfb), const Color(0xffbe96f8))
-                .withAlpha(kAlphaLowDisabled),
-            selectedColor: const Color(0xffbe96f8),
-            secondarySelectedColor: const Color(0xffbe96f8),
+            backgroundColor: backgroundColor,
+            disabledColor:
+                FlexSubThemes.tintedDisable(backgroundColor, selectedColor)
+                    .withValues(alpha: kAlphaLowDisabledFloat),
+            selectedColor: selectedColor,
+            secondarySelectedColor: secondarySelectedColor,
             checkmarkColor: Colors.black87,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
@@ -1508,7 +1525,7 @@ void main() {
             ),
             disabledColor: FlexSubThemes.tintedDisable(
                     colorScheme.primary, colorScheme.secondaryContainer)
-                .withAlpha(kAlphaLowDisabled),
+                .withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1631,7 +1648,7 @@ void main() {
             ),
             disabledColor: FlexSubThemes.tintedDisable(
                     colorScheme.tertiary, colorScheme.secondaryContainer)
-                .withAlpha(kAlphaLowDisabled),
+                .withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1682,7 +1699,7 @@ void main() {
             ),
             disabledColor: FlexSubThemes.tintedDisable(
                     colorScheme.tertiary, colorScheme.tertiaryContainer)
-                .withAlpha(kAlphaLowDisabled),
+                .withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1742,7 +1759,7 @@ void main() {
             ),
             disabledColor:
                 FlexSubThemes.tintedDisable(backgroundColor, selectedColor)
-                    .withAlpha(kAlphaLowDisabled),
+                    .withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1799,7 +1816,8 @@ void main() {
               color: colorScheme.onSurfaceVariant,
               size: 18.0,
             ),
-            disabledColor: colorScheme.onSurface.withAlpha(kAlphaLowDisabled),
+            disabledColor:
+                colorScheme.onSurface.withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -3888,6 +3906,11 @@ void main() {
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
+
+      final Color overlay = colorScheme.secondary;
+      final Color tint = colorScheme.onPrimary;
+      final double factor =
+          FlexSubThemes.tintAlphaFactor(tint, colorScheme.brightness);
       expect(
         FlexSubThemes.floatingActionButtonTheme(
           colorScheme: colorScheme,
@@ -3900,9 +3923,9 @@ void main() {
           FloatingActionButtonThemeData(
             backgroundColor: colorScheme.onPrimary,
             foregroundColor: colorScheme.secondary,
-            focusColor: const Color(0x38b2f3ed),
-            hoverColor: const Color(0x22b2f3ed),
-            splashColor: const Color(0x20a6f1ea),
+            focusColor: FlexSubThemes.tintedFocused(overlay, tint, factor),
+            hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
+            splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(24),
