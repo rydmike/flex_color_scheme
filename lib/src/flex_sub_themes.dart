@@ -567,10 +567,10 @@ abstract final class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedHovered(Color overlay, Color tint, [double factor = 1]) {
     // Used kAlphaTintedHighlight 0x11 = 17 = 6.7%
-    final int usedAlpha =
-        (kAlphaTintedHovered * factor).round().clamp(0x00, 0xFF);
+    final double usedAlpha =
+        (kAlphaTintedHovered * factor).round().clamp(0x00, 0xFF) / 255;
     // Tint color alpha blend into overlay kTintHover 0xB2 = 178 = 69.8%
-    return overlay.blendAlpha(tint, kTintHover).withAlpha(usedAlpha);
+    return overlay.blendAlpha(tint, kTintHover).withValues(alpha: usedAlpha);
   }
 
   /// Returns the FCS opinionated tinted highlight color on an overlay color.
@@ -579,10 +579,12 @@ abstract final class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedHighlight(Color overlay, Color tint, [double factor = 1]) {
     // Used kAlphaTintedHighlight 0x0F = 15 = 5.9%
-    final int usedAlpha =
-        (kAlphaTintedHighlight * factor).round().clamp(0x00, 0xFF);
+    final double usedAlpha =
+        (kAlphaTintedHighlight * factor).round().clamp(0x00, 0xFF) / 255;
     // Tint color alpha blend into overlay kTintHighlight 0xA5 = 165 = 65%
-    return overlay.blendAlpha(tint, kTintHighlight).withAlpha(usedAlpha);
+    return overlay
+        .blendAlpha(tint, kTintHighlight)
+        .withValues(alpha: usedAlpha);
   }
 
   /// Returns the FCS opinionated tinted splash color on an overlay color.
@@ -591,9 +593,10 @@ abstract final class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedSplash(Color overlay, Color tint, [double factor = 1]) {
     // Used kAlphaTintSplash 0x10 = 16 = 6.3%
-    final int usedAlpha = (kAlphaTintSplash * factor).round().clamp(0x00, 0xFF);
+    final double usedAlpha =
+        (kAlphaTintSplash * factor).round().clamp(0x00, 0xFF) / 255;
     // Tint color alpha blend into overlay kTintSplash 0xA5 = 165 = 65%
-    return overlay.blendAlpha(tint, kTintSplash).withAlpha(usedAlpha);
+    return overlay.blendAlpha(tint, kTintSplash).withValues(alpha: usedAlpha);
   }
 
   /// Returns the FCS opinionated tinted splash color on an overlay color.
@@ -602,10 +605,10 @@ abstract final class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedPressed(Color overlay, Color tint, [double factor = 1]) {
     // Used kAlphaTintPressed 0x10 = 16 = 6.3%
-    final int usedAlpha =
-        (kAlphaTintPressed * factor).round().clamp(0x00, 0xFF);
+    final double usedAlpha =
+        (kAlphaTintPressed * factor).round().clamp(0x00, 0xFF) / 255;
     // Tint color alpha blend into overlay kTintPressed 0xA5 = 165 = 65%
-    return overlay.blendAlpha(tint, kTintPressed).withAlpha(usedAlpha);
+    return overlay.blendAlpha(tint, kTintPressed).withValues(alpha: usedAlpha);
   }
 
   /// Returns the FCS opinionated tinted focus color on an overlay color.
@@ -614,10 +617,10 @@ abstract final class FlexSubThemes {
   /// The tint effect is different for light and dark mode.
   static Color tintedFocused(Color overlay, Color tint, [double factor = 1]) {
     // Used kAlphaTintFocused 0x1C = 28 = 11%
-    final int usedAlpha =
-        (kAlphaTintFocused * factor).round().clamp(0x00, 0xFF);
+    final double usedAlpha =
+        (kAlphaTintFocused * factor).round().clamp(0x00, 0xFF) / 255;
     // Tint color alpha blend into overlay kTintFocus 0xB2 = 178 = 70%.
-    return overlay.blendAlpha(tint, kTintFocus).withAlpha(usedAlpha);
+    return overlay.blendAlpha(tint, kTintFocus).withValues(alpha: usedAlpha);
   }
 
   /// Returns the FCS opinionated tinted disabled color on an overlay color.
@@ -627,7 +630,9 @@ abstract final class FlexSubThemes {
   static Color tintedDisable(Color overlay, Color tint) =>
       // Tint color alpha blend into overlay #66=40%
       // Opacity of result #61=38%, same as M3 opacity on disable.
-      overlay.blendAlpha(tint, kTintDisabled).withAlpha(kAlphaDisabled);
+      overlay
+          .blendAlpha(tint, kTintDisabled)
+          .withValues(alpha: kAlphaDisabledFloat);
 
   /// An opinionated [AppBarTheme] theme.
   ///
