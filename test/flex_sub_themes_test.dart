@@ -10754,12 +10754,15 @@ void main() {
         colorScheme: colorScheme,
       );
       expect(
-          textSelection,
-          equals(TextSelectionThemeData(
+        textSelection,
+        equals(
+          TextSelectionThemeData(
             cursorColor: colorScheme.primary,
             selectionColor: colorScheme.primary.withValues(alpha: 0.4),
             selectionHandleColor: colorScheme.primary,
-          )));
+          ),
+        ),
+      );
       //
       textSelection = FlexSubThemes.textSelectionTheme(
         colorScheme: colorScheme,
@@ -10769,12 +10772,15 @@ void main() {
         selectionHandleSchemeColor: SchemeColor.onPrimaryContainer,
       );
       expect(
-          textSelection,
-          equals(TextSelectionThemeData(
+        textSelection,
+        equals(
+          TextSelectionThemeData(
             cursorColor: colorScheme.tertiary,
             selectionColor: colorScheme.secondary.withValues(alpha: 0.3),
             selectionHandleColor: colorScheme.onPrimaryContainer,
-          )));
+          ),
+        ),
+      );
       textSelection = FlexSubThemes.textSelectionTheme(
         colorScheme: colorScheme,
         cursorSchemeColor: SchemeColor.tertiary,
