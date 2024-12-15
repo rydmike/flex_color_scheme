@@ -171,6 +171,7 @@ const double kInputDecoratorRadius = 10;
 ///
 /// Value: 0x3D = 61 = 24%
 const int kNavigationBarIndicatorAlpha = 0x3D;
+const double kNavigationBarIndicatorAlphaFloat = 0x3D / 255;
 
 /// The width of a Material 2 Drawer.
 ///
@@ -261,12 +262,14 @@ const double kTooltipRadius = 8;
 ///
 /// Value: 0x0D = 13 = 5%
 const int kFillColorAlphaLight = 0x0D;
+const double kFillColorAlphaLightFloat = 0x0D / 255;
 
 /// Fill color alpha value for [InputDecorator] used by FlexColorScheme
 /// in dark theme for M2 defaults.
 ///
 /// Value: 0x14 = 20 = 8%
 const int kFillColorAlphaDark = 0x14;
+const double kFillColorAlphaDarkFloat = 0x14 / 255;
 
 /// Enabled border alpha value on border sides.
 ///
@@ -277,6 +280,7 @@ const int kFillColorAlphaDark = 0x14;
 ///
 /// Value: 0xA7 = 167 = 65%
 const int kEnabledBorderAlpha = 0xA7;
+const double kEnabledBorderAlphaFloat = 0xA7 / 255;
 
 /// The surface color alpha blend, for primary colored Chip background.
 ///
@@ -284,6 +288,7 @@ const int kEnabledBorderAlpha = 0xA7;
 ///
 /// Value: 0xCC = 204 = 80%
 const int kChipBackgroundAlphaBlend = 0xCC;
+const double kChipBackgroundAlphaBlendFloat = 0xCC / 255;
 
 /// The surface color alpha blend, for primary colored selected Chip background.
 ///
@@ -291,18 +296,21 @@ const int kChipBackgroundAlphaBlend = 0xCC;
 ///
 /// Value: 0x96 = 150 = 59%
 const int kChipSelectedBackgroundAlphaBlend = 0x96;
+const double kChipSelectedBackgroundAlphaBlendFloat = 0x96 / 255;
 
 /// The onBackground primary alpha blend value for an unselected item, typically
 /// an icon in a TabBar, BottomNavigationBar, NavigationBar or NavigationRail.
 ///
 /// Value: 0x66 = 102 = 40%
 const int kUnselectedBackgroundPrimaryAlphaBlend = 0x66;
+const double kUnselectedBackgroundPrimaryAlphaBlendFloat = 0x66 / 255;
 
 /// The alpha value for an unselected item, typically an icon or text
 /// in a TabBar, BottomNavigationBar, NavigationBar or NavigationRail.
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kUnselectedAlphaBlend = 0xA5;
+const double kUnselectedAlphaBlendFloat = 0xA5 / 255;
 
 // The v7 new tinted interactions effects and disable constants start here.
 // -----------------------------------------------------------------------------
@@ -312,6 +320,7 @@ const int kUnselectedAlphaBlend = 0xA5;
 ///
 /// Value: 0xB2 = 178 = 69.8%
 const int kTintHover = 0xB2;
+const double kTintHoverFloat = 0xB2 / 255;
 
 /// The amount of alpha based opacity used on standard hover effect.
 ///
@@ -319,17 +328,20 @@ const int kTintHover = 0xB2;
 ///
 /// Value: 0x14 = 20 = 8%
 const int kAlphaHovered = 0x14;
+const double kAlphaHoveredFloat = 0x14 / 255;
 
 /// The amount of alpha based opacity used on tinted hover effect.
 ///
 /// Value: 0x11 = 17 = 6.7%
 const int kAlphaTintedHovered = 0x11;
+const double kAlphaTintedHoveredFloat = 0x11 / 255;
 
 /// The amount of alpha blend used on tinted highlight effect that is blended
 /// into overlay color.
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kTintHighlight = 0xA5;
+const double kTintHighlightFloat = 0xA5 / 255;
 
 /// The amount of alpha based opacity used on standard highlight effect.
 ///
@@ -337,17 +349,20 @@ const int kTintHighlight = 0xA5;
 ///
 /// Value: 0x14 = 20 = 8%
 const int kAlphaHighlight = 0x14;
+const double kAlphaHighlightFloat = 0x14 / 255;
 
 /// The amount of alpha based opacity used on tinted highlight effect.
 ///
 /// Value: 0x0F = 15 = 5.9%
 const int kAlphaTintedHighlight = 0x0F;
+const double kAlphaTintedHighlightFloat = 0x0F / 255;
 
 /// The amount of alpha blend used on tinted pressed effect that is blended
 /// into overlay color.
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kTintPressed = 0xA5;
+const double kTintPressedFloat = 0xA5 / 255;
 
 /// The amount of alpha based opacity used on standard pressed effect.
 ///
@@ -355,11 +370,13 @@ const int kTintPressed = 0xA5;
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaPressed = 0x1F;
+const double kAlphaPressedFloat = 0x1F / 255;
 
 /// The amount of alpha based opacity used on tinted pressed effect.
 ///
 /// Value: 0x10 = 16 = 6.3%
 const int kAlphaTintPressed = 0x10;
+const double kAlphaTintPressedFloat = 0x10 / 255;
 
 /// The amount of alpha based opacity used on tinted input pressed effect,
 /// like SearchBar.
@@ -369,12 +386,14 @@ const int kAlphaTintPressed = 0x10;
 ///
 /// Value: 0x19 = 25 = 10% = 0.1
 const int kAlphaInputPressed = 0x19;
+const double kAlphaInputPressedFloat = 0x19 / 255;
 
 /// The amount of alpha blend used on tinted splash effect that is blended
 /// into overlay color.
 ///
 /// Value: 0xA5 = 165 = 65%
 const int kTintSplash = 0xA5;
+const double kTintSplashFloat = 0xA5 / 255;
 
 /// The amount of alpha based opacity used on standard splash effect.
 ///
@@ -382,17 +401,20 @@ const int kTintSplash = 0xA5;
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaSplash = 0x1F;
+const double kAlphaSplashFloat = 0x1F / 255;
 
 /// The amount of alpha based opacity used on tinted splash effect.
 ///
 /// Value: 0x10 = 16 = 6.3%
 const int kAlphaTintSplash = 0x10;
+const double kAlphaTintSplashFloat = 0x10 / 255;
 
 /// The amount of alpha blend used on tinted focus effect that is blended
 /// into overlay color.
 ///
 /// Value: 0xB2 = 178 = 70%
 const int kTintFocus = 0xB2;
+const double kTintFocusFloat = 0xB2 / 255;
 
 /// The amount of alpha based opacity used on standard focus effect.
 ///
@@ -400,17 +422,20 @@ const int kTintFocus = 0xB2;
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaFocused = 0x1F;
+const double kAlphaFocusedFloat = 0x1F / 255;
 
 /// The amount of alpha based opacity used on tinted focus effect.
 ///
 /// Value: 0x1C = 28 = 11%
 const int kAlphaTintFocused = 0x1C;
+const double kAlphaTintFocusedFloat = 0x1C / 255;
 
 /// The amount of alpha blend used on tinted disabled effect that is blended
 /// into overlay color.
 ///
 /// Value: 0x66 = 102 = 40%
 const int kTintDisabled = 0x66;
+const double kTintDisabledFloat = 0x66 / 255;
 
 /// The amount of alpha based opacity used on tinted disabled effect.
 ///
@@ -418,6 +443,7 @@ const int kTintDisabled = 0x66;
 ///
 /// Value: 0x61 = 97 = 38.04%
 const int kAlphaDisabled = 0x61;
+const double kAlphaDisabledFloat = 0x61 / 255;
 
 /// An optional medium amount of alpha based opacity used on disabled
 /// components.
@@ -426,6 +452,7 @@ const int kAlphaDisabled = 0x61;
 ///
 /// Value: 0x52 = 82 = 32.16%
 const int kAlphaMediumDisabled = 0x52;
+const double kAlphaMediumDisabledFloat = 0x52 / 255;
 
 /// An optional lower amount of alpha based opacity used on disabled components.
 ///
@@ -433,6 +460,7 @@ const int kAlphaMediumDisabled = 0x52;
 ///
 /// Value: 0x3D = 61 = 24%
 const int kAlphaLowDisabled = 0x3D;
+const double kAlphaLowDisabledFloat = 0x3D / 255;
 
 /// An optional lower amount of alpha based opacity used on tinted disabled
 /// effect.
@@ -442,6 +470,7 @@ const int kAlphaLowDisabled = 0x3D;
 ///
 /// Value: 0x1F = 31 = 12.16%
 const int kAlphaVeryLowDisabled = 0x1F;
+const double kAlphaVeryLowDisabledFloat = 0x1F / 255;
 
 /// An optional ultra low amount of alpha based opacity used on tinted disabled
 /// effect.
@@ -450,6 +479,7 @@ const int kAlphaVeryLowDisabled = 0x1F;
 ///
 /// Value: 0x0A = 10 = 3.92%%
 const int kAlphaUltraLowDisabled = 0x0A;
+const double kAlphaUltraLowDisabledFloat = 0x0A / 255;
 
 /// Default Color of disabled M2 Switch track color in M2
 ///
@@ -461,41 +491,49 @@ const Color kSwitchM2LightTrackColor = Color(0x52000000);
 ///
 /// Value: 0xDD = 221 = 86.67%
 const int kAlphaUnselect = 0xDD;
+const double kAlphaUnselectFloat = 0xDD / 255;
 
 /// Switch in M2 mode selected light mode alpha.
 ///
 /// Value: 0x70 = 112 = 43.92%
 const int kAlphaM2SwitchTrackLight = 0x70;
+const double kAlphaM2SwitchTrackLightFloat = 0x70 / 255;
 
 /// Switch in M2 mode selected dark mode alpha.
 ///
 /// Value: 0x80 = 128 = 50.20%
 const int kAlphaM2SwitchTrackDark = 0x80;
+const double kAlphaM2SwitchTrackDarkFloat = 0x80 / 255;
 
 /// Switch in M2 mode unselected light mode alpha.
 ///
 /// Value: 0x50 = 80 = 31.37%
 const int kAlphaM2SwitchUnselectTrackLight = 0x50;
+const double kAlphaM2SwitchUnselectTrackLightFloat = 0x50 / 255;
 
 /// Switch in M2 mode unselected dark mode alpha.
 ///
 /// Value: 0x65 = 101 = 39.61%
 const int kAlphaM2SwitchUnselectTrackDark = 0x65;
+const double kAlphaM2SwitchUnselectTrackDarkFloat = 0x65 / 255;
 
 /// Switch in M3 mode unselected light mode alpha.
 ///
 /// Value: 0x33 = 51 = 20.00%
 const int kAlphaM3SwitchUnselectTrackLight = 0x33;
+const double kAlphaM3SwitchUnselectTrackLightFloat = 0x33 / 255;
 
 /// Switch in M3 mode unselected dark mode alpha.
 ///
 /// Value: 0x44 = 68 = 26.67%
 const int kAlphaM3SwitchUnselectTrackDark = 0x44;
+const double kAlphaM3SwitchUnselectTrackDarkFloat = 0x44 / 255;
 
 /// Tick mark alpha for Slider and RangeSlider.
 ///
 /// Value: 0x8A = 138 = 54.12%
 const int kAlphaSliderTickMark = 0x8A;
+const double kAlphaSliderTickMarkFloat = 0x8A / 255;
 
 /// Input decorator light color decorator background color, hover mode
 /// darken level percentage.
@@ -552,31 +590,37 @@ const int kLoDarkTextBlend = 15;
 ///
 /// Value: 0xD8 = 85%
 const int kHiLightTextAlpha = 0xD8;
+const double kHiLightTextAlphaFloat = 0xD8 / 255;
 
 /// High blended dark TextTheme alpha value
 ///
 /// Value: 0xE2 = 92%
 const int kHiDarkTextAlpha = 0xE2;
+const double kHiDarkTextAlphaFloat = 0xE2 / 255;
 
 /// Medium blended light TextTheme alpha value
 ///
 /// Value: 0xF4 = 96%
 const int kMedLightTextAlpha = 0xF4;
+const double kMedLightTextAlphaFloat = 0xF4 / 255;
 
 /// Medium blended dark TextTheme alpha value
 ///
 /// Value: 0xFF = 100%
 const int kMedDarkTextAlpha = 0xFF;
+const double kMedDarkTextAlphaFloat = 0xFF / 255;
 
 /// Low blended light TextTheme alpha value
 ///
 /// Value: 0xFF = 100%
 const int kLoLightTextAlpha = 0xFF;
+const double kLoLightTextAlphaFloat = 0xFF / 255;
 
 /// Low blended dark TextTheme alpha value
 ///
 /// Value: 0xFF = 100%
 const int kLoDarkTextAlpha = 0xFF;
+const double kLoDarkTextAlphaFloat = 0xFF / 255;
 
 // Primary TextTheme
 
@@ -614,31 +658,37 @@ const int kLoDarkPrimTextBlend = 7;
 ///
 /// Value: 0xD8 = 85%
 const int kHiLightPrimTextAlpha = 0xD8;
+const double kHiLightPrimTextAlphaFloat = 0xD8 / 255;
 
 /// High blended dark PrimaryTextTheme alpha value
 ///
 /// Value: 0xE5 = 90%
 const int kHiDarkPrimTextAlpha = 0xE5;
+const double kHiDarkPrimTextAlphaFloat = 0xE5 / 255;
 
 /// Medium blended light PrimaryTextTheme alpha value
 ///
 /// Value: 0xF2 = 95%
 const int kMedLightPrimTextAlpha = 0xF2;
+const double kMedLightPrimTextAlphaFloat = 0xF2 / 255;
 
 /// Medium blended dark PrimaryTextTheme alpha value
 ///
 /// Value: 0xFF = 100%
 const int kMedDarkPrimTextAlpha = 0xFF;
+const double kMedDarkPrimTextAlphaFloat = 0xFF / 255;
 
 /// Low blended light PrimaryTextTheme alpha value
 ///
 /// Value: 0xFF = 100%
 const int kLoLightPrimTextAlpha = 0xFF;
+const double kLoLightPrimTextAlphaFloat = 0xFF / 255;
 
 /// Low blended dark PrimaryTextTheme alpha value
 ///
 /// Value: 0xFF = 100%
 const int kLoDarkPrimTextAlpha = 0xFF;
+const double kLoDarkPrimTextAlphaFloat = 0xFF / 255;
 
 // Version 7.2 new const properties
 // -----------------------------------------------------------------------------
