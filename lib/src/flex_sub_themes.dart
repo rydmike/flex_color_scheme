@@ -8130,9 +8130,9 @@ abstract final class FlexSubThemes {
 
     // Get used selectionColor, defaults to primary.
     // Get around the opacity optimized out assert by using alpha.
-    final Color selectionColor = schemeColor(
-            selectionSchemeColor ?? SchemeColor.primary, colorScheme)
-        .withAlpha(((selectionOpacity ?? kTextSelectionOpacity) * 255).round());
+    final Color selectionColor =
+        schemeColor(selectionSchemeColor ?? SchemeColor.primary, colorScheme)
+            .withValues(alpha: selectionOpacity ?? kTextSelectionOpacity);
 
     // Get used selectionHandleColor, defaults to primary.
     final Color selectionHandleColor = selectionHandleCustomColor ??
