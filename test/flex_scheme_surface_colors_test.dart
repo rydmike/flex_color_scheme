@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'testFlexSchemeSurfaceColorsEquality.dart';
+import 'test_flex_scheme_surface_colors_equality.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 void main() {
