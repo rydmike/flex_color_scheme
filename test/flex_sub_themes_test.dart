@@ -308,7 +308,6 @@ void main() {
         FlexSubThemes.bottomSheetTheme(),
         equals(
           const BottomSheetThemeData(
-            clipBehavior: Clip.antiAlias,
             elevation: 1,
             modalElevation: 2,
             shape: RoundedRectangleBorder(

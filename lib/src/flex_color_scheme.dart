@@ -7765,6 +7765,7 @@ class FlexColorScheme with Diagnosticable {
               radius: subTheme.bottomSheetRadius ?? platformRadius,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              clipBehavior: subTheme.bottomSheetClipBehavior,
             )
           : null,
       //

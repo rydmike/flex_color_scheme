@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.1.0 WIP
 
-**Dec 14, 2024**
+**Dec 27, 2024**
 
 ### Package
 
@@ -16,6 +16,12 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * **Slider**: Added theming properties for the Slider thumb color.
   * `FlexSubThemesData` got the property `sliderThumbSchemeColor`.
   * `FlexSubThemes.sliderTheme` got the property `thumbSchemeColor`.
+* **BottomSheet**: Added theming properties for the BottomSheet clip behavior property.
+  * `FlexSubThemesData` got the property `bottomSheetClipBehavior`.
+  * `FlexSubThemes.bottomSheetTheme` got the property `clipBehavior`.
+  * The default value is now `null` causing the sheet to use `Clip.none` as the default via the component's built-in default value. Keeping it null, or setting it to `Clip.none` helps avoid this Flutter SDK issue: https://github.com/rydmike/flex_color_scheme/issues/270 where using a `BackdropFilter` does not work correctly is any other clip behavior value than `Clip.none` is used.
+  * **CHANGE/FIX** P
+    * Previously **FlexColorScheme** made `BottomSheetThemeData` where the clip behavior was set to `Clip.antialias` by default, causing the issue with `BackdropFilter` usage to emerge by default. Now you have to select another clip behavior explicitly to get the same result as before, and ne warned that Flutter SDK has issues when doing so.
 * **TabBar**: Added theming properties for the TabBar indicator animation behavior, that are based on the new enum property `TabIndicatorAnimation` in Flutter 3.27.0.
   * `FlexSubThemesData` got the property `tabBarIndicatorAnimation`.
   * `FlexSubThemes.tabBarTheme` got the property `indicatorAnimation`.

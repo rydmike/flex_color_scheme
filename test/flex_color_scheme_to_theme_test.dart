@@ -2240,40 +2240,37 @@ void main() {
       useMaterial3: false,
     );
 
-    const Color blendColor = Color(0xffcd5758);
+    const Color primColorL = Color(0xffcd5758);
     final FlexSchemeSurfaceColors surf = FlexSchemeSurfaceColors.blend(
       brightness: Brightness.light,
       useMaterial3: false,
       surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
       blendLevel: 30,
-      // schemeColors: effectiveColors,
-      // scaffoldBaseColor: subTheme.scaffoldBackgroundBaseColor,
       blendColors: const FlexSchemeSurfaceColors(
-        surface: blendColor,
-        surfaceDim: blendColor,
-        surfaceBright: blendColor,
-        surfaceContainerLowest: blendColor,
-        surfaceContainerLow: blendColor,
-        surfaceContainer: blendColor,
-        surfaceContainerHigh: blendColor,
-        surfaceContainerHighest: blendColor,
-        inverseSurface: blendColor,
-        dialogBackground: blendColor,
-        scaffoldBackground: blendColor,
+        surface: primColorL,
+        surfaceDim: primColorL,
+        surfaceBright: primColorL,
+        surfaceContainerLowest: primColorL,
+        surfaceContainerLow: primColorL,
+        surfaceContainer: primColorL,
+        surfaceContainerHigh: primColorL,
+        surfaceContainerHighest: primColorL,
+        inverseSurface: primColorL,
+        dialogBackground: primColorL,
+        scaffoldBackground: primColorL,
       ),
     );
 
     final ColorScheme realRawSchemeLight = ColorScheme(
       brightness: Brightness.light,
-      primary: const Color(0xffcd5758),
+      primary: primColorL,
       onPrimary: const Color(0xffffffff),
-      primaryContainer:
-          const Color(0xffcd5758).lighten(20).blend(Colors.white, 60),
+      primaryContainer: primColorL.lighten(20).blend(Colors.white, 60),
       onPrimaryContainer: const Color(0xff000000),
-      primaryFixed: _fixedColor(const Color(0xffcd5758)),
-      primaryFixedDim: _fixedDimColor(const Color(0xffcd5758)),
-      onPrimaryFixed: _onFixedColor(const Color(0xffcd5758)),
-      onPrimaryFixedVariant: _onFixedVariantColor(const Color(0xffcd5758)),
+      primaryFixed: _fixedColor(primColorL),
+      primaryFixedDim: _fixedDimColor(primColorL),
+      onPrimaryFixed: _onFixedColor(primColorL),
+      onPrimaryFixedVariant: _onFixedVariantColor(primColorL),
       secondary: const Color(0xff57c8d3),
       onSecondary: const Color(0xff000000),
       secondaryContainer:
@@ -2285,10 +2282,8 @@ void main() {
       onSecondaryFixedVariant: _onFixedVariantColor(const Color(0xff57c8d3)),
       tertiary: const Color(0xfff37d7e),
       onTertiary: const Color(0xff000000),
-      tertiaryContainer: const Color(0xffcd5758)
-          .brighten(15)
-          .lighten(20)
-          .blend(Colors.white, 60),
+      tertiaryContainer:
+          primColorL.brighten(15).lighten(20).blend(Colors.white, 60),
       onTertiaryContainer: const Color(0xff000000),
       tertiaryFixed: _fixedColor(const Color(0xfff37d7e)),
       tertiaryFixedDim: _fixedDimColor(const Color(0xfff37d7e)),
@@ -2324,10 +2319,9 @@ void main() {
         // The 30 blend level will be produced by the colors given here
         // with 0 blend level
         blendLevel: 0,
-        primary: const Color(0xffcd5758),
+        primary: primColorL,
         onPrimary: const Color(0xffffffff),
-        primaryContainer:
-            const Color(0xffcd5758).lighten(20).blend(Colors.white, 60),
+        primaryContainer: primColorL.lighten(20).blend(Colors.white, 60),
         onPrimaryContainer: const Color(0xff000000),
         secondary: const Color(0xff57c8d3),
         onSecondary: const Color(0xff000000),
@@ -2336,10 +2330,8 @@ void main() {
         onSecondaryContainer: const Color(0xff000000),
         tertiary: const Color(0xfff37d7e),
         onTertiary: const Color(0xff000000),
-        tertiaryContainer: const Color(0xffcd5758)
-            .brighten(15)
-            .lighten(20)
-            .blend(Colors.white, 60),
+        tertiaryContainer:
+            primColorL.brighten(15).lighten(20).blend(Colors.white, 60),
         onTertiaryContainer: const Color(0xff000000),
         error: const Color(0xff790000),
         onError: const Color(0xffffffff),
@@ -2374,10 +2366,9 @@ void main() {
     });
     final FlexColorScheme fcsLightH2RealRaw = FlexColorScheme(
       colorScheme: realRawSchemeLight,
-      primary: const Color(0xffcd5758),
+      primary: primColorL,
       onPrimary: const Color(0xffffffff),
-      primaryContainer:
-          const Color(0xffcd5758).lighten(20).blend(Colors.white, 60),
+      primaryContainer: primColorL.lighten(20).blend(Colors.white, 60),
       onPrimaryContainer: const Color(0xff000000),
       secondary: const Color(0xff57c8d3),
       onSecondary: const Color(0xff000000),
@@ -2386,10 +2377,8 @@ void main() {
       onSecondaryContainer: const Color(0xff000000),
       tertiary: const Color(0xfff37d7e),
       onTertiary: const Color(0xff000000),
-      tertiaryContainer: const Color(0xffcd5758)
-          .brighten(15)
-          .lighten(20)
-          .blend(Colors.white, 60),
+      tertiaryContainer:
+          primColorL.brighten(15).lighten(20).blend(Colors.white, 60),
       onTertiaryContainer: const Color(0xff000000),
       error: const Color(0xff790000),
       onError: const Color(0xffffffff),
@@ -2454,81 +2443,109 @@ void main() {
       usedColors: 2,
     );
 
-    const FlexColorScheme fcsDarkH2Raw = FlexColorScheme(
+    const Color primColorD = Color(0xffda8585); // Prim Mandy dark
+    final Color tertiaryD = primColorD.brighten(15);
+
+    final FlexSchemeSurfaceColors surfD = FlexSchemeSurfaceColors.blend(
+      brightness: Brightness.dark,
+      useMaterial3: false,
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 30,
+      blendColors: const FlexSchemeSurfaceColors(
+        surface: primColorD,
+        surfaceDim: primColorD,
+        surfaceBright: primColorD,
+        surfaceContainerLowest: primColorD,
+        surfaceContainerLow: primColorD,
+        surfaceContainer: primColorD,
+        surfaceContainerHigh: primColorD,
+        surfaceContainerHighest: primColorD,
+        inverseSurface: primColorD,
+        dialogBackground: primColorD,
+        scaffoldBackground: primColorD,
+      ),
+    );
+
+    final FlexColorScheme fcsDarkH2Raw = FlexColorScheme(
       brightness: Brightness.dark,
       // Override the ones we can set via direct input
       // to be equal to direct inputs
       colorScheme: ColorScheme(
         brightness: Brightness.dark,
-        primary: Color(0xffda8585),
-        onPrimary: Color(0xffffffff),
-        primaryContainer: Color(0xff5f3232),
-        onPrimaryContainer: Color(0xffffffff),
-        primaryFixed: Color(0xfff0dcdc),
-        primaryFixedDim: Color(0xffe0b8b8),
-        onPrimaryFixed: Color(0xff691f20),
-        onPrimaryFixedVariant: Color(0xff772324),
-        secondary: Color(0xff68cdd7),
-        onSecondary: Color(0xff000000),
-        secondaryContainer: Color(0xff14464b),
-        onSecondaryContainer: Color(0xffffffff),
-        secondaryFixed: Color(0xffb4dde2),
-        secondaryFixedDim: Color(0xff8ecdd3),
-        onSecondaryFixed: Color(0xff000000),
-        onSecondaryFixedVariant: Color(0xff081c1e),
-        tertiary: Color(0xffffabab),
-        onTertiary: Color(0xff000000),
-        tertiaryContainer: Color(0xffb33030),
-        onTertiaryContainer: Color(0xffffffff),
-        tertiaryFixed: Color(0xffefc9c9),
-        tertiaryFixedDim: Color(0xffe6a9aa),
-        onTertiaryFixed: Color(0xff2d0404),
-        onTertiaryFixedVariant: Color(0xff5c0909),
-        error: Color(0xffcf6679),
-        onError: Color(0xff000000),
-        errorContainer: Color(0xffb1384e),
-        onErrorContainer: Color(0xffffffff),
-        surface: Color(0xff050404),
-        onSurface: Color(0xfff1f1f1),
-        surfaceDim: Color(0xff030202),
-        surfaceBright: Color(0xff292525),
-        surfaceContainerLowest: Color(0xff000000),
-        surfaceContainerLow: Color(0xff0c0a0a),
-        surfaceContainer: Color(0xff120f0f),
-        surfaceContainerHigh: Color(0xff1a1717),
-        surfaceContainerHighest: Color(0xff252121),
-        onSurfaceVariant: Color(0xffcacaca),
-        outline: Color(0xff777777),
-        outlineVariant: Color(0xff414141),
-        shadow: Color(0xff000000),
-        scrim: Color(0xff000000),
-        inverseSurface: Color(0xfff3f0f0),
-        onInverseSurface: Color(0xff2a2a2a),
-        inversePrimary: Color(0xff5f3c3c),
-        surfaceTint: Color(0xffda8585),
+        primary: primColorD,
+        onPrimary: const Color(0xffffffff),
+        primaryContainer: primColorD.darken(5).blend(Colors.black, 55),
+        onPrimaryContainer: const Color(0xffffffff),
+        primaryFixed: _fixedColor(primColorL),
+        primaryFixedDim: _fixedDimColor(primColorL),
+        onPrimaryFixed: _onFixedColor(primColorL),
+        onPrimaryFixedVariant: _onFixedVariantColor(primColorL),
+        secondary: const Color(0xff68cdd7),
+        onSecondary: const Color(0xff000000),
+        secondaryContainer:
+            const Color(0xff68cdd7).darken(25).blend(Colors.black, 50),
+        onSecondaryContainer: const Color(0xffffffff),
+        secondaryFixed: _fixedColor(const Color(0xff57c8d3)),
+        secondaryFixedDim: _fixedDimColor(const Color(0xff57c8d3)),
+        onSecondaryFixed: _onFixedColor(const Color(0xff57c8d3)),
+        onSecondaryFixedVariant: _onFixedVariantColor(const Color(0xff57c8d3)),
+        tertiary: tertiaryD,
+        onTertiary: const Color(0xff000000),
+        tertiaryContainer:
+            primColorD.brighten(15).darken(20).blend(Colors.black, 30),
+        onTertiaryContainer: const Color(0xff000000),
+        tertiaryFixed: _fixedColor(const Color(0xfff37d7e)),
+        tertiaryFixedDim: _fixedDimColor(const Color(0xfff37d7e)),
+        onTertiaryFixed: _onFixedColor(const Color(0xfff37d7e)),
+        onTertiaryFixedVariant: _onFixedVariantColor(const Color(0xfff37d7e)),
+        error: const Color(0xffcf6679),
+        onError: const Color(0xff000000),
+        errorContainer: const Color(0xffb1384e),
+        onErrorContainer: const Color(0xffffffff),
+        surface: const Color(0xff050404),
+        onSurface: const Color(0xfff1f1f1),
+        surfaceDim: surfD.surfaceDim.darken(5),
+        surfaceBright: surfD.surfaceBright.darken(5),
+        surfaceContainerLowest: surfD.surfaceContainerLowest.darken(5),
+        surfaceContainerLow: surfD.surfaceContainerLow.darken(5),
+        surfaceContainer: surfD.surfaceContainer.darken(5),
+        surfaceContainerHigh: surfD.surfaceContainerHigh.darken(5),
+        surfaceContainerHighest: surfD.surfaceContainerHighest.darken(5),
+        onSurfaceVariant: const Color(0xffcacaca),
+        outline: const Color(0xff777777),
+        outlineVariant: const Color(0xff414141),
+        shadow: const Color(0xff000000),
+        scrim: const Color(0xff000000),
+        inverseSurface: const Color(0xfff3f0f0),
+        onInverseSurface: const Color(0xff2a2a2a),
+        inversePrimary: _inversePrimary(
+            Brightness.dark, primColorD, const Color(0xff050404)),
+        surfaceTint: primColorD,
       ),
-      primary: Color(0xffda8585),
-      onPrimary: Color(0xffffffff),
-      primaryContainer: Color(0xff5f3232),
-      onPrimaryContainer: Color(0xffffffff),
-      secondary: Color(0xff68cdd7),
-      onSecondary: Color(0xff000000),
-      secondaryContainer: Color(0xff14464b),
-      onSecondaryContainer: Color(0xffffffff),
-      tertiary: Color(0xffffabab),
-      onTertiary: Color(0xff000000),
-      tertiaryContainer: Color(0xffb33030),
-      onTertiaryContainer: Color(0xffffffff),
-      error: Color(0xffcf6679),
-      onError: Color(0xff000000),
-      errorContainer: Color(0xffb1384e),
-      onErrorContainer: Color(0xffffffff),
-      surface: Color(0xff050404),
-      onSurface: Color(0xfff1f1f1),
+      primary: primColorD,
+      onPrimary: const Color(0xffffffff),
+      primaryContainer: primColorD.darken(5).blend(Colors.black, 55),
+      onPrimaryContainer: const Color(0xffffffff),
+      secondary: const Color(0xff68cdd7),
+      onSecondary: const Color(0xff000000),
+      secondaryContainer:
+          const Color(0xff68cdd7).darken(25).blend(Colors.black, 50),
+      onSecondaryContainer: const Color(0xffffffff),
+      tertiary: const Color(0xffffabab),
+      onTertiary: const Color(0xff000000),
+      tertiaryContainer:
+          primColorD.brighten(15).darken(20).blend(Colors.black, 30),
+      onTertiaryContainer: const Color(0xffffffff),
+      error: const Color(0xffcf6679),
+      onError: const Color(0xff000000),
+      errorContainer: FlexColor.darkErrorContainer(const Color(0xffcf6679)),
+      onErrorContainer: const Color(0xffffffff),
+      surface: const Color(0xff050404),
+      onSurface: const Color(0xfff1f1f1),
       //
-      scaffoldBackground: Color(0xff000000),
-      appBarBackground: Color(0xff0c0a0a),
-      dialogBackground: Color(0xff1a1717),
+      scaffoldBackground: const Color(0xff000000),
+      appBarBackground: surfD.surfaceContainerLow.darken(5), // 0xff0c0a0a
+      dialogBackground: surfD.dialogBackground.darken(5), // 0xff1a1717,
       tabBarStyle: FlexTabBarStyle.forBackground,
       tooltipsMatchBackground: false,
       transparentStatusBar: true,
@@ -2542,9 +2559,48 @@ void main() {
       subThemesData: null,
     );
 
+    test('scaffoldBackground', () {
+      expect(fcsDarkH2.scaffoldBackground, equals(const Color(0xff000000)));
+    });
+
+    test('appBarBackground', () {
+      expect(fcsDarkH2.appBarBackground,
+          equals(surfD.surfaceContainerLow.darken(5)));
+    });
+
+    test('dialogBackground = dialogBackground darken5', () {
+      expect(
+          fcsDarkH2.dialogBackground, equals(surfD.dialogBackground.darken(5)));
+    });
+    // test('dialogBackground = diag', () {
+    //   expect(fcsDarkH2.dialogBackground, equals(surfD.dialogBackground));
+    // });
+    // test('dialogBackground = surf', () {
+    //   expect(fcsDarkH2.dialogBackground, equals(surfD.surface));
+    // });
+    // test('dialogBackground = surf darken5', () {
+    //   expect(fcsDarkH2.dialogBackground, equals(surfD.surface.darken(5)));
+    // });
+
+    test('dialogBackground Raw', () {
+      expect(fcsDarkH2Raw.dialogBackground,
+          equals(surfD.dialogBackground.darken(5)));
+    });
+
+    test(
+        'FCS7.80a-scheme-thresh: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'blend 30 and 2 colors and true black '
+        'EXPECT equals scheme strings.', () {
+      testColorSchemeEquality(
+        fcsDarkH2.toScheme,
+        fcsDarkH2Raw.toScheme,
+        threshold: 0.000,
+      );
+    });
+
     test(
         'FCS7.80a-scheme: GIVEN a Equal Raw and FlexColorScheme.dark with '
-        'heavy branding and 2 colors and true black '
+        'blend 30 and 2 colors and true black '
         'EXPECT equals scheme strings.', () {
       expect(
         fcsDarkH2.toScheme.toString(minLevel: DiagnosticLevel.fine),
@@ -2555,16 +2611,16 @@ void main() {
     });
     test(
         'FCS7.80b-scheme: GIVEN a Equal Raw and FlexColorScheme.dark with '
-        'heavy branding and 2 colors and true black EXPECT equal objects.', () {
-      testColorSchemeEquality(
+        'blend 30 and 2 colors and true black EXPECT equal '
+        'scheme objects.', () {
+      expect(
         fcsDarkH2.toScheme,
-        fcsDarkH2Raw.toScheme,
-        threshold: 0.006,
+        equals(fcsDarkH2Raw.toScheme),
       );
     });
     test(
-        'FCS7.80c-string: GIVEN a Equal Raw and FlexColorScheme.dark with '
-        'heavy branding and 2 colors and true black that produce same '
+        'FCS7.80c-fcs: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'blend 30 and 2 colors and true black that produce same '
         'ColorScheme but via different config '
         'EXPECT unequal equal objects.', () {
       expect(
@@ -2574,15 +2630,15 @@ void main() {
     });
     test(
         'FCS7.80d-object: GIVEN a Equal Raw and FlexColorScheme.dark with '
-        'heavy branding and 2 colors EXPECT equal objects.', () {
+        'blend 30 and 2 colors EXPECT equal objects.', () {
       expect(
         fcsDarkH2,
         equals(fcsDarkH2Raw),
       );
     });
     test(
-        'FCS7.80e: GIVEN a Raw and FlexColorScheme.dark with heavy '
-        'branding and 2 colors and true black, that define SAME '
+        'FCS7.80e-string: GIVEN a Raw and FlexColorScheme.dark with blend '
+        '30 and 2 colors and true black, that define SAME '
         'FlexColorScheme.toScheme and theme but are unequal as '
         'FlexColorScheme objects '
         'EXPECT equals toTheme.', () {
@@ -3362,7 +3418,7 @@ void main() {
       );
       expect(
         theme.bottomSheetTheme.clipBehavior,
-        equals(Clip.antiAlias),
+        equals(null),
       );
       expect(
         theme.bottomSheetTheme.shape,
@@ -3385,7 +3441,9 @@ void main() {
       final ThemeData theme = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
         useMaterial3: true,
-        subThemesData: const FlexSubThemesData(),
+        subThemesData: const FlexSubThemesData(
+          bottomSheetClipBehavior: Clip.antiAlias,
+        ),
       ).toTheme;
       final ColorScheme scheme = theme.colorScheme;
       final ThemeData refTheme = ThemeData.from(colorScheme: scheme);
@@ -3438,6 +3496,7 @@ void main() {
           bottomSheetRadius: 8,
           bottomSheetElevation: 2,
           bottomSheetModalElevation: 12,
+          bottomSheetClipBehavior: Clip.hardEdge,
           bottomSheetBackgroundColor: SchemeColor.surface,
           bottomSheetModalBackgroundColor: SchemeColor.surfaceContainer,
         ),
@@ -3461,7 +3520,7 @@ void main() {
       );
       expect(
         theme.bottomSheetTheme.clipBehavior,
-        equals(Clip.antiAlias),
+        equals(Clip.hardEdge),
       );
       expect(
         theme.bottomSheetTheme.shape,
@@ -3491,6 +3550,7 @@ void main() {
           bottomSheetModalElevation: 10,
           bottomSheetBackgroundColor: SchemeColor.onPrimary,
           bottomSheetModalBackgroundColor: SchemeColor.surfaceContainer,
+          bottomSheetClipBehavior: Clip.antiAliasWithSaveLayer,
         ),
       );
       final ColorScheme scheme = theme.colorScheme;
@@ -3515,7 +3575,7 @@ void main() {
       );
       expect(
         theme.bottomSheetTheme.clipBehavior,
-        equals(Clip.antiAlias),
+        equals(Clip.antiAliasWithSaveLayer),
       );
       expect(
         theme.bottomSheetTheme.shape,
@@ -3543,6 +3603,7 @@ void main() {
           bottomSheetRadius: 20,
           bottomSheetModalElevation: 10,
           bottomSheetModalBackgroundColor: SchemeColor.surfaceContainer,
+          bottomSheetClipBehavior: Clip.none,
         ),
       );
       final ColorScheme scheme = theme.colorScheme;
@@ -3558,7 +3619,7 @@ void main() {
       );
       expect(
         theme.bottomSheetTheme.clipBehavior,
-        equals(Clip.antiAlias),
+        equals(Clip.none),
       );
       expect(
         theme.bottomSheetTheme.shape,
