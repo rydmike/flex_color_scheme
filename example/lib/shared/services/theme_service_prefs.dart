@@ -808,6 +808,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= FlexScaffoldBaseColor.values.length) return defaultValue;
         return FlexScaffoldBaseColor.values[value] as T;
       }
+      // T is Clip is nullable value.
+      if (sameTypes<T, Clip?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded Clip?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= Clip.values.length) return defaultValue;
+        return Clip.values[value] as T;
+      }
+      // T is Clip none nullable value.
+      if (sameTypes<T, Clip>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded Clip : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= Clip.values.length) return defaultValue;
+        return Clip.values[value] as T;
+      }
       //
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
