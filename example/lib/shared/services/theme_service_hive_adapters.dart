@@ -551,3 +551,27 @@ class FlexScaffoldBaseColorAdapter extends TypeAdapter<FlexScaffoldBaseColor?> {
   @override
   int get typeId => 176;
 }
+
+/// A Hive data type adapter for enum [Clip], nullable.
+///
+/// Handles storing `null` value as -1 and returns anything out of enum
+/// index range as null value.
+class ClipAdapter extends TypeAdapter<Clip?> {
+  @override
+  Clip? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= Clip.values.length) {
+      return null;
+    } else {
+      return Clip.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, Clip? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 177;
+}
