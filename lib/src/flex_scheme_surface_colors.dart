@@ -190,7 +190,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     ///
     /// This was used as a divisor for surfaceVariant color in versions
     /// before V8, but since surfaceVariant color is removed it is no longer
-    /// used internally. The default value 1 is always used. Might deprecated
+    /// used internally. The default value 1 is always used. Might deprecate
     /// this property later.
     final int surfaceVariantBlendDivide = 1,
 
