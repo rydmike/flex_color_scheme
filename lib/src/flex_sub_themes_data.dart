@@ -440,6 +440,7 @@ class FlexSubThemesData with Diagnosticable {
     this.bottomSheetRadius,
     this.bottomSheetElevation,
     this.bottomSheetModalElevation,
+    this.bottomSheetClipBehavior,
     //
     this.bottomNavigationBarLabelTextStyle,
     this.bottomNavigationBarSelectedLabelSize,
@@ -3345,6 +3346,18 @@ class FlexSubThemesData with Diagnosticable {
   /// is true, and to [kBottomSheetModalElevationM2] = 8 if false.
   final double? bottomSheetModalElevation;
 
+  /// Defines the bottom sheet's [Material.clipBehavior]
+  /// by overriding the default value for [BottomSheet.clipBehavior].
+  ///
+  /// Use this property to enable clipping of content when the bottom sheet
+  /// has a custom [shape] and the content can extend past this shape.
+  /// For example, a bottom sheet with rounded corners and an edge-to-edge
+  /// [Image] at the top.
+  ///
+  /// If this property is null then then the behavior will be [Clip.none],
+  /// via Flutter's default values.
+  final Clip? bottomSheetClipBehavior;
+
   // ---------------------------------------------------------------------------
   //
   // BottomNavigationBar Properties
@@ -4391,6 +4404,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? bottomSheetRadius,
     final double? bottomSheetElevation,
     final double? bottomSheetModalElevation,
+    final Clip? bottomSheetClipBehavior,
     //
     final TextStyle? bottomNavigationBarLabelTextStyle,
     final double? bottomNavigationBarSelectedLabelSize,
@@ -4904,6 +4918,8 @@ class FlexSubThemesData with Diagnosticable {
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
       bottomSheetModalElevation:
           bottomSheetModalElevation ?? this.bottomSheetModalElevation,
+      bottomSheetClipBehavior:
+          bottomSheetClipBehavior ?? this.bottomSheetClipBehavior,
       //
       bottomNavigationBarLabelTextStyle: bottomNavigationBarLabelTextStyle ??
           this.bottomNavigationBarLabelTextStyle,
@@ -5366,6 +5382,7 @@ class FlexSubThemesData with Diagnosticable {
         other.bottomSheetRadius == bottomSheetRadius &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
+        other.bottomSheetClipBehavior == bottomSheetClipBehavior &&
         //
         other.bottomNavigationBarLabelTextStyle ==
             bottomNavigationBarLabelTextStyle &&
@@ -5751,6 +5768,7 @@ class FlexSubThemesData with Diagnosticable {
         bottomSheetRadius,
         bottomSheetElevation,
         bottomSheetModalElevation,
+        bottomSheetClipBehavior,
         //
         bottomNavigationBarLabelTextStyle,
         bottomNavigationBarSelectedLabelSize,
@@ -6324,6 +6342,8 @@ class FlexSubThemesData with Diagnosticable {
         'bottomSheetElevation', bottomSheetElevation));
     properties.add(DiagnosticsProperty<double>(
         'bottomSheetModalElevation', bottomSheetModalElevation));
+    properties.add(
+        EnumProperty<Clip>('bottomSheetClipBehavior', bottomSheetClipBehavior));
     //
     properties.add(DiagnosticsProperty<TextStyle>(
         'bottomNavigationBarLabelTextStyle',

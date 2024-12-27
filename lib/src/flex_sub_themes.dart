@@ -1202,8 +1202,8 @@ abstract final class FlexSubThemes {
     );
   }
 
-  /// An opinionated [BottomSheetThemeData] with custom top corner
-  /// radius.
+  /// A theme helper for [BottomSheetThemeData] for customizing the theme
+  /// for [BottomSheet].
   ///
   /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 28,
   /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
@@ -1240,12 +1240,17 @@ abstract final class FlexSubThemes {
     /// https://m3.material.io/components/bottom-sheets/specs
     final double? radius,
 
-    /// The clipBehavior of the bottom sheet theme, defaults to
-    /// [Clip.antiAlias] for smoother clipping when using rounded corners.
+    /// Defines the bottom sheet's [Material.clipBehavior]
+    /// by overriding the default value for [BottomSheet.clipBehavior].
     ///
-    /// This property is not available in [FlexSubThemeData] but you can use
-    /// it if you otherwise use this as theme helper.
-    final Clip clipBehavior = Clip.antiAlias,
+    /// Use this property to enable clipping of content when the bottom sheet
+    /// has a custom [shape] and the content can extend past this shape.
+    /// For example, a bottom sheet with rounded corners and an edge-to-edge
+    /// [Image] at the top.
+    ///
+    /// If this property is null then then the behavior will be [Clip.none],
+    /// via Flutter's default values.
+    final Clip? clipBehavior,
 
     /// Constrains the size of the [BottomSheet].
     ///
