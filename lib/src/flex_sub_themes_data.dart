@@ -422,7 +422,7 @@ class FlexSubThemesData with Diagnosticable {
     this.tabBarIndicatorTopRadius,
     this.tabBarDividerColor,
     this.tabBarTabAlignment,
-    this.tabBarIndicatorAnimation, // Not in Playground
+    this.tabBarIndicatorAnimation,
     //
     this.drawerRadius,
     this.drawerElevation,
