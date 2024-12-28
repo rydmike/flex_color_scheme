@@ -2448,7 +2448,7 @@ void main() {
 
     final FlexSchemeSurfaceColors surfD = FlexSchemeSurfaceColors.blend(
       brightness: Brightness.dark,
-      useMaterial3: false,
+      useMaterial3: true,
       surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
       blendLevel: 30,
       blendColors: const FlexSchemeSurfaceColors(
@@ -2476,28 +2476,34 @@ void main() {
         onPrimary: const Color(0xffffffff),
         primaryContainer: primColorD.darken(5).blend(Colors.black, 55),
         onPrimaryContainer: const Color(0xffffffff),
+        //
         primaryFixed: _fixedColor(primColorL),
         primaryFixedDim: _fixedDimColor(primColorL),
         onPrimaryFixed: _onFixedColor(primColorL),
         onPrimaryFixedVariant: _onFixedVariantColor(primColorL),
+        //
         secondary: const Color(0xff68cdd7),
         onSecondary: const Color(0xff000000),
         secondaryContainer:
             const Color(0xff68cdd7).darken(25).blend(Colors.black, 50),
         onSecondaryContainer: const Color(0xffffffff),
+        //
         secondaryFixed: _fixedColor(const Color(0xff57c8d3)),
         secondaryFixedDim: _fixedDimColor(const Color(0xff57c8d3)),
         onSecondaryFixed: _onFixedColor(const Color(0xff57c8d3)),
         onSecondaryFixedVariant: _onFixedVariantColor(const Color(0xff57c8d3)),
+        //
         tertiary: tertiaryD,
         onTertiary: const Color(0xff000000),
         tertiaryContainer:
             primColorD.brighten(15).darken(20).blend(Colors.black, 30),
-        onTertiaryContainer: const Color(0xff000000),
+        onTertiaryContainer: const Color(0xffffffff),
+        //
         tertiaryFixed: _fixedColor(const Color(0xfff37d7e)),
         tertiaryFixedDim: _fixedDimColor(const Color(0xfff37d7e)),
         onTertiaryFixed: _onFixedColor(const Color(0xfff37d7e)),
         onTertiaryFixedVariant: _onFixedVariantColor(const Color(0xfff37d7e)),
+        //
         error: const Color(0xffcf6679),
         onError: const Color(0xff000000),
         errorContainer: const Color(0xffb1384e),
@@ -2547,6 +2553,8 @@ void main() {
       appBarBackground: surfD.surfaceContainerLow.darken(5), // 0xff0c0a0a
       dialogBackground: surfD.dialogBackground.darken(5), // 0xff1a1717,
       tabBarStyle: FlexTabBarStyle.forBackground,
+      appBarElevation: null,
+      bottomAppBarElevation: null,
       tooltipsMatchBackground: false,
       transparentStatusBar: true,
       visualDensity: null,
@@ -2559,32 +2567,39 @@ void main() {
       subThemesData: null,
     );
 
-    test('scaffoldBackground', () {
-      expect(fcsDarkH2.scaffoldBackground, equals(const Color(0xff000000)));
-    });
-
-    test('appBarBackground', () {
-      expect(fcsDarkH2.appBarBackground,
-          equals(surfD.surfaceContainerLow.darken(5)));
-    });
-
-    test('dialogBackground = dialogBackground darken5', () {
+    test('fcs scaffoldBackground = black in true black', () {
       expect(
-          fcsDarkH2.dialogBackground, equals(surfD.dialogBackground.darken(5)));
+        fcsDarkH2.scaffoldBackground,
+        equals(const Color(0xff000000)),
+      );
     });
-    // test('dialogBackground = diag', () {
-    //   expect(fcsDarkH2.dialogBackground, equals(surfD.dialogBackground));
-    // });
-    // test('dialogBackground = surf', () {
-    //   expect(fcsDarkH2.dialogBackground, equals(surfD.surface));
-    // });
-    // test('dialogBackground = surf darken5', () {
-    //   expect(fcsDarkH2.dialogBackground, equals(surfD.surface.darken(5)));
-    // });
+
+    test('fcs appBarBackground = surfaceContainerLow darken5', () {
+      expect(
+        fcsDarkH2.appBarBackground,
+        equals(surfD.surfaceContainerLow.darken(5)),
+      );
+    });
+
+    test('fcs dialogBackground = dialogBackground darken5', () {
+      expect(
+        fcsDarkH2.dialogBackground,
+        equals(surfD.dialogBackground.darken(5)),
+      );
+    });
+
+    test('fcs dialogBackground hex = dialogBackground hextString darken5', () {
+      expect(
+        fcsDarkH2.dialogBackground?.hexCode,
+        equals(surfD.dialogBackground.darken(5).hexCode),
+      );
+    });
 
     test('dialogBackground Raw', () {
-      expect(fcsDarkH2Raw.dialogBackground,
-          equals(surfD.dialogBackground.darken(5)));
+      expect(
+        fcsDarkH2Raw.dialogBackground,
+        equals(surfD.dialogBackground.darken(5)),
+      );
     });
 
     test(
@@ -2629,7 +2644,16 @@ void main() {
       );
     });
     test(
-        'FCS7.80d-object: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'FCS7.80d-string: GIVEN a Equal Raw and FlexColorScheme.dark with '
+        'blend 30 and 2 colors EXPECT equal toString results.', () {
+      expect(
+        fcsDarkH2.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+            fcsDarkH2Raw.toString(minLevel: DiagnosticLevel.fine)),
+      );
+    });
+    test(
+        'FCS7.80e-object: GIVEN a Equal Raw and FlexColorScheme.dark with '
         'blend 30 and 2 colors EXPECT equal objects.', () {
       expect(
         fcsDarkH2,
@@ -2637,7 +2661,7 @@ void main() {
       );
     });
     test(
-        'FCS7.80e-string: GIVEN a Raw and FlexColorScheme.dark with blend '
+        'FCS7.80f-string: GIVEN a Raw and FlexColorScheme.dark with blend '
         '30 and 2 colors and true black, that define SAME '
         'FlexColorScheme.toScheme and theme but are unequal as '
         'FlexColorScheme objects '
