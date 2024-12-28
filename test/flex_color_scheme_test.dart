@@ -738,33 +738,33 @@ void main() {
   group('FCS2: WITH FlexColorScheme.toScheme ', () {
     debugDefaultTargetPlatformOverride = null;
 
-    const ColorScheme lightScheme = ColorScheme(
+    final ColorScheme lightScheme = ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xff6200ee),
-      onPrimary: Color(0xffffffff),
-      primaryContainer: Color(0xffbb86fc),
-      onPrimaryContainer: Color(0xff000000),
-      secondary: Color(0xff03dac6),
-      onSecondary: Color(0xff000000),
-      secondaryContainer: Color(0xFFCEFAF8),
-      onSecondaryContainer: Color(0xff000000),
-      tertiary: Color(0xff018786),
-      onTertiary: Color(0xffffffff),
-      tertiaryContainer: Color(0xffa4f1ef),
-      onTertiaryContainer: Color(0xff000000),
-      error: Color(0xffb00020),
-      onError: Color(0xffffffff),
-      errorContainer: Color(0xFFFCD8DF),
-      onErrorContainer: Color(0xff000000),
-      surface: Color(0xffffffff),
-      onSurface: Color(0xff000000),
-      onSurfaceVariant: Color(0xff000000),
-      outline: Color(0xFF919191),
-      outlineVariant: Color(0xFFD1D1D1),
-      shadow: Color(0xff000000),
-      scrim: Color(0xff000000),
-      inverseSurface: Color(0xFF121212),
-      inversePrimary: Color(0xffda99ff),
+      primary: const Color(0xff6200ee),
+      onPrimary: const Color(0xffffffff),
+      primaryContainer: const Color(0xffbb86fc),
+      onPrimaryContainer: const Color(0xff000000),
+      secondary: const Color(0xff03dac6),
+      onSecondary: const Color(0xff000000),
+      secondaryContainer: const Color(0xFFCEFAF8),
+      onSecondaryContainer: const Color(0xff000000),
+      tertiary: const Color(0xff018786),
+      onTertiary: const Color(0xffffffff),
+      tertiaryContainer: const Color(0xffa4f1ef),
+      onTertiaryContainer: const Color(0xff000000),
+      error: const Color(0xffb00020),
+      onError: const Color(0xffffffff),
+      errorContainer: FlexColor.lightErrorContainer(const Color(0xffb00020)),
+      onErrorContainer: const Color(0xff000000),
+      surface: const Color(0xffffffff),
+      onSurface: const Color(0xff000000),
+      onSurfaceVariant: const Color(0xff000000),
+      outline: const Color(0xFF919191),
+      outlineVariant: const Color(0xFFD1D1D1),
+      shadow: const Color(0xff000000),
+      scrim: const Color(0xff000000),
+      inverseSurface: const Color(0xFF121212),
+      inversePrimary: const Color(0xffda99ff),
     );
 
     final ColorScheme lightFCS = const FlexColorScheme(
@@ -789,30 +789,25 @@ void main() {
           isSameColorAs(lightScheme.onErrorContainer));
     });
 
-    // ColorScheme#00000(brightness: Brightness.light, primary: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), onPrimary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), primaryContainer: Color(alpha: 1.0000, red: 0.7333, green: 0.5255, blue: 0.9882, colorSpace: ColorSpace.sRGB), onPrimaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), primaryFixed: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), primaryFixedDim: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), onPrimaryFixed: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onPrimaryFixedVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), secondary: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), onSecondary: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), secondaryContainer: Color(alpha: 1.0000, red: 0.8078, green: 0.9804, blue: 0.9725, colorSpace: ColorSpace.sRGB), onSecondaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), secondaryFixed: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), secondaryFixedDim: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), onSecondaryFixed: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSecondaryFixedVariant: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), tertiary: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), tertiaryContainer: Color(alpha: 1.0000, red: 0.6431, green: 0.9451, blue: 0.9373, colorSpace: ColorSpace.sRGB), onTertiaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), tertiaryFixed: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryFixedDim: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiaryFixed: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onTertiaryFixedVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), error: Color(alpha: 1.0000, red: 0.6902, green: 0.0000, blue: 0.1255, colorSpace: ColorSpace.sRGB), onError: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), errorContainer: Color(alpha: 1.0000, red: 0.9882, green: 0.8510, blue: 0.8745, colorSpace: ColorSpace.sRGB), onErrorContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), surface: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onSurface: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), surfaceDim: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceBright: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerLowest: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerLow: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainer: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerHigh: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerHighest: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onSurfaceVariant: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), outline: Color(alpha: 1.0000, red: 0.5686, green: 0.5686, blue: 0.5686, colorSpace: ColorSpace.sRGB), outlineVariant: Color(alpha: 1.0000, red: 0.8196, green: 0.8196, blue: 0.8196, colorSpace: ColorSpace.sRGB), shadow: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), scrim: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), inverseSurface: Color(alpha: 1.0000, red: 0.0706, green: 0.0706, blue: 0.0706, colorSpace: ColorSpace.sRGB), onInverseSurface: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), inversePrimary: Color(alpha: 1.0000, red: 0.8549, green: 0.6000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceTint: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), background: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onBackground: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), surfaceVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB))
-    // ColorScheme#a1c45(brightness: Brightness.light, primary: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), onPrimary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), primaryContainer: Color(alpha: 1.0000, red: 0.7333, green: 0.5255, blue: 0.9882, colorSpace: ColorSpace.sRGB), onPrimaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), primaryFixed: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), primaryFixedDim: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), onPrimaryFixed: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onPrimaryFixedVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), secondary: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), onSecondary: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), secondaryContainer: Color(alpha: 1.0000, red: 0.8078, green: 0.9804, blue: 0.9725, colorSpace: ColorSpace.sRGB), onSecondaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), secondaryFixed: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), secondaryFixedDim: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), onSecondaryFixed: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSecondaryFixedVariant: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), tertiary: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), tertiaryContainer: Color(alpha: 1.0000, red: 0.6431, green: 0.9451, blue: 0.9373, colorSpace: ColorSpace.sRGB), onTertiaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), tertiaryFixed: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryFixedDim: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiaryFixed: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onTertiaryFixedVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), error: Color(alpha: 1.0000, red: 0.6902, green: 0.0000, blue: 0.1255, colorSpace: ColorSpace.sRGB), onError: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), errorContainer: Color(alpha: 1.0000, red: 0.9882, green: 0.8502, blue: 0.8753, colorSpace: ColorSpace.sRGB), onErrorContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), surface: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onSurface: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), surfaceDim: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceBright: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerLowest: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerLow: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainer: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerHigh: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerHighest: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onSurfaceVariant: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), outline: Color(alpha: 1.0000, red: 0.5686, green: 0.5686, blue: 0.5686, colorSpace: ColorSpace.sRGB), outlineVariant: Color(alpha: 1.0000, red: 0.8196, green: 0.8196, blue: 0.8196, colorSpace: ColorSpace.sRGB), shadow: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), scrim: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), inverseSurface: Color(alpha: 1.0000, red: 0.0706, green: 0.0706, blue: 0.0706, colorSpace: ColorSpace.sRGB), onInverseSurface: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), inversePrimary: Color(alpha: 1.0000, red: 0.8549, green: 0.6000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceTint: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), background: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onBackground: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), surfaceVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB))
+    test(
+        'FCS2.01string: GIVEN a Material2 light FlexColorScheme object '
+        'EXPECT toScheme to be equal to raw ColorScheme light', () {
+      expect(
+        lightFCS.toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          lightScheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
+    });
 
-    // test(
-    //     'FCS2.01string: GIVEN a Material2 light FlexColorScheme object '
-    //     'EXPECT toScheme to be equal to raw ColorScheme light', () {
-    //   expect(
-    //     lightFCS.toString(minLevel: DiagnosticLevel.fine),
-    //     equalsIgnoringHashCodes(
-    //       lightScheme.toString(minLevel: DiagnosticLevel.fine),
-    //     ),
-    //   );
-    // });
-
-    // ColorScheme:<ColorScheme#cad92(primaryContainer: Color(alpha: 1.0000, red: 0.7333, green: 0.5255, blue: 0.9882, colorSpace: ColorSpace.sRGB), onPrimaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), secondaryContainer: Color(alpha: 1.0000, red: 0.8078, green: 0.9804, blue: 0.9725, colorSpace: ColorSpace.sRGB), tertiary: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), tertiaryContainer: Color(alpha: 1.0000, red: 0.6431, green: 0.9451, blue: 0.9373, colorSpace: ColorSpace.sRGB), tertiaryFixed: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryFixedDim: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiaryFixed: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onTertiaryFixedVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), errorContainer: Color(alpha: 1.0000, red: 0.9882, green: 0.8510, blue: 0.8745, colorSpace: ColorSpace.sRGB), onErrorContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), outline: Color(alpha: 1.0000, red: 0.5686, green: 0.5686, blue: 0.5686, colorSpace: ColorSpace.sRGB), outlineVariant: Color(alpha: 1.0000, red: 0.8196, green: 0.8196, blue: 0.8196, colorSpace: ColorSpace.sRGB), inverseSurface: Color(alpha: 1.0000, red: 0.0706, green: 0.0706, blue: 0.0706, colorSpace: ColorSpace.sRGB), inversePrimary: Color(alpha: 1.0000, red: 0.8549, green: 0.6000, blue: 1.0000, colorSpace: ColorSpace.sRGB))
-    // ColorScheme:<ColorScheme#a1c45(primaryContainer: Color(alpha: 1.0000, red: 0.7333, green: 0.5255, blue: 0.9882, colorSpace: ColorSpace.sRGB), onPrimaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), secondaryContainer: Color(alpha: 1.0000, red: 0.8078, green: 0.9804, blue: 0.9725, colorSpace: ColorSpace.sRGB), tertiary: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), tertiaryContainer: Color(alpha: 1.0000, red: 0.6431, green: 0.9451, blue: 0.9373, colorSpace: ColorSpace.sRGB), tertiaryFixed: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryFixedDim: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), onTertiaryFixed: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onTertiaryFixedVariant: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), errorContainer: Color(alpha: 1.0000, red: 0.9882, green: 0.8502, blue: 0.8753, colorSpace: ColorSpace.sRGB), onErrorContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), outline: Color(alpha: 1.0000, red: 0.5686, green: 0.5686, blue: 0.5686, colorSpace: ColorSpace.sRGB), outlineVariant: Color(alpha: 1.0000, red: 0.8196, green: 0.8196, blue: 0.8196, colorSpace: ColorSpace.sRGB), inverseSurface: Color(alpha: 1.0000, red: 0.0706, green: 0.0706, blue: 0.0706, colorSpace: ColorSpace.sRGB), inversePrimary: Color(alpha: 1.0000, red: 0.8549, green: 0.6000, blue: 1.0000, colorSpace: ColorSpace.sRGB))
     test(
         'FCS2.01: GIVEN a Material2 light FlexColorScheme object '
         'EXPECT toScheme to be equal to raw ColorScheme light', () {
       testColorSchemeEquality(lightFCS, lightScheme);
-      // expect(
-      //   lightFCS,
-      //   equals(lightScheme),
-      // );
+      expect(
+        lightFCS,
+        equals(lightScheme),
+      );
     });
 
     const ColorScheme lightSchemeM3 = ColorScheme(
