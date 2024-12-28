@@ -26,6 +26,7 @@ enum JsonKeys {
   playgroundVersion(key: 'playground_version'),
   typeColor(key: 'color'),
   typeEnumAdaptiveResponse(key: 'enum_adaptive_response'),
+  typeEnumClip(key: 'enum_clip'),
   typeEnumFlexAppBarStyle(key: 'enum_flex_appbar_style'),
   typeEnumFlexFixedColorStyle(key: 'enum_flex_fixed_color_style'),
   typeEnumFlexInputBorderType(key: 'enum_flex_input_border_type'),
@@ -48,6 +49,7 @@ enum JsonKeys {
   typeEnumShowValueIndicator(key: 'enum_show_value_indicator'),
   typeEnumSplashType(key: 'enum_splash_type'),
   typeEnumTabAlignment(key: 'enum_tab_alignment'),
+  typeEnumTabBarIndicatorAnimation(key: 'enum_tabbar_indicator_animation'),
   typeEnumTabBarIndicatorSize(key: 'enum_tabbar_indicator_size'),
   typeEnumThemeModeColor(key: 'enum_theme_mode'),
   typeEnumVisualDensity(key: 'enum_visual_density'),
@@ -86,6 +88,8 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
         String? dartType;
         if (object is AdaptiveResponse) {
           dartType = JsonKeys.typeEnumAdaptiveResponse.key;
+        } else if (object is Clip) {
+          dartType = JsonKeys.typeEnumClip.key;
         } else if (object is FlexAppBarStyle) {
           dartType = JsonKeys.typeEnumFlexAppBarStyle.key;
         } else if (object is FlexFixedColorStyle) {
@@ -128,6 +132,8 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
           dartType = JsonKeys.typeEnumSplashType.key;
         } else if (object is TabAlignment) {
           dartType = JsonKeys.typeEnumTabAlignment.key;
+        } else if (object is TabIndicatorAnimation) {
+          dartType = JsonKeys.typeEnumTabBarIndicatorAnimation.key;
         } else if (object is TabBarIndicatorSize) {
           dartType = JsonKeys.typeEnumTabBarIndicatorSize.key;
         } else if (object is ThemeMode) {

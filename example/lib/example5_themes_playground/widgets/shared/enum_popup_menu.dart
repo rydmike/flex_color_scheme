@@ -315,6 +315,16 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           }
       }
     }
+    if (T == TabIndicatorAnimation) {
+      switch (value) {
+        case TabIndicatorAnimation.linear:
+          return 'Linear animation';
+        case TabIndicatorAnimation.elastic:
+          return 'Elastic animation';
+        case null:
+          return 'Default';
+      }
+    }
     if (T == ShowValueIndicator) {
       switch (value) {
         case ShowValueIndicator.onlyForDiscrete:
@@ -424,6 +434,20 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           return 'Default\nM:padded, D:shrinkWrap';
       }
     }
+    if (T == Clip) {
+      switch (value) {
+        case Clip.none:
+          return 'No clip';
+        case Clip.hardEdge:
+          return 'Clip, no anti-aliasing';
+        case Clip.antiAlias:
+          return 'Clip with anti-aliasing';
+        case Clip.antiAliasWithSaveLayer:
+          return 'Clip with anti-aliasing and saveLayer';
+        case null:
+          return 'Default (no clip)';
+      }
+    }
     if (T == AdaptiveResponse) {
       final AdaptiveResponse? castValue = value as AdaptiveResponse?;
       return castValue?.label ?? 'Default (${AdaptiveResponse.off.label})';
@@ -479,11 +503,27 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         ),
         Tooltip(
           message: 'Width equals label',
-          child: Icon(Icons.format_underlined_outlined),
+          child: Icon(Icons.border_bottom_outlined),
         ),
         Tooltip(
           message: 'Width equals entire tab',
-          child: Icon(Icons.border_bottom_outlined),
+          child: Icon(Icons.format_underlined_outlined),
+        ),
+      ];
+    }
+    if (T == TabIndicatorAnimation) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Linear move to next tab',
+          child: Icon(Icons.horizontal_rule_outlined),
+        ),
+        Tooltip(
+          message: 'Elastic stretch to next tab',
+          child: Icon(Icons.linear_scale_outlined),
         ),
       ];
     }
@@ -649,6 +689,30 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         Tooltip(
           message: 'shrinkWrap',
           child: Icon(Icons.fit_screen_outlined),
+        ),
+      ];
+    }
+    if (T == Clip) {
+      return const <Widget>[
+        Tooltip(
+          message: 'Default (None, no clip at all)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'None, no clip at all',
+          child: Icon(Icons.settings_overscan_outlined),
+        ),
+        Tooltip(
+          message: 'Clip, no anti-aliasing.',
+          child: Icon(Icons.border_clear_outlined),
+        ),
+        Tooltip(
+          message: 'Clip with anti-aliasing',
+          child: Icon(Icons.border_style_outlined),
+        ),
+        Tooltip(
+          message: 'Clip with anti-aliasing and saveLayer',
+          child: Icon(Icons.rounded_corner_outlined),
         ),
       ];
     }
