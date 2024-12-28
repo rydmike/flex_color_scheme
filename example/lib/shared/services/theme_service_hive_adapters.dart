@@ -575,3 +575,27 @@ class ClipAdapter extends TypeAdapter<Clip?> {
   @override
   int get typeId => 177;
 }
+
+/// A Hive data type adapter for enum [TabIndicatorAnimation], nullable.
+///
+/// Handles storing `null` value as -1 and returns anything out of enum
+/// index range as null value.
+class TabIndicatorAnimationAdapter extends TypeAdapter<TabIndicatorAnimation?> {
+  @override
+  TabIndicatorAnimation? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= TabIndicatorAnimation.values.length) {
+      return null;
+    } else {
+      return TabIndicatorAnimation.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TabIndicatorAnimation? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 178;
+}
