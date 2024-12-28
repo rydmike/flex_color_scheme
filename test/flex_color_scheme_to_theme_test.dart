@@ -9,12 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'test_color_scheme_equality.dart';
 
-/// FlexColorScheme default for inversePrimary color, when not using seeds.
-///
-/// When using real M3 ColorScheme's that are seeded, this color is not used.
-///
-/// Not the best algo in the world, but simple and works fairly well for light
-/// Brightness, but should be better for dark.
+// FlexColorScheme default for inversePrimary color, when not using seeds.
+//
+// When using real M3 ColorScheme's that are seeded, this color is not used.
+//
+// Not the best algo in the world, but simple and works fairly well for light
+// Brightness, but should be better for dark.
 Color _inversePrimary(Brightness brightness, Color primary, Color surface) {
   if (brightness == Brightness.light) {
     return primary.brighten(40).lighten(10);
@@ -23,91 +23,70 @@ Color _inversePrimary(Brightness brightness, Color primary, Color surface) {
   }
 }
 
-double _tintAlphaFactor(Color color, Brightness mode,
-    [bool surfaceMode = false]) {
-  if (mode == Brightness.light) {
-    return surfaceMode
-        ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-            ? 1.5
-            : 4.0
-        : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-            ? 5.0
-            : 2.0;
-  } else {
-    return surfaceMode
-        ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-            ? 5.0
-            : 2.0
-        : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-            ? 5.0
-            : 4.0;
-  }
-}
+// FlexColorScheme default for outline color, when not using M3 seeds.
+// Color _outlineColor(Brightness brightness, Color blendColor, int alpha) {
+//   if (brightness == Brightness.light) {
+//     return FlexColor.lightFlexOutline.blendAlpha(blendColor, alpha);
+//   } else {
+//     return FlexColor.darkFlexOutline.blendAlpha(blendColor, alpha);
+//   }
+// }
 
-/// FlexColorScheme default for outline color, when not using M3 seeds.
-Color _outlineColor(Brightness brightness, Color blendColor, int alpha) {
-  if (brightness == Brightness.light) {
-    return FlexColor.lightFlexOutline.blendAlpha(blendColor, alpha);
-  } else {
-    return FlexColor.darkFlexOutline.blendAlpha(blendColor, alpha);
-  }
-}
-
-/// FlexColorScheme default for outlineVariant color, when not using M3 seeds.
-Color _outlineVariantColor(Brightness brightness, Color blendColor, int alpha) {
-  if (brightness == Brightness.light) {
-    return FlexColor.lightFlexOutlineVariant.blendAlpha(blendColor, alpha);
-  } else {
-    return FlexColor.darkFlexOutlineVariant.blendAlpha(blendColor, alpha);
-  }
-}
+// FlexColorScheme default for outlineVariant color, when not using M3 seeds.
+// Color _outlineVariantColor(Brightness brightness, Color blendColor, int alpha) {
+//   if (brightness == Brightness.light) {
+//     return FlexColor.lightFlexOutlineVariant.blendAlpha(blendColor, alpha);
+//   } else {
+//     return FlexColor.darkFlexOutlineVariant.blendAlpha(blendColor, alpha);
+//   }
+// }
 
 /// Return true if the color is light, and should use dark contrast color.
 bool _isLight(final Color color) =>
     FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
-/// FlexColorScheme default for "fixed" colors that are supposed
-/// to be same in light and dark mode.
-///
-/// This version is used, when not using Material-3 seed generated
-/// ColorScheme and FlexColorScheme.fixedColorStyle is null or
-/// equal to [FlexFixedColorStyle.computed].
+// FlexColorScheme default for "fixed" colors that are supposed
+// to be same in light and dark mode.
+//
+// This version is used, when not using Material-3 seed generated
+// ColorScheme and FlexColorScheme.fixedColorStyle is null or
+// equal to [FlexFixedColorStyle.computed].
 Color _fixedColor(Color color) {
   return _isLight(color)
       ? color.blend(Colors.black, 12).lighten(12).blend(Colors.white, 45)
       : color.blend(Colors.black, 18).lighten(15).blend(Colors.white, 75);
 }
 
-/// FlexColorScheme default for "fixedDim" colors that are supposed
-/// to be same in light and dark mode.
-///
-/// This version is used, when not using Material-3 seed generated
-/// ColorScheme and FlexColorScheme.fixedColorStyle is null or
-/// equal to [FlexFixedColorStyle.computed].
+// FlexColorScheme default for "fixedDim" colors that are supposed
+// to be same in light and dark mode.
+//
+// This version is used, when not using Material-3 seed generated
+// ColorScheme and FlexColorScheme.fixedColorStyle is null or
+// equal to [FlexFixedColorStyle.computed].
 Color _fixedDimColor(Color color) {
   return _isLight(color)
       ? color.blend(Colors.black, 12).lighten(8).blend(Colors.white, 25)
       : color.blend(Colors.black, 30).lighten(16).blend(Colors.white, 55);
 }
 
-/// FlexColorScheme default for "onFixed" colors that are supposed
-/// to be same in light and dark mode.
-///
-/// This version is used, when not using Material-3 seed generated
-/// ColorScheme and FlexColorScheme.fixedColorStyle is null or
-/// equal to [FlexFixedColorStyle.computed].
+// FlexColorScheme default for "onFixed" colors that are supposed
+// to be same in light and dark mode.
+//
+// This version is used, when not using Material-3 seed generated
+// ColorScheme and FlexColorScheme.fixedColorStyle is null or
+// equal to [FlexFixedColorStyle.computed].
 Color _onFixedColor(Color color) {
   return _isLight(color)
       ? color.darken(60).blend(Colors.black, 20)
       : color.darken(19).blend(Colors.black, 30);
 }
 
-/// FlexColorScheme default for "onFixedVariant" colors that are supposed
-/// to be same in light and dark mode.
-///
-/// This version is used, when not using Material-3 seed generated
-/// ColorScheme and FlexColorScheme.fixedColorStyle is null or
-/// equal to [FlexFixedColorStyle.computed].
+// FlexColorScheme default for "onFixedVariant" colors that are supposed
+// to be same in light and dark mode.
+//
+// This version is used, when not using Material-3 seed generated
+// ColorScheme and FlexColorScheme.fixedColorStyle is null or
+// equal to [FlexFixedColorStyle.computed].
 Color _onFixedVariantColor(Color color) {
   return _isLight(color)
       ? color.darken(50).blend(Colors.black, 10)
