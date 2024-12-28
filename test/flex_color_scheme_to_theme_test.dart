@@ -1,6 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +20,27 @@ Color _inversePrimary(Brightness brightness, Color primary, Color surface) {
     return primary.brighten(40).lighten(10);
   } else {
     return primary.brighten(5).blendAlpha(surface, 0x99);
+  }
+}
+
+double _tintAlphaFactor(Color color, Brightness mode,
+    [bool surfaceMode = false]) {
+  if (mode == Brightness.light) {
+    return surfaceMode
+        ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+            ? 1.5
+            : 4.0
+        : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+            ? 5.0
+            : 2.0;
+  } else {
+    return surfaceMode
+        ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+            ? 5.0
+            : 2.0
+        : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+            ? 5.0
+            : 4.0;
   }
 }
 
@@ -4369,26 +4391,39 @@ void main() {
           tintedDisabledControls: true,
         ),
       ).toTheme;
+      final ColorScheme colorScheme = theme.colorScheme;
+      final Color disabledSlider = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
       expect(
           theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
           equalsIgnoringHashCodes(
-            const SliderThemeData(
-              activeTrackColor: Color(0xff6750a4),
-              inactiveTrackColor: Color(0x3d6750a4),
-              disabledActiveTrackColor: Color(0x61292041),
-              disabledInactiveTrackColor: Color(0x1f000000),
-              activeTickMarkColor: Color(0x8affffff),
-              inactiveTickMarkColor: Color(0x8a6750a4),
-              disabledActiveTickMarkColor: Color(0x1fffffff),
-              disabledInactiveTickMarkColor: Color(0x1f000000),
-              thumbColor: Color(0xff6750a4),
-              disabledThumbColor: Color(0xffadaab6),
-              overlayColor: Color(0x00000000),
-              valueIndicatorColor: Color(0xff6750a4),
-              valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            SliderThemeData(
+              activeTrackColor: colorScheme.primary,
+              inactiveTrackColor:
+                  colorScheme.primary.withAlpha(kAlphaLowDisabled),
+              disabledActiveTrackColor: disabledSlider,
+              disabledInactiveTrackColor:
+                  colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+              activeTickMarkColor:
+                  colorScheme.onPrimary.withAlpha(kAlphaSliderTickMark),
+              inactiveTickMarkColor:
+                  colorScheme.primary.withAlpha(kAlphaSliderTickMark),
+              disabledActiveTickMarkColor:
+                  colorScheme.onPrimary.withAlpha(kAlphaVeryLowDisabled),
+              disabledInactiveTickMarkColor:
+                  colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+              thumbColor: colorScheme.primary,
+              disabledThumbColor: Color.alphaBlend(
+                  FlexSubThemes.tintedDisable(
+                      colorScheme.onSurface, colorScheme.primary),
+                  colorScheme.surface),
+              overlayColor: Colors.transparent,
+              valueIndicatorColor: colorScheme.primary,
+              valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
             ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
+
     // Test default Slider theming, dark M2
     test(
         'FCS7.104b GIVEN a FlexColorScheme.dark with useMaterial3:false '
@@ -4401,23 +4436,35 @@ void main() {
           tintedDisabledControls: true,
         ),
       ).toTheme;
+      final ColorScheme colorScheme = theme.colorScheme;
+      final Color disabledSlider = FlexSubThemes.tintedDisable(
+          colorScheme.onSurface, colorScheme.primary);
       expect(
           theme.sliderTheme.toString(minLevel: DiagnosticLevel.debug),
           equalsIgnoringHashCodes(
-            const SliderThemeData(
-              activeTrackColor: Color(0xffd0bcff),
-              inactiveTrackColor: Color(0x3dd0bcff),
-              disabledActiveTrackColor: Color(0x61ece4ff),
-              disabledInactiveTrackColor: Color(0x1fffffff),
-              activeTickMarkColor: Color(0x8a000000),
-              inactiveTickMarkColor: Color(0x8ad0bcff),
-              disabledActiveTickMarkColor: Color(0x1f000000),
-              disabledInactiveTickMarkColor: Color(0x1fffffff),
-              thumbColor: Color(0xffd0bcff),
-              disabledThumbColor: Color(0xff64616c),
-              overlayColor: Color(0x00000000),
-              valueIndicatorColor: Color(0xffd0bcff),
-              valueIndicatorShape: RectangularSliderValueIndicatorShape(),
+            SliderThemeData(
+              activeTrackColor: colorScheme.primary,
+              inactiveTrackColor:
+                  colorScheme.primary.withAlpha(kAlphaLowDisabled),
+              disabledActiveTrackColor: disabledSlider,
+              disabledInactiveTrackColor:
+                  colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+              activeTickMarkColor:
+                  colorScheme.onPrimary.withAlpha(kAlphaSliderTickMark),
+              inactiveTickMarkColor:
+                  colorScheme.primary.withAlpha(kAlphaSliderTickMark),
+              disabledActiveTickMarkColor:
+                  colorScheme.onPrimary.withAlpha(kAlphaVeryLowDisabled),
+              disabledInactiveTickMarkColor:
+                  colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+              thumbColor: colorScheme.primary,
+              disabledThumbColor: Color.alphaBlend(
+                  FlexSubThemes.tintedDisable(
+                      colorScheme.onSurface, colorScheme.primary),
+                  colorScheme.surface),
+              overlayColor: Colors.transparent,
+              valueIndicatorColor: colorScheme.primary,
+              valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
             ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
@@ -4490,7 +4537,9 @@ void main() {
         theme.tooltipTheme.decoration,
         equals(
           BoxDecoration(
-            color: FlexColor.darkSurface.blendAlpha(colorScheme.primary, 0x72),
+            color: FlexColor.darkSurface
+                .blendAlpha(colorScheme.primary, 0x72)
+                .withAlpha(0xFF),
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             border: Border.all(color: theme.dividerColor),
           ),
@@ -4522,7 +4571,9 @@ void main() {
         theme.tooltipTheme.decoration,
         equals(
           BoxDecoration(
-            color: FlexColor.lightSurface.blendAlpha(colorScheme.primary, 0x63),
+            color: FlexColor.lightSurface
+                .blendAlpha(colorScheme.primary, 0x63)
+                .withAlpha(0xFF),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             border: Border.all(color: theme.dividerColor),
           ),
@@ -4593,8 +4644,7 @@ void main() {
           BoxDecoration(
             color: FlexColor.darkSurface
                 .blendAlpha(colorScheme.primary, 0x28)
-                .withAlpha(0xF2)
-                .withValues(alpha: 0.5),
+                .withAlpha(Color.getAlphaFromOpacity(0.5)),
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             border: Border.all(color: theme.dividerColor),
           ),
