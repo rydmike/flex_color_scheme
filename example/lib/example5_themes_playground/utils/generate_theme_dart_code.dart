@@ -432,6 +432,10 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '    bottomSheetModalBackgroundColor: ${controller.bottomSheetModalSchemeColor},\n'
       : '';
+  final String bottomSheetClipBehavior = controller.bottomSheetClipBehavior !=
+          null
+      ? '    bottomSheetClipBehavior: ${controller.bottomSheetClipBehavior},\n'
+      : '';
   //
   // Material button sub themes border radius setup CODE.
   //
@@ -1171,6 +1175,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String tabBarTabAlignment = controller.tabBarTabAlignment != null
       ? '    tabBarTabAlignment: ${controller.tabBarTabAlignment},\n'
       : '';
+  final String tabBarIndicatorAnimation = controller.tabBarIndicatorAnimation !=
+          null
+      ? '    tabBarIndicatorAnimation: ${controller.tabBarIndicatorAnimation},\n'
+      : '';
   //
   // Drawers setup CODE
   //
@@ -1785,6 +1793,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tabBarIndicatorTopRadius'
           '$tabBarDividerColor'
           '$tabBarTabAlignment'
+          '$tabBarIndicatorAnimation'
           //
           '$drawerBorderRadius'
           '$drawerElevation'
@@ -1802,6 +1811,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomSheetRadius'
           '$bottomSheetElevation'
           '$bottomSheetModalElevation'
+          '$bottomSheetClipBehavior'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'
@@ -2069,6 +2079,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$tabBarIndicatorTopRadius'
           '$tabBarDividerColor'
           '$tabBarTabAlignment'
+          '$tabBarIndicatorAnimation'
           //
           '$drawerBorderRadius'
           '$drawerElevation'
@@ -2086,6 +2097,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$bottomSheetRadius'
           '$bottomSheetElevation'
           '$bottomSheetModalElevation'
+          '$bottomSheetClipBehavior'
           //
           '$bottomNavigationBarSelectedLabelSchemeColor'
           '$bottomNavigationBarUnselectedLabelSchemeColor'

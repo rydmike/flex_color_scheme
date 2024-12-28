@@ -531,6 +531,9 @@ class ThemeController with ChangeNotifier {
         Store.keyTabBarDividerColor, Store.defaultTabBarDividerColor);
     _tabBarTabAlignment = await _themeService.load(
         Store.keyTabBarTabAlignment, Store.defaultTabBarTabAlignment);
+    _tabBarIndicatorAnimation = await _themeService.load(
+        Store.keyTabBarIndicatorAnimation,
+        Store.defaultTabBarIndicatorAnimation);
     //
     // Drawer SETTINGS.
     _drawerBorderRadius = await _themeService.load(
@@ -572,6 +575,8 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomSheetModalElevation);
     _bottomSheetBorderRadius = await _themeService.load(
         Store.keyBottomSheetBorderRadius, Store.defaultBottomSheetBorderRadius);
+    _bottomSheetClipBehavior = await _themeService.load(
+        Store.keyBottomSheetClipBehavior, Store.defaultBottomSheetClipBehavior);
     //
     // Android System Navigator bar SETTINGS.
     _systemNavBarStyle = await _themeService.load(
@@ -1328,6 +1333,7 @@ class ThemeController with ChangeNotifier {
     setTabBarIndicatorTopRadius(Store.defaultTabBarIndicatorTopRadius, false);
     setTabBarDividerColor(Store.defaultTabBarDividerColor, false);
     setTabBarTabAlignment(Store.defaultTabBarTabAlignment, false);
+    setTabBarIndicatorAnimation(Store.defaultTabBarIndicatorAnimation, false);
     //
     // Drawer SETTINGS.
     setDrawerBorderRadius(Store.defaultDrawerBorderRadius, false);
@@ -1353,6 +1359,7 @@ class ThemeController with ChangeNotifier {
         Store.defaultBottomSheetModalSchemeColor, false);
     setBottomSheetModalElevation(Store.defaultBottomSheetModalElevation, false);
     setBottomSheetBorderRadius(Store.defaultBottomSheetBorderRadius, false);
+    setBottomSheetClipBehavior(Store.defaultBottomSheetClipBehavior, false);
     //
     // Android System Navigator bar SETTINGS.
     setSystemNavBarStyle(Store.defaultSystemNavBarStyle, false);
@@ -4869,6 +4876,19 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyTabBarTabAlignment, value));
   }
 
+  late TabIndicatorAnimation? _tabBarIndicatorAnimation;
+
+  TabIndicatorAnimation? get tabBarIndicatorAnimation =>
+      _tabBarIndicatorAnimation;
+
+  void setTabBarIndicatorAnimation(TabIndicatorAnimation? value,
+      [bool notify = true]) {
+    if (value == _tabBarIndicatorAnimation) return;
+    _tabBarIndicatorAnimation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyTabBarIndicatorAnimation, value));
+  }
+
   // Drawer SETTINGS.
   // ===========================================================================
 
@@ -5046,6 +5066,17 @@ class ThemeController with ChangeNotifier {
     _bottomSheetBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyBottomSheetBorderRadius, value));
+  }
+
+  late Clip? _bottomSheetClipBehavior;
+
+  Clip? get bottomSheetClipBehavior => _bottomSheetClipBehavior;
+
+  void setBottomSheetClipBehavior(Clip? value, [bool notify = true]) {
+    if (value == _bottomSheetClipBehavior) return;
+    _bottomSheetClipBehavior = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyBottomSheetClipBehavior, value));
   }
 
   // Android System Navigator bar SETTINGS.

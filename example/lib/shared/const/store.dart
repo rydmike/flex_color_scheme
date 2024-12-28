@@ -1156,6 +1156,12 @@ abstract final class Store {
   // We use NULL as default, this nullable setting.
   static const TabAlignment? defaultTabBarTabAlignment = null;
 
+  // Key used to read and save the tabBarIndicatorAnimation value.
+  static const String keyTabBarIndicatorAnimation = 'tabBarIndicatorAnimation';
+  // Default value for the tabBarIndicatorAnimation, also to reset settings.
+  // We use NULL as default, this nullable setting.
+  static const TabIndicatorAnimation? defaultTabBarIndicatorAnimation = null;
+
   // Drawer SETTINGS.
   // ===========================================================================
 
@@ -1259,6 +1265,12 @@ abstract final class Store {
   // Default value for the bottomSheetBorderRadius, also to reset settings.
   // We use NULL as default, on this nullable setting.
   static const double? defaultBottomSheetBorderRadius = null;
+
+  // Key used to read and save the bottomSheetClipBehavior value.
+  static const String keyBottomSheetClipBehavior = 'bottomSheetClipBehavior';
+  // Default value for the bottomSheetBorderRadius, also to reset settings.
+  // We use NULL as default, on this nullable setting.
+  static const Clip? defaultBottomSheetClipBehavior = null;
 
   // Android System Navigator bar SETTINGS.
   // ===========================================================================
@@ -2698,6 +2710,7 @@ abstract final class Store {
     keyTabBarIndicatorTopRadius,
     keyTabBarDividerColor,
     keyTabBarTabAlignment,
+    keyTabBarIndicatorAnimation,
     keyDrawerBorderRadius,
     keyDrawerElevation,
     keyDrawerBackgroundSchemeColor,
@@ -2713,6 +2726,7 @@ abstract final class Store {
     keyBottomSheetElevation,
     keyBottomSheetModalElevation,
     keyBottomSheetBorderRadius,
+    keyBottomSheetClipBehavior,
     keySystemNavBarStyle,
     keySystemNavBarOpacity,
     keyUseSystemNavBarDivider,

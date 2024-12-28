@@ -449,6 +449,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             tabBarIndicatorTopRadius: controller.tabBarIndicatorTopRadius,
             tabBarDividerColor: controller.tabBarDividerColor,
             tabBarTabAlignment: controller.tabBarTabAlignment,
+            tabBarIndicatorAnimation: controller.tabBarIndicatorAnimation,
             // Drawer Settings.
             drawerRadius: controller.drawerBorderRadius,
             drawerElevation: controller.drawerElevation,
@@ -469,6 +470,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             bottomSheetModalBackgroundColor:
                 controller.bottomSheetModalSchemeColor,
             bottomSheetRadius: controller.bottomSheetBorderRadius,
+            bottomSheetClipBehavior: controller.bottomSheetClipBehavior,
             // BottomNavigationBar settings.
             bottomNavigationBarSelectedLabelSchemeColor:
                 controller.bottomNavigationBarSelectedItemSchemeColor,
