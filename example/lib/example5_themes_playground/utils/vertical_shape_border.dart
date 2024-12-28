@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 /// A ShapeBorder that can draw left and right side outline borders with
 /// different thickness and colors.
 class VerticalShapeBorder extends ShapeBorder {
-  final double cornerRadius;
-  final BorderSide leftSide;
-  final BorderSide rightSide;
-
   const VerticalShapeBorder({
     this.cornerRadius = 8.0,
     this.leftSide = BorderSide.none,
     this.rightSide = BorderSide.none,
   });
+
+  final double cornerRadius;
+  final BorderSide leftSide;
+  final BorderSide rightSide;
 
   @override
   EdgeInsetsGeometry get dimensions =>

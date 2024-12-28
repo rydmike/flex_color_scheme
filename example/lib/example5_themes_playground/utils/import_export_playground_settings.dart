@@ -55,8 +55,8 @@ enum JsonKeys {
   typeEnumVisualDensity(key: 'enum_visual_density'),
   value(key: 'value');
 
-  final String key;
   const JsonKeys({required this.key});
+  final String key;
 }
 
 /// A function that exports the theme playground settings to JSON.

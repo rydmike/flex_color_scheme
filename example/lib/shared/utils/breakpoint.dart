@@ -95,6 +95,7 @@ class Breakpoint {
   /// watch and large desktop classes suitable for 4 screen.
   ///
   /// Use a layout builder to get [BoxConstraints]
+  // ignore: sort_constructors_first
   factory Breakpoint.fromConstraints(
     BoxConstraints constraints, {
     BreakType type = BreakType.material,
@@ -149,6 +150,7 @@ class Breakpoint {
   ///
   /// Use [Breakpoint.fromConstraints] when the widget does not take up the
   /// full screen
+  // ignore: sort_constructors_first
   factory Breakpoint.fromMediaQuery(
     BuildContext context, {
     BreakType type = BreakType.material,
@@ -189,6 +191,7 @@ class Breakpoint {
   /// The private factory [Breakpoint._calcBreakpoint] follows the
   /// Material Design Guidelines for breakpoints:
   /// [https://material.io/design/layout/responsive-layout-grid.html#grid-behavior]
+  // ignore: sort_constructors_first
   factory Breakpoint._calcBreakpoint({
     required Orientation orientation,
     required double width,
@@ -395,6 +398,7 @@ class Breakpoint {
   /// devices, last one is for 4k and larger screens. The calculation also
   /// includes and handles breakpoints for upp to 4k screens providing a
   /// total of max 24 columns instead of max 12 columns as in Material.
+  // ignore: sort_constructors_first
   factory Breakpoint._calcBreakpointLarge({
     required Orientation orientation,
     required double width,

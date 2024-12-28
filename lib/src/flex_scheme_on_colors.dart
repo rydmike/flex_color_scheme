@@ -129,6 +129,7 @@ class FlexSchemeOnColors with Diagnosticable {
   ///
   /// The factory can also alpha blend the onColor, with each color using an
   /// optionally provided alpha blend level, that defaults to 0.
+  // ignore: sort_constructors_first
   factory FlexSchemeOnColors.from({
     bool? useMaterial3,
     required Color primary,

@@ -248,6 +248,7 @@ class FlexSchemeColor with Diagnosticable {
   /// [FlexColor.materialLightError] or [FlexColor.materialDarkError]
   /// or as input value for [error] if not provided and computes
   /// [errorContainer]. If either value is passed in they are used as given.
+  // ignore: sort_constructors_first
   factory FlexSchemeColor.from({
     required Color primary,
     Color? primaryContainer,

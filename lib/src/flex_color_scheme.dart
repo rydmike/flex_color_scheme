@@ -1,3 +1,5 @@
+// ignore_for_file: sort_constructors_first
+
 import 'dart:async';
 
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';

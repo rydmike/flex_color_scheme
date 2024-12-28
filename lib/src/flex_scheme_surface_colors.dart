@@ -173,6 +173,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// The surface colors returned by this factory can also be used to make
   /// branded surface colors for Flutter's standard [ColorScheme], it does
   /// not have to be used exclusively by [FlexColorScheme].
+  // ignore: sort_constructors_first
   factory FlexSchemeSurfaceColors.blend({
     /// Controls if we create surface colors for light or dark surfaces.
     final Brightness brightness = Brightness.light,

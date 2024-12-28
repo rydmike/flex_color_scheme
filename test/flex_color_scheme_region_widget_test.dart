@@ -34,12 +34,12 @@ void main() {
 }
 
 class MyWidget extends StatelessWidget {
-  final ColorScheme scheme;
-
   const MyWidget({
     super.key,
     required this.scheme,
   });
+
+  final ColorScheme scheme;
 
   @override
   Widget build(BuildContext context) {

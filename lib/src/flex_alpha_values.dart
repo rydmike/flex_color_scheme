@@ -94,6 +94,7 @@ class FlexAlphaValues {
 
   /// Factory used to get alpha values for a given blend level and blend mode
   /// and brightness.
+  // ignore: sort_constructors_first
   factory FlexAlphaValues.getAlphas(
       final FlexSurfaceMode mode, final int blendLevel) {
     switch (mode) {

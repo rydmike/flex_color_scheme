@@ -96,6 +96,7 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
 
   /// A color harmonized topic theme, based on [brightness] where colors
   /// are harmonized towards a given [sourceColor].
+  // ignore: sort_constructors_first
   factory TopicTheme.harmonized(Color sourceColor, Brightness brightness) {
     final int sourceColorValue = sourceColor.value32bit;
 

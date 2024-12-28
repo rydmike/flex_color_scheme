@@ -18,13 +18,13 @@ const bool _debug = !kReleaseMode && true;
 /// This implementation listens to URL changes and calls the provided callback
 /// when the query parameters change.
 class QueryParamsHandler implements QueryParamsHandlerInterface {
-  final void Function(Map<String, String> params) _onParamsChanged;
-  StreamSubscription<web.PopStateEvent>? _popStateSubscription;
-  JSFunction? _locationChangeListener;
-
   QueryParamsHandler(this._onParamsChanged) {
     _initializeWebListener();
   }
+
+  final void Function(Map<String, String> params) _onParamsChanged;
+  StreamSubscription<web.PopStateEvent>? _popStateSubscription;
+  JSFunction? _locationChangeListener;
 
   void _initializeWebListener() {
     // Listen to PopState events (handles both URL changes and history changes)
