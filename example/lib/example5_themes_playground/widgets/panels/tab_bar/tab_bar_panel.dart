@@ -124,6 +124,24 @@ class TabBarPanel extends StatelessWidget {
       return 'TabBarStyle';
     }
 
+    // Logic for default unselected light mode default label
+    String defaultIndicatorAnimation() {
+      if (!controller.useSubThemes ||
+          !controller.useFlexColorScheme ||
+          controller.tabBarIndicatorSize == null) {
+        if (useMaterial3) {
+          return 'Default (elastic)';
+        } else {
+          return 'Default (linear)';
+        }
+      }
+      if (controller.tabBarIndicatorSize == TabBarIndicatorSize.label) {
+        return 'Default (elastic)';
+      } else {
+        return 'Default (linear)';
+      }
+    }
+
     return Column(
       children: <Widget>[
         const SizedBox(height: 8),
@@ -166,32 +184,53 @@ class TabBarPanel extends StatelessWidget {
           value: controller.tabBarStyle,
           onChanged: controller.setTabBarStyle,
         ),
-        EnumPopupMenu<TabAlignment>(
-          enabled: enableControl,
-          values: TabAlignment.values,
-          title: const Text('Tab alignment'),
-          subtitleReveal: const Text('If any of your TabBar widgets are '
-              'scrollable only the TabBar alignment options "fill" and '
-              '"center" are valid values.\n'
-              'If any of your TabBar widgets are fixed, the common case, '
-              'only the TabBar alignment options "start", "startOffset" and '
-              '"center" are valid alignment values.\n'
-              '\n'
-              'If you theme to an alignment value that is not '
-              "valid by any of your TabBar widget's scrolling setting, those "
-              'TabBars will throw an exception !!!\n'
-              '\n'
-              'If you have both scrollable and fixed TabBar widgets '
-              'in your app, you can only theme to the "center" alignment or '
-              'leave it at default undefined, which causes Flutter to use '
-              'different default styles for fixed and scrollable variants.\n'
-              '\n'
-              'NOTE: The TabBar widgets presented in the Playground have '
-              'logic to ignore invalid TabAlignment values.\n'
-              'Hot take: Flutter should do this by default and not throw!\n'),
-          value: controller.tabBarTabAlignment,
-          onChanged: controller.setTabBarTabAlignment,
-        ),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: EnumPopupMenu<TabAlignment>(
+              enabled: enableControl,
+              values: TabAlignment.values,
+              title: const Text('Tab alignment'),
+              subtitleReveal: const Text(
+                'ISSUE:\n'
+                'If any of your TabBar widgets are '
+                'scrollable, only the TabBar alignment options "fill" and '
+                '"center" are valid values.\n'
+                'If any of your TabBar widgets are fixed, the common case, '
+                'only the TabBar alignment options "start", "startOffset" and '
+                '"center" are valid alignment values.\n'
+                '\n'
+                'If you theme to an alignment value that is not '
+                "valid by any of your TabBar widget's scrolling setting, those "
+                'TabBars will throw an exception !!!\n'
+                '\n'
+                'If you have both scrollable and fixed TabBar widgets '
+                'in your app, you can only theme to the "center" alignment or '
+                'leave it at default undefined, which causes Flutter to use '
+                'different default styles for fixed and scrollable variants.\n'
+                '\n'
+                'NOTE: The TabBar widgets presented in the Playground have '
+                'logic to ignore invalid TabAlignment values.\n'
+                'Hot take: Flutter should do this by default and not throw!\n',
+              ),
+              value: controller.tabBarTabAlignment,
+              onChanged: controller.setTabBarTabAlignment,
+            ),
+            lastWidget: EnumPopupMenu<TabIndicatorAnimation>(
+              enabled: enableControl,
+              values: TabIndicatorAnimation.values,
+              defaultLabel: defaultIndicatorAnimation(),
+              title: const Text('Tab animation'),
+              subtitleReveal: const Text('Default is elastic if style is only '
+                  'label, otherwise linear.\n\n'
+                  'ISSUE:\n'
+                  'In Flutter 3.27 the tab indicator animation style elastic '
+                  'does not seem to work, the style is identical to linear.\n'),
+              value: controller.tabBarIndicatorAnimation,
+              onChanged: controller.setTabBarIndicatorAnimation,
+            ),
+            isRow: isRow,
+          );
+        }),
         if (isLight) ...<Widget>[
           ColorSchemePopupMenu(
             enabled: enableControl,

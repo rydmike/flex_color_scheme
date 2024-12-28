@@ -2,14 +2,14 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.1.0 WIP
+## 8.1.0
 
 **Dec 28, 2024**
 
 ### Package
 
-
-* First prep for Flutter 3.27.0 update with new Color features that supports wide gamut. In total, 350 deprecations will have to be replaced with the new Color features.
+* Updated the package to support and require at least Flutter v3.27.0.
+* Fixed all new analyzer lint warnings and removed usage of all deprecated `Color` properties.
 
 **NEW**
 
@@ -39,7 +39,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **NEW**
 
 * **Slider**: On the Slider panel added a scheme color selector for the Slider thumb color.
-
+* **BottomSheet**: On the BottomSheet panel added a clipping behavior selector.
+* **TabBar**: On the TabBar panel added a tab indicator animation selector.
+ 
 **CHANGE**
 
 * **Slider**: Increased Playground allowed max Slider track height from 14 to 40.
