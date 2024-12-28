@@ -830,7 +830,30 @@ class ThemeServicePrefs implements ThemeService {
         if (value >= Clip.values.length) return defaultValue;
         return Clip.values[value] as T;
       }
-      //
+      // T is TabIndicatorAnimation is nullable value.
+      if (sameTypes<T, TabIndicatorAnimation?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded TabIndicatorAnimation?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= TabIndicatorAnimation.values.length) return defaultValue;
+        return TabIndicatorAnimation.values[value] as T;
+      }
+      // T is TabIndicatorAnimation none nullable value.
+      if (sameTypes<T, TabIndicatorAnimation>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint(
+              'SharedPrefs loaded TabIndicatorAnimation : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= TabIndicatorAnimation.values.length) return defaultValue;
+        return TabIndicatorAnimation.values[value] as T;
+      }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');
       debugPrint(' Error message ...... : $e');

@@ -96,6 +96,7 @@ class ThemeServiceHive implements ThemeService {
     Hive.registerAdapter(MaterialTapTargetSizeAdapter());
     Hive.registerAdapter(FlexScaffoldBaseColorAdapter());
     Hive.registerAdapter(ClipAdapter());
+    Hive.registerAdapter(TabIndicatorAnimationAdapter());
   }
 
   // ----------
