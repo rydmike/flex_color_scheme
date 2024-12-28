@@ -897,10 +897,10 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class Category {
+  const Category({required this.title, required this.selections});
+
   final String title;
   final List<String> selections;
-
-  Category({required this.title, required this.selections});
 }
 
 void _pushScreen({required BuildContext context, required Widget screen}) {
@@ -911,6 +911,15 @@ void _pushScreen({required BuildContext context, required Widget screen}) {
 }
 
 class Product {
+  const Product(
+      {required this.name,
+      required this.imageUrls,
+      required this.cost,
+      this.description,
+      this.sizes,
+      required this.category,
+      required this.productType});
+
   final String name;
   final List<String> imageUrls;
   final double cost;
@@ -922,15 +931,6 @@ class Product {
 
   /// Represents type of product such as shirt, jeans, pet treats, etc.
   final String productType;
-
-  Product(
-      {required this.name,
-      required this.imageUrls,
-      required this.cost,
-      this.description,
-      this.sizes,
-      required this.category,
-      required this.productType});
 }
 
 class Cart extends ChangeNotifier {
@@ -1054,17 +1054,17 @@ class OrderItem {
   String? selectedColor;
 }
 
-Category _mensCategory = Category(title: 'Men', selections: <String>[
+Category _mensCategory = const Category(title: 'Men', selections: <String>[
   'Shirts',
   'Jeans',
   'Shorts',
   'Jackets',
 ]);
-Category _womensCategory = Category(title: 'Women', selections: <String>[
+Category _womensCategory = const Category(title: 'Women', selections: <String>[
   'Shirts',
   'Jeans',
 ]);
-Category _petsCategory = Category(title: 'Pets', selections: <String>[
+Category _petsCategory = const Category(title: 'Pets', selections: <String>[
   'Toys',
   'Treats',
 ]);

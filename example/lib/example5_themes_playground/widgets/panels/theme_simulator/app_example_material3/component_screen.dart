@@ -365,9 +365,8 @@ class _ButtonsState extends State<Buttons> {
 }
 
 class ButtonsWithoutIcon extends StatelessWidget {
-  final bool isDisabled;
-
   const ButtonsWithoutIcon({super.key, required this.isDisabled});
+  final bool isDisabled;
 
   @override
   Widget build(BuildContext context) {

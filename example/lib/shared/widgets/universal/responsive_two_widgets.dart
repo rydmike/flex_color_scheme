@@ -9,18 +9,18 @@ const double _kMinWidth = 550;
 ///
 /// Value of [minWidth] defaults to [_kMinWidth].
 class ResponsiveTwoWidgets extends StatelessWidget {
+  const ResponsiveTwoWidgets({
+    super.key,
+    required this.builder,
+    this.minWidth = _kMinWidth,
+  });
+
   final Widget Function(
     BuildContext context,
     bool isRow,
   ) builder;
 
   final double minWidth;
-
-  const ResponsiveTwoWidgets({
-    super.key,
-    required this.builder,
-    this.minWidth = _kMinWidth,
-  });
 
   @override
   Widget build(BuildContext context) {

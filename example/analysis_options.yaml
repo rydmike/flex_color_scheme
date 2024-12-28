@@ -25,6 +25,34 @@ linter:
     #   APPLICATION: disabled : With false value. (Default, assume we are making an app most of the time.)
     diagnostic_describe_all_properties: false
 
+    # AVOID catches without on clauses.
+    #
+    # https://dart.dev/tools/linter-rules/avoid_catches_without_on_clauses.html
+    #
+    # Using catch clauses without on clauses makes your code prone to encountering unexpected
+    # errors that won't be thrown (and thus will go unnoticed). However, there are situations
+    # where we voluntarily want to catch everything, especially as a library.
+    # See https://github.com/dart-lang/linter/issues/3023
+    #
+    # The above issue has been resolved and closed, so the rule is now enabled
+    # starting in version 2.3.0, in packages, keeping it disabled in example and
+    # Playground apps for now.
+    #
+    # Other known linters use:
+    #
+    # Core           disabled : https://pub.dev/packages/lints
+    # Recommended    disabled : https://pub.dev/packages/lints
+    # Flutter Lints  disabled : https://pub.dev/packages/flutter_lints
+    # Pedantic       disabled : https://pub.dev/packages/pedantic
+    # Effective Dart enabled  : https://pub.dev/packages/effective_dart
+    # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    # Lint           disabled : https://pub.dev/packages/lint
+    # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
+    # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    #   PACKAGE:     enabled  : By commenting it out below.
+    #   APPLICATION: disabled : With false value.
+    avoid_catches_without_on_clauses: false
+
     # DO document all public members.
     #
     # https://dart-lang.github.io/linter/lints/public_member_api_docs.html
