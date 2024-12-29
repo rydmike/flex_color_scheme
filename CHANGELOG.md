@@ -34,7 +34,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **FIX**
 
-* BUG: Locked errorContainer used tertiaryContainer, corrected to use errorContainer.
+* BUG: Locked `errorContainer` used `tertiaryContainer`, corrected to use `errorContainer`.
 
 ### Themes Playground
 
