@@ -25,6 +25,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * **TabBar**: Added theming properties for the TabBar indicator animation behavior, that are based on the new enum property `TabIndicatorAnimation` in Flutter 3.27.0.
   * `FlexSubThemesData` got the property `tabBarIndicatorAnimation`.
   * `FlexSubThemes.tabBarTheme` got the property `indicatorAnimation`.
+
+* Exposes the convenience `Color` sRGB extensions from package `flex_seed_scheme`, that can be used as none deprecated replacements for `alpha`, `red`, `green`, `blue` and `value` they are called `alpha8bit`, `red8bit`, `green8bit`, `blue8bit` and `value32bit`. FlexColorPicker uses them internally to avoid using the deprecated Color properties.
   
 **CHANGE**
   * **Slider**: Minor color fidelity change to the Slider's thumb overlay color, it now uses Material-3 default for none tinted overlay. The M3 spec default is tinted as well, so the difference to when using FlexColorScheme's tinted interactions via `FlexSubThemesData(interactionEffects: true)` is now negligible for the Slider's default thumb overlay color.

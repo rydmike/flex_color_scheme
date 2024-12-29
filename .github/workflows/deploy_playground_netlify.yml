@@ -15,7 +15,7 @@
 name: Deploy_Playground_Netlify
 on:
   push:
-    branches: [master]
+    branches: [none]
     paths-ignore:
      - "**.md"
 jobs:
@@ -45,8 +45,8 @@ jobs:
       - name: "Themes playground START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "Themes playground WEB WASM-GC release build"
-        #run: cd example && flutter build web --wasm --release -t lib/example5_themes_playground/main.dart
-        run: cd example && flutter build web --wasm --release --no-strip-wasm -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --wasm --release -t lib/example5_themes_playground/main.dart
+        #run: cd example && flutter build web --wasm --release --no-strip-wasm -t lib/example5_themes_playground/main.dart
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:

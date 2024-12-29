@@ -20,10 +20,10 @@ class BottomSheetPanel extends StatelessWidget {
     path: 'rydmike/flex_color_scheme/issues/270',
   );
 
-  static final Uri _fcsFlutterIssue = Uri(
+  static final Uri _fcsFlutterIssue160963 = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/issues/',
+    path: 'flutter/flutter/issues/160963',
   );
 
   @override
@@ -160,8 +160,8 @@ class BottomSheetPanel extends StatelessWidget {
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: _fcsFlutterIssue,
-                  text: 'issue #XXXXX',
+                  uri: _fcsFlutterIssue160963,
+                  text: 'issue #160963',
                 ),
                 // _fcsChipUmbrellaIssue115364
                 TextSpan(

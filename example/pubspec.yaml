@@ -15,7 +15,7 @@ dependencies:
   # Provides encoders and decoders for various archive and compression
   # formats such as zip, tar, bzip2, gzip, and zlib. (by loki3d.com)
   # https://pub.dev/packages/archive
-  archive: ^4.0.1
+  archive: ^4.0.2
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.
@@ -38,7 +38,7 @@ dependencies:
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used for color selection in the Playground to make customized color schemes.
   # https://pub.dev/packages/flex_color_picker
-  flex_color_picker: ^3.6.0
+  flex_color_picker: ^3.7.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
@@ -94,7 +94,7 @@ dependencies:
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
   # https://pub.dev/packages/string_scanner
-  string_scanner: ^1.2.0
+  string_scanner: ^1.3.0
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher

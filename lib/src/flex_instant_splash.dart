@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_extensions.dart';

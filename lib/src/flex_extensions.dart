@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// Extensions on [Color] to brighten, lighten, darken and blend colors and
