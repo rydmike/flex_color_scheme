@@ -1,11 +1,11 @@
 /// A library to help you make beautiful color scheme based themes for Flutter.
 library;
 
-/// Export FlexSeedScheme package API, except Cam16.
+/// Export FlexSeedScheme package API.
 ///
 /// These features and APIs were baked into FlexColorScheme before version
 /// 6.0.0, but were moved to their own package starting from version 6.0.0.
-export 'package:flex_seed_scheme/flex_seed_scheme.dart' hide Cam16;
+export 'package:flex_seed_scheme/flex_seed_scheme.dart';
 
 /// Configuration class for adaptive theming features.
 export 'src/flex_adaptive.dart';

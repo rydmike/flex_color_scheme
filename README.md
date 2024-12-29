@@ -166,7 +166,8 @@ You should use the same major version of **Themes Playground** as the `flex_colo
 
 | Name  | Version | Link                                                         |
 |-------|---------|--------------------------------------------------------------| 
-| V8.0  | V8.0.0  | https://rydmike.com/flexcolorscheme/themesplayground-latest  | 
+| V8.1  | V8.1.0  | https://rydmike.com/flexcolorscheme/themesplayground-latest  |
+| V8.0  | V8.0.2  | https://rydmike.com/flexcolorscheme/themesplayground-v8-0    |
 | V7.3  | V7.3.1  | https://rydmike.com/flexcolorscheme/themesplayground-v7-3    |
 | V7.2  | V7.2.0  | https://rydmike.com/flexcolorscheme/themesplayground-v7-2    |
 | V7.1  | V7.1.2  | https://rydmike.com/flexcolorscheme/themesplayground-v7-1    |
