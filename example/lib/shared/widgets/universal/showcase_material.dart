@@ -2465,9 +2465,11 @@ class TextFieldShowcase extends StatefulWidget {
 class _TextFieldShowcaseState extends State<TextFieldShowcase> {
   late TextEditingController _plainFieldController;
   late TextEditingController _withIconsController;
+  late TextEditingController _fixedHinController;
   late TextEditingController _collapsedFieldController;
   bool _errorStatePlain = false;
   bool _errorStateWithIcons = false;
+  bool _errorFixedhint = false;
   bool _forceFilled = false;
   bool _forceOutlined = false;
 
@@ -2480,6 +2482,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
     super.initState();
     _plainFieldController = TextEditingController();
     _withIconsController = TextEditingController();
+    _fixedHinController = TextEditingController();
     _collapsedFieldController = TextEditingController();
   }
 
@@ -2487,6 +2490,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
   void dispose() {
     _plainFieldController.dispose();
     _withIconsController.dispose();
+    _fixedHinController.dispose();
     _collapsedFieldController.dispose();
     super.dispose();
   }
@@ -2565,7 +2569,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                         : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
-                    labelText: 'Icons',
+                    labelText: 'Moving label',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: const Icon(Icons.info),
                     errorText: _errorStateWithIcons
@@ -2587,6 +2591,52 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                     labelText: 'Disabled label',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: const Icon(Icons.info),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: TextField(
+                  onChanged: (String text) {
+                    setState(() {
+                      if (text.contains('a') | text.isEmpty) {
+                        _errorFixedhint = false;
+                      } else {
+                        _errorFixedhint = true;
+                      }
+                    });
+                  },
+                  key: const Key('TextField2'),
+                  controller: _fixedHinController,
+                  decoration: InputDecoration(
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
+                    hintText: 'Not moving label',
+                    prefixIcon: const Icon(Icons.key),
+                    errorText: _errorFixedhint
+                        ? "Any entry without an 'a' will trigger this error"
+                        : null,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: TextField(
+                  controller: TextEditingController(text: ''),
+                  enabled: false,
+                  decoration: InputDecoration(
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
+                    labelText: 'Disabled entry',
+                    prefixIcon: const Icon(Icons.key),
                   ),
                 ),
               ),
