@@ -1,5 +1,5 @@
 {
-  "playground_data": "Themes Playground data exported 02.01.2025 00:59:36",
+  "playground_data": "Themes Playground data exported 02.01.2025 01:15:43",
   "playground_version": "8.2.0",
   "adaptiveAppBarScrollUnderOffLight": {
     "dart_type": "enum_adaptive_response",
@@ -292,7 +292,15 @@
   "surfacesUseBWLight": false,
   "swapLegacyColorsInM3": true,
   "swapPrimaryAndSecondaryLightColors": false,
-  "switchThumbFixedSize": true,
+  "switchAdaptiveCupertinoLike": {
+    "dart_type": "enum_adaptive_response",
+    "value": "all"
+  },
+  "switchThumbFixedSize": false,
+  "switchThumbSchemeColor": {
+    "dart_type": "enum_scheme_color",
+    "value": "onPrimaryContainer"
+  },
   "tabBarDividerColor": {
     "dart_type": "color",
     "value": "00000000"
@@ -319,9 +327,9 @@
     "value": "surfaceContainerHigh"
   },
   "tooltipsMatchBackground": true,
-  "topicIndexEndSide": 3,
+  "topicIndexEndSide": 16,
   "topicIndexStartSide": 4,
-  "unselectedToggleIsColored": false,
+  "unselectedToggleIsColored": true,
   "useError": true,
   "useFlexColorScheme": true,
   "useKeyColors": true,
