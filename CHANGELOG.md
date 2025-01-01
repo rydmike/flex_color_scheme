@@ -17,8 +17,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Add Switch track color and outline colors, to be able to match Shadcn
 * Add Checkbox shape, to be able to match Shadcn
 * Add menu and popup border outline color, to be able to match Shadcn
-* Add Card color selection, with theme warning!
-* Add Card outline color selection, with theme warning!
+* Add Card color selection, with theme variant warning!
+* Add Card outline color selection, with theme variant warning!
 
 ### Themes Playground
 
