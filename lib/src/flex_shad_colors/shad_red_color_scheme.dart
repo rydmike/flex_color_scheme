@@ -5,74 +5,93 @@ import 'shad_color_scheme.dart';
 /// Shadcn based Red color scheme.
 @immutable
 class ShadRedColorScheme extends ShadColorScheme {
-  // const ShadRedColorScheme({
-  //   required super.background,
-  //   required super.foreground,
-  //   required super.card,
-  //   required super.cardForeground,
-  //   required super.popover,
-  //   required super.popoverForeground,
-  //   required super.primary,
-  //   required super.primaryForeground,
-  //   required super.secondary,
-  //   required super.secondaryForeground,
-  //   required super.muted,
-  //   required super.mutedForeground,
-  //   required super.accent,
-  //   required super.accentForeground,
-  //   required super.destructive,
-  //   required super.destructiveForeground,
-  //   required super.border,
-  //   required super.input,
-  //   required super.ring,
-  //   required super.selection,
-  // });
-
   /// Shadcn based Red color scheme, light.
   const ShadRedColorScheme.light({
-    super.background = const Color(0xffffffff),
-    super.foreground = const Color(0xff0a0a0a),
-    super.card = const Color(0xffffffff),
-    super.cardForeground = const Color(0xff0a0a0a),
-    super.popover = const Color(0xffffffff),
-    super.popoverForeground = const Color(0xff0a0a0a),
-    super.primary = const Color(0xffdc2626),
-    super.primaryForeground = const Color(0xfffef2f2),
-    super.secondary = const Color(0xfff5f5f5),
-    super.secondaryForeground = const Color(0xff171717),
-    super.muted = const Color(0xfff5f5f5),
-    super.mutedForeground = const Color(0xff737373),
-    super.accent = const Color(0xfff5f5f5),
-    super.accentForeground = const Color(0xff171717),
-    super.destructive = const Color(0xffef4444),
-    super.destructiveForeground = const Color(0xfffafafa),
-    super.border = const Color(0xffe5e5e5),
-    super.input = const Color(0xffe5e5e5),
-    super.ring = const Color(0xffdc2626),
-    super.selection = const Color(0xFFB4D7FF),
+    super.background = backgroundLight,
+    super.foreground = foregroundLight,
+    super.card = cardLight,
+    super.cardForeground = cardForegroundLight,
+    super.popover = popoverLight,
+    super.popoverForeground = popoverForegroundLight,
+    super.primary = primaryLight,
+    super.primaryForeground = primaryForegroundLight,
+    super.secondary = secondaryLight,
+    super.secondaryForeground = secondaryForegroundLight,
+    super.muted = mutedLight,
+    super.mutedForeground = mutedForegroundLight,
+    super.accent = accentLight,
+    super.accentForeground = accentForegroundLight,
+    super.destructive = destructiveLight,
+    super.destructiveForeground = destructiveForegroundLight,
+    super.border = borderLight,
+    super.input = inputLight,
+    super.ring = ringLight,
+    super.selection = selectionLight,
   });
 
   /// Shadcn based Red color scheme, dark.
   const ShadRedColorScheme.dark({
-    super.background = const Color(0xff0a0a0a),
-    super.foreground = const Color(0xfffafafa),
-    super.card = const Color(0xff0a0a0a),
-    super.cardForeground = const Color(0xfffafafa),
-    super.popover = const Color(0xff0a0a0a),
-    super.popoverForeground = const Color(0xfffafafa),
-    super.primary = const Color(0xffdc2626),
-    super.primaryForeground = const Color(0xfffef2f2),
-    super.secondary = const Color(0xff262626),
-    super.secondaryForeground = const Color(0xfffafafa),
-    super.muted = const Color(0xff262626),
-    super.mutedForeground = const Color(0xffa3a3a3),
-    super.accent = const Color(0xff262626),
-    super.accentForeground = const Color(0xfffafafa),
-    super.destructive = const Color(0xff7f1d1d),
-    super.destructiveForeground = const Color(0xfffafafa),
-    super.border = const Color(0xff262626),
-    super.input = const Color(0xff262626),
-    super.ring = const Color(0xffdc2626),
-    super.selection = const Color(0xFF355172),
+    super.background = backgroundDark,
+    super.foreground = foregroundDark,
+    super.card = cardDark,
+    super.cardForeground = cardForegroundDark,
+    super.popover = popoverDark,
+    super.popoverForeground = popoverForegroundDark,
+    super.primary = primaryDark,
+    super.primaryForeground = primaryForegroundDark,
+    super.secondary = secondaryDark,
+    super.secondaryForeground = secondaryForegroundDark,
+    super.muted = mutedDark,
+    super.mutedForeground = mutedForegroundDark,
+    super.accent = accentDark,
+    super.accentForeground = accentForegroundDark,
+    super.destructive = destructiveDark,
+    super.destructiveForeground = destructiveForegroundDark,
+    super.border = borderDark,
+    super.input = inputDark,
+    super.ring = ringDark,
+    super.selection = selectionDark,
   });
+
+  static const Color backgroundLight = Color(0xffffffff);
+  static const Color foregroundLight = Color(0xff0a0a0a);
+  static const Color cardLight = Color(0xffffffff);
+  static const Color cardForegroundLight = Color(0xff0a0a0a);
+  static const Color popoverLight = Color(0xffffffff);
+  static const Color popoverForegroundLight = Color(0xff0a0a0a);
+  static const Color primaryLight = Color(0xffdc2626);
+  static const Color primaryForegroundLight = Color(0xfffef2f2);
+  static const Color secondaryLight = Color(0xfff5f5f5);
+  static const Color secondaryForegroundLight = Color(0xff171717);
+  static const Color mutedLight = Color(0xfff5f5f5);
+  static const Color mutedForegroundLight = Color(0xff737373);
+  static const Color accentLight = Color(0xfff5f5f5);
+  static const Color accentForegroundLight = Color(0xff171717);
+  static const Color destructiveLight = Color(0xffef4444);
+  static const Color destructiveForegroundLight = Color(0xfffafafa);
+  static const Color borderLight = Color(0xffe5e5e5);
+  static const Color inputLight = Color(0xffe5e5e5);
+  static const Color ringLight = Color(0xffdc2626);
+  static const Color selectionLight = Color(0xFFB4D7FF);
+
+  static const Color backgroundDark = Color(0xff0a0a0a);
+  static const Color foregroundDark = Color(0xfffafafa);
+  static const Color cardDark = Color(0xff0a0a0a);
+  static const Color cardForegroundDark = Color(0xfffafafa);
+  static const Color popoverDark = Color(0xff0a0a0a);
+  static const Color popoverForegroundDark = Color(0xfffafafa);
+  static const Color primaryDark = Color(0xffdc2626);
+  static const Color primaryForegroundDark = Color(0xfffef2f2);
+  static const Color secondaryDark = Color(0xff262626);
+  static const Color secondaryForegroundDark = Color(0xfffafafa);
+  static const Color mutedDark = Color(0xff262626);
+  static const Color mutedForegroundDark = Color(0xffa3a3a3);
+  static const Color accentDark = Color(0xff262626);
+  static const Color accentForegroundDark = Color(0xfffafafa);
+  static const Color destructiveDark = Color(0xff7f1d1d);
+  static const Color destructiveForegroundDark = Color(0xfffafafa);
+  static const Color borderDark = Color(0xff262626);
+  static const Color inputDark = Color(0xff262626);
+  static const Color ringDark = Color(0xffdc2626);
+  static const Color selectionDark = Color(0xFF355172);
 }

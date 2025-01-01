@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../flex_scheme_color.dart';
+
 /// Shadcn based color scheme.
 @immutable
 class ShadColorScheme with Diagnosticable {
@@ -102,6 +104,21 @@ class ShadColorScheme with Diagnosticable {
   final Color selection;
 
   // TODO(rydmike): Add toFlexSchemeColor mapping function.
+
+  /// The [toFlexSchemeColor] function converts this Shadcn color scheme to a
+  /// FlexSchemeColor. This is useful when you want to use a Shadcn color scheme.
+  ///
+  /// It uses th above defined mappings.
+  FlexSchemeColor toFlexSchemeColor(Brightness brightness) {
+    return FlexSchemeColor.from(
+      primary: primary,
+      secondary: secondary,
+      tertiary: accent,
+      error: destructive,
+      brightness: brightness,
+    );
+  }
+
   // TODO(rydmike): Add toColorScheme mapping function.
   // TODO(rydmike): To FlexColorScheme add toShadcnColorScheme mapping function.
   // TODO(rydmike): How shadcn surface colors? Add to FlexSchemeColor?
