@@ -1,6 +1,6 @@
 {
-  "playground_data": "Themes Playground data exported 31.12.2024 22:19:21",
-  "playground_version": "8.1.0",
+  "playground_data": "Themes Playground data exported 02.01.2025 00:59:36",
+  "playground_version": "8.2.0",
   "adaptiveAppBarScrollUnderOffLight": {
     "dart_type": "enum_adaptive_response",
     "value": "all"
@@ -151,6 +151,7 @@
   "dialogBorderRadius": 12.0,
   "drawerBorderRadius": 0.0,
   "drawerElevation": 2.0,
+  "drawerIndicatorOpacity": 0.5,
   "elevatedButtonSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "onPrimaryContainer"
@@ -188,17 +189,18 @@
   "inputDecoratorUnfocusedBorderIsColored": false,
   "inputDecoratorUnfocusedHasBorder": true,
   "interactionEffects": true,
-  "keepDarkError": false,
+  "keepDarkError": true,
   "keepDarkErrorContainer": false,
   "keepDarkPrimary": true,
-  "keepDarkPrimaryContainer": true,
-  "keepDarkSecondary": false,
-  "keepError": false,
+  "keepDarkPrimaryContainer": false,
+  "keepDarkSecondary": true,
+  "keepDarkTertiary": true,
+  "keepError": true,
   "keepErrorContainer": false,
   "keepPrimary": true,
-  "keepPrimaryContainer": true,
-  "keepSecondary": false,
-  "keepTertiary": false,
+  "keepPrimaryContainer": false,
+  "keepSecondary": true,
+  "keepTertiary": true,
   "menuBarElevation": 0.0,
   "menuBarRadius": 0.0,
   "menuBarShadowColor": {
@@ -223,6 +225,10 @@
   "navigationBarBackgroundSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "surfaceContainerLow"
+  },
+  "navigationBarIndicatorSchemeColor": {
+    "dart_type": "enum_scheme_color",
+    "value": "secondaryContainer"
   },
   "navigationBarMuteUnselectedItem": false,
   "navigationRailBackgroundSchemeColor": {
@@ -249,17 +255,22 @@
   },
   "scaffoldDarkIsTrueBlack": false,
   "scaffoldLightIsWhite": true,
-  "schemeIndex": 21,
+  "schemeIndex": 58,
   "searchIsFullScreen": false,
   "searchUseGlobalShape": false,
   "segmentedButtonBorderSchemeColor": {
     "dart_type": "enum_scheme_color",
     "value": "outlineVariant"
   },
-  "simulatorAppIndex": 0,
+  "segmentedButtonSchemeColor": {
+    "dart_type": "enum_scheme_color",
+    "value": "primary"
+  },
+  "showSchemeInputColors": false,
+  "simulatorAppIndex": 2,
   "simulatorComponentsIndex": 7,
   "simulatorDeviceIndex": 3,
-  "simulatorViewZoom": 1300.0,
+  "simulatorViewZoom": 940.0,
   "sliderTrackHeight": 8.0,
   "sliderValueTinted": true,
   "splashType": {
@@ -294,7 +305,7 @@
   },
   "themeMode": {
     "dart_type": "enum_theme_mode",
-    "value": "dark"
+    "value": "light"
   },
   "tintedDisabledControls": false,
   "toggleButtonsBorderSchemeColor": {
@@ -308,19 +319,19 @@
     "value": "surfaceContainerHigh"
   },
   "tooltipsMatchBackground": true,
-  "topicIndexEndSide": 24,
+  "topicIndexEndSide": 3,
   "topicIndexStartSide": 4,
   "unselectedToggleIsColored": false,
-  "useError": false,
+  "useError": true,
   "useFlexColorScheme": true,
   "useKeyColors": true,
   "useMaterial3": true,
   "useMonoSurfacesDark": false,
   "useMonoSurfacesLight": false,
-  "useSecondary": false,
+  "useSecondary": true,
   "useSubThemes": true,
-  "useTertiary": false,
+  "useTertiary": true,
   "usedColors": 6,
-  "usedFlexToneSetup": 18,
+  "usedFlexToneSetup": 20,
   "verticalMode": true
 }
