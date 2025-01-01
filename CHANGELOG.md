@@ -2,6 +2,30 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.2.0/WIP/DRAFT
+
+**Jan 1, 2025**
+
+### Package
+
+**NEW**
+
+* Added Shadcn UI color schemes
+
+**TODO**
+
+* Add Switch track color and outline colors, to be able to match Shadcn
+* Add Checkbox shape, to be able to match Shadcn
+* Add menu and popup border outline color, to be able to match Shadcn
+* Add Card color selection, with theme warning!
+* Add Card outline color selection, with theme warning!
+
+### Themes Playground
+
+**NEW**
+
+* TODO: Add built-in config for Shadcn UI like config for FlexColorScheme
+
 ## 8.1.0
 
 **Dec 29, 2024**
