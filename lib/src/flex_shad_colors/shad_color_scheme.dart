@@ -33,7 +33,7 @@ class ShadColorScheme with Diagnosticable {
   // TODO(rydmike): Add toFlexSchemeColor mapping function.
   // TODO(rydmike): Add toColorScheme mapping function.
   // TODO(rydmike): To FlexColorScheme add toShadcnColorScheme mapping function.
-  // TODO(rydmike): Consider best way, if at all, to use Shadcn surface colors.
+  // TODO(rydmike): Consider best way, to use Shadcn surface colors.
 
   /// The [background] color corresponds to [ColorScheme.surface].
   final Color background;
