@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 /// Shadcn based color scheme.
 @immutable
@@ -35,26 +35,75 @@ class ShadColorScheme with Diagnosticable {
   // TODO(rydmike): To FlexColorScheme add toShadcnColorScheme mapping function.
   // TODO(rydmike): Consider best way, if at all, to use Shadcn surface colors.
 
-  // TODO(rydmike): Add color and mapping inf comments to Material colors.
+  /// The [background] color corresponds to [ColorScheme.surface].
   final Color background;
+
+  /// The [foreground] color corresponds to [ColorScheme.onSurface].
   final Color foreground;
+
+  /// The [card] color corresponds to [ColorScheme.surfaceContainerLow].
   final Color card;
+
+  /// The [card] color corresponds to [ColorScheme.onSurface].
   final Color cardForeground;
+
+  /// The [popover] color corresponds to [ColorScheme.surfaceContainerLowest].
   final Color popover;
+
+  /// The [popoverForeground] color corresponds to [ColorScheme.onSurface].
   final Color popoverForeground;
+
+  /// The [primary] color corresponds to [ColorScheme.primary].
   final Color primary;
+
+  /// The [primaryForeground] color corresponds to [ColorScheme.onPrimary].
   final Color primaryForeground;
+
+  /// The [secondary] color corresponds to [ColorScheme.secondary].
   final Color secondary;
+
+  /// The [secondaryForeground] color corresponds to [ColorScheme.onSecondary].
   final Color secondaryForeground;
+
+  /// The [muted] color corresponds to [ColorScheme.surfaceContainerHigh].
   final Color muted;
+
+  /// The [mutedForeground] color corresponds to [ColorScheme.onSurfaceVariant].
   final Color mutedForeground;
+
+  /// The [accent] color corresponds to [ColorScheme.tertiary].
   final Color accent;
+
+  /// The [accentForeground] color corresponds to [ColorScheme.onTertiary].
   final Color accentForeground;
+
+  /// The [destructive] color corresponds to [ColorScheme.error].
   final Color destructive;
+
+  /// The [destructiveForeground] color corresponds to [ColorScheme.onError].
   final Color destructiveForeground;
+
+  /// The [border] color corresponds to [ColorScheme.outlineVariant].
   final Color border;
+
+  /// Used as border on Shad outlined button, select outline, Switch unselected
+  /// track color. The unselected switch track color is
+  /// [ColorScheme.surfaceContainerHighest] in Material, we can potentially also
+  /// use it t map this color.
   final Color input;
+
+  /// This is only used as focused or secondary focused border around input.
+  ///
+  /// There is no direct suitable mapping in Material [ColorScheme]. Material
+  /// uses [primary]. We can get the same result if we use the color
+  /// directly in input decoration theme.
   final Color ring;
+
+  /// Used for text selection and selection control colors on mobile.
+  ///
+  /// In Material text selection default to to [primary] with 50% opacity.
+  /// The way to get this color into Material is to set it text selection theme,
+  /// but there is no fitting place for it in the [ColorScheme].
   final Color selection;
 
   /// Shadcn based color scheme lerp theme transition animation.
