@@ -30,11 +30,6 @@ class ShadColorScheme with Diagnosticable {
     required this.selection,
   });
 
-  // TODO(rydmike): Add toFlexSchemeColor mapping function.
-  // TODO(rydmike): Add toColorScheme mapping function.
-  // TODO(rydmike): To FlexColorScheme add toShadcnColorScheme mapping function.
-  // TODO(rydmike): Consider best way, to use Shadcn surface colors.
-
   /// The [background] color corresponds to [ColorScheme.surface].
   final Color background;
 
@@ -105,6 +100,11 @@ class ShadColorScheme with Diagnosticable {
   /// The way to get this color into Material is to set it text selection theme,
   /// but there is no fitting place for it in the [ColorScheme].
   final Color selection;
+
+  // TODO(rydmike): Add toFlexSchemeColor mapping function.
+  // TODO(rydmike): Add toColorScheme mapping function.
+  // TODO(rydmike): To FlexColorScheme add toShadcnColorScheme mapping function.
+  // TODO(rydmike): How shadcn surface colors? Add to FlexSchemeColor?
 
   /// Shadcn based color scheme lerp theme transition animation.
   static ShadColorScheme lerp(
