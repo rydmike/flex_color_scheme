@@ -177,7 +177,7 @@
     "value": "outline"
   },
   "inputDecoratorBorderWidth": 0.5,
-  "inputDecoratorFocusedBorderWidth": 1.0,
+  "inputDecoratorFocusedBorderWidth": 2.0,
   "inputDecoratorFocusedHasBorder": true,
   "inputDecoratorIsDense": true,
   "inputDecoratorIsFilled": false,
