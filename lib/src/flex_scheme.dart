@@ -191,6 +191,9 @@ enum FlexScheme {
   /// Sepia, a warm slight brown yellow tinted neutral theme.
   sepia,
 
+   /// Shadcn blue color inspired theme.
+  shadBlue,
+
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom
   /// [FlexSchemeData] object. If not provided, it defaults to the

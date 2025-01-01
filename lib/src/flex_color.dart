@@ -4,6 +4,7 @@ import 'flex_extensions.dart';
 import 'flex_scheme.dart';
 import 'flex_scheme_color.dart';
 import 'flex_scheme_data.dart';
+import 'flex_shad_colors/shad_blue_color_scheme.dart';
 
 // ignore_for_file: comment_references
 
@@ -5399,6 +5400,46 @@ class FlexColor {
     ),
   );
 
+  /// English name of the Shadcn blue theme.
+  static const String shadBlueName = 'Shadcn Blue';
+
+  /// English description of the Shadcn blue theme.
+  static const String shadBlueDescription = 'Shadcn blue based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadBlue = FlexSchemeData(
+    name: shadBlueName,
+    description: shadBlueDescription,
+    light: FlexSchemeColor(
+      primary: ShadBlueColorScheme.primaryLight,
+      // primaryContainer: sepiaLightPrimaryContainer,
+      primaryLightRef: ShadBlueColorScheme.primaryLight,
+      secondary: ShadBlueColorScheme.secondaryLight,
+      // secondaryContainer: sepiaLightSecondaryContainer,
+      secondaryLightRef: ShadBlueColorScheme.secondaryLight,
+      tertiary: ShadBlueColorScheme.accentLight,
+      // tertiaryContainer: sepiaLightTertiaryContainer,
+      tertiaryLightRef: ShadBlueColorScheme.accentLight,
+      // appBarColor: sepiaLightTertiary,
+      error: ShadBlueColorScheme.destructiveLight,
+      // errorContainer: material3LightErrorContainer,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadBlueColorScheme.primaryDark,
+      // primaryContainer: sepiaDarkPrimaryContainer,
+      primaryLightRef: ShadBlueColorScheme.primaryLight,
+      secondary: ShadBlueColorScheme.secondaryDark,
+      // secondaryContainer: sepiaDarkSecondaryContainer,
+      secondaryLightRef: ShadBlueColorScheme.secondaryLight,
+      tertiary: ShadBlueColorScheme.accentDark,
+      // tertiaryContainer: sepiaDarkTertiaryContainer,
+      tertiaryLightRef: ShadBlueColorScheme.accentLight,
+      // appBarColor: sepiaDarkTertiary,
+      error: ShadBlueColorScheme.destructiveDark,
+      // errorContainer: material3DarkErrorContainer,
+    ),
+  );
+
   /// Starting values for custom color data.
   ///
   /// These can serve as fallback data to custom color values
@@ -5510,6 +5551,7 @@ class FlexColor {
     FlexScheme.blackWhite: blackWhite,
     FlexScheme.greys: greys,
     FlexScheme.sepia: sepia,
+    FlexScheme.shadBlue: shadBlue,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -5598,5 +5640,6 @@ class FlexColor {
     blackWhite,
     greys,
     sepia,
+    shadBlue,
   ];
 }
