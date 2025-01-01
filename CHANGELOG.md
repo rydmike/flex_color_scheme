@@ -19,6 +19,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Add menu and popup border outline color, to be able to match Shadcn
 * Add Card color selection, with theme variant warning!
 * Add Card outline color selection, with theme variant warning!
+* Add SegmentedControl icon color selection.
 
 ### Themes Playground
 
