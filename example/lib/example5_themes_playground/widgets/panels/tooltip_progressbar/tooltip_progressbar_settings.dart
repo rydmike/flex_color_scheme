@@ -7,6 +7,7 @@ import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/color_scheme_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 
 class TooltipProgressBarPanel extends StatelessWidget {
   const TooltipProgressBarPanel(this.controller, {super.key});
@@ -199,6 +200,7 @@ class TooltipProgressBarPanel extends StatelessWidget {
           padding: EdgeInsets.all(16.0),
           child: ProgressIndicatorShowcase(),
         ),
+        TestAdaptiveResponse(controller),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),

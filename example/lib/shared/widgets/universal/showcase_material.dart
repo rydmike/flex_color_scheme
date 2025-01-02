@@ -77,11 +77,11 @@ class ShowcaseMaterial extends StatelessWidget {
         const SizedBox(height: 16),
         const Text('Checkbox', style: headerStyle),
         const SizedBox(height: 8),
-        const CheckboxShowcase(),
+        const CheckboxShowcase(showCupertinoSwitches: true),
         const SizedBox(height: 16),
         const Text('Radio', style: headerStyle),
         const SizedBox(height: 8),
-        const RadioShowcase(),
+        const RadioShowcase(showCupertinoSwitches: true),
         const SizedBox(height: 16),
         //
         // Icon
@@ -126,6 +126,9 @@ class ShowcaseMaterial extends StatelessWidget {
         const Text('Slider and RangeSlider', style: headerStyle),
         const SizedBox(height: 8),
         const SliderShowcase(),
+        const Divider(),
+        const SizedBox(height: 8),
+        const SliderAdaptiveShowcase(),
         const Divider(),
         const RangeSliderShowcase(),
         const SizedBox(height: 8),
@@ -917,7 +920,8 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
 }
 
 class CheckboxShowcase extends StatefulWidget {
-  const CheckboxShowcase({super.key});
+  const CheckboxShowcase({super.key, this.showCupertinoSwitches = false});
+  final bool showCupertinoSwitches;
 
   @override
   State<CheckboxShowcase> createState() => _CheckboxShowcaseState();
@@ -1075,6 +1079,45 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
               ),
             ],
           ),
+          if (widget.showCupertinoSwitches)
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                const SizedBox(width: _width, child: Text('Adaptive')),
+                Checkbox.adaptive(
+                  value: isSelected1,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isSelected1 = value ?? false;
+                    });
+                  },
+                ),
+                Checkbox.adaptive(
+                  value: !isSelected1,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isSelected1 = !(value ?? false);
+                    });
+                  },
+                ),
+              ],
+            ),
+          if (widget.showCupertinoSwitches)
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                const SizedBox(width: _width, child: Text('Disabled')),
+                Checkbox.adaptive(value: isSelected1, onChanged: null),
+                Checkbox.adaptive(
+                  value: !isSelected1,
+                  onChanged: null,
+                ),
+              ],
+            ),
         ],
       ),
     );
@@ -1082,7 +1125,8 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
 }
 
 class RadioShowcase extends StatefulWidget {
-  const RadioShowcase({super.key});
+  const RadioShowcase({super.key, this.showCupertinoSwitches = false});
+  final bool showCupertinoSwitches;
 
   @override
   State<RadioShowcase> createState() => _RadioShowcaseState();
@@ -1136,6 +1180,50 @@ class _RadioShowcaseState extends State<RadioShowcase> {
                 onChanged: null,
               ),
               Radio<bool>(
+                value: false,
+                groupValue: groupValue,
+                onChanged: null,
+              ),
+            ],
+          ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(width: _width, child: Text('Adaptive')),
+              Radio<bool>.adaptive(
+                value: true,
+                groupValue: groupValue,
+                onChanged: (bool? value) {
+                  setState(() {
+                    groupValue = value;
+                  });
+                },
+              ),
+              Radio<bool>.adaptive(
+                value: false,
+                groupValue: groupValue,
+                onChanged: (bool? value) {
+                  setState(() {
+                    groupValue = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(width: _width, child: Text('Disabled')),
+              Radio<bool>.adaptive(
+                value: true,
+                groupValue: groupValue,
+                onChanged: null,
+              ),
+              Radio<bool>.adaptive(
                 value: false,
                 groupValue: groupValue,
                 onChanged: null,
@@ -1209,6 +1297,81 @@ class _SliderShowcaseState extends State<SliderShowcase> {
             title: Text(
                 'Slider continuous disabled (${value.toStringAsFixed(2)})'),
             subtitle: Slider(
+              max: 30,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: null,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SliderAdaptiveShowcase extends StatefulWidget {
+  const SliderAdaptiveShowcase({super.key});
+
+  @override
+  State<SliderAdaptiveShowcase> createState() => _SliderAdaptiveShowcaseState();
+}
+
+class _SliderAdaptiveShowcaseState extends State<SliderAdaptiveShowcase> {
+  double value = 5;
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            dense: true,
+            title:
+                Text('Slider.adaptive stepped (${value.toStringAsFixed(0)})'),
+            subtitle: Slider.adaptive(
+              max: 30,
+              divisions: 31,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: (double newValue) {
+                setState(() {
+                  value = newValue.roundToDouble();
+                });
+              },
+            ),
+          ),
+          ListTile(
+            dense: true,
+            title: Text(
+                'Slider.adaptive continuous (${value.toStringAsFixed(2)})'),
+            subtitle: Slider.adaptive(
+              max: 30,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: (double newValue) {
+                setState(() {
+                  value = newValue;
+                });
+              },
+            ),
+          ),
+          ListTile(
+            dense: true,
+            title: Text('Slider.adaptive stepped disabled '
+                '(${value.toStringAsFixed(0)})'),
+            subtitle: Slider.adaptive(
+              max: 30,
+              divisions: 31,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: null,
+            ),
+          ),
+          ListTile(
+            dense: true,
+            title: Text('Slider.adaptive continuous disabled '
+                '(${value.toStringAsFixed(2)})'),
+            subtitle: Slider.adaptive(
               max: 30,
               label: value.toStringAsFixed(0),
               value: value,
@@ -2069,33 +2232,57 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
     final double? progressValue = playProgressIndicator ? null : 0.75;
 
     return RepaintBoundary(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 16,
-        runSpacing: 16,
+      child: Column(
+        spacing: 8,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          IconButton(
-            isSelected: playProgressIndicator,
-            selectedIcon: const Icon(Icons.pause),
-            icon: const Icon(Icons.play_arrow),
-            onPressed: () {
-              setState(() {
-                playProgressIndicator = !playProgressIndicator;
-              });
-            },
+          Row(
+            children: [
+              IconButton(
+                isSelected: playProgressIndicator,
+                selectedIcon: const Icon(Icons.pause),
+                icon: const Icon(Icons.play_arrow),
+                onPressed: () {
+                  setState(() {
+                    playProgressIndicator = !playProgressIndicator;
+                  });
+                },
+              ),
+              if (playProgressIndicator)
+                const Text('Pause')
+              else
+                const Text('Play'),
+            ],
           ),
+          const Text('Material'),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: <Widget>[
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: CircularProgressIndicator(
+                  value: progressValue,
+                ),
+              ),
+              SizedBox(
+                width: 200,
+                child: LinearProgressIndicator(
+                  value: progressValue,
+                ),
+              ),
+            ],
+          ),
+          const Text('Adaptive'),
           SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
+            width: 40,
+            height: 40,
+            child: CircularProgressIndicator.adaptive(
               value: progressValue,
             ),
           ),
-          SizedBox(
-              width: 200,
-              child: LinearProgressIndicator(
-                value: progressValue,
-              )),
         ],
       ),
     );
@@ -2617,7 +2804,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                         ? const OutlineInputBorder()
                         : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
-                    hintText: 'Not moving label',
+                    hintText: 'No moving label',
                     prefixIcon: const Icon(Icons.key),
                     errorText: _errorFixedhint
                         ? "Any entry without an 'a' will trigger this error"
@@ -4614,11 +4801,14 @@ class ExpansionPanelShowcaseItems {
 class AlertDialogShowcase extends StatelessWidget {
   const AlertDialogShowcase({super.key});
 
-  Future<void> _openDialog(BuildContext context) async {
+  Future<void> _openDialog(BuildContext context,
+      [bool adaptive = false]) async {
     await showDialog<void>(
         context: context,
         useRootNavigator: false,
-        builder: (BuildContext context) => const _AlertDialogExample());
+        builder: (BuildContext context) => adaptive
+            ? const _AlertDialogAdaptiveExample()
+            : const _AlertDialogExample());
   }
 
   @override
@@ -4626,12 +4816,24 @@ class AlertDialogShowcase extends StatelessWidget {
     return Column(
       children: <Widget>[
         const AbsorbPointer(child: _AlertDialogExample()),
-        TextButton(
-          child: const Text(
-            'Show AlertDialog',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          onPressed: () async => _openDialog(context),
+        const AbsorbPointer(child: _AlertDialogAdaptiveExample()),
+        Wrap(
+          children: <Widget>[
+            TextButton(
+              child: const Text(
+                'Show AlertDialog',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () async => _openDialog(context, false),
+            ),
+            TextButton(
+              child: const Text(
+                'Show adaptive AlertDialog',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () async => _openDialog(context, true),
+            ),
+          ],
         ),
       ],
     );
@@ -4656,6 +4858,50 @@ class _AlertDialogExample extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(), child: Text(cancel)),
         TextButton(
             onPressed: () => Navigator.of(context).pop(), child: Text(allow)),
+      ],
+    );
+  }
+}
+
+class _AlertDialogAdaptiveExample extends StatelessWidget {
+  const _AlertDialogAdaptiveExample();
+
+  Widget adaptiveAction(
+      {required BuildContext context,
+      required VoidCallback onPressed,
+      required Widget child}) {
+    final ThemeData theme = Theme.of(context);
+    switch (theme.platform) {
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return TextButton(onPressed: onPressed, child: child);
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return CupertinoDialogAction(onPressed: onPressed, child: child);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bool useMaterial3 = Theme.of(context).useMaterial3;
+    final String cancel = useMaterial3 ? 'Cancel' : 'CANCEL';
+    final String allow = useMaterial3 ? 'Allow' : 'ALLOW';
+
+    return AlertDialog.adaptive(
+      title: const Text('Allow location services'),
+      content: const Text('Let us help determine location. This means '
+          'sending anonymous location data to us'),
+      actions: <Widget>[
+        adaptiveAction(
+            context: context,
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(cancel)),
+        adaptiveAction(
+            context: context,
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(allow)),
       ],
     );
   }
