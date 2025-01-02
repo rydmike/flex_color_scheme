@@ -27,6 +27,13 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 **NEW**
 
+* Added showing all existing Material-Cupertino platform adaptive widgets. Switch already existed but now also added:
+  * AlertDialog.adaptive
+  * Slider.adaptive
+  * Checkbox.adaptive  
+  * Radio.adaptive
+  
+ 
 * TODO: Add built-in config for Shadcn UI like config for FlexColorScheme
 
 ## 8.1.0
