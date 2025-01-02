@@ -106,7 +106,7 @@ class ShadColorScheme with Diagnosticable {
   // TODO(rydmike): Add toFlexSchemeColor mapping function.
 
   /// The [toFlexSchemeColor] function converts this Shadcn color scheme to a
-  /// FlexSchemeColor. This is useful when you want to use a Shadcn color scheme.
+  /// FlexSchemeColor. This is useful when you want to use a Shadcn colorscheme.
   ///
   /// It uses th above defined mappings.
   FlexSchemeColor toFlexSchemeColor(Brightness brightness) {
