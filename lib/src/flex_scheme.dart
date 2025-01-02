@@ -191,8 +191,41 @@ enum FlexScheme {
   /// Sepia, a warm slight brown yellow tinted neutral theme.
   sepia,
 
-   /// Shadcn blue color inspired theme.
+  /// Shadcn blue color inspired theme.
   shadBlue,
+
+  /// Shadcn gray color inspired theme.
+  shadGray,
+
+  /// Shadcn green color inspired theme.
+  shadGreen,
+
+  /// Shadcn neutral color inspired theme.
+  shadNeutral,
+
+  /// Shadcn orange color inspired theme.
+  shadOrange,
+
+  /// Shadcn red color inspired theme.
+  shadRed,
+
+  /// Shadcn rose color inspired theme.
+  shadRose,
+
+  /// Shadcn slate color inspired theme.
+  shadSlate,
+
+  /// Shadcn stone color inspired theme.
+  shadStone,
+
+  /// Shadcn violet color inspired theme.
+  shadViolet,
+
+  /// Shadcn yellow color inspired theme.
+  shadYellow,
+
+  /// Shadcn zinc color inspired theme.
+  shadZinc,
 
   /// Placeholder for adding a custom scheme. When this scheme
   /// is selected you should provide a [FlexColorScheme] based on a custom

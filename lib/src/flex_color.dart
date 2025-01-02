@@ -5,6 +5,17 @@ import 'flex_scheme.dart';
 import 'flex_scheme_color.dart';
 import 'flex_scheme_data.dart';
 import 'flex_shad_colors/shad_blue_color_scheme.dart';
+import 'flex_shad_colors/shad_gray_color_scheme.dart';
+import 'flex_shad_colors/shad_green_color_scheme.dart';
+import 'flex_shad_colors/shad_neutral_color_scheme.dart';
+import 'flex_shad_colors/shad_orange_color_scheme.dart';
+import 'flex_shad_colors/shad_red_color_scheme.dart';
+import 'flex_shad_colors/shad_rose_color_scheme.dart';
+import 'flex_shad_colors/shad_slate_color_scheme.dart';
+import 'flex_shad_colors/shad_stone_color_scheme.dart';
+import 'flex_shad_colors/shad_violet_color_scheme.dart';
+import 'flex_shad_colors/shad_yellow_color_scheme.dart';
+import 'flex_shad_colors/shad_zinc_color_scheme.dart';
 
 // ignore_for_file: comment_references
 
@@ -5412,31 +5423,351 @@ class FlexColor {
     description: shadBlueDescription,
     light: FlexSchemeColor(
       primary: ShadBlueColorScheme.primaryLight,
-      // primaryContainer: sepiaLightPrimaryContainer,
       primaryLightRef: ShadBlueColorScheme.primaryLight,
       secondary: ShadBlueColorScheme.secondaryLight,
-      // secondaryContainer: sepiaLightSecondaryContainer,
       secondaryLightRef: ShadBlueColorScheme.secondaryLight,
       tertiary: ShadBlueColorScheme.accentLight,
-      // tertiaryContainer: sepiaLightTertiaryContainer,
       tertiaryLightRef: ShadBlueColorScheme.accentLight,
-      // appBarColor: sepiaLightTertiary,
       error: ShadBlueColorScheme.destructiveLight,
-      // errorContainer: material3LightErrorContainer,
     ),
     dark: FlexSchemeColor(
       primary: ShadBlueColorScheme.primaryDark,
-      // primaryContainer: sepiaDarkPrimaryContainer,
       primaryLightRef: ShadBlueColorScheme.primaryLight,
       secondary: ShadBlueColorScheme.secondaryDark,
-      // secondaryContainer: sepiaDarkSecondaryContainer,
       secondaryLightRef: ShadBlueColorScheme.secondaryLight,
       tertiary: ShadBlueColorScheme.accentDark,
-      // tertiaryContainer: sepiaDarkTertiaryContainer,
       tertiaryLightRef: ShadBlueColorScheme.accentLight,
-      // appBarColor: sepiaDarkTertiary,
       error: ShadBlueColorScheme.destructiveDark,
-      // errorContainer: material3DarkErrorContainer,
+    ),
+  );
+
+  /// English name of the Shadcn gray theme.
+  static const String shadGrayName = 'Shadcn Gray';
+
+  /// English description of the Shadcn gray theme.
+  static const String shadGrayDescription = 'Shadcn gray based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadGray = FlexSchemeData(
+    name: shadGrayName,
+    description: shadGrayDescription,
+    light: FlexSchemeColor(
+      primary: ShadGrayColorScheme.primaryLight,
+      primaryLightRef: ShadGrayColorScheme.primaryLight,
+      secondary: ShadGrayColorScheme.secondaryLight,
+      secondaryLightRef: ShadGrayColorScheme.secondaryLight,
+      tertiary: ShadGrayColorScheme.accentLight,
+      tertiaryLightRef: ShadGrayColorScheme.accentLight,
+      error: ShadGrayColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadGrayColorScheme.primaryDark,
+      primaryLightRef: ShadGrayColorScheme.primaryLight,
+      secondary: ShadGrayColorScheme.secondaryDark,
+      secondaryLightRef: ShadGrayColorScheme.secondaryLight,
+      tertiary: ShadGrayColorScheme.accentDark,
+      tertiaryLightRef: ShadGrayColorScheme.accentLight,
+      error: ShadGrayColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn green theme.
+  static const String shadGreenName = 'Shadcn Green';
+
+  /// English description of the Shadcn green theme.
+  static const String shadGreenDescription = 'Shadcn green based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadGreen = FlexSchemeData(
+    name: shadGreenName,
+    description: shadGreenDescription,
+    light: FlexSchemeColor(
+      primary: ShadGreenColorScheme.primaryLight,
+      primaryLightRef: ShadGreenColorScheme.primaryLight,
+      secondary: ShadGreenColorScheme.secondaryLight,
+      secondaryLightRef: ShadGreenColorScheme.secondaryLight,
+      tertiary: ShadGreenColorScheme.accentLight,
+      tertiaryLightRef: ShadGreenColorScheme.accentLight,
+      error: ShadGreenColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadGreenColorScheme.primaryDark,
+      primaryLightRef: ShadGreenColorScheme.primaryLight,
+      secondary: ShadGreenColorScheme.secondaryDark,
+      secondaryLightRef: ShadGreenColorScheme.secondaryLight,
+      tertiary: ShadGreenColorScheme.accentDark,
+      tertiaryLightRef: ShadGreenColorScheme.accentLight,
+      error: ShadGreenColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn neutral theme.
+  static const String shadNeutralName = 'Shadcn Neutral';
+
+  /// English description of the Shadcn neutral theme.
+  static const String shadNeutralDescription = 'Shadcn neutral based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadNeutral = FlexSchemeData(
+    name: shadNeutralName,
+    description: shadNeutralDescription,
+    light: FlexSchemeColor(
+      primary: ShadNeutralColorScheme.primaryLight,
+      primaryLightRef: ShadNeutralColorScheme.primaryLight,
+      secondary: ShadNeutralColorScheme.secondaryLight,
+      secondaryLightRef: ShadNeutralColorScheme.secondaryLight,
+      tertiary: ShadNeutralColorScheme.accentLight,
+      tertiaryLightRef: ShadNeutralColorScheme.accentLight,
+      error: ShadNeutralColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadNeutralColorScheme.primaryDark,
+      primaryLightRef: ShadNeutralColorScheme.primaryLight,
+      secondary: ShadNeutralColorScheme.secondaryDark,
+      secondaryLightRef: ShadNeutralColorScheme.secondaryLight,
+      tertiary: ShadNeutralColorScheme.accentDark,
+      tertiaryLightRef: ShadNeutralColorScheme.accentLight,
+      error: ShadNeutralColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn orange theme.
+  static const String shadOrangeName = 'Shadcn Orange';
+
+  /// English description of the Shadcn orange theme.
+  static const String shadOrangeDescription = 'Shadcn orange based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadOrange = FlexSchemeData(
+    name: shadOrangeName,
+    description: shadOrangeDescription,
+    light: FlexSchemeColor(
+      primary: ShadOrangeColorScheme.primaryLight,
+      primaryLightRef: ShadOrangeColorScheme.primaryLight,
+      secondary: ShadOrangeColorScheme.secondaryLight,
+      secondaryLightRef: ShadOrangeColorScheme.secondaryLight,
+      tertiary: ShadOrangeColorScheme.accentLight,
+      tertiaryLightRef: ShadOrangeColorScheme.accentLight,
+      error: ShadOrangeColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadOrangeColorScheme.primaryDark,
+      primaryLightRef: ShadOrangeColorScheme.primaryLight,
+      secondary: ShadOrangeColorScheme.secondaryDark,
+      secondaryLightRef: ShadOrangeColorScheme.secondaryLight,
+      tertiary: ShadOrangeColorScheme.accentDark,
+      tertiaryLightRef: ShadOrangeColorScheme.accentLight,
+      error: ShadOrangeColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn red theme.
+  static const String shadRedName = 'Shadcn Red';
+
+  /// English description of the Shadcn red theme.
+  static const String shadRedDescription = 'Shadcn red based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadRed = FlexSchemeData(
+    name: shadRedName,
+    description: shadRedDescription,
+    light: FlexSchemeColor(
+      primary: ShadRedColorScheme.primaryLight,
+      primaryLightRef: ShadRedColorScheme.primaryLight,
+      secondary: ShadRedColorScheme.secondaryLight,
+      secondaryLightRef: ShadRedColorScheme.secondaryLight,
+      tertiary: ShadRedColorScheme.accentLight,
+      tertiaryLightRef: ShadRedColorScheme.accentLight,
+      error: ShadRedColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadRedColorScheme.primaryDark,
+      primaryLightRef: ShadRedColorScheme.primaryLight,
+      secondary: ShadRedColorScheme.secondaryDark,
+      secondaryLightRef: ShadRedColorScheme.secondaryLight,
+      tertiary: ShadRedColorScheme.accentDark,
+      tertiaryLightRef: ShadRedColorScheme.accentLight,
+      error: ShadRedColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn rose theme.
+  static const String shadRoseName = 'Shadcn Rose';
+
+  /// English description of the Shadcn rose theme.
+  static const String shadRoseDescription = 'Shadcn rose based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadRose = FlexSchemeData(
+    name: shadRoseName,
+    description: shadRoseDescription,
+    light: FlexSchemeColor(
+      primary: ShadRoseColorScheme.primaryLight,
+      primaryLightRef: ShadRoseColorScheme.primaryLight,
+      secondary: ShadRoseColorScheme.secondaryLight,
+      secondaryLightRef: ShadRoseColorScheme.secondaryLight,
+      tertiary: ShadRoseColorScheme.accentLight,
+      tertiaryLightRef: ShadRoseColorScheme.accentLight,
+      error: ShadRoseColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadRoseColorScheme.primaryDark,
+      primaryLightRef: ShadRoseColorScheme.primaryLight,
+      secondary: ShadRoseColorScheme.secondaryDark,
+      secondaryLightRef: ShadRoseColorScheme.secondaryLight,
+      tertiary: ShadRoseColorScheme.accentDark,
+      tertiaryLightRef: ShadRoseColorScheme.accentLight,
+      error: ShadRoseColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn slate theme.
+  static const String shadSlateName = 'Shadcn Slate';
+
+  /// English description of the Shadcn slate theme.
+  static const String shadSlateDescription = 'Shadcn slate based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadSlate = FlexSchemeData(
+    name: shadSlateName,
+    description: shadSlateDescription,
+    light: FlexSchemeColor(
+      primary: ShadSlateColorScheme.primaryLight,
+      primaryLightRef: ShadSlateColorScheme.primaryLight,
+      secondary: ShadSlateColorScheme.secondaryLight,
+      secondaryLightRef: ShadSlateColorScheme.secondaryLight,
+      tertiary: ShadSlateColorScheme.accentLight,
+      tertiaryLightRef: ShadSlateColorScheme.accentLight,
+      error: ShadSlateColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadSlateColorScheme.primaryDark,
+      primaryLightRef: ShadSlateColorScheme.primaryLight,
+      secondary: ShadSlateColorScheme.secondaryDark,
+      secondaryLightRef: ShadSlateColorScheme.secondaryLight,
+      tertiary: ShadSlateColorScheme.accentDark,
+      tertiaryLightRef: ShadSlateColorScheme.accentLight,
+      error: ShadSlateColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn stone theme.
+  static const String shadStoneName = 'Shadcn Stone';
+
+  /// English description of the Shadcn stone theme.
+  static const String shadStoneDescription = 'Shadcn stone based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadStone = FlexSchemeData(
+    name: shadStoneName,
+    description: shadStoneDescription,
+    light: FlexSchemeColor(
+      primary: ShadStoneColorScheme.primaryLight,
+      primaryLightRef: ShadStoneColorScheme.primaryLight,
+      secondary: ShadStoneColorScheme.secondaryLight,
+      secondaryLightRef: ShadStoneColorScheme.secondaryLight,
+      tertiary: ShadStoneColorScheme.accentLight,
+      tertiaryLightRef: ShadStoneColorScheme.accentLight,
+      error: ShadStoneColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadStoneColorScheme.primaryDark,
+      primaryLightRef: ShadStoneColorScheme.primaryLight,
+      secondary: ShadStoneColorScheme.secondaryDark,
+      secondaryLightRef: ShadStoneColorScheme.secondaryLight,
+      tertiary: ShadStoneColorScheme.accentDark,
+      tertiaryLightRef: ShadStoneColorScheme.accentLight,
+      error: ShadStoneColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn violet theme.
+  static const String shadVioletName = 'Shadcn Violet';
+
+  /// English description of the Shadcn violet theme.
+  static const String shadVioletDescription = 'Shadcn violet based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadViolet = FlexSchemeData(
+    name: shadVioletName,
+    description: shadVioletDescription,
+    light: FlexSchemeColor(
+      primary: ShadVioletColorScheme.primaryLight,
+      primaryLightRef: ShadVioletColorScheme.primaryLight,
+      secondary: ShadVioletColorScheme.secondaryLight,
+      secondaryLightRef: ShadVioletColorScheme.secondaryLight,
+      tertiary: ShadVioletColorScheme.accentLight,
+      tertiaryLightRef: ShadVioletColorScheme.accentLight,
+      error: ShadVioletColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadVioletColorScheme.primaryDark,
+      primaryLightRef: ShadVioletColorScheme.primaryLight,
+      secondary: ShadVioletColorScheme.secondaryDark,
+      secondaryLightRef: ShadVioletColorScheme.secondaryLight,
+      tertiary: ShadVioletColorScheme.accentDark,
+      tertiaryLightRef: ShadVioletColorScheme.accentLight,
+      error: ShadVioletColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn yellow theme.
+  static const String shadYellowName = 'Shadcn Yellow';
+
+  /// English description of the Shadcn yellow theme.
+  static const String shadYellowDescription = 'Shadcn yellow based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadYellow = FlexSchemeData(
+    name: shadYellowName,
+    description: shadYellowDescription,
+    light: FlexSchemeColor(
+      primary: ShadYellowColorScheme.primaryLight,
+      primaryLightRef: ShadYellowColorScheme.primaryLight,
+      secondary: ShadYellowColorScheme.secondaryLight,
+      secondaryLightRef: ShadYellowColorScheme.secondaryLight,
+      tertiary: ShadYellowColorScheme.accentLight,
+      tertiaryLightRef: ShadYellowColorScheme.accentLight,
+      error: ShadYellowColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadYellowColorScheme.primaryDark,
+      primaryLightRef: ShadYellowColorScheme.primaryLight,
+      secondary: ShadYellowColorScheme.secondaryDark,
+      secondaryLightRef: ShadYellowColorScheme.secondaryLight,
+      tertiary: ShadYellowColorScheme.accentDark,
+      tertiaryLightRef: ShadYellowColorScheme.accentLight,
+      error: ShadYellowColorScheme.destructiveDark,
+    ),
+  );
+
+  /// English name of the Shadcn zinc theme.
+  static const String shadZincName = 'Shadcn Zinc';
+
+  /// English description of the Shadcn zinc theme.
+  static const String shadZincDescription = 'Shadcn zinc based theme.';
+
+  /// A Material 3 Shadcn UI ShadColorScheme based scheme as FlexSchemeData.
+  static const FlexSchemeData shadZinc = FlexSchemeData(
+    name: shadZincName,
+    description: shadZincDescription,
+    light: FlexSchemeColor(
+      primary: ShadZincColorScheme.primaryLight,
+      primaryLightRef: ShadZincColorScheme.primaryLight,
+      secondary: ShadZincColorScheme.secondaryLight,
+      secondaryLightRef: ShadZincColorScheme.secondaryLight,
+      tertiary: ShadZincColorScheme.accentLight,
+      tertiaryLightRef: ShadZincColorScheme.accentLight,
+      error: ShadZincColorScheme.destructiveLight,
+    ),
+    dark: FlexSchemeColor(
+      primary: ShadZincColorScheme.primaryDark,
+      primaryLightRef: ShadZincColorScheme.primaryLight,
+      secondary: ShadZincColorScheme.secondaryDark,
+      secondaryLightRef: ShadZincColorScheme.secondaryLight,
+      tertiary: ShadZincColorScheme.accentDark,
+      tertiaryLightRef: ShadZincColorScheme.accentLight,
+      error: ShadZincColorScheme.destructiveDark,
     ),
   );
 
@@ -5552,6 +5883,17 @@ class FlexColor {
     FlexScheme.greys: greys,
     FlexScheme.sepia: sepia,
     FlexScheme.shadBlue: shadBlue,
+    FlexScheme.shadGray: shadGray,
+    FlexScheme.shadGreen: shadGreen,
+    FlexScheme.shadNeutral: shadNeutral,
+    FlexScheme.shadOrange: shadOrange,
+    FlexScheme.shadRed: shadRed,
+    FlexScheme.shadRose: shadRose,
+    FlexScheme.shadSlate: shadSlate,
+    FlexScheme.shadStone: shadStone,
+    FlexScheme.shadViolet: shadViolet,
+    FlexScheme.shadYellow: shadYellow,
+    FlexScheme.shadZinc: shadZinc,
   };
 
   /// Returns a [FlexScheme] enum to [FlexSchemeData] constant map.
@@ -5641,5 +5983,15 @@ class FlexColor {
     greys,
     sepia,
     shadBlue,
+    shadGray,
+    shadGreen,
+    shadNeutral,
+    shadOrange,
+    shadRed,
+    shadRose,
+    shadSlate,
+    shadStone,
+    shadViolet,
+    shadYellow,
   ];
 }
