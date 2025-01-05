@@ -283,9 +283,9 @@ class _ButtonsSwitchesIconsShowcase extends StatelessWidget {
             //
             Text('Switch, CheckBox and Radio', style: headerStyle),
             SizedBox(height: 8),
-            SwitchShowcase(showCupertinoSwitches: false),
-            CheckboxShowcase(),
-            RadioShowcase(),
+            SwitchShowcase(showCupertinoSwitches: true),
+            CheckboxShowcase(showCupertinoSwitches: true),
+            RadioShowcase(showCupertinoSwitches: true),
             SizedBox(height: 8),
             //
             // Icon
