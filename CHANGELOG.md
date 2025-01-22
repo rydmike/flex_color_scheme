@@ -26,7 +26,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 ### Themes Playground
 
 **NEW**
-
 * Added showing all existing Material-Cupertino platform adaptive widgets. Switch already existed but now also added:
   * AlertDialog.adaptive
   * Slider.adaptive
@@ -35,8 +34,15 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   
 **UPDATE** 
 * Updated TabBar "Known issues" info expand, to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
+
+
+**FIX**
+* Playground: Fix code gen for the first scheme, [see issue 275](https://github.com/rydmike/flex_color_scheme/issues/275).
  
-* TODO: Add built-in config for Shadcn UI like config for FlexColorScheme
+* TODO: 
+  * Add built-in config for Shadcn UI like config for FlexColorScheme
+  * Fix: Look into custom dark uses own colors as seed not updating correctly in the Playground
+  * Fix: Codegen for schemes 2 and 3. 
 
 ## 8.1.0
 

@@ -53,6 +53,13 @@ String generateThemeDartCode(ThemeController controller) {
   final bool useBuiltIn = controller.schemeIndex > 2 &&
       controller.schemeIndex < AppColor.schemes.length - 1;
   final bool useCustom = controller.schemeIndex == AppColor.schemes.length - 1;
+
+  final String lightBuiltInError = scheme.light.error == null
+      ? ''
+      : '    error: ${scheme.light.error.toColorString()},\n';
+  final String lightBuiltInErrorContainer = scheme.light.errorContainer == null
+      ? ''
+      : '    errorContainer: ${scheme.light.errorContainer.toColorString()},\n';
   String lightScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
@@ -66,8 +73,8 @@ String generateThemeDartCode(ThemeController controller) {
           '    tertiaryContainer: ${scheme.light.tertiaryContainer.toColorString()},\n'
           '    tertiaryLightRef: ${scheme.light.tertiaryLightRef.toColorString()},\n'
           '    appBarColor: ${scheme.light.appBarColor.toColorString()},\n'
-          '    error: ${scheme.light.error.toColorString()},\n'
-          '    errorContainer: ${scheme.light.errorContainer.toColorString()},\n'
+          '$lightBuiltInError'
+          '$lightBuiltInErrorContainer'
           '  ),\n';
   if (useCustom) {
     lightScheme = '  colors: const FlexSchemeColor( // Custom colors\n'
@@ -85,6 +92,12 @@ String generateThemeDartCode(ThemeController controller) {
         '    errorContainer: ${controller.customErrorContainerLight.toColorString()},\n'
         '  ),\n';
   }
+  final String darkBuiltInError = scheme.dark.error == null
+      ? ''
+      : '    error: ${scheme.dark.error.toColorString()},\n';
+  final String darkBuiltInErrorContainer = scheme.dark.errorContainer == null
+      ? ''
+      : '    errorContainer: ${scheme.dark.errorContainer.toColorString()},\n';
   String darkScheme = useBuiltIn
       ? '  scheme: ${FlexScheme.values[flexScheme]},\n'
       : '  colors: const FlexSchemeColor(\n'
@@ -98,8 +111,8 @@ String generateThemeDartCode(ThemeController controller) {
           '    tertiaryContainer: ${scheme.dark.tertiaryContainer.toColorString()},\n'
           '    tertiaryLightRef: ${scheme.light.tertiaryLightRef.toColorString()},\n'
           '    appBarColor: ${scheme.dark.appBarColor.toColorString()},\n'
-          '    error: ${scheme.dark.error.toColorString()},\n'
-          '    errorContainer: ${scheme.dark.errorContainer.toColorString()},\n'
+          '$darkBuiltInError'
+          '$darkBuiltInErrorContainer'
           '  ),\n';
   if (useCustom) {
     darkScheme = '  colors: const FlexSchemeColor( // Custom colors\n'
