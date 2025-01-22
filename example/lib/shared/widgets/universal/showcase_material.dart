@@ -1,8 +1,3 @@
-// ignore_for_file: avoid-adjacent-strings, nothing wrong with adjacent strings, it is a good and convenient Dart feature.
-// ignore_for_file: avoid-non-null-assertion, this file uses null assertions on TextTheme styles that are never null in the Framework.
-// ignore_for_file: avoid-unsafe-collection-methods, this file defines a few mutable lists locally and handles them correctly.
-// ignore_for_file: no-empty-block, this files contains on purpose many empty blocks for onPressed etc methods that intentionally do nothing.
-// ignore_for_file: avoid-late-keyword, this file declares none nullable TextEditing controllers as late and initializes them in initState, as should be.
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -2017,16 +2012,12 @@ class IconButtonVariantsShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(height: 18),
             SizedBox(width: 75, height: 21, child: Text('Type')),
             SizedBox(height: 16),
             SizedBox(width: 75, height: 48, child: Text('Tappable')),
-            // SizedBox(height: 8),
             SizedBox(width: 75, height: 48, child: Text('Toggleable')),
-            // SizedBox(height: 8),
             SizedBox(width: 75, height: 48, child: Text('Disabled')),
           ],
         ),
