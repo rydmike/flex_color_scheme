@@ -33,6 +33,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * Checkbox.adaptive  
   * Radio.adaptive
   
+**UPDATE** 
+* Updated TabBar "Known issues" info expand, to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
  
 * TODO: Add built-in config for Shadcn UI like config for FlexColorScheme
 

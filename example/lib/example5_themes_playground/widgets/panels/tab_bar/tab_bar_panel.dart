@@ -22,6 +22,18 @@ class TabBarPanel extends StatelessWidget {
     path: 'flutter/flutter/pull/119690',
   );
 
+  static final Uri _fcsFlutterIssue160631 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/160631',
+  );
+
+  static final Uri _fcsFlutterPr161514 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/161514',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -221,10 +233,7 @@ class TabBarPanel extends StatelessWidget {
               defaultLabel: defaultIndicatorAnimation(),
               title: const Text('Tab animation'),
               subtitleReveal: const Text('Default is elastic if style is only '
-                  'label, otherwise linear.\n\n'
-                  'ISSUE:\n'
-                  'In Flutter 3.27 the tab indicator animation style elastic '
-                  'does not seem to work, the style is identical to linear.\n'),
+                  'label, otherwise linear.\n'),
               value: controller.tabBarIndicatorAnimation,
               onChanged: controller.setTabBarIndicatorAnimation,
             ),
@@ -417,6 +426,29 @@ class TabBarPanel extends StatelessWidget {
                     style: linkStyle,
                     uri: _fcsFlutterPr119690,
                     text: 'PR #119690',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '.\n'
+                        'In Flutter 3.24 the elastic TabBar indicator '
+                        'animation is glitchy, in Flutter 3.27.0 to 3.27.2, '
+                        'the elastic TabBar indicator animation is broken, '
+                        'see issue ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: _fcsFlutterIssue160631,
+                    text: '#160631',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '. The issue is fixed in Flutter 3.27.3 and later, '
+                        'via',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: _fcsFlutterPr161514,
+                    text: 'PR #161514',
                   ),
                   TextSpan(
                     style: spanTextStyle,
