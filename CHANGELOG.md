@@ -32,6 +32,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Add Card color selection, with theme variant warning!
 * Add Card outline color selection, with theme variant warning!
 * Add SegmentedControl icon color selection.
+* Look into potential dark mode issue with icon contrast in AppBar. Issues is potentially new in 3.27. 
 
 ### Themes Playground
 
