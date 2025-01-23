@@ -12,13 +12,14 @@ abstract final class AppColor {
   static const FlexSchemeColor _myScheme1Light = FlexSchemeColor(
     primary: Color(0xFF00296B),
     primaryContainer: Color(0xFFA0C2ED),
-    primaryLightRef: Color(0xFF00296B),
+    // TODO(rydmike): Remove the commented light ref colors.
+    // primaryLightRef: Color(0xFF00296B),
     secondary: Color(0xFFD26900),
     secondaryContainer: Color(0xFFFFD270),
-    secondaryLightRef: Color(0xFFD26900),
+    // secondaryLightRef: Color(0xFFD26900),
     tertiary: Color(0xFF5C5C95),
     tertiaryContainer: Color(0xFFC8DBF8),
-    tertiaryLightRef: Color(0xFF5C5C95),
+    // tertiaryLightRef: Color(0xFF5C5C95),
     // The built in schemes use their tertiary color as their default
     // custom app bar color, but it can be any color. We use a custom color
     // here. We will see this in example 5 when using the theme and selecting
