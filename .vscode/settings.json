@@ -20,5 +20,7 @@
     "Tert",
     "themedata"
   ],
-  "dart.flutterSdkPath": ".fvm/versions/stable"
+  "dart.flutterSdkPath": ".fvm/versions/stable",
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.showTabs": "multiple"
 }
