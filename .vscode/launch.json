@@ -49,7 +49,7 @@
             "program": "lib/example4_all_themes/main.dart"
         },
         {
-            "name": "Example 5 - JS Themes Playground",
+            "name": "Example 5 - Themes Playground",
             "cwd": "example",
             "request": "launch",
             "type": "dart",
