@@ -53,7 +53,7 @@ class ShadBlueColorScheme extends ShadColorScheme {
     super.selection = selectionDark,
   });
 
-    /// The background color in light theme.
+  /// The background color in light theme.
   static const Color backgroundLight = Color(0xffffffff);
 
   /// The foreground color in light theme.

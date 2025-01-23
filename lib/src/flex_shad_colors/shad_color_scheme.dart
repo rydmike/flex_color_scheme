@@ -86,7 +86,7 @@ class ShadColorScheme with Diagnosticable {
   /// Used as border on Shad outlined button, select outline, Switch unselected
   /// track color. The unselected switch track color is
   /// [ColorScheme.surfaceContainerHighest] in Material, we can potentially also
-  /// use it t map this color.
+  /// use it to map this color.
   final Color input;
 
   /// This is only used as focused or secondary focused border around input.
@@ -98,9 +98,9 @@ class ShadColorScheme with Diagnosticable {
 
   /// Used for text selection and selection control colors on mobile.
   ///
-  /// In Material text selection default to to [primary] with 50% opacity.
-  /// The way to get this color into Material is to set it text selection theme,
-  /// but there is no fitting place for it in the [ColorScheme].
+  /// In Material text selection defaults to [primary] with 50% opacity.
+  /// The way to get this color into Material is to set its text selection
+  /// theme, but there is no fitting place for it in the [ColorScheme].
   final Color selection;
 
   // TODO(rydmike): Add toFlexSchemeColor mapping function.
@@ -121,7 +121,7 @@ class ShadColorScheme with Diagnosticable {
 
   // TODO(rydmike): Add toColorScheme mapping function.
   // TODO(rydmike): To FlexColorScheme add toShadcnColorScheme mapping function.
-  // TODO(rydmike): How shadcn surface colors? Add to FlexSchemeColor?
+  // TODO(rydmike): How to use shadcn surface colors? Add to FlexSchemeColor?
 
   /// Shadcn based color scheme lerp theme transition animation.
   static ShadColorScheme lerp(
