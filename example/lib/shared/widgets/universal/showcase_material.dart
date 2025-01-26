@@ -26,7 +26,7 @@ class ShowcaseMaterial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    const TextStyle headerStyle = TextStyle(fontSize: 16);
+    const TextStyle headerStyle = TextStyle(fontSize: 20);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -4497,34 +4497,53 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
   }
 }
 
-class ListTileShowcase extends StatelessWidget {
+class ListTileShowcase extends StatefulWidget {
   const ListTileShowcase({super.key});
 
+  @override
+  State<ListTileShowcase> createState() => _ListTileShowcaseState();
+}
+
+class _ListTileShowcaseState extends State<ListTileShowcase> {
+  bool selected = true;
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Column(
         children: <Widget>[
           ListTile(
+            selected: !selected,
             leading: const Icon(Icons.info),
             title: const Text('ListTile'),
-            subtitle: const Text('List tile sub title'),
+            subtitle: selected
+                ? const Text('Selected list tile')
+                : const Text('Normal list tile'),
             trailing: const Text('Trailing'),
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                selected = !selected;
+              });
+            },
           ),
           ListTile(
             leading: const Icon(Icons.info),
             title: const Text('ListTile selected'),
-            subtitle: const Text('Selected list tile sub title'),
+            subtitle: selected
+                ? const Text('Selected list tile')
+                : const Text('Normal list tile'),
             trailing: const Text('Trailing'),
-            selected: true,
-            onTap: () {},
+            selected: selected,
+            onTap: () {
+              setState(() {
+                selected = !selected;
+              });
+            },
           ),
           ListTile(
             enabled: false,
             leading: const Icon(Icons.info),
             title: const Text('ListTile disabled'),
-            subtitle: const Text('Selected list tile sub title'),
+            subtitle: const Text('Disabled list tile'),
             trailing: const Text('Trailing'),
             onTap: () {},
           ),
@@ -4534,9 +4553,16 @@ class ListTileShowcase extends StatelessWidget {
   }
 }
 
-class SwitchListTileShowcase extends StatelessWidget {
+class SwitchListTileShowcase extends StatefulWidget {
   const SwitchListTileShowcase({super.key});
 
+  @override
+  State<SwitchListTileShowcase> createState() => _SwitchListTileShowcaseState();
+}
+
+class _SwitchListTileShowcaseState extends State<SwitchListTileShowcase> {
+  bool isSwitchOneOn = true;
+  bool isSwitchTwoOn = false;
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
@@ -4545,16 +4571,28 @@ class SwitchListTileShowcase extends StatelessWidget {
           SwitchListTile(
             secondary: const Icon(Icons.info),
             title: const Text('SwitchListTile'),
-            subtitle: const Text('The switch list tile is OFF'),
-            value: false,
-            onChanged: (bool value) {},
+            subtitle: isSwitchOneOn
+                ? const Text('The switch list tile is ON')
+                : const Text('The switch list tile is OFF'),
+            value: isSwitchOneOn,
+            onChanged: (bool value) {
+              setState(() {
+                isSwitchOneOn = value;
+              });
+            },
           ),
           SwitchListTile(
             secondary: const Icon(Icons.info),
             title: const Text('SwitchListTile'),
-            subtitle: const Text('The switch list tile is ON'),
-            value: true,
-            onChanged: (bool value) {},
+            subtitle: isSwitchTwoOn
+                ? const Text('The switch list tile is ON')
+                : const Text('The switch list tile is OFF'),
+            value: isSwitchTwoOn,
+            onChanged: (bool value) {
+              setState(() {
+                isSwitchTwoOn = value;
+              });
+            },
           ),
           const SwitchListTile(
             secondary: Icon(Icons.info),
@@ -4569,8 +4607,18 @@ class SwitchListTileShowcase extends StatelessWidget {
   }
 }
 
-class CheckboxListTileShowcase extends StatelessWidget {
+class CheckboxListTileShowcase extends StatefulWidget {
   const CheckboxListTileShowcase({super.key});
+
+  @override
+  State<CheckboxListTileShowcase> createState() =>
+      _CheckboxListTileShowcaseState();
+}
+
+class _CheckboxListTileShowcaseState extends State<CheckboxListTileShowcase> {
+  bool isCheckOneOn = false;
+  bool isCheckTwoOn = true;
+  bool? isCheckThreeOn;
 
   @override
   Widget build(BuildContext context) {
@@ -4580,32 +4628,56 @@ class CheckboxListTileShowcase extends StatelessWidget {
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: const Text('The checkbox list tile is unchecked'),
-            value: false,
-            onChanged: (bool? value) {},
+            subtitle: isCheckOneOn
+                ? const Text('The checkbox list tile is checked')
+                : const Text('The checkbox list tile is unchecked'),
+            value: isCheckOneOn,
+            onChanged: (bool? value) {
+              if (value != null) {
+                setState(() {
+                  isCheckOneOn = value;
+                });
+              }
+            },
           ),
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: const Text('The checkbox list tile is checked'),
-            value: true,
-            onChanged: (bool? value) {},
+            subtitle: isCheckTwoOn
+                ? const Text('The checkbox list tile is checked')
+                : const Text('The checkbox list tile is unchecked'),
+            value: isCheckTwoOn,
+            onChanged: (bool? value) {
+              if (value != null) {
+                setState(() {
+                  isCheckTwoOn = value;
+                });
+              }
+            },
           ),
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: const Text('The checkbox list tile is null in tristate'),
+            subtitle: isCheckThreeOn == null
+                ? const Text('The checkbox list tile is null in tristate')
+                : isCheckThreeOn!
+                    ? const Text('The checkbox list tile is checked')
+                    : const Text('The checkbox list tile is unchecked'),
             tristate: true,
-            value: null,
-            onChanged: (bool? value) {},
+            value: isCheckThreeOn,
+            onChanged: (bool? value) {
+              setState(() {
+                isCheckThreeOn = value;
+              });
+            },
           ),
-          CheckboxListTile(
+          const CheckboxListTile(
             enabled: false,
-            secondary: const Icon(Icons.info),
-            title: const Text('CheckboxListTile disabled'),
-            subtitle: const Text('The checkbox list tile is checked'),
+            secondary: Icon(Icons.info),
+            title: Text('CheckboxListTile disabled'),
+            subtitle: Text('The checkbox list tile is checked'),
             value: true,
-            onChanged: (bool? value) {},
+            onChanged: null,
           ),
         ],
       ),
@@ -4613,9 +4685,15 @@ class CheckboxListTileShowcase extends StatelessWidget {
   }
 }
 
-class RadioListTileShowcase extends StatelessWidget {
+class RadioListTileShowcase extends StatefulWidget {
   const RadioListTileShowcase({super.key});
 
+  @override
+  State<RadioListTileShowcase> createState() => _RadioListTileShowcaseState();
+}
+
+class _RadioListTileShowcaseState extends State<RadioListTileShowcase> {
+  int value = 2;
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
@@ -4624,35 +4702,59 @@ class RadioListTileShowcase extends StatelessWidget {
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: const Text('The radio option is unselected'),
-            value: 0,
-            onChanged: (_) {},
-            groupValue: 1,
+            subtitle: value == 1
+                ? const Text('The radio option is selected')
+                : const Text('The radio option is unselected'),
+            value: 1,
+            groupValue: value,
+            onChanged: (int? val) {
+              if (val != null) {
+                setState(() {
+                  value = val;
+                });
+              }
+            },
           ),
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: const Text('The radio option is selected'),
-            value: 1,
-            onChanged: (_) {},
-            groupValue: 1,
+            subtitle: value == 2
+                ? const Text('The radio option is selected')
+                : const Text('The radio option is unselected'),
+            value: 2,
+            groupValue: value,
+            onChanged: (int? val) {
+              if (val != null) {
+                setState(() {
+                  value = val;
+                });
+              }
+            },
           ),
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: const Text('The radio option and list tile is selected'),
-            value: 1,
-            selected: true,
-            onChanged: (_) {},
-            groupValue: 1,
+            subtitle: value == 3
+                ? const Text('The radio option and list tile is selected')
+                : const Text('The radio option is unselected'),
+            value: 3,
+            groupValue: value,
+            selected: value == 3,
+            onChanged: (int? val) {
+              if (val != null) {
+                setState(() {
+                  value = val;
+                });
+              }
+            },
           ),
-          const RadioListTile<int>(
-            secondary: Icon(Icons.info),
-            title: Text('RadioListTile disabled'),
-            subtitle: Text('The radio option is selected'),
-            value: 1,
+          RadioListTile<int>(
+            secondary: const Icon(Icons.info),
+            title: const Text('RadioListTile disabled'),
+            subtitle: const Text('The radio option is unselected and disabled'),
+            value: 4,
+            groupValue: value,
             onChanged: null,
-            groupValue: 1,
           ),
         ],
       ),
