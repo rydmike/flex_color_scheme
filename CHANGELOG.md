@@ -4,9 +4,12 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.2.0/WIP/DRAFT
 
-**Jan 23, 2025**
+**Feb 13, 2025**
 
 ### Package
+
+**UPDATE/TODO**
+* Update the package to support and maybe require at least Flutter v3.29.0.
 
 **NEW**
 * Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. The enums are:
@@ -41,7 +44,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   
  
 **CHANGE** 
-* Fix/improve code gen for the second and third Playground scheme. It now exports these schemes the way they are defined internally in the Playground app, instead of as this configuration's resulting colors.
+* Fix/improve code gen for the second and third Playground scheme. It now exports these schemes the way they are defined internally in the Playground app, instead of as their configuration resulting colors.
 * Improved the theme code gen order and added some comments to the generated code to make it easier to understand what the main parts does.
 * Removed the theme codegen option that was used to generate a config to be pasted directly into `MaterialApp` properties `theme` and `themeDark`, in favor of the newer one that generates the configs as its own file. The newer one has been the default option since version 8.0.0.
 * Updated TabBar "Known issues" info expand, to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
