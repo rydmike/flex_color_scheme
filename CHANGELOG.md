@@ -8,9 +8,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ### Package
 
-**UPDATE/TODO**
-* Update the package to support and maybe require at least Flutter v3.29.0.
-
+**CHORE**
+* Update the package to support and (maybe) require at least Flutter v3.29.0.
+  * Remove all usage and references to new deprecated theming properties in Flutter 3.29.0: 
+    * MaterialStateUnderlineInputBorder → WidgetStateInputBorder
+    * MaterialStateOutlineInputBorder → WidgetStateInputBorder
+    * Themedata.dialogBackgroundColor → Remove all usage and references in the FCS packages.
+  * TODO: Test if it will still work with Flutter 3.27.x with these changes and relax constraint if it compiles. 
+  
 **NEW**
 * Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. The enums are:
   * `FlexScheme.shadBlue`
@@ -35,7 +40,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Add Card color selection, with theme variant warning!
 * Add Card outline color selection, with theme variant warning!
 * Add SegmentedControl icon color selection.
-* Look into potential dark mode issue with icon contrast in AppBar. Issues is potentially new in 3.27. 
+* Look into potential dark mode issue with icon contrast in AppBar. The issue is potentially new in 3.27.
+* Check Material info on used colors in canvas types, may have changed in 3.29.
 
 ### Themes Playground
 
@@ -45,7 +51,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
  
 **CHANGE** 
 * Fix/improve code gen for the second and third Playground scheme. It now exports these schemes the way they are defined internally in the Playground app, instead of as their configuration resulting colors.
-* Improved the theme code gen order and added some comments to the generated code to make it easier to understand what the main parts does.
+* Improved the theme code gen order and added some comments to the generated code to make it easier to understand what the main parts do.
 * Removed the theme codegen option that was used to generate a config to be pasted directly into `MaterialApp` properties `theme` and `themeDark`, in favor of the newer one that generates the configs as its own file. The newer one has been the default option since version 8.0.0.
 * Updated TabBar "Known issues" info expand, to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
 

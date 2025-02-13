@@ -4172,7 +4172,7 @@ void main() {
             filled: filled,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
+            border: WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
@@ -4390,7 +4390,7 @@ void main() {
             filled: isFilled,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
+            border: WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
@@ -4620,7 +4620,7 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
+            border: WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
@@ -4849,7 +4849,7 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
+            border: WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
@@ -5079,7 +5079,7 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
+            border: WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
@@ -5378,7 +5378,7 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateOutlineInputBorder.resolveWith(
+            border: WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return OutlineInputBorder(
@@ -5549,8 +5549,7 @@ void main() {
       //
       // Outline border default
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{}),
         equals(
           OutlineInputBorder(
             gapPadding: 4,
@@ -5564,7 +5563,7 @@ void main() {
       );
       // Outline border disabled (not tinted)
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           OutlineInputBorder(
@@ -5578,7 +5577,7 @@ void main() {
       );
       // Outline border error
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
           OutlineInputBorder(
@@ -5592,7 +5591,7 @@ void main() {
       );
       // Outline border error, focused
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
         equals(
           OutlineInputBorder(
@@ -5606,7 +5605,7 @@ void main() {
       );
       // Outline border error, hovered
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
         equals(
           OutlineInputBorder(
@@ -5620,7 +5619,7 @@ void main() {
       );
       // Outline border focused
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.focused}),
         equals(
           OutlineInputBorder(
@@ -5634,7 +5633,7 @@ void main() {
       );
       // Outline border focused
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.hovered}),
         equals(
           OutlineInputBorder(
@@ -5665,8 +5664,7 @@ void main() {
       // Underline border disabled (tinted)
       final Color tintDisable = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.secondaryContainer);
-      final OutlineInputBorder ulAct1 = (m.border
-              as MaterialStateOutlineInputBorder?)!
+      final OutlineInputBorder ulAct1 = (m.border as WidgetStateInputBorder?)!
           .resolve(<WidgetState>{WidgetState.disabled}) as OutlineInputBorder;
       final OutlineInputBorder ulExp1 = OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
@@ -5866,8 +5864,7 @@ void main() {
       //
       // Underline border default
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{}),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
@@ -5883,7 +5880,7 @@ void main() {
       );
       // Underline border disabled (not tinted)
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           UnderlineInputBorder(
@@ -5900,7 +5897,7 @@ void main() {
       );
       // Underline border error
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
           UnderlineInputBorder(
@@ -5917,7 +5914,7 @@ void main() {
       );
       // Underline border error, focused
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
         equals(
           UnderlineInputBorder(
@@ -5934,7 +5931,7 @@ void main() {
       );
       // Underline border error, hovered
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
         equals(
           UnderlineInputBorder(
@@ -5951,7 +5948,7 @@ void main() {
       );
       // Underline border focused
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.focused}),
         equals(
           UnderlineInputBorder(
@@ -5968,7 +5965,7 @@ void main() {
       );
       // Underline border focused
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
+        (m.border as WidgetStateInputBorder?)!
             .resolve(<WidgetState>{WidgetState.hovered}),
         equals(
           UnderlineInputBorder(
@@ -5999,8 +5996,7 @@ void main() {
       // Underline border disabled (tinted)
       final Color tintDisabledColor2 = FlexSubThemes.tintedDisable(
           colorScheme.onSurface, colorScheme.primary);
-      final UnderlineInputBorder ulAct = (m.border
-              as MaterialStateUnderlineInputBorder?)!
+      final UnderlineInputBorder ulAct = (m.border as WidgetStateInputBorder?)!
           .resolve(<WidgetState>{WidgetState.disabled}) as UnderlineInputBorder;
       final UnderlineInputBorder ulExp = UnderlineInputBorder(
         borderRadius: const BorderRadius.only(

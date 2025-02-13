@@ -3975,8 +3975,8 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(1),
       );
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
 
       // InputDecoration thin width
       expect(
@@ -4054,8 +4054,8 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(1),
       );
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       // InputDecoration thin width
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
@@ -4132,8 +4132,8 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(3),
       );
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       // InputDecoration thin width
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
@@ -4211,8 +4211,8 @@ void main() {
         equals(3),
       );
       // InputDecoration thin width
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(3),
@@ -4297,8 +4297,8 @@ void main() {
         equals(1.5),
       );
       // InputDecoration thin width
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(2.5),
@@ -5742,8 +5742,9 @@ void main() {
       expect(theme.colorScheme.onSurface, equals(Colors.black));
       expect(theme.scaffoldBackgroundColor,
           equals(FlexColor.materialLightBackground));
-      expect(
-          theme.dialogBackgroundColor, equals(FlexColor.materialLightSurface));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor, equals(FlexColor.materialLightSurface));
       expect(theme.colorScheme.surfaceTint, equals(Colors.red));
     });
     test(
@@ -5777,7 +5778,8 @@ void main() {
       expect(theme.colorScheme.onSurface, equals(Colors.black));
       expect(theme.scaffoldBackgroundColor,
           equals(FlexColor.materialLightBackground));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(Colors.red));
     });
     test(
@@ -5823,7 +5825,7 @@ void main() {
           equals(colorScheme.onErrorContainer));
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor, equals(Colors.blue));
@@ -5876,7 +5878,8 @@ void main() {
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
       expect(theme.scaffoldBackgroundColor, equals(colorScheme.surface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor,
@@ -5931,7 +5934,8 @@ void main() {
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
       expect(theme.scaffoldBackgroundColor, equals(colorScheme.surface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor, equals(Colors.blue));
@@ -5986,7 +5990,8 @@ void main() {
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
       expect(theme.scaffoldBackgroundColor, equals(colorScheme.surface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor,

@@ -793,10 +793,16 @@ class FlexColorScheme with Diagnosticable {
 
   /// The background color used by [Dialog]s.
   ///
-  /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
-  /// controlled separately with only a [ThemeData.from] a color scheme.
+  /// In FCS versions before 8.2.0 this color is applied to
+  /// `ThemeData.dialogBackgroundColor`, a color that cannot be
+  /// controlled separately with only a [ThemeData.from] a [ColorScheme].
   ///
-  /// When using sub-themes, it is also applied to backgroundColor in
+  /// In FCS version 8.2.0 and later this color is no longer applied to
+  /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
+  /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
+  /// must now be enabled.
+  ///
+  /// When using sub-themes,this color is applied to backgroundColor in
   /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
   /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
   /// defined in [subThemesData].
@@ -7515,10 +7521,17 @@ class FlexColorScheme with Diagnosticable {
       // configured. Use dialogs with background color that equals theme
       // ColorScheme.surface to ensure it gets elevation overlay color applied
       // in M2 dark mode. See: https://github.com/flutter/flutter/issues/90353
-      dialogBackgroundColor: dialogBackground ??
-          (useMaterial3
-              ? colorScheme.surfaceContainerHigh
-              : colorScheme.surface),
+      //
+      // TODO(rydmike): Now commented since dialogBackgroundColor is deprecated.
+      // For version 8.2.0 that uses Flutter 3.29.0 and later we now remove
+      // this assignments, as doing it will cause a score penalty.
+      // However, not doing it may give us worse default colors on dialogs
+      // when sub-themes are not enabled. Most users probably use sub-themes
+      // and will never see the difference
+      // dialogBackgroundColor: dialogBackground ??
+      //     (useMaterial3
+      //         ? colorScheme.surfaceContainerHigh
+      //         : colorScheme.surface),
       // Disabled color uses a different style when using tinted disabled.
       // effects, if not opted in same as before v4.0.0 = ThemeData default.
       disabledColor: tintedDisabled

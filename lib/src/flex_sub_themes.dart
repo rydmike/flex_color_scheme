@@ -4112,7 +4112,7 @@ abstract final class FlexSubThemes {
       //
       border: (borderType ?? FlexInputBorderType.underline) ==
               FlexInputBorderType.underline
-          ? MaterialStateUnderlineInputBorder.resolveWith(
+          ? WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return UnderlineInputBorder(
@@ -4200,7 +4200,7 @@ abstract final class FlexSubThemes {
             )
           //
           // The outline version
-          : MaterialStateOutlineInputBorder.resolveWith(
+          : WidgetStateInputBorder.resolveWith(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return OutlineInputBorder(
