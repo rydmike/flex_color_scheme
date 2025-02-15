@@ -2,6 +2,26 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.1.1
+
+**Feb 15, 2025**
+
+**NOTE** 
+
+This fix release only contains a critical **Flutter BUG** workaround solution for users of Flutter versions 3.27.0 to 3.27.4 and 3.29.0.
+
+This release does not contain any support for new theming features released in Flutter 3.29.0, nor does it address theming properties that were deprecated in Flutter 3.29.0. **FlexColorScheme** v8.1.1 and v8.1.0, sans the useful workaround released here, are verified to work with Flutter v3.29 as is. A later **FlexColorScheme** release v8.2.0, will add new theming features and also remove the theming properties that were deprecated in Flutter 3.29.0. Removing them has no impact on FlexColorScheme produced Material-3 themes in Flutter 3.29. Removing and fixing all the deprecations will break things in Flutter 3.27 versions, since some of their replacements do not exist in Flutter 3.27. The issue workaround and fix added here is intended to also support the issue in Flutter 3.27 versions, not only in Flutter 3.29, thus we cannot address the 3.29 deprecations in this release.
+
+### Package
+
+**FIX**
+
+* In Flutter **3.27.0** to at least Flutter **3.29.0** the `iconColor` on buttons `ElevatedButton`, `FilledButton`, `OutlinedButton`, `TextButton` and `SegmentedButton` no longer default to `foregroundColor` when `iconColor` is not defined. This is caused by a **BREAKING REGRESSION BUG** in Flutter SDK, see [issue 162839](https://github.com/flutter/flutter/issues/162839). The issue in Flutter SDK has been fixed via [PR 162880](https://github.com/flutter/flutter/pull/162880). However, this fix will never apply to Flutter versions 3.27.0 to at least 3.29.0. It may land as a cherry-picked hotfix in Flutter 3.29.1 or later minor release of Flutter 3.29. The FIX released here in this version of FlexColorScheme, adds a workaround to this issue. Without this workaround patch, the icon color on the above-mentioned buttons will not work correctly. The used workaround patch will also work correctly after Flutter [PR 162880](https://github.com/flutter/flutter/pull/162880) lands in Flutter.
+
+### Themes Playground
+
+* The above-mentioned Flutter SDK issue was added to "Known issues" in info expands on the Buttons and Segmented Buttons Playground panels.
+
 ## 8.1.0
 
 **Dec 29, 2024**

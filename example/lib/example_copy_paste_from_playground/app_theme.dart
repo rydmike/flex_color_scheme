@@ -8,14 +8,13 @@ import 'package:flutter/material.dart';
 /// Use same major flex_color_scheme package version. If you use a
 /// lower minor version, some properties may not be supported.
 /// In that case, remove them after copying this theme to your
-/// app or upgrade package to version 8.0.2.
+/// app or upgrade package to version 8.1.1.
 ///
 /// Use in [MaterialApp] like this:
 ///
 /// MaterialApp(
 ///  theme: AppTheme.light,
 ///  darkTheme: AppTheme.dark,
-///  :
 /// );
 abstract final class AppTheme {
   // The defined light theme.

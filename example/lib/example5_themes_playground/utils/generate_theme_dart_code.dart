@@ -2387,7 +2387,6 @@ String generateThemeDartCode(ThemeController controller) {
           '/// MaterialApp(\n'
           '///   theme: AppTheme.light,\n'
           '///   darkTheme: AppTheme.dark,\n'
-          '///     :\n'
           '/// );\n'
           'abstract final class AppTheme {\n'
           '  // The defined light theme.\n'

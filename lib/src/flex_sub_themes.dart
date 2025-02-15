@@ -2977,6 +2977,18 @@ abstract final class FlexSubThemes {
 
     // We are using FCS M2 buttons, styled in M3 fashion by FCS.
     if (!useM3) {
+      final WidgetStateProperty<Color> foregroundColor =
+          WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            if (tintDisable) {
+              return tintedDisable(colorScheme.onSurface, tint);
+            }
+            return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+          }
+          return foreground;
+        },
+      );
       return ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           splashFactory: splashFactory,
@@ -2990,17 +3002,8 @@ abstract final class FlexSubThemes {
           ), //buttonShape,
         ).copyWith(
           textStyle: textStyle,
-          foregroundColor: WidgetStateProperty.resolveWith<Color>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                if (tintDisable) {
-                  return tintedDisable(colorScheme.onSurface, tint);
-                }
-                return colorScheme.onSurface.withAlpha(kAlphaDisabled);
-              }
-              return foreground;
-            },
-          ),
+          foregroundColor: foregroundColor,
+          iconColor: foregroundColor,
           backgroundColor: WidgetStateProperty.resolveWith<Color>(
             (Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
@@ -3127,6 +3130,7 @@ abstract final class FlexSubThemes {
           splashFactory: splashFactory,
           textStyle: textStyle,
           foregroundColor: foregroundColor,
+          iconColor: foregroundColor,
           backgroundColor: backgroundColor,
           overlayColor: overlayColor,
           minimumSize: ButtonStyleButton.allOrNull<Size>(minButtonSize),
@@ -3341,6 +3345,7 @@ abstract final class FlexSubThemes {
         splashFactory: splashFactory,
         textStyle: textStyle,
         foregroundColor: foregroundColor,
+        iconColor: foregroundColor,
         backgroundColor: backgroundColor,
         overlayColor: overlayColor,
         minimumSize: ButtonStyleButton.allOrNull<Size>(
@@ -6146,6 +6151,7 @@ abstract final class FlexSubThemes {
         splashFactory: splashFactory,
         textStyle: textStyle,
         foregroundColor: foregroundColor,
+        iconColor: foregroundColor,
         overlayColor: overlayColor,
         minimumSize: ButtonStyleButton.allOrNull<Size>(
           minButtonSize ?? (useM3 ? null : kButtonMinSize),
@@ -6903,6 +6909,30 @@ abstract final class FlexSubThemes {
         ? colorScheme.onSurface
         : onUnselectedColor;
 
+    final WidgetStateProperty<Color> foregroundColor =
+        WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
+        if (tintDisable) {
+          return tintedDisable(disabledForeground, disableTint);
+        }
+        return disabledForeground.withAlpha(kAlphaDisabled);
+      }
+      if (states.contains(WidgetState.selected)) {
+        if (states.contains(WidgetState.pressed)) {
+          return onSelectedColor;
+        }
+        if (states.contains(WidgetState.hovered)) {
+          return onSelectedColor;
+        }
+        if (states.contains(WidgetState.focused)) {
+          return onSelectedColor;
+        }
+        return onSelectedColor;
+      } else {
+        return onUnselectedColor;
+      }
+    });
+
     return SegmentedButtonThemeData(
       style: ButtonStyle(
         textStyle: textStyle,
@@ -6922,29 +6952,8 @@ abstract final class FlexSubThemes {
           }
           return unselectedSchemeColor == null ? null : unselectedColor;
         }),
-        foregroundColor:
-            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
-            if (tintDisable) {
-              return tintedDisable(disabledForeground, disableTint);
-            }
-            return disabledForeground.withAlpha(kAlphaDisabled);
-          }
-          if (states.contains(WidgetState.selected)) {
-            if (states.contains(WidgetState.pressed)) {
-              return onSelectedColor;
-            }
-            if (states.contains(WidgetState.hovered)) {
-              return onSelectedColor;
-            }
-            if (states.contains(WidgetState.focused)) {
-              return onSelectedColor;
-            }
-            return onSelectedColor;
-          } else {
-            return onUnselectedColor;
-          }
-        }),
+        foregroundColor: foregroundColor,
+        iconColor: foregroundColor,
         // TODO(Rydmike): Issue: Flutter SDK SegmentedButton overlayColor bug.
         // https://github.com/flutter/flutter/issues/123308
         // SegmentedButton triggers overlay 3 times in Selected mode, 1st
@@ -8087,6 +8096,7 @@ abstract final class FlexSubThemes {
         splashFactory: splashFactory,
         textStyle: textStyle,
         foregroundColor: foregroundColor,
+        iconColor: foregroundColor,
         overlayColor: overlayColor,
         minimumSize: ButtonStyleButton.allOrNull<Size>(
             minButtonSize ?? (useM3 ? null : kButtonMinSize)),
