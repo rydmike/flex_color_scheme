@@ -19,7 +19,7 @@
 name: Deploy
 on:
   push:
-    branches: [none]
+    branches: [master]
     paths-ignore:
      - "**.md"
   pull_request:
