@@ -2461,6 +2461,16 @@ void main() {
                   return colorScheme.onPrimary;
                 },
               ),
+              iconColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.onPrimary;
+                },
+              ),
               backgroundColor: WidgetStateProperty.resolveWith<Color>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
@@ -2542,6 +2552,16 @@ void main() {
                   return colorScheme.onSecondary;
                 },
               ),
+              iconColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.onSecondary;
+                },
+              ),
               backgroundColor: WidgetStateProperty.resolveWith<Color>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
@@ -2605,6 +2625,16 @@ void main() {
                   return colorScheme.onSecondary;
                 },
               ),
+              iconColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.secondary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.onSecondary;
+                },
+              ),
               backgroundColor: WidgetStateProperty.resolveWith<Color>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
@@ -2649,6 +2679,13 @@ void main() {
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
       // Disabled foreground, custom, M2, with tint
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2660,12 +2697,29 @@ void main() {
         equals(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.secondary)),
       );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useTintedDisable: true,
+          useMaterial3: false,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.secondary)),
+      );
       // Selected foreground, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.onPrimary),
       );
       // Selected foreground, custom color, M2
@@ -2677,6 +2731,14 @@ void main() {
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.onSecondary),
       );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: false,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.onSecondary),
+      );
       // Selected foreground, custom colors, M2
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2685,6 +2747,15 @@ void main() {
           onBaseSchemeColor: SchemeColor.tertiary,
           useMaterial3: false,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          onBaseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: false,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.tertiary),
       );
       // Disabled background, M2, default
@@ -2792,6 +2863,14 @@ void main() {
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+          useMaterial3: true,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+      );
       // Disabled foreground, tinted M3
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2800,6 +2879,16 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.primary)),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+          useTintedDisable: true,
+          useMaterial3: true,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.primary)),
       );
@@ -2812,6 +2901,14 @@ void main() {
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: true,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+      );
       // Selected foreground, M3
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2819,6 +2916,14 @@ void main() {
           baseSchemeColor: SchemeColor.primary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.primary),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.primary,
+          useMaterial3: true,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.primary),
       );
       // Selected foreground, custom color, M3
@@ -2830,6 +2935,14 @@ void main() {
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.secondary),
       );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          useMaterial3: true,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.secondary),
+      );
       // Selected foreground, custom colors, M3
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2838,6 +2951,15 @@ void main() {
           onBaseSchemeColor: SchemeColor.tertiary,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.secondary),
+      );
+      expect(
+        FlexSubThemes.elevatedButtonTheme(
+          colorScheme: colorScheme,
+          baseSchemeColor: SchemeColor.secondary,
+          onBaseSchemeColor: SchemeColor.tertiary,
+          useMaterial3: true,
+        ).style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.secondary),
       );
       // Disabled background, M3
@@ -3065,6 +3187,16 @@ void main() {
                   return colorScheme.onPrimary;
                 },
               ),
+              iconColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.onPrimary;
+                },
+              ),
               backgroundColor: WidgetStateProperty.resolveWith<Color>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
@@ -3124,6 +3256,16 @@ void main() {
               elevation: 1,
             ).copyWith(
               foregroundColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.tertiary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x5E);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
+              iconColor: WidgetStateProperty.resolveWith<Color>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
                     return colorScheme.tertiary
@@ -3233,6 +3375,13 @@ void main() {
           ElevatedButtonThemeData(
             style: ButtonStyle(
               foregroundColor:
+                  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.tertiary;
+              }),
+              iconColor:
                   WidgetStateProperty.resolveWith((Set<WidgetState> states) {
                 if (states.contains(WidgetState.disabled)) {
                   return colorScheme.onSurface.withValues(alpha: 0.38);
@@ -3355,6 +3504,14 @@ void main() {
                 },
               ),
               foregroundColor: WidgetStateProperty.resolveWith<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.38);
+                  }
+                  return colorScheme.onSecondary;
+                },
+              ),
+              iconColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
                     return colorScheme.onSurface.withValues(alpha: 0.38);
@@ -3487,6 +3644,10 @@ void main() {
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
       // Default state colors
       expect(
         button.style!.backgroundColor!.resolve(<WidgetState>{}),
@@ -3494,6 +3655,10 @@ void main() {
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
+        equals(colorScheme.onTertiary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{}),
         equals(colorScheme.onTertiary),
       );
       // Overlay color states
@@ -3539,6 +3704,10 @@ void main() {
             .resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+      );
       // Default state
       expect(
         button.style!.backgroundColor!.resolve(<WidgetState>{}),
@@ -3546,6 +3715,10 @@ void main() {
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
+        isSameColorAs(colorScheme.onPrimary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{}),
         isSameColorAs(colorScheme.onPrimary),
       );
       // No custom Overlay unless tinted version is used!
@@ -3611,6 +3784,10 @@ void main() {
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
       // Default state colors
       expect(
         button.style!.backgroundColor!.resolve(<WidgetState>{}),
@@ -3618,6 +3795,10 @@ void main() {
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
+        equals(colorScheme.onTertiary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{}),
         equals(colorScheme.onTertiary),
       );
       // Overlay color states
@@ -3674,6 +3855,10 @@ void main() {
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
       // Default state colors
       expect(
         button.style!.backgroundColor!.resolve(<WidgetState>{}),
@@ -3681,6 +3866,10 @@ void main() {
       );
       expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
+        equals(colorScheme.onTertiary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{}),
         equals(colorScheme.onTertiary),
       );
       // Overlay color states
@@ -3732,6 +3921,10 @@ void main() {
       expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
     });
@@ -7292,6 +7485,14 @@ void main() {
                   return colorScheme.primaryContainer;
                 },
               ),
+              iconColor: WidgetStateProperty.resolveWith<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.38);
+                  }
+                  return colorScheme.primaryContainer;
+                },
+              ),
               overlayColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.hovered)) {
@@ -7385,6 +7586,15 @@ void main() {
                 ),
               ),
               foregroundColor: WidgetStateProperty.resolveWith<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return FlexSubThemes.tintedDisable(
+                        colorScheme.onSurface, colorScheme.secondary);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
+              iconColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.disabled)) {
                     return FlexSubThemes.tintedDisable(
@@ -7511,6 +7721,7 @@ void main() {
           OutlinedButtonThemeData(
             style: ButtonStyle(
               foregroundColor: foregroundColor,
+              iconColor: foregroundColor,
               overlayColor: overlayColor,
               minimumSize:
                   ButtonStyleButton.allOrNull<Size>(const Size(52, 40)),
@@ -7549,12 +7760,24 @@ void main() {
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        colorScheme.onSurface.withValues(alpha: 0x61 / 255),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
         colorScheme.primary,
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
+        colorScheme.primary,
+      );
+      expect(
         button.style!.foregroundColor!.resolve(<WidgetState>{}),
+        colorScheme.primary,
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{}),
         colorScheme.primary,
       );
       // Overlay color states
@@ -7633,8 +7856,17 @@ void main() {
             colorScheme.onSurface, colorScheme.tertiary)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.tertiary)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.tertiary),
       );
       // Overlay color states
@@ -7706,8 +7938,16 @@ void main() {
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        colorScheme.onSurface.withValues(alpha: 0x61 / 255),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.primary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.primary),
       );
       // Overlay color states
@@ -7781,8 +8021,16 @@ void main() {
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        colorScheme.onSurface.withValues(alpha: 0x61 / 255),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        colorScheme.tertiary,
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         colorScheme.tertiary,
       );
       // Overlay color states
@@ -8684,7 +8932,16 @@ void main() {
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       expect(
+        m.style?.iconColor?.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+      );
+      expect(
         m.style?.foregroundColor
+            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        m.style?.iconColor
             ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
         equals(colorScheme.onPrimary),
       );
@@ -8694,7 +8951,17 @@ void main() {
         equals(colorScheme.onPrimary),
       );
       expect(
+        m.style?.iconColor
+            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
         m.style?.foregroundColor
+            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
+        m.style?.iconColor
             ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
         equals(colorScheme.onPrimary),
       );
@@ -8703,7 +8970,15 @@ void main() {
         equals(colorScheme.onPrimary),
       );
       expect(
+        m.style?.iconColor?.resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.onPrimary),
+      );
+      expect(
         m.style?.foregroundColor?.resolve(<WidgetState>{}),
+        equals(colorScheme.onSurface),
+      );
+      expect(
+        m.style?.iconColor?.resolve(<WidgetState>{}),
         equals(colorScheme.onSurface),
       );
       //
@@ -8770,6 +9045,11 @@ void main() {
         equals(FlexSubThemes.tintedDisable(
             colorScheme.onSurface, colorScheme.secondaryContainer)),
       );
+      expect(
+        m.style?.iconColor?.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(FlexSubThemes.tintedDisable(
+            colorScheme.onSurface, colorScheme.secondaryContainer)),
+      );
       //
       // overlayColor color
       expect(
@@ -8833,6 +9113,10 @@ void main() {
       );
       expect(
         m.style?.foregroundColor?.resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.tertiaryContainer),
+      );
+      expect(
+        m.style?.iconColor?.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.tertiaryContainer),
       );
       //
@@ -10440,6 +10724,14 @@ void main() {
                   return colorScheme.secondary;
                 },
               ),
+              iconColor: WidgetStateProperty.resolveWith<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.38);
+                  }
+                  return colorScheme.secondary;
+                },
+              ),
               overlayColor: WidgetStateProperty.resolveWith<Color?>(
                 (Set<WidgetState> states) {
                   if (states.contains(WidgetState.hovered)) {
@@ -10497,8 +10789,16 @@ void main() {
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.primary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.primary),
       );
       // Overlay color states
@@ -10542,8 +10842,16 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.tertiary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.tertiary),
       );
       // Overlay color states
@@ -10585,8 +10893,16 @@ void main() {
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.primary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.primary),
       );
       // Overlay color states
@@ -10642,8 +10958,16 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.primaryContainer),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.primaryContainer),
       );
       // Overlay color states
@@ -10695,8 +11019,16 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.tertiary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.tertiary),
       );
       // Overlay color states
@@ -10748,8 +11080,16 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        equals(colorScheme.tertiary),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.tertiary),
       );
       // Overlay color states
@@ -10802,8 +11142,16 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
+        isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
+      );
+      expect(
         button.style!.foregroundColor!
             .resolve(<WidgetState>{WidgetState.selected}),
+        isSameColorAs(colorScheme.primaryContainer),
+      );
+      expect(
+        button.style!.iconColor!.resolve(<WidgetState>{WidgetState.selected}),
         isSameColorAs(colorScheme.primaryContainer),
       );
       // Overlay color states

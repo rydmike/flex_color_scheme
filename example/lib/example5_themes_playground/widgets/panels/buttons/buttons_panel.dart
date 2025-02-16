@@ -17,6 +17,18 @@ class ButtonsPanel extends StatelessWidget {
   });
   final ThemeController controller;
 
+  static final Uri _iconColorIssue162839 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/162839',
+  );
+
+  static final Uri _iconColorPR162880 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/162880',
+  );
+
   static final Uri _fcsFlutterIssue118063 = Uri(
     scheme: 'https',
     host: 'github.com',
@@ -297,6 +309,44 @@ class ButtonsPanel extends StatelessWidget {
           valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
         const Divider(),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issue on ALL Buttons'),
+          subtitleReveal: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'In Flutter 3.27.0 to 3.27.4 and also at least 3.29.0 '
+                      'the color of icons on ElevatedButton, FilledButton, '
+                      'OutlinedButton and TextButton do not follow the '
+                      'foreground color of the button, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _iconColorIssue162839,
+                  text: '(issue #162839)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This issue has been corrected via ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _iconColorPR162880,
+                  text: '(PR #162880)',
+                ),
+                //
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This fix has not yet landed in Flutter stable 3.29. '
+                      'FlexColorScheme 8.1.1 and later, include a workaround '
+                      'patch for this issue.',
+                ),
+              ],
+            ),
+          ),
+        ),
         const ListTileReveal(
           dense: true,
           title: Text('More settings with the API'),

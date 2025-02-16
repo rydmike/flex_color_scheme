@@ -14,25 +14,37 @@ class SegmentedButtonsPanel extends StatelessWidget {
   const SegmentedButtonsPanel(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _iconColorIssue162839 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/162839',
+  );
+
+  static final Uri _iconColorPR162880 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/162880',
+  );
+
   static final Uri _segmentNotTransparentIssue123292 = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/pull/123292',
+    path: 'flutter/flutter/issues/123292',
   );
   static final Uri _segmentWrongHeightIssue121493 = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/pull/121493',
+    path: 'flutter/flutter/issues/121493',
   );
   static final Uri _segmentWrongOverlayIssue123308 = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/pull/123308',
+    path: 'flutter/flutter/issues/123308',
   );
   static final Uri _segmentNotM3SpecIssue119733 = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/pull/119733',
+    path: 'flutter/flutter/issues/119733',
   );
 
   @override
@@ -221,7 +233,32 @@ class SegmentedButtonsPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.7 the SegmentedButton has a few '
+                  text: 'In Flutter 3.27.0 to 3.27.4 and also at least 3.29.0 '
+                      'the color of icons on SegmentedButton do not follow the '
+                      'foreground color of the button, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _iconColorIssue162839,
+                  text: '(issue #162839)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This issue has been corrected via ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _iconColorPR162880,
+                  text: '(PR #162880)',
+                ),
+                //
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This fix has not yet landed in Flutter stable 3.29. '
+                      'FlexColorScheme 8.1.1 and later, include a workaround '
+                      'patch for this issue.'
+                      '\n\n'
+                      'In Flutter 3.7 the SegmentedButton has a few '
                       'small issues, like background is not transparent ',
                 ),
                 LinkTextSpan(
@@ -241,9 +278,8 @@ class SegmentedButtonsPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', these issues are fixed in Flutter 3.10.\n'
-                      'Additionally min height or size '
-                      'cannot be set ',
+                  text: ', these issues are fixed in Flutter 3.10.\n\n'
+                      'The minimum height or size cannot be set, see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -261,7 +297,10 @@ class SegmentedButtonsPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', these have no fixes yet.',
+                  text: '. The former issue is closed, but NOT fixed! '
+                      'The PR that closed it only fixed the wrong spec '
+                      'default size, but did not make it customizable. The '
+                      'latter issue is still open and has no fix yet.',
                 ),
               ],
             ),

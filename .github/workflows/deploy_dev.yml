@@ -59,7 +59,7 @@ jobs:
       - name: "EXAMPLE-1 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-1 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/basictheme-dev/" --release -t lib/example1_basic_theme_usage/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/basictheme-dev/" --release -t lib/example1_basic_theme_usage/main.dart
       - name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
@@ -75,7 +75,7 @@ jobs:
       - name: "EXAMPLE-2 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-2 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/customtheme-dev/" --release -t lib/example2_custom_theme/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/customtheme-dev/" --release -t lib/example2_custom_theme/main.dart
       - name: "EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
@@ -91,7 +91,7 @@ jobs:
       - name: "EXAMPLE-3 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-3 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/fourthemes-dev/" --release -t lib/example3_four_themes/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/fourthemes-dev/" --release -t lib/example3_four_themes/main.dart
       - name: "EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
@@ -107,7 +107,7 @@ jobs:
       - name: "EXAMPLE-4 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-4 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/allthemes-dev/" --release -t lib/example4_all_themes/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/allthemes-dev/" --release -t lib/example4_all_themes/main.dart
       - name: "EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
@@ -123,7 +123,7 @@ jobs:
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-5 WEB release build"
-        run: cd example && flutter build web --web-renderer canvaskit --base-href "/flexcolorscheme/themesplayground-dev/" --no-tree-shake-icons --release -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/themesplayground-dev/" --no-tree-shake-icons --release -t lib/example5_themes_playground/main.dart
       - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
