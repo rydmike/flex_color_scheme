@@ -36,11 +36,13 @@ abstract final class App {
   static const String packageName = 'FlexColor\u{00AD}Scheme';
 
   // Check if this is a Web-WASM build, Web-JS build or native VM build.
-  static const bool isRunningWithWasm =
-      bool.fromEnvironment('dart.tool.dart2wasm');
-  static const String buildType = isRunningWithWasm
-      ? ', WasmGC'
-      : kIsWeb
+  static const bool isRunningWithWasm = bool.fromEnvironment(
+    'dart.tool.dart2wasm',
+  );
+  static const String buildType =
+      isRunningWithWasm
+          ? ', WasmGC'
+          : kIsWeb
           ? ', JS'
           : ', native VM';
   // Version of the WEB build, usually same as package, but it also has a
@@ -49,10 +51,11 @@ abstract final class App {
   static const String versionMinor = '2';
   static const String versionPatch = '0';
   static const String versionBuild = '01';
-  static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
+  static const String versionFull =
+      '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = 'stable 3.29.0 (canvaskit$buildType)';
+  static const String flutterVersion = 'stable 3.29.1 (canvaskit$buildType)';
   static const String copyright = '© 2020 - 2024';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -182,29 +185,32 @@ abstract final class App {
   // it from style when M3 Typography is used.
   static String? get font => GoogleFonts.notoSans().fontFamily;
 
-  static final TextStyle notoSansRegular =
-      GoogleFonts.notoSans(fontWeight: FontWeight.w400);
-  static final TextStyle notoSansMedium =
-      GoogleFonts.notoSans(fontWeight: FontWeight.w500);
-  static final TextStyle notoSansBold =
-      GoogleFonts.notoSans(fontWeight: FontWeight.w700);
+  static final TextStyle notoSansRegular = GoogleFonts.notoSans(
+    fontWeight: FontWeight.w400,
+  );
+  static final TextStyle notoSansMedium = GoogleFonts.notoSans(
+    fontWeight: FontWeight.w500,
+  );
+  static final TextStyle notoSansBold = GoogleFonts.notoSans(
+    fontWeight: FontWeight.w700,
+  );
   static TextTheme? get textTheme => TextTheme(
-        displayLarge: notoSansRegular, // Regular is default
-        displayMedium: notoSansRegular, // Regular is default
-        displaySmall: notoSansRegular, // Regular is default
-        headlineLarge: notoSansRegular, // Regular is default
-        headlineMedium: notoSansRegular, // Regular is default
-        headlineSmall: notoSansRegular, // Regular is default
-        titleLarge: notoSansRegular, // Regular is default
-        titleMedium: notoSansMedium, // medium is default
-        titleSmall: notoSansMedium, // Medium is default
-        bodyLarge: notoSansRegular, // Regular is default
-        bodyMedium: notoSansRegular, // Regular is default
-        bodySmall: notoSansRegular, // Regular is default
-        labelLarge: notoSansMedium, // Medium is default
-        labelMedium: notoSansMedium, // Medium is default
-        labelSmall: notoSansMedium, // Medium is default
-      );
+    displayLarge: notoSansRegular, // Regular is default
+    displayMedium: notoSansRegular, // Regular is default
+    displaySmall: notoSansRegular, // Regular is default
+    headlineLarge: notoSansRegular, // Regular is default
+    headlineMedium: notoSansRegular, // Regular is default
+    headlineSmall: notoSansRegular, // Regular is default
+    titleLarge: notoSansRegular, // Regular is default
+    titleMedium: notoSansMedium, // medium is default
+    titleSmall: notoSansMedium, // Medium is default
+    bodyLarge: notoSansRegular, // Regular is default
+    bodyMedium: notoSansRegular, // Regular is default
+    bodySmall: notoSansRegular, // Regular is default
+    labelLarge: notoSansMedium, // Medium is default
+    labelMedium: notoSansMedium, // Medium is default
+    labelSmall: notoSansMedium, // Medium is default
+  );
 
   /// Defining the visual density here to so we can change it in one spot when
   /// we want to try different options.
