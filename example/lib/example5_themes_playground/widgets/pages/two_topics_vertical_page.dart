@@ -18,10 +18,7 @@ import 'widgets/vertical_panel_view.dart';
 /// simpler view suitable for large media where everything is in a row with five
 /// different vertical lists in the row.
 class TwoTopicsVerticalPage extends StatelessWidget {
-  const TwoTopicsVerticalPage({
-    super.key,
-    required this.controller,
-  });
+  const TwoTopicsVerticalPage({super.key, required this.controller});
   final ThemeController controller;
 
   @override

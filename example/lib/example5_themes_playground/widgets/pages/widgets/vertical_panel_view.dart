@@ -32,8 +32,7 @@ class VerticalPanelView extends StatefulWidget {
   State<VerticalPanelView> createState() => _VerticalPanelViewState();
 }
 
-class _VerticalPanelViewState extends State<VerticalPanelView>
-    with TickerProviderStateMixin {
+class _VerticalPanelViewState extends State<VerticalPanelView> with TickerProviderStateMixin {
   late final ScrollController scrollController;
 
   late final AnimationController scaleController = AnimationController(
@@ -42,10 +41,7 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
     upperBound: 1.0,
     vsync: this,
   );
-  late final Animation<double> scaleAnimation = CurvedAnimation(
-    parent: scaleController,
-    curve: Curves.fastOutSlowIn,
-  );
+  late final Animation<double> scaleAnimation = CurvedAnimation(parent: scaleController, curve: Curves.fastOutSlowIn);
 
   late final AnimationController fadeController = AnimationController(
     duration: const Duration(milliseconds: 180),
@@ -53,10 +49,7 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
     upperBound: 1.0,
     vsync: this,
   );
-  late final Animation<double> fadeAnimation = CurvedAnimation(
-    parent: fadeController,
-    curve: Curves.fastOutSlowIn,
-  );
+  late final Animation<double> fadeAnimation = CurvedAnimation(parent: fadeController, curve: Curves.fastOutSlowIn);
 
   @override
   void initState() {
@@ -82,19 +75,17 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
 
-    final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onSurface)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onSurface);
+    final Color iconColor =
+        isLight
+            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
+            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
 
     final Size mediaSize = MediaQuery.sizeOf(context);
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = widget.controller.compactMode;
     final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     final double bottomPadding = mediaPadding.bottom;
-    final double topPadding =
-        widget.addTopPadding ? mediaPadding.top + margins : 0;
+    final double topPadding = widget.addTopPadding ? mediaPadding.top + margins : 0;
 
     return Expanded(
       child: Row(
@@ -142,8 +133,7 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
                   opacity: fadeAnimation,
                   child: HeaderCard(
                     title: Text(themeTopics[widget.panel].heading),
-                    leading:
-                        Icon(themeTopics[widget.panel].icon, color: iconColor),
+                    leading: Icon(themeTopics[widget.panel].icon, color: iconColor),
                     info: themeTopics[widget.panel].info,
                     child: Panel(widget.panel, widget.controller),
                   ),

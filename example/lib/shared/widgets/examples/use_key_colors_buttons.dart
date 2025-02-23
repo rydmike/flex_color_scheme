@@ -13,11 +13,7 @@ import '../../controllers/theme_controller.dart';
 /// This widget is used by example 4 "All theme"s and example 5 "Playground".
 /// Example 4 uses it with showErrorButton set to false.
 class UseKeyColorsButtons extends StatelessWidget {
-  const UseKeyColorsButtons({
-    super.key,
-    required this.controller,
-    this.showErrorButton = true,
-  });
+  const UseKeyColorsButtons({super.key, required this.controller, this.showErrorButton = true});
   final ThemeController controller;
   final bool showErrorButton;
 
@@ -47,7 +43,8 @@ class UseKeyColorsButtons extends StatelessWidget {
       },
       children: <Widget>[
         const Tooltip(
-          message: 'Use light theme Primary color\n'
+          message:
+              'Use light theme Primary color\n'
               'as key color to seed your ColorScheme',
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -60,7 +57,8 @@ class UseKeyColorsButtons extends StatelessWidget {
           maintainState: true,
           maintainAnimation: true,
           child: const Tooltip(
-            message: 'Use light theme Secondary color\n'
+            message:
+                'Use light theme Secondary color\n'
                 'as key color to seed your ColorScheme',
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -74,7 +72,8 @@ class UseKeyColorsButtons extends StatelessWidget {
           maintainState: true,
           maintainAnimation: true,
           child: const Tooltip(
-            message: 'Use light theme Tertiary color\n'
+            message:
+                'Use light theme Tertiary color\n'
                 'as key color to seed your ColorScheme',
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -89,7 +88,8 @@ class UseKeyColorsButtons extends StatelessWidget {
             maintainState: true,
             maintainAnimation: true,
             child: const Tooltip(
-              message: 'Use light theme Error color\n'
+              message:
+                  'Use light theme Error color\n'
                   'as key color to seed your ColorScheme',
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),

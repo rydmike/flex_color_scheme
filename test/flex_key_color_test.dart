@@ -47,38 +47,31 @@ void main() {
       keepTertiaryContainer: true,
     );
     // Do identity tests
-    test(
-        'FKCS1.01a: GIVEN same FlexKeyColorSetup objects '
+    test('FKCS1.01a: GIVEN same FlexKeyColorSetup objects '
         'EXPECT them to be equal', () {
       expect(m1, equals(m1));
     });
-    test(
-        'FKCS1.01b: GIVEN same FlexKeyColorSetup objects '
+    test('FKCS1.01b: GIVEN same FlexKeyColorSetup objects '
         'EXPECT them to have identity', () {
       expect(identical(m1, m1), true);
     });
-    test(
-        'FKCS1.01c: GIVEN two equal FlexKeyColorSetup objects '
+    test('FKCS1.01c: GIVEN two equal FlexKeyColorSetup objects '
         'EXPECT them to have equality', () {
       expect(m1, equals(m2));
     });
-    test(
-        'FKCS1.01d: GIVEN two equal FlexKeyColorSetup objects '
+    test('FKCS1.01d: GIVEN two equal FlexKeyColorSetup objects '
         'EXPECT them to have identity', () {
       expect(identical(m1, m2), true);
     });
-    test(
-        'FKCS1.01c: GIVEN two equal FlexKeyColorSetup objects '
+    test('FKCS1.01c: GIVEN two equal FlexKeyColorSetup objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
-    test(
-        'FKCS1.02a: GIVEN none equal FlexKeyColorSetup objects '
+    test('FKCS1.02a: GIVEN none equal FlexKeyColorSetup objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
-    test(
-        'FKCS1.02b: GIVEN none equal FlexKeyColorSetup objects '
+    test('FKCS1.02b: GIVEN none equal FlexKeyColorSetup objects '
         'EXPECT them to be unequal with operator', () {
       expect(m1 != m3, true);
     });
@@ -87,26 +80,15 @@ void main() {
     //
     // Test .copyWith, full and null..
     //**************************************************************************
-    test(
-        'FKCS1.09a: GIVEN a FlexKeyColorSetup object EXPECT it to be equal to '
+    test('FKCS1.09a: GIVEN a FlexKeyColorSetup object EXPECT it to be equal to '
         'an unequal object when made equal with copyWith.', () {
-      expect(
-        m3.copyWith(
-          useKeyColors: true,
-        ),
-        equals(m1),
-      );
+      expect(m3.copyWith(useKeyColors: true), equals(m1));
     });
-    test(
-        'FKCS1.09b: GIVEN a FlexKeyColorSetup object EXPECT it to be unchanged '
+    test('FKCS1.09b: GIVEN a FlexKeyColorSetup object EXPECT it to be unchanged '
         'after and empty copyWith.', () {
-      expect(
-        m1.copyWith(),
-        equals(m1),
-      );
+      expect(m1.copyWith(), equals(m1));
     });
-    test(
-        'FKCS1.09c: GIVEN a FlexKeyColorSetup with all different values '
+    test('FKCS1.09c: GIVEN a FlexKeyColorSetup with all different values '
         'EXPECT equal to an unequal one when made equal with copyWith.', () {
       expect(
         m4.copyWith(
@@ -130,21 +112,20 @@ void main() {
     // toString and hashcode.
     //**************************************************************************
 
-    test(
-        'FKCS1.10: Test toString implemented via debugFillProperties '
+    test('FKCS1.10: Test toString implemented via debugFillProperties '
         'EXPECT exact print string value.', () {
       expect(
-          m1.toString(),
-          //
-          equalsIgnoringHashCodes(
-              // ignore: lines_longer_than_80_chars
-              'FlexKeyColors#00000(useKeyColors: true, keyPrimary: null, keepPrimary: false, keepPrimaryContainer: false, keySecondary: null, useSecondary: false, keepSecondary: false, keepSecondaryContainer: false, keyTertiary: null, keyTertiary: false, keepTertiary: false, keepTertiaryContainer: false, keyError: null, keyError: false, keepError: false, keepErrorContainer: false, contrastLevel: 0.0, useExpressiveOnContainerColors: null, useLegacyMonochromeSeedBehavior: null)'));
+        m1.toString(),
+        //
+        equalsIgnoringHashCodes(
+          // ignore: lines_longer_than_80_chars
+          'FlexKeyColors#00000(useKeyColors: true, keyPrimary: null, keepPrimary: false, keepPrimaryContainer: false, keySecondary: null, useSecondary: false, keepSecondary: false, keepSecondaryContainer: false, keyTertiary: null, keyTertiary: false, keepTertiary: false, keepTertiaryContainer: false, keyError: null, keyError: false, keepError: false, keepErrorContainer: false, contrastLevel: 0.0, useExpressiveOnContainerColors: null, useLegacyMonochromeSeedBehavior: null)',
+        ),
+      );
     });
-    test(
-        'FKCS1.11: Test toStringShort implemented via debugFillProperties '
+    test('FKCS1.11: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout.', () {
-      expect(
-          m1.toStringShort(), equalsIgnoringHashCodes('FlexKeyColors#00000'));
+      expect(m1.toStringShort(), equalsIgnoringHashCodes('FlexKeyColors#00000'));
     });
     test('FKCS1.12: Test hashCode has value.', () {
       expect(m1.hashCode, isNotNull);

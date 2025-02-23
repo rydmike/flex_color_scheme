@@ -23,10 +23,7 @@ abstract final class App {
   /// a const somewhere and no need to pass it around via a title prop either.
   /// Also used in the [showAppAboutDialog] About box as app name.
   static String title(BuildContext context) =>
-      (context as Element)
-          .findAncestorWidgetOfExactType<MaterialApp>()
-          ?.title ??
-      '';
+      (context as Element).findAncestorWidgetOfExactType<MaterialApp>()?.title ?? '';
 
   // When building new public web versions of the demos, make sure to
   // update this info with current versions used for the build, before
@@ -36,9 +33,7 @@ abstract final class App {
   static const String packageName = 'FlexColor\u{00AD}Scheme';
 
   // Check if this is a Web-WASM build, Web-JS build or native VM build.
-  static const bool isRunningWithWasm = bool.fromEnvironment(
-    'dart.tool.dart2wasm',
-  );
+  static const bool isRunningWithWasm = bool.fromEnvironment('dart.tool.dart2wasm');
   static const String buildType =
       isRunningWithWasm
           ? ', WasmGC'
@@ -64,14 +59,9 @@ abstract final class App {
   // This will be the only one later when WASM works OK.
   //static const String playgroundURL='https://playground.flexcolorscheme.com/';
   // URL for GitHub pages build.
-  static const String playgroundURL =
-      'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
+  static const String playgroundURL = 'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
 
-  static final Uri packageUri = Uri(
-    scheme: 'https',
-    host: 'pub.dev',
-    path: 'packages/flex_color_scheme',
-  );
+  static final Uri packageUri = Uri(scheme: 'https', host: 'pub.dev', path: 'packages/flex_color_scheme');
   static const String exportInfo = 'Themes Playground data exported ';
 
   /// The max dp width used for layout content on the screen in the available
@@ -185,15 +175,9 @@ abstract final class App {
   // it from style when M3 Typography is used.
   static String? get font => GoogleFonts.notoSans().fontFamily;
 
-  static final TextStyle notoSansRegular = GoogleFonts.notoSans(
-    fontWeight: FontWeight.w400,
-  );
-  static final TextStyle notoSansMedium = GoogleFonts.notoSans(
-    fontWeight: FontWeight.w500,
-  );
-  static final TextStyle notoSansBold = GoogleFonts.notoSans(
-    fontWeight: FontWeight.w700,
-  );
+  static final TextStyle notoSansRegular = GoogleFonts.notoSans(fontWeight: FontWeight.w400);
+  static final TextStyle notoSansMedium = GoogleFonts.notoSans(fontWeight: FontWeight.w500);
+  static final TextStyle notoSansBold = GoogleFonts.notoSans(fontWeight: FontWeight.w700);
   static TextTheme? get textTheme => TextTheme(
     displayLarge: notoSansRegular, // Regular is default
     displayMedium: notoSansRegular, // Regular is default
@@ -219,8 +203,7 @@ abstract final class App {
   /// default one. The default Flutter one is too dense imo.
   ///
   /// Only used by example 4.
-  static VisualDensity get visualDensity =>
-      FlexColorScheme.comfortablePlatformDensity;
+  static VisualDensity get visualDensity => FlexColorScheme.comfortablePlatformDensity;
 
   /// The menu items that we use on the responsive side menu.
   ///
@@ -265,16 +248,9 @@ abstract final class App {
       iconSecondary: Icons.subtitles_off_outlined,
     ),
     // Item 4
-    ResponsiveMenuItems(
-      dividerAbove: true,
-      label: 'Copy theme code',
-      icon: Icons.integration_instructions_outlined,
-    ),
+    ResponsiveMenuItems(dividerAbove: true, label: 'Copy theme code', icon: Icons.integration_instructions_outlined),
     // Item 5
-    ResponsiveMenuItems(
-      label: 'Copy ColorScheme',
-      icon: Icons.palette_outlined,
-    ),
+    ResponsiveMenuItems(label: 'Copy ColorScheme', icon: Icons.palette_outlined),
     // Item 6
     ResponsiveMenuItems(
       dividerAbove: true,
@@ -304,10 +280,6 @@ abstract final class App {
       icon: Icons.ios_share,
     ),
     // Item 9
-    ResponsiveMenuItems(
-      label: 'Reset config',
-      icon: Icons.replay_outlined,
-      dividerBelow: true,
-    ),
+    ResponsiveMenuItems(label: 'Reset config', icon: Icons.replay_outlined, dividerBelow: true),
   ];
 }

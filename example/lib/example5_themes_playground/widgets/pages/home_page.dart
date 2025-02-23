@@ -28,10 +28,7 @@ import 'two_topics_vertical_page.dart';
 /// The learn more about its history and design see docs at:
 /// - https://docs.flexcolorscheme.com/tutorial5
 class HomePage extends StatefulWidget {
-  const HomePage({
-    super.key,
-    required this.controller,
-  });
+  const HomePage({super.key, required this.controller});
 
   final ThemeController controller;
 
@@ -61,14 +58,15 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     // Set enabled menu items.
-    menuItemsEnabled =
-        List<bool>.generate(App.menuItems.length, (int i) => true);
+    menuItemsEnabled = List<bool>.generate(App.menuItems.length, (int i) => true);
     menuItemsEnabled[3] = widget.controller.useFlexColorScheme;
 
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
+      App.menuItems.length,
+      (int i) => ResponsiveMenuItemIconState.primary,
+    );
 
     // The panels can only be opened/closed on the large masonry grid view.
     // Since by default users will start with the page view, they will have
@@ -81,25 +79,23 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    menuItemsIconState[0] = Theme.of(context).brightness == Brightness.light
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[1] = widget.controller.useMaterial3
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[2] = widget.controller.useFlexColorScheme
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[3] = widget.controller.useSubThemes
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[0] =
+        Theme.of(context).brightness == Brightness.light
+            ? ResponsiveMenuItemIconState.primary
+            : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[1] =
+        widget.controller.useMaterial3 ? ResponsiveMenuItemIconState.primary : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[2] =
+        widget.controller.useFlexColorScheme
+            ? ResponsiveMenuItemIconState.primary
+            : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[3] =
+        widget.controller.useSubThemes ? ResponsiveMenuItemIconState.primary : ResponsiveMenuItemIconState.secondary;
     menuItemsEnabled[3] = widget.controller.useFlexColorScheme;
-    menuItemsIconState[6] = widget.controller.compactMode
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[7] = widget.controller.verticalMode
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[6] =
+        widget.controller.compactMode ? ResponsiveMenuItemIconState.primary : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[7] =
+        widget.controller.verticalMode ? ResponsiveMenuItemIconState.primary : ResponsiveMenuItemIconState.secondary;
   }
 
   void updateMenuState(int index) {
@@ -117,10 +113,8 @@ class _HomePageState extends State<HomePage> {
     final bool isDark = theme.brightness == Brightness.dark;
     final TextTheme textTheme = theme.textTheme;
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
-    final bool isBigDesktop =
-        mediaSize.width > App.mediumDesktopWidthBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isBigDesktop = mediaSize.width > App.mediumDesktopWidthBreakpoint;
     // final String materialType = theme.useMaterial3 ? 'M3 ' : 'M2 ';
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -135,15 +129,15 @@ class _HomePageState extends State<HomePage> {
         extendBody: true,
         railWidth: isPhone ? 52 : 66,
         breakpointShowFullMenu: App.desktopWidthBreakpoint,
-        title: isPhone
-            ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
-            : Text('${App.title(context)} - '
-                '${AppColor.schemes[widget.controller.schemeIndex].name}'),
+        title:
+            isPhone
+                ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
+                : Text(
+                  '${App.title(context)} - '
+                  '${AppColor.schemes[widget.controller.schemeIndex].name}',
+                ),
         menuTitle: const Text(App.packageName),
-        menuLeadingTitle: Text(
-          App.title(context),
-          style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
-        ),
+        menuLeadingTitle: Text(App.title(context), style: textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold)),
         menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
         menuItems: App.menuItems,
@@ -218,8 +212,7 @@ class _HomePageState extends State<HomePage> {
           else if (index == 8) {
             // Steps:
             // 1. Convert settings to JSON.
-            final String jsonSetting =
-                await exportPlaygroundSettings(widget.controller);
+            final String jsonSetting = await exportPlaygroundSettings(widget.controller);
             // 2. Compress the JSON String and make URL.
             final String url = await ShareSettings.makeUrl(jsonSetting);
             // 3. Copy the URL to the clipboard.
@@ -247,11 +240,12 @@ class _HomePageState extends State<HomePage> {
             }
           }
         },
-        body: isBigDesktop
-            ? widget.controller.verticalMode
-                ? TwoTopicsVerticalPage(controller: widget.controller)
-                : TwoTopicsPage(controller: widget.controller)
-            : OneOrTwoTopicPageView(controller: widget.controller),
+        body:
+            isBigDesktop
+                ? widget.controller.verticalMode
+                    ? TwoTopicsVerticalPage(controller: widget.controller)
+                    : TwoTopicsPage(controller: widget.controller)
+                : OneOrTwoTopicPageView(controller: widget.controller),
       ),
     );
   }

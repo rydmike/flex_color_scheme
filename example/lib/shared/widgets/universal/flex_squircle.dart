@@ -83,9 +83,7 @@ class SquircleBorder extends ShapeBorder {
   /// Creates a continuous cornered rectangle border.
   ///
   /// The [cornerRadius] argument must not be null.
-  const SquircleBorder({
-    this.cornerRadius = 0.0,
-  });
+  const SquircleBorder({this.cornerRadius = 0.0});
 
   /// The radius for each corner.
   ///
@@ -140,37 +138,67 @@ class SquircleBorder extends ShapeBorder {
       return Path()
         ..moveTo(leftX(1.52866483), topY(0.0))
         ..lineTo(rightX(1.52866471), topY(0.0))
-        ..cubicTo(rightX(1.08849323), topY(0.0), rightX(0.86840689), topY(0.0),
-            rightX(0.66993427), topY(0.06549600))
+        ..cubicTo(rightX(1.08849323), topY(0.0), rightX(0.86840689), topY(0.0), rightX(0.66993427), topY(0.06549600))
         ..lineTo(rightX(0.63149399), topY(0.07491100))
-        ..cubicTo(rightX(0.37282392), topY(0.16905899), rightX(0.16906013),
-            topY(0.37282401), rightX(0.07491176), topY(0.63149399))
-        ..cubicTo(rightX(0), topY(0.86840701), rightX(0.0), topY(1.08849299),
-            rightX(0.0), topY(1.52866483))
+        ..cubicTo(
+          rightX(0.37282392),
+          topY(0.16905899),
+          rightX(0.16906013),
+          topY(0.37282401),
+          rightX(0.07491176),
+          topY(0.63149399),
+        )
+        ..cubicTo(rightX(0), topY(0.86840701), rightX(0.0), topY(1.08849299), rightX(0.0), topY(1.52866483))
         ..lineTo(rightX(0.0), bottomY(1.52866471))
-        ..cubicTo(rightX(0.0), bottomY(1.08849323), rightX(0.0),
-            bottomY(0.86840689), rightX(0.06549600), bottomY(0.66993427))
+        ..cubicTo(
+          rightX(0.0),
+          bottomY(1.08849323),
+          rightX(0.0),
+          bottomY(0.86840689),
+          rightX(0.06549600),
+          bottomY(0.66993427),
+        )
         ..lineTo(rightX(0.07491100), bottomY(0.63149399))
-        ..cubicTo(rightX(0.16905899), bottomY(0.37282392), rightX(0.37282401),
-            bottomY(0.16906013), rightX(0.63149399), bottomY(0.07491176))
-        ..cubicTo(rightX(0.86840701), bottomY(0), rightX(1.08849299),
-            bottomY(0.0), rightX(1.52866483), bottomY(0.0))
+        ..cubicTo(
+          rightX(0.16905899),
+          bottomY(0.37282392),
+          rightX(0.37282401),
+          bottomY(0.16906013),
+          rightX(0.63149399),
+          bottomY(0.07491176),
+        )
+        ..cubicTo(rightX(0.86840701), bottomY(0), rightX(1.08849299), bottomY(0.0), rightX(1.52866483), bottomY(0.0))
         ..lineTo(leftX(1.52866483), bottomY(0.0))
-        ..cubicTo(leftX(1.08849323), bottomY(0.0), leftX(0.86840689),
-            bottomY(0.0), leftX(0.66993427), bottomY(0.06549600))
+        ..cubicTo(
+          leftX(1.08849323),
+          bottomY(0.0),
+          leftX(0.86840689),
+          bottomY(0.0),
+          leftX(0.66993427),
+          bottomY(0.06549600),
+        )
         ..lineTo(leftX(0.63149399), bottomY(0.07491100))
-        ..cubicTo(leftX(0.37282392), bottomY(0.16905899), leftX(0.16906013),
-            bottomY(0.37282401), leftX(0.07491176), bottomY(0.63149399))
-        ..cubicTo(leftX(0), bottomY(0.86840701), leftX(0.0),
-            bottomY(1.08849299), leftX(0.0), bottomY(1.52866483))
+        ..cubicTo(
+          leftX(0.37282392),
+          bottomY(0.16905899),
+          leftX(0.16906013),
+          bottomY(0.37282401),
+          leftX(0.07491176),
+          bottomY(0.63149399),
+        )
+        ..cubicTo(leftX(0), bottomY(0.86840701), leftX(0.0), bottomY(1.08849299), leftX(0.0), bottomY(1.52866483))
         ..lineTo(leftX(0.0), topY(1.52866471))
-        ..cubicTo(leftX(0.0), topY(1.08849323), leftX(0.0), topY(0.86840689),
-            leftX(0.06549600), topY(0.66993427))
+        ..cubicTo(leftX(0.0), topY(1.08849323), leftX(0.0), topY(0.86840689), leftX(0.06549600), topY(0.66993427))
         ..lineTo(leftX(0.07491100), topY(0.63149399))
-        ..cubicTo(leftX(0.16905899), topY(0.37282392), leftX(0.37282401),
-            topY(0.16906013), leftX(0.63149399), topY(0.07491176))
-        ..cubicTo(leftX(0.86840701), topY(0), leftX(1.08849299), topY(0.0),
-            leftX(1.52866483), topY(0.0))
+        ..cubicTo(
+          leftX(0.16905899),
+          topY(0.37282392),
+          leftX(0.37282401),
+          topY(0.16906013),
+          leftX(0.63149399),
+          topY(0.07491176),
+        )
+        ..cubicTo(leftX(0.86840701), topY(0), leftX(1.08849299), topY(0.0), leftX(1.52866483), topY(0.0))
         ..close();
     }
 
@@ -193,8 +221,7 @@ class SquircleBorder extends ShapeBorder {
 
     // The ratio of the radius to the magnitude of pixels on a given side that
     // will be used to construct the two corners.
-    const double minimalUnclippedSideToCornerRadiusRatio =
-        2.0 * totalAffectedCornerPixelRatio;
+    const double minimalUnclippedSideToCornerRadiusRatio = 2.0 * totalAffectedCornerPixelRatio;
 
     // The multiplier of the radius in comparison to the smallest edge length
     // used to describe the minimum radius for this shape.
@@ -226,11 +253,12 @@ class SquircleBorder extends ShapeBorder {
     // As the edge length approaches 200, the limitedRadius approaches ~3 –- the
     // multiplier of the radius value where the resulting shape is concave (ie.
     // does not visually clip) at any dimension.
-    final double multiplier = ui.lerpDouble(
-      minimalEdgeLengthSideToCornerRadiusRatio,
-      minimalUnclippedSideToCornerRadiusRatio,
-      minSideLength / minRadiusEdgeLength,
-    )!;
+    final double multiplier =
+        ui.lerpDouble(
+          minimalEdgeLengthSideToCornerRadiusRatio,
+          minimalUnclippedSideToCornerRadiusRatio,
+          minSideLength / minRadiusEdgeLength,
+        )!;
     limitedRadius = math.min(radius, minSideLength / multiplier);
     return bezierRoundedRect();
   }
@@ -253,17 +281,13 @@ class SquircleBorder extends ShapeBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return SquircleBorder(
-      cornerRadius: cornerRadius * t,
-    );
+    return SquircleBorder(cornerRadius: cornerRadius * t);
   }
 
   @override
   ShapeBorder? lerpFrom(ShapeBorder? a, double t) {
     if (a is SquircleBorder) {
-      return SquircleBorder(
-        cornerRadius: ui.lerpDouble(a.cornerRadius, cornerRadius, t)!,
-      );
+      return SquircleBorder(cornerRadius: ui.lerpDouble(a.cornerRadius, cornerRadius, t)!);
     }
     return super.lerpFrom(a, t);
   }
@@ -271,9 +295,7 @@ class SquircleBorder extends ShapeBorder {
   @override
   ShapeBorder? lerpTo(ShapeBorder? b, double t) {
     if (b is SquircleBorder) {
-      return SquircleBorder(
-        cornerRadius: ui.lerpDouble(cornerRadius, b.cornerRadius, t)!,
-      );
+      return SquircleBorder(cornerRadius: ui.lerpDouble(cornerRadius, b.cornerRadius, t)!);
     }
     return super.lerpTo(b, t);
   }

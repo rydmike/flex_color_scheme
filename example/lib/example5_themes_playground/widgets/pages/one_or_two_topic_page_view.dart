@@ -45,18 +45,14 @@ const bool _debug = !kReleaseMode && false;
 /// own vertical topic selectors for each panel. Which gets used on bigger
 /// screens.
 class OneOrTwoTopicPageView extends StatefulWidget {
-  const OneOrTwoTopicPageView({
-    super.key,
-    required this.controller,
-  });
+  const OneOrTwoTopicPageView({super.key, required this.controller});
   final ThemeController controller;
 
   @override
   State<OneOrTwoTopicPageView> createState() => _OneOrTwoTopicPageViewState();
 }
 
-class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
-    with TickerProviderStateMixin {
+class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView> with TickerProviderStateMixin {
   late final PageController pageController;
   late final ScrollController scrollController;
   late int previousPage;
@@ -67,10 +63,7 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
     upperBound: 1.0,
     vsync: this,
   );
-  late final Animation<double> scaleAnimation = CurvedAnimation(
-    parent: scaleController,
-    curve: Curves.fastOutSlowIn,
-  );
+  late final Animation<double> scaleAnimation = CurvedAnimation(parent: scaleController, curve: Curves.fastOutSlowIn);
 
   late final AnimationController fadeController = AnimationController(
     duration: const Duration(milliseconds: 260),
@@ -78,20 +71,14 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
     upperBound: 1.0,
     vsync: this,
   );
-  late final Animation<double> fadeAnimation = CurvedAnimation(
-    parent: fadeController,
-    curve: Curves.fastOutSlowIn,
-  );
+  late final Animation<double> fadeAnimation = CurvedAnimation(parent: fadeController, curve: Curves.fastOutSlowIn);
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController(
-      initialPage: widget.controller.topicIndexStartSide,
-    );
+    pageController = PageController(initialPage: widget.controller.topicIndexStartSide);
     previousPage = widget.controller.topicIndexStartSide;
-    scrollController =
-        ScrollController(debugLabel: 'PanelViewScrollController');
+    scrollController = ScrollController(debugLabel: 'PanelViewScrollController');
     scaleController.value = 1.0;
     fadeController.value = 1.0;
   }
@@ -112,14 +99,11 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = widget.controller.compactMode;
     final bool isPinned = mediaSize.height >= App.pinnedSelector;
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint ||
-        isCompact;
+    final bool isPhone =
+        mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint || isCompact;
     final double margins = App.responsiveInsets(mediaSize.width, isCompact);
-    final double buttonHeight = App.panelButtonHeight +
-        (isPhone ? App.panelButtonPhoneHeightReduce : 0);
-    final double buttonWidth =
-        App.panelButtonWidth + (isPhone ? App.panelButtonPhoneWidthReduce : 0);
+    final double buttonHeight = App.panelButtonHeight + (isPhone ? App.panelButtonPhoneHeightReduce : 0);
+    final double buttonWidth = App.panelButtonWidth + (isPhone ? App.panelButtonPhoneWidthReduce : 0);
     // All the above is so we can below calculate how high the
     // [_ThemeTopicSelectorHeaderDelegate] extent should be in different modes,
     // compact and phone responsive layouts.
@@ -144,35 +128,36 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
               pinned: isPinned,
               floating: true,
               delegate: _TopicSelectorHeaderDelegate(
-                  vsync: this,
-                  extent: headerExtent,
-                  page: themeCtrl.topicIndexStartSide,
-                  previousPage: previousPage,
-                  isCompact: isCompact,
-                  buttonWidth: buttonWidth,
-                  onSelect: (int index) {
-                    if (previousPage != index) {
-                      setState(() {
-                        previousPage = index;
-                      });
-                    }
-                    if (themeCtrl.topicIndexStartSide != index) {
-                      themeCtrl.setTopicIndexStartSide(index);
-                      // This is a handmade scale and fade up animation
-                      // when user taps on ThemeTopic, we use this instead
-                      // of animating to the page with the page controller.
-                      // We jump to the page and trigger a slight
-                      // fade and zoom in effect. Without this, it is hard too
-                      // notice that the page changed, and this fade-zoom-in
-                      // fits well on a tablet view. If we animate to page with
-                      // the page view controller, it also looks very confusing.
-                      scaleController.value = 0.8;
-                      fadeController.value = 0.2;
-                      scaleController.forward();
-                      fadeController.forward();
-                      pageController.jumpToPage(themeCtrl.topicIndexStartSide);
-                    }
-                  }),
+                vsync: this,
+                extent: headerExtent,
+                page: themeCtrl.topicIndexStartSide,
+                previousPage: previousPage,
+                isCompact: isCompact,
+                buttonWidth: buttonWidth,
+                onSelect: (int index) {
+                  if (previousPage != index) {
+                    setState(() {
+                      previousPage = index;
+                    });
+                  }
+                  if (themeCtrl.topicIndexStartSide != index) {
+                    themeCtrl.setTopicIndexStartSide(index);
+                    // This is a handmade scale and fade up animation
+                    // when user taps on ThemeTopic, we use this instead
+                    // of animating to the page with the page controller.
+                    // We jump to the page and trigger a slight
+                    // fade and zoom in effect. Without this, it is hard too
+                    // notice that the page changed, and this fade-zoom-in
+                    // fits well on a tablet view. If we animate to page with
+                    // the page view controller, it also looks very confusing.
+                    scaleController.value = 0.8;
+                    fadeController.value = 0.2;
+                    scaleController.forward();
+                    fadeController.forward();
+                    pageController.jumpToPage(themeCtrl.topicIndexStartSide);
+                  }
+                },
+              ),
             ),
             // SliverAppBar(),
             SliverToBoxAdapter(
@@ -195,10 +180,7 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
           itemBuilder: (BuildContext context, int pageIndex) {
             return ScaleTransition(
               scale: scaleAnimation,
-              child: FadeTransition(
-                opacity: fadeAnimation,
-                child: _ThemePanelView(pageIndex, themeCtrl),
-              ),
+              child: FadeTransition(opacity: fadeAnimation, child: _ThemePanelView(pageIndex, themeCtrl)),
             );
           },
         ),
@@ -224,19 +206,17 @@ class _ThemePanelView extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onSurface)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onSurface);
+    final Color iconColor =
+        isLight
+            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
+            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
 
     // Logic to show divider
     final Color background = theme.scaffoldBackgroundColor;
     final Color cardColor = theme.cardColor;
-    final Color headerColor = Color.alphaBlend(
-        theme.colorScheme.surfaceTint.withAlpha(isLight ? 12 : 15), cardColor);
-    final bool showDivider = !(colorsAreClose(cardColor, background, isLight) ||
-        colorsAreClose(headerColor, background, isLight));
+    final Color headerColor = Color.alphaBlend(theme.colorScheme.surfaceTint.withAlpha(isLight ? 12 : 15), cardColor);
+    final bool showDivider =
+        !(colorsAreClose(cardColor, background, isLight) || colorsAreClose(headerColor, background, isLight));
 
     final Size mediaSize = MediaQuery.sizeOf(context);
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
@@ -246,82 +226,71 @@ class _ThemePanelView extends StatelessWidget {
 
     final int sideViewIndex = controller.topicIndexEndSide;
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      // A custom breakpoint, when the layout width is larger than breakpoint
-      // we show the code panel in a side-by side view.
-      final bool showSecondPage =
-          constraints.maxWidth >= App.sideBySideViewBreakpoint;
-      // We get double implicit scrollbars and that causes issues with the
-      // scroll controller, this removes it, we don't need one here.
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ScrollConfiguration(
-            behavior: const NoScrollbarBehavior(),
-            // This ListView allows the content in the PageView to scroll
-            // vertically as a part of the NestedScroll view the PageView is
-            // included in, but by itself. We need the ListView to allow
-            // its page content to grow beyond the visible page.
-            // TODO(rydmike): Evaluating SingleChildScrollView vs ListView
-            // The content is always fixed and known amount of widgets, but
-            // always a single child, so a ListView is not needed, trying the
-            // the SingleChildScrollView instead. Which for use cases
-            // with only a few items, or just one, like this case, may be
-            // faster. This test started Oct 12, 2024.
-            // EDIT: Dec 14, 2024: SingleChildScrollView is a bit faster here.
-            child: Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsetsDirectional.fromSTEB(
-                  margins,
-                  0,
-                  showSecondPage ? 0 : margins,
-                  margins + bottomPadding,
-                ),
-                child: HeaderCard(
-                  endStraight: showSecondPage,
-                  title: Text(themeTopics[leftPageIndex].heading),
-                  info: themeTopics[leftPageIndex].info,
-                  leading:
-                      Icon(themeTopics[leftPageIndex].icon, color: iconColor),
-                  child: Panel(leftPageIndex, controller),
-                ),
-              ),
-            ),
-          ),
-          if (showSecondPage && showDivider)
-            VerticalDivider(
-              width: 1,
-              color: background,
-            ),
-          if (showSecondPage)
-            Expanded(
-              child: SingleChildScrollView(
-                controller: ScrollController(),
-                primary: false,
-                padding: EdgeInsetsDirectional.fromSTEB(
-                  0,
-                  0,
-                  margins,
-                  margins + bottomPadding,
-                ),
-                child: HeaderCard(
-                  startStraight: true,
-                  title: Text(themeTopics[sideViewIndex].heading),
-                  info: themeTopics[sideViewIndex].info,
-                  leading:
-                      Icon(themeTopics[sideViewIndex].icon, color: iconColor),
-                  trailing: _SelectSidePanelView(
-                    index: sideViewIndex,
-                    onChanged: controller.setTopicIndexEndSide,
-                    iconColor: iconColor,
+      builder: (BuildContext context, BoxConstraints constraints) {
+        // A custom breakpoint, when the layout width is larger than breakpoint
+        // we show the code panel in a side-by side view.
+        final bool showSecondPage = constraints.maxWidth >= App.sideBySideViewBreakpoint;
+        // We get double implicit scrollbars and that causes issues with the
+        // scroll controller, this removes it, we don't need one here.
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            ScrollConfiguration(
+              behavior: const NoScrollbarBehavior(),
+              // This ListView allows the content in the PageView to scroll
+              // vertically as a part of the NestedScroll view the PageView is
+              // included in, but by itself. We need the ListView to allow
+              // its page content to grow beyond the visible page.
+              // TODO(rydmike): Evaluating SingleChildScrollView vs ListView
+              // The content is always fixed and known amount of widgets, but
+              // always a single child, so a ListView is not needed, trying the
+              // the SingleChildScrollView instead. Which for use cases
+              // with only a few items, or just one, like this case, may be
+              // faster. This test started Oct 12, 2024.
+              // EDIT: Dec 14, 2024: SingleChildScrollView is a bit faster here.
+              child: Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsetsDirectional.fromSTEB(
+                    margins,
+                    0,
+                    showSecondPage ? 0 : margins,
+                    margins + bottomPadding,
                   ),
-                  child: Panel(sideViewIndex, controller),
+                  child: HeaderCard(
+                    endStraight: showSecondPage,
+                    title: Text(themeTopics[leftPageIndex].heading),
+                    info: themeTopics[leftPageIndex].info,
+                    leading: Icon(themeTopics[leftPageIndex].icon, color: iconColor),
+                    child: Panel(leftPageIndex, controller),
+                  ),
                 ),
               ),
-            )
-        ],
-      );
-    });
+            ),
+            if (showSecondPage && showDivider) VerticalDivider(width: 1, color: background),
+            if (showSecondPage)
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: ScrollController(),
+                  primary: false,
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, margins, margins + bottomPadding),
+                  child: HeaderCard(
+                    startStraight: true,
+                    title: Text(themeTopics[sideViewIndex].heading),
+                    info: themeTopics[sideViewIndex].info,
+                    leading: Icon(themeTopics[sideViewIndex].icon, color: iconColor),
+                    trailing: _SelectSidePanelView(
+                      index: sideViewIndex,
+                      onChanged: controller.setTopicIndexEndSide,
+                      iconColor: iconColor,
+                    ),
+                    child: Panel(sideViewIndex, controller),
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
+    );
   }
 }
 
@@ -351,14 +320,8 @@ class _TopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double buttonWidth;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return TopicSelectorHorizontal(
-      page: page,
-      onSelect: onSelect,
-      isCompact: isCompact,
-      buttonWidth: buttonWidth,
-    );
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return TopicSelectorHorizontal(page: page, onSelect: onSelect, isCompact: isCompact, buttonWidth: buttonWidth);
   }
 
   @override
@@ -369,24 +332,17 @@ class _TopicSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return oldDelegate.maxExtent != maxExtent ||
-        oldDelegate.minExtent != minExtent ||
-        previousPage != page;
+    return oldDelegate.maxExtent != maxExtent || oldDelegate.minExtent != minExtent || previousPage != page;
   }
 
   @override
-  FloatingHeaderSnapConfiguration? get snapConfiguration =>
-      FloatingHeaderSnapConfiguration();
+  FloatingHeaderSnapConfiguration? get snapConfiguration => FloatingHeaderSnapConfiguration();
 }
 
 /// Widget used to select used side-by-side second [Panel] using
 /// a popup menu.
 class _SelectSidePanelView extends StatelessWidget {
-  const _SelectSidePanelView({
-    required this.index,
-    this.onChanged,
-    required this.iconColor,
-  });
+  const _SelectSidePanelView({required this.index, this.onChanged, required this.iconColor});
   final int index;
   final ValueChanged<int>? onChanged;
   final Color iconColor;
@@ -397,20 +353,14 @@ class _SelectSidePanelView extends StatelessWidget {
     final ColorScheme scheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     final bool enabled = onChanged != null;
-    final IconThemeData selectedIconTheme =
-        theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
-    final IconThemeData unSelectedIconTheme =
-        theme.iconTheme.copyWith(color: iconColor);
+    final IconThemeData selectedIconTheme = theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
+    final IconThemeData unSelectedIconTheme = theme.iconTheme.copyWith(color: iconColor);
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
       position: PopupMenuPosition.under,
       offset: const Offset(0, -4),
-      constraints: const BoxConstraints(
-        minWidth: 320,
-        maxWidth: 320,
-        maxHeight: 640,
-      ),
+      constraints: const BoxConstraints(minWidth: 320, maxWidth: 320, maxHeight: 640),
       initialValue: index,
       tooltip: '',
       padding: EdgeInsets.zero,
@@ -418,38 +368,37 @@ class _SelectSidePanelView extends StatelessWidget {
         onChanged?.call(index);
       },
       enabled: enabled,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < themeTopics.length; i++)
-          PopupMenuItem<int>(
-            value: i,
-            child: ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              leading: index == i
-                  ? IconTheme(
-                      data: selectedIconTheme,
-                      child: ColorSchemeBox(
-                        backgroundColor: iconColor,
-                        borderColor: Colors.transparent,
-                        child: Icon(themeTopics[i].icon),
-                      ),
-                    )
-                  : IconTheme(
-                      data: unSelectedIconTheme,
-                      child: ColorSchemeBox(
-                        backgroundColor: Colors.transparent,
-                        borderColor: iconColor,
-                        child: Icon(themeTopics[i].icon),
-                      ),
-                    ),
-              title: Text(themeTopics[i].heading, style: txtStyle),
-            ),
-          )
-      ],
-      icon: Icon(
-        Icons.more_vert,
-        color: iconColor,
-      ),
+      itemBuilder:
+          (BuildContext context) => <PopupMenuItem<int>>[
+            for (int i = 0; i < themeTopics.length; i++)
+              PopupMenuItem<int>(
+                value: i,
+                child: ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  leading:
+                      index == i
+                          ? IconTheme(
+                            data: selectedIconTheme,
+                            child: ColorSchemeBox(
+                              backgroundColor: iconColor,
+                              borderColor: Colors.transparent,
+                              child: Icon(themeTopics[i].icon),
+                            ),
+                          )
+                          : IconTheme(
+                            data: unSelectedIconTheme,
+                            child: ColorSchemeBox(
+                              backgroundColor: Colors.transparent,
+                              borderColor: iconColor,
+                              child: Icon(themeTopics[i].icon),
+                            ),
+                          ),
+                  title: Text(themeTopics[i].heading, style: txtStyle),
+                ),
+              ),
+          ],
+      icon: Icon(Icons.more_vert, color: iconColor),
     );
   }
 }

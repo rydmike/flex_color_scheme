@@ -116,74 +116,67 @@ class DemoApp extends StatelessWidget {
     // the nature that the entire App UI needs to be redrawn, so this approach
     // works well for this use case.
     return ListenableBuilder(
-        listenable: themeController,
-        builder: (BuildContext context, Widget? child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Custom Theme',
-            // Define FlexThemeData.light() theme using above custom colors.
-            theme: FlexThemeData.light(
-              useMaterial3: themeController.useMaterial3,
-              // We could have stored the light scheme in a FlexSchemeColor
-              // and used it for the colors, but we will use both the light and
-              // dark colors also on the HomePage for the theme switch widget
-              // and to display its name, where we pass it as a FlexSchemeData
-              // object that contains both the light and dark scheme and its
-              // name and description.
-              colors: _myFlexScheme.light,
-              // Opt in/out on FlexColorScheme sub-themes with theme controller.
-              subThemesData: themeController.useSubThemes
-                  ? const FlexSubThemesData()
-                  : null,
-              // Use very low elevation light theme mode. On light colored
-              // AppBars this show up as a nice thin underline effect.
-              appBarElevation: 0.5,
-              // Here we want the large default visual density on all platforms.
-              // Like Flutter SDK it default to
-              // VisualDensity.adaptivePlatformDensity, which uses standard on
-              // devices, but compact on desktops, compact is very compact,
-              // maybe even a bit too compact
-              visualDensity: VisualDensity.standard,
-              // You can add a font via just a fontFamily from e.g. GoogleFonts.
-              // For better results, prefer defining complete TextThemes,
-              // using a font and its different styles, potentially even
-              // more then one font, and then assign the TextTheme to the
-              // textTheme and primaryTextTheme in FlexThemeData. This is
-              // just how you would use it with ThemeData too.
-              fontFamily: GoogleFonts.notoSans().fontFamily,
-              // We use the nicer Material 3 Typography in both M2 and M3 mode.
-              typography: Typography.material2021(
-                platform: defaultTargetPlatform,
-              ),
-            ),
-            // Same setup for the dark theme, but using FlexThemeData.dark().
-            darkTheme: FlexThemeData.dark(
-              useMaterial3: themeController.useMaterial3,
-              colors: _myFlexScheme.dark,
-              subThemesData: themeController.useSubThemes
-                  ? const FlexSubThemesData()
-                  : null,
-              appBarElevation: 1,
-              visualDensity: VisualDensity.standard,
-              fontFamily: GoogleFonts.notoSans().fontFamily,
-              // We use the nicer Material 3 Typography in both M2 and M3 mode.
-              typography: Typography.material2021(
-                platform: defaultTargetPlatform,
-              ),
-            ),
-            // Use the dark or light theme, based on theme controller setting.
-            themeMode: themeController.themeMode,
-            home: HomePage(
-              // Pass in the FlexSchemeData we used for the active theme. Not
-              // needed to use FlexColorScheme, but we use it to
-              // show the active theme's name, description and colors in the
-              // demo. It is also used by the theme mode switch that shows the
-              // theme's colors in the different theme modes.
-              flexSchemeData: _myFlexScheme,
-              // Pass in the theme controller to the home page.
-              controller: themeController,
-            ),
-          );
-        });
+      listenable: themeController,
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Custom Theme',
+          // Define FlexThemeData.light() theme using above custom colors.
+          theme: FlexThemeData.light(
+            useMaterial3: themeController.useMaterial3,
+            // We could have stored the light scheme in a FlexSchemeColor
+            // and used it for the colors, but we will use both the light and
+            // dark colors also on the HomePage for the theme switch widget
+            // and to display its name, where we pass it as a FlexSchemeData
+            // object that contains both the light and dark scheme and its
+            // name and description.
+            colors: _myFlexScheme.light,
+            // Opt in/out on FlexColorScheme sub-themes with theme controller.
+            subThemesData: themeController.useSubThemes ? const FlexSubThemesData() : null,
+            // Use very low elevation light theme mode. On light colored
+            // AppBars this show up as a nice thin underline effect.
+            appBarElevation: 0.5,
+            // Here we want the large default visual density on all platforms.
+            // Like Flutter SDK it default to
+            // VisualDensity.adaptivePlatformDensity, which uses standard on
+            // devices, but compact on desktops, compact is very compact,
+            // maybe even a bit too compact
+            visualDensity: VisualDensity.standard,
+            // You can add a font via just a fontFamily from e.g. GoogleFonts.
+            // For better results, prefer defining complete TextThemes,
+            // using a font and its different styles, potentially even
+            // more then one font, and then assign the TextTheme to the
+            // textTheme and primaryTextTheme in FlexThemeData. This is
+            // just how you would use it with ThemeData too.
+            fontFamily: GoogleFonts.notoSans().fontFamily,
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
+            typography: Typography.material2021(platform: defaultTargetPlatform),
+          ),
+          // Same setup for the dark theme, but using FlexThemeData.dark().
+          darkTheme: FlexThemeData.dark(
+            useMaterial3: themeController.useMaterial3,
+            colors: _myFlexScheme.dark,
+            subThemesData: themeController.useSubThemes ? const FlexSubThemesData() : null,
+            appBarElevation: 1,
+            visualDensity: VisualDensity.standard,
+            fontFamily: GoogleFonts.notoSans().fontFamily,
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
+            typography: Typography.material2021(platform: defaultTargetPlatform),
+          ),
+          // Use the dark or light theme, based on theme controller setting.
+          themeMode: themeController.themeMode,
+          home: HomePage(
+            // Pass in the FlexSchemeData we used for the active theme. Not
+            // needed to use FlexColorScheme, but we use it to
+            // show the active theme's name, description and colors in the
+            // demo. It is also used by the theme mode switch that shows the
+            // theme's colors in the different theme modes.
+            flexSchemeData: _myFlexScheme,
+            // Pass in the theme controller to the home page.
+            controller: themeController,
+          ),
+        );
+      },
+    );
   }
 }

@@ -21,11 +21,7 @@ class MenusPanel extends StatelessWidget {
     path: 'flutter/flutter/issues/123736',
   );
 
-  static final Uri _dropNotFollowTextPR = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'flutter/flutter/pull/154667',
-  );
+  static final Uri _dropNotFollowTextPR = Uri(scheme: 'https', host: 'github.com', path: 'flutter/flutter/pull/154667');
 
   static final Uri _menuLeadingIconIssue131350 = Uri(
     scheme: 'https',
@@ -36,68 +32,49 @@ class MenusPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
-    final String menuDefault = controller.menuSchemeColor == null
-        ? 'surfaceContainer'
-        : SchemeColor.values[controller.menuSchemeColor!.index].name;
+    final String menuDefault =
+        controller.menuSchemeColor == null
+            ? 'surfaceContainer'
+            : SchemeColor.values[controller.menuSchemeColor!.index].name;
 
-    final String menuOnDefault = controller.menuSchemeColor == null &&
-            controller.menuItemBackgroundSchemeColor == null
-        ? 'onSurface'
-        : controller.menuItemBackgroundSchemeColor != null
-            ? SchemeColor
-                .values[FlexSubThemes.onSchemeColor(
-                        controller.menuItemBackgroundSchemeColor!)
-                    .index]
-                .name
-            : SchemeColor
-                .values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!)
-                    .index]
-                .name;
+    final String menuOnDefault =
+        controller.menuSchemeColor == null && controller.menuItemBackgroundSchemeColor == null
+            ? 'onSurface'
+            : controller.menuItemBackgroundSchemeColor != null
+            ? SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuItemBackgroundSchemeColor!).index].name
+            : SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!).index].name;
 
-    final String overlayStyle = controller.interactionEffects
-        ? ' with tinted overlay'
-        : ' with default overlay';
+    final String overlayStyle = controller.interactionEffects ? ' with tinted overlay' : ' with default overlay';
 
-    final String menuIndicatorDefault = controller.menuSchemeColor == null &&
-            controller.menuItemBackgroundSchemeColor == null
-        ? 'onSurface$overlayStyle'
-        : controller.menuItemBackgroundSchemeColor == null
+    final String menuIndicatorDefault =
+        controller.menuSchemeColor == null && controller.menuItemBackgroundSchemeColor == null
+            ? 'onSurface$overlayStyle'
+            : controller.menuItemBackgroundSchemeColor == null
             // ignore: lines_longer_than_80_chars
             ? '${SchemeColor.values[controller.menuSchemeColor!.index].name}$overlayStyle'
             // ignore: lines_longer_than_80_chars
             : '${SchemeColor.values[controller.menuItemBackgroundSchemeColor!.index].name}$overlayStyle';
 
-    final String menuOnIndicatorDefault = controller.menuSchemeColor == null &&
-            controller.menuItemBackgroundSchemeColor == null &&
-            controller.menuIndicatorBackgroundSchemeColor == null
-        ? 'onSurface'
-        : controller.menuIndicatorBackgroundSchemeColor == null
+    final String menuOnIndicatorDefault =
+        controller.menuSchemeColor == null &&
+                controller.menuItemBackgroundSchemeColor == null &&
+                controller.menuIndicatorBackgroundSchemeColor == null
+            ? 'onSurface'
+            : controller.menuIndicatorBackgroundSchemeColor == null
             ? controller.menuItemBackgroundSchemeColor == null
-                ? SchemeColor
-                    .values[
-                        FlexSubThemes.onSchemeColor(controller.menuSchemeColor!)
-                            .index]
-                    .name
-                : SchemeColor
-                    .values[FlexSubThemes.onSchemeColor(
-                            controller.menuItemBackgroundSchemeColor!)
-                        .index]
-                    .name
+                ? SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuSchemeColor!).index].name
+                : SchemeColor.values[FlexSubThemes.onSchemeColor(controller.menuItemBackgroundSchemeColor!).index].name
             : SchemeColor
-                .values[FlexSubThemes.onSchemeColor(
-                        controller.menuIndicatorBackgroundSchemeColor!)
-                    .index]
+                .values[FlexSubThemes.onSchemeColor(controller.menuIndicatorBackgroundSchemeColor!).index]
                 .name;
 
     return Column(
@@ -109,146 +86,152 @@ class MenusPanel extends StatelessWidget {
         //
         const ListTileReveal(
           title: Text('Menu'),
-          subtitleReveal:
-              Text('Menu container theming properties are shared by '
-                  'DropdownMenu, MenuAnchor and MenuBar. You can see applied '
-                  'container styles when you open test menus.\n'),
+          subtitleReveal: Text(
+            'Menu container theming properties are shared by '
+            'DropdownMenu, MenuAnchor and MenuBar. You can see applied '
+            'container styles when you open test menus.\n',
+          ),
         ),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Color'),
-              defaultLabel: 'surfaceContainer',
-              value: controller.menuSchemeColor,
-              onChanged: controller.setMenuSchemeColor,
-            ),
-            lastWidget: SliderListTileReveal(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              title: const Text('Opacity'),
-              value: controller.menuOpacity,
-              onChanged: controller.setMenuOpacity,
-              min: 0,
-              max: 1,
-              divisions: 100,
-              valueDisplayScale: 100,
-              valueDecimalPlaces: 0,
-              valueHeading: 'OPACITY',
-              valueUnitLabel: ' %',
-              valueDefaultLabel: '100 %',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Radius'),
-              subtitleReveal: const Text(
-                'Does not use the global border radius setting. '
-                'Avoid using very large border radius on menu container. '
-                'Unlike the using larger radius on PopupMenuButton, the '
-                'M3 based  Menu widgets will correctly clip the '
-                'highlighted item in corners, so you can use '
-                'higher border radius without issues, it is just not '
-                'recommended design wise.\n',
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Color'),
+                defaultLabel: 'surfaceContainer',
+                value: controller.menuSchemeColor,
+                onChanged: controller.setMenuSchemeColor,
               ),
-              value: controller.menuRadius,
-              onChanged: controller.setMenuRadius,
-              min: 0,
-              max: 25,
-              divisions: 25,
-              valueDecimalPlaces: 0,
-              valueHeading: 'RADIUS',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '4 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Elevation'),
-              value: controller.menuElevation,
-              onChanged: controller.setMenuElevation,
-              min: 0,
-              max: 30,
-              divisions: 30,
-              valueHeading: 'ELEV',
-              valueDecimalPlaces: 0,
-              valueDefaultLabel: '3',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ListTile(
-          enabled: enableControl,
-          title: const Text('Content padding'),
+              lastWidget: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Opacity'),
+                value: controller.menuOpacity,
+                onChanged: controller.setMenuOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
+              ),
+              isRow: isRow,
+            );
+          },
         ),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              value: controller.menuPaddingStart,
-              onChanged: controller.setMenuPaddingStart,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'START',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              value: controller.menuPaddingEnd,
-              onChanged: controller.setMenuPaddingEnd,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'END',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              value: controller.menuPaddingTop,
-              onChanged: controller.setMenuPaddingTop,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'TOP',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              value: controller.menuPaddingBottom,
-              onChanged: controller.setMenuPaddingBottom,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'BOTTOM',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
-            ),
-            isRow: isRow,
-          );
-        }),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Radius'),
+                subtitleReveal: const Text(
+                  'Does not use the global border radius setting. '
+                  'Avoid using very large border radius on menu container. '
+                  'Unlike the using larger radius on PopupMenuButton, the '
+                  'M3 based  Menu widgets will correctly clip the '
+                  'highlighted item in corners, so you can use '
+                  'higher border radius without issues, it is just not '
+                  'recommended design wise.\n',
+                ),
+                value: controller.menuRadius,
+                onChanged: controller.setMenuRadius,
+                min: 0,
+                max: 25,
+                divisions: 25,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '4 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Elevation'),
+                value: controller.menuElevation,
+                onChanged: controller.setMenuElevation,
+                min: 0,
+                max: 30,
+                divisions: 30,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '3',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ListTile(enabled: enableControl, title: const Text('Content padding')),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                value: controller.menuPaddingStart,
+                onChanged: controller.setMenuPaddingStart,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'START',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                value: controller.menuPaddingEnd,
+                onChanged: controller.setMenuPaddingEnd,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'END',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0 dp',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                value: controller.menuPaddingTop,
+                onChanged: controller.setMenuPaddingTop,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'TOP',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                value: controller.menuPaddingBottom,
+                onChanged: controller.setMenuPaddingBottom,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'BOTTOM',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '0 dp',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
         const Divider(),
         //
         // Menu items
@@ -262,52 +245,56 @@ class MenusPanel extends StatelessWidget {
             'when you open the test menus.\n',
           ),
         ),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Background color'),
-              defaultLabel: menuDefault,
-              defaultDisabledLabel: 'surfaceContainer',
-              value: controller.menuItemBackgroundSchemeColor,
-              onChanged: controller.setMenuItemBackgroundSchemeColor,
-            ),
-            lastWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              title: const Text('Foreground color'),
-              defaultLabel: menuOnDefault,
-              defaultDisabledLabel: 'onSurface',
-              value: controller.menuItemForegroundSchemeColor,
-              onChanged: controller.setMenuItemForegroundSchemeColor,
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Highlighted background'),
-              defaultLabel: menuIndicatorDefault,
-              defaultDisabledLabel: 'onSurface$overlayStyle',
-              value: controller.menuIndicatorBackgroundSchemeColor,
-              onChanged: controller.setMenuIndicatorBackgroundSchemeColor,
-            ),
-            lastWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              title: const Text('Highlighted foreground'),
-              defaultLabel: menuOnIndicatorDefault,
-              defaultDisabledLabel: 'onSurface',
-              value: controller.menuIndicatorForegroundSchemeColor,
-              onChanged: controller.setMenuIndicatorForegroundSchemeColor,
-            ),
-            isRow: isRow,
-          );
-        }),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Background color'),
+                defaultLabel: menuDefault,
+                defaultDisabledLabel: 'surfaceContainer',
+                value: controller.menuItemBackgroundSchemeColor,
+                onChanged: controller.setMenuItemBackgroundSchemeColor,
+              ),
+              lastWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Foreground color'),
+                defaultLabel: menuOnDefault,
+                defaultDisabledLabel: 'onSurface',
+                value: controller.menuItemForegroundSchemeColor,
+                onChanged: controller.setMenuItemForegroundSchemeColor,
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Highlighted background'),
+                defaultLabel: menuIndicatorDefault,
+                defaultDisabledLabel: 'onSurface$overlayStyle',
+                value: controller.menuIndicatorBackgroundSchemeColor,
+                onChanged: controller.setMenuIndicatorBackgroundSchemeColor,
+              ),
+              lastWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Highlighted foreground'),
+                defaultLabel: menuOnIndicatorDefault,
+                defaultDisabledLabel: 'onSurface',
+                value: controller.menuIndicatorForegroundSchemeColor,
+                onChanged: controller.setMenuIndicatorForegroundSchemeColor,
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Highlight radius'),
@@ -341,10 +328,7 @@ class MenusPanel extends StatelessWidget {
             'theme settings for DropdownMenu, MenuAnchor and MenuBar menus.\n',
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: DropDownMenuShowcase(),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: DropDownMenuShowcase()),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -353,18 +337,16 @@ class MenusPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'The selected and focused style of any item found in '
+                  text:
+                      'The selected and focused style of any item found in '
                       'the DropdownMenu is not themed. This is a bug in '
                       'Flutter SDK. For more information see ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _menuNoThemeOnFocusedIssue123736,
-                  text: 'issue #123736',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _menuNoThemeOnFocusedIssue123736, text: 'issue #123736'),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This has been fixed in master, but has not yet '
+                  text:
+                      '. This has been fixed in master, but has not yet '
                       'landed in Flutter 3.24.\n'
                       '\n'
                       'There are three reported '
@@ -372,14 +354,11 @@ class MenusPanel extends StatelessWidget {
                       'input field correctly. A FIX PR that references these '
                       'issues can be found here ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _dropNotFollowTextPR,
-                  text: 'PR #154667',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _dropNotFollowTextPR, text: 'PR #154667'),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This FIX PR, that also links the issues, '
+                  text:
+                      '. This FIX PR, that also links the issues, '
                       'has landed in master, but not yet in Flutter 3.24.\n'
                       '\n'
                       'Another issue was using leading icons on both menu '
@@ -389,15 +368,8 @@ class MenusPanel extends StatelessWidget {
                       'past issue and also '
                       'find links to many other DropdownMenu issues in \n',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _menuLeadingIconIssue131350,
-                  text: 'issue #131350',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '.\n',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _menuLeadingIconIssue131350, text: 'issue #131350'),
+                TextSpan(style: spanTextStyle, text: '.\n'),
               ],
             ),
           ),
@@ -419,10 +391,7 @@ class MenusPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: MenuAnchorShowcase(explain: false),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: MenuAnchorShowcase(explain: false)),
         const SizedBox(height: 16),
         const Divider(),
         //
@@ -442,83 +411,87 @@ class MenusPanel extends StatelessWidget {
 
         const MenuBarShowcase(explain: false),
         const SizedBox(height: 8),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Background color'),
-              defaultLabel: menuDefault,
-              defaultDisabledLabel: 'surfaceContainer',
-              value: controller.menuBarBackgroundSchemeColor,
-              onChanged: controller.setMenuBarBackgroundSchemeColor,
-            ),
-            lastWidget: SwitchListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              title: const Text('No shadow'),
-              subtitleReveal: const Text(
-                'The M3 guide depicts MenuBars with no shadow and optional '
-                'elevation with tint. Flutter defaults has shadow in M3. '
-                'To be able to use elevation with only elevation tint in M3, '
-                'turn this setting ON, to remove the shadow.\n',
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Background color'),
+                defaultLabel: menuDefault,
+                defaultDisabledLabel: 'surfaceContainer',
+                value: controller.menuBarBackgroundSchemeColor,
+                onChanged: controller.setMenuBarBackgroundSchemeColor,
               ),
-              value: controller.menuBarShadowColor == Colors.transparent,
-              onChanged: (bool removeShadow) {
-                if (removeShadow) {
-                  controller.setMenuBarShadowColor(Colors.transparent);
-                } else {
-                  controller.setMenuBarShadowColor(null);
-                }
-              },
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Radius'),
-              subtitleReveal: const Text(
-                'For an edge-to-edge MenuBar design use 0 dp. The Material-3 '
-                'guide depicts MenuBar as edge-to-edge '
-                'with no corner rounding, but Flutter defaults to 4 dp. '
-                'As of Aug 28, 2024 there is no official M3 spec for '
-                'the MenuBar.\n',
+              lastWidget: SwitchListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('No shadow'),
+                subtitleReveal: const Text(
+                  'The M3 guide depicts MenuBars with no shadow and optional '
+                  'elevation with tint. Flutter defaults has shadow in M3. '
+                  'To be able to use elevation with only elevation tint in M3, '
+                  'turn this setting ON, to remove the shadow.\n',
+                ),
+                value: controller.menuBarShadowColor == Colors.transparent,
+                onChanged: (bool removeShadow) {
+                  if (removeShadow) {
+                    controller.setMenuBarShadowColor(Colors.transparent);
+                  } else {
+                    controller.setMenuBarShadowColor(null);
+                  }
+                },
               ),
-              value: controller.menuBarRadius,
-              onChanged: controller.setMenuBarRadius,
-              min: 0,
-              max: 40,
-              divisions: 40,
-              valueDecimalPlaces: 0,
-              valueHeading: 'RADIUS',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '4 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Elevation'),
-              subtitleReveal: const Text(
-                'For an flat MenuBar design use 0 elevation. The Material-3 '
-                'guide depicts MenuBar as flat with no elevation, '
-                'but Flutter defaults to elevation 3. As of Aug 28, 2024 '
-                'there is no official M3 spec for the MenuBar.\n',
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Radius'),
+                subtitleReveal: const Text(
+                  'For an edge-to-edge MenuBar design use 0 dp. The Material-3 '
+                  'guide depicts MenuBar as edge-to-edge '
+                  'with no corner rounding, but Flutter defaults to 4 dp. '
+                  'As of Aug 28, 2024 there is no official M3 spec for '
+                  'the MenuBar.\n',
+                ),
+                value: controller.menuBarRadius,
+                onChanged: controller.setMenuBarRadius,
+                min: 0,
+                max: 40,
+                divisions: 40,
+                valueDecimalPlaces: 0,
+                valueHeading: 'RADIUS',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '4 dp',
               ),
-              value: controller.menuBarElevation,
-              onChanged: controller.setMenuBarElevation,
-              min: 0,
-              max: 30,
-              divisions: 30,
-              valueHeading: 'ELEV',
-              valueDecimalPlaces: 0,
-              valueDefaultLabel: '3',
-            ),
-            isRow: isRow,
-          );
-        }),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Elevation'),
+                subtitleReveal: const Text(
+                  'For an flat MenuBar design use 0 elevation. The Material-3 '
+                  'guide depicts MenuBar as flat with no elevation, '
+                  'but Flutter defaults to elevation 3. As of Aug 28, 2024 '
+                  'there is no official M3 spec for the MenuBar.\n',
+                ),
+                value: controller.menuBarElevation,
+                onChanged: controller.setMenuBarElevation,
+                min: 0,
+                max: 30,
+                divisions: 30,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '3',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
         const Divider(),
         const ListTileReveal(
           dense: true,

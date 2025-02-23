@@ -39,18 +39,14 @@ const bool _debug = !kReleaseMode && false;
 /// This view was a quick rework of [ThemeTopicPage] to create a totally
 /// new layout by mostly re-using already existing parts in the app.
 class TwoTopicsPage extends StatefulWidget {
-  const TwoTopicsPage({
-    super.key,
-    required this.controller,
-  });
+  const TwoTopicsPage({super.key, required this.controller});
   final ThemeController controller;
 
   @override
   State<TwoTopicsPage> createState() => _TwoTopicsPageState();
 }
 
-class _TwoTopicsPageState extends State<TwoTopicsPage>
-    with TickerProviderStateMixin {
+class _TwoTopicsPageState extends State<TwoTopicsPage> with TickerProviderStateMixin {
   late final ScrollController scrollController;
   late int previousSchemeIndex;
   late bool previousUseFlexColorScheme;
@@ -60,10 +56,7 @@ class _TwoTopicsPageState extends State<TwoTopicsPage>
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController(
-      keepScrollOffset: true,
-      debugLabel: 'ThemeTwoTopicsPageScrollController',
-    );
+    scrollController = ScrollController(keepScrollOffset: true, debugLabel: 'ThemeTwoTopicsPageScrollController');
     previousSchemeIndex = widget.controller.schemeIndex;
     previousUseFlexColorScheme = widget.controller.useFlexColorScheme;
     previousUseSubThemes = widget.controller.useSubThemes;
@@ -109,25 +102,19 @@ class _TwoTopicsPageState extends State<TwoTopicsPage>
 
     final bool isCompact = widget.controller.compactMode;
     final bool isPinned = mediaSize.height >= App.pinnedSelector;
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint ||
-        isCompact;
+    final bool isPhone =
+        mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint || isCompact;
     final double phoneReduce = isPhone ? App.colorButtonPhoneReduce : 0;
     final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     // The height diff of the switch = dense - normal.
-    final double phoneSwitchReduce =
-        isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
+    final double phoneSwitchReduce = isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
     // The height diff with switches removed.
     final double switchRemove = isCompact ? -_kHeightDenseListTile : 0;
     // All the above is so we can below calculate how high the
     // [ThemeColorSelectorHeaderDelegate] extent should be in different modes,
     // compact and phone responsive layouts.
-    final double headerExtent = _kHeightSelector +
-        mediaPadding.top +
-        margins * 3 +
-        phoneReduce +
-        phoneSwitchReduce +
-        switchRemove;
+    final double headerExtent =
+        _kHeightSelector + mediaPadding.top + margins * 3 + phoneReduce + phoneSwitchReduce + switchRemove;
     // It was tricky to figure out all the extent details, these helped.
     if (_debug) {
       debugPrint('headerExtent ............ : $headerExtent');

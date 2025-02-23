@@ -16,10 +16,7 @@ class TestAdaptiveResponse extends StatelessWidget {
       title: const Text('Test the adaptive response'),
       child: Column(
         children: <Widget>[
-          PlatformPopupMenu(
-            platform: controller.platform,
-            onChanged: controller.setPlatform,
-          ),
+          PlatformPopupMenu(platform: controller.platform, onChanged: controller.setPlatform),
           IsWebListTile(controller: controller),
           BackToActualPlatform(controller: controller),
         ],

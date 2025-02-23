@@ -24,8 +24,7 @@ class ShowCodeThemeColors extends StatelessWidget {
   final Color? onBackgroundColor;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(final Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
   static Color _onColor(final Color color, final Color bg) =>
@@ -50,50 +49,34 @@ class ShowCodeThemeColors extends StatelessWidget {
     // defaults you would use if you had a package that provided a theme
     // extension, and it would fallback to defaults like this internally if
     // it had not been added by user to ThemeData as an extension.
-    final CodeTheme colors = theme.extension<CodeTheme>() ??
-        (isDark ? CodeTheme.dark : CodeTheme.light);
+    final CodeTheme colors = theme.extension<CodeTheme>() ?? (isDark ? CodeTheme.dark : CodeTheme.light);
 
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
     // If we had one, copy in a border side to it.
     if (border is RoundedRectangleBorder) {
-      border = border.copyWith(
-        side: BorderSide(
-          color: theme.dividerColor,
-          width: 1,
-        ),
-      );
+      border = border.copyWith(side: BorderSide(color: theme.dividerColor, width: 1));
       // If
     } else {
       // If border was null, make one matching Card default, but with border
       // side, if it was not null, we leave it as it was.
       border ??= RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-        side: BorderSide(
-          color: theme.dividerColor,
-          width: 1,
-        ),
+        side: BorderSide(color: theme.dividerColor, width: 1),
       );
     }
 
     // Get effective background color.
-    final Color background =
-        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
+    final Color background = onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
 
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
     return Theme(
-      data: theme.copyWith(
-        cardTheme: CardTheme.of(context).copyWith(
-          elevation: 0,
-          shape: border,
-        ),
-      ),
+      data: theme.copyWith(cardTheme: CardTheme.of(context).copyWith(elevation: 0, shape: border)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

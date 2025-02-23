@@ -10,17 +10,13 @@ import 'package:flutter/services.dart';
 /// seems to work on some Android SDK levels, but not all.
 class SplashPageTwo extends StatefulWidget {
   /// Default const constructor.
-  const SplashPageTwo({
-    super.key,
-  });
+  const SplashPageTwo({super.key});
 
   /// A static convenience function show this screen.
   static Future<void> show(BuildContext context) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute<Widget>(
-        builder: (BuildContext context) => const SplashPageTwo(),
-      ),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute<Widget>(builder: (BuildContext context) => const SplashPageTwo()));
   }
 
   @override
@@ -53,10 +49,7 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // Another thing to be aware of with this method is that eg bringing up
     // the keyboard will bring the navigation bar back, so that is not so nice
     // with it either.
-    unawaited(SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.edgeToEdge,
-      overlays: <SystemUiOverlay>[],
-    ));
+    unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: <SystemUiOverlay>[]));
     super.initState();
   }
 
@@ -73,8 +66,7 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
     // is put them all back. If we control the parent it is not a problem,
     // because then we know and can but back what it had, but if we use this
     // in a package, it is a not possible.
-    unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values));
+    unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values));
     super.dispose();
   }
 
@@ -94,21 +86,13 @@ class _SplashPageTwoState extends State<SplashPageTwo> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'Splash!',
-                style: theme.textTheme.displayMedium!
-                    .copyWith(color: theme.colorScheme.primary),
-              ),
+              Text('Splash!', style: theme.textTheme.displayMedium!.copyWith(color: theme.colorScheme.primary)),
               const SizedBox(height: 20),
               const Text('A clean splash screen'),
               const SizedBox(height: 8),
-              const Text('No status bar and no navigation bar',
-                  textAlign: TextAlign.center),
+              const Text('No status bar and no navigation bar', textAlign: TextAlign.center),
               const SizedBox(height: 30),
-              Text(
-                'Tap screen to close',
-                style: TextStyle(color: theme.colorScheme.secondary),
-              ),
+              Text('Tap screen to close', style: TextStyle(color: theme.colorScheme.secondary)),
             ],
           ),
         ),

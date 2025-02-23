@@ -8,14 +8,10 @@ import '../theme/flex_theme_light.dart';
 
 /// Function that returns the current light and dark ColorScheme as
 /// a Dart Flutter code String.
-String generateColorSchemeDartCode(
-  ThemeController controller,
-) {
-  final ColorScheme lightScheme =
-      flexColorSchemeLight(controller, Colors.black).toScheme;
+String generateColorSchemeDartCode(ThemeController controller) {
+  final ColorScheme lightScheme = flexColorSchemeLight(controller, Colors.black).toScheme;
 
-  final ColorScheme darkScheme =
-      flexColorSchemeDark(controller, Colors.black).toScheme;
+  final ColorScheme darkScheme = flexColorSchemeDark(controller, Colors.black).toScheme;
 
   final String code = '''
 /// Light [ColorScheme] made with FlexColorScheme v${App.version}.

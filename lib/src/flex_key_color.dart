@@ -568,14 +568,12 @@ class FlexKeyColors with Diagnosticable {
       keySecondary: keySecondary ?? this.keySecondary,
       useSecondary: useSecondary ?? this.useSecondary,
       keepSecondary: keepSecondary ?? this.keepSecondary,
-      keepSecondaryContainer:
-          keepSecondaryContainer ?? this.keepSecondaryContainer,
+      keepSecondaryContainer: keepSecondaryContainer ?? this.keepSecondaryContainer,
       //
       keyTertiary: keyTertiary ?? this.keyTertiary,
       useTertiary: useTertiary ?? this.useTertiary,
       keepTertiary: keepTertiary ?? this.keepTertiary,
-      keepTertiaryContainer:
-          keepTertiaryContainer ?? this.keepTertiaryContainer,
+      keepTertiaryContainer: keepTertiaryContainer ?? this.keepTertiaryContainer,
       //
       keyError: keyError ?? this.keyError,
       useError: useError ?? this.useError,
@@ -583,10 +581,8 @@ class FlexKeyColors with Diagnosticable {
       keepErrorContainer: keepErrorContainer ?? this.keepErrorContainer,
       //
       contrastLevel: contrastLevel ?? this.contrastLevel,
-      useExpressiveOnContainerColors:
-          useExpressiveOnContainerColors ?? this.useExpressiveOnContainerColors,
-      useLegacyMonochromeSeedBehavior: useLegacyMonochromeSeedBehavior ??
-          this.useLegacyMonochromeSeedBehavior,
+      useExpressiveOnContainerColors: useExpressiveOnContainerColors ?? this.useExpressiveOnContainerColors,
+      useLegacyMonochromeSeedBehavior: useLegacyMonochromeSeedBehavior ?? this.useLegacyMonochromeSeedBehavior,
       //
     );
   }
@@ -619,40 +615,38 @@ class FlexKeyColors with Diagnosticable {
         other.keepErrorContainer == keepErrorContainer &&
         //
         other.contrastLevel == contrastLevel &&
-        other.useExpressiveOnContainerColors ==
-            useExpressiveOnContainerColors &&
-        other.useLegacyMonochromeSeedBehavior ==
-            useLegacyMonochromeSeedBehavior;
+        other.useExpressiveOnContainerColors == useExpressiveOnContainerColors &&
+        other.useLegacyMonochromeSeedBehavior == useLegacyMonochromeSeedBehavior;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hash(
-        useKeyColors,
-        //
-        keyPrimary,
-        keepPrimary,
-        keepPrimaryContainer,
-        //
-        keySecondary,
-        useSecondary,
-        keepSecondary,
-        keepSecondaryContainer,
-        //
-        keyTertiary,
-        useTertiary,
-        keepTertiary,
-        keepTertiaryContainer,
-        //
-        keyError,
-        useError,
-        keepError,
-        keepErrorContainer,
-        //
-        contrastLevel,
-        useExpressiveOnContainerColors,
-        useLegacyMonochromeSeedBehavior,
-      );
+    useKeyColors,
+    //
+    keyPrimary,
+    keepPrimary,
+    keepPrimaryContainer,
+    //
+    keySecondary,
+    useSecondary,
+    keepSecondary,
+    keepSecondaryContainer,
+    //
+    keyTertiary,
+    useTertiary,
+    keepTertiary,
+    keepTertiaryContainer,
+    //
+    keyError,
+    useError,
+    keepError,
+    keepErrorContainer,
+    //
+    contrastLevel,
+    useExpressiveOnContainerColors,
+    useLegacyMonochromeSeedBehavior,
+  );
 
   /// Flutter debug properties override, includes toString.
   @override
@@ -662,31 +656,25 @@ class FlexKeyColors with Diagnosticable {
     //
     properties.add(ColorProperty('keyPrimary', keyPrimary));
     properties.add(DiagnosticsProperty<bool>('keepPrimary', keepPrimary));
-    properties.add(DiagnosticsProperty<bool>(
-        'keepPrimaryContainer', keepPrimaryContainer));
+    properties.add(DiagnosticsProperty<bool>('keepPrimaryContainer', keepPrimaryContainer));
     //
     properties.add(ColorProperty('keySecondary', keySecondary));
     properties.add(DiagnosticsProperty<bool>('useSecondary', useSecondary));
     properties.add(DiagnosticsProperty<bool>('keepSecondary', keepSecondary));
-    properties.add(DiagnosticsProperty<bool>(
-        'keepSecondaryContainer', keepSecondaryContainer));
+    properties.add(DiagnosticsProperty<bool>('keepSecondaryContainer', keepSecondaryContainer));
     //
     properties.add(ColorProperty('keyTertiary', keyPrimary));
     properties.add(DiagnosticsProperty<bool>('keyTertiary', useTertiary));
     properties.add(DiagnosticsProperty<bool>('keepTertiary', keepTertiary));
-    properties.add(DiagnosticsProperty<bool>(
-        'keepTertiaryContainer', keepTertiaryContainer));
+    properties.add(DiagnosticsProperty<bool>('keepTertiaryContainer', keepTertiaryContainer));
     //
     properties.add(ColorProperty('keyError', keyPrimary));
     properties.add(DiagnosticsProperty<bool>('keyError', useError));
     properties.add(DiagnosticsProperty<bool>('keepError', keepError));
-    properties.add(
-        DiagnosticsProperty<bool>('keepErrorContainer', keepErrorContainer));
+    properties.add(DiagnosticsProperty<bool>('keepErrorContainer', keepErrorContainer));
     //
     properties.add(DiagnosticsProperty<double>('contrastLevel', contrastLevel));
-    properties.add(DiagnosticsProperty<bool>(
-        'useExpressiveOnContainerColors', useExpressiveOnContainerColors));
-    properties.add(DiagnosticsProperty<bool>(
-        'useLegacyMonochromeSeedBehavior', useLegacyMonochromeSeedBehavior));
+    properties.add(DiagnosticsProperty<bool>('useExpressiveOnContainerColors', useExpressiveOnContainerColors));
+    properties.add(DiagnosticsProperty<bool>('useLegacyMonochromeSeedBehavior', useLegacyMonochromeSeedBehavior));
   }
 }

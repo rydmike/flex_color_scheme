@@ -34,10 +34,11 @@ class QueryParamsHandler implements QueryParamsHandlerInterface {
     });
 
     // Create event listener for URL changes
-    _locationChangeListener = ((web.Event event) {
-      final Map<String, String> params = getQueryParameters();
-      _onParamsChanged(params);
-    }).toJS;
+    _locationChangeListener =
+        ((web.Event event) {
+          final Map<String, String> params = getQueryParameters();
+          _onParamsChanged(params);
+        }).toJS;
 
     // Add the event listener
     web.window.addEventListener('locationchange', _locationChangeListener);

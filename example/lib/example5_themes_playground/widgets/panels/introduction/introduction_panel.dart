@@ -13,22 +13,11 @@ class IntroductionPanel extends StatelessWidget {
   const IntroductionPanel(this.controller, {super.key});
   final ThemeController controller;
 
-  static final Uri _fcsDocs = Uri(
-    scheme: 'https',
-    host: 'docs.flexcolorscheme.com',
-  );
+  static final Uri _fcsDocs = Uri(scheme: 'https', host: 'docs.flexcolorscheme.com');
 
-  static final Uri _fcsDocsPlayground = Uri(
-    scheme: 'https',
-    host: 'docs.flexcolorscheme.com',
-    path: 'playground',
-  );
+  static final Uri _fcsDocsPlayground = Uri(scheme: 'https', host: 'docs.flexcolorscheme.com', path: 'playground');
 
-  static final Uri _fcsFlutterIssues = Uri(
-    scheme: 'https',
-    host: 'docs.flexcolorscheme.com',
-    path: 'known_issues',
-  );
+  static final Uri _fcsFlutterIssues = Uri(scheme: 'https', host: 'docs.flexcolorscheme.com', path: 'known_issues');
 
   static final Uri _fcsDocsPlaygroundHistory = Uri(
     scheme: 'https',
@@ -39,8 +28,7 @@ class IntroductionPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
@@ -51,10 +39,10 @@ class IntroductionPanel extends StatelessWidget {
       fontWeight: FontWeight.bold,
     );
 
-    final EdgeInsetsGeometry listTilePadding = theme.useMaterial3
-        ? const EdgeInsetsDirectional.only(
-            start: 16.0, end: 24.0, top: 8, bottom: 8)
-        : const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+    final EdgeInsetsGeometry listTilePadding =
+        theme.useMaterial3
+            ? const EdgeInsetsDirectional.only(start: 16.0, end: 24.0, top: 8, bottom: 8)
+            : const EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 
     return Column(
       children: <Widget>[
@@ -80,27 +68,14 @@ class IntroductionPanel extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               children: <TextSpan>[
+                TextSpan(style: spanTextStyle, text: 'Check out the '),
+                LinkTextSpan(style: linkStyle, uri: _fcsDocs, text: 'FlexColorScheme documentation site'),
+                TextSpan(style: spanTextStyle, text: ' for more information. It also has a section on '),
+                LinkTextSpan(style: linkStyle, uri: _fcsDocsPlayground, text: 'how-to-use'),
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Check out the ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsDocs,
-                  text: 'FlexColorScheme documentation site',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ' for more information. It also has a section on ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsDocsPlayground,
-                  text: 'how-to-use',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ' the Themes Playground, give it a go. It also '
+                  text:
+                      ' the Themes Playground, give it a go. It also '
                       'explains FlexColorScheme with tutorials, examples and '
                       'an API guide. Additionally it also contains general '
                       'Flutter theming guidance and advice.',
@@ -174,13 +149,14 @@ class IntroductionPanel extends StatelessWidget {
           onChanged: controller.setUseFlexColorScheme,
         ),
         SwitchListTile(
-          subtitle: const Text('The component themes are '
-              'ON by default in the Playground, but OFF by default in '
-              'the API. By using them you get pre-styled components that you '
-              'can adjust further to your liking.'),
+          subtitle: const Text(
+            'The component themes are '
+            'ON by default in the Playground, but OFF by default in '
+            'the API. By using them you get pre-styled components that you '
+            'can adjust further to your liking.',
+          ),
           value: controller.useSubThemes && controller.useFlexColorScheme,
-          onChanged:
-              controller.useFlexColorScheme ? controller.setUseSubThemes : null,
+          onChanged: controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
         const ListTile(
           subtitle: Text(
@@ -211,26 +187,29 @@ class IntroductionPanel extends StatelessWidget {
             'What you see in the Themes Playground is what you get.',
           ),
           trailing: FilledButton(
-            onPressed: controller.useFlexColorScheme
-                ? () async {
-                    await showCopySetupCodeDialog(context, controller);
-                  }
-                : null,
+            onPressed:
+                controller.useFlexColorScheme
+                    ? () async {
+                      await showCopySetupCodeDialog(context, controller);
+                    }
+                    : null,
             child: const Text('Code'),
           ),
-          onTap: controller.useFlexColorScheme
-              ? () async {
-                  await showCopySetupCodeDialog(context, controller);
-                }
-              : null,
+          onTap:
+              controller.useFlexColorScheme
+                  ? () async {
+                    await showCopySetupCodeDialog(context, controller);
+                  }
+                  : null,
         ),
         const Divider(),
         SwitchListTile(
           title: const Text('Material-3 Design'),
           subtitle: const Text(
-              'Flutter SDK and FlexColorScheme use Material-3 design '
-              'styled components by default. You can still turn it OFF '
-              'and use Material-2 design, but it is not recommended.'),
+            'Flutter SDK and FlexColorScheme use Material-3 design '
+            'styled components by default. You can still turn it OFF '
+            'and use Material-2 design, but it is not recommended.',
+          ),
           value: controller.useMaterial3,
           onChanged: controller.setUseMaterial3,
         ),
@@ -273,21 +252,15 @@ class IntroductionPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanSmallTextStyle,
-                  text: 'Info about known theming issues in Flutter are '
+                  text:
+                      'Info about known theming issues in Flutter are '
                       'presented in component theme settings in this style. '
                       'You can also read more about Flutter '
                       'theming related issues in the FlexColorScheme docs. '
                       'Important Flutter theming issues are ',
                 ),
-                LinkTextSpan(
-                  style: linkSmallStyle,
-                  uri: _fcsFlutterIssues,
-                  text: 'tracked here',
-                ),
-                TextSpan(
-                  style: spanSmallTextStyle,
-                  text: '.\n',
-                ),
+                LinkTextSpan(style: linkSmallStyle, uri: _fcsFlutterIssues, text: 'tracked here'),
+                TextSpan(style: spanSmallTextStyle, text: '.\n'),
               ],
             ),
           ),
@@ -326,22 +299,16 @@ class IntroductionPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: "Due the the Playground's original intent and purpose "
+                  text:
+                      "Due the the Playground's original intent and purpose "
                       'it has a simple architecture that is not so well suited '
                       'to be developed into a direction that can provide all '
                       'the features users are currently asking for. You can '
                       'read more about the history and also future plans for '
                       'the Playground in the ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsDocsPlaygroundHistory,
-                  text: 'documentation site here',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '.',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsDocsPlaygroundHistory, text: 'documentation site here'),
+                TextSpan(style: spanTextStyle, text: '.'),
               ],
             ),
           ),

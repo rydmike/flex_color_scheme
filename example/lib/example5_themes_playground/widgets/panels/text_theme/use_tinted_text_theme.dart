@@ -7,7 +7,8 @@ class UseTinted3TextTheme extends StatelessWidget {
   const UseTinted3TextTheme({super.key, required this.controller});
   final ThemeController controller;
 
-  static const String _deprecateTint = 'The tinted TextTheme feature '
+  static const String _deprecateTint =
+      'The tinted TextTheme feature '
       'available in previous versions has been deprecated.\n'
       '\n'
       'The feature was originally '
@@ -105,10 +106,7 @@ class UseTinted3TextTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ListTileReveal(
-      title: Text('Where is the tinted TextTheme?'),
-      subtitleReveal: Text(_deprecateTint),
-    );
+    return const ListTileReveal(title: Text('Where is the tinted TextTheme?'), subtitleReveal: Text(_deprecateTint));
 
     // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
     // final bool isLight = Theme.of(context).brightness == Brightness.light;

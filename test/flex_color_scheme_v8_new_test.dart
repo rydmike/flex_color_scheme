@@ -4,902 +4,392 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Test FlexColorScheme V8 features: fixedColorStyle', () {
-    test(
-        'FCSV8:01L GIVEN a M3 FlexColorScheme.light with  '
+    test('FCSV8:01L GIVEN a M3 FlexColorScheme.light with  '
         'fixedColorStyle.computed expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
         fixedColorStyle: FlexFixedColorStyle.computed,
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.primaryFixed,
-        isSameColorAs(const Color(0xFFDDD7EB)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixed,
-        isSameColorAs(const Color(0xFF2B2145)),
-      );
-      expect(
-        theme.colorScheme.primaryFixedDim,
-        isSameColorAs(const Color(0xFFBBB1D8)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixedVariant,
-        isSameColorAs(const Color(0xFF332851), threshold: 0.005),
-      );
+      expect(theme.colorScheme.primaryFixed, isSameColorAs(const Color(0xFFDDD7EB)));
+      expect(theme.colorScheme.onPrimaryFixed, isSameColorAs(const Color(0xFF2B2145)));
+      expect(theme.colorScheme.primaryFixedDim, isSameColorAs(const Color(0xFFBBB1D8)));
+      expect(theme.colorScheme.onPrimaryFixedVariant, isSameColorAs(const Color(0xFF332851), threshold: 0.005));
       //
-      expect(
-        theme.colorScheme.secondaryFixed,
-        isSameColorAs(const Color(0xFFDCDAE1)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixed,
-        isSameColorAs(const Color(0xFF232129)),
-      );
-      expect(
-        theme.colorScheme.secondaryFixedDim,
-        isSameColorAs(const Color(0xFFBCB8C3), threshold: 0.007),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixedVariant,
-        isSameColorAs(const Color(0xFF2C2933)),
-      );
+      expect(theme.colorScheme.secondaryFixed, isSameColorAs(const Color(0xFFDCDAE1)));
+      expect(theme.colorScheme.onSecondaryFixed, isSameColorAs(const Color(0xFF232129)));
+      expect(theme.colorScheme.secondaryFixedDim, isSameColorAs(const Color(0xFFBCB8C3), threshold: 0.007));
+      expect(theme.colorScheme.onSecondaryFixedVariant, isSameColorAs(const Color(0xFF2C2933)));
       //
-      expect(
-        theme.colorScheme.tertiaryFixed,
-        isSameColorAs(const Color(0xFFE4D7DB)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixed,
-        isSameColorAs(const Color(0xFF2E1E23)),
-      );
-      expect(
-        theme.colorScheme.tertiaryFixedDim,
-        isSameColorAs(const Color(0xFFC9B4BB)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixedVariant,
-        isSameColorAs(const Color(0xFF39252C)),
-      );
+      expect(theme.colorScheme.tertiaryFixed, isSameColorAs(const Color(0xFFE4D7DB)));
+      expect(theme.colorScheme.onTertiaryFixed, isSameColorAs(const Color(0xFF2E1E23)));
+      expect(theme.colorScheme.tertiaryFixedDim, isSameColorAs(const Color(0xFFC9B4BB)));
+      expect(theme.colorScheme.onTertiaryFixedVariant, isSameColorAs(const Color(0xFF39252C)));
     });
-    test(
-        'FCSV8:01D GIVEN a M3 FlexColorScheme.dark with  '
+    test('FCSV8:01D GIVEN a M3 FlexColorScheme.dark with  '
         'fixedColorStyle.computed expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
         fixedColorStyle: FlexFixedColorStyle.computed,
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.primaryFixed,
-        isSameColorAs(const Color(0xFFDDD7EB)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixed,
-        isSameColorAs(const Color(0xFF2B2145)),
-      );
-      expect(
-        theme.colorScheme.primaryFixedDim,
-        isSameColorAs(const Color(0xFFBBB1D8)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixedVariant,
-        isSameColorAs(const Color(0xFF332851)),
-      );
+      expect(theme.colorScheme.primaryFixed, isSameColorAs(const Color(0xFFDDD7EB)));
+      expect(theme.colorScheme.onPrimaryFixed, isSameColorAs(const Color(0xFF2B2145)));
+      expect(theme.colorScheme.primaryFixedDim, isSameColorAs(const Color(0xFFBBB1D8)));
+      expect(theme.colorScheme.onPrimaryFixedVariant, isSameColorAs(const Color(0xFF332851)));
       //
-      expect(
-        theme.colorScheme.secondaryFixed,
-        isSameColorAs(const Color(0xFFDCDAE1)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixed,
-        isSameColorAs(const Color(0xFF232129)),
-      );
-      expect(
-        theme.colorScheme.secondaryFixedDim,
-        isSameColorAs(const Color(0xFFBCB8C3), threshold: 0.007),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixedVariant,
-        isSameColorAs(const Color(0xFF2C2933)),
-      );
+      expect(theme.colorScheme.secondaryFixed, isSameColorAs(const Color(0xFFDCDAE1)));
+      expect(theme.colorScheme.onSecondaryFixed, isSameColorAs(const Color(0xFF232129)));
+      expect(theme.colorScheme.secondaryFixedDim, isSameColorAs(const Color(0xFFBCB8C3), threshold: 0.007));
+      expect(theme.colorScheme.onSecondaryFixedVariant, isSameColorAs(const Color(0xFF2C2933)));
       //
-      expect(
-        theme.colorScheme.tertiaryFixed,
-        isSameColorAs(const Color(0xFFE4D7DB)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixed,
-        isSameColorAs(const Color(0xFF2E1E23)),
-      );
-      expect(
-        theme.colorScheme.tertiaryFixedDim,
-        isSameColorAs(const Color(0xFFC9B4BB)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixedVariant,
-        isSameColorAs(const Color(0xFF39252C)),
-      );
+      expect(theme.colorScheme.tertiaryFixed, isSameColorAs(const Color(0xFFE4D7DB)));
+      expect(theme.colorScheme.onTertiaryFixed, isSameColorAs(const Color(0xFF2E1E23)));
+      expect(theme.colorScheme.tertiaryFixedDim, isSameColorAs(const Color(0xFFC9B4BB)));
+      expect(theme.colorScheme.onTertiaryFixedVariant, isSameColorAs(const Color(0xFF39252C)));
     });
-    test(
-        'FCSV8:02L GIVEN a M3 FlexColorScheme.light with  '
+    test('FCSV8:02L GIVEN a M3 FlexColorScheme.light with  '
         'fixedColorStyle.seeded expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
         fixedColorStyle: FlexFixedColorStyle.seeded,
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.primaryFixed,
-        isSameColorAs(const Color(0xFFE9DDFF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixed,
-        isSameColorAs(const Color(0xFF22005D)),
-      );
-      expect(
-        theme.colorScheme.primaryFixedDim,
-        isSameColorAs(const Color(0xFFCFBCFF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixedVariant,
-        isSameColorAs(const Color(0xFF4F378A)),
-      );
+      expect(theme.colorScheme.primaryFixed, isSameColorAs(const Color(0xFFE9DDFF)));
+      expect(theme.colorScheme.onPrimaryFixed, isSameColorAs(const Color(0xFF22005D)));
+      expect(theme.colorScheme.primaryFixedDim, isSameColorAs(const Color(0xFFCFBCFF)));
+      expect(theme.colorScheme.onPrimaryFixedVariant, isSameColorAs(const Color(0xFF4F378A)));
       //
-      expect(
-        theme.colorScheme.secondaryFixed,
-        isSameColorAs(const Color(0xFFE8DEF9)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixed,
-        isSameColorAs(const Color(0xFF1E192B)),
-      );
-      expect(
-        theme.colorScheme.secondaryFixedDim,
-        isSameColorAs(const Color(0xFFCCC2DC)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixedVariant,
-        isSameColorAs(const Color(0xFF4A4358)),
-      );
+      expect(theme.colorScheme.secondaryFixed, isSameColorAs(const Color(0xFFE8DEF9)));
+      expect(theme.colorScheme.onSecondaryFixed, isSameColorAs(const Color(0xFF1E192B)));
+      expect(theme.colorScheme.secondaryFixedDim, isSameColorAs(const Color(0xFFCCC2DC)));
+      expect(theme.colorScheme.onSecondaryFixedVariant, isSameColorAs(const Color(0xFF4A4358)));
       //
-      expect(
-        theme.colorScheme.tertiaryFixed,
-        isSameColorAs(const Color(0xFFFFD9E3)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixed,
-        isSameColorAs(const Color(0xFF31111D)),
-      );
-      expect(
-        theme.colorScheme.tertiaryFixedDim,
-        isSameColorAs(const Color(0xFFEEB8C8)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixedVariant,
-        isSameColorAs(const Color(0xFF633B48)),
-      );
+      expect(theme.colorScheme.tertiaryFixed, isSameColorAs(const Color(0xFFFFD9E3)));
+      expect(theme.colorScheme.onTertiaryFixed, isSameColorAs(const Color(0xFF31111D)));
+      expect(theme.colorScheme.tertiaryFixedDim, isSameColorAs(const Color(0xFFEEB8C8)));
+      expect(theme.colorScheme.onTertiaryFixedVariant, isSameColorAs(const Color(0xFF633B48)));
     });
-    test(
-        'FCSV8:02D GIVEN a M3 FlexColorScheme.dark with  '
+    test('FCSV8:02D GIVEN a M3 FlexColorScheme.dark with  '
         'fixedColorStyle.seeded expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
         fixedColorStyle: FlexFixedColorStyle.seeded,
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.primaryFixed,
-        isSameColorAs(const Color(0xFFE9DDFF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixed,
-        isSameColorAs(const Color(0xFF22005D)),
-      );
-      expect(
-        theme.colorScheme.primaryFixedDim,
-        isSameColorAs(const Color(0xFFCFBCFF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixedVariant,
-        isSameColorAs(const Color(0xFF4F378A)),
-      );
+      expect(theme.colorScheme.primaryFixed, isSameColorAs(const Color(0xFFE9DDFF)));
+      expect(theme.colorScheme.onPrimaryFixed, isSameColorAs(const Color(0xFF22005D)));
+      expect(theme.colorScheme.primaryFixedDim, isSameColorAs(const Color(0xFFCFBCFF)));
+      expect(theme.colorScheme.onPrimaryFixedVariant, isSameColorAs(const Color(0xFF4F378A)));
       //
-      expect(
-        theme.colorScheme.secondaryFixed,
-        isSameColorAs(const Color(0xFFE8DEF9)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixed,
-        isSameColorAs(const Color(0xFF1E192B)),
-      );
-      expect(
-        theme.colorScheme.secondaryFixedDim,
-        isSameColorAs(const Color(0xFFCCC2DC)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixedVariant,
-        isSameColorAs(const Color(0xFF4A4358)),
-      );
+      expect(theme.colorScheme.secondaryFixed, isSameColorAs(const Color(0xFFE8DEF9)));
+      expect(theme.colorScheme.onSecondaryFixed, isSameColorAs(const Color(0xFF1E192B)));
+      expect(theme.colorScheme.secondaryFixedDim, isSameColorAs(const Color(0xFFCCC2DC)));
+      expect(theme.colorScheme.onSecondaryFixedVariant, isSameColorAs(const Color(0xFF4A4358)));
       //
-      expect(
-        theme.colorScheme.tertiaryFixed,
-        isSameColorAs(const Color(0xFFFFD9E3)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixed,
-        isSameColorAs(const Color(0xFF31111D)),
-      );
-      expect(
-        theme.colorScheme.tertiaryFixedDim,
-        isSameColorAs(const Color(0xFFEEB8C8)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixedVariant,
-        isSameColorAs(const Color(0xFF633B48)),
-      );
+      expect(theme.colorScheme.tertiaryFixed, isSameColorAs(const Color(0xFFFFD9E3)));
+      expect(theme.colorScheme.onTertiaryFixed, isSameColorAs(const Color(0xFF31111D)));
+      expect(theme.colorScheme.tertiaryFixedDim, isSameColorAs(const Color(0xFFEEB8C8)));
+      expect(theme.colorScheme.onTertiaryFixedVariant, isSameColorAs(const Color(0xFF633B48)));
     });
-    test(
-        'FCSV8:03L GIVEN a M3 FlexColorScheme.light with  '
+    test('FCSV8:03L GIVEN a M3 FlexColorScheme.light with  '
         'fixedColorStyle.seededHighContrast expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
         fixedColorStyle: FlexFixedColorStyle.seededHighContrast,
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.primaryFixed,
-        isSameColorAs(const Color(0xFFEEE4FF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixed,
-        isSameColorAs(const Color(0xFF190048)),
-      );
-      expect(
-        theme.colorScheme.primaryFixedDim,
-        isSameColorAs(const Color(0xFFD9CAFF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixedVariant,
-        isSameColorAs(const Color(0xFF260661)),
-      );
+      expect(theme.colorScheme.primaryFixed, isSameColorAs(const Color(0xFFEEE4FF)));
+      expect(theme.colorScheme.onPrimaryFixed, isSameColorAs(const Color(0xFF190048)));
+      expect(theme.colorScheme.primaryFixedDim, isSameColorAs(const Color(0xFFD9CAFF)));
+      expect(theme.colorScheme.onPrimaryFixedVariant, isSameColorAs(const Color(0xFF260661)));
       //
-      expect(
-        theme.colorScheme.secondaryFixed,
-        isSameColorAs(const Color(0xFFEEE4FE)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixed,
-        isSameColorAs(const Color(0xFF161023)),
-      );
-      expect(
-        theme.colorScheme.secondaryFixedDim,
-        isSameColorAs(const Color(0xFFD7CDE7)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixedVariant,
-        isSameColorAs(const Color(0xFF221D2F)),
-      );
+      expect(theme.colorScheme.secondaryFixed, isSameColorAs(const Color(0xFFEEE4FE)));
+      expect(theme.colorScheme.onSecondaryFixed, isSameColorAs(const Color(0xFF161023)));
+      expect(theme.colorScheme.secondaryFixedDim, isSameColorAs(const Color(0xFFD7CDE7)));
+      expect(theme.colorScheme.onSecondaryFixedVariant, isSameColorAs(const Color(0xFF221D2F)));
       //
-      expect(
-        theme.colorScheme.tertiaryFixed,
-        isSameColorAs(const Color(0xFFFFE1E8)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixed,
-        isSameColorAs(const Color(0xFF270915)),
-      );
-      expect(
-        theme.colorScheme.tertiaryFixedDim,
-        isSameColorAs(const Color(0xFFFAC3D3)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixedVariant,
-        isSameColorAs(const Color(0xFF361521)),
-      );
+      expect(theme.colorScheme.tertiaryFixed, isSameColorAs(const Color(0xFFFFE1E8)));
+      expect(theme.colorScheme.onTertiaryFixed, isSameColorAs(const Color(0xFF270915)));
+      expect(theme.colorScheme.tertiaryFixedDim, isSameColorAs(const Color(0xFFFAC3D3)));
+      expect(theme.colorScheme.onTertiaryFixedVariant, isSameColorAs(const Color(0xFF361521)));
     });
-    test(
-        'FCSV8:03D GIVEN a M3 FlexColorScheme.dark with  '
+    test('FCSV8:03D GIVEN a M3 FlexColorScheme.dark with  '
         'fixedColorStyle.seededHighContrast expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
         fixedColorStyle: FlexFixedColorStyle.seededHighContrast,
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.primaryFixed,
-        isSameColorAs(const Color(0xFFEEE4FF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixed,
-        isSameColorAs(const Color(0xFF190048)),
-      );
-      expect(
-        theme.colorScheme.primaryFixedDim,
-        isSameColorAs(const Color(0xFFD9CAFF)),
-      );
-      expect(
-        theme.colorScheme.onPrimaryFixedVariant,
-        isSameColorAs(const Color(0xFF260661)),
-      );
+      expect(theme.colorScheme.primaryFixed, isSameColorAs(const Color(0xFFEEE4FF)));
+      expect(theme.colorScheme.onPrimaryFixed, isSameColorAs(const Color(0xFF190048)));
+      expect(theme.colorScheme.primaryFixedDim, isSameColorAs(const Color(0xFFD9CAFF)));
+      expect(theme.colorScheme.onPrimaryFixedVariant, isSameColorAs(const Color(0xFF260661)));
       //
-      expect(
-        theme.colorScheme.secondaryFixed,
-        isSameColorAs(const Color(0xFFEEE4FE)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixed,
-        isSameColorAs(const Color(0xFF161023)),
-      );
-      expect(
-        theme.colorScheme.secondaryFixedDim,
-        isSameColorAs(const Color(0xFFD7CDE7)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryFixedVariant,
-        isSameColorAs(const Color(0xFF221D2F)),
-      );
+      expect(theme.colorScheme.secondaryFixed, isSameColorAs(const Color(0xFFEEE4FE)));
+      expect(theme.colorScheme.onSecondaryFixed, isSameColorAs(const Color(0xFF161023)));
+      expect(theme.colorScheme.secondaryFixedDim, isSameColorAs(const Color(0xFFD7CDE7)));
+      expect(theme.colorScheme.onSecondaryFixedVariant, isSameColorAs(const Color(0xFF221D2F)));
       //
-      expect(
-        theme.colorScheme.tertiaryFixed,
-        isSameColorAs(const Color(0xFFFFE1E8)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixed,
-        isSameColorAs(const Color(0xFF270915)),
-      );
-      expect(
-        theme.colorScheme.tertiaryFixedDim,
-        isSameColorAs(const Color(0xFFFAC3D3)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryFixedVariant,
-        isSameColorAs(const Color(0xFF361521)),
-      );
+      expect(theme.colorScheme.tertiaryFixed, isSameColorAs(const Color(0xFFFFE1E8)));
+      expect(theme.colorScheme.onTertiaryFixed, isSameColorAs(const Color(0xFF270915)));
+      expect(theme.colorScheme.tertiaryFixedDim, isSameColorAs(const Color(0xFFFAC3D3)));
+      expect(theme.colorScheme.onTertiaryFixedVariant, isSameColorAs(const Color(0xFF361521)));
     });
   });
   group('Test FlexColorScheme V8 features: FlexScaffoldBaseColor', () {
-    test(
-        'FCSV8:10L GIVEN a FlexScaffoldBaseColor using a ColorScheme light '
+    test('FCSV8:10L GIVEN a FlexScaffoldBaseColor using a ColorScheme light '
         'or defaults with with Brightness.light expect given styles.', () {
-      final ColorScheme scheme = FlexColorScheme.dark(
-        scheme: FlexScheme.sepia,
-      ).toTheme.colorScheme;
+      final ColorScheme scheme = FlexColorScheme.dark(scheme: FlexScheme.sepia).toTheme.colorScheme;
       // Test FlexScaffoldBaseColor.lowestBase
+      expect(FlexScaffoldBaseColor.lowestBase.color(null), isSameColorAs(Colors.white));
       expect(
-        FlexScaffoldBaseColor.lowestBase.color(null),
+        FlexScaffoldBaseColor.lowestBase.color(null, brightness: Brightness.light, useMaterial3: true),
         isSameColorAs(Colors.white),
       );
       expect(
-        FlexScaffoldBaseColor.lowestBase.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.lowestBase.color(null, brightness: Brightness.light, useMaterial3: false),
         isSameColorAs(Colors.white),
       );
-      expect(
-        FlexScaffoldBaseColor.lowestBase.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
-        isSameColorAs(Colors.white),
-      );
-      expect(
-        FlexScaffoldBaseColor.lowestBase.getName(true),
-        equals('Lowest base (White)'),
-      );
+      expect(FlexScaffoldBaseColor.lowestBase.getName(true), equals('Lowest base (White)'));
       // Test FlexScaffoldBaseColor.surface
+      expect(FlexScaffoldBaseColor.surface.color(null), isSameColorAs(FlexColor.lightFlexSurface));
       expect(
-        FlexScaffoldBaseColor.surface.color(null),
+        FlexScaffoldBaseColor.surface.color(null, brightness: Brightness.light, useMaterial3: true),
         isSameColorAs(FlexColor.lightFlexSurface),
       );
       expect(
-        FlexScaffoldBaseColor.surface.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
-        isSameColorAs(FlexColor.lightFlexSurface),
-      );
-      expect(
-        FlexScaffoldBaseColor.surface.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surface.color(null, brightness: Brightness.light, useMaterial3: false),
         isSameColorAs(FlexColor.materialLightScaffoldBackground),
       );
-      expect(
-        FlexScaffoldBaseColor.surface.color(scheme),
-        isSameColorAs(scheme.surface),
-      );
-      expect(
-        FlexScaffoldBaseColor.surface.getName(true),
-        equals('Surface'),
-      );
+      expect(FlexScaffoldBaseColor.surface.color(scheme), isSameColorAs(scheme.surface));
+      expect(FlexScaffoldBaseColor.surface.getName(true), equals('Surface'));
       // Test FlexScaffoldBaseColor.surfaceDim
+      expect(FlexScaffoldBaseColor.surfaceDim.color(null), isSameColorAs(FlexColor.lightFlexSurfaceDim));
       expect(
-        FlexScaffoldBaseColor.surfaceDim.color(null),
+        FlexScaffoldBaseColor.surfaceDim.color(null, brightness: Brightness.light, useMaterial3: true),
         isSameColorAs(FlexColor.lightFlexSurfaceDim),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceDim.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceDim.color(null, brightness: Brightness.light, useMaterial3: false),
         isSameColorAs(FlexColor.lightFlexSurfaceDim),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceDim.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
-        isSameColorAs(FlexColor.lightFlexSurfaceDim),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceDim.color(scheme),
-        isSameColorAs(scheme.surfaceDim),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceDim.getName(true),
-        equals('Surface dim'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceDim.color(scheme), isSameColorAs(scheme.surfaceDim));
+      expect(FlexScaffoldBaseColor.surfaceDim.getName(true), equals('Surface dim'));
       // Test FlexScaffoldBaseColor.surfaceBright
+      expect(FlexScaffoldBaseColor.surfaceBright.color(null), isSameColorAs(FlexColor.lightFlexSurfaceBright));
       expect(
-        FlexScaffoldBaseColor.surfaceBright.color(null),
-        isSameColorAs(FlexColor.lightFlexSurfaceBright),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceBright.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceBright.color(null, brightness: Brightness.light, useMaterial3: true),
         equals(FlexColor.lightFlexSurfaceBright),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceBright.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceBright.color(null, brightness: Brightness.light, useMaterial3: false),
         equals(FlexColor.lightFlexSurfaceBright),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceBright.color(scheme),
-        equals(scheme.surfaceBright),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceBright.getName(true),
-        equals('Surface bright'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceBright.color(scheme), equals(scheme.surfaceBright));
+      expect(FlexScaffoldBaseColor.surfaceBright.getName(true), equals('Surface bright'));
       // Test FlexScaffoldBaseColor.surfaceContainerLowest
       expect(
         FlexScaffoldBaseColor.surfaceContainerLowest.color(null),
         equals(FlexColor.lightFlexSurfaceContainerLowest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerLowest.color(null, brightness: Brightness.light, useMaterial3: true),
         equals(FlexColor.lightFlexSurfaceContainerLowest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerLowest.color(null, brightness: Brightness.light, useMaterial3: false),
         equals(FlexColor.lightFlexSurfaceContainerLowest),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.color(scheme),
-        equals(scheme.surfaceContainerLowest),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.getName(true),
-        equals('Surface container lowest'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerLowest.color(scheme), equals(scheme.surfaceContainerLowest));
+      expect(FlexScaffoldBaseColor.surfaceContainerLowest.getName(true), equals('Surface container lowest'));
       // Test FlexScaffoldBaseColor.surfaceContainerLow
+      expect(FlexScaffoldBaseColor.surfaceContainerLow.color(null), equals(FlexColor.lightFlexSurfaceContainerLow));
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.color(null),
+        FlexScaffoldBaseColor.surfaceContainerLow.color(null, brightness: Brightness.light, useMaterial3: true),
         equals(FlexColor.lightFlexSurfaceContainerLow),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerLow.color(null, brightness: Brightness.light, useMaterial3: false),
         equals(FlexColor.lightFlexSurfaceContainerLow),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
-        equals(FlexColor.lightFlexSurfaceContainerLow),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.color(scheme),
-        equals(scheme.surfaceContainerLow),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.getName(true),
-        equals('Surface container low'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerLow.color(scheme), equals(scheme.surfaceContainerLow));
+      expect(FlexScaffoldBaseColor.surfaceContainerLow.getName(true), equals('Surface container low'));
       // Test FlexScaffoldBaseColor.surfaceContainer
+      expect(FlexScaffoldBaseColor.surfaceContainer.color(null), equals(FlexColor.lightFlexSurfaceContainer));
       expect(
-        FlexScaffoldBaseColor.surfaceContainer.color(null),
+        FlexScaffoldBaseColor.surfaceContainer.color(null, brightness: Brightness.light, useMaterial3: true),
         equals(FlexColor.lightFlexSurfaceContainer),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainer.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceContainer.color(null, brightness: Brightness.light, useMaterial3: false),
         equals(FlexColor.lightFlexSurfaceContainer),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainer.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
-        equals(FlexColor.lightFlexSurfaceContainer),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainer.color(scheme),
-        equals(scheme.surfaceContainer),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainer.getName(true),
-        equals('Surface container'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainer.color(scheme), equals(scheme.surfaceContainer));
+      expect(FlexScaffoldBaseColor.surfaceContainer.getName(true), equals('Surface container'));
       // Test FlexScaffoldBaseColor.surfaceContainerHigh
+      expect(FlexScaffoldBaseColor.surfaceContainerHigh.color(null), equals(FlexColor.lightFlexSurfaceContainerHigh));
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.color(null),
+        FlexScaffoldBaseColor.surfaceContainerHigh.color(null, brightness: Brightness.light, useMaterial3: true),
         equals(FlexColor.lightFlexSurfaceContainerHigh),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerHigh.color(null, brightness: Brightness.light, useMaterial3: false),
         equals(FlexColor.lightFlexSurfaceContainerHigh),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
-        equals(FlexColor.lightFlexSurfaceContainerHigh),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.color(scheme),
-        equals(scheme.surfaceContainerHigh),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.getName(true),
-        equals('Surface container high'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerHigh.color(scheme), equals(scheme.surfaceContainerHigh));
+      expect(FlexScaffoldBaseColor.surfaceContainerHigh.getName(true), equals('Surface container high'));
       // Test FlexScaffoldBaseColor.surfaceContainerHighest
       expect(
         FlexScaffoldBaseColor.surfaceContainerHighest.color(null),
         equals(FlexColor.lightFlexSurfaceContainerHighest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerHighest.color(null, brightness: Brightness.light, useMaterial3: true),
         equals(FlexColor.lightFlexSurfaceContainerHighest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.color(
-          null,
-          brightness: Brightness.light,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerHighest.color(null, brightness: Brightness.light, useMaterial3: false),
         equals(FlexColor.lightFlexSurfaceContainerHighest),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.color(scheme),
-        equals(scheme.surfaceContainerHighest),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.getName(true),
-        equals('Surface container highest'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerHighest.color(scheme), equals(scheme.surfaceContainerHighest));
+      expect(FlexScaffoldBaseColor.surfaceContainerHighest.getName(true), equals('Surface container highest'));
     });
-    test(
-        'FCSV8:10D GIVEN a FlexScaffoldBaseColor using a ColorScheme dark '
+    test('FCSV8:10D GIVEN a FlexScaffoldBaseColor using a ColorScheme dark '
         'or defaults with with Brightness.dark expect given styles.', () {
-      final ColorScheme scheme = FlexColorScheme.dark(
-        scheme: FlexScheme.sepia,
-      ).toTheme.colorScheme;
+      final ColorScheme scheme = FlexColorScheme.dark(scheme: FlexScheme.sepia).toTheme.colorScheme;
       // Test FlexScaffoldBaseColor.lowestBase
+      expect(FlexScaffoldBaseColor.lowestBase.color(null, brightness: Brightness.dark), equals(Colors.black));
       expect(
-        FlexScaffoldBaseColor.lowestBase
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.lowestBase.color(null, brightness: Brightness.dark, useMaterial3: true),
         equals(Colors.black),
       );
       expect(
-        FlexScaffoldBaseColor.lowestBase.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.lowestBase.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(Colors.black),
       );
-      expect(
-        FlexScaffoldBaseColor.lowestBase.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
-        equals(Colors.black),
-      );
-      expect(
-        FlexScaffoldBaseColor.lowestBase.getName(true),
-        equals('Lowest base (White)'),
-      );
+      expect(FlexScaffoldBaseColor.lowestBase.getName(true), equals('Lowest base (White)'));
       // Test FlexScaffoldBaseColor.surface
+      expect(FlexScaffoldBaseColor.surface.color(null, brightness: Brightness.dark), equals(FlexColor.darkFlexSurface));
       expect(
-        FlexScaffoldBaseColor.surface.color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surface.color(null, brightness: Brightness.dark, useMaterial3: true),
         equals(FlexColor.darkFlexSurface),
       );
       expect(
-        FlexScaffoldBaseColor.surface.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: true,
-        ),
-        equals(FlexColor.darkFlexSurface),
-      );
-      expect(
-        FlexScaffoldBaseColor.surface.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surface.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.materialDarkScaffoldBackground),
       );
-      expect(
-        FlexScaffoldBaseColor.surface.color(scheme),
-        equals(scheme.surface),
-      );
-      expect(
-        FlexScaffoldBaseColor.surface.getName(true),
-        equals('Surface'),
-      );
+      expect(FlexScaffoldBaseColor.surface.color(scheme), equals(scheme.surface));
+      expect(FlexScaffoldBaseColor.surface.getName(true), equals('Surface'));
       // Test FlexScaffoldBaseColor.surfaceDim
       expect(
-        FlexScaffoldBaseColor.surfaceDim
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceDim.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceDim),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceDim.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: true,
-        ),
+        FlexScaffoldBaseColor.surfaceDim.color(null, brightness: Brightness.dark, useMaterial3: true),
         equals(FlexColor.darkFlexSurfaceDim),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceDim.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceDim.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceDim),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceDim.color(scheme),
-        equals(scheme.surfaceDim),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceDim.getName(false),
-        equals('Surface dim'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceDim.color(scheme), equals(scheme.surfaceDim));
+      expect(FlexScaffoldBaseColor.surfaceDim.getName(false), equals('Surface dim'));
       // Test FlexScaffoldBaseColor.surfaceBright
       expect(
-        FlexScaffoldBaseColor.surfaceBright
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceBright.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceBright),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceBright.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceBright.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceBright),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceBright.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceBright.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceBright),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceBright.color(scheme),
-        equals(scheme.surfaceBright),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceBright.getName(false),
-        equals('Surface bright'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceBright.color(scheme), equals(scheme.surfaceBright));
+      expect(FlexScaffoldBaseColor.surfaceBright.getName(false), equals('Surface bright'));
       // Test FlexScaffoldBaseColor.surfaceContainerLowest
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerLowest.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerLowest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerLowest.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerLowest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerLowest.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerLowest),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.color(scheme),
-        equals(scheme.surfaceContainerLowest),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest.getName(false),
-        equals('Surface container lowest'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerLowest.color(scheme), equals(scheme.surfaceContainerLowest));
+      expect(FlexScaffoldBaseColor.surfaceContainerLowest.getName(false), equals('Surface container lowest'));
       // Test FlexScaffoldBaseColor.surfaceContainerLow
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLow
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerLow.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerLow),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerLow.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerLow),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerLow.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerLow),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.color(scheme),
-        equals(scheme.surfaceContainerLow),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerLow.getName(false),
-        equals('Surface container low'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerLow.color(scheme), equals(scheme.surfaceContainerLow));
+      expect(FlexScaffoldBaseColor.surfaceContainerLow.getName(false), equals('Surface container low'));
       // Test FlexScaffoldBaseColor.surfaceContainer
       expect(
-        FlexScaffoldBaseColor.surfaceContainer
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainer.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainer),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainer.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainer.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainer),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainer.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainer.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainer),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainer.color(scheme),
-        equals(scheme.surfaceContainer),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainer.getName(false),
-        equals('Surface container'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainer.color(scheme), equals(scheme.surfaceContainer));
+      expect(FlexScaffoldBaseColor.surfaceContainer.getName(false), equals('Surface container'));
       // Test FlexScaffoldBaseColor.surfaceContainerHigh
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerHigh.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerHigh),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerHigh.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerHigh),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerHigh.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerHigh),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.color(scheme),
-        equals(scheme.surfaceContainerHigh),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh.getName(false),
-        equals('Surface container high'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerHigh.color(scheme), equals(scheme.surfaceContainerHigh));
+      expect(FlexScaffoldBaseColor.surfaceContainerHigh.getName(false), equals('Surface container high'));
       // Test FlexScaffoldBaseColor.surfaceContainerHighest
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerHighest.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerHighest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerHighest.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerHighest),
       );
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.color(
-          null,
-          brightness: Brightness.dark,
-          useMaterial3: false,
-        ),
+        FlexScaffoldBaseColor.surfaceContainerHighest.color(null, brightness: Brightness.dark, useMaterial3: false),
         equals(FlexColor.darkFlexSurfaceContainerHighest),
       );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.color(scheme),
-        equals(scheme.surfaceContainerHighest),
-      );
-      expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest.getName(false),
-        equals('Surface container highest'),
-      );
+      expect(FlexScaffoldBaseColor.surfaceContainerHighest.color(scheme), equals(scheme.surfaceContainerHighest));
+      expect(FlexScaffoldBaseColor.surfaceContainerHighest.getName(false), equals('Surface container highest'));
     });
   });
   group('Test FlexColorScheme V8 features: Error seed and scaffold color', () {
-    test(
-        'FCSV8:20L GIVEN a M3 FlexColorScheme.light sepia theme with custom '
+    test('FCSV8:20L GIVEN a M3 FlexColorScheme.light sepia theme with custom '
         'error colors and keeping them expect given styles.', () {
       const Color error = Color(0xFFB73E11);
       const Color errorContainer = Color(0xFFDFA392);
@@ -932,66 +422,26 @@ void main() {
         ),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.error,
-        isSameColorAs(error),
-      );
-      expect(
-        theme.colorScheme.errorContainer,
-        isSameColorAs(errorContainer),
-      );
-      expect(
-        theme.colorScheme.onPrimaryContainer,
-        isSameColorAs(const Color(0xFF554500)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryContainer,
-        isSameColorAs(const Color(0xFF54442A)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryContainer,
-        isSameColorAs(const Color(0xFF594319)),
-      );
-      expect(
-        theme.scaffoldBackgroundColor,
-        isSameColorAs(theme.colorScheme.surfaceDim),
-      );
+      expect(theme.colorScheme.error, isSameColorAs(error));
+      expect(theme.colorScheme.errorContainer, isSameColorAs(errorContainer));
+      expect(theme.colorScheme.onPrimaryContainer, isSameColorAs(const Color(0xFF554500)));
+      expect(theme.colorScheme.onSecondaryContainer, isSameColorAs(const Color(0xFF54442A)));
+      expect(theme.colorScheme.onTertiaryContainer, isSameColorAs(const Color(0xFF594319)));
+      expect(theme.scaffoldBackgroundColor, isSameColorAs(theme.colorScheme.surfaceDim));
       // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
       // expect(
       //   theme.dialogBackgroundColor,
       //   isSameColorAs(theme.colorScheme.surfaceContainerHigh),
       // );
-      expect(
-        theme.disabledColor,
-        isSameColorAs(const Color(0x612C2505)),
-      );
-      expect(
-        theme.hoverColor,
-        isSameColorAs(const Color(0x114E4009)),
-      );
-      expect(
-        theme.focusColor,
-        isSameColorAs(const Color(0x1C4E4009)),
-      );
-      expect(
-        theme.highlightColor,
-        isSameColorAs(const Color(0x0F483C08)),
-      );
-      expect(
-        theme.splashColor,
-        isSameColorAs(const Color(0x10483C08)),
-      );
-      expect(
-        theme.appBarTheme.actionsIconTheme!.color,
-        isSameColorAs(theme.colorScheme.tertiary),
-      );
-      expect(
-        theme.appBarTheme.iconTheme!.color,
-        isSameColorAs(theme.colorScheme.tertiaryContainer),
-      );
+      expect(theme.disabledColor, isSameColorAs(const Color(0x612C2505)));
+      expect(theme.hoverColor, isSameColorAs(const Color(0x114E4009)));
+      expect(theme.focusColor, isSameColorAs(const Color(0x1C4E4009)));
+      expect(theme.highlightColor, isSameColorAs(const Color(0x0F483C08)));
+      expect(theme.splashColor, isSameColorAs(const Color(0x10483C08)));
+      expect(theme.appBarTheme.actionsIconTheme!.color, isSameColorAs(theme.colorScheme.tertiary));
+      expect(theme.appBarTheme.iconTheme!.color, isSameColorAs(theme.colorScheme.tertiaryContainer));
     });
-    test(
-        'FCSV8:20D GIVEN a M3 FlexColorScheme.dark sepia theme with custom '
+    test('FCSV8:20D GIVEN a M3 FlexColorScheme.dark sepia theme with custom '
         'error colors and keeping them expect given styles.', () {
       const Color error = Color(0xFFDFA392);
       const Color errorContainer = Color(0xFFB73E11);
@@ -1024,66 +474,26 @@ void main() {
         ),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.error,
-        isSameColorAs(error),
-      );
-      expect(
-        theme.colorScheme.errorContainer,
-        isSameColorAs(errorContainer),
-      );
-      expect(
-        theme.colorScheme.onPrimaryContainer,
-        isSameColorAs(const Color(0xFFFCE186)),
-      );
-      expect(
-        theme.colorScheme.onSecondaryContainer,
-        isSameColorAs(const Color(0xFFF8DFBB)),
-      );
-      expect(
-        theme.colorScheme.onTertiaryContainer,
-        isSameColorAs(const Color(0xFFFFDEA8)),
-      );
-      expect(
-        theme.scaffoldBackgroundColor,
-        isSameColorAs(theme.colorScheme.surfaceBright),
-      );
+      expect(theme.colorScheme.error, isSameColorAs(error));
+      expect(theme.colorScheme.errorContainer, isSameColorAs(errorContainer));
+      expect(theme.colorScheme.onPrimaryContainer, isSameColorAs(const Color(0xFFFCE186)));
+      expect(theme.colorScheme.onSecondaryContainer, isSameColorAs(const Color(0xFFF8DFBB)));
+      expect(theme.colorScheme.onTertiaryContainer, isSameColorAs(const Color(0xFFFFDEA8)));
+      expect(theme.scaffoldBackgroundColor, isSameColorAs(theme.colorScheme.surfaceBright));
       // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
       // expect(
       //   theme.dialogBackgroundColor,
       //   isSameColorAs(theme.colorScheme.surfaceContainerHigh),
       // );
-      expect(
-        theme.disabledColor,
-        isSameColorAs(const Color(0x61F1E7C5)),
-      );
-      expect(
-        theme.hoverColor,
-        isSameColorAs(const Color(0x11E7D699)),
-      );
-      expect(
-        theme.focusColor,
-        isSameColorAs(const Color(0x1CE7D699)),
-      );
-      expect(
-        theme.highlightColor,
-        isSameColorAs(const Color(0x0FE9D9A1)),
-      );
-      expect(
-        theme.splashColor,
-        isSameColorAs(const Color(0x10E9D9A1)),
-      );
-      expect(
-        theme.appBarTheme.actionsIconTheme!.color,
-        isSameColorAs(theme.colorScheme.primary),
-      );
-      expect(
-        theme.appBarTheme.iconTheme!.color,
-        isSameColorAs(theme.colorScheme.secondary),
-      );
+      expect(theme.disabledColor, isSameColorAs(const Color(0x61F1E7C5)));
+      expect(theme.hoverColor, isSameColorAs(const Color(0x11E7D699)));
+      expect(theme.focusColor, isSameColorAs(const Color(0x1CE7D699)));
+      expect(theme.highlightColor, isSameColorAs(const Color(0x0FE9D9A1)));
+      expect(theme.splashColor, isSameColorAs(const Color(0x10E9D9A1)));
+      expect(theme.appBarTheme.actionsIconTheme!.color, isSameColorAs(theme.colorScheme.primary));
+      expect(theme.appBarTheme.iconTheme!.color, isSameColorAs(theme.colorScheme.secondary));
     });
-    test(
-        'FCSV8:21L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
+    test('FCSV8:21L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
         'expect given styles.', () {
       const Color tertiary = Color(0xFF565656);
       final FlexColorScheme fcs = FlexColorScheme.light(
@@ -1110,22 +520,15 @@ void main() {
         ),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.tertiary,
-        equals(const Color(0xFF39656C)),
-      );
-      expect(
-        theme.scaffoldBackgroundColor,
-        equals(Colors.white),
-      );
+      expect(theme.colorScheme.tertiary, equals(const Color(0xFF39656C)));
+      expect(theme.scaffoldBackgroundColor, equals(Colors.white));
       // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
       // expect(
       //   theme.dialogBackgroundColor,
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:21D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
+    test('FCSV8:21D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
         'expect given styles.', () {
       const Color tertiary = Color(0xFF565656);
       final FlexColorScheme fcs = FlexColorScheme.dark(
@@ -1152,22 +555,15 @@ void main() {
         ),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.tertiary,
-        equals(const Color(0xFFA1CED6)),
-      );
-      expect(
-        theme.scaffoldBackgroundColor,
-        equals(theme.colorScheme.surfaceContainerLow),
-      );
+      expect(theme.colorScheme.tertiary, equals(const Color(0xFFA1CED6)));
+      expect(theme.scaffoldBackgroundColor, equals(theme.colorScheme.surfaceContainerLow));
       // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
       // expect(
       //   theme.dialogBackgroundColor,
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:22L GIVEN a M2 FlexColorScheme.light custom colors theme with  '
+    test('FCSV8:22L GIVEN a M2 FlexColorScheme.light custom colors theme with  '
         'and keeping expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         useMaterial3: false,
@@ -1188,25 +584,17 @@ void main() {
           useM2StyleDividerInM3: true,
           inputDecoratorIsFilled: true,
         ),
-        keyColors: const FlexKeyColors(
-          useSecondary: true,
-          useTertiary: true,
-          useError: true,
-        ),
+        keyColors: const FlexKeyColors(useSecondary: true, useTertiary: true, useError: true),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.scaffoldBackgroundColor,
-        equals(theme.colorScheme.surface),
-      );
+      expect(theme.scaffoldBackgroundColor, equals(theme.colorScheme.surface));
       // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
       // expect(
       //   theme.dialogBackgroundColor,
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:22D GIVEN a M2 FlexColorScheme.dark custom colors theme with  '
+    test('FCSV8:22D GIVEN a M2 FlexColorScheme.dark custom colors theme with  '
         'and keeping expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         useMaterial3: false,
@@ -1227,29 +615,18 @@ void main() {
           useM2StyleDividerInM3: true,
           inputDecoratorIsFilled: true,
         ),
-        keyColors: const FlexKeyColors(
-          useSecondary: true,
-          useTertiary: true,
-          useError: true,
-        ),
+        keyColors: const FlexKeyColors(useSecondary: true, useTertiary: true, useError: true),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.colorScheme.primary,
-        equals(const Color(0xffbac3ff)),
-      );
-      expect(
-        theme.scaffoldBackgroundColor,
-        equals(theme.colorScheme.surface),
-      );
+      expect(theme.colorScheme.primary, equals(const Color(0xffbac3ff)));
+      expect(theme.scaffoldBackgroundColor, equals(theme.colorScheme.surface));
       // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
       // expect(
       //   theme.dialogBackgroundColor,
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:23L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
+    test('FCSV8:23L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
         'expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         useMaterial3: false,
@@ -1266,24 +643,14 @@ void main() {
         keyColors: const FlexKeyColors(),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.appBarTheme.foregroundColor,
-        equals(theme.colorScheme.tertiary),
-      );
-      expect(
-        theme.tabBarTheme.unselectedLabelColor,
-        equals(const Color(0xb2ffffff)),
-      );
+      expect(theme.appBarTheme.foregroundColor, equals(theme.colorScheme.tertiary));
+      expect(theme.tabBarTheme.unselectedLabelColor, equals(const Color(0xb2ffffff)));
       final OutlineInputBorder border =
-          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
-              .resolve(<WidgetState>{}) as OutlineInputBorder;
-      expect(
-        border.borderRadius.bottomLeft,
-        equals(const Radius.circular(15.0)),
-      );
+          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!.resolve(<WidgetState>{})
+              as OutlineInputBorder;
+      expect(border.borderRadius.bottomLeft, equals(const Radius.circular(15.0)));
     });
-    test(
-        'FCSV8:23D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
+    test('FCSV8:23D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
         'expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         useMaterial3: false,
@@ -1300,24 +667,14 @@ void main() {
         keyColors: const FlexKeyColors(),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.appBarTheme.foregroundColor,
-        equals(theme.colorScheme.tertiary),
-      );
-      expect(
-        theme.tabBarTheme.unselectedLabelColor,
-        equals(const Color(0xb2ffffff)),
-      );
+      expect(theme.appBarTheme.foregroundColor, equals(theme.colorScheme.tertiary));
+      expect(theme.tabBarTheme.unselectedLabelColor, equals(const Color(0xb2ffffff)));
       final OutlineInputBorder border =
-          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
-              .resolve(<WidgetState>{}) as OutlineInputBorder;
-      expect(
-        border.borderRadius.bottomLeft,
-        equals(const Radius.circular(15.0)),
-      );
+          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!.resolve(<WidgetState>{})
+              as OutlineInputBorder;
+      expect(border.borderRadius.bottomLeft, equals(const Radius.circular(15.0)));
     });
-    test(
-        'FCSV8:24L GIVEN a M3 FlexColorScheme.light blackWhite theme with '
+    test('FCSV8:24L GIVEN a M3 FlexColorScheme.light blackWhite theme with '
         'seeds tab bar opacity '
         'expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
@@ -1338,21 +695,12 @@ void main() {
         keyColors: const FlexKeyColors(),
       );
       final ThemeData theme = fcs.toTheme;
-      expect(
-        theme.appBarTheme.foregroundColor,
-        equals(theme.colorScheme.tertiary),
-      );
-      expect(
-        theme.tabBarTheme.unselectedLabelColor,
-        equals(const Color(0xe61b1b1b)),
-      );
+      expect(theme.appBarTheme.foregroundColor, equals(theme.colorScheme.tertiary));
+      expect(theme.tabBarTheme.unselectedLabelColor, equals(const Color(0xe61b1b1b)));
       final OutlineInputBorder border =
-          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
-              .resolve(<WidgetState>{}) as OutlineInputBorder;
-      expect(
-        border.borderRadius.bottomLeft,
-        equals(const Radius.circular(10.0)),
-      );
+          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!.resolve(<WidgetState>{})
+              as OutlineInputBorder;
+      expect(border.borderRadius.bottomLeft, equals(const Radius.circular(10.0)));
     });
   });
 }

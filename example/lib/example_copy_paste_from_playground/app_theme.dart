@@ -144,10 +144,7 @@ abstract final class AppTheme {
       navigationRailBackgroundSchemeColor: SchemeColor.surface,
       navigationRailLabelType: NavigationRailLabelType.all,
     ),
-    keyColors: const FlexKeyColors(
-      useSecondary: true,
-      useTertiary: true,
-    ),
+    keyColors: const FlexKeyColors(useSecondary: true, useTertiary: true),
     tones: FlexSchemeVariant.jolly.tones(Brightness.dark),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     cupertinoOverrideTheme: const CupertinoThemeData(applyThemeToAll: true),

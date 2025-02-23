@@ -30,16 +30,14 @@ class ChipPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
@@ -47,13 +45,10 @@ class ChipPanel extends StatelessWidget {
     final String chipRadiusDefaultLabel =
         controller.chipBorderRadius == null && effectiveRadius == null
             ? '8 dp'
-            : controller.chipBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
-                : '';
-    final String selectedColor = controller.chipSchemeColor == null
-        ? 'primary'
-        : controller.chipSchemeColor!.name;
+            : controller.chipBorderRadius == null && controller.defaultRadius != null
+            ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
+            : '';
+    final String selectedColor = controller.chipSchemeColor == null ? 'primary' : controller.chipSchemeColor!.name;
     final bool useBlend =
         // ignore: avoid_bool_literals_in_conditional_expressions
         controller.chipBlendColors ?? (useMaterial3 ? false : true);
@@ -65,11 +60,8 @@ class ChipPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Chip color'),
-          defaultLabel:
-              useBlend ? 'primary with 80% surface alpha blend' : 'surface',
-          defaultLabelM2: useBlend
-              ? 'primary with 80% surface alpha blend'
-              : 'primaryContainer',
+          defaultLabel: useBlend ? 'primary with 80% surface alpha blend' : 'surface',
+          defaultLabelM2: useBlend ? 'primary with 80% surface alpha blend' : 'primaryContainer',
           defaultDisabledLabel: 'surface',
           defaultDisabledLabelM2: 'Black opacity 12%',
           defaultDisabledLabelDarkM2: 'White opacity 12%',
@@ -79,9 +71,7 @@ class ChipPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Selected Chip color'),
-          defaultLabel: useBlend
-              ? '$selectedColor with 59% surface alpha blend'
-              : 'secondaryContainer',
+          defaultLabel: useBlend ? '$selectedColor with 59% surface alpha blend' : 'secondaryContainer',
           defaultDisabledLabel: 'secondaryContainer',
           defaultDisabledLabelM2: 'Black opacity 24%',
           defaultDisabledLabelDarkM2: 'White opacity 24%',
@@ -91,9 +81,7 @@ class ChipPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Choice Chip selected color'),
-          defaultLabel: useBlend
-              ? '$selectedColor with 59% surface alpha blend'
-              : 'secondaryContainer',
+          defaultLabel: useBlend ? '$selectedColor with 59% surface alpha blend' : 'secondaryContainer',
           defaultDisabledLabel: 'secondaryContainer',
           defaultDisabledLabelM2: 'Black opacity 24%',
           defaultDisabledLabelDarkM2: 'White opacity 24%',
@@ -125,115 +113,115 @@ class ChipPanel extends StatelessWidget {
           valueDefaultLabel: chipRadiusDefaultLabel,
           valueDefaultDisabledLabel: useMaterial3 ? '8 dp' : 'stadium',
         ),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Font size'),
-              value: controller.chipFontSize,
-              onChanged: controller.setChipFontSize,
-              min: 8,
-              max: 20,
-              divisions: 12,
-              valueDecimalPlaces: 0,
-              valueHeading: 'SIZE',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '14 dp',
-              valueDefaultDisabledLabel: useMaterial3 ? '14 dp' : '16 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Icon size'),
-              value: controller.chipIconSize,
-              onChanged: controller.setChipIconSize,
-              min: 8,
-              max: 30,
-              divisions: 22,
-              valueDecimalPlaces: 0,
-              valueHeading: 'SIZE',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: '18 dp',
-              // valueDefaultDisabledLabel: useMaterial3 ? '18' : '16',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ListTileReveal(
-          enabled: controller.useSubThemes && controller.useFlexColorScheme,
-          title: const Text('Padding'),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Font size'),
+                value: controller.chipFontSize,
+                onChanged: controller.setChipFontSize,
+                min: 8,
+                max: 20,
+                divisions: 12,
+                valueDecimalPlaces: 0,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '14 dp',
+                valueDefaultDisabledLabel: useMaterial3 ? '14 dp' : '16 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Icon size'),
+                value: controller.chipIconSize,
+                onChanged: controller.setChipIconSize,
+                min: 8,
+                max: 30,
+                divisions: 22,
+                valueDecimalPlaces: 0,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: '18 dp',
+                // valueDefaultDisabledLabel: useMaterial3 ? '18' : '16',
+              ),
+              isRow: isRow,
+            );
+          },
         ),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              trailingWidth: 52,
-              enabled: enableControl,
-              value: controller.chipPaddingStart,
-              onChanged: controller.setChipPaddingStart,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'START',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              trailingWidth: 60,
-              enabled: enableControl,
-              value: controller.chipPaddingEnd,
-              onChanged: controller.setChipPaddingEnd,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'END',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              trailingWidth: 52,
-              enabled: enableControl,
-              value: controller.chipPaddingTop,
-              onChanged: controller.setChipPaddingTop,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'TOP',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              trailingWidth: 60,
-              enabled: enableControl,
-              value: controller.chipPaddingBottom,
-              onChanged: controller.setChipPaddingBottom,
-              min: 0,
-              max: 32,
-              divisions: 32,
-              valueDecimalPlaces: 0,
-              valueHeading: 'BOTTOM',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
-            ),
-            isRow: isRow,
-          );
-        }),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: ChipShowcase(showOptions: true),
+        ListTileReveal(enabled: controller.useSubThemes && controller.useFlexColorScheme, title: const Text('Padding')),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                trailingWidth: 52,
+                enabled: enableControl,
+                value: controller.chipPaddingStart,
+                onChanged: controller.setChipPaddingStart,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'START',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                trailingWidth: 60,
+                enabled: enableControl,
+                value: controller.chipPaddingEnd,
+                onChanged: controller.setChipPaddingEnd,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'END',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
+              ),
+              isRow: isRow,
+            );
+          },
         ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                trailingWidth: 52,
+                enabled: enableControl,
+                value: controller.chipPaddingTop,
+                onChanged: controller.setChipPaddingTop,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'TOP',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                trailingWidth: 60,
+                enabled: enableControl,
+                value: controller.chipPaddingBottom,
+                onChanged: controller.setChipPaddingBottom,
+                min: 0,
+                max: 32,
+                divisions: 32,
+                valueDecimalPlaces: 0,
+                valueHeading: 'BOTTOM',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: useMaterial3 ? '8 dp' : '4 dp',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        const Padding(padding: EdgeInsets.fromLTRB(16, 8, 16, 16), child: ChipShowcase(showOptions: true)),
         const Divider(),
         ListTileReveal(
           dense: true,
@@ -243,7 +231,8 @@ class ChipPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Flutter Chip theming has severe '
+                  text:
+                      'Flutter Chip theming has severe '
                       'theming limitations. You can not '
                       'make themed Chips where the different Chip types '
                       'required different text and icon color contrast from '
@@ -251,26 +240,20 @@ class ChipPanel extends StatelessWidget {
                       'cannot be fully themed independently of each other. '
                       'See Flutter SDK ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue115827,
-                  text: 'issue #115827',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsFlutterIssue115827, text: 'issue #115827'),
                 // _fcsChipUmbrellaIssue115364
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n\n'
+                  text:
+                      '.\n\n'
                       'The Chip has had many other known issues, for a list '
                       'and their status, check the umbrella ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsChipUmbrellaIssue115364,
-                  text: 'issue #115364',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsChipUmbrellaIssue115364, text: 'issue #115364'),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Most of them were solved in Flutter 3.13. But the '
+                  text:
+                      '. Most of them were solved in Flutter 3.13. But the '
                       'severe theming limitations remain. A new issue will '
                       'be opened to further explain and highlight current '
                       'shortcomings.\n',

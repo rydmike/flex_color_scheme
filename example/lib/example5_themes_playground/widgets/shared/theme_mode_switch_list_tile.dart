@@ -4,8 +4,7 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/theme_mode_switch.dart';
 
 class ThemeModeSwitchListTile extends StatelessWidget {
-  const ThemeModeSwitchListTile(
-      {super.key, required this.controller, this.contentPadding});
+  const ThemeModeSwitchListTile({super.key, required this.controller, this.contentPadding});
 
   final EdgeInsetsGeometry? contentPadding;
   final ThemeController controller;
@@ -16,10 +15,7 @@ class ThemeModeSwitchListTile extends StatelessWidget {
       contentPadding: contentPadding,
       title: const Text('Theme mode'),
       subtitle: Text('Theme ${controller.themeMode.name}'),
-      trailing: ThemeModeSwitch(
-        themeMode: controller.themeMode,
-        onChanged: controller.setThemeMode,
-      ),
+      trailing: ThemeModeSwitch(themeMode: controller.themeMode, onChanged: controller.setThemeMode),
       // Toggle theme mode also via the ListTile tap.
       onTap: () {
         if (Theme.of(context).brightness == Brightness.light) {

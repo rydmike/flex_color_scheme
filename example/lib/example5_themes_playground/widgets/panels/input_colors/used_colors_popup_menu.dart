@@ -8,13 +8,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 /// This is just a popup with current selected value given in index
 /// and onChanged  callback with index of selected item in the popup.
 class UsedColorsPopupMenu extends StatelessWidget {
-  const UsedColorsPopupMenu({
-    super.key,
-    required this.index,
-    this.onChanged,
-    this.title,
-    this.contentPadding,
-  });
+  const UsedColorsPopupMenu({super.key, required this.index, this.onChanged, this.title, this.contentPadding});
   final int index;
   final ValueChanged<int>? onChanged;
   final Widget? title;
@@ -100,17 +94,18 @@ class UsedColorsPopupMenu extends StatelessWidget {
       padding: EdgeInsets.zero,
       onSelected: onChanged,
       enabled: enabled,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 1; i < 7 + 1; i++)
-          PopupMenuItem<int>(
-            value: i,
-            child: ListTile(
-              dense: true,
-              leading: CircleAvatar(child: Text(_avText(i))),
-              title: Text(_selectColors(i), style: txtStyle),
-            ),
-          )
-      ],
+      itemBuilder:
+          (BuildContext context) => <PopupMenuItem<int>>[
+            for (int i = 1; i < 7 + 1; i++)
+              PopupMenuItem<int>(
+                value: i,
+                child: ListTile(
+                  dense: true,
+                  leading: CircleAvatar(child: Text(_avText(i))),
+                  title: Text(_selectColors(i), style: txtStyle),
+                ),
+              ),
+          ],
       child: ListTileReveal(
         enabled: enabled,
         contentPadding: contentPadding,

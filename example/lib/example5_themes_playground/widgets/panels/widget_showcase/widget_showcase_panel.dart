@@ -14,11 +14,7 @@ class WidgetShowcasePanel extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(height: 8),
-          ShowcaseMaterial(),
-          SizedBox(height: 8),
-        ],
+        children: <Widget>[SizedBox(height: 8), ShowcaseMaterial(), SizedBox(height: 8)],
       ),
     );
   }

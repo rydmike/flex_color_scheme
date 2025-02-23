@@ -21,27 +21,19 @@ import '../shared/widgets/universal/showcase_material.dart';
 // theme with, the app listens to changes in the controller and rebuilds.
 // -----------------------------------------------------------------------------
 class HomePage extends StatelessWidget {
-  const HomePage({
-    super.key,
-    required this.flexSchemeData,
-    required this.controller,
-  });
+  const HomePage({super.key, required this.flexSchemeData, required this.controller});
 
   final FlexSchemeData flexSchemeData;
   final ThemeController controller;
 
   @override
   Widget build(BuildContext context) {
-    final double margins =
-        App.responsiveInsets(MediaQuery.sizeOf(context).width);
+    final double margins = App.responsiveInsets(MediaQuery.sizeOf(context).width);
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(App.title(context)),
-        actions: const <Widget>[AboutIconButton()],
-      ),
+      appBar: AppBar(title: Text(App.title(context)), actions: const <Widget>[AboutIconButton()]),
       body: ResponsiveCenter(
         constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(

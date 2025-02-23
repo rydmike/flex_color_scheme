@@ -10,9 +10,6 @@ class DarkSurfaceModeToggleButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SurfaceModeToggleButtons(
-      mode: controller.surfaceModeDark,
-      onChanged: controller.setSurfaceModeDark,
-    );
+    return SurfaceModeToggleButtons(mode: controller.surfaceModeDark, onChanged: controller.setSurfaceModeDark);
   }
 }

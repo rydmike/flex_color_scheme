@@ -38,8 +38,7 @@ import 'topic_theme.dart';
 /// ThemeData is created with, thus using the same colors in your custom
 /// sub-themes.
 ThemeData themeDataLight(ThemeController controller) {
-  final ColorScheme colorScheme =
-      flexColorSchemeLight(controller, Colors.black).toScheme;
+  final ColorScheme colorScheme = flexColorSchemeLight(controller, Colors.black).toScheme;
 
   return ThemeData(
     brightness: Brightness.light,
@@ -54,17 +53,17 @@ ThemeData themeDataLight(ThemeController controller) {
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
     // in the Playground app.
-    visualDensity: controller.visualDensity?.setting(controller.platform) ??
+    visualDensity:
+        controller.visualDensity?.setting(controller.platform) ??
         VisualDensityEnum.platform.setting(controller.platform),
     // Use tap target size setting.
     materialTapTargetSize: controller.tapTargetSize,
     platform: controller.platform,
     useMaterial3: controller.useMaterial3,
-    typography: controller.useMaterial3
-        ? Typography.material2021(
-            platform: controller.platform ?? defaultTargetPlatform)
-        : Typography.material2018(
-            platform: controller.platform ?? defaultTargetPlatform),
+    typography:
+        controller.useMaterial3
+            ? Typography.material2021(platform: controller.platform ?? defaultTargetPlatform)
+            : Typography.material2018(platform: controller.platform ?? defaultTargetPlatform),
     // Add a custom theme extension with light mode code highlight colors and
     // light mode topic colors.
     extensions: <ThemeExtension<dynamic>>{

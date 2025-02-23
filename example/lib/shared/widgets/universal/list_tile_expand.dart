@@ -157,27 +157,22 @@ class _ListTileExpandState extends State<ListTileExpand> {
               });
             },
           ),
-          onTap: widget.enabled
-              ? () {
-                  _focusNode.requestFocus();
-                  setState(() {
-                    _isOpen = !_isOpen;
-                  });
-                }
-              : null,
+          onTap:
+              widget.enabled
+                  ? () {
+                    _focusNode.requestFocus();
+                    setState(() {
+                      _isOpen = !_isOpen;
+                    });
+                  }
+                  : null,
         ),
         AnimatedSwitcher(
           duration: widget.duration,
           transitionBuilder: (Widget child, Animation<double> animation) {
-            return SizeTransition(
-              sizeFactor: animation,
-              axisAlignment: _isOpen ? 1 : -1,
-              child: child,
-            );
+            return SizeTransition(sizeFactor: animation, axisAlignment: _isOpen ? 1 : -1, child: child);
           },
-          child: _isOpen
-              ? widget.child ?? const SizedBox.shrink()
-              : const SizedBox.shrink(),
+          child: _isOpen ? widget.child ?? const SizedBox.shrink() : const SizedBox.shrink(),
         ),
       ],
     );

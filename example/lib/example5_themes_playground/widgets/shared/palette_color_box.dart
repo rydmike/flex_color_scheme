@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 @immutable
 class PaletteColorBox extends StatelessWidget {
   /// Default const constructor for the color indicator.
-  const PaletteColorBox(
-      {super.key,
-      this.onTap,
-      this.color = Colors.blue,
-      this.height = 40,
-      required this.name,
-      required this.tone,
-      this.child})
-      : assert(height > 0, 'Height must be positive.');
+  const PaletteColorBox({
+    super.key,
+    this.onTap,
+    this.color = Colors.blue,
+    this.height = 40,
+    required this.name,
+    required this.tone,
+    this.child,
+  }) : assert(height > 0, 'Height must be positive.');
 
   /// Optional void callback, called when the color indicator is tapped.
   ///
@@ -42,13 +42,13 @@ class PaletteColorBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool colorIsLight =
-        ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+    final bool colorIsLight = ThemeData.estimateBrightnessForColor(color) == Brightness.light;
     final String hexCode = color.hexCode;
 
     return Tooltip(
       waitDuration: const Duration(milliseconds: 700),
-      message: '$name tone $tone\n'
+      message:
+          '$name tone $tone\n'
           'Color #$hexCode\n'
           'Tap to copy to Clipboard',
       child: Material(

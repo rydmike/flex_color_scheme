@@ -56,8 +56,7 @@ class ThemeServiceHive implements ThemeService {
     // choice for this type of feature. I wanted to show how it can be
     // used as well. We always show this path info in none release builds.
     if (_debug) {
-      debugPrint(
-          'Hive using storage path: $appDataDir and file name: $boxName');
+      debugPrint('Hive using storage path: $appDataDir and file name: $boxName');
     }
     // Init the Hive box box giving it the platform usable folder.
     Hive.init(appDataDir);
@@ -128,8 +127,10 @@ class ThemeServiceHive implements ThemeService {
           (sameTypes<T, int?>() || sameTypes<T, int>())) {
         final T loaded = value.round() as T;
         if (_debug) {
-          debugPrint(' ** WASM Issue : Expected int but got double, '
-              'returning as int: $loaded');
+          debugPrint(
+            ' ** WASM Issue : Expected int but got double, '
+            'returning as int: $loaded',
+          );
         }
         return loaded;
       } else {
@@ -186,10 +187,7 @@ class ThemeServiceHive implements ThemeService {
 
   /// Put all key-value pairs into the Hive storage.
   @override
-  Future<void> putAll(
-    Map<String, dynamic> values, {
-    bool clearExisting = true,
-  }) async {
+  Future<void> putAll(Map<String, dynamic> values, {bool clearExisting = true}) async {
     if (clearExisting) {
       await _hiveBox.clear();
     }

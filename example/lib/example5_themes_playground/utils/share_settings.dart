@@ -12,8 +12,7 @@ abstract final class ShareSettings {
   // Compress JSON string
   static String _compressJsonString(String jsonString) {
     final List<int> jsonBytes = utf8.encode(jsonString);
-    final List<int> compressedBytes =
-        const GZipEncoder().encode(Uint8List.fromList(jsonBytes));
+    final List<int> compressedBytes = const GZipEncoder().encode(Uint8List.fromList(jsonBytes));
     return base64UrlEncode(compressedBytes);
   }
 

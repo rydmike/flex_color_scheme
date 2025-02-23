@@ -26,10 +26,7 @@ class ShowcaseCupertino extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(height: 8),
-        CupertinoButtonShowcase(),
-      ],
+      children: <Widget>[SizedBox(height: 8), CupertinoButtonShowcase()],
     );
   }
 }
@@ -44,14 +41,8 @@ class CupertinoButtonShowcase extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: <Widget>[
-        CupertinoButton(
-          child: const Text('CupertinoButton'),
-          onPressed: () {},
-        ),
-        CupertinoButton.filled(
-          child: const Text('CupertinoButton filled'),
-          onPressed: () {},
-        ),
+        CupertinoButton(child: const Text('CupertinoButton'), onPressed: () {}),
+        CupertinoButton.filled(child: const Text('CupertinoButton filled'), onPressed: () {}),
       ],
     );
   }

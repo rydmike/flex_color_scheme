@@ -21,16 +21,14 @@ class CardPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
@@ -38,8 +36,8 @@ class CardPanel extends StatelessWidget {
         controller.cardBorderRadius == null && effectiveRadius == null
             ? '12 dp'
             : controller.cardBorderRadius == null && effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
-                : '';
+            ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
+            : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,10 +70,7 @@ class CardPanel extends StatelessWidget {
           valueDefaultLabel: cardRadiusDefaultLabel,
           valueDefaultDisabledLabel: useMaterial3 ? '12 dp' : '4 dp',
         ),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: CardTypesShowcase(showForcedOutlined: true),
-        ),
+        const Padding(padding: EdgeInsets.all(16), child: CardTypesShowcase(showForcedOutlined: true)),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -84,7 +79,8 @@ class CardPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'You cannot theme the Card variants separately. If '
+                  text:
+                      'You cannot theme the Card variants separately. If '
                       'you change the border radius from the default radius, '
                       'the outline will be removed from the themed '
                       'Card.outlined.\n'
@@ -94,14 +90,11 @@ class CardPanel extends StatelessWidget {
                       'variants and you loose their different styles. '
                       'See Flutter SDK ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssueCardTheme,
-                  text: 'issue #153912',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsFlutterIssueCardTheme, text: 'issue #153912'),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information.\n'
+                  text:
+                      ' for more information.\n'
                       '\n'
                       'Due to this issue, if you theme the radius to anything '
                       'else above than 12 in M3 mode, be aware that you loose '
@@ -114,10 +107,7 @@ class CardPanel extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: CardShowcase(explain: true),
-        ),
+        const Padding(padding: EdgeInsets.all(16), child: CardShowcase(explain: true)),
       ],
     );
   }

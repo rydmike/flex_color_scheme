@@ -39,22 +39,26 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     Color? inverseSurface,
     required this.scaffoldBackground,
     required this.dialogBackground,
-    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
+    @Deprecated(
+      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
+      'deprecated the color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
     this.surfaceVariant,
-    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
+    @Deprecated(
+      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
+      'deprecated the color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
     this.background,
-  })  : _surfaceDim = surfaceDim,
-        _surfaceBright = surfaceBright,
-        _surfaceContainerLowest = surfaceContainerLowest,
-        _surfaceContainerLow = surfaceContainerLow,
-        _surfaceContainer = surfaceContainer,
-        _surfaceContainerHigh = surfaceContainerHigh,
-        _surfaceContainerHighest = surfaceContainerHighest,
-        _inverseSurface = inverseSurface;
+  }) : _surfaceDim = surfaceDim,
+       _surfaceBright = surfaceBright,
+       _surfaceContainerLowest = surfaceContainerLowest,
+       _surfaceContainerLow = surfaceContainerLow,
+       _surfaceContainer = surfaceContainer,
+       _surfaceContainerHigh = surfaceContainerHigh,
+       _surfaceContainerHighest = surfaceContainerHighest,
+       _inverseSurface = inverseSurface;
 
   /// The background color for widgets like [Card] and [Dialog].
   ///
@@ -145,17 +149,21 @@ class FlexSchemeSurfaceColors with Diagnosticable {
 
   /// A color variant of [surface] that can be used for differentiation against
   /// a component using [surface]. Defaults to [surface] as fallback.
-  @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.')
+  @Deprecated(
+    'This color was deprecated in FCS 8.0 because Flutter 3.22 '
+    'deprecated the color. '
+    'It no longer has any function in FCS v8 and will be removed in v9.',
+  )
   final Color? surfaceVariant;
 
   /// A color that typically appears behind scrollable content.
   ///
   /// The default background color of [Material] of type canvas.
-  @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.')
+  @Deprecated(
+    'This color was deprecated in FCS 8.0 because Flutter 3.22 '
+    'deprecated the color. '
+    'It no longer has any function in FCS v8 and will be removed in v9.',
+  )
   final Color? background;
 
   /// Create nuanced surface colors using pre-defined behavior via enum
@@ -181,8 +189,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     /// The used surface mode to create different surface color blends.
     ///
     /// Defaults to highBackground.
-    final FlexSurfaceMode surfaceMode =
-        FlexSurfaceMode.highBackgroundLowScaffold,
+    final FlexSurfaceMode surfaceMode = FlexSurfaceMode.highBackgroundLowScaffold,
 
     /// The the blend level strength used for the mode.
     final int blendLevel = 0,
@@ -230,10 +237,11 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     final bool useMaterial3 = true,
   }) {
     assert(
-        blendLevel >= 0 && blendLevel <= 40,
-        'Only blend levels from 0 to 40 '
-        'are allowed. Very high alpha blend levels may not produce results '
-        'that are visually very appealing or useful.');
+      blendLevel >= 0 && blendLevel <= 40,
+      'Only blend levels from 0 to 40 '
+      'are allowed. Very high alpha blend levels may not produce results '
+      'that are visually very appealing or useful.',
+    );
     int usedBlendLevel = blendLevel;
     // If above happens in none debug mode, use 0, no blends.
     if (blendLevel < 0 || blendLevel > 40) usedBlendLevel = 0;
@@ -244,17 +252,16 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // default colors for the theme mode, if it was not provided. It is
     // typically provided when making branded surfaces, but Material default
     // colors are used as fallback colors.
-    final FlexSchemeColor scheme = schemeColors ??
-        (isLight ? FlexColor.material.light : FlexColor.material.dark);
+    final FlexSchemeColor scheme = schemeColors ?? (isLight ? FlexColor.material.light : FlexColor.material.dark);
     // The scaffold base Color, if null use default.
-    final FlexScaffoldBaseColor scaffoldBase = scaffoldBaseColor ??
-        (useMaterial3
-            ? FlexScaffoldBaseColor.surfaceContainerLowest
-            : FlexScaffoldBaseColor.surface);
+    final FlexScaffoldBaseColor scaffoldBase =
+        scaffoldBaseColor ??
+        (useMaterial3 ? FlexScaffoldBaseColor.surfaceContainerLowest : FlexScaffoldBaseColor.surface);
 
     // The color that should be blended into each surface, defaults to primary
     // color for all surfaces.
-    FlexSchemeSurfaceColors blendColor = blendColors ??
+    FlexSchemeSurfaceColors blendColor =
+        blendColors ??
         FlexSchemeSurfaceColors(
           surface: scheme.primary,
           surfaceDim: scheme.primary,
@@ -277,94 +284,81 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     // default colors if it was not provided. It is normally provided when
     // making branded surfaces, but Material default colors are used as
     // fallback colors.
-    final FlexSchemeSurfaceColors surface = surfaceColors ??
+    final FlexSchemeSurfaceColors surface =
+        surfaceColors ??
         (isLight
             ? FlexSchemeSurfaceColors(
-                surface: useMaterial3
-                    ? FlexColor.lightFlexSurface
-                    : FlexColor.materialLightSurface,
-                surfaceDim: FlexColor.lightFlexSurfaceDim,
-                surfaceBright: FlexColor.lightFlexSurfaceBright,
-                surfaceContainerLowest:
-                    FlexColor.lightFlexSurfaceContainerLowest,
-                surfaceContainerLow: FlexColor.lightFlexSurfaceContainerLow,
-                surfaceContainer: FlexColor.lightFlexSurfaceContainer,
-                surfaceContainerHigh: FlexColor.lightFlexSurfaceContainerHigh,
-                surfaceContainerHighest:
-                    FlexColor.lightFlexSurfaceContainerHighest,
-                inverseSurface: useMaterial3
-                    ? FlexColor.lightFlexInverseSurface
-                    : FlexColor.materialDarkSurface,
-                scaffoldBackground: scaffoldBase.color(
-                  null,
-                  brightness: brightness,
-                  useMaterial3: useMaterial3,
-                ),
-                dialogBackground: useMaterial3
-                    ? FlexColor.lightFlexSurfaceContainerHigh
-                    : FlexColor.materialLightSurface,
-              )
+              surface: useMaterial3 ? FlexColor.lightFlexSurface : FlexColor.materialLightSurface,
+              surfaceDim: FlexColor.lightFlexSurfaceDim,
+              surfaceBright: FlexColor.lightFlexSurfaceBright,
+              surfaceContainerLowest: FlexColor.lightFlexSurfaceContainerLowest,
+              surfaceContainerLow: FlexColor.lightFlexSurfaceContainerLow,
+              surfaceContainer: FlexColor.lightFlexSurfaceContainer,
+              surfaceContainerHigh: FlexColor.lightFlexSurfaceContainerHigh,
+              surfaceContainerHighest: FlexColor.lightFlexSurfaceContainerHighest,
+              inverseSurface: useMaterial3 ? FlexColor.lightFlexInverseSurface : FlexColor.materialDarkSurface,
+              scaffoldBackground: scaffoldBase.color(null, brightness: brightness, useMaterial3: useMaterial3),
+              dialogBackground: useMaterial3 ? FlexColor.lightFlexSurfaceContainerHigh : FlexColor.materialLightSurface,
+            )
             : FlexSchemeSurfaceColors(
-                surface: useMaterial3
-                    ? FlexColor.darkFlexSurface
-                    : FlexColor.materialDarkSurface,
-                surfaceDim: FlexColor.darkFlexSurfaceDim,
-                surfaceBright: FlexColor.darkFlexSurfaceBright,
-                surfaceContainerLowest:
-                    FlexColor.darkFlexSurfaceContainerLowest,
-                surfaceContainerLow: FlexColor.darkFlexSurfaceContainerLow,
-                surfaceContainer: FlexColor.darkFlexSurfaceContainer,
-                surfaceContainerHigh: FlexColor.darkFlexSurfaceContainerHigh,
-                surfaceContainerHighest:
-                    FlexColor.darkFlexSurfaceContainerHighest,
-                inverseSurface: useMaterial3
-                    ? FlexColor.darkFlexInverseSurface
-                    : FlexColor.materialLightSurface,
-                scaffoldBackground: scaffoldBase.color(
-                  null,
-                  brightness: brightness,
-                  useMaterial3: useMaterial3,
-                ),
-                dialogBackground: useMaterial3
-                    ? FlexColor.darkFlexSurfaceContainerHigh
-                    : FlexColor.materialDarkSurface,
-              ));
+              surface: useMaterial3 ? FlexColor.darkFlexSurface : FlexColor.materialDarkSurface,
+              surfaceDim: FlexColor.darkFlexSurfaceDim,
+              surfaceBright: FlexColor.darkFlexSurfaceBright,
+              surfaceContainerLowest: FlexColor.darkFlexSurfaceContainerLowest,
+              surfaceContainerLow: FlexColor.darkFlexSurfaceContainerLow,
+              surfaceContainer: FlexColor.darkFlexSurfaceContainer,
+              surfaceContainerHigh: FlexColor.darkFlexSurfaceContainerHigh,
+              surfaceContainerHighest: FlexColor.darkFlexSurfaceContainerHighest,
+              inverseSurface: useMaterial3 ? FlexColor.darkFlexInverseSurface : FlexColor.materialLightSurface,
+              scaffoldBackground: scaffoldBase.color(null, brightness: brightness, useMaterial3: useMaterial3),
+              dialogBackground: useMaterial3 ? FlexColor.darkFlexSurfaceContainerHigh : FlexColor.materialDarkSurface,
+            ));
 
     /// Get alpha blend values corresponding to used mode, level and brightness.
-    final FlexAlphaValues alphaValue =
-        FlexAlphaValues.getAlphas(surfaceMode, usedBlendLevel);
+    final FlexAlphaValues alphaValue = FlexAlphaValues.getAlphas(surfaceMode, usedBlendLevel);
     // Return the computed and resulting surface colors.
     return FlexSchemeSurfaceColors(
-      surface: surface.surface.blendAlpha(blendColor.surface,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
-      surfaceDim: surface.surfaceDim.blendAlpha(blendColor.surfaceDim,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
-      surfaceBright: surface.surfaceBright.blendAlpha(blendColor.surfaceBright,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
+      surface: surface.surface.blendAlpha(blendColor.surface, alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
+      surfaceDim: surface.surfaceDim.blendAlpha(
+        blendColor.surfaceDim,
+        alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
+      surfaceBright: surface.surfaceBright.blendAlpha(
+        blendColor.surfaceBright,
+        alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
       surfaceContainerLowest: surface.surfaceContainerLowest.blendAlpha(
-          blendColor.surfaceContainerLowest,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.surfaceContainerLowest,
+        alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
       surfaceContainerLow: surface.surfaceContainerLow.blendAlpha(
-          blendColor.surfaceContainerLow,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.surfaceContainerLow,
+        alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
       surfaceContainer: surface.surfaceContainer.blendAlpha(
-          blendColor.surfaceContainer,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.surfaceContainer,
+        alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
       surfaceContainerHigh: surface.surfaceContainerHigh.blendAlpha(
-          blendColor.surfaceContainerHigh,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.surfaceContainerHigh,
+        alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
       surfaceContainerHighest: surface.surfaceContainerHighest.blendAlpha(
-          blendColor.surfaceContainerHighest,
-          alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.surfaceContainerHighest,
+        alphaValue.surfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
       inverseSurface: surface.inverseSurface.blendAlpha(
-          blendColor.inverseSurface,
-          alphaValue.inverseSurfaceAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.inverseSurface,
+        alphaValue.inverseSurfaceAlpha ~/ surfaceVariantBlendDivide,
+      ),
       scaffoldBackground: surface.scaffoldBackground.blendAlpha(
-          blendColor.scaffoldBackground,
-          alphaValue.scaffoldAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.scaffoldBackground,
+        alphaValue.scaffoldAlpha ~/ surfaceVariantBlendDivide,
+      ),
       dialogBackground: surface.dialogBackground.blendAlpha(
-          blendColor.dialogBackground,
-          alphaValue.dialogAlpha ~/ surfaceVariantBlendDivide),
+        blendColor.dialogBackground,
+        alphaValue.dialogAlpha ~/ surfaceVariantBlendDivide,
+      ),
     );
   }
 
@@ -381,26 +375,28 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     Color? inverseSurface,
     Color? scaffoldBackground,
     Color? dialogBackground,
-    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
+    @Deprecated(
+      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
+      'deprecated the color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
     Color? surfaceVariant,
-    @Deprecated('This color was deprecated in FCS 8.0 because Flutter 3.22 '
-        'deprecated the color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
+    @Deprecated(
+      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
+      'deprecated the color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
     Color? background,
   }) {
     return FlexSchemeSurfaceColors(
       surface: surface ?? this.surface,
       surfaceDim: surfaceDim ?? this.surfaceDim,
       surfaceBright: surfaceBright ?? this.surfaceBright,
-      surfaceContainerLowest:
-          surfaceContainerLowest ?? this.surfaceContainerLowest,
+      surfaceContainerLowest: surfaceContainerLowest ?? this.surfaceContainerLowest,
       surfaceContainerLow: surfaceContainerLow ?? this.surfaceContainerLow,
       surfaceContainer: surfaceContainer ?? this.surfaceContainer,
       surfaceContainerHigh: surfaceContainerHigh ?? this.surfaceContainerHigh,
-      surfaceContainerHighest:
-          surfaceContainerHighest ?? this.surfaceContainerHighest,
+      surfaceContainerHighest: surfaceContainerHighest ?? this.surfaceContainerHighest,
       inverseSurface: inverseSurface ?? this.inverseSurface,
       scaffoldBackground: scaffoldBackground ?? this.scaffoldBackground,
       dialogBackground: dialogBackground ?? this.dialogBackground,
@@ -429,18 +425,18 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hash(
-        surface,
-        surfaceDim,
-        surfaceBright,
-        surfaceContainerLowest,
-        surfaceContainerLow,
-        surfaceContainer,
-        surfaceContainerHigh,
-        surfaceContainerHighest,
-        inverseSurface,
-        scaffoldBackground,
-        dialogBackground,
-      );
+    surface,
+    surfaceDim,
+    surfaceBright,
+    surfaceContainerLowest,
+    surfaceContainerLow,
+    surfaceContainer,
+    surfaceContainerHigh,
+    surfaceContainerHighest,
+    inverseSurface,
+    scaffoldBackground,
+    dialogBackground,
+  );
 
   /// Flutter debug properties override, includes toString.
   @override
@@ -449,13 +445,11 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     properties.add(ColorProperty('surface', surface));
     properties.add(ColorProperty('surfaceDim', surfaceDim));
     properties.add(ColorProperty('surfaceBright', surfaceBright));
-    properties
-        .add(ColorProperty('surfaceContainerLowest', surfaceContainerLowest));
+    properties.add(ColorProperty('surfaceContainerLowest', surfaceContainerLowest));
     properties.add(ColorProperty('surfaceContainerLow', surfaceContainerLow));
     properties.add(ColorProperty('surfaceContainer', surfaceContainer));
     properties.add(ColorProperty('surfaceContainerHigh', surfaceContainerHigh));
-    properties
-        .add(ColorProperty('surfaceContainerHighest', surfaceContainerHighest));
+    properties.add(ColorProperty('surfaceContainerHighest', surfaceContainerHighest));
     properties.add(ColorProperty('inverseSurface', inverseSurface));
     properties.add(ColorProperty('scaffoldBackground', scaffoldBackground));
     properties.add(ColorProperty('dialogBackground', dialogBackground));

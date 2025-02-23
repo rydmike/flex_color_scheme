@@ -36,18 +36,17 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
     Color? navigationColor,
     Color? surfacesColor,
     Color? textsColor,
-  }) =>
-      TopicTheme(
-        generalColor: generalColor ?? this.generalColor,
-        colorsColor: colorsColor ?? this.colorsColor,
-        componentsColor: componentsColor ?? this.componentsColor,
-        controlsColor: controlsColor ?? this.controlsColor,
-        inputsColor: inputsColor ?? this.inputsColor,
-        barsColor: barsColor ?? this.barsColor,
-        navigationColor: navigationColor ?? this.navigationColor,
-        surfacesColor: surfacesColor ?? this.surfacesColor,
-        textsColor: textsColor ?? this.textsColor,
-      );
+  }) => TopicTheme(
+    generalColor: generalColor ?? this.generalColor,
+    colorsColor: colorsColor ?? this.colorsColor,
+    componentsColor: componentsColor ?? this.componentsColor,
+    controlsColor: controlsColor ?? this.controlsColor,
+    inputsColor: inputsColor ?? this.inputsColor,
+    barsColor: barsColor ?? this.barsColor,
+    navigationColor: navigationColor ?? this.navigationColor,
+    surfacesColor: surfacesColor ?? this.surfacesColor,
+    textsColor: textsColor ?? this.textsColor,
+  );
 
   /// Must override the lerp method.
   @override
@@ -120,54 +119,18 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
           sourceColorValue,
         ),
       ),
-      colorsColor: Color(
-        Blend.harmonize(
-          topicTheme.colorsColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
-      ),
+      colorsColor: Color(Blend.harmonize(topicTheme.colorsColor?.value32bit ?? fallbackValue, sourceColorValue)),
       componentsColor: Color(
-        Blend.harmonize(
-          topicTheme.componentsColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
+        Blend.harmonize(topicTheme.componentsColor?.value32bit ?? fallbackValue, sourceColorValue),
       ),
-      controlsColor: Color(
-        Blend.harmonize(
-          topicTheme.controlsColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
-      ),
-      inputsColor: Color(
-        Blend.harmonize(
-          topicTheme.inputsColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
-      ),
-      barsColor: Color(
-        Blend.harmonize(
-          topicTheme.barsColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
-      ),
+      controlsColor: Color(Blend.harmonize(topicTheme.controlsColor?.value32bit ?? fallbackValue, sourceColorValue)),
+      inputsColor: Color(Blend.harmonize(topicTheme.inputsColor?.value32bit ?? fallbackValue, sourceColorValue)),
+      barsColor: Color(Blend.harmonize(topicTheme.barsColor?.value32bit ?? fallbackValue, sourceColorValue)),
       navigationColor: Color(
-        Blend.harmonize(
-          topicTheme.navigationColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
+        Blend.harmonize(topicTheme.navigationColor?.value32bit ?? fallbackValue, sourceColorValue),
       ),
-      surfacesColor: Color(
-        Blend.harmonize(
-          topicTheme.surfacesColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
-      ),
-      textsColor: Color(
-        Blend.harmonize(
-          topicTheme.textsColor?.value32bit ?? fallbackValue,
-          sourceColorValue,
-        ),
-      ),
+      surfacesColor: Color(Blend.harmonize(topicTheme.surfacesColor?.value32bit ?? fallbackValue, sourceColorValue)),
+      textsColor: Color(Blend.harmonize(topicTheme.textsColor?.value32bit ?? fallbackValue, sourceColorValue)),
     );
   }
 }

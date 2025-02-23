@@ -30,10 +30,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     // Value less than 0, or index over range disables the control.
-    final bool disabled = index < 0 ||
-        index >= FlexSchemeVariant.values.length ||
-        onChanged == null ||
-        !enabled;
+    final bool disabled = index < 0 || index >= FlexSchemeVariant.values.length || onChanged == null || !enabled;
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
@@ -44,35 +41,34 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
-        onChanged?.call(
-            index >= FlexSchemeVariant.values.length || index < 0 ? 0 : index);
+        onChanged?.call(index >= FlexSchemeVariant.values.length || index < 0 ? 0 : index);
       },
       enabled: !disabled,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < FlexSchemeVariant.values.length; i++)
-          PopupMenuItem<int>(
-            value: i,
-            child: ListTile(
-              dense: true,
-              leading: Badge(
-                label: FlexSchemeVariant.values[i].isFlutterScheme
-                    ? const Text('MCU', style: TextStyle(fontSize: 8))
-                    : const Text('FSS', style: TextStyle(fontSize: 8)),
-                child: ColorSchemeBox(
-                  optionIcon: FlexSchemeVariant.values[i].icon,
-                  backgroundColor: FlexSchemeVariant.values[i].shade < 0
-                      ? colorScheme.primary
-                          .lighten(FlexSchemeVariant.values[i].shade * -1)
-                      : colorScheme.primary
-                          .darken(FlexSchemeVariant.values[i].shade),
-                  borderColor: Colors.transparent,
+      itemBuilder:
+          (BuildContext context) => <PopupMenuItem<int>>[
+            for (int i = 0; i < FlexSchemeVariant.values.length; i++)
+              PopupMenuItem<int>(
+                value: i,
+                child: ListTile(
+                  dense: true,
+                  leading: Badge(
+                    label:
+                        FlexSchemeVariant.values[i].isFlutterScheme
+                            ? const Text('MCU', style: TextStyle(fontSize: 8))
+                            : const Text('FSS', style: TextStyle(fontSize: 8)),
+                    child: ColorSchemeBox(
+                      optionIcon: FlexSchemeVariant.values[i].icon,
+                      backgroundColor:
+                          FlexSchemeVariant.values[i].shade < 0
+                              ? colorScheme.primary.lighten(FlexSchemeVariant.values[i].shade * -1)
+                              : colorScheme.primary.darken(FlexSchemeVariant.values[i].shade),
+                      borderColor: Colors.transparent,
+                    ),
+                  ),
+                  title: Text(FlexSchemeVariant.values[i].variantName, style: txtStyle),
                 ),
               ),
-              title: Text(FlexSchemeVariant.values[i].variantName,
-                  style: txtStyle),
-            ),
-          )
-      ],
+          ],
       child: ListTileReveal(
         enabled: !disabled,
         contentPadding: contentPadding,
@@ -98,13 +94,12 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: Badge(
-            label: FlexSchemeVariant.values[index].isFlutterScheme
-                ? const Text('MCU', style: TextStyle(fontSize: 8))
-                : const Text('FSS', style: TextStyle(fontSize: 8)),
+            label:
+                FlexSchemeVariant.values[index].isFlutterScheme
+                    ? const Text('MCU', style: TextStyle(fontSize: 8))
+                    : const Text('FSS', style: TextStyle(fontSize: 8)),
             child: ColorSchemeBox(
-              backgroundColor: disabled
-                  ? colorScheme.surfaceContainerHighest
-                  : colorScheme.primary,
+              backgroundColor: disabled ? colorScheme.surfaceContainerHighest : colorScheme.primary,
               foregroundColor: disabled ? theme.dividerColor : null,
               borderColor: disabled ? theme.dividerColor : Colors.transparent,
               defaultOption: disabled,

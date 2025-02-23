@@ -28,45 +28,35 @@ void main() {
     // m2, has same definition as m1, but via off constructor
     const FlexAdaptive m2 = FlexAdaptive.off(overrideIsWeb: false);
     // m3, has same definition as m1, but one value is different.
-    const FlexAdaptive m3 = FlexAdaptive.off(
-      android: true,
-      overrideIsWeb: false,
-    );
+    const FlexAdaptive m3 = FlexAdaptive.off(android: true, overrideIsWeb: false);
     // m4, has all values different from m1
     const FlexAdaptive m4 = FlexAdaptive.all(overrideIsWeb: true);
     // Do identity tests
-    test(
-        'FA1.01: GIVEN same FlexAdaptive objects '
+    test('FA1.01: GIVEN same FlexAdaptive objects '
         'EXPECT them to be equal', () {
       expect(m1, equals(m1));
     });
-    test(
-        'FA1.02: GIVEN same FlexAdaptive objects '
+    test('FA1.02: GIVEN same FlexAdaptive objects '
         'EXPECT them to have identity', () {
       expect(identical(m1, m1), true);
     });
-    test(
-        'FA1.03: GIVEN two equal FlexAdaptive objects '
+    test('FA1.03: GIVEN two equal FlexAdaptive objects '
         'EXPECT them to have equality', () {
       expect(m1, equals(m2));
     });
-    test(
-        'FA1.04: GIVEN two equal FlexAdaptive objects '
+    test('FA1.04: GIVEN two equal FlexAdaptive objects '
         'EXPECT them to have identity', () {
       expect(identical(m1, m2), true);
     });
-    test(
-        'FA1.05: GIVEN two equal FlexAdaptive objects '
+    test('FA1.05: GIVEN two equal FlexAdaptive objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
-    test(
-        'FA1.06: GIVEN none equal FlexAdaptive objects '
+    test('FA1.06: GIVEN none equal FlexAdaptive objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
-    test(
-        'FA1.07: GIVEN none equal FlexAdaptive objects '
+    test('FA1.07: GIVEN none equal FlexAdaptive objects '
         'EXPECT them to be unequal with operator', () {
       expect(m1 != m3, true);
     });
@@ -75,26 +65,15 @@ void main() {
     //
     // Test .copyWith, full and null..
     //**************************************************************************
-    test(
-        'FA1.08: GIVEN a FlexAdaptive object EXPECT it to be equal to '
+    test('FA1.08: GIVEN a FlexAdaptive object EXPECT it to be equal to '
         'an unequal object when made equal with copyWith.', () {
-      expect(
-        m3.copyWith(
-          android: false,
-        ),
-        equals(m1),
-      );
+      expect(m3.copyWith(android: false), equals(m1));
     });
-    test(
-        'FA1.09: GIVEN a FlexAdaptive object EXPECT it to be unchanged '
+    test('FA1.09: GIVEN a FlexAdaptive object EXPECT it to be unchanged '
         'after and empty copyWith.', () {
-      expect(
-        m1.copyWith(),
-        equals(m1),
-      );
+      expect(m1.copyWith(), equals(m1));
     });
-    test(
-        'FA1.09c: GIVEN a FlexAdaptive with all different values '
+    test('FA1.09c: GIVEN a FlexAdaptive with all different values '
         'EXPECT equal to an unequal one when made equal with copyWith.', () {
       expect(
         m4.copyWith(
@@ -122,18 +101,18 @@ void main() {
     // toString and hashcode.
     //**************************************************************************
 
-    test(
-        'FA1.10: Test toString implemented via debugFillProperties '
+    test('FA1.10: Test toString implemented via debugFillProperties '
         'EXPECT exact print string value.', () {
       expect(
-          m1.toString(),
-          //
-          equalsIgnoringHashCodes(
-              // ignore: lines_longer_than_80_chars
-              'FlexAdaptive#00000(android: false, androidWeb: false, fuchsia: false, fuchsiaWeb: false, iOS: false, iOSWeb: false, linux: false, linuxWeb: false, macOS: false, macOSWeb: false, windows: false, windowsWeb: false, overrideIsWeb: false)'));
+        m1.toString(),
+        //
+        equalsIgnoringHashCodes(
+          // ignore: lines_longer_than_80_chars
+          'FlexAdaptive#00000(android: false, androidWeb: false, fuchsia: false, fuchsiaWeb: false, iOS: false, iOSWeb: false, linux: false, linuxWeb: false, macOS: false, macOSWeb: false, windows: false, windowsWeb: false, overrideIsWeb: false)',
+        ),
+      );
     });
-    test(
-        'FA1.11: Test toStringShort implemented via debugFillProperties '
+    test('FA1.11: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout.', () {
       expect(m1.toStringShort(), equalsIgnoringHashCodes('FlexAdaptive#00000'));
     });
@@ -411,8 +390,7 @@ void main() {
       expect(m.adapt(TargetPlatform.windows, false), true);
       expect(m.adapt(TargetPlatform.windows, true), true);
     });
-    test('FA1.020: Verify FlexAdaptive.excludeWebAndroidFuchsia definition. ',
-        () {
+    test('FA1.020: Verify FlexAdaptive.excludeWebAndroidFuchsia definition. ', () {
       const FlexAdaptive m = FlexAdaptive.excludeWebAndroidFuchsia();
       expect(
         m,
@@ -446,11 +424,9 @@ void main() {
       expect(m.adapt(TargetPlatform.windows, false), true);
       expect(m.adapt(TargetPlatform.windows, true), false);
     });
-    test(
-        'FA1.021: Verify FlexAdaptive.excludeWebAndroidFuchsia definition. '
+    test('FA1.021: Verify FlexAdaptive.excludeWebAndroidFuchsia definition. '
         'with passed in web FALSE override ', () {
-      const FlexAdaptive m =
-          FlexAdaptive.excludeWebAndroidFuchsia(overrideIsWeb: false);
+      const FlexAdaptive m = FlexAdaptive.excludeWebAndroidFuchsia(overrideIsWeb: false);
       expect(
         m,
         equals(
@@ -478,8 +454,7 @@ void main() {
       expect(m.adapt(TargetPlatform.macOS), true);
       expect(m.adapt(TargetPlatform.windows), true);
     });
-    test(
-        'FA1.022: Verify FlexAdaptive.desktop definition. '
+    test('FA1.022: Verify FlexAdaptive.desktop definition. '
         'with passed in web TRUE override ', () {
       const FlexAdaptive m = FlexAdaptive.desktop(overrideIsWeb: true);
       expect(

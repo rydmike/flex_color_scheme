@@ -22,8 +22,7 @@ class AppExampleComponents extends StatefulWidget {
   State<AppExampleComponents> createState() => _AppExampleComponentsState();
 }
 
-class _AppExampleComponentsState extends State<AppExampleComponents>
-    with TickerProviderStateMixin {
+class _AppExampleComponentsState extends State<AppExampleComponents> with TickerProviderStateMixin {
   late int currentPage;
   late TabController tabController;
 
@@ -31,11 +30,7 @@ class _AppExampleComponentsState extends State<AppExampleComponents>
   void initState() {
     super.initState();
     currentPage = widget.controller.simulatorComponentsIndex;
-    tabController = TabController(
-      initialIndex: currentPage,
-      length: 12,
-      vsync: this,
-    );
+    tabController = TabController(initialIndex: currentPage, length: 12, vsync: this);
     // Update stored tab page info also if swiped to new page.
     tabController.addListener(() {
       if (tabController.index != currentPage) {
@@ -157,8 +152,7 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle =
-      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
@@ -207,25 +201,24 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'This app demonstrates what ${App.packageName} '
+                text:
+                    'This app demonstrates what ${App.packageName} '
                     'themed components look like by showing them in a mock '
                     'device. '
                     'To learn more about ${App.packageName}, check out '
                     'the package on ',
               ),
-              LinkTextSpan(
-                style: linkStyle,
-                uri: App.packageUri,
-                text: 'pub.dev',
-              ),
+              LinkTextSpan(style: linkStyle, uri: App.packageUri, text: 'pub.dev'),
               TextSpan(
                 style: aboutTextStyle,
-                text: '. It also includes the source '
+                text:
+                    '. It also includes the source '
                     'code of this application.\n\n',
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${App.flutterVersion}, '
+                text:
+                    'Built with Flutter ${App.flutterVersion}, '
                     'using ${App.packageName} '
                     '${App.version}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
@@ -253,17 +246,15 @@ class CCard extends StatelessWidget {
       color: color,
       shadowColor: useM3 ? Colors.transparent : null,
       margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-      elevation: useM3
-          ? isDark
-              ? 1
-              : 0.5
-          : isDark
+      elevation:
+          useM3
+              ? isDark
+                  ? 1
+                  : 0.5
+              : isDark
               ? 3
               : 2,
-      child: Padding(
-        padding: padding ?? const EdgeInsets.all(12),
-        child: child,
-      ),
+      child: Padding(padding: padding ?? const EdgeInsets.all(12), child: child),
     );
   }
 }
@@ -277,12 +268,7 @@ class ShowcaseColors extends StatelessWidget {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: <Widget>[
         CCard(
           padding: EdgeInsets.zero,
@@ -308,12 +294,7 @@ class ShowcaseButtons extends StatelessWidget {
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         CCard(
           child: Column(
@@ -393,12 +374,7 @@ class ShowcaseInput extends StatelessWidget {
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         CCard(
           child: Column(
@@ -436,12 +412,7 @@ class ShowcaseMenus extends StatelessWidget {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         CCard(
           child: Column(
@@ -456,10 +427,7 @@ class ShowcaseMenus extends StatelessWidget {
         SizedBox(height: 8),
         MenuBarShowcase(explain: true, explainIndent: 16),
         SizedBox(height: 32),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: MenuAnchorShowcase(),
-        ),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: MenuAnchorShowcase()),
       ],
     );
   }
@@ -473,12 +441,7 @@ class ShowcaseSwitches extends StatelessWidget {
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         CCard(
           child: Column(
@@ -521,12 +484,7 @@ class ShowcaseListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         CCard(
           padding: EdgeInsets.zero,
@@ -553,12 +511,7 @@ class ShowcaseSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         CCard(child: SliderShowcase()),
         CCard(child: RangeSliderShowcase()),
@@ -568,10 +521,7 @@ class ShowcaseSlider extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ListTile(title: Text('Progress indicators')),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: ProgressIndicatorShowcase(),
-              ),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 16.0), child: ProgressIndicatorShowcase()),
               SizedBox(height: 16),
             ],
           ),
@@ -589,29 +539,18 @@ class ShowcaseAppBar extends StatelessWidget {
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         SizedBox(height: 8),
         AppBarShowcase(),
         SizedBox(height: 8),
         SearchBarShowcase(),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('BottomAppBar', style: headerStyle),
-        ),
+        Padding(padding: EdgeInsets.all(8.0), child: Text('BottomAppBar', style: headerStyle)),
         BottomAppBarShowcase(),
         SizedBox(height: 16),
         TabBarForAppBarShowcase(),
         SizedBox(height: 16),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('TabBar on a surface', style: headerStyle),
-        ),
+        Padding(padding: EdgeInsets.all(8.0), child: Text('TabBar on a surface', style: headerStyle)),
         TabBarForBackgroundShowcase(),
       ],
     );
@@ -626,37 +565,17 @@ class ShowcaseNavigation extends StatelessWidget {
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('BottomNavigationBar (M2)', style: headerStyle),
-        ),
+        Padding(padding: EdgeInsets.all(8.0), child: Text('BottomNavigationBar (M2)', style: headerStyle)),
         BottomNavigationBarShowcase(),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('NavigationBar (M3)', style: headerStyle),
-        ),
+        Padding(padding: EdgeInsets.all(8.0), child: Text('NavigationBar (M3)', style: headerStyle)),
         NavigationBarShowcase(),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('NavigationRail', style: headerStyle),
-        ),
+        Padding(padding: EdgeInsets.all(8.0), child: Text('NavigationRail', style: headerStyle)),
         NavigationRailShowcase(),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('NavigationDrawer', style: headerStyle),
-        ),
+        Padding(padding: EdgeInsets.all(8.0), child: Text('NavigationDrawer', style: headerStyle)),
         NavigationDrawerShowcase(),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('Drawer', style: headerStyle),
-        ),
+        Padding(padding: EdgeInsets.all(8.0), child: Text('Drawer', style: headerStyle)),
         DrawerShowcase(),
       ],
     );
@@ -670,12 +589,7 @@ class ShowcaseDialogs extends StatelessWidget {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         AlertDialogShowcase(),
         TimePickerDialogShowcase(),
@@ -698,31 +612,14 @@ class ShowcaseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: const <Widget>[
         SizedBox(height: 8),
-        Padding(
-          padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-          child: CardTypesShowcase(width: 115),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-          child: CardShowcase(width: 130, explain: true),
-        ),
+        Padding(padding: EdgeInsets.fromLTRB(8, 0, 8, 8), child: CardTypesShowcase(width: 115)),
+        Padding(padding: EdgeInsets.fromLTRB(8, 0, 8, 8), child: CardShowcase(width: 130, explain: true)),
         Divider(height: 32),
-        Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: Text('Material', style: TextStyle(fontSize: 16)),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: MaterialShowcase(width: 130 - 8, explain: true),
-        ),
+        Padding(padding: EdgeInsets.fromLTRB(16, 0, 16, 8), child: Text('Material', style: TextStyle(fontSize: 16))),
+        Padding(padding: EdgeInsets.fromLTRB(16, 0, 16, 8), child: MaterialShowcase(width: 130 - 8, explain: true)),
       ],
     );
   }
@@ -736,24 +633,16 @@ class ShowcaseText extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final EdgeInsets padding = MediaQuery.paddingOf(context);
     return ListView(
-      padding: EdgeInsets.fromLTRB(
-        0,
-        padding.top + 8,
-        0,
-        padding.bottom + 8,
-      ),
+      padding: EdgeInsets.fromLTRB(0, padding.top + 8, 0, padding.bottom + 8),
       children: <Widget>[
-        const CCard(
-          child: TooltipShowcase(),
-        ),
+        const CCard(child: TooltipShowcase()),
         CCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text('Normal TextTheme',
-                    style: theme.textTheme.titleMedium),
+                child: Text('Normal TextTheme', style: theme.textTheme.titleMedium),
               ),
               const TextThemeShowcase(),
             ],
@@ -767,8 +656,7 @@ class ShowcaseText extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text('Primary TextTheme',
-                    style: theme.primaryTextTheme.titleMedium),
+                child: Text('Primary TextTheme', style: theme.primaryTextTheme.titleMedium),
               ),
               const PrimaryTextThemeShowcase(),
             ],

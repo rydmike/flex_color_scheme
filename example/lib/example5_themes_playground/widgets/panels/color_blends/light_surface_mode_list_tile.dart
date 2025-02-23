@@ -5,12 +5,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import 'light_surface_mode_toggle_buttons.dart';
 
 class LightSurfaceModeListTile extends StatelessWidget {
-  const LightSurfaceModeListTile({
-    this.title,
-    this.subtitle,
-    required this.controller,
-    super.key,
-  });
+  const LightSurfaceModeListTile({this.title, this.subtitle, required this.controller, super.key});
 
   final Widget? title;
   final Widget? subtitle;
@@ -31,8 +26,7 @@ class LightSurfaceModeListTile extends StatelessWidget {
         if (mode.index + 1 >= FlexSurfaceMode.values.length - 1) {
           controller.setSurfaceModeLight(FlexSurfaceMode.values[0]);
         } else {
-          controller
-              .setSurfaceModeLight(FlexSurfaceMode.values[mode.index + 1]);
+          controller.setSurfaceModeLight(FlexSurfaceMode.values[mode.index + 1]);
         }
       },
     );

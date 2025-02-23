@@ -21,26 +21,18 @@ import 'widgets/theme_select_buttons.dart';
 // defined example looks like in an application and with commonly used Widgets.
 // -----------------------------------------------------------------------------
 class HomePage extends StatelessWidget {
-  const HomePage({
-    super.key,
-    required this.flexSchemeData,
-    required this.controller,
-  });
+  const HomePage({super.key, required this.flexSchemeData, required this.controller});
   final FlexSchemeData flexSchemeData;
   final ThemeController controller;
 
   @override
   Widget build(BuildContext context) {
-    final double margins =
-        App.responsiveInsets(MediaQuery.sizeOf(context).width);
+    final double margins = App.responsiveInsets(MediaQuery.sizeOf(context).width);
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(App.title(context)),
-        actions: const <Widget>[AboutIconButton()],
-      ),
+      appBar: AppBar(title: Text(App.title(context)), actions: const <Widget>[AboutIconButton()]),
       body: ResponsiveCenter(
         constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
         child: ListView(
@@ -64,10 +56,7 @@ class HomePage extends StatelessWidget {
             Card(
               margin: EdgeInsets.zero,
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: margins,
-                  horizontal: margins + 4,
-                ),
+                padding: EdgeInsets.symmetric(vertical: margins, horizontal: margins + 4),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -80,8 +69,7 @@ class HomePage extends StatelessWidget {
                       // can pass it property values to make it match. It is
                       // possible to extract it from the surrounding theme too
                       // and use that value, this is done in another example.
-                      optionButtonBorderRadius:
-                          controller.useSubThemes ? 12 : 4,
+                      optionButtonBorderRadius: controller.useSubThemes ? 12 : 4,
                       buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
                     ),
                     const SizedBox(height: 8),
@@ -95,10 +83,7 @@ class HomePage extends StatelessWidget {
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Select theme'),
-                      trailing: ThemeSelectButtons(
-                        scheme: controller.usedScheme,
-                        onChanged: controller.setUsedScheme,
-                      ),
+                      trailing: ThemeSelectButtons(scheme: controller.usedScheme, onChanged: controller.setUsedScheme),
                     ),
                     // Show theme name and description.
                     ListTile(
@@ -115,12 +100,7 @@ class HomePage extends StatelessWidget {
                       subtitle: Text(AppColor.explainUsedColors(controller)),
                     ),
                     // Only Playground uses the error key color.
-                    ListTile(
-                      trailing: UseKeyColorsButtons(
-                        controller: controller,
-                        showErrorButton: false,
-                      ),
-                    ),
+                    ListTile(trailing: UseKeyColorsButtons(controller: controller, showErrorButton: false)),
                     // Show all active colors in ThemeData, these will all be
                     // deprecated in Flutter SDK, for more info see
                     // https://github.com/flutter/flutter/issues/91772
@@ -129,12 +109,14 @@ class HomePage extends StatelessWidget {
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Use component themes'),
-                      subtitle: const Text('Enable component themes. '
-                          'They are not customized in this example. FCS M3 '
-                          'component themes look mostly same as default M3, '
-                          'but in M2 mode, FCS defaults are very opinionated '
-                          'and look more like M3 defaults than M2 '
-                          'defaults.'),
+                      subtitle: const Text(
+                        'Enable component themes. '
+                        'They are not customized in this example. FCS M3 '
+                        'component themes look mostly same as default M3, '
+                        'but in M2 mode, FCS defaults are very opinionated '
+                        'and look more like M3 defaults than M2 '
+                        'defaults.',
+                      ),
                       value: controller.useSubThemes,
                       onChanged: controller.setUseSubThemes,
                     ),

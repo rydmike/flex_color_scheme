@@ -11,11 +11,8 @@ void main() {
   group('FTMS1 LDS: WITH FlexThemeModeSwitch LightMode LightDarkSystem', () {
     debugDefaultTargetPlatformOverride = null;
 
-    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ThemeSwitchApp(
-        order: FlexThemeModeButtonOrder.lightDarkSystem,
-      ));
+    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode', (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(order: FlexThemeModeButtonOrder.lightDarkSystem));
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -24,8 +21,8 @@ void main() {
 
       // EXPECT: That it STARTED in light theme mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate lightMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      final WidgetPredicate lightMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.light;
       expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a theme mode 3-way switch.
@@ -48,8 +45,8 @@ void main() {
 
       // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate darkMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      final WidgetPredicate darkMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.dark;
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a system theme mode button
@@ -69,11 +66,8 @@ void main() {
   group('FTMS1 LSD: WITH FlexThemeModeSwitch LightMode LightSystemDark', () {
     debugDefaultTargetPlatformOverride = null;
 
-    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ThemeSwitchApp(
-        order: FlexThemeModeButtonOrder.lightSystemDark,
-      ));
+    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode', (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(order: FlexThemeModeButtonOrder.lightSystemDark));
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -82,8 +76,8 @@ void main() {
 
       // EXPECT: That it STARTED in light theme mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate lightMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      final WidgetPredicate lightMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.light;
       expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a theme mode 3-way switch.
@@ -106,8 +100,8 @@ void main() {
 
       // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate darkMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      final WidgetPredicate darkMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.dark;
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a system theme mode button
@@ -127,11 +121,8 @@ void main() {
   group('FTMS1 DLS: WITH FlexThemeModeSwitch LightMode DarkLightSystem', () {
     debugDefaultTargetPlatformOverride = null;
 
-    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ThemeSwitchApp(
-        order: FlexThemeModeButtonOrder.darkLightSystem,
-      ));
+    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode', (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(order: FlexThemeModeButtonOrder.darkLightSystem));
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -145,8 +136,8 @@ void main() {
 
       // EXPECT: That it STARTED in light theme mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate lightMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      final WidgetPredicate lightMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.light;
       expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a theme mode 3-way switch.
@@ -162,11 +153,8 @@ void main() {
       expect(lightSwitch, findsOneWidget);
 
       // EXPECT: Light switch has default white background and type canvas.
-      final Finder lightSwitchMaterial = find
-          .descendant(of: lightSwitch, matching: find.byType(Material))
-          .first;
-      final Material lightMaterial =
-          tester.widget<Material>(lightSwitchMaterial);
+      final Finder lightSwitchMaterial = find.descendant(of: lightSwitch, matching: find.byType(Material)).first;
+      final Material lightMaterial = tester.widget<Material>(lightSwitchMaterial);
       expect(lightMaterial.type, MaterialType.canvas);
       expect(lightMaterial.color, Colors.white);
 
@@ -177,17 +165,15 @@ void main() {
       expect(darkSwitch, findsOneWidget);
 
       // EXPECT: Dark switch has default grey850 background and type canvas.
-      final Finder darkSwitchMaterial = find
-          .descendant(of: darkSwitch, matching: find.byType(Material))
-          .first;
+      final Finder darkSwitchMaterial = find.descendant(of: darkSwitch, matching: find.byType(Material)).first;
       final Material darkMaterial = tester.widget<Material>(darkSwitchMaterial);
       expect(darkMaterial.type, MaterialType.canvas);
       expect(darkMaterial.color, Colors.grey[850]);
 
       // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate darkMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      final WidgetPredicate darkMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.dark;
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a system theme mode button
@@ -197,11 +183,8 @@ void main() {
       expect(systemSwitch, findsOneWidget);
 
       // EXPECT: Dark switch has default grey850 background and type canvas.
-      final Finder systemSwitchMaterial = find
-          .descendant(of: systemSwitch, matching: find.byType(Material))
-          .first;
-      final Material systemMaterial =
-          tester.widget<Material>(systemSwitchMaterial);
+      final Finder systemSwitchMaterial = find.descendant(of: systemSwitch, matching: find.byType(Material)).first;
+      final Material systemMaterial = tester.widget<Material>(systemSwitchMaterial);
       expect(systemMaterial.type, MaterialType.canvas);
       expect(systemMaterial.color, Colors.grey[500]);
 
@@ -216,12 +199,10 @@ void main() {
   group('FTMS1 DSL: WITH FlexThemeModeSwitch LightMode DarkSystemLight', () {
     debugDefaultTargetPlatformOverride = null;
 
-    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ThemeSwitchApp(
-        order: FlexThemeModeButtonOrder.darkSystemLight,
-        title: Text('TITLE'),
-      ));
+    testWidgets('FTMS1.01: Finds FlexThemeModeSwitch LightMode', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ThemeSwitchApp(order: FlexThemeModeButtonOrder.darkSystemLight, title: Text('TITLE')),
+      );
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -235,8 +216,8 @@ void main() {
 
       // EXPECT: That it STARTED in light theme mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate lightMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      final WidgetPredicate lightMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.light;
       expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a theme mode 3-way switch.
@@ -259,8 +240,8 @@ void main() {
 
       // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate darkMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      final WidgetPredicate darkMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.dark;
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a system theme mode button
@@ -279,18 +260,19 @@ void main() {
 
   group('FTMS2 LDS: WITH FlexThemeModeSwitch DarkMode LightDarkSystem', () {
     debugDefaultTargetPlatformOverride = null;
-    testWidgets('FTMS2.01: Finds FlexThemeModeSwitch in DarkMode no System btn',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ThemeSwitchApp(
-        themeMode: ThemeMode.dark,
-        showSystemMode: false,
-        labelAbove: false,
-        labelLight: 'light',
-        labelDark: 'dark',
-        labelSystem: 'system',
-        selected: false,
-        hasTitle: false,
-      ));
+    testWidgets('FTMS2.01: Finds FlexThemeModeSwitch in DarkMode no System btn', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ThemeSwitchApp(
+          themeMode: ThemeMode.dark,
+          showSystemMode: false,
+          labelAbove: false,
+          labelLight: 'light',
+          labelDark: 'dark',
+          labelSystem: 'system',
+          selected: false,
+          hasTitle: false,
+        ),
+      );
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -304,8 +286,8 @@ void main() {
 
       // EXPECT: That it STARTED in dark theme mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate darkMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      final WidgetPredicate darkMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.dark;
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a theme mode 3-way switch.
@@ -322,8 +304,8 @@ void main() {
 
       // EXPECT: That after the LIGHT theme mode TAP the app is in LIGHT mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate lightMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.light;
+      final WidgetPredicate lightMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.light;
       expect(find.byWidgetPredicate(lightMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a dark theme mode button
@@ -348,12 +330,8 @@ void main() {
   group('FTMS3: WITH FlexThemeModeSwitch SystemMode', () {
     debugDefaultTargetPlatformOverride = null;
 
-    testWidgets('FTMS3.01: Finds FlexThemeModeSwitch in SystemMode',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ThemeSwitchApp(
-        themeMode: ThemeMode.system,
-        changePadding: true,
-      ));
+    testWidgets('FTMS3.01: Finds FlexThemeModeSwitch in SystemMode', (WidgetTester tester) async {
+      await tester.pumpWidget(const ThemeSwitchApp(themeMode: ThemeMode.system, changePadding: true));
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -367,8 +345,8 @@ void main() {
 
       // EXPECT: That it STARTED in system theme mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate systemMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.system;
+      final WidgetPredicate systemMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.system;
       expect(find.byWidgetPredicate(systemMaterialApp), findsOneWidget);
 
       // EXPECT: That we find a theme mode 3-way switch.
@@ -391,8 +369,8 @@ void main() {
 
       // EXPECT: That after the DARK theme mode TAP the app is in DARK mode.
       // ignore: prefer_function_declarations_over_variables
-      final WidgetPredicate darkMaterialApp = (Widget widget) =>
-          widget is MaterialApp && widget.themeMode == ThemeMode.dark;
+      final WidgetPredicate darkMaterialApp =
+          (Widget widget) => widget is MaterialApp && widget.themeMode == ThemeMode.dark;
       expect(find.byWidgetPredicate(darkMaterialApp), findsOneWidget);
     });
   });
@@ -400,13 +378,10 @@ void main() {
   group('FTMS4: WITH FlexThemeModeOptionButton', () {
     debugDefaultTargetPlatformOverride = null;
 
-    testWidgets('FTMS4.01: Finds FlexThemeModeOptionButton with BUTTON sem',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ModeOptionButtonApp(
-        themeMode: ThemeMode.light,
-        label: 'BUTTON',
-        semanticLabel: null,
-      ));
+    testWidgets('FTMS4.01: Finds FlexThemeModeOptionButton with BUTTON sem', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ModeOptionButtonApp(themeMode: ThemeMode.light, label: 'BUTTON', semanticLabel: null),
+      );
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -426,14 +401,15 @@ void main() {
       // expect(sizedBox, findsOneWidget);
     });
     //
-    testWidgets('FTMS4.02: Finds FlexThemeModeOptionButton with BUTTON2 sem',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ModeOptionButtonApp(
-        themeMode: ThemeMode.light,
-        padding: EdgeInsets.all(5),
-        label: 'BUTTON',
-        semanticLabel: 'BUTTON2',
-      ));
+    testWidgets('FTMS4.02: Finds FlexThemeModeOptionButton with BUTTON2 sem', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ModeOptionButtonApp(
+          themeMode: ThemeMode.light,
+          padding: EdgeInsets.all(5),
+          label: 'BUTTON',
+          semanticLabel: 'BUTTON2',
+        ),
+      );
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -447,15 +423,16 @@ void main() {
       expect(modeButton, findsOneWidget);
     });
     //
-    testWidgets('FTMS4.03: Finds FlexThemeModeOptionButton with BUTTON2 sem',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(const ModeOptionButtonApp(
-        themeMode: ThemeMode.light,
-        padding: EdgeInsetsDirectional.fromSTEB(5, 6, 7, 8),
-        label: 'BUTTON',
-        semanticLabel: 'BUTTON3',
-        setFocusOnTap: true,
-      ));
+    testWidgets('FTMS4.03: Finds FlexThemeModeOptionButton with BUTTON2 sem', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ModeOptionButtonApp(
+          themeMode: ThemeMode.light,
+          padding: EdgeInsetsDirectional.fromSTEB(5, 6, 7, 8),
+          label: 'BUTTON',
+          semanticLabel: 'BUTTON3',
+          setFocusOnTap: true,
+        ),
+      );
 
       // EXPECT: That we find the built MaterialApp.
       final Finder theApp = find.byKey(const ValueKey<String>('theApp'));
@@ -536,59 +513,60 @@ class _ThemeSwitchAppState extends State<ThemeSwitchApp> {
     return MaterialApp(
       key: const ValueKey<String>('theApp'),
       title: 'Theme Switch',
-      theme: FlexColorScheme.light(
-              colors: FlexColor.schemes[FlexScheme.material]!.light)
-          .toTheme,
-      darkTheme: FlexColorScheme.dark(
-              colors: FlexColor.schemes[FlexScheme.material]!.dark)
-          .toTheme,
+      theme: FlexColorScheme.light(colors: FlexColor.schemes[FlexScheme.material]!.light).toTheme,
+      darkTheme: FlexColorScheme.dark(colors: FlexColor.schemes[FlexScheme.material]!.dark).toTheme,
       themeMode: mode,
       home: Scaffold(
         appBar: AppBar(title: const Text('Theme Switch')),
         body: Column(
           children: <Widget>[
             FlexThemeModeSwitch(
-                key: const ValueKey<String>('switch'),
-                themeMode: mode!,
-                labelAbove: widget.labelAbove,
-                labelLight: widget.labelLight,
-                labelDark: widget.labelDark,
-                labelSystem: widget.labelSystem,
-                showSystemMode: widget.showSystemMode,
-                buttonOrder: widget.order,
-                title: widget.title,
-                hasTitle: widget.hasTitle,
-                optionButtonMargin: widget.changePadding
-                    ? padNormal
-                        ? padNor
-                        : padDir
-                    : null,
-                padding: widget.changePadding
-                    ? padNormal
-                        ? padDir
-                        : padNor
-                    : null,
-                onThemeModeChanged: (ThemeMode value) {
-                  setState(() {
-                    mode = value;
-                    padNormal = !padNormal;
-                  });
-                },
-                flexSchemeData: FlexColor.schemes[FlexScheme.material]!),
+              key: const ValueKey<String>('switch'),
+              themeMode: mode!,
+              labelAbove: widget.labelAbove,
+              labelLight: widget.labelLight,
+              labelDark: widget.labelDark,
+              labelSystem: widget.labelSystem,
+              showSystemMode: widget.showSystemMode,
+              buttonOrder: widget.order,
+              title: widget.title,
+              hasTitle: widget.hasTitle,
+              optionButtonMargin:
+                  widget.changePadding
+                      ? padNormal
+                          ? padNor
+                          : padDir
+                      : null,
+              padding:
+                  widget.changePadding
+                      ? padNormal
+                          ? padDir
+                          : padNor
+                      : null,
+              onThemeModeChanged: (ThemeMode value) {
+                setState(() {
+                  mode = value;
+                  padNormal = !padNormal;
+                });
+              },
+              flexSchemeData: FlexColor.schemes[FlexScheme.material]!,
+            ),
             FlexThemeModeOptionButton(
               key: const ValueKey<String>('option'),
               flexSchemeColor: FlexColor.schemes[FlexScheme.material]!.light,
               backgroundColor: Colors.white,
-              optionButtonMargin: widget.changePadding
-                  ? padNormal
-                      ? padNor
-                      : padDir
-                  : null,
-              padding: widget.changePadding
-                  ? padNormal
-                      ? padDir
-                      : padNor
-                  : null,
+              optionButtonMargin:
+                  widget.changePadding
+                      ? padNormal
+                          ? padNor
+                          : padDir
+                      : null,
+              padding:
+                  widget.changePadding
+                      ? padNormal
+                          ? padDir
+                          : padNor
+                      : null,
               selected: selected,
               onSelect: () {
                 setState(() {
@@ -644,12 +622,8 @@ class _ModeOptionButtonAppState extends State<ModeOptionButtonApp> {
     return MaterialApp(
       key: const ValueKey<String>('theApp'),
       title: 'Theme Switch',
-      theme: FlexColorScheme.light(
-              colors: FlexColor.schemes[FlexScheme.material]!.light)
-          .toTheme,
-      darkTheme: FlexColorScheme.dark(
-              colors: FlexColor.schemes[FlexScheme.material]!.dark)
-          .toTheme,
+      theme: FlexColorScheme.light(colors: FlexColor.schemes[FlexScheme.material]!.light).toTheme,
+      darkTheme: FlexColorScheme.dark(colors: FlexColor.schemes[FlexScheme.material]!.dark).toTheme,
       themeMode: mode,
       home: Scaffold(
         appBar: AppBar(title: const Text('Theme Switch')),

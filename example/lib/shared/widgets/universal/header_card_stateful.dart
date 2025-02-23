@@ -141,13 +141,10 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
-    final Color cardColor = widget.backgroundColor ??
-        (isLight ? scheme.surfaceBright : scheme.surfaceDim);
+    final Color cardColor = widget.backgroundColor ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
     final Color headerColor = widget.headingColor ?? scheme.surfaceContainer;
 
-    final bool useHeading = widget.title != null ||
-        widget.subtitle != null ||
-        widget.leading != null;
+    final bool useHeading = widget.title != null || widget.subtitle != null || widget.leading != null;
 
     // Default starting point value based on M3 and M2 mode spec values.
     double borderRadius = useMaterial3 ? 12 : 4;
@@ -157,20 +154,21 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
       final BorderRadius shape = cardShape.borderRadius as BorderRadius;
       borderRadius = shape.bottomLeft.x;
     }
-    final bool useBorderSide = colorsAreClose(cardColor, background, isLight) ||
+    final bool useBorderSide =
+        colorsAreClose(cardColor, background, isLight) ||
         (useHeading && colorsAreClose(headerColor, background, isLight));
     final ShapeBorder shapeBorder = RoundedRectangleBorder(
       borderRadius: BorderRadiusDirectional.horizontal(
-        start:
-            widget.startStraight ? Radius.zero : Radius.circular(borderRadius),
+        start: widget.startStraight ? Radius.zero : Radius.circular(borderRadius),
         end: widget.endStraight ? Radius.zero : Radius.circular(borderRadius),
       ),
-      side: useBorderSide
-          ? BorderSide(
-              color: theme.dividerColor,
-              width: 0, // This gives a hairline 1 pc border
-            )
-          : BorderSide.none,
+      side:
+          useBorderSide
+              ? BorderSide(
+                color: theme.dividerColor,
+                width: 0, // This gives a hairline 1 pc border
+              )
+              : BorderSide.none,
     );
 
     return FocusTraversalGroup(
@@ -190,30 +188,26 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
                 leading: widget.leading,
                 title: widget.title,
                 subtitle: widget.subtitle,
-                trailing: widget.enabled
-                    ? ExpandIcon(
-                        size: 32,
-                        isExpanded: _isOpen,
-                        padding: EdgeInsets.zero,
-                        onPressed: (_) {
-                          _handleTap();
-                        },
-                      )
-                    : null,
+                trailing:
+                    widget.enabled
+                        ? ExpandIcon(
+                          size: 32,
+                          isExpanded: _isOpen,
+                          padding: EdgeInsets.zero,
+                          onPressed: (_) {
+                            _handleTap();
+                          },
+                        )
+                        : null,
                 onTap: widget.enabled ? _handleTap : null,
               ),
             ),
             AnimatedSwitcher(
               duration: widget.duration,
               transitionBuilder: (Widget child, Animation<double> animation) {
-                return SizeTransition(
-                  sizeFactor: animation,
-                  child: child,
-                );
+                return SizeTransition(sizeFactor: animation, child: child);
               },
-              child: (_isOpen && widget.child != null)
-                  ? widget.child
-                  : const SizedBox.shrink(),
+              child: (_isOpen && widget.child != null) ? widget.child : const SizedBox.shrink(),
             ),
           ],
         ),

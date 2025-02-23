@@ -27,105 +27,106 @@ class SlidersPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     // final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
     final bool isLight = theme.brightness == Brightness.light;
-    final String labelThumbDefault = controller.sliderBaseSchemeColor == null
-        ? 'primary'
-        : '${controller.sliderBaseSchemeColor?.name}';
+    final String labelThumbDefault =
+        controller.sliderBaseSchemeColor == null ? 'primary' : '${controller.sliderBaseSchemeColor?.name}';
     final String labelIndicatorDefault =
-        controller.sliderBaseSchemeColor == null &&
-                controller.sliderThumbSchemeColor == null
+        controller.sliderBaseSchemeColor == null && controller.sliderThumbSchemeColor == null
             ? 'primary'
             : controller.sliderThumbSchemeColor == null
-                ? '${controller.sliderBaseSchemeColor?.name}'
-                : '${controller.sliderThumbSchemeColor?.name}';
+            ? '${controller.sliderBaseSchemeColor?.name}'
+            : '${controller.sliderThumbSchemeColor?.name}';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
 
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Main color'),
-              defaultLabel: 'primary',
-              value: controller.sliderBaseSchemeColor,
-              onChanged: controller.setSliderBaseSchemeColor,
-            ),
-            lastWidget: ColorSchemePopupMenu(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Thumb color'),
-              defaultLabel: labelThumbDefault,
-              value: controller.sliderThumbSchemeColor,
-              onChanged: controller.setSliderThumbSchemeColor,
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Value indicator color'),
-              defaultLabel: labelIndicatorDefault,
-              defaultDisabledLabelM2:
-                  'grey [onSurface op60% alpha blended w. surface op90%]',
-              colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
-              value: controller.sliderIndicatorSchemeColor,
-              onChanged: controller.setSliderIndicatorSchemeColor,
-            ),
-            lastWidget: SwitchListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Tinted indicator'),
-              subtitleReveal: Text(
-                'Uses a scrim and opacity, to make it much '
-                '${isLight ? 'darker' : 'lighter'} than the selected color, '
-                'it also and adds some slight opacity. By default the value '
-                'indicator only shows up on a stepped Slider. You can change '
-                'this behavior with the indicator visibility further '
-                'below.\n',
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Main color'),
+                defaultLabel: 'primary',
+                value: controller.sliderBaseSchemeColor,
+                onChanged: controller.setSliderBaseSchemeColor,
               ),
-              value: controller.sliderValueTinted,
-              onChanged: controller.setSliderValueTinted,
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: EnumPopupMenu<FlexSliderIndicatorType>(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              values: FlexSliderIndicatorType.values,
-              title: const Text('Indicator type'),
-              value: controller.sliderValueIndicatorType,
-              onChanged: controller.setSliderValueIndicatorType,
-            ),
-            lastWidget: EnumPopupMenu<ShowValueIndicator>(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              values: ShowValueIndicator.values,
-              title: const Text('Indicator visibility'),
-              value: controller.sliderShowValueIndicator,
-              onChanged: controller.setSliderShowValueIndicator,
-            ),
-            isRow: isRow,
-          );
-        }),
+              lastWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Thumb color'),
+                defaultLabel: labelThumbDefault,
+                value: controller.sliderThumbSchemeColor,
+                onChanged: controller.setSliderThumbSchemeColor,
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Value indicator color'),
+                defaultLabel: labelIndicatorDefault,
+                defaultDisabledLabelM2: 'grey [onSurface op60% alpha blended w. surface op90%]',
+                colorPrefix: controller.sliderValueTinted ? 'tinted ' : '',
+                value: controller.sliderIndicatorSchemeColor,
+                onChanged: controller.setSliderIndicatorSchemeColor,
+              ),
+              lastWidget: SwitchListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Tinted indicator'),
+                subtitleReveal: Text(
+                  'Uses a scrim and opacity, to make it much '
+                  '${isLight ? 'darker' : 'lighter'} than the selected color, '
+                  'it also and adds some slight opacity. By default the value '
+                  'indicator only shows up on a stepped Slider. You can change '
+                  'this behavior with the indicator visibility further '
+                  'below.\n',
+                ),
+                value: controller.sliderValueTinted,
+                onChanged: controller.setSliderValueTinted,
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: EnumPopupMenu<FlexSliderIndicatorType>(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                values: FlexSliderIndicatorType.values,
+                title: const Text('Indicator type'),
+                value: controller.sliderValueIndicatorType,
+                onChanged: controller.setSliderValueIndicatorType,
+              ),
+              lastWidget: EnumPopupMenu<ShowValueIndicator>(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                values: ShowValueIndicator.values,
+                title: const Text('Indicator visibility'),
+                value: controller.sliderShowValueIndicator,
+                onChanged: controller.setSliderShowValueIndicator,
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Track height'),
@@ -142,10 +143,7 @@ class SlidersPanel extends StatelessWidget {
         const Divider(),
         const ListTile(title: Text('Slider')),
         //
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: SliderShowcase(),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: SliderShowcase()),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
@@ -154,18 +152,16 @@ class SlidersPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'There are many issues related to Slider and a few '
+                  text:
+                      'There are many issues related to Slider and a few '
                       'to its theming as well. You can find a collection of '
                       'issues related to the Slider in the slider umbrella ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue125329,
-                  text: 'issue #125329',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsFlutterIssue125329, text: 'issue #125329'),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. The Slider does also not in Flutter 3.24 and '
+                  text:
+                      '. The Slider does also not in Flutter 3.24 and '
                       'earlier versions follow the correct Material-3 '
                       'design. This is being worked on and a version that '
                       'supports it is expected in a coming Flutter update.\n',
@@ -176,17 +172,11 @@ class SlidersPanel extends StatelessWidget {
         ),
         const Divider(),
         const ListTile(title: Text('Slider.adaptive')),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: SliderAdaptiveShowcase(),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: SliderAdaptiveShowcase()),
         TestAdaptiveResponse(controller),
         const Divider(),
         const ListTileReveal(title: Text('RangeSlider')),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: RangeSliderShowcase(),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: RangeSliderShowcase()),
         ListTileReveal(
           title: const Text('Known issues'),
           dense: true,
@@ -195,7 +185,8 @@ class SlidersPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'The RangeSlider should behave and look like Slider '
+                  text:
+                      'The RangeSlider should behave and look like Slider '
                       'in Material-3 mode. This design is not yet available in '
                       'Flutter 3.24 and earlier. It can also not use the same '
                       'indicator classes as Slider. FCS applies existing drop '
@@ -208,15 +199,8 @@ class SlidersPanel extends StatelessWidget {
                       'You can find a collection of issues related to the '
                       'RangeSlider in the slider umbrella ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue125329,
-                  text: 'issue #125329',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '.\n',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsFlutterIssue125329, text: 'issue #125329'),
+                TextSpan(style: spanTextStyle, text: '.\n'),
               ],
             ),
           ),

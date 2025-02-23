@@ -16,10 +16,7 @@ import 'surface_colors.dart';
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
 class ColorBlendsPanel extends StatelessWidget {
-  const ColorBlendsPanel(
-    this.controller, {
-    super.key,
-  });
+  const ColorBlendsPanel(this.controller, {super.key});
   final ThemeController controller;
 
   static const String _blendInfo =
@@ -134,8 +131,7 @@ class ColorBlendsPanel extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,10 +141,7 @@ class ColorBlendsPanel extends StatelessWidget {
         if (isLight) ...<Widget>[
           LightSurfaceModePopupMenu(controller: controller),
           LightSurfaceModeListTile(controller: controller),
-          const ListTileReveal(
-            title: Text('Surface colors blend level'),
-            subtitleReveal: Text(_blendInfo),
-          ),
+          const ListTileReveal(title: Text('Surface colors blend level'), subtitleReveal: Text(_blendInfo)),
           ListTile(
             title: Slider(
               min: 0,
@@ -165,14 +158,10 @@ class ColorBlendsPanel extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: theme.textTheme.bodySmall,
-                  ),
+                  Text('LEVEL', style: theme.textTheme.bodySmall),
                   Text(
                     '${controller.blendLevelLight}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -181,10 +170,7 @@ class ColorBlendsPanel extends StatelessWidget {
         ] else ...<Widget>[
           DarkSurfaceModePopupMenu(controller: controller),
           DarkSurfaceModeListTile(controller: controller),
-          const ListTileReveal(
-            title: Text('Surface colors blend level'),
-            subtitleReveal: Text(_blendInfo),
-          ),
+          const ListTileReveal(title: Text('Surface colors blend level'), subtitleReveal: Text(_blendInfo)),
           ListTile(
             title: Slider(
               min: 0,
@@ -201,14 +187,10 @@ class ColorBlendsPanel extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: theme.textTheme.bodySmall,
-                  ),
+                  Text('LEVEL', style: theme.textTheme.bodySmall),
                   Text(
                     '${controller.blendLevelDark}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -216,10 +198,7 @@ class ColorBlendsPanel extends StatelessWidget {
           ),
         ],
         // Show all the surface colors to show what is done to them.
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: SurfaceColors(controller: controller),
-        ),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 16.0), child: SurfaceColors(controller: controller)),
         const SizedBox(height: 8),
         if (isLight) ...<Widget>[
           SurfacesSeedBlendColorLight(controller),
@@ -247,16 +226,18 @@ class ColorBlendsPanel extends StatelessWidget {
             title: const Text('Scaffold background override'),
             subtitleReveal: const Text(_scaffoldColorOverrideInfo),
             defaultLabel: 'not used',
-            defaultDisabledLabel: controller.useFlexColorScheme
-                ? controller.scaffoldLightIsWhite
-                    ? 'White'
-                    : 'surfaceContainerLowest'
-                : 'surface',
-            defaultDisabledLabelM2: controller.useFlexColorScheme
-                ? controller.scaffoldLightIsWhite
-                    ? 'White'
-                    : 'surface'
-                : 'grey50',
+            defaultDisabledLabel:
+                controller.useFlexColorScheme
+                    ? controller.scaffoldLightIsWhite
+                        ? 'White'
+                        : 'surfaceContainerLowest'
+                    : 'surface',
+            defaultDisabledLabelM2:
+                controller.useFlexColorScheme
+                    ? controller.scaffoldLightIsWhite
+                        ? 'White'
+                        : 'surface'
+                    : 'grey50',
             value: controller.scaffoldBackgroundLightSchemeColor,
             onChanged: controller.setScaffoldBackgroundLightSchemeColor,
           ),
@@ -287,16 +268,18 @@ class ColorBlendsPanel extends StatelessWidget {
             title: const Text('Scaffold background override'),
             subtitleReveal: const Text(_scaffoldColorOverrideInfo),
             defaultLabel: 'not used',
-            defaultDisabledLabel: controller.useFlexColorScheme
-                ? controller.scaffoldDarkIsTrueBlack
-                    ? 'Black'
-                    : 'surfaceContainerLowest'
-                : 'surface',
-            defaultDisabledLabelM2: controller.useFlexColorScheme
-                ? controller.scaffoldDarkIsTrueBlack
-                    ? 'Black'
-                    : 'surface'
-                : 'grey850',
+            defaultDisabledLabel:
+                controller.useFlexColorScheme
+                    ? controller.scaffoldDarkIsTrueBlack
+                        ? 'Black'
+                        : 'surfaceContainerLowest'
+                    : 'surface',
+            defaultDisabledLabelM2:
+                controller.useFlexColorScheme
+                    ? controller.scaffoldDarkIsTrueBlack
+                        ? 'Black'
+                        : 'surface'
+                    : 'grey850',
             value: controller.scaffoldBackgroundDarkSchemeColor,
             onChanged: controller.setScaffoldBackgroundDarkSchemeColor,
           ),
@@ -340,28 +323,24 @@ class ColorBlendsPanel extends StatelessWidget {
               max: 40,
               divisions: 40,
               label: controller.blendOnLevelLight.toString(),
-              value:
-                  enableControl ? controller.blendOnLevelLight.toDouble() : 0,
-              onChanged: enableControl
-                  ? (double value) {
-                      controller.setBlendOnLevelLight(value.toInt());
-                    }
-                  : null,
+              value: enableControl ? controller.blendOnLevelLight.toDouble() : 0,
+              onChanged:
+                  enableControl
+                      ? (double value) {
+                        controller.setBlendOnLevelLight(value.toInt());
+                      }
+                      : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: theme.textTheme.bodySmall,
-                  ),
+                  Text('LEVEL', style: theme.textTheme.bodySmall),
                   Text(
                     // ignore: lines_longer_than_80_chars
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelLight : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -400,26 +379,23 @@ class ColorBlendsPanel extends StatelessWidget {
               divisions: 40,
               label: controller.blendOnLevelDark.toString(),
               value: enableControl ? controller.blendOnLevelDark.toDouble() : 0,
-              onChanged: enableControl
-                  ? (double value) {
-                      controller.setBlendOnLevelDark(value.toInt());
-                    }
-                  : null,
+              onChanged:
+                  enableControl
+                      ? (double value) {
+                        controller.setBlendOnLevelDark(value.toInt());
+                      }
+                      : null,
             ),
             trailing: Padding(
               padding: const EdgeInsetsDirectional.only(end: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'LEVEL',
-                    style: theme.textTheme.bodySmall,
-                  ),
+                  Text('LEVEL', style: theme.textTheme.bodySmall),
                   Text(
                     // ignore: lines_longer_than_80_chars
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -427,10 +403,7 @@ class ColorBlendsPanel extends StatelessWidget {
           ),
         ],
         // Show all the on colors to show what is done to them.
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: OnColors(controller: controller),
-        ),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 16.0), child: OnColors(controller: controller)),
         const SizedBox(height: 16),
       ],
     );

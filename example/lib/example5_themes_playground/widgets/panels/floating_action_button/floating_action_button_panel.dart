@@ -24,26 +24,22 @@ class FloatingActionButtonPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
     final String fabRadiusDefaultLabel =
-        controller.floatingActionButtonBorderRadius == null &&
-                effectiveRadius == null
+        controller.floatingActionButtonBorderRadius == null && effectiveRadius == null
             ? '16 dp'
-            : controller.floatingActionButtonBorderRadius == null &&
-                    controller.defaultRadius != null
-                ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
-                : '';
+            : controller.floatingActionButtonBorderRadius == null && controller.defaultRadius != null
+            ? 'global ${effectiveRadius!.toStringAsFixed(0)} dp'
+            : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,13 +56,12 @@ class FloatingActionButtonPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Foreground color'),
-          defaultLabel: controller.floatingActionButtonSchemeColor != null
-              ? SchemeColor
-                  .values[FlexSubThemes.onSchemeColor(
-                          controller.floatingActionButtonSchemeColor!)
-                      .index]
-                  .name
-              : useMaterial3
+          defaultLabel:
+              controller.floatingActionButtonSchemeColor != null
+                  ? SchemeColor
+                      .values[FlexSubThemes.onSchemeColor(controller.floatingActionButtonSchemeColor!).index]
+                      .name
+                  : useMaterial3
                   ? 'onPrimaryContainer'
                   : 'onSecondary',
           defaultDisabledLabel: 'onPrimaryContainer',
@@ -74,39 +69,38 @@ class FloatingActionButtonPanel extends StatelessWidget {
           value: controller.floatingActionButtonForegroundSchemeColor,
           onChanged: controller.setFloatingActionButtonForegroundSchemeColor,
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: FabShowcase(),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: FabShowcase()),
         SwitchListTileReveal(
           title: const Text('Use themed shape'),
           enabled: enableControl,
           subtitleReveal: const Text(
-              'OFF removes shape usage, making it use default '
-              'style, regardless of global border radius setting or own radius '
-              'setting.\n'),
-          value: controller.floatingActionButtonUseShape &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged:
-              enableControl ? controller.setFloatingActionButtonUseShape : null,
+            'OFF removes shape usage, making it use default '
+            'style, regardless of global border radius setting or own radius '
+            'setting.\n',
+          ),
+          value: controller.floatingActionButtonUseShape && controller.useSubThemes && controller.useFlexColorScheme,
+          onChanged: enableControl ? controller.setFloatingActionButtonUseShape : null,
         ),
         SwitchListTileReveal(
           enabled: enableControl && controller.floatingActionButtonUseShape,
           title: const Text('Always circular'),
-          subtitleReveal:
-              const Text('Turn on to always use circular and stadium '
-                  'shaped FAB, also in Material-3.\n'),
-          value: controller.floatingActionButtonAlwaysCircular &&
+          subtitleReveal: const Text(
+            'Turn on to always use circular and stadium '
+            'shaped FAB, also in Material-3.\n',
+          ),
+          value:
+              controller.floatingActionButtonAlwaysCircular &&
               controller.floatingActionButtonUseShape &&
               controller.useSubThemes &&
               controller.useFlexColorScheme,
-          onChanged: enableControl && controller.floatingActionButtonUseShape
-              ? controller.setFloatingActionButtonAlwaysCircular
-              : null,
+          onChanged:
+              enableControl && controller.floatingActionButtonUseShape
+                  ? controller.setFloatingActionButtonAlwaysCircular
+                  : null,
         ),
         SliderListTileReveal(
-          enabled: enableControl &&
+          enabled:
+              enableControl &&
               controller.floatingActionButtonUseShape &&
               !controller.floatingActionButtonAlwaysCircular,
           title: const Text('Border radius'),
@@ -120,12 +114,11 @@ class FloatingActionButtonPanel extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: fabRadiusDefaultLabel,
           valueDefaultDisabledLabel:
-              controller.floatingActionButtonAlwaysCircular &&
-                      controller.floatingActionButtonUseShape
+              controller.floatingActionButtonAlwaysCircular && controller.floatingActionButtonUseShape
                   ? 'circular'
                   : useMaterial3
-                      ? 'M3 rounded'
-                      : 'circular',
+                  ? 'M3 rounded'
+                  : 'circular',
         ),
         const Divider(),
         ListTileReveal(
@@ -136,21 +129,15 @@ class FloatingActionButtonPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Current Flutter SDK FloatingActionButton theming has '
+                  text:
+                      'Current Flutter SDK FloatingActionButton theming has '
                       'limitations. You cannot make themed '
                       'FloatingActionButtons where the radius varies '
                       'by type, like the Material-3 defaults do. See '
                       'Flutter SDK ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue107946,
-                  text: 'issue #107946',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: ' for more info.\n',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsFlutterIssue107946, text: 'issue #107946'),
+                TextSpan(style: spanTextStyle, text: ' for more info.\n'),
               ],
             ),
           ),

@@ -263,10 +263,7 @@ class ShowcaseMaterial extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('TextTheme', style: theme.textTheme.titleMedium),
-                const TextThemeShowcase(),
-              ],
+              children: <Widget>[Text('TextTheme', style: theme.textTheme.titleMedium), const TextThemeShowcase()],
             ),
           ),
         ),
@@ -278,8 +275,7 @@ class ShowcaseMaterial extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('PrimaryTextTheme',
-                    style: theme.primaryTextTheme.titleMedium),
+                Text('PrimaryTextTheme', style: theme.primaryTextTheme.titleMedium),
                 const PrimaryTextThemeShowcase(),
               ],
             ),
@@ -302,28 +298,12 @@ class ElevatedButtonShowcase extends StatelessWidget {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
-          SizedBox(
-            width: 116,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Elevated'),
-            ),
-          ),
+          SizedBox(width: 116, child: ElevatedButton(onPressed: () {}, child: const Text('Elevated'))),
           SizedBox(
             width: 110,
-            child: ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: const Text('Icon'),
-            ),
+            child: ElevatedButton.icon(onPressed: () {}, icon: const Icon(Icons.add), label: const Text('Icon')),
           ),
-          const SizedBox(
-            width: 117,
-            child: ElevatedButton(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-          ),
+          const SizedBox(width: 117, child: ElevatedButton(onPressed: null, child: Text('Disabled'))),
         ],
       ),
     );
@@ -341,28 +321,12 @@ class FilledButtonShowcase extends StatelessWidget {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
-          SizedBox(
-            width: 116,
-            child: FilledButton(
-              onPressed: () {},
-              child: const Text('Filled'),
-            ),
-          ),
+          SizedBox(width: 116, child: FilledButton(onPressed: () {}, child: const Text('Filled'))),
           SizedBox(
             width: 110,
-            child: FilledButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: const Text('Icon'),
-            ),
+            child: FilledButton.icon(onPressed: () {}, icon: const Icon(Icons.add), label: const Text('Icon')),
           ),
-          const SizedBox(
-            width: 117,
-            child: FilledButton(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-          ),
+          const SizedBox(width: 117, child: FilledButton(onPressed: null, child: Text('Disabled'))),
         ],
       ),
     );
@@ -380,28 +344,12 @@ class FilledButtonTonalShowcase extends StatelessWidget {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
-          SizedBox(
-            width: 116,
-            child: FilledButton.tonal(
-              onPressed: () {},
-              child: const Text('Tonal'),
-            ),
-          ),
+          SizedBox(width: 116, child: FilledButton.tonal(onPressed: () {}, child: const Text('Tonal'))),
           SizedBox(
             width: 110,
-            child: FilledButton.tonalIcon(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: const Text('Icon'),
-            ),
+            child: FilledButton.tonalIcon(onPressed: () {}, icon: const Icon(Icons.add), label: const Text('Icon')),
           ),
-          const SizedBox(
-            width: 117,
-            child: FilledButton.tonal(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-          ),
+          const SizedBox(width: 117, child: FilledButton.tonal(onPressed: null, child: Text('Disabled'))),
         ],
       ),
     );
@@ -419,28 +367,12 @@ class OutlinedButtonShowcase extends StatelessWidget {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
-          SizedBox(
-            width: 116,
-            child: OutlinedButton(
-              onPressed: () {},
-              child: const Text('Outlined'),
-            ),
-          ),
+          SizedBox(width: 116, child: OutlinedButton(onPressed: () {}, child: const Text('Outlined'))),
           SizedBox(
             width: 110,
-            child: OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: const Text('Icon'),
-            ),
+            child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.add), label: const Text('Icon')),
           ),
-          const SizedBox(
-            width: 117,
-            child: OutlinedButton(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-          ),
+          const SizedBox(width: 117, child: OutlinedButton(onPressed: null, child: Text('Disabled'))),
         ],
       ),
     );
@@ -458,28 +390,12 @@ class TextButtonShowcase extends StatelessWidget {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
-          SizedBox(
-            width: 116,
-            child: TextButton(
-              onPressed: () {},
-              child: const Text('Text'),
-            ),
-          ),
+          SizedBox(width: 116, child: TextButton(onPressed: () {}, child: const Text('Text'))),
           SizedBox(
             width: 110,
-            child: TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-              label: const Text('Icon'),
-            ),
+            child: TextButton.icon(onPressed: () {}, icon: const Icon(Icons.add), label: const Text('Icon')),
           ),
-          const SizedBox(
-            width: 117,
-            child: TextButton(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-          ),
+          const SizedBox(width: 117, child: TextButton(onPressed: null, child: Text('Disabled'))),
         ],
       ),
     );
@@ -512,36 +428,16 @@ class _ToggleButtonsShowcaseState extends State<ToggleButtonsShowcase> {
                 selected[toggledIndex] = !selected[toggledIndex];
               });
             },
-            children: const <Widget>[
-              Icon(Icons.adb),
-              Icon(Icons.phone),
-              Icon(Icons.account_circle),
-            ],
+            children: const <Widget>[Icon(Icons.adb), Icon(Icons.phone), Icon(Icons.account_circle)],
           ),
-          if (widget.compareButtons ?? false)
-            OutlinedButton(
-              onPressed: () {},
-              child: const Text('Outlined'),
-            ),
-          if (widget.compareButtons ?? false)
-            FilledButton(
-              onPressed: () {},
-              child: const Text('Filled'),
-            ),
+          if (widget.compareButtons ?? false) OutlinedButton(onPressed: () {}, child: const Text('Outlined')),
+          if (widget.compareButtons ?? false) FilledButton(onPressed: () {}, child: const Text('Filled')),
           ToggleButtons(
             isSelected: const <bool>[true, false, false],
             onPressed: null,
-            children: const <Widget>[
-              Icon(Icons.adb),
-              Icon(Icons.phone),
-              Icon(Icons.account_circle),
-            ],
+            children: const <Widget>[Icon(Icons.adb), Icon(Icons.phone), Icon(Icons.account_circle)],
           ),
-          if (widget.compareButtons ?? false)
-            const OutlinedButton(
-              onPressed: null,
-              child: Text('Outlined'),
-            ),
+          if (widget.compareButtons ?? false) const OutlinedButton(onPressed: null, child: Text('Outlined')),
         ],
       ),
     );
@@ -553,8 +449,7 @@ class SegmentedButtonShowcase extends StatefulWidget {
   final bool? showOutlinedButton;
 
   @override
-  State<SegmentedButtonShowcase> createState() =>
-      _SegmentedButtonShowcaseState();
+  State<SegmentedButtonShowcase> createState() => _SegmentedButtonShowcaseState();
 }
 
 enum Calendar { day, week, month, year }
@@ -574,22 +469,10 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
             showSelectedIcon: false,
             // multiSelectionEnabled: false,
             segments: const <ButtonSegment<Calendar>>[
-              ButtonSegment<Calendar>(
-                value: Calendar.day,
-                label: Text('Day'),
-              ),
-              ButtonSegment<Calendar>(
-                value: Calendar.week,
-                label: Text('Week'),
-              ),
-              ButtonSegment<Calendar>(
-                value: Calendar.month,
-                label: Text('Month'),
-              ),
-              ButtonSegment<Calendar>(
-                value: Calendar.year,
-                label: Text('Year'),
-              ),
+              ButtonSegment<Calendar>(value: Calendar.day, label: Text('Day')),
+              ButtonSegment<Calendar>(value: Calendar.week, label: Text('Week')),
+              ButtonSegment<Calendar>(value: Calendar.month, label: Text('Month')),
+              ButtonSegment<Calendar>(value: Calendar.year, label: Text('Year')),
             ],
             selected: <Calendar>{_selected},
             onSelectionChanged: (Set<Calendar> selected) {
@@ -600,26 +483,14 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
           ),
           SegmentedButton<Calendar>(
             segments: const <ButtonSegment<Calendar>>[
-              ButtonSegment<Calendar>(
-                value: Calendar.day,
-                label: Text('Day'),
-                icon: Icon(Icons.calendar_view_day),
-              ),
-              ButtonSegment<Calendar>(
-                value: Calendar.week,
-                icon: Icon(Icons.calendar_view_week),
-                label: Text('Week'),
-              ),
+              ButtonSegment<Calendar>(value: Calendar.day, label: Text('Day'), icon: Icon(Icons.calendar_view_day)),
+              ButtonSegment<Calendar>(value: Calendar.week, icon: Icon(Icons.calendar_view_week), label: Text('Week')),
               ButtonSegment<Calendar>(
                 value: Calendar.month,
                 icon: Icon(Icons.calendar_view_month),
                 label: Text('Mont'),
               ),
-              ButtonSegment<Calendar>(
-                value: Calendar.year,
-                icon: Icon(Icons.calendar_today),
-                label: Text('Year'),
-              ),
+              ButtonSegment<Calendar>(value: Calendar.year, icon: Icon(Icons.calendar_today), label: Text('Year')),
             ],
             selected: <Calendar>{_selected},
             onSelectionChanged: (Set<Calendar> selected) {
@@ -636,22 +507,14 @@ class _SegmentedButtonShowcaseState extends State<SegmentedButtonShowcase> {
                 icon: Icon(Icons.calendar_view_day),
                 enabled: false,
               ),
-              ButtonSegment<Calendar>(
-                value: Calendar.week,
-                icon: Icon(Icons.calendar_view_week),
-                label: Text('Week'),
-              ),
+              ButtonSegment<Calendar>(value: Calendar.week, icon: Icon(Icons.calendar_view_week), label: Text('Week')),
               ButtonSegment<Calendar>(
                 value: Calendar.month,
                 icon: Icon(Icons.calendar_view_month),
                 label: Text('Mont'),
                 enabled: false,
               ),
-              ButtonSegment<Calendar>(
-                value: Calendar.year,
-                icon: Icon(Icons.calendar_today),
-                label: Text('Year'),
-              ),
+              ButtonSegment<Calendar>(value: Calendar.year, icon: Icon(Icons.calendar_today), label: Text('Year')),
             ],
             selected: <Calendar>{_selected},
             onSelectionChanged: (Set<Calendar> selected) {
@@ -780,13 +643,9 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
                 },
               ),
               Switch(
-                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                    (Set<WidgetState> states) {
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
                   if (states.contains(WidgetState.selected)) {
-                    return Icon(Icons.check,
-                        color: isLight
-                            ? colorScheme.primary
-                            : colorScheme.onPrimary);
+                    return Icon(Icons.check, color: isLight ? colorScheme.primary : colorScheme.onPrimary);
                   }
                   // All other states will use the default thumbIcon.
                   return Icon(Icons.close, color: colorScheme.onPrimary);
@@ -806,22 +665,12 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(width: _width, child: Text('Disabled')),
+              Switch(value: isOn1, onChanged: null),
+              Switch(value: !isOn1, onChanged: null),
               Switch(
-                value: isOn1,
-                onChanged: null,
-              ),
-              Switch(
-                value: !isOn1,
-                onChanged: null,
-              ),
-              Switch(
-                thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                    (Set<WidgetState> states) {
+                thumbIcon: WidgetStateProperty.resolveWith<Icon?>((Set<WidgetState> states) {
                   if (states.contains(WidgetState.selected)) {
-                    return Icon(Icons.check,
-                        color: isLight
-                            ? colorScheme.primary
-                            : colorScheme.onPrimary);
+                    return Icon(Icons.check, color: isLight ? colorScheme.primary : colorScheme.onPrimary);
                   }
                   // All other states will use the default thumbIcon.
                   return Icon(Icons.close, color: colorScheme.onPrimary);
@@ -861,14 +710,8 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(width: _width, child: Text('Disabled')),
-              Switch.adaptive(
-                value: isOn1,
-                onChanged: null,
-              ),
-              Switch.adaptive(
-                value: !isOn1,
-                onChanged: null,
-              ),
+              Switch.adaptive(value: isOn1, onChanged: null),
+              Switch.adaptive(value: !isOn1, onChanged: null),
             ],
           ),
           if (widget.showCupertinoSwitches)
@@ -903,14 +746,8 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
               runSpacing: 8,
               children: <Widget>[
                 const SizedBox(width: _width, child: Text('Disabled')),
-                CupertinoSwitch(
-                  value: isOn1,
-                  onChanged: null,
-                ),
-                CupertinoSwitch(
-                  value: !isOn1,
-                  onChanged: null,
-                ),
+                CupertinoSwitch(value: isOn1, onChanged: null),
+                CupertinoSwitch(value: !isOn1, onChanged: null),
               ],
             ),
         ],
@@ -1062,21 +899,9 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(width: _width, child: Text('Disabled')),
-              Checkbox(
-                tristate: true,
-                value: isSelectedTri1,
-                onChanged: null,
-              ),
-              Checkbox(
-                tristate: true,
-                value: isSelectedTri2,
-                onChanged: null,
-              ),
-              Checkbox(
-                tristate: true,
-                value: isSelectedTri3,
-                onChanged: null,
-              ),
+              Checkbox(tristate: true, value: isSelectedTri1, onChanged: null),
+              Checkbox(tristate: true, value: isSelectedTri2, onChanged: null),
+              Checkbox(tristate: true, value: isSelectedTri3, onChanged: null),
             ],
           ),
           if (widget.showCupertinoSwitches)
@@ -1112,10 +937,7 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
               children: <Widget>[
                 const SizedBox(width: _width, child: Text('Disabled')),
                 Checkbox.adaptive(value: isSelected1, onChanged: null),
-                Checkbox.adaptive(
-                  value: !isSelected1,
-                  onChanged: null,
-                ),
+                Checkbox.adaptive(value: !isSelected1, onChanged: null),
               ],
             ),
         ],
@@ -1174,16 +996,8 @@ class _RadioShowcaseState extends State<RadioShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(width: _width, child: Text('Disabled')),
-              Radio<bool>(
-                value: true,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
-              Radio<bool>(
-                value: false,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
+              Radio<bool>(value: true, groupValue: groupValue, onChanged: null),
+              Radio<bool>(value: false, groupValue: groupValue, onChanged: null),
             ],
           ),
           Wrap(
@@ -1218,16 +1032,8 @@ class _RadioShowcaseState extends State<RadioShowcase> {
             runSpacing: 8,
             children: <Widget>[
               const SizedBox(width: _width, child: Text('Disabled')),
-              Radio<bool>.adaptive(
-                value: true,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
-              Radio<bool>.adaptive(
-                value: false,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
+              Radio<bool>.adaptive(value: true, groupValue: groupValue, onChanged: null),
+              Radio<bool>.adaptive(value: false, groupValue: groupValue, onChanged: null),
             ],
           ),
         ],
@@ -1282,26 +1088,13 @@ class _SliderShowcaseState extends State<SliderShowcase> {
           ),
           ListTile(
             dense: true,
-            title:
-                Text('Slider stepped disabled (${value.toStringAsFixed(0)})'),
-            subtitle: Slider(
-              max: 30,
-              divisions: 31,
-              label: value.toStringAsFixed(0),
-              value: value,
-              onChanged: null,
-            ),
+            title: Text('Slider stepped disabled (${value.toStringAsFixed(0)})'),
+            subtitle: Slider(max: 30, divisions: 31, label: value.toStringAsFixed(0), value: value, onChanged: null),
           ),
           ListTile(
             dense: true,
-            title: Text(
-                'Slider continuous disabled (${value.toStringAsFixed(2)})'),
-            subtitle: Slider(
-              max: 30,
-              label: value.toStringAsFixed(0),
-              value: value,
-              onChanged: null,
-            ),
+            title: Text('Slider continuous disabled (${value.toStringAsFixed(2)})'),
+            subtitle: Slider(max: 30, label: value.toStringAsFixed(0), value: value, onChanged: null),
           ),
         ],
       ),
@@ -1326,8 +1119,7 @@ class _SliderAdaptiveShowcaseState extends State<SliderAdaptiveShowcase> {
         children: <Widget>[
           ListTile(
             dense: true,
-            title:
-                Text('Slider.adaptive stepped (${value.toStringAsFixed(0)})'),
+            title: Text('Slider.adaptive stepped (${value.toStringAsFixed(0)})'),
             subtitle: Slider.adaptive(
               max: 30,
               divisions: 31,
@@ -1342,8 +1134,7 @@ class _SliderAdaptiveShowcaseState extends State<SliderAdaptiveShowcase> {
           ),
           ListTile(
             dense: true,
-            title: Text(
-                'Slider.adaptive continuous (${value.toStringAsFixed(2)})'),
+            title: Text('Slider.adaptive continuous (${value.toStringAsFixed(2)})'),
             subtitle: Slider.adaptive(
               max: 30,
               label: value.toStringAsFixed(0),
@@ -1357,8 +1148,10 @@ class _SliderAdaptiveShowcaseState extends State<SliderAdaptiveShowcase> {
           ),
           ListTile(
             dense: true,
-            title: Text('Slider.adaptive stepped disabled '
-                '(${value.toStringAsFixed(0)})'),
+            title: Text(
+              'Slider.adaptive stepped disabled '
+              '(${value.toStringAsFixed(0)})',
+            ),
             subtitle: Slider.adaptive(
               max: 30,
               divisions: 31,
@@ -1369,14 +1162,11 @@ class _SliderAdaptiveShowcaseState extends State<SliderAdaptiveShowcase> {
           ),
           ListTile(
             dense: true,
-            title: Text('Slider.adaptive continuous disabled '
-                '(${value.toStringAsFixed(2)})'),
-            subtitle: Slider.adaptive(
-              max: 30,
-              label: value.toStringAsFixed(0),
-              value: value,
-              onChanged: null,
+            title: Text(
+              'Slider.adaptive continuous disabled '
+              '(${value.toStringAsFixed(2)})',
             ),
+            subtitle: Slider.adaptive(max: 30, label: value.toStringAsFixed(0), value: value, onChanged: null),
           ),
         ],
       ),
@@ -1401,40 +1191,29 @@ class _RangeSliderShowcaseState extends State<RangeSliderShowcase> {
         children: <Widget>[
           ListTile(
             dense: true,
-            title: Text('RangeSlider stepped (${RangeLabels(
-              values.start.toStringAsFixed(0),
-              values.end.toStringAsFixed(0),
-            )})'),
+            title: Text(
+              'RangeSlider stepped (${RangeLabels(values.start.toStringAsFixed(0), values.end.toStringAsFixed(0))})',
+            ),
             subtitle: RangeSlider(
               max: 30,
               divisions: 31,
-              labels: RangeLabels(
-                values.start.toStringAsFixed(0),
-                values.end.toStringAsFixed(0),
-              ),
+              labels: RangeLabels(values.start.toStringAsFixed(0), values.end.toStringAsFixed(0)),
               values: values,
               onChanged: (RangeValues newValues) {
                 setState(() {
-                  values = RangeValues(
-                    newValues.start.roundToDouble(),
-                    newValues.end.roundToDouble(),
-                  );
+                  values = RangeValues(newValues.start.roundToDouble(), newValues.end.roundToDouble());
                 });
               },
             ),
           ),
           ListTile(
             dense: true,
-            title: Text('RangeSlider continuous (${RangeLabels(
-              values.start.toStringAsFixed(2),
-              values.end.toStringAsFixed(2),
-            )})'),
+            title: Text(
+              'RangeSlider continuous (${RangeLabels(values.start.toStringAsFixed(2), values.end.toStringAsFixed(2))})',
+            ),
             subtitle: RangeSlider(
               max: 30,
-              labels: RangeLabels(
-                values.start.toStringAsFixed(2),
-                values.end.toStringAsFixed(2),
-              ),
+              labels: RangeLabels(values.start.toStringAsFixed(2), values.end.toStringAsFixed(2)),
               values: values,
               onChanged: (RangeValues newValues) {
                 setState(() {
@@ -1445,34 +1224,26 @@ class _RangeSliderShowcaseState extends State<RangeSliderShowcase> {
           ),
           ListTile(
             dense: true,
-            title: Text('RangeSlider stepped disabled (${RangeLabels(
-              values.start.toStringAsFixed(0),
-              values.end.toStringAsFixed(0),
-            )})'),
+            title: Text(
+              'RangeSlider stepped disabled (${RangeLabels(values.start.toStringAsFixed(0), values.end.toStringAsFixed(0))})',
+            ),
             subtitle: RangeSlider(
               max: 30,
               divisions: 31,
-              labels: RangeLabels(
-                values.start.toStringAsFixed(0),
-                values.end.toStringAsFixed(0),
-              ),
+              labels: RangeLabels(values.start.toStringAsFixed(0), values.end.toStringAsFixed(0)),
               values: values,
               onChanged: null,
             ),
           ),
           ListTile(
             dense: true,
-            title: Text('RangeSlider continuous disabled (${RangeLabels(
-              values.start.toStringAsFixed(2),
-              values.end.toStringAsFixed(2),
-            )})'),
+            title: Text(
+              'RangeSlider continuous disabled (${RangeLabels(values.start.toStringAsFixed(2), values.end.toStringAsFixed(2))})',
+            ),
             subtitle: RangeSlider(
               max: 30,
               divisions: 31,
-              labels: RangeLabels(
-                values.start.toStringAsFixed(2),
-                values.end.toStringAsFixed(2),
-              ),
+              labels: RangeLabels(values.start.toStringAsFixed(2), values.end.toStringAsFixed(2)),
               values: values,
               onChanged: null,
             ),
@@ -1490,24 +1261,18 @@ class PopupMenuButtonsShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return Column(
       spacing: 0,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (explain)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-            child: Text(
-              'PopupMenuButton',
-              style: denseHeader,
-            ),
-          ),
+          Padding(padding: const EdgeInsets.fromLTRB(0, 16, 0, 0), child: Text('PopupMenuButton', style: denseHeader)),
         if (explain)
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
@@ -1540,13 +1305,14 @@ class PopupMenuButtonShowcase extends StatelessWidget {
       child: PopupMenuButton<int>(
         onSelected: (_) {},
         position: PopupMenuPosition.under,
-        itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
-          PopupMenuItem<int>(value: 1, child: Text('Option 1')),
-          PopupMenuItem<int>(value: 2, child: Text('Option 2')),
-          PopupMenuItem<int>(value: 3, child: Text('Option 3')),
-          PopupMenuItem<int>(value: 4, child: Text('Option 4')),
-          PopupMenuItem<int>(value: 5, child: Text('Option 5')),
-        ],
+        itemBuilder:
+            (BuildContext context) => const <PopupMenuItem<int>>[
+              PopupMenuItem<int>(value: 1, child: Text('Option 1')),
+              PopupMenuItem<int>(value: 2, child: Text('Option 2')),
+              PopupMenuItem<int>(value: 3, child: Text('Option 3')),
+              PopupMenuItem<int>(value: 4, child: Text('Option 4')),
+              PopupMenuItem<int>(value: 5, child: Text('Option 5')),
+            ],
         icon: const Icon(Icons.more_vert),
       ),
     );
@@ -1562,13 +1328,14 @@ class CheckedPopupMenuButtonShowcase extends StatelessWidget {
       child: PopupMenuButton<int>(
         onSelected: (_) {},
         position: PopupMenuPosition.under,
-        itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
-          CheckedPopupMenuItem<int>(value: 1, child: Text('Option 1')),
-          CheckedPopupMenuItem<int>(value: 2, child: Text('Option 2')),
-          CheckedPopupMenuItem<int>(value: 3, child: Text('Option 3')),
-          CheckedPopupMenuItem<int>(value: 4, child: Text('Option 4')),
-          CheckedPopupMenuItem<int>(value: 5, child: Text('Option 5')),
-        ],
+        itemBuilder:
+            (BuildContext context) => const <PopupMenuItem<int>>[
+              CheckedPopupMenuItem<int>(value: 1, child: Text('Option 1')),
+              CheckedPopupMenuItem<int>(value: 2, child: Text('Option 2')),
+              CheckedPopupMenuItem<int>(value: 3, child: Text('Option 3')),
+              CheckedPopupMenuItem<int>(value: 4, child: Text('Option 4')),
+              CheckedPopupMenuItem<int>(value: 5, child: Text('Option 5')),
+            ],
         icon: const Icon(Icons.playlist_add_check),
       ),
     );
@@ -1585,26 +1352,19 @@ class PopupMenuButtonTilesShowcase extends StatelessWidget {
         tooltip: 'Show menu using\nListTile items',
         onSelected: (_) {},
         position: PopupMenuPosition.under,
-        itemBuilder: (BuildContext context) => const <PopupMenuItem<int>>[
-          PopupMenuItem<int>(
-              value: 1,
-              child:
-                  ListTile(leading: Icon(Icons.alarm), title: Text('Alarm'))),
-          PopupMenuItem<int>(
-              value: 2,
-              child: ListTile(
-                  leading: Icon(Icons.cabin), title: Text('Wood cabin'))),
-          PopupMenuItem<int>(
-              value: 3,
-              child: ListTile(
-                  leading: Icon(Icons.camera_outdoor_rounded),
-                  title: Text('Surveillance'))),
-          PopupMenuItem<int>(
-              value: 4,
-              child: ListTile(
-                  leading: Icon(Icons.water_damage),
-                  title: Text('Water damage'))),
-        ],
+        itemBuilder:
+            (BuildContext context) => const <PopupMenuItem<int>>[
+              PopupMenuItem<int>(value: 1, child: ListTile(leading: Icon(Icons.alarm), title: Text('Alarm'))),
+              PopupMenuItem<int>(value: 2, child: ListTile(leading: Icon(Icons.cabin), title: Text('Wood cabin'))),
+              PopupMenuItem<int>(
+                value: 3,
+                child: ListTile(leading: Icon(Icons.camera_outdoor_rounded), title: Text('Surveillance')),
+              ),
+              PopupMenuItem<int>(
+                value: 4,
+                child: ListTile(leading: Icon(Icons.water_damage), title: Text('Water damage')),
+              ),
+            ],
         icon: const Icon(Icons.more_horiz),
       ),
     );
@@ -1624,11 +1384,11 @@ class _DropDownButtonShowcaseState extends State<DropDownButtonShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return RepaintBoundary(
       child: Column(
@@ -1636,13 +1396,7 @@ class _DropDownButtonShowcaseState extends State<DropDownButtonShowcase> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (widget.explain)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Text(
-                'DropdownButton',
-                style: denseHeader,
-              ),
-            ),
+            Padding(padding: const EdgeInsets.fromLTRB(0, 16, 0, 0), child: Text('DropdownButton', style: denseHeader)),
           if (widget.explain)
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
@@ -1659,24 +1413,22 @@ class _DropDownButtonShowcaseState extends State<DropDownButtonShowcase> {
                 selectedItem = value ?? '1 DropdownButton';
               });
             },
-            items: <String>[
-              '1 DropdownButton',
-              '2 DropdownButton',
-              '3 DropdownButton',
-              '4 DropdownButton',
-              '5 DropdownButton',
-              '6 DropdownButton',
-              '7 DropdownButton',
-              '8 DropdownButton',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(value),
-                ),
-              );
-            }).toList(),
+            items:
+                <String>[
+                  '1 DropdownButton',
+                  '2 DropdownButton',
+                  '3 DropdownButton',
+                  '4 DropdownButton',
+                  '5 DropdownButton',
+                  '6 DropdownButton',
+                  '7 DropdownButton',
+                  '8 DropdownButton',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16.0), child: Text(value)),
+                  );
+                }).toList(),
           ),
         ],
       ),
@@ -1689,21 +1441,19 @@ class DropdownButtonFormFieldShowcase extends StatefulWidget {
   final bool explain;
 
   @override
-  State<DropdownButtonFormFieldShowcase> createState() =>
-      _DropdownButtonFormFieldShowcaseState();
+  State<DropdownButtonFormFieldShowcase> createState() => _DropdownButtonFormFieldShowcaseState();
 }
 
-class _DropdownButtonFormFieldShowcaseState
-    extends State<DropdownButtonFormFieldShowcase> {
+class _DropdownButtonFormFieldShowcaseState extends State<DropdownButtonFormFieldShowcase> {
   String selectedItem = '1 DropdownButtonFormField';
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return RepaintBoundary(
       child: Column(
@@ -1713,10 +1463,7 @@ class _DropdownButtonFormFieldShowcaseState
           if (widget.explain)
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Text(
-                'DropdownButtonFormField',
-                style: denseHeader,
-              ),
+              child: Text('DropdownButtonFormField', style: denseHeader),
             ),
           if (widget.explain)
             Padding(
@@ -1735,21 +1482,19 @@ class _DropdownButtonFormFieldShowcaseState
                 selectedItem = value ?? '1 DropdownButtonFormField';
               });
             },
-            items: <String>[
-              '1 DropdownButtonFormField',
-              '2 DropdownButtonFormField',
-              '3 DropdownButtonFormField',
-              '4 DropdownButtonFormField',
-              '5 DropdownButtonFormField',
-              '6 DropdownButtonFormField',
-              '7 DropdownButtonFormField',
-              '8 DropdownButtonFormField',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+            items:
+                <String>[
+                  '1 DropdownButtonFormField',
+                  '2 DropdownButtonFormField',
+                  '3 DropdownButtonFormField',
+                  '4 DropdownButtonFormField',
+                  '5 DropdownButtonFormField',
+                  '6 DropdownButtonFormField',
+                  '7 DropdownButtonFormField',
+                  '8 DropdownButtonFormField',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(value: value, child: Text(value));
+                }).toList(),
           ),
         ],
       ),
@@ -1770,11 +1515,11 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return RepaintBoundary(
       child: Column(
@@ -1782,13 +1527,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (widget.explain)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Text(
-                'DropdownMenu',
-                style: denseHeader,
-              ),
-            ),
+            Padding(padding: const EdgeInsets.fromLTRB(0, 16, 0, 0), child: Text('DropdownMenu', style: denseHeader)),
           if (widget.explain)
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
@@ -1813,8 +1552,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
             dropdownMenuEntries: const <DropdownMenuEntry<IconData>>[
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Alarm settings',
                 leadingIcon: Icon(Icons.alarm),
@@ -1822,8 +1560,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
               ),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Disabled settings',
                 leadingIcon: Icon(Icons.settings),
@@ -1832,8 +1569,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
               ),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Cabin overview',
                 leadingIcon: Icon(Icons.cabin),
@@ -1841,8 +1577,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
               ),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Surveillance view',
                 leadingIcon: Icon(Icons.camera_outdoor_rounded),
@@ -1851,8 +1586,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
               ),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.symmetric(horizontal: 12)),
                 ),
                 label: 'Water alert',
                 leadingIcon: Icon(Icons.water_damage),
@@ -1877,16 +1611,11 @@ class TooltipShowcase extends StatelessWidget {
       spacing: 16,
       runSpacing: 4,
       children: <Widget>[
+        Tooltip(message: 'Current tooltip theme', child: Text('Text with tooltip')),
+        Tooltip(message: 'Current tooltip theme.\nThis a two row tooltip.', child: Text('Text with two row tooltip')),
         Tooltip(
-          message: 'Current tooltip theme',
-          child: Text('Text with tooltip'),
-        ),
-        Tooltip(
-          message: 'Current tooltip theme.\nThis a two row tooltip.',
-          child: Text('Text with two row tooltip'),
-        ),
-        Tooltip(
-          message: 'Current tooltip theme.\nThis tooltip is too long.\n'
+          message:
+              'Current tooltip theme.\nThis tooltip is too long.\n'
               'Try to keep them short.',
           child: Text('Text with three row tooltip'),
         ),
@@ -1905,22 +1634,10 @@ class IconShowcase extends StatelessWidget {
       spacing: 16,
       runSpacing: 4,
       children: <Widget>[
-        Tooltip(
-          message: 'Icon is Icons\nAddCircle',
-          child: Icon(Icons.add_circle),
-        ),
-        Tooltip(
-          message: 'Icon is Icons\nCameraAltOutlined',
-          child: Icon(Icons.camera_alt_outlined),
-        ),
-        Tooltip(
-          message: 'Icon is Icons\nFlutterDash',
-          child: Icon(Icons.flutter_dash),
-        ),
-        Tooltip(
-          message: 'Icon is Icons\nWarningAmber',
-          child: Icon(Icons.warning_amber),
-        ),
+        Tooltip(message: 'Icon is Icons\nAddCircle', child: Icon(Icons.add_circle)),
+        Tooltip(message: 'Icon is Icons\nCameraAltOutlined', child: Icon(Icons.camera_alt_outlined)),
+        Tooltip(message: 'Icon is Icons\nFlutterDash', child: Icon(Icons.flutter_dash)),
+        Tooltip(message: 'Icon is Icons\nWarningAmber', child: Icon(Icons.warning_amber)),
       ],
     );
   }
@@ -1936,24 +1653,11 @@ class CircleAvatarShowcase extends StatelessWidget {
       spacing: 16,
       runSpacing: 4,
       children: <Widget>[
-        Tooltip(
-          message: 'This is a\nCircleAvatar',
-          child: CircleAvatar(
-            child: Text('CA'),
-          ),
-        ),
-        Tooltip(
-          message: 'CircleAvatar\nwith image',
-          child: CircleAvatar(
-            child: FlutterLogo(),
-          ),
-        ),
+        Tooltip(message: 'This is a\nCircleAvatar', child: CircleAvatar(child: Text('CA'))),
+        Tooltip(message: 'CircleAvatar\nwith image', child: CircleAvatar(child: FlutterLogo())),
         Tooltip(
           message: 'CircleAvatar\nwith image\nradius 30',
-          child: CircleAvatar(
-            radius: 30,
-            child: FlutterLogo(size: 40),
-          ),
+          child: CircleAvatar(radius: 30, child: FlutterLogo(size: 40)),
         ),
       ],
     );
@@ -1978,17 +1682,14 @@ class _IconButtonShowcaseState extends State<IconButtonShowcase> {
         spacing: 16,
         runSpacing: 4,
         children: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.accessibility),
-            tooltip: 'This is an\nIconButton',
-            onPressed: () {},
-          ),
+          IconButton(icon: const Icon(Icons.accessibility), tooltip: 'This is an\nIconButton', onPressed: () {}),
           IconButton(
             icon: const Icon(Icons.lock_outlined),
             selectedIcon: const Icon(Icons.lock_open_outlined),
-            tooltip: isLockOpen
-                ? 'This is an IconButton\nIn M3 tap to close lock'
-                : 'This is an IconButton\nIn M3 tap to open lock',
+            tooltip:
+                isLockOpen
+                    ? 'This is an IconButton\nIn M3 tap to close lock'
+                    : 'This is an IconButton\nIn M3 tap to open lock',
             isSelected: isLockOpen,
             onPressed: () {
               setState(() {
@@ -2024,8 +1725,7 @@ class IconButtonVariantsShowcase extends StatelessWidget {
         Column(
           // Standard IconButton
           children: <Widget>[
-            SizedBox(
-                width: 65, child: Text('Default', textAlign: TextAlign.center)),
+            SizedBox(width: 65, child: Text('Default', textAlign: TextAlign.center)),
             SizedBox(height: 4),
             _IconToggleButton(
               isEnabled: true,
@@ -2034,11 +1734,7 @@ class IconButtonVariantsShowcase extends StatelessWidget {
               toggleable: false,
             ),
             SizedBox(height: 8),
-            _IconToggleButton(
-              isEnabled: true,
-              tooltip: 'Standard toggleable',
-              variant: _IconButtonVariant.standard,
-            ),
+            _IconToggleButton(isEnabled: true, tooltip: 'Standard toggleable', variant: _IconButtonVariant.standard),
             SizedBox(height: 8),
             _IconToggleButton(
               isEnabled: false,
@@ -2050,8 +1746,7 @@ class IconButtonVariantsShowcase extends StatelessWidget {
         ),
         Column(
           children: <Widget>[
-            SizedBox(
-                width: 65, child: Text('Filled', textAlign: TextAlign.center)),
+            SizedBox(width: 65, child: Text('Filled', textAlign: TextAlign.center)),
             SizedBox(height: 4),
             // Filled IconButton
             _IconToggleButton(
@@ -2061,11 +1756,7 @@ class IconButtonVariantsShowcase extends StatelessWidget {
               toggleable: false,
             ),
             SizedBox(height: 8),
-            _IconToggleButton(
-              isEnabled: true,
-              tooltip: 'Filled toggleable',
-              variant: _IconButtonVariant.filled,
-            ),
+            _IconToggleButton(isEnabled: true, tooltip: 'Filled toggleable', variant: _IconButtonVariant.filled),
             SizedBox(height: 8),
             _IconToggleButton(
               isEnabled: false,
@@ -2077,8 +1768,7 @@ class IconButtonVariantsShowcase extends StatelessWidget {
         ),
         Column(
           children: <Widget>[
-            SizedBox(
-                width: 65, child: Text('Tonal', textAlign: TextAlign.center)),
+            SizedBox(width: 65, child: Text('Tonal', textAlign: TextAlign.center)),
             SizedBox(height: 4),
             // Filled Tonal IconButton
             _IconToggleButton(
@@ -2104,9 +1794,7 @@ class IconButtonVariantsShowcase extends StatelessWidget {
         ),
         Column(
           children: <Widget>[
-            SizedBox(
-                width: 65,
-                child: Text('Outlined', textAlign: TextAlign.center)),
+            SizedBox(width: 65, child: Text('Outlined', textAlign: TextAlign.center)),
             SizedBox(height: 4),
             // Outlined IconButton
             _IconToggleButton(
@@ -2116,11 +1804,7 @@ class IconButtonVariantsShowcase extends StatelessWidget {
               toggleable: false,
             ),
             SizedBox(height: 8),
-            _IconToggleButton(
-              isEnabled: true,
-              tooltip: 'Outlined toggleable',
-              variant: _IconButtonVariant.outlined,
-            ),
+            _IconToggleButton(isEnabled: true, tooltip: 'Outlined toggleable', variant: _IconButtonVariant.outlined),
             SizedBox(height: 8),
             _IconToggleButton(
               isEnabled: false,
@@ -2159,19 +1843,21 @@ class _IconToggleButtonState extends State<_IconToggleButton> {
 
   @override
   Widget build(BuildContext context) {
-    final VoidCallback? onPressed = widget.isEnabled
-        ? () {
-            setState(() {
-              selected = !selected;
-            });
-          }
-        : null;
+    final VoidCallback? onPressed =
+        widget.isEnabled
+            ? () {
+              setState(() {
+                selected = !selected;
+              });
+            }
+            : null;
 
-    final String toggleState = widget.toggleable
-        ? selected
-            ? '\n(selected)'
-            : '\n(not selected)'
-        : '';
+    final String toggleState =
+        widget.toggleable
+            ? selected
+                ? '\n(selected)'
+                : '\n(not selected)'
+            : '';
 
     switch (widget.variant) {
       case _IconButtonVariant.standard:
@@ -2222,8 +1908,7 @@ class ProgressIndicatorShowcase extends StatefulWidget {
   const ProgressIndicatorShowcase({super.key});
 
   @override
-  State<ProgressIndicatorShowcase> createState() =>
-      _ProgressIndicatorShowcaseState();
+  State<ProgressIndicatorShowcase> createState() => _ProgressIndicatorShowcaseState();
 }
 
 class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
@@ -2249,10 +1934,7 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
                   });
                 },
               ),
-              if (playProgressIndicator)
-                const Text('Pause')
-              else
-                const Text('Play'),
+              if (playProgressIndicator) const Text('Pause') else const Text('Play'),
             ],
           ),
           const Text('Material'),
@@ -2261,27 +1943,12 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
             spacing: 16,
             runSpacing: 16,
             children: <Widget>[
-              SizedBox.square(
-                dimension: 40,
-                child: CircularProgressIndicator(
-                  value: progressValue,
-                ),
-              ),
-              SizedBox(
-                width: 200,
-                child: LinearProgressIndicator(
-                  value: progressValue,
-                ),
-              ),
+              SizedBox.square(dimension: 40, child: CircularProgressIndicator(value: progressValue)),
+              SizedBox(width: 200, child: LinearProgressIndicator(value: progressValue)),
             ],
           ),
           const Text('Adaptive'),
-          SizedBox.square(
-            dimension: 40,
-            child: CircularProgressIndicator.adaptive(
-              value: progressValue,
-            ),
-          ),
+          SizedBox.square(dimension: 40, child: CircularProgressIndicator.adaptive(value: progressValue)),
         ],
       ),
     );
@@ -2329,18 +1996,12 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text('Chip', style: TextStyle(fontSize: _fontSize)),
-                    Text('No M3 spec', style: TextStyle(fontSize: _fontSize))
+                    Text('No M3 spec', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
-              Chip(
-                label: const Text('Chip'),
-                onDeleted: () {},
-              ),
-              const Chip(
-                label: Text('Chip'),
-                avatar: FlutterLogo(),
-              ),
+              Chip(label: const Text('Chip'), onDeleted: () {}),
+              const Chip(label: Text('Chip'), avatar: FlutterLogo()),
             ],
           ),
           Wrap(
@@ -2360,16 +2021,12 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               ActionChip(
                 label: const Text('ActionChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 onPressed: () {},
               ),
               ActionChip(
                 label: const Text('ActionChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 onPressed: null,
               ),
             ],
@@ -2391,18 +2048,14 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               FilterChip(
                 label: const Text('FilterChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: false,
                 onSelected: (bool value) {},
               ),
               FilterChip(
                 label: const Text('FilterChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: false,
                 onSelected: null,
@@ -2426,9 +2079,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               FilterChip(
                 label: const Text('FilterChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: filterSelected,
                 onSelected: (bool value) {
@@ -2439,9 +2090,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               FilterChip(
                 label: const Text('FilterChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: true,
                 onSelected: null,
@@ -2465,18 +2114,14 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               InputChip(
                 label: const Text('InputChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 onSelected: (bool value) {},
                 onDeleted: () {},
               ),
               InputChip(
                 label: const Text('InputChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 isEnabled: false,
                 onSelected: (bool value) {},
@@ -2502,9 +2147,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               InputChip(
                 label: const Text('InputChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 selected: inputSelected,
                 showCheckmark: showCheckmark,
                 onSelected: (bool value) {
@@ -2516,9 +2159,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               InputChip(
                 label: const Text('InputChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 selected: true,
                 showCheckmark: showCheckmark,
                 isEnabled: false,
@@ -2538,25 +2179,20 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text('ChoiceChip', style: TextStyle(fontSize: _fontSize)),
-                    Text('Suggestion (M3)',
-                        style: TextStyle(fontSize: _fontSize)),
+                    Text('Suggestion (M3)', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               ChoiceChip(
                 label: const Text('ChoiceChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: false,
                 onSelected: (bool value) {},
               ),
               ChoiceChip(
                 label: const Text('ChoiceChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: false,
                 onSelected: null,
@@ -2574,16 +2210,13 @@ class _ChipShowcaseState extends State<ChipShowcase> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text('Selected', style: TextStyle(fontSize: _fontSize)),
-                    Text('Suggestion (M3)',
-                        style: TextStyle(fontSize: _fontSize)),
+                    Text('Suggestion (M3)', style: TextStyle(fontSize: _fontSize)),
                   ],
                 ),
               ),
               ChoiceChip(
                 label: const Text('ChoiceChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: choiceSelected,
                 onSelected: (bool value) {
@@ -2594,9 +2227,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
               ChoiceChip(
                 label: const Text('ChoiceChip'),
-                avatar: showAvatar
-                    ? const Icon(Icons.account_circle_rounded)
-                    : null,
+                avatar: showAvatar ? const Icon(Icons.account_circle_rounded) : null,
                 showCheckmark: showCheckmark,
                 selected: true,
               ),
@@ -2676,8 +2307,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDefaultDecoration =
-        Theme.of(context).inputDecorationTheme == const InputDecorationTheme();
+    final bool isDefaultDecoration = Theme.of(context).inputDecorationTheme == const InputDecorationTheme();
 
     return RepaintBoundary(
       child: Column(
@@ -2700,15 +2330,11 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   key: const Key('TextField1'),
                   controller: _plainFieldController,
                   decoration: InputDecoration(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
                     labelText: 'TextField',
-                    errorText: _errorStatePlain
-                        ? "Any entry without an 'a' will trigger this error"
-                        : null,
+                    errorText: _errorStatePlain ? "Any entry without an 'a' will trigger this error" : null,
                   ),
                 ),
               ),
@@ -2718,9 +2344,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: TextEditingController(),
                   enabled: false,
                   decoration: InputDecoration(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     labelText: 'Disabled label',
                   ),
@@ -2745,17 +2369,13 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   key: const Key('TextField2'),
                   controller: _withIconsController,
                   decoration: InputDecoration(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
                     labelText: 'Moving label',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: const Icon(Icons.info),
-                    errorText: _errorStateWithIcons
-                        ? "Any entry without an 'a' will trigger this error"
-                        : null,
+                    errorText: _errorStateWithIcons ? "Any entry without an 'a' will trigger this error" : null,
                   ),
                 ),
               ),
@@ -2765,9 +2385,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: TextEditingController(text: 'Entry'),
                   enabled: false,
                   decoration: InputDecoration(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     labelText: 'Disabled label',
                     prefixIcon: const Icon(Icons.search),
@@ -2794,15 +2412,11 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   key: const Key('TextField2'),
                   controller: _fixedHinController,
                   decoration: InputDecoration(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'No moving label',
                     prefixIcon: const Icon(Icons.key),
-                    errorText: _errorFixedHint
-                        ? "Any entry without an 'a' will trigger this error"
-                        : null,
+                    errorText: _errorFixedHint ? "Any entry without an 'a' will trigger this error" : null,
                   ),
                 ),
               ),
@@ -2812,9 +2426,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   controller: TextEditingController(text: ''),
                   enabled: false,
                   decoration: InputDecoration(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     labelText: 'Disabled entry',
                     prefixIcon: const Icon(Icons.key),
@@ -2831,9 +2443,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   key: const Key('TextField3'),
                   controller: _collapsedFieldController,
                   decoration: InputDecoration.collapsed(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Collapsed',
                   ),
@@ -2846,9 +2456,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   // ignore: avoid-undisposed-instances, false positive, this will be disposed automatically by GC.
                   controller: TextEditingController(text: 'Disabled entry'),
                   decoration: InputDecoration.collapsed(
-                    border: _forceOutlined && isDefaultDecoration
-                        ? const OutlineInputBorder()
-                        : null,
+                    border: _forceOutlined && isDefaultDecoration ? const OutlineInputBorder() : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Collapsed TextField',
                   ),
@@ -2866,11 +2474,13 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   dense: true,
                   shape: _tileShape,
                   title: const Text('Filled'),
-                  subtitleReveal: const Text('This is not a theme toggle. It '
-                      'sets the Decoration.filled to true on widget level. '
-                      "Use it to see Flutter's default filled style when "
-                      'no custom theme is used. This switch does nothing '
-                      'when a custom InputDecoration theme is active.'),
+                  subtitleReveal: const Text(
+                    'This is not a theme toggle. It '
+                    'sets the Decoration.filled to true on widget level. '
+                    "Use it to see Flutter's default filled style when "
+                    'no custom theme is used. This switch does nothing '
+                    'when a custom InputDecoration theme is active.',
+                  ),
                   enabled: isDefaultDecoration,
                   allowRevealWhenDisabled: true,
                   value: _forceFilled,
@@ -2887,11 +2497,13 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   dense: true,
                   shape: _tileShape,
                   title: const Text('Outlined'),
-                  subtitleReveal: const Text('This is not a theme toggle. It '
-                      'sets border to the default OutlineInputBorder() on '
-                      "widget level. Use it to see Flutter's default outlined "
-                      'style when no custom theme is used. This switch does '
-                      'nothing when a custom InputDecoration theme is active.'),
+                  subtitleReveal: const Text(
+                    'This is not a theme toggle. It '
+                    'sets border to the default OutlineInputBorder() on '
+                    "widget level. Use it to see Flutter's default outlined "
+                    'style when no custom theme is used. This switch does '
+                    'nothing when a custom InputDecoration theme is active.',
+                  ),
                   enabled: isDefaultDecoration,
                   allowRevealWhenDisabled: true,
                   value: _forceOutlined,
@@ -2928,17 +2540,9 @@ class AppBarShowcase extends StatelessWidget {
               children: <Widget>[
                 const _BehindAppBar(),
                 AppBar(
-                  leading: IconButton(
-                    icon: const Icon(Icons.menu),
-                    onPressed: () {},
-                  ),
+                  leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
                   title: const Text('AppBar'),
-                  actions: <Widget>[
-                    IconButton(
-                      icon: const Icon(Icons.search),
-                      onPressed: () {},
-                    ),
-                  ],
+                  actions: <Widget>[IconButton(icon: const Icon(Icons.search), onPressed: () {})],
                 ),
               ],
             ),
@@ -2954,17 +2558,9 @@ class AppBarShowcase extends StatelessWidget {
                   shrinkWrap: true,
                   slivers: <Widget>[
                     SliverAppBar(
-                      leading: IconButton(
-                        icon: const Icon(Icons.menu),
-                        onPressed: () {},
-                      ),
+                      leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
                       title: const Text('SliverAppBar'),
-                      actions: <Widget>[
-                        IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () {},
-                        ),
-                      ],
+                      actions: <Widget>[IconButton(icon: const Icon(Icons.search), onPressed: () {})],
                     ),
                   ],
                 ),
@@ -2978,17 +2574,9 @@ class AppBarShowcase extends StatelessWidget {
                   shrinkWrap: true,
                   slivers: <Widget>[
                     SliverAppBar.medium(
-                      leading: IconButton(
-                        icon: const Icon(Icons.menu),
-                        onPressed: () {},
-                      ),
+                      leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
                       title: const Text('SliverAppBar.medium'),
-                      actions: <Widget>[
-                        IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () {},
-                        ),
-                      ],
+                      actions: <Widget>[IconButton(icon: const Icon(Icons.search), onPressed: () {})],
                     ),
                   ],
                 ),
@@ -3002,17 +2590,9 @@ class AppBarShowcase extends StatelessWidget {
                   shrinkWrap: true,
                   slivers: <Widget>[
                     SliverAppBar.large(
-                      leading: IconButton(
-                        icon: const Icon(Icons.menu),
-                        onPressed: () {},
-                      ),
+                      leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
                       title: const Text('SliverAppBar.large'),
-                      actions: <Widget>[
-                        IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () {},
-                        ),
-                      ],
+                      actions: <Widget>[IconButton(icon: const Icon(Icons.search), onPressed: () {})],
                     ),
                   ],
                 ),
@@ -3038,12 +2618,7 @@ class _BehindAppBar extends StatelessWidget {
         children: <Widget>[
           const Text('Behind AppBar'),
           const CircleAvatar(child: Text('AV')),
-          InputChip(
-            showCheckmark: true,
-            selected: true,
-            label: const Text('Chip check'),
-            onSelected: (bool value) {},
-          ),
+          InputChip(showCheckmark: true, selected: true, label: const Text('Chip check'), onSelected: (bool value) {}),
         ],
       ),
     );
@@ -3051,11 +2626,7 @@ class _BehindAppBar extends StatelessWidget {
 }
 
 class SearchBarShowcase extends StatefulWidget {
-  const SearchBarShowcase({
-    super.key,
-    this.explain = false,
-    this.isFullScreen = false,
-  });
+  const SearchBarShowcase({super.key, this.explain = false, this.isFullScreen = false});
   final bool explain;
   final bool isFullScreen;
 
@@ -3077,8 +2648,7 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
           icon: const Icon(Icons.call_missed),
           onPressed: () {
             controller.text = color.label;
-            controller.selection =
-                TextSelection.collapsed(offset: controller.text.length);
+            controller.selection = TextSelection.collapsed(offset: controller.text.length);
           },
         ),
         onTap: () {
@@ -3101,8 +2671,7 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
               icon: const Icon(Icons.call_missed),
               onPressed: () {
                 controller.text = filteredColor.label;
-                controller.selection =
-                    TextSelection.collapsed(offset: controller.text.length);
+                controller.selection = TextSelection.collapsed(offset: controller.text.length);
               },
             ),
             onTap: () {
@@ -3126,11 +2695,11 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -3138,13 +2707,7 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (widget.explain) ...<Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Text(
-                'SearchBar',
-                style: denseHeader,
-              ),
-            ),
+            Padding(padding: const EdgeInsets.fromLTRB(0, 16, 0, 0), child: Text('SearchBar', style: denseHeader)),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
               child: Text(
@@ -3172,27 +2735,18 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
                 ),
               ),
             ],
-            suggestionsBuilder:
-                (BuildContext context, SearchController controller) {
+            suggestionsBuilder: (BuildContext context, SearchController controller) {
               if (controller.text.isEmpty) {
                 if (searchHistory.isNotEmpty) {
                   return getHistoryList(controller);
                 }
-                return <Widget>[
-                  const Center(
-                    child: Text('No search history.',
-                        style: TextStyle(color: Colors.grey)),
-                  ),
-                ];
+                return <Widget>[const Center(child: Text('No search history.', style: TextStyle(color: Colors.grey)))];
               }
               return getSuggestions(controller);
             },
           ),
           const SizedBox(height: 20),
-          if (selectedColor == null)
-            const Text('Select a color')
-          else
-            Text('Last selected color is $selectedColor'),
+          if (selectedColor == null) const Text('Select a color') else Text('Last selected color is $selectedColor'),
         ],
       ),
     );
@@ -3271,17 +2825,18 @@ class TabBarForAppBarShowcase extends StatelessWidget {
     final bool useM3 = theme.useMaterial3;
     final ColorScheme colorScheme = theme.colorScheme;
 
-    final Color effectiveTabBackground = theme.appBarTheme.backgroundColor ??
+    final Color effectiveTabBackground =
+        theme.appBarTheme.backgroundColor ??
         (isDark
             ? colorScheme.surface
             : useM3
-                ? colorScheme.surface
-                : colorScheme.primary);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+            ? colorScheme.surface
+            : colorScheme.primary);
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return RepaintBoundary(
       child: DefaultTabController(
@@ -3292,10 +2847,7 @@ class TabBarForAppBarShowcase extends StatelessWidget {
             if (explain) ...<Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: Text(
-                  'TabBar in an AppBar',
-                  style: denseHeader,
-                ),
+                child: Text('TabBar in an AppBar', style: denseHeader),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -3316,40 +2868,19 @@ class TabBarForAppBarShowcase extends StatelessWidget {
                 child: SizedBox(
                   height: 130,
                   child: AppBar(
-                    leading: IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {},
-                    ),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: () {},
-                      ),
-                    ],
+                    leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
+                    actions: <Widget>[IconButton(icon: const Icon(Icons.search), onPressed: () {})],
                     title: const Text('TabBar in AppBar'),
                     bottom: TabBar(
-                      tabAlignment: theme.tabBarTheme.tabAlignment ==
-                                  TabAlignment.start ||
-                              theme.tabBarTheme.tabAlignment ==
-                                  TabAlignment.startOffset
-                          ? TabAlignment.fill
-                          : null,
+                      tabAlignment:
+                          theme.tabBarTheme.tabAlignment == TabAlignment.start ||
+                                  theme.tabBarTheme.tabAlignment == TabAlignment.startOffset
+                              ? TabAlignment.fill
+                              : null,
                       tabs: const <Widget>[
-                        Tab(
-                          text: 'Chat',
-                          icon: Badge(
-                            label: Text('18'),
-                            child: Icon(Icons.chat_bubble),
-                          ),
-                        ),
-                        Tab(
-                          text: 'Tasks',
-                          icon: Icon(Icons.beenhere),
-                        ),
-                        Tab(
-                          text: 'Folder',
-                          icon: Icon(Icons.create_new_folder),
-                        ),
+                        Tab(text: 'Chat', icon: Badge(label: Text('18'), child: Icon(Icons.chat_bubble))),
+                        Tab(text: 'Tasks', icon: Icon(Icons.beenhere)),
+                        Tab(text: 'Folder', icon: Icon(Icons.create_new_folder)),
                       ],
                     ),
                   ),
@@ -3374,12 +2905,13 @@ class TabBarScrollingForAppBarShowcase extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     const int nrOfTabs = 40;
 
-    final Color effectiveTabBackground = theme.appBarTheme.backgroundColor ??
+    final Color effectiveTabBackground =
+        theme.appBarTheme.backgroundColor ??
         (isDark
             ? colorScheme.surface
             : useM3
-                ? colorScheme.surface
-                : colorScheme.primary);
+            ? colorScheme.surface
+            : colorScheme.primary);
 
     return RepaintBoundary(
       child: DefaultTabController(
@@ -3396,16 +2928,8 @@ class TabBarScrollingForAppBarShowcase extends StatelessWidget {
                 child: SizedBox(
                   height: 100,
                   child: AppBar(
-                    leading: IconButton(
-                      icon: const Icon(Icons.menu),
-                      onPressed: () {},
-                    ),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: () {},
-                      ),
-                    ],
+                    leading: IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
+                    actions: <Widget>[IconButton(icon: const Icon(Icons.search), onPressed: () {})],
                     title: const Text('Scrolling TabBar in AppBar'),
                     bottom: TabBar(
                       isScrollable: true,
@@ -3417,9 +2941,7 @@ class TabBarScrollingForAppBarShowcase extends StatelessWidget {
                               : null,
                       tabs: <Widget>[
                         for (int i = 0; i < nrOfTabs; i++)
-                          useM3
-                              ? Tab(text: 'Tab label ${i + 1}')
-                              : Tab(text: 'TAB LABEL ${i + 1}'),
+                          useM3 ? Tab(text: 'Tab label ${i + 1}') : Tab(text: 'TAB LABEL ${i + 1}'),
                       ],
                     ),
                   ),
@@ -3440,11 +2962,11 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return RepaintBoundary(
       child: DefaultTabController(
         length: 3,
@@ -3454,10 +2976,7 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
             if (explain) ...<Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: Text(
-                  'TabBar on a surface',
-                  style: denseHeader,
-                ),
+                child: Text('TabBar on a surface', style: denseHeader),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -3475,26 +2994,13 @@ class TabBarForBackgroundShowcase extends StatelessWidget {
                 child: TabBar(
                   tabAlignment:
                       theme.tabBarTheme.tabAlignment == TabAlignment.start ||
-                              theme.tabBarTheme.tabAlignment ==
-                                  TabAlignment.startOffset
+                              theme.tabBarTheme.tabAlignment == TabAlignment.startOffset
                           ? TabAlignment.fill
                           : null,
                   tabs: const <Widget>[
-                    Tab(
-                      text: 'Chat',
-                      icon: Badge(
-                        label: Text('+99'),
-                        child: Icon(Icons.chat_bubble),
-                      ),
-                    ),
-                    Tab(
-                      text: 'Tasks',
-                      icon: Icon(Icons.beenhere),
-                    ),
-                    Tab(
-                      text: 'Folder',
-                      icon: Icon(Icons.create_new_folder),
-                    ),
+                    Tab(text: 'Chat', icon: Badge(label: Text('+99'), child: Icon(Icons.chat_bubble))),
+                    Tab(text: 'Tasks', icon: Icon(Icons.beenhere)),
+                    Tab(text: 'Folder', icon: Icon(Icons.create_new_folder)),
                   ],
                 ),
               ),
@@ -3514,11 +3020,11 @@ class BottomAppBarShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return RepaintBoundary(
       child: MediaQuery.removePadding(
         context: context,
@@ -3529,8 +3035,9 @@ class BottomAppBarShowcase extends StatelessWidget {
           children: <Widget>[
             if (explain) ...<Widget>[
               Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                  child: Text('BottomAppBar', style: denseHeader)),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: Text('BottomAppBar', style: denseHeader),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                 child: Text(
@@ -3548,22 +3055,10 @@ class BottomAppBarShowcase extends StatelessWidget {
             BottomAppBar(
               child: Row(
                 children: <Widget>[
-                  IconButton(
-                    tooltip: 'Open navigation menu',
-                    icon: const Icon(Icons.menu),
-                    onPressed: () {},
-                  ),
+                  IconButton(tooltip: 'Open navigation menu', icon: const Icon(Icons.menu), onPressed: () {}),
                   const Spacer(),
-                  IconButton(
-                    tooltip: 'Search',
-                    icon: const Icon(Icons.search),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    tooltip: 'Favorite',
-                    icon: const Icon(Icons.favorite),
-                    onPressed: () {},
-                  ),
+                  IconButton(tooltip: 'Search', icon: const Icon(Icons.search), onPressed: () {}),
+                  IconButton(tooltip: 'Favorite', icon: const Icon(Icons.favorite), onPressed: () {}),
                 ],
               ),
             ),
@@ -3580,22 +3075,20 @@ class BottomNavigationBarShowcase extends StatefulWidget {
   final bool explain;
 
   @override
-  State<BottomNavigationBarShowcase> createState() =>
-      _BottomNavigationBarShowcaseState();
+  State<BottomNavigationBarShowcase> createState() => _BottomNavigationBarShowcaseState();
 }
 
-class _BottomNavigationBarShowcaseState
-    extends State<BottomNavigationBarShowcase> {
+class _BottomNavigationBarShowcaseState extends State<BottomNavigationBarShowcase> {
   int buttonIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return RepaintBoundary(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -3603,10 +3096,7 @@ class _BottomNavigationBarShowcaseState
           if (widget.explain) ...<Widget>[
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: Text(
-                'BottomNavigationBar',
-                style: denseHeader,
-              ),
+              child: Text('BottomNavigationBar', style: denseHeader),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -3658,10 +3148,7 @@ class _BottomNavigationBarShowcaseState
                   },
                   items: const <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
-                      icon: Badge(
-                        label: Text('3'),
-                        child: Icon(Icons.chat_bubble),
-                      ),
+                      icon: Badge(label: Text('3'), child: Icon(Icons.chat_bubble)),
                       label: 'Chat',
                       // title: Text('Item 1'),
                     ),
@@ -3700,23 +3187,17 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return RepaintBoundary(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (widget.explain) ...<Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: Text(
-                'NavigationBar',
-                style: denseHeader,
-              ),
-            ),
+            Padding(padding: const EdgeInsets.fromLTRB(16, 8, 16, 0), child: Text('NavigationBar', style: denseHeader)),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: Text(
@@ -3766,20 +3247,11 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
                   },
                   destinations: const <NavigationDestination>[
                     NavigationDestination(
-                      icon: Badge(
-                        label: Text('12'),
-                        child: Icon(Icons.chat_bubble),
-                      ),
+                      icon: Badge(label: Text('12'), child: Icon(Icons.chat_bubble)),
                       label: 'Chat',
                     ),
-                    NavigationDestination(
-                      icon: Icon(Icons.beenhere),
-                      label: 'Tasks',
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.create_new_folder),
-                      label: 'Folder',
-                    ),
+                    NavigationDestination(icon: Icon(Icons.beenhere), label: 'Tasks'),
+                    NavigationDestination(icon: Icon(Icons.create_new_folder), label: 'Folder'),
                   ],
                 ),
               ],
@@ -3792,12 +3264,7 @@ class _NavigationBarShowcaseState extends State<NavigationBarShowcase> {
 }
 
 class NavigationRailShowcase extends StatefulWidget {
-  const NavigationRailShowcase({
-    super.key,
-    this.child,
-    this.height = 350,
-    this.explain = false,
-  });
+  const NavigationRailShowcase({super.key, this.child, this.height = 350, this.explain = false});
 
   /// A child widget that we can use to place controls on the
   /// side of the NavigationRail in the show case widget.
@@ -3819,11 +3286,11 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return RepaintBoundary(
       child: Column(
@@ -3832,10 +3299,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
           if (widget.explain)
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Text(
-                'NavigationRail',
-                style: denseHeader,
-              ),
+              child: Text('NavigationRail', style: denseHeader),
             ),
           if (widget.explain)
             Padding(
@@ -3866,8 +3330,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                       removeTop: true,
                       child: NavigationRail(
                         extended: isExtended,
-                        labelType:
-                            isExtended ? NavigationRailLabelType.none : null,
+                        labelType: isExtended ? NavigationRailLabelType.none : null,
                         selectedIndex: buttonIndex,
                         onDestinationSelected: (int value) {
                           setState(() {
@@ -3876,24 +3339,12 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                         },
                         destinations: const <NavigationRailDestination>[
                           NavigationRailDestination(
-                            icon: Badge(
-                              label: Text('5'),
-                              child: Icon(Icons.chat_bubble),
-                            ),
+                            icon: Badge(label: Text('5'), child: Icon(Icons.chat_bubble)),
                             label: Text('Chat'),
                           ),
-                          NavigationRailDestination(
-                            icon: Icon(Icons.beenhere),
-                            label: Text('Tasks'),
-                          ),
-                          NavigationRailDestination(
-                            icon: Icon(Icons.create_new_folder),
-                            label: Text('Folder'),
-                          ),
-                          NavigationRailDestination(
-                            icon: Icon(Icons.logout),
-                            label: Text('Logout'),
-                          ),
+                          NavigationRailDestination(icon: Icon(Icons.beenhere), label: Text('Tasks')),
+                          NavigationRailDestination(icon: Icon(Icons.create_new_folder), label: Text('Folder')),
+                          NavigationRailDestination(icon: Icon(Icons.logout), label: Text('Logout')),
                         ],
                       ),
                     ),
@@ -3902,10 +3353,11 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                         children: <Widget>[
                           SwitchListTileReveal(
                             title: const Text('Expanded'),
-                            subtitleReveal:
-                                const Text('ON to expand  OFF to collapse\n'
-                                    'Only used for local control of Rail '
-                                    'presentation.'),
+                            subtitleReveal: const Text(
+                              'ON to expand  OFF to collapse\n'
+                              'Only used for local control of Rail '
+                              'presentation.',
+                            ),
                             value: isExtended,
                             onChanged: (bool value) {
                               setState(() {
@@ -3913,10 +3365,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
                               });
                             },
                           ),
-                          if (widget.child != null)
-                            RepaintBoundary(child: widget.child)
-                          else
-                            const SizedBox.shrink(),
+                          if (widget.child != null) RepaintBoundary(child: widget.child) else const SizedBox.shrink(),
                         ],
                       ),
                     ),
@@ -3932,26 +3381,21 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
 }
 
 class MenuBarShowcase extends StatelessWidget {
-  const MenuBarShowcase({
-    super.key,
-    this.explain = false,
-    this.explainIndent = 0,
-  });
+  const MenuBarShowcase({super.key, this.explain = false, this.explainIndent = 0});
   final bool explain;
   final double explainIndent;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     return Shortcuts(
       shortcuts: const <ShortcutActivator, Intent>{
-        SingleActivator(LogicalKeyboardKey.keyT, control: true):
-            VoidCallbackIntent(debugDumpApp),
+        SingleActivator(LogicalKeyboardKey.keyT, control: true): VoidCallbackIntent(debugDumpApp),
       },
       child: Column(
         spacing: 0,
@@ -3961,10 +3405,7 @@ class MenuBarShowcase extends StatelessWidget {
           if (explain)
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(explainIndent, 16, 0, 0),
-              child: Text(
-                'MenuBar',
-                style: denseHeader,
-              ),
+              child: Text('MenuBar', style: denseHeader),
             ),
           if (explain)
             Padding(
@@ -3998,21 +3439,13 @@ class MenuBarShowcase extends StatelessWidget {
                           menuChildren: <Widget>[
                             MenuItemButton(
                               onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Saved!'),
-                                  ),
-                                );
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Saved!')));
                               },
                               child: const MenuAcceleratorLabel('&Save now'),
                             ),
                             MenuItemButton(
                               onPressed: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Load!'),
-                                  ),
-                                );
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Load!')));
                               },
                               child: const MenuAcceleratorLabel('&Load now'),
                             ),
@@ -4021,11 +3454,7 @@ class MenuBarShowcase extends StatelessWidget {
                         ),
                         MenuItemButton(
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Quit!'),
-                              ),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Quit!')));
                           },
                           child: const MenuAcceleratorLabel('&Quit'),
                         ),
@@ -4036,31 +3465,19 @@ class MenuBarShowcase extends StatelessWidget {
                       menuChildren: <Widget>[
                         MenuItemButton(
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Bold!'),
-                              ),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bold!')));
                           },
                           child: const MenuAcceleratorLabel('&Bold'),
                         ),
                         MenuItemButton(
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Italic!'),
-                              ),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Italic!')));
                           },
                           child: const MenuAcceleratorLabel('&Italic'),
                         ),
                         MenuItemButton(
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Underline!'),
-                              ),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Underline!')));
                           },
                           child: const MenuAcceleratorLabel('&Underline'),
                         ),
@@ -4069,17 +3486,10 @@ class MenuBarShowcase extends StatelessWidget {
                     ),
                     SubmenuButton(
                       menuChildren: <Widget>[
-                        const MenuItemButton(
-                          onPressed: null,
-                          child: MenuAcceleratorLabel('&Disabled item'),
-                        ),
+                        const MenuItemButton(onPressed: null, child: MenuAcceleratorLabel('&Disabled item')),
                         MenuItemButton(
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Minify!'),
-                              ),
-                            );
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Minify!')));
                           },
                           child: const MenuAcceleratorLabel('Mi&nify'),
                         ),
@@ -4104,40 +3514,23 @@ class MenuAnchorShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (explain) ...<Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-            child: Text(
-              'MenuAnchor',
-              style: denseHeader,
-            ),
-          ),
+          Padding(padding: const EdgeInsets.fromLTRB(0, 16, 0, 0), child: Text('MenuAnchor', style: denseHeader)),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-            child: Text(
-              'The M3 MenuAnchor used on a Container as a context menu.',
-              style: denseBody,
-            ),
+            child: Text('The M3 MenuAnchor used on a Container as a context menu.', style: denseBody),
           ),
         ],
-        const Row(
-          children: <Widget>[
-            Expanded(
-              child: MenuAnchorContextMenu(
-                message: 'The M3 MenuAnchor is cool!',
-              ),
-            ),
-          ],
-        ),
+        const Row(children: <Widget>[Expanded(child: MenuAnchorContextMenu(message: 'The M3 MenuAnchor is cool!'))]),
       ],
     );
   }
@@ -4149,10 +3542,8 @@ class MenuAnchorShowcase extends StatelessWidget {
 /// they could be used for simple menu systems.
 enum MenuEntry {
   about('About'),
-  showMessage(
-      'Show Message', SingleActivator(LogicalKeyboardKey.keyS, control: true)),
-  hideMessage(
-      'Hide Message', SingleActivator(LogicalKeyboardKey.keyH, control: true)),
+  showMessage('Show Message', SingleActivator(LogicalKeyboardKey.keyS, control: true)),
+  hideMessage('Hide Message', SingleActivator(LogicalKeyboardKey.keyH, control: true)),
   colorMenu('Color Menu'),
   colorRed('Red', SingleActivator(LogicalKeyboardKey.keyR, control: true)),
   colorGreen('Green', SingleActivator(LogicalKeyboardKey.keyG, control: true)),
@@ -4198,16 +3589,13 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
     // be registered to apply to the entire app. Menus don't register their
     // shortcuts, they only display the shortcut hint text.
     // ignore: move-variable-closer-to-its-usage, false positive, used right after this!!
-    final Map<ShortcutActivator, Intent> shortcuts =
-        <ShortcutActivator, Intent>{
+    final Map<ShortcutActivator, Intent> shortcuts = <ShortcutActivator, Intent>{
       for (final MenuEntry item in MenuEntry.values)
-        if (item.shortcut != null)
-          item.shortcut!: VoidCallbackIntent(() => _activate(item)),
+        if (item.shortcut != null) item.shortcut!: VoidCallbackIntent(() => _activate(item)),
     };
     // Register the shortcuts with the ShortcutRegistry so that they are
     // available to the entire application.
-    final Map<ShortcutActivator, Intent>? entries =
-        ShortcutRegistry.maybeOf(context)?.shortcuts;
+    final Map<ShortcutActivator, Intent>? entries = ShortcutRegistry.maybeOf(context)?.shortcuts;
     // TODO(rydmike): Potential issue with ShortcutRegistry? Investigate.
     // Workaround to avoid issue of entries being added multiple times, the
     // dispose of them does not seem to work all the time. This widget is in
@@ -4240,13 +3628,8 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
         controller: _menuController,
         consumeOutsideTap: true,
         menuChildren: <Widget>[
-          MenuItemButton(
-            child: Text(MenuEntry.about.label),
-            onPressed: () => _activate(MenuEntry.about),
-          ),
-          const MenuItemButton(
-            child: Text('Disabled item'),
-          ),
+          MenuItemButton(child: Text(MenuEntry.about.label), onPressed: () => _activate(MenuEntry.about)),
+          const MenuItemButton(child: Text('Disabled item')),
           if (_showingMessage)
             MenuItemButton(
               onPressed: () => _activate(MenuEntry.hideMessage),
@@ -4293,10 +3676,7 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
                   'MenuAnchor context menu.',
                   textAlign: TextAlign.center,
                 ),
-                const Text(
-                  'Menu keyboard shortcuts also work.',
-                  textAlign: TextAlign.center,
-                ),
+                const Text('Menu keyboard shortcuts also work.', textAlign: TextAlign.center),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
@@ -4306,9 +3686,7 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
                   ),
                 ),
                 Text(
-                  _lastSelection != null
-                      ? 'Last Selected: ${_lastSelection!.label}'
-                      : '',
+                  _lastSelection != null ? 'Last Selected: ${_lastSelection!.label}' : '',
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -4360,23 +3738,17 @@ class DrawerShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (explain) ...<Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            child: Text(
-              'Drawer',
-              style: denseHeader,
-            ),
-          ),
+          Padding(padding: const EdgeInsets.fromLTRB(16, 16, 16, 0), child: Text('Drawer', style: denseHeader)),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Text(
@@ -4394,11 +3766,7 @@ class DrawerShowcase extends StatelessWidget {
             context: context,
             removeBottom: true,
             removeTop: true,
-            child: const Drawer(
-              child: Center(
-                child: Text('Drawer'),
-              ),
-            ),
+            child: const Drawer(child: Center(child: Text('Drawer'))),
           ),
         ),
       ],
@@ -4412,8 +3780,7 @@ class NavigationDrawerShowcase extends StatefulWidget {
   final bool explain;
 
   @override
-  State<NavigationDrawerShowcase> createState() =>
-      _NavigationDrawerShowcaseState();
+  State<NavigationDrawerShowcase> createState() => _NavigationDrawerShowcaseState();
 }
 
 class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
@@ -4422,11 +3789,11 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return RepaintBoundary(
       child: Column(
@@ -4436,10 +3803,7 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
           if (widget.explain) ...<Widget>[
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Text(
-                'NavigationDrawer',
-                style: denseHeader,
-              ),
+              child: Text('NavigationDrawer', style: denseHeader),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
@@ -4468,25 +3832,13 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
                 children: const <Widget>[
                   SizedBox(height: 16),
                   NavigationDrawerDestination(
-                    icon: Badge(
-                      label: Text('26'),
-                      child: Icon(Icons.chat_bubble),
-                    ),
+                    icon: Badge(label: Text('26'), child: Icon(Icons.chat_bubble)),
                     label: Text('Chat'),
                   ),
-                  NavigationDrawerDestination(
-                    icon: Icon(Icons.beenhere),
-                    label: Text('Tasks'),
-                  ),
+                  NavigationDrawerDestination(icon: Icon(Icons.beenhere), label: Text('Tasks')),
                   Divider(),
-                  NavigationDrawerDestination(
-                    icon: Icon(Icons.create_new_folder),
-                    label: Text('Folder'),
-                  ),
-                  NavigationDrawerDestination(
-                    icon: Icon(Icons.logout),
-                    label: Text('Logout'),
-                  ),
+                  NavigationDrawerDestination(icon: Icon(Icons.create_new_folder), label: Text('Folder')),
+                  NavigationDrawerDestination(icon: Icon(Icons.logout), label: Text('Logout')),
                 ],
               ),
             ),
@@ -4515,9 +3867,7 @@ class _ListTileShowcaseState extends State<ListTileShowcase> {
             selected: !selected,
             leading: const Icon(Icons.info),
             title: const Text('ListTile'),
-            subtitle: selected
-                ? const Text('Selected list tile')
-                : const Text('Normal list tile'),
+            subtitle: selected ? const Text('Selected list tile') : const Text('Normal list tile'),
             trailing: const Text('Trailing'),
             onTap: () {
               setState(() {
@@ -4528,9 +3878,7 @@ class _ListTileShowcaseState extends State<ListTileShowcase> {
           ListTile(
             leading: const Icon(Icons.info),
             title: const Text('ListTile selected'),
-            subtitle: selected
-                ? const Text('Selected list tile')
-                : const Text('Normal list tile'),
+            subtitle: selected ? const Text('Selected list tile') : const Text('Normal list tile'),
             trailing: const Text('Trailing'),
             selected: selected,
             onTap: () {
@@ -4571,9 +3919,8 @@ class _SwitchListTileShowcaseState extends State<SwitchListTileShowcase> {
           SwitchListTile(
             secondary: const Icon(Icons.info),
             title: const Text('SwitchListTile'),
-            subtitle: isSwitchOneOn
-                ? const Text('The switch list tile is ON')
-                : const Text('The switch list tile is OFF'),
+            subtitle:
+                isSwitchOneOn ? const Text('The switch list tile is ON') : const Text('The switch list tile is OFF'),
             value: isSwitchOneOn,
             onChanged: (bool value) {
               setState(() {
@@ -4584,9 +3931,8 @@ class _SwitchListTileShowcaseState extends State<SwitchListTileShowcase> {
           SwitchListTile(
             secondary: const Icon(Icons.info),
             title: const Text('SwitchListTile'),
-            subtitle: isSwitchTwoOn
-                ? const Text('The switch list tile is ON')
-                : const Text('The switch list tile is OFF'),
+            subtitle:
+                isSwitchTwoOn ? const Text('The switch list tile is ON') : const Text('The switch list tile is OFF'),
             value: isSwitchTwoOn,
             onChanged: (bool value) {
               setState(() {
@@ -4611,8 +3957,7 @@ class CheckboxListTileShowcase extends StatefulWidget {
   const CheckboxListTileShowcase({super.key});
 
   @override
-  State<CheckboxListTileShowcase> createState() =>
-      _CheckboxListTileShowcaseState();
+  State<CheckboxListTileShowcase> createState() => _CheckboxListTileShowcaseState();
 }
 
 class _CheckboxListTileShowcaseState extends State<CheckboxListTileShowcase> {
@@ -4628,9 +3973,10 @@ class _CheckboxListTileShowcaseState extends State<CheckboxListTileShowcase> {
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: isCheckOneOn
-                ? const Text('The checkbox list tile is checked')
-                : const Text('The checkbox list tile is unchecked'),
+            subtitle:
+                isCheckOneOn
+                    ? const Text('The checkbox list tile is checked')
+                    : const Text('The checkbox list tile is unchecked'),
             value: isCheckOneOn,
             onChanged: (bool? value) {
               if (value != null) {
@@ -4643,9 +3989,10 @@ class _CheckboxListTileShowcaseState extends State<CheckboxListTileShowcase> {
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: isCheckTwoOn
-                ? const Text('The checkbox list tile is checked')
-                : const Text('The checkbox list tile is unchecked'),
+            subtitle:
+                isCheckTwoOn
+                    ? const Text('The checkbox list tile is checked')
+                    : const Text('The checkbox list tile is unchecked'),
             value: isCheckTwoOn,
             onChanged: (bool? value) {
               if (value != null) {
@@ -4658,9 +4005,10 @@ class _CheckboxListTileShowcaseState extends State<CheckboxListTileShowcase> {
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: isCheckThreeOn == null
-                ? const Text('The checkbox list tile is null in tristate')
-                : isCheckThreeOn!
+            subtitle:
+                isCheckThreeOn == null
+                    ? const Text('The checkbox list tile is null in tristate')
+                    : isCheckThreeOn!
                     ? const Text('The checkbox list tile is checked')
                     : const Text('The checkbox list tile is unchecked'),
             tristate: true,
@@ -4702,9 +4050,8 @@ class _RadioListTileShowcaseState extends State<RadioListTileShowcase> {
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: value == 1
-                ? const Text('The radio option is selected')
-                : const Text('The radio option is unselected'),
+            subtitle:
+                value == 1 ? const Text('The radio option is selected') : const Text('The radio option is unselected'),
             value: 1,
             groupValue: value,
             onChanged: (int? val) {
@@ -4718,9 +4065,8 @@ class _RadioListTileShowcaseState extends State<RadioListTileShowcase> {
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: value == 2
-                ? const Text('The radio option is selected')
-                : const Text('The radio option is unselected'),
+            subtitle:
+                value == 2 ? const Text('The radio option is selected') : const Text('The radio option is unselected'),
             value: 2,
             groupValue: value,
             onChanged: (int? val) {
@@ -4734,9 +4080,10 @@ class _RadioListTileShowcaseState extends State<RadioListTileShowcase> {
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: value == 3
-                ? const Text('The radio option and list tile is selected')
-                : const Text('The radio option is unselected'),
+            subtitle:
+                value == 3
+                    ? const Text('The radio option and list tile is selected')
+                    : const Text('The radio option is unselected'),
             value: 3,
             groupValue: value,
             selected: value == 3,
@@ -4780,21 +4127,13 @@ class _ExpansionTileShowcaseState extends State<ExpansionTileShowcase> {
           const ExpansionTile(
             title: Text('ExpansionTile 1'),
             subtitle: Text('Trailing expansion arrow icon'),
-            children: <Widget>[
-              ListTile(title: Text('This is tile number 1')),
-            ],
+            children: <Widget>[ListTile(title: Text('This is tile number 1'))],
           ),
           ExpansionTile(
             title: const Text('ExpansionTile 2'),
             subtitle: const Text('Custom expansion arrow icon'),
-            trailing: Icon(
-              _customTileExpanded
-                  ? Icons.arrow_drop_down_circle
-                  : Icons.arrow_drop_down,
-            ),
-            children: const <Widget>[
-              ListTile(title: Text('This is tile number 2')),
-            ],
+            trailing: Icon(_customTileExpanded ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down),
+            children: const <Widget>[ListTile(title: Text('This is tile number 2'))],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
             },
@@ -4803,9 +4142,7 @@ class _ExpansionTileShowcaseState extends State<ExpansionTileShowcase> {
             title: Text('ExpansionTile 3'),
             subtitle: Text('Leading expansion arrow icon'),
             controlAffinity: ListTileControlAffinity.leading,
-            children: <Widget>[
-              ListTile(title: Text('This is tile number 3')),
-            ],
+            children: <Widget>[ListTile(title: Text('This is tile number 3'))],
           ),
         ],
       ),
@@ -4817,14 +4154,11 @@ class ExpansionPanelListShowcase extends StatefulWidget {
   const ExpansionPanelListShowcase({super.key});
 
   @override
-  State<ExpansionPanelListShowcase> createState() =>
-      _ExpansionPanelListShowcaseState();
+  State<ExpansionPanelListShowcase> createState() => _ExpansionPanelListShowcaseState();
 }
 
-class _ExpansionPanelListShowcaseState
-    extends State<ExpansionPanelListShowcase> {
-  final List<ExpansionPanelShowcaseItems> _items =
-      ExpansionPanelShowcaseItems.generateItems(6);
+class _ExpansionPanelListShowcaseState extends State<ExpansionPanelListShowcase> {
+  final List<ExpansionPanelShowcaseItems> _items = ExpansionPanelShowcaseItems.generateItems(6);
 
   @override
   Widget build(BuildContext context) {
@@ -4837,36 +4171,35 @@ class _ExpansionPanelListShowcaseState
         },
         children:
             _items.map<ExpansionPanel>((ExpansionPanelShowcaseItems item) {
-          return ExpansionPanel(
-            canTapOnHeader: true,
-            headerBuilder: (BuildContext context, bool isExpanded) {
-              return ListTile(
-                title: Text(item.headerValue),
+              return ExpansionPanel(
+                canTapOnHeader: true,
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return ListTile(title: Text(item.headerValue));
+                },
+                body: ListTile(
+                  title: Text(item.expandedValue),
+                  subtitle:
+                      item.id > 2
+                          ? const Text('To delete this panel, tap the trash can icon')
+                          : const Text(
+                            'This panel is fixed here and cannot be removed. Items '
+                            'numbered 3 and higher can be removed.',
+                          ),
+                  trailing:
+                      item.id > 2
+                          ? IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              setState(() {
+                                _items.removeWhere((ExpansionPanelShowcaseItems currentItem) => item == currentItem);
+                              });
+                            },
+                          )
+                          : null,
+                ),
+                isExpanded: item.isExpanded,
               );
-            },
-            body: ListTile(
-              title: Text(item.expandedValue),
-              subtitle: item.id > 2
-                  ? const Text('To delete this panel, tap the trash can icon')
-                  : const Text(
-                      'This panel is fixed here and cannot be removed. Items '
-                      'numbered 3 and higher can be removed.'),
-              trailing: item.id > 2
-                  ? IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        setState(() {
-                          _items.removeWhere(
-                              (ExpansionPanelShowcaseItems currentItem) =>
-                                  item == currentItem);
-                        });
-                      },
-                    )
-                  : null,
-            ),
-            isExpanded: item.isExpanded,
-          );
-        }).toList(),
+            }).toList(),
       ),
     );
   }
@@ -4887,8 +4220,7 @@ class ExpansionPanelShowcaseItems {
   bool isExpanded;
 
   static List<ExpansionPanelShowcaseItems> generateItems(int numberOfItems) {
-    return List<ExpansionPanelShowcaseItems>.generate(numberOfItems,
-        (int index) {
+    return List<ExpansionPanelShowcaseItems>.generate(numberOfItems, (int index) {
       return ExpansionPanelShowcaseItems(
         id: index,
         headerValue: 'ExpansionPanelList tile $index',
@@ -4901,14 +4233,11 @@ class ExpansionPanelShowcaseItems {
 class AlertDialogShowcase extends StatelessWidget {
   const AlertDialogShowcase({super.key});
 
-  Future<void> _openDialog(BuildContext context,
-      [bool adaptive = false]) async {
+  Future<void> _openDialog(BuildContext context, [bool adaptive = false]) async {
     await showDialog<void>(
       context: context,
       useRootNavigator: false,
-      builder: (BuildContext context) => adaptive
-          ? const _AlertDialogAdaptiveExample()
-          : const _AlertDialogExample(),
+      builder: (BuildContext context) => adaptive ? const _AlertDialogAdaptiveExample() : const _AlertDialogExample(),
     );
   }
 
@@ -4921,17 +4250,11 @@ class AlertDialogShowcase extends StatelessWidget {
         Wrap(
           children: <Widget>[
             TextButton(
-              child: const Text(
-                'Show AlertDialog',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              child: const Text('Show AlertDialog', style: TextStyle(fontWeight: FontWeight.bold)),
               onPressed: () async => _openDialog(context, false),
             ),
             TextButton(
-              child: const Text(
-                'Show adaptive AlertDialog',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              child: const Text('Show adaptive AlertDialog', style: TextStyle(fontWeight: FontWeight.bold)),
               onPressed: () async => _openDialog(context, true),
             ),
           ],
@@ -4952,13 +4275,13 @@ class _AlertDialogExample extends StatelessWidget {
 
     return AlertDialog(
       title: const Text('Allow location services'),
-      content: const Text('Let us help determine location. This means '
-          'sending anonymous location data to us'),
+      content: const Text(
+        'Let us help determine location. This means '
+        'sending anonymous location data to us',
+      ),
       actions: <Widget>[
-        TextButton(
-            onPressed: () => Navigator.of(context).pop(), child: Text(cancel)),
-        TextButton(
-            onPressed: () => Navigator.of(context).pop(), child: Text(allow)),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(cancel)),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(allow)),
       ],
     );
   }
@@ -4967,10 +4290,7 @@ class _AlertDialogExample extends StatelessWidget {
 class _AlertDialogAdaptiveExample extends StatelessWidget {
   const _AlertDialogAdaptiveExample();
 
-  Widget adaptiveAction(
-      {required BuildContext context,
-      required VoidCallback onPressed,
-      required Widget child}) {
+  Widget adaptiveAction({required BuildContext context, required VoidCallback onPressed, required Widget child}) {
     final ThemeData theme = Theme.of(context);
     switch (theme.platform) {
       case TargetPlatform.android:
@@ -4992,19 +4312,15 @@ class _AlertDialogAdaptiveExample extends StatelessWidget {
 
     return AlertDialog.adaptive(
       title: const Text('Allow location services'),
-      content: const Text('Let us help determine location. This means '
-          'sending anonymous location data to us'),
+      content: const Text(
+        'Let us help determine location. This means '
+        'sending anonymous location data to us',
+      ),
       actions: <Widget>[
         // ignore: avoid-returning-widgets, perfectly valid use case here.
-        adaptiveAction(
-            context: context,
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(cancel)),
+        adaptiveAction(context: context, onPressed: () => Navigator.of(context).pop(), child: Text(cancel)),
         // ignore: avoid-returning-widgets, perfectly valid use case here.
-        adaptiveAction(
-            context: context,
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(allow)),
+        adaptiveAction(context: context, onPressed: () => Navigator.of(context).pop(), child: Text(allow)),
       ],
     );
   }
@@ -5017,9 +4333,7 @@ class TimePickerDialogShowcase extends StatelessWidget {
     await showDialog<void>(
       context: context,
       useRootNavigator: false,
-      builder: (BuildContext context) => TimePickerDialog(
-        initialTime: TimeOfDay.now(),
-      ),
+      builder: (BuildContext context) => TimePickerDialog(initialTime: TimeOfDay.now()),
     );
   }
 
@@ -5027,16 +4341,9 @@ class TimePickerDialogShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        AbsorbPointer(
-          child: TimePickerDialog(
-            initialTime: TimeOfDay.now(),
-          ),
-        ),
+        AbsorbPointer(child: TimePickerDialog(initialTime: TimeOfDay.now())),
         TextButton(
-          child: const Text(
-            'Show TimePickerDialog',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          child: const Text('Show TimePickerDialog', style: TextStyle(fontWeight: FontWeight.bold)),
           onPressed: () async => _openDialog(context),
         ),
       ],
@@ -5051,11 +4358,9 @@ class DatePickerDialogShowcase extends StatelessWidget {
     await showDialog<void>(
       context: context,
       useRootNavigator: false,
-      builder: (BuildContext context) => DatePickerDialog(
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1930),
-        lastDate: DateTime(2050),
-      ),
+      builder:
+          (BuildContext context) =>
+              DatePickerDialog(initialDate: DateTime.now(), firstDate: DateTime(1930), lastDate: DateTime(2050)),
     );
   }
 
@@ -5068,18 +4373,11 @@ class DatePickerDialogShowcase extends StatelessWidget {
             context: context,
             removeTop: true,
             removeBottom: true,
-            child: DatePickerDialog(
-              initialDate: DateTime.now(),
-              firstDate: DateTime(1930),
-              lastDate: DateTime(2050),
-            ),
+            child: DatePickerDialog(initialDate: DateTime.now(), firstDate: DateTime(1930), lastDate: DateTime(2050)),
           ),
         ),
         TextButton(
-          child: const Text(
-            'Show DatePickerDialog',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          child: const Text('Show DatePickerDialog', style: TextStyle(fontWeight: FontWeight.bold)),
           onPressed: () async => _openDialog(context),
         ),
       ],
@@ -5100,27 +4398,25 @@ class BottomSheetShowcase extends StatelessWidget {
         elevation: theme.bottomSheetTheme.elevation,
         backgroundColor: theme.bottomSheetTheme.backgroundColor,
         onClosing: () {},
-        builder: (final BuildContext context) => SizedBox(
-          height: 150,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'BottomSheet',
-                  style: theme.textTheme.titleMedium,
+        builder:
+            (final BuildContext context) => SizedBox(
+              height: 150,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('BottomSheet', style: theme.textTheme.titleMedium),
+                    Text(
+                      'In M2 Flutter uses Material of type canvas, resulting in\n'
+                      'color surface. In M3 Flutter uses surfaceContainerLow.\n'
+                      'FCS defaults to surfaceContainerLow in both modes.',
+                      style: theme.textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-                Text(
-                  'In M2 Flutter uses Material of type canvas, resulting in\n'
-                  'color surface. In M3 Flutter uses surfaceContainerLow.\n'
-                  'FCS defaults to surfaceContainerLow in both modes.',
-                  style: theme.textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
       ),
     );
   }
@@ -5139,27 +4435,25 @@ class BottomSheetModalShowcase extends StatelessWidget {
         backgroundColor: theme.bottomSheetTheme.modalBackgroundColor,
         enableDrag: false,
         onClosing: () {},
-        builder: (final BuildContext context) => SizedBox(
-          height: 150,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Modal BottomSheet',
-                  style: theme.textTheme.titleMedium,
+        builder:
+            (final BuildContext context) => SizedBox(
+              height: 150,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Modal BottomSheet', style: theme.textTheme.titleMedium),
+                    Text(
+                      'In M2 Flutter uses Material of type canvas, resulting in\n'
+                      'color surface. In M3 Flutter uses surfaceContainerLow.\n'
+                      'FCS defaults to surfaceContainerLow in both modes.',
+                      style: theme.textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-                Text(
-                  'In M2 Flutter uses Material of type canvas, resulting in\n'
-                  'color surface. In M3 Flutter uses surfaceContainerLow.\n'
-                  'FCS defaults to surfaceContainerLow in both modes.',
-                  style: theme.textTheme.bodySmall,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
       ),
     );
   }
@@ -5173,10 +4467,7 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
     return const Column(
       spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SnackBarShowcase(),
-        MaterialBannerShowcase(),
-      ],
+      children: <Widget>[SnackBarShowcase(), MaterialBannerShowcase()],
     );
   }
 }
@@ -5192,17 +4483,13 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
   int fixedCount = 0;
   int pinnedCount = 0;
 
-  void _showDemoSnackBar(
-      BuildContext context, SnackBarBehavior style, String message) {
+  void _showDemoSnackBar(BuildContext context, SnackBarBehavior style, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
         behavior: style,
         showCloseIcon: true,
-        action: SnackBarAction(
-          label: 'Undo',
-          onPressed: () {},
-        ),
+        action: SnackBarAction(label: 'Undo', onPressed: () {}),
         duration: const Duration(milliseconds: 3000),
       ),
     );
@@ -5215,37 +4502,26 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isLight = theme.brightness == Brightness.light;
 
-    final Color defaultBackgroundColor = isLight
-        ? useMaterial3
-            ? colorScheme.inverseSurface
-            : Color.alphaBlend(colorScheme.onSurface.withValues(alpha: 0.80),
-                colorScheme.surface)
-        : colorScheme.onSurface;
-    final Color snackBackground =
-        theme.snackBarTheme.backgroundColor ?? defaultBackgroundColor;
+    final Color defaultBackgroundColor =
+        isLight
+            ? useMaterial3
+                ? colorScheme.inverseSurface
+                : Color.alphaBlend(colorScheme.onSurface.withValues(alpha: 0.80), colorScheme.surface)
+            : colorScheme.onSurface;
+    final Color snackBackground = theme.snackBarTheme.backgroundColor ?? defaultBackgroundColor;
 
     final Color snackForeground =
-        ThemeData.estimateBrightnessForColor(snackBackground) ==
-                Brightness.light
-            ? Colors.black
-            : Colors.white;
+        ThemeData.estimateBrightnessForColor(snackBackground) == Brightness.light ? Colors.black : Colors.white;
 
-    final Color defaultActionColor =
-        useMaterial3 ? colorScheme.inversePrimary : colorScheme.secondary;
-    final Color snackActionColor =
-        theme.snackBarTheme.actionTextColor ?? defaultActionColor;
+    final Color defaultActionColor = useMaterial3 ? colorScheme.inversePrimary : colorScheme.secondary;
+    final Color snackActionColor = theme.snackBarTheme.actionTextColor ?? defaultActionColor;
 
-    final TextStyle snackStyle = theme.snackBarTheme.contentTextStyle ??
-        ThemeData(brightness: Brightness.light)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: snackForeground);
-    final TextStyle snackActionStyle = theme.snackBarTheme.contentTextStyle
-            ?.copyWith(color: snackActionColor) ??
-        ThemeData(brightness: Brightness.light)
-            .textTheme
-            .titleMedium!
-            .copyWith(color: snackActionColor);
+    final TextStyle snackStyle =
+        theme.snackBarTheme.contentTextStyle ??
+        ThemeData(brightness: Brightness.light).textTheme.titleMedium!.copyWith(color: snackForeground);
+    final TextStyle snackActionStyle =
+        theme.snackBarTheme.contentTextStyle?.copyWith(color: snackActionColor) ??
+        ThemeData(brightness: Brightness.light).textTheme.titleMedium!.copyWith(color: snackActionColor);
     final double snackElevation = theme.snackBarTheme.elevation ?? 6;
 
     final ShapeBorder? shape = theme.snackBarTheme.shape;
@@ -5260,12 +4536,7 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
               color: snackBackground,
               elevation: snackElevation,
               shadowColor: colorScheme.shadow,
-              shape: shape ??
-                  const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
+              shape: shape ?? const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),
               child: SizedBox(
                 height: 46,
                 width: double.infinity,
@@ -5287,14 +4558,10 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
           const SizedBox(height: 8),
           Center(
             child: TextButton(
-              child: const Text(
-                'Show floating SnackBar',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              child: const Text('Show floating SnackBar', style: TextStyle(fontWeight: FontWeight.bold)),
               onPressed: () {
                 pinnedCount++;
-                _showDemoSnackBar(context, SnackBarBehavior.floating,
-                    'A floating SnackBar ($pinnedCount)');
+                _showDemoSnackBar(context, SnackBarBehavior.floating, 'A floating SnackBar ($pinnedCount)');
               },
             ),
           ),
@@ -5324,14 +4591,10 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
           const SizedBox(height: 8),
           Center(
             child: TextButton(
-              child: const Text(
-                'Show fixed SnackBar',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              child: const Text('Show fixed SnackBar', style: TextStyle(fontWeight: FontWeight.bold)),
               onPressed: () {
                 fixedCount++;
-                _showDemoSnackBar(context, SnackBarBehavior.fixed,
-                    'A fixed SnackBar ($fixedCount)');
+                _showDemoSnackBar(context, SnackBarBehavior.fixed, 'A fixed SnackBar ($fixedCount)');
               },
             ),
           ),
@@ -5353,8 +4616,7 @@ class MaterialBannerShowcase extends StatefulWidget {
 class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
   int showCount = 0;
 
-  void _showDemoMaterialBanner(
-      BuildContext context, bool twoButtons, String message) {
+  void _showDemoMaterialBanner(BuildContext context, bool twoButtons, String message) {
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
         // elevation: 3,
@@ -5391,14 +4653,8 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
             content: const Text('I am a MaterialBanner at elevation 3'),
             leading: const Icon(Icons.agriculture_outlined),
             actions: <Widget>[
-              TextButton(
-                child: const Text('Open'),
-                onPressed: () {},
-              ),
-              TextButton(
-                child: const Text('Dismiss'),
-                onPressed: () {},
-              ),
+              TextButton(child: const Text('Open'), onPressed: () {}),
+              TextButton(child: const Text('Dismiss'), onPressed: () {}),
             ],
           ),
           if (widget.enableShowBanner)
@@ -5409,25 +4665,17 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: <Widget>[
                   TextButton(
-                    child: const Text(
-                      'Show MaterialBanner',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    child: const Text('Show MaterialBanner', style: TextStyle(fontWeight: FontWeight.bold)),
                     onPressed: () {
                       showCount++;
-                      _showDemoMaterialBanner(
-                          context, false, 'A MaterialBanner ($showCount)');
+                      _showDemoMaterialBanner(context, false, 'A MaterialBanner ($showCount)');
                     },
                   ),
                   TextButton(
-                    child: const Text(
-                      'Show two button MaterialBanner',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    child: const Text('Show two button MaterialBanner', style: TextStyle(fontWeight: FontWeight.bold)),
                     onPressed: () {
                       showCount++;
-                      _showDemoMaterialBanner(context, true,
-                          'A MaterialBanner with two actions ($showCount)');
+                      _showDemoMaterialBanner(context, true, 'A MaterialBanner with two actions ($showCount)');
                     },
                   ),
                 ],
@@ -5440,8 +4688,7 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
 }
 
 class MaterialShowcase extends StatelessWidget {
-  const MaterialShowcase(
-      {super.key, this.explain = false, this.width = CardShowcase._width - 8});
+  const MaterialShowcase({super.key, this.explain = false, this.width = CardShowcase._width - 8});
   final bool explain;
   final double width;
 
@@ -5451,11 +4698,11 @@ class MaterialShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(
-      fontSize: 13,
+    final TextStyle denseHeader = theme.textTheme.titleMedium!.copyWith(fontSize: 13);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
     );
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
     final TextStyle labelSmall = theme.textTheme.labelSmall!;
 
     return RepaintBoundary(
@@ -5821,8 +5068,10 @@ class CardShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle denseBody = theme.textTheme.bodyMedium!
-        .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
+    final TextStyle denseBody = theme.textTheme.bodyMedium!.copyWith(
+      fontSize: 12,
+      color: theme.textTheme.bodySmall!.color,
+    );
     final TextStyle labelSmall = theme.textTheme.labelSmall!;
 
     return RepaintBoundary(
@@ -6159,11 +5408,7 @@ class CardShowcase extends StatelessWidget {
 }
 
 class CardTypesShowcase extends StatelessWidget {
-  const CardTypesShowcase({
-    super.key,
-    this.width,
-    this.showForcedOutlined = false,
-  });
+  const CardTypesShowcase({super.key, this.width, this.showForcedOutlined = false});
 
   final double? width;
   final bool showForcedOutlined;
@@ -6210,15 +5455,9 @@ class CardTypesShowcase extends StatelessWidget {
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
-                    child: IconButton(
-                      icon: const Icon(Icons.more_vert),
-                      onPressed: () {},
-                    ),
+                    child: IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
                   ),
-                  const Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text('Elevated'),
-                  ),
+                  const Align(alignment: Alignment.bottomLeft, child: Text('Elevated')),
                 ],
               ),
             ),
@@ -6234,15 +5473,9 @@ class CardTypesShowcase extends StatelessWidget {
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
-                    child: IconButton(
-                      icon: const Icon(Icons.more_vert),
-                      onPressed: () {},
-                    ),
+                    child: IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
                   ),
-                  const Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text('Filled'),
-                  ),
+                  const Align(alignment: Alignment.bottomLeft, child: Text('Filled')),
                 ],
               ),
             ),
@@ -6258,15 +5491,9 @@ class CardTypesShowcase extends StatelessWidget {
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
-                    child: IconButton(
-                      icon: const Icon(Icons.more_vert),
-                      onPressed: () {},
-                    ),
+                    child: IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
                   ),
-                  const Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text('Outlined'),
-                  ),
+                  const Align(alignment: Alignment.bottomLeft, child: Text('Outlined')),
                 ],
               ),
             ),
@@ -6289,15 +5516,9 @@ class CardTypesShowcase extends StatelessWidget {
                   children: <Widget>[
                     Align(
                       alignment: Alignment.topRight,
-                      child: IconButton(
-                        icon: const Icon(Icons.more_vert),
-                        onPressed: () {},
-                      ),
+                      child: IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
                     ),
-                    const Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Forced'),
-                    ),
+                    const Align(alignment: Alignment.bottomLeft, child: Text('Forced')),
                   ],
                 ),
               ),
@@ -6314,10 +5535,7 @@ class TextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextThemeColumnShowcase(
-      textTheme: Theme.of(context).textTheme,
-      showDetails: showDetails,
-    );
+    return TextThemeColumnShowcase(textTheme: Theme.of(context).textTheme, showDetails: showDetails);
   }
 }
 
@@ -6327,19 +5545,12 @@ class PrimaryTextThemeShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextThemeColumnShowcase(
-      textTheme: Theme.of(context).primaryTextTheme,
-      showDetails: showDetails,
-    );
+    return TextThemeColumnShowcase(textTheme: Theme.of(context).primaryTextTheme, showDetails: showDetails);
   }
 }
 
 class TextThemeColumnShowcase extends StatelessWidget {
-  const TextThemeColumnShowcase({
-    super.key,
-    required this.textTheme,
-    this.showDetails = false,
-  });
+  const TextThemeColumnShowcase({super.key, required this.textTheme, this.showDetails = false});
   final TextTheme textTheme;
   final bool showDetails;
 
@@ -6465,12 +5676,7 @@ class TextThemeColumnShowcase extends StatelessWidget {
 }
 
 class _ShowTextStyle extends StatelessWidget {
-  const _ShowTextStyle(
-    this.label, {
-    required this.style,
-    required this.infoStyle,
-    this.showDetails = false,
-  });
+  const _ShowTextStyle(this.label, {required this.style, required this.infoStyle, this.showDetails = false});
 
   final String label;
   final TextStyle style;
@@ -6483,12 +5689,8 @@ class _ShowTextStyle extends StatelessWidget {
     final String size = style.fontSize!.toStringAsFixed(1);
     final String fontWeight = style.fontWeight!.toString();
     final String color = style.color!.toString();
-    final String spacing = style.letterSpacing != null
-        ? style.letterSpacing!.toStringAsFixed(2)
-        : '';
-    final String height = style.height != null
-        ? ' height: ${style.height!.toStringAsFixed(2)}'
-        : '';
+    final String spacing = style.letterSpacing != null ? style.letterSpacing!.toStringAsFixed(2) : '';
+    final String height = style.height != null ? ' height: ${style.height!.toStringAsFixed(2)}' : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

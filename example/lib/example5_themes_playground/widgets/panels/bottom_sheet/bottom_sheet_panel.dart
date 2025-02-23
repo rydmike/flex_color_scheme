@@ -30,24 +30,21 @@ class BottomSheetPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
-    final String sheetRadiusDefaultLabel = controller.bottomSheetBorderRadius ==
-                null &&
-            effectiveRadius == null
-        ? '28 dp'
-        : controller.bottomSheetBorderRadius == null && effectiveRadius != null
+    final String sheetRadiusDefaultLabel =
+        controller.bottomSheetBorderRadius == null && effectiveRadius == null
+            ? '28 dp'
+            : controller.bottomSheetBorderRadius == null && effectiveRadius != null
             ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
             : '';
     return Column(
@@ -57,10 +54,11 @@ class BottomSheetPanel extends StatelessWidget {
         const ListTileReveal(
           title: Text('BottomSheet'),
           subtitleReveal: Text(
-              'The BottomSheet comes in two variants, normal and '
-              'modal version. Some of their properties can be themed '
-              'individually, but not all of them. The border radius only has '
-              'one the property shared by both variants.\n'),
+            'The BottomSheet comes in two variants, normal and '
+            'modal version. Some of their properties can be themed '
+            'individually, but not all of them. The border radius only has '
+            'one the property shared by both variants.\n',
+          ),
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -80,20 +78,19 @@ class BottomSheetPanel extends StatelessWidget {
           enabled: enableControl,
           values: Clip.values,
           title: const Text('Content clip behavior'),
-          subtitleReveal: const Text('Controls how the content is clipped '
-              'inside the BottomSheet. Clip is needed if you have content '
-              'in the bottom sheet that would overlap its rounded top '
-              'corners. See known issues below for more info.\n'),
+          subtitleReveal: const Text(
+            'Controls how the content is clipped '
+            'inside the BottomSheet. Clip is needed if you have content '
+            'in the bottom sheet that would overlap its rounded top '
+            'corners. See known issues below for more info.\n',
+          ),
           value: controller.bottomSheetClipBehavior,
           onChanged: controller.setBottomSheetClipBehavior,
         ),
         const Divider(),
         const ListTile(title: Text('Standard BottomSheet')),
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: BottomSheetShowcase(),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: BottomSheetShowcase()),
         SliderListTileReveal(
           enabled: enableControl,
           title: const Text('Elevation'),
@@ -118,10 +115,7 @@ class BottomSheetPanel extends StatelessWidget {
         const Divider(),
         const ListTile(title: Text('Modal BottomSheet')),
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: BottomSheetModalShowcase(),
-        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: BottomSheetModalShowcase()),
         const SizedBox(height: 16),
         SliderListTileReveal(
           enabled: enableControl,
@@ -153,31 +147,26 @@ class BottomSheetPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Using a BackdropFilter with a BottomSheet does not '
+                  text:
+                      'Using a BackdropFilter with a BottomSheet does not '
                       'work if any other content clip behavior than Clip.none '
                       'is used. This is a known issue in Flutter, see '
                       'Flutter SDK ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue160963,
-                  text: 'issue #160963',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsFlutterIssue160963, text: 'issue #160963'),
                 // _fcsChipUmbrellaIssue115364
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n\n'
+                  text:
+                      '.\n\n'
                       'The issues is also reported in the FlexColorScheme '
                       'issue tracker, see issue ',
                 ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsIssue270,
-                  text: 'issue #270',
-                ),
+                LinkTextSpan(style: linkStyle, uri: _fcsIssue270, text: 'issue #270'),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. It contains a work around example that can be used '
+                  text:
+                      '. It contains a work around example that can be used '
                       'to change the clip behavior to Clip.none, if you need '
                       'to use a BackdropFilter with a BottomSheet, with FCS '
                       'versions prior to 8.1.0, when the property value '

@@ -35,83 +35,82 @@ class SurfaceModePopupMenu extends StatelessWidget {
   // need in both the popup menu and toggle buttons implementation.
   // It needs the theme ColorScheme so it can't be a const list or final, and
   // we need to control when we only included a sub set in toggle buttons case.
-  static List<Widget> getModeWidget(ColorScheme scheme,
-          [bool allModes = true]) =>
-      <Widget>[
-        const Tooltip(
-          message: 'Level blend\nAll at same level\n'
-              '(level)',
-          child: Icon(Icons.check_box_outline_blank),
+  static List<Widget> getModeWidget(ColorScheme scheme, [bool allModes = true]) => <Widget>[
+    const Tooltip(
+      message:
+          'Level blend\nAll at same level\n'
+          '(level)',
+      child: Icon(Icons.check_box_outline_blank),
+    ),
+    const Tooltip(
+      message:
+          'Very high surfaces\nLow scaffold\n'
+          '(highBackgroundLowScaffold)',
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Padding(padding: EdgeInsets.only(top: 10), child: Icon(Icons.layers_outlined)),
+          Icon(Icons.layers),
+        ],
+      ),
+    ),
+    const Tooltip(
+      message:
+          'High surfaces\nLow scaffold\n'
+          '(highSurfaceLowScaffold)',
+      child: Icon(Icons.layers),
+    ),
+    const Tooltip(
+      message:
+          'Low surfaces\nHigh scaffold\n'
+          '(highScaffoldLowSurface)',
+      child: Icon(Icons.layers_outlined),
+    ),
+    if (allModes)
+      const Tooltip(
+        message:
+            'Level surfaces\nHigh scaffold\n'
+            '(highScaffoldLevelSurface)',
+        child: Icon(Icons.dynamic_feed_rounded),
+      ),
+    const Tooltip(
+      message:
+          'Level surfaces\nLow scaffold\n'
+          '(levelSurfacesLowScaffold)',
+      child: RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
+    ),
+    const Tooltip(
+      message:
+          'Low surfaces\nHigh scaffold\n'
+          '(highScaffoldLowSurfaces)',
+      child: Icon(Icons.horizontal_split),
+    ),
+    if (allModes)
+      Tooltip(
+        message:
+            'Level surfaces, low scaffold\n'
+            'Level tertiaryContainer dialog\n'
+            '(levelSurfacesLowScaffoldVariantDialog)',
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            const RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
+            Icon(Icons.stop, color: scheme.tertiary, size: 18),
+          ],
         ),
-        const Tooltip(
-          message: 'Very high surfaces\nLow scaffold\n'
-              '(highBackgroundLowScaffold)',
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Icon(Icons.layers_outlined),
-              ),
-              Icon(Icons.layers),
-            ],
-          ),
+      ),
+    if (allModes)
+      Tooltip(
+        message:
+            'Low surfaces, very high scaffold\n'
+            'Low tertiaryContainer dialog\n'
+            '(highScaffoldLowSurfacesVariantDialog)',
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[const Icon(Icons.horizontal_split), Icon(Icons.stop, color: scheme.tertiary, size: 18)],
         ),
-        const Tooltip(
-          message: 'High surfaces\nLow scaffold\n'
-              '(highSurfaceLowScaffold)',
-          child: Icon(Icons.layers),
-        ),
-        const Tooltip(
-          message: 'Low surfaces\nHigh scaffold\n'
-              '(highScaffoldLowSurface)',
-          child: Icon(Icons.layers_outlined),
-        ),
-        if (allModes)
-          const Tooltip(
-            message: 'Level surfaces\nHigh scaffold\n'
-                '(highScaffoldLevelSurface)',
-            child: Icon(Icons.dynamic_feed_rounded),
-          ),
-        const Tooltip(
-          message: 'Level surfaces\nLow scaffold\n'
-              '(levelSurfacesLowScaffold)',
-          child:
-              RotatedBox(quarterTurns: 2, child: Icon(Icons.horizontal_split)),
-        ),
-        const Tooltip(
-          message: 'Low surfaces\nHigh scaffold\n'
-              '(highScaffoldLowSurfaces)',
-          child: Icon(Icons.horizontal_split),
-        ),
-        if (allModes)
-          Tooltip(
-            message: 'Level surfaces, low scaffold\n'
-                'Level tertiaryContainer dialog\n'
-                '(levelSurfacesLowScaffoldVariantDialog)',
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                const RotatedBox(
-                    quarterTurns: 2, child: Icon(Icons.horizontal_split)),
-                Icon(Icons.stop, color: scheme.tertiary, size: 18),
-              ],
-            ),
-          ),
-        if (allModes)
-          Tooltip(
-            message: 'Low surfaces, very high scaffold\n'
-                'Low tertiaryContainer dialog\n'
-                '(highScaffoldLowSurfacesVariantDialog)',
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                const Icon(Icons.horizontal_split),
-                Icon(Icons.stop, color: scheme.tertiary, size: 18),
-              ],
-            ),
-          ),
-      ];
+      ),
+  ];
 
   // Short explanation of the used surface mode.
   static String modeShort(final FlexSurfaceMode mode) {
@@ -190,10 +189,8 @@ class SurfaceModePopupMenu extends StatelessWidget {
     final String styleName = explainMode(FlexSurfaceMode.values[index]);
     final List<Widget> modeWidgets = getModeWidget(scheme);
 
-    final IconThemeData selectedIconTheme =
-        theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
-    final IconThemeData unSelectedIconTheme =
-        theme.iconTheme.copyWith(color: scheme.primary);
+    final IconThemeData selectedIconTheme = theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
+    final IconThemeData unSelectedIconTheme = theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
@@ -219,33 +216,28 @@ class SurfaceModePopupMenu extends StatelessWidget {
               child: ListTile(
                 dense: true,
                 contentPadding: EdgeInsets.zero,
-                leading: index == i
-                    ? IconTheme(
-                        data: selectedIconTheme,
-                        child: ColorSchemeBox(
-                          backgroundColor: scheme.primary,
-                          borderColor: scheme.primary,
-                          child: modeWidgets[i],
+                leading:
+                    index == i
+                        ? IconTheme(
+                          data: selectedIconTheme,
+                          child: ColorSchemeBox(
+                            backgroundColor: scheme.primary,
+                            borderColor: scheme.primary,
+                            child: modeWidgets[i],
+                          ),
+                        )
+                        : IconTheme(
+                          data: unSelectedIconTheme,
+                          child: ColorSchemeBox(
+                            backgroundColor: Colors.transparent,
+                            borderColor: scheme.primary,
+                            child: modeWidgets[i],
+                          ),
                         ),
-                      )
-                    : IconTheme(
-                        data: unSelectedIconTheme,
-                        child: ColorSchemeBox(
-                          backgroundColor: Colors.transparent,
-                          borderColor: scheme.primary,
-                          child: modeWidgets[i],
-                        ),
-                      ),
-                title: Text(
-                  modeShort(FlexSurfaceMode.values[i]),
-                  style: txtStyle,
-                ),
-                subtitle: Text(
-                  '(${FlexSurfaceMode.values[i].name})',
-                  style: txtStyle.copyWith(fontSize: 9.0),
-                ),
+                title: Text(modeShort(FlexSurfaceMode.values[i]), style: txtStyle),
+                subtitle: Text('(${FlexSurfaceMode.values[i].name})', style: txtStyle.copyWith(fontSize: 9.0)),
               ),
-            )
+            ),
         ];
       },
       child: ListTile(
@@ -254,10 +246,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
         title: title,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (subtitle != null) subtitle!,
-            Text(styleName),
-          ],
+          children: <Widget>[if (subtitle != null) subtitle!, Text(styleName)],
         ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),

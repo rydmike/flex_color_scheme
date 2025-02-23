@@ -14,54 +14,48 @@ class VerticalShapeBorder extends ShapeBorder {
   final BorderSide rightSide;
 
   @override
-  EdgeInsetsGeometry get dimensions =>
-      EdgeInsets.fromLTRB(leftSide.width, 0, rightSide.width, 0);
+  EdgeInsetsGeometry get dimensions => EdgeInsets.fromLTRB(leftSide.width, 0, rightSide.width, 0);
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      ..addRRect(RRect.fromRectAndRadius(rect, Radius.circular(cornerRadius)));
+    return Path()..addRRect(RRect.fromRectAndRadius(rect, Radius.circular(cornerRadius)));
   }
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     return Path()
       ..addRRect(RRect.fromRectAndRadius(rect, Radius.circular(cornerRadius)))
-      ..addRect(Rect.fromLTWH(
-        rect.left,
-        rect.top + leftSide.width,
-        leftSide.width,
-        rect.height - leftSide.width * 2,
-      ))
-      ..addRect(Rect.fromLTWH(
-        rect.right - rightSide.width,
-        rect.top + rightSide.width,
-        rightSide.width,
-        rect.height - rightSide.width * 2,
-      ));
+      ..addRect(Rect.fromLTWH(rect.left, rect.top + leftSide.width, leftSide.width, rect.height - leftSide.width * 2))
+      ..addRect(
+        Rect.fromLTWH(
+          rect.right - rightSide.width,
+          rect.top + rightSide.width,
+          rightSide.width,
+          rect.height - rightSide.width * 2,
+        ),
+      );
   }
 
   @override
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
     if (leftSide.style != BorderStyle.none) {
-      final Path leftBorderPath = Path()
-        ..addRect(Rect.fromLTWH(
-          rect.left,
-          rect.top + leftSide.width / 2,
-          leftSide.width,
-          rect.height - leftSide.width,
-        ));
+      final Path leftBorderPath =
+          Path()..addRect(
+            Rect.fromLTWH(rect.left, rect.top + leftSide.width / 2, leftSide.width, rect.height - leftSide.width),
+          );
       canvas.drawPath(leftBorderPath, leftSide.toPaint());
     }
 
     if (rightSide.style != BorderStyle.none) {
-      final Path rightBorderPath = Path()
-        ..addRect(Rect.fromLTWH(
-          rect.right - rightSide.width,
-          rect.top + rightSide.width / 2,
-          rightSide.width,
-          rect.height - rightSide.width,
-        ));
+      final Path rightBorderPath =
+          Path()..addRect(
+            Rect.fromLTWH(
+              rect.right - rightSide.width,
+              rect.top + rightSide.width / 2,
+              rightSide.width,
+              rect.height - rightSide.width,
+            ),
+          );
       canvas.drawPath(rightBorderPath, rightSide.toPaint());
     }
   }

@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 
 // Widget used to change the used FlexScheme in example 3.
 class ThemeSelectButtons extends StatelessWidget {
-  const ThemeSelectButtons({
-    super.key,
-    required this.scheme,
-    required this.onChanged,
-  });
+  const ThemeSelectButtons({super.key, required this.scheme, required this.onChanged});
   final FlexScheme scheme;
   final ValueChanged<FlexScheme> onChanged;
 
@@ -34,38 +30,10 @@ class ThemeSelectButtons extends StatelessWidget {
         }
       },
       children: const <Widget>[
-        Padding(
-          padding: EdgeInsets.all(6),
-          child: Text(
-            'Hippie\nblue',
-            textAlign: TextAlign.center,
-            style: style,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(6),
-          child: Text(
-            'Mallard\ngreen',
-            textAlign: TextAlign.center,
-            style: style,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(6),
-          child: Text(
-            'Outer\nspace',
-            textAlign: TextAlign.center,
-            style: style,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(6),
-          child: Text(
-            'Custom\nblue',
-            textAlign: TextAlign.center,
-            style: style,
-          ),
-        ),
+        Padding(padding: EdgeInsets.all(6), child: Text('Hippie\nblue', textAlign: TextAlign.center, style: style)),
+        Padding(padding: EdgeInsets.all(6), child: Text('Mallard\ngreen', textAlign: TextAlign.center, style: style)),
+        Padding(padding: EdgeInsets.all(6), child: Text('Outer\nspace', textAlign: TextAlign.center, style: style)),
+        Padding(padding: EdgeInsets.all(6), child: Text('Custom\nblue', textAlign: TextAlign.center, style: style)),
       ],
     );
   }

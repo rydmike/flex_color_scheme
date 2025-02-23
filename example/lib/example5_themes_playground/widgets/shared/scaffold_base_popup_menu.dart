@@ -188,27 +188,22 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
     final String usedLabel = defaultLabel ?? 'unknown';
     final String usedLabelM2 = defaultLabelM2 ?? usedLabel;
     final String usedLabelDark = defaultLabelDark ?? usedLabel;
-    final String usedLabelDarkM2 =
-        defaultLabelDarkM2 ?? defaultLabelM2 ?? defaultLabelDark ?? usedLabel;
+    final String usedLabelDarkM2 = defaultLabelDarkM2 ?? defaultLabelM2 ?? defaultLabelDark ?? usedLabel;
 
-    final String resolvedEnabledLabel = useMaterial3
-        ? isLight
-            ? usedLabel
-            : usedLabelDark
-        : isLight
+    final String resolvedEnabledLabel =
+        useMaterial3
+            ? isLight
+                ? usedLabel
+                : usedLabelDark
+            : isLight
             ? usedLabelM2
             : usedLabelDarkM2;
 
     final String disabledLabel = defaultDisabledLabel ?? usedLabel;
-    final String disabledLabelDark = defaultDisabledLabelDark ??
-        defaultDisabledLabel ??
-        defaultLabelDark ??
-        usedLabel;
-    final String disabledLabelM2 = defaultDisabledLabelM2 ??
-        defaultDisabledLabel ??
-        defaultLabelM2 ??
-        usedLabel;
-    final String disabledLabelDarkM2 = defaultDisabledLabelDarkM2 ??
+    final String disabledLabelDark = defaultDisabledLabelDark ?? defaultDisabledLabel ?? defaultLabelDark ?? usedLabel;
+    final String disabledLabelM2 = defaultDisabledLabelM2 ?? defaultDisabledLabel ?? defaultLabelM2 ?? usedLabel;
+    final String disabledLabelDarkM2 =
+        defaultDisabledLabelDarkM2 ??
         defaultDisabledLabelM2 ??
         defaultDisabledLabelDark ??
         defaultDisabledLabel ??
@@ -216,77 +211,64 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
         defaultLabelM2 ??
         usedLabel;
 
-    final String resolvedDisabledLabel = useMaterial3
-        ? isLight
-            ? disabledLabel
-            : disabledLabelDark
-        : isLight
+    final String resolvedDisabledLabel =
+        useMaterial3
+            ? isLight
+                ? disabledLabel
+                : disabledLabelDark
+            : isLight
             ? disabledLabelM2
             : disabledLabelDarkM2;
 
-    final String resolvedLabel =
-        enabled ? resolvedEnabledLabel : resolvedDisabledLabel;
+    final String resolvedLabel = enabled ? resolvedEnabledLabel : resolvedDisabledLabel;
 
-    final String effectiveDefaultLabel =
-        wrapWithDefaultLabel ? 'default ($resolvedLabel)' : resolvedLabel;
+    final String effectiveDefaultLabel = wrapWithDefaultLabel ? 'default ($resolvedLabel)' : resolvedLabel;
 
-    final String selectedLabel = enabled && value != null
-        ? value?.getName(isLight) ?? ''
-        : effectiveDefaultLabel;
+    final String selectedLabel = enabled && value != null ? value?.getName(isLight) ?? '' : effectiveDefaultLabel;
 
     return Theme(
       data: Theme.of(context).copyWith(
-        scrollbarTheme: Theme.of(context).scrollbarTheme.copyWith(
-              thumbVisibility: WidgetStateProperty.all<bool>(true),
-            ),
+        scrollbarTheme: Theme.of(context).scrollbarTheme.copyWith(thumbVisibility: WidgetStateProperty.all<bool>(true)),
       ),
       child: PopupMenuButton<int>(
         popUpAnimationStyle: AnimationStyle.noAnimation,
         position: PopupMenuPosition.under,
         offset: const Offset(0, -4),
-        constraints: const BoxConstraints(
-          minWidth: 300,
-          maxWidth: 300,
-          maxHeight: 600,
-        ),
+        constraints: const BoxConstraints(minWidth: 300, maxWidth: 300, maxHeight: 600),
         initialValue: !enabled || value == null ? 0 : value!.index + 1,
         tooltip: '',
         padding: EdgeInsets.zero,
         onSelected: (int index) {
-          onChanged?.call(
-              index == 0 ? null : FlexScaffoldBaseColor.values[index - 1]);
+          onChanged?.call(index == 0 ? null : FlexScaffoldBaseColor.values[index - 1]);
         },
         enabled: enabled,
-        itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-          for (int i = 0; i <= FlexScaffoldBaseColor.values.length; i++)
-            PopupMenuItem<int>(
-              value: i,
-              child: ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                leading: ColorSchemeBox(
-                  foregroundColor: (value?.index ?? -1) + 1 == i
-                      ? colorScheme.onSurface
-                      : colorScheme.onSurfaceVariant,
-                  backgroundColor: i <= 0
-                      ? colorScheme.surface
-                      : FlexScaffoldBaseColor.values[i - 1].color(
-                          colorScheme,
-                          useMaterial3: useMaterial3,
-                        ),
-                  selected: (value?.index ?? -1) + 1 == i,
-                  borderColor: (value?.index ?? -1) + 1 == i
-                      ? theme.colorScheme.onSurface
-                      : theme.colorScheme.outline,
-                  defaultOption: i <= 0,
+        itemBuilder:
+            (BuildContext context) => <PopupMenuItem<int>>[
+              for (int i = 0; i <= FlexScaffoldBaseColor.values.length; i++)
+                PopupMenuItem<int>(
+                  value: i,
+                  child: ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    leading: ColorSchemeBox(
+                      foregroundColor:
+                          (value?.index ?? -1) + 1 == i ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
+                      backgroundColor:
+                          i <= 0
+                              ? colorScheme.surface
+                              : FlexScaffoldBaseColor.values[i - 1].color(colorScheme, useMaterial3: useMaterial3),
+                      selected: (value?.index ?? -1) + 1 == i,
+                      borderColor:
+                          (value?.index ?? -1) + 1 == i ? theme.colorScheme.onSurface : theme.colorScheme.outline,
+                      defaultOption: i <= 0,
+                    ),
+                    title:
+                        i <= 0
+                            ? Text(effectiveDefaultLabel, style: txtStyle)
+                            : Text(FlexScaffoldBaseColor.values[i - 1].getName(isLight), style: txtStyle),
+                  ),
                 ),
-                title: i <= 0
-                    ? Text(effectiveDefaultLabel, style: txtStyle)
-                    : Text(FlexScaffoldBaseColor.values[i - 1].getName(isLight),
-                        style: txtStyle),
-              ),
-            )
-        ],
+            ],
         child: ListTileReveal(
           enabled: enabled,
           dense: dense,
@@ -295,26 +277,19 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
           title: title,
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('$colorPrefix$selectedLabel$colorSuffix'),
-              if (subtitle != null) subtitle!,
-            ],
+            children: <Widget>[Text('$colorPrefix$selectedLabel$colorSuffix'), if (subtitle != null) subtitle!],
           ),
           subtitleReveal: subtitleReveal,
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 5.0),
             child: ColorSchemeBox(
-              foregroundColor: enabled
-                  ? colorScheme.onSurface
-                  : colorScheme.onSurface.withValues(alpha: enabled ? 1 : 0.5),
-              backgroundColor: enabled && value != null
-                  ? value!.color(
-                      colorScheme,
-                      useMaterial3: useMaterial3,
-                    )
-                  : colorScheme.surface,
-              borderColor:
-                  colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
+              foregroundColor:
+                  enabled ? colorScheme.onSurface : colorScheme.onSurface.withValues(alpha: enabled ? 1 : 0.5),
+              backgroundColor:
+                  enabled && value != null
+                      ? value!.color(colorScheme, useMaterial3: useMaterial3)
+                      : colorScheme.surface,
+              borderColor: colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
               defaultOption: value == null,
             ),
           ),

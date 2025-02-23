@@ -40,10 +40,7 @@ class AnimatedSwitchHide extends StatelessWidget {
     return AnimatedSwitcher(
       duration: duration,
       transitionBuilder: (Widget child, Animation<double> animation) {
-        return SizeTransition(
-          sizeFactor: animation,
-          child: child,
-        );
+        return SizeTransition(sizeFactor: animation, child: child);
       },
       child: showChild ? child : switchedChild ?? const SizedBox.shrink(),
     );

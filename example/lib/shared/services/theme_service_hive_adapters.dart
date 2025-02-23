@@ -174,8 +174,7 @@ class FlexSchemeColorAdapter extends TypeAdapter<SchemeColor?> {
 }
 
 /// A Hive data type adapter for enum [NavigationDestinationLabelBehavior].
-class NavigationDestinationLabelBehaviorAdapter
-    extends TypeAdapter<NavigationDestinationLabelBehavior> {
+class NavigationDestinationLabelBehaviorAdapter extends TypeAdapter<NavigationDestinationLabelBehavior> {
   @override
   NavigationDestinationLabelBehavior read(BinaryReader reader) {
     final int index = reader.readInt();
@@ -192,8 +191,7 @@ class NavigationDestinationLabelBehaviorAdapter
 }
 
 /// A Hive data type adapter for enum [NavigationRailLabelType].
-class NavigationRailLabelTypeAdapter
-    extends TypeAdapter<NavigationRailLabelType> {
+class NavigationRailLabelTypeAdapter extends TypeAdapter<NavigationRailLabelType> {
   @override
   NavigationRailLabelType read(BinaryReader reader) {
     final int index = reader.readInt();
@@ -213,8 +211,7 @@ class NavigationRailLabelTypeAdapter
 ///
 /// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
-class FlexSliderIndicatorTypeAdapter
-    extends TypeAdapter<FlexSliderIndicatorType?> {
+class FlexSliderIndicatorTypeAdapter extends TypeAdapter<FlexSliderIndicatorType?> {
   @override
   FlexSliderIndicatorType? read(BinaryReader reader) {
     final int index = reader.readInt();
@@ -458,8 +455,7 @@ class ListTileStyleAdapter extends TypeAdapter<ListTileStyle?> {
 ///
 /// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
-class ListTileTitleAlignmentAdapter
-    extends TypeAdapter<ListTileTitleAlignment?> {
+class ListTileTitleAlignmentAdapter extends TypeAdapter<ListTileTitleAlignment?> {
   @override
   ListTileTitleAlignment? read(BinaryReader reader) {
     final int index = reader.readInt();
@@ -483,8 +479,7 @@ class ListTileTitleAlignmentAdapter
 ///
 /// Handles storing `null` value as -1 and returns anything out of enum
 /// index range as null value.
-class ListTileControlAffinityAdapter
-    extends TypeAdapter<ListTileControlAffinity?> {
+class ListTileControlAffinityAdapter extends TypeAdapter<ListTileControlAffinity?> {
   @override
   ListTileControlAffinity? read(BinaryReader reader) {
     final int index = reader.readInt();

@@ -121,9 +121,10 @@ class DemoApp extends StatelessWidget {
           // enum value as key.
           theme: FlexThemeData.light(
             useMaterial3: themeController.useMaterial3,
-            colors: themeController.usedScheme == FlexScheme.custom
-                ? _myFlexScheme.light
-                : FlexColor.schemes[themeController.usedScheme]!.light,
+            colors:
+                themeController.usedScheme == FlexScheme.custom
+                    ? _myFlexScheme.light
+                    : FlexColor.schemes[themeController.usedScheme]!.light,
             // We use a surface color mode where Material surfaces use
             // more primary color branding than background, and scaffold uses
             // even less.
@@ -136,8 +137,7 @@ class DemoApp extends StatelessWidget {
             // to pass in a `FlexSubThemesData()` data object that contains a
             // large number of easy to use configuration parameters that you
             // can use for quick styling of the sub-themes per component.
-            subThemesData:
-                themeController.useSubThemes ? const FlexSubThemesData() : null,
+            subThemesData: themeController.useSubThemes ? const FlexSubThemesData() : null,
             // Passing in `FlexKeyColors()` to `keyColors` activates Material 3
             // key color seed based schemes. The primary color in your
             // active theme is always used as main "primary" key for the
@@ -175,17 +175,16 @@ class DemoApp extends StatelessWidget {
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
             // We use the nicer Material 3 Typography in both M2 and M3 mode.
-            typography: Typography.material2021(
-              platform: defaultTargetPlatform,
-            ),
+            typography: Typography.material2021(platform: defaultTargetPlatform),
           ),
           // We make an equivalent definition for the dark theme, but using
           // FlexThemeData.dark() and the dark FlexSchemeColors instead.
           darkTheme: FlexThemeData.dark(
             useMaterial3: themeController.useMaterial3,
-            colors: themeController.usedScheme == FlexScheme.custom
-                ? _myFlexScheme.dark
-                : FlexColor.schemes[themeController.usedScheme]!.dark,
+            colors:
+                themeController.usedScheme == FlexScheme.custom
+                    ? _myFlexScheme.dark
+                    : FlexColor.schemes[themeController.usedScheme]!.dark,
             // We don't have to use the same surface mode in dark mode, for an
             // interesting effect here we use a mode where scaffold background
             // color gets a much higher blend value than surface and background.
@@ -195,8 +194,7 @@ class DemoApp extends StatelessWidget {
             // goes better together with the highScaffoldLowSurfaces mode.
             blendLevel: 12,
             appBarElevation: 1,
-            subThemesData:
-                themeController.useSubThemes ? const FlexSubThemesData() : null,
+            subThemesData: themeController.useSubThemes ? const FlexSubThemesData() : null,
             keyColors: FlexKeyColors(
               useKeyColors: themeController.useKeyColors,
               useSecondary: themeController.useSecondary,
@@ -205,9 +203,7 @@ class DemoApp extends StatelessWidget {
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
             fontFamily: GoogleFonts.notoSans().fontFamily,
             // We use the nicer Material 3 Typography in both M2 and M3 mode.
-            typography: Typography.material2021(
-              platform: defaultTargetPlatform,
-            ),
+            typography: Typography.material2021(platform: defaultTargetPlatform),
           ),
           // Use the dark or light theme, based on controller setting.
           themeMode: themeController.themeMode,
@@ -218,9 +214,10 @@ class DemoApp extends StatelessWidget {
             // show the active theme's name, descriptions and colors in the
             // example. We also use it for the theme mode switch that shows the
             // theme's colors in the different theme modes.
-            flexSchemeData: themeController.usedScheme == FlexScheme.custom
-                ? _myFlexScheme
-                : FlexColor.schemes[themeController.usedScheme]!,
+            flexSchemeData:
+                themeController.usedScheme == FlexScheme.custom
+                    ? _myFlexScheme
+                    : FlexColor.schemes[themeController.usedScheme]!,
             // Pass in the theme controller to the home page.
             controller: themeController,
           ),

@@ -25,8 +25,7 @@ enum TopicGroup {
     // defaults you would use if you had a package that provided a theme
     // extension, and it would fallback to defaults like this internally if
     // it had not been added by user to ThemeData as an extension.
-    final TopicTheme colors = theme.extension<TopicTheme>() ??
-        (isLight ? TopicTheme.light : TopicTheme.dark);
+    final TopicTheme colors = theme.extension<TopicTheme>() ?? (isLight ? TopicTheme.light : TopicTheme.dark);
 
     switch (this) {
       case TopicGroup.general:
@@ -79,7 +78,8 @@ const List<Topic> themeTopics = <Topic>[
     group: TopicGroup.general,
     heading: 'Introduction',
     icon: Icons.info_outlined,
-    info: 'Use Themes Playground to try features and themes '
+    info:
+        'Use Themes Playground to try features and themes '
         'of FlexColorScheme. Find a theme you like, experiment '
         'with surface blends and try Material 3\n',
   ),
@@ -88,7 +88,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Premade Designs',
     buttonLabel: 'Premade\nDesigns',
     icon: Icons.design_services_outlined,
-    info: 'To quick start your theming try these '
+    info:
+        'To quick start your theming try these '
         'premade designs. You can use them as starting points, for '
         'inspiration and to see examples of what FlexColorScheme can '
         'do. These templates do no set colors, you choose them as '
@@ -107,7 +108,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Theme Simulator',
     buttonLabel: 'Theme\nSimulator',
     icon: Icons.phone_iphone,
-    info: 'Use the theme simulator in a side view '
+    info:
+        'Use the theme simulator in a side view '
         'as you change theme setting and see how the changes '
         'modify the look and feel of included demo apps on different '
         'simulated devices.\n'
@@ -125,7 +127,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Widget Showcase',
     buttonLabel: 'Widget\nShowcase',
     icon: Icons.flutter_dash,
-    info: 'This is a presentation of Flutter Material UI widgets '
+    info:
+        'This is a presentation of Flutter Material UI widgets '
         'in one large panel. It shows they look when the current theme is '
         'applied to them. '
         'To style them, use component theme settings for each widget.\n',
@@ -135,7 +138,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Theme Code',
     buttonLabel: 'Theme\nCode',
     icon: Icons.integration_instructions_outlined,
-    info: 'This is the setup code for the light and dark theme '
+    info:
+        'This is the setup code for the light and dark theme '
         'you have configured. It changes as you adjust theme settings in '
         'the Playground.\n'
         '\n'
@@ -152,7 +156,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'General Settings',
     buttonLabel: 'General\nSettings',
     icon: Icons.widgets_outlined,
-    info: 'To use all theming features on FlexColorScheme you must enable '
+    info:
+        'To use all theming features on FlexColorScheme you must enable '
         'component (sub) themes. If you are only here for the color '
         'theming features, and intend to style your component themes yourself, '
         'you can turn OFF using component themes.\n'
@@ -170,7 +175,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Adaptive Theming',
     buttonLabel: 'Adaptive\nTheming',
     icon: Icons.auto_fix_high,
-    info: 'In Flutter, adaptive widgets refer to UI components that use a '
+    info:
+        'In Flutter, adaptive widgets refer to UI components that use a '
         'different style or a completely different platform native looking '
         'component for a target platform. Flutter only has a few '
         'components that adapt between iOS and Android versions.\n'
@@ -202,7 +208,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Shape and Radius',
     buttonLabel: 'Shape\nRadius',
     icon: Icons.rounded_corner_outlined,
-    info: 'The border shape and radius used by components in flutter can '
+    info:
+        'The border shape and radius used by components in flutter can '
         'be themed. With FlexColorScheme you can change the radius globally '
         'for all curved corners with one convenient setting. You can also use '
         'a different border radius on selected platforms. With the current '
@@ -229,7 +236,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'ColorScheme',
     buttonLabel: 'Color\nScheme',
     icon: Icons.palette,
-    info: 'In Material-3 color system, seed generated light and '
+    info:
+        'In Material-3 color system, seed generated light and '
         'dark mode ColorSchemes use the same key colors to generate six '
         'tonal palettes. Light and dark ColorScheme colors, use the same '
         'palettes, but different tones. This ensures that light and '
@@ -246,7 +254,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Surface Color Blends',
     buttonLabel: 'Color\nBlends',
     icon: Icons.invert_colors_outlined,
-    info: 'Already Material-2 design used surfaces with primary color '
+    info:
+        'Already Material-2 design used surfaces with primary color '
         'alpha-blends in dark mode. FlexColorScheme color blends '
         'provides this for both light and dark mode surfaces and allows you '
         'to tune it to your preferences and design target.\n'
@@ -276,7 +285,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Effective Colors',
     buttonLabel: 'Effective\nColors',
     icon: Icons.gradient_outlined,
-    info: 'This panel displays the current colors in the active '
+    info:
+        'This panel displays the current colors in the active '
         "theme's ColorScheme and colors still defined directly in "
         'ThemeData, as well as important component theme colors. The info '
         'expands below provides additional background information about the '
@@ -287,7 +297,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Buttons',
     buttonLabel: 'Buttons',
     icon: Icons.crop_16_9_outlined,
-    info: 'Buttons help people take action, such as sending an email, '
+    info:
+        'Buttons help people take action, such as sending an email, '
         'sharing a document, or liking a comment.\n'
         '\n'
         'In Flutter Material buttons refer to the standard push buttons, '
@@ -301,7 +312,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Segmented Buttons',
     buttonLabel: 'Segmented\nbuttons',
     icon: Icons.view_week_outlined,
-    info: 'Segmented buttons help people select options, switch views, '
+    info:
+        'Segmented buttons help people select options, switch views, '
         'or sort elements. '
         'In Flutter segmented buttons includes both the Material 2 style '
         'ToggleButtons and Material 3 style SegmentedButton.\n'
@@ -319,7 +331,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Floating Action Button',
     buttonLabel: 'FAB',
     icon: Icons.add_circle,
-    info: 'The FloatingActionButton, the "FAB", represents the most '
+    info:
+        'The FloatingActionButton, the "FAB", represents the most '
         'important action '
         'on a screen. It puts key actions within reach. In M2 design it '
         'uses secondary color by default. In M3 color system secondary '
@@ -333,7 +346,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Chip',
     buttonLabel: 'Chip',
     icon: Icons.edit_attributes,
-    info: 'Chips help people enter information, make selections, filter '
+    info:
+        'Chips help people enter information, make selections, filter '
         'content, or trigger actions. It has a totally new design in M3 '
         'mode, FCS M2 mode takes some inspiration from it, while also '
         'retaining some M2 style influences.\n',
@@ -343,7 +357,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Switch, Checkbox and Radio',
     buttonLabel: 'Switch\nCheck Radio',
     icon: Icons.toggle_on_outlined,
-    info: 'Switches toggle the state of a single item on or off.\n'
+    info:
+        'Switches toggle the state of a single item on or off.\n'
         '\n'
         'Checkboxes allow users to select one or more items from a set. '
         'Checkboxes can turn an option on or off.\n'
@@ -355,7 +370,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Icon, IconButton and CircleAvatar',
     buttonLabel: 'Icon\nAvatar',
     icon: Icons.insert_emoticon,
-    info: 'Icon buttons help people take supplementary actions with a '
+    info:
+        'Icon buttons help people take supplementary actions with a '
         'single tap. CircleAvatar is used to show a user image, users '
         'initials or a user avatar.\n',
   ),
@@ -364,7 +380,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Tooltip and Progress Indicators',
     buttonLabel: 'Tooltip\nProgress',
     icon: Icons.live_help_outlined,
-    info: 'Tooltips display informative text when users hover over, '
+    info:
+        'Tooltips display informative text when users hover over, '
         'focus on, or tap an element. Progress indicators inform users '
         'about the status of ongoing processes, such as loading an app or '
         'submitting a form.\n',
@@ -374,7 +391,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Slider',
     buttonLabel: 'Slider',
     icon: Icons.tune,
-    info: 'Sliders allow users to make selections from a range of values.\n'
+    info:
+        'Sliders allow users to make selections from a range of values.\n'
         '\n'
         'Slider and its theme are very configurable in Flutter. Slider '
         'has classes designed to be extended for complete '
@@ -387,7 +405,8 @@ const List<Topic> themeTopics = <Topic>[
     group: TopicGroup.inputs,
     heading: 'TextField',
     icon: Icons.pin_outlined,
-    info: 'Text fields allow users to enter text into a UI. They typically '
+    info:
+        'Text fields allow users to enter text into a UI. They typically '
         'appear in forms and dialogs. TextField theming is done via the '
         'InputDecorator theme. It is a very complex theme, with mixed '
         'legacy and MaterialState properties.\n',
@@ -397,7 +416,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'PopupMenu and Dropdowns',
     buttonLabel: 'Popup\nDropdowns',
     icon: Icons.arrow_drop_down_circle_outlined,
-    info: 'Popup menus and dropdowns display a list of choices on a '
+    info:
+        'Popup menus and dropdowns display a list of choices on a '
         'temporary surface.\n'
         '\n'
         'The PopupMenuButton is a Material-2 menu control, it still works '
@@ -409,7 +429,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Menus',
     buttonLabel: 'Menus',
     icon: Icons.segment,
-    info: 'The DropdownMenu, MenuAnchor and MenuBar display '
+    info:
+        'The DropdownMenu, MenuAnchor and MenuBar display '
         'a list of choices on a temporary surface.\n'
         '\n'
         'These menu components are newer Material-3 design components in '
@@ -421,7 +442,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'AppBar',
     buttonLabel: 'AppBar',
     icon: Icons.web_asset_outlined,
-    info: 'Top app bars display information and actions at the top of a '
+    info:
+        'Top app bars display information and actions at the top of a '
         'screen. Material 2 uses primary colored AppBar in light mode and '
         'almost black in dark mode. Material 3 defaults to surface color in '
         'both light and dark theme mode. With FCS you can use select if you '
@@ -432,7 +454,8 @@ const List<Topic> themeTopics = <Topic>[
     group: TopicGroup.bars,
     heading: 'TabBar',
     icon: Icons.tab_outlined,
-    info: 'Tabs organize content across different screens, data sets, and '
+    info:
+        'Tabs organize content across different screens, data sets, and '
         'other interactions.\n'
         '\n'
         'FlexColorscheme comes with a quick TabBar styling '
@@ -452,7 +475,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'SearchBar',
     buttonLabel: 'SearchBar',
     icon: Icons.search,
-    info: 'A SearchBar allows users to enter a keyword '
+    info:
+        'A SearchBar allows users to enter a keyword '
         'or phrase and get relevant information. It is an alternative to '
         'other forms of navigation.\n'
         'The SearchBar and SearchView were added in Flutter '
@@ -464,7 +488,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'BottomAppBar',
     buttonLabel: 'Bottom\nAppBar',
     icon: Icons.video_label,
-    info: 'A bottom app bar displays navigation and key actions at the '
+    info:
+        'A bottom app bar displays navigation and key actions at the '
         'bottom of mobile screens.\n',
   ),
   Topic(
@@ -472,7 +497,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'BottomNavigationBar',
     buttonLabel: 'Bottom\nNavBar',
     icon: Icons.video_label,
-    info: 'Navigation bars offer a persistent and convenient way to switch '
+    info:
+        'Navigation bars offer a persistent and convenient way to switch '
         'between primary destinations in an app. '
         'The BottomNavigationBar is used for top level destination '
         'navigation on phones in Material 2 design. In Material 3 it '
@@ -483,7 +509,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'NavigationBar',
     buttonLabel: 'Navigation\nBar',
     icon: Icons.call_to_action,
-    info: 'Navigation bars offer a persistent and convenient way to switch '
+    info:
+        'Navigation bars offer a persistent and convenient way to switch '
         'between primary destinations in an app. The NavigationBar is '
         'used for top level destination '
         'navigation on phones in Material 3 design.\n',
@@ -494,7 +521,8 @@ const List<Topic> themeTopics = <Topic>[
     buttonLabel: 'Navigation\nRail',
     icon: Icons.view_sidebar_rounded,
     iconTurns: 2,
-    info: 'The NavigationRail is typically used for top level destination '
+    info:
+        'The NavigationRail is typically used for top level destination '
         'navigation on tablets and sometimes also on desktops. It supports '
         'both Material 2 and 3, styles rails. Flutter default background '
         'color is colorScheme.surface. '
@@ -505,7 +533,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Drawer and NavigationDrawer',
     buttonLabel: 'Navigation\nDrawer',
     icon: Icons.featured_video_outlined,
-    info: 'A drawer is used on phones to provide navigation destinations in a '
+    info:
+        'A drawer is used on phones to provide navigation destinations in a '
         'hidden side drawer. On desktop media sizes, a navigation drawer can '
         'also be used as pinned side menu.\n',
   ),
@@ -520,7 +549,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'BottomSheet',
     buttonLabel: 'BottomSheet',
     icon: Icons.call_to_action_outlined,
-    info: 'Bottom sheets are surfaces containing supplementary content, '
+    info:
+        'Bottom sheets are surfaces containing supplementary content, '
         'anchored to the bottom of the screen.\n',
   ),
   Topic(
@@ -528,7 +558,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'SnackBar and MaterialBanner',
     buttonLabel: 'SnackBar\nBanner',
     icon: Icons.featured_play_list_outlined,
-    info: 'A SnackBar is used to provide brief messages about app processes '
+    info:
+        'A SnackBar is used to provide brief messages about app processes '
         'at the bottom of the screen.\n'
         '\n'
         'MaterialBanners are similar to SnackBars, but at the top of '
@@ -540,7 +571,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Card',
     buttonLabel: 'Card',
     icon: Icons.picture_in_picture_alt_outlined,
-    info: 'Cards contain content and actions that relate '
+    info:
+        'Cards contain content and actions that relate '
         'information about a subject.\n',
   ),
   Topic(
@@ -548,7 +580,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Material',
     buttonLabel: 'Material',
     icon: Icons.square,
-    info: 'Material widget is a lower level building block. It cannot '
+    info:
+        'Material widget is a lower level building block. It cannot '
         'be themed, but it has Material-2 and Material-3 mode dependent '
         'behavior. Material is responsible for clipping, elevation '
         'and ink effects below its children.\n',
@@ -558,7 +591,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'ListTile',
     buttonLabel: 'ListTile',
     icon: Icons.dns_outlined,
-    info: 'Lists tiles are often used in lists, with continuous, '
+    info:
+        'Lists tiles are often used in lists, with continuous, '
         'vertical indexes of text or images.\n'
         'There are many different types of ListTiles in Flutter, often '
         'useful for showing lists of items, for settings and options.\n'
@@ -571,7 +605,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'TextTheme',
     buttonLabel: 'Text\nTheme',
     icon: Icons.font_download_outlined,
-    info: 'The default typeface for Android is Roboto. Flutter uses platform '
+    info:
+        'The default typeface for Android is Roboto. Flutter uses platform '
         'specific default typefaces. The Typography (2021) introduced with '
         'Material-3 is better than past Material-2 typography '
         '(2018 in Flutter) or even older (2014). Typography 2014 is the '
@@ -599,7 +634,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'PrimaryTextTheme',
     buttonLabel: 'Primary\nTextTheme',
     icon: Icons.font_download,
-    info: 'The primary text theme sounds based on its name like it should be '
+    info:
+        'The primary text theme sounds based on its name like it should be '
         'a TextTheme that by default fits on primary colored surfaces. '
         'It actually does so in light theme mode, but not always in Flutter '
         'by default in dark theme mode. FlexColorScheme corrects this and '
@@ -610,7 +646,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Android System Navigation Bar',
     buttonLabel: 'Android\nSystem Nav',
     icon: Icons.android_outlined,
-    info: 'The system navigation bar in Android is in newer versions '
+    info:
+        'The system navigation bar in Android is in newer versions '
         'a swipe bar at the bottom of the screen used for swipe '
         'gestures. In older versions it is made up of the 3 system '
         'navigation buttons. The system navigation area can be styled '
@@ -627,7 +664,8 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Page Examples',
     buttonLabel: 'Page\nexamples',
     icon: Icons.article_outlined,
-    info: 'The page examples present the Material showcase content in '
+    info:
+        'The page examples present the Material showcase content in '
         'a separate screen. It also contains examples of different ways to '
         'make full screen themed splash screens.\n',
   ),

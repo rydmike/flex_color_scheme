@@ -20,11 +20,10 @@ class ShowSubPages extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onSurface)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onSurface);
+    final Color iconColor =
+        isLight
+            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
+            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.article_outlined, color: iconColor),
       title: const Text('Page Examples'),

@@ -30,12 +30,8 @@ class FlexIcons {
   static const String _kFontFam = 'FlexIcons';
   static const String? _kFontPkg = null;
 
-  static const IconData infinity =
-      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData apple =
-      IconData(0xf179, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData windows =
-      IconData(0xf17a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData linux =
-      IconData(0xf17c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData infinity = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData apple = IconData(0xf179, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData windows = IconData(0xf17a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData linux = IconData(0xf17c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Widget used to change the used app bar style mode in example 5.
 class SystemNavBarStyleToggleButtons extends StatelessWidget {
-  const SystemNavBarStyleToggleButtons({
-    super.key,
-    required this.style,
-    required this.onChanged,
-  });
+  const SystemNavBarStyleToggleButtons({super.key, required this.style, required this.onChanged});
   final FlexSystemNavBarStyle style;
   final ValueChanged<FlexSystemNavBarStyle> onChanged;
 
@@ -32,51 +28,24 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
       },
       children: <Widget>[
         Tooltip(
-          message:
-              isLight ? 'Android default\n(White)' : 'Android default\n(Black)',
-          child: Icon(
-            Icons.lens,
-            color: isLight ? Colors.white : Colors.black,
-            size: 30,
-          ),
+          message: isLight ? 'Android default\n(White)' : 'Android default\n(Black)',
+          child: Icon(Icons.lens, color: isLight ? Colors.white : Colors.black, size: 30),
         ),
-        Tooltip(
-          message: 'Themed surface color',
-          child: Icon(
-            Icons.lens,
-            color: colorScheme.surface,
-            size: 30,
-          ),
-        ),
+        Tooltip(message: 'Themed surface color', child: Icon(Icons.lens, color: colorScheme.surface, size: 30)),
         Tooltip(
           message: 'Themed surfaceContainerLow color',
-          child: Icon(
-            Icons.lens,
-            color: colorScheme.surfaceContainerLow,
-            size: 30,
-          ),
+          child: Icon(Icons.lens, color: colorScheme.surfaceContainerLow, size: 30),
         ),
         Tooltip(
           message: 'Themed scaffoldBackground color',
-          child: Icon(
-            Icons.lens,
-            color: theme.scaffoldBackgroundColor,
-            size: 30,
-          ),
+          child: Icon(Icons.lens, color: theme.scaffoldBackgroundColor, size: 30),
         ),
-        const Tooltip(
-          message: 'Fully transparent',
-          child: Icon(
-            Icons.lens_outlined,
-            size: 30,
-          ),
-        ),
+        const Tooltip(message: 'Fully transparent', child: Icon(Icons.lens_outlined, size: 30)),
         Tooltip(
           message: 'Themed NavigationBar background color',
           child: Icon(
             Icons.lens,
-            color: theme.navigationBarTheme.backgroundColor ??
-                colorScheme.surfaceContainer,
+            color: theme.navigationBarTheme.backgroundColor ?? colorScheme.surfaceContainer,
             size: 30,
           ),
         ),
@@ -92,11 +61,7 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
 /// [ToggleButtons] but it just get too wide and it does not seem to be
 /// possible to make it smaller.
 class SystemNavBarStyleSegmentedButton extends StatelessWidget {
-  const SystemNavBarStyleSegmentedButton({
-    super.key,
-    required this.style,
-    required this.onChanged,
-  });
+  const SystemNavBarStyleSegmentedButton({super.key, required this.style, required this.onChanged});
   final FlexSystemNavBarStyle style;
   final ValueChanged<FlexSystemNavBarStyle> onChanged;
 
@@ -123,58 +88,33 @@ class SystemNavBarStyleSegmentedButton extends StatelessWidget {
         ButtonSegment<FlexSystemNavBarStyle>(
           value: FlexSystemNavBarStyle.system,
           icon: Tooltip(
-            message: isLight
-                ? 'Android default\n(White)'
-                : 'Android default\n(Black)',
-            child: Icon(
-              Icons.lens,
-              color: isLight ? Colors.white : Colors.black,
-              size: 30,
-            ),
+            message: isLight ? 'Android default\n(White)' : 'Android default\n(Black)',
+            child: Icon(Icons.lens, color: isLight ? Colors.white : Colors.black, size: 30),
           ),
         ),
         ButtonSegment<FlexSystemNavBarStyle>(
           value: FlexSystemNavBarStyle.surface,
-          icon: Tooltip(
-            message: 'Themed surface color',
-            child: Icon(
-              Icons.lens,
-              color: colorScheme.surface,
-              size: 30,
-            ),
-          ),
+          icon: Tooltip(message: 'Themed surface color', child: Icon(Icons.lens, color: colorScheme.surface, size: 30)),
         ),
         ButtonSegment<FlexSystemNavBarStyle>(
           value: FlexSystemNavBarStyle.background,
           icon: Tooltip(
             message: 'Themed surfaceContainerLow color',
-            child: Icon(
-              Icons.lens,
-              color: colorScheme.surfaceContainerLow,
-              size: 30,
-            ),
+            child: Icon(Icons.lens, color: colorScheme.surfaceContainerLow, size: 30),
           ),
         ),
         ButtonSegment<FlexSystemNavBarStyle>(
           value: FlexSystemNavBarStyle.scaffoldBackground,
           icon: Tooltip(
             message: 'Themed scaffoldBackground color',
-            child: Icon(
-              Icons.lens,
-              color: theme.scaffoldBackgroundColor,
-              size: 30,
-            ),
+            child: Icon(Icons.lens, color: theme.scaffoldBackgroundColor, size: 30),
           ),
         ),
         ButtonSegment<FlexSystemNavBarStyle>(
           value: FlexSystemNavBarStyle.transparent,
           icon: Tooltip(
             message: 'Fully transparent',
-            child: Icon(
-              Icons.lens_outlined,
-              color: colorScheme.surface,
-              size: 30,
-            ),
+            child: Icon(Icons.lens_outlined, color: colorScheme.surface, size: 30),
           ),
         ),
         ButtonSegment<FlexSystemNavBarStyle>(
@@ -183,8 +123,7 @@ class SystemNavBarStyleSegmentedButton extends StatelessWidget {
             message: 'Themed NavigationBar background color',
             child: Icon(
               Icons.lens,
-              color: theme.navigationBarTheme.backgroundColor ??
-                  colorScheme.surfaceContainer,
+              color: theme.navigationBarTheme.backgroundColor ?? colorScheme.surfaceContainer,
               size: 30,
             ),
           ),

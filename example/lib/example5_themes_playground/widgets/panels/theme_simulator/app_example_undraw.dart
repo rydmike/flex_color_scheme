@@ -36,8 +36,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
     // So we will get a new random colored image list, but only every time
     // we rebuild the screen, not as we scroll it back and forth or rescale it,
     // that could be done too, but it feels a bit too random.
-    imageColors = List<MaterialColor>.generate(
-        _maxTiles, (int index) => RandomColor().randomMaterialColor());
+    imageColors = List<MaterialColor>.generate(_maxTiles, (int index) => RandomColor().randomMaterialColor());
   }
 
   @override
@@ -49,10 +48,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
-        appBar: AppBar(
-          title: const Text('Undraw'),
-          actions: const <Widget>[UndrawAbout(useRootNavigator: false)],
-        ),
+        appBar: AppBar(title: const Text('Undraw'), actions: const <Widget>[UndrawAbout(useRootNavigator: false)]),
         drawer: AppExampleDrawer(controller: widget.controller),
         bottomNavigationBar: const AppExampleNavigationBar(),
         body: SafeArea(
@@ -65,52 +61,42 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                 primary: false,
                 slivers: <Widget>[
                   SliverPadding(
-                    padding: EdgeInsetsDirectional.only(
-                      top: 16 + safeArea.top + kToolbarHeight,
-                      start: 16,
-                      end: 16,
-                    ),
+                    padding: EdgeInsetsDirectional.only(top: 16 + safeArea.top + kToolbarHeight, start: 16, end: 16),
                     sliver: SliverList(
-                      delegate: SliverChildListDelegate(
-                        <Widget>[
-                          const PageHeader(
-                            icon: Icon(Icons.local_florist_outlined),
-                            heading: Text('Undraw Images'),
+                      delegate: SliverChildListDelegate(<Widget>[
+                        const PageHeader(icon: Icon(Icons.local_florist_outlined), heading: Text('Undraw Images')),
+                        const Divider(),
+                        const PageIntro(
+                          introTop: Text(
+                            'This demo shows Undraw SVG images '
+                            'in a grid and then randomly '
+                            'animates in a new one.\n'
+                            '\n'
+                            'Each image has its own random wait before it '
+                            'switches and also a random switch animation '
+                            'time. Each time the screen is built, every '
+                            'image box gets a new random colored border, '
+                            'with good contrast in light theme mode and a '
+                            'less saturated version of same color in dark '
+                            'mode.\n',
                           ),
-                          const Divider(),
-                          const PageIntro(
-                            introTop: Text(
-                              'This demo shows Undraw SVG images '
-                              'in a grid and then randomly '
-                              'animates in a new one.\n'
-                              '\n'
-                              'Each image has its own random wait before it '
-                              'switches and also a random switch animation '
-                              'time. Each time the screen is built, every '
-                              'image box gets a new random colored border, '
-                              'with good contrast in light theme mode and a '
-                              'less saturated version of same color in dark '
-                              'mode.\n',
-                            ),
-                            introBottom: Text(
-                              'Each image is colored dynamically to match '
-                              'the color of its border. This is done by '
-                              'changing a color text string in the image SVG '
-                              'file. This demo is mostly a stress test for '
-                              'Flutter, especially for Web builds. '
-                              'We could make the grid of switching images '
-                              'infinite, but this demo stops at $_maxTiles '
-                              'images in the grid.\n',
-                            ),
-                            imageAssets: AppImages.undraw,
+                          introBottom: Text(
+                            'Each image is colored dynamically to match '
+                            'the color of its border. This is done by '
+                            'changing a color text string in the image SVG '
+                            'file. This demo is mostly a stress test for '
+                            'Flutter, especially for Web builds. '
+                            'We could make the grid of switching images '
+                            'infinite, but this demo stops at $_maxTiles '
+                            'images in the grid.\n',
                           ),
-                        ],
-                      ),
+                          imageAssets: AppImages.undraw,
+                        ),
+                      ]),
                     ),
                   ),
                   SliverPadding(
-                    padding: EdgeInsetsDirectional.only(
-                        start: 16, end: 16, bottom: 90 + safeArea.bottom),
+                    padding: EdgeInsetsDirectional.only(start: 16, end: 16, bottom: 90 + safeArea.bottom),
                     sliver: SliverGrid(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: breakpoint.columns ~/ 2,
@@ -118,17 +104,14 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                         crossAxisSpacing: breakpoint.gutters / 2,
                         childAspectRatio: 1.4,
                       ),
-                      delegate: SliverChildBuilderDelegate(
-                        (BuildContext ctx, int index) {
-                          return RandomImageWidget(
-                            imageColor: imageColors[index],
-                            borderWidth: breakpoint.columns.toDouble() / 2 + 4,
-                          );
-                        },
-                        childCount: imageColors.length,
-                      ),
+                      delegate: SliverChildBuilderDelegate((BuildContext ctx, int index) {
+                        return RandomImageWidget(
+                          imageColor: imageColors[index],
+                          borderWidth: breakpoint.columns.toDouble() / 2 + 4,
+                        );
+                      }, childCount: imageColors.length),
                     ),
-                  )
+                  ),
                 ],
               );
             },
@@ -148,12 +131,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
 // After a theme change the next shown random image will be themed in the color
 // hue that is more suitable for the theme mode.
 class RandomImageWidget extends StatelessWidget {
-  const RandomImageWidget({
-    super.key,
-    required this.imageColor,
-    this.borderRadius,
-    this.borderWidth = 10.0,
-  });
+  const RandomImageWidget({super.key, required this.imageColor, this.borderRadius, this.borderWidth = 10.0});
 
   final MaterialColor imageColor;
   // Defaults to theme radius of Card if not defined.
@@ -186,9 +164,7 @@ class RandomImageWidget extends StatelessWidget {
       elevation: 0,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        side: BorderSide(
-            color: isLight ? imageColor[700]! : imageColor[200]!,
-            width: borderWidth),
+        side: BorderSide(color: isLight ? imageColor[700]! : imageColor[200]!, width: borderWidth),
         borderRadius: BorderRadius.all(Radius.circular(radius)),
       ),
       child: SvgAssetImageSwitcher(
@@ -235,40 +211,20 @@ class _AppExampleDrawerState extends State<AppExampleDrawer> {
           CircleAvatar(
             radius: 60,
             backgroundColor: theme.colorScheme.secondaryContainer,
-            child: SvgAssetImage(
-              assetName: AppImages.nature,
-              color: theme.colorScheme.secondary,
-            ),
+            child: SvgAssetImage(assetName: AppImages.nature, color: theme.colorScheme.secondary),
           ),
-          Center(
-            child: Text(
-              'Undraw',
-              style: textTheme.headlineMedium,
-            ),
-          ),
+          Center(child: Text('Undraw', style: textTheme.headlineMedium)),
           const SizedBox(height: 16),
           ThemeModeSwitchListTile(controller: widget.controller),
           const Divider(),
+          const NavigationDrawerDestination(icon: Icon(Icons.image), label: Text('Images')),
+          const NavigationDrawerDestination(icon: Icon(Icons.beenhere), label: Text('Notifications')),
           const NavigationDrawerDestination(
-            icon: Icon(Icons.image),
-            label: Text('Images'),
-          ),
-          const NavigationDrawerDestination(
-            icon: Icon(Icons.beenhere),
-            label: Text('Notifications'),
-          ),
-          const NavigationDrawerDestination(
-            icon: Badge(
-              label: Text('12'),
-              child: Icon(Icons.chat_bubble),
-            ),
+            icon: Badge(label: Text('12'), child: Icon(Icons.chat_bubble)),
             label: Text('Chat'),
           ),
           const Divider(),
-          const NavigationDrawerDestination(
-            icon: Icon(Icons.logout),
-            label: Text('Logout'),
-          ),
+          const NavigationDrawerDestination(icon: Icon(Icons.logout), label: Text('Logout')),
         ],
       ),
     );
@@ -279,8 +235,7 @@ class AppExampleNavigationBar extends StatefulWidget {
   const AppExampleNavigationBar({super.key});
 
   @override
-  State<AppExampleNavigationBar> createState() =>
-      _AppExampleNavigationBarState();
+  State<AppExampleNavigationBar> createState() => _AppExampleNavigationBarState();
 }
 
 class _AppExampleNavigationBarState extends State<AppExampleNavigationBar> {
@@ -296,21 +251,9 @@ class _AppExampleNavigationBarState extends State<AppExampleNavigationBar> {
         });
       },
       destinations: const <NavigationDestination>[
-        NavigationDestination(
-          icon: Icon(Icons.image),
-          label: 'Images',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.beenhere),
-          label: 'Notifications',
-        ),
-        NavigationDestination(
-          icon: Badge(
-            label: Text('12'),
-            child: Icon(Icons.chat_bubble),
-          ),
-          label: 'Chat',
-        ),
+        NavigationDestination(icon: Icon(Icons.image), label: 'Images'),
+        NavigationDestination(icon: Icon(Icons.beenhere), label: 'Notifications'),
+        NavigationDestination(icon: Badge(label: Text('12'), child: Icon(Icons.chat_bubble)), label: 'Chat'),
       ],
     );
   }
@@ -320,11 +263,7 @@ class _AppExampleNavigationBarState extends State<AppExampleNavigationBar> {
 // selected destination returned by Flexfold onDestination. Used only for
 // demo purposes in the example application.
 class PageHeader extends StatelessWidget {
-  const PageHeader({
-    super.key,
-    required this.icon,
-    required this.heading,
-  });
+  const PageHeader({super.key, required this.icon, required this.heading});
 
   final Widget icon;
   final Widget heading;
@@ -336,20 +275,11 @@ class PageHeader extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsetsDirectional.only(end: 8),
-          child: IconTheme(
-            data: IconThemeData(
-              size: 35,
-              color: theme.colorScheme.primary,
-            ),
-            child: icon,
-          ),
+          child: IconTheme(data: IconThemeData(size: 35, color: theme.colorScheme.primary), child: icon),
         ),
         Padding(
           padding: const EdgeInsetsDirectional.only(end: 8),
-          child: DefaultTextStyle(
-            style: theme.textTheme.headlineMedium!,
-            child: heading,
-          ),
+          child: DefaultTextStyle(style: theme.textTheme.headlineMedium!, child: heading),
         ),
       ],
     );
@@ -360,12 +290,7 @@ class PageHeader extends StatelessWidget {
 // of the intro text and page related image(s) on a large canvas and phone
 // sized layouts.
 class PageIntro extends StatelessWidget {
-  const PageIntro({
-    super.key,
-    this.introTop,
-    this.introBottom,
-    required this.imageAssets,
-  });
+  const PageIntro({super.key, this.introTop, this.introBottom, required this.imageAssets});
   final Widget? introTop;
   final Widget? introBottom;
   final List<String> imageAssets;
@@ -403,11 +328,7 @@ class PageIntro extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    if (introTop != null)
-                      Flexible(
-                        flex: 3,
-                        child: styledIntroTop,
-                      ),
+                    if (introTop != null) Flexible(flex: 3, child: styledIntroTop),
                     Flexible(flex: 2, child: _imageSwitcher(context)),
                   ],
                 ),
@@ -459,34 +380,24 @@ class UndrawAbout extends StatelessWidget {
 
 /// This [showUndrawAboutDialog] function is based on the [AboutDialog] example
 /// that exist(ed) in the Flutter Gallery App.
-void showUndrawAboutDialog(BuildContext context,
-    [bool useRootNavigator = true]) {
+void showUndrawAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle =
-      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
   final double height = mediaSize.height;
 
-  final Uri sourceLink = Uri(
-    scheme: 'https',
-    host: 'undraw.co',
-    path: 'illustrations',
-  );
+  final Uri sourceLink = Uri(scheme: 'https', host: 'undraw.co', path: 'illustrations');
 
   showAboutDialog(
     context: context,
     applicationName: 'Undraw images',
     applicationVersion: '1.0',
     useRootNavigator: useRootNavigator,
-    applicationIcon: Icon(
-      Icons.local_florist_outlined,
-      size: 50,
-      color: theme.colorScheme.primary,
-    ),
+    applicationIcon: Icon(Icons.local_florist_outlined, size: 50, color: theme.colorScheme.primary),
     applicationLegalese: '© 2023 Images by Katerina Limpitsouni',
     children: <Widget>[
       Padding(
@@ -496,7 +407,8 @@ void showUndrawAboutDialog(BuildContext context,
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'Shows how to use Undraw images '
+                text:
+                    'Shows how to use Undraw images '
                     'and color them dynamically in a Flutter app. '
                     'Also demonstrates the NavigationBar and '
                     'NavigationDrawer in an app.\n'
@@ -504,18 +416,12 @@ void showUndrawAboutDialog(BuildContext context,
                     'To learn more about the wonderful Undraw '
                     'images, please visit ',
               ),
-              LinkTextSpan(
-                style: linkStyle,
-                uri: sourceLink,
-                text: 'undraw.co',
-              ),
-              TextSpan(
-                style: aboutTextStyle,
-                text: '.\n\n',
-              ),
+              LinkTextSpan(style: linkStyle, uri: sourceLink, text: 'undraw.co'),
+              TextSpan(style: aboutTextStyle, text: '.\n\n'),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${App.flutterVersion}, '
+                text:
+                    'Built with Flutter ${App.flutterVersion}, '
                     'using ${App.packageName} '
                     '${App.version}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '

@@ -17,11 +17,7 @@ import 'color_card.dart';
 /// all the Widgets in this file be dropped into any application. They are
 /// however not so generally reusable.
 class ShowColorSchemeColors extends StatelessWidget {
-  const ShowColorSchemeColors({
-    super.key,
-    this.onBackgroundColor,
-    this.showTitle = true,
-  });
+  const ShowColorSchemeColors({super.key, this.onBackgroundColor, this.showTitle = true});
 
   /// The color of the background the color widget are being drawn on.
   ///
@@ -38,12 +34,10 @@ class ShowColorSchemeColors extends StatelessWidget {
   final bool showTitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(final Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // Return true if the color is dark, meaning it needs light text for contrast.
-  static bool _isDark(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+  static bool _isDark(final Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
 
   // On color used when a theme color property does not have a theme onColor.
   static Color _onColor(final Color color, final Color bg) =>
@@ -58,43 +52,34 @@ class ShowColorSchemeColors extends StatelessWidget {
     final TextStyle headerStyle = theme.textTheme.titleMedium!;
 
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
     // If we had one, copy in a border side to it.
     if (border is RoundedRectangleBorder) {
-      border = border.copyWith(
-        side: BorderSide(
-          color: theme.dividerColor,
-          width: 1,
-        ),
-      );
+      border = border.copyWith(side: BorderSide(color: theme.dividerColor, width: 1));
       // If
     } else {
       // If border was null, make one matching Card default, but with border
       // side, if it was not null, we leave it as it was.
       border ??= RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-        side: BorderSide(
-          color: theme.dividerColor,
-          width: 1,
-        ),
+        side: BorderSide(color: theme.dividerColor, width: 1),
       );
     }
 
     // Get effective background color.
-    final Color background =
-        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
+    final Color background = onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
 
     // Warning label for scaffold background when it uses to much blend.
-    final String surfaceTooHigh = isDark
-        ? _isLight(theme.colorScheme.surface)
-            ? '\nTOO HIGH'
-            : ''
-        : _isDark(theme.colorScheme.surface)
+    final String surfaceTooHigh =
+        isDark
+            ? _isLight(theme.colorScheme.surface)
+                ? '\nTOO HIGH'
+                : ''
+            : _isDark(theme.colorScheme.surface)
             ? '\nTOO HIGH'
             : '';
 
@@ -110,12 +95,7 @@ class ShowColorSchemeColors extends StatelessWidget {
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
     return Theme(
-      data: theme.copyWith(
-        cardTheme: CardTheme.of(context).copyWith(
-          elevation: 0,
-          shape: border,
-        ),
-      ),
+      data: theme.copyWith(cardTheme: CardTheme.of(context).copyWith(elevation: 0, shape: border)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -130,16 +110,8 @@ class ShowColorSchemeColors extends StatelessWidget {
             spacing: spacing,
             runSpacing: spacing,
             children: <Widget>[
-              ColorCard(
-                label: 'Primary',
-                color: colorScheme.primary,
-                textColor: colorScheme.onPrimary,
-              ),
-              ColorCard(
-                label: 'on\nPrimary',
-                color: colorScheme.onPrimary,
-                textColor: colorScheme.primary,
-              ),
+              ColorCard(label: 'Primary', color: colorScheme.primary, textColor: colorScheme.onPrimary),
+              ColorCard(label: 'on\nPrimary', color: colorScheme.onPrimary, textColor: colorScheme.primary),
               ColorCard(
                 label: 'Primary\nContainer',
                 color: colorScheme.primaryContainer,
@@ -170,16 +142,8 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onPrimaryFixedVariant,
                 textColor: colorScheme.primaryFixedDim,
               ),
-              ColorCard(
-                label: 'Secondary',
-                color: colorScheme.secondary,
-                textColor: colorScheme.onSecondary,
-              ),
-              ColorCard(
-                label: 'on\nSecondary',
-                color: colorScheme.onSecondary,
-                textColor: colorScheme.secondary,
-              ),
+              ColorCard(label: 'Secondary', color: colorScheme.secondary, textColor: colorScheme.onSecondary),
+              ColorCard(label: 'on\nSecondary', color: colorScheme.onSecondary, textColor: colorScheme.secondary),
               ColorCard(
                 label: 'Secondary\nContainer',
                 color: colorScheme.secondaryContainer,
@@ -210,16 +174,8 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onSecondaryFixedVariant,
                 textColor: colorScheme.secondaryFixedDim,
               ),
-              ColorCard(
-                label: 'Tertiary',
-                color: colorScheme.tertiary,
-                textColor: colorScheme.onTertiary,
-              ),
-              ColorCard(
-                label: 'on\nTertiary',
-                color: colorScheme.onTertiary,
-                textColor: colorScheme.tertiary,
-              ),
+              ColorCard(label: 'Tertiary', color: colorScheme.tertiary, textColor: colorScheme.onTertiary),
+              ColorCard(label: 'on\nTertiary', color: colorScheme.onTertiary, textColor: colorScheme.tertiary),
               ColorCard(
                 label: 'Tertiary\nContainer',
                 color: colorScheme.tertiaryContainer,
@@ -250,16 +206,8 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onTertiaryFixedVariant,
                 textColor: colorScheme.tertiaryFixedDim,
               ),
-              ColorCard(
-                label: 'Error',
-                color: colorScheme.error,
-                textColor: colorScheme.onError,
-              ),
-              ColorCard(
-                label: 'on\nError',
-                color: colorScheme.onError,
-                textColor: colorScheme.error,
-              ),
+              ColorCard(label: 'Error', color: colorScheme.error, textColor: colorScheme.onError),
+              ColorCard(label: 'on\nError', color: colorScheme.onError, textColor: colorScheme.error),
               ColorCard(
                 label: 'Error\nContainer',
                 color: colorScheme.errorContainer,
@@ -270,26 +218,10 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onErrorContainer,
                 textColor: colorScheme.errorContainer,
               ),
-              ColorCard(
-                label: 'Surface$surfaceTooHigh',
-                color: colorScheme.surface,
-                textColor: colorScheme.onSurface,
-              ),
-              ColorCard(
-                label: 'on\nSurface',
-                color: colorScheme.onSurface,
-                textColor: colorScheme.surface,
-              ),
-              ColorCard(
-                label: 'Surface\nDim',
-                color: colorScheme.surfaceDim,
-                textColor: colorScheme.onSurface,
-              ),
-              ColorCard(
-                label: 'Surface\nBright',
-                color: colorScheme.surfaceBright,
-                textColor: colorScheme.onSurface,
-              ),
+              ColorCard(label: 'Surface$surfaceTooHigh', color: colorScheme.surface, textColor: colorScheme.onSurface),
+              ColorCard(label: 'on\nSurface', color: colorScheme.onSurface, textColor: colorScheme.surface),
+              ColorCard(label: 'Surface\nDim', color: colorScheme.surfaceDim, textColor: colorScheme.onSurface),
+              ColorCard(label: 'Surface\nBright', color: colorScheme.surfaceBright, textColor: colorScheme.onSurface),
               ColorCard(
                 label: 'Surface\nContainer\nLowest',
                 color: colorScheme.surfaceContainerLowest,
@@ -335,11 +267,7 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.shadow,
                 textColor: _onColor(colorScheme.shadow, background),
               ),
-              ColorCard(
-                label: 'Scrim',
-                color: colorScheme.scrim,
-                textColor: _onColor(colorScheme.shadow, background),
-              ),
+              ColorCard(label: 'Scrim', color: colorScheme.scrim, textColor: _onColor(colorScheme.shadow, background)),
               ColorCard(
                 label: 'Inverse\nSurface',
                 color: colorScheme.inverseSurface,
@@ -355,11 +283,7 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.inversePrimary,
                 textColor: colorScheme.inverseSurface,
               ),
-              ColorCard(
-                label: 'Surface\nTint',
-                color: colorScheme.surfaceTint,
-                textColor: colorScheme.onPrimary,
-              ),
+              ColorCard(label: 'Surface\nTint', color: colorScheme.surfaceTint, textColor: colorScheme.onPrimary),
             ],
           ),
         ],

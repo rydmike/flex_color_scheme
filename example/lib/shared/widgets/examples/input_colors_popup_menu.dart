@@ -27,8 +27,8 @@ class InputColorsPopupMenu extends StatelessWidget {
           ? (controller.cardBorderRadius ?? controller.defaultRadius ?? 12)
           // M3 or M2 default for Card.
           : useMaterial3
-              ? 12
-              : 4;
+          ? 12
+          : 4;
 
   @override
   Widget build(BuildContext context) {
@@ -47,44 +47,41 @@ class InputColorsPopupMenu extends StatelessWidget {
       initialValue: controller.schemeIndex,
       padding: EdgeInsets.zero,
       onSelected: controller.setSchemeIndex,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-        for (int i = 0; i < AppColor.schemes.length - removeCustom; i++)
-          PopupMenuItem<int>(
-            value: i,
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
-              dense: true,
-              title: Text(AppColor.schemes[i].name),
-              leading: SizedBox(
-                width: 52,
-                child: FlexThemeModeOptionButton(
-                  flexSchemeColor: isLight
-                      ? AppColor.schemeAtIndex(i, controller).light
-                      : AppColor.schemeAtIndex(i, controller).dark,
-                  selected: i == controller.schemeIndex,
-                  unselectedBorder: BorderSide.none,
-                  selectedBorder: BorderSide(
-                    color: scheme.outline,
-                    width: 3,
+      itemBuilder:
+          (BuildContext context) => <PopupMenuItem<int>>[
+            for (int i = 0; i < AppColor.schemes.length - removeCustom; i++)
+              PopupMenuItem<int>(
+                value: i,
+                child: ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  title: Text(AppColor.schemes[i].name),
+                  leading: SizedBox(
+                    width: 52,
+                    child: FlexThemeModeOptionButton(
+                      flexSchemeColor:
+                          isLight
+                              ? AppColor.schemeAtIndex(i, controller).light
+                              : AppColor.schemeAtIndex(i, controller).dark,
+                      selected: i == controller.schemeIndex,
+                      unselectedBorder: BorderSide.none,
+                      selectedBorder: BorderSide(color: scheme.outline, width: 3),
+                      backgroundColor: scheme.surface,
+                      width: 26,
+                      height: 18,
+                      padding: EdgeInsets.zero,
+                      borderRadius: 0,
+                      optionButtonPadding: EdgeInsets.zero,
+                      optionButtonMargin: EdgeInsets.zero,
+                      optionButtonBorderRadius: _borderRadius(useMaterial3),
+                    ),
                   ),
-                  backgroundColor: scheme.surface,
-                  width: 26,
-                  height: 18,
-                  padding: EdgeInsets.zero,
-                  borderRadius: 0,
-                  optionButtonPadding: EdgeInsets.zero,
-                  optionButtonMargin: EdgeInsets.zero,
-                  optionButtonBorderRadius: _borderRadius(useMaterial3),
                 ),
               ),
-            ),
-          )
-      ],
+          ],
       child: ListTile(
         contentPadding: contentPadding,
-        title: Text(
-          AppColor.schemes[controller.schemeIndex].name,
-        ),
+        title: Text(AppColor.schemes[controller.schemeIndex].name),
         subtitle: Text(AppColor.schemes[controller.schemeIndex].description),
         trailing: SizedBox(
           width: 68,

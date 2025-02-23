@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 enum VisualDensityEnum {
   standard(
     label: 'Standard',
-    describe: 'The Standard VisualDensity is the least dense of component UI '
+    describe:
+        'The Standard VisualDensity is the least dense of component UI '
         'density settings in Flutter. This is the preferred density on small '
         'mobile touch based devices. It is called "Standard", because '
         'originally this mobile density was the only supported '
@@ -15,7 +16,8 @@ enum VisualDensityEnum {
   ),
   comfortable(
     label: 'Comfortable',
-    describe: 'The Comfortable VisualDensity is a medium level of component UI '
+    describe:
+        'The Comfortable VisualDensity is a medium level of component UI '
         'density setting in Flutter. It is not used by Flutter SDK '
         'by default on any devices. It works well and looks balanced on '
         'laptops with touch screens. It allows user interface elements to be '
@@ -26,7 +28,8 @@ enum VisualDensityEnum {
   ),
   compact(
     label: 'Compact',
-    describe: 'The Compact VisualDensity is the most dense and compact '
+    describe:
+        'The Compact VisualDensity is the most dense and compact '
         'component UI density setting in Flutter. It is used by '
         'Flutter SDK by default on Windows, macOS and Linux. It may make some '
         'components look a bit too compact, if you think so, try the '
@@ -36,7 +39,8 @@ enum VisualDensityEnum {
   ),
   platform(
     label: 'Platform compact adaptive',
-    describe: 'This VisualDensity is adaptive based on the current '
+    describe:
+        'This VisualDensity is adaptive based on the current '
         'platform on which the framework is executing. If a density is not '
         'specified in ThemeData, Flutter SDK uses this setup by DEFAULT. This '
         'setting results in Standard density on platforms '
@@ -47,7 +51,8 @@ enum VisualDensityEnum {
   ),
   comfortablePlatform(
     label: 'Platform comfortable adaptive',
-    describe: 'This VisualDensity is adaptive based on the current '
+    describe:
+        'This VisualDensity is adaptive based on the current '
         'platform on which the framework is executing. It '
         'results in Standard density on platforms '
         'Android, iOS and Fuchsia, while Windows, macOs and Linux get '
@@ -60,12 +65,7 @@ enum VisualDensityEnum {
     icon: Icons.view_day_outlined,
   );
 
-  const VisualDensityEnum({
-    required this.label,
-    required this.describe,
-    required this.code,
-    required this.icon,
-  });
+  const VisualDensityEnum({required this.label, required this.describe, required this.code, required this.icon});
 
   final String label;
   final String describe;
@@ -83,11 +83,9 @@ enum VisualDensityEnum {
       case VisualDensityEnum.compact:
         return VisualDensity.compact;
       case VisualDensityEnum.platform:
-        return VisualDensity.defaultDensityForPlatform(
-            platform ?? defaultTargetPlatform);
+        return VisualDensity.defaultDensityForPlatform(platform ?? defaultTargetPlatform);
       case VisualDensityEnum.comfortablePlatform:
-        return FlexColorScheme.defaultComfortablePlatformDensity(
-            platform ?? defaultTargetPlatform);
+        return FlexColorScheme.defaultComfortablePlatformDensity(platform ?? defaultTargetPlatform);
     }
   }
 }

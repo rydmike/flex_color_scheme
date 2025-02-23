@@ -4,11 +4,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/navigation_rail_label_type_toggle_buttons.dart';
 
 class NavigationRailLabelBehaviorListTile extends StatelessWidget {
-  const NavigationRailLabelBehaviorListTile({
-    required this.controller,
-    this.contentPadding,
-    super.key,
-  });
+  const NavigationRailLabelBehaviorListTile({required this.controller, this.contentPadding, super.key});
   final ThemeController controller;
 
   /// The [ListTile]'s internal padding.
@@ -36,25 +32,25 @@ class NavigationRailLabelBehaviorListTile extends StatelessWidget {
       contentPadding: contentPadding,
       enabled: controller.useSubThemes && controller.useFlexColorScheme,
       title: const Text('Labels when collapsed'),
-      subtitle: Text(_explainLabelStyle(
+      subtitle: Text(
+        _explainLabelStyle(
           controller.useSubThemes && controller.useFlexColorScheme
               ? controller.navigationRailLabelType
-              : NavigationRailLabelType.none)),
+              : NavigationRailLabelType.none,
+        ),
+      ),
       trailing: NavigationRailLabelTypeToggleButtons(
-        style: controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.navigationRailLabelType
-            : NavigationRailLabelType.none,
-        onChanged: controller.useSubThemes && controller.useFlexColorScheme
-            ? controller.setNavigationRailLabelType
-            : null,
+        style:
+            controller.useSubThemes && controller.useFlexColorScheme
+                ? controller.navigationRailLabelType
+                : NavigationRailLabelType.none,
+        onChanged:
+            controller.useSubThemes && controller.useFlexColorScheme ? controller.setNavigationRailLabelType : null,
       ),
       onTap: () {
-        if (controller.navigationRailLabelType ==
-            NavigationRailLabelType.none) {
-          controller
-              .setNavigationRailLabelType(NavigationRailLabelType.selected);
-        } else if (controller.navigationRailLabelType ==
-            NavigationRailLabelType.selected) {
+        if (controller.navigationRailLabelType == NavigationRailLabelType.none) {
+          controller.setNavigationRailLabelType(NavigationRailLabelType.selected);
+        } else if (controller.navigationRailLabelType == NavigationRailLabelType.selected) {
           controller.setNavigationRailLabelType(NavigationRailLabelType.all);
         } else {
           controller.setNavigationRailLabelType(NavigationRailLabelType.none);
