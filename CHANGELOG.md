@@ -4,17 +4,19 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.2.0/WIP/DRAFT
 
-**Feb 16, 2025**
+**Feb 23, 2025**
 
 ### Package
 
 **CHORE**
-* Update the package to support and (maybe) require at least Flutter v3.29.0.
+* Update the package to support and require at least Flutter v3.29.0.
   * Remove all usage and references to new deprecated theming properties in Flutter 3.29.0: 
     * MaterialStateUnderlineInputBorder → WidgetStateInputBorder
     * MaterialStateOutlineInputBorder → WidgetStateInputBorder
-    * Themedata.dialogBackgroundColor → Remove all usage and references in the FCS packages.
-  * TODO: Test if it will still work with Flutter 3.27.x with these changes and relax constraint if it compiles. 
+    * Themedata.dialogBackgroundColor → Remove all usage and references in the FCS packages.   
+
+**FIX**
+* Fix TabBarTheme normalization Flutter SDK breaking change on the master channel https://github.com/rydmike/flex_color_scheme/issues/276
   
 **NEW**
 * Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. The enums are:
