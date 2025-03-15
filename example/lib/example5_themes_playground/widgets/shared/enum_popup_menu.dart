@@ -60,6 +60,8 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   ///
   /// The default value selection calls this with null value.
   /// The other with the choice corresponding to the selected enum value.
+  // TODO(rydmike): Fix unsafe variance, but how?
+  // ignore: unsafe_variance
   final ValueChanged<T?>? onChanged;
 
   /// Whether this PopupMenu is enabled.

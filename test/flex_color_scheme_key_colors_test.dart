@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
+// ignore_for_file: deprecated_member_use
 
 void main() {
   //****************************************************************************

@@ -1080,7 +1080,7 @@ class ThemeServicePrefs implements ThemeService {
 
   /// Clear all stored values.
   @override
-  Future<void> clearAll() async {
+  Future<void> clearAll() {
     throw UnimplementedError();
   }
 }

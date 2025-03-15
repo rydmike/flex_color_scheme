@@ -733,14 +733,18 @@ class _DialogsState extends State<Dialogs> {
               'Show dialog',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            onPressed: () async => openDialog(context),
+            onPressed: () async {
+              await openDialog(context);
+            },
           ),
           TextButton(
             child: const Text(
               'Show full-screen dialog',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            onPressed: () async => openFullscreenDialog(context),
+            onPressed: () async {
+              await openFullscreenDialog(context);
+            },
           ),
         ],
       ),
