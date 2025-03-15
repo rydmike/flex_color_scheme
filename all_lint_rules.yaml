@@ -1,11 +1,11 @@
-# A list of all linter rules.
-# Expected by rydmike analysis_options: V2.3.0
+# A list of all linter rules available in Dart.
 #
-# Up-to-date auto generated list: https://dart.dev/tools/linter-rules/all
+# Based on manual update from auto generated list: https://dart.dev/tools/linter-rules/all
 #
-# The list below has removed ALL deprecated lint rules. These following were still included
-# in the above list of all lint rules, but are deprecated and should NOT be used:
+# This file is used and needed by rydmike analysis_options: V2.4.0
 #
+# The list below has removed these deprecated lint rules, that were included in
+# older version of the list:
 # - avoid_returning_null_for_future (Deprecated)
 # - iterable_contains_unrelated_type (Deprecated)
 # - list_remove_unrelated_type (Deprecated)
@@ -17,6 +17,17 @@
 # - unnecessary_getters_settersinvariant_booleans
 # - unsafe_html
 #
+# Version 2.4.0 removed the following deprecated rule:
+# - package_api_docs
+# And added these rules:
+# - omit_obvious_property_types (added to not used rules, conflicts with always use types)
+# - specify_nonobvious_property_types
+# - strict_top_level_inference
+# - unnecessary_async
+# - unnecessary_ignore
+# - unnecessary_underscores
+# - unsafe_variance
+
 linter:
   rules:
     - always_declare_return_types
@@ -128,10 +139,10 @@ linter:
     - null_closures
     - omit_local_variable_types
     - omit_obvious_local_variable_types
+    - omit_obvious_property_types
     - one_member_abstracts
     - only_throw_errors
     - overridden_fields
-    - package_api_docs
     - package_names
     - package_prefixed_library_names
     - parameter_assignments
@@ -187,6 +198,8 @@ linter:
     - sort_pub_dependencies
     - sort_unnamed_constructors_first
     - specify_nonobvious_local_variable_types
+    - specify_nonobvious_property_types
+    - strict_top_level_inference
     - test_types_in_equals
     - throw_in_finally
     - tighten_type_of_initializing_formals
@@ -195,6 +208,7 @@ linter:
     - type_literal_in_constant_pattern
     - unawaited_futures
     - unintended_html_in_doc_comment
+    - unnecessary_async
     - unnecessary_await_in_return
     - unnecessary_brace_in_string_interps
     - unnecessary_breaks
@@ -202,6 +216,7 @@ linter:
     - unnecessary_constructor_name
     - unnecessary_final
     - unnecessary_getters_setters
+    - unnecessary_ignore
     - unnecessary_lambdas
     - unnecessary_late
     - unnecessary_library_directive
@@ -220,8 +235,10 @@ linter:
     - unnecessary_string_interpolations
     - unnecessary_this
     - unnecessary_to_list_in_spreads
+    - unnecessary_underscores
     - unreachable_from_main
     - unrelated_type_equality_checks
+    - unsafe_variance
     - use_build_context_synchronously
     - use_colored_box
     - use_decorated_box
