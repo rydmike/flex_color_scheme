@@ -12,7 +12,11 @@ import '../../../shared/widgets/universal/list_tile_reveal.dart';
 /// This PopupMenu is on purpose not using the EnumPopupMenu, as this one
 /// has a bit more own style, still it could maybe be reworked to use it.
 class PlatformPopupMenu extends StatelessWidget {
-  const PlatformPopupMenu({super.key, required this.platform, required this.onChanged});
+  const PlatformPopupMenu({
+    super.key,
+    required this.platform,
+    required this.onChanged,
+  });
   final TargetPlatform? platform;
   final ValueChanged<TargetPlatform?>? onChanged;
 
@@ -24,7 +28,8 @@ class PlatformPopupMenu extends StatelessWidget {
   static const String _labelFuchsia = 'Google Fuchsia';
   static final String _platform = defaultTargetPlatform.name;
   static final String _labelDefault = 'Actual platform ($_platform)';
-  static const Map<TargetPlatform, IconData> _platformIcon = <TargetPlatform, IconData>{
+  static const Map<TargetPlatform, IconData> _platformIcon =
+      <TargetPlatform, IconData>{
     TargetPlatform.android: Icons.android,
     TargetPlatform.iOS: Icons.phone_iphone,
     TargetPlatform.windows: FlexIcons.windows,
@@ -32,7 +37,8 @@ class PlatformPopupMenu extends StatelessWidget {
     TargetPlatform.linux: FlexIcons.linux,
     TargetPlatform.fuchsia: FlexIcons.infinity,
   };
-  static final Map<TargetPlatform, String> _platformString = <TargetPlatform, String>{
+  static final Map<TargetPlatform, String> _platformString =
+      <TargetPlatform, String>{
     TargetPlatform.android: _labelAndroid,
     TargetPlatform.iOS: _labelApple,
     TargetPlatform.windows: _labelWindows,
@@ -50,9 +56,9 @@ class PlatformPopupMenu extends StatelessWidget {
     String subtitle;
     String platformLabel;
     if (platform != null) {
-      platformLabel = 'Mock ${_platformString[TargetPlatform.values[platform!.index]]!}';
-      subtitle =
-          'Mock and used platform now set to '
+      platformLabel =
+          'Mock ${_platformString[TargetPlatform.values[platform!.index]]!}';
+      subtitle = 'Mock and used platform now set to '
           '${_platformString[TargetPlatform.values[platform!.index]]}, '
           'actual platform is $_platform.\n';
     } else {
@@ -81,27 +87,29 @@ class PlatformPopupMenu extends StatelessWidget {
               'Now set to ${_platformString[TargetPlatform.values[index]]}, '
               'actual platform is $_platform.\n';
         }
-        onChanged?.call(index >= TargetPlatform.values.length ? null : TargetPlatform.values[index]);
+        onChanged?.call(index >= TargetPlatform.values.length
+            ? null
+            : TargetPlatform.values[index]);
       },
-      itemBuilder:
-          (BuildContext context) => <PopupMenuItem<int>>[
-            for (int i = 0; i <= TargetPlatform.values.length; i++)
-              PopupMenuItem<int>(
-                value: i,
-                child: ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  leading:
-                      i < TargetPlatform.values.length
-                          ? Icon(_platformIcon[TargetPlatform.values[i]], color: index == i ? iconColor : null)
-                          : Icon(Icons.devices_outlined, color: index == i ? iconColor : null),
-                  title:
-                      i < TargetPlatform.values.length
-                          ? Text(_platformString[TargetPlatform.values[i]]!, style: txtStyle)
-                          : Text(_labelDefault, style: txtStyle),
-                ),
-              ),
-          ],
+      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+        for (int i = 0; i <= TargetPlatform.values.length; i++)
+          PopupMenuItem<int>(
+            value: i,
+            child: ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              leading: i < TargetPlatform.values.length
+                  ? Icon(_platformIcon[TargetPlatform.values[i]],
+                      color: index == i ? iconColor : null)
+                  : Icon(Icons.devices_outlined,
+                      color: index == i ? iconColor : null),
+              title: i < TargetPlatform.values.length
+                  ? Text(_platformString[TargetPlatform.values[i]]!,
+                      style: txtStyle)
+                  : Text(_labelDefault, style: txtStyle),
+            ),
+          )
+      ],
       child: ListTileReveal(
         dense: true,
         revealDense: true,
@@ -111,16 +119,19 @@ class PlatformPopupMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Use this setting to test what your adaptive theme looks '
-              'looks like on different platforms by mocking another '
-              'platform here in the Playground.\n',
-            ),
+                'Use this setting to test what your adaptive theme looks '
+                'looks like on different platforms by mocking another '
+                'platform here in the Playground.\n'),
             Text(subtitle),
           ],
         ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5),
-          child: Icon(_platformIcon[platform ?? defaultTargetPlatform], color: iconColor, size: 40),
+          child: Icon(
+            _platformIcon[platform ?? defaultTargetPlatform],
+            color: iconColor,
+            size: 40,
+          ),
         ),
       ),
     );

@@ -17,7 +17,11 @@ const bool _debug = !kReleaseMode && false;
 ///
 /// Returns the current query parameters as a map.
 class QueryParamsSettings extends StatefulWidget {
-  const QueryParamsSettings({super.key, required this.controller, required this.child});
+  const QueryParamsSettings({
+    super.key,
+    required this.controller,
+    required this.child,
+  });
 
   final ThemeController controller;
   final Widget child;
@@ -43,7 +47,10 @@ class _QueryParamsSettingsState extends State<QueryParamsSettings> {
     if (_debug) debugPrint('EXEC QueryParamsSettings _onParamsChanged');
     if (params.isNotEmpty) {
       if (_debug) debugPrint('_onParamsChanged: inside IF with $params');
-      await ThemeController.importFromQueryParams(params, widget.controller);
+      await ThemeController.importFromQueryParams(
+        params,
+        widget.controller,
+      );
       // After handling the query parameters, clear them from the URL,
       // regardless of whether the import was successful or not.
       _handler.clearQueryParams();

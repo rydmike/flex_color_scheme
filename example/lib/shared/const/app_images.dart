@@ -27,12 +27,14 @@ abstract final class AppImages {
   static const String natureOnScreen = 'assets/images/ud_nature_on_screen.svg';
   static const String openedTabs = 'assets/images/ud_opened_tabs.svg';
   static const String openSource = 'assets/images/ud_open_source.svg';
-  static const String permissionDenied = 'assets/images/ud_permission_denied.svg';
+  static const String permissionDenied =
+      'assets/images/ud_permission_denied.svg';
   static const String postOnline = 'assets/images/ud_post_online.svg';
   static const String postingPhoto = 'assets/images/ud_posting_photo.svg';
   static const String prioritize = 'assets/images/ud_prioritise.svg';
   static const String productTeardown = 'assets/images/ud_product_teardown.svg';
-  static const String progressOverview = 'assets/images/ud_progress_overview.svg';
+  static const String progressOverview =
+      'assets/images/ud_progress_overview.svg';
   static const String progressApp = 'assets/images/ud_progressive_app.svg';
   static const String setPreferences = 'assets/images/ud_set_preferences.svg';
   static const String setupWizard = 'assets/images/ud_setup_wizard.svg';
@@ -50,7 +52,13 @@ abstract final class AppImages {
   static const String shopPets = 'assets/images/shop_pet.jpg';
 
   // There are 16 images above, only 9 actually used in this setup.
-  static const List<String> undraw = <String>[healthyOptions, openedTabs, setupWizard, openSource, setPreferences];
+  static const List<String> undraw = <String>[
+    healthyOptions,
+    openedTabs,
+    setupWizard,
+    openSource,
+    setPreferences,
+  ];
 
   // All the above Undraw SVG asset strings in a list
   static const List<String> allImages = <String>[

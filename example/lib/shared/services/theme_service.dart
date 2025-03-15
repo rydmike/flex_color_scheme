@@ -16,7 +16,10 @@ abstract class ThemeService {
 
   /// Put all keys and values into storage.
   /// If [clearExisting] existing data will be deleted first
-  Future<void> putAll(Map<String, dynamic> values, {bool clearExisting = true});
+  Future<void> putAll(
+    Map<String, dynamic> values, {
+    bool clearExisting = true,
+  });
 
   /// If we can export the playground theme using this storage
   bool get supportsExportImport;

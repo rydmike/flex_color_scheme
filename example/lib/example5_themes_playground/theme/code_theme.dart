@@ -33,16 +33,17 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
     Color? punctuationColor,
     Color? classColor,
     Color? constantColor,
-  }) => CodeTheme(
-    baseColor: baseColor ?? this.baseColor,
-    numberColor: numberColor ?? this.numberColor,
-    commentColor: commentColor ?? this.commentColor,
-    keywordColor: keywordColor ?? this.keywordColor,
-    stringColor: stringColor ?? this.stringColor,
-    punctuationColor: punctuationColor ?? this.punctuationColor,
-    classColor: classColor ?? this.classColor,
-    constantColor: constantColor ?? this.constantColor,
-  );
+  }) =>
+      CodeTheme(
+        baseColor: baseColor ?? this.baseColor,
+        numberColor: numberColor ?? this.numberColor,
+        commentColor: commentColor ?? this.commentColor,
+        keywordColor: keywordColor ?? this.keywordColor,
+        stringColor: stringColor ?? this.stringColor,
+        punctuationColor: punctuationColor ?? this.punctuationColor,
+        classColor: classColor ?? this.classColor,
+        constantColor: constantColor ?? this.constantColor,
+      );
 
   /// Must override the lerp method.
   @override
@@ -113,15 +114,48 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
           sourceColorValue,
         ),
       ),
-      numberColor: Color(Blend.harmonize(codeTheme.numberColor?.value32bit ?? fallbackValue, sourceColorValue)),
-      commentColor: Color(Blend.harmonize(codeTheme.commentColor?.value32bit ?? fallbackValue, sourceColorValue)),
-      keywordColor: Color(Blend.harmonize(codeTheme.keywordColor?.value32bit ?? fallbackValue, sourceColorValue)),
-      stringColor: Color(Blend.harmonize(codeTheme.stringColor?.value32bit ?? fallbackValue, sourceColorValue)),
-      punctuationColor: Color(
-        Blend.harmonize(codeTheme.punctuationColor?.value32bit ?? fallbackValue, sourceColorValue),
+      numberColor: Color(
+        Blend.harmonize(
+          codeTheme.numberColor?.value32bit ?? fallbackValue,
+          sourceColorValue,
+        ),
       ),
-      classColor: Color(Blend.harmonize(codeTheme.classColor?.value32bit ?? fallbackValue, sourceColorValue)),
-      constantColor: Color(Blend.harmonize(codeTheme.constantColor?.value32bit ?? fallbackValue, sourceColorValue)),
+      commentColor: Color(
+        Blend.harmonize(
+          codeTheme.commentColor?.value32bit ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      keywordColor: Color(
+        Blend.harmonize(
+          codeTheme.keywordColor?.value32bit ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      stringColor: Color(
+        Blend.harmonize(
+          codeTheme.stringColor?.value32bit ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      punctuationColor: Color(
+        Blend.harmonize(
+          codeTheme.punctuationColor?.value32bit ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      classColor: Color(
+        Blend.harmonize(
+          codeTheme.classColor?.value32bit ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
+      constantColor: Color(
+        Blend.harmonize(
+          codeTheme.constantColor?.value32bit ?? fallbackValue,
+          sourceColorValue,
+        ),
+      ),
     );
   }
 }

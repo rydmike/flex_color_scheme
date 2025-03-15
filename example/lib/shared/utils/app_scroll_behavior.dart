@@ -18,11 +18,11 @@ class DragScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => <PointerDeviceKind>{
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-    PointerDeviceKind.trackpad,
-    PointerDeviceKind.stylus,
-  };
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+        PointerDeviceKind.stylus,
+      };
 }
 
 /// AppScrollBehavior with no implicit scrollbars on any platform.
@@ -33,7 +33,8 @@ class NoScrollbarBehavior extends DragScrollBehavior {
   const NoScrollbarBehavior();
   // Override for no scrollbars.
   @override
-  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildScrollbar(
+      BuildContext context, Widget child, ScrollableDetails details) {
     return child;
   }
 }
@@ -48,14 +49,21 @@ class AppleScrollBehavior extends ScrollBehavior {
   const AppleScrollBehavior();
 
   @override
-  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) => child;
+  Widget buildScrollbar(
+          BuildContext context, Widget child, ScrollableDetails details) =>
+      child;
 
   @override
-  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) => child;
+  Widget buildOverscrollIndicator(
+          BuildContext context, Widget child, ScrollableDetails details) =>
+      child;
 
   // Override behavior methods and getters like dragDevices
   @override
-  Set<PointerDeviceKind> get dragDevices => <PointerDeviceKind>{PointerDeviceKind.touch, PointerDeviceKind.mouse};
+  Set<PointerDeviceKind> get dragDevices => <PointerDeviceKind>{
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 
   @override
   TargetPlatform getPlatform(BuildContext context) => TargetPlatform.macOS;

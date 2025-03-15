@@ -71,23 +71,32 @@ class FlexInstantSplash extends InteractiveInkFeature {
     super.customBorder,
     double? radius,
     super.onRemoved,
-  }) : _position = position,
-       _borderRadius = borderRadius ?? BorderRadius.zero,
-       _targetRadius = radius ?? _getTargetRadius(referenceBox, containedInkWell, rectCallback, position!),
-       _clipCallback = _getClipCallback(referenceBox, containedInkWell, rectCallback),
-       _repositionToReferenceBox = !containedInkWell,
-       _textDirection = textDirection,
-       super(controller: controller, color: color) {
-    _radiusController =
-        AnimationController(duration: _kUnconfirmedSplashDuration, vsync: controller.vsync)
-          ..addListener(controller.markNeedsPaint)
-          ..forward();
-    _radius = _radiusController.drive(Tween<double>(begin: _kSplashInitialSize, end: _targetRadius));
-    _alphaController =
-        AnimationController(duration: _kSplashFadeDuration, vsync: controller.vsync)
-          ..addListener(controller.markNeedsPaint)
-          ..addStatusListener(_handleAlphaStatusChanged);
-    _alpha = _alphaController!.drive(IntTween(begin: color.alpha8bit, end: 0));
+  })  : _position = position,
+        _borderRadius = borderRadius ?? BorderRadius.zero,
+        _targetRadius = radius ??
+            _getTargetRadius(
+                referenceBox, containedInkWell, rectCallback, position!),
+        _clipCallback =
+            _getClipCallback(referenceBox, containedInkWell, rectCallback),
+        _repositionToReferenceBox = !containedInkWell,
+        _textDirection = textDirection,
+        super(controller: controller, color: color) {
+    _radiusController = AnimationController(
+        duration: _kUnconfirmedSplashDuration, vsync: controller.vsync)
+      ..addListener(controller.markNeedsPaint)
+      ..forward();
+    _radius = _radiusController.drive(Tween<double>(
+      begin: _kSplashInitialSize,
+      end: _targetRadius,
+    ));
+    _alphaController = AnimationController(
+        duration: _kSplashFadeDuration, vsync: controller.vsync)
+      ..addListener(controller.markNeedsPaint)
+      ..addStatusListener(_handleAlphaStatusChanged);
+    _alpha = _alphaController!.drive(IntTween(
+      begin: color.alpha8bit,
+      end: 0,
+    ));
 
     controller.addInkFeature(this);
   }
@@ -107,7 +116,8 @@ class FlexInstantSplash extends InteractiveInkFeature {
 
   /// Used to specify this type of ink splash for an [InkWell], [InkResponse],
   /// material [Theme], or [ButtonStyle].
-  static const InteractiveInkFeatureFactory splashFactory = _InstantSplashFactory();
+  static const InteractiveInkFeatureFactory splashFactory =
+      _InstantSplashFactory();
 
   @override
   void confirm() {
@@ -145,7 +155,8 @@ class FlexInstantSplash extends InteractiveInkFeature {
     Offset? center = _position;
     // coverage:ignore-start
     if (_repositionToReferenceBox) {
-      center = Offset.lerp(center, referenceBox.size.center(Offset.zero), _radiusController.value);
+      center = Offset.lerp(center, referenceBox.size.center(Offset.zero),
+          _radiusController.value);
     }
     // coverage:ignore-end
     paintInkCircle(
@@ -162,7 +173,8 @@ class FlexInstantSplash extends InteractiveInkFeature {
   }
 }
 
-RectCallback? _getClipCallback(RenderBox referenceBox, bool containedInkWell, RectCallback? rectCallback) {
+RectCallback? _getClipCallback(
+    RenderBox referenceBox, bool containedInkWell, RectCallback? rectCallback) {
   if (rectCallback != null) {
     return rectCallback;
   }
@@ -172,9 +184,11 @@ RectCallback? _getClipCallback(RenderBox referenceBox, bool containedInkWell, Re
   return null;
 }
 
-double _getTargetRadius(RenderBox referenceBox, bool containedInkWell, RectCallback? rectCallback, Offset position) {
+double _getTargetRadius(RenderBox referenceBox, bool containedInkWell,
+    RectCallback? rectCallback, Offset position) {
   if (containedInkWell) {
-    final Size size = rectCallback != null ? rectCallback().size : referenceBox.size;
+    final Size size =
+        rectCallback != null ? rectCallback().size : referenceBox.size;
     return _getSplashRadiusForPositionInSize(size, position);
   }
   return Material.defaultSplashRadius;

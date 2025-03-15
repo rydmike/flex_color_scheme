@@ -91,24 +91,28 @@ class ListTileSlider extends StatelessWidget {
       divisions: divisions ?? (max - min).toInt(),
       label: value.toStringAsFixed(valueDecimals),
       value: value,
-      onChanged:
-          enabled
-              ? (double value) {
-                onChanged?.call(value);
-              }
-              // Sett to null to also disable the Slider in the ListTile.
-              : null,
+      onChanged: enabled
+          ? (double value) {
+              onChanged?.call(value);
+            }
+          // Sett to null to also disable the Slider in the ListTile.
+          : null,
     );
 
     return ListTile(
       enabled: enabled,
       dense: dense,
       title: (title == null && subtitle == null) ? slider : title,
-      subtitle:
-          (title != null && subtitle == null)
-              ? slider
-              : (subtitle != null)
-              ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[subtitle!, slider])
+      subtitle: (title != null && subtitle == null)
+          ? slider
+          : (subtitle != null)
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    subtitle!,
+                    slider,
+                  ],
+                )
               : null,
       trailing: Padding(
         // For now using hard coded padding for sliderLabel.
@@ -117,7 +121,10 @@ class ListTileSlider extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             if (sliderLabel != null) Text(sliderLabel!, style: style),
-            Text(value.toStringAsFixed(valueDecimals), style: style.copyWith(fontWeight: FontWeight.bold)),
+            Text(
+              value.toStringAsFixed(valueDecimals),
+              style: style.copyWith(fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),

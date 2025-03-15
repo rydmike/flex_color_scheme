@@ -421,6 +421,7 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // toggle buttons.
   thickBorderWidth: 1.5, // Default is 2.0.
   thinBorderWidth: 1, // Default is 1.0.
+
   // Select the ColorScheme color used for selected TabBar indicator.
   // Defaults to same color as selected tab if not defined.
   // tabBarIndicatorSchemeColor: SchemeColor.secondary,
@@ -503,12 +504,19 @@ final TargetPlatform _platform = defaultTargetPlatform;
 /// You can add as many colors and other theme properties as you need, and
 /// you can add multiple different ThemeExtension sub classes as well.
 class BrandTheme extends ThemeExtension<BrandTheme> {
-  const BrandTheme({this.brandColor});
+  const BrandTheme({
+    this.brandColor,
+  });
   final Color? brandColor;
 
   // You must override the copyWith method.
   @override
-  BrandTheme copyWith({Color? brandColor}) => BrandTheme(brandColor: brandColor ?? this.brandColor);
+  BrandTheme copyWith({
+    Color? brandColor,
+  }) =>
+      BrandTheme(
+        brandColor: brandColor ?? this.brandColor,
+      );
 
   // You must override the lerp method.
   @override
@@ -516,15 +524,21 @@ class BrandTheme extends ThemeExtension<BrandTheme> {
     if (other is! BrandTheme) {
       return this;
     }
-    return BrandTheme(brandColor: Color.lerp(brandColor, other.brandColor, t));
+    return BrandTheme(
+      brandColor: Color.lerp(brandColor, other.brandColor, t),
+    );
   }
 }
 
 // Custom const theme with our brand color in light mode.
-const BrandTheme lightBrandTheme = BrandTheme(brandColor: Color.fromARGB(255, 8, 79, 71));
+const BrandTheme lightBrandTheme = BrandTheme(
+  brandColor: Color.fromARGB(255, 8, 79, 71),
+);
 
 // Custom const theme with our brand color in dark mode.
-const BrandTheme darkBrandTheme = BrandTheme(brandColor: Color.fromARGB(255, 167, 227, 218));
+const BrandTheme darkBrandTheme = BrandTheme(
+  brandColor: Color.fromARGB(255, 167, 227, 218),
+);
 
 class DemoApp extends StatefulWidget {
   const DemoApp({super.key});
@@ -626,7 +640,9 @@ class _DemoAppState extends State<DemoApp> {
         visualDensity: _visualDensity,
         platform: _platform,
         // Add all our custom theme extensions, in this case we only have one.
-        extensions: <ThemeExtension<dynamic>>{lightBrandTheme},
+        extensions: <ThemeExtension<dynamic>>{
+          lightBrandTheme,
+        },
       ),
 
       // Define the corresponding dark theme for the app.
@@ -646,17 +662,16 @@ class _DemoAppState extends State<DemoApp> {
         // would just use the colors or scheme property based on what you want.
         // This logic is just here so you can toggle the two booleans earlier
         // above to try the options without commenting any code.
-        colors:
-            (_useScheme && _computeDarkTheme)
-                // If we use predefined schemes and want to compute a dark
-                // theme from its light colors, we can grab the light scheme colors
-                // for _schemes from the FlexColor.schemes map and use toDark(),
-                // that takes a white blend saturation %, where 0 is same colors as
-                // the input light scheme colors, and 100% makes it white.
-                ? FlexColor.schemes[_scheme]!.light.toDark(_toDarkLevel)
-                // If we use a predefined scheme, then pass, null so we get
-                // selected _scheme via the scheme property.
-                : _useScheme
+        colors: (_useScheme && _computeDarkTheme)
+            // If we use predefined schemes and want to compute a dark
+            // theme from its light colors, we can grab the light scheme colors
+            // for _schemes from the FlexColor.schemes map and use toDark(),
+            // that takes a white blend saturation %, where 0 is same colors as
+            // the input light scheme colors, and 100% makes it white.
+            ? FlexColor.schemes[_scheme]!.light.toDark(_toDarkLevel)
+            // If we use a predefined scheme, then pass, null so we get
+            // selected _scheme via the scheme property.
+            : _useScheme
                 ? null
                 // If we compute a scheme from our custom data, then use the
                 // toDark() method on our custom light FlexSchemeColor data.
@@ -664,9 +679,9 @@ class _DemoAppState extends State<DemoApp> {
                 // For better dark mapping of the light color
                 // based values, set parameter swapColor to true in toDark.
                 : _computeDarkTheme
-                ? _schemeLight.toDark(_toDarkLevel, true)
-                // And finally, use the defined custom dark colors.
-                : _schemeDark,
+                    ? _schemeLight.toDark(_toDarkLevel, true)
+                    // And finally, use the defined custom dark colors.
+                    : _schemeDark,
         // To use a built-in scheme based on enum, don't assign colors above.
         scheme: _scheme,
         swapColors: _swapColors,
@@ -700,7 +715,9 @@ class _DemoAppState extends State<DemoApp> {
         visualDensity: _visualDensity,
         platform: _platform,
         // Add all our custom theme extensions, in this case we only have one.
-        extensions: <ThemeExtension<dynamic>>{darkBrandTheme},
+        extensions: <ThemeExtension<dynamic>>{
+          darkBrandTheme,
+        },
       ),
       themeMode: themeMode,
       home: HomePage(
@@ -766,17 +783,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
+    scrollController =
+        ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
     // Set enabled menu items.
-    menuItemsEnabled = List<bool>.generate(App.menuItems.length, (int i) => false);
+    menuItemsEnabled =
+        List<bool>.generate(App.menuItems.length, (int i) => false);
     menuItemsEnabled[0] = true;
     menuItemsEnabled[1] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-      App.menuItems.length,
-      (int i) => ResponsiveMenuItemIconState.primary,
-    );
+        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
   }
 
   @override
@@ -784,9 +801,12 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[0] = isLight ? ResponsiveMenuItemIconState.primary : ResponsiveMenuItemIconState.secondary;
-    menuItemsIconState[1] =
-        theme.useMaterial3 ? ResponsiveMenuItemIconState.primary : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[0] = isLight
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[1] = theme.useMaterial3
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
   }
 
   @override
@@ -802,7 +822,8 @@ class _HomePageState extends State<HomePage> {
     final double margins = App.responsiveInsets(mediaSize.width);
     final double topPadding = mediaPadding.top + kToolbarHeight + margins;
     final double bottomPadding = mediaPadding.bottom + margins;
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint;
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headlineMedium = textTheme.headlineSmall!;
@@ -810,7 +831,8 @@ class _HomePageState extends State<HomePage> {
 
     // Get our custom brand color from the BrandTheme extension, with a
     // fallback to primary color.
-    final Color brandColor = theme.extension<BrandTheme>()!.brandColor ?? theme.colorScheme.primary;
+    final Color brandColor =
+        theme.extension<BrandTheme>()!.brandColor ?? theme.colorScheme.primary;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // FlexColorScheme contains a static helper that can be use to theme
@@ -845,7 +867,8 @@ class _HomePageState extends State<HomePage> {
         menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
           App.title(context),
-          style: theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
+          style:
+              theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
         ),
         menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
@@ -877,9 +900,11 @@ class _HomePageState extends State<HomePage> {
           constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
           child: ListView(
             controller: scrollController,
-            padding: EdgeInsets.fromLTRB(margins, topPadding, margins, bottomPadding),
+            padding: EdgeInsets.fromLTRB(
+                margins, topPadding, margins, bottomPadding),
             children: <Widget>[
-              Text('Theme Extension Colored Header', style: headlineMedium.copyWith(color: brandColor)),
+              Text('Theme Extension Colored Header',
+                  style: headlineMedium.copyWith(color: brandColor)),
               const Text(
                 'This is FlexColorScheme developers Hot Reload '
                 'Playground. It has a large number of property values '
@@ -890,11 +915,12 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text('Theme mode'),
-                subtitle: Text(
-                  'Theme '
-                  '${widget.themeMode.toString().dotTail}',
+                subtitle: Text('Theme '
+                    '${widget.themeMode.toString().dotTail}'),
+                trailing: ThemeModeSwitch(
+                  themeMode: widget.themeMode,
+                  onChanged: widget.onThemeModeChanged,
                 ),
-                trailing: ThemeModeSwitch(themeMode: widget.themeMode, onChanged: widget.onThemeModeChanged),
                 onTap: () {
                   if (isDark) {
                     widget.onThemeModeChanged(ThemeMode.light);

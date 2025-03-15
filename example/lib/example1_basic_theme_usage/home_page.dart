@@ -33,7 +33,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double margins = App.responsiveInsets(MediaQuery.sizeOf(context).width);
+    final double margins =
+        App.responsiveInsets(MediaQuery.sizeOf(context).width);
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
@@ -42,7 +43,9 @@ class HomePage extends StatelessWidget {
         title: Text(App.title(context)),
         actions: <Widget>[
           IconButton(
-            icon: useMaterial3 ? const Icon(Icons.filter_3) : const Icon(Icons.filter_2),
+            icon: useMaterial3
+                ? const Icon(Icons.filter_3)
+                : const Icon(Icons.filter_2),
             onPressed: () {
               onUseMaterial3Changed(!useMaterial3);
             },

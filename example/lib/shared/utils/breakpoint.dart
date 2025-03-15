@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
-enum WindowSize { xxsmall, xsmall, small, medium, large, xlarge, xxlarge, xxxlarge }
+enum WindowSize {
+  xxsmall,
+  xsmall,
+  small,
+  medium,
+  large,
+  xlarge,
+  xxlarge,
+  xxxlarge
+}
 
 enum LayoutClass {
   smallWatch,
@@ -12,7 +21,7 @@ enum LayoutClass {
   largeTablet,
   desktop,
   largeDesktop,
-  hugeDesktop,
+  hugeDesktop
 }
 
 enum BreakType { material, large }
@@ -96,36 +105,37 @@ class Breakpoint {
     /// The predefined amount of columns for the BreakType for a given width
     /// will be returned if columnsInterval is null or minColumnSize is null.
     assert(
-      columnInterval == null || (columnInterval >= 1 && columnInterval <= 24),
-      'columnInterval must be null or from 1 to 24',
-    );
+        columnInterval == null || (columnInterval >= 1 && columnInterval <= 24),
+        'columnInterval must be null or from 1 to 24');
     assert(
-      minColumnSize == null || (minColumnSize >= 137 / 2 && minColumnSize <= 8192),
-      'MinColumnSize must be null or from 137/2 (=two columns on a small watch) '
-      ' to 8192 (=1 column on a 8k screen)',
-    );
+        minColumnSize == null ||
+            (minColumnSize >= 137 / 2 && minColumnSize <= 8192),
+        'MinColumnSize must be null or from 137/2 (=two columns on a small watch) '
+        ' to 8192 (=1 column on a 8k screen)');
 
     double width = 359;
     Orientation orientation = Orientation.portrait;
 
     if (constraints.debugAssertIsValid()) {
       width = constraints.normalize().maxWidth;
-      orientation = constraints.maxHeight > constraints.maxWidth ? Orientation.portrait : Orientation.landscape;
+      orientation = constraints.maxHeight > constraints.maxWidth
+          ? Orientation.portrait
+          : Orientation.landscape;
     }
 
     return type == BreakType.material
         ? Breakpoint._calcBreakpoint(
-          orientation: orientation,
-          width: width,
-          columnInterval: columnInterval,
-          minColumnSize: minColumnSize,
-        )
+            orientation: orientation,
+            width: width,
+            columnInterval: columnInterval,
+            minColumnSize: minColumnSize,
+          )
         : Breakpoint._calcBreakpointLarge(
-          orientation: orientation,
-          width: width,
-          columnInterval: columnInterval,
-          minColumnSize: minColumnSize,
-        );
+            orientation: orientation,
+            width: width,
+            columnInterval: columnInterval,
+            minColumnSize: minColumnSize,
+          );
   }
 
   /// Create breakpoint data from the current Media context that is passed in.
@@ -150,14 +160,13 @@ class Breakpoint {
     /// The predefined amount of columns for the BreakType for a given width
     /// will be returned if columnsSpace is null or minColumnSize is null.
     assert(
-      columnInterval == null || (columnInterval >= 1 && columnInterval <= 24),
-      'columnInterval must be null or from 1 to 24',
-    );
+        columnInterval == null || (columnInterval >= 1 && columnInterval <= 24),
+        'columnInterval must be null or from 1 to 24');
     assert(
-      minColumnSize == null || (minColumnSize >= 137 / 2 && minColumnSize <= 8192),
-      'MinColumnSize must be null or from 137/2 (=two columns on a small watch) '
-      ' to 8192 (=1 column on a 8k screen)',
-    );
+        minColumnSize == null ||
+            (minColumnSize >= 137 / 2 && minColumnSize <= 8192),
+        'MinColumnSize must be null or from 137/2 (=two columns on a small watch) '
+        ' to 8192 (=1 column on a 8k screen)');
 
     final double width = MediaQuery.sizeOf(context).width;
     final Orientation orientation = MediaQuery.orientationOf(context);
@@ -312,7 +321,8 @@ class Breakpoint {
           minColumnSize: minColumnSize,
         ),
         gutters: 16,
-        device: isPortrait ? LayoutClass.smallTablet : LayoutClass.mediumHandset,
+        device:
+            isPortrait ? LayoutClass.smallTablet : LayoutClass.mediumHandset,
         window: WindowSize.small,
         orientation: orientation,
       );
@@ -326,7 +336,8 @@ class Breakpoint {
           minColumnSize: minColumnSize,
         ),
         gutters: 16,
-        device: isPortrait ? LayoutClass.largeHandset : LayoutClass.smallHandset,
+        device:
+            isPortrait ? LayoutClass.largeHandset : LayoutClass.smallHandset,
         window: WindowSize.xsmall,
         orientation: orientation,
       );
@@ -360,7 +371,12 @@ class Breakpoint {
       );
     }
     return Breakpoint(
-      columns: usedColumns(numberOfColumns: 4, width: width, columnSpace: columnInterval, minColumnSize: minColumnSize),
+      columns: usedColumns(
+        numberOfColumns: 4,
+        width: width,
+        columnSpace: columnInterval,
+        minColumnSize: minColumnSize,
+      ),
       gutters: 16,
       device: LayoutClass.smallHandset,
       window: WindowSize.xsmall,
@@ -596,7 +612,8 @@ class Breakpoint {
           minColumnSize: minColumnSize,
         ),
         gutters: 14,
-        device: isPortrait ? LayoutClass.smallTablet : LayoutClass.mediumHandset,
+        device:
+            isPortrait ? LayoutClass.smallTablet : LayoutClass.mediumHandset,
         window: WindowSize.small,
         orientation: orientation,
       );
@@ -610,7 +627,8 @@ class Breakpoint {
           minColumnSize: minColumnSize,
         ),
         gutters: 12,
-        device: isPortrait ? LayoutClass.smallTablet : LayoutClass.mediumHandset,
+        device:
+            isPortrait ? LayoutClass.smallTablet : LayoutClass.mediumHandset,
         window: WindowSize.small,
         orientation: orientation,
       );
@@ -624,7 +642,8 @@ class Breakpoint {
           minColumnSize: minColumnSize,
         ),
         gutters: 12,
-        device: isPortrait ? LayoutClass.largeHandset : LayoutClass.smallHandset,
+        device:
+            isPortrait ? LayoutClass.largeHandset : LayoutClass.smallHandset,
         window: WindowSize.xsmall,
         orientation: orientation,
       );
@@ -700,7 +719,12 @@ class Breakpoint {
       );
     }
     return Breakpoint(
-      columns: usedColumns(numberOfColumns: 2, width: width, columnSpace: columnInterval, minColumnSize: minColumnSize),
+      columns: usedColumns(
+        numberOfColumns: 2,
+        width: width,
+        columnSpace: columnInterval,
+        minColumnSize: minColumnSize,
+      ),
       gutters: 8,
       device: LayoutClass.smallWatch,
       window: WindowSize.xxsmall,
@@ -724,11 +748,18 @@ class Breakpoint {
     if (usableColumns < 1 || usableColumns > 24) usableColumns = 1;
 
     if (divideBy < 1 || divideBy > 24) divideBy = 1;
-    return (usableColumns / divideBy).floor() < 1 ? 1 : (usableColumns / divideBy).floor();
+    return (usableColumns / divideBy).floor() < 1
+        ? 1
+        : (usableColumns / divideBy).floor();
   }
 
   /// Return number of columns to use for a given width or breakpoint
-  static int usedColumns({int? numberOfColumns, double? width, int? columnSpace, double? minColumnSize}) {
+  static int usedColumns({
+    int? numberOfColumns,
+    double? width,
+    int? columnSpace,
+    double? minColumnSize,
+  }) {
     // It is bad style to modify passed in parameters, so we make local
     // copies further below that we modify as needed for validity checks.
     // Make sure numberOfColumns is valid and force it valid if it is not.
@@ -742,13 +773,16 @@ class Breakpoint {
     // for reducing the available columns, so we use all available columns at
     // the given breakpoint.
     if ((columnSpace == null || columnSpace == 1) &&
-        (minColumnSize == null || minColumnSize <= 137 / 2 || minColumnSize > 8192)) {
+        (minColumnSize == null ||
+            minColumnSize <= 137 / 2 ||
+            minColumnSize > 8192)) {
       return effectiveColumns;
     }
 
     // If columnSpace input was invalid, we use 1
     int? usedColumnSpace = columnSpace;
-    if (usedColumnSpace != null && (usedColumnSpace < 1 || usedColumnSpace > 24)) {
+    if (usedColumnSpace != null &&
+        (usedColumnSpace < 1 || usedColumnSpace > 24)) {
       usedColumnSpace = 1;
     }
 
@@ -761,7 +795,9 @@ class Breakpoint {
       // available ones should be used. 1 means it takes up 1 of the available
       // ones, 2 uses two of them, etc.
       columnsViaColumnInterval =
-          (effectiveColumns / usedColumnSpace).floor() < 1 ? 1 : (effectiveColumns / usedColumnSpace).floor();
+          (effectiveColumns / usedColumnSpace).floor() < 1
+              ? 1
+              : (effectiveColumns / usedColumnSpace).floor();
     }
 
     // This is a bit ugly, but if passed width was null or smaller
@@ -775,7 +811,9 @@ class Breakpoint {
       // minimum column width. This feature can be used to make columns of
       // any min size that just increases proportionally in amount as the
       // width of the screen increases.
-      columnsViaMinSize = (effectiveWidth / minColumnSize).floor() < 1 ? 1 : (effectiveWidth / minColumnSize).floor();
+      columnsViaMinSize = (effectiveWidth / minColumnSize).floor() < 1
+          ? 1
+          : (effectiveWidth / minColumnSize).floor();
     }
     // Both ways of providing desired number of columns should not really be
     // used at the same time, but if they were, we use the smaller calculated
@@ -788,18 +826,24 @@ class Breakpoint {
   }
 
   /// The device is a watch, any sized watch
-  bool get isWatch => device == LayoutClass.smallWatch || device == LayoutClass.largeWatch;
+  bool get isWatch =>
+      device == LayoutClass.smallWatch || device == LayoutClass.largeWatch;
 
   /// The device is a phone, any sized phone
   bool get isPhone =>
-      device == LayoutClass.smallHandset || device == LayoutClass.mediumHandset || device == LayoutClass.largeHandset;
+      device == LayoutClass.smallHandset ||
+      device == LayoutClass.mediumHandset ||
+      device == LayoutClass.largeHandset;
 
   /// The device is a tablet, any sized tablet
-  bool get isTablet => device == LayoutClass.smallTablet || device == LayoutClass.largeTablet;
+  bool get isTablet =>
+      device == LayoutClass.smallTablet || device == LayoutClass.largeTablet;
 
   /// The device is a desktop, any sized desktop
   bool get isDesktop =>
-      device == LayoutClass.desktop || device == LayoutClass.largeDesktop || device == LayoutClass.hugeDesktop;
+      device == LayoutClass.desktop ||
+      device == LayoutClass.largeDesktop ||
+      device == LayoutClass.hugeDesktop;
 
   /// This is a helper to determine if we are on a handset or not, which is
   /// defined as any size phone or watch

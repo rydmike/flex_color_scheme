@@ -34,17 +34,13 @@ class FlexAlphaValues {
     this.inverseSurfaceAlpha = 0,
     this.dialogAlpha = 0,
     this.scaffoldAlpha = 0,
-    @Deprecated(
-      'Use surfaceAlpha instead. This was removed because Flutter '
-      '3.22 deprecated the color ColorScheme.surfaceVariant. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
+    @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
+        '3.22 deprecated the color ColorScheme.surfaceVariant. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.surfaceVariantAlpha,
-    @Deprecated(
-      'Use surfaceAlpha instead. This was removed because Flutter '
-      '3.22 deprecated the color ColorScheme.background. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
+    @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
+        '3.22 deprecated the color ColorScheme.background. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     this.backgroundAlpha,
   });
 
@@ -85,25 +81,22 @@ class FlexAlphaValues {
   final int scaffoldAlpha;
 
   /// Alpha blend value for surfaceVariant color.
-  @Deprecated(
-    'Use surfaceAlpha instead. This was removed because Flutter '
-    '3.22 deprecated the color ColorScheme.surfaceVariant. '
-    'It no longer has any function in FCS v8 and will be removed in v9.',
-  )
+  @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
+      '3.22 deprecated the color ColorScheme.surfaceVariant. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final int? surfaceVariantAlpha;
 
   /// Alpha blend value for background color.
-  @Deprecated(
-    'Use surfaceAlpha instead. This was removed because Flutter '
-    '3.22 deprecated the color ColorScheme.background. '
-    'It no longer has any function in FCS v8 and will be removed in v9.',
-  )
+  @Deprecated('Use surfaceAlpha instead. This was removed because Flutter '
+      '3.22 deprecated the color ColorScheme.background. '
+      'It no longer has any function in FCS v8 and will be removed in v9.')
   final int? backgroundAlpha;
 
   /// Factory used to get alpha values for a given blend level and blend mode
   /// and brightness.
   // ignore: sort_constructors_first
-  factory FlexAlphaValues.getAlphas(final FlexSurfaceMode mode, final int blendLevel) {
+  factory FlexAlphaValues.getAlphas(
+      final FlexSurfaceMode mode, final int blendLevel) {
     switch (mode) {
       case FlexSurfaceMode.level:
       case FlexSurfaceMode.custom:

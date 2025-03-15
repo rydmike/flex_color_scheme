@@ -49,10 +49,10 @@ class FlexSchemeColor with Diagnosticable {
     this.error,
     this.errorContainer,
     this.swapOnMaterial3 = false,
-  }) : _primaryContainer = primaryContainer,
-       _secondaryContainer = secondaryContainer,
-       _tertiary = tertiary,
-       _tertiaryContainer = tertiaryContainer;
+  })  : _primaryContainer = primaryContainer,
+        _secondaryContainer = secondaryContainer,
+        _tertiary = tertiary,
+        _tertiaryContainer = tertiaryContainer;
 
   /// The color displayed most frequently across your application's screens
   /// and components.
@@ -268,67 +268,77 @@ class FlexSchemeColor with Diagnosticable {
     if (brightness == Brightness.light) {
       return FlexSchemeColor(
         primary: primary,
-        primaryContainer: primaryContainer ?? primary.lighten(20).blend(Colors.white, 60),
+        primaryContainer:
+            primaryContainer ?? primary.lighten(20).blend(Colors.white, 60),
         primaryLightRef: primaryLightRef ?? primary,
         secondary: secondary ?? primary.darken().brighten(20),
-        secondaryContainer:
-            secondaryContainer ??
+        secondaryContainer: secondaryContainer ??
             secondary?.brighten(14).blend(Colors.white, 50) ??
             primary.darken().brighten(20).blend(Colors.white, 60),
-        secondaryLightRef: secondaryLightRef ?? secondary ?? primary.darken().brighten(20),
+        secondaryLightRef:
+            secondaryLightRef ?? secondary ?? primary.darken().brighten(20),
         tertiary: tertiary ?? primary.brighten(15),
-        tertiaryContainer:
-            tertiaryContainer ??
+        tertiaryContainer: tertiaryContainer ??
             tertiary?.brighten(18).blend(Colors.white, 50) ??
             primary.brighten(15).lighten(20).blend(Colors.white, 60),
         tertiaryLightRef: tertiaryLightRef ?? tertiary ?? primary.brighten(15),
-        appBarColor: appBarColor ?? tertiary ?? primary.brighten(15).lighten(20).blend(Colors.white, 60),
+        appBarColor: appBarColor ??
+            tertiary ??
+            primary.brighten(15).lighten(20).blend(Colors.white, 60),
         error: error ?? FlexColor.materialLightError,
-        errorContainer: errorContainer ?? FlexColor.lightErrorContainer(error ?? FlexColor.materialLightError),
+        errorContainer: errorContainer ??
+            FlexColor.lightErrorContainer(
+                error ?? FlexColor.materialLightError),
         swapOnMaterial3: swapOnMaterial3,
       );
     } else if (brightness == Brightness.dark) {
       return FlexSchemeColor(
         primary: primary,
-        primaryContainer: primaryContainer ?? primary.darken(5).blend(Colors.black, 55),
+        primaryContainer:
+            primaryContainer ?? primary.darken(5).blend(Colors.black, 55),
         primaryLightRef: primaryLightRef ?? primary,
         secondary: secondary ?? primary.darken().brighten(20),
-        secondaryContainer:
-            secondaryContainer ??
+        secondaryContainer: secondaryContainer ??
             secondary?.darken(25).blend(Colors.black, 50) ??
             primary.darken().brighten(20).blend(Colors.black, 40),
-        secondaryLightRef: secondaryLightRef ?? secondary ?? primary.darken().brighten(20),
+        secondaryLightRef:
+            secondaryLightRef ?? secondary ?? primary.darken().brighten(20),
         tertiary: tertiary ?? primary.brighten(15),
-        tertiaryContainer:
-            tertiaryContainer ??
+        tertiaryContainer: tertiaryContainer ??
             tertiary?.darken(15).blend(Colors.black, 60) ??
             primary.brighten(15).darken(20).blend(Colors.black, 30),
         tertiaryLightRef: tertiaryLightRef ?? tertiary ?? primary.brighten(15),
-        appBarColor: appBarColor ?? tertiary ?? primary.brighten(15).darken(20).blend(Colors.black, 30),
+        appBarColor: appBarColor ??
+            tertiary ??
+            primary.brighten(15).darken(20).blend(Colors.black, 30),
         error: error ?? FlexColor.materialDarkError,
-        errorContainer: errorContainer ?? FlexColor.darkErrorContainer(error ?? FlexColor.materialDarkError),
+        errorContainer: errorContainer ??
+            FlexColor.darkErrorContainer(error ?? FlexColor.materialDarkError),
         swapOnMaterial3: swapOnMaterial3,
       );
     } else {
       // Legacy support for FCS earlier than v5, where brightness was not used.
       return FlexSchemeColor(
         primary: primary,
-        primaryContainer: primaryContainer ?? primary.darken(kDarkenPrimaryContainer),
+        primaryContainer:
+            primaryContainer ?? primary.darken(kDarkenPrimaryContainer),
         primaryLightRef: primaryLightRef ?? primary,
         secondary: secondary ?? primary.darken(kDarkenSecondary),
-        secondaryContainer:
-            secondaryContainer ??
+        secondaryContainer: secondaryContainer ??
             secondary?.darken(kDarkenSecondaryContainerFromSecondary) ??
             primary.darken(kDarkenSecondaryContainer),
-        secondaryLightRef: secondaryLightRef ?? secondary ?? primary.darken(kDarkenSecondary),
+        secondaryLightRef:
+            secondaryLightRef ?? secondary ?? primary.darken(kDarkenSecondary),
         tertiary: tertiary ?? primary.lighten(kDarkenPrimaryContainer),
-        tertiaryContainer:
-            tertiaryContainer ??
+        tertiaryContainer: tertiaryContainer ??
             tertiary?.lighten(kDarkenSecondaryContainer) ??
-            primary.brighten(kDarkenSecondary * 2).lighten(kDarkenSecondaryContainer),
-        tertiaryLightRef: tertiaryLightRef ?? tertiary ?? primary.lighten(kDarkenPrimaryContainer),
-        appBarColor:
-            appBarColor ??
+            primary
+                .brighten(kDarkenSecondary * 2)
+                .lighten(kDarkenSecondaryContainer),
+        tertiaryLightRef: tertiaryLightRef ??
+            tertiary ??
+            primary.lighten(kDarkenPrimaryContainer),
+        appBarColor: appBarColor ??
             tertiary ??
             secondary?.lighten(kDarkenPrimaryContainer) ??
             primary.lighten(kDarkenPrimaryContainer),
@@ -390,106 +400,116 @@ class FlexSchemeColor with Diagnosticable {
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
 
     // Swap legacy M2 designed secondary and tertiary colors.
-    final FlexSchemeColor swapLegacyColors =
-        swapLegacy
-            ? colors.copyWith(
-              secondary: colors.tertiary,
-              secondaryContainer: colors.tertiaryContainer,
-              secondaryLightRef: colors.tertiaryLightRef,
-              tertiary: colors.secondary,
-              tertiaryContainer: colors.secondaryContainer,
-              tertiaryLightRef: colors.secondaryLightRef,
-            )
-            : colors;
+    final FlexSchemeColor swapLegacyColors = swapLegacy
+        ? colors.copyWith(
+            secondary: colors.tertiary,
+            secondaryContainer: colors.tertiaryContainer,
+            secondaryLightRef: colors.tertiaryLightRef,
+            tertiary: colors.secondary,
+            tertiaryContainer: colors.secondaryContainer,
+            tertiaryLightRef: colors.secondaryLightRef,
+          )
+        : colors;
 
     // Swap primary and secondary colors, using legacy fixColors.
-    final FlexSchemeColor effectiveColors =
-        swapColors
-            ? swapLegacyColors.copyWith(
-              primary: swapLegacyColors.secondary,
-              primaryContainer: swapLegacyColors.secondaryContainer,
-              primaryLightRef: swapLegacyColors.secondaryLightRef,
-              secondary: swapLegacyColors.primary,
-              secondaryContainer: swapLegacyColors.primaryContainer,
-              secondaryLightRef: swapLegacyColors.primaryLightRef,
-            )
-            : swapLegacyColors;
+    final FlexSchemeColor effectiveColors = swapColors
+        ? swapLegacyColors.copyWith(
+            primary: swapLegacyColors.secondary,
+            primaryContainer: swapLegacyColors.secondaryContainer,
+            primaryLightRef: swapLegacyColors.secondaryLightRef,
+            secondary: swapLegacyColors.primary,
+            secondaryContainer: swapLegacyColors.primaryContainer,
+            secondaryLightRef: swapLegacyColors.primaryLightRef,
+          )
+        : swapLegacyColors;
 
     if (brightness == Brightness.light) {
       return effectiveColors.copyWith(
         primary: effectiveColors.primary,
         primaryLightRef: effectiveColors.primaryLightRef,
-        primaryContainer:
-            (usedColors > 2 && usedColors != 7)
-                ? effectiveColors.primaryContainer
-                : effectiveColors.primary.lighten(20).blend(Colors.white, 60),
-        secondary:
-            (usedColors > 1 || usedColors == 7)
-                ? effectiveColors.secondary
-                : effectiveColors.primary.darken().brighten(20),
-        secondaryLightRef:
-            (usedColors > 1 || usedColors == 7)
-                ? effectiveColors.secondaryLightRef
-                : (effectiveColors.primaryLightRef ?? effectiveColors.primary).darken().brighten(20),
-        secondaryContainer:
-            (usedColors > 3 && usedColors != 7)
-                ? effectiveColors.secondaryContainer
-                : usedColors > 1
+        primaryContainer: (usedColors > 2 && usedColors != 7)
+            ? effectiveColors.primaryContainer
+            : effectiveColors.primary.lighten(20).blend(Colors.white, 60),
+        secondary: (usedColors > 1 || usedColors == 7)
+            ? effectiveColors.secondary
+            : effectiveColors.primary.darken().brighten(20),
+        secondaryLightRef: (usedColors > 1 || usedColors == 7)
+            ? effectiveColors.secondaryLightRef
+            : (effectiveColors.primaryLightRef ?? effectiveColors.primary)
+                .darken()
+                .brighten(20),
+        secondaryContainer: (usedColors > 3 && usedColors != 7)
+            ? effectiveColors.secondaryContainer
+            : usedColors > 1
                 ? effectiveColors.secondary.brighten(14).blend(Colors.white, 50)
-                : effectiveColors.primary.darken().brighten(20).blend(Colors.white, 60),
-        tertiary: (usedColors > 4 || usedColors == 7) ? effectiveColors.tertiary : effectiveColors.primary.brighten(15),
-        tertiaryLightRef:
-            (usedColors > 4 || usedColors == 7)
-                ? effectiveColors.tertiaryLightRef
-                : (effectiveColors.primaryLightRef ?? effectiveColors.primary).brighten(15),
-        tertiaryContainer:
-            (usedColors > 5 && usedColors != 7)
-                ? effectiveColors.tertiaryContainer
-                : usedColors > 4
+                : effectiveColors.primary
+                    .darken()
+                    .brighten(20)
+                    .blend(Colors.white, 60),
+        tertiary: (usedColors > 4 || usedColors == 7)
+            ? effectiveColors.tertiary
+            : effectiveColors.primary.brighten(15),
+        tertiaryLightRef: (usedColors > 4 || usedColors == 7)
+            ? effectiveColors.tertiaryLightRef
+            : (effectiveColors.primaryLightRef ?? effectiveColors.primary)
+                .brighten(15),
+        tertiaryContainer: (usedColors > 5 && usedColors != 7)
+            ? effectiveColors.tertiaryContainer
+            : usedColors > 4
                 ? effectiveColors.tertiary.brighten(18).blend(Colors.white, 50)
-                : effectiveColors.primary.brighten(15).lighten(20).blend(Colors.white, 60),
+                : effectiveColors.primary
+                    .brighten(15)
+                    .lighten(20)
+                    .blend(Colors.white, 60),
         appBarColor: colors.appBarColor,
         error: colors.error ?? FlexColor.materialLightError,
-        errorContainer:
-            colors.errorContainer ?? FlexColor.lightErrorContainer(colors.error ?? FlexColor.materialLightError),
+        errorContainer: colors.errorContainer ??
+            FlexColor.lightErrorContainer(
+                colors.error ?? FlexColor.materialLightError),
       );
     } else if (brightness == Brightness.dark) {
       return effectiveColors.copyWith(
         primary: effectiveColors.primary,
         primaryLightRef: effectiveColors.primaryLightRef,
-        primaryContainer:
-            (usedColors > 2 && usedColors != 7)
-                ? effectiveColors.primaryContainer
-                : effectiveColors.primary.darken(5).blend(Colors.black, 55),
-        secondary:
-            (usedColors > 1 || usedColors == 7)
-                ? effectiveColors.secondary
-                : effectiveColors.primary.darken().brighten(20),
-        secondaryLightRef:
-            (usedColors > 1 || usedColors == 7)
-                ? effectiveColors.secondaryLightRef
-                : (effectiveColors.primaryLightRef ?? effectiveColors.primary).darken().brighten(20),
-        secondaryContainer:
-            (usedColors > 3 && usedColors != 7)
-                ? effectiveColors.secondaryContainer
-                : usedColors > 1
+        primaryContainer: (usedColors > 2 && usedColors != 7)
+            ? effectiveColors.primaryContainer
+            : effectiveColors.primary.darken(5).blend(Colors.black, 55),
+        secondary: (usedColors > 1 || usedColors == 7)
+            ? effectiveColors.secondary
+            : effectiveColors.primary.darken().brighten(20),
+        secondaryLightRef: (usedColors > 1 || usedColors == 7)
+            ? effectiveColors.secondaryLightRef
+            : (effectiveColors.primaryLightRef ?? effectiveColors.primary)
+                .darken()
+                .brighten(20),
+        secondaryContainer: (usedColors > 3 && usedColors != 7)
+            ? effectiveColors.secondaryContainer
+            : usedColors > 1
                 ? effectiveColors.secondary.darken(25).blend(Colors.black, 50)
-                : effectiveColors.primary.darken().brighten(20).blend(Colors.black, 40),
-        tertiary: (usedColors > 4 || usedColors == 7) ? effectiveColors.tertiary : effectiveColors.primary.brighten(15),
-        tertiaryLightRef:
-            (usedColors > 4 || usedColors == 7)
-                ? effectiveColors.tertiaryLightRef
-                : (effectiveColors.primaryLightRef ?? effectiveColors.primary).brighten(15),
-        tertiaryContainer:
-            (usedColors > 5 && usedColors != 7)
-                ? effectiveColors.tertiaryContainer
-                : usedColors > 4
+                : effectiveColors.primary
+                    .darken()
+                    .brighten(20)
+                    .blend(Colors.black, 40),
+        tertiary: (usedColors > 4 || usedColors == 7)
+            ? effectiveColors.tertiary
+            : effectiveColors.primary.brighten(15),
+        tertiaryLightRef: (usedColors > 4 || usedColors == 7)
+            ? effectiveColors.tertiaryLightRef
+            : (effectiveColors.primaryLightRef ?? effectiveColors.primary)
+                .brighten(15),
+        tertiaryContainer: (usedColors > 5 && usedColors != 7)
+            ? effectiveColors.tertiaryContainer
+            : usedColors > 4
                 ? effectiveColors.tertiary.darken(15).blend(Colors.black, 60)
-                : effectiveColors.primary.brighten(15).darken(20).blend(Colors.black, 30),
+                : effectiveColors.primary
+                    .brighten(15)
+                    .darken(20)
+                    .blend(Colors.black, 30),
         appBarColor: colors.appBarColor,
         error: colors.error ?? FlexColor.materialDarkError,
-        errorContainer:
-            colors.errorContainer ?? FlexColor.darkErrorContainer(colors.error ?? FlexColor.materialDarkError),
+        errorContainer: colors.errorContainer ??
+            FlexColor.darkErrorContainer(
+                colors.error ?? FlexColor.materialDarkError),
       );
     } else {
       // Return effective colors as computed in versions before 4, we do thus
@@ -497,38 +517,36 @@ class FlexSchemeColor with Diagnosticable {
       return effectiveColors.copyWith(
         primary: effectiveColors.primary,
         primaryLightRef: effectiveColors.primaryLightRef,
-        primaryContainer:
-            (usedColors > 2 && usedColors != 7)
-                ? effectiveColors.primaryContainer
-                : effectiveColors.primary.darken(kDarkenPrimaryContainer),
-        secondary:
-            (usedColors > 1 || usedColors == 7)
+        primaryContainer: (usedColors > 2 && usedColors != 7)
+            ? effectiveColors.primaryContainer
+            : effectiveColors.primary.darken(kDarkenPrimaryContainer),
+        secondary: (usedColors > 1 || usedColors == 7)
+            ? effectiveColors.secondary
+            : effectiveColors.primary.darken(kDarkenSecondary),
+        secondaryLightRef: (usedColors > 1 || usedColors == 7)
+            ? effectiveColors.secondaryLightRef
+            : (effectiveColors.primaryLightRef ?? effectiveColors.primary)
+                .darken(kDarkenSecondary),
+        secondaryContainer: (usedColors > 3 && usedColors != 7)
+            ? effectiveColors.secondaryContainer
+            : usedColors > 1
                 ? effectiveColors.secondary
-                : effectiveColors.primary.darken(kDarkenSecondary),
-        secondaryLightRef:
-            (usedColors > 1 || usedColors == 7)
-                ? effectiveColors.secondaryLightRef
-                : (effectiveColors.primaryLightRef ?? effectiveColors.primary).darken(kDarkenSecondary),
-        secondaryContainer:
-            (usedColors > 3 && usedColors != 7)
-                ? effectiveColors.secondaryContainer
-                : usedColors > 1
-                ? effectiveColors.secondary.darken(kDarkenSecondaryContainerFromSecondary)
+                    .darken(kDarkenSecondaryContainerFromSecondary)
                 : effectiveColors.primary.darken(kDarkenSecondaryContainer),
-        tertiary:
-            (usedColors > 4 || usedColors == 7)
-                ? effectiveColors.tertiary
-                : effectiveColors.primary.lighten(kDarkenPrimaryContainer),
-        tertiaryLightRef:
-            (usedColors > 4 || usedColors == 7)
-                ? effectiveColors.tertiaryLightRef
-                : (effectiveColors.primaryLightRef ?? effectiveColors.primary).lighten(kDarkenPrimaryContainer),
-        tertiaryContainer:
-            (usedColors > 5 && usedColors != 7)
-                ? effectiveColors.tertiaryContainer
-                : usedColors > 4
+        tertiary: (usedColors > 4 || usedColors == 7)
+            ? effectiveColors.tertiary
+            : effectiveColors.primary.lighten(kDarkenPrimaryContainer),
+        tertiaryLightRef: (usedColors > 4 || usedColors == 7)
+            ? effectiveColors.tertiaryLightRef
+            : (effectiveColors.primaryLightRef ?? effectiveColors.primary)
+                .lighten(kDarkenPrimaryContainer),
+        tertiaryContainer: (usedColors > 5 && usedColors != 7)
+            ? effectiveColors.tertiaryContainer
+            : usedColors > 4
                 ? effectiveColors.tertiary.lighten(kDarkenSecondaryContainer)
-                : effectiveColors.primary.brighten(kDarkenSecondary * 2).lighten(kDarkenSecondaryContainer),
+                : effectiveColors.primary
+                    .brighten(kDarkenSecondary * 2)
+                    .lighten(kDarkenSecondaryContainer),
         appBarColor: colors.appBarColor,
         error: colors.error,
         errorContainer: colors.errorContainer,
@@ -702,20 +720,20 @@ class FlexSchemeColor with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hash(
-    primary,
-    primaryContainer,
-    primaryLightRef,
-    secondary,
-    secondaryContainer,
-    secondaryLightRef,
-    tertiary,
-    tertiaryContainer,
-    tertiaryLightRef,
-    appBarColor,
-    error,
-    errorContainer,
-    swapOnMaterial3,
-  );
+        primary,
+        primaryContainer,
+        primaryLightRef,
+        secondary,
+        secondaryContainer,
+        secondaryLightRef,
+        tertiary,
+        tertiaryContainer,
+        tertiaryLightRef,
+        appBarColor,
+        error,
+        errorContainer,
+        swapOnMaterial3,
+      );
 
   /// Flutter debug properties override, includes toString.
   @override
@@ -733,6 +751,7 @@ class FlexSchemeColor with Diagnosticable {
     properties.add(ColorProperty('appBarColor', appBarColor));
     properties.add(ColorProperty('error', error));
     properties.add(ColorProperty('errorContainer', errorContainer));
-    properties.add(DiagnosticsProperty<bool>('swapOnMaterial3', swapOnMaterial3));
+    properties
+        .add(DiagnosticsProperty<bool>('swapOnMaterial3', swapOnMaterial3));
   }
 }

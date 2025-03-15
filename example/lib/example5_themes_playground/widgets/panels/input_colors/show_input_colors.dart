@@ -12,22 +12,28 @@ import '../../shared/color_picker_inkwell.dart';
 // Allow user to edit the colors, if we are we are viewing the last color
 // scheme, which is the custom color scheme.
 class ShowInputColors extends StatelessWidget {
-  const ShowInputColors({super.key, required this.controller});
+  const ShowInputColors({
+    super.key,
+    required this.controller,
+  });
 
   final ThemeController controller;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) => FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
+  static bool _isLight(final Color color) =>
+      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(final Color color) => _isLight(color) ? Colors.black : Colors.white;
+  static Color _onColor(final Color color) =>
+      _isLight(color) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
     // Used to enable & disable color selection on the color boxes.
     // We can only pick colors when custom theme is selected, which is
     // last index in out list of color schemes.
-    final bool isCustomTheme = (AppColor.schemes.length - 1) == controller.schemeIndex;
+    final bool isCustomTheme =
+        (AppColor.schemes.length - 1) == controller.schemeIndex;
     // Are colors swapped?
     final bool swapLight = controller.swapPrimaryAndSecondaryLightColors;
     final bool swapDark = controller.swapPrimaryAndSecondaryDarkColors;
@@ -55,41 +61,56 @@ class ShowInputColors extends StatelessWidget {
     final Color errorContainer = colorScheme.errorContainer;
 
     // Get controller input colors, if we are using the to dark
-    final FlexSchemeColor inputColor =
-        isLight || controller.useToDarkMethod ? AppColor.scheme(controller).light : AppColor.scheme(controller).dark;
+    final FlexSchemeColor inputColor = isLight || controller.useToDarkMethod
+        ? AppColor.scheme(controller).light
+        : AppColor.scheme(controller).dark;
 
     // But error input dark mode colors also when we use toDark
-    final FlexSchemeColor inputErrColor =
-        isLight ? AppColor.scheme(controller).light : AppColor.scheme(controller).dark;
+    final FlexSchemeColor inputErrColor = isLight
+        ? AppColor.scheme(controller).light
+        : AppColor.scheme(controller).dark;
 
     // Input errorColors
-    final Color inputErrorColor =
-        inputErrColor.error ?? (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
+    final Color inputErrorColor = inputErrColor.error ??
+        (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
     final Color inputOnErrorColor = _onColor(inputErrorColor);
-    final Color inputErrorContainerColor =
-        inputErrColor.errorContainer ??
-        (isLight ? FlexColor.lightErrorContainer(inputErrorColor) : FlexColor.darkErrorContainer(inputErrorColor));
+    final Color inputErrorContainerColor = inputErrColor.errorContainer ??
+        (isLight
+            ? FlexColor.lightErrorContainer(inputErrorColor)
+            : FlexColor.darkErrorContainer(inputErrorColor));
     final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
     // If we had one, copy in a border side to it.
     if (border is RoundedRectangleBorder) {
-      border = border.copyWith(side: BorderSide(color: theme.dividerColor, width: 1));
+      border = border.copyWith(
+        side: BorderSide(
+          color: theme.dividerColor,
+          width: 1,
+        ),
+      );
       // else
     } else {
       // If border was null, make one matching Card default, but with border
       // side, if it was not null, we leave it as it was.
       border ??= RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-        side: BorderSide(color: theme.dividerColor, width: 1),
+        side: BorderSide(
+          color: theme.dividerColor,
+          width: 1,
+        ),
       );
     }
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
     return Theme(
       data: theme.copyWith(
-        cardTheme: CardTheme.of(context).copyWith(elevation: 0, shape: border, surfaceTintColor: Colors.transparent),
+        cardTheme: CardTheme.of(context).copyWith(
+          elevation: 0,
+          shape: border,
+          surfaceTintColor: Colors.transparent,
+        ),
       ),
       child: Wrap(
         alignment: WrapAlignment.start,
@@ -113,9 +134,13 @@ class ShowInputColors extends StatelessWidget {
                     color: primary,
                     onChanged: (Color color) {
                       if (isLight) {
-                        swapLight ? controller.setCustomSecondaryLight(color) : controller.setCustomPrimaryLight(color);
+                        swapLight
+                            ? controller.setCustomSecondaryLight(color)
+                            : controller.setCustomPrimaryLight(color);
                       } else {
-                        swapDark ? controller.setCustomSecondaryDark(color) : controller.setCustomPrimaryDark(color);
+                        swapDark
+                            ? controller.setCustomSecondaryDark(color)
+                            : controller.setCustomPrimaryDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -180,21 +205,23 @@ class ShowInputColors extends StatelessWidget {
                       if (cancelled) {
                         if (isLight) {
                           swapLight
-                              ? controller.setCustomSecondaryContainerLight(primaryContainer)
-                              : controller.setCustomPrimaryContainerLight(primaryContainer);
+                              ? controller.setCustomSecondaryContainerLight(
+                                  primaryContainer)
+                              : controller.setCustomPrimaryContainerLight(
+                                  primaryContainer);
                         } else {
                           swapDark
-                              ? controller.setCustomSecondaryContainerDark(primaryContainer)
-                              : controller.setCustomPrimaryContainerDark(primaryContainer);
+                              ? controller.setCustomSecondaryContainerDark(
+                                  primaryContainer)
+                              : controller.setCustomPrimaryContainerDark(
+                                  primaryContainer);
                         }
                       }
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
-                      key: ValueKey<String>(
-                        'ipc primaryContainer '
-                        '$primaryContainer',
-                      ),
+                      key: ValueKey<String>('ipc primaryContainer '
+                          '$primaryContainer'),
                       color: primaryContainer,
                       textColor: colorScheme.onPrimaryContainer,
                       label: 'primaryContainer',
@@ -224,9 +251,13 @@ class ShowInputColors extends StatelessWidget {
                     color: secondary,
                     onChanged: (Color color) {
                       if (isLight) {
-                        swapLight ? controller.setCustomPrimaryLight(color) : controller.setCustomSecondaryLight(color);
+                        swapLight
+                            ? controller.setCustomPrimaryLight(color)
+                            : controller.setCustomSecondaryLight(color);
                       } else {
-                        swapDark ? controller.setCustomPrimaryDark(color) : controller.setCustomSecondaryDark(color);
+                        swapDark
+                            ? controller.setCustomPrimaryDark(color)
+                            : controller.setCustomSecondaryDark(color);
                       }
                     },
                     recentColors: controller.recentColors,
@@ -278,7 +309,8 @@ class ShowInputColors extends StatelessWidget {
                       if (isLight) {
                         swapLight
                             ? controller.setCustomPrimaryContainerLight(color)
-                            : controller.setCustomSecondaryContainerLight(color);
+                            : controller
+                                .setCustomSecondaryContainerLight(color);
                       } else {
                         swapDark
                             ? controller.setCustomPrimaryContainerDark(color)
@@ -291,18 +323,23 @@ class ShowInputColors extends StatelessWidget {
                       if (cancelled) {
                         if (isLight) {
                           swapLight
-                              ? controller.setCustomPrimaryContainerLight(secondaryContainer)
-                              : controller.setCustomSecondaryContainerLight(secondaryContainer);
+                              ? controller.setCustomPrimaryContainerLight(
+                                  secondaryContainer)
+                              : controller.setCustomSecondaryContainerLight(
+                                  secondaryContainer);
                         } else {
                           swapDark
-                              ? controller.setCustomPrimaryContainerDark(secondaryContainer)
-                              : controller.setCustomSecondaryContainerDark(secondaryContainer);
+                              ? controller.setCustomPrimaryContainerDark(
+                                  secondaryContainer)
+                              : controller.setCustomSecondaryContainerDark(
+                                  secondaryContainer);
                         }
                       }
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
-                      key: ValueKey<String>('ipc secondaryContainer $secondaryContainer'),
+                      key: ValueKey<String>(
+                          'ipc secondaryContainer $secondaryContainer'),
                       color: secondaryContainer,
                       textColor: colorScheme.onSecondaryContainer,
                       label: 'secondaryContainer',
@@ -390,15 +427,18 @@ class ShowInputColors extends StatelessWidget {
                     wasCancelled: (bool cancelled) {
                       if (cancelled) {
                         if (isLight) {
-                          controller.setCustomTertiaryContainerLight(tertiaryContainer);
+                          controller.setCustomTertiaryContainerLight(
+                              tertiaryContainer);
                         } else {
-                          controller.setCustomTertiaryContainerDark(tertiaryContainer);
+                          controller.setCustomTertiaryContainerDark(
+                              tertiaryContainer);
                         }
                       }
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
-                      key: ValueKey<String>('ipc tertiaryContainer $tertiaryContainer'),
+                      key: ValueKey<String>(
+                          'ipc tertiaryContainer $tertiaryContainer'),
                       color: tertiaryContainer,
                       textColor: colorScheme.onTertiaryContainer,
                       label: 'tertiaryContainer',
@@ -486,15 +526,18 @@ class ShowInputColors extends StatelessWidget {
                     wasCancelled: (bool cancelled) {
                       if (cancelled) {
                         if (isLight) {
-                          controller.setCustomErrorContainerLight(errorContainer);
+                          controller
+                              .setCustomErrorContainerLight(errorContainer);
                         } else {
-                          controller.setCustomErrorContainerDark(errorContainer);
+                          controller
+                              .setCustomErrorContainerDark(errorContainer);
                         }
                       }
                     },
                     enabled: isCustomTheme,
                     child: ColorNameValue(
-                      key: ValueKey<String>('ipc errorContainer $errorContainer'),
+                      key: ValueKey<String>(
+                          'ipc errorContainer $errorContainer'),
                       color: errorContainer,
                       textColor: colorScheme.onErrorContainer,
                       label: 'errorContainer',

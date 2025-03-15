@@ -15,15 +15,22 @@ void main() {
     // debugDefaultTargetPlatformOverride = null;
 
     const Color m3BaseSeed = Color(0xFF6750A4);
-    final FlexSchemeColor m3Baseline = FlexSchemeColor.from(primary: m3BaseSeed);
+    final FlexSchemeColor m3Baseline =
+        FlexSchemeColor.from(primary: m3BaseSeed);
 
     final FlexColorScheme m1Light = FlexColorScheme.light(
       colors: m3Baseline,
-      keyColors: const FlexKeyColors(useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     final FlexColorScheme m1Dark = FlexColorScheme.dark(
       colors: m3Baseline,
-      keyColors: const FlexKeyColors(useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     //
     // A key promise of the above algorithm is that ColorScheme produced by
@@ -33,56 +40,60 @@ void main() {
     // For testing purposes in test below, we have to override the
     // surfaceVariant color with default result, as it is deprecated and we can
     // no longer use i in the package.
-    test('FCS7.001-light: GIVEN a FlexColorScheme.light with keyColors using '
+    test(
+        'FCS7.001-light: GIVEN a FlexColorScheme.light with keyColors using '
         'only one seed color '
         'EXPECT FlexColorScheme.light.toScheme to be equal to '
         'ColorScheme.fromSeed using same color as key.', () {
       expect(
         m1Light.toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          ColorScheme.fromSeed(
-            seedColor: m3BaseSeed,
-            brightness: Brightness.light,
-          ).copyWith(surfaceVariant: const Color(0xfffdf7ff)).toString(minLevel: DiagnosticLevel.fine),
-        ),
+        equalsIgnoringHashCodes(ColorScheme.fromSeed(
+          seedColor: m3BaseSeed,
+          brightness: Brightness.light,
+        )
+            .copyWith(surfaceVariant: const Color(0xfffdf7ff))
+            .toString(minLevel: DiagnosticLevel.fine)),
       );
     });
-    test('FCS7.001-l-s: GIVEN a ColorScheme.fromFlexSeeds using only one seed '
+    test(
+        'FCS7.001-l-s: GIVEN a ColorScheme.fromFlexSeeds using only one seed '
         'EXPECT equal to ColorScheme.fromSeed using same color as key.', () {
       expect(
-        SeedColorScheme.fromSeeds(brightness: Brightness.light, primaryKey: m3BaseSeed),
-        equals(
-          ColorScheme.fromSeed(
-            brightness: Brightness.light,
-            seedColor: m3BaseSeed,
-          ).copyWith(surfaceVariant: const Color(0xfffdf7ff)),
+        SeedColorScheme.fromSeeds(
+          brightness: Brightness.light,
+          primaryKey: m3BaseSeed,
         ),
+        equals(ColorScheme.fromSeed(
+          brightness: Brightness.light,
+          seedColor: m3BaseSeed,
+        ).copyWith(surfaceVariant: const Color(0xfffdf7ff))),
       );
     });
-    test('FCS7.001-dark: GIVEN a FlexColorScheme.dark with keyColors using '
+    test(
+        'FCS7.001-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'only one seed color '
         'EXPECT FlexColorScheme.dark.toScheme to be equal to '
         'ColorScheme.fromSeed using same color as key.', () {
       expect(
         m1Dark.toScheme,
-        equals(
-          ColorScheme.fromSeed(
-            seedColor: m3BaseSeed,
-            brightness: Brightness.dark,
-          ).copyWith(surfaceVariant: const Color(0xff141218)),
-        ),
+        equals(ColorScheme.fromSeed(
+          seedColor: m3BaseSeed,
+          brightness: Brightness.dark,
+        ).copyWith(surfaceVariant: const Color(0xff141218))),
       );
     });
-    test('FCS7.001-d-s: GIVEN a ColorScheme.fromFlexSeeds using only one seed '
+    test(
+        'FCS7.001-d-s: GIVEN a ColorScheme.fromFlexSeeds using only one seed '
         'EXPECT equal to ColorScheme.fromSeed using same color as key.', () {
       expect(
-        SeedColorScheme.fromSeeds(brightness: Brightness.dark, primaryKey: m3BaseSeed),
-        equals(
-          ColorScheme.fromSeed(
-            brightness: Brightness.dark,
-            seedColor: m3BaseSeed,
-          ).copyWith(surfaceVariant: const Color(0xff141218)),
+        SeedColorScheme.fromSeeds(
+          brightness: Brightness.dark,
+          primaryKey: m3BaseSeed,
         ),
+        equals(ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: m3BaseSeed,
+        ).copyWith(surfaceVariant: const Color(0xff141218))),
       );
     });
     //--------------------------------------------------------------------------
@@ -114,40 +125,98 @@ void main() {
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
       useMaterial3ErrorColors: true,
-      keyColors: const FlexKeyColors(useKeyColors: false, useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useKeyColors: false,
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     final FlexColorScheme m2Dark = FlexColorScheme.dark(
       colors: schemeDark,
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
       useMaterial3ErrorColors: true,
-      keyColors: const FlexKeyColors(useKeyColors: false, useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useKeyColors: false,
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
-    test('FCS7.002-light: GIVEN a FlexColorScheme.light with keyColors using '
+    test(
+        'FCS7.002-light: GIVEN a FlexColorScheme.light with keyColors using '
         'explicit NO seed color but M3 error colors '
         'EXPECT FlexColorScheme.light.toScheme to use M3 error colors but '
         'original provided main colors ', () {
-      expect(m2Light.toScheme.primary, equals(FlexColor.sakuraLightPrimary));
-      expect(m2Light.toScheme.primaryContainer, equals(FlexColor.sakuraLightPrimaryContainer));
-      expect(m2Light.toScheme.secondary, equals(FlexColor.sakuraLightSecondary));
-      expect(m2Light.toScheme.secondaryContainer, equals(FlexColor.sakuraLightSecondaryContainer));
-      expect(m2Light.toScheme.tertiary, equals(FlexColor.sakuraLightTertiary));
-      expect(m2Light.toScheme.tertiaryContainer, equals(FlexColor.sakuraLightTertiaryContainer));
-      expect(m2Light.toScheme.error, equals(FlexColor.material3LightError));
-      expect(m2Light.toScheme.errorContainer, equals(FlexColor.material3LightErrorContainer));
+      expect(
+        m2Light.toScheme.primary,
+        equals(FlexColor.sakuraLightPrimary),
+      );
+      expect(
+        m2Light.toScheme.primaryContainer,
+        equals(FlexColor.sakuraLightPrimaryContainer),
+      );
+      expect(
+        m2Light.toScheme.secondary,
+        equals(FlexColor.sakuraLightSecondary),
+      );
+      expect(
+        m2Light.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraLightSecondaryContainer),
+      );
+      expect(
+        m2Light.toScheme.tertiary,
+        equals(FlexColor.sakuraLightTertiary),
+      );
+      expect(
+        m2Light.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraLightTertiaryContainer),
+      );
+      expect(
+        m2Light.toScheme.error,
+        equals(FlexColor.material3LightError),
+      );
+      expect(
+        m2Light.toScheme.errorContainer,
+        equals(FlexColor.material3LightErrorContainer),
+      );
     });
-    test('FCS7.002-dark: GIVEN a FlexColorScheme.dark with keyColors using '
+    test(
+        'FCS7.002-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'explicit NO seed color but M3 error colors '
         'EXPECT FlexColorScheme.dark.toScheme to use M3 error colors but '
         'original provided main colors ', () {
-      expect(m2Dark.toScheme.primary, equals(FlexColor.sakuraDarkPrimary));
-      expect(m2Dark.toScheme.primaryContainer, equals(FlexColor.sakuraDarkPrimaryContainer));
-      expect(m2Dark.toScheme.secondary, equals(FlexColor.sakuraDarkSecondary));
-      expect(m2Dark.toScheme.secondaryContainer, equals(FlexColor.sakuraDarkSecondaryContainer));
-      expect(m2Dark.toScheme.tertiary, equals(FlexColor.sakuraDarkTertiary));
-      expect(m2Dark.toScheme.tertiaryContainer, equals(FlexColor.sakuraDarkTertiaryContainer));
-      expect(m2Dark.toScheme.error, equals(FlexColor.material3DarkError));
-      expect(m2Dark.toScheme.errorContainer, equals(FlexColor.material3DarkErrorContainer));
+      expect(
+        m2Dark.toScheme.primary,
+        equals(FlexColor.sakuraDarkPrimary),
+      );
+      expect(
+        m2Dark.toScheme.primaryContainer,
+        equals(FlexColor.sakuraDarkPrimaryContainer),
+      );
+      expect(
+        m2Dark.toScheme.secondary,
+        equals(FlexColor.sakuraDarkSecondary),
+      );
+      expect(
+        m2Dark.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraDarkSecondaryContainer),
+      );
+      expect(
+        m2Dark.toScheme.tertiary,
+        equals(FlexColor.sakuraDarkTertiary),
+      );
+      expect(
+        m2Dark.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraDarkTertiaryContainer),
+      );
+      expect(
+        m2Dark.toScheme.error,
+        equals(FlexColor.material3DarkError),
+      );
+      expect(
+        m2Dark.toScheme.errorContainer,
+        equals(FlexColor.material3DarkErrorContainer),
+      );
     });
     //
     // Here we explicitly turn OFF of using key color based seeding
@@ -157,42 +226,97 @@ void main() {
       colors: schemeLight,
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
-      keyColors: const FlexKeyColors(useKeyColors: false, useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useKeyColors: false,
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     final FlexColorScheme m2DarkNoErrCol = FlexColorScheme.dark(
       colors: schemeDark,
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
-      keyColors: const FlexKeyColors(useKeyColors: false, useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useKeyColors: false,
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
-    test('FCS7.002-light-no-err: GIVEN a FlexColorScheme.light with keyColors '
+    test(
+        'FCS7.002-light-no-err: GIVEN a FlexColorScheme.light with keyColors '
         'using explicit NO seed color AND no error colors '
         'EXPECT FlexColorScheme.light.toScheme to use M2 error colors and '
         'original provided main colors ', () {
-      expect(m2LightNoErrCol.toScheme.primary, equals(FlexColor.sakuraLightPrimary));
-      expect(m2LightNoErrCol.toScheme.primaryContainer, equals(FlexColor.sakuraLightPrimaryContainer));
-      expect(m2LightNoErrCol.toScheme.secondary, equals(FlexColor.sakuraLightSecondary));
-      expect(m2LightNoErrCol.toScheme.secondaryContainer, equals(FlexColor.sakuraLightSecondaryContainer));
-      expect(m2LightNoErrCol.toScheme.tertiary, equals(FlexColor.sakuraLightTertiary));
-      expect(m2LightNoErrCol.toScheme.tertiaryContainer, equals(FlexColor.sakuraLightTertiaryContainer));
-      expect(m2LightNoErrCol.toScheme.error, equals(FlexColor.materialLightError));
+      expect(
+        m2LightNoErrCol.toScheme.primary,
+        equals(FlexColor.sakuraLightPrimary),
+      );
+      expect(
+        m2LightNoErrCol.toScheme.primaryContainer,
+        equals(FlexColor.sakuraLightPrimaryContainer),
+      );
+      expect(
+        m2LightNoErrCol.toScheme.secondary,
+        equals(FlexColor.sakuraLightSecondary),
+      );
+      expect(
+        m2LightNoErrCol.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraLightSecondaryContainer),
+      );
+      expect(
+        m2LightNoErrCol.toScheme.tertiary,
+        equals(FlexColor.sakuraLightTertiary),
+      );
+      expect(
+        m2LightNoErrCol.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraLightTertiaryContainer),
+      );
+      expect(
+        m2LightNoErrCol.toScheme.error,
+        equals(FlexColor.materialLightError),
+      );
       expect(
         m2LightNoErrCol.toScheme.errorContainer,
         equals(FlexColor.lightErrorContainer(FlexColor.materialLightError)),
       );
     });
-    test('FCS7.002-dark-no-err: GIVEN a FlexColorScheme.dark with keyColors '
+    test(
+        'FCS7.002-dark-no-err: GIVEN a FlexColorScheme.dark with keyColors '
         'using explicit NO seed color AND no error colors '
         'EXPECT FlexColorScheme.dark.toScheme to use M2 error colors and '
         'original provided main colors ', () {
-      expect(m2DarkNoErrCol.toScheme.primary, equals(FlexColor.sakuraDarkPrimary));
-      expect(m2DarkNoErrCol.toScheme.primaryContainer, equals(FlexColor.sakuraDarkPrimaryContainer));
-      expect(m2DarkNoErrCol.toScheme.secondary, equals(FlexColor.sakuraDarkSecondary));
-      expect(m2DarkNoErrCol.toScheme.secondaryContainer, equals(FlexColor.sakuraDarkSecondaryContainer));
-      expect(m2DarkNoErrCol.toScheme.tertiary, equals(FlexColor.sakuraDarkTertiary));
-      expect(m2DarkNoErrCol.toScheme.tertiaryContainer, equals(FlexColor.sakuraDarkTertiaryContainer));
-      expect(m2DarkNoErrCol.toScheme.error, equals(FlexColor.materialDarkError));
-      expect(m2DarkNoErrCol.toScheme.errorContainer, equals(FlexColor.darkErrorContainer(FlexColor.materialDarkError)));
+      expect(
+        m2DarkNoErrCol.toScheme.primary,
+        equals(FlexColor.sakuraDarkPrimary),
+      );
+      expect(
+        m2DarkNoErrCol.toScheme.primaryContainer,
+        equals(FlexColor.sakuraDarkPrimaryContainer),
+      );
+      expect(
+        m2DarkNoErrCol.toScheme.secondary,
+        equals(FlexColor.sakuraDarkSecondary),
+      );
+      expect(
+        m2DarkNoErrCol.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraDarkSecondaryContainer),
+      );
+      expect(
+        m2DarkNoErrCol.toScheme.tertiary,
+        equals(FlexColor.sakuraDarkTertiary),
+      );
+      expect(
+        m2DarkNoErrCol.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraDarkTertiaryContainer),
+      );
+      expect(
+        m2DarkNoErrCol.toScheme.error,
+        equals(FlexColor.materialDarkError),
+      );
+      expect(
+        m2DarkNoErrCol.toScheme.errorContainer,
+        equals(FlexColor.darkErrorContainer(FlexColor.materialDarkError)),
+      );
     });
     //
     // Here we explicitly turn OFF of using key color based seeding
@@ -222,43 +346,101 @@ void main() {
       colors: schemeLightDefErr,
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
-      keyColors: const FlexKeyColors(useKeyColors: false, useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useKeyColors: false,
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     final FlexColorScheme m2DarkDefErrCol = FlexColorScheme.dark(
       colors: schemeDarkDefErr,
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
-      keyColors: const FlexKeyColors(useKeyColors: false, useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useKeyColors: false,
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     //
     // Here we are using explicit turn OFF of using key color based seeding
     // despite passing in a class for it, but member useKeyColors is FALSE.
     // We do also set no error colors and expect default M2 ones.
-    test('FCS7.002-light-def-err: GIVEN a FlexColorScheme.light with keyColors '
+    test(
+        'FCS7.002-light-def-err: GIVEN a FlexColorScheme.light with keyColors '
         'using explicit NO seed color AND given error colors '
         'EXPECT FlexColorScheme.light.toScheme to use given error colors and '
         'original provided main colors ', () {
-      expect(m2LightDefErrCol.toScheme.primary, equals(FlexColor.sakuraLightPrimary));
-      expect(m2LightDefErrCol.toScheme.primaryContainer, equals(FlexColor.sakuraLightPrimaryContainer));
-      expect(m2LightDefErrCol.toScheme.secondary, equals(FlexColor.sakuraLightSecondary));
-      expect(m2LightDefErrCol.toScheme.secondaryContainer, equals(FlexColor.sakuraLightSecondaryContainer));
-      expect(m2LightDefErrCol.toScheme.tertiary, equals(FlexColor.sakuraLightTertiary));
-      expect(m2LightDefErrCol.toScheme.tertiaryContainer, equals(FlexColor.sakuraLightTertiaryContainer));
-      expect(m2LightDefErrCol.toScheme.error, equals(FlexColor.redLightPrimary));
-      expect(m2LightDefErrCol.toScheme.errorContainer, equals(FlexColor.redLightPrimaryContainer));
+      expect(
+        m2LightDefErrCol.toScheme.primary,
+        equals(FlexColor.sakuraLightPrimary),
+      );
+      expect(
+        m2LightDefErrCol.toScheme.primaryContainer,
+        equals(FlexColor.sakuraLightPrimaryContainer),
+      );
+      expect(
+        m2LightDefErrCol.toScheme.secondary,
+        equals(FlexColor.sakuraLightSecondary),
+      );
+      expect(
+        m2LightDefErrCol.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraLightSecondaryContainer),
+      );
+      expect(
+        m2LightDefErrCol.toScheme.tertiary,
+        equals(FlexColor.sakuraLightTertiary),
+      );
+      expect(
+        m2LightDefErrCol.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraLightTertiaryContainer),
+      );
+      expect(
+        m2LightDefErrCol.toScheme.error,
+        equals(FlexColor.redLightPrimary),
+      );
+      expect(
+        m2LightDefErrCol.toScheme.errorContainer,
+        equals(FlexColor.redLightPrimaryContainer),
+      );
     });
-    test('FCS7.002-dark-def-err: GIVEN a FlexColorScheme.dark with keyColors '
+    test(
+        'FCS7.002-dark-def-err: GIVEN a FlexColorScheme.dark with keyColors '
         'using explicit NO seed color AND given error colors '
         'EXPECT FlexColorScheme.dark.toScheme to use given error colors and '
         'original provided main colors ', () {
-      expect(m2DarkDefErrCol.toScheme.primary, equals(FlexColor.sakuraDarkPrimary));
-      expect(m2DarkDefErrCol.toScheme.primaryContainer, equals(FlexColor.sakuraDarkPrimaryContainer));
-      expect(m2DarkDefErrCol.toScheme.secondary, equals(FlexColor.sakuraDarkSecondary));
-      expect(m2DarkDefErrCol.toScheme.secondaryContainer, equals(FlexColor.sakuraDarkSecondaryContainer));
-      expect(m2DarkDefErrCol.toScheme.tertiary, equals(FlexColor.sakuraDarkTertiary));
-      expect(m2DarkDefErrCol.toScheme.tertiaryContainer, equals(FlexColor.sakuraDarkTertiaryContainer));
-      expect(m2DarkDefErrCol.toScheme.error, equals(FlexColor.redDarkPrimary));
-      expect(m2DarkDefErrCol.toScheme.errorContainer, equals(FlexColor.redDarkPrimaryContainer));
+      expect(
+        m2DarkDefErrCol.toScheme.primary,
+        equals(FlexColor.sakuraDarkPrimary),
+      );
+      expect(
+        m2DarkDefErrCol.toScheme.primaryContainer,
+        equals(FlexColor.sakuraDarkPrimaryContainer),
+      );
+      expect(
+        m2DarkDefErrCol.toScheme.secondary,
+        equals(FlexColor.sakuraDarkSecondary),
+      );
+      expect(
+        m2DarkDefErrCol.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraDarkSecondaryContainer),
+      );
+      expect(
+        m2DarkDefErrCol.toScheme.tertiary,
+        equals(FlexColor.sakuraDarkTertiary),
+      );
+      expect(
+        m2DarkDefErrCol.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraDarkTertiaryContainer),
+      );
+      expect(
+        m2DarkDefErrCol.toScheme.error,
+        equals(FlexColor.redDarkPrimary),
+      );
+      expect(
+        m2DarkDefErrCol.toScheme.errorContainer,
+        equals(FlexColor.redDarkPrimaryContainer),
+      );
     });
     //
     // Setup test for using key colors all, but keeping ALL input colors.
@@ -300,31 +482,81 @@ void main() {
     // despite passing in a class for it, but member useKeyColors is FALSE.
     // We do however request M3 error colors and not M2 ones.
     // Verify the results.
-    test('FCS7.003-light: GIVEN a FlexColorScheme.light with keyColors using '
+    test(
+        'FCS7.003-light: GIVEN a FlexColorScheme.light with keyColors using '
         'ALL INPUT but keeping all inputs as they were defined '
         'EXPECT FlexColorScheme.light.toScheme to use input colors '
         'and M3 error colors by seed algo.', () {
-      expect(m3Light.toScheme.primary, equals(FlexColor.sakuraLightPrimary));
-      expect(m3Light.toScheme.primaryContainer, equals(FlexColor.sakuraLightPrimaryContainer));
-      expect(m3Light.toScheme.secondary, equals(FlexColor.sakuraLightSecondary));
-      expect(m3Light.toScheme.secondaryContainer, equals(FlexColor.sakuraLightSecondaryContainer));
-      expect(m3Light.toScheme.tertiary, equals(FlexColor.sakuraLightTertiary));
-      expect(m3Light.toScheme.tertiaryContainer, equals(FlexColor.sakuraLightTertiaryContainer));
-      expect(m3Light.toScheme.error, equals(FlexColor.material3LightError));
-      expect(m3Light.toScheme.errorContainer, equals(FlexColor.material3LightErrorContainer));
+      expect(
+        m3Light.toScheme.primary,
+        equals(FlexColor.sakuraLightPrimary),
+      );
+      expect(
+        m3Light.toScheme.primaryContainer,
+        equals(FlexColor.sakuraLightPrimaryContainer),
+      );
+      expect(
+        m3Light.toScheme.secondary,
+        equals(FlexColor.sakuraLightSecondary),
+      );
+      expect(
+        m3Light.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraLightSecondaryContainer),
+      );
+      expect(
+        m3Light.toScheme.tertiary,
+        equals(FlexColor.sakuraLightTertiary),
+      );
+      expect(
+        m3Light.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraLightTertiaryContainer),
+      );
+      expect(
+        m3Light.toScheme.error,
+        equals(FlexColor.material3LightError),
+      );
+      expect(
+        m3Light.toScheme.errorContainer,
+        equals(FlexColor.material3LightErrorContainer),
+      );
     });
-    test('FCS7.003-dark: GIVEN a FlexColorScheme.dark with keyColors using '
+    test(
+        'FCS7.003-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'ALL INPUT but keeping all inputs as they were defined '
         'EXPECT FlexColorScheme.dark.toScheme to use input colors '
         'and M3 error colors by seed algo.', () {
-      expect(m3Dark.toScheme.primary, equals(FlexColor.sakuraDarkPrimary));
-      expect(m3Dark.toScheme.primaryContainer, equals(FlexColor.sakuraDarkPrimaryContainer));
-      expect(m3Dark.toScheme.secondary, equals(FlexColor.sakuraDarkSecondary));
-      expect(m3Dark.toScheme.secondaryContainer, equals(FlexColor.sakuraDarkSecondaryContainer));
-      expect(m3Dark.toScheme.tertiary, equals(FlexColor.sakuraDarkTertiary));
-      expect(m3Dark.toScheme.tertiaryContainer, equals(FlexColor.sakuraDarkTertiaryContainer));
-      expect(m3Dark.toScheme.error, equals(FlexColor.material3DarkError));
-      expect(m3Dark.toScheme.errorContainer, equals(FlexColor.material3DarkErrorContainer));
+      expect(
+        m3Dark.toScheme.primary,
+        equals(FlexColor.sakuraDarkPrimary),
+      );
+      expect(
+        m3Dark.toScheme.primaryContainer,
+        equals(FlexColor.sakuraDarkPrimaryContainer),
+      );
+      expect(
+        m3Dark.toScheme.secondary,
+        equals(FlexColor.sakuraDarkSecondary),
+      );
+      expect(
+        m3Dark.toScheme.secondaryContainer,
+        equals(FlexColor.sakuraDarkSecondaryContainer),
+      );
+      expect(
+        m3Dark.toScheme.tertiary,
+        equals(FlexColor.sakuraDarkTertiary),
+      );
+      expect(
+        m3Dark.toScheme.tertiaryContainer,
+        equals(FlexColor.sakuraDarkTertiaryContainer),
+      );
+      expect(
+        m3Dark.toScheme.error,
+        equals(FlexColor.material3DarkError),
+      );
+      expect(
+        m3Dark.toScheme.errorContainer,
+        equals(FlexColor.material3DarkErrorContainer),
+      );
     });
     //--------------------------------------------------------------------------
     // Test Passing ColorScheme as override, with seed colors
@@ -337,15 +569,14 @@ void main() {
       seedColor: m3BaseSeed,
       brightness: Brightness.light,
     ).copyWith(
-      // TODO(rydmike): Monitor change when Flutter goes to MCU 12
-      // These values are off by one now, rounding diff!? Investigate later.
-      onPrimaryContainer: const Color(0xff211047),
-      onPrimaryFixed: const Color(0xff211047),
-      secondary: const Color(0xff625b70),
-      secondaryFixedDim: const Color(0xffccc2db),
-      // Deprecated, we need to override for expected result.
-      surfaceVariant: const Color(0xfffdf7ff),
-    );
+        // TODO(rydmike): Monitor change when Flutter goes to MCU 12
+        // These values are off by one now, rounding diff!? Investigate later.
+        onPrimaryContainer: const Color(0xff211047),
+        onPrimaryFixed: const Color(0xff211047),
+        secondary: const Color(0xff625b70),
+        secondaryFixedDim: const Color(0xffccc2db),
+        // Deprecated, we need to override for expected result.
+        surfaceVariant: const Color(0xfffdf7ff));
     final ColorScheme keySchemeDark = ColorScheme.fromSeed(
       seedColor: m3BaseSeed,
       brightness: Brightness.dark,
@@ -357,7 +588,10 @@ void main() {
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
       variant: FlexSchemeVariant.material,
-      keyColors: const FlexKeyColors(useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     final FlexColorScheme m4PassSchemeDark = FlexColorScheme.dark(
       colors: m3Baseline,
@@ -366,26 +600,35 @@ void main() {
       colorScheme: keySchemeDark.copyWith(primary: m3BaseSeed),
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
-      keyColors: const FlexKeyColors(useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     //
     // A key promise of the above algorithm is that ColorScheme produced by
     // the above setup should be equal to ColorScheme.fromSeed with same color,
     // this verifies that it is.
-    test('FCS7.004-light: GIVEN a FlexColorScheme.light with keyColors using '
+    test(
+        'FCS7.004-light: GIVEN a FlexColorScheme.light with keyColors using '
         'only one seed color from passed in ColorScheme '
         'EXPECT FlexColorScheme.light.toScheme to be equal to '
         'ColorScheme.fromSeed using same color as key.', () {
       expect(
         m4PassSchemeLight.toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(keySchemeLight.toString(minLevel: DiagnosticLevel.fine)),
+        equalsIgnoringHashCodes(
+            keySchemeLight.toString(minLevel: DiagnosticLevel.fine)),
       );
     });
-    test('FCS7.004-dark: GIVEN a FlexColorScheme.dark with keyColors using '
+    test(
+        'FCS7.004-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'only one seed color from passed in ColorScheme '
         'EXPECT FlexColorScheme.dark.toScheme to be equal to '
         'ColorScheme.fromSeed using same color as key.', () {
-      expect(m4PassSchemeDark.toScheme, equals(keySchemeDark));
+      expect(
+        m4PassSchemeDark.toScheme,
+        equals(keySchemeDark),
+      );
     });
     //--------------------------------------------------------------------------
     // Test Passing ColorScheme and override with seed colors
@@ -405,7 +648,10 @@ void main() {
       // Relevant for seed result
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
-      keyColors: const FlexKeyColors(useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     final FlexColorScheme m5OverrideDark = FlexColorScheme.dark(
       colors: m3Baseline,
@@ -424,64 +670,77 @@ void main() {
       // Relevant for seed result
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: 0,
-      keyColors: const FlexKeyColors(useSecondary: false, useTertiary: false),
+      keyColors: const FlexKeyColors(
+        useSecondary: false,
+        useTertiary: false,
+      ),
     );
     //
     // A key promise of the above algorithm is that ColorScheme produced by
     // the above setup should be equal to ColorScheme.fromSeed with same color,
     // this verifies that it is.
-    test('FCS7.005-light: GIVEN a FlexColorScheme.light with keyColors using '
+    test(
+        'FCS7.005-light: GIVEN a FlexColorScheme.light with keyColors using '
         'only one seed color from passed in color '
         'EXPECT FlexColorScheme.light.toScheme to be equal to '
         'ColorScheme.fromSeed using same primary color as override value.', () {
       expect(
         m5OverrideLight.toScheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          ColorScheme.fromSeed(seedColor: FlexColor.sakuraLightPrimary, brightness: Brightness.light)
-              .copyWith(
-                background: const Color(0xfffff8f7),
-                onBackground: const Color(0xff22191b),
-                surfaceVariant: const Color(0xfffff8f7),
-              )
-              .toString(minLevel: DiagnosticLevel.fine),
-        ),
+        equalsIgnoringHashCodes(ColorScheme.fromSeed(
+          seedColor: FlexColor.sakuraLightPrimary,
+          brightness: Brightness.light,
+        )
+            .copyWith(
+              background: const Color(0xfffff8f7),
+              onBackground: const Color(0xff22191b),
+              surfaceVariant: const Color(0xfffff8f7),
+            )
+            .toString(minLevel: DiagnosticLevel.fine)),
       );
     });
-    test('FCS7.005-dark: GIVEN a FlexColorScheme.dark with keyColors using '
+    test(
+        'FCS7.005-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'only one seed color from passed in color '
         'EXPECT FlexColorScheme.dark.toScheme to be equal to '
         'ColorScheme.fromSeed using same primary color as override value.', () {
       expect(
         m5OverrideDark.toScheme,
-        equals(
-          ColorScheme.fromSeed(seedColor: FlexColor.sakuraDarkPrimary, brightness: Brightness.dark).copyWith(
-            background: const Color(0xff181115),
-            onBackground: const Color(0xffeddfe4),
-            surfaceVariant: const Color(0xff181115),
-          ),
-        ),
+        equals(ColorScheme.fromSeed(
+          seedColor: FlexColor.sakuraDarkPrimary,
+          brightness: Brightness.dark,
+        ).copyWith(
+          background: const Color(0xff181115),
+          onBackground: const Color(0xffeddfe4),
+          surfaceVariant: const Color(0xff181115),
+        )),
       );
     });
 
     //
     // Test that scheme based seeded DARK color schemes are based on the
     // light colors when using FlexScheme `scheme`.
-    test('FCS7.007-dark: GIVEN a FlexColorScheme.dark with keyColors using '
+    test(
+        'FCS7.007-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'three seed color from used FlexScheme scheme '
         'EXPECT FlexColorScheme.dark.toScheme to be equal to a '
         'FlexColorScheme.dark made with same scheme based colors '
         'FlexSchemeColor', () {
       expect(
         FlexColorScheme.dark(
-          scheme: FlexScheme.flutterDash,
-          blendLevel: 2,
-          keyColors: const FlexKeyColors(useSecondary: true, useTertiary: true),
-        ).toScheme,
+            scheme: FlexScheme.flutterDash,
+            blendLevel: 2,
+            keyColors: const FlexKeyColors(
+              useSecondary: true,
+              useTertiary: true,
+            )).toScheme,
         equals(
           FlexColorScheme.dark(
             colors: FlexColor.flutterDash.light,
             blendLevel: 2,
-            keyColors: const FlexKeyColors(useSecondary: true, useTertiary: true),
+            keyColors: const FlexKeyColors(
+              useSecondary: true,
+              useTertiary: true,
+            ),
           ).toScheme,
         ),
       );

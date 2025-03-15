@@ -157,7 +157,10 @@ class _ListTileRevealState extends State<ListTileReveal> {
                   child: SizedBox(
                     width: 28,
                     height: 28,
-                    child: Icon(_isOpen ? Icons.info : Icons.info_outlined, size: 18),
+                    child: Icon(
+                      _isOpen ? Icons.info : Icons.info_outlined,
+                      size: 18,
+                    ),
                   ),
                 ),
             ],
@@ -169,16 +172,19 @@ class _ListTileRevealState extends State<ListTileReveal> {
         AnimatedSwitcher(
           duration: widget.duration,
           transitionBuilder: (Widget child, Animation<double> animation) {
-            return SizeTransition(sizeFactor: animation, axisAlignment: _isOpen ? 1 : -1, child: child);
+            return SizeTransition(
+              sizeFactor: animation,
+              axisAlignment: _isOpen ? 1 : -1,
+              child: child,
+            );
           },
-          child:
-              (_isOpen && widget.subtitleReveal != null && widget.enabled)
-                  ? ListTile(
-                    dense: widget.revealDense ?? true,
-                    subtitle: widget.subtitleReveal,
-                    onTap: widget.enabled ? _handleTap : null,
-                  )
-                  : const SizedBox.shrink(),
+          child: (_isOpen && widget.subtitleReveal != null && widget.enabled)
+              ? ListTile(
+                  dense: widget.revealDense ?? true,
+                  subtitle: widget.subtitleReveal,
+                  onTap: widget.enabled ? _handleTap : null,
+                )
+              : const SizedBox.shrink(),
         ),
       ],
     );

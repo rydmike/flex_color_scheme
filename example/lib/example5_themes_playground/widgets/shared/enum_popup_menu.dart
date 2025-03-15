@@ -126,16 +126,20 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelMedium!;
 
     final String defaultSelectionValuePopupLabel =
-        (enabled ? null : defaultDisabledLabel) ?? defaultLabel ?? _popupItemLabel(null, useMaterial3);
+        (enabled ? null : defaultDisabledLabel) ??
+            defaultLabel ??
+            _popupItemLabel(null, useMaterial3);
 
-    final String selectedPopupLabel =
-        enabled && value != null ? _popupItemLabel(value, useMaterial3) : defaultSelectionValuePopupLabel;
+    final String selectedPopupLabel = enabled && value != null
+        ? _popupItemLabel(value, useMaterial3)
+        : defaultSelectionValuePopupLabel;
 
-    final IconThemeData selectedIconTheme = theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
-    final IconThemeData unSelectedIconTheme = theme.iconTheme.copyWith(color: scheme.primary);
-    final IconThemeData unSelectedTrailingIconTheme = theme.iconTheme.copyWith(
-      color: scheme.onSurface.withValues(alpha: enabled ? 1 : 0.5),
-    );
+    final IconThemeData selectedIconTheme =
+        theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
+    final IconThemeData unSelectedIconTheme =
+        theme.iconTheme.copyWith(color: scheme.primary);
+    final IconThemeData unSelectedTrailingIconTheme = theme.iconTheme
+        .copyWith(color: scheme.onSurface.withValues(alpha: enabled ? 1 : 0.5));
 
     final List<Widget> iconWidgets = _popupIcons(values);
 
@@ -151,40 +155,41 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         onChanged?.call(index == 0 ? null : enumFromIndex(index - 1));
       },
       enabled: enabled,
-      itemBuilder:
-          (BuildContext context) => <PopupMenuItem<int>>[
-            for (int i = 0; i <= values.length; i++)
-              PopupMenuItem<int>(
-                value: i,
-                child: ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  leading:
-                      (value?.index ?? -1) + 1 == i
-                          ? IconTheme(
-                            data: selectedIconTheme,
-                            child: ColorSchemeBox(
-                              backgroundColor: scheme.primary,
-                              borderColor: Colors.transparent,
-                              child: iconWidgets[i],
-                            ),
-                          )
-                          : IconTheme(
-                            data: unSelectedIconTheme,
-                            child: ColorSchemeBox(
-                              backgroundColor: Colors.transparent,
-                              borderColor: scheme.primary,
-                              child: iconWidgets[i],
-                            ),
-                          ),
-                  title:
-                      i == 0
-                          // If first position use default label.
-                          ? Text(_popupItemLabel(null, useMaterial3, false), style: txtStyle)
-                          : Text(_popupItemLabel(enumFromIndex(i - 1), useMaterial3, false), style: txtStyle),
-                ),
-              ),
-          ],
+      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+        for (int i = 0; i <= values.length; i++)
+          PopupMenuItem<int>(
+            value: i,
+            child: ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              leading: (value?.index ?? -1) + 1 == i
+                  ? IconTheme(
+                      data: selectedIconTheme,
+                      child: ColorSchemeBox(
+                        backgroundColor: scheme.primary,
+                        borderColor: Colors.transparent,
+                        child: iconWidgets[i],
+                      ),
+                    )
+                  : IconTheme(
+                      data: unSelectedIconTheme,
+                      child: ColorSchemeBox(
+                        backgroundColor: Colors.transparent,
+                        borderColor: scheme.primary,
+                        child: iconWidgets[i],
+                      ),
+                    ),
+              title: i == 0
+                  // If first position use default label.
+                  ? Text(_popupItemLabel(null, useMaterial3, false),
+                      style: txtStyle)
+                  : Text(
+                      _popupItemLabel(
+                          enumFromIndex(i - 1), useMaterial3, false),
+                      style: txtStyle),
+            ),
+          )
+      ],
       child: ListTileReveal(
         dense: dense,
         revealDense: revealDense,
@@ -193,31 +198,34 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         title: title,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[if (subtitle != null) subtitle!, Text(selectedPopupLabel)],
+          children: <Widget>[
+            if (subtitle != null) subtitle!,
+            Text(selectedPopupLabel),
+          ],
         ),
         subtitleReveal: subtitleReveal,
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
-          child:
-              !enabled || value == null
-                  ? IconTheme(
-                    data: unSelectedTrailingIconTheme,
-                    child: ColorSchemeBox(
-                      foregroundColor: scheme.onSurface,
-                      backgroundColor: scheme.surface,
-                      borderColor: scheme.outline.withValues(alpha: enabled ? 1 : 0.5),
-                      child: iconWidgets[0],
-                    ),
-                  )
-                  : IconTheme(
-                    data: selectedIconTheme,
-                    child: ColorSchemeBox(
-                      foregroundColor: scheme.onPrimary,
-                      backgroundColor: scheme.primary,
-                      borderColor: Colors.transparent,
-                      child: iconWidgets[(value?.index ?? 0) + 1],
-                    ),
+          child: !enabled || value == null
+              ? IconTheme(
+                  data: unSelectedTrailingIconTheme,
+                  child: ColorSchemeBox(
+                    foregroundColor: scheme.onSurface,
+                    backgroundColor: scheme.surface,
+                    borderColor:
+                        scheme.outline.withValues(alpha: enabled ? 1 : 0.5),
+                    child: iconWidgets[0],
                   ),
+                )
+              : IconTheme(
+                  data: selectedIconTheme,
+                  child: ColorSchemeBox(
+                    foregroundColor: scheme.onPrimary,
+                    backgroundColor: scheme.primary,
+                    borderColor: Colors.transparent,
+                    child: iconWidgets[(value?.index ?? 0) + 1],
+                  ),
+                ),
         ),
       ),
     );
@@ -233,7 +241,8 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   /// we return a shorter `label`, if the enum defines one, or
   /// just the `name`. Typically the short form is used in the
   /// popup menu items and the long form in the ListTile subtitle.
-  String _popupItemLabel(final T? value, final bool useMaterial3, [final bool useLongLabel = true]) {
+  String _popupItemLabel(final T? value, final bool useMaterial3,
+      [final bool useLongLabel = true]) {
     if (T == FlexTabBarStyle) {
       switch (value) {
         case FlexTabBarStyle.forAppBar:
@@ -270,8 +279,8 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
                   ? 'Default uses the "flutterDefault" option in M3 mode'
                   : 'Default uses the "forAppBar" option in M2 mode'
               : useMaterial3
-              ? 'Default (flutterDefault)'
-              : 'Default (forAppBar)';
+                  ? 'Default (flutterDefault)'
+                  : 'Default (forAppBar)';
       }
     }
     if (T == TabBarIndicatorSize) {
@@ -445,11 +454,13 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     }
     if (T == SplashTypeEnum) {
       final SplashTypeEnum? castValue = value as SplashTypeEnum?;
-      return castValue?.label ?? 'Default (${SplashTypeEnum.defaultSplash.label})';
+      return castValue?.label ??
+          'Default (${SplashTypeEnum.defaultSplash.label})';
     }
     if (T == VisualDensityEnum) {
       final VisualDensityEnum? castValue = value as VisualDensityEnum?;
-      return castValue?.label ?? 'Default (${VisualDensityEnum.platform.label})';
+      return castValue?.label ??
+          'Default (${VisualDensityEnum.platform.label})';
     }
     // For an unknown enum type, return its name as a default label.
     return value?.name ?? 'Default';
@@ -462,121 +473,286 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   List<Widget> _popupIcons(List<T> values) {
     if (T == FlexTabBarStyle) {
       return const <Widget>[
-        Tooltip(message: 'Default', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'To use in AppBar', child: Icon(Icons.tab)),
-        Tooltip(message: 'To use on background color', child: Icon(Icons.tab_unselected)),
-        Tooltip(message: 'Flutter SDK default', child: Icon(Icons.web_asset_outlined)),
-        Tooltip(message: 'Universal style', child: Icon(Icons.crop_3_2)),
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'To use in AppBar',
+          child: Icon(Icons.tab),
+        ),
+        Tooltip(
+          message: 'To use on background color',
+          child: Icon(Icons.tab_unselected),
+        ),
+        Tooltip(
+          message: 'Flutter SDK default',
+          child: Icon(Icons.web_asset_outlined),
+        ),
+        Tooltip(
+          message: 'Universal style',
+          child: Icon(Icons.crop_3_2),
+        ),
       ];
     }
     if (T == TabBarIndicatorSize) {
       return const <Widget>[
-        Tooltip(message: 'Default', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'Width equals label', child: Icon(Icons.border_bottom_outlined)),
-        Tooltip(message: 'Width equals entire tab', child: Icon(Icons.format_underlined_outlined)),
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Width equals label',
+          child: Icon(Icons.border_bottom_outlined),
+        ),
+        Tooltip(
+          message: 'Width equals entire tab',
+          child: Icon(Icons.format_underlined_outlined),
+        ),
       ];
     }
     if (T == TabIndicatorAnimation) {
       return const <Widget>[
-        Tooltip(message: 'Default', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'Linear move to next tab', child: Icon(Icons.horizontal_rule_outlined)),
-        Tooltip(message: 'Elastic stretch to next tab', child: Icon(Icons.linear_scale_outlined)),
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Linear move to next tab',
+          child: Icon(Icons.horizontal_rule_outlined),
+        ),
+        Tooltip(
+          message: 'Elastic stretch to next tab',
+          child: Icon(Icons.linear_scale_outlined),
+        ),
       ];
     }
     if (T == FlexSliderIndicatorType) {
       return const <Widget>[
-        Tooltip(message: 'Default indicator', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'Rounded rectangular indicator', child: Icon(Icons.assistant)),
-        Tooltip(message: 'Inverted water drop', child: Icon(Icons.pin_drop)),
+        Tooltip(
+          message: 'Default indicator',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Rounded rectangular indicator',
+          child: Icon(Icons.assistant),
+        ),
+        Tooltip(
+          message: 'Inverted water drop',
+          child: Icon(Icons.pin_drop),
+        ),
       ];
     }
     if (T == FlexFixedColorStyle) {
       return const <Widget>[
-        Tooltip(message: 'Default (computed)', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'Computed (FCS)', child: Icon(Icons.gradient_outlined)),
-        Tooltip(message: 'Seeded (FSS)', child: Icon(Icons.lens_blur_outlined)),
-        Tooltip(message: 'Seeded higher contrast (FSS)', child: Icon(Icons.contrast_outlined)),
+        Tooltip(
+          message: 'Default (computed)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Computed (FCS)',
+          child: Icon(Icons.gradient_outlined),
+        ),
+        Tooltip(
+          message: 'Seeded (FSS)',
+          child: Icon(Icons.lens_blur_outlined),
+        ),
+        Tooltip(
+          message: 'Seeded higher contrast (FSS)',
+          child: Icon(Icons.contrast_outlined),
+        ),
       ];
     }
     //
     if (T == ShowValueIndicator) {
       return const <Widget>[
-        Tooltip(message: 'Default (discrete)', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'Discrete', child: Icon(Icons.linear_scale)),
-        Tooltip(message: 'Continuous', child: Icon(Icons.horizontal_rule)),
-        Tooltip(message: 'All', child: Icon(Icons.done_outline)),
-        Tooltip(message: 'Never', child: Icon(Icons.block)),
+        Tooltip(
+          message: 'Default (discrete)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'Discrete',
+          child: Icon(Icons.linear_scale),
+        ),
+        Tooltip(
+          message: 'Continuous',
+          child: Icon(Icons.horizontal_rule),
+        ),
+        Tooltip(
+          message: 'All',
+          child: Icon(Icons.done_outline),
+        ),
+        Tooltip(
+          message: 'Never',
+          child: Icon(Icons.block),
+        ),
       ];
     }
     if (T == TabAlignment) {
       return const <Widget>[
-        Tooltip(message: 'Default', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'start', child: Icon(Icons.start_outlined)),
-        Tooltip(message: 'startOffset', child: Icon(Icons.space_bar_outlined)),
-        Tooltip(message: 'fill', child: Icon(Icons.view_column_outlined)),
-        Tooltip(message: 'center', child: Icon(Icons.horizontal_distribute_outlined)),
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'start',
+          child: Icon(Icons.start_outlined),
+        ),
+        Tooltip(
+          message: 'startOffset',
+          child: Icon(Icons.space_bar_outlined),
+        ),
+        Tooltip(
+          message: 'fill',
+          child: Icon(Icons.view_column_outlined),
+        ),
+        Tooltip(
+          message: 'center',
+          child: Icon(Icons.horizontal_distribute_outlined),
+        ),
       ];
     }
     if (T == ListTileStyle) {
       return const <Widget>[
-        Tooltip(message: 'Default (usage based)', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'list', child: Icon(Icons.format_list_bulleted_outlined)),
-        Tooltip(message: 'drawer', child: Icon(Icons.list_outlined)),
+        Tooltip(
+          message: 'Default (usage based)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'list',
+          child: Icon(Icons.format_list_bulleted_outlined),
+        ),
+        Tooltip(
+          message: 'drawer',
+          child: Icon(Icons.list_outlined),
+        ),
       ];
     }
     if (T == ListTileTitleAlignment) {
       return const <Widget>[
-        Tooltip(message: 'Default', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'threeLine', child: Icon(Icons.segment_outlined)),
-        Tooltip(message: 'titleHeight', child: Icon(Icons.align_vertical_top_outlined)),
-        Tooltip(message: 'top', child: Icon(Icons.vertical_align_top_outlined)),
-        Tooltip(message: 'center', child: Icon(Icons.vertical_align_center_outlined)),
-        Tooltip(message: 'bottom', child: Icon(Icons.vertical_align_bottom_outlined)),
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'threeLine',
+          child: Icon(Icons.segment_outlined),
+        ),
+        Tooltip(
+          message: 'titleHeight',
+          child: Icon(Icons.align_vertical_top_outlined),
+        ),
+        Tooltip(
+          message: 'top',
+          child: Icon(Icons.vertical_align_top_outlined),
+        ),
+        Tooltip(
+          message: 'center',
+          child: Icon(Icons.vertical_align_center_outlined),
+        ),
+        Tooltip(
+          message: 'bottom',
+          child: Icon(Icons.vertical_align_bottom_outlined),
+        ),
       ];
     }
     if (T == ListTileControlAffinity) {
       return const <Widget>[
-        Tooltip(message: 'Default (Platform standard)', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'leading', child: Icon(Icons.list_outlined)),
-        Tooltip(message: 'trailing', child: Icon(Icons.toc_outlined)),
-        Tooltip(message: 'platform', child: Icon(Icons.dns_outlined)),
+        Tooltip(
+          message: 'Default (Platform standard)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'leading',
+          child: Icon(Icons.list_outlined),
+        ),
+        Tooltip(
+          message: 'trailing',
+          child: Icon(Icons.toc_outlined),
+        ),
+        Tooltip(
+          message: 'platform',
+          child: Icon(Icons.dns_outlined),
+        ),
       ];
     }
     if (T == MaterialTapTargetSize) {
       return const <Widget>[
-        Tooltip(message: 'Default', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'padded', child: Icon(Icons.settings_overscan_outlined)),
-        Tooltip(message: 'shrinkWrap', child: Icon(Icons.fit_screen_outlined)),
+        Tooltip(
+          message: 'Default',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'padded',
+          child: Icon(Icons.settings_overscan_outlined),
+        ),
+        Tooltip(
+          message: 'shrinkWrap',
+          child: Icon(Icons.fit_screen_outlined),
+        ),
       ];
     }
     if (T == Clip) {
       return const <Widget>[
-        Tooltip(message: 'Default (None, no clip at all)', child: Icon(Icons.texture_outlined)),
-        Tooltip(message: 'None, no clip at all', child: Icon(Icons.settings_overscan_outlined)),
-        Tooltip(message: 'Clip, no anti-aliasing.', child: Icon(Icons.border_clear_outlined)),
-        Tooltip(message: 'Clip with anti-aliasing', child: Icon(Icons.border_style_outlined)),
-        Tooltip(message: 'Clip with anti-aliasing and saveLayer', child: Icon(Icons.rounded_corner_outlined)),
+        Tooltip(
+          message: 'Default (None, no clip at all)',
+          child: Icon(Icons.texture_outlined),
+        ),
+        Tooltip(
+          message: 'None, no clip at all',
+          child: Icon(Icons.settings_overscan_outlined),
+        ),
+        Tooltip(
+          message: 'Clip, no anti-aliasing.',
+          child: Icon(Icons.border_clear_outlined),
+        ),
+        Tooltip(
+          message: 'Clip with anti-aliasing',
+          child: Icon(Icons.border_style_outlined),
+        ),
+        Tooltip(
+          message: 'Clip with anti-aliasing and saveLayer',
+          child: Icon(Icons.rounded_corner_outlined),
+        ),
       ];
     }
     if (T == AdaptiveResponse) {
       return <Widget>[
-        Tooltip(message: 'Default (${AdaptiveResponse.off.label})', child: const Icon(Icons.texture_outlined)),
+        Tooltip(
+          message: 'Default (${AdaptiveResponse.off.label})',
+          child: const Icon(Icons.texture_outlined),
+        ),
         for (final AdaptiveResponse enumValue in AdaptiveResponse.values)
-          Tooltip(message: enumValue.label, child: Icon(enumValue.icon)),
+          Tooltip(
+            message: enumValue.label,
+            child: Icon(enumValue.icon),
+          ),
       ];
     }
     if (T == SplashTypeEnum) {
       return <Widget>[
-        Tooltip(message: 'Default (${SplashTypeEnum.defaultSplash.label})', child: const Icon(Icons.texture_outlined)),
+        Tooltip(
+          message: 'Default (${SplashTypeEnum.defaultSplash.label})',
+          child: const Icon(Icons.texture_outlined),
+        ),
         for (final SplashTypeEnum enumValue in SplashTypeEnum.values)
-          Tooltip(message: enumValue.label, child: Icon(enumValue.icon)),
+          Tooltip(
+            message: enumValue.label,
+            child: Icon(enumValue.icon),
+          ),
       ];
     }
     if (T == VisualDensityEnum) {
       return <Widget>[
-        Tooltip(message: 'Default (${VisualDensityEnum.platform.label})', child: const Icon(Icons.texture_outlined)),
+        Tooltip(
+          message: 'Default (${VisualDensityEnum.platform.label})',
+          child: const Icon(Icons.texture_outlined),
+        ),
         for (final VisualDensityEnum enumValue in VisualDensityEnum.values)
-          Tooltip(message: enumValue.label, child: Icon(enumValue.icon)),
+          Tooltip(
+            message: enumValue.label,
+            child: Icon(enumValue.icon),
+          ),
       ];
     }
 
@@ -584,8 +760,15 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     // This is just here so we can see that we have to add the
     // correct icons for the enum type we are using.
     return <Widget>[
-      const Tooltip(message: 'Default', child: Icon(Icons.texture_outlined)),
-      for (final T value in values) Tooltip(message: value.toString(), child: const Icon(Icons.texture_outlined)),
+      const Tooltip(
+        message: 'Default',
+        child: Icon(Icons.texture_outlined),
+      ),
+      for (final T value in values)
+        Tooltip(
+          message: value.toString(),
+          child: const Icon(Icons.texture_outlined),
+        ),
     ];
   }
 }

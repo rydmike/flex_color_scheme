@@ -41,42 +41,56 @@ void main() {
       onError: Colors.black,
     );
     // Identity and quality tests
-    test('FSOC1.01a: GIVEN the same FlexSchemeOnColor object '
+    test(
+        'FSOC1.01a: GIVEN the same FlexSchemeOnColor object '
         'EXPECT them to be equal', () {
       expect(m1, equals(m1));
     });
-    test('FSOC1.01b: GIVEN the same FlexSchemeOnColor object '
+    test(
+        'FSOC1.01b: GIVEN the same FlexSchemeOnColor object '
         'EXPECT them to have identity', () {
       expect(identical(m1, m1), true);
     });
-    test('FSOC1.01c: GIVEN two equal FlexSchemeOnColors objects '
+    test(
+        'FSOC1.01c: GIVEN two equal FlexSchemeOnColors objects '
         'EXPECT them to be equal', () {
       expect(m1, equals(m2));
     });
-    test('FSOC1.01d: GIVEN two equal FlexSchemeOnColors objects '
+    test(
+        'FSOC1.01d: GIVEN two equal FlexSchemeOnColors objects '
         'EXPECT them to have identity', () {
       expect(identical(m1, m2), true);
     });
-    test('FSOC1.01e: GIVEN two equal FlexSchemeOnColors objects '
+    test(
+        'FSOC1.01e: GIVEN two equal FlexSchemeOnColors objects '
         'EXPECT them to have equality with operator', () {
       expect(m1 == m2, true);
     });
-    test('FSOC1.02a: GIVEN none equal FlexSchemeOnColors objects '
+    test(
+        'FSOC1.02a: GIVEN none equal FlexSchemeOnColors objects '
         'EXPECT them to be unequal', () {
       expect(m1, isNot(m3));
     });
-    test('FSOC1.02b: GIVEN none equal FlexSchemeOnColors objects '
+    test(
+        'FSOC1.02b: GIVEN none equal FlexSchemeOnColors objects '
         'EXPECT them to be unequal with operator', () {
       expect(m1 != m3, true);
     });
-    test('FSOC1.03a: GIVEN a FlexSchemeOnColors object EXPECT it to be '
+    test(
+        'FSOC1.03a: GIVEN a FlexSchemeOnColors object EXPECT it to be '
         'equal to an unequal object when made equal with copyWith.', () {
       expect(
-        m4.copyWith(onPrimary: Colors.white, onSecondary: Colors.white, onSurface: Colors.black, onError: Colors.white),
+        m4.copyWith(
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onError: Colors.white,
+        ),
         m1,
       );
     });
-    test('FSOC1.03b: GIVEN a FlexSchemeOnColors object EXPECT it to be '
+    test(
+        'FSOC1.03b: GIVEN a FlexSchemeOnColors object EXPECT it to be '
         'unchanged after and empty copyWith.', () {
       expect(m4.copyWith(), m4);
     });
@@ -88,7 +102,8 @@ void main() {
       error: FlexColor.materialLightError,
       useMaterial3: false,
     );
-    test('FSOC1.04: GIVEN a FlexSchemeOnColors created from default Material '
+    test(
+        'FSOC1.04: GIVEN a FlexSchemeOnColors created from default Material '
         'light surface colors EXPECT correctly computed "onColors".', () {
       expect(
         m5,
@@ -108,7 +123,8 @@ void main() {
       );
     });
 
-    test('FSOC1.04-all: GIVEN a FlexSchemeOnColors created from default '
+    test(
+        'FSOC1.04-all: GIVEN a FlexSchemeOnColors created from default '
         'Material light ALL colors '
         'EXPECT correctly computed "onColors".', () {
       expect(
@@ -165,7 +181,8 @@ void main() {
       onErrorContainer: const Color(0xFFAA346A),
     );
 
-    test('FSOC1.05a: GIVEN a FlexSchemeOnColors created from default Material '
+    test(
+        'FSOC1.05a: GIVEN a FlexSchemeOnColors created from default Material '
         'surface colors with OnColors specified EXPECT provided onColors to '
         'be used.', () {
       expect(
@@ -208,7 +225,8 @@ void main() {
       useMaterial3: false,
     );
 
-    test('FSOC1.05b: GIVEN a FlexSchemeOnColors created from default Material '
+    test(
+        'FSOC1.05b: GIVEN a FlexSchemeOnColors created from default Material '
         'surface colors with OnColors specified EXPECT provided onColors.', () {
       expect(
         m6b,
@@ -242,7 +260,8 @@ void main() {
       useMaterial3: false,
     );
 
-    test('FSOC1.05c: GIVEN a FlexSchemeOnColors created from default Material '
+    test(
+        'FSOC1.05c: GIVEN a FlexSchemeOnColors created from default Material '
         'EXPECT correct contrast onColors.', () {
       expect(
         m7,
@@ -276,7 +295,8 @@ void main() {
       useMaterial3: false,
     );
 
-    test('FSOC1.05d: GIVEN a FlexSchemeOnColors created from given colors '
+    test(
+        'FSOC1.05d: GIVEN a FlexSchemeOnColors created from given colors '
         'EXPECT correct contrast onColors.', () {
       expect(
         m7a,
@@ -302,20 +322,21 @@ void main() {
     // toString and hashcode.
     //**************************************************************************
 
-    test('FSOC1.06: Test toString implemented via debugFillProperties '
+    test(
+        'FSOC1.06: Test toString implemented via debugFillProperties '
         'EXPECT exact print string.', () {
       expect(
-        m7a.toString(),
-        //
-        equalsIgnoringHashCodes(
-          // ignore: lines_longer_than_80_chars
-          'FlexSchemeOnColors#0b4c7(onPrimary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onPrimaryContainer: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onSecondary: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSecondaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onTertiary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onTertiaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSurface: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSurfaceVariant: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSurfaceDim: null, onSurfaceBright: null, onSurfaceContainerLowest: null, onSurfaceContainerLow: null, onSurfaceContainer: null, onSurfaceContainerHigh: null, onSurfaceContainerHighest: null, onInverseSurface: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onError: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onErrorContainer: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB))',
-        ),
-      );
+          m7a.toString(),
+          //
+          equalsIgnoringHashCodes(
+              // ignore: lines_longer_than_80_chars
+              'FlexSchemeOnColors#0b4c7(onPrimary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onPrimaryContainer: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onSecondary: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSecondaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onTertiary: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onTertiaryContainer: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSurface: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSurfaceVariant: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onSurfaceDim: null, onSurfaceBright: null, onSurfaceContainerLowest: null, onSurfaceContainerLow: null, onSurfaceContainer: null, onSurfaceContainerHigh: null, onSurfaceContainerHighest: null, onInverseSurface: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), onError: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), onErrorContainer: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB))'));
     });
-    test('FSOC1.07: Test toStringShort implemented via debugFillProperties '
+    test(
+        'FSOC1.07: Test toStringShort implemented via debugFillProperties '
         'EXPECT exact short printout string.', () {
-      expect(m7a.toStringShort(), equalsIgnoringHashCodes('FlexSchemeOnColors#00000'));
+      expect(m7a.toStringShort(),
+          equalsIgnoringHashCodes('FlexSchemeOnColors#00000'));
     });
     test('FSOC1.08a: Test hashCode has value.', () {
       expect(m7a.hashCode, isNotNull);

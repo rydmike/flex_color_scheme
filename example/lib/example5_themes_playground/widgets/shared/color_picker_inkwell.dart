@@ -52,107 +52,178 @@ class ColorPickerInkWellDialog extends StatelessWidget {
   final Widget child;
 
   // Custom colors to use in Light mode
-  static final Map<ColorSwatch<Object>, String> _lightSwatches = <ColorSwatch<Object>, String>{
+  static final Map<ColorSwatch<Object>, String> _lightSwatches =
+      <ColorSwatch<Object>, String>{
     // COLORS: Purple and blue like colors
-    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimary): 'Purple M2 guide Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryContainer): 'Purple M2 guide Sec',
-    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryHc): 'Blue Flutter HiC Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryContainerHc): 'Blue Flutter HiC Sec',
-    ColorTools.createPrimarySwatch(FlexColor.blueWhaleLightPrimary): 'Blue whale Prim',
-    ColorTools.createPrimarySwatch(FlexColor.outerSpaceLightPrimary): 'Outer space Prim',
-    ColorTools.createPrimarySwatch(FlexColor.blumineBlueLightPrimary): 'Blumine Prim',
-    ColorTools.createPrimarySwatch(FlexColor.hippieBlueLightPrimary): 'Hippie blue Prim',
-    ColorTools.createPrimarySwatch(FlexColor.aquaBlueLightPrimary): 'Aqua blue Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightPrimary): 'Brand blue FB Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightPrimaryContainer): 'Brand blue IG PrimVar',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightSecondary): 'Brand blue TW Sec',
-    ColorTools.createPrimarySwatch(FlexColor.ebonyClayLightPrimary): 'Ebony clay Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightTertiary): 'Brand blue G Tert',
-    ColorTools.createPrimarySwatch(FlexColor.deepBlueLightPrimary): 'Deep blue sea Prim',
-    ColorTools.createPrimarySwatch(FlexColor.deepBlueLightSecondary): 'Deep blue sea Sec',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimary):
+        'Purple M2 guide Prim',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryContainer):
+        'Purple M2 guide Sec',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryHc):
+        'Blue Flutter HiC Prim',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightPrimaryContainerHc):
+        'Blue Flutter HiC Sec',
+    ColorTools.createPrimarySwatch(FlexColor.blueWhaleLightPrimary):
+        'Blue whale Prim',
+    ColorTools.createPrimarySwatch(FlexColor.outerSpaceLightPrimary):
+        'Outer space Prim',
+    ColorTools.createPrimarySwatch(FlexColor.blumineBlueLightPrimary):
+        'Blumine Prim',
+    ColorTools.createPrimarySwatch(FlexColor.hippieBlueLightPrimary):
+        'Hippie blue Prim',
+    ColorTools.createPrimarySwatch(FlexColor.aquaBlueLightPrimary):
+        'Aqua blue Prim',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightPrimary):
+        'Brand blue FB Prim',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightPrimaryContainer):
+        'Brand blue IG PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightSecondary):
+        'Brand blue TW Sec',
+    ColorTools.createPrimarySwatch(FlexColor.ebonyClayLightPrimary):
+        'Ebony clay Prim',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueLightTertiary):
+        'Brand blue G Tert',
+    ColorTools.createPrimarySwatch(FlexColor.deepBlueLightPrimary):
+        'Deep blue sea Prim',
+    ColorTools.createPrimarySwatch(FlexColor.deepBlueLightSecondary):
+        'Deep blue sea Sec',
     // COLORS: Green like
     ColorTools.createPrimarySwatch(FlexColor.jungleLightPrimary): 'Jungle Prim',
     ColorTools.createPrimarySwatch(FlexColor.moneyLightPrimary): 'Money Prim',
     ColorTools.createPrimarySwatch(FlexColor.moneyLightSecondary): 'Money Sec',
-    ColorTools.createPrimarySwatch(FlexColor.mallardGreenLightPrimary): 'Mallard Prim',
-    ColorTools.createPrimarySwatch(FlexColor.mallardGreenLightPrimaryContainer): 'Mallard PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.mallardGreenLightPrimary):
+        'Mallard Prim',
+    ColorTools.createPrimarySwatch(FlexColor.mallardGreenLightPrimaryContainer):
+        'Mallard PrimVar',
     ColorTools.createPrimarySwatch(FlexColor.wasabiLightPrimary): 'Wasabi Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialLightTertiary): 'Teal M2 guide Tert',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightTertiary):
+        'Teal M2 guide Tert',
     // COLORS: Red like
-    ColorTools.createPrimarySwatch(FlexColor.materialLightError): 'Error M2 guide',
-    ColorTools.createPrimarySwatch(FlexColor.materialLightErrorHc): 'Error Flutter HiC',
-    ColorTools.createPrimarySwatch(FlexColor.redWineLightPrimary): 'Red Wine Prim',
-    ColorTools.createPrimarySwatch(FlexColor.redWineLightSecondary): 'Red Wine Sec',
-    ColorTools.createPrimarySwatch(FlexColor.rosewoodLightPrimary): 'Rosewood Prim',
-    ColorTools.createPrimarySwatch(FlexColor.rosewoodLightPrimaryContainer): 'Rosewood PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightError):
+        'Error M2 guide',
+    ColorTools.createPrimarySwatch(FlexColor.materialLightErrorHc):
+        'Error Flutter HiC',
+    ColorTools.createPrimarySwatch(FlexColor.redWineLightPrimary):
+        'Red Wine Prim',
+    ColorTools.createPrimarySwatch(FlexColor.redWineLightSecondary):
+        'Red Wine Sec',
+    ColorTools.createPrimarySwatch(FlexColor.rosewoodLightPrimary):
+        'Rosewood Prim',
+    ColorTools.createPrimarySwatch(FlexColor.rosewoodLightPrimaryContainer):
+        'Rosewood PrimVar',
     ColorTools.createPrimarySwatch(FlexColor.sakuraLightPrimary): 'Sakura Prim',
-    ColorTools.createPrimarySwatch(FlexColor.sakuraLightPrimaryContainer): 'Sakura PrimVar',
-    ColorTools.createPrimarySwatch(FlexColor.sakuraLightSecondary): 'Sakura Sec',
-    ColorTools.createPrimarySwatch(FlexColor.mandyRedLightPrimary): 'Mandy red Prim',
-    ColorTools.createPrimarySwatch(FlexColor.sanJuanBlueLightSecondary): 'SanJuan Sec',
+    ColorTools.createPrimarySwatch(FlexColor.sakuraLightPrimaryContainer):
+        'Sakura PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.sakuraLightSecondary):
+        'Sakura Sec',
+    ColorTools.createPrimarySwatch(FlexColor.mandyRedLightPrimary):
+        'Mandy red Prim',
+    ColorTools.createPrimarySwatch(FlexColor.sanJuanBlueLightSecondary):
+        'SanJuan Sec',
     ColorTools.createPrimarySwatch(FlexColor.damaskLightPrimary): 'Damask Prim',
-    ColorTools.createPrimarySwatch(FlexColor.damaskLightPrimaryContainer): 'Damask PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.damaskLightPrimaryContainer):
+        'Damask PrimVar',
     // COLORS: Orange like
     ColorTools.createPrimarySwatch(FlexColor.goldLightPrimary): 'Gold Prim',
-    ColorTools.createPrimarySwatch(FlexColor.bahamaBlueLightSecondary): 'Bahama Sec',
+    ColorTools.createPrimarySwatch(FlexColor.bahamaBlueLightSecondary):
+        'Bahama Sec',
     ColorTools.createPrimarySwatch(FlexColor.sharkLightSecondary): 'Shark Sec',
     ColorTools.createPrimarySwatch(FlexColor.sharkLightTertiary): 'Shark Tert',
-    ColorTools.createPrimarySwatch(FlexColor.outerSpaceLightSecondary): 'Outer space Sec',
-    ColorTools.createPrimarySwatch(FlexColor.blueWhaleLightSecondary): 'Blue whale Sec',
-    ColorTools.createPrimarySwatch(FlexColor.bigStoneLightSecondary): 'Big stone Sec',
-    ColorTools.createPrimarySwatch(FlexColor.blumineBlueLightSecondary): 'Blumine Sec',
+    ColorTools.createPrimarySwatch(FlexColor.outerSpaceLightSecondary):
+        'Outer space Sec',
+    ColorTools.createPrimarySwatch(FlexColor.blueWhaleLightSecondary):
+        'Blue whale Sec',
+    ColorTools.createPrimarySwatch(FlexColor.bigStoneLightSecondary):
+        'Big stone Sec',
+    ColorTools.createPrimarySwatch(FlexColor.blumineBlueLightSecondary):
+        'Blumine Sec',
   };
 
   // Custom colors to use in Dark mode
-  static final Map<ColorSwatch<Object>, String> _darkSwatches = <ColorSwatch<Object>, String>{
+  static final Map<ColorSwatch<Object>, String> _darkSwatches =
+      <ColorSwatch<Object>, String>{
     // COLORS: Purple and blue like colors
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimary): 'Purple M2 guide Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimaryContainer): 'Purple M2 guide Sec',
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimaryHc): 'Blue Flutter HiC Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimaryContainerHc): 'Blue Flutter HiC Sec',
-    ColorTools.createPrimarySwatch(FlexColor.blueWhaleDarkPrimary): 'Blue whale Prim',
-    ColorTools.createPrimarySwatch(FlexColor.outerSpaceDarkPrimary): 'Outer space Prim',
-    ColorTools.createPrimarySwatch(FlexColor.blumineBlueDarkPrimary): 'Blumine Prim',
-    ColorTools.createPrimarySwatch(FlexColor.hippieBlueDarkPrimary): 'Hippie blue Prim',
-    ColorTools.createPrimarySwatch(FlexColor.aquaBlueDarkPrimary): 'Aqua blue Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkPrimary): 'Brand blue FB Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkPrimaryContainer): 'Brand blue IG PrimVar',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkSecondary): 'Brand blue TW Sec',
-    ColorTools.createPrimarySwatch(FlexColor.ebonyClayDarkPrimary): 'Ebony clay Prim',
-    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkTertiary): 'Brand blue G Tert',
-    ColorTools.createPrimarySwatch(FlexColor.deepBlueDarkPrimary): 'Deep blue sea Prim',
-    ColorTools.createPrimarySwatch(FlexColor.deepBlueDarkSecondary): 'Deep blue sea Sec',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimary):
+        'Purple M2 guide Prim',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimaryContainer):
+        'Purple M2 guide Sec',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimaryHc):
+        'Blue Flutter HiC Prim',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkPrimaryContainerHc):
+        'Blue Flutter HiC Sec',
+    ColorTools.createPrimarySwatch(FlexColor.blueWhaleDarkPrimary):
+        'Blue whale Prim',
+    ColorTools.createPrimarySwatch(FlexColor.outerSpaceDarkPrimary):
+        'Outer space Prim',
+    ColorTools.createPrimarySwatch(FlexColor.blumineBlueDarkPrimary):
+        'Blumine Prim',
+    ColorTools.createPrimarySwatch(FlexColor.hippieBlueDarkPrimary):
+        'Hippie blue Prim',
+    ColorTools.createPrimarySwatch(FlexColor.aquaBlueDarkPrimary):
+        'Aqua blue Prim',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkPrimary):
+        'Brand blue FB Prim',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkPrimaryContainer):
+        'Brand blue IG PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkSecondary):
+        'Brand blue TW Sec',
+    ColorTools.createPrimarySwatch(FlexColor.ebonyClayDarkPrimary):
+        'Ebony clay Prim',
+    ColorTools.createPrimarySwatch(FlexColor.brandBlueDarkTertiary):
+        'Brand blue G Tert',
+    ColorTools.createPrimarySwatch(FlexColor.deepBlueDarkPrimary):
+        'Deep blue sea Prim',
+    ColorTools.createPrimarySwatch(FlexColor.deepBlueDarkSecondary):
+        'Deep blue sea Sec',
     // COLORS: Green like
     ColorTools.createPrimarySwatch(FlexColor.jungleDarkPrimary): 'Jungle Prim',
     ColorTools.createPrimarySwatch(FlexColor.moneyDarkPrimary): 'Money Prim',
     ColorTools.createPrimarySwatch(FlexColor.moneyDarkSecondary): 'Money Sec',
-    ColorTools.createPrimarySwatch(FlexColor.mallardGreenDarkPrimary): 'Mallard Prim',
-    ColorTools.createPrimarySwatch(FlexColor.mallardGreenDarkPrimaryContainer): 'Mallard PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.mallardGreenDarkPrimary):
+        'Mallard Prim',
+    ColorTools.createPrimarySwatch(FlexColor.mallardGreenDarkPrimaryContainer):
+        'Mallard PrimVar',
     ColorTools.createPrimarySwatch(FlexColor.wasabiDarkPrimary): 'Wasabi Prim',
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkTertiary): 'Teal M2 guide Tert',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkTertiary):
+        'Teal M2 guide Tert',
     // COLORS: Red like
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkError): 'Error M2 guide',
-    ColorTools.createPrimarySwatch(FlexColor.materialDarkErrorHc): 'Error Flutter HiC',
-    ColorTools.createPrimarySwatch(FlexColor.redWineDarkPrimary): 'Red Wine Prim',
-    ColorTools.createPrimarySwatch(FlexColor.redWineDarkSecondary): 'Red Wine Sec',
-    ColorTools.createPrimarySwatch(FlexColor.rosewoodDarkPrimary): 'Rosewood Prim',
-    ColorTools.createPrimarySwatch(FlexColor.rosewoodDarkPrimaryContainer): 'Rosewood PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkError):
+        'Error M2 guide',
+    ColorTools.createPrimarySwatch(FlexColor.materialDarkErrorHc):
+        'Error Flutter HiC',
+    ColorTools.createPrimarySwatch(FlexColor.redWineDarkPrimary):
+        'Red Wine Prim',
+    ColorTools.createPrimarySwatch(FlexColor.redWineDarkSecondary):
+        'Red Wine Sec',
+    ColorTools.createPrimarySwatch(FlexColor.rosewoodDarkPrimary):
+        'Rosewood Prim',
+    ColorTools.createPrimarySwatch(FlexColor.rosewoodDarkPrimaryContainer):
+        'Rosewood PrimVar',
     ColorTools.createPrimarySwatch(FlexColor.sakuraDarkPrimary): 'Sakura Prim',
-    ColorTools.createPrimarySwatch(FlexColor.sakuraDarkPrimaryContainer): 'Sakura PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.sakuraDarkPrimaryContainer):
+        'Sakura PrimVar',
     ColorTools.createPrimarySwatch(FlexColor.sakuraDarkSecondary): 'Sakura Sec',
-    ColorTools.createPrimarySwatch(FlexColor.mandyRedDarkPrimary): 'Mandy red Prim',
-    ColorTools.createPrimarySwatch(FlexColor.sanJuanBlueDarkSecondary): 'SanJuan Sec',
+    ColorTools.createPrimarySwatch(FlexColor.mandyRedDarkPrimary):
+        'Mandy red Prim',
+    ColorTools.createPrimarySwatch(FlexColor.sanJuanBlueDarkSecondary):
+        'SanJuan Sec',
     ColorTools.createPrimarySwatch(FlexColor.damaskDarkPrimary): 'Damask Prim',
-    ColorTools.createPrimarySwatch(FlexColor.damaskDarkPrimaryContainer): 'Damask PrimVar',
+    ColorTools.createPrimarySwatch(FlexColor.damaskDarkPrimaryContainer):
+        'Damask PrimVar',
     // COLORS: Orange like
     ColorTools.createPrimarySwatch(FlexColor.goldDarkPrimary): 'Gold Prim',
-    ColorTools.createPrimarySwatch(FlexColor.bahamaBlueDarkSecondary): 'Bahama Sec',
+    ColorTools.createPrimarySwatch(FlexColor.bahamaBlueDarkSecondary):
+        'Bahama Sec',
     ColorTools.createPrimarySwatch(FlexColor.sharkDarkSecondary): 'Shark Sec',
     ColorTools.createPrimarySwatch(FlexColor.sharkDarkTertiary): 'Shark Tert',
-    ColorTools.createPrimarySwatch(FlexColor.outerSpaceDarkSecondary): 'Outer space Sec',
-    ColorTools.createPrimarySwatch(FlexColor.blueWhaleDarkSecondary): 'Blue whale Sec',
-    ColorTools.createPrimarySwatch(FlexColor.bigStoneDarkSecondary): 'Big stone Sec',
-    ColorTools.createPrimarySwatch(FlexColor.blumineBlueDarkSecondary): 'Blumine Sec',
+    ColorTools.createPrimarySwatch(FlexColor.outerSpaceDarkSecondary):
+        'Outer space Sec',
+    ColorTools.createPrimarySwatch(FlexColor.blueWhaleDarkSecondary):
+        'Blue whale Sec',
+    ColorTools.createPrimarySwatch(FlexColor.bigStoneDarkSecondary):
+        'Big stone Sec',
+    ColorTools.createPrimarySwatch(FlexColor.blumineBlueDarkSecondary):
+        'Blumine Sec',
   };
 
   @override
@@ -166,7 +237,10 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       color: color,
       onColorChanged: onChanged,
       crossAxisAlignment: CrossAxisAlignment.center,
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.symmetric(
+        vertical: 8,
+        horizontal: 16,
+      ),
       enableShadesSelection: true,
       enableTonalPalette: true,
       width: 35,
@@ -202,8 +276,10 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       onRecentColorsChanged: onRecentColorsChanged,
       title: Text('Select Color', style: theme.textTheme.titleLarge),
       subheading: Text('Select color shade', style: theme.textTheme.bodyLarge),
-      wheelSubheading: Text('Selected color and its shades', style: theme.textTheme.bodyLarge),
-      recentColorsSubheading: Text('Recent colors', style: theme.textTheme.bodyLarge),
+      wheelSubheading: Text('Selected color and its shades',
+          style: theme.textTheme.bodyLarge),
+      recentColorsSubheading:
+          Text('Recent colors', style: theme.textTheme.bodyLarge),
       selectedPickerTypeColor: theme.colorScheme.primary,
       showMaterialName: true,
       showColorName: true,
@@ -211,8 +287,9 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       colorCodeHasColor: true,
       focusedEditHasNoColor: true,
       showEditIconButton: true,
-      customColorSwatchesAndNames:
-          isLight ? ColorPickerInkWellDialog._lightSwatches : ColorPickerInkWellDialog._darkSwatches,
+      customColorSwatchesAndNames: isLight
+          ? ColorPickerInkWellDialog._lightSwatches
+          : ColorPickerInkWellDialog._darkSwatches,
       copyPasteBehavior: const ColorPickerCopyPasteBehavior(
         longPressMenu: true,
         editUsesParsedPaste: true,
@@ -233,22 +310,25 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       onHover: (bool value) {
         onHover?.call(value);
       },
-      onTap:
-          enabled
-              ? () async {
-                // ignore: use_build_context_synchronously
-                if (await colorPicker.showPickerDialog(
-                  context,
-                  insetPadding: const EdgeInsets.all(16),
-                  barrierColor: Colors.black.withValues(alpha: 0.05),
-                  constraints: const BoxConstraints(minHeight: 570, minWidth: 450, maxWidth: 450),
-                )) {
-                  wasCancelled(false);
-                } else {
-                  wasCancelled(true);
-                }
+      onTap: enabled
+          ? () async {
+              // ignore: use_build_context_synchronously
+              if (await colorPicker.showPickerDialog(
+                context,
+                insetPadding: const EdgeInsets.all(16),
+                barrierColor: Colors.black.withValues(alpha: 0.05),
+                constraints: const BoxConstraints(
+                  minHeight: 570,
+                  minWidth: 450,
+                  maxWidth: 450,
+                ),
+              )) {
+                wasCancelled(false);
+              } else {
+                wasCancelled(true);
               }
-              : null,
+            }
+          : null,
       child: child,
     );
   }

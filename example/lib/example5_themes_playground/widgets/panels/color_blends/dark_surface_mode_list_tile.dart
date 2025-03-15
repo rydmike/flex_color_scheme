@@ -5,7 +5,12 @@ import '../../../../shared/controllers/theme_controller.dart';
 import 'dark_surface_mode_toggle_buttons.dart';
 
 class DarkSurfaceModeListTile extends StatelessWidget {
-  const DarkSurfaceModeListTile({this.title, this.subtitle, required this.controller, super.key});
+  const DarkSurfaceModeListTile({
+    this.title,
+    this.subtitle,
+    required this.controller,
+    super.key,
+  });
 
   final Widget? title;
   final Widget? subtitle;

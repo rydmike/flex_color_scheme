@@ -20,7 +20,9 @@ class AppExampleLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: LoginColumn());
+    return const Scaffold(
+      body: LoginColumn(),
+    );
   }
 }
 
@@ -37,7 +39,8 @@ class _LoginColumnState extends State<LoginColumn> {
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 3));
   }
 
   @override
@@ -62,11 +65,10 @@ class _LoginColumnState extends State<LoginColumn> {
     path.moveTo(size.width, halfWidth);
 
     for (double step = 0; step < fullAngle; step += degreesPerStep) {
-      path.lineTo(halfWidth + externalRadius * cos(step), halfWidth + externalRadius * sin(step));
-      path.lineTo(
-        halfWidth + internalRadius * cos(step + halfDegreesPerStep),
-        halfWidth + internalRadius * sin(step + halfDegreesPerStep),
-      );
+      path.lineTo(halfWidth + externalRadius * cos(step),
+          halfWidth + externalRadius * sin(step));
+      path.lineTo(halfWidth + internalRadius * cos(step + halfDegreesPerStep),
+          halfWidth + internalRadius * sin(step + halfDegreesPerStep));
     }
     path.close();
     return path;
@@ -94,7 +96,10 @@ class _LoginColumnState extends State<LoginColumn> {
                   const SizedBox(height: 32),
                   ConstrainedBox(
                     constraints: const BoxConstraints.tightFor(width: 300),
-                    child: SvgAssetImage(assetName: AppImages.verified, color: theme.colorScheme.primary),
+                    child: SvgAssetImage(
+                      assetName: AppImages.verified,
+                      color: theme.colorScheme.primary,
+                    ),
                   ),
                 ] else
                   const SizedBox.shrink(),
@@ -103,12 +108,22 @@ class _LoginColumnState extends State<LoginColumn> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Spacer(flex: useTwoColumns ? 1 : 2),
-                      Text('Sign In', style: textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold)),
+                      Text(
+                        'Sign In',
+                        style: textTheme.headlineLarge!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text('No account?', style: textTheme.bodyLarge),
-                          TextButton(onPressed: () {}, child: const Text('Make account')),
+                          Text(
+                            'No account?',
+                            style: textTheme.bodyLarge,
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text('Make account'),
+                          ),
                         ],
                       ),
                       SizedBox(height: 8 * spaceFactor),
@@ -129,7 +144,10 @@ class _LoginColumnState extends State<LoginColumn> {
                         ),
                       ),
                       SizedBox(height: 8 * spaceFactor),
-                      TextButton(onPressed: () {}, child: const Text('Forgot Password?')),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('Forgot Password?'),
+                      ),
                       SizedBox(height: 16 * spaceFactor),
                       Center(
                         child: SizedBox(
@@ -141,7 +159,8 @@ class _LoginColumnState extends State<LoginColumn> {
                             child: ConfettiWidget(
                               confettiController: _confettiController,
                               numberOfParticles: 20,
-                              blastDirectionality: BlastDirectionality.explosive,
+                              blastDirectionality:
+                                  BlastDirectionality.explosive,
                               shouldLoop: false,
                               colors: const <Color>[
                                 Colors.green,
@@ -150,13 +169,14 @@ class _LoginColumnState extends State<LoginColumn> {
                                 Colors.red,
                                 Colors.indigo,
                                 Colors.orange,
-                                Colors.purple,
+                                Colors.purple
                               ],
                               createParticlePath: drawStar,
                               canvas: Size.infinite,
                               child: Text(
                                 'Sign In',
-                                style: textTheme.titleMedium!.copyWith(color: theme.colorScheme.onPrimary),
+                                style: textTheme.titleMedium!.copyWith(
+                                    color: theme.colorScheme.onPrimary),
                               ),
                             ),
                           ),
@@ -166,7 +186,10 @@ class _LoginColumnState extends State<LoginColumn> {
                         const Spacer(),
                         Expanded(
                           flex: 10,
-                          child: SvgAssetImage(assetName: AppImages.verified, color: theme.colorScheme.primary),
+                          child: SvgAssetImage(
+                            assetName: AppImages.verified,
+                            color: theme.colorScheme.primary,
+                          ),
                         ),
                         const Spacer(),
                       ] else

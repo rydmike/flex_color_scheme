@@ -22,7 +22,8 @@ class TooltipProgressBarPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
+        .copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
@@ -30,84 +31,89 @@ class TooltipProgressBarPanel extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
-    final String opacityDefaultLabel =
-        !controller.useFlexColorScheme
-            ? isLight
-                ? '90 %'
-                : '90 %'
-            : controller.useSubThemes && controller.tooltipSchemeColor != null
+    final String opacityDefaultLabel = !controller.useFlexColorScheme
+        ? isLight
+            ? '90 %'
+            : '90 %'
+        : controller.useSubThemes && controller.tooltipSchemeColor != null
             ? '100 %'
             : controller.tooltipsMatchBackground
-            ? controller.useSubThemes
-                ? isLight
-                    ? '95 %'
-                    : '95 %'
-                : isLight
-                ? '94 %'
-                : '93 %'
-            : controller.useSubThemes
-            ? isLight
-                ? '95 %'
-                : '95 %'
-            : isLight
-            ? '90 %'
-            : '90 %';
+                ? controller.useSubThemes
+                    ? isLight
+                        ? '95 %'
+                        : '95 %'
+                    : isLight
+                        ? '94 %'
+                        : '93 %'
+                : controller.useSubThemes
+                    ? isLight
+                        ? '95 %'
+                        : '95 %'
+                    : isLight
+                        ? '90 %'
+                        : '90 %';
 
-    final String toolTipDefaultColorLabel =
-        !controller.useFlexColorScheme
-            ? isLight
-                ? 'Grey700'
-                : 'White'
-            : controller.tooltipsMatchBackground
+    final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
+        ? isLight
+            ? 'Grey700'
+            : 'White'
+        : controller.tooltipsMatchBackground
             ? controller.useSubThemes
                 ? isLight
                     ? 'White + 4% primary alpha blend'
                     : 'Dark grey #111111 + 16% primary alpha blend'
                 : isLight
-                ? 'Almost white #FCFCFC'
-                : 'Grey #444444'
+                    ? 'Almost white #FCFCFC'
+                    : 'Grey #444444'
             : controller.useSubThemes
-            ? isLight
-                ? 'Dark grey #111111 + 45% primary alpha blend'
-                : 'White + 39% primary alpha blend'
-            : isLight
-            ? 'Grey700'
-            : 'White';
+                ? isLight
+                    ? 'Dark grey #111111 + 45% primary alpha blend'
+                    : 'White + 39% primary alpha blend'
+                : isLight
+                    ? 'Grey700'
+                    : 'White';
 
-    final String tooltipDefaultRadiusLabel =
-        controller.tooltipRadius == null
-            ? controller.useSubThemes
-                ? '8 dp'
-                : '4 dp'
-            : '';
+    final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
+        ? controller.useSubThemes
+            ? '8 dp'
+            : '4 dp'
+        : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
         SwitchListTileReveal(
-          title: const Text('Tooltip background brightness'),
+          title: const Text(
+            'Tooltip background brightness',
+          ),
           subtitleReveal: const Text(
             "OFF theme mode inverted, common on Web. Android's default.\n"
             'ON theme mode brightness, like Windows\n',
           ),
-          value:
-              controller.tooltipsMatchBackground &&
+          value: controller.tooltipsMatchBackground &&
               controller.useFlexColorScheme &&
-              (controller.tooltipSchemeColor == null || !controller.useSubThemes),
-          onChanged:
-              controller.useFlexColorScheme && (controller.tooltipSchemeColor == null || !controller.useSubThemes)
-                  ? controller.setTooltipsMatchBackground
-                  : null,
+              (controller.tooltipSchemeColor == null ||
+                  !controller.useSubThemes),
+          onChanged: controller.useFlexColorScheme &&
+                  (controller.tooltipSchemeColor == null ||
+                      !controller.useSubThemes)
+              ? controller.setTooltipsMatchBackground
+              : null,
         ),
-        const Padding(padding: EdgeInsets.all(16.0), child: TooltipShowcase()),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: TooltipShowcase(),
+        ),
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Tooltip background color'),
-          subtitle:
-              controller.tooltipSchemeColor == null ? null : const Text('Foreground pair used as foreground color'),
+          subtitle: controller.tooltipSchemeColor == null
+              ? null
+              : const Text('Foreground pair used as foreground color'),
           defaultLabel: toolTipDefaultColorLabel,
           value: controller.tooltipSchemeColor,
           onChanged: controller.setTooltipSchemeColor,
@@ -155,7 +161,8 @@ class TooltipProgressBarPanel extends StatelessWidget {
           title: const Text('Wait duration before shown'),
           value: controller.tooltipWaitDuration?.toDouble(),
           onChanged: (double? value) {
-            controller.setTooltipWaitDuration(value == null || value <= 0 ? null : value.toInt());
+            controller.setTooltipWaitDuration(
+                value == null || value <= 0 ? null : value.toInt());
           },
           min: 100,
           max: 2000,
@@ -167,13 +174,12 @@ class TooltipProgressBarPanel extends StatelessWidget {
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text(
-            'Show duration, after tap&long press or '
-            'mouse exit',
-          ),
+          title: const Text('Show duration, after tap&long press or '
+              'mouse exit'),
           value: controller.tooltipShowDuration?.toDouble(),
           onChanged: (double? value) {
-            controller.setTooltipShowDuration(value == null || value <= 0 ? null : value.toInt());
+            controller.setTooltipShowDuration(
+                value == null || value <= 0 ? null : value.toInt());
           },
           min: 100,
           max: 2000,
@@ -186,12 +192,14 @@ class TooltipProgressBarPanel extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('ProgressIndicator'),
-          subtitleReveal: Text(
-            'Progress indicators in FCS currently only offer the '
-            'default theme and no customization.\n',
-          ),
+          subtitleReveal:
+              Text('Progress indicators in FCS currently only offer the '
+                  'default theme and no customization.\n'),
         ),
-        const Padding(padding: EdgeInsets.all(16.0), child: ProgressIndicatorShowcase()),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: ProgressIndicatorShowcase(),
+        ),
         TestAdaptiveResponse(controller),
         ListTileReveal(
           dense: true,
@@ -201,14 +209,20 @@ class TooltipProgressBarPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text:
-                      'There is a nice new feature to enable circular '
+                  text: 'There is a nice new feature to enable circular '
                       'end-caps in Flutter 3.10. However, that feature cannot '
                       'be set via a theme at all yet. To support bringing the '
                       'feature Flutter, go upvote this  ',
                 ),
-                LinkTextSpan(style: linkStyle, uri: _fcsFlutterIssue131690, text: 'issue #131690'),
-                TextSpan(style: spanTextStyle, text: '.\n'),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _fcsFlutterIssue131690,
+                  text: 'issue #131690',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.\n',
+                ),
               ],
             ),
           ),

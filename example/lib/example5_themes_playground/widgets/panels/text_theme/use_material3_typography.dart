@@ -4,7 +4,10 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/nullable_bool_toggle_buttons.dart';
 
 class UseMaterial3Typography extends StatelessWidget {
-  const UseMaterial3Typography({required this.controller, super.key});
+  const UseMaterial3Typography({
+    required this.controller,
+    super.key,
+  });
   final ThemeController controller;
 
   String _explainLabelStyle(final bool? value) {
@@ -28,9 +31,12 @@ class UseMaterial3Typography extends StatelessWidget {
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(
-          value: controller.useFlexColorScheme && controller.useSubThemes ? controller.useMaterial3Typography : null,
-          onChanged:
-              controller.useFlexColorScheme && controller.useSubThemes ? controller.setUseMaterial3Typography : null,
+          value: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.useMaterial3Typography
+              : null,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.setUseMaterial3Typography
+              : null,
         ),
       ),
       onTap: () {

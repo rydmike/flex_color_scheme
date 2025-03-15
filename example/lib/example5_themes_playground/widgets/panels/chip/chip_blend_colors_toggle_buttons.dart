@@ -5,7 +5,11 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/nullable_bool_toggle_buttons.dart';
 
 class ChipBlendColorsToggleButtons extends StatelessWidget {
-  const ChipBlendColorsToggleButtons({super.key, required this.controller, this.contentPadding});
+  const ChipBlendColorsToggleButtons({
+    super.key,
+    required this.controller,
+    this.contentPadding,
+  });
   final ThemeController controller;
 
   /// The [ListTile]'s internal padding.
@@ -30,7 +34,8 @@ class ChipBlendColorsToggleButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // The most common logic for enabling Playground controls.
-    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     return ListTileReveal(
       contentPadding: contentPadding,

@@ -18,11 +18,13 @@ abstract final class ThemeValues {
     // Get adaptive border radius value
     final double? adaptiveRadius = controller.defaultRadiusAdaptive;
     // Get effective platform
-    final TargetPlatform platform = controller.platform ?? defaultTargetPlatform;
+    final TargetPlatform platform =
+        controller.platform ?? defaultTargetPlatform;
     // Get fake web platform
     final bool? isWeb = controller.fakeIsWeb;
     // Get Adaptive Settings usage.
-    final AdaptiveResponse adaptiveConfig = controller.adaptiveResponseRadius ?? AdaptiveResponse.off;
+    final AdaptiveResponse adaptiveConfig =
+        controller.adaptiveResponseRadius ?? AdaptiveResponse.off;
     // Should we use adaptive radius or not?
     final bool adapt = adaptiveConfig.setting(isWeb).adapt(platform, isWeb);
     // Return the effective platform default radius, may be null.
@@ -32,15 +34,18 @@ abstract final class ThemeValues {
   // Return ListTile content padding for a ListTile used in two column layout,
   // for the first column, that respects the themed content padding and
   // Material3 and Material2 padding logic.
-  static EdgeInsetsGeometry? tilePaddingStart(BuildContext context, [bool isRow = true]) {
+  static EdgeInsetsGeometry? tilePaddingStart(BuildContext context,
+      [bool isRow = true]) {
     // If padding is for a single ListTile, return null.
     if (!isRow) return null;
     // Else return the padding for the ListTile in the first/start column.
-    final EdgeInsetsGeometry? padding = Theme.of(context).listTileTheme.contentPadding;
+    final EdgeInsetsGeometry? padding =
+        Theme.of(context).listTileTheme.contentPadding;
     if (padding == null) {
       return const EdgeInsetsDirectional.only(start: 16, end: 8);
     } else if (padding is EdgeInsetsDirectional) {
-      return EdgeInsetsDirectional.fromSTEB(padding.start, padding.top, padding.end / 2, padding.bottom / 2);
+      return EdgeInsetsDirectional.fromSTEB(
+          padding.start, padding.top, padding.end / 2, padding.bottom / 2);
     } else {
       return padding;
     }
@@ -49,7 +54,8 @@ abstract final class ThemeValues {
   // Return ListTile content padding for a ListTile used in two column layout,
   // for the second column, that respects the themed content padding and
   // Material3 and Material2 padding logic.
-  static EdgeInsetsGeometry? tilePaddingEnd(BuildContext context, [bool isRow = true]) {
+  static EdgeInsetsGeometry? tilePaddingEnd(BuildContext context,
+      [bool isRow = true]) {
     // If padding is for a single ListTile, return null.
     if (!isRow) return null;
     // Else return the padding for the ListTile in the second/end column.
@@ -59,7 +65,8 @@ abstract final class ThemeValues {
     if (padding == null) {
       return EdgeInsetsDirectional.only(start: 8, end: useMaterial3 ? 24 : 16);
     } else if (padding is EdgeInsetsDirectional) {
-      return EdgeInsetsDirectional.fromSTEB(padding.start / 2, padding.top, padding.end, padding.bottom);
+      return EdgeInsetsDirectional.fromSTEB(
+          padding.start / 2, padding.top, padding.end, padding.bottom);
     } else {
       return padding;
     }

@@ -32,9 +32,11 @@ void main() {
       expect(font.labelMedium?.color, isNotNull);
       expect(font.labelSmall?.color, isNotNull);
     });
-    test('FTTC01.02: GIVEN a font with colors, and apply null FontColor, '
+    test(
+        'FTTC01.02: GIVEN a font with colors, and apply null FontColor, '
         'test all style has NULL color', () {
-      final TextTheme font = TextThemeColor.nullFontColor(ThemeData.light().textTheme);
+      final TextTheme font =
+          TextThemeColor.nullFontColor(ThemeData.light().textTheme);
       expect(font.displayLarge?.color, isNull);
       expect(font.displayMedium?.color, isNull);
       expect(font.displaySmall?.color, isNull);

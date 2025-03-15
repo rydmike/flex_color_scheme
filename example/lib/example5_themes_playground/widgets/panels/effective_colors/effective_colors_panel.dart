@@ -17,13 +17,18 @@ class EffectiveColorsPanel extends StatelessWidget {
   const EffectiveColorsPanel(this.controller, {super.key});
   final ThemeController controller;
 
-  static final Uri _githubIssueUri = Uri(scheme: 'https', host: 'github.com', path: 'flutter/flutter/issues/91772');
+  static final Uri _githubIssueUri = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/91772',
+  );
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
-    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
+    final TextStyle linkStyle =
+        theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +53,10 @@ class EffectiveColorsPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: ShowColorSchemeColors(showTitle: false)),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: ShowColorSchemeColors(showTitle: false),
+        ),
         ListTileReveal(
           title: const Text('ThemeData colors'),
           subtitleReveal: RichText(
@@ -56,16 +64,18 @@ class EffectiveColorsPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text:
-                      'Most direct color properties in ThemeData are '
+                  text: 'Most direct color properties in ThemeData are '
                       'planned to be deprecated and removed from Flutter. '
                       'More info in ',
                 ),
-                LinkTextSpan(style: linkStyle, uri: _githubIssueUri, text: 'issue #91772'),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _githubIssueUri,
+                  text: 'issue #91772',
+                ),
                 TextSpan(
                   style: spanTextStyle,
-                  text:
-                      '.\n'
+                  text: '.\n'
                       '\n'
                       'Some ThemeData colors still matter in Flutter 3.24 '
                       'and earlier. Some widgets depend on them for '
@@ -88,9 +98,15 @@ class EffectiveColorsPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: ShowThemeDataColors(showTitle: false)),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: ShowThemeDataColors(showTitle: false),
+        ),
         const ComponentColorsReveal(),
-        const Padding(padding: EdgeInsets.fromLTRB(16, 4, 16, 16), child: ShowSubThemeColors(showTitle: false)),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(16, 4, 16, 16),
+          child: ShowSubThemeColors(showTitle: false),
+        ),
       ],
     );
   }

@@ -11,6 +11,9 @@ class LightSurfaceModeToggleButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SurfaceModeToggleButtons(mode: controller.surfaceModeLight, onChanged: controller.setSurfaceModeLight);
+    return SurfaceModeToggleButtons(
+      mode: controller.surfaceModeLight,
+      onChanged: controller.setSurfaceModeLight,
+    );
   }
 }

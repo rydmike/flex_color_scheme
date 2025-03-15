@@ -35,8 +35,8 @@ class _AppExampleShopState extends State<AppExampleShop> {
   }
 
   void setSearchString(String value) => setState(() {
-    searchString = value;
-  });
+        searchString = value;
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +49,13 @@ class _AppExampleShopState extends State<AppExampleShop> {
     );
     List<Widget> searchResultTiles = <Widget>[];
     if (searchString.isNotEmpty) {
-      searchResultTiles =
-          products
-              .where((Product p) => p.name.toLowerCase().contains(searchString.toLowerCase()))
-              .map((Product p) => ProductTile(product: p))
-              .toList();
+      searchResultTiles = products
+          .where((Product p) =>
+              p.name.toLowerCase().contains(searchString.toLowerCase()))
+          .map(
+            (Product p) => ProductTile(product: p),
+          )
+          .toList();
     }
     final ThemeData theme = Theme.of(context);
     return ScrollConfiguration(
@@ -63,41 +65,49 @@ class _AppExampleShopState extends State<AppExampleShop> {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: SearchBar(onChanged: setSearchString),
-          actions: const <Widget>[CartAppBarAction(), ShopAbout(useRootNavigator: false)],
+          actions: const <Widget>[
+            CartAppBarAction(),
+            ShopAbout(useRootNavigator: false),
+          ],
         ),
         body: SafeArea(
           top: false,
           bottom: false,
-          child:
-              searchString.isNotEmpty
-                  ? GridView.count(
-                    padding: listViewPadding,
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    childAspectRatio: .75,
-                    children: searchResultTiles,
-                  )
-                  : ListView(
-                    padding: listViewPadding,
-                    children: <Widget>[
-                      Text('Shop by Category', style: theme.textTheme.headlineSmall),
-                      const SizedBox(height: 16),
-                      CategoryTile(
-                        imageUrl: AppImages.shopMen,
-                        category: _mensCategory,
-                        imageAlignment: Alignment.topCenter,
-                      ),
-                      const SizedBox(height: 16),
-                      CategoryTile(
-                        imageUrl: AppImages.shopWomen,
-                        category: _womensCategory,
-                        imageAlignment: Alignment.topCenter,
-                      ),
-                      const SizedBox(height: 16),
-                      CategoryTile(imageUrl: AppImages.shopPets, category: _petsCategory),
-                    ],
-                  ),
+          child: searchString.isNotEmpty
+              ? GridView.count(
+                  padding: listViewPadding,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  childAspectRatio: .75,
+                  children: searchResultTiles,
+                )
+              : ListView(
+                  padding: listViewPadding,
+                  children: <Widget>[
+                    Text(
+                      'Shop by Category',
+                      style: theme.textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: 16),
+                    CategoryTile(
+                      imageUrl: AppImages.shopMen,
+                      category: _mensCategory,
+                      imageAlignment: Alignment.topCenter,
+                    ),
+                    const SizedBox(height: 16),
+                    CategoryTile(
+                      imageUrl: AppImages.shopWomen,
+                      category: _womensCategory,
+                      imageAlignment: Alignment.topCenter,
+                    ),
+                    const SizedBox(height: 16),
+                    CategoryTile(
+                      imageUrl: AppImages.shopPets,
+                      category: _petsCategory,
+                    ),
+                  ],
+                ),
         ),
       ),
     );
@@ -136,9 +146,14 @@ class _CartAppBarActionState extends State<CartAppBarAction> {
         icon: Badge.count(
           count: cart.itemsInCart.length,
           isLabelVisible: cart.itemsInCart.isNotEmpty,
-          child: const Icon(Icons.shopping_cart),
+          child: const Icon(
+            Icons.shopping_cart,
+          ),
         ),
-        onPressed: () => _pushScreen(context: context, screen: const CartScreen()),
+        onPressed: () => _pushScreen(
+          context: context,
+          screen: const CartScreen(),
+        ),
       ),
     );
   }
@@ -180,45 +195,50 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color background = isLight ? theme.colorScheme.surfaceContainerHighest : theme.colorScheme.onSurface;
-    final Color iconColor =
-        isLight
-            ? theme.colorScheme.secondary.withValues(alpha: 0.8)
-            : theme.colorScheme.secondaryContainer.withValues(alpha: 0.8);
-    final List<Widget> imagePreviews =
-        product.imageUrls
-            .map(
-              (String url) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: GestureDetector(
-                  onTap: () => setSelectedImageUrl(url),
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: selectedImageUrl == url ? Border.all(color: theme.colorScheme.tertiary, width: 2) : null,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Image.network(
-                      url,
-                      loadingBuilder:
-                          (_, Widget child, ImageChunkEvent? loadingProgress) =>
-                              loadingProgress == null ? child : const Center(child: CircularProgressIndicator()),
-                      errorBuilder:
-                          (_, Object child, StackTrace? trace) =>
-                              Icon(Icons.image_not_supported_outlined, size: 30, color: iconColor),
-                      cacheHeight: 100,
-                    ),
+    final Color background = isLight
+        ? theme.colorScheme.surfaceContainerHighest
+        : theme.colorScheme.onSurface;
+    final Color iconColor = isLight
+        ? theme.colorScheme.secondary.withValues(alpha: 0.8)
+        : theme.colorScheme.secondaryContainer.withValues(alpha: 0.8);
+    final List<Widget> imagePreviews = product.imageUrls
+        .map(
+          (String url) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: GestureDetector(
+              onTap: () => setSelectedImageUrl(url),
+              child: Container(
+                height: 50,
+                width: 50,
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: selectedImageUrl == url
+                      ? Border.all(color: theme.colorScheme.tertiary, width: 2)
+                      : null,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Image.network(
+                  url,
+                  loadingBuilder: (_, Widget child,
+                          ImageChunkEvent? loadingProgress) =>
+                      loadingProgress == null
+                          ? child
+                          : const Center(child: CircularProgressIndicator()),
+                  errorBuilder: (_, Object child, StackTrace? trace) => Icon(
+                    Icons.image_not_supported_outlined,
+                    size: 30,
+                    color: iconColor,
                   ),
+                  cacheHeight: 100,
                 ),
               ),
-            )
-            .toList();
+            ),
+          ),
+        )
+        .toList();
 
-    final List<Widget> sizeSelectionWidgets =
-        product.sizes
+    final List<Widget> sizeSelectionWidgets = product.sizes
             ?.map(
               (String s) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -230,17 +250,23 @@ class _ProductScreenState extends State<ProductScreen> {
                     height: 42,
                     width: 38,
                     decoration: BoxDecoration(
-                      color: selectedSize == s ? theme.colorScheme.tertiaryContainer : null,
-                      border: Border.all(color: theme.colorScheme.outline, width: 1),
+                      color: selectedSize == s
+                          ? theme.colorScheme.tertiaryContainer
+                          : null,
+                      border: Border.all(
+                        color: theme.colorScheme.outline,
+                        width: 1,
+                      ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
                       child: Text(
                         s,
                         style: theme.textTheme.bodySmall!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: selectedSize == s ? theme.colorScheme.onTertiaryContainer : null,
-                        ),
+                            fontWeight: FontWeight.bold,
+                            color: selectedSize == s
+                                ? theme.colorScheme.onTertiaryContainer
+                                : null),
                       ),
                     ),
                   ),
@@ -251,7 +277,9 @@ class _ProductScreenState extends State<ProductScreen> {
         <Widget>[];
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.product.productType), actions: const <Widget>[CartAppBarAction()]),
+      appBar: AppBar(
+          title: Text(widget.product.productType),
+          actions: const <Widget>[CartAppBarAction()]),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,10 +296,16 @@ class _ProductScreenState extends State<ProductScreen> {
                       selectedImageUrl!,
                       loadingBuilder:
                           (_, Widget child, ImageChunkEvent? loadingProgress) =>
-                              loadingProgress == null ? child : const Center(child: CircularProgressIndicator()),
-                      errorBuilder:
-                          (_, Object child, StackTrace? trace) =>
-                              Icon(Icons.image_not_supported_outlined, size: 200, color: iconColor),
+                              loadingProgress == null
+                                  ? child
+                                  : const Center(
+                                      child: CircularProgressIndicator()),
+                      errorBuilder: (_, Object child, StackTrace? trace) =>
+                          Icon(
+                        Icons.image_not_supported_outlined,
+                        size: 200,
+                        color: iconColor,
+                      ),
                       cacheHeight: 500,
                       fit: BoxFit.cover,
                       color: background,
@@ -279,7 +313,10 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   ),
                   const SizedBox(height: 18),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: imagePreviews),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: imagePreviews,
+                  ),
                 ],
               ),
             ),
@@ -289,8 +326,13 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(product.name, style: theme.textTheme.titleLarge),
-                    const SizedBox(height: 4),
+                    Text(
+                      product.name,
+                      style: theme.textTheme.titleLarge,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
                     Text(
                       '\$${product.cost}',
                       style: theme.textTheme.titleMedium!.copyWith(
@@ -307,19 +349,31 @@ class _ProductScreenState extends State<ProductScreen> {
                               'tempor, ligula.',
                       style: theme.textTheme.bodyMedium!.copyWith(height: 1.5),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(
+                      height: 18,
+                    ),
                     if (sizeSelectionWidgets.isNotEmpty) ...<Widget>[
-                      Text('Size', style: theme.textTheme.titleSmall),
+                      Text(
+                        'Size',
+                        style: theme.textTheme.titleSmall,
+                      ),
                       const SizedBox(height: 8),
-                      Row(children: sizeSelectionWidgets),
+                      Row(
+                        children: sizeSelectionWidgets,
+                      ),
                     ],
                     const Spacer(),
                     Center(
                       child: CallToActionButton(
-                        onPressed: () => cart.add(OrderItem(product: product, selectedSize: selectedSize)),
+                        onPressed: () => cart.add(
+                          OrderItem(
+                            product: product,
+                            selectedSize: selectedSize,
+                          ),
+                        ),
                         labelText: 'Add to Cart',
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -332,12 +386,11 @@ class _ProductScreenState extends State<ProductScreen> {
 }
 
 class CallToActionButton extends StatelessWidget {
-  const CallToActionButton({
-    required this.onPressed,
-    required this.labelText,
-    this.minSize = const Size(266, 45),
-    super.key,
-  });
+  const CallToActionButton(
+      {required this.onPressed,
+      required this.labelText,
+      this.minSize = const Size(266, 45),
+      super.key});
   final Function onPressed;
   final String labelText;
   final Size minSize;
@@ -346,7 +399,9 @@ class CallToActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: onPressed as void Function()?,
-      style: ElevatedButton.styleFrom(minimumSize: minSize),
+      style: ElevatedButton.styleFrom(
+        minimumSize: minSize,
+      ),
       child: Text(labelText, style: const TextStyle(fontSize: 16)),
     );
   }
@@ -371,7 +426,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     selection = category.selections.first;
-    categoryProducts = products.where((Product p) => p.category == category).toList();
+    categoryProducts =
+        products.where((Product p) => p.category == category).toList();
     super.initState();
   }
 
@@ -384,20 +440,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
       top: 16 + safeArea.top + kToolbarHeight,
       bottom: 16,
     );
-    final List<ProductRow> productRows =
-        category.selections
-            .map(
-              (String s) => ProductRow(
-                productType: s,
-                products:
-                    categoryProducts.where((Product p) => p.productType.toLowerCase() == s.toLowerCase()).toList(),
-              ),
-            )
-            .toList();
+    final List<ProductRow> productRows = category.selections
+        .map((String s) => ProductRow(
+              productType: s,
+              products: categoryProducts
+                  .where((Product p) =>
+                      p.productType.toLowerCase() == s.toLowerCase())
+                  .toList(),
+            ))
+        .toList();
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: AppBar(centerTitle: true, title: Text(category.title), actions: const <Widget>[CartAppBarAction()]),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(category.title),
+        actions: const <Widget>[
+          CartAppBarAction(),
+        ],
+      ),
       body: SafeArea(
         top: false,
         bottom: false,
@@ -416,37 +477,42 @@ class _CategoryScreenState extends State<CategoryScreen> {
 }
 
 class ProductRow extends StatelessWidget {
-  const ProductRow({required this.products, required this.productType, super.key});
+  const ProductRow(
+      {required this.products, required this.productType, super.key});
   final String productType;
   final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
     List<ProductTile> productTiles;
-    productTiles = products.map((Product p) => ProductTile(product: p)).toList();
+    productTiles =
+        products.map((Product p) => ProductTile(product: p)).toList();
 
     return productTiles.isEmpty
         ? const SizedBox.shrink()
         : Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(productType, style: Theme.of(context).textTheme.headlineSmall),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 222,
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                itemCount: productTiles.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, int index) => productTiles[index],
-                separatorBuilder: (_, int index) => const SizedBox(width: 8),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  productType,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
-            ),
-          ],
-        );
+              const SizedBox(height: 8),
+              SizedBox(
+                height: 222,
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  itemCount: productTiles.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_, int index) => productTiles[index],
+                  separatorBuilder: (_, int index) => const SizedBox(width: 8),
+                ),
+              ),
+            ],
+          );
   }
 }
 
@@ -503,9 +569,8 @@ class ProductTile extends StatelessWidget {
                         child: Text(
                           '\$${product.cost}',
                           style: theme.textTheme.titleMedium!.copyWith(
-                            color: theme.colorScheme.tertiary,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: theme.colorScheme.tertiary,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -516,13 +581,17 @@ class ProductTile extends StatelessWidget {
           ),
         );
       },
-      openBuilder: (BuildContext context, void Function() action) => ProductScreen(product: product),
+      openBuilder: (BuildContext context, void Function() action) =>
+          ProductScreen(product: product),
     );
   }
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({super.key, required this.product});
+  const ProductImage({
+    super.key,
+    required this.product,
+  });
 
   final Product product;
 
@@ -530,23 +599,27 @@ class ProductImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color background = isLight ? theme.colorScheme.surfaceContainerHighest : theme.colorScheme.onSurface;
-    final Color iconColor =
-        isLight
-            ? theme.colorScheme.secondary.withValues(alpha: 0.8)
-            : theme.colorScheme.secondaryContainer.withValues(alpha: 0.8);
+    final Color background = isLight
+        ? theme.colorScheme.surfaceContainerHighest
+        : theme.colorScheme.onSurface;
+    final Color iconColor = isLight
+        ? theme.colorScheme.secondary.withValues(alpha: 0.8)
+        : theme.colorScheme.secondaryContainer.withValues(alpha: 0.8);
     return AspectRatio(
       aspectRatio: .95,
       child: ColoredBox(
         color: background,
         child: Image.network(
           product.imageUrls.first,
-          loadingBuilder:
-              (_, Widget child, ImageChunkEvent? loadingProgress) =>
-                  loadingProgress == null ? child : const Center(child: CircularProgressIndicator()),
-          errorBuilder:
-              (_, Object child, StackTrace? trace) =>
-                  Icon(Icons.image_not_supported_outlined, size: 80, color: iconColor),
+          loadingBuilder: (_, Widget child, ImageChunkEvent? loadingProgress) =>
+              loadingProgress == null
+                  ? child
+                  : const Center(child: CircularProgressIndicator()),
+          errorBuilder: (_, Object child, StackTrace? trace) => Icon(
+            Icons.image_not_supported_outlined,
+            size: 80,
+            color: iconColor,
+          ),
           cacheHeight: 500,
           color: background,
           fit: BoxFit.cover,
@@ -582,39 +655,52 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final List<Widget> orderItemRows =
-        cart.itemsInCart
-            .map(
-              (OrderItem item) => Row(
-                children: <Widget>[
-                  Card(
-                    margin: EdgeInsets.zero,
-                    elevation: 0,
-                    child: SizedBox(width: 125, child: ProductImage(product: item.product)),
+    final List<Widget> orderItemRows = cart.itemsInCart
+        .map(
+          (OrderItem item) => Row(
+            children: <Widget>[
+              Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                child: SizedBox(
+                  width: 125,
+                  child: ProductImage(
+                    product: item.product,
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(item.product.name, style: theme.textTheme.titleMedium),
-                        const SizedBox(height: 8),
-                        Text(
-                          '\$${item.product.cost}',
-                          style: theme.textTheme.titleSmall!.copyWith(color: theme.colorScheme.tertiary),
-                        ),
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => cart.remove(item),
-                    color: theme.colorScheme.error,
-                  ),
-                ],
+                ),
               ),
-            )
-            .toList();
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      item.product.name,
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      '\$${item.product.cost}',
+                      style: theme.textTheme.titleSmall!.copyWith(
+                        color: theme.colorScheme.tertiary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => cart.remove(item),
+                color: theme.colorScheme.error,
+              )
+            ],
+          ),
+        )
+        .toList();
     final EdgeInsets safeArea = MediaQuery.viewPaddingOf(context);
     final EdgeInsetsDirectional listViewPadding = EdgeInsetsDirectional.only(
       start: 16,
@@ -630,7 +716,8 @@ class _CartScreenState extends State<CartScreen> {
         title: Column(
           children: <Widget>[
             const Text('Cart'),
-            Text('${cart.itemsInCart.length} items', style: const TextStyle(fontSize: 12)),
+            Text('${cart.itemsInCart.length} items',
+                style: const TextStyle(fontSize: 12))
           ],
         ),
       ),
@@ -654,7 +741,9 @@ class _CartScreenState extends State<CartScreen> {
                       padding: listViewPadding,
                       itemCount: orderItemRows.length,
                       itemBuilder: (_, int index) => orderItemRows[index],
-                      separatorBuilder: (_, int index) => const SizedBox(height: 16),
+                      separatorBuilder: (_, int index) => const SizedBox(
+                        height: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -678,11 +767,21 @@ class _CartScreenState extends State<CartScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Total', style: theme.textTheme.bodySmall),
-                          Text('\$${cart.totalCost.toStringAsFixed(2)}', style: theme.textTheme.titleSmall),
+                          Text(
+                            'Total',
+                            style: theme.textTheme.bodySmall,
+                          ),
+                          Text(
+                            '\$${cart.totalCost.toStringAsFixed(2)}',
+                            style: theme.textTheme.titleSmall,
+                          ),
                         ],
                       ),
-                      CallToActionButton(onPressed: () {}, labelText: 'Check Out', minSize: const Size(220, 45)),
+                      CallToActionButton(
+                        onPressed: () {},
+                        labelText: 'Check Out',
+                        minSize: const Size(220, 45),
+                      ),
                     ],
                   ),
                 ),
@@ -696,12 +795,11 @@ class _CartScreenState extends State<CartScreen> {
 }
 
 class CategoryTile extends StatelessWidget {
-  const CategoryTile({
-    required this.category,
-    required this.imageUrl,
-    this.imageAlignment = Alignment.center,
-    super.key,
-  });
+  const CategoryTile(
+      {required this.category,
+      required this.imageUrl,
+      this.imageAlignment = Alignment.center,
+      super.key});
   final String imageUrl;
   final Category category;
   final Alignment imageAlignment; // Which part of the image to prefer
@@ -713,20 +811,34 @@ class CategoryTile extends StatelessWidget {
       margin: EdgeInsets.zero,
       elevation: 0,
       child: InkWell(
-        onTap: () => _pushScreen(context: context, screen: CategoryScreen(category: category)),
+        onTap: () => _pushScreen(
+          context: context,
+          screen: CategoryScreen(
+            category: category,
+          ),
+        ),
         child: Container(
           height: 200,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
           clipBehavior: Clip.antiAlias,
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
-              Ink.image(image: AssetImage(imageUrl), alignment: imageAlignment, fit: BoxFit.cover),
+              Ink.image(
+                image: AssetImage(imageUrl),
+                alignment: imageAlignment,
+                fit: BoxFit.cover,
+              ),
               Align(
                 alignment: Alignment.center,
                 child: Text(
                   category.title.toUpperCase(),
-                  style: theme.textTheme.displayMedium!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: theme.textTheme.displayMedium!.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -767,7 +879,10 @@ class _SearchBarState extends State<SearchBar> {
         prefixIcon: const Icon(Icons.search),
         hintText: 'Search...',
         suffixIcon: IconButton(
-          constraints: const BoxConstraints(minHeight: 36, minWidth: 36),
+          constraints: const BoxConstraints(
+            minHeight: 36,
+            minWidth: 36,
+          ),
           splashRadius: 24,
           icon: const Icon(Icons.clear),
           onPressed: () {
@@ -789,19 +904,21 @@ class Category {
 }
 
 void _pushScreen({required BuildContext context, required Widget screen}) {
-  unawaited(Navigator.push(context, MaterialPageRoute<dynamic>(builder: (BuildContext context) => screen)));
+  unawaited(Navigator.push(
+    context,
+    MaterialPageRoute<dynamic>(builder: (BuildContext context) => screen),
+  ));
 }
 
 class Product {
-  const Product({
-    required this.name,
-    required this.imageUrls,
-    required this.cost,
-    this.description,
-    this.sizes,
-    required this.category,
-    required this.productType,
-  });
+  const Product(
+      {required this.name,
+      required this.imageUrls,
+      required this.cost,
+      this.description,
+      this.sizes,
+      required this.category,
+      required this.productType});
 
   final String name;
   final List<String> imageUrls;
@@ -867,20 +984,29 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle =
+      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
   final double height = mediaSize.height;
 
-  final Uri sourceLink = Uri(scheme: 'https', host: 'flutterui.design', path: 'components/ecommerce');
+  final Uri sourceLink = Uri(
+    scheme: 'https',
+    host: 'flutterui.design',
+    path: 'components/ecommerce',
+  );
 
   showAboutDialog(
     context: context,
     applicationName: 'Shop',
     applicationVersion: '1.0',
     useRootNavigator: useRootNavigator,
-    applicationIcon: Icon(Icons.star, size: 50, color: theme.colorScheme.primary),
+    applicationIcon: Icon(
+      Icons.star,
+      size: 50,
+      color: theme.colorScheme.primary,
+    ),
     applicationLegalese: '© Zachery Gentry',
     children: <Widget>[
       Padding(
@@ -890,22 +1016,23 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text:
-                    'This app is included to show the used theme on '
+                text: 'This app is included to show the used theme on '
                     'a compact shop app. It is a minor modification '
                     'of the open source shop app available at ',
               ),
-              LinkTextSpan(style: linkStyle, uri: sourceLink, text: 'flutterui.design'),
+              LinkTextSpan(
+                style: linkStyle,
+                uri: sourceLink,
+                text: 'flutterui.design',
+              ),
               TextSpan(
                 style: aboutTextStyle,
-                text:
-                    '. Included here with permission. Credits and '
+                text: '. Included here with permission. Credits and '
                     'thanks to its author Zachery Gentry.\n\n',
               ),
               TextSpan(
                 style: footerStyle,
-                text:
-                    'Built with Flutter ${App.flutterVersion}, '
+                text: 'Built with Flutter ${App.flutterVersion}, '
                     'using ${App.packageName} '
                     '${App.version}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
@@ -927,30 +1054,40 @@ class OrderItem {
   String? selectedColor;
 }
 
-Category _mensCategory = const Category(title: 'Men', selections: <String>['Shirts', 'Jeans', 'Shorts', 'Jackets']);
-Category _womensCategory = const Category(title: 'Women', selections: <String>['Shirts', 'Jeans']);
-Category _petsCategory = const Category(title: 'Pets', selections: <String>['Toys', 'Treats']);
+Category _mensCategory = const Category(title: 'Men', selections: <String>[
+  'Shirts',
+  'Jeans',
+  'Shorts',
+  'Jackets',
+]);
+Category _womensCategory = const Category(title: 'Women', selections: <String>[
+  'Shirts',
+  'Jeans',
+]);
+Category _petsCategory = const Category(title: 'Pets', selections: <String>[
+  'Toys',
+  'Treats',
+]);
 
 List<Product> products = <Product>[
   Product(
-    name: 'Crewneck T-Shirts',
-    imageUrls: <String>[
-      'https://images-na.ssl-images-amazon.com/images/I/91ieWhKe9AL.jpg',
-      'https://m.media-amazon.com/images/I/716CJVk6FLS.jpg',
-      'https://m.media-amazon.com/images/I/81AVnzFKUqS.jpg',
-    ],
-    cost: 12.99,
-    category: _mensCategory,
-    productType: 'Shirts',
-    sizes: <String>['S', 'M', 'L', 'XL'],
-  ),
+      name: 'Crewneck T-Shirts',
+      imageUrls: <String>[
+        'https://images-na.ssl-images-amazon.com/images/I/91ieWhKe9AL.jpg',
+        'https://m.media-amazon.com/images/I/716CJVk6FLS.jpg',
+        'https://m.media-amazon.com/images/I/81AVnzFKUqS.jpg',
+      ],
+      cost: 12.99,
+      category: _mensCategory,
+      productType: 'Shirts',
+      sizes: <String>['S', 'M', 'L', 'XL']),
   Product(
     name: 'Short Sleeve Henley',
     imageUrls: <String>[
       'https://images-na.ssl-images-amazon.com/images/I/81tpGc13OgL.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/81oNSlos2tL.jpg',
       'https://images-na.ssl-images-amazon.com/images/I/819ea2vQIjL.jpg',
-      'https://images-na.ssl-images-amazon.com/images/I/91SH0RB-8dL.jpg',
+      'https://images-na.ssl-images-amazon.com/images/I/91SH0RB-8dL.jpg'
     ],
     cost: 17.99,
     category: _mensCategory,

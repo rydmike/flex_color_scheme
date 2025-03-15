@@ -24,26 +24,41 @@ class ElevationScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.0, 20 + padding.top, 16.0, 0),
-                child: Text('Surface Tint Color Only', style: theme.textTheme.titleLarge),
+                child: Text(
+                  'Surface Tint Color Only',
+                  style: theme.textTheme.titleLarge,
+                ),
               ),
             ),
-            ElevationGrid(surfaceTintColor: surfaceTint, shadowColor: theme.useMaterial3 ? Colors.transparent : null),
+            ElevationGrid(
+              surfaceTintColor: surfaceTint,
+              shadowColor: theme.useMaterial3 ? Colors.transparent : null,
+            ),
             SliverList(
               delegate: SliverChildListDelegate(<Widget>[
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                  child: Text('Surface Tint Color and Shadow Color', style: theme.textTheme.titleLarge),
+                  child: Text(
+                    'Surface Tint Color and Shadow Color',
+                    style: theme.textTheme.titleLarge,
+                  ),
                 ),
               ]),
             ),
-            ElevationGrid(shadowColor: shadowColor, surfaceTintColor: surfaceTint),
+            ElevationGrid(
+              shadowColor: shadowColor,
+              surfaceTintColor: surfaceTint,
+            ),
             SliverList(
               delegate: SliverChildListDelegate(<Widget>[
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                  child: Text('Shadow Color Only', style: theme.textTheme.titleLarge),
+                  child: Text(
+                    'Shadow Color Only',
+                    style: theme.textTheme.titleLarge,
+                  ),
                 ),
               ]),
             ),
@@ -62,11 +77,15 @@ class ElevationGrid extends StatelessWidget {
   final Color? shadowColor;
   final Color? surfaceTintColor;
 
-  List<ElevationCard> elevationCards(Color? shadowColor, Color? surfaceTintColor) {
+  List<ElevationCard> elevationCards(
+      Color? shadowColor, Color? surfaceTintColor) {
     return elevations
         .map(
-          (ElevationInfo elevationInfo) =>
-              ElevationCard(info: elevationInfo, shadowColor: shadowColor, surfaceTint: surfaceTintColor),
+          (ElevationInfo elevationInfo) => ElevationCard(
+            info: elevationInfo,
+            shadowColor: shadowColor,
+            surfaceTint: surfaceTintColor,
+          ),
         )
         .toList();
   }
@@ -76,20 +95,26 @@ class ElevationGrid extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.all(8),
       sliver: SliverLayoutBuilder(
-        builder: (BuildContext context, SliverConstraints constraints) {
-          if (constraints.crossAxisExtent < kNarrowScreenWidthThreshold) {
-            return SliverGrid.count(crossAxisCount: 3, children: elevationCards(shadowColor, surfaceTintColor));
-          } else {
-            return SliverGrid.count(crossAxisCount: 6, children: elevationCards(shadowColor, surfaceTintColor));
-          }
-        },
-      ),
+          builder: (BuildContext context, SliverConstraints constraints) {
+        if (constraints.crossAxisExtent < kNarrowScreenWidthThreshold) {
+          return SliverGrid.count(
+            crossAxisCount: 3,
+            children: elevationCards(shadowColor, surfaceTintColor),
+          );
+        } else {
+          return SliverGrid.count(
+            crossAxisCount: 6,
+            children: elevationCards(shadowColor, surfaceTintColor),
+          );
+        }
+      }),
     );
   }
 }
 
 class ElevationCard extends StatefulWidget {
-  const ElevationCard({super.key, required this.info, this.shadowColor, this.surfaceTint});
+  const ElevationCard(
+      {super.key, required this.info, this.shadowColor, this.surfaceTint});
 
   final ElevationInfo info;
   final Color? shadowColor;
@@ -128,13 +153,22 @@ class _ElevationCardState extends State<ElevationCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Level ${widget.info.level}', style: theme.textTheme.labelMedium),
-              Text('${widget.info.elevation.toStringAsFixed(0)} dp', style: theme.textTheme.labelMedium),
+              Text(
+                'Level ${widget.info.level}',
+                style: theme.textTheme.labelMedium,
+              ),
+              Text(
+                '${widget.info.elevation.toStringAsFixed(0)} dp',
+                style: theme.textTheme.labelMedium,
+              ),
               if (widget.surfaceTint != null)
                 Expanded(
                   child: Align(
                     alignment: Alignment.bottomRight,
-                    child: Text('${widget.info.overlayPercent}%', style: theme.textTheme.bodySmall),
+                    child: Text(
+                      '${widget.info.overlayPercent}%',
+                      style: theme.textTheme.bodySmall,
+                    ),
                   ),
                 ),
             ],

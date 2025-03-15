@@ -9,26 +9,37 @@ const double _kMinWidth = 550;
 ///
 /// Value of [minWidth] defaults to [_kMinWidth].
 class ResponsiveTwoWidgets extends StatelessWidget {
-  const ResponsiveTwoWidgets({super.key, required this.builder, this.minWidth = _kMinWidth});
+  const ResponsiveTwoWidgets({
+    super.key,
+    required this.builder,
+    this.minWidth = _kMinWidth,
+  });
 
-  final Widget Function(BuildContext context, bool isRow) builder;
+  final Widget Function(
+    BuildContext context,
+    bool isRow,
+  ) builder;
 
   final double minWidth;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints boxConstraints) {
-        return builder(context, boxConstraints.maxWidth >= minWidth);
-      },
-    );
+        builder: (BuildContext context, BoxConstraints boxConstraints) {
+      return builder(context, boxConstraints.maxWidth >= minWidth);
+    });
   }
 }
 
 /// Return [firstWidget] and [lastWidget] in a [Row] or [Column] based on the
 /// value of [isRow].
 class RowOrColumn extends StatelessWidget {
-  const RowOrColumn({super.key, required this.firstWidget, required this.lastWidget, required this.isRow});
+  const RowOrColumn({
+    super.key,
+    required this.firstWidget,
+    required this.lastWidget,
+    required this.isRow,
+  });
 
   final Widget firstWidget;
   final Widget lastWidget;
@@ -38,9 +49,17 @@ class RowOrColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return isRow
         ? Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[Expanded(child: firstWidget), Expanded(child: lastWidget)],
-        )
-        : Column(children: <Widget>[firstWidget, lastWidget]);
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(child: firstWidget),
+              Expanded(child: lastWidget),
+            ],
+          )
+        : Column(
+            children: <Widget>[
+              firstWidget,
+              lastWidget,
+            ],
+          );
   }
 }

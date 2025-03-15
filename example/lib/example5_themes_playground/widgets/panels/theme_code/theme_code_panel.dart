@@ -102,9 +102,13 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
         });
       }
     } on Exception catch (error, stackTrace) {
-      debugPrintStack(label: 'Error exporting playground theme data: $error', stackTrace: stackTrace);
+      debugPrintStack(
+        label: 'Error exporting playground theme data: $error',
+        stackTrace: stackTrace,
+      );
       if (context.mounted) {
-        final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
+        final double? width =
+            MediaQuery.sizeOf(context).width > 800 ? 700 : null;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
@@ -121,16 +125,25 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
   Future<void> _handleImportPlaygroundTheme(BuildContext context) async {
     try {
       if (playgroundConfig.isNotEmpty) {
-        final String result = await importPlaygroundSettings(widget.controller, settings: playgroundConfig);
+        final String result = await importPlaygroundSettings(
+          widget.controller,
+          settings: playgroundConfig,
+        );
         widget.controller.setImportErrorLog(result);
       }
     } on Exception catch (error, stackTrace) {
-      debugPrintStack(label: 'Error importing playground theme data: $error', stackTrace: stackTrace);
+      debugPrintStack(
+        label: 'Error importing playground theme data: $error',
+        stackTrace: stackTrace,
+      );
       // Date time now formatted as string dd.MM.yyyy HH:mm:ss
-      final String importDate = DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
-      widget.controller.setImportErrorLog('Failed to decode JSON at $importDate, error:\n$error');
+      final String importDate =
+          DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+      widget.controller.setImportErrorLog(
+          'Failed to decode JSON at $importDate, error:\n$error');
       if (context.mounted) {
-        final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
+        final double? width =
+            MediaQuery.sizeOf(context).width > 800 ? 700 : null;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
@@ -163,25 +176,21 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
             message: 'Copy code',
             child: IconButton(
               onPressed: () {
-                unawaited(
-                  ShareSettings.copyToClipboardWithSnackBarInfo(
-                    context,
-                    code,
-                    'FlexColorScheme setup code copied to the clipboard!',
-                  ),
-                );
+                unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
+                  context,
+                  code,
+                  'FlexColorScheme setup code copied to the clipboard!',
+                ));
               },
               icon: const Icon(Icons.copy),
             ),
           ),
           onTap: () {
-            unawaited(
-              ShareSettings.copyToClipboardWithSnackBarInfo(
-                context,
-                code,
-                'FlexColorScheme setup code copied to the clipboard!',
-              ),
-            );
+            unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
+              context,
+              code,
+              'FlexColorScheme setup code copied to the clipboard!',
+            ));
           },
         ),
         // TODO(rydmike): Remove the Seperate file option code below.
@@ -244,7 +253,11 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
           child: SelectableText.rich(
             TextSpan(
               style: GoogleFonts.firaMono(fontSize: 12),
-              children: <TextSpan>[DartSyntaxHighlighter(SyntaxHighlighterStyle.harmonized(context)).format(code)],
+              children: <TextSpan>[
+                DartSyntaxHighlighter(
+                  SyntaxHighlighterStyle.harmonized(context),
+                ).format(code),
+              ],
             ),
           ),
         ),
@@ -282,34 +295,34 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
         const SizedBox(height: 16),
         ...switch (widget.controller.canImportExportThemeData()) {
           true => <Widget>[
-            const SizedBox(height: 8),
-            const Divider(height: 1),
-            ListTileReveal(
-              title: const Text('Export and Import Playground Settings'),
-              leading: const Icon(Icons.data_object),
-              subtitleReveal: Text(
-                'With this feature you can export '
-                'the current theme settings from the Themes Playground '
-                'app to a JSON string into the staging area below. '
-                'You can then paste this JSON string into a file and e.g. '
-                'keep the file in your project. The Themes Playground '
-                'settings can then be re-imported here if you need to '
-                "make design changes to your application's theme.\n"
-                '\n'
-                'Latest import log is shown below:\n'
-                '\n'
-                '${widget.controller.importErrorLog}',
+              const SizedBox(height: 8),
+              const Divider(height: 1),
+              ListTileReveal(
+                title: const Text('Export and Import Playground Settings'),
+                leading: const Icon(Icons.data_object),
+                subtitleReveal: Text(
+                  'With this feature you can export '
+                  'the current theme settings from the Themes Playground '
+                  'app to a JSON string into the staging area below. '
+                  'You can then paste this JSON string into a file and e.g. '
+                  'keep the file in your project. The Themes Playground '
+                  'settings can then be re-imported here if you need to '
+                  "make design changes to your application's theme.\n"
+                  '\n'
+                  'Latest import log is shown below:\n'
+                  '\n'
+                  '${widget.controller.importErrorLog}',
+                ),
+                tileColor: theme.colorScheme.surfaceContainer,
               ),
-              tileColor: theme.colorScheme.surfaceContainer,
-            ),
-            const Divider(height: 1),
-            const SizedBox(height: 8),
-            ResponsiveTwoWidgets(
-              builder: (BuildContext context, bool isRow) {
+              const Divider(height: 1),
+              const SizedBox(height: 8),
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
-                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Export settings'),
                     subtitleReveal: const Text(
                       'Export theme settings to JSON to the staging '
@@ -348,38 +361,34 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       child: IconButton(
                         onPressed: () {
                           unawaited(
-                            ShareSettings.copyToClipboardWithSnackBarInfo(
-                              context,
-                              playgroundConfig,
-                              'Themes Playground configuration copied to the '
-                              'clipboard!',
-                            ),
-                          );
+                              ShareSettings.copyToClipboardWithSnackBarInfo(
+                            context,
+                            playgroundConfig,
+                            'Themes Playground configuration copied to the '
+                            'clipboard!',
+                          ));
                         },
                         icon: const Icon(Icons.copy),
                       ),
                     ),
                     onTap: () {
-                      unawaited(
-                        ShareSettings.copyToClipboardWithSnackBarInfo(
-                          context,
-                          playgroundConfig,
-                          'Themes Playground configuration copied to the '
-                          'clipboard!',
-                        ),
-                      );
+                      unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
+                        context,
+                        playgroundConfig,
+                        'Themes Playground configuration copied to the '
+                        'clipboard!',
+                      ));
                     },
                   ),
                   isRow: isRow,
                 );
-              },
-            ),
-            ResponsiveTwoWidgets(
-              builder: (BuildContext context, bool isRow) {
+              }),
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
-                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Paste settings'),
                     subtitleReveal: const Text(
                       'Paste Themes Playground JSON settings from '
@@ -424,15 +433,14 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                   ),
                   isRow: isRow,
                 );
-              },
-            ),
-            ResponsiveTwoWidgets(
-              builder: (BuildContext context, bool isRow) {
+              }),
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
                     enabled: playgroundConfig.isNotEmpty,
-                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Make shareable URL'),
                     subtitleReveal: const Text(
                       'This takes the exported settings JSON string from the '
@@ -440,9 +448,13 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       'settings that can be shared.\n',
                     ),
                     trailing: IconButton(
-                      icon: const Tooltip(message: 'Make URL', child: Icon(Icons.link)),
+                      icon: const Tooltip(
+                        message: 'Make URL',
+                        child: Icon(Icons.link),
+                      ),
                       onPressed: () async {
-                        shareUrl = await ShareSettings.makeUrl(playgroundConfig);
+                        shareUrl =
+                            await ShareSettings.makeUrl(playgroundConfig);
                         setState(() {});
                       },
                     ),
@@ -469,39 +481,35 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       child: IconButton(
                         onPressed: () {
                           unawaited(
-                            ShareSettings.copyToClipboardWithSnackBarInfo(
-                              context,
-                              shareUrl,
-                              'Themes Playground settings share link copied '
-                              'to the clipboard!',
-                            ),
-                          );
+                              ShareSettings.copyToClipboardWithSnackBarInfo(
+                            context,
+                            shareUrl,
+                            'Themes Playground settings share link copied '
+                            'to the clipboard!',
+                          ));
                         },
                         icon: const Icon(Icons.copy),
                       ),
                     ),
                     onTap: () {
-                      unawaited(
-                        ShareSettings.copyToClipboardWithSnackBarInfo(
-                          context,
-                          shareUrl,
-                          'Themes Playground settings share link copied '
-                          'to the clipboard!',
-                        ),
-                      );
+                      unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
+                        context,
+                        shareUrl,
+                        'Themes Playground settings share link copied '
+                        'to the clipboard!',
+                      ));
                     },
                   ),
                   isRow: isRow,
                 );
-              },
-            ),
-            ResponsiveTwoWidgets(
-              builder: (BuildContext context, bool isRow) {
+              }),
+              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
                     enabled: playgroundConfig.isNotEmpty,
-                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding:
+                        ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Clear staging area'),
                     subtitleReveal: const Text(
                       'This action only clears the staging area below '
@@ -510,7 +518,10 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       'destructive, just a way to clear the area.',
                     ),
                     trailing: IconButton(
-                      icon: const Tooltip(message: 'Clear staging area', child: Icon(Icons.refresh)),
+                      icon: const Tooltip(
+                        message: 'Clear staging area',
+                        child: Icon(Icons.refresh),
+                      ),
                       onPressed: () {
                         setState(() {
                           playgroundConfig = '';
@@ -539,7 +550,10 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                       'invalid JSON import keys.\n',
                     ),
                     trailing: IconButton(
-                      icon: const Tooltip(message: 'Delete local data', child: Icon(Icons.delete)),
+                      icon: const Tooltip(
+                        message: 'Delete local data',
+                        child: Icon(Icons.delete),
+                      ),
                       onPressed: () async {
                         await _handleDeleteStorage(context);
                       },
@@ -550,58 +564,67 @@ class _ThemeCodePanelState extends State<ThemeCodePanel> {
                   ),
                   isRow: isRow,
                 );
-              },
-            ),
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Card(
-                margin: EdgeInsets.zero,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      if (playgroundConfig.isEmpty)
-                        const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Text('Staging import/export area is empty'),
+              }),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        if (playgroundConfig.isEmpty)
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Text(
+                                'Staging import/export area is empty',
+                              ),
+                            ),
+                          )
+                        else ...<Widget>[
+                          if (shareUrl.isNotEmpty) ...<Widget>[
+                            const Text('\nShareable settings URL'),
+                            Text(
+                              shareUrl,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.firaMono(
+                                fontSize: 11,
+                              ).copyWith(
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                            const Text('\nExported settings JSON data'),
+                          ],
+                          SelectableText(
+                            playgroundConfig,
+                            style: GoogleFonts.firaMono(
+                              fontSize: 11,
+                            ).copyWith(
+                              color: theme.colorScheme.primary,
+                            ),
                           ),
-                        )
-                      else ...<Widget>[
-                        if (shareUrl.isNotEmpty) ...<Widget>[
-                          const Text('\nShareable settings URL'),
-                          Text(
-                            shareUrl,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.firaMono(fontSize: 11).copyWith(color: theme.colorScheme.primary),
-                          ),
-                          const Text('\nExported settings JSON data'),
                         ],
-                        SelectableText(
-                          playgroundConfig,
-                          style: GoogleFonts.firaMono(fontSize: 11).copyWith(color: theme.colorScheme.primary),
-                        ),
                       ],
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
           false => <Widget>[
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Card(
-                margin: EdgeInsets.zero,
-                child: Text(
-                  'Playground theme export not supported with '
-                  'current storage solution.',
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  child: Text(
+                    'Playground theme export not supported with '
+                    'current storage solution.',
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
         },
         const SizedBox(height: 8),
       ],

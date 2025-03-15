@@ -22,7 +22,11 @@ import '../../../theme/theme_values.dart';
 /// this version is kind of cooler. Just to show different ways of doing the
 /// same things. This is of course a bit more complicated to build.
 class InputColorsSelector extends StatefulWidget {
-  const InputColorsSelector({super.key, required this.controller, required this.isPhone});
+  const InputColorsSelector({
+    super.key,
+    required this.controller,
+    required this.isPhone,
+  });
 
   final ThemeController controller;
   final bool isPhone;
@@ -46,10 +50,17 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     super.initState();
     schemeIndex = widget.controller.schemeIndex;
     final bool isCompact = widget.controller.compactMode;
-    final double phoneReduce = widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
-    final double phoneButtonsSpacingReduce = widget.isPhone || isCompact ? -3 : 0;
-    scrollOffset = (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) * schemeIndex;
-    scrollController = ScrollController(keepScrollOffset: true, initialScrollOffset: scrollOffset);
+    final double phoneReduce =
+        widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce =
+        widget.isPhone || isCompact ? -3 : 0;
+    scrollOffset =
+        (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
+            schemeIndex;
+    scrollController = ScrollController(
+      keepScrollOffset: true,
+      initialScrollOffset: scrollOffset,
+    );
   }
 
   @override
@@ -63,10 +74,14 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
     super.didChangeDependencies();
     if (widget.controller.schemeIndex != schemeIndex) {
       final bool isCompact = widget.controller.compactMode;
-      final double phoneReduce = widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
-      final double phoneButtonsSpacingReduce = widget.isPhone || isCompact ? -3 : 0;
+      final double phoneReduce =
+          widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
+      final double phoneButtonsSpacingReduce =
+          widget.isPhone || isCompact ? -3 : 0;
       schemeIndex = widget.controller.schemeIndex;
-      scrollOffset = (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) * schemeIndex;
+      scrollOffset =
+          (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
+              schemeIndex;
       scrollController.jumpTo(scrollOffset);
     }
   }
@@ -74,8 +89,10 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
   @override
   Widget build(BuildContext context) {
     final bool isCompact = widget.controller.compactMode;
-    final double phoneReduce = widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
-    final double phoneButtonsSpacingReduce = widget.isPhone || isCompact ? -3 : 0;
+    final double phoneReduce =
+        widget.isPhone || isCompact ? App.colorButtonPhoneReduce : 0;
+    final double phoneButtonsSpacingReduce =
+        widget.isPhone || isCompact ? -3 : 0;
     return SizedBox(
       height: _kHeightOfScrollItem + phoneReduce,
       child: Row(
@@ -104,15 +121,20 @@ class _InputColorsSelectorState extends State<InputColorsSelector> {
 }
 
 class InputColorsSelectorVertical extends StatefulWidget {
-  const InputColorsSelectorVertical({super.key, required this.controller});
+  const InputColorsSelectorVertical({
+    super.key,
+    required this.controller,
+  });
 
   final ThemeController controller;
 
   @override
-  State<InputColorsSelectorVertical> createState() => _InputColorsSelectorVerticalState();
+  State<InputColorsSelectorVertical> createState() =>
+      _InputColorsSelectorVerticalState();
 }
 
-class _InputColorsSelectorVerticalState extends State<InputColorsSelectorVertical> {
+class _InputColorsSelectorVerticalState
+    extends State<InputColorsSelectorVertical> {
   late final ScrollController scrollController;
   late int schemeIndex;
   late double scrollOffset;
@@ -127,8 +149,13 @@ class _InputColorsSelectorVerticalState extends State<InputColorsSelectorVertica
     final bool isCompact = widget.controller.compactMode;
     final double phoneReduce = isCompact ? App.colorButtonPhoneReduce : 0;
     final double phoneButtonsSpacingReduce = isCompact ? -3 : 0;
-    scrollOffset = (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) * schemeIndex;
-    scrollController = ScrollController(keepScrollOffset: true, initialScrollOffset: scrollOffset);
+    scrollOffset =
+        (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
+            schemeIndex;
+    scrollController = ScrollController(
+      keepScrollOffset: true,
+      initialScrollOffset: scrollOffset,
+    );
   }
 
   @override
@@ -146,7 +173,9 @@ class _InputColorsSelectorVerticalState extends State<InputColorsSelectorVertica
       final double phoneButtonsSpacingReduce = isCompact ? -3 : 0;
 
       schemeIndex = widget.controller.schemeIndex;
-      scrollOffset = (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) * schemeIndex;
+      scrollOffset =
+          (_kWidthOfScrollItem + phoneReduce + phoneButtonsSpacingReduce) *
+              schemeIndex;
       scrollController.jumpTo(scrollOffset);
     }
   }
@@ -209,17 +238,20 @@ class SchemeButtonsList extends StatelessWidget {
   double _borderRadius(bool useMaterial3) =>
       controller.useSubThemes && controller.useFlexColorScheme
           // FCS default for Card is 12.
-          ? (controller.cardBorderRadius ?? ThemeValues.effectiveRadius(controller) ?? 12)
+          ? (controller.cardBorderRadius ??
+              ThemeValues.effectiveRadius(controller) ??
+              12)
           // M3 or M2 default for Card.
           : useMaterial3
-          ? 12
-          : 4;
+              ? 12
+              : 4;
 
   @override
   Widget build(BuildContext context) {
     final Size mediaSize = MediaQuery.sizeOf(context);
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
-    final double margins = App.responsiveInsets(mediaSize.width, controller.compactMode);
+    final double margins =
+        App.responsiveInsets(mediaSize.width, controller.compactMode);
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final bool useMaterial3 = theme.useMaterial3;
@@ -242,18 +274,20 @@ class SchemeButtonsList extends StatelessWidget {
           message: AppColor.schemes[index].name,
           waitDuration: const Duration(milliseconds: 700),
           child: FlexThemeModeOptionButton(
-            semanticLabel:
-                'Set to color scheme '
+            semanticLabel: 'Set to color scheme '
                 '${AppColor.schemes[index].name}',
             setFocusOnTap: true,
             // The buttons are colorful and need custom light/dark mode
             // focus and hover colors that don't depend theme to be visible.
-            hoverColor: isLight ? Colors.white.withAlpha(0x3F) : Colors.black.withAlpha(0x2F),
-            focusColor: isLight ? Colors.white.withAlpha(0x5F) : Colors.black.withAlpha(0x4F),
+            hoverColor: isLight
+                ? Colors.white.withAlpha(0x3F)
+                : Colors.black.withAlpha(0x2F),
+            focusColor: isLight
+                ? Colors.white.withAlpha(0x5F)
+                : Colors.black.withAlpha(0x4F),
             optionButtonPadding: EdgeInsetsDirectional.only(
-              start: isHorizontal ? 6 + phoneButtonsSpacingReduce : 0,
-              bottom: isHorizontal ? 0 : 6 + phoneButtonsSpacingReduce,
-            ),
+                start: isHorizontal ? 6 + phoneButtonsSpacingReduce : 0,
+                bottom: isHorizontal ? 0 : 6 + phoneButtonsSpacingReduce),
             optionButtonBorderRadius: _borderRadius(useMaterial3),
             height: 30 + phoneReduce / 2,
             width: 30 + phoneReduce / 2,
@@ -261,16 +295,18 @@ class SchemeButtonsList extends StatelessWidget {
             optionButtonMargin: EdgeInsets.zero,
             borderRadius: 0,
             unselectedBorder: BorderSide.none,
-            selectedBorder: BorderSide(color: theme.primaryColorLight, width: 4),
+            selectedBorder: BorderSide(
+              color: theme.primaryColorLight,
+              width: 4,
+            ),
             onSelect: () {
               onSelect(index);
             },
             selected: controller.schemeIndex == index,
             backgroundColor: theme.colorScheme.surface,
-            flexSchemeColor:
-                isLight
-                    ? AppColor.schemeAtIndex(index, controller).light
-                    : AppColor.schemeAtIndex(index, controller).dark,
+            flexSchemeColor: isLight
+                ? AppColor.schemeAtIndex(index, controller).light
+                : AppColor.schemeAtIndex(index, controller).dark,
           ),
         );
       },

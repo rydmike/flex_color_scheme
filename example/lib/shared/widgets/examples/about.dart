@@ -34,7 +34,8 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle =
+      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
@@ -85,23 +86,24 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
               children: <TextSpan>[
                 TextSpan(
                   style: aboutTextStyle,
-                  text:
-                      'The ${App.title(context)} application demonstrates '
+                  text: 'The ${App.title(context)} application demonstrates '
                       'features '
                       'of the ${App.packageName} Flutter theming package.\n\n'
                       'To learn more, check out the package on ',
                 ),
-                LinkTextSpan(style: linkStyle, uri: App.packageUri, text: 'pub.dev'),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: App.packageUri,
+                  text: 'pub.dev',
+                ),
                 TextSpan(
                   style: aboutTextStyle,
-                  text:
-                      '. It also includes the source code '
+                  text: '. It also includes the source code '
                       'of this application.\n\n',
                 ),
                 TextSpan(
                   style: footerStyle,
-                  text:
-                      'Built with Flutter ${App.flutterVersion}, '
+                  text: 'Built with Flutter ${App.flutterVersion}, '
                       'using ${App.packageName} '
                       '${App.version}. '
                       'Media size (w:${width.toStringAsFixed(0)}, '

@@ -15,7 +15,7 @@ dependencies:
   # Provides encoders and decoders for various archive and compression
   # formats such as zip, tar, bzip2, gzip, and zlib. (by loki3d.com)
   # https://pub.dev/packages/archive
-  archive: ^4.0.3
+  archive: ^4.0.2
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.

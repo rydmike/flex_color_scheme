@@ -21,7 +21,8 @@ class AdaptiveThemePanel extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,115 +31,109 @@ class AdaptiveThemePanel extends StatelessWidget {
         const ListTileReveal(
           title: Text('Platform adaptive response'),
           subtitleReveal: Text(
-            'With platform adaptive settings you can modify theme '
-            'properties to have a different response on selected platforms.\n'
-            '\n'
-            'You select which platforms the platform adaptive '
-            'value should be used on. All other platforms not included '
-            'in this choice, will continue to use the none adaptive '
-            'value or default behavior.\n'
-            '\n'
-            'With the API you can customize which platform an adaptive '
-            'response is used on, including separate definitions when using '
-            'the app in a web build on each platform. The selections here '
-            'use built-in combinations, they cover typical use cases.',
-          ),
+              'With platform adaptive settings you can modify theme '
+              'properties to have a different response on selected platforms.\n'
+              '\n'
+              'You select which platforms the platform adaptive '
+              'value should be used on. All other platforms not included '
+              'in this choice, will continue to use the none adaptive '
+              'value or default behavior.\n'
+              '\n'
+              'With the API you can customize which platform an adaptive '
+              'response is used on, including separate definitions when using '
+              'the app in a web build on each platform. The selections here '
+              'use built-in combinations, they cover typical use cases.'),
         ),
-        ResponsiveTwoWidgets(
-          builder: (BuildContext context, bool isRow) {
-            return RowOrColumn(
-              isRow: isRow,
-              firstWidget: EnumPopupMenu<VisualDensityEnum>(
-                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-                enabled: controller.useFlexColorScheme,
-                values: VisualDensityEnum.values,
-                title: const Text('Visual density'),
-                subtitleReveal: Text(
-                  'Defines the visual density of user interface components. '
-                  'Density, in the context of a UI, is the vertical and '
-                  'horizontal "compactness" of the components in the UI. '
-                  'It is without unit, since it means different things to '
-                  'different UI components.\n'
-                  '\n'
-                  // ignore: lines_longer_than_80_chars
-                  '${controller.visualDensity?.describe ?? VisualDensityEnum.platform.describe}',
-                ),
-                value: controller.visualDensity,
-                onChanged: controller.setVisualDensity,
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            isRow: isRow,
+            firstWidget: EnumPopupMenu<VisualDensityEnum>(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: controller.useFlexColorScheme,
+              values: VisualDensityEnum.values,
+              title: const Text('Visual density'),
+              subtitleReveal: Text(
+                'Defines the visual density of user interface components. '
+                'Density, in the context of a UI, is the vertical and '
+                'horizontal "compactness" of the components in the UI. '
+                'It is without unit, since it means different things to '
+                'different UI components.\n'
+                '\n'
+                // ignore: lines_longer_than_80_chars
+                '${controller.visualDensity?.describe ?? VisualDensityEnum.platform.describe}',
               ),
-              lastWidget: EnumPopupMenu<MaterialTapTargetSize>(
-                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-                enabled: controller.useFlexColorScheme,
-                values: MaterialTapTargetSize.values,
-                title: const Text('Tap target size'),
-                subtitleReveal: const Text(
-                  'Configures the tap target and layout size of Material '
-                  'widgets.\n'
-                  '\n'
-                  'The "padded" selection makes minimum tap size 48x48 dp '
-                  'and is primarily intended for Mobile touch devices.\n'
-                  '\n'
-                  'The "shrinkWrap" selection keeps the tap target size '
-                  'same as the child size, and is primary intended for Desktop '
-                  'devices.\n'
-                  '\n'
-                  'Impacted Material widgets are:\n'
-                  'FloatingActionButton (only the mini one), '
-                  'OutlinedButton, TextButton, ElevatedButton, IconButton, '
-                  'showTimePicker, SnackBar, Chips, Radio, Switch '
-                  'and Checkbox.\n'
-                  '\n',
-                ),
-                value: controller.tapTargetSize,
-                onChanged: controller.setTapTargetSize,
+              value: controller.visualDensity,
+              onChanged: controller.setVisualDensity,
+            ),
+            lastWidget: EnumPopupMenu<MaterialTapTargetSize>(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: controller.useFlexColorScheme,
+              values: MaterialTapTargetSize.values,
+              title: const Text('Tap target size'),
+              subtitleReveal: const Text(
+                'Configures the tap target and layout size of Material '
+                'widgets.\n'
+                '\n'
+                'The "padded" selection makes minimum tap size 48x48 dp '
+                'and is primarily intended for Mobile touch devices.\n'
+                '\n'
+                'The "shrinkWrap" selection keeps the tap target size '
+                'same as the child size, and is primary intended for Desktop '
+                'devices.\n'
+                '\n'
+                'Impacted Material widgets are:\n'
+                'FloatingActionButton (only the mini one), '
+                'OutlinedButton, TextButton, ElevatedButton, IconButton, '
+                'showTimePicker, SnackBar, Chips, Radio, Switch '
+                'and Checkbox.\n'
+                '\n',
               ),
-            );
-          },
-        ),
+              value: controller.tapTargetSize,
+              onChanged: controller.setTapTargetSize,
+            ),
+          );
+        }),
         const Divider(),
-        ResponsiveTwoWidgets(
-          builder: (BuildContext context, bool isRow) {
-            return RowOrColumn(
-              isRow: isRow,
-              firstWidget: EnumPopupMenu<SplashTypeEnum>(
-                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-                enabled: enableControl,
-                values: SplashTypeEnum.values,
-                title: const Text('Splash type'),
-                subtitleReveal: Text(
-                  'Defines the type of tap ink splash effect used on Material '
-                  'UI components.\n'
-                  '\n'
-                  // ignore: lines_longer_than_80_chars
-                  '${controller.splashType?.describe ?? SplashTypeEnum.defaultSplash.describe}',
-                ),
-                value: controller.splashType,
-                onChanged: controller.setSplashType,
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            isRow: isRow,
+            firstWidget: EnumPopupMenu<SplashTypeEnum>(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              values: SplashTypeEnum.values,
+              title: const Text('Splash type'),
+              subtitleReveal: Text(
+                'Defines the type of tap ink splash effect used on Material '
+                'UI components.\n'
+                '\n'
+                // ignore: lines_longer_than_80_chars
+                '${controller.splashType?.describe ?? SplashTypeEnum.defaultSplash.describe}',
               ),
-              lastWidget: EnumPopupMenu<SplashTypeEnum>(
-                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-                enabled:
-                    enableControl &&
-                    controller.adaptiveResponseSplash != AdaptiveResponse.off &&
-                    controller.adaptiveResponseSplash != null,
-                values: SplashTypeEnum.values,
-                title: const Text('Adaptive splash'),
-                subtitleReveal: Text(
-                  'Defines the type of tap ink splash effect response used on '
-                  'Material UI components when running on selected platforms. '
-                  'When not running on these platforms or if the platform '
-                  'adaptive ink feature is OFF, the ink splash effect is '
-                  'used.\n'
-                  '\n'
-                  // ignore: lines_longer_than_80_chars
-                  '${controller.splashTypeAdaptive?.describe ?? SplashTypeEnum.defaultSplash.describe}',
-                ),
-                value: controller.splashTypeAdaptive,
-                onChanged: controller.setSplashTypeAdaptive,
+              value: controller.splashType,
+              onChanged: controller.setSplashType,
+            ),
+            lastWidget: EnumPopupMenu<SplashTypeEnum>(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl &&
+                  controller.adaptiveResponseSplash != AdaptiveResponse.off &&
+                  controller.adaptiveResponseSplash != null,
+              values: SplashTypeEnum.values,
+              title: const Text('Adaptive splash'),
+              subtitleReveal: Text(
+                'Defines the type of tap ink splash effect response used on '
+                'Material UI components when running on selected platforms. '
+                'When not running on these platforms or if the platform '
+                'adaptive ink feature is OFF, the ink splash effect is '
+                'used.\n'
+                '\n'
+                // ignore: lines_longer_than_80_chars
+                '${controller.splashTypeAdaptive?.describe ?? SplashTypeEnum.defaultSplash.describe}',
               ),
-            );
-          },
-        ),
+              value: controller.splashTypeAdaptive,
+              onChanged: controller.setSplashTypeAdaptive,
+            ),
+          );
+        }),
         EnumPopupMenu<AdaptiveResponse>(
           enabled: enableControl,
           values: AdaptiveResponse.values,
@@ -261,13 +256,11 @@ class AdaptiveThemePanel extends StatelessWidget {
         const Divider(),
         const ListTile(
           dense: true,
-          title: Text(
-            'You can find additional platform adaptive '
-            'theme settings under Shape Radius, Switch, TextField, AppBar, '
-            'NavigationBar and Dialogs. The above controls used '
-            'to test the adaptive response are present on all settings '
-            'panels that have platform adaptive properties.',
-          ),
+          title: Text('You can find additional platform adaptive '
+              'theme settings under Shape Radius, Switch, TextField, AppBar, '
+              'NavigationBar and Dialogs. The above controls used '
+              'to test the adaptive response are present on all settings '
+              'panels that have platform adaptive properties.'),
         ),
         const SizedBox(height: 8),
       ],

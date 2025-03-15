@@ -6,7 +6,10 @@ import '../../../shared/widgets/universal/is_web_toggle_buttons.dart';
 import '../../../shared/widgets/universal/list_tile_reveal.dart';
 
 class IsWebListTile extends StatelessWidget {
-  const IsWebListTile({required this.controller, super.key});
+  const IsWebListTile({
+    required this.controller,
+    super.key,
+  });
   final ThemeController controller;
 
   String _explainLabelStyle(final bool? isWeb) {
@@ -30,13 +33,15 @@ class IsWebListTile extends StatelessWidget {
       title: const Text('Mock web'),
       subtitle: Text(_explainLabelStyle(controller.fakeIsWeb)),
       subtitleReveal: const Text(
-        'Use this setting to test what your adaptive theme looks '
-        'likes on web and none web platform, by mocking web or device usage '
-        'status here in the Playground.\n',
-      ),
+          'Use this setting to test what your adaptive theme looks '
+          'likes on web and none web platform, by mocking web or device usage '
+          'status here in the Playground.\n'),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 5.0),
-        child: IsWebToggleButtons(isWeb: controller.fakeIsWeb, onChanged: controller.setFakeIsWeb),
+        child: IsWebToggleButtons(
+          isWeb: controller.fakeIsWeb,
+          onChanged: controller.setFakeIsWeb,
+        ),
       ),
       onTap: () {
         if (controller.fakeIsWeb ?? false) {

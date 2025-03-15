@@ -33,15 +33,17 @@ class TonalPaletteColors extends StatelessWidget {
   /// Type of palette displayed.
   final FlexPaletteType paletteType;
 
-  String _toneLabel(int index) =>
-      paletteType == FlexPaletteType.common
-          ? FlexTonalPalette.commonTones[index].toString()
-          : FlexTonalPalette.extendedTones[index].toString();
+  String _toneLabel(int index) => paletteType == FlexPaletteType.common
+      ? FlexTonalPalette.commonTones[index].toString()
+      : FlexTonalPalette.extendedTones[index].toString();
 
   static Color _onColor(Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light ? Colors.black : Colors.white;
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light
+          ? Colors.black
+          : Colors.white;
 
-  static bool _isLight(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(Color color) =>
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,8 @@ class TonalPaletteColors extends StatelessWidget {
                 color: Color(tonalPalette[i]),
                 height: height,
                 onTap: () {
-                  unawaited(copyColorToClipboard(context, Color(tonalPalette[i])));
+                  unawaited(
+                      copyColorToClipboard(context, Color(tonalPalette[i])));
                 },
                 child: Center(
                   child: Stack(
@@ -79,7 +82,8 @@ class TonalPaletteColors extends StatelessWidget {
                             size: height - 6,
                             color: _onColor(
                               Color(tonalPalette[i]),
-                            ).withAlpha(_isLight(Color(tonalPalette[i])) ? 0x33 : 0x66),
+                            ).withAlpha(
+                                _isLight(Color(tonalPalette[i])) ? 0x33 : 0x66),
                           ),
                         ),
                     ],

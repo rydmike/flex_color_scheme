@@ -5,14 +5,18 @@ import '../../../shared/controllers/theme_controller.dart';
 import '../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 
 class CustomUsesDarkColorsForSeedSwitch extends StatelessWidget {
-  const CustomUsesDarkColorsForSeedSwitch({super.key, required this.controller});
+  const CustomUsesDarkColorsForSeedSwitch({
+    super.key,
+    required this.controller,
+  });
   final ThemeController controller;
 
   @override
   Widget build(BuildContext context) {
     return SwitchListTileReveal(
       dense: true,
-      enabled: controller.useKeyColors && controller.schemeIndex == AppColor.schemes.length - 1,
+      enabled: controller.useKeyColors &&
+          controller.schemeIndex == AppColor.schemes.length - 1,
       title: const Text('Custom dark uses its own colors as seeds'),
       subtitleReveal: const Text(
         'Turn ON to use the custom dark input colors as seed keys '

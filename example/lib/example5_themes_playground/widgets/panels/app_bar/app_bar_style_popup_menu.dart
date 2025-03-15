@@ -89,7 +89,9 @@ class AppBarStylePopupMenu extends StatelessWidget {
       case FlexAppBarStyle.primary:
         return colorScheme.primary;
       case FlexAppBarStyle.material:
-        return isLight ? FlexColor.materialLightSurface : FlexColor.materialDarkSurface;
+        return isLight
+            ? FlexColor.materialLightSurface
+            : FlexColor.materialDarkSurface;
       case FlexAppBarStyle.surface:
         return colorScheme.surface;
       case FlexAppBarStyle.background:
@@ -113,12 +115,18 @@ class AppBarStylePopupMenu extends StatelessWidget {
     }
   }
 
-  String _popupItemLabel(final FlexAppBarStyle? style, final bool isLight, final bool useMaterial3) {
+  String _popupItemLabel(
+    final FlexAppBarStyle? style,
+    final bool isLight,
+    final bool useMaterial3,
+  ) {
     switch (style) {
       case FlexAppBarStyle.primary:
         return 'Primary\n(M2 light default)';
       case FlexAppBarStyle.material:
-        return isLight ? 'Material white\n(M2 light spec)' : 'Material #121212\n(M2 dark spec)';
+        return isLight
+            ? 'Material white\n(M2 light spec)'
+            : 'Material #121212\n(M2 dark spec)';
       case FlexAppBarStyle.surface:
         return 'Surface${isBlended ? '\nwith blend (M3 spec)' : ''}';
       case FlexAppBarStyle.background:
@@ -131,7 +139,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         {
           if (useMaterial3) {
             return 'Default (surface)${isBlended ? '\n'
-                    'with blend ' : '\n'}(M3 spec)';
+                'with blend ' : '\n'}(M3 spec)';
           } else {
             if (isLight) {
               return 'Default primary\n(M2 spec)';
@@ -152,10 +160,13 @@ class AppBarStylePopupMenu extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelMedium!;
 
     final String defaultSelectionValuePopupLabel =
-        (enabled ? null : defaultDisabledLabel) ?? defaultLabel ?? _popupItemLabel(null, isLight, useMaterial3);
+        (enabled ? null : defaultDisabledLabel) ??
+            defaultLabel ??
+            _popupItemLabel(null, isLight, useMaterial3);
 
-    final String selectedPopupLabel =
-        enabled && value != null ? _popupItemLabel(value, isLight, useMaterial3) : defaultSelectionValuePopupLabel;
+    final String selectedPopupLabel = enabled && value != null
+        ? _popupItemLabel(value, isLight, useMaterial3)
+        : defaultSelectionValuePopupLabel;
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
@@ -169,59 +180,77 @@ class AppBarStylePopupMenu extends StatelessWidget {
         onChanged?.call(index == 0 ? null : FlexAppBarStyle.values[index - 1]);
       },
       enabled: enabled,
-      itemBuilder:
-          (BuildContext context) => <PopupMenuItem<int>>[
-            for (int i = 0; i <= FlexAppBarStyle.values.length; i++)
-              PopupMenuItem<int>(
-                value: i,
-                child: ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  leading: ColorSchemeBox(
-                    borderColor: (value?.index ?? -1) + 1 == i ? theme.colorScheme.onSurface : theme.dividerColor,
-                    selected: (value?.index ?? -1) + 1 == i,
-                    backgroundColor:
-                        i == 0
-                            ? _appBarStyleColor(null, colorScheme, theme.scaffoldBackgroundColor, isLight, useMaterial3)
-                            : _appBarStyleColor(
-                              FlexAppBarStyle.values[i - 1],
-                              colorScheme,
-                              theme.scaffoldBackgroundColor,
-                              isLight,
-                              useMaterial3,
-                            ),
-                    defaultOption: i == 0,
-                  ),
-                  title:
-                      i == 0
-                          // If first position use default label.
-                          ? Text(defaultSelectionValuePopupLabel, style: txtStyle)
-                          : Text(
-                            _popupItemLabel(FlexAppBarStyle.values[i - 1], isLight, useMaterial3),
-                            style: txtStyle,
-                          ),
-                ),
+      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+        for (int i = 0; i <= FlexAppBarStyle.values.length; i++)
+          PopupMenuItem<int>(
+            value: i,
+            child: ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              leading: ColorSchemeBox(
+                borderColor: (value?.index ?? -1) + 1 == i
+                    ? theme.colorScheme.onSurface
+                    : theme.dividerColor,
+                selected: (value?.index ?? -1) + 1 == i,
+                backgroundColor: i == 0
+                    ? _appBarStyleColor(
+                        null,
+                        colorScheme,
+                        theme.scaffoldBackgroundColor,
+                        isLight,
+                        useMaterial3,
+                      )
+                    : _appBarStyleColor(
+                        FlexAppBarStyle.values[i - 1],
+                        colorScheme,
+                        theme.scaffoldBackgroundColor,
+                        isLight,
+                        useMaterial3,
+                      ),
+                defaultOption: i == 0,
               ),
-          ],
+              title: i == 0
+                  // If first position use default label.
+                  ? Text(defaultSelectionValuePopupLabel, style: txtStyle)
+                  : Text(
+                      _popupItemLabel(
+                          FlexAppBarStyle.values[i - 1], isLight, useMaterial3),
+                      style: txtStyle),
+            ),
+          )
+      ],
       child: ListTile(
         enabled: enabled,
         contentPadding: contentPadding,
         title: title,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[if (subtitle != null) subtitle!, Text(selectedPopupLabel)],
+          children: <Widget>[
+            if (subtitle != null) subtitle!,
+            Text(selectedPopupLabel),
+          ],
         ),
         trailing: Padding(
           padding: const EdgeInsetsDirectional.only(end: 5.0),
           child: ColorSchemeBox(
-            borderColor:
-                !enabled || value == null
-                    ? colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5)
-                    : colorScheme.outline,
-            backgroundColor:
-                !enabled || value == null
-                    ? _appBarStyleColor(null, colorScheme, theme.scaffoldBackgroundColor, isLight, useMaterial3)
-                    : _appBarStyleColor(value, colorScheme, theme.scaffoldBackgroundColor, isLight, useMaterial3),
+            borderColor: !enabled || value == null
+                ? colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5)
+                : colorScheme.outline,
+            backgroundColor: !enabled || value == null
+                ? _appBarStyleColor(
+                    null,
+                    colorScheme,
+                    theme.scaffoldBackgroundColor,
+                    isLight,
+                    useMaterial3,
+                  )
+                : _appBarStyleColor(
+                    value,
+                    colorScheme,
+                    theme.scaffoldBackgroundColor,
+                    isLight,
+                    useMaterial3,
+                  ),
             defaultOption: !enabled || value == null,
           ),
         ),

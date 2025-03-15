@@ -64,7 +64,8 @@ enum FlexSplashType {
   ///
   /// Type [defaultSplash] returns null the type selection should be handled
   /// by [ThemeData] factory defaults or caller.
-  InteractiveInkFeatureFactory? splashFactory([bool useMaterial3 = true, bool mockIsWeb = false]) {
+  InteractiveInkFeatureFactory? splashFactory(
+      [bool useMaterial3 = true, bool mockIsWeb = false]) {
     switch (this) {
       case FlexSplashType.defaultSplash:
         return null;

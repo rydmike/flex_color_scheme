@@ -21,10 +21,13 @@ class SubpageDemo extends StatefulWidget {
   final ThemeController? controller;
 
   // A static convenience function show this screen, as pushed on top.
-  static Future<void> show(BuildContext context, [ThemeController? controller]) async {
-    await Navigator.of(
-      context,
-    ).push<Widget>(MaterialPageRoute<Widget>(builder: (BuildContext context) => SubpageDemo(controller: controller)));
+  static Future<void> show(BuildContext context,
+      [ThemeController? controller]) async {
+    await Navigator.of(context).push<Widget>(
+      MaterialPageRoute<Widget>(
+        builder: (BuildContext context) => SubpageDemo(controller: controller),
+      ),
+    );
   }
 
   @override
@@ -50,7 +53,8 @@ class _SubpageDemoState extends State<SubpageDemo> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: widget.controller?.systemNavBarStyle ?? FlexSystemNavBarStyle.background,
+        systemNavBarStyle: widget.controller?.systemNavBarStyle ??
+            FlexSystemNavBarStyle.background,
         useDivider: widget.controller?.useSystemNavBarDivider ?? false,
         opacity: widget.controller?.systemNavBarOpacity ?? 1,
       ),
@@ -64,7 +68,13 @@ class _SubpageDemoState extends State<SubpageDemo> {
           appBar: AppBar(
             title: const Text('Subpage Demo'),
             actions: const <Widget>[AboutIconButton()],
-            bottom: const TabBar(tabs: <Widget>[Tab(text: 'Home'), Tab(text: 'Feed'), Tab(text: 'Settings')]),
+            bottom: const TabBar(
+              tabs: <Widget>[
+                Tab(text: 'Home'),
+                Tab(text: 'Feed'),
+                Tab(text: 'Settings'),
+              ],
+            ),
           ),
           body: ResponsiveCenter(
             child: ScrollConfiguration(
@@ -88,7 +98,8 @@ class _SubpageDemoState extends State<SubpageDemo> {
                   if (widget.controller != null)
                     ListTile(
                       title: const Text('Theme mode'),
-                      subtitle: Text('Theme ${widget.controller!.themeMode.name}'),
+                      subtitle:
+                          Text('Theme ${widget.controller!.themeMode.name}'),
                       trailing: ThemeModeSwitch(
                         themeMode: widget.controller!.themeMode,
                         onChanged: widget.controller!.setThemeMode,
@@ -106,15 +117,18 @@ class _SubpageDemoState extends State<SubpageDemo> {
                   // Show all key active theme colors.
                   Text('Theme Colors', style: headlineMedium),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                     child: ShowColorSchemeColors(),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                     child: ShowThemeDataColors(),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                     child: ShowSubThemeColors(),
                   ),
                   const Divider(),
@@ -132,9 +146,21 @@ class _SubpageDemoState extends State<SubpageDemo> {
             },
             selectedIndex: _buttonIndex,
             destinations: const <NavigationDestination>[
-              NavigationDestination(icon: Icon(Icons.chat_bubble), label: 'Chat', tooltip: ''),
-              NavigationDestination(icon: Icon(Icons.beenhere), label: 'Tasks', tooltip: ''),
-              NavigationDestination(icon: Icon(Icons.create_new_folder), label: 'Archive', tooltip: ''),
+              NavigationDestination(
+                icon: Icon(Icons.chat_bubble),
+                label: 'Chat',
+                tooltip: '',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.beenhere),
+                label: 'Tasks',
+                tooltip: '',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.create_new_folder),
+                label: 'Archive',
+                tooltip: '',
+              ),
             ],
           ),
         ),

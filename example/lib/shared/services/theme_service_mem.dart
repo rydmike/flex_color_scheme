@@ -44,7 +44,10 @@ class ThemeServiceMem implements ThemeService {
 
   /// Put all key-value pairs into the Mem storage.
   @override
-  Future<void> putAll(Map<String, dynamic> values, {bool clearExisting = true}) {
+  Future<void> putAll(
+    Map<String, dynamic> values, {
+    bool clearExisting = true,
+  }) {
     throw UnimplementedError();
   }
 

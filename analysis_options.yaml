@@ -23,11 +23,6 @@
 # VG Analysis    v7.0.0     : https://pub.dev/packages/very_good_analysis
 # RydMike        v2.3.0     : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 include: all_lint_rules.yaml
-
-# This project uses 120 char line length.
-formatter:
-  page_width: 120
-
 analyzer:
   exclude:
     - "**/*.g.dart"
@@ -603,8 +598,16 @@ linter:
     #
     # https://dart.dev/tools/linter-rules/lines_longer_than_80_chars.html
     #
-    # We use the new feature to set other line length for the formatter
-    # here in analysis options, so we turn this lint rule OFF.
+    # Using this rule will sometimes force a line of 81 characters to be split in two.
+    # As long as we try to respect the 80-character limit, going slightly above is fine.
+    #
+    # For packages, keep this rule enabled though, because the pub.dev dart format check will
+    # penalize package points if it does not adhere to strict Dart format rules, which
+    # requires max 80 char lines. This rule will then help you find cases where you go over
+    # and fix them manually when possible. Ironically, Flutter repo violates this rule, but
+    # if you do it in a package for pub.dev you get a score deduction. We often disable this rule
+    # if this is not a package, so we keep it listed here as a handy toggle.
+    #
     # Other known linters use:
     #
     # Core           disabled : https://pub.dev/packages/lints
@@ -615,8 +618,10 @@ linter:
     # Flutter repo   disabled : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
     # Lint           disabled : https://pub.dev/packages/lint
     # VG Analysis    enabled  : https://pub.dev/packages/very_good_analysis
-    # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
-    lines_longer_than_80_chars: false
+    # RydMike                 : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    #   PACKAGE:     enabled  : By commenting it out. (Default, even if it is not a package, we start with this.)
+    #   APPLICATION: disabled : With false value. (When/if short lines become problematic. We sometimes like 100 chars.)
+    # lines_longer_than_80_chars: false
 
     # DO use super parameter names that match their corresponding super constructor’s
     # parameter names.

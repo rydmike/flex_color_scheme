@@ -5,7 +5,11 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/nullable_bool_toggle_buttons.dart';
 
 class AppBarCenterTitleToggleButtons extends StatelessWidget {
-  const AppBarCenterTitleToggleButtons({super.key, required this.controller, this.contentPadding});
+  const AppBarCenterTitleToggleButtons({
+    super.key,
+    required this.controller,
+    this.contentPadding,
+  });
   final ThemeController controller;
 
   /// The [ListTile]'s internal padding.
@@ -34,18 +38,20 @@ class AppBarCenterTitleToggleButtons extends StatelessWidget {
       enabled: controller.useFlexColorScheme && controller.useSubThemes,
       title: const Text('Center title'),
       subtitle: Text(_explainLabelStyle(controller.appBarCenterTitle)),
-      subtitleReveal: const Text(
-        'When default undefined "null" value is used, '
-        'Flutter has built-in platform adaptive logic to center the title '
-        'when running on iOs or macOS and to start align on other platforms. '
-        'If two or more action icons are present, the title will be start '
-        'aligned on all platforms when the value is null.',
-      ),
+      subtitleReveal: const Text('When default undefined "null" value is used, '
+          'Flutter has built-in platform adaptive logic to center the title '
+          'when running on iOs or macOS and to start align on other platforms. '
+          'If two or more action icons are present, the title will be start '
+          'aligned on all platforms when the value is null.'),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(
-          value: controller.useFlexColorScheme && controller.useSubThemes ? controller.appBarCenterTitle : null,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes ? controller.setAppBarCenterTitle : null,
+          value: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.appBarCenterTitle
+              : null,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.setAppBarCenterTitle
+              : null,
         ),
       ),
       onTap: () {

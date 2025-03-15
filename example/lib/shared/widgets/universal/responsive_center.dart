@@ -96,7 +96,10 @@ class ResponsiveCenter extends StatelessWidget {
               constraints: constraints,
               child: ScrollConfiguration(
                 behavior: const NoScrollbarBehavior(),
-                child: Padding(padding: padding, child: child),
+                child: Padding(
+                  padding: padding,
+                  child: child,
+                ),
               ),
             ),
           ),

@@ -36,7 +36,10 @@ class _TextThemePanelState extends State<TextThemePanel> {
             });
           },
         ),
-        Padding(padding: const EdgeInsets.all(16), child: TextThemeShowcase(showDetails: showDetails)),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: TextThemeShowcase(showDetails: showDetails),
+        ),
       ],
     );
   }

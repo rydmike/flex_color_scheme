@@ -68,7 +68,8 @@ Future<void> main() async {
 
   // The ThemeServiceHive constructor requires a box name, the others do not.
   // The box name is just a file name for the file that stores the settings.
-  final ThemeService themeService = ThemeServiceHive('flex_color_scheme_v5_box_4');
+  final ThemeService themeService =
+      ThemeServiceHive('flex_color_scheme_v5_box_4');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
@@ -117,20 +118,19 @@ class DemoApp extends StatelessWidget {
             // to pass in a `FlexSubThemesData()` data object that contains a
             // large number of easy to use configuration parameters that you
             // can use for quick styling of the sub-themes per component.
-            subThemesData:
-                themeController.useSubThemes
-                    // Below we show one example for configuring the component
-                    // sub-themes. In example 5 we will use almost all of them.
-                    ? FlexSubThemesData(
-                      // Value to adjust themed border radius on widgets with
-                      // an adjustable corner rounding, this one is very handy.
-                      // If null, it defaults to Material3 (You) design
-                      // guide values, when available: https://m3.material.io/
-                      // If you give it value, "all" Flutter built-in widgets
-                      // supporting border radius will use the give radius.
-                      defaultRadius: themeController.defaultRadius,
-                    )
-                    : null,
+            subThemesData: themeController.useSubThemes
+                // Below we show one example for configuring the component
+                // sub-themes. In example 5 we will use almost all of them.
+                ? FlexSubThemesData(
+                    // Value to adjust themed border radius on widgets with
+                    // an adjustable corner rounding, this one is very handy.
+                    // If null, it defaults to Material3 (You) design
+                    // guide values, when available: https://m3.material.io/
+                    // If you give it value, "all" Flutter built-in widgets
+                    // supporting border radius will use the give radius.
+                    defaultRadius: themeController.defaultRadius,
+                  )
+                : null,
             // Passing in `FlexKeyColors()` to `keyColors` activates Material 3
             // key color seed based schemes. The primary color in your
             // active theme is always used as main "primary" key for the
@@ -163,13 +163,16 @@ class DemoApp extends StatelessWidget {
               keepTertiary: themeController.keepTertiary,
             ),
             // Used ColorScheme seed generation variant.
-            variant: FlexSchemeVariant.values[themeController.usedFlexToneSetup],
+            variant:
+                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
             // In this example we use the values for visual density and font
             // from a single static source, so we can change it easily there.
             visualDensity: App.visualDensity,
             fontFamily: App.font,
             // We use the nicer Material 3 Typography in both M2 and M3 mode.
-            typography: Typography.material2021(platform: defaultTargetPlatform),
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // We do the exact same definition for the dark theme, but using
           // FlexThemeData.dark() and the dark FlexSchemeColors in our
@@ -191,13 +194,19 @@ class DemoApp extends StatelessWidget {
               keepTertiary: themeController.keepDarkTertiary,
             ),
             // Used ColorScheme seed generation variant.
-            variant: FlexSchemeVariant.values[themeController.usedFlexToneSetup],
-            subThemesData:
-                themeController.useSubThemes ? FlexSubThemesData(defaultRadius: themeController.defaultRadius) : null,
+            variant:
+                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
+            subThemesData: themeController.useSubThemes
+                ? FlexSubThemesData(
+                    defaultRadius: themeController.defaultRadius,
+                  )
+                : null,
             visualDensity: App.visualDensity,
             fontFamily: App.font,
             // We use the nicer Material 3 Typography in both M2 and M3 mode.
-            typography: Typography.material2021(platform: defaultTargetPlatform),
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // Define the light high contrast theme for the app,
           // using current scheme index.
@@ -207,8 +216,11 @@ class DemoApp extends StatelessWidget {
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             blendLevel: 2,
             appBarElevation: 0.5,
-            subThemesData:
-                themeController.useSubThemes ? FlexSubThemesData(defaultRadius: themeController.defaultRadius) : null,
+            subThemesData: themeController.useSubThemes
+                ? FlexSubThemesData(
+                    defaultRadius: themeController.defaultRadius,
+                  )
+                : null,
             tones: FlexTones.ultraContrast(Brightness.light),
             keyColors: FlexKeyColors(
               useKeyColors: themeController.useKeyColors,
@@ -220,7 +232,9 @@ class DemoApp extends StatelessWidget {
             ),
             visualDensity: App.visualDensity,
             fontFamily: App.font,
-            typography: Typography.material2021(platform: defaultTargetPlatform),
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // Define the dark high contrast theme for the app,
           // using current scheme index.
@@ -240,11 +254,16 @@ class DemoApp extends StatelessWidget {
               keepSecondary: themeController.keepDarkSecondary,
               keepTertiary: themeController.keepDarkTertiary,
             ),
-            subThemesData:
-                themeController.useSubThemes ? FlexSubThemesData(defaultRadius: themeController.defaultRadius) : null,
+            subThemesData: themeController.useSubThemes
+                ? FlexSubThemesData(
+                    defaultRadius: themeController.defaultRadius,
+                  )
+                : null,
             visualDensity: App.visualDensity,
             fontFamily: App.font,
-            typography: Typography.material2021(platform: defaultTargetPlatform),
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
+            ),
           ),
           // Use the dark or light theme based on controller setting.
           themeMode: themeController.themeMode,

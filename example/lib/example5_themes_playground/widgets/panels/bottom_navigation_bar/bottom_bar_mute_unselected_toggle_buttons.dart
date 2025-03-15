@@ -5,7 +5,11 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/nullable_bool_toggle_buttons.dart';
 
 class BottomBarMuteUnselectedToggleButtons extends StatelessWidget {
-  const BottomBarMuteUnselectedToggleButtons({super.key, required this.controller, this.contentPadding});
+  const BottomBarMuteUnselectedToggleButtons({
+    super.key,
+    required this.controller,
+    this.contentPadding,
+  });
   final ThemeController controller;
 
   /// The [ListTile]'s internal padding.
@@ -33,27 +37,24 @@ class BottomBarMuteUnselectedToggleButtons extends StatelessWidget {
       contentPadding: contentPadding,
       enabled: controller.useFlexColorScheme && controller.useSubThemes,
       title: const Text('Muted'),
-      subtitle: Text(_explainLabelStyle(controller.bottomNavigationBarMuteUnselectedItem)),
-      subtitleReveal: const Text(
-        'When undefined (null), unselected items are '
-        'muted in M2 mode, but not in M3 mode. In M3 mode unselected items '
-        'default to onSurfaceVariant, which already is a bit muted as a '
-        'part of its color role definition. In M2 mode, onSurface is the '
-        'default unselected, and it had another muting mechanism. '
-        'We can be use it here too, in a slightly modified subtly '
-        'color expressive version.',
-      ),
+      subtitle: Text(
+          _explainLabelStyle(controller.bottomNavigationBarMuteUnselectedItem)),
+      subtitleReveal: const Text('When undefined (null), unselected items are '
+          'muted in M2 mode, but not in M3 mode. In M3 mode unselected items '
+          'default to onSurfaceVariant, which already is a bit muted as a '
+          'part of its color role definition. In M2 mode, onSurface is the '
+          'default unselected, and it had another muting mechanism. '
+          'We can be use it here too, in a slightly modified subtly '
+          'color expressive version.'),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(
-          value:
-              controller.useFlexColorScheme && controller.useSubThemes
-                  ? controller.bottomNavigationBarMuteUnselectedItem
-                  : null,
-          onChanged:
-              controller.useFlexColorScheme && controller.useSubThemes
-                  ? controller.setBottomNavigationBarMuteUnselectedItem
-                  : null,
+          value: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.bottomNavigationBarMuteUnselectedItem
+              : null,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes
+              ? controller.setBottomNavigationBarMuteUnselectedItem
+              : null,
         ),
       ),
       onTap: () {

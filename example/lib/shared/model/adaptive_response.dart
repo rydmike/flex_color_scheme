@@ -10,8 +10,7 @@ enum AdaptiveResponse {
   ),
   all(
     label: 'All platforms',
-    describe:
-        'The platform adaptive response is used on ALL native '
+    describe: 'The platform adaptive response is used on ALL native '
         'platform builds and on web builds on ALL platforms.\n'
         '\n'
         'Use this choice to disable a theming feature that does not fit '
@@ -21,8 +20,7 @@ enum AdaptiveResponse {
   ),
   apple(
     label: 'Apple devices, no web usage',
-    describe:
-        'The platform adaptive response is used on iOS and macOS '
+    describe: 'The platform adaptive response is used on iOS and macOS '
         'device builds, but not on any platform with the web build, '
         'not even in browsers on iOS and macOS.\n'
         '\n'
@@ -34,8 +32,7 @@ enum AdaptiveResponse {
   ),
   appleWeb(
     label: 'Apple devices and their web usage',
-    describe:
-        'The platform adaptive response is used on iOS and macOS '
+    describe: 'The platform adaptive response is used on iOS and macOS '
         'devices, also on web builds when used from iOS and macOS.\n'
         '\n'
         'Use this choice when you want this platform adaptive response '
@@ -48,8 +45,7 @@ enum AdaptiveResponse {
   ),
   desktop(
     label: 'Desktops and their web usage',
-    describe:
-        'The platform adaptive response is used on all desktop '
+    describe: 'The platform adaptive response is used on all desktop '
         'operating system builds, also when using a web build of the app '
         'from a browser on all desktop operating systems.\n',
     code: 'FlexAdaptive.desktop()',
@@ -57,8 +53,7 @@ enum AdaptiveResponse {
   ),
   iOSAndDesktop(
     label: 'Desktops, iOS and their web usage',
-    describe:
-        'The platform adaptive response is used on all desktop '
+    describe: 'The platform adaptive response is used on all desktop '
         'operating system and iOS builds, '
         'including when using a web build of the app on them.\n'
         '\n'
@@ -71,8 +66,7 @@ enum AdaptiveResponse {
   ),
   excludeAndroidFuchsia(
     label: 'Exclude Android and Fuchsia device builds',
-    describe:
-        'The platform adaptive response is used on all platforms and all '
+    describe: 'The platform adaptive response is used on all platforms and all '
         'Web builds, only Android and Fuchsia device builds are excluded. '
         'They keep the none adaptive response.\n'
         '\n'
@@ -85,8 +79,7 @@ enum AdaptiveResponse {
   ),
   excludeWebAndroidFuchsia(
     label: 'Exclude Android and Fuchsia, exclude all Web usage',
-    describe:
-        'The platform adaptive response is used on all platforms, '
+    describe: 'The platform adaptive response is used on all platforms, '
         'except on native Android and Fuchsia device builds. Web usage on '
         'all platforms also keep the none adaptive response.\n'
         '\n'
@@ -98,7 +91,12 @@ enum AdaptiveResponse {
     icon: Icons.no_cell_outlined,
   );
 
-  const AdaptiveResponse({required this.label, required this.describe, required this.code, required this.icon});
+  const AdaptiveResponse({
+    required this.label,
+    required this.describe,
+    required this.code,
+    required this.icon,
+  });
 
   final String label;
   final String describe;
@@ -122,7 +120,8 @@ enum AdaptiveResponse {
       case AdaptiveResponse.excludeAndroidFuchsia:
         return FlexAdaptive.excludeAndroidFuchsia(overrideIsWeb: overrideIsWeb);
       case AdaptiveResponse.excludeWebAndroidFuchsia:
-        return FlexAdaptive.excludeWebAndroidFuchsia(overrideIsWeb: overrideIsWeb);
+        return FlexAdaptive.excludeWebAndroidFuchsia(
+            overrideIsWeb: overrideIsWeb);
     }
   }
 }

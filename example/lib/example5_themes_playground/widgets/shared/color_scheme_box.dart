@@ -70,21 +70,26 @@ class ColorSchemeBox extends StatelessWidget {
   final Widget? child;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) => FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
+  static bool _isLight(final Color color) =>
+      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color for icon on the colored box.
-  static Color _onColor(final Color color) =>
-      _isLight(color) ? Colors.black.withValues(alpha: 0.8) : Colors.white.withValues(alpha: 0.8);
+  static Color _onColor(final Color color) => _isLight(color)
+      ? Colors.black.withValues(alpha: 0.8)
+      : Colors.white.withValues(alpha: 0.8);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
-    final Color foreground = foregroundColor ?? _onColor(backgroundColor ?? scheme.surface);
-    final double width = size?.width ?? theme.toggleButtonsTheme.constraints?.minWidth ?? 38;
-    final double height = size?.height ?? theme.toggleButtonsTheme.constraints?.minHeight ?? 34;
-    final BorderRadius borderRadius =
-        theme.toggleButtonsTheme.borderRadius ?? const BorderRadius.all(Radius.circular(20));
+    final Color foreground =
+        foregroundColor ?? _onColor(backgroundColor ?? scheme.surface);
+    final double width =
+        size?.width ?? theme.toggleButtonsTheme.constraints?.minWidth ?? 38;
+    final double height =
+        size?.height ?? theme.toggleButtonsTheme.constraints?.minHeight ?? 34;
+    final BorderRadius borderRadius = theme.toggleButtonsTheme.borderRadius ??
+        const BorderRadius.all(Radius.circular(20));
 
     return SizedBox(
       width: width + 16,
@@ -94,10 +99,15 @@ class ColorSchemeBox extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius,
-          side: BorderSide(color: borderColor ?? scheme.outline, width: selected ? 2 : 1),
+          side: BorderSide(
+            color: borderColor ?? scheme.outline,
+            width: selected ? 2 : 1,
+          ),
         ),
-        child:
-            child ?? (defaultOption ? Icon(defaultOptionIcon, color: foreground) : Icon(optionIcon, color: foreground)),
+        child: child ??
+            (defaultOption
+                ? Icon(defaultOptionIcon, color: foreground)
+                : Icon(optionIcon, color: foreground)),
       ),
     );
   }

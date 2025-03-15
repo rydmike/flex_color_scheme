@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 /// This is a simple Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.
 class NavigationRailLabelTypeToggleButtons extends StatelessWidget {
-  const NavigationRailLabelTypeToggleButtons({super.key, this.style, this.onChanged});
+  const NavigationRailLabelTypeToggleButtons({
+    super.key,
+    this.style,
+    this.onChanged,
+  });
   final NavigationRailLabelType? style;
   final ValueChanged<NavigationRailLabelType>? onChanged;
 
@@ -19,16 +23,24 @@ class NavigationRailLabelTypeToggleButtons extends StatelessWidget {
     ];
     return ToggleButtons(
       isSelected: isSelected,
-      onPressed:
-          onChanged == null
-              ? null
-              : (int index) {
-                onChanged?.call(NavigationRailLabelType.values[index]);
-              },
+      onPressed: onChanged == null
+          ? null
+          : (int index) {
+              onChanged?.call(NavigationRailLabelType.values[index]);
+            },
       children: const <Widget>[
-        Tooltip(message: 'Items have\nno labels', child: Icon(Icons.menu)),
-        Tooltip(message: 'Only selected\nitem has a label', child: Icon(Icons.rule_outlined)),
-        Tooltip(message: 'All items\nhave labels', child: Icon(Icons.checklist_rtl_outlined)),
+        Tooltip(
+          message: 'Items have\nno labels',
+          child: Icon(Icons.menu),
+        ),
+        Tooltip(
+          message: 'Only selected\nitem has a label',
+          child: Icon(Icons.rule_outlined),
+        ),
+        Tooltip(
+          message: 'All items\nhave labels',
+          child: Icon(Icons.checklist_rtl_outlined),
+        ),
       ],
     );
   }

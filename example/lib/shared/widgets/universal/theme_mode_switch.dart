@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 /// This is a simple Flutter "Universal" Widget that only depends on the SDK and
 /// can be dropped into any application.
 class ThemeModeSwitch extends StatelessWidget {
-  const ThemeModeSwitch({super.key, required this.themeMode, required this.onChanged});
+  const ThemeModeSwitch({
+    super.key,
+    required this.themeMode,
+    required this.onChanged,
+  });
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onChanged;
 
@@ -28,7 +32,11 @@ class ThemeModeSwitch extends StatelessWidget {
           onChanged(ThemeMode.dark);
         }
       },
-      children: const <Widget>[Icon(Icons.wb_sunny), Icon(Icons.phone_iphone), Icon(Icons.bedtime)],
+      children: const <Widget>[
+        Icon(Icons.wb_sunny),
+        Icon(Icons.phone_iphone),
+        Icon(Icons.bedtime),
+      ],
     );
   }
 }

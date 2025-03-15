@@ -4,7 +4,11 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/navigation_bar_label_behavior_toggle_buttons.dart';
 
 class NavigationBarLabelBehaviorListTile extends StatelessWidget {
-  const NavigationBarLabelBehaviorListTile({required this.controller, this.contentPadding, super.key});
+  const NavigationBarLabelBehaviorListTile({
+    required this.controller,
+    this.contentPadding,
+    super.key,
+  });
   final ThemeController controller;
 
   /// The [ListTile]'s internal padding.
@@ -32,28 +36,30 @@ class NavigationBarLabelBehaviorListTile extends StatelessWidget {
       contentPadding: contentPadding,
       enabled: controller.useSubThemes && controller.useFlexColorScheme,
       title: const Text('Label behavior'),
-      subtitle: Text(
-        _explainLabelStyle(
+      subtitle: Text(_explainLabelStyle(
           controller.useSubThemes && controller.useFlexColorScheme
               ? controller.navigationBarLabelBehavior
-              : NavigationDestinationLabelBehavior.alwaysShow,
-        ),
-      ),
+              : NavigationDestinationLabelBehavior.alwaysShow)),
       trailing: NavigationBarLabelBehaviorToggleButtons(
-        labelBehavior:
-            controller.useSubThemes && controller.useFlexColorScheme
-                ? controller.navigationBarLabelBehavior
-                : NavigationDestinationLabelBehavior.alwaysShow,
-        onChanged:
-            controller.useSubThemes && controller.useFlexColorScheme ? controller.setNavigationBarLabelBehavior : null,
+        labelBehavior: controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.navigationBarLabelBehavior
+            : NavigationDestinationLabelBehavior.alwaysShow,
+        onChanged: controller.useSubThemes && controller.useFlexColorScheme
+            ? controller.setNavigationBarLabelBehavior
+            : null,
       ),
       onTap: () {
-        if (controller.navigationBarLabelBehavior == NavigationDestinationLabelBehavior.alwaysHide) {
-          controller.setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior.onlyShowSelected);
-        } else if (controller.navigationBarLabelBehavior == NavigationDestinationLabelBehavior.onlyShowSelected) {
-          controller.setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior.alwaysShow);
+        if (controller.navigationBarLabelBehavior ==
+            NavigationDestinationLabelBehavior.alwaysHide) {
+          controller.setNavigationBarLabelBehavior(
+              NavigationDestinationLabelBehavior.onlyShowSelected);
+        } else if (controller.navigationBarLabelBehavior ==
+            NavigationDestinationLabelBehavior.onlyShowSelected) {
+          controller.setNavigationBarLabelBehavior(
+              NavigationDestinationLabelBehavior.alwaysShow);
         } else {
-          controller.setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior.alwaysHide);
+          controller.setNavigationBarLabelBehavior(
+              NavigationDestinationLabelBehavior.alwaysHide);
         }
       },
     );

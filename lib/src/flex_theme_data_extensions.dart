@@ -1357,11 +1357,9 @@ extension FlexThemeData on ThemeData {
     /// [FlexSurface].
     ///
     /// Defaults to null.
-    @Deprecated(
-      'Use surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
+    @Deprecated('Use surface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? background,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -1380,11 +1378,9 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    @Deprecated(
-      'Use onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
+    @Deprecated('Use onSurface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? onBackground,
   }) =>
       FlexColorScheme.light(
@@ -2860,11 +2856,9 @@ extension FlexThemeData on ThemeData {
     /// same color in it as well.
     ///
     /// Defaults to null.
-    @Deprecated(
-      'Use surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
+    @Deprecated('Use surface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? background,
 
     /// A color that is clearly legible when drawn on [background] color.
@@ -2883,11 +2877,9 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    @Deprecated(
-      'Use onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
+    @Deprecated('Use onSurface instead. It is deprecated '
+        'because Flutter 3.22 deprecated this ColorScheme color. '
+        'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? onBackground,
   }) =>
       FlexColorScheme.dark(

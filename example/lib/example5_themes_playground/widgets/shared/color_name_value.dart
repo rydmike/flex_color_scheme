@@ -82,12 +82,11 @@ class _ColorNameValueState extends State<ColorNameValue> {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Text(
-            widget.label,
-            textAlign: TextAlign.start,
-            overflow: TextOverflow.clip,
-            style: TextStyle(color: widget.textColor, fontSize: widget.fontSize + 1),
-          ),
+          Text(widget.label,
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                  color: widget.textColor, fontSize: widget.fontSize + 1)),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -102,7 +101,9 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.end,
                         maxLines: 1,
-                        style: TextStyle(color: widget.textColor, fontSize: widget.fontSize - 1),
+                        style: TextStyle(
+                            color: widget.textColor,
+                            fontSize: widget.fontSize - 1),
                       ),
                     ),
                   ],
@@ -115,7 +116,9 @@ class _ColorNameValueState extends State<ColorNameValue> {
                       nameThatColor,
                       overflow: TextOverflow.clip,
                       textAlign: TextAlign.end,
-                      style: TextStyle(color: widget.textColor, fontSize: widget.fontSize - 1),
+                      style: TextStyle(
+                          color: widget.textColor,
+                          fontSize: widget.fontSize - 1),
                     ),
                   ),
                 ],
@@ -131,7 +134,9 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.end,
                         maxLines: 1,
-                        style: TextStyle(color: widget.textColor, fontSize: widget.fontSize - 1),
+                        style: TextStyle(
+                            color: widget.textColor,
+                            fontSize: widget.fontSize - 1),
                       ),
                     ),
                   ],
@@ -141,20 +146,27 @@ class _ColorNameValueState extends State<ColorNameValue> {
                 children: <Widget>[
                   Expanded(
                     child: InkWell(
-                      hoverColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
-                      splashColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
-                      focusColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
-                      highlightColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
+                      hoverColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
+                      splashColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
+                      focusColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
+                      highlightColor: isLight
+                          ? const Color(0x40BCBCBC)
+                          : const Color(0x30FFFFFF),
                       child: Text(
                         '#${widget.color.hexCode}',
                         textAlign: TextAlign.end,
                         overflow: TextOverflow.clip,
                         maxLines: 1,
                         style: TextStyle(
-                          color: widget.textColor,
-                          fontSize: widget.fontSize,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            color: widget.textColor,
+                            fontSize: widget.fontSize,
+                            fontWeight: FontWeight.bold),
                       ),
                       onTap: () async {
                         await copyColorToClipboard(context, widget.color);
@@ -165,7 +177,9 @@ class _ColorNameValueState extends State<ColorNameValue> {
               ),
               // Show input color only if both are defined and showInput color
               // is enabled.
-              if (widget.inputColor != null && widget.inputTextColor != null && widget.showInputColor)
+              if (widget.inputColor != null &&
+                  widget.inputTextColor != null &&
+                  widget.showInputColor)
                 Card(
                   margin: const EdgeInsets.only(top: 8.0),
                   color: widget.inputColor,
@@ -184,22 +198,34 @@ class _ColorNameValueState extends State<ColorNameValue> {
                           'Scheme input',
                           textAlign: TextAlign.start,
                           overflow: TextOverflow.clip,
-                          style: TextStyle(color: widget.inputTextColor, fontSize: widget.fontSize - 1),
+                          style: TextStyle(
+                              color: widget.inputTextColor,
+                              fontSize: widget.fontSize - 1),
                         ),
                         Row(
                           children: <Widget>[
                             Expanded(
                               child: InkWell(
-                                hoverColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
-                                splashColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
-                                focusColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
-                                highlightColor: isLight ? const Color(0x40BCBCBC) : const Color(0x30FFFFFF),
+                                hoverColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
+                                splashColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
+                                focusColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
+                                highlightColor: isLight
+                                    ? const Color(0x40BCBCBC)
+                                    : const Color(0x30FFFFFF),
                                 child: Text(
                                   '#${widget.inputColor!.hexCode}',
                                   textAlign: TextAlign.end,
                                   overflow: TextOverflow.clip,
                                   maxLines: 1,
-                                  style: TextStyle(color: widget.inputTextColor, fontSize: widget.fontSize - 1),
+                                  style: TextStyle(
+                                      color: widget.inputTextColor,
+                                      fontSize: widget.fontSize - 1),
                                 ),
                                 onTap: () async {
                                   await copyColorToClipboard(
@@ -215,7 +241,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                       ],
                     ),
                   ),
-                ),
+                )
             ],
           ),
           if (widget.isLocked != null && widget.onLocked != null)
@@ -224,25 +250,31 @@ class _ColorNameValueState extends State<ColorNameValue> {
               top: 14,
               start: 0,
               child: Theme(
-                data: theme.copyWith(colorScheme: theme.colorScheme.copyWith(outline: widget.color.withAlpha(0x77))),
+                data: theme.copyWith(
+                    colorScheme: theme.colorScheme
+                        .copyWith(outline: widget.color.withAlpha(0x77))),
                 child: Switch(
                   value: widget.isLocked!,
-                  activeColor: Color.alphaBlend(widget.color.withAlpha(0x44), widget.textColor),
-                  activeTrackColor: Color.alphaBlend(widget.color.withAlpha(0x99), widget.textColor),
-                  inactiveTrackColor: Color.alphaBlend(widget.color.withAlpha(0xAA), widget.textColor),
-                  inactiveThumbColor: Color.alphaBlend(widget.color.withAlpha(0xCC), widget.textColor),
-                  trackOutlineColor:
-                      theme.useMaterial3
-                          ? WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-                            if (states.contains(WidgetState.selected)) {
-                              return Colors.transparent;
-                            }
-                            if (states.contains(WidgetState.disabled)) {
-                              return theme.colorScheme.onSurface.withAlpha(0x1F);
-                            }
-                            return widget.textColor.withAlpha(0x26);
-                          })
-                          : null,
+                  activeColor: Color.alphaBlend(
+                      widget.color.withAlpha(0x44), widget.textColor),
+                  activeTrackColor: Color.alphaBlend(
+                      widget.color.withAlpha(0x99), widget.textColor),
+                  inactiveTrackColor: Color.alphaBlend(
+                      widget.color.withAlpha(0xAA), widget.textColor),
+                  inactiveThumbColor: Color.alphaBlend(
+                      widget.color.withAlpha(0xCC), widget.textColor),
+                  trackOutlineColor: theme.useMaterial3
+                      ? WidgetStateProperty.resolveWith(
+                          (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return Colors.transparent;
+                          }
+                          if (states.contains(WidgetState.disabled)) {
+                            return theme.colorScheme.onSurface.withAlpha(0x1F);
+                          }
+                          return widget.textColor.withAlpha(0x26);
+                        })
+                      : null,
                   onChanged: widget.onLocked?.call,
                   // materialTapTargetSize: MaterialTapTargetSize.padded,
                 ),

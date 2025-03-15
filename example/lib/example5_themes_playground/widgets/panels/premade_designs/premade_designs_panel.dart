@@ -22,11 +22,10 @@ class PremadeDesignsPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!.copyWith(color: theme.textTheme.bodySmall!.color);
+    final TextStyle spanTextStyle = theme.textTheme.bodyMedium!
+        .copyWith(color: theme.textTheme.bodySmall!.color);
     final TextStyle linkStyle = theme.textTheme.bodyMedium!.copyWith(
-      color: theme.colorScheme.primary,
-      fontWeight: FontWeight.bold,
-    );
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,8 +34,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Themes Playground default',
           seeded: false,
-          subtitle:
-              'Set settings to their Playground defaults. In '
+          subtitle: 'Set settings to their Playground defaults. In '
               'Material-2 mode the default setup is quite opinionated, it '
               'mimics Material-3 in Material-2 mode. In Material-3 mode the '
               'Playground defaults are 98% Material-3 default styles, '
@@ -50,8 +48,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Material 3 default',
           seeded: true,
-          subtitle:
-              'Set Playground settings to a configuration that '
+          subtitle: 'Set Playground settings to a configuration that '
               'matches the Material-3 design defaults. Seeded color scheme is '
               'activated using the default Flutter Material-3 '
               'DynamicSchemeVariant TonalSpot setting, with only one key color '
@@ -64,8 +61,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Primary navigators',
           seeded: false,
-          subtitle:
-              'Features primary color on navigators, with filled '
+          subtitle: 'Features primary color on navigators, with filled '
               'TextField using primary opacity, rounder corners and no '
               'unfocused border. Button outlines are also primary colored. '
               'Uses light surface blends with tinted TextTheme and '
@@ -78,8 +74,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Fabulous 12',
           seeded: true,
-          subtitle:
-              'Primary color favoring theme, with a bit extra blend '
+          subtitle: 'Primary color favoring theme, with a bit extra blend '
               'blend on Scaffold background. ColorScheme uses 3 seed '
               'key-colors and the more saturated Jolly seed strategy. It of '
               'course works great without using seed generated Colorscheme '
@@ -94,8 +89,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Material-3 does M2',
           seeded: false,
-          subtitle:
-              'Shows how you can emulate Material-2 styles in Material-3 '
+          subtitle: 'Shows how you can emulate Material-2 styles in Material-3 '
               'mode, with Material-3 components. It does not use surface '
               'blends or seeded ColorScheme since it is not used in '
               'Material-2.\n'
@@ -113,8 +107,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'High contrast',
           seeded: true,
-          subtitle:
-              'A theme that looks like it is not seed generated, but '
+          subtitle: 'A theme that looks like it is not seed generated, but '
               'actually is. Uses the FCS ultra high contrast seed '
               'setting with three key colors, that are kept as locked brand '
               'colors in light theme mode. It also uses black and white "on" '
@@ -132,8 +125,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'One hue',
           seeded: true,
-          subtitle:
-              'This theme limits input colors to only the primary color. '
+          subtitle: 'This theme limits input colors to only the primary color. '
               'It uses the "One Hue" seed generation choice to create '
               'a bright ColorScheme where all colors are shades of the same '
               'input primary color. Even if you turn off using seeds, '
@@ -151,8 +143,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Platform adaptive',
           seeded: false,
-          subtitle:
-              'A Material 3 platform adaptive theme. '
+          subtitle: 'A Material 3 platform adaptive theme. '
               'On platforms other than Android and Fuchsia, a more platform '
               'agnostic design than M3 is used. Components are less rounded, '
               'they use 10dp as default platform adaptive border radius '
@@ -183,8 +174,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Colorful Scaffold',
           seeded: true,
-          subtitle:
-              'Features a strong primary blend on '
+          subtitle: 'Features a strong primary blend on '
               'the scaffold background color, and primary color on navigators, '
               'with filled TextField using primary opacity and rounded '
               'corners. Has tinted TextTheme and tinted interactions. Seed '
@@ -210,8 +200,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         SetupListTile(
           title: 'Computed theme',
           seeded: false,
-          subtitle:
-              'This theme is not seeded, but still uses only three input '
+          subtitle: 'This theme is not seeded, but still uses only three input '
               'colors, primary, secondary and tertiary colors from light '
               'theme mode and computes all other colors, including all dark '
               'mode colors. If you do not want to use a seed generated '
@@ -230,12 +219,10 @@ class PremadeDesignsPanel extends StatelessWidget {
         UseSeededColorSchemeSwitch(controller: controller),
         SwitchListTileReveal(
           title: const Text('Confirm selection?'),
-          subtitleReveal: const Text(
-            'To toggle quickly between premade '
-            'configurations, turn OFF this option. It is ON by default to '
-            'prevent accidental activation of premade themes that will '
-            'overwrite you current theme settings when activated.',
-          ),
+          subtitleReveal: const Text('To toggle quickly between premade '
+              'configurations, turn OFF this option. It is ON by default to '
+              'prevent accidental activation of premade themes that will '
+              'overwrite you current theme settings when activated.'),
           value: controller.confirmPremade,
           onChanged: controller.setConfirmPremade,
         ),
@@ -244,9 +231,19 @@ class PremadeDesignsPanel extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               children: <TextSpan>[
-                TextSpan(style: spanTextStyle, text: 'Learn more about key color seeded ColorScheme in the '),
-                LinkTextSpan(style: linkStyle, uri: _materialDocs, text: 'Material-3 design guide'),
-                TextSpan(style: spanTextStyle, text: '. '),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'Learn more about key color seeded ColorScheme in the ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _materialDocs,
+                  text: 'Material-3 design guide',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. ',
+                ),
               ],
             ),
           ),
@@ -296,9 +293,14 @@ class SetupListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final Color bgColor = seeded ? theme.colorScheme.error : theme.colorScheme.primary;
-    final Color fgColor = seeded ? theme.colorScheme.onError : theme.colorScheme.onPrimary;
-    final TextStyle style = theme.textTheme.labelSmall!.copyWith(color: fgColor, fontWeight: FontWeight.bold);
+    final Color bgColor =
+        seeded ? theme.colorScheme.error : theme.colorScheme.primary;
+    final Color fgColor =
+        seeded ? theme.colorScheme.onError : theme.colorScheme.onPrimary;
+    final TextStyle style = theme.textTheme.labelSmall!.copyWith(
+      color: fgColor,
+      fontWeight: FontWeight.bold,
+    );
 
     return Banner(
       message: seeded ? 'Seeded' : 'Vanilla',

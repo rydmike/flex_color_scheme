@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 /// Enum to indicate which palette we are using.
 ///
 /// Used to show which TonalPalette a hovered color belongs to.
-enum TonalPalettes { primary, secondary, tertiary, error, neutral, neutralVariant }
+enum TonalPalettes {
+  primary,
+  secondary,
+  tertiary,
+  error,
+  neutral,
+  neutralVariant,
+}
 
 /// A controller used to manage the hovered state on tonal palette color
 /// tones.

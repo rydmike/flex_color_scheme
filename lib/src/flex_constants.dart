@@ -81,7 +81,8 @@ const double kBottomSheetModalElevationM2 = 8;
 /// The values results in width 40 and height 40.
 /// The Material guide 3 specifies width 48 and height 40. This is an
 /// opinionated choice in order to make ToggleButtons min size squared.
-const Size kButtonMinSize = Size(kMinInteractiveDimension - 8, kMinInteractiveDimension - 8);
+const Size kButtonMinSize =
+    Size(kMinInteractiveDimension - 8, kMinInteractiveDimension - 8);
 
 /// Default padding on legacy buttons.
 ///

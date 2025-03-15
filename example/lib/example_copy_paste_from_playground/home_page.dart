@@ -20,7 +20,11 @@ import '../shared/widgets/universal/theme_mode_switch.dart';
 // commonly used widgets in Flutter with their theme applied.
 // -----------------------------------------------------------------------------
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.themeMode, required this.onThemeModeChanged});
+  const HomePage({
+    super.key,
+    required this.themeMode,
+    required this.onThemeModeChanged,
+  });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
@@ -39,25 +43,24 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
+    scrollController =
+        ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
     // Set enabled menu items.
-    menuItemsEnabled = List<bool>.generate(App.menuItems.length, (int i) => false);
+    menuItemsEnabled =
+        List<bool>.generate(App.menuItems.length, (int i) => false);
     menuItemsEnabled[0] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-      App.menuItems.length,
-      (int i) => ResponsiveMenuItemIconState.primary,
-    );
+        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    menuItemsIconState[0] =
-        Theme.of(context).brightness == Brightness.light
-            ? ResponsiveMenuItemIconState.primary
-            : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[0] = Theme.of(context).brightness == Brightness.light
+        ? ResponsiveMenuItemIconState.primary
+        : ResponsiveMenuItemIconState.secondary;
   }
 
   @override
@@ -73,16 +76,23 @@ class _HomePageState extends State<HomePage> {
     final double margins = App.responsiveInsets(mediaSize.width);
     final double topPadding = mediaPadding.top + kToolbarHeight + margins;
     final double bottomPadding = mediaPadding.bottom + margins;
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
+        mediaSize.height < App.phoneHeightBreakpoint;
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: FlexColorScheme.themedSystemNavigationBar(context, systemNavBarStyle: FlexSystemNavBarStyle.transparent),
+      value: FlexColorScheme.themedSystemNavigationBar(
+        context,
+        systemNavBarStyle: FlexSystemNavBarStyle.transparent,
+      ),
       child: ResponsiveScaffold(
         title: Text(App.title(context)),
         menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
           App.title(context),
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(fontWeight: FontWeight.w600),
         ),
         menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
@@ -108,9 +118,13 @@ class _HomePageState extends State<HomePage> {
           constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
           child: ListView(
             controller: scrollController,
-            padding: EdgeInsets.fromLTRB(margins, topPadding, margins, bottomPadding),
+            padding: EdgeInsets.fromLTRB(
+                margins, topPadding, margins, bottomPadding),
             children: <Widget>[
-              _MainPanel(themeMode: widget.themeMode, onThemeModeChanged: widget.onThemeModeChanged),
+              _MainPanel(
+                themeMode: widget.themeMode,
+                onThemeModeChanged: widget.onThemeModeChanged,
+              ),
               const SizedBox(height: 8),
               const ShowSubPages(),
               const SizedBox(height: 8),
@@ -148,7 +162,10 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _MainPanel extends StatefulWidget {
-  const _MainPanel({required this.themeMode, required this.onThemeModeChanged});
+  const _MainPanel({
+    required this.themeMode,
+    required this.onThemeModeChanged,
+  });
 
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeModeChanged;
@@ -162,10 +179,11 @@ class _MainPanelState extends State<_MainPanel> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.gradient_outlined, color: iconColor),
       title: const Text('Theme'),
@@ -178,11 +196,12 @@ class _MainPanelState extends State<_MainPanel> {
           ),
           ListTile(
             title: const Text('Theme mode'),
-            subtitle: Text(
-              'Theme '
-              '${widget.themeMode.toString().dotTail}',
+            subtitle: Text('Theme '
+                '${widget.themeMode.toString().dotTail}'),
+            trailing: ThemeModeSwitch(
+              themeMode: widget.themeMode,
+              onChanged: widget.onThemeModeChanged,
             ),
-            trailing: ThemeModeSwitch(themeMode: widget.themeMode, onChanged: widget.onThemeModeChanged),
             onTap: () {
               if (isLight) {
                 widget.onThemeModeChanged(ThemeMode.dark);
@@ -191,8 +210,14 @@ class _MainPanelState extends State<_MainPanel> {
               }
             },
           ),
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: ShowColorSchemeColors()),
-          const Padding(padding: EdgeInsets.fromLTRB(16, 0, 16, 8), child: ShowThemeDataColors()),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ShowColorSchemeColors(),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: ShowThemeDataColors(),
+          ),
         ],
       ),
     );
@@ -207,10 +232,11 @@ class _ButtonsSwitchesIconsShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.crop_16_9_outlined, color: iconColor),
       title: const Text('Buttons, Switches and Icons'),
@@ -299,10 +325,11 @@ class _ToggleFabSwitchesChipsShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.tune, color: iconColor),
       title: const Text('Tooltips, Progress Indicators and Sliders'),
@@ -348,10 +375,11 @@ class _TextInputFieldShowcase extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.pin_outlined, color: iconColor),
       title: const Text('TextFields and Menus'),
@@ -400,10 +428,11 @@ class _AppTabBottomSearchBars extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     const TextStyle headerStyle = TextStyle(fontSize: 16);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.tab_outlined, color: iconColor),
       title: const Text('AppBar TabBar BottomAppBar and SearchBar'),
@@ -444,10 +473,11 @@ class _BottomNavigationBarsShowCase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.video_label, color: iconColor),
       title: const Text('Bottom Navigation'),
@@ -473,10 +503,11 @@ class _NavigationRailShowCase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.view_sidebar_outlined, color: iconColor),
       title: const Text('NavigationRail'),
@@ -492,10 +523,11 @@ class _NavigationDrawerShowCase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.featured_video_outlined, color: iconColor),
       title: const Text('NavigationDrawer'),
@@ -521,10 +553,11 @@ class _DialogShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.branding_watermark_outlined, color: iconColor),
       title: const Text('Dialogs'),
@@ -553,10 +586,11 @@ class _MaterialAndBottomSheetShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.call_to_action_outlined, color: iconColor),
       title: const Text('Material, Banner, Sheet & Snack'),
@@ -592,28 +626,28 @@ class _CardShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
-      leading: Icon(Icons.picture_in_picture_alt_outlined, color: iconColor),
-      title: const Text('Card'),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            //
-            // Card
-            //
-            SizedBox(height: 8),
-            CardShowcase(explain: true),
-            SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
+        leading: Icon(Icons.picture_in_picture_alt_outlined, color: iconColor),
+        title: const Text('Card'),
+        child: const Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              //
+              // Card
+              //
+              SizedBox(height: 8),
+              CardShowcase(explain: true),
+              SizedBox(height: 16),
+            ],
+          ),
+        ));
   }
 }
 
@@ -623,10 +657,11 @@ class _ListTileShowcase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.dns_outlined, color: iconColor),
       title: const Text('ListTiles'),
@@ -664,10 +699,11 @@ class _TextThemeShowcaseState extends State<_TextThemeShowcase> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.font_download_outlined, color: iconColor),
       title: const Text('TextTheme'),
@@ -684,7 +720,10 @@ class _TextThemeShowcaseState extends State<_TextThemeShowcase> {
               });
             },
           ),
-          Padding(padding: const EdgeInsets.all(16), child: TextThemeShowcase(showDetails: showDetails)),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextThemeShowcase(showDetails: showDetails),
+          ),
         ],
       ),
     );
@@ -695,7 +734,8 @@ class _PrimaryTextThemeShowcase extends StatefulWidget {
   const _PrimaryTextThemeShowcase();
 
   @override
-  State<_PrimaryTextThemeShowcase> createState() => _PrimaryTextThemeShowcaseState();
+  State<_PrimaryTextThemeShowcase> createState() =>
+      _PrimaryTextThemeShowcaseState();
 }
 
 class _PrimaryTextThemeShowcaseState extends State<_PrimaryTextThemeShowcase> {
@@ -705,10 +745,11 @@ class _PrimaryTextThemeShowcaseState extends State<_PrimaryTextThemeShowcase> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color iconColor =
-        isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
+    final Color iconColor = isLight
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
+            theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
+            theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.font_download, color: iconColor),
       title: const Text('PrimaryTextTheme'),

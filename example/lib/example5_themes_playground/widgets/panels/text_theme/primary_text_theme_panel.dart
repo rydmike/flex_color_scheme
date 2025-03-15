@@ -28,7 +28,8 @@ class _PrimaryTextThemePanelState extends State<PrimaryTextThemePanel> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
+        .copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
@@ -59,8 +60,7 @@ class _PrimaryTextThemePanelState extends State<PrimaryTextThemePanel> {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text:
-                      'When the primary color of the theme requires dark '
+                  text: 'When the primary color of the theme requires dark '
                       'contrast color, the primaryTextTheme gets the wrong '
                       'contrast color in dark mode. For more information, '
                       'please see ',
@@ -73,8 +73,7 @@ class _PrimaryTextThemePanelState extends State<PrimaryTextThemePanel> {
                 // _fcsChipUmbrellaIssue115364
                 TextSpan(
                   style: spanTextStyle,
-                  text:
-                      '. FlexColorScheme fixes this issue and ensures that '
+                  text: '. FlexColorScheme fixes this issue and ensures that '
                       'the primaryTextTheme always has the correct contrast '
                       "color to fit on active theme's primary color.\n",
                 ),

@@ -24,7 +24,12 @@ class FlexSchemeData with Diagnosticable {
   /// Default constructor, used to make an immutable FlexSchemeData object.
   ///
   /// Contains [name], [description] plus [light] and [dark] scheme colors.
-  const FlexSchemeData({required this.name, required this.description, required this.light, required this.dark});
+  const FlexSchemeData({
+    required this.name,
+    required this.description,
+    required this.light,
+    required this.dark,
+  });
 
   /// A short name for the [FlexSchemeData] based color scheme.
   final String name;
@@ -67,7 +72,12 @@ class FlexSchemeData with Diagnosticable {
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
-  int get hashCode => Object.hash(name, description, light, dark);
+  int get hashCode => Object.hash(
+        name,
+        description,
+        light,
+        dark,
+      );
 
   /// Flutter debug properties override, includes toString.
   @override

@@ -113,7 +113,8 @@ class _SvgAssetImageSwitcherState extends State<SvgAssetImageSwitcher> {
     // Set starting image index
     currentIndex = 0;
     oldIndex = 0;
-    if (widget.switchType == ImageSwitchType.forward || widget.switchType == ImageSwitchType.random) {
+    if (widget.switchType == ImageSwitchType.forward ||
+        widget.switchType == ImageSwitchType.random) {
       currentIndex = 0;
     } else {
       currentIndex = widget.assetNames.length;
@@ -144,12 +145,14 @@ class _SvgAssetImageSwitcherState extends State<SvgAssetImageSwitcher> {
     // return  currentImage;
     if (widget.assetNames.length > 1) {
       return AnimatedSwitcher(
-        duration: widget.switchDuration,
-        transitionBuilder: (Widget child, Animation<double> animation) {
-          return ScaleTransition(scale: animation, child: child);
-        },
-        child: getImageIndex(oldIndex),
-      );
+          duration: widget.switchDuration,
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(
+              scale: animation,
+              child: child,
+            );
+          },
+          child: getImageIndex(oldIndex));
     } else {
       return getImageIndex(oldIndex);
     }

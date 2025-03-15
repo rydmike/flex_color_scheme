@@ -480,20 +480,20 @@ class FlexAdaptive with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hashAll(<Object?>[
-    android,
-    androidWeb,
-    fuchsia,
-    fuchsiaWeb,
-    iOS,
-    iOSWeb,
-    linux,
-    linuxWeb,
-    macOS,
-    macOSWeb,
-    windows,
-    windowsWeb,
-    overrideIsWeb,
-  ]);
+        android,
+        androidWeb,
+        fuchsia,
+        fuchsiaWeb,
+        iOS,
+        iOSWeb,
+        linux,
+        linuxWeb,
+        macOS,
+        macOSWeb,
+        windows,
+        windowsWeb,
+        overrideIsWeb,
+      ]);
 
   /// Flutter debug properties override, includes toString.
   @override
