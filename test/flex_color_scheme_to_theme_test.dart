@@ -2589,7 +2589,7 @@ void main() {
       );
     });
 
-    test('fcs dialogBackground hex = dialogBackground hextString darken5', () {
+    test('fcs dialogBackground hex = dialogBackground hexString darken5', () {
       expect(
         fcsDarkH2.dialogBackground?.hexCode,
         equals(surfD.dialogBackground.darken(5).hexCode),
@@ -3877,7 +3877,7 @@ void main() {
     // Test custom PopupMenu theming, with custom background, dark M2.
     test(
         'FCS7.102d GIVEN a FlexColorScheme.dark with useMaterial3:false '
-        'and a FlexSubThemesData with popup opacity null, elev 12, radi 11 '
+        'and a FlexSubThemesData with popup opacity null, elev 12, radius 11 '
         'and custom background '
         'EXPECT popup surface, with opacity null, elev 12 and radius 11 '
         'using custom background.', () {

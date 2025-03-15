@@ -17,16 +17,16 @@ void main() {
               ? 1.5
               : 4.0
           : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-          ? 5.0
-          : 2.0;
+              ? 5.0
+              : 2.0;
     } else {
       return surfaceMode
           ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
               ? 5.0
               : 2.0
           : ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-          ? 5.0
-          : 4.0;
+              ? 5.0
+              : 4.0;
     }
   }
 
@@ -45,7 +45,8 @@ void main() {
     // Flutter AppBar theme. All the logic and complexity is included in
     // FlexColorScheme.toTheme factory and included in its tests. No need
     // to test it here, but included as a stub for potential future additions.
-    test('AppBar FST1.1: GIVEN a default FlexSubTheme.appBarTheme() '
+    test(
+        'AppBar FST1.1: GIVEN a default FlexSubTheme.appBarTheme() '
         'EXPECT equal to AppBarTheme with shape RoundedRectangleBorder()', () {
       expect(
         FlexSubThemes.appBarTheme(),
@@ -57,7 +58,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes bottomAppBarTheme tests
     // -------------------------------------------------------------------------
-    test('BottomAppBar FST2.1: GIVEN a FlexSubTheme.bottomAppBarTheme() '
+    test(
+        'BottomAppBar FST2.1: GIVEN a FlexSubTheme.bottomAppBarTheme() '
         'EXPECT equal to BottomAppBarTheme() with same config', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -71,7 +73,8 @@ void main() {
         equals(BottomAppBarTheme(color: colorScheme.surfaceContainer)),
       );
     });
-    test('BottomAppBar FST2.2: GIVEN a FlexSubTheme.bottomAppBarTheme() M3 '
+    test(
+        'BottomAppBar FST2.2: GIVEN a FlexSubTheme.bottomAppBarTheme() M3 '
         'EXPECT equal to BottomAppBarTheme() with same config', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -90,7 +93,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomNavigationBar tests
     // -------------------------------------------------------------------------
-    test('BottomNavigationBar FST3.1 flutter-default-light: GIVEN a LIGHT '
+    test(
+        'BottomNavigationBar FST3.1 flutter-default-light: GIVEN a LIGHT '
         'default '
         'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
@@ -134,7 +138,8 @@ void main() {
         ),
       );
     });
-    test('BottomNavigationBar FST3.2 flutter-default-dark: GIVEN a DARK '
+    test(
+        'BottomNavigationBar FST3.2 flutter-default-dark: GIVEN a DARK '
         'default '
         'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
@@ -178,7 +183,8 @@ void main() {
         ),
       );
     });
-    test('BottomNavigationBar FST3.3 fcs-default-light: GIVEN a default LIGHT '
+    test(
+        'BottomNavigationBar FST3.3 fcs-default-light: GIVEN a default LIGHT '
         'FlexSubTheme.bottomNavigationBar() with FCS default '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -218,7 +224,8 @@ void main() {
         ),
       );
     });
-    test('BottomNavigationBar FST3.4 fcs-default-dark: GIVEN a default DARK '
+    test(
+        'BottomNavigationBar FST3.4 fcs-default-dark: GIVEN a default DARK '
         'FlexSubTheme.bottomNavigationBar() with FCS default '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -259,7 +266,8 @@ void main() {
         ),
       );
     });
-    test('BottomNavigationBar FST3.5 custom: GIVEN a custom '
+    test(
+        'BottomNavigationBar FST3.5 custom: GIVEN a custom '
         'FlexSubTheme.bottomNavigationBar() '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -317,7 +325,8 @@ void main() {
         ),
       );
     });
-    test('BottomNavigationBar FST3.6: Given a deprecated bottomNavigationBar '
+    test(
+        'BottomNavigationBar FST3.6: Given a deprecated bottomNavigationBar '
         'EXPECT bottomNavigationBarTheme', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -333,7 +342,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomSheet tests
     // -------------------------------------------------------------------------
-    test('BottomSheet FST4.1:  GIVEN a default FlexSubTheme.bottomSheetTheme() '
+    test(
+        'BottomSheet FST4.1:  GIVEN a default FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
         FlexSubThemes.bottomSheetTheme(),
@@ -351,7 +361,8 @@ void main() {
         ),
       );
     });
-    test('BottomSheet FST4.2 custom: GIVEN a custom '
+    test(
+        'BottomSheet FST4.2 custom: GIVEN a custom '
         'FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
@@ -382,7 +393,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
     // -------------------------------------------------------------------------
-    test('ButtonTheme FST5.1: light GIVEN a default FlexSubTheme.buttonTheme() '
+    test(
+        'ButtonTheme FST5.1: light GIVEN a default FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -425,7 +437,8 @@ void main() {
         ),
       );
     });
-    test('ButtonTheme FST5.2: dark GIVEN a custom FlexSubTheme.buttonTheme() '
+    test(
+        'ButtonTheme FST5.2: dark GIVEN a custom FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -471,7 +484,8 @@ void main() {
         ),
       );
     });
-    test('ButtonTheme FST5.3 base-color: GIVEN a default '
+    test(
+        'ButtonTheme FST5.3 base-color: GIVEN a default '
         'FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -521,14 +535,16 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Card tests
     // -------------------------------------------------------------------------
-    test('Card FST6.1: GIVEN a default FlexSubTheme.cardTheme() '
+    test(
+        'Card FST6.1: GIVEN a default FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubThemes.cardTheme(),
         equals(const CardThemeData(clipBehavior: Clip.antiAlias)),
       );
     });
-    test('Card FST6.2 custom: GIVEN a custom FlexSubTheme.cardTheme() '
+    test(
+        'Card FST6.2 custom: GIVEN a custom FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubThemes.cardTheme(
@@ -552,7 +568,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Checkbox tests
     // -------------------------------------------------------------------------
-    test('Checkbox FST7.1 light: GIVEN a light default M2 '
+    test(
+        'Checkbox FST7.1 light: GIVEN a light default M2 '
         'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -639,7 +656,8 @@ void main() {
         ),
       );
     });
-    test('Checkbox FST7.2 light-states: Does '
+    test(
+        'Checkbox FST7.2 light-states: Does '
         'Checkbox M2 have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -650,21 +668,19 @@ void main() {
       // Side: Disabled and selected
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: Disabled, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useTintedDisable: true,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -679,10 +695,9 @@ void main() {
       // Side: disabled
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -694,31 +709,28 @@ void main() {
       // Side: selected
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  unselectedIsColored: true,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(const BorderSide(width: 2.0, color: Colors.black54)),
       );
@@ -797,7 +809,8 @@ void main() {
     });
     //
     //
-    test('Checkbox FST7.3 light-M3-states: Does '
+    test(
+        'Checkbox FST7.3 light-M3-states: Does '
         'Checkbox have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -1128,7 +1141,8 @@ void main() {
       );
     });
 
-    test('CheckBox FST7.4 dark: GIVEN an M2 dark default '
+    test(
+        'CheckBox FST7.4 dark: GIVEN an M2 dark default '
         'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -1215,7 +1229,8 @@ void main() {
         ),
       );
     });
-    test('CheckBox FST7.5 dark-states: Does CheckBox M2 have '
+    test(
+        'CheckBox FST7.5 dark-states: Does CheckBox M2 have '
         'right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -1226,21 +1241,19 @@ void main() {
       // Side: Disabled and selected
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: Disabled, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useTintedDisable: true,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useTintedDisable: true,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -1255,10 +1268,9 @@ void main() {
       // Side: disabled
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -1270,31 +1282,28 @@ void main() {
       // Side: selected
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  unselectedIsColored: true,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).side
-                as WidgetStateBorderSide?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(const BorderSide(width: 2.0, color: Colors.white70)),
       );
@@ -1372,7 +1381,8 @@ void main() {
         equals(colorScheme.onPrimary),
       );
     });
-    test('CheckBox FST7.6 custom-light: GIVEN a light '
+    test(
+        'CheckBox FST7.6 custom-light: GIVEN a light '
         'custom FlexSubTheme.checkboxTheme '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -1466,7 +1476,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Chip tests
     // -------------------------------------------------------------------------
-    test('Chip FST8.1: GIVEN a default FlexSubTheme.chipTheme() '
+    test(
+        'Chip FST8.1: GIVEN a default FlexSubTheme.chipTheme() '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -1521,7 +1532,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.2: GIVEN a FlexSubTheme.chipTheme(tint disable) '
+    test(
+        'Chip FST8.2: GIVEN a FlexSubTheme.chipTheme(tint disable) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -1577,7 +1589,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.3 M3: GIVEN a default '
+    test(
+        'Chip FST8.3 M3: GIVEN a default '
         'FlexSubTheme.chipTheme(M3 no-null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -1611,7 +1624,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.4 M3: GIVEN a '
+    test(
+        'Chip FST8.4 M3: GIVEN a '
         'FlexSubTheme.chipTheme(M3 no-null scheme with disable tint) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -1619,11 +1633,10 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1657,7 +1670,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.5 M3-n: GIVEN a default '
+    test(
+        'Chip FST8.5 M3-n: GIVEN a default '
         'FlexSubTheme.chipTheme(M3 null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -1665,11 +1679,10 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1699,7 +1712,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.6: GIVEN a '
+    test(
+        'Chip FST8.6: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Secondary EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -1737,7 +1751,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.7: GIVEN a '
+    test(
+        'Chip FST8.7: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Tertiary and disable tint EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -1780,7 +1795,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.8: GIVEN a '
+    test(
+        'Chip FST8.8: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Tertiary, selectedSchemeColor, secondarySelectedSchemeColor and '
         'disable tint EXPECT equal to ChipThemeData() version '
@@ -1789,11 +1805,10 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1831,7 +1846,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.9: GIVEN a '
+    test(
+        'Chip FST8.9: GIVEN a '
         'FlexSubTheme.chipTheme() with blend and usedSchemeColor '
         'Tertiary, selectedSchemeColor, secondarySelectedSchemeColor and '
         'disable tint EXPECT equal to ChipThemeData() version '
@@ -1840,11 +1856,10 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       final Color backgroundColor = colorScheme.tertiary.blendAlpha(
         colorScheme.surface,
         kChipBackgroundAlphaBlend,
@@ -1895,7 +1910,8 @@ void main() {
         ),
       );
     });
-    test('Chip FST8.10: GIVEN a '
+    test(
+        'Chip FST8.10: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'tertiary, selectedSchemeColor, '
         'secondarySelectedSchemeColor and '
@@ -1905,11 +1921,10 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1959,7 +1974,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes DatePicker tests
     // -------------------------------------------------------------------------
-    test('DatePicker FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
+    test(
+        'DatePicker FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -1978,7 +1994,8 @@ void main() {
         ),
       );
     });
-    test('DatePicker FST9a.2 background-based-a: GIVEN a '
+    test(
+        'DatePicker FST9a.2 background-based-a: GIVEN a '
         'FlexSubTheme.datePickerTheme with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DatePickerThemeData with backgroundColor', () {
@@ -2002,7 +2019,8 @@ void main() {
         ),
       );
     });
-    test('DatePicker FST9a.3 background-based-b: GIVEN a '
+    test(
+        'DatePicker FST9a.3 background-based-b: GIVEN a '
         'FlexSubTheme.datePickerTheme '
         'with no backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DatePickerThemeData with backgroundColor', () {
@@ -2083,7 +2101,8 @@ void main() {
         );
       },
     );
-    test('DatePicker FST9a.5 custom: GIVEN a custom '
+    test(
+        'DatePicker FST9a.5 custom: GIVEN a custom '
         'FlexSubTheme.datePickerTheme '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -2105,7 +2124,8 @@ void main() {
         ),
       );
     });
-    test('DatePicker FST9a.6 custom: GIVEN a custom '
+    test(
+        'DatePicker FST9a.6 custom: GIVEN a custom '
         'FlexSubTheme.datePickerTheme with light ColorScheme '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -2135,14 +2155,12 @@ void main() {
             ),
             inputDecorationTheme: InputDecorationTheme(
               filled: false,
-              hoverColor:
-                  colorScheme.brightness == Brightness.dark
-                      ? Colors.white.withValues(alpha: 0.04)
-                      : Colors.black.withValues(alpha: 0.04),
-              focusColor:
-                  colorScheme.brightness == Brightness.dark
-                      ? Colors.white.withValues(alpha: 0.12)
-                      : Colors.black.withValues(alpha: 0.12),
+              hoverColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withValues(alpha: 0.04)
+                  : Colors.black.withValues(alpha: 0.04),
+              focusColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withValues(alpha: 0.12)
+                  : Colors.black.withValues(alpha: 0.12),
               border: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(color: colorScheme.primary, width: 1),
@@ -2204,7 +2222,8 @@ void main() {
         ),
       );
     });
-    test('DatePicker FST9a.6 custom: GIVEN a custom '
+    test(
+        'DatePicker FST9a.6 custom: GIVEN a custom '
         'FlexSubTheme.datePickerTheme with dark ColorScheme '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -2234,14 +2253,12 @@ void main() {
             ),
             inputDecorationTheme: InputDecorationTheme(
               filled: false,
-              hoverColor:
-                  colorScheme.brightness == Brightness.dark
-                      ? Colors.white.withValues(alpha: 0.04)
-                      : Colors.black.withValues(alpha: 0.04),
-              focusColor:
-                  colorScheme.brightness == Brightness.dark
-                      ? Colors.white.withValues(alpha: 0.12)
-                      : Colors.black.withValues(alpha: 0.12),
+              hoverColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withValues(alpha: 0.04)
+                  : Colors.black.withValues(alpha: 0.04),
+              focusColor: colorScheme.brightness == Brightness.dark
+                  ? Colors.white.withValues(alpha: 0.12)
+                  : Colors.black.withValues(alpha: 0.12),
               border: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(color: colorScheme.primary, width: 1),
@@ -2309,7 +2326,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Dialog tests
     // -------------------------------------------------------------------------
-    test('Dialog FST9.1: GIVEN a default FlexSubTheme.dialogTheme() '
+    test(
+        'Dialog FST9.1: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
         FlexSubThemes.dialogTheme(),
@@ -2328,7 +2346,8 @@ void main() {
         ),
       );
     });
-    test('Dialog FST9.2 background-based-a: GIVEN a FlexSubTheme.dialogTheme '
+    test(
+        'Dialog FST9.2 background-based-a: GIVEN a FlexSubTheme.dialogTheme '
         'with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
@@ -2354,7 +2373,8 @@ void main() {
         ),
       );
     });
-    test('Dialog FST9.3 background-based-b: GIVEN a FlexSubTheme.dialogTheme '
+    test(
+        'Dialog FST9.3 background-based-b: GIVEN a FlexSubTheme.dialogTheme '
         'with no backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2380,7 +2400,8 @@ void main() {
         ),
       );
     });
-    test('Dialog FST9.4 scheme-based: GIVEN a FlexSubTheme.dialogTheme '
+    test(
+        'Dialog FST9.4 scheme-based: GIVEN a FlexSubTheme.dialogTheme '
         'with backgroundSchemeColor and no backgroundColor '
         'EXPECT equal to DialogTheme with backgroundSchemeColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -2406,7 +2427,8 @@ void main() {
         ),
       );
     });
-    test('Dialog FST9.5 custom: GIVEN a custom FlexSubTheme.dialogTheme() '
+    test(
+        'Dialog FST9.5 custom: GIVEN a custom FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
         FlexSubThemes.dialogTheme(
@@ -2438,7 +2460,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes drawerTheme tests
     // -------------------------------------------------------------------------
-    test('Drawer FST10.1: GIVEN a FlexSubTheme.drawerTheme() '
+    test(
+        'Drawer FST10.1: GIVEN a FlexSubTheme.drawerTheme() '
         'EXPECT equal to DrawerThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -2526,7 +2549,8 @@ void main() {
     // InputDecoratorTheme and via the MenuTheme. This is mostly here to
     // provide a stub for future individual theming of the the container
     // for the DropdownMenu.
-    test('DropdownMenu 11.1: GIVEN a FlexSubTheme.dropdownMenuTheme() '
+    test(
+        'DropdownMenu 11.1: GIVEN a FlexSubTheme.dropdownMenuTheme() '
         'EXPECT equal to DropdownMenuThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -2562,7 +2586,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes ElevatedButton tests
     // -------------------------------------------------------------------------
-    test('ElevatedButton 12.1 M2: GIVEN a default M2 '
+    test(
+        'ElevatedButton 12.1 M2: GIVEN a default M2 '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -2630,7 +2655,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.2 M3: GIVEN a default M3 '
+    test(
+        'ElevatedButton 12.2 M3: GIVEN a default M3 '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'defaults', () {
@@ -2647,7 +2673,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.3 M2 secondary: GIVEN a default '
+    test(
+        'ElevatedButton 12.3 M2 secondary: GIVEN a default '
         'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as base color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -2717,7 +2744,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.3 M2 secondary-onBase: GIVEN a default '
+    test(
+        'ElevatedButton 12.3 M2 secondary-onBase: GIVEN a default '
         'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as onBase color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -2787,7 +2815,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.4 M2 states: Does '
+    test(
+        'ElevatedButton 12.4 M2 states: Does '
         'ElevatedButton have right Material 2 states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF42AEE7),
@@ -2996,7 +3025,8 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    test('ElevatedButton 12.5 M3-states: Does '
+    test(
+        'ElevatedButton 12.5 M3-states: Does '
         'ElevatedButton have right Material 3 states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Disabled foreground, default, M3
@@ -3316,7 +3346,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.6 M2 custom-1: GIVEN a '
+    test(
+        'ElevatedButton 12.6 M2 custom-1: GIVEN a '
         'custom FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -3389,7 +3420,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.7 M2 custom-2: GIVEN a custom '
+    test(
+        'ElevatedButton 12.7 M2 custom-2: GIVEN a custom '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -3464,7 +3496,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.8 custom-1-M3: GIVEN a custom '
+    test(
+        'ElevatedButton 12.8 custom-1-M3: GIVEN a custom '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -3514,7 +3547,8 @@ void main() {
         ),
       );
     });
-    test('ElevatedButton 12.9 custom-2-M3: GIVEN a custom '
+    test(
+        'ElevatedButton 12.9 custom-2-M3: GIVEN a custom '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -3609,7 +3643,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes FilledButton tests
     // -------------------------------------------------------------------------
-    test('FilledButton FST13.1 M2: GIVEN a default M2 '
+    test(
+        'FilledButton FST13.1 M2: GIVEN a default M2 '
         'FlexSubTheme.filledButtonTheme() '
         'EXPECT equal to FilledButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3634,7 +3669,8 @@ void main() {
         ),
       );
     });
-    test('FilledButton FST13.2 M2-base: GIVEN a custom '
+    test(
+        'FilledButton FST13.2 M2-base: GIVEN a custom '
         'FlexSubTheme.filledButtonTheme() '
         'EXPECT equal to FilledButtonThemeData() version with same color', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -3701,7 +3737,8 @@ void main() {
         ),
       );
     });
-    test('FilledButton FST13.3 M3: GIVEN a default M3 '
+    test(
+        'FilledButton FST13.3 M3: GIVEN a default M3 '
         'FlexSubTheme.filledButtonTheme() '
         'EXPECT equal to FilledButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -3720,7 +3757,8 @@ void main() {
         ),
       );
     });
-    test('FilledButton FST13.4 M2-states: Does FilledButton '
+    test(
+        'FilledButton FST13.4 M2-states: Does FilledButton '
         'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -3777,7 +3815,8 @@ void main() {
       //   equals(null),
       // );
     });
-    test('FilledButton FST13.5 M2-tint-states: Does M2 '
+    test(
+        'FilledButton FST13.5 M2-tint-states: Does M2 '
         'FilledButton have right tinted material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -3846,7 +3885,8 @@ void main() {
         equals(null),
       );
     });
-    test('FilledButton FST13.6 M3-states: Does '
+    test(
+        'FilledButton FST13.6 M3-states: Does '
         'FilledButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -3921,7 +3961,8 @@ void main() {
         ),
       );
     });
-    test('FilledButton FST13.7 M3-custom-tint-states: Does '
+    test(
+        'FilledButton FST13.7 M3-custom-tint-states: Does '
         'FilledButton have right material tinted states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -4000,7 +4041,8 @@ void main() {
         ),
       );
     });
-    test('FilledButton FST13.8 M3-custom-tint-states: Does '
+    test(
+        'FilledButton FST13.8 M3-custom-tint-states: Does '
         'FilledButton have right material tinted states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -4079,7 +4121,8 @@ void main() {
         ),
       );
     });
-    test('FilledButton FST13.9 M3-custom-disable-states: Does '
+    test(
+        'FilledButton FST13.9 M3-custom-disable-states: Does '
         'FilledButton have right material disabled when tinted disabled '
         'used on default null color', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -4119,7 +4162,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes FloatingActionButton tests
     // -------------------------------------------------------------------------
-    test('FAB FST14.1: GIVEN a default '
+    test(
+        'FAB FST14.1: GIVEN a default '
         'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
@@ -4136,7 +4180,8 @@ void main() {
         ),
       );
     });
-    test('FST14.2: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test(
+        'FST14.2: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
@@ -4153,7 +4198,8 @@ void main() {
         ),
       );
     });
-    test('FAB FST14.3: GIVEN a circular '
+    test(
+        'FAB FST14.3: GIVEN a circular '
         'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same Shape', () {
@@ -4166,7 +4212,8 @@ void main() {
         equals(const FloatingActionButtonThemeData(shape: StadiumBorder())),
       );
     });
-    test('FAB FST14.4: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test(
+        'FAB FST14.4: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -4187,7 +4234,8 @@ void main() {
         ),
       );
     });
-    test('FAB FST14.5: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test(
+        'FAB FST14.5: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -4205,7 +4253,8 @@ void main() {
         ),
       );
     });
-    test('FAB FST14.6: GIVEN a null shape '
+    test(
+        'FAB FST14.6: GIVEN a null shape '
         'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with default shape values and colors', () {
@@ -4225,7 +4274,8 @@ void main() {
         ),
       );
     });
-    test('FST14.7: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
+    test(
+        'FST14.7: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with default shape values and colors', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -4246,7 +4296,8 @@ void main() {
         ),
       );
     });
-    test('FAB FST14.8: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test(
+        'FAB FST14.8: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -4267,7 +4318,8 @@ void main() {
         ),
       );
     });
-    test('FAB FST14.9: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test(
+        'FAB FST14.9: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -4302,7 +4354,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes iconButtonTheme tests
     // -------------------------------------------------------------------------
-    test('IconButton 15.1: GIVEN a FlexSubTheme.iconButtonTheme() '
+    test(
+        'IconButton 15.1: GIVEN a FlexSubTheme.iconButtonTheme() '
         'EXPECT equal to ...', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -4408,7 +4461,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
-    test('InputDecoration FST16.1-M2 light: GIVEN a M2 '
+    test(
+        'InputDecoration FST16.1-M2 light: GIVEN a M2 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -4647,7 +4701,8 @@ void main() {
         ),
       );
     });
-    test('InputDecoration FST16.1-M3 light: GIVEN a M3 '
+    test(
+        'InputDecoration FST16.1-M3 light: GIVEN a M3 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true, filled) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -4867,7 +4922,8 @@ void main() {
         ),
       );
     });
-    test('InputDecoration FST16.2 light: GIVEN a M2 '
+    test(
+        'InputDecoration FST16.2 light: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
@@ -5100,7 +5156,8 @@ void main() {
         ),
       );
     });
-    test('InputDecoration FST16.3 dark: GIVEN a M2 '
+    test(
+        'InputDecoration FST16.3 dark: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -5332,7 +5389,8 @@ void main() {
         ),
       );
     });
-    test('InputDecoration FST16.4 dark: GIVEN a default M2 '
+    test(
+        'InputDecoration FST16.4 dark: GIVEN a default M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationTheme() version with same values', () {
@@ -5565,7 +5623,8 @@ void main() {
         ),
       );
     });
-    test('InputDecoration FST16.5 states: Does Decorator '
+    test(
+        'InputDecoration FST16.5 states: Does Decorator '
         'have right material states in M2', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -5579,31 +5638,28 @@ void main() {
       // Floating label focused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  tintedDisabled: true,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          tintedDisabled: true,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label error hovered style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label unfocused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
           TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
@@ -5612,26 +5668,25 @@ void main() {
       // Floating label disabled style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  tintedDisabled: true,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          tintedDisabled: true,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(TextStyle(color: tintDisabledColor)),
       );
       // Floating label default style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{}),
         equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
       );
     });
-    test('InputDecoration FST16.6 light: GIVEN a default M2 '
+    test(
+        'InputDecoration FST16.6 light: GIVEN a default M2 '
         'FlexSubTheme.inputDecorationTheme(borderType: '
         'FlexInputBorderType.outline, usedSchemeColor: '
         'FlexUsedColor.secondary, tintedDisabled: true) '
@@ -5863,7 +5918,8 @@ void main() {
         ),
       );
     });
-    test('InputDecoration FST16.7 states: Does Decorator '
+    test(
+        'InputDecoration FST16.7 states: Does Decorator '
         'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -5877,34 +5933,31 @@ void main() {
       // Floating label focused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  borderType: FlexInputBorderType.outline,
-                  tintedDisabled: true,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          tintedDisabled: true,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label error hovered style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  borderType: FlexInputBorderType.outline,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label unfocused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  borderType: FlexInputBorderType.outline,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
           TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
@@ -5913,23 +5966,21 @@ void main() {
       // Floating label disabled style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  borderType: FlexInputBorderType.outline,
-                  useMaterial3: false,
-                  tintedDisabled: true,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+          tintedDisabled: true,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(TextStyle(color: tintDisabledColor)),
       );
       // Floating label default style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-                  colorScheme: colorScheme,
-                  borderType: FlexInputBorderType.outline,
-                  useMaterial3: false,
-                ).floatingLabelStyle
-                as WidgetStateTextStyle?)!
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{}),
         equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
       );
@@ -6073,9 +6124,8 @@ void main() {
       );
       final OutlineInputBorder ulAct1 =
           (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
-                WidgetState.disabled,
-              })
-              as OutlineInputBorder;
+        WidgetState.disabled,
+      }) as OutlineInputBorder;
       final OutlineInputBorder ulExp1 = OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(
@@ -6428,9 +6478,8 @@ void main() {
       );
       final UnderlineInputBorder ulAct =
           (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
-                WidgetState.disabled,
-              })
-              as UnderlineInputBorder;
+        WidgetState.disabled,
+      }) as UnderlineInputBorder;
       final UnderlineInputBorder ulExp = UnderlineInputBorder(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(kInputDecoratorRadius),
@@ -6585,7 +6634,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes listTileTheme tests
     // -------------------------------------------------------------------------
-    test('ListTile FST17.1: GIVEN a default FlexSubTheme.listTileTheme() '
+    test(
+        'ListTile FST17.1: GIVEN a default FlexSubTheme.listTileTheme() '
         'ListTileThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -6599,7 +6649,8 @@ void main() {
         equals(ListTileThemeData(selectedColor: colorScheme.primary)),
       );
     });
-    test('ListTile FST17.2: GIVEN a custom FlexSubTheme.listTileTheme() '
+    test(
+        'ListTile FST17.2: GIVEN a custom FlexSubTheme.listTileTheme() '
         'ListTileThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -6641,7 +6692,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuBarTheme tests
     // -------------------------------------------------------------------------
-    test('MenuBar FST18.1: GIVEN a FlexSubTheme.menuBarTheme() '
+    test(
+        'MenuBar FST18.1: GIVEN a FlexSubTheme.menuBarTheme() '
         'MenuBarThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -6701,7 +6753,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuButtonTheme tests
     // -------------------------------------------------------------------------
-    test('MenuButton FST19.1 : GIVEN a FlexSubTheme.menuButtonTheme() '
+    test(
+        'MenuButton FST19.1 : GIVEN a FlexSubTheme.menuButtonTheme() '
         'MenuButtonThemeData() with same values.', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -6936,7 +6989,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuTheme tests
     // -------------------------------------------------------------------------
-    test('MenuAnchor FST20.1: GIVEN a FlexSubTheme.menuTheme() '
+    test(
+        'MenuAnchor FST20.1: GIVEN a FlexSubTheme.menuTheme() '
         'EXPECT equal to MenuThemeData() with same values.', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -7013,18 +7067,18 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationBar tests
     // -------------------------------------------------------------------------
-    test('NavigationBar FST21.1: GIVEN a default '
+    test(
+        'NavigationBar FST21.1: GIVEN a default '
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.navigationBarTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
@@ -7064,38 +7118,38 @@ void main() {
       );
     });
 
-    test('NavigationBar FST21.2 custom1: GIVEN a custom1 '
+    test(
+        'NavigationBar FST21.2 custom1: GIVEN a custom1 '
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
-            colorScheme: colorScheme,
-            elevation: 3,
-            selectedIconSchemeColor: SchemeColor.secondary,
-            selectedLabelSchemeColor: SchemeColor.error,
-            unselectedIconSchemeColor: SchemeColor.onSurface,
-            unselectedLabelSchemeColor: SchemeColor.onSurface,
-            backgroundSchemeColor: null,
-            indicatorSchemeColor: SchemeColor.secondaryContainer,
-            indicatorRadius: 12,
-            height: 80,
-            opacity: 0.9,
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            mutedUnselectedIcon: true,
-            mutedUnselectedLabel: true,
-            indicatorAlpha: 0x3D,
-            unselectedAlphaBlend: 0x66,
-            unselectedAlpha: 0xA5,
-          );
+        colorScheme: colorScheme,
+        elevation: 3,
+        selectedIconSchemeColor: SchemeColor.secondary,
+        selectedLabelSchemeColor: SchemeColor.error,
+        unselectedIconSchemeColor: SchemeColor.onSurface,
+        unselectedLabelSchemeColor: SchemeColor.onSurface,
+        backgroundSchemeColor: null,
+        indicatorSchemeColor: SchemeColor.secondaryContainer,
+        indicatorRadius: 12,
+        height: 80,
+        opacity: 0.9,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        mutedUnselectedIcon: true,
+        mutedUnselectedLabel: true,
+        indicatorAlpha: 0x3D,
+        unselectedAlphaBlend: 0x66,
+        unselectedAlpha: 0xA5,
+      );
       expect(
         navBarTheme.toString(),
         equalsIgnoringHashCodes(
@@ -7168,39 +7222,39 @@ void main() {
         ),
       );
     });
-    test('NavigationBar FST21.3 custom2: GIVEN a custom1 '
+    test(
+        'NavigationBar FST21.3 custom2: GIVEN a custom1 '
         'FlexSubTheme.navigationBarTheme() in M2 settings '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );
-      final TextTheme textTheme =
-          Typography.material2021(
-            platform: TargetPlatform.android,
-            colorScheme: colorScheme,
-          ).black;
+      final TextTheme textTheme = Typography.material2021(
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
-            colorScheme: colorScheme,
-            labelTextStyle: textTheme.bodySmall,
-            selectedIconSchemeColor: SchemeColor.secondaryContainer,
-            selectedLabelSchemeColor: SchemeColor.primaryContainer,
-            unselectedIconSchemeColor: SchemeColor.onSurface,
-            unselectedLabelSchemeColor: SchemeColor.onSurface,
-            indicatorSchemeColor: SchemeColor.secondary,
-            backgroundSchemeColor: SchemeColor.error,
-            height: 80,
-            opacity: 0.9,
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            mutedUnselectedIcon: false,
-            mutedUnselectedLabel: false,
-            indicatorAlpha: 0x3D,
-            unselectedAlphaBlend: 0x66,
-            unselectedAlpha: 0xA5,
-            selectedIconSize: 28,
-            unselectedIconSize: 25,
-          );
+        colorScheme: colorScheme,
+        labelTextStyle: textTheme.bodySmall,
+        selectedIconSchemeColor: SchemeColor.secondaryContainer,
+        selectedLabelSchemeColor: SchemeColor.primaryContainer,
+        unselectedIconSchemeColor: SchemeColor.onSurface,
+        unselectedLabelSchemeColor: SchemeColor.onSurface,
+        indicatorSchemeColor: SchemeColor.secondary,
+        backgroundSchemeColor: SchemeColor.error,
+        height: 80,
+        opacity: 0.9,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        mutedUnselectedIcon: false,
+        mutedUnselectedLabel: false,
+        indicatorAlpha: 0x3D,
+        unselectedAlphaBlend: 0x66,
+        unselectedAlpha: 0xA5,
+        selectedIconSize: 28,
+        unselectedIconSize: 25,
+      );
       expect(
         navBarTheme.toString(),
         equalsIgnoringHashCodes(
@@ -7269,7 +7323,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes navigationDrawerTheme tests
     // -------------------------------------------------------------------------
-    test('NavigationDrawer FST22.1: GIVEN a FlexSubTheme.navigationDrawerTheme '
+    test(
+        'NavigationDrawer FST22.1: GIVEN a FlexSubTheme.navigationDrawerTheme '
         'EXPECT equal to NavigationDrawerThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -7347,7 +7402,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationRail tests
     // -------------------------------------------------------------------------
-    test('NavigationRail FST22.2 light-flutter default: GIVEN a default '
+    test(
+        'NavigationRail FST22.2 light-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -7384,7 +7440,8 @@ void main() {
         ),
       );
     });
-    test('NavigationRail FST22.3 dark-flutter default: GIVEN a default '
+    test(
+        'NavigationRail FST22.3 dark-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -7422,7 +7479,8 @@ void main() {
         ),
       );
     });
-    test('NavigationRail FST22.4 light-flutter default: GIVEN a default '
+    test(
+        'NavigationRail FST22.4 light-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() with opacity '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -7463,7 +7521,8 @@ void main() {
         ),
       );
     });
-    test('NavigationRail FST22.5 dark-flutter default: GIVEN a default '
+    test(
+        'NavigationRail FST22.5 dark-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -7505,7 +7564,8 @@ void main() {
         ),
       );
     });
-    test('NavigationRail FST22.6 custom: GIVEN a custom '
+    test(
+        'NavigationRail FST22.6 custom: GIVEN a custom '
         'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -7568,7 +7628,8 @@ void main() {
         ),
       );
     });
-    test('NavigationRail FST22.7 custom: GIVEN a custom '
+    test(
+        'NavigationRail FST22.7 custom: GIVEN a custom '
         'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values Icons Size test', () {
@@ -7635,7 +7696,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes OutlinedButton tests
     // -------------------------------------------------------------------------
-    test('OutlinedButton FST23.1 M2: GIVEN a default M2 '
+    test(
+        'OutlinedButton FST23.1 M2: GIVEN a default M2 '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -7683,7 +7745,8 @@ void main() {
         ),
       );
     });
-    test('OutlinedButton FST23.2 custom-M2: GIVEN a custom '
+    test(
+        'OutlinedButton FST23.2 custom-M2: GIVEN a custom '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -7774,7 +7837,8 @@ void main() {
         ),
       );
     });
-    test('OutlinedButton FST23.3 M3: GIVEN a default '
+    test(
+        'OutlinedButton FST23.3 M3: GIVEN a default '
         'FlexSubTheme.outlinedButtonTheme() EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -7793,7 +7857,8 @@ void main() {
         ),
       );
     });
-    test('OutlinedButton FST23.4 outline-M2: GIVEN a custom '
+    test(
+        'OutlinedButton FST23.4 outline-M2: GIVEN a custom '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -7880,7 +7945,8 @@ void main() {
       );
     });
 
-    test('OutlinedButton FST23.5 outline-M3: GIVEN a custom '
+    test(
+        'OutlinedButton FST23.5 outline-M3: GIVEN a custom '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -7890,42 +7956,42 @@ void main() {
       );
       final WidgetStateProperty<Color?> foregroundColor =
           WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-            if (states.contains(WidgetState.disabled)) {
-              return colorScheme.onSurface.withValues(alpha: 0.38);
-            }
-            return colorScheme.secondary;
-          });
+        if (states.contains(WidgetState.disabled)) {
+          return colorScheme.onSurface.withValues(alpha: 0.38);
+        }
+        return colorScheme.secondary;
+      });
 
       final WidgetStateProperty<Color?> overlayColor =
           WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-            if (states.contains(WidgetState.hovered)) {
-              return colorScheme.secondary.withValues(alpha: 0.08);
-            }
-            if (states.contains(WidgetState.focused)) {
-              return colorScheme.secondary.withValues(alpha: 0.12);
-            }
-            if (states.contains(WidgetState.pressed)) {
-              return colorScheme.secondary.withValues(alpha: 0.12);
-            }
-            return null;
-          });
+        if (states.contains(WidgetState.hovered)) {
+          return colorScheme.secondary.withValues(alpha: 0.08);
+        }
+        if (states.contains(WidgetState.focused)) {
+          return colorScheme.secondary.withValues(alpha: 0.12);
+        }
+        if (states.contains(WidgetState.pressed)) {
+          return colorScheme.secondary.withValues(alpha: 0.12);
+        }
+        return null;
+      });
 
       final WidgetStateProperty<BorderSide?> side =
           WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-            if (states.contains(WidgetState.disabled)) {
-              return BorderSide(
-                color: colorScheme.onSurface.withValues(alpha: 0.12),
-                width: 1,
-              );
-            }
-            if (states.contains(WidgetState.error)) {
-              return BorderSide(color: colorScheme.error, width: 1);
-            }
-            if (states.contains(WidgetState.pressed)) {
-              return BorderSide(color: colorScheme.tertiary, width: 1);
-            }
-            return BorderSide(color: colorScheme.tertiary, width: 1);
-          });
+        if (states.contains(WidgetState.disabled)) {
+          return BorderSide(
+            color: colorScheme.onSurface.withValues(alpha: 0.12),
+            width: 1,
+          );
+        }
+        if (states.contains(WidgetState.error)) {
+          return BorderSide(color: colorScheme.error, width: 1);
+        }
+        if (states.contains(WidgetState.pressed)) {
+          return BorderSide(color: colorScheme.tertiary, width: 1);
+        }
+        return BorderSide(color: colorScheme.tertiary, width: 1);
+      });
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
@@ -7960,7 +8026,8 @@ void main() {
       );
     });
 
-    test('OutlinedButton FST23.6 states-M2: Does '
+    test(
+        'OutlinedButton FST23.6 states-M2: Does '
         'OutlinedButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -8043,7 +8110,8 @@ void main() {
         equals(BorderSide(color: colorScheme.primary, width: 1)),
       );
     });
-    test('OutlinedButton FST23.7 states-custom-M2: Does '
+    test(
+        'OutlinedButton FST23.7 states-custom-M2: Does '
         'OutlinedButton have right states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF42AEE7),
@@ -8135,7 +8203,8 @@ void main() {
         equals(BorderSide(color: colorScheme.primaryContainer, width: 1)),
       );
     });
-    test('OutlinedButton FST23.8 states-M3: Does '
+    test(
+        'OutlinedButton FST23.8 states-M3: Does '
         'OutlinedButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -8210,7 +8279,8 @@ void main() {
         equals(BorderSide(color: colorScheme.outline, width: 1.0)),
       );
     });
-    test('OutlinedButton FST23.9 states-M3-custom: Does '
+    test(
+        'OutlinedButton FST23.9 states-M3-custom: Does '
         'OutlinedButton have right material '
         'custom states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -8307,14 +8377,16 @@ void main() {
       seedColor: const Color(0xFF42AEE7),
       brightness: Brightness.light,
     );
-    test('PopupMenu FST24.1: GIVEN a default FlexSubTheme.popupMenuTheme() '
+    test(
+        'PopupMenu FST24.1: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(),
         equals(const PopupMenuThemeData()),
       );
     });
-    test('PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
+    test(
+        'PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(
@@ -8347,7 +8419,8 @@ void main() {
         ),
       );
     });
-    test('PopupMenu FST24.3 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
+    test(
+        'PopupMenu FST24.3 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       final PopupMenuThemeData m = FlexSubThemes.popupMenuTheme(
         colorScheme: colorScheme,
@@ -8380,7 +8453,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Radio tests
     // -------------------------------------------------------------------------
-    test('Radio FST25.1 light: GIVEN a light default FlexSubTheme.radioTheme() '
+    test(
+        'Radio FST25.1 light: GIVEN a light default FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -8432,7 +8506,8 @@ void main() {
         ),
       );
     });
-    test('Radio FST25.2 light-states: Does Radio '
+    test(
+        'Radio FST25.2 light-states: Does Radio '
         'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -8474,7 +8549,8 @@ void main() {
       );
     });
 
-    test('Radio FST25.3 dark: GIVEN a dark default FlexSubTheme.radioTheme() '
+    test(
+        'Radio FST25.3 dark: GIVEN a dark default FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -8526,7 +8602,8 @@ void main() {
         ),
       );
     });
-    test('Radio FST25.4 dark-states: Does '
+    test(
+        'Radio FST25.4 dark-states: Does '
         'Radio have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -8567,7 +8644,8 @@ void main() {
         equals(Colors.white70),
       );
     });
-    test('Radio FST25.5 custom-light: GIVEN a light custom '
+    test(
+        'Radio FST25.5 custom-light: GIVEN a light custom '
         'FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -8914,7 +8992,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes searchBarTheme tests
     // -------------------------------------------------------------------------
-    test('SearchBar FST25SB.1: GIVEN a default FlexSubTheme.searchBarTheme() '
+    test(
+        'SearchBar FST25SB.1: GIVEN a default FlexSubTheme.searchBarTheme() '
         'SearchBarThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -8972,7 +9051,8 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    test('SearchBar FST25SB.2: GIVEN a custom FlexSubTheme.searchBarTheme() '
+    test(
+        'SearchBar FST25SB.2: GIVEN a custom FlexSubTheme.searchBarTheme() '
         'SearchBarThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -9003,23 +9083,21 @@ void main() {
       // Get brightness of the SearchBar background color.
       final bool buttonBgIsLight =
           ThemeData.estimateBrightnessForColor(backgroundColor) ==
-          Brightness.light;
+              Brightness.light;
       // For tint color use the one that is more likely to give a colored effect
-      final Color tint =
-          isLight
-              ? buttonBgIsLight
-                  ? onBackgroundColor
-                  : backgroundColor
-              : buttonBgIsLight
+      final Color tint = isLight
+          ? buttonBgIsLight
+              ? onBackgroundColor
+              : backgroundColor
+          : buttonBgIsLight
               ? backgroundColor
               : onBackgroundColor;
       // The reverse color is used for overlay
-      final Color overlay =
-          isLight
-              ? buttonBgIsLight
-                  ? backgroundColor
-                  : onBackgroundColor
-              : buttonBgIsLight
+      final Color overlay = isLight
+          ? buttonBgIsLight
+              ? backgroundColor
+              : onBackgroundColor
+          : buttonBgIsLight
               ? onBackgroundColor
               : backgroundColor;
       final bool surfaceMode =
@@ -9110,7 +9188,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes searchViewTheme tests
     // -------------------------------------------------------------------------
-    test('SearchView FST25SV.1: GIVEN a default FlexSubTheme.searchViewTheme() '
+    test(
+        'SearchView FST25SV.1: GIVEN a default FlexSubTheme.searchViewTheme() '
         'SearchViewThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -9128,7 +9207,8 @@ void main() {
         ),
       );
     });
-    test('SearchView FST25SV.2: GIVEN a custom FlexSubTheme.searchViewTheme() '
+    test(
+        'SearchView FST25SV.2: GIVEN a custom FlexSubTheme.searchViewTheme() '
         'SearchViewThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -9167,7 +9247,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes segmentedButtonTheme tests
     // -------------------------------------------------------------------------
-    test('SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
+    test(
+        'SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
         'EXPECT equal to SegmentedButtonThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -9494,7 +9575,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Slider tests
     // -------------------------------------------------------------------------
-    test('Slider FST27.1 light: GIVEN a light default '
+    test(
+        'Slider FST27.1 light: GIVEN a light default '
         'FlexSubTheme.sliderTheme() '
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -9521,7 +9603,8 @@ void main() {
         ),
       );
     });
-    test('Slider FST27.2 light: GIVEN a light custom '
+    test(
+        'Slider FST27.2 light: GIVEN a light custom '
         'FlexSubTheme.sliderTheme() '
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -9558,7 +9641,8 @@ void main() {
         ),
       );
     });
-    test('Slider FST27.3: GIVEN a FlexSubTheme.sliderTheme '
+    test(
+        'Slider FST27.3: GIVEN a FlexSubTheme.sliderTheme '
         'EXPECT equal to SliderThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -9671,7 +9755,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes SnackBar tests
     // -------------------------------------------------------------------------
-    test('SnackBar FST28.1: GIVEN a default FlexSubTheme.snackBarTheme '
+    test(
+        'SnackBar FST28.1: GIVEN a default FlexSubTheme.snackBarTheme '
         'EXPECT equal to SnackBarThemeData() version '
         'with same values', () {
       expect(
@@ -9684,7 +9769,8 @@ void main() {
         ),
       );
     });
-    test('SnackBar FST28.2 background-based-a: GIVEN a '
+    test(
+        'SnackBar FST28.2 background-based-a: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to SnackBarThemeData with backgroundColor', () {
@@ -9700,8 +9786,8 @@ void main() {
             backgroundColor: const Color(0xFF343476),
             elevation: 10,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-              color: Colors.white,
-            ),
+                  color: Colors.white,
+                ),
             actionTextColor: Colors.white.withAlpha(0xDD),
             disabledActionTextColor: Colors.white.withAlpha(0x11),
             closeIconColor: Colors.white.withAlpha(0xAA),
@@ -9709,7 +9795,8 @@ void main() {
         ),
       );
     });
-    test('SnackBar FST28.3 background-based-b: GIVEN a '
+    test(
+        'SnackBar FST28.3 background-based-b: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'no colorScheme, no backgroundSchemeColor, but with backgroundColor '
         'EXPECT equal to SnackBarThemeData with backgroundColor', () {
@@ -9726,8 +9813,8 @@ void main() {
             backgroundColor: const Color(0xFFBBC2D5),
             elevation: 5,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-              color: Colors.black,
-            ),
+                  color: Colors.black,
+                ),
             actionTextColor: colorScheme.inversePrimary,
             disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
             closeIconColor: Colors.black.withAlpha(0xAA),
@@ -9735,7 +9822,8 @@ void main() {
         ),
       );
     });
-    test('SnackBar FST28.4 scheme-based: GIVEN a '
+    test(
+        'SnackBar FST28.4 scheme-based: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor '
         'EXPECT equal to SnackBarThemeData with scheme color.', () {
@@ -9752,8 +9840,8 @@ void main() {
             backgroundColor: colorScheme.error,
             elevation: 0,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-              color: colorScheme.onError,
-            ),
+                  color: colorScheme.onError,
+                ),
             actionTextColor: colorScheme.inversePrimary,
             disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
@@ -9761,7 +9849,8 @@ void main() {
         ),
       );
     });
-    test('SnackBar FST28.5 scheme-based: GIVEN a '
+    test(
+        'SnackBar FST28.5 scheme-based: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor and '
         'actionTextSchemeColor'
@@ -9784,8 +9873,8 @@ void main() {
               borderRadius: BorderRadius.all(Radius.circular(7)),
             ),
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-              color: colorScheme.onError,
-            ),
+                  color: colorScheme.onError,
+                ),
             actionTextColor: colorScheme.tertiary,
             disabledActionTextColor: colorScheme.tertiary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
@@ -9793,7 +9882,8 @@ void main() {
         ),
       );
     });
-    test('SnackBar FST28.6 scheme-based: GIVEN a '
+    test(
+        'SnackBar FST28.6 scheme-based: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor and '
         'actionTextSchemeColor and content '
@@ -9832,7 +9922,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Switch tests
     // -------------------------------------------------------------------------
-    test('Switch FST29.1 light: GIVEN a light default M2 '
+    test(
+        'Switch FST29.1 light: GIVEN a light default M2 '
         'FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -9899,7 +9990,8 @@ void main() {
         ),
       );
     });
-    test('Switch FST29.2 light-states: Does Switch have right '
+    test(
+        'Switch FST29.2 light-states: Does Switch have right '
         'M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -10150,7 +10242,8 @@ void main() {
       );
     });
 
-    test('Switch FST29.3 dark: GIVEN a dark default FlexSubTheme.switchTheme() '
+    test(
+        'Switch FST29.3 dark: GIVEN a dark default FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -10217,7 +10310,8 @@ void main() {
         ),
       );
     });
-    test('Switch FST29.4 dark-states: Does Switch have right '
+    test(
+        'Switch FST29.4 dark-states: Does Switch have right '
         'M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -10314,7 +10408,8 @@ void main() {
         isSameColorAs(Colors.white30),
       );
     });
-    test('Switch FST29.5 custom-light: GIVEN a light custom '
+    test(
+        'Switch FST29.5 custom-light: GIVEN a light custom '
         'FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -10385,7 +10480,8 @@ void main() {
         ),
       );
     });
-    test('Switch FST29.6 light-M3-states: '
+    test(
+        'Switch FST29.6 light-M3-states: '
         'Does Switch have right M3 states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -10798,7 +10894,8 @@ void main() {
       );
     });
 
-    test('Switch FST29.7 LIGHT Cupertino-like Switch: '
+    test(
+        'Switch FST29.7 LIGHT Cupertino-like Switch: '
         'Does Switch have right states?', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -10886,7 +10983,8 @@ void main() {
       // Zero splash radius
       expect(switchTheme.splashRadius, equals(0));
     });
-    test('Switch FST29.7 DARK Cupertino-like Switch: '
+    test(
+        'Switch FST29.7 DARK Cupertino-like Switch: '
         'Does Switch have right states?', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -10931,7 +11029,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes tabBarTheme tests
     // -------------------------------------------------------------------------
-    test('TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
+    test(
+        'TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
         'EXPECT equal to TabBarTheme with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -11080,7 +11179,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes TextButton tests
     // -------------------------------------------------------------------------
-    test('TextButton FST31.1 M2: GIVEN a default M2 '
+    test(
+        'TextButton FST31.1 M2: GIVEN a default M2 '
         'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -11105,7 +11205,8 @@ void main() {
         ),
       );
     });
-    test('TextButton FST31.2 M2-base: GIVEN a custom '
+    test(
+        'TextButton FST31.2 M2-base: GIVEN a custom '
         'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same color', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -11161,7 +11262,8 @@ void main() {
         ),
       );
     });
-    test('TextButton FST31.3 M3: GIVEN a default M3 '
+    test(
+        'TextButton FST31.3 M3: GIVEN a default M3 '
         'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -11180,7 +11282,8 @@ void main() {
         ),
       );
     });
-    test('TextButton FST31.4 M2-states: Does TextButton '
+    test(
+        'TextButton FST31.4 M2-states: Does TextButton '
         'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -11231,7 +11334,8 @@ void main() {
         equals(null),
       );
     });
-    test('TextButton FST31.5 M2-tint-states: Does M2 '
+    test(
+        'TextButton FST31.5 M2-tint-states: Does M2 '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -11286,7 +11390,8 @@ void main() {
         equals(null),
       );
     });
-    test('TextButton FST31.6 M3-states: Does '
+    test(
+        'TextButton FST31.6 M3-states: Does '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -11348,7 +11453,8 @@ void main() {
         ),
       );
     });
-    test('TextButton FST31.7 M3-custom-states: Does light '
+    test(
+        'TextButton FST31.7 M3-custom-states: Does light '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -11413,7 +11519,8 @@ void main() {
         ),
       );
     });
-    test('TextButton FST31.8 M3-custom-states: Does light '
+    test(
+        'TextButton FST31.8 M3-custom-states: Does light '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -11478,7 +11585,8 @@ void main() {
         ),
       );
     });
-    test('TextButton FST31.9 M3-custom-states: Does dark '
+    test(
+        'TextButton FST31.9 M3-custom-states: Does dark '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -11543,7 +11651,8 @@ void main() {
         ),
       );
     });
-    test('TextButton FST31.10 M3-custom-states: Does dark '
+    test(
+        'TextButton FST31.10 M3-custom-states: Does dark '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -11613,7 +11722,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes textSelectionTheme tests
     // -------------------------------------------------------------------------
-    test('TextSelection FST32.1: GIVEN a FlexSubTheme.textSelectionTheme() '
+    test(
+        'TextSelection FST32.1: GIVEN a FlexSubTheme.textSelectionTheme() '
         'EXPECT equal to equivalent TextSelectionThemeData().', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -11673,7 +11783,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
-    test('TimePicker FST33.1 default: GIVEN a default M2 '
+    test(
+        'TimePicker FST33.1 default: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -11707,7 +11818,8 @@ void main() {
       );
     });
 
-    test('TimePicker FST33.2 scheme-based: GIVEN a default M2 '
+    test(
+        'TimePicker FST33.2 scheme-based: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -11743,7 +11855,8 @@ void main() {
       );
     });
 
-    test('TimePicker FST33.3 background-a: GIVEN a default M2 '
+    test(
+        'TimePicker FST33.3 background-a: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -11779,7 +11892,8 @@ void main() {
       );
     });
 
-    test('TimePicker FST33.4 background-b: GIVEN a custom '
+    test(
+        'TimePicker FST33.4 background-b: GIVEN a custom '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -11818,7 +11932,8 @@ void main() {
         ),
       );
     });
-    test('TimePicker FST33.5 GIVEN a custom FlexSubTheme.timePickerTheme() '
+    test(
+        'TimePicker FST33.5 GIVEN a custom FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF345234),
@@ -11980,7 +12095,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes ToggleButtons tests
     // -------------------------------------------------------------------------
-    test('ToggleButtons FST34.1: GIVEN a default '
+    test(
+        'ToggleButtons FST34.1: GIVEN a default '
         'FlexSubTheme.toggleButtonsTheme() EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -12015,7 +12131,8 @@ void main() {
         ),
       );
     });
-    test('ToggleButtons FST34.2 base-color: GIVEN a default '
+    test(
+        'ToggleButtons FST34.2 base-color: GIVEN a default '
         'FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -12053,7 +12170,8 @@ void main() {
         ),
       );
     });
-    test('ToggleButtons FST34.3 M3-base-color: GIVEN a tinted interact disable '
+    test(
+        'ToggleButtons FST34.3 M3-base-color: GIVEN a tinted interact disable '
         'and default M3 outline border FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -12100,7 +12218,8 @@ void main() {
         ),
       );
     });
-    test('ToggleButtons FST34.4 M3-base-color: GIVEN a tinted interact disable '
+    test(
+        'ToggleButtons FST34.4 M3-base-color: GIVEN a tinted interact disable '
         'FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -12155,7 +12274,8 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Tooltip tests
     // -------------------------------------------------------------------------
-    test('Tooltip FST35.1 light: GIVEN a light default '
+    test(
+        'Tooltip FST35.1 light: GIVEN a light default '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -12175,7 +12295,8 @@ void main() {
         ),
       );
     });
-    test('Tooltip FST35.2 light: GIVEN a light custom '
+    test(
+        'Tooltip FST35.2 light: GIVEN a light custom '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -12212,7 +12333,8 @@ void main() {
         ),
       );
     });
-    test('Tooltip FST34.3 light: GIVEN a light custom '
+    test(
+        'Tooltip FST34.3 light: GIVEN a light custom '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();

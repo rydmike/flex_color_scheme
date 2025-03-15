@@ -34,8 +34,8 @@ topics:
   - materialdesign
 
 environment:
-  sdk: '>=3.7.0 <4.0.0'
-  flutter: '>=3.27.0'
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.29.0'
 
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).

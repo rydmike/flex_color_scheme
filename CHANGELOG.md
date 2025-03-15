@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.2.0/WIP/DRAFT
 
-**Feb 23, 2025**
+**March 15, 2025**
 
 ### Package
 
@@ -13,10 +13,11 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * Remove all usage and references to new deprecated theming properties in Flutter 3.29.0: 
     * MaterialStateUnderlineInputBorder → WidgetStateInputBorder
     * MaterialStateOutlineInputBorder → WidgetStateInputBorder
-    * Themedata.dialogBackgroundColor → Remove all usage and references in the FCS packages.   
+    * Themedata.dialogBackgroundColor → Remove all usage and references in the FCS packages.
+ * Keep using pre Dart 3.7.0 formatter. Will change to new one when it supports manual trailing comma.
 
 **FIX**
-* Fix TabBarTheme normalization Flutter SDK breaking change on the master channel https://github.com/rydmike/flex_color_scheme/issues/276
+* Fix `TabBarTheme` normalization Flutter SDK breaking change on the master channel https://github.com/rydmike/flex_color_scheme/issues/276
   
 **NEW**
 * Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. The enums are:
@@ -41,7 +42,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Add Menu gap padding, to be able to match Shadcn
 * Add Card color selection, with theme variant warning!
 * Add Card outline color selection, with theme variant warning!
-* Add SegmentedControl icon color selection.
 * Look into potential dark mode issue with icon contrast in AppBar. The issue is potentially new in 3.27.
 * Check Material info on used colors in canvas types, may have changed in 3.29.
 
