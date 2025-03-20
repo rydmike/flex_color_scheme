@@ -8408,7 +8408,7 @@ class FlexColorScheme with Diagnosticable {
         indicatorAnimation: subTheme.tabBarIndicatorAnimation,
         useTintedInteraction: subTheme.interactionEffects,
         useMaterial3: useMaterial3,
-      ),
+      ).data,
       //
       // TextButton Theme.
       textButtonTheme: useSubThemes
