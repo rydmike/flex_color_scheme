@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.2.0/WIP/DRAFT
 
-**March 15, 2025**
+**March 21, 2025**
 
 ### Package
 
@@ -13,14 +13,14 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * Remove all usage and references to new deprecated theming properties in Flutter 3.29.0: 
     * MaterialStateUnderlineInputBorder → WidgetStateInputBorder
     * MaterialStateOutlineInputBorder → WidgetStateInputBorder
-    * Themedata.dialogBackgroundColor → Remove all usage and references in the FCS packages.
- * Keep using pre Dart 3.7.0 formatter. Will change to new one when it supports manual trailing comma.
+    * Themedata.dialogBackgroundColor → Removed all usage and references in the FCS packages.
+ * Repo is still using pre Dart 3.7.0 formatter. It will change to new one when it supports manual trailing comma.
 
 **FIX**
-* Fix `TabBarTheme` normalization Flutter SDK breaking change on the master channel https://github.com/rydmike/flex_color_scheme/issues/276
+* Fix `TabBarTheme` normalization Flutter SDK breaking change on the master and beta channel https://github.com/rydmike/flex_color_scheme/issues/276
   
 **NEW**
-* Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. The enums are:
+* **Pre-release feature**: Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. These schemes are considered a pre-release, basically a beta since they might still change when it comes to the produced theme colors. The current version does not yet support or use the **Shadcn** defaults for **background**, **surface** and **container** colors. In this pre-release those colors are using FlexColorScheme's monochrome surface colors. Later version will change to use the **Shadcn** surface colors by default, with an option to switch to FlexColorScheme's monochrome surface colors. The `FlexScheme` enums for using the Shadcn colors are:
   * `FlexScheme.shadBlue`
   * `FlexScheme.shadGray`
   * `FlexScheme.shadGreen`
@@ -44,6 +44,8 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Add Card outline color selection, with theme variant warning!
 * Look into potential dark mode issue with icon contrast in AppBar. The issue is potentially new in 3.27.
 * Check Material info on used colors in canvas types, may have changed in 3.29.
+* Migrate to map-based WidgetState properties, for ThemeData equality and performance. 
+* Migrate to using opacity-based const values in themes and remove the old alpha-based values. 
 
 ### Themes Playground
 
@@ -65,6 +67,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * Radio.adaptive
 
 * **TODO** 
+  * Add info about NavigationRail issue.
   * Add built-in config for Shadcn UI like config for FlexColorScheme.
   * Fix: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
