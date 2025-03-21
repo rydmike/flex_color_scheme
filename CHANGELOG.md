@@ -14,7 +14,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
     * MaterialStateUnderlineInputBorder → WidgetStateInputBorder
     * MaterialStateOutlineInputBorder → WidgetStateInputBorder
     * Themedata.dialogBackgroundColor → Removed all usage and references in the FCS packages.
- * Repo is still using pre Dart 3.7.0 formatter. It will change to new one when it supports manual trailing comma.
+ * Repo is still using pre-Dart 3.7.0 formatter. It will change to new one when it supports manual trailing comma.
 
 **FIX**
 * Fix `TabBarTheme` normalization Flutter SDK breaking change on the master and beta channel, see [issue #276](https://github.com/rydmike/flex_color_scheme/issues/276).
@@ -46,6 +46,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Add Menu gap padding, to be able to match Shadcn.
 * Add Card color selection, with theme variant warning.
 * Add Card outline color selection, with theme variant warning.
+* Add support for Shadcn background, surface and container colors.
 * Migrate to map-based WidgetState properties, for ThemeData equality and performance. 
 * Migrate to using opacity-based const values in themes and remove the old alpha-based values. 
 
