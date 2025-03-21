@@ -317,7 +317,7 @@ class ButtonsPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.27.0 to 3.27.4 and also at least 3.29.0 '
+                  text: 'In Flutter 3.27.0 to 3.27.4 and 3.29.0 '
                       'the color of icons on ElevatedButton, FilledButton, '
                       'OutlinedButton and TextButton do not follow the '
                       'foreground color of the button, see ',
@@ -339,7 +339,7 @@ class ButtonsPanel extends StatelessWidget {
                 //
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This fix has not yet landed in Flutter stable 3.29. '
+                  text: ', that landed in Flutter stable 3.29.1. '
                       'FlexColorScheme 8.1.1 and later, include a workaround '
                       'patch for this issue.',
                 ),

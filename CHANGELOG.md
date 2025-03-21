@@ -17,7 +17,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
  * Repo is still using pre Dart 3.7.0 formatter. It will change to new one when it supports manual trailing comma.
 
 **FIX**
-* Fix `TabBarTheme` normalization Flutter SDK breaking change on the master and beta channel https://github.com/rydmike/flex_color_scheme/issues/276
+* Fix `TabBarTheme` normalization Flutter SDK breaking change on the master and beta channel, see [issue #276](https://github.com/rydmike/flex_color_scheme/issues/276).
   
 **NEW**
 * **Pre-release feature**: Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. These schemes are considered a pre-release, basically a beta since they might still change when it comes to the produced theme colors. The current version does not yet support or use the **Shadcn** defaults for **background**, **surface** and **container** colors. In this pre-release those colors are using FlexColorScheme's monochrome surface colors. Later version will change to use the **Shadcn** surface colors by default, with an option to switch to FlexColorScheme's monochrome surface colors. The `FlexScheme` enums for using the Shadcn colors are:
@@ -35,29 +35,33 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * `FlexScheme.shadZinc`
 
 **TODO**
-* Add Switch track color and outline colors, to be able to match Shadcn
-* Add Checkbox shape, to be able to match Shadcn
-* Add menu and popup border outline color, to be able to match Shadcn
-* Add MenuBar border outline color, to be able to match Shadcn
-* Add Menu gap padding, to be able to match Shadcn
-* Add Card color selection, with theme variant warning!
-* Add Card outline color selection, with theme variant warning!
 * Look into potential dark mode issue with icon contrast in AppBar. The issue is potentially new in 3.27.
 * Check Material info on used colors in canvas types, may have changed in 3.29.
+
+**TODOs** Pushed to version 8.3.0 or later
+* Add Switch track color and outline colors, to be able to match Shadcn.
+* Add Checkbox shape, to be able to match Shadcn.
+* Add menu and popup border outline color, to be able to match Shadcn.
+* Add MenuBar border outline color, to be able to match Shadcn.
+* Add Menu gap padding, to be able to match Shadcn.
+* Add Card color selection, with theme variant warning.
+* Add Card outline color selection, with theme variant warning.
 * Migrate to map-based WidgetState properties, for ThemeData equality and performance. 
 * Migrate to using opacity-based const values in themes and remove the old alpha-based values. 
 
 ### Themes Playground
 
 **FIX**
-* Playground: Fix code gen for the first scheme, [see issue 275](https://github.com/rydmike/flex_color_scheme/issues/275).
+* Playground: Fix code gen for the first scheme, see [issue #275](https://github.com/rydmike/flex_color_scheme/issues/275).
   
  
 **CHANGE** 
 * Fix/improve code gen for the second and third Playground scheme. It now exports these schemes the way they are defined internally in the Playground app, instead of as their configuration resulting colors.
 * Improved the theme code gen order and added some comments to the generated code to make it easier to understand what the main parts do.
-* Removed the theme codegen option that was used to generate a config to be pasted directly into `MaterialApp` properties `theme` and `themeDark`, in favor of the newer one that generates the configs as its own file. The newer one has been the default option since version 8.0.0.
-* Updated TabBar "Known issues" info expand, to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
+* Removed the theme codegen option used to generate a config to be pasted directly into `MaterialApp` properties `theme` and `themeDark`, in favor of the newer one that generates the configs as its own file. The newer one has been the default option since version 8.0.0.
+* Updated TabBar "Known issues" info-expand, to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
+* The **NavigationRail** default configuration in the Playground is now `NavigationRailLabelType.none`. This is already the default in the **FlexColorScheme** package and in Flutter SDK. This default value is used to avoid the issue that **Flutter SDK** only supports using the `none` option as the collapsed style, when the rail is expanded. For more info about this peculiar limitation see [issue #277](https://github.com/rydmike/flex_color_scheme/issues/277) and Flutter SDK issue (_to be added_). 
+  * **NOTE:** You can work around this issue, but only on component config level, by setting the `labelType` to `NavigationRailLabelType.none` when `extended` is set to `true`, and back to `null` when it is `false` to use a themed value, that may then have another value than `none` when the rail is collapsed. This is a limitation in **Flutter SDK**, not in **FlexColorScheme**. The **Playground** app uses this workaround to avoid the issue when it displays the demo **NavigationRail** in the extended state.
 
 **NEW**
 * Added showing all existing Material-Cupertino platform adaptive widgets. Switch already existed but now also added:
@@ -85,7 +89,7 @@ This release does not contain any support for new theming features released in F
 
 **FIX**
 
-* In Flutter **3.27.0** to at least Flutter **3.29.0** the `iconColor` on buttons `ElevatedButton`, `FilledButton`, `OutlinedButton`, `TextButton` and `SegmentedButton` no longer default to `foregroundColor` when `iconColor` is not defined. This is caused by a **BREAKING REGRESSION BUG** in Flutter SDK, see [issue 162839](https://github.com/flutter/flutter/issues/162839). The issue in Flutter SDK has been fixed via [PR 162880](https://github.com/flutter/flutter/pull/162880). However, this fix will never apply to Flutter versions 3.27.0 to at least 3.29.0. It may land as a cherry-picked hotfix in Flutter 3.29.1 or later minor release of Flutter 3.29. The FIX released here in this version of FlexColorScheme, adds a workaround to this issue. Without this workaround patch, the icon color on the above-mentioned buttons will not work correctly. The used workaround patch will also work correctly after Flutter [PR 162880](https://github.com/flutter/flutter/pull/162880) lands in Flutter.
+* In Flutter **3.27.0** to at least Flutter **3.29.0** the `iconColor` on buttons `ElevatedButton`, `FilledButton`, `OutlinedButton`, `TextButton` and `SegmentedButton` no longer default to `foregroundColor` when `iconColor` is not defined. This is caused by a **BREAKING REGRESSION BUG** in Flutter SDK, see [issue 162839](https://github.com/flutter/flutter/issues/162839). The issue in Flutter SDK has been fixed via [PR 162880](https://github.com/flutter/flutter/pull/162880). However, this fix will never apply to Flutter versions 3.27.0 to at least 3.29.0. A cherry-picked hotfix for this issue landed in Flutter 3.29.1. The FIX released here in this version of FlexColorScheme, adds a workaround to this issue. Without this workaround patch, the icon color on the above-mentioned buttons will not work correctly in affected Flutter versions. The used workaround patch will also work correctly after Flutter [PR 162880](https://github.com/flutter/flutter/pull/162880) lands in Flutter.
 
 ### Themes Playground
 
