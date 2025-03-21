@@ -1691,7 +1691,7 @@ abstract final class Store {
   // Default value for the navigationRailLabelType, also used to
   // reset settings.
   static const NavigationRailLabelType defaultNavigationRailLabelType =
-      NavigationRailLabelType.all;
+      NavigationRailLabelType.none;
 
   // Key used to read and save the navigationRailUseIndicator value.
   static const String keyNavigationRailUseIndicator =
