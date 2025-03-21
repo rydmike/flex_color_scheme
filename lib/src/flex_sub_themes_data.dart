@@ -2745,29 +2745,15 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [kDialogElevation] = 6.
   final double? dialogElevation;
 
-  /// Defines which [Theme] based [ColorScheme] based color dialogs use as
-  /// as their background color.
+  /// Defines which [Theme] based [ColorScheme] color, dialogs use as
+  /// their background color.
   ///
-  /// This will affect both background in [DialogTheme] and
+  /// This will affect default background color in [DialogTheme] and
   /// [TimePickerThemeData].
   ///
-  /// If undefined, defaults to [SchemeColor.surface].
-  ///
-  /// If set to null [Dialog] will use its Flutter SDK default, which is
-  /// [ThemeData.dialogBackgroundColor] which is [ColorScheme.surface].
-  ///
-  /// Since FlexColorScheme also sets [ThemeData.dialogBackgroundColor] to
-  /// [ColorScheme.surface], there is no difference when using FlexColorscheme
-  /// and setting [dialogBackgroundSchemeColor] to null versus keeping it
-  /// at its default value [SchemeColor.surface]. This is valid as long as
-  /// [ThemeData.dialogBackgroundColor] exists, but it will be in deprecated,
-  /// see issue https://github.com/flutter/flutter/issues/91772.
-  /// After that there will be a difference.
-  ///
-  /// Using surface color as default instead of background,
-  /// ensures that dark mode dialogs will get elevation overlay in Material 2
-  /// color, also when surface and background color are not equal.
-  /// See issue: https://github.com/flutter/flutter/issues/90353
+  /// If undefined, dialogs will use Flutter SDK default, which is
+  /// [ColorScheme.surface] in Material-2 mode and
+  /// [ColorScheme.surfaceContainerHigh] in Material-3 mode.
   final SchemeColor? dialogBackgroundSchemeColor;
 
   /// Overrides the default value for [DefaultTextStyle] for

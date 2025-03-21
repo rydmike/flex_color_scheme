@@ -799,7 +799,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// In FCS version 8.2.0 and later this color is no longer applied to
   /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
-  /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
+  /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
   /// must now be enabled.
   ///
   /// When using sub-themes,this color is applied to backgroundColor in
@@ -811,8 +811,8 @@ class FlexColorScheme with Diagnosticable {
   /// instead of this [dialogBackground] color.
   ///
   /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-  /// is defined, default color is [ColorScheme.surface] in M2 mode and
-  /// [ColorScheme.surfaceContainerHigh] in M3 mode.
+  /// is defined, default color is [ColorScheme.surface] in Material-2 mode and
+  /// [ColorScheme.surfaceContainerHigh] in Material-3 mode.
   final Color? dialogBackground;
 
   /// Background theme color for the [AppBar].
@@ -2144,10 +2144,16 @@ class FlexColorScheme with Diagnosticable {
 
     /// The background color used by [Dialog]s.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
-    /// controlled separately with only a [ThemeData.from] a color scheme.
+    /// In FCS versions before 8.2.0 this color is applied to
+    /// `ThemeData.dialogBackgroundColor`, a color that cannot be
+    /// controlled separately with only a [ThemeData.from] a [ColorScheme].
     ///
-    /// When using sub-themes, it is also applied to backgroundColor in
+    /// In FCS version 8.2.0 and later this color is no longer applied to
+    /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
+    /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
+    /// must now be enabled.
+    ///
+    /// When using sub-themes,this color is applied to backgroundColor in
     /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
     /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
     /// defined in [subThemesData].
@@ -2156,8 +2162,8 @@ class FlexColorScheme with Diagnosticable {
     /// instead of this [dialogBackground] color.
     ///
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in M2 mode and
-    /// [ColorScheme.surfaceContainerHigh] in M3 mode.
+    /// is defined, default color is [ColorScheme.surface] in Material-2 mode
+    /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -4306,10 +4312,16 @@ class FlexColorScheme with Diagnosticable {
 
     /// The background color used by [Dialog]s.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
-    /// controlled separately with only a [ThemeData.from] a color scheme.
+    /// In FCS versions before 8.2.0 this color is applied to
+    /// `ThemeData.dialogBackgroundColor`, a color that cannot be
+    /// controlled separately with only a [ThemeData.from] a [ColorScheme].
     ///
-    /// When using sub-themes, it is also applied to backgroundColor in
+    /// In FCS version 8.2.0 and later this color is no longer applied to
+    /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
+    /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
+    /// must now be enabled.
+    ///
+    /// When using sub-themes,this color is applied to backgroundColor in
     /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
     /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
     /// defined in [subThemesData].
@@ -4318,8 +4330,8 @@ class FlexColorScheme with Diagnosticable {
     /// instead of this [dialogBackground] color.
     ///
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in M2 mode and
-    /// [ColorScheme.surfaceContainerHigh] in M3 mode.
+    /// is defined, default color is [ColorScheme.surface] in Material-2 mode
+    /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -7447,7 +7459,7 @@ class FlexColorScheme with Diagnosticable {
                 ? kBottomSheetModalElevation
                 : kBottomSheetModalElevationM2);
 
-    // Popupmenu menu background Color and elevation.
+    // PopupMenu menu background Color and elevation.
     final double popupMenuElevation = subTheme.popupMenuElevation ??
         (useMaterial3 ? kPopupMenuM3Elevation : kPopupMenuM2Elevation);
     final Color? popupMenuBackgroundColor = subTheme.popupMenuOpacity == null
@@ -7515,14 +7527,8 @@ class FlexColorScheme with Diagnosticable {
       // default after Flutter 3.22.0.
       cardColor:
           useMaterial3 ? colorScheme.surfaceContainerLow : colorScheme.surface,
-      // TODO(rydmike): Monitor Flutter SDK deprecation of dialogBackgroundColor
-      // If using dialog color not equal for ColorScheme.surface color, there
-      // will be no elevation overlay color in dark M2 mode, even if so
-      // configured. Use dialogs with background color that equals theme
-      // ColorScheme.surface to ensure it gets elevation overlay color applied
-      // in M2 dark mode. See: https://github.com/flutter/flutter/issues/90353
-      //
-      // TODO(rydmike): Now commented since dialogBackgroundColor is deprecated.
+
+      // TODO(rydmike): Removed since dialogBackgroundColor is deprecated.
       // For version 8.2.0 that uses Flutter 3.29.0 and later we now remove
       // this assignments, as doing it will cause a score penalty.
       // However, not doing it may give us worse default colors on dialogs
@@ -7532,6 +7538,7 @@ class FlexColorScheme with Diagnosticable {
       //     (useMaterial3
       //         ? colorScheme.surfaceContainerHigh
       //         : colorScheme.surface),
+
       // Disabled color uses a different style when using tinted disabled.
       // effects, if not opted in same as before v4.0.0 = ThemeData default.
       disabledColor: tintedDisabled

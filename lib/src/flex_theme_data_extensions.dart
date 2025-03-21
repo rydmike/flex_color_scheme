@@ -553,7 +553,7 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
-    /// The color to use for input validation errors with less empahsis than
+    /// The color to use for input validation errors with less emphasis than
     /// error.
     ///
     /// When using the factory this is an override color for the color that
@@ -634,10 +634,16 @@ extension FlexThemeData on ThemeData {
 
     /// The background color used by [Dialog]s.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
-    /// controlled separately with only a [ThemeData.from] a color scheme.
+    /// In FCS versions before 8.2.0 this color is applied to
+    /// `ThemeData.dialogBackgroundColor`, a color that cannot be
+    /// controlled separately with only a [ThemeData.from] a [ColorScheme].
     ///
-    /// When using sub-themes, it is also applied to backgroundColor in
+    /// In FCS version 8.2.0 and later this color is no longer applied to
+    /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
+    /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
+    /// must now be enabled.
+    ///
+    /// When using sub-themes,this color is applied to backgroundColor in
     /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
     /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
     /// defined in [subThemesData].
@@ -646,8 +652,8 @@ extension FlexThemeData on ThemeData {
     /// instead of this [dialogBackground] color.
     ///
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in M2 mode and
-    /// [ColorScheme.surfaceContainerHigh] in M3 mode.
+    /// is defined, default color is [ColorScheme.surface] in Material-2 mode
+    /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
@@ -2054,7 +2060,7 @@ extension FlexThemeData on ThemeData {
     /// color that this scheme color gets via the extensions factory behavior.
     final Color? onError,
 
-    /// The color to use for input validation errors with less empahsis than
+    /// The color to use for input validation errors with less emphasis than
     /// error.
     ///
     /// When using the factory this is an override color for the color that
@@ -2135,10 +2141,16 @@ extension FlexThemeData on ThemeData {
 
     /// The background color used by [Dialog]s.
     ///
-    /// The color is applied to [ThemeData.dialogBackgroundColor]. It cannot be
-    /// controlled separately with only a [ThemeData.from] a color scheme.
+    /// In FCS versions before 8.2.0 this color is applied to
+    /// `ThemeData.dialogBackgroundColor`, a color that cannot be
+    /// controlled separately with only a [ThemeData.from] a [ColorScheme].
     ///
-    /// When using sub-themes, it is also applied to backgroundColor in
+    /// In FCS version 8.2.0 and later this color is no longer applied to
+    /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
+    /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
+    /// must now be enabled.
+    ///
+    /// When using sub-themes,this color is applied to backgroundColor in
     /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
     /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
     /// defined in [subThemesData].
@@ -2147,8 +2159,8 @@ extension FlexThemeData on ThemeData {
     /// instead of this [dialogBackground] color.
     ///
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in M2 mode and
-    /// [ColorScheme.surfaceContainerHigh] in M3 mode.
+    /// is defined, default color is [ColorScheme.surface] in Material-2 mode
+    /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
     final Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
