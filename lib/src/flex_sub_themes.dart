@@ -7361,8 +7361,10 @@ abstract final class FlexSubThemes {
 
     // TODO(rydmike): Fidelity review of M3 theme for Slider.
     return SliderThemeData(
-      // This is directly deprecated in Flutter SDK, this is a test to see
-      // if we can ignore that it is used and not get a package score penalty.
+      // The year2023 property is directly deprecated in Flutter SDK, this is
+      // a test to see if we can ignore that it is deprecated and not get a
+      // package score penalty, when we use it to access this new feature.
+      //
       // ignore: deprecated_member_use, deprecated_member_use_from_same_package
       year2023: useOldM3Design ?? true,
       trackHeight: trackHeight,
