@@ -1,8 +1,11 @@
-// ignore_for_file: comment_references
-
 import 'dart:ui';
 
-import '../flex_color_scheme.dart';
+import 'package:flutter/material.dart' show ColorScheme; // For comment refs.
+
+import 'flex_color.dart' show FlexColor;
+import 'flex_color_scheme.dart';
+import 'flex_scheme_color.dart' show FlexSchemeColor;
+import 'flex_scheme_data.dart' show FlexSchemeData;
 
 /// Enum that can be used to lookup predefined [FlexSchemeData] color theme
 /// definition objects.

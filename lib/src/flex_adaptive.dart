@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart'; // For comment refs.
 
-// ignore_for_file: comment_references
+import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
+import 'flex_sub_themes_data.dart'; // For comment refs.
 
 /// The [FlexAdaptive] class is used to define on what platforms
 /// [FlexColorScheme] generated [ThemeData] platform adaptive theming
@@ -33,13 +36,15 @@ import 'package:flutter/foundation.dart';
 /// - [FlexSubThemesData.adaptiveAppBarScrollUnderOff] to adaptively remove the
 ///   [AppBar] scroll under elevation tint when Material-3 mode is used.
 /// - [FlexSubThemesData.adaptiveRadius] to adaptively use global
-///   [defaultRadiusAdaptive] instead of [defaultRadius] in both
-///   Material-2 and Material-3 mode.
+///   [FlexSubThemesData.defaultRadiusAdaptive] instead of
+///   [FlexSubThemesData.defaultRadius] in both Material-2 and Material-3 mode.
 /// - [FlexSubThemesData.adaptiveDialogRadius] to platform adaptively use
-///   [dialogRadiusAdaptive] instead of [dialogRadius] in both
-///   Material-2 and Material-3 mode as border radius on dialogs.
+///   [FlexSubThemesData.dialogRadiusAdaptive] instead of
+///   [FlexSubThemesData.dialogRadius] in both Material-2 and Material-3
+///   mode as border radius on dialogs.
 /// - [FlexSubThemesData.adaptiveSplash] to platform adaptively use
-///   [splashTypeAdaptive] instead of [splashType] in both
+///   [FlexSubThemesData.splashTypeAdaptive] instead of
+///   [FlexSubThemesData.splashType] in both
 ///   Material-2 and Material-3 mode as Ink effect on Material widgets.
 /// - [FlexSubThemesData.switchAdaptiveCupertinoLike] to platform adaptively use
 ///   a [Switch] theme that makes it look like a [CupertinoSwitch] on platforms
@@ -58,11 +63,11 @@ import 'package:flutter/foundation.dart';
 /// in Flutter to draw an iOS correct Squircle. See issue:
 /// https://github.com/flutter/flutter/issues/91523
 ///
-/// - **FUTURE PLAN**: [FlexSubThemesData.adaptiveSquircle] use Squircle as
+/// - **FUTURE PLAN**: FlexSubThemesData.adaptiveSquircle use Squircle as
 ///   [ShapeBorder] shape instead of Circular, when added, will be available in
 ///   both Material-2 and Material-3 mode.
 ///
-/// Another planned feature is [FlexSubThemesData.adaptiveAppBarStyle], that
+/// Another planned feature is FlexSubThemesData.adaptiveAppBarStyle, that
 /// can enable you to e.g. use colored AppBar in traditional M2 style, plain
 /// white e.g. on iOS. This could be useful for designs that on Android prefer
 /// the classic M2 colored AppBar in light mode, but want to use a white AppBar

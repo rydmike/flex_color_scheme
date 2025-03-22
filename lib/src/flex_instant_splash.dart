@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 const Duration _kUnconfirmedSplashDuration = Duration(milliseconds: 20);
 const Duration _kSplashFadeDuration = Duration(milliseconds: 20);
 
-const double _kSplashInitialSize = 0.0; // logical pixels
-const double _kSplashConfirmedVelocity = 1000.0; // pixels per millisecond
+/// Logical pixels
+const double _kSplashInitialSize = 0.0;
+
+/// pixels per millisecond
+const double _kSplashConfirmedVelocity = 1000.0;
 
 /// A visual reaction on a piece of [Material] to user input.
 ///

@@ -17,18 +17,12 @@ import 'flex_shad_colors/shad_violet_color_scheme.dart';
 import 'flex_shad_colors/shad_yellow_color_scheme.dart';
 import 'flex_shad_colors/shad_zinc_color_scheme.dart';
 
-// ignore_for_file: comment_references
-
 /// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by FlexColorScheme.
 ///
 /// There are also const values for every color value and FlexSchemeData of
 /// every scheme.
-class FlexColor {
-  /// Private constructor for the FlexColor static class to prevent it from
-  /// being instantiated or extended.
-  FlexColor._(); // coverage:ignore-line
-
+abstract final class FlexColor {
   /// Material 2 standard color for light surface.
   static const Color materialLightSurface = Color(0xFFFFFFFF);
 

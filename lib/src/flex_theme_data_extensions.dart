@@ -9,8 +9,6 @@ import 'flex_scheme_color.dart';
 import 'flex_sub_themes_data.dart';
 import 'flex_surface_mode.dart';
 
-// ignore_for_file: comment_references
-
 /// A convenience extension on [ThemeData] to define a
 /// [FlexColorScheme] object and return the [ThemeData] object defined by
 /// its instance, using its [FlexColorScheme.toTheme] method in one go.
@@ -1352,16 +1350,18 @@ extension FlexThemeData on ThemeData {
     /// To obtain an extension, use ThemeData.of(context).extension.
     final Iterable<ThemeExtension<dynamic>>? extensions,
 
+    /// **Deprecated:**
     /// A color that typically appears behind scrollable content.
     ///
-    /// The color is applied to [ThemeData.canvasColor] and
-    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
+    /// The color is applied to [ThemeData.canvasColor] and was also before
+    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
+    /// Material-2 used eg by menu [Drawer]. It was then also used by all
     /// [Material] of type [MaterialType.canvas].
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface].
+    /// When using the factory this was also an override color for the color
+    /// that would have been used based on mode defined by property
+    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
+    /// it overrode the same color in it as well.
     ///
     /// Defaults to null.
     @Deprecated('Use surface instead. It is deprecated '
@@ -1369,22 +1369,22 @@ extension FlexThemeData on ThemeData {
         'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? background,
 
-    /// A color that is clearly legible when drawn on [background] color.
+    /// **Deprecated:**
+    /// A color that is clearly legible when drawn on `background` color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    /// `background` and `onBackground` is recommended.
     ///
-    /// When using this extension, this is an override color for the color that
+    /// When using this factory, this was an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
+    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
+    /// or when using pre-defined color scheme based [FlexScheme] and its
+    /// `scheme` property, including any used blend logic. If a [colorScheme]
+    /// was provided with this corresponding color defined, this color property
+    /// also overrode the same color in it as well.
     ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the extensions factory behavior.
+    /// You used this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     @Deprecated('Use onSurface instead. It is deprecated '
         'because Flutter 3.22 deprecated this ColorScheme color. '
         'It no longer has any function in FCS v8 and will be removed in v9.')
@@ -2857,17 +2857,18 @@ extension FlexThemeData on ThemeData {
     /// To obtain an extension, use ThemeData.of(context).extension.
     final Iterable<ThemeExtension<dynamic>>? extensions,
 
+    /// **Deprecated:**
     /// A color that typically appears behind scrollable content.
     ///
-    /// The color is applied to [ThemeData.canvasColor] and
-    /// [ThemeData.backgroundColor], it is used eg by menu [Drawer] and by all
+    /// The color is applied to [ThemeData.canvasColor] and was also before
+    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
+    /// Material-2 used eg by menu [Drawer]. It was then also used by all
     /// [Material] of type [MaterialType.canvas].
     ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface], or if a [colorScheme] was provided it will override the
-    /// same color in it as well.
+    /// When using the factory this was also an override color for the color
+    /// that would have been used based on mode defined by property
+    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
+    /// it overrode the same color in it as well.
     ///
     /// Defaults to null.
     @Deprecated('Use surface instead. It is deprecated '
@@ -2875,22 +2876,22 @@ extension FlexThemeData on ThemeData {
         'It no longer has any function in FCS v8 and will be removed in v9.')
     final Color? background,
 
-    /// A color that is clearly legible when drawn on [background] color.
+    /// **Deprecated:**
+    /// A color that is clearly legible when drawn on `background` color.
     ///
     /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+    /// `background` and `onBackground` is recommended.
     ///
-    /// When using this extension, this is an override color for the color that
+    /// When using this factory, this was an override color for the color that
     /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
+    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
+    /// or when using pre-defined color scheme based [FlexScheme] and its
+    /// `scheme` property, including any used blend logic. If a [colorScheme]
+    /// was provided with this corresponding color defined, this color property
+    /// also overrode the same color in it as well.
     ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the extensions factory behavior.
+    /// You used this property for convenience if you want to override the
+    /// color that this scheme color gets via the factory behavior.
     @Deprecated('Use onSurface instead. It is deprecated '
         'because Flutter 3.22 deprecated this ColorScheme color. '
         'It no longer has any function in FCS v8 and will be removed in v9.')

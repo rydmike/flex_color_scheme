@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-// ignore_for_file: comment_references
+import '../flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
+import 'flex_sub_themes.dart' show FlexSubThemes; // For comment refs.
 
 // Constants used when FCS computes generated colors from primary color.
 //
@@ -235,7 +236,7 @@ const double kThickBorderWidth = 2;
 /// [ToggleButtons].
 const double kThinBorderWidth = 1;
 
-/// Default border radius on time entry elements in [TimePicker] dialog.
+/// Default border radius on time entry elements in [TimePickerDialog] dialog.
 ///
 /// Follows Material M3 guide.
 /// https://m3.material.io/components/time-pickers/specs.
@@ -803,13 +804,13 @@ const double kLoDarkPrimTextAlphaFloat = 0xFF / 255;
 const double kTextSelectionOpacity = 0.4;
 
 /// Opacity on selected text applied to text selection color by default in
-/// [FlexColorScheme.subThemesData] in light mode.
+/// [FlexColorScheme.light], `subThemesData` parameter in light mode.
 ///
 /// Value: 0.3 = 30%
 const double kTextSelectionLightOpacity = 0.3;
 
 /// Opacity on selected text applied to text selection color by default in
-/// [FlexColorScheme.subThemesData] in dark mode.
+/// [FlexColorScheme.dark], `subThemesData` parameter in dark mode.
 ///
 /// Value: 0.5 = 50%
 const double kTextSelectionDarkOpacity = 0.5;

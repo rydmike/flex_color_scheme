@@ -8,8 +8,7 @@ import 'package:flutter/services.dart';
 import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
-
-// ignore_for_file: comment_references
+import 'flex_sub_themes_data.dart' show FlexSubThemesData;
 
 /// Enum used to select the type of border used on by the input decorator in
 /// [FlexSubThemes.inputDecorationTheme].
@@ -250,10 +249,10 @@ enum FlexSliderIndicatorType {
 /// * [CardThemeData] for [Card] via [cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [chipTheme].
-/// * [DatePickerThemeData] for [DatePicker] via [datePickerTheme].
+/// * [DatePickerThemeData] for [DatePickerDialog] via [datePickerTheme].
 /// * [DialogThemeData] for [Dialog] via [dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [drawerTheme].
-/// * [DropdownMenuThemeData] for [DropDownMenu] via [dropdownMenuTheme].
+/// * [DropdownMenuThemeData] for [DropdownMenu] via [dropdownMenuTheme].
 /// * [ElevatedButtonThemeData] for [ElevatedButton] via [elevatedButtonTheme].
 /// * [FilledButtonThemeData] for [FilledButton] via
 ///   [FlexSubThemes.filledButtonTheme].
@@ -263,8 +262,9 @@ enum FlexSliderIndicatorType {
 /// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
 /// * [ListTileThemeData] for [ListTile] via [listTileTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [menuBarTheme].
-/// * [MenuButtonThemeData] for [MenuButton] via [menuButtonTheme].
-/// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+/// * [MenuButtonThemeData] for [MenuItemButton] and [SubmenuButton] via
+///   [menuButtonTheme].
+/// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropdownMenu] via
 ///   [menuTheme].
 /// * [NavigationBarThemeData] for [NavigationBar] via [navigationBarTheme].
 /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
@@ -274,7 +274,8 @@ enum FlexSliderIndicatorType {
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
 /// * [RadioThemeData] for [Radio] via [radioTheme].
 /// * [SearchBarThemeData] for [SearchBar] via [searchBarTheme].
-/// * [SearchViewThemeData] for [SearchView] via [searchViewTheme].
+/// * [SearchViewThemeData] for [SearchBar] and its open view via
+///   [searchViewTheme].
 /// * [SegmentedButtonThemeData] for [SegmentedButton] via
 ///   [segmentedButtonTheme].
 /// * [SliderThemeData] for [Slider] via [sliderTheme].
@@ -1108,9 +1109,9 @@ abstract final class FlexSubThemes {
     /// ```
     /// FCS further applies both an alpha blend and slight opacity to
     /// unselected icon and unselected label, but only if
-    /// [bottomNavigationBarMutedUnselectedIcon] and
-    /// [bottomNavigationBarMutedUnselectedLabel] are true respectively,
-    /// this also applies to undefined color inputs.
+    /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedIcon] and
+    /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedLabel] are true,
+    /// respectively, this also applies to undefined color inputs.
     ///
     /// When muted unselected options are true, the difference to Flutter
     /// default for unselected items is subtle, FCS has a bit more contrast.
@@ -1441,7 +1442,7 @@ abstract final class FlexSubThemes {
   /// corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
-  /// defaults to [kCardElevation] = 0.
+  /// defaults to Flutter SDK defaults if not defined.
   static CardThemeData cardTheme({
     /// Corner radius
     ///
@@ -1518,7 +1519,7 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [CheckboxThemeData] theme.
   ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
   ///
@@ -2864,7 +2865,7 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [ElevatedButtonThemeData] theme.
   ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
   ///
@@ -3454,11 +3455,12 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [FloatingActionButtonThemeData] with custom border radius.
   ///
-  /// The border radius defaults to [kDefaultRadius] = 16, the new M3 default.
-  /// https://m3.material.io/components/floating-action-button/specs
+  /// The border radius defaults to [kFabRadius] = 16, the new M3 default.
+  /// https://m3.material.io/components/floating-action-button/specs for the
+  /// standard sized FAB.
   ///
   /// By setting [useShape] to false, it is possible to opt out of all
-  /// shape theming on FABs and keep their M2 defaults, while still eg.
+  /// shape theming on FABs and keep their defaults, while still eg.
   /// keeping M3 defaults on other widgets or changing their border radius
   /// with the shared global value.
   ///
@@ -4894,7 +4896,7 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [MenuThemeData] theme.
   ///
-  /// This theme is used by the menu for the [DropDownMenu], [MenuBar] and
+  /// This theme is used by the menu for the [DropdownMenu], [MenuBar] and
   /// [MenuAnchor].
   static MenuThemeData menuTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
@@ -5266,9 +5268,9 @@ abstract final class FlexSubThemes {
     /// ```
     /// FCS further applies both an alpha blend and slight opacity to
     /// unselected icon and unselected label, but only if
-    /// [navigationBarMutedUnselectedIcon] and
-    /// [navigationBarMutedUnselectedLabel] are true respectively, this
-    /// also applies to undefined color inputs.
+    /// [FlexSubThemesData.navigationBarMutedUnselectedIcon] and
+    /// [FlexSubThemesData.navigationBarMutedUnselectedLabel] are true
+    /// respectively, this also applies to undefined color inputs.
     @Deprecated(
       'The `useFlutterDefaults` is deprecated, it no longer has any '
       'function and will be removed in v9. FlexColorScheme in M3 mode '
@@ -5950,9 +5952,9 @@ abstract final class FlexSubThemes {
     /// ```
     /// FCS further applies both an alpha blend and slight opacity to
     /// unselected icon and unselected label, but only if
-    /// [navigationRailMutedUnselectedIcon] and
-    /// are [navigationRailMutedUnselectedLabel] true respectively,
-    /// this also applies to undefined color inputs.
+    /// [FlexSubThemesData.navigationRailMutedUnselectedIcon] and
+    /// are [FlexSubThemesData.navigationRailMutedUnselectedLabel] true
+    /// respectively, this also applies to undefined color inputs.
     ///
     /// If you want a style that is consistent by default across
     /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
@@ -6319,11 +6321,11 @@ abstract final class FlexSubThemes {
   /// An opinionated [PopupMenuThemeData] with custom corner radius.
   ///
   /// When used by [FlexColorScheme] the corner radius of popup menus follows
-  /// the global [FlexSubThemeData.defaultRadius] if defined, until and
+  /// the global [FlexSubThemesData.defaultRadius] if defined, until and
   /// including 10 dp. After which it stays at 10 dp. If you need a higher
   /// corner radius on popup menus than 10 dp, with [FlexColorScheme]
   /// you will have to explicitly override
-  /// [FlexSubThemeData.popupMenuRadius].
+  /// [FlexSubThemesData.popupMenuRadius].
   ///
   /// It will not look very good when it is
   /// over 10dp. The highlight inside the menu will start to overflow the
@@ -6332,7 +6334,7 @@ abstract final class FlexSubThemes {
   /// since it does not look good with too much rounding on a small menu.
   ///
   /// The built-in behavior in FlexColorScheme allows it to match at low
-  /// inherited radius values from [FlexSubThemeData.defaultRadius] but to
+  /// inherited radius values from [FlexSubThemesData.defaultRadius] but to
   /// also stay below the usable max rounding automatically at higher global
   /// border radius values.
   static PopupMenuThemeData popupMenuTheme({
@@ -6445,7 +6447,7 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [RadioThemeData] theme.
   ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
   ///
@@ -7210,7 +7212,7 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [SliderThemeData] theme for the [Slider].
   ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
   static SliderThemeData sliderTheme({
@@ -7531,7 +7533,7 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [SwitchThemeData] theme.
   ///
-  /// Requires a [ColorScheme] in [colorscheme]. The color scheme would
+  /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
   ///
