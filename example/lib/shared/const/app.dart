@@ -48,13 +48,13 @@ abstract final class App {
   // build numbers.
   static const String versionMajor = '8';
   static const String versionMinor = '2';
-  static const String versionPatch = '0';
+  static const String versionPatch = '0-dev.1';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = 'stable 3.29.1 (canvaskit$buildType)';
-  static const String copyright = '© 2020 - 2024';
+  static const String flutterVersion = 'stable 3.29.2 (canvaskit$buildType)';
+  static const String copyright = '© 2020 - 2025';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';
