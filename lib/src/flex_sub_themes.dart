@@ -7276,6 +7276,17 @@ abstract final class FlexSubThemes {
     /// If undefined, defaults to false.
     final bool? useTintedDisable,
 
+    /// Overrides the default value of [Slider.year2023].
+    ///
+    /// When true, the [Slider] will use the 2023 Material Design 3 appearance.
+    /// Defaults to true.
+    ///
+    /// If this is set to false, the [Slider] will use the latest Material-3
+    /// appearance, which was introduced in December 2023.
+    ///
+    /// If [useMaterial3] is false, then this property is ignored.
+    final bool? useOldM3Design,
+
     /// A temporary flag used to disable Material-3 design and use legacy
     /// Material-2 design instead. Material-3 design is the default.
     /// Material-2 will be deprecated in Flutter.
@@ -7350,6 +7361,10 @@ abstract final class FlexSubThemes {
 
     // TODO(rydmike): Fidelity review of M3 theme for Slider.
     return SliderThemeData(
+      // This is directly deprecated in Flutter SDK, this is a test to see
+      // if we can ignore that it is used and not get a package score penalty.
+      // ignore: deprecated_member_use, deprecated_member_use_from_same_package
+      year2023: useOldM3Design ?? true,
       trackHeight: trackHeight,
       activeTrackColor: baseColor,
       inactiveTrackColor: baseColor.withAlpha(kAlphaLowDisabled),
