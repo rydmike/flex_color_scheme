@@ -128,8 +128,8 @@ class NavigationRailPanel extends StatelessWidget {
                 // TextSpan(
                 //   style: spanTextStyle,
                 //   text: ', that landed in Flutter stable 3.29.1. '
-                //       'FlexColorScheme 8.1.1 and later, include a workaround '
-                //       'patch for this issue.',
+                //     'FlexColorScheme 8.1.1 and later, include a workaround '
+                //     'patch for this issue.',
                 // ),
               ],
             ),

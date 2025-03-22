@@ -283,19 +283,19 @@ extension FlexThemeData on ThemeData {
     /// default elevation behavior of [BottomAppBar].
     final double? bottomAppBarElevation,
 
-    /// Select preferred style for the default [TabBarTheme].
+    /// Select preferred style for the default [TabBarThemeData].
     ///
-    /// By default the TabBarTheme is made to fit with the style of the AppBar.
-    /// In M2 mode that is done by defaulting to using
-    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
-    /// defaulting to using [FlexTabBarStyle.flutterDefault].
+    /// By default the TabBarThemeData is made to fit with the style of the
+    /// AppBar. In Material-2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In Material-3 mode it is
+    /// done by defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
     /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarTheme style is useful if you primarily intended to use the
-    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
-    /// colors.
+    /// This TabBarThemeData style is useful if you primarily intended to use
+    /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
+    /// background colors.
     final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
@@ -644,9 +644,10 @@ extension FlexThemeData on ThemeData {
     /// must now be enabled.
     ///
     /// When using sub-themes,this color is applied to backgroundColor in
-    /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
-    /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
-    /// defined in [subThemesData].
+    /// dialog themes DatePickerThemeData, DialogThemeData and
+    /// TimePickerThemeData, but only if
+    /// [subThemesData.dialogBackgroundSchemeColor] has not be defined in
+    /// [subThemesData].
     ///
     /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
     /// instead of this [dialogBackground] color.
@@ -824,12 +825,12 @@ extension FlexThemeData on ThemeData {
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
     ///   [FlexSubThemes.buttonTheme].
-    /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+    /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
     /// * [DatePickerThemeData] for [DatePicker] via
     ///   [FlexSubThemes.datePickerTheme].
-    /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+    /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via
     ///   [FlexSubThemes.dropdownMenuTheme].
@@ -864,7 +865,7 @@ extension FlexThemeData on ThemeData {
     /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
     /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-    /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
+    /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
     /// * [TextSelectionThemeData] for [TextField] via
@@ -1695,19 +1696,19 @@ extension FlexThemeData on ThemeData {
     /// both via the defaults for the respective theme mode
     final double? bottomAppBarElevation,
 
-    /// Select preferred style for the default [TabBarTheme].
+    /// Select preferred style for the default [TabBarThemeData].
     ///
-    /// By default the TabBarTheme is made to fit with the style of the AppBar.
-    /// In M2 mode that is done by defaulting to using
-    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
-    /// defaulting to using [FlexTabBarStyle.flutterDefault].
+    /// By default the TabBarThemeData is made to fit with the style of the
+    /// AppBar. In Material-2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In Material-3 mode it is
+    /// done by defaulting to [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
     /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarTheme style is useful if you primarily intended to use the
-    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
-    /// colors.
+    /// This TabBarThemeData style is useful if you primarily intended to use
+    /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
+    /// background colors.
     final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
@@ -2151,9 +2152,10 @@ extension FlexThemeData on ThemeData {
     /// must now be enabled.
     ///
     /// When using sub-themes,this color is applied to backgroundColor in
-    /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
-    /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
-    /// defined in [subThemesData].
+    /// dialog themes DatePickerThemeData, DialogThemeData and
+    /// TimePickerThemeData, but only if
+    /// [subThemesData.dialogBackgroundSchemeColor] has not be defined in
+    /// [subThemesData].
     ///
     /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
     /// instead of this [dialogBackground] color.
@@ -2331,12 +2333,12 @@ extension FlexThemeData on ThemeData {
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
     ///   [FlexSubThemes.buttonTheme].
-    /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+    /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
     /// * [DatePickerThemeData] for [DatePicker] via
     ///   [FlexSubThemes.datePickerTheme].
-    /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+    /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via
     ///   [FlexSubThemes.dropdownMenuTheme].
@@ -2371,7 +2373,7 @@ extension FlexThemeData on ThemeData {
     /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
     /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-    /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
+    /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
     /// * [TextSelectionThemeData] for [TextField] via

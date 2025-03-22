@@ -247,11 +247,11 @@ enum FlexSliderIndicatorType {
 ///   [bottomNavigationBarTheme].
 /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
 /// * [ButtonThemeData] for old deprecated buttons, via [buttonTheme].
-/// * [CardTheme] for [Card] via [cardTheme].
+/// * [CardThemeData] for [Card] via [cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [chipTheme].
 /// * [DatePickerThemeData] for [DatePicker] via [datePickerTheme].
-/// * [DialogTheme] for [Dialog] via [dialogTheme].
+/// * [DialogThemeData] for [Dialog] via [dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [drawerTheme].
 /// * [DropdownMenuThemeData] for [DropDownMenu] via [dropdownMenuTheme].
 /// * [ElevatedButtonThemeData] for [ElevatedButton] via [elevatedButtonTheme].
@@ -280,7 +280,7 @@ enum FlexSliderIndicatorType {
 /// * [SliderThemeData] for [Slider] via [sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [switchTheme].
-/// * [TabBarTheme] for [TabBar] via [tabBarTheme].
+/// * [TabBarThemeData] for [TabBar] via [tabBarTheme].
 /// * [TextButtonThemeData] for [TextButton] via [textButtonTheme].
 /// * [TextSelectionThemeData] for [TextField] via [textSelectionTheme].
 /// * [TimePickerThemeData] for [TimePickerDialog] via [timePickerTheme].
@@ -1437,7 +1437,7 @@ abstract final class FlexSubThemes {
     );
   }
 
-  /// An opinionated [CardTheme] for [Card] with custom
+  /// An opinionated [CardThemeData] for [Card] with custom
   /// corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
@@ -2636,7 +2636,7 @@ abstract final class FlexSubThemes {
     );
   }
 
-  /// An opinionated [DialogTheme] with custom corner radius and elevation.
+  /// An opinionated [DialogThemeData] with custom corner radius and elevation.
   ///
   /// Corner [radius] defaults to [kDialogRadius] = 28 and [elevation] to
   /// [kDialogElevation] = 10.
@@ -5361,9 +5361,7 @@ abstract final class FlexSubThemes {
       indicatorShape: indicatorRadius == null
           ? null
           : RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(indicatorRadius)
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(indicatorRadius)),
             ),
       labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
         Set<WidgetState> states,
@@ -8002,7 +8000,7 @@ abstract final class FlexSubThemes {
     }
   }
 
-  /// An opinionated [TabBarTheme] theme.
+  /// An opinionated [TabBarThemeData] theme.
   ///
   /// Contrary to the other opinionated static [FlexSubThemes] sub-theme
   /// function, this one is only a sub-set of the original and does not do or
@@ -8083,7 +8081,7 @@ abstract final class FlexSubThemes {
 
     /// The color of the divider.
     ///
-    /// If null and [useMaterial3] is true, [TabBarTheme.dividerColor]
+    /// If null and [useMaterial3] is true, [TabBarThemeData.dividerColor]
     /// color is used. If that is null and [useMaterial3] is true,
     /// [ColorScheme.surfaceVariant] will be used,
     /// otherwise divider will not be drawn.

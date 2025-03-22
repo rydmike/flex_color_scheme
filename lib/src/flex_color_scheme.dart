@@ -1,5 +1,3 @@
-// ignore_for_file: sort_constructors_first
-
 import 'dart:async';
 
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
@@ -23,6 +21,7 @@ import 'flex_sub_themes_data.dart';
 import 'flex_surface_mode.dart';
 import 'flex_text_theme_color.dart';
 
+// ignore_for_file: sort_constructors_first
 // ignore_for_file: comment_references
 
 /// Enum to select the used AppBarTheme style in [FlexColorScheme] (FCS)
@@ -175,7 +174,8 @@ enum FlexSystemNavBarStyle {
   navigationBar,
 }
 
-/// Enum to select [TabBarTheme] preference in [FlexColorScheme] based themes.
+/// Enum to select [TabBarThemeData] preference in [FlexColorScheme]
+/// based themes.
 enum FlexTabBarStyle {
   /// Themed to fit with active [FlexAppBarStyle] and [AppBarTheme].
   ///
@@ -198,7 +198,7 @@ enum FlexTabBarStyle {
   /// in the AppBar, as well as on surfaces.
   forBackground,
 
-  /// Make a [TabBarTheme] sub-theme that equals the style you get with
+  /// Make a [TabBarThemeData] sub-theme that equals the style you get with
   /// ThemeData constructor and Widget default values in Flutter SDK.
   ///
   /// This works well with default primary colored AppBar's in light
@@ -207,7 +207,7 @@ enum FlexTabBarStyle {
   /// [FlexColorScheme], prefer using [forAppBar] for that.
   flutterDefault,
 
-  /// An experimental [TabBarTheme] mode that works on both primary and
+  /// An experimental [TabBarThemeData] mode that works on both primary and
   /// background colors.
   ///
   /// This theme is more low contrast than the themes explicitly designed
@@ -480,8 +480,8 @@ enum FlexScaffoldBaseColor {
 /// also to surface, background and scaffold background colors that also
 /// use the same tint as these themed colors.
 ///
-/// [FlexColorScheme] can automatically adjust the [TabBarTheme] to fit with the
-/// active [AppBar] background or to be themed to always fit on
+/// [FlexColorScheme] can automatically adjust the [TabBarThemeData] to fit
+/// with the active [AppBar] background or to be themed to always fit on
 /// background/surface colors, if its primary usage will be in e.g. a [Scaffold]
 /// body, or [Material] surface or canvas.
 ///
@@ -803,8 +803,9 @@ class FlexColorScheme with Diagnosticable {
   /// must now be enabled.
   ///
   /// When using sub-themes,this color is applied to backgroundColor in
-  /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
-  /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
+  /// dialog themes DatePickerThemeData, DialogThemeData and
+  /// TimePickerThemeData, but only if
+  /// [subThemesData.dialogBackgroundSchemeColor] has not be
   /// defined in [subThemesData].
   ///
   /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
@@ -850,17 +851,18 @@ class FlexColorScheme with Diagnosticable {
   /// If undefined, [primary] color is used.
   final Color? surfaceTint;
 
-  /// Select preferred style for the default [TabBarTheme].
+  /// Select preferred style for the default [TabBarThemeData].
   ///
-  /// By default the TabBarTheme is made to fit with the style of the AppBar.
-  /// In M2 mode that is done by defaulting to using
-  /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it done by
-  /// defaulting to using [FlexTabBarStyle.flutterDefault].
+  /// By default the TabBarThemeData is made to fit with the style of the
+  /// [AppBar].
+  /// In Material-22 mode that is done by defaulting to using
+  /// [FlexTabBarStyle.forAppBar] if not defined. In Material-3 mode it is
+  /// done by defaulting to using [FlexTabBarStyle.flutterDefault].
   ///
   /// When setting this to [FlexTabBarStyle.forBackground], it will default
   /// to a theme that uses the color scheme and fits on background color,
   /// which typically also on works surface and scaffoldBackground color.
-  /// This TabBarTheme style is useful if you primarily intended to use the
+  /// This TabBarThemeData style is useful if you primarily intended to use the
   /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
   /// colors.
   final FlexTabBarStyle? tabBarStyle;
@@ -1227,12 +1229,12 @@ class FlexColorScheme with Diagnosticable {
   ///   [FlexSubThemes.bottomSheetTheme].
   /// * [ButtonThemeData] for old deprecated buttons, via
   ///   [FlexSubThemes.buttonTheme].
-  /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+  /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
   /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
   /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
   /// * [DatePickerThemeData] for [DatePicker] via
   ///   [FlexSubThemes.datePickerTheme].
-  /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+  /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
   /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
   /// * [DropdownMenuThemeData] for [DropDownMenu] via
   ///   [FlexSubThemes.dropdownMenuTheme].
@@ -1267,7 +1269,7 @@ class FlexColorScheme with Diagnosticable {
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
   /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-  /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
+  /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
   /// * [TextButtonThemeData] for [TextButton] via
   ///   [FlexSubThemes.textButtonTheme].
   /// * [TextSelectionThemeData] for [TextField] via
@@ -1793,19 +1795,20 @@ class FlexColorScheme with Diagnosticable {
     /// default elevation behavior of [BottomAppBar].
     final double? bottomAppBarElevation,
 
-    /// Select preferred style for the default [TabBarTheme].
+    /// Select preferred style for the default [TabBarThemeData].
     ///
-    /// By default the TabBarTheme is made to fit with the style of the AppBar.
-    /// In M2 mode that is done by defaulting to using
+    /// By default the TabBarThemeData is made to fit with the style of the
+    /// [AppBar].
+    /// In Material-2 mode that is done by defaulting to using
     /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
     /// defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
     /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarTheme style is useful if you primarily intended to use the
-    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
-    /// colors.
+    /// This TabBarThemeData style is useful if you primarily intended to use
+    /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
+    /// background colors.
     final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
@@ -2154,7 +2157,8 @@ class FlexColorScheme with Diagnosticable {
     /// must now be enabled.
     ///
     /// When using sub-themes,this color is applied to backgroundColor in
-    /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
+    /// dialog themes DatePickerThemeData, DialogThemeData and
+    /// TimePickerThemeData,
     /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
     /// defined in [subThemesData].
     ///
@@ -2334,12 +2338,12 @@ class FlexColorScheme with Diagnosticable {
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
     ///   [FlexSubThemes.buttonTheme].
-    /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+    /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
     /// * [DatePickerThemeData] for [DatePicker] via
     ///   [FlexSubThemes.datePickerTheme].
-    /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+    /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via
     ///   [FlexSubThemes.dropdownMenuTheme].
@@ -2374,7 +2378,7 @@ class FlexColorScheme with Diagnosticable {
     /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
     /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-    /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
+    /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
     /// * [TextSelectionThemeData] for [TextField] via
@@ -3866,19 +3870,20 @@ class FlexColorScheme with Diagnosticable {
     /// default elevation behavior of [BottomAppBar].
     final double? bottomAppBarElevation,
 
-    /// Select preferred style for the default [TabBarTheme].
+    /// Select preferred style for the default [TabBarThemeData].
     ///
-    /// By default the TabBarTheme is made to fit with the style of the AppBar.
-    /// In M2 mode that is done by defaulting to using
-    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
-    /// defaulting to using [FlexTabBarStyle.flutterDefault].
+    /// By default the TabBarThemeData is made to fit with the style of the
+    /// [AppBar].
+    /// In Material-2 mode that is done by defaulting to using
+    /// [FlexTabBarStyle.forAppBar] if not defined. In Material-3 mode it is
+    /// done by defaulting to using [FlexTabBarStyle.flutterDefault].
     ///
     /// When setting this to [FlexTabBarStyle.forBackground], it will default
     /// to a theme that uses the color scheme and fits on background color,
     /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarTheme style is useful if you primarily intended to use the
-    /// TabBar in a Scaffold, Dialog, Drawer or Side panel on their background
-    /// colors.
+    /// This TabBarThemeData style is useful if you primarily intended to use
+    /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
+    /// background colors.
     final FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
@@ -4322,9 +4327,10 @@ class FlexColorScheme with Diagnosticable {
     /// must now be enabled.
     ///
     /// When using sub-themes,this color is applied to backgroundColor in
-    /// dialog themes DatePickerThemeData, DialogTheme and TimePickerThemeData,
-    /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
-    /// defined in [subThemesData].
+    /// dialog themes DatePickerThemeData, DialogThemeData and
+    /// TimePickerThemeData, but only if
+    /// [subThemesData.dialogBackgroundSchemeColor] has not be defined in
+    /// [subThemesData].
     ///
     /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
     /// instead of this [dialogBackground] color.
@@ -4502,12 +4508,12 @@ class FlexColorScheme with Diagnosticable {
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
     ///   [FlexSubThemes.buttonTheme].
-    /// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+    /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
     /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
     /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
     /// * [DatePickerThemeData] for [DatePicker] via
     ///   [FlexSubThemes.datePickerTheme].
-    /// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+    /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
     /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
     /// * [DropdownMenuThemeData] for [DropDownMenu] via
     ///   [FlexSubThemes.dropdownMenuTheme].
@@ -4542,7 +4548,7 @@ class FlexColorScheme with Diagnosticable {
     /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
     /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
     /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-    /// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
+    /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
     /// * [TextButtonThemeData] for [TextButton] via
     ///   [FlexSubThemes.textButtonTheme].
     /// * [TextSelectionThemeData] for [TextField] via
@@ -6268,7 +6274,7 @@ class FlexColorScheme with Diagnosticable {
   ///   In M3 `ColorScheme.surface` is used by the SDK as well.
   ///
   /// * The `indicatorColor` is same as `effectiveTabColor` which uses a
-  ///   function with logic to determine its color based on if a TabBarTheme
+  ///   function with logic to determine its color based on if a TabBarThemeData
   ///   was selected that should work on current AppBar background color,
   ///   or on surface/background colors.
   ///
@@ -6352,12 +6358,12 @@ class FlexColorScheme with Diagnosticable {
   ///   FlexColorScheme fixed the issue. The issue has been resolved but
   ///   same [ChipThemeData] is still in use for backward style compatibility.
   ///
-  /// * For [TabBarTheme], in M2 the Flutter standard selected tab and indicator
-  ///   color is onSurface in dark mode and on Primary in light mode, which is
-  ///   designed to fit an AppBar colored TabBar. This is kept, and the default
-  ///   via [FlexTabBarStyle.forAppBar] style, with a minor modification. If
-  ///   AppBar is "light", then black87 is used, not black, it is the same as
-  ///   the textTheme on AppBar in light app bar brightness.
+  /// * For [TabBarThemeData], in M2 the Flutter standard selected tab and
+  ///   indicator color is onSurface in dark mode and on Primary in light mode,
+  ///   which is designed to fit an AppBar colored TabBar. This is kept, and
+  ///   the default via [FlexTabBarStyle.forAppBar] style, with a minor
+  ///   modification. If AppBar is "light", then black87 is used, not black,
+  ///   it is the same as the textTheme on AppBar in light app bar brightness.
   ///   If the [FlexTabBarStyle.forBackground] style was used, the
   ///   selected  color is always color scheme primary color, which works well
   ///   on surface, background and scaffold background colors. When using M3
@@ -8387,14 +8393,6 @@ class FlexColorScheme with Diagnosticable {
           : null,
       //
       // TabBar Theme.
-      // Defines the TabBar theme that will fit nicely in an AppBar
-      // (default) or on background color for use eg in a Scaffold, the choice
-      // depends on tabBarStyle `FlexTabBarStyle`, that defaults to
-      // `FlexTabBarStyle.forAppBar`. Using different theme styles for intended
-      // target usage avoids this challenge:
-      // https://github.com/flutter/flutter/pull/68171#pullrequestreview-517753917
-      // That still has some issue related to it, is using default is used, we
-      // pass in `null` and let ThemeData use default sub-theme for TabBarTheme.
       tabBarTheme: FlexSubThemes.tabBarTheme(
         colorScheme: colorScheme,
         indicatorColor: subTheme.tabBarIndicatorSchemeColor == null

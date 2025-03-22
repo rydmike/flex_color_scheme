@@ -103,11 +103,11 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.bottomSheetTheme].
 /// * [ButtonThemeData] for old deprecated buttons, via
 ///   [FlexSubThemes.buttonTheme].
-/// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+/// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
 /// * [DatePickerThemeData] for [DatePicker] via [FlexSubThemes.datePickerTheme]
-/// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+/// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
 /// * [DropdownMenuThemeData] for [DropDownMenu] via
 ///   [FlexSubThemes.dropdownMenuTheme].
@@ -142,7 +142,7 @@ import 'flex_sub_themes.dart';
 /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-/// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
+/// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
 /// * [TextButtonThemeData] for [TextButton] via
 ///   [FlexSubThemes.textButtonTheme].
 /// * [TextSelectionThemeData] for [TextField] via
@@ -2748,7 +2748,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] color, dialogs use as
   /// their background color.
   ///
-  /// This will affect default background color in [DialogTheme] and
+  /// This will affect default background color in [DialogThemeData] and
   /// [TimePickerThemeData].
   ///
   /// If undefined, dialogs will use Flutter SDK default, which is
@@ -3151,7 +3151,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The color of the divider.
   ///
-  /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]
+  /// If null and [ThemeData.useMaterial3] is true, [TabBarThemeData.dividerColor]
   /// color is used. If that is null and [ThemeData.useMaterial3] is true,
   /// [ColorScheme.outlineVariant] will be used, otherwise divider will
   /// not be drawn.
@@ -3167,13 +3167,13 @@ class FlexSubThemesData with Diagnosticable {
   /// [TabAlignment.startOffset], and [TabAlignment.center] are supported.
   /// Otherwise an exception is thrown.
   ///
-  /// If this is null, then the value of [TabBarTheme.tabAlignment] is used.
+  /// If this is null, then the value of [TabBarThemeData.tabAlignment] is used.
   ///
-  /// If [TabBarTheme.tabAlignment] is null and [ThemeData.useMaterial3] is
+  /// If [TabBarThemeData.tabAlignment] is null and [ThemeData.useMaterial3] is
   /// true, then [TabAlignment.startOffset] is used if [isScrollable] is true,
   /// otherwise [TabAlignment.fill] is used.
   ///
-  /// If [TabBarTheme.tabAlignment] is null and [ThemeData.useMaterial3] is
+  /// If [TabBarThemeData.tabAlignment] is null and [ThemeData.useMaterial3] is
   /// false, then [TabAlignment.center] is used if [isScrollable] is true,
   /// otherwise [TabAlignment.fill] is used.
   ///
