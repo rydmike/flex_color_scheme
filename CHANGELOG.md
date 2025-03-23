@@ -2,7 +2,7 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
-## 8.2.0/WIP/DRAFT
+## 8.2.0-dev.1
 
 **March 23, 2025**
 
@@ -45,19 +45,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
   * The **Shadcn** color selections only set default colors, you will have to theme Material to look more like Shadcn yourself by selecting the correct Material components and modifying their properties to look and behave more like Shadcn style. The **Themes Playground** includes a pre-configured **very preliminary** configuration that you can use to do this.  
   * The **Shadcn** color features are in this **beta** release excluded from **FlexColorScheme**'s otherwise rigorous tests.
 
-**TODO**  
-Pushed to version 8.3.0 or later
-* Add support for Shadcn background, surface and container colors.
-* Add Switch track color and outline colors, to be able to match Shadcn.
-* Add Checkbox shape to be able to match Shadcn.
-* Add menu and popup border outline color, to be able to match Shadcn.
-* Add MenuBar border outline color, to be able to match Shadcn.
-* Add Menu gap padding to be able to match Shadcn.
-* Add Card color selection, with theme variant warning.
-* Add Card outline color selection, with theme variant warning.
-* Internal: Migrate to map-based WidgetState properties, for ThemeData equality and performance. 
-* Internal: Migrate to only using opacity-based const values in themes and remove the old alpha-based values. 
-* Playground Fix: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
 ### Themes Playground
 
