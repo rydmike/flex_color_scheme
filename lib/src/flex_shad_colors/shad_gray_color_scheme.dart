@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 
 import 'shad_color_scheme.dart';
 
+// The Shadcn features are still beta nd not included in test coverage.
+// coverage:ignore-file
+
 /// Shadcn based Grey color scheme.
 @immutable
 class ShadGrayColorScheme extends ShadColorScheme {

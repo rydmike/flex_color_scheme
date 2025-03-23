@@ -5405,6 +5405,9 @@ abstract final class FlexColor {
     ),
   );
 
+  // The Shadcn features are still beta nd not included in test coverage.
+  // coverage:ignore-start
+
   /// English name of the Shadcn blue theme.
   static const String shadBlueName = 'Shadcn Blue';
 
@@ -5765,6 +5768,9 @@ abstract final class FlexColor {
     ),
   );
 
+  // The Shadcn features above are still beta nd not included in test coverage.
+  // coverage:ignore-end
+
   /// Starting values for custom color data.
   ///
   /// These can serve as fallback data to custom color values
@@ -5819,6 +5825,9 @@ abstract final class FlexColor {
   /// directly iterated over using the [FlexScheme] enum values list.
   /// For a version that contains all the enum values, including the last
   /// [FlexScheme.custom] value, use the [schemesWithCustom] map instead.
+  ///
+  /// Note: All Shadcn schemes, starting with name shad are still beta and
+  /// not included in test coverage. Their styles may change in future versions.
   static const Map<FlexScheme, FlexSchemeData> schemes =
       <FlexScheme, FlexSchemeData>{
     FlexScheme.material: material,

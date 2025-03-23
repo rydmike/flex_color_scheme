@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'shad_color_scheme.dart';
 
+// The Shadcn features are still beta nd not included in test coverage.
+// coverage:ignore-file
+
 /// Shadcn based Neutral color scheme.
 @immutable
 class ShadNeutralColorScheme extends ShadColorScheme {

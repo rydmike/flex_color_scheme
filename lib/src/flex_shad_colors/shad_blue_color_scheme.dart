@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 
 import 'shad_color_scheme.dart';
 
+// The Shadcn features are still beta nd not included in test coverage.
+// coverage:ignore-file
+
 /// Shadcn based Blue color scheme.
 class ShadBlueColorScheme extends ShadColorScheme {
   /// Shadcn based Blue color scheme, light.

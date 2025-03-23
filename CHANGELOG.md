@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.2.0/WIP/DRAFT
 
-**March 21, 2025**
+**March 23, 2025**
 
 ### Package
 
@@ -20,25 +20,32 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Fix `TabBarTheme` normalization Flutter SDK breaking change on the master and beta channel, see [issue #276](https://github.com/rydmike/flex_color_scheme/issues/276).
   
 **NEW**
-* **Pre-release feature**: Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them. These schemes are considered a pre-release, basically a beta since they might still change when it comes to the produced theme colors. The current version does not yet support or use the **Shadcn** defaults for **background**, **surface** and **container** colors. In this pre-release those colors are using FlexColorScheme's monochrome surface colors. Later version will change to use the **Shadcn** surface colors by default, with an option to switch to FlexColorScheme's monochrome surface colors. The `FlexScheme` enums for using the Shadcn colors are:
-  * `FlexScheme.shadBlue`
-  * `FlexScheme.shadGray`
-  * `FlexScheme.shadGreen`
-  * `FlexScheme.shadNeutral`
-  * `FlexScheme.shadOrange`
-  * `FlexScheme.shadRed`  
-  * `FlexScheme.shadRose`
-  * `FlexScheme.shadSlate`
-  * `FlexScheme.shadStone`
-  * `FlexScheme.shadViolet`
-  * `FlexScheme.shadYellow`
-  * `FlexScheme.shadZinc`
+* **Beta feature**: 
+  * Added Shadcn UI color schemes, this includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them.  
+  
+    The `FlexScheme` enums for using the Shadcn colors are:
+    * `FlexScheme.shadBlue`
+    * `FlexScheme.shadGray`
+    * `FlexScheme.shadGreen`
+    * `FlexScheme.shadNeutral`
+    * `FlexScheme.shadOrange`
+    * `FlexScheme.shadRed`  
+    * `FlexScheme.shadRose`
+    * `FlexScheme.shadSlate`
+    * `FlexScheme.shadStone`
+    * `FlexScheme.shadViolet`
+    * `FlexScheme.shadYellow`
+    * `FlexScheme.shadZinc`
+  
+  * The **Shadcn color schemes** are considered **beta**. The current version does not yet support or use the **Shadcn** default colors for **background**, **surface** and **container** colors. In this release those colors are using FlexColorScheme's monochrome surface colors. Later versions may change this and use the **Shadcn** surface colors by default, when selecting these themes, with an option to switch to FlexColorScheme's monochrome surface colors, which this version currently uses.
+  * The **Shadcn** color selections only set default colors, you will have to theme Material to look more like Shadcn yourself by selecting the correct Material components and modifying their properties to look and behave more like Shadcn style. The **Themes Playground** includes a pre-configured style that you can use to do this.  
+  * The **Shadcn** color features are in this **beta** release excluded from **FlexColorScheme**'s otherwise rigorous tests.
 
 **TODO**
-* Look into potential dark mode issue with icon contrast in AppBar. The issue is potentially new in 3.27.
 * Check Material info on used colors in canvas types, may have changed in 3.29.
 
-**TODOs** Pushed to version 8.3.0 or later
+**TODO**  
+Pushed to version 8.3.0 or later
 * Add Switch track color and outline colors, to be able to match Shadcn.
 * Add Checkbox shape, to be able to match Shadcn.
 * Add menu and popup border outline color, to be able to match Shadcn.
@@ -61,18 +68,19 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Improved the theme code gen order and added some comments to the generated code to make it easier to understand what the main parts do.
 * Removed the theme codegen option used to generate a config to be pasted directly into `MaterialApp` properties `theme` and `themeDark`, in favor of the newer one that generates the configs as its own file. The newer one has been the default option since version 8.0.0.
 * Updated TabBar "Known issues" info-expand, to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
-* The **NavigationRail** default configuration in the Playground is now `NavigationRailLabelType.none`. This is already the default in the **FlexColorScheme** package and in Flutter SDK. This default value is used to avoid the issue that **Flutter SDK** only supports using the `none` option as the collapsed style, when the rail is expanded. For more info about this peculiar limitation see [issue #277](https://github.com/rydmike/flex_color_scheme/issues/277) and Flutter SDK issue (_to be added_). 
-  * **NOTE:** You can work around this issue, but only on component config level, by setting the `labelType` to `NavigationRailLabelType.none` when `extended` is set to `true`, and back to `null` when it is `false` to use a themed value, that may then have another value than `none` when the rail is collapsed. This is a limitation in **Flutter SDK**, not in **FlexColorScheme**. The **Playground** app uses this workaround to avoid the issue when it displays the demo **NavigationRail** in the extended state.
+* The **NavigationRail** default configuration in the Playground is now `NavigationRailLabelType.none`.
+  * This is already the default in the **FlexColorScheme** package and in Flutter SDK. This default value is used to avoid the issue that **Flutter SDK** only supports using the `none` option as the collapsed style, when the rail is expanded. For more info about this peculiar limitation see [issue #277](https://github.com/rydmike/flex_color_scheme/issues/277).
+  * Added an info-expand to the **NavigationRail** panel to explain this known-issue.
+  * You can work around this issue, but only on component config level, by setting the `labelType` to `NavigationRailLabelType.none` when `extended` is set to `true`, and back to `null` when it is `false` to use a themed value, that may then have another value than `none` when the rail is collapsed. This is a limitation in **Flutter SDK**, not in **FlexColorScheme**. The **Playground** app uses this workaround to avoid the issue when it displays the demo **NavigationRail** in the extended state.
 
 **NEW**
-* Added showing all existing Material-Cupertino platform adaptive widgets. Switch already existed but now also added:
+* Added showing all existing Material-Cupertino platform adaptive widgets. Switch already existed, but now also added:
   * AlertDialog.adaptive
   * Slider.adaptive
   * Checkbox.adaptive  
   * Radio.adaptive
 
 * **TODO** 
-  * Add info about NavigationRail issue.
   * Add built-in config for Shadcn UI like config for FlexColorScheme.
   * Fix: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
