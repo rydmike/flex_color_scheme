@@ -198,7 +198,7 @@ class PremadeDesignsPanel extends StatelessWidget {
         ),
         const Divider(),
         SetupListTile(
-          title: 'Computed theme',
+          title: 'Computed',
           seeded: false,
           subtitle: 'This theme is not seeded, but still uses only three input '
               'colors, primary, secondary and tertiary colors from light '
@@ -213,6 +213,26 @@ class PremadeDesignsPanel extends StatelessWidget {
               'to get a dark mode theme without defining its colors when not '
               'using seed generated ColorSchemes.',
           settingsId: 9,
+          controller: controller,
+        ),
+        const Divider(),
+        SetupListTile(
+          title: 'Shadcn UI like (BETA)',
+          seeded: true,
+          subtitle: 'This style configures the Material theme to look '
+              'a bit like the Shadcn UI design system. It is not an exact '
+              'replica and never will be, consider it more like inspired '
+              'by Shadcn. It is primarily intended to be used with the Shadcn '
+              'theme colors, but you can of course use it with any of the '
+              'built-in schemes. This is a preliminary first config '
+              'and will be refined over time as more theming features '
+              'are added to the Playground that allow us to bring it closer '
+              'to the Shadcn design. Be aware that the results you get '
+              'when you use this configuration WILL change  in future '
+              'Themes Playground releases.\n\n'
+              'As always, export your settings and save them as JSON if you '
+              'want to keep them and use them later again in the Playground.',
+          settingsId: 10,
           controller: controller,
         ),
         const Divider(),

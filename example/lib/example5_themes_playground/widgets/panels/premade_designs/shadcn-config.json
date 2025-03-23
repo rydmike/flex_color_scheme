@@ -1,6 +1,10 @@
 {
-  "playground_data": "Themes Playground data exported 02.01.2025 01:15:43",
-  "playground_version": "8.2.0",
+  "playground_data": "Themes Playground data exported 23.03.2025 18:58:55",
+  "playground_version": "8.2.0-dev.1",
+  "adaptiveAppBarScrollUnderOffDark": {
+    "dart_type": "enum_adaptive_response",
+    "value": "all"
+  },
   "adaptiveAppBarScrollUnderOffLight": {
     "dart_type": "enum_adaptive_response",
     "value": "all"
@@ -327,7 +331,7 @@
     "value": "surfaceContainerHigh"
   },
   "tooltipsMatchBackground": true,
-  "topicIndexEndSide": 16,
+  "topicIndexEndSide": 24,
   "topicIndexStartSide": 4,
   "unselectedToggleIsColored": true,
   "useError": true,

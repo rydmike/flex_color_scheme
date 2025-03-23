@@ -57,6 +57,7 @@ Pushed to version 8.3.0 or later
 * Add Card outline color selection, with theme variant warning.
 * Internal: Migrate to map-based WidgetState properties, for ThemeData equality and performance. 
 * Internal: Migrate to only using opacity-based const values in themes and remove the old alpha-based values. 
+* Playground Fix: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
 ### Themes Playground
 
@@ -80,10 +81,10 @@ Pushed to version 8.3.0 or later
   * Slider.adaptive
   * Checkbox.adaptive  
   * Radio.adaptive
-
-* **TODO** 
-  * Add built-in config for Shadcn UI like config for FlexColorScheme.
-  * Fix: Look into custom dark uses own colors as seed not updating correctly in the Playground.
+* **BETA**
+  * Added a built-in config for a **Shadcn UI** like config to the **Premade Designs** panel. This is only a first rough **beta** config. 
+    * This style configures the Material theme to look a bit like the Shadcn UI design system. It is not an exact replica and never will be, consider it more like inspired by Shadcn. It is primarily intended to be used with the Shadcn theme colors, but you can of course use it with any of the built-in schemes. This is a preliminary first config and will be refined over time as more theming features are added to the Playground that allow us to bring it closer to the Shadcn design. Be aware that the results you get when you use this configuration WILL change in future **Themes Playground** releases. As always, export your settings and save them as JSON if you want to keep them and use them later again in the Playground. 
+  
 
 ## 8.1.1
 

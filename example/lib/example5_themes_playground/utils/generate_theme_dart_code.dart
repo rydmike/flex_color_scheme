@@ -1345,9 +1345,8 @@ String generateThemeDartCode(ThemeController controller) {
       ? '      bottomNavigationBarOpacity: ${controller.bottomNavigationBarOpacity!.toStringAsFixed(2)},\n'
       : '';
   final String bottomNavigationBarElevation = controller
-                  .bottomNavigationBarElevation !=
-              null &&
-          controller.bottomNavigationBarElevation != 0
+              .bottomNavigationBarElevation !=
+          null
       ? '      bottomNavigationBarElevation: ${controller.bottomNavigationBarElevation!.toStringAsFixed(1)},\n'
       : '';
   final String bottomNavigationBarShowSelectedLabels = controller
