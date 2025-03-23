@@ -7,8 +7,6 @@ import '../../const/app.dart';
 import '../../utils/colors_are_close.dart';
 import 'about.dart';
 
-// ignore_for_file: comment_references
-
 // The default width of the side menu when expanded to full menu.
 const double _kMenuWidth = 280;
 

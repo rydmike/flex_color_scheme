@@ -8,7 +8,6 @@ import '../model/splash_type_enum.dart';
 import '../model/visual_density_enum.dart';
 import '../utils/same_types.dart';
 import 'theme_service.dart';
-// ignore_for_file: comment_references
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.

@@ -177,11 +177,6 @@ class ShowThemeDataColors extends StatelessWidget {
                 textColor: _onColor(theme.scaffoldBackgroundColor, background),
               ),
               ColorCard(
-                label: 'Indicator\nColor',
-                color: theme.indicatorColor,
-                textColor: _onColor(theme.indicatorColor, background),
-              ),
-              ColorCard(
                 label: 'Divider\nColor',
                 color: theme.dividerColor,
                 textColor: _onColor(theme.dividerColor, background),

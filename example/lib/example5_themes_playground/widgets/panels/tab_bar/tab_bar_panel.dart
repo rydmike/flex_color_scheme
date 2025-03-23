@@ -34,6 +34,24 @@ class TabBarPanel extends StatelessWidget {
     path: 'flutter/flutter/pull/161514',
   );
 
+  static final Uri _fcsFlutterIssue162098 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/162098',
+  );
+
+  static final Uri _fcsFlutterPr162450 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/162450',
+  );
+
+  static final Uri _fcsFlutterTabBarBreak = Uri(
+    scheme: 'https',
+    host: 'docs.flutter.dev',
+    path: 'release/breaking-changes/component-theme-normalization',
+  );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -431,7 +449,7 @@ class TabBarPanel extends StatelessWidget {
                     style: spanTextStyle,
                     text: '.\n'
                         'In Flutter 3.24 the elastic TabBar indicator '
-                        'animation is glitchy, in Flutter 3.27.0 to 3.27.2, '
+                        'animation is glitchy and in Flutter 3.27.0 to 3.27.2, '
                         'the elastic TabBar indicator animation is broken, '
                         'see issue ',
                   ),
@@ -443,7 +461,7 @@ class TabBarPanel extends StatelessWidget {
                   TextSpan(
                     style: spanTextStyle,
                     text: '. The issue is fixed in Flutter 3.27.3 and later, '
-                        'via',
+                        'via ',
                   ),
                   LinkTextSpan(
                     style: linkStyle,
@@ -452,7 +470,52 @@ class TabBarPanel extends StatelessWidget {
                   ),
                   TextSpan(
                     style: spanTextStyle,
-                    text: '.\n',
+                    text: '.\n'
+                        'In Flutter 3.29.0 the TabBar animation is again a bit '
+                        'broken, see issue ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: _fcsFlutterIssue162098,
+                    text: '#162098',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '. This is fixed in Flutter 3.29.1 via PR ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: _fcsFlutterPr162450,
+                    text: '#162098',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '.\n\n'
+                        'The TabBar theme API had breaking changes in '
+                        'Flutter 3.27 release. These were addressed in '
+                        'FlexColorScheme v8.1.0. In Flutter 3.31 (beta) '
+                        'there are additional compile-time '
+                        'breaking changes not present in Flutter 3.29 and '
+                        'earlier versions. FlexColorScheme v8.2.0 is '
+                        'compatible with these Flutter SDK breaking changes. '
+                        'For more information, see the ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: _fcsFlutterTabBarBreak,
+                    text: 'TabBar theme API breaking changes',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: ', that documented the in Flutter 3.27 breaking '
+                        'changes. Apparently, something more changed now, '
+                        'as the TabBar theming that still works in '
+                        'Flutter 3.29, broke again in Flutter 3.31 beta and '
+                        'later. Regardless of what and why it was broken, '
+                        'FCS v8.2.0 fixes the usage of the compile-time '
+                        'broken API, it now works again, with at release time '
+                        'used APIs in Flutter stable, beta and master '
+                        'channels.',
                   ),
                 ],
               ),

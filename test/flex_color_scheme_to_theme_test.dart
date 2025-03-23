@@ -1762,14 +1762,15 @@ void main() {
         'FCS7.26: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color primary.', () {
-      expect(
-          tLightL.indicatorColor, isSameColorAs(tLightL.colorScheme.primary));
+      expect(tLightL.tabBarTheme.indicatorColor,
+          isSameColorAs(tLightL.colorScheme.primary));
     });
     test(
         'FCS7.27: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color primary.', () {
-      expect(tDarkL.indicatorColor, isSameColorAs(tDarkL.colorScheme.primary));
+      expect(tDarkL.tabBarTheme.indicatorColor,
+          isSameColorAs(tDarkL.colorScheme.primary));
     });
 
     test(
@@ -1825,7 +1826,6 @@ void main() {
       blendLevel: 20,
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 1,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -1835,7 +1835,6 @@ void main() {
       blendLevel: 20,
       appBarStyle: FlexAppBarStyle.primary,
       appBarElevation: 3,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -1903,13 +1902,13 @@ void main() {
         'FCS7.41: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color black87.', () {
-      expect(tLightM.indicatorColor, isSameColorAs(Colors.black87));
+      expect(tLightM.tabBarTheme.indicatorColor, isSameColorAs(Colors.black87));
     });
     test(
         'FCS7.42: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color black87.', () {
-      expect(tDarkM.indicatorColor, isSameColorAs(Colors.black87));
+      expect(tDarkM.tabBarTheme.indicatorColor, isSameColorAs(Colors.black87));
     });
 
     test(
@@ -1957,7 +1956,6 @@ void main() {
       blendLevel: 30,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 6,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -1965,10 +1963,8 @@ void main() {
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
       surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
       blendLevel: 30,
-      // ignore: avoid_redundant_argument_values
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 6,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -2036,13 +2032,13 @@ void main() {
         'FCS7.57: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color white.', () {
-      expect(tLightS.indicatorColor, isSameColorAs(Colors.white));
+      expect(tLightS.tabBarTheme.indicatorColor, isSameColorAs(Colors.white));
     });
     test(
         'FCS7.58: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color white.', () {
-      expect(tDarkS.indicatorColor, isSameColorAs(Colors.white));
+      expect(tDarkS.tabBarTheme.indicatorColor, isSameColorAs(Colors.white));
     });
 
     test(
@@ -2171,14 +2167,15 @@ void main() {
         'FCS7.73: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color primary.', () {
-      expect(
-          tLightH.indicatorColor, isSameColorAs(tLightH.colorScheme.primary));
+      expect(tLightH.tabBarTheme.indicatorColor,
+          isSameColorAs(tLightH.colorScheme.primary));
     });
     test(
         'FCS7.74: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color primary.', () {
-      expect(tDarkH.indicatorColor, isSameColorAs(tDarkH.colorScheme.primary));
+      expect(tDarkH.tabBarTheme.indicatorColor,
+          isSameColorAs(tDarkH.colorScheme.primary));
     });
 
     test(
@@ -2744,7 +2741,8 @@ void main() {
         'FCS7.82-2L indicator: GIVEN tabBarIndicatorUsedColor: '
         'FlexUsedColor.secondary '
         'EXPECT indicator color to be theme.scheme.secondary', () {
-      expect(tLightHb.indicatorColor, tLightHb.colorScheme.secondary);
+      expect(
+          tLightHb.tabBarTheme.indicatorColor, tLightHb.colorScheme.secondary);
     });
 
     final RoundedRectangleBorder? shapeL =
@@ -2784,7 +2782,7 @@ void main() {
         'FCS7.82-2D indicator: GIVEN tabBarIndicatorUsedColor: '
         'FlexUsedColor.error '
         'EXPECT indicator color to be theme.scheme.secondary', () {
-      expect(tDarkHb.indicatorColor, tDarkHb.colorScheme.error);
+      expect(tDarkHb.tabBarTheme.indicatorColor, tDarkHb.colorScheme.error);
     });
 
     final RoundedRectangleBorder? shapeD =

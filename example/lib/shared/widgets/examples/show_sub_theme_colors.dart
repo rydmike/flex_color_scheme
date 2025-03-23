@@ -335,11 +335,6 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: _onColor(tabBarColor, background),
               ),
               ColorCard(
-                label: 'TabBar\nIndicator',
-                color: theme.indicatorColor,
-                textColor: _onColor(theme.indicatorColor, background),
-              ),
-              ColorCard(
                 label: 'Bottom\nNaviBar\nBackground',
                 color: bottomNavBarColor,
                 textColor: _onColor(bottomNavBarColor, background),

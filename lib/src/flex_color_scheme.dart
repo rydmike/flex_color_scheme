@@ -7544,18 +7544,6 @@ class FlexColorScheme with Diagnosticable {
       // default after Flutter 3.22.0.
       cardColor:
           useMaterial3 ? colorScheme.surfaceContainerLow : colorScheme.surface,
-
-      // TODO(rydmike): Removed since dialogBackgroundColor is deprecated.
-      // For version 8.2.0 that uses Flutter 3.29.0 and later we now remove
-      // this assignments, as doing it will cause a score penalty.
-      // However, not doing it may give us worse default colors on dialogs
-      // when sub-themes are not enabled. Most users probably use sub-themes
-      // and will never see the difference
-      // dialogBackgroundColor: dialogBackground ??
-      //     (useMaterial3
-      //         ? colorScheme.surfaceContainerHigh
-      //         : colorScheme.surface),
-
       // Disabled color uses a different style when using tinted disabled.
       // effects, if not opted in same as before v4.0.0 = ThemeData default.
       disabledColor: tintedDisabled
@@ -7589,15 +7577,6 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.tintedSplash(
               isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
-
-      // TODO(rydmike): Monitor Flutter SDK deprecation of indicatorColor.
-      // https://github.com/flutter/flutter/issues/91772#issuecomment-1198206279
-      // Use TabBar style dependent function for selected Tab as indicatorColor,
-      // if no SchemeColor color selection for it is made.
-      indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
-          ? tabBarStyleColor()
-          : FlexSubThemes.schemeColor(
-              subTheme.tabBarIndicatorSchemeColor!, colorScheme),
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
       // See: https://github.com/flutter/flutter/issues/91772

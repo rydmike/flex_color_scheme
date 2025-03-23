@@ -5,8 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'test_flex_scheme__color_equality.dart';
 
-// ignore_for_file: avoid_redundant_argument_values
-
 void main() {
   //****************************************************************************
   // FlexColorScheme unit tests.

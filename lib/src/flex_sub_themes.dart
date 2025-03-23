@@ -7370,7 +7370,7 @@ abstract final class FlexSubThemes {
       // a test to see if we can ignore that it is deprecated and not get a
       // package score penalty, when we use it to access this new feature.
       //
-      // ignore: deprecated_member_use, deprecated_member_use_from_same_package
+      // ignore: deprecated_member_use
       year2023: useOldM3Design,
       trackHeight: trackHeight,
       activeTrackColor: baseColor,

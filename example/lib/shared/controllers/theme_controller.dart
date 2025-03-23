@@ -42,7 +42,6 @@ const bool _debug = !kReleaseMode && true;
 /// want to persist locally (or remotely), in that case this approach is also
 /// the simpler and more convenient one. In this particular case though, well
 /// maybe not with this amount of props.
-// ignore:prefer_mixin
 class ThemeController with ChangeNotifier {
   ThemeController(this._themeService);
 
