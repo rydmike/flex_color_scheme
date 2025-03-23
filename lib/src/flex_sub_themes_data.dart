@@ -1892,8 +1892,8 @@ class FlexSubThemesData with Diagnosticable {
   /// it is capped at closer value.
   ///
   /// If not defined, in M3 mode it defaults to 0xFF fully opaque. In M2 mode
-  /// defaults to [kFillColorAlphaLight] (0x0D = 5% opacity) in light theme and
-  /// to [kFillColorAlphaDark] (0x14 = 8% opacity) in dark mode.
+  /// defaults to [kFillColorLightOpacity] (0x0D = 5% opacity) in light theme
+  /// and to [kFillColorDarkOpacity] (0x14 = 8% opacity) in dark mode.
   ///
   /// The border [inputDecoratorBorderSchemeColor] can be used to define the
   /// border color separately, but it defaults to this color if not defined.
@@ -1964,7 +1964,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// The default design in FlexColorScheme when this is true, creates
   /// unfocused border that use [inputDecoratorSchemeColor] as it s color with
-  /// alpha set to [kEnabledBorderAlpha] (90%) using the [thinBorderWidth] as
+  /// alpha set to [kEnabledBorderOpacity] (90%) using the [thinBorderWidth] as
   /// its width.
   ///
   /// When false the border/underline will revert back to using Flutter M2

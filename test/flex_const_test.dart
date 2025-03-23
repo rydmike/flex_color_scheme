@@ -142,25 +142,18 @@ void main() {
     // -------------
     // Alpha, opacity and blend values
     //
-    test('FCT kFillColorAlphaLight is 0x0D', () {
-      expect(kFillColorAlphaLight, 0x0D);
-    });
     test('FCT kFillColorAlphaLightFloat is 0x0D/255', () {
-      expect(kFillColorAlphaLightFloat, 0x0D / 255);
-    });
-
-    test('FCT kFillColorAlphaDark is 0x14', () {
-      expect(kFillColorAlphaDark, 0x14);
+      expect(kFillColorLightOpacity, 0x0D / 255);
     });
     test('FCT kFillColorAlphaDarkFloat is 0x14/255', () {
-      expect(kFillColorAlphaDarkFloat, 0x14 / 255);
+      expect(kFillColorDarkOpacity, 0x14 / 255);
     });
 
-    test('FCT kEnabledBorderAlpha is 0xA7', () {
-      expect(kEnabledBorderAlpha, 0xA7);
-    });
+    // test('FCT kEnabledBorderAlpha is 0xA7', () {
+    //   expect(kEnabledBorderAlpha, 0xA7);
+    // });
     test('FCT kEnabledBorderAlphaFloat is 0xA7/255', () {
-      expect(kEnabledBorderAlphaFloat, 0xA7 / 255);
+      expect(kEnabledBorderOpacity, 0xA7 / 255);
     });
 
     test('FCT kChipBackgroundAlphaBlend is 0xCC', () {

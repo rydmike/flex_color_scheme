@@ -3824,6 +3824,7 @@ abstract final class FlexSubThemes {
     /// if color scheme is dark.
     final Color? fillColor,
 
+    // TODO(rydmike): Migrate backgroundAlpha to backgroundOpacity.
     /// Defines the alpha, opacity channel value used as opacity on effective
     /// [InputDecorator] background color.
     ///
@@ -3831,8 +3832,12 @@ abstract final class FlexSubThemes {
     /// it is capped to closest valid value.
     ///
     /// If not defined, in M3 mode it defaults to 0xFF fully opaque. In M2 mode
-    /// defaults to [kFillColorAlphaLight] (0x0D = 5% opacity) in light theme
-    /// and to [kFillColorAlphaDark] (0x14 = 8% opacity) in dark mode.
+    /// defaults to [kFillColorLightOpacity] (0x0D = 5% opacity) in light theme
+    /// and to [kFillColorDarkOpacity] (0x14 = 8% opacity) in dark mode.
+    ///
+    /// NOTE: This will be migrated to use o 0.0 to 1.0 opacity values in
+    /// version 9.0. A parallel API wil be introduced in v8.0 to allow for
+    /// a smooth migration path.
     final int? backgroundAlpha,
 
     /// The icon color of the prefixIcon in a focused [InputDecoration].
@@ -3977,13 +3982,13 @@ abstract final class FlexSubThemes {
     ).withValues(alpha: kAlphaUltraLowDisabledFloat);
 
     // Get effective alpha value for background fill color.
-    final double effectiveAlpha = (backgroundAlpha?.clamp(0, 255) ??
-            (useM3
-                ? 0xFF
-                : isDark
-                    ? kFillColorAlphaDark
-                    : kFillColorAlphaLight)) /
-        255;
+    final double effectiveOpacity = backgroundAlpha == null
+        ? useM3
+            ? 1.0
+            : isDark
+                ? kFillColorDarkOpacity
+                : kFillColorLightOpacity
+        : backgroundAlpha.clamp(0, 255) / 255;
 
     // Effective used fill color, can also be a totally custom color value.
     // These alpha blends remove the actual opacity and create a none opaque
@@ -3993,7 +3998,7 @@ abstract final class FlexSubThemes {
     // the hover effect, which is also actually not transparent.
     final Color usedFillColor = fillColor != null
         ? Color.alphaBlend(
-            fillColor.withValues(alpha: effectiveAlpha),
+            fillColor.withValues(alpha: effectiveOpacity),
             colorScheme.surface,
           )
         : WidgetStateColor.resolveWith((Set<WidgetState> states) {
@@ -4007,12 +4012,12 @@ abstract final class FlexSubThemes {
             return baseSchemeColor == null && useM3
                 ? Color.alphaBlend(
                     colorScheme.surfaceContainerHighest.withValues(
-                      alpha: effectiveAlpha,
+                      alpha: effectiveOpacity,
                     ),
                     colorScheme.surface,
                   )
                 : Color.alphaBlend(
-                    baseColor.withValues(alpha: effectiveAlpha),
+                    baseColor.withValues(alpha: effectiveOpacity),
                     colorScheme.surface,
                   );
           });
@@ -4057,7 +4062,7 @@ abstract final class FlexSubThemes {
 
     // Enabled border color.
     final Color enabledBorderColor = unfocusedBorderIsColored ?? false
-        ? borderColor.withValues(alpha: kEnabledBorderAlphaFloat)
+        ? borderColor.withValues(alpha: kEnabledBorderOpacity)
         : useM3
             ? isFilled
                 ? colorScheme.onSurfaceVariant
@@ -4139,7 +4144,7 @@ abstract final class FlexSubThemes {
             // TODO(rydmike): Info: M3 error, with this we get a hover diff.
             // Prefer this as a diff to the hover state.
             color: colorScheme.error.withValues(
-              alpha: kEnabledBorderAlphaFloat,
+              alpha: kEnabledBorderOpacity,
             ),
           );
         }
@@ -4281,7 +4286,7 @@ abstract final class FlexSubThemes {
                       ? BorderSide(
                           // TODO(rydmike): Info: M3 uses error
                           color: colorScheme.error.withValues(
-                            alpha: kEnabledBorderAlphaFloat,
+                            alpha: kEnabledBorderOpacity,
                           ),
                           width: unfocusedWidth,
                         )
@@ -4370,7 +4375,7 @@ abstract final class FlexSubThemes {
                       ? BorderSide(
                           // TODO(rydmike): Info: M3 uses error
                           color: colorScheme.error.withValues(
-                            alpha: kEnabledBorderAlphaFloat,
+                            alpha: kEnabledBorderOpacity,
                           ),
                           width: unfocusedWidth,
                         )
@@ -7279,11 +7284,11 @@ abstract final class FlexSubThemes {
     /// Overrides the default value of [Slider.year2023].
     ///
     /// When true, the [Slider] will use the 2023 Material Design 3 appearance.
-    /// Defaults to true.
     ///
     /// If this is set to false, the [Slider] will use the latest Material-3
     /// appearance, which was introduced in December 2023.
     ///
+    /// If undefined, defaults to true, via Flutter SDK default behavior.
     /// If [useMaterial3] is false, then this property is ignored.
     final bool? useOldM3Design,
 
@@ -7366,7 +7371,7 @@ abstract final class FlexSubThemes {
       // package score penalty, when we use it to access this new feature.
       //
       // ignore: deprecated_member_use, deprecated_member_use_from_same_package
-      year2023: useOldM3Design ?? true,
+      year2023: useOldM3Design,
       trackHeight: trackHeight,
       activeTrackColor: baseColor,
       inactiveTrackColor: baseColor.withAlpha(kAlphaLowDisabled),

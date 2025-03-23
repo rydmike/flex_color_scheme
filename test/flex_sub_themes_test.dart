@@ -4494,7 +4494,7 @@ void main() {
       );
 
       // Get effective alpha value for background fill color.
-      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      const double effectiveAlpha = kFillColorLightOpacity;
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
         colorScheme.onSurface,
         colorScheme.primary,
@@ -4565,7 +4565,8 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -4668,7 +4669,8 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -4786,7 +4788,8 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -4889,7 +4892,8 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -4954,7 +4958,7 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
         colorScheme.onSurface,
@@ -5020,7 +5024,8 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -5123,7 +5128,8 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -5187,7 +5193,7 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorAlphaDarkFloat;
+      const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
         colorScheme.onSurface,
@@ -5253,7 +5259,8 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -5356,7 +5363,8 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -5421,7 +5429,7 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorAlphaDarkFloat;
+      const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
         colorScheme.onSurface,
@@ -5487,7 +5495,8 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -5590,7 +5599,8 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -5664,7 +5674,9 @@ void main() {
         ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
-          TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
+          TextStyle(
+              color:
+                  colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
         ),
       );
       // Floating label disabled style
@@ -5713,7 +5725,7 @@ void main() {
       final BorderRadius effectiveOutlineBorder = BorderRadius.circular(
         effectiveRadius,
       );
-      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
         colorScheme.onSurface,
@@ -5780,7 +5792,8 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -5885,7 +5898,8 @@ void main() {
                   borderRadius: effectiveOutlineBorder,
                   borderSide: BorderSide(
                     // TODO(rydmike): INFO: M3 uses error
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -5962,7 +5976,9 @@ void main() {
         ).floatingLabelStyle as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
-          TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
+          TextStyle(
+              color:
+                  colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
         ),
       );
       // Floating label disabled style
@@ -6044,7 +6060,7 @@ void main() {
           OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
               width: 3,
             ),
           ),
@@ -6389,7 +6405,7 @@ void main() {
               topRight: Radius.circular(4),
             ),
             borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
               width: 3,
             ),
           ),
