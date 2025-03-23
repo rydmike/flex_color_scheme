@@ -731,7 +731,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If [blendOnColors] is false, the [blendOnLevel] setting only affects
   /// [ColorScheme.onSurface], [ColorScheme.onPrimaryContainer],
   /// [ColorScheme.onSecondaryContainer], [ColorScheme.onTertiaryContainer]
-  /// and [ColorScheme..onErrorContainer].
+  /// and [ColorScheme.onErrorContainer].
   ///
   /// If [blendOnColors] is true, it also impacts [ColorScheme.onPrimary],
   /// [ColorScheme.onSecondary], [ColorScheme.onTertiary] and
@@ -3267,8 +3267,8 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [SchemeColor.surfaceContainerLow].
   ///
   /// Flutter SDK uses surfaceContainerLow color as default in M3 and
-  /// ThemeData's canvasColor in M2 mode, which is Colors.grey[50] in
-  /// light mode and Colors.grey[850] in dark mode.
+  /// ThemeData's canvasColor in M2 mode, which is Colors.grey(50) in
+  /// light mode and Colors.grey(850) in dark mode.
   final SchemeColor? drawerBackgroundSchemeColor;
 
   /// Defines the width of [Drawer] and [NavigationDrawer].

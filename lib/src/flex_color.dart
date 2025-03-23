@@ -3242,7 +3242,7 @@ abstract final class FlexColor {
   /// This is primary color you get when you seed from M2 [Colors.lime].
   ///
   /// In this case it almost the result from the lime color. The result from
-  /// Here we use 0xFF596400 because the result M2 Colors.lime[500] is
+  /// Here we use 0xFF596400 because the result M2 Colors.lime(500) is
   /// 0xFF5B6300, and it produces very bright surface. Feels like a bug in the
   /// Material Color Utilities algorithm since it does not produce a smooth
   /// tone set, it suddenly jumps and gets much brighter at tone 99.
