@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.2.0-dev.1
+version: 8.2.0
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -15,7 +15,7 @@ dependencies:
   # Provides encoders and decoders for various archive and compression
   # formats such as zip, tar, bzip2, gzip, and zlib. (by loki3d.com)
   # https://pub.dev/packages/archive
-  archive: ^4.0.4
+  archive: ^4.0.5
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.
