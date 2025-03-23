@@ -11,6 +11,7 @@ import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
 import '../../shared/color_scheme_popup_menu.dart';
 import '../../shared/enum_popup_menu.dart';
+import '../../shared/test_adaptive_response.dart';
 
 class SlidersPanel extends StatelessWidget {
   const SlidersPanel(this.controller, {super.key});
@@ -173,6 +174,13 @@ class SlidersPanel extends StatelessWidget {
             ),
           ),
         ),
+        const Divider(),
+        const ListTile(title: Text('Slider.adaptive')),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: SliderAdaptiveShowcase(),
+        ),
+        TestAdaptiveResponse(controller),
         const Divider(),
         const ListTileReveal(title: Text('RangeSlider')),
         const Padding(

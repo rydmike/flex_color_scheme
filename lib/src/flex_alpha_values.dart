@@ -1,8 +1,7 @@
+import 'package:flutter/material.dart' show ColorScheme; // For comment refs.
 import 'package:meta/meta.dart' show immutable, internal;
 
 import 'flex_surface_mode.dart';
-
-// ignore_for_file: comment_references
 
 /// Internal class used to hold alpha values for a given [FlexSurfaceMode]
 /// blend mode and blend level.

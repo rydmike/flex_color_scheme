@@ -956,10 +956,11 @@ void main() {
         theme.scaffoldBackgroundColor,
         isSameColorAs(theme.colorScheme.surfaceDim),
       );
-      expect(
-        theme.dialogBackgroundColor,
-        isSameColorAs(theme.colorScheme.surfaceContainerHigh),
-      );
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor,
+      //   isSameColorAs(theme.colorScheme.surfaceContainerHigh),
+      // );
       expect(
         theme.disabledColor,
         isSameColorAs(const Color(0x612C2505)),
@@ -1047,10 +1048,11 @@ void main() {
         theme.scaffoldBackgroundColor,
         isSameColorAs(theme.colorScheme.surfaceBright),
       );
-      expect(
-        theme.dialogBackgroundColor,
-        isSameColorAs(theme.colorScheme.surfaceContainerHigh),
-      );
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor,
+      //   isSameColorAs(theme.colorScheme.surfaceContainerHigh),
+      // );
       expect(
         theme.disabledColor,
         isSameColorAs(const Color(0x61F1E7C5)),
@@ -1116,10 +1118,11 @@ void main() {
         theme.scaffoldBackgroundColor,
         equals(Colors.white),
       );
-      expect(
-        theme.dialogBackgroundColor,
-        equals(theme.colorScheme.surface),
-      );
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor,
+      //   equals(theme.colorScheme.surface),
+      // );
     });
     test(
         'FCSV8:21D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
@@ -1157,10 +1160,11 @@ void main() {
         theme.scaffoldBackgroundColor,
         equals(theme.colorScheme.surfaceContainerLow),
       );
-      expect(
-        theme.dialogBackgroundColor,
-        equals(theme.colorScheme.surface),
-      );
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor,
+      //   equals(theme.colorScheme.surface),
+      // );
     });
     test(
         'FCSV8:22L GIVEN a M2 FlexColorScheme.light custom colors theme with  '
@@ -1195,10 +1199,11 @@ void main() {
         theme.scaffoldBackgroundColor,
         equals(theme.colorScheme.surface),
       );
-      expect(
-        theme.dialogBackgroundColor,
-        equals(theme.colorScheme.surface),
-      );
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor,
+      //   equals(theme.colorScheme.surface),
+      // );
     });
     test(
         'FCSV8:22D GIVEN a M2 FlexColorScheme.dark custom colors theme with  '
@@ -1237,10 +1242,11 @@ void main() {
         theme.scaffoldBackgroundColor,
         equals(theme.colorScheme.surface),
       );
-      expect(
-        theme.dialogBackgroundColor,
-        equals(theme.colorScheme.surface),
-      );
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor,
+      //   equals(theme.colorScheme.surface),
+      // );
     });
     test(
         'FCSV8:23L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
@@ -1268,9 +1274,9 @@ void main() {
         theme.tabBarTheme.unselectedLabelColor,
         equals(const Color(0xb2ffffff)),
       );
-      final OutlineInputBorder border = (theme.inputDecorationTheme.border!
-              as MaterialStateOutlineInputBorder?)!
-          .resolve(<WidgetState>{}) as OutlineInputBorder;
+      final OutlineInputBorder border =
+          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
+              .resolve(<WidgetState>{}) as OutlineInputBorder;
       expect(
         border.borderRadius.bottomLeft,
         equals(const Radius.circular(15.0)),
@@ -1302,9 +1308,9 @@ void main() {
         theme.tabBarTheme.unselectedLabelColor,
         equals(const Color(0xb2ffffff)),
       );
-      final OutlineInputBorder border = (theme.inputDecorationTheme.border!
-              as MaterialStateOutlineInputBorder?)!
-          .resolve(<WidgetState>{}) as OutlineInputBorder;
+      final OutlineInputBorder border =
+          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
+              .resolve(<WidgetState>{}) as OutlineInputBorder;
       expect(
         border.borderRadius.bottomLeft,
         equals(const Radius.circular(15.0)),
@@ -1340,9 +1346,9 @@ void main() {
         theme.tabBarTheme.unselectedLabelColor,
         equals(const Color(0xe61b1b1b)),
       );
-      final OutlineInputBorder border = (theme.inputDecorationTheme.border!
-              as MaterialStateOutlineInputBorder?)!
-          .resolve(<WidgetState>{}) as OutlineInputBorder;
+      final OutlineInputBorder border =
+          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
+              .resolve(<WidgetState>{}) as OutlineInputBorder;
       expect(
         border.borderRadius.bottomLeft,
         equals(const Radius.circular(10.0)),

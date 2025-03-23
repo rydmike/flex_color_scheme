@@ -77,8 +77,8 @@ class EffectiveColorsPanel extends StatelessWidget {
                   style: spanTextStyle,
                   text: '.\n'
                       '\n'
-                      'Some ThemeData colors still matter in Flutter 3.24 '
-                      'and earlier. Some widgets depend on them for '
+                      'ThemeData colors still matter in Flutter, some widgets '
+                      'depend on them for '
                       'their default colors, especially when using Material-2. '
                       'FlexColorScheme keeps them in sync with ColorScheme to '
                       'produce an app with consistent colors on all widgets. '

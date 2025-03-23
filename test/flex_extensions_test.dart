@@ -13,7 +13,6 @@ void main() {
     const Color white = Color(0xFFFFFFFF);
     // const Color? nullColor = null;
     test('FCE1.01: GIVEN brighten() EXPECT default brighten(10).', () {
-      // ignore: avoid_redundant_argument_values
       expect(col.brighten(), col.brighten(10));
     });
     test('FCE1.02: GIVEN brighten(0) EXPECT no change.', () {
@@ -44,7 +43,6 @@ void main() {
     const Color black = Color(0xFF000000);
     // const Color? nullColor = null;
     test('FCE2.01: GIVEN lighten() EXPECT default lighten(10).', () {
-      // ignore: avoid_redundant_argument_values
       expect(col.lighten(), col.lighten(10));
     });
     test('FCE2.02: GIVEN lighten(0) EXPECT no change.', () {
@@ -77,7 +75,6 @@ void main() {
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
     test('FCE3.01: GIVEN darken() EXPECT default darken(10).', () {
-      // ignore: avoid_redundant_argument_values
       expect(col.darken(), col.darken(10));
     });
     test('FCE3.02: GIVEN darken(0) EXPECT no change.', () {
@@ -184,7 +181,6 @@ void main() {
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
     test('FCE4a.01: GIVEN blend(color) EXPECT default blend(color, 10) ', () {
-      // ignore: avoid_redundant_argument_values
       expect(col1.blend(white), col1.blend(white, 10));
     });
     test('FCE4a.02: GIVEN color.blend(color2, 0) EXPECT $col1.', () {
@@ -230,7 +226,6 @@ void main() {
     test(
         'FCE4a.01: GIVEN blendAlpha(color) EXPECT default '
         'blendAlpha(color, 0x0A).', () {
-      // ignore: avoid_redundant_argument_values
       expect(col1.blendAlpha(white), col1.blendAlpha(white, 0x0A));
     });
     test('FCE4a.02: GIVEN color.blendAlpha(color2, 0) EXPECT $col1.', () {
@@ -342,10 +337,7 @@ void main() {
       expect(
           col1.getShadeColor(),
           col1.getShadeColor(
-              shadeValue: 15, // ignore: avoid_redundant_argument_values
-              lighten: true, // ignore: avoid_redundant_argument_values
-              keepBlack: true, // ignore: avoid_redundant_argument_values
-              keepWhite: true)); // ignore: avoid_redundant_argument_values
+              shadeValue: 15, lighten: true, keepBlack: true, keepWhite: true));
     });
     test(
         'FCE7.02: GIVEN color.getShadeColor(shadeValue: null, lighten: null, '
@@ -355,10 +347,7 @@ void main() {
       expect(
           col1.getShadeColor(),
           col1.getShadeColor(
-              shadeValue: 15, // ignore: avoid_redundant_argument_values
-              lighten: true, // ignore: avoid_redundant_argument_values
-              keepBlack: true, // ignore: avoid_redundant_argument_values
-              keepWhite: true)); // ignore: avoid_redundant_argument_values
+              shadeValue: 15, lighten: true, keepBlack: true, keepWhite: true));
     });
     test('FCE7.03: GIVEN $white.getShadeColor() EXPECT $white.', () {
       expect(white.getShadeColor(), white);

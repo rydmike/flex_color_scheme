@@ -20,19 +20,13 @@ void main() {
     test(
         'FTD1.00DefLType: GIVEN FlexThemeData.light() '
         'EXPECT it to be a ThemeData type.', () {
-      expect(
-        FlexThemeData.light().runtimeType,
-        ThemeData,
-      );
+      expect(FlexThemeData.light().runtimeType, ThemeData);
     });
 
     test(
         'FTD1.00DefDType: GIVEN FlexThemeData.dark() '
         'EXPECT it to be a ThemeData type.', () {
-      expect(
-        FlexThemeData.light().runtimeType,
-        ThemeData,
-      );
+      expect(FlexThemeData.light().runtimeType, ThemeData);
     });
     // Expect toTheme to be equal
     // TODO(rydmike): toString on ThemeData match, but not ThemeData.
@@ -43,11 +37,12 @@ void main() {
         'FTD1.00DefL1: GIVEN FlexColorScheme.light().toTheme '
         'EXPECT its ThemeData to be equal to FlexThemeData.light().', () {
       expect(
-        FlexColorScheme.light()
-            .toTheme
-            .toString(minLevel: DiagnosticLevel.fine),
+        FlexColorScheme.light().toTheme.toString(
+              minLevel: DiagnosticLevel.fine,
+            ),
         equalsIgnoringHashCodes(
-            FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine)),
+          FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
 
@@ -55,21 +50,27 @@ void main() {
         'FTD1.00DefL2: GIVEN FlexThemeData.light made with no parameters '
         'EXPECT its ThemeData to be equal to one made with light scheme.', () {
       expect(
-          FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(FlexColorScheme.light(
+        FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light(
             colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
-          ).toTheme.toString(minLevel: DiagnosticLevel.fine)));
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
+      );
     });
     test(
         'FTD1.00aL: GIVEN two FlexThemeData.light made with identical '
         'parameters EXPECT their ThemeData to be equal.', () {
       expect(
+        FlexThemeData.light(
+          colors: FlexColor.schemes[FlexScheme.material]!.light,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
           FlexThemeData.light(
             colors: FlexColor.schemes[FlexScheme.material]!.light,
           ).toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(FlexThemeData.light(
-            colors: FlexColor.schemes[FlexScheme.material]!.light,
-          ).toString(minLevel: DiagnosticLevel.fine)));
+        ),
+      );
     });
     test(
         'FTD1.00bL: GIVEN a FlexThemeData.light made with no '
@@ -78,8 +79,9 @@ void main() {
       expect(
         FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.light(scheme: FlexScheme.materialBaseline)
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexThemeData.light(
+            scheme: FlexScheme.materialBaseline,
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -134,8 +136,9 @@ void main() {
           ),
         ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.dark(useMaterial3: false)
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexThemeData.dark(
+            useMaterial3: false,
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -242,8 +245,9 @@ void main() {
       expect(
         FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.dark(scheme: FlexScheme.materialBaseline)
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexThemeData.dark(
+            scheme: FlexScheme.materialBaseline,
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -344,15 +348,13 @@ void main() {
     );
 
     test(
-        'FTD1.01-scheme-props: '
-        'GIVEN a FlexThemeData.raw theme with Material3 scheme light'
-        ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
-        () {
-      testColorSchemeEquality(
-        themeLight.colorScheme,
-        lightRawScheme,
-      );
-    });
+      'FTD1.01-scheme-props: '
+      'GIVEN a FlexThemeData.raw theme with Material3 scheme light'
+      ' colors EXPECT .colorScheme equality with raw ColorScheme light().',
+      () {
+        testColorSchemeEquality(themeLight.colorScheme, lightRawScheme);
+      },
+    );
 
     // themeDark = Default material M3 dark scheme colors.
     final ThemeData themeDark = const FlexColorScheme(
@@ -448,8 +450,10 @@ void main() {
     test(
         'FTD1.06: GIVEN FlexThemeData.raw M2 theme with null Typography input '
         'EXPECT Typography.material2018.', () {
-      expect(themeLight.typography,
-          Typography.material2018(platform: defaultTargetPlatform));
+      expect(
+        themeLight.typography,
+        Typography.material2018(platform: defaultTargetPlatform),
+      );
     });
 
     //**************************************************************************
@@ -566,14 +570,18 @@ void main() {
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT surface Color(0xfff9f8fb).', () {
       expect(
-          tLightL.colorScheme.surface, isSameColorAs(const Color(0xfff9f8fb)));
+        tLightL.colorScheme.surface,
+        isSameColorAs(const Color(0xfff9f8fb)),
+      );
     });
     test(
         'FTD1.21: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT surface Color(0xff0a090b).', () {
       expect(
-          tDarkL.colorScheme.surface, isSameColorAs(const Color(0xff0a090b)));
+        tDarkL.colorScheme.surface,
+        isSameColorAs(const Color(0xff0a090b)),
+      );
     });
 
     test(
@@ -581,29 +589,37 @@ void main() {
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT background Color(0xfff9f8fb).', () {
       expect(
-          tLightL.colorScheme.surface, isSameColorAs(const Color(0xfff9f8fb)));
+        tLightL.colorScheme.surface,
+        isSameColorAs(const Color(0xfff9f8fb)),
+      );
     });
     test(
         'FTD1.23: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT background Color(0xff0a090b).', () {
       expect(
-          tDarkL.colorScheme.surface, isSameColorAs(const Color(0xff0a090b)));
+        tDarkL.colorScheme.surface,
+        isSameColorAs(const Color(0xff0a090b)),
+      );
     });
 
     test(
         'FTD1.24: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT scaffold background Color(0xfffcfbfe).', () {
-      expect(tLightL.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xfffcfbfe)));
+      expect(
+        tLightL.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xfffcfbfe)),
+      );
     });
     test(
         'FTD1.25: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'EXPECT scaffold background Color(0xff030304).', () {
-      expect(tDarkL.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xff030304)));
+      expect(
+        tDarkL.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xff030304)),
+      );
     });
 
     test(
@@ -612,14 +628,17 @@ void main() {
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.material '
         'EXPECT indicator color primary.', () {
       expect(
-          tLightL.indicatorColor, isSameColorAs(tLightL.colorScheme.primary));
+        tLightL.tabBarTheme.indicatorColor,
+        isSameColorAs(tLightL.colorScheme.primary),
+      );
     });
     test(
         'FTD1.27: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary '
         'EXPECT indicator color primary.', () {
-      expect(tDarkL.indicatorColor, isSameColorAs(tDarkL.colorScheme.primary));
+      expect(tDarkL.tabBarTheme.indicatorColor,
+          isSameColorAs(tDarkL.colorScheme.primary));
     });
 
     test(
@@ -627,16 +646,20 @@ void main() {
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.material '
         'EXPECT TabBarTheme.labelColor primary.', () {
-      expect(tLightL.tabBarTheme.labelColor,
-          isSameColorAs(tLightL.colorScheme.primary));
+      expect(
+        tLightL.tabBarTheme.labelColor,
+        isSameColorAs(tLightL.colorScheme.primary),
+      );
     });
     test(
         'FTD1.296: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurfaceMode.level blendLevel: 4 '
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary '
         'EXPECT TabBarTheme.labelColor primary.', () {
-      expect(tDarkL.tabBarTheme.labelColor,
-          isSameColorAs(tDarkL.colorScheme.primary));
+      expect(
+        tDarkL.tabBarTheme.labelColor,
+        isSameColorAs(tDarkL.colorScheme.primary),
+      );
     });
 
     test(
@@ -645,8 +668,10 @@ void main() {
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.material '
         'EXPECT TabBarTheme.unselectedLabelColor '
         'onSurface.withValues(alpha: 0.6).', () {
-      expect(tLightL.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(tLightL.colorScheme.onSurface.withValues(alpha: 0.6)));
+      expect(
+        tLightL.tabBarTheme.unselectedLabelColor,
+        isSameColorAs(tLightL.colorScheme.onSurface.withValues(alpha: 0.6)),
+      );
     });
     test(
         'FTD1.31: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
@@ -654,8 +679,10 @@ void main() {
         'FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary '
         'EXPECT TabBarTheme.unselectedLabelColor '
         'onSurface.withValues(alpha: 0.6)', () {
-      expect(tDarkL.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(tDarkL.colorScheme.onSurface.withValues(alpha: 0.6)));
+      expect(
+        tDarkL.tabBarTheme.unselectedLabelColor,
+        isSameColorAs(tDarkL.colorScheme.onSurface.withValues(alpha: 0.6)),
+      );
     });
 
     //**************************************************************************
@@ -670,7 +697,6 @@ void main() {
       blendLevel: 10,
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 1,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
     final ThemeData tDarkM = FlexThemeData.dark(
@@ -679,7 +705,6 @@ void main() {
       blendLevel: 10,
       appBarStyle: FlexAppBarStyle.primary,
       appBarElevation: 3,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
     test(
@@ -687,7 +712,9 @@ void main() {
         'WITH FlexAppBarStyle.material EXPECT appbar theme color '
         'FlexColor.materialLightSurface.', () {
       expect(
-          tLightM.appBarTheme.backgroundColor, FlexColor.materialLightSurface);
+        tLightM.appBarTheme.backgroundColor,
+        FlexColor.materialLightSurface,
+      );
     });
     test(
         'FTD1.33: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
@@ -710,27 +737,35 @@ void main() {
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
         'EXPECT surface Color(0xffefe8fa).', () {
       expect(
-          tLightM.colorScheme.surface, isSameColorAs(const Color(0xffefe8fa)));
+        tLightM.colorScheme.surface,
+        isSameColorAs(const Color(0xffefe8fa)),
+      );
     });
     test(
         'FTD1.37: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexSurface.medium EXPECT surface Color(0xff16111b).', () {
       expect(
-          tDarkM.colorScheme.surface, isSameColorAs(const Color(0xff16111b)));
+        tDarkM.colorScheme.surface,
+        isSameColorAs(const Color(0xff16111b)),
+      );
     });
     test(
         'FTD1.38L: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
         'EXPECT background Color(0xffefe8fa).', () {
       expect(
-          tLightM.colorScheme.surface, isSameColorAs(const Color(0xffefe8fa)));
+        tLightM.colorScheme.surface,
+        isSameColorAs(const Color(0xffefe8fa)),
+      );
     });
     test(
         'FTD1.38D: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
         'EXPECT background Color(0xff16111b).', () {
       expect(
-          tDarkM.colorScheme.surface, isSameColorAs(const Color(0xff16111b)));
+        tDarkM.colorScheme.surface,
+        isSameColorAs(const Color(0xff16111b)),
+      );
     });
 
     test(
@@ -738,28 +773,32 @@ void main() {
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
         'EXPECT scaffold '
         'background Color(0xfffbfafe).', () {
-      expect(tLightM.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xfffbfafe)));
+      expect(
+        tLightM.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xfffbfafe)),
+      );
     });
     test(
         'FTD1.40: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highBackgroundLowScaffold blendLevel: 10 '
         'background Color(0xff040305).', () {
-      expect(tDarkM.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xff040305)));
+      expect(
+        tDarkM.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xff040305)),
+      );
     });
 
     test(
         'FTD1.41: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color black87.', () {
-      expect(tLightM.indicatorColor, isSameColorAs(Colors.black87));
+      expect(tLightM.tabBarTheme.indicatorColor, isSameColorAs(Colors.black87));
     });
     test(
         'FTD1.42: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color black87.', () {
-      expect(tDarkM.indicatorColor, isSameColorAs(Colors.black87));
+      expect(tDarkM.tabBarTheme.indicatorColor, isSameColorAs(Colors.black87));
     });
 
     test(
@@ -775,19 +814,24 @@ void main() {
       expect(tDarkM.tabBarTheme.labelColor, isSameColorAs(Colors.black87));
     });
     test(
-        'FTD1.45: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
-        () {
-      expect(tLightM.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(tLightM.colorScheme.onSurface.withValues(alpha: 0.6)));
-    });
+      'FTD1.45: GIVEN a FlexThemeData.light theme FROM scheme "material" '
+      'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
+      'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
+      () {
+        expect(
+          tLightM.tabBarTheme.unselectedLabelColor,
+          isSameColorAs(tLightM.colorScheme.onSurface.withValues(alpha: 0.6)),
+        );
+      },
+    );
     test(
         'FTD1.46: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.unselectedLabelColor black87.withAlpha(0xB2)', () {
-      expect(tDarkM.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(Colors.black87.withAlpha(0xB2)));
+      expect(
+        tDarkM.tabBarTheme.unselectedLabelColor,
+        isSameColorAs(Colors.black87.withAlpha(0xB2)),
+      );
     });
 
     //**************************************************************************
@@ -802,17 +846,14 @@ void main() {
       blendLevel: 30,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 6,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
     final ThemeData tDarkS = FlexThemeData.dark(
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
       surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
       blendLevel: 30,
-      // ignore: avoid_redundant_argument_values
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 6,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     );
     test(
@@ -843,54 +884,66 @@ void main() {
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT surface Color(0xfff2edfb).', () {
       expect(
-          tLightS.colorScheme.surface, isSameColorAs(const Color(0xfff2edfb)));
+        tLightS.colorScheme.surface,
+        isSameColorAs(const Color(0xfff2edfb)),
+      );
     });
     test(
         'FTD1.52: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT surface Color(0xff120f16).', () {
       expect(
-          tDarkS.colorScheme.surface, isSameColorAs(const Color(0xff120f16)));
+        tDarkS.colorScheme.surface,
+        isSameColorAs(const Color(0xff120f16)),
+      );
     });
     test(
         'FTD1.53: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT background Color(0xfff2edfb).', () {
       expect(
-          tLightS.colorScheme.surface, isSameColorAs(const Color(0xfff2edfb)));
+        tLightS.colorScheme.surface,
+        isSameColorAs(const Color(0xfff2edfb)),
+      );
     });
     test(
         'FTD1.54: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT background Color(0xff120f16).', () {
       expect(
-          tDarkS.colorScheme.surface, isSameColorAs(const Color(0xff120f16)));
+        tDarkS.colorScheme.surface,
+        isSameColorAs(const Color(0xff120f16)),
+      );
     });
     test(
         'FTD1.55: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT scaffold background Color(0xffc7a5f9).', () {
-      expect(tLightS.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xffc7a5f9)));
+      expect(
+        tLightS.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xffc7a5f9)),
+      );
     });
     test(
         'FTD1.56: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfaces blendLevel: 30 '
         'EXPECT scaffold background Color(0xff422f59).', () {
-      expect(tDarkS.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xff422f59)));
+      expect(
+        tDarkS.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xff422f59)),
+      );
     });
     test(
         'FTD1.57: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color white.', () {
-      expect(tLightS.indicatorColor, isSameColorAs(Colors.white));
+      expect(tLightS.tabBarTheme.indicatorColor, isSameColorAs(Colors.white));
     });
     test(
         'FTD1.58: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color white.', () {
-      expect(tDarkS.indicatorColor, isSameColorAs(Colors.white));
+      expect(tDarkS.tabBarTheme.indicatorColor, isSameColorAs(Colors.white));
     });
     test(
         'FTD1.59: GIVEN a FlexThemeData.light theme FROM scheme "material" '
@@ -908,15 +961,19 @@ void main() {
         'FTD1.61: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.unselectedLabelColor white.withAlpha(0xB2).', () {
-      expect(tLightS.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(Colors.white.withAlpha(0xB2)));
+      expect(
+        tLightS.tabBarTheme.unselectedLabelColor,
+        isSameColorAs(Colors.white.withAlpha(0xB2)),
+      );
     });
     test(
         'FTD1.62: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.unselectedLabelColor white.withAlpha(0xB2)', () {
-      expect(tDarkS.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(Colors.white.withAlpha(0xB2)));
+      expect(
+        tDarkS.tabBarTheme.unselectedLabelColor,
+        isSameColorAs(Colors.white.withAlpha(0xB2)),
+      );
     });
 
     //**************************************************************************
@@ -951,15 +1008,19 @@ void main() {
         'FTD1.63: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tLightH.appBarTheme.backgroundColor,
-          tLightH.colorScheme.surfaceContainerLow);
+      expect(
+        tLightH.appBarTheme.backgroundColor,
+        tLightH.colorScheme.surfaceContainerLow,
+      );
     });
     test(
         'FTD1.64: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexAppBarStyle.background EXPECT appbar theme color '
         'colorScheme.background.', () {
-      expect(tDarkH.appBarTheme.backgroundColor,
-          tDarkH.colorScheme.surfaceContainerLow);
+      expect(
+        tDarkH.appBarTheme.backgroundColor,
+        tDarkH.colorScheme.surfaceContainerLow,
+      );
     });
     test(
         'FTD1.65: GIVEN a FlexThemeData.light theme FROM scheme "material" '
@@ -976,86 +1037,111 @@ void main() {
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT surface Color(0xffefe8fa).', () {
       expect(
-          tLightH.colorScheme.surface, isSameColorAs(const Color(0xffefe8fa)));
+        tLightH.colorScheme.surface,
+        isSameColorAs(const Color(0xffefe8fa)),
+      );
     });
     test(
         'FTD1.68: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT surface Color(0xff16111b).', () {
       expect(
-          tDarkH.colorScheme.surface, isSameColorAs(const Color(0xff16111b)));
+        tDarkH.colorScheme.surface,
+        isSameColorAs(const Color(0xff16111b)),
+      );
     });
     test(
         'FTD1.69: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT background Color(0xffefe8fa).', () {
       expect(
-          tLightH.colorScheme.surface, isSameColorAs(const Color(0xffefe8fa)));
+        tLightH.colorScheme.surface,
+        isSameColorAs(const Color(0xffefe8fa)),
+      );
     });
     test(
         'FTD1.70: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT background Color(0xff16111b).', () {
       expect(
-          tDarkH.colorScheme.surface, isSameColorAs(const Color(0xff16111b)));
+        tDarkH.colorScheme.surface,
+        isSameColorAs(const Color(0xff16111b)),
+      );
     });
     test(
         'FTD1.71: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT scaffold background Color(0xffb587f7).', () {
-      expect(tLightH.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xffb587f7)));
+      expect(
+        tLightH.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xffb587f7)),
+      );
     });
     test(
         'FTD1.72: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH surfaceMode: highScaffoldLowSurfacesVariantDialog blendLevel: 40 '
         'EXPECT scaffold background Color(0xff60477f).', () {
-      expect(tDarkH.scaffoldBackgroundColor,
-          isSameColorAs(const Color(0xff583f77)));
+      expect(
+        tDarkH.scaffoldBackgroundColor,
+        isSameColorAs(const Color(0xff583f77)),
+      );
     });
     test(
         'FTD1.73: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color primary.', () {
       expect(
-          tLightH.indicatorColor, isSameColorAs(tLightH.colorScheme.primary));
+        tLightH.tabBarTheme.indicatorColor,
+        isSameColorAs(tLightH.colorScheme.primary),
+      );
     });
     test(
         'FTD1.74: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color primary.', () {
-      expect(tDarkH.indicatorColor, isSameColorAs(tDarkH.colorScheme.primary));
+      expect(tDarkH.tabBarTheme.indicatorColor,
+          isSameColorAs(tDarkH.colorScheme.primary));
     });
     test(
         'FTD1.75: GIVEN a FlexThemeData.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'TabBarTheme.labelColor primary.', () {
-      expect(tLightH.tabBarTheme.labelColor,
-          isSameColorAs(tLightH.colorScheme.primary));
+      expect(
+        tLightH.tabBarTheme.labelColor,
+        isSameColorAs(tLightH.colorScheme.primary),
+      );
     });
     test(
         'FTD1.76: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'TabBarTheme.labelColor primary.', () {
-      expect(tDarkH.tabBarTheme.labelColor,
-          isSameColorAs(tDarkH.colorScheme.primary));
+      expect(
+        tDarkH.tabBarTheme.labelColor,
+        isSameColorAs(tDarkH.colorScheme.primary),
+      );
     });
     test(
-        'FTD1.77: GIVEN a FlexThemeData.light theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
-        () {
-      expect(tLightH.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(tLightH.colorScheme.onSurface.withValues(alpha: 0.6)));
-    });
+      'FTD1.77: GIVEN a FlexThemeData.light theme FROM scheme "material" '
+      'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
+      'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6).',
+      () {
+        expect(
+          tLightH.tabBarTheme.unselectedLabelColor,
+          isSameColorAs(tLightH.colorScheme.onSurface.withValues(alpha: 0.6)),
+        );
+      },
+    );
     test(
-        'FTD1.78: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
-        'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
-        'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6)',
-        () {
-      expect(tDarkH.tabBarTheme.unselectedLabelColor,
-          isSameColorAs(tDarkH.colorScheme.onSurface.withValues(alpha: 0.6)));
-    });
+      'FTD1.78: GIVEN a FlexThemeData.dark theme FROM scheme "material" '
+      'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
+      'TabBarTheme.unselectedLabelColor onSurface.withValues(alpha: 0.6)',
+      () {
+        expect(
+          tDarkH.tabBarTheme.unselectedLabelColor,
+          isSameColorAs(tDarkH.colorScheme.onSurface.withValues(alpha: 0.6)),
+        );
+      },
+    );
 
     //**************************************************************************
     // FlexThemeData.light & dark extension tests. With HEAVY surface branding.
@@ -1251,12 +1337,13 @@ void main() {
     final TextTheme nLightP =
         ThemeData(typography: Typography.material2021()).primaryTextTheme;
     test(
-        'FTD1.84: GIVEN a FlexThemeData.light with no PrimaryTextTheme '
-        'defined EXPECT equal '
-        'ThemeData(typography: Typography.material2021()).primaryTextTheme',
-        () {
-      expect(fLightP, equals(nLightP));
-    });
+      'FTD1.84: GIVEN a FlexThemeData.light with no PrimaryTextTheme '
+      'defined EXPECT equal '
+      'ThemeData(typography: Typography.material2021()).primaryTextTheme',
+      () {
+        expect(fLightP, equals(nLightP));
+      },
+    );
     // Default dark TextTheme equality verification.
     final TextTheme fDarkT = FlexThemeData.dark(
       scheme: FlexScheme.material,
@@ -1338,9 +1425,7 @@ void main() {
         fontWeight: FontWeight.w400,
         letterSpacing: 0.5,
       ),
-      labelSmall: TextStyle(
-        letterSpacing: 0.5,
-      ),
+      labelSmall: TextStyle(letterSpacing: 0.5),
     );
 
     // Light theme with custom text theme
@@ -1422,17 +1507,17 @@ void main() {
       expect(
         FlexThemeData.light().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexColorScheme.light()
-              .toTheme
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexColorScheme.light().toTheme.toString(
+                minLevel: DiagnosticLevel.fine,
+              ),
         ),
       );
       expect(
         FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexColorScheme.dark()
-              .toTheme
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexColorScheme.dark().toTheme.toString(
+                minLevel: DiagnosticLevel.fine,
+              ),
         ),
       );
     });
@@ -2017,10 +2102,7 @@ void main() {
       );
 
       // Check FlexColorScheme light object equality - with all props.
-      expect(
-        fcsLight1,
-        equals(fcsLight2),
-      );
+      expect(fcsLight1, equals(fcsLight2));
 
       // Turn it into ThemeData.
       final ThemeData fcsLightTd = fcsLight1.toTheme;
@@ -2072,218 +2154,223 @@ void main() {
       // Using isNot to prove that here and get a track on the issue, if it
       // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
-      expect(
-        fcsLightTd,
-        isNot(ftdLight),
-      );
+      expect(fcsLightTd, isNot(ftdLight));
       expect(
         ftdLight,
-        equals(ftdLight.copyWith(
-          primaryColor: FlexColor.indigo.light.primary,
-          scaffoldBackgroundColor: FlexColor.lightScaffoldBackground,
-          dialogBackgroundColor: FlexColor.lightSurface,
-        )),
+        equals(
+          ftdLight.copyWith(
+            primaryColor: FlexColor.indigo.light.primary,
+            scaffoldBackgroundColor: FlexColor.lightScaffoldBackground,
+          ),
+        ),
       );
     });
 
     test(
-        'FTD2.08-w-sub2: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
-        'case with sub-theme and rev tooltip EXPECT equal.', () {
-      const TextTheme myTextTheme = TextTheme(
-        displayLarge: TextStyle(
-          fontSize: 70, // Defaults to 96 in Material2018 Typography.
-        ),
-        labelLarge: TextStyle(
-          fontSize: 16, // Defaults to 14 in Material2018 Typography.
-          letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
-        ),
-        labelSmall: TextStyle(
-          fontSize: 11, // Defaults to 10 in Material2018 Typography.
-          letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
-        ),
-      );
-      // Make a FlexColorScheme.
-      final FlexColorScheme fcsLight1 = FlexColorScheme.light(
-        colors: FlexColor.mandyRed.light,
-        scheme: FlexScheme.bigStone,
-        usedColors: 3,
-        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-        blendLevel: 0,
-        appBarStyle: FlexAppBarStyle.primary,
-        appBarOpacity: 0.95,
-        appBarElevation: 1,
-        bottomAppBarElevation: 1,
-        tabBarStyle: FlexTabBarStyle.universal,
-        primary: FlexColor.indigo.light.primary,
-        primaryContainer: FlexColor.indigo.light.primaryContainer,
-        secondary: FlexColor.indigo.light.secondary,
-        secondaryContainer: FlexColor.indigo.light.secondaryContainer,
-        tertiary: FlexColor.indigo.light.tertiary,
-        tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
-        error: FlexColor.indigo.light.error,
-        surface: FlexColor.lightSurface,
-        scaffoldBackground: FlexColor.lightScaffoldBackground,
-        dialogBackground: FlexColor.lightSurface,
-        appBarBackground: FlexColor.indigo.light.primary,
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-        onSurface: Colors.black,
-        onError: Colors.white,
-        lightIsWhite: true,
-        swapColors: false,
-        tooltipsMatchBackground: false,
-        transparentStatusBar: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: myTextTheme,
-        primaryTextTheme: myTextTheme,
-        fontFamily: 'Roboto',
-        fontFamilyFallback: const <String>['Roboto', 'Arial'],
-        package: 'SansSerif',
-        platform: TargetPlatform.android,
-        typography: Typography.material2018(platform: TargetPlatform.android),
-        applyElevationOverlayColor: true,
-        subThemesData: const FlexSubThemesData(),
-      );
+      'FTD2.08-w-sub2: GIVEN equal FlexThemeData and FlexColorScheme.toTheme '
+      'case with sub-theme and rev tooltip EXPECT equal.',
+      () {
+        const TextTheme myTextTheme = TextTheme(
+          displayLarge: TextStyle(
+            fontSize: 70, // Defaults to 96 in Material2018 Typography.
+          ),
+          labelLarge: TextStyle(
+            fontSize: 16, // Defaults to 14 in Material2018 Typography.
+            letterSpacing: 0.9, // Defaults to 1.25 in Material2018 Typography.
+          ),
+          labelSmall: TextStyle(
+            fontSize: 11, // Defaults to 10 in Material2018 Typography.
+            letterSpacing: 0.5, // Defaults to 1.5 in Material2018 Typography.
+          ),
+        );
+        // Make a FlexColorScheme.
+        final FlexColorScheme fcsLight1 = FlexColorScheme.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+          blendLevel: 0,
+          appBarStyle: FlexAppBarStyle.primary,
+          appBarOpacity: 0.95,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          tabBarStyle: FlexTabBarStyle.universal,
+          primary: FlexColor.indigo.light.primary,
+          primaryContainer: FlexColor.indigo.light.primaryContainer,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+          tertiary: FlexColor.indigo.light.tertiary,
+          tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
+          error: FlexColor.indigo.light.error,
+          surface: FlexColor.lightSurface,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onError: Colors.white,
+          lightIsWhite: true,
+          swapColors: false,
+          tooltipsMatchBackground: false,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: myTextTheme,
+          primaryTextTheme: myTextTheme,
+          fontFamily: 'Roboto',
+          fontFamilyFallback: const <String>['Roboto', 'Arial'],
+          package: 'SansSerif',
+          platform: TargetPlatform.android,
+          typography: Typography.material2018(platform: TargetPlatform.android),
+          applyElevationOverlayColor: true,
+          subThemesData: const FlexSubThemesData(),
+        );
 
-      final FlexColorScheme fcsLight2 = FlexColorScheme.light(
-        colors: FlexColor.mandyRed.light,
-        scheme: FlexScheme.bigStone,
-        usedColors: 3,
-        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-        blendLevel: 0,
-        appBarStyle: FlexAppBarStyle.primary,
-        appBarOpacity: 0.95,
-        appBarElevation: 1,
-        bottomAppBarElevation: 1,
-        tabBarStyle: FlexTabBarStyle.universal,
-        primary: FlexColor.indigo.light.primary,
-        primaryContainer: FlexColor.indigo.light.primaryContainer,
-        secondary: FlexColor.indigo.light.secondary,
-        secondaryContainer: FlexColor.indigo.light.secondaryContainer,
-        tertiary: FlexColor.indigo.light.tertiary,
-        tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
-        error: FlexColor.indigo.light.error,
-        surface: FlexColor.lightSurface,
-        scaffoldBackground: FlexColor.lightScaffoldBackground,
-        dialogBackground: FlexColor.lightSurface,
-        appBarBackground: FlexColor.indigo.light.primary,
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-        onSurface: Colors.black,
-        onError: Colors.white,
-        lightIsWhite: true,
-        swapColors: false,
-        tooltipsMatchBackground: false,
-        transparentStatusBar: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: myTextTheme,
-        primaryTextTheme: myTextTheme,
-        fontFamily: 'Roboto',
-        fontFamilyFallback: const <String>['Roboto', 'Arial'],
-        package: 'SansSerif',
-        platform: TargetPlatform.android,
-        typography: Typography.material2018(platform: TargetPlatform.android),
-        applyElevationOverlayColor: true,
-        subThemesData: const FlexSubThemesData(),
-      );
+        final FlexColorScheme fcsLight2 = FlexColorScheme.light(
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+          blendLevel: 0,
+          appBarStyle: FlexAppBarStyle.primary,
+          appBarOpacity: 0.95,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          tabBarStyle: FlexTabBarStyle.universal,
+          primary: FlexColor.indigo.light.primary,
+          primaryContainer: FlexColor.indigo.light.primaryContainer,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+          tertiary: FlexColor.indigo.light.tertiary,
+          tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
+          error: FlexColor.indigo.light.error,
+          surface: FlexColor.lightSurface,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onError: Colors.white,
+          lightIsWhite: true,
+          swapColors: false,
+          tooltipsMatchBackground: false,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: myTextTheme,
+          primaryTextTheme: myTextTheme,
+          fontFamily: 'Roboto',
+          fontFamilyFallback: const <String>['Roboto', 'Arial'],
+          package: 'SansSerif',
+          platform: TargetPlatform.android,
+          typography: Typography.material2018(platform: TargetPlatform.android),
+          applyElevationOverlayColor: true,
+          subThemesData: const FlexSubThemesData(),
+        );
 
-      // Check FlexColorScheme light object equality - with all props.
-      expect(
-        fcsLight1,
-        equals(fcsLight2),
-      );
+        // Check FlexColorScheme light object equality - with all props.
+        expect(fcsLight1, equals(fcsLight2));
 
-      // Turn it into ThemeData.
-      final ThemeData fcsLightTd = fcsLight1.toTheme;
+        // Turn it into ThemeData.
+        final ThemeData fcsLightTd = fcsLight1.toTheme;
 
-      // Make same ThemeData via extension.
-      final ThemeData ftdLight = FlexThemeData.light(
-        // The manual colors will override commented ones:
-        colors: FlexColor.mandyRed.light,
-        scheme: FlexScheme.bigStone,
-        usedColors: 3,
-        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-        blendLevel: 0,
-        appBarStyle: FlexAppBarStyle.primary,
-        appBarOpacity: 0.95,
-        appBarElevation: 1,
-        bottomAppBarElevation: 1,
-        tabBarStyle: FlexTabBarStyle.universal,
-        primary: FlexColor.indigo.light.primary,
-        primaryContainer: FlexColor.indigo.light.primaryContainer,
-        secondary: FlexColor.indigo.light.secondary,
-        secondaryContainer: FlexColor.indigo.light.secondaryContainer,
-        tertiary: FlexColor.indigo.light.tertiary,
-        tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
-        error: FlexColor.indigo.light.error,
-        surface: FlexColor.lightSurface,
-        scaffoldBackground: FlexColor.lightScaffoldBackground,
-        dialogBackground: FlexColor.lightSurface,
-        appBarBackground: FlexColor.indigo.light.primary,
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-        onSurface: Colors.black,
-        onError: Colors.white,
-        lightIsWhite: true,
-        swapColors: false,
-        tooltipsMatchBackground: false,
-        transparentStatusBar: true,
-        visualDensity: FlexColorScheme.comfortablePlatformDensity,
-        textTheme: myTextTheme,
-        primaryTextTheme: myTextTheme,
-        fontFamily: 'Roboto',
-        fontFamilyFallback: const <String>['Roboto', 'Arial'],
-        package: 'SansSerif',
-        platform: TargetPlatform.android,
-        typography: Typography.material2018(platform: TargetPlatform.android),
-        applyElevationOverlayColor: true,
-        subThemesData: const FlexSubThemesData(),
-      );
-      // Check to String equality
-      expect(
-        fcsLightTd.toString(),
-        equalsIgnoringHashCodes(
-          ftdLight.toString(),
-        ),
-      );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
-      // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed, it will show up here.
-      // Check ThemeData equality, well checking inequality for now.
-      expect(
-        fcsLightTd,
-        isNot(ftdLight),
-      );
-      // Test color override results with this copyWith, copying in expected
-      // results that should not change the ColorScheme.
-      expect(
-        ftdLight,
-        equals(ftdLight.copyWith(primaryColor: FlexColor.indigo.light.primary)),
-      );
-      expect(
-        ftdLight.colorScheme,
-        equals(ftdLight.colorScheme.copyWith(
-            primaryContainer: FlexColor.indigo.light.primaryContainer)),
-      );
-      expect(
-        ftdLight.colorScheme,
-        equals(ftdLight.colorScheme
-            .copyWith(secondary: FlexColor.indigo.light.secondary)),
-      );
-      // Used colors is 3, we should NOT get tertiary, but computed value
-      expect(
-        ftdLight.colorScheme,
-        isNot(ftdLight.colorScheme
-            .copyWith(tertiary: FlexColor.indigo.light.tertiary)),
-      );
-      // But we should get this color on tertiary with this setup.
-      expect(
-        ftdLight.colorScheme,
-        equals(ftdLight.colorScheme.copyWith(
-          tertiary: FlexColor.indigo.light.primary.brighten(15),
-        )),
-      );
-    });
+        // Make same ThemeData via extension.
+        final ThemeData ftdLight = FlexThemeData.light(
+          // The manual colors will override commented ones:
+          colors: FlexColor.mandyRed.light,
+          scheme: FlexScheme.bigStone,
+          usedColors: 3,
+          surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+          blendLevel: 0,
+          appBarStyle: FlexAppBarStyle.primary,
+          appBarOpacity: 0.95,
+          appBarElevation: 1,
+          bottomAppBarElevation: 1,
+          tabBarStyle: FlexTabBarStyle.universal,
+          primary: FlexColor.indigo.light.primary,
+          primaryContainer: FlexColor.indigo.light.primaryContainer,
+          secondary: FlexColor.indigo.light.secondary,
+          secondaryContainer: FlexColor.indigo.light.secondaryContainer,
+          tertiary: FlexColor.indigo.light.tertiary,
+          tertiaryContainer: FlexColor.indigo.light.tertiaryContainer,
+          error: FlexColor.indigo.light.error,
+          surface: FlexColor.lightSurface,
+          scaffoldBackground: FlexColor.lightScaffoldBackground,
+          dialogBackground: FlexColor.lightSurface,
+          appBarBackground: FlexColor.indigo.light.primary,
+          onPrimary: Colors.white,
+          onSecondary: Colors.white,
+          onSurface: Colors.black,
+          onError: Colors.white,
+          lightIsWhite: true,
+          swapColors: false,
+          tooltipsMatchBackground: false,
+          transparentStatusBar: true,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          textTheme: myTextTheme,
+          primaryTextTheme: myTextTheme,
+          fontFamily: 'Roboto',
+          fontFamilyFallback: const <String>['Roboto', 'Arial'],
+          package: 'SansSerif',
+          platform: TargetPlatform.android,
+          typography: Typography.material2018(platform: TargetPlatform.android),
+          applyElevationOverlayColor: true,
+          subThemesData: const FlexSubThemesData(),
+        );
+        // Check to String equality
+        expect(
+          fcsLightTd.toString(),
+          equalsIgnoringHashCodes(ftdLight.toString()),
+        );
+        // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
+        // Using isNot to prove that here and get a track on the issue, if it
+        // ever changes and is fixed, it will show up here.
+        // Check ThemeData equality, well checking inequality for now.
+        expect(fcsLightTd, isNot(ftdLight));
+        // Test color override results with this copyWith, copying in expected
+        // results that should not change the ColorScheme.
+        expect(
+          ftdLight,
+          equals(
+            ftdLight.copyWith(primaryColor: FlexColor.indigo.light.primary),
+          ),
+        );
+        expect(
+          ftdLight.colorScheme,
+          equals(
+            ftdLight.colorScheme.copyWith(
+              primaryContainer: FlexColor.indigo.light.primaryContainer,
+            ),
+          ),
+        );
+        expect(
+          ftdLight.colorScheme,
+          equals(
+            ftdLight.colorScheme.copyWith(
+              secondary: FlexColor.indigo.light.secondary,
+            ),
+          ),
+        );
+        // Used colors is 3, we should NOT get tertiary, but computed value
+        expect(
+          ftdLight.colorScheme,
+          isNot(
+            ftdLight.colorScheme.copyWith(
+              tertiary: FlexColor.indigo.light.tertiary,
+            ),
+          ),
+        );
+        // But we should get this color on tertiary with this setup.
+        expect(
+          ftdLight.colorScheme,
+          equals(
+            ftdLight.colorScheme.copyWith(
+              tertiary: FlexColor.indigo.light.primary.brighten(15),
+            ),
+          ),
+        );
+      },
+    );
 
     test(
         'FTD2.09-w-sub-DARK: GIVEN equal FlexThemeData and '
@@ -2384,10 +2471,7 @@ void main() {
       );
 
       // Check FlexColorScheme dark object equality - with all props.
-      expect(
-        fcsDark1,
-        equals(fcsDark2),
-      );
+      expect(fcsDark1, equals(fcsDark2));
 
       // Turn it into ThemeData.
       final ThemeData fcsTdDark = fcsDark1.toTheme;
@@ -2442,10 +2526,7 @@ void main() {
       // Using isNot to prove that here and get a track on the issue, if it
       // ever changes and is fixed, it will show up here.
       // Check ThemeData equality, well checking inequality for now.
-      expect(
-        fcsTdDark,
-        isNot(fcsDarkTd),
-      );
+      expect(fcsTdDark, isNot(fcsDarkTd));
     });
 
     //**************************************************************************
@@ -2487,12 +2568,13 @@ void main() {
         'parameters EXPECT ThemeData to be equal to one made with '
         'scheme FlexThemeData.light FlexScheme.material.', () {
       expect(
-        FlexColorScheme.light()
-            .toTheme
-            .toString(minLevel: DiagnosticLevel.fine),
+        FlexColorScheme.light().toTheme.toString(
+              minLevel: DiagnosticLevel.fine,
+            ),
         equalsIgnoringHashCodes(
-          FlexThemeData.light(scheme: FlexScheme.materialBaseline)
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexThemeData.light(
+            scheme: FlexScheme.materialBaseline,
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -2516,12 +2598,15 @@ void main() {
         'material EXPECT ThemeData to be equal to one made with '
         'no params.', () {
       expect(
-          FlexThemeData.light(
-            colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
-          ).toString(minLevel: DiagnosticLevel.fine),
-          equalsIgnoringHashCodes(FlexColorScheme.light()
-              .toTheme
-              .toString(minLevel: DiagnosticLevel.fine)));
+        FlexThemeData.light(
+          colors: FlexColor.schemes[FlexScheme.materialBaseline]!.light,
+        ).toString(minLevel: DiagnosticLevel.fine),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.light().toTheme.toString(
+                minLevel: DiagnosticLevel.fine,
+              ),
+        ),
+      );
     });
 
     test(
@@ -2546,9 +2631,9 @@ void main() {
           ),
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexColorScheme.dark(useMaterial3: false)
-              .toTheme
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexColorScheme.dark(
+            useMaterial3: false,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -2645,8 +2730,9 @@ void main() {
       expect(
         FlexThemeData.dark().toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          FlexThemeData.dark(scheme: FlexScheme.materialBaseline)
-              .toString(minLevel: DiagnosticLevel.fine),
+          FlexThemeData.dark(
+            scheme: FlexScheme.materialBaseline,
+          ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
     });
@@ -2658,9 +2744,11 @@ void main() {
         FlexThemeData.dark(
           colors: FlexColor.schemes[FlexScheme.materialBaseline]!.dark,
         ).toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(FlexColorScheme.dark(
-          scheme: FlexScheme.materialBaseline,
-        ).toTheme.toString(minLevel: DiagnosticLevel.fine)),
+        equalsIgnoringHashCodes(
+          FlexColorScheme.dark(
+            scheme: FlexScheme.materialBaseline,
+          ).toTheme.toString(minLevel: DiagnosticLevel.fine),
+        ),
       );
     });
     test(
@@ -2686,8 +2774,10 @@ void main() {
     test(
         'FTD3.10 Light: GIVEN a FlexThemeData.light with null appBarStyle and '
         'not using M3 EXPECT app bar background primary ', () {
-      expect(tLAppBarNull.appBarTheme.backgroundColor,
-          equals(tLAppBarNull.colorScheme.primary));
+      expect(
+        tLAppBarNull.appBarTheme.backgroundColor,
+        equals(tLAppBarNull.colorScheme.primary),
+      );
     });
     final ThemeData tDAppBarNull = FlexThemeData.dark(
       scheme: FlexScheme.flutterDash,
@@ -2697,8 +2787,10 @@ void main() {
     test(
         'FTD3.10 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
         'not using M3 EXPECT app bar background surface ', () {
-      expect(tDAppBarNull.appBarTheme.backgroundColor,
-          equals(tDAppBarNull.colorScheme.surface));
+      expect(
+        tDAppBarNull.appBarTheme.backgroundColor,
+        equals(tDAppBarNull.colorScheme.surface),
+      );
     });
     // AppBar test null style, using M3.
     final ThemeData tLAppBarNullM3 = FlexThemeData.light(
@@ -2709,8 +2801,10 @@ void main() {
     test(
         'FTD3.11 Light: GIVEN a FlexThemeData.light with null appBarStyle '
         'and using M3 EXPECT app bar background 0xfffcfcfc ', () {
-      expect(tLAppBarNullM3.appBarTheme.backgroundColor,
-          equals(const Color(0xfffcfcfc)));
+      expect(
+        tLAppBarNullM3.appBarTheme.backgroundColor,
+        equals(const Color(0xfffcfcfc)),
+      );
     });
     final ThemeData tDAppBarNullM3 = FlexThemeData.dark(
       scheme: FlexScheme.flutterDash,
@@ -2720,8 +2814,10 @@ void main() {
     test(
         'FTD3.11 Dark: GIVEN a FlexThemeData.dark with null appBarStyle and '
         ' using M3 EXPECT app bar background 0xff080808 ', () {
-      expect(tDAppBarNullM3.appBarTheme.backgroundColor,
-          equals(const Color(0xff080808)));
+      expect(
+        tDAppBarNullM3.appBarTheme.backgroundColor,
+        equals(const Color(0xff080808)),
+      );
     });
 
     // Test swapLegacyOnMaterial3 when using Material 3 - No swap result

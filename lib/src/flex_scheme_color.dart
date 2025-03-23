@@ -1,11 +1,12 @@
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../flex_color_scheme.dart' show FlexSchemeData; // For comment refs.
 import 'flex_color.dart';
+import 'flex_color_scheme.dart' show FlexColorScheme;
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
-
-// ignore_for_file: comment_references
 
 /// Immutable color data class for the main scheme colors used in a
 /// FlexColorScheme based color scheme and theming engine.
@@ -77,9 +78,10 @@ class FlexSchemeColor with Diagnosticable {
   /// dark mode, when using the [toDark] method.
   ///
   /// In dark mode color schemes this reference color is used so that
-  /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
-  /// mode, for the [ColorScheme] colors [primaryFixed], [onPrimaryFixed],
-  /// [primaryFixedDim] and [onPrimaryFixedVariant].
+  /// [SeedColorScheme.fromSeeds] can compute the same colors in dark mode,
+  /// as in light mode, for the [ColorScheme] colors [ColorScheme.primaryFixed],
+  /// [ColorScheme.onPrimaryFixed], [ColorScheme.primaryFixedDim] and
+  /// [ColorScheme.onPrimaryFixedVariant].
   ///
   /// This color does not need to be provided in a [FlexSchemeColor] used for
   /// light mode colors, as it is not used in light mode.
@@ -116,9 +118,10 @@ class FlexSchemeColor with Diagnosticable {
   /// dark mode, when using the [toDark] method.
   ///
   /// In dark mode color schemes this reference color is used so that
-  /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
-  /// mode, for the [ColorScheme] colors [secondaryFixed], [onSecondaryFixed],
-  /// [secondaryFixedDim] and [onSecondaryFixedVariant].
+  /// [SeedColorScheme.fromSeeds] can compute the same colors in dark mode,
+  /// as in light mode, for the [ColorScheme] colors [ColorScheme.primaryFixed],
+  /// [ColorScheme.onPrimaryFixed], [ColorScheme.primaryFixedDim] and
+  /// [ColorScheme.onPrimaryFixedVariant].
   ///
   /// This color does not need to be provided in a [FlexSchemeColor] used for
   /// light mode colors, as it is not used in light mode.
@@ -161,9 +164,10 @@ class FlexSchemeColor with Diagnosticable {
   /// dark mode, when using the [toDark] method.
   ///
   /// In dark mode color schemes this reference color is used so that
-  /// [FlexSeedScheme] can compute the same colors in dark mode, as in light
-  /// mode, for the [ColorScheme] colors [tertiaryFixed], [onTertiaryFixed],
-  /// [tertiaryFixedDim] and [onTertiaryFixedVariant].
+  /// [SeedColorScheme.fromSeeds] can compute the same colors in dark mode,
+  /// as in light mode, for the [ColorScheme] colors [ColorScheme.primaryFixed],
+  /// [ColorScheme.onPrimaryFixed], [ColorScheme.primaryFixedDim] and
+  /// [ColorScheme.onPrimaryFixedVariant].
   ///
   /// This color does not need to be provided in a [FlexSchemeColor] used for
   /// light mode colors, as it is not used in light mode.
@@ -221,12 +225,13 @@ class FlexSchemeColor with Diagnosticable {
   /// All others have it set to false.
   ///
   /// To actually make such [FlexSchemeColor] automatically swap secondary and
-  /// tertiary colors when [useMaterial3] is set to true , set the
-  /// [FlexColorScheme] property [swapLegacyOnMaterial3] to true.
+  /// tertiary colors when [FlexColorScheme.useMaterial3] is set to true,
+  /// which it is by default, set the [FlexColorScheme.light] and
+  /// [FlexColorScheme.light] parameter `swapLegacyOnMaterial3`to true.
   /// It defaults to false for backwards compatibility, but it is recommended
-  /// to turn it on when using Material 3 color system. If you use seeded
-  /// color schemes with Material 2 ([useMaterial3] flag is false), it may be
-  /// preferable to keep [swapOnMaterial3] false.
+  /// to turn it on when using Material-3 color system. If you use seeded
+  /// color schemes with Material-2, the [FlexColorScheme.useMaterial3] flag is
+  /// false, it may be preferable to keep [swapOnMaterial3] false.
   ///
   /// The Themes Playground app defaults to setting this value to true, but
   /// allows you to turn it off.

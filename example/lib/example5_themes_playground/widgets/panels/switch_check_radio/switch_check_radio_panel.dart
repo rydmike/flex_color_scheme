@@ -117,6 +117,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
           value: controller.switchAdaptiveCupertinoLike,
           onChanged: controller.setSwitchAdaptiveCupertinoLike,
         ),
+        const Divider(),
         TestAdaptiveResponse(controller),
         const Divider(),
         ColorSchemePopupMenu(
@@ -129,7 +130,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: CheckboxShowcase(),
+          child: CheckboxShowcase(showCupertinoSwitches: true),
         ),
         if (!useMaterial3)
           const ListTile(
@@ -180,7 +181,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: RadioShowcase(),
+          child: RadioShowcase(showCupertinoSwitches: true),
         ),
       ],
     );

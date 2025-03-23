@@ -2,6 +2,77 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.2.0
+
+**March 23, 2025**
+
+### Package
+
+**CHORE**
+* Update the package to support and require at least Flutter v3.29.0.
+  * Remove all usage and references to new deprecated properties in **Flutter 3.29.0**: 
+    * `MaterialStateUnderlineInputBorder` → `WidgetStateInputBorder`
+    * `MaterialStateOutlineInputBorder` → `WidgetStateInputBorder`
+    * `Themedata.dialogBackgroundColor`: **Removed** all usage and references in the FCS packages and **Themes Playground** app.
+ * Remove all usage and references to new deprecated properties in **Flutter 3.31.0 BETA**:
+   * `ThemeData.indicatorColor`: **Removed** all usage and references in the FCS packages and **Themes Playground** app. FlexColorScheme has not used this property for a while, but kept it defined while it still existed. It is deprecated in **Flutter 3.31.0 BETA** and will be so in next stable Flutter release as well. FCS 8.2.0 stops defining any value for it and also removes it from the **Themes Playground** app. It has in FCS for a long time already been replaced by `TabBarThemeData.indicatorColor`. Test were now also updated to use this reference instead of the to be deprecated one.
+ * Fix lints for the stable, beta and master channels.  
+ * FlexColorScheme is still using pre-Dart 3.7.0 formatter. It will change to new format, with longer line length, when the Flutter stable channel supports manual trailing comma. Change to the new formatter was tested, but reverted because it was horrible.
+
+**FIX**
+* Fix `TabBarTheme` normalization Flutter SDK breaking change on the master and beta channel, see [issue #276](https://github.com/rydmike/flex_color_scheme/issues/276).
+  * The TabBar theme API had breaking changes in Flutter 3.27 release. These were addressed in FlexColorScheme v8.1.0. In Flutter 3.31 (beta) there are additional compile-time breaking changes not present in Flutter 3.29 and earlier versions. FlexColorScheme v8.2.0 is compatible with these Flutter SDK breaking changes. For more information, see the [TabBar theme API breaking changes](https://docs.flutter.dev/release/breaking-changes/component-theme-normalization), that documented the in Flutter 3.27 breaking changes. Apparently, something more changed now, as the TabBar theming that still works in Flutter 3.29, broke again in Flutter 3.31 beta and later. Regardless of what and why it was broken, FCS v8.2.0 fixes the usage of the compile-time broken API, it now works again, with at release time used APIs in Flutter stable, beta and master channels.
+
+**NEW**
+* **Beta feature**: 
+  * Added Shadcn UI color schemes. This includes, custom classes to store the Shadcn color tokens, `FlexSchemeColor` implementations of them and `FlexScheme` enums of the configs to make it easy to use them.  
+  
+    The `FlexScheme` enums for using the Shadcn colors are:
+    * `FlexScheme.shadBlue`
+    * `FlexScheme.shadGray`
+    * `FlexScheme.shadGreen`
+    * `FlexScheme.shadNeutral`
+    * `FlexScheme.shadOrange`
+    * `FlexScheme.shadRed`  
+    * `FlexScheme.shadRose`
+    * `FlexScheme.shadSlate`
+    * `FlexScheme.shadStone`
+    * `FlexScheme.shadViolet`
+    * `FlexScheme.shadYellow`
+    * `FlexScheme.shadZinc`
+  
+  * The **Shadcn color schemes** are still considered **beta**. The current version does not yet support or use the **Shadcn** default colors for **background**, **surface** and **container** colors. In this release those colors are using FlexColorScheme's monochrome surface colors. Later versions may change this and use the **Shadcn** surface colors by default when selecting these themes, with an option to switch to FlexColorScheme's monochrome surface colors, which this version currently uses as the only choice.
+  * The **Shadcn** color selections only set default colors, you will have to theme Material to look more like Shadcn yourself by selecting the correct Material components and modifying their properties to look and behave more like Shadcn style. The **Themes Playground** includes a pre-configured **very preliminary** configuration that you can use to do this.  
+  * The **Shadcn** color features are in this **beta** release excluded from **FlexColorScheme**'s otherwise rigorous tests.
+
+
+### Themes Playground
+
+**FIX**
+* Playground: Fix code gen for the first scheme, see [issue #275](https://github.com/rydmike/flex_color_scheme/issues/275).
+  
+ 
+**CHANGE** 
+* Fix/improve code gen for the second and third Playground scheme. It now exports these schemes the way they are defined internally in the Playground app, instead of as their configuration resulting colors.
+* Improved the theme code gen order and added some comments to the generated code to make it easier to understand what the main parts do.
+* Removed the theme codegen option used to generate a config to be pasted directly into `MaterialApp` properties `theme` and `themeDark`, in favor of the newer one that generates the configs as its own file. The newer one has been the default option since version 8.0.0.
+* Updated TabBar "Known issues" info-expand to state that the broken elastic indicator animation is fixed in Flutter 3.27.3. 
+* The **NavigationRail** default configuration in the Playground is now `NavigationRailLabelType.none`.
+  * This is already the default in the **FlexColorScheme** package and in Flutter SDK. This default value is used to avoid the issue that **Flutter SDK** only supports using the `none` option as the collapsed style, when the rail is expanded. For more info about this peculiar limitation see [issue #277](https://github.com/rydmike/flex_color_scheme/issues/277).
+  * Added an info-expand to the **NavigationRail** panel to explain this known-issue.
+  * You can work around this issue, but only on component config level, by setting the `labelType` to `NavigationRailLabelType.none` when `extended` is set to `true`, and back to `null` when it is `false` to use a themed value, that may then have another value than `none` when the rail is collapsed. This is a limitation in **Flutter SDK**, not in **FlexColorScheme**. The **Playground** app uses this workaround to avoid the issue when it displays the demo **NavigationRail** in the extended state.
+
+**NEW**
+* Added showing all existing Material-Cupertino platform adaptive widgets. Switch already existed but now also added:
+  * AlertDialog.adaptive
+  * Slider.adaptive
+  * Checkbox.adaptive  
+  * Radio.adaptive
+* **BETA**
+  * Added a built-in config for a **Shadcn UI** like config to the **Premade Designs** panel. This is only a first rough **beta** config. 
+    * This style configures the Material theme to look a bit like the Shadcn UI design system. It is not an exact replica and never will be, consider it more like inspired by Shadcn. It is primarily intended to be used with the Shadcn theme colors, but you can of course use it with any of the built-in schemes. This is a preliminary first config and will be refined over time as more theming features are added to the Playground that allow us to bring it closer to the Shadcn design. Be aware that the results you get when you use this configuration WILL change in future **Themes Playground** releases. As always, export your settings and save them as JSON if you want to keep them and use them later again in the Playground. 
+  
+
 ## 8.1.1
 
 **Feb 15, 2025**
@@ -10,13 +81,13 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 This fix release only contains a critical **Flutter BUG** workaround solution for users of Flutter versions 3.27.0 to 3.27.4 and 3.29.0.
 
-This release does not contain any support for new theming features released in Flutter 3.29.0, nor does it address theming properties that were deprecated in Flutter 3.29.0. **FlexColorScheme** v8.1.1 and v8.1.0, sans the useful workaround released here, are verified to work with Flutter v3.29 as is. A later **FlexColorScheme** release v8.2.0, will add new theming features and also remove the theming properties that were deprecated in Flutter 3.29.0. Removing them has no impact on FlexColorScheme produced Material-3 themes in Flutter 3.29. Removing and fixing all the deprecations will break things in Flutter 3.27 versions, since some of their replacements do not exist in Flutter 3.27. The issue workaround and fix added here is intended to also support the issue in Flutter 3.27 versions, not only in Flutter 3.29, thus we cannot address the 3.29 deprecations in this release.
+This release does not contain any support for new theming features released in Flutter 3.29.0, nor does it address theming properties that were deprecated in Flutter 3.29.0. **FlexColorScheme** v8.1.1 and v8.1.0, sans the useful workaround released here, are verified to work with Flutter v3.29 as is. A later **FlexColorScheme** release v8.2.0, will add new theming features and also remove the theming properties that were deprecated in Flutter 3.29.0. Removing them has no impact on FlexColorScheme produced Material-3 themes in Flutter 3.29. Removing and fixing all the deprecations will break things in Flutter 3.27 versions, since some of their replacements do not exist in Flutter 3.27. The issue workaround and fix added here are intended to also support the issue in Flutter 3.27 versions, not only in Flutter 3.29, thus we cannot address the 3.29 deprecations in this release.
 
 ### Package
 
 **FIX**
 
-* In Flutter **3.27.0** to at least Flutter **3.29.0** the `iconColor` on buttons `ElevatedButton`, `FilledButton`, `OutlinedButton`, `TextButton` and `SegmentedButton` no longer default to `foregroundColor` when `iconColor` is not defined. This is caused by a **BREAKING REGRESSION BUG** in Flutter SDK, see [issue 162839](https://github.com/flutter/flutter/issues/162839). The issue in Flutter SDK has been fixed via [PR 162880](https://github.com/flutter/flutter/pull/162880). However, this fix will never apply to Flutter versions 3.27.0 to at least 3.29.0. It may land as a cherry-picked hotfix in Flutter 3.29.1 or later minor release of Flutter 3.29. The FIX released here in this version of FlexColorScheme, adds a workaround to this issue. Without this workaround patch, the icon color on the above-mentioned buttons will not work correctly. The used workaround patch will also work correctly after Flutter [PR 162880](https://github.com/flutter/flutter/pull/162880) lands in Flutter.
+* In Flutter **3.27.0** to at least Flutter **3.29.0** the `iconColor` on buttons `ElevatedButton`, `FilledButton`, `OutlinedButton`, `TextButton` and `SegmentedButton` no longer default to `foregroundColor` when `iconColor` is not defined. This is caused by a **BREAKING REGRESSION BUG** in Flutter SDK, see [issue 162839](https://github.com/flutter/flutter/issues/162839). The issue in Flutter SDK has been fixed via [PR 162880](https://github.com/flutter/flutter/pull/162880). However, this fix will never apply to Flutter versions 3.27.0 to at least 3.29.0. A cherry-picked hotfix for this issue landed in Flutter 3.29.1. The FIX, released in this version of FlexColorScheme, adds a workaround to this issue. Without this workaround patch, the icon color on the above-mentioned buttons will not work correctly in affected Flutter versions. The used workaround patch will also work correctly after Flutter [PR 162880](https://github.com/flutter/flutter/pull/162880) lands in Flutter.
 
 ### Themes Playground
 
@@ -41,7 +112,7 @@ This release does not contain any support for new theming features released in F
   * `FlexSubThemes.bottomSheetTheme` got the property `clipBehavior`.
   * The default value is now `null` causing the sheet to use `Clip.none` as the default via the component's built-in default value. Keeping it null, or setting it to `Clip.none` helps avoid this Flutter SDK issue: https://github.com/rydmike/flex_color_scheme/issues/270 where using a `BackdropFilter` does not work correctly is any other clip behavior value than `Clip.none` is used.
   * **CHANGE/FIX**
-    * Previously **FlexColorScheme** made `BottomSheetThemeData` where the clip behavior was set to `Clip.antialias` by default, causing the issue with `BackdropFilter` usage to emerge by default. Now you have to select another clip behavior explicitly to get the same result as before, and ne warned that Flutter SDK has issues when doing so.
+    * Previously **FlexColorScheme** made `BottomSheetThemeData` where the clip behavior was set to `Clip.antialias` by default, causing the issue with `BackdropFilter` usage to emerge by default. Now you have to select another clip behavior explicitly to get the same result as before, and be warned that Flutter SDK has issues when doing so.
 * **TabBar**: Added theming properties for the TabBar indicator animation behavior, that are based on the new enum property `TabIndicatorAnimation` in Flutter 3.27.0.
   * `FlexSubThemesData` got the property `tabBarIndicatorAnimation`.
   * `FlexSubThemes.tabBarTheme` got the property `indicatorAnimation`.
@@ -77,7 +148,7 @@ This release does not contain any support for new theming features released in F
 
 **FIX**
 
-* Changelog for version 8.0.0 says and intended this: 
+* Changelog for version 8.0.0 said and intended this: 
   > "The `FlexSubThemesData` property `inputDecoratorIsFilled` now default to `false` when undefined, like Flutter SDK does. 
   > Set it to `true` to get the same style it had with previous undefined value."
 
@@ -483,7 +554,7 @@ In current Flutter versions, using a custom-tinted TextTheme is rather pointless
 - Added feature [#224](https://github.com/rydmike/flex_color_scheme/issues/224) that adds `Card.filled` and `Card.outlined` to widget showcase. They are also used in the "**Card**" settings" panel for card presentation.
 
  
-- The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it to show the correct palette color tones also for DynamicScheme variants.
+- The Playground can now also show the used color tones numbers for MCU based generated dynamic color schemes, also when they use dynamically obtained tones and when e.g., contrast level is adjusted. This feature is computationally complex and quite expensive, but we thought it was worth it, to show the correct palette color tones also for DynamicScheme variants.
 
 
 
@@ -953,7 +1024,7 @@ The **Themes Playground** application has been updated to include most of the ne
   - Unfortunately, elevation-based shadow cannot be added to any of them in the Material-3 mode. It will have to wait for actual implementation of the components and their Material-3 themes with support for it.
   - The Material-3 supporting components and themes for `BottomSheet` and `PopupMenuButton`, already exist in the Flutter master channel, they will probably land in next new stable release after Flutter 3.3. 
   - These temporary Material-3 fixes, make it possible to use the `BottomSheet` and `PopupMenuButton` when opting in on Material-3. Since shadow elevations are still not working for them in Material-3 mode, it is not perfect, but much better.
-  - The reasons why these issues exist are because these components have not yet been migrated to Material-3 in Flutter 3.3, plus the combination of this `Material` elevation [issue #107190](https://github.com/flutter/flutter/issues/107190) in Material-3 mode. As a result we get no elevation tint or any shadow on such `Material` using widgets in Material-3 mode.
+  - The reasons why these issues exist are because these components have not yet been migrated to Material-3 in Flutter 3.3, plus the combination of this `Material` elevation [issue #107190](https://github.com/flutter/flutter/issues/107190) in Material-3 mode. As a result, we get no elevation tint or any shadow on such `Material` using widgets in Material-3 mode.
   - The [issue #107190](https://github.com/flutter/flutter/issues/107190) has been fixed in master. Even if only it lands, we will get shadows back in Material-3 default `Material`, also if the components and their themes do not land. In combination with the here made Material-3 manual elevation tint fix, they would in such a case get the correct Material-3 default background elevation tint behavior and shadow.
   - The above temporary work-around fixes will be removed when the stable version of the framework implements the correct Material-3 elevation behavior for these widgets, and produces the same results itself. Hopefully in the next stable release of Flutter.
 
@@ -1002,7 +1073,7 @@ The **Themes Playground** application has been updated to include most of the ne
     - Direct panel/page selection via the control now instead uses a small **Fade and Zoom in** to show the selected settings panel.
     - Without any panel page change effect, it was hard to notice what changed. The default slide to the page animation, with the `PageView` is fine when swiping, where it remains, but it was a tad annoying when clicking on the panel page selector.
   - Changed all used `Slider.adaptive` to `Slider`.
-    - The Cupertino adaptive one has poorer UX. You cannot click on the track to move the thumb to a given position. The app presents Material theming, so we will show only Material widgets in the apps own controls, on all platforms going forward.
+    - The Cupertino adaptive one has poorer UX. You cannot click on the track to move the thumb to a given position. The app presents Material theming, so we will show only Material widgets in the app's own controls, on all platforms going forward.
   - Changed all used custom `SwitchListTileAdaptive` to just `SwitchListTile`.
     - We like using the Material theme following `SwitchListTileAdaptive` iOS switch on iOS on macOS. However, the app presents Material theming, and the new Material-3 Switch will land in Flutter stable soon. The new Material-3 `Switch` is even nicer than the Cupertino Switch, and we want to see it in the app when it lands. We will thus use the Material Switch in the Themes Playground app on all of its own controls on all platforms going forward.
     - The `SwitchListTileAdaptive` is kept in use on examples 2 to 4. As an example of how to make and use a theme following platform adaptive `ListTileSwitch`. In the `SwitchListTileAdaptive` doc comments it is mentioned that the plain `SwitchListTile.adaptive` is not theme color following on iOS/macOS platforms, nor can it be themed to be so. You have to make a custom wrapper like [`SwitchListTileAdaptive`](https://github.com/rydmike/flex_color_scheme/blob/master/example/lib/shared/widgets/universal/switch_list_tile_adaptive.dart).

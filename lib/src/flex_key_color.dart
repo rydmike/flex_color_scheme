@@ -1,7 +1,10 @@
+import 'package:flex_seed_scheme/flex_seed_scheme.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// ignore_for_file: comment_references
+import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
+import 'flex_scheme.dart' show FlexScheme;
+import 'flex_theme_data_extensions.dart' show FlexThemeData; // For comment refs
 
 /// Immutable data class that configures if and how [FlexColorScheme] uses
 /// key colors to populate the Material-3 [ColorScheme] it creates and uses
@@ -13,10 +16,10 @@ import 'package:flutter/material.dart';
 ///
 /// When using [FlexColorScheme] a seed generated [ColorScheme] will be made if
 /// a [FlexKeyColors] instance is passed to [FlexColorScheme.light] or
-/// [FlexColorScheme.dark] parameter [keyColorSetup] with [useKeyColors] set
-/// to true, in its [FlexKeyColors] configuration input.
+/// [FlexColorScheme.dark] parameter `keyColors` with
+/// [FlexKeyColors.useKeyColors] set to true.
 ///
-/// By default [keyColors] is null and key colors are not used. To activate
+/// By default `keyColors` is null and key colors are not used. To activate
 /// the feature pass you can in a default [FlexKeyColors] instance,
 /// its [useKeyColors] defaults to true.
 ///
@@ -37,12 +40,12 @@ import 'package:flutter/material.dart';
 /// You will then get tonal palette's for secondary and tertiary colors that
 /// depend on these key colors and not on only the primary color.
 ///
-/// If you use factory [FlexColorScheme.light] and [FlexColorScheme.scheme], to
-/// use a built-in color [scheme] set, then the primary, secondary and tertiary
+/// If you use factory [FlexColorScheme.light] and parameter `scheme`, to
+/// use a built-in color scheme set, then the primary, secondary and tertiary
 /// colors for the associated [FlexScheme] enum will be used as key colors for
 /// those color categories in the resulting [ColorScheme].
 ///
-/// When using [FlexColorScheme.dark] and [FlexColorScheme.scheme], the same
+/// When using [FlexColorScheme.dark] and parameter `scheme`, the same
 /// colors from the light theme color definitions will be used as key color
 /// inputs to generate the tonal palettes for dark mode ColorScheme. This is
 /// because the light and dark theme mode colors should use
@@ -51,7 +54,7 @@ import 'package:flutter/material.dart';
 /// generate the tonal palette for both light and dark theme to adhere to this
 /// design principle.
 ///
-/// If you use [FlexColorScheme.colors] in the factories light and dark, or
+/// If you use parameter `colors` in the factories light and dark, or
 /// direct color property inputs, or a custom [FlexColorScheme.colorScheme] as
 /// input, and combine them with key color usage via the [useKeyColors] flag,
 /// then it is possible to use different key color inputs for light and dark
@@ -69,7 +72,7 @@ import 'package:flutter/material.dart';
 ///
 /// The neutral tonal palette and its variant are used as inputs to
 /// [ColorScheme] colors in the same way as in [ColorScheme.fromSeed] and are
-/// produced with a slight hint of [primary] key color in them using same
+/// produced with a slight hint of [keyPrimary] key color in them using same
 /// algorithm as [ColorScheme.fromSeed] too. This color branding is a bit
 /// equivalent to using primary color alpha surface color blends, or so called
 /// primary color branding in [FlexColorScheme]. The surface mode and blend
@@ -104,7 +107,7 @@ class FlexKeyColors with Diagnosticable {
   ///
   /// The property [useKeyColors] will if set to false disable using seed
   /// generated [ColorScheme], even if you pass a [FlexKeyColors] instance to
-  /// the [keyColors] parameter in [FlexColorScheme.light] or
+  /// the `keyColors? parameter in [FlexColorScheme.light] or
   /// [FlexColorScheme.dark] factories. The property is true by default, it
   /// exists mainly for debugging and to enable easier construction of
   /// configurable toggles to enable and disable using seed generated
@@ -408,27 +411,27 @@ class FlexKeyColors with Diagnosticable {
   final bool keepErrorContainer;
 
   /// The [contrastLevel] parameter indicates the contrast level between color
-  /// pairs, such as [primary] and [onPrimary]. The value 0.0 is the default
+  /// pairs, such as [ColorScheme.primary] and [ColorScheme.onPrimary].
+  /// The value 0.0 is the default
   /// (normal) contrast; -1.0 is the lowest; 1.0 is the highest.
   /// From Material Design guideline, the normal, medium and high contrast
   /// options correspond to 0.0, 0.5 and 1.0 respectively.
   ///
   /// The [contrastLevel] property is only used when seed generating a
-  /// [ColorScheme] based on [FlexSeedScheme]'s [SeedColorScheme.fromSeeds]
-  /// when a scheme [variant] is used where its [FlexSchemeVariant.value],
-  /// [isFlutterScheme] it set to true. This corresponds to all the
-  /// [DynamicSchemeVariant]s in Flutter SDK.
+  /// [ColorScheme] based on [SeedColorScheme.fromSeeds] when a scheme `variant`
+  /// in a [FlexColorScheme.light] or [FlexColorScheme.dark] or in the
+  /// extensions [FlexThemeData.light] or [FlexThemeData.dark] are used where
+  /// its [FlexSchemeVariant.isFlutterScheme] is set to true. This corresponds
+  /// to all the [DynamicSchemeVariant]s in Flutter SDK.
   ///
   /// This [contrastLevel] is the same as the Flutter [contrastLevel] property
-  /// available in [ColorScheme.fromSeed]. As of 1.9.2024 still only available
-  /// in the master channel. It will land in next Flutter stable released
-  /// after Flutter 3.24.
+  /// available in [ColorScheme.fromSeed].
   ///
-  /// When using [tones] based seed generated schemes or [variant] is having
-  /// its [FlexSchemeVariant.value], [isFlutterScheme] it set to false,
-  /// the [contrastLevel] value is ignored.
+  /// When using `tones` based seed generated schemes or a `variant` where its
+  /// [FlexSchemeVariant.isFlutterScheme] is set to false, the [contrastLevel]
+  /// value is ignored.
   ///
-  /// With [tones] based schemes, the contrast level can instead be set as
+  /// With `tones` based schemes, the contrast level can instead be set as
   /// desired using custom [FlexTones] configurations. There are two
   /// predefined higher contrast level tone mappings available as
   /// [FlexTones.highContrast] and [FlexTones.ultraContrast], you can use them
@@ -439,8 +442,9 @@ class FlexKeyColors with Diagnosticable {
   /// Use expressive on container colors for light mode.
   ///
   /// The [useExpressiveOnContainerColors] is used to make the light theme
-  /// mode [ColorScheme] colors [onPrimaryContainer], [onSecondaryContainer],
-  /// [onTertiaryContainer] and [onErrorContainer] more color expressive.
+  /// mode [ColorScheme] colors [ColorScheme.onPrimaryContainer],
+  /// [ColorScheme.onSecondaryContainer], [ColorScheme.onTertiaryContainer]
+  /// and [ColorScheme.onErrorContainer] more color expressive.
   ///
   /// This comes at the cost of their contrast level and accessibility.
   ///
@@ -465,15 +469,16 @@ class FlexKeyColors with Diagnosticable {
   /// Defaults to `false` if undefined.
   ///
   /// The Material design spec for the tones used by the colors
-  /// [onPrimaryContainer], [onSecondaryContainer], [onTertiaryContainer] and
-  /// [onErrorContainer] have changed from tone **10** to **30** for **LIGHT**
+  /// [ColorScheme.onPrimaryContainer], [ColorScheme.onSecondaryContainer],
+  /// [ColorScheme.onTertiaryContainer] and [ColorScheme.onErrorContainer] have
+  /// changed from tone **10** to **30** for **LIGHT**
   /// theme mode. It also sets the min `ContrastCurve` from
   /// ContrastCurve(4.5, 7.0, 11.0, 21.0) to
   /// ContrastCurve(3.0, 4.5, 7.0, 11.0), making min contrast for normal
   /// contrast 4.5 instead of past 7.0.
   ///
   /// The expressive light container tone is not yet used in the Flutter SDK
-  /// (Sep 22, 2024), but it is in the Material-3 design spec and also in
+  /// (Mar 22, 2025), but it is in the Material-3 design spec and also in
   /// MCU v0.12.0. This is a breaking change in MCU 0.12.0 compared to 0.11.1
   /// used in Flutter 3.24 and it will change the light mode color schemes
   /// produced by all DynamicColor based Material color schemes.

@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
-// ignore_for_file: comment_references
+import '../flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
+import 'flex_sub_themes.dart' show FlexSubThemes; // For comment refs.
+
+// These constants are not exported by FlexColorScheme, they are only used
+// internally and in some document comments as reference information of
+// default values.
+//
+// These constants do also have tests, mainly to prevent accidental
+// changes that could break the produced styles. Occasionally these values may
+// need to be changed as Material styles evolve. Such changes are treated as
+// style breaking changes. Flutter SDK breaks defaults left and right without
+// even reporting them.
 
 // Constants used when FCS computes generated colors from primary color.
 //
@@ -235,7 +246,7 @@ const double kThickBorderWidth = 2;
 /// [ToggleButtons].
 const double kThinBorderWidth = 1;
 
-/// Default border radius on time entry elements in [TimePicker] dialog.
+/// Default border radius on time entry elements in [TimePickerDialog] dialog.
 ///
 /// Follows Material M3 guide.
 /// https://m3.material.io/components/time-pickers/specs.
@@ -249,7 +260,7 @@ const double kTimeElementRadius = 8;
 /// It can be changed via API.
 const double kTooltipRadius = 8;
 
-// Alpha, opacity and bland constant values.
+// Alpha, opacity and blend constant values.
 //
 // Used for disable, hover, focus and background color adjustments by menu
 // components. Values are based on values from M2 and M3 as used
@@ -263,19 +274,13 @@ const double kTooltipRadius = 8;
 /// in light theme for M2 defaults.
 ///
 /// Value: 0x0D = 13 = 5%
-const int kFillColorAlphaLight = 0x0D;
-
-/// Float version of [kFillColorAlphaLight].
-const double kFillColorAlphaLightFloat = 0x0D / 255;
+const double kFillColorLightOpacity = 0x0D / 255;
 
 /// Fill color alpha value for [InputDecorator] used by FlexColorScheme
 /// in dark theme for M2 defaults.
 ///
 /// Value: 0x14 = 20 = 8%
-const int kFillColorAlphaDark = 0x14;
-
-/// Float version of [kFillColorAlphaDark].
-const double kFillColorAlphaDarkFloat = 0x14 / 255;
+const double kFillColorDarkOpacity = 0x14 / 255;
 
 /// Enabled border alpha value on border sides.
 ///
@@ -285,10 +290,7 @@ const double kFillColorAlphaDarkFloat = 0x14 / 255;
 /// a color used for focus. Error focus/unfocus color also uses this alpha.
 ///
 /// Value: 0xA7 = 167 = 65%
-const int kEnabledBorderAlpha = 0xA7;
-
-/// Float version of [kEnabledBorderAlpha].
-const double kEnabledBorderAlphaFloat = 0xA7 / 255;
+const double kEnabledBorderOpacity = 0xA7 / 255;
 
 /// The surface color alpha blend, for primary colored Chip background.
 ///
@@ -803,13 +805,13 @@ const double kLoDarkPrimTextAlphaFloat = 0xFF / 255;
 const double kTextSelectionOpacity = 0.4;
 
 /// Opacity on selected text applied to text selection color by default in
-/// [FlexColorScheme.subThemesData] in light mode.
+/// [FlexColorScheme.light], `subThemesData` parameter in light mode.
 ///
 /// Value: 0.3 = 30%
 const double kTextSelectionLightOpacity = 0.3;
 
 /// Opacity on selected text applied to text selection color by default in
-/// [FlexColorScheme.subThemesData] in dark mode.
+/// [FlexColorScheme.dark], `subThemesData` parameter in dark mode.
 ///
 /// Value: 0.5 = 50%
 const double kTextSelectionDarkOpacity = 0.5;

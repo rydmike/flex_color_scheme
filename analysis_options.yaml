@@ -1,4 +1,4 @@
-# RydMike LINTER Preferences v2.3.0
+# RydMike LINTER Preferences v2.4.0
 #
 # Get this file here: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
@@ -6,13 +6,13 @@
 # You can find a list of all lint rules to put in your all_lint_rules.yaml file here:
 # https://dart.dev/tools/linter-rules/all
 #
-# This version is updated for Flutter 3.27 and Dart 3.6.
+# This version is updated for Flutter 3.29 and Dart 3.7.
 #
 # For a comparison of all lint rules settings in rule styles listed below, please see this Google
 # sheet: https://docs.google.com/spreadsheets/d/1Nc1gFjmCOMubWZD7f2E4fLhWN7LYaOE__tsA7bf2NjA
+# The comparison is "a bit" dated and should be updated.
 #
 # Versions used for comparison:
-#
 # Core           v5.1.1     : https://pub.dev/packages/lints
 # Recommended    v5.1.1     : https://pub.dev/packages/lints
 # Flutter Lints  v5.0.0     : https://pub.dev/packages/flutter_lints
@@ -486,7 +486,7 @@ linter:
     # package in which they are declared.
     #
     # RydMike: In packages and especially in public packages, it is often useful to deprecate a
-    # member, but keep it available and functional until the deprecated member is completley
+    # member, but keep it available and functional until the deprecated member is completely
     # removed. We thus need to reference it in code and doc comments.
     #
     # Other known linters use:
@@ -704,6 +704,27 @@ linter:
     # VG Analysis    disabled : https://pub.dev/packages/very_good_analysis
     # RydMike        disabled : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
     omit_obvious_local_variable_types: false
+
+    # CONSIDER omitting obvious type annotations for top-level and static variables.
+    #
+    # https://dart.dev/tools/linter-rules/omit_obvious_property_types
+    #
+    # Conflicts with 'always_specify_types' that is used, so then we can't have this rule either,
+    # besides we like being verbose and specific. Why and when would omitting the type for local
+    # variables be a good thing anyway, be specific, is our take on this.
+    #
+    # Other known linters use:
+    #
+    # Core           not checked : https://pub.dev/packages/lints
+    # Recommended    not checked : https://pub.dev/packages/lints
+    # Flutter Lints  not checked : https://pub.dev/packages/flutter_lints
+    # Pedantic       not checked : https://pub.dev/packages/pedantic
+    # Effective Dart not checked : https://pub.dev/packages/effective_dart
+    # Flutter repo   not checked : https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    # Lint           not checked : https://pub.dev/packages/lint
+    # VG Analysis    not checked : https://pub.dev/packages/very_good_analysis
+    # RydMike        disabled    : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+    omit_obvious_property_types: false
 
     # PREFER asserts with a message string.
     #

@@ -3,8 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-// ignore_for_file: avoid_redundant_argument_values
-
 void main() {
   //****************************************************************************
   // FlexColorScheme unit tests for using FlexColorScheme with sub-themes.
@@ -40,7 +38,7 @@ void main() {
         equals(fcs.toTheme.colorScheme.secondaryContainer),
       );
       expect(
-        fcs.toTheme.indicatorColor,
+        fcs.toTheme.tabBarTheme.indicatorColor,
         equals(fcs.toTheme.colorScheme.inversePrimary),
       );
       expect(
@@ -82,7 +80,7 @@ void main() {
         equals(fcs.toTheme.colorScheme.secondaryContainer),
       );
       expect(
-        fcs.toTheme.indicatorColor,
+        fcs.toTheme.tabBarTheme.indicatorColor,
         equals(fcs.toTheme.colorScheme.inversePrimary),
       );
       expect(
@@ -124,7 +122,7 @@ void main() {
         equals(fcs.toTheme.colorScheme.secondaryContainer),
       );
       expect(
-        fcs.toTheme.indicatorColor,
+        fcs.toTheme.tabBarTheme.indicatorColor,
         equals(fcs.toTheme.colorScheme.inversePrimary),
       );
       expect(
@@ -162,7 +160,7 @@ void main() {
         equals(fcs.toTheme.colorScheme.secondaryContainer),
       );
       expect(
-        fcs.toTheme.indicatorColor,
+        fcs.toTheme.tabBarTheme.indicatorColor,
         equals(fcs.toTheme.colorScheme.inversePrimary),
       );
       expect(

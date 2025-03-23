@@ -52,7 +52,8 @@ class GeneralPanel extends StatelessWidget {
             'Material-2 support has been removed from the Flutter framework.\n'
             '\n'
             'You can toggle this setting ON and OFF to observe the differences '
-            'when Material-3 and legacy Material-2 is being used.',
+            'when Material-3 and legacy Material-2 is being used. '
+            'The same toggle is also available in the sidebar.',
           ),
           value: useMaterial3,
           onChanged: controller.setUseMaterial3,
@@ -65,8 +66,8 @@ class GeneralPanel extends StatelessWidget {
             '\n'
             'You can toggle it ON and OFF to observe the differences when FCS '
             "is being used, to Flutter's default theming. Even when OFF, the "
-            'selected color theme is still being applied to the '
-            'Themes Playground app.',
+            'selected color theme is still being applied to the Themes '
+            'Playground app. The same toggle is also available in the sidebar.',
           ),
           value: controller.useFlexColorScheme,
           onChanged: controller.setUseFlexColorScheme,
@@ -83,7 +84,7 @@ class GeneralPanel extends StatelessWidget {
             '\n'
             'You can toggle this setting ON and OFF to observe the '
             'differences between FCS with and without component themes '
-            'enabled.',
+            'enabled. The same toggle is also available in the sidebar.',
           ),
           value: controller.useSubThemes && controller.useFlexColorScheme,
           onChanged:
@@ -93,7 +94,7 @@ class GeneralPanel extends StatelessWidget {
         SwitchListTileReveal(
           title: const Text('Apply ColorScheme to all Cupertino components'),
           subtitleReveal: const Text(
-            "Keep this ON to apply the colors of this Material theme's  "
+            "Keep this ON to apply the colors of this Material theme's "
             'ColorScheme to '
             'all Cupertino components. You typically want this, and we '
             'recommend that you keep this setting ON. '

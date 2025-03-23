@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A custom [SwitchListTile] that has a built-in animated custom leading action
+/// A custom [SwitchListTile] that has a built-in animated custom action
 /// as a part of [title] that reveals the [subtitleReveal] when clicked.
 ///
 /// This is useful when a more compact look is desired where more information
@@ -114,7 +114,7 @@ class SwitchListTileReveal extends StatefulWidget {
 }
 
 class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
-  late bool _isOpen;
+  bool _isOpen = false;
 
   @override
   void initState() {
@@ -155,9 +155,8 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
                       ? _handleTap
                       : null,
                   borderRadius: BorderRadius.circular(28),
-                  child: SizedBox(
-                    width: 28,
-                    height: 28,
+                  child: SizedBox.square(
+                    dimension: 28,
                     child: Icon(
                       _isOpen ? Icons.info : Icons.info_outlined,
                       size: 18,

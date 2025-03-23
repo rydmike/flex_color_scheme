@@ -1,7 +1,7 @@
-// ignore_for_file: comment_references
+import 'flex_scheme_surface_colors.dart'; // For comment refs.
 
 /// Enum for using predefined surface blend modes for all surfaces and scaffold
-/// background colors in [FlexColorScheme] based themes.
+/// background colors in FlexColorScheme based themes.
 enum FlexSurfaceMode {
   /// All surfaces have same alpha blend level including scaffold background.
   ///

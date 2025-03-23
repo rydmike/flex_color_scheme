@@ -6,12 +6,12 @@ import 'package:flutter/services.dart';
 
 import 'switch_list_tile_reveal.dart';
 
-/// Used to show the current theme on Material widgets.
+/// Used to show the current themed Material widgets.
 ///
 /// Use this widget to review your theme's impact on [ThemeData] and see
 /// how it looks with different Material widgets.
 ///
-/// The sub widgets used in this theme show case can also be used on their
+/// The sub widgets used in this theme showcase can also be used on their
 /// own, for example combined in smaller panels instead of in on big column
 /// like here. Using the individual elements is done in example 5 where they
 /// are put in separate cards.
@@ -26,7 +26,7 @@ class ShowcaseMaterial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    const TextStyle headerStyle = TextStyle(fontSize: 16);
+    const TextStyle headerStyle = TextStyle(fontSize: 20);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -77,11 +77,11 @@ class ShowcaseMaterial extends StatelessWidget {
         const SizedBox(height: 16),
         const Text('Checkbox', style: headerStyle),
         const SizedBox(height: 8),
-        const CheckboxShowcase(),
+        const CheckboxShowcase(showCupertinoSwitches: true),
         const SizedBox(height: 16),
         const Text('Radio', style: headerStyle),
         const SizedBox(height: 8),
-        const RadioShowcase(),
+        const RadioShowcase(showCupertinoSwitches: true),
         const SizedBox(height: 16),
         //
         // Icon
@@ -126,6 +126,9 @@ class ShowcaseMaterial extends StatelessWidget {
         const Text('Slider and RangeSlider', style: headerStyle),
         const SizedBox(height: 8),
         const SliderShowcase(),
+        const Divider(),
+        const SizedBox(height: 8),
+        const SliderAdaptiveShowcase(),
         const Divider(),
         const RangeSliderShowcase(),
         const SizedBox(height: 8),
@@ -917,7 +920,8 @@ class _SwitchShowcaseState extends State<SwitchShowcase> {
 }
 
 class CheckboxShowcase extends StatefulWidget {
-  const CheckboxShowcase({super.key});
+  const CheckboxShowcase({super.key, this.showCupertinoSwitches = false});
+  final bool showCupertinoSwitches;
 
   @override
   State<CheckboxShowcase> createState() => _CheckboxShowcaseState();
@@ -1075,6 +1079,45 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
               ),
             ],
           ),
+          if (widget.showCupertinoSwitches)
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                const SizedBox(width: _width, child: Text('Adaptive')),
+                Checkbox.adaptive(
+                  value: isSelected1,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isSelected1 = value ?? false;
+                    });
+                  },
+                ),
+                Checkbox.adaptive(
+                  value: !isSelected1,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isSelected1 = !(value ?? false);
+                    });
+                  },
+                ),
+              ],
+            ),
+          if (widget.showCupertinoSwitches)
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                const SizedBox(width: _width, child: Text('Disabled')),
+                Checkbox.adaptive(value: isSelected1, onChanged: null),
+                Checkbox.adaptive(
+                  value: !isSelected1,
+                  onChanged: null,
+                ),
+              ],
+            ),
         ],
       ),
     );
@@ -1082,7 +1125,8 @@ class _CheckboxShowcaseState extends State<CheckboxShowcase> {
 }
 
 class RadioShowcase extends StatefulWidget {
-  const RadioShowcase({super.key});
+  const RadioShowcase({super.key, this.showCupertinoSwitches = false});
+  final bool showCupertinoSwitches;
 
   @override
   State<RadioShowcase> createState() => _RadioShowcaseState();
@@ -1136,6 +1180,50 @@ class _RadioShowcaseState extends State<RadioShowcase> {
                 onChanged: null,
               ),
               Radio<bool>(
+                value: false,
+                groupValue: groupValue,
+                onChanged: null,
+              ),
+            ],
+          ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(width: _width, child: Text('Adaptive')),
+              Radio<bool>.adaptive(
+                value: true,
+                groupValue: groupValue,
+                onChanged: (bool? value) {
+                  setState(() {
+                    groupValue = value;
+                  });
+                },
+              ),
+              Radio<bool>.adaptive(
+                value: false,
+                groupValue: groupValue,
+                onChanged: (bool? value) {
+                  setState(() {
+                    groupValue = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              const SizedBox(width: _width, child: Text('Disabled')),
+              Radio<bool>.adaptive(
+                value: true,
+                groupValue: groupValue,
+                onChanged: null,
+              ),
+              Radio<bool>.adaptive(
                 value: false,
                 groupValue: groupValue,
                 onChanged: null,
@@ -1209,6 +1297,81 @@ class _SliderShowcaseState extends State<SliderShowcase> {
             title: Text(
                 'Slider continuous disabled (${value.toStringAsFixed(2)})'),
             subtitle: Slider(
+              max: 30,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: null,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SliderAdaptiveShowcase extends StatefulWidget {
+  const SliderAdaptiveShowcase({super.key});
+
+  @override
+  State<SliderAdaptiveShowcase> createState() => _SliderAdaptiveShowcaseState();
+}
+
+class _SliderAdaptiveShowcaseState extends State<SliderAdaptiveShowcase> {
+  double value = 5;
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            dense: true,
+            title:
+                Text('Slider.adaptive stepped (${value.toStringAsFixed(0)})'),
+            subtitle: Slider.adaptive(
+              max: 30,
+              divisions: 31,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: (double newValue) {
+                setState(() {
+                  value = newValue.roundToDouble();
+                });
+              },
+            ),
+          ),
+          ListTile(
+            dense: true,
+            title: Text(
+                'Slider.adaptive continuous (${value.toStringAsFixed(2)})'),
+            subtitle: Slider.adaptive(
+              max: 30,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: (double newValue) {
+                setState(() {
+                  value = newValue;
+                });
+              },
+            ),
+          ),
+          ListTile(
+            dense: true,
+            title: Text('Slider.adaptive stepped disabled '
+                '(${value.toStringAsFixed(0)})'),
+            subtitle: Slider.adaptive(
+              max: 30,
+              divisions: 31,
+              label: value.toStringAsFixed(0),
+              value: value,
+              onChanged: null,
+            ),
+          ),
+          ListTile(
+            dense: true,
+            title: Text('Slider.adaptive continuous disabled '
+                '(${value.toStringAsFixed(2)})'),
+            subtitle: Slider.adaptive(
               max: 30,
               label: value.toStringAsFixed(0),
               value: value,
@@ -1334,36 +1497,37 @@ class PopupMenuButtonsShowcase extends StatelessWidget {
         .copyWith(fontSize: 12, color: theme.textTheme.bodySmall!.color);
 
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          if (explain)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Text(
-                'PopupMenuButton',
-                style: denseHeader,
-              ),
+      spacing: 0,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        if (explain)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            child: Text(
+              'PopupMenuButton',
+              style: denseHeader,
             ),
-          if (explain)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-              child: Text(
-                'The PopupMenuButton is a Material-2 design commonly used in '
-                'Material apps. In M3 it has received a slightly updated style '
-                'with elevation tint.',
-                style: denseBody,
-              ),
-            ),
-          const Row(
-            children: <Widget>[
-              PopupMenuButtonShowcase(),
-              SizedBox(width: 16),
-              CheckedPopupMenuButtonShowcase(),
-              SizedBox(width: 16),
-              PopupMenuButtonTilesShowcase(),
-            ],
           ),
-        ]);
+        if (explain)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+            child: Text(
+              'The PopupMenuButton is a Material-2 design commonly used in '
+              'Material apps. In M3 it has received a slightly updated style '
+              'with elevation tint.',
+              style: denseBody,
+            ),
+          ),
+        const Row(
+          spacing: 16,
+          children: <Widget>[
+            PopupMenuButtonShowcase(),
+            CheckedPopupMenuButtonShowcase(),
+            PopupMenuButtonTilesShowcase(),
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -1468,6 +1632,7 @@ class _DropDownButtonShowcaseState extends State<DropDownButtonShowcase> {
 
     return RepaintBoundary(
       child: Column(
+        spacing: 0,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (widget.explain)
@@ -1542,6 +1707,7 @@ class _DropdownButtonFormFieldShowcaseState
 
     return RepaintBoundary(
       child: Column(
+        spacing: 0,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (widget.explain)
@@ -1612,6 +1778,7 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
 
     return RepaintBoundary(
       child: Column(
+        spacing: 0,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           if (widget.explain)
@@ -1673,14 +1840,15 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
                 value: Icons.cabin,
               ),
               DropdownMenuEntry<IconData>(
-                  style: ButtonStyle(
-                    padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                        EdgeInsets.symmetric(horizontal: 12)),
-                  ),
-                  label: 'Surveillance view',
-                  leadingIcon: Icon(Icons.camera_outdoor_rounded),
-                  // value: 'four',
-                  value: Icons.camera_outdoor_rounded),
+                style: ButtonStyle(
+                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(horizontal: 12)),
+                ),
+                label: 'Surveillance view',
+                leadingIcon: Icon(Icons.camera_outdoor_rounded),
+                // value: 'four',
+                value: Icons.camera_outdoor_rounded,
+              ),
               DropdownMenuEntry<IconData>(
                 style: ButtonStyle(
                   padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
@@ -1844,16 +2012,12 @@ class IconButtonVariantsShowcase extends StatelessWidget {
       runSpacing: 4,
       children: <Widget>[
         Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(height: 18),
             SizedBox(width: 75, height: 21, child: Text('Type')),
             SizedBox(height: 16),
             SizedBox(width: 75, height: 48, child: Text('Tappable')),
-            // SizedBox(height: 8),
             SizedBox(width: 75, height: 48, child: Text('Toggleable')),
-            // SizedBox(height: 8),
             SizedBox(width: 75, height: 48, child: Text('Disabled')),
           ],
         ),
@@ -2069,33 +2233,55 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
     final double? progressValue = playProgressIndicator ? null : 0.75;
 
     return RepaintBoundary(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 16,
-        runSpacing: 16,
+      child: Column(
+        spacing: 8,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          IconButton(
-            isSelected: playProgressIndicator,
-            selectedIcon: const Icon(Icons.pause),
-            icon: const Icon(Icons.play_arrow),
-            onPressed: () {
-              setState(() {
-                playProgressIndicator = !playProgressIndicator;
-              });
-            },
+          Row(
+            children: <Widget>[
+              IconButton(
+                isSelected: playProgressIndicator,
+                selectedIcon: const Icon(Icons.pause),
+                icon: const Icon(Icons.play_arrow),
+                onPressed: () {
+                  setState(() {
+                    playProgressIndicator = !playProgressIndicator;
+                  });
+                },
+              ),
+              if (playProgressIndicator)
+                const Text('Pause')
+              else
+                const Text('Play'),
+            ],
           ),
-          SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
+          const Text('Material'),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: <Widget>[
+              SizedBox.square(
+                dimension: 40,
+                child: CircularProgressIndicator(
+                  value: progressValue,
+                ),
+              ),
+              SizedBox(
+                width: 200,
+                child: LinearProgressIndicator(
+                  value: progressValue,
+                ),
+              ),
+            ],
+          ),
+          const Text('Adaptive'),
+          SizedBox.square(
+            dimension: 40,
+            child: CircularProgressIndicator.adaptive(
               value: progressValue,
             ),
           ),
-          SizedBox(
-              width: 200,
-              child: LinearProgressIndicator(
-                value: progressValue,
-              )),
         ],
       ),
     );
@@ -2128,6 +2314,7 @@ class _ChipShowcaseState extends State<ChipShowcase> {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Column(
+        spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Wrap(
@@ -2156,7 +2343,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 4,
@@ -2188,7 +2374,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 4,
@@ -2224,7 +2409,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 4,
@@ -2264,7 +2448,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 4,
@@ -2302,7 +2485,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 4,
@@ -2345,7 +2527,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 4,
@@ -2382,7 +2563,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             spacing: 4,
@@ -2422,7 +2602,6 @@ class _ChipShowcaseState extends State<ChipShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           if (widget.showOptions)
             SwitchListTile(
               dense: true,
@@ -2465,9 +2644,11 @@ class TextFieldShowcase extends StatefulWidget {
 class _TextFieldShowcaseState extends State<TextFieldShowcase> {
   late TextEditingController _plainFieldController;
   late TextEditingController _withIconsController;
+  late TextEditingController _fixedHinController;
   late TextEditingController _collapsedFieldController;
   bool _errorStatePlain = false;
   bool _errorStateWithIcons = false;
+  bool _errorFixedHint = false;
   bool _forceFilled = false;
   bool _forceOutlined = false;
 
@@ -2480,6 +2661,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
     super.initState();
     _plainFieldController = TextEditingController();
     _withIconsController = TextEditingController();
+    _fixedHinController = TextEditingController();
     _collapsedFieldController = TextEditingController();
   }
 
@@ -2487,6 +2669,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
   void dispose() {
     _plainFieldController.dispose();
     _withIconsController.dispose();
+    _fixedHinController.dispose();
     _collapsedFieldController.dispose();
     super.dispose();
   }
@@ -2498,8 +2681,10 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
 
     return RepaintBoundary(
       child: Column(
+        spacing: 16,
         children: <Widget>[
           Row(
+            spacing: 16,
             children: <Widget>[
               Expanded(
                 child: TextField(
@@ -2527,9 +2712,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
               Expanded(
                 child: TextField(
+                  // ignore: avoid-undisposed-instances, false positive, this will be disposed automatically by GC.
                   controller: TextEditingController(),
                   enabled: false,
                   decoration: InputDecoration(
@@ -2543,8 +2728,8 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
           Row(
+            spacing: 16,
             children: <Widget>[
               Expanded(
                 child: TextField(
@@ -2565,7 +2750,7 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                         : null,
                     filled: _forceFilled && isDefaultDecoration ? true : null,
                     hintText: 'Write something...',
-                    labelText: 'Icons',
+                    labelText: 'Moving label',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: const Icon(Icons.info),
                     errorText: _errorStateWithIcons
@@ -2574,9 +2759,9 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
               Expanded(
                 child: TextField(
+                  // ignore: avoid-undisposed-instances, false positive, this will be disposed automatically by GC.
                   controller: TextEditingController(text: 'Entry'),
                   enabled: false,
                   decoration: InputDecoration(
@@ -2592,8 +2777,54 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
           Row(
+            spacing: 16,
+            children: <Widget>[
+              Expanded(
+                child: TextField(
+                  onChanged: (String text) {
+                    setState(() {
+                      if (text.contains('a') | text.isEmpty) {
+                        _errorFixedHint = false;
+                      } else {
+                        _errorFixedHint = true;
+                      }
+                    });
+                  },
+                  key: const Key('TextField2'),
+                  controller: _fixedHinController,
+                  decoration: InputDecoration(
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
+                    hintText: 'No moving label',
+                    prefixIcon: const Icon(Icons.key),
+                    errorText: _errorFixedHint
+                        ? "Any entry without an 'a' will trigger this error"
+                        : null,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: TextField(
+                  // ignore: avoid-undisposed-instances, false positive, this will be disposed automatically by GC.
+                  controller: TextEditingController(text: ''),
+                  enabled: false,
+                  decoration: InputDecoration(
+                    border: _forceOutlined && isDefaultDecoration
+                        ? const OutlineInputBorder()
+                        : null,
+                    filled: _forceFilled && isDefaultDecoration ? true : null,
+                    labelText: 'Disabled entry',
+                    prefixIcon: const Icon(Icons.key),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            spacing: 16,
             children: <Widget>[
               Expanded(
                 child: TextField(
@@ -2608,11 +2839,11 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
               Expanded(
                 child: TextField(
                   key: const Key('TextField4'),
                   enabled: false,
+                  // ignore: avoid-undisposed-instances, false positive, this will be disposed automatically by GC.
                   controller: TextEditingController(text: 'Disabled entry'),
                   decoration: InputDecoration.collapsed(
                     border: _forceOutlined && isDefaultDecoration
@@ -2625,8 +2856,8 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
           Row(
+            spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Expanded(
@@ -2650,7 +2881,6 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
                   },
                 ),
               ),
-              const SizedBox(width: 16),
               Expanded(
                 child: SwitchListTileReveal(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 6),
@@ -2691,6 +2921,7 @@ class AppBarShowcase extends StatelessWidget {
         removeBottom: true,
         removeTop: true,
         child: Column(
+          spacing: 8,
           children: <Widget>[
             Stack(
               alignment: AlignmentDirectional.center,
@@ -2711,7 +2942,6 @@ class AppBarShowcase extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
             // A bit nasty usage of CustomScrollViews and Slivers and
             // shrinkWraps, to show what the SliverAppBars look like, don't
             // do this in a production app. With just a few widgets,
@@ -2735,12 +2965,11 @@ class AppBarShowcase extends StatelessWidget {
                           onPressed: () {},
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 8),
             Stack(
               alignment: AlignmentDirectional.center,
               children: <Widget>[
@@ -2760,12 +2989,11 @@ class AppBarShowcase extends StatelessWidget {
                           onPressed: () {},
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 8),
             Stack(
               alignment: AlignmentDirectional.center,
               children: <Widget>[
@@ -2785,7 +3013,7 @@ class AppBarShowcase extends StatelessWidget {
                           onPressed: () {},
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ],
@@ -2841,42 +3069,48 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
   List<_ColorItem> searchHistory = <_ColorItem>[];
 
   Iterable<Widget> getHistoryList(SearchController controller) {
-    return searchHistory.map((_ColorItem color) => ListTile(
-          leading: const Icon(Icons.history),
-          title: Text(color.label),
-          trailing: IconButton(
-              icon: const Icon(Icons.call_missed),
-              onPressed: () {
-                controller.text = color.label;
-                controller.selection =
-                    TextSelection.collapsed(offset: controller.text.length);
-              }),
-          onTap: () {
-            controller.closeView(color.label);
-            handleSelection(color);
+    return searchHistory.map(
+      (_ColorItem color) => ListTile(
+        leading: const Icon(Icons.history),
+        title: Text(color.label),
+        trailing: IconButton(
+          icon: const Icon(Icons.call_missed),
+          onPressed: () {
+            controller.text = color.label;
+            controller.selection =
+                TextSelection.collapsed(offset: controller.text.length);
           },
-        ));
+        ),
+        onTap: () {
+          controller.closeView(color.label);
+          handleSelection(color);
+        },
+      ),
+    );
   }
 
   Iterable<Widget> getSuggestions(SearchController controller) {
     final String input = controller.value.text;
     return _ColorItem.values
         .where((_ColorItem color) => color.label.contains(input))
-        .map((_ColorItem filteredColor) => ListTile(
-              leading: CircleAvatar(backgroundColor: filteredColor.color),
-              title: Text(filteredColor.label),
-              trailing: IconButton(
-                  icon: const Icon(Icons.call_missed),
-                  onPressed: () {
-                    controller.text = filteredColor.label;
-                    controller.selection =
-                        TextSelection.collapsed(offset: controller.text.length);
-                  }),
-              onTap: () {
-                controller.closeView(filteredColor.label);
-                handleSelection(filteredColor);
+        .map(
+          (_ColorItem filteredColor) => ListTile(
+            leading: CircleAvatar(backgroundColor: filteredColor.color),
+            title: Text(filteredColor.label),
+            trailing: IconButton(
+              icon: const Icon(Icons.call_missed),
+              onPressed: () {
+                controller.text = filteredColor.label;
+                controller.selection =
+                    TextSelection.collapsed(offset: controller.text.length);
               },
-            ));
+            ),
+            onTap: () {
+              controller.closeView(filteredColor.label);
+              handleSelection(filteredColor);
+            },
+          ),
+        );
   }
 
   void handleSelection(_ColorItem color) {
@@ -2936,7 +3170,7 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
                   icon: const Icon(Icons.mic_off),
                   selectedIcon: const Icon(Icons.mic),
                 ),
-              )
+              ),
             ],
             suggestionsBuilder:
                 (BuildContext context, SearchController controller) {
@@ -2948,7 +3182,7 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
                   const Center(
                     child: Text('No search history.',
                         style: TextStyle(color: Colors.grey)),
-                  )
+                  ),
                 ];
               }
               return getSuggestions(controller);
@@ -2958,7 +3192,7 @@ class _SearchBarShowcaseState extends State<SearchBarShowcase> {
           if (selectedColor == null)
             const Text('Select a color')
           else
-            Text('Last selected color is $selectedColor')
+            Text('Last selected color is $selectedColor'),
         ],
       ),
     );
@@ -3071,7 +3305,7 @@ class TabBarForAppBarShowcase extends StatelessWidget {
                   'here regardless of selected AppBar background color.',
                   style: denseBody,
                 ),
-              )
+              ),
             ],
             MediaQuery.removePadding(
               context: context,
@@ -3298,16 +3532,18 @@ class BottomAppBarShowcase extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                   child: Text('BottomAppBar', style: denseHeader)),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                  child: Text(
-                      'Typically used as a command bar at the bottom of the '
-                      'screen. Flutter M2 past default color was '
-                      'ThemeData.bottomAppBarColor. It was deprecated in '
-                      'Flutter 3.7. New M2 default is colorScheme.surface and '
-                      'elevation 8. In M3 it defaults to colorScheme.surface '
-                      'color, elevation 3, no shadow, but with surface '
-                      'elevation tint.',
-                      style: denseBody))
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: Text(
+                  'Typically used as a command bar at the bottom of the '
+                  'screen. Flutter M2 past default color was '
+                  'ThemeData.bottomAppBarColor. It was deprecated in '
+                  'Flutter 3.7. New M2 default is colorScheme.surface and '
+                  'elevation 8. In M3 it defaults to colorScheme.surface '
+                  'color, elevation 3, no shadow, but with surface '
+                  'elevation tint.',
+                  style: denseBody,
+                ),
+              ),
             ],
             BottomAppBar(
               child: Row(
@@ -3718,6 +3954,7 @@ class MenuBarShowcase extends StatelessWidget {
             VoidCallbackIntent(debugDumpApp),
       },
       child: Column(
+        spacing: 0,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -3938,6 +4175,7 @@ class MenuAnchorContextMenu extends StatefulWidget {
 class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
   MenuEntry? _lastSelection;
   final FocusNode _buttonFocusNode = FocusNode(debugLabel: 'Menu Button');
+  // ignore: dispose-fields, false positive, the menu controller has no dispose method.
   final MenuController _menuController = MenuController();
   ShortcutRegistryEntry? _shortcutsEntry;
   bool get showingMessage => _showingMessage;
@@ -3959,6 +4197,7 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
     // Collect the shortcuts from the different menu selections so that they can
     // be registered to apply to the entire app. Menus don't register their
     // shortcuts, they only display the shortcut hint text.
+    // ignore: move-variable-closer-to-its-usage, false positive, used right after this!!
     final Map<ShortcutActivator, Intent> shortcuts =
         <ShortcutActivator, Intent>{
       for (final MenuEntry item in MenuEntry.values)
@@ -4096,13 +4335,9 @@ class _MenuAnchorContextMenuState extends State<MenuAnchorContextMenu> {
       case MenuEntry.hideMessage:
         showingMessage = !showingMessage;
       case MenuEntry.colorMenu:
-        break;
       case MenuEntry.colorRed:
-        break;
       case MenuEntry.colorGreen:
-        break;
       case MenuEntry.colorBlue:
-        break;
     }
   }
 
@@ -4262,34 +4497,53 @@ class _NavigationDrawerShowcaseState extends State<NavigationDrawerShowcase> {
   }
 }
 
-class ListTileShowcase extends StatelessWidget {
+class ListTileShowcase extends StatefulWidget {
   const ListTileShowcase({super.key});
 
+  @override
+  State<ListTileShowcase> createState() => _ListTileShowcaseState();
+}
+
+class _ListTileShowcaseState extends State<ListTileShowcase> {
+  bool selected = true;
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Column(
         children: <Widget>[
           ListTile(
+            selected: !selected,
             leading: const Icon(Icons.info),
             title: const Text('ListTile'),
-            subtitle: const Text('List tile sub title'),
+            subtitle: selected
+                ? const Text('Selected list tile')
+                : const Text('Normal list tile'),
             trailing: const Text('Trailing'),
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                selected = !selected;
+              });
+            },
           ),
           ListTile(
             leading: const Icon(Icons.info),
             title: const Text('ListTile selected'),
-            subtitle: const Text('Selected list tile sub title'),
+            subtitle: selected
+                ? const Text('Selected list tile')
+                : const Text('Normal list tile'),
             trailing: const Text('Trailing'),
-            selected: true,
-            onTap: () {},
+            selected: selected,
+            onTap: () {
+              setState(() {
+                selected = !selected;
+              });
+            },
           ),
           ListTile(
             enabled: false,
             leading: const Icon(Icons.info),
             title: const Text('ListTile disabled'),
-            subtitle: const Text('Selected list tile sub title'),
+            subtitle: const Text('Disabled list tile'),
             trailing: const Text('Trailing'),
             onTap: () {},
           ),
@@ -4299,9 +4553,16 @@ class ListTileShowcase extends StatelessWidget {
   }
 }
 
-class SwitchListTileShowcase extends StatelessWidget {
+class SwitchListTileShowcase extends StatefulWidget {
   const SwitchListTileShowcase({super.key});
 
+  @override
+  State<SwitchListTileShowcase> createState() => _SwitchListTileShowcaseState();
+}
+
+class _SwitchListTileShowcaseState extends State<SwitchListTileShowcase> {
+  bool isSwitchOneOn = true;
+  bool isSwitchTwoOn = false;
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
@@ -4310,16 +4571,28 @@ class SwitchListTileShowcase extends StatelessWidget {
           SwitchListTile(
             secondary: const Icon(Icons.info),
             title: const Text('SwitchListTile'),
-            subtitle: const Text('The switch list tile is OFF'),
-            value: false,
-            onChanged: (bool value) {},
+            subtitle: isSwitchOneOn
+                ? const Text('The switch list tile is ON')
+                : const Text('The switch list tile is OFF'),
+            value: isSwitchOneOn,
+            onChanged: (bool value) {
+              setState(() {
+                isSwitchOneOn = value;
+              });
+            },
           ),
           SwitchListTile(
             secondary: const Icon(Icons.info),
             title: const Text('SwitchListTile'),
-            subtitle: const Text('The switch list tile is ON'),
-            value: true,
-            onChanged: (bool value) {},
+            subtitle: isSwitchTwoOn
+                ? const Text('The switch list tile is ON')
+                : const Text('The switch list tile is OFF'),
+            value: isSwitchTwoOn,
+            onChanged: (bool value) {
+              setState(() {
+                isSwitchTwoOn = value;
+              });
+            },
           ),
           const SwitchListTile(
             secondary: Icon(Icons.info),
@@ -4334,8 +4607,18 @@ class SwitchListTileShowcase extends StatelessWidget {
   }
 }
 
-class CheckboxListTileShowcase extends StatelessWidget {
+class CheckboxListTileShowcase extends StatefulWidget {
   const CheckboxListTileShowcase({super.key});
+
+  @override
+  State<CheckboxListTileShowcase> createState() =>
+      _CheckboxListTileShowcaseState();
+}
+
+class _CheckboxListTileShowcaseState extends State<CheckboxListTileShowcase> {
+  bool isCheckOneOn = false;
+  bool isCheckTwoOn = true;
+  bool? isCheckThreeOn;
 
   @override
   Widget build(BuildContext context) {
@@ -4345,32 +4628,56 @@ class CheckboxListTileShowcase extends StatelessWidget {
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: const Text('The checkbox list tile is unchecked'),
-            value: false,
-            onChanged: (bool? value) {},
+            subtitle: isCheckOneOn
+                ? const Text('The checkbox list tile is checked')
+                : const Text('The checkbox list tile is unchecked'),
+            value: isCheckOneOn,
+            onChanged: (bool? value) {
+              if (value != null) {
+                setState(() {
+                  isCheckOneOn = value;
+                });
+              }
+            },
           ),
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: const Text('The checkbox list tile is checked'),
-            value: true,
-            onChanged: (bool? value) {},
+            subtitle: isCheckTwoOn
+                ? const Text('The checkbox list tile is checked')
+                : const Text('The checkbox list tile is unchecked'),
+            value: isCheckTwoOn,
+            onChanged: (bool? value) {
+              if (value != null) {
+                setState(() {
+                  isCheckTwoOn = value;
+                });
+              }
+            },
           ),
           CheckboxListTile(
             secondary: const Icon(Icons.info),
             title: const Text('CheckboxListTile'),
-            subtitle: const Text('The checkbox list tile is null in tristate'),
+            subtitle: isCheckThreeOn == null
+                ? const Text('The checkbox list tile is null in tristate')
+                : isCheckThreeOn!
+                    ? const Text('The checkbox list tile is checked')
+                    : const Text('The checkbox list tile is unchecked'),
             tristate: true,
-            value: null,
-            onChanged: (bool? value) {},
+            value: isCheckThreeOn,
+            onChanged: (bool? value) {
+              setState(() {
+                isCheckThreeOn = value;
+              });
+            },
           ),
-          CheckboxListTile(
+          const CheckboxListTile(
             enabled: false,
-            secondary: const Icon(Icons.info),
-            title: const Text('CheckboxListTile disabled'),
-            subtitle: const Text('The checkbox list tile is checked'),
+            secondary: Icon(Icons.info),
+            title: Text('CheckboxListTile disabled'),
+            subtitle: Text('The checkbox list tile is checked'),
             value: true,
-            onChanged: (bool? value) {},
+            onChanged: null,
           ),
         ],
       ),
@@ -4378,9 +4685,15 @@ class CheckboxListTileShowcase extends StatelessWidget {
   }
 }
 
-class RadioListTileShowcase extends StatelessWidget {
+class RadioListTileShowcase extends StatefulWidget {
   const RadioListTileShowcase({super.key});
 
+  @override
+  State<RadioListTileShowcase> createState() => _RadioListTileShowcaseState();
+}
+
+class _RadioListTileShowcaseState extends State<RadioListTileShowcase> {
+  int value = 2;
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
@@ -4389,35 +4702,59 @@ class RadioListTileShowcase extends StatelessWidget {
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: const Text('The radio option is unselected'),
-            value: 0,
-            onChanged: (_) {},
-            groupValue: 1,
+            subtitle: value == 1
+                ? const Text('The radio option is selected')
+                : const Text('The radio option is unselected'),
+            value: 1,
+            groupValue: value,
+            onChanged: (int? val) {
+              if (val != null) {
+                setState(() {
+                  value = val;
+                });
+              }
+            },
           ),
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: const Text('The radio option is selected'),
-            value: 1,
-            onChanged: (_) {},
-            groupValue: 1,
+            subtitle: value == 2
+                ? const Text('The radio option is selected')
+                : const Text('The radio option is unselected'),
+            value: 2,
+            groupValue: value,
+            onChanged: (int? val) {
+              if (val != null) {
+                setState(() {
+                  value = val;
+                });
+              }
+            },
           ),
           RadioListTile<int>(
             secondary: const Icon(Icons.info),
             title: const Text('RadioListTile'),
-            subtitle: const Text('The radio option and list tile is selected'),
-            value: 1,
-            selected: true,
-            onChanged: (_) {},
-            groupValue: 1,
+            subtitle: value == 3
+                ? const Text('The radio option and list tile is selected')
+                : const Text('The radio option is unselected'),
+            value: 3,
+            groupValue: value,
+            selected: value == 3,
+            onChanged: (int? val) {
+              if (val != null) {
+                setState(() {
+                  value = val;
+                });
+              }
+            },
           ),
-          const RadioListTile<int>(
-            secondary: Icon(Icons.info),
-            title: Text('RadioListTile disabled'),
-            subtitle: Text('The radio option is selected'),
-            value: 1,
+          RadioListTile<int>(
+            secondary: const Icon(Icons.info),
+            title: const Text('RadioListTile disabled'),
+            subtitle: const Text('The radio option is unselected and disabled'),
+            value: 4,
+            groupValue: value,
             onChanged: null,
-            groupValue: 1,
           ),
         ],
       ),
@@ -4564,11 +4901,15 @@ class ExpansionPanelShowcaseItems {
 class AlertDialogShowcase extends StatelessWidget {
   const AlertDialogShowcase({super.key});
 
-  Future<void> _openDialog(BuildContext context) async {
+  Future<void> _openDialog(BuildContext context,
+      [bool adaptive = false]) async {
     await showDialog<void>(
-        context: context,
-        useRootNavigator: false,
-        builder: (BuildContext context) => const _AlertDialogExample());
+      context: context,
+      useRootNavigator: false,
+      builder: (BuildContext context) => adaptive
+          ? const _AlertDialogAdaptiveExample()
+          : const _AlertDialogExample(),
+    );
   }
 
   @override
@@ -4576,12 +4917,28 @@ class AlertDialogShowcase extends StatelessWidget {
     return Column(
       children: <Widget>[
         const AbsorbPointer(child: _AlertDialogExample()),
-        TextButton(
-          child: const Text(
-            'Show AlertDialog',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          onPressed: () async => _openDialog(context),
+        const AbsorbPointer(child: _AlertDialogAdaptiveExample()),
+        Wrap(
+          children: <Widget>[
+            TextButton(
+              child: const Text(
+                'Show AlertDialog',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () async {
+                await _openDialog(context, false);
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'Show adaptive AlertDialog',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              onPressed: () async {
+                await _openDialog(context, true);
+              },
+            ),
+          ],
         ),
       ],
     );
@@ -4606,6 +4963,52 @@ class _AlertDialogExample extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(), child: Text(cancel)),
         TextButton(
             onPressed: () => Navigator.of(context).pop(), child: Text(allow)),
+      ],
+    );
+  }
+}
+
+class _AlertDialogAdaptiveExample extends StatelessWidget {
+  const _AlertDialogAdaptiveExample();
+
+  Widget adaptiveAction(
+      {required BuildContext context,
+      required VoidCallback onPressed,
+      required Widget child}) {
+    final ThemeData theme = Theme.of(context);
+    switch (theme.platform) {
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return TextButton(onPressed: onPressed, child: child);
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return CupertinoDialogAction(onPressed: onPressed, child: child);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bool useMaterial3 = Theme.of(context).useMaterial3;
+    final String cancel = useMaterial3 ? 'Cancel' : 'CANCEL';
+    final String allow = useMaterial3 ? 'Allow' : 'ALLOW';
+
+    return AlertDialog.adaptive(
+      title: const Text('Allow location services'),
+      content: const Text('Let us help determine location. This means '
+          'sending anonymous location data to us'),
+      actions: <Widget>[
+        // ignore: avoid-returning-widgets, perfectly valid use case here.
+        adaptiveAction(
+            context: context,
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(cancel)),
+        // ignore: avoid-returning-widgets, perfectly valid use case here.
+        adaptiveAction(
+            context: context,
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(allow)),
       ],
     );
   }
@@ -4638,7 +5041,9 @@ class TimePickerDialogShowcase extends StatelessWidget {
             'Show TimePickerDialog',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          onPressed: () async => _openDialog(context),
+          onPressed: () async {
+            await _openDialog(context);
+          },
         ),
       ],
     );
@@ -4681,7 +5086,9 @@ class DatePickerDialogShowcase extends StatelessWidget {
             'Show DatePickerDialog',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          onPressed: () async => _openDialog(context),
+          onPressed: () async {
+            await _openDialog(context);
+          },
         ),
       ],
     );
@@ -4772,12 +5179,11 @@ class MaterialBannerSnackBarShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
+      spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SnackBarShowcase(),
-        SizedBox(height: 16),
         MaterialBannerShowcase(),
-        SizedBox(height: 16),
       ],
     );
   }
@@ -4794,8 +5200,8 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
   int fixedCount = 0;
   int pinnedCount = 0;
 
-  Future<void> _showDemoSnackBar(
-      BuildContext context, SnackBarBehavior style, String message) async {
+  void _showDemoSnackBar(
+      BuildContext context, SnackBarBehavior style, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -4895,8 +5301,8 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
               ),
               onPressed: () {
                 pinnedCount++;
-                unawaited(_showDemoSnackBar(context, SnackBarBehavior.floating,
-                    'A floating SnackBar ($pinnedCount)'));
+                _showDemoSnackBar(context, SnackBarBehavior.floating,
+                    'A floating SnackBar ($pinnedCount)');
               },
             ),
           ),
@@ -4932,8 +5338,8 @@ class _SnackBarShowcaseState extends State<SnackBarShowcase> {
               ),
               onPressed: () {
                 fixedCount++;
-                unawaited(_showDemoSnackBar(context, SnackBarBehavior.fixed,
-                    'A fixed SnackBar ($fixedCount)'));
+                _showDemoSnackBar(context, SnackBarBehavior.fixed,
+                    'A fixed SnackBar ($fixedCount)');
               },
             ),
           ),
@@ -4955,8 +5361,8 @@ class MaterialBannerShowcase extends StatefulWidget {
 class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
   int showCount = 0;
 
-  Future<void> _showDemoMaterialBanner(
-      BuildContext context, bool twoButtons, String message) async {
+  void _showDemoMaterialBanner(
+      BuildContext context, bool twoButtons, String message) {
     ScaffoldMessenger.of(context).showMaterialBanner(
       MaterialBanner(
         // elevation: 3,
@@ -4985,6 +5391,7 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Column(
+        spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MaterialBanner(
@@ -5002,7 +5409,6 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
           if (widget.enableShowBanner)
             Center(
               child: Wrap(
@@ -5017,8 +5423,8 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
                     ),
                     onPressed: () {
                       showCount++;
-                      unawaited(_showDemoMaterialBanner(
-                          context, false, 'A MaterialBanner ($showCount)'));
+                      _showDemoMaterialBanner(
+                          context, false, 'A MaterialBanner ($showCount)');
                     },
                   ),
                   TextButton(
@@ -5028,8 +5434,8 @@ class _MaterialBannerShowcaseState extends State<MaterialBannerShowcase> {
                     ),
                     onPressed: () {
                       showCount++;
-                      unawaited(_showDemoMaterialBanner(context, true,
-                          'A MaterialBanner with two actions ($showCount)'));
+                      _showDemoMaterialBanner(context, true,
+                          'A MaterialBanner with two actions ($showCount)');
                     },
                   ),
                 ],
@@ -5429,222 +5835,78 @@ class CardShowcase extends StatelessWidget {
 
     return RepaintBoundary(
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (explain)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: Text(
-                  'In M2 mode default background color is theme.cardColor, '
-                  'which is typically set to colorScheme.surface.',
-                  style: denseBody,
-                ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          if (explain)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'In M2 mode default background color is theme.cardColor, '
+                'which is typically set to colorScheme.surface.',
+                style: denseBody,
               ),
-            if (explain)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: Text(
-                  'In M3 mode, before Flutter 3.22, its background defaults to '
-                  'surface color and it gets elevation based surfaceTint. '
-                  'After Flutter 3.22, the background defaults to '
-                  'surfaceContainerLow and it does not get any elevation '
-                  'based surfaceTint by default.',
-                  style: denseBody,
-                ),
+            ),
+          if (explain)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'In M3 mode, before Flutter 3.22, its background defaults to '
+                'surface color and it gets elevation based surfaceTint. '
+                'After Flutter 3.22, the background defaults to '
+                'surfaceContainerLow and it does not get any elevation '
+                'based surfaceTint by default.',
+                style: denseBody,
               ),
-            if (explain)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                child: Text(
-                  'In M2 mode surfaceTint has no effect, even if specified. '
-                  'Card gets elevation shadow by default in both '
-                  'M2 and M3 mode.',
-                  style: denseBody,
-                ),
+            ),
+          if (explain)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                'In M2 mode surfaceTint has no effect, even if specified. '
+                'Card gets elevation shadow by default in both '
+                'M2 and M3 mode.',
+                style: denseBody,
               ),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 8,
-              runSpacing: 8,
-              children: <Widget>[
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 0,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
+            ),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 0,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
                           'Card elevation 0,\ndefault surfaceTint\n'
                           'and default shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 0,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 0,\nwith surfaceTint,\n'
-                            'default shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 0,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    shadowColor: Colors.transparent,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 0,\nwith surfaceTint,\n'
-                            'transparent shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 8,
-              runSpacing: 8,
-              children: <Widget>[
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 1,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
-                          'Card elevation 1,\ndefault surfaceTint\n'
-                          'and default shadow',
-                          textAlign: TextAlign.center,
-                          style: labelSmall,
-                        )),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 1,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 1,\nwith surfaceTint,\n'
-                            'default shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 1,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    shadowColor: Colors.transparent,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 1,\nwith surfaceTint,\n'
-                            'transparent shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 8,
-              runSpacing: 8,
-              children: <Widget>[
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 4,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 4,\ndefault surfaceTint\n'
-                            'and default shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 4,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    child: SizedBox(
-                      height: 60,
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 0,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Center(
                         child: Text(
-                          'Card elevation 4,\nwith surfaceTint,\n'
+                          'Card elevation 0,\nwith surfaceTint,\n'
                           'default shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
@@ -5653,105 +5915,253 @@ class CardShowcase extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 4,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    shadowColor: Colors.transparent,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 4,\nwith surfaceTint,\n'
-                            'transparent shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 0,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 0,\nwith surfaceTint,\n'
+                          'transparent shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              spacing: 8,
-              runSpacing: 8,
-              children: <Widget>[
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 10,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 10,\ndefault surfaceTint\n'
-                            'and default shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 1,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 1,\ndefault surfaceTint\n'
+                          'and default shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 10,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            'Card elevation 10,\nwith surfaceTint,\n'
-                            'default shadow',
-                            textAlign: TextAlign.center,
-                            style: labelSmall,
-                          ),
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 1,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 1,\nwith surfaceTint,\n'
+                          'default shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: width ?? _width,
-                  height: _height,
-                  child: Card(
-                    elevation: 10,
-                    surfaceTintColor: colorScheme.surfaceTint,
-                    shadowColor: Colors.transparent,
-                    child: SizedBox(
-                      height: 60,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                            child: Text(
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 1,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 1,\nwith surfaceTint,\n'
+                          'transparent shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 4,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 4,\ndefault surfaceTint\n'
+                          'and default shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 4,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  child: SizedBox(
+                    height: 60,
+                    child: Center(
+                      child: Text(
+                        'Card elevation 4,\nwith surfaceTint,\n'
+                        'default shadow',
+                        textAlign: TextAlign.center,
+                        style: labelSmall,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 4,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 4,\nwith surfaceTint,\n'
+                          'transparent shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 10,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 10,\ndefault surfaceTint\n'
+                          'and default shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 10,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Card elevation 10,\nwith surfaceTint,\n'
+                          'default shadow',
+                          textAlign: TextAlign.center,
+                          style: labelSmall,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: width ?? _width,
+                height: _height,
+                child: Card(
+                  elevation: 10,
+                  surfaceTintColor: colorScheme.surfaceTint,
+                  shadowColor: Colors.transparent,
+                  child: SizedBox(
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
                           'Card elevation 10,\nwith surfaceTint,\n'
                           'transparent shadow',
                           textAlign: TextAlign.center,
                           style: labelSmall,
-                        )),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-          ]),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -5784,9 +6194,13 @@ class CardTypesShowcase extends StatelessWidget {
     double borderRadius = useMaterial3 ? 12 : 4;
     // Is themed? Try to get the radius from the theme,  used that if it was.
     final ShapeBorder? cardShape = theme.cardTheme.shape;
+    // ignore: avoid-excessive-expressions, false positive, shape in CardTheme can be null.
     if (cardShape != null && cardShape is RoundedRectangleBorder) {
-      final BorderRadius shape = cardShape.borderRadius as BorderRadius;
-      borderRadius = shape.bottomLeft.x;
+      if (cardShape.borderRadius is BorderRadius) {
+        // ignore: avoid-type-casts, false positive, the cast is checked just above!
+        final BorderRadius shape = cardShape.borderRadius as BorderRadius;
+        borderRadius = shape.bottomLeft.x;
+      }
     }
 
     return Wrap(
@@ -5800,6 +6214,7 @@ class CardTypesShowcase extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
               child: Column(
+                spacing: 20,
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -5808,11 +6223,10 @@ class CardTypesShowcase extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ),
-                  const SizedBox(height: 20),
                   const Align(
                     alignment: Alignment.bottomLeft,
                     child: Text('Elevated'),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -5824,6 +6238,7 @@ class CardTypesShowcase extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
               child: Column(
+                spacing: 20,
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -5832,11 +6247,10 @@ class CardTypesShowcase extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ),
-                  const SizedBox(height: 20),
                   const Align(
                     alignment: Alignment.bottomLeft,
                     child: Text('Filled'),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -5845,9 +6259,10 @@ class CardTypesShowcase extends StatelessWidget {
         SizedBox(
           width: width ?? _cardWidth,
           child: Card.outlined(
-            child: Container(
+            child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
               child: Column(
+                spacing: 20,
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -5856,11 +6271,10 @@ class CardTypesShowcase extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ),
-                  const SizedBox(height: 20),
                   const Align(
                     alignment: Alignment.bottomLeft,
                     child: Text('Outlined'),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -5879,6 +6293,7 @@ class CardTypesShowcase extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 5, 5, 10),
                 child: Column(
+                  spacing: 20,
                   children: <Widget>[
                     Align(
                       alignment: Alignment.topRight,
@@ -5887,11 +6302,10 @@ class CardTypesShowcase extends StatelessWidget {
                         onPressed: () {},
                       ),
                     ),
-                    const SizedBox(height: 20),
                     const Align(
                       alignment: Alignment.bottomLeft,
                       child: Text('Forced'),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -5939,11 +6353,11 @@ class TextThemeColumnShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String fontName = textTheme.bodyMedium!.fontFamily ?? '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Font: ${textTheme.bodyMedium!.fontFamily}',
-            style: textTheme.titleSmall),
+        Text('Font: $fontName', style: textTheme.titleSmall),
         _ShowTextStyle(
           'Display Large '
           '(${textTheme.displayLarge!.fontSize!.toStringAsFixed(0)})',
@@ -6091,9 +6505,10 @@ class _ShowTextStyle extends StatelessWidget {
         if (showDetails) ...<Widget>[
           const SizedBox(height: 4),
           Text(
-              '$font $size pt, $fontWeight $color '
-              'Letter spacing: $spacing$height',
-              style: infoStyle),
+            '$font $size pt, $fontWeight $color '
+            'Letter spacing: $spacing$height',
+            style: infoStyle,
+          ),
           const SizedBox(height: 4),
         ],
       ],
