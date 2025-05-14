@@ -6676,7 +6676,7 @@ class FlexColorScheme with Diagnosticable {
     // always get correct contrast color to be used on primary color.
     defPrimaryText = defPrimaryText.merge(pPrimTextTheme);
 
-    // Finally, in order to correctly customize text styles based on the default
+    // Lastly, in order to correctly customize text styles based on the default
     // TextTheme text styles, we need to use the typography geometry. This fixes
     // text disalignment issues in chip labels for example.
     // This is equivalent to what Flutter does under the hood in
