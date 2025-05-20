@@ -4,7 +4,7 @@ version: 8.2.1
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.29.0'
+  flutter: '>=3.32.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
