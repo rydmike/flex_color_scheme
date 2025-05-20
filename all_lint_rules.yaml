@@ -27,7 +27,10 @@
 # - unnecessary_ignore
 # - unnecessary_underscores
 # - unsafe_variance
-
+#
+# Dart 3.8.0 added the following new rules:
+# - use_null_aware_elements
+#
 linter:
   rules:
     - always_declare_return_types
@@ -250,6 +253,7 @@ linter:
     - use_key_in_widget_constructors
     - use_late_for_private_fields_and_variables
     - use_named_constants
+    - use_null_aware_elements
     - use_raw_strings
     - use_rethrow_when_possible
     - use_setters_to_change_properties
