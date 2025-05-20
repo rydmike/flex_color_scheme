@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,7 +20,7 @@ class LinkTextSpan extends TextSpan {
       : super(
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              launchUrl(uri);
+              unawaited(launchUrl(uri));
             },
         );
 }
