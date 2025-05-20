@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/examples/responsive_scaffold.dart';
@@ -53,7 +54,10 @@ abstract final class App {
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = 'stable 3.32.0 (canvaskit$buildType)';
+  static const String flutterVersionNum = FlutterVersion.version ?? '';
+  static const String flutterChannel = FlutterVersion.channel ?? '';
+  static const String flutterVersion =
+      '$flutterChannel $flutterVersionNum (canvaskit$buildType)';
   static const String copyright = '© 2020 - 2025';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
