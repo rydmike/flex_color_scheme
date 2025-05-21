@@ -1,18 +1,22 @@
+// Cupertino only for comment refs.
+import 'package:flutter/cupertino.dart'
+    show CupertinoAlertDialog, CupertinoSwitch;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'flex_adaptive.dart';
+import 'flex_color.dart' show FlexColor; // For comment refs.
 import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_splash_type.dart';
 import 'flex_sub_themes.dart';
-
-// ignore_for_file: comment_references
+import 'flex_theme_data_extensions.dart'; // For comment refs.
 
 /// Parameters used by [FlexColorScheme] to configure its used [FlexSubThemes].
 ///
 /// To enable the optional component theming feature in FlexColorScheme, pass in
-/// at least a default [FlexSubThemesData] to its [subThemesData] property.
+/// at least a default [FlexSubThemesData] to the
+/// [FlexColorScheme.subThemesData] property.
 /// This gives you the default opinionated component theming setup.
 ///
 /// The list of properties in the flat configuration class is very large.
@@ -103,13 +107,14 @@ import 'flex_sub_themes.dart';
 ///   [FlexSubThemes.bottomSheetTheme].
 /// * [ButtonThemeData] for old deprecated buttons, via
 ///   [FlexSubThemes.buttonTheme].
-/// * [CardTheme] for [Card] via [FlexSubThemes.cardTheme].
+/// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
 /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
 /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
-/// * [DatePickerThemeData] for [DatePicker] via [FlexSubThemes.datePickerTheme]
-/// * [DialogTheme] for [Dialog] via [FlexSubThemes.dialogTheme].
+/// * [DatePickerThemeData] for [DatePickerDialog] via
+///   [FlexSubThemes.datePickerTheme]
+/// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
 /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
-/// * [DropdownMenuThemeData] for [DropDownMenu] via
+/// * [DropdownMenuThemeData] for [DropdownMenu] via
 ///   [FlexSubThemes.dropdownMenuTheme].
 /// * [ElevatedButtonThemeData] for [ElevatedButton] via
 ///   [FlexSubThemes.elevatedButtonTheme].
@@ -122,9 +127,9 @@ import 'flex_sub_themes.dart';
 /// * [InputDecorationTheme] for [InputDecoration] via
 ///   [FlexSubThemes.inputDecorationTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
-/// * [MenuButtonThemeData] for [MenuButton] via
+/// * [MenuButtonThemeData] for [MenuItemButton] and [SubmenuButton] via
 ///   [FlexSubThemes.menuButtonTheme].
-/// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
+/// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropdownMenu] via
 ///   [FlexSubThemes.menuTheme].
 /// * [ListTileThemeData] for [ListTile] via
 ///   [FlexSubThemes.listTileTheme].
@@ -142,7 +147,7 @@ import 'flex_sub_themes.dart';
 /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-/// * [TabBarTheme] for [TabBar] via [FlexSubThemes.tabBarTheme].
+/// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
 /// * [TextButtonThemeData] for [TextButton] via
 ///   [FlexSubThemes.textButtonTheme].
 /// * [TextSelectionThemeData] for [TextField] via
@@ -688,11 +693,13 @@ class FlexSubThemesData with Diagnosticable {
   /// each corresponding [ColorScheme] color property's color into its onColors.
   ///
   /// If [blendOnColors] is false, the [blendOnLevel] setting only affects
-  /// [onSurface], [onBackGround], [onPrimaryContainer], [onSecondaryContainer]
-  /// [onTertiaryContainer] and [onErrorContainer].
+  /// produced [ColorScheme.onSurface], [ColorScheme.onPrimaryContainer],
+  /// [ColorScheme.onSecondaryContainer], [ColorScheme.onTertiaryContainer] and
+  /// [ColorScheme.onErrorContainer].
   ///
-  /// If [blendOnColors] is true, it also impacts [onPrimary], [onSecondary]
-  /// [onTertiary] and [onError].
+  /// If [blendOnColors] is true, it also impacts [ColorScheme.onPrimary],
+  /// [ColorScheme.onSecondary], [ColorScheme.onTertiary] and
+  /// [ColorScheme.onError].
   ///
   /// The blend level is the integer decimal value of the alpha value
   /// used in the alpha blend function. It mixes one color with another
@@ -715,17 +722,20 @@ class FlexSubThemesData with Diagnosticable {
   final int? blendOnLevel;
 
   /// Set to true to enable [blendOnLevel] based onColor blending also on
-  /// [onPrimary], [onSecondary] and [onTertiary] colors.
+  /// resulting [ColorScheme.onPrimary], [ColorScheme.onSecondary] and
+  /// [ColorScheme.onTertiary] colors.
   ///
   /// Use [blendOnLevel] value to in FlexColorScheme themes to also blend in
   /// each corresponding [ColorScheme] color property's color into its onColors.
   ///
   /// If [blendOnColors] is false, the [blendOnLevel] setting only affects
-  /// [onSurface], [onBackGround], [onPrimaryContainer], [onSecondaryContainer]
-  /// [onTertiaryContainer] and [onErrorContainer].
+  /// [ColorScheme.onSurface], [ColorScheme.onPrimaryContainer],
+  /// [ColorScheme.onSecondaryContainer], [ColorScheme.onTertiaryContainer]
+  /// and [ColorScheme.onErrorContainer].
   ///
-  /// If [blendOnColors] is true, it also impacts [onPrimary], [onSecondary],
-  /// [onTertiary] and [onError].
+  /// If [blendOnColors] is true, it also impacts [ColorScheme.onPrimary],
+  /// [ColorScheme.onSecondary], [ColorScheme.onTertiary] and
+  /// [ColorScheme.onError].
   ///
   /// Blending the on colors results in lower contrast than when not doing so,
   /// but it works well on lower blend levels. The effect can be adjusted
@@ -761,7 +771,7 @@ class FlexSubThemesData with Diagnosticable {
   /// - [Chip]
   /// - [Dialog]
   /// - [Drawer]
-  /// - [DropDownMenu]
+  /// - [DropdownMenu]
   /// - [MenuAnchor]
   /// - [MenuBar]
   /// - [NavigationDrawer]
@@ -811,7 +821,7 @@ class FlexSubThemesData with Diagnosticable {
   /// - [BottomSheet],
   /// - [Card]
   /// - [Chip]
-  /// - [DropDownMenu]
+  /// - [DropdownMenu]
   /// - [MenuAnchor]
   /// - [MenuBar], might be a mistake that the bar has shadow in M3 by default.
   ///   The menus from the bar should have shadow and do, but probably not the
@@ -977,7 +987,7 @@ class FlexSubThemesData with Diagnosticable {
   /// defined by [splashType].
   final FlexSplashType? splashTypeAdaptive;
 
-  /// Use selection [surfaceMode] and [blendLevel] in [FlexColorScheme.light]
+  /// Use selection `surfaceMode` and `blendLevel` in [FlexColorScheme.light]
   /// and [FlexColorScheme.dark] to also blend primary color into text themes
   /// for both [ThemeData.textTheme] and [ThemeData.primaryTextTheme].
   ///
@@ -1096,8 +1106,8 @@ class FlexSubThemesData with Diagnosticable {
   /// like ThemeData. You apply and use them just as you would with ThemeData.
   /// This text theme is just a convenience Typography toggle.
   ///
-  /// If you specify a custom [typography] to [FlexColorScheme] or
-  /// [FlexThemeData], this property has no impact on used typography.
+  /// If you specify a custom typography in [FlexColorScheme.typography],
+  /// this property has no impact on used typography.
   final bool? useMaterial3Typography;
 
   /// Determines if M2 style opacity based divider is used in Material 3.
@@ -1259,14 +1269,14 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The style for the [TextButton]'s [Text] widget descendants.
   ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
+  /// The color of the [textButtonTextStyle] is typically not used directly, the
+  /// [textButtonSchemeColor] is used instead.
   final WidgetStateProperty<TextStyle?>? textButtonTextStyle;
 
   /// Border radius override value for [FilledButton].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kButtonRadius] 40dp in M2 and StadiumBorder in M3.
+  /// [kButtonRadius] 40dp in Material-2 and StadiumBorder in Material-3.
   /// https://m3.material.io/components/buttons/specs
   final double? filledButtonRadius;
 
@@ -1279,8 +1289,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The style for the [FilledButton]'s [Text] widget descendants.
   ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
+  /// The color of the [filledButtonTextStyle] is typically not used directly,
+  /// the [filledButtonSchemeColor] complement is used instead.
   final WidgetStateProperty<TextStyle?>? filledButtonTextStyle;
 
   // TODO(rydmike): Hold for https://github.com/flutter/flutter/issues/115827
@@ -1317,16 +1327,18 @@ class FlexSubThemesData with Diagnosticable {
   /// primary colored by default, it thus needs no elevation or very little in
   /// FlexColorSchemes custom design.
   ///
-  /// If null, defaults to [kElevatedButtonElevation] = 1, when [useMaterial3]
-  /// is false. If [useMaterial3] is true, it is kept null and default M3
-  /// elevation of [ElevatedButton] is kept.
+  /// If null, defaults to [kElevatedButtonElevation] = 1, when
+  /// [FlexColorScheme.useMaterial3] is false.
+  /// If [FlexColorScheme.useMaterial3] is true, it is kept null and default
+  /// Material-3 elevation of [ElevatedButton] is kept.
   final double? elevatedButtonElevation;
 
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [ElevatedButton] used as its main color.
   ///
-  /// If [useMaterial3] is false, the [elevatedButtonSchemeColor] is used as
-  /// button background color in M2 style. If [useMaterial3] is true, it is
+  /// If [FlexColorScheme.useMaterial3] is false, the
+  /// [elevatedButtonSchemeColor] is used as button background color in
+  /// Material-2 style. If [FlexColorScheme.useMaterial3] is true, it is
   /// used as the button foreground color for text and icon.
   ///
   /// If not defined, it defaults to theme.colorScheme.primary color via
@@ -1336,19 +1348,20 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [ElevatedButton] uses as its secondary color.
   ///
-  /// If [useMaterial3] is false, the [elevatedButtonSecondarySchemeColor] is
-  /// used as button foreground color in M2 style. If [useMaterial3] is true,
+  /// If [FlexColorScheme.useMaterial3] is false, the
+  /// [elevatedButtonSecondarySchemeColor] is used as button foreground color
+  /// in Material-2 style. If [FlexColorScheme.useMaterial3] is true,
   /// it is used as the button background color.
   ///
   /// If not defined, the [elevatedButtonSchemeColor]'s on color will be used if
-  /// [useMaterial3] is false, and if it is true, then [ColorScheme.surface]
-  /// will be used as default.
+  /// [FlexColorScheme.useMaterial3] is false, and if it is true, then
+  /// [ColorScheme.surface] will be used as default.
   final SchemeColor? elevatedButtonSecondarySchemeColor;
 
   /// The style for the [ElevatedButton]'s [Text] widget descendants.
   ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
+  /// The color of the [elevatedButtonTextStyle] is typically not used directly,
+  /// the [elevatedButtonSchemeColor] is used instead.
   final WidgetStateProperty<TextStyle?>? elevatedButtonTextStyle;
 
   /// Border radius value for [OutlinedButton].
@@ -1368,29 +1381,31 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [OutlinedButton] uses as its outline color.
   ///
-  /// If [useMaterial3] is false, and the [outlinedButtonOutlineSchemeColor] is
+  /// If [FlexColorScheme.useMaterial3] is false, and the
+  /// [outlinedButtonOutlineSchemeColor] is
   /// not defined, the [outlinedButtonSchemeColor] is used as default button
-  /// outline color, following M2 style.
+  /// outline color, following Material-2 style.
   ///
-  /// If [useMaterial3] is true, and the [outlinedButtonOutlineSchemeColor] is
+  /// If [FlexColorScheme.useMaterial3] is true, and the
+  /// [outlinedButtonOutlineSchemeColor] is
   /// not defined, the [ColorScheme.outline] is used as default button
-  /// outline color in M3 style.
+  /// outline color in Material-3 style.
   final SchemeColor? outlinedButtonOutlineSchemeColor;
 
-  /// The border width of the [OutlineButton].
+  /// The border width of the [OutlinedButton].
   ///
   /// If not defined, defaults to [thinBorderWidth];
   final double? outlinedButtonBorderWidth;
 
-  /// The border width of the pressed [OutlineButton].
+  /// The border width of the pressed [OutlinedButton].
   ///
   /// If not defined, defaults to [thickBorderWidth];
   final double? outlinedButtonPressedBorderWidth;
 
   /// The style for the [OutlinedButton]'s [Text] widget descendants.
   ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
+  /// The color of the [outlinedButtonTextStyle] is typically not used directly,
+  /// the [outlinedButtonSchemeColor] complement is used instead.
   final WidgetStateProperty<TextStyle?>? outlinedButtonTextStyle;
 
   /// Border radius value for [ToggleButtons].
@@ -1409,13 +1424,14 @@ class FlexSubThemesData with Diagnosticable {
   /// Always defines the background color for selected button, and
   /// it's onColor pair defines the foreground for selected button.
   ///
-  /// If [unselectedSchemeColor] is not defined, [baseSchemeColor] is also
-  /// used as foreground color for unselected buttons.
+  /// If [toggleButtonsUnselectedSchemeColor] is not defined,
+  /// [toggleButtonsSchemeColor] is used as foreground color for unselected
+  /// buttons.
   ///
-  /// If [toggleButtonsBorderSchemeColor] is not defined, then in M2 it is also
-  /// used as color base for the border color, in M3 an undefined
-  /// [toggleButtonsBorderSchemeColor] results in [ColorScheme.outline] color
-  /// being used.
+  /// If [toggleButtonsBorderSchemeColor] is not defined, then in Material-2
+  /// mode it is also used as color base for the border color. In Material-3
+  /// mode an undefined [toggleButtonsBorderSchemeColor] results in
+  /// [ColorScheme.outline] color being used.
   ///
   /// If not defined it defaults to [SchemeColor.primary].
   final SchemeColor? toggleButtonsSchemeColor;
@@ -1447,8 +1463,10 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The default text style for [ToggleButtons.children].
   ///
-  /// [TextStyle.color] will be ignored and substituted by [color],
-  /// [selectedColor] or [disabledColor] depending on whether the buttons
+  /// [TextStyle.color] will be ignored and substituted by
+  /// [toggleButtonsSchemeColor],[toggleButtonsSelectedForegroundSchemeColor]
+  /// or [toggleButtonsUnselectedSchemeColor] complement or computed
+  /// disabled color, depending on whether the buttons
   /// are active, selected, or disabled.
   final TextStyle? toggleButtonsTextStyle;
 
@@ -1502,23 +1520,24 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The style for the segmented button's [Text] widget descendants.
   ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [segmentedButtonSchemeColor] and [unselectedForegroundSchemeColor] are
-  /// used instead.
+  /// The color of the [segmentedButtonTextStyle] is typically not used
+  /// directly, the [segmentedButtonSchemeColor] and
+  /// [segmentedButtonUnselectedForegroundSchemeColor] are used instead.
   final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle;
 
-  /// Base color used as [Themedata.scaffoldBackgroundColor] in a theme
-  /// produced by [FlexColorScheme.light] and [FlexColorScheme.dark] factories.
+  /// Base color used as [ThemeData.scaffoldBackgroundColor] in a theme
+  /// produced by [FlexColorScheme.light] and [FlexColorScheme.dark] factories,
+  /// or extensions [FlexThemeData.light] and [FlexThemeData.dark].
   ///
-  /// The used base color is modified by used [surfaceMode] and [blendLevel]
-  /// in the [FlexColorScheme] factory constructors.
+  /// The used base color is modified by used `surfaceMode` and `blendLevel`
+  /// parameters in the [FlexColorScheme] factory constructors or extensions.
   ///
   /// By using different base colors you can create alpha blended scaffold
   /// background colors with even more variation, as they are mixed with the
   /// blend color, but start at different base colors.
   ///
   /// If you do not want to get any blend in the Scaffold background color, but
-  /// otherwise want to use surface blends with [blendLevel] > 0, you can
+  /// otherwise want to use surface blends with `blendLevel` > 0, you can
   /// set the `FlexSubThemesData(scaffoldBackgroundSchemeColor)` to any
   /// [SchemeColor]. Setting this property overrides all scaffold background
   /// color definitions, and always uses the selected color as is.
@@ -1528,8 +1547,11 @@ class FlexSubThemesData with Diagnosticable {
   /// [ThemeData.scaffoldBackgroundColor] will use as override color.
   ///
   /// Defining this color will override any blended Scaffold background and
-  /// also [lightIsWhite] in light mode, and [darkIsTrueBlack] in dark mode,
-  /// the other parts of their impacts  will remain in effect. '
+  /// also parameters `lightIsWhite` in light mode, and `darkIsTrueBlack` in
+  /// dark mode theme produced by [FlexColorScheme.light] and
+  /// [FlexColorScheme.dark] factories or extensions [FlexThemeData.light] and
+  /// [FlexThemeData.dark], the other parts of their impacts will remain
+  /// in effect.
   ///
   /// Recommend sticking to surface colors, but if ScaffoldBackground is
   /// only as a background effect color, it is feasible to use any ColorScheme
@@ -1601,8 +1623,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, defaults to:
   ///
-  /// - If [useMaterial3] is false [switchSchemeColor].
-  /// - If [useMaterial3 ]is true [SchemeColor.primaryContainer].
+  /// - [switchSchemeColor] if [FlexColorScheme.useMaterial3] is false.
+  /// - [SchemeColor.primaryContainer] if [FlexColorScheme.useMaterial3] is true
   final SchemeColor? switchThumbSchemeColor;
 
   /// Set to true to keep the [Switch] thumb size fixed.
@@ -1648,7 +1670,8 @@ class FlexSubThemesData with Diagnosticable {
   /// the [switchSchemeColor] property of the Switch theming properties
   /// will impact the style, other Switch theming properties will be ignored.
   ///
-  /// This feature only has any impact when [useMaterial3] is true.
+  /// This feature only has any impact when
+  /// [FlexColorScheme.useMaterial3] is true.
   ///
   /// If not defined, defaults to [FlexAdaptive.off].
   final FlexAdaptive? switchAdaptiveCupertinoLike;
@@ -1708,10 +1731,11 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// Flutter SDK use neutral grey for switches, checkboxes and radio buttons
   /// when they are not selected. To some this may even look like it is
-  /// disabled. By setting [unselectedSwitchesIsColored] to true, they
-  /// use their themed color also in the unselected state. The [Checkbox] and
-  /// [Radio] use their theme color in the outline. The [Switch] has just a hint
-  /// of its themed color in it inactive track.
+  /// disabled. By setting [unselectedToggleIsColored] to true, they
+  /// use their themed color also in the unselected state.
+  ///
+  /// * The [Checkbox] and [Radio] use their theme color in the outline.
+  /// * The [Switch] has just a hint of its themed color in it inactive track.
   ///
   /// Defaults to false, set it to for slightly different style.
   final bool unselectedToggleIsColored;
@@ -1778,9 +1802,11 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The border radius value for themed [InputDecoration].
   ///
-  /// If not defined and [defaultRadius] is undefined, defaults to
-  /// [kInputDecoratorRadius] = 10dp if [useMaterial3] is false and to
-  /// [kInputDecoratorM3Radius] = 4dp if [useMaterial3] is true.
+  /// If not defined and [defaultRadius] is undefined, then defaults to:
+  /// * [kInputDecoratorRadius] = 10dp, if [FlexColorScheme.useMaterial3]
+  ///   is false.
+  /// * [kInputDecoratorM3Radius] = 4dp, if [FlexColorScheme.useMaterial3]
+  ///   is true.
   final double? inputDecoratorRadius;
 
   /// The [inputDecoratorRadiusAdaptive] has the same definition and usage as
@@ -1793,9 +1819,11 @@ class FlexSubThemesData with Diagnosticable {
   /// more platform agnostic design on other platforms than Android and Fuchsia.
   ///
   /// If not defined, and [defaultRadiusAdaptive], [defaultRadius] and
-  /// [inputDecoratorRadius] are undefined, defaults to
-  /// [kInputDecoratorRadius] = 10dp if [useMaterial3] is false and to
-  /// [kInputDecoratorM3Radius] = 4dp if [useMaterial3] is true.
+  /// [inputDecoratorRadius] are undefined, then defaults to:
+  /// * [kInputDecoratorRadius] = 10dp, if [FlexColorScheme.useMaterial3]
+  ///   is false.
+  /// * [kInputDecoratorM3Radius] = 4dp, if [FlexColorScheme.useMaterial3]
+  ///   is true.
   final double? inputDecoratorRadiusAdaptive;
 
   /// Defines which [Theme] based [ColorScheme] color the input decorator
@@ -1813,22 +1841,24 @@ class FlexSubThemesData with Diagnosticable {
   /// The padding for the input decoration's container.
   ///
   /// The decoration's container is the area which is filled if
-  /// [InputDecoration.filled] is true and bordered per the [border].
+  /// [InputDecoration.filled] is true and bordered per the
+  /// [InputDecoration.border].
   /// It's the area adjacent to [InputDecoration.icon] and above the
   /// [InputDecoration.icon] and above the widgets that contain
   /// [InputDecoration.helperText], [InputDecoration.errorText], and
   /// [InputDecoration.counterText].
   ///
-  /// By default the [contentPadding] reflects [isDense] and the type of the
-  /// [border]. If [isCollapsed] is true then [contentPadding] is
-  /// [EdgeInsets.zero].
+  /// By default the [inputDecoratorContentPadding] reflects
+  /// [inputDecoratorIsDense] and the
+  /// type of the [InputDecoration.border]. If [InputDecoration.isCollapsed]
+  /// is true then [inputDecoratorContentPadding] is [EdgeInsets.zero].
   ///
   /// When [inputDecoratorIsDense] is true, the content padding can be made
   /// smaller and tighter than when it is false.
   ///
   /// If no [inputDecoratorContentPadding] is given, Flutter SDK uses default
-  /// padding values that depends on if [isDense] is true or false and if we
-  /// use outline or underline border.
+  /// padding values that depends on if [inputDecoratorIsDense] is true or
+  /// false and if we use outline or underline border.
   final EdgeInsetsGeometry? inputDecoratorContentPadding;
 
   /// Whether the input decorator's child is part of a dense form (i.e., uses
@@ -1862,8 +1892,8 @@ class FlexSubThemesData with Diagnosticable {
   /// it is capped at closer value.
   ///
   /// If not defined, in M3 mode it defaults to 0xFF fully opaque. In M2 mode
-  /// defaults to [kFillColorAlphaLight] (0x0D = 5% opacity) in light theme and
-  /// to [kFillColorAlphaDark] (0x14 = 8% opacity) in dark mode.
+  /// defaults to [kFillColorLightOpacity] (0x0D = 5% opacity) in light theme
+  /// and to [kFillColorDarkOpacity] (0x14 = 8% opacity) in dark mode.
   ///
   /// The border [inputDecoratorBorderSchemeColor] can be used to define the
   /// border color separately, but it defaults to this color if not defined.
@@ -1934,7 +1964,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// The default design in FlexColorScheme when this is true, creates
   /// unfocused border that use [inputDecoratorSchemeColor] as it s color with
-  /// alpha set to [kEnabledBorderAlpha] (90%) using the [thinBorderWidth] as
+  /// alpha set to [kEnabledBorderOpacity] (90%) using the [thinBorderWidth] as
   /// its width.
   ///
   /// When false the border/underline will revert back to using Flutter M2
@@ -1974,16 +2004,16 @@ class FlexSubThemesData with Diagnosticable {
   /// the field.
   ///
   /// If not defined, defaults to [inputDecoratorSchemeColor] and if it is
-  /// not defined [colorScheme.primary] is used.
+  /// not defined [ColorScheme.primary] is used.
   final SchemeColor? inputCursorSchemeColor;
 
   /// The [SchemeColor] based background color of selected text.
   ///
   /// If not defined, defaults to [inputDecoratorSchemeColor] and if it is
-  /// not defined [colorScheme.primary] is used.
+  /// not defined [ColorScheme.primary] is used.
   final SchemeColor? inputSelectionSchemeColor;
 
-  /// The opacity applied to [selectionSchemeColor].
+  /// The opacity applied to [inputSelectionSchemeColor].
   ///
   /// If not defined, defaults to [kTextSelectionLightOpacity] = 0.3 (30%) in
   /// light mode and to [kTextSelectionDarkOpacity] = 0.5 (50%) in dark mode.
@@ -2007,29 +2037,32 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [ColorScheme.primary].
   final SchemeColor? listTileSelectedSchemeColor;
 
-  /// Defines the default color for ListTile [leading] and [trailing] icons.
+  /// Defines the default color for [ListTile.leading] and
+  /// [ListTile.trailing] icons.
   ///
-  /// If this property is null and [selected] is false then this color is used.
+  /// If this property is null and [ListTile.selected] is false then this
+  /// color is used.
   ///
   /// If null and [ThemeData.useMaterial3] is true,
   /// [ColorScheme.onSurfaceVariant] is used, otherwise in M2 and if
   /// [ThemeData.brightness] is [Brightness.light], [Colors.black54] is used,
   /// and if [ThemeData.brightness] is [Brightness.dark], the value is null.
   ///
-  /// If [selected] is true then [listTileSelectedSchemeColor] is used. If
-  /// it is null then [ColorScheme.primary] is used.
+  /// If [ListTile.selected] is true then [listTileSelectedSchemeColor] is
+  /// used. If it is null then [ColorScheme.primary] is used.
   final SchemeColor? listTileIconSchemeColor;
 
-  /// Defines the text color for the [title], [subtitle], [leading], and
-  /// [trailing].
+  /// Defines the text color for the [ListTile.title], [ListTile.subtitle],
+  /// [ListTile.leading] and [ListTile.trailing] widgets when they are [Text].
   ///
-  /// If this property is null and [selected] is false then
+  /// If this property is null and [ListTile.selected] is false then
   /// [ListTileThemeData.textColor] is used. If that is also null then
-  /// default text color is used for the [title], [subtitle], [leading], and
-  /// [trailing]. Except for [subtitle], if [ThemeData.useMaterial3] is false,
+  /// default text color is used for the [ListTile.title], [ListTile.subtitle],
+  /// [ListTile.leading], and [ListTile.trailing]. Except for
+  /// [ListTile.subtitle], if [ThemeData.useMaterial3] is false,
   /// [TextTheme.bodySmall] is used.
   ///
-  /// If this property is null and [selected] is true then
+  /// If this property is null and [ListTile.selected] is true then
   /// [ListTileThemeData.selectedColor] is used. If that is also null
   /// then [ColorScheme.primary] is used.
   ///
@@ -2037,7 +2070,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [WidgetState.selected] and [WidgetState.disabled] states.
   final SchemeColor? listTileTextSchemeColor;
 
-  /// The text style for ListTile's [title].
+  /// The text style for ListTile's [ListTile.title].
   ///
   /// If this property is null, then [ListTileThemeData.titleTextStyle] is
   /// used.
@@ -2050,7 +2083,7 @@ class FlexSubThemesData with Diagnosticable {
   /// is [ListTileStyle.drawer], [TextTheme.bodyLarge] will be used.
   final TextStyle? listTileTitleTextStyle;
 
-  /// The text style for ListTile's [subtitle].
+  /// The text style for ListTile's [ListTile.subtitle].
   ///
   /// If this property is null, then [ListTileThemeData.subtitleTextStyle]
   /// is used.
@@ -2061,7 +2094,7 @@ class FlexSubThemesData with Diagnosticable {
   /// be used.
   final TextStyle? listTileSubtitleTextStyle;
 
-  /// The text style for ListTile's [leading] and [trailing].
+  /// The text style for ListTile's [ListTile.leading] and [ListTile.trailing].
   ///
   /// If this property is null, then
   /// [ListTileThemeData.leadingAndTrailingTextStyle] is used.
@@ -2071,27 +2104,29 @@ class FlexSubThemesData with Diagnosticable {
   /// otherwise [TextTheme.bodyMedium] will be used.
   final TextStyle? listTileLeadingAndTrailingTextStyle;
 
-  /// Defines the background color of `ListTile` when [selected] is false.
+  /// Defines the background color of [ListTile] when
+  /// [ListTile.selected] is false.
   ///
-  /// If this property is null and [selected] is false then
+  /// If this property is null and [ListTile.selected] is false then
   /// [ListTileThemeData.tileColor] is used. If that is also null and
-  /// [selected] is true, [selectedTileColor] is used.
+  /// [ListTile.selected] is true, [ListTile.selectedTileColor] is used.
   ///
   /// When that is also null, the [ListTileTheme.selectedTileColor] is used,
   /// otherwise [Colors.transparent] is used.
   final SchemeColor? listTileTileSchemeColor;
 
-  /// Defines the background color of `ListTile` when [selected] is true.
+  /// Defines the background color of [ListTile] when
+  /// [ListTile.selected] is true.
   ///
-  /// When the value if null, the [selectedTileColor] is set to
+  /// When the value if null, the [ListTile.selectedTileColor] is set to
   /// [ListTileTheme.selectedTileColor] if it's not null and to
   /// [Colors.transparent] if it's null.
   final SchemeColor? listTileSelectedTileSchemeColor;
 
   /// The ListTile's title internal padding.
   ///
-  /// Insets a [ListTile]'s contents: its [leading], [title], [subtitle],
-  /// and [trailing] widgets.
+  /// Insets a [ListTile]'s contents: its [ListTile.leading], [ListTile.title],
+  /// [ListTile.subtitle] and [ListTile.trailing] widgets.
   ///
   ///
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used, if
@@ -2099,19 +2134,19 @@ class FlexSubThemesData with Diagnosticable {
   /// `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` is used.
   final EdgeInsetsGeometry? listTileContentPadding;
 
-  /// The horizontal gap between the LitTile titles and the leading/trailing
+  /// The horizontal gap between the [ListTile] titles and the leading/trailing
   /// widgets.
   ///
   /// If not defined, defaults to 16.
   final double? listTileHorizontalTitleGap;
 
-  /// The minimum padding on the top and bottom of the title and subtitle
-  /// widgets on the ListTile.
+  /// The minimum padding on the top and bottom of the [ListTile.title] and
+  /// [ListTile.subtitle] widgets on the [ListTile].
   ///
   /// If not defined, defaults to 4.
   final double? listTileMinVerticalPadding;
 
-  /// Defines the font used for the ListTile title.
+  /// Defines the font used for the [ListTile.title].
   ///
   /// If this property is null then [ListTileThemeData.style] is used. If that
   /// is also null then [ListTileStyle.list] is used.
@@ -2210,7 +2245,6 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Border radius value for [Chip] widgets.
   ///
-  ///
   /// If not defined and [defaultRadius] is undefined, defaults to
   /// [kChipRadius] 8dp, based on M3 Specification
   /// https://m3.material.io/components/chips/specs
@@ -2231,12 +2265,12 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the Chips
   /// use as their background base color.
   ///
-  /// If not defined and [useMaterial3] is true, it defaults
+  /// If not defined and [FlexColorScheme.useMaterial3] is true, it defaults
   /// [SchemeColor.surface].
   ///
-  /// If not defined and [useMaterial3] is false, it defaults
+  /// If not defined and [FlexColorScheme.useMaterial3] is false, it defaults
   /// [SchemeColor.primary] with a surface alpha blend of
-  /// [kChipBackgroundAlphaBlend] applied, if [blendColors] is true,
+  /// [kChipBackgroundAlphaBlend] applied, if [chipBlendColors] is true,
   /// which it defaults to in Material-2 mode.
   final SchemeColor? chipSchemeColor;
 
@@ -2244,14 +2278,15 @@ class FlexSubThemesData with Diagnosticable {
   /// use as their selected state color.
   ///
   /// The color scheme contrast pair color is used for text and icons, on the
-  /// [selectedSchemeColor].
+  /// [chipSelectedSchemeColor].
   ///
-  /// If not defined and [useMaterial3] is true, defaults to
+  /// If not defined and [FlexColorScheme.useMaterial3] is true, defaults to
   /// [SchemeColor.secondaryContainer].
   ///
-  /// If not defined and [useMaterial3] is false, defaults to
-  /// [SchemeColor.secondaryContainer] if [blendColors] is false.
-  /// If [blendColors] is true, defaults to [SchemeColor.primary] with
+  /// If not defined and [FlexColorScheme.useMaterial3] is false, defaults to
+  /// [SchemeColor.secondaryContainer] if [chipBlendColors] is false.
+  ///
+  /// If [chipBlendColors] is true, defaults to [SchemeColor.primary] with
   /// a surface alpha blend of [kChipSelectedBackgroundAlphaBlend] applied.
   final SchemeColor? chipSelectedSchemeColor;
 
@@ -2259,10 +2294,10 @@ class FlexSubThemesData with Diagnosticable {
   /// [ChoiceChip] use as their selected state color.
   ///
   /// The color scheme contrast pair color is used for text and icons, on the
-  /// [secondarySelectedSchemeColor].
+  /// [chipSecondarySelectedSchemeColor].
   ///
-  /// If not defined and [useMaterial3] is true, defaults to
-  /// [selectedSchemeColor].
+  /// If not defined and [FlexColorScheme.useMaterial3] is true, defaults to
+  /// [chipSelectedSchemeColor].
   final SchemeColor? chipSecondarySelectedSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
@@ -2327,7 +2362,7 @@ class FlexSubThemesData with Diagnosticable {
   final double? chipIconSize;
 
   /// Overrides the default for [ChipAttributes.padding],
-  /// the padding between the contents of the chip and the outside [shape].
+  /// the padding between the contents of the chip and the chip edge.
   ///
   /// This property applies to [ActionChip], [Chip], [ChoiceChip],
   /// [FilterChip], [InputChip], [RawChip].
@@ -2346,11 +2381,9 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of [Card].
   ///
-  /// This design favors a flat design using color branded tint on card
-  /// background, and defaults to [kCardElevation] = 0 as default
-  /// themed elevation on [Card] widgets.
-  ///
-  /// If not defined, defaults to [kCardElevation] = 0dp.
+  /// If not defined, defaults Flutter SDK defaults. For the default [Card]
+  /// constructor this is 1.0. For [Card.filled] and [Card.outlined]
+  /// constructors this is 0.0.
   final double? cardElevation;
 
   /// Border radius override value for the menu on [PopupMenuButton].
@@ -2368,7 +2401,7 @@ class FlexSubThemesData with Diagnosticable {
   /// It will still look fairly OK with a border radius of max 12, the selected
   /// item highlight corner overflow at top and bottom is barely visible. If
   /// you configure it manually, max 12 might still be considered usable.
-  /// To be on the safe side it only follows the [defaultBorder] to max 10.
+  /// To be on the safe side it only follows the [defaultRadius] to max 10.
   ///
   /// The built-in behavior in FlexColorScheme allows it to match at low
   /// inherited default radius values, but to also stay below the usable max
@@ -2381,7 +2414,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Default elevation of [PopupMenuButton].
   ///
-  /// If not defined, then if [useMaterial3] is:
+  /// If not defined, then if [FlexColorScheme.useMaterial3] is:
   ///
   /// - false : defaults to [kPopupMenuM2Elevation] = 6 dp.
   /// - true  : defaults to [kPopupMenuM3Elevation] = 3 dp.
@@ -2389,9 +2422,10 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The ColorScheme based color used as background color on [PopupMenuButton].
   ///
-  /// If not defined, then if [useMaterial3] is:
+  /// If not defined, then if [FlexColorScheme.useMaterial3] is:
   /// - false : defaults to theme.cardColor.
   /// - true  : defaults to theme.colorScheme.surface.
+  ///
   /// Usually they are the same.
   final SchemeColor? popupMenuSchemeColor;
 
@@ -2401,7 +2435,7 @@ class FlexSubThemesData with Diagnosticable {
   /// fully opaque.
   final double? popupMenuOpacity;
 
-  /// The [TextStyle] of the text entry in a [DropDownMenu].
+  /// The [TextStyle] of the text entry in a [DropdownMenu].
   ///
   /// If not defined, defaults to [TextTheme.bodyLarge] this size matches
   /// the default on the menu entries and in a normal [TextField].
@@ -2411,7 +2445,8 @@ class FlexSubThemesData with Diagnosticable {
   /// https://github.com/flutter/flutter/issues/131350
   final TextStyle? dropdownMenuTextStyle;
 
-  /// The border radius of [Menu] containers.
+  /// The border radius of [MenuBar], [MenuAnchor] and [DropdownMenu]
+  /// containers.
   ///
   /// When used by [FlexColorScheme] the border radius of menus follows
   /// the [defaultRadius] until and including 10 dp. After which it stays at
@@ -2426,7 +2461,7 @@ class FlexSubThemesData with Diagnosticable {
   /// It will still look fairly OK with a border radius of max 12, the selected
   /// item highlight corner overflow at top and bottom is barely visible. If
   /// you configure it manually, max 12 might still be considered usable.
-  /// To be on the safe side it only follows the [defaultBorder] to max 10.
+  /// To be on the safe side it only follows the [defaultRadius] to max 10.
   ///
   /// The built-in behavior in FlexColorScheme allows it to match at low
   /// inherited default radius values, but to also stay below the usable max
@@ -2437,13 +2472,13 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/menus/specs.
   final double? menuRadius;
 
-  /// The elevation of [Menu] containers.
+  /// The elevation of [MenuBar], [MenuAnchor] and [DropdownMenu] containers.
   ///
   /// If not defined, defaults to 3 via Flutter SDK default.
   final double? menuElevation;
 
   /// The ColorScheme based color used as background color on [MenuBar],
-  /// [MenuAnchor] and [DropDownMenu].
+  /// [MenuAnchor] and [DropdownMenu].
   ///
   /// If not defined, defaults to surface.
   final SchemeColor? menuSchemeColor;
@@ -2451,7 +2486,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Menu background opacity.
   ///
   /// Used by FlexColorScheme to modify the opacity the themed [MenuBar],
-  /// [MenuAnchor] and [DropDownMenu] background color.
+  /// [MenuAnchor] and [DropdownMenu] background color.
   ///
   /// Defaults to undefined (null).
   /// If undefined, produced result is same as 1, fully opaque.
@@ -2467,8 +2502,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The style for a menu button's [Text] widget descendants.
   ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundSchemeColor] is used instead.
+  /// The color of the [menuButtonTextStyle] is typically not used directly, the
+  /// [menuSchemeColor] complement pair is used instead.
   final WidgetStateProperty<TextStyle?>? menuButtonTextStyle;
 
   /// Select which color from active [ColorScheme] to use as background color
@@ -2519,8 +2554,8 @@ class FlexSubThemesData with Diagnosticable {
   /// the highlighted [SubmenuButton]s and [MenuItemButton]s indicator
   /// background color.
   ///
-  /// If not defined, defaults to [backgroundSchemeColor] and the indicator
-  /// only get overlay color for hover, focus and press states.
+  /// If not defined, defaults to [menuItemBackgroundSchemeColor] and the
+  /// indicator only get overlay color for hover, focus and press states.
   ///
   /// The overlay style can be tinted using [interactionEffects].
   final SchemeColor? menuIndicatorBackgroundSchemeColor;
@@ -2599,13 +2634,13 @@ class FlexSubThemesData with Diagnosticable {
   /// [Theme]. The default text color is [ColorScheme.onSurface].
   final TextStyle? searchViewHeaderTextStyle;
 
-  /// The style to use for the [hintText] in the search bar.
+  /// The style to use for the hint text in the search bar.
   ///
   /// If null, defaults to `bodyLarge` text style from the current [Theme].
   /// The default text color is [ColorScheme.onSurfaceVariant].
   final WidgetStateProperty<TextStyle?>? searchBarHintStyle;
 
-  /// The style to use for the [hintText] in the search view.
+  /// The style to use for the hint text in the search view.
   ///
   /// If null, defaults to `bodyLarge` text style from the current [Theme].
   /// The default text color is [ColorScheme.onSurfaceVariant].
@@ -2614,7 +2649,7 @@ class FlexSubThemesData with Diagnosticable {
   /// The color of the divider on the search view.
   ///
   /// If this property is null, the default value is
-  /// [ThemeData.dividerTheme.color] if it is null, then the default value is
+  /// `ThemeData.dividerTheme.color` if it is null, then the default value is
   /// [ColorScheme.outline].
   final Color? searchViewDividerColor;
 
@@ -2651,7 +2686,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// By default, the search view has the same width as the anchor and is 2/3
   /// the height of the screen. If the width and height of the view are within
-  /// the [viewConstraints], the view will show its default size. Otherwise,
+  /// the view constraints, the view will show its default size. Otherwise,
   /// the size of the view will be constrained by this property.
   ///
   /// If null, the constraints defaults to:
@@ -2661,7 +2696,7 @@ class FlexSubThemesData with Diagnosticable {
   /// ```
   final BoxConstraints? searchViewConstraints;
 
-  /// Border radius value for [Tooltips].
+  /// Border radius value for [Tooltip].
   ///
   /// If not defined and, defaults to [kTooltipRadius].
   final double? tooltipRadius;
@@ -2678,7 +2713,7 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to Flutter SDK default 1500ms.
   final Duration? tooltipShowDuration;
 
-  /// The ColorScheme based color used as background color on [Tooltips].
+  /// The ColorScheme based color used as background color on [Tooltip]s.
   ///
   /// If defined this overrides the style set via
   /// [FlexColorScheme.tooltipsMatchBackground].
@@ -2745,29 +2780,15 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [kDialogElevation] = 6.
   final double? dialogElevation;
 
-  /// Defines which [Theme] based [ColorScheme] based color dialogs use as
-  /// as their background color.
+  /// Defines which [Theme] based [ColorScheme] color, dialogs use as
+  /// their background color.
   ///
-  /// This will affect both background in [DialogTheme] and
+  /// This will affect default background color in [DialogThemeData] and
   /// [TimePickerThemeData].
   ///
-  /// If undefined, defaults to [SchemeColor.surface].
-  ///
-  /// If set to null [Dialog] will use its Flutter SDK default, which is
-  /// [ThemeData.dialogBackgroundColor] which is [ColorScheme.surface].
-  ///
-  /// Since FlexColorScheme also sets [ThemeData.dialogBackgroundColor] to
-  /// [ColorScheme.surface], there is no difference when using FlexColorscheme
-  /// and setting [dialogBackgroundSchemeColor] to null versus keeping it
-  /// at its default value [SchemeColor.surface]. This is valid as long as
-  /// [ThemeData.dialogBackgroundColor] exists, but it will be in deprecated,
-  /// see issue https://github.com/flutter/flutter/issues/91772.
-  /// After that there will be a difference.
-  ///
-  /// Using surface color as default instead of background,
-  /// ensures that dark mode dialogs will get elevation overlay in Material 2
-  /// color, also when surface and background color are not equal.
-  /// See issue: https://github.com/flutter/flutter/issues/90353
+  /// If undefined, dialogs will use Flutter SDK default, which is
+  /// [ColorScheme.surface] in Material-2 mode and
+  /// [ColorScheme.surfaceContainerHigh] in Material-3 mode.
   final SchemeColor? dialogBackgroundSchemeColor;
 
   /// Overrides the default value for [DefaultTextStyle] for
@@ -2793,10 +2814,11 @@ class FlexSubThemesData with Diagnosticable {
   /// The dialog's header displays the currently selected date.
   ///
   /// This is used instead of the [TextStyle.color] property of
-  /// [headerHeadlineStyle] and [headerHelpStyle].
+  /// [datePickerHeaderHeadlineStyle] and
+  /// [datePickerRangePickerHeaderHelpStyle].
   ///
   /// If not defined, defaults to correct contrast pair for the used
-  /// [headerBackgroundSchemeColor], with a preference to
+  /// [datePickerHeaderBackgroundSchemeColor], with a preference to
   /// [SchemeColor.onSurfaceVariant] if any surface color is used as the
   /// background color.
   final SchemeColor? datePickerHeaderForegroundSchemeColor;
@@ -2912,8 +2934,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The [TextStyle] for the numbers on the time selection dial.
   ///
-  /// If [dialTextStyle]'s [TextStyle.color] is a [WidgetStateColor], then
-  /// the effective text color can depend on the [WidgetState.selected]
+  /// If [timePickerDialTextStyle]'s [TextStyle.color] is a [WidgetStateColor],
+  /// then the effective text color can depend on the [WidgetState.selected]
   /// state, i.e. if the text is selected or not.
   ///
   /// If this style is null then the dial's text style is based on the theme's
@@ -2929,7 +2951,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Used to configure the [TextStyle]s for the hour/minute controls.
   ///
   /// If this is null, the time picker defaults to the overall theme's
-  /// [TextTheme.headline3].
+  /// [TextTheme.displayMedium].
   final TextStyle? timePickerHourMinuteTextStyle;
 
   /// Corner radius of the [SnackBar].
@@ -3000,8 +3022,8 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If not defined, [AppBar] uses the color defined in
   /// [FlexColorScheme.appBarBackground]. If made with [FlexColorScheme.light]
-  /// or [FlexColorScheme.dark], then the enum [FlexAppBarStyle] in property
-  /// [appBarStyle], is used to determine the [AppBar] color and background.
+  /// or [FlexColorScheme.dark], then the enum [FlexAppBarStyle] in parameter
+  /// `appBarStyle`, is used to determine the [AppBar] color and background.
   ///
   /// The themed [AppBar] background color is typically determined by defined
   /// [FlexAppBarStyle] in [FlexColorScheme.light] or [FlexColorScheme.dark].
@@ -3083,8 +3105,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines which [Theme] based [ColorScheme] based color the [TabBar]
   /// items use.
   ///
-  /// If not defined, then [TabBar] uses the enum [FlexTabBarStyle] property
-  /// [tabBarStyle] in factories [FlexColorScheme.light] or
+  /// If not defined, then [TabBar] uses the enum [FlexTabBarStyle] parameter
+  /// `tabBarStyle`] in factories [FlexColorScheme.light] or
   /// [FlexColorScheme.dark] to determine the [TabBar] selected and
   /// unselected item color.
   ///
@@ -3106,8 +3128,8 @@ class FlexSubThemesData with Diagnosticable {
   /// [tabBarUnselectedItemOpacity] applied.
   ///
   /// if not defined and [tabBarItemSchemeColor] is also not defined,
-  /// then [TabBar] uses the enum [FlexTabBarStyle] property
-  /// [tabBarStyle] in factories [FlexColorScheme.light] or
+  /// then [TabBar] uses the enum [FlexTabBarStyle] parameter
+  /// `tabBarStyle`] in factories [FlexColorScheme.light] or
   /// [FlexColorScheme.dark] to determine the [TabBar] selected and
   /// unselected item color.
   ///
@@ -3147,9 +3169,9 @@ class FlexSubThemesData with Diagnosticable {
   /// Defines how the selected tab indicator's size is computed.
   ///
   /// The size of the selected tab indicator is defined relative to the
-  /// tab's overall bounds if [indicatorSize] is [TabBarIndicatorSize.tab]
+  /// tab's overall bounds if [tabBarIndicatorSize] is [TabBarIndicatorSize.tab]
   /// (the default) or relative to the bounds of the tab's widget if
-  /// [indicatorSize] is [TabBarIndicatorSize.label].
+  /// [tabBarIndicatorSize] is [TabBarIndicatorSize.label].
   final TabBarIndicatorSize? tabBarIndicatorSize;
 
   /// The thickness of the underline border indicator on the [TabBar].
@@ -3165,7 +3187,8 @@ class FlexSubThemesData with Diagnosticable {
 
   /// The color of the divider.
   ///
-  /// If null and [ThemeData.useMaterial3] is true, [TabBarTheme.dividerColor]
+  /// If null and [ThemeData.useMaterial3] is true,
+  /// [TabBarThemeData.dividerColor]
   /// color is used. If that is null and [ThemeData.useMaterial3] is true,
   /// [ColorScheme.outlineVariant] will be used, otherwise divider will
   /// not be drawn.
@@ -3181,21 +3204,23 @@ class FlexSubThemesData with Diagnosticable {
   /// [TabAlignment.startOffset], and [TabAlignment.center] are supported.
   /// Otherwise an exception is thrown.
   ///
-  /// If this is null, then the value of [TabBarTheme.tabAlignment] is used.
+  /// If this is null, then the value of [TabBarThemeData.tabAlignment] is used.
   ///
-  /// If [TabBarTheme.tabAlignment] is null and [ThemeData.useMaterial3] is
-  /// true, then [TabAlignment.startOffset] is used if [isScrollable] is true,
-  /// otherwise [TabAlignment.fill] is used.
+  /// If [TabBarThemeData.tabAlignment] is null and [ThemeData.useMaterial3] is
+  /// true, then [TabAlignment.startOffset] is used if [TabBar.isScrollable]
+  /// is true, otherwise [TabAlignment.fill] is used.
   ///
-  /// If [TabBarTheme.tabAlignment] is null and [ThemeData.useMaterial3] is
-  /// false, then [TabAlignment.center] is used if [isScrollable] is true,
-  /// otherwise [TabAlignment.fill] is used.
+  /// If [TabBarThemeData.tabAlignment] is null and [ThemeData.useMaterial3] is
+  /// false, then [TabAlignment.center] is used if [TabBar.isScrollable] is
+  /// true, otherwise [TabAlignment.fill] is used.
   ///
-  /// In M3 the default is [TabAlignment.startOffset] if [TabBar] property
-  /// [isScrollable] is true, if false the default is [TabAlignment.fill].
+  /// In Material-3 the default is [TabAlignment.startOffset] if [TabBar]
+  /// property [TabBar.isScrollable] is true, if false the default is
+  /// [TabAlignment.fill].
   ///
-  /// In M2 the default is [TabAlignment.start] if [TabBar] property
-  /// [isScrollable] is true, if false the default is [TabAlignment.fill].
+  /// In Material-2 the default is [TabAlignment.start] if [TabBar] property
+  /// [TabBar.isScrollable] is true, if false, the default is
+  /// [TabAlignment.fill].
   ///
   /// **NOTE:**
   ///
@@ -3219,8 +3244,8 @@ class FlexSubThemesData with Diagnosticable {
   /// Specifies the animation behavior of the tab indicator in a [TabBar].
   ///
   /// If not defined, the tab indicator will animate linearly if
-  /// the [indicatorSize] is [TabBarIndicatorSize.tab], otherwise it will
-  /// animate with an elastic effect if the [indicatorSize] is
+  /// the [tabBarIndicatorSize] is [TabBarIndicatorSize.tab], otherwise it will
+  /// animate with an elastic effect if the [tabBarIndicatorSize] is
   /// [TabBarIndicatorSize.label].
   final TabIndicatorAnimation? tabBarIndicatorAnimation;
 
@@ -3242,8 +3267,8 @@ class FlexSubThemesData with Diagnosticable {
   /// If not defined, defaults to [SchemeColor.surfaceContainerLow].
   ///
   /// Flutter SDK uses surfaceContainerLow color as default in M3 and
-  /// ThemeData's canvasColor in M2 mode, which is Colors.grey[50] in
-  /// light mode and Colors.grey[850] in dark mode.
+  /// ThemeData's canvasColor in M2 mode, which is Colors.grey(50) in
+  /// light mode and Colors.grey(850) in dark mode.
   final SchemeColor? drawerBackgroundSchemeColor;
 
   /// Defines the width of [Drawer] and [NavigationDrawer].
@@ -3336,21 +3361,25 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Elevation of none modal [BottomSheet].
   ///
-  /// If null, defaults to [kBottomSheetElevation] = 1, if [useMaterial3]
-  /// is true, and to [kBottomSheetElevationM2] = 4, if false.
+  /// If null, defaults to [kBottomSheetElevation] = 1, if
+  /// [FlexColorScheme.useMaterial3]
+  /// is true, and to [kBottomSheetElevationM2] = 4, if
+  /// [FlexColorScheme.useMaterial3] is false.
   final double? bottomSheetElevation;
 
   /// Elevation of modal [BottomSheet].
   ///
-  /// If null, defaults to [kBottomSheetModalElevation] = 2, if [useMaterial3]
-  /// is true, and to [kBottomSheetModalElevationM2] = 8 if false.
+  /// If null, defaults to [kBottomSheetModalElevation] = 2, if
+  /// [FlexColorScheme.useMaterial3] is true, and to
+  /// [kBottomSheetModalElevationM2] = 8 if [FlexColorScheme.useMaterial3]
+  /// is false.
   final double? bottomSheetModalElevation;
 
   /// Defines the bottom sheet's [Material.clipBehavior]
   /// by overriding the default value for [BottomSheet.clipBehavior].
   ///
   /// Use this property to enable clipping of content when the bottom sheet
-  /// has a custom [shape] and the content can extend past this shape.
+  /// has a custom shape and the content can extend past this shape.
   /// For example, a bottom sheet with rounded corners and an edge-to-edge
   /// [Image] at the top.
   ///
@@ -3366,7 +3395,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [BottomNavigationBar] labels.
   ///
-  /// If not defined, the text style [bodyMedium]
+  /// If not defined, the text style [TextTheme.bodyMedium]
   /// will be used as base style for the text style.
   ///
   /// The size and colors defined in any of the text size and color properties
@@ -3382,8 +3411,8 @@ class FlexSubThemesData with Diagnosticable {
   /// The size of the text label on unselected [BottomNavigationBar] items.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
-  /// on unselected items. Defaults to [selectedLabelSize] - 2, but min 8.
-  /// Smaller than 8dp is not legible on most screens.
+  /// on unselected items. Defaults to [bottomNavigationBarSelectedLabelSize]-2,
+  /// but min 8. Smaller than 8dp is not legible on most screens.
   ///
   /// [BottomNavigationBar] uses this -2dp smaller font on the unselected
   /// label as default, since it is so based on Material 2 spec. By assigning
@@ -3528,7 +3557,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [BottomNavigationBarType.shifting] is used for 4+ items.
   final BottomNavigationBarType? bottomNavigationBarType;
 
-  /// The arrangement of the bottom navigation bar's [items] when the enclosing
+  /// The arrangement of the [BottomNavigationBar.items] when the enclosing
   /// [MediaQueryData.orientation] is [Orientation.landscape].
   ///
   /// The following alternatives are supported:
@@ -3559,8 +3588,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [NavigationBar] labels.
   ///
-  /// The text style
-  /// [ThemeData.textTheme.labelMedium]  will be used as base style for the
+  /// The text style [TextTheme.labelMedium]  will be used as base style for the
   /// text style.
   ///
   /// The size and colors defined in any of the text size and color properties
@@ -3757,7 +3785,7 @@ class FlexSubThemesData with Diagnosticable {
 
   /// Optional text style for the [NavigationRail] labels.
   ///
-  /// The text style [ThemeData.textTheme.labelMedium] is used as base
+  /// The text style [TextTheme.labelMedium] is used as base
   /// style for the text style.
   ///
   /// If all label modifying properties (size and scheme color) are null, it
@@ -3795,7 +3823,7 @@ class FlexSubThemesData with Diagnosticable {
 
   // TODO(rydmike): Report spec bug issue and add link
   /// Select which color from the theme's [ColorScheme] to use for
-  /// the [NavigationRails]'s unselected label text color.
+  /// the [NavigationRail]'s unselected label text color.
   ///
   /// When undefined, if [navigationRailBackgroundSchemeColor] is
   /// using any of the surface colors, the default on pair used will be
@@ -3883,8 +3911,9 @@ class FlexSubThemesData with Diagnosticable {
   /// If `true`, adds a rounded [NavigationIndicator] behind the selected
   /// destination's icon.
   ///
-  /// The indicator's shape will be circular if [labelType] is
-  /// [NavigationRailLabelType.none], or a [StadiumBorder] if [labelType] is
+  /// The indicator's shape will be circular if [navigationRailLabelType] is
+  /// [NavigationRailLabelType.none], or a [StadiumBorder] if
+  /// [navigationRailLabelType] is
   /// [NavigationRailLabelType.all] or [NavigationRailLabelType.selected].
   ///
   /// If undefined, defaults to [ThemeData.useMaterial3]. Indicator is used by
@@ -3894,7 +3923,7 @@ class FlexSubThemesData with Diagnosticable {
   final bool? navigationRailUseIndicator;
 
   /// Select which color from the theme [ColorScheme] to use for
-  /// the selected [NavigationRails]'s highlighted item.
+  /// the selected [NavigationRail]'s highlighted item.
   ///
   /// If undefined, defaults to [SchemeColor.secondaryContainer].
   ///
@@ -3943,27 +3972,34 @@ class FlexSubThemesData with Diagnosticable {
   ///   rail item.
   /// * [NavigationRailLabelType.all] label is shown on all rail items.
   ///
-  /// When a navigation rail is [extended], the labels are always shown.
+  /// When a navigation rail is [NavigationRail.extended], the labels are
+  /// always shown. If the [NavigationRail.extended] is true, then the
+  /// [navigationRailLabelType] can only be set to
+  /// [NavigationRailLabelType.none], if any other value is used the Flutter
+  /// framework throws an assertion error. This is a strange limitation in the
+  /// framework, but it is what it is. You can work around it it, by own
+  /// component level setting label type to [NavigationRailLabelType.none] when
+  /// you extend the rail.
   ///
-  /// Default to [NavigationRailLabelType.all]. FlexColorScheme uses all so that
-  /// it by default will match the behavior on [NavigationBar].
-  ///
-  /// If set to null it will default Flutter SDK default
+  /// If not defined, it will default Flutter SDK default
   /// behavior [NavigationRailLabelType.none].
   final NavigationRailLabelType? navigationRailLabelType;
 
-  /// The vertical alignment for the group of [destinations] within a
-  /// [NavigationRail].
+  /// The vertical alignment for the group of [NavigationRail.destinations]
+  /// within a [NavigationRail].
   ///
   /// The [NavigationRailDestination]s are grouped together with the
-  /// [trailing] widget, between the [leading] widget and the bottom
-  /// of the rail.
+  /// [NavigationRail.trailing] widget, between the [NavigationRail.leading]
+  /// widget and the bottom of the rail.
   ///
   /// The value must be between -1.0 and 1.0.
   ///
-  /// If [groupAlignment] is -1.0, then the items are aligned to the top. If
-  /// [groupAlignment] is 0.0, then the items are aligned to the center. If
-  /// [groupAlignment] is 1.0, then the items are aligned to the bottom.
+  /// * If [navigationRailGroupAlignment] is -1.0, then the items are aligned
+  ///   to the top.
+  /// * If [navigationRailGroupAlignment] is 0.0, then the items are aligned
+  ///   to the center.
+  /// * If [navigationRailGroupAlignment] is 1.0, then the items are aligned
+  ///   to the bottom.
   ///
   /// The default is -1.0.
   final double? navigationRailGroupAlignment;
@@ -4013,8 +4049,8 @@ class FlexSubThemesData with Diagnosticable {
   /// like ThemeData. You apply and use them just as you would with ThemeData.
   /// This text theme is just a convenience Typography toggle.
   ///
-  /// If you specify a custom [typography] to [FlexColorScheme] or
-  /// [FlexThemeData], this property has no impact on used typography.
+  /// If you specify a custom typography in [FlexColorScheme.typography] then
+  /// this property has no impact on used typography.
   ///
   /// This property was originally used in [FlexColorScheme] to opt-in on using
   /// a custom text theme defined internally by [FlexColorScheme] to look like

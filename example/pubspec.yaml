@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.1.1
+version: 8.2.1
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.27.0'
+  flutter: '>=3.32.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -15,7 +15,7 @@ dependencies:
   # Provides encoders and decoders for various archive and compression
   # formats such as zip, tar, bzip2, gzip, and zlib. (by loki3d.com)
   # https://pub.dev/packages/archive
-  archive: ^4.0.2
+  archive: ^4.0.7
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.
@@ -33,12 +33,12 @@ dependencies:
   # device_frame: ^1.2.0
   # Original no longer well maintained, using fork:
   # https://pub:dev/packages/device_frame_plus:
-  device_frame_plus: ^1.2.2+1
+  device_frame_plus: ^1.3.1
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used for color selection in the Playground to make customized color schemes.
   # https://pub.dev/packages/flex_color_picker
-  flex_color_picker: ^3.7.0
+  flex_color_picker: ^3.7.1
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
@@ -48,7 +48,7 @@ dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^3.5.0
+  flex_seed_scheme: ^3.5.1
 
   # The Flutter SDK, by Google flutter.dev.
   flutter:
@@ -57,7 +57,7 @@ dependencies:
   # SVG file drawing, used by Asset Images, by dnfield.dev, now Google.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.0.17
+  flutter_svg: ^2.1.0
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
@@ -68,7 +68,7 @@ dependencies:
   # hive: ^2.2.3 # Original Hive package
   # This is a community fork that supports WASM-GC, by using package:web and
   # dart:js_interop.
-  hive_ce: ^2.10.1
+  hive_ce: ^2.11.2
     #path: ../../hive_ce/hive
     # Temporarily used from a fixed fork until the official package is updated.
     #git:
@@ -89,7 +89,7 @@ dependencies:
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.5.2
+  shared_preferences: ^2.5.3
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev
@@ -103,8 +103,7 @@ dependencies:
   # Used for url query param extraction in Playground
   # Replaces dart:html, support WASM. Package by Google dart.dev.
   # https://pub.dev/packages/web
-  web: ^1.1.0
-
+  web: ^1.1.1
 
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.
@@ -126,7 +125,6 @@ flutter:
   # all image assets used by the program.
   assets:
     # images contains all different resolutions:
-    # mdpi (1.0x), hdpi (1.5x), xhdpi (2.0x), xxhdpi (3.0x), xxxhdpi (4.0x)
     - assets/images/
     # Google fonts, font assets
     - assets/google_fonts/

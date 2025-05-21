@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'surface_mode_popup_menu.dart';
 
-// ignore_for_file: comment_references
-
 /// Widget used to select used [FlexSurfaceMode] using [ToggleButtons].
 ///
 /// This is a stateless widget version of surface mode Popupmenu selection using

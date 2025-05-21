@@ -52,7 +52,7 @@ class CustomThemeControls extends StatelessWidget {
                 'to it and is here to make it easier to discover this '
                 'feature\n'),
             trailing: FilledButton(
-              onPressed: () async {
+              onPressed: () {
                 controller.setSchemeIndex(AppColor.schemes.length - 1);
               },
               child: const Text('Custom'),

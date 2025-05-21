@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' show ThemeData; // For comment refs.
 
+import '../flex_color_scheme.dart' show FlexScheme; // For comment refs.
+import 'flex_color.dart' show FlexColor; // For comment refs.
 import 'flex_scheme_color.dart';
-
-// ignore_for_file: comment_references
 
 /// Immutable data class that holds [name] and [description] string scheme
 /// descriptions, [light] and [dark], [FlexSchemeColor] definitions.

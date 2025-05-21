@@ -2,6 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
+import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
@@ -14,10 +16,29 @@ class NavigationRailPanel extends StatelessWidget {
   const NavigationRailPanel(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _railIssueFCS277 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'rydmike/flex_color_scheme/issues/277',
+  );
+
+  // TODO(rydmike): To be added when issue is created
+  // static final Uri _railIssueFlutter = Uri(
+  //   scheme: 'https',
+  //   host: 'github.com',
+  //   path: 'flutter/flutter/pull/---',
+  // );
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
+        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+      color: theme.colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
     // The most common logic for enabling Playground controls.
     final bool enableControl =
         controller.useSubThemes && controller.useFlexColorScheme;
@@ -76,6 +97,44 @@ class NavigationRailPanel extends StatelessWidget {
             isRow: isRow,
           );
         }),
+        ListTileReveal(
+          dense: true,
+          title: const Text('Known issues'),
+          subtitleReveal: RichText(
+            text: TextSpan(
+              children: <TextSpan>[
+                TextSpan(
+                  style: spanTextStyle,
+                  text: 'If you any other labType than none and show the '
+                      'NavigationRail in extended state, Flutter SDK will '
+                      'throw. This is a Flutter SDK limitation, not '
+                      'FlexColorScheme related, see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _railIssueFCS277,
+                  text: '(FCS issue #277)',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '.',
+                ),
+                // LinkTextSpan(
+                //   style: linkStyle,
+                //   uri: _iconColorPR162880,
+                //   text: '(PR #162880)',
+                // ),
+                // //
+                // TextSpan(
+                //   style: spanTextStyle,
+                //   text: ', that landed in Flutter stable 3.29.1. '
+                //     'FlexColorScheme 8.1.1 and later, include a workaround '
+                //     'patch for this issue.',
+                // ),
+              ],
+            ),
+          ),
+        ),
         const Divider(),
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(

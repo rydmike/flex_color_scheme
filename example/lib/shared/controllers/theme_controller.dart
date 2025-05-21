@@ -42,7 +42,6 @@ const bool _debug = !kReleaseMode && true;
 /// want to persist locally (or remotely), in that case this approach is also
 /// the simpler and more convenient one. In this particular case though, well
 /// maybe not with this amount of props.
-// ignore:prefer_mixin
 class ThemeController with ChangeNotifier {
   ThemeController(this._themeService);
 
@@ -2602,6 +2601,193 @@ class ThemeController with ChangeNotifier {
       setSearchUseGlobalShape(true, false);
       setSearchElevation(1, false);
     }
+
+    // 10) Shadcn UI like theme
+    else if (settingsId == 10) {
+      // Legacy swap
+      setSwapLegacyColorsInM3(true, false);
+      setUsedColors(6, false);
+      // Set blend modes and levels.
+      setSurfaceModeLight(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setSurfaceModeDark(FlexSurfaceMode.highScaffoldLowSurface, false);
+      setBlendLevelLight(0, false);
+      setBlendLevelDark(0, false);
+      // On colors blending
+      setBlendLightOnColors(false, false);
+      setBlendDarkOnColors(true, false);
+      setBlendOnLevelLight(10, false);
+      setBlendOnLevelDark(20, false);
+      // White scaffold in light mode
+      setScaffoldLightIsWhite(true, false);
+      // Effects: M2 Divider, interaction effects, tinted disable.
+      setUseM2StyleDividerInM3(true, false);
+      setInteractionEffects(true, false);
+      setTintedDisabledControls(false, false);
+      // The default radius to 6 for all.
+      setDefaultRadius(6, false);
+      // Adaptive settings
+      setSplashType(SplashTypeEnum.instantSplash, false);
+      setSplashTypeAdaptive(SplashTypeEnum.instantSplash, false);
+      setAdaptiveElevationShadowsBackLight(AdaptiveResponse.all, false);
+      setAdaptiveElevationShadowsBackDark(AdaptiveResponse.all, false);
+      setAdaptiveAppBarScrollUnderOffLight(AdaptiveResponse.all, false);
+      setAdaptiveAppBarScrollUnderOffDark(AdaptiveResponse.all, false);
+      // AppBar settings
+      setAppBarStyleLight(FlexAppBarStyle.background, false);
+      setAppBarStyleDark(FlexAppBarStyle.background, false);
+      setAppBarBackgroundSchemeColorLight(
+          SchemeColor.surfaceContainerLowest, false);
+      setAppBarBackgroundSchemeColorDark(
+          SchemeColor.surfaceContainerLowest, false);
+      setAppBarElevationLight(0, false);
+      setAppBarElevationDark(0, false);
+      setAppBarScrolledUnderElevationLight(0.5, false);
+      setAppBarScrolledUnderElevationDark(2.5, false);
+      // Bottom AppBar settings
+      setBottomAppBarElevationLight(0.5, false);
+      setBottomAppBarElevationDark(0.5, false);
+      setBottomAppBarHeight(60, false);
+      // Elevated button
+      setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
+      setElevatedButtonSecondarySchemeColor(
+          SchemeColor.primaryContainer, false);
+      // OutlinedButton settings
+      setOutlinedButtonSchemeColor(SchemeColor.onSurface, false);
+      setOutlinedButtonOutlineSchemeColor(SchemeColor.outlineVariant, false);
+      // ToggleButtons settings
+      setToggleButtonsBorderSchemeColor(SchemeColor.outlineVariant, false);
+      // SegmentedButton settings
+      setSegmentedButtonSchemeColor(SchemeColor.primary, false);
+      setSegmentedButtonBorderSchemeColor(SchemeColor.outlineVariant, false);
+      // Switch and toggles
+      setUnselectedToggleIsColored(true, false);
+      setSwitchThumbSchemeColor(SchemeColor.onPrimaryContainer, false);
+      setSwitchAdaptiveCupertinoLike(AdaptiveResponse.all, false);
+      // Slider settings
+      setSliderValueTinted(true, false);
+      setSliderTrackHeight(8, false);
+      // Set TextField Settings via InputDecorator
+      setInputDecoratorIsDense(true, false);
+      setInputDecoratorIsFilled(false, false);
+      setInputDecoratorPaddingBottom(12, false);
+      setInputDecoratorPaddingTop(12, false);
+      setInputDecoratorPaddingStart(12, false);
+      setInputDecoratorPaddingEnd(12, false);
+      setInputDecoratorBorderRadius(8, false);
+      setInputDecoratorBorderType(FlexInputBorderType.outline, false);
+      setInputDecoratorBorderSchemeColorLight(SchemeColor.primary, false);
+      setInputDecoratorBorderSchemeColorDark(SchemeColor.primary, false);
+      setInputDecoratorBorderWidth(0.5, false);
+      setInputDecoratorFocusedBorderWidth(2.0, false);
+      // FAB Settings
+      setFloatingActionButtonAlwaysCircular(true, false);
+      setFloatingActionButtonUseShape(true, false);
+      // Chip settings
+      setChipSchemeColor(SchemeColor.secondaryContainer, false);
+      setChipSelectedSchemeColor(SchemeColor.primaryContainer, false);
+      setChipFontSize(12, false);
+      setChipIconSize(16, false);
+      setChipPaddingBottom(4, false);
+      setChipPaddingTop(4, false);
+      setChipPaddingStart(4, false);
+      setChipPaddingEnd(4, false);
+      // Card settings
+      setCardBorderRadius(12, false);
+      // Popupmenu
+      setPopupMenuBorderRadius(6, false);
+      setPopupMenuElevation(4, false);
+      setAlignedDropdown(true, false);
+      // Tooltip
+      setTooltipRadius(6, false);
+      setTooltipSchemeColor(SchemeColor.surfaceContainerHigh, false);
+      setTooltipOpacity(0.96, false);
+      // Dialog settings
+      setDialogBorderRadius(12, false);
+      setDialogBackgroundLightSchemeColor(
+          SchemeColor.surfaceContainerHigh, false);
+      setDialogBackgroundDarkSchemeColor(
+          SchemeColor.surfaceContainerHigh, false);
+      // TabBar settings
+      setTabBarIndicatorWeight(4, false);
+      setTabBarIndicatorTopRadius(4, false);
+      setTabBarDividerColor(Colors.transparent, false);
+      // Drawer settings
+      setDrawerBorderRadius(0, false);
+      setDrawerElevation(2, false);
+      setDrawerIndicatorOpacity(0.5, false);
+      // BottomSheet settings
+      setBottomSheetSchemeColor(SchemeColor.surfaceContainerHigh, false);
+      setBottomSheetModalSchemeColor(SchemeColor.surfaceContainer, false);
+      setBottomSheetBorderRadius(12, false);
+      setBottomSheetElevation(4, false);
+      setBottomSheetModalElevation(6, false);
+      // Menu settings
+      setMenuRadius(6, false);
+      setMenuElevation(4, false);
+      setMenuSchemeColor(SchemeColor.surfaceContainerLowest, false);
+      setMenuPaddingTop(10, false);
+      setMenuPaddingBottom(10, false);
+      setMenuPaddingStart(6, false);
+      setMenuPaddingEnd(5, false);
+      setMenuBarRadius(0, false);
+      setMenuBarElevation(0, false);
+      setMenuBarShadowColor(Colors.transparent, false);
+      setMenuIndicatorBackgroundSchemeColor(
+          SchemeColor.surfaceContainerHigh, false);
+      setMenuIndicatorRadius(6, false);
+      // BottomNavigationBar
+      setBottomNavigationBarMuteUnselectedItem(true, false);
+      setBottomNavigationBarBackgroundSchemeColor(
+          SchemeColor.surfaceContainer, false);
+      setBottomNavigationBarElevation(0, false);
+      setBottomNavigationBarSelectedItemSchemeColor(SchemeColor.primary, false);
+      setBottomNavigationBarElevation(0, false);
+      // NavigationBar settings
+      setNavigationBarIndicatorSchemeColor(
+          SchemeColor.secondaryContainer, false);
+      setNavigationBarBackgroundSchemeColor(
+          SchemeColor.surfaceContainer, false);
+      setNavigationBarIndicatorOpacity(1.0, false);
+      setNavigationBarElevation(0, false);
+      setNavigationBarHeight(72, false);
+      // NavigationRail settings
+      setNavigationBarElevation(0, false);
+      setNavigationRailUseIndicator(true, false);
+      setNavigationRailBackgroundSchemeColor(
+          SchemeColor.surfaceContainer, false);
+      setNavigationRailIndicatorSchemeColor(
+          SchemeColor.secondaryContainer, false);
+      setNavigationRailIndicatorOpacity(1.0, false);
+      // SearchBar
+      setSearchUseGlobalShape(false, false);
+      setSearchElevation(0, false);
+      // SnackBar
+      setSnackBarBorderRadius(6, false);
+      setSnackBarSchemeColor(SchemeColor.surfaceContainerLow, false);
+      setSnackBarElevation(6, false);
+      // Seeding
+      setUseKeyColors(true, false);
+      setUseSecondary(true, false);
+      setUseTertiary(true, false);
+      setUseError(true, false);
+      setUsedFlexToneSetup(20, false); // <-- Chroma scheme.
+      setHigherContrastFixed(true, false);
+      setUseMonoSurfacesLight(true, false);
+      setUseMonoSurfacesDark(true, false);
+      setKeepPrimary(true, false);
+      setKeepSecondary(true, false);
+      setKeepTertiaryContainer(true, false);
+      setKeepError(true, false);
+      setKeepDarkPrimary(true, false);
+      setKeepDarkSecondary(true, false);
+      setKeepDarkTertiaryContainer(true, false);
+      setKeepDarkError(true, false);
+      // Platform defaults
+      setTapTargetSize(MaterialTapTargetSize.padded, false);
+      setVisualDensity(VisualDensityEnum.comfortablePlatform, false);
+      setApplyThemeToAllCupertino(true, false);
+    }
+
     // All settings have been modified, now notify listeners.
     notifyListeners();
   }

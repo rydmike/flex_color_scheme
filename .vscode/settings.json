@@ -1,24 +1,36 @@
 {
   "cSpell.words": [
+    "aloisdeniel",
     "checkmark",
+    "Choi",
     "codecov",
+    "dmnemec",
     "dont",
+    "FKCS",
     "flexcolorscheme",
     "flexthemedata",
     "FTMS",
+    "funwith",
     "hashcode",
     "Intelli",
     "intellij",
     "Leir",
+    "materialdesign",
     "Navi",
+    "nonobvious",
     "Overscroll",
     "Prefs",
     "Rastel",
     "Segoe",
+    "settersinvariant",
     "sublist",
+    "subosito",
     "sysnavbar",
     "Tert",
-    "themedata"
+    "themedata",
+    "themesplayground"
   ],
-  "dart.flutterSdkPath": ".fvm/versions/stable"
+  "dart.flutterSdkPath": ".fvm/versions/stable",
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.showTabs": "multiple"
 }

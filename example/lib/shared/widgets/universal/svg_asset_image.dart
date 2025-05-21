@@ -80,8 +80,6 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
   @override
   void initState() {
     super.initState();
-    // False positive, see: https://github.com/dart-lang/linter/issues/3739
-    // ignore: discarded_futures
     svgImage = _coloredUndrawImage(true, widget.color);
   }
 
@@ -91,8 +89,6 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
     if (widget.color != oldWidget.color ||
         widget.assetName != oldWidget.assetName) {
       final bool loadSvgAsset = widget.assetName != oldWidget.assetName;
-      // False positive, see: https://github.com/dart-lang/linter/issues/3739
-      // ignore: discarded_futures
       svgImage = _coloredUndrawImage(loadSvgAsset, widget.color);
     }
   }

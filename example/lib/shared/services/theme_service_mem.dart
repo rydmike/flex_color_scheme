@@ -57,7 +57,7 @@ class ThemeServiceMem implements ThemeService {
 
   /// Clear all stored values.
   @override
-  Future<void> clearAll() async {
+  Future<void> clearAll() {
     throw UnimplementedError();
   }
 }

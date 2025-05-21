@@ -6,8 +6,6 @@ import '../panels/input_colors/input_colors_selector.dart';
 import 'two_topics_page.dart';
 import 'widgets/vertical_panel_view.dart';
 
-// ignore_for_file: comment_references
-
 /// This is an alternative two topics view of the Playground.
 ///
 /// Used only on big desktops, when desktop size is over

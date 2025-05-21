@@ -1762,14 +1762,15 @@ void main() {
         'FCS7.26: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color primary.', () {
-      expect(
-          tLightL.indicatorColor, isSameColorAs(tLightL.colorScheme.primary));
+      expect(tLightL.tabBarTheme.indicatorColor,
+          isSameColorAs(tLightL.colorScheme.primary));
     });
     test(
         'FCS7.27: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color primary.', () {
-      expect(tDarkL.indicatorColor, isSameColorAs(tDarkL.colorScheme.primary));
+      expect(tDarkL.tabBarTheme.indicatorColor,
+          isSameColorAs(tDarkL.colorScheme.primary));
     });
 
     test(
@@ -1825,7 +1826,6 @@ void main() {
       blendLevel: 20,
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 1,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -1835,7 +1835,6 @@ void main() {
       blendLevel: 20,
       appBarStyle: FlexAppBarStyle.primary,
       appBarElevation: 3,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -1903,13 +1902,13 @@ void main() {
         'FCS7.41: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color black87.', () {
-      expect(tLightM.indicatorColor, isSameColorAs(Colors.black87));
+      expect(tLightM.tabBarTheme.indicatorColor, isSameColorAs(Colors.black87));
     });
     test(
         'FCS7.42: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color black87.', () {
-      expect(tDarkM.indicatorColor, isSameColorAs(Colors.black87));
+      expect(tDarkM.tabBarTheme.indicatorColor, isSameColorAs(Colors.black87));
     });
 
     test(
@@ -1957,7 +1956,6 @@ void main() {
       blendLevel: 30,
       appBarStyle: FlexAppBarStyle.custom,
       appBarElevation: 6,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -1965,10 +1963,8 @@ void main() {
       colors: FlexColor.schemes[FlexScheme.material]!.dark,
       surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
       blendLevel: 30,
-      // ignore: avoid_redundant_argument_values
       appBarStyle: FlexAppBarStyle.material,
       appBarElevation: 6,
-      // ignore: avoid_redundant_argument_values
       tabBarStyle: FlexTabBarStyle.forAppBar,
     ).toTheme;
 
@@ -2036,13 +2032,13 @@ void main() {
         'FCS7.57: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color white.', () {
-      expect(tLightS.indicatorColor, isSameColorAs(Colors.white));
+      expect(tLightS.tabBarTheme.indicatorColor, isSameColorAs(Colors.white));
     });
     test(
         'FCS7.58: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color white.', () {
-      expect(tDarkS.indicatorColor, isSameColorAs(Colors.white));
+      expect(tDarkS.tabBarTheme.indicatorColor, isSameColorAs(Colors.white));
     });
 
     test(
@@ -2171,14 +2167,15 @@ void main() {
         'FCS7.73: GIVEN a FlexColorScheme.light theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.material EXPECT '
         'indicator color primary.', () {
-      expect(
-          tLightH.indicatorColor, isSameColorAs(tLightH.colorScheme.primary));
+      expect(tLightH.tabBarTheme.indicatorColor,
+          isSameColorAs(tLightH.colorScheme.primary));
     });
     test(
         'FCS7.74: GIVEN a FlexColorScheme.dark theme FROM scheme "material" '
         'WITH FlexTabBarStyle.forAppBar and FlexAppBarStyle.primary EXPECT '
         'indicator color primary.', () {
-      expect(tDarkH.indicatorColor, isSameColorAs(tDarkH.colorScheme.primary));
+      expect(tDarkH.tabBarTheme.indicatorColor,
+          isSameColorAs(tDarkH.colorScheme.primary));
     });
 
     test(
@@ -2589,7 +2586,7 @@ void main() {
       );
     });
 
-    test('fcs dialogBackground hex = dialogBackground hextString darken5', () {
+    test('fcs dialogBackground hex = dialogBackground hexString darken5', () {
       expect(
         fcsDarkH2.dialogBackground?.hexCode,
         equals(surfD.dialogBackground.darken(5).hexCode),
@@ -2744,7 +2741,8 @@ void main() {
         'FCS7.82-2L indicator: GIVEN tabBarIndicatorUsedColor: '
         'FlexUsedColor.secondary '
         'EXPECT indicator color to be theme.scheme.secondary', () {
-      expect(tLightHb.indicatorColor, tLightHb.colorScheme.secondary);
+      expect(
+          tLightHb.tabBarTheme.indicatorColor, tLightHb.colorScheme.secondary);
     });
 
     final RoundedRectangleBorder? shapeL =
@@ -2784,7 +2782,7 @@ void main() {
         'FCS7.82-2D indicator: GIVEN tabBarIndicatorUsedColor: '
         'FlexUsedColor.error '
         'EXPECT indicator color to be theme.scheme.secondary', () {
-      expect(tDarkHb.indicatorColor, tDarkHb.colorScheme.error);
+      expect(tDarkHb.tabBarTheme.indicatorColor, tDarkHb.colorScheme.error);
     });
 
     final RoundedRectangleBorder? shapeD =
@@ -3877,7 +3875,7 @@ void main() {
     // Test custom PopupMenu theming, with custom background, dark M2.
     test(
         'FCS7.102d GIVEN a FlexColorScheme.dark with useMaterial3:false '
-        'and a FlexSubThemesData with popup opacity null, elev 12, radi 11 '
+        'and a FlexSubThemesData with popup opacity null, elev 12, radius 11 '
         'and custom background '
         'EXPECT popup surface, with opacity null, elev 12 and radius 11 '
         'using custom background.', () {
@@ -3975,8 +3973,8 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(1),
       );
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
 
       // InputDecoration thin width
       expect(
@@ -4054,8 +4052,8 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(1),
       );
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       // InputDecoration thin width
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
@@ -4132,8 +4130,8 @@ void main() {
         theme.toggleButtonsTheme.borderWidth,
         equals(3),
       );
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       // InputDecoration thin width
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
@@ -4211,8 +4209,8 @@ void main() {
         equals(3),
       );
       // InputDecoration thin width
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(3),
@@ -4297,8 +4295,8 @@ void main() {
         equals(1.5),
       );
       // InputDecoration thin width
-      final MaterialStateUnderlineInputBorder? border = theme
-          .inputDecorationTheme.border as MaterialStateUnderlineInputBorder?;
+      final WidgetStateInputBorder? border =
+          theme.inputDecorationTheme.border as WidgetStateInputBorder?;
       expect(
         border?.resolve(<WidgetState>{WidgetState.disabled}).borderSide.width,
         equals(2.5),
@@ -5742,8 +5740,9 @@ void main() {
       expect(theme.colorScheme.onSurface, equals(Colors.black));
       expect(theme.scaffoldBackgroundColor,
           equals(FlexColor.materialLightBackground));
-      expect(
-          theme.dialogBackgroundColor, equals(FlexColor.materialLightSurface));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(
+      //   theme.dialogBackgroundColor, equals(FlexColor.materialLightSurface));
       expect(theme.colorScheme.surfaceTint, equals(Colors.red));
     });
     test(
@@ -5777,7 +5776,8 @@ void main() {
       expect(theme.colorScheme.onSurface, equals(Colors.black));
       expect(theme.scaffoldBackgroundColor,
           equals(FlexColor.materialLightBackground));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(Colors.red));
     });
     test(
@@ -5823,7 +5823,7 @@ void main() {
           equals(colorScheme.onErrorContainer));
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor, equals(Colors.blue));
@@ -5876,7 +5876,8 @@ void main() {
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
       expect(theme.scaffoldBackgroundColor, equals(colorScheme.surface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor,
@@ -5931,7 +5932,8 @@ void main() {
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
       expect(theme.scaffoldBackgroundColor, equals(colorScheme.surface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor, equals(Colors.blue));
@@ -5986,7 +5988,8 @@ void main() {
       expect(theme.colorScheme.surface, equals(colorScheme.surface));
       expect(theme.colorScheme.onSurface, equals(colorScheme.onSurface));
       expect(theme.scaffoldBackgroundColor, equals(colorScheme.surface));
-      expect(theme.dialogBackgroundColor, equals(Colors.blue));
+      // TODO(rydmike): Remove test of deprecated theme.dialogBackgroundColor
+      // expect(theme.dialogBackgroundColor, equals(Colors.blue));
       expect(theme.colorScheme.surfaceTint, equals(colorScheme.surfaceTint));
       //
       expect(theme.dialogTheme.backgroundColor,

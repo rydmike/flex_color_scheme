@@ -1,17 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../flex_color_scheme.dart';
 import 'flex_alpha_values.dart';
-
-// ignore_for_file: comment_references
+import 'flex_color.dart' show FlexColor;
+import 'flex_color_scheme.dart' show FlexColorScheme;
+import 'flex_color_scheme.dart' show FlexScaffoldBaseColor;
+import 'flex_extensions.dart';
+import 'flex_scheme_color.dart' show FlexSchemeColor;
+import 'flex_surface_mode.dart' show FlexSurfaceMode;
 
 /// Immutable data class used to make the six different surface colors in a
 /// [FlexColorScheme].
 ///
 /// [FlexSchemeSurfaceColors] is used primarily via the
-/// [FlexSchemeSurfaceColors.blend] factory. Before version 4.0 the
-/// [FlexSchemeSurfaceColors.from] factory was used.
+/// [FlexSchemeSurfaceColors.blend] factory.
 ///
 /// Included colors are [surface] and [inverseSurface] plus
 /// plus blended surface colors
@@ -26,7 +28,7 @@ import 'flex_alpha_values.dart';
 @immutable
 class FlexSchemeSurfaceColors with Diagnosticable {
   /// Default constructor. [FlexSchemeSurfaceColors] is usually created with
-  /// the [FlexSchemeSurfaceColors.from] factory.
+  /// the [FlexSchemeSurfaceColors.blend] factory.
   const FlexSchemeSurfaceColors({
     required this.surface,
     Color? surfaceDim,

@@ -202,9 +202,6 @@ class ShowSubThemeColors extends StatelessWidget {
             (useMaterial3
                 ? colorScheme.onSecondaryContainer
                 : colorScheme.secondary.withValues(alpha: .24));
-    //
-    final Color dialogColor =
-        theme.dialogTheme.backgroundColor ?? theme.dialogBackgroundColor;
     final Color defaultSnackBackgroundColor = isDark
         ? colorScheme.onSurface
         : Color.alphaBlend(
@@ -338,11 +335,6 @@ class ShowSubThemeColors extends StatelessWidget {
                 textColor: _onColor(tabBarColor, background),
               ),
               ColorCard(
-                label: 'TabBar\nIndicator',
-                color: theme.indicatorColor,
-                textColor: _onColor(theme.indicatorColor, background),
-              ),
-              ColorCard(
                 label: 'Bottom\nNaviBar\nBackground',
                 color: bottomNavBarColor,
                 textColor: _onColor(bottomNavBarColor, background),
@@ -381,11 +373,6 @@ class ShowSubThemeColors extends StatelessWidget {
                 label: 'Navigation\nRail\nIndicator',
                 color: navigationRailIndicatorColor,
                 textColor: _onColor(navigationRailIndicatorColor, background),
-              ),
-              ColorCard(
-                label: 'Dialog\nBackground',
-                color: dialogColor,
-                textColor: _onColor(dialogColor, background),
               ),
               ColorCard(
                 label: 'SnackBar\nBackground',

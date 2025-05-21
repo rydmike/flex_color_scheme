@@ -157,7 +157,6 @@ class AndroidNavigationBarPanel extends StatelessWidget {
                   style: TextStyle(fontSize: 11),
                 ),
                 Text(
-                  // ignore: lines_longer_than_80_chars
                   controller.systemNavBarStyle ==
                           FlexSystemNavBarStyle.transparent
                       ? '0 %'

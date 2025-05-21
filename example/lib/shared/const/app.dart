@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/examples/responsive_scaffold.dart';
@@ -36,8 +37,9 @@ abstract final class App {
   static const String packageName = 'FlexColor\u{00AD}Scheme';
 
   // Check if this is a Web-WASM build, Web-JS build or native VM build.
-  static const bool isRunningWithWasm =
-      bool.fromEnvironment('dart.tool.dart2wasm');
+  static const bool isRunningWithWasm = bool.fromEnvironment(
+    'dart.tool.dart2wasm',
+  );
   static const String buildType = isRunningWithWasm
       ? ', WasmGC'
       : kIsWeb
@@ -46,23 +48,26 @@ abstract final class App {
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '8';
-  static const String versionMinor = '1';
+  static const String versionMinor = '2';
   static const String versionPatch = '1';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = 'stable 3.29.0 (canvaskit$buildType)';
+  static const String flutterVersionNum = FlutterVersion.version ?? '';
+  static const String flutterChannel = FlutterVersion.channel ?? '';
+  static const String flutterVersion =
+      '$flutterChannel $flutterVersionNum (canvaskit$buildType)';
   static const String copyright = '© 2020 - 2025';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';
   // URL for Netlify hosting build.
   // This will be the only one later when WASM works OK.
-  static const String playgroundURL = 'https://playground.flexcolorscheme.com/';
+  //static const String playgroundURL='https://playground.flexcolorscheme.com/';
   // URL for GitHub pages build.
-  // static const String playgroundURL =
-  //     'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
+  static const String playgroundURL =
+      'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
 
   static final Uri packageUri = Uri(
     scheme: 'https',
@@ -182,12 +187,15 @@ abstract final class App {
   // it from style when M3 Typography is used.
   static String? get font => GoogleFonts.notoSans().fontFamily;
 
-  static final TextStyle notoSansRegular =
-      GoogleFonts.notoSans(fontWeight: FontWeight.w400);
-  static final TextStyle notoSansMedium =
-      GoogleFonts.notoSans(fontWeight: FontWeight.w500);
-  static final TextStyle notoSansBold =
-      GoogleFonts.notoSans(fontWeight: FontWeight.w700);
+  static final TextStyle notoSansRegular = GoogleFonts.notoSans(
+    fontWeight: FontWeight.w400,
+  );
+  static final TextStyle notoSansMedium = GoogleFonts.notoSans(
+    fontWeight: FontWeight.w500,
+  );
+  static final TextStyle notoSansBold = GoogleFonts.notoSans(
+    fontWeight: FontWeight.w700,
+  );
   static TextTheme? get textTheme => TextTheme(
         displayLarge: notoSansRegular, // Regular is default
         displayMedium: notoSansRegular, // Regular is default

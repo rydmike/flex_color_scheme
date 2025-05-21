@@ -5,9 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+// ignore_for_file: deprecated_member_use_from_same_package
+
 void main() {
-  double tintAlphaFactor(Color color, Brightness mode,
-      [bool surfaceMode = false]) {
+  double tintAlphaFactor(
+    Color color,
+    Brightness mode, [
+    bool surfaceMode = false,
+  ]) {
     if (mode == Brightness.light) {
       return surfaceMode
           ? ThemeData.estimateBrightnessForColor(color) == Brightness.dark
@@ -47,9 +52,7 @@ void main() {
         'EXPECT equal to AppBarTheme with shape RoundedRectangleBorder()', () {
       expect(
         FlexSubThemes.appBarTheme(),
-        equals(const AppBarTheme(
-          shape: RoundedRectangleBorder(),
-        )),
+        equals(const AppBarTheme(shape: RoundedRectangleBorder())),
       );
     });
   });
@@ -69,9 +72,7 @@ void main() {
           colorScheme: colorScheme,
           backgroundSchemeColor: SchemeColor.surfaceContainer,
         ),
-        equals(BottomAppBarTheme(
-          color: colorScheme.surfaceContainer,
-        )),
+        equals(BottomAppBarTheme(color: colorScheme.surfaceContainer)),
       );
     });
     test(
@@ -114,15 +115,27 @@ void main() {
             backgroundColor: Color(0xfff8faf0),
             elevation: 3.0,
             selectedIconTheme: IconThemeData(
-                size: 24.0, color: Color(0xff446732), opacity: 1.0),
+              size: 24.0,
+              color: Color(0xff446732),
+              opacity: 1.0,
+            ),
             unselectedIconTheme: IconThemeData(
-                size: 24.0, color: Color(0xa5191d16), opacity: 1.0),
+              size: 24.0,
+              color: Color(0xa5191d16),
+              opacity: 1.0,
+            ),
             selectedItemColor: Color(0xff446732),
             unselectedItemColor: Color(0xa5191d16),
             selectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xff446732), fontSize: 14.0),
+              inherit: true,
+              color: Color(0xff446732),
+              fontSize: 14.0,
+            ),
             unselectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xa5191d16), fontSize: 12.0),
+              inherit: true,
+              color: Color(0xa5191d16),
+              fontSize: 12.0,
+            ),
           ),
         ),
       );
@@ -147,15 +160,27 @@ void main() {
             backgroundColor: Color(0xff11140e),
             elevation: 3.0,
             selectedIconTheme: IconThemeData(
-                size: 24.0, color: Color(0xffaad291), opacity: 1.0),
+              size: 24.0,
+              color: Color(0xffaad291),
+              opacity: 1.0,
+            ),
             unselectedIconTheme: IconThemeData(
-                size: 24.0, color: Color(0xffc3c8bb), opacity: 1.0),
+              size: 24.0,
+              color: Color(0xffc3c8bb),
+              opacity: 1.0,
+            ),
             selectedItemColor: Color(0xffaad291),
             unselectedItemColor: Color(0xffc3c8bb),
             selectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xffaad291), fontSize: 14.0),
+              inherit: true,
+              color: Color(0xffaad291),
+              fontSize: 14.0,
+            ),
             unselectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xffc3c8bb), fontSize: 12.0),
+              inherit: true,
+              color: Color(0xffc3c8bb),
+              fontSize: 12.0,
+            ),
           ),
         ),
       );
@@ -176,15 +201,27 @@ void main() {
             elevation: 3.0,
             backgroundColor: Colors.white,
             selectedIconTheme: IconThemeData(
-                color: Color(0xff6200ee), opacity: 1.0, size: 24.0),
+              color: Color(0xff6200ee),
+              opacity: 1.0,
+              size: 24.0,
+            ),
             unselectedIconTheme: IconThemeData(
-                color: Color(0xa5000000), opacity: 1.0, size: 24.0),
+              color: Color(0xa5000000),
+              opacity: 1.0,
+              size: 24.0,
+            ),
             selectedItemColor: Color(0xff6200ee),
             unselectedItemColor: Color(0xa5000000),
             selectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xff6200ee), fontSize: 14.0),
+              inherit: true,
+              color: Color(0xff6200ee),
+              fontSize: 14.0,
+            ),
             unselectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xa5000000), fontSize: 12.0),
+              inherit: true,
+              color: Color(0xa5000000),
+              fontSize: 12.0,
+            ),
           ),
         ),
       );
@@ -206,15 +243,27 @@ void main() {
             elevation: 2,
             backgroundColor: Color(0xff121212),
             selectedIconTheme: IconThemeData(
-                color: Color(0xffbb86fc), opacity: 1.0, size: 24.0),
+              color: Color(0xffbb86fc),
+              opacity: 1.0,
+              size: 24.0,
+            ),
             unselectedIconTheme: IconThemeData(
-                color: Color(0xa5ffffff), opacity: 1.0, size: 24.0),
+              color: Color(0xa5ffffff),
+              opacity: 1.0,
+              size: 24.0,
+            ),
             selectedItemColor: Color(0xffbb86fc),
             unselectedItemColor: Color(0xa5ffffff),
             selectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xffbb86fc), fontSize: 14.0),
+              inherit: true,
+              color: Color(0xffbb86fc),
+              fontSize: 14.0,
+            ),
             unselectedLabelStyle: TextStyle(
-                inherit: true, color: Color(0xa5ffffff), fontSize: 12.0),
+              inherit: true,
+              color: Color(0xa5ffffff),
+              fontSize: 12.0,
+            ),
           ),
         ),
       );
@@ -286,14 +335,8 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.bottomNavigationBarTheme(
-          colorScheme: colorScheme,
-        ),
-        equals(
-          FlexSubThemes.bottomNavigationBar(
-            colorScheme: colorScheme,
-          ),
-        ),
+        FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
+        equals(FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme)),
       );
     });
   });
@@ -378,16 +421,18 @@ void main() {
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
             focusColor: FlexSubThemes.tintedFocused(overlay, tint, factor),
-            highlightColor:
-                FlexSubThemes.tintedHighlight(overlay, tint, factor),
+            highlightColor: FlexSubThemes.tintedHighlight(
+              overlay,
+              tint,
+              factor,
+            ),
             splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
-            disabledColor:
-                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-                    .withAlpha(kAlphaLowDisabled),
+            disabledColor: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              tint,
+            ).withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(40),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(40)),
             ),
             textTheme: ButtonTextTheme.primary,
           ),
@@ -423,16 +468,18 @@ void main() {
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
             focusColor: FlexSubThemes.tintedFocused(overlay, tint, factor),
-            highlightColor:
-                FlexSubThemes.tintedHighlight(overlay, tint, factor),
+            highlightColor: FlexSubThemes.tintedHighlight(
+              overlay,
+              tint,
+              factor,
+            ),
             splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
-            disabledColor:
-                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-                    .withAlpha(kAlphaLowDisabled),
+            disabledColor: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              tint,
+            ).withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             textTheme: ButtonTextTheme.primary,
           ),
@@ -467,16 +514,18 @@ void main() {
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
             focusColor: FlexSubThemes.tintedFocused(overlay, tint, factor),
-            highlightColor:
-                FlexSubThemes.tintedHighlight(overlay, tint, factor),
+            highlightColor: FlexSubThemes.tintedHighlight(
+              overlay,
+              tint,
+              factor,
+            ),
             splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
-            disabledColor:
-                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-                    .withAlpha(kAlphaLowDisabled),
+            disabledColor: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              tint,
+            ).withAlpha(kAlphaLowDisabled),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(40),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(40)),
             ),
             textTheme: ButtonTextTheme.primary,
           ),
@@ -493,9 +542,7 @@ void main() {
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubThemes.cardTheme(),
-        equals(
-          const CardThemeData(clipBehavior: Clip.antiAlias),
-        ),
+        equals(const CardThemeData(clipBehavior: Clip.antiAlias)),
       );
     });
     test(
@@ -512,9 +559,7 @@ void main() {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 2,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(1),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(1)),
             ),
           ),
         ),
@@ -544,7 +589,9 @@ void main() {
               if (states.contains(WidgetState.disabled)) {
                 if (states.contains(WidgetState.selected)) {
                   return const BorderSide(
-                      width: 2.0, color: Colors.transparent);
+                    width: 2.0,
+                    color: Colors.transparent,
+                  );
                 }
                 return BorderSide(
                   width: 2.0,
@@ -557,56 +604,56 @@ void main() {
               // This is M2 SDK default.
               return const BorderSide(width: 2.0, color: Colors.black54);
             }),
-            fillColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  if (states.contains(WidgetState.selected)) {
-                    return Colors.grey.shade400;
-                  }
-                }
+            fillColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
                 if (states.contains(WidgetState.selected)) {
-                  return colorScheme.primary;
+                  return Colors.grey.shade400;
                 }
-                return Colors.transparent;
-              },
-            ),
-            checkColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade200;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.onPrimary;
-                }
-                return Colors.grey.shade50;
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                }
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.primary;
+              }
+              return Colors.transparent;
+            }),
+            checkColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade200;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.onPrimary;
+              }
+              return Colors.grey.shade50;
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
                   return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.primary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.primary.withValues(alpha: 0.12);
+                }
                 return Colors.transparent;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.primary.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return Colors.transparent;
+            }),
           ).toString(),
         ),
       );
@@ -637,13 +684,15 @@ void main() {
           useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          width: 2.0,
-          color: FlexSubThemes.tintedDisable(
-            colorScheme.onSurface,
-            colorScheme.primary,
+        equals(
+          BorderSide(
+            width: 2.0,
+            color: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              colorScheme.primary,
+            ),
           ),
-        )),
+        ),
       );
       // Side: disabled
       expect(
@@ -652,10 +701,12 @@ void main() {
           useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          width: 2.0,
-          color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-        )),
+        equals(
+          BorderSide(
+            width: 2.0,
+            color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+          ),
+        ),
       );
       // Side: selected
       expect(
@@ -691,9 +742,10 @@ void main() {
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
-        )
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        ).fillColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         equals(Colors.grey.shade400),
       );
       expect(
@@ -715,11 +767,16 @@ void main() {
           colorScheme: colorScheme,
           useTintedDisable: true,
           useMaterial3: false,
-        )
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        ).fillColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.checkboxTheme(
@@ -776,77 +833,93 @@ void main() {
       //
       // Side: Disabled and selected
       expect(
-        (m.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        (m.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: Disabled, tinted
       expect(
-        (m2.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          width: 2.0,
-          color: FlexSubThemes.tintedDisable(
-            colorScheme.onSurface,
-            colorScheme.primary,
+        (m2.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          BorderSide(
+            width: 2.0,
+            color: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              colorScheme.primary,
+            ),
           ),
-        )),
+        ),
       );
       // Side: disabled
       expect(
-        (m.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          width: 2.0,
-          color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-        )),
+        (m.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          BorderSide(
+            width: 2.0,
+            color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+          ),
+        ),
       );
       // Side: selected
       expect(
-        (m.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        (m.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(const BorderSide(width: 0.0, color: Colors.transparent)),
       );
       // Side: error
       expect(
-        (m.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.error}),
+        (m.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.error,
+        }),
         equals(BorderSide(width: 2.0, color: colorScheme.error)),
       );
       // Side: pressed, tinted
       expect(
-        (m2.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.pressed}),
+        (m2.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.pressed,
+        }),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
       );
       // Side: pressed
       expect(
-        (m.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.pressed}),
+        (m.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.pressed,
+        }),
         equals(BorderSide(width: 2.0, color: colorScheme.onSurface)),
       );
       // Side: hovered, tinted
       expect(
-        (m2.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        (m2.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
       );
       // Side: hovered
       expect(
-        (m.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        (m.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(BorderSide(width: 2.0, color: colorScheme.onSurface)),
       );
       // Side: focused, tinted
       expect(
-        (m2.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m2.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
       );
       // Side: focused
       expect(
-        (m.side as WidgetStateBorderSide?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.side as WidgetStateBorderSide?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(BorderSide(width: 2.0, color: colorScheme.onSurface)),
       );
       // Side: default, tinted
@@ -864,8 +937,10 @@ void main() {
       //
       // FillColor - disabled, selected
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       // FillColor - disabled
@@ -875,8 +950,10 @@ void main() {
       );
       // FillColor - selected, error
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.error}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.error,
+        }),
         equals(colorScheme.error),
       );
       // FillColor - selected
@@ -884,16 +961,19 @@ void main() {
         m.fillColor!.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
-      expect(
-        m.fillColor!.resolve(<WidgetState>{}),
-        equals(Colors.transparent),
-      );
+      expect(m.fillColor!.resolve(<WidgetState>{}), equals(Colors.transparent));
       // Tinted fillColor
       expect(
-        m2.fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        m2.fillColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       // Check colors
       //
@@ -904,14 +984,18 @@ void main() {
       );
       // checkColor - disabled, selected
       expect(
-        m.checkColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        m.checkColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         equals(colorScheme.surface),
       );
       // checkColor - selected, error
       expect(
-        m.checkColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.error}),
+        m.checkColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.error,
+        }),
         equals(colorScheme.onError),
       );
       // checkColor - selected
@@ -927,52 +1011,85 @@ void main() {
       // OverlayColors
       //
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.pressed}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.error.withAlpha(kAlphaPressed)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.error.withAlpha(kAlphaHovered)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.focused,
+        }),
         equals(colorScheme.error.withAlpha(kAlphaFocused)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaPressed)),
       );
       expect(
-        m2.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        m2.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.primary.withAlpha(kAlphaHovered)),
       );
       expect(
-        m2.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        m2.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.primary.withAlpha(kAlphaFocused)),
       );
       expect(
-        m2.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        m2.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.selected}),
@@ -984,8 +1101,13 @@ void main() {
       );
       expect(
         m2.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
@@ -993,8 +1115,13 @@ void main() {
       );
       expect(
         m2.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
@@ -1002,8 +1129,13 @@ void main() {
       );
       expect(
         m2.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{}),
@@ -1021,15 +1153,18 @@ void main() {
       );
       expect(
         FlexSubThemes.checkboxTheme(
-                colorScheme: colorScheme, unselectedIsColored: true)
-            .toString(),
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+        ).toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
             side: WidgetStateBorderSide.resolveWith((Set<WidgetState> states) {
               if (states.contains(WidgetState.disabled)) {
                 if (states.contains(WidgetState.selected)) {
                   return const BorderSide(
-                      width: 2.0, color: Colors.transparent);
+                    width: 2.0,
+                    color: Colors.transparent,
+                  );
                 }
                 return BorderSide(
                   width: 2.0,
@@ -1042,56 +1177,56 @@ void main() {
               // This is M2 SDK default.
               return const BorderSide(width: 2.0, color: Colors.white70);
             }),
-            fillColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  if (states.contains(WidgetState.selected)) {
-                    return Colors.grey.shade800;
-                  }
-                }
+            fillColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
                 if (states.contains(WidgetState.selected)) {
-                  return colorScheme.primary;
+                  return Colors.grey.shade800;
                 }
-                return Colors.transparent;
-              },
-            ),
-            checkColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade600;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.onPrimary;
-                }
-                return Colors.grey.shade400;
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                }
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.primary;
+              }
+              return Colors.transparent;
+            }),
+            checkColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade600;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.onPrimary;
+              }
+              return Colors.grey.shade400;
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
                   return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.primary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.primary.withValues(alpha: 0.12);
+                }
                 return Colors.transparent;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.primary.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return Colors.transparent;
+            }),
           ).toString(),
         ),
       );
@@ -1122,13 +1257,15 @@ void main() {
           useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          width: 2.0,
-          color: FlexSubThemes.tintedDisable(
-            colorScheme.onSurface,
-            colorScheme.primary,
+        equals(
+          BorderSide(
+            width: 2.0,
+            color: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              colorScheme.primary,
+            ),
           ),
-        )),
+        ),
       );
       // Side: disabled
       expect(
@@ -1137,10 +1274,12 @@ void main() {
           useMaterial3: false,
         ).side as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          width: 2.0,
-          color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-        )),
+        equals(
+          BorderSide(
+            width: 2.0,
+            color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
+          ),
+        ),
       );
       // Side: selected
       expect(
@@ -1176,9 +1315,10 @@ void main() {
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
-        )
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        ).fillColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         equals(Colors.grey.shade800),
       );
       expect(
@@ -1200,11 +1340,16 @@ void main() {
           colorScheme: colorScheme,
           useTintedDisable: true,
           useMaterial3: false,
-        )
-            .fillColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        ).fillColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.checkboxTheme(
@@ -1261,7 +1406,9 @@ void main() {
               if (states.contains(WidgetState.disabled)) {
                 if (states.contains(WidgetState.selected)) {
                   return const BorderSide(
-                      width: 2.0, color: Colors.transparent);
+                    width: 2.0,
+                    color: Colors.transparent,
+                  );
                 }
                 return BorderSide(
                   width: 2.0,
@@ -1274,54 +1421,54 @@ void main() {
               // This is M2 SDK default.
               return const BorderSide(width: 2.0, color: Colors.black54);
             }),
-            fillColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade400;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.tertiary;
-                }
-                return Colors.transparent;
-              },
-            ),
-            checkColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade200;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.onTertiary;
-                }
-                return Colors.grey.shade50;
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.tertiary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.tertiary.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                }
+            fillColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade400;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.tertiary;
+              }
+              return Colors.transparent;
+            }),
+            checkColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade200;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.onTertiary;
+              }
+              return Colors.grey.shade50;
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
                   return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.tertiary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.tertiary.withValues(alpha: 0.12);
+                }
                 return Colors.transparent;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.tertiary.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return Colors.transparent;
+            }),
           ).toString(),
         ),
       );
@@ -1339,10 +1486,14 @@ void main() {
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
 
-      final Color backgroundColor = colorScheme.primaryContainer
-          .blendAlpha(colorScheme.surface, kChipBackgroundAlphaBlend);
-      final Color selectedColor = colorScheme.primaryContainer
-          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color backgroundColor = colorScheme.primaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipBackgroundAlphaBlend,
+      );
+      final Color selectedColor = colorScheme.primaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipSelectedBackgroundAlphaBlend,
+      );
       final Color secondarySelectedColor = colorScheme.primaryContainer
           .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
 
@@ -1369,20 +1520,16 @@ void main() {
               height: 1.43,
             ),
             backgroundColor: backgroundColor,
-            disabledColor:
-                backgroundColor.withValues(alpha: kAlphaLowDisabledFloat),
+            disabledColor: backgroundColor.withValues(
+              alpha: kAlphaLowDisabledFloat,
+            ),
             selectedColor: selectedColor,
             secondarySelectedColor: secondarySelectedColor,
             checkmarkColor: Colors.black87,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            iconTheme: const IconThemeData(
-              color: Colors.black87,
-              size: 18.0,
-            ),
+            iconTheme: const IconThemeData(color: Colors.black87, size: 18.0),
           ),
         ),
       );
@@ -1395,10 +1542,14 @@ void main() {
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
 
-      final Color backgroundColor = colorScheme.primaryContainer
-          .blendAlpha(colorScheme.surface, kChipBackgroundAlphaBlend);
-      final Color selectedColor = colorScheme.primaryContainer
-          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color backgroundColor = colorScheme.primaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipBackgroundAlphaBlend,
+      );
+      final Color selectedColor = colorScheme.primaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipSelectedBackgroundAlphaBlend,
+      );
       final Color secondarySelectedColor = colorScheme.primaryContainer
           .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
 
@@ -1425,21 +1576,17 @@ void main() {
               height: 1.43,
             ),
             backgroundColor: backgroundColor,
-            disabledColor:
-                FlexSubThemes.tintedDisable(backgroundColor, selectedColor)
-                    .withValues(alpha: kAlphaLowDisabledFloat),
+            disabledColor: FlexSubThemes.tintedDisable(
+              backgroundColor,
+              selectedColor,
+            ).withValues(alpha: kAlphaLowDisabledFloat),
             selectedColor: selectedColor,
             secondarySelectedColor: secondarySelectedColor,
             checkmarkColor: Colors.black87,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            iconTheme: const IconThemeData(
-              color: Colors.black87,
-              size: 18.0,
-            ),
+            iconTheme: const IconThemeData(color: Colors.black87, size: 18.0),
           ),
         ),
       );
@@ -1454,9 +1601,7 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.chipTheme(
-          colorScheme: colorScheme,
-        ),
+        FlexSubThemes.chipTheme(colorScheme: colorScheme),
         equals(
           ChipThemeData(
             labelStyle: const TextStyle().copyWith(
@@ -1518,13 +1663,11 @@ void main() {
             ),
             backgroundColor: colorScheme.primary,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: const IconThemeData(
-              size: 18.0,
-              color: Colors.white70,
-            ),
+            iconTheme: const IconThemeData(size: 18.0, color: Colors.white70),
             disabledColor: FlexSubThemes.tintedDisable(
-                    colorScheme.primary, colorScheme.secondaryContainer)
-                .withValues(alpha: kAlphaLowDisabledFloat),
+              colorScheme.primary,
+              colorScheme.secondaryContainer,
+            ).withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1535,10 +1678,13 @@ void main() {
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final TextTheme textTheme = Typography.material2021(
-              platform: TargetPlatform.android, colorScheme: colorScheme)
-          .black;
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -1574,7 +1720,9 @@ void main() {
         'Secondary EXPECT equal to ChipThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
       expect(
@@ -1600,10 +1748,7 @@ void main() {
             disabledColor: colorScheme.secondary.withAlpha(kAlphaLowDisabled),
             backgroundColor: colorScheme.secondary,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: const IconThemeData(
-              color: Colors.white70,
-              size: 18.0,
-            ),
+            iconTheme: const IconThemeData(color: Colors.white70, size: 18.0),
           ),
         ),
       );
@@ -1614,7 +1759,9 @@ void main() {
         'Tertiary and disable tint EXPECT equal to ChipThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final TextTheme textTheme =
           Typography.material2018(platform: TargetPlatform.android).black;
       expect(
@@ -1641,13 +1788,11 @@ void main() {
             ),
             backgroundColor: colorScheme.tertiary,
             checkmarkColor: colorScheme.onSecondaryContainer,
-            iconTheme: const IconThemeData(
-              color: Colors.white70,
-              size: 18.0,
-            ),
+            iconTheme: const IconThemeData(color: Colors.white70, size: 18.0),
             disabledColor: FlexSubThemes.tintedDisable(
-                    colorScheme.tertiary, colorScheme.secondaryContainer)
-                .withValues(alpha: kAlphaLowDisabledFloat),
+              colorScheme.tertiary,
+              colorScheme.secondaryContainer,
+            ).withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1659,7 +1804,9 @@ void main() {
         'disable tint EXPECT equal to ChipThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final TextTheme textTheme = Typography.material2021(
         platform: TargetPlatform.android,
         colorScheme: colorScheme,
@@ -1692,13 +1839,11 @@ void main() {
             secondarySelectedColor: colorScheme.secondaryContainer,
             backgroundColor: colorScheme.tertiary,
             checkmarkColor: colorScheme.onTertiaryContainer,
-            iconTheme: const IconThemeData(
-              color: Colors.white70,
-              size: 18.0,
-            ),
+            iconTheme: const IconThemeData(color: Colors.white70, size: 18.0),
             disabledColor: FlexSubThemes.tintedDisable(
-                    colorScheme.tertiary, colorScheme.tertiaryContainer)
-                .withValues(alpha: kAlphaLowDisabledFloat),
+              colorScheme.tertiary,
+              colorScheme.tertiaryContainer,
+            ).withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1710,16 +1855,22 @@ void main() {
         'disable tint EXPECT equal to ChipThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final TextTheme textTheme = Typography.material2021(
         platform: TargetPlatform.android,
         colorScheme: colorScheme,
       ).black;
-      final Color backgroundColor = colorScheme.tertiary
-          .blendAlpha(colorScheme.surface, kChipBackgroundAlphaBlend);
+      final Color backgroundColor = colorScheme.tertiary.blendAlpha(
+        colorScheme.surface,
+        kChipBackgroundAlphaBlend,
+      );
       const Color onBackgroundColor = Colors.black87;
-      final Color selectedColor = colorScheme.tertiaryContainer
-          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color selectedColor = colorScheme.tertiaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipSelectedBackgroundAlphaBlend,
+      );
       const Color onSelectedColor = Colors.black87;
       final Color secondarySelectedColor = colorScheme.secondaryContainer
           .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
@@ -1752,13 +1903,11 @@ void main() {
             secondarySelectedColor: secondarySelectedColor,
             backgroundColor: backgroundColor,
             checkmarkColor: onSelectedColor,
-            iconTheme: const IconThemeData(
-              color: Colors.black87,
-              size: 18.0,
-            ),
-            disabledColor:
-                FlexSubThemes.tintedDisable(backgroundColor, selectedColor)
-                    .withValues(alpha: kAlphaLowDisabledFloat),
+            iconTheme: const IconThemeData(color: Colors.black87, size: 18.0),
+            disabledColor: FlexSubThemes.tintedDisable(
+              backgroundColor,
+              selectedColor,
+            ).withValues(alpha: kAlphaLowDisabledFloat),
           ),
         ),
       );
@@ -1771,7 +1920,9 @@ void main() {
         'NO disable tint EXPECT equal to ChipThemeData() version '
         'with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6750A4), brightness: Brightness.light);
+        seedColor: const Color(0xFF6750A4),
+        brightness: Brightness.light,
+      );
       final TextTheme textTheme = Typography.material2021(
         platform: TargetPlatform.android,
         colorScheme: colorScheme,
@@ -1802,9 +1953,7 @@ void main() {
               height: 1.43,
             ),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(kChipRadius),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(kChipRadius)),
             ),
             padding: const EdgeInsets.all(4),
             selectedColor: colorScheme.tertiaryContainer,
@@ -1815,8 +1964,9 @@ void main() {
               color: colorScheme.onSurfaceVariant,
               size: 18.0,
             ),
-            disabledColor:
-                colorScheme.onSurface.withValues(alpha: kAlphaLowDisabledFloat),
+            disabledColor: colorScheme.onSurface.withValues(
+              alpha: kAlphaLowDisabledFloat,
+            ),
           ),
         ),
       );
@@ -1840,9 +1990,7 @@ void main() {
           const DatePickerThemeData(
             elevation: 6,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
           ),
         ),
@@ -1867,9 +2015,7 @@ void main() {
             backgroundColor: colorScheme.tertiary,
             elevation: 6,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
           ),
         ),
@@ -1894,71 +2040,69 @@ void main() {
             backgroundColor: Color(0xFFDDDDDD),
             elevation: 6,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
           ),
         ),
       );
     });
     test(
-        'DatePicker FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
-        'with backgroundSchemeColor and no backgroundColor '
-        'EXPECT equal to DatePickerThemeData with backgroundSchemeColor', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.datePickerTheme(
-          colorScheme: colorScheme,
-          backgroundColor: null,
-          backgroundSchemeColor: SchemeColor.tertiary,
-          inputDecorationTheme: null,
-          useInputDecoratorTheme: true,
-        ),
-        equals(
-          DatePickerThemeData(
-            backgroundColor: colorScheme.tertiary,
-            elevation: 6,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
+      'DatePicker FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+      'with backgroundSchemeColor and no backgroundColor '
+      'EXPECT equal to DatePickerThemeData with backgroundSchemeColor',
+      () {
+        const ColorScheme colorScheme = ColorScheme.light();
+        expect(
+          FlexSubThemes.datePickerTheme(
+            colorScheme: colorScheme,
+            backgroundColor: null,
+            backgroundSchemeColor: SchemeColor.tertiary,
+            inputDecorationTheme: null,
+            useInputDecoratorTheme: true,
+          ),
+          equals(
+            DatePickerThemeData(
+              backgroundColor: colorScheme.tertiary,
+              elevation: 6,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(28)),
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
     test(
-        'DatePicker FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
-        'with backgroundSchemeColor and backgroundColor nad header '
-        'background '
-        'EXPECT equal to DatePickerThemeData with backgroundSchemeColor and '
-        'header background and header foreground contrast ', () {
-      const ColorScheme colorScheme = ColorScheme.light();
-      expect(
-        FlexSubThemes.datePickerTheme(
-          colorScheme: colorScheme,
-          backgroundColor: const Color(0xFFDDDDDD),
-          backgroundSchemeColor: SchemeColor.tertiary,
-          headerBackgroundSchemeColor: SchemeColor.primaryContainer,
-          inputDecorationTheme: null,
-          useInputDecoratorTheme: true,
-        ),
-        equals(
-          DatePickerThemeData(
-            backgroundColor: colorScheme.tertiary,
-            headerBackgroundColor: colorScheme.primaryContainer,
-            headerForegroundColor: colorScheme.onPrimaryContainer,
-            elevation: 6,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
+      'DatePicker FST9a.4 scheme-based: GIVEN a FlexSubTheme.datePickerTheme '
+      'with backgroundSchemeColor and backgroundColor nad header '
+      'background '
+      'EXPECT equal to DatePickerThemeData with backgroundSchemeColor and '
+      'header background and header foreground contrast ',
+      () {
+        const ColorScheme colorScheme = ColorScheme.light();
+        expect(
+          FlexSubThemes.datePickerTheme(
+            colorScheme: colorScheme,
+            backgroundColor: const Color(0xFFDDDDDD),
+            backgroundSchemeColor: SchemeColor.tertiary,
+            headerBackgroundSchemeColor: SchemeColor.primaryContainer,
+            inputDecorationTheme: null,
+            useInputDecoratorTheme: true,
+          ),
+          equals(
+            DatePickerThemeData(
+              backgroundColor: colorScheme.tertiary,
+              headerBackgroundColor: colorScheme.primaryContainer,
+              headerForegroundColor: colorScheme.onPrimaryContainer,
+              elevation: 6,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(28)),
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
     test(
         'DatePicker FST9a.5 custom: GIVEN a custom '
         'FlexSubTheme.datePickerTheme '
@@ -1976,9 +2120,7 @@ void main() {
           const DatePickerThemeData(
             elevation: 10,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(6)),
             ),
           ),
         ),
@@ -2011,9 +2153,7 @@ void main() {
             headerForegroundColor: colorScheme.secondaryContainer,
             headerBackgroundColor: colorScheme.onSecondaryContainer,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(6)),
             ),
             inputDecorationTheme: InputDecorationTheme(
               filled: false,
@@ -2046,17 +2186,20 @@ void main() {
               disabledBorder: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(
-                    color: colorScheme.onSurface.withValues(alpha: 0.12),
-                    width: 1),
+                  color: colorScheme.onSurface.withValues(alpha: 0.12),
+                  width: 1,
+                ),
               ),
-              floatingLabelStyle:
-                  WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+              floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 // These styles are copied from M3 default, we are not
                 // going to test them again.
                 // coverage:ignore-start
                 if (states.contains(WidgetState.disabled)) {
                   return TextStyle(
-                      color: colorScheme.onSurface.withValues(alpha: 0.38));
+                    color: colorScheme.onSurface.withValues(alpha: 0.38),
+                  );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.hovered)) {
@@ -2108,9 +2251,7 @@ void main() {
             headerForegroundColor: colorScheme.secondaryContainer,
             headerBackgroundColor: colorScheme.onSecondaryContainer,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(6)),
             ),
             inputDecorationTheme: InputDecorationTheme(
               filled: false,
@@ -2143,17 +2284,20 @@ void main() {
               disabledBorder: OutlineInputBorder(
                 borderRadius: defaultRadius,
                 borderSide: BorderSide(
-                    color: colorScheme.onSurface.withValues(alpha: 0.12),
-                    width: 1),
+                  color: colorScheme.onSurface.withValues(alpha: 0.12),
+                  width: 1,
+                ),
               ),
-              floatingLabelStyle:
-                  WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+              floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 // These styles are copied from M3 default,
                 // we are not going to test them again.
                 // coverage:ignore-start
                 if (states.contains(WidgetState.disabled)) {
                   return TextStyle(
-                      color: colorScheme.onSurface.withValues(alpha: 0.38));
+                    color: colorScheme.onSurface.withValues(alpha: 0.38),
+                  );
                 }
                 if (states.contains(WidgetState.error)) {
                   if (states.contains(WidgetState.hovered)) {
@@ -2192,12 +2336,13 @@ void main() {
         equals(
           const DialogThemeData(
             elevation: 6,
-            actionsPadding:
-                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+            actionsPadding: EdgeInsets.only(
+              left: 24.0,
+              right: 24.0,
+              bottom: 24.0,
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
           ),
         ),
@@ -2210,19 +2355,21 @@ void main() {
         'EXPECT equal to DialogTheme with backgroundColor', () {
       expect(
         FlexSubThemes.dialogTheme(
-            colorScheme: null,
-            backgroundColor: const Color(0xFF343476),
-            backgroundSchemeColor: SchemeColor.tertiary),
+          colorScheme: null,
+          backgroundColor: const Color(0xFF343476),
+          backgroundSchemeColor: SchemeColor.tertiary,
+        ),
         equals(
           const DialogThemeData(
             backgroundColor: Color(0xFF343476),
             elevation: 6,
-            actionsPadding:
-                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+            actionsPadding: EdgeInsets.only(
+              left: 24.0,
+              right: 24.0,
+              bottom: 24.0,
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
           ),
         ),
@@ -2243,12 +2390,13 @@ void main() {
           const DialogThemeData(
             backgroundColor: Color(0xFFDDDDDD),
             elevation: 6,
-            actionsPadding:
-                EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+            actionsPadding: EdgeInsets.only(
+              left: 24.0,
+              right: 24.0,
+              bottom: 24.0,
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
           ),
         ),
@@ -2268,13 +2416,14 @@ void main() {
         equals(
           DialogThemeData(
             backgroundColor: colorScheme.tertiary,
-            actionsPadding:
-                const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+            actionsPadding: const EdgeInsets.only(
+              left: 24.0,
+              right: 24.0,
+              bottom: 24.0,
+            ),
             elevation: 6,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
           ),
         ),
@@ -2287,18 +2436,22 @@ void main() {
         FlexSubThemes.dialogTheme(
           elevation: 10,
           radius: 6,
-          actionsPadding:
-              const EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
+          actionsPadding: const EdgeInsets.only(
+            left: 12.0,
+            right: 6.0,
+            bottom: 20.0,
+          ),
         ),
         equals(
           const DialogThemeData(
             elevation: 10,
-            actionsPadding:
-                EdgeInsets.only(left: 12.0, right: 6.0, bottom: 20.0),
+            actionsPadding: EdgeInsets.only(
+              left: 12.0,
+              right: 6.0,
+              bottom: 20.0,
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(6),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(6)),
             ),
           ),
         ),
@@ -2317,12 +2470,10 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.drawerTheme(
-          colorScheme: colorScheme,
-          useMaterial3: true,
-        ),
+        FlexSubThemes.drawerTheme(colorScheme: colorScheme, useMaterial3: true),
         equals(
-            DrawerThemeData(backgroundColor: colorScheme.surfaceContainerLow)),
+          DrawerThemeData(backgroundColor: colorScheme.surfaceContainerLow),
+        ),
       );
       expect(
         FlexSubThemes.drawerTheme(
@@ -2330,38 +2481,42 @@ void main() {
           useMaterial3: true,
           radius: 8,
         ),
-        equals(DrawerThemeData(
-          backgroundColor: colorScheme.surfaceContainerLow,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.horizontal(
-              end: Radius.circular(8),
+        equals(
+          DrawerThemeData(
+            backgroundColor: colorScheme.surfaceContainerLow,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                end: Radius.circular(8),
+              ),
+            ),
+            endShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                start: Radius.circular(8),
+              ),
             ),
           ),
-          endShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.horizontal(
-              start: Radius.circular(8),
-            ),
-          ),
-        )),
+        ),
       );
       expect(
         FlexSubThemes.drawerTheme(
           colorScheme: colorScheme,
           useMaterial3: false,
         ),
-        equals(DrawerThemeData(
-          backgroundColor: colorScheme.surfaceContainerLow,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.horizontal(
-              end: Radius.circular(kDrawerRadius),
+        equals(
+          DrawerThemeData(
+            backgroundColor: colorScheme.surfaceContainerLow,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                end: Radius.circular(kDrawerRadius),
+              ),
+            ),
+            endShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                start: Radius.circular(kDrawerRadius),
+              ),
             ),
           ),
-          endShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.horizontal(
-              start: Radius.circular(kDrawerRadius),
-            ),
-          ),
-        )),
+        ),
       );
       expect(
         FlexSubThemes.drawerTheme(
@@ -2369,19 +2524,21 @@ void main() {
           useMaterial3: false,
           radius: 7,
         ),
-        equals(DrawerThemeData(
-          backgroundColor: colorScheme.surfaceContainerLow,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.horizontal(
-              end: Radius.circular(7),
+        equals(
+          DrawerThemeData(
+            backgroundColor: colorScheme.surfaceContainerLow,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                end: Radius.circular(7),
+              ),
+            ),
+            endShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.horizontal(
+                start: Radius.circular(7),
+              ),
             ),
           ),
-          endShape: const RoundedRectangleBorder(
-            borderRadius: BorderRadiusDirectional.horizontal(
-              start: Radius.circular(7),
-            ),
-          ),
-        )),
+        ),
       );
     });
   });
@@ -2402,23 +2559,25 @@ void main() {
         brightness: Brightness.light,
       );
       expect(
-        FlexSubThemes.dropdownMenuTheme(
-          colorScheme: colorScheme,
-        ),
+        FlexSubThemes.dropdownMenuTheme(colorScheme: colorScheme),
         equals(const DropdownMenuThemeData(menuStyle: MenuStyle())),
       );
       const DropdownMenuThemeData m = DropdownMenuThemeData(
-          menuStyle: MenuStyle(
-              surfaceTintColor:
-                  WidgetStatePropertyAll<Color>(Colors.transparent)));
+        menuStyle: MenuStyle(
+          surfaceTintColor: WidgetStatePropertyAll<Color>(Colors.transparent),
+        ),
+      );
       expect(
         m.menuStyle!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       final DropdownMenuThemeData m2 = DropdownMenuThemeData(
-          menuStyle: MenuStyle(
-              surfaceTintColor:
-                  WidgetStatePropertyAll<Color>(colorScheme.surfaceContainer)));
+        menuStyle: MenuStyle(
+          surfaceTintColor: WidgetStatePropertyAll<Color>(
+            colorScheme.surfaceContainer,
+          ),
+        ),
+      );
       expect(
         m2.menuStyle!.surfaceTintColor!.resolve(<WidgetState>{}),
         equals(colorScheme.surfaceContainer),
@@ -2445,56 +2604,54 @@ void main() {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(40)),
               ), //buttonShape,
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onPrimary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onPrimary;
-                },
-              ),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26);
-                  }
-                  return colorScheme.primary;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.onPrimary.withAlpha(0x0D);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.onPrimary.withAlpha(0x26);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onPrimary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+              foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onPrimary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onPrimary;
+              }),
+              backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x26);
+                }
+                return colorScheme.primary;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.onPrimary.withAlpha(0x0D);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.onPrimary.withAlpha(0x26);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.onPrimary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              }),
             ),
           ).toString(),
         ),
@@ -2536,56 +2693,54 @@ void main() {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(40)),
               ), //buttonShape,
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onSecondary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onSecondary;
-                },
-              ),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.onPrimary.withAlpha(0x0D);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.onPrimary.withAlpha(0x26);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onPrimary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+              foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.secondary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onSecondary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.secondary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onSecondary;
+              }),
+              backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.secondary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x26);
+                }
+                return colorScheme.secondary;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.onPrimary.withAlpha(0x0D);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.onPrimary.withAlpha(0x26);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.onPrimary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              }),
             ),
           ).toString(),
         ),
@@ -2609,56 +2764,54 @@ void main() {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(40, 40),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(40)),
               ), //buttonShape,
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onSecondary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.secondary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onSecondary;
-                },
-              ),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26);
-                  }
-                  return colorScheme.primary;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.onSecondary.withAlpha(0x0D);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.onSecondary.withAlpha(0x26);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSecondary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+              foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.secondary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onSecondary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.secondary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onSecondary;
+              }),
+              backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x26);
+                }
+                return colorScheme.primary;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.onSecondary.withAlpha(0x0D);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.onSecondary.withAlpha(0x26);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.onSecondary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              }),
             ),
           ).toString(),
         ),
@@ -2694,8 +2847,12 @@ void main() {
           useTintedDisable: true,
           useMaterial3: false,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.secondary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.secondary,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2704,8 +2861,12 @@ void main() {
           useTintedDisable: true,
           useMaterial3: false,
         ).style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.secondary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.secondary,
+          ),
+        ),
       );
       // Selected foreground, M2
       expect(
@@ -2773,9 +2934,12 @@ void main() {
           useTintedDisable: true,
           useMaterial3: false,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, colorScheme.secondary)
-            .withAlpha(kAlphaVeryLowDisabled)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.secondary,
+          ).withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2800,7 +2964,10 @@ void main() {
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
         equals(
           FlexSubThemes.tintedHovered(
-              colorScheme.onPrimary, colorScheme.primary, 5.0),
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
         ),
       );
       expect(
@@ -2816,8 +2983,13 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2832,8 +3004,13 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2879,8 +3056,12 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        isSameColorAs(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        isSameColorAs(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.elevatedButtonTheme(
@@ -2889,8 +3070,12 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        isSameColorAs(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        isSameColorAs(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       // Disabled foreground, custom, M3
       expect(
@@ -2979,9 +3164,12 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        isSameColorAs(FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, colorScheme.primary)
-            .withAlpha(kAlphaVeryLowDisabled)),
+        isSameColorAs(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ).withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       // Disabled background, M3, only onBase given
       expect(
@@ -3000,9 +3188,12 @@ void main() {
           useTintedDisable: true,
           useMaterial3: true,
         ).style!.backgroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        isSameColorAs(FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, colorScheme.primary)
-            .withAlpha(kAlphaVeryLowDisabled)),
+        isSameColorAs(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ).withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       // Default background, M3, only onBase given
       expect(
@@ -3039,7 +3230,10 @@ void main() {
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
         isSameColorAs(
           FlexSubThemes.tintedHovered(
-              colorScheme.surface, colorScheme.primary, 1.5),
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
         ),
       );
       expect(
@@ -3058,7 +3252,10 @@ void main() {
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
         isSameColorAs(
           FlexSubThemes.tintedFocused(
-              colorScheme.surface, colorScheme.primary, 1.5),
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
         ),
       );
       expect(
@@ -3077,7 +3274,10 @@ void main() {
         ).style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         isSameColorAs(
           FlexSubThemes.tintedPressed(
-              colorScheme.surface, colorScheme.primary, 1.5),
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
         ),
       );
       expect(
@@ -3143,9 +3343,7 @@ void main() {
         ).style!.shape!.resolve(<WidgetState>{}),
         equals(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
       );
@@ -3170,57 +3368,55 @@ void main() {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(50, 50),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ), //buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 8),
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onPrimary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.onPrimary;
-                },
-              ),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26);
-                  }
-                  return colorScheme.primary;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.onPrimary.withAlpha(0x0D);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.onPrimary.withAlpha(0x26);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onPrimary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+              foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onPrimary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.onPrimary;
+              }),
+              backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.primary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x26);
+                }
+                return colorScheme.primary;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.onPrimary.withAlpha(0x0D);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.onPrimary.withAlpha(0x26);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.onPrimary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              }),
             ),
           ).toString(),
         ),
@@ -3248,57 +3444,55 @@ void main() {
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(55, 55),
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
               ), //buttonShape,
               padding: const EdgeInsets.symmetric(horizontal: 8),
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.tertiary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.tertiary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x5E);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.tertiary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26);
-                  }
-                  return colorScheme.tertiary;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.onTertiary.withAlpha(0x0D);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.onTertiary.withAlpha(0x26);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onTertiary.withAlpha(0x33);
-                  }
-                  return Colors.transparent;
-                },
-              ),
+              foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.tertiary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.secondary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.tertiary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x5E);
+                }
+                return colorScheme.secondary;
+              }),
+              backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.tertiary
+                      .blendAlpha(colorScheme.onSurface, 0x66)
+                      .withAlpha(0x26);
+                }
+                return colorScheme.tertiary;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.onTertiary.withAlpha(0x0D);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.onTertiary.withAlpha(0x26);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.onTertiary.withAlpha(0x33);
+                }
+                return Colors.transparent;
+              }),
             ),
           ).toString(),
         ),
@@ -3322,12 +3516,15 @@ void main() {
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ButtonStyle(
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(50, 50)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(50, 50),
+              ),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
-                  const EdgeInsets.symmetric(horizontal: 8)),
-              elevation:
-                  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+                const EdgeInsets.symmetric(horizontal: 8),
+              ),
+              elevation: WidgetStateProperty.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 if (states.contains(WidgetState.disabled)) {
                   return 0.0;
                 }
@@ -3344,9 +3541,7 @@ void main() {
               }),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ), //buttonShape,
             ),
@@ -3374,29 +3569,33 @@ void main() {
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ButtonStyle(
-              foregroundColor:
-                  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+              foregroundColor: WidgetStateProperty.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 if (states.contains(WidgetState.disabled)) {
                   return colorScheme.onSurface.withValues(alpha: 0.38);
                 }
                 return colorScheme.tertiary;
               }),
-              iconColor:
-                  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+              iconColor: WidgetStateProperty.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 if (states.contains(WidgetState.disabled)) {
                   return colorScheme.onSurface.withValues(alpha: 0.38);
                 }
                 return colorScheme.tertiary;
               }),
-              backgroundColor:
-                  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+              backgroundColor: WidgetStateProperty.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 if (states.contains(WidgetState.disabled)) {
                   return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
                 return colorScheme.secondary;
               }),
-              overlayColor:
-                  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+              overlayColor: WidgetStateProperty.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 if (states.contains(WidgetState.hovered)) {
                   return colorScheme.tertiary.withValues(alpha: 0.08);
                 }
@@ -3408,12 +3607,15 @@ void main() {
                 }
                 return null;
               }),
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(55, 55)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(55, 55),
+              ),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
-                  const EdgeInsets.symmetric(horizontal: 9)),
-              elevation:
-                  WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+                const EdgeInsets.symmetric(horizontal: 9),
+              ),
+              elevation: WidgetStateProperty.resolveWith((
+                Set<WidgetState> states,
+              ) {
                 if (states.contains(WidgetState.disabled)) {
                   return 0.0;
                 }
@@ -3430,9 +3632,7 @@ void main() {
               }),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
               ), //buttonShape,
             ),
@@ -3458,13 +3658,12 @@ void main() {
         equalsIgnoringHashCodes(
           FilledButtonThemeData(
             style: ButtonStyle(
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(40, 40),
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ), // buttonShape,
             ),
@@ -3486,39 +3685,38 @@ void main() {
         equalsIgnoringHashCodes(
           FilledButtonThemeData(
             style: ButtonStyle(
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(40, 40),
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ), // buttonShape,
-              backgroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.38);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.38);
-                  }
-                  return colorScheme.onSecondary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.38);
-                  }
-                  return colorScheme.onSecondary;
-                },
-              ),
+              backgroundColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.secondary;
+              }),
+              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.onSecondary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.onSecondary;
+              }),
               // No custom Overlay unless tinted version is used!
               // Temp design due to:
               // https://github.com/flutter/flutter/issues/118063
@@ -3575,13 +3773,15 @@ void main() {
       );
       // Disabled colors
       expect(
-        button.style!.backgroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.backgroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       // Default state
@@ -3634,14 +3834,20 @@ void main() {
       final Color tint = colorScheme.tertiary;
       // Disabled foreground/background,
       expect(
-        button.style!.backgroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-            .withAlpha(kAlphaVeryLowDisabled)),
+        button.style!.backgroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            tint,
+          ).withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -3675,8 +3881,9 @@ void main() {
         equals(FlexSubThemes.tintedPressed(overlay, tint, 5.0)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
     });
@@ -3695,13 +3902,15 @@ void main() {
       );
       // Disabled colors
       expect(
-        button.style!.backgroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.backgroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
@@ -3749,9 +3958,7 @@ void main() {
         button.style!.shape!.resolve(<WidgetState>{}),
         equals(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
         ),
       );
@@ -3774,14 +3981,20 @@ void main() {
       final Color tint = colorScheme.tertiary;
       // Disabled foreground/background,
       expect(
-        button.style!.backgroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-            .withAlpha(kAlphaVeryLowDisabled)),
+        button.style!.backgroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            tint,
+          ).withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -3815,17 +4028,20 @@ void main() {
         equals(FlexSubThemes.tintedPressed(overlay, tint, 5.0)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Custom shape test
       expect(
-          button.style!.shape!.resolve(<WidgetState>{}),
-          equals(
-            const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-          ));
+        button.style!.shape!.resolve(<WidgetState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+      );
     });
     test(
         'FilledButton FST13.8 M3-custom-tint-states: Does '
@@ -3845,14 +4061,20 @@ void main() {
       final Color tint = colorScheme.tertiary;
       // Disabled foreground/background,
       expect(
-        button.style!.backgroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-            .withAlpha(kAlphaVeryLowDisabled)),
+        button.style!.backgroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            tint,
+          ).withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -3886,17 +4108,20 @@ void main() {
         equals(FlexSubThemes.tintedPressed(overlay, tint, 4.0)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Custom shape test
       expect(
-          button.style!.shape!.resolve(<WidgetState>{}),
-          equals(
-            const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-          ));
+        button.style!.shape!.resolve(<WidgetState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+      );
     });
     test(
         'FilledButton FST13.9 M3-custom-disable-states: Does '
@@ -3913,14 +4138,20 @@ void main() {
       final Color tint = colorScheme.primary;
       // Disabled foreground/background,
       expect(
-        button.style!.backgroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-            .withAlpha(kAlphaVeryLowDisabled)),
+        button.style!.backgroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            tint,
+          ).withAlpha(kAlphaVeryLowDisabled),
+        ),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -3980,9 +4211,7 @@ void main() {
           radius: 30,
           alwaysCircular: true,
         ),
-        equals(
-          const FloatingActionButtonThemeData(shape: StadiumBorder()),
-        ),
+        equals(const FloatingActionButtonThemeData(shape: StadiumBorder())),
       );
     });
     test(
@@ -4085,9 +4314,7 @@ void main() {
             backgroundColor: colorScheme.onPrimary,
             foregroundColor: colorScheme.primary,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(32),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(32)),
             ),
           ),
         ),
@@ -4118,9 +4345,7 @@ void main() {
             hoverColor: FlexSubThemes.tintedHovered(overlay, tint, factor),
             splashColor: FlexSubThemes.tintedSplash(overlay, tint, factor),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(24),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(24)),
             ),
           ),
         ),
@@ -4151,42 +4376,82 @@ void main() {
       // Disabled foreground color states
       expect(
         b.style!.foregroundColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       // Overlay color states
       expect(
-        b.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        b.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
-        b.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        b.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
-        b.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        b.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
         b.style!.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
         b.style!.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
         b.style!.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.onPrimary, colorScheme.primary, 5.0)),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.onPrimary,
+            colorScheme.primary,
+            5.0,
+          ),
+        ),
       );
       expect(
         b.style!.overlayColor!.resolve(<WidgetState>{}),
@@ -4208,7 +4473,9 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
 
       const bool filled = false;
       const bool useM3 = false;
@@ -4227,14 +4494,16 @@ void main() {
       );
 
       // Get effective alpha value for background fill color.
-      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      const double effectiveAlpha = kFillColorLightOpacity;
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary)
-          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
 
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor =
-          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+      final Color usedFillColor = WidgetStateColor.resolveWith((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return tintDisabledUltraLowColor;
         }
@@ -4264,8 +4533,9 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
-            labelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            labelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
@@ -4282,21 +4552,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            floatingLabelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -4308,23 +4578,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            helperStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            helperStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            hintStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            hintStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
@@ -4339,8 +4607,9 @@ void main() {
               }
               return Colors.black45;
             }),
-            prefixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            prefixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return tintDisabledColor;
               }
@@ -4349,8 +4618,9 @@ void main() {
               }
               return Colors.black45;
             }),
-            suffixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            suffixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 return colorScheme.error;
               }
@@ -4365,49 +4635,24 @@ void main() {
             filled: filled,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.focused)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: focusedWidth,
-                      ),
-                    );
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: unfocusedWidth,
-                      ),
-                    );
-                  }
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
+            border: WidgetStateInputBorder.resolveWith((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: borderColor,
+                      color: colorScheme.error,
                       width: focusedWidth,
                     ),
                   );
@@ -4416,7 +4661,7 @@ void main() {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: enabledHoveredBorderColor,
+                      color: colorScheme.error,
                       width: unfocusedWidth,
                     ),
                   );
@@ -4424,12 +4669,38 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: enabledBorderColor,
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
-              },
-            ),
+              }
+              if (states.contains(WidgetState.focused)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: borderColor,
+                    width: focusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: enabledHoveredBorderColor,
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              return UnderlineInputBorder(
+                borderRadius: effectiveUnderlineBorder,
+                borderSide: BorderSide(
+                  color: enabledBorderColor,
+                  width: unfocusedWidth,
+                ),
+              );
+            }),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -4444,7 +4715,9 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
 
       const bool useM3 = true;
       const bool tintDisable = true;
@@ -4463,8 +4736,9 @@ void main() {
       );
       const int effectiveAlpha = 0xFF;
       final Color usedFillColor = Color.alphaBlend(
-          colorScheme.surfaceContainerHighest.withAlpha(effectiveAlpha),
-          colorScheme.surface);
+        colorScheme.surfaceContainerHighest.withAlpha(effectiveAlpha),
+        colorScheme.surface,
+      );
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
@@ -4482,8 +4756,9 @@ void main() {
         m.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
-            labelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            labelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
@@ -4500,21 +4775,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            floatingLabelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -4526,23 +4801,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            helperStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            helperStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            hintStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            hintStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
@@ -4557,8 +4830,9 @@ void main() {
               }
               return colorScheme.onSurfaceVariant;
             }),
-            prefixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            prefixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return tintDisabledColor;
               }
@@ -4567,8 +4841,9 @@ void main() {
               }
               return colorScheme.onSurfaceVariant;
             }),
-            suffixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            suffixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 return colorScheme.error;
               }
@@ -4583,49 +4858,24 @@ void main() {
             filled: isFilled,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.focused)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: focusedWidth,
-                      ),
-                    );
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: unfocusedWidth,
-                      ),
-                    );
-                  }
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
+            border: WidgetStateInputBorder.resolveWith((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: borderColor,
+                      color: colorScheme.error,
                       width: focusedWidth,
                     ),
                   );
@@ -4634,7 +4884,7 @@ void main() {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: enabledHoveredBorderColor,
+                      color: colorScheme.error,
                       width: unfocusedWidth,
                     ),
                   );
@@ -4642,12 +4892,38 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: enabledBorderColor,
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
-              },
-            ),
+              }
+              if (states.contains(WidgetState.focused)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: borderColor,
+                    width: focusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: enabledHoveredBorderColor,
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              return UnderlineInputBorder(
+                borderRadius: effectiveUnderlineBorder,
+                borderSide: BorderSide(
+                  color: enabledBorderColor,
+                  width: unfocusedWidth,
+                ),
+              );
+            }),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -4663,7 +4939,9 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
 
       const bool useM3 = false;
       const bool tintDisable = true;
@@ -4680,14 +4958,16 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary)
-          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor =
-          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+      final Color usedFillColor = WidgetStateColor.resolveWith((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return tintDisabledUltraLowColor;
         }
@@ -4712,8 +4992,9 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
-            labelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            labelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
@@ -4730,21 +5011,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            floatingLabelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -4756,23 +5037,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            helperStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            helperStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            hintStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            hintStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
@@ -4787,8 +5066,9 @@ void main() {
               }
               return Colors.black45;
             }),
-            prefixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            prefixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return tintDisabledColor;
               }
@@ -4797,8 +5077,9 @@ void main() {
               }
               return Colors.black45;
             }),
-            suffixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            suffixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 return colorScheme.error;
               }
@@ -4813,49 +5094,24 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.focused)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: focusedWidth,
-                      ),
-                    );
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: unfocusedWidth,
-                      ),
-                    );
-                  }
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
+            border: WidgetStateInputBorder.resolveWith((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: borderColor,
+                      color: colorScheme.error,
                       width: focusedWidth,
                     ),
                   );
@@ -4864,7 +5120,7 @@ void main() {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: enabledHoveredBorderColor,
+                      color: colorScheme.error,
                       width: unfocusedWidth,
                     ),
                   );
@@ -4872,12 +5128,38 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: enabledBorderColor,
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
-              },
-            ),
+              }
+              if (states.contains(WidgetState.focused)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: borderColor,
+                    width: focusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: enabledHoveredBorderColor,
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              return UnderlineInputBorder(
+                borderRadius: effectiveUnderlineBorder,
+                borderSide: BorderSide(
+                  color: enabledBorderColor,
+                  width: unfocusedWidth,
+                ),
+              );
+            }),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -4892,7 +5174,9 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
 
       const bool useM3 = false;
       const bool tintDisable = true;
@@ -4909,14 +5193,16 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorAlphaDarkFloat;
+      const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary)
-          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor =
-          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+      final Color usedFillColor = WidgetStateColor.resolveWith((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return tintDisabledUltraLowColor;
         }
@@ -4941,8 +5227,9 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
-            labelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            labelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
@@ -4959,21 +5246,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            floatingLabelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -4985,23 +5272,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            helperStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            helperStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            hintStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            hintStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
@@ -5016,8 +5301,9 @@ void main() {
               }
               return Colors.white70;
             }),
-            prefixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            prefixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return tintDisabledColor;
               }
@@ -5026,8 +5312,9 @@ void main() {
               }
               return Colors.white70;
             }),
-            suffixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            suffixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 return colorScheme.error;
               }
@@ -5042,49 +5329,24 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.focused)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: focusedWidth,
-                      ),
-                    );
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: unfocusedWidth,
-                      ),
-                    );
-                  }
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
+            border: WidgetStateInputBorder.resolveWith((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: borderColor,
+                      color: colorScheme.error,
                       width: focusedWidth,
                     ),
                   );
@@ -5093,7 +5355,7 @@ void main() {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: enabledHoveredBorderColor,
+                      color: colorScheme.error,
                       width: unfocusedWidth,
                     ),
                   );
@@ -5101,12 +5363,38 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: enabledBorderColor,
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
-              },
-            ),
+              }
+              if (states.contains(WidgetState.focused)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: borderColor,
+                    width: focusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: enabledHoveredBorderColor,
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              return UnderlineInputBorder(
+                borderRadius: effectiveUnderlineBorder,
+                borderSide: BorderSide(
+                  color: enabledBorderColor,
+                  width: unfocusedWidth,
+                ),
+              );
+            }),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -5122,7 +5410,9 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
 
       const bool useM3 = false;
       const bool tintDisable = true;
@@ -5139,14 +5429,16 @@ void main() {
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorAlphaDarkFloat;
+      const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary)
-          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor =
-          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+      final Color usedFillColor = WidgetStateColor.resolveWith((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return tintDisabledUltraLowColor;
         }
@@ -5171,8 +5463,9 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
-            labelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            labelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
@@ -5189,21 +5482,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            floatingLabelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -5215,23 +5508,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            helperStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            helperStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            hintStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            hintStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
@@ -5246,8 +5537,9 @@ void main() {
               }
               return Colors.white70;
             }),
-            prefixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            prefixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return tintDisabledColor;
               }
@@ -5256,8 +5548,9 @@ void main() {
               }
               return Colors.white70;
             }),
-            suffixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            suffixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 return colorScheme.error;
               }
@@ -5272,49 +5565,24 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateUnderlineInputBorder.resolveWith(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.focused)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: focusedWidth,
-                      ),
-                    );
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return UnderlineInputBorder(
-                      borderRadius: effectiveUnderlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: unfocusedWidth,
-                      ),
-                    );
-                  }
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
+            border: WidgetStateInputBorder.resolveWith((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: borderColor,
+                      color: colorScheme.error,
                       width: focusedWidth,
                     ),
                   );
@@ -5323,7 +5591,7 @@ void main() {
                   return UnderlineInputBorder(
                     borderRadius: effectiveUnderlineBorder,
                     borderSide: BorderSide(
-                      color: enabledHoveredBorderColor,
+                      color: colorScheme.error,
                       width: unfocusedWidth,
                     ),
                   );
@@ -5331,12 +5599,38 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: enabledBorderColor,
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
-              },
-            ),
+              }
+              if (states.contains(WidgetState.focused)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: borderColor,
+                    width: focusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return UnderlineInputBorder(
+                  borderRadius: effectiveUnderlineBorder,
+                  borderSide: BorderSide(
+                    color: enabledHoveredBorderColor,
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              return UnderlineInputBorder(
+                borderRadius: effectiveUnderlineBorder,
+                borderSide: BorderSide(
+                  color: enabledBorderColor,
+                  width: unfocusedWidth,
+                ),
+              );
+            }),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -5349,70 +5643,61 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
 
       // Floating label focused error style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            tintedDisabled: true,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.error,
-            WidgetState.focused,
-          }),
-          equals(
-            TextStyle(color: colorScheme.error),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          tintedDisabled: true,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
       // Floating label error hovered style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.error,
-            WidgetState.hovered,
-          }),
-          equals(
-            TextStyle(color: colorScheme.error),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
       // Floating label unfocused error style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.error,
-          }),
-          equals(
-            TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.error}),
+        equals(
+          TextStyle(
+              color:
+                  colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
+        ),
+      );
       // Floating label disabled style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            tintedDisabled: true,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.disabled,
-          }),
-          equals(
-            TextStyle(color: tintDisabledColor),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          tintedDisabled: true,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
       // Floating label default style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{}),
-          equals(
-            TextStyle(color: Colors.black.withAlpha(kTintHover)),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{}),
+        equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
+      );
     });
     test(
         'InputDecoration FST16.6 light: GIVEN a default M2 '
@@ -5426,7 +5711,9 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.secondary);
+        colorScheme.onSurface,
+        colorScheme.secondary,
+      );
 
       const double? radius = null;
       const double unfocusedWidth = 1.0;
@@ -5435,16 +5722,19 @@ void main() {
       final Color enabledBorderColor = colorScheme.outline;
       final Color enabledHoveredBorderColor = colorScheme.secondary;
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
-      final BorderRadius effectiveOutlineBorder =
-          BorderRadius.circular(effectiveRadius);
-      const double effectiveAlpha = kFillColorAlphaLightFloat;
+      final BorderRadius effectiveOutlineBorder = BorderRadius.circular(
+        effectiveRadius,
+      );
+      const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
       final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary)
-          .withValues(alpha: kAlphaUltraLowDisabledFloat);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor =
-          WidgetStateColor.resolveWith((Set<WidgetState> states) {
+      final Color usedFillColor = WidgetStateColor.resolveWith((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return tintDisabledUltraLowColor;
         }
@@ -5470,8 +5760,9 @@ void main() {
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
           InputDecorationTheme(
-            labelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            labelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
@@ -5488,21 +5779,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            floatingLabelStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return TextStyle(color: colorScheme.error);
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -5514,23 +5805,21 @@ void main() {
                 return TextStyle(color: colorScheme.onSurfaceVariant);
               }
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            helperStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            helperStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
-                return TextStyle(
-                  color: tintDisabledColor,
-                );
+                return TextStyle(color: tintDisabledColor);
               }
               return TextStyle(color: Colors.black.withAlpha(0xCC));
             }),
-            hintStyle:
-                WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+            hintStyle: WidgetStateTextStyle.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return TextStyle(color: tintDisabledColor);
               }
@@ -5545,8 +5834,9 @@ void main() {
               }
               return Colors.black45;
             }),
-            prefixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            prefixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
                 return tintDisabledColor;
               }
@@ -5555,8 +5845,9 @@ void main() {
               }
               return Colors.black45;
             }),
-            suffixIconColor:
-                WidgetStateColor.resolveWith((Set<WidgetState> states) {
+            suffixIconColor: WidgetStateColor.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.error)) {
                 return colorScheme.error;
               }
@@ -5571,51 +5862,24 @@ void main() {
             filled: false,
             fillColor: usedFillColor,
             hoverColor: usedHover,
-            border: MaterialStateOutlineInputBorder.resolveWith(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return OutlineInputBorder(
-                    borderRadius: effectiveOutlineBorder,
-                    borderSide: BorderSide(
-                      color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.focused)) {
-                    return OutlineInputBorder(
-                      borderRadius: effectiveOutlineBorder,
-                      borderSide: BorderSide(
-                        color: colorScheme.error,
-                        width: focusedWidth,
-                      ),
-                    );
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return OutlineInputBorder(
-                      borderRadius: effectiveOutlineBorder,
-                      borderSide: BorderSide(
-                        // TODO(rydmike): INFO: M3 uses onErrorContainer
-                        color: colorScheme.error,
-                        width: unfocusedWidth,
-                      ),
-                    );
-                  }
-                  return OutlineInputBorder(
-                    borderRadius: effectiveOutlineBorder,
-                    borderSide: BorderSide(
-                      // TODO(rydmike): INFO: M3 uses error
-                      color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
+            border: WidgetStateInputBorder.resolveWith((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return OutlineInputBorder(
+                  borderRadius: effectiveOutlineBorder,
+                  borderSide: BorderSide(
+                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.error)) {
                 if (states.contains(WidgetState.focused)) {
                   return OutlineInputBorder(
                     borderRadius: effectiveOutlineBorder,
                     borderSide: BorderSide(
-                      color: borderColor,
+                      color: colorScheme.error,
                       width: focusedWidth,
                     ),
                   );
@@ -5624,7 +5888,8 @@ void main() {
                   return OutlineInputBorder(
                     borderRadius: effectiveOutlineBorder,
                     borderSide: BorderSide(
-                      color: enabledHoveredBorderColor,
+                      // TODO(rydmike): INFO: M3 uses onErrorContainer
+                      color: colorScheme.error,
                       width: unfocusedWidth,
                     ),
                   );
@@ -5632,12 +5897,39 @@ void main() {
                 return OutlineInputBorder(
                   borderRadius: effectiveOutlineBorder,
                   borderSide: BorderSide(
-                    color: enabledBorderColor,
+                    // TODO(rydmike): INFO: M3 uses error
+                    color: colorScheme.error
+                        .withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
-              },
-            ),
+              }
+              if (states.contains(WidgetState.focused)) {
+                return OutlineInputBorder(
+                  borderRadius: effectiveOutlineBorder,
+                  borderSide: BorderSide(
+                    color: borderColor,
+                    width: focusedWidth,
+                  ),
+                );
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return OutlineInputBorder(
+                  borderRadius: effectiveOutlineBorder,
+                  borderSide: BorderSide(
+                    color: enabledHoveredBorderColor,
+                    width: unfocusedWidth,
+                  ),
+                );
+              }
+              return OutlineInputBorder(
+                borderRadius: effectiveOutlineBorder,
+                borderSide: BorderSide(
+                  color: enabledBorderColor,
+                  width: unfocusedWidth,
+                ),
+              );
+            }),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -5651,74 +5943,65 @@ void main() {
       );
       // Tinted disabled colors
       final Color tintDisabledColor = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
       // Floating label focused error style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            borderType: FlexInputBorderType.outline,
-            tintedDisabled: true,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.error,
-            WidgetState.focused,
-          }),
-          equals(
-            TextStyle(color: colorScheme.error),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          tintedDisabled: true,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
       // Floating label error hovered style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            borderType: FlexInputBorderType.outline,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.error,
-            WidgetState.hovered,
-          }),
-          equals(
-            TextStyle(color: colorScheme.error),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
       // Floating label unfocused error style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            borderType: FlexInputBorderType.outline,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.error,
-          }),
-          equals(
-            TextStyle(color: colorScheme.error.withAlpha(kEnabledBorderAlpha)),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.error}),
+        equals(
+          TextStyle(
+              color:
+                  colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
+        ),
+      );
       // Floating label disabled style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            borderType: FlexInputBorderType.outline,
-            useMaterial3: false,
-            tintedDisabled: true,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{
-            WidgetState.disabled,
-          }),
-          equals(
-            TextStyle(color: tintDisabledColor),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+          tintedDisabled: true,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
       // Floating label default style
       expect(
-          (FlexSubThemes.inputDecorationTheme(
-            colorScheme: colorScheme,
-            borderType: FlexInputBorderType.outline,
-            useMaterial3: false,
-          ).floatingLabelStyle as WidgetStateTextStyle?)!
-              .resolve(<WidgetState>{}),
-          equals(
-            TextStyle(color: Colors.black.withAlpha(kTintHover)),
-          ));
+        (FlexSubThemes.inputDecorationTheme(
+          colorScheme: colorScheme,
+          borderType: FlexInputBorderType.outline,
+          useMaterial3: false,
+        ).floatingLabelStyle as WidgetStateTextStyle?)!
+            .resolve(<WidgetState>{}),
+        equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
+      );
       //
       // Outline M3 case
       InputDecorationTheme m = FlexSubThemes.inputDecorationTheme(
@@ -5735,30 +6018,29 @@ void main() {
       expect(
         m.fillColor,
         equals(
-          Color.alphaBlend(colorScheme.secondaryContainer.withAlpha(0xAA),
-              colorScheme.surface),
+          Color.alphaBlend(
+            colorScheme.secondaryContainer.withAlpha(0xAA),
+            colorScheme.surface,
+          ),
         ),
       );
       //
       // Outline border default
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{}),
         equals(
           OutlineInputBorder(
             gapPadding: 4,
             borderRadius: const BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(
-              color: colorScheme.outline,
-              width: 3,
-            ),
+            borderSide: BorderSide(color: colorScheme.outline, width: 3),
           ),
         ),
       );
       // Outline border disabled (not tinted)
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(
           OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
@@ -5771,13 +6053,14 @@ void main() {
       );
       // Outline border error
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.error}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.error,
+        }),
         equals(
           OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
               width: 3,
             ),
           ),
@@ -5785,50 +6068,47 @@ void main() {
       );
       // Outline border error, focused
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.focused,
+        }),
         equals(
           OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: 4,
-            ),
+            borderSide: BorderSide(color: colorScheme.error, width: 4),
           ),
         ),
       );
       // Outline border error, hovered
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.hovered,
+        }),
         equals(
           OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: 3,
-            ),
+            borderSide: BorderSide(color: colorScheme.error, width: 3),
           ),
         ),
       );
       // Outline border focused
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(
           OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(
-              color: colorScheme.primary,
-              width: 4,
-            ),
+            borderSide: BorderSide(color: colorScheme.primary, width: 4),
           ),
         ),
       );
       // Outline border focused
       expect(
-        (m.border as MaterialStateOutlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(
           OutlineInputBorder(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
@@ -5857,10 +6137,13 @@ void main() {
       // Border
       // Underline border disabled (tinted)
       final Color tintDisable = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.secondaryContainer);
-      final OutlineInputBorder ulAct1 = (m.border
-              as MaterialStateOutlineInputBorder?)!
-          .resolve(<WidgetState>{WidgetState.disabled}) as OutlineInputBorder;
+        colorScheme.onSurface,
+        colorScheme.secondaryContainer,
+      );
+      final OutlineInputBorder ulAct1 =
+          (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+        WidgetState.disabled,
+      }) as OutlineInputBorder;
       final OutlineInputBorder ulExp1 = OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(4)),
         borderSide: BorderSide(
@@ -5888,15 +6171,19 @@ void main() {
       //
       // fillColor
       expect(
-        (m.fillColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.fillColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled)),
       );
       expect(
         (m.fillColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
-        equals(Color.alphaBlend(
+        equals(
+          Color.alphaBlend(
             colorScheme.surfaceContainerHighest.withAlpha(0xCC),
-            colorScheme.surface)),
+            colorScheme.surface,
+          ),
+        ),
       );
       //
       // labelStyle
@@ -5937,7 +6224,8 @@ void main() {
           WidgetState.disabled,
         }),
         equals(
-            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
+          TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+        ),
       );
       expect(
         (m.labelStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{}),
@@ -5962,20 +6250,24 @@ void main() {
           WidgetState.disabled,
         }),
         equals(
-            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
+          TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+        ),
       );
       expect(
-        (m.floatingLabelStyle as WidgetStateTextStyle?)!
-            .resolve(<WidgetState>{}),
+        (m.floatingLabelStyle as WidgetStateTextStyle?)!.resolve(
+          <WidgetState>{},
+        ),
         equals(TextStyle(color: colorScheme.onSurfaceVariant)),
       );
       //
       // helperStyle
       expect(
-        (m.helperStyle as WidgetStateTextStyle?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.helperStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(
-            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
+          TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+        ),
       );
       expect(
         (m.helperStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{}),
@@ -5984,10 +6276,12 @@ void main() {
       //
       // hintStyle
       expect(
-        (m.hintStyle as WidgetStateTextStyle?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.hintStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(
-            TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled))),
+          TextStyle(color: colorScheme.onSurface.withAlpha(kAlphaDisabled)),
+        ),
       );
       expect(
         (m.hintStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{}),
@@ -5996,13 +6290,15 @@ void main() {
       //
       // iconColor
       expect(
-        (m.iconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.iconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       expect(
-        (m.iconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.iconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.onSurfaceVariant),
       );
       expect(
@@ -6012,13 +6308,15 @@ void main() {
       //
       // prefixIconColor
       expect(
-        (m.prefixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.prefixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       expect(
-        (m.prefixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.prefixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.onSurfaceVariant),
       );
       expect(
@@ -6028,28 +6326,35 @@ void main() {
       //
       // suffixIconColor
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.error}),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.error,
+        }),
         equals(colorScheme.error),
       );
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.focused,
+        }),
         equals(colorScheme.error),
       );
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.error),
       );
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.onSurfaceVariant),
       );
       expect(
@@ -6059,25 +6364,22 @@ void main() {
       //
       // Underline border default
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{}),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(4),
               topRight: Radius.circular(4),
             ),
-            borderSide: BorderSide(
-              color: colorScheme.outline,
-              width: 3,
-            ),
+            borderSide: BorderSide(color: colorScheme.outline, width: 3),
           ),
         ),
       );
       // Underline border disabled (not tinted)
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
@@ -6093,8 +6395,9 @@ void main() {
       );
       // Underline border error
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.error}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.error,
+        }),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
@@ -6102,7 +6405,7 @@ void main() {
               topRight: Radius.circular(4),
             ),
             borderSide: BorderSide(
-              color: colorScheme.error.withAlpha(kEnabledBorderAlpha),
+              color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
               width: 3,
             ),
           ),
@@ -6110,59 +6413,56 @@ void main() {
       );
       // Underline border error, focused
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.focused,
+        }),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(4),
               topRight: Radius.circular(4),
             ),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: 4,
-            ),
+            borderSide: BorderSide(color: colorScheme.error, width: 4),
           ),
         ),
       );
       // Underline border error, hovered
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.error,
+          WidgetState.hovered,
+        }),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(4),
               topRight: Radius.circular(4),
             ),
-            borderSide: BorderSide(
-              color: colorScheme.error,
-              width: 3,
-            ),
+            borderSide: BorderSide(color: colorScheme.error, width: 3),
           ),
         ),
       );
       // Underline border focused
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(4),
               topRight: Radius.circular(4),
             ),
-            borderSide: BorderSide(
-              color: colorScheme.primary,
-              width: 4,
-            ),
+            borderSide: BorderSide(color: colorScheme.primary, width: 4),
           ),
         ),
       );
       // Underline border focused
       expect(
-        (m.border as MaterialStateUnderlineInputBorder?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(
           UnderlineInputBorder(
             borderRadius: const BorderRadius.only(
@@ -6191,10 +6491,13 @@ void main() {
       // Border
       // Underline border disabled (tinted)
       final Color tintDisabledColor2 = FlexSubThemes.tintedDisable(
-          colorScheme.onSurface, colorScheme.primary);
-      final UnderlineInputBorder ulAct = (m.border
-              as MaterialStateUnderlineInputBorder?)!
-          .resolve(<WidgetState>{WidgetState.disabled}) as UnderlineInputBorder;
+        colorScheme.onSurface,
+        colorScheme.primary,
+      );
+      final UnderlineInputBorder ulAct =
+          (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+        WidgetState.disabled,
+      }) as UnderlineInputBorder;
       final UnderlineInputBorder ulExp = UnderlineInputBorder(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(kInputDecoratorRadius),
@@ -6214,28 +6517,40 @@ void main() {
         (m.labelStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{
           WidgetState.disabled,
         }),
-        equals(TextStyle(
+        equals(
+          TextStyle(
             color: FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, colorScheme.primary))),
+              colorScheme.onSurface,
+              colorScheme.primary,
+            ),
+          ),
+        ),
       );
       expect(
         (m.labelStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{}),
         equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
       );
       expect(
-        (m.floatingLabelStyle as WidgetStateTextStyle?)!
-            .resolve(<WidgetState>{}),
+        (m.floatingLabelStyle as WidgetStateTextStyle?)!.resolve(
+          <WidgetState>{},
+        ),
         equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
       );
       //
       // helperStyle
 
       expect(
-        (m.helperStyle as WidgetStateTextStyle?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(TextStyle(
+        (m.helperStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          TextStyle(
             color: FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, colorScheme.primary))),
+              colorScheme.onSurface,
+              colorScheme.primary,
+            ),
+          ),
+        ),
       );
       expect(
         (m.helperStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{}),
@@ -6244,23 +6559,35 @@ void main() {
       //
       // hintStyle
       expect(
-        (m.hintStyle as WidgetStateTextStyle?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(TextStyle(
+        (m.hintStyle as WidgetStateTextStyle?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          TextStyle(
             color: FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, colorScheme.primary))),
+              colorScheme.onSurface,
+              colorScheme.primary,
+            ),
+          ),
+        ),
       );
       //
       // iconColor
       expect(
-        (m.iconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        (m.iconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
-        (m.iconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.iconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.primary),
       );
       expect(
@@ -6270,14 +6597,20 @@ void main() {
       //
       // prefixIconColor
       expect(
-        (m.prefixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        (m.prefixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
-        (m.prefixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.prefixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.primary),
       );
       expect(
@@ -6287,19 +6620,26 @@ void main() {
       //
       // suffixIconColor
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.error}),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.error,
+        }),
         equals(colorScheme.error),
       );
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
-        (m.suffixIconColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.suffixIconColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.primary),
       );
       expect(
@@ -6324,9 +6664,7 @@ void main() {
       );
       expect(
         listTheme,
-        equals(
-          ListTileThemeData(selectedColor: colorScheme.primary),
-        ),
+        equals(ListTileThemeData(selectedColor: colorScheme.primary)),
       );
     });
     test(
@@ -6396,21 +6734,13 @@ void main() {
         menu.style!.surfaceTintColor?.resolve(<WidgetState>{}),
         equals(null),
       );
-      expect(
-        menu.style!.shadowColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
-      expect(
-        menu.style!.elevation?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(menu.style!.shadowColor?.resolve(<WidgetState>{}), equals(null));
+      expect(menu.style!.elevation?.resolve(<WidgetState>{}), equals(null));
       expect(
         menu.style!.shape!.resolve(<WidgetState>{}),
         equals(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(5),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
         ),
       );
@@ -6433,14 +6763,8 @@ void main() {
         menu.style!.shadowColor?.resolve(<WidgetState>{}),
         equals(colorScheme.onSurface),
       );
-      expect(
-        menu.style!.elevation?.resolve(<WidgetState>{}),
-        equals(8),
-      );
-      expect(
-        menu.style!.shape?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(menu.style!.elevation?.resolve(<WidgetState>{}), equals(8));
+      expect(menu.style!.shape?.resolve(<WidgetState>{}), equals(null));
     });
   });
   group('WITH: FlexSubTheme.menuButtonTheme ', () {
@@ -6490,10 +6814,7 @@ void main() {
       );
       // No animation duration on menu buttons, this is a fix for issue:
       // https://github.com/flutter/flutter/issues/123615
-      expect(
-        m1.style!.animationDuration,
-        equals(Duration.zero),
-      );
+      expect(m1.style!.animationDuration, equals(Duration.zero));
       // Foreground color
       expect(
         m1.style!.foregroundColor?.resolve(<WidgetState>{WidgetState.disabled}),
@@ -6501,13 +6822,21 @@ void main() {
       );
       expect(
         m2.style!.foregroundColor?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
         m5.style!.foregroundColor?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurfaceVariant, colorScheme.primary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurfaceVariant,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
         m1.style!.foregroundColor?.resolve(<WidgetState>{WidgetState.pressed}),
@@ -6536,13 +6865,21 @@ void main() {
       );
       expect(
         m2.style!.iconColor?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.primary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
         m5.style!.iconColor?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurfaceVariant, colorScheme.primary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurfaceVariant,
+            colorScheme.primary,
+          ),
+        ),
       );
       expect(
         m1.style!.iconColor?.resolve(<WidgetState>{WidgetState.pressed}),
@@ -6600,8 +6937,13 @@ void main() {
       );
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.surfaceContainer, colorScheme.primary, 1)),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surfaceContainer,
+            colorScheme.primary,
+            1,
+          ),
+        ),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{WidgetState.selected}),
@@ -6609,8 +6951,13 @@ void main() {
       );
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.selected}),
-        equals(FlexSubThemes.tintedSplash(
-            colorScheme.surfaceContainer, colorScheme.primary, 1)),
+        equals(
+          FlexSubThemes.tintedSplash(
+            colorScheme.surfaceContainer,
+            colorScheme.primary,
+            1,
+          ),
+        ),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{WidgetState.focused}),
@@ -6618,8 +6965,13 @@ void main() {
       );
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surfaceContainer, colorScheme.primary, 1)),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surfaceContainer,
+            colorScheme.primary,
+            1,
+          ),
+        ),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{WidgetState.hovered}),
@@ -6627,25 +6979,27 @@ void main() {
       );
       expect(
         m2.style!.overlayColor?.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.surfaceContainer, colorScheme.primary, 1)),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surfaceContainer,
+            colorScheme.primary,
+            1,
+          ),
+        ),
       );
       expect(
         m1.style!.overlayColor?.resolve(<WidgetState>{}),
         equals(Colors.transparent),
       );
       // Shape
-      expect(
-        m1.style!.shape?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m1.style!.shape?.resolve(<WidgetState>{}), equals(null));
       expect(
         m2.style!.shape?.resolve(<WidgetState>{}),
-        equals(const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(11),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(11)),
           ),
-        )),
+        ),
       );
     });
   });
@@ -6669,18 +7023,12 @@ void main() {
         colorScheme: colorScheme,
         radius: 11,
       );
-      expect(
-        menu.style!.elevation?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(menu.style!.elevation?.resolve(<WidgetState>{}), equals(null));
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
         equals(null),
       );
-      expect(
-        menu.style!.padding?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(menu.style!.padding?.resolve(<WidgetState>{}), equals(null));
       expect(
         menu.style!.surfaceTintColor?.resolve(<WidgetState>{}),
         equals(null),
@@ -6689,9 +7037,7 @@ void main() {
         menu.style!.shape!.resolve(<WidgetState>{}),
         equals(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(11),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(11)),
           ),
         ),
       );
@@ -6702,10 +7048,7 @@ void main() {
         surfaceTintColor: colorScheme.tertiary,
         padding: const EdgeInsets.all(7),
       );
-      expect(
-        menu.style!.elevation?.resolve(<WidgetState>{}),
-        equals(3),
-      );
+      expect(menu.style!.elevation?.resolve(<WidgetState>{}), equals(3));
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
         equals(colorScheme.surfaceContainer.withValues(alpha: 0.8)),
@@ -6718,10 +7061,7 @@ void main() {
         menu.style!.surfaceTintColor?.resolve(<WidgetState>{}),
         equals(colorScheme.tertiary),
       );
-      expect(
-        menu.style!.shape?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(menu.style!.shape?.resolve(<WidgetState>{}), equals(null));
       menu = FlexSubThemes.menuTheme(
         colorScheme: colorScheme,
         backgroundSchemeColor: SchemeColor.surfaceContainer,
@@ -6731,9 +7071,10 @@ void main() {
         equals(colorScheme.surfaceContainer),
       );
       menu = FlexSubThemes.menuTheme(
-          colorScheme: colorScheme,
-          backgroundSchemeColor: SchemeColor.secondaryContainer,
-          opacity: 0.9);
+        colorScheme: colorScheme,
+        backgroundSchemeColor: SchemeColor.secondaryContainer,
+        opacity: 0.9,
+      );
       expect(
         menu.style!.backgroundColor?.resolve(<WidgetState>{}),
         equals(colorScheme.secondaryContainer.withValues(alpha: 0.9)),
@@ -6749,11 +7090,13 @@ void main() {
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
-      final ColorScheme colorScheme =
-          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+      );
       final TextTheme textTheme = Typography.material2021(
-              platform: TargetPlatform.android, colorScheme: colorScheme)
-          .black;
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       expect(
         FlexSubThemes.navigationBarTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
@@ -6763,32 +7106,31 @@ void main() {
             labelBehavior: null,
             backgroundColor: colorScheme.surfaceContainer,
             indicatorColor: colorScheme.secondaryContainer,
-            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  return textTheme.labelMedium!.copyWith(
-                    color: colorScheme.onSurface,
-                    fontSize: 12,
-                  );
-                }
+            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 return textTheme.labelMedium!.copyWith(
-                  color: colorScheme.onSurfaceVariant,
+                  color: colorScheme.onSurface,
                   fontSize: 12,
                 );
-              },
-            ),
-            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  return IconThemeData(
-                    size: 24,
-                    color: colorScheme.onSurface,
-                  );
-                }
-                return IconThemeData(
-                    size: 24, color: colorScheme.onSurfaceVariant);
-              },
-            ),
+              }
+              return textTheme.labelMedium!.copyWith(
+                color: colorScheme.onSurfaceVariant,
+                fontSize: 12,
+              );
+            }),
+            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
+                return IconThemeData(size: 24, color: colorScheme.onSurface);
+              }
+              return IconThemeData(
+                size: 24,
+                color: colorScheme.onSurfaceVariant,
+              );
+            }),
           ).toString(),
         ),
       );
@@ -6799,11 +7141,13 @@ void main() {
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
-      final ColorScheme colorScheme =
-          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+      );
       final TextTheme textTheme = Typography.material2021(
-              platform: TargetPlatform.android, colorScheme: colorScheme)
-          .black;
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
@@ -6830,50 +7174,47 @@ void main() {
           NavigationBarThemeData(
             height: 80,
             elevation: 3,
-            backgroundColor:
-                colorScheme.surfaceContainer.withValues(alpha: 0.9),
+            backgroundColor: colorScheme.surfaceContainer.withValues(
+              alpha: 0.9,
+            ),
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             indicatorColor: colorScheme.secondaryContainer.withAlpha(0x3D),
             indicatorShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
-            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  return textTheme.labelSmall!
-                      .copyWith(color: colorScheme.error);
-                }
-                return textTheme.labelSmall!.copyWith(
-                  color: colorScheme.error
-                      .blendAlpha(colorScheme.error, 0x66)
-                      .withAlpha(0xA5),
-                );
-              },
-            ),
-            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  return IconThemeData(
-                    size: 24,
-                    color: colorScheme.secondary,
-                  );
-                }
-                return IconThemeData(
-                    size: 24,
-                    color: colorScheme.onSurface
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0xA5));
-              },
-            ),
+            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
+                return textTheme.labelSmall!.copyWith(color: colorScheme.error);
+              }
+              return textTheme.labelSmall!.copyWith(
+                color: colorScheme.error
+                    .blendAlpha(colorScheme.error, 0x66)
+                    .withAlpha(0xA5),
+              );
+            }),
+            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
+                return IconThemeData(size: 24, color: colorScheme.secondary);
+              }
+              return IconThemeData(
+                size: 24,
+                color: colorScheme.onSurface
+                    .blendAlpha(colorScheme.onSurface, 0x66)
+                    .withAlpha(0xA5),
+              );
+            }),
           ).toString(),
         ),
       );
       // Does it have the right states?
       expect(
-        navBarTheme.iconTheme!
-            .resolve(<WidgetState>{WidgetState.selected})?.color,
+        navBarTheme.iconTheme!.resolve(<WidgetState>{
+          WidgetState.selected,
+        })?.color,
         equals(colorScheme.secondary),
       );
       expect(
@@ -6885,8 +7226,9 @@ void main() {
         ),
       );
       expect(
-        navBarTheme.labelTextStyle!
-            .resolve(<WidgetState>{WidgetState.selected})?.color,
+        navBarTheme.labelTextStyle!.resolve(<WidgetState>{
+          WidgetState.selected,
+        })?.color,
         equals(colorScheme.error),
       );
       expect(
@@ -6903,11 +7245,13 @@ void main() {
         'FlexSubTheme.navigationBarTheme() in M2 settings '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
-      final ColorScheme colorScheme =
-          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+      );
       final TextTheme textTheme = Typography.material2021(
-              platform: TargetPlatform.android, colorScheme: colorScheme)
-          .black;
+        platform: TargetPlatform.android,
+        colorScheme: colorScheme,
+      ).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
@@ -6937,61 +7281,59 @@ void main() {
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             backgroundColor: colorScheme.error.withValues(alpha: 0.9),
             indicatorColor: colorScheme.secondary.withAlpha(0x3D),
-            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  return textTheme.bodySmall!
-                      .copyWith(color: colorScheme.primaryContainer);
-                }
-                return textTheme.bodySmall!
-                    .copyWith(color: colorScheme.onSurface);
-              },
-            ),
-            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  return IconThemeData(
-                    size: 28,
-                    color: colorScheme.secondaryContainer,
-                  );
-                }
-                return IconThemeData(size: 25, color: colorScheme.onSurface);
-              },
-            ),
+            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
+                return textTheme.bodySmall!.copyWith(
+                  color: colorScheme.primaryContainer,
+                );
+              }
+              return textTheme.bodySmall!.copyWith(
+                color: colorScheme.onSurface,
+              );
+            }),
+            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
+                return IconThemeData(
+                  size: 28,
+                  color: colorScheme.secondaryContainer,
+                );
+              }
+              return IconThemeData(size: 25, color: colorScheme.onSurface);
+            }),
           ).toString(),
         ),
       );
       // Does it have the right states?
       expect(
-        navBarTheme.iconTheme!
-            .resolve(<WidgetState>{WidgetState.selected})?.color,
+        navBarTheme.iconTheme!.resolve(<WidgetState>{
+          WidgetState.selected,
+        })?.color,
         equals(colorScheme.secondaryContainer),
       );
       expect(
-        navBarTheme.iconTheme!
-            .resolve(<WidgetState>{WidgetState.selected})?.size,
+        navBarTheme.iconTheme!.resolve(<WidgetState>{
+          WidgetState.selected,
+        })?.size,
         equals(28),
       );
       expect(
         navBarTheme.iconTheme!.resolve(<WidgetState>{})?.color,
-        equals(
-          colorScheme.onSurface,
-        ),
+        equals(colorScheme.onSurface),
       );
+      expect(navBarTheme.iconTheme!.resolve(<WidgetState>{})?.size, equals(25));
       expect(
-        navBarTheme.iconTheme!.resolve(<WidgetState>{})?.size,
-        equals(25),
-      );
-      expect(
-        navBarTheme.labelTextStyle!
-            .resolve(<WidgetState>{WidgetState.selected})?.color,
+        navBarTheme.labelTextStyle!.resolve(<WidgetState>{
+          WidgetState.selected,
+        })?.color,
         equals(colorScheme.primaryContainer),
       );
       expect(
         navBarTheme.labelTextStyle!.resolve(<WidgetState>{})?.color,
-        equals(
-          colorScheme.onSurface,
-        ),
+        equals(colorScheme.onSurface),
       );
     });
   });
@@ -7009,18 +7351,9 @@ void main() {
       NavigationDrawerThemeData m = FlexSubThemes.navigationDrawerTheme(
         colorScheme: colorScheme,
       );
-      expect(
-        m.backgroundColor,
-        equals(colorScheme.surfaceContainerLow),
-      );
-      expect(
-        m.indicatorColor,
-        equals(colorScheme.secondaryContainer),
-      );
-      expect(
-        m.indicatorSize,
-        equals(const Size(336, 56)),
-      );
+      expect(m.backgroundColor, equals(colorScheme.surfaceContainerLow));
+      expect(m.indicatorColor, equals(colorScheme.secondaryContainer));
+      expect(m.indicatorSize, equals(const Size(336, 56)));
       expect(
         m.labelTextStyle!.resolve(<WidgetState>{WidgetState.selected})?.color,
         equals(colorScheme.onSecondaryContainer),
@@ -7049,26 +7382,14 @@ void main() {
         indicatorRadius: 8,
         indicatorWidth: 304,
       );
-      expect(
-        m.backgroundColor,
-        equals(colorScheme.secondaryContainer),
-      );
-      expect(
-        m.surfaceTintColor,
-        equals(colorScheme.tertiary),
-      );
-      expect(
-        m.shadowColor,
-        equals(Colors.red),
-      );
+      expect(m.backgroundColor, equals(colorScheme.secondaryContainer));
+      expect(m.surfaceTintColor, equals(colorScheme.tertiary));
+      expect(m.shadowColor, equals(Colors.red));
       expect(
         m.indicatorColor,
         equals(colorScheme.primary.withValues(alpha: 0.95)),
       );
-      expect(
-        m.indicatorSize,
-        equals(const Size(304, 56)),
-      );
+      expect(m.indicatorSize, equals(const Size(304, 56)));
       expect(
         m.labelTextStyle!.resolve(<WidgetState>{WidgetState.selected})?.color,
         equals(colorScheme.secondaryContainer),
@@ -7087,11 +7408,11 @@ void main() {
       );
       expect(
         m.indicatorShape,
-        equals(const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
-        )),
+        ),
       );
     });
   });
@@ -7104,12 +7425,11 @@ void main() {
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
-      final ColorScheme colorScheme =
-          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+      );
       expect(
-        FlexSubThemes.navigationRailTheme(
-          colorScheme: colorScheme,
-        ),
+        FlexSubThemes.navigationRailTheme(colorScheme: colorScheme),
         equals(
           NavigationRailThemeData(
             backgroundColor: colorScheme.surface,
@@ -7182,8 +7502,9 @@ void main() {
         'FlexSubTheme.navigationRailTheme() with opacity '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
-      final ColorScheme colorScheme =
-          ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4));
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6750A4),
+      );
       expect(
         FlexSubThemes.navigationRailTheme(
           colorScheme: colorScheme,
@@ -7316,9 +7637,7 @@ void main() {
             ),
             useIndicator: true,
             indicatorShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(13),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(13)),
             ),
             indicatorColor: colorScheme.secondaryContainer,
             labelType: NavigationRailLabelType.all,
@@ -7403,47 +7722,42 @@ void main() {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
         FlexSubThemes.outlinedButtonTheme(
-                colorScheme: colorScheme, useMaterial3: false)
-            .toString(),
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).toString(),
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: ButtonStyle(
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(40, 40),
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
-                  const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(40),
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
-              )), //buttonShape,
-              side: WidgetStateProperty.resolveWith<BorderSide?>(
-                (final Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return BorderSide(
-                      color: colorScheme.primary
-                          .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x26),
-                      width: 1.5,
-                    );
-                  }
-                  if (states.contains(WidgetState.error)) {
-                    return BorderSide(
-                      color: colorScheme.error,
-                      width: 2,
-                    );
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return BorderSide(
-                      color: colorScheme.primary,
-                      width: 2,
-                    );
-                  }
+              ), //buttonShape,
+              side: WidgetStateProperty.resolveWith<BorderSide?>((
+                final Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
-                    color: colorScheme.primary.withAlpha(0xA7),
+                    color: colorScheme.primary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x26),
                     width: 1.5,
                   );
-                },
-              ),
+                }
+                if (states.contains(WidgetState.error)) {
+                  return BorderSide(color: colorScheme.error, width: 2);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return BorderSide(color: colorScheme.primary, width: 2);
+                }
+                return BorderSide(
+                  color: colorScheme.primary.withAlpha(0xA7),
+                  width: 1.5,
+                );
+              }),
             ),
           ).toString(),
         ),
@@ -7470,75 +7784,72 @@ void main() {
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: ButtonStyle(
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(52, 40)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(52, 40),
+              ),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
-                  const EdgeInsets.symmetric(horizontal: 17)),
+                const EdgeInsets.symmetric(horizontal: 17),
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(13),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
                 ),
               ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.38);
-                  }
-                  return colorScheme.primaryContainer;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.38);
-                  }
-                  return colorScheme.primaryContainer;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primaryContainer.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primaryContainer.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primaryContainer.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                },
-              ),
-              side: WidgetStateProperty.resolveWith<BorderSide?>(
-                (final Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return BorderSide(
-                      color: colorScheme.secondaryContainer
-                          .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x26),
-                      width: 1.5,
-                    );
-                  }
-                  if (states.contains(WidgetState.error)) {
-                    return BorderSide(
-                      color: colorScheme.error,
-                      width: 2,
-                    );
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return BorderSide(
-                      color: colorScheme.secondaryContainer,
-                      width: 2,
-                    );
-                  }
+              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.primaryContainer;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.primaryContainer;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.primaryContainer.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.primaryContainer.withValues(alpha: 0.12);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.primaryContainer.withValues(alpha: 0.12);
+                }
+                return Colors.transparent;
+              }),
+              side: WidgetStateProperty.resolveWith<BorderSide?>((
+                final Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
-                    color: colorScheme.secondaryContainer.withAlpha(0xA7),
+                    color: colorScheme.secondaryContainer
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x26),
                     width: 1.5,
                   );
-                },
-              ),
+                }
+                if (states.contains(WidgetState.error)) {
+                  return BorderSide(color: colorScheme.error, width: 2);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return BorderSide(
+                    color: colorScheme.secondaryContainer,
+                    width: 2,
+                  );
+                }
+                return BorderSide(
+                  color: colorScheme.secondaryContainer.withAlpha(0xA7),
+                  width: 1.5,
+                );
+              }),
             ),
           ).toString(),
         ),
@@ -7580,75 +7891,72 @@ void main() {
         equalsIgnoringHashCodes(
           OutlinedButtonThemeData(
             style: ButtonStyle(
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(40, 40),
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return FlexSubThemes.tintedDisable(
-                        colorScheme.onSurface, colorScheme.secondary);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return FlexSubThemes.tintedDisable(
-                        colorScheme.onSurface, colorScheme.secondary);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.secondary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.secondary.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.secondary.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                },
-              ),
-              side: WidgetStateProperty.resolveWith<BorderSide?>(
-                (final Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return BorderSide(
-                      color: colorScheme.tertiary
-                          .blendAlpha(colorScheme.onSurface, 0x66)
-                          .withAlpha(0x26),
-                      width: 1.5,
-                    );
-                  }
-                  if (states.contains(WidgetState.error)) {
-                    return BorderSide(
-                      color: colorScheme.error,
-                      width: 2,
-                    );
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return BorderSide(
-                      color: colorScheme.tertiary,
-                      width: 2,
-                    );
-                  }
+              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface,
+                    colorScheme.secondary,
+                  );
+                }
+                return colorScheme.secondary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface,
+                    colorScheme.secondary,
+                  );
+                }
+                return colorScheme.secondary;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.secondary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.secondary.withValues(alpha: 0.12);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.secondary.withValues(alpha: 0.12);
+                }
+                return Colors.transparent;
+              }),
+              side: WidgetStateProperty.resolveWith<BorderSide?>((
+                final Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
-                    color: colorScheme.tertiary.withValues(alpha: 0.12),
+                    color: colorScheme.tertiary
+                        .blendAlpha(colorScheme.onSurface, 0x66)
+                        .withAlpha(0x26),
                     width: 1.5,
                   );
-                },
-              ),
+                }
+                if (states.contains(WidgetState.error)) {
+                  return BorderSide(color: colorScheme.error, width: 2);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return BorderSide(color: colorScheme.tertiary, width: 2);
+                }
+                return BorderSide(
+                  color: colorScheme.tertiary.withValues(alpha: 0.12),
+                  width: 1.5,
+                );
+              }),
             ),
           ).toString(),
         ),
@@ -7695,21 +8003,12 @@ void main() {
           );
         }
         if (states.contains(WidgetState.error)) {
-          return BorderSide(
-            color: colorScheme.error,
-            width: 1,
-          );
+          return BorderSide(color: colorScheme.error, width: 1);
         }
         if (states.contains(WidgetState.pressed)) {
-          return BorderSide(
-            color: colorScheme.tertiary,
-            width: 1,
-          );
+          return BorderSide(color: colorScheme.tertiary, width: 1);
         }
-        return BorderSide(
-          color: colorScheme.tertiary,
-          width: 1,
-        );
+        return BorderSide(color: colorScheme.tertiary, width: 1);
       });
       expect(
         FlexSubThemes.outlinedButtonTheme(
@@ -7727,16 +8026,16 @@ void main() {
               foregroundColor: foregroundColor,
               iconColor: foregroundColor,
               overlayColor: overlayColor,
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(52, 40)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(52, 40),
+              ),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
-                  const EdgeInsets.symmetric(horizontal: 17)),
+                const EdgeInsets.symmetric(horizontal: 17),
+              ),
               side: side,
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(13),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(13)),
                 ),
               ),
             ),
@@ -7759,8 +8058,9 @@ void main() {
       );
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
@@ -7768,8 +8068,9 @@ void main() {
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         colorScheme.primary,
       );
       expect(
@@ -7809,30 +8110,22 @@ void main() {
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
-              color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
-              width: 1),
+            color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
+            width: 1,
+          ),
         ),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
-        equals(BorderSide(
-          color: colorScheme.error,
-          width: 2,
-        )),
+        equals(BorderSide(color: colorScheme.error, width: 2)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(BorderSide(
-          color: colorScheme.primary,
-          width: 2,
-        )),
+        equals(BorderSide(color: colorScheme.primary, width: 2)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(BorderSide(
-          color: colorScheme.primary,
-          width: 1,
-        )),
+        equals(BorderSide(color: colorScheme.primary, width: 1)),
       );
     });
     test(
@@ -7854,19 +8147,29 @@ void main() {
       final Color tint = colorScheme.tertiary;
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.tertiary)),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.tertiary,
+          ),
+        ),
       );
       expect(
         button.style!.iconColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.tertiary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.tertiary,
+          ),
+        ),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
@@ -7887,39 +8190,35 @@ void main() {
         equals(FlexSubThemes.tintedPressed(overlay, tint, 5)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Border side states
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
+        equals(
+          BorderSide(
             color: FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, colorScheme.primaryContainer)
-                .withValues(alpha: kAlphaLowDisabledFloat),
-            width: 1)),
+              colorScheme.onSurface,
+              colorScheme.primaryContainer,
+            ).withValues(alpha: kAlphaLowDisabledFloat),
+            width: 1,
+          ),
+        ),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
-        equals(BorderSide(
-          color: colorScheme.error,
-          width: 2,
-        )),
+        equals(BorderSide(color: colorScheme.error, width: 2)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(BorderSide(
-          color: colorScheme.primaryContainer,
-          width: 2,
-        )),
+        equals(BorderSide(color: colorScheme.primaryContainer, width: 2)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(BorderSide(
-          color: colorScheme.primaryContainer,
-          width: 1,
-        )),
+        equals(BorderSide(color: colorScheme.primaryContainer, width: 1)),
       );
     });
     test(
@@ -7937,8 +8236,9 @@ void main() {
       );
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
@@ -7946,8 +8246,9 @@ void main() {
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.primary),
       );
       expect(
@@ -7968,37 +8269,32 @@ void main() {
         colorScheme.primary.withValues(alpha: 0x1F / 255),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Border side states
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
+        equals(
+          BorderSide(
             color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
-            width: 1.0)),
+            width: 1.0,
+          ),
+        ),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
-        equals(BorderSide(
-          color: colorScheme.error,
-          width: 1.0,
-        )),
+        equals(BorderSide(color: colorScheme.error, width: 1.0)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(BorderSide(
-          color: colorScheme.outline,
-          width: 1.0,
-        )),
+        equals(BorderSide(color: colorScheme.outline, width: 1.0)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(BorderSide(
-          color: colorScheme.outline,
-          width: 1.0,
-        )),
+        equals(BorderSide(color: colorScheme.outline, width: 1.0)),
       );
     });
     test(
@@ -8020,8 +8316,9 @@ void main() {
       );
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
@@ -8029,8 +8326,9 @@ void main() {
         colorScheme.onSurface.withValues(alpha: 0x61 / 255),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         colorScheme.tertiary,
       );
       expect(
@@ -8051,47 +8349,39 @@ void main() {
         colorScheme.tertiary.withValues(alpha: 0x1F / 255),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Border side states
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
-          width: 2.0,
-        )),
+        equals(
+          BorderSide(
+            color: colorScheme.onSurface.withValues(alpha: 0x1F / 255),
+            width: 2.0,
+          ),
+        ),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.error}),
-        equals(BorderSide(
-          color: colorScheme.error,
-          width: 3.0,
-        )),
+        equals(BorderSide(color: colorScheme.error, width: 3.0)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(BorderSide(
-          color: colorScheme.primaryContainer,
-          width: 3.0,
-        )),
+        equals(BorderSide(color: colorScheme.primaryContainer, width: 3.0)),
       );
       expect(
         button.style!.side!.resolve(<WidgetState>{WidgetState.selected}),
-        equals(BorderSide(
-          color: colorScheme.primaryContainer,
-          width: 2.0,
-        )),
+        equals(BorderSide(color: colorScheme.primaryContainer, width: 2.0)),
       );
       // Custom shape test
       expect(
         button.style!.shape!.resolve(<WidgetState>{}),
         equals(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
       );
@@ -8130,18 +8420,18 @@ void main() {
             surfaceTintColor: Colors.transparent,
             elevation: 8,
             textStyle: const TextStyle().apply(color: Colors.white),
-            labelTextStyle:
-                WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            labelTextStyle: WidgetStateProperty.resolveWith((
+              Set<WidgetState> states,
+            ) {
               if (states.contains(WidgetState.disabled)) {
-                return const TextStyle()
-                    .apply(color: Colors.white.withAlpha(kAlphaDisabled));
+                return const TextStyle().apply(
+                  color: Colors.white.withAlpha(kAlphaDisabled),
+                );
               }
               return const TextStyle().apply(color: Colors.white);
             }),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
           ).toString(minLevel: DiagnosticLevel.debug),
         ),
@@ -8165,8 +8455,11 @@ void main() {
       );
       expect(
         m.labelTextStyle!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(TextStyle(
-            color: colorScheme.tertiaryContainer.withAlpha(kAlphaDisabled))),
+        equals(
+          TextStyle(
+            color: colorScheme.tertiaryContainer.withAlpha(kAlphaDisabled),
+          ),
+        ),
       );
       expect(
         m.labelTextStyle!.resolve(<WidgetState>{}),
@@ -8189,44 +8482,44 @@ void main() {
         FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           RadioThemeData(
-            fillColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade400;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.primary;
-                }
-                // Opinionated color on track when not selected
-                return colorScheme.primary.withAlpha(0xDD);
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                }
+            fillColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade400;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.primary;
+              }
+              // Opinionated color on track when not selected
+              return colorScheme.primary.withAlpha(0xDD);
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
                   return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.primary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.primary.withValues(alpha: 0.12);
+                }
                 return Colors.transparent;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.primary.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return Colors.transparent;
+            }),
           ).toString(),
         ),
       );
@@ -8285,44 +8578,44 @@ void main() {
         FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           RadioThemeData(
-            fillColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade800;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.primary;
-                }
-                // Opinionated color on track when not selected
-                return colorScheme.primary.withAlpha(0xDD);
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                }
+            fillColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade800;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.primary;
+              }
+              // Opinionated color on track when not selected
+              return colorScheme.primary.withAlpha(0xDD);
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
                   return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.primary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.primary.withValues(alpha: 0.12);
+                }
                 return Colors.transparent;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.primary.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return Colors.transparent;
+            }),
           ).toString(),
         ),
       );
@@ -8387,43 +8680,43 @@ void main() {
         equalsIgnoringHashCodes(
           RadioThemeData(
             splashRadius: 30,
-            fillColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade400;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.tertiary;
-                }
-                return Colors.black54;
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return Colors.transparent;
-                }
+            fillColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade400;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.tertiary;
+              }
+              return Colors.black54;
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
                   return colorScheme.onSurface.withValues(alpha: 0.12);
                 }
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.primary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.primary.withValues(alpha: 0.12);
+                }
                 return Colors.transparent;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.primary.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return Colors.transparent;
+            }),
           ).toString(),
         ),
       );
@@ -8438,8 +8731,12 @@ void main() {
       );
       expect(
         m.fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.tertiary)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.tertiary,
+          ),
+        ),
       );
       m = FlexSubThemes.radioTheme(
         colorScheme: colorScheme,
@@ -8452,23 +8749,31 @@ void main() {
       //
       // fillColor
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.disabled}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.disabled,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
@@ -8498,18 +8803,24 @@ void main() {
       //
       // overlayColor
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaPressed)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.tertiary.withAlpha(kAlphaHovered)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.tertiary.withAlpha(kAlphaFocused)),
       );
       expect(
@@ -8544,33 +8855,45 @@ void main() {
       //
       // fillColor
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.disabled}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.disabled,
+        }),
         equals(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.tertiary),
+            colorScheme.onSurface,
+            colorScheme.tertiary,
+          ),
         ),
       );
       expect(
         m.fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.tertiary),
+            colorScheme.onSurface,
+            colorScheme.tertiary,
+          ),
         ),
       );
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
-        m.fillColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.fillColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
@@ -8581,7 +8904,9 @@ void main() {
         m.fillColor!.resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.tertiary),
+            colorScheme.onSurface,
+            colorScheme.tertiary,
+          ),
         ),
       );
       expect(
@@ -8603,22 +8928,43 @@ void main() {
       //
       // overlayColor
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.tertiary, 1.5)),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.tertiary,
+            1.5,
+          ),
+        ),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.tertiary, 1.5)),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.tertiary,
+            1.5,
+          ),
+        ),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.tertiary, 1.5)),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.tertiary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.selected}),
@@ -8626,18 +8972,33 @@ void main() {
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.tertiary, 1.5)),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.tertiary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.tertiary, 1.5)),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.tertiary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.tertiary, 1.5)),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.tertiary,
+            1.5,
+          ),
+        ),
       );
       expect(
         m.overlayColor!.resolve(<WidgetState>{}),
@@ -8663,8 +9024,9 @@ void main() {
         elevation: const WidgetStatePropertyAll<double?>(null),
         shadowColor: const WidgetStatePropertyAll<Color?>(null),
         padding: const WidgetStatePropertyAll<EdgeInsetsGeometry?>(null),
-        overlayColor:
-            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        overlayColor: WidgetStateProperty.resolveWith((
+          Set<WidgetState> states,
+        ) {
           if (states.contains(WidgetState.disabled)) {
             return colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled);
           }
@@ -8680,25 +9042,26 @@ void main() {
 
       expect(
         searchBarTheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          m.toString(minLevel: DiagnosticLevel.fine),
-        ),
+        equalsIgnoringHashCodes(m.toString(minLevel: DiagnosticLevel.fine)),
       );
       //
       // overlayColor color
       expect(
-        searchBarTheme.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.disabled}),
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled)),
       );
       expect(
-        searchBarTheme.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.pressed}),
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaInputPressed)),
       );
       expect(
-        searchBarTheme.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.hovered}),
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(colorScheme.onSurface.withAlpha(kAlphaHovered)),
       );
       expect(
@@ -8757,8 +9120,11 @@ void main() {
               : backgroundColor;
       final bool surfaceMode =
           (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
-      final double factor =
-          tintAlphaFactor(tint, colorScheme.brightness, surfaceMode);
+      final double factor = tintAlphaFactor(
+        tint,
+        colorScheme.brightness,
+        surfaceMode,
+      );
 
       final SearchBarThemeData m = SearchBarThemeData(
         backgroundColor: WidgetStatePropertyAll<Color?>(backgroundColor),
@@ -8777,13 +9143,15 @@ void main() {
           maxWidth: 700.0,
           minHeight: 60.0,
         ),
-        overlayColor:
-            WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+        overlayColor: WidgetStateProperty.resolveWith((
+          Set<WidgetState> states,
+        ) {
           if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
               return FlexSubThemes.tintedDisable(
-                      colorScheme.onSurface, backgroundColor)
-                  .withAlpha(kAlphaUltraLowDisabled);
+                colorScheme.onSurface,
+                backgroundColor,
+              ).withAlpha(kAlphaUltraLowDisabled);
             }
           }
           if (states.contains(WidgetState.pressed)) {
@@ -8801,27 +9169,31 @@ void main() {
       );
       expect(
         searchBarTheme.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          m.toString(minLevel: DiagnosticLevel.fine),
-        ),
+        equalsIgnoringHashCodes(m.toString(minLevel: DiagnosticLevel.fine)),
       );
       //
       // overlayColor color
       expect(
-        searchBarTheme.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.disabled}),
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         equals(
-            FlexSubThemes.tintedDisable(colorScheme.onSurface, backgroundColor)
-                .withAlpha(kAlphaUltraLowDisabled)),
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            backgroundColor,
+          ).withAlpha(kAlphaUltraLowDisabled),
+        ),
       );
       expect(
-        searchBarTheme.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.pressed}),
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{
+          WidgetState.pressed,
+        }),
         equals(FlexSubThemes.tintedPressed(backgroundColor, tint, factor)),
       );
       expect(
-        searchBarTheme.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.hovered}),
+        searchBarTheme.overlayColor?.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(FlexSubThemes.tintedHovered(overlay, tint, factor)),
       );
       expect(
@@ -8911,10 +9283,7 @@ void main() {
         m.style?.minimumSize?.resolve(<WidgetState>{}),
         equals(const Size(40, 40)),
       );
-      expect(
-        m.style?.padding?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.style?.padding?.resolve(<WidgetState>{}), equals(null));
       //
       // background color
       expect(
@@ -8925,10 +9294,7 @@ void main() {
         m.style?.backgroundColor?.resolve(<WidgetState>{WidgetState.selected}),
         equals(colorScheme.primary),
       );
-      expect(
-        m.style?.backgroundColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.style?.backgroundColor?.resolve(<WidgetState>{}), equals(null));
       //
       // foregroundColor color
       expect(
@@ -8940,33 +9306,45 @@ void main() {
         equals(colorScheme.onSurface.withAlpha(kAlphaDisabled)),
       );
       expect(
-        m.style?.foregroundColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.style?.foregroundColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onPrimary),
       );
       expect(
-        m.style?.iconColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.style?.iconColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onPrimary),
       );
       expect(
-        m.style?.foregroundColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.style?.foregroundColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.onPrimary),
       );
       expect(
-        m.style?.iconColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.style?.iconColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.onPrimary),
       );
       expect(
-        m.style?.foregroundColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.style?.foregroundColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.onPrimary),
       );
       expect(
-        m.style?.iconColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.style?.iconColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.onPrimary),
       );
       expect(
@@ -8988,18 +9366,24 @@ void main() {
       //
       // overlayColor color
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.surface.withAlpha(kAlphaHovered)),
       );
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.surface.withAlpha(kAlphaFocused)),
       );
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.surface.withAlpha(kAlphaPressed)),
       );
       expect(
@@ -9014,25 +9398,21 @@ void main() {
         m.style?.overlayColor?.resolve(<WidgetState>{WidgetState.pressed}),
         equals(colorScheme.onSurface.withAlpha(kAlphaPressed)),
       );
-      expect(
-        m.style?.overlayColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.style?.overlayColor?.resolve(<WidgetState>{}), equals(null));
       //
       // side
       expect(
         m.style?.side?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
-          width: 2,
-        )),
+        equals(
+          BorderSide(
+            color: colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+            width: 2,
+          ),
+        ),
       );
       expect(
         m.style?.side?.resolve(<WidgetState>{}),
-        equals(BorderSide(
-          color: colorScheme.primary,
-          width: 2,
-        )),
+        equals(BorderSide(color: colorScheme.primary, width: 2)),
       );
       //
       // Baseline test, M3 and tints
@@ -9046,62 +9426,106 @@ void main() {
       // foregroundColor
       expect(
         m.style?.foregroundColor?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.secondaryContainer)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.secondaryContainer,
+          ),
+        ),
       );
       expect(
         m.style?.iconColor?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(FlexSubThemes.tintedDisable(
-            colorScheme.onSurface, colorScheme.secondaryContainer)),
+        equals(
+          FlexSubThemes.tintedDisable(
+            colorScheme.onSurface,
+            colorScheme.secondaryContainer,
+          ),
+        ),
       );
       //
       // overlayColor color
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(colorScheme.onSecondaryContainer,
-            colorScheme.secondaryContainer, 4.0)),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.onSecondaryContainer,
+            colorScheme.secondaryContainer,
+            4.0,
+          ),
+        ),
       );
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(colorScheme.onSecondaryContainer,
-            colorScheme.secondaryContainer, 4.0)),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.onSecondaryContainer,
+            colorScheme.secondaryContainer,
+            4.0,
+          ),
+        ),
       );
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(colorScheme.onSecondaryContainer,
-            colorScheme.secondaryContainer, 4.0)),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.onSecondaryContainer,
+            colorScheme.secondaryContainer,
+            4.0,
+          ),
+        ),
       );
       expect(
         m.style?.overlayColor?.resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.secondaryContainer, 4.0)),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.secondaryContainer,
+            4.0,
+          ),
+        ),
       );
       expect(
         m.style?.overlayColor?.resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.secondaryContainer, 4.0)),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.secondaryContainer,
+            4.0,
+          ),
+        ),
       );
       expect(
         m.style?.overlayColor?.resolve(<WidgetState>{WidgetState.pressed}),
-        equals(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.secondaryContainer, 4.0)),
+        equals(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.secondaryContainer,
+            4.0,
+          ),
+        ),
       );
-      expect(
-        m.style?.overlayColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.style?.overlayColor?.resolve(<WidgetState>{}), equals(null));
       // side
       expect(
         m.style?.side?.resolve(<WidgetState>{WidgetState.disabled}),
-        equals(BorderSide(
-          color: FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, colorScheme.secondaryContainer)
-              .withAlpha(kAlphaLowDisabled),
-          width: 1,
-        )),
+        equals(
+          BorderSide(
+            color: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              colorScheme.secondaryContainer,
+            ).withAlpha(kAlphaLowDisabled),
+            width: 1,
+          ),
+        ),
       );
       // Baseline test, M3 and tints
       m = FlexSubThemes.segmentedButtonTheme(
@@ -9126,18 +9550,24 @@ void main() {
       //
       // overlayColor color
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.primaryContainer.withAlpha(kAlphaHovered)),
       );
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.primaryContainer.withAlpha(kAlphaFocused)),
       );
       expect(
-        m.style?.overlayColor
-            ?.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.style?.overlayColor?.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.primaryContainer.withAlpha(kAlphaPressed)),
       );
       expect(
@@ -9152,16 +9582,10 @@ void main() {
         m.style?.overlayColor?.resolve(<WidgetState>{WidgetState.pressed}),
         equals(colorScheme.onSecondaryContainer.withAlpha(kAlphaPressed)),
       );
-      expect(
-        m.style?.overlayColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.style?.overlayColor?.resolve(<WidgetState>{}), equals(null));
       expect(
         m.style?.side?.resolve(<WidgetState>{}),
-        equals(BorderSide(
-          color: colorScheme.primaryContainer,
-          width: 1,
-        )),
+        equals(BorderSide(color: colorScheme.primaryContainer, width: 1)),
       );
     });
   });
@@ -9175,8 +9599,9 @@ void main() {
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.sliderTheme(colorScheme: colorScheme)
-            .toString(minLevel: DiagnosticLevel.debug),
+        FlexSubThemes.sliderTheme(
+          colorScheme: colorScheme,
+        ).toString(minLevel: DiagnosticLevel.debug),
         equalsIgnoringHashCodes(
           const SliderThemeData(
             activeTrackColor: Color(0xff6200ee),
@@ -9226,8 +9651,10 @@ void main() {
             valueIndicatorColor: Color(0xff342342),
             valueIndicatorShape: DropSliderValueIndicatorShape(),
             rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
-            valueIndicatorTextStyle:
-                TextStyle(inherit: true, color: Color(0x1fffffff)),
+            valueIndicatorTextStyle: TextStyle(
+              inherit: true,
+              color: Color(0x1fffffff),
+            ),
           ).toString(minLevel: DiagnosticLevel.debug),
         ),
       );
@@ -9252,18 +9679,21 @@ void main() {
         equals(const PaddleRangeSliderValueIndicatorShape()),
       );
       expect(
-        (m.overlayColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(colorScheme.primary.withAlpha(kAlphaHovered)),
       );
       expect(
-        (m.overlayColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.primary.withAlpha(kAlphaFocused)),
       );
       expect(
-        (m.overlayColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.dragged}),
+        (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.dragged,
+        }),
         equals(colorScheme.primary.withAlpha(kAlphaFocused)),
       );
       expect(
@@ -9281,27 +9711,42 @@ void main() {
         m.valueIndicatorShape,
         equals(const RectangularSliderValueIndicatorShape()),
       );
+      expect(m.rangeValueIndicatorShape, equals(null));
       expect(
-        m.rangeValueIndicatorShape,
-        equals(null),
+        (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
+        equals(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
-        (m.overlayColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
-        equals(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
-        (m.overlayColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
-      );
-      expect(
-        (m.overlayColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.dragged}),
-        equals(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.dragged,
+        }),
+        equals(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
@@ -9443,9 +9888,7 @@ void main() {
             backgroundColor: colorScheme.error,
             elevation: 0,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(7),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(7)),
             ),
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: colorScheme.onError,
@@ -9479,12 +9922,12 @@ void main() {
             backgroundColor: colorScheme.error,
             elevation: 0,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(7),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(7)),
             ),
-            contentTextStyle:
-                TextStyle(fontSize: 14, color: colorScheme.onError),
+            contentTextStyle: TextStyle(
+              fontSize: 14,
+              color: colorScheme.onError,
+            ),
             actionTextColor: colorScheme.tertiary,
             disabledActionTextColor: colorScheme.tertiary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
@@ -9512,55 +9955,55 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
-            thumbColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade400;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.primary;
-                }
-                return Colors.grey.shade50;
-              },
-            ),
-            trackColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.black12;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.primary.withAlpha(0x70);
-                }
-                // Opinionated color on track when not selected
-                return colorScheme.primary.withAlpha(0x30);
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return null;
-                }
+            thumbColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade400;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.primary;
+              }
+              return Colors.grey.shade50;
+            }),
+            trackColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.black12;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.primary.withAlpha(0x70);
+              }
+              // Opinionated color on track when not selected
+              return colorScheme.primary.withAlpha(0x30);
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color?>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
+                  return colorScheme.primary.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 return null;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return null;
+            }),
           ).toString(),
         ),
       );
@@ -9582,10 +10025,7 @@ void main() {
         isSameColorAs(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.switchTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        )
+        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         isSameColorAs(Colors.grey.shade400),
@@ -9595,12 +10035,15 @@ void main() {
           colorScheme: colorScheme,
           useTintedDisable: true,
           useMaterial3: false,
-        )
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        ).thumbColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
         ),
       );
       expect(
@@ -9611,8 +10054,9 @@ void main() {
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, colorScheme.primary)
-              .withAlpha(kAlphaLowDisabled),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ).withAlpha(kAlphaLowDisabled),
         ),
       );
       // Disabled track colors
@@ -9624,8 +10068,9 @@ void main() {
         ).trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, colorScheme.primary)
-              .withAlpha(kAlphaVeryLowDisabled),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ).withAlpha(kAlphaVeryLowDisabled),
         ),
       );
       expect(
@@ -9676,28 +10121,19 @@ void main() {
       );
       // Non tinted interactions - selected
       expect(
-        FlexSubThemes.switchTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        )
+        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
-        FlexSubThemes.switchTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        )
+        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
-        FlexSubThemes.switchTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        )
+        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
             .overlayColor!
             .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
@@ -9709,8 +10145,13 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
-        isSameColorAs(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        isSameColorAs(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9718,8 +10159,13 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
-        isSameColorAs(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        isSameColorAs(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
@@ -9727,41 +10173,64 @@ void main() {
           useTintedInteraction: true,
           useMaterial3: false,
         ).overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
-        isSameColorAs(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        isSameColorAs(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedInteraction: true,
           useMaterial3: false,
-        )
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        isSameColorAs(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        ).overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
+        isSameColorAs(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedInteraction: true,
           useMaterial3: false,
-        )
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        isSameColorAs(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        ).overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
+        isSameColorAs(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
           colorScheme: colorScheme,
           useTintedInteraction: true,
           useMaterial3: false,
-        )
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        isSameColorAs(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+        ).overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
+        isSameColorAs(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
 
       // Default states
@@ -9806,55 +10275,55 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
-            thumbColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade800;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.secondary;
-                }
-                return Colors.grey.shade400;
-              },
-            ),
-            trackColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.white10;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.secondary.withAlpha(0x70);
-                }
-                // Opinionated color on track when not selected
-                return colorScheme.secondary.withAlpha(0x25);
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return null;
-                }
+            thumbColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade800;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.secondary;
+              }
+              return Colors.grey.shade400;
+            }),
+            trackColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.white10;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.secondary.withAlpha(0x70);
+              }
+              // Opinionated color on track when not selected
+              return colorScheme.secondary.withAlpha(0x25);
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color?>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
+                  return colorScheme.primary.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 return null;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return null;
+            }),
           ).toString(),
         ),
       );
@@ -9875,10 +10344,7 @@ void main() {
         isSameColorAs(Colors.grey.shade800),
       );
       expect(
-        FlexSubThemes.switchTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        )
+        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
             .thumbColor!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         isSameColorAs(Colors.grey.shade800),
@@ -9888,12 +10354,15 @@ void main() {
           colorScheme: colorScheme,
           useTintedDisable: true,
           useMaterial3: false,
-        )
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        ).thumbColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
         ),
       );
       expect(
@@ -9904,8 +10373,9 @@ void main() {
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, colorScheme.primary)
-              .withAlpha(kAlphaLowDisabled),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ).withAlpha(kAlphaLowDisabled),
         ),
       );
       expect(
@@ -9975,55 +10445,55 @@ void main() {
         equalsIgnoringHashCodes(
           SwitchThemeData(
             splashRadius: 30,
-            thumbColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.grey.shade400;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.tertiary;
-                }
-                return Colors.grey.shade50;
-              },
-            ),
-            trackColor: WidgetStateProperty.resolveWith<Color>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.disabled)) {
-                  return Colors.black12;
-                }
-                if (states.contains(WidgetState.selected)) {
-                  return colorScheme.tertiary.withAlpha(0x70);
-                }
-                // Opinionated color on track when not selected
-                return colorScheme.tertiary.withAlpha(0x30);
-              },
-            ),
-            overlayColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
-                if (states.contains(WidgetState.selected)) {
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.primary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.primary.withValues(alpha: 0.12);
-                  }
-                  return null;
-                }
+            thumbColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey.shade400;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.tertiary;
+              }
+              return Colors.grey.shade50;
+            }),
+            trackColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.black12;
+              }
+              if (states.contains(WidgetState.selected)) {
+                return colorScheme.tertiary.withAlpha(0x70);
+              }
+              // Opinionated color on track when not selected
+              return colorScheme.tertiary.withAlpha(0x30);
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color?>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.selected)) {
                 if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.08);
+                  return colorScheme.primary.withValues(alpha: 0.08);
                 }
                 if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
+                  return colorScheme.primary.withValues(alpha: 0.12);
                 }
                 return null;
-              },
-            ),
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withValues(alpha: 0.08);
+              }
+              if (states.contains(WidgetState.focused)) {
+                return colorScheme.onSurface.withValues(alpha: 0.12);
+              }
+              return null;
+            }),
           ).toString(),
         ),
       );
@@ -10044,19 +10514,13 @@ void main() {
         colorScheme: colorScheme,
         useMaterial3: true,
       ).thumbIcon?.resolve(<WidgetState>{});
-      expect(
-        icon,
-        equals(null),
-      );
+      expect(icon, equals(null));
       icon = FlexSubThemes.switchTheme(
         colorScheme: colorScheme,
         thumbFixedSize: false,
         useMaterial3: true,
       ).thumbIcon?.resolve(<WidgetState>{});
-      expect(
-        icon,
-        equals(null),
-      );
+      expect(icon, equals(null));
       // Thumb Icons - has hidden icon for fixed size thumb effect.
       expect(
         FlexSubThemes.switchTheme(
@@ -10076,8 +10540,10 @@ void main() {
       );
       // Disabled thumb colors
       expect(
-        switchTheme.thumbColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        switchTheme.thumbColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.surface),
       );
       expect(
@@ -10096,23 +10562,29 @@ void main() {
         ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
         ),
       );
       // Disabled track colors
       expect(
-        switchTheme.trackColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        switchTheme.trackColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
         switchTheme.trackColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(
-            colorScheme.surfaceContainerHighest.withValues(alpha: 0.12)),
+          colorScheme.surfaceContainerHighest.withValues(alpha: 0.12),
+        ),
       );
       expect(
-        switchTheme.trackOutlineColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        switchTheme.trackOutlineColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.12)),
       );
       expect(
@@ -10120,12 +10592,15 @@ void main() {
           colorScheme: colorScheme,
           useTintedDisable: true,
           useMaterial3: true,
-        )
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        ).trackColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
         ),
       );
       expect(
@@ -10136,24 +10611,32 @@ void main() {
         ).trackOutlineColor!.resolve(<WidgetState>{WidgetState.disabled}),
         isSameColorAs(
           FlexSubThemes.tintedDisable(
-              colorScheme.onSurface, colorScheme.primary),
+            colorScheme.onSurface,
+            colorScheme.primary,
+          ),
         ),
       );
 
       // Selected thumb colors
       expect(
-        switchTheme.thumbColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        switchTheme.thumbColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
-        switchTheme.thumbColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        switchTheme.thumbColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
-        switchTheme.thumbColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        switchTheme.thumbColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
@@ -10219,34 +10702,46 @@ void main() {
       );
 
       expect(
-        switchTheme.trackColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        switchTheme.trackColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         isSameColorAs(colorScheme.primary),
       );
       expect(
-        switchTheme.trackColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        switchTheme.trackColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         isSameColorAs(colorScheme.primary),
       );
       expect(
-        switchTheme.trackColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        switchTheme.trackColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         isSameColorAs(colorScheme.primary),
       );
       // Non tinted interactions - selected
       expect(
-        switchTheme.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        switchTheme.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
-        switchTheme.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        switchTheme.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
-        switchTheme.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        switchTheme.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
@@ -10257,101 +10752,130 @@ void main() {
       // Overlay color
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                useTintedInteraction: true,
-                useMaterial3: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.pressed}),
-        isSameColorAs(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: true,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
+        isSameColorAs(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                useTintedInteraction: true,
-                useMaterial3: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.hovered}),
-        isSameColorAs(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: true,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.hovered}),
+        isSameColorAs(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                useTintedInteraction: true,
-                useMaterial3: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.focused}),
-        isSameColorAs(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: true,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.focused}),
+        isSameColorAs(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                useTintedInteraction: true,
-                useMaterial3: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
-        isSameColorAs(FlexSubThemes.tintedPressed(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: true,
+        ).overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
+        isSameColorAs(
+          FlexSubThemes.tintedPressed(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                useTintedInteraction: true,
-                useMaterial3: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        isSameColorAs(FlexSubThemes.tintedHovered(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: true,
+        ).overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
+        isSameColorAs(
+          FlexSubThemes.tintedHovered(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                useTintedInteraction: true,
-                useMaterial3: true)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        isSameColorAs(FlexSubThemes.tintedFocused(
-            colorScheme.surface, colorScheme.primary, 1.5)),
+          colorScheme: colorScheme,
+          useTintedInteraction: true,
+          useMaterial3: true,
+        ).overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
+        isSameColorAs(
+          FlexSubThemes.tintedFocused(
+            colorScheme.surface,
+            colorScheme.primary,
+            1.5,
+          ),
+        ),
       );
 
       // Unselected is colored
       // trackColor color
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.pressed}),
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: true,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.pressed}),
         isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: true,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.hovered}),
         isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<WidgetState>{WidgetState.focused}),
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: true,
+        ).trackColor!.resolve(<WidgetState>{WidgetState.focused}),
         isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
       expect(
         FlexSubThemes.switchTheme(
-                colorScheme: colorScheme,
-                unselectedIsColored: true,
-                useMaterial3: true)
-            .trackColor!
-            .resolve(<WidgetState>{}),
+          colorScheme: colorScheme,
+          unselectedIsColored: true,
+          useMaterial3: true,
+        ).trackColor!.resolve(<WidgetState>{}),
         isSameColorAs(colorScheme.primary.withAlpha(0x33)),
       );
 
@@ -10401,14 +10925,8 @@ void main() {
       );
       // Thumb Icons - hidden icon.
       final Icon? usedIcon = switchTheme.thumbIcon?.resolve(<WidgetState>{});
-      expect(
-        usedIcon!.icon,
-        equals(Icons.minimize),
-      );
-      expect(
-        usedIcon.color,
-        equals(Colors.transparent),
-      );
+      expect(usedIcon!.icon, equals(Icons.minimize));
+      expect(usedIcon.color, equals(Colors.transparent));
       // Disabled thumb colors
       expect(
         switchTheme.thumbColor!.resolve(<WidgetState>{WidgetState.disabled}),
@@ -10427,8 +10945,10 @@ void main() {
       );
       // Disabled selected track colors
       expect(
-        switchTheme.trackColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        switchTheme.trackColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         equals(colorScheme.primary.withValues(alpha: 0.5)),
       );
       expect(
@@ -10437,13 +10957,14 @@ void main() {
       );
       // Track outline color focused
       expect(
-        switchTheme.trackOutlineColor!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        switchTheme.trackOutlineColor!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         isSameColorAs(
-            HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
-                .withLightness(0.69)
-                .withSaturation(0.835)
-                .toColor()),
+          HSLColor.fromColor(
+            colorScheme.primary.withValues(alpha: 0.80),
+          ).withLightness(0.69).withSaturation(0.835).toColor(),
+        ),
       );
       // Track outline color all other cases
       expect(
@@ -10452,8 +10973,9 @@ void main() {
       );
       // Track outline width focused
       expect(
-        switchTheme.trackOutlineWidth!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        switchTheme.trackOutlineWidth!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(3.5),
       );
       // Track outline width all other cases
@@ -10477,10 +10999,7 @@ void main() {
         equals(SystemMouseCursors.basic),
       );
       // Zero splash radius
-      expect(
-        switchTheme.splashRadius,
-        equals(0),
-      );
+      expect(switchTheme.splashRadius, equals(0));
     });
     test(
         'Switch FST29.7 DARK Cupertino-like Switch: '
@@ -10501,8 +11020,10 @@ void main() {
       );
       // Disabled selected track colors
       expect(
-        switchTheme.trackColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        switchTheme.trackColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.5)),
       );
       expect(
@@ -10511,13 +11032,14 @@ void main() {
       );
       // Track outline color focused
       expect(
-        switchTheme.trackOutlineColor!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        switchTheme.trackOutlineColor!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         isSameColorAs(
-            HSLColor.fromColor(colorScheme.primary.withValues(alpha: 0.80))
-                .withLightness(0.69)
-                .withSaturation(0.835)
-                .toColor()),
+          HSLColor.fromColor(
+            colorScheme.primary.withValues(alpha: 0.80),
+          ).withLightness(0.69).withSaturation(0.835).toColor(),
+        ),
       );
     });
   });
@@ -10532,30 +11054,33 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      TabBarTheme m = FlexSubThemes.tabBarTheme(
+      TabBarThemeData m = FlexSubThemes.tabBarTheme(
         colorScheme: colorScheme,
         labelColor: colorScheme.tertiary,
         dividerColor: colorScheme.outline,
         useMaterial3: true,
       );
-      expect(
-        m.dividerColor,
-        isSameColorAs(colorScheme.outline),
-      );
+      expect(m.dividerColor, isSameColorAs(colorScheme.outline));
       // Overlay color
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaHovered)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaFocused)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaPressed)),
       );
       expect(
@@ -10574,10 +11099,7 @@ void main() {
         m.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         isSameColorAs(colorScheme.tertiary.withAlpha(kAlphaPressed)),
       );
-      expect(
-        m.overlayColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.overlayColor?.resolve(<WidgetState>{}), equals(null));
       m = FlexSubThemes.tabBarTheme(
         colorScheme: colorScheme,
         dividerColor: colorScheme.outline,
@@ -10587,18 +11109,24 @@ void main() {
       );
       // Overlay color
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         isSameColorAs(colorScheme.primary.withAlpha(kAlphaHovered)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         isSameColorAs(colorScheme.primary.withAlpha(kAlphaFocused)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         isSameColorAs(colorScheme.primary.withAlpha(kAlphaPressed)),
       );
       expect(
@@ -10617,10 +11145,7 @@ void main() {
         m.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         isSameColorAs(colorScheme.primary.withAlpha(kAlphaPressed)),
       );
-      expect(
-        m.overlayColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.overlayColor?.resolve(<WidgetState>{}), equals(null));
       m = FlexSubThemes.tabBarTheme(
         colorScheme: colorScheme,
         dividerColor: colorScheme.outline,
@@ -10629,18 +11154,24 @@ void main() {
       );
       // Overlay color
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         isSameColorAs(colorScheme.secondary.withAlpha(kAlphaHovered)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         isSameColorAs(colorScheme.secondary.withAlpha(kAlphaFocused)),
       );
       expect(
-        m.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        m.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         isSameColorAs(colorScheme.secondary.withAlpha(kAlphaPressed)),
       );
       expect(
@@ -10659,10 +11190,7 @@ void main() {
         m.overlayColor!.resolve(<WidgetState>{WidgetState.pressed}),
         isSameColorAs(colorScheme.secondary.withAlpha(kAlphaPressed)),
       );
-      expect(
-        m.overlayColor?.resolve(<WidgetState>{}),
-        equals(null),
-      );
+      expect(m.overlayColor?.resolve(<WidgetState>{}), equals(null));
     });
   });
   group('WITH: FlexSubTheme.textButtonTheme ', () {
@@ -10682,13 +11210,12 @@ void main() {
         equalsIgnoringHashCodes(
           TextButtonThemeData(
             style: ButtonStyle(
-              minimumSize:
-                  ButtonStyleButton.allOrNull<Size>(const Size(40, 40)),
+              minimumSize: ButtonStyleButton.allOrNull<Size>(
+                const Size(40, 40),
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ),
             ),
@@ -10715,41 +11242,39 @@ void main() {
               ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.38);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              iconColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.disabled)) {
-                    return colorScheme.onSurface.withValues(alpha: 0.38);
-                  }
-                  return colorScheme.secondary;
-                },
-              ),
-              overlayColor: WidgetStateProperty.resolveWith<Color?>(
-                (Set<WidgetState> states) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return colorScheme.secondary.withValues(alpha: 0.08);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return colorScheme.secondary.withValues(alpha: 0.12);
-                  }
-                  if (states.contains(WidgetState.pressed)) {
-                    return colorScheme.secondary.withValues(alpha: 0.12);
-                  }
-                  return null;
-                },
-              ),
+              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.secondary;
+              }),
+              iconColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.disabled)) {
+                  return colorScheme.onSurface.withValues(alpha: 0.38);
+                }
+                return colorScheme.secondary;
+              }),
+              overlayColor: WidgetStateProperty.resolveWith<Color?>((
+                Set<WidgetState> states,
+              ) {
+                if (states.contains(WidgetState.hovered)) {
+                  return colorScheme.secondary.withValues(alpha: 0.08);
+                }
+                if (states.contains(WidgetState.focused)) {
+                  return colorScheme.secondary.withValues(alpha: 0.12);
+                }
+                if (states.contains(WidgetState.pressed)) {
+                  return colorScheme.secondary.withValues(alpha: 0.12);
+                }
+                return null;
+              }),
             ),
           ).toString(),
         ),
@@ -10788,8 +11313,9 @@ void main() {
       );
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
@@ -10797,8 +11323,9 @@ void main() {
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.primary),
       );
       expect(
@@ -10819,8 +11346,9 @@ void main() {
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
     });
@@ -10841,8 +11369,9 @@ void main() {
       final Color tint = colorScheme.tertiary;
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -10850,8 +11379,9 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.tertiary),
       );
       expect(
@@ -10872,8 +11402,9 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
     });
@@ -10892,8 +11423,9 @@ void main() {
       );
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
@@ -10901,8 +11433,9 @@ void main() {
         isSameColorAs(colorScheme.onSurface.withValues(alpha: 0.38)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.primary),
       );
       expect(
@@ -10923,8 +11456,9 @@ void main() {
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Custom shape test
@@ -10932,9 +11466,7 @@ void main() {
         button.style!.shape!.resolve(<WidgetState>{}),
         equals(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
         ),
       );
@@ -10957,8 +11489,9 @@ void main() {
       final Color tint = colorScheme.primaryContainer;
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -10966,8 +11499,9 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
@@ -10988,17 +11522,20 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 4.0)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Custom shape test
       expect(
-          button.style!.shape!.resolve(<WidgetState>{}),
-          equals(
-            const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-          ));
+        button.style!.shape!.resolve(<WidgetState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+      );
     });
     test(
         'TextButton FST31.8 M3-custom-states: Does light '
@@ -11018,8 +11555,9 @@ void main() {
       final Color tint = colorScheme.tertiary;
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -11027,8 +11565,9 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.tertiary),
       );
       expect(
@@ -11049,17 +11588,20 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 1.5)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Custom shape test
       expect(
-          button.style!.shape!.resolve(<WidgetState>{}),
-          equals(
-            const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-          ));
+        button.style!.shape!.resolve(<WidgetState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+      );
     });
     test(
         'TextButton FST31.9 M3-custom-states: Does dark '
@@ -11079,8 +11621,9 @@ void main() {
       final Color tint = colorScheme.tertiary;
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -11088,8 +11631,9 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(colorScheme.tertiary),
       );
       expect(
@@ -11110,18 +11654,20 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 2)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Custom shape test
       expect(
-          button.style!.shape!.resolve(<WidgetState>{}),
-          equals(
-            const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-            ),
-          ));
+        button.style!.shape!.resolve(<WidgetState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+      );
     });
     test(
         'TextButton FST31.10 M3-custom-states: Does dark '
@@ -11141,8 +11687,9 @@ void main() {
       final Color tint = colorScheme.primaryContainer;
       // Disabled foreground
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.disabled}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.disabled,
+        }),
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
@@ -11150,8 +11697,9 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)),
       );
       expect(
-        button.style!.foregroundColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.foregroundColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         isSameColorAs(colorScheme.primaryContainer),
       );
       expect(
@@ -11172,18 +11720,20 @@ void main() {
         isSameColorAs(FlexSubThemes.tintedPressed(overlay, tint, 5)),
       );
       expect(
-        button.style!.overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        button.style!.overlayColor!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(null),
       );
       // Custom shape test
       expect(
-          button.style!.shape!.resolve(<WidgetState>{}),
-          equals(
-            const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-            ),
-          ));
+        button.style!.shape!.resolve(<WidgetState>{}),
+        equals(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+      );
     });
   });
   group('WITH: FlexSubTheme.textSelectionTheme ', () {
@@ -11236,12 +11786,15 @@ void main() {
         selectionHandleCustomColor: const Color(0xFFEEDDCC),
       );
       expect(
-          textSelection,
-          equals(TextSelectionThemeData(
+        textSelection,
+        equals(
+          TextSelectionThemeData(
             cursorColor: colorScheme.tertiary,
             selectionColor: colorScheme.secondary.withValues(alpha: 0.4),
             selectionHandleColor: const Color(0xFFEEDDCC),
-          )));
+          ),
+        ),
+      );
     });
   });
   group('WITH: FlexSubTheme.timePickerTheme ', () {
@@ -11266,19 +11819,13 @@ void main() {
           TimePickerThemeData(
             elevation: 6,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
             hourMinuteShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             inputDecorationTheme: const InputDecorationTheme().copyWith(
               contentPadding: EdgeInsets.zero,
@@ -11309,19 +11856,13 @@ void main() {
             backgroundColor: colorScheme.tertiary,
             // dialBackgroundColor: colorScheme.surfaceVariant,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
             hourMinuteShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             inputDecorationTheme: const InputDecorationTheme().copyWith(
               contentPadding: EdgeInsets.zero,
@@ -11350,22 +11891,17 @@ void main() {
             elevation: 6,
             backgroundColor: const Color(0xFFDDDDDD),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
             hourMinuteShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            inputDecorationTheme:
-                const InputDecorationTheme(filled: true).copyWith(
+            inputDecorationTheme: const InputDecorationTheme(
+              filled: true,
+            ).copyWith(
               contentPadding: EdgeInsets.zero,
               errorStyle: const TextStyle(fontSize: 0, height: 0),
             ),
@@ -11396,22 +11932,17 @@ void main() {
             elevation: 6,
             backgroundColor: colorScheme.tertiary,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(28),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(28)),
             ),
             hourMinuteShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
             dayPeriodShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
-            inputDecorationTheme:
-                const InputDecorationTheme(filled: true).copyWith(
+            inputDecorationTheme: const InputDecorationTheme(
+              filled: true,
+            ).copyWith(
               contentPadding: EdgeInsets.zero,
               errorStyle: const TextStyle(fontSize: 0, height: 0),
             ),
@@ -11435,8 +11966,9 @@ void main() {
       //
       // dayPeriodColor
       expect(
-        (m.dayPeriodColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected}),
+        (m.dayPeriodColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
         equals(colorScheme.tertiaryContainer),
       );
       expect(
@@ -11446,33 +11978,42 @@ void main() {
       //
       // dayPeriodTextColor
       expect(
-        (m.dayPeriodTextColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        (m.dayPeriodTextColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onTertiaryContainer),
       );
       expect(
-        (m.dayPeriodTextColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        (m.dayPeriodTextColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
         equals(colorScheme.onTertiaryContainer),
       );
       expect(
-        (m.dayPeriodTextColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        (m.dayPeriodTextColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
         equals(colorScheme.onTertiaryContainer),
       );
       expect(
-        (m.dayPeriodTextColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.pressed}),
+        (m.dayPeriodTextColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onSurfaceVariant),
       );
       expect(
-        (m.dayPeriodTextColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
+        (m.dayPeriodTextColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
         equals(colorScheme.onSurfaceVariant),
       );
       expect(
-        (m.dayPeriodTextColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
+        (m.dayPeriodTextColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
         equals(colorScheme.onSurfaceVariant),
       );
       expect(
@@ -11482,52 +12023,88 @@ void main() {
       //
       // hourMinuteColor
       expect(
-        (m.hourMinuteColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.pressed,
+        }),
         equals(colorScheme.onPrimaryContainer),
       );
       expect(
-        (m.hourMinuteColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
-        equals(Color.alphaBlend(
+        (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.focused,
+        }),
+        equals(
+          Color.alphaBlend(
             colorScheme.onPrimaryContainer.withAlpha(kAlphaFocused),
-            colorScheme.primaryContainer)),
+            colorScheme.primaryContainer,
+          ),
+        ),
       );
       expect(
-        (m.hourMinuteColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
-        equals(Color.alphaBlend(
+        (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+          WidgetState.hovered,
+        }),
+        equals(
+          Color.alphaBlend(
             colorScheme.onPrimaryContainer.withAlpha(kAlphaHovered),
-            colorScheme.primaryContainer)),
+            colorScheme.primaryContainer,
+          ),
+        ),
       );
       expect(
-        (m.hourMinuteColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.selected}),
-        equals(Color.alphaBlend(
-            colorScheme.primaryContainer, colorScheme.primaryContainer)),
+        (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.selected,
+        }),
+        equals(
+          Color.alphaBlend(
+            colorScheme.primaryContainer,
+            colorScheme.primaryContainer,
+          ),
+        ),
       );
       expect(
-        (m.hourMinuteColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.pressed}),
-        equals(Color.alphaBlend(
-            colorScheme.onSurface, colorScheme.surfaceContainerHighest)),
+        (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.pressed,
+        }),
+        equals(
+          Color.alphaBlend(
+            colorScheme.onSurface,
+            colorScheme.surfaceContainerHighest,
+          ),
+        ),
       );
       expect(
-        (m.hourMinuteColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.focused}),
-        equals(Color.alphaBlend(colorScheme.onSurface.withAlpha(kAlphaFocused),
-            colorScheme.surfaceContainerHighest)),
+        (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.focused,
+        }),
+        equals(
+          Color.alphaBlend(
+            colorScheme.onSurface.withAlpha(kAlphaFocused),
+            colorScheme.surfaceContainerHighest,
+          ),
+        ),
       );
       expect(
-        (m.hourMinuteColor as WidgetStateColor?)!
-            .resolve(<WidgetState>{WidgetState.hovered}),
-        equals(Color.alphaBlend(colorScheme.onSurface.withAlpha(kAlphaHovered),
-            colorScheme.surfaceContainerHighest)),
+        (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{
+          WidgetState.hovered,
+        }),
+        equals(
+          Color.alphaBlend(
+            colorScheme.onSurface.withAlpha(kAlphaHovered),
+            colorScheme.surfaceContainerHighest,
+          ),
+        ),
       );
       expect(
         (m.hourMinuteColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
-        equals(Color.alphaBlend(colorScheme.surfaceContainerHighest,
-            colorScheme.surfaceContainerHighest)),
+        equals(
+          Color.alphaBlend(
+            colorScheme.surfaceContainerHighest,
+            colorScheme.surfaceContainerHighest,
+          ),
+        ),
       );
     });
   });
@@ -11560,8 +12137,9 @@ void main() {
             highlightColor: colorScheme.primary.withAlpha(kAlphaHighlight),
             splashColor: colorScheme.primary.withAlpha(kAlphaSplash),
             disabledColor: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-            disabledBorderColor:
-                colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+            disabledBorderColor: colorScheme.onSurface.withAlpha(
+              kAlphaVeryLowDisabled,
+            ),
             borderRadius: BorderRadius.circular(40),
             constraints: BoxConstraints(
               minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
@@ -11598,8 +12176,9 @@ void main() {
             highlightColor: colorScheme.secondary.withAlpha(kAlphaHighlight),
             splashColor: colorScheme.secondary.withAlpha(kAlphaSplash),
             disabledColor: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-            disabledBorderColor:
-                colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled),
+            disabledBorderColor: colorScheme.onSurface.withAlpha(
+              kAlphaVeryLowDisabled,
+            ),
             borderRadius: BorderRadius.circular(40),
             constraints: BoxConstraints(
               minWidth: 40 - 2 * 2 + visualDensity.baseSizeAdjustment.dx,
@@ -11640,12 +12219,14 @@ void main() {
             focusColor: FlexSubThemes.tintedFocused(overlay, tint, 2),
             highlightColor: FlexSubThemes.tintedHighlight(overlay, tint, 2),
             splashColor: FlexSubThemes.tintedSplash(overlay, tint, 2),
-            disabledColor:
-                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-                    .withAlpha(kAlphaLowDisabled),
+            disabledColor: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              tint,
+            ).withAlpha(kAlphaLowDisabled),
             disabledBorderColor: FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, colorScheme.outline)
-                .withAlpha(kAlphaLowDisabled),
+              colorScheme.onSurface,
+              colorScheme.outline,
+            ).withAlpha(kAlphaLowDisabled),
             borderRadius: BorderRadius.circular(14),
             constraints: BoxConstraints(
               minWidth: 40 - 1 * 2 + visualDensity.baseSizeAdjustment.dx,
@@ -11689,12 +12270,14 @@ void main() {
             focusColor: FlexSubThemes.tintedFocused(overlay, tint, 2),
             highlightColor: FlexSubThemes.tintedHighlight(overlay, tint, 2),
             splashColor: FlexSubThemes.tintedSplash(overlay, tint, 2),
-            disabledColor:
-                FlexSubThemes.tintedDisable(colorScheme.onSurface, tint)
-                    .withAlpha(kAlphaLowDisabled),
+            disabledColor: FlexSubThemes.tintedDisable(
+              colorScheme.onSurface,
+              tint,
+            ).withAlpha(kAlphaLowDisabled),
             disabledBorderColor: FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, colorScheme.error)
-                .withAlpha(kAlphaLowDisabled),
+              colorScheme.onSurface,
+              colorScheme.error,
+            ).withAlpha(kAlphaLowDisabled),
             borderRadius: BorderRadius.circular(16),
             constraints: BoxConstraints(
               minWidth: 40 - 1.5 * 2 + visualDensity.baseSizeAdjustment.dx,
@@ -11715,15 +12298,12 @@ void main() {
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
-        FlexSubThemes.tooltipTheme(
-          colorScheme: colorScheme,
-        ).toString(),
+        FlexSubThemes.tooltipTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           TooltipThemeData(
-            textStyle: ThemeData(brightness: Brightness.light)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: colorScheme.surface),
+            textStyle: ThemeData(
+              brightness: Brightness.light,
+            ).textTheme.bodyMedium!.copyWith(color: colorScheme.surface),
             decoration: BoxDecoration(
               color: colorScheme.onSurface,
               borderRadius: const BorderRadius.all(Radius.circular(4)),
@@ -11755,10 +12335,9 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           TooltipThemeData(
-            textStyle: ThemeData(brightness: Brightness.light)
-                .textTheme
-                .bodyLarge!
-                .copyWith(color: const Color(0xFFB5DEC2)),
+            textStyle: ThemeData(
+              brightness: Brightness.light,
+            ).textTheme.bodyLarge!.copyWith(color: const Color(0xFFB5DEC2)),
             decoration: BoxDecoration(
               color: const Color(0xDD032F11),
               borderRadius: const BorderRadius.all(Radius.circular(9)),
@@ -11795,10 +12374,9 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           TooltipThemeData(
-            textStyle: ThemeData(brightness: Brightness.light)
-                .textTheme
-                .bodyLarge!
-                .copyWith(color: colorScheme.onTertiary),
+            textStyle: ThemeData(
+              brightness: Brightness.light,
+            ).textTheme.bodyLarge!.copyWith(color: colorScheme.onTertiary),
             decoration: BoxDecoration(
               color: colorScheme.tertiary.withAlpha(0xDD),
               borderRadius: const BorderRadius.all(Radius.circular(9)),

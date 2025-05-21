@@ -1,12 +1,12 @@
-// ignore_for_file: comment_references
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
 import 'flex_instant_splash.dart';
 
-/// An enum for easy configuration and selection of ink splash effect in
-/// a [FlexColorScheme.subThemes] configuration.
+/// An enum for easy configuration and selection of ink splash effect.
+///
+/// Typically used in a [FlexColorScheme.subThemesData] configuration.
 enum FlexSplashType {
   /// Use default Material splash effect.
   ///

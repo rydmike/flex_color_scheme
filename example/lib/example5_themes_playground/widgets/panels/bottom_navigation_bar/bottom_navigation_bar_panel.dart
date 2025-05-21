@@ -26,11 +26,9 @@ class BottomNavigationBarPanel extends StatelessWidget {
         controller.useSubThemes && controller.useFlexColorScheme;
 
     final String labelForDefaultSelectedItem = isDark &&
-            (!controller.useFlexColorScheme ||
-                (controller.bottomNavigationBarSelectedItemSchemeColor ==
-                        null &&
-                    controller.bottomNavigationBarUnselectedItemSchemeColor ==
-                        null))
+            useMaterial3 &&
+            ((controller.useFlexColorScheme && !controller.useSubThemes) ||
+                !controller.useFlexColorScheme)
         ? 'secondary'
         : 'primary';
 
