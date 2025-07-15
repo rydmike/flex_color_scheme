@@ -4,6 +4,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.3.0-Dev.1
 
+* Update `FlexSubThemes.bottomAppBarTheme` to be compatible with
+  Flutter `3.34.0-0`
+
 **March 25, 2025**
 
 ### Package
