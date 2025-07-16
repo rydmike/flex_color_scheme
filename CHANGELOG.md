@@ -7,12 +7,12 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 **July 16, 2025**
 
 This is a pre-release of FlexColorScheme v8.2.1, released to support breaking 
-chnages in Flutter SDK v3.34.0-0.1.pre "beta" channel. It does not cover 
+changes in Flutter SDK v3.34.0-0.1.pre "beta" channel. It does not cover 
 additional breaking changes in latest Flutter "master" channel.
 
 Requires at least Flutter SDK v3.34.0-0.1.pre.
 
-### Pacakge
+### Package
 
 **CHORE**
 
