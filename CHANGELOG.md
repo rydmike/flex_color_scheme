@@ -2,6 +2,31 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.2.1-dev.1
+
+**July 16, 2025**
+
+This is a pre-release of FlexColorScheme v8.2.1, released to support breaking 
+chnages in Flutter SDK v3.34.0-0.1.pre "beta" channel. It does not cover 
+additional breaking changes in latest Flutter "master" channel.
+
+Requires at least Flutter SDK v3.34.0-0.1.pre.
+
+### Pacakge
+
+**CHORE**
+
+* Fix the Flutter broken API for `BottomAppBarTheme` on the beta/master channel, 
+  see [issue #283](https://github.com/rydmike/flex_color_scheme/issues/283)
+* Update tests to use the new `BottomAppBarThemeData` API.
+* Bump packages to latest versions.
+
+### Playground
+
+* Change deprecated `Switch.activeColor` to `Switch.activeThumbColor` in `ColorNameValue`.
+* Use the new `RadioGroup` API in the Playground Theme Simulator in the Material-3 example app.
+* Bump packages to latest versions.
+
 ## 8.2.0
 
 **March 23, 2025**

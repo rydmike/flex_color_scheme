@@ -49,7 +49,7 @@ abstract final class App {
   // build numbers.
   static const String versionMajor = '8';
   static const String versionMinor = '2';
-  static const String versionPatch = '1';
+  static const String versionPatch = '1-dev.1';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';

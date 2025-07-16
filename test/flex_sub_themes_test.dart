@@ -72,7 +72,7 @@ void main() {
           colorScheme: colorScheme,
           backgroundSchemeColor: SchemeColor.surfaceContainer,
         ),
-        equals(BottomAppBarTheme(color: colorScheme.surfaceContainer)),
+        equals(BottomAppBarThemeData(color: colorScheme.surfaceContainer)),
       );
     });
     test(
@@ -87,7 +87,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: true,
         ),
-        equals(const BottomAppBarTheme()),
+        equals(const BottomAppBarThemeData()),
       );
     });
   });

@@ -1,6 +1,6 @@
 name: flex_color_scheme
 description: A Flutter package to use and make beautiful Material design based themes.
-version: 8.2.1
+version: 8.2.1-dev.1
 homepage: https://docs.flexcolorscheme.com
 repository: https://github.com/rydmike/flex_color_scheme
 issue_tracker: https://github.com/rydmike/flex_color_scheme/issues
@@ -35,7 +35,7 @@ topics:
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.29.0'
+  flutter: '>=3.34.0-0'
 
 dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
@@ -50,11 +50,11 @@ dependencies:
   #
   # Flutter does not expose the "@internal" annotation via foundation, to use it we need to
   # import the package.
-  meta: ^1.9.0
+  meta: ^1.9.1
 
 dev_dependencies:
   # Dart test coverage
-  coverage: ^1.13.1
+  coverage: ^1.15.0
   # Flutter test tools
   flutter_test:
     sdk: flutter

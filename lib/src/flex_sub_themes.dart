@@ -766,7 +766,7 @@ abstract final class FlexSubThemes {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level on elements placed on the [BottomAppBar].
-  static BottomAppBarTheme bottomAppBarTheme({
+  static BottomAppBarThemeData bottomAppBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
@@ -830,7 +830,7 @@ abstract final class FlexSubThemes {
     final Color? effectiveColor =
         backgroundSchemeColor == null && useM3 ? null : backgroundColor;
 
-    return BottomAppBarTheme(
+    return BottomAppBarThemeData(
       color: effectiveColor,
       elevation: elevation,
       height: height,
