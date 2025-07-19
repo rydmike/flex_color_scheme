@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.2.1-dev.1
+version: 8.2.1-dev.2
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.34.0-0'
+  flutter: '>=3.35.0-0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).

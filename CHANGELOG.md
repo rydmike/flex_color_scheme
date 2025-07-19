@@ -2,13 +2,37 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.2.1-dev.2
+
+**July 19, 2025**
+
+This is a pre-release of FlexColorScheme v8.2.1, released to support breaking changes in Flutter SDK v3.35.0-0.0.pre "beta" channel. It may not cover additional breaking changes in the latest Flutter "master" channel.
+
+Requires at least Flutter SDK v3.35.0-0.0.pre.
+
+### Package
+
+**CHORE**
+
+* Fix the Flutter broken API for `AppBarTheme`, migrate to use new `AppBarThemeData`. For more information, see the discussion in [#PR285](https://github.com/rydmike/flex_color_scheme/pull/285)
+* Update tests to use the new `AppBarThemeData` API.
+
+
+* Fix the Flutter broken API for `InputDecorationTheme`, migrate to use new `InputDecorationThemeData`. For more information, see the discussion in [#PR285](https://github.com/rydmike/flex_color_scheme/pull/285)
+* Update tests to use the new `InputDecorationThemeData` API.
+
+
+* The test for `FlexSubThemeData.sliderShowValueIndicator` was changed from in Flutter 3.35 deprecated value `ShowValueIndicator.always` to `ShowValueIndicator.onDrag`, which is the new equivalent value in Flutter 3.35.
+
+### Playground
+
+* The slider indicator value selection got the new selections `ShowValueIndicator.onDrag` and `ShowValueIndicator.alwaysShow`, which are the new values in Flutter 3.35. The old value `ShowValueIndicator.always` is deprecated in Flutter 3.35 and will be removed in a future version of Flutter SDK and the Playground app.
+
 ## 8.2.1-dev.1
 
 **July 16, 2025**
 
-This is a pre-release of FlexColorScheme v8.2.1, released to support breaking 
-changes in Flutter SDK v3.34.0-0.1.pre "beta" channel. It does not cover 
-additional breaking changes in latest Flutter "master" channel.
+This is a pre-release of FlexColorScheme v8.2.1, released to support breaking changes in Flutter SDK v3.34.0-0.1.pre "beta" channel. It does not cover additional breaking changes in latest Flutter "master" channel.
 
 Requires at least Flutter SDK v3.34.0-0.1.pre.
 
@@ -16,8 +40,7 @@ Requires at least Flutter SDK v3.34.0-0.1.pre.
 
 **CHORE**
 
-* Fix the Flutter broken API for `BottomAppBarTheme` on the beta/master channel, 
-  see [issue #283](https://github.com/rydmike/flex_color_scheme/issues/283)
+* Fix the Flutter broken API for `BottomAppBarTheme` on the beta/master channel, see [issue #283](https://github.com/rydmike/flex_color_scheme/issues/283)
 * Update tests to use the new `BottomAppBarThemeData` API.
 * Bump packages to latest versions.
 

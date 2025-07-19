@@ -98,8 +98,8 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 /// These are the current custom and opinionated component themes available in
 /// [FlexSubThemes] as static theming helpers:
 ///
-/// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
-/// * [BottomAppBarTheme] for [BottomAppBar] via
+/// * [AppBarThemeData] for [AppBar] via [FlexSubThemes.appBarTheme].
+/// * [BottomAppBarThemeData] for [BottomAppBar] via
 ///   [FlexSubThemes.bottomAppBarTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [FlexSubThemes.bottomNavigationBarTheme].
@@ -124,7 +124,7 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 ///   [FlexSubThemes.floatingActionButtonTheme].
 /// * [IconButtonThemeData] for [IconButton] via
 ///   [FlexSubThemes.iconButtonTheme].
-/// * [InputDecorationTheme] for [InputDecoration] via
+/// * [InputDecorationThemeData] for [InputDecoration] via
 ///   [FlexSubThemes.inputDecorationTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
 /// * [MenuButtonThemeData] for [MenuItemButton] and [SubmenuButton] via

@@ -12,6 +12,10 @@ import 'constants.dart';
 import 'elevation_screen.dart';
 import 'typography_screen.dart';
 
+// TODO(rydmike): Investigate why we in this Flutter version suddenly need to
+//  ignore discarded futures for AnimationController()..forward
+// ignore_for_file: discarded_futures
+
 class AppExampleMaterial3 extends StatefulWidget {
   const AppExampleMaterial3({super.key, required this.themeController});
   final ThemeController themeController;

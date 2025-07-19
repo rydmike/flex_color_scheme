@@ -49,7 +49,7 @@ abstract final class App {
   // build numbers.
   static const String versionMajor = '8';
   static const String versionMinor = '2';
-  static const String versionPatch = '1-dev.1';
+  static const String versionPatch = '1-dev.2';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
@@ -57,7 +57,7 @@ abstract final class App {
   static const String flutterVersionNum = FlutterVersion.version ?? '';
   static const String flutterChannel = FlutterVersion.channel ?? '';
   static const String flutterVersion =
-      '$flutterChannel $flutterVersionNum (canvaskit$buildType)';
+      '$flutterChannel $flutterVersionNum ($buildType)';
   static const String copyright = '© 2020 - 2025';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';

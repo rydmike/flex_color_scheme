@@ -1729,7 +1729,7 @@ class _DropdownButtonFormFieldShowcaseState
               ),
             ),
           DropdownButtonFormField<String>(
-            value: selectedItem,
+            initialValue: selectedItem,
             onChanged: (String? value) {
               setState(() {
                 selectedItem = value ?? '1 DropdownButtonFormField';
@@ -2676,8 +2676,8 @@ class _TextFieldShowcaseState extends State<TextFieldShowcase> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDefaultDecoration =
-        Theme.of(context).inputDecorationTheme == const InputDecorationTheme();
+    final bool isDefaultDecoration = Theme.of(context).inputDecorationTheme ==
+        const InputDecorationThemeData();
 
     return RepaintBoundary(
       child: Column(

@@ -246,7 +246,7 @@ void main() {
       sliderIndicatorSchemeColor: SchemeColor.tertiary,
       sliderValueTinted: true,
       sliderValueIndicatorType: FlexSliderIndicatorType.drop,
-      sliderShowValueIndicator: ShowValueIndicator.always,
+      sliderShowValueIndicator: ShowValueIndicator.onDrag,
       sliderTrackHeight: 5,
       //
       inputDecoratorRadius: 8,
@@ -608,7 +608,7 @@ void main() {
           sliderIndicatorSchemeColor: SchemeColor.tertiary,
           sliderValueTinted: true,
           sliderValueIndicatorType: FlexSliderIndicatorType.drop,
-          sliderShowValueIndicator: ShowValueIndicator.always,
+          sliderShowValueIndicator: ShowValueIndicator.onDrag,
           sliderTrackHeight: 5,
           //
           inputDecoratorRadius: 8,

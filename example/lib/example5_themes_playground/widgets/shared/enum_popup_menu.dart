@@ -334,7 +334,11 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         case ShowValueIndicator.onlyForContinuous:
           return 'Only for continuous';
         case ShowValueIndicator.always:
-          return 'Show on all types';
+          return 'On all types (deprecated)';
+        case ShowValueIndicator.onDrag:
+          return 'When dragging';
+        case ShowValueIndicator.alwaysVisible:
+          return 'Always visible';
         case ShowValueIndicator.never:
           return 'Never show';
         case null:
@@ -581,7 +585,15 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           child: Icon(Icons.horizontal_rule),
         ),
         Tooltip(
-          message: 'All',
+          message: 'All type (deprecated)',
+          child: Icon(Icons.done_outline),
+        ),
+        Tooltip(
+          message: 'When dragging',
+          child: Icon(Icons.drag_indicator),
+        ),
+        Tooltip(
+          message: 'Allways visible',
           child: Icon(Icons.done_outline),
         ),
         Tooltip(
