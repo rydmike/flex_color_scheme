@@ -7979,6 +7979,7 @@ class FlexColorScheme with Diagnosticable {
               // Style match its InputDecoration to same as TextField.
               inputDecorationTheme: effectiveInputDecorationTheme,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              maximumSize: subTheme.dropdownMenuMaximumSize,
             )
           : null,
       //

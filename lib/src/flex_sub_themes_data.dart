@@ -328,6 +328,7 @@ class FlexSubThemesData with Diagnosticable {
     this.popupMenuOpacity,
     //
     this.dropdownMenuTextStyle, // Not in Playground
+    this.dropdownMenuMaximumSize, // Not in Playground
     //
     this.menuRadius,
     this.menuElevation,
@@ -2445,6 +2446,26 @@ class FlexSubThemesData with Diagnosticable {
   /// https://github.com/flutter/flutter/issues/131350
   final TextStyle? dropdownMenuTextStyle;
 
+  // TODO(rydmike): Remove maximumSize fallback when fixed in Flutter SDK.
+  /// The maximum size of the dropdown menu itself.
+  ///
+  /// A [Size.infinite] or null value for this property means that the menu's
+  /// maximum size is not constrained.
+  ///
+  /// This value must be greater than or equal to `minimumSize`.
+  ///
+  /// If not defined, this property temporarily defaults to
+  /// `WidgetStatePropertyAll<Size>(Size.infinite)`. This default fallback is
+  /// added to avoid a breaking style bug in Flutter SDK 3.32.0 and later,
+  /// at least up to 3.35.1 and maybe later versions too.
+  /// It is a temporary fix for this issue
+  /// https://github.com/flutter/flutter/issues/170970 and it will be
+  /// removed in a future release when
+  /// this PR fix https://github.com/flutter/flutter/pull/169438
+  /// has landed in the stable Flutter release. It has landed in master, but
+  /// not yet in Flutter 3.35.1.
+  final WidgetStateProperty<Size?>? dropdownMenuMaximumSize;
+
   /// The border radius of [MenuBar], [MenuAnchor] and [DropdownMenu]
   /// containers.
   ///
@@ -4324,6 +4345,7 @@ class FlexSubThemesData with Diagnosticable {
     final double? popupMenuOpacity,
     //
     final TextStyle? dropdownMenuTextStyle,
+    final WidgetStateProperty<Size?>? dropdownMenuMaximumSize,
     //
     final double? menuRadius,
     final double? menuElevation,
@@ -4777,6 +4799,8 @@ class FlexSubThemesData with Diagnosticable {
       //
       dropdownMenuTextStyle:
           dropdownMenuTextStyle ?? this.dropdownMenuTextStyle,
+      dropdownMenuMaximumSize:
+          dropdownMenuMaximumSize ?? this.dropdownMenuMaximumSize,
       //
       menuRadius: menuRadius ?? this.menuRadius,
       menuElevation: menuElevation ?? this.menuElevation,
@@ -5290,6 +5314,7 @@ class FlexSubThemesData with Diagnosticable {
         other.popupMenuOpacity == popupMenuOpacity &&
         //
         other.dropdownMenuTextStyle == dropdownMenuTextStyle &&
+        other.dropdownMenuMaximumSize == dropdownMenuMaximumSize &&
         //
         other.menuRadius == menuRadius &&
         other.menuElevation == menuElevation &&
@@ -5688,6 +5713,7 @@ class FlexSubThemesData with Diagnosticable {
         popupMenuOpacity,
         //
         dropdownMenuTextStyle,
+        dropdownMenuMaximumSize,
         //
         menuRadius,
         menuElevation,
@@ -6165,6 +6191,8 @@ class FlexSubThemesData with Diagnosticable {
     //
     properties.add(DiagnosticsProperty<TextStyle>(
         'dropdownMenuTextStyle', dropdownMenuTextStyle));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<Size?>>(
+        'dropdownMenuMaximumSize', dropdownMenuMaximumSize));
     //
     properties.add(DiagnosticsProperty<double>('menuRadius', menuRadius));
     properties.add(DiagnosticsProperty<double>('menuElevation', menuElevation));
