@@ -39,6 +39,7 @@ import 'text_field/text_field_panel.dart';
 import 'text_theme/primary_text_theme_panel.dart';
 import 'text_theme/text_theme_panel.dart';
 import 'theme_code/theme_code_panel.dart';
+import 'theme_export_import/theme_export_import_panel.dart';
 import 'theme_simulator/theme_simulator_panel.dart';
 import 'tooltip_progressbar/tooltip_progressbar_settings.dart';
 import 'widget_showcase/widget_showcase_panel.dart';
@@ -63,6 +64,7 @@ class Panel extends StatelessWidget {
       ThemeSimulatorPanel(controller: controller),
       const WidgetShowcasePanel(),
       ThemeCodePanel(controller),
+      ThemeExportImportPanel(controller),
       GeneralPanel(controller),
       AdaptiveThemePanel(controller),
       ShapeRadiusPanel(controller),

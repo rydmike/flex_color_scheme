@@ -148,6 +148,25 @@ const List<Topic> themeTopics = <Topic>[
         'rows of code to reproduce with the vanilla ThemeData factory.\n',
   ),
   Topic(
+    group: TopicGroup.general,
+    heading: 'Export and Import Theme Settings',
+    buttonLabel: 'Export\nImport',
+    icon: Icons.data_object,
+    info: 'With this feature you can export '
+        'the current theme settings from the Themes Playground '
+        'app to a JSON string into the staging area below. '
+        'You can then paste this JSON string into a file and e.g. '
+        'keep the file in your project. The Themes Playground '
+        'settings can then be re-imported here if you need to '
+        "make design changes to your application's theme.\n"
+        '\n'
+        'You can also share your theme configuration with others via a '
+        'link. The link will open the Playground with your current theme '
+        'settings applied. You can the link to share your '
+        'theme settings with others, just to show it off or so they can '
+        'use it as a starting point for their own themes.\n',
+  ),
+  Topic(
     group: TopicGroup.components,
     heading: 'General Settings',
     buttonLabel: 'General\nSettings',
