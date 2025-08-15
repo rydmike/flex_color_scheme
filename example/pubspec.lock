@@ -135,7 +135,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "8.2.1-dev.2"
+    version: "8.3.0"
   flex_seed_scheme:
     dependency: "direct main"
     description:
@@ -171,10 +171,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_fonts
-      sha256: b1ac0fe2832c9cc95e5e88b57d627c5e68c223b9657f4b96e1487aa9098c7b82
+      sha256: df9763500dadba0155373e9cb44e202ce21bd9ed5de6bdbd05c5854e86839cb8
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.1"
+    version: "6.3.0"
   hive_ce:
     dependency: "direct main"
     description:
@@ -614,4 +614,4 @@ packages:
     version: "6.5.0"
 sdks:
   dart: ">=3.8.0-0 <4.0.0"
-  flutter: ">=3.35.0-0"
+  flutter: ">=3.35.0"

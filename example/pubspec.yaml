@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.2.1-dev.2
+version: 8.3.0
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.35.0-0'
+  flutter: '>=3.35.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -61,20 +61,14 @@ dependencies:
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^6.2.1
+  google_fonts: ^6.3.0
 
   # Hive local storage, originally by Simon Leir/Choi.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
   # hive: ^2.2.3 # Original Hive package
-  # This is a community fork that supports WASM-GC, by using package:web and
-  # dart:js_interop.
+  # This is a community edition fork that supports WASM-GC, by using
+  # package:web and dart:js_interop.
   hive_ce: ^2.11.3
-    #path: ../../hive_ce/hive
-    # Temporarily used from a fixed fork until the official package is updated.
-    #git:
-    #  url: https://github.com/rydmike/hive_ce.git
-    #  ref: main
-    #  path: hive/
 
   # Internationalization package, by Google dart.dev.
   # Used only for date time string formatting in example 5.
