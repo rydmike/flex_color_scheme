@@ -6111,7 +6111,7 @@ class FlexColorScheme with Diagnosticable {
     } else {
       final ThemeData theme = Theme.of(context);
       final ColorScheme colorScheme = theme.colorScheme;
-      final AppBarTheme appBarTheme = AppBarTheme.of(context);
+      final AppBarThemeData appBarTheme = AppBarTheme.of(context);
       appBarColor = appBarTheme.backgroundColor ??
           (colorScheme.brightness == Brightness.dark
               ? colorScheme.surface
@@ -6337,7 +6337,7 @@ class FlexColorScheme with Diagnosticable {
   ///   This is done to avoid issues with deprecation of
   ///   `ThemeData.bottomAppBarColor` that is still used in M2 mode defaults.
   ///   When using M3 mode and if `bottomAppBarElevation` is null, we
-  ///   actually get a default `BottomAppBarTheme()` all null theme made by
+  ///   actually get a default `BottomAppBarThemeData()` all null theme made by
   ///   `FlexSubThemes.bottomAppBarTheme`.
   ///
   /// * A predefined slightly opinionated [InputDecorationTheme] is used. It
