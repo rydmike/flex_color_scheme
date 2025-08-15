@@ -2560,7 +2560,13 @@ void main() {
       );
       expect(
         FlexSubThemes.dropdownMenuTheme(colorScheme: colorScheme),
-        equals(const DropdownMenuThemeData(menuStyle: MenuStyle())),
+        equals(
+          const DropdownMenuThemeData(
+            menuStyle: MenuStyle(
+              maximumSize: WidgetStatePropertyAll<Size>(Size.infinite),
+            ),
+          ),
+        ),
       );
       const DropdownMenuThemeData m = DropdownMenuThemeData(
         menuStyle: MenuStyle(
