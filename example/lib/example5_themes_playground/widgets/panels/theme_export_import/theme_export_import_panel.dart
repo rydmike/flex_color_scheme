@@ -9,7 +9,6 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../theme/theme_values.dart';
-import '../../../utils/generate_theme_dart_code.dart';
 import '../../../utils/import_export_playground_settings.dart';
 import '../../../utils/share_settings.dart';
 import '../../dialogs/delete_settings_data.dart';
@@ -153,7 +152,6 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final String code = generateThemeDartCode(widget.controller);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
