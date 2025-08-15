@@ -164,19 +164,23 @@ There are **Theme Playground** version builds corresponding to the last major re
 
 You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7 and 8, you should prefer to match the minor version too.
 
-| Name  | Version | Link                                                        |
-|-------|---------|-------------------------------------------------------------| 
-| V8.2  | V8.2.0  | https://rydmike.com/flexcolorscheme/themesplayground-latest |
-| V8.1  | V8.1.1  | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
-| V8.0  | V8.0.2  | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
-| V7.3  | V7.3.1  | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
-| V7.2  | V7.2.0  | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
-| V7.1  | V7.1.2  | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
-| V7.0  | V7.0.5  | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
-| V6    | V6.1.1  | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
-| V5    | V5.1.0  | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
-| V4    | V4.2.0  | https://rydmike.com/flexcolorschemeV4Tut5                   |
+| Name        | Version         | Link                                                        |
+|-------------|-----------------|-------------------------------------------------------------| 
+| V8.2 & V8.3 | V8.2.0 & V8.3.0 | https://rydmike.com/flexcolorscheme/themesplayground-latest |
+| V8.1        | V8.1.1          | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
+| V8.0        | V8.0.2          | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
+| V7.3        | V7.3.1          | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
+| V7.2        | V7.2.0          | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
+| V7.1        | V7.1.2          | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
+| V7.0        | V7.0.5          | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
+| V6          | V6.1.1          | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
+| V5          | V5.1.0          | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
+| V4          | V4.2.0          | https://rydmike.com/flexcolorschemeV4Tut5                   |
 
+
+There is also an experimental version of the **Themes Playground** that uses a WASM GC build to run with WASM in the browser. It is available for the latest version of **FlexColorScheme**, you can find it here [WASM Playground](https://playground.flexcolorscheme.com/). This build may run smoother than the above JS build in Chromium-based browsers on desktops. If your browser does not support WASM GC, it will automatically fall back to the JS build. 
+
+The plan is to move the default **Themes Playground** links to this WASM GC build soon. This WASM build was first publicly shared with v8.3.0 release of **FlexColorScheme**. 
 
 > **NOTE!**  
 > If you use a higher version of a WEB build and try to load a lower version again with the same browser, it will most likely fail and not load. This happens because older and newer builds run on the same domain and share the same browser local storage file. This allows newer versions to load data configured in older versions. However, older versions may not understand some data stored and inserted by the newer versions and they will fail. You can get the web build for an older version to start again by clearing stored browser data:  
