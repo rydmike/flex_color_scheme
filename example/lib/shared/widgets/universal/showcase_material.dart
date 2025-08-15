@@ -1812,48 +1812,28 @@ class _DropDownMenuShowcaseState extends State<DropDownMenuShowcase> {
             },
             dropdownMenuEntries: const <DropdownMenuEntry<IconData>>[
               DropdownMenuEntry<IconData>(
-                style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
-                ),
                 label: 'Alarm settings',
                 leadingIcon: Icon(Icons.alarm),
                 value: Icons.alarm,
               ),
               DropdownMenuEntry<IconData>(
-                style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
-                ),
                 label: 'Disabled settings',
                 leadingIcon: Icon(Icons.settings),
                 enabled: false,
                 value: Icons.settings,
               ),
               DropdownMenuEntry<IconData>(
-                style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
-                ),
                 label: 'Cabin overview',
                 leadingIcon: Icon(Icons.cabin),
                 value: Icons.cabin,
               ),
               DropdownMenuEntry<IconData>(
-                style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
-                ),
                 label: 'Surveillance view',
                 leadingIcon: Icon(Icons.camera_outdoor_rounded),
                 // value: 'four',
                 value: Icons.camera_outdoor_rounded,
               ),
               DropdownMenuEntry<IconData>(
-                style: ButtonStyle(
-                  padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 12)),
-                ),
                 label: 'Water alert',
                 leadingIcon: Icon(Icons.water_damage),
                 // value: 'five',
