@@ -919,35 +919,29 @@ class _RadiosState extends State<Radios> {
     return ComponentDecoration(
       label: 'Radio buttons',
       tooltipMessage: 'Use RadioListTile<T> or Radio<T>',
-      child: Column(
-        children: <Widget>[
-          RadioListTile<Options>(
-            title: const Text('Option 1'),
-            value: Options.option1,
-            groupValue: _selectedOption,
-            onChanged: (Options? value) {
-              setState(() {
-                _selectedOption = value;
-              });
-            },
-          ),
-          RadioListTile<Options>(
-            title: const Text('Option 2'),
-            value: Options.option2,
-            groupValue: _selectedOption,
-            onChanged: (Options? value) {
-              setState(() {
-                _selectedOption = value;
-              });
-            },
-          ),
-          RadioListTile<Options>(
-            title: const Text('Option 3'),
-            value: Options.option3,
-            groupValue: _selectedOption,
-            onChanged: null,
-          ),
-        ],
+      child: RadioGroup<Options>(
+        groupValue: _selectedOption,
+        onChanged: (Options? value) {
+          setState(() {
+            _selectedOption = value;
+          });
+        },
+        child: const Column(
+          children: <Widget>[
+            RadioListTile<Options>(
+              title: Text('Option 1'),
+              value: Options.option1,
+            ),
+            RadioListTile<Options>(
+              title: Text('Option 2'),
+              value: Options.option2,
+            ),
+            RadioListTile<Options>(
+              title: Text('Option 3'),
+              value: Options.option3,
+            ),
+          ],
+        ),
       ),
     );
   }

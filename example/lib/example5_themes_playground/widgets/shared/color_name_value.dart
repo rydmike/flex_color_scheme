@@ -255,7 +255,7 @@ class _ColorNameValueState extends State<ColorNameValue> {
                         .copyWith(outline: widget.color.withAlpha(0x77))),
                 child: Switch(
                   value: widget.isLocked!,
-                  activeColor: Color.alphaBlend(
+                  activeThumbColor: Color.alphaBlend(
                       widget.color.withAlpha(0x44), widget.textColor),
                   activeTrackColor: Color.alphaBlend(
                       widget.color.withAlpha(0x99), widget.textColor),

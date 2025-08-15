@@ -7,6 +7,10 @@ import '../../panels/panel.dart';
 import '../model/theme_topic.dart';
 import 'topic_selector.dart';
 
+// TODO(rydmike): Investigate why we in this Flutter version suddenly need to
+//  ignore discarded futures for AnimationController()..forward
+// ignore_for_file: discarded_futures
+
 /// A [Panel] wrapper that puts the content of our panels in a [Row]
 /// with a [TopicSelectorVertical] on the left or right of a [Panel]
 /// in a [ListView] inside a HeaderCard.

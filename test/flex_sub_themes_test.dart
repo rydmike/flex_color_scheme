@@ -52,7 +52,7 @@ void main() {
         'EXPECT equal to AppBarTheme with shape RoundedRectangleBorder()', () {
       expect(
         FlexSubThemes.appBarTheme(),
-        equals(const AppBarTheme(shape: RoundedRectangleBorder())),
+        equals(const AppBarThemeData(shape: RoundedRectangleBorder())),
       );
     });
   });
@@ -72,7 +72,7 @@ void main() {
           colorScheme: colorScheme,
           backgroundSchemeColor: SchemeColor.surfaceContainer,
         ),
-        equals(BottomAppBarTheme(color: colorScheme.surfaceContainer)),
+        equals(BottomAppBarThemeData(color: colorScheme.surfaceContainer)),
       );
     });
     test(
@@ -87,7 +87,7 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: true,
         ),
-        equals(const BottomAppBarTheme()),
+        equals(const BottomAppBarThemeData()),
       );
     });
   });
@@ -2560,7 +2560,13 @@ void main() {
       );
       expect(
         FlexSubThemes.dropdownMenuTheme(colorScheme: colorScheme),
-        equals(const DropdownMenuThemeData(menuStyle: MenuStyle())),
+        equals(
+          const DropdownMenuThemeData(
+            menuStyle: MenuStyle(
+              maximumSize: WidgetStatePropertyAll<Size>(Size.infinite),
+            ),
+          ),
+        ),
       );
       const DropdownMenuThemeData m = DropdownMenuThemeData(
         menuStyle: MenuStyle(
@@ -4532,7 +4538,7 @@ void main() {
           useMaterial3: useM3, // false
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          InputDecorationTheme(
+          InputDecorationThemeData(
             labelStyle: WidgetStateTextStyle.resolveWith((
               Set<WidgetState> states,
             ) {
@@ -4745,7 +4751,7 @@ void main() {
               ? usedFillColor.darken(kInputDecoratorLightBgDarken)
               : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
-      final InputDecorationTheme m = FlexSubThemes.inputDecorationTheme(
+      final InputDecorationThemeData m = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
         tintedDisabled: tintDisable,
         tintedInteractions: tintInteract,
@@ -4755,7 +4761,7 @@ void main() {
       expect(
         m.toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          InputDecorationTheme(
+          InputDecorationThemeData(
             labelStyle: WidgetStateTextStyle.resolveWith((
               Set<WidgetState> states,
             ) {
@@ -4991,7 +4997,7 @@ void main() {
           useMaterial3: useM3,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          InputDecorationTheme(
+          InputDecorationThemeData(
             labelStyle: WidgetStateTextStyle.resolveWith((
               Set<WidgetState> states,
             ) {
@@ -5226,7 +5232,7 @@ void main() {
           useMaterial3: useM3,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          InputDecorationTheme(
+          InputDecorationThemeData(
             labelStyle: WidgetStateTextStyle.resolveWith((
               Set<WidgetState> states,
             ) {
@@ -5462,7 +5468,7 @@ void main() {
           useMaterial3: useM3,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          InputDecorationTheme(
+          InputDecorationThemeData(
             labelStyle: WidgetStateTextStyle.resolveWith((
               Set<WidgetState> states,
             ) {
@@ -5759,7 +5765,7 @@ void main() {
           useMaterial3: false,
         ).toString(minLevel: DiagnosticLevel.fine),
         equalsIgnoringHashCodes(
-          InputDecorationTheme(
+          InputDecorationThemeData(
             labelStyle: WidgetStateTextStyle.resolveWith((
               Set<WidgetState> states,
             ) {
@@ -6004,7 +6010,7 @@ void main() {
       );
       //
       // Outline M3 case
-      InputDecorationTheme m = FlexSubThemes.inputDecorationTheme(
+      InputDecorationThemeData m = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
         borderType: FlexInputBorderType.outline,
         backgroundAlpha: 0xAA,
@@ -11846,7 +11852,7 @@ void main() {
           colorScheme: colorScheme,
           backgroundColor: const Color(0xFFDDDDDD),
           backgroundSchemeColor: SchemeColor.tertiary,
-          inputDecorationTheme: const InputDecorationTheme(),
+          inputDecorationTheme: const InputDecorationThemeData(),
           useInputDecoratorTheme: true,
           useMaterial3: false,
         ),
@@ -11882,7 +11888,7 @@ void main() {
         FlexSubThemes.timePickerTheme(
           colorScheme: colorScheme,
           backgroundColor: const Color(0xFFDDDDDD),
-          inputDecorationTheme: const InputDecorationTheme(filled: true),
+          inputDecorationTheme: const InputDecorationThemeData(filled: true),
           useInputDecoratorTheme: true,
           useMaterial3: false,
         ),
@@ -11922,7 +11928,7 @@ void main() {
         FlexSubThemes.timePickerTheme(
           colorScheme: colorScheme,
           backgroundSchemeColor: SchemeColor.tertiary,
-          inputDecorationTheme: const InputDecorationTheme(filled: true),
+          inputDecorationTheme: const InputDecorationThemeData(filled: true),
           elementRadius: 12,
           useInputDecoratorTheme: true,
           useMaterial3: false,
@@ -11959,7 +11965,7 @@ void main() {
       );
       final TimePickerThemeData m = FlexSubThemes.timePickerTheme(
         colorScheme: colorScheme,
-        inputDecorationTheme: const InputDecorationTheme(filled: true),
+        inputDecorationTheme: const InputDecorationThemeData(filled: true),
         useInputDecoratorTheme: true,
         useMaterial3: true,
       );

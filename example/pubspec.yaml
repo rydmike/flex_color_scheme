@@ -1,10 +1,10 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.2.1
+version: 8.3.0
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.32.0'
+  flutter: '>=3.35.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -33,7 +33,7 @@ dependencies:
   # device_frame: ^1.2.0
   # Original no longer well maintained, using fork:
   # https://pub:dev/packages/device_frame_plus:
-  device_frame_plus: ^1.3.1
+  device_frame_plus: ^1.5.0
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used for color selection in the Playground to make customized color schemes.
@@ -57,24 +57,18 @@ dependencies:
   # SVG file drawing, used by Asset Images, by dnfield.dev, now Google.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.1.0
+  flutter_svg: ^2.2.0
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^6.2.1
+  google_fonts: ^6.3.0
 
   # Hive local storage, originally by Simon Leir/Choi.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
   # hive: ^2.2.3 # Original Hive package
-  # This is a community fork that supports WASM-GC, by using package:web and
-  # dart:js_interop.
-  hive_ce: ^2.11.2
-    #path: ../../hive_ce/hive
-    # Temporarily used from a fixed fork until the official package is updated.
-    #git:
-    #  url: https://github.com/rydmike/hive_ce.git
-    #  ref: main
-    #  path: hive/
+  # This is a community edition fork that supports WASM-GC, by using
+  # package:web and dart:js_interop.
+  hive_ce: ^2.11.3
 
   # Internationalization package, by Google dart.dev.
   # Used only for date time string formatting in example 5.
@@ -98,7 +92,7 @@ dependencies:
 
   # Used for launching a WEB URL, by Google flutter.dev.
   # https://pub.dev/packages/url_launcher
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
 
   # Used for url query param extraction in Playground
   # Replaces dart:html, support WASM. Package by Google dart.dev.

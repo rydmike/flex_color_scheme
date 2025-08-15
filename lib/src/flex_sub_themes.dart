@@ -240,8 +240,8 @@ enum FlexSliderIndicatorType {
 ///
 /// These component theme helpers are currently available:
 ///
-/// * [AppBarTheme] for [AppBar] via [appBarTheme].
-/// * [BottomAppBarTheme] for [BottomAppBar] via [bottomAppBarTheme].
+/// * [AppBarThemeData] for [AppBar] via [appBarTheme].
+/// * [BottomAppBarThemeData] for [BottomAppBar] via [bottomAppBarTheme].
 /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
 ///   [bottomNavigationBarTheme].
 /// * [BottomSheetThemeData] for [BottomSheet] via [bottomSheetTheme].
@@ -259,7 +259,8 @@ enum FlexSliderIndicatorType {
 /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
 ///   [floatingActionButtonTheme].
 /// * [IconButtonThemeData] for [IconButton] via [iconButtonTheme].
-/// * [InputDecorationTheme] for [InputDecoration] via [inputDecorationTheme].
+/// * [InputDecorationThemeData] for [InputDecoration] via
+///   [inputDecorationTheme].
 /// * [ListTileThemeData] for [ListTile] via [listTileTheme].
 /// * [MenuBarThemeData] for [MenuBar] via [menuBarTheme].
 /// * [MenuButtonThemeData] for [MenuItemButton] and [SubmenuButton] via
@@ -657,7 +658,7 @@ abstract final class FlexSubThemes {
   /// keep and have all [FlexColorScheme] used sub-themes in the [FlexSubThemes]
   /// class. Actual convenience features may be added to
   /// [FlexSubThemes.appBarTheme] later.
-  static AppBarTheme appBarTheme({
+  static AppBarThemeData appBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     final ColorScheme? colorScheme,
 
@@ -738,7 +739,7 @@ abstract final class FlexSubThemes {
     /// property in all descendant [AppBar] widgets.
     final SystemUiOverlayStyle? systemOverlayStyle,
   }) {
-    return AppBarTheme(
+    return AppBarThemeData(
       centerTitle: centerTitle,
       backgroundColor: backgroundColor,
       foregroundColor: foregroundColor,
@@ -766,7 +767,7 @@ abstract final class FlexSubThemes {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level on elements placed on the [BottomAppBar].
-  static BottomAppBarTheme bottomAppBarTheme({
+  static BottomAppBarThemeData bottomAppBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
 
@@ -830,7 +831,7 @@ abstract final class FlexSubThemes {
     final Color? effectiveColor =
         backgroundSchemeColor == null && useM3 ? null : backgroundColor;
 
-    return BottomAppBarTheme(
+    return BottomAppBarThemeData(
       color: effectiveColor,
       elevation: elevation,
       height: height,
@@ -2282,7 +2283,7 @@ abstract final class FlexSubThemes {
     /// does internally to the default null InputDecorationTheme. There is
     /// no need to add those in the passed in InputDecorationTheme. Just pass
     /// in your overall used app InputDecorationTheme.
-    final InputDecorationTheme? inputDecorationTheme,
+    final InputDecorationThemeData? inputDecorationTheme,
 
     /// Set to true to not use the provided [inputDecorationTheme].
     ///
@@ -2483,14 +2484,14 @@ abstract final class FlexSubThemes {
     // This InputDecorationTheme is here to help work around this issue:
     // https://github.com/flutter/flutter/issues/131666
     // It is reasonably successful in fixing the issue, but it is not perfect.
-    InputDecorationTheme datePickerDefaultInputDecorationTheme() {
+    InputDecorationThemeData datePickerDefaultInputDecorationTheme() {
       const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(4.0));
       // The input decoration theme is used to style the input fields in the
       // date picker dialog. This matches the default input decoration theme
       // used by the date picker dialog.
       // TODO(rydmike): Check that Flutter's defaults have not changed.
       // If it has the changes are probably subtle enough to not matter for now.
-      return InputDecorationTheme(
+      return InputDecorationThemeData(
         filled: false,
         hoverColor: colorScheme.brightness == Brightness.dark
             ? Colors.white.withValues(alpha: 0.04)
@@ -2846,11 +2847,31 @@ abstract final class FlexSubThemes {
 
     /// An [InputDecorationTheme] for the text input part of the [DropDownMenu].
     /// Typically you want it to match the input decorator on your TextField.
-    final InputDecorationTheme? inputDecorationTheme,
+    final InputDecorationThemeData? inputDecorationTheme,
 
     /// Overrides the default value for DropdownMenuThemeData
     /// [menuStyle.surfaceTintColor].
     final Color? surfaceTintColor,
+
+    // TODO(rydmike): Remove maximumSize fallback when fixed in Flutter SDK.
+    /// The maximum size of the dropdown menu itself.
+    ///
+    /// A [Size.infinite] or null value for this property means that the menu's
+    /// maximum size is not constrained.
+    ///
+    /// This value must be greater than or equal to `minimumSize`.
+    ///
+    /// If not defined, this property temporarily defaults to
+    /// `WidgetStatePropertyAll<Size>(Size.infinite)`. This default fallback is
+    /// added to avoid a breaking style bug in Flutter SDK 3.32.0 and later,
+    /// at least up to 3.35.1 and maybe later versions too.
+    /// It is a temporary fix for this issue
+    /// https://github.com/flutter/flutter/issues/170970 and it will be
+    /// removed in a future release when
+    /// this PR fix https://github.com/flutter/flutter/pull/169438
+    /// has landed in the stable Flutter release. It has landed in master, but
+    /// not yet in Flutter 3.35.1.
+    final WidgetStateProperty<Size?>? maximumSize,
   }) {
     return DropdownMenuThemeData(
       inputDecorationTheme: inputDecorationTheme,
@@ -2859,6 +2880,8 @@ abstract final class FlexSubThemes {
         surfaceTintColor: surfaceTintColor == null
             ? null
             : WidgetStatePropertyAll<Color>(surfaceTintColor),
+        maximumSize:
+            maximumSize ?? const WidgetStatePropertyAll<Size>(Size.infinite),
       ),
     );
   }
@@ -3740,7 +3763,7 @@ abstract final class FlexSubThemes {
   /// it defaults to [kInputDecoratorRadius] which is 16, in Material 3 mode it
   /// defaults to [kInputDecoratorM3Radius] which is 4, following the Material
   /// 3 design specification.
-  static InputDecorationTheme inputDecorationTheme({
+  static InputDecorationThemeData inputDecorationTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
 
@@ -4092,7 +4115,7 @@ abstract final class FlexSubThemes {
       effectiveRadius,
     );
 
-    return InputDecorationTheme(
+    return InputDecorationThemeData(
       labelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
           return tintDisable
@@ -8492,7 +8515,7 @@ abstract final class FlexSubThemes {
     /// does internally to the default null InputDecorationTheme. There is
     /// no need to add those in the passed in InputDecorationTheme. Just pass
     /// in your overall used app InputDecorationTheme.
-    final InputDecorationTheme? inputDecorationTheme,
+    final InputDecorationThemeData? inputDecorationTheme,
 
     /// Set to true to not use the provided [inputDecorationTheme].
     ///
@@ -8601,9 +8624,9 @@ abstract final class FlexSubThemes {
       });
     }
 
-    InputDecorationTheme timePickerDefaultInputDecorationTheme() {
+    InputDecorationThemeData timePickerDefaultInputDecorationTheme() {
       const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(8.0));
-      return InputDecorationTheme(
+      return InputDecorationThemeData(
         contentPadding: EdgeInsets.zero,
         filled: true,
         hoverColor: colorScheme.brightness == Brightness.dark
@@ -8766,7 +8789,7 @@ abstract final class FlexSubThemes {
                 // See https://github.com/flutter/flutter/issues/54104
                 errorStyle: const TextStyle(fontSize: 0, height: 0),
               ) ??
-              const InputDecorationTheme().copyWith(
+              const InputDecorationThemeData().copyWith(
                 contentPadding: EdgeInsets.zero,
                 // Prevent the error text from appearing.
                 // See https://github.com/flutter/flutter/issues/54104

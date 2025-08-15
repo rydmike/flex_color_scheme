@@ -6111,7 +6111,7 @@ class FlexColorScheme with Diagnosticable {
     } else {
       final ThemeData theme = Theme.of(context);
       final ColorScheme colorScheme = theme.colorScheme;
-      final AppBarTheme appBarTheme = AppBarTheme.of(context);
+      final AppBarThemeData appBarTheme = AppBarTheme.of(context);
       appBarColor = appBarTheme.backgroundColor ??
           (colorScheme.brightness == Brightness.dark
               ? colorScheme.surface
@@ -7417,7 +7417,7 @@ class FlexColorScheme with Diagnosticable {
     // if opted in, otherwise use pre FCS v4 variant as before. This decoration
     // theme is also passed into the TimePickerTheme, and DropdownMenu so we
     // get the same style used on them too.
-    final InputDecorationTheme? effectiveInputDecorationTheme = useSubThemes
+    final InputDecorationThemeData? effectiveInputDecorationTheme = useSubThemes
         // FCS V4 and later component theme based input decorator use.
         ? FlexSubThemes.inputDecorationTheme(
             colorScheme: colorScheme,
@@ -7451,7 +7451,7 @@ class FlexColorScheme with Diagnosticable {
             // FCS default one in all previous versions before version 4.0.0.
             // Kept for backwards defaults compatibility. Only used when not
             // using opinionated component sub-themes in M2 mode.
-            : InputDecorationTheme(
+            : InputDecorationThemeData(
                 filled: subTheme.inputDecoratorIsFilled ?? true,
                 fillColor: isDark
                     ? colorScheme.primary.withAlpha(0x0F) // 6%
@@ -7979,6 +7979,7 @@ class FlexColorScheme with Diagnosticable {
               // Style match its InputDecoration to same as TextField.
               inputDecorationTheme: effectiveInputDecorationTheme,
               surfaceTintColor: removeTint ? Colors.transparent : null,
+              maximumSize: subTheme.dropdownMenuMaximumSize,
             )
           : null,
       //

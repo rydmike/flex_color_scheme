@@ -13,6 +13,10 @@ import 'model/theme_topic.dart';
 import 'widgets/theme_color_selector.dart';
 import 'widgets/topic_selector.dart';
 
+// TODO(rydmike): Investigate why we in this Flutter version suddenly need to
+//  ignore discarded futures for AnimationController()..forward
+// ignore_for_file: discarded_futures
+
 // ignore_for_file: comment_references
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
