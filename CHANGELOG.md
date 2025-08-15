@@ -39,13 +39,16 @@ This release of FlexColorScheme adds support for breaking changes in Flutter v3.
 ### Playground
 
 **CHORE**
+
 * Change deprecated `Switch.activeColor` to `Switch.activeThumbColor` in `ColorNameValue`.
 * Use the new `RadioGroup` API in the Playground Theme Simulator in the Material-3 example app.
+* Update known issues info expands in the Playground with up-to-date information about known issues and limitations in Flutter SDK theming.
 * Bump packages to latest versions. 
 
-* **FEATURE**
-* The slider indicator value selection got the new selections `ShowValueIndicator.onDrag` and `ShowValueIndicator.alwaysShow`, which are new values in Flutter 3.35. The old value `ShowValueIndicator.always` is deprecated in Flutter 3.35 and will be removed in a future version of Flutter SDK and the Playground app.
+**FEATURE**
 
+* The slider indicator value selection got the new selections `ShowValueIndicator.onDrag` and `ShowValueIndicator.alwaysShow`, which are new values in Flutter 3.35. The old value `ShowValueIndicator.always` is deprecated in Flutter 3.35 and will be removed in a future version of Flutter SDK and the Playground app.
+* The Code generation and Export-Import to JSON features were separated into two different panels. This was done to improve the discoverability of the Export-import to JSON feature.
  
 ## 8.2.0
 
