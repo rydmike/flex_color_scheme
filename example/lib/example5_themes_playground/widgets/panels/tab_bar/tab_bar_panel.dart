@@ -448,6 +448,7 @@ class TabBarPanel extends StatelessWidget {
                   TextSpan(
                     style: spanTextStyle,
                     text: '.\n'
+                        '\n'
                         'In Flutter 3.24 the elastic TabBar indicator '
                         'animation is glitchy and in Flutter 3.27.0 to 3.27.2, '
                         'the elastic TabBar indicator animation is broken, '
@@ -471,6 +472,7 @@ class TabBarPanel extends StatelessWidget {
                   TextSpan(
                     style: spanTextStyle,
                     text: '.\n'
+                        '\n'
                         'In Flutter 3.29.0 the TabBar animation is again a bit '
                         'broken, see issue ',
                   ),

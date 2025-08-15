@@ -209,10 +209,10 @@ class TooltipProgressBarPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'There is a nice new feature to enable circular '
-                      'end-caps in Flutter 3.10. However, that feature cannot '
-                      'be set via a theme at all yet. To support bringing the '
-                      'feature Flutter, go upvote this  ',
+                  text: 'There is a feature to enable circular '
+                      'end-caps in Flutter 3.10. Before Flutter version 3.29 '
+                      'these features could not be set via a theme at all. '
+                      'Read more about this in the ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -221,7 +221,10 @@ class TooltipProgressBarPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n',
+                  text: '. In Flutter 3.29 and later, the circular end-caps '
+                      'can be set via the theme as well, but it is currently '
+                      'not supported in FCS or the Playground. Support will '
+                      'be added in a coming version update.\n',
                 ),
               ],
             ),

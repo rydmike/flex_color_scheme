@@ -169,11 +169,12 @@ class SearchBarPanel extends StatelessWidget {
                   text: '. This issue has been fixed in Flutter 3.13.\n'
                       '\n'
                       'The SearchView suffers from the common Flutter lack '
-                      'of support f variant themes, thus if you set the '
+                      'of support for variant themes, thus if you set the '
                       'shape to something else for the none full screen mode '
                       'the full screen mode gets the same shape. You do not '
-                      'want or expect that, it should remain without a shape '
-                      'in full screen mode. See issue <report and add link>.',
+                      'want or expect that. It should remain without a shape '
+                      'in full screen mode. See issue <not yet reported '
+                      'or is it? Let me know if it is, or report it.>.',
                 ),
               ],
             ),

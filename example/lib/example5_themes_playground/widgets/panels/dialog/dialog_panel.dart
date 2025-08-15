@@ -640,8 +640,8 @@ class DialogPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n The DatePicker should adopt the working prior '
-                      'art solution used by the TimePicker.',
+                  text: '. The DatePicker should prefer to adopt the working '
+                      'prior art solution used by the TimePicker.',
                 ),
               ],
             ),

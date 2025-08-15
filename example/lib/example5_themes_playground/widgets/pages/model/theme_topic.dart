@@ -629,9 +629,9 @@ const List<Topic> themeTopics = <Topic>[
     heading: 'Android System Navigation Bar',
     buttonLabel: 'Android\nSystem Nav',
     icon: Icons.android_outlined,
-    info: 'The system navigation bar in Android is in newer versions '
+    info: 'The system navigation bar in Android is in current Android versions '
         'a swipe bar at the bottom of the screen used for swipe '
-        'gestures. In older versions it is made up of the 3 system '
+        'gestures. In older Android versions it is made up of the 3 system '
         'navigation buttons. The system navigation area can be styled '
         'in Flutter, but not via themes.\n'
         '\n'

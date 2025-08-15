@@ -278,7 +278,8 @@ class SegmentedButtonsPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', these issues are fixed in Flutter 3.10.\n\n'
+                  text: ', these issues are fixed in Flutter 3.10 and later.'
+                      '\n\n'
                       'The minimum height or size cannot be set, see ',
                 ),
                 LinkTextSpan(
@@ -297,10 +298,10 @@ class SegmentedButtonsPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. The former issue is closed, but NOT fixed! '
+                  text: '. The former issue was fixed in Flutter 3.22. '
                       'The PR that closed it only fixed the wrong spec '
                       'default size, but did not make it customizable. The '
-                      'latter issue is still open and has no fix yet.',
+                      'latter issue is was fixed in Flutter 3.27.',
                 ),
               ],
             ),

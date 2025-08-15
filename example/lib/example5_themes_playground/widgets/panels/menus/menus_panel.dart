@@ -15,6 +15,18 @@ class MenusPanel extends StatelessWidget {
   const MenusPanel(this.controller, {super.key});
   final ThemeController controller;
 
+  static final Uri _menuSizeIssue170970 = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/issues/170970',
+  );
+
+  static final Uri _menuSizeIssue169438PR = Uri(
+    scheme: 'https',
+    host: 'github.com',
+    path: 'flutter/flutter/pull/169438',
+  );
+
   static final Uri _menuNoThemeOnFocusedIssue123736 = Uri(
     scheme: 'https',
     host: 'github.com',
@@ -353,9 +365,35 @@ class MenusPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'The selected and focused style of any item found in '
-                      'the DropdownMenu is not themed. This is a bug in '
-                      'Flutter SDK. For more information see ',
+                  text: 'The width of the DropdownMenu no longer by default '
+                      'matches the width of the dropdown input field. This is '
+                      'a regression bug in Flutter SDK that was introduced in '
+                      'version 3.32.0. For more information see ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _menuSizeIssue170970,
+                  text: 'issue #170970',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. This has been fixed in master, but has not yet '
+                      'landed in Flutter 3.35.1. See ',
+                ),
+                LinkTextSpan(
+                  style: linkStyle,
+                  uri: _menuSizeIssue169438PR,
+                  text: 'PR #169438',
+                ),
+                TextSpan(
+                  style: spanTextStyle,
+                  text: '. FlexColorScheme version 8.3.0 includes a built-in '
+                      'workaround for this issue that will be used until the '
+                      'FIX PR is merged into the stable channel.\n'
+                      '\n'
+                      'The selected and focused style of any item found in '
+                      'the DropdownMenu is not themed. This was a bug in '
+                      'Flutter SDK before 3.27. For more information see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -364,8 +402,7 @@ class MenusPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This has been fixed in master, but has not yet '
-                      'landed in Flutter 3.24.\n'
+                  text: '. This has been fixed in Flutter 3.27 and later.\n'
                       '\n'
                       'There are three reported '
                       'issues about the DropdownMenu not following the '
@@ -379,8 +416,8 @@ class MenusPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. This FIX PR, that also links the issues, '
-                      'has landed in master, but not yet in Flutter 3.24.\n'
+                  text: '. The FIX PR, that also links the issues and the FIX '
+                      'landed in Flutter 3.27.\n'
                       '\n'
                       'Another issue was using leading icons on both menu '
                       'input field and the items as show in the above example. '

@@ -319,7 +319,7 @@ class NavigationDrawerPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. A few of them have been solved, but most '
+                  text: '. A few of them have been solved, but many '
                       'are open and still impact latest Flutter release.\n',
                 ),
               ],

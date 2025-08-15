@@ -597,7 +597,7 @@ class AppBarPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. The issue is still in effect in Flutter 3.24, '
+                  text: '. The issue is still in effect in Flutter 3.35.1. '
                       'FCS includes the fix mentioned in the '
                       'issue to make the color change animated.\n',
                 ),

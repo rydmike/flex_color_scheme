@@ -22,7 +22,7 @@ class NavigationRailPanel extends StatelessWidget {
     path: 'rydmike/flex_color_scheme/issues/277',
   );
 
-  // TODO(rydmike): To be added when issue is created
+  // TODO(rydmike): To be added when Flutter issue for the above is created
   // static final Uri _railIssueFlutter = Uri(
   //   scheme: 'https',
   //   host: 'github.com',
@@ -105,10 +105,10 @@ class NavigationRailPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'If you any other labType than none and show the '
+                  text: 'If you use any other labType than none and show the '
                       'NavigationRail in extended state, Flutter SDK will '
-                      'throw. This is a Flutter SDK limitation, not '
-                      'FlexColorScheme related, see ',
+                      'throw an exception. This is a Flutter SDK limitation, '
+                      'not FlexColorScheme related, see ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,

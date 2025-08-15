@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
@@ -14,28 +13,28 @@ class BottomSheetPanel extends StatelessWidget {
 
   final ThemeController controller;
 
-  static final Uri _fcsIssue270 = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'rydmike/flex_color_scheme/issues/270',
-  );
-
-  static final Uri _fcsFlutterIssue160963 = Uri(
-    scheme: 'https',
-    host: 'github.com',
-    path: 'flutter/flutter/issues/160963',
-  );
+  // static final Uri _fcsIssue270 = Uri(
+  //   scheme: 'https',
+  //   host: 'github.com',
+  //   path: 'rydmike/flex_color_scheme/issues/270',
+  // );
+  //
+  // static final Uri _fcsFlutterIssue160963 = Uri(
+  //   scheme: 'https',
+  //   host: 'github.com',
+  //   path: 'flutter/flutter/issues/160963',
+  // );
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
-    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-      color: theme.colorScheme.primary,
-      fontWeight: FontWeight.bold,
-    );
+    // final TextStyle spanTextStyle = theme.textTheme.bodySmall!
+    //     .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    // final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+    //   color: theme.colorScheme.primary,
+    //   fontWeight: FontWeight.bold,
+    // );
 
     // The most common logic for enabling Playground controls.
     final bool enableControl =
@@ -144,49 +143,49 @@ class BottomSheetPanel extends StatelessWidget {
           value: controller.bottomSheetModalSchemeColor,
           onChanged: controller.setBottomSheetModalSchemeColor,
         ),
-        const Divider(),
-        ListTileReveal(
-          dense: true,
-          title: const Text('Known issues'),
-          subtitleReveal: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  style: spanTextStyle,
-                  text: 'Using a BackdropFilter with a BottomSheet does not '
-                      'work if any other content clip behavior than Clip.none '
-                      'is used. This is a known issue in Flutter, see '
-                      'Flutter SDK ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsFlutterIssue160963,
-                  text: 'issue #160963',
-                ),
-                // _fcsChipUmbrellaIssue115364
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '.\n\n'
-                      'The issues is also reported in the FlexColorScheme '
-                      'issue tracker, see issue ',
-                ),
-                LinkTextSpan(
-                  style: linkStyle,
-                  uri: _fcsIssue270,
-                  text: 'issue #270',
-                ),
-                TextSpan(
-                  style: spanTextStyle,
-                  text: '. It contains a work around example that can be used '
-                      'to change the clip behavior to Clip.none, if you need '
-                      'to use a BackdropFilter with a BottomSheet, with FCS '
-                      'versions prior to 8.1.0, when the property value '
-                      'defaulted to Clip.antiAlias and could not be changed.\n',
-                ),
-              ],
-            ),
-          ),
-        ),
+        // const Divider(),
+        // ListTileReveal(
+        //   dense: true,
+        //   title: const Text('Known issues'),
+        //   subtitleReveal: RichText(
+        //     text: TextSpan(
+        //       children: <TextSpan>[
+        //         TextSpan(
+        //           style: spanTextStyle,
+        //           text: 'Using a BackdropFilter with a BottomSheet does not '
+        //             'work if any other content clip behavior than Clip.none '
+        //               'is used. This is a known issue in Flutter, see '
+        //               'Flutter SDK ',
+        //         ),
+        //         LinkTextSpan(
+        //           style: linkStyle,
+        //           uri: _fcsFlutterIssue160963,
+        //           text: 'issue #160963',
+        //         ),
+        //         // _fcsChipUmbrellaIssue115364
+        //         TextSpan(
+        //           style: spanTextStyle,
+        //           text: '.\n\n'
+        //               'The issues is also reported in the FlexColorScheme '
+        //               'issue tracker, see issue ',
+        //         ),
+        //         LinkTextSpan(
+        //           style: linkStyle,
+        //           uri: _fcsIssue270,
+        //           text: 'issue #270',
+        //         ),
+        //         TextSpan(
+        //           style: spanTextStyle,
+        //         text: '. It contains a work around example that can be used '
+        //             'to change the clip behavior to Clip.none, if you need '
+        //               'to use a BackdropFilter with a BottomSheet, with FCS '
+        //               'versions prior to 8.1.0, when the property value '
+        //            'defaulted to Clip.antiAlias and could not be changed.\n',
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
