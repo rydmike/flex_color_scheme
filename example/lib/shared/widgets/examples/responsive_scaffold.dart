@@ -426,7 +426,8 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   // Previous media size.
   late Size previousMediaSize;
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // Scaffold key to control the Drawer.
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void didUpdateWidget(covariant ResponsiveScaffold oldWidget) {
@@ -450,8 +451,10 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         isMenuClosed = true;
       } else {
         isMenuClosed = false;
+        // Auto-close drawer when transitioning to desktop breakpoint to avoid
+        // showing both drawer and persistent sidebar menu simultaneously
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          _scaffoldKey.currentState?.closeDrawer();
+          scaffoldKey.currentState?.closeDrawer();
         });
       }
     }
@@ -586,7 +589,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         Expanded(
           child: FocusTraversalGroup(
             child: Scaffold(
-              key: _scaffoldKey,
+              key: scaffoldKey,
               appBar: AppBar(
                 title: widget.title,
                 actions: const <Widget>[AboutIconButton()],
@@ -613,13 +616,13 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                     maxWidth: widget.menuWidth,
                     railWidth: widget.railWidth,
                     onSelect: (int index) {
-                     _scaffoldKey.currentState?.closeDrawer();
+                      scaffoldKey.currentState?.closeDrawer();
                       widget.onSelect?.call(index);
                     },
                     // User pushed menu button in Drawer, close the Drawer and
                     // set menu state to not be closed, it will open as a rail.
                     onOperate: () {
-                      _scaffoldKey.currentState?.closeDrawer();
+                      scaffoldKey.currentState?.closeDrawer();
                       // If we do this, we can wait to complete the closing
                       // drawer animation, before we trigger animating the
                       // rail visible:
