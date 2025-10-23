@@ -613,13 +613,13 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                     maxWidth: widget.menuWidth,
                     railWidth: widget.railWidth,
                     onSelect: (int index) {
-                      Navigator.of(context).pop();
+                     _scaffoldKey.currentState?.closeDrawer();
                       widget.onSelect?.call(index);
                     },
                     // User pushed menu button in Drawer, close the Drawer and
                     // set menu state to not be closed, it will open as a rail.
                     onOperate: () {
-                      Navigator.of(context).pop();
+                      _scaffoldKey.currentState?.closeDrawer();
                       // If we do this, we can wait to complete the closing
                       // drawer animation, before we trigger animating the
                       // rail visible:
