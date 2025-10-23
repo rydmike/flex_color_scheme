@@ -426,6 +426,8 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   // Previous media size.
   late Size previousMediaSize;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void didUpdateWidget(covariant ResponsiveScaffold oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -448,6 +450,9 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         isMenuClosed = true;
       } else {
         isMenuClosed = false;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _scaffoldKey.currentState?.closeDrawer();
+        });
       }
     }
     if (widget.menuItemsEnabled != null) {
@@ -581,6 +586,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
         Expanded(
           child: FocusTraversalGroup(
             child: Scaffold(
+              key: _scaffoldKey,
               appBar: AppBar(
                 title: widget.title,
                 actions: const <Widget>[AboutIconButton()],
