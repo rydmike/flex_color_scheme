@@ -2,6 +2,31 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.3.1
+
+**October 24, 2025**
+
+### Package
+
+No changes
+
+### Playground
+
+**CHORE**
+
+* Update build to use Flutter 3.35.7 stable.
+* Bump packages to latest versions.
+ 
+**CHANGE**
+ 
+* Switch from `device_frame_plus` back to using original author's `device_frame` package.
+* Add new simulated Android and iPhone devices in updated `device_frame` to the Themes Playground device frame selector.
+
+**FIX**
+
+* Fix issue [#298](https://github.com/rydmike/flex_color_scheme/issues/298) Auto-close drawer when switching to desktop layout.
+* Fix issue [#300](https://github.com/rydmike/flex_color_scheme/issues/300) ResponsiveScaffold: Tooltip widget causes exception when the rail menu animates to full menu width.
+
 ## 8.3.0
 
 **August 15, 2025**
