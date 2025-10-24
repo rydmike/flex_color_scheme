@@ -30,10 +30,11 @@ dependencies:
   # Simulated device frames package by aloisdeniel.com.
   # Used by the theme simulator in the Playground.
   # https://pub.dev/packages/device_frame
-  # device_frame: ^1.2.0
+  device_frame: ^1.4.0
   # Original no longer well maintained, using fork:
   # https://pub:dev/packages/device_frame_plus:
-  device_frame_plus: ^1.5.0
+  # Original got good updates, mvoing back to it on version 1.4.0.
+  # device_frame_plus: ^1.5.0
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used for color selection in the Playground to make customized color schemes.
