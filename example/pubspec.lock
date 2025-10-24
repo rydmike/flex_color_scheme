@@ -89,14 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  device_frame_plus:
+  device_frame:
     dependency: "direct main"
     description:
-      name: device_frame_plus
-      sha256: ccc94abccd4d9f0a9f19ef239001b3a59896e678ad42601371d7065889f2bf78
+      name: device_frame
+      sha256: "7b2ebb2a09d6cc0f086b51bd1412d7be83e0170056a7290349169be41164c86a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.4.0"
   fake_async:
     dependency: transitive
     description:
@@ -135,7 +135,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "8.3.0"
+    version: "8.3.1"
   flex_seed_scheme:
     dependency: "direct main"
     description:
@@ -167,6 +167,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: "7294967ff0a6d98638e7acb774aac3af2550777accd8149c90af5b014e6d44d8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   google_fonts:
     dependency: "direct main"
     description:

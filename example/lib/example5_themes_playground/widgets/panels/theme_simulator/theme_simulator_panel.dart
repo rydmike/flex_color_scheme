@@ -1,4 +1,4 @@
-import 'package:device_frame_plus/device_frame_plus.dart';
+import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
@@ -314,6 +314,30 @@ class SimulatorPopupMenu extends StatelessWidget {
     //
     // iPhones here
     SimDevice(
+      info: Devices.ios.iPhone16ProMax,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone16Pro,
+      size: 26,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone16Plus,
+      size: 29,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone16,
+      size: 25,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone15ProMax,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.ios.iPhone15Pro,
+      size: 26,
+    ),
+    SimDevice(
       info: Devices.ios.iPhone13ProMax,
       size: 30,
     ),
@@ -341,12 +365,19 @@ class SimulatorPopupMenu extends StatelessWidget {
       info: Devices.ios.iPhoneSE,
       size: 20,
     ),
-    SimDevice(
-      info: Devices.ios.iPhone14Pro,
-      size: 26,
-    ),
+
     //
     // iPads here
+    SimDevice(
+      info: Devices.ios.iPadPro13InchesM4,
+      icon: Icons.tablet_mac_outlined,
+      size: 38,
+    ),
+    SimDevice(
+      info: Devices.ios.iPadPro11InchesM4,
+      icon: Icons.tablet_mac_outlined,
+      size: 32,
+    ),
     SimDevice(
       info: Devices.ios.iPad,
       icon: Icons.tablet_mac_outlined,
@@ -363,12 +394,22 @@ class SimulatorPopupMenu extends StatelessWidget {
       size: 32,
     ),
     SimDevice(
-      info: Devices.ios.iPad12InchesGen4,
+      info: Devices.ios.iPad12InchesGen2,
       icon: Icons.tablet_mac_outlined,
       size: 36,
     ),
     //
     // Android brands here
+    SimDevice(
+      info: Devices.android.googlePixel9ProXL,
+      icon: Icons.smartphone_outlined,
+      size: 30,
+    ),
+    SimDevice(
+      info: Devices.android.googlePixel9,
+      icon: Icons.smartphone_outlined,
+      size: 28,
+    ),
     SimDevice(
       info: Devices.android.samsungGalaxyNote20Ultra,
       icon: Icons.smartphone_outlined,
@@ -389,11 +430,7 @@ class SimulatorPopupMenu extends StatelessWidget {
       icon: Icons.smartphone_outlined,
       size: 28,
     ),
-    SimDevice(
-      info: Devices.android.pixel4,
-      icon: Icons.smartphone_outlined,
-      size: 26,
-    ),
+
     SimDevice(
       info: Devices.android.onePlus8Pro,
       icon: Icons.smartphone_outlined,
