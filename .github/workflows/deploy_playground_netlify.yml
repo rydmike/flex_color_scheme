@@ -15,9 +15,17 @@
 name: Deploy_Playground_Netlify
 on:
   push:
+    branches: [master]
+    paths-ignore:
+      - "**.md"
+  pull_request:
     branches: [none]
     paths-ignore:
-     - "**.md"
+      - "**.md"
+  release:
+    branches: [master]
+    types: [published]
+
 jobs:
   flutter_tests:
     name: "Analyze and test package, then build and deploy Playground only"

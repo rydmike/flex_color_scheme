@@ -21,7 +21,7 @@ on:
   push:
     branches: [none]
     paths-ignore:
-     - "**.md"
+      - "**.md"
   pull_request:
     branches: [none]
     paths-ignore:
