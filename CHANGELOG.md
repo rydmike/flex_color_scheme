@@ -24,8 +24,8 @@ No changes
 
 **FIX**
 
-* Fix issue [#298](https://github.com/rydmike/flex_color_scheme/issues/298) Auto-close drawer when switching to desktop layout.
-* Fix issue [#300](https://github.com/rydmike/flex_color_scheme/issues/300) ResponsiveScaffold: Tooltip widget causes exception when the rail menu animates to full menu width.
+* Fix [#298](https://github.com/rydmike/flex_color_scheme/issues/298) Auto-close drawer when switching to desktop layout.
+* Fix [#300](https://github.com/rydmike/flex_color_scheme/issues/300) ResponsiveScaffold: Tooltip widget causes exception when the rail menu animates to full menu width.
 
 ## 8.3.0
 
