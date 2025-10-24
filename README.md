@@ -4,7 +4,9 @@
 
 [<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-Use **FlexColorScheme** to make beautiful Flutter Material Design themes. Apply optional surface blends, and use Material-3 seeded generated ColorSchemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated ones. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from many pre-made designs or make your own. You can also use easy-to-configure component themes.
+Use **FlexColorScheme** to make beautiful Flutter Material Design themes. Apply optional surface blends and use Material-3 seed generated ColorSchemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from pre-made designs or make your own and quickly configure component themes to your liking.
+
+Use the **Themes Playground** WEB app to visually configure your themes and get the needed **FlexColorScheme** API code to use in your Flutter app.
 
 <table>
   <tr>
@@ -15,9 +17,9 @@ Use **FlexColorScheme** to make beautiful Flutter Material Design themes. Apply 
   </tr>
 </table>
 
-When you theme a Flutter application **in the intended manner**, all built-in widgets use the colors of the `ColorScheme` in your theme. However, all Flutter's `ThemeData` factories misses a few details when it comes to direct color properties in `ThemeData`itself. This applies in particular if you still use legacy Material-2 mode in Flutter. When you use the current default Material-3 mode, the color results and styles are much more consistent by default, with only a few colors in `ThemeData` not matching the defined `ColorScheme` colors. 
+When you theme a Flutter application **in the intended manner**, all built-in widgets use the colors of the `ColorScheme` in your theme. However, Flutter's `ThemeData` factories misses a few details when it comes to direct color properties in `ThemeData` itself. This applies in particular if you still use legacy Material-2 mode in Flutter. When you use the current default Material-3 mode, the color results and styles are much more consistent by default, with only a few colors in `ThemeData` not matching the defined `ColorScheme` colors. 
 
-**FlexColorScheme** ensures that all Flutter SDK UI components get themed completely by its `ColorScheme` and custom colors you provide. It also applies the `ColorScheme` colors to all legacy color properties in `ThemeData`. This ensures that all the direct colors properties in `ThemeData` match your `ColorScheme`. There are no surprising colors in `ThemeData` that do not match your `ColorScheme`. This applies regardless of if you use Material-2 or Material-3 mode.
+**FlexColorScheme** ensures that all Flutter SDK UI components get themed completely by its `ColorScheme` and custom colors you provide. It also applies the `ColorScheme` colors to all legacy color properties in `ThemeData`. This guarantees that all the direct colors properties in `ThemeData` match your `ColorScheme`. There are no surprising colors in `ThemeData` that do not match your `ColorScheme`. This applies regardless of if you use Material-2 or Material-3 mode.
 
 You can also opt in on using FlexColorScheme's component theme customization features. By doing so, you can, for example, adjust the border radius on all UI widgets with a single property value. 
 
@@ -34,7 +36,7 @@ When you enable component themes in Material-2 mode, the border radius on compon
 
 ### Material-3
 
-As in Flutter's `ThemeData`, Material-3 mode is enabled by default in **FlexColorScheme** V8 and later. The Material-3 mode component theme defaults are far less opinionated than the Material-2 defaults. In **FlexColorScheme** V8 and later, enabling component themes use almost only Material-3 defaults as starting points for component styles and seeded `ColorScheme` generation. With the large number of component theme settings, you can quickly customize Material-3 to fit your application's design goals.
+As in Flutter's `ThemeData`, Material-3 mode is enabled by default in **FlexColorScheme** Version 8 and later. The **FlexColorscheme** Material-3 mode component theme defaults are far less opinionated than the Material-2 defaults. In **FlexColorScheme** V8 and later, enabling component themes use almost only Material-3 defaults as starting points for component styles and seeded `ColorScheme` generation. With the component theme settings, you can quickly customize Material-3 to fit your application's design goals.
 
 Since Flutter **3.7 and later**, using Material-3 design is production ready. Some minor issues may always exist. Please refer to the FlexColorScheme docs [known issues](https://docs.flexcolorscheme.com/known_issues) chapter for more information on the status of known **theming** issues in Flutter, and to which versions they apply.
 
@@ -47,7 +49,7 @@ Since Flutter **3.7 and later**, using Material-3 design is production ready. So
   </tr>
 </table>
 
-**FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material-3 based ColorSchemes, including seed generated `ColorSchemes`. It offers many advanced configuration options that you can use when you generate your `ColorScheme` from seed colors. You can e.g., make more saturated seed generated themes and themes with higher contrast. FlexColorScheme's advanced seeded `ColorScheme` offer features that are not available in Flutter directly. This includes using multiple key colors as seeds, custom minimum chroma levels and customized tone mapping to ColorScheme colors.
+**FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material-3 based color schemes, including seed generated `ColorSchemes`. It offers many advanced configuration options that you can use when you generate your `ColorScheme` from seed colors. You can e.g., make more saturated seed generated themes with higher contrast. FlexColorScheme's advanced seeded `ColorScheme` offer features that are not available in Flutter directly. This includes using multiple colors as seed colors, custom minimum chroma levels and customized tone mapping to `ColorScheme` colors.
 
 <table>
   <tr>
@@ -73,7 +75,7 @@ Import the package to use it:
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 ```
 
-You can now start using **FlexColorScheme** based color schemes and theming in your application. A quick way to do so is to try one of the **55** built-in color schemes. They have enum values that you use to select which one to use as the theme for your application.
+You can now start using **FlexColorScheme** based color schemes and theming in your application. A quick way to do so is to try one of the **66** built-in color schemes. They have enum values that you use to select which one to use as the theme for your application.
 
 The package **default example** offers a heavily commented code guide on how to use key features in FlexColorScheme. The [**Examples**](https://docs.flexcolorscheme.com/examples) chapter shows you how to try it. In the [**Tutorial**](https://docs.flexcolorscheme.com/tutorial1) you can learn more via five additional examples of increasing complexity.
 
@@ -151,6 +153,13 @@ The latest **Themes Playground** build can be used as a [web app here](https://r
 
 Beware, fiddling with all the different themes and settings can be quite fun and addictive, happy theming! 💙
 
+### Experimental Playground WASM GC build
+
+There is also an experimental version of the **Themes Playground** that uses a WASM GC build to run with WASM in the browser. It is available for the latest version of **FlexColorScheme**, you can find it here [WASM Playground](https://playground.flexcolorscheme.com/). This build may run smoother than the above JS build in Chromium-based browsers on desktops and Android. If your browser does not support WASM GC, it will automatically fall back to the JS build.
+
+The plan is to move the **Themes Playground** latest version link to this WASM GC build and offer older versions as JS builds.
+
+The WASM build was first publicly shared with the v8.3.0 release of **FlexColorScheme**.
 
 ### Open Source
 
@@ -164,23 +173,19 @@ There are **Theme Playground** version builds corresponding to the last major re
 
 You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7 and 8, you should prefer to match the minor version too.
 
-| Name        | Version         | Link                                                        |
-|-------------|-----------------|-------------------------------------------------------------| 
-| V8.2 & V8.3 | V8.2.0 & V8.3.0 | https://rydmike.com/flexcolorscheme/themesplayground-latest |
-| V8.1        | V8.1.1          | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
-| V8.0        | V8.0.2          | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
-| V7.3        | V7.3.1          | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
-| V7.2        | V7.2.0          | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
-| V7.1        | V7.1.2          | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
-| V7.0        | V7.0.5          | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
-| V6          | V6.1.1          | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
-| V5          | V5.1.0          | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
-| V4          | V4.2.0          | https://rydmike.com/flexcolorschemeV4Tut5                   |
+| Name        | Version          | Link                                                        |
+|-------------|------------------|-------------------------------------------------------------| 
+| V8.2 & V8.3 | V8.2.0, V8.3.x   | https://rydmike.com/flexcolorscheme/themesplayground-latest |
+| V8.1        | V8.1.1           | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
+| V8.0        | V8.0.2           | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
+| V7.3        | V7.3.1           | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
+| V7.2        | V7.2.0           | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
+| V7.1        | V7.1.2           | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
+| V7.0        | V7.0.5           | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
+| V6          | V6.1.1           | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
+| V5          | V5.1.0           | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
+| V4          | V4.2.0           | https://rydmike.com/flexcolorschemeV4Tut5                   |
 
-
-There is also an experimental version of the **Themes Playground** that uses a WASM GC build to run with WASM in the browser. It is available for the latest version of **FlexColorScheme**, you can find it here [WASM Playground](https://playground.flexcolorscheme.com/). This build may run smoother than the above JS build in Chromium-based browsers on desktops. If your browser does not support WASM GC, it will automatically fall back to the JS build. 
-
-The plan is to move the default **Themes Playground** links to this WASM GC build soon. This WASM build was first publicly shared with v8.3.0 release of **FlexColorScheme**. 
 
 > **NOTE!**  
 > If you use a higher version of a WEB build and try to load a lower version again with the same browser, it will most likely fail and not load. This happens because older and newer builds run on the same domain and share the same browser local storage file. This allows newer versions to load data configured in older versions. However, older versions may not understand some data stored and inserted by the newer versions and they will fail. You can get the web build for an older version to start again by clearing stored browser data:  
@@ -189,4 +194,8 @@ The plan is to move the default **Themes Playground** links to this WASM GC buil
 > Version 8.0.0 and later uses a new local storage name to avoid this issue, so it will not conflict with V7 and older versions. There are few storage settings in V8 that are backwards compatible anyway.
 > 
 
-You can also build Windows, macOS or Linux desktop versions of the **Themes Playground**, it is highly recommended, as it runs much smoother and nicer than the WEB build. The **Themes Playground** app is bundled with the package GitHub repository as **Example 5**. If you need a Themes Playground companion build for a specific older FlexColorScheme version, you can download a ZIP bundle from the GitHub repo for any past [release here](https://github.com/rydmike/flex_color_scheme/releases).
+### Themes Playground as a Desktop App
+
+You can also build Windows, macOS or Linux desktop versions of the **Themes Playground**. This is highly recommended, as it runs much smoother and nicer than the WEB build. The **Themes Playground** app is bundled with the package GitHub repository as **Example 5**.
+
+If you need a Themes Playground companion build for a specific older FlexColorScheme version, you can download a ZIP bundle from the GitHub repo for any past [release here](https://github.com/rydmike/flex_color_scheme/releases).
