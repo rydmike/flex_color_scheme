@@ -4,9 +4,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.3.1
 
-Minor fixes and improvements to the Themes Playground app only.
-
 **October 24, 2025**
+
+Minor fixes and improvements to the Themes Playground app only.
 
 ### Package
 
