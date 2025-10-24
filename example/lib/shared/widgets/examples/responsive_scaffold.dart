@@ -921,15 +921,8 @@ class _MenuItem extends StatelessWidget {
                     onTap: enabled ? onTap : null,
                     child: Row(
                       children: <Widget>[
-                        Tooltip(
-                          // Show tooltips only at rail size and if enabled.
-                          // Setting message to empty never shows tooltip.
-                          message: width == railWidth && enabled ? tooltip : '',
-                          // Just to get the tooltip outside the rail.
-                          margin: const EdgeInsetsDirectional.only(start: 50),
-                          waitDuration: const Duration(milliseconds: 500),
-                          // Constrain icon to min of rail width.
-                          child: ConstrainedBox(
+                        Builder(builder: (BuildContext context) {
+                          final ConstrainedBox iconBox = ConstrainedBox(
                             constraints: BoxConstraints.tightFor(
                               width: railWidth,
                               height: railWidth,
@@ -940,8 +933,23 @@ class _MenuItem extends StatelessWidget {
                                     quarterTurns: turns,
                                     child: Icon(icon, color: iconColor),
                                   ),
-                          ),
-                        ),
+                          );
+                          // Show tooltips only at rail size and if enabled.
+                          if (width == railWidth && enabled) {
+                            return Tooltip(
+                              // Show tooltips only at rail size and if enabled.
+                              message: tooltip,
+                              // Just to get the tooltip outside the rail.
+                              margin:
+                                  const EdgeInsetsDirectional.only(start: 50),
+                              waitDuration: const Duration(milliseconds: 500),
+                              // Constrain icon to min of rail width.
+                              child: iconBox,
+                            );
+                          }
+
+                          return iconBox;
+                        }),
                         // Below width of 10dp we remove the label.
                         if (width < railWidth + 10)
                           const SizedBox.shrink()
