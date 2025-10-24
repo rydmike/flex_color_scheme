@@ -926,11 +926,9 @@ class _MenuItem extends StatelessWidget {
                                   ),
                           );
                           // Show tooltips only at rail size and if enabled.
-                          // Setting message to empty never shows tooltip.
                           if (width == railWidth && enabled) {
                             return Tooltip(
                               // Show tooltips only at rail size and if enabled.
-                              // Setting message to empty never shows tooltip.
                               message: tooltip,
                               // Just to get the tooltip outside the rail.
                               margin:
