@@ -4,6 +4,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// ignore: no_literal_bool_comparisons_
 const bool _debug = kDebugMode && false;
 
 /// Generate random colors that are visually appealing.

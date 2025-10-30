@@ -11,6 +11,7 @@ import 'query_params_handler_interface.dart';
 // The handy part is that if it gets in the way in debugging, it is an easy
 // toggle to turn it off here too. Often I just leave them true if it is one
 // I want to see in dev mode, unless it is too chatty.
+// ignore: no_literal_bool_comparisons_
 const bool _debug = !kReleaseMode && true;
 
 /// The query params handler for Dart Web builds
