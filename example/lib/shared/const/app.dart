@@ -6,9 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/examples/responsive_scaffold.dart';
 
-// ignore_for_file: comment_references
-
-/// App static container class with functions and constants used in by
+/// A static container class with functions and constants used in by
 /// example applications.
 ///
 /// In a real app you probably prefer putting these into different static
@@ -22,7 +20,7 @@ abstract final class App {
   /// same one that is defined in each example as its app name. Handy as we only
   /// need to update in one place, where it belongs and no need to put it as
   /// a const somewhere and no need to pass it around via a title prop either.
-  /// Also used in the [showAppAboutDialog] About box as app name.
+  /// Also used in the `showAppAboutDialog` About box as app name.
   static String title(BuildContext context) =>
       (context as Element)
           .findAncestorWidgetOfExactType<MaterialApp>()
@@ -48,8 +46,8 @@ abstract final class App {
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '8';
-  static const String versionMinor = '3';
-  static const String versionPatch = '1';
+  static const String versionMinor = '4';
+  static const String versionPatch = '0';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';

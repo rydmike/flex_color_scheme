@@ -2,6 +2,61 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+
+## 8.4.0-Dev.1 (WIP)
+
+**October 31, 2025**
+
+### Package
+
+**CHORE**
+**FIX**
+**CHANGE**
+**NEW**
+
+### Themes Playground
+
+**CHORE**
+**FIX**
+**CHANGE**
+**NEW**
+
+**TODOs**
+
+Todo items are picked for this list, all may not be done in this release.
+
+**CHORE**
+* Chore: Fix strange new score issue with single quotes reported on import/export.
+* Chore: Add missing tests for Shadcn color schemes.
+* Chore: Migrate to map-based WidgetState properties, for ThemeData equality and performance.
+* Chore: Migrate to only using opacity-based const values in themes and remove the old alpha-based values.
+ 
+**FIX**
+* Playground: Look into custom dark uses own colors as seed not updating correctly in the Playground.
+
+**NEW**
+* New: Add Updated M3 Slider styles.
+* Add support for Shadcn background, surface and container colors.
+* Add Switch track color and outline colors, to be able to match Shadcn.
+* Add Checkbox shape to be able to match Shadcn.
+* Add menu and popup border outline color, to be able to match Shadcn.
+* Add MenuBar border outline color, to be able to match Shadcn.
+* Add Menu gap padding to be able to match Shadcn.
+* Add Card color selection, with theme variant warning.
+* Add Card outline color selection, with theme variant warning.
+
+**Specific new theming properties**
+
+- switchOnTrackColor
+- switchOffTrackColor
+- switchOnTrackOutlineColor
+- switchOffTrackOutlineColor
+ 
+- progressIndicator theming
+- MaterialBanner theme
+- BottomAppBarOpacity (maybe).
+- BottomSheet width constraint (Uses max 640 in M3 mode)
+
 ## 8.3.1
 
 **October 24, 2025**

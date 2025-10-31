@@ -1,6 +1,6 @@
 name: flex_color_scheme_example
 description: Examples that demonstrate how to use the FlexColorScheme package.
-version: 8.3.1
+version: 8.4.0
 publish_to: 'none'
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -31,9 +31,10 @@ dependencies:
   # Used by the theme simulator in the Playground.
   # https://pub.dev/packages/device_frame
   device_frame: ^1.4.0
-  # Original no longer well maintained, using fork:
+  # Original was no longer well maintained, used fork:
   # https://pub:dev/packages/device_frame_plus:
-  # Original got good updates, mvoing back to it on version 1.4.0.
+  # Original got good updates in version 1.4.0, moved back to it.
+  # This change was made in FlexColorScheme 8.3.1.
   # device_frame_plus: ^1.5.0
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
