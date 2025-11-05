@@ -2,7 +2,7 @@
 #
 # Based on manual update from auto generated list: https://dart.dev/tools/linter-rules/all
 #
-# This file is used and needed by rydmike analysis_options: V2.4.0
+# This file is used and needed by rydmike analysis_options: V2.5.0
 #
 # The list below has removed these deprecated lint rules, that were included in
 # older version of the list:
@@ -34,6 +34,9 @@
 # Dart 3.9.0 added the following new rules:
 # - switch_on_type
 # - unnecessary_unawaited
+#
+# Version 2.5.0 / 5.10.2025 added:
+# - remove_deprecations_in_breaking_versions
 linter:
   rules:
     - always_declare_return_types
@@ -194,6 +197,7 @@ linter:
     - provide_deprecation_message
     - public_member_api_docs
     - recursive_getters
+    - remove_deprecations_in_breaking_versions
     - require_trailing_commas
     - secure_pubspec_urls
     - sized_box_for_whitespace
