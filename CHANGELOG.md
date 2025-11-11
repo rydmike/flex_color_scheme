@@ -5,7 +5,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.4.0-Dev.1 (WIP)
 
-**October 31, 2025**
+**November 12, 2025**
 
 ### Package
 
@@ -21,7 +21,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 ### Themes Playground
 
 **CHORE**
+
 **FIX**
+* Fix: Deprecated Radio properties and use RadioGroup instead.
+
 **CHANGE**
 **NEW**
 
@@ -30,7 +33,6 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 Todo items are picked for this list, all may not be done in this release.
 
 **CHORE**
-* Chore: Fix strange new score issue with single quotes reported on import/export.
 * Chore: Add missing tests for Shadcn color schemes.
 * Chore: Migrate to map-based WidgetState properties, for ThemeData equality and performance.
 * Chore: Migrate to only using opacity-based const values in themes and remove the old alpha-based values.
