@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,12 +14,6 @@ import '../shared/color_scheme_box.dart';
 import 'model/theme_topic.dart';
 import 'widgets/theme_color_selector.dart';
 import 'widgets/topic_selector.dart';
-
-// TODO(rydmike): Investigate why we in this Flutter version suddenly need to
-//  ignore discarded futures for AnimationController()..forward
-// ignore_for_file: discarded_futures
-
-// ignore_for_file: comment_references
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -46,7 +42,7 @@ const bool _debug = !kReleaseMode && false;
 ///
 /// On bigger screens it shows two panels side-by-side, where the left secondary
 /// one can be selected via a popup menu. This is a bit cumbersome, but takes
-/// up very little space. See the [TwoTopicsPage] for one that features
+/// up very little space. See the `TwoTopicsPage` for one that features
 /// own vertical topic selectors for each panel. Which gets used on bigger
 /// screens.
 class OneOrTwoTopicPageView extends StatefulWidget {
@@ -173,8 +169,8 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
                       // the page view controller, it also looks very confusing.
                       scaleController.value = 0.8;
                       fadeController.value = 0.2;
-                      scaleController.forward();
-                      fadeController.forward();
+                      unawaited(scaleController.forward());
+                      unawaited(fadeController.forward());
                       pageController.jumpToPage(themeCtrl.topicIndexStartSide);
                     }
                   }),

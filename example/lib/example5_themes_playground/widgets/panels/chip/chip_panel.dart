@@ -55,7 +55,7 @@ class ChipPanel extends StatelessWidget {
         ? 'primary'
         : controller.chipSchemeColor!.name;
     final bool useBlend =
-        // ignore: avoid_bool_literals_in_conditional_expressions
+        // ignore: avoid_bool_literals_in_conditional_expressions, this is clear
         controller.chipBlendColors ?? (useMaterial3 ? false : true);
 
     return Column(

@@ -6,8 +6,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
 
-// ignore_for_file: comment_references
-
 /// A stadium border with continuous corners.
 ///
 /// A shape similar to a stadium, but with a smoother transition from
@@ -73,9 +71,8 @@ class SquircleStadiumBorder extends ShapeBorder {
   /// dimension, the interior shape's corners will no longer resemble those of
   /// the exterior shape. If concentric corners are desired for a stroke width
   /// greater than 1/10 the length of the smallest rectangle dimension, it is
-  /// recommended to use a [Stack] widget, placing a smaller
-  /// [SquircleStadiumBorder] with the on top of a
-  /// larger one.
+  /// recommended to use a Stack widget, placing a smaller
+  /// [SquircleStadiumBorder] with the on top of a larger one.
   ///
   /// By default this value is [BorderSide.none]. It also must not be null.
   final BorderSide side;

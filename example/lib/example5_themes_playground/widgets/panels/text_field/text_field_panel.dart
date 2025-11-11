@@ -461,7 +461,7 @@ class TextFieldPanel extends StatelessWidget {
                 'Use an alternative InputDecorator border radius on '
                 'selected platforms.\n'
                 '\n'
-                // ignore: lines_longer_than_80_chars
+                // ignore: lines_longer_than_80_chars, string interpolation
                 '${controller.adaptiveResponseInputDecoratorRadius?.describe ?? AdaptiveResponse.off.describe}',
               ),
               defaultLabel: _adaptiveDecoratorModeLabel(controller),

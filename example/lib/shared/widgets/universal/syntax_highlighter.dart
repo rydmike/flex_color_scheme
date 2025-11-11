@@ -125,7 +125,7 @@ class SyntaxHighlighterStyle {
   final TextStyle? constantStyle;
 }
 
-// ignore: one_member_abstracts
+// ignore: one_member_abstracts, we inherited this code this way :)
 abstract class SyntaxHighlighter {
   TextSpan format(String src);
 }

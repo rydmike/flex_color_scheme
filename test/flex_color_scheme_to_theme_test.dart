@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars, for commented tests.
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';

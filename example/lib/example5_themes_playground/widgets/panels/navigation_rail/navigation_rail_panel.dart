@@ -237,7 +237,7 @@ class NavigationRailPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationRailSelectedLabelSize !=
                       null
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   ? '${(controller.navigationRailSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
                   : '12 pt',
               valueDefaultDisabledLabel: '12 pt',
@@ -275,7 +275,7 @@ class NavigationRailPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationRailSelectedIconSize !=
                       null
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   ? '${(controller.navigationRailSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
                   : '24 dp',
               valueDefaultDisabledLabel: '24 dp',

@@ -22,7 +22,7 @@ import 'flex_surface_mode.dart';
 import 'flex_text_theme_color.dart';
 import 'flex_theme_data_extensions.dart'; // For comment refs.
 
-// ignore_for_file: sort_constructors_first
+// ignore_for_file: sort_constructors_first, we prefer factories before props.
 
 /// Enum to select the used AppBarTheme style in [FlexColorScheme] (FCS)
 /// based themes when using its [FlexColorScheme.light] and
@@ -6593,8 +6593,7 @@ class FlexColorScheme with Diagnosticable {
     // A little know thing Typography.material2021 factory also needs the used
     // M3 colorscheme for a correct style.
     Typography defaultTypography() {
-      // ignore: use_if_null_to_convert_nulls_to_bools
-      if (useSubThemes && subTheme.useMaterial3Typography == true) {
+      if (useSubThemes && (subTheme.useMaterial3Typography ?? false)) {
         return Typography.material2021(
             platform: effectivePlatform, colorScheme: colorScheme);
       }

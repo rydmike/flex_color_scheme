@@ -229,7 +229,7 @@ class BottomNavigationBarPanel extends StatelessWidget {
               valueDefaultLabel: controller
                           .bottomNavigationBarSelectedLabelSize !=
                       null
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   ? '${((controller.bottomNavigationBarSelectedLabelSize ?? 12) - 2).toStringAsFixed(0)} pt'
                   : '12 pt',
               valueDefaultDisabledLabel: '12 pt',
@@ -268,7 +268,7 @@ class BottomNavigationBarPanel extends StatelessWidget {
               valueDefaultLabel: controller
                           .bottomNavigationBarSelectedIconSize !=
                       null
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   ? '${(controller.bottomNavigationBarSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
                   : '24 dp',
               valueDefaultDisabledLabel: '24 dp',

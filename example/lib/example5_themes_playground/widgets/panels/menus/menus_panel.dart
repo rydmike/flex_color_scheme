@@ -85,9 +85,9 @@ class MenusPanel extends StatelessWidget {
             controller.menuItemBackgroundSchemeColor == null
         ? 'onSurface$overlayStyle'
         : controller.menuItemBackgroundSchemeColor == null
-            // ignore: lines_longer_than_80_chars
+            // ignore: lines_longer_than_80_chars, string interpolation
             ? '${SchemeColor.values[controller.menuSchemeColor!.index].name}$overlayStyle'
-            // ignore: lines_longer_than_80_chars
+            // ignore: lines_longer_than_80_chars, string interpolation
             : '${SchemeColor.values[controller.menuItemBackgroundSchemeColor!.index].name}$overlayStyle';
 
     final String menuOnIndicatorDefault = controller.menuSchemeColor == null &&

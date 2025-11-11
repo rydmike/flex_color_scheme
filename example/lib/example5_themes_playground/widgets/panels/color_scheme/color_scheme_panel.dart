@@ -124,9 +124,9 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 child: Text(
                   'Tap a color code to copy it to the clipboard.'
                   '\n'
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   "${widget.controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   "${showBlendInfo ? 'Color blends are used, blended colors may not be found in palettes when hovered.' : '\n'}",
                   style: theme.textTheme.labelSmall,
                 ),
@@ -139,9 +139,9 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   'primary, secondary, tertiary and error colors, plus their '
                   'container colors, to change them.'
                   '\n'
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   "${widget.controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   "${showBlendInfo ? 'Color blends are used, blended colors may not be found in palettes when hovered.' : '\n'}",
                   style: theme.textTheme.labelSmall,
                 ),

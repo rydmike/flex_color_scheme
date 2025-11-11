@@ -413,7 +413,7 @@ class DialogPanel extends StatelessWidget {
             'Use an alternative dialog border radius on '
             'selected platforms.\n'
             '\n'
-            // ignore: lines_longer_than_80_chars
+            // ignore: lines_longer_than_80_chars, string interpolation
             '${controller.adaptiveResponseDialogRadius?.describe ?? AdaptiveResponse.off.describe}',
           ),
           defaultLabel: _adaptiveDialogModeLabel(controller),

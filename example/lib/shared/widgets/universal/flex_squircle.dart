@@ -6,8 +6,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/rendering.dart';
 
-// ignore_for_file: comment_references
-
 /// A rectangle border with continuous corners.
 ///
 /// A shape similar to a rounded rectangle, but with a smoother transition from
@@ -75,7 +73,7 @@ import 'package:flutter/rendering.dart';
 ///
 /// * [RoundedRectangleBorder], which is a rectangle whose corners are
 ///   precisely quarter circles.
-/// * [SquircleStadiumBorder], which is a stadium whose two edges have a
+/// * `SquircleStadiumBorder`, which is a stadium whose two edges have a
 ///   continuous transition into its two 180º curves.
 /// * [StadiumBorder], which is a rectangle with semi-circles on two parallel
 ///   edges.

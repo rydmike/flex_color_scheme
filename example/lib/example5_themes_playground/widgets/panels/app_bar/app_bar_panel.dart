@@ -527,7 +527,7 @@ class AppBarPanel extends StatelessWidget {
               'elevation effect in Material-3 LIGHT mode on selected '
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for string interpolation
               '${controller.adaptiveAppBarScrollUnderOffLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveAppBarScrollUnderOffLight,
@@ -543,7 +543,7 @@ class AppBarPanel extends StatelessWidget {
               'elevation effect in Material-3 DARK mode on selected '
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for string interpolation
               '${controller.adaptiveAppBarScrollUnderOffDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveAppBarScrollUnderOffDark,

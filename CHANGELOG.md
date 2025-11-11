@@ -10,6 +10,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 ### Package
 
 **CHORE**
+
+* Update lints RydMike lint rules 2.5.0
+* Fix new linting issues 
+
 **FIX**
 **CHANGE**
 **NEW**

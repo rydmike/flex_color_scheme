@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/topic_theme.dart';
 
-// ignore_for_file: comment_references
-
 /// Used to groups [Topic]s into related groups.
 enum TopicGroup {
   general,
@@ -51,7 +49,7 @@ enum TopicGroup {
   }
 }
 
-/// A class to hold the heading data we need to display in our [Panel]
+/// A class to hold the heading data we need to display in our
 /// topic panels headers and selection buttons.
 @immutable
 class Topic {

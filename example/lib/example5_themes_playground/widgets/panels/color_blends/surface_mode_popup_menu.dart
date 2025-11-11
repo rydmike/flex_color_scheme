@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../shared/color_scheme_box.dart';
 
-// ignore_for_file: comment_references
-
 /// Widget used to select used [FlexSurfaceMode] using a popup menu.
 ///
 /// This is a stateless widget version of surface mode Popupmenu selection using
 /// call back. It was designed this way to be state management agnostic.
 /// Widget using this widget can use state management to get and set values
-/// for this widget. In this app see e.g. widgets
-/// [LightSurfacePopupMenu] and [DarkSurfacePopupMenu].
+/// for this widget.
 class SurfaceModePopupMenu extends StatelessWidget {
   const SurfaceModePopupMenu({
     super.key,

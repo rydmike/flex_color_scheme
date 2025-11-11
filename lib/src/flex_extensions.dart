@@ -185,7 +185,7 @@ extension FlexColorExtensions on Color {
   /// Return uppercase RGB hex code string, with # and no alpha value.
   /// This format is often used in APIs and in CSS color values..
   String get hex {
-    // ignore: lines_longer_than_80_chars
+    // ignore: lines_longer_than_80_chars, this case clearer on one line.
     return '#${value32bit.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
   }
 }

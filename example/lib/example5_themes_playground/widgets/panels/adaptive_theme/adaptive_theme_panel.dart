@@ -59,7 +59,7 @@ class AdaptiveThemePanel extends StatelessWidget {
                 'It is without unit, since it means different things to '
                 'different UI components.\n'
                 '\n'
-                // ignore: lines_longer_than_80_chars
+                // ignore: lines_longer_than_80_chars, long string interpolation
                 '${controller.visualDensity?.describe ?? VisualDensityEnum.platform.describe}',
               ),
               value: controller.visualDensity,
@@ -106,7 +106,7 @@ class AdaptiveThemePanel extends StatelessWidget {
                 'Defines the type of tap ink splash effect used on Material '
                 'UI components.\n'
                 '\n'
-                // ignore: lines_longer_than_80_chars
+                // ignore: lines_longer_than_80_chars, for string interpolation
                 '${controller.splashType?.describe ?? SplashTypeEnum.defaultSplash.describe}',
               ),
               value: controller.splashType,
@@ -126,7 +126,7 @@ class AdaptiveThemePanel extends StatelessWidget {
                 'adaptive ink feature is OFF, the ink splash effect is '
                 'used.\n'
                 '\n'
-                // ignore: lines_longer_than_80_chars
+                // ignore: lines_longer_than_80_chars, for string interpolation
                 '${controller.splashTypeAdaptive?.describe ?? SplashTypeEnum.defaultSplash.describe}',
               ),
               value: controller.splashTypeAdaptive,
@@ -142,7 +142,7 @@ class AdaptiveThemePanel extends StatelessWidget {
             'An adaptive theme response used to select a different ink '
             'splash effect on selected platforms.\n'
             '\n'
-            // ignore: lines_longer_than_80_chars
+            // ignore: lines_longer_than_80_chars, for string interpolation
             '${controller.adaptiveResponseSplash?.describe ?? AdaptiveResponse.off.describe}',
           ),
           value: controller.adaptiveResponseSplash,
@@ -161,7 +161,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for string interpolation
               '${controller.adaptiveElevationShadowsBackLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveElevationShadowsBackLight,
@@ -189,7 +189,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
               'want to keep it ON, even if otherwise removing elevation tint.\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for string interpolation
               '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveElevationTintLight,
@@ -207,7 +207,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for string interpolation
               '${controller.adaptiveElevationShadowsBackDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveElevationShadowsBackDark,
@@ -244,7 +244,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
               'want to keep it ON, even if otherwise removing elevation tint.\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for string interpolation
               '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveElevationTintDark,

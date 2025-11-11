@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../../shared/const/app.dart';
@@ -6,10 +8,6 @@ import '../../../../shared/widgets/universal/header_card.dart';
 import '../../panels/panel.dart';
 import '../model/theme_topic.dart';
 import 'topic_selector.dart';
-
-// TODO(rydmike): Investigate why we in this Flutter version suddenly need to
-//  ignore discarded futures for AnimationController()..forward
-// ignore_for_file: discarded_futures
 
 /// A [Panel] wrapper that puts the content of our panels in a [Row]
 /// with a [TopicSelectorVertical] on the left or right of a [Panel]
@@ -115,8 +113,8 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
                 // item, we trigger a slight fade and zoom in effect.
                 scaleController.value = 0.9;
                 fadeController.value = 0.2;
-                scaleController.forward();
-                fadeController.forward();
+                unawaited(scaleController.forward());
+                unawaited(fadeController.forward());
               },
               isCompact: isCompact,
               isRight: widget.isRight,
@@ -166,8 +164,8 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
                 // item, we trigger a slight fade and zoom in effect.
                 scaleController.value = 0.9;
                 fadeController.value = 0.2;
-                scaleController.forward();
-                fadeController.forward();
+                unawaited(scaleController.forward());
+                unawaited(fadeController.forward());
               },
               isCompact: isCompact,
               isRight: widget.isRight,

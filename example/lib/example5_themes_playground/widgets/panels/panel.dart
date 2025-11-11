@@ -44,13 +44,10 @@ import 'theme_simulator/theme_simulator_panel.dart';
 import 'tooltip_progressbar/tooltip_progressbar_settings.dart';
 import 'widget_showcase/widget_showcase_panel.dart';
 
-// ignore_for_file: comment_references
-
 /// Used to select which one of all the theme topic panels in the
 /// Themes Playground is shown as content in a panel.
 ///
-/// The panels are used as content in the [PageView.builder] based view used
-/// by the [TopicPage], the [TwoTopicsPage] and [].
+/// The panels are used as content in a [PageView.builder].
 class Panel extends StatelessWidget {
   const Panel(this.page, this.controller, {super.key});
   final int page;

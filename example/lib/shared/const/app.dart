@@ -80,11 +80,10 @@ abstract final class App {
   /// Wider content gets growing side padding, kind of like on most
   /// web pages when they are used on super wide screen. This is typically used
   /// pages in the example apps that use content that is width constrained,
-  /// typically via the [PageBody] screen content wrapper widget.
+  /// typically via a screen content wrapper widget.
   static const double maxBodyWidth = 1000;
 
-  /// Breakpoint needed to show second panel in side-by-side view for the
-  /// [ThemeTopicPage] page view.
+  /// Breakpoint to show second panel in side-by-side view in the page view.
   ///
   /// This is available content layout width, not media size!
   ///
@@ -108,9 +107,9 @@ abstract final class App {
   /// and it is just to much dynamic changes happening, it does not nice.
   static const double desktopWidthBreakpoint = 1700;
 
-  /// A medium sized desktop, in panel view we switch to vertical
-  /// topic selector page [ThemeTwoTopicsPage], with topic selector on
-  /// left and right side, one for each theme topic panel.
+  /// A medium sized desktop, in the panel view we switch to two vertical
+  /// topic selector pages, with topic selector on left and right side,
+  /// one for each theme topic panel.
   ///
   /// This is a media size breakpoint.
   static const double mediumDesktopWidthBreakpoint = 1079;

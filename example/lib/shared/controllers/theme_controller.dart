@@ -7708,7 +7708,7 @@ class ThemeController with ChangeNotifier {
 
   List<Color> get recentColors => _recentColors;
 
-  // ignore: use_setters_to_change_properties
+  // ignore: use_setters_to_change_properties, we prefer a method here.
   void setRecentColors(final List<Color> colors) {
     _recentColors = colors;
   }

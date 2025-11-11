@@ -333,6 +333,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           return 'Only for discrete';
         case ShowValueIndicator.onlyForContinuous:
           return 'Only for continuous';
+        // ignore: deprecated_member_use, allow using while still in SDK.
         case ShowValueIndicator.always:
           return 'On all types (deprecated)';
         case ShowValueIndicator.onDrag:

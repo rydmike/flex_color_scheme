@@ -1,5 +1,3 @@
-// ignore_for_file: comment_references
-
 import 'package:flutter/cupertino.dart';
 
 // TODO(rydmike): Add a showcase to show most Cupertino widgets.
@@ -7,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 
 /// Used to show the current theme on Cupertino widgets.
 ///
-/// Use this widget to review your theme's impact on [ThemeData] and see
-/// how it looks with different Cupertino widgets.
+/// Use this widget to review your theme's impact on [CupertinoThemeData] and
+/// see how it looks with different Cupertino widgets.
 ///
 /// The sub widgets used in this theme show case can also be used on their
 /// own, for example combined in smaller panels instead of in on big column

@@ -8,8 +8,6 @@ import '../../../../shared/utils/app_scroll_behavior.dart';
 import '../../../../shared/utils/colors_are_close.dart';
 import '../model/theme_topic.dart';
 
-// ignore_for_file: comment_references
-
 /// Horizontal panel selector of active theme topic to view.
 ///
 /// Used in phone, tablet, small and medium desktop view.
@@ -138,9 +136,6 @@ class _TopicSelectorHorizontalState extends State<TopicSelectorHorizontal> {
 }
 
 /// Vertical theme topic selector used in the two columns view.
-///
-/// Used only on desktop views via [TwoTopicsPage] and
-/// [TwoTopicsVerticalPage].
 class TopicSelectorVertical extends StatefulWidget {
   const TopicSelectorVertical({
     super.key,

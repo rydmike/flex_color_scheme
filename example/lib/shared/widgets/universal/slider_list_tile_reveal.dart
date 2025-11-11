@@ -254,9 +254,9 @@ class _SliderListTileRevealState extends State<SliderListTileReveal> {
                                     effectiveMin * widget.valueDisplayScale) <
                                 widget.min * widget.valueDisplayScale
                         ? 'default\n${widget.valueDefaultLabel}'
-                        // ignore: lines_longer_than_80_chars
+                        // ignore: lines_longer_than_80_chars, str interpolation
                         : '${(widget.value! * widget.valueDisplayScale).toStringAsFixed(widget.valueDecimalPlaces)}${widget.valueUnitLabel}'
-                    // ignore: lines_longer_than_80_chars
+                    // ignore: lines_longer_than_80_chars, string interpolation
                     : 'default\n${widget.valueDefaultDisabledLabel ?? widget.valueDefaultLabel}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
