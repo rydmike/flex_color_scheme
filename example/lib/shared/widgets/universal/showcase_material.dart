@@ -1139,17 +1139,17 @@ class _RadioShowcaseState extends State<RadioShowcase> {
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
-      child: RadioGroup<bool?>(
-        groupValue: groupValue,
-        onChanged: (bool? value) {
-          setState(() {
-            groupValue = value;
-          });
-        },
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Wrap(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 8,
               runSpacing: 8,
@@ -1163,7 +1163,15 @@ class _RadioShowcaseState extends State<RadioShowcase> {
                 ),
               ],
             ),
-            Wrap(
+          ),
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 8,
               runSpacing: 8,
@@ -1179,7 +1187,15 @@ class _RadioShowcaseState extends State<RadioShowcase> {
                 ),
               ],
             ),
-            Wrap(
+          ),
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 8,
               runSpacing: 8,
@@ -1193,7 +1209,15 @@ class _RadioShowcaseState extends State<RadioShowcase> {
                 ),
               ],
             ),
-            Wrap(
+          ),
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 8,
               runSpacing: 8,
@@ -1209,8 +1233,8 @@ class _RadioShowcaseState extends State<RadioShowcase> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
