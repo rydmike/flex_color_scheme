@@ -30,7 +30,7 @@
     "themedata",
     "themesplayground"
   ],
-  "dart.flutterSdkPath": ".fvm/versions/beta",
+  "dart.flutterSdkPath": ".fvm/versions/stable",
   "workbench.editor.wrapTabs": true,
   "workbench.editor.showTabs": "multiple"
 }
