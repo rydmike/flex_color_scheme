@@ -18,6 +18,9 @@ flutter test test/flex_color_scheme_test.dart
 
 # Run tests matching a name pattern
 flutter test --name="pattern"
+
+# Run a specific test within a file by line number
+flutter test test/flex_color_scheme_test.dart --plain-name="test description"
 ```
 
 ### Linting & Analysis
@@ -26,9 +29,12 @@ flutter test --name="pattern"
 dart analyze
 
 # The project uses RydMike lint rules v2.5.0 with strict settings:
+# - Enables ALL lint rules via all_lint_rules.yaml, then selectively disables unwanted ones
 # - strict-casts: true
 # - strict-inference: true
 # - strict-raw-types: true
+# - Treats missing_required_param and missing_return as errors
+# - See analysis_options.yaml for complete configuration
 ```
 
 ### Building Examples
@@ -115,6 +121,7 @@ The main library code is in `lib/src/`:
 - **Supporting types**: `flex_scheme_color.dart`, `flex_scheme_data.dart`, `flex_key_color.dart`, etc.
 - **Extensions** (`flex_extensions.dart`): Color manipulation utilities
 - **Additional features**: `flex_adaptive.dart`, `flex_theme_mode_switch.dart`, `flex_instant_splash.dart`
+- **Shadcn colors** (`flex_shad_colors/`): Shadcn color scheme definitions and utilities
 
 ### Example Applications
 
@@ -125,7 +132,7 @@ The `example/` directory contains:
 - `example4_all_themes/`: Showcase of all built-in schemes
 - `example5_themes_playground/`: Full-featured theme configuration app (also deployed as web app)
 
-The Themes Playground is the most comprehensive example, demonstrating all package features and generating FlexColorScheme API code.
+The Themes Playground is the most comprehensive example, demonstrating all package features and generating FlexColorScheme API code. See "Themes Playground Architecture" section below for detailed information.
 
 ## Important Notes for Development
 
@@ -143,9 +150,16 @@ When contributing, ensure your changes pass `dart analyze` without warnings.
 - Maintain or improve code coverage (currently monitored via CodeCov)
 - Tests are in `test/` directory following the pattern `*_test.dart`
 - Widget tests use the suffix `*_widget_test.dart`
+- Test files mirror the structure of `lib/src/` (e.g., `flex_color_scheme.dart` → `flex_color_scheme_test.dart`)
+- Helper test utilities are named with `test_` prefix (e.g., `test_color_scheme_equality.dart`)
 
-### Breaking Changes
-Do **not** introduce breaking API changes without prior discussion. This is a published package with a large user base. API changes should be discussed in GitHub issues before implementation.
+### Contributing Guidelines
+- Fork the repository and create feature branches from `master` (e.g., `fix/issue-123`, `feature/new-option`)
+- Follow the existing code style and conventions
+- Write clear commit messages referencing relevant issues
+- Do **not** introduce breaking API changes without prior discussion
+- Avoid stylistic-only changes to examples that add little value
+- See `CONTRIBUTING.md` for complete guidelines
 
 ### Material-3 Considerations
 - As of v8.0+, Material-3 is the default mode (matching Flutter 3.7+)
@@ -155,6 +169,141 @@ Do **not** introduce breaking API changes without prior discussion. This is a pu
 
 ### Integration with flex_seed_scheme
 FlexColorScheme depends on the `flex_seed_scheme` package (also by the same author) for Material-3 seed color generation. This package was extracted from FlexColorScheme v6.0.0 to be usable independently. Changes affecting seed color generation may require coordinated updates.
+
+## Themes Playground Architecture
+
+The **Themes Playground** (`example5_themes_playground/`) is a sophisticated configuration app that demonstrates all FlexColorScheme features and generates API setup code. It's both a learning tool and a production theme design application.
+
+### Core Architecture
+
+**State Management Pattern**
+- Uses `ThemeController` (ChangeNotifier) to manage 383+ theme settings properties
+- Abstract `ThemeService` interface with three implementations:
+  - `ThemeServiceMem`: In-memory only (no persistence)
+  - `ThemeServicePrefs`: Uses SharedPreferences
+  - `ThemeServiceHive`: Uses Hive (default for Playground - `flex_color_scheme_v8` box)
+- Each setting persisted individually as key-value pairs for efficient slider updates
+- Follows Flutter skeleton template architecture pattern
+
+**Shared Code Architecture** (`example/lib/shared/`)
+- **Controllers**: `ThemeController` - main state manager coordinating all theme settings
+- **Services**: `ThemeService` interface and implementations for persistence
+- **Models**: Data models for settings (adaptive responses, enums, etc.)
+- **Constants**: `Store` (persistence keys), `App` (app config), `AppColor` (color schemes)
+- **Widgets**: Reusable UI components shared across examples
+
+### Directory Structure
+
+```
+example5_themes_playground/
+├── main.dart                    # App entry point, ThemeController setup
+├── theme/                       # Theme definitions for the Playground app itself
+│   ├── flex_theme_light.dart    # Light theme using FlexColorScheme
+│   ├── flex_theme_dark.dart     # Dark theme using FlexColorScheme
+│   ├── theme_data_light.dart    # Alternative ThemeData light theme
+│   ├── theme_data_dark.dart     # Alternative ThemeData dark theme
+│   ├── topic_theme.dart         # Theme extension for topic group colors
+│   └── code_theme.dart          # Syntax highlighting theme for code view
+├── utils/                       # Code generation and settings utilities (~3461 lines)
+│   ├── generate_theme_dart_code.dart       # Generates FlexColorScheme API code
+│   ├── generate_colorscheme_dart_code.dart # Generates ColorScheme code
+│   ├── import_export_playground_settings.dart # Settings persistence/sharing
+│   ├── share_settings.dart                 # Share config via URL/file
+│   ├── effective_flex_tones.dart           # Tone calculations
+│   └── query_params/                       # URL query parameter handling
+│       ├── query_params_handler.dart       # Platform-agnostic interface
+│       ├── query_params_handler_web.dart   # Web implementation
+│       ├── query_params_handler_vm.dart    # VM (mobile/desktop) implementation
+│       └── query_params_settings.dart      # Query param serialization
+└── widgets/
+    ├── dialogs/                 # Modal dialogs (code view, reset, etc.)
+    ├── pages/                   # Main page layouts
+    │   ├── home_page.dart       # Main responsive scaffold
+    │   ├── two_topics_page.dart # Two-panel layout
+    │   ├── model/
+    │   │   └── theme_topic.dart # Topic/TopicGroup definitions
+    │   └── widgets/             # Page-specific widgets
+    ├── panels/                  # 40+ configuration panels organized by TopicGroup
+    │   ├── introduction/
+    │   ├── premade_designs/
+    │   ├── theme_simulator/     # Live theme preview with demo apps
+    │   ├── color_scheme/        # ColorScheme configuration
+    │   ├── color_blends/        # Surface blend settings
+    │   ├── shape_radius/        # Global radius settings
+    │   ├── buttons/             # Button theme panels
+    │   ├── text_field/          # Input decoration panels
+    │   ├── app_bar/             # AppBar theme panels
+    │   ├── tab_bar/             # TabBar theme panels
+    │   ├── navigation_bar/      # NavigationBar panels
+    │   ├── navigation_rail/     # NavigationRail panels
+    │   ├── navigation_drawer/   # NavigationDrawer panels
+    │   └── [30+ more component panels...]
+    └── shared/                  # Reusable panel widgets
+```
+
+### Key Features
+
+**1. Real-Time Configuration**
+- 40+ themed panels grouped into 9 TopicGroups (general, colors, components, controls, inputs, bars, navigation, surfaces, texts)
+- Live preview updates as settings change
+- Two-panel view: configuration on one side, simulator on the other
+- Responsive design with breakpoints: phone (< 600), desktop (≥ 900), big desktop (> 1700)
+
+**2. Code Generation**
+- Generates complete FlexColorScheme API setup code
+- Generates standalone ColorScheme code
+- Supports both Material-2 and Material-3 modes
+- Option to generate code for separate file vs inline
+- Includes all configured properties with proper formatting
+
+**3. Settings Persistence & Sharing**
+- Export/import settings as compressed JSON files
+- Share configurations via URL query parameters (web)
+- Reset to defaults (premade designs available)
+- Hive-based local storage with ~383 persisted properties
+
+**4. Theme Simulator**
+- Multiple demo apps: Material-3 reference app, custom examples
+- Multiple device form factors: Phone, iPad, Desktop
+- Zoom controls for detailed inspection
+- Real-time updates matching configuration panel changes
+
+### Working with Themes Playground
+
+**Running the Playground**
+```bash
+cd example
+flutter run -d chrome lib/example5_themes_playground/main.dart
+```
+
+**Key Files to Understand**
+- `ThemeController` (`shared/controllers/theme_controller.dart`): Central state manager with 383+ properties
+- `theme_topic.dart`: Defines the 40+ topics/panels and their organization
+- `generate_theme_dart_code.dart`: Code generation logic - study this to understand API usage patterns
+- `home_page.dart`: Main UI structure and responsive behavior
+
+**Common Development Tasks**
+- **Adding a new theme property**:
+  1. Add to `ThemeController` (property, getter, setter, persistence in `loadAll()`)
+  2. Add to `Store` (constant keys and defaults)
+  3. Add to code generator if it should appear in generated code
+  4. Create or update panel widget in `widgets/panels/`
+
+- **Adding a new panel**:
+  1. Create panel widget in appropriate `widgets/panels/` subdirectory
+  2. Add Topic entry to `themeTopics` list in `theme_topic.dart`
+  3. Wire up in `home_page.dart` if needed
+
+- **Testing generated code**:
+  Use the "Copy Theme Code" feature to generate and test the API code in a separate Flutter app
+
+### Architecture Benefits
+
+1. **Separation of Concerns**: UI, state, persistence, and code generation are cleanly separated
+2. **Reusability**: Shared code used across all 5 examples demonstrates real-world package integration
+3. **Testability**: Abstract interfaces enable testing with mock services
+4. **Flexibility**: Easy to swap persistence mechanisms or add new configuration options
+5. **Learning Tool**: Well-commented code serves as comprehensive API documentation
 
 ## Documentation Resources
 
