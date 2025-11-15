@@ -244,6 +244,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             sliderValueIndicatorType: controller.sliderValueIndicatorType,
             sliderShowValueIndicator: controller.sliderShowValueIndicator,
             sliderTrackHeight: controller.sliderTrackHeight,
+            sliderYear2023: controller.sliderYear2023,
             // Input decoration (TextField) settings.
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
             inputDecoratorBorderSchemeColor:

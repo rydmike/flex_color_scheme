@@ -709,6 +709,10 @@ String generateThemeDartCode(ThemeController controller) {
   final String sliderTrackHeight = controller.sliderTrackHeight == null
       ? ''
       : '      sliderTrackHeight: ${controller.sliderTrackHeight},\n';
+  final String sliderYear2023 =
+      controller.sliderYear2023 == null || controller.sliderYear2023 == true
+          ? ''
+          : '      sliderYear2023: ${controller.sliderYear2023},\n';
   //
   // Input decorator setup CODE.
   //
@@ -1767,6 +1771,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderValueIndicatorType'
           '$sliderShowValueIndicator'
           '$sliderTrackHeight'
+          '$sliderYear2023'
           //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
@@ -2053,6 +2058,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderValueIndicatorType'
           '$sliderShowValueIndicator'
           '$sliderTrackHeight'
+          '$sliderYear2023'
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'

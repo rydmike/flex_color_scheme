@@ -183,8 +183,9 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
                     ),
               title: i == 0
                   // If first position use default label.
-                  ? Text(_popupItemLabel(null, useMaterial3, false),
-                      style: txtStyle)
+                  ? Text(defaultSelectionValuePopupLabel)
+                  // Text(_popupItemLabel(null, useMaterial3, false),
+                  //         style: txtStyle)
                   : Text(
                       _popupItemLabel(
                           enumFromIndex(i - 1), useMaterial3, false),
@@ -304,13 +305,15 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     if (T == FlexSliderIndicatorType) {
       switch (value) {
         case FlexSliderIndicatorType.rectangular:
-          return 'Rectangle (rounded)';
+          return 'Rectangle';
         case FlexSliderIndicatorType.drop:
-          return 'Drop (inverted)';
+          return 'Pin drop';
+        case FlexSliderIndicatorType.rounded:
+          return 'Rounded';
         case null:
           {
             if (useMaterial3) {
-              return 'Default (drop)';
+              return 'Default  (pin drop)';
             } else {
               return 'Default (rectangle)';
             }
@@ -545,8 +548,12 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
           child: Icon(Icons.assistant),
         ),
         Tooltip(
-          message: 'Inverted water drop',
+          message: 'Pin drop indicator',
           child: Icon(Icons.pin_drop),
+        ),
+        Tooltip(
+          message: 'Rounded indicator',
+          child: Icon(Icons.home_max_outlined),
         ),
       ];
     }

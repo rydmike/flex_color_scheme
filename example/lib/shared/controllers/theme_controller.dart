@@ -907,6 +907,9 @@ class ThemeController with ChangeNotifier {
         Store.defaultSliderShowValueIndicator);
     _sliderTrackHeight = await _themeService.load(
         Store.keySliderTrackHeight, Store.defaultSliderTrackHeight);
+    _sliderYear2023 = await _themeService.load(
+        Store.keySliderYear2023, Store.defaultSliderYear2023);
+
     //
     // Fab SETTINGS.
     _floatingActionButtonUseShape = await _themeService.load(
@@ -1565,6 +1568,7 @@ class ThemeController with ChangeNotifier {
     setSliderValueIndicatorType(Store.defaultSliderValueIndicatorType, false);
     setSliderShowValueIndicator(Store.defaultSliderShowValueIndicator, false);
     setSliderTrackHeight(Store.defaultSliderTrackHeight, false);
+    setSliderYear2023(Store.defaultSliderYear2023, false);
     //
     // Fab SETTINGS.
     setFloatingActionButtonUseShape(
@@ -6713,6 +6717,17 @@ class ThemeController with ChangeNotifier {
     _sliderTrackHeight = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keySliderTrackHeight, value));
+  }
+
+  late bool? _sliderYear2023;
+
+  bool? get sliderYear2023 => _sliderYear2023;
+
+  void setSliderYear2023(bool? value, [bool notify = true]) {
+    if (value == _sliderYear2023) return;
+    _sliderYear2023 = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keySliderYear2023, value));
   }
 
   // FloatingActionButton SETTINGS.

@@ -2058,6 +2058,11 @@ abstract final class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultSliderTrackHeight = null;
 
+  // Key used to read and save the sliderYear2023 value.
+  static const String keySliderYear2023 = 'sliderYear2023';
+  // Default value for the sliderYear2023, also to reset settings.
+  static const bool? defaultSliderYear2023 = null;
+
   // Fab, Chip SnackBar, Popup, Dropdown, Card and Dialog SETTINGS.
   // ===========================================================================
 
