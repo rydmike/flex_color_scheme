@@ -5,18 +5,21 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.4.0-Dev.1 (WIP)
 
-**November 12, 2025**
+**November 15, 2025**
+
+Requires at least Flutter 3.38.1.
 
 ### Package
 
 **CHORE**
+* Update lints to RydMike lint rules 2.5.0 and fix new linting issues. 
 
-* Update lints RydMike lint rules 2.5.0
-* Fix new linting issues 
-
-**FIX**
 **CHANGE**
+* The enum `FlexSliderIndicatorType` got a new value `rounded`, to support selecting the newer M3 indicator style also in M2 and older M3 mode for Slider and RangeSlider.
+
 **NEW**
+* Add boolean `sliderYear2023` to `FlexSubThemesData` to be able to select between older M3 and newer current M3 slider styles. Defaults to older style as before to not break styles. Set `sliderYear2023` to value false, to use the current newer M3 style.
+
 
 ### Themes Playground
 
@@ -26,7 +29,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 * Fix: Deprecated Radio properties and use RadioGroup instead.
 
 **CHANGE**
+
 **NEW**
+* The Slider panel got a new switch to select between older M3 and newer current M3 slider styles. It uses the new `FlexSubThemesData.sliderYear2023` property to do so.
 
 **TODOs**
 
@@ -41,7 +46,6 @@ Todo items are picked for this list, all may not be done in this release.
 * Playground: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
 **NEW**
-* New: Add Updated M3 Slider styles.
 * Add support for Shadcn background, surface and container colors.
 * Add Switch track color and outline colors, to be able to match Shadcn.
 * Add Checkbox shape to be able to match Shadcn.
