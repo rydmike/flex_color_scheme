@@ -101,6 +101,11 @@ dependencies:
   # https://pub.dev/packages/web
   web: ^1.1.1
 
+# Add dependency_overrides:
+dependency_overrides:
+  flex_seed_scheme: ## ^3.5.1
+    path: ../../flex_seed_scheme
+
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.
   # https://pub.dev/packages/flutter_launcher_icons
