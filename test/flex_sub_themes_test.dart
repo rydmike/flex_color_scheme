@@ -9621,7 +9621,7 @@ void main() {
             thumbColor: Color(0xff6200ee),
             disabledThumbColor: Color(0xff9e9e9e),
             overlayColor: Color(0x00000000),
-            valueIndicatorShape: DropSliderValueIndicatorShape(),
+            // valueIndicatorShape: DropSliderValueIndicatorShape(),
             rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
           ).toString(minLevel: DiagnosticLevel.debug),
         ),
@@ -9655,7 +9655,7 @@ void main() {
             disabledThumbColor: Color(0xff9e9e9e),
             overlayColor: Color(0x00000000),
             valueIndicatorColor: Color(0xff342342),
-            valueIndicatorShape: DropSliderValueIndicatorShape(),
+            // valueIndicatorShape: DropSliderValueIndicatorShape(),
             rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
             valueIndicatorTextStyle: TextStyle(
               inherit: true,
@@ -9678,7 +9678,7 @@ void main() {
       );
       expect(
         m.valueIndicatorShape,
-        equals(const DropSliderValueIndicatorShape()),
+        equals(null),
       );
       expect(
         m.rangeValueIndicatorShape,
@@ -9717,7 +9717,10 @@ void main() {
         m.valueIndicatorShape,
         equals(const RectangularSliderValueIndicatorShape()),
       );
-      expect(m.rangeValueIndicatorShape, equals(null));
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const RectangularRangeSliderValueIndicatorShape()),
+      );
       expect(
         (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
           WidgetState.hovered,
@@ -9761,8 +9764,6 @@ void main() {
       m = FlexSubThemes.sliderTheme(
         colorScheme: colorScheme,
         valueIndicatorType: FlexSliderIndicatorType.drop,
-        useTintedDisable: true,
-        useTintedInteraction: true,
         useMaterial3: true,
       );
       expect(
@@ -9772,6 +9773,49 @@ void main() {
       expect(
         m.rangeValueIndicatorShape,
         equals(const PaddleRangeSliderValueIndicatorShape()),
+      );
+
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+        useOldM3Design: true,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(null),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const PaddleRangeSliderValueIndicatorShape()),
+      );
+
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+        useOldM3Design: false,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(null),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(null),
+      );
+
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        valueIndicatorType: FlexSliderIndicatorType.rounded,
+        useMaterial3: true,
+        useOldM3Design: false,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(const RoundedRectSliderValueIndicatorShape()),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const RoundedRectRangeSliderValueIndicatorShape()),
       );
     });
   });

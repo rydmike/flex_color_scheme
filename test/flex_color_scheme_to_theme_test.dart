@@ -4396,7 +4396,7 @@ void main() {
                   colorScheme.surface),
               overlayColor: Colors.transparent,
               valueIndicatorColor: colorScheme.primary,
-              valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
+              // valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
             ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
@@ -4441,7 +4441,7 @@ void main() {
                   colorScheme.surface),
               overlayColor: Colors.transparent,
               valueIndicatorColor: colorScheme.primary,
-              valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
+              // valueIndicatorShape: const RectangularSliderValueIndicatorShape(),
             ).toString(minLevel: DiagnosticLevel.debug),
           ));
     });
