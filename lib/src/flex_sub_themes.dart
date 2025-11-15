@@ -201,17 +201,42 @@ enum SchemeColor {
 /// This enum is used by [FlexSubThemes.sliderTheme].
 enum FlexSliderIndicatorType {
   /// Used to select [RectangularSliderValueIndicatorShape] as value indicator
-  /// in [FlexSubThemes.sliderTheme].
+  /// in [FlexSubThemes.sliderTheme] for the [Slider] widget.
+  /// For the [RangeSlider] the corresponding shape
+  /// [RectangularRangeSliderValueIndicatorShape] is used.
   ///
   /// It is a rounded rectangle with talk bubble pointer to slider thumb.
+  ///
+  /// This is default style for the Material-2 specification and mode.
   rectangular,
 
   /// Used to select [DropSliderValueIndicatorShape] as value indicator
-  /// in [FlexSubThemes.sliderTheme].
+  /// in [FlexSubThemes.sliderTheme] for the [Slider] widget.
+  /// For the [RangeSlider] the corresponding shape
+  /// [PaddleRangeSliderValueIndicatorShape] is used. There is no old M3
+  /// spec correct drop shape for RangeSlider in Flutter, this is used
+  /// as the closest available alternative. This version was made before the
+  /// correct M3 older shape was available. The correct shape for the older
+  /// M3 shape was never implemented for RangeSlider in Flutter.
   ///
   /// It is a like an inverted water drop, or a map pin drop pointing
   /// towards the slider thumb.
+  ///
+  /// This is default style for the older Material-3 specification and mode.
+  /// In Flutter SDK the range slider uses the rectangular shape by default
+  /// in M3 mode, but FCS uses the [PaddleRangeSliderValueIndicatorShape]
+  /// as default for the [RangeSlider] as it is closer to the older M3 spec
+  /// than the rectangular shape.
   drop,
+
+  /// Used to select the [RoundedRectSliderValueIndicatorShape] for the [Slider]
+  /// value indicator in [FlexSubThemes.sliderTheme] for the [Slider] widget.
+  /// For the [RangeSlider] the corresponding shape
+  /// [RoundedRectRangeSliderValueIndicatorShape] is used.
+  ///
+  /// This is the default style
+  /// for the newer Material-3 specification introduced in December 2023.
+  rounded,
 }
 
 /// A class container with static sub-theme helper functions used by
@@ -7353,23 +7378,36 @@ abstract final class FlexSubThemes {
     final Color tint = baseColor;
     final double factor = _tintAlphaFactor(tint, colorScheme.brightness, true);
 
-    SliderComponentShape effectiveIndicatorShape() {
-      if (valueIndicatorType == null) {
-        return useM3
-            ? const DropSliderValueIndicatorShape()
-            : const RectangularSliderValueIndicatorShape();
-      } else {
+    // Assign sliderShape with based on valueIndicatorType
+    final SliderComponentShape? sliderShape = switch (valueIndicatorType) {
+      FlexSliderIndicatorType.drop => const DropSliderValueIndicatorShape(),
+      FlexSliderIndicatorType.rectangular =>
+        const RectangularSliderValueIndicatorShape(),
+      FlexSliderIndicatorType.rounded =>
+        const RoundedRectSliderValueIndicatorShape(),
+      null => null,
+    };
+
+    // Assign range sliderShape based on valueIndicatorType
+    final RangeSliderValueIndicatorShape? rangeSliderShape =
         switch (valueIndicatorType) {
-          case FlexSliderIndicatorType.rectangular:
-            return const RectangularSliderValueIndicatorShape();
-          case FlexSliderIndicatorType.drop:
-            return const DropSliderValueIndicatorShape();
-        }
-      }
-    }
+      FlexSliderIndicatorType.drop =>
+        const PaddleRangeSliderValueIndicatorShape(),
+      FlexSliderIndicatorType.rectangular =>
+        const RectangularRangeSliderValueIndicatorShape(),
+      FlexSliderIndicatorType.rounded =>
+        const RoundedRectRangeSliderValueIndicatorShape(),
+      null => useM3 && (useOldM3Design ?? true)
+          ? const PaddleRangeSliderValueIndicatorShape()
+          : null,
+    };
 
     Color? overlayColor() =>
         WidgetStateColor.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.dragged)) {
+            if (tintInteract) return tintedFocused(overlay, tint, factor);
+            return thumbColor.withAlpha(kAlphaFocused);
+          }
           if (states.contains(WidgetState.hovered)) {
             if (tintInteract) return tintedHovered(overlay, tint, factor);
             return thumbColor.withAlpha(kAlphaHovered);
@@ -7378,22 +7416,18 @@ abstract final class FlexSubThemes {
             if (tintInteract) return tintedFocused(overlay, tint, factor);
             return thumbColor.withAlpha(kAlphaFocused);
           }
-          if (states.contains(WidgetState.dragged)) {
-            if (tintInteract) return tintedFocused(overlay, tint, factor);
-            return thumbColor.withAlpha(kAlphaFocused);
-          }
           return Colors.transparent;
         });
 
-    final SliderComponentShape indicatorShape = effectiveIndicatorShape();
-
     // TODO(rydmike): Fidelity review of M3 theme for Slider.
     return SliderThemeData(
-      // The year2023 property is directly deprecated in Flutter SDK, this is
-      // a test to see if we can ignore that it is deprecated and not get a
-      // package score penalty, when we use it to access this new feature.
+      // TODO(rydmike): Remove when SliderThemeData.year2023 is removed.
+      // The year2023 property is directly deprecated in Flutter SDK,
+      // we must ignore that it was directly deprecated when it was introduced
+      // to not get a package score penalty, when we use it to access this
+      // feature that allows us to toggle between older and current M3 style.
       //
-      // ignore: deprecated_member_use
+      // ignore: deprecated_member_use, this is the way to config M3 style.
       year2023: useOldM3Design,
       trackHeight: trackHeight,
       activeTrackColor: baseColor,
@@ -7429,13 +7463,10 @@ abstract final class FlexSubThemes {
       //
       showValueIndicator: showValueIndicator,
       valueIndicatorColor: valueIndicatorColor,
-      valueIndicatorShape: indicatorShape,
       valueIndicatorTextStyle: valueIndicatorTextStyle,
-      // TODO(rydmike): RangeSlider to use real M3 style drop when supported.
-      // Use the almost matching drop style for RangeSlider
-      rangeValueIndicatorShape: indicatorShape is DropSliderValueIndicatorShape
-          ? const PaddleRangeSliderValueIndicatorShape()
-          : null,
+      //
+      valueIndicatorShape: sliderShape,
+      rangeValueIndicatorShape: rangeSliderShape,
     );
   }
 

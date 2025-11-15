@@ -8346,6 +8346,7 @@ class FlexColorScheme with Diagnosticable {
               showValueIndicator: subTheme.sliderShowValueIndicator,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
+              useOldM3Design: subTheme.sliderYear2023,
               useMaterial3: useMaterial3,
             )
           : null,

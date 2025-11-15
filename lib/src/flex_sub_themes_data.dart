@@ -260,6 +260,7 @@ class FlexSubThemesData with Diagnosticable {
     this.sliderValueIndicatorType,
     this.sliderShowValueIndicator,
     this.sliderTrackHeight,
+    this.sliderYear2023,
     //
     this.inputDecoratorRadius,
     this.inputDecoratorRadiusAdaptive,
@@ -1769,7 +1770,6 @@ class FlexSubThemesData with Diagnosticable {
   /// Default to false.
   final bool sliderValueTinted;
 
-  // TODO(rydmike): RangeSlider to use real M3 style when supported.
   /// Enum used to select the type of built-in value indicator used by
   /// [Slider].
   ///
@@ -1800,6 +1800,21 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to 4 dp via Flutter SDK defaults.
   final double? sliderTrackHeight;
+
+  // ignore: deprecated_member_use, need to use in doc comment,
+  /// Overrides default value of [Slider.year2023] and [RangeSlider.year2023].
+  ///
+  /// When true, the [Slider] and [RangeSlider] will use the older before of
+  /// 2023 Material Design 3 appearance.
+  ///
+  /// If this is set to false, the [Slider] and [RangeSlider] will use the
+  /// latest Material Design 3 appearance, which was introduced
+  /// in December 2023.
+  ///
+  /// If [ThemeData.useMaterial3] is false, then this property is ignored.
+  ///
+  /// Defaults to true, if not defined.
+  final bool? sliderYear2023;
 
   /// The border radius value for themed [InputDecoration].
   ///
@@ -4277,6 +4292,7 @@ class FlexSubThemesData with Diagnosticable {
     final FlexSliderIndicatorType? sliderValueIndicatorType,
     final ShowValueIndicator? sliderShowValueIndicator,
     final double? sliderTrackHeight,
+    final bool? sliderYear2023,
     //
     final double? inputDecoratorRadius,
     final double? inputDecoratorRadiusAdaptive,
@@ -4687,6 +4703,7 @@ class FlexSubThemesData with Diagnosticable {
       sliderShowValueIndicator:
           sliderShowValueIndicator ?? this.sliderShowValueIndicator,
       sliderTrackHeight: sliderTrackHeight ?? this.sliderTrackHeight,
+      sliderYear2023: sliderYear2023 ?? this.sliderYear2023,
       //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorRadiusAdaptive:
@@ -5235,6 +5252,7 @@ class FlexSubThemesData with Diagnosticable {
         other.sliderValueIndicatorType == sliderValueIndicatorType &&
         other.sliderShowValueIndicator == sliderShowValueIndicator &&
         other.sliderTrackHeight == sliderTrackHeight &&
+        other.sliderYear2023 == sliderYear2023 &&
         //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorRadiusAdaptive == inputDecoratorRadiusAdaptive &&
@@ -5645,6 +5663,7 @@ class FlexSubThemesData with Diagnosticable {
         sliderValueIndicatorType,
         sliderShowValueIndicator,
         sliderTrackHeight,
+        sliderYear2023,
         //
         inputDecoratorRadius,
         inputDecoratorRadiusAdaptive,
@@ -6068,6 +6087,7 @@ class FlexSubThemesData with Diagnosticable {
         'sliderShowValueIndicator', sliderShowValueIndicator));
     properties.add(
         DiagnosticsProperty<double>('sliderTrackHeight', sliderTrackHeight));
+    properties.add(DiagnosticsProperty<bool>('sliderYear2023', sliderYear2023));
     //
     properties.add(DiagnosticsProperty<double>(
         'inputDecoratorRadius', inputDecoratorRadius));
