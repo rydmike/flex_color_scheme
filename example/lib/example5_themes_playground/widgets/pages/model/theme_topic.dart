@@ -378,11 +378,18 @@ const List<Topic> themeTopics = <Topic>[
   ),
   Topic(
     group: TopicGroup.controls,
-    heading: 'Tooltip and Progress Indicators',
-    buttonLabel: 'Tooltip\nProgress',
+    heading: 'Tooltip',
+    buttonLabel: 'Tooltip',
     icon: Icons.live_help_outlined,
     info: 'Tooltips display informative text when users hover over, '
-        'focus on, or tap an element. Progress indicators inform users '
+        'focus on, or tap an element.\n',
+  ),
+  Topic(
+    group: TopicGroup.controls,
+    heading: 'Progress Indicator',
+    buttonLabel: 'Progress\nIndicator',
+    icon: Icons.update_outlined,
+    info: 'Progress indicators inform users '
         'about the status of ongoing processes, such as loading an app or '
         'submitting a form.\n',
   ),
