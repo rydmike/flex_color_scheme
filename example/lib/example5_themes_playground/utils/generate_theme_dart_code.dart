@@ -710,7 +710,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? ''
       : '      sliderTrackHeight: ${controller.sliderTrackHeight},\n';
   final String sliderYear2023 =
-      controller.sliderYear2023 == null || controller.sliderYear2023 == true
+      controller.sliderYear2023 == null || (controller.sliderYear2023 ?? false)
           ? ''
           : '      sliderYear2023: ${controller.sliderYear2023},\n';
   //
