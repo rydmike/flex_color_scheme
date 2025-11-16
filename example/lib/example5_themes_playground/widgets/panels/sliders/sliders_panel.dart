@@ -56,13 +56,19 @@ class SlidersPanel extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTileReveal(
           enabled: enableControl && useMaterial3,
-          title: const Text('Use older Material-3 Slider style'),
+          title: const Text('Use legacy Material-3 style'),
           subtitleReveal: const Text(
-            'The Material-3 specification for the Slider design changed in '
-            'December 2023. This older style is ON and used by default when '
-            'M3 is enabled to not break past theming. Turn OFF this past '
-            'legacy M3 style to enable the newer Material-3 Slider style.\n',
-          ),
+              'The Material-3 specification for the Slider design changed in '
+              'December 2023. The old style is ON and used by default in '
+              'Flutter and FCS Material-3 to not break past themed style. '
+              'Turn OFF this setting to opt-in and enable the newer and '
+              'current Material-3 Slider style.\n'
+              '\n'
+              'There are plans to make the new style the default in a future '
+              'Flutter release and remove support for the older M3 style. When '
+              'that happens and if it is '
+              'possible, FCS will retain support for the older '
+              'M3 style via theming options.'),
           value: use2023Style,
           onChanged: controller.setSliderYear2023,
         ),
