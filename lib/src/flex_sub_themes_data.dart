@@ -20,8 +20,8 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 /// This gives you the default opinionated component theming setup.
 ///
 /// The list of properties in the flat configuration class is very large.
-/// While it can be a bit tricky to maintain it, using it is easy and a
-/// convenient way to adjust commonly used properties on UI component
+/// While it can be a bit tricky to maintain this, using it is easy, and a
+/// convenient way to adjust commonly used theming properties on UI component
 /// widgets, by using a simple flat list of property values.
 ///
 /// No need for deep [ShapeBorder] definitions for a simple border radius
@@ -62,12 +62,12 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 ///
 /// By design the shape border radius rounding on included and
 /// supported sub-themes that use shapes, default to the border radius
-/// defined by the Material 3 guide per widget,
-/// [see Material 3 Design guide](https://m3.material.io). This is done also
-/// in Material 2 mode. This can give your Material 2 app a more modern look
-/// without using the Material 3 mode in Flutter [ThemeData]. If you
-/// want the actual border radius used in Material 2 for a Material 2 using
-/// application, set [defaultRadius] to 4 dp.
+/// defined by the Material-3 guide per widget,
+/// [see Material-3 Design guide](https://m3.material.io). This is done also
+/// in Material-2 mode. This can give your Material 2 app a more modern look
+/// without using the Material-3 mode in Flutter [ThemeData]. If you
+/// want the actual border radius used in Material-2 for a legacy Material-2
+/// using application, set [defaultRadius] to 4 dp.
 ///
 /// Additionally, the sub-theming offers a consistent button design on all
 /// buttons, including [ToggleButtons] that is styled to match size of
@@ -75,18 +75,19 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 /// [ElevatedButton] color. Hover and Focus colors are also matched. It is also
 /// size matched with the other buttons, and includes a theme implementation
 /// that makes it implement [VisualDensity], which it does not do out of the box
-/// in the SDK.
+/// in Flutter's Material implementation.
 ///
 /// On most sub-themes the used default colors from the theme's colorScheme for
 /// each component's color properties can be changed with an enum based
-/// [SchemeColor] selection value.
+/// [SchemeColor] selection value. Allowing easy color swapping of component
+/// colors from the themed ColorScheme.
 ///
 /// If the options included in [FlexColorScheme] are not enough, you can always
 /// modify any [FlexColorScheme] produced [ThemeData] object with
 /// [ThemeData.copyWith] to add custom component sub-theme designs that
 /// [FlexColorScheme] does not include or support directly.
 ///
-/// It is not in-scope to provide every option possible via Flutter SDK
+/// It is not in-scope to provide every option possible via Flutter's Material
 /// component sub-themes to be configurable via [FlexSubThemesData]. Only a
 /// sub-set of commonly used properties are available as convenient sub-theme
 /// settings via this flat and easy to use configuration class.
@@ -143,6 +144,8 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 ///   [FlexSubThemes.outlinedButtonTheme].
 /// * [PopupMenuThemeData] for [PopupMenuButton] via
 ///   [FlexSubThemes.popupMenuTheme].
+/// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
 /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
 /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
@@ -373,6 +376,8 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipShowDuration,
     this.tooltipSchemeColor,
     this.tooltipOpacity,
+    //
+    // Progress Indicator
     //
     this.useInputDecoratorThemeInDialogs,
     //
