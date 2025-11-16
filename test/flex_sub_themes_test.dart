@@ -8473,6 +8473,81 @@ void main() {
       );
     });
   });
+
+  group('WITH: FlexSubTheme.progressIndicatorTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes progressIndicatorTheme tests
+    // -------------------------------------------------------------------------
+    test(
+        'ProgressIndicator FST25PI.1: GIVEN a default '
+        'FlexSubTheme.progressIndicatorTheme() '
+        'ProgressIndicatorThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final ProgressIndicatorThemeData progressTheme =
+          FlexSubThemes.progressIndicatorTheme(
+        colorScheme: colorScheme,
+      );
+      expect(
+        progressTheme,
+        equals(
+          const ProgressIndicatorThemeData(),
+        ),
+      );
+    });
+    test(
+        'ProgressIndicator FST25PI.2: GIVEN a custom '
+        'FlexSubTheme.progressIndicatorTheme() '
+        'ProgressIndicatorThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final ProgressIndicatorThemeData progressTheme =
+          FlexSubThemes.progressIndicatorTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.secondary,
+        linearTrackSchemeColor: SchemeColor.onSecondaryContainer,
+        linearMinHeight: 6,
+        circularTrackSchemeColor: SchemeColor.tertiary,
+        refreshBackgroundSchemeColor: SchemeColor.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(4.0),
+        stopIndicatorSchemeColor: SchemeColor.primaryFixed,
+        stopIndicatorRadius: 5,
+        strokeWidth: 8,
+        strokeAlign: 1.0,
+        strokeCap: StrokeCap.round,
+        constraints: const BoxConstraints(minWidth: 45.0, minHeight: 45.0),
+        //
+        year2023: false,
+      );
+      expect(
+        progressTheme,
+        equals(
+          ProgressIndicatorThemeData(
+            color: colorScheme.secondary,
+            linearTrackColor: colorScheme.onSecondaryContainer,
+            linearMinHeight: 6,
+            circularTrackColor: colorScheme.tertiary,
+            refreshBackgroundColor: colorScheme.surfaceContainerLow,
+            borderRadius: BorderRadius.circular(4.0),
+            stopIndicatorColor: colorScheme.primaryFixed,
+            stopIndicatorRadius: 5,
+            strokeWidth: 8,
+            strokeAlign: CircularProgressIndicator.strokeAlignOutside,
+            strokeCap: StrokeCap.round,
+            constraints: const BoxConstraints(minWidth: 45.0, minHeight: 45.0),
+            //
+            // ignore: deprecated_member_use, required to use new M3 style
+            year2023: false,
+          ),
+        ),
+      );
+    });
+  });
+
   group('WITH: FlexSubTheme.radioTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Radio tests

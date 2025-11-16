@@ -298,6 +298,8 @@ enum FlexSliderIndicatorType {
 /// * [NavigationRailThemeData] for [NavigationRail] via [navigationRailTheme].
 /// * [OutlinedButtonThemeData] for [OutlinedButton] via [outlinedButtonTheme].
 /// * [PopupMenuThemeData] for [PopupMenuButton] via [popupMenuTheme].
+/// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+///   [LinearProgressIndicator] via [progressIndicatorTheme].
 /// * [RadioThemeData] for [Radio] via [radioTheme].
 /// * [SearchBarThemeData] for [SearchBar] via [searchBarTheme].
 /// * [SearchViewThemeData] for [SearchBar] and its open view via
@@ -6498,6 +6500,178 @@ abstract final class FlexSubThemes {
     );
   }
 
+  /// An opinionated [ProgressIndicatorThemeData] theme for the
+  /// [CircularProgressIndicator] and [LinearProgressIndicator].
+  static ProgressIndicatorThemeData progressIndicatorTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    required final ColorScheme colorScheme,
+
+    /// The color of the [ProgressIndicator]'s indicator.
+    ///
+    /// If null, then it will use [ColorScheme.primary] of the ambient
+    /// [ThemeData.colorScheme].
+    final SchemeColor? baseSchemeColor,
+
+    /// Color of the track being filled by the linear indicator.
+    ///
+    /// If [linearTrackSchemeColor] is null then in M2 mode
+    /// the ambient theme's deprecated [ColorScheme.background] color is used
+    /// In M3 mode [ColorScheme.secondaryContainer] is used as default.
+    final SchemeColor? linearTrackSchemeColor,
+
+    /// The minimum height of the line used to draw the linear indicator.
+    ///
+    /// If [linearMinHeight] is null it defaults to 4dp.
+    final double? linearMinHeight,
+
+    /// Scheme color of the circular track being filled by circular indicator.
+    ///
+    /// If [circularTrackSchemeColor] is null the track will not be painted.
+    final SchemeColor? circularTrackSchemeColor,
+
+    /// Background scheme color fill under the circle of the refresh indicator.
+    ///
+    /// If [refreshBackgroundSchemeColor] is null then the ambient
+    /// theme's [ThemeData.canvasColor]
+    /// will be used. In FCs this defaults to [ColorScheme.surface].
+    final SchemeColor? refreshBackgroundSchemeColor,
+
+    // TODO(rydmike): Check if this is for linear only.
+    // Overrides the border radius of the [ProgressIndicator]. Linear only?
+
+    /// The border radius of both the indicator and the track.
+    ///
+    /// Defaults to radius of 2, which produces a rounded shape with a rounded
+    /// indicator. If [ThemeData.useMaterial3] is false, then defaults to
+    /// [BorderRadius.zero], which produces a rectangular shape
+    /// with a rectangular indicator.
+    final BorderRadiusGeometry? borderRadius,
+
+    /// The scheme color of the stop indicator of the [LinearProgressIndicator].
+    ///
+    /// If [year2023] is true or [ThemeData.useMaterial3] is false, then no stop
+    /// indicator will be drawn.
+    ///
+    /// Defaults to [SchemeColor.primary].
+    final SchemeColor? stopIndicatorSchemeColor,
+
+    /// Overrides the stop indicator radius of the [LinearProgressIndicator].
+    ///
+    /// If [LinearProgressIndicator.year2023] is true or
+    /// [ThemeData.useMaterial3] is false, then no stop indicator will be drawn.
+    final double? stopIndicatorRadius,
+
+    /// The width of the line used to draw the circle in  the
+    /// [CircularProgressIndicator].
+    final double? strokeWidth,
+
+    /// The relative position of the stroke on a [CircularProgressIndicator].
+    ///
+    /// Values typically range from -1.0 ([strokeAlignInside], inside stroke)
+    /// to 1.0 ([strokeAlignOutside], outside stroke), without any bound
+    /// constraints (e.g., a value of -2.0 is not typical, but allowed).
+    /// A value of 0 ([strokeAlignCenter]) will center the border
+    /// on the edge of the widget.
+    ///
+    /// If [year2023] is true, then the default value is [strokeAlignCenter].
+    /// Otherwise, the default value is [strokeAlignInside].
+    final double? strokeAlign,
+
+    /// Overrides the stroke cap of the [CircularProgressIndicator].
+    ///
+    /// Determines the shape of the stroke ends of the progress indicator.
+    /// By default, [strokeCap] is null.
+    /// When value is null (indeterminate), the stroke ends are set to
+    /// [StrokeCap.square]. When value is not null, the stroke
+    /// ends are set to [StrokeCap.butt].
+    ///
+    /// Setting [strokeCap] to [StrokeCap.round] will result in a rounded end.
+    /// Setting [strokeCap] to [StrokeCap.butt] with value == null will result
+    /// in a slightly different indeterminate animation; the indicator
+    /// completely disappears and reappears on its minimum value.
+    /// Setting [strokeCap] to [StrokeCap.square] with [value] != null will
+    /// result in a different display of value. The indicator will start
+    /// drawing from slightly less than the start, and end slightly after
+    /// the end. This will produce an alternative result, as the
+    /// default behavior, for example, that a value of 0.5 starts at 90
+    /// degrees and ends at 270 degrees. With [StrokeCap.square], it could
+    /// start 85 degrees and end at 275 degrees.
+    final StrokeCap? strokeCap,
+
+    /// Defines minimum and maximum sizes for a [CircularProgressIndicator].
+    ///
+    /// If null, in Material-2 or Material-3 when [year2023] is true or null,
+    /// defaults to a minimum width and height of 36 pixels.
+    /// If Material-3 mode and [year2023] is false,
+    /// defaults to a minimum width and height of 40 pixels.
+    final BoxConstraints? constraints,
+
+    /// Overrides the active indicator and the background track.
+    ///
+    /// If [CircularProgressIndicator.year2023] is true or
+    /// [ThemeData.useMaterial3] is false, then no track gap will be drawn.
+    ///
+    /// If [LinearProgressIndicator.year2023] is true or
+    /// [ThemeData.useMaterial3] is false, then no track gap will be drawn.
+    final double? trackGap,
+
+    /// Overrides the padding of the [CircularProgressIndicator].
+    final EdgeInsetsGeometry? circularTrackPadding,
+
+    /// Overrides the [CircularProgressIndicator.year2023] and
+    /// [LinearProgressIndicator.year2023] properties.
+    ///
+    /// When true, the [CircularProgressIndicator] and [LinearProgressIndicator]
+    /// will use the 2023 Material-3 appearance. Defaults to true.
+    ///
+    /// If this is set to false, the [CircularProgressIndicator] and
+    /// [LinearProgressIndicator] will use the latest Material-3 appearance,
+    /// which was introduced in December 2023 and become common in 2024.
+    ///
+    /// If [ThemeData.useMaterial3] is false, then this property is ignored.
+    final bool? year2023,
+  }) {
+    // Get selected indicator color, defaults to primary if not defined.
+    final Color? color = baseSchemeColor == null
+        ? null
+        : schemeColor(baseSchemeColor, colorScheme);
+
+    final Color? linearTrackColor = linearTrackSchemeColor == null
+        ? null
+        : schemeColor(linearTrackSchemeColor, colorScheme);
+
+    final Color? circularTrackColor = circularTrackSchemeColor == null
+        ? null
+        : schemeColor(circularTrackSchemeColor, colorScheme);
+
+    final Color? refreshBackgroundColor = refreshBackgroundSchemeColor == null
+        ? null
+        : schemeColor(refreshBackgroundSchemeColor, colorScheme);
+
+    final Color? stopIndicatorColor = stopIndicatorSchemeColor == null
+        ? null
+        : schemeColor(stopIndicatorSchemeColor, colorScheme);
+
+    return ProgressIndicatorThemeData(
+      color: color,
+      linearTrackColor: linearTrackColor,
+      linearMinHeight: linearMinHeight,
+      circularTrackColor: circularTrackColor,
+      refreshBackgroundColor: refreshBackgroundColor,
+      borderRadius: borderRadius,
+      stopIndicatorColor: stopIndicatorColor,
+      stopIndicatorRadius: stopIndicatorRadius,
+      strokeWidth: strokeWidth,
+      strokeAlign: strokeAlign,
+      strokeCap: strokeCap,
+      constraints: constraints,
+      trackGap: trackGap,
+      circularTrackPadding: circularTrackPadding,
+      // ignore: deprecated_member_use, required to use current M3 style.
+      year2023: year2023,
+    );
+  }
+
   /// An opinionated [RadioThemeData] theme.
   ///
   /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
@@ -7334,9 +7508,12 @@ abstract final class FlexSubThemes {
     /// When true, the [Slider] will use the 2023 Material Design 3 appearance.
     ///
     /// If this is set to false, the [Slider] will use the latest Material-3
-    /// appearance, which was introduced in December 2023.
+    /// appearance, which was introduced in December 2023 and become common
+    /// in 2024.
     ///
-    /// If undefined, defaults to true, via Flutter SDK default behavior.
+    /// In Flutter Material SDK, this property is named `year2023`.
+    ///
+    /// If undefined, defaults to true, via Flutter Material's default behavior.
     /// If [useMaterial3] is false, then this property is ignored.
     final bool? useOldM3Design,
 
@@ -7427,7 +7604,7 @@ abstract final class FlexSubThemes {
       // to not get a package score penalty, when we use it to access this
       // feature that allows us to toggle between older and current M3 style.
       //
-      // ignore: deprecated_member_use, this is the way to config M3 style.
+      // ignore: deprecated_member_use, required to use current M3 style.
       year2023: useOldM3Design,
       trackHeight: trackHeight,
       activeTrackColor: baseColor,

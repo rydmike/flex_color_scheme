@@ -8260,9 +8260,13 @@ class FlexColorScheme with Diagnosticable {
             )
           : null,
       //
-      // progressIndicatorTheme: NOT YET DEFINED BY FCS. USE: .copyWith
-      progressIndicatorTheme:
-          useSubThemes ? const ProgressIndicatorThemeData() : null,
+      // ProgressIndicator Theme
+      progressIndicatorTheme: useSubThemes
+          ? FlexSubThemes.progressIndicatorTheme(
+              colorScheme: colorScheme,
+              // year2023: false,
+            )
+          : null,
       //
       // Radio Theme.
       radioTheme: useSubThemes
