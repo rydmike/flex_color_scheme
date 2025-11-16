@@ -20,6 +20,8 @@ Requires at least Flutter 3.38.1.
 **NEW**
 * Add boolean `sliderYear2023` to `FlexSubThemesData` to be able to select between older M3 and newer current M3 slider styles. Defaults to older style as before to not break styles. Set `sliderYear2023` to value false, to use the current newer M3 style.
 * Add `progressIndicatorTheme` to `FlexSubThemes` to be able to theme `CircularProgressIndicator` and `LinearProgressIndicator` components.
+* To `FlexSubThemesData` add properties:
+  - `progressIndicatorYear2023` (bool)
 
 ### Themes Playground
 
@@ -46,27 +48,22 @@ Todo items are picked for this list, all may not be done in this release.
 * Playground: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
 **NEW**
-- [WIP] progressIndicator theming
-- Add support for Shadcn background, surface and container colors.
-- Add Switch track color and outline colors, to be able to match Shadcn.
+- [WIP] ProgressIndicator theming
+- Add Switch track color and outline colors, to be able to match Shadcn:
+  - switchOnTrackColor
+  - switchOffTrackColor
+  - switchOnTrackOutlineColor
+  - switchOffTrackOutlineColor
 - Add Checkbox shape to be able to match Shadcn.
 - Add menu and popup border outline color, to be able to match Shadcn.
 - Add MenuBar border outline color, to be able to match Shadcn.
 - Add Menu gap padding to be able to match Shadcn.
 - Add Card color selection, with theme variant warning.
 - Add Card outline color selection, with theme variant warning.
-
-**Specific new theming properties**
-
-- switchOnTrackColor
-- switchOffTrackColor
-- switchOnTrackOutlineColor
-- switchOffTrackOutlineColor
- 
-
-- MaterialBanner theme
-- BottomAppBarOpacity (maybe).
-- BottomSheet width constraint (Uses max 640 in M3 mode)
+- Add support for Shadcn background, surface and container colors.
+- Add MaterialBanner theme
+- Add BottomAppBarOpacity (maybe).
+- Add BottomSheet width constraint (Uses max 640 in M3 mode)
 
 ## 8.3.1
 

@@ -378,6 +378,7 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipOpacity,
     //
     // Progress Indicator
+    this.progressIndicatorYear2023,
     //
     this.useInputDecoratorThemeInDialogs,
     //
@@ -1814,7 +1815,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If this is set to false, the [Slider] and [RangeSlider] will use the
   /// latest Material Design 3 appearance, which was introduced
-  /// in December 2023.
+  /// in December 2023 and became common during 2024.
   ///
   /// If [ThemeData.useMaterial3] is false, then this property is ignored.
   ///
@@ -2774,6 +2775,21 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// See [FlexColorScheme.tooltipsMatchBackground] for additional details.
   final double? tooltipOpacity;
+
+  // ignore: deprecated_member_use, required to use new M3 style.
+  /// Overrides the [CircularProgressIndicator.year2023] and
+  // ignore: deprecated_member_use, required to use new M3 style.
+  /// [LinearProgressIndicator.year2023] properties.
+  ///
+  /// When true, the [CircularProgressIndicator] and [LinearProgressIndicator]
+  /// will use the 2023 Material-3 appearance. Defaults to true.
+  ///
+  /// If this is set to false, the [CircularProgressIndicator] and
+  /// [LinearProgressIndicator] will use the latest Material-3 appearance,
+  /// which was introduced in December 2023 and become common in 2024.
+  ///
+  /// If [ThemeData.useMaterial3] is false, then this property is ignored.
+  final bool? progressIndicatorYear2023;
 
   /// Set to true to use the app overall app [InputDecoration] theme in
   /// dialogs themes.
@@ -4392,6 +4408,8 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tooltipSchemeColor,
     final double? tooltipOpacity,
     //
+    final bool? progressIndicatorYear2023,
+    //
     final SchemeColor? searchBarBackgroundSchemeColor,
     final SchemeColor? searchViewBackgroundSchemeColor,
     final double? searchBarElevation,
@@ -4852,6 +4870,9 @@ class FlexSubThemesData with Diagnosticable {
       tooltipShowDuration: tooltipShowDuration ?? this.tooltipShowDuration,
       tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
       tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
+      //
+      progressIndicatorYear2023:
+          progressIndicatorYear2023 ?? this.progressIndicatorYear2023,
       //
       searchBarBackgroundSchemeColor:
           searchBarBackgroundSchemeColor ?? this.searchBarBackgroundSchemeColor,
@@ -5365,6 +5386,8 @@ class FlexSubThemesData with Diagnosticable {
         other.tooltipSchemeColor == tooltipSchemeColor &&
         other.tooltipOpacity == tooltipOpacity &&
         //
+        other.progressIndicatorYear2023 == progressIndicatorYear2023 &&
+        //
         other.searchBarBackgroundSchemeColor ==
             searchBarBackgroundSchemeColor &&
         other.searchViewBackgroundSchemeColor ==
@@ -5762,6 +5785,8 @@ class FlexSubThemesData with Diagnosticable {
         tooltipShowDuration,
         tooltipSchemeColor,
         tooltipOpacity,
+        //
+        progressIndicatorYear2023,
         //
         searchBarBackgroundSchemeColor,
         searchViewBackgroundSchemeColor,
@@ -6258,6 +6283,9 @@ class FlexSubThemesData with Diagnosticable {
         EnumProperty<SchemeColor>('tooltipSchemeColor', tooltipSchemeColor));
     properties
         .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
+    //
+    properties.add(DiagnosticsProperty<bool>(
+        'progressIndicatorYear2023', progressIndicatorYear2023));
     //
     properties.add(EnumProperty<SchemeColor>(
         'searchBarBackgroundSchemeColor', searchBarBackgroundSchemeColor));

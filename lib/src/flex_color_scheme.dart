@@ -8264,7 +8264,7 @@ class FlexColorScheme with Diagnosticable {
       progressIndicatorTheme: useSubThemes
           ? FlexSubThemes.progressIndicatorTheme(
               colorScheme: colorScheme,
-              // year2023: false,
+              year2023: subTheme.progressIndicatorYear2023,
             )
           : null,
       //
