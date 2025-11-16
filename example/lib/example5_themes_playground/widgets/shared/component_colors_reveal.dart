@@ -13,9 +13,8 @@ class ComponentColorsReveal extends StatelessWidget {
       title: Text('Component theme colors'),
       subtitleReveal: Text('Component theme colors are defined in each '
           "component's settings panel. Below default or currently selected "
-          'ColorScheme based themed color for important components. '
-          'Themed interaction colors for hover, focus, highlight and '
-          'splash are also shown.\n'),
+          'ColorScheme based color for important components and their '
+          'main ColorScheme based color.\n'),
     );
   }
 }

@@ -394,31 +394,6 @@ class ShowSubThemeColors extends StatelessWidget {
                 color: primTextColor,
                 textColor: _onColor(primTextColor, background),
               ),
-              ColorCard(
-                label: 'Disabled\nColor',
-                color: theme.disabledColor,
-                textColor: _onColor(theme.disabledColor, background),
-              ),
-              ColorCard(
-                label: 'Hover\nColor',
-                color: theme.hoverColor,
-                textColor: _onColor(theme.hoverColor, background),
-              ),
-              ColorCard(
-                label: 'Focus\nColor',
-                color: theme.focusColor,
-                textColor: _onColor(theme.focusColor, background),
-              ),
-              ColorCard(
-                label: 'Highlight\nColor',
-                color: theme.highlightColor,
-                textColor: _onColor(theme.highlightColor, background),
-              ),
-              ColorCard(
-                label: 'Splash\nColor',
-                color: theme.splashColor,
-                textColor: _onColor(theme.splashColor, background),
-              ),
             ],
           ),
         ],

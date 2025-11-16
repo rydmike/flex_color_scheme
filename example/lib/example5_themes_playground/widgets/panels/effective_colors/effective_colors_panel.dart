@@ -36,18 +36,17 @@ class EffectiveColorsPanel extends StatelessWidget {
         const ListTileReveal(
           title: Text('ColorScheme colors'),
           subtitleReveal: Text(
-            'The themed and effective ColorScheme colors '
-            'are presented below in the order they appear in the '
-            'ColorScheme class. Deprecated colors primaryVariant and '
-            'secondaryVariant are excluded.\n'
+            'The themed and effective ColorScheme colors are presented '
+            'below for compact reference in the order they appear in the '
+            'ColorScheme class. Deprecated colors background, onBackground '
+            'and surfaceVariant are excluded.\n'
             '\n'
             'When you make custom components or assign custom colors to '
             'component themes, prefer using colors that are '
-            "available in the application's ColorScheme. Flutter Material "
-            'widgets are mostly transitioned to using only ColorScheme '
-            'based colors. In M3 mode this migration is mostly done, '
-            'but in M2 mode some components still use colors defined '
-            'directly in ThemeData. Avoid using colors directly from '
+            "available in the application's ColorScheme. Flutter Material-3 "
+            'widgets are transitioned to use only ColorScheme based colors. '
+            'In legacy Material-2 mode some components still use colors '
+            'defined directly in ThemeData. Avoid using colors directly from '
             'ThemeData going forward. See more info in the ThemeData info '
             'expand below.\n',
           ),
