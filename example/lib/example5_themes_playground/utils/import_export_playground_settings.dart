@@ -20,7 +20,7 @@ import '../../shared/model/visual_density_enum.dart';
 // ignore: no_literal_bool_comparisons, used for debug config.
 const bool _debug = !kReleaseMode && true;
 
-/// Common JsonKeys used in serialisation and deserialization.
+/// Common JsonKeys used in serialization and deserialization.
 enum JsonKeys {
   dartType(key: 'dart_type'),
   playgroundData(key: 'playground_data'),
@@ -49,6 +49,7 @@ enum JsonKeys {
   typeEnumSchemeColor(key: 'enum_scheme_color'),
   typeEnumShowValueIndicator(key: 'enum_show_value_indicator'),
   typeEnumSplashType(key: 'enum_splash_type'),
+  typeEnumStrokeCap(key: 'enum_stroke_cap'),
   typeEnumTabAlignment(key: 'enum_tab_alignment'),
   typeEnumTabBarIndicatorAnimation(key: 'enum_tabbar_indicator_animation'),
   typeEnumTabBarIndicatorSize(key: 'enum_tabbar_indicator_size'),
@@ -79,7 +80,7 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
   final String data = JsonEncoder.withIndent(
     '    ',
     (dynamic object) {
-      /// Custom converter for types that can't be serialised
+      /// Custom converter for types that can't be serialized
       if (object is Color) {
         return <String, String>{
           JsonKeys.dartType.key: JsonKeys.typeColor.key,
@@ -131,6 +132,8 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
           dartType = JsonKeys.typeEnumShowValueIndicator.key;
         } else if (object is SplashTypeEnum) {
           dartType = JsonKeys.typeEnumSplashType.key;
+        } else if (object is StrokeCap) {
+          dartType = JsonKeys.typeEnumStrokeCap.key;
         } else if (object is TabAlignment) {
           dartType = JsonKeys.typeEnumTabAlignment.key;
         } else if (object is TabIndicatorAnimation) {
@@ -319,6 +322,9 @@ Future<String> importPlaygroundSettings(
                 _equalsIgnoreCase(element.name, value as String));
       } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumSplashType.key)) {
         mapped = SplashTypeEnum.values.firstWhere((SplashTypeEnum element) =>
+            _equalsIgnoreCase(element.name, value as String));
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumStrokeCap.key)) {
+        mapped = StrokeCap.values.firstWhere((StrokeCap element) =>
             _equalsIgnoreCase(element.name, value as String));
       } else if (_equalsIgnoreCase(
           dartType, JsonKeys.typeEnumTabAlignment.key)) {
