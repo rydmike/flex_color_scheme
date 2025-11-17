@@ -6536,21 +6536,20 @@ abstract final class FlexSubThemes {
     /// will be used. In FCs this defaults to [ColorScheme.surface].
     final SchemeColor? refreshBackgroundSchemeColor,
 
-    // TODO(rydmike): Check if this is for linear only.
-    // Overrides the border radius of the [ProgressIndicator]. Linear only?
-
-    /// The border radius of both the indicator and the track.
+    /// The border radius of both the linear indicator and the track.
     ///
-    /// Defaults to radius of 2, which produces a rounded shape with a rounded
-    /// indicator. If [ThemeData.useMaterial3] is false, then defaults to
-    /// [BorderRadius.zero], which produces a rectangular shape
+    /// Defaults to circular radius of 2 in Material-3, which produces a
+    /// rounded shape with a rounded indicator. In Material-2 mode it defaults
+    /// to [BorderRadius.zero], which produces a rectangular shape
     /// with a rectangular indicator.
-    final BorderRadiusGeometry? borderRadius,
+    ///
+    /// Providing a values of 0 or less will result in [BorderRadius.zero].
+    final double? linearRadius,
 
     /// The scheme color of the stop indicator of the [LinearProgressIndicator].
     ///
-    /// If [year2023] is true or [ThemeData.useMaterial3] is false, then no stop
-    /// indicator will be drawn.
+    /// If [year2023] is true/null or [ThemeData.useMaterial3] is false, then
+    /// no stop indicator will be drawn.
     ///
     /// Defaults to [SchemeColor.primary].
     final SchemeColor? stopIndicatorSchemeColor,
@@ -6567,14 +6566,18 @@ abstract final class FlexSubThemes {
 
     /// The relative position of the stroke on a [CircularProgressIndicator].
     ///
-    /// Values typically range from -1.0 ([strokeAlignInside], inside stroke)
-    /// to 1.0 ([strokeAlignOutside], outside stroke), without any bound
-    /// constraints (e.g., a value of -2.0 is not typical, but allowed).
-    /// A value of 0 ([strokeAlignCenter]) will center the border
-    /// on the edge of the widget.
+    /// Values typically range from -1.0
+    /// ([CircularProgressIndicator.strokeAlignInside], inside stroke)
+    /// to 1.0 ([CircularProgressIndicator.strokeAlignOutside], outside stroke),
+    /// without any bound constraints (e.g., a value of -2.0 is not typical,
+    /// but allowed).
+    /// A value of 0 ([CircularProgressIndicator.strokeAlignCenter]) will center
+    /// the border on the edge of the widget.
     ///
-    /// If [year2023] is true, then the default value is [strokeAlignCenter].
-    /// Otherwise, the default value is [strokeAlignInside].
+    /// If [progressIndicatorYear2023] is true, then the default value is
+    /// [CircularProgressIndicator.strokeAlignCenter].
+    /// Otherwise, the default value is
+    /// [CircularProgressIndicator.strokeAlignInside].
     final double? strokeAlign,
 
     /// Overrides the stroke cap of the [CircularProgressIndicator].
@@ -6606,12 +6609,9 @@ abstract final class FlexSubThemes {
     /// defaults to a minimum width and height of 40 pixels.
     final BoxConstraints? constraints,
 
-    /// Overrides the active indicator and the background track.
+    /// Overrides the active indicator and the background track gap.
     ///
-    /// If [CircularProgressIndicator.year2023] is true or
-    /// [ThemeData.useMaterial3] is false, then no track gap will be drawn.
-    ///
-    /// If [LinearProgressIndicator.year2023] is true or
+    /// If [year2023] is true or
     /// [ThemeData.useMaterial3] is false, then no track gap will be drawn.
     final double? trackGap,
 
@@ -6651,6 +6651,12 @@ abstract final class FlexSubThemes {
     final Color? stopIndicatorColor = stopIndicatorSchemeColor == null
         ? null
         : schemeColor(stopIndicatorSchemeColor, colorScheme);
+
+    final BorderRadiusGeometry? borderRadius = linearRadius == null
+        ? null
+        : linearRadius <= 0
+            ? BorderRadius.zero
+            : BorderRadius.all(Radius.circular(linearRadius));
 
     return ProgressIndicatorThemeData(
       color: color,

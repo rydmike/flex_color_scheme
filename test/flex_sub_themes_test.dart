@@ -8513,14 +8513,15 @@ void main() {
         linearMinHeight: 6,
         circularTrackSchemeColor: SchemeColor.tertiary,
         refreshBackgroundSchemeColor: SchemeColor.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(4.0),
+        linearRadius: 4,
         stopIndicatorSchemeColor: SchemeColor.primaryFixed,
         stopIndicatorRadius: 5,
         strokeWidth: 8,
         strokeAlign: 1.0,
         strokeCap: StrokeCap.round,
         constraints: const BoxConstraints(minWidth: 45.0, minHeight: 45.0),
-        //
+        trackGap: 7,
+        circularTrackPadding: const EdgeInsets.all(3.0),
         year2023: false,
       );
       expect(
@@ -8539,6 +8540,8 @@ void main() {
             strokeAlign: CircularProgressIndicator.strokeAlignOutside,
             strokeCap: StrokeCap.round,
             constraints: const BoxConstraints(minWidth: 45.0, minHeight: 45.0),
+            trackGap: 7,
+            circularTrackPadding: const EdgeInsets.all(3.0),
             //
             // ignore: deprecated_member_use, required to use new M3 style
             year2023: false,

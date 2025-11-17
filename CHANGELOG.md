@@ -5,7 +5,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.4.0-Dev.1 (WIP)
 
-**November 15, 2025**
+**November 17, 2025**
 
 Requires at least Flutter 3.38.1.
 
@@ -20,7 +20,21 @@ Requires at least Flutter 3.38.1.
 **NEW**
 * Add boolean `sliderYear2023` to `FlexSubThemesData` to be able to select between older M3 and newer current M3 slider styles. Defaults to older style as before to not break styles. Set `sliderYear2023` to value false, to use the current newer M3 style.
 * Add `progressIndicatorTheme` to `FlexSubThemes` to be able to theme `CircularProgressIndicator` and `LinearProgressIndicator` components.
-* To `FlexSubThemesData` add properties:
+* To `FlexSubThemesData` add properties:  
+  - `progressIndicatorBaseSchemeColor` (SchemeColor)
+  - `progressIndicatorLinearTrackSchemeColor` SchemeColor()
+  - `progressIndicatorLinearMinHeight` (double)
+  - `progressIndicatorCircularTrackSchemeColor` (SchemeColor)
+  - `progressIndicatorRefreshBackgroundSchemeColor` (SchemeColor)
+  - `progressIndicatorLinearRadius` (double)
+  - `progressIndicatorStopIndicatorSchemeColor` (SchemeColor)
+  - `progressIndicatorStopIndicatorRadius` (double)
+  - `progressIndicatorStrokeWidth` (double)
+  - `progressIndicatorStrokeAlign` (double)
+  - `progressIndicatorStrokeCap` (StrokeCap)
+  - `progressIndicatorConstraints` (BoxConstraints)
+  - `progressIndicatorTrackGap` (double)
+  - `progressIndicatorCircularTrackPadding` (EdgeInsetsGeometry)
   - `progressIndicatorYear2023` (bool)
 
 ### Themes Playground
@@ -48,7 +62,7 @@ Todo items are picked for this list, all may not be done in this release.
 * Playground: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
 **NEW**
-- [WIP] ProgressIndicator theming
+- [WIP] ProgressIndicator theming (package)
 - Add Switch track color and outline colors, to be able to match Shadcn:
   - switchOnTrackColor
   - switchOffTrackColor

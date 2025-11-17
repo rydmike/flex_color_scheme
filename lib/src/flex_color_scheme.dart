@@ -8264,7 +8264,36 @@ class FlexColorScheme with Diagnosticable {
       progressIndicatorTheme: useSubThemes
           ? FlexSubThemes.progressIndicatorTheme(
               colorScheme: colorScheme,
+              baseSchemeColor: subTheme.progressIndicatorBaseSchemeColor,
+              linearTrackSchemeColor:
+                  subTheme.progressIndicatorLinearTrackSchemeColor,
+              linearMinHeight: subTheme.progressIndicatorLinearMinHeight,
+              circularTrackSchemeColor:
+                  subTheme.progressIndicatorCircularTrackSchemeColor,
+              refreshBackgroundSchemeColor:
+                  subTheme.progressIndicatorRefreshBackgroundSchemeColor,
+              linearRadius: subTheme.progressIndicatorLinearRadius,
+              stopIndicatorSchemeColor:
+                  subTheme.progressIndicatorStopIndicatorSchemeColor,
+              stopIndicatorRadius:
+                  subTheme.progressIndicatorStopIndicatorRadius,
+              strokeWidth: subTheme.progressIndicatorStrokeWidth,
+              strokeAlign: subTheme.progressIndicatorStrokeAlign,
+              strokeCap: subTheme.progressIndicatorStrokeCap,
+              constraints: subTheme.progressIndicatorConstraints,
+              trackGap: subTheme.progressIndicatorTrackGap,
+              circularTrackPadding:
+                  subTheme.progressIndicatorCircularTrackPadding,
               year2023: subTheme.progressIndicatorYear2023,
+              //
+              // TODO(rydmike): Remove these after debug tests
+              // linearTrackSchemeColor: SchemeColor.inversePrimary,
+              // circularTrackSchemeColor: SchemeColor.inversePrimary,
+              // stopIndicatorSchemeColor: SchemeColor.primaryFixed,
+              // stopIndicatorRadius: 5,
+              // linearMinHeight: 16,
+              // linearRadius: 4,
+              // year2023: false,
             )
           : null,
       //

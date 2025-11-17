@@ -378,6 +378,20 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipOpacity,
     //
     // Progress Indicator
+    this.progressIndicatorBaseSchemeColor,
+    this.progressIndicatorLinearTrackSchemeColor,
+    this.progressIndicatorLinearMinHeight,
+    this.progressIndicatorCircularTrackSchemeColor,
+    this.progressIndicatorRefreshBackgroundSchemeColor,
+    this.progressIndicatorLinearRadius,
+    this.progressIndicatorStopIndicatorSchemeColor,
+    this.progressIndicatorStopIndicatorRadius,
+    this.progressIndicatorStrokeWidth,
+    this.progressIndicatorStrokeAlign, // Not in Playground
+    this.progressIndicatorStrokeCap,
+    this.progressIndicatorConstraints, // Not in Playground
+    this.progressIndicatorTrackGap,
+    this.progressIndicatorCircularTrackPadding, // Not in Playground
     this.progressIndicatorYear2023,
     //
     this.useInputDecoratorThemeInDialogs,
@@ -2776,11 +2790,120 @@ class FlexSubThemesData with Diagnosticable {
   /// See [FlexColorScheme.tooltipsMatchBackground] for additional details.
   final double? tooltipOpacity;
 
-  // ignore: deprecated_member_use, required to use new M3 style.
-  /// Overrides the [CircularProgressIndicator.year2023] and
-  // ignore: deprecated_member_use, required to use new M3 style.
-  /// [LinearProgressIndicator.year2023] properties.
+  /// The color of the [ProgressIndicator]'s indicator.
   ///
+  /// If null, then it will use [ColorScheme.primary] of the ambient
+  /// [ThemeData.colorScheme].
+  final SchemeColor? progressIndicatorBaseSchemeColor;
+
+  /// Color of the track being filled by the linear indicator.
+  ///
+  /// If [progressIndicatorLinearTrackSchemeColor] is null then in M2 mode
+  /// the ambient theme's deprecated ColorScheme.background color is used
+  /// In M3 mode [ColorScheme.secondaryContainer] is used as default.
+  final SchemeColor? progressIndicatorLinearTrackSchemeColor;
+
+  /// The minimum height of the line used to draw the linear indicator.
+  ///
+  /// If [progressIndicatorLinearMinHeight] is null it defaults to 4dp.
+  final double? progressIndicatorLinearMinHeight;
+
+  /// Scheme color of the circular track being filled by circular indicator.
+  ///
+  /// If [progressIndicatorCircularTrackSchemeColor] is null the track will
+  /// not be painted.
+  final SchemeColor? progressIndicatorCircularTrackSchemeColor;
+
+  /// Background scheme color fill under the circle of the refresh indicator.
+  ///
+  /// If [progressIndicatorRefreshBackgroundSchemeColor] is null then the
+  /// ambient theme's [ThemeData.canvasColor]
+  /// will be used. In FCs this defaults to [ColorScheme.surface].
+  final SchemeColor? progressIndicatorRefreshBackgroundSchemeColor;
+
+  /// The border radius of both the linear indicator and the track.
+  ///
+  /// Defaults to circular radius of 2 in Material-3, which produces a
+  /// rounded shape with a rounded indicator. In Material-2 mode it defaults
+  /// to [BorderRadius.zero], which produces a rectangular shape
+  /// with a rectangular indicator.
+  ///
+  /// Providing a values of 0 or less will result in [BorderRadius.zero].
+  final double? progressIndicatorLinearRadius;
+
+  /// The scheme color of the stop indicator of the [LinearProgressIndicator].
+  ///
+  /// If [progressIndicatorYear2023] is true/null or [ThemeData.useMaterial3]
+  /// is false, then no stop indicator will be drawn.
+  ///
+  /// Defaults to [SchemeColor.primary].
+  final SchemeColor? progressIndicatorStopIndicatorSchemeColor;
+
+  /// Overrides the stop indicator radius of the [LinearProgressIndicator].
+  ///
+  /// If [progressIndicatorYear2023] is true or
+  /// [ThemeData.useMaterial3] is false, then no stop indicator will be drawn.
+  final double? progressIndicatorStopIndicatorRadius;
+
+  /// The width of the line used to draw the circle in the
+  /// [CircularProgressIndicator].
+  final double? progressIndicatorStrokeWidth;
+
+  /// The relative position of the stroke on a [CircularProgressIndicator].
+  ///
+  /// Values typically range from -1.0
+  /// ([CircularProgressIndicator.strokeAlignInside], inside stroke)
+  /// to 1.0 ([CircularProgressIndicator.strokeAlignOutside], outside stroke),
+  /// without any bound constraints (e.g., a value of -2.0 is not typical,
+  /// but allowed).
+  /// A value of 0 ([CircularProgressIndicator.strokeAlignCenter]) will center
+  /// the border on the edge of the widget.
+  ///
+  /// If [progressIndicatorYear2023] is true, then the default value is
+  /// [CircularProgressIndicator.strokeAlignCenter].
+  /// Otherwise, the default value is
+  /// [CircularProgressIndicator.strokeAlignInside].
+  final double? progressIndicatorStrokeAlign;
+
+  /// Overrides the stroke cap of the [CircularProgressIndicator].
+  ///
+  /// Determines the shape of the stroke ends of the progress indicator.
+  /// By default, [progressIndicatorStrokeCap] is null.
+  /// When value is null (indeterminate), the stroke ends are set to
+  /// [StrokeCap.square]. When value is not null, the stroke
+  /// ends are set to [StrokeCap.butt].
+  ///
+  /// Setting [progressIndicatorStrokeCap] to [StrokeCap.round] will result
+  /// in a rounded end.
+  /// Setting [progressIndicatorStrokeCap] to [StrokeCap.butt] with
+  /// alue == null will result in a slightly different indeterminate animation;
+  /// the indicator completely disappears and reappears on its minimum value.
+  /// Setting [progressIndicatorStrokeCap] to [StrokeCap.square] with
+  /// value != null will result in a different display of value.
+  /// The indicator will start drawing from slightly less than the start,
+  /// and end slightly after the end. This will produce an alternative result,
+  /// as the default behavior, for example, that a value of 0.5 starts at 90
+  /// degrees and ends at 270 degrees. With [StrokeCap.square], it could
+  /// start 85 degrees and end at 275 degrees.
+  final StrokeCap? progressIndicatorStrokeCap;
+
+  /// Defines minimum and maximum sizes for a [CircularProgressIndicator].
+  ///
+  /// If null, in Material-2 or Material-3 when [progressIndicatorYear2023] is
+  /// true or null, defaults to a minimum width and height of 36 pixels.
+  /// If Material-3 mode and [progressIndicatorYear2023] is false,
+  /// defaults to a minimum width and height of 40 pixels.
+  final BoxConstraints? progressIndicatorConstraints;
+
+  /// Overrides the active indicator and the background track gap.
+  ///
+  /// If [progressIndicatorYear2023] is true or
+  /// [ThemeData.useMaterial3] is false, then no track gap will be drawn.
+  final double? progressIndicatorTrackGap;
+
+  /// Overrides the padding of the [CircularProgressIndicator].
+  final EdgeInsetsGeometry? progressIndicatorCircularTrackPadding;
+
   /// When true, the [CircularProgressIndicator] and [LinearProgressIndicator]
   /// will use the 2023 Material-3 appearance. Defaults to true.
   ///
@@ -4408,6 +4531,20 @@ class FlexSubThemesData with Diagnosticable {
     final SchemeColor? tooltipSchemeColor,
     final double? tooltipOpacity,
     //
+    final SchemeColor? progressIndicatorBaseSchemeColor,
+    final SchemeColor? progressIndicatorLinearTrackSchemeColor,
+    final double? progressIndicatorLinearMinHeight,
+    final SchemeColor? progressIndicatorCircularTrackSchemeColor,
+    final SchemeColor? progressIndicatorRefreshBackgroundSchemeColor,
+    final double? progressIndicatorLinearRadius,
+    final SchemeColor? progressIndicatorStopIndicatorSchemeColor,
+    final double? progressIndicatorStopIndicatorRadius,
+    final double? progressIndicatorStrokeWidth,
+    final double? progressIndicatorStrokeAlign,
+    final StrokeCap? progressIndicatorStrokeCap,
+    final BoxConstraints? progressIndicatorConstraints,
+    final double? progressIndicatorTrackGap,
+    final EdgeInsetsGeometry? progressIndicatorCircularTrackPadding,
     final bool? progressIndicatorYear2023,
     //
     final SchemeColor? searchBarBackgroundSchemeColor,
@@ -4871,6 +5008,40 @@ class FlexSubThemesData with Diagnosticable {
       tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
       tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
       //
+      progressIndicatorBaseSchemeColor: progressIndicatorBaseSchemeColor ??
+          this.progressIndicatorBaseSchemeColor,
+      progressIndicatorLinearTrackSchemeColor:
+          progressIndicatorLinearTrackSchemeColor ??
+              this.progressIndicatorLinearTrackSchemeColor,
+      progressIndicatorLinearMinHeight: progressIndicatorLinearMinHeight ??
+          this.progressIndicatorLinearMinHeight,
+      progressIndicatorCircularTrackSchemeColor:
+          progressIndicatorCircularTrackSchemeColor ??
+              this.progressIndicatorCircularTrackSchemeColor,
+      progressIndicatorRefreshBackgroundSchemeColor:
+          progressIndicatorRefreshBackgroundSchemeColor ??
+              this.progressIndicatorRefreshBackgroundSchemeColor,
+      progressIndicatorLinearRadius:
+          progressIndicatorLinearRadius ?? this.progressIndicatorLinearRadius,
+      progressIndicatorStopIndicatorSchemeColor:
+          progressIndicatorStopIndicatorSchemeColor ??
+              this.progressIndicatorStopIndicatorSchemeColor,
+      progressIndicatorStopIndicatorRadius:
+          progressIndicatorStopIndicatorRadius ??
+              this.progressIndicatorStopIndicatorRadius,
+      progressIndicatorStrokeWidth:
+          progressIndicatorStrokeWidth ?? this.progressIndicatorStrokeWidth,
+      progressIndicatorStrokeAlign:
+          progressIndicatorStrokeAlign ?? this.progressIndicatorStrokeAlign,
+      progressIndicatorStrokeCap:
+          progressIndicatorStrokeCap ?? this.progressIndicatorStrokeCap,
+      progressIndicatorConstraints:
+          progressIndicatorConstraints ?? this.progressIndicatorConstraints,
+      progressIndicatorTrackGap:
+          progressIndicatorTrackGap ?? this.progressIndicatorTrackGap,
+      progressIndicatorCircularTrackPadding:
+          progressIndicatorCircularTrackPadding ??
+              this.progressIndicatorCircularTrackPadding,
       progressIndicatorYear2023:
           progressIndicatorYear2023 ?? this.progressIndicatorYear2023,
       //
@@ -5386,6 +5557,28 @@ class FlexSubThemesData with Diagnosticable {
         other.tooltipSchemeColor == tooltipSchemeColor &&
         other.tooltipOpacity == tooltipOpacity &&
         //
+        other.progressIndicatorBaseSchemeColor ==
+            progressIndicatorBaseSchemeColor &&
+        other.progressIndicatorLinearTrackSchemeColor ==
+            progressIndicatorLinearTrackSchemeColor &&
+        other.progressIndicatorLinearMinHeight ==
+            progressIndicatorLinearMinHeight &&
+        other.progressIndicatorCircularTrackSchemeColor ==
+            progressIndicatorCircularTrackSchemeColor &&
+        other.progressIndicatorRefreshBackgroundSchemeColor ==
+            progressIndicatorRefreshBackgroundSchemeColor &&
+        other.progressIndicatorLinearRadius == progressIndicatorLinearRadius &&
+        other.progressIndicatorStopIndicatorSchemeColor ==
+            progressIndicatorStopIndicatorSchemeColor &&
+        other.progressIndicatorStopIndicatorRadius ==
+            progressIndicatorStopIndicatorRadius &&
+        other.progressIndicatorStrokeWidth == progressIndicatorStrokeWidth &&
+        other.progressIndicatorStrokeAlign == progressIndicatorStrokeAlign &&
+        other.progressIndicatorStrokeCap == progressIndicatorStrokeCap &&
+        other.progressIndicatorConstraints == progressIndicatorConstraints &&
+        other.progressIndicatorTrackGap == progressIndicatorTrackGap &&
+        other.progressIndicatorCircularTrackPadding ==
+            progressIndicatorCircularTrackPadding &&
         other.progressIndicatorYear2023 == progressIndicatorYear2023 &&
         //
         other.searchBarBackgroundSchemeColor ==
@@ -5786,6 +5979,20 @@ class FlexSubThemesData with Diagnosticable {
         tooltipSchemeColor,
         tooltipOpacity,
         //
+        progressIndicatorBaseSchemeColor,
+        progressIndicatorLinearTrackSchemeColor,
+        progressIndicatorLinearMinHeight,
+        progressIndicatorCircularTrackSchemeColor,
+        progressIndicatorRefreshBackgroundSchemeColor,
+        progressIndicatorLinearRadius,
+        progressIndicatorStopIndicatorSchemeColor,
+        progressIndicatorStopIndicatorRadius,
+        progressIndicatorStrokeWidth,
+        progressIndicatorStrokeAlign,
+        progressIndicatorStrokeCap,
+        progressIndicatorConstraints,
+        progressIndicatorTrackGap,
+        progressIndicatorCircularTrackPadding,
         progressIndicatorYear2023,
         //
         searchBarBackgroundSchemeColor,
@@ -6284,6 +6491,40 @@ class FlexSubThemesData with Diagnosticable {
     properties
         .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
     //
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorBaseSchemeColor', progressIndicatorBaseSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorLinearTrackSchemeColor',
+        progressIndicatorLinearTrackSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorLinearMinHeight', progressIndicatorLinearMinHeight));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorCircularTrackSchemeColor',
+        progressIndicatorCircularTrackSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorRefreshBackgroundSchemeColor',
+        progressIndicatorRefreshBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorLinearRadius', progressIndicatorLinearRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorStopIndicatorSchemeColor',
+        progressIndicatorStopIndicatorSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorStopIndicatorRadius',
+        progressIndicatorStopIndicatorRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorStrokeWidth', progressIndicatorStrokeWidth));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorStrokeAlign', progressIndicatorStrokeAlign));
+    properties.add(EnumProperty<StrokeCap>(
+        'progressIndicatorStrokeCap', progressIndicatorStrokeCap));
+    properties.add(DiagnosticsProperty<BoxConstraints>(
+        'progressIndicatorConstraints', progressIndicatorConstraints));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorTrackGap', progressIndicatorTrackGap));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
+        'progressIndicatorCircularTrackPadding',
+        progressIndicatorCircularTrackPadding));
     properties.add(DiagnosticsProperty<bool>(
         'progressIndicatorYear2023', progressIndicatorYear2023));
     //
