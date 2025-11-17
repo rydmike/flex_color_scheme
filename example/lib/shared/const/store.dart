@@ -2068,6 +2068,110 @@ abstract final class Store {
   // Default value for the progressIndicatorYear2023, also to reset settings.
   static const bool? defaultProgressIndicatorYear2023 = null;
 
+  // Key used to read and save the progressIndicatorBaseSchemeColor value.
+  static const String keyProgressIndicatorBaseSchemeColor =
+      'progressIndicatorBaseSchemeColor';
+  // Default value for the progressIndicatorBaseSchemeColor, also to reset settings.
+  static const SchemeColor? defaultProgressIndicatorBaseSchemeColor = null;
+
+  // Key used to read and save the progressIndicatorLinearTrackSchemeColor value.
+  static const String keyProgressIndicatorLinearTrackSchemeColor =
+      'progressIndicatorLinearTrackSchemeColor';
+  // Default value for the progressIndicatorLinearTrackSchemeColor, also to reset settings.
+  static const SchemeColor? defaultProgressIndicatorLinearTrackSchemeColor = null;
+
+  // Key used to read and save the progressIndicatorCircularTrackSchemeColor value.
+  static const String keyProgressIndicatorCircularTrackSchemeColor =
+      'progressIndicatorCircularTrackSchemeColor';
+  // Default value for the progressIndicatorCircularTrackSchemeColor, also to reset settings.
+  static const SchemeColor? defaultProgressIndicatorCircularTrackSchemeColor =
+      null;
+
+  // Key used to read and save the progressIndicatorRefreshBackgroundSchemeColor value.
+  static const String keyProgressIndicatorRefreshBackgroundSchemeColor =
+      'progressIndicatorRefreshBackgroundSchemeColor';
+  // Default value for the progressIndicatorRefreshBackgroundSchemeColor, also to reset settings.
+  static const SchemeColor?
+      defaultProgressIndicatorRefreshBackgroundSchemeColor = null;
+
+  // Key used to read and save the progressIndicatorStopIndicatorSchemeColor value.
+  static const String keyProgressIndicatorStopIndicatorSchemeColor =
+      'progressIndicatorStopIndicatorSchemeColor';
+  // Default value for the progressIndicatorStopIndicatorSchemeColor, also to reset settings.
+  static const SchemeColor? defaultProgressIndicatorStopIndicatorSchemeColor =
+      null;
+
+  // Key used to read and save the progressIndicatorLinearMinHeight value.
+  static const String keyProgressIndicatorLinearMinHeight =
+      'progressIndicatorLinearMinHeight';
+  // Default value for the progressIndicatorLinearMinHeight, also to reset settings.
+  static const double? defaultProgressIndicatorLinearMinHeight = null;
+
+  // Key used to read and save the progressIndicatorLinearRadius value.
+  static const String keyProgressIndicatorLinearRadius =
+      'progressIndicatorLinearRadius';
+  // Default value for the progressIndicatorLinearRadius, also to reset settings.
+  static const double? defaultProgressIndicatorLinearRadius = null;
+
+  // Key used to read and save the progressIndicatorStopIndicatorRadius value.
+  static const String keyProgressIndicatorStopIndicatorRadius =
+      'progressIndicatorStopIndicatorRadius';
+  // Default value for the progressIndicatorStopIndicatorRadius, also to reset settings.
+  static const double? defaultProgressIndicatorStopIndicatorRadius = null;
+
+  // Key used to read and save the progressIndicatorStrokeWidth value.
+  static const String keyProgressIndicatorStrokeWidth =
+      'progressIndicatorStrokeWidth';
+  // Default value for the progressIndicatorStrokeWidth, also to reset settings.
+  static const double? defaultProgressIndicatorStrokeWidth = null;
+
+  // Key used to read and save the progressIndicatorStrokeAlign value.
+  static const String keyProgressIndicatorStrokeAlign =
+      'progressIndicatorStrokeAlign';
+  // Default value for the progressIndicatorStrokeAlign, also to reset settings.
+  static const double? defaultProgressIndicatorStrokeAlign = null;
+
+  // Key used to read and save the progressIndicatorTrackGap value.
+  static const String keyProgressIndicatorTrackGap = 'progressIndicatorTrackGap';
+  // Default value for the progressIndicatorTrackGap, also to reset settings.
+  static const double? defaultProgressIndicatorTrackGap = null;
+
+  // Key used to read and save the progressIndicatorStrokeCap value.
+  static const String keyProgressIndicatorStrokeCap =
+      'progressIndicatorStrokeCap';
+  // Default value for the progressIndicatorStrokeCap, also to reset settings.
+  static const StrokeCap? defaultProgressIndicatorStrokeCap = null;
+
+  // Key used to read and save the progressIndicatorConstraints value.
+  static const String keyProgressIndicatorConstraints =
+      'progressIndicatorConstraints';
+  // Default value for the progressIndicatorConstraints, also to reset settings.
+  static const BoxConstraints? defaultProgressIndicatorConstraints = null;
+
+  // Key used to read and save the progressIndicatorCircularTrackPaddingStart value.
+  static const String keyProgressIndicatorCircularTrackPaddingStart =
+      'progressIndicatorCircularTrackPaddingStart';
+  // Default value for the progressIndicatorCircularTrackPaddingStart, also to reset settings.
+  static const double? defaultProgressIndicatorCircularTrackPaddingStart = null;
+
+  // Key used to read and save the progressIndicatorCircularTrackPaddingEnd value.
+  static const String keyProgressIndicatorCircularTrackPaddingEnd =
+      'progressIndicatorCircularTrackPaddingEnd';
+  // Default value for the progressIndicatorCircularTrackPaddingEnd, also to reset settings.
+  static const double? defaultProgressIndicatorCircularTrackPaddingEnd = null;
+
+  // Key used to read and save the progressIndicatorCircularTrackPaddingTop value.
+  static const String keyProgressIndicatorCircularTrackPaddingTop =
+      'progressIndicatorCircularTrackPaddingTop';
+  // Default value for the progressIndicatorCircularTrackPaddingTop, also to reset settings.
+  static const double? defaultProgressIndicatorCircularTrackPaddingTop = null;
+
+  // Key used to read and save the progressIndicatorCircularTrackPaddingBottom value.
+  static const String keyProgressIndicatorCircularTrackPaddingBottom =
+      'progressIndicatorCircularTrackPaddingBottom';
+  // Default value for the progressIndicatorCircularTrackPaddingBottom, also to reset settings.
+  static const double? defaultProgressIndicatorCircularTrackPaddingBottom = null;
+
   // Fab, Chip SnackBar, Popup, Dropdown, Card and Dialog SETTINGS.
   // ===========================================================================
 

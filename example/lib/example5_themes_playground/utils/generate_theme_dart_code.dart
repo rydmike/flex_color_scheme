@@ -719,6 +719,83 @@ String generateThemeDartCode(ThemeController controller) {
           (controller.progressIndicatorYear2023 ?? false)
       ? ''
       : '      progressIndicatorYear2023: ${controller.progressIndicatorYear2023},\n';
+  final String progressIndicatorBaseSchemeColor = controller
+              .progressIndicatorBaseSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorBaseSchemeColor: ${controller.progressIndicatorBaseSchemeColor},\n';
+  final String progressIndicatorLinearTrackSchemeColor = controller
+              .progressIndicatorLinearTrackSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorLinearTrackSchemeColor: ${controller.progressIndicatorLinearTrackSchemeColor},\n';
+  final String progressIndicatorCircularTrackSchemeColor = controller
+              .progressIndicatorCircularTrackSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorCircularTrackSchemeColor: ${controller.progressIndicatorCircularTrackSchemeColor},\n';
+  final String progressIndicatorRefreshBackgroundSchemeColor = controller
+              .progressIndicatorRefreshBackgroundSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorRefreshBackgroundSchemeColor: ${controller.progressIndicatorRefreshBackgroundSchemeColor},\n';
+  final String progressIndicatorStopIndicatorSchemeColor = controller
+              .progressIndicatorStopIndicatorSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorStopIndicatorSchemeColor: ${controller.progressIndicatorStopIndicatorSchemeColor},\n';
+  final String progressIndicatorLinearMinHeight = controller
+              .progressIndicatorLinearMinHeight ==
+          null
+      ? ''
+      : '      progressIndicatorLinearMinHeight: ${controller.progressIndicatorLinearMinHeight},\n';
+  final String progressIndicatorLinearRadius = controller
+              .progressIndicatorLinearRadius ==
+          null
+      ? ''
+      : '      progressIndicatorLinearRadius: ${controller.progressIndicatorLinearRadius},\n';
+  final String progressIndicatorStopIndicatorRadius = controller
+              .progressIndicatorStopIndicatorRadius ==
+          null
+      ? ''
+      : '      progressIndicatorStopIndicatorRadius: ${controller.progressIndicatorStopIndicatorRadius},\n';
+  final String progressIndicatorStrokeWidth = controller
+              .progressIndicatorStrokeWidth ==
+          null
+      ? ''
+      : '      progressIndicatorStrokeWidth: ${controller.progressIndicatorStrokeWidth},\n';
+  final String progressIndicatorStrokeAlign = controller
+              .progressIndicatorStrokeAlign ==
+          null
+      ? ''
+      : '      progressIndicatorStrokeAlign: ${controller.progressIndicatorStrokeAlign},\n';
+  final String progressIndicatorTrackGap = controller
+              .progressIndicatorTrackGap ==
+          null
+      ? ''
+      : '      progressIndicatorTrackGap: ${controller.progressIndicatorTrackGap},\n';
+  final String progressIndicatorStrokeCap = controller
+              .progressIndicatorStrokeCap ==
+          null
+      ? ''
+      : '      progressIndicatorStrokeCap: ${controller.progressIndicatorStrokeCap},\n';
+  final String progressIndicatorConstraints = controller
+              .progressIndicatorConstraints ==
+          null
+      ? ''
+      : '      progressIndicatorConstraints: ${controller.progressIndicatorConstraints},\n';
+  final String progressIndicatorCircularTrackPadding = controller
+                  .progressIndicatorCircularTrackPaddingStart !=
+              null ||
+          controller.progressIndicatorCircularTrackPaddingEnd != null ||
+          controller.progressIndicatorCircularTrackPaddingTop != null ||
+          controller.progressIndicatorCircularTrackPaddingBottom != null
+      ? '      progressIndicatorCircularTrackPadding: EdgeInsetsDirectional.fromSTEB('
+          '${controller.progressIndicatorCircularTrackPaddingStart?.toStringAsFixed(1) ?? '0'}, '
+          '${controller.progressIndicatorCircularTrackPaddingTop?.toStringAsFixed(1) ?? '0'}, '
+          '${controller.progressIndicatorCircularTrackPaddingEnd?.toStringAsFixed(1) ?? '0'}, '
+          '${controller.progressIndicatorCircularTrackPaddingBottom?.toStringAsFixed(1) ?? '0'}),\n'
+      : '';
   //
   // Input decorator setup CODE.
   //
@@ -1779,6 +1856,20 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderTrackHeight'
           '$sliderYear2023'
           '$progressIndicatorYear2023'
+          '$progressIndicatorBaseSchemeColor'
+          '$progressIndicatorLinearTrackSchemeColor'
+          '$progressIndicatorCircularTrackSchemeColor'
+          '$progressIndicatorRefreshBackgroundSchemeColor'
+          '$progressIndicatorStopIndicatorSchemeColor'
+          '$progressIndicatorLinearMinHeight'
+          '$progressIndicatorLinearRadius'
+          '$progressIndicatorStopIndicatorRadius'
+          '$progressIndicatorStrokeWidth'
+          '$progressIndicatorStrokeAlign'
+          '$progressIndicatorTrackGap'
+          '$progressIndicatorStrokeCap'
+          '$progressIndicatorConstraints'
+          '$progressIndicatorCircularTrackPadding'
           //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
@@ -2067,6 +2158,20 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderTrackHeight'
           '$sliderYear2023'
           '$progressIndicatorYear2023'
+          '$progressIndicatorBaseSchemeColor'
+          '$progressIndicatorLinearTrackSchemeColor'
+          '$progressIndicatorCircularTrackSchemeColor'
+          '$progressIndicatorRefreshBackgroundSchemeColor'
+          '$progressIndicatorStopIndicatorSchemeColor'
+          '$progressIndicatorLinearMinHeight'
+          '$progressIndicatorLinearRadius'
+          '$progressIndicatorStopIndicatorRadius'
+          '$progressIndicatorStrokeWidth'
+          '$progressIndicatorStrokeAlign'
+          '$progressIndicatorTrackGap'
+          '$progressIndicatorStrokeCap'
+          '$progressIndicatorConstraints'
+          '$progressIndicatorCircularTrackPadding'
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'

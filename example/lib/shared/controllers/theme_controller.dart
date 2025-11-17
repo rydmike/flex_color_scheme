@@ -912,6 +912,57 @@ class ThemeController with ChangeNotifier {
     _progressIndicatorYear2023 = await _themeService.load(
         Store.keyProgressIndicatorYear2023,
         Store.defaultProgressIndicatorYear2023);
+    _progressIndicatorBaseSchemeColor = await _themeService.load(
+        Store.keyProgressIndicatorBaseSchemeColor,
+        Store.defaultProgressIndicatorBaseSchemeColor);
+    _progressIndicatorLinearTrackSchemeColor = await _themeService.load(
+        Store.keyProgressIndicatorLinearTrackSchemeColor,
+        Store.defaultProgressIndicatorLinearTrackSchemeColor);
+    _progressIndicatorCircularTrackSchemeColor = await _themeService.load(
+        Store.keyProgressIndicatorCircularTrackSchemeColor,
+        Store.defaultProgressIndicatorCircularTrackSchemeColor);
+    _progressIndicatorRefreshBackgroundSchemeColor = await _themeService.load(
+        Store.keyProgressIndicatorRefreshBackgroundSchemeColor,
+        Store.defaultProgressIndicatorRefreshBackgroundSchemeColor);
+    _progressIndicatorStopIndicatorSchemeColor = await _themeService.load(
+        Store.keyProgressIndicatorStopIndicatorSchemeColor,
+        Store.defaultProgressIndicatorStopIndicatorSchemeColor);
+    _progressIndicatorLinearMinHeight = await _themeService.load(
+        Store.keyProgressIndicatorLinearMinHeight,
+        Store.defaultProgressIndicatorLinearMinHeight);
+    _progressIndicatorLinearRadius = await _themeService.load(
+        Store.keyProgressIndicatorLinearRadius,
+        Store.defaultProgressIndicatorLinearRadius);
+    _progressIndicatorStopIndicatorRadius = await _themeService.load(
+        Store.keyProgressIndicatorStopIndicatorRadius,
+        Store.defaultProgressIndicatorStopIndicatorRadius);
+    _progressIndicatorStrokeWidth = await _themeService.load(
+        Store.keyProgressIndicatorStrokeWidth,
+        Store.defaultProgressIndicatorStrokeWidth);
+    _progressIndicatorStrokeAlign = await _themeService.load(
+        Store.keyProgressIndicatorStrokeAlign,
+        Store.defaultProgressIndicatorStrokeAlign);
+    _progressIndicatorTrackGap = await _themeService.load(
+        Store.keyProgressIndicatorTrackGap,
+        Store.defaultProgressIndicatorTrackGap);
+    _progressIndicatorStrokeCap = await _themeService.load(
+        Store.keyProgressIndicatorStrokeCap,
+        Store.defaultProgressIndicatorStrokeCap);
+    _progressIndicatorConstraints = await _themeService.load(
+        Store.keyProgressIndicatorConstraints,
+        Store.defaultProgressIndicatorConstraints);
+    _progressIndicatorCircularTrackPaddingStart = await _themeService.load(
+        Store.keyProgressIndicatorCircularTrackPaddingStart,
+        Store.defaultProgressIndicatorCircularTrackPaddingStart);
+    _progressIndicatorCircularTrackPaddingEnd = await _themeService.load(
+        Store.keyProgressIndicatorCircularTrackPaddingEnd,
+        Store.defaultProgressIndicatorCircularTrackPaddingEnd);
+    _progressIndicatorCircularTrackPaddingTop = await _themeService.load(
+        Store.keyProgressIndicatorCircularTrackPaddingTop,
+        Store.defaultProgressIndicatorCircularTrackPaddingTop);
+    _progressIndicatorCircularTrackPaddingBottom = await _themeService.load(
+        Store.keyProgressIndicatorCircularTrackPaddingBottom,
+        Store.defaultProgressIndicatorCircularTrackPaddingBottom);
 
     //
     // Fab SETTINGS.
@@ -1573,6 +1624,39 @@ class ThemeController with ChangeNotifier {
     setSliderTrackHeight(Store.defaultSliderTrackHeight, false);
     setSliderYear2023(Store.defaultSliderYear2023, false);
     setProgressIndicatorYear2023(Store.defaultProgressIndicatorYear2023, false);
+    setProgressIndicatorBaseSchemeColor(
+        Store.defaultProgressIndicatorBaseSchemeColor, false);
+    setProgressIndicatorLinearTrackSchemeColor(
+        Store.defaultProgressIndicatorLinearTrackSchemeColor, false);
+    setProgressIndicatorCircularTrackSchemeColor(
+        Store.defaultProgressIndicatorCircularTrackSchemeColor, false);
+    setProgressIndicatorRefreshBackgroundSchemeColor(
+        Store.defaultProgressIndicatorRefreshBackgroundSchemeColor, false);
+    setProgressIndicatorStopIndicatorSchemeColor(
+        Store.defaultProgressIndicatorStopIndicatorSchemeColor, false);
+    setProgressIndicatorLinearMinHeight(
+        Store.defaultProgressIndicatorLinearMinHeight, false);
+    setProgressIndicatorLinearRadius(
+        Store.defaultProgressIndicatorLinearRadius, false);
+    setProgressIndicatorStopIndicatorRadius(
+        Store.defaultProgressIndicatorStopIndicatorRadius, false);
+    setProgressIndicatorStrokeWidth(
+        Store.defaultProgressIndicatorStrokeWidth, false);
+    setProgressIndicatorStrokeAlign(
+        Store.defaultProgressIndicatorStrokeAlign, false);
+    setProgressIndicatorTrackGap(Store.defaultProgressIndicatorTrackGap, false);
+    setProgressIndicatorStrokeCap(
+        Store.defaultProgressIndicatorStrokeCap, false);
+    setProgressIndicatorConstraints(
+        Store.defaultProgressIndicatorConstraints, false);
+    setProgressIndicatorCircularTrackPaddingStart(
+        Store.defaultProgressIndicatorCircularTrackPaddingStart, false);
+    setProgressIndicatorCircularTrackPaddingEnd(
+        Store.defaultProgressIndicatorCircularTrackPaddingEnd, false);
+    setProgressIndicatorCircularTrackPaddingTop(
+        Store.defaultProgressIndicatorCircularTrackPaddingTop, false);
+    setProgressIndicatorCircularTrackPaddingBottom(
+        Store.defaultProgressIndicatorCircularTrackPaddingBottom, false);
     //
     // Fab SETTINGS.
     setFloatingActionButtonUseShape(
@@ -6743,6 +6827,229 @@ class ThemeController with ChangeNotifier {
     _progressIndicatorYear2023 = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyProgressIndicatorYear2023, value));
+  }
+
+  late SchemeColor? _progressIndicatorBaseSchemeColor;
+
+  SchemeColor? get progressIndicatorBaseSchemeColor =>
+      _progressIndicatorBaseSchemeColor;
+
+  void setProgressIndicatorBaseSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorBaseSchemeColor) return;
+    _progressIndicatorBaseSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyProgressIndicatorBaseSchemeColor, value));
+  }
+
+  late SchemeColor? _progressIndicatorLinearTrackSchemeColor;
+
+  SchemeColor? get progressIndicatorLinearTrackSchemeColor =>
+      _progressIndicatorLinearTrackSchemeColor;
+
+  void setProgressIndicatorLinearTrackSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorLinearTrackSchemeColor) return;
+    _progressIndicatorLinearTrackSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorLinearTrackSchemeColor, value));
+  }
+
+  late SchemeColor? _progressIndicatorCircularTrackSchemeColor;
+
+  SchemeColor? get progressIndicatorCircularTrackSchemeColor =>
+      _progressIndicatorCircularTrackSchemeColor;
+
+  void setProgressIndicatorCircularTrackSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorCircularTrackSchemeColor) return;
+    _progressIndicatorCircularTrackSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorCircularTrackSchemeColor, value));
+  }
+
+  late SchemeColor? _progressIndicatorRefreshBackgroundSchemeColor;
+
+  SchemeColor? get progressIndicatorRefreshBackgroundSchemeColor =>
+      _progressIndicatorRefreshBackgroundSchemeColor;
+
+  void setProgressIndicatorRefreshBackgroundSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorRefreshBackgroundSchemeColor) return;
+    _progressIndicatorRefreshBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorRefreshBackgroundSchemeColor, value));
+  }
+
+  late SchemeColor? _progressIndicatorStopIndicatorSchemeColor;
+
+  SchemeColor? get progressIndicatorStopIndicatorSchemeColor =>
+      _progressIndicatorStopIndicatorSchemeColor;
+
+  void setProgressIndicatorStopIndicatorSchemeColor(SchemeColor? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorStopIndicatorSchemeColor) return;
+    _progressIndicatorStopIndicatorSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorStopIndicatorSchemeColor, value));
+  }
+
+  late double? _progressIndicatorLinearMinHeight;
+
+  double? get progressIndicatorLinearMinHeight =>
+      _progressIndicatorLinearMinHeight;
+
+  void setProgressIndicatorLinearMinHeight(double? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorLinearMinHeight) return;
+    _progressIndicatorLinearMinHeight = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyProgressIndicatorLinearMinHeight, value));
+  }
+
+  late double? _progressIndicatorLinearRadius;
+
+  double? get progressIndicatorLinearRadius => _progressIndicatorLinearRadius;
+
+  void setProgressIndicatorLinearRadius(double? value, [bool notify = true]) {
+    if (value == _progressIndicatorLinearRadius) return;
+    _progressIndicatorLinearRadius = value;
+    if (notify) notifyListeners();
+    unawaited(
+        _themeService.save(Store.keyProgressIndicatorLinearRadius, value));
+  }
+
+  late double? _progressIndicatorStopIndicatorRadius;
+
+  double? get progressIndicatorStopIndicatorRadius =>
+      _progressIndicatorStopIndicatorRadius;
+
+  void setProgressIndicatorStopIndicatorRadius(double? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorStopIndicatorRadius) return;
+    _progressIndicatorStopIndicatorRadius = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorStopIndicatorRadius, value));
+  }
+
+  late double? _progressIndicatorStrokeWidth;
+
+  double? get progressIndicatorStrokeWidth => _progressIndicatorStrokeWidth;
+
+  void setProgressIndicatorStrokeWidth(double? value, [bool notify = true]) {
+    if (value == _progressIndicatorStrokeWidth) return;
+    _progressIndicatorStrokeWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyProgressIndicatorStrokeWidth, value));
+  }
+
+  late double? _progressIndicatorStrokeAlign;
+
+  double? get progressIndicatorStrokeAlign => _progressIndicatorStrokeAlign;
+
+  void setProgressIndicatorStrokeAlign(double? value, [bool notify = true]) {
+    if (value == _progressIndicatorStrokeAlign) return;
+    _progressIndicatorStrokeAlign = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyProgressIndicatorStrokeAlign, value));
+  }
+
+  late double? _progressIndicatorTrackGap;
+
+  double? get progressIndicatorTrackGap => _progressIndicatorTrackGap;
+
+  void setProgressIndicatorTrackGap(double? value, [bool notify = true]) {
+    if (value == _progressIndicatorTrackGap) return;
+    _progressIndicatorTrackGap = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyProgressIndicatorTrackGap, value));
+  }
+
+  late StrokeCap? _progressIndicatorStrokeCap;
+
+  StrokeCap? get progressIndicatorStrokeCap => _progressIndicatorStrokeCap;
+
+  void setProgressIndicatorStrokeCap(StrokeCap? value, [bool notify = true]) {
+    if (value == _progressIndicatorStrokeCap) return;
+    _progressIndicatorStrokeCap = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyProgressIndicatorStrokeCap, value));
+  }
+
+  late BoxConstraints? _progressIndicatorConstraints;
+
+  BoxConstraints? get progressIndicatorConstraints =>
+      _progressIndicatorConstraints;
+
+  void setProgressIndicatorConstraints(BoxConstraints? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorConstraints) return;
+    _progressIndicatorConstraints = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyProgressIndicatorConstraints, value));
+  }
+
+  late double? _progressIndicatorCircularTrackPaddingStart;
+
+  double? get progressIndicatorCircularTrackPaddingStart =>
+      _progressIndicatorCircularTrackPaddingStart;
+
+  void setProgressIndicatorCircularTrackPaddingStart(double? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorCircularTrackPaddingStart) return;
+    _progressIndicatorCircularTrackPaddingStart = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorCircularTrackPaddingStart, value));
+  }
+
+  late double? _progressIndicatorCircularTrackPaddingEnd;
+
+  double? get progressIndicatorCircularTrackPaddingEnd =>
+      _progressIndicatorCircularTrackPaddingEnd;
+
+  void setProgressIndicatorCircularTrackPaddingEnd(double? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorCircularTrackPaddingEnd) return;
+    _progressIndicatorCircularTrackPaddingEnd = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorCircularTrackPaddingEnd, value));
+  }
+
+  late double? _progressIndicatorCircularTrackPaddingTop;
+
+  double? get progressIndicatorCircularTrackPaddingTop =>
+      _progressIndicatorCircularTrackPaddingTop;
+
+  void setProgressIndicatorCircularTrackPaddingTop(double? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorCircularTrackPaddingTop) return;
+    _progressIndicatorCircularTrackPaddingTop = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorCircularTrackPaddingTop, value));
+  }
+
+  late double? _progressIndicatorCircularTrackPaddingBottom;
+
+  double? get progressIndicatorCircularTrackPaddingBottom =>
+      _progressIndicatorCircularTrackPaddingBottom;
+
+  void setProgressIndicatorCircularTrackPaddingBottom(double? value,
+      [bool notify = true]) {
+    if (value == _progressIndicatorCircularTrackPaddingBottom) return;
+    _progressIndicatorCircularTrackPaddingBottom = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(
+        Store.keyProgressIndicatorCircularTrackPaddingBottom, value));
   }
 
   // FloatingActionButton SETTINGS.

@@ -31,9 +31,9 @@ Requires at least Flutter 3.38.0, but prefer at least 3.38.1 stable.
   - `progressIndicatorStopIndicatorRadius` (double)
   - `progressIndicatorStrokeWidth` (double)
   - `progressIndicatorStrokeAlign` (double)
+  - `progressIndicatorTrackGap` (double)
   - `progressIndicatorStrokeCap` (StrokeCap)
   - `progressIndicatorConstraints` (BoxConstraints)
-  - `progressIndicatorTrackGap` (double)
   - `progressIndicatorCircularTrackPadding` (EdgeInsetsGeometry)
   - `progressIndicatorYear2023` (bool)
 
@@ -48,6 +48,20 @@ Requires at least Flutter 3.38.0, but prefer at least 3.38.1 stable.
 
 **NEW**
 * The Slider panel got a new switch to select between older M3 and newer current M3 slider styles. It uses the new `FlexSubThemesData.sliderYear2023` property to do so.
+* The ProgressIndicator panel got a new switch to select between older M3 and newer current M3 progress indicator styles. It uses the new `FlexSubThemesData.progressIndicatorYear2023` property to do so.
+* The ProgressIndicator panel got a new color selector for the progress indicator base color. It uses the new `FlexSubThemesData.progressIndicatorBaseSchemeColor` property to do so.
+* The ProgressIndicator panel got a new color selector for the progress indicator linear track color. It uses the new `FlexSubThemesData.progressIndicatorLinearTrackSchemeColor` property to do so.
+* The ProgressIndicator panel got a new color selector for the progress indicator circular track color. It uses the new `FlexSubThemesData.progressIndicatorCircularTrackSchemeColor` property to do so.
+* The ProgressIndicator panel got a new color selector for the progress indicator refresh background color. It uses the new `FlexSubThemesData.progressIndicatorRefreshBackgroundSchemeColor` property to do so.
+* The ProgressIndicator panel got a new color selector for the progress indicator stop indicator color. It uses the new `FlexSubThemesData.progressIndicatorStopIndicatorSchemeColor` property to do so.
+* The ProgressIndicator panel got a new slider for the progress indicator linear min height. It uses the new `FlexSubThemesData.progressIndicatorLinearMinHeight` property to do so.
+* The ProgressIndicator panel got a new slider for the progress indicator linear radius. It uses the new `FlexSubThemesData.progressIndicatorLinearRadius` property to do so.
+* The ProgressIndicator panel got a new slider for the progress indicator stop indicator radius. It uses the new `FlexSubThemesData.progressIndicatorStopIndicatorRadius` property to do so.
+* The ProgressIndicator panel got a new slider for the progress indicator stroke width. It uses the new `FlexSubThemesData.progressIndicatorStrokeWidth` property to do so.
+* The ProgressIndicator panel got a new slider for the progress indicator stroke align. It uses the new `FlexSubThemesData.progressIndicatorStrokeAlign` property to do so.
+* The ProgressIndicator panel got a new slider for the progress indicator track gap. It uses the new `FlexSubThemesData.progressIndicatorTrackGap` property to do so.
+* The ProgressIndicator panel got a new selector for the progress indicator stroke cap. It uses the new `FlexSubThemesData.progressIndicatorStrokeCap` property to do so.
+* The ProgressIndicator panel got a new selector for the progress indicator circular track padding. It uses the new `FlexSubThemesData.progressIndicatorCircularTrackPadding` property to do so.
 
 **TODOs**
 

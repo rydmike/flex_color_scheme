@@ -246,6 +246,46 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             sliderTrackHeight: controller.sliderTrackHeight,
             sliderYear2023: controller.sliderYear2023,
             progressIndicatorYear2023: controller.progressIndicatorYear2023,
+            progressIndicatorBaseSchemeColor:
+                controller.progressIndicatorBaseSchemeColor,
+            progressIndicatorLinearTrackSchemeColor:
+                controller.progressIndicatorLinearTrackSchemeColor,
+            progressIndicatorCircularTrackSchemeColor:
+                controller.progressIndicatorCircularTrackSchemeColor,
+            progressIndicatorRefreshBackgroundSchemeColor:
+                controller.progressIndicatorRefreshBackgroundSchemeColor,
+            progressIndicatorStopIndicatorSchemeColor:
+                controller.progressIndicatorStopIndicatorSchemeColor,
+            progressIndicatorLinearMinHeight:
+                controller.progressIndicatorLinearMinHeight,
+            progressIndicatorLinearRadius:
+                controller.progressIndicatorLinearRadius,
+            progressIndicatorStopIndicatorRadius:
+                controller.progressIndicatorStopIndicatorRadius,
+            progressIndicatorStrokeWidth:
+                controller.progressIndicatorStrokeWidth,
+            progressIndicatorStrokeAlign:
+                controller.progressIndicatorStrokeAlign,
+            progressIndicatorTrackGap: controller.progressIndicatorTrackGap,
+            progressIndicatorStrokeCap: controller.progressIndicatorStrokeCap,
+            progressIndicatorConstraints:
+                controller.progressIndicatorConstraints,
+            progressIndicatorCircularTrackPadding: controller
+                            .progressIndicatorCircularTrackPaddingStart !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingEnd !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingTop !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingBottom !=
+                        null
+                ? EdgeInsetsDirectional.fromSTEB(
+                    controller.progressIndicatorCircularTrackPaddingStart ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingTop ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingEnd ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingBottom ?? 0,
+                  )
+                : null,
             // Input decoration (TextField) settings.
             inputDecoratorSchemeColor: controller.inputDecoratorSchemeColorDark,
             inputDecoratorBorderSchemeColor:
