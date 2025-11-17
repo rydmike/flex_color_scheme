@@ -1,3 +1,5 @@
+import 'dart:ui' show StrokeCap;
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -853,6 +855,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value < 0) return defaultValue;
         if (value >= TabIndicatorAnimation.values.length) return defaultValue;
         return TabIndicatorAnimation.values[value] as T;
+      }
+      // T is StrokeCap is nullable value.
+      if (sameTypes<T, StrokeCap?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded StrokeCap?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= StrokeCap.values.length) return defaultValue;
+        return StrokeCap.values[value] as T;
+      }
+      // T is StrokeCap none nullable value.
+      if (sameTypes<T, StrokeCap>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded StrokeCap : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= StrokeCap.values.length) return defaultValue;
+        return StrokeCap.values[value] as T;
       }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');

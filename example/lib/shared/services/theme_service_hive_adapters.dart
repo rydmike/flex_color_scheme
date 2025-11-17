@@ -1,3 +1,5 @@
+import 'dart:ui' show StrokeCap;
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce/hive.dart';
@@ -598,4 +600,28 @@ class TabIndicatorAnimationAdapter extends TypeAdapter<TabIndicatorAnimation?> {
 
   @override
   int get typeId => 178;
+}
+
+/// A Hive data type adapter for enum [StrokeCap], nullable.
+///
+/// Handles storing `null` value as -1 and returns anything out of enum
+/// index range as null value.
+class StrokeCapAdapter extends TypeAdapter<StrokeCap?> {
+  @override
+  StrokeCap? read(BinaryReader reader) {
+    final int index = reader.readInt();
+    if (index < 0 || index >= StrokeCap.values.length) {
+      return null;
+    } else {
+      return StrokeCap.values[index];
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, StrokeCap? obj) {
+    writer.writeInt(obj?.index ?? -1);
+  }
+
+  @override
+  int get typeId => 179;
 }
