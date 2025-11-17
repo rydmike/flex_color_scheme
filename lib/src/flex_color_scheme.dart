@@ -8285,15 +8285,6 @@ class FlexColorScheme with Diagnosticable {
               circularTrackPadding:
                   subTheme.progressIndicatorCircularTrackPadding,
               year2023: subTheme.progressIndicatorYear2023,
-              //
-              // TODO(rydmike): Remove these after debug tests
-              // linearTrackSchemeColor: SchemeColor.inversePrimary,
-              // circularTrackSchemeColor: SchemeColor.inversePrimary,
-              // stopIndicatorSchemeColor: SchemeColor.primaryFixed,
-              // stopIndicatorRadius: 5,
-              // linearMinHeight: 16,
-              // linearRadius: 4,
-              // year2023: false,
             )
           : null,
       //
