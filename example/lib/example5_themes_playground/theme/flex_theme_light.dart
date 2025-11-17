@@ -280,30 +280,30 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.progressIndicatorLinearRadius,
             progressIndicatorStopIndicatorRadius:
                 controller.progressIndicatorStopIndicatorRadius,
-            progressIndicatorStrokeWidth: controller.progressIndicatorStrokeWidth,
+            progressIndicatorStrokeWidth:
+                controller.progressIndicatorStrokeWidth,
             progressIndicatorStrokeAlign:
                 controller.progressIndicatorStrokeAlign,
             progressIndicatorTrackGap: controller.progressIndicatorTrackGap,
             progressIndicatorStrokeCap: controller.progressIndicatorStrokeCap,
             progressIndicatorConstraints:
                 controller.progressIndicatorConstraints,
-            progressIndicatorCircularTrackPadding:
-                controller.progressIndicatorCircularTrackPaddingStart != null ||
-                        controller.progressIndicatorCircularTrackPaddingEnd !=
-                            null ||
-                        controller.progressIndicatorCircularTrackPaddingTop !=
-                            null ||
-                        controller.progressIndicatorCircularTrackPaddingBottom !=
-                            null
-                    ? EdgeInsetsDirectional.fromSTEB(
-                        controller.progressIndicatorCircularTrackPaddingStart ??
-                            0,
-                        controller.progressIndicatorCircularTrackPaddingTop ?? 0,
-                        controller.progressIndicatorCircularTrackPaddingEnd ?? 0,
-                        controller.progressIndicatorCircularTrackPaddingBottom ??
-                            0,
-                      )
-                    : null,
+            progressIndicatorCircularTrackPadding: controller
+                            .progressIndicatorCircularTrackPaddingStart !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingEnd !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingTop !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingBottom !=
+                        null
+                ? EdgeInsetsDirectional.fromSTEB(
+                    controller.progressIndicatorCircularTrackPaddingStart ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingTop ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingEnd ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingBottom ?? 0,
+                  )
+                : null,
             // Input decoration (TextField) settings.
             // Base ColorScheme used by TextField InputDecorator.
             inputDecoratorSchemeColor:
@@ -652,7 +652,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.navigationRailUnselectedIconSize,
             // Do not pass null to Playground even if it is, this is done to
             // avoid the alignment jumping down 0 and back to -1 when moving
-            // from nul to minus one and theme lerps from 0 to -1.
+            // from null to minus one and theme animates from 0 to -1.
             navigationRailGroupAlignment:
                 controller.navigationRailGroupAlignment ?? -1,
             navigationRailMinWidth: controller.navigationRailMinWidth,

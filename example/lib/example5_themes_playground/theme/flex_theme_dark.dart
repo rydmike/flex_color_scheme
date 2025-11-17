@@ -630,7 +630,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
                 controller.navigationRailUnselectedIconSize,
             // Do not pass null to Playground even if it is, this is done to
             // avoid the alignment jumping down 0 and back to -1 when moving
-            // from nul to minus one and theme lerps from 0 to -1.
+            // from null to minus one and theme animates from 0 to -1.
             navigationRailGroupAlignment:
                 controller.navigationRailGroupAlignment ?? -1,
             navigationRailMinWidth: controller.navigationRailMinWidth,

@@ -2786,7 +2786,7 @@ class ThemeController with ChangeNotifier {
       setChipPaddingEnd(4, false);
       // Card settings
       setCardBorderRadius(12, false);
-      // Popupmenu
+      // PopupMenu
       setPopupMenuBorderRadius(6, false);
       setPopupMenuElevation(4, false);
       setAlignedDropdown(true, false);
