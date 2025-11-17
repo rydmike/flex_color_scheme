@@ -2063,6 +2063,11 @@ abstract final class Store {
   // Default value for the sliderYear2023, also to reset settings.
   static const bool? defaultSliderYear2023 = null;
 
+  // Key used to read and save the progressIndicatorYear2023 value.
+  static const String keyProgressIndicatorYear2023 = 'progressIndicatorYear2023';
+  // Default value for the progressIndicatorYear2023, also to reset settings.
+  static const bool? defaultProgressIndicatorYear2023 = null;
+
   // Fab, Chip SnackBar, Popup, Dropdown, Card and Dialog SETTINGS.
   // ===========================================================================
 

@@ -713,6 +713,12 @@ String generateThemeDartCode(ThemeController controller) {
       controller.sliderYear2023 == null || (controller.sliderYear2023 ?? false)
           ? ''
           : '      sliderYear2023: ${controller.sliderYear2023},\n';
+  final String progressIndicatorYear2023 = controller
+                  .progressIndicatorYear2023 ==
+              null ||
+          (controller.progressIndicatorYear2023 ?? false)
+      ? ''
+      : '      progressIndicatorYear2023: ${controller.progressIndicatorYear2023},\n';
   //
   // Input decorator setup CODE.
   //
@@ -1772,6 +1778,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderShowValueIndicator'
           '$sliderTrackHeight'
           '$sliderYear2023'
+          '$progressIndicatorYear2023'
           //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
@@ -2059,6 +2066,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderShowValueIndicator'
           '$sliderTrackHeight'
           '$sliderYear2023'
+          '$progressIndicatorYear2023'
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'

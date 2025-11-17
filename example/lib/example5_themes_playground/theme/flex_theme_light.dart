@@ -263,6 +263,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             sliderShowValueIndicator: controller.sliderShowValueIndicator,
             sliderTrackHeight: controller.sliderTrackHeight,
             sliderYear2023: controller.sliderYear2023,
+            progressIndicatorYear2023: controller.progressIndicatorYear2023,
             // Input decoration (TextField) settings.
             // Base ColorScheme used by TextField InputDecorator.
             inputDecoratorSchemeColor:

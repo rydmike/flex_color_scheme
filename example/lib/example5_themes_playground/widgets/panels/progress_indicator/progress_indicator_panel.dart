@@ -4,6 +4,7 @@ import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
+import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 import '../../shared/test_adaptive_response.dart';
 
 class ProgressIndicatorPanel extends StatelessWidget {
@@ -19,6 +20,9 @@ class ProgressIndicatorPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool useMaterial3 = theme.useMaterial3;
+    final bool use2023Style = controller.progressIndicatorYear2023 ?? true;
+
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!
         .copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
@@ -28,18 +32,30 @@ class ProgressIndicatorPanel extends StatelessWidget {
     // final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
-    // final bool enableControl =
-    //     controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl =
+        controller.useSubThemes && controller.useFlexColorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-        const ListTileReveal(
-          title: Text('ProgressIndicator'),
-          subtitleReveal:
-              Text('Progress indicators in FCS currently only offer the '
-                  'default theme and no customization.\n'),
+        SwitchListTileReveal(
+          enabled: enableControl && useMaterial3,
+          title: const Text('Use legacy Material-3 style'),
+          subtitleReveal: const Text(
+              'The Material-3 specification for the ProgressIndicator design '
+              'changed in December 2023. The old style is ON and used by '
+              'default in Flutter and FCS Material-3 to not break past themed '
+              'style. Turn OFF this setting to opt-in and enable the newer and '
+              'current Material-3 ProgressIndicator style.\n'
+              '\n'
+              'There are plans to make the new style the default in a future '
+              'Flutter release and remove support for the older M3 style. When '
+              'that happens and if it is '
+              'possible, FCS will retain support for the older '
+              'M3 style via theming options.'),
+          value: use2023Style,
+          onChanged: controller.setProgressIndicatorYear2023,
         ),
         const Padding(
           padding: EdgeInsets.all(16.0),
