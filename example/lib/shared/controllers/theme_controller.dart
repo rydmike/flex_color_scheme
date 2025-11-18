@@ -6983,13 +6983,11 @@ class ThemeController with ChangeNotifier {
     unawaited(_themeService.save(Store.keyProgressIndicatorStrokeCap, value));
   }
 
-  late BoxConstraints? _progressIndicatorConstraints;
+  late double? _progressIndicatorConstraints;
 
-  BoxConstraints? get progressIndicatorConstraints =>
-      _progressIndicatorConstraints;
+  double? get progressIndicatorConstraints => _progressIndicatorConstraints;
 
-  void setProgressIndicatorConstraints(BoxConstraints? value,
-      [bool notify = true]) {
+  void setProgressIndicatorConstraints(double? value, [bool notify = true]) {
     if (value == _progressIndicatorConstraints) return;
     _progressIndicatorConstraints = value;
     if (notify) notifyListeners();

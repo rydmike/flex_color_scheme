@@ -249,7 +249,20 @@ class ProgressIndicatorPanel extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: !use2023Style && useMaterial3 ? '4 dp' : '0 dp',
         ),
-        const ListTile(title: Text('Circular track padding')),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Circular size constraint'),
+          value: controller.progressIndicatorConstraints,
+          onChanged: controller.setProgressIndicatorConstraints,
+          min: 20,
+          max: 200,
+          divisions: 180,
+          valueDecimalPlaces: 0,
+          valueHeading: 'MIN',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: !use2023Style && useMaterial3 ? '40 dp' : '36 dp',
+        ),
+        const ListTile(title: Text('Circular padding')),
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(
             firstWidget: SliderListTileReveal(

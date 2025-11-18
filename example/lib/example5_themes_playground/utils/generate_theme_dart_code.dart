@@ -779,11 +779,14 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? ''
       : '      progressIndicatorStrokeCap: ${controller.progressIndicatorStrokeCap},\n';
+  final String progressConstraint =
+      controller.progressIndicatorConstraints?.toStringAsFixed(0) ?? '';
   final String progressIndicatorConstraints = controller
               .progressIndicatorConstraints ==
           null
       ? ''
-      : '      progressIndicatorConstraints: ${controller.progressIndicatorConstraints},\n';
+      : '      progressIndicatorConstraints: const BoxConstraints(minWidth: '
+          '$progressConstraint, minHeight: $progressConstraint),\n';
   final String progressIndicatorCircularTrackPadding = controller
                   .progressIndicatorCircularTrackPaddingStart !=
               null ||

@@ -287,7 +287,13 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             progressIndicatorTrackGap: controller.progressIndicatorTrackGap,
             progressIndicatorStrokeCap: controller.progressIndicatorStrokeCap,
             progressIndicatorConstraints:
-                controller.progressIndicatorConstraints,
+                controller.progressIndicatorConstraints == null
+                    ? null
+                    : BoxConstraints(
+                        minWidth: controller.progressIndicatorConstraints ?? 40,
+                        minHeight:
+                            controller.progressIndicatorConstraints ?? 40,
+                      ),
             progressIndicatorCircularTrackPadding: controller
                             .progressIndicatorCircularTrackPaddingStart !=
                         null ||

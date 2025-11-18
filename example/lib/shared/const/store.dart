@@ -2160,7 +2160,7 @@ abstract final class Store {
   static const String keyProgressIndicatorConstraints =
       'progressIndicatorConstraints';
   // Default value for the progressIndicatorConstraints, also to reset settings.
-  static const BoxConstraints? defaultProgressIndicatorConstraints = null;
+  static const double? defaultProgressIndicatorConstraints = null;
 
   // Key used to read and save the progressIndicatorCircularTrackPaddingStart
   // value.

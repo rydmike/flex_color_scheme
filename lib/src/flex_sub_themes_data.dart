@@ -389,7 +389,7 @@ class FlexSubThemesData with Diagnosticable {
     this.progressIndicatorStrokeWidth,
     this.progressIndicatorStrokeAlign,
     this.progressIndicatorStrokeCap,
-    this.progressIndicatorConstraints, // Not in Playground
+    this.progressIndicatorConstraints,
     this.progressIndicatorTrackGap,
     this.progressIndicatorCircularTrackPadding,
     this.progressIndicatorYear2023,
