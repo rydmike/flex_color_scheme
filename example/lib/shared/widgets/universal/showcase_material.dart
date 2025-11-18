@@ -2212,17 +2212,26 @@ class ProgressIndicatorShowcase extends StatefulWidget {
 
 class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
   bool playProgressIndicator = false;
+  late double sliderProgress;
+
+  @override
+  void initState() {
+    super.initState();
+    sliderProgress = 0.75;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final double? progressValue = playProgressIndicator ? null : 0.75;
+    final double? progressValue = playProgressIndicator ? null : sliderProgress;
 
     return RepaintBoundary(
       child: Column(
-        spacing: 8,
+        spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
+              const Text('Animate'),
               IconButton(
                 isSelected: playProgressIndicator,
                 selectedIcon: const Icon(Icons.pause),
@@ -2233,39 +2242,27 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
                   });
                 },
               ),
-              if (playProgressIndicator)
-                const Text('Pause')
-              else
-                const Text('Play'),
-            ],
-          ),
-          const Text('Material'),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
-            children: <Widget>[
-              SizedBox.square(
-                dimension: 40,
-                child: CircularProgressIndicator(
-                  value: progressValue,
-                ),
-              ),
-              SizedBox(
-                width: 200,
-                child: LinearProgressIndicator(
-                  value: progressValue,
-                ),
+              const Text('Value'),
+              Slider(
+                min: 0,
+                max: 1,
+                value: sliderProgress,
+                onChanged: playProgressIndicator
+                    ? null
+                    : (double value) {
+                        setState(() {
+                          sliderProgress = value;
+                        });
+                      },
               ),
             ],
           ),
-          const Text('Adaptive'),
-          SizedBox.square(
-            dimension: 40,
-            child: CircularProgressIndicator.adaptive(
-              value: progressValue,
-            ),
-          ),
+          const Text('Material linear'),
+          LinearProgressIndicator(value: progressValue),
+          const Text('Material circular'),
+          CircularProgressIndicator(value: progressValue),
+          const Text('Platform adaptive'),
+          CircularProgressIndicator.adaptive(value: progressValue),
         ],
       ),
     );
