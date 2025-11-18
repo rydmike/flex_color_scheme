@@ -52,7 +52,9 @@ class ProgressIndicatorPanel extends StatelessWidget {
             : '${controller.progressIndicatorLinearTrackSchemeColor?.name}';
     final String labelCircularTrackDefault =
         controller.progressIndicatorCircularTrackSchemeColor == null
-            ? 'not painted'
+            ? !use2023Style && useMaterial3
+                ? 'secondaryContainer, animated=not painted'
+                : 'not painted'
             : '${controller.progressIndicatorCircularTrackSchemeColor?.name}';
     final String labelRefreshBackgroundDefault = controller
                 .progressIndicatorRefreshBackgroundSchemeColor ==
@@ -63,6 +65,14 @@ class ProgressIndicatorPanel extends StatelessWidget {
         controller.progressIndicatorStopIndicatorSchemeColor == null
             ? 'primary'
             : '${controller.progressIndicatorStopIndicatorSchemeColor?.name}';
+
+    final bool useZeroDefault =
+        controller.progressIndicatorCircularTrackPaddingStart != null ||
+            controller.progressIndicatorCircularTrackPaddingEnd != null ||
+            controller.progressIndicatorCircularTrackPaddingTop != null ||
+            controller.progressIndicatorCircularTrackPaddingBottom != null;
+    final String labelTrackPaddingDefault =
+        !use2023Style && useMaterial3 && !useZeroDefault ? '4 dp' : '0 dp';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,6 +198,9 @@ class ProgressIndicatorPanel extends StatelessWidget {
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               values: StrokeCap.values,
+              defaultLabel: !use2023Style
+                  ? 'default (round)'
+                  : 'default (butt, animated=square)',
               title: const Text('Circular stroke cap'),
               value: controller.progressIndicatorStrokeCap,
               onChanged: controller.setProgressIndicatorStrokeCap,
@@ -201,9 +214,9 @@ class ProgressIndicatorPanel extends StatelessWidget {
           value: controller.progressIndicatorStrokeWidth,
           onChanged: controller.setProgressIndicatorStrokeWidth,
           min: 1,
-          max: 10,
-          divisions: 18,
-          valueDecimalPlaces: 1,
+          max: 20,
+          divisions: 19,
+          valueDecimalPlaces: 0,
           valueHeading: 'WIDTH',
           valueUnitLabel: ' dp',
           valueDefaultLabel: '4 dp',
@@ -229,9 +242,9 @@ class ProgressIndicatorPanel extends StatelessWidget {
           value: controller.progressIndicatorTrackGap,
           onChanged: controller.setProgressIndicatorTrackGap,
           min: 0,
-          max: 10,
+          max: 20,
           divisions: 20,
-          valueDecimalPlaces: 1,
+          valueDecimalPlaces: 0,
           valueHeading: 'GAP',
           valueUnitLabel: ' dp',
           valueDefaultLabel: !use2023Style && useMaterial3 ? '4 dp' : '0 dp',
@@ -251,7 +264,7 @@ class ProgressIndicatorPanel extends StatelessWidget {
               valueDecimalPlaces: 1,
               valueHeading: 'START',
               valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
+              valueDefaultLabel: labelTrackPaddingDefault,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
@@ -264,7 +277,7 @@ class ProgressIndicatorPanel extends StatelessWidget {
               valueDecimalPlaces: 1,
               valueHeading: 'END',
               valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
+              valueDefaultLabel: labelTrackPaddingDefault,
             ),
             isRow: isRow,
           );
@@ -282,7 +295,7 @@ class ProgressIndicatorPanel extends StatelessWidget {
               valueDecimalPlaces: 1,
               valueHeading: 'TOP',
               valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
+              valueDefaultLabel: labelTrackPaddingDefault,
             ),
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
@@ -296,7 +309,7 @@ class ProgressIndicatorPanel extends StatelessWidget {
               valueDecimalPlaces: 1,
               valueHeading: 'BOTTOM',
               valueUnitLabel: ' dp',
-              valueDefaultLabel: '0 dp',
+              valueDefaultLabel: labelTrackPaddingDefault,
             ),
             isRow: isRow,
           );
