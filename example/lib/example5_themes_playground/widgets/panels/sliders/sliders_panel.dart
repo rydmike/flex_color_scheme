@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_expand.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -72,7 +73,7 @@ class SlidersPanel extends StatelessWidget {
           value: use2023Style,
           onChanged: controller.setSliderYear2023,
         ),
-
+        const Divider(),
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(
             firstWidget: ColorSchemePopupMenu(
@@ -198,18 +199,26 @@ class SlidersPanel extends StatelessWidget {
           ),
         ),
         const Divider(),
-        const ListTile(title: Text('Slider.adaptive')),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: SliderAdaptiveShowcase(),
-        ),
-        TestAdaptiveResponse(controller),
-        const Divider(),
         const ListTileReveal(title: Text('RangeSlider')),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: RangeSliderShowcase(),
         ),
+        const Divider(),
+        ListTileExpand(
+          title: const Text('Slider.adaptive'),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Column(
+              children: <Widget>[
+                const SliderAdaptiveShowcase(),
+                TestAdaptiveResponse(controller),
+              ],
+            ),
+          ),
+        ),
+
+        const Divider(),
         ListTileReveal(
           title: const Text('Known issues'),
           dense: true,
