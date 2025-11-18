@@ -189,10 +189,7 @@ class SlidersPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. The Slider does also not in Flutter 3.24 and '
-                      'earlier versions follow the correct Material-3 '
-                      'design. This is being worked on and a version that '
-                      'supports it is expected in a coming Flutter update.\n',
+                  text: '.\n',
                 ),
               ],
             ),
