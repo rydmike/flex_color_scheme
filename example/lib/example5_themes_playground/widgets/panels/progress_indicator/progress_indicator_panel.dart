@@ -16,10 +16,10 @@ class ProgressIndicatorPanel extends StatelessWidget {
   const ProgressIndicatorPanel(this.controller, {super.key});
   final ThemeController controller;
 
-  static final Uri _fcsFlutterIssue131690 = Uri(
+  static final Uri _fcsFlutterIssues = Uri(
     scheme: 'https',
     host: 'github.com',
-    path: 'flutter/flutter/issues/131690',
+    path: 'flutter/flutter/issues',
   );
 
   @override
@@ -312,22 +312,28 @@ class ProgressIndicatorPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'There is a feature to enable circular '
-                      'end-caps in Flutter 3.10. Before Flutter version 3.29 '
-                      'these features could not be set via a theme at all. '
-                      'Read more about this in the ',
+                  text: 'If you set legacy style, year2023, to false and use '
+                      'Material-2 mode and do not specify the linear stop '
+                      'indicator color and you have specified a linear stop '
+                      'indicator radius, the Flutter SDK will throw a null '
+                      'check error. Not sure if this is reported, feel free to '
+                      'report it in Flutter ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
-                  uri: _fcsFlutterIssue131690,
-                  text: 'issue #131690',
+                  uri: _fcsFlutterIssues,
+                  text: 'issues',
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. In Flutter 3.29 and later, the circular end-caps '
-                      'can be set via the theme as well, but it is currently '
-                      'not supported in FCS or the Playground. Support will '
-                      'be added in a coming version update.\n',
+                  text: ' if it is not.\n'
+                      '\n'
+                      'FCS and the Playground avoids this bug '
+                      'by always defining a sub-theme with the default color '
+                      'assigned. The correct fix is probably that in M2 mode '
+                      'the SDK should not draw the stop indicator at all, '
+                      'but currently it does if year2023 is false and a color '
+                      'is assigned to stopIndicatorColor.\n',
                 ),
               ],
             ),
