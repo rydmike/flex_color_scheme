@@ -17,7 +17,8 @@ class NullableBoolToggleButtons extends StatelessWidget {
     final List<bool> isSelected = <bool>[
       value == false,
       value == null,
-      value ?? true,
+      // ignore: use_if_null_to_convert_nulls_to_bools, this is more clear.
+      value == true,
     ];
     return ToggleButtons(
       isSelected: isSelected,
