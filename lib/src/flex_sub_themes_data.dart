@@ -387,11 +387,11 @@ class FlexSubThemesData with Diagnosticable {
     this.progressIndicatorStopIndicatorSchemeColor,
     this.progressIndicatorStopIndicatorRadius,
     this.progressIndicatorStrokeWidth,
-    this.progressIndicatorStrokeAlign, // Not in Playground
+    this.progressIndicatorStrokeAlign,
     this.progressIndicatorStrokeCap,
     this.progressIndicatorConstraints, // Not in Playground
     this.progressIndicatorTrackGap,
-    this.progressIndicatorCircularTrackPadding, // Not in Playground
+    this.progressIndicatorCircularTrackPadding,
     this.progressIndicatorYear2023,
     //
     this.useInputDecoratorThemeInDialogs,
