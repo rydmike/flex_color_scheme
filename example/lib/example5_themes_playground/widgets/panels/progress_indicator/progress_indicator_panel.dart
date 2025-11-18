@@ -302,11 +302,13 @@ class ProgressIndicatorPanel extends StatelessWidget {
           );
         }),
         const Divider(),
+        const ListTile(title: Text('Progress Indicators')),
         const Padding(
           padding: EdgeInsets.all(16.0),
           child: ProgressIndicatorShowcase(),
         ),
         TestAdaptiveResponse(controller),
+        const Divider(),
         ListTileReveal(
           dense: true,
           title: const Text('Known issues'),
