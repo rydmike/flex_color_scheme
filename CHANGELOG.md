@@ -66,7 +66,6 @@ Todo items are picked for this list, all may not be done in this release.
 * Playground: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
 **NEW**
-- [WIP] ProgressIndicator theming (package)
 - Add Switch track color and outline colors, to be able to match Shadcn:
   - switchOnTrackColor
   - switchOffTrackColor
