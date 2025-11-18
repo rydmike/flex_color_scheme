@@ -6648,8 +6648,16 @@ abstract final class FlexSubThemes {
         ? null
         : schemeColor(refreshBackgroundSchemeColor, colorScheme);
 
-    final Color? stopIndicatorColor = stopIndicatorSchemeColor == null
-        ? null
+    final Color stopIndicatorColor = stopIndicatorSchemeColor == null
+        // TODO(rydmike): Report null crash in Flutter SDK!
+        // This should be null, but if year2023 is false, we get a crash in SDK
+        // if we use Material-2 mode with null here and we have specified a
+        // stopIndicatorRadius. We work around this by always
+        // assigning a color here until the SDK is fixed.
+        // The STOP indicator should not be drawn at all in M2 mode, but it
+        // currently is if you set year2023 to false and give this property
+        // a color, if you don't Flutter SDK throws a bang! crash on null.
+        ? colorScheme.primary
         : schemeColor(stopIndicatorSchemeColor, colorScheme);
 
     final BorderRadiusGeometry? borderRadius = linearRadius == null

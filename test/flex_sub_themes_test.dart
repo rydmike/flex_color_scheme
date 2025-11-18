@@ -8493,7 +8493,9 @@ void main() {
       expect(
         progressTheme,
         equals(
-          const ProgressIndicatorThemeData(),
+          ProgressIndicatorThemeData(
+            stopIndicatorColor: colorScheme.primary,
+          ),
         ),
       );
     });
