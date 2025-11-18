@@ -46,16 +46,18 @@ class ProgressIndicatorPanel extends StatelessWidget {
             : '${controller.progressIndicatorBaseSchemeColor?.name}';
     final String labelLinearTrackDefault =
         controller.progressIndicatorLinearTrackSchemeColor == null
-            ? 'surfaceVariant'
+            ? useMaterial3
+                ? 'secondaryContainer'
+                : 'background deprecated'
             : '${controller.progressIndicatorLinearTrackSchemeColor?.name}';
     final String labelCircularTrackDefault =
         controller.progressIndicatorCircularTrackSchemeColor == null
-            ? 'surfaceVariant'
+            ? 'not painted'
             : '${controller.progressIndicatorCircularTrackSchemeColor?.name}';
     final String labelRefreshBackgroundDefault = controller
                 .progressIndicatorRefreshBackgroundSchemeColor ==
             null
-        ? 'surface'
+        ? 'canvasColor'
         : '${controller.progressIndicatorRefreshBackgroundSchemeColor?.name}';
     final String labelStopIndicatorDefault =
         controller.progressIndicatorStopIndicatorSchemeColor == null
@@ -67,7 +69,7 @@ class ProgressIndicatorPanel extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 8),
         SwitchListTileReveal(
-          enabled: enableControl && useMaterial3,
+          enabled: enableControl,
           title: const Text('Use legacy Material-3 style'),
           subtitleReveal: const Text(
               'The Material-3 specification for the ProgressIndicator design '
@@ -84,12 +86,13 @@ class ProgressIndicatorPanel extends StatelessWidget {
           value: use2023Style,
           onChanged: controller.setProgressIndicatorYear2023,
         ),
+        const Divider(),
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(
             firstWidget: ColorSchemePopupMenu(
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               enabled: enableControl,
-              title: const Text('Base color'),
+              title: const Text('Main color'),
               defaultLabel: labelBaseDefault,
               value: controller.progressIndicatorBaseSchemeColor,
               onChanged: controller.setProgressIndicatorBaseSchemeColor,
@@ -109,43 +112,23 @@ class ProgressIndicatorPanel extends StatelessWidget {
           return RowOrColumn(
             firstWidget: ColorSchemePopupMenu(
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Circular track color'),
-              defaultLabel: labelCircularTrackDefault,
-              value: controller.progressIndicatorCircularTrackSchemeColor,
-              onChanged:
-                  controller.setProgressIndicatorCircularTrackSchemeColor,
-            ),
-            lastWidget: ColorSchemePopupMenu(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Refresh background color'),
-              defaultLabel: labelRefreshBackgroundDefault,
-              value: controller.progressIndicatorRefreshBackgroundSchemeColor,
-              onChanged:
-                  controller.setProgressIndicatorRefreshBackgroundSchemeColor,
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Stop indicator color'),
+              enabled: enableControl && !use2023Style,
+              title: const Text('Linear stop indicator'),
               defaultLabel: labelStopIndicatorDefault,
               value: controller.progressIndicatorStopIndicatorSchemeColor,
               onChanged:
                   controller.setProgressIndicatorStopIndicatorSchemeColor,
             ),
-            lastWidget: EnumPopupMenu<StrokeCap>(
+            lastWidget: ColorSchemePopupMenu(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
-              values: StrokeCap.values,
-              title: const Text('Stroke cap'),
-              value: controller.progressIndicatorStrokeCap,
-              onChanged: controller.setProgressIndicatorStrokeCap,
+              title: const Text('Refresh background'),
+              subtitleReveal: const Text('Background color of the '
+                  'pull-to-refresh circular progress indicator.\n'),
+              defaultLabel: labelRefreshBackgroundDefault,
+              value: controller.progressIndicatorRefreshBackgroundSchemeColor,
+              onChanged:
+                  controller.setProgressIndicatorRefreshBackgroundSchemeColor,
             ),
             isRow: isRow,
           );
@@ -174,11 +157,11 @@ class ProgressIndicatorPanel extends StatelessWidget {
           valueDecimalPlaces: 1,
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
-          valueDefaultLabel: '0 dp',
+          valueDefaultLabel: use2023Style || !useMaterial3 ? '0 dp' : '2 dp',
         ),
         SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Stop indicator radius'),
+          enabled: enableControl && !use2023Style,
+          title: const Text('Linear stop indicator radius'),
           value: controller.progressIndicatorStopIndicatorRadius,
           onChanged: controller.setProgressIndicatorStopIndicatorRadius,
           min: 0,
@@ -187,11 +170,34 @@ class ProgressIndicatorPanel extends StatelessWidget {
           valueDecimalPlaces: 1,
           valueHeading: 'RADIUS',
           valueUnitLabel: ' dp',
-          valueDefaultLabel: '0 dp',
+          valueDefaultLabel: use2023Style || !useMaterial3 ? 'null' : '2 dp',
         ),
+        const Divider(),
+        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+          return RowOrColumn(
+            firstWidget: ColorSchemePopupMenu(
+              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              enabled: enableControl,
+              title: const Text('Circular track color'),
+              defaultLabel: labelCircularTrackDefault,
+              value: controller.progressIndicatorCircularTrackSchemeColor,
+              onChanged:
+                  controller.setProgressIndicatorCircularTrackSchemeColor,
+            ),
+            lastWidget: EnumPopupMenu<StrokeCap>(
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              enabled: enableControl,
+              values: StrokeCap.values,
+              title: const Text('Circular stroke cap'),
+              value: controller.progressIndicatorStrokeCap,
+              onChanged: controller.setProgressIndicatorStrokeCap,
+            ),
+            isRow: isRow,
+          );
+        }),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('Stroke width'),
+          title: const Text('Circular stroke width'),
           value: controller.progressIndicatorStrokeWidth,
           onChanged: controller.setProgressIndicatorStrokeWidth,
           min: 1,
@@ -204,20 +210,22 @@ class ProgressIndicatorPanel extends StatelessWidget {
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('Stroke align'),
+          title: const Text('Circular stroke align'),
+          subtitleReveal: const Text('-1.0 is inside, 0.0 is center, '
+              'and 1.0 is outside the nominal radius.\n'),
           value: controller.progressIndicatorStrokeAlign,
           onChanged: controller.setProgressIndicatorStrokeAlign,
           min: -1,
           max: 1,
-          divisions: 40,
-          valueDecimalPlaces: 2,
+          divisions: 21,
+          valueDecimalPlaces: 1,
           valueHeading: 'ALIGN',
           valueUnitLabel: '',
-          valueDefaultLabel: '0',
+          valueDefaultLabel: !use2023Style && useMaterial3 ? '-1' : '0',
         ),
         SliderListTileReveal(
-          enabled: enableControl,
-          title: const Text('Track gap'),
+          enabled: enableControl && !use2023Style,
+          title: const Text('Circular track gap'),
           value: controller.progressIndicatorTrackGap,
           onChanged: controller.setProgressIndicatorTrackGap,
           min: 0,
@@ -226,16 +234,14 @@ class ProgressIndicatorPanel extends StatelessWidget {
           valueDecimalPlaces: 1,
           valueHeading: 'GAP',
           valueUnitLabel: ' dp',
-          valueDefaultLabel: '0 dp',
+          valueDefaultLabel: !use2023Style && useMaterial3 ? '4 dp' : '0 dp',
         ),
-        const Divider(),
         const ListTile(title: Text('Circular track padding')),
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(
             firstWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               enabled: enableControl,
-              title: const Text('Padding start'),
               value: controller.progressIndicatorCircularTrackPaddingStart,
               onChanged:
                   controller.setProgressIndicatorCircularTrackPaddingStart,
@@ -250,7 +256,6 @@ class ProgressIndicatorPanel extends StatelessWidget {
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
-              title: const Text('Padding end'),
               value: controller.progressIndicatorCircularTrackPaddingEnd,
               onChanged: controller.setProgressIndicatorCircularTrackPaddingEnd,
               min: 0,
@@ -269,7 +274,6 @@ class ProgressIndicatorPanel extends StatelessWidget {
             firstWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingStart(context, isRow),
               enabled: enableControl,
-              title: const Text('Padding top'),
               value: controller.progressIndicatorCircularTrackPaddingTop,
               onChanged: controller.setProgressIndicatorCircularTrackPaddingTop,
               min: 0,
@@ -283,7 +287,6 @@ class ProgressIndicatorPanel extends StatelessWidget {
             lastWidget: SliderListTileReveal(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
-              title: const Text('Padding bottom'),
               value: controller.progressIndicatorCircularTrackPaddingBottom,
               onChanged:
                   controller.setProgressIndicatorCircularTrackPaddingBottom,
