@@ -768,12 +768,12 @@ String generateThemeDartCode(ThemeController controller) {
               .progressIndicatorStrokeAlign ==
           null
       ? ''
-      : '      progressIndicatorStrokeAlign: ${controller.progressIndicatorStrokeAlign},\n';
+      : '      progressIndicatorStrokeAlign: ${controller.progressIndicatorStrokeAlign?.toStringAsFixed(1) ?? '0'},\n';
   final String progressIndicatorTrackGap = controller
               .progressIndicatorTrackGap ==
           null
       ? ''
-      : '      progressIndicatorTrackGap: ${controller.progressIndicatorTrackGap},\n';
+      : '      progressIndicatorTrackGap: ${controller.progressIndicatorTrackGap?.toStringAsFixed(1) ?? '0'},\n';
   final String progressIndicatorStrokeCap = controller
               .progressIndicatorStrokeCap ==
           null
@@ -781,12 +781,11 @@ String generateThemeDartCode(ThemeController controller) {
       : '      progressIndicatorStrokeCap: ${controller.progressIndicatorStrokeCap},\n';
   final String progressConstraint =
       controller.progressIndicatorConstraints?.toStringAsFixed(0) ?? '';
-  final String progressIndicatorConstraints = controller
-              .progressIndicatorConstraints ==
-          null
-      ? ''
-      : '      progressIndicatorConstraints: const BoxConstraints(minWidth: '
-          '$progressConstraint, minHeight: $progressConstraint),\n';
+  final String progressIndicatorConstraints =
+      controller.progressIndicatorConstraints == null
+          ? ''
+          : '      progressIndicatorConstraints: BoxConstraints(minWidth: '
+              '$progressConstraint, minHeight: $progressConstraint),\n';
   final String progressIndicatorCircularTrackPadding = controller
                   .progressIndicatorCircularTrackPaddingStart !=
               null ||
