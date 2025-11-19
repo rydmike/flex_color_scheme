@@ -230,7 +230,7 @@ class ProgressIndicatorPanel extends StatelessWidget {
           onChanged: controller.setProgressIndicatorStrokeAlign,
           min: -1,
           max: 1,
-          divisions: 21,
+          divisions: 20,
           valueDecimalPlaces: 1,
           valueHeading: 'ALIGN',
           valueUnitLabel: '',
