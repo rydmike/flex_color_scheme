@@ -258,7 +258,8 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                     title: const Text('Import settings'),
                     subtitleReveal: const Text(
                       'Import theme settings exported previously from '
-                      'the below paste input staging area.',
+                      'the below paste input staging area. Open import log '
+                      'info expand below to see any logged import errors.\n',
                     ),
                     trailing: Tooltip(
                       message: 'Import settings',
@@ -311,7 +312,7 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                     contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
                     title: const Text('Copy URL'),
                     subtitleReveal: const Text(
-                      'Copy the share URL created to the clipbaord, it may '
+                      'Copy the share URL created to the clipboard, it may '
                       'be quite long, some browsers may not support it. You '
                       'can also use the "Share config" button on the '
                       'side menu, to export settings, make a shareable '
@@ -389,7 +390,8 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                       'This is useful for purging all keys from the local '
                       'storage including any invalid keys from older '
                       'Playground versions or invalid data inserted via '
-                      'invalid JSON import keys.\n',
+                      'invalid JSON import keys. Import does check for '
+                      'keys being known and valid too.\n',
                     ),
                     trailing: IconButton(
                       icon: const Tooltip(
