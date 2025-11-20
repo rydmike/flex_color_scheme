@@ -1755,50 +1755,38 @@ abstract final class FlexSubThemes {
           return isLight ? Colors.grey.shade50 : Colors.grey.shade400;
         }
       }),
-      overlayColor: WidgetStateProperty.resolveWith<Color>((
-        Set<WidgetState> states,
-      ) {
-        // Error state only exists in M3 mode.
-        if (states.contains(WidgetState.error) && useM3) {
-          if (states.contains(WidgetState.pressed)) {
-            return colorScheme.error.withAlpha(kAlphaPressed);
-          }
-          if (states.contains(WidgetState.hovered)) {
-            return colorScheme.error.withAlpha(kAlphaHovered);
-          }
-          if (states.contains(WidgetState.focused)) {
-            return colorScheme.error.withAlpha(kAlphaFocused);
-          }
-        }
-        if (states.contains(WidgetState.selected)) {
-          if (states.contains(WidgetState.pressed)) {
-            if (tintInteract) return tintedPressed(overlay, tint, factor);
-            return colorScheme.onSurface.withAlpha(kAlphaPressed);
-          }
-          if (states.contains(WidgetState.hovered)) {
-            if (tintInteract) return tintedHovered(overlay, tint, factor);
-            return baseColor.withAlpha(kAlphaHovered);
-          }
-          if (states.contains(WidgetState.focused)) {
-            if (tintInteract) return tintedFocused(overlay, tint, factor);
-            return baseColor.withAlpha(kAlphaFocused);
-          }
-          return Colors.transparent;
-        }
-        if (states.contains(WidgetState.pressed)) {
-          if (tintInteract) return tintedPressed(overlay, tint, factor);
-          return baseColor.withAlpha(kAlphaPressed);
-        }
-        if (states.contains(WidgetState.hovered)) {
-          if (tintInteract) return tintedHovered(overlay, tint, factor);
-          return colorScheme.onSurface.withAlpha(kAlphaHovered);
-        }
-        if (states.contains(WidgetState.focused)) {
-          if (tintInteract) return tintedFocused(overlay, tint, factor);
-          return colorScheme.onSurface.withAlpha(kAlphaFocused);
-        }
-        return Colors.transparent;
-      }),
+      overlayColor: WidgetStateProperty<Color>.fromMap(
+        <WidgetStatesConstraint, Color>{
+          if (useM3)
+            WidgetState.error & WidgetState.pressed:
+                colorScheme.error.withAlpha(kAlphaPressed),
+          if (useM3)
+            WidgetState.error & WidgetState.hovered:
+                colorScheme.error.withAlpha(kAlphaHovered),
+          if (useM3)
+            WidgetState.error & WidgetState.focused:
+                colorScheme.error.withAlpha(kAlphaFocused),
+          WidgetState.selected & WidgetState.pressed: tintInteract
+              ? tintedPressed(overlay, tint, factor)
+              : colorScheme.onSurface.withAlpha(kAlphaPressed),
+          WidgetState.selected & WidgetState.hovered: tintInteract
+              ? tintedHovered(overlay, tint, factor)
+              : baseColor.withAlpha(kAlphaHovered),
+          WidgetState.selected & WidgetState.focused: tintInteract
+              ? tintedFocused(overlay, tint, factor)
+              : baseColor.withAlpha(kAlphaFocused),
+          WidgetState.pressed: tintInteract
+              ? tintedPressed(overlay, tint, factor)
+              : baseColor.withAlpha(kAlphaPressed),
+          WidgetState.hovered: tintInteract
+              ? tintedHovered(overlay, tint, factor)
+              : colorScheme.onSurface.withAlpha(kAlphaHovered),
+          WidgetState.focused: tintInteract
+              ? tintedFocused(overlay, tint, factor)
+              : colorScheme.onSurface.withAlpha(kAlphaFocused),
+          WidgetState.any: Colors.transparent,
+        },
+      ),
     );
   }
 

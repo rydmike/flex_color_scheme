@@ -628,32 +628,23 @@ void main() {
               }
               return Colors.grey.shade50;
             }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.primary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.selected & WidgetState.pressed:
+                    colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered:
+                    colorScheme.primary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused:
+                    colorScheme.primary.withAlpha(kAlphaFocused),
+                WidgetState.pressed:
+                    colorScheme.primary.withAlpha(kAlphaPressed),
+                WidgetState.hovered:
+                    colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused:
+                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.any: Colors.transparent,
+              },
+            ),
           ).toString(),
         ),
       );
@@ -1155,6 +1146,7 @@ void main() {
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
@@ -1201,32 +1193,23 @@ void main() {
               }
               return Colors.grey.shade400;
             }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.primary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.selected & WidgetState.pressed:
+                    colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered:
+                    colorScheme.primary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused:
+                    colorScheme.primary.withAlpha(kAlphaFocused),
+                WidgetState.pressed:
+                    colorScheme.primary.withAlpha(kAlphaPressed),
+                WidgetState.hovered:
+                    colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused:
+                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.any: Colors.transparent,
+              },
+            ),
           ).toString(),
         ),
       );
@@ -1443,32 +1426,23 @@ void main() {
               }
               return Colors.grey.shade50;
             }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.tertiary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.selected & WidgetState.pressed:
+                    colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered:
+                    colorScheme.tertiary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused:
+                    colorScheme.tertiary.withAlpha(kAlphaFocused),
+                WidgetState.pressed:
+                    colorScheme.tertiary.withAlpha(kAlphaPressed),
+                WidgetState.hovered:
+                    colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused:
+                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.any: Colors.transparent,
+              },
+            ),
           ).toString(),
         ),
       );
