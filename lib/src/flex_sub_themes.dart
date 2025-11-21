@@ -634,10 +634,7 @@ abstract final class FlexSubThemes {
   /// and background colors used here, for other component theme definitions as
   /// well, and has already computed them once, so they are only reused here.
   ///
-  /// At the moment the [FlexSubThemes.appBarTheme] is mostly included to
-  /// keep and have all [FlexColorScheme] used sub-themes in the [FlexSubThemes]
-  /// class. Actual convenience features may be added to
-  /// [FlexSubThemes.appBarTheme] later.
+  /// The named parameters are:
   static AppBarThemeData appBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     final ColorScheme? colorScheme,
@@ -744,6 +741,8 @@ abstract final class FlexSubThemes {
   /// a background color that requires different contrast color than the
   /// active theme's surface colors, you will need to set their colors on
   /// widget level on elements placed on the [BottomAppBar].
+  ///
+  /// The named parameters are:
   static BottomAppBarThemeData bottomAppBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -823,6 +822,8 @@ abstract final class FlexSubThemes {
   /// [colorScheme] to style the bottom navigation bar.
   ///
   /// Background [opacity] can be set.
+  ///
+  /// The named parameters are:
   static BottomNavigationBarThemeData bottomNavigationBarTheme({
     /// Typically you would pass the same [ColorScheme] that is also used in
     /// your [ThemeData] definition.
@@ -1127,6 +1128,8 @@ abstract final class FlexSubThemes {
   /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 28,
   /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
   /// [kBottomSheetModalElevation] = 8.
+  ///
+  /// The named parameters are:
   static BottomSheetThemeData bottomSheetTheme({
     /// Default value for [BottomSheet.backgroundColor].
     ///
@@ -1223,6 +1226,8 @@ abstract final class FlexSubThemes {
   /// obsolete in SDK docs though) still use this theme. It is thus kept around
   /// in FlexColorScheme package as long as it might have some use and exists
   /// in Flutter stable SDK.
+  ///
+  /// The named parameters are:
   static ButtonThemeData buttonTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -1293,6 +1298,8 @@ abstract final class FlexSubThemes {
   ///
   /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
   /// defaults to Flutter SDK defaults if not defined.
+  ///
+  /// The named parameters are:
   static CardThemeData cardTheme({
     /// Corner radius
     ///
@@ -1355,6 +1362,8 @@ abstract final class FlexSubThemes {
   /// for your app theme.
   ///
   /// The splashRadius is not used by FlexColorScheme sub-themes.
+  ///
+  /// The named parameters are:
   static CheckboxThemeData checkboxTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -1417,6 +1426,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [ChipThemeData] theme.
+  ///
+  /// The named parameters are:
   static ChipThemeData chipTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -1593,6 +1604,8 @@ abstract final class FlexSubThemes {
       );
 
   /// A slightly opinionated [DatePickerThemeData] helper for FlexColorScheme.
+  ///
+  /// The named parameters are:
   static DatePickerThemeData datePickerTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -1924,6 +1937,8 @@ abstract final class FlexSubThemes {
   ///
   /// The default radius follows Material M3 guide
   /// [specification](https://m3.material.io/components/dialogs/specs).
+  ///
+  /// The named parameters are:
   static DialogThemeData dialogTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     final ColorScheme? colorScheme,
@@ -1998,6 +2013,8 @@ abstract final class FlexSubThemes {
   ///
   /// The [NavigationDrawer] also uses these value for its drawer parts. Its
   /// menu part has an own theme in Flutter SDK.
+  ///
+  /// The named parameters are:
   static DrawerThemeData drawerTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2073,6 +2090,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [DropdownMenuThemeData] theme.
+  ///
+  /// The named parameters are:
   static DropdownMenuThemeData dropdownMenuTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2133,6 +2152,8 @@ abstract final class FlexSubThemes {
   ///
   /// The adjustable button corner [radius] defaults to 20. This is the new
   /// default in M3, Flutter SDK M2 defaults to 4.
+  ///
+  /// The named parameters are:
   static ElevatedButtonThemeData elevatedButtonTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -2271,6 +2292,8 @@ abstract final class FlexSubThemes {
   ///
   /// The adjustable button corner [radius] defaults to Stadium in M3, and FCS
   /// uses 20 in M2, where SDK M2 defaults to 4.
+  ///
+  /// The named parameters are:
   static FilledButtonThemeData filledButtonTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -2376,6 +2399,8 @@ abstract final class FlexSubThemes {
   /// You may want to continue to keep the FAB circular and extended FAB stadium
   /// (pill) shaped as before, despite otherwise using a rounder or M3 design.
   /// The circular M2 FAB goes well with those designs too and is more familiar.
+  ///
+  /// The named parameters are:
   static FloatingActionButtonThemeData floatingActionButtonTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -2504,6 +2529,8 @@ abstract final class FlexSubThemes {
   /// it defaults to [kInputDecoratorRadius] which is 16, in Material 3 mode it
   /// defaults to [kInputDecoratorM3Radius] which is 4, following the Material
   /// 3 design specification.
+  ///
+  /// The named parameters are:
   static InputDecorationThemeData inputDecorationTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2741,6 +2768,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [ListTileThemeData] theme.
+  ///
+  /// The named parameters are:
   static ListTileThemeData listTileTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2895,6 +2924,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [MenuBarThemeData] theme.
+  ///
+  /// The named parameters are:
   static MenuBarThemeData menuBarTheme({
     // Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -2948,6 +2979,8 @@ abstract final class FlexSubThemes {
   /// [WidgetState] property response os overlay for highlighted item.
   /// These states can optionally also use FlexColorScheme tinted style.
   /// Disabled items can also to use the optional FCS tinted style.
+  ///
+  /// The named parameters are:
   static MenuButtonThemeData menuButtonTheme({
     // Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -3031,6 +3064,8 @@ abstract final class FlexSubThemes {
   ///
   /// This theme is used by the menu for the [DropdownMenu], [MenuBar] and
   /// [MenuAnchor].
+  ///
+  /// The named parameters are:
   static MenuThemeData menuTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -3106,6 +3141,8 @@ abstract final class FlexSubThemes {
   /// use. It instead exposes properties for the usable states.
   ///
   /// It can also set an [opacity] on the background color.
+  ///
+  /// The named parameters are:
   static NavigationBarThemeData navigationBarTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -3415,6 +3452,8 @@ abstract final class FlexSubThemes {
   /// [indicatorSchemeColor] plus its opacity [indicatorOpacity] and colors
   /// for selected and unselected items [selectedItemSchemeColor],
   /// [unselectedItemSchemeColor].
+  ///
+  /// The named parameters are:
   static NavigationDrawerThemeData navigationDrawerTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -3530,6 +3569,8 @@ abstract final class FlexSubThemes {
   /// a custom sub-theme for [NavigationRailThemeData].
   /// It can also set an [opacity] on the background color, although the use
   /// case for it is not as common as on bottom navigation bars.
+  ///
+  /// The named parameters are:
   static NavigationRailThemeData navigationRailTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -3912,6 +3953,8 @@ abstract final class FlexSubThemes {
   ///
   /// The adjustable button corner [radius] defaults to 20. This is the new
   /// default in M3, Flutter SDK M2 defaults to 4.
+  ///
+  /// The named parameters are:
   static OutlinedButtonThemeData outlinedButtonTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -4048,6 +4091,8 @@ abstract final class FlexSubThemes {
   /// inherited radius values from [FlexSubThemesData.defaultRadius] but to
   /// also stay below the usable max rounding automatically at higher global
   /// border radius values.
+  ///
+  /// The named parameters are:
   static PopupMenuThemeData popupMenuTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     final ColorScheme? colorScheme,
@@ -4119,6 +4164,8 @@ abstract final class FlexSubThemes {
 
   /// An opinionated [ProgressIndicatorThemeData] theme for the
   /// [CircularProgressIndicator] and [LinearProgressIndicator].
+  ///
+  /// The named parameters are:
   static ProgressIndicatorThemeData progressIndicatorTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -4274,6 +4321,8 @@ abstract final class FlexSubThemes {
   /// for your app theme.
   ///
   /// The splashRadius is not used by FlexColorScheme sub-themes.
+  ///
+  /// The named parameters are:
   static RadioThemeData radioTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -4336,6 +4385,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [SearchBarThemeData] theme for the [SearchBar].
+  ///
+  /// The named parameters are:
   static SearchBarThemeData searchBarTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -4439,6 +4490,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [SearchViewThemeData] theme for the [SearchBar]'s view.
+  ///
+  /// The named parameters are:
   static SearchViewThemeData searchViewTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -4526,6 +4579,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
+  ///
+  /// The named parameters are:
   static SegmentedButtonThemeData segmentedButtonTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -4651,6 +4706,8 @@ abstract final class FlexSubThemes {
   /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
+  ///
+  /// The named parameters are:
   static SliderThemeData sliderTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -4758,6 +4815,8 @@ abstract final class FlexSubThemes {
   /// An opinionated [SnackBarThemeData] with custom elevation.
   ///
   /// The [elevation] defaults to [kSnackBarElevation] (4).
+  ///
+  /// The named parameters are:
   static SnackBarThemeData snackBarTheme({
     /// SnackBar elevation
     ///
@@ -4842,6 +4901,8 @@ abstract final class FlexSubThemes {
   /// for your app theme.
   ///
   /// The splashRadius is not used by FlexColorScheme sub-themes.
+  ///
+  /// The named parameters are:
   static SwitchThemeData switchTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -4959,6 +5020,8 @@ abstract final class FlexSubThemes {
   /// The [FlexColorScheme.toTheme] needs some of the properties, like fore-
   /// and background colors used here, for other component theme definitions as
   /// well and has already computed them once, so they are reused here.
+  ///
+  /// The named parameters are:
   static TabBarThemeData tabBarTheme({
     /// Typically the same [ColorScheme] that is also used for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -5080,6 +5143,8 @@ abstract final class FlexSubThemes {
   ///
   /// The adjustable button corner [radius] defaults to 20. This is the new
   /// default in M3, Flutter SDK M2 defaults to 4.
+  ///
+  /// The named parameters are:
   static TextButtonThemeData textButtonTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -5169,6 +5234,8 @@ abstract final class FlexSubThemes {
   /// Requires a [ColorScheme], the color scheme would
   /// typically be equal the color scheme also used to define the color scheme
   /// for your app theme.
+  ///
+  /// The named parameters are:
   static TextSelectionThemeData textSelectionTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -5225,6 +5292,8 @@ abstract final class FlexSubThemes {
   /// In the InputDecorator, if you pass it an input decoration style
   /// that matches the main input decoration style and corner rounding it
   /// will be used on the data entry elements in the picker.
+  ///
+  /// The named parameters are:
   static TimePickerThemeData timePickerTheme({
     /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
     required final ColorScheme colorScheme,
@@ -5338,6 +5407,8 @@ abstract final class FlexSubThemes {
   /// If it is important that the themed border appears similar to the disabled
   /// border width, then keep the thin and thick outlined borders same or
   /// reasonably close to each other.
+  ///
+  /// The named parameters are:
   static ToggleButtonsThemeData toggleButtonsTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
@@ -5462,6 +5533,8 @@ abstract final class FlexSubThemes {
       );
 
   /// An opinionated [TooltipThemeData]
+  ///
+  /// The named parameters are:
   static TooltipThemeData tooltipTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required final ColorScheme colorScheme,
