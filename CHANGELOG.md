@@ -13,6 +13,7 @@ Requires at least Flutter 3.38.0, but prefer at least 3.38.1 stable.
 
 **CHORE**
 * Update lints to RydMike lint rules 2.5.0 and fix new linting issues. 
+* Internal: Refactored all component themes in `FlexSubThemes` to be in their own files, to improve maintainability and reduce the size of `flex_sub_themes.dart` file. This also make it easier for LLMs to work on the component themes, as they now have smaller files to process.
 
 **CHANGE**
 * The enum `FlexSliderIndicatorType` got a new value `rounded`, to support selecting the newer M3 indicator style also in M2 and older M3 mode for Slider and RangeSlider.
