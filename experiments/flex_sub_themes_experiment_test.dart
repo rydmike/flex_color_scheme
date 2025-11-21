@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-// ignore_for_file: deprecated_member_use_from_same_package, for tests.
+// ignore_for_file: lines_longer_than_80_chars, for tests
 
 Map<WidgetStatesConstraint, T> widgetStateMap<T>(
   WidgetPropertyResolver<T> resolver,
@@ -31,39 +31,39 @@ WidgetStatesConstraint _constraintFor(Set<WidgetState> states) {
   return constraint;
 }
 
-const List<Set<WidgetState>> _inputDecorationLabelStates = <Set<WidgetState>>[
-  <WidgetState>{WidgetState.error, WidgetState.focused},
-  <WidgetState>{WidgetState.error, WidgetState.hovered},
-  <WidgetState>{WidgetState.error},
-  <WidgetState>{WidgetState.focused},
-  <WidgetState>{WidgetState.hovered},
-  <WidgetState>{WidgetState.disabled},
-  <WidgetState>{},
-];
+// const List<Set<WidgetState>> _inputDecorationLabelStates = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.error, WidgetState.focused},
+//   <WidgetState>{WidgetState.error, WidgetState.hovered},
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{WidgetState.hovered},
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{},
+// ];
 
-const List<Set<WidgetState>> _inputDecorationIconStates = <Set<WidgetState>>[
-  <WidgetState>{WidgetState.disabled},
-  <WidgetState>{WidgetState.focused},
-  <WidgetState>{},
-];
+// const List<Set<WidgetState>> _inputDecorationIconStates = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{},
+// ];
 
-const List<Set<WidgetState>> _inputDecorationSuffixIconStates =
-    <Set<WidgetState>>[
-  <WidgetState>{WidgetState.error},
-  <WidgetState>{WidgetState.disabled},
-  <WidgetState>{WidgetState.focused},
-  <WidgetState>{},
-];
+// const List<Set<WidgetState>> _inputDecorationSuffixIconStates =
+//     <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{},
+// ];
 
-const List<Set<WidgetState>> _inputDecorationBorderStates = <Set<WidgetState>>[
-  <WidgetState>{WidgetState.disabled},
-  <WidgetState>{WidgetState.error, WidgetState.focused},
-  <WidgetState>{WidgetState.error, WidgetState.hovered},
-  <WidgetState>{WidgetState.error},
-  <WidgetState>{WidgetState.focused},
-  <WidgetState>{WidgetState.hovered},
-  <WidgetState>{},
-];
+// const List<Set<WidgetState>> _inputDecorationBorderStates = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.error, WidgetState.focused},
+//   <WidgetState>{WidgetState.error, WidgetState.hovered},
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{WidgetState.hovered},
+//   <WidgetState>{},
+// ];
 
 const List<Set<WidgetState>> _disabledDefaultStates = <Set<WidgetState>>[
   <WidgetState>{WidgetState.disabled},
@@ -121,61 +121,61 @@ const List<Set<WidgetState>> _disabledPressedHoveredDefaultStates =
   <WidgetState>{},
 ];
 
-const List<Set<WidgetState>> _defaultWidgetStateOrder = <Set<WidgetState>>[
-  <WidgetState>{WidgetState.disabled, WidgetState.selected},
-  <WidgetState>{WidgetState.disabled, WidgetState.error},
-  <WidgetState>{WidgetState.disabled},
-  <WidgetState>{WidgetState.error, WidgetState.selected},
-  <WidgetState>{WidgetState.error, WidgetState.pressed},
-  <WidgetState>{WidgetState.error, WidgetState.hovered},
-  <WidgetState>{WidgetState.error, WidgetState.focused},
-  <WidgetState>{WidgetState.error},
-  <WidgetState>{WidgetState.selected, WidgetState.pressed},
-  <WidgetState>{WidgetState.selected, WidgetState.hovered},
-  <WidgetState>{WidgetState.selected, WidgetState.focused},
-  <WidgetState>{WidgetState.selected},
-  <WidgetState>{WidgetState.pressed},
-  <WidgetState>{WidgetState.hovered},
-  <WidgetState>{WidgetState.focused},
-  <WidgetState>{WidgetState.dragged},
-  <WidgetState>{},
-];
+// const List<Set<WidgetState>> _defaultWidgetStateOrder = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.disabled, WidgetState.selected},
+//   <WidgetState>{WidgetState.disabled, WidgetState.error},
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.error, WidgetState.selected},
+//   <WidgetState>{WidgetState.error, WidgetState.pressed},
+//   <WidgetState>{WidgetState.error, WidgetState.hovered},
+//   <WidgetState>{WidgetState.error, WidgetState.focused},
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.selected, WidgetState.pressed},
+//   <WidgetState>{WidgetState.selected, WidgetState.hovered},
+//   <WidgetState>{WidgetState.selected, WidgetState.focused},
+//   <WidgetState>{WidgetState.selected},
+//   <WidgetState>{WidgetState.pressed},
+//   <WidgetState>{WidgetState.hovered},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{WidgetState.dragged},
+//   <WidgetState>{},
+// ];
 
-WidgetStateProperty<T> widgetStatePropertyFromResolver<T>(
-  WidgetPropertyResolver<T> resolver, [
-  List<Set<WidgetState>>? prioritizedStates,
-]) {
-  return WidgetStateProperty<T>.fromMap(
-    widgetStateMap<T>(
-      resolver,
-      prioritizedStates ?? _defaultWidgetStateOrder,
-    ),
-  );
-}
-
-WidgetStateBorderSide widgetStateBorderSideFromResolver(
-  WidgetPropertyResolver<BorderSide> resolver, [
-  List<Set<WidgetState>>? prioritizedStates,
-]) {
-  return WidgetStateBorderSide.fromMap(
-    widgetStateMap<BorderSide>(
-      resolver,
-      prioritizedStates ?? _defaultWidgetStateOrder,
-    ),
-  );
-}
-
-WidgetStateInputBorder widgetStateInputBorderFromResolver(
-  WidgetPropertyResolver<InputBorder> resolver, [
-  List<Set<WidgetState>>? prioritizedStates,
-]) {
-  return WidgetStateInputBorder.fromMap(
-    widgetStateMap<InputBorder>(
-      resolver,
-      prioritizedStates ?? _defaultWidgetStateOrder,
-    ),
-  );
-}
+// WidgetStateProperty<T> widgetStatePropertyFromResolver<T>(
+//   WidgetPropertyResolver<T> resolver, [
+//   List<Set<WidgetState>>? prioritizedStates,
+// ]) {
+//   return WidgetStateProperty<T>.fromMap(
+//     widgetStateMap<T>(
+//       resolver,
+//       prioritizedStates ?? _defaultWidgetStateOrder,
+//     ),
+//   );
+// }
+//
+// WidgetStateBorderSide widgetStateBorderSideFromResolver(
+//   WidgetPropertyResolver<BorderSide> resolver, [
+//   List<Set<WidgetState>>? prioritizedStates,
+// ]) {
+//   return WidgetStateBorderSide.fromMap(
+//     widgetStateMap<BorderSide>(
+//       resolver,
+//       prioritizedStates ?? _defaultWidgetStateOrder,
+//     ),
+//   );
+// }
+//
+// WidgetStateInputBorder widgetStateInputBorderFromResolver(
+//   WidgetPropertyResolver<InputBorder> resolver, [
+//   List<Set<WidgetState>>? prioritizedStates,
+// ]) {
+//   return WidgetStateInputBorder.fromMap(
+//     widgetStateMap<InputBorder>(
+//       resolver,
+//       prioritizedStates ?? _defaultWidgetStateOrder,
+//     ),
+//   );
+// }
 
 void expectUnderlineBorderState(
   InputBorder? border,
@@ -189,17 +189,17 @@ void expectUnderlineBorderState(
   expect(resolved.borderSide.width, equals(width));
 }
 
-void expectOutlineBorderState(
-  InputBorder? border,
-  BorderRadius radius,
-  Color color,
-  double width,
-) {
-  final OutlineInputBorder resolved = border! as OutlineInputBorder;
-  expect(resolved.borderRadius, equals(radius));
-  expect(resolved.borderSide.color, equals(color));
-  expect(resolved.borderSide.width, equals(width));
-}
+// void expectOutlineBorderState(
+//   InputBorder? border,
+//   BorderRadius radius,
+//   Color color,
+//   double width,
+// ) {
+//   final OutlineInputBorder resolved = border! as OutlineInputBorder;
+//   expect(resolved.borderRadius, equals(radius));
+//   expect(resolved.borderSide.color, equals(color));
+//   expect(resolved.borderSide.width, equals(width));
+// }
 
 void main() {
   double tintAlphaFactor(
@@ -530,6 +530,7 @@ void main() {
       );
       expect(
         FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
+        // ignore: deprecated_member_use_from_same_package, test usage.
         equals(FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme)),
       );
     });
@@ -3581,7 +3582,7 @@ void main() {
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                 const EdgeInsets.symmetric(horizontal: 8),
               ),
-              elevation: WidgetStateProperty<double?>.fromMap(
+              elevation: const WidgetStateProperty<double?>.fromMap(
                 <WidgetStatesConstraint, double?>{
                   WidgetState.disabled: 0.0,
                   WidgetState.hovered: 4.0,
@@ -3658,7 +3659,7 @@ void main() {
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                 const EdgeInsets.symmetric(horizontal: 9),
               ),
-              elevation: WidgetStateProperty<double?>.fromMap(
+              elevation: const WidgetStateProperty<double?>.fromMap(
                 <WidgetStatesConstraint, double?>{
                   WidgetState.disabled: 0.0,
                   WidgetState.hovered: 4.0,
@@ -4511,45 +4512,45 @@ void main() {
         colorScheme.primary,
       );
 
-      const bool filled = false;
+      // const bool filled = false;
       const bool useM3 = false;
       const bool tintDisable = true;
       const bool tintInteract = true;
-      const double? radius = null;
-      const double unfocusedWidth = 1.0;
-      const double focusedWidth = 2.0;
-      final Color borderColor = colorScheme.primary;
-      final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.primary;
-      const double effectiveRadius = radius ?? kInputDecoratorRadius;
-      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
-        topLeft: Radius.circular(effectiveRadius),
-        topRight: Radius.circular(effectiveRadius),
-      );
+      // const double? radius = null;
+      // const double unfocusedWidth = 1.0;
+      // const double focusedWidth = 2.0;
+      // final Color borderColor = colorScheme.primary;
+      // final Color enabledBorderColor = colorScheme.outline;
+      // final Color enabledHoveredBorderColor = colorScheme.primary;
+      // const double effectiveRadius = radius ?? kInputDecoratorRadius;
+      // const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+      //   topLeft: Radius.circular(effectiveRadius),
+      //   topRight: Radius.circular(effectiveRadius),
+      // );
 
       // Get effective alpha value for background fill color.
-      const double effectiveAlpha = kFillColorLightOpacity;
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // const double effectiveAlpha = kFillColorLightOpacity;
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
 
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = Color.alphaBlend(
-        colorScheme.primary.withValues(alpha: effectiveAlpha),
-        colorScheme.surface,
-      );
+      // final Color usedFillColor = Color.alphaBlend(
+      //   colorScheme.primary.withValues(alpha: effectiveAlpha),
+      //   colorScheme.surface,
+      // );
 
       // debugPrint('Test effectiveAlpha : $kFillColorAlphaLightFloat');
       // debugPrint('Test usedFillColor  : $usedFillColor');
       // debugPrint('Test primary        : ${colorScheme.primary}');
       // debugPrint('Test surface        : ${colorScheme.surface}');
 
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      // final Color usedHover =
+      //     ThemeData.estimateBrightnessForColor(usedFillColor) ==
+      //             Brightness.light
+      //         ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+      //         : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
@@ -4875,10 +4876,10 @@ void main() {
       );
       const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
       final Color usedFillColor = Color.alphaBlend(
         colorScheme.primary.withValues(alpha: effectiveAlpha),
@@ -5125,7 +5126,7 @@ void main() {
       const bool unfocusedBorderIsColored = true;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.primary;
+      // final Color enabledHoveredBorderColor = colorScheme.primary;
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
@@ -5133,10 +5134,10 @@ void main() {
       );
       const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
       final Color usedFillColor = Color.alphaBlend(
         colorScheme.primary.withValues(alpha: effectiveAlpha),
@@ -5173,7 +5174,7 @@ void main() {
       );
       expect(
         labelStyle.resolve(<WidgetState>{}),
-        equals(TextStyle(color: Colors.white60)),
+        equals(const TextStyle(color: Colors.white60)),
       );
 
       final WidgetStateTextStyle floatingLabelStyle =
@@ -5193,7 +5194,7 @@ void main() {
       );
       expect(
         floatingLabelStyle.resolve(<WidgetState>{}),
-        equals(TextStyle(color: Colors.white60)),
+        equals(const TextStyle(color: Colors.white60)),
       );
 
       final WidgetStateColor iconColor = theme.iconColor! as WidgetStateColor;
@@ -5315,28 +5316,28 @@ void main() {
       const bool unfocusedBorderIsColored = false;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.primary;
+      // final Color enabledHoveredBorderColor = colorScheme.primary;
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorDarkOpacity;
+      // const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = Color.alphaBlend(
-        colorScheme.primary.withValues(alpha: effectiveAlpha),
-        colorScheme.surface,
-      );
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      // final Color usedFillColor = Color.alphaBlend(
+      //   colorScheme.primary.withValues(alpha: effectiveAlpha),
+      //   colorScheme.surface,
+      // );
+      // final Color usedHover =
+      //     ThemeData.estimateBrightnessForColor(usedFillColor) ==
+      //             Brightness.light
+      //         ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+      //         : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
@@ -5363,7 +5364,7 @@ void main() {
       );
       expect(
         labelStyle.resolve(<WidgetState>{}),
-        equals(TextStyle(color: Colors.white60)),
+        equals(const TextStyle(color: Colors.white60)),
       );
 
       final WidgetStateColor iconColor = theme.iconColor! as WidgetStateColor;
@@ -5509,27 +5510,27 @@ void main() {
       const double focusedWidth = 2.0;
       final Color borderColor = colorScheme.secondary;
       final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.secondary;
+      // final Color enabledHoveredBorderColor = colorScheme.secondary;
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
       final BorderRadius effectiveOutlineBorder = BorderRadius.circular(
         effectiveRadius,
       );
-      const double effectiveAlpha = kFillColorLightOpacity;
+      // const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = Color.alphaBlend(
-        colorScheme.secondary.withValues(alpha: effectiveAlpha),
-        colorScheme.surface,
-      );
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      // final Color usedFillColor = Color.alphaBlend(
+      //   colorScheme.secondary.withValues(alpha: effectiveAlpha),
+      //   colorScheme.surface,
+      // );
+      // final Color usedHover =
+      //     ThemeData.estimateBrightnessForColor(usedFillColor) ==
+      //             Brightness.light
+      //         ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+      //         : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
@@ -6809,10 +6810,10 @@ void main() {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );
-      final TextTheme textTheme = Typography.material2021(
-        platform: TargetPlatform.android,
-        colorScheme: colorScheme,
-      ).black;
+      // final TextTheme textTheme = Typography.material2021(
+      //   platform: TargetPlatform.android,
+      //   colorScheme: colorScheme,
+      // ).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
