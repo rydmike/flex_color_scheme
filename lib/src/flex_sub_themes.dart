@@ -5008,7 +5008,6 @@ abstract final class FlexSubThemes {
     /// variant.
     final TabAlignment? tabAlignment,
 
-    // TODO(rydmike): Open issue, in 3.27 always linear even if elastic used.
     /// Specifies the animation behavior of the tab indicator in a [TabBar].
     ///
     /// If not defined, the tab indicator will animate linearly if
