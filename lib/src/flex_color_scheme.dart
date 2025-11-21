@@ -1253,7 +1253,7 @@ class FlexColorScheme with Diagnosticable {
   ///   [FlexSubThemes.floatingActionButtonTheme].
   /// * [IconButtonThemeData] for [IconButton] via
   ///   [FlexSubThemes.iconButtonTheme].
-  /// * [InputDecorationTheme] for [InputDecoration] via
+  /// * [InputDecorationThemeData] for [InputDecoration] via
   ///   [FlexSubThemes.inputDecorationTheme].
   /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
   /// * [MenuButtonThemeData] for [SubmenuButton] and [MenuItemButton] via
@@ -2362,7 +2362,7 @@ class FlexColorScheme with Diagnosticable {
     ///   [FlexSubThemes.floatingActionButtonTheme].
     /// * [IconButtonThemeData] for [IconButton] via
     ///   [FlexSubThemes.iconButtonTheme].
-    /// * [InputDecorationTheme] for [InputDecoration] via
+    /// * [InputDecorationThemeData] for [InputDecoration] via
     ///   [FlexSubThemes.inputDecorationTheme].
     /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
     /// * [MenuButtonThemeData] for [MenuButton] via
@@ -4533,7 +4533,7 @@ class FlexColorScheme with Diagnosticable {
     ///   [FlexSubThemes.floatingActionButtonTheme].
     /// * [IconButtonThemeData] for [IconButton] via
     ///   [FlexSubThemes.iconButtonTheme].
-    /// * [InputDecorationTheme] for [InputDecoration] via
+    /// * [InputDecorationThemeData] for [InputDecoration] via
     ///   [FlexSubThemes.inputDecorationTheme].
     /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
     /// * [MenuButtonThemeData] for [MenuButton] via
@@ -6340,7 +6340,7 @@ class FlexColorScheme with Diagnosticable {
   ///   actually get a default `BottomAppBarTheme()` all null theme made by
   ///   `FlexSubThemes.bottomAppBarTheme`.
   ///
-  /// * A predefined slightly opinionated [InputDecorationTheme] is used. It
+  /// * A predefined slightly opinionated [InputDecorationThemeData] is used. It
   ///   sets `filled` to `true` and fill color to color scheme primary color
   ///   with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
   ///
@@ -7444,7 +7444,8 @@ class FlexColorScheme with Diagnosticable {
             useMaterial3: useMaterial3,
           )
         : useMaterial3
-            // In M3 if not using sub themes, use default InputDecorationTheme.
+            // In M3 if not using sub themes,
+            // use default InputDecorationThemeData.
             ? null
             // Default decorator in M2 is a bit opinionated, this is the legacy
             // FCS default one in all previous versions before version 4.0.0.

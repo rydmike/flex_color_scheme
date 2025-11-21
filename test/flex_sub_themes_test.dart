@@ -2129,7 +2129,7 @@ void main() {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(6)),
             ),
-            inputDecorationTheme: InputDecorationTheme(
+            inputDecorationTheme: InputDecorationThemeData(
               filled: false,
               hoverColor: colorScheme.brightness == Brightness.dark
                   ? Colors.white.withValues(alpha: 0.04)
@@ -2227,7 +2227,7 @@ void main() {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(6)),
             ),
-            inputDecorationTheme: InputDecorationTheme(
+            inputDecorationTheme: InputDecorationThemeData(
               filled: false,
               hoverColor: colorScheme.brightness == Brightness.dark
                   ? Colors.white.withValues(alpha: 0.04)
@@ -4439,14 +4439,15 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubThemes.inputDecorationTheme ', () {
+  group('WITH: FlexSubThemes.InputDecorationThemeData ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
     test(
         'InputDecoration FST16.1-M2 light: GIVEN a M2 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true) '
-        'EXPECT equal to InputDecorationTheme() version with same values', () {
+        'EXPECT equal to InputDecorationThemeData() version with same values',
+        () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -4688,7 +4689,8 @@ void main() {
     test(
         'InputDecoration FST16.1-M3 light: GIVEN a M3 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true, filled) '
-        'EXPECT equal to InputDecorationTheme() version with same values', () {
+        'EXPECT equal to InputDecorationThemeData() version with same values',
+        () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -4912,7 +4914,8 @@ void main() {
         'InputDecoration FST16.2 light: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
-        'EXPECT equal to InputDecorationTheme() version with same values', () {
+        'EXPECT equal to InputDecorationThemeData() version with same '
+        'values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -5147,7 +5150,8 @@ void main() {
     test(
         'InputDecoration FST16.3 dark: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
-        'EXPECT equal to InputDecorationTheme() version with same values', () {
+        'EXPECT equal to InputDecorationThemeData() version with same values',
+        () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.dark,
@@ -5383,7 +5387,8 @@ void main() {
         'InputDecoration FST16.4 dark: GIVEN a default M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
-        'EXPECT equal to InputDecorationTheme() version with same values', () {
+        'EXPECT equal to InputDecorationThemeData() version with same values',
+        () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.dark,
@@ -5684,7 +5689,8 @@ void main() {
         'FlexSubTheme.inputDecorationTheme(borderType: '
         'FlexInputBorderType.outline, usedSchemeColor: '
         'FlexUsedColor.secondary, tintedDisabled: true) '
-        'EXPECT equal to InputDecorationTheme() version with same values', () {
+        'EXPECT equal to InputDecorationThemeData() version with same values',
+        () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -11931,7 +11937,7 @@ void main() {
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            inputDecorationTheme: const InputDecorationTheme().copyWith(
+            inputDecorationTheme: const InputDecorationThemeData().copyWith(
               contentPadding: EdgeInsets.zero,
               errorStyle: const TextStyle(fontSize: 0, height: 0),
             ),
@@ -11968,7 +11974,7 @@ void main() {
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            inputDecorationTheme: const InputDecorationTheme().copyWith(
+            inputDecorationTheme: const InputDecorationThemeData().copyWith(
               contentPadding: EdgeInsets.zero,
               errorStyle: const TextStyle(fontSize: 0, height: 0),
             ),
@@ -12003,7 +12009,7 @@ void main() {
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            inputDecorationTheme: const InputDecorationTheme(
+            inputDecorationTheme: const InputDecorationThemeData(
               filled: true,
             ).copyWith(
               contentPadding: EdgeInsets.zero,
@@ -12044,7 +12050,7 @@ void main() {
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
-            inputDecorationTheme: const InputDecorationTheme(
+            inputDecorationTheme: const InputDecorationThemeData(
               filled: true,
             ).copyWith(
               contentPadding: EdgeInsets.zero,

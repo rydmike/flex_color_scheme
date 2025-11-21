@@ -840,7 +840,7 @@ extension FlexThemeData on ThemeData {
     ///   [FlexSubThemes.floatingActionButtonTheme].
     /// * [IconButtonThemeData] for [IconButton] via
     ///   [FlexSubThemes.iconButtonTheme].
-    /// * [InputDecorationTheme] for [InputDecoration] via
+    /// * [InputDecorationThemeData] for [InputDecoration] via
     ///   [FlexSubThemes.inputDecorationTheme].
     /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
     /// * [MenuButtonThemeData] for [MenuButton] via
@@ -2350,7 +2350,7 @@ extension FlexThemeData on ThemeData {
     ///   [FlexSubThemes.floatingActionButtonTheme].
     /// * [IconButtonThemeData] for [IconButton] via
     ///   [FlexSubThemes.iconButtonTheme].
-    /// * [InputDecorationTheme] for [InputDecoration] via
+    /// * [InputDecorationThemeData] for [InputDecoration] via
     ///   [FlexSubThemes.inputDecorationTheme].
     /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
     /// * [MenuButtonThemeData] for [MenuButton] via
