@@ -370,216 +370,124 @@ abstract final class FlexSubThemes {
   /// corresponding to the [SchemeColor] enum selection in [value].
   ///
   /// This function is used to select a none default color available in the
-  /// theme's [ColorScheme] in opinionated sub-themes, used for example by:
-  ///
-  /// - [TextField] in [FlexSubThemes.inputDecorationTheme]
-  /// - [TabBar] indicator color
-  /// - [BottomNavigationBar] in [FlexSubThemes.bottomNavigationBarTheme]
-  /// - [NavigationBar] in [FlexSubThemes.navigationBarTheme]
-  /// - [ChipThemeData] from [FlexSubThemes.chipTheme].
-  /// - [FloatingActionButton] from [FlexSubThemes.floatingActionButtonTheme]
+  /// theme's [ColorScheme] in opinionated sub-themes. While still intentionally
+  /// restricting the selection to only colors available in the active
+  /// theme's [ColorScheme].
   static Color schemeColor(SchemeColor value, ColorScheme colorScheme) {
-    switch (value) {
-      case SchemeColor.primary:
-        return colorScheme.primary;
-      case SchemeColor.onPrimary:
-        return colorScheme.onPrimary;
-      case SchemeColor.primaryContainer:
-        return colorScheme.primaryContainer;
-      case SchemeColor.onPrimaryContainer:
-        return colorScheme.onPrimaryContainer;
-      case SchemeColor.primaryFixed:
-        return colorScheme.primaryFixed;
-      case SchemeColor.primaryFixedDim:
-        return colorScheme.primaryFixedDim;
-      case SchemeColor.onPrimaryFixed:
-        return colorScheme.onPrimaryFixed;
-      case SchemeColor.onPrimaryFixedVariant:
-        return colorScheme.onPrimaryFixedVariant;
-      case SchemeColor.secondary:
-        return colorScheme.secondary;
-      case SchemeColor.onSecondary:
-        return colorScheme.onSecondary;
-      case SchemeColor.secondaryContainer:
-        return colorScheme.secondaryContainer;
-      case SchemeColor.onSecondaryContainer:
-        return colorScheme.onSecondaryContainer;
-      case SchemeColor.secondaryFixed:
-        return colorScheme.secondaryFixed;
-      case SchemeColor.secondaryFixedDim:
-        return colorScheme.secondaryFixedDim;
-      case SchemeColor.onSecondaryFixed:
-        return colorScheme.onSecondaryFixed;
-      case SchemeColor.onSecondaryFixedVariant:
-        return colorScheme.onSecondaryFixedVariant;
-      case SchemeColor.tertiary:
-        return colorScheme.tertiary;
-      case SchemeColor.onTertiary:
-        return colorScheme.onTertiary;
-      case SchemeColor.tertiaryContainer:
-        return colorScheme.tertiaryContainer;
-      case SchemeColor.onTertiaryContainer:
-        return colorScheme.onTertiaryContainer;
-      case SchemeColor.tertiaryFixed:
-        return colorScheme.tertiaryFixed;
-      case SchemeColor.tertiaryFixedDim:
-        return colorScheme.tertiaryFixedDim;
-      case SchemeColor.onTertiaryFixed:
-        return colorScheme.onTertiaryFixed;
-      case SchemeColor.onTertiaryFixedVariant:
-        return colorScheme.onTertiaryFixedVariant;
-      case SchemeColor.error:
-        return colorScheme.error;
-      case SchemeColor.onError:
-        return colorScheme.onError;
-      case SchemeColor.errorContainer:
-        return colorScheme.errorContainer;
-      case SchemeColor.onErrorContainer:
-        return colorScheme.onErrorContainer;
-      case SchemeColor.surface:
-        return colorScheme.surface;
-      case SchemeColor.onSurface:
-        return colorScheme.onSurface;
-      case SchemeColor.surfaceDim:
-        return colorScheme.surfaceDim;
-      case SchemeColor.surfaceBright:
-        return colorScheme.surfaceBright;
-      case SchemeColor.surfaceContainerLowest:
-        return colorScheme.surfaceContainerLowest;
-      case SchemeColor.surfaceContainerLow:
-        return colorScheme.surfaceContainerLow;
-      case SchemeColor.surfaceContainer:
-        return colorScheme.surfaceContainer;
-      case SchemeColor.surfaceContainerHigh:
-        return colorScheme.surfaceContainerHigh;
-      case SchemeColor.surfaceContainerHighest:
-        return colorScheme.surfaceContainerHighest;
-      case SchemeColor.onSurfaceVariant:
-        return colorScheme.onSurfaceVariant;
-      case SchemeColor.outline:
-        return colorScheme.outline;
-      case SchemeColor.outlineVariant:
-        return colorScheme.outlineVariant;
-      case SchemeColor.shadow:
-        return colorScheme.shadow;
-      case SchemeColor.scrim:
-        return colorScheme.scrim;
-      case SchemeColor.inverseSurface:
-        return colorScheme.inverseSurface;
-      case SchemeColor.onInverseSurface:
-        return colorScheme.onInverseSurface;
-      case SchemeColor.inversePrimary:
-        return colorScheme.inversePrimary;
-      case SchemeColor.surfaceTint:
-        return colorScheme.surfaceTint;
-      case SchemeColor.black:
-        return Colors.black;
-      case SchemeColor.white:
-        return Colors.white;
-      case SchemeColor.transparent:
-        return Colors.transparent;
-    }
+    return switch (value) {
+      SchemeColor.primary => colorScheme.primary,
+      SchemeColor.onPrimary => colorScheme.onPrimary,
+      SchemeColor.primaryContainer => colorScheme.primaryContainer,
+      SchemeColor.onPrimaryContainer => colorScheme.onPrimaryContainer,
+      SchemeColor.primaryFixed => colorScheme.primaryFixed,
+      SchemeColor.primaryFixedDim => colorScheme.primaryFixedDim,
+      SchemeColor.onPrimaryFixed => colorScheme.onPrimaryFixed,
+      SchemeColor.onPrimaryFixedVariant => colorScheme.onPrimaryFixedVariant,
+      SchemeColor.secondary => colorScheme.secondary,
+      SchemeColor.onSecondary => colorScheme.onSecondary,
+      SchemeColor.secondaryContainer => colorScheme.secondaryContainer,
+      SchemeColor.onSecondaryContainer => colorScheme.onSecondaryContainer,
+      SchemeColor.secondaryFixed => colorScheme.secondaryFixed,
+      SchemeColor.secondaryFixedDim => colorScheme.secondaryFixedDim,
+      SchemeColor.onSecondaryFixed => colorScheme.onSecondaryFixed,
+      SchemeColor.onSecondaryFixedVariant =>
+        colorScheme.onSecondaryFixedVariant,
+      SchemeColor.tertiary => colorScheme.tertiary,
+      SchemeColor.onTertiary => colorScheme.onTertiary,
+      SchemeColor.tertiaryContainer => colorScheme.tertiaryContainer,
+      SchemeColor.onTertiaryContainer => colorScheme.onTertiaryContainer,
+      SchemeColor.tertiaryFixed => colorScheme.tertiaryFixed,
+      SchemeColor.tertiaryFixedDim => colorScheme.tertiaryFixedDim,
+      SchemeColor.onTertiaryFixed => colorScheme.onTertiaryFixed,
+      SchemeColor.onTertiaryFixedVariant => colorScheme.onTertiaryFixedVariant,
+      SchemeColor.error => colorScheme.error,
+      SchemeColor.onError => colorScheme.onError,
+      SchemeColor.errorContainer => colorScheme.errorContainer,
+      SchemeColor.onErrorContainer => colorScheme.onErrorContainer,
+      SchemeColor.surface => colorScheme.surface,
+      SchemeColor.onSurface => colorScheme.onSurface,
+      SchemeColor.surfaceDim => colorScheme.surfaceDim,
+      SchemeColor.surfaceBright => colorScheme.surfaceBright,
+      SchemeColor.surfaceContainerLowest => colorScheme.surfaceContainerLowest,
+      SchemeColor.surfaceContainerLow => colorScheme.surfaceContainerLow,
+      SchemeColor.surfaceContainer => colorScheme.surfaceContainer,
+      SchemeColor.surfaceContainerHigh => colorScheme.surfaceContainerHigh,
+      SchemeColor.surfaceContainerHighest =>
+        colorScheme.surfaceContainerHighest,
+      SchemeColor.onSurfaceVariant => colorScheme.onSurfaceVariant,
+      SchemeColor.outline => colorScheme.outline,
+      SchemeColor.outlineVariant => colorScheme.outlineVariant,
+      SchemeColor.shadow => colorScheme.shadow,
+      SchemeColor.scrim => colorScheme.scrim,
+      SchemeColor.inverseSurface => colorScheme.inverseSurface,
+      SchemeColor.onInverseSurface => colorScheme.onInverseSurface,
+      SchemeColor.inversePrimary => colorScheme.inversePrimary,
+      SchemeColor.surfaceTint => colorScheme.surfaceTint,
+      SchemeColor.black => Colors.black,
+      SchemeColor.white => Colors.white,
+      SchemeColor.transparent => Colors.transparent
+    };
   }
 
-  /// Returns the correct [SchemeColor] to be used as contrasting on
-  /// [SchemeColor] pair for [SchemeColor] passed in via [value].
+  /// Returns the [SchemeColor] to be used as contrasting pair for the
+  /// [SchemeColor] passed in via [value].
   static SchemeColor onSchemeColor(
     SchemeColor value, {
     bool useOnSurfaceVariant = false,
   }) {
-    switch (value) {
-      case SchemeColor.primary:
-      case SchemeColor.surfaceTint:
-        return SchemeColor.onPrimary;
-      case SchemeColor.onPrimary:
-        return SchemeColor.primary;
-      case SchemeColor.primaryContainer:
-        return SchemeColor.onPrimaryContainer;
-      case SchemeColor.onPrimaryContainer:
-        return SchemeColor.primaryContainer;
-      case SchemeColor.primaryFixed:
-        return SchemeColor.onPrimaryFixed;
-      case SchemeColor.onPrimaryFixed:
-        return SchemeColor.primaryFixed;
-      case SchemeColor.primaryFixedDim:
-        return SchemeColor.onPrimaryFixedVariant;
-      case SchemeColor.onPrimaryFixedVariant:
-        return SchemeColor.primaryFixedDim;
-      case SchemeColor.secondary:
-        return SchemeColor.onSecondary;
-      case SchemeColor.onSecondary:
-        return SchemeColor.secondary;
-      case SchemeColor.secondaryContainer:
-        return SchemeColor.onSecondaryContainer;
-      case SchemeColor.onSecondaryContainer:
-        return SchemeColor.secondaryContainer;
-      case SchemeColor.secondaryFixed:
-        return SchemeColor.onSecondaryFixed;
-      case SchemeColor.onSecondaryFixed:
-        return SchemeColor.secondaryFixed;
-      case SchemeColor.secondaryFixedDim:
-        return SchemeColor.onSecondaryFixedVariant;
-      case SchemeColor.onSecondaryFixedVariant:
-        return SchemeColor.secondaryFixedDim;
-      case SchemeColor.tertiary:
-        return SchemeColor.onTertiary;
-      case SchemeColor.onTertiary:
-        return SchemeColor.tertiary;
-      case SchemeColor.tertiaryContainer:
-        return SchemeColor.onTertiaryContainer;
-      case SchemeColor.onTertiaryContainer:
-        return SchemeColor.tertiaryContainer;
-      case SchemeColor.tertiaryFixed:
-        return SchemeColor.onTertiaryFixed;
-      case SchemeColor.onTertiaryFixed:
-        return SchemeColor.tertiaryFixed;
-      case SchemeColor.tertiaryFixedDim:
-        return SchemeColor.onTertiaryFixedVariant;
-      case SchemeColor.onTertiaryFixedVariant:
-        return SchemeColor.tertiaryFixedDim;
-      case SchemeColor.error:
-        return SchemeColor.onError;
-      case SchemeColor.onError:
-        return SchemeColor.error;
-      case SchemeColor.errorContainer:
-        return SchemeColor.onErrorContainer;
-      case SchemeColor.onErrorContainer:
-        return SchemeColor.errorContainer;
-      case SchemeColor.surface:
-      case SchemeColor.surfaceDim:
-      case SchemeColor.surfaceBright:
-      case SchemeColor.surfaceContainerLowest:
-      case SchemeColor.surfaceContainerLow:
-      case SchemeColor.surfaceContainer:
-      case SchemeColor.surfaceContainerHigh:
-      case SchemeColor.surfaceContainerHighest:
-      case SchemeColor.transparent:
-        return useOnSurfaceVariant
+    return switch (value) {
+      SchemeColor.primary || SchemeColor.surfaceTint => SchemeColor.onPrimary,
+      SchemeColor.onPrimary => SchemeColor.primary,
+      SchemeColor.primaryContainer => SchemeColor.onPrimaryContainer,
+      SchemeColor.onPrimaryContainer => SchemeColor.primaryContainer,
+      SchemeColor.primaryFixed => SchemeColor.onPrimaryFixed,
+      SchemeColor.onPrimaryFixed => SchemeColor.primaryFixed,
+      SchemeColor.primaryFixedDim => SchemeColor.onPrimaryFixedVariant,
+      SchemeColor.onPrimaryFixedVariant => SchemeColor.primaryFixedDim,
+      SchemeColor.secondary => SchemeColor.onSecondary,
+      SchemeColor.onSecondary => SchemeColor.secondary,
+      SchemeColor.secondaryContainer => SchemeColor.onSecondaryContainer,
+      SchemeColor.onSecondaryContainer => SchemeColor.secondaryContainer,
+      SchemeColor.secondaryFixed => SchemeColor.onSecondaryFixed,
+      SchemeColor.onSecondaryFixed => SchemeColor.secondaryFixed,
+      SchemeColor.secondaryFixedDim => SchemeColor.onSecondaryFixedVariant,
+      SchemeColor.onSecondaryFixedVariant => SchemeColor.secondaryFixedDim,
+      SchemeColor.tertiary => SchemeColor.onTertiary,
+      SchemeColor.onTertiary => SchemeColor.tertiary,
+      SchemeColor.tertiaryContainer => SchemeColor.onTertiaryContainer,
+      SchemeColor.onTertiaryContainer => SchemeColor.tertiaryContainer,
+      SchemeColor.tertiaryFixed => SchemeColor.onTertiaryFixed,
+      SchemeColor.onTertiaryFixed => SchemeColor.tertiaryFixed,
+      SchemeColor.tertiaryFixedDim => SchemeColor.onTertiaryFixedVariant,
+      SchemeColor.onTertiaryFixedVariant => SchemeColor.tertiaryFixedDim,
+      SchemeColor.error => SchemeColor.onError,
+      SchemeColor.onError => SchemeColor.error,
+      SchemeColor.errorContainer => SchemeColor.onErrorContainer,
+      SchemeColor.onErrorContainer => SchemeColor.errorContainer,
+      SchemeColor.surface ||
+      SchemeColor.surfaceDim ||
+      SchemeColor.surfaceBright ||
+      SchemeColor.surfaceContainerLowest ||
+      SchemeColor.surfaceContainerLow ||
+      SchemeColor.surfaceContainer ||
+      SchemeColor.surfaceContainerHigh ||
+      SchemeColor.surfaceContainerHighest ||
+      SchemeColor.transparent =>
+        useOnSurfaceVariant
             ? SchemeColor.onSurfaceVariant
-            : SchemeColor.onSurface;
-      case SchemeColor.onSurface:
-        return SchemeColor.surface;
-      case SchemeColor.onSurfaceVariant:
-        return SchemeColor.surfaceContainerLowest;
-      case SchemeColor.outline:
-        return SchemeColor.surface;
-      case SchemeColor.outlineVariant:
-        return SchemeColor.onSurface;
-      case SchemeColor.shadow:
-        return SchemeColor.outline;
-      case SchemeColor.scrim:
-        return SchemeColor.outline;
-      case SchemeColor.inverseSurface:
-        return SchemeColor.onInverseSurface;
-      case SchemeColor.onInverseSurface:
-        return SchemeColor.inverseSurface;
-      case SchemeColor.inversePrimary:
-        return SchemeColor.onSurface;
-      case SchemeColor.black:
-        return SchemeColor.white;
-      case SchemeColor.white:
-        return SchemeColor.black;
-    }
+            : SchemeColor.onSurface,
+      SchemeColor.onSurface => SchemeColor.surface,
+      SchemeColor.onSurfaceVariant => SchemeColor.surfaceContainerLowest,
+      SchemeColor.outline => SchemeColor.surface,
+      SchemeColor.outlineVariant => SchemeColor.onSurface,
+      SchemeColor.shadow => SchemeColor.outline,
+      SchemeColor.scrim => SchemeColor.outline,
+      SchemeColor.inverseSurface => SchemeColor.onInverseSurface,
+      SchemeColor.onInverseSurface => SchemeColor.inverseSurface,
+      SchemeColor.inversePrimary => SchemeColor.onSurface,
+      SchemeColor.black => SchemeColor.white,
+      SchemeColor.white => SchemeColor.black
+    };
   }
 
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
