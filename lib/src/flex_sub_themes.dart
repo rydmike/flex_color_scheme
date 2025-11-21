@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'flex_color_scheme.dart';
 import 'flex_constants.dart';
 import 'flex_extensions.dart';
-import 'flex_sub_themes_data.dart' show FlexSubThemesData;
+import 'flex_sub_themes_data.dart';
 
 part 'flex_sub_themes/flex_sub_themes_app_bar.dart';
 part 'flex_sub_themes/flex_sub_themes_bottom_app_bar.dart';
@@ -63,7 +63,7 @@ enum FlexInputBorderType {
   underline,
 }
 
-/// Enum used to described which color from the active theme's 30
+/// Enum used to described which color from the active theme's 46
 /// [ColorScheme] colors, should be used for by color properties available in
 /// component sub-themes.
 ///
@@ -71,13 +71,17 @@ enum FlexInputBorderType {
 /// typically have one or more properties called `nnnSchemeColor`. Where
 /// `nnn` describes the color feature that can be set to a none default
 /// [ColorScheme] based color.
+///
 /// If not set, the property is null and the default [ColorScheme] based
 /// color behavior of the opinionated component theme will be used. This may
 /// differ from the corresponding Widget's SDK default un-themed color behavior,
 /// but is often the same if defined at all.
 ///
-/// The enum selection `primaryVariant` and `secondaryVariant` colors have been
-/// deprecated in v4.2.0 as they were deprecated in Flutter SDK stable 2.10.0.
+/// The [SchemeColor] also includes options for black, white and
+/// transparent colors, they may sometimes be useful in sub-themes.
+///
+/// Colors that have been deprecated in Flutter's [ColorScheme] but not yet
+/// removed in the stable channel are already excluded here.
 enum SchemeColor {
   /// The active theme's color scheme primary color will be used.
   primary,
@@ -288,8 +292,8 @@ enum FlexSliderIndicatorType {
 /// configuration values in the [FlexSubThemesData] configuration class,
 /// and passing it to the [FlexColorScheme.subThemesData] property.
 ///
-/// To enable the component sub-themes using default settings, pass a
-/// default constructor [FlexSubThemesData] to [FlexColorScheme.subThemesData].
+/// To enable the component sub-themes using default settings, pass a default
+/// constructor `FlexSubThemesData()` to [FlexColorScheme.subThemesData].
 ///
 /// The configuration class [FlexSubThemesData] offers easy to use configuration
 /// properties for using these sub-themes in [FlexColorScheme].
@@ -357,8 +361,8 @@ enum FlexSliderIndicatorType {
 /// * [ToggleButtonsThemeData] for [ToggleButtons] via [toggleButtonsTheme].
 /// * [TooltipThemeData] for [Tooltip] via [tooltipTheme].
 ///
-/// While it is possible to use them without [FlexColorScheme] it may not be
-/// ideal, as they are designed with the features used and needed by
+/// While it is possible to use these helpers without [FlexColorScheme] it may
+/// not be ideal, as they are designed with the features used and needed by
 /// [FlexColorScheme] and its configuration class [FlexSubThemesData] in mind.
 ///
 /// The [FlexSubThemes] may have more frequent breaking changes than
