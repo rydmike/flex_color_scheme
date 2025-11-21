@@ -716,19 +716,20 @@ abstract final class FlexSubThemes {
     final SystemUiOverlayStyle? systemOverlayStyle,
   }) =>
       _appBarTheme(
-          colorScheme: colorScheme,
-          centerTitle: centerTitle,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          elevation: elevation,
-          scrolledUnderElevation: scrolledUnderElevation,
-          iconTheme: iconTheme,
-          actionsIconTheme: actionsIconTheme,
-          shadowColor: shadowColor,
-          toolbarTextStyle: toolbarTextStyle,
-          titleTextStyle: titleTextStyle,
-          surfaceTintColor: surfaceTintColor,
-          systemOverlayStyle: systemOverlayStyle);
+        colorScheme: colorScheme,
+        centerTitle: centerTitle,
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        elevation: elevation,
+        scrolledUnderElevation: scrolledUnderElevation,
+        iconTheme: iconTheme,
+        actionsIconTheme: actionsIconTheme,
+        shadowColor: shadowColor,
+        toolbarTextStyle: toolbarTextStyle,
+        titleTextStyle: titleTextStyle,
+        surfaceTintColor: surfaceTintColor,
+        systemOverlayStyle: systemOverlayStyle,
+      );
 
   /// An opinionated [BottomAppBarTheme] theme.
   ///
