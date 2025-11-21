@@ -3997,10 +3997,18 @@ void main() {
             .width,
         equals(2),
       );
+      // TODO(rydmike): Not expected, why is borderSide width 1 here?
+      // The general width should not be defined since we used one
+      // defined with WidgetStateInputBorder.resolveWith callback, but it is
+      // 1 in this case, not defined value. If we define the border by using
+      // WidgetStateBorderSide.fromMap this test fails and causes Flutter SDK to
+      // throw an error. This needs to be investigated and fixed.
+      //
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
         equals(1),
       );
+
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
@@ -4075,11 +4083,18 @@ void main() {
             .width,
         equals(2),
       );
-      // The general width should not be defined since we used the specific ones
+      // TODO(rydmike): Not expected, why is borderSide width 1 here?
+      // The general width should not be defined since we used one
+      // defined with WidgetStateInputBorder.resolveWith callback, but it is
+      // 1 in this case, not defined value. If we define the border by using
+      // WidgetStateBorderSide.fromMap this test fails and causes Flutter SDK to
+      // throw an error. This needs to be investigated and fixed.
+      //
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
         equals(1),
       );
+
       // OutlinedButton thin widths, null in M3 which results in 1
       expect(
         theme.outlinedButtonTheme.style?.side
@@ -4153,11 +4168,18 @@ void main() {
             .width,
         equals(4),
       );
-      // TODO(rydmike): This is not expected, why do we get this? Study it!
+      // TODO(rydmike): Not expected, why is borderSide width 1 here?
+      // The general width should not be defined since we used one
+      // defined with WidgetStateInputBorder.resolveWith callback, but it is
+      // 1 in this case, not defined value. If we define the border by using
+      // WidgetStateBorderSide.fromMap this test fails and causes Flutter SDK to
+      // throw an error. This needs to be investigated and fixed.
+      //
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
         equals(1),
       );
+
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
@@ -4231,12 +4253,18 @@ void main() {
             .width,
         equals(4),
       );
-      // The general width should not be defined since we used the specific ones
+      // TODO(rydmike): Not expected, why is borderSide width 1 here?
+      // The general width should not be defined since we used one
+      // defined with WidgetStateInputBorder.resolveWith callback, but it is
+      // 1 in this case, not defined value. If we define the border by using
+      // WidgetStateBorderSide.fromMap this test fails and causes Flutter SDK to
+      // throw an error. This needs to be investigated and fixed.
+      //
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
-        // TODO(rydmike): This is not expected, why do we get this? Study it!
         equals(1),
       );
+
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
@@ -4317,12 +4345,18 @@ void main() {
             .width,
         equals(3.5),
       );
-      // The general width should not be defined since we used the specific ones
+      // TODO(rydmike): Not expected, why is borderSide width 1 here?
+      // The general width should not be defined since we used one
+      // defined with WidgetStateInputBorder.resolveWith callback, but it is
+      // 1 in this case, not defined value. If we define the border by using
+      // WidgetStateBorderSide.fromMap this test fails and causes Flutter SDK to
+      // throw an error. This needs to be investigated and fixed.
+      //
       expect(
         theme.inputDecorationTheme.border?.borderSide.width,
-        // TODO(rydmike): This is not expected, why do we get this? Study it!
         equals(1),
       );
+
       // OutlinedButton thin widths
       expect(
         theme.outlinedButtonTheme.style?.side
