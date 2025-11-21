@@ -5,7 +5,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.4.0 (WIP)
 
-**November 18, 2025**
+**November 21, 2025**
 
 Requires at least Flutter 3.38.0, but prefer at least 3.38.1 stable.
 
@@ -42,26 +42,26 @@ Requires at least Flutter 3.38.0, but prefer at least 3.38.1 stable.
 **CHORE**
 
 **FIX**
-* Fix: Deprecated Radio properties and use RadioGroup instead.
+* Fixed deprecated Radio properties and used `RadioGroup` instead.
 
 **CHANGE**
 * Split the Tooltip and Progress Indicator panels into two separate panels.
 
 **NEW**
  
-* The Slider panel got a new switch to select between older M3 and newer current M3 slider styles. It uses the new `FlexSubThemesData.sliderYear2023` property to do so.
+* The **Slider panel** got a new switch to select between older M3 and newer current M3 slider styles. It uses the new `FlexSubThemesData.sliderYear2023` property to do so.
  
-* The new Progress Indicator panel got theming properties for all supported new FCS properties.
+* The new **Progress Indicator panel** got theming properties for all supported new FCS properties.
 
 **TODOs**
 
-Todo items are picked for this list, all may not be done in this release.
+Todo items are picked from this list, all may not be done in this release.
 
 **CHORE**
-* Chore: Add missing tests for Shadcn color schemes.
 * Chore: Migrate to map-based WidgetState properties, for ThemeData equality and performance.
 * Chore: Migrate to only using opacity-based const values in themes and remove the old alpha-based values.
- 
+* Chore: Add missing tests for Shadcn color schemes.
+   
 **FIX**
 * Playground: Look into custom dark uses own colors as seed not updating correctly in the Playground.
 
