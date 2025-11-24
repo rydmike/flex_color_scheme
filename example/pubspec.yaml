@@ -3,7 +3,7 @@ description: Examples that demonstrate how to use the FlexColorScheme package.
 version: 8.4.0
 publish_to: 'none'
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: '>=3.38.0'
 
 dependencies:
