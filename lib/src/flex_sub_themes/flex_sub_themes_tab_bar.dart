@@ -58,7 +58,6 @@ TabBarThemeData _tabBarTheme({
   /// variant.
   final TabAlignment? tabAlignment,
 
-  // TODO(rydmike): Open issue, in 3.27 always linear even if elastic used.
   /// Specifies the animation behavior of the tab indicator in a [TabBar].
   ///
   /// If not defined, the tab indicator will animate linearly if
@@ -83,7 +82,7 @@ TabBarThemeData _tabBarTheme({
   ///
   /// If null and [useMaterial3] is true, [TabBarThemeData.dividerColor]
   /// color is used. If that is null and [useMaterial3] is true,
-  /// [ColorScheme.surfaceVariant] will be used,
+  /// [ColorScheme.outlineVariant] will be used,
   /// otherwise divider will not be drawn.
   final Color? dividerColor,
 
