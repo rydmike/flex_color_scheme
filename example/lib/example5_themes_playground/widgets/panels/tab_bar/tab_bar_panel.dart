@@ -496,11 +496,11 @@ class TabBarPanel extends StatelessWidget {
                         'The TabBar theme API had breaking changes in '
                         'Flutter 3.27 release. These were addressed in '
                         'FlexColorScheme v8.1.0. In Flutter 3.31 (beta) '
-                        'there are additional compile-time '
+                        'there were additional compile-time '
                         'breaking changes not present in Flutter 3.29 and '
-                        'earlier versions. FlexColorScheme v8.2.0 is '
-                        'compatible with these Flutter SDK breaking changes. '
-                        'For more information, see the ',
+                        'earlier versions. FlexColorScheme v8.2.0 and later '
+                        'are compatible with these Flutter SDK breaking '
+                        'changes. For more information, see the ',
                   ),
                   LinkTextSpan(
                     style: linkStyle,
@@ -510,14 +510,12 @@ class TabBarPanel extends StatelessWidget {
                   TextSpan(
                     style: spanTextStyle,
                     text: ', that documented the in Flutter 3.27 breaking '
-                        'changes. Apparently, something more changed now, '
-                        'as the TabBar theming that still works in '
+                        'changes. Apparently, new changes were added, '
+                        'as the TabBar theming that still worked in '
                         'Flutter 3.29, broke again in Flutter 3.31 beta and '
-                        'later. Regardless of what and why it was broken, '
-                        'FCS v8.2.0 fixes the usage of the compile-time '
-                        'broken API, it now works again, with at release time '
-                        'used APIs in Flutter stable, beta and master '
-                        'channels.',
+                        'later. Regardless of what and why was broken, '
+                        'FCS v8.2.0 and later fixed the usage of the compile '
+                        'breaking API.',
                   ),
                 ],
               ),
