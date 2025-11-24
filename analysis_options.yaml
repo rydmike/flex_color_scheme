@@ -1,4 +1,4 @@
-# RydMike LINTER Preferences v2.5.0
+# RydMike LINTER Preferences v2.6.0
 #
 # Get this file here: https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
@@ -6,7 +6,7 @@
 # You can find a list of all lint rules to put in your all_lint_rules.yaml file here:
 # https://dart.dev/tools/linter-rules/all
 #
-# This version is updated for Flutter 3.35 and Dart 3.9.
+# This version is updated for Flutter 3.38 and Dart 3.10.
 #
 # For comparison of all lint rules settings in rule styles listed below, please see this sheet
 # https://docs.google.com/spreadsheets/d/1Nc1gFjmCOMubWZD7f2E4fLhWN7LYaOE__tsA7bf2NjA
@@ -23,6 +23,29 @@
 # RydMike        this       : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 #
 include: all_lint_rules.yaml
+
+# Describes how Dart formatter should behave on project level.
+#
+# To use both these options you must be on minimum Dart SDK 3.8.0 (trailing_commas), but for the
+# (page_width) Dart SDK 3.7.0 is sufficient. However, when testing this, with option
+# "trailing_commas: preserve" and lint "require_trailing_commas: false" formatted code,
+# we still get HUGE git-diffs if we jump to min Dart SDK 3.8.0 and run "dart format ."
+# Keeping at min Dart 3.6.0 in older projects for now, to avoid this issue.
+# Will jump to min 3.8.0 pr higher when bumping page_width later.
+formatter:
+  # Strongly recommended to preserve trailing commas as written and not let formatter mess with them.
+  # See https://github.com/dart-lang/dart_style/issues/1652
+  # Not using this setting contradicts the
+  # - require_trailing_commas: false
+  # linter rule and removes the ability to force line breaks.
+  trailing_commas: preserve
+  # Set page width to whatever you prefer for you project, legacy is 80 chars.
+  # If you use something else than 80 characters, then also set lint:
+  # - lines_longer_than_80_chars: false
+  #
+  # This project still uses 80 chars as line length limit, but may bump to 100 or 120 later.
+  page_width: 80
+
 analyzer:
   exclude:
     - "**/*.g.dart"

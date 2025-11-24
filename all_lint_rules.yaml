@@ -2,7 +2,7 @@
 #
 # Based on manual update from auto generated list: https://dart.dev/tools/linter-rules/all
 #
-# This file is used and needed by rydmike analysis_options: V2.5.0
+# This file is used and needed by rydmike analysis_options: V2.5.0 and V2.6.0.
 #
 # The list below has removed these deprecated lint rules, that were included in
 # older version of the list:
@@ -28,15 +28,22 @@
 # - unnecessary_underscores
 # - unsafe_variance
 #
-# Dart 3.8.0 added the following new rules:
+# Version 2.5.0 / 5.10.2025 added:
+# - remove_deprecations_in_breaking_versions
 # - use_null_aware_elements
-#
-# Dart 3.9.0 added the following new rules:
 # - switch_on_type
 # - unnecessary_unawaited
 #
-# Version 2.5.0 / 5.10.2025 added:
-# - remove_deprecations_in_breaking_versions
+#   Where Dart 3.8.0 brought the following new rules:
+#   - use_null_aware_elements
+#   And Dart 3.9.0 brought the following new rules:
+#   - switch_on_type
+#   - unnecessary_unawaited
+#
+# Version 2.6.0 of analysis_options.yaml
+# - No changed the list of all rules below.
+# - Checked for Dart 3.10.0, it did not add/remove any rules.
+# - Bumped to version 2.6.0 in analysis_options.yaml because added formatter options to analysis_options.yaml
 linter:
   rules:
     - always_declare_return_types
