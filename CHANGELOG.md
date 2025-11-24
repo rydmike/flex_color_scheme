@@ -11,80 +11,48 @@ Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
 
 ### Package
 
-**CHORE**
-* Update lints to RydMike lint rules 2.5.0 and fix new linting issues.
-* Bump to `flex_seed_scheme ^4.0.0`.
-* Internal: Refactored all component themes in `FlexSubThemes` to be in their own files, to improve maintainability and reduce the size of `flex_sub_themes.dart` file. This also make it easier for LLMs to work on the component themes, as they now have smaller files to process.
+**NEW**
+* Add boolean `sliderYear2023` to `FlexSubThemesData` to be able to select between older M3 and newer current M3 slider styles. Defaults to older style as before to not break styles. Set `sliderYear2023` to value false, to use the current newer M3 style.
+* Add `progressIndicatorTheme` to `FlexSubThemes` to be able to theme `CircularProgressIndicator` and `LinearProgressIndicator` components.
+* To `FlexSubThemesData` added the properties:
+    - `progressIndicatorBaseSchemeColor` (SchemeColor)
+    - `progressIndicatorLinearTrackSchemeColor` SchemeColor()
+    - `progressIndicatorLinearMinHeight` (double)
+    - `progressIndicatorCircularTrackSchemeColor` (SchemeColor)
+    - `progressIndicatorRefreshBackgroundSchemeColor` (SchemeColor)
+    - `progressIndicatorLinearRadius` (double)
+    - `progressIndicatorStopIndicatorSchemeColor` (SchemeColor)
+    - `progressIndicatorStopIndicatorRadius` (double)
+    - `progressIndicatorStrokeWidth` (double)
+    - `progressIndicatorStrokeAlign` (double)
+    - `progressIndicatorTrackGap` (double)
+    - `progressIndicatorStrokeCap` (StrokeCap)
+    - `progressIndicatorConstraints` (BoxConstraints)
+    - `progressIndicatorCircularTrackPadding` (EdgeInsetsGeometry)
+    - `progressIndicatorYear2023` (bool)
 
 **CHANGE**
 * The enum `FlexSliderIndicatorType` got a new value `rounded`, to support selecting the newer M3 indicator style also in M2 and older M3 mode for Slider and RangeSlider.
 
-**NEW**
-* Add boolean `sliderYear2023` to `FlexSubThemesData` to be able to select between older M3 and newer current M3 slider styles. Defaults to older style as before to not break styles. Set `sliderYear2023` to value false, to use the current newer M3 style.
-* Add `progressIndicatorTheme` to `FlexSubThemes` to be able to theme `CircularProgressIndicator` and `LinearProgressIndicator` components.
-* To `FlexSubThemesData` add properties:  
-  - `progressIndicatorBaseSchemeColor` (SchemeColor)
-  - `progressIndicatorLinearTrackSchemeColor` SchemeColor()
-  - `progressIndicatorLinearMinHeight` (double)
-  - `progressIndicatorCircularTrackSchemeColor` (SchemeColor)
-  - `progressIndicatorRefreshBackgroundSchemeColor` (SchemeColor)
-  - `progressIndicatorLinearRadius` (double)
-  - `progressIndicatorStopIndicatorSchemeColor` (SchemeColor)
-  - `progressIndicatorStopIndicatorRadius` (double)
-  - `progressIndicatorStrokeWidth` (double)
-  - `progressIndicatorStrokeAlign` (double)
-  - `progressIndicatorTrackGap` (double)
-  - `progressIndicatorStrokeCap` (StrokeCap)
-  - `progressIndicatorConstraints` (BoxConstraints)
-  - `progressIndicatorCircularTrackPadding` (EdgeInsetsGeometry)
-  - `progressIndicatorYear2023` (bool)
+**CHORE**
+* Update lints to RydMike lint rules 2.6.0 and fix new linting issues.
+* Internal: Bump `flex_seed_scheme` dependency to `^4.0.0`.
+* Internal: Refactored all component themes in `FlexSubThemes` to be in their own files, to improve maintainability and reduce the size of `flex_sub_themes.dart` file. This also make it easier for LLMs to work on the component themes, as they now have smaller files to process.
+* Improve `FlexSubTHemes` function and variable documentation. Add parameter docs to all component theme functions in the function header docs so they show up in API docs.
 
 ### Themes Playground
 
-**CHORE**
+**NEW**
+* The **Slider** panel got a new switch control to select between older M3 and newer current M3 slider styles. It uses the new `FlexSubThemesData.sliderYear2023` property to do so.
 
-
-**FIX**
-* Fixed deprecated Radio properties and used `RadioGroup` instead.
+* Split the **Tooltip** and **Progress Indicator** panel into two separate panels.
+* The new **Progress Indicator** panel got theming controls for all supported new `FlexSubThemesData` progress indicator properties listed above. 
 
 **CHANGE**
-* Split the Tooltip and Progress Indicator panels into two separate panels.
 * Visual improvements to the color picker dialog in the Themes Playground.
 
-**NEW**
- 
-* The **Slider panel** got a new switch to select between older M3 and newer current M3 slider styles. It uses the new `FlexSubThemesData.sliderYear2023` property to do so.
-* The new **Progress Indicator panel** got theming properties for all supported new FCS properties.
-
-**TODOs**
-
-The todo items are picked from this list, all may not be done in this release.
-
-**CHORE**
-* Chore: Migrate to map-based WidgetState properties, for ThemeData equality and performance.
-* Chore: Migrate to only using opacity-based const values in themes and remove the old alpha-based values.
-* Chore: Add missing tests for Shadcn color schemes.
-   
 **FIX**
-* Playground: Look into custom dark uses own colors as seed not updating correctly in the Playground.
-
-**NEW**
-- Add Switch track color and outline colors, to be able to match Shadcn:
-  - switchOnTrackColor
-  - switchOffTrackColor
-  - switchOnTrackOutlineColor
-  - switchOffTrackOutlineColor
-- Add Checkbox shape to be able to match Shadcn.
-- Add menu and popup border outline color, to be able to match Shadcn.
-- Add MenuBar border outline color, to be able to match Shadcn.
-- Add Menu gap padding to be able to match Shadcn.
-- Add Card color selection, with theme variant warning.
-- Add Card outline color selection, with theme variant warning.
-- Add support for Shadcn background, surface and container colors.
-- Add MaterialBanner theme
-- Add BottomAppBarOpacity (maybe).
-- Add BottomSheet width constraint (Uses max 640 in M3 mode)
-
+* Fixed deprecated `Radio` properties and used `RadioGroup` instead.
 
 
 
