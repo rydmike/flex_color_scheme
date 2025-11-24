@@ -50,7 +50,7 @@ dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^3.5.1
+  flex_seed_scheme: ^4.0.0
 
   # The Flutter SDK, by Google flutter.dev.
   flutter:
@@ -103,8 +103,8 @@ dependencies:
 
 # Add dependency_overrides:
 dependency_overrides:
-  flex_seed_scheme: ## ^3.5.1
-    path: ../../flex_seed_scheme
+  flex_seed_scheme: 4.0.1
+  #  path: ../../flex_seed_scheme
 
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.
