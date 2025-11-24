@@ -248,8 +248,8 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       spacing: 2,
       runSpacing: 2,
       elevation: 0,
-      hasBorder: true,
-      borderRadius: 4,
+      hasBorder: false,
+      borderRadius: 2,
       wheelDiameter: 200,
       wheelWidth: 18,
       wheelHasBorder: false,
@@ -306,6 +306,24 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       showRecentColors: true,
     );
 
+    // Make a shape border that copies current Dialog theme border
+    // but inserts an outline with the current theme outlineVariant color.
+    ShapeBorder? shapeBorder = theme.dialogTheme.shape;
+    if (shapeBorder is RoundedRectangleBorder) {
+      shapeBorder = RoundedRectangleBorder(
+        borderRadius: shapeBorder.borderRadius,
+        side: BorderSide(color: theme.colorScheme.outlineVariant, width: 1),
+      );
+    } else {
+      // If border was null, match Dialog default, but with border side,
+      shapeBorder = RoundedRectangleBorder(
+        borderRadius: theme.useMaterial3
+            ? const BorderRadius.all(Radius.circular(28))
+            : const BorderRadius.all(Radius.circular(4)),
+        side: BorderSide(color: theme.colorScheme.outlineVariant, width: 1),
+      );
+    }
+
     return InkWell(
       onHover: (bool value) {
         onHover?.call(value);
@@ -315,9 +333,17 @@ class ColorPickerInkWellDialog extends StatelessWidget {
               if (await colorPicker.showPickerDialog(
                 context,
                 insetPadding: const EdgeInsets.all(16),
-                barrierColor: Colors.black.withValues(alpha: 0.05),
+                // We want to see background color behind the dialog
+                // So we can see impact of color changes.
+                barrierColor: Colors.transparent,
+                // Use shape with border
+                shape: shapeBorder,
+                // and elevation
+                elevation: 10,
+                // and theme mode based shadow color, so we can see the dialog.
+                shadowColor: isLight ? Colors.black : Colors.grey.shade500,
                 constraints: const BoxConstraints(
-                  minHeight: 570,
+                  minHeight: 572,
                   minWidth: 450,
                   maxWidth: 450,
                 ),
