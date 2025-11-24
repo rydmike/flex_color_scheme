@@ -5,14 +5,15 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.4.0 (WIP)
 
-**November 21, 2025**
+**November 24, 2025**
 
-Requires at least Flutter 3.38.0, but prefer at least 3.38.1 stable.
+Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
 
 ### Package
 
 **CHORE**
-* Update lints to RydMike lint rules 2.5.0 and fix new linting issues. 
+* Update lints to RydMike lint rules 2.5.0 and fix new linting issues.
+* Bump to `flex_seed_scheme ^4.0.0`.
 * Internal: Refactored all component themes in `FlexSubThemes` to be in their own files, to improve maintainability and reduce the size of `flex_sub_themes.dart` file. This also make it easier for LLMs to work on the component themes, as they now have smaller files to process.
 
 **CHANGE**
@@ -42,21 +43,22 @@ Requires at least Flutter 3.38.0, but prefer at least 3.38.1 stable.
 
 **CHORE**
 
+
 **FIX**
 * Fixed deprecated Radio properties and used `RadioGroup` instead.
 
 **CHANGE**
 * Split the Tooltip and Progress Indicator panels into two separate panels.
+* Visual improvements to the color picker dialog in the Themes Playground.
 
 **NEW**
  
 * The **Slider panel** got a new switch to select between older M3 and newer current M3 slider styles. It uses the new `FlexSubThemesData.sliderYear2023` property to do so.
- 
 * The new **Progress Indicator panel** got theming properties for all supported new FCS properties.
 
 **TODOs**
 
-Todo items are picked from this list, all may not be done in this release.
+The todo items are picked from this list, all may not be done in this release.
 
 **CHORE**
 * Chore: Migrate to map-based WidgetState properties, for ThemeData equality and performance.
@@ -82,6 +84,9 @@ Todo items are picked from this list, all may not be done in this release.
 - Add MaterialBanner theme
 - Add BottomAppBarOpacity (maybe).
 - Add BottomSheet width constraint (Uses max 640 in M3 mode)
+
+
+
 
 ## 8.3.1
 
