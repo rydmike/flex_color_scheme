@@ -189,7 +189,7 @@ InputDecorationThemeData _inputDecorationTheme({
   /// Applies to both outline and underline mode.
   ///
   /// When set to true, the unfocused borders also uses the [baseSchemeColor]
-  /// as its border color, but with alpha [kEnabledBorderAlpha] (90%).
+  /// as its border color, but with alpha [kEnabledBorderOpacity] (65%).
   ///
   /// If set to false, the color uses the SDK default unselected border color,
   /// which is [ColorScheme.onSurface] with 38% opacity.
