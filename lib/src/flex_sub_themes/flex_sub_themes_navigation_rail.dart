@@ -63,7 +63,6 @@ NavigationRailThemeData _navigationRailTheme({
   /// Flutter M2 default is primary, M3 default is onSurface.
   final SchemeColor? selectedLabelSchemeColor,
 
-  // TODO(rydmike): Report spec bug issue and add link
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [NavigationRails]'s unselected label text color.
   ///
@@ -79,10 +78,10 @@ NavigationRailThemeData _navigationRailTheme({
   /// then this defaults to [SchemeColor.onSurfaceVariant].
   ///
   /// Flutter Material-2 default is onSurface with opacity 0.64,
-  /// In Flutter version 3.24 and earlier,
-  /// the Material-3 default is still also onSurface.
-  /// This is a spec BUG in Flutter's Material-3 defaults, it should be
-  /// onSurfaceVariant. See issue: <add new issue link here>
+  /// In Flutter version 3.38 and earlier, the Material-3 default is also
+  /// onSurface. This is a spec BUG in Flutter's Material-3 defaults, it should
+  /// be onSurfaceVariant based on M3 specification
+  /// https://m3.material.io/components/navigation-rail/specs
   final SchemeColor? unselectedLabelSchemeColor,
 
   // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
