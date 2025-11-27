@@ -35,6 +35,10 @@ Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
     - `backgroundSchemeColor` (SchemeColor)
     - `borderSchemeColor` (SchemeColor)
     - `borderWidth` (double)
+* To `FlexSubThemesData` added the properties:
+    - `cardBackgroundSchemeColor` (SchemeColor)
+    - `cardBorderSchemeColor` (SchemeColor)
+    - `cardBorderWidth` (double)    
 
 **CHANGE**
 * The enum `FlexSliderIndicatorType` got a new value `rounded`, to support selecting the newer M3 indicator style also in M2 and older M3 mode for Slider and RangeSlider.

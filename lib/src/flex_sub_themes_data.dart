@@ -323,6 +323,9 @@ class FlexSubThemesData with Diagnosticable {
     this.chipIconSize,
     this.chipPadding,
     //
+    this.cardBackgroundSchemeColor,
+    this.cardBorderSchemeColor,
+    this.cardBorderWidth,
     this.cardRadius,
     this.cardElevation,
     //
@@ -2407,6 +2410,49 @@ class FlexSubThemesData with Diagnosticable {
   /// Material mode and to EdgeInsets.symmetric(horizontal: 4) in
   /// Material2 mode.
   final EdgeInsetsGeometry? chipPadding;
+
+  /// Selects which color from the passed in [colorScheme] to use as the
+  /// background color of Cards.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: [ThemeData.cardColor]
+  /// - M3: Card (elevated): [ColorScheme.surfaceContainerLow]
+  /// - M3: Card.filled: [ColorScheme.surfaceContainerHighest]
+  /// - M3: Card.outlined: [ColorScheme.surface]
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  final SchemeColor? cardBackgroundSchemeColor;
+
+  /// Selects which color from the passed in [colorScheme] to use as the
+  /// border color for Cards.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: no border
+  /// - M3: Card (elevated): no border
+  /// - M3: Card.filled: no border
+  /// - M3: Card.outlined: [ColorScheme.outlineVariant]
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  final SchemeColor? cardBorderSchemeColor;
+
+  /// Defines the border width of the border on Cards.
+  ///
+  /// Only used if [cardBorderSchemeColor] is also defined.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: no border
+  /// - M3: Card (elevated): no border
+  /// - M3: Card.filled: no border
+  /// - M3: Card.outlined: 1.0
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  final double? cardBorderWidth;
 
   /// Border radius value for [Card].
   ///
@@ -4496,6 +4542,9 @@ class FlexSubThemesData with Diagnosticable {
     final double? chipIconSize,
     final EdgeInsetsGeometry? chipPadding,
     //
+    final SchemeColor? cardBackgroundSchemeColor,
+    final SchemeColor? cardBorderSchemeColor,
+    final double? cardBorderWidth,
     final double? cardRadius,
     final double? cardElevation,
     //
@@ -4966,6 +5015,11 @@ class FlexSubThemesData with Diagnosticable {
       chipIconSize: chipIconSize ?? this.chipIconSize,
       chipPadding: chipPadding ?? this.chipPadding,
       //
+      cardBackgroundSchemeColor:
+          cardBackgroundSchemeColor ?? this.cardBackgroundSchemeColor,
+      cardBorderSchemeColor:
+          cardBorderSchemeColor ?? this.cardBorderSchemeColor,
+      cardBorderWidth: cardBorderWidth ?? this.cardBorderWidth,
       cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
       //
@@ -5520,6 +5574,10 @@ class FlexSubThemesData with Diagnosticable {
         other.chipIconSize == chipIconSize &&
         other.chipPadding == chipPadding &&
         //
+        other.cardBackgroundSchemeColor == cardBackgroundSchemeColor &&
+        other.cardBorderSchemeColor == cardBorderSchemeColor &&
+        other.cardBorderWidth == cardBorderWidth &&
+        //
         other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
         //
@@ -5943,6 +6001,10 @@ class FlexSubThemesData with Diagnosticable {
         chipSecondaryFontSize,
         chipIconSize,
         chipPadding,
+        //
+        cardBackgroundSchemeColor,
+        cardBorderSchemeColor,
+        cardBorderWidth,
         //
         cardRadius,
         cardElevation,
@@ -6434,6 +6496,12 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(
         DiagnosticsProperty<EdgeInsetsGeometry>('chipPadding', chipPadding));
     //
+    properties.add(EnumProperty<SchemeColor>(
+        'cardBackgroundSchemeColor', cardBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'cardBorderSchemeColor', cardBorderSchemeColor));
+    properties.add(
+        DiagnosticsProperty<double>('cardBorderWidth', cardBorderWidth));
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
     //
