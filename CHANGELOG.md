@@ -30,6 +30,11 @@ Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
     - `progressIndicatorConstraints` (BoxConstraints)
     - `progressIndicatorCircularTrackPadding` (EdgeInsetsGeometry)
     - `progressIndicatorYear2023` (bool)
+* To `FlexSubThemes` static function `cardTheme` added the parameters:
+    - `colorScheme` (ColorScheme)
+    - `backgroundSchemeColor` (SchemeColor)
+    - `borderSchemeColor` (SchemeColor)
+    - `borderWidth` (double)
 
 **CHANGE**
 * The enum `FlexSliderIndicatorType` got a new value `rounded`, to support selecting the newer M3 indicator style also in M2 and older M3 mode for Slider and RangeSlider.

@@ -1787,10 +1787,27 @@ abstract final class FlexSubThemes {
   /// An opinionated [CardThemeData] for [Card] with custom
   /// corner radius and elevation.
   ///
-  /// Corner [radius] defaults to [kCardRadius] = 12 and [elevation]
-  /// defaults to Flutter SDK defaults if not defined.
-  ///
   /// The named parameters are:
+  ///
+  /// * [colorScheme]
+  /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+  ///
+  /// If null, any provided [SchemeColor] values will be ignored and
+  /// component theme color defaults will be used.
+  ///
+  /// * [backgroundSchemeColor]
+  /// Selects which color from the passed in [colorScheme] to use as the
+  /// background color of Cards.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: [ThemeData.cardColor]
+  /// - M3: Card (elevated): [ColorScheme.surfaceContainerLow]
+  /// - M3: Card.filled: [ColorScheme.surfaceContainerHighest]
+  /// - M3: Card.outlined: [ColorScheme.surface]
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
   ///
   /// * [radius]
   /// Corner radius
@@ -1799,10 +1816,47 @@ abstract final class FlexSubThemes {
   /// based on M3 Specification
   /// https://m3.material.io/components/cards/specs
   ///
+  /// * [borderSchemeColor]
+  /// Selects which color from the passed in [colorScheme] to use as the
+  /// border color for Cards.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: no border
+  /// - M3: Card (elevated): no border
+  /// - M3: Card.filled: no border
+  /// - M3: Card.outlined: [ColorScheme.outlineVariant]
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  ///
+  /// * [borderWidth]
+  /// Defines the border width of the border on Cards.
+  ///
+  /// Only used if [borderSchemeColor] is also defined.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: no border
+  /// - M3: Card (elevated): no border
+  /// - M3: Card.filled: no border
+  /// - M3: Card.outlined: 1.0
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  ///
   /// * [elevation]
   /// Card elevation.
   ///
-  /// If not defined, defaults to 1 via M2 and M3 defaults.
+  /// If not defined, defaults to:
+  /// - M2: 1.0
+  /// - M3: Card (elevated): 1.0
+  /// - M3: Card.filled: 0.0
+  /// - M3: Card.outlined: 0.0
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide an elevation, all Card variants will get same elevation.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
   ///
   /// * [shadowColor]
   /// Overrides the default value for [Card.shadowColor].
@@ -1837,16 +1891,73 @@ abstract final class FlexSubThemes {
   ///
   /// If undefined, defaults to true.
   static CardThemeData cardTheme({
+    /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+    ///
+    /// If null, any provided [SchemeColor] values will be ignored and
+    /// component theme color defaults will be used.
+    final ColorScheme? colorScheme,
+
+    /// Selects which color from the passed in [colorScheme] to use as the
+    /// background color of Cards.
+    ///
+    /// If not defined, defaults to:
+    /// - M2: [ThemeData.cardColor]
+    /// - M3: Card (elevated): [ColorScheme.surfaceContainerLow]
+    /// - M3: Card.filled: [ColorScheme.surfaceContainerHighest]
+    /// - M3: Card.outlined: [ColorScheme.surface]
+    ///
+    /// Warning: The Card variants cannot be themed separately in Flutter, if
+    /// you provide a color, all card variants will share the same color.
+    /// See issue: https://github.com/flutter/flutter/issues/153912
+    final SchemeColor? backgroundSchemeColor,
+
     /// Corner radius
     ///
     /// If not defined, defaults to [kCardRadius] 12dp,
-    /// based on M3 Specification
-    /// https://m3.material.io/components/cards/specs
+    /// based on M3 Specification, this is also the opinionated
+    /// default for M2 in this package.
     final double? radius,
+
+    /// Selects which color from the passed in [colorScheme] to use as the
+    /// border color for Cards.
+    ///
+    /// If not defined, defaults to:
+    /// - M2: no border
+    /// - M3: Card (elevated): no border
+    /// - M3: Card.filled: no border
+    /// - M3: Card.outlined: [ColorScheme.outlineVariant]
+    ///
+    /// Warning: The Card variants cannot be themed separately in Flutter, if
+    /// you provide a color, all card variants will share the same color.
+    /// See issue: https://github.com/flutter/flutter/issues/153912
+    final SchemeColor? borderSchemeColor,
+
+    /// Defines the border width of the border on Cards.
+    ///
+    /// Only used if [borderSchemeColor] is also defined.
+    ///
+    /// If not defined, defaults to:
+    /// - M2: no border
+    /// - M3: Card (elevated): no border
+    /// - M3: Card.filled: no border
+    /// - M3: Card.outlined: 1.0
+    ///
+    /// Warning: The Card variants cannot be themed separately in Flutter, if
+    /// you provide a color, all card variants will share the same color.
+    /// See issue: https://github.com/flutter/flutter/issues/153912
+    final double? borderWidth,
 
     /// Card elevation.
     ///
-    /// If not defined, defaults to 1 via M2 and M3 defaults.
+    /// If not defined, defaults to:
+    /// - M2: 1.0
+    /// - M3: Card (elevated): 1.0
+    /// - M3: Card.filled: 0.0
+    /// - M3: Card.outlined: 0.0
+    ///
+    /// Warning: The Card variants cannot be themed separately in Flutter, if
+    /// you provide an elevation, all Card variants will get same elevation.
+    /// See issue: https://github.com/flutter/flutter/issues/153912
     final double? elevation,
 
     /// Overrides the default value for [Card.shadowColor].
@@ -1883,7 +1994,11 @@ abstract final class FlexSubThemes {
     final bool? useMaterial3,
   }) =>
       _cardTheme(
+        colorScheme: colorScheme,
+        backgroundSchemeColor: backgroundSchemeColor,
         radius: radius,
+        borderSchemeColor: borderSchemeColor,
+        borderWidth: borderWidth,
         elevation: elevation,
         shadowColor: shadowColor,
         surfaceTintColor: surfaceTintColor,

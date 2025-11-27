@@ -7835,7 +7835,11 @@ class FlexColorScheme with Diagnosticable {
       // Card Theme.
       cardTheme: useSubThemes
           ? FlexSubThemes.cardTheme(
+              colorScheme: colorScheme,
+              // backgroundSchemeColor: subTheme.cardBackgroundSchemeColor,
               radius: subTheme.cardRadius ?? platformRadius,
+              // borderSchemeColor: subTheme.cardBorderSchemeColor,
+              // borderWidth: subTheme.cardBorderWidth,
               elevation: subTheme.cardElevation,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               useMaterial3: useMaterial3,
