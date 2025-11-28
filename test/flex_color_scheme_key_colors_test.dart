@@ -62,6 +62,8 @@ void main() {
         SeedColorScheme.fromSeeds(
           brightness: Brightness.light,
           primaryKey: m3BaseSeed,
+          // TODO(rydmike): Change to default/true when MCU 12 is minimum.
+          useExpressiveOnContainerColors: false,
         ),
         equals(ColorScheme.fromSeed(
           brightness: Brightness.light,
