@@ -3,8 +3,6 @@ import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-// ignore_for_file: deprecated_member_use_from_same_package, for tests.
-
 void main() {
   group('WITH: FlexSubThemes.cardTheme ', () {
     // -------------------------------------------------------------------------
@@ -79,8 +77,8 @@ void main() {
       );
     });
     test(
-        'Card FST6.5 border default width: GIVEN border scheme color and custom '
-        'radius EXPECT shape with default border width', () {
+        'Card FST6.5 border default width: GIVEN border scheme color and '
+        'custom radius EXPECT shape with default border width', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );

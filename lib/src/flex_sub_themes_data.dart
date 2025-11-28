@@ -6500,8 +6500,8 @@ class FlexSubThemesData with Diagnosticable {
         'cardBackgroundSchemeColor', cardBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'cardBorderSchemeColor', cardBorderSchemeColor));
-    properties.add(
-        DiagnosticsProperty<double>('cardBorderWidth', cardBorderWidth));
+    properties
+        .add(DiagnosticsProperty<double>('cardBorderWidth', cardBorderWidth));
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
     //

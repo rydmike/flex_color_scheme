@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'helpers/tint_alpha_factor.dart';
 
-// ignore_for_file: deprecated_member_use_from_same_package, for tests.
-
 void main() {
   group('WITH: FlexSubThemes.floatingActionButtonTheme ', () {
     // -------------------------------------------------------------------------
