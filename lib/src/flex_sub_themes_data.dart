@@ -2411,7 +2411,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Material2 mode.
   final EdgeInsetsGeometry? chipPadding;
 
-  /// Selects which color from the passed in [colorScheme] to use as the
+  /// Selects which color from the theme in [ColorScheme] to use as the
   /// background color of Cards.
   ///
   /// If not defined, defaults to:
@@ -2425,7 +2425,7 @@ class FlexSubThemesData with Diagnosticable {
   /// See issue: https://github.com/flutter/flutter/issues/153912
   final SchemeColor? cardBackgroundSchemeColor;
 
-  /// Selects which color from the passed in [colorScheme] to use as the
+  /// Selects which color from the theme [ColorScheme] to use as the
   /// border color for Cards.
   ///
   /// If not defined, defaults to:
