@@ -38,7 +38,7 @@ void main() {
   // Tests that the static sub theme methods create intended defined sub
   // ThemeData when matching ons, matching with FlexSubTheme defaults.
   //****************************************************************************
-  group('WITH: FlexSubTheme.appBarTheme ', () {
+  group('WITH: FlexSubThemes.appBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes appBarTheme tests
     // -------------------------------------------------------------------------
@@ -56,7 +56,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.bottomAppBarTheme ', () {
+  group('WITH: FlexSubThemes.bottomAppBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes bottomAppBarTheme tests
     // -------------------------------------------------------------------------
@@ -91,7 +91,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.bottomNavigationBar ', () {
+  group('WITH: FlexSubThemes.bottomNavigationBar ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomNavigationBar tests
     // -------------------------------------------------------------------------
@@ -340,7 +340,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.bottomSheetTheme ', () {
+  group('WITH: FlexSubThemes.bottomSheetTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomSheet tests
     // -------------------------------------------------------------------------
@@ -390,7 +390,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.buttonTheme ', () {
+  group('WITH: FlexSubThemes.buttonTheme ', () {
     // TODO(rydmike): Monitor Flutter SDK deprecation of ButtonThemeData.
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
@@ -533,7 +533,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.cardTheme ', () {
+  group('WITH: FlexSubThemes.cardTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Card tests
     // -------------------------------------------------------------------------
@@ -566,7 +566,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.checkboxTheme ', () {
+  group('WITH: FlexSubThemes.checkboxTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Checkbox tests
     // -------------------------------------------------------------------------
@@ -1448,7 +1448,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.chipTheme ', () {
+  group('WITH: FlexSubThemes.chipTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Chip tests
     // -------------------------------------------------------------------------
@@ -1946,7 +1946,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.datePickerTheme ', () {
+  group('WITH: FlexSubThemes.datePickerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes DatePicker tests
     // -------------------------------------------------------------------------
@@ -2298,7 +2298,7 @@ void main() {
     });
   });
 
-  group('WITH: FlexSubTheme.dialogTheme ', () {
+  group('WITH: FlexSubThemes.dialogTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Dialog tests
     // -------------------------------------------------------------------------
@@ -2432,7 +2432,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.drawerTheme ', () {
+  group('WITH: FlexSubThemes.drawerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes drawerTheme tests
     // -------------------------------------------------------------------------
@@ -2516,7 +2516,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.dropdownMenuTheme ', () {
+  group('WITH: FlexSubThemes.dropdownMenuTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes dropdownMenuTheme tests
     // -------------------------------------------------------------------------
@@ -2564,7 +2564,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.elevatedButtonTheme ', () {
+  group('WITH: FlexSubThemes.elevatedButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes ElevatedButton tests
     // -------------------------------------------------------------------------
@@ -3621,7 +3621,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.filledButtonTheme ', () {
+  group('WITH: FlexSubThemes.filledButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes FilledButton tests
     // -------------------------------------------------------------------------
@@ -4140,7 +4140,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.floatingActionButtonTheme ', () {
+  group('WITH: FlexSubThemes.floatingActionButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes FloatingActionButton tests
     // -------------------------------------------------------------------------
@@ -4332,7 +4332,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.iconButtonTheme ', () {
+  group('WITH: FlexSubThemes.iconButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes iconButtonTheme tests
     // -------------------------------------------------------------------------
@@ -6634,7 +6634,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.listTileTheme ', () {
+  group('WITH: FlexSubThemes.listTileTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes listTileTheme tests
     // -------------------------------------------------------------------------
@@ -6692,7 +6692,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.menuBarTheme ', () {
+  group('WITH: FlexSubThemes.menuBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuBarTheme tests
     // -------------------------------------------------------------------------
@@ -6753,7 +6753,7 @@ void main() {
       expect(menu.style!.shape?.resolve(<WidgetState>{}), equals(null));
     });
   });
-  group('WITH: FlexSubTheme.menuButtonTheme ', () {
+  group('WITH: FlexSubThemes.menuButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuButtonTheme tests
     // -------------------------------------------------------------------------
@@ -6989,7 +6989,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.menuTheme ', () {
+  group('WITH: FlexSubThemes.menuTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuTheme tests
     // -------------------------------------------------------------------------
@@ -7067,7 +7067,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.navigationBarTheme ', () {
+  group('WITH: FlexSubThemes.navigationBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationBar tests
     // -------------------------------------------------------------------------
@@ -7323,7 +7323,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.navigationDrawerTheme ', () {
+  group('WITH: FlexSubThemes.navigationDrawerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes navigationDrawerTheme tests
     // -------------------------------------------------------------------------
@@ -7402,7 +7402,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.navigationRailTheme ', () {
+  group('WITH: FlexSubThemes.navigationRailTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationRail tests
     // -------------------------------------------------------------------------
@@ -7696,7 +7696,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.outlinedButtonTheme ', () {
+  group('WITH: FlexSubThemes.outlinedButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes OutlinedButton tests
     // -------------------------------------------------------------------------
@@ -8373,7 +8373,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.popupMenuTheme ', () {
+  group('WITH: FlexSubThemes.popupMenuTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes PopupMenu tests
     // -------------------------------------------------------------------------
@@ -8454,7 +8454,7 @@ void main() {
     });
   });
 
-  group('WITH: FlexSubTheme.progressIndicatorTheme ', () {
+  group('WITH: FlexSubThemes.progressIndicatorTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes progressIndicatorTheme tests
     // -------------------------------------------------------------------------
@@ -8533,7 +8533,7 @@ void main() {
     });
   });
 
-  group('WITH: FlexSubTheme.radioTheme ', () {
+  group('WITH: FlexSubThemes.radioTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Radio tests
     // -------------------------------------------------------------------------
@@ -9072,7 +9072,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.searchBarTheme ', () {
+  group('WITH: FlexSubThemes.searchBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes searchBarTheme tests
     // -------------------------------------------------------------------------
@@ -9268,7 +9268,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.searchViewTheme ', () {
+  group('WITH: FlexSubThemes.searchViewTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes searchViewTheme tests
     // -------------------------------------------------------------------------
@@ -9327,7 +9327,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.segmentedButtonTheme ', () {
+  group('WITH: FlexSubThemes.segmentedButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes segmentedButtonTheme tests
     // -------------------------------------------------------------------------
@@ -9655,7 +9655,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.sliderTheme ', () {
+  group('WITH: FlexSubThemes.sliderTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Slider tests
     // -------------------------------------------------------------------------
@@ -9879,7 +9879,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.snackBarTheme ', () {
+  group('WITH: FlexSubThemes.snackBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes SnackBar tests
     // -------------------------------------------------------------------------
@@ -10046,7 +10046,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.switchTheme ', () {
+  group('WITH: FlexSubThemes.switchTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Switch tests
     // -------------------------------------------------------------------------
@@ -11153,7 +11153,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.tabBarTheme ', () {
+  group('WITH: FlexSubThemes.tabBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes tabBarTheme tests
     // -------------------------------------------------------------------------
@@ -11303,7 +11303,7 @@ void main() {
       expect(m.overlayColor?.resolve(<WidgetState>{}), equals(null));
     });
   });
-  group('WITH: FlexSubTheme.textButtonTheme ', () {
+  group('WITH: FlexSubThemes.textButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes TextButton tests
     // -------------------------------------------------------------------------
@@ -11846,7 +11846,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.textSelectionTheme ', () {
+  group('WITH: FlexSubThemes.textSelectionTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes textSelectionTheme tests
     // -------------------------------------------------------------------------
@@ -11907,7 +11907,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.timePickerTheme ', () {
+  group('WITH: FlexSubThemes.timePickerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
@@ -12219,7 +12219,7 @@ void main() {
     });
   });
 
-  group('WITH: FlexSubTheme.toggleButtonsTheme ', () {
+  group('WITH: FlexSubThemes.toggleButtonsTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes ToggleButtons tests
     // -------------------------------------------------------------------------
@@ -12398,7 +12398,7 @@ void main() {
       );
     });
   });
-  group('WITH: FlexSubTheme.tooltipTheme ', () {
+  group('WITH: FlexSubThemes.tooltipTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Tooltip tests
     // -------------------------------------------------------------------------
