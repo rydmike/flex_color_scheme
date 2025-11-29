@@ -137,13 +137,13 @@ The Themes Playground is the most comprehensive example, demonstrating all packa
 ## Important Notes for Development
 
 ### Lint Rules
-This project uses **RydMike lint rules v2.5.0** - an opinionated, comprehensive ruleset that:
+This project uses **RydMike lint rules v2.6.0** - an opinionated, comprehensive ruleset that:
 - Enables ALL available Dart/Flutter lint rules via `all_lint_rules.yaml`
 - Selectively disables rules that conflict or are not desired
 - Enforces strict mode: casts, inference, and raw types
 - Treats missing parameters/returns as errors (not warnings)
 
-When contributing, ensure your changes pass `dart analyze` without warnings.
+When contributing, ensure your changes pass `dart analyze` without error, warnings and hints.
 
 ### Testing Requirements
 - Write tests for all new features and bug fixes
