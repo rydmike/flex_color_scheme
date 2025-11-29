@@ -2387,6 +2387,12 @@ abstract final class Store {
   // We use NULL as default, on nullable settings.
   static const double? defaultCardBorderWidth = null;
 
+  // Key used to read and save the cardElevation value.
+  static const String keyCardElevation = 'cardElevation';
+  // Default value for the cardElevation, also used to reset settings.
+  // We use NULL as default, on nullable settings.
+  static const double? defaultCardElevation = null;
+
   // Key used to read and save the dialogBackgroundLightSchemeColor value.
   static const String keyDialogBackgroundLightSchemeColor =
       'dialogBackgroundLightSchemeColor';
@@ -3047,6 +3053,7 @@ abstract final class Store {
     keyCardBackgroundSchemeColor,
     keyCardBorderSchemeColor,
     keyCardBorderWidth,
+    keyCardElevation,
     keyDialogBackgroundLightSchemeColor,
     keyDialogBackgroundDarkSchemeColor,
     keyDatePickerHeaderBackgroundSchemeColor,

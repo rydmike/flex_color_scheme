@@ -57,7 +57,7 @@ Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
 * Split the **Tooltip** and **Progress Indicator** panel into two separate panels.
 * The new **Progress Indicator** panel got theming controls for all supported new `FlexSubThemesData` progress indicator properties listed above. 
 
-* The **Card** panel got theming controls for all supported new `FlexSubThemesData` card properties listed above.
+* The **Card** panel got theming controls for `FlexSubThemesData` card properties `cardBackgroundSchemeColor`, `cardBorderSchemeColor`, `cardBorderWidth` and `cardElevation`.
  
 **CHANGE**
 * Visual improvements to the color picker dialog in the Themes Playground.

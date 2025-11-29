@@ -1045,6 +1045,8 @@ class ThemeController with ChangeNotifier {
         Store.keyCardBorderSchemeColor, Store.defaultCardBorderSchemeColor);
     _cardBorderWidth = await _themeService.load(
         Store.keyCardBorderWidth, Store.defaultCardBorderWidth);
+    _cardElevation = await _themeService.load(
+        Store.keyCardElevation, Store.defaultCardElevation);
     //
     // Dialog SETTINGS.
     _dialogBackgroundLightSchemeColor = await _themeService.load(
@@ -1711,6 +1713,7 @@ class ThemeController with ChangeNotifier {
     setCardBackgroundSchemeColor(Store.defaultCardBackgroundSchemeColor, false);
     setCardBorderSchemeColor(Store.defaultCardBorderSchemeColor, false);
     setCardBorderWidth(Store.defaultCardBorderWidth, false);
+    setCardElevation(Store.defaultCardElevation, false);
     setCardBorderRadius(Store.defaultCardBorderRadius, false);
     //
     // Dialog SETTINGS.
@@ -7418,6 +7421,17 @@ class ThemeController with ChangeNotifier {
     _cardBorderWidth = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyCardBorderWidth, value));
+  }
+
+  late double? _cardElevation;
+
+  double? get cardElevation => _cardElevation;
+
+  void setCardElevation(double? value, [bool notify = true]) {
+    if (value == _cardElevation) return;
+    _cardElevation = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyCardElevation, value));
   }
 
   // Dialog SETTINGS.

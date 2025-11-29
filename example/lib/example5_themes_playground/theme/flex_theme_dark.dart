@@ -410,6 +410,7 @@ FlexColorScheme flexColorSchemeDark(ThemeController controller, Color source) {
             cardBackgroundSchemeColor: controller.cardBackgroundSchemeColor,
             cardBorderSchemeColor: controller.cardBorderSchemeColor,
             cardBorderWidth: controller.cardBorderWidth,
+            cardElevation: controller.cardElevation,
             // PopupMenuButton settings.
             popupMenuRadius: controller.popupMenuBorderRadius,
             popupMenuElevation: controller.popupMenuElevation,

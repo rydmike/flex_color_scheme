@@ -41,6 +41,11 @@ class CardPanel extends StatelessWidget {
             : controller.cardBorderRadius == null && effectiveRadius != null
                 ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
                 : '';
+    final String cardElevationDefaultLabel = controller.cardElevation == null
+        ? useMaterial3
+            ? 'Card 1/variants 0'
+            : '1'
+        : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +96,6 @@ class CardPanel extends StatelessWidget {
             'by Card variant: elevated uses surfaceContainerLow, filled uses '
             'surfaceContainerHighest, and outlined uses surface. In M2 mode, '
             'ThemeData.cardColor is used.\n'
-            '\n'
             'Warning: Card variants cannot be themed separately. If you '
             'provide a color, all M3 Card variants will share the same '
             'background color.',
@@ -108,7 +112,6 @@ class CardPanel extends StatelessWidget {
             'The border color for Cards. In M3 mode, only Card.outlined has '
             'a border by default (using outlineVariant). Other Card variants '
             'have no border. In M2 mode, Cards have no border by default.\n'
-            '\n'
             'Warning: Card variants cannot be themed separately. If you '
             'provide a border color, all M3 Card variants will have a border.',
           ),
@@ -134,10 +137,28 @@ class CardPanel extends StatelessWidget {
             'is also defined. In M3 mode, Card.outlined defaults to 1.0 dp, '
             'while other variants have no border. In M2 mode, Cards have no '
             'border.\n'
-            '\n'
             'Warning: Card variants cannot be themed separately. If you '
             'provide a border width, all M3 Card variants will have a border '
             'with the same width.',
+          ),
+        ),
+        SliderListTileReveal(
+          enabled: enableControl,
+          title: const Text('Elevation'),
+          value: controller.cardElevation,
+          onChanged: controller.setCardElevation,
+          min: 0,
+          max: 20,
+          divisions: 40,
+          valueDecimalPlaces: 1,
+          valueHeading: 'ELEV',
+          valueDefaultLabel: cardElevationDefaultLabel,
+          subtitleReveal: const Text(
+            'Defines the elevation for Cards. Card is the elevated type and '
+            'uses elevation 1.0, Card.filled and Card.outlined use '
+            '0.0.\n'
+            'Warning: If a value is provided it is applied to all Card '
+            'variants and their variant specific elevation defaults are lost.',
           ),
         ),
         const Padding(

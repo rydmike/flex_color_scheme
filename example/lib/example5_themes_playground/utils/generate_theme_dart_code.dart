@@ -1024,7 +1024,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '      listTileTitleAlignment: ${controller.listTileTitleAlignment},\n'
       : '';
   //
-  // Fab and chip, snack, card, and popup setup CODE
+  // Floating action button setup CODE
   //
   final String fabUseShape = controller.floatingActionButtonUseShape
       ? '      fabUseShape: ${controller.floatingActionButtonUseShape},\n'
@@ -1048,7 +1048,9 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '      fabForegroundSchemeColor: ${controller.floatingActionButtonForegroundSchemeColor},\n'
       : '';
-
+  //
+  // Snack bar setup CODE
+  //
   final String snackBarRadius = controller.snackBarBorderRadius != null
       ? '      snackBarRadius: ${controller.snackBarBorderRadius},\n'
       : '';
@@ -1064,6 +1066,9 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '      snackBarActionSchemeColor: ${controller.snackBarActionSchemeColor},\n'
       : '';
+  //
+  // Chip setup CODE
+  //
   final String chipSchemeColor = controller.chipSchemeColor != null
       ? '      chipSchemeColor: ${controller.chipSchemeColor},\n'
       : '';
@@ -1105,6 +1110,9 @@ String generateThemeDartCode(ThemeController controller) {
   final String chipBorderRadius = controller.chipBorderRadius != null
       ? '      chipRadius: ${controller.chipBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  //
+  // Card setup CODE
+  //
   final String cardBorderRadius = controller.cardBorderRadius != null
       ? '      cardRadius: ${controller.cardBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1120,6 +1128,12 @@ String generateThemeDartCode(ThemeController controller) {
           controller.cardBorderSchemeColor != null
       ? '      cardBorderWidth: ${controller.cardBorderWidth!.toStringAsFixed(1)},\n'
       : '';
+  final String cardElevation = controller.cardElevation != null
+      ? '      cardElevation: ${controller.cardElevation!.toStringAsFixed(1)},\n'
+      : '';
+  //
+  // Popup menu setup CODE
+  //
   final String popupMenuBorderRadius = controller.popupMenuBorderRadius != null
       ? '      popupMenuRadius: ${controller.popupMenuBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1938,6 +1952,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$cardBackgroundSchemeColor'
           '$cardBorderSchemeColor'
           '$cardBorderWidth'
+          '$cardElevation'
           //
           '$popupMenuBorderRadius'
           '$popupMenuElevation'
@@ -2243,6 +2258,7 @@ String generateThemeDartCode(ThemeController controller) {
           '$cardBackgroundSchemeColor'
           '$cardBorderSchemeColor'
           '$cardBorderWidth'
+          '$cardElevation'
           //
           '$popupMenuBorderRadius'
           '$popupMenuElevation'

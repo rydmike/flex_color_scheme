@@ -2922,7 +2922,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Setting [progressIndicatorStrokeCap] to [StrokeCap.round] will result
   /// in a rounded end.
   /// Setting [progressIndicatorStrokeCap] to [StrokeCap.butt] with
-  /// alue == null will result in a slightly different indeterminate animation;
+  /// value == null will result in a slightly different indeterminate animation;
   /// the indicator completely disappears and reappears on its minimum value.
   /// Setting [progressIndicatorStrokeCap] to [StrokeCap.square] with
   /// value != null will result in a different display of value.
@@ -4542,10 +4542,10 @@ class FlexSubThemesData with Diagnosticable {
     final double? chipIconSize,
     final EdgeInsetsGeometry? chipPadding,
     //
+    final double? cardRadius,
     final SchemeColor? cardBackgroundSchemeColor,
     final SchemeColor? cardBorderSchemeColor,
     final double? cardBorderWidth,
-    final double? cardRadius,
     final double? cardElevation,
     //
     final double? popupMenuRadius,
@@ -5015,12 +5015,12 @@ class FlexSubThemesData with Diagnosticable {
       chipIconSize: chipIconSize ?? this.chipIconSize,
       chipPadding: chipPadding ?? this.chipPadding,
       //
+      cardRadius: cardRadius ?? this.cardRadius,
       cardBackgroundSchemeColor:
           cardBackgroundSchemeColor ?? this.cardBackgroundSchemeColor,
       cardBorderSchemeColor:
           cardBorderSchemeColor ?? this.cardBorderSchemeColor,
       cardBorderWidth: cardBorderWidth ?? this.cardBorderWidth,
-      cardRadius: cardRadius ?? this.cardRadius,
       cardElevation: cardElevation ?? this.cardElevation,
       //
       popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
@@ -5574,11 +5574,10 @@ class FlexSubThemesData with Diagnosticable {
         other.chipIconSize == chipIconSize &&
         other.chipPadding == chipPadding &&
         //
+        other.cardRadius == cardRadius &&
         other.cardBackgroundSchemeColor == cardBackgroundSchemeColor &&
         other.cardBorderSchemeColor == cardBorderSchemeColor &&
         other.cardBorderWidth == cardBorderWidth &&
-        //
-        other.cardRadius == cardRadius &&
         other.cardElevation == cardElevation &&
         //
         other.popupMenuRadius == popupMenuRadius &&
@@ -6002,11 +6001,10 @@ class FlexSubThemesData with Diagnosticable {
         chipIconSize,
         chipPadding,
         //
+        cardRadius,
         cardBackgroundSchemeColor,
         cardBorderSchemeColor,
         cardBorderWidth,
-        //
-        cardRadius,
         cardElevation,
         //
         popupMenuRadius,
@@ -6496,13 +6494,13 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(
         DiagnosticsProperty<EdgeInsetsGeometry>('chipPadding', chipPadding));
     //
+    properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(EnumProperty<SchemeColor>(
         'cardBackgroundSchemeColor', cardBackgroundSchemeColor));
     properties.add(EnumProperty<SchemeColor>(
         'cardBorderSchemeColor', cardBorderSchemeColor));
     properties
         .add(DiagnosticsProperty<double>('cardBorderWidth', cardBorderWidth));
-    properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
     //
     properties
