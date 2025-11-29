@@ -1108,6 +1108,18 @@ String generateThemeDartCode(ThemeController controller) {
   final String cardBorderRadius = controller.cardBorderRadius != null
       ? '      cardRadius: ${controller.cardBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String cardBackgroundSchemeColor = controller
+              .cardBackgroundSchemeColor !=
+          null
+      ? '      cardBackgroundSchemeColor: ${controller.cardBackgroundSchemeColor},\n'
+      : '';
+  final String cardBorderSchemeColor = controller.cardBorderSchemeColor != null
+      ? '      cardBorderSchemeColor: ${controller.cardBorderSchemeColor},\n'
+      : '';
+  final String cardBorderWidth = controller.cardBorderWidth != null &&
+          controller.cardBorderSchemeColor != null
+      ? '      cardBorderWidth: ${controller.cardBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
   final String popupMenuBorderRadius = controller.popupMenuBorderRadius != null
       ? '      popupMenuRadius: ${controller.popupMenuBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1923,6 +1935,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipPadding'
           //
           '$cardBorderRadius'
+          '$cardBackgroundSchemeColor'
+          '$cardBorderSchemeColor'
+          '$cardBorderWidth'
           //
           '$popupMenuBorderRadius'
           '$popupMenuElevation'
@@ -2225,6 +2240,9 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipPadding'
           //
           '$cardBorderRadius'
+          '$cardBackgroundSchemeColor'
+          '$cardBorderSchemeColor'
+          '$cardBorderWidth'
           //
           '$popupMenuBorderRadius'
           '$popupMenuElevation'

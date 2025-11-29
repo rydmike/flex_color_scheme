@@ -5,7 +5,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 8.4.0 (WIP)
 
-**November 24, 2025**
+**November 29, 2025**
 
 Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
 
@@ -57,6 +57,8 @@ Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
 * Split the **Tooltip** and **Progress Indicator** panel into two separate panels.
 * The new **Progress Indicator** panel got theming controls for all supported new `FlexSubThemesData` progress indicator properties listed above. 
 
+* The **Card** panel got theming controls for all supported new `FlexSubThemesData` card properties listed above.
+ 
 **CHANGE**
 * Visual improvements to the color picker dialog in the Themes Playground.
 

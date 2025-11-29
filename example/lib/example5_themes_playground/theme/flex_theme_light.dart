@@ -429,6 +429,9 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 : null,
             // Card settings.
             cardRadius: controller.cardBorderRadius,
+            cardBackgroundSchemeColor: controller.cardBackgroundSchemeColor,
+            cardBorderSchemeColor: controller.cardBorderSchemeColor,
+            cardBorderWidth: controller.cardBorderWidth,
             // PopupMenuButton settings.
             popupMenuRadius: controller.popupMenuBorderRadius,
             popupMenuElevation: controller.popupMenuElevation,

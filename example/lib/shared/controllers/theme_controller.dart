@@ -1038,6 +1038,13 @@ class ThemeController with ChangeNotifier {
     // Card SETTINGS.
     _cardBorderRadius = await _themeService.load(
         Store.keyCardBorderRadius, Store.defaultCardBorderRadius);
+    _cardBackgroundSchemeColor = await _themeService.load(
+        Store.keyCardBackgroundSchemeColor,
+        Store.defaultCardBackgroundSchemeColor);
+    _cardBorderSchemeColor = await _themeService.load(
+        Store.keyCardBorderSchemeColor, Store.defaultCardBorderSchemeColor);
+    _cardBorderWidth = await _themeService.load(
+        Store.keyCardBorderWidth, Store.defaultCardBorderWidth);
     //
     // Dialog SETTINGS.
     _dialogBackgroundLightSchemeColor = await _themeService.load(
@@ -1701,6 +1708,9 @@ class ThemeController with ChangeNotifier {
     setAlignedDropdown(Store.defaultAlignedDropdown, false);
     //
     // Card SETTINGS.
+    setCardBackgroundSchemeColor(Store.defaultCardBackgroundSchemeColor, false);
+    setCardBorderSchemeColor(Store.defaultCardBorderSchemeColor, false);
+    setCardBorderWidth(Store.defaultCardBorderWidth, false);
     setCardBorderRadius(Store.defaultCardBorderRadius, false);
     //
     // Dialog SETTINGS.
@@ -7375,6 +7385,39 @@ class ThemeController with ChangeNotifier {
     _cardBorderRadius = value;
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyCardBorderRadius, value));
+  }
+
+  late SchemeColor? _cardBackgroundSchemeColor;
+
+  SchemeColor? get cardBackgroundSchemeColor => _cardBackgroundSchemeColor;
+
+  void setCardBackgroundSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _cardBackgroundSchemeColor) return;
+    _cardBackgroundSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyCardBackgroundSchemeColor, value));
+  }
+
+  late SchemeColor? _cardBorderSchemeColor;
+
+  SchemeColor? get cardBorderSchemeColor => _cardBorderSchemeColor;
+
+  void setCardBorderSchemeColor(SchemeColor? value, [bool notify = true]) {
+    if (value == _cardBorderSchemeColor) return;
+    _cardBorderSchemeColor = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyCardBorderSchemeColor, value));
+  }
+
+  late double? _cardBorderWidth;
+
+  double? get cardBorderWidth => _cardBorderWidth;
+
+  void setCardBorderWidth(double? value, [bool notify = true]) {
+    if (value == _cardBorderWidth) return;
+    _cardBorderWidth = value;
+    if (notify) notifyListeners();
+    unawaited(_themeService.save(Store.keyCardBorderWidth, value));
   }
 
   // Dialog SETTINGS.

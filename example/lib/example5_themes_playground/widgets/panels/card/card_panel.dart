@@ -6,6 +6,7 @@ import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
 import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
 import '../../../theme/theme_values.dart';
+import '../../shared/color_scheme_popup_menu.dart';
 
 class CardPanel extends StatelessWidget {
   const CardPanel(this.controller, {super.key});
@@ -71,10 +72,77 @@ class CardPanel extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: cardRadiusDefaultLabel,
           valueDefaultDisabledLabel: useMaterial3 ? '12 dp' : '4 dp',
+          subtitleReveal: const Text(
+            'Warning: Card variants in M3 cannot be themed separately. If you '
+            'provide a radius, all Card variants will share the same radius '
+            'and the Card.outlined variant will loose its outline border, if '
+            'a radius is provided and it is not 12.\n',
+          ),
+        ),
+        ColorSchemePopupMenu(
+          enabled: enableControl,
+          title: const Text('Background color'),
+          defaultLabel:
+              useMaterial3 ? 'surfaceContainerLow' : 'ThemeData.cardColor',
+          value: controller.cardBackgroundSchemeColor,
+          onChanged: controller.setCardBackgroundSchemeColor,
+          subtitleReveal: const Text(
+            'The background color for Cards. In M3 mode, the default varies '
+            'by Card variant: elevated uses surfaceContainerLow, filled uses '
+            'surfaceContainerHighest, and outlined uses surface. In M2 mode, '
+            'ThemeData.cardColor is used.\n'
+            '\n'
+            'Warning: Card variants cannot be themed separately. If you '
+            'provide a color, all M3 Card variants will share the same '
+            'background color.',
+          ),
+        ),
+        ColorSchemePopupMenu(
+          enabled: enableControl,
+          title: const Text('Border color'),
+          defaultLabel:
+              useMaterial3 ? 'outlineVariant only Card.outlined' : 'none',
+          value: controller.cardBorderSchemeColor,
+          onChanged: controller.setCardBorderSchemeColor,
+          subtitleReveal: const Text(
+            'The border color for Cards. In M3 mode, only Card.outlined has '
+            'a border by default (using outlineVariant). Other Card variants '
+            'have no border. In M2 mode, Cards have no border by default.\n'
+            '\n'
+            'Warning: Card variants cannot be themed separately. If you '
+            'provide a border color, all M3 Card variants will have a border.',
+          ),
+        ),
+        SliderListTileReveal(
+          enabled: enableControl && controller.cardBorderSchemeColor != null,
+          title: const Text('Border width'),
+          value: controller.cardBorderWidth,
+          onChanged: controller.setCardBorderWidth,
+          min: 0,
+          max: 6,
+          divisions: 12,
+          valueDecimalPlaces: 1,
+          valueHeading: 'WIDTH',
+          valueUnitLabel: ' dp',
+          valueDefaultLabel: controller.cardBorderWidth == null
+              ? useMaterial3
+                  ? '1.0 only Card.outlined'
+                  : 'none'
+              : '',
+          subtitleReveal: const Text(
+            'Defines the border width for Cards. Only used if a border color '
+            'is also defined. In M3 mode, Card.outlined defaults to 1.0 dp, '
+            'while other variants have no border. In M2 mode, Cards have no '
+            'border.\n'
+            '\n'
+            'Warning: Card variants cannot be themed separately. If you '
+            'provide a border width, all M3 Card variants will have a border '
+            'with the same width.',
+          ),
         ),
         const Padding(
           padding: EdgeInsets.all(16),
-          child: CardTypesShowcase(showForcedOutlined: true),
+          child: CardTypesShowcase(showForcedOutlined: false),
         ),
         ListTileReveal(
           dense: true,
@@ -84,15 +152,15 @@ class CardPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'You cannot theme the Card variants separately. If '
+                  text: 'You cannot theme the M3 Card variants separately. If '
                       'you change the border radius from the default radius, '
                       'the outline will be removed from the themed '
-                      'Card.outlined.\n'
+                      'Card.outlined if radius is not 12.\n'
                       '\n'
-                      'Same applies if you theme the Card background color or '
-                      'elevation, the defined values will get used by all Card '
-                      'variants and you loose their different styles. '
-                      'See Flutter SDK ',
+                      'Same applies if you theme the Card background color, '
+                      'elevation, border4 color or border width, the defined '
+                      'values will get used by all Card variants and you loose '
+                      'their different styles. See Flutter SDK ',
                 ),
                 LinkTextSpan(
                   style: linkStyle,
@@ -101,13 +169,7 @@ class CardPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information.\n'
-                      '\n'
-                      'Due to this issue, if you theme the radius to anything '
-                      'else above than 12 in M3 mode, be aware that you loose '
-                      'the Card.outlined variant, it will not have a border. '
-                      'The Outlined Forced version above is putting the border '
-                      'back on widget level.\n',
+                  text: ' for more information.\n',
                 ),
               ],
             ),
