@@ -560,6 +560,7 @@ class FlexColorScheme with Diagnosticable {
     this.splashFactory,
     this.platform,
     this.typography,
+    this.scriptCategory = ScriptCategory.englishLike,
     this.applyElevationOverlayColor = true,
     this.cupertinoOverrideTheme,
     this.subThemesData,
@@ -1122,6 +1123,18 @@ class FlexColorScheme with Diagnosticable {
   /// [Typography.material2014] when not using M3. This is done for legacy
   /// compatibility reasons, you should use 2018 with M2.
   final Typography? typography;
+
+  /// Defines the localized [TextStyle] geometry for [ThemeData.textTheme].
+  ///
+  /// The [scriptCategory] defines the overall geometry of a [TextTheme] for
+  /// the [Typography.geometryThemeFor] method in terms of the
+  /// three language categories defined in https://material.io/go/design-typography.
+  ///
+  /// Generally speaking, font sizes for [ScriptCategory.tall] and
+  /// [ScriptCategory.dense] scripts - for text styles that are smaller than the
+  /// title style - are one unit larger than they are for
+  /// [ScriptCategory.englishLike] scripts.
+  final ScriptCategory scriptCategory;
 
   /// Apply a semi-transparent overlay color on Material surfaces to indicate
   /// elevation for dark themes.
@@ -6611,6 +6624,9 @@ class FlexColorScheme with Diagnosticable {
     }
 
     final Typography effectiveTypography = typography ?? defaultTypography();
+    final TextTheme textThemeGeometry =
+        effectiveTypography.geometryThemeFor(scriptCategory);
+
     // We need the text themes locally for the theming, so we must form them
     // fully using the same process that the ThemeData() factory uses.
     TextTheme defText =
@@ -6693,6 +6709,17 @@ class FlexColorScheme with Diagnosticable {
     // Equivalent text theme and color correct for primary TextTheme that will
     // always get correct contrast color to be used on primary color.
     defPrimaryText = defPrimaryText.merge(pPrimTextTheme);
+
+    // Lastly, in order to correctly customize text styles based on the default
+    // TextTheme text styles, we need to use the typography geometry. This fixes
+    // text disalignment issues in chip labels for example.
+    // This is equivalent to what Flutter does under the hood in
+    // Theme.of(context) which calls [ThemeData.localize].
+    // Specifically, merging the geometry can use important text style
+    // properties like [leadingDistribution] and [textBaseline] that affect text
+    // rendering.
+    defText = textThemeGeometry.merge(defText);
+    defPrimaryText = textThemeGeometry.merge(defPrimaryText);
 
     // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
     //  Keeping it around for a while in case we can bring it back later.
