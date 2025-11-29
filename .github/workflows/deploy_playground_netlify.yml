@@ -15,7 +15,7 @@
 name: Deploy_Playground_Netlify
 on:
   push:
-    branches: [master]
+    branches: [none]
     paths-ignore:
       - "**.md"
   pull_request:
@@ -23,7 +23,7 @@ on:
     paths-ignore:
       - "**.md"
   release:
-    branches: [master]
+    branches: [none]
     types: [published]
 
 jobs:
