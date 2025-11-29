@@ -2,10 +2,9 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 8.4.0
 
-## 8.4.0 (WIP)
-
-**November 29, 2025**
+**November 30, 2025**
 
 Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
 
