@@ -47,7 +47,7 @@ Requires at least Flutter 3.38.0, but prefer 3.38.1 or higher.
 * Update lints to RydMike lint rules 2.6.0 and fix new linting issues.
 * Internal: Bump `flex_seed_scheme` dependency to `^4.0.0`.
 * Internal: Refactored all component themes in `FlexSubThemes` to be in their own files, to improve maintainability and reduce the size of `flex_sub_themes.dart` file. This also make it easier for LLMs to work on the component themes, as they now have smaller files to process.
-* Improve `FlexSubTHemes` function and variable documentation. Add parameter docs to all component theme functions in the function header docs so they show up in API docs.
+* Improve `FlexSubThemes` function and variable documentation. Add parameter docs to all component theme functions in the function header docs so they show up in API docs.
 
 ### Themes Playground
 
