@@ -137,7 +137,7 @@ void main() {
           m1.toString(),
           //
           equalsIgnoringHashCodes(
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for this test.
               'FlexKeyColors#00000(useKeyColors: true, keyPrimary: null, keepPrimary: false, keepPrimaryContainer: false, keySecondary: null, useSecondary: false, keepSecondary: false, keepSecondaryContainer: false, keyTertiary: null, keyTertiary: false, keepTertiary: false, keepTertiaryContainer: false, keyError: null, keyError: false, keepError: false, keepErrorContainer: false, contrastLevel: 0.0, useExpressiveOnContainerColors: null, useLegacyMonochromeSeedBehavior: null)'));
     });
     test(

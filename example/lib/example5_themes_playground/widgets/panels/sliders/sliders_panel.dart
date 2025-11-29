@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/utils/link_text_span.dart';
+import '../../../../shared/widgets/universal/list_tile_expand.dart';
 import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
 import '../../../../shared/widgets/universal/showcase_material.dart';
@@ -26,7 +27,9 @@ class SlidersPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    // final bool useMaterial3 = theme.useMaterial3;
+    final bool useMaterial3 = theme.useMaterial3;
+    final bool use2023Style = controller.sliderYear2023 ?? true;
+
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!
         .copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
@@ -52,7 +55,25 @@ class SlidersPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const SizedBox(height: 8),
-
+        SwitchListTileReveal(
+          enabled: enableControl && useMaterial3,
+          title: const Text('Use legacy Material-3 style'),
+          subtitleReveal: const Text(
+              'The Material-3 specification for the Slider design changed in '
+              'December 2023. The old style is ON and used by default in '
+              'Flutter and FCS Material-3 to not break past themed style. '
+              'Turn OFF this setting to opt-in and enable the newer and '
+              'current Material-3 Slider style.\n'
+              '\n'
+              'There are plans to make the new style the default in a future '
+              'Flutter release and remove support for the older M3 style. When '
+              'that happens and if it is '
+              'possible, FCS will retain support for the older '
+              'M3 style via theming options.'),
+          value: use2023Style,
+          onChanged: controller.setSliderYear2023,
+        ),
+        const Divider(),
         ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
           return RowOrColumn(
             firstWidget: ColorSchemePopupMenu(
@@ -64,7 +85,7 @@ class SlidersPanel extends StatelessWidget {
               onChanged: controller.setSliderBaseSchemeColor,
             ),
             lastWidget: ColorSchemePopupMenu(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
               enabled: enableControl,
               title: const Text('Thumb color'),
               defaultLabel: labelThumbDefault,
@@ -114,6 +135,9 @@ class SlidersPanel extends StatelessWidget {
               title: const Text('Indicator type'),
               value: controller.sliderValueIndicatorType,
               onChanged: controller.setSliderValueIndicatorType,
+              defaultLabel: enableControl && useMaterial3 && !use2023Style
+                  ? 'Default (rounded)'
+                  : null,
             ),
             lastWidget: EnumPopupMenu<ShowValueIndicator>(
               contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
@@ -137,7 +161,7 @@ class SlidersPanel extends StatelessWidget {
           valueDecimalPlaces: 0,
           valueHeading: 'HEIGHT',
           valueUnitLabel: ' dp',
-          valueDefaultLabel: '4 dp',
+          valueDefaultLabel: useMaterial3 && !use2023Style ? '16 dp' : '4 dp',
         ),
         const Divider(),
         const ListTile(title: Text('Slider')),
@@ -165,28 +189,33 @@ class SlidersPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. The Slider does also not in Flutter 3.24 and '
-                      'earlier versions follow the correct Material-3 '
-                      'design. This is being worked on and a version that '
-                      'supports it is expected in a coming Flutter update.\n',
+                  text: '.\n',
                 ),
               ],
             ),
           ),
         ),
         const Divider(),
-        const ListTile(title: Text('Slider.adaptive')),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: SliderAdaptiveShowcase(),
-        ),
-        TestAdaptiveResponse(controller),
-        const Divider(),
         const ListTileReveal(title: Text('RangeSlider')),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: RangeSliderShowcase(),
         ),
+        const Divider(),
+        ListTileExpand(
+          title: const Text('Slider.adaptive'),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Column(
+              children: <Widget>[
+                const SliderAdaptiveShowcase(),
+                TestAdaptiveResponse(controller),
+              ],
+            ),
+          ),
+        ),
+
+        const Divider(),
         ListTileReveal(
           title: const Text('Known issues'),
           dense: true,
@@ -196,18 +225,18 @@ class SlidersPanel extends StatelessWidget {
                 TextSpan(
                   style: spanTextStyle,
                   text: 'The RangeSlider should behave and look like Slider '
-                      'in Material-3 mode. This design is not yet available in '
-                      'Flutter 3.24 and earlier. It can also not use the same '
-                      'indicator classes as Slider. FCS applies existing drop '
-                      'style as a better match with M3 than the rectangle in '
-                      'M3 mode as default.\n'
+                      'in Material-3 mode in the older M3 style as well. This '
+                      'design is not available in Flutter 3.38 and earlier. '
+                      'It can also not use the same indicator classes as '
+                      'Slider. FCS applies the paddle drop style as a better '
+                      'match with the older M3 than the rectangle in '
+                      'M3 mode as default when older M3 style is used.\n'
                       '\n'
-                      'The Sliders theming in FlexColorScheme and the '
-                      'Playground do not yet support the revised and newer '
-                      'Material-3 designs. This will be added in a coming '
-                      'update.\n'
+                      'When using the newer Material-3 Slider style, that '
+                      'was introduced in December 2023, the RangeSlider gets '
+                      'the correct updated Material-3 design\n'
                       '\n'
-                      'RangeSlider also behaves differently from Slider when '
+                      'RangeSlider behaves a bit differently from Slider when '
                       'looking at things like hover and focus responses. It '
                       'also lacks any kind of keyboard usage support. '
                       'You can find a collection of issues related to the '

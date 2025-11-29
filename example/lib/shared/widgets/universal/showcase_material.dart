@@ -1142,93 +1142,97 @@ class _RadioShowcaseState extends State<RadioShowcase> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 8,
-            runSpacing: 8,
-            children: <Widget>[
-              const SizedBox(width: _width, child: Text('Enabled')),
-              Radio<bool>(
-                value: true,
-                groupValue: groupValue,
-                onChanged: (bool? value) {
-                  setState(() {
-                    groupValue = value;
-                  });
-                },
-              ),
-              Radio<bool>(
-                value: false,
-                groupValue: groupValue,
-                onChanged: (bool? value) {
-                  setState(() {
-                    groupValue = value;
-                  });
-                },
-              ),
-            ],
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                SizedBox(width: _width, child: Text('Enabled')),
+                Radio<bool?>(
+                  value: true,
+                ),
+                Radio<bool?>(
+                  value: false,
+                ),
+              ],
+            ),
           ),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 8,
-            runSpacing: 8,
-            children: <Widget>[
-              const SizedBox(width: _width, child: Text('Disabled')),
-              Radio<bool>(
-                value: true,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
-              Radio<bool>(
-                value: false,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
-            ],
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                SizedBox(width: _width, child: Text('Disabled')),
+                Radio<bool?>(
+                  value: true,
+                  enabled: false,
+                ),
+                Radio<bool?>(
+                  value: false,
+                  enabled: false,
+                ),
+              ],
+            ),
           ),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 8,
-            runSpacing: 8,
-            children: <Widget>[
-              const SizedBox(width: _width, child: Text('Adaptive')),
-              Radio<bool>.adaptive(
-                value: true,
-                groupValue: groupValue,
-                onChanged: (bool? value) {
-                  setState(() {
-                    groupValue = value;
-                  });
-                },
-              ),
-              Radio<bool>.adaptive(
-                value: false,
-                groupValue: groupValue,
-                onChanged: (bool? value) {
-                  setState(() {
-                    groupValue = value;
-                  });
-                },
-              ),
-            ],
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                SizedBox(width: _width, child: Text('Adaptive')),
+                Radio<bool?>.adaptive(
+                  value: true,
+                ),
+                Radio<bool?>.adaptive(
+                  value: false,
+                ),
+              ],
+            ),
           ),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 8,
-            runSpacing: 8,
-            children: <Widget>[
-              const SizedBox(width: _width, child: Text('Disabled')),
-              Radio<bool>.adaptive(
-                value: true,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
-              Radio<bool>.adaptive(
-                value: false,
-                groupValue: groupValue,
-                onChanged: null,
-              ),
-            ],
+          RadioGroup<bool?>(
+            groupValue: groupValue,
+            onChanged: (bool? value) {
+              setState(() {
+                groupValue = value;
+              });
+            },
+            child: const Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 8,
+              children: <Widget>[
+                SizedBox(width: _width, child: Text('Disabled')),
+                Radio<bool?>.adaptive(
+                  value: true,
+                  enabled: false,
+                ),
+                Radio<bool?>.adaptive(
+                  value: false,
+                  enabled: false,
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -2208,17 +2212,26 @@ class ProgressIndicatorShowcase extends StatefulWidget {
 
 class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
   bool playProgressIndicator = false;
+  late double sliderProgress;
+
+  @override
+  void initState() {
+    super.initState();
+    sliderProgress = 0.75;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final double? progressValue = playProgressIndicator ? null : 0.75;
+    final double? progressValue = playProgressIndicator ? null : sliderProgress;
 
     return RepaintBoundary(
       child: Column(
-        spacing: 8,
+        spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             children: <Widget>[
+              const Text('Animate'),
               IconButton(
                 isSelected: playProgressIndicator,
                 selectedIcon: const Icon(Icons.pause),
@@ -2229,39 +2242,27 @@ class _ProgressIndicatorShowcaseState extends State<ProgressIndicatorShowcase> {
                   });
                 },
               ),
-              if (playProgressIndicator)
-                const Text('Pause')
-              else
-                const Text('Play'),
-            ],
-          ),
-          const Text('Material'),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 16,
-            runSpacing: 16,
-            children: <Widget>[
-              SizedBox.square(
-                dimension: 40,
-                child: CircularProgressIndicator(
-                  value: progressValue,
-                ),
-              ),
-              SizedBox(
-                width: 200,
-                child: LinearProgressIndicator(
-                  value: progressValue,
-                ),
+              const Text('Value'),
+              Slider(
+                min: 0,
+                max: 1,
+                value: sliderProgress,
+                onChanged: playProgressIndicator
+                    ? null
+                    : (double value) {
+                        setState(() {
+                          sliderProgress = value;
+                        });
+                      },
               ),
             ],
           ),
-          const Text('Adaptive'),
-          SizedBox.square(
-            dimension: 40,
-            child: CircularProgressIndicator.adaptive(
-              value: progressValue,
-            ),
-          ),
+          const Text('Material linear'),
+          LinearProgressIndicator(value: progressValue),
+          const Text('Material circular'),
+          CircularProgressIndicator(value: progressValue),
+          const Text('Platform adaptive'),
+          CircularProgressIndicator.adaptive(value: progressValue),
         ],
       ),
     );
@@ -4673,70 +4674,53 @@ class RadioListTileShowcase extends StatefulWidget {
 }
 
 class _RadioListTileShowcaseState extends State<RadioListTileShowcase> {
-  int value = 2;
+  int? value = 2;
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
-      child: Column(
-        children: <Widget>[
-          RadioListTile<int>(
-            secondary: const Icon(Icons.info),
-            title: const Text('RadioListTile'),
-            subtitle: value == 1
-                ? const Text('The radio option is selected')
-                : const Text('The radio option is unselected'),
-            value: 1,
-            groupValue: value,
-            onChanged: (int? val) {
-              if (val != null) {
-                setState(() {
-                  value = val;
-                });
-              }
-            },
-          ),
-          RadioListTile<int>(
-            secondary: const Icon(Icons.info),
-            title: const Text('RadioListTile'),
-            subtitle: value == 2
-                ? const Text('The radio option is selected')
-                : const Text('The radio option is unselected'),
-            value: 2,
-            groupValue: value,
-            onChanged: (int? val) {
-              if (val != null) {
-                setState(() {
-                  value = val;
-                });
-              }
-            },
-          ),
-          RadioListTile<int>(
-            secondary: const Icon(Icons.info),
-            title: const Text('RadioListTile'),
-            subtitle: value == 3
-                ? const Text('The radio option and list tile is selected')
-                : const Text('The radio option is unselected'),
-            value: 3,
-            groupValue: value,
-            selected: value == 3,
-            onChanged: (int? val) {
-              if (val != null) {
-                setState(() {
-                  value = val;
-                });
-              }
-            },
-          ),
-          RadioListTile<int>(
-            secondary: const Icon(Icons.info),
-            title: const Text('RadioListTile disabled'),
-            subtitle: const Text('The radio option is unselected and disabled'),
-            value: 4,
-            groupValue: value,
-            onChanged: null,
-          ),
-        ],
+      child: RadioGroup<int?>(
+        groupValue: value,
+        onChanged: (int? selectedValue) {
+          setState(() {
+            value = selectedValue;
+          });
+        },
+        child: Column(
+          children: <Widget>[
+            RadioListTile<int?>(
+              secondary: const Icon(Icons.info),
+              title: const Text('RadioListTile'),
+              subtitle: value == 1
+                  ? const Text('The radio option is selected')
+                  : const Text('The radio option is unselected'),
+              value: 1,
+            ),
+            RadioListTile<int?>(
+              secondary: const Icon(Icons.info),
+              title: const Text('RadioListTile'),
+              subtitle: value == 2
+                  ? const Text('The radio option is selected')
+                  : const Text('The radio option is unselected'),
+              value: 2,
+            ),
+            RadioListTile<int?>(
+              secondary: const Icon(Icons.info),
+              title: const Text('RadioListTile'),
+              subtitle: value == 3
+                  ? const Text('The radio option and list tile is selected')
+                  : const Text('The radio option is unselected'),
+              value: 3,
+              selected: value == 3,
+            ),
+            const RadioListTile<int?>(
+              secondary: Icon(Icons.info),
+              title: Text('RadioListTile disabled'),
+              subtitle: Text('The radio option is unselected and disabled'),
+              value: 4,
+              enabled: false,
+            ),
+          ],
+        ),
       ),
     );
   }

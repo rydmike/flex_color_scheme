@@ -358,7 +358,7 @@ class ColorBlendsPanel extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    // ignore: lines_longer_than_80_chars
+                    // ignore: lines_longer_than_80_chars, string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelLight : ""}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
@@ -416,7 +416,7 @@ class ColorBlendsPanel extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    // ignore: lines_longer_than_80_chars
+                    // ignore: lines_longer_than_80_chars, string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),

@@ -1,4 +1,3 @@
-// ignore_for_file: lines_longer_than_80_chars
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +7,8 @@ import '../../shared/controllers/theme_controller.dart';
 import '../../shared/model/adaptive_response.dart';
 import '../../shared/utils/color_string.dart';
 import '../theme/theme_values.dart';
+
+// ignore_for_file: lines_longer_than_80_chars, used for code gen strings.
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
 /// code for the theme held by ThemeController.
@@ -708,6 +709,95 @@ String generateThemeDartCode(ThemeController controller) {
   final String sliderTrackHeight = controller.sliderTrackHeight == null
       ? ''
       : '      sliderTrackHeight: ${controller.sliderTrackHeight},\n';
+  final String sliderYear2023 =
+      controller.sliderYear2023 == null || (controller.sliderYear2023 ?? false)
+          ? ''
+          : '      sliderYear2023: ${controller.sliderYear2023},\n';
+  final String progressIndicatorYear2023 = controller
+                  .progressIndicatorYear2023 ==
+              null ||
+          (controller.progressIndicatorYear2023 ?? false)
+      ? ''
+      : '      progressIndicatorYear2023: ${controller.progressIndicatorYear2023},\n';
+  final String progressIndicatorBaseSchemeColor = controller
+              .progressIndicatorBaseSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorBaseSchemeColor: ${controller.progressIndicatorBaseSchemeColor},\n';
+  final String progressIndicatorLinearTrackSchemeColor = controller
+              .progressIndicatorLinearTrackSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorLinearTrackSchemeColor: ${controller.progressIndicatorLinearTrackSchemeColor},\n';
+  final String progressIndicatorCircularTrackSchemeColor = controller
+              .progressIndicatorCircularTrackSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorCircularTrackSchemeColor: ${controller.progressIndicatorCircularTrackSchemeColor},\n';
+  final String progressIndicatorRefreshBackgroundSchemeColor = controller
+              .progressIndicatorRefreshBackgroundSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorRefreshBackgroundSchemeColor: ${controller.progressIndicatorRefreshBackgroundSchemeColor},\n';
+  final String progressIndicatorStopIndicatorSchemeColor = controller
+              .progressIndicatorStopIndicatorSchemeColor ==
+          null
+      ? ''
+      : '      progressIndicatorStopIndicatorSchemeColor: ${controller.progressIndicatorStopIndicatorSchemeColor},\n';
+  final String progressIndicatorLinearMinHeight = controller
+              .progressIndicatorLinearMinHeight ==
+          null
+      ? ''
+      : '      progressIndicatorLinearMinHeight: ${controller.progressIndicatorLinearMinHeight},\n';
+  final String progressIndicatorLinearRadius = controller
+              .progressIndicatorLinearRadius ==
+          null
+      ? ''
+      : '      progressIndicatorLinearRadius: ${controller.progressIndicatorLinearRadius},\n';
+  final String progressIndicatorStopIndicatorRadius = controller
+              .progressIndicatorStopIndicatorRadius ==
+          null
+      ? ''
+      : '      progressIndicatorStopIndicatorRadius: ${controller.progressIndicatorStopIndicatorRadius},\n';
+  final String progressIndicatorStrokeWidth = controller
+              .progressIndicatorStrokeWidth ==
+          null
+      ? ''
+      : '      progressIndicatorStrokeWidth: ${controller.progressIndicatorStrokeWidth},\n';
+  final String progressIndicatorStrokeAlign = controller
+              .progressIndicatorStrokeAlign ==
+          null
+      ? ''
+      : '      progressIndicatorStrokeAlign: ${controller.progressIndicatorStrokeAlign?.toStringAsFixed(1) ?? '0'},\n';
+  final String progressIndicatorTrackGap = controller
+              .progressIndicatorTrackGap ==
+          null
+      ? ''
+      : '      progressIndicatorTrackGap: ${controller.progressIndicatorTrackGap?.toStringAsFixed(1) ?? '0'},\n';
+  final String progressIndicatorStrokeCap = controller
+              .progressIndicatorStrokeCap ==
+          null
+      ? ''
+      : '      progressIndicatorStrokeCap: ${controller.progressIndicatorStrokeCap},\n';
+  final String progressConstraint =
+      controller.progressIndicatorConstraints?.toStringAsFixed(0) ?? '';
+  final String progressIndicatorConstraints =
+      controller.progressIndicatorConstraints == null
+          ? ''
+          : '      progressIndicatorConstraints: BoxConstraints(minWidth: '
+              '$progressConstraint, minHeight: $progressConstraint),\n';
+  final String progressIndicatorCircularTrackPadding = controller
+                  .progressIndicatorCircularTrackPaddingStart !=
+              null ||
+          controller.progressIndicatorCircularTrackPaddingEnd != null ||
+          controller.progressIndicatorCircularTrackPaddingTop != null ||
+          controller.progressIndicatorCircularTrackPaddingBottom != null
+      ? '      progressIndicatorCircularTrackPadding: EdgeInsetsDirectional.fromSTEB('
+          '${controller.progressIndicatorCircularTrackPaddingStart?.toStringAsFixed(1) ?? '0'}, '
+          '${controller.progressIndicatorCircularTrackPaddingTop?.toStringAsFixed(1) ?? '0'}, '
+          '${controller.progressIndicatorCircularTrackPaddingEnd?.toStringAsFixed(1) ?? '0'}, '
+          '${controller.progressIndicatorCircularTrackPaddingBottom?.toStringAsFixed(1) ?? '0'}),\n'
+      : '';
   //
   // Input decorator setup CODE.
   //
@@ -934,7 +1024,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '      listTileTitleAlignment: ${controller.listTileTitleAlignment},\n'
       : '';
   //
-  // Fab and chip, snack, card, and popup setup CODE
+  // Floating action button setup CODE
   //
   final String fabUseShape = controller.floatingActionButtonUseShape
       ? '      fabUseShape: ${controller.floatingActionButtonUseShape},\n'
@@ -958,7 +1048,9 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '      fabForegroundSchemeColor: ${controller.floatingActionButtonForegroundSchemeColor},\n'
       : '';
-
+  //
+  // Snack bar setup CODE
+  //
   final String snackBarRadius = controller.snackBarBorderRadius != null
       ? '      snackBarRadius: ${controller.snackBarBorderRadius},\n'
       : '';
@@ -974,6 +1066,9 @@ String generateThemeDartCode(ThemeController controller) {
           null
       ? '      snackBarActionSchemeColor: ${controller.snackBarActionSchemeColor},\n'
       : '';
+  //
+  // Chip setup CODE
+  //
   final String chipSchemeColor = controller.chipSchemeColor != null
       ? '      chipSchemeColor: ${controller.chipSchemeColor},\n'
       : '';
@@ -1015,9 +1110,30 @@ String generateThemeDartCode(ThemeController controller) {
   final String chipBorderRadius = controller.chipBorderRadius != null
       ? '      chipRadius: ${controller.chipBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  //
+  // Card setup CODE
+  //
   final String cardBorderRadius = controller.cardBorderRadius != null
       ? '      cardRadius: ${controller.cardBorderRadius!.toStringAsFixed(1)},\n'
       : '';
+  final String cardBackgroundSchemeColor = controller
+              .cardBackgroundSchemeColor !=
+          null
+      ? '      cardBackgroundSchemeColor: ${controller.cardBackgroundSchemeColor},\n'
+      : '';
+  final String cardBorderSchemeColor = controller.cardBorderSchemeColor != null
+      ? '      cardBorderSchemeColor: ${controller.cardBorderSchemeColor},\n'
+      : '';
+  final String cardBorderWidth = controller.cardBorderWidth != null &&
+          controller.cardBorderSchemeColor != null
+      ? '      cardBorderWidth: ${controller.cardBorderWidth!.toStringAsFixed(1)},\n'
+      : '';
+  final String cardElevation = controller.cardElevation != null
+      ? '      cardElevation: ${controller.cardElevation!.toStringAsFixed(1)},\n'
+      : '';
+  //
+  // Popup menu setup CODE
+  //
   final String popupMenuBorderRadius = controller.popupMenuBorderRadius != null
       ? '      popupMenuRadius: ${controller.popupMenuBorderRadius!.toStringAsFixed(1)},\n'
       : '';
@@ -1766,6 +1882,22 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderValueIndicatorType'
           '$sliderShowValueIndicator'
           '$sliderTrackHeight'
+          '$sliderYear2023'
+          '$progressIndicatorYear2023'
+          '$progressIndicatorBaseSchemeColor'
+          '$progressIndicatorLinearTrackSchemeColor'
+          '$progressIndicatorCircularTrackSchemeColor'
+          '$progressIndicatorRefreshBackgroundSchemeColor'
+          '$progressIndicatorStopIndicatorSchemeColor'
+          '$progressIndicatorLinearMinHeight'
+          '$progressIndicatorLinearRadius'
+          '$progressIndicatorStopIndicatorRadius'
+          '$progressIndicatorStrokeWidth'
+          '$progressIndicatorStrokeAlign'
+          '$progressIndicatorTrackGap'
+          '$progressIndicatorStrokeCap'
+          '$progressIndicatorConstraints'
+          '$progressIndicatorCircularTrackPadding'
           //
           '$inputDecoratorSchemeColorLight'
           '$inputDecoratorIsFilled'
@@ -1817,6 +1949,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipPadding'
           //
           '$cardBorderRadius'
+          '$cardBackgroundSchemeColor'
+          '$cardBorderSchemeColor'
+          '$cardBorderWidth'
+          '$cardElevation'
           //
           '$popupMenuBorderRadius'
           '$popupMenuElevation'
@@ -2052,6 +2188,22 @@ String generateThemeDartCode(ThemeController controller) {
           '$sliderValueIndicatorType'
           '$sliderShowValueIndicator'
           '$sliderTrackHeight'
+          '$sliderYear2023'
+          '$progressIndicatorYear2023'
+          '$progressIndicatorBaseSchemeColor'
+          '$progressIndicatorLinearTrackSchemeColor'
+          '$progressIndicatorCircularTrackSchemeColor'
+          '$progressIndicatorRefreshBackgroundSchemeColor'
+          '$progressIndicatorStopIndicatorSchemeColor'
+          '$progressIndicatorLinearMinHeight'
+          '$progressIndicatorLinearRadius'
+          '$progressIndicatorStopIndicatorRadius'
+          '$progressIndicatorStrokeWidth'
+          '$progressIndicatorStrokeAlign'
+          '$progressIndicatorTrackGap'
+          '$progressIndicatorStrokeCap'
+          '$progressIndicatorConstraints'
+          '$progressIndicatorCircularTrackPadding'
           //
           '$inputDecoratorSchemeColorDark'
           '$inputDecoratorIsFilled'
@@ -2103,6 +2255,10 @@ String generateThemeDartCode(ThemeController controller) {
           '$chipPadding'
           //
           '$cardBorderRadius'
+          '$cardBackgroundSchemeColor'
+          '$cardBorderSchemeColor'
+          '$cardBorderWidth'
+          '$cardElevation'
           //
           '$popupMenuBorderRadius'
           '$popupMenuElevation'

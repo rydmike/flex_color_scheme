@@ -6,9 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/examples/responsive_scaffold.dart';
 
-// ignore_for_file: comment_references
-
-/// App static container class with functions and constants used in by
+/// A static container class with functions and constants used in by
 /// example applications.
 ///
 /// In a real app you probably prefer putting these into different static
@@ -22,7 +20,7 @@ abstract final class App {
   /// same one that is defined in each example as its app name. Handy as we only
   /// need to update in one place, where it belongs and no need to put it as
   /// a const somewhere and no need to pass it around via a title prop either.
-  /// Also used in the [showAppAboutDialog] About box as app name.
+  /// Also used in the `showAppAboutDialog` About box as app name.
   static String title(BuildContext context) =>
       (context as Element)
           .findAncestorWidgetOfExactType<MaterialApp>()
@@ -48,8 +46,8 @@ abstract final class App {
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '8';
-  static const String versionMinor = '3';
-  static const String versionPatch = '1';
+  static const String versionMinor = '4';
+  static const String versionPatch = '0';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
@@ -82,11 +80,10 @@ abstract final class App {
   /// Wider content gets growing side padding, kind of like on most
   /// web pages when they are used on super wide screen. This is typically used
   /// pages in the example apps that use content that is width constrained,
-  /// typically via the [PageBody] screen content wrapper widget.
+  /// typically via a screen content wrapper widget.
   static const double maxBodyWidth = 1000;
 
-  /// Breakpoint needed to show second panel in side-by-side view for the
-  /// [ThemeTopicPage] page view.
+  /// Breakpoint to show second panel in side-by-side view in the page view.
   ///
   /// This is available content layout width, not media size!
   ///
@@ -110,9 +107,9 @@ abstract final class App {
   /// and it is just to much dynamic changes happening, it does not nice.
   static const double desktopWidthBreakpoint = 1700;
 
-  /// A medium sized desktop, in panel view we switch to vertical
-  /// topic selector page [ThemeTwoTopicsPage], with topic selector on
-  /// left and right side, one for each theme topic panel.
+  /// A medium sized desktop, in the panel view we switch to two vertical
+  /// topic selector pages, with topic selector on left and right side,
+  /// one for each theme topic panel.
   ///
   /// This is a media size breakpoint.
   static const double mediumDesktopWidthBreakpoint = 1079;

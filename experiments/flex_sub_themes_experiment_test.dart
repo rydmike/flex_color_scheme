@@ -5,7 +5,201 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-// ignore_for_file: deprecated_member_use_from_same_package
+// ignore_for_file: lines_longer_than_80_chars, for tests
+
+Map<WidgetStatesConstraint, T> widgetStateMap<T>(
+  WidgetPropertyResolver<T> resolver,
+  List<Set<WidgetState>> prioritizedStates,
+) {
+  final Map<WidgetStatesConstraint, T> map = <WidgetStatesConstraint, T>{};
+  for (final Set<WidgetState> states in prioritizedStates) {
+    map[_constraintFor(states)] = resolver(states);
+  }
+  return map;
+}
+
+WidgetStatesConstraint _constraintFor(Set<WidgetState> states) {
+  if (states.isEmpty) {
+    return WidgetState.any;
+  }
+  final Iterator<WidgetState> iterator = states.iterator;
+  iterator.moveNext();
+  WidgetStatesConstraint constraint = iterator.current;
+  while (iterator.moveNext()) {
+    constraint &= iterator.current;
+  }
+  return constraint;
+}
+
+// const List<Set<WidgetState>> _inputDecorationLabelStates = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.error, WidgetState.focused},
+//   <WidgetState>{WidgetState.error, WidgetState.hovered},
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{WidgetState.hovered},
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{},
+// ];
+
+// const List<Set<WidgetState>> _inputDecorationIconStates = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{},
+// ];
+
+// const List<Set<WidgetState>> _inputDecorationSuffixIconStates =
+//     <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{},
+// ];
+
+// const List<Set<WidgetState>> _inputDecorationBorderStates = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.error, WidgetState.focused},
+//   <WidgetState>{WidgetState.error, WidgetState.hovered},
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{WidgetState.hovered},
+//   <WidgetState>{},
+// ];
+
+const List<Set<WidgetState>> _disabledDefaultStates = <Set<WidgetState>>[
+  <WidgetState>{WidgetState.disabled},
+  <WidgetState>{},
+];
+
+const List<Set<WidgetState>> _selectedDefaultStates = <Set<WidgetState>>[
+  <WidgetState>{WidgetState.selected},
+  <WidgetState>{},
+];
+
+const List<Set<WidgetState>> _outlinedSideStates = <Set<WidgetState>>[
+  <WidgetState>{WidgetState.disabled},
+  <WidgetState>{WidgetState.error},
+  <WidgetState>{WidgetState.pressed},
+  <WidgetState>{},
+];
+
+const List<Set<WidgetState>> _hoverFocusPressStates = <Set<WidgetState>>[
+  <WidgetState>{WidgetState.hovered},
+  <WidgetState>{WidgetState.focused},
+  <WidgetState>{WidgetState.pressed},
+  <WidgetState>{},
+];
+
+const List<Set<WidgetState>> _switchThumbStates = <Set<WidgetState>>[
+  <WidgetState>{WidgetState.disabled, WidgetState.selected},
+  <WidgetState>{WidgetState.disabled},
+  <WidgetState>{WidgetState.selected},
+  <WidgetState>{},
+];
+
+const List<Set<WidgetState>> _switchOverlayStates = <Set<WidgetState>>[
+  <WidgetState>{WidgetState.selected, WidgetState.pressed},
+  <WidgetState>{WidgetState.selected, WidgetState.hovered},
+  <WidgetState>{WidgetState.selected, WidgetState.focused},
+  <WidgetState>{WidgetState.selected},
+  <WidgetState>{WidgetState.pressed},
+  <WidgetState>{WidgetState.hovered},
+  <WidgetState>{WidgetState.focused},
+  <WidgetState>{},
+];
+
+const List<Set<WidgetState>> _switchTrackStates = <Set<WidgetState>>[
+  <WidgetState>{WidgetState.disabled},
+  <WidgetState>{WidgetState.selected},
+  <WidgetState>{},
+];
+
+const List<Set<WidgetState>> _disabledPressedHoveredDefaultStates =
+    <Set<WidgetState>>[
+  <WidgetState>{WidgetState.disabled},
+  <WidgetState>{WidgetState.pressed},
+  <WidgetState>{WidgetState.hovered},
+  <WidgetState>{},
+];
+
+// const List<Set<WidgetState>> _defaultWidgetStateOrder = <Set<WidgetState>>[
+//   <WidgetState>{WidgetState.disabled, WidgetState.selected},
+//   <WidgetState>{WidgetState.disabled, WidgetState.error},
+//   <WidgetState>{WidgetState.disabled},
+//   <WidgetState>{WidgetState.error, WidgetState.selected},
+//   <WidgetState>{WidgetState.error, WidgetState.pressed},
+//   <WidgetState>{WidgetState.error, WidgetState.hovered},
+//   <WidgetState>{WidgetState.error, WidgetState.focused},
+//   <WidgetState>{WidgetState.error},
+//   <WidgetState>{WidgetState.selected, WidgetState.pressed},
+//   <WidgetState>{WidgetState.selected, WidgetState.hovered},
+//   <WidgetState>{WidgetState.selected, WidgetState.focused},
+//   <WidgetState>{WidgetState.selected},
+//   <WidgetState>{WidgetState.pressed},
+//   <WidgetState>{WidgetState.hovered},
+//   <WidgetState>{WidgetState.focused},
+//   <WidgetState>{WidgetState.dragged},
+//   <WidgetState>{},
+// ];
+
+// WidgetStateProperty<T> widgetStatePropertyFromResolver<T>(
+//   WidgetPropertyResolver<T> resolver, [
+//   List<Set<WidgetState>>? prioritizedStates,
+// ]) {
+//   return WidgetStateProperty<T>.fromMap(
+//     widgetStateMap<T>(
+//       resolver,
+//       prioritizedStates ?? _defaultWidgetStateOrder,
+//     ),
+//   );
+// }
+//
+// WidgetStateBorderSide widgetStateBorderSideFromResolver(
+//   WidgetPropertyResolver<BorderSide> resolver, [
+//   List<Set<WidgetState>>? prioritizedStates,
+// ]) {
+//   return WidgetStateBorderSide.fromMap(
+//     widgetStateMap<BorderSide>(
+//       resolver,
+//       prioritizedStates ?? _defaultWidgetStateOrder,
+//     ),
+//   );
+// }
+//
+// WidgetStateInputBorder widgetStateInputBorderFromResolver(
+//   WidgetPropertyResolver<InputBorder> resolver, [
+//   List<Set<WidgetState>>? prioritizedStates,
+// ]) {
+//   return WidgetStateInputBorder.fromMap(
+//     widgetStateMap<InputBorder>(
+//       resolver,
+//       prioritizedStates ?? _defaultWidgetStateOrder,
+//     ),
+//   );
+// }
+
+void expectUnderlineBorderState(
+  InputBorder? border,
+  BorderRadius radius,
+  Color color,
+  double width,
+) {
+  final UnderlineInputBorder resolved = border! as UnderlineInputBorder;
+  expect(resolved.borderRadius, equals(radius));
+  expect(resolved.borderSide.color, equals(color));
+  expect(resolved.borderSide.width, equals(width));
+}
+
+// void expectOutlineBorderState(
+//   InputBorder? border,
+//   BorderRadius radius,
+//   Color color,
+//   double width,
+// ) {
+//   final OutlineInputBorder resolved = border! as OutlineInputBorder;
+//   expect(resolved.borderRadius, equals(radius));
+//   expect(resolved.borderSide.color, equals(color));
+//   expect(resolved.borderSide.width, equals(width));
+// }
 
 void main() {
   double tintAlphaFactor(
@@ -336,6 +530,7 @@ void main() {
       );
       expect(
         FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
+        // ignore: deprecated_member_use_from_same_package, test usage.
         equals(FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme)),
       );
     });
@@ -585,75 +780,53 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
-            side: WidgetStateBorderSide.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                if (states.contains(WidgetState.selected)) {
-                  return const BorderSide(
-                    width: 2.0,
-                    color: Colors.transparent,
-                  );
-                }
-                return BorderSide(
+            side: WidgetStateBorderSide.fromMap(
+              <WidgetStatesConstraint, BorderSide?>{
+                WidgetState.disabled & WidgetState.selected:
+                    const BorderSide(width: 2.0, color: Colors.transparent),
+                WidgetState.disabled: BorderSide(
                   width: 2.0,
                   color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-                );
-              }
-              if (states.contains(WidgetState.selected)) {
-                return const BorderSide(width: 0.0, color: Colors.transparent);
-              }
-              // This is M2 SDK default.
-              return const BorderSide(width: 2.0, color: Colors.black54);
-            }),
-            fillColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                if (states.contains(WidgetState.selected)) {
-                  return Colors.grey.shade400;
-                }
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.primary;
-              }
-              return Colors.transparent;
-            }),
-            checkColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade200;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.onPrimary;
-              }
-              return Colors.grey.shade50;
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.primary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+                ),
+                WidgetState.selected:
+                    const BorderSide(width: 2.0, color: Colors.transparent),
+                WidgetState.any:
+                    const BorderSide(width: 2.0, color: Colors.black54),
+              },
+            ),
+            fillColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.disabled & WidgetState.selected:
+                    Colors.grey.shade400,
+                WidgetState.disabled: Colors.transparent,
+                WidgetState.selected: colorScheme.primary,
+                WidgetState.any: Colors.transparent,
+              },
+            ),
+            checkColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.disabled: Colors.grey.shade200,
+                WidgetState.selected: colorScheme.onPrimary,
+                WidgetState.any: Colors.grey.shade50,
+              },
+            ),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.selected & WidgetState.pressed:
+                    colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered:
+                    colorScheme.primary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused:
+                    colorScheme.primary.withAlpha(kAlphaFocused),
+                WidgetState.pressed:
+                    colorScheme.primary.withAlpha(kAlphaPressed),
+                WidgetState.hovered:
+                    colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused:
+                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.any: Colors.transparent,
+              },
+            ),
           ).toString(),
         ),
       );
@@ -1151,82 +1324,63 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.dark,
       );
+      // CheckboxThemeData#00000(fillColor: WidgetStateMapper<Color>({(WidgetState.disabled & WidgetState.selected): Color(alpha: 1.0000, red: 0.2588, green: 0.2588, blue: 0.2588, colorSpace: ColorSpace.sRGB), WidgetState.disabled: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), WidgetState.selected: Color(alpha: 1.0000, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), WidgetState.any: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB)}), checkColor: WidgetStateMapper<Color>({WidgetState.disabled: Color(alpha: 1.0000, red: 0.1294, green: 0.1294, blue: 0.1294, colorSpace: ColorSpace.sRGB), WidgetState.selected: Color(alpha: 1.0000, red: 0.2118, green: 0.1529, blue: 0.3647, colorSpace: ColorSpace.sRGB), WidgetState.any: Color(alpha: 1.0000, red: 0.7412, green: 0.7412, blue: 0.7412, colorSpace: ColorSpace.sRGB)}), overlayColor: WidgetStateMapper<Color>({(WidgetState.selected & WidgetState.pressed): Color(alpha: 0.1216, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), (WidgetState.selected & WidgetState.hovered): Color(alpha: 0.0784, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), (WidgetState.selected & WidgetState.focused): Color(alpha: 0.1216, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), WidgetState.pressed: Color(alpha: 0.1216, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), WidgetState.hovered: Color(alpha: 0.0784, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), WidgetState.focused: Color(alpha: 0.1216, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), WidgetState.any: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB)}), side: WidgetStateMapper<BorderSide?>({(WidgetState.disabled & WidgetState.selected): BorderSide(color: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), width: 2.0), WidgetState.disabled: BorderSide(color: Color(alpha: 0.3804, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), width: 2.0), WidgetState.selected: BorderSide(color: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), width: 0.0), WidgetState.any: BorderSide(color: Color(alpha: 0.7020, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), width: 2.0)}))
+      // CheckboxThemeData#0f799(fillColor: WidgetStateMapper<Color>({(WidgetState.disabled & WidgetState.selected): Color(alpha: 1.0000, red: 0.2588, green: 0.2588, blue: 0.2588, colorSpace: ColorSpace.sRGB), WidgetState.disabled: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), WidgetState.selected: Color(alpha: 1.0000, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), WidgetState.any: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB)}), checkColor: WidgetStateMapper<Color>({WidgetState.disabled: Color(alpha: 1.0000, red: 0.1294, green: 0.1294, blue: 0.1294, colorSpace: ColorSpace.sRGB), WidgetState.selected: Color(alpha: 1.0000, red: 0.2118, green: 0.1529, blue: 0.3647, colorSpace: ColorSpace.sRGB), WidgetState.any: Color(alpha: 1.0000, red: 0.7412, green: 0.7412, blue: 0.7412, colorSpace: ColorSpace.sRGB)}), overlayColor: WidgetStateMapper<Color>({(WidgetState.selected & WidgetState.pressed): Color(alpha: 0.1216, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), (WidgetState.selected & WidgetState.hovered): Color(alpha: 0.0784, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), (WidgetState.selected & WidgetState.focused): Color(alpha: 0.1216, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), WidgetState.pressed: Color(alpha: 0.1216, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), WidgetState.hovered: Color(alpha: 0.0784, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), WidgetState.focused: Color(alpha: 0.1216, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), WidgetState.any: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB)}), side: WidgetStateMapper<BorderSide?>({(WidgetState.disabled & WidgetState.selected): BorderSide(color: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), width: 2.0), WidgetState.disabled: BorderSide(color: Color(alpha: 0.3804, red: 0.9020, green: 0.8784, blue: 0.9137, colorSpace: ColorSpace.sRGB), width: 2.0), WidgetState.selected: BorderSide(color: Color(alpha: 0.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), width: 2.0), WidgetState.any: BorderSide(color: Color(alpha: 1.0000, red: 0.8118, green: 0.7412, blue: 0.9961, colorSpace: ColorSpace.sRGB), width: 2.0)}))
       expect(
         FlexSubThemes.checkboxTheme(
           colorScheme: colorScheme,
           unselectedIsColored: true,
+          useMaterial3: false,
         ).toString(),
         equalsIgnoringHashCodes(
           CheckboxThemeData(
-            side: WidgetStateBorderSide.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                if (states.contains(WidgetState.selected)) {
-                  return const BorderSide(
-                    width: 2.0,
-                    color: Colors.transparent,
-                  );
-                }
-                return BorderSide(
+            side: WidgetStateBorderSide.fromMap(
+              <WidgetStatesConstraint, BorderSide?>{
+                WidgetState.disabled & WidgetState.selected:
+                    const BorderSide(width: 2.0, color: Colors.transparent),
+                WidgetState.disabled: BorderSide(
                   width: 2.0,
                   color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-                );
-              }
-              if (states.contains(WidgetState.selected)) {
-                return const BorderSide(width: 0.0, color: Colors.transparent);
-              }
-              // This is M2 SDK default.
-              return const BorderSide(width: 2.0, color: Colors.white70);
-            }),
-            fillColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                if (states.contains(WidgetState.selected)) {
-                  return Colors.grey.shade800;
-                }
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.primary;
-              }
-              return Colors.transparent;
-            }),
-            checkColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade600;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.onPrimary;
-              }
-              return Colors.grey.shade400;
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.primary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+                ),
+                WidgetState.selected:
+                    const BorderSide(width: 2.0, color: Colors.transparent),
+                WidgetState.any:
+                    BorderSide(width: 2.0, color: colorScheme.primary),
+              },
+            ),
+            fillColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.disabled & WidgetState.selected:
+                    Colors.grey.shade800,
+                WidgetState.disabled: Colors.transparent,
+                WidgetState.selected: colorScheme.primary,
+                WidgetState.any: Colors.transparent,
+              },
+            ),
+            checkColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.disabled: Colors.grey.shade900,
+                WidgetState.selected: colorScheme.onPrimary,
+                WidgetState.any: Colors.grey.shade400,
+              },
+            ),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.selected & WidgetState.pressed:
+                    colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered:
+                    colorScheme.primary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused:
+                    colorScheme.primary.withAlpha(kAlphaFocused),
+                WidgetState.pressed:
+                    colorScheme.primary.withAlpha(kAlphaPressed),
+                WidgetState.hovered:
+                    colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused:
+                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.any: Colors.transparent,
+              },
+            ),
           ).toString(),
         ),
       );
@@ -1402,73 +1556,53 @@ void main() {
         equalsIgnoringHashCodes(
           CheckboxThemeData(
             splashRadius: 30,
-            side: WidgetStateBorderSide.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                if (states.contains(WidgetState.selected)) {
-                  return const BorderSide(
-                    width: 2.0,
-                    color: Colors.transparent,
-                  );
-                }
-                return BorderSide(
+            side: WidgetStateBorderSide.fromMap(
+              <WidgetStatesConstraint, BorderSide?>{
+                WidgetState.disabled & WidgetState.selected:
+                    const BorderSide(width: 2.0, color: Colors.transparent),
+                WidgetState.disabled: BorderSide(
                   width: 2.0,
                   color: colorScheme.onSurface.withAlpha(kAlphaDisabled),
-                );
-              }
-              if (states.contains(WidgetState.selected)) {
-                return const BorderSide(width: 0.0, color: Colors.transparent);
-              }
-              // This is M2 SDK default.
-              return const BorderSide(width: 2.0, color: Colors.black54);
-            }),
-            fillColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade400;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.tertiary;
-              }
-              return Colors.transparent;
-            }),
-            checkColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade200;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.onTertiary;
-              }
-              return Colors.grey.shade50;
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.tertiary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+                ),
+                WidgetState.selected:
+                    const BorderSide(width: 2.0, color: Colors.transparent),
+                WidgetState.any:
+                    const BorderSide(width: 2.0, color: Colors.black54),
+              },
+            ),
+            fillColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.disabled & WidgetState.selected:
+                    Colors.grey.shade400,
+                WidgetState.disabled: Colors.transparent,
+                WidgetState.selected: colorScheme.tertiary,
+                WidgetState.any: Colors.transparent,
+              },
+            ),
+            checkColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.disabled: Colors.grey.shade200,
+                WidgetState.selected: colorScheme.onTertiary,
+                WidgetState.any: Colors.grey.shade50,
+              },
+            ),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.selected & WidgetState.pressed:
+                    colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered:
+                    colorScheme.tertiary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused:
+                    colorScheme.tertiary.withAlpha(kAlphaFocused),
+                WidgetState.pressed:
+                    colorScheme.tertiary.withAlpha(kAlphaPressed),
+                WidgetState.hovered:
+                    colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused:
+                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.any: Colors.transparent,
+              },
+            ),
           ).toString(),
         ),
       );
@@ -2190,35 +2324,25 @@ void main() {
                   width: 1,
                 ),
               ),
-              floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                // These styles are copied from M3 default, we are not
-                // going to test them again.
-                // coverage:ignore-start
-                if (states.contains(WidgetState.disabled)) {
-                  return TextStyle(
+              floatingLabelStyle: WidgetStateTextStyle.fromMap(
+                <WidgetStatesConstraint, TextStyle>{
+                  // coverage:ignore-start
+                  WidgetState.disabled: TextStyle(
                     color: colorScheme.onSurface.withValues(alpha: 0.38),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return TextStyle(color: colorScheme.onErrorContainer);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return TextStyle(color: colorScheme.error);
-                  }
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onSurfaceVariant);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.primary);
-                }
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-                // coverage:ignore-end
-              }),
+                  ),
+                  WidgetState.error & WidgetState.hovered:
+                      TextStyle(color: colorScheme.onErrorContainer),
+                  WidgetState.error & WidgetState.focused:
+                      TextStyle(color: colorScheme.error),
+                  WidgetState.error: TextStyle(color: colorScheme.error),
+                  WidgetState.hovered:
+                      TextStyle(color: colorScheme.onSurfaceVariant),
+                  WidgetState.focused: TextStyle(color: colorScheme.primary),
+                  WidgetState.any:
+                      TextStyle(color: colorScheme.onSurfaceVariant),
+                  // coverage:ignore-end
+                },
+              ),
             ),
           ),
         ),
@@ -2288,35 +2412,25 @@ void main() {
                   width: 1,
                 ),
               ),
-              floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                // These styles are copied from M3 default,
-                // we are not going to test them again.
-                // coverage:ignore-start
-                if (states.contains(WidgetState.disabled)) {
-                  return TextStyle(
+              floatingLabelStyle: WidgetStateTextStyle.fromMap(
+                <WidgetStatesConstraint, TextStyle>{
+                  // coverage:ignore-start
+                  WidgetState.disabled: TextStyle(
                     color: colorScheme.onSurface.withValues(alpha: 0.38),
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  if (states.contains(WidgetState.hovered)) {
-                    return TextStyle(color: colorScheme.onErrorContainer);
-                  }
-                  if (states.contains(WidgetState.focused)) {
-                    return TextStyle(color: colorScheme.error);
-                  }
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onSurfaceVariant);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.primary);
-                }
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-                // coverage:ignore-end
-              }),
+                  ),
+                  WidgetState.error & WidgetState.hovered:
+                      TextStyle(color: colorScheme.onErrorContainer),
+                  WidgetState.error & WidgetState.focused:
+                      TextStyle(color: colorScheme.error),
+                  WidgetState.error: TextStyle(color: colorScheme.error),
+                  WidgetState.hovered:
+                      TextStyle(color: colorScheme.onSurfaceVariant),
+                  WidgetState.focused: TextStyle(color: colorScheme.primary),
+                  WidgetState.any:
+                      TextStyle(color: colorScheme.onSurfaceVariant),
+                  // coverage:ignore-end
+                },
+              ),
             ),
           ),
         ),
@@ -2614,50 +2728,38 @@ void main() {
               ), //buttonShape,
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
+              foregroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onPrimary,
+                },
+              ),
+              iconColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onPrimary,
+                },
+              ),
+              backgroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.primary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onPrimary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onPrimary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onPrimary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
+                      .withAlpha(0x26),
+                  WidgetState.any: colorScheme.primary,
+                },
+              ),
+              overlayColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.hovered: colorScheme.onPrimary.withAlpha(0x0D),
+                  WidgetState.focused: colorScheme.onPrimary.withAlpha(0x26),
+                  WidgetState.pressed: colorScheme.onPrimary.withAlpha(0x33),
+                  WidgetState.any: Colors.transparent,
+                },
+              ),
             ),
           ).toString(),
         ),
@@ -2703,50 +2805,38 @@ void main() {
               ), //buttonShape,
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
+              foregroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.secondary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onSecondary,
+                },
+              ),
+              iconColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.secondary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onSecondary,
+                },
+              ),
+              backgroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.secondary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.secondary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onPrimary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onPrimary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onPrimary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
+                      .withAlpha(0x26),
+                  WidgetState.any: colorScheme.secondary,
+                },
+              ),
+              overlayColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.hovered: colorScheme.onPrimary.withAlpha(0x0D),
+                  WidgetState.focused: colorScheme.onPrimary.withAlpha(0x26),
+                  WidgetState.pressed: colorScheme.onPrimary.withAlpha(0x33),
+                  WidgetState.any: Colors.transparent,
+                },
+              ),
             ),
           ).toString(),
         ),
@@ -2774,50 +2864,38 @@ void main() {
               ), //buttonShape,
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
+              foregroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.secondary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onSecondary,
+                },
+              ),
+              iconColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.secondary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onSecondary,
+                },
+              ),
+              backgroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.primary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSecondary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSecondary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSecondary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
+                      .withAlpha(0x26),
+                  WidgetState.any: colorScheme.primary,
+                },
+              ),
+              overlayColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.hovered: colorScheme.onSecondary.withAlpha(0x0D),
+                  WidgetState.focused: colorScheme.onSecondary.withAlpha(0x26),
+                  WidgetState.pressed: colorScheme.onSecondary.withAlpha(0x33),
+                  WidgetState.any: Colors.transparent,
+                },
+              ),
             ),
           ).toString(),
         ),
@@ -3379,50 +3457,38 @@ void main() {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
+              foregroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onPrimary,
+                },
+              ),
+              iconColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.onPrimary,
+                },
+              ),
+              backgroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.primary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.primary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onPrimary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onPrimary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onPrimary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
+                      .withAlpha(0x26),
+                  WidgetState.any: colorScheme.primary,
+                },
+              ),
+              overlayColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.hovered: colorScheme.onPrimary.withAlpha(0x0D),
+                  WidgetState.focused: colorScheme.onPrimary.withAlpha(0x26),
+                  WidgetState.pressed: colorScheme.onPrimary.withAlpha(0x33),
+                  WidgetState.any: Colors.transparent,
+                },
+              ),
             ),
           ).toString(),
         ),
@@ -3455,50 +3521,38 @@ void main() {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               elevation: 1,
             ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.tertiary
+              foregroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.tertiary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.secondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.tertiary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.secondary,
+                },
+              ),
+              iconColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.tertiary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.secondary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.tertiary
+                      .withAlpha(0x5E),
+                  WidgetState.any: colorScheme.secondary,
+                },
+              ),
+              backgroundColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.disabled: colorScheme.tertiary
                       .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.tertiary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onTertiary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onTertiary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onTertiary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
+                      .withAlpha(0x26),
+                  WidgetState.any: colorScheme.tertiary,
+                },
+              ),
+              overlayColor: WidgetStateProperty<Color>.fromMap(
+                <WidgetStatesConstraint, Color>{
+                  WidgetState.hovered: colorScheme.onTertiary.withAlpha(0x0D),
+                  WidgetState.focused: colorScheme.onTertiary.withAlpha(0x26),
+                  WidgetState.pressed: colorScheme.onTertiary.withAlpha(0x33),
+                  WidgetState.any: Colors.transparent,
+                },
+              ),
             ),
           ).toString(),
         ),
@@ -3528,23 +3582,15 @@ void main() {
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                 const EdgeInsets.symmetric(horizontal: 8),
               ),
-              elevation: WidgetStateProperty.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return 0.0;
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return 4.0;
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return 2.0;
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return 2.0;
-                }
-                return 2.0;
-              }),
+              elevation: const WidgetStateProperty<double?>.fromMap(
+                <WidgetStatesConstraint, double?>{
+                  WidgetState.disabled: 0.0,
+                  WidgetState.hovered: 4.0,
+                  WidgetState.focused: 2.0,
+                  WidgetState.pressed: 2.0,
+                  WidgetState.any: 2.0,
+                },
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -3575,67 +3621,53 @@ void main() {
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
             style: ButtonStyle(
-              foregroundColor: WidgetStateProperty.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.tertiary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.tertiary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                return colorScheme.secondary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.tertiary.withValues(alpha: 0.12);
-                }
-                return null;
-              }),
+              foregroundColor: WidgetStateProperty<Color?>.fromMap(
+                <WidgetStatesConstraint, Color?>{
+                  WidgetState.disabled:
+                      colorScheme.onSurface.withValues(alpha: 0.38),
+                  WidgetState.any: colorScheme.tertiary,
+                },
+              ),
+              iconColor: WidgetStateProperty<Color?>.fromMap(
+                <WidgetStatesConstraint, Color?>{
+                  WidgetState.disabled:
+                      colorScheme.onSurface.withValues(alpha: 0.38),
+                  WidgetState.any: colorScheme.tertiary,
+                },
+              ),
+              backgroundColor: WidgetStateProperty<Color?>.fromMap(
+                <WidgetStatesConstraint, Color?>{
+                  WidgetState.disabled:
+                      colorScheme.onSurface.withValues(alpha: 0.12),
+                  WidgetState.any: colorScheme.secondary,
+                },
+              ),
+              overlayColor: WidgetStateProperty<Color?>.fromMap(
+                <WidgetStatesConstraint, Color?>{
+                  WidgetState.hovered:
+                      colorScheme.tertiary.withValues(alpha: 0.08),
+                  WidgetState.focused:
+                      colorScheme.tertiary.withValues(alpha: 0.12),
+                  WidgetState.pressed:
+                      colorScheme.tertiary.withValues(alpha: 0.12),
+                  WidgetState.any: null,
+                },
+              ),
               minimumSize: ButtonStyleButton.allOrNull<Size>(
                 const Size(55, 55),
               ),
               padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
                 const EdgeInsets.symmetric(horizontal: 9),
               ),
-              elevation: WidgetStateProperty.resolveWith((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return 0.0;
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return 4.0;
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return 2.0;
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return 2.0;
-                }
-                return 2.0;
-              }),
+              elevation: const WidgetStateProperty<double?>.fromMap(
+                <WidgetStatesConstraint, double?>{
+                  WidgetState.disabled: 0.0,
+                  WidgetState.hovered: 4.0,
+                  WidgetState.focused: 2.0,
+                  WidgetState.pressed: 2.0,
+                  WidgetState.any: 2.0,
+                },
+              ),
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -3699,30 +3731,27 @@ void main() {
                   borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ), // buttonShape,
-              backgroundColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.secondary;
-              }),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.onSecondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.onSecondary;
-              }),
+              backgroundColor: WidgetStateProperty<Color?>.fromMap(
+                <WidgetStatesConstraint, Color?>{
+                  WidgetState.disabled:
+                      colorScheme.onSurface.withValues(alpha: 0.38),
+                  WidgetState.any: colorScheme.secondary,
+                },
+              ),
+              foregroundColor: WidgetStateProperty<Color?>.fromMap(
+                <WidgetStatesConstraint, Color?>{
+                  WidgetState.disabled:
+                      colorScheme.onSurface.withValues(alpha: 0.38),
+                  WidgetState.any: colorScheme.onSecondary,
+                },
+              ),
+              iconColor: WidgetStateProperty<Color?>.fromMap(
+                <WidgetStatesConstraint, Color?>{
+                  WidgetState.disabled:
+                      colorScheme.onSurface.withValues(alpha: 0.38),
+                  WidgetState.any: colorScheme.onSecondary,
+                },
+              ),
               // No custom Overlay unless tinted version is used!
               // Temp design due to:
               // https://github.com/flutter/flutter/issues/118063
@@ -4483,232 +4512,91 @@ void main() {
         colorScheme.primary,
       );
 
-      const bool filled = false;
+      // const bool filled = false;
       const bool useM3 = false;
       const bool tintDisable = true;
       const bool tintInteract = true;
-      const double? radius = null;
-      const double unfocusedWidth = 1.0;
-      const double focusedWidth = 2.0;
-      final Color borderColor = colorScheme.primary;
-      final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.primary;
-      const double effectiveRadius = radius ?? kInputDecoratorRadius;
-      const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
-        topLeft: Radius.circular(effectiveRadius),
-        topRight: Radius.circular(effectiveRadius),
-      );
+      // const double? radius = null;
+      // const double unfocusedWidth = 1.0;
+      // const double focusedWidth = 2.0;
+      // final Color borderColor = colorScheme.primary;
+      // final Color enabledBorderColor = colorScheme.outline;
+      // final Color enabledHoveredBorderColor = colorScheme.primary;
+      // const double effectiveRadius = radius ?? kInputDecoratorRadius;
+      // const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
+      //   topLeft: Radius.circular(effectiveRadius),
+      //   topRight: Radius.circular(effectiveRadius),
+      // );
 
       // Get effective alpha value for background fill color.
-      const double effectiveAlpha = kFillColorLightOpacity;
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // const double effectiveAlpha = kFillColorLightOpacity;
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
 
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = WidgetStateColor.resolveWith((
-        Set<WidgetState> states,
-      ) {
-        if (states.contains(WidgetState.disabled)) {
-          return tintDisabledUltraLowColor;
-        }
-        return Color.alphaBlend(
-          colorScheme.primary.withValues(alpha: effectiveAlpha),
-          colorScheme.surface,
-        );
-      });
+      // final Color usedFillColor = Color.alphaBlend(
+      //   colorScheme.primary.withValues(alpha: effectiveAlpha),
+      //   colorScheme.surface,
+      // );
 
       // debugPrint('Test effectiveAlpha : $kFillColorAlphaLightFloat');
       // debugPrint('Test usedFillColor  : $usedFillColor');
       // debugPrint('Test primary        : ${colorScheme.primary}');
       // debugPrint('Test surface        : ${colorScheme.surface}');
 
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      // final Color usedHover =
+      //     ThemeData.estimateBrightnessForColor(usedFillColor) ==
+      //             Brightness.light
+      //         ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+      //         : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
+      final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        tintedDisabled: tintDisable,
+        tintedInteractions: tintInteract,
+        useMaterial3: useM3,
+      );
+      final WidgetStateTextStyle labelStyle =
+          theme.labelStyle! as WidgetStateTextStyle;
       expect(
-        FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          tintedDisabled: tintDisable, // true
-          tintedInteractions: tintInteract, // true
-          useMaterial3: useM3, // false
-        ).toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          InputDecorationThemeData(
-            labelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onErrorContainer);
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                  );
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            helperStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            hintStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.black45;
-            }),
-            prefixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.black45;
-            }),
-            suffixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                return colorScheme.error;
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.black45;
-            }),
-            filled: filled,
-            fillColor: usedFillColor,
-            hoverColor: usedHover,
-            border: WidgetStateInputBorder.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: focusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.focused)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: borderColor,
-                    width: focusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: enabledHoveredBorderColor,
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              return UnderlineInputBorder(
-                borderRadius: effectiveUnderlineBorder,
-                borderSide: BorderSide(
-                  color: enabledBorderColor,
-                  width: unfocusedWidth,
-                ),
-              );
-            }),
-          ).toString(minLevel: DiagnosticLevel.fine),
+        labelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{}),
+        equals(
+          TextStyle(
+            color: Colors.black.withValues(alpha: kTintHoverFloat),
+          ),
         ),
+      );
+
+      final WidgetStateTextStyle floatingLabelStyle =
+          theme.floatingLabelStyle! as WidgetStateTextStyle;
+      expect(
+        floatingLabelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+
+      final WidgetStateColor iconColor = theme.iconColor! as WidgetStateColor;
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{}),
+        equals(Colors.black45),
       );
     });
     test(
@@ -4758,180 +4646,202 @@ void main() {
         filled: isFilled,
         useMaterial3: useM3,
       );
+      expect(m.filled, isTrue);
+      expect(m.fillColor, equals(usedFillColor));
+      expect(m.hoverColor, equals(usedHover));
+
+      final WidgetStateTextStyle labelStyle =
+          m.labelStyle! as WidgetStateTextStyle;
       expect(
-        m.toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          InputDecorationThemeData(
-            labelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onErrorContainer);
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                  );
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            helperStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            hintStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurfaceVariant;
-              }
-              return colorScheme.onSurfaceVariant;
-            }),
-            prefixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurfaceVariant;
-              }
-              return colorScheme.onSurfaceVariant;
-            }),
-            suffixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                return colorScheme.error;
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurfaceVariant;
-              }
-              return colorScheme.onSurfaceVariant;
-            }),
-            filled: isFilled,
-            fillColor: usedFillColor,
-            hoverColor: usedHover,
-            border: WidgetStateInputBorder.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: focusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.focused)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: borderColor,
-                    width: focusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: enabledHoveredBorderColor,
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              return UnderlineInputBorder(
-                borderRadius: effectiveUnderlineBorder,
-                borderSide: BorderSide(
-                  color: enabledBorderColor,
-                  width: unfocusedWidth,
-                ),
-              );
-            }),
-          ).toString(minLevel: DiagnosticLevel.fine),
+        labelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.error}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+
+      final WidgetStateTextStyle floatingLabelStyle =
+          m.floatingLabelStyle! as WidgetStateTextStyle;
+      expect(
+        floatingLabelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        floatingLabelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.error}),
+        equals(
+          TextStyle(
+            color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
+          ),
         ),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+
+      final WidgetStateTextStyle helperStyle =
+          m.helperStyle! as WidgetStateTextStyle;
+      expect(
+        helperStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        helperStyle.resolve(<WidgetState>{}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+
+      final WidgetStateTextStyle hintStyle =
+          m.hintStyle! as WidgetStateTextStyle;
+      expect(
+        hintStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        hintStyle.resolve(<WidgetState>{}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+
+      final WidgetStateColor iconColor = m.iconColor! as WidgetStateColor;
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+
+      final WidgetStateColor prefixIconColor =
+          m.prefixIconColor! as WidgetStateColor;
+      expect(
+        prefixIconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        prefixIconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        prefixIconColor.resolve(<WidgetState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+
+      final WidgetStateColor suffixIconColor =
+          m.suffixIconColor! as WidgetStateColor;
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.error}),
+        equals(colorScheme.error),
+      );
+      expect(
+        suffixIconColor
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(colorScheme.error),
+      );
+      expect(
+        suffixIconColor
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(colorScheme.error),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{}),
+        equals(colorScheme.onSurfaceVariant),
+      );
+
+      final WidgetStateInputBorder border = m.border! as WidgetStateInputBorder;
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.disabled}),
+        effectiveUnderlineBorder,
+        tintDisabledColor.withAlpha(kAlphaLowDisabled),
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        effectiveUnderlineBorder,
+        colorScheme.error,
+        focusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        effectiveUnderlineBorder,
+        colorScheme.error,
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.error}),
+        effectiveUnderlineBorder,
+        colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.focused}),
+        effectiveUnderlineBorder,
+        borderColor,
+        focusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.hovered}),
+        effectiveUnderlineBorder,
+        enabledHoveredBorderColor,
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{}),
+        effectiveUnderlineBorder,
+        enabledBorderColor,
+        unfocusedWidth,
       );
     });
     test(
@@ -4966,208 +4876,231 @@ void main() {
       );
       const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = WidgetStateColor.resolveWith((
-        Set<WidgetState> states,
-      ) {
-        if (states.contains(WidgetState.disabled)) {
-          return tintDisabledUltraLowColor;
-        }
-        return Color.alphaBlend(
-          colorScheme.primary.withValues(alpha: effectiveAlpha),
-          colorScheme.surface,
-        );
-      });
+      final Color usedFillColor = Color.alphaBlend(
+        colorScheme.primary.withValues(alpha: effectiveAlpha),
+        colorScheme.surface,
+      );
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
               ? usedFillColor.darken(kInputDecoratorLightBgDarken)
               : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
+      final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        unfocusedBorderIsColored: unfocusedBorderIsColored,
+        tintedDisabled: tintDisable,
+        tintedInteractions: tintInteract,
+        useMaterial3: useM3,
+      );
+      final WidgetStateTextStyle labelStyle =
+          theme.labelStyle! as WidgetStateTextStyle;
       expect(
-        FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          unfocusedBorderIsColored: unfocusedBorderIsColored,
-          tintedDisabled: tintDisable,
-          tintedInteractions: tintInteract,
-          useMaterial3: useM3,
-        ).toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          InputDecorationThemeData(
-            labelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onErrorContainer);
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                  );
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            helperStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            hintStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.black45;
-            }),
-            prefixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.black45;
-            }),
-            suffixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                return colorScheme.error;
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.black45;
-            }),
-            filled: false,
-            fillColor: usedFillColor,
-            hoverColor: usedHover,
-            border: WidgetStateInputBorder.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: focusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.focused)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: borderColor,
-                    width: focusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: enabledHoveredBorderColor,
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              return UnderlineInputBorder(
-                borderRadius: effectiveUnderlineBorder,
-                borderSide: BorderSide(
-                  color: enabledBorderColor,
-                  width: unfocusedWidth,
-                ),
-              );
-            }),
-          ).toString(minLevel: DiagnosticLevel.fine),
+        labelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.error}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{}),
+        equals(
+          TextStyle(
+            color: Colors.black.withValues(alpha: kTintHoverFloat),
+          ),
         ),
+      );
+
+      final WidgetStateTextStyle floatingLabelStyle =
+          theme.floatingLabelStyle! as WidgetStateTextStyle;
+      expect(
+        floatingLabelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        floatingLabelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        equals(
+          TextStyle(
+            color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
+          ),
+        ),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.error}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.hovered}),
+        equals(TextStyle(color: colorScheme.onSurfaceVariant)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{}),
+        equals(
+          TextStyle(
+            color: Colors.black.withValues(alpha: kTintHoverFloat),
+          ),
+        ),
+      );
+
+      final WidgetStateTextStyle helperStyle =
+          theme.helperStyle! as WidgetStateTextStyle;
+      expect(
+        helperStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        helperStyle.resolve(<WidgetState>{}),
+        equals(
+          TextStyle(
+            color: Colors.black.withValues(alpha: kTintHoverFloat),
+          ),
+        ),
+      );
+
+      final WidgetStateTextStyle hintStyle =
+          theme.hintStyle! as WidgetStateTextStyle;
+      expect(
+        hintStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        hintStyle.resolve(<WidgetState>{}),
+        equals(
+          TextStyle(
+            color: Colors.black.withValues(alpha: kTintHoverFloat),
+          ),
+        ),
+      );
+
+      final WidgetStateColor iconColor = theme.iconColor! as WidgetStateColor;
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{}),
+        equals(Colors.black45),
+      );
+
+      final WidgetStateColor prefixIconColor =
+          theme.prefixIconColor! as WidgetStateColor;
+      expect(
+        prefixIconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        prefixIconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        prefixIconColor.resolve(<WidgetState>{}),
+        equals(Colors.black45),
+      );
+
+      final WidgetStateColor suffixIconColor =
+          theme.suffixIconColor! as WidgetStateColor;
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.error}),
+        equals(colorScheme.error),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{}),
+        equals(Colors.black45),
+      );
+
+      expect(theme.filled, isFalse);
+      expect(theme.fillColor, equals(usedFillColor));
+      expect(theme.hoverColor, equals(usedHover));
+
+      final WidgetStateInputBorder border =
+          theme.border! as WidgetStateInputBorder;
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.disabled}),
+        effectiveUnderlineBorder,
+        tintDisabledColor.withAlpha(kAlphaLowDisabled),
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        effectiveUnderlineBorder,
+        colorScheme.error,
+        focusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
+        effectiveUnderlineBorder,
+        colorScheme.error,
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.error}),
+        effectiveUnderlineBorder,
+        colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.focused}),
+        effectiveUnderlineBorder,
+        borderColor,
+        focusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{WidgetState.hovered}),
+        effectiveUnderlineBorder,
+        enabledHoveredBorderColor,
+        unfocusedWidth,
+      );
+      expectUnderlineBorderState(
+        border.resolve(<WidgetState>{}),
+        effectiveUnderlineBorder,
+        enabledBorderColor,
+        unfocusedWidth,
       );
     });
     test(
@@ -5193,7 +5126,7 @@ void main() {
       const bool unfocusedBorderIsColored = true;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.primary;
+      // final Color enabledHoveredBorderColor = colorScheme.primary;
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
@@ -5201,207 +5134,161 @@ void main() {
       );
       const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = WidgetStateColor.resolveWith((
-        Set<WidgetState> states,
-      ) {
-        if (states.contains(WidgetState.disabled)) {
-          return tintDisabledUltraLowColor;
-        }
-        return Color.alphaBlend(
-          colorScheme.primary.withValues(alpha: effectiveAlpha),
-          colorScheme.surface,
-        );
-      });
+      final Color usedFillColor = Color.alphaBlend(
+        colorScheme.primary.withValues(alpha: effectiveAlpha),
+        colorScheme.surface,
+      );
       final Color usedHover =
           ThemeData.estimateBrightnessForColor(usedFillColor) ==
                   Brightness.light
               ? usedFillColor.darken(kInputDecoratorLightBgDarken)
               : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
+      final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        unfocusedBorderIsColored: unfocusedBorderIsColored,
+        tintedDisabled: tintDisable,
+        tintedInteractions: tintInteract,
+        useMaterial3: useM3,
+      );
+
+      final WidgetStateTextStyle labelStyle =
+          theme.labelStyle! as WidgetStateTextStyle;
       expect(
-        FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          unfocusedBorderIsColored: unfocusedBorderIsColored,
-          tintedDisabled: tintDisable,
-          tintedInteractions: tintInteract,
-          useMaterial3: useM3,
-        ).toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          InputDecorationThemeData(
-            labelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onErrorContainer);
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                  );
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            helperStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            hintStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.white70;
-            }),
-            prefixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.white70;
-            }),
-            suffixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                return colorScheme.error;
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.white70;
-            }),
-            filled: false,
-            fillColor: usedFillColor,
-            hoverColor: usedHover,
-            border: WidgetStateInputBorder.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: focusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.focused)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: borderColor,
-                    width: focusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: enabledHoveredBorderColor,
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              return UnderlineInputBorder(
-                borderRadius: effectiveUnderlineBorder,
-                borderSide: BorderSide(
-                  color: enabledBorderColor,
-                  width: unfocusedWidth,
-                ),
-              );
-            }),
-          ).toString(minLevel: DiagnosticLevel.fine),
+        labelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{}),
+        equals(const TextStyle(color: Colors.white60)),
+      );
+
+      final WidgetStateTextStyle floatingLabelStyle =
+          theme.floatingLabelStyle! as WidgetStateTextStyle;
+      expect(
+        floatingLabelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        floatingLabelStyle.resolve(<WidgetState>{}),
+        equals(const TextStyle(color: Colors.white60)),
+      );
+
+      final WidgetStateColor iconColor = theme.iconColor! as WidgetStateColor;
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{}),
+        equals(Colors.white70),
+      );
+
+      final WidgetStateColor prefixIconColor =
+          theme.prefixIconColor! as WidgetStateColor;
+      expect(
+        prefixIconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        prefixIconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        prefixIconColor.resolve(<WidgetState>{}),
+        equals(Colors.white70),
+      );
+
+      final WidgetStateColor suffixIconColor =
+          theme.suffixIconColor! as WidgetStateColor;
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.error}),
+        equals(colorScheme.error),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        suffixIconColor.resolve(<WidgetState>{}),
+        equals(Colors.white70),
+      );
+
+      expect(theme.fillColor, equals(usedFillColor));
+      expect(theme.hoverColor, equals(usedHover));
+
+      final WidgetStateInputBorder border =
+          theme.border! as WidgetStateInputBorder;
+      expect(
+        border.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide: BorderSide(
+              color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+              width: unfocusedWidth,
+            ),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide:
+                BorderSide(color: colorScheme.error, width: focusedWidth),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{WidgetState.focused}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide: BorderSide(color: borderColor, width: focusedWidth),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide:
+                BorderSide(color: enabledBorderColor, width: unfocusedWidth),
+          ),
         ),
       );
     });
@@ -5429,215 +5316,112 @@ void main() {
       const bool unfocusedBorderIsColored = false;
       final Color borderColor = colorScheme.primary;
       final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.primary;
+      // final Color enabledHoveredBorderColor = colorScheme.primary;
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
       const BorderRadius effectiveUnderlineBorder = BorderRadius.only(
         topLeft: Radius.circular(effectiveRadius),
         topRight: Radius.circular(effectiveRadius),
       );
-      const double effectiveAlpha = kFillColorDarkOpacity;
+      // const double effectiveAlpha = kFillColorDarkOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = WidgetStateColor.resolveWith((
-        Set<WidgetState> states,
-      ) {
-        if (states.contains(WidgetState.disabled)) {
-          return tintDisabledUltraLowColor;
-        }
-        return Color.alphaBlend(
-          colorScheme.primary.withValues(alpha: effectiveAlpha),
-          colorScheme.surface,
-        );
-      });
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      // final Color usedFillColor = Color.alphaBlend(
+      //   colorScheme.primary.withValues(alpha: effectiveAlpha),
+      //   colorScheme.surface,
+      // );
+      // final Color usedHover =
+      //     ThemeData.estimateBrightnessForColor(usedFillColor) ==
+      //             Brightness.light
+      //         ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+      //         : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
+      final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        unfocusedBorderIsColored: unfocusedBorderIsColored,
+        tintedDisabled: tintDisable,
+        tintedInteractions: tintInteract,
+        useMaterial3: useM3,
+      );
+
+      final WidgetStateTextStyle labelStyle =
+          theme.labelStyle! as WidgetStateTextStyle;
       expect(
-        FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          unfocusedBorderIsColored: unfocusedBorderIsColored,
-          tintedDisabled: tintDisable,
-          tintedInteractions: tintInteract,
-          useMaterial3: useM3,
-        ).toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          InputDecorationThemeData(
-            labelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onErrorContainer);
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                  );
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.primary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            helperStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            hintStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.white70;
-            }),
-            prefixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.white70;
-            }),
-            suffixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                return colorScheme.error;
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.primary;
-              }
-              return Colors.white70;
-            }),
-            filled: false,
-            fillColor: usedFillColor,
-            hoverColor: usedHover,
-            border: WidgetStateInputBorder.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: focusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return UnderlineInputBorder(
-                    borderRadius: effectiveUnderlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.focused)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: borderColor,
-                    width: focusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return UnderlineInputBorder(
-                  borderRadius: effectiveUnderlineBorder,
-                  borderSide: BorderSide(
-                    color: enabledHoveredBorderColor,
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              return UnderlineInputBorder(
-                borderRadius: effectiveUnderlineBorder,
-                borderSide: BorderSide(
-                  color: enabledBorderColor,
-                  width: unfocusedWidth,
-                ),
-              );
-            }),
-          ).toString(minLevel: DiagnosticLevel.fine),
+        labelStyle
+            .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.error)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.primary)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{}),
+        equals(const TextStyle(color: Colors.white60)),
+      );
+
+      final WidgetStateColor iconColor = theme.iconColor! as WidgetStateColor;
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.primary),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{}),
+        equals(Colors.white70),
+      );
+
+      final WidgetStateInputBorder border =
+          theme.border! as WidgetStateInputBorder;
+      expect(
+        border.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide: BorderSide(
+              color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+              width: unfocusedWidth,
+            ),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide:
+                BorderSide(color: colorScheme.error, width: focusedWidth),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{WidgetState.focused}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide: BorderSide(color: borderColor, width: focusedWidth),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{}),
+        equals(
+          UnderlineInputBorder(
+            borderRadius: effectiveUnderlineBorder,
+            borderSide:
+                BorderSide(color: enabledBorderColor, width: unfocusedWidth),
+          ),
         ),
       );
     });
@@ -5726,217 +5510,101 @@ void main() {
       const double focusedWidth = 2.0;
       final Color borderColor = colorScheme.secondary;
       final Color enabledBorderColor = colorScheme.outline;
-      final Color enabledHoveredBorderColor = colorScheme.secondary;
+      // final Color enabledHoveredBorderColor = colorScheme.secondary;
       const double effectiveRadius = radius ?? kInputDecoratorRadius;
       final BorderRadius effectiveOutlineBorder = BorderRadius.circular(
         effectiveRadius,
       );
-      const double effectiveAlpha = kFillColorLightOpacity;
+      // const double effectiveAlpha = kFillColorLightOpacity;
       // Get effective alpha value for background fill color.
-      final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
-        colorScheme.onSurface,
-        colorScheme.primary,
-      ).withValues(alpha: kAlphaUltraLowDisabledFloat);
+      // final Color tintDisabledUltraLowColor = FlexSubThemes.tintedDisable(
+      //   colorScheme.onSurface,
+      //   colorScheme.primary,
+      // ).withValues(alpha: kAlphaUltraLowDisabledFloat);
       // Effective used fill color, can also be a totally custom color value.
-      final Color usedFillColor = WidgetStateColor.resolveWith((
-        Set<WidgetState> states,
-      ) {
-        if (states.contains(WidgetState.disabled)) {
-          return tintDisabledUltraLowColor;
-        }
-        return Color.alphaBlend(
-          colorScheme.secondary.withValues(alpha: effectiveAlpha),
-          colorScheme.surface,
-        );
-      });
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      // final Color usedFillColor = Color.alphaBlend(
+      //   colorScheme.secondary.withValues(alpha: effectiveAlpha),
+      //   colorScheme.surface,
+      // );
+      // final Color usedHover =
+      //     ThemeData.estimateBrightnessForColor(usedFillColor) ==
+      //             Brightness.light
+      //         ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+      //         : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
+      final InputDecorationThemeData theme = FlexSubThemes.inputDecorationTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.secondary,
+        borderType: FlexInputBorderType.outline,
+        tintedDisabled: true,
+        tintedInteractions: true,
+        useMaterial3: false,
+      );
+
+      final WidgetStateTextStyle labelStyle =
+          theme.labelStyle! as WidgetStateTextStyle;
       expect(
-        FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          baseSchemeColor: SchemeColor.secondary,
-          borderType: FlexInputBorderType.outline,
-          tintedDisabled: true,
-          tintedInteractions: true,
-          useMaterial3: false,
-        ).toString(minLevel: DiagnosticLevel.fine),
-        equalsIgnoringHashCodes(
-          InputDecorationThemeData(
-            labelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(color: colorScheme.onErrorContainer);
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.secondary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            floatingLabelStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return TextStyle(color: colorScheme.error);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                  );
-                }
-                return TextStyle(color: colorScheme.error);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return TextStyle(color: colorScheme.secondary);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return TextStyle(color: colorScheme.onSurfaceVariant);
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            helperStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            hintStyle: WidgetStateTextStyle.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return TextStyle(color: tintDisabledColor);
-              }
-              return TextStyle(color: Colors.black.withAlpha(0xCC));
-            }),
-            iconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.secondary;
-              }
-              return Colors.black45;
-            }),
-            prefixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.secondary;
-              }
-              return Colors.black45;
-            }),
-            suffixIconColor: WidgetStateColor.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.error)) {
-                return colorScheme.error;
-              }
-              if (states.contains(WidgetState.disabled)) {
-                return tintDisabledColor;
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.secondary;
-              }
-              return Colors.black45;
-            }),
-            filled: false,
-            fillColor: usedFillColor,
-            hoverColor: usedHover,
-            border: WidgetStateInputBorder.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return OutlineInputBorder(
-                  borderRadius: effectiveOutlineBorder,
-                  borderSide: BorderSide(
-                    color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.error)) {
-                if (states.contains(WidgetState.focused)) {
-                  return OutlineInputBorder(
-                    borderRadius: effectiveOutlineBorder,
-                    borderSide: BorderSide(
-                      color: colorScheme.error,
-                      width: focusedWidth,
-                    ),
-                  );
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return OutlineInputBorder(
-                    borderRadius: effectiveOutlineBorder,
-                    borderSide: BorderSide(
-                      // TODO(rydmike): INFO: M3 uses onErrorContainer
-                      color: colorScheme.error,
-                      width: unfocusedWidth,
-                    ),
-                  );
-                }
-                return OutlineInputBorder(
-                  borderRadius: effectiveOutlineBorder,
-                  borderSide: BorderSide(
-                    // TODO(rydmike): INFO: M3 uses error
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.focused)) {
-                return OutlineInputBorder(
-                  borderRadius: effectiveOutlineBorder,
-                  borderSide: BorderSide(
-                    color: borderColor,
-                    width: focusedWidth,
-                  ),
-                );
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return OutlineInputBorder(
-                  borderRadius: effectiveOutlineBorder,
-                  borderSide: BorderSide(
-                    color: enabledHoveredBorderColor,
-                    width: unfocusedWidth,
-                  ),
-                );
-              }
-              return OutlineInputBorder(
-                borderRadius: effectiveOutlineBorder,
-                borderSide: BorderSide(
-                  color: enabledBorderColor,
-                  width: unfocusedWidth,
-                ),
-              );
-            }),
-          ).toString(minLevel: DiagnosticLevel.fine),
+        labelStyle.resolve(<WidgetState>{WidgetState.focused}),
+        equals(TextStyle(color: colorScheme.secondary)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(TextStyle(color: tintDisabledColor)),
+      );
+      expect(
+        labelStyle.resolve(<WidgetState>{}),
+        equals(
+          TextStyle(
+            color: Colors.black.withValues(alpha: kTintHoverFloat),
+          ),
+        ),
+      );
+
+      final WidgetStateColor iconColor = theme.iconColor! as WidgetStateColor;
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(tintDisabledColor),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{WidgetState.focused}),
+        equals(colorScheme.secondary),
+      );
+      expect(
+        iconColor.resolve(<WidgetState>{}),
+        equals(Colors.black45),
+      );
+
+      final WidgetStateInputBorder border =
+          theme.border! as WidgetStateInputBorder;
+      expect(
+        border.resolve(<WidgetState>{WidgetState.disabled}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: effectiveOutlineBorder,
+            borderSide: BorderSide(
+              color: tintDisabledColor.withAlpha(kAlphaLowDisabled),
+              width: unfocusedWidth,
+            ),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{WidgetState.focused}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: effectiveOutlineBorder,
+            borderSide: BorderSide(color: borderColor, width: focusedWidth),
+          ),
+        ),
+      );
+      expect(
+        border.resolve(<WidgetState>{}),
+        equals(
+          OutlineInputBorder(
+            borderRadius: effectiveOutlineBorder,
+            borderSide:
+                BorderSide(color: enabledBorderColor, width: unfocusedWidth),
+          ),
         ),
       );
     });
@@ -6177,13 +5845,7 @@ void main() {
       //
       // fillColor
       expect(
-        (m.fillColor as WidgetStateColor?)!.resolve(<WidgetState>{
-          WidgetState.disabled,
-        }),
-        equals(colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled)),
-      );
-      expect(
-        (m.fillColor as WidgetStateColor?)!.resolve(<WidgetState>{}),
+        m.fillColor,
         equals(
           Color.alphaBlend(
             colorScheme.surfaceContainerHighest.withAlpha(0xCC),
@@ -7099,10 +6761,6 @@ void main() {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );
-      final TextTheme textTheme = Typography.material2021(
-        platform: TargetPlatform.android,
-        colorScheme: colorScheme,
-      ).black;
       expect(
         FlexSubThemes.navigationBarTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
@@ -7112,31 +6770,33 @@ void main() {
             labelBehavior: null,
             backgroundColor: colorScheme.surfaceContainer,
             indicatorColor: colorScheme.secondaryContainer,
-            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                return textTheme.labelMedium!.copyWith(
+            labelTextStyle: WidgetStateProperty<TextStyle>.fromMap(
+              <WidgetStatesConstraint, TextStyle>{
+                WidgetState.selected: TextStyle(
                   color: colorScheme.onSurface,
                   fontSize: 12,
-                );
-              }
-              return textTheme.labelMedium!.copyWith(
-                color: colorScheme.onSurfaceVariant,
-                fontSize: 12,
-              );
-            }),
-            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                return IconThemeData(size: 24, color: colorScheme.onSurface);
-              }
-              return IconThemeData(
-                size: 24,
-                color: colorScheme.onSurfaceVariant,
-              );
-            }),
+                ),
+                WidgetState.any: TextStyle(
+                  color: colorScheme.onSurfaceVariant,
+                  fontSize: 12,
+                ),
+              },
+            ),
+            iconTheme: WidgetStateProperty<IconThemeData>.fromMap(
+              widgetStateMap<IconThemeData>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return IconThemeData(
+                        size: 24, color: colorScheme.onSecondaryContainer);
+                  }
+                  return IconThemeData(
+                    size: 24,
+                    color: colorScheme.onSurfaceVariant,
+                  );
+                },
+                _selectedDefaultStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -7150,10 +6810,10 @@ void main() {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );
-      final TextTheme textTheme = Typography.material2021(
-        platform: TargetPlatform.android,
-        colorScheme: colorScheme,
-      ).black;
+      // final TextTheme textTheme = Typography.material2021(
+      //   platform: TargetPlatform.android,
+      //   colorScheme: colorScheme,
+      // ).black;
       final NavigationBarThemeData navBarTheme =
           FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
@@ -7188,31 +6848,33 @@ void main() {
             indicatorShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
-            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                return textTheme.labelSmall!.copyWith(color: colorScheme.error);
-              }
-              return textTheme.labelSmall!.copyWith(
-                color: colorScheme.error
-                    .blendAlpha(colorScheme.error, 0x66)
-                    .withAlpha(0xA5),
-              );
-            }),
-            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                return IconThemeData(size: 24, color: colorScheme.secondary);
-              }
-              return IconThemeData(
-                size: 24,
-                color: colorScheme.onSurface
-                    .blendAlpha(colorScheme.onSurface, 0x66)
-                    .withAlpha(0xA5),
-              );
-            }),
+            labelTextStyle: WidgetStateProperty<TextStyle>.fromMap(
+              <WidgetStatesConstraint, TextStyle>{
+                WidgetState.selected: TextStyle(
+                  color: colorScheme.error,
+                  fontSize: 12,
+                ),
+                WidgetState.any: TextStyle(
+                  color: colorScheme.onSurface.withAlpha(0xA5),
+                  fontSize: 12,
+                ),
+              },
+            ),
+            iconTheme: WidgetStateProperty<IconThemeData>.fromMap(
+              widgetStateMap<IconThemeData>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return IconThemeData(
+                        size: 24, color: colorScheme.secondary);
+                  }
+                  return IconThemeData(
+                    size: 24,
+                    color: colorScheme.onSurface.withAlpha(0xA5),
+                  );
+                },
+                _selectedDefaultStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -7287,29 +6949,37 @@ void main() {
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             backgroundColor: colorScheme.error.withValues(alpha: 0.9),
             indicatorColor: colorScheme.secondary.withAlpha(0x3D),
-            labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                return textTheme.bodySmall!.copyWith(
-                  color: colorScheme.primaryContainer,
-                );
-              }
-              return textTheme.bodySmall!.copyWith(
-                color: colorScheme.onSurface,
-              );
-            }),
-            iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                return IconThemeData(
-                  size: 28,
-                  color: colorScheme.secondaryContainer,
-                );
-              }
-              return IconThemeData(size: 25, color: colorScheme.onSurface);
-            }),
+            labelTextStyle: WidgetStateProperty<TextStyle>.fromMap(
+              widgetStateMap<TextStyle>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return textTheme.bodySmall!.copyWith(
+                      color: colorScheme.primaryContainer,
+                      fontSize: textTheme.bodySmall!.fontSize ?? 12,
+                    );
+                  }
+                  return textTheme.bodySmall!.copyWith(
+                    color: colorScheme.onSurface,
+                    fontSize: textTheme.bodySmall!.fontSize ?? 12,
+                  );
+                },
+                _selectedDefaultStates,
+              ),
+            ),
+            iconTheme: WidgetStateProperty<IconThemeData>.fromMap(
+              widgetStateMap<IconThemeData>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    return IconThemeData(
+                      size: 28,
+                      color: colorScheme.secondaryContainer,
+                    );
+                  }
+                  return IconThemeData(size: 25, color: colorScheme.onSurface);
+                },
+                _selectedDefaultStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -7742,28 +7412,30 @@ void main() {
                   borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ), //buttonShape,
-              side: WidgetStateProperty.resolveWith<BorderSide?>((
-                final Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return BorderSide(
-                    color: colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26),
-                    width: 1.5,
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  return BorderSide(color: colorScheme.error, width: 2);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return BorderSide(color: colorScheme.primary, width: 2);
-                }
-                return BorderSide(
-                  color: colorScheme.primary.withAlpha(0xA7),
-                  width: 1.5,
-                );
-              }),
+              side: WidgetStateProperty<BorderSide?>.fromMap(
+                widgetStateMap<BorderSide?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return BorderSide(
+                        color: colorScheme.onSurface
+                            .withValues(alpha: kAlphaVeryLowDisabledFloat),
+                        width: 1.0,
+                      );
+                    }
+                    if (states.contains(WidgetState.error)) {
+                      return BorderSide(color: colorScheme.error, width: 2);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return BorderSide(color: colorScheme.primary, width: 2);
+                    }
+                    return BorderSide(
+                      color: colorScheme.primary,
+                      width: 1.0,
+                    );
+                  },
+                  _outlinedSideStates,
+                ),
+              ),
             ),
           ).toString(),
         ),
@@ -7801,61 +7473,75 @@ void main() {
                   borderRadius: BorderRadius.all(Radius.circular(13)),
                 ),
               ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.primaryContainer;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.primaryContainer;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primaryContainer.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primaryContainer.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primaryContainer.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }),
-              side: WidgetStateProperty.resolveWith<BorderSide?>((
-                final Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return BorderSide(
-                    color: colorScheme.secondaryContainer
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26),
-                    width: 1.5,
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  return BorderSide(color: colorScheme.error, width: 2);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return BorderSide(
-                    color: colorScheme.secondaryContainer,
-                    width: 2,
-                  );
-                }
-                return BorderSide(
-                  color: colorScheme.secondaryContainer.withAlpha(0xA7),
-                  width: 1.5,
-                );
-              }),
+              foregroundColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.onSurface.withValues(alpha: 0.38);
+                    }
+                    return colorScheme.primaryContainer;
+                  },
+                  _disabledDefaultStates,
+                ),
+              ),
+              iconColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.onSurface.withValues(alpha: 0.38);
+                    }
+                    return colorScheme.primaryContainer;
+                  },
+                  _disabledDefaultStates,
+                ),
+              ),
+              overlayColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.primaryContainer
+                          .withValues(alpha: 0.08);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.primaryContainer
+                          .withValues(alpha: 0.12);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.primaryContainer
+                          .withValues(alpha: 0.12);
+                    }
+                    return null;
+                  },
+                  _hoverFocusPressStates,
+                ),
+              ),
+              side: WidgetStateProperty<BorderSide?>.fromMap(
+                widgetStateMap<BorderSide?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return BorderSide(
+                        color: colorScheme.onSurface
+                            .withValues(alpha: kAlphaVeryLowDisabledFloat),
+                        width: 1.0,
+                      );
+                    }
+                    if (states.contains(WidgetState.error)) {
+                      return BorderSide(color: colorScheme.error, width: 2);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return BorderSide(
+                        color: colorScheme.secondaryContainer,
+                        width: 2,
+                      );
+                    }
+                    return BorderSide(
+                      color: colorScheme.secondaryContainer,
+                      width: 1.0,
+                    );
+                  },
+                  _outlinedSideStates,
+                ),
+              ),
             ),
           ).toString(),
         ),
@@ -7905,64 +7591,75 @@ void main() {
                   borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface,
-                    colorScheme.secondary,
-                  );
-                }
-                return colorScheme.secondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface,
-                    colorScheme.secondary,
-                  );
-                }
-                return colorScheme.secondary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.secondary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.secondary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.secondary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }),
-              side: WidgetStateProperty.resolveWith<BorderSide?>((
-                final Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return BorderSide(
-                    color: colorScheme.tertiary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26),
-                    width: 1.5,
-                  );
-                }
-                if (states.contains(WidgetState.error)) {
-                  return BorderSide(color: colorScheme.error, width: 2);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return BorderSide(color: colorScheme.tertiary, width: 2);
-                }
-                return BorderSide(
-                  color: colorScheme.tertiary.withValues(alpha: 0.12),
-                  width: 1.5,
-                );
-              }),
+              foregroundColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return FlexSubThemes.tintedDisable(
+                        colorScheme.onSurface,
+                        colorScheme.secondary,
+                      );
+                    }
+                    return colorScheme.secondary;
+                  },
+                  _disabledDefaultStates,
+                ),
+              ),
+              iconColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return FlexSubThemes.tintedDisable(
+                        colorScheme.onSurface,
+                        colorScheme.secondary,
+                      );
+                    }
+                    return colorScheme.secondary;
+                  },
+                  _disabledDefaultStates,
+                ),
+              ),
+              overlayColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.secondary.withAlpha(kAlphaHovered);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.secondary.withAlpha(kAlphaFocused);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.secondary.withAlpha(kAlphaPressed);
+                    }
+                    return null;
+                  },
+                  _hoverFocusPressStates,
+                ),
+              ),
+              side: WidgetStateProperty<BorderSide?>.fromMap(
+                widgetStateMap<BorderSide?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return BorderSide(
+                        color: colorScheme.onSurface
+                            .withValues(alpha: kAlphaVeryLowDisabledFloat),
+                        width: 1.0,
+                      );
+                    }
+                    if (states.contains(WidgetState.error)) {
+                      return BorderSide(color: colorScheme.error, width: 2);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return BorderSide(color: colorScheme.tertiary, width: 2);
+                    }
+                    return BorderSide(
+                      color: colorScheme.tertiary,
+                      width: 1.0,
+                    );
+                  },
+                  _outlinedSideStates,
+                ),
+              ),
             ),
           ).toString(),
         ),
@@ -7979,43 +7676,59 @@ void main() {
         brightness: Brightness.light,
       );
       final WidgetStateProperty<Color?> foregroundColor =
-          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return colorScheme.onSurface.withValues(alpha: 0.38);
-        }
-        return colorScheme.secondary;
-      });
+          WidgetStateProperty<Color?>.fromMap(
+        widgetStateMap<Color?>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return colorScheme.onSurface.withValues(alpha: 0.38);
+            }
+            return colorScheme.secondary;
+          },
+          _disabledDefaultStates,
+        ),
+      );
 
       final WidgetStateProperty<Color?> overlayColor =
-          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-        if (states.contains(WidgetState.hovered)) {
-          return colorScheme.secondary.withValues(alpha: 0.08);
-        }
-        if (states.contains(WidgetState.focused)) {
-          return colorScheme.secondary.withValues(alpha: 0.12);
-        }
-        if (states.contains(WidgetState.pressed)) {
-          return colorScheme.secondary.withValues(alpha: 0.12);
-        }
-        return null;
-      });
+          WidgetStateProperty<Color?>.fromMap(
+        widgetStateMap<Color?>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.hovered)) {
+              return colorScheme.secondary.withValues(alpha: 0.08);
+            }
+            if (states.contains(WidgetState.focused)) {
+              return colorScheme.secondary.withValues(alpha: 0.12);
+            }
+            if (states.contains(WidgetState.pressed)) {
+              return colorScheme.secondary.withValues(alpha: 0.12);
+            }
+            return null;
+          },
+          _hoverFocusPressStates,
+        ),
+      );
 
       final WidgetStateProperty<BorderSide?> side =
-          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
-        if (states.contains(WidgetState.disabled)) {
-          return BorderSide(
-            color: colorScheme.onSurface.withValues(alpha: 0.12),
-            width: 1,
-          );
-        }
-        if (states.contains(WidgetState.error)) {
-          return BorderSide(color: colorScheme.error, width: 1);
-        }
-        if (states.contains(WidgetState.pressed)) {
-          return BorderSide(color: colorScheme.tertiary, width: 1);
-        }
-        return BorderSide(color: colorScheme.tertiary, width: 1);
-      });
+          WidgetStateProperty<BorderSide?>.fromMap(
+        widgetStateMap<BorderSide?>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return BorderSide(
+                color: colorScheme.onSurface
+                    .withValues(alpha: kAlphaVeryLowDisabledFloat),
+                width: 1,
+              );
+            }
+            if (states.contains(WidgetState.error)) {
+              return BorderSide(color: colorScheme.error, width: 1);
+            }
+            if (states.contains(WidgetState.pressed)) {
+              return BorderSide(color: colorScheme.tertiary, width: 1);
+            }
+            return BorderSide(color: colorScheme.tertiary, width: 1);
+          },
+          _outlinedSideStates,
+        ),
+      );
       expect(
         FlexSubThemes.outlinedButtonTheme(
           colorScheme: colorScheme,
@@ -8426,16 +8139,19 @@ void main() {
             surfaceTintColor: Colors.transparent,
             elevation: 8,
             textStyle: const TextStyle().apply(color: Colors.white),
-            labelTextStyle: WidgetStateProperty.resolveWith((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return const TextStyle().apply(
-                  color: Colors.white.withAlpha(kAlphaDisabled),
-                );
-              }
-              return const TextStyle().apply(color: Colors.white);
-            }),
+            labelTextStyle: WidgetStateProperty<TextStyle>.fromMap(
+              widgetStateMap<TextStyle>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return const TextStyle().apply(
+                      color: Colors.white.withAlpha(kAlphaDisabled),
+                    );
+                  }
+                  return const TextStyle().apply(color: Colors.white);
+                },
+                _disabledDefaultStates,
+              ),
+            ),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
@@ -8473,6 +8189,86 @@ void main() {
       );
     });
   });
+
+  group('WITH: FlexSubTheme.progressIndicatorTheme ', () {
+    // -------------------------------------------------------------------------
+    // FlexSubThemes progressIndicatorTheme tests
+    // -------------------------------------------------------------------------
+    test(
+        'ProgressIndicator FST25PI.1: GIVEN a default '
+        'FlexSubTheme.progressIndicatorTheme() '
+        'ProgressIndicatorThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final ProgressIndicatorThemeData progressTheme =
+          FlexSubThemes.progressIndicatorTheme(
+        colorScheme: colorScheme,
+      );
+      expect(
+        progressTheme,
+        equals(
+          ProgressIndicatorThemeData(
+            stopIndicatorColor: colorScheme.primary,
+          ),
+        ),
+      );
+    });
+    test(
+        'ProgressIndicator FST25PI.2: GIVEN a custom '
+        'FlexSubTheme.progressIndicatorTheme() '
+        'ProgressIndicatorThemeData with same values', () {
+      final ColorScheme colorScheme = ColorScheme.fromSeed(
+        seedColor: const Color(0xFF79E742),
+        brightness: Brightness.light,
+      );
+      final ProgressIndicatorThemeData progressTheme =
+          FlexSubThemes.progressIndicatorTheme(
+        colorScheme: colorScheme,
+        baseSchemeColor: SchemeColor.secondary,
+        linearTrackSchemeColor: SchemeColor.onSecondaryContainer,
+        linearMinHeight: 6,
+        circularTrackSchemeColor: SchemeColor.tertiary,
+        refreshBackgroundSchemeColor: SchemeColor.surfaceContainerLow,
+        linearRadius: 4,
+        stopIndicatorSchemeColor: SchemeColor.primaryFixed,
+        stopIndicatorRadius: 5,
+        strokeWidth: 8,
+        strokeAlign: 1.0,
+        strokeCap: StrokeCap.round,
+        constraints: const BoxConstraints(minWidth: 45.0, minHeight: 45.0),
+        trackGap: 7,
+        circularTrackPadding: const EdgeInsets.all(3.0),
+        year2023: false,
+      );
+      expect(
+        progressTheme,
+        equals(
+          ProgressIndicatorThemeData(
+            color: colorScheme.secondary,
+            linearTrackColor: colorScheme.onSecondaryContainer,
+            linearMinHeight: 6,
+            circularTrackColor: colorScheme.tertiary,
+            refreshBackgroundColor: colorScheme.surfaceContainerLow,
+            borderRadius: BorderRadius.circular(4.0),
+            stopIndicatorColor: colorScheme.primaryFixed,
+            stopIndicatorRadius: 5,
+            strokeWidth: 8,
+            strokeAlign: CircularProgressIndicator.strokeAlignOutside,
+            strokeCap: StrokeCap.round,
+            constraints: const BoxConstraints(minWidth: 45.0, minHeight: 45.0),
+            trackGap: 7,
+            circularTrackPadding: const EdgeInsets.all(3.0),
+            //
+            // ignore: deprecated_member_use, required to use new M3 style
+            year2023: false,
+          ),
+        ),
+      );
+    });
+  });
+
   group('WITH: FlexSubTheme.radioTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Radio tests
@@ -8488,44 +8284,49 @@ void main() {
         FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           RadioThemeData(
-            fillColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade400;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.primary;
-              }
-              // Opinionated color on track when not selected
-              return colorScheme.primary.withAlpha(0xDD);
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.primary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+            fillColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.grey.shade400;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.primary;
+                  }
+                  return colorScheme.primary.withAlpha(0xDD);
+                },
+                _switchTrackStates,
+              ),
+            ),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onSurface.withValues(alpha: 0.12);
+                    }
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.primary.withValues(alpha: 0.08);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.primary.withValues(alpha: 0.12);
+                    }
+                    return Colors.transparent;
+                  }
+                  if (states.contains(WidgetState.pressed)) {
+                    return colorScheme.primary.withValues(alpha: 0.12);
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.08);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
+                  }
+                  return Colors.transparent;
+                },
+                _switchOverlayStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -8584,44 +8385,49 @@ void main() {
         FlexSubThemes.radioTheme(colorScheme: colorScheme).toString(),
         equalsIgnoringHashCodes(
           RadioThemeData(
-            fillColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade800;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.primary;
-              }
-              // Opinionated color on track when not selected
-              return colorScheme.primary.withAlpha(0xDD);
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.primary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+            fillColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.grey.shade800;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.primary;
+                  }
+                  return colorScheme.primary.withAlpha(0xDD);
+                },
+                _switchTrackStates,
+              ),
+            ),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onSurface.withValues(alpha: 0.12);
+                    }
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.primary.withValues(alpha: 0.08);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.primary.withValues(alpha: 0.12);
+                    }
+                    return Colors.transparent;
+                  }
+                  if (states.contains(WidgetState.pressed)) {
+                    return colorScheme.primary.withValues(alpha: 0.12);
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.08);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
+                  }
+                  return Colors.transparent;
+                },
+                _switchOverlayStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -8686,43 +8492,49 @@ void main() {
         equalsIgnoringHashCodes(
           RadioThemeData(
             splashRadius: 30,
-            fillColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade400;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.tertiary;
-              }
-              return Colors.black54;
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return Colors.transparent;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.primary.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return Colors.transparent;
-            }),
+            fillColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.grey.shade400;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.tertiary;
+                  }
+                  return Colors.black54;
+                },
+                _switchTrackStates,
+              ),
+            ),
+            overlayColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onSurface.withValues(alpha: 0.12);
+                    }
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.primary.withValues(alpha: 0.08);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.primary.withValues(alpha: 0.12);
+                    }
+                    return Colors.transparent;
+                  }
+                  if (states.contains(WidgetState.pressed)) {
+                    return colorScheme.primary.withValues(alpha: 0.12);
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.08);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return colorScheme.onSurface.withValues(alpha: 0.12);
+                  }
+                  return Colors.transparent;
+                },
+                _switchOverlayStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -9030,20 +8842,23 @@ void main() {
         elevation: const WidgetStatePropertyAll<double?>(null),
         shadowColor: const WidgetStatePropertyAll<Color?>(null),
         padding: const WidgetStatePropertyAll<EdgeInsetsGeometry?>(null),
-        overlayColor: WidgetStateProperty.resolveWith((
-          Set<WidgetState> states,
-        ) {
-          if (states.contains(WidgetState.disabled)) {
-            return colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled);
-          }
-          if (states.contains(WidgetState.pressed)) {
-            return colorScheme.onSurface.withAlpha(kAlphaInputPressed);
-          }
-          if (states.contains(WidgetState.hovered)) {
-            return colorScheme.onSurface.withAlpha(kAlphaHovered);
-          }
-          return Colors.transparent;
-        }),
+        overlayColor: WidgetStateProperty<Color?>.fromMap(
+          widgetStateMap<Color?>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return colorScheme.onSurface.withAlpha(kAlphaUltraLowDisabled);
+              }
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.onSurface.withAlpha(kAlphaInputPressed);
+              }
+              if (states.contains(WidgetState.hovered)) {
+                return colorScheme.onSurface.withAlpha(kAlphaHovered);
+              }
+              return Colors.transparent;
+            },
+            _disabledPressedHoveredDefaultStates,
+          ),
+        ),
       );
 
       expect(
@@ -9149,29 +8964,40 @@ void main() {
           maxWidth: 700.0,
           minHeight: 60.0,
         ),
-        overlayColor: WidgetStateProperty.resolveWith((
-          Set<WidgetState> states,
-        ) {
-          if (states.contains(WidgetState.disabled)) {
-            if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                colorScheme.onSurface,
-                backgroundColor,
-              ).withAlpha(kAlphaUltraLowDisabled);
-            }
-          }
-          if (states.contains(WidgetState.pressed)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedPressed(backgroundColor, tint, factor);
-            }
-          }
-          if (states.contains(WidgetState.hovered)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedHovered(overlay, tint, factor);
-            }
-          }
-          return Colors.transparent;
-        }),
+        overlayColor: WidgetStateProperty<Color?>.fromMap(
+          widgetStateMap<Color?>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                if (tintDisable) {
+                  return FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface,
+                    backgroundColor,
+                  ).withAlpha(kAlphaUltraLowDisabled);
+                }
+              }
+              if (states.contains(WidgetState.pressed)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedPressed(
+                    backgroundColor,
+                    tint,
+                    factor,
+                  );
+                }
+              }
+              if (states.contains(WidgetState.hovered)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedHovered(
+                    overlay,
+                    tint,
+                    factor,
+                  );
+                }
+              }
+              return Colors.transparent;
+            },
+            _disabledPressedHoveredDefaultStates,
+          ),
+        ),
       );
       expect(
         searchBarTheme.toString(minLevel: DiagnosticLevel.fine),
@@ -9621,7 +9447,7 @@ void main() {
             thumbColor: Color(0xff6200ee),
             disabledThumbColor: Color(0xff9e9e9e),
             overlayColor: Color(0x00000000),
-            valueIndicatorShape: DropSliderValueIndicatorShape(),
+            // valueIndicatorShape: DropSliderValueIndicatorShape(),
             rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
           ).toString(minLevel: DiagnosticLevel.debug),
         ),
@@ -9655,7 +9481,7 @@ void main() {
             disabledThumbColor: Color(0xff9e9e9e),
             overlayColor: Color(0x00000000),
             valueIndicatorColor: Color(0xff342342),
-            valueIndicatorShape: DropSliderValueIndicatorShape(),
+            // valueIndicatorShape: DropSliderValueIndicatorShape(),
             rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
             valueIndicatorTextStyle: TextStyle(
               inherit: true,
@@ -9678,7 +9504,7 @@ void main() {
       );
       expect(
         m.valueIndicatorShape,
-        equals(const DropSliderValueIndicatorShape()),
+        equals(null),
       );
       expect(
         m.rangeValueIndicatorShape,
@@ -9717,7 +9543,10 @@ void main() {
         m.valueIndicatorShape,
         equals(const RectangularSliderValueIndicatorShape()),
       );
-      expect(m.rangeValueIndicatorShape, equals(null));
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const RectangularRangeSliderValueIndicatorShape()),
+      );
       expect(
         (m.overlayColor as WidgetStateColor?)!.resolve(<WidgetState>{
           WidgetState.hovered,
@@ -9761,8 +9590,6 @@ void main() {
       m = FlexSubThemes.sliderTheme(
         colorScheme: colorScheme,
         valueIndicatorType: FlexSliderIndicatorType.drop,
-        useTintedDisable: true,
-        useTintedInteraction: true,
         useMaterial3: true,
       );
       expect(
@@ -9772,6 +9599,49 @@ void main() {
       expect(
         m.rangeValueIndicatorShape,
         equals(const PaddleRangeSliderValueIndicatorShape()),
+      );
+
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+        useOldM3Design: true,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(null),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const PaddleRangeSliderValueIndicatorShape()),
+      );
+
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+        useOldM3Design: false,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(null),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(null),
+      );
+
+      m = FlexSubThemes.sliderTheme(
+        colorScheme: colorScheme,
+        valueIndicatorType: FlexSliderIndicatorType.rounded,
+        useMaterial3: true,
+        useOldM3Design: false,
+      );
+      expect(
+        m.valueIndicatorShape,
+        equals(const RoundedRectSliderValueIndicatorShape()),
+      );
+      expect(
+        m.rangeValueIndicatorShape,
+        equals(const RoundedRectRangeSliderValueIndicatorShape()),
       );
     });
   });
@@ -9788,7 +9658,11 @@ void main() {
         equalsIgnoringHashCodes(
           SnackBarThemeData(
             elevation: 4,
-            actionTextColor: Colors.grey[500],
+            actionTextColor: WidgetStateColor.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.any: Colors.grey[500]!,
+              },
+            ),
           ).toString(minLevel: DiagnosticLevel.fine),
         ),
       );
@@ -9812,7 +9686,11 @@ void main() {
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: Colors.white,
                 ),
-            actionTextColor: Colors.white.withAlpha(0xDD),
+            actionTextColor: WidgetStateColor.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.any: Colors.white.withAlpha(0xDD),
+              },
+            ),
             disabledActionTextColor: Colors.white.withAlpha(0x11),
             closeIconColor: Colors.white.withAlpha(0xAA),
           ).toString(minLevel: DiagnosticLevel.fine),
@@ -9839,7 +9717,11 @@ void main() {
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: Colors.black,
                 ),
-            actionTextColor: colorScheme.inversePrimary,
+            actionTextColor: WidgetStateColor.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.any: colorScheme.inversePrimary,
+              },
+            ),
             disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
             closeIconColor: Colors.black.withAlpha(0xAA),
           ).toString(minLevel: DiagnosticLevel.fine),
@@ -9866,7 +9748,11 @@ void main() {
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: colorScheme.onError,
                 ),
-            actionTextColor: colorScheme.inversePrimary,
+            actionTextColor: WidgetStateColor.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.any: colorScheme.inversePrimary,
+              },
+            ),
             disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
           ).toString(minLevel: DiagnosticLevel.fine),
@@ -9899,7 +9785,11 @@ void main() {
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
                   color: colorScheme.onError,
                 ),
-            actionTextColor: colorScheme.tertiary,
+            actionTextColor: WidgetStateColor.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.any: colorScheme.tertiary,
+              },
+            ),
             disabledActionTextColor: colorScheme.tertiary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
           ).toString(minLevel: DiagnosticLevel.fine),
@@ -9934,7 +9824,11 @@ void main() {
               fontSize: 14,
               color: colorScheme.onError,
             ),
-            actionTextColor: colorScheme.tertiary,
+            actionTextColor: WidgetStateColor.fromMap(
+              <WidgetStatesConstraint, Color>{
+                WidgetState.any: colorScheme.tertiary,
+              },
+            ),
             disabledActionTextColor: colorScheme.tertiary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
           ).toString(minLevel: DiagnosticLevel.fine),
@@ -9961,55 +9855,63 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
-            thumbColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade400;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.primary;
-              }
-              return Colors.grey.shade50;
-            }),
-            trackColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.black12;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.primary.withAlpha(0x70);
-              }
-              // Opinionated color on track when not selected
-              return colorScheme.primary.withAlpha(0x30);
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color?>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return null;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return null;
-            }),
+            thumbColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.grey.shade400;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.primary;
+                  }
+                  return Colors.grey.shade50;
+                },
+                _switchThumbStates,
+              ),
+            ),
+            trackColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.black12;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.primary.withAlpha(0x70);
+                  }
+                  return kSwitchM2LightTrackColor;
+                },
+                _switchTrackStates,
+              ),
+            ),
+            overlayColor: WidgetStateProperty<Color?>.fromMap(
+              widgetStateMap<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.primary.withAlpha(kAlphaPressed);
+                    }
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.primary.withAlpha(kAlphaHovered);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.primary.withAlpha(kAlphaFocused);
+                    }
+                    return null;
+                  }
+                  if (states.contains(WidgetState.pressed)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaPressed);
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaHovered);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaFocused);
+                  }
+                  return null;
+                },
+                _switchOverlayStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -10281,55 +10183,63 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           SwitchThemeData(
-            thumbColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade800;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.secondary;
-              }
-              return Colors.grey.shade400;
-            }),
-            trackColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.white10;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.secondary.withAlpha(0x70);
-              }
-              // Opinionated color on track when not selected
-              return colorScheme.secondary.withAlpha(0x25);
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color?>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return null;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return null;
-            }),
+            thumbColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.grey.shade800;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.secondary;
+                  }
+                  return Colors.grey.shade400;
+                },
+                _switchThumbStates,
+              ),
+            ),
+            trackColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.white10;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.secondary.withAlpha(0x80);
+                  }
+                  return colorScheme.secondary.withAlpha(0x65);
+                },
+                _switchTrackStates,
+              ),
+            ),
+            overlayColor: WidgetStateProperty<Color?>.fromMap(
+              widgetStateMap<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.primary.withAlpha(kAlphaPressed);
+                    }
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.primary.withAlpha(kAlphaHovered);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.primary.withAlpha(kAlphaFocused);
+                    }
+                    return null;
+                  }
+                  if (states.contains(WidgetState.pressed)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaPressed);
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaHovered);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaFocused);
+                  }
+                  return null;
+                },
+                _switchOverlayStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -10404,7 +10314,9 @@ void main() {
           colorScheme: colorScheme,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{WidgetState.selected}),
-        isSameColorAs(colorScheme.primary.withAlpha(0x80)),
+        isSameColorAs(
+          colorScheme.primary.withAlpha(kAlphaM2SwitchTrackDark),
+        ),
       );
       // Default states
       expect(
@@ -10420,7 +10332,9 @@ void main() {
           unselectedIsColored: true,
           useMaterial3: false,
         ).trackColor!.resolve(<WidgetState>{}),
-        isSameColorAs(colorScheme.primary.withAlpha(0x65)),
+        isSameColorAs(
+          colorScheme.primary.withAlpha(kAlphaM2SwitchUnselectTrackDark),
+        ),
       );
       // Default state for trackColor when unselectedIsColored, is false
       expect(
@@ -10451,55 +10365,65 @@ void main() {
         equalsIgnoringHashCodes(
           SwitchThemeData(
             splashRadius: 30,
-            thumbColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.grey.shade400;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.tertiary;
-              }
-              return Colors.grey.shade50;
-            }),
-            trackColor: WidgetStateProperty.resolveWith<Color>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.disabled)) {
-                return Colors.black12;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return colorScheme.tertiary.withAlpha(0x70);
-              }
-              // Opinionated color on track when not selected
-              return colorScheme.tertiary.withAlpha(0x30);
-            }),
-            overlayColor: WidgetStateProperty.resolveWith<Color?>((
-              Set<WidgetState> states,
-            ) {
-              if (states.contains(WidgetState.selected)) {
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.primary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.primary.withValues(alpha: 0.12);
-                }
-                return null;
-              }
-              if (states.contains(WidgetState.pressed)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              if (states.contains(WidgetState.hovered)) {
-                return colorScheme.onSurface.withValues(alpha: 0.08);
-              }
-              if (states.contains(WidgetState.focused)) {
-                return colorScheme.onSurface.withValues(alpha: 0.12);
-              }
-              return null;
-            }),
+            thumbColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.grey.shade400;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.tertiary;
+                  }
+                  return Colors.grey.shade50;
+                },
+                _switchThumbStates,
+              ),
+            ),
+            trackColor: WidgetStateProperty<Color>.fromMap(
+              widgetStateMap<Color>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.disabled)) {
+                    return Colors.black12;
+                  }
+                  if (states.contains(WidgetState.selected)) {
+                    return colorScheme.tertiary
+                        .withAlpha(kAlphaM2SwitchTrackLight);
+                  }
+                  return colorScheme.tertiary
+                      .withAlpha(kAlphaM2SwitchUnselectTrackLight);
+                },
+                _switchTrackStates,
+              ),
+            ),
+            overlayColor: WidgetStateProperty<Color?>.fromMap(
+              widgetStateMap<Color?>(
+                (Set<WidgetState> states) {
+                  if (states.contains(WidgetState.selected)) {
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.primary.withAlpha(kAlphaPressed);
+                    }
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.primary.withAlpha(kAlphaHovered);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.primary.withAlpha(kAlphaFocused);
+                    }
+                    return null;
+                  }
+                  if (states.contains(WidgetState.pressed)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaPressed);
+                  }
+                  if (states.contains(WidgetState.hovered)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaHovered);
+                  }
+                  if (states.contains(WidgetState.focused)) {
+                    return colorScheme.onSurface.withAlpha(kAlphaFocused);
+                  }
+                  return null;
+                },
+                _switchOverlayStates,
+              ),
+            ),
           ).toString(),
         ),
       );
@@ -11251,36 +11175,45 @@ void main() {
                   borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
               ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.secondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.onSurface.withValues(alpha: 0.38);
-                }
-                return colorScheme.secondary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color?>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.secondary.withValues(alpha: 0.08);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.secondary.withValues(alpha: 0.12);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.secondary.withValues(alpha: 0.12);
-                }
-                return null;
-              }),
+              foregroundColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+                    }
+                    return colorScheme.secondary;
+                  },
+                  _disabledDefaultStates,
+                ),
+              ),
+              iconColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.onSurface.withAlpha(kAlphaDisabled);
+                    }
+                    return colorScheme.secondary;
+                  },
+                  _disabledDefaultStates,
+                ),
+              ),
+              overlayColor: WidgetStateProperty<Color?>.fromMap(
+                widgetStateMap<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.secondary.withValues(alpha: 0.08);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.secondary.withValues(alpha: 0.12);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.secondary.withValues(alpha: 0.12);
+                    }
+                    return null;
+                  },
+                  _hoverFocusPressStates,
+                ),
+              ),
             ),
           ).toString(),
         ),

@@ -152,7 +152,7 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
                         },
                       ),
                       title: Text('${SimulatorPopupMenu.devices[device].name} ('
-                          // ignore: lines_longer_than_80_chars
+                          // ignore: lines_longer_than_80_chars, str interpol.
                           '${SimulatorPopupMenu.devices[device].info.identifier.platform.name})'),
                       subtitleReveal: Text('${_phoneInfo(device)}\n'),
                       trailing: Icon(

@@ -7,24 +7,22 @@ import 'widgets/theme_color_selector_header_delegate.dart';
 import 'widgets/topic_selector.dart';
 import 'widgets/vertical_panel_view.dart';
 
-// ignore_for_file: comment_references
-
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
 // The handy part is that if it gets in the way in debugging, it is an easy
 // toggle to turn it off there too. Often I just leave them true if it is one
 // I want to see in dev mode, unless it is too chatty.
-// ignore: no_literal_bool_comparisons_
+// ignore: no_literal_bool_comparisons, used for debug config.
 const bool _debug = !kReleaseMode && false;
 
-/// This is the two topics view of the Playground.
+/// This is the two topics side-by-side view of the Playground.
 ///
 /// Used only on big desktops, when desktop size is over
 /// [App.mediumDesktopWidthBreakpoint] in width.
 ///
-/// This view no longer like the [ThemeTopicPage] keep the content of the two
-/// side-by-side theme topic panels in a [PageView], in fact there is no
-/// [PageView] in this layout, it is a lot simpler that way.
+/// This view does not keep the content of the two side-by-side theme
+/// topic panels in a [PageView], there is no [PageView] in this layout,
+/// it is a lot simpler that way than the `OneOrTwoTopicPageView` view.
 /// It is just a [CustomScrollView] with a [SliverPersistentHeader] and the
 /// same [ThemeColorSelectorHeaderDelegate] that is used in the large masonry
 /// grid view.
@@ -34,11 +32,8 @@ const bool _debug = !kReleaseMode && false;
 /// selector should be on the left o right side.
 ///
 /// One advantage with this scroll view is that the two sides scroll
-/// independently from each other, not as in the [ThemeTopicPage] where they
-/// are in the same [PageView] and partially scroll together.
-///
-/// This view was a quick rework of [ThemeTopicPage] to create a totally
-/// new layout by mostly re-using already existing parts in the app.
+/// independently from each other, not as in the `OneOrTwoTopicPageView`
+/// where they are in the same [PageView] and partially scroll together.
 class TwoTopicsPage extends StatefulWidget {
   const TwoTopicsPage({
     super.key,

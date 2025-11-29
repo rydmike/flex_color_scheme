@@ -267,7 +267,7 @@ class NavigationBarPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationBarSelectedLabelSize !=
                       null
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   ? '${(controller.navigationBarSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
                   : '12 pt',
               valueDefaultDisabledLabel: '12 pt',
@@ -305,7 +305,7 @@ class NavigationBarPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationBarSelectedIconSize !=
                       null
-                  // ignore: lines_longer_than_80_chars
+                  // ignore: lines_longer_than_80_chars, string interpolation
                   ? '${(controller.navigationBarSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
                   : '24 dp',
               valueDefaultDisabledLabel: '24 dp',
@@ -330,7 +330,7 @@ class NavigationBarPanel extends StatelessWidget {
               'Keeping it around for now, but it is not useful in Flutter 3.22 '
               'and later.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, string interpolation
               '${controller.adaptiveRemoveNavigationBarTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveNavigationBarTintLight,
@@ -352,7 +352,7 @@ class NavigationBarPanel extends StatelessWidget {
               'Keeping it around for now, but it is not useful in Flutter 3.22 '
               'and later.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, string interpolation
               '${controller.adaptiveRemoveNavigationBarTintDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveNavigationBarTintDark,

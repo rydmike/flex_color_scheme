@@ -14,7 +14,7 @@ import 'theme_service.dart';
 // The handy part is that if it gets in the way in debugging, it is an easy
 // toggle to turn it off there too. Often I just leave them true if it is one
 // I want to see in dev mode, unless it is too chatty.
-// ignore: no_literal_bool_comparisons_
+// ignore: no_literal_bool_comparisons, used for debug config.
 const bool _debug = !kReleaseMode && true;
 
 /// A [ThemeService] implementation that stores and retrieves theme settings
@@ -853,6 +853,28 @@ class ThemeServicePrefs implements ThemeService {
         if (value < 0) return defaultValue;
         if (value >= TabIndicatorAnimation.values.length) return defaultValue;
         return TabIndicatorAnimation.values[value] as T;
+      }
+      // T is StrokeCap is nullable value.
+      if (sameTypes<T, StrokeCap?>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded StrokeCap?: $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return null as T;
+        if (value >= StrokeCap.values.length) return defaultValue;
+        return StrokeCap.values[value] as T;
+      }
+      // T is StrokeCap none nullable value.
+      if (sameTypes<T, StrokeCap>()) {
+        final int? value = _prefs.getInt(key);
+        if (_debug) {
+          debugPrint('SharedPrefs loaded StrokeCap : $key as $value');
+        }
+        if (value == null) return defaultValue;
+        if (value < 0) return defaultValue;
+        if (value >= StrokeCap.values.length) return defaultValue;
+        return StrokeCap.values[value] as T;
       }
     } catch (e) {
       debugPrint('SharedPrefs load ERROR');

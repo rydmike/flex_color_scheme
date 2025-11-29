@@ -8,11 +8,9 @@ import 'code_theme.dart';
 import 'flex_theme_dark.dart';
 import 'topic_theme.dart';
 
-// ignore_for_file: comment_references
-
 /// Return a Flutter SDK standard created [ThemeData] object,
 /// using the [ColorScheme] colors created by the current configuration
-/// in our [FlexColorScheme] object as configured by the [ThemeController].
+/// in our `FlexColorScheme` object as configured by the [ThemeController].
 ///
 /// Here we do NOT use FlexColorScheme to make the theme. We use the SDK
 /// ThemeData factory to make the theme instead. This is used in the demo
@@ -23,7 +21,7 @@ import 'topic_theme.dart';
 /// can use with ThemeData to create the ThemeData from the exact same
 /// colors. The [ColorScheme] it creates also contains the blends, M3 seeded
 /// color etc, but since [ColorScheme], only contains surface and background
-/// colors and is missing [FlexColorScheme] custom Scaffold and dialog color,
+/// colors and is missing `FlexColorScheme` custom Scaffold and dialog color,
 /// it cannot provide those colors.
 ///
 /// NOTE:

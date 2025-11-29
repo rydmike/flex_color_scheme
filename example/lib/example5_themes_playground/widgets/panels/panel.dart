@@ -28,6 +28,7 @@ import 'navigation_drawer/navigation_drawer_panel.dart';
 import 'navigation_rail/navigation_rail_panel.dart';
 import 'popup_menu_button/popup_menu_button_panel.dart';
 import 'premade_designs/premade_designs_panel.dart';
+import 'progress_indicator/progress_indicator_panel.dart';
 import 'search_bar/search_bar_panel.dart';
 import 'segmented_buttons/segmented_buttons_panel.dart';
 import 'shape_radius/shape_radius_panel.dart';
@@ -41,16 +42,13 @@ import 'text_theme/text_theme_panel.dart';
 import 'theme_code/theme_code_panel.dart';
 import 'theme_export_import/theme_export_import_panel.dart';
 import 'theme_simulator/theme_simulator_panel.dart';
-import 'tooltip_progressbar/tooltip_progressbar_settings.dart';
+import 'tooltip_progressbar/tooltip_panel.dart';
 import 'widget_showcase/widget_showcase_panel.dart';
-
-// ignore_for_file: comment_references
 
 /// Used to select which one of all the theme topic panels in the
 /// Themes Playground is shown as content in a panel.
 ///
-/// The panels are used as content in the [PageView.builder] based view used
-/// by the [TopicPage], the [TwoTopicsPage] and [].
+/// The panels are used as content in a [PageView.builder].
 class Panel extends StatelessWidget {
   const Panel(this.page, this.controller, {super.key});
   final int page;
@@ -78,7 +76,8 @@ class Panel extends StatelessWidget {
       ChipPanel(controller),
       SwitchCheckRadioPanel(controller),
       IconButtonAvatarPanel(controller),
-      TooltipProgressBarPanel(controller),
+      TooltipPanel(controller),
+      ProgressIndicatorPanel(controller),
       SlidersPanel(controller),
       TextFieldPanel(controller),
       PopupMenuButtonPanel(controller),

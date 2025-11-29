@@ -20,8 +20,8 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 /// This gives you the default opinionated component theming setup.
 ///
 /// The list of properties in the flat configuration class is very large.
-/// While it can be a bit tricky to maintain it, using it is easy and a
-/// convenient way to adjust commonly used properties on UI component
+/// While it can be a bit tricky to maintain this, using it is easy, and a
+/// convenient way to adjust commonly used theming properties on UI component
 /// widgets, by using a simple flat list of property values.
 ///
 /// No need for deep [ShapeBorder] definitions for a simple border radius
@@ -62,12 +62,12 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 ///
 /// By design the shape border radius rounding on included and
 /// supported sub-themes that use shapes, default to the border radius
-/// defined by the Material 3 guide per widget,
-/// [see Material 3 Design guide](https://m3.material.io). This is done also
-/// in Material 2 mode. This can give your Material 2 app a more modern look
-/// without using the Material 3 mode in Flutter [ThemeData]. If you
-/// want the actual border radius used in Material 2 for a Material 2 using
-/// application, set [defaultRadius] to 4 dp.
+/// defined by the Material-3 guide per widget,
+/// [see Material-3 Design guide](https://m3.material.io). This is done also
+/// in Material-2 mode. This can give your Material 2 app a more modern look
+/// without using the Material-3 mode in Flutter [ThemeData]. If you
+/// want the actual border radius used in Material-2 for a legacy Material-2
+/// using application, set [defaultRadius] to 4 dp.
 ///
 /// Additionally, the sub-theming offers a consistent button design on all
 /// buttons, including [ToggleButtons] that is styled to match size of
@@ -75,18 +75,19 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 /// [ElevatedButton] color. Hover and Focus colors are also matched. It is also
 /// size matched with the other buttons, and includes a theme implementation
 /// that makes it implement [VisualDensity], which it does not do out of the box
-/// in the SDK.
+/// in Flutter's Material implementation.
 ///
 /// On most sub-themes the used default colors from the theme's colorScheme for
 /// each component's color properties can be changed with an enum based
-/// [SchemeColor] selection value.
+/// [SchemeColor] selection value. Allowing easy color swapping of component
+/// colors from the themed ColorScheme.
 ///
 /// If the options included in [FlexColorScheme] are not enough, you can always
 /// modify any [FlexColorScheme] produced [ThemeData] object with
 /// [ThemeData.copyWith] to add custom component sub-theme designs that
 /// [FlexColorScheme] does not include or support directly.
 ///
-/// It is not in-scope to provide every option possible via Flutter SDK
+/// It is not in-scope to provide every option possible via Flutter's Material
 /// component sub-themes to be configurable via [FlexSubThemesData]. Only a
 /// sub-set of commonly used properties are available as convenient sub-theme
 /// settings via this flat and easy to use configuration class.
@@ -143,6 +144,8 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 ///   [FlexSubThemes.outlinedButtonTheme].
 /// * [PopupMenuThemeData] for [PopupMenuButton] via
 ///   [FlexSubThemes.popupMenuTheme].
+/// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
 /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
 /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
@@ -260,6 +263,7 @@ class FlexSubThemesData with Diagnosticable {
     this.sliderValueIndicatorType,
     this.sliderShowValueIndicator,
     this.sliderTrackHeight,
+    this.sliderYear2023,
     //
     this.inputDecoratorRadius,
     this.inputDecoratorRadiusAdaptive,
@@ -319,6 +323,9 @@ class FlexSubThemesData with Diagnosticable {
     this.chipIconSize,
     this.chipPadding,
     //
+    this.cardBackgroundSchemeColor,
+    this.cardBorderSchemeColor,
+    this.cardBorderWidth,
     this.cardRadius,
     this.cardElevation,
     //
@@ -372,6 +379,23 @@ class FlexSubThemesData with Diagnosticable {
     this.tooltipShowDuration,
     this.tooltipSchemeColor,
     this.tooltipOpacity,
+    //
+    // Progress Indicator
+    this.progressIndicatorBaseSchemeColor,
+    this.progressIndicatorLinearTrackSchemeColor,
+    this.progressIndicatorLinearMinHeight,
+    this.progressIndicatorCircularTrackSchemeColor,
+    this.progressIndicatorRefreshBackgroundSchemeColor,
+    this.progressIndicatorLinearRadius,
+    this.progressIndicatorStopIndicatorSchemeColor,
+    this.progressIndicatorStopIndicatorRadius,
+    this.progressIndicatorStrokeWidth,
+    this.progressIndicatorStrokeAlign,
+    this.progressIndicatorStrokeCap,
+    this.progressIndicatorConstraints,
+    this.progressIndicatorTrackGap,
+    this.progressIndicatorCircularTrackPadding,
+    this.progressIndicatorYear2023,
     //
     this.useInputDecoratorThemeInDialogs,
     //
@@ -578,8 +602,8 @@ class FlexSubThemesData with Diagnosticable {
       'issue is addressed, the tinted TextTheme feature in FCS may '
       'be brought back, if it is a requested feature.\n'
       '\n'
-      'In current Flutter versions, using a custom tinted TextTheme is '
-      'rather pointless. You can do it, but is not enough to just define the '
+      'In current Flutter versions, using a custom tinted TextTheme is rather '
+      'pointless. You can do it, but it is not enough to just define the '
       'TextTheme. You also have to pass each tinted TextStyle it has to the '
       'appropriate TextStyles in ALL component themes that override its '
       'colors, for it to have any effect. It is typically not '
@@ -1769,7 +1793,6 @@ class FlexSubThemesData with Diagnosticable {
   /// Default to false.
   final bool sliderValueTinted;
 
-  // TODO(rydmike): RangeSlider to use real M3 style when supported.
   /// Enum used to select the type of built-in value indicator used by
   /// [Slider].
   ///
@@ -1800,6 +1823,21 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// If undefined, defaults to 4 dp via Flutter SDK defaults.
   final double? sliderTrackHeight;
+
+  // ignore: deprecated_member_use, need to use in doc comment,
+  /// Overrides default value of [Slider.year2023] and [RangeSlider.year2023].
+  ///
+  /// When true, the [Slider] and [RangeSlider] will use the older before of
+  /// 2023 Material Design 3 appearance.
+  ///
+  /// If this is set to false, the [Slider] and [RangeSlider] will use the
+  /// latest Material Design 3 appearance, which was introduced
+  /// in December 2023 and became common during 2024.
+  ///
+  /// If [ThemeData.useMaterial3] is false, then this property is ignored.
+  ///
+  /// Defaults to true, if not defined.
+  final bool? sliderYear2023;
 
   /// The border radius value for themed [InputDecoration].
   ///
@@ -2373,6 +2411,49 @@ class FlexSubThemesData with Diagnosticable {
   /// Material2 mode.
   final EdgeInsetsGeometry? chipPadding;
 
+  /// Selects which color from the theme in [ColorScheme] to use as the
+  /// background color of Cards.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: [ThemeData.cardColor]
+  /// - M3: Card (elevated): [ColorScheme.surfaceContainerLow]
+  /// - M3: Card.filled: [ColorScheme.surfaceContainerHighest]
+  /// - M3: Card.outlined: [ColorScheme.surface]
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  final SchemeColor? cardBackgroundSchemeColor;
+
+  /// Selects which color from the theme [ColorScheme] to use as the
+  /// border color for Cards.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: no border
+  /// - M3: Card (elevated): no border
+  /// - M3: Card.filled: no border
+  /// - M3: Card.outlined: [ColorScheme.outlineVariant]
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  final SchemeColor? cardBorderSchemeColor;
+
+  /// Defines the border width of the border on Cards.
+  ///
+  /// Only used if [cardBorderSchemeColor] is also defined.
+  ///
+  /// If not defined, defaults to:
+  /// - M2: no border
+  /// - M3: Card (elevated): no border
+  /// - M3: Card.filled: no border
+  /// - M3: Card.outlined: 1.0
+  ///
+  /// Warning: The Card variants cannot be themed separately in Flutter, if
+  /// you provide a color, all card variants will share the same color.
+  /// See issue: https://github.com/flutter/flutter/issues/153912
+  final double? cardBorderWidth;
+
   /// Border radius value for [Card].
   ///
   /// If not defined and [defaultRadius] is undefined, defaults to
@@ -2754,6 +2835,130 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// See [FlexColorScheme.tooltipsMatchBackground] for additional details.
   final double? tooltipOpacity;
+
+  /// The color of the [ProgressIndicator]'s indicator.
+  ///
+  /// If null, then it will use [ColorScheme.primary] of the ambient
+  /// [ThemeData.colorScheme].
+  final SchemeColor? progressIndicatorBaseSchemeColor;
+
+  /// Color of the track being filled by the linear indicator.
+  ///
+  /// If [progressIndicatorLinearTrackSchemeColor] is null then in M2 mode
+  /// the ambient theme's deprecated ColorScheme.background color is used
+  /// In M3 mode [ColorScheme.secondaryContainer] is used as default.
+  final SchemeColor? progressIndicatorLinearTrackSchemeColor;
+
+  /// The minimum height of the line used to draw the linear indicator.
+  ///
+  /// If [progressIndicatorLinearMinHeight] is null it defaults to 4dp.
+  final double? progressIndicatorLinearMinHeight;
+
+  /// Scheme color of the circular track being filled by circular indicator.
+  ///
+  /// If [progressIndicatorCircularTrackSchemeColor] is null the track will
+  /// not be painted.
+  final SchemeColor? progressIndicatorCircularTrackSchemeColor;
+
+  /// Background scheme color fill under the circle of the refresh indicator.
+  ///
+  /// If [progressIndicatorRefreshBackgroundSchemeColor] is null then the
+  /// ambient theme's [ThemeData.canvasColor]
+  /// will be used. In FCs this defaults to [ColorScheme.surface].
+  final SchemeColor? progressIndicatorRefreshBackgroundSchemeColor;
+
+  /// The border radius of both the linear indicator and the track.
+  ///
+  /// Defaults to circular radius of 2 in Material-3, which produces a
+  /// rounded shape with a rounded indicator. In Material-2 mode it defaults
+  /// to [BorderRadius.zero], which produces a rectangular shape
+  /// with a rectangular indicator.
+  ///
+  /// Providing a values of 0 or less will result in [BorderRadius.zero].
+  final double? progressIndicatorLinearRadius;
+
+  /// The scheme color of the stop indicator of the [LinearProgressIndicator].
+  ///
+  /// If [progressIndicatorYear2023] is true/null or [ThemeData.useMaterial3]
+  /// is false, then no stop indicator will be drawn.
+  ///
+  /// Defaults to [SchemeColor.primary].
+  final SchemeColor? progressIndicatorStopIndicatorSchemeColor;
+
+  /// Overrides the stop indicator radius of the [LinearProgressIndicator].
+  ///
+  /// If [progressIndicatorYear2023] is true or
+  /// [ThemeData.useMaterial3] is false, then no stop indicator will be drawn.
+  final double? progressIndicatorStopIndicatorRadius;
+
+  /// The width of the line used to draw the circle in the
+  /// [CircularProgressIndicator].
+  final double? progressIndicatorStrokeWidth;
+
+  /// The relative position of the stroke on a [CircularProgressIndicator].
+  ///
+  /// Values typically range from -1.0
+  /// ([CircularProgressIndicator.strokeAlignInside], inside stroke)
+  /// to 1.0 ([CircularProgressIndicator.strokeAlignOutside], outside stroke),
+  /// without any bound constraints (e.g., a value of -2.0 is not typical,
+  /// but allowed).
+  /// A value of 0 ([CircularProgressIndicator.strokeAlignCenter]) will center
+  /// the border on the edge of the widget.
+  ///
+  /// If [progressIndicatorYear2023] is true, then the default value is
+  /// [CircularProgressIndicator.strokeAlignCenter].
+  /// Otherwise, the default value is
+  /// [CircularProgressIndicator.strokeAlignInside].
+  final double? progressIndicatorStrokeAlign;
+
+  /// Overrides the stroke cap of the [CircularProgressIndicator].
+  ///
+  /// Determines the shape of the stroke ends of the progress indicator.
+  /// By default, [progressIndicatorStrokeCap] is null.
+  /// When value is null (indeterminate), the stroke ends are set to
+  /// [StrokeCap.square]. When value is not null, the stroke
+  /// ends are set to [StrokeCap.butt].
+  ///
+  /// Setting [progressIndicatorStrokeCap] to [StrokeCap.round] will result
+  /// in a rounded end.
+  /// Setting [progressIndicatorStrokeCap] to [StrokeCap.butt] with
+  /// value == null will result in a slightly different indeterminate animation;
+  /// the indicator completely disappears and reappears on its minimum value.
+  /// Setting [progressIndicatorStrokeCap] to [StrokeCap.square] with
+  /// value != null will result in a different display of value.
+  /// The indicator will start drawing from slightly less than the start,
+  /// and end slightly after the end. This will produce an alternative result,
+  /// as the default behavior, for example, that a value of 0.5 starts at 90
+  /// degrees and ends at 270 degrees. With [StrokeCap.square], it could
+  /// start 85 degrees and end at 275 degrees.
+  final StrokeCap? progressIndicatorStrokeCap;
+
+  /// Defines minimum and maximum sizes for a [CircularProgressIndicator].
+  ///
+  /// If null, in Material-2 or Material-3 when [progressIndicatorYear2023] is
+  /// true or null, defaults to a minimum width and height of 36 pixels.
+  /// If Material-3 mode and [progressIndicatorYear2023] is false,
+  /// defaults to a minimum width and height of 40 pixels.
+  final BoxConstraints? progressIndicatorConstraints;
+
+  /// Overrides the active indicator and the background track gap.
+  ///
+  /// If [progressIndicatorYear2023] is true or
+  /// [ThemeData.useMaterial3] is false, then no track gap will be drawn.
+  final double? progressIndicatorTrackGap;
+
+  /// Overrides the padding of the [CircularProgressIndicator].
+  final EdgeInsetsGeometry? progressIndicatorCircularTrackPadding;
+
+  /// When true, the [CircularProgressIndicator] and [LinearProgressIndicator]
+  /// will use the 2023 Material-3 appearance. Defaults to true.
+  ///
+  /// If this is set to false, the [CircularProgressIndicator] and
+  /// [LinearProgressIndicator] will use the latest Material-3 appearance,
+  /// which was introduced in December 2023 and become common in 2024.
+  ///
+  /// If [ThemeData.useMaterial3] is false, then this property is ignored.
+  final bool? progressIndicatorYear2023;
 
   /// Set to true to use the app overall app [InputDecoration] theme in
   /// dialogs themes.
@@ -4277,6 +4482,7 @@ class FlexSubThemesData with Diagnosticable {
     final FlexSliderIndicatorType? sliderValueIndicatorType,
     final ShowValueIndicator? sliderShowValueIndicator,
     final double? sliderTrackHeight,
+    final bool? sliderYear2023,
     //
     final double? inputDecoratorRadius,
     final double? inputDecoratorRadiusAdaptive,
@@ -4337,6 +4543,9 @@ class FlexSubThemesData with Diagnosticable {
     final EdgeInsetsGeometry? chipPadding,
     //
     final double? cardRadius,
+    final SchemeColor? cardBackgroundSchemeColor,
+    final SchemeColor? cardBorderSchemeColor,
+    final double? cardBorderWidth,
     final double? cardElevation,
     //
     final double? popupMenuRadius,
@@ -4370,6 +4579,22 @@ class FlexSubThemesData with Diagnosticable {
     final Duration? tooltipShowDuration,
     final SchemeColor? tooltipSchemeColor,
     final double? tooltipOpacity,
+    //
+    final SchemeColor? progressIndicatorBaseSchemeColor,
+    final SchemeColor? progressIndicatorLinearTrackSchemeColor,
+    final double? progressIndicatorLinearMinHeight,
+    final SchemeColor? progressIndicatorCircularTrackSchemeColor,
+    final SchemeColor? progressIndicatorRefreshBackgroundSchemeColor,
+    final double? progressIndicatorLinearRadius,
+    final SchemeColor? progressIndicatorStopIndicatorSchemeColor,
+    final double? progressIndicatorStopIndicatorRadius,
+    final double? progressIndicatorStrokeWidth,
+    final double? progressIndicatorStrokeAlign,
+    final StrokeCap? progressIndicatorStrokeCap,
+    final BoxConstraints? progressIndicatorConstraints,
+    final double? progressIndicatorTrackGap,
+    final EdgeInsetsGeometry? progressIndicatorCircularTrackPadding,
+    final bool? progressIndicatorYear2023,
     //
     final SchemeColor? searchBarBackgroundSchemeColor,
     final SchemeColor? searchViewBackgroundSchemeColor,
@@ -4687,6 +4912,7 @@ class FlexSubThemesData with Diagnosticable {
       sliderShowValueIndicator:
           sliderShowValueIndicator ?? this.sliderShowValueIndicator,
       sliderTrackHeight: sliderTrackHeight ?? this.sliderTrackHeight,
+      sliderYear2023: sliderYear2023 ?? this.sliderYear2023,
       //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
       inputDecoratorRadiusAdaptive:
@@ -4790,6 +5016,11 @@ class FlexSubThemesData with Diagnosticable {
       chipPadding: chipPadding ?? this.chipPadding,
       //
       cardRadius: cardRadius ?? this.cardRadius,
+      cardBackgroundSchemeColor:
+          cardBackgroundSchemeColor ?? this.cardBackgroundSchemeColor,
+      cardBorderSchemeColor:
+          cardBorderSchemeColor ?? this.cardBorderSchemeColor,
+      cardBorderWidth: cardBorderWidth ?? this.cardBorderWidth,
       cardElevation: cardElevation ?? this.cardElevation,
       //
       popupMenuRadius: popupMenuRadius ?? this.popupMenuRadius,
@@ -4830,6 +5061,43 @@ class FlexSubThemesData with Diagnosticable {
       tooltipShowDuration: tooltipShowDuration ?? this.tooltipShowDuration,
       tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
       tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
+      //
+      progressIndicatorBaseSchemeColor: progressIndicatorBaseSchemeColor ??
+          this.progressIndicatorBaseSchemeColor,
+      progressIndicatorLinearTrackSchemeColor:
+          progressIndicatorLinearTrackSchemeColor ??
+              this.progressIndicatorLinearTrackSchemeColor,
+      progressIndicatorLinearMinHeight: progressIndicatorLinearMinHeight ??
+          this.progressIndicatorLinearMinHeight,
+      progressIndicatorCircularTrackSchemeColor:
+          progressIndicatorCircularTrackSchemeColor ??
+              this.progressIndicatorCircularTrackSchemeColor,
+      progressIndicatorRefreshBackgroundSchemeColor:
+          progressIndicatorRefreshBackgroundSchemeColor ??
+              this.progressIndicatorRefreshBackgroundSchemeColor,
+      progressIndicatorLinearRadius:
+          progressIndicatorLinearRadius ?? this.progressIndicatorLinearRadius,
+      progressIndicatorStopIndicatorSchemeColor:
+          progressIndicatorStopIndicatorSchemeColor ??
+              this.progressIndicatorStopIndicatorSchemeColor,
+      progressIndicatorStopIndicatorRadius:
+          progressIndicatorStopIndicatorRadius ??
+              this.progressIndicatorStopIndicatorRadius,
+      progressIndicatorStrokeWidth:
+          progressIndicatorStrokeWidth ?? this.progressIndicatorStrokeWidth,
+      progressIndicatorStrokeAlign:
+          progressIndicatorStrokeAlign ?? this.progressIndicatorStrokeAlign,
+      progressIndicatorStrokeCap:
+          progressIndicatorStrokeCap ?? this.progressIndicatorStrokeCap,
+      progressIndicatorConstraints:
+          progressIndicatorConstraints ?? this.progressIndicatorConstraints,
+      progressIndicatorTrackGap:
+          progressIndicatorTrackGap ?? this.progressIndicatorTrackGap,
+      progressIndicatorCircularTrackPadding:
+          progressIndicatorCircularTrackPadding ??
+              this.progressIndicatorCircularTrackPadding,
+      progressIndicatorYear2023:
+          progressIndicatorYear2023 ?? this.progressIndicatorYear2023,
       //
       searchBarBackgroundSchemeColor:
           searchBarBackgroundSchemeColor ?? this.searchBarBackgroundSchemeColor,
@@ -5235,6 +5503,7 @@ class FlexSubThemesData with Diagnosticable {
         other.sliderValueIndicatorType == sliderValueIndicatorType &&
         other.sliderShowValueIndicator == sliderShowValueIndicator &&
         other.sliderTrackHeight == sliderTrackHeight &&
+        other.sliderYear2023 == sliderYear2023 &&
         //
         other.inputDecoratorRadius == inputDecoratorRadius &&
         other.inputDecoratorRadiusAdaptive == inputDecoratorRadiusAdaptive &&
@@ -5306,6 +5575,9 @@ class FlexSubThemesData with Diagnosticable {
         other.chipPadding == chipPadding &&
         //
         other.cardRadius == cardRadius &&
+        other.cardBackgroundSchemeColor == cardBackgroundSchemeColor &&
+        other.cardBorderSchemeColor == cardBorderSchemeColor &&
+        other.cardBorderWidth == cardBorderWidth &&
         other.cardElevation == cardElevation &&
         //
         other.popupMenuRadius == popupMenuRadius &&
@@ -5341,6 +5613,30 @@ class FlexSubThemesData with Diagnosticable {
         other.tooltipShowDuration == tooltipShowDuration &&
         other.tooltipSchemeColor == tooltipSchemeColor &&
         other.tooltipOpacity == tooltipOpacity &&
+        //
+        other.progressIndicatorBaseSchemeColor ==
+            progressIndicatorBaseSchemeColor &&
+        other.progressIndicatorLinearTrackSchemeColor ==
+            progressIndicatorLinearTrackSchemeColor &&
+        other.progressIndicatorLinearMinHeight ==
+            progressIndicatorLinearMinHeight &&
+        other.progressIndicatorCircularTrackSchemeColor ==
+            progressIndicatorCircularTrackSchemeColor &&
+        other.progressIndicatorRefreshBackgroundSchemeColor ==
+            progressIndicatorRefreshBackgroundSchemeColor &&
+        other.progressIndicatorLinearRadius == progressIndicatorLinearRadius &&
+        other.progressIndicatorStopIndicatorSchemeColor ==
+            progressIndicatorStopIndicatorSchemeColor &&
+        other.progressIndicatorStopIndicatorRadius ==
+            progressIndicatorStopIndicatorRadius &&
+        other.progressIndicatorStrokeWidth == progressIndicatorStrokeWidth &&
+        other.progressIndicatorStrokeAlign == progressIndicatorStrokeAlign &&
+        other.progressIndicatorStrokeCap == progressIndicatorStrokeCap &&
+        other.progressIndicatorConstraints == progressIndicatorConstraints &&
+        other.progressIndicatorTrackGap == progressIndicatorTrackGap &&
+        other.progressIndicatorCircularTrackPadding ==
+            progressIndicatorCircularTrackPadding &&
+        other.progressIndicatorYear2023 == progressIndicatorYear2023 &&
         //
         other.searchBarBackgroundSchemeColor ==
             searchBarBackgroundSchemeColor &&
@@ -5645,6 +5941,7 @@ class FlexSubThemesData with Diagnosticable {
         sliderValueIndicatorType,
         sliderShowValueIndicator,
         sliderTrackHeight,
+        sliderYear2023,
         //
         inputDecoratorRadius,
         inputDecoratorRadiusAdaptive,
@@ -5705,6 +6002,9 @@ class FlexSubThemesData with Diagnosticable {
         chipPadding,
         //
         cardRadius,
+        cardBackgroundSchemeColor,
+        cardBorderSchemeColor,
+        cardBorderWidth,
         cardElevation,
         //
         popupMenuRadius,
@@ -5738,6 +6038,22 @@ class FlexSubThemesData with Diagnosticable {
         tooltipShowDuration,
         tooltipSchemeColor,
         tooltipOpacity,
+        //
+        progressIndicatorBaseSchemeColor,
+        progressIndicatorLinearTrackSchemeColor,
+        progressIndicatorLinearMinHeight,
+        progressIndicatorCircularTrackSchemeColor,
+        progressIndicatorRefreshBackgroundSchemeColor,
+        progressIndicatorLinearRadius,
+        progressIndicatorStopIndicatorSchemeColor,
+        progressIndicatorStopIndicatorRadius,
+        progressIndicatorStrokeWidth,
+        progressIndicatorStrokeAlign,
+        progressIndicatorStrokeCap,
+        progressIndicatorConstraints,
+        progressIndicatorTrackGap,
+        progressIndicatorCircularTrackPadding,
+        progressIndicatorYear2023,
         //
         searchBarBackgroundSchemeColor,
         searchViewBackgroundSchemeColor,
@@ -6068,6 +6384,7 @@ class FlexSubThemesData with Diagnosticable {
         'sliderShowValueIndicator', sliderShowValueIndicator));
     properties.add(
         DiagnosticsProperty<double>('sliderTrackHeight', sliderTrackHeight));
+    properties.add(DiagnosticsProperty<bool>('sliderYear2023', sliderYear2023));
     //
     properties.add(DiagnosticsProperty<double>(
         'inputDecoratorRadius', inputDecoratorRadius));
@@ -6178,6 +6495,12 @@ class FlexSubThemesData with Diagnosticable {
         DiagnosticsProperty<EdgeInsetsGeometry>('chipPadding', chipPadding));
     //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'cardBackgroundSchemeColor', cardBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'cardBorderSchemeColor', cardBorderSchemeColor));
+    properties
+        .add(DiagnosticsProperty<double>('cardBorderWidth', cardBorderWidth));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
     //
     properties
@@ -6233,6 +6556,43 @@ class FlexSubThemesData with Diagnosticable {
         EnumProperty<SchemeColor>('tooltipSchemeColor', tooltipSchemeColor));
     properties
         .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
+    //
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorBaseSchemeColor', progressIndicatorBaseSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorLinearTrackSchemeColor',
+        progressIndicatorLinearTrackSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorLinearMinHeight', progressIndicatorLinearMinHeight));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorCircularTrackSchemeColor',
+        progressIndicatorCircularTrackSchemeColor));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorRefreshBackgroundSchemeColor',
+        progressIndicatorRefreshBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorLinearRadius', progressIndicatorLinearRadius));
+    properties.add(EnumProperty<SchemeColor>(
+        'progressIndicatorStopIndicatorSchemeColor',
+        progressIndicatorStopIndicatorSchemeColor));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorStopIndicatorRadius',
+        progressIndicatorStopIndicatorRadius));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorStrokeWidth', progressIndicatorStrokeWidth));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorStrokeAlign', progressIndicatorStrokeAlign));
+    properties.add(EnumProperty<StrokeCap>(
+        'progressIndicatorStrokeCap', progressIndicatorStrokeCap));
+    properties.add(DiagnosticsProperty<BoxConstraints>(
+        'progressIndicatorConstraints', progressIndicatorConstraints));
+    properties.add(DiagnosticsProperty<double>(
+        'progressIndicatorTrackGap', progressIndicatorTrackGap));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
+        'progressIndicatorCircularTrackPadding',
+        progressIndicatorCircularTrackPadding));
+    properties.add(DiagnosticsProperty<bool>(
+        'progressIndicatorYear2023', progressIndicatorYear2023));
     //
     properties.add(EnumProperty<SchemeColor>(
         'searchBarBackgroundSchemeColor', searchBarBackgroundSchemeColor));

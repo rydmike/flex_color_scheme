@@ -121,7 +121,7 @@ void main() {
           m1.toString(),
           //
           equalsIgnoringHashCodes(
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for this test.
               'FlexSchemeSurfaceColors#9456a(surface: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceDim: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceBright: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerLowest: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerLow: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainer: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerHigh: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), surfaceContainerHighest: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), inverseSurface: Color(alpha: 1.0000, red: 0.0706, green: 0.0706, blue: 0.0706, colorSpace: ColorSpace.sRGB), scaffoldBackground: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), dialogBackground: Color(alpha: 1.0000, red: 0.9529, green: 0.9529, blue: 0.9529, colorSpace: ColorSpace.sRGB))'));
     });
 

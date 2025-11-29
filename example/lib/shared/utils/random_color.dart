@@ -4,7 +4,12 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// ignore: no_literal_bool_comparisons_
+// Set the bool flag to true to show debug prints. Even if it is forgotten
+// to set it to false, debug prints will not show in release builds.
+// The handy part is that if it gets in the way in debugging, it is an easy
+// toggle to turn it off there too. Often I just leave them true if it is one
+// I want to see in dev mode, unless it is too chatty.
+// ignore: no_literal_bool_comparisons, used for debug config.
 const bool _debug = kDebugMode && false;
 
 /// Generate random colors that are visually appealing.

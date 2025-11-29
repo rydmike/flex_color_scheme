@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_theme.dart';
 import 'home_page.dart';
 
-// ignore_for_file: unused_import
-// ignore_for_file: unreachable_from_main
+// ignore_for_file: unused_import, for commenting code.
+// ignore_for_file: unreachable_from_main, used in commented tutorial code.
 
 // -----------------------------------------------------------------------------
 /// EXAMPLE: COPY-PASTE PLAYGROUND
@@ -28,7 +28,7 @@ class DemoApp extends StatefulWidget {
 class _DemoAppState extends State<DemoApp> {
   ThemeMode themeMode = ThemeMode.system;
 
-  // ignore: unused_field
+  // ignore: unused_field, gets used when uncommenting tutorial code.
   late final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/topic_theme.dart';
 
-// ignore_for_file: comment_references
-
 /// Used to groups [Topic]s into related groups.
 enum TopicGroup {
   general,
@@ -51,7 +49,7 @@ enum TopicGroup {
   }
 }
 
-/// A class to hold the heading data we need to display in our [Panel]
+/// A class to hold the heading data we need to display in our
 /// topic panels headers and selection buttons.
 @immutable
 class Topic {
@@ -380,11 +378,18 @@ const List<Topic> themeTopics = <Topic>[
   ),
   Topic(
     group: TopicGroup.controls,
-    heading: 'Tooltip and Progress Indicators',
-    buttonLabel: 'Tooltip\nProgress',
+    heading: 'Tooltip',
+    buttonLabel: 'Tooltip',
     icon: Icons.live_help_outlined,
     info: 'Tooltips display informative text when users hover over, '
-        'focus on, or tap an element. Progress indicators inform users '
+        'focus on, or tap an element.\n',
+  ),
+  Topic(
+    group: TopicGroup.controls,
+    heading: 'Progress Indicator',
+    buttonLabel: 'Progress\nIndicator',
+    icon: Icons.update_outlined,
+    info: 'Progress indicators inform users '
         'about the status of ongoing processes, such as loading an app or '
         'submitting a form.\n',
   ),

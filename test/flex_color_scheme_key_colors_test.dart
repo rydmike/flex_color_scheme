@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, used in tests, SDK still uses them.
 
 void main() {
   //****************************************************************************
@@ -62,6 +62,8 @@ void main() {
         SeedColorScheme.fromSeeds(
           brightness: Brightness.light,
           primaryKey: m3BaseSeed,
+          // TODO(rydmike): Change to default/true when MCU 12 is minimum.
+          useExpressiveOnContainerColors: false,
         ),
         equals(ColorScheme.fromSeed(
           brightness: Brightness.light,

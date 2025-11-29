@@ -262,6 +262,54 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             sliderValueIndicatorType: controller.sliderValueIndicatorType,
             sliderShowValueIndicator: controller.sliderShowValueIndicator,
             sliderTrackHeight: controller.sliderTrackHeight,
+            sliderYear2023: controller.sliderYear2023,
+            progressIndicatorYear2023: controller.progressIndicatorYear2023,
+            progressIndicatorBaseSchemeColor:
+                controller.progressIndicatorBaseSchemeColor,
+            progressIndicatorLinearTrackSchemeColor:
+                controller.progressIndicatorLinearTrackSchemeColor,
+            progressIndicatorCircularTrackSchemeColor:
+                controller.progressIndicatorCircularTrackSchemeColor,
+            progressIndicatorRefreshBackgroundSchemeColor:
+                controller.progressIndicatorRefreshBackgroundSchemeColor,
+            progressIndicatorStopIndicatorSchemeColor:
+                controller.progressIndicatorStopIndicatorSchemeColor,
+            progressIndicatorLinearMinHeight:
+                controller.progressIndicatorLinearMinHeight,
+            progressIndicatorLinearRadius:
+                controller.progressIndicatorLinearRadius,
+            progressIndicatorStopIndicatorRadius:
+                controller.progressIndicatorStopIndicatorRadius,
+            progressIndicatorStrokeWidth:
+                controller.progressIndicatorStrokeWidth,
+            progressIndicatorStrokeAlign:
+                controller.progressIndicatorStrokeAlign,
+            progressIndicatorTrackGap: controller.progressIndicatorTrackGap,
+            progressIndicatorStrokeCap: controller.progressIndicatorStrokeCap,
+            progressIndicatorConstraints:
+                controller.progressIndicatorConstraints == null
+                    ? null
+                    : BoxConstraints(
+                        minWidth: controller.progressIndicatorConstraints ?? 40,
+                        minHeight:
+                            controller.progressIndicatorConstraints ?? 40,
+                      ),
+            progressIndicatorCircularTrackPadding: controller
+                            .progressIndicatorCircularTrackPaddingStart !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingEnd !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingTop !=
+                        null ||
+                    controller.progressIndicatorCircularTrackPaddingBottom !=
+                        null
+                ? EdgeInsetsDirectional.fromSTEB(
+                    controller.progressIndicatorCircularTrackPaddingStart ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingTop ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingEnd ?? 0,
+                    controller.progressIndicatorCircularTrackPaddingBottom ?? 0,
+                  )
+                : null,
             // Input decoration (TextField) settings.
             // Base ColorScheme used by TextField InputDecorator.
             inputDecoratorSchemeColor:
@@ -381,6 +429,10 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 : null,
             // Card settings.
             cardRadius: controller.cardBorderRadius,
+            cardBackgroundSchemeColor: controller.cardBackgroundSchemeColor,
+            cardBorderSchemeColor: controller.cardBorderSchemeColor,
+            cardBorderWidth: controller.cardBorderWidth,
+            cardElevation: controller.cardElevation,
             // PopupMenuButton settings.
             popupMenuRadius: controller.popupMenuBorderRadius,
             popupMenuElevation: controller.popupMenuElevation,
@@ -610,7 +662,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
                 controller.navigationRailUnselectedIconSize,
             // Do not pass null to Playground even if it is, this is done to
             // avoid the alignment jumping down 0 and back to -1 when moving
-            // from nul to minus one and theme lerps from 0 to -1.
+            // from null to minus one and theme animates from 0 to -1.
             navigationRailGroupAlignment:
                 controller.navigationRailGroupAlignment ?? -1,
             navigationRailMinWidth: controller.navigationRailMinWidth,

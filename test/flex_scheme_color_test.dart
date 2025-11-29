@@ -1260,7 +1260,7 @@ void main() {
           m1.toString(),
           //
           equalsIgnoringHashCodes(
-              // ignore: lines_longer_than_80_chars
+              // ignore: lines_longer_than_80_chars, for this test.
               'FlexSchemeColor#0034c(primary: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), primaryContainer: Color(alpha: 1.0000, red: 0.7333, green: 0.5255, blue: 0.9882, colorSpace: ColorSpace.sRGB), primaryLightRef: Color(alpha: 1.0000, red: 0.3843, green: 0.0000, blue: 0.9333, colorSpace: ColorSpace.sRGB), secondary: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), secondaryContainer: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), secondaryLightRef: Color(alpha: 1.0000, red: 0.0118, green: 0.8549, blue: 0.7765, colorSpace: ColorSpace.sRGB), tertiary: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryContainer: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), tertiaryLightRef: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), appBarColor: Color(alpha: 1.0000, red: 0.0039, green: 0.5294, blue: 0.5255, colorSpace: ColorSpace.sRGB), error: Color(alpha: 1.0000, red: 0.6902, green: 0.0000, blue: 0.1255, colorSpace: ColorSpace.sRGB), errorContainer: null, swapOnMaterial3: false)'));
     });
     test(

@@ -2150,11 +2150,19 @@ void main() {
           ftdLight.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
-      // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed, it will show up here.
-      // Check ThemeData equality, well checking inequality for now.
+      // TODO(rydmike): Address ThemeData equality issue, it is broken.
+      // This is because ThemeData equality comparison is broken when using
+      // sub-themes that uses WidgetState or WidgetStateProperty using
+      // resolveWith callback, if we use fromMap, the object equality works.
+      // However, using fromMap in some WidgetState cases in component themes
+      // seem to break Flutter SDK and cause crashes. This needs to be
+      // investigated and fixed.
+      // Using isNot equal test for now, it will break when the issue is fixed
+      // and we have migrated all to is fromMap, we can then use equals test,
+      // as it should be.
       expect(fcsLightTd, isNot(ftdLight));
+
+      // This test case works as it does not contain any WidgetState..
       expect(
         ftdLight,
         equals(
@@ -2322,10 +2330,16 @@ void main() {
           fcsLightTd.toString(),
           equalsIgnoringHashCodes(ftdLight.toString()),
         );
-        // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
-        // Using isNot to prove that here and get a track on the issue, if it
-        // ever changes and is fixed, it will show up here.
-        // Check ThemeData equality, well checking inequality for now.
+        // TODO(rydmike): Address ThemeData equality issue, it is broken.
+        // This is because ThemeData equality comparison is broken when using
+        // sub-themes that uses WidgetState or WidgetStateProperty using
+        // resolveWith callback, if we use fromMap, the object equality works.
+        // However, using fromMap in some WidgetState cases in component themes
+        // seem to break Flutter SDK and cause crashes. This needs to be
+        // investigated and fixed.
+        // Using isNot equal test for now, it will break when the issue is fixed
+        // and we have migrated all to is fromMap, we can then use equals test,
+        // as it should be.
         expect(fcsLightTd, isNot(ftdLight));
         // Test color override results with this copyWith, copying in expected
         // results that should not change the ColorScheme.
@@ -2522,11 +2536,18 @@ void main() {
           fcsDarkTd.toString(minLevel: DiagnosticLevel.fine),
         ),
       );
-      // TODO(rydmike): toString on ThemeData match above, but not ThemeData.
-      // Using isNot to prove that here and get a track on the issue, if it
-      // ever changes and is fixed, it will show up here.
-      // Check ThemeData equality, well checking inequality for now.
+      // TODO(rydmike): Address ThemeData equality issue, it is broken.
+      // This is because ThemeData equality comparison is broken when using
+      // sub-themes that uses WidgetState or WidgetStateProperty using
+      // resolveWith callback, if we use fromMap, the object equality works.
+      // However, using fromMap in some WidgetState cases in component themes
+      // seem to break Flutter SDK and cause crashes. This needs to be
+      // investigated and fixed.
+      // Using isNot equal test for now, it will break when the issue is fixed
+      // and we have migrated all to is fromMap, we can then use equals test,
+      // as it should be.
       expect(fcsTdDark, isNot(fcsDarkTd));
+      // expect(fcsTdDark, isNot(fcsDarkTd));
     });
 
     //**************************************************************************

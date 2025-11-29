@@ -205,7 +205,7 @@ class ButtonsPanel extends StatelessWidget {
                       'colors would be set, the different colors of the '
                       'buttons would also be lost. Separate colors and border '
                       'radius for the two variants will be offered when the '
-                      'current limitation is removed in Flutter. Go upvote '
+                      'current limitation is removed in Flutter. Go up vote '
                       'the issue by giving it thumbs-up!\n',
                 ),
               ],

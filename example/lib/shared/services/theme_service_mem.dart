@@ -1,5 +1,4 @@
 import 'theme_service.dart';
-// ignore_for_file: comment_references
 
 /// A service that stores and retrieves theme settings from memory only.
 ///
@@ -7,9 +6,9 @@ import 'theme_service.dart';
 /// values. The runtime in memory storage is actually handled by the theme
 /// controller.
 ///
-/// To actually persist the settings locally, use the [ThemeServicePrefs]
+/// To actually persist the settings locally, use the `ThemeServicePrefs`
 /// implementation that uses the shared_preferences package to persists the
-/// values, or the [ThemeServiceHive] that uses the hive package to accomplish
+/// values, or the `ThemeServiceHive`] that uses the hive_ce package to do
 /// the same thing. You could also make an implementation that stores settings
 /// on a web server, e.g. with the http package.
 ///

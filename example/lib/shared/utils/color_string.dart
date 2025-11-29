@@ -10,7 +10,7 @@ extension ColorStringClass on Color? {
     if (this == null) {
       return 'Color(0x00000000)';
     } else {
-      // ignore: lines_longer_than_80_chars
+      // ignore: lines_longer_than_80_chars, for string interpolation.
       return 'Color(0x${this!.value32bit.toRadixString(16).padLeft(8, '0').toUpperCase()})';
     }
   }

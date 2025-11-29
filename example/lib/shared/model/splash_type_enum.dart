@@ -1,11 +1,9 @@
-// ignore_for_file: comment_references
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// An enum for easy configuration and selection of ink splash effect in
-/// a [FlexColorScheme.subThemes] configuration.
+/// the Themes Playground.
 enum SplashTypeEnum {
   /// Use default Material splash effect.
   ///
@@ -79,7 +77,7 @@ enum SplashTypeEnum {
   /// pressed highlight remains, which is usually quite subtle due to
   /// the typically used highlight color.
   ///
-  /// For a more prominent immediate click splash, use [inkHighLight] that
+  /// For a more prominent immediate click splash, use [instantSplash] that
   /// utilizes the splash color as an immediate ink.
   noSplash(
     label: 'NoSplash',

@@ -111,7 +111,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
             'In Material-2 mode this setting has no effect and is thus not '
             'available.\n'
             '\n'
-            // ignore: lines_longer_than_80_chars
+            // ignore: lines_longer_than_80_chars, string interpolation
             '${controller.switchAdaptiveCupertinoLike?.describe ?? AdaptiveResponse.off.describe}',
           ),
           value: controller.switchAdaptiveCupertinoLike,
