@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 double tintAlphaFactor(
   Color color,
   Brightness mode, [
