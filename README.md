@@ -173,18 +173,19 @@ There are **Theme Playground** version builds corresponding to the last major re
 
 You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7 and 8, you should prefer to match the minor version too.
 
-| Name        | Version          | Link                                                        |
-|-------------|------------------|-------------------------------------------------------------| 
-| V8.2 & V8.3 | V8.2.0, V8.3.x   | https://rydmike.com/flexcolorscheme/themesplayground-latest |
-| V8.1        | V8.1.1           | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
-| V8.0        | V8.0.2           | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
-| V7.3        | V7.3.1           | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
-| V7.2        | V7.2.0           | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
-| V7.1        | V7.1.2           | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
-| V7.0        | V7.0.5           | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
-| V6          | V6.1.1           | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
-| V5          | V5.1.0           | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
-| V4          | V4.2.0           | https://rydmike.com/flexcolorschemeV4Tut5                   |
+| Name        | Version        | Link                                                        |
+|-------------|----------------|-------------------------------------------------------------| 
+| V8.4        | V8.4.0         | https://rydmike.com/flexcolorscheme/themesplayground-latest |
+| V8.2 & V8.3 | V8.2.0, V8.3.x | https://rydmike.com/flexcolorscheme/themesplayground-v8-3   |
+| V8.1        | V8.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
+| V8.0        | V8.0.2         | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
+| V7.3        | V7.3.1         | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
+| V7.2        | V7.2.0         | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
+| V7.1        | V7.1.2         | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
+| V7.0        | V7.0.5         | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
+| V6          | V6.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
+| V5          | V5.1.0         | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
+| V4          | V4.2.0         | https://rydmike.com/flexcolorschemeV4Tut5                   |
 
 
 > **NOTE!**  
