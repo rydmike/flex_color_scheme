@@ -23,6 +23,11 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - Bump package version to 9.0.0.
 - Bump packages to latest versions.
 
+### Test
+
+**FIX**
+- Temp test fix: Refactored `flex_color_scheme_to_theme_test.dart` use the new `textThemeFromGoogleFonts` adapter function from `google_fonts_text_theme.dart` file. Needed because`google_fonts` still types `TextTheme` against `package:flutter/material.dart`, which is a different class than `package:material_ui`'s `TextTheme`. The `TextStyle` is shared, so copying the styles is type-safe. This will be removed when `google_fonts` is updated to use `package:material_ui`'s `TextTheme`.
+
 ### Themes Playground
 
 **NEW**

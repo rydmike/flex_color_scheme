@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'google_fonts_text_theme.dart';
 import 'test_color_scheme_equality.dart';
 
 // FlexColorScheme default for inversePrimary color, when not using seeds.
@@ -7098,7 +7099,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.light, seedColor: const Color(0xffd9008c));
       // FCS light, M2 and custom text theme.
@@ -7198,7 +7201,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.light, seedColor: const Color(0xffd9008c));
       // FCS light, M2 and custom text theme.
@@ -7303,7 +7308,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xffd9008c));
       // FCS light, M2 and custom text theme.
@@ -7403,7 +7410,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xffd9008c));
       // FCS light, M2 and custom text theme.
@@ -7509,7 +7518,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.light, seedColor: const Color(0xffd9008c));
       // FCS light, M3 and custom text theme.
@@ -7612,7 +7623,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.light, seedColor: const Color(0xffd9008c));
       // FCS light, M3 and custom text theme.
@@ -7717,7 +7730,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xffd9008c));
       // FCS light, M3 and custom text theme.
@@ -7820,7 +7835,9 @@ void main() {
       // FCS will then return the correct color style for textTheme and
       // primaryTextTheme, that is correct for both M2 and M3 mode, where
       // M2 gets the opacity based colors and M3 the onSurface based colors.
-      final TextTheme gTextTheme = GoogleFonts.notoSansTextTheme();
+      final TextTheme gTextTheme = textThemeFromGoogleFonts(
+        GoogleFonts.notoSansTextTheme(),
+      );
       // Make a full ColorScheme from a SeedColor.
       final ColorScheme scheme = ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color(0xffd9008c));
       // FCS light, M3 and custom text theme.
