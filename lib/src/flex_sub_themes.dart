@@ -6,8 +6,6 @@ import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flex_color_scheme/src/flex_extensions.dart';
 import 'package:flex_color_scheme/src/flex_sub_themes_data.dart';
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart' show Colors;
-import 'package:material_ui/material_ui.dart' show Colors;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
