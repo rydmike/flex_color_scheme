@@ -85,40 +85,28 @@ MenuButtonThemeData _menuButtonTheme({
   // defined, to ensure buttons are based on their background color.
   // The buttons can have another un-highlighted background color than the
   // menu container, but it is probably not a very useful design.
-  final SchemeColor menuBgScheme =
-      menuBackgroundSchemeColor ?? SchemeColor.surfaceContainer;
+  final SchemeColor menuBgScheme = menuBackgroundSchemeColor ?? SchemeColor.surfaceContainer;
   final SchemeColor bgScheme = backgroundSchemeColor ?? menuBgScheme;
-  final Color backgroundColor =
-      FlexSubThemes.schemeColor(bgScheme, colorScheme);
-  final SchemeColor fgScheme =
-      foregroundSchemeColor ?? FlexSubThemes.onSchemeColor(bgScheme);
-  final Color foregroundColor =
-      FlexSubThemes.schemeColor(fgScheme, colorScheme);
+  final Color backgroundColor = FlexSubThemes.schemeColor(bgScheme, colorScheme);
+  final SchemeColor fgScheme = foregroundSchemeColor ?? FlexSubThemes.onSchemeColor(bgScheme);
+  final Color foregroundColor = FlexSubThemes.schemeColor(fgScheme, colorScheme);
 
   // Get background color of highlighted menu item.
   final SchemeColor indBgScheme = indicatorBackgroundSchemeColor ?? bgScheme;
-  final Color indicatorBgColor =
-      FlexSubThemes.schemeColor(indBgScheme, colorScheme);
-  final SchemeColor indFgScheme = indicatorForegroundSchemeColor ??
-      FlexSubThemes.onSchemeColor(indBgScheme);
-  final Color indicatorFgColor =
-      FlexSubThemes.schemeColor(indFgScheme, colorScheme);
+  final Color indicatorBgColor = FlexSubThemes.schemeColor(indBgScheme, colorScheme);
+  final SchemeColor indFgScheme = indicatorForegroundSchemeColor ?? FlexSubThemes.onSchemeColor(indBgScheme);
+  final Color indicatorFgColor = FlexSubThemes.schemeColor(indFgScheme, colorScheme);
 
-  final bool transparentBackground =
-      backgroundSchemeColor == null || menuBgScheme == bgScheme;
+  final bool transparentBackground = backgroundSchemeColor == null || menuBgScheme == bgScheme;
 
   // If foreground is plain contrast to a standard surface, we cannot use it
   // for tint, in that case we will use primary color for tint.
-  final bool fgIsPlain = fgScheme == SchemeColor.onSurface ||
-      fgScheme == SchemeColor.onSurfaceVariant;
-  final bool indFgIsPlain = indFgScheme == SchemeColor.onSurface ||
-      indFgScheme == SchemeColor.onSurfaceVariant;
+  final bool fgIsPlain = fgScheme == SchemeColor.onSurface || fgScheme == SchemeColor.onSurfaceVariant;
+  final bool indFgIsPlain = indFgScheme == SchemeColor.onSurface || indFgScheme == SchemeColor.onSurfaceVariant;
   // We are using a light colorScheme.
   final bool isLight = colorScheme.brightness == Brightness.light;
   // Get brightness of background color.
-  final bool bgIsLight =
-      ThemeData.estimateBrightnessForColor(indicatorBgColor) ==
-          Brightness.light;
+  final bool bgIsLight = ThemeData.estimateBrightnessForColor(indicatorBgColor) == Brightness.light;
   // We use surface mode tint factor, if it is light theme and background
   // is light OR if it is a dark theme and background is dark.
   final bool surfaceMode = (isLight && bgIsLight) || (!isLight && !bgIsLight);

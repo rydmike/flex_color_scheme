@@ -29,8 +29,7 @@ class NavigationBarLabelBehaviorToggleButtons extends StatelessWidget {
               if (index == 0) {
                 onChanged?.call(NavigationDestinationLabelBehavior.alwaysHide);
               } else if (index == 1) {
-                onChanged
-                    ?.call(NavigationDestinationLabelBehavior.onlyShowSelected);
+                onChanged?.call(NavigationDestinationLabelBehavior.onlyShowSelected);
               } else {
                 onChanged?.call(NavigationDestinationLabelBehavior.alwaysShow);
               }

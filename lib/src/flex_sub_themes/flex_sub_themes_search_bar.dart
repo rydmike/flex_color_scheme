@@ -106,28 +106,26 @@ SearchBarThemeData _searchBarTheme({
   // of the search bar.
   final bool isLight = colorScheme.brightness == Brightness.light;
   // Get brightness of the SearchBar background color.
-  final bool buttonBgIsLight =
-      ThemeData.estimateBrightnessForColor(backgroundColor) == Brightness.light;
+  final bool buttonBgIsLight = ThemeData.estimateBrightnessForColor(backgroundColor) == Brightness.light;
   // For tint color use the one that is more likely to give a colored effect.
   final Color tint = isLight
       ? buttonBgIsLight
-          ? onBackgroundColor
-          : backgroundColor
+            ? onBackgroundColor
+            : backgroundColor
       : buttonBgIsLight
-          ? backgroundColor
-          : onBackgroundColor;
+      ? backgroundColor
+      : onBackgroundColor;
   // The reverse color is used for overlay
   final Color overlay = isLight
       ? buttonBgIsLight
-          ? backgroundColor
-          : onBackgroundColor
+            ? backgroundColor
+            : onBackgroundColor
       : buttonBgIsLight
-          ? onBackgroundColor
-          : backgroundColor;
+      ? onBackgroundColor
+      : backgroundColor;
   // We use surface mode tint factor, if it is light theme and background
   // is light OR if it is a dark theme and background is dark.
-  final bool surfaceMode =
-      (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
+  final bool surfaceMode = (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
   final double factor = FlexSubThemes._tintAlphaFactor(
     tint,
     colorScheme.brightness,
@@ -135,9 +133,7 @@ SearchBarThemeData _searchBarTheme({
   );
 
   return SearchBarThemeData(
-    backgroundColor: backgroundSchemeColor != null
-        ? WidgetStatePropertyAll<Color?>(backgroundColor)
-        : null,
+    backgroundColor: backgroundSchemeColor != null ? WidgetStatePropertyAll<Color?>(backgroundColor) : null,
     elevation: WidgetStatePropertyAll<double?>(elevation),
     shadowColor: WidgetStatePropertyAll<Color?>(shadowColor),
     shape: radius != null

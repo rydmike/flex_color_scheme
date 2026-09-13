@@ -42,8 +42,7 @@ enum JsonKeys {
   typeEnumListTileStyle(key: 'enum_listtile_style'),
   typeEnumListTileTitleAlignment(key: 'enum_listtile_title_alignment'),
   typeEnumMaterialTapTargetSize(key: 'enum_material_tap_target_size'),
-  typeEnumNavigationDestinationLabelBehavior(
-      key: 'enum_navigation_destination_label_behavior'),
+  typeEnumNavigationDestinationLabelBehavior(key: 'enum_navigation_destination_label_behavior'),
   typeEnumNavigationRailLabelType(key: 'enum_navigation_rail_label_type'),
   typeEnumSchemeColor(key: 'enum_scheme_color'),
   typeEnumShowValueIndicator(key: 'enum_show_value_indicator'),
@@ -65,8 +64,7 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
   final Map<String, dynamic> themeData = <String, dynamic>{};
 
   // Date time now formatted as string dd.MM.yyyy HH:mm:ss
-  final String exportDate =
-      DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+  final String exportDate = DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
   // Add info about JSON file and export date time.
   themeData[JsonKeys.playgroundData.key] = App.exportInfo + exportDate;
   // This may be useful in the future, e.g., to handle migrations when
@@ -145,8 +143,10 @@ Future<String> exportPlaygroundSettings(ThemeController controller) async {
           dartType = JsonKeys.typeEnumVisualDensity.key;
         } else {
           if (_debug) {
-            debugPrint("Unhandled enum type '${object.runtimeType}' "
-                "with value '${object.name}'");
+            debugPrint(
+              "Unhandled enum type '${object.runtimeType}' "
+              "with value '${object.name}'",
+            );
           }
         }
         if (dartType != null) {
@@ -189,8 +189,7 @@ Future<String> importPlaygroundSettings(
   try {
     json = jsonDecode(settings) as Map<String, dynamic>;
   } catch (e) {
-    final String importDate =
-        DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+    final String importDate = DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
     resultLog += 'Settings JSON decode $importDate error: $e ';
     if (_debug) debugPrint('Settings JSON decode $importDate error: $e');
     controller.setImportErrorLog(resultLog, false);
@@ -222,133 +221,117 @@ Future<String> importPlaygroundSettings(
 
     dynamic mapped;
     if (item.value is Map) {
-      final String dartType =
-          (item.value as Map<String, dynamic>)[JsonKeys.dartType.key] as String;
-      final dynamic value =
-          (item.value as Map<String, dynamic>)[JsonKeys.value.key];
+      final String dartType = (item.value as Map<String, dynamic>)[JsonKeys.dartType.key] as String;
+      final dynamic value = (item.value as Map<String, dynamic>)[JsonKeys.value.key];
       if (_equalsIgnoreCase(dartType, JsonKeys.typeColor.key)) {
         mapped = Color(int.parse("0x${(value as String).replaceAll("#", "")}"));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumAdaptiveResponse.key)) {
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumAdaptiveResponse.key)) {
         mapped = AdaptiveResponse.values.firstWhere(
-            (AdaptiveResponse element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexAppBarStyle.key)) {
-        mapped = FlexAppBarStyle.values.firstWhere((FlexAppBarStyle element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexFixedColorStyle.key)) {
+          (AdaptiveResponse element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexAppBarStyle.key)) {
+        mapped = FlexAppBarStyle.values.firstWhere(
+          (FlexAppBarStyle element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexFixedColorStyle.key)) {
         mapped = FlexFixedColorStyle.values.firstWhere(
-            (FlexFixedColorStyle element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexInputBorderType.key)) {
+          (FlexFixedColorStyle element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexInputBorderType.key)) {
         mapped = FlexInputBorderType.values.firstWhere(
-            (FlexInputBorderType element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexPaletteType.key)) {
-        mapped = FlexPaletteType.values.firstWhere((FlexPaletteType element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexScaffoldBaseColor.key)) {
+          (FlexInputBorderType element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexPaletteType.key)) {
+        mapped = FlexPaletteType.values.firstWhere(
+          (FlexPaletteType element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexScaffoldBaseColor.key)) {
         mapped = FlexScaffoldBaseColor.values.firstWhere(
-            (FlexScaffoldBaseColor element) =>
-                _equalsIgnoreCase(element.name, value as String));
+          (FlexScaffoldBaseColor element) => _equalsIgnoreCase(element.name, value as String),
+        );
       } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexScheme.key)) {
-        mapped = FlexScheme.values.firstWhere((FlexScheme element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexSliderIndicatorType.key)) {
+        mapped = FlexScheme.values.firstWhere((FlexScheme element) => _equalsIgnoreCase(element.name, value as String));
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexSliderIndicatorType.key)) {
         mapped = FlexSliderIndicatorType.values.firstWhere(
-            (FlexSliderIndicatorType element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexSurfaceMode.key)) {
-        mapped = FlexSurfaceMode.values.firstWhere((FlexSurfaceMode element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexSystemNavBarStyle.key)) {
+          (FlexSliderIndicatorType element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexSurfaceMode.key)) {
+        mapped = FlexSurfaceMode.values.firstWhere(
+          (FlexSurfaceMode element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexSystemNavBarStyle.key)) {
         mapped = FlexSystemNavBarStyle.values.firstWhere(
-            (FlexSystemNavBarStyle element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexTabBarStyle.key)) {
-        mapped = FlexTabBarStyle.values.firstWhere((FlexTabBarStyle element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumFlexSchemeColor.key)) {
-        mapped = SchemeColor.values.firstWhere((SchemeColor element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumListTileControlAffinity.key)) {
+          (FlexSystemNavBarStyle element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexTabBarStyle.key)) {
+        mapped = FlexTabBarStyle.values.firstWhere(
+          (FlexTabBarStyle element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumFlexSchemeColor.key)) {
+        mapped = SchemeColor.values.firstWhere(
+          (SchemeColor element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumListTileControlAffinity.key)) {
         mapped = ListTileControlAffinity.values.firstWhere(
-            (ListTileControlAffinity element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumListTileStyle.key)) {
-        mapped = ListTileStyle.values.firstWhere((ListTileStyle element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumListTileTitleAlignment.key)) {
+          (ListTileControlAffinity element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumListTileStyle.key)) {
+        mapped = ListTileStyle.values.firstWhere(
+          (ListTileStyle element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumListTileTitleAlignment.key)) {
         mapped = ListTileTitleAlignment.values.firstWhere(
-            (ListTileTitleAlignment element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumMaterialTapTargetSize.key)) {
+          (ListTileTitleAlignment element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumMaterialTapTargetSize.key)) {
         mapped = MaterialTapTargetSize.values.firstWhere(
-            (MaterialTapTargetSize element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumNavigationDestinationLabelBehavior.key)) {
+          (MaterialTapTargetSize element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumNavigationDestinationLabelBehavior.key)) {
         mapped = NavigationDestinationLabelBehavior.values.firstWhere(
-            (NavigationDestinationLabelBehavior element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumNavigationRailLabelType.key)) {
+          (NavigationDestinationLabelBehavior element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumNavigationRailLabelType.key)) {
         mapped = NavigationRailLabelType.values.firstWhere(
-            (NavigationRailLabelType element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumSchemeColor.key)) {
-        mapped = SchemeColor.values.firstWhere((SchemeColor element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumShowValueIndicator.key)) {
+          (NavigationRailLabelType element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumSchemeColor.key)) {
+        mapped = SchemeColor.values.firstWhere(
+          (SchemeColor element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumShowValueIndicator.key)) {
         mapped = ShowValueIndicator.values.firstWhere(
-            (ShowValueIndicator element) =>
-                _equalsIgnoreCase(element.name, value as String));
+          (ShowValueIndicator element) => _equalsIgnoreCase(element.name, value as String),
+        );
       } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumSplashType.key)) {
-        mapped = SplashTypeEnum.values.firstWhere((SplashTypeEnum element) =>
-            _equalsIgnoreCase(element.name, value as String));
+        mapped = SplashTypeEnum.values.firstWhere(
+          (SplashTypeEnum element) => _equalsIgnoreCase(element.name, value as String),
+        );
       } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumStrokeCap.key)) {
-        mapped = StrokeCap.values.firstWhere((StrokeCap element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumTabAlignment.key)) {
-        mapped = TabAlignment.values.firstWhere((TabAlignment element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumTabBarIndicatorSize.key)) {
+        mapped = StrokeCap.values.firstWhere((StrokeCap element) => _equalsIgnoreCase(element.name, value as String));
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumTabAlignment.key)) {
+        mapped = TabAlignment.values.firstWhere(
+          (TabAlignment element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumTabBarIndicatorSize.key)) {
         mapped = TabBarIndicatorSize.values.firstWhere(
-            (TabBarIndicatorSize element) =>
-                _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumThemeModeColor.key)) {
-        mapped = ThemeMode.values.firstWhere((ThemeMode element) =>
-            _equalsIgnoreCase(element.name, value as String));
-      } else if (_equalsIgnoreCase(
-          dartType, JsonKeys.typeEnumVisualDensity.key)) {
+          (TabBarIndicatorSize element) => _equalsIgnoreCase(element.name, value as String),
+        );
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumThemeModeColor.key)) {
+        mapped = ThemeMode.values.firstWhere((ThemeMode element) => _equalsIgnoreCase(element.name, value as String));
+      } else if (_equalsIgnoreCase(dartType, JsonKeys.typeEnumVisualDensity.key)) {
         mapped = VisualDensityEnum.values.firstWhere(
-            (VisualDensityEnum element) =>
-                _equalsIgnoreCase(element.name, value as String));
+          (VisualDensityEnum element) => _equalsIgnoreCase(element.name, value as String),
+        );
       } else {
-        resultLog += "Unhandled type '$dartType' with value "
+        resultLog +=
+            "Unhandled type '$dartType' with value "
             "'$value' for key '${item.key}'\n";
         if (_debug) {
-          debugPrint("Unhandled type '$dartType' with value "
-              "'$value' for key '${item.key}'");
+          debugPrint(
+            "Unhandled type '$dartType' with value "
+            "'$value' for key '${item.key}'",
+          );
         }
       }
     } else {
@@ -362,8 +345,7 @@ Future<String> importPlaygroundSettings(
     }
   }
   // Date time now formatted as string dd.MM.yyyy HH:mm:ss
-  final String importDate =
-      DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+  final String importDate = DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
   if (resultLog.isNotEmpty) {
     resultLog = 'Imported with issues $importDate\n$resultLog';
   } else {

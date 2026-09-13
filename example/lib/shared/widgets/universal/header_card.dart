@@ -146,12 +146,10 @@ class HeaderCard extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
-    final Color cardColor =
-        backgroundColor ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
+    final Color cardColor = backgroundColor ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
     final Color headerColor = headingColor ?? scheme.surfaceContainer;
 
-    final bool useHeading =
-        title != null || subtitle != null || leading != null;
+    final bool useHeading = title != null || subtitle != null || leading != null;
 
     // Default starting point value based on M3 and M2 mode spec values.
     double borderRadius = useMaterial3 ? 12 : 4;
@@ -161,7 +159,8 @@ class HeaderCard extends StatelessWidget {
       final BorderRadius shape = cardShape.borderRadius as BorderRadius;
       borderRadius = shape.bottomLeft.x;
     }
-    final bool useBorderSide = colorsAreClose(cardColor, background, isLight) ||
+    final bool useBorderSide =
+        colorsAreClose(cardColor, background, isLight) ||
         (useHeading && colorsAreClose(headerColor, background, isLight));
     final ShapeBorder shapeBorder = RoundedRectangleBorder(
       borderRadius: BorderRadiusDirectional.horizontal(
@@ -193,9 +192,9 @@ class HeaderCard extends StatelessWidget {
                   contentPadding: headerPadding,
                   leading: leading,
                   title: title,
-                  subtitleReveal:
-                      info != null && info != '' ? Text(info!) : null,
-                  trailing: trailing ??
+                  subtitleReveal: info != null && info != '' ? Text(info!) : null,
+                  trailing:
+                      trailing ??
                       ((enabled && onTap != null)
                           ? ExpandIcon(
                               size: 32,
@@ -217,9 +216,7 @@ class HeaderCard extends StatelessWidget {
                   child: child,
                 );
               },
-              child: (isOpen && child != null)
-                  ? RepaintBoundary(child: child)
-                  : const SizedBox.shrink(),
+              child: (isOpen && child != null) ? RepaintBoundary(child: child) : const SizedBox.shrink(),
             ),
           ],
         ),

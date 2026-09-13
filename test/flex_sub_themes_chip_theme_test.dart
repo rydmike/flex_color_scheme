@@ -8,13 +8,11 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Chip tests
     // -------------------------------------------------------------------------
-    test(
-        'Chip FST8.1: GIVEN a default FlexSubTheme.chipTheme() '
+    test('Chip FST8.1: GIVEN a default FlexSubTheme.chipTheme() '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
+      final TextTheme textTheme = Typography.material2018(platform: TargetPlatform.android).black;
 
       final Color backgroundColor = colorScheme.primaryContainer.blendAlpha(
         colorScheme.surface,
@@ -24,8 +22,10 @@ void main() {
         colorScheme.surface,
         kChipSelectedBackgroundAlphaBlend,
       );
-      final Color secondarySelectedColor = colorScheme.primaryContainer
-          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color secondarySelectedColor = colorScheme.primaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipSelectedBackgroundAlphaBlend,
+      );
 
       expect(
         FlexSubThemes.chipTheme(
@@ -64,13 +64,11 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.2: GIVEN a FlexSubTheme.chipTheme(tint disable) '
+    test('Chip FST8.2: GIVEN a FlexSubTheme.chipTheme(tint disable) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
+      final TextTheme textTheme = Typography.material2018(platform: TargetPlatform.android).black;
 
       final Color backgroundColor = colorScheme.primaryContainer.blendAlpha(
         colorScheme.surface,
@@ -80,8 +78,10 @@ void main() {
         colorScheme.surface,
         kChipSelectedBackgroundAlphaBlend,
       );
-      final Color secondarySelectedColor = colorScheme.primaryContainer
-          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color secondarySelectedColor = colorScheme.primaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipSelectedBackgroundAlphaBlend,
+      );
 
       expect(
         FlexSubThemes.chipTheme(
@@ -121,8 +121,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.3 M3: GIVEN a default '
+    test('Chip FST8.3 M3: GIVEN a default '
         'FlexSubTheme.chipTheme(M3 no-null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -156,8 +155,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.4 M3: GIVEN a '
+    test('Chip FST8.4 M3: GIVEN a '
         'FlexSubTheme.chipTheme(M3 no-null scheme with disable tint) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -202,8 +200,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.5 M3-n: GIVEN a default '
+    test('Chip FST8.5 M3-n: GIVEN a default '
         'FlexSubTheme.chipTheme(M3 null scheme) '
         'EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -244,8 +241,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.6: GIVEN a '
+    test('Chip FST8.6: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Secondary EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -253,8 +249,7 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
+      final TextTheme textTheme = Typography.material2018(platform: TargetPlatform.android).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -283,8 +278,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.7: GIVEN a '
+    test('Chip FST8.7: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Tertiary and disable tint EXPECT equal to ChipThemeData() version '
         'with same values', () {
@@ -292,8 +286,7 @@ void main() {
         seedColor: const Color(0xFF6750A4),
         brightness: Brightness.light,
       );
-      final TextTheme textTheme =
-          Typography.material2018(platform: TargetPlatform.android).black;
+      final TextTheme textTheme = Typography.material2018(platform: TargetPlatform.android).black;
       expect(
         FlexSubThemes.chipTheme(
           colorScheme: colorScheme,
@@ -327,8 +320,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.8: GIVEN a '
+    test('Chip FST8.8: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'Tertiary, selectedSchemeColor, secondarySelectedSchemeColor and '
         'disable tint EXPECT equal to ChipThemeData() version '
@@ -378,8 +370,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.9: GIVEN a '
+    test('Chip FST8.9: GIVEN a '
         'FlexSubTheme.chipTheme() with blend and usedSchemeColor '
         'Tertiary, selectedSchemeColor, secondarySelectedSchemeColor and '
         'disable tint EXPECT equal to ChipThemeData() version '
@@ -402,8 +393,10 @@ void main() {
         kChipSelectedBackgroundAlphaBlend,
       );
       const Color onSelectedColor = Colors.black87;
-      final Color secondarySelectedColor = colorScheme.secondaryContainer
-          .blendAlpha(colorScheme.surface, kChipSelectedBackgroundAlphaBlend);
+      final Color secondarySelectedColor = colorScheme.secondaryContainer.blendAlpha(
+        colorScheme.surface,
+        kChipSelectedBackgroundAlphaBlend,
+      );
       const Color onSecondarySelectedColor = Colors.black87;
       expect(
         FlexSubThemes.chipTheme(
@@ -442,8 +435,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Chip FST8.10: GIVEN a '
+    test('Chip FST8.10: GIVEN a '
         'FlexSubTheme.chipTheme() with usedSchemeColor '
         'tertiary, selectedSchemeColor, '
         'secondarySelectedSchemeColor and '

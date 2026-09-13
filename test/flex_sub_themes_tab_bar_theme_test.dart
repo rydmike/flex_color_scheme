@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes tabBarTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
+    test('TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
         'EXPECT equal to TabBarTheme with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),

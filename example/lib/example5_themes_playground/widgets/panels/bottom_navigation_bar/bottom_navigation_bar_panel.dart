@@ -21,13 +21,12 @@ class BottomNavigationBarPanel extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
-    final String labelForDefaultSelectedItem = isDark &&
+    final String labelForDefaultSelectedItem =
+        isDark &&
             useMaterial3 &&
-            ((controller.useFlexColorScheme && !controller.useSubThemes) ||
-                !controller.useFlexColorScheme)
+            ((controller.useFlexColorScheme && !controller.useSubThemes) || !controller.useFlexColorScheme)
         ? 'secondary'
         : 'primary';
 
@@ -55,13 +54,15 @@ class BottomNavigationBarPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Background color'),
-              subtitleReveal: const Text('In Material-2 dark mode, the bottom '
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Background color'),
+                subtitleReveal: const Text(
+                  'In Material-2 dark mode, the bottom '
                   'navigation background color gets an elevation overlay, '
                   'making the background color lighter the more it is '
                   'elevated. This is the correct behavior for elevated '
@@ -81,200 +82,200 @@ class BottomNavigationBarPanel extends StatelessWidget {
                   'elevated Material surfaces when the background color of '
                   'the Material has a color value that equals '
                   'ColorScheme.surface. For any other color value, the '
-                  'elevation overlay is not applied.\n'),
-              colorSuffix: isDark &&
-                      !useMaterial3 &&
-                      controller.bottomNavigationBarBackgroundSchemeColor ==
-                          SchemeColor.surface &&
-                      controller.bottomNavigationBarElevation != 0
-                  ? ', with dark elevation overlay'
-                  : '',
-              defaultLabel: 'surface',
-              defaultLabelDarkM2: controller.bottomNavigationBarElevation != 0
-                  ? 'surface, with dark elevation overlay'
-                  : 'surface',
-              defaultDisabledLabel:
-                  !controller.useSubThemes && controller.useFlexColorScheme
-                      ? 'surface'
-                      : 'ThemeData.canvasColor',
-              defaultDisabledLabelDark: 'surface',
-              defaultDisabledLabelDarkM2:
-                  !controller.useSubThemes && controller.useFlexColorScheme
-                      ? 'surface, with dark elevation overlay'
-                      : 'ThemeData.canvasColor, with dark elevation overlay',
-              value: controller.bottomNavigationBarBackgroundSchemeColor,
-              onChanged: controller.setBottomNavigationBarBackgroundSchemeColor,
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Opacity'),
-              value: controller.bottomNavigationBarOpacity,
-              onChanged: controller.setBottomNavigationBarOpacity,
-              min: 0,
-              max: 1,
-              divisions: 100,
-              valueDisplayScale: 100,
-              valueDecimalPlaces: 0,
-              valueHeading: 'OPACITY',
-              valueUnitLabel: ' %',
-              valueDefaultLabel: '100 %',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Selected item color'),
-              subtitle: const Text('Label and icon, but separate API'),
-              defaultLabel: labelForDefaultSelectedItem,
-              value: controller.bottomNavigationBarSelectedItemSchemeColor,
-              onChanged:
-                  controller.setBottomNavigationBarSelectedItemSchemeColor,
-            ),
-            lastWidget: SliderListTileReveal(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              title: const Text('Elevation'),
-              value: controller.bottomNavigationBarElevation,
-              onChanged: controller.setBottomNavigationBarElevation,
-              min: 0,
-              max: 24,
-              divisions: 24,
-              valueHeading: 'ELEV',
-              valueDecimalPlaces: 1,
-              valueDefaultLabel: '3',
-              valueDefaultDisabledLabel: '8',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: ColorSchemePopupMenu(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Unselected item color'),
-              subtitle: const Text('Label and icon, but separate API'),
-              defaultLabel: useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
-              value: controller.bottomNavigationBarUnselectedItemSchemeColor,
-              onChanged:
-                  controller.setBottomNavigationBarUnselectedItemSchemeColor,
-            ),
-            lastWidget: BottomBarMuteUnselectedToggleButtons(
-              controller: controller,
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SwitchListTile(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Show selected labels'),
-              value: enableControl &&
-                  controller.bottomNavigationBarShowSelectedLabels,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBottomNavigationBarShowSelectedLabels
-                      : null,
-            ),
-            lastWidget: SwitchListTile(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              title: const Text('Show unselected labels'),
-              value: enableControl &&
-                  controller.bottomNavigationBarShowUnselectedLabels,
-              onChanged:
-                  controller.useSubThemes && controller.useFlexColorScheme
-                      ? controller.setBottomNavigationBarShowUnselectedLabels
-                      : null,
-            ),
-            isRow: isRow,
-          );
-        }),
+                  'elevation overlay is not applied.\n',
+                ),
+                colorSuffix:
+                    isDark &&
+                        !useMaterial3 &&
+                        controller.bottomNavigationBarBackgroundSchemeColor == SchemeColor.surface &&
+                        controller.bottomNavigationBarElevation != 0
+                    ? ', with dark elevation overlay'
+                    : '',
+                defaultLabel: 'surface',
+                defaultLabelDarkM2: controller.bottomNavigationBarElevation != 0
+                    ? 'surface, with dark elevation overlay'
+                    : 'surface',
+                defaultDisabledLabel: !controller.useSubThemes && controller.useFlexColorScheme
+                    ? 'surface'
+                    : 'ThemeData.canvasColor',
+                defaultDisabledLabelDark: 'surface',
+                defaultDisabledLabelDarkM2: !controller.useSubThemes && controller.useFlexColorScheme
+                    ? 'surface, with dark elevation overlay'
+                    : 'ThemeData.canvasColor, with dark elevation overlay',
+                value: controller.bottomNavigationBarBackgroundSchemeColor,
+                onChanged: controller.setBottomNavigationBarBackgroundSchemeColor,
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Opacity'),
+                value: controller.bottomNavigationBarOpacity,
+                onChanged: controller.setBottomNavigationBarOpacity,
+                min: 0,
+                max: 1,
+                divisions: 100,
+                valueDisplayScale: 100,
+                valueDecimalPlaces: 0,
+                valueHeading: 'OPACITY',
+                valueUnitLabel: ' %',
+                valueDefaultLabel: '100 %',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Selected item color'),
+                subtitle: const Text('Label and icon, but separate API'),
+                defaultLabel: labelForDefaultSelectedItem,
+                value: controller.bottomNavigationBarSelectedItemSchemeColor,
+                onChanged: controller.setBottomNavigationBarSelectedItemSchemeColor,
+              ),
+              lastWidget: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Elevation'),
+                value: controller.bottomNavigationBarElevation,
+                onChanged: controller.setBottomNavigationBarElevation,
+                min: 0,
+                max: 24,
+                divisions: 24,
+                valueHeading: 'ELEV',
+                valueDecimalPlaces: 1,
+                valueDefaultLabel: '3',
+                valueDefaultDisabledLabel: '8',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: ColorSchemePopupMenu(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Unselected item color'),
+                subtitle: const Text('Label and icon, but separate API'),
+                defaultLabel: useMaterial3 ? 'onSurfaceVariant' : 'onSurface',
+                value: controller.bottomNavigationBarUnselectedItemSchemeColor,
+                onChanged: controller.setBottomNavigationBarUnselectedItemSchemeColor,
+              ),
+              lastWidget: BottomBarMuteUnselectedToggleButtons(
+                controller: controller,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SwitchListTile(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Show selected labels'),
+                value: enableControl && controller.bottomNavigationBarShowSelectedLabels,
+                onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.setBottomNavigationBarShowSelectedLabels
+                    : null,
+              ),
+              lastWidget: SwitchListTile(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Show unselected labels'),
+                value: enableControl && controller.bottomNavigationBarShowUnselectedLabels,
+                onChanged: controller.useSubThemes && controller.useFlexColorScheme
+                    ? controller.setBottomNavigationBarShowUnselectedLabels
+                    : null,
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
         const Divider(),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Selected label size'),
-              value: controller.bottomNavigationBarSelectedLabelSize,
-              onChanged: controller.setBottomNavigationBarSelectedLabelSize,
-              min: 10,
-              max: 26,
-              divisions: 16,
-              valueHeading: 'SIZE',
-              valueUnitLabel: ' pt',
-              valueDecimalPlaces: 0,
-              valueDefaultLabel: '14 pt',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Unselected size'),
-              value: controller.bottomNavigationBarUnselectedLabelSize,
-              onChanged: controller.setBottomNavigationBarUnselectedLabelSize,
-              min: 8,
-              max: 26,
-              divisions: 20,
-              valueHeading: 'SIZE',
-              valueUnitLabel: ' pt',
-              valueDecimalPlaces: 0,
-              valueDefaultLabel: controller
-                          .bottomNavigationBarSelectedLabelSize !=
-                      null
-                  // ignore: string interpolation
-                  ? '${((controller.bottomNavigationBarSelectedLabelSize ?? 12) - 2).toStringAsFixed(0)} pt'
-                  : '12 pt',
-              valueDefaultDisabledLabel: '12 pt',
-            ),
-            isRow: isRow,
-          );
-        }),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              enabled: enableControl,
-              title: const Text('Selected icon size'),
-              value: controller.bottomNavigationBarSelectedIconSize,
-              onChanged: controller.setBottomNavigationBarSelectedIconSize,
-              min: 14,
-              max: 50,
-              divisions: 36,
-              valueHeading: 'SIZE',
-              valueUnitLabel: ' dp',
-              valueDecimalPlaces: 0,
-              valueDefaultLabel: '24 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              enabled: enableControl,
-              title: const Text('Unselected size'),
-              value: controller.bottomNavigationBarUnselectedIconSize,
-              onChanged: controller.setBottomNavigationBarUnselectedIconSize,
-              min: 14,
-              max: 50,
-              divisions: 36,
-              valueHeading: 'SIZE',
-              valueUnitLabel: ' dp',
-              valueDecimalPlaces: 0,
-              valueDefaultLabel: controller
-                          .bottomNavigationBarSelectedIconSize !=
-                      null
-                  // ignore: string interpolation
-                  ? '${(controller.bottomNavigationBarSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
-                  : '24 dp',
-              valueDefaultDisabledLabel: '24 dp',
-            ),
-            isRow: isRow,
-          );
-        }),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selected label size'),
+                value: controller.bottomNavigationBarSelectedLabelSize,
+                onChanged: controller.setBottomNavigationBarSelectedLabelSize,
+                min: 10,
+                max: 26,
+                divisions: 16,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' pt',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '14 pt',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Unselected size'),
+                value: controller.bottomNavigationBarUnselectedLabelSize,
+                onChanged: controller.setBottomNavigationBarUnselectedLabelSize,
+                min: 8,
+                max: 26,
+                divisions: 20,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' pt',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: controller.bottomNavigationBarSelectedLabelSize != null
+                    // ignore: string interpolation
+                    ? '${((controller.bottomNavigationBarSelectedLabelSize ?? 12) - 2).toStringAsFixed(0)} pt'
+                    : '12 pt',
+                valueDefaultDisabledLabel: '12 pt',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                enabled: enableControl,
+                title: const Text('Selected icon size'),
+                value: controller.bottomNavigationBarSelectedIconSize,
+                onChanged: controller.setBottomNavigationBarSelectedIconSize,
+                min: 14,
+                max: 50,
+                divisions: 36,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: '24 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                enabled: enableControl,
+                title: const Text('Unselected size'),
+                value: controller.bottomNavigationBarUnselectedIconSize,
+                onChanged: controller.setBottomNavigationBarUnselectedIconSize,
+                min: 14,
+                max: 50,
+                divisions: 36,
+                valueHeading: 'SIZE',
+                valueUnitLabel: ' dp',
+                valueDecimalPlaces: 0,
+                valueDefaultLabel: controller.bottomNavigationBarSelectedIconSize != null
+                    // ignore: string interpolation
+                    ? '${(controller.bottomNavigationBarSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
+                    : '24 dp',
+                valueDefaultDisabledLabel: '24 dp',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
       ],
     );
   }

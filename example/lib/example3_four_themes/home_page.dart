@@ -30,8 +30,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double margins =
-        App.responsiveInsets(MediaQuery.sizeOf(context).width);
+    final double margins = App.responsiveInsets(MediaQuery.sizeOf(context).width);
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 
@@ -79,8 +78,7 @@ class HomePage extends StatelessWidget {
                       // can pass it property values to make it match. It is
                       // possible to extract it from the surrounding theme too
                       // and use that value, this is done in another example.
-                      optionButtonBorderRadius:
-                          controller.useSubThemes ? 12 : 4,
+                      optionButtonBorderRadius: controller.useSubThemes ? 12 : 4,
                       buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
                     ),
                     const SizedBox(height: 8),
@@ -128,12 +126,14 @@ class HomePage extends StatelessWidget {
                     SwitchListTile(
                       contentPadding: EdgeInsets.zero,
                       title: const Text('Use component themes'),
-                      subtitle: const Text('Enable component themes. '
-                          'They are not customized in this example. FCS M3 '
-                          'component themes look mostly same as default M3, '
-                          'but in M2 mode, FCS defaults are very opinionated '
-                          'and look more like M3 defaults than M2 '
-                          'defaults.'),
+                      subtitle: const Text(
+                        'Enable component themes. '
+                        'They are not customized in this example. FCS M3 '
+                        'component themes look mostly same as default M3, '
+                        'but in M2 mode, FCS defaults are very opinionated '
+                        'and look more like M3 defaults than M2 '
+                        'defaults.',
+                      ),
                       value: controller.useSubThemes,
                       onChanged: controller.setUseSubThemes,
                     ),

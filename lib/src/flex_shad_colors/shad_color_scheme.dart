@@ -137,21 +137,17 @@ class ShadColorScheme with Diagnosticable {
       card: Color.lerp(a.card, b.card, t)!,
       cardForeground: Color.lerp(a.cardForeground, b.cardForeground, t)!,
       popover: Color.lerp(a.popover, b.popover, t)!,
-      popoverForeground:
-          Color.lerp(a.popoverForeground, b.popoverForeground, t)!,
+      popoverForeground: Color.lerp(a.popoverForeground, b.popoverForeground, t)!,
       primary: Color.lerp(a.primary, b.primary, t)!,
-      primaryForeground:
-          Color.lerp(a.primaryForeground, b.primaryForeground, t)!,
+      primaryForeground: Color.lerp(a.primaryForeground, b.primaryForeground, t)!,
       secondary: Color.lerp(a.secondary, b.secondary, t)!,
-      secondaryForeground:
-          Color.lerp(a.secondaryForeground, b.secondaryForeground, t)!,
+      secondaryForeground: Color.lerp(a.secondaryForeground, b.secondaryForeground, t)!,
       muted: Color.lerp(a.muted, b.muted, t)!,
       mutedForeground: Color.lerp(a.mutedForeground, b.mutedForeground, t)!,
       accent: Color.lerp(a.accent, b.accent, t)!,
       accentForeground: Color.lerp(a.accentForeground, b.accentForeground, t)!,
       destructive: Color.lerp(a.destructive, b.destructive, t)!,
-      destructiveForeground:
-          Color.lerp(a.destructiveForeground, b.destructiveForeground, t)!,
+      destructiveForeground: Color.lerp(a.destructiveForeground, b.destructiveForeground, t)!,
       border: Color.lerp(a.border, b.border, t)!,
       input: Color.lerp(a.input, b.input, t)!,
       ring: Color.lerp(a.ring, b.ring, t)!,
@@ -191,27 +187,27 @@ class ShadColorScheme with Diagnosticable {
   /// Shadcn based color scheme, hashcode.
   @override
   int get hashCode => Object.hash(
-        background,
-        foreground,
-        card,
-        cardForeground,
-        popover,
-        popoverForeground,
-        primary,
-        primaryForeground,
-        secondary,
-        secondaryForeground,
-        muted,
-        mutedForeground,
-        accent,
-        accentForeground,
-        destructive,
-        destructiveForeground,
-        border,
-        input,
-        ring,
-        selection,
-      );
+    background,
+    foreground,
+    card,
+    cardForeground,
+    popover,
+    popoverForeground,
+    primary,
+    primaryForeground,
+    secondary,
+    secondaryForeground,
+    muted,
+    mutedForeground,
+    accent,
+    accentForeground,
+    destructive,
+    destructiveForeground,
+    border,
+    input,
+    ring,
+    selection,
+  );
 
   /// Flutter debug properties override, includes toString.
   @override
@@ -232,8 +228,7 @@ class ShadColorScheme with Diagnosticable {
     properties.add(ColorProperty('accent', accent));
     properties.add(ColorProperty('accentForeground', accentForeground));
     properties.add(ColorProperty('destructive', destructive));
-    properties
-        .add(ColorProperty('destructiveForeground', destructiveForeground));
+    properties.add(ColorProperty('destructiveForeground', destructiveForeground));
     properties.add(ColorProperty('border', border));
     properties.add(ColorProperty('input', input));
     properties.add(ColorProperty('ring', ring));

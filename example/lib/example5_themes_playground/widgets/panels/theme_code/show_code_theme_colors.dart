@@ -23,12 +23,10 @@ class ShowCodeThemeColors extends StatelessWidget {
   final Color? onBackgroundColor;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(Color color, Color bg) =>
-      _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
+  static Color _onColor(Color color, Color bg) => _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +47,10 @@ class ShowCodeThemeColors extends StatelessWidget {
     // defaults you would use if you had a package that provided a theme
     // extension, and it would fallback to defaults like this internally if
     // it had not been added by user to ThemeData as an extension.
-    final CodeTheme colors = theme.extension<CodeTheme>() ??
-        (isDark ? CodeTheme.dark : CodeTheme.light);
+    final CodeTheme colors = theme.extension<CodeTheme>() ?? (isDark ? CodeTheme.dark : CodeTheme.light);
 
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
@@ -81,8 +77,7 @@ class ShowCodeThemeColors extends StatelessWidget {
     }
 
     // Get effective background color.
-    final Color background =
-        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
+    final Color background = onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
 
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.

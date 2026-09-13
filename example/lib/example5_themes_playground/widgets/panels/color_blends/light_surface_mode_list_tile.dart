@@ -30,8 +30,7 @@ class LightSurfaceModeListTile extends StatelessWidget {
         if (mode.index + 1 >= FlexSurfaceMode.values.length - 1) {
           controller.setSurfaceModeLight(FlexSurfaceMode.values[0]);
         } else {
-          controller
-              .setSurfaceModeLight(FlexSurfaceMode.values[mode.index + 1]);
+          controller.setSurfaceModeLight(FlexSurfaceMode.values[mode.index + 1]);
         }
       },
     );

@@ -31,8 +31,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double margins =
-        App.responsiveInsets(MediaQuery.sizeOf(context).width);
+    final double margins = App.responsiveInsets(MediaQuery.sizeOf(context).width);
     final ThemeData theme = Theme.of(context);
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
 

@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes navigationDrawerTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'NavigationDrawer FST22.1: GIVEN a FlexSubTheme.navigationDrawerTheme '
+    test('NavigationDrawer FST22.1: GIVEN a FlexSubTheme.navigationDrawerTheme '
         'EXPECT equal to NavigationDrawerThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

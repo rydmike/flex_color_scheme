@@ -141,17 +141,11 @@ ListTileThemeData _listTileTheme({
     colorScheme,
   );
 
-  final Color? iconColor = iconSchemeColor == null
-      ? null
-      : FlexSubThemes.schemeColor(iconSchemeColor, colorScheme);
+  final Color? iconColor = iconSchemeColor == null ? null : FlexSubThemes.schemeColor(iconSchemeColor, colorScheme);
 
-  final Color? textColor = textSchemeColor == null
-      ? null
-      : FlexSubThemes.schemeColor(textSchemeColor, colorScheme);
+  final Color? textColor = textSchemeColor == null ? null : FlexSubThemes.schemeColor(textSchemeColor, colorScheme);
 
-  final Color? tileColor = tileSchemeColor == null
-      ? null
-      : FlexSubThemes.schemeColor(tileSchemeColor, colorScheme);
+  final Color? tileColor = tileSchemeColor == null ? null : FlexSubThemes.schemeColor(tileSchemeColor, colorScheme);
 
   final Color? selectedTileColor = selectedTileSchemeColor == null
       ? null

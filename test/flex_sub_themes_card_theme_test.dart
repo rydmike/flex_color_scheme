@@ -8,16 +8,14 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Card tests
     // -------------------------------------------------------------------------
-    test(
-        'Card FST6.1: GIVEN a default FlexSubTheme.cardTheme() '
+    test('Card FST6.1: GIVEN a default FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubThemes.cardTheme(),
         equals(const CardThemeData(clipBehavior: Clip.antiAlias)),
       );
     });
-    test(
-        'Card FST6.2 custom: GIVEN a custom FlexSubTheme.cardTheme() '
+    test('Card FST6.2 custom: GIVEN a custom FlexSubTheme.cardTheme() '
         'EXPECT equal to CardTheme() version with same values', () {
       expect(
         FlexSubThemes.cardTheme(
@@ -36,8 +34,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Card FST6.3 m2-default-radius: GIVEN useMaterial3 is false and no '
+    test('Card FST6.3 m2-default-radius: GIVEN useMaterial3 is false and no '
         'radius defined EXPECT shape with default M2 radius', () {
       final CardThemeData theme = FlexSubThemes.cardTheme(useMaterial3: false);
       expect(
@@ -50,10 +47,8 @@ void main() {
       );
       expect(theme.clipBehavior, equals(Clip.antiAlias));
     });
-    test(
-        'Card FST6.4 background and tint: GIVEN a background scheme color, '
-        'shadow and surface tint EXPECT CardThemeData using provided values',
-        () {
+    test('Card FST6.4 background and tint: GIVEN a background scheme color, '
+        'shadow and surface tint EXPECT CardThemeData using provided values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
       );
@@ -76,8 +71,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Card FST6.5 border default width: GIVEN border scheme color and '
+    test('Card FST6.5 border default width: GIVEN border scheme color and '
         'custom radius EXPECT shape with default border width', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -87,8 +81,7 @@ void main() {
         borderSchemeColor: SchemeColor.outline,
         radius: 8,
       );
-      final RoundedRectangleBorder shape =
-          theme.shape! as RoundedRectangleBorder;
+      final RoundedRectangleBorder shape = theme.shape! as RoundedRectangleBorder;
       expect(
         shape.borderRadius,
         equals(const BorderRadius.all(Radius.circular(8))),
@@ -96,8 +89,7 @@ void main() {
       expect(shape.side.width, equals(1.0));
       expect(shape.side.color, equals(colorScheme.outline));
     });
-    test(
-        'Card FST6.6 border custom width: GIVEN border color and custom width '
+    test('Card FST6.6 border custom width: GIVEN border color and custom width '
         'with default radius EXPECT shape using provided width and color', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -107,8 +99,7 @@ void main() {
         borderSchemeColor: SchemeColor.primary,
         borderWidth: 2.5,
       );
-      final RoundedRectangleBorder shape =
-          theme.shape! as RoundedRectangleBorder;
+      final RoundedRectangleBorder shape = theme.shape! as RoundedRectangleBorder;
       expect(
         shape.borderRadius,
         equals(

@@ -93,8 +93,7 @@ ButtonThemeData _buttonTheme({
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
 
   // Effective minimum button size.
   final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
@@ -107,18 +106,12 @@ ButtonThemeData _buttonTheme({
     padding: padding ?? kButtonPadding,
     layoutBehavior: ButtonBarLayoutBehavior.constrained,
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    hoverColor: tintInteract
-        ? FlexSubThemes.tintedHovered(overlay, tint, factor)
-        : baseColor.withAlpha(kAlphaHovered),
-    focusColor: tintInteract
-        ? FlexSubThemes.tintedFocused(overlay, tint, factor)
-        : baseColor.withAlpha(kAlphaFocused),
+    hoverColor: tintInteract ? FlexSubThemes.tintedHovered(overlay, tint, factor) : baseColor.withAlpha(kAlphaHovered),
+    focusColor: tintInteract ? FlexSubThemes.tintedFocused(overlay, tint, factor) : baseColor.withAlpha(kAlphaFocused),
     highlightColor: tintInteract
         ? FlexSubThemes.tintedHighlight(overlay, tint, factor)
         : baseColor.withAlpha(kAlphaHighlight),
-    splashColor: tintInteract
-        ? FlexSubThemes.tintedSplash(overlay, tint, factor)
-        : baseColor.withAlpha(kAlphaSplash),
+    splashColor: tintInteract ? FlexSubThemes.tintedSplash(overlay, tint, factor) : baseColor.withAlpha(kAlphaSplash),
     disabledColor: tintDisable
         ? FlexSubThemes.tintedDisable(
             colorScheme.onSurface,

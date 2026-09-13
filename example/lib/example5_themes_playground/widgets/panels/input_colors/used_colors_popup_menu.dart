@@ -108,7 +108,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
               leading: CircleAvatar(child: Text(_avText(i))),
               title: Text(_selectColors(i), style: txtStyle),
             ),
-          )
+          ),
       ],
       child: ListTileReveal(
         enabled: enabled,

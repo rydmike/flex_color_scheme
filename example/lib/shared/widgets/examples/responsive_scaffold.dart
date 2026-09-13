@@ -41,10 +41,10 @@ class ResponsiveMenuItems {
     String? labelSecondary,
     String? tooltipSecondary,
     IconData? iconSecondary,
-  })  : _tooltip = tooltip,
-        _labelSecondary = labelSecondary,
-        _tooltipSecondary = tooltipSecondary,
-        _iconSecondary = iconSecondary;
+  }) : _tooltip = tooltip,
+       _labelSecondary = labelSecondary,
+       _tooltipSecondary = tooltipSecondary,
+       _iconSecondary = iconSecondary;
 
   final String label;
   final IconData icon;
@@ -59,8 +59,7 @@ class ResponsiveMenuItems {
 
   String get tooltip => _tooltip ?? label;
   String get labelSecondary => _labelSecondary ?? label;
-  String get tooltipSecondary =>
-      _tooltipSecondary ?? _labelSecondary ?? tooltip;
+  String get tooltipSecondary => _tooltipSecondary ?? _labelSecondary ?? tooltip;
   IconData get iconSecondary => _iconSecondary ?? icon;
 }
 
@@ -483,16 +482,16 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     previousMenuWidth = activeMenuWidth;
     // No value provided for enabled or state used, will default to
     // enabled and primary state.
-    menuItemsEnabled =
-        List<bool>.generate(widget.menuItems.length, (int i) => true);
+    menuItemsEnabled = List<bool>.generate(widget.menuItems.length, (int i) => true);
     if (widget.menuItemsEnabled != null) {
       if ((widget.menuItemsEnabled?.length ?? 0) == widget.menuItems.length) {
         menuItemsEnabled = widget.menuItemsEnabled!;
       }
     }
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        widget.menuItems.length,
-        (int i) => ResponsiveMenuItemIconState.primary);
+      widget.menuItems.length,
+      (int i) => ResponsiveMenuItemIconState.primary,
+    );
     if (widget.menuItemsIconState != null) {
       if ((widget.menuItemsIconState?.length ?? 0) == widget.menuItems.length) {
         menuItemsIconState = widget.menuItemsIconState!;
@@ -505,8 +504,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
     // We are on media width where we allow the menu to be shown as fixed,
     // we are just going to call that isDesktop, but it could be large tablet
     // or tablet in landscape, or even phone in landscape.
-    final bool isDesktop =
-        MediaQuery.sizeOf(context).width >= widget.breakpointShowFullMenu;
+    final bool isDesktop = MediaQuery.sizeOf(context).width >= widget.breakpointShowFullMenu;
     // Secret sauce for a simple auto responsive & toggleable drawer-rail-menu.
     if (!isDesktop) activeMenuWidth = widget.railWidth;
     if (!isDesktop && isMenuClosed) activeMenuWidth = 0;
@@ -594,8 +592,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
                 actions: const <Widget>[AboutIconButton()],
                 // Some logic to show the implicit menu button on AppBar when
                 // there is no rail or menu.
-                automaticallyImplyLeading:
-                    !isDesktop && isMenuClosed && menuDoneClosing,
+                automaticallyImplyLeading: !isDesktop && isMenuClosed && menuDoneClosing,
               ),
               // The menu content when used in the Drawer.
               drawer: ConstrainedBox(
@@ -661,8 +658,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
               drawerScrimColor: widget.drawerScrimColor,
               drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
               drawerEnableOpenDragGesture: !isDesktop && isMenuClosed,
-              endDrawerEnableOpenDragGesture:
-                  widget.endDrawerEnableOpenDragGesture,
+              endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
               restorationId: widget.restorationId,
             ),
           ),
@@ -719,8 +715,7 @@ class _AppMenuState extends State<_AppMenu> {
     final bool isLight = theme.brightness == Brightness.light;
     final Color menuBackground = theme.canvasColor;
     final Color scaffoldBackground = theme.scaffoldBackgroundColor;
-    final bool closeColors =
-        colorsAreClose(menuBackground, scaffoldBackground, isLight);
+    final bool closeColors = colorsAreClose(menuBackground, scaffoldBackground, isLight);
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints size) {
@@ -754,9 +749,7 @@ class _AppMenuState extends State<_AppMenu> {
                   decoration: BoxDecoration(
                     border: BorderDirectional(
                       end: BorderSide(
-                        color: closeColors
-                            ? theme.dividerColor
-                            : Colors.transparent,
+                        color: closeColors ? theme.dividerColor : Colors.transparent,
                       ),
                     ),
                   ),
@@ -774,8 +767,7 @@ class _AppMenuState extends State<_AppMenu> {
                             railWidth: widget.railWidth,
                             menuLeadingTitle: widget.menuLeadingTitle,
                             menuLeadingSubtitle: widget.menuLeadingSubtitle,
-                            menuLeadingAvatarLabel:
-                                widget.menuLeadingAvatarLabel,
+                            menuLeadingAvatarLabel: widget.menuLeadingAvatarLabel,
                           ),
                           // Add all the menu items.
                           for (int i = 0; i < widget.menuItems.length; i++)
@@ -789,20 +781,16 @@ class _AppMenuState extends State<_AppMenu> {
                                 widget.onSelect?.call(i);
                               },
                               selected: selectedItem == i,
-                              icon: widget.menuItemsIconState[i] ==
-                                      ResponsiveMenuItemIconState.primary
+                              icon: widget.menuItemsIconState[i] == ResponsiveMenuItemIconState.primary
                                   ? widget.menuItems[i].icon
                                   : widget.menuItems[i].iconSecondary,
-                              turns: widget.menuItemsIconState[i] ==
-                                      ResponsiveMenuItemIconState.primary
+                              turns: widget.menuItemsIconState[i] == ResponsiveMenuItemIconState.primary
                                   ? widget.menuItems[i].turns
                                   : widget.menuItems[i].turnsSecondary,
-                              label: widget.menuItemsIconState[i] ==
-                                      ResponsiveMenuItemIconState.primary
+                              label: widget.menuItemsIconState[i] == ResponsiveMenuItemIconState.primary
                                   ? widget.menuItems[i].label
                                   : widget.menuItems[i].labelSecondary,
-                              tooltip: widget.menuItemsIconState[i] ==
-                                      ResponsiveMenuItemIconState.primary
+                              tooltip: widget.menuItemsIconState[i] == ResponsiveMenuItemIconState.primary
                                   ? widget.menuItems[i].tooltip
                                   : widget.menuItems[i].tooltipSecondary,
                               enabled: widget.menuItemsEnabled[i],
@@ -869,10 +857,8 @@ class _MenuItem extends StatelessWidget {
     // theme's color schemes, like here:
     final Color iconColor = enabled
         ? isLight
-            ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-                theme.colorScheme.onSurface)
-            : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-                theme.colorScheme.onSurface)
+              ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
+              : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface)
         : theme.colorScheme.onSurface.withAlpha(0x55);
     final Color textColor = enabled
         ? theme.colorScheme.onSurface.withAlpha(0xCC)
@@ -885,8 +871,8 @@ class _MenuItem extends StatelessWidget {
         ? 12
         // If we use a really narrow rail rail, make padding even smaller-
         : railWidth < 60
-            ? 5
-            : 8;
+        ? 5
+        : 8;
     // Remove the menu when it gets smaller than 4dp during animation.
     if (width < 4) {
       return const SizedBox.shrink();
@@ -920,44 +906,44 @@ class _MenuItem extends StatelessWidget {
                     onTap: enabled ? onTap : null,
                     child: Row(
                       children: <Widget>[
-                        Builder(builder: (BuildContext context) {
-                          final ConstrainedBox iconBox = ConstrainedBox(
-                            constraints: BoxConstraints.tightFor(
-                              width: railWidth,
-                              height: railWidth,
-                            ),
-                            child: turns == 0
-                                ? Icon(icon, color: iconColor)
-                                : RotatedBox(
-                                    quarterTurns: turns,
-                                    child: Icon(icon, color: iconColor),
-                                  ),
-                          );
-                          // Show tooltips only at rail size and if enabled.
-                          if (width == railWidth && enabled) {
-                            return Tooltip(
-                              // Show tooltips only at rail size and if enabled.
-                              message: tooltip,
-                              // Just to get the tooltip outside the rail.
-                              margin:
-                                  const EdgeInsetsDirectional.only(start: 50),
-                              waitDuration: const Duration(milliseconds: 500),
-                              // Constrain icon to min of rail width.
-                              child: iconBox,
+                        Builder(
+                          builder: (BuildContext context) {
+                            final ConstrainedBox iconBox = ConstrainedBox(
+                              constraints: BoxConstraints.tightFor(
+                                width: railWidth,
+                                height: railWidth,
+                              ),
+                              child: turns == 0
+                                  ? Icon(icon, color: iconColor)
+                                  : RotatedBox(
+                                      quarterTurns: turns,
+                                      child: Icon(icon, color: iconColor),
+                                    ),
                             );
-                          }
+                            // Show tooltips only at rail size and if enabled.
+                            if (width == railWidth && enabled) {
+                              return Tooltip(
+                                // Show tooltips only at rail size and if enabled.
+                                message: tooltip,
+                                // Just to get the tooltip outside the rail.
+                                margin: const EdgeInsetsDirectional.only(start: 50),
+                                waitDuration: const Duration(milliseconds: 500),
+                                // Constrain icon to min of rail width.
+                                child: iconBox,
+                              );
+                            }
 
-                          return iconBox;
-                        }),
+                            return iconBox;
+                          },
+                        ),
                         // Below width of 10dp we remove the label.
                         if (width < railWidth + 10)
                           const SizedBox.shrink()
                         else
                           Text(
                             label,
-                            style: theme.textTheme.bodyLarge!
-                                .copyWith(color: textColor),
-                          )
+                            style: theme.textTheme.bodyLarge!.copyWith(color: textColor),
+                          ),
                       ],
                     ),
                   ),
@@ -1028,8 +1014,9 @@ class _MenuLeadingItemState extends State<_MenuLeadingItem> {
               child: Text(
                 widget.menuLeadingAvatarLabel,
                 style: primaryTextTheme.titleMedium!.copyWith(
-                    color: theme.colorScheme.onPrimary,
-                    fontWeight: FontWeight.bold),
+                  color: theme.colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             title: widget.menuLeadingTitle,

@@ -99,47 +99,35 @@ FloatingActionButtonThemeData _floatingActionButtonTheme({
   final Color? background = backgroundSchemeColor == null
       ? null
       : FlexSubThemes.schemeColor(backgroundSchemeColor, colorScheme);
-  final Color? foreground =
-      backgroundSchemeColor == null && foregroundSchemeColor == null
-          ? null
-          : foregroundSchemeColor != null
-              ? FlexSubThemes.schemeColor(foregroundSchemeColor, colorScheme)
-              : FlexSubThemes.schemeColorPair(
-                  backgroundSchemeColor ??
-                      (useM3
-                          ? SchemeColor.onPrimaryContainer
-                          : SchemeColor.onSecondary),
-                  colorScheme,
-                );
+  final Color? foreground = backgroundSchemeColor == null && foregroundSchemeColor == null
+      ? null
+      : foregroundSchemeColor != null
+      ? FlexSubThemes.schemeColor(foregroundSchemeColor, colorScheme)
+      : FlexSubThemes.schemeColorPair(
+          backgroundSchemeColor ?? (useM3 ? SchemeColor.onPrimaryContainer : SchemeColor.onSecondary),
+          colorScheme,
+        );
 
-  final Color overlay = foreground ??
-      (useM3 ? colorScheme.onPrimaryContainer : colorScheme.onSecondary);
-  final Color tint = background ??
-      (useM3 ? colorScheme.primaryContainer : colorScheme.secondary);
+  final Color overlay = foreground ?? (useM3 ? colorScheme.onPrimaryContainer : colorScheme.onSecondary);
+  final Color tint = background ?? (useM3 ? colorScheme.primaryContainer : colorScheme.secondary);
 
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
 
   return FloatingActionButtonThemeData(
     extendedTextStyle: extendedTextStyle,
     foregroundColor: foreground,
     backgroundColor: background,
-    splashColor:
-        tintInteract ? FlexSubThemes.tintedSplash(overlay, tint, factor) : null,
-    focusColor: tintInteract
-        ? FlexSubThemes.tintedFocused(overlay, tint, factor)
-        : null,
-    hoverColor: tintInteract
-        ? FlexSubThemes.tintedHovered(overlay, tint, factor)
-        : null,
+    splashColor: tintInteract ? FlexSubThemes.tintedSplash(overlay, tint, factor) : null,
+    focusColor: tintInteract ? FlexSubThemes.tintedFocused(overlay, tint, factor) : null,
+    hoverColor: tintInteract ? FlexSubThemes.tintedHovered(overlay, tint, factor) : null,
     shape: useShape
         ? alwaysCircular
-            ? const StadiumBorder()
-            : RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(radius ?? kFabRadius),
-                ),
-              )
+              ? const StadiumBorder()
+              : RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(radius ?? kFabRadius),
+                  ),
+                )
         : null,
   );
 }

@@ -99,8 +99,7 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
         stackTrace: stackTrace,
       );
       if (context.mounted) {
-        final double? width =
-            MediaQuery.sizeOf(context).width > 800 ? 700 : null;
+        final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
@@ -129,13 +128,10 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
         stackTrace: stackTrace,
       );
       // Date time now formatted as string dd.MM.yyyy HH:mm:ss
-      final String importDate =
-          DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
-      widget.controller.setImportErrorLog(
-          'Failed to decode JSON at $importDate, error:\n$error');
+      final String importDate = DateFormat('dd.MM.yyyy HH:mm:ss').format(DateTime.now());
+      widget.controller.setImportErrorLog('Failed to decode JSON at $importDate, error:\n$error');
       if (context.mounted) {
-        final double? width =
-            MediaQuery.sizeOf(context).width > 800 ? 700 : null;
+        final double? width = MediaQuery.sizeOf(context).width > 800 ? 700 : null;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
@@ -157,13 +153,13 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
         const SizedBox(height: 8),
         ...switch (widget.controller.canImportExportThemeData()) {
           true => <Widget>[
-              const SizedBox(height: 8),
-              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+            const SizedBox(height: 8),
+            ResponsiveTwoWidgets(
+              builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
-                    contentPadding:
-                        ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Export settings'),
                     subtitleReveal: const Text(
                       'Export theme settings to JSON to the staging '
@@ -202,34 +198,38 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                       child: IconButton(
                         onPressed: () {
                           unawaited(
-                              ShareSettings.copyToClipboardWithSnackBarInfo(
-                            context,
-                            playgroundConfig,
-                            'Themes Playground configuration copied to the '
-                            'clipboard!',
-                          ));
+                            ShareSettings.copyToClipboardWithSnackBarInfo(
+                              context,
+                              playgroundConfig,
+                              'Themes Playground configuration copied to the '
+                              'clipboard!',
+                            ),
+                          );
                         },
                         icon: const Icon(Icons.copy),
                       ),
                     ),
                     onTap: () {
-                      unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
-                        context,
-                        playgroundConfig,
-                        'Themes Playground configuration copied to the '
-                        'clipboard!',
-                      ));
+                      unawaited(
+                        ShareSettings.copyToClipboardWithSnackBarInfo(
+                          context,
+                          playgroundConfig,
+                          'Themes Playground configuration copied to the '
+                          'clipboard!',
+                        ),
+                      );
                     },
                   ),
                   isRow: isRow,
                 );
-              }),
-              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+              },
+            ),
+            ResponsiveTwoWidgets(
+              builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
-                    contentPadding:
-                        ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Paste settings'),
                     subtitleReveal: const Text(
                       'Paste Themes Playground JSON settings from '
@@ -275,14 +275,15 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                   ),
                   isRow: isRow,
                 );
-              }),
-              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+              },
+            ),
+            ResponsiveTwoWidgets(
+              builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
                     enabled: playgroundConfig.isNotEmpty,
-                    contentPadding:
-                        ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Make shareable URL'),
                     subtitleReveal: const Text(
                       'This takes the exported settings JSON string from the '
@@ -295,8 +296,7 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                         child: Icon(Icons.link),
                       ),
                       onPressed: () async {
-                        shareUrl =
-                            await ShareSettings.makeUrl(playgroundConfig);
+                        shareUrl = await ShareSettings.makeUrl(playgroundConfig);
                         setState(() {});
                       },
                     ),
@@ -323,35 +323,39 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                       child: IconButton(
                         onPressed: () {
                           unawaited(
-                              ShareSettings.copyToClipboardWithSnackBarInfo(
-                            context,
-                            shareUrl,
-                            'Themes Playground settings share link copied '
-                            'to the clipboard!',
-                          ));
+                            ShareSettings.copyToClipboardWithSnackBarInfo(
+                              context,
+                              shareUrl,
+                              'Themes Playground settings share link copied '
+                              'to the clipboard!',
+                            ),
+                          );
                         },
                         icon: const Icon(Icons.copy),
                       ),
                     ),
                     onTap: () {
-                      unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
-                        context,
-                        shareUrl,
-                        'Themes Playground settings share link copied '
-                        'to the clipboard!',
-                      ));
+                      unawaited(
+                        ShareSettings.copyToClipboardWithSnackBarInfo(
+                          context,
+                          shareUrl,
+                          'Themes Playground settings share link copied '
+                          'to the clipboard!',
+                        ),
+                      );
                     },
                   ),
                   isRow: isRow,
                 );
-              }),
-              ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
+              },
+            ),
+            ResponsiveTwoWidgets(
+              builder: (BuildContext context, bool isRow) {
                 return RowOrColumn(
                   firstWidget: ListTileReveal(
                     dense: true,
                     enabled: playgroundConfig.isNotEmpty,
-                    contentPadding:
-                        ThemeValues.tilePaddingStart(context, isRow),
+                    contentPadding: ThemeValues.tilePaddingStart(context, isRow),
                     title: const Text('Clear staging area'),
                     subtitleReveal: const Text(
                       'This action only clears the staging area below '
@@ -407,80 +411,83 @@ class _ThemeExportImportPanelState extends State<ThemeExportImportPanel> {
                   ),
                   isRow: isRow,
                 );
-              }),
-              const SizedBox(height: 8),
-              const Divider(height: 1),
-              ListTileReveal(
-                title: const Text('Import log'),
-                leading: const Icon(Icons.text_snippet_outlined),
-                subtitleReveal: Text(
-                  'Latest import log is shown below:\n'
-                  '\n'
-                  '${widget.controller.importErrorLog}',
-                ),
-                tileColor: theme.colorScheme.surfaceContainer,
+              },
+            ),
+            const SizedBox(height: 8),
+            const Divider(height: 1),
+            ListTileReveal(
+              title: const Text('Import log'),
+              leading: const Icon(Icons.text_snippet_outlined),
+              subtitleReveal: Text(
+                'Latest import log is shown below:\n'
+                '\n'
+                '${widget.controller.importErrorLog}',
               ),
-              const Divider(height: 1),
-              const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        if (playgroundConfig.isEmpty)
-                          const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Text(
-                                'Staging import/export area is empty',
-                              ),
+              tileColor: theme.colorScheme.surfaceContainer,
+            ),
+            const Divider(height: 1),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Card(
+                margin: EdgeInsets.zero,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      if (playgroundConfig.isEmpty)
+                        const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Text(
+                              'Staging import/export area is empty',
                             ),
-                          )
-                        else ...<Widget>[
-                          if (shareUrl.isNotEmpty) ...<Widget>[
-                            const Text('\nShareable settings URL'),
-                            Text(
-                              shareUrl,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.firaMono(
+                          ),
+                        )
+                      else ...<Widget>[
+                        if (shareUrl.isNotEmpty) ...<Widget>[
+                          const Text('\nShareable settings URL'),
+                          Text(
+                            shareUrl,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                GoogleFonts.firaMono(
+                                  fontSize: 11,
+                                ).copyWith(
+                                  color: theme.colorScheme.primary,
+                                ),
+                          ),
+                          const Text('\nExported settings JSON data'),
+                        ],
+                        SelectableText(
+                          playgroundConfig,
+                          style:
+                              GoogleFonts.firaMono(
                                 fontSize: 11,
                               ).copyWith(
                                 color: theme.colorScheme.primary,
                               ),
-                            ),
-                            const Text('\nExported settings JSON data'),
-                          ],
-                          SelectableText(
-                            playgroundConfig,
-                            style: GoogleFonts.firaMono(
-                              fontSize: 11,
-                            ).copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                        ],
+                        ),
                       ],
-                    ),
+                    ],
                   ),
                 ),
               ),
-            ],
+            ),
+          ],
           false => <Widget>[
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  child: Text(
-                    'Playground theme export not supported with '
-                    'current storage solution.',
-                  ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Card(
+                margin: EdgeInsets.zero,
+                child: Text(
+                  'Playground theme export not supported with '
+                  'current storage solution.',
                 ),
               ),
-            ],
+            ),
+          ],
         },
         const SizedBox(height: 8),
       ],

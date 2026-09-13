@@ -130,17 +130,13 @@ SwitchThemeData _switchTheme({
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
 
   // Get selected thumb color, and its pair, defaults to
   // M2: primary and onPrimary.
   // M3: primaryContainer and onPrimaryContainer
   final Color thumbColor = FlexSubThemes.schemeColor(
-    thumbSchemeColor ??
-        (useM3
-            ? SchemeColor.primaryContainer
-            : baseSchemeColor ?? SchemeColor.primary),
+    thumbSchemeColor ?? (useM3 ? SchemeColor.primaryContainer : baseSchemeColor ?? SchemeColor.primary),
     colorScheme,
   );
 
@@ -154,8 +150,7 @@ SwitchThemeData _switchTheme({
         if (states.contains(WidgetState.disabled)) {
           if (states.contains(WidgetState.selected)) {
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
           }
@@ -192,9 +187,7 @@ SwitchThemeData _switchTheme({
         // Custom themed color on track when not selected
         if (unselectedColored) {
           return baseColor.withAlpha(
-            isLight
-                ? kAlphaM2SwitchUnselectTrackLight
-                : kAlphaM2SwitchUnselectTrackDark,
+            isLight ? kAlphaM2SwitchUnselectTrackLight : kAlphaM2SwitchUnselectTrackDark,
           );
         }
         // This is SDK default, yes that value is hard coded in SDK too.
@@ -346,8 +339,7 @@ SwitchThemeData _switchTheme({
               return colorScheme.surface;
             }
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
@@ -380,8 +372,7 @@ SwitchThemeData _switchTheme({
           if (states.contains(WidgetState.disabled)) {
             if (states.contains(WidgetState.selected)) {
               if (tintDisable) {
-                return FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, baseColor);
+                return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
               }
               return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
             }
@@ -404,35 +395,27 @@ SwitchThemeData _switchTheme({
           if (states.contains(WidgetState.pressed)) {
             return unselectedColored
                 ? baseColor.withAlpha(
-                    isLight
-                        ? kAlphaM3SwitchUnselectTrackLight
-                        : kAlphaM3SwitchUnselectTrackDark,
+                    isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                   )
                 : colorScheme.surfaceContainerHighest;
           }
           if (states.contains(WidgetState.hovered)) {
             return unselectedColored
                 ? baseColor.withAlpha(
-                    isLight
-                        ? kAlphaM3SwitchUnselectTrackLight
-                        : kAlphaM3SwitchUnselectTrackDark,
+                    isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                   )
                 : colorScheme.surfaceContainerHighest;
           }
           if (states.contains(WidgetState.focused)) {
             return unselectedColored
                 ? baseColor.withAlpha(
-                    isLight
-                        ? kAlphaM3SwitchUnselectTrackLight
-                        : kAlphaM3SwitchUnselectTrackDark,
+                    isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                   )
                 : colorScheme.surfaceContainerHighest;
           }
           return unselectedColored
               ? baseColor.withAlpha(
-                  isLight
-                      ? kAlphaM3SwitchUnselectTrackLight
-                      : kAlphaM3SwitchUnselectTrackDark,
+                  isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                 )
               : colorScheme.surfaceContainerHighest;
         }),
@@ -444,8 +427,7 @@ SwitchThemeData _switchTheme({
           }
           if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }

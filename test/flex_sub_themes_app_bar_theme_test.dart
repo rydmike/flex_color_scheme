@@ -12,8 +12,7 @@ void main() {
     // Flutter AppBar theme. All the logic and complexity is included in
     // FlexColorScheme.toTheme factory and included in its tests. No need
     // to test it here, but included as a stub for potential future additions.
-    test(
-        'AppBar FST1.1: GIVEN a default FlexSubTheme.appBarTheme() '
+    test('AppBar FST1.1: GIVEN a default FlexSubTheme.appBarTheme() '
         'EXPECT equal to AppBarTheme with shape RoundedRectangleBorder()', () {
       expect(
         FlexSubThemes.appBarTheme(),

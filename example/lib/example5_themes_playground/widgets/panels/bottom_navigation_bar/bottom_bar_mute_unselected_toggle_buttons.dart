@@ -36,15 +36,16 @@ class BottomBarMuteUnselectedToggleButtons extends StatelessWidget {
       contentPadding: contentPadding,
       enabled: controller.useFlexColorScheme && controller.useSubThemes,
       title: const Text('Muted'),
-      subtitle: Text(
-          _explainLabelStyle(controller.bottomNavigationBarMuteUnselectedItem)),
-      subtitleReveal: const Text('When undefined (null), unselected items are '
-          'muted in M2 mode, but not in M3 mode. In M3 mode unselected items '
-          'default to onSurfaceVariant, which already is a bit muted as a '
-          'part of its color role definition. In M2 mode, onSurface is the '
-          'default unselected, and it had another muting mechanism. '
-          'We can be use it here too, in a slightly modified subtly '
-          'color expressive version.'),
+      subtitle: Text(_explainLabelStyle(controller.bottomNavigationBarMuteUnselectedItem)),
+      subtitleReveal: const Text(
+        'When undefined (null), unselected items are '
+        'muted in M2 mode, but not in M3 mode. In M3 mode unselected items '
+        'default to onSurfaceVariant, which already is a bit muted as a '
+        'part of its color role definition. In M2 mode, onSurface is the '
+        'default unselected, and it had another muting mechanism. '
+        'We can be use it here too, in a slightly modified subtly '
+        'color expressive version.',
+      ),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(

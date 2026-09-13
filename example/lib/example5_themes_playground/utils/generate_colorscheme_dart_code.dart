@@ -10,13 +10,12 @@ import 'package:material_ui/material_ui.dart';
 String generateColorSchemeDartCode(
   ThemeController controller,
 ) {
-  final ColorScheme lightScheme =
-      flexColorSchemeLight(controller, Colors.black).toScheme;
+  final ColorScheme lightScheme = flexColorSchemeLight(controller, Colors.black).toScheme;
 
-  final ColorScheme darkScheme =
-      flexColorSchemeDark(controller, Colors.black).toScheme;
+  final ColorScheme darkScheme = flexColorSchemeDark(controller, Colors.black).toScheme;
 
-  final String code = '''
+  final String code =
+      '''
 /// Light [ColorScheme] made with FlexColorScheme v${App.version}.
 /// Requires Flutter 3.22.0 or later.
 const ColorScheme lightColorScheme = ColorScheme(

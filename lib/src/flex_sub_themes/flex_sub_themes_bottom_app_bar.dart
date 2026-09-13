@@ -70,8 +70,7 @@ BottomAppBarThemeData _bottomAppBarTheme({
     backgroundSchemeColor ?? SchemeColor.surface,
     colorScheme,
   );
-  final Color? effectiveColor =
-      backgroundSchemeColor == null && useM3 ? null : backgroundColor;
+  final Color? effectiveColor = backgroundSchemeColor == null && useM3 ? null : backgroundColor;
 
   return BottomAppBarThemeData(
     color: effectiveColor,

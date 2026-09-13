@@ -21,8 +21,7 @@ class AppExampleComponents extends StatefulWidget {
   State<AppExampleComponents> createState() => _AppExampleComponentsState();
 }
 
-class _AppExampleComponentsState extends State<AppExampleComponents>
-    with TickerProviderStateMixin {
+class _AppExampleComponentsState extends State<AppExampleComponents> with TickerProviderStateMixin {
   late int currentPage;
   late TabController tabController;
 
@@ -156,8 +155,7 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle =
-      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
@@ -206,7 +204,8 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'This app demonstrates what ${App.packageName} '
+                text:
+                    'This app demonstrates what ${App.packageName} '
                     'themed components look like by showing them in a mock '
                     'device. '
                     'To learn more about ${App.packageName}, check out '
@@ -219,12 +218,14 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
               ),
               TextSpan(
                 style: aboutTextStyle,
-                text: '. It also includes the source '
+                text:
+                    '. It also includes the source '
                     'code of this application.\n\n',
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${App.flutterVersion}, '
+                text:
+                    'Built with Flutter ${App.flutterVersion}, '
                     'using ${App.packageName} '
                     '${App.version}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
@@ -254,11 +255,11 @@ class CCard extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
       elevation: useM3
           ? isDark
-              ? 1
-              : 0.5
+                ? 1
+                : 0.5
           : isDark
-              ? 3
-              : 2,
+          ? 3
+          : 2,
       child: Padding(
         padding: padding ?? const EdgeInsets.all(12),
         child: child,
@@ -751,8 +752,7 @@ class ShowcaseText extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text('Normal TextTheme',
-                    style: theme.textTheme.titleMedium),
+                child: Text('Normal TextTheme', style: theme.textTheme.titleMedium),
               ),
               const TextThemeShowcase(),
             ],
@@ -766,8 +766,7 @@ class ShowcaseText extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text('Primary TextTheme',
-                    style: theme.primaryTextTheme.titleMedium),
+                child: Text('Primary TextTheme', style: theme.primaryTextTheme.titleMedium),
               ),
               const PrimaryTextThemeShowcase(),
             ],

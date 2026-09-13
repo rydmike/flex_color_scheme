@@ -282,16 +282,16 @@ DatePickerThemeData _datePickerTheme({
   /// picker. It defaults to the ambient locale provided by [Localizations].
   Locale? locale,
 }) {
-// This InputDecorationTheme is here to help work around this issue:
-// https://github.com/flutter/flutter/issues/131666
-// It is reasonably successful in fixing the issue, but it is not perfect.
+  // This InputDecorationTheme is here to help work around this issue:
+  // https://github.com/flutter/flutter/issues/131666
+  // It is reasonably successful in fixing the issue, but it is not perfect.
   InputDecorationThemeData datePickerDefaultInputDecorationTheme() {
     const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(4.0));
-// The input decoration theme is used to style the input fields in the
-// date picker dialog. This matches the default input decoration theme
-// used by the date picker dialog.
-// TODO(rydmike): Check that Flutter's defaults have not changed.
-// If it has the changes are probably subtle enough to not matter for now.
+    // The input decoration theme is used to style the input fields in the
+    // date picker dialog. This matches the default input decoration theme
+    // used by the date picker dialog.
+    // TODO(rydmike): Check that Flutter's defaults have not changed.
+    // If it has the changes are probably subtle enough to not matter for now.
     return InputDecorationThemeData(
       filled: false,
       hoverColor: colorScheme.brightness == Brightness.dark
@@ -370,7 +370,8 @@ DatePickerThemeData _datePickerTheme({
   final Color? headerForeground = headerForegroundSchemeColor == null
       ? null
       : FlexSubThemes.schemeColor(headerForegroundSchemeColor, colorScheme);
-  final Color? headerForegroundColor = headerForeground ??
+  final Color? headerForegroundColor =
+      headerForeground ??
       (headerBackgroundSchemeColor == null
           ? null
           : FlexSubThemes.schemeColorPair(

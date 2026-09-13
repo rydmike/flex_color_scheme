@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes drawerTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'Drawer FST10.1: GIVEN a FlexSubTheme.drawerTheme() '
+    test('Drawer FST10.1: GIVEN a FlexSubTheme.drawerTheme() '
         'EXPECT equal to DrawerThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),

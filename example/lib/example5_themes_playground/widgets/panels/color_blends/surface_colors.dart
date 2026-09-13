@@ -15,12 +15,10 @@ class SurfaceColors extends StatelessWidget {
   final ThemeController controller;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(Color color) =>
-      _isLight(color) ? Colors.black : Colors.white;
+  static Color _onColor(Color color) => _isLight(color) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +35,7 @@ class SurfaceColors extends StatelessWidget {
     final FlexTones tones = effectiveFlexTones(controller, context);
 
     // Should we even show the tone? We show them only when, seeding is on.
-    final bool showTones =
-        controller.useKeyColors && controller.useFlexColorScheme;
+    final bool showTones = controller.useKeyColors && controller.useFlexColorScheme;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -95,8 +92,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surface,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur surface '
-                              '${colorScheme.surface}'),
+                          key: ValueKey<String>(
+                            'sur surface '
+                            '${colorScheme.surface}',
+                          ),
                           color: colorScheme.surface,
                           textColor: colorScheme.onSurface,
                           label: 'surface',
@@ -109,8 +108,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur surfaceContainer '
-                              '${colorScheme.surfaceContainer}'),
+                          key: ValueKey<String>(
+                            'sur surfaceContainer '
+                            '${colorScheme.surfaceContainer}',
+                          ),
                           color: colorScheme.surfaceContainer,
                           textColor: colorScheme.onSurface,
                           label: 'surfaceContainer',
@@ -140,8 +141,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceDim,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceDim '
-                              '${colorScheme.surfaceDim}'),
+                          key: ValueKey<String>(
+                            'cnv surfaceDim '
+                            '${colorScheme.surfaceDim}',
+                          ),
                           color: colorScheme.surfaceDim,
                           textColor: colorScheme.onSurface,
                           label: 'surface\u200BDim',
@@ -154,8 +157,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceBright,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceBright '
-                              '${colorScheme.surfaceBright}'),
+                          key: ValueKey<String>(
+                            'cnv surfaceBright '
+                            '${colorScheme.surfaceBright}',
+                          ),
                           color: colorScheme.surfaceBright,
                           textColor: colorScheme.onSurface,
                           label: 'surface\u200BBright',
@@ -186,8 +191,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceContainerLowest,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerLowest '
-                              '${colorScheme.surfaceContainerLowest}'),
+                          key: ValueKey<String>(
+                            'cnv surfaceContainerLowest '
+                            '${colorScheme.surfaceContainerLowest}',
+                          ),
                           color: colorScheme.surfaceContainerLowest,
                           textColor: colorScheme.onSurface,
                           label: 'surface\u200BContainer\u200BLowest',
@@ -200,8 +207,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceContainerLow,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerLow '
-                              '${colorScheme.surfaceContainerLow}'),
+                          key: ValueKey<String>(
+                            'cnv surfaceContainerLow '
+                            '${colorScheme.surfaceContainerLow}',
+                          ),
                           color: colorScheme.surfaceContainerLow,
                           textColor: colorScheme.onSurface,
                           label: 'surface\u200BContainer\u200BLow',
@@ -232,8 +241,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceContainerHigh,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerLowest '
-                              '${colorScheme.surfaceContainerHigh}'),
+                          key: ValueKey<String>(
+                            'cnv surfaceContainerLowest '
+                            '${colorScheme.surfaceContainerHigh}',
+                          ),
                           color: colorScheme.surfaceContainerHigh,
                           textColor: colorScheme.onSurface,
                           label: 'surface\u200BContainer\u200BHigh',
@@ -246,8 +257,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceContainerHighest,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv surfaceContainerHighest '
-                              '${colorScheme.surfaceContainerHighest}'),
+                          key: ValueKey<String>(
+                            'cnv surfaceContainerHighest '
+                            '${colorScheme.surfaceContainerHighest}',
+                          ),
                           color: colorScheme.surfaceContainerHighest,
                           textColor: colorScheme.onSurface,
                           label: 'surface\u200BContainer\u200BHighest',
@@ -278,8 +291,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: theme.scaffoldBackgroundColor,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur scaffoldBackgroundColor '
-                              '${theme.scaffoldBackgroundColor}'),
+                          key: ValueKey<String>(
+                            'sur scaffoldBackgroundColor '
+                            '${theme.scaffoldBackgroundColor}',
+                          ),
                           color: theme.scaffoldBackgroundColor,
                           textColor: _onColor(theme.scaffoldBackgroundColor),
                           label: 'Scaffold\nbackground',
@@ -292,8 +307,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.inverseSurface,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur inverseSurface '
-                              '${colorScheme.inverseSurface}'),
+                          key: ValueKey<String>(
+                            'sur inverseSurface '
+                            '${colorScheme.inverseSurface}',
+                          ),
                           color: colorScheme.inverseSurface,
                           textColor: colorScheme.onInverseSurface,
                           label: 'inverse\u200BSurface',
@@ -324,8 +341,10 @@ class SurfaceColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.surfaceTint,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur surfaceTint '
-                              '${colorScheme.surfaceTint}'),
+                          key: ValueKey<String>(
+                            'sur surfaceTint '
+                            '${colorScheme.surfaceTint}',
+                          ),
                           color: colorScheme.surfaceTint,
                           textColor: _onColor(colorScheme.surfaceTint),
                           label: 'surfaceTint',

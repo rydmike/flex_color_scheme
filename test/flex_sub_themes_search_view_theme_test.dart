@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes searchViewTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'SearchView FST25SV.1: GIVEN a default FlexSubTheme.searchViewTheme() '
+    test('SearchView FST25SV.1: GIVEN a default FlexSubTheme.searchViewTheme() '
         'SearchViewThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -26,8 +25,7 @@ void main() {
         ),
       );
     });
-    test(
-        'SearchView FST25SV.2: GIVEN a custom FlexSubTheme.searchViewTheme() '
+    test('SearchView FST25SV.2: GIVEN a custom FlexSubTheme.searchViewTheme() '
         'SearchViewThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

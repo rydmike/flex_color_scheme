@@ -121,21 +121,19 @@ OutlinedButtonThemeData _outlinedButtonTheme({
   // Outline color logic with different M2 and M3 defaults.
   final Color outlineColor = outlineSchemeColor == null
       ? useM3
-          ? FlexSubThemes.schemeColor(SchemeColor.outline, colorScheme)
-          : baseColor
+            ? FlexSubThemes.schemeColor(SchemeColor.outline, colorScheme)
+            : baseColor
       : FlexSubThemes.schemeColor(outlineSchemeColor, colorScheme);
 
   // Using these tinted overlay variables in all themes for ease of
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
 
   // Default outline widths.
   final double normalWidth = outlineWidth ?? kThinBorderWidth;
-  final double pressedWidth =
-      pressedOutlineWidth ?? (useM3 ? kThinBorderWidth : kThickBorderWidth);
+  final double pressedWidth = pressedOutlineWidth ?? (useM3 ? kThinBorderWidth : kThickBorderWidth);
 
   // We only define theme props for foregroundColor and overlayColor, if we
   // have some settings the default widget behavior does not handle.
@@ -180,11 +178,7 @@ OutlinedButtonThemeData _outlinedButtonTheme({
   // Define side if its widths or color has any custom definition, if not
   // we fall back to default theme.
   WidgetStateProperty<BorderSide?>? side;
-  if (outlineSchemeColor != null ||
-      outlineWidth != null ||
-      pressedOutlineWidth != null ||
-      tintDisable ||
-      !useM3) {
+  if (outlineSchemeColor != null || outlineWidth != null || pressedOutlineWidth != null || tintDisable || !useM3) {
     side = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
       if (states.contains(WidgetState.disabled)) {
         if (tintDisable) {

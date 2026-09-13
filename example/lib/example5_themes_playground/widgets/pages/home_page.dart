@@ -60,14 +60,15 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     // Set enabled menu items.
-    menuItemsEnabled =
-        List<bool>.generate(App.menuItems.length, (int i) => true);
+    menuItemsEnabled = List<bool>.generate(App.menuItems.length, (int i) => true);
     menuItemsEnabled[3] = widget.controller.useFlexColorScheme;
 
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
+      App.menuItems.length,
+      (int i) => ResponsiveMenuItemIconState.primary,
+    );
 
     // The panels can only be opened/closed on the large masonry grid view.
     // Since by default users will start with the page view, they will have
@@ -103,10 +104,9 @@ class _HomePageState extends State<HomePage> {
 
   void updateMenuState(int index) {
     setState(() {
-      menuItemsIconState[index] =
-          menuItemsIconState[index] == ResponsiveMenuItemIconState.primary
-              ? ResponsiveMenuItemIconState.secondary
-              : ResponsiveMenuItemIconState.primary;
+      menuItemsIconState[index] = menuItemsIconState[index] == ResponsiveMenuItemIconState.primary
+          ? ResponsiveMenuItemIconState.secondary
+          : ResponsiveMenuItemIconState.primary;
     });
   }
 
@@ -116,10 +116,8 @@ class _HomePageState extends State<HomePage> {
     final bool isDark = theme.brightness == Brightness.dark;
     final TextTheme textTheme = theme.textTheme;
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
-    final bool isBigDesktop =
-        mediaSize.width > App.mediumDesktopWidthBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isBigDesktop = mediaSize.width > App.mediumDesktopWidthBreakpoint;
     // final String materialType = theme.useMaterial3 ? 'M3 ' : 'M2 ';
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -136,8 +134,10 @@ class _HomePageState extends State<HomePage> {
         breakpointShowFullMenu: App.desktopWidthBreakpoint,
         title: isPhone
             ? Text(AppColor.schemes[widget.controller.schemeIndex].name)
-            : Text('${App.title(context)} - '
-                '${AppColor.schemes[widget.controller.schemeIndex].name}'),
+            : Text(
+                '${App.title(context)} - '
+                '${AppColor.schemes[widget.controller.schemeIndex].name}',
+              ),
         menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
           App.title(context),
@@ -217,8 +217,7 @@ class _HomePageState extends State<HomePage> {
           else if (index == 8) {
             // Steps:
             // 1. Convert settings to JSON.
-            final String jsonSetting =
-                await exportPlaygroundSettings(widget.controller);
+            final String jsonSetting = await exportPlaygroundSettings(widget.controller);
             // 2. Compress the JSON String and make URL.
             final String url = await ShareSettings.makeUrl(jsonSetting);
             // 3. Copy the URL to the clipboard.
@@ -248,8 +247,8 @@ class _HomePageState extends State<HomePage> {
         },
         body: isBigDesktop
             ? widget.controller.verticalMode
-                ? TwoTopicsVerticalPage(controller: widget.controller)
-                : TwoTopicsPage(controller: widget.controller)
+                  ? TwoTopicsVerticalPage(controller: widget.controller)
+                  : TwoTopicsPage(controller: widget.controller)
             : OneOrTwoTopicPageView(controller: widget.controller),
       ),
     );

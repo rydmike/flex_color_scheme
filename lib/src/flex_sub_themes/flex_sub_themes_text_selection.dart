@@ -57,7 +57,8 @@ TextSelectionThemeData _textSelectionTheme({
   ).withValues(alpha: selectionOpacity ?? kTextSelectionOpacity);
 
   // Get used selectionHandleColor, defaults to primary.
-  final Color selectionHandleColor = selectionHandleCustomColor ??
+  final Color selectionHandleColor =
+      selectionHandleCustomColor ??
       FlexSubThemes.schemeColor(
         selectionHandleSchemeColor ?? SchemeColor.primary,
         colorScheme,

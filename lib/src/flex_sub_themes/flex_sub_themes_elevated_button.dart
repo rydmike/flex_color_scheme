@@ -136,9 +136,8 @@ ElevatedButtonThemeData _elevatedButtonTheme({
   // On color logic for M2 and M3 are different. Elevated button is a mess.
   final Color onBaseColor = onBaseSchemeColor == null
       ? useM3
-          ? FlexSubThemes.schemeColor(
-              SchemeColor.surfaceContainerLow, colorScheme)
-          : FlexSubThemes.schemeColorPair(baseScheme, colorScheme)
+            ? FlexSubThemes.schemeColor(SchemeColor.surfaceContainerLow, colorScheme)
+            : FlexSubThemes.schemeColorPair(baseScheme, colorScheme)
       : FlexSubThemes.schemeColor(onBaseSchemeColor, colorScheme);
 
   // To not mess up let's define button foreground and background colors.
@@ -154,28 +153,26 @@ ElevatedButtonThemeData _elevatedButtonTheme({
   // We are using a light colorScheme.
   final bool isLight = colorScheme.brightness == Brightness.light;
   // Get brightness of button background color.
-  final bool buttonBgIsLight =
-      ThemeData.estimateBrightnessForColor(background) == Brightness.light;
+  final bool buttonBgIsLight = ThemeData.estimateBrightnessForColor(background) == Brightness.light;
   // For tint color use the one that is more likely to give a colored effect.
   final Color tint = isLight
       ? buttonBgIsLight
-          ? foreground
-          : background
+            ? foreground
+            : background
       : buttonBgIsLight
-          ? background
-          : foreground;
+      ? background
+      : foreground;
   // The reverse color is used for overlay
   final Color overlay = isLight
       ? buttonBgIsLight
-          ? background
-          : foreground
+            ? background
+            : foreground
       : buttonBgIsLight
-          ? foreground
-          : background;
+      ? foreground
+      : background;
   // We use surface mode tint factor, if it is light theme and background
   // is light OR if it is a dark theme and background is dark.
-  final bool surfaceMode =
-      (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
+  final bool surfaceMode = (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
   final double factor = FlexSubThemes._tintAlphaFactor(
     tint,
     colorScheme.brightness,
@@ -184,8 +181,9 @@ ElevatedButtonThemeData _elevatedButtonTheme({
 
   // We are using FCS M2 buttons, styled in M3 fashion by FCS.
   if (!useM3) {
-    final WidgetStateProperty<Color> foregroundColor =
-        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+    final WidgetStateProperty<Color> foregroundColor = WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
       if (states.contains(WidgetState.disabled)) {
         if (tintDisable) {
           return FlexSubThemes.tintedDisable(colorScheme.onSurface, tint);
@@ -195,58 +193,59 @@ ElevatedButtonThemeData _elevatedButtonTheme({
       return foreground;
     });
     return ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        splashFactory: splashFactory,
-        minimumSize: minButtonSize ?? kButtonMinSize,
-        padding: padding,
-        elevation: elevation ?? kElevatedButtonElevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
+      style:
+          ElevatedButton.styleFrom(
+            splashFactory: splashFactory,
+            minimumSize: minButtonSize ?? kButtonMinSize,
+            padding: padding,
+            elevation: elevation ?? kElevatedButtonElevation,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kButtonRadius),
+              ),
+            ), //buttonShape,
+          ).copyWith(
+            textStyle: textStyle,
+            foregroundColor: foregroundColor,
+            iconColor: foregroundColor,
+            backgroundColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                if (tintDisable) {
+                  return FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface,
+                    tint,
+                  ).withAlpha(kAlphaVeryLowDisabled);
+                }
+                return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+              }
+              return background;
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.hovered)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedHovered(overlay, tint, factor);
+                }
+                return overlay.withAlpha(kAlphaHovered);
+              }
+              if (states.contains(WidgetState.focused)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedFocused(overlay, tint, factor);
+                }
+                return overlay.withAlpha(kAlphaFocused);
+              }
+              if (states.contains(WidgetState.pressed)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedPressed(overlay, tint, factor);
+                }
+                return overlay.withAlpha(kAlphaPressed);
+              }
+              return Colors.transparent;
+            }),
           ),
-        ), //buttonShape,
-      ).copyWith(
-        textStyle: textStyle,
-        foregroundColor: foregroundColor,
-        iconColor: foregroundColor,
-        backgroundColor: WidgetStateProperty.resolveWith<Color>((
-          Set<WidgetState> states,
-        ) {
-          if (states.contains(WidgetState.disabled)) {
-            if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                colorScheme.onSurface,
-                tint,
-              ).withAlpha(kAlphaVeryLowDisabled);
-            }
-            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
-          }
-          return background;
-        }),
-        overlayColor: WidgetStateProperty.resolveWith<Color>((
-          Set<WidgetState> states,
-        ) {
-          if (states.contains(WidgetState.hovered)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedHovered(overlay, tint, factor);
-            }
-            return overlay.withAlpha(kAlphaHovered);
-          }
-          if (states.contains(WidgetState.focused)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedFocused(overlay, tint, factor);
-            }
-            return overlay.withAlpha(kAlphaFocused);
-          }
-          if (states.contains(WidgetState.pressed)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedPressed(overlay, tint, factor);
-            }
-            return overlay.withAlpha(kAlphaPressed);
-          }
-          return Colors.transparent;
-        }),
-      ),
     );
   } else {
     //

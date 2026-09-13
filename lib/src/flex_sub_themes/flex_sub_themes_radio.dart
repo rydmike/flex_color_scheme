@@ -74,8 +74,7 @@ RadioThemeData _radioTheme({
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
 
   return RadioThemeData(
     splashRadius: splashRadius,
@@ -86,8 +85,7 @@ RadioThemeData _radioTheme({
         if (states.contains(WidgetState.selected)) {
           if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
@@ -104,8 +102,7 @@ RadioThemeData _radioTheme({
         }
         if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
-            return FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, baseColor);
+            return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
           }
           return colorScheme.onSurface.withAlpha(kAlphaDisabled);
         }
@@ -126,8 +123,7 @@ RadioThemeData _radioTheme({
       } else {
         if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
-            return FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, baseColor);
+            return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
           }
           return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
         }

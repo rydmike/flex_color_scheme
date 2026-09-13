@@ -72,8 +72,7 @@ Future<void> main() async {
   GoogleFonts.config.allowRuntimeFetching = false;
   // Add font license info for used fonts from Google fonts.
   LicenseRegistry.addLicense(() async* {
-    final String license =
-        await rootBundle.loadString('assets/google_fonts/OFL.txt');
+    final String license = await rootBundle.loadString('assets/google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(<String>['google_fonts'], license);
   });
 

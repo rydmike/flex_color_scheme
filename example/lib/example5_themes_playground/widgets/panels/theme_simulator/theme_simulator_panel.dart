@@ -25,8 +25,7 @@ class ThemeSimulatorPanel extends StatefulWidget {
   State<ThemeSimulatorPanel> createState() => _ThemeSimulatorPanelState();
 }
 
-class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
-    with TickerProviderStateMixin {
+class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel> with TickerProviderStateMixin {
   late int currentPage;
   late int device;
   late Orientation orientation;
@@ -85,153 +84,153 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: 34,
-              child: TabBar(
-                tabAlignment: TabAlignment.fill,
-                indicatorColor: theme.colorScheme.primary,
-                labelColor: theme.colorScheme.primary,
-                unselectedLabelColor: theme.colorScheme.onSurface,
-                controller: tabController,
-                onTap: (int newPage) {
-                  setState(() {
-                    currentPage = newPage;
-                    widget.controller.setSimulatorAppIndex(currentPage);
-                  });
-                },
-                tabs: const <Widget>[
-                  Tab(text: 'Widgets'),
-                  Tab(text: 'Material'),
-                  Tab(text: 'Login'),
-                  Tab(text: 'Shop'),
-                  Tab(text: 'Undraw'),
-                ],
-              ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(
+            height: 34,
+            child: TabBar(
+              tabAlignment: TabAlignment.fill,
+              indicatorColor: theme.colorScheme.primary,
+              labelColor: theme.colorScheme.primary,
+              unselectedLabelColor: theme.colorScheme.onSurface,
+              controller: tabController,
+              onTap: (int newPage) {
+                setState(() {
+                  currentPage = newPage;
+                  widget.controller.setSimulatorAppIndex(currentPage);
+                });
+              },
+              tabs: const <Widget>[
+                Tab(text: 'Widgets'),
+                Tab(text: 'Material'),
+                Tab(text: 'Login'),
+                Tab(text: 'Shop'),
+                Tab(text: 'Undraw'),
+              ],
             ),
-            const SizedBox(height: 4),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 3,
-                  child: SimulatorPopupMenu(
-                    index: device,
-                    onChanged: (int index) {
-                      setState(() {
-                        device = index;
-                        widget.controller.setSimulatorDeviceIndex(device);
-                      });
-                    },
-                    child: ListTileReveal(
-                      contentPadding: ThemeValues.tilePaddingStart(context),
-                      dense: true,
-                      leading: IconButton(
-                        icon: AnimatedRotation(
-                          turns: turns,
-                          duration: const Duration(milliseconds: 200),
-                          child: Icon(
-                            Icons.screen_rotation_outlined,
-                            color: theme.colorScheme.primary,
-                            size: 30,
-                          ),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: SimulatorPopupMenu(
+                  index: device,
+                  onChanged: (int index) {
+                    setState(() {
+                      device = index;
+                      widget.controller.setSimulatorDeviceIndex(device);
+                    });
+                  },
+                  child: ListTileReveal(
+                    contentPadding: ThemeValues.tilePaddingStart(context),
+                    dense: true,
+                    leading: IconButton(
+                      icon: AnimatedRotation(
+                        turns: turns,
+                        duration: const Duration(milliseconds: 200),
+                        child: Icon(
+                          Icons.screen_rotation_outlined,
+                          color: theme.colorScheme.primary,
+                          size: 30,
                         ),
-                        onPressed: () {
-                          setState(() {
-                            if (orientation == Orientation.portrait) {
-                              orientation = Orientation.landscape;
-                              turns = 3 / 8;
-                            } else {
-                              orientation = Orientation.portrait;
-                              turns = 1 / 8;
-                            }
-                          });
-                        },
                       ),
-                      title: Text('${SimulatorPopupMenu.devices[device].name} ('
-                          // ignore: str interpol.
-                          '${SimulatorPopupMenu.devices[device].info.identifier.platform.name})'),
-                      subtitleReveal: Text('${_phoneInfo(device)}\n'),
-                      trailing: Icon(
-                        SimulatorPopupMenu.devices[device].icon,
-                        size: SimulatorPopupMenu.devices[device].size,
-                        color: iconColor,
-                      ),
+                      onPressed: () {
+                        setState(() {
+                          if (orientation == Orientation.portrait) {
+                            orientation = Orientation.landscape;
+                            turns = 3 / 8;
+                          } else {
+                            orientation = Orientation.portrait;
+                            turns = 1 / 8;
+                          }
+                        });
+                      },
+                    ),
+                    title: Text(
+                      '${SimulatorPopupMenu.devices[device].name} ('
+                      // ignore: str interpol.
+                      '${SimulatorPopupMenu.devices[device].info.identifier.platform.name})',
+                    ),
+                    subtitleReveal: Text('${_phoneInfo(device)}\n'),
+                    trailing: Icon(
+                      SimulatorPopupMenu.devices[device].icon,
+                      size: SimulatorPopupMenu.devices[device].size,
+                      color: iconColor,
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
-                const Padding(
-                  padding: EdgeInsets.only(top: 14.0),
-                  child: Text('Zoom'),
+              ),
+              const SizedBox(width: 8),
+              const Padding(
+                padding: EdgeInsets.only(top: 14.0),
+                child: Text('Zoom'),
+              ),
+              Expanded(
+                flex: 1,
+                child: Slider(
+                  min: 400,
+                  max: 1600,
+                  divisions: 100,
+                  label: widget.controller.simulatorViewZoom.toStringAsFixed(0),
+                  value: widget.controller.simulatorViewZoom,
+                  onChanged: widget.controller.setSimulatorViewZoom,
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Slider(
-                    min: 400,
-                    max: 1600,
-                    divisions: 100,
-                    label:
-                        widget.controller.simulatorViewZoom.toStringAsFixed(0),
-                    value: widget.controller.simulatorViewZoom,
-                    onChanged: widget.controller.setSimulatorViewZoom,
-                  ),
-                ),
-              ],
-            ),
-            Card(
-              margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
-              elevation: 0,
-              color: theme.colorScheme.surfaceContainerHighest,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: widget.controller.simulatorViewZoom,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TabBarView(
-                    controller: tabController,
-                    children: <Widget>[
-                      SimulatorFrame(
-                        controller: widget.controller,
-                        device: device,
-                        orientation: orientation,
-                        child:
-                            AppExampleComponents(controller: widget.controller),
-                      ),
-                      SimulatorFrame(
-                        controller: widget.controller,
-                        device: device,
-                        orientation: orientation,
-                        child: AppExampleMaterial3(
-                            themeController: widget.controller),
-                      ),
-                      SimulatorFrame(
-                        controller: widget.controller,
-                        device: device,
-                        orientation: orientation,
-                        child: const AppExampleLogin(),
-                      ),
-                      SimulatorFrame(
-                        controller: widget.controller,
-                        device: device,
-                        orientation: orientation,
-                        child: const AppExampleShop(),
-                      ),
-                      SimulatorFrame(
-                        controller: widget.controller,
-                        device: device,
-                        orientation: orientation,
-                        child: AppExampleUndraw(controller: widget.controller),
-                      ),
-                    ],
-                  ),
+              ),
+            ],
+          ),
+          Card(
+            margin: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+            elevation: 0,
+            color: theme.colorScheme.surfaceContainerHighest,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: widget.controller.simulatorViewZoom,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TabBarView(
+                  controller: tabController,
+                  children: <Widget>[
+                    SimulatorFrame(
+                      controller: widget.controller,
+                      device: device,
+                      orientation: orientation,
+                      child: AppExampleComponents(controller: widget.controller),
+                    ),
+                    SimulatorFrame(
+                      controller: widget.controller,
+                      device: device,
+                      orientation: orientation,
+                      child: AppExampleMaterial3(themeController: widget.controller),
+                    ),
+                    SimulatorFrame(
+                      controller: widget.controller,
+                      device: device,
+                      orientation: orientation,
+                      child: const AppExampleLogin(),
+                    ),
+                    SimulatorFrame(
+                      controller: widget.controller,
+                      device: device,
+                      orientation: orientation,
+                      child: const AppExampleShop(),
+                    ),
+                    SimulatorFrame(
+                      controller: widget.controller,
+                      device: device,
+                      orientation: orientation,
+                      child: AppExampleUndraw(controller: widget.controller),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ]),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -264,12 +263,8 @@ class SimulatorFrame extends StatelessWidget {
           // app theme changes, and not after it has concluded its change. This
           // feels "faster", or more concurrent and imo offers better UX for
           // this use case.
-          theme: controller.useFlexColorScheme
-              ? flexThemeLight(controller)
-              : themeDataLight(controller),
-          darkTheme: controller.useFlexColorScheme
-              ? flexThemeDark(controller)
-              : themeDataDark(controller),
+          theme: controller.useFlexColorScheme ? flexThemeLight(controller) : themeDataLight(controller),
+          darkTheme: controller.useFlexColorScheme ? flexThemeDark(controller) : themeDataDark(controller),
           // Use the dark or light theme based on controller setting.
           themeMode: controller.themeMode,
           home: child,
@@ -523,7 +518,7 @@ class SimulatorPopupMenu extends StatelessWidget {
                     ),
               title: Text(devices[i].name, style: txtStyle),
             ),
-          )
+          ),
       ],
       child: child,
     );

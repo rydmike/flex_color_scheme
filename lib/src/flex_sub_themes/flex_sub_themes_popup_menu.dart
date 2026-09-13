@@ -80,29 +80,26 @@ PopupMenuThemeData _popupMenuTheme({
 }) {
   // Get selected background color, defaults to surface in M3 if not defined
   // and to theme.cardColor in M2, typically they are the same.
-  final Color? backgroundColor = color ??
+  final Color? backgroundColor =
+      color ??
       (colorScheme != null && backgroundSchemeColor != null
           ? FlexSubThemes.schemeColor(backgroundSchemeColor, colorScheme)
           : null);
-  final Color? onBackgroundColor =
-      colorScheme != null && backgroundSchemeColor != null
-          ? FlexSubThemes.schemeColorPair(backgroundSchemeColor, colorScheme)
-          : color != null
-              ? ThemeData.estimateBrightnessForColor(color) == Brightness.light
-                  ? Colors.black
-                  : Colors.white
-              : null;
+  final Color? onBackgroundColor = colorScheme != null && backgroundSchemeColor != null
+      ? FlexSubThemes.schemeColorPair(backgroundSchemeColor, colorScheme)
+      : color != null
+      ? ThemeData.estimateBrightnessForColor(color) == Brightness.light
+            ? Colors.black
+            : Colors.white
+      : null;
 
-  final Color? foregroundColor =
-      colorScheme != null && foregroundSchemeColor != null
-          ? FlexSubThemes.schemeColor(foregroundSchemeColor, colorScheme)
-          : onBackgroundColor;
+  final Color? foregroundColor = colorScheme != null && foregroundSchemeColor != null
+      ? FlexSubThemes.schemeColor(foregroundSchemeColor, colorScheme)
+      : onBackgroundColor;
 
-  final bool inputsNull =
-      color == null && backgroundColor == null && foregroundColor == null;
+  final bool inputsNull = color == null && backgroundColor == null && foregroundColor == null;
 
-  final TextStyle? effectiveTextStyle =
-      inputsNull ? null : textStyle ?? const TextStyle();
+  final TextStyle? effectiveTextStyle = inputsNull ? null : textStyle ?? const TextStyle();
 
   return PopupMenuThemeData(
     elevation: elevation,

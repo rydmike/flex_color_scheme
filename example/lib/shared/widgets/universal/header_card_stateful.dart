@@ -140,13 +140,10 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
     final bool useMaterial3 = theme.useMaterial3;
     final ColorScheme scheme = theme.colorScheme;
     final Color background = theme.scaffoldBackgroundColor;
-    final Color cardColor = widget.backgroundColor ??
-        (isLight ? scheme.surfaceBright : scheme.surfaceDim);
+    final Color cardColor = widget.backgroundColor ?? (isLight ? scheme.surfaceBright : scheme.surfaceDim);
     final Color headerColor = widget.headingColor ?? scheme.surfaceContainer;
 
-    final bool useHeading = widget.title != null ||
-        widget.subtitle != null ||
-        widget.leading != null;
+    final bool useHeading = widget.title != null || widget.subtitle != null || widget.leading != null;
 
     // Default starting point value based on M3 and M2 mode spec values.
     double borderRadius = useMaterial3 ? 12 : 4;
@@ -156,12 +153,12 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
       final BorderRadius shape = cardShape.borderRadius as BorderRadius;
       borderRadius = shape.bottomLeft.x;
     }
-    final bool useBorderSide = colorsAreClose(cardColor, background, isLight) ||
+    final bool useBorderSide =
+        colorsAreClose(cardColor, background, isLight) ||
         (useHeading && colorsAreClose(headerColor, background, isLight));
     final ShapeBorder shapeBorder = RoundedRectangleBorder(
       borderRadius: BorderRadiusDirectional.horizontal(
-        start:
-            widget.startStraight ? Radius.zero : Radius.circular(borderRadius),
+        start: widget.startStraight ? Radius.zero : Radius.circular(borderRadius),
         end: widget.endStraight ? Radius.zero : Radius.circular(borderRadius),
       ),
       side: useBorderSide
@@ -210,9 +207,7 @@ class _HeaderCardStatefulState extends State<HeaderCardStateful> {
                   child: child,
                 );
               },
-              child: (_isOpen && widget.child != null)
-                  ? widget.child
-                  : const SizedBox.shrink(),
+              child: (_isOpen && widget.child != null) ? widget.child : const SizedBox.shrink(),
             ),
           ],
         ),

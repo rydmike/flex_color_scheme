@@ -288,8 +288,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   final bool useM3 = useMaterial3 ?? true;
 
   // Background color, when using normal default, falls back to surface
-  final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
-          backgroundSchemeColor != SchemeColor.transparent
+  final Color backgroundColor = (opacity ?? 1.0) != 1.0 && backgroundSchemeColor != SchemeColor.transparent
       ? FlexSubThemes.schemeColor(
           backgroundSchemeColor ?? SchemeColor.surface,
           colorScheme,
@@ -325,8 +324,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   final double labelSize = selectedLabelSize ?? textStyle.fontSize ?? 14;
   // If not specified, unselected is label size, use 2dp smaller than
   // selected, but always at least 8dp.
-  final double effectiveUnselectedLabelSize =
-      unselectedLabelSize ?? math.max(labelSize - 2, 8);
+  final double effectiveUnselectedLabelSize = unselectedLabelSize ?? math.max(labelSize - 2, 8);
 
   // Get icon color, defaults to primary.
   final Color iconColor = FlexSubThemes.schemeColor(
@@ -350,9 +348,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
       size: effectiveUnselectedIconSize,
       opacity: 1,
       color: (mutedUnselectedIcon ?? !useM3)
-          ? unselectedIconColor
-              .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
-              .withAlpha(unselectedAlpha)
+          ? unselectedIconColor.blendAlpha(unselectedIconColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
           : unselectedIconColor,
     ),
     selectedIconTheme: IconThemeData(
@@ -362,16 +358,12 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
     ),
     selectedItemColor: labelColor,
     unselectedItemColor: (mutedUnselectedLabel ?? !useM3)
-        ? unselectedLabelColor
-            .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
-            .withAlpha(unselectedAlpha)
+        ? unselectedLabelColor.blendAlpha(unselectedLabelColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
         : unselectedLabelColor,
     unselectedLabelStyle: textStyle.copyWith(
       fontSize: effectiveUnselectedLabelSize,
       color: (mutedUnselectedLabel ?? !useM3)
-          ? unselectedLabelColor
-              .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
-              .withAlpha(unselectedAlpha)
+          ? unselectedLabelColor.blendAlpha(unselectedLabelColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
           : unselectedLabelColor,
     ),
     selectedLabelStyle: textStyle.copyWith(

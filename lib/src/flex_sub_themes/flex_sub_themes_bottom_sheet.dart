@@ -62,20 +62,19 @@ BottomSheetThemeData _bottomSheetTheme({
   ///
   /// See [Material.surfaceTintColor] for more details.
   Color? surfaceTintColor,
-}) =>
-    BottomSheetThemeData(
-      backgroundColor: backgroundColor,
-      modalBackgroundColor: modalBackgroundColor,
-      elevation: elevation ?? kBottomSheetElevation,
-      modalElevation: modalElevation ?? kBottomSheetModalElevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(radius ?? kBottomSheetBorderRadius),
-          topRight: Radius.circular(radius ?? kBottomSheetBorderRadius),
-        ),
-      ),
-      clipBehavior: clipBehavior,
-      constraints: constraints,
-      shadowColor: shadowColor,
-      surfaceTintColor: surfaceTintColor,
-    );
+}) => BottomSheetThemeData(
+  backgroundColor: backgroundColor,
+  modalBackgroundColor: modalBackgroundColor,
+  elevation: elevation ?? kBottomSheetElevation,
+  modalElevation: modalElevation ?? kBottomSheetModalElevation,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(radius ?? kBottomSheetBorderRadius),
+      topRight: Radius.circular(radius ?? kBottomSheetBorderRadius),
+    ),
+  ),
+  clipBehavior: clipBehavior,
+  constraints: constraints,
+  shadowColor: shadowColor,
+  surfaceTintColor: surfaceTintColor,
+);

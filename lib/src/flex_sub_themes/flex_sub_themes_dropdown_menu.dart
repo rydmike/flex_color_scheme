@@ -45,11 +45,8 @@ DropdownMenuThemeData _dropdownMenuTheme({
     inputDecorationTheme: inputDecorationTheme,
     textStyle: textStyle,
     menuStyle: MenuStyle(
-      surfaceTintColor: surfaceTintColor == null
-          ? null
-          : WidgetStatePropertyAll<Color>(surfaceTintColor),
-      maximumSize:
-          maximumSize ?? const WidgetStatePropertyAll<Size>(Size.infinite),
+      surfaceTintColor: surfaceTintColor == null ? null : WidgetStatePropertyAll<Color>(surfaceTintColor),
+      maximumSize: maximumSize ?? const WidgetStatePropertyAll<Size>(Size.infinite),
     ),
   );
 }

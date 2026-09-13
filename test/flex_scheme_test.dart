@@ -17,8 +17,7 @@ void main() {
         equals(FlexColor.material),
       );
     });
-    test('FST FlexScheme.material.colors light is FlexColor.material.light',
-        () {
+    test('FST FlexScheme.material.colors light is FlexColor.material.light', () {
       expect(
         FlexScheme.material.colors(Brightness.light),
         equals(FlexColor.material.light),

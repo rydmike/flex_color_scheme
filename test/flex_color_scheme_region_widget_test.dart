@@ -16,15 +16,13 @@ import 'package:material_ui/material_ui.dart';
 void main() {
   group('FCS6: WITH FlexColorScheme.themedSystemNavigationBar ', () {
     debugDefaultTargetPlatformOverride = null;
-    testWidgets('FCS6.01: Finds Annotated Region in light themed app',
-        (WidgetTester tester) async {
+    testWidgets('FCS6.01: Finds Annotated Region in light themed app', (WidgetTester tester) async {
       // Create the widget by telling the tester to build it.
       await tester.pumpWidget(const MyWidget(scheme: ColorScheme.light()));
       final Finder region = find.byKey(const ValueKey<String>('region'));
       expect(region, findsOneWidget);
     });
-    testWidgets('FCS6.02: Finds Annotated Region in dark themed app',
-        (WidgetTester tester) async {
+    testWidgets('FCS6.02: Finds Annotated Region in dark themed app', (WidgetTester tester) async {
       // Create the widget by telling the tester to build it.
       await tester.pumpWidget(const MyWidget(scheme: ColorScheme.dark()));
       final Finder region = find.byKey(const ValueKey<String>('region'));

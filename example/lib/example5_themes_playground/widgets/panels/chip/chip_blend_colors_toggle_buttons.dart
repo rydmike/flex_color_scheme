@@ -33,8 +33,7 @@ class ChipBlendColorsToggleButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     return ListTileReveal(
       contentPadding: contentPadding,

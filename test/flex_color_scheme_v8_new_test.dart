@@ -4,8 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('Test FlexColorScheme V8 features: fixedColorStyle', () {
-    test(
-        'FCSV8:01L GIVEN a M3 FlexColorScheme.light with  '
+    test('FCSV8:01L GIVEN a M3 FlexColorScheme.light with  '
         'fixedColorStyle.computed expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
@@ -63,8 +62,7 @@ void main() {
         isSameColorAs(const Color(0xFF39252C)),
       );
     });
-    test(
-        'FCSV8:01D GIVEN a M3 FlexColorScheme.dark with  '
+    test('FCSV8:01D GIVEN a M3 FlexColorScheme.dark with  '
         'fixedColorStyle.computed expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
@@ -122,8 +120,7 @@ void main() {
         isSameColorAs(const Color(0xFF39252C)),
       );
     });
-    test(
-        'FCSV8:02L GIVEN a M3 FlexColorScheme.light with  '
+    test('FCSV8:02L GIVEN a M3 FlexColorScheme.light with  '
         'fixedColorStyle.seeded expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
@@ -181,8 +178,7 @@ void main() {
         isSameColorAs(const Color(0xFF633B48)),
       );
     });
-    test(
-        'FCSV8:02D GIVEN a M3 FlexColorScheme.dark with  '
+    test('FCSV8:02D GIVEN a M3 FlexColorScheme.dark with  '
         'fixedColorStyle.seeded expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
@@ -240,8 +236,7 @@ void main() {
         isSameColorAs(const Color(0xFF633B48)),
       );
     });
-    test(
-        'FCSV8:03L GIVEN a M3 FlexColorScheme.light with  '
+    test('FCSV8:03L GIVEN a M3 FlexColorScheme.light with  '
         'fixedColorStyle.seededHighContrast expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         scheme: FlexScheme.materialBaseline,
@@ -299,8 +294,7 @@ void main() {
         isSameColorAs(const Color(0xFF361521)),
       );
     });
-    test(
-        'FCSV8:03D GIVEN a M3 FlexColorScheme.dark with  '
+    test('FCSV8:03D GIVEN a M3 FlexColorScheme.dark with  '
         'fixedColorStyle.seededHighContrast expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         scheme: FlexScheme.materialBaseline,
@@ -360,8 +354,7 @@ void main() {
     });
   });
   group('Test FlexColorScheme V8 features: FlexScaffoldBaseColor', () {
-    test(
-        'FCSV8:10L GIVEN a FlexScaffoldBaseColor using a ColorScheme light '
+    test('FCSV8:10L GIVEN a FlexScaffoldBaseColor using a ColorScheme light '
         'or defaults with with Brightness.light expect given styles.', () {
       final ColorScheme scheme = FlexColorScheme.dark(
         scheme: FlexScheme.sepia,
@@ -624,16 +617,14 @@ void main() {
         equals('Surface container highest'),
       );
     });
-    test(
-        'FCSV8:10D GIVEN a FlexScaffoldBaseColor using a ColorScheme dark '
+    test('FCSV8:10D GIVEN a FlexScaffoldBaseColor using a ColorScheme dark '
         'or defaults with with Brightness.dark expect given styles.', () {
       final ColorScheme scheme = FlexColorScheme.dark(
         scheme: FlexScheme.sepia,
       ).toTheme.colorScheme;
       // Test FlexScaffoldBaseColor.lowestBase
       expect(
-        FlexScaffoldBaseColor.lowestBase
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.lowestBase.color(null, brightness: Brightness.dark),
         equals(Colors.black),
       );
       expect(
@@ -687,8 +678,7 @@ void main() {
       );
       // Test FlexScaffoldBaseColor.surfaceDim
       expect(
-        FlexScaffoldBaseColor.surfaceDim
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceDim.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceDim),
       );
       expect(
@@ -717,8 +707,7 @@ void main() {
       );
       // Test FlexScaffoldBaseColor.surfaceBright
       expect(
-        FlexScaffoldBaseColor.surfaceBright
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceBright.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceBright),
       );
       expect(
@@ -747,8 +736,7 @@ void main() {
       );
       // Test FlexScaffoldBaseColor.surfaceContainerLowest
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLowest
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerLowest.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerLowest),
       );
       expect(
@@ -777,8 +765,7 @@ void main() {
       );
       // Test FlexScaffoldBaseColor.surfaceContainerLow
       expect(
-        FlexScaffoldBaseColor.surfaceContainerLow
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerLow.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerLow),
       );
       expect(
@@ -807,8 +794,7 @@ void main() {
       );
       // Test FlexScaffoldBaseColor.surfaceContainer
       expect(
-        FlexScaffoldBaseColor.surfaceContainer
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainer.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainer),
       );
       expect(
@@ -837,8 +823,7 @@ void main() {
       );
       // Test FlexScaffoldBaseColor.surfaceContainerHigh
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHigh
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerHigh.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerHigh),
       );
       expect(
@@ -867,8 +852,7 @@ void main() {
       );
       // Test FlexScaffoldBaseColor.surfaceContainerHighest
       expect(
-        FlexScaffoldBaseColor.surfaceContainerHighest
-            .color(null, brightness: Brightness.dark),
+        FlexScaffoldBaseColor.surfaceContainerHighest.color(null, brightness: Brightness.dark),
         equals(FlexColor.darkFlexSurfaceContainerHighest),
       );
       expect(
@@ -898,8 +882,7 @@ void main() {
     });
   });
   group('Test FlexColorScheme V8 features: Error seed and scaffold color', () {
-    test(
-        'FCSV8:20L GIVEN a M3 FlexColorScheme.light sepia theme with custom '
+    test('FCSV8:20L GIVEN a M3 FlexColorScheme.light sepia theme with custom '
         'error colors and keeping them expect given styles.', () {
       const Color error = Color(0xFFB73E11);
       const Color errorContainer = Color(0xFFDFA392);
@@ -990,8 +973,7 @@ void main() {
         isSameColorAs(theme.colorScheme.tertiaryContainer),
       );
     });
-    test(
-        'FCSV8:20D GIVEN a M3 FlexColorScheme.dark sepia theme with custom '
+    test('FCSV8:20D GIVEN a M3 FlexColorScheme.dark sepia theme with custom '
         'error colors and keeping them expect given styles.', () {
       const Color error = Color(0xFFDFA392);
       const Color errorContainer = Color(0xFFB73E11);
@@ -1082,8 +1064,7 @@ void main() {
         isSameColorAs(theme.colorScheme.secondary),
       );
     });
-    test(
-        'FCSV8:21L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
+    test('FCSV8:21L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
         'expect given styles.', () {
       const Color tertiary = Color(0xFF565656);
       final FlexColorScheme fcs = FlexColorScheme.light(
@@ -1124,8 +1105,7 @@ void main() {
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:21D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
+    test('FCSV8:21D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
         'expect given styles.', () {
       const Color tertiary = Color(0xFF565656);
       final FlexColorScheme fcs = FlexColorScheme.dark(
@@ -1166,8 +1146,7 @@ void main() {
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:22L GIVEN a M2 FlexColorScheme.light custom colors theme with  '
+    test('FCSV8:22L GIVEN a M2 FlexColorScheme.light custom colors theme with  '
         'and keeping expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         useMaterial3: false,
@@ -1205,8 +1184,7 @@ void main() {
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:22D GIVEN a M2 FlexColorScheme.dark custom colors theme with  '
+    test('FCSV8:22D GIVEN a M2 FlexColorScheme.dark custom colors theme with  '
         'and keeping expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.dark(
         useMaterial3: false,
@@ -1248,8 +1226,7 @@ void main() {
       //   equals(theme.colorScheme.surface),
       // );
     });
-    test(
-        'FCSV8:23L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
+    test('FCSV8:23L GIVEN a M2 FlexColorScheme.light sepia theme with seeds '
         'expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         useMaterial3: false,
@@ -1274,16 +1251,15 @@ void main() {
         theme.tabBarTheme.unselectedLabelColor,
         equals(const Color(0xb2ffffff)),
       );
-      final OutlineInputBorder border =
-          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
-              .resolve(<WidgetState>{}) as OutlineInputBorder;
+      final OutlineInputBorder border = (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!.resolve(
+        <WidgetState>{},
+      ) as OutlineInputBorder;
       expect(
         border.borderRadius.bottomLeft,
         equals(const Radius.circular(15.0)),
       );
     });
-    test(
-        'FCSV8:23D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
+    test('FCSV8:23D GIVEN a M2 FlexColorScheme.dark sepia theme with seeds '
         'expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
         useMaterial3: false,
@@ -1308,16 +1284,15 @@ void main() {
         theme.tabBarTheme.unselectedLabelColor,
         equals(const Color(0xb2ffffff)),
       );
-      final OutlineInputBorder border =
-          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
-              .resolve(<WidgetState>{}) as OutlineInputBorder;
+      final OutlineInputBorder border = (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!.resolve(
+        <WidgetState>{},
+      ) as OutlineInputBorder;
       expect(
         border.borderRadius.bottomLeft,
         equals(const Radius.circular(15.0)),
       );
     });
-    test(
-        'FCSV8:24L GIVEN a M3 FlexColorScheme.light blackWhite theme with '
+    test('FCSV8:24L GIVEN a M3 FlexColorScheme.light blackWhite theme with '
         'seeds tab bar opacity '
         'expect given styles.', () {
       final FlexColorScheme fcs = FlexColorScheme.light(
@@ -1346,9 +1321,9 @@ void main() {
         theme.tabBarTheme.unselectedLabelColor,
         equals(const Color(0xe61b1b1b)),
       );
-      final OutlineInputBorder border =
-          (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!
-              .resolve(<WidgetState>{}) as OutlineInputBorder;
+      final OutlineInputBorder border = (theme.inputDecorationTheme.border! as WidgetStateInputBorder?)!.resolve(
+        <WidgetState>{},
+      ) as OutlineInputBorder;
       expect(
         border.borderRadius.bottomLeft,
         equals(const Radius.circular(10.0)),

@@ -24,16 +24,14 @@ class SwitchCheckRadioPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     final String explainThumb = useMaterial3 ? ' pressed/hovered/focused' : '';
 
@@ -43,15 +41,14 @@ class SwitchCheckRadioPanel extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTileReveal(
           title: const Text('Unselected toggle is colored'),
-          subtitleReveal:
-              const Text('Applies to OFF state of Switch and unselected '
-                  'state on checkbox and Radio.\n'
-                  '\n'
-                  'ON: Use main color on unselected toggle\n'
-                  'OFF: Use default grey/surface style on unselected toggle\n'),
-          value: controller.unselectedToggleIsColored &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
+          subtitleReveal: const Text(
+            'Applies to OFF state of Switch and unselected '
+            'state on checkbox and Radio.\n'
+            '\n'
+            'ON: Use main color on unselected toggle\n'
+            'OFF: Use default grey/surface style on unselected toggle\n',
+          ),
+          value: controller.unselectedToggleIsColored && controller.useSubThemes && controller.useFlexColorScheme,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.setUnselectedToggleIsColored
               : null,
@@ -81,17 +78,17 @@ class SwitchCheckRadioPanel extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Thumb size is fixed'),
-          subtitleReveal:
-              const Text('Turn ON to keep the Switch thumb the same '
-                  'size when Switch is ON or OFF. Only available in Material-3 '
-                  'mode.\n'),
-          value: controller.switchThumbFixedSize &&
+          subtitleReveal: const Text(
+            'Turn ON to keep the Switch thumb the same '
+            'size when Switch is ON or OFF. Only available in Material-3 '
+            'mode.\n',
+          ),
+          value:
+              controller.switchThumbFixedSize &&
               controller.useSubThemes &&
               controller.useFlexColorScheme &&
               useMaterial3,
-          onChanged: controller.useSubThemes &&
-                  controller.useFlexColorScheme &&
-                  useMaterial3
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme && useMaterial3
               ? controller.setSwitchThumbFixedSize
               : null,
         ),
@@ -144,7 +141,8 @@ class SwitchCheckRadioPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Prior to version 3.13 Flutter Checkbox theming '
+                  text:
+                      'Prior to version 3.13 Flutter Checkbox theming '
                       'worked slightly differently concerning how to color '
                       'the outline and filled state. If you had themed them '
                       'before, the Flutter release 3.13 breaks the result. '
@@ -161,7 +159,8 @@ class SwitchCheckRadioPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information. FlexColorScheme 7.3 and later '
+                  text:
+                      ' for more information. FlexColorScheme 7.3 and later '
                       'versions include the needed changes to address this '
                       'minor breaking theming change in Flutter 3.13.\n',
                 ),

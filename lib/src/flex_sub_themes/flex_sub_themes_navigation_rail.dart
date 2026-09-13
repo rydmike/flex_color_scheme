@@ -362,8 +362,7 @@ NavigationRailThemeData _navigationRailTheme({
   bool? useFlutterDefaults,
 }) {
   // Background color, falls back to surface.
-  final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
-          backgroundSchemeColor != SchemeColor.transparent
+  final Color backgroundColor = (opacity ?? 1.0) != 1.0 && backgroundSchemeColor != SchemeColor.transparent
       ? FlexSubThemes.schemeColor(
           backgroundSchemeColor ?? SchemeColor.surface,
           colorScheme,
@@ -437,9 +436,7 @@ NavigationRailThemeData _navigationRailTheme({
     unselectedLabelTextStyle: textStyle.copyWith(
       fontSize: effectiveUnselectedLabelSize,
       color: (mutedUnselectedLabel ?? false)
-          ? unselectedLabelColor
-              .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
-              .withAlpha(unselectedAlpha)
+          ? unselectedLabelColor.blendAlpha(unselectedLabelColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
           : unselectedLabelColor,
     ),
     selectedLabelTextStyle: textStyle.copyWith(
@@ -450,9 +447,7 @@ NavigationRailThemeData _navigationRailTheme({
       size: effectiveUnselectedIconSize,
       opacity: 1,
       color: (mutedUnselectedIcon ?? false)
-          ? unselectedIconColor
-              .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
-              .withAlpha(unselectedAlpha)
+          ? unselectedIconColor.blendAlpha(unselectedIconColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
           : unselectedIconColor,
     ),
     selectedIconTheme: IconThemeData(

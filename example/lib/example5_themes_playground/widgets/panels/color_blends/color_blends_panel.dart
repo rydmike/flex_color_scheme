@@ -133,8 +133,7 @@ class ColorBlendsPanel extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,8 +169,7 @@ class ColorBlendsPanel extends StatelessWidget {
                   ),
                   Text(
                     '${controller.blendLevelLight}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -206,8 +204,7 @@ class ColorBlendsPanel extends StatelessWidget {
                   ),
                   Text(
                     '${controller.blendLevelDark}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -248,13 +245,13 @@ class ColorBlendsPanel extends StatelessWidget {
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.scaffoldLightIsWhite
-                    ? 'White'
-                    : 'surfaceContainerLowest'
+                      ? 'White'
+                      : 'surfaceContainerLowest'
                 : 'surface',
             defaultDisabledLabelM2: controller.useFlexColorScheme
                 ? controller.scaffoldLightIsWhite
-                    ? 'White'
-                    : 'surface'
+                      ? 'White'
+                      : 'surface'
                 : 'grey50',
             value: controller.scaffoldBackgroundLightSchemeColor,
             onChanged: controller.setScaffoldBackgroundLightSchemeColor,
@@ -288,13 +285,13 @@ class ColorBlendsPanel extends StatelessWidget {
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.scaffoldDarkIsTrueBlack
-                    ? 'Black'
-                    : 'surfaceContainerLowest'
+                      ? 'Black'
+                      : 'surfaceContainerLowest'
                 : 'surface',
             defaultDisabledLabelM2: controller.useFlexColorScheme
                 ? controller.scaffoldDarkIsTrueBlack
-                    ? 'Black'
-                    : 'surface'
+                      ? 'Black'
+                      : 'surface'
                 : 'grey850',
             value: controller.scaffoldBackgroundDarkSchemeColor,
             onChanged: controller.setScaffoldBackgroundDarkSchemeColor,
@@ -339,8 +336,7 @@ class ColorBlendsPanel extends StatelessWidget {
               max: 40,
               divisions: 40,
               label: controller.blendOnLevelLight.toString(),
-              value:
-                  enableControl ? controller.blendOnLevelLight.toDouble() : 0,
+              value: enableControl ? controller.blendOnLevelLight.toDouble() : 0,
               onChanged: enableControl
                   ? (double value) {
                       controller.setBlendOnLevelLight(value.toInt());
@@ -359,8 +355,7 @@ class ColorBlendsPanel extends StatelessWidget {
                   Text(
                     // ignore: string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelLight : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -417,8 +412,7 @@ class ColorBlendsPanel extends StatelessWidget {
                   Text(
                     // ignore: string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

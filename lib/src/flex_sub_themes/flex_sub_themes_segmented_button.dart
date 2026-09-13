@@ -110,10 +110,9 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   final bool isLight = colorScheme.brightness == Brightness.light;
 
   // Get selected background color, defaults to secondaryContainer.
-  final SchemeColor selectedScheme = selectedSchemeColor ??
-      (useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary);
-  final Color selectedColor =
-      FlexSubThemes.schemeColor(selectedScheme, colorScheme);
+  final SchemeColor selectedScheme =
+      selectedSchemeColor ?? (useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary);
+  final Color selectedColor = FlexSubThemes.schemeColor(selectedScheme, colorScheme);
 
   final Color onSelectedColor = selectedForegroundSchemeColor != null
       ? FlexSubThemes.schemeColor(selectedForegroundSchemeColor, colorScheme)
@@ -124,9 +123,7 @@ SegmentedButtonThemeData _segmentedButtonTheme({
     colorScheme,
   );
   final Color onUnselectedColor = FlexSubThemes.schemeColor(
-    unselectedForegroundSchemeColor ??
-        FlexSubThemes.onSchemeColor(
-            unselectedSchemeColor ?? SchemeColor.surface),
+    unselectedForegroundSchemeColor ?? FlexSubThemes.onSchemeColor(unselectedSchemeColor ?? SchemeColor.surface),
     colorScheme,
   );
 
@@ -135,12 +132,10 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   final Color overlay = onSelectedColor;
   final Color tint = selectedColor;
   // Get brightness of selectedColor color.
-  final bool selectedBgIsLight =
-      ThemeData.estimateBrightnessForColor(selectedColor) == Brightness.light;
+  final bool selectedBgIsLight = ThemeData.estimateBrightnessForColor(selectedColor) == Brightness.light;
   // We use surface mode tint factor, if it is light theme and selectedColor
   // is light OR if it is a dark theme and background is dark.
-  final bool selectedSurfaceMode =
-      (isLight && selectedBgIsLight) || (!isLight && !selectedBgIsLight);
+  final bool selectedSurfaceMode = (isLight && selectedBgIsLight) || (!isLight && !selectedBgIsLight);
   final double factor = FlexSubThemes._tintAlphaFactor(
     tint,
     colorScheme.brightness,
@@ -148,25 +143,21 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   );
 
   final Color unOverlay = unselectedColor;
-  final Color unTint = unselectedSchemeColor == null ||
-          unselectedSchemeColor == SchemeColor.surface
+  final Color unTint = unselectedSchemeColor == null || unselectedSchemeColor == SchemeColor.surface
       ? selectedColor
       : onUnselectedColor;
   // Get brightness of unselectedColor color.
-  final bool unSelectedBgIsLight =
-      ThemeData.estimateBrightnessForColor(unselectedColor) == Brightness.light;
+  final bool unSelectedBgIsLight = ThemeData.estimateBrightnessForColor(unselectedColor) == Brightness.light;
   // We use surface mode tint factor, if it is light theme and unselectedColor
   // is light OR if it is a dark theme and background is dark.
-  final bool unSelectedSurfaceMode =
-      (isLight && unSelectedBgIsLight) || (!isLight && !unSelectedBgIsLight);
+  final bool unSelectedSurfaceMode = (isLight && unSelectedBgIsLight) || (!isLight && !unSelectedBgIsLight);
   final double unFactor = FlexSubThemes._tintAlphaFactor(
     unTint,
     colorScheme.brightness,
     unSelectedSurfaceMode,
   );
 
-  final Color disableTint = unselectedSchemeColor == null ||
-          unselectedSchemeColor == SchemeColor.surface
+  final Color disableTint = unselectedSchemeColor == null || unselectedSchemeColor == SchemeColor.surface
       ? selectedColor
       : onUnselectedColor;
 
@@ -177,16 +168,13 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   // Effective border width.
   final double effectiveWidth = borderWidth ?? kThinBorderWidth;
 
-  final Color disableBorderTint = (borderSchemeColor == null && useM3) ||
-          unselectedSchemeColor == SchemeColor.outline
+  final Color disableBorderTint = (borderSchemeColor == null && useM3) || unselectedSchemeColor == SchemeColor.outline
       ? selectedColor
       : borderColor;
 
-  final Color disabledForeground =
-      unselectedSchemeColor == null ? colorScheme.onSurface : onUnselectedColor;
+  final Color disabledForeground = unselectedSchemeColor == null ? colorScheme.onSurface : onUnselectedColor;
 
-  final WidgetStateProperty<Color> foregroundColor =
-      WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+  final WidgetStateProperty<Color> foregroundColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
     if (states.contains(WidgetState.disabled)) {
       if (tintDisable) {
         return FlexSubThemes.tintedDisable(disabledForeground, disableTint);

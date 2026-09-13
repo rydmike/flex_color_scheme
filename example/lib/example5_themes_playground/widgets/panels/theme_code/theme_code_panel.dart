@@ -38,21 +38,25 @@ class ThemeCodePanel extends StatelessWidget {
             message: 'Copy code',
             child: IconButton(
               onPressed: () {
-                unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
-                  context,
-                  code,
-                  'FlexColorScheme setup code copied to the clipboard!',
-                ));
+                unawaited(
+                  ShareSettings.copyToClipboardWithSnackBarInfo(
+                    context,
+                    code,
+                    'FlexColorScheme setup code copied to the clipboard!',
+                  ),
+                );
               },
               icon: const Icon(Icons.copy),
             ),
           ),
           onTap: () {
-            unawaited(ShareSettings.copyToClipboardWithSnackBarInfo(
-              context,
-              code,
-              'FlexColorScheme setup code copied to the clipboard!',
-            ));
+            unawaited(
+              ShareSettings.copyToClipboardWithSnackBarInfo(
+                context,
+                code,
+                'FlexColorScheme setup code copied to the clipboard!',
+              ),
+            );
           },
         ),
         const Divider(height: 1),

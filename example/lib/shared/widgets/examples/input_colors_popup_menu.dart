@@ -20,14 +20,13 @@ class InputColorsPopupMenu extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final bool includeCustomizableScheme;
 
-  double _borderRadius(bool useMaterial3) =>
-      controller.useSubThemes && controller.useFlexColorScheme
-          // M3 default for Card is 12.
-          ? (controller.cardBorderRadius ?? controller.defaultRadius ?? 12)
-          // M3 or M2 default for Card.
-          : useMaterial3
-              ? 12
-              : 4;
+  double _borderRadius(bool useMaterial3) => controller.useSubThemes && controller.useFlexColorScheme
+      // M3 default for Card is 12.
+      ? (controller.cardBorderRadius ?? controller.defaultRadius ?? 12)
+      // M3 or M2 default for Card.
+      : useMaterial3
+      ? 12
+      : 4;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class InputColorsPopupMenu extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
       ],
       child: ListTile(
         contentPadding: contentPadding,

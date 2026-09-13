@@ -9,15 +9,16 @@ import 'package:string_scanner/string_scanner.dart';
 /// Use of this source code is governed by a BSD-style license that can be
 /// found in the LICENSE file.
 class SyntaxHighlighterStyle {
-  SyntaxHighlighterStyle(
-      {this.baseStyle,
-      this.numberStyle,
-      this.commentStyle,
-      this.keywordStyle,
-      this.stringStyle,
-      this.punctuationStyle,
-      this.classStyle,
-      this.constantStyle});
+  SyntaxHighlighterStyle({
+    this.baseStyle,
+    this.numberStyle,
+    this.commentStyle,
+    this.keywordStyle,
+    this.stringStyle,
+    this.punctuationStyle,
+    this.classStyle,
+    this.constantStyle,
+  });
 
   /// A fixed example light code view style.
   ///
@@ -26,15 +27,15 @@ class SyntaxHighlighterStyle {
   /// It uses the same colors as the colors used in the [CodeTheme] theme
   /// extension, but it could be any fixed none theme related colors.
   static SyntaxHighlighterStyle lightThemeStyle() => SyntaxHighlighterStyle(
-        baseStyle: const TextStyle(color: Color(0xFF092249)),
-        numberStyle: const TextStyle(color: Color(0xFF1565C0)),
-        commentStyle: const TextStyle(color: Color(0xFF446736)),
-        keywordStyle: const TextStyle(color: Color(0xFF9C27B0)),
-        stringStyle: const TextStyle(color: Color(0xFF43A047)),
-        punctuationStyle: const TextStyle(color: Color(0xFF081936)),
-        classStyle: const TextStyle(color: Color(0xFF6607C5)),
-        constantStyle: const TextStyle(color: Color(0xFF795548)),
-      );
+    baseStyle: const TextStyle(color: Color(0xFF092249)),
+    numberStyle: const TextStyle(color: Color(0xFF1565C0)),
+    commentStyle: const TextStyle(color: Color(0xFF446736)),
+    keywordStyle: const TextStyle(color: Color(0xFF9C27B0)),
+    stringStyle: const TextStyle(color: Color(0xFF43A047)),
+    punctuationStyle: const TextStyle(color: Color(0xFF081936)),
+    classStyle: const TextStyle(color: Color(0xFF6607C5)),
+    constantStyle: const TextStyle(color: Color(0xFF795548)),
+  );
 
   /// A fixed example dark code view style.
   ///
@@ -43,15 +44,15 @@ class SyntaxHighlighterStyle {
   /// It uses the same colors as the colors used in the [CodeTheme] theme
   /// extension, but it could be any fixed none theme related colors.
   static SyntaxHighlighterStyle darkThemeStyle() => SyntaxHighlighterStyle(
-        baseStyle: const TextStyle(color: Color(0xFFEEEED6)),
-        numberStyle: const TextStyle(color: Color(0xFFB4CDA8)),
-        commentStyle: const TextStyle(color: Color(0xFF90C07A)),
-        keywordStyle: const TextStyle(color: Color(0xFF5BAAE8)),
-        stringStyle: const TextStyle(color: Color(0xFFD3A384)),
-        punctuationStyle: const TextStyle(color: Color(0xFFEAE9D4)),
-        classStyle: const TextStyle(color: Color(0xFF39C8B0)),
-        constantStyle: const TextStyle(color: Color(0xFFB9A1DC)),
-      );
+    baseStyle: const TextStyle(color: Color(0xFFEEEED6)),
+    numberStyle: const TextStyle(color: Color(0xFFB4CDA8)),
+    commentStyle: const TextStyle(color: Color(0xFF90C07A)),
+    keywordStyle: const TextStyle(color: Color(0xFF5BAAE8)),
+    stringStyle: const TextStyle(color: Color(0xFFD3A384)),
+    punctuationStyle: const TextStyle(color: Color(0xFFEAE9D4)),
+    classStyle: const TextStyle(color: Color(0xFF39C8B0)),
+    constantStyle: const TextStyle(color: Color(0xFFB9A1DC)),
+  );
 
   /// A theme harmonized code view syntax syntax highlighter style.
   ///
@@ -78,8 +79,7 @@ class SyntaxHighlighterStyle {
     // defaults you would use if you had a package that provided a theme
     // extension, and it would fallback to defaults like this internally if
     // it had not been added by user to ThemeData as an extension.
-    final CodeTheme colors = theme.extension<CodeTheme>() ??
-        (isLight ? CodeTheme.light : CodeTheme.dark);
+    final CodeTheme colors = theme.extension<CodeTheme>() ?? (isLight ? CodeTheme.light : CodeTheme.dark);
 
     return SyntaxHighlighterStyle(
       baseStyle: TextStyle(color: colors.baseColor),
@@ -102,17 +102,16 @@ class SyntaxHighlighterStyle {
     TextStyle? punctuationStyle,
     TextStyle? classStyle,
     TextStyle? constantStyle,
-  }) =>
-      SyntaxHighlighterStyle(
-        baseStyle: baseStyle ?? this.baseStyle,
-        numberStyle: numberStyle ?? this.numberStyle,
-        commentStyle: commentStyle ?? this.commentStyle,
-        keywordStyle: keywordStyle ?? this.keywordStyle,
-        stringStyle: stringStyle ?? this.stringStyle,
-        punctuationStyle: punctuationStyle ?? this.punctuationStyle,
-        classStyle: classStyle ?? this.classStyle,
-        constantStyle: constantStyle ?? this.constantStyle,
-      );
+  }) => SyntaxHighlighterStyle(
+    baseStyle: baseStyle ?? this.baseStyle,
+    numberStyle: numberStyle ?? this.numberStyle,
+    commentStyle: commentStyle ?? this.commentStyle,
+    keywordStyle: keywordStyle ?? this.keywordStyle,
+    stringStyle: stringStyle ?? this.stringStyle,
+    punctuationStyle: punctuationStyle ?? this.punctuationStyle,
+    classStyle: classStyle ?? this.classStyle,
+    constantStyle: constantStyle ?? this.constantStyle,
+  );
 
   final TextStyle? baseStyle;
   final TextStyle? numberStyle;
@@ -191,15 +190,10 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
     'void',
     'while',
     'with',
-    'yield'
+    'yield',
   ];
 
-  static const List<String> _builtInTypes = <String>[
-    'int',
-    'double',
-    'num',
-    'bool'
-  ];
+  static const List<String> _builtInTypes = <String>['int', 'double', 'num', 'bool'];
 
   late String _src;
   late StringScanner _scanner;
@@ -218,19 +212,16 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 
       for (final _HighlightSpan span in _spans) {
         if (currentPosition != span.start) {
-          formattedText
-              .add(TextSpan(text: _src.substring(currentPosition, span.start)));
+          formattedText.add(TextSpan(text: _src.substring(currentPosition, span.start)));
         }
 
-        formattedText.add(TextSpan(
-            style: span.textStyle(style), text: span.textForSpan(_src)));
+        formattedText.add(TextSpan(style: span.textStyle(style), text: span.textForSpan(_src)));
 
         currentPosition = span.end;
       }
 
       if (currentPosition != _src.length) {
-        formattedText
-            .add(TextSpan(text: _src.substring(currentPosition, _src.length)));
+        formattedText.add(TextSpan(text: _src.substring(currentPosition, _src.length)));
       }
 
       return TextSpan(style: style!.baseStyle, children: formattedText);
@@ -249,8 +240,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 
       // Block comments
       if (_scanner.scan(RegExp(r'/\*(.|\n)*\*/'))) {
-        _spans.add(_HighlightSpan(_HighlightType.comment,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.comment, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
@@ -267,8 +257,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
           endComment = _src.length;
         }
 
-        _spans.add(
-            _HighlightSpan(_HighlightType.comment, startComment, endComment));
+        _spans.add(_HighlightSpan(_HighlightType.comment, startComment, endComment));
 
         if (eof) break;
 
@@ -278,72 +267,62 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
       // Raw r"String"
       // ignore: unnecessary_raw_strings
       if (_scanner.scan(RegExp(r'r".*"'))) {
-        _spans.add(_HighlightSpan(_HighlightType.string,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.string, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // Raw r'String'
       // ignore: unnecessary_raw_strings
       if (_scanner.scan(RegExp(r"r'.*'"))) {
-        _spans.add(_HighlightSpan(_HighlightType.string,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.string, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // Multiline """String"""
       if (_scanner.scan(RegExp(r'"""(?:[^"\\]|\\(.|\n))*"""'))) {
-        _spans.add(_HighlightSpan(_HighlightType.string,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.string, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // Multiline '''String'''
       if (_scanner.scan(RegExp(r"'''(?:[^'\\]|\\(.|\n))*'''"))) {
-        _spans.add(_HighlightSpan(_HighlightType.string,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.string, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // "String"
       if (_scanner.scan(RegExp(r'"(?:[^"\\]|\\.)*"'))) {
-        _spans.add(_HighlightSpan(_HighlightType.string,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.string, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // 'String'
       if (_scanner.scan(RegExp(r"'(?:[^'\\]|\\.)*'"))) {
-        _spans.add(_HighlightSpan(_HighlightType.string,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.string, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // Double
       if (_scanner.scan(RegExp(r'\d+\.\d+'))) {
-        _spans.add(_HighlightSpan(_HighlightType.number,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.number, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // Integer
       if (_scanner.scan(RegExp(r'\d+'))) {
-        _spans.add(_HighlightSpan(_HighlightType.number,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.number, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // Punctuation
       if (_scanner.scan(RegExp(r'[\[\]{}().!=<>&\|\?\+\-\*/%\^~;:,]'))) {
-        _spans.add(_HighlightSpan(_HighlightType.punctuation,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.punctuation, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
       // Meta data
       if (_scanner.scan(RegExp(r'@\w+'))) {
-        _spans.add(_HighlightSpan(_HighlightType.keyword,
-            _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+        _spans.add(_HighlightSpan(_HighlightType.keyword, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         continue;
       }
 
@@ -360,15 +339,12 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
           type = _HighlightType.keyword;
         } else if (_firstLetterIsUpperCase(word)) {
           type = _HighlightType.klass;
-        } else if (word.length >= 2 &&
-            word.startsWith('k') &&
-            _firstLetterIsUpperCase(word.substring(1))) {
+        } else if (word.length >= 2 && word.startsWith('k') && _firstLetterIsUpperCase(word.substring(1))) {
           type = _HighlightType.constant;
         }
 
         if (type != null) {
-          _spans.add(_HighlightSpan(
-              type, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
+          _spans.add(_HighlightSpan(type, _scanner.lastMatch!.start, _scanner.lastMatch!.end));
         }
       }
 
@@ -386,10 +362,8 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 
   void _simplify() {
     for (int i = _spans.length - 2; i >= 0; i -= 1) {
-      if (_spans[i].type == _spans[i + 1].type &&
-          _spans[i].end == _spans[i + 1].start) {
-        _spans[i] =
-            _HighlightSpan(_spans[i].type, _spans[i].start, _spans[i + 1].end);
+      if (_spans[i].type == _spans[i + 1].type && _spans[i].end == _spans[i + 1].start) {
+        _spans[i] = _HighlightSpan(_spans[i].type, _spans[i].start, _spans[i + 1].end);
         _spans.removeAt(i + 1);
       }
     }
@@ -404,15 +378,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
   }
 }
 
-enum _HighlightType {
-  number,
-  comment,
-  keyword,
-  string,
-  punctuation,
-  klass,
-  constant
-}
+enum _HighlightType { number, comment, keyword, string, punctuation, klass, constant }
 
 class _HighlightSpan {
   _HighlightSpan(this.type, this.start, this.end);

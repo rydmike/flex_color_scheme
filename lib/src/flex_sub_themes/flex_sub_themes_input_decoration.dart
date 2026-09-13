@@ -256,10 +256,10 @@ InputDecorationThemeData _inputDecorationTheme({
   // Get effective alpha value for background fill color.
   final double effectiveOpacity = backgroundAlpha == null
       ? useM3
-          ? 1.0
-          : isDark
-              ? kFillColorDarkOpacity
-              : kFillColorLightOpacity
+            ? 1.0
+            : isDark
+            ? kFillColorDarkOpacity
+            : kFillColorLightOpacity
       : backgroundAlpha.clamp(0, 255) / 255;
 
   // Effective used fill color, can also be a totally custom color value.
@@ -300,15 +300,12 @@ InputDecorationThemeData _inputDecorationTheme({
   // only way it was possible to make a nice tinted version that worked well
   // with any config that it is possible to create for the background on
   // the InputDecorator.
-  final Color tintedHover =
-      ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
-          ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-          : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+  final Color tintedHover = ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+      ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+      : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
   // Focused prefix iconColor defaults
-  final SchemeColor focusedIconDefault = useM3
-      ? SchemeColor.onSurfaceVariant
-      : baseSchemeColor ?? SchemeColor.primary;
+  final SchemeColor focusedIconDefault = useM3 ? SchemeColor.onSurfaceVariant : baseSchemeColor ?? SchemeColor.primary;
   // Effective focused prefix icon color.
   final Color focusedPrefixIconColor = FlexSubThemes.schemeColor(
     prefixIconSchemeColor ?? focusedIconDefault,
@@ -321,9 +318,7 @@ InputDecorationThemeData _inputDecorationTheme({
   );
 
   // Flutter SDK "magic" theme colors from ThemeData, with old M1/M2 roots.
-  final Color hintColorM2 = isDark
-      ? Colors.white60
-      : Colors.black.withValues(alpha: kTintHoverFloat); // 60%
+  final Color hintColorM2 = isDark ? Colors.white60 : Colors.black.withValues(alpha: kTintHoverFloat); // 60%
   final Color unfocusedIconDefaultM2 = isDark ? Colors.white70 : Colors.black45;
   final Color disabledDefaultM2 = isDark ? Colors.white38 : Colors.black38;
   final Color disabledDefaultM3 = colorScheme.onSurface.withValues(
@@ -335,21 +330,20 @@ InputDecorationThemeData _inputDecorationTheme({
   final Color enabledBorderColor = unfocusedBorderIsColored ?? false
       ? borderColor.withValues(alpha: kEnabledBorderOpacity)
       : useM3
-          ? isFilled
-              ? colorScheme.onSurfaceVariant
-              : colorScheme.outline
-          : colorScheme.onSurface.withValues(alpha: kAlphaDisabledFloat);
+      ? isFilled
+            ? colorScheme.onSurfaceVariant
+            : colorScheme.outline
+      : colorScheme.onSurface.withValues(alpha: kAlphaDisabledFloat);
   // TODO(rydmike): Review M3 border hover, defaults are not very distinct.
   // Enabled hovered border color.
   final Color enabledHoveredBorderColor = unfocusedBorderIsColored ?? false
       ? borderColor //.withAlpha(kEnabledBorderAlpha)
       : isFilled
-          ? colorScheme.onSurface
-          : colorScheme.onSurfaceVariant; // .withAlpha(kAlphaDisabled);
+      ? colorScheme.onSurface
+      : colorScheme.onSurfaceVariant; // .withAlpha(kAlphaDisabled);
 
   // Default border radius.
-  final double effectiveRadius =
-      radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
+  final double effectiveRadius = radius ?? (useM3 ? kInputDecoratorM3Radius : kInputDecoratorRadius);
 
   // Default outline widths.
   final double unfocusedWidth = unfocusedBorderWidth ?? kThinBorderWidth;
@@ -426,9 +420,7 @@ InputDecorationThemeData _inputDecorationTheme({
         return TextStyle(color: colorScheme.onSurfaceVariant);
       }
       if (states.contains(WidgetState.disabled)) {
-        return tintDisable
-            ? TextStyle(color: tintDisabledColor)
-            : TextStyle(color: disabledDefault);
+        return tintDisable ? TextStyle(color: tintDisabledColor) : TextStyle(color: disabledDefault);
       }
       return TextStyle(
         color: useM3 ? colorScheme.onSurfaceVariant : hintColorM2,
@@ -507,8 +499,7 @@ InputDecorationThemeData _inputDecorationTheme({
     //
     // Complex custom BORDER theming, now with hover effects.
     //
-    border: (borderType ?? FlexInputBorderType.underline) ==
-            FlexInputBorderType.underline
+    border: (borderType ?? FlexInputBorderType.underline) == FlexInputBorderType.underline
         ? WidgetStateInputBorder.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.disabled)) {
               return UnderlineInputBorder(

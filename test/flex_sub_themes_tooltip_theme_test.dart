@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Tooltip tests
     // -------------------------------------------------------------------------
-    test(
-        'Tooltip FST35.1 light: GIVEN a light default '
+    test('Tooltip FST35.1 light: GIVEN a light default '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -28,8 +27,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Tooltip FST35.2 light: GIVEN a light custom '
+    test('Tooltip FST35.2 light: GIVEN a light custom '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -41,8 +39,7 @@ void main() {
           borderColor: const Color(0x88CCCCCC),
           borderRadius: 9,
           backgroundAlpha: 0xDD,
-          textStyle:
-              ThemeData(brightness: Brightness.light).textTheme.bodyLarge,
+          textStyle: ThemeData(brightness: Brightness.light).textTheme.bodyLarge,
           margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(12),
           waitDuration: const Duration(seconds: 1),
@@ -66,8 +63,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Tooltip FST34.3 light: GIVEN a light custom '
+    test('Tooltip FST34.3 light: GIVEN a light custom '
         'FlexSubTheme.tooltipTheme() '
         'EXPECT equal to TooltipThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -80,8 +76,7 @@ void main() {
           borderColor: const Color(0x88CCCCCC),
           borderRadius: 9,
           backgroundAlpha: 0xDD,
-          textStyle:
-              ThemeData(brightness: Brightness.light).textTheme.bodyLarge,
+          textStyle: ThemeData(brightness: Brightness.light).textTheme.bodyLarge,
           margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(12),
           waitDuration: const Duration(seconds: 1),

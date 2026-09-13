@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes ElevatedButton tests
     // -------------------------------------------------------------------------
-    test(
-        'ElevatedButton 12.1 M2: GIVEN a default M2 '
+    test('ElevatedButton 12.1 M2: GIVEN a default M2 '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -21,64 +20,58 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(40)),
-              ), //buttonShape,
-              elevation: 1,
-            ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.primary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onPrimary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onPrimary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onPrimary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
-            ),
+            style:
+                ElevatedButton.styleFrom(
+                  minimumSize: const Size(40, 40),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                  ), //buttonShape,
+                  elevation: 1,
+                ).copyWith(
+                  foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onPrimary;
+                  }),
+                  iconColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onPrimary;
+                  }),
+                  backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26);
+                    }
+                    return colorScheme.primary;
+                  }),
+                  overlayColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.onPrimary.withAlpha(0x0D);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.onPrimary.withAlpha(0x26);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onPrimary.withAlpha(0x33);
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
           ).toString(),
         ),
       );
     });
-    test(
-        'ElevatedButton 12.2 M3: GIVEN a default M3 '
+    test('ElevatedButton 12.2 M3: GIVEN a default M3 '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'defaults', () {
@@ -95,8 +88,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ElevatedButton 12.3 M2 secondary: GIVEN a default '
+    test('ElevatedButton 12.3 M2 secondary: GIVEN a default '
         'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as base color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -110,64 +102,58 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(40)),
-              ), //buttonShape,
-              elevation: 1,
-            ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.secondary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onPrimary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onPrimary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onPrimary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
-            ),
+            style:
+                ElevatedButton.styleFrom(
+                  minimumSize: const Size(40, 40),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                  ), //buttonShape,
+                  elevation: 1,
+                ).copyWith(
+                  foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.secondary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onSecondary;
+                  }),
+                  iconColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.secondary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onSecondary;
+                  }),
+                  backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.secondary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26);
+                    }
+                    return colorScheme.secondary;
+                  }),
+                  overlayColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.onPrimary.withAlpha(0x0D);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.onPrimary.withAlpha(0x26);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onPrimary.withAlpha(0x33);
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
           ).toString(),
         ),
       );
     });
-    test(
-        'ElevatedButton 12.3 M2 secondary-onBase: GIVEN a default '
+    test('ElevatedButton 12.3 M2 secondary-onBase: GIVEN a default '
         'FlexSubTheme.elevatedButtonTheme() '
         'with secondary color as onBase color '
         'EXPECT equal to ElevatedButtonThemeData() version with '
@@ -181,64 +167,58 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(40, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(40)),
-              ), //buttonShape,
-              elevation: 1,
-            ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.secondary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onSecondary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.primary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onSecondary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onSecondary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onSecondary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
-            ),
+            style:
+                ElevatedButton.styleFrom(
+                  minimumSize: const Size(40, 40),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                  ), //buttonShape,
+                  elevation: 1,
+                ).copyWith(
+                  foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.secondary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onSecondary;
+                  }),
+                  iconColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.secondary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onSecondary;
+                  }),
+                  backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26);
+                    }
+                    return colorScheme.primary;
+                  }),
+                  overlayColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.onSecondary.withAlpha(0x0D);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.onSecondary.withAlpha(0x26);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onSecondary.withAlpha(0x33);
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
           ).toString(),
         ),
       );
     });
-    test(
-        'ElevatedButton 12.4 M2 states: Does '
+    test('ElevatedButton 12.4 M2 states: Does '
         'ElevatedButton have right Material 2 states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF42AEE7),
@@ -447,8 +427,7 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    test(
-        'ElevatedButton 12.5 M3-states: Does '
+    test('ElevatedButton 12.5 M3-states: Does '
         'ElevatedButton have right Material 3 states', () {
       const ColorScheme colorScheme = ColorScheme.light();
       // Disabled foreground, default, M3
@@ -768,8 +747,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ElevatedButton 12.6 M2 custom-1: GIVEN a '
+    test('ElevatedButton 12.6 M2 custom-1: GIVEN a '
         'custom FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -785,65 +763,59 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(50, 50),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ), //buttonShape,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              elevation: 1,
-            ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.onPrimary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.primary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.primary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onPrimary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onPrimary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onPrimary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
-            ),
+            style:
+                ElevatedButton.styleFrom(
+                  minimumSize: const Size(50, 50),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ), //buttonShape,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  elevation: 1,
+                ).copyWith(
+                  foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onPrimary;
+                  }),
+                  iconColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.onPrimary;
+                  }),
+                  backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26);
+                    }
+                    return colorScheme.primary;
+                  }),
+                  overlayColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.onPrimary.withAlpha(0x0D);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.onPrimary.withAlpha(0x26);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onPrimary.withAlpha(0x33);
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
           ).toString(),
         ),
       );
     });
-    test(
-        'ElevatedButton 12.7 M2 custom-2: GIVEN a custom '
+    test('ElevatedButton 12.7 M2 custom-2: GIVEN a custom '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -861,65 +833,59 @@ void main() {
         ).toString(),
         equalsIgnoringHashCodes(
           ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(55, 55),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ), //buttonShape,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              elevation: 1,
-            ).copyWith(
-              foregroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.tertiary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.secondary;
-              }),
-              iconColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.tertiary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x5E);
-                }
-                return colorScheme.secondary;
-              }),
-              backgroundColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.disabled)) {
-                  return colorScheme.tertiary
-                      .blendAlpha(colorScheme.onSurface, 0x66)
-                      .withAlpha(0x26);
-                }
-                return colorScheme.tertiary;
-              }),
-              overlayColor: WidgetStateProperty.resolveWith<Color>((
-                Set<WidgetState> states,
-              ) {
-                if (states.contains(WidgetState.hovered)) {
-                  return colorScheme.onTertiary.withAlpha(0x0D);
-                }
-                if (states.contains(WidgetState.focused)) {
-                  return colorScheme.onTertiary.withAlpha(0x26);
-                }
-                if (states.contains(WidgetState.pressed)) {
-                  return colorScheme.onTertiary.withAlpha(0x33);
-                }
-                return Colors.transparent;
-              }),
-            ),
+            style:
+                ElevatedButton.styleFrom(
+                  minimumSize: const Size(55, 55),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ), //buttonShape,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  elevation: 1,
+                ).copyWith(
+                  foregroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.tertiary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.secondary;
+                  }),
+                  iconColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.tertiary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x5E);
+                    }
+                    return colorScheme.secondary;
+                  }),
+                  backgroundColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.disabled)) {
+                      return colorScheme.tertiary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26);
+                    }
+                    return colorScheme.tertiary;
+                  }),
+                  overlayColor: WidgetStateProperty.resolveWith<Color>((
+                    Set<WidgetState> states,
+                  ) {
+                    if (states.contains(WidgetState.hovered)) {
+                      return colorScheme.onTertiary.withAlpha(0x0D);
+                    }
+                    if (states.contains(WidgetState.focused)) {
+                      return colorScheme.onTertiary.withAlpha(0x26);
+                    }
+                    if (states.contains(WidgetState.pressed)) {
+                      return colorScheme.onTertiary.withAlpha(0x33);
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
           ).toString(),
         ),
       );
     });
-    test(
-        'ElevatedButton 12.8 custom-1-M3: GIVEN a custom '
+    test('ElevatedButton 12.8 custom-1-M3: GIVEN a custom '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {
@@ -969,8 +935,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ElevatedButton 12.9 custom-2-M3: GIVEN a custom '
+    test('ElevatedButton 12.9 custom-2-M3: GIVEN a custom '
         'FlexSubTheme.elevatedButtonTheme() '
         'EXPECT equal to ElevatedButtonThemeData() version with '
         'same values', () {

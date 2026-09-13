@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuButtonTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'MenuButton FST19.1 : GIVEN a FlexSubTheme.menuButtonTheme() '
+    test('MenuButton FST19.1 : GIVEN a FlexSubTheme.menuButtonTheme() '
         'MenuButtonThemeData() with same values.', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

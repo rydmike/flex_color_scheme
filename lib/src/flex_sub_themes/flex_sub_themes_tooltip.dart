@@ -82,21 +82,19 @@ TooltipThemeData _tooltipTheme({
   /// for mouse pointer exits the widget.
   Duration? showDuration,
 }) {
-  final Color background =
-      (backgroundSchemeColor == null && backgroundColor != null)
-          ? backgroundColor
-          : FlexSubThemes.schemeColor(
-              backgroundSchemeColor ?? SchemeColor.onSurface,
-              colorScheme,
-            );
+  final Color background = (backgroundSchemeColor == null && backgroundColor != null)
+      ? backgroundColor
+      : FlexSubThemes.schemeColor(
+          backgroundSchemeColor ?? SchemeColor.onSurface,
+          colorScheme,
+        );
 
-  final Color foreground =
-      (backgroundSchemeColor == null && foregroundColor != null)
-          ? foregroundColor
-          : FlexSubThemes.schemeColorPair(
-              backgroundSchemeColor ?? SchemeColor.onSurface,
-              colorScheme,
-            );
+  final Color foreground = (backgroundSchemeColor == null && foregroundColor != null)
+      ? foregroundColor
+      : FlexSubThemes.schemeColorPair(
+          backgroundSchemeColor ?? SchemeColor.onSurface,
+          colorScheme,
+        );
 
   final TextStyle tooltipTextStyle = textStyle == null
       ? ThemeData(

@@ -106,8 +106,7 @@ FilledButtonThemeData _filledButtonTheme({
   // reasoning and duplication.
   final Color overlay = foreground;
   final Color tint = background;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
 
   WidgetStateProperty<Color?>? backgroundColor;
   WidgetStateProperty<Color?>? foregroundColor;
@@ -170,8 +169,7 @@ FilledButtonThemeData _filledButtonTheme({
       ) {
         if (states.contains(WidgetState.disabled)) {
           if (tintDisable) {
-            return FlexSubThemes.tintedDisable(
-                colorScheme.onSurface, background);
+            return FlexSubThemes.tintedDisable(colorScheme.onSurface, background);
           }
         }
         return null; // We get default foregroundColor.

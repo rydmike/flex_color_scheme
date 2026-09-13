@@ -70,11 +70,11 @@ class FlexSchemeData with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hash(
-        name,
-        description,
-        light,
-        dark,
-      );
+    name,
+    description,
+    light,
+    dark,
+  );
 
   /// Flutter debug properties override, includes toString.
   @override

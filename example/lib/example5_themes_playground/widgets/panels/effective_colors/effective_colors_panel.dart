@@ -26,8 +26,7 @@ class EffectiveColorsPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
-    final TextStyle linkStyle =
-        theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +61,8 @@ class EffectiveColorsPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Most direct color properties in ThemeData are '
+                  text:
+                      'Most direct color properties in ThemeData are '
                       'planned to be deprecated and removed from Flutter. '
                       'More info in ',
                 ),
@@ -73,7 +73,8 @@ class EffectiveColorsPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n'
+                  text:
+                      '.\n'
                       '\n'
                       'ThemeData colors still matter in Flutter, some widgets '
                       'depend on them for '

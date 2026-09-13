@@ -35,8 +35,7 @@ import 'package:material_ui/material_ui.dart';
 /// ThemeData is created with, thus using the same colors in your custom
 /// sub-themes.
 ThemeData themeDataDark(ThemeController controller) {
-  final ColorScheme colorScheme =
-      flexColorSchemeDark(controller, Colors.black).toScheme;
+  final ColorScheme colorScheme = flexColorSchemeDark(controller, Colors.black).toScheme;
 
   return ThemeData(
     brightness: Brightness.dark,
@@ -51,7 +50,8 @@ ThemeData themeDataDark(ThemeController controller) {
     // platform and useMaterial3 flag, that we used in FlexColorScheme created
     // ThemeData. We do this so created theme will be using the same features
     // in the Playground app.
-    visualDensity: controller.visualDensity?.setting(controller.platform) ??
+    visualDensity:
+        controller.visualDensity?.setting(controller.platform) ??
         VisualDensityEnum.platform.setting(controller.platform),
     // Use tap target size setting.
     materialTapTargetSize: controller.tapTargetSize,
@@ -59,10 +59,8 @@ ThemeData themeDataDark(ThemeController controller) {
     useMaterial3: controller.useMaterial3,
     // applyElevationOverlayColor: true,
     typography: controller.useMaterial3
-        ? Typography.material2021(
-            platform: controller.platform ?? defaultTargetPlatform)
-        : Typography.material2018(
-            platform: controller.platform ?? defaultTargetPlatform),
+        ? Typography.material2021(platform: controller.platform ?? defaultTargetPlatform)
+        : Typography.material2018(platform: controller.platform ?? defaultTargetPlatform),
     // Add a custom theme extension with light mode code highlight colors and
     // dark mode topic colors.
     extensions: <ThemeExtension<dynamic>>{

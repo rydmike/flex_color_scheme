@@ -305,17 +305,17 @@ TimePickerThemeData _timePickerTheme({
     // for it to work and look right.
     inputDecorationTheme: useDecorator
         ? inputDecorationTheme?.copyWith(
-              contentPadding: EdgeInsets.zero,
-              // Prevent the error text from appearing.
-              // See https://github.com/flutter/flutter/issues/54104
-              errorStyle: const TextStyle(fontSize: 0, height: 0),
-            ) ??
-            const InputDecorationThemeData().copyWith(
-              contentPadding: EdgeInsets.zero,
-              // Prevent the error text from appearing.
-              // See https://github.com/flutter/flutter/issues/54104
-              errorStyle: const TextStyle(fontSize: 0, height: 0),
-            )
+                contentPadding: EdgeInsets.zero,
+                // Prevent the error text from appearing.
+                // See https://github.com/flutter/flutter/issues/54104
+                errorStyle: const TextStyle(fontSize: 0, height: 0),
+              ) ??
+              const InputDecorationThemeData().copyWith(
+                contentPadding: EdgeInsets.zero,
+                // Prevent the error text from appearing.
+                // See https://github.com/flutter/flutter/issues/54104
+                errorStyle: const TextStyle(fontSize: 0, height: 0),
+              )
         // To get back to a default style, we have to provide an explicit
         // default matching style, very tedious.
         // Read more about this here:

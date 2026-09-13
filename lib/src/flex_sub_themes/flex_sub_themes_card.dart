@@ -115,14 +115,12 @@ CardThemeData _cardTheme({
   // one and filled one.
   //
   // See issue: https://github.com/flutter/flutter/issues/153912
-  final bool usesDefaultRadius =
-      (radius == null || (useM3 && radius == kCardRadius)) && useM3;
+  final bool usesDefaultRadius = (radius == null || (useM3 && radius == kCardRadius)) && useM3;
 
   // Effective background color, if null, keep null defaults.
-  final Color? backgroundColor =
-      colorScheme == null || backgroundSchemeColor == null
-          ? null
-          : FlexSubThemes.schemeColor(backgroundSchemeColor, colorScheme);
+  final Color? backgroundColor = colorScheme == null || backgroundSchemeColor == null
+      ? null
+      : FlexSubThemes.schemeColor(backgroundSchemeColor, colorScheme);
 
   // Effective border color, if null, keep null defaults.
   final Color? borderColor = colorScheme == null || borderSchemeColor == null
@@ -143,16 +141,17 @@ CardThemeData _cardTheme({
     );
   }
   if (borderColor != null) {
-    shape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(radius ?? kCardRadius),
-      ),
-    ).copyWith(
-      side: BorderSide(
-        width: effectiveBorderWidth,
-        color: borderColor,
-      ),
-    );
+    shape =
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? kCardRadius),
+          ),
+        ).copyWith(
+          side: BorderSide(
+            width: effectiveBorderWidth,
+            color: borderColor,
+          ),
+        );
   }
 
   return CardThemeData(

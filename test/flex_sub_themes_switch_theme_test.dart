@@ -10,8 +10,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Switch tests
     // -------------------------------------------------------------------------
-    test(
-        'Switch FST29.1 light: GIVEN a light default M2 '
+    test('Switch FST29.1 light: GIVEN a light default M2 '
         'FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -78,8 +77,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Switch FST29.2 light-states: Does Switch have right '
+    test('Switch FST29.2 light-states: Does Switch have right '
         'M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -95,9 +93,10 @@ void main() {
         isSameColorAs(Colors.grey.shade400),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         isSameColorAs(Colors.grey.shade400),
       );
       expect(
@@ -191,21 +190,24 @@ void main() {
       );
       // Non tinted interactions - selected
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.selected, WidgetState.pressed}),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.selected, WidgetState.hovered}),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.08)),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
-            .overlayColor!
-            .resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).overlayColor!.resolve(<WidgetState>{WidgetState.selected, WidgetState.focused}),
         isSameColorAs(colorScheme.primary.withValues(alpha: 0.12)),
       );
       // Tinted interactions
@@ -330,8 +332,7 @@ void main() {
       );
     });
 
-    test(
-        'Switch FST29.3 dark: GIVEN a dark default FlexSubTheme.switchTheme() '
+    test('Switch FST29.3 dark: GIVEN a dark default FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -398,8 +399,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Switch FST29.4 dark-states: Does Switch have right '
+    test('Switch FST29.4 dark-states: Does Switch have right '
         'M2 material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -414,9 +414,10 @@ void main() {
         isSameColorAs(Colors.grey.shade800),
       );
       expect(
-        FlexSubThemes.switchTheme(colorScheme: colorScheme, useMaterial3: false)
-            .thumbColor!
-            .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
+        FlexSubThemes.switchTheme(
+          colorScheme: colorScheme,
+          useMaterial3: false,
+        ).thumbColor!.resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         isSameColorAs(Colors.grey.shade800),
       );
       expect(
@@ -496,8 +497,7 @@ void main() {
         isSameColorAs(Colors.white30),
       );
     });
-    test(
-        'Switch FST29.5 custom-light: GIVEN a light custom '
+    test('Switch FST29.5 custom-light: GIVEN a light custom '
         'FlexSubTheme.switchTheme() '
         'EXPECT equal to SwitchThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -568,8 +568,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Switch FST29.6 light-M3-states: '
+    test('Switch FST29.6 light-M3-states: '
         'Does Switch have right M3 states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -982,8 +981,7 @@ void main() {
       );
     });
 
-    test(
-        'Switch FST29.7 LIGHT Cupertino-like Switch: '
+    test('Switch FST29.7 LIGHT Cupertino-like Switch: '
         'Does Switch have right states?', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -1071,8 +1069,7 @@ void main() {
       // Zero splash radius
       expect(switchTheme.splashRadius, equals(0));
     });
-    test(
-        'Switch FST29.7 DARK Cupertino-like Switch: '
+    test('Switch FST29.7 DARK Cupertino-like Switch: '
         'Does Switch have right states?', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),

@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes ToggleButtons tests
     // -------------------------------------------------------------------------
-    test(
-        'ToggleButtons FST34.1: GIVEN a default '
+    test('ToggleButtons FST34.1: GIVEN a default '
         'FlexSubTheme.toggleButtonsTheme() EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -44,8 +43,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ToggleButtons FST34.2 base-color: GIVEN a default '
+    test('ToggleButtons FST34.2 base-color: GIVEN a default '
         'FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -83,8 +81,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ToggleButtons FST34.3 M3-base-color: GIVEN a tinted interact disable '
+    test('ToggleButtons FST34.3 M3-base-color: GIVEN a tinted interact disable '
         'and default M3 outline border FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {
@@ -131,8 +128,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ToggleButtons FST34.4 M3-base-color: GIVEN a tinted interact disable '
+    test('ToggleButtons FST34.4 M3-base-color: GIVEN a tinted interact disable '
         'FlexSubTheme.toggleButtonsTheme() '
         'EXPECT '
         'equal to ToggleButtonsThemeData() version with same values', () {

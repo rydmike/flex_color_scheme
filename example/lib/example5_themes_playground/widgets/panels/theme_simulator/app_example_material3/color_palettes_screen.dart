@@ -26,11 +26,9 @@ class ColorPalettesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.paddingOf(context);
 
-    final ColorScheme lightScheme =
-        flexColorSchemeLight(themeController, Colors.black).toScheme;
+    final ColorScheme lightScheme = flexColorSchemeLight(themeController, Colors.black).toScheme;
 
-    final ColorScheme darkScheme =
-        flexColorSchemeDark(themeController, Colors.black).toScheme;
+    final ColorScheme darkScheme = flexColorSchemeDark(themeController, Colors.black).toScheme;
 
     Widget schemeLabel(String brightness) {
       return Padding(
@@ -52,65 +50,43 @@ class ColorPalettesScreen extends StatelessWidget {
     }
 
     Widget dynamicColorNotice() => RichText(
-          textAlign: TextAlign.start,
-          text: TextSpan(
-            style: Theme.of(context).textTheme.bodySmall,
-            children: <TextSpan>[
-              const TextSpan(
-                  text: 'This color presentation shows colors from '
-                      'ThemesPlayground light and dark ColorScheme. '
-                      'To create color schemes based on a '
-                      "platform's implementation of dynamic color, "
-                      'use the '),
-              TextSpan(
-                text: 'dynamic_color',
-                style: const TextStyle(decoration: TextDecoration.underline),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () async {
-                    final Uri url = Uri.parse(
-                      'https://pub.dev/packages/dynamic_color',
-                    );
-                    if (!await launchUrl(url)) {
-                      throw Exception('Could not launch $url');
-                    }
-                  },
-              ),
-              const TextSpan(text: ' package.'),
-            ],
+      textAlign: TextAlign.start,
+      text: TextSpan(
+        style: Theme.of(context).textTheme.bodySmall,
+        children: <TextSpan>[
+          const TextSpan(
+            text:
+                'This color presentation shows colors from '
+                'ThemesPlayground light and dark ColorScheme. '
+                'To create color schemes based on a '
+                "platform's implementation of dynamic color, "
+                'use the ',
           ),
-        );
+          TextSpan(
+            text: 'dynamic_color',
+            style: const TextStyle(decoration: TextDecoration.underline),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                final Uri url = Uri.parse(
+                  'https://pub.dev/packages/dynamic_color',
+                );
+                if (!await launchUrl(url)) {
+                  throw Exception('Could not launch $url');
+                }
+              },
+          ),
+          const TextSpan(text: ' package.'),
+        ],
+      ),
+    );
 
     return ScrollConfiguration(
       behavior: const DragScrollBehavior(),
       child: Expanded(
         child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth < narrowScreenWidthThreshold) {
-            return SingleChildScrollView(
-              padding: EdgeInsets.only(
-                top: 8 + padding.top,
-                bottom: 8 + padding.bottom,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    child: dynamicColorNotice(),
-                  ),
-                  schemeLabel('Light ColorScheme'),
-                  schemeView(lightScheme),
-                  divider,
-                  schemeLabel('Dark ColorScheme'),
-                  schemeView(darkScheme),
-                ],
-              ),
-            );
-          } else {
-            return SingleChildScrollView(
-              child: Padding(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth < narrowScreenWidthThreshold) {
+              return SingleChildScrollView(
                 padding: EdgeInsets.only(
                   top: 8 + padding.top,
                   bottom: 8 + padding.bottom,
@@ -119,35 +95,59 @@ class ColorPalettesScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 8),
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                       child: dynamicColorNotice(),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              schemeLabel('Light ColorScheme'),
-                              schemeView(lightScheme),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              schemeLabel('Dark ColorScheme'),
-                              schemeView(darkScheme),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    schemeLabel('Light ColorScheme'),
+                    schemeView(lightScheme),
+                    divider,
+                    schemeLabel('Dark ColorScheme'),
+                    schemeView(darkScheme),
                   ],
                 ),
-              ),
-            );
-          }
-        }),
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: 8 + padding.top,
+                    bottom: 8 + padding.bottom,
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                        child: dynamicColorNotice(),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                schemeLabel('Light ColorScheme'),
+                                schemeView(lightScheme),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: <Widget>[
+                                schemeLabel('Dark ColorScheme'),
+                                schemeView(darkScheme),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -466,11 +466,10 @@ class ColorChip extends StatelessWidget {
   final Color? onColor;
   final String label;
 
-  static Color contrastColor(Color color) =>
-      switch (ThemeData.estimateBrightnessForColor(color)) {
-        Brightness.dark => Colors.white,
-        Brightness.light => Colors.black
-      };
+  static Color contrastColor(Color color) => switch (ThemeData.estimateBrightnessForColor(color)) {
+    Brightness.dark => Colors.white,
+    Brightness.light => Colors.black,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -483,8 +482,8 @@ class ColorChip extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Expanded(
-                child: Text(label,
-                    style: TextStyle(color: labelColor, fontSize: 11))),
+              child: Text(label, style: TextStyle(color: labelColor, fontSize: 11)),
+            ),
           ],
         ),
       ),

@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes SnackBar tests
     // -------------------------------------------------------------------------
-    test(
-        'SnackBar FST28.1: GIVEN a default FlexSubTheme.snackBarTheme '
+    test('SnackBar FST28.1: GIVEN a default FlexSubTheme.snackBarTheme '
         'EXPECT equal to SnackBarThemeData() version '
         'with same values', () {
       expect(
@@ -21,8 +20,7 @@ void main() {
         ),
       );
     });
-    test(
-        'SnackBar FST28.2 background-based-a: GIVEN a '
+    test('SnackBar FST28.2 background-based-a: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to SnackBarThemeData with backgroundColor', () {
@@ -38,8 +36,8 @@ void main() {
             backgroundColor: const Color(0xFF343476),
             elevation: 10,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-                  color: Colors.white,
-                ),
+              color: Colors.white,
+            ),
             actionTextColor: Colors.white.withAlpha(0xDD),
             disabledActionTextColor: Colors.white.withAlpha(0x11),
             closeIconColor: Colors.white.withAlpha(0xAA),
@@ -47,8 +45,7 @@ void main() {
         ),
       );
     });
-    test(
-        'SnackBar FST28.3 background-based-b: GIVEN a '
+    test('SnackBar FST28.3 background-based-b: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'no colorScheme, no backgroundSchemeColor, but with backgroundColor '
         'EXPECT equal to SnackBarThemeData with backgroundColor', () {
@@ -65,8 +62,8 @@ void main() {
             backgroundColor: const Color(0xFFBBC2D5),
             elevation: 5,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-                  color: Colors.black,
-                ),
+              color: Colors.black,
+            ),
             actionTextColor: colorScheme.inversePrimary,
             disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
             closeIconColor: Colors.black.withAlpha(0xAA),
@@ -74,8 +71,7 @@ void main() {
         ),
       );
     });
-    test(
-        'SnackBar FST28.4 scheme-based: GIVEN a '
+    test('SnackBar FST28.4 scheme-based: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor '
         'EXPECT equal to SnackBarThemeData with scheme color.', () {
@@ -92,8 +88,8 @@ void main() {
             backgroundColor: colorScheme.error,
             elevation: 0,
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-                  color: colorScheme.onError,
-                ),
+              color: colorScheme.onError,
+            ),
             actionTextColor: colorScheme.inversePrimary,
             disabledActionTextColor: colorScheme.inversePrimary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
@@ -101,8 +97,7 @@ void main() {
         ),
       );
     });
-    test(
-        'SnackBar FST28.5 scheme-based: GIVEN a '
+    test('SnackBar FST28.5 scheme-based: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor and '
         'actionTextSchemeColor'
@@ -125,8 +120,8 @@ void main() {
               borderRadius: BorderRadius.all(Radius.circular(7)),
             ),
             contentTextStyle: ThemeData().textTheme.titleMedium!.copyWith(
-                  color: colorScheme.onError,
-                ),
+              color: colorScheme.onError,
+            ),
             actionTextColor: colorScheme.tertiary,
             disabledActionTextColor: colorScheme.tertiary.withAlpha(0x11),
             closeIconColor: colorScheme.onError.withAlpha(0xAA),
@@ -134,8 +129,7 @@ void main() {
         ),
       );
     });
-    test(
-        'SnackBar FST28.6 scheme-based: GIVEN a '
+    test('SnackBar FST28.6 scheme-based: GIVEN a '
         'FlexSubTheme.snackBarTheme with '
         'colorScheme, backgroundSchemeColor and backgroundColor and '
         'actionTextSchemeColor and content '

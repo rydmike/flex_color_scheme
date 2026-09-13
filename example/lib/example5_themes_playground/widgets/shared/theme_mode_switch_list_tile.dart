@@ -3,8 +3,7 @@ import 'package:flex_color_scheme_example/shared/widgets/universal/theme_mode_sw
 import 'package:material_ui/material_ui.dart';
 
 class ThemeModeSwitchListTile extends StatelessWidget {
-  const ThemeModeSwitchListTile(
-      {super.key, required this.controller, this.contentPadding});
+  const ThemeModeSwitchListTile({super.key, required this.controller, this.contentPadding});
 
   final EdgeInsetsGeometry? contentPadding;
   final ThemeController controller;

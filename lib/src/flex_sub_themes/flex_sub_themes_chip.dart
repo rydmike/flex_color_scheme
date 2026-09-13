@@ -180,8 +180,8 @@ ChipThemeData _chipTheme({
   final SchemeColor fallbackSchemeColor = baseSchemeColor == null && blend
       ? SchemeColor.primary
       : useM3
-          ? SchemeColor.surface
-          : SchemeColor.primaryContainer;
+      ? SchemeColor.surface
+      : SchemeColor.primaryContainer;
   Color backgroundColor = FlexSubThemes.schemeColor(
     baseSchemeColor ?? fallbackSchemeColor,
     colorScheme,
@@ -190,16 +190,15 @@ ChipThemeData _chipTheme({
   final SchemeColor fallbackSelected = useM3
       ? SchemeColor.secondaryContainer
       : blend
-          ? SchemeColor.primary
-          : SchemeColor.secondaryContainer;
+      ? SchemeColor.primary
+      : SchemeColor.secondaryContainer;
   Color selectedColor = FlexSubThemes.schemeColor(
     selectedSchemeColor ?? fallbackSelected,
     colorScheme,
   );
 
   // Secondary selected color
-  final SchemeColor fallbackSecondarySelected =
-      selectedSchemeColor ?? fallbackSelected;
+  final SchemeColor fallbackSecondarySelected = selectedSchemeColor ?? fallbackSelected;
   Color secondarySelectedColor = FlexSubThemes.schemeColor(
     secondarySelectedSchemeColor ?? fallbackSecondarySelected,
     colorScheme,
@@ -287,19 +286,14 @@ ChipThemeData _chipTheme({
   //     baseLabelStyle.copyWith(color: onSelectedColor);
 
   // Text color, uses the foreground color for all chip styles.
-  final TextStyle effectiveSecondarySelectedLabelStyle =
-      (secondaryLabelStyle ?? labelStyle ?? const TextStyle()).copyWith(
-    color: onSecondarySelectedColor,
-    fontSize: secondaryFontSize ??
-        fontSize ??
-        secondaryLabelStyle?.fontSize ??
-        labelStyle?.fontSize ??
-        14,
-    // These two needed to match size of default M3.
-    letterSpacing:
-        secondaryLabelStyle?.letterSpacing ?? labelStyle?.letterSpacing ?? 0.1,
-    height: secondaryLabelStyle?.height ?? labelStyle?.height ?? 1.43,
-  );
+  final TextStyle effectiveSecondarySelectedLabelStyle = (secondaryLabelStyle ?? labelStyle ?? const TextStyle())
+      .copyWith(
+        color: onSecondarySelectedColor,
+        fontSize: secondaryFontSize ?? fontSize ?? secondaryLabelStyle?.fontSize ?? labelStyle?.fontSize ?? 14,
+        // These two needed to match size of default M3.
+        letterSpacing: secondaryLabelStyle?.letterSpacing ?? labelStyle?.letterSpacing ?? 0.1,
+        height: secondaryLabelStyle?.height ?? labelStyle?.height ?? 1.43,
+      );
 
   // TODO(rydmike): M3 is 34dp high, should only be 32dp. Report issue?
 
@@ -344,37 +338,33 @@ ChipThemeData _chipTheme({
     deleteIconColor: deleteIconSchemeColor == null ? null : deleteIconColor,
     // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
     // Same formula as on FCS Elevated button and ToggleButtons.
-    disabledColor: !tintDisable &&
-            useM3 &&
-            onBackgroundColor == colorScheme.onSurfaceVariant
+    disabledColor: !tintDisable && useM3 && onBackgroundColor == colorScheme.onSurfaceVariant
         ? null
         : onBackgroundColor == colorScheme.onSurfaceVariant
-            ? tintDisable
-                ? FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface,
-                    tint,
-                  ).withValues(alpha: kAlphaLowDisabledFloat)
-                : colorScheme.onSurface.withValues(
-                    alpha: kAlphaLowDisabledFloat,
-                  )
-            : tintDisable
-                ? FlexSubThemes.tintedDisable(
-                    backgroundColor,
-                    tint,
-                  ).withValues(alpha: kAlphaLowDisabledFloat)
-                : backgroundColor.withValues(alpha: kAlphaLowDisabledFloat),
+        ? tintDisable
+              ? FlexSubThemes.tintedDisable(
+                  colorScheme.onSurface,
+                  tint,
+                ).withValues(alpha: kAlphaLowDisabledFloat)
+              : colorScheme.onSurface.withValues(
+                  alpha: kAlphaLowDisabledFloat,
+                )
+        : tintDisable
+        ? FlexSubThemes.tintedDisable(
+            backgroundColor,
+            tint,
+          ).withValues(alpha: kAlphaLowDisabledFloat)
+        : backgroundColor.withValues(alpha: kAlphaLowDisabledFloat),
     // Applies to [ChoiceChip], [FilterChip], [InputChip], [RawChip].
     selectedColor: selectedSchemeColor == null && !blend
         ? useM3
-            ? null
-            : selectedColor
+              ? null
+              : selectedColor
         : selectedColor,
 
     // Applies to [ChoiceChip.selectedColor], if set it overrides the
     // [selectedColor], for ChoiceChips.
-    secondarySelectedColor: secondarySelectedSchemeColor == null && !blend
-        ? null
-        : secondarySelectedColor,
+    secondarySelectedColor: secondarySelectedSchemeColor == null && !blend ? null : secondarySelectedColor,
     // Applies to [ActionChip], [Chip], [ChoiceChip], [FilterChip],
     // [InputChip] and [RawChip].
     surfaceTintColor: surfaceTintColor,

@@ -132,9 +132,7 @@ ProgressIndicatorThemeData _progressIndicatorTheme({
   bool? year2023,
 }) {
   // Get selected indicator color, defaults to primary if not defined.
-  final Color? color = baseSchemeColor == null
-      ? null
-      : FlexSubThemes.schemeColor(baseSchemeColor, colorScheme);
+  final Color? color = baseSchemeColor == null ? null : FlexSubThemes.schemeColor(baseSchemeColor, colorScheme);
 
   final Color? linearTrackColor = linearTrackSchemeColor == null
       ? null
@@ -163,8 +161,8 @@ ProgressIndicatorThemeData _progressIndicatorTheme({
   final BorderRadiusGeometry? borderRadius = linearRadius == null
       ? null
       : linearRadius <= 0
-          ? BorderRadius.zero
-          : BorderRadius.all(Radius.circular(linearRadius));
+      ? BorderRadius.zero
+      : BorderRadius.all(Radius.circular(linearRadius));
 
   return ProgressIndicatorThemeData(
     color: color,

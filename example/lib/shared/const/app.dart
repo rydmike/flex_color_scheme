@@ -21,10 +21,7 @@ abstract final class App {
   /// a const somewhere and no need to pass it around via a title prop either.
   /// Also used in the `showAppAboutDialog` About box as app name.
   static String title(BuildContext context) =>
-      (context as Element)
-          .findAncestorWidgetOfExactType<MaterialApp>()
-          ?.title ??
-      '';
+      (context as Element).findAncestorWidgetOfExactType<MaterialApp>()?.title ?? '';
 
   // When building new public web versions of the demos, make sure to
   // update this info with current versions used for the build, before
@@ -40,21 +37,21 @@ abstract final class App {
   static const String buildType = isRunningWithWasm
       ? 'WasmGC'
       : kIsWeb
-          ? 'JS'
-          : 'native VM';
+      ? 'JS'
+      : 'native VM';
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '9';
   static const String versionMinor = '0';
   static const String versionPatch = '0';
   static const String versionBuild = '01';
-  static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
+  static const String versionFull =
+      '$versionMajor.$versionMinor.$versionPatch'
       '\nBuild-$versionBuild';
   static const String version = '$versionMajor.$versionMinor.$versionPatch';
   static const String flutterVersionNum = FlutterVersion.version ?? '';
   static const String flutterChannel = FlutterVersion.channel ?? '';
-  static const String flutterVersion =
-      '$flutterChannel $flutterVersionNum ($buildType)';
+  static const String flutterVersion = '$flutterChannel $flutterVersionNum ($buildType)';
   static const String copyright = '© 2020 - 2026';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
@@ -63,8 +60,7 @@ abstract final class App {
   // This will be the only one later when WASM works OK.
   // static const String playgroundURL = 'https://playground.flexcolorscheme.com/';
   // URL for GitHub pages build.
-  static const String playgroundURL =
-      'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
+  static const String playgroundURL = 'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
 
   static final Uri packageUri = Uri(
     scheme: 'https',
@@ -193,22 +189,22 @@ abstract final class App {
     fontWeight: FontWeight.w700,
   );
   static TextTheme? get textTheme => TextTheme(
-        displayLarge: notoSansRegular, // Regular is default
-        displayMedium: notoSansRegular, // Regular is default
-        displaySmall: notoSansRegular, // Regular is default
-        headlineLarge: notoSansRegular, // Regular is default
-        headlineMedium: notoSansRegular, // Regular is default
-        headlineSmall: notoSansRegular, // Regular is default
-        titleLarge: notoSansRegular, // Regular is default
-        titleMedium: notoSansMedium, // medium is default
-        titleSmall: notoSansMedium, // Medium is default
-        bodyLarge: notoSansRegular, // Regular is default
-        bodyMedium: notoSansRegular, // Regular is default
-        bodySmall: notoSansRegular, // Regular is default
-        labelLarge: notoSansMedium, // Medium is default
-        labelMedium: notoSansMedium, // Medium is default
-        labelSmall: notoSansMedium, // Medium is default
-      );
+    displayLarge: notoSansRegular, // Regular is default
+    displayMedium: notoSansRegular, // Regular is default
+    displaySmall: notoSansRegular, // Regular is default
+    headlineLarge: notoSansRegular, // Regular is default
+    headlineMedium: notoSansRegular, // Regular is default
+    headlineSmall: notoSansRegular, // Regular is default
+    titleLarge: notoSansRegular, // Regular is default
+    titleMedium: notoSansMedium, // medium is default
+    titleSmall: notoSansMedium, // Medium is default
+    bodyLarge: notoSansRegular, // Regular is default
+    bodyMedium: notoSansRegular, // Regular is default
+    bodySmall: notoSansRegular, // Regular is default
+    labelLarge: notoSansMedium, // Medium is default
+    labelMedium: notoSansMedium, // Medium is default
+    labelSmall: notoSansMedium, // Medium is default
+  );
 
   /// Defining the visual density here to so we can change it in one spot when
   /// we want to try different options.
@@ -217,8 +213,7 @@ abstract final class App {
   /// default one. The default Flutter one is too dense imo.
   ///
   /// Only used by example 4.
-  static VisualDensity get visualDensity =>
-      FlexColorScheme.comfortablePlatformDensity;
+  static VisualDensity get visualDensity => FlexColorScheme.comfortablePlatformDensity;
 
   /// The menu items that we use on the responsive side menu.
   ///

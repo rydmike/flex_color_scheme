@@ -127,20 +127,17 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelMedium!;
 
     final String defaultSelectionValuePopupLabel =
-        (enabled ? null : defaultDisabledLabel) ??
-            defaultLabel ??
-            _popupItemLabel(null, useMaterial3);
+        (enabled ? null : defaultDisabledLabel) ?? defaultLabel ?? _popupItemLabel(null, useMaterial3);
 
     final String selectedPopupLabel = enabled && value != null
         ? _popupItemLabel(value, useMaterial3)
         : defaultSelectionValuePopupLabel;
 
-    final IconThemeData selectedIconTheme =
-        theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
-    final IconThemeData unSelectedIconTheme =
-        theme.iconTheme.copyWith(color: scheme.primary);
-    final IconThemeData unSelectedTrailingIconTheme = theme.iconTheme
-        .copyWith(color: scheme.onSurface.withValues(alpha: enabled ? 1 : 0.5));
+    final IconThemeData selectedIconTheme = theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
+    final IconThemeData unSelectedIconTheme = theme.iconTheme.copyWith(color: scheme.primary);
+    final IconThemeData unSelectedTrailingIconTheme = theme.iconTheme.copyWith(
+      color: scheme.onSurface.withValues(alpha: enabled ? 1 : 0.5),
+    );
 
     final List<Widget> iconWidgets = _popupIcons(values);
 
@@ -185,12 +182,9 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
                   ? Text(defaultSelectionValuePopupLabel)
                   // Text(_popupItemLabel(null, useMaterial3, false),
                   //         style: txtStyle)
-                  : Text(
-                      _popupItemLabel(
-                          enumFromIndex(i - 1), useMaterial3, false),
-                      style: txtStyle),
+                  : Text(_popupItemLabel(enumFromIndex(i - 1), useMaterial3, false), style: txtStyle),
             ),
-          )
+          ),
       ],
       child: ListTileReveal(
         dense: dense,
@@ -214,8 +208,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
                   child: ColorSchemeBox(
                     foregroundColor: scheme.onSurface,
                     backgroundColor: scheme.surface,
-                    borderColor:
-                        scheme.outline.withValues(alpha: enabled ? 1 : 0.5),
+                    borderColor: scheme.outline.withValues(alpha: enabled ? 1 : 0.5),
                     child: iconWidgets[0],
                   ),
                 )
@@ -243,46 +236,45 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   /// we return a shorter `label`, if the enum defines one, or
   /// just the `name`. Typically the short form is used in the
   /// popup menu items and the long form in the ListTile subtitle.
-  String _popupItemLabel(T? value, bool useMaterial3,
-      [bool useLongLabel = true]) {
+  String _popupItemLabel(T? value, bool useMaterial3, [bool useLongLabel = true]) {
     if (T == FlexTabBarStyle) {
       switch (value) {
         case FlexTabBarStyle.forAppBar:
           return useLongLabel
               ? 'Style: forAppbar\n'
-                  'Works with themed AppBar background color '
-                  '(FCS default for M2 mode)'
+                    'Works with themed AppBar background color '
+                    '(FCS default for M2 mode)'
               : 'Suitable for AppBar usage';
         case FlexTabBarStyle.forBackground:
           return useLongLabel
               ? 'Style: forBackground\n'
-                  'Works on surface colors, like scaffold '
-                  'and surface colored AppBar'
+                    'Works on surface colors, like scaffold '
+                    'and surface colored AppBar'
               : 'Suitable for surface colors usage';
         case FlexTabBarStyle.flutterDefault:
           return useLongLabel
               ? useMaterial3
-                  ? 'Style: flutterDefault\n'
-                      'In M3, this style works on surface colors in light '
-                      'and dark mode (FCS default for M3)'
-                  : 'Style: flutterDefault\n'
-                      'In M2, this style works on primary color in '
-                      'light mode and surface colors in dark mode'
+                    ? 'Style: flutterDefault\n'
+                          'In M3, this style works on surface colors in light '
+                          'and dark mode (FCS default for M3)'
+                    : 'Style: flutterDefault\n'
+                          'In M2, this style works on primary color in '
+                          'light mode and surface colors in dark mode'
               : 'Flutter SDK style';
         case FlexTabBarStyle.universal:
           return useLongLabel
               ? 'Style: universal\n'
-                  'Experimental style, typically has too low contrast. '
-                  'May change in future versions'
+                    'Experimental style, typically has too low contrast. '
+                    'May change in future versions'
               : 'Universal style';
         case null:
           return useLongLabel
               ? useMaterial3
-                  ? 'Default uses the "flutterDefault" option in M3 mode'
-                  : 'Default uses the "forAppBar" option in M2 mode'
+                    ? 'Default uses the "flutterDefault" option in M3 mode'
+                    : 'Default uses the "forAppBar" option in M2 mode'
               : useMaterial3
-                  ? 'Default (flutterDefault)'
-                  : 'Default (forAppBar)';
+              ? 'Default (flutterDefault)'
+              : 'Default (forAppBar)';
       }
     }
     if (T == TabBarIndicatorSize) {
@@ -290,12 +282,12 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         case TabBarIndicatorSize.tab:
           return useLongLabel
               ? 'Size: tab\n'
-                  'Indicator covers entire tab width'
+                    'Indicator covers entire tab width'
               : 'Covers entire tab';
         case TabBarIndicatorSize.label:
           return useLongLabel
               ? 'Size: label\n'
-                  'Indicator only spans width of the tab label'
+                    'Indicator only spans width of the tab label'
               : 'Covers only label';
         case null:
           return useMaterial3 ? 'Default (only label)' : 'Default (entire tab)';
@@ -372,22 +364,22 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         case FlexFixedColorStyle.computed:
           return useLongLabel
               ? 'Computed by FlexColorScheme (FCS)\n'
-                  'No seed generation, less expressive'
+                    'No seed generation, less expressive'
               : 'Computed by FCS';
         case FlexFixedColorStyle.seeded:
           return useLongLabel
               ? 'Seeded by FlexSeedScheme (FSS)\n'
-                  'Using MCU standard tones'
+                    'Using MCU standard tones'
               : 'Seeded by FSS';
         case FlexFixedColorStyle.seededHighContrast:
           return useLongLabel
               ? 'Seeded by FlexSeedScheme (FSS)\n'
-                  'Using FSS high contrast tones'
+                    'Using FSS high contrast tones'
               : 'Seeded high contrast by FSS';
         case null:
           return useLongLabel
               ? 'Default (computed) by FlexColorScheme (FCS)\n'
-                  'No seed generation, less expressive'
+                    'No seed generation, less expressive'
               : 'Default (computed)';
       }
     }
@@ -462,17 +454,17 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         case StrokeCap.butt:
           return useLongLabel
               ? 'Butt cap\n'
-                  'Flat end, no extension'
+                    'Flat end, no extension'
               : 'Butt (flat end)';
         case StrokeCap.round:
           return useLongLabel
               ? 'Round cap\n'
-                  'Rounded end, extends half stroke width'
+                    'Rounded end, extends half stroke width'
               : 'Round (rounded end)';
         case StrokeCap.square:
           return useLongLabel
               ? 'Square cap\n'
-                  'Square end, extends half stroke width'
+                    'Square end, extends half stroke width'
               : 'Square (square end)';
         case null:
           return 'Default (butt)';
@@ -484,13 +476,11 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
     }
     if (T == SplashTypeEnum) {
       final SplashTypeEnum? castValue = value as SplashTypeEnum?;
-      return castValue?.label ??
-          'Default (${SplashTypeEnum.defaultSplash.label})';
+      return castValue?.label ?? 'Default (${SplashTypeEnum.defaultSplash.label})';
     }
     if (T == VisualDensityEnum) {
       final VisualDensityEnum? castValue = value as VisualDensityEnum?;
-      return castValue?.label ??
-          'Default (${VisualDensityEnum.platform.label})';
+      return castValue?.label ?? 'Default (${VisualDensityEnum.platform.label})';
     }
     // For an unknown enum type, return its name as a default label.
     return value?.name ?? 'Default';

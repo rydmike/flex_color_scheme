@@ -71,8 +71,7 @@ DialogThemeData _dialogTheme({
   return DialogThemeData(
     elevation: elevation ?? kDialogElevation,
     backgroundColor: background,
-    actionsPadding: actionsPadding ??
-        const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
+    actionsPadding: actionsPadding ?? const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 24.0),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(radius ?? kDialogRadius),

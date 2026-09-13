@@ -65,16 +65,14 @@ CheckboxThemeData _checkboxTheme({
   // Get selected color, defaults to primary.
   final SchemeColor baseScheme = baseSchemeColor ?? SchemeColor.primary;
   final Color baseColor = FlexSubThemes.schemeColor(baseScheme, colorScheme);
-  final Color onBaseColor =
-      FlexSubThemes.schemeColorPair(baseScheme, colorScheme);
+  final Color onBaseColor = FlexSubThemes.schemeColorPair(baseScheme, colorScheme);
   final bool isLight = colorScheme.brightness == Brightness.light;
 
   // Using these tinted overlay variable in all themes for ease of
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
 
   return CheckboxThemeData(
     splashRadius: splashRadius,
@@ -87,8 +85,7 @@ CheckboxThemeData _checkboxTheme({
           if (tintDisable) {
             return BorderSide(
               width: 2.0,
-              color:
-                  FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor),
+              color: FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor),
             );
           }
           return BorderSide(
@@ -127,8 +124,7 @@ CheckboxThemeData _checkboxTheme({
           if (tintDisable) {
             return BorderSide(
               width: 2.0,
-              color:
-                  FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor),
+              color: FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor),
             );
           }
           return BorderSide(
@@ -154,8 +150,7 @@ CheckboxThemeData _checkboxTheme({
         if (states.contains(WidgetState.disabled)) {
           if (states.contains(WidgetState.selected)) {
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
@@ -174,8 +169,7 @@ CheckboxThemeData _checkboxTheme({
         if (states.contains(WidgetState.disabled)) {
           if (states.contains(WidgetState.selected)) {
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
           }
@@ -218,15 +212,9 @@ CheckboxThemeData _checkboxTheme({
     }),
     overlayColor: WidgetStateProperty<Color>.fromMap(
       <WidgetStatesConstraint, Color>{
-        if (useM3)
-          WidgetState.error & WidgetState.pressed:
-              colorScheme.error.withAlpha(kAlphaPressed),
-        if (useM3)
-          WidgetState.error & WidgetState.hovered:
-              colorScheme.error.withAlpha(kAlphaHovered),
-        if (useM3)
-          WidgetState.error & WidgetState.focused:
-              colorScheme.error.withAlpha(kAlphaFocused),
+        if (useM3) WidgetState.error & WidgetState.pressed: colorScheme.error.withAlpha(kAlphaPressed),
+        if (useM3) WidgetState.error & WidgetState.hovered: colorScheme.error.withAlpha(kAlphaHovered),
+        if (useM3) WidgetState.error & WidgetState.focused: colorScheme.error.withAlpha(kAlphaFocused),
         WidgetState.selected & WidgetState.pressed: tintInteract
             ? FlexSubThemes.tintedPressed(overlay, tint, factor)
             : colorScheme.onSurface.withAlpha(kAlphaPressed),

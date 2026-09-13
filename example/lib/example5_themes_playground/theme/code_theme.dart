@@ -33,17 +33,16 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
     Color? punctuationColor,
     Color? classColor,
     Color? constantColor,
-  }) =>
-      CodeTheme(
-        baseColor: baseColor ?? this.baseColor,
-        numberColor: numberColor ?? this.numberColor,
-        commentColor: commentColor ?? this.commentColor,
-        keywordColor: keywordColor ?? this.keywordColor,
-        stringColor: stringColor ?? this.stringColor,
-        punctuationColor: punctuationColor ?? this.punctuationColor,
-        classColor: classColor ?? this.classColor,
-        constantColor: constantColor ?? this.constantColor,
-      );
+  }) => CodeTheme(
+    baseColor: baseColor ?? this.baseColor,
+    numberColor: numberColor ?? this.numberColor,
+    commentColor: commentColor ?? this.commentColor,
+    keywordColor: keywordColor ?? this.keywordColor,
+    stringColor: stringColor ?? this.stringColor,
+    punctuationColor: punctuationColor ?? this.punctuationColor,
+    classColor: classColor ?? this.classColor,
+    constantColor: constantColor ?? this.constantColor,
+  );
 
   /// Must override the lerp method.
   @override

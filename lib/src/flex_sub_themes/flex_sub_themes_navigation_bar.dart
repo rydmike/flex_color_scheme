@@ -298,8 +298,7 @@ NavigationBarThemeData _navigationBarTheme({
 }) {
   // Background color, when using normal default, falls back to
   // surfaceContainer.
-  final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
-          backgroundSchemeColor != SchemeColor.transparent
+  final Color backgroundColor = (opacity ?? 1.0) != 1.0 && backgroundSchemeColor != SchemeColor.transparent
       ? FlexSubThemes.schemeColor(
           backgroundSchemeColor ?? SchemeColor.surfaceContainer,
           colorScheme,
@@ -388,9 +387,7 @@ NavigationBarThemeData _navigationBarTheme({
       return textStyle.copyWith(
         fontSize: effectiveUnselectedLabelSize,
         color: (mutedUnselectedLabel ?? false)
-            ? unselectedLabelColor
-                .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
-                .withAlpha(unselectedAlpha)
+            ? unselectedLabelColor.blendAlpha(unselectedLabelColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
             : unselectedLabelColor,
       );
     }),
@@ -403,9 +400,7 @@ NavigationBarThemeData _navigationBarTheme({
       return IconThemeData(
         size: effectiveUnselectedIconSize,
         color: (mutedUnselectedIcon ?? false)
-            ? unselectedIconColor
-                .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
-                .withAlpha(unselectedAlpha)
+            ? unselectedIconColor.blendAlpha(unselectedIconColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
             : unselectedIconColor,
       );
     }),

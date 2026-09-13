@@ -14,8 +14,7 @@ class CustomUsesDarkColorsForSeedSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return SwitchListTileReveal(
       dense: true,
-      enabled: controller.useKeyColors &&
-          controller.schemeIndex == AppColor.schemes.length - 1,
+      enabled: controller.useKeyColors && controller.schemeIndex == AppColor.schemes.length - 1,
       title: const Text('Custom dark uses its own colors as seeds'),
       subtitleReveal: const Text(
         'Turn ON to use the custom dark input colors as seed keys '

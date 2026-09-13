@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes Radio tests
     // -------------------------------------------------------------------------
-    test(
-        'Radio FST25.1 light: GIVEN a light default FlexSubTheme.radioTheme() '
+    test('Radio FST25.1 light: GIVEN a light default FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -61,8 +60,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Radio FST25.2 light-states: Does Radio '
+    test('Radio FST25.2 light-states: Does Radio '
         'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -104,8 +102,7 @@ void main() {
       );
     });
 
-    test(
-        'Radio FST25.3 dark: GIVEN a dark default FlexSubTheme.radioTheme() '
+    test('Radio FST25.3 dark: GIVEN a dark default FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -157,8 +154,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Radio FST25.4 dark-states: Does '
+    test('Radio FST25.4 dark-states: Does '
         'Radio have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -199,8 +195,7 @@ void main() {
         equals(Colors.white70),
       );
     });
-    test(
-        'Radio FST25.5 custom-light: GIVEN a light custom '
+    test('Radio FST25.5 custom-light: GIVEN a light custom '
         'FlexSubTheme.radioTheme() '
         'EXPECT equal to RadioThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(

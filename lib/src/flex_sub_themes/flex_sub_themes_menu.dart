@@ -52,10 +52,11 @@ MenuThemeData _menuTheme({
           colorScheme,
         ).withValues(alpha: opacity ?? 1.0)
       : opacity != null
-          ? colorScheme.surfaceContainer.withValues(alpha: opacity)
-          : null;
+      ? colorScheme.surfaceContainer.withValues(alpha: opacity)
+      : null;
 
-  final bool allDefaults = backgroundSchemeColor == null &&
+  final bool allDefaults =
+      backgroundSchemeColor == null &&
       opacity == null &&
       radius == null &&
       padding == null &&
@@ -66,18 +67,12 @@ MenuThemeData _menuTheme({
     style: allDefaults
         ? null
         : MenuStyle(
-            elevation: elevation == null
-                ? null
-                : WidgetStatePropertyAll<double?>(elevation),
+            elevation: elevation == null ? null : WidgetStatePropertyAll<double?>(elevation),
             backgroundColor: backgroundSchemeColor == null && opacity == null
                 ? null
                 : WidgetStatePropertyAll<Color?>(backgroundColor),
-            padding: padding == null
-                ? null
-                : WidgetStatePropertyAll<EdgeInsetsGeometry?>(padding),
-            surfaceTintColor: surfaceTintColor == null
-                ? null
-                : WidgetStatePropertyAll<Color>(surfaceTintColor),
+            padding: padding == null ? null : WidgetStatePropertyAll<EdgeInsetsGeometry?>(padding),
+            surfaceTintColor: surfaceTintColor == null ? null : WidgetStatePropertyAll<Color>(surfaceTintColor),
             shape: radius == null
                 ? null
                 : WidgetStatePropertyAll<OutlinedBorder>(

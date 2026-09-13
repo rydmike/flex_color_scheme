@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomSheet tests
     // -------------------------------------------------------------------------
-    test(
-        'BottomSheet FST4.1:  GIVEN a default FlexSubTheme.bottomSheetTheme() '
+    test('BottomSheet FST4.1:  GIVEN a default FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
         FlexSubThemes.bottomSheetTheme(),
@@ -26,8 +25,7 @@ void main() {
         ),
       );
     });
-    test(
-        'BottomSheet FST4.2 custom: GIVEN a custom '
+    test('BottomSheet FST4.2 custom: GIVEN a custom '
         'FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(

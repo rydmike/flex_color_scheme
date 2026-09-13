@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes OutlinedButton tests
     // -------------------------------------------------------------------------
-    test(
-        'OutlinedButton FST23.1 M2: GIVEN a default M2 '
+    test('OutlinedButton FST23.1 M2: GIVEN a default M2 '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -35,9 +34,7 @@ void main() {
               ) {
                 if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
-                    color: colorScheme.primary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26),
+                    color: colorScheme.primary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26),
                     width: 1.5,
                   );
                 }
@@ -57,8 +54,7 @@ void main() {
         ),
       );
     });
-    test(
-        'OutlinedButton FST23.2 custom-M2: GIVEN a custom '
+    test('OutlinedButton FST23.2 custom-M2: GIVEN a custom '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -124,9 +120,7 @@ void main() {
               ) {
                 if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
-                    color: colorScheme.secondaryContainer
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26),
+                    color: colorScheme.secondaryContainer.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26),
                     width: 1.5,
                   );
                 }
@@ -149,8 +143,7 @@ void main() {
         ),
       );
     });
-    test(
-        'OutlinedButton FST23.3 M3: GIVEN a default '
+    test('OutlinedButton FST23.3 M3: GIVEN a default '
         'FlexSubTheme.outlinedButtonTheme() EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -169,8 +162,7 @@ void main() {
         ),
       );
     });
-    test(
-        'OutlinedButton FST23.4 outline-M2: GIVEN a custom '
+    test('OutlinedButton FST23.4 outline-M2: GIVEN a custom '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -234,9 +226,7 @@ void main() {
               ) {
                 if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
-                    color: colorScheme.tertiary
-                        .blendAlpha(colorScheme.onSurface, 0x66)
-                        .withAlpha(0x26),
+                    color: colorScheme.tertiary.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0x26),
                     width: 1.5,
                   );
                 }
@@ -257,8 +247,7 @@ void main() {
       );
     });
 
-    test(
-        'OutlinedButton FST23.5 outline-M3: GIVEN a custom '
+    test('OutlinedButton FST23.5 outline-M3: GIVEN a custom '
         'FlexSubTheme.outlinedButtonTheme() '
         'EXPECT '
         'equal to OutlinedButtonThemeData() version with same values', () {
@@ -266,16 +255,14 @@ void main() {
         seedColor: const Color(0xFF7142E7),
         brightness: Brightness.light,
       );
-      final WidgetStateProperty<Color?> foregroundColor =
-          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      final WidgetStateProperty<Color?> foregroundColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
           return colorScheme.onSurface.withValues(alpha: 0.38);
         }
         return colorScheme.secondary;
       });
 
-      final WidgetStateProperty<Color?> overlayColor =
-          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      final WidgetStateProperty<Color?> overlayColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.hovered)) {
           return colorScheme.secondary.withValues(alpha: 0.08);
         }
@@ -288,8 +275,7 @@ void main() {
         return null;
       });
 
-      final WidgetStateProperty<BorderSide?> side =
-          WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      final WidgetStateProperty<BorderSide?> side = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
         if (states.contains(WidgetState.disabled)) {
           return BorderSide(
             color: colorScheme.onSurface.withValues(alpha: 0.12),
@@ -338,8 +324,7 @@ void main() {
       );
     });
 
-    test(
-        'OutlinedButton FST23.6 states-M2: Does '
+    test('OutlinedButton FST23.6 states-M2: Does '
         'OutlinedButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -422,8 +407,7 @@ void main() {
         equals(BorderSide(color: colorScheme.primary, width: 1)),
       );
     });
-    test(
-        'OutlinedButton FST23.7 states-custom-M2: Does '
+    test('OutlinedButton FST23.7 states-custom-M2: Does '
         'OutlinedButton have right states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF42AEE7),
@@ -515,8 +499,7 @@ void main() {
         equals(BorderSide(color: colorScheme.primaryContainer, width: 1)),
       );
     });
-    test(
-        'OutlinedButton FST23.8 states-M3: Does '
+    test('OutlinedButton FST23.8 states-M3: Does '
         'OutlinedButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -591,8 +574,7 @@ void main() {
         equals(BorderSide(color: colorScheme.outline, width: 1.0)),
       );
     });
-    test(
-        'OutlinedButton FST23.9 states-M3-custom: Does '
+    test('OutlinedButton FST23.9 states-M3-custom: Does '
         'OutlinedButton have right material '
         'custom states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(

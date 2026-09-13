@@ -8,8 +8,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes segmentedButtonTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
+    test('SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
         'EXPECT equal to SegmentedButtonThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

@@ -187,27 +187,21 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
     final String usedLabel = defaultLabel ?? 'unknown';
     final String usedLabelM2 = defaultLabelM2 ?? usedLabel;
     final String usedLabelDark = defaultLabelDark ?? usedLabel;
-    final String usedLabelDarkM2 =
-        defaultLabelDarkM2 ?? defaultLabelM2 ?? defaultLabelDark ?? usedLabel;
+    final String usedLabelDarkM2 = defaultLabelDarkM2 ?? defaultLabelM2 ?? defaultLabelDark ?? usedLabel;
 
     final String resolvedEnabledLabel = useMaterial3
         ? isLight
-            ? usedLabel
-            : usedLabelDark
+              ? usedLabel
+              : usedLabelDark
         : isLight
-            ? usedLabelM2
-            : usedLabelDarkM2;
+        ? usedLabelM2
+        : usedLabelDarkM2;
 
     final String disabledLabel = defaultDisabledLabel ?? usedLabel;
-    final String disabledLabelDark = defaultDisabledLabelDark ??
-        defaultDisabledLabel ??
-        defaultLabelDark ??
-        usedLabel;
-    final String disabledLabelM2 = defaultDisabledLabelM2 ??
-        defaultDisabledLabel ??
-        defaultLabelM2 ??
-        usedLabel;
-    final String disabledLabelDarkM2 = defaultDisabledLabelDarkM2 ??
+    final String disabledLabelDark = defaultDisabledLabelDark ?? defaultDisabledLabel ?? defaultLabelDark ?? usedLabel;
+    final String disabledLabelM2 = defaultDisabledLabelM2 ?? defaultDisabledLabel ?? defaultLabelM2 ?? usedLabel;
+    final String disabledLabelDarkM2 =
+        defaultDisabledLabelDarkM2 ??
         defaultDisabledLabelM2 ??
         defaultDisabledLabelDark ??
         defaultDisabledLabel ??
@@ -217,27 +211,23 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
 
     final String resolvedDisabledLabel = useMaterial3
         ? isLight
-            ? disabledLabel
-            : disabledLabelDark
+              ? disabledLabel
+              : disabledLabelDark
         : isLight
-            ? disabledLabelM2
-            : disabledLabelDarkM2;
+        ? disabledLabelM2
+        : disabledLabelDarkM2;
 
-    final String resolvedLabel =
-        enabled ? resolvedEnabledLabel : resolvedDisabledLabel;
+    final String resolvedLabel = enabled ? resolvedEnabledLabel : resolvedDisabledLabel;
 
-    final String effectiveDefaultLabel =
-        wrapWithDefaultLabel ? 'default ($resolvedLabel)' : resolvedLabel;
+    final String effectiveDefaultLabel = wrapWithDefaultLabel ? 'default ($resolvedLabel)' : resolvedLabel;
 
-    final String selectedLabel = enabled && value != null
-        ? value?.getName(isLight) ?? ''
-        : effectiveDefaultLabel;
+    final String selectedLabel = enabled && value != null ? value?.getName(isLight) ?? '' : effectiveDefaultLabel;
 
     return Theme(
       data: Theme.of(context).copyWith(
         scrollbarTheme: Theme.of(context).scrollbarTheme.copyWith(
-              thumbVisibility: WidgetStateProperty.all<bool>(true),
-            ),
+          thumbVisibility: WidgetStateProperty.all<bool>(true),
+        ),
       ),
       child: PopupMenuButton<int>(
         popUpAnimationStyle: AnimationStyle.noAnimation,
@@ -252,8 +242,7 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
         tooltip: '',
         padding: EdgeInsets.zero,
         onSelected: (int index) {
-          onChanged?.call(
-              index == 0 ? null : FlexScaffoldBaseColor.values[index - 1]);
+          onChanged?.call(index == 0 ? null : FlexScaffoldBaseColor.values[index - 1]);
         },
         enabled: enabled,
         itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
@@ -264,9 +253,7 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
                 dense: true,
                 contentPadding: EdgeInsets.zero,
                 leading: ColorSchemeBox(
-                  foregroundColor: (value?.index ?? -1) + 1 == i
-                      ? colorScheme.onSurface
-                      : colorScheme.onSurfaceVariant,
+                  foregroundColor: (value?.index ?? -1) + 1 == i ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
                   backgroundColor: i <= 0
                       ? colorScheme.surface
                       : FlexScaffoldBaseColor.values[i - 1].color(
@@ -274,17 +261,14 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
                           useMaterial3: useMaterial3,
                         ),
                   selected: (value?.index ?? -1) + 1 == i,
-                  borderColor: (value?.index ?? -1) + 1 == i
-                      ? theme.colorScheme.onSurface
-                      : theme.colorScheme.outline,
+                  borderColor: (value?.index ?? -1) + 1 == i ? theme.colorScheme.onSurface : theme.colorScheme.outline,
                   defaultOption: i <= 0,
                 ),
                 title: i <= 0
                     ? Text(effectiveDefaultLabel, style: txtStyle)
-                    : Text(FlexScaffoldBaseColor.values[i - 1].getName(isLight),
-                        style: txtStyle),
+                    : Text(FlexScaffoldBaseColor.values[i - 1].getName(isLight), style: txtStyle),
               ),
-            )
+            ),
         ],
         child: ListTileReveal(
           enabled: enabled,
@@ -312,8 +296,7 @@ class ScaffoldBasePopupMenu extends StatelessWidget {
                       useMaterial3: useMaterial3,
                     )
                   : colorScheme.surface,
-              borderColor:
-                  colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
+              borderColor: colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
               defaultOption: value == null,
             ),
           ),

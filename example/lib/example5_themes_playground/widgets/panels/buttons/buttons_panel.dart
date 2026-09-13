@@ -38,73 +38,61 @@ class ButtonsPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
     final String elevatedButtonRadiusDefaultLabel =
         controller.elevatedButtonBorderRadius == null && effectiveRadius == null
-            ? useMaterial3
-                ? 'stadium'
-                : '40 dp'
-            : controller.elevatedButtonBorderRadius == null &&
-                    effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
-                : '';
+        ? useMaterial3
+              ? 'stadium'
+              : '40 dp'
+        : controller.elevatedButtonBorderRadius == null && effectiveRadius != null
+        ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
+        : '';
     final String outlinedButtonRadiusDefaultLabel =
         controller.outlinedButtonBorderRadius == null && effectiveRadius == null
-            ? useMaterial3
-                ? 'stadium'
-                : '40 dp'
-            : controller.outlinedButtonBorderRadius == null &&
-                    effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)}'
-                : '';
-    final String textButtonRadiusDefaultLabel =
-        controller.textButtonBorderRadius == null && effectiveRadius == null
-            ? useMaterial3
-                ? 'stadium'
-                : '40 dp'
-            : controller.textButtonBorderRadius == null &&
-                    effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
-                : '';
-    final String filledButtonRadiusDefaultLabel =
-        controller.filledButtonBorderRadius == null && effectiveRadius == null
-            ? useMaterial3
-                ? 'stadium'
-                : '40 dp'
-            : controller.filledButtonBorderRadius == null &&
-                    effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
-                : '';
+        ? useMaterial3
+              ? 'stadium'
+              : '40 dp'
+        : controller.outlinedButtonBorderRadius == null && effectiveRadius != null
+        ? 'global ${effectiveRadius.toStringAsFixed(0)}'
+        : '';
+    final String textButtonRadiusDefaultLabel = controller.textButtonBorderRadius == null && effectiveRadius == null
+        ? useMaterial3
+              ? 'stadium'
+              : '40 dp'
+        : controller.textButtonBorderRadius == null && effectiveRadius != null
+        ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
+        : '';
+    final String filledButtonRadiusDefaultLabel = controller.filledButtonBorderRadius == null && effectiveRadius == null
+        ? useMaterial3
+              ? 'stadium'
+              : '40 dp'
+        : controller.filledButtonBorderRadius == null && effectiveRadius != null
+        ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
+        : '';
     final String outlinedBorderDefaultLabel =
-        controller.outlinedButtonBorderWidth == null &&
-                controller.thinBorderWidth == null
-            ? '1 dp'
-            : controller.outlinedButtonBorderWidth == null &&
-                    controller.thinBorderWidth != null
-                ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
-                : '1 dp';
+        controller.outlinedButtonBorderWidth == null && controller.thinBorderWidth == null
+        ? '1 dp'
+        : controller.outlinedButtonBorderWidth == null && controller.thinBorderWidth != null
+        ? 'global ${controller.thinBorderWidth!.toStringAsFixed(1)} dp'
+        : '1 dp';
     final String pressedOutlinedBorderDefaultLabel =
-        controller.outlinedButtonPressedBorderWidth == null &&
-                controller.thickBorderWidth == null
-            ? useMaterial3
-                ? '1 dp'
-                : '2 dp'
-            : controller.outlinedButtonPressedBorderWidth == null &&
-                    controller.thickBorderWidth != null
-                ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)} dp'
-                : '1 dp';
+        controller.outlinedButtonPressedBorderWidth == null && controller.thickBorderWidth == null
+        ? useMaterial3
+              ? '1 dp'
+              : '2 dp'
+        : controller.outlinedButtonPressedBorderWidth == null && controller.thickBorderWidth != null
+        ? 'global ${controller.thickBorderWidth!.toStringAsFixed(1)} dp'
+        : '1 dp';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,7 +171,8 @@ class ButtonsPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Current Flutter SDK FilledButton theming has a '
+                  text:
+                      'Current Flutter SDK FilledButton theming has a '
                       'limitation where the FilledButton.tonal variant cannot '
                       'be themed differently from FilledButton. See '
                       'Flutter SDK ',
@@ -195,7 +184,8 @@ class ButtonsPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. Due to this issue, if you change theme color, the '
+                  text:
+                      '. Due to this issue, if you change theme color, the '
                       'FilledButton and FilledButton.tonal will get the same '
                       'color.\n'
                       '\n'
@@ -246,41 +236,43 @@ class ButtonsPanel extends StatelessWidget {
           valueDefaultLabel: outlinedButtonRadiusDefaultLabel,
           valueDefaultDisabledLabel: useMaterial3 ? 'stadium' : '4 dp',
         ),
-        ResponsiveTwoWidgets(builder: (BuildContext context, bool isRow) {
-          return RowOrColumn(
-            firstWidget: SliderListTileReveal(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingStart(context, isRow),
-              title: const Text('Border width'),
-              value: controller.outlinedButtonBorderWidth,
-              onChanged: controller.setOutlinedButtonBorderWidth,
-              min: 0.5,
-              max: 6,
-              divisions: 11,
-              valueDecimalPlaces: 1,
-              valueHeading: 'WIDTH',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: outlinedBorderDefaultLabel,
-              valueDefaultDisabledLabel: '1 dp',
-            ),
-            lastWidget: SliderListTileReveal(
-              enabled: enableControl,
-              contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
-              title: const Text('Pressed width'),
-              value: controller.outlinedButtonPressedBorderWidth,
-              onChanged: controller.setOutlinedButtonPressedBorderWidth,
-              min: 0.5,
-              max: 6,
-              divisions: 11,
-              valueDecimalPlaces: 1,
-              valueHeading: 'WIDTH',
-              valueUnitLabel: ' dp',
-              valueDefaultLabel: pressedOutlinedBorderDefaultLabel,
-              valueDefaultDisabledLabel: '1 dp',
-            ),
-            isRow: isRow,
-          );
-        }),
+        ResponsiveTwoWidgets(
+          builder: (BuildContext context, bool isRow) {
+            return RowOrColumn(
+              firstWidget: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingStart(context, isRow),
+                title: const Text('Border width'),
+                value: controller.outlinedButtonBorderWidth,
+                onChanged: controller.setOutlinedButtonBorderWidth,
+                min: 0.5,
+                max: 6,
+                divisions: 11,
+                valueDecimalPlaces: 1,
+                valueHeading: 'WIDTH',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: outlinedBorderDefaultLabel,
+                valueDefaultDisabledLabel: '1 dp',
+              ),
+              lastWidget: SliderListTileReveal(
+                enabled: enableControl,
+                contentPadding: ThemeValues.tilePaddingEnd(context, isRow),
+                title: const Text('Pressed width'),
+                value: controller.outlinedButtonPressedBorderWidth,
+                onChanged: controller.setOutlinedButtonPressedBorderWidth,
+                min: 0.5,
+                max: 6,
+                divisions: 11,
+                valueDecimalPlaces: 1,
+                valueHeading: 'WIDTH',
+                valueUnitLabel: ' dp',
+                valueDefaultLabel: pressedOutlinedBorderDefaultLabel,
+                valueDefaultDisabledLabel: '1 dp',
+              ),
+              isRow: isRow,
+            );
+          },
+        ),
         const Divider(),
         ColorSchemePopupMenu(
           enabled: enableControl,
@@ -316,7 +308,8 @@ class ButtonsPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Flutter 3.27.0 to 3.27.4 and 3.29.0 '
+                  text:
+                      'In Flutter 3.27.0 to 3.27.4 and 3.29.0 '
                       'the color of icons on ElevatedButton, FilledButton, '
                       'OutlinedButton and TextButton do not follow the '
                       'foreground color of the button, see ',
@@ -338,7 +331,8 @@ class ButtonsPanel extends StatelessWidget {
                 //
                 TextSpan(
                   style: spanTextStyle,
-                  text: ', that landed in Flutter stable 3.29.1. '
+                  text:
+                      ', that landed in Flutter stable 3.29.1. '
                       'FlexColorScheme 8.1.1 and later, include a workaround '
                       'patch for this issue.',
                 ),

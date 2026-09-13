@@ -29,9 +29,7 @@ class UseMaterial3Typography extends StatelessWidget {
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(
-          value: controller.useFlexColorScheme && controller.useSubThemes
-              ? controller.useMaterial3Typography
-              : null,
+          value: controller.useFlexColorScheme && controller.useSubThemes ? controller.useMaterial3Typography : null,
           onChanged: controller.useFlexColorScheme && controller.useSubThemes
               ? controller.setUseMaterial3Typography
               : null,

@@ -200,17 +200,13 @@ NavigationDrawerThemeData _navigationDrawerTheme({
       Set<WidgetState> states,
     ) {
       return style.apply(
-        color: states.contains(WidgetState.selected)
-            ? onIndicatorColor
-            : onBackgroundColor,
+        color: states.contains(WidgetState.selected) ? onIndicatorColor : onBackgroundColor,
       );
     }),
     iconTheme: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
       return IconThemeData(
         size: 24.0,
-        color: states.contains(WidgetState.selected)
-            ? onIndicatorColor
-            : onBackgroundColor,
+        color: states.contains(WidgetState.selected) ? onIndicatorColor : onBackgroundColor,
       );
     }),
   );

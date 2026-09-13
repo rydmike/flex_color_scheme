@@ -67,8 +67,7 @@ Future<void> main() async {
 
   // The ThemeServiceHive constructor requires a box name, the others do not.
   // The box name is just a file name for the file that stores the settings.
-  final ThemeService themeService =
-      ThemeServiceHive('flex_color_scheme_v5_box_4');
+  final ThemeService themeService = ThemeServiceHive('flex_color_scheme_v5_box_4');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
@@ -162,8 +161,7 @@ class DemoApp extends StatelessWidget {
               keepTertiary: themeController.keepTertiary,
             ),
             // Used ColorScheme seed generation variant.
-            variant:
-                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
+            variant: FlexSchemeVariant.values[themeController.usedFlexToneSetup],
             // In this example we use the values for visual density and font
             // from a single static source, so we can change it easily there.
             visualDensity: App.visualDensity,
@@ -193,8 +191,7 @@ class DemoApp extends StatelessWidget {
               keepTertiary: themeController.keepDarkTertiary,
             ),
             // Used ColorScheme seed generation variant.
-            variant:
-                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
+            variant: FlexSchemeVariant.values[themeController.usedFlexToneSetup],
             subThemesData: themeController.useSubThemes
                 ? FlexSubThemesData(
                     defaultRadius: themeController.defaultRadius,

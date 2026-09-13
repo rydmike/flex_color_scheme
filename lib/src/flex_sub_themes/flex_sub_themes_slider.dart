@@ -116,55 +116,45 @@ SliderThemeData _sliderTheme({
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
 
   // Assign sliderShape with based on valueIndicatorType
   final SliderComponentShape? sliderShape = switch (valueIndicatorType) {
     FlexSliderIndicatorType.drop => const DropSliderValueIndicatorShape(),
-    FlexSliderIndicatorType.rectangular =>
-      const RectangularSliderValueIndicatorShape(),
-    FlexSliderIndicatorType.rounded =>
-      const RoundedRectSliderValueIndicatorShape(),
+    FlexSliderIndicatorType.rectangular => const RectangularSliderValueIndicatorShape(),
+    FlexSliderIndicatorType.rounded => const RoundedRectSliderValueIndicatorShape(),
     null => null,
   };
 
   // Assign range sliderShape based on valueIndicatorType
-  final RangeSliderValueIndicatorShape? rangeSliderShape =
-      switch (valueIndicatorType) {
-    FlexSliderIndicatorType.drop =>
-      const PaddleRangeSliderValueIndicatorShape(),
-    FlexSliderIndicatorType.rectangular =>
-      const RectangularRangeSliderValueIndicatorShape(),
-    FlexSliderIndicatorType.rounded =>
-      const RoundedRectRangeSliderValueIndicatorShape(),
-    null => useM3 && (useOldM3Design ?? true)
-        ? const PaddleRangeSliderValueIndicatorShape()
-        : null,
+  final RangeSliderValueIndicatorShape? rangeSliderShape = switch (valueIndicatorType) {
+    FlexSliderIndicatorType.drop => const PaddleRangeSliderValueIndicatorShape(),
+    FlexSliderIndicatorType.rectangular => const RectangularRangeSliderValueIndicatorShape(),
+    FlexSliderIndicatorType.rounded => const RoundedRectRangeSliderValueIndicatorShape(),
+    null => useM3 && (useOldM3Design ?? true) ? const PaddleRangeSliderValueIndicatorShape() : null,
   };
 
-  Color? overlayColor() =>
-      WidgetStateColor.resolveWith((Set<WidgetState> states) {
-        if (states.contains(WidgetState.dragged)) {
-          if (tintInteract) {
-            return FlexSubThemes.tintedFocused(overlay, tint, factor);
-          }
-          return thumbColor.withAlpha(kAlphaFocused);
-        }
-        if (states.contains(WidgetState.hovered)) {
-          if (tintInteract) {
-            return FlexSubThemes.tintedHovered(overlay, tint, factor);
-          }
-          return thumbColor.withAlpha(kAlphaHovered);
-        }
-        if (states.contains(WidgetState.focused)) {
-          if (tintInteract) {
-            return FlexSubThemes.tintedFocused(overlay, tint, factor);
-          }
-          return thumbColor.withAlpha(kAlphaFocused);
-        }
-        return Colors.transparent;
-      });
+  Color? overlayColor() => WidgetStateColor.resolveWith((Set<WidgetState> states) {
+    if (states.contains(WidgetState.dragged)) {
+      if (tintInteract) {
+        return FlexSubThemes.tintedFocused(overlay, tint, factor);
+      }
+      return thumbColor.withAlpha(kAlphaFocused);
+    }
+    if (states.contains(WidgetState.hovered)) {
+      if (tintInteract) {
+        return FlexSubThemes.tintedHovered(overlay, tint, factor);
+      }
+      return thumbColor.withAlpha(kAlphaHovered);
+    }
+    if (states.contains(WidgetState.focused)) {
+      if (tintInteract) {
+        return FlexSubThemes.tintedFocused(overlay, tint, factor);
+      }
+      return thumbColor.withAlpha(kAlphaFocused);
+    }
+    return Colors.transparent;
+  });
 
   // TODO(rydmike): Fidelity review of M3 theme for Slider.
   return SliderThemeData(

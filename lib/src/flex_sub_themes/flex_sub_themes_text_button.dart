@@ -92,8 +92,7 @@ TextButtonThemeData _textButtonTheme({
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
 
   // We only define theme props for foregroundColor and overlayColor, if we
   // have some settings the default widget behavior does not handle.

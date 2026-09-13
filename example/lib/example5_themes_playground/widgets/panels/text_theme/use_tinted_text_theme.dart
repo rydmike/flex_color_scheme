@@ -6,7 +6,8 @@ class UseTinted3TextTheme extends StatelessWidget {
   const UseTinted3TextTheme({super.key, required this.controller});
   final ThemeController controller;
 
-  static const String _deprecateTint = 'The tinted TextTheme feature '
+  static const String _deprecateTint =
+      'The tinted TextTheme feature '
       'available in previous versions has been deprecated.\n'
       '\n'
       'The feature was originally '

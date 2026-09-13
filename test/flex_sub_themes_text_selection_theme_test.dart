@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes textSelectionTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'TextSelection FST32.1: GIVEN a FlexSubTheme.textSelectionTheme() '
+    test('TextSelection FST32.1: GIVEN a FlexSubTheme.textSelectionTheme() '
         'EXPECT equal to equivalent TextSelectionThemeData().', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

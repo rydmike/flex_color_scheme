@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuBarTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'MenuBar FST18.1: GIVEN a FlexSubTheme.menuBarTheme() '
+    test('MenuBar FST18.1: GIVEN a FlexSubTheme.menuBarTheme() '
         'MenuBarThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

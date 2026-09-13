@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes iconButtonTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'IconButton 15.1: GIVEN a FlexSubTheme.iconButtonTheme() '
+    test('IconButton 15.1: GIVEN a FlexSubTheme.iconButtonTheme() '
         'EXPECT equal to ...', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

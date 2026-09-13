@@ -41,7 +41,8 @@ MenuBarThemeData _menuBarTheme({
     colorScheme,
   );
 
-  final bool allDefault = backgroundSchemeColor == null &&
+  final bool allDefault =
+      backgroundSchemeColor == null &&
       shadowColor == null &&
       surfaceTintColor == null &&
       elevation == null &&
@@ -51,18 +52,10 @@ MenuBarThemeData _menuBarTheme({
     style: allDefault
         ? null
         : MenuStyle(
-            backgroundColor: backgroundSchemeColor != null
-                ? WidgetStatePropertyAll<Color?>(background)
-                : null,
-            surfaceTintColor: surfaceTintColor != null
-                ? WidgetStatePropertyAll<Color?>(surfaceTintColor)
-                : null,
-            shadowColor: shadowColor != null
-                ? WidgetStatePropertyAll<Color?>(shadowColor)
-                : null,
-            elevation: elevation != null
-                ? WidgetStatePropertyAll<double?>(elevation)
-                : null,
+            backgroundColor: backgroundSchemeColor != null ? WidgetStatePropertyAll<Color?>(background) : null,
+            surfaceTintColor: surfaceTintColor != null ? WidgetStatePropertyAll<Color?>(surfaceTintColor) : null,
+            shadowColor: shadowColor != null ? WidgetStatePropertyAll<Color?>(shadowColor) : null,
+            elevation: elevation != null ? WidgetStatePropertyAll<double?>(elevation) : null,
             shape: radius != null
                 ? WidgetStatePropertyAll<OutlinedBorder>(
                     RoundedRectangleBorder(

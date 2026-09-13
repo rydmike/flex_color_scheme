@@ -7,8 +7,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes menuTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'MenuAnchor FST20.1: GIVEN a FlexSubTheme.menuTheme() '
+    test('MenuAnchor FST20.1: GIVEN a FlexSubTheme.menuTheme() '
         'EXPECT equal to MenuThemeData() with same values.', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

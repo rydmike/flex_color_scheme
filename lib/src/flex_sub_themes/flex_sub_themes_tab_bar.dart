@@ -119,16 +119,15 @@ TabBarThemeData _tabBarTheme({
         : null,
     borderSide: BorderSide(
       width: weight,
-      color: indicatorColor ??
-          (useM3 ? colorScheme.primary : colorScheme.onSurface),
+      color: indicatorColor ?? (useM3 ? colorScheme.primary : colorScheme.onSurface),
     ),
   );
 
-  final Color overlayBase =
-      labelColor ?? (useM3 ? colorScheme.primary : colorScheme.onPrimary);
+  final Color overlayBase = labelColor ?? (useM3 ? colorScheme.primary : colorScheme.onPrimary);
 
   // Only make a custom overlay when we have settings that require it.
-  final bool useCustomOverlay = tintInteract ||
+  final bool useCustomOverlay =
+      tintInteract ||
       (useM3 && labelColor != colorScheme.primary && labelColor != null) ||
       (!useM3 && labelColor != colorScheme.onPrimary && labelColor != null);
 
@@ -141,9 +140,7 @@ TabBarThemeData _tabBarTheme({
     indicatorSize: indicatorSize,
     indicatorAnimation: indicatorAnimation,
     indicatorColor: indicatorColor,
-    indicator: (indicatorWeight != null || indicatorTopRadius != null)
-        ? indicator
-        : null,
+    indicator: (indicatorWeight != null || indicatorTopRadius != null) ? indicator : null,
     tabAlignment: tabAlignment,
     dividerColor: dividerColor,
     //

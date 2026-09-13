@@ -28,8 +28,7 @@ class ThemeColorSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   final bool updateDelegate;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return _ThemeColorSelectorDelegateWrapper(controller);
   }
 
@@ -41,14 +40,11 @@ class ThemeColorSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return oldDelegate.maxExtent != maxExtent ||
-        oldDelegate.minExtent != minExtent ||
-        updateDelegate;
+    return oldDelegate.maxExtent != maxExtent || oldDelegate.minExtent != minExtent || updateDelegate;
   }
 
   @override
-  FloatingHeaderSnapConfiguration? get snapConfiguration =>
-      FloatingHeaderSnapConfiguration();
+  FloatingHeaderSnapConfiguration? get snapConfiguration => FloatingHeaderSnapConfiguration();
 }
 
 /// A wrapper for the [ThemeColorSelector] when it is used via a

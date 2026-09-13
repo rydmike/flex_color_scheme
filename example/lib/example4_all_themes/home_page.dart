@@ -32,15 +32,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double margins =
-        App.responsiveInsets(MediaQuery.sizeOf(context).width);
+    final double margins = App.responsiveInsets(MediaQuery.sizeOf(context).width);
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final TextStyle headlineMedium = theme.textTheme.headlineMedium!;
-    final String flexToneName =
-        FlexSchemeVariant.values[controller.usedFlexToneSetup].variantName;
-    final bool isFlutterScheme =
-        FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme;
+    final String flexToneName = FlexSchemeVariant.values[controller.usedFlexToneSetup].variantName;
+    final bool isFlutterScheme = FlexSchemeVariant.values[controller.usedFlexToneSetup].isFlutterScheme;
     final String seedType = isFlutterScheme ? 'MCU' : 'FSS';
     final double endPadding = theme.useMaterial3 ? 24 : 16;
 
@@ -102,12 +99,9 @@ class HomePage extends StatelessWidget {
                           child: FlexThemeModeSwitch(
                             themeMode: controller.themeMode,
                             onThemeModeChanged: controller.setThemeMode,
-                            flexSchemeData:
-                                AppColor.schemes[controller.schemeIndex],
-                            optionButtonBorderRadius:
-                                controller.useSubThemes ? 12 : 4,
-                            buttonOrder:
-                                FlexThemeModeButtonOrder.lightSystemDark,
+                            flexSchemeData: AppColor.schemes[controller.schemeIndex],
+                            optionButtonBorderRadius: controller.useSubThemes ? 12 : 4,
+                            buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -134,8 +128,7 @@ class HomePage extends StatelessWidget {
                         const SizedBox(height: 8),
                         ListTile(
                           title: const Text('Use seed generated ColorScheme'),
-                          subtitle:
-                              Text(AppColor.explainUsedColors(controller)),
+                          subtitle: Text(AppColor.explainUsedColors(controller)),
                         ),
                         // Only Playground uses the error key color.
                         ListTile(
@@ -154,52 +147,34 @@ class HomePage extends StatelessWidget {
                         if (isLight) ...<Widget>[
                           SwitchListTile(
                             title: const Text('Keep primary color'),
-                            value: controller.useKeyColors &&
-                                controller.keepPrimary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepPrimary
-                                : null,
+                            value: controller.useKeyColors && controller.keepPrimary,
+                            onChanged: controller.useKeyColors ? controller.setKeepPrimary : null,
                           ),
                           SwitchListTile(
                             title: const Text('Keep secondary color'),
-                            value: controller.useKeyColors &&
-                                controller.keepSecondary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepSecondary
-                                : null,
+                            value: controller.useKeyColors && controller.keepSecondary,
+                            onChanged: controller.useKeyColors ? controller.setKeepSecondary : null,
                           ),
                           SwitchListTile(
                             title: const Text('Keep tertiary color'),
-                            value: controller.useKeyColors &&
-                                controller.keepTertiary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepTertiary
-                                : null,
+                            value: controller.useKeyColors && controller.keepTertiary,
+                            onChanged: controller.useKeyColors ? controller.setKeepTertiary : null,
                           ),
                         ] else ...<Widget>[
                           SwitchListTile(
                             title: const Text('Keep primary color'),
-                            value: controller.useKeyColors &&
-                                controller.keepDarkPrimary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepDarkPrimary
-                                : null,
+                            value: controller.useKeyColors && controller.keepDarkPrimary,
+                            onChanged: controller.useKeyColors ? controller.setKeepDarkPrimary : null,
                           ),
                           SwitchListTile(
                             title: const Text('Keep secondary color'),
-                            value: controller.useKeyColors &&
-                                controller.keepDarkSecondary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepDarkSecondary
-                                : null,
+                            value: controller.useKeyColors && controller.keepDarkSecondary,
+                            onChanged: controller.useKeyColors ? controller.setKeepDarkSecondary : null,
                           ),
                           SwitchListTile(
                             title: const Text('Keep tertiary color'),
-                            value: controller.useKeyColors &&
-                                controller.keepDarkTertiary,
-                            onChanged: controller.useKeyColors
-                                ? controller.setKeepDarkTertiary
-                                : null,
+                            value: controller.useKeyColors && controller.keepDarkTertiary,
+                            onChanged: controller.useKeyColors ? controller.setKeepDarkTertiary : null,
                           ),
                         ],
                         // Show colors in ThemeData, these will all
@@ -223,45 +198,35 @@ class HomePage extends StatelessWidget {
                         const SizedBox(height: 8),
                         SwitchListTile(
                           title: const Text('Use component themes'),
-                          subtitle: const Text(
-                              'Enable opinionated widget sub themes'),
+                          subtitle: const Text('Enable opinionated widget sub themes'),
                           value: controller.useSubThemes,
                           onChanged: controller.setUseSubThemes,
                         ),
                         ListTile(
-                          enabled: controller.useSubThemes &&
-                              controller.useFlexColorScheme,
-                          title:
-                              const Text('Used border radius on UI elements'),
+                          enabled: controller.useSubThemes && controller.useFlexColorScheme,
+                          title: const Text('Used border radius on UI elements'),
                           subtitle: const Text(
-                              'Default uses Material-3 specification border '
-                              'radius, which varies per component. '
-                              'A defined value sets it for all components. '
-                              'Material-2 specification is 4.'),
+                            'Default uses Material-3 specification border '
+                            'radius, which varies per component. '
+                            'A defined value sets it for all components. '
+                            'Material-2 specification is 4.',
+                          ),
                         ),
                         ListTile(
-                          enabled: controller.useSubThemes &&
-                              controller.useFlexColorScheme,
+                          enabled: controller.useSubThemes && controller.useFlexColorScheme,
                           title: Slider(
                             min: -1,
                             max: 30,
                             divisions: 31,
-                            label: controller.defaultRadius == null ||
-                                    (controller.defaultRadius ?? -1) < 0
+                            label: controller.defaultRadius == null || (controller.defaultRadius ?? -1) < 0
                                 ? 'default'
-                                : (controller.defaultRadius
-                                        ?.toStringAsFixed(0) ??
-                                    ''),
-                            value: controller.useSubThemes &&
-                                    controller.useFlexColorScheme
+                                : (controller.defaultRadius?.toStringAsFixed(0) ?? ''),
+                            value: controller.useSubThemes && controller.useFlexColorScheme
                                 ? controller.defaultRadius ?? -1
                                 : 4,
-                            onChanged: controller.useSubThemes &&
-                                    controller.useFlexColorScheme
+                            onChanged: controller.useSubThemes && controller.useFlexColorScheme
                                 ? (double value) {
-                                    controller.setDefaultRadius(value < 0
-                                        ? null
-                                        : value.roundToDouble());
+                                    controller.setDefaultRadius(value < 0 ? null : value.roundToDouble());
                                   }
                                 : null,
                           ),
@@ -275,18 +240,12 @@ class HomePage extends StatelessWidget {
                                   style: theme.textTheme.bodySmall,
                                 ),
                                 Text(
-                                  controller.useSubThemes &&
-                                          controller.useFlexColorScheme
-                                      ? controller.defaultRadius == null ||
-                                              (controller.defaultRadius ?? -1) <
-                                                  0
-                                          ? 'default'
-                                          : (controller.defaultRadius
-                                                  ?.toStringAsFixed(0) ??
-                                              '')
+                                  controller.useSubThemes && controller.useFlexColorScheme
+                                      ? controller.defaultRadius == null || (controller.defaultRadius ?? -1) < 0
+                                            ? 'default'
+                                            : (controller.defaultRadius?.toStringAsFixed(0) ?? '')
                                       : '4',
-                                  style: theme.textTheme.bodySmall!
-                                      .copyWith(fontWeight: FontWeight.bold),
+                                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),

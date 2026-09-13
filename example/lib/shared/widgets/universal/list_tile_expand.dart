@@ -175,9 +175,7 @@ class _ListTileExpandState extends State<ListTileExpand> {
               child: child,
             );
           },
-          child: _isOpen
-              ? widget.child ?? const SizedBox.shrink()
-              : const SizedBox.shrink(),
+          child: _isOpen ? widget.child ?? const SizedBox.shrink() : const SizedBox.shrink(),
         ),
       ],
     );

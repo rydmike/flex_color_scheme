@@ -12,16 +12,14 @@ void main() {
       seedColor: const Color(0xFF42AEE7),
       brightness: Brightness.light,
     );
-    test(
-        'PopupMenu FST24.1: GIVEN a default FlexSubTheme.popupMenuTheme() '
+    test('PopupMenu FST24.1: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(),
         equals(const PopupMenuThemeData()),
       );
     });
-    test(
-        'PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
+    test('PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(
@@ -54,8 +52,7 @@ void main() {
         ),
       );
     });
-    test(
-        'PopupMenu FST24.3 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
+    test('PopupMenu FST24.3 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       final PopupMenuThemeData m = FlexSubThemes.popupMenuTheme(
         colorScheme: colorScheme,

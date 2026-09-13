@@ -70,19 +70,17 @@ SnackBarThemeData _snackBarTheme({
   /// If null, [SnackBar] defines its default using titleMedium
   TextStyle? contentTextStyle,
 }) {
-  final Color? background =
-      (colorScheme == null || backgroundSchemeColor == null)
-          ? backgroundColor // might be null, then SDK theme defaults.
-          : FlexSubThemes.schemeColor(backgroundSchemeColor, colorScheme);
+  final Color? background = (colorScheme == null || backgroundSchemeColor == null)
+      ? backgroundColor // might be null, then SDK theme defaults.
+      : FlexSubThemes.schemeColor(backgroundSchemeColor, colorScheme);
 
-  final Color? foreground = (colorScheme != null &&
-          backgroundSchemeColor != null)
+  final Color? foreground = (colorScheme != null && backgroundSchemeColor != null)
       ? FlexSubThemes.schemeColorPair(backgroundSchemeColor, colorScheme)
       : background != null
-          ? ThemeData.estimateBrightnessForColor(background) == Brightness.light
-              ? Colors.black
-              : Colors.white
-          : null;
+      ? ThemeData.estimateBrightnessForColor(background) == Brightness.light
+            ? Colors.black
+            : Colors.white
+      : null;
 
   final Color? actionForeground = colorScheme != null
       ? FlexSubThemes.schemeColor(
@@ -93,10 +91,10 @@ SnackBarThemeData _snackBarTheme({
 
   final TextStyle? snackTextStyle = foreground != null
       ? contentTextStyle == null
-          ? ThemeData(
-              brightness: Brightness.light,
-            ).textTheme.titleMedium!.copyWith(color: foreground)
-          : contentTextStyle.copyWith(color: foreground)
+            ? ThemeData(
+                brightness: Brightness.light,
+              ).textTheme.titleMedium!.copyWith(color: foreground)
+            : contentTextStyle.copyWith(color: foreground)
       : contentTextStyle;
 
   return SnackBarThemeData(
@@ -111,8 +109,7 @@ SnackBarThemeData _snackBarTheme({
     actionTextColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
       return actionForeground ?? foreground?.withAlpha(0xDD) ?? Colors.grey;
     }),
-    disabledActionTextColor:
-        actionForeground?.withAlpha(0x11) ?? foreground?.withAlpha(0x11),
+    disabledActionTextColor: actionForeground?.withAlpha(0x11) ?? foreground?.withAlpha(0x11),
 
     // This is using same foreground as the text, but slightly muted from it
     // as the default should be, this just works with any resulting foreground

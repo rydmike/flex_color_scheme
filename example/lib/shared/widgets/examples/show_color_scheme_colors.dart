@@ -37,16 +37,13 @@ class ShowColorSchemeColors extends StatelessWidget {
   final bool showTitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // Return true if the color is dark, meaning it needs light text for contrast.
-  static bool _isDark(Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+  static bool _isDark(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(Color color, Color bg) =>
-      _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
+  static Color _onColor(Color color, Color bg) => _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +54,7 @@ class ShowColorSchemeColors extends StatelessWidget {
     final TextStyle headerStyle = theme.textTheme.titleMedium!;
 
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
@@ -85,17 +81,16 @@ class ShowColorSchemeColors extends StatelessWidget {
     }
 
     // Get effective background color.
-    final Color background =
-        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
+    final Color background = onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
 
     // Warning label for scaffold background when it uses to much blend.
     final String surfaceTooHigh = isDark
         ? _isLight(theme.colorScheme.surface)
-            ? '\nTOO HIGH'
-            : ''
+              ? '\nTOO HIGH'
+              : ''
         : _isDark(theme.colorScheme.surface)
-            ? '\nTOO HIGH'
-            : '';
+        ? '\nTOO HIGH'
+        : '';
 
     // Warning label for scaffold background when it uses to much blend.
     // final String backTooHigh = isDark

@@ -22,8 +22,8 @@ class ShowTonalPalette extends StatelessWidget {
     final Brightness brightness = theme.brightness;
     final bool isLight = brightness == Brightness.light;
 
-    final bool useMonochrome = themController.useMonoSurfacesLight && isLight ||
-        themController.useMonoSurfacesDark && !isLight;
+    final bool useMonochrome =
+        themController.useMonoSurfacesLight && isLight || themController.useMonoSurfacesDark && !isLight;
 
     final FlexSchemeData scheme = AppColor.scheme(themController);
 
@@ -32,18 +32,15 @@ class ShowTonalPalette extends StatelessWidget {
     final FlexSchemeColor colors = FlexSchemeColor.effective(
       scheme.light,
       themController.usedColors,
-      swapLegacy:
-          themController.swapLegacyColorsInM3 && scheme.light.swapOnMaterial3,
+      swapLegacy: themController.swapLegacyColorsInM3 && scheme.light.swapOnMaterial3,
       swapColors:
           (isLight && themController.swapPrimaryAndSecondaryLightColors) ||
-              (!isLight && themController.swapPrimaryAndSecondaryDarkColors),
+          (!isLight && themController.swapPrimaryAndSecondaryDarkColors),
       brightness: Brightness.light,
     );
 
     // Get the FlexTones setup
-    final FlexTones tones = FlexSchemeVariant
-        .values[themController.usedFlexToneSetup]
-        .tones(brightness);
+    final FlexTones tones = FlexSchemeVariant.values[themController.usedFlexToneSetup].tones(brightness);
 
     // Lists of ints that we need to draw the tonal palettes.
     List<int> primaryTonals = <int>[];
@@ -54,8 +51,7 @@ class ShowTonalPalette extends StatelessWidget {
     List<int> neutralVariantTonals = <int>[];
 
     // Which variant is being used?
-    final FlexSchemeVariant usedVariant =
-        FlexSchemeVariant.values[themController.usedFlexToneSetup];
+    final FlexSchemeVariant usedVariant = FlexSchemeVariant.values[themController.usedFlexToneSetup];
 
     // But error input dark mode colors also when we use toDark
     final FlexSchemeColor inputErrColor = isLight
@@ -63,8 +59,8 @@ class ShowTonalPalette extends StatelessWidget {
         : AppColor.scheme(themController).dark;
 
     // Input errorColors
-    final Color inputErrorColor = inputErrColor.error ??
-        (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
+    final Color inputErrorColor =
+        inputErrColor.error ?? (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
 
     // Are we using a Flutter SDK scheme? Otherwise use FlexTone.
     if (usedVariant.isFlutterScheme || !themController.useKeyColors) {
@@ -72,19 +68,12 @@ class ShowTonalPalette extends StatelessWidget {
       final DynamicScheme dynamicScheme = SeedColorScheme.buildDynamicScheme(
         brightness: brightness,
         primarySeedColor: colors.primary,
-        secondarySeedColor:
-            themController.useSecondary ? colors.secondary : null,
+        secondarySeedColor: themController.useSecondary ? colors.secondary : null,
         tertiarySeedColor: themController.useTertiary ? colors.tertiary : null,
         errorSeedColor: themController.useError ? inputErrorColor : null,
-        neutralSeedColor: isLight
-            ? themController.surfaceTintLight
-            : themController.surfaceTintDark,
-        neutralVariantSeedColor: isLight
-            ? themController.surfaceTintLight
-            : themController.surfaceTintDark,
-        variant: themController.useKeyColors
-            ? usedVariant
-            : FlexSchemeVariant.monochrome,
+        neutralSeedColor: isLight ? themController.surfaceTintLight : themController.surfaceTintDark,
+        neutralVariantSeedColor: isLight ? themController.surfaceTintLight : themController.surfaceTintDark,
+        variant: themController.useKeyColors ? usedVariant : FlexSchemeVariant.monochrome,
         contrastLevel: themController.dynamicContrastLevel,
         useExpressiveOnContainerColors: themController.expressiveOnContainer,
         respectMonochromeSeed: !themController.useLegacyMonochromeSeedBehavior,
@@ -105,15 +94,11 @@ class ShowTonalPalette extends StatelessWidget {
       final FlexCorePalette palettes = FlexCorePalette.fromSeeds(
         primary: colors.primary.value32bit,
         // Null if set to not use secondary, tertiary or error seed keys.
-        secondary:
-            themController.useSecondary ? colors.secondary.value32bit : null,
-        tertiary:
-            themController.useTertiary ? colors.tertiary.value32bit : null,
+        secondary: themController.useSecondary ? colors.secondary.value32bit : null,
+        tertiary: themController.useTertiary ? colors.tertiary.value32bit : null,
         error: themController.useError ? inputErrorColor.value32bit : null,
         // If custom surfaceTint is not null, use it as key for neutrals.
-        neutral: isLight
-            ? themController.surfaceTintLight?.value32bit
-            : themController.surfaceTintDark?.value32bit,
+        neutral: isLight ? themController.surfaceTintLight?.value32bit : themController.surfaceTintDark?.value32bit,
         neutralVariant: isLight
             ? themController.surfaceTintLight?.value32bit
             : themController.surfaceTintDark?.value32bit,
@@ -170,49 +155,42 @@ class ShowTonalPalette extends StatelessWidget {
           name: 'Primary',
           tonalPalette: primaryTonals,
           paletteType: FlexPaletteType.extended,
-          selectedColor: themController.useKeyColors &&
-                  toneController.hoverTonalPalette == TonalPalettes.primary
+          selectedColor: themController.useKeyColors && toneController.hoverTonalPalette == TonalPalettes.primary
               ? toneController.hoverColor
               : null,
         ),
         TonalPaletteColors(
           name: 'Secondary',
           tonalPalette: secondaryTonals,
-          selectedColor: themController.useKeyColors &&
-                  toneController.hoverTonalPalette == TonalPalettes.secondary
+          selectedColor: themController.useKeyColors && toneController.hoverTonalPalette == TonalPalettes.secondary
               ? toneController.hoverColor
               : null,
         ),
         TonalPaletteColors(
           name: 'Tertiary',
           tonalPalette: tertiaryTonals,
-          selectedColor: themController.useKeyColors &&
-                  toneController.hoverTonalPalette == TonalPalettes.tertiary
+          selectedColor: themController.useKeyColors && toneController.hoverTonalPalette == TonalPalettes.tertiary
               ? toneController.hoverColor
               : null,
         ),
         TonalPaletteColors(
           name: 'Error',
           tonalPalette: errorTonals,
-          selectedColor: themController.useKeyColors &&
-                  toneController.hoverTonalPalette == TonalPalettes.error
+          selectedColor: themController.useKeyColors && toneController.hoverTonalPalette == TonalPalettes.error
               ? toneController.hoverColor
               : null,
         ),
         TonalPaletteColors(
           name: 'Neutral',
           tonalPalette: neutralTonals,
-          selectedColor: themController.useKeyColors &&
-                  toneController.hoverTonalPalette == TonalPalettes.neutral
+          selectedColor: themController.useKeyColors && toneController.hoverTonalPalette == TonalPalettes.neutral
               ? toneController.hoverColor
               : null,
         ),
         TonalPaletteColors(
           name: 'Neutral variant',
           tonalPalette: neutralVariantTonals,
-          selectedColor: themController.useKeyColors &&
-                  toneController.hoverTonalPalette ==
-                      TonalPalettes.neutralVariant
+          selectedColor: themController.useKeyColors && toneController.hoverTonalPalette == TonalPalettes.neutralVariant
               ? toneController.hoverColor
               : null,
         ),

@@ -124,8 +124,7 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   final bool tintInteract = useTintedInteraction ?? false;
   final bool tintDisable = useTintedDisable ?? false;
   // Get selected color, defaults to primary.
-  final SchemeColor selectedBackgroundSchemeColor =
-      baseSchemeColor ?? SchemeColor.primary;
+  final SchemeColor selectedBackgroundSchemeColor = baseSchemeColor ?? SchemeColor.primary;
   final Color selectedBackground = FlexSubThemes.schemeColor(
     selectedBackgroundSchemeColor,
     colorScheme,
@@ -136,10 +135,8 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   );
   final Color selectedForeground = selectedForegroundSchemeColor != null
       ? FlexSubThemes.schemeColor(selectedForegroundSchemeColor, colorScheme)
-      : FlexSubThemes.schemeColorPair(
-          selectedBackgroundSchemeColor, colorScheme);
-  final SchemeColor borderDefault =
-      useM3 ? SchemeColor.outline : selectedBackgroundSchemeColor;
+      : FlexSubThemes.schemeColorPair(selectedBackgroundSchemeColor, colorScheme);
+  final SchemeColor borderDefault = useM3 ? SchemeColor.outline : selectedBackgroundSchemeColor;
   final Color borderColor = FlexSubThemes.schemeColor(
     borderSchemeColor ?? borderDefault,
     colorScheme,
@@ -149,16 +146,14 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = selectedBackground;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness);
 
   // Effective minimum button size.
   final Size effectiveMinButtonSize = minButtonSize ?? kButtonMinSize;
   // Effective border width.
   final double effectiveWidth = borderWidth ?? kThinBorderWidth;
   // Effective visual density.
-  final VisualDensity usedVisualDensity =
-      visualDensity ?? VisualDensity.adaptivePlatformDensity;
+  final VisualDensity usedVisualDensity = visualDensity ?? VisualDensity.adaptivePlatformDensity;
   return ToggleButtonsThemeData(
     textStyle: textStyle,
     borderWidth: effectiveWidth,
@@ -202,12 +197,8 @@ ToggleButtonsThemeData _toggleButtonsTheme({
       // based on theme setting, to do so this theme can accept a
       // VisualDensity property. Give it the same value that your theme
       // uses. This defaults to same value that ThemeData uses by default.
-      minWidth: effectiveMinButtonSize.width -
-          effectiveWidth * 2 +
-          usedVisualDensity.baseSizeAdjustment.dx,
-      minHeight: effectiveMinButtonSize.height -
-          effectiveWidth * 2 +
-          usedVisualDensity.baseSizeAdjustment.dy,
+      minWidth: effectiveMinButtonSize.width - effectiveWidth * 2 + usedVisualDensity.baseSizeAdjustment.dx,
+      minHeight: effectiveMinButtonSize.height - effectiveWidth * 2 + usedVisualDensity.baseSizeAdjustment.dy,
     ),
   );
 }

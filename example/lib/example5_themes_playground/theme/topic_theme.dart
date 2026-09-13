@@ -36,18 +36,17 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
     Color? navigationColor,
     Color? surfacesColor,
     Color? textsColor,
-  }) =>
-      TopicTheme(
-        generalColor: generalColor ?? this.generalColor,
-        colorsColor: colorsColor ?? this.colorsColor,
-        componentsColor: componentsColor ?? this.componentsColor,
-        controlsColor: controlsColor ?? this.controlsColor,
-        inputsColor: inputsColor ?? this.inputsColor,
-        barsColor: barsColor ?? this.barsColor,
-        navigationColor: navigationColor ?? this.navigationColor,
-        surfacesColor: surfacesColor ?? this.surfacesColor,
-        textsColor: textsColor ?? this.textsColor,
-      );
+  }) => TopicTheme(
+    generalColor: generalColor ?? this.generalColor,
+    colorsColor: colorsColor ?? this.colorsColor,
+    componentsColor: componentsColor ?? this.componentsColor,
+    controlsColor: controlsColor ?? this.controlsColor,
+    inputsColor: inputsColor ?? this.inputsColor,
+    barsColor: barsColor ?? this.barsColor,
+    navigationColor: navigationColor ?? this.navigationColor,
+    surfacesColor: surfacesColor ?? this.surfacesColor,
+    textsColor: textsColor ?? this.textsColor,
+  );
 
   /// Must override the lerp method.
   @override
