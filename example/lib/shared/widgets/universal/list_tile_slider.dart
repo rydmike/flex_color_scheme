@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A [ListTile] with a [Slider] either in [title] or in [subtitle]
 /// position that can never return null.

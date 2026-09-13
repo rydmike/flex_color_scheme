@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A ShapeBorder that can draw left and right side outline borders with
 /// different thickness and colors.

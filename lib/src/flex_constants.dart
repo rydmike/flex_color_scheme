@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
 import 'flex_sub_themes.dart' show FlexSubThemes; // For comment refs.

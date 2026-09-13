@@ -1,7 +1,7 @@
 import 'dart:async' show Timer;
 import 'dart:math' show Random;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'svg_asset_image.dart';
 

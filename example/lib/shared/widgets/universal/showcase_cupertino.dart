@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 // TODO(rydmike): Add a showcase to show most Cupertino widgets.
 // This is a preparation for adding a ColorScheme mapper for Cupertino theme.

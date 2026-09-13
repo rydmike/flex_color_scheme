@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:string_scanner/string_scanner.dart';
 
 import '../../../example5_themes_playground/theme/code_theme.dart';

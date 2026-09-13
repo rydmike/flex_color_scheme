@@ -1,8 +1,8 @@
 // Cupertino only for comment refs.
-import 'package:flutter/cupertino.dart'
+import 'package:cupertino_ui/cupertino_ui.dart'
     show CupertinoAlertDialog, CupertinoSwitch;
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'flex_adaptive.dart';
 import 'flex_color.dart' show FlexColor; // For comment refs.

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // The Shadcn features are still beta nd not included in test coverage.
 // coverage:ignore-file

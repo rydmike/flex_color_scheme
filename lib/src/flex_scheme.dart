@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart' show ColorScheme; // For comment refs.
+import 'package:material_ui/material_ui.dart' show ColorScheme; // For comment refs.
 
 import 'flex_color.dart' show FlexColor;
 import 'flex_color_scheme.dart';

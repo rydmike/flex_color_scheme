@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Widget using [ToggleButtons) that can be used to toggle a boolean value
 /// between false, null (undetermined) and true.

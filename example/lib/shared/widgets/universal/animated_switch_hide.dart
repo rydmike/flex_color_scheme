@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// This widget uses a boolean condition to show/hide the [child] widget.
 ///

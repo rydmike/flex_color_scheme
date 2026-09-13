@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'flex_extensions.dart';
 import 'flex_scheme.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A custom [ListTile] that has a built-in animated custom [trailing] action
 /// that animate expands to show the [child] when clicked.

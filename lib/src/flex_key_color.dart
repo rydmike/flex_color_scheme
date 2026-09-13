@@ -1,6 +1,6 @@
 import 'package:flex_seed_scheme/flex_seed_scheme.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
 import 'flex_scheme.dart' show FlexScheme;

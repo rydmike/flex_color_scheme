@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show ColorScheme; // For comment refs.
+import 'package:material_ui/material_ui.dart' show ColorScheme; // For comment refs.
 import 'package:meta/meta.dart' show immutable, internal;
 
 import 'flex_surface_mode.dart';

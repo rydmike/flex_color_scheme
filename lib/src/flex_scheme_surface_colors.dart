@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'flex_alpha_values.dart';
 import 'flex_color.dart' show FlexColor;

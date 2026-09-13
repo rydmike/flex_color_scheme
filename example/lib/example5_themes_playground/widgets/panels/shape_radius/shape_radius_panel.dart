@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../../shared/controllers/theme_controller.dart';
 import '../../../../shared/model/adaptive_response.dart';

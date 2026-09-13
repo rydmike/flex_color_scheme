@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const Size _kDialogSize = Size(570, 850);
 const double _kWidthForFullScreenDialog = 720;

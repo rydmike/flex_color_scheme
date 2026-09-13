@@ -1,5 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A [ThemeExtension] for semantic theme topic group color properties.
 class TopicTheme extends ThemeExtension<TopicTheme> {

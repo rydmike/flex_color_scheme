@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show ThemeData; // For comment refs.
+import 'package:material_ui/material_ui.dart' show ThemeData; // For comment refs.
 
 import '../flex_color_scheme.dart' show FlexScheme; // For comment refs.
 import 'flex_color.dart' show FlexColor; // For comment refs.

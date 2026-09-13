@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart'; // For comment refs.
+import 'package:cupertino_ui/cupertino_ui.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart'; // For comment refs.
+import 'package:material_ui/material_ui.dart'; // For comment refs.
 
 import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
 import 'flex_sub_themes_data.dart'; // For comment refs.

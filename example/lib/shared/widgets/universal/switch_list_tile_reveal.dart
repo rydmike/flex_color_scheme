@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A custom [SwitchListTile] that has a built-in animated custom action
 /// as a part of [title] that reveals the [subtitleReveal] when clicked.

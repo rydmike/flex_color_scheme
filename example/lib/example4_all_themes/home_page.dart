@@ -1,5 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../example5_themes_playground/widgets/panels/color_scheme/flex_tone_config_popup_menu.dart';
 import '../shared/const/app.dart';
