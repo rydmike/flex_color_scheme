@@ -6,6 +6,8 @@ import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flex_color_scheme/src/flex_extensions.dart';
 import 'package:flex_color_scheme/src/flex_sub_themes_data.dart';
 import 'package:flutter/foundation.dart';
+import 'package:material_ui/material_ui.dart' show Colors;
+import 'package:material_ui/material_ui.dart' show Colors;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -1159,36 +1161,6 @@ abstract final class FlexSubThemes {
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  ///
-  /// * [useFlutterDefaults]
-  /// Set to true to use Flutter SDK defaults for [BottomNavigationBar]
-  /// theme when its color, size and text style properties are undefined,
-  /// instead of using [FlexColorScheme]'s own defaults.
-  ///
-  /// Recommend keeping it **false** for a more color harmonized component
-  /// theme starting point. This flag may be helpful if you want to create
-  /// custom sub-themes starting from less opinionated settings.
-  ///
-  /// When all required properties are undefined and flag is false or true,
-  /// the effective default styles for undefined inputs become:
-  ///
-  /// ```text
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     background
-  /// - selected icon    primary        light: theme primary, dark: secondary
-  /// - Selected label   primary        light: theme primary, dark: secondary
-  /// - unselected icon  onSurface      light: black54, dark: white70
-  /// - unSelected label onSurface      light: black54, dark: white70
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedIcon] and
-  /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedLabel] are true,
-  /// respectively, this also applies to undefined color inputs.
-  ///
-  /// When muted unselected options are true, the difference to Flutter
-  /// default for unselected items is subtle, FCS has a bit more contrast.
   static BottomNavigationBarThemeData bottomNavigationBarTheme({
     /// Typically you would pass the same [ColorScheme] that is also used in
     /// your [ThemeData] definition.
@@ -1293,20 +1265,6 @@ abstract final class FlexSubThemes {
     /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
     /// [Colors.black54] in light mode and [Colors.white70] in dark.
     SchemeColor? unselectedIconSchemeColor,
-
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // An alternative unselected item color.
-    //
-    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-    // before its normal default fallbacks.
-    //
-    // The color is typically used to provide the color created by blended or
-    // tinted text theme, when it is being used by FlexColorScheme as an
-    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-    //
-    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-    // a blended TextTheme is being used.
-    // final Color? altUnselectedColor,
 
     /// If true, the unselected icon in the [BottomNavigationBar] use a more
     /// muted color version of the color defined by
@@ -1421,44 +1379,6 @@ abstract final class FlexSubThemes {
     ///
     /// If undefined, defaults to true.
     bool? useMaterial3,
-
-    /// Set to true to use Flutter SDK defaults for [BottomNavigationBar]
-    /// theme when its color, size and text style properties are undefined,
-    /// instead of using [FlexColorScheme]'s own defaults.
-    ///
-    /// Recommend keeping it **false** for a more color harmonized component
-    /// theme starting point. This flag may be helpful if you want to create
-    /// custom sub-themes starting from less opinionated settings.
-    ///
-    /// When all required properties are undefined and flag is false or true,
-    /// the effective default styles for undefined inputs become:
-    ///
-    /// ```text
-    ///                    FCS defaults   Flutter defaults
-    /// useFlutterDefaults false          true
-    /// - background       background     background
-    /// - selected icon    primary        light: theme primary, dark: secondary
-    /// - Selected label   primary        light: theme primary, dark: secondary
-    /// - unselected icon  onSurface      light: black54, dark: white70
-    /// - unSelected label onSurface      light: black54, dark: white70
-    /// ```
-    /// FCS further applies both an alpha blend and slight opacity to
-    /// unselected icon and unselected label, but only if
-    /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedIcon] and
-    /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedLabel] are true,
-    /// respectively, this also applies to undefined color inputs.
-    ///
-    /// When muted unselected options are true, the difference to Flutter
-    /// default for unselected items is subtle, FCS has a bit more contrast.
-    @Deprecated(
-      'The `useFlutterDefaults` is deprecated, it no longer has any '
-      'function and will be removed in v9. FlexColorScheme in M3 mode '
-      'defaults to using mostly Flutter defaults styles. '
-      'For other configurations modify the theme as desired. '
-      'In M2 mode FCS will continue to use its own opinionated defaults for '
-      'as long as M2 exists.',
-    )
-    bool? useFlutterDefaults,
   }) => _bottomNavigationBarTheme(
     colorScheme: colorScheme,
     labelTextStyle: labelTextStyle,
@@ -1482,8 +1402,6 @@ abstract final class FlexSubThemes {
     unselectedAlphaBlend: unselectedAlphaBlend,
     unselectedAlpha: unselectedAlpha,
     useMaterial3: useMaterial3,
-    // ignore: legacy code
-    useFlutterDefaults: useFlutterDefaults,
   );
 
   /// A theme helper for [BottomSheetThemeData] for customizing the theme
@@ -5365,50 +5283,6 @@ abstract final class FlexSubThemes {
   ///
   /// This setting is not exposed via [FlexSubThemesData], but can be if
   /// needed later.
-  ///
-  /// * [useMaterial3]
-  /// A temporary flag used to disable Material-3 design and use legacy
-  /// Material-2 design instead. Material-3 design is the default.
-  /// Material-2 will be deprecated in Flutter.
-  ///
-  /// The M2/M3 SDK defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
-  ///
-  /// * [useFlutterDefaults]
-  /// Set to true to use Flutter SDK defaults for [NavigationBar]
-  /// theme when its properties are undefined (null), instead of using
-  /// FlexColorScheme's own opinionated defaults.
-  ///
-  /// Recommend keeping it **false** for a more color harmonized component
-  /// theme starting point. This flag can be helpful if you want to create
-  /// custom sub-themes starting from less opinionated settings.
-  ///
-  /// When all required properties are undefined and flag is false or true,
-  /// the effective default styles for undefined inputs become:
-  ///
-  /// ```text
-  ///                    FCS defaults   M2 defaults       useMaterial3:true
-  /// useFlutterDefaults false          true              true
-  /// results in:
-  ///
-  /// - background       surfaceVariant surface with      surface with
-  ///                                   onSurface overlay primary overlay
-  ///                    elev 3         elev 0            elev 3
-  /// - height           80             80                80
-  /// - indicator        primary op24%  secondary op24%   secondaryContainer
-  /// - selected icon    primary        onSurface         onSecondaryContainer
-  /// - unselected icon  onSurface      onSurface         onSurfaceVariant
-  /// - Selected label   primary        onSurface         onSurface
-  /// - unSelected label onSurface      onSurface         onSurfaceVariant
-  /// - TextTheme        labelMedium    overline          labelMedium
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [FlexSubThemesData.navigationBarMutedUnselectedIcon] and
-  /// [FlexSubThemesData.navigationBarMutedUnselectedLabel] are true
-  /// respectively, this also applies to undefined color inputs.
   static NavigationBarThemeData navigationBarTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required ColorScheme colorScheme,
@@ -5458,21 +5332,6 @@ abstract final class FlexSubThemes {
     /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
     /// [ColorScheme.onSurfaceVariant] in M3 mode.
     SchemeColor? unselectedLabelSchemeColor,
-
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    //
-    // An alternative unselected item color.
-    //
-    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-    // before its normal default fallbacks.
-    //
-    // The color is typically used to provide the color created by blended or
-    // tinted text theme, when it is being used by FlexColorScheme as an
-    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-    //
-    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-    // a blended TextTheme is being used.
-    // final Color? altUnselectedColor,
 
     /// If true, the unselected label in the [NavigationBar] use a more
     /// muted color version of the color defined by
@@ -5624,62 +5483,6 @@ abstract final class FlexSubThemes {
     /// This setting is not exposed via [FlexSubThemesData], but can be if
     /// needed later.
     int unselectedAlpha = kUnselectedAlphaBlend,
-
-    /// A temporary flag used to disable Material-3 design and use legacy
-    /// Material-2 design instead. Material-3 design is the default.
-    /// Material-2 will be deprecated in Flutter.
-    ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
-    /// defined, if defined they keep their defined values.
-    ///
-    /// If undefined, defaults to true.
-    @Deprecated(
-      'The useMaterial3 flag no longer has any function in this '
-      'component theme and is deprecated here. It will be removed in v9',
-    )
-    bool? useMaterial3,
-
-    /// Set to true to use Flutter SDK defaults for [NavigationBar]
-    /// theme when its properties are undefined (null), instead of using
-    /// FlexColorScheme's own opinionated defaults.
-    ///
-    /// Recommend keeping it **false** for a more color harmonized component
-    /// theme starting point. This flag can be helpful if you want to create
-    /// custom sub-themes starting from less opinionated settings.
-    ///
-    /// When all required properties are undefined and flag is false or true,
-    /// the effective default styles for undefined inputs become:
-    ///
-    /// ```text
-    ///                    FCS defaults   M2 defaults       useMaterial3:true
-    /// useFlutterDefaults false          true              true
-    /// results in:
-    ///
-    /// - background       surfaceVariant surface with      surface with
-    ///                                   onSurface overlay primary overlay
-    ///                    elev 3         elev 0            elev 3
-    /// - height           80             80                80
-    /// - indicator        primary op24%  secondary op24%   secondaryContainer
-    /// - selected icon    primary        onSurface         onSecondaryContainer
-    /// - unselected icon  onSurface      onSurface         onSurfaceVariant
-    /// - Selected label   primary        onSurface         onSurface
-    /// - unSelected label onSurface      onSurface         onSurfaceVariant
-    /// - TextTheme        labelMedium    overline          labelMedium
-    /// ```
-    /// FCS further applies both an alpha blend and slight opacity to
-    /// unselected icon and unselected label, but only if
-    /// [FlexSubThemesData.navigationBarMutedUnselectedIcon] and
-    /// [FlexSubThemesData.navigationBarMutedUnselectedLabel] are true
-    /// respectively, this also applies to undefined color inputs.
-    @Deprecated(
-      'The `useFlutterDefaults` is deprecated, it no longer has any '
-      'function and will be removed in v9. FlexColorScheme in M3 mode '
-      'defaults to using mostly Flutter defaults styles. '
-      'For other configurations modify the theme as desired. '
-      'In M2 mode FCS will continue to use its own opinionated defaults for '
-      'as long as M2 exists.',
-    )
-    bool? useFlutterDefaults,
   }) => _navigationBarTheme(
     colorScheme: colorScheme,
     labelTextStyle: labelTextStyle,
@@ -5705,10 +5508,6 @@ abstract final class FlexSubThemes {
     indicatorRadius: indicatorRadius,
     unselectedAlphaBlend: unselectedAlphaBlend,
     unselectedAlpha: unselectedAlpha,
-    // ignore: legacy support.
-    useMaterial3: useMaterial3,
-    // ignore: legacy support.
-    useFlutterDefaults: useFlutterDefaults,
   );
 
   /// An opinionated [NavigationDrawerThemeData] theme with simpler API.
@@ -5846,22 +5645,6 @@ abstract final class FlexSubThemes {
     /// [backgroundSchemeColor].
     SchemeColor? unselectedItemSchemeColor,
 
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    //
-    // An alternative unselected item color.
-    //
-    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-    // before its normal default fallbacks.
-    //
-    // The color is typically used to provide the color created by blended or
-    // tinted text theme, when it is being used by FlexColorScheme as an
-    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-    //
-    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-    // a blended TextTheme is being used.
-    // final Color? altUnselectedColor,
-
-    /// Overrides the default value of [NavigationDrawer.shadowColor].
     Color? shadowColor,
 
     /// Overrides the default value of [NavigationDrawer.surfaceTintColor].
@@ -6173,52 +5956,6 @@ abstract final class FlexSubThemes {
   /// If not defined, defaults to M3 spec default value 256 dp.
   ///
   /// Flutter M2 and M3 use 256 dp as default.
-  ///
-  /// * [useMaterial3] **Deprecated**
-  /// A temporary flag used to disable Material-3 design and use legacy
-  /// Material-2 design instead. Material-3 design is the default.
-  /// Material-2 will be deprecated in Flutter.
-  ///
-  /// The M2/M3 SDK defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
-  ///
-  /// * [useFlutterDefaults] **Deprecated**
-  /// Set to true to use Flutter SDK defaults for [NavigationRail]
-  /// theme when its properties are undefined (null) instead of using
-  /// [FlexColorScheme]'s own defaults.
-  ///
-  /// Recommend keeping it **false** for a more color harmonized component
-  /// theme starting point. This flag may be helpful if you want to create
-  /// custom sub-themes starting from less opinionated settings.
-  ///
-  /// Differences when flag is false versus true are:
-  ///
-  /// ```text
-  ///                    FCS defaults    M2 defaults      useMaterial3:true
-  /// useFlutterDefaults false           true             true
-  /// results in:
-  ///
-  /// - background       background      surface          surface
-  /// - indicator        primary op24%   secondary op24%  secondaryContainer
-  /// - selected icon    primary         primary          onSecondaryContainer
-  /// - unselected icon  onSurface       onSurface op64%  onSurfaceVariant
-  /// - selected label   primary         primary          onSurface
-  /// - unSelected label onSurface       onSurface op64%  onSurface
-  /// - TextTheme        labelMedium     bodyText1        labelMedium
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [FlexSubThemesData.navigationRailMutedUnselectedIcon] and
-  /// are [FlexSubThemesData.navigationRailMutedUnselectedLabel] true
-  /// respectively, this also applies to undefined color inputs.
-  ///
-  /// If you want a style that is consistent by default across
-  /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
-  /// prefer keeping this setting false.
-  ///
-  /// Defaults to null.
   static NavigationRailThemeData navigationRailTheme({
     /// Typically the same [ColorScheme] that is also use for your [ThemeData].
     required ColorScheme colorScheme,
@@ -6283,21 +6020,6 @@ abstract final class FlexSubThemes {
     /// should be onSurfaceVariant based on M3 specification
     /// https://m3.material.io/components/navigation-rail/specs
     SchemeColor? unselectedLabelSchemeColor,
-
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    //
-    // An alternative unselected item color.
-    //
-    // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-    // before its normal default fallbacks.
-    //
-    // The color is typically used to provide the color created by blended or
-    // tinted text theme, when it is being used by FlexColorScheme as an
-    // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-    //
-    // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-    // a blended TextTheme is being used.
-    // final Color? altUnselectedColor,
 
     /// If true, the unselected label in the [NavigationRail] use a more
     /// muted color version of the color defined by
@@ -6502,64 +6224,6 @@ abstract final class FlexSubThemes {
     ///
     /// Flutter M2 and M3 use 256 dp as default.
     double? minExtendedWidth,
-
-    /// A temporary flag used to disable Material-3 design and use legacy
-    /// Material-2 design instead. Material-3 design is the default.
-    /// Material-2 will be deprecated in Flutter.
-    ///
-    /// The M2/M3 SDK defaults will only be used for properties that are not
-    /// defined, if defined they keep their defined values.
-    ///
-    /// If undefined, defaults to true.
-    @Deprecated(
-      'The useMaterial3 flag no longer has any function in this '
-      'component theme and is deprecated. It will be removed in v9.',
-    )
-    bool? useMaterial3,
-
-    /// Set to true to use Flutter SDK defaults for [NavigationRail]
-    /// theme when its properties are undefined (null) instead of using
-    /// [FlexColorScheme]'s own defaults.
-    ///
-    /// Recommend keeping it **false** for a more color harmonized component
-    /// theme starting point. This flag may be helpful if you want to create
-    /// custom sub-themes starting from less opinionated settings.
-    ///
-    /// Differences when flag is false versus true are:
-    ///
-    /// ```text
-    ///                    FCS defaults    M2 defaults      useMaterial3:true
-    /// useFlutterDefaults false           true             true
-    /// results in:
-    ///
-    /// - background       background      surface          surface
-    /// - indicator        primary op24%   secondary op24%  secondaryContainer
-    /// - selected icon    primary         primary          onSecondaryContainer
-    /// - unselected icon  onSurface       onSurface op64%  onSurfaceVariant
-    /// - selected label   primary         primary          onSurface
-    /// - unSelected label onSurface       onSurface op64%  onSurface
-    /// - TextTheme        labelMedium     bodyText1        labelMedium
-    /// ```
-    /// FCS further applies both an alpha blend and slight opacity to
-    /// unselected icon and unselected label, but only if
-    /// [FlexSubThemesData.navigationRailMutedUnselectedIcon] and
-    /// are [FlexSubThemesData.navigationRailMutedUnselectedLabel] true
-    /// respectively, this also applies to undefined color inputs.
-    ///
-    /// If you want a style that is consistent by default across
-    /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
-    /// prefer keeping this setting false.
-    ///
-    /// Defaults to null.
-    @Deprecated(
-      'The `useFlutterDefaults` is deprecated, it no longer has any '
-      'function and will be removed in v9. FlexColorScheme in M3 mode '
-      'defaults to using mostly Flutter defaults styles. '
-      'For other configurations modify the theme as desired. '
-      'In M2 mode FCS will continue to use its own opinionated defaults for '
-      'as long as M2 exists.',
-    )
-    bool? useFlutterDefaults,
   }) => _navigationRailTheme(
     colorScheme: colorScheme,
     labelTextStyle: labelTextStyle,
@@ -6586,10 +6250,6 @@ abstract final class FlexSubThemes {
     unselectedAlpha: unselectedAlpha,
     minWidth: minWidth,
     minExtendedWidth: minExtendedWidth,
-    // ignore: legacy support.
-    useMaterial3: useMaterial3,
-    // ignore: legacy support.
-    useFlutterDefaults: useFlutterDefaults,
   );
 
   /// An opinionated [OutlinedButtonThemeData] theme.
@@ -9532,60 +9192,5 @@ abstract final class FlexSubThemes {
     margin: margin,
     waitDuration: waitDuration,
     showDuration: showDuration,
-  );
-
-  /// Deprecated, use [bottomNavigationBarTheme] instead.
-  @Deprecated(
-    'Use FlexSubThemes.bottomNavigationBarTheme instead. This '
-    'function has been renamed to use the correct name that all other '
-    'component theme helpers use, ending with "Theme". This deprecated '
-    'pass-through version will be removed in FlexColorScheme 9.0.0.',
-  )
-  static BottomNavigationBarThemeData bottomNavigationBar({
-    required ColorScheme colorScheme,
-    TextStyle? labelTextStyle,
-    double? selectedLabelSize,
-    double? unselectedLabelSize,
-    SchemeColor? selectedLabelSchemeColor,
-    SchemeColor? unselectedLabelSchemeColor,
-    bool? mutedUnselectedLabel,
-    double? selectedIconSize,
-    double? unselectedIconSize,
-    SchemeColor? selectedIconSchemeColor,
-    SchemeColor? unselectedIconSchemeColor,
-    bool? mutedUnselectedIcon,
-    SchemeColor? backgroundSchemeColor,
-    double? opacity,
-    double? elevation,
-    bool? showSelectedLabels,
-    bool? showUnselectedLabels,
-    BottomNavigationBarType? type,
-    BottomNavigationBarLandscapeLayout? landscapeLayout,
-    int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
-    int unselectedAlpha = kUnselectedAlphaBlend,
-    bool? useFlutterDefaults,
-  }) => _bottomNavigationBarTheme(
-    colorScheme: colorScheme,
-    labelTextStyle: labelTextStyle,
-    selectedLabelSize: selectedLabelSize,
-    unselectedLabelSize: unselectedLabelSize,
-    selectedLabelSchemeColor: selectedLabelSchemeColor,
-    unselectedLabelSchemeColor: unselectedLabelSchemeColor,
-    mutedUnselectedLabel: mutedUnselectedLabel,
-    selectedIconSize: selectedIconSize,
-    unselectedIconSize: unselectedIconSize,
-    selectedIconSchemeColor: selectedIconSchemeColor,
-    unselectedIconSchemeColor: unselectedIconSchemeColor,
-    mutedUnselectedIcon: mutedUnselectedIcon,
-    backgroundSchemeColor: backgroundSchemeColor,
-    opacity: opacity,
-    elevation: elevation,
-    showSelectedLabels: showSelectedLabels,
-    showUnselectedLabels: showUnselectedLabels,
-    type: type,
-    landscapeLayout: landscapeLayout,
-    unselectedAlphaBlend: unselectedAlphaBlend,
-    unselectedAlpha: unselectedAlpha,
-    useFlutterDefaults: useFlutterDefaults,
   );
 }

@@ -25,8 +25,6 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -44,10 +42,7 @@ void main() {
         fcs.toTheme.tabBarTheme.labelColor,
         equals(fcs.toTheme.colorScheme.onSurfaceVariant),
       );
-      // We get fixed blend color for blended TextTheme in light mode.
-      // It is more blended than the onSurface color in light mode, when
-      // onSurface is max blended.
-      // Oct 15, 2024: Since blendTextTheme is deprecated, this test is: false
+      // blendTextTheme was removed in 9.0; text is not extra-blended vs onSurface.
       expect(
         fcsScheme.onSurface.red8bit > fcs.toTheme.textTheme.displayLarge!.color!.red8bit,
         equals(false),
@@ -65,8 +60,6 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -84,10 +77,7 @@ void main() {
         fcs.toTheme.tabBarTheme.labelColor,
         equals(fcs.toTheme.colorScheme.onSurfaceVariant),
       );
-      // We get fixed blend color for blended TextTheme in dark mode.
-      // It is less blended than the onSurface color in dark mode, when
-      // onSurface is max blended.
-      // Oct 15, 2024: Since blendTextTheme is deprecated, this test is: false
+      // blendTextTheme was removed in 9.0; text is not extra-blended vs onSurface.
       expect(
         fcsScheme.onSurface.red8bit < fcs.toTheme.textTheme.displayLarge!.color!.red8bit,
         equals(false),
@@ -105,8 +95,6 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -142,8 +130,6 @@ void main() {
           appBarBackgroundSchemeColor: SchemeColor.secondaryContainer,
           tabBarIndicatorSchemeColor: SchemeColor.inversePrimary,
           tabBarItemSchemeColor: SchemeColor.onSurfaceVariant,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 40,
         ),
@@ -177,8 +163,6 @@ void main() {
         ),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondary,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -199,8 +183,6 @@ void main() {
         appBarBackground: const Color(0xFF3DA3C2),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.secondary,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -220,8 +202,6 @@ void main() {
         ),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.tertiary,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -242,8 +222,6 @@ void main() {
         appBarBackground: const Color(0xFF30454C),
         subThemesData: const FlexSubThemesData(
           appBarBackgroundSchemeColor: SchemeColor.tertiary,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),
@@ -265,8 +243,6 @@ void main() {
           navigationRailIndicatorSchemeColor: SchemeColor.onTertiary,
           navigationBarIndicatorOpacity: 0.8,
           navigationBarIndicatorSchemeColor: SchemeColor.primaryContainer,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
           blendOnColors: true,
           blendOnLevel: 25,
         ),

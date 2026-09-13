@@ -347,13 +347,6 @@ String generateThemeDartCode(ThemeController controller) {
   final String blendDarkOnColors = controller.blendDarkOnColors
       ? '      blendOnColors: ${controller.blendDarkOnColors},\n'
       : '';
-  // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-  // final String blendLightTextTheme = controller.blendLightTextTheme
-  //     ? '      blendTextTheme: ${controller.blendLightTextTheme},\n'
-  //     : '';
-  // final String blendDarkTextTheme = controller.blendDarkTextTheme
-  //     ? '      blendTextTheme: ${controller.blendDarkTextTheme},\n'
-  //     : '';
   final String useMaterial3Typography = controller.useMaterial3Typography != null
       ? '      useMaterial3Typography: ${controller.useMaterial3Typography},\n'
       : '';
@@ -1434,8 +1427,6 @@ String generateThemeDartCode(ThemeController controller) {
             '$scaffoldBackgroundLightBaseColor'
             '$scaffoldBackgroundLightSchemeColor'
             //
-            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-            // '$blendLightTextTheme'
             '$useMaterial3Typography'
             '$useM2StyleDividerInM3'
             //
@@ -1740,8 +1731,6 @@ String generateThemeDartCode(ThemeController controller) {
             '$scaffoldBackgroundDarkBaseColor'
             '$scaffoldBackgroundDarkSchemeColor'
             //
-            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-            // '$blendDarkTextTheme'
             '$useMaterial3Typography'
             '$useM2StyleDividerInM3'
             //

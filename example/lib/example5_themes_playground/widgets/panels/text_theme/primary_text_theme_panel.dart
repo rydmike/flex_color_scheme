@@ -38,7 +38,7 @@ class _PrimaryTextThemePanelState extends State<PrimaryTextThemePanel> {
       children: <Widget>[
         const SizedBox(height: 8),
         UseMaterial3Typography(controller: widget.controller),
-        UseTinted3TextTheme(controller: widget.controller),
+        const UseTinted3TextTheme(),
         const Divider(),
         UseAppFontSwitchLisTile(controller: widget.controller),
         SwitchListTile(

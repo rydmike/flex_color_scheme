@@ -49,12 +49,6 @@ class FlexSchemeOnColors with Diagnosticable {
     this.onInverseSurface,
     required this.onError,
     this.onErrorContainer,
-    @Deprecated(
-      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    this.onBackground,
   });
 
   /// A color that is clearly legible when drawn on primary color.
@@ -107,15 +101,6 @@ class FlexSchemeOnColors with Diagnosticable {
   /// A color that is clearly legible when drawn on inverseSurface color.
   final Color? onInverseSurface;
 
-  /// A color that is clearly legible when drawn on background color also used
-  /// as on color for scaffold background color.
-  @Deprecated(
-    'This color was deprecated in FCS 8.0 because Flutter 3.22 '
-    'deprecated the color. '
-    'It no longer has any function in FCS v8 and will be removed in v9.',
-  )
-  final Color? onBackground;
-
   /// A color that is clearly legible when drawn on error color.
   final Color onError;
 
@@ -167,36 +152,6 @@ class FlexSchemeOnColors with Diagnosticable {
     int inverseSurfaceAlpha = 0,
     int errorAlpha = 0,
     int errorContainerAlpha = 0,
-    @Deprecated(
-      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? background,
-    @Deprecated(
-      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? onBackground,
-    @Deprecated(
-      'This property was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the related color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    int backgroundAlpha = 0,
-    @Deprecated(
-      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? surfaceVariant,
-    @Deprecated(
-      'This property was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the related color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    int surfaceVariantAlpha = 0,
   }) {
     final bool useM3 = useMaterial3 ?? true;
     // Use optional surfaceTint, with fallback to primary.
@@ -352,12 +307,6 @@ class FlexSchemeOnColors with Diagnosticable {
     Color? onInverseSurface,
     Color? onError,
     Color? onErrorContainer,
-    @Deprecated(
-      'This color was deprecated in FCS 8.0 because Flutter 3.22 '
-      'deprecated the color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? onBackground,
   }) {
     return FlexSchemeOnColors(
       onPrimary: onPrimary ?? this.onPrimary,

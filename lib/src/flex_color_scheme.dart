@@ -546,19 +546,6 @@ class FlexColorScheme with Diagnosticable {
     this.subThemesData,
     this.useMaterial3 = true,
     this.extensions,
-    //
-    @Deprecated(
-      'Use FlexColorScheme.surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    this.background,
-    @Deprecated(
-      'Use FlexColorScheme.onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    this.onBackground,
   }) : assert(appBarElevation == null || appBarElevation >= 0.0, 'AppBar elevation must be >= 0 or null.'),
        assert(
          bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
@@ -1387,37 +1374,6 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// To obtain an extension, use ThemeData.of(context).extension.
   final Iterable<ThemeExtension<dynamic>>? extensions;
-
-  /// A color that typically appears behind scrollable content.
-  ///
-  /// The color is applied to [ThemeData.canvasColor] and
-  /// ThemeData.backgroundColor, it is used eg by menu [Drawer] and by all
-  /// [Material] of type [MaterialType.canvas].
-  ///
-  /// If no value is given, and if there is no [colorScheme] defined, it
-  /// defaults to [FlexColor.materialLightBackground] if brightness is light,
-  /// and to [FlexColor.materialDarkBackground] if brightness is dark.
-  @Deprecated(
-    'Use FlexColorScheme.surface instead. It is deprecated '
-    'because Flutter 3.22 deprecated this ColorScheme color. '
-    'It no longer has any function in FCS v8 and will be removed in v9.',
-  )
-  final Color? background;
-
-  /// A color that is clearly legible when drawn on background color.
-  ///
-  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-  /// background and onBackground is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, the on color is derived from the brightness of the background
-  /// color, and will be be black if it is light and white if it is dark.
-  @Deprecated(
-    'Use FlexColorScheme.onSurface instead. It is deprecated '
-    'because Flutter 3.22 deprecated this ColorScheme color. '
-    'It no longer has any function in FCS v8 and will be removed in v9.',
-  )
-  final Color? onBackground;
 
   //****************************************************************************
   //
@@ -2330,7 +2286,7 @@ class FlexColorScheme with Diagnosticable {
     /// * [BottomAppBarTheme] for [BottomAppBar] via
     ///   [FlexSubThemes.bottomAppBarTheme].
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [FlexSubThemes.bottomNavigationBar].
+    ///   [FlexSubThemes.bottomNavigationBarTheme].
     /// * [BottomSheetThemeData] for [BottomSheet] via
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
@@ -2850,50 +2806,6 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     Iterable<ThemeExtension<dynamic>>? extensions,
-
-    /// **Deprecated:**
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and was also before
-    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
-    /// Material-2 used eg by menu [Drawer]. It was then also used by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this was also an override color for the color
-    /// that would have been used based on mode defined by property
-    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
-    /// it overrode the same color in it as well.
-    ///
-    /// Defaults to null.
-    @Deprecated(
-      'Use surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? background,
-
-    /// **Deprecated:**
-    /// A color that is clearly legible when drawn on `background` color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `background` and `onBackground` is recommended.
-    ///
-    /// When using this factory, this was an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
-    /// or when using pre-defined color scheme based [FlexScheme] and its
-    /// `scheme` property, including any used blend logic. If a [colorScheme]
-    /// was provided with this corresponding color defined, this color property
-    /// also overrode the same color in it as well.
-    ///
-    /// You used this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    @Deprecated(
-      'Use onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? onBackground,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7');
@@ -4435,7 +4347,7 @@ class FlexColorScheme with Diagnosticable {
     /// * [BottomAppBarTheme] for [BottomAppBar] via
     ///   [FlexSubThemes.bottomAppBarTheme].
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [FlexSubThemes.bottomNavigationBar].
+    ///   [FlexSubThemes.bottomNavigationBarTheme].
     /// * [BottomSheetThemeData] for [BottomSheet] via
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
@@ -4955,51 +4867,6 @@ class FlexColorScheme with Diagnosticable {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     Iterable<ThemeExtension<dynamic>>? extensions,
-
-    /// **Deprecated:**
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and was also before
-    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
-    /// Material-2 used eg by menu [Drawer]. It was then also used by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this was also an override color for the color
-    /// that would have been used based on mode defined by property
-    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
-    /// it overrode the same color in it as well.
-    ///
-    /// Defaults to null.
-    @Deprecated(
-      'Use surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? background,
-
-    /// **Deprecated:**
-    /// A color that is clearly legible when drawn on [background] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this was an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
-    /// or when using pre-defined color scheme based [FlexScheme] and its
-    /// `scheme` property, including any used blend logic. If a [colorScheme]
-    /// was provided with this corresponding color defined, this color property
-    /// also overrode the same color in it as well.
-    ///
-    /// You used this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    @Deprecated(
-      'Use onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? onBackground,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
@@ -5604,7 +5471,6 @@ class FlexColorScheme with Diagnosticable {
   //
   //  * comfortablePlatformDensity
   //  * themedSystemNavigationBar
-  //  * createPrimarySwatch
   //
   //****************************************************************************
 
@@ -5997,92 +5863,6 @@ class FlexColorScheme with Diagnosticable {
       // Bottom system navigation bar icon or swipe bar navigator color.
       systemNavigationBarIconBrightness: systemNavigationBarIconBrightness,
     );
-  }
-
-  /// Create a primary Material color swatch from a given [color].
-  ///
-  /// This function is since version 5.0.0 no longer used by FlexColorScheme.
-  /// In previous version it was used by [FlexColorScheme.toTheme] to provide
-  /// [ColorScheme.primary] matching colors for [ThemeData.primaryColorLight],
-  /// [ThemeData.primaryColorDark] and [ThemeData.secondaryHeaderColor].
-  ///
-  /// Since algorithm does not produce a correct [MaterialColor], it did not
-  /// work so well if the provided color was not of roughly a mid point 500
-  /// index equivalent. So it worked well for light theme mode, but not so well
-  /// for dark theme mode themes were [ColorScheme.primary] is typically much
-  /// lighter than then [MaterialColor] 500 index. FlexColorScheme moved to
-  /// using alpha blends to provide primary color matching colors to
-  /// above mentioned colors. Since the colors are very rarely used and on a
-  /// deprecation path in Flutter SDK they are not so critical.
-  ///
-  /// Since this function is no longer need by this library, it may be
-  /// deprecated and removed. Deprecation could e.g. happen in FlexColorScheme
-  /// version 6, and removal in version 7.
-  ///
-  /// There reason why it is not deprecated already is because I would like to
-  /// replace it with the correct Material 2 [MaterialColor] algorithm, which
-  /// is not available in Dart.
-  /// There are reversed engineered JS versions of the official Material Color
-  /// algorithm made from the Material Guide web tools. If anybody has the
-  /// energy to make a Dart version of it, that would be fabulous.
-  /// SO discussion here:
-  /// https://stackoverflow.com/questions/32942503/material-design-color-palette
-  ///
-  /// Starting points here:
-  ///
-  /// - https://github.com/mbitson/mcg/issues/19
-  /// - Good candidate: https://github.com/eugeneford/material-palette-generator
-  /// - https://github.com/edelstone/material-palette-generator
-  ///
-  /// Old documentation for using [createPrimarySwatch].
-  ///
-  /// The provided [color] is used as the Material swatch default color 500
-  /// in the returned swatch, with lighter hues for lower indexes and darker
-  /// shades for higher index values.
-  ///
-  /// If you give this function a standard Material color index 500 value,
-  /// eg `Colors.red[500]` it will not return the same swatch as `Colors.red`.
-  /// This function is an approximation and gives an automated way of creating
-  /// a Material like primary swatch.
-  ///
-  /// The used algorithm is identical to the same named function
-  /// found in ColorTools in FlexColorPicker at
-  /// https://pub.dev/packages/flex_color_picker.
-  @Deprecated(
-    'This function is no longer used by FlexColorScheme and will be '
-    'removed in FCS v9. You can still find this function in ColorTools '
-    'in package FlexColorPicker.',
-  )
-  static MaterialColor createPrimarySwatch(Color? color) {
-    // Null default fallback is default material primary light color.
-    final Color usedColor = color ?? FlexColor.materialLightPrimary;
-    const List<double> strengths =
-        <double> //
-        [0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
-    final Map<int, Color> swatch = <int, Color>{};
-    final int r = usedColor.red8bit;
-    final int g = usedColor.green8bit;
-    final int b = usedColor.blue8bit;
-    for (final double strength in strengths) {
-      final double ds = 0.5 - strength;
-      swatch[(strength * 1000).round()] = Color.fromRGBO(
-        r + ((ds < 0 ? r : (255 - r)) * ds).round(),
-        g + ((ds < 0 ? g : (255 - g)) * ds).round(),
-        b + ((ds < 0 ? b : (255 - b)) * ds).round(),
-        1,
-      );
-    }
-    // The above gives a starting point, this tunes it a bit better, still far
-    // from the real algorithm.
-    swatch[50] = swatch[50]!.lighten(18);
-    swatch[100] = swatch[100]!.lighten(16);
-    swatch[200] = swatch[200]!.lighten(14);
-    swatch[300] = swatch[300]!.lighten(10);
-    swatch[400] = swatch[400]!.lighten(6);
-    swatch[700] = swatch[700]!.darken(2);
-    swatch[800] = swatch[800]!.darken(3);
-    swatch[900] = swatch[900]!.darken(4);
-    return MaterialColor(usedColor.value, swatch);
   }
 
   //****************************************************************************
@@ -6512,261 +6292,6 @@ class FlexColorScheme with Diagnosticable {
     // always get correct contrast color to be used on primary color.
     defPrimaryText = defPrimaryText.merge(pPrimTextTheme);
 
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    //  Keeping it around for a while in case we can bring it back later.
-    //
-    // We are using sub themes and blend colors on text themes. If surfaces and
-    // background are not set to use blends, the effect will be slightly
-    // different, a bit less colorful, but only very marginally.
-    //
-    // if (useSubThemes && subTheme.blendTextTheme) {
-    //   // Calculate colors for the different TextStyles, color blend strength are
-    //   // inline with opacities on the 2014/2018 typographies.
-    //   // For main text theme we are using surface tint instead of primary,
-    //   // normally it defaults to primary, but if it is customized we should base
-    //   // tinted text theme on it instead.
-    //   Color blendText(Color? color, int blend, int alpha) {
-    //  final Color baseColor = color ?? (isDark ? Colors.white : Colors.black);
-    //  return baseColor.blend(colorScheme.surfaceTint, blend).withAlpha(alpha);
-    //   }
-    //
-    //   // The tinted text theme is based of white/black, but if a custom color
-    //   // was provided, it is based of it and tinted with surfaceTint.
-    //   final Color cDisplayLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.displayLarge?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.displayLarge?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cDisplayMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.displayMedium?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.displayMedium?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cDisplaySmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.displaySmall?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.displaySmall?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   //
-    //   final Color cHeadlineLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.headlineLarge?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.headlineLarge?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cHeadlineMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.headlineMedium?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.headlineMedium?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cHeadlineSmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.headlineSmall?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.headlineSmall?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   //
-    //   final Color cTitleLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.titleLarge?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.titleLarge?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cTitleMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.titleMedium?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.titleMedium?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cTitleSmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.titleSmall?.color, kLoDarkTextBlend,
-    //           kLoDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.titleSmall?.color, kLoLightTextBlend,
-    //           kLoLightTextAlpha); // 100%
-    //   //
-    //   final Color cBodyLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.bodyLarge?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.bodyLarge?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cBodyMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.bodyMedium?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.bodyMedium?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cBodySmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.bodySmall?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.bodySmall?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   //
-    //   final Color cLabelLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.labelLarge?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.labelLarge?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cLabelMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.labelMedium?.color, kLoDarkTextBlend,
-    //           kLoDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.labelMedium?.color, kLoLightTextBlend,
-    //           kLoLightTextAlpha); // 100%
-    //   final Color cLabelSmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.labelSmall?.color, kLoDarkTextBlend,
-    //           kLoDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.labelSmall?.color, kLoLightTextBlend,
-    //           kLoLightTextAlpha); // 100%
-    //
-    //   // Apply the computed colors. With this opt-in style, text gets a hint
-    //   // of primary and less opacity than defaults. The primary tint may
-    //   // not work so well if you need to put text on a completely different
-    //   // colored container than the background color. Which is why this
-    //   // feature can be opted out of.
-    //   // M3 has separate on colors for all colorscheme colors that can also
-    //   // be used for color matched text on each container color.
-    //   // This slightly primary colored default text works very well for the
-    // //slight primary colored M3 "neutral" surface colors that by default have
-    //   // a primary tint too.
-    //   defText = defText.copyWith(
-    //     // The textHiOpacity color style group.
-    //     displayLarge: defText.displayLarge!.copyWith(color: cDisplayLarge),
-    //   displayMedium: defText.displayMedium!.copyWith(color: cDisplayMedium),
-    //     displaySmall: defText.displaySmall!.copyWith(color: cDisplaySmall),
-    //   headlineLarge: defText.headlineLarge!.copyWith(color: cHeadlineLarge),
-    //     headlineMedium:
-    //         defText.headlineMedium!.copyWith(color: cHeadlineMedium),
-    //     bodySmall: defText.bodySmall!.copyWith(color: cBodySmall),
-    //     // The textMediumOpacity color style group.
-    //   headlineSmall: defText.headlineSmall!.copyWith(color: cHeadlineSmall),
-    //     titleLarge: defText.titleLarge!.copyWith(color: cTitleLarge),
-    //     titleMedium: defText.titleMedium!.copyWith(color: cTitleMedium),
-    //     bodyLarge: defText.bodyLarge!.copyWith(color: cBodyLarge),
-    //     bodyMedium: defText.bodyMedium!.copyWith(color: cBodyMedium),
-    //     labelLarge: defText.labelLarge!.copyWith(color: cLabelLarge),
-    //     // The textNoOpacity color style group.
-    //     titleSmall: defText.titleSmall!.copyWith(color: cTitleSmall),
-    //     labelMedium: defText.labelMedium!.copyWith(color: cLabelMedium),
-    //     labelSmall: defText.labelSmall!.copyWith(color: cLabelSmall),
-    //   );
-
-    // // Calculate colors for different TextStyles, color blend strength are
-    //   // inline with opacities on the 2014/2018 typographies.
-    //   // For main text theme we are using surface tint instead of primary,
-    // // normally it defaults to primary, but if customized we should base
-    //   // tinted text theme on it instead.
-    //   Color blendPrimText(Color? color, int blend, int alpha) {
-    //     final Color baseColor =
-    //         color ?? (primaryIsDark ? Colors.white : Colors.black);
-    //     return baseColor.blend(colorScheme.primary, blend).withAlpha(alpha);
-    //   }
-    //
-    //   // The tinted text theme is based of white/black, but if a custom color
-    //   // was provided, it is based of it and tinted with surfaceTint.
-    //   final Color cPrimDisplayLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.displayLarge?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.displayLarge?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimDisplayMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.displayMedium?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.displayMedium?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimDisplaySmall = primaryIsDark // SDK dark70%, light54%
-    //       ? blendPrimText(pPrimTextTheme?.displaySmall?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.displaySmall?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   //
-    //   final Color cPrimHeadlineLarge = primaryIsDark //SDK dark70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.headlineLarge?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.headlineLarge?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimHeadlineMedium = primaryIsDark //SDK dark70%, light54%
-    //       ? blendPrimText(pPrimTextTheme?.headlineMedium?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.headlineMedium?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimHeadlineSmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.headlineSmall?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.headlineSmall?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   //
-    //   final Color cPrimTitleLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.titleLarge?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.titleLarge?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimTitleMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.titleMedium?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.titleMedium?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimTitleSmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.titleSmall?.color,
-    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.titleSmall?.color,
-    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-    //   //
-    //   final Color cPrimBodyLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.bodyLarge?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.bodyLarge?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimBodyMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.bodyMedium?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.bodyMedium?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimBodySmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.bodySmall?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 92%
-    //       : blendPrimText(pPrimTextTheme?.bodySmall?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   //
-    //   final Color cPrimLabelLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.labelLarge?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.labelLarge?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimLabelMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.labelMedium?.color,
-    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.labelMedium?.color,
-    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-    //   final Color cPrimLabelSmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.labelSmall?.color,
-    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.labelSmall?.color,
-    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-    //   // Equivalent blend text styles for primary text theme.
-    //   defPrimaryText = defPrimaryText.copyWith(
-    //     // The primeHiOpacity color style group.
-    //     displayLarge:
-    //         defPrimaryText.displayLarge!.copyWith(color: cPrimDisplayLarge),
-    //     displayMedium:
-    //       defPrimaryText.displayMedium!.copyWith(color: cPrimDisplayMedium),
-    //     displaySmall:
-    //         defPrimaryText.displaySmall!.copyWith(color: cPrimDisplaySmall),
-    //     headlineLarge:
-    //       defPrimaryText.headlineLarge!.copyWith(color: cPrimHeadlineLarge),
-    //     headlineMedium:
-    //      defPrimaryText.headlineMedium!.copyWith(color: cPrimHeadlineMedium),
-    //     bodySmall: defPrimaryText.bodySmall!.copyWith(color: cPrimBodySmall),
-    //     // The primeMediumOpacity color style group.
-    //     headlineSmall:
-    //        defPrimaryText.headlineSmall!.copyWith(color: cPrimHeadlineSmall),
-    //  titleLarge: defPrimaryText.titleLarge!.copyWith(color: cPrimTitleLarge),
-    //     titleMedium:
-    //         defPrimaryText.titleMedium!.copyWith(color: cPrimTitleMedium),
-    //     bodyLarge: defPrimaryText.bodyLarge!.copyWith(color: cPrimBodyLarge),
-    //  bodyMedium: defPrimaryText.bodyMedium!.copyWith(color: cPrimBodyMedium),
-    //  labelLarge: defPrimaryText.labelLarge!.copyWith(color: cPrimLabelLarge),
-    //     // The primeNoOpacity color style group.
-    //  titleSmall: defPrimaryText.titleSmall!.copyWith(color: cPrimTitleSmall),
-    //     labelMedium:
-    //         defPrimaryText.labelMedium!.copyWith(color: cPrimLabelMedium),
-    //  labelSmall: defPrimaryText.labelSmall!.copyWith(color: cPrimLabelSmall),
-    //   );
-    // }
-
     // Assigning results to effective text themes. In older versions a merge
     // of original text themes were done here, but that is incorrect. It should
     // be earlier above, where it is now. In principle we could use the "def"
@@ -6774,57 +6299,6 @@ class FlexColorScheme with Diagnosticable {
     // for now to indicate nothing more can or should be done to them.
     final TextTheme effectiveTextTheme = defText;
     final TextTheme effectivePrimaryTextTheme = defPrimaryText;
-
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // TODO(rydmike): In M3 we need to tint via onSurface and onSurfaceVariant!
-    // The text theme tinting has changed in M3, default theme sets text colors
-    // via onSurface and onSurfaceVariant, overriding the default colors the
-    // used text style from the text theme has! This is not done in M2 mode.
-    // Need to think about how to address this so we still get tinted fonts
-    // when so requested in FCS. Most likely have to pass the correctly tinted
-    // text style to each component theme. BIG changes needed!
-    //
-    // Color? onSurfaceBlendedTextStyle;
-    // Color? onSurfaceVariantBlendedTextStyle;
-    // final bool blendTT = useSubThemes && subTheme.blendTextTheme;
-    // if (blendTT) {
-    //   onSurfaceBlendedTextStyle = effectiveTextTheme.titleLarge?.color;
-    //   onSurfaceVariantBlendedTextStyle =
-    //     effectiveTextTheme.displayLarge?.color;
-    // }
-
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // These text style are made to be passed in to component, or so called
-    // sub-themes to force them to use the blended text theme. See issue:
-    // TODO(rydmike): Add link to issue when I have created it.
-    // final TextStyle subBodyLarge = blendTT
-    //     ? effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceBlendedTextStyle, fontSize: 16)
-    //     : effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16);
-    // final TextStyle subBodyLargeV = blendTT
-    //     ? effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 16)
-    //     : effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16);
-    // final WidgetStateProperty<TextStyle> subBodyLargeWSP = blendTT
-    //     ? WidgetStatePropertyAll<TextStyle>(effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceBlendedTextStyle, fontSize: 16))
-    //     : WidgetStatePropertyAll<TextStyle>(
-    //         effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16));
-    // final WidgetStateProperty<TextStyle> subBodyLargeWSPV = blendTT
-    //     ? WidgetStatePropertyAll<TextStyle>(effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 16))
-    //     : WidgetStatePropertyAll<TextStyle>(
-    //         effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16));
-    // final TextStyle subBodyMediumV = blendTT
-    //     ? effectiveTextTheme.bodyMedium!
-    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 14)
-    //     : effectiveTextTheme.bodyMedium!.copyWith(fontSize: 14);
-    // final TextStyle subLabelSmallV = blendTT
-    //     ? effectiveTextTheme.labelSmall!.copyWith(
-    //         color: onSurfaceVariantBlendedTextStyle,
-    //         fontSize: useMaterial3 ? 11 : 10)
-    //     : effectiveTextTheme.labelSmall!
-    //         .copyWith(fontSize: useMaterial3 ? 11 : 10);
 
     // Custom computed shades from primary color using alpha blends works well
     // for these rarely used colors that are on deprecation path in Flutter SDK.
@@ -7517,8 +6991,6 @@ class FlexColorScheme with Diagnosticable {
               showSelectedLabels: subTheme.bottomNavigationBarShowSelectedLabels,
               showUnselectedLabels: subTheme.bottomNavigationBarShowUnselectedLabels,
               landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
@@ -7880,8 +7352,6 @@ class FlexColorScheme with Diagnosticable {
               unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
               selectedLabelSchemeColor: subTheme.navigationBarSelectedLabelSchemeColor,
               unselectedLabelSchemeColor: subTheme.navigationBarUnselectedLabelSchemeColor,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               mutedUnselectedLabel: subTheme.navigationBarMutedUnselectedLabel,
               selectedIconSize: subTheme.navigationBarSelectedIconSize,
               unselectedIconSize: subTheme.navigationBarUnselectedIconSize,
@@ -7919,8 +7389,6 @@ class FlexColorScheme with Diagnosticable {
               indicatorOpacity: subTheme.drawerIndicatorOpacity,
               selectedItemSchemeColor: subTheme.drawerSelectedItemSchemeColor,
               unselectedItemSchemeColor: subTheme.drawerUnselectedItemSchemeColor,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               textStyle: effectiveTextTheme.bodyLarge,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
@@ -7941,8 +7409,6 @@ class FlexColorScheme with Diagnosticable {
               unselectedIconSize: subTheme.navigationRailUnselectedIconSize,
               selectedIconSchemeColor: subTheme.navigationRailSelectedIconSchemeColor,
               unselectedIconSchemeColor: subTheme.navigationRailUnselectedIconSchemeColor,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               mutedUnselectedIcon: subTheme.navigationRailMutedUnselectedIcon,
               useIndicator: subTheme.navigationRailUseIndicator,
               indicatorSchemeColor: subTheme.navigationRailIndicatorSchemeColor,
@@ -8621,19 +8087,6 @@ class FlexColorScheme with Diagnosticable {
     FlexSubThemesData? subThemesData,
     bool? useMaterial3,
     Iterable<ThemeExtension<dynamic>>? extensions,
-    //
-    @Deprecated(
-      'Use FlexColorScheme.surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? background,
-    @Deprecated(
-      'Use FlexColorScheme.onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? onBackground,
   }) {
     return FlexColorScheme(
       brightness: brightness ?? this.brightness,

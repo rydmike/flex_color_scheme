@@ -5766,8 +5766,6 @@ void main() {
         primaryTextTheme: testText,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: false,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -5818,39 +5816,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(11));
       expect(pTextTheme.labelSmall!.fontSize, equals(10));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M2 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
-      // // Test M2 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets('FCS11-03 FCS-M2-DARK default textTheme with some other props defined '
         'EXPECT color and font size match 2018 typography', (WidgetTester tester) async {
@@ -5955,10 +5920,7 @@ void main() {
         useMaterial3: false,
         textTheme: testText,
         primaryTextTheme: testText,
-        subThemesData: const FlexSubThemesData(
-          // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-          // blendTextTheme: true,
-        ),
+        subThemesData: const FlexSubThemesData(),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -6008,39 +5970,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(11));
       expect(pTextTheme.labelSmall!.fontSize, equals(10));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M2 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xfffff3f8)));
-      // // Test M2 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xff0a0608)));
     });
     //
     //
@@ -6152,8 +6081,6 @@ void main() {
         primaryTextTheme: testText,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: true,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -6204,39 +6131,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(12));
       expect(pTextTheme.labelSmall!.fontSize, equals(11));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M3 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
-      // // Test M3 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets('FCS11-07 FCS-M3-DARK default textTheme with some other props defined '
         'EXPECT color and font size match 2018 typography', (WidgetTester tester) async {
@@ -6344,10 +6238,7 @@ void main() {
         useMaterial3: true,
         textTheme: testText,
         primaryTextTheme: testText,
-        subThemesData: const FlexSubThemesData(
-          // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-          // blendTextTheme: true,
-        ),
+        subThemesData: const FlexSubThemesData(),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -6397,39 +6288,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(12));
       expect(pTextTheme.labelSmall!.fontSize, equals(11));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M2 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xfffff3f8)));
-      // // Test M2 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xff0a0608)));
     });
     //
     // Define a full LIGHT TextTheme, with font sizes and colors.
@@ -6812,10 +6670,7 @@ void main() {
         useMaterial3: true,
         textTheme: tLText,
         primaryTextTheme: tDText,
-        subThemesData: const FlexSubThemesData(
-          // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-          // blendTextTheme: true,
-        ),
+        subThemesData: const FlexSubThemesData(),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -6865,39 +6720,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(15));
       expect(pTextTheme.labelMedium!.fontSize, equals(13));
       expect(pTextTheme.labelSmall!.fontSize, equals(12));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M3 custom and tinted font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xd85d143e)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xd83e4e1a)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xd8224655)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xd85d143e)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xd84c2119)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xf45c173f)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xf4691446)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xf4504e1a)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xff264e2a)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xf4293519)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xf43c112a)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xd8621642)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xf42a1455)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xff241c42)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xff373b1e)));
-      // // Test M3 custom and tinted font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xe553424b)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5504f46)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xe53d454b)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5643f55)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5795b53)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xff724e63)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xff6e465e)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xff65654a)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xff0e4f1c)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xff515f47)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xff7a546a)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xe56e4e60)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xff4e4467)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xff56566f)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xff667158)));
     });
 
     testWidgets('FCS11-11 FCS-M3-DARK custom textTheme with color and size defined '
@@ -7003,10 +6825,7 @@ void main() {
         useMaterial3: true,
         textTheme: tDText,
         primaryTextTheme: tLText,
-        subThemesData: const FlexSubThemesData(
-          // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-          // blendTextTheme: true,
-        ),
+        subThemesData: const FlexSubThemesData(),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -7056,39 +6875,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(15));
       expect(pTextTheme.labelMedium!.fontSize, equals(13));
       expect(pTextTheme.labelSmall!.fontSize, equals(12));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M3 custom and tinted font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xe26b545f)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xe268605a)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xe256575f)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xe27b5168)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xe28e6c67)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xff835c72)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xff80546d)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xff777259)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xff2f6036)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xff636c57)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xff8b6278)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xe2845f73)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xff605275)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xff6f6780)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xff7e7f6b)));
-      // // Test M3 custom and tinted font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xd8631745)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xd8415a1b)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xd820515e)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xd8631745)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xd8512719)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xf258113c)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xf2680e45)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xf24a550f)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xff0f541e)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xf21a360d)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xf2320a22)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xd86a1a49)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xf21b0d57)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xff0d133d)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xff253b0e)));
     });
 
     testWidgets('FCS11-13 FCS-M2-LIGHT Google textTheme with no props defined '
@@ -7214,8 +7000,6 @@ void main() {
         primaryTextTheme: gTextTheme,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: false,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -7266,39 +7050,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(11));
       expect(pTextTheme.labelSmall!.fontSize, equals(10));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M2 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
-      // // Test M2 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets('FCS11-15 FCS-M2-DARK Google textTheme with no other props defined '
         'EXPECT color and font size match 2018 typography', (WidgetTester tester) async {
@@ -7421,10 +7172,7 @@ void main() {
         useMaterial3: false,
         textTheme: gTextTheme,
         primaryTextTheme: gTextTheme,
-        subThemesData: const FlexSubThemesData(
-          // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-          // blendTextTheme: true,
-        ),
+        subThemesData: const FlexSubThemesData(),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -7474,39 +7222,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(11));
       expect(pTextTheme.labelSmall!.fontSize, equals(10));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M2 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xfffff3f8)));
-      // // Test M2 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xff0a0608)));
     });
     //
     //
@@ -7636,8 +7351,6 @@ void main() {
         primaryTextTheme: gTextTheme,
         subThemesData: const FlexSubThemesData(
           useMaterial3Typography: true,
-          // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-          // blendTextTheme: true,
         ),
       );
       final ThemeData theme = fcs.toTheme;
@@ -7688,39 +7401,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(12));
       expect(pTextTheme.labelSmall!.fontSize, equals(11));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M3 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xd81b0e14)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xf41b0e14)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xff1f1017)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xff1f1017)));
-      // // Test M3 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xe5f3edf0)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xfff4eff1)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xfff7f2f4)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xfff7f2f4)));
     });
     testWidgets('FCS11-19 FCS-M3-DARK Google textTheme with no other props defined '
         'EXPECT color and font size match 2018 typography', (WidgetTester tester) async {
@@ -7846,10 +7526,7 @@ void main() {
         useMaterial3: true,
         textTheme: gTextTheme,
         primaryTextTheme: gTextTheme,
-        subThemesData: const FlexSubThemesData(
-          // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-          // blendTextTheme: true,
-        ),
+        subThemesData: const FlexSubThemesData(),
       );
       final ThemeData theme = fcs.toTheme;
       late TextTheme textTheme;
@@ -7899,39 +7576,6 @@ void main() {
       expect(pTextTheme.labelLarge!.fontSize, equals(14));
       expect(pTextTheme.labelMedium!.fontSize, equals(12));
       expect(pTextTheme.labelSmall!.fontSize, equals(11));
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // // Test M2 default font colors for textTheme.
-      // expect(textTheme.displayLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displayMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.displaySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineLarge!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineMedium!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.headlineSmall!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.titleSmall!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.bodyLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodyMedium!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.bodySmall!.color, equals(const Color(0xe2fff3f8)));
-      // expect(textTheme.labelLarge!.color, equals(const Color(0xfffff5f9)));
-      // expect(textTheme.labelMedium!.color, equals(const Color(0xfffff3f8)));
-      // expect(textTheme.labelSmall!.color, equals(const Color(0xfffff3f8)));
-      // // Test M2 default font colors for primTextTheme.
-      // expect(pTextTheme.displayLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displayMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.displaySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineLarge!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineMedium!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.headlineSmall!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.titleSmall!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.bodyLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodyMedium!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.bodySmall!.color, equals(const Color(0xd8191114)));
-      // expect(pTextTheme.labelLarge!.color, equals(const Color(0xf20c0809)));
-      // expect(pTextTheme.labelMedium!.color, equals(const Color(0xff0a0608)));
-      // expect(pTextTheme.labelSmall!.color, equals(const Color(0xff0a0608)));
     });
   });
 }

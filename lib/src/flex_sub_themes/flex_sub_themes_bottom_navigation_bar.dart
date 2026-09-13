@@ -119,20 +119,6 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// [Colors.black54] in light mode and [Colors.white70] in dark.
   SchemeColor? unselectedIconSchemeColor,
 
-  // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-  // An alternative unselected item color.
-  //
-  // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-  // before its normal default fallbacks.
-  //
-  // The color is typically used to provide the color created by blended or
-  // tinted text theme, when it is being used by FlexColorScheme as an
-  // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-  //
-  // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-  // a blended TextTheme is being used.
-  // final Color? altUnselectedColor,
-
   /// If true, the unselected icon in the [BottomNavigationBar] use a more
   /// muted color version of the color defined by
   /// [bottomNavigationBarUnselectedIconSchemeColor].
@@ -246,44 +232,6 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// If undefined, defaults to true.
   bool? useMaterial3,
-
-  /// Set to true to use Flutter SDK defaults for [BottomNavigationBar]
-  /// theme when its color, size and text style properties are undefined,
-  /// instead of using [FlexColorScheme]'s own defaults.
-  ///
-  /// Recommend keeping it **false** for a more color harmonized component
-  /// theme starting point. This flag may be helpful if you want to create
-  /// custom sub-themes starting from less opinionated settings.
-  ///
-  /// When all required properties are undefined and flag is false or true,
-  /// the effective default styles for undefined inputs become:
-  ///
-  /// ```text
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     background
-  /// - selected icon    primary        light: theme primary, dark: secondary
-  /// - Selected label   primary        light: theme primary, dark: secondary
-  /// - unselected icon  onSurface      light: black54, dark: white70
-  /// - unSelected label onSurface      light: black54, dark: white70
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedIcon] and
-  /// [FlexSubThemesData.bottomNavigationBarMutedUnselectedLabel] are true,
-  /// respectively, this also applies to undefined color inputs.
-  ///
-  /// When muted unselected options are true, the difference to Flutter
-  /// default for unselected items is subtle, FCS has a bit more contrast.
-  @Deprecated(
-    'The `useFlutterDefaults` is deprecated, it no longer has any '
-    'function and will be removed in v9. FlexColorScheme in M3 mode '
-    'defaults to using mostly Flutter defaults styles. '
-    'For other configurations modify the theme as desired. '
-    'In M2 mode FCS will continue to use its own opinionated defaults for '
-    'as long as M2 exists.',
-  )
-  bool? useFlutterDefaults,
 }) {
   final bool useM3 = useMaterial3 ?? true;
 

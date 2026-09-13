@@ -532,86 +532,6 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailGroupAlignment,
     this.navigationRailMinWidth,
     this.navigationRailMinExtendedWidth,
-    //
-    @Deprecated(
-      'This property has been replaced by the more aptly named '
-      'useMaterial3Typography property and no longer has any function '
-      'in V8 and will be removed in v9.0.0.',
-    )
-    this.useTextTheme,
-    @Deprecated(
-      'The `useFlutterDefaults` is deprecated, it no longer has any '
-      'function and will be removed in v9. FlexColorScheme in M3 mode '
-      'defaults to using mostly Flutter defaults styles. '
-      'For other configurations modify the theme as desired. '
-      'In M2 mode FCS will continue to use its own opinionated defaults for '
-      'as long as M2 exists.',
-    )
-    this.useFlutterDefaults,
-    @Deprecated(
-      'The `blendTextTheme` is deprecated, it no longer has any '
-      'function and will be removed in v9. More info below.\n'
-      '\n'
-      'The `blendTextTheme` feature was originally '
-      "made before Material-3's TextTheme was available, before it was fully "
-      'known how it was going to be implemented. It was an approximation of '
-      'the TextStyles that could be seen in early versions of Material-3 '
-      'images. Since the actual Material-3 TextTheme is available, the tinted '
-      'TextTheme feature is no longer needed. While the FCS tinted TextTheme '
-      'did provide an alternative version of the actual tint used in '
-      'Material-3, but the differences were quite subtle. Additionally, '
-      'recent changes in Flutter make using it very verbose and complicated. '
-      'Why it does so, is explained below.\n'
-      '\n'
-      'In Material-3 Typography 2021, the TextTheme and all styles in it are '
-      'fully opaque and use onSurface as color on all TextStyles. '
-      'In a seed generated ColorScheme, the text becomes primary tinted, '
-      'because the onSurface color by default has subtle primary tint. '
-      'With FCS you can modify the onSurface to black or white to avoid this, '
-      'if so preferred.\n'
-      '\n'
-      'In Material-2 Typography 2018 and 2014, some TextStyles '
-      'in their TextThemes use partially transparent white or '
-      'black colors, making them appear tinted '
-      'when placed on lightly colored backgrounds. Such TextStyles also '
-      'have lower contrast. If the Material-3 default text theme is '
-      'used on background colors that are tinted with a color that '
-      'deviates a lot in hue from the hue used as tint color by the TextTheme, '
-      'it may not fit it so well. The Material-2 opacity-based text styles '
-      'do not have this limitation. It is unknown why Material-3 switched to '
-      'a fixed tint color instead of using the opacity-based approach '
-      'used in Material-2, that is more universally '
-      'usable on backgrounds with different tint colors.\n'
-      '\n'
-      'In Material-3, some component themes override the default color the of '
-      'the default TextTheme TextStyles they use with onSurfaceVariant. '
-      'This color has slightly more tint and lower contrast than onSurface. '
-      'This is used for elements that should have less emphasis. Many default '
-      'Material-3 components also override the color in default TextTheme '
-      'TextStyles '
-      'they use with onSurface color, that it actually already has in a '
-      'default TextTheme. These two overrides causes whatever '
-      'color the default TextTheme TextStyles have, to be overridden by '
-      'these ColorScheme colors. Resulting in that any custom colored '
-      'TextTheme is not getting used by such Material-3 components and that '
-      'the custom colors from the meticulously colored custom TextTheme, '
-      'are rarely visible anywhere in a Material-3 application. Material-2 '
-      'component themes do not do this, nor did older Flutter versions of '
-      'Material-3 component themes do this.\n'
-      '\n'
-      'An issue has been raised explaining the challenges this newer approach '
-      'in Flutter causes when using custom colored text themes. If this '
-      'issue is addressed, the tinted TextTheme feature in FCS may '
-      'be brought back, if it is a requested feature.\n'
-      '\n'
-      'In current Flutter versions, using a custom tinted TextTheme is rather '
-      'pointless. You can do it, but it is not enough to just define the '
-      'TextTheme. You also have to pass each tinted TextStyle it has to the '
-      'appropriate TextStyles in ALL component themes that override its '
-      'colors, for it to have any effect. It is typically not '
-      'worth the effort.\n',
-    )
-    this.blendTextTheme = false,
   });
 
   /// Flag used to enable color tinted hover, focus, highlight, selected,
@@ -1013,99 +933,6 @@ class FlexSubThemesData with Diagnosticable {
   /// criteria defined by [adaptiveSplash], the used splash type is
   /// defined by [splashType].
   final FlexSplashType? splashTypeAdaptive;
-
-  /// Use selection `surfaceMode` and `blendLevel` in [FlexColorScheme.light]
-  /// and [FlexColorScheme.dark] to also blend primary color into text themes
-  /// for both [ThemeData.textTheme] and [ThemeData.primaryTextTheme].
-  ///
-  /// This feature is similar to the slightly colored texts seen in Material 3
-  /// when using "onColor" colored texts.
-  ///
-  /// This feature does not work so well if you need to put text on
-  /// a completely different colored container than the background color.
-  /// Which is why this feature can be opted out of.
-  ///
-  /// M3 has separate on colors for all colorscheme colors that can also
-  /// be used for color matched text on each color. However, this slightly
-  /// primary colored default text works very well for the slight primary
-  /// colored M3 "neutral" surface colors with a primary hint too.
-  ///
-  /// At heavy blend levels it may reduce contrast too much and can
-  /// be turned off if so desired. This feature is a bit experimental in nature
-  /// and will be improved over time. Expect minor changes to the visual result
-  /// when using this option in future versions when actual Material 3 text
-  /// theme Typography becomes available.
-  ///
-  /// Defaults to false.
-  ///
-  /// **Style break info**: In FCS before version 7, the default was true, and
-  /// blended text themes were used by default. Going forward if you want it,
-  /// and also if you had not defined earlier and don't want to break your
-  /// apps past style, set [blendTextTheme] to true.
-  @Deprecated(
-    'The `blendTextTheme` is deprecated, it no longer has any '
-    'function and will be removed in v9. More info below.\n'
-    '\n'
-    'The `blendTextTheme` feature was originally '
-    "made before Material-3's TextTheme was available, before it was fully "
-    'known how it was going to be implemented. It was an approximation of '
-    'the TextStyles that could be seen in early versions of Material-3 '
-    'images. Since the actual Material-3 TextTheme is available, the tinted '
-    'TextTheme feature is no longer needed. While the FCS tinted TextTheme '
-    'did provide an alternative version of the actual tint used in '
-    'Material-3, but the differences were quite subtle. Additionally, '
-    'recent changes in Flutter make using it very verbose and complicated. '
-    'Why it does so, is explained below.\n'
-    '\n'
-    'In Material-3 Typography 2021, the TextTheme and all styles in it are '
-    'fully opaque and use onSurface as color on all TextStyles. '
-    'In a seed generated ColorScheme, the text becomes primary tinted, '
-    'because the onSurface color by default has subtle primary tint. '
-    'With FCS you can modify the onSurface to black or white to avoid this, '
-    'if so preferred.\n'
-    '\n'
-    'In Material-2 Typography 2018 and 2014, some TextStyles '
-    'in their TextThemes use partially transparent white or '
-    'black colors, making them appear tinted '
-    'when placed on lightly colored backgrounds. Such TextStyles also '
-    'have lower contrast. If the Material-3 default text theme is '
-    'used on background colors that are tinted with a color that '
-    'deviates a lot in hue from the hue used as tint color by the TextTheme, '
-    'it may not fit it so well. The Material-2 opacity-based text styles '
-    'do not have this limitation. It is unknown why Material-3 switched to '
-    'a fixed tint color instead of using the opacity-based approach '
-    'used in Material-2, that is more universally '
-    'usable on backgrounds with different tint colors.\n'
-    '\n'
-    'In Material-3, some component themes override the default color the of '
-    'the default TextTheme TextStyles they use with onSurfaceVariant. '
-    'This color has slightly more tint and lower contrast than onSurface. '
-    'This is used for elements that should have less emphasis. Many default '
-    'Material-3 components also override the color in default TextTheme '
-    'TextStyles '
-    'they use with onSurface color, that it actually already has in a '
-    'default TextTheme. These two overrides causes whatever '
-    'color the default TextTheme TextStyles have, to be overridden by '
-    'these ColorScheme colors. Resulting in that any custom colored '
-    'TextTheme is not getting used by such Material-3 components and that '
-    'the custom colors from the meticulously colored custom TextTheme, '
-    'are rarely visible anywhere in a Material-3 application. Material-2 '
-    'component themes do not do this, nor did older Flutter versions of '
-    'Material-3 component themes do this.\n'
-    '\n'
-    'An issue has been raised explaining the challenges this newer approach '
-    'in Flutter causes when using custom colored text themes. If this '
-    'issue is addressed, the tinted TextTheme feature in FCS may '
-    'be brought back, if it is a requested feature.\n'
-    '\n'
-    'In current Flutter versions, using a custom tinted TextTheme is '
-    'rather pointless. You can do it, but is not enough to just define the '
-    'TextTheme. You also have to pass each tinted TextStyle it has to the '
-    'appropriate TextStyles in ALL component themes that override its '
-    'colors, for it to have any effect. It is typically not '
-    'worth the effort.\n',
-  )
-  final bool blendTextTheme;
 
   /// Determines if Material-3 TextTheme and Typography is used.
   ///
@@ -4234,151 +4061,6 @@ class FlexSubThemesData with Diagnosticable {
   /// Flutter M2 and M3 use 256 dp as default.
   final double? navigationRailMinExtendedWidth;
 
-  /// **DEPRECATED** and has no function anymore.
-  /// Use [useMaterial3Typography] instead.
-  ///
-  /// Determines if Material-3 TextTheme and Typography is used.
-  ///
-  /// When opting in on using the sub-theming, this flag controls if the
-  /// TextTheme will use the new Material-3 [Typography.material2021]
-  /// as specified in the [Material-3 Design Guide](https://m3.material.io).
-  ///
-  /// If not defined, and [ThemeData.useMaterial3] is true, then it defaults
-  /// to true. If not defined and [ThemeData.useMaterial3] is false, then it
-  /// defaults to false.
-  ///
-  /// This toggle works as an override toggle for using
-  /// [Typography.material2021] in Material-2 mode and for using
-  /// [Typography.material2018] in Material-3 mode.
-  ///
-  /// When using [FlexColorScheme] and [ThemeData.useMaterial3] is false and
-  /// component themes are not used, then default typography is
-  /// [Typography.material2018]. Note that if [FlexColorScheme] is
-  /// not used at all, and your [ThemeData] has [ThemeData.useMaterial3] false,
-  /// then Flutter defaults to using very old poor [Typography.material2014].
-  /// In such cases consider defining your typography manually to
-  /// [Typography.material2018] or why not even [Typography.material2021].
-  ///
-  /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
-  /// like ThemeData. You apply and use them just as you would with ThemeData.
-  /// This text theme is just a convenience Typography toggle.
-  ///
-  /// If you specify a custom typography in [FlexColorScheme.typography] then
-  /// this property has no impact on used typography.
-  ///
-  /// This property was originally used in [FlexColorScheme] to opt-in on using
-  /// a custom text theme defined internally by [FlexColorScheme] to look like
-  /// the typography and text theme used in Material-3, before such a text theme
-  /// and typography existed in Flutter. When Flutter started providing M3
-  /// text theme and typography, this property was converted into toggle to opt
-  /// in and out of using the text theme. Typically, you do not want to
-  /// opt-out of it, but in M2 mode you may want to opt-in and set it to true.
-  @Deprecated(
-    'This property has been replaced by the more aptly named '
-    'useMaterial3Typography property and no longer has any function '
-    'in V8 and will be removed in v9.0.0.',
-  )
-  final bool? useTextTheme;
-
-  /// **DEPRECATED** and has no function anymore.
-  ///
-  /// Set to true to use Flutter SDK default component theme designs.
-  ///
-  /// Default to false.
-  ///
-  /// Prefer false to use FlexColorScheme (FCS) defaults.
-  ///
-  /// When set to `true`, many color properties that in [FlexSubThemesData] are
-  /// nullable and default to 'null, but that as undefined default to using
-  /// theming choices that differ from Flutter SDK default component theme
-  /// designs, will when this property is set to true default to
-  /// using Flutter SDK defaults, instead of its own opinionated defaults.
-  ///
-  /// When you use this flag you loose many of the harmonizing defaults
-  /// [FlexColorScheme.subThemesData] bring, but it may serve as an optional
-  /// starting point for your own custom component themes with fewer `copyWith`
-  /// overrides needed for its opinionated choices.
-  ///
-  /// The individual [FlexSubThemesData] properties and [FlexSubThemes]
-  /// document their adherence to this setting, they are also listed here:
-  ///
-  /// Impact on [BottomNavigationBarThemeData] sub-theming:
-  ///
-  /// ```text
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     background
-  /// - selected icon    primary        light: theme primary, dark: secondary
-  /// - Selected label   primary        light: theme primary, dark: secondary
-  /// - unselected icon  onSurface      light: black54, dark: white70
-  /// - unSelected label onSurface      light: black54, dark: white70
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [bottomNavigationBarMutedUnselectedIcon] and
-  /// [bottomNavigationBarMutedUnselectedLabel] are true respectively,
-  /// this also applies to undefined color inputs.
-  ///
-  /// When muted unselected options are true, the actual difference to Flutter
-  /// default for unselected items is subtle, FCS has a bit more contrast.
-  ///
-  /// Impact on [NavigationBarThemeData] sub-theming:
-  ///
-  /// ```text
-  ///                    FCS defaults   M2 defaults       useMaterial3:true
-  /// useFlutterDefaults false          true              true
-  /// results in:
-  ///
-  /// - background       surfaceVariant surface with      surface with
-  ///                                   onSurface overlay primary overlay
-  ///                    elev 3         elev 0            elev 3
-  /// - height           80             80                80
-  /// - indicator        primary op24%  secondary op24%   secondaryContainer
-  /// - selected icon    primary        onSurface         onSecondaryContainer
-  /// - unselected icon  onSurface      onSurface         onSurfaceVariant
-  /// - Selected label   primary        onSurface         onSurface
-  /// - unSelected label onSurface      onSurface         onSurfaceVariant
-  /// - TextTheme        labelMedium    overline          labelMedium
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [navigationBarMutedUnselectedIcon] and [navigationBarMutedUnselectedLabel]
-  /// are true respectively, this also applies to undefined color inputs.
-  ///
-  /// Impact on [NavigationRailThemeData] sub-theming:
-  ///
-  /// ```text
-  ///                    FCS defaults    Flutter defaults
-  /// useFlutterDefaults false           true
-  /// - background       background      surface
-  /// - indicator        primary op24%   secondary op24%
-  /// - selected icon    primary         primary
-  /// - Selected label   primary         primary
-  /// - unselected icon  onSurface       onSurface op64%
-  /// - unSelected label onSurface       onSurface op64%
-  /// - TextTheme        FCS.labelMedium default.bodyText1
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [navigationRailMutedUnselectedIcon] and
-  /// are [navigationRailMutedUnselectedLabel] true respectively,
-  /// this also applies to undefined color inputs.
-  ///
-  /// If you want a style that is consistent by default across
-  /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
-  /// prefer keeping this setting false.
-  ///
-  /// If undefined, defaults to false.
-  @Deprecated(
-    'The `useFlutterDefaults` is deprecated, it no longer has any '
-    'function and will be removed in v9. FlexColorScheme in M3 mode '
-    'defaults to using mostly Flutter defaults styles. '
-    'For other configurations modify the theme as desired. '
-    'In M2 mode FCS will continue to use its own opinionated defaults for '
-    'as long as M2 exists.',
-  )
-  final bool? useFlutterDefaults;
-
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
     bool? interactionEffects,
@@ -4397,7 +4079,6 @@ class FlexSubThemesData with Diagnosticable {
     FlexSplashType? splashType,
     FlexSplashType? splashTypeAdaptive,
     //
-    bool? blendTextTheme,
     bool? useMaterial3Typography,
     bool? useM2StyleDividerInM3,
     //
@@ -4743,22 +4424,6 @@ class FlexSubThemesData with Diagnosticable {
     double? navigationRailGroupAlignment,
     double? navigationRailMinWidth,
     double? navigationRailMinExtendedWidth,
-    //
-    @Deprecated(
-      'This property has been replaced by the more aptly named '
-      'useMaterial3Typography property and no longer has any function '
-      'in V8 and will be removed in v9.0.0.',
-    )
-    bool? useTextTheme,
-    @Deprecated(
-      'The `useFlutterDefaults` is deprecated, it no longer has any '
-      'function and will be removed in v9. FlexColorScheme in M3 mode '
-      'defaults to using mostly Flutter defaults styles. '
-      'For other configurations modify the theme as desired. '
-      'In M2 mode FCS will continue to use its own opinionated defaults for '
-      'as long as M2 exists.',
-    )
-    bool? useFlutterDefaults,
   }) {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
@@ -4777,8 +4442,6 @@ class FlexSubThemesData with Diagnosticable {
       splashType: splashType ?? this.splashType,
       splashTypeAdaptive: splashTypeAdaptive ?? this.splashTypeAdaptive,
       //
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // blendTextTheme: blendTextTheme ?? this.blendTextTheme,
       useMaterial3Typography: useMaterial3Typography ?? this.useMaterial3Typography,
       useM2StyleDividerInM3: useM2StyleDividerInM3 ?? this.useM2StyleDividerInM3,
       //
@@ -5192,8 +4855,6 @@ class FlexSubThemesData with Diagnosticable {
         other.splashType == splashType &&
         other.splashTypeAdaptive == splashTypeAdaptive &&
         //
-        // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-        // other.blendTextTheme == blendTextTheme &&
         other.useMaterial3Typography == useMaterial3Typography &&
         other.useM2StyleDividerInM3 == useM2StyleDividerInM3 &&
         //
@@ -5559,8 +5220,6 @@ class FlexSubThemesData with Diagnosticable {
     splashType,
     splashTypeAdaptive,
     //
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // blendTextTheme,
     useMaterial3Typography,
     useM2StyleDividerInM3,
     //
@@ -5927,9 +5586,6 @@ class FlexSubThemesData with Diagnosticable {
     properties.add(EnumProperty<FlexSplashType>('splashType', splashType));
     properties.add(EnumProperty<FlexSplashType>('splashTypeAdaptive', splashTypeAdaptive));
     //
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // properties.add(DiagnosticsProperty<bool>('blendTextTheme',
-    // blendTextTheme));
     properties.add(DiagnosticsProperty<bool>('useMaterial3Typography', useMaterial3Typography));
     properties.add(DiagnosticsProperty<bool>('useM2StyleDividerInM3', useM2StyleDividerInM3));
     //

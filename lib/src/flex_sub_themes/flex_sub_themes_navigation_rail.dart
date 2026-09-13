@@ -84,21 +84,6 @@ NavigationRailThemeData _navigationRailTheme({
   /// https://m3.material.io/components/navigation-rail/specs
   SchemeColor? unselectedLabelSchemeColor,
 
-  // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-  //
-  // An alternative unselected item color.
-  //
-  // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-  // before its normal default fallbacks.
-  //
-  // The color is typically used to provide the color created by blended or
-  // tinted text theme, when it is being used by FlexColorScheme as an
-  // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-  //
-  // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-  // a blended TextTheme is being used.
-  // final Color? altUnselectedColor,
-
   /// If true, the unselected label in the [NavigationRail] use a more
   /// muted color version of the color defined by
   /// [unselectedLabelSchemeColor].
@@ -302,64 +287,6 @@ NavigationRailThemeData _navigationRailTheme({
   ///
   /// Flutter M2 and M3 use 256 dp as default.
   double? minExtendedWidth,
-
-  /// A temporary flag used to disable Material-3 design and use legacy
-  /// Material-2 design instead. Material-3 design is the default.
-  /// Material-2 will be deprecated in Flutter.
-  ///
-  /// The M2/M3 SDK defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
-  @Deprecated(
-    'The useMaterial3 flag no longer has any function in this '
-    'component theme and is deprecated. It will be removed in v9.',
-  )
-  bool? useMaterial3,
-
-  /// Set to true to use Flutter SDK defaults for [NavigationRail]
-  /// theme when its properties are undefined (null) instead of using
-  /// [FlexColorScheme]'s own defaults.
-  ///
-  /// Recommend keeping it **false** for a more color harmonized component
-  /// theme starting point. This flag may be helpful if you want to create
-  /// custom sub-themes starting from less opinionated settings.
-  ///
-  /// Differences when flag is false versus true are:
-  ///
-  /// ```text
-  ///                    FCS defaults    M2 defaults      useMaterial3:true
-  /// useFlutterDefaults false           true             true
-  /// results in:
-  ///
-  /// - background       background      surface          surface
-  /// - indicator        primary op24%   secondary op24%  secondaryContainer
-  /// - selected icon    primary         primary          onSecondaryContainer
-  /// - unselected icon  onSurface       onSurface op64%  onSurfaceVariant
-  /// - selected label   primary         primary          onSurface
-  /// - unSelected label onSurface       onSurface op64%  onSurface
-  /// - TextTheme        labelMedium     bodyText1        labelMedium
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [FlexSubThemesData.navigationRailMutedUnselectedIcon] and
-  /// are [FlexSubThemesData.navigationRailMutedUnselectedLabel] true
-  /// respectively, this also applies to undefined color inputs.
-  ///
-  /// If you want a style that is consistent by default across
-  /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
-  /// prefer keeping this setting false.
-  ///
-  /// Defaults to null.
-  @Deprecated(
-    'The `useFlutterDefaults` is deprecated, it no longer has any '
-    'function and will be removed in v9. FlexColorScheme in M3 mode '
-    'defaults to using mostly Flutter defaults styles. '
-    'For other configurations modify the theme as desired. '
-    'In M2 mode FCS will continue to use its own opinionated defaults for '
-    'as long as M2 exists.',
-  )
-  bool? useFlutterDefaults,
 }) {
   // Background color, falls back to surface.
   final Color backgroundColor = (opacity ?? 1.0) != 1.0 && backgroundSchemeColor != SchemeColor.transparent

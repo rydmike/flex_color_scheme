@@ -14,8 +14,13 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - This version requires Flutter 3.47.0 or higher
 - It also opts in on Dart 3.13.0 language features and lints.
 - This release brings full support for the standalone `material_ui` and `cupertino_ui` packages.
-- Per **Flutter's official recommendation** the package is released as a **major breaking** release. Public APIs are otherwise unchanged.
-- Seeded **light** themes now default `FlexKeyColors.useExpressiveOnContainerColors` to `true` when undefined, matching Flutter 3.47 `ColorScheme.fromSeed` and FlexSeedScheme 5 (MCU 0.13 tone **30** on-container colors). This changes `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` in light mode. Dark on-container tones were already tone **90** and do not change. Opt out with `useExpressiveOnContainerColors: false` to keep the older higher-contrast tone **10** light on-container colors. Flutter's `ColorScheme.fromSeed` has no such opt-out. 
+- Per **Flutter's official recommendation** the package is released as a **major breaking** release.
+- Seeded **light** themes now default `FlexKeyColors.useExpressiveOnContainerColors` to `true` when undefined, matching Flutter 3.47 `ColorScheme.fromSeed` and FlexSeedScheme 5 (MCU 0.13 tone **30** on-container colors). This changes `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` in light mode. Dark on-container tones were already tone **90** and do not change. Opt out with `useExpressiveOnContainerColors: false` to keep the older higher-contrast tone **10** light on-container colors. Flutter's `ColorScheme.fromSeed` has no such opt-out.
+- Removed no-op ColorScheme leftovers deprecated since v8. Use `surface` / `onSurface` instead of `background` / `onBackground` on `FlexColorScheme`, `FlexThemeData`, `FlexSchemeOnColors`, and `FlexSchemeSurfaceColors`. `surfaceVariant` was also removed from `FlexSchemeSurfaceColors`. Matching unused alpha fields were removed from `FlexAlphaValues`.
+- Removed no-op `FlexSubThemesData` flags `useTextTheme`, `useFlutterDefaults`, and `blendTextTheme`. Use `useMaterial3Typography` instead of `useTextTheme`.
+- Removed unused `useFlutterDefaults` from `FlexSubThemes.bottomNavigationBarTheme`, and unused `useMaterial3` / `useFlutterDefaults` from `navigationBarTheme` and `navigationRailTheme`. `bottomNavigationBarTheme` still uses `useMaterial3`.
+- Removed the `FlexSubThemes.bottomNavigationBar` pass-through alias. Use `FlexSubThemes.bottomNavigationBarTheme`.
+- Removed `FlexColorScheme.createPrimarySwatch`. Use `ColorTools.createPrimarySwatch` in package `flex_color_picker`.
 
 **FIX**
 - In beta feature Shadcn colors, the shadZinc scheme was not included in the schemesList, it has been added.
@@ -41,6 +46,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 
 **CHANGE**
 - The **Expressive containers** switch now defaults ON, matching FCS 9.0 and Flutter 3.47 `ColorScheme.fromSeed`. Generated theme code omits `useExpressiveOnContainerColors` when on (the new default) and emits `useExpressiveOnContainerColors: false` when off.
+- Removed leftover `blendTextTheme` Playground persistence and code-generation comments. The TextTheme panel keeps a short notice that tinted TextTheme was removed in 9.0.
 
 **FIX**
 - Make cancel custom color selection work correctly.

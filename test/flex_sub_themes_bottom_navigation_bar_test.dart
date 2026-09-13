@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 void main() {
-  group('WITH: FlexSubThemes.bottomNavigationBar ', () {
+  group('WITH: FlexSubThemes.bottomNavigationBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomNavigationBar tests
     // -------------------------------------------------------------------------
@@ -226,17 +226,6 @@ void main() {
             ),
           ),
         ),
-      );
-    });
-    test('BottomNavigationBar FST3.6: Given a deprecated bottomNavigationBar '
-        'EXPECT bottomNavigationBarTheme', () {
-      final ColorScheme colorScheme = ColorScheme.fromSeed(
-        seedColor: const Color(0xFF79E742),
-        brightness: Brightness.light,
-      );
-      expect(
-        FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
-        equals(FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme)),
       );
     });
   });

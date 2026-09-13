@@ -193,13 +193,6 @@ class ThemeController with ChangeNotifier {
     _toDarkMethodLevel = await _themeService.load(Store.keyToDarkMethodLevel, Store.defaultToDarkMethodLevel);
     _blendLightOnColors = await _themeService.load(Store.keyBlendLightOnColors, Store.defaultBlendLightOnColors);
     _blendDarkOnColors = await _themeService.load(Store.keyBlendDarkOnColors, Store.defaultBlendDarkOnColors);
-    // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-    // _blendLightTextTheme = await _themeService.load(
-    //     Store.keyBlendLightTextTheme, Store.defaultBlendLightTextTheme);
-    // _blendDarkTextTheme = await _themeService.load(
-    //     Store.keyBlendDarkTextTheme, Store.defaultBlendDarkTextTheme);
-    //
-    // Material 3 and Seed ColorScheme SETTINGS.
     _useMaterial3 = await _themeService.load(Store.keyUseMaterial3, Store.defaultUseMaterial3);
     _fixedColorStyle = await _themeService.load(Store.keyFixedColorStyle, Store.defaultFixedColorStyle);
     _useKeyColors = await _themeService.load(Store.keyUseKeyColors, Store.defaultUseKeyColors);
@@ -1401,11 +1394,6 @@ class ThemeController with ChangeNotifier {
     setToDarkMethodLevel(Store.defaultToDarkMethodLevel, false);
     setBlendLightOnColors(Store.defaultBlendLightOnColors, false);
     setBlendDarkOnColors(Store.defaultBlendDarkOnColors, false);
-    // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-    // setBlendLightTextTheme(Store.defaultBlendLightTextTheme, false);
-    // setBlendDarkTextTheme(Store.defaultBlendDarkTextTheme, false);
-    //
-    // Material 3 and Seed ColorScheme SETTINGS.
     setUseMaterial3(Store.defaultUseMaterial3, false);
     setFixedColorStyle(Store.defaultFixedColorStyle, false);
     setUseKeyColors(Store.defaultUseKeyColors, false);
@@ -1982,10 +1970,6 @@ class ThemeController with ChangeNotifier {
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
       // Text theme blends: ON light, ON dark
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // setBlendLightTextTheme(true, false);
-      // setBlendDarkTextTheme(true, false);
-      // OutlinedButton settings
       setOutlinedButtonOutlineSchemeColor(SchemeColor.primary, false);
       setOutlinedButtonPressedBorderWidth(2, false);
       // ToggleButtons settings
@@ -2053,10 +2037,6 @@ class ThemeController with ChangeNotifier {
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
       // Text theme blends
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // setBlendLightTextTheme(false, false);
-      // setBlendDarkTextTheme(true, false);
-      // Elevated button
       setElevatedButtonSchemeColor(SchemeColor.onPrimaryContainer, false);
       setElevatedButtonSecondarySchemeColor(SchemeColor.primaryContainer, false);
       // OutlinedButton settings
@@ -2137,11 +2117,6 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(false, false);
       setTintedDisabledControls(false, false);
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // Text theme blends
-      // setBlendLightTextTheme(false, false);
-      // setBlendDarkTextTheme(false, false);
-      // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.primary, false);
       setAppBarStyleDark(FlexAppBarStyle.material, false);
       setAppBarElevationLight(4, false);
@@ -2244,11 +2219,6 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // Text theme blends
-      // setBlendLightTextTheme(false, false);
-      // setBlendDarkTextTheme(false, false);
-      // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
       setBottomAppBarElevationLight(1, false);
@@ -2330,11 +2300,6 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // Text theme blends
-      // setBlendLightTextTheme(false, false);
-      // setBlendDarkTextTheme(true, false);
-      // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
       // Set TextField Settings via InputDecorator
@@ -2417,11 +2382,6 @@ class ThemeController with ChangeNotifier {
       setAdaptiveAppBarScrollUnderOffLight(AdaptiveResponse.excludeWebAndroidFuchsia, false);
       setAdaptiveElevationShadowsBackDark(AdaptiveResponse.all, false);
       setAdaptiveAppBarScrollUnderOffDark(AdaptiveResponse.excludeWebAndroidFuchsia, false);
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // Text theme blends
-      // setBlendLightTextTheme(false, false);
-      // setBlendDarkTextTheme(false, false);
-      // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
       setAppBarElevationLight(0, false);
@@ -2524,11 +2484,6 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // Text theme blends: ON light, ON dark
-      // setBlendLightTextTheme(true, false);
-      // setBlendDarkTextTheme(true, false);
-      // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
       setAppBarScrolledUnderElevationLight(8, false);
@@ -2616,11 +2571,6 @@ class ThemeController with ChangeNotifier {
       setUseM2StyleDividerInM3(true, false);
       setInteractionEffects(true, false);
       setTintedDisabledControls(true, false);
-      // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-      // Text theme blends: ON light, ON dark
-      // setBlendLightTextTheme(true, false);
-      // setBlendDarkTextTheme(true, false);
-      // AppBar settings
       setAppBarStyleLight(FlexAppBarStyle.background, false);
       setAppBarStyleDark(FlexAppBarStyle.background, false);
       setAppBarScrolledUnderElevationLight(8, false);
@@ -3560,31 +3510,6 @@ class ThemeController with ChangeNotifier {
     if (notify) notifyListeners();
     unawaited(_themeService.save(Store.keyBlendDarkOnColors, value));
   }
-
-  // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-  // TextThem blending ON/OFF
-  // late bool _blendLightTextTheme;
-  // bool get blendLightTextTheme => _blendLightTextTheme;
-  // void setBlendLightTextTheme(bool? value, [bool notify = true]) {
-  //   if (value == null) return;
-  //   if (value == _blendLightTextTheme) return;
-  //   _blendLightTextTheme = value;
-  //   if (notify) notifyListeners();
-  //   unawaited(_themeService.save(Store.keyBlendLightTextTheme, value));
-  // }
-  //
-  // late bool _blendDarkTextTheme;
-  // bool get blendDarkTextTheme => _blendDarkTextTheme;
-  // void setBlendDarkTextTheme(bool? value, [bool notify = true]) {
-  //   if (value == null) return;
-  //   if (value == _blendDarkTextTheme) return;
-  //   _blendDarkTextTheme = value;
-  //   if (notify) notifyListeners();
-  //   unawaited(_themeService.save(Store.keyBlendDarkTextTheme, value));
-  // }
-
-  // Material 3 and Seed ColorScheme SETTINGS.
-  // ===========================================================================
 
   late bool _useMaterial3;
 

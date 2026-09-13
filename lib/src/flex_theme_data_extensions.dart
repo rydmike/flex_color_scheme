@@ -818,7 +818,7 @@ extension FlexThemeData on ThemeData {
     /// * [BottomAppBarTheme] for [BottomAppBar] via
     ///   [FlexSubThemes.bottomAppBarTheme].
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [FlexSubThemes.bottomNavigationBar].
+    ///   [FlexSubThemes.bottomNavigationBarTheme].
     /// * [BottomSheetThemeData] for [BottomSheet] via
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
@@ -1349,50 +1349,6 @@ extension FlexThemeData on ThemeData {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     Iterable<ThemeExtension<dynamic>>? extensions,
-
-    /// **Deprecated:**
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and was also before
-    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
-    /// Material-2 used eg by menu [Drawer]. It was then also used by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this was also an override color for the color
-    /// that would have been used based on mode defined by property
-    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
-    /// it overrode the same color in it as well.
-    ///
-    /// Defaults to null.
-    @Deprecated(
-      'Use surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? background,
-
-    /// **Deprecated:**
-    /// A color that is clearly legible when drawn on `background` color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `background` and `onBackground` is recommended.
-    ///
-    /// When using this factory, this was an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
-    /// or when using pre-defined color scheme based [FlexScheme] and its
-    /// `scheme` property, including any used blend logic. If a [colorScheme]
-    /// was provided with this corresponding color defined, this color property
-    /// also overrode the same color in it as well.
-    ///
-    /// You used this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    @Deprecated(
-      'Use onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? onBackground,
   }) => FlexColorScheme.light(
     colors: colors,
     scheme: scheme,
@@ -2331,7 +2287,7 @@ extension FlexThemeData on ThemeData {
     /// * [BottomAppBarTheme] for [BottomAppBar] via
     ///   [FlexSubThemes.bottomAppBarTheme].
     /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [FlexSubThemes.bottomNavigationBar].
+    ///   [FlexSubThemes.bottomNavigationBarTheme].
     /// * [BottomSheetThemeData] for [BottomSheet] via
     ///   [FlexSubThemes.bottomSheetTheme].
     /// * [ButtonThemeData] for old deprecated buttons, via
@@ -2859,50 +2815,6 @@ extension FlexThemeData on ThemeData {
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
     Iterable<ThemeExtension<dynamic>>? extensions,
-
-    /// **Deprecated:**
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and was also before
-    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
-    /// Material-2 used eg by menu [Drawer]. It was then also used by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this was also an override color for the color
-    /// that would have been used based on mode defined by property
-    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
-    /// it overrode the same color in it as well.
-    ///
-    /// Defaults to null.
-    @Deprecated(
-      'Use surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? background,
-
-    /// **Deprecated:**
-    /// A color that is clearly legible when drawn on `background` color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `background` and `onBackground` is recommended.
-    ///
-    /// When using this factory, this was an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
-    /// or when using pre-defined color scheme based [FlexScheme] and its
-    /// `scheme` property, including any used blend logic. If a [colorScheme]
-    /// was provided with this corresponding color defined, this color property
-    /// also overrode the same color in it as well.
-    ///
-    /// You used this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    @Deprecated(
-      'Use onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.',
-    )
-    Color? onBackground,
   }) => FlexColorScheme.dark(
     colorScheme: colorScheme,
     colors: colors,

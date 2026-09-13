@@ -67,21 +67,6 @@ NavigationDrawerThemeData _navigationDrawerTheme({
   /// [backgroundSchemeColor].
   SchemeColor? unselectedItemSchemeColor,
 
-  // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-  //
-  // An alternative unselected item color.
-  //
-  // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-  // before its normal default fallbacks.
-  //
-  // The color is typically used to provide the color created by blended or
-  // tinted text theme, when it is being used by FlexColorScheme as an
-  // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-  //
-  // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-  // a blended TextTheme is being used.
-  // final Color? altUnselectedColor,
-
   /// Overrides the default value of [NavigationDrawer.shadowColor].
   Color? shadowColor,
 

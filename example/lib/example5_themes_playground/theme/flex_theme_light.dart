@@ -151,8 +151,6 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
             // Custom Scaffold background color.
             scaffoldBackgroundBaseColor: controller.scaffoldBackgroundLightBaseColor,
             scaffoldBackgroundSchemeColor: controller.scaffoldBackgroundLightSchemeColor,
-            // TODO(rydmike): Commented as part of blendTextTheme deprecation.
-            // blendTextTheme: controller.blendLightTextTheme,
             // Used typography.
             useMaterial3Typography: controller.useMaterial3Typography,
             // Divider settings
@@ -618,7 +616,7 @@ FlexColorScheme flexColorSchemeLight(ThemeController controller, Color source) {
     // To test manual typography override use this:
     // typography: Typography.material2021(platform: controller.platform),
     // Or the one below, the selection will correctly override the via
-    // sub themes "useTextTheme" value.
+    // sub themes "useMaterial3Typography" value.
     // typography: Typography.material2018(platform: controller.platform),
     //
     // The platform can be toggled in the app, but not saved.
