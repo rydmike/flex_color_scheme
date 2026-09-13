@@ -2,6 +2,38 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 9.0.0
+
+**September 13, 2026**
+
+The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled Material and Cupertino libraries.
+
+### Package
+
+**BREAKING**
+- This version requires Flutter 3.47.0 or higher
+- It also opts in on Dart 3.13.0 language features and lints.
+- This release brings full support for the standalone `material_ui` and `cupertino_ui` packages.
+- Per **Flutter's official recommendation** the package is released as a **major breaking** release, but contains no breaking APIs or any new APIs. 
+
+**FIX**
+- In beta feature Shadcn colors, the shadZinc scheme was not included in the schemesList
+
+**CHORE**
+- Bump package version to 9.0.0.
+
+### Themes Playground
+
+**NEW**
+- Add showing textBaseline and leadingDistribution to TextStyle details.
+ 
+**FIX**
+- Make cancel custom color selection work correctly.
+
+**CHORE**
+- Bump version to 9.0.0.
+
+
 ## 8.4.0
 
 **November 30, 2025**

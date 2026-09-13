@@ -45,8 +45,8 @@ abstract final class App {
           : 'native VM';
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
-  static const String versionMajor = '8';
-  static const String versionMinor = '4';
+  static const String versionMajor = '9';
+  static const String versionMinor = '0';
   static const String versionPatch = '0';
   static const String versionBuild = '01';
   static const String versionFull = '$versionMajor.$versionMinor.$versionPatch'
@@ -56,7 +56,7 @@ abstract final class App {
   static const String flutterChannel = FlutterVersion.channel ?? '';
   static const String flutterVersion =
       '$flutterChannel $flutterVersionNum ($buildType)';
-  static const String copyright = '© 2020 - 2025';
+  static const String copyright = '© 2020 - 2026';
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';

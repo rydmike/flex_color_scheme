@@ -53,6 +53,7 @@ analyzer:
     - "test/.test_coverage.dart"
     - "bin/cache/**"
     - "lib/generated_plugin_registrant.dart"
+    - build/**
 
   # For more information see: https://dart.dev/tools/analysis
   language:
