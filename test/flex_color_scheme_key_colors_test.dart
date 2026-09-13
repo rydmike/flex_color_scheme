@@ -59,8 +59,6 @@ void main() {
         SeedColorScheme.fromSeeds(
           brightness: Brightness.light,
           primaryKey: m3BaseSeed,
-          // TODO(rydmike): Change to default/true when MCU 12 is minimum.
-          useExpressiveOnContainerColors: false,
         ),
         equals(
           ColorScheme.fromSeed(
@@ -69,6 +67,36 @@ void main() {
           ).copyWith(surfaceVariant: const Color(0xfffdf7ff)),
         ),
       );
+    });
+    test('FCS7.001-light-legacy: GIVEN a FlexColorScheme.light with keyColors '
+        'opting out of expressive on-container colors '
+        'EXPECT tone 10 on-container colors that differ from '
+        'ColorScheme.fromSeed.', () {
+      final ColorScheme legacy = FlexColorScheme.light(
+        colors: m3Baseline,
+        keyColors: const FlexKeyColors(
+          useSecondary: false,
+          useTertiary: false,
+          useExpressiveOnContainerColors: false,
+        ),
+      ).toScheme;
+      final ColorScheme fromSeed = ColorScheme.fromSeed(
+        seedColor: m3BaseSeed,
+        brightness: Brightness.light,
+      );
+      final ColorScheme fssLegacy = SeedColorScheme.fromSeeds(
+        brightness: Brightness.light,
+        primaryKey: m3BaseSeed,
+        useExpressiveOnContainerColors: false,
+      );
+      expect(legacy.onPrimaryContainer, fssLegacy.onPrimaryContainer);
+      expect(legacy.onSecondaryContainer, fssLegacy.onSecondaryContainer);
+      expect(legacy.onTertiaryContainer, fssLegacy.onTertiaryContainer);
+      expect(legacy.onErrorContainer, fssLegacy.onErrorContainer);
+      expect(legacy.onPrimaryContainer, isNot(fromSeed.onPrimaryContainer));
+      expect(legacy.onSecondaryContainer, isNot(fromSeed.onSecondaryContainer));
+      expect(legacy.onTertiaryContainer, isNot(fromSeed.onTertiaryContainer));
+      expect(legacy.onErrorContainer, isNot(fromSeed.onErrorContainer));
     });
     test('FCS7.001-dark: GIVEN a FlexColorScheme.dark with keyColors using '
         'only one seed color '
@@ -565,9 +593,7 @@ void main() {
           seedColor: m3BaseSeed,
           brightness: Brightness.light,
         ).copyWith(
-          // TODO(rydmike): Monitor change when Flutter goes to MCU 12
-          // These values are off by one now, rounding diff!? Investigate later.
-          onPrimaryContainer: const Color(0xff211047),
+          // FSS MCU fork vs Flutter MCU 0.13: 1-unit rounding on these roles.
           onPrimaryFixed: const Color(0xff211047),
           secondary: const Color(0xff625b70),
           secondaryFixedDim: const Color(0xffccc2db),

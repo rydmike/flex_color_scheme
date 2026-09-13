@@ -79,7 +79,6 @@ abstract final class AppTheme {
       useSecondary: true,
       useTertiary: true,
       keepPrimary: true,
-      useExpressiveOnContainerColors: true,
     ),
     tones: FlexSchemeVariant.jolly.tones(Brightness.light),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,

@@ -556,7 +556,7 @@ abstract final class Store {
   // Key used to read and save the expressiveOnContainer value.
   static const String keyExpressiveOnContainer = 'expressiveOnContainer';
   // Default value for the expressiveOnContainer, also to reset settings.
-  static const bool defaultExpressiveOnContainer = false;
+  static const bool defaultExpressiveOnContainer = true;
 
   // Key used to read and save the useLegacyMonochromeSeedBehavior value.
   static const String keyUseLegacyMonochromeSeedBehavior = 'useLegacyMonochromeSeedBehavior';

@@ -3004,7 +3004,7 @@ class FlexColorScheme with Diagnosticable {
                   .higherContrastFixed(fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
         variant: seed.useKeyColors ? variant : null,
         contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
-        useExpressiveOnContainerColors: seed.useExpressiveOnContainerColors ?? false,
+        useExpressiveOnContainerColors: seed.useExpressiveOnContainerColors ?? true,
         respectMonochromeSeed: !(seed.useLegacyMonochromeSeedBehavior ?? false),
       );
       // Update effective main colors to seed colors, keeping configured
@@ -5167,10 +5167,9 @@ class FlexColorScheme with Diagnosticable {
                   .higherContrastFixed(fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
         variant: seed.useKeyColors ? variant : null,
         contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
-        // This API only has any impact in light mode, as intended, we could
-        // call it with a true value, but result will be same as false,
-        // only more compute, so it is always set to false.
-        useExpressiveOnContainerColors: false,
+        // Forwarded for API consistency with light. Dark on-container tones
+        // are already 90 either way; this flag only changes light 10 vs 30.
+        useExpressiveOnContainerColors: seed.useExpressiveOnContainerColors ?? true,
         respectMonochromeSeed: !(seed.useLegacyMonochromeSeedBehavior ?? false),
       );
       // Update effective main colors to seed colors, keeping configured

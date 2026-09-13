@@ -2103,7 +2103,7 @@ String generateThemeDartCode(ThemeController controller) {
       ? '      contrastLevel: ${controller.dynamicContrastLevel},\n'
       : '';
 
-  final String useExpressiveOnContainerColors = controller.expressiveOnContainer
+  final String useExpressiveOnContainerColors = !controller.expressiveOnContainer
       ? '      useExpressiveOnContainerColors: ${controller.expressiveOnContainer},\n'
       : '';
 

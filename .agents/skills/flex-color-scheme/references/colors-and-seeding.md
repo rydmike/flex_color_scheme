@@ -20,6 +20,8 @@ final ThemeData dark = FlexThemeData.dark(keyColors: seeds);
 
 This snippet uses the imports from the skill entrypoint. A default `FlexKeyColors()` enables seeding from effective primary. Secondary, tertiary, and error seeding have separate opt-in flags; providing a seed override alone is not a substitute for enabling its category.
 
+In 9.x, seeded **light** themes match Flutter 3.47 `ColorScheme.fromSeed` expressive on-container colors (tone 30). Set `useExpressiveOnContainerColors: false` on `FlexKeyColors` to keep the older higher-contrast tone 10 on-container colors. The flag does not change dark on-container tones.
+
 Built-in `scheme` seeding uses the light palette's seed inputs for the dark theme too. With custom inputs, keep seed colors consistent yourself unless different palettes are intentional. A seed color does not necessarily equal the generated theme's primary: the seed determines a palette and the selected tone supplies the role color.
 
 `keepPrimary`, `keepSecondary`, and related keep flags retain selected input roles instead of accepting their generated tones. They change color-pair relationships; inspect the corresponding on-colors and contrast rather than enabling them automatically for branding.

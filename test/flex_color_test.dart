@@ -348,23 +348,24 @@ void main() {
       expect(scheme.primary, const Color(0xff36618e)); // OLD was: 0xff0061a4
       expect(scheme.onPrimary, const Color(0xffffffff));
       expect(scheme.primaryContainer, const Color(0xffd1e4ff));
-      expect(scheme.onPrimaryContainer, const Color(0xff001d36));
+      expect(scheme.onPrimaryContainer, const Color(0xff194975));
       expect(scheme.secondary, const Color(0xff535f70));
       expect(scheme.onSecondary, const Color(0xffffffff));
       expect(scheme.secondaryContainer, const Color(0xffd7e3f7));
-      expect(scheme.onSecondaryContainer, const Color(0xff101c2b));
+      expect(scheme.onSecondaryContainer, const Color(0xff3b4858));
       expect(scheme.tertiary, const Color(0xff6b5778));
       expect(scheme.onTertiary, const Color(0xffffffff));
       expect(scheme.tertiaryContainer, const Color(0xfff2daff));
-      expect(scheme.onTertiaryContainer, const Color(0xff251431));
+      expect(scheme.onTertiaryContainer, const Color(0xff523f5f));
       expect(scheme.error, const Color(0xffba1a1a));
       expect(scheme.error, FlexColor.material3LightError);
       expect(scheme.onError, const Color(0xffffffff));
       expect(scheme.onError, FlexColor.material3LightOnError);
       expect(scheme.errorContainer, const Color(0xffffdad6));
       expect(scheme.errorContainer, FlexColor.material3LightErrorContainer);
-      expect(scheme.onErrorContainer, const Color(0xff410002));
-      expect(scheme.onErrorContainer, FlexColor.material3LightOnErrorContainer);
+      // MCU 0.13 fromSeed uses tone 30; FlexColor keeps the unseeded M3 token.
+      expect(scheme.onErrorContainer, const Color(0xff93000a));
+      expect(scheme.onErrorContainer, isNot(FlexColor.material3LightOnErrorContainer));
       expect(scheme.outline, const Color(0xff73777f));
       // TODO(rydmike): surface changed from Flutter version 3.19 to 3.22!
       expect(scheme.surface, const Color(0xfff8f9ff)); // Old was: 0xfffdfcff

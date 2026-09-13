@@ -14,7 +14,8 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - This version requires Flutter 3.47.0 or higher
 - It also opts in on Dart 3.13.0 language features and lints.
 - This release brings full support for the standalone `material_ui` and `cupertino_ui` packages.
-- Per **Flutter's official recommendation** the package is released as a **major breaking** release, but contains no breaking APIs or any new APIs. 
+- Per **Flutter's official recommendation** the package is released as a **major breaking** release. Public APIs are otherwise unchanged.
+- Seeded **light** themes now default `FlexKeyColors.useExpressiveOnContainerColors` to `true` when undefined, matching Flutter 3.47 `ColorScheme.fromSeed` and FlexSeedScheme 5 (MCU 0.13 tone **30** on-container colors). This changes `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` in light mode. Dark on-container tones were already tone **90** and do not change. Opt out with `useExpressiveOnContainerColors: false` to keep the older higher-contrast tone **10** light on-container colors. Flutter's `ColorScheme.fromSeed` has no such opt-out. 
 
 **FIX**
 - In beta feature Shadcn colors, the shadZinc scheme was not included in the schemesList, it has been added.
@@ -31,12 +32,16 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 
 **FIX**
 - Temp test fix: Refactored `flex_color_scheme_to_theme_test.dart` use the new `textThemeFromGoogleFonts` adapter function from `google_fonts_text_theme.dart` file. Needed because`google_fonts` still types `TextTheme` against `package:flutter/material.dart`, which is a different class than `package:material_ui`'s `TextTheme`. The `TextStyle` is shared, so copying the styles is type-safe. This will be removed when `google_fonts` is updated to use `package:material_ui`'s `TextTheme`.
+- Updated seeded `ColorScheme.fromSeed` parity tests for MCU 0.13 expressive light on-container colors. Added a lock that `useExpressiveOnContainerColors: false` still produces the legacy tone 10 colors.
 
 ### Themes Playground
 
 **NEW**
 - Add showing textBaseline and leadingDistribution to TextStyle details.
- 
+
+**CHANGE**
+- The **Expressive containers** switch now defaults ON, matching FCS 9.0 and Flutter 3.47 `ColorScheme.fromSeed`. Generated theme code omits `useExpressiveOnContainerColors` when on (the new default) and emits `useExpressiveOnContainerColors: false` when off.
+
 **FIX**
 - Make cancel custom color selection work correctly.
 

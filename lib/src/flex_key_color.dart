@@ -446,14 +446,16 @@ class FlexKeyColors with Diagnosticable {
   /// This comes at the cost of their contrast level and accessibility.
   ///
   /// The value has no impact on dark mode [ColorScheme] colors. Expressive
-  /// onColors for container colors have always been used in dark mode in
-  /// Material-3 design and they have good contrast and accessibility.
+  /// on-colors for container colors have always been used in dark mode in
+  /// Material-3 design (tone **90**) and they have good contrast and
+  /// accessibility. The flag is still forwarded in [FlexColorScheme.dark]
+  /// for API consistency.
   ///
   /// Setting the [useExpressiveOnContainerColors] to `true` will make the
   /// onContainer colors of all scheme variants and [FlexTones] based schemes
   /// use the new expressive tone, if the currently used tone is 10. If a scheme
   /// already uses an intentionally customized tone, the new expressive tone
-  /// will not be used for those tones, even when this settings is true.
+  /// will not be used for those tones, even when this setting is true.
   ///
   /// Schemes that contain such on container tones are:
   /// - Fidelity
@@ -463,7 +465,8 @@ class FlexKeyColors with Diagnosticable {
   /// - Candy pop
   /// - Chroma
   ///
-  /// Defaults to `false` if undefined.
+  /// Defaults to `true` if undefined, matching Flutter 3.47+
+  /// [ColorScheme.fromSeed] and Material Color Utilities (MCU) 0.13.
   ///
   /// The Material design spec for the tones used by the colors
   /// [ColorScheme.onPrimaryContainer], [ColorScheme.onSecondaryContainer],
@@ -474,23 +477,15 @@ class FlexKeyColors with Diagnosticable {
   /// ContrastCurve(3.0, 4.5, 7.0, 11.0), making min contrast for normal
   /// contrast 4.5 instead of past 7.0.
   ///
-  /// The expressive light container tone is not yet used in the Flutter SDK
-  /// (Mar 22, 2025), but it is in the Material-3 design spec and also in
-  /// MCU v0.12.0. This is a breaking change in MCU 0.12.0 compared to 0.11.1
-  /// used in Flutter 3.24 and it will change the light mode color schemes
-  /// produced by all DynamicColor based Material color schemes.
-  ///
-  /// When this change lands in stable Flutter, it will be made
-  /// `true` by default in FCS too when undefined. You you will still be able
-  /// to opt out of using it, by setting it `false`. Flutter SDK and MCU will
-  /// not contain such an opt-out feature. This
+  /// Flutter 3.38 still used MCU 0.11.1 tone **10**. Flutter 3.47 uses MCU
+  /// 0.13.0 tone **30**. FlexColorScheme 9.0 defaults this flag to `true`
+  /// when undefined so seeded light themes match [ColorScheme.fromSeed].
+  /// Flutter SDK and MCU do not offer an opt-out. Set this to `false` to
+  /// keep the older higher-contrast light on-container tones.
   ///
   /// The new **on** color tones for containers in light mode make them more
   /// color expressive, but they also reduce their contrast level and
-  /// accessibility. We recommend keeping them at the higher contrast level,
-  /// by setting [useExpressiveOnContainerColors] to `false`. With it set to
-  /// `false`, you will also keep this preference when Flutter SDK
-  /// defaults to using the expressive tones.
+  /// accessibility. Prefer `false` if you need the previous contrast.
   final bool? useExpressiveOnContainerColors;
 
   /// Set this to `true` to use the legacy behavior for monochrome seed colors.
