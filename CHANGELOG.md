@@ -17,7 +17,11 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - Per **Flutter's official recommendation** the package is released as a **major breaking** release, but contains no breaking APIs or any new APIs. 
 
 **FIX**
-- In beta feature Shadcn colors, the shadZinc scheme was not included in the schemesList
+- In beta feature Shadcn colors, the shadZinc scheme was not included in the schemesList, it has been added.
+
+**DOCS**
+- Setup package for agentic development and usage use with git worktrees.
+- Added a skill for agents that consume this package, see `.agents/skills/flex-color-scheme/SKILL.md`.
 
 **CHORE**
 - Bump package version to 9.0.0.
