@@ -904,10 +904,10 @@ class Category {
 }
 
 void _pushScreen({required BuildContext context, required Widget screen}) {
-  unawaited(Navigator.push(
+  Navigator.push(
     context,
     MaterialPageRoute<dynamic>(builder: (BuildContext context) => screen),
-  ));
+  );
 }
 
 class Product {

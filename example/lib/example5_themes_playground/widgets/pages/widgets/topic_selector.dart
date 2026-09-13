@@ -60,9 +60,9 @@ class _TopicSelectorHorizontalState extends State<TopicSelectorHorizontal> {
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
       scrollOffset = widget.buttonWidth * selectedPage;
-      unawaited(scrollController.animateTo(scrollOffset,
+      scrollController.animateTo(scrollOffset,
           duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic));
+          curve: Curves.easeOutCubic);
     }
   }
 
@@ -198,9 +198,9 @@ class _TopicSelectorVerticalState extends State<TopicSelectorVertical> {
       final double compactHeight = widget.isCompact ? heightReduce : 0;
       scrollOffset = (buttonHeight - compactHeight) * selectedPage;
       scrollOffset = buttonHeight * selectedPage;
-      unawaited(scrollController.animateTo(scrollOffset,
+      scrollController.animateTo(scrollOffset,
           duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic));
+          curve: Curves.easeOutCubic);
     }
   }
 

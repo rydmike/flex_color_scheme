@@ -169,8 +169,8 @@ class _OneOrTwoTopicPageViewState extends State<OneOrTwoTopicPageView>
                       // the page view controller, it also looks very confusing.
                       scaleController.value = 0.8;
                       fadeController.value = 0.2;
-                      unawaited(scaleController.forward());
-                      unawaited(fadeController.forward());
+                      scaleController.forward();
+                      fadeController.forward();
                       pageController.jumpToPage(themeCtrl.topicIndexStartSide);
                     }
                   }),
