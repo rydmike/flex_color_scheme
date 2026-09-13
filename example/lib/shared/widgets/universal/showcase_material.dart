@@ -3398,9 +3398,10 @@ class TabBarScrollingForAppBarShowcase extends StatelessWidget {
                               : null,
                       tabs: <Widget>[
                         for (int i = 0; i < nrOfTabs; i++)
-                          useM3
-                              ? Tab(text: 'Tab label ${i + 1}')
-                              : Tab(text: 'TAB LABEL ${i + 1}'),
+                          if (useM3)
+                            Tab(text: 'Tab label ${i + 1}')
+                          else
+                            Tab(text: 'TAB LABEL ${i + 1}'),
                       ],
                     ),
                   ),
