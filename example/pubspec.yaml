@@ -3,8 +3,8 @@ description: Examples that demonstrate how to use the FlexColorScheme package.
 version: 9.0.0
 publish_to: 'none'
 environment:
-  sdk: '>=3.6.0 <4.0.0'
-  flutter: '>=3.38.0'
+  sdk: '>=3.13.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
@@ -27,6 +27,9 @@ dependencies:
   # https://pub.dev/packages/cupertino_icons
   cupertino_icons: ^1.0.8
 
+  # The official Flutter Cupertino Design Library.
+  cupertino_ui: ^1.0.0
+
   # Simulated device frames package by aloisdeniel.com.
   # Used by the theme simulator in the Playground.
   # https://pub.dev/packages/device_frame
@@ -40,7 +43,7 @@ dependencies:
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used for color selection in the Playground to make customized color schemes.
   # https://pub.dev/packages/flex_color_picker
-  flex_color_picker: ^3.7.1
+  flex_color_picker: ^4.0.0
 
   # Color scheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_color_scheme
@@ -50,9 +53,9 @@ dependencies:
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used by the playground app to compute and display tonal palettes.
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^4.0.0
+  flex_seed_scheme: ^5.0.0
 
-  # The Flutter SDK, by Google flutter.dev.
+  # The flutter library itself
   flutter:
     sdk: flutter
 
@@ -77,6 +80,9 @@ dependencies:
   # https://pub.dev/packages/intl
   intl: ^0.20.2
 
+  # The official Flutter Material UI Library.
+  material_ui: ^1.0.0
+
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
@@ -100,11 +106,6 @@ dependencies:
   # Replaces dart:html, support WASM. Package by Google dart.dev.
   # https://pub.dev/packages/web
   web: ^1.1.1
-
-# Add dependency_overrides:
-dependency_overrides:
-  flex_seed_scheme: 4.0.1
-  #  path: ../../flex_seed_scheme
 
 dev_dependencies:
   # Flutter launcher icons package, by Mark O'Sullivan.

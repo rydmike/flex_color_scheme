@@ -34,31 +34,41 @@ topics:
   - materialdesign
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
-  flutter: '>=3.38.0'
+  sdk: '>=3.13.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
+  # The official Flutter Cupertino Design Library.
+  cupertino_ui: ^1.0.0
+
   # FlexSeedScheme package, by Mike Rydstrom, rydmike.com (@rydmike).
   # https://pub.dev/packages/flex_seed_scheme
-  flex_seed_scheme: ^4.0.0
-  #  path: ../flex_seed_scheme
+  flex_seed_scheme: ^5.0.0
 
+    # The flutter library itself
   flutter:
     sdk: flutter
-
+  
+  # The official Flutter Material UI Library.
+  material_ui: ^1.0.0
+  
   # Annotations used to express developer intentions that can't otherwise be deduced by
   # statically analyzing source code. Package is from Google dart.dev team.
   #
-  # Flutter does not expose the "@internal" annotation via foundation, to use it we need to
-  # import the package.
-  meta: ^1.9.1
+  # Flutter does not expose the "@internal" annotation via foundation, to use it we need to import the package.
+  # Version 1.9.1 is first with updated SDK constraints to >=2.12.0 <4.0.0. 
+  # We use same version constraint as Flutter 3.44.
+  # https://pub.dev/packages/meta
+  meta: ^1.18.0
 
 dev_dependencies:
   # Dart test coverage
   coverage: ^1.15.0
+  
   # Flutter test tools
   flutter_test:
     sdk: flutter
+  
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
   google_fonts: ^6.3.0

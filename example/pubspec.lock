@@ -89,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  cupertino_ui:
+    dependency: "direct main"
+    description:
+      name: cupertino_ui
+      sha256: e9dfe7fac704028f8928cbe4028a0be5e8a709498e8daf8247de99e99a32aef3
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   device_frame:
     dependency: "direct main"
     description:
@@ -125,10 +133,10 @@ packages:
     dependency: "direct main"
     description:
       name: flex_color_picker
-      sha256: "8f753a1a026a13ea5cc5eddbae3ceb886f2537569ab2e5208efb1e3bb5af72ff"
+      sha256: f3cac22c1d5af8b355faa9a8146ae81b441664d499475c7a2690c933cf1c673e
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.1"
+    version: "4.0.0"
   flex_color_scheme:
     dependency: "direct main"
     description:
@@ -140,12 +148,17 @@ packages:
     dependency: "direct main"
     description:
       name: flex_seed_scheme
-      sha256: a3183753bbcfc3af106224bff3ab3e1844b73f58062136b7499919f49f3667e7
+      sha256: "08f9ee11f9a08c2dee76d0a07ea824c8a09ea4db9456e32ac4f6dfb34d28392c"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.1"
+    version: "5.0.1"
   flutter:
     dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_localizations:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -211,10 +224,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+      sha256: "1ca20c894b1717686a2319b8548763d812bc0aabdac580420a44c5178c57a867"
       url: "https://pub.dev"
     source: hosted
-    version: "0.20.2"
+    version: "0.20.3"
   isolate_channel:
     dependency: transitive
     description:
@@ -271,6 +284,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.0"
+  material_ui:
+    dependency: "direct main"
+    description:
+      name: material_ui
+      sha256: fbfb53cab6c4629438feeade5f3d305f72944bc9d9f25786b19106d32b80ec45
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   meta:
     dependency: transitive
     description:
@@ -621,5 +642,5 @@ packages:
     source: hosted
     version: "6.6.1"
 sdks:
-  dart: ">=3.11.0-0 <4.0.0"
-  flutter: ">=3.38.0"
+  dart: ">=3.13.0 <4.0.0"
+  flutter: ">=3.47.0"
