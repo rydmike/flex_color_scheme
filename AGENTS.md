@@ -1,31 +1,33 @@
-# Repository Guidelines
+# FlexColorScheme repository guidance
 
-## Project Structure & Module Organization
-- `lib/` holds the published package; most implementation lives under `lib/src/` (e.g., `flex_color_scheme.dart`, `flex_sub_themes*.dart`, and color data classes). Add new APIs next to related modules.
-- `example/` contains runnable Flutter apps; `example5_themes_playground` showcases every option and is the fastest way to sanity‑check UI changes.
-- `test/` mirrors the `lib/` layout with `*_test.dart` files plus widget-specific suites.
-- `coverage/lcov.info` and `build/` are generated outputs; do not edit them manually.
+FlexColorScheme is a public Flutter theming package. `lib/` contains the package, `test/` its tests, and `example/` a separate Flutter package. The Themes Playground starts at `example/lib/example5_themes_playground/main.dart`; much of its state and persistence lives in `example/lib/shared/`.
 
-## Build, Test, and Development Commands
-- `flutter pub get` – refreshes dependencies defined in `pubspec.yaml`.
-- `dart analyze` – runs the strict RydMike lint bundle (all lint rules + `strict-*` analyzer settings from `analysis_options.yaml`). Fix every warning before opening a PR.
-- `flutter test --coverage` – executes the full test suite and refreshes `coverage/lcov.info` for Codecov uploads.
-- `flutter test test/flex_color_scheme_test.dart` or `flutter test --name="pattern"` – use for focused debugging during development.
-- Example smoke test: `flutter run -d chrome example/lib/example5_themes_playground/main.dart`.
+## Working conventions
 
-## Coding Style & Naming Conventions
-- Dart’s formatter (2-space indent, 80-char soft wrap) is required; run `dart format lib test example`.
-- Prefer explicit types and `@immutable` data objects, matching the `all_lint_rules.yaml` baseline; avoid `var` unless inference adds clarity.
-- Keep public APIs documented with triple-slash comments and mention Material-design specifics when behavior differs from Flutter defaults.
+- Read SDK/dependency constraints from both pubspecs and formatter/lint settings from the applicable `analysis_options.yaml`. Use the configured FVM SDK when available; `.fvmrc` selects a channel, not an immutable SDK version.
+- Keep public APIs documented and preserve deliberate defaults, null semantics, and Material 2/3 differences. Discuss breaking changes before implementing them.
+- Follow the SDK-decoupled `material_ui` / `cupertino_ui` imports used by this checkout. Do not mechanically restore old Flutter Material/Cupertino imports.
+- Keep edits and checks scoped to the task. Format changed Dart files using repository settings. Add relevant regression coverage for behavior changes, especially theme calculations and seeding.
+- Do not hand-edit generated build/coverage output. Preserve unrelated working-tree changes.
+- Use concise conventional commit messages. For user-visible changes, describe behavior, validation, and API impact; include a Playground screenshot or example when useful.
 
+## Choose the relevant skill
 
-## Testing Guidelines
-- Unit and widget tests live in `test/` and should mirror filenames in `lib/` (`flex_color_scheme_test.dart`, `flex_sub_themes_test.dart`, etc.).
-- Add regression cases whenever you touch theming math or seeded color logic; lean on the example apps for visual checks.
-- Maintain coverage by running `flutter test --coverage`; avoid skipping tests and gate new functionality with assertions that guard against API regressions.
+Read only the skills and references needed for the task.
 
-## Commit & Pull Request Guidelines
-- Use topical branches such as `fix/<issue-id>` or `feature/<theme-area>`; one logical change per PR.
-- Follow conventional commits with concise scopes (e.g., `fix: correct blend for tertiary colors`) and reference GitHub issues when available.
-- Every PR should describe the change, testing performed, screenshots or Playground snippets for visual tweaks, and note any API considerations.
-- Do not land breaking API updates without prior discussion; flag them in the PR template and update docs (`README*.md`, examples, and changelog) in the same branch.
+| Task | Skill |
+| --- | --- |
+| Use the package in an app | [flex-color-scheme](.agents/skills/flex-color-scheme/SKILL.md) |
+| Change package APIs, theme behavior, or tests | [package-development](.agents/skills/package-development/SKILL.md) |
+| Write Dart docs, README, or changelog entries | [code-documentation](.agents/skills/code-documentation/SKILL.md) |
+| Review a diff or pull request | [code-review](.agents/skills/code-review/SKILL.md) |
+| Prepare or verify a release | [release](.agents/skills/release/SKILL.md) |
+| Change Playground properties, persistence, or panels | [themes-playground-development](.agents/skills/themes-playground-development/SKILL.md) |
+| Change or verify emitted theme code | [themes-playground-code-generation](.agents/skills/themes-playground-code-generation/SKILL.md) |
+
+Package map: [architecture](docs/guides/architecture.md). Fresh checkout/worktree setup: [worktree guidance](docs/guides/using-worktrees-guidance.md).
+
+## Canonical guidance and Claude
+
+Edit `AGENTS.md`, `.agents/skills/`, and their linked references. `CLAUDE.md` and `.claude/skills/` are ignored, generated local copies. After cloning or changing canonical guidance, run `./scripts/sync_claude_code_config.sh` when using Claude Code. Do not edit the mirrors. See [scripts](scripts/README.md) for sync and cleanup behavior.
+

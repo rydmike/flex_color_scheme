@@ -48,8 +48,7 @@ scripts/
 # GitHub blob URLs with ?raw=true, so pub.dev renders them from GitHub and
 # they are not needed inside the published package archive.
 #
-# NOTE: Do NOT exclude assets/ — assets/opacity.png is a runtime AssetImage
-# loaded with package: 'flex_color_picker' and MUST be in the archive.
+# Preserve any runtime assets declared by the package or example pubspecs.
 #
 # NOTE: Do NOT exclude example/screenshots/ here. Those files are declared in
 # the pubspec.yaml `screenshots:` section and MUST be inside the archive; the
