@@ -6,8 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'test_color_scheme_equality.dart';
 
-// ignore_for_file: deprecated_member_use_from_same_package, for testing.
-
 void main() {
   //****************************************************************************
   // FlexColorScheme unit tests.
