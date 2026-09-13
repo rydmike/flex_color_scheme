@@ -20,6 +20,6 @@ enum ScreenSelected {
   typography(2),
   elevation(3);
 
-  const ScreenSelected(this.value);
+  ScreenSelected(this.value);
   final int value;
 }

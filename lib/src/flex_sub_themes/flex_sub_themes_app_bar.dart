@@ -16,14 +16,14 @@ part of '../flex_sub_themes.dart';
 /// [FlexSubThemes.appBarTheme] later.
 AppBarThemeData _appBarTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  final ColorScheme? colorScheme,
+  ColorScheme? colorScheme,
 
   /// Whether the AppBar title should be centered.
   ///
   /// Overrides the default value of [AppBar.centerTitle] property in all
   /// descendant [AppBar] widgets. If this property is null, then value
   /// is adapted to the current [TargetPlatform].
-  final bool? centerTitle,
+  bool? centerTitle,
 
   /// Overrides the default value of [AppBar.backgroundColor] in all
   /// descendant [AppBar] widgets.
@@ -32,7 +32,7 @@ AppBarThemeData _appBarTheme({
   ///
   ///  * [foregroundColor], which overrides the default value of
   ///    [AppBar.foregroundColor] in all descendant [AppBar] widgets.
-  final Color? backgroundColor,
+  Color? backgroundColor,
 
   /// Overrides the default value of [AppBar.foregroundColor] in all
   /// descendant [AppBar] widgets.
@@ -41,17 +41,17 @@ AppBarThemeData _appBarTheme({
   ///
   ///  * [backgroundColor], which overrides the default value of
   ///    [AppBar.backgroundColor] in all descendant [AppBar] widgets.
-  final Color? foregroundColor,
+  Color? foregroundColor,
 
   /// Overrides the default value of [AppBar.elevation] in all
   /// descendant [AppBar] widgets.
-  final double? elevation,
+  double? elevation,
 
   /// Overrides the default value of [AppBar.scrolledUnderElevation] in all
   /// descendant [AppBar] widgets.
   ///
   /// If not defined, defaults to 3.
-  final double? scrolledUnderElevation,
+  double? scrolledUnderElevation,
 
   /// Overrides the default value of [AppBar.iconTheme] in all
   /// descendant [AppBar] widgets.
@@ -62,7 +62,7 @@ AppBarThemeData _appBarTheme({
   ///    [AppBar.actionsIconTheme] in all descendant [AppBar] widgets.
   ///  * [foregroundColor], which overrides the default value
   ///    [AppBar.foregroundColor] in all descendant [AppBar] widgets.
-  final IconThemeData? iconTheme,
+  IconThemeData? iconTheme,
 
   /// Overrides the default value of [AppBar.actionsIconTheme] in all
   /// descendant [AppBar] widgets.
@@ -73,27 +73,27 @@ AppBarThemeData _appBarTheme({
   ///    [AppBar.iconTheme] in all descendant [AppBar] widgets.
   ///  * [foregroundColor], which overrides the default value
   ///    [AppBar.foregroundColor] in all descendant [AppBar] widgets.
-  final IconThemeData? actionsIconTheme,
+  IconThemeData? actionsIconTheme,
 
   /// Overrides the default value of [AppBar.shadowColor] in all
   /// descendant [AppBar] widgets.
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// Overrides the default value of the [AppBar.toolbarTextStyle]
   /// property in all descendant [AppBar] widgets.
-  final TextStyle? toolbarTextStyle,
+  TextStyle? toolbarTextStyle,
 
   /// Overrides the default value of [AppBar.titleTextStyle]
   /// property in all descendant [AppBar] widgets.
-  final TextStyle? titleTextStyle,
+  TextStyle? titleTextStyle,
 
   /// Overrides the default value of [AppBar.surfaceTintColor] in all
   /// descendant [AppBar] widgets.
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   /// Overrides the default value of [AppBar.systemOverlayStyle]
   /// property in all descendant [AppBar] widgets.
-  final SystemUiOverlayStyle? systemOverlayStyle,
+  SystemUiOverlayStyle? systemOverlayStyle,
 }) {
   return AppBarThemeData(
     centerTitle: centerTitle,

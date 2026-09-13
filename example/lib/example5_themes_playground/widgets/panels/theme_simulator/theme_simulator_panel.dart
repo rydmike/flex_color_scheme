@@ -1,19 +1,18 @@
 import 'package:device_frame/device_frame.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_dark.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_light.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_data_dark.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_data_light.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_components.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_login.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/app_example_material3.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_shop.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_undraw.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../theme/flex_theme_dark.dart';
-import '../../../theme/flex_theme_light.dart';
-import '../../../theme/theme_data_dark.dart';
-import '../../../theme/theme_data_light.dart';
-import '../../../theme/theme_values.dart';
-import 'app_example_components.dart';
-import 'app_example_login.dart';
-import 'app_example_material3/app_example_material3.dart';
-import 'app_example_shop.dart';
-import 'app_example_undraw.dart';
 
 /// A mock device simulator that show what an app using the active
 /// theme will look like.
@@ -152,7 +151,7 @@ class _ThemeSimulatorPanelState extends State<ThemeSimulatorPanel>
                         },
                       ),
                       title: Text('${SimulatorPopupMenu.devices[device].name} ('
-                          // ignore: lines_longer_than_80_chars, str interpol.
+                          // ignore: str interpol.
                           '${SimulatorPopupMenu.devices[device].info.identifier.platform.name})'),
                       subtitleReveal: Text('${_phoneInfo(device)}\n'),
                       trailing: Icon(

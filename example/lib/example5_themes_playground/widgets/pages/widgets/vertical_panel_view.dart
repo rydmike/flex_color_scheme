@@ -1,11 +1,10 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/model/theme_topic.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/topic_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/panel.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/header_card.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
-import '../../panels/panel.dart';
-import '../model/theme_topic.dart';
-import 'topic_selector.dart';
 
 /// A [Panel] wrapper that puts the content of our panels in a [Row]
 /// with a [TopicSelectorVertical] on the left or right of a [Panel]

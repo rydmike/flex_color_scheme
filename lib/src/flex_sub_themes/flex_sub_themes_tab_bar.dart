@@ -11,24 +11,24 @@ part of '../flex_sub_themes.dart';
 /// well and has already computed them once, so they are reused here.
 TabBarThemeData _tabBarTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Overrides the default value for [TabBar.labelStyle].
-  final TextStyle? labelStyle,
+  TextStyle? labelStyle,
 
   /// Overrides the default value for [TabBar.labelColor].
-  final Color? labelColor,
+  Color? labelColor,
 
   /// Overrides the default value for [TabBar.unselectedLabelColor].
-  final Color? unselectedLabelColor,
+  Color? unselectedLabelColor,
 
   /// Overrides the default value for [TabBar.indicatorSize].
-  final TabBarIndicatorSize? indicatorSize,
+  TabBarIndicatorSize? indicatorSize,
 
   /// The thickness of the underline border indicator on the [TabBar].
   ///
   /// If not defined, defaults to 2 in M2 and to 3 in M3.
-  final double? indicatorWeight,
+  double? indicatorWeight,
 
   // TODO(rydmike): Open issue about using TabAlignment. Theme variant issue.
   /// Overrides the default value for [TabBar.tabAlignment].
@@ -56,7 +56,7 @@ TabBarThemeData _tabBarTheme({
   /// for both scrollable and non-scrollable [TabBar]s so we can style them
   /// with different alignments. That do not throw for the used [TabBar]
   /// variant.
-  final TabAlignment? tabAlignment,
+  TabAlignment? tabAlignment,
 
   /// Specifies the animation behavior of the tab indicator in a [TabBar].
   ///
@@ -64,19 +64,19 @@ TabBarThemeData _tabBarTheme({
   /// the [indicatorSize] is [TabBarIndicatorSize.tab], otherwise it will
   /// animate with an elastic effect if the [indicatorSize] is
   /// [TabBarIndicatorSize.label].
-  final TabIndicatorAnimation? indicatorAnimation,
+  TabIndicatorAnimation? indicatorAnimation,
 
   /// The top left and right corner radius of the underline border
   /// indicator on the [TabBar].
   ///
   /// If not defined, defaults to 0 in M2 and to 3 in M3.
-  final double? indicatorTopRadius,
+  double? indicatorTopRadius,
 
   /// Overrides the default value for [TabBar.indicatorColor].
-  final Color? indicatorColor,
+  Color? indicatorColor,
 
   /// Overrides the default value for [TabBar.unselectedLabelStyle].
-  final TextStyle? unselectedLabelStyle,
+  TextStyle? unselectedLabelStyle,
 
   /// The color of the divider.
   ///
@@ -84,12 +84,12 @@ TabBarThemeData _tabBarTheme({
   /// color is used. If that is null and [useMaterial3] is true,
   /// [ColorScheme.outlineVariant] will be used,
   /// otherwise divider will not be drawn.
-  final Color? dividerColor,
+  Color? dividerColor,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -103,7 +103,7 @@ TabBarThemeData _tabBarTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;

@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../shared/color_scheme_box.dart';
 
 /// Widget used to select used [FlexSurfaceMode] using a popup menu.
 ///
@@ -111,7 +110,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
       ];
 
   // Short explanation of the used surface mode.
-  static String modeShort(final FlexSurfaceMode mode) {
+  static String modeShort(FlexSurfaceMode mode) {
     switch (mode) {
       case FlexSurfaceMode.level:
         return 'Level blend\nAll at same level';
@@ -141,7 +140,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
   // Explain the used surface mode. This is for dev mode to have an explanation
   // of what the used surface mode. All of these are not used by out control,
   // but if we add them this will cover all of them.
-  String explainMode(final FlexSurfaceMode mode) {
+  String explainMode(FlexSurfaceMode mode) {
     switch (mode) {
       case FlexSurfaceMode.level:
         return 'Level blends\n'
@@ -252,7 +251,7 @@ class SurfaceModePopupMenu extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            if (subtitle != null) subtitle!,
+            ?subtitle,
             Text(styleName),
           ],
         ),

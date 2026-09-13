@@ -1,11 +1,10 @@
 import 'dart:ui';
 
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/model/theme_topic.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/utils/colors_are_close.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../shared/utils/colors_are_close.dart';
-import '../model/theme_topic.dart';
 
 /// Horizontal panel selector of active theme topic to view.
 ///

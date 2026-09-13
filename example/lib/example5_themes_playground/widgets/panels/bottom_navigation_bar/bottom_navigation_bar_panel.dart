@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/bottom_navigation_bar/bottom_bar_mute_unselected_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import 'bottom_bar_mute_unselected_toggle_buttons.dart';
 
 // Panel used to control the sub-theme for BottomNavigationBar.
 class BottomNavigationBarPanel extends StatelessWidget {
@@ -229,7 +228,7 @@ class BottomNavigationBarPanel extends StatelessWidget {
               valueDefaultLabel: controller
                           .bottomNavigationBarSelectedLabelSize !=
                       null
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   ? '${((controller.bottomNavigationBarSelectedLabelSize ?? 12) - 2).toStringAsFixed(0)} pt'
                   : '12 pt',
               valueDefaultDisabledLabel: '12 pt',
@@ -268,7 +267,7 @@ class BottomNavigationBarPanel extends StatelessWidget {
               valueDefaultLabel: controller
                           .bottomNavigationBarSelectedIconSize !=
                       null
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   ? '${(controller.bottomNavigationBarSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
                   : '24 dp',
               valueDefaultDisabledLabel: '24 dp',

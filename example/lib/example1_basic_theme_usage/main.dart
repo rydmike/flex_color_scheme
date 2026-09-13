@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example1_basic_theme_usage/home_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'home_page.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 1 - Basic Theme Usage

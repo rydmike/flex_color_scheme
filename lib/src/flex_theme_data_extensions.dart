@@ -1,13 +1,13 @@
-import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart' show FlexColor, FlexSchemeVariant, FlexSubThemes, SchemeColor;
+import 'package:flex_color_scheme/src/flex_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_key_color.dart';
+import 'package:flex_color_scheme/src/flex_scheme.dart';
+import 'package:flex_color_scheme/src/flex_scheme_color.dart';
+import 'package:flex_color_scheme/src/flex_sub_themes_data.dart';
+import 'package:flex_color_scheme/src/flex_surface_mode.dart';
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'flex_color_scheme.dart';
-import 'flex_key_color.dart';
-import 'flex_scheme.dart';
-import 'flex_scheme_color.dart';
-import 'flex_sub_themes_data.dart';
-import 'flex_surface_mode.dart';
 
 /// A convenience extension on [ThemeData] to define a
 /// [FlexColorScheme] object and return the [ThemeData] object defined by
@@ -58,7 +58,7 @@ extension FlexThemeData on ThemeData {
     /// undefined. If both are specified the scheme colors defined by [colors]
     /// are used. If both are null then [scheme] defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
-    final FlexSchemeColor? colors,
+    FlexSchemeColor? colors,
 
     /// Use one of the built-in color schemes defined by enum [FlexScheme].
     ///
@@ -70,7 +70,7 @@ extension FlexThemeData on ThemeData {
     /// [colors] is used. If both are null, then [scheme] defaults to
     /// [FlexScheme.material] if [useMaterial3] is false, and to
     /// [FlexScheme.materialBaseline] [useMaterial3] is true.
-    final FlexScheme? scheme,
+    FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
     ///
@@ -118,7 +118,7 @@ extension FlexThemeData on ThemeData {
     /// [ColorScheme] for your theme is often needed if you want to create
     /// custom sub-themes that should use the colors from the scheme using none
     /// default color assignments from the color scheme.
-    final ColorScheme? colorScheme,
+    ColorScheme? colorScheme,
 
     /// The selection of the six main scheme colors to be used when creating
     /// effective [ColorScheme].
@@ -155,7 +155,7 @@ extension FlexThemeData on ThemeData {
     /// all produce the same effective scheme as the computed values will be
     /// the same as the [FlexSchemeColor.from] is using to compute any main
     /// missing scheme color values.
-    final int usedColors = 6,
+    int usedColors = 6,
 
     /// Blends surface tint color into all surface colors and
     /// scaffold background color.
@@ -164,7 +164,7 @@ extension FlexThemeData on ThemeData {
     /// value for different surfaces.
     ///
     /// If undefined, defaults to [FlexSurfaceMode.level].
-    final FlexSurfaceMode? surfaceMode,
+    FlexSurfaceMode? surfaceMode,
 
     /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
@@ -176,7 +176,7 @@ extension FlexThemeData on ThemeData {
     /// color.
     ///
     /// Defaults to 0.
-    final int blendLevel = 0,
+    int blendLevel = 0,
 
     /// The style and method used to compute the fixed, fixedDim colors and
     /// their on colors in a [ColorScheme] using the palettes provided main
@@ -206,7 +206,7 @@ extension FlexThemeData on ThemeData {
     /// visually more appealing results.
     ///
     /// If not defined, defaults to [FlexFixedColorStyle.computed].
-    final FlexFixedColorStyle? fixedColorStyle,
+    FlexFixedColorStyle? fixedColorStyle,
 
     /// Style used to define the themed color of the AppBar background color.
     ///
@@ -219,7 +219,7 @@ extension FlexThemeData on ThemeData {
     /// If you enable component themes you can also control the themed
     /// [AppBar] by selecting any active [ColorScheme] as its background color.
     /// If you do so, the setting applied by this property is ignored.
-    final FlexAppBarStyle? appBarStyle,
+    FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
     ///
@@ -241,7 +241,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// If null, defaults to 1, fully opaque, no transparency.
     /// If not null, must be from 0 to 1.
-    final double? appBarOpacity,
+    double? appBarOpacity,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -263,7 +263,7 @@ extension FlexThemeData on ThemeData {
     /// constructor. In M2 mode an AppBar theme will always be created, also
     /// when not opting in on the actual sub-themes feature, this per its
     /// opinionated and legacy styling for M2 mode.
-    final bool transparentStatusBar = true,
+    bool transparentStatusBar = true,
 
     /// The themed elevation for the [AppBar].
     ///
@@ -272,14 +272,14 @@ extension FlexThemeData on ThemeData {
     ///
     /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
     /// choice, it can easily be adjusted for the theme with this property.
-    final double? appBarElevation,
+    double? appBarElevation,
 
     /// The themed elevation for the [BottomAppBar].
     ///
     /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
     /// both via the defaults for the respective theme mode from Flutter's
     /// default elevation behavior of [BottomAppBar].
-    final double? bottomAppBarElevation,
+    double? bottomAppBarElevation,
 
     /// Select preferred style for the default [TabBarThemeData].
     ///
@@ -294,7 +294,7 @@ extension FlexThemeData on ThemeData {
     /// This TabBarThemeData style is useful if you primarily intended to use
     /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
     /// background colors.
-    final FlexTabBarStyle? tabBarStyle,
+    FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -313,7 +313,7 @@ extension FlexThemeData on ThemeData {
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? primary,
+    Color? primary,
 
     /// A color that is clearly legible when drawn on [primary] color.
     ///
@@ -331,7 +331,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onPrimary,
+    Color? onPrimary,
 
     /// A color used for elements needing less emphasis than [primary].
     ///
@@ -349,7 +349,7 @@ extension FlexThemeData on ThemeData {
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? primaryContainer,
+    Color? primaryContainer,
 
     /// A color that's clearly legible when drawn on [primaryContainer].
     ///
@@ -368,7 +368,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onPrimaryContainer,
+    Color? onPrimaryContainer,
 
     /// A support color to primary, with less emphasis than primary, often of
     /// same hue as primary, but does not have to be.
@@ -387,7 +387,7 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? secondary,
+    Color? secondary,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -405,7 +405,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onSecondary,
+    Color? onSecondary,
 
     /// A color used for elements needing less emphasis than [secondary].
     ///
@@ -423,7 +423,7 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? secondaryContainer,
+    Color? secondaryContainer,
 
     /// A color that's clearly legible when drawn on [secondaryContainer].
     ///
@@ -442,7 +442,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onSecondaryContainer,
+    Color? onSecondaryContainer,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -462,7 +462,7 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? tertiary,
+    Color? tertiary,
 
     /// A color that's clearly legible when drawn on [tertiary].
     ///
@@ -480,7 +480,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiary,
+    Color? onTertiary,
 
     /// A color used for elements needing less emphasis than [tertiary].
     ///
@@ -498,7 +498,7 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? tertiaryContainer,
+    Color? tertiaryContainer,
 
     /// A color that's clearly legible when drawn on [tertiaryContainer].
     ///
@@ -517,7 +517,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiaryContainer,
+    Color? onTertiaryContainer,
 
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
@@ -531,7 +531,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? error,
+    Color? error,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -549,7 +549,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onError,
+    Color? onError,
 
     /// The color to use for input validation errors with less emphasis than
     /// error.
@@ -563,7 +563,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? errorContainer,
+    Color? errorContainer,
 
     /// A color that is clearly legible when drawn on [errorContainer] color.
     ///
@@ -581,7 +581,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? onErrorContainer,
+    Color? onErrorContainer,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -597,7 +597,7 @@ extension FlexThemeData on ThemeData {
     /// same color in it as well.
     ///
     /// Defaults to null.
-    final Color? surface,
+    Color? surface,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -615,7 +615,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onSurface,
+    Color? onSurface,
 
     /// The color of the [Scaffold] background.
     ///
@@ -628,7 +628,7 @@ extension FlexThemeData on ThemeData {
     /// [subThemesData.scaffoldBackgroundSchemeColor]
     /// is defined, default color is [ColorScheme.surface] in M2 mode and
     /// [ColorScheme.surfaceContainerLowest] in M3 mode.
-    final Color? scaffoldBackground,
+    Color? scaffoldBackground,
 
     /// The background color used by [Dialog]s.
     ///
@@ -653,7 +653,7 @@ extension FlexThemeData on ThemeData {
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
     /// is defined, default color is [ColorScheme.surface] in Material-2 mode
     /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
-    final Color? dialogBackground,
+    Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
     ///
@@ -665,7 +665,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Thus custom color will also override any scheme color based selection
     /// for the [AppBAr] in active used sub-themes.
-    final Color? appBarBackground,
+    Color? appBarBackground,
 
     /// A custom color used as an overlay on a surface color to indicate a
     /// component's elevation and surface color branding or tinting.
@@ -686,7 +686,7 @@ extension FlexThemeData on ThemeData {
     /// surface blends that can optionally be added with FlexColorScheme.
     ///
     /// If undefined, [primary] color is used.
-    final Color? surfaceTint,
+    Color? surfaceTint,
 
     /// Makes the light theme backgrounds lighter or even white.
     ///
@@ -694,7 +694,7 @@ extension FlexThemeData on ThemeData {
     /// [blendLevel]. Other surfaces also become lighter, when using low blend
     /// levels they may become fully white too, but are still impacted by the
     /// blend level.
-    final bool lightIsWhite = false,
+    bool lightIsWhite = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
     /// their secondary counterparts.
@@ -712,7 +712,7 @@ extension FlexThemeData on ThemeData {
     /// user modifiable theme option if you like. One usage possibility is to
     /// set `swapColors` to true only for the dark modem and use your color
     /// scheme the other way around only in dark mode.
-    final bool swapColors = false,
+    bool swapColors = false,
 
     /// When set to true, tooltip background color will match the brightness of
     /// the theme's background color.
@@ -777,7 +777,7 @@ extension FlexThemeData on ThemeData {
     /// When using additional theming via sub-themes properties, its
     /// properties will if used override background color, text color and
     /// background opacity as well as border radius.
-    final bool tooltipsMatchBackground = false,
+    bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
@@ -876,7 +876,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
-    final FlexSubThemesData? subThemesData,
+    FlexSubThemesData? subThemesData,
 
     /// To use and activate Material 3 color system based [ColorScheme]
     /// defined via key colors for primary, secondary and tertiary colors and
@@ -900,7 +900,7 @@ extension FlexThemeData on ThemeData {
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
-    final FlexKeyColors? keyColors,
+    FlexKeyColors? keyColors,
 
     /// Set to true, to use the new Material 3 error colors.
     ///
@@ -915,7 +915,7 @@ extension FlexThemeData on ThemeData {
     /// Key color seed generated [ColorScheme]s always use the Material 3
     /// design guide error colors, or error colors from its customized
     /// [TonalPalette] generation setup.
-    final bool useMaterial3ErrorColors = false,
+    bool useMaterial3ErrorColors = false,
 
     /// A configuration class enabling complete customization of
     /// used chroma for [TonalPalette] generation for the used seed [keyColors],
@@ -931,7 +931,7 @@ extension FlexThemeData on ThemeData {
     /// There are six other built-in definitions that you can use, they can also
     /// serve as an example of how you can make custom `FlexTones`
     /// configurations.
-    final FlexTones? tones,
+    FlexTones? tones,
 
     /// An optional way to select the used algorithm for seeded [ColorScheme]
     /// generation, can be used instead of a [FlexTones] provided in [tones].
@@ -954,7 +954,7 @@ extension FlexThemeData on ThemeData {
     /// use the [FlexTones] modifiers [monochromeSurfaces], [onMainsUseBW],
     /// [onSurfacesUseBW] and [surfacesUseBW], since the only operate on the
     /// [FlexTones] configurations passed in to [tones].
-    final FlexSchemeVariant? variant,
+    FlexSchemeVariant? variant,
 
     /// The density value for specifying the compactness of various UI
     /// components.
@@ -994,7 +994,7 @@ extension FlexThemeData on ThemeData {
     /// smaller value translates to a spacing decrease (more dense).
     ///
     /// Defaults to [VisualDensity.adaptivePlatformDensity].
-    final VisualDensity? visualDensity,
+    VisualDensity? visualDensity,
 
     /// Text with a color that contrasts with background, surface, card and
     /// canvas colors.
@@ -1003,7 +1003,7 @@ extension FlexThemeData on ThemeData {
     /// FlexColorScheme will detect this and make the color in the passed
     /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
     /// color for M2/M3 mode and contrast for light/dark mode is used.
-    final TextTheme? textTheme,
+    TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
     ///
@@ -1011,7 +1011,7 @@ extension FlexThemeData on ThemeData {
     /// FlexColorScheme will detect this and make the color in the passed
     /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
     /// color for M2/M3 mode and contrast for primary color is used.
-    final TextTheme? primaryTextTheme,
+    TextTheme? primaryTextTheme,
 
     /// Name of the font family to use as default font for the text theme in
     /// created theme.
@@ -1019,28 +1019,28 @@ extension FlexThemeData on ThemeData {
     /// Same feature as in [ThemeData] factory. Used to apply the font family
     /// name to default text theme and primary text theme, also passed along
     /// to [ThemeData],
-    final String? fontFamily,
+    String? fontFamily,
 
     /// Name of the font families to use as fallback to main font family.
     ///
     /// Same feature as in [ThemeData] factory. Used to apply the font family
     /// fallback to default text theme and primary text theme, also passed
     /// along to [ThemeData],
-    final List<String>? fontFamilyFallback,
+    List<String>? fontFamilyFallback,
 
     /// Name of the font package to use with font fallback.
     ///
     /// Same feature as in [ThemeData] factory. Used to apply the font package
     /// to default text theme and primary text theme, also passed along
     /// to [ThemeData],
-    final String? package,
+    String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
     /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
     /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
     /// platforms.
-    final MaterialTapTargetSize? materialTapTargetSize,
+    MaterialTapTargetSize? materialTapTargetSize,
 
     /// Default [MaterialPageRoute] transitions per [TargetPlatform].
     ///
@@ -1050,7 +1050,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// This is convenience pass through in FlexColorScheme to avoid a
     /// `copyWith` on `ThemeData` produced by FlexColorScheme.
-    final PageTransitionsTheme? pageTransitionsTheme,
+    PageTransitionsTheme? pageTransitionsTheme,
 
     /// Defines the appearance of ink splashes produces by [InkWell]
     /// and [InkResponse].
@@ -1066,7 +1066,7 @@ extension FlexThemeData on ThemeData {
     ///    more aggressively than the default.
     ///  * [InkSparkle.splashFactory], which defines a more aggressive and
     ///    organic splash with sparkle effects.
-    final InteractiveInkFeatureFactory? splashFactory,
+    InteractiveInkFeatureFactory? splashFactory,
 
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
@@ -1099,7 +1099,7 @@ extension FlexThemeData on ThemeData {
     /// When developing applications you can use this property to dynamically
     /// in the application change the used platform and partially test and see
     /// how adaptive widgets and scroll looks and feels on other platforms.
-    final TargetPlatform? platform,
+    TargetPlatform? platform,
 
     /// The color and geometry [TextTheme] values used to configure [textTheme].
     ///
@@ -1122,7 +1122,7 @@ extension FlexThemeData on ThemeData {
     /// recommended to create your light and dark theme data with
     /// different methods. If you use FlexColorScheme, DO use it for both the
     /// light and dark theme mode.
-    final Typography? typography,
+    Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
     /// elevation for dark themes.
@@ -1177,7 +1177,7 @@ extension FlexThemeData on ThemeData {
     /// lack of it might not be an issue with other modes in such themes.
     /// For more information about this limitation see Flutter SDK issue:
     /// https://github.com/flutter/flutter/issues/90353
-    final bool applyElevationOverlayColor = true,
+    bool applyElevationOverlayColor = true,
 
     /// Components of the [CupertinoThemeData] to override from the Material
     /// [ThemeData] adaptation.
@@ -1190,7 +1190,7 @@ extension FlexThemeData on ThemeData {
     /// This cascading effect for individual attributes of the
     /// [CupertinoThemeData]
     /// can be overridden using attributes of this [cupertinoOverrideTheme].
-    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+    NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
 
     /// A temporary flag used to disable Material-3 design and use legacy
     /// Material-2 design instead. Material-3 design is the default.
@@ -1287,7 +1287,7 @@ extension FlexThemeData on ThemeData {
     /// See also:
     ///
     ///   * [Material 3 specification](https://m3.material.io/).
-    final bool useMaterial3 = true,
+    bool useMaterial3 = true,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
     /// built-in color schemes when [useMaterial3] is true, that benefit
@@ -1337,7 +1337,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to false, for backwards compatibility, but prefer setting it
     /// to true if you also set [useMaterial3] to true.
-    final bool swapLegacyOnMaterial3 = false,
+    bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
     ///
@@ -1348,7 +1348,7 @@ extension FlexThemeData on ThemeData {
     /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
-    final Iterable<ThemeExtension<dynamic>>? extensions,
+    Iterable<ThemeExtension<dynamic>>? extensions,
 
     /// **Deprecated:**
     /// A color that typically appears behind scrollable content.
@@ -1364,10 +1364,12 @@ extension FlexThemeData on ThemeData {
     /// it overrode the same color in it as well.
     ///
     /// Defaults to null.
-    @Deprecated('Use surface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? background,
+    @Deprecated(
+      'Use surface instead. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
+    Color? background,
 
     /// **Deprecated:**
     /// A color that is clearly legible when drawn on `background` color.
@@ -1385,79 +1387,80 @@ extension FlexThemeData on ThemeData {
     ///
     /// You used this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    @Deprecated('Use onSurface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? onBackground,
-  }) =>
-      FlexColorScheme.light(
-        colors: colors,
-        scheme: scheme,
-        colorScheme: colorScheme,
-        usedColors: usedColors,
-        surfaceMode: surfaceMode,
-        blendLevel: blendLevel,
-        fixedColorStyle: fixedColorStyle,
-        //
-        appBarStyle: appBarStyle,
-        appBarOpacity: appBarOpacity,
-        transparentStatusBar: transparentStatusBar,
-        appBarElevation: appBarElevation,
-        bottomAppBarElevation: bottomAppBarElevation,
-        tabBarStyle: tabBarStyle,
-        //
-        primary: primary,
-        onPrimary: onPrimary,
-        primaryContainer: primaryContainer,
-        onPrimaryContainer: onPrimaryContainer,
-        //
-        secondary: secondary,
-        onSecondary: onSecondary,
-        secondaryContainer: secondaryContainer,
-        onSecondaryContainer: onSecondaryContainer,
-        //
-        tertiary: tertiary,
-        onTertiary: onTertiary,
-        tertiaryContainer: tertiaryContainer,
-        onTertiaryContainer: onTertiaryContainer,
-        //
-        error: error,
-        onError: onError,
-        errorContainer: errorContainer,
-        onErrorContainer: onErrorContainer,
-        //
-        surface: surface,
-        onSurface: onSurface,
-        scaffoldBackground: scaffoldBackground,
-        dialogBackground: dialogBackground,
-        appBarBackground: appBarBackground,
-        surfaceTint: surfaceTint,
-        //
-        lightIsWhite: lightIsWhite,
-        swapColors: swapColors,
-        tooltipsMatchBackground: tooltipsMatchBackground,
-        subThemesData: subThemesData,
-        keyColors: keyColors,
-        useMaterial3ErrorColors: useMaterial3ErrorColors,
-        tones: tones,
-        variant: variant,
-        visualDensity: visualDensity,
-        textTheme: textTheme,
-        primaryTextTheme: primaryTextTheme,
-        fontFamily: fontFamily,
-        fontFamilyFallback: fontFamilyFallback,
-        package: package,
-        materialTapTargetSize: materialTapTargetSize,
-        pageTransitionsTheme: pageTransitionsTheme,
-        splashFactory: splashFactory,
-        platform: platform,
-        typography: typography,
-        applyElevationOverlayColor: applyElevationOverlayColor,
-        cupertinoOverrideTheme: cupertinoOverrideTheme,
-        useMaterial3: useMaterial3,
-        swapLegacyOnMaterial3: swapLegacyOnMaterial3,
-        extensions: extensions,
-      ).toTheme;
+    @Deprecated(
+      'Use onSurface instead. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
+    Color? onBackground,
+  }) => FlexColorScheme.light(
+    colors: colors,
+    scheme: scheme,
+    colorScheme: colorScheme,
+    usedColors: usedColors,
+    surfaceMode: surfaceMode,
+    blendLevel: blendLevel,
+    fixedColorStyle: fixedColorStyle,
+    //
+    appBarStyle: appBarStyle,
+    appBarOpacity: appBarOpacity,
+    transparentStatusBar: transparentStatusBar,
+    appBarElevation: appBarElevation,
+    bottomAppBarElevation: bottomAppBarElevation,
+    tabBarStyle: tabBarStyle,
+    //
+    primary: primary,
+    onPrimary: onPrimary,
+    primaryContainer: primaryContainer,
+    onPrimaryContainer: onPrimaryContainer,
+    //
+    secondary: secondary,
+    onSecondary: onSecondary,
+    secondaryContainer: secondaryContainer,
+    onSecondaryContainer: onSecondaryContainer,
+    //
+    tertiary: tertiary,
+    onTertiary: onTertiary,
+    tertiaryContainer: tertiaryContainer,
+    onTertiaryContainer: onTertiaryContainer,
+    //
+    error: error,
+    onError: onError,
+    errorContainer: errorContainer,
+    onErrorContainer: onErrorContainer,
+    //
+    surface: surface,
+    onSurface: onSurface,
+    scaffoldBackground: scaffoldBackground,
+    dialogBackground: dialogBackground,
+    appBarBackground: appBarBackground,
+    surfaceTint: surfaceTint,
+    //
+    lightIsWhite: lightIsWhite,
+    swapColors: swapColors,
+    tooltipsMatchBackground: tooltipsMatchBackground,
+    subThemesData: subThemesData,
+    keyColors: keyColors,
+    useMaterial3ErrorColors: useMaterial3ErrorColors,
+    tones: tones,
+    variant: variant,
+    visualDensity: visualDensity,
+    textTheme: textTheme,
+    primaryTextTheme: primaryTextTheme,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+    package: package,
+    materialTapTargetSize: materialTapTargetSize,
+    pageTransitionsTheme: pageTransitionsTheme,
+    splashFactory: splashFactory,
+    platform: platform,
+    typography: typography,
+    applyElevationOverlayColor: applyElevationOverlayColor,
+    cupertinoOverrideTheme: cupertinoOverrideTheme,
+    useMaterial3: useMaterial3,
+    swapLegacyOnMaterial3: swapLegacyOnMaterial3,
+    extensions: extensions,
+  ).toTheme;
 
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.dark]
   /// and its [FlexColorScheme.toTheme] method.
@@ -1474,7 +1477,7 @@ extension FlexThemeData on ThemeData {
     /// undefined. If both are specified the scheme colors defined by [colors]
     /// are used. If both are null then [scheme] defaults to
     /// [FlexScheme.material], thus defining the resulting scheme.
-    final FlexSchemeColor? colors,
+    FlexSchemeColor? colors,
 
     /// Use one of the built-in color schemes defined by enum [FlexScheme].
     ///
@@ -1486,7 +1489,7 @@ extension FlexThemeData on ThemeData {
     /// [colors] is used. If both are null, then [scheme] defaults to
     /// [FlexScheme.material] if [useMaterial3] is false, and to
     /// [FlexScheme.materialBaseline] [useMaterial3] is true.
-    final FlexScheme? scheme,
+    FlexScheme? scheme,
 
     /// The overall [ColorScheme] based colors for the theme.
     ///
@@ -1534,7 +1537,7 @@ extension FlexThemeData on ThemeData {
     /// [ColorScheme] for your theme is often needed if you want to create
     /// custom sub-themes that should use the colors from the scheme using none
     /// default color assignments from the color scheme.
-    final ColorScheme? colorScheme,
+    ColorScheme? colorScheme,
 
     /// The selection of the six main scheme colors to be used when creating
     /// effective [ColorScheme].
@@ -1571,7 +1574,7 @@ extension FlexThemeData on ThemeData {
     /// all produce the same effective scheme as the computed values will be
     /// the same as the [FlexSchemeColor.from] is using to compute any main
     /// missing scheme color values.
-    final int usedColors = 6,
+    int usedColors = 6,
 
     /// Blends surface tint color into all surface colors and
     /// scaffold background color.
@@ -1580,7 +1583,7 @@ extension FlexThemeData on ThemeData {
     /// value for different surfaces.
     ///
     /// If undefined, defaults to [FlexSurfaceMode.level].
-    final FlexSurfaceMode? surfaceMode,
+    FlexSurfaceMode? surfaceMode,
 
     /// When [surfaceMode] is defined, this sets the blend level strength used
     /// by the surface mode.
@@ -1592,7 +1595,7 @@ extension FlexThemeData on ThemeData {
     /// color.
     ///
     /// Defaults to 0.
-    final int blendLevel = 0,
+    int blendLevel = 0,
 
     /// The style and method used to compute the fixed, fixedDim colors and
     /// their on colors in a [ColorScheme] using the palettes provided main
@@ -1622,7 +1625,7 @@ extension FlexThemeData on ThemeData {
     /// visually more appealing results.
     ///
     /// If not defined, defaults to [FlexFixedColorStyle.computed].
-    final FlexFixedColorStyle? fixedColorStyle,
+    FlexFixedColorStyle? fixedColorStyle,
 
     /// Style used to define the themed color of the [AppBar] background color.
     ///
@@ -1635,7 +1638,7 @@ extension FlexThemeData on ThemeData {
     /// If you enable component themes you can also control the themed
     /// [AppBar] by selecting any active [ColorScheme] as its background color.
     /// If you do so, the setting applied by this property is ignored.
-    final FlexAppBarStyle? appBarStyle,
+    FlexAppBarStyle? appBarStyle,
 
     /// Themed [AppBar] opacity.
     ///
@@ -1657,7 +1660,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// If null, defaults to 1, fully opaque, no transparency.
     /// If not null, must be from 0 to 1.
-    final double? appBarOpacity,
+    double? appBarOpacity,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
@@ -1679,7 +1682,7 @@ extension FlexThemeData on ThemeData {
     /// constructor. In M2 mode an AppBar theme will always be created, also
     /// when not opting in on the actual sub-themes feature, this per its
     /// opinionated and legacy styling for M2 mode.
-    final bool transparentStatusBar = true,
+    bool transparentStatusBar = true,
 
     /// The themed elevation for the [AppBar].
     ///
@@ -1688,13 +1691,13 @@ extension FlexThemeData on ThemeData {
     ///
     /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
     /// choice, it can easily be adjusted for the theme with this property.
-    final double? appBarElevation,
+    double? appBarElevation,
 
     /// The themed elevation for the [BottomAppBar].
     ///
     /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
     /// both via the defaults for the respective theme mode
-    final double? bottomAppBarElevation,
+    double? bottomAppBarElevation,
 
     /// Select preferred style for the default [TabBarThemeData].
     ///
@@ -1709,7 +1712,7 @@ extension FlexThemeData on ThemeData {
     /// This TabBarThemeData style is useful if you primarily intended to use
     /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
     /// background colors.
-    final FlexTabBarStyle? tabBarStyle,
+    FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
@@ -1733,7 +1736,7 @@ extension FlexThemeData on ThemeData {
     /// ColorSchemes and setting [fixedColorStyle] to default.
     ///
     /// Defaults to null.
-    final Color? primary,
+    Color? primary,
 
     /// If you specify an override color for [primary], you should also specify
     /// an override for the [primaryLightRef] color when not using a seed
@@ -1759,7 +1762,7 @@ extension FlexThemeData on ThemeData {
     /// typically want this. But if you always seed and use overrides, you
     /// can give the light  mode primary color as the primary override in dark
     /// mode too and skip the [primaryLightRef] override.
-    final Color? primaryLightRef,
+    Color? primaryLightRef,
 
     /// A color that is clearly legible when drawn on [primary] color.
     ///
@@ -1777,7 +1780,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onPrimary,
+    Color? onPrimary,
 
     /// A color used for elements needing less emphasis than [primary].
     ///
@@ -1795,7 +1798,7 @@ extension FlexThemeData on ThemeData {
     /// properties [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? primaryContainer,
+    Color? primaryContainer,
 
     /// A color that's clearly legible when drawn on [primaryContainer].
     ///
@@ -1814,7 +1817,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onPrimaryContainer,
+    Color? onPrimaryContainer,
 
     /// A support color to primary, with less emphasis than primary, often of
     /// same hue as primary, but does not have to be.
@@ -1838,7 +1841,7 @@ extension FlexThemeData on ThemeData {
     /// ColorSchemes and setting [fixedColorStyle] to default.
     ///
     /// Defaults to null.
-    final Color? secondary,
+    Color? secondary,
 
     /// If you specify an override color for [secondary], you should also
     /// specify an override for the [secondaryLightRef] color when not using a
@@ -1865,7 +1868,7 @@ extension FlexThemeData on ThemeData {
     /// always seed and use overrides, you can give the light mode
     /// secondary color as the secondary override in dark
     /// mode too and skip the [secondaryLightRef] override.
-    final Color? secondaryLightRef,
+    Color? secondaryLightRef,
 
     /// A color that is clearly legible when drawn on [secondary] color.
     ///
@@ -1883,7 +1886,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onSecondary,
+    Color? onSecondary,
 
     /// A color used for elements needing less emphasis than [secondary].
     ///
@@ -1901,7 +1904,7 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? secondaryContainer,
+    Color? secondaryContainer,
 
     /// A color that's clearly legible when drawn on [secondaryContainer].
     ///
@@ -1920,7 +1923,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onSecondaryContainer,
+    Color? onSecondaryContainer,
 
     /// A color used as a contrasting accent that can balance [primary]
     /// and [secondary] colors or bring heightened attention to an element,
@@ -1945,7 +1948,7 @@ extension FlexThemeData on ThemeData {
     /// ColorSchemes and setting [fixedColorStyle] to default.
     ///
     /// Defaults to null.
-    final Color? tertiary,
+    Color? tertiary,
 
     /// If you specify an override color for [tertiary], you should also
     /// specify an override for the [tertiaryLightRef] color when not using a
@@ -1972,7 +1975,7 @@ extension FlexThemeData on ThemeData {
     /// always seed and use overrides, you can give the light mode
     /// tertiary color as the tertiary override in dark
     /// mode too and skip the [tertiaryLightRef] override.
-    final Color? tertiaryLightRef,
+    Color? tertiaryLightRef,
 
     /// A color that's clearly legible when drawn on [tertiary].
     ///
@@ -1990,7 +1993,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiary,
+    Color? onTertiary,
 
     /// A color used for elements needing less emphasis than [tertiary].
     ///
@@ -2008,7 +2011,7 @@ extension FlexThemeData on ThemeData {
     /// [usedColors] and [swapColors] and included in their behavior.
     ///
     /// Defaults to null.
-    final Color? tertiaryContainer,
+    Color? tertiaryContainer,
 
     /// A color that's clearly legible when drawn on [tertiaryContainer].
     ///
@@ -2027,7 +2030,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiaryContainer,
+    Color? onTertiaryContainer,
 
     /// The color to use for input validation errors, e.g. for
     /// [InputDecoration.errorText].
@@ -2041,7 +2044,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? error,
+    Color? error,
 
     /// A color that is clearly legible when drawn on [error] color.
     ///
@@ -2059,7 +2062,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onError,
+    Color? onError,
 
     /// The color to use for input validation errors with less emphasis than
     /// error.
@@ -2073,7 +2076,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? errorContainer,
+    Color? errorContainer,
 
     /// A color that is clearly legible when drawn on [errorContainer] color.
     ///
@@ -2091,7 +2094,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    final Color? onErrorContainer,
+    Color? onErrorContainer,
 
     /// The surface (background) color for widgets like [Card] and
     /// [BottomAppBar].
@@ -2107,7 +2110,7 @@ extension FlexThemeData on ThemeData {
     /// same color in it as well.
     ///
     /// Defaults to null.
-    final Color? surface,
+    Color? surface,
 
     /// A color that is clearly legible when drawn on [surface] color.
     ///
@@ -2125,7 +2128,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// You can use this property for convenience if you want to override the
     /// color that this scheme color gets via the extensions factory behavior.
-    final Color? onSurface,
+    Color? onSurface,
 
     /// The color of the [Scaffold] background.
     ///
@@ -2138,7 +2141,7 @@ extension FlexThemeData on ThemeData {
     /// [subThemesData.scaffoldBackgroundSchemeColor]
     /// is defined, default color is [ColorScheme.surface] in M2 mode and
     /// [ColorScheme.surfaceContainerLowest] in M3 mode.
-    final Color? scaffoldBackground,
+    Color? scaffoldBackground,
 
     /// The background color used by [Dialog]s.
     ///
@@ -2163,7 +2166,7 @@ extension FlexThemeData on ThemeData {
     /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
     /// is defined, default color is [ColorScheme.surface] in Material-2 mode
     /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
-    final Color? dialogBackground,
+    Color? dialogBackground,
 
     /// Background theme color for the [AppBar].
     ///
@@ -2175,7 +2178,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Thus custom color will also override any scheme color based selection
     /// for the [AppBAr] in active used sub-themes.
-    final Color? appBarBackground,
+    Color? appBarBackground,
 
     /// A custom color used as an overlay on a surface color to indicate a
     /// component's elevation and surface color branding or tinting.
@@ -2196,7 +2199,7 @@ extension FlexThemeData on ThemeData {
     /// surface blends that can optionally be added with FlexColorScheme.
     ///
     /// If undefined, [primary] color is used.
-    final Color? surfaceTint,
+    Color? surfaceTint,
 
     /// Makes the dark theme backgrounds darker or even black.
     ///
@@ -2204,7 +2207,7 @@ extension FlexThemeData on ThemeData {
     /// by used [blendLevel]. Other surfaces also become darker, when
     /// using low blend levels they may become fully black too, but are still
     /// impacted by the blend level.
-    final bool darkIsTrueBlack = false,
+    bool darkIsTrueBlack = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
     /// their secondary counterparts.
@@ -2222,7 +2225,7 @@ extension FlexThemeData on ThemeData {
     /// user modifiable theme option if you like. One usage possibility is to
     /// set `swapColors` to true only for the dark modem and use your color
     /// scheme the other way around only in dark mode.
-    final bool swapColors = false,
+    bool swapColors = false,
 
     /// When set to true, tooltip background color will match the brightness of
     /// the theme's background color.
@@ -2287,7 +2290,7 @@ extension FlexThemeData on ThemeData {
     /// When using additional theming via sub-themes properties, its
     /// properties will if used override background color, text color and
     /// background opacity as well as border radius.
-    final bool tooltipsMatchBackground = false,
+    bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
@@ -2386,7 +2389,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to null, resulting in FlexColorScheme not using any extra
     /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
-    final FlexSubThemesData? subThemesData,
+    FlexSubThemesData? subThemesData,
 
     /// To use and activate Material 3 color system based [ColorScheme]
     /// defined via key colors for primary, secondary and tertiary colors and
@@ -2410,7 +2413,7 @@ extension FlexThemeData on ThemeData {
     /// For more information on Material 3 color system and usage of key colors
     /// to generate tonal palettes and tones, see:
     /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
-    final FlexKeyColors? keyColors,
+    FlexKeyColors? keyColors,
 
     /// Set to true, to use the new Material 3 error colors.
     ///
@@ -2425,7 +2428,7 @@ extension FlexThemeData on ThemeData {
     /// Key color seed generated [ColorScheme]s always use the Material 3
     /// design guide error colors, or error colors from its customized
     /// [TonalPalette] generation setup.
-    final bool useMaterial3ErrorColors = false,
+    bool useMaterial3ErrorColors = false,
 
     /// A configuration class enabling complete customization of
     /// used chroma for [TonalPalette] generation for the used seed [keyColors],
@@ -2438,7 +2441,7 @@ extension FlexThemeData on ThemeData {
     /// There are six other built-in definitions that you can use, they can also
     /// serve as an example of how you can make custom `FlexTones`
     /// configurations.
-    final FlexTones? tones,
+    FlexTones? tones,
 
     /// An optional way to select the used algorithm for seeded [ColorScheme]
     /// generation, can be used instead of a [FlexTones] provided in [tones].
@@ -2461,7 +2464,7 @@ extension FlexThemeData on ThemeData {
     /// use the [FlexTones] modifiers [monochromeSurfaces], [onMainsUseBW],
     /// [onSurfacesUseBW] and [surfacesUseBW], since the only operate on the
     /// [FlexTones] configurations passed in to [tones].
-    final FlexSchemeVariant? variant,
+    FlexSchemeVariant? variant,
 
     /// The density value for specifying the compactness of various UI
     /// components.
@@ -2501,7 +2504,7 @@ extension FlexThemeData on ThemeData {
     /// smaller value translates to a spacing decrease (more dense).
     ///
     /// Defaults to [VisualDensity.adaptivePlatformDensity].
-    final VisualDensity? visualDensity,
+    VisualDensity? visualDensity,
 
     /// Text with a color that contrasts with background, surface, card and
     /// canvas colors.
@@ -2510,7 +2513,7 @@ extension FlexThemeData on ThemeData {
     /// FlexColorScheme will detect this and make the color in the passed
     /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
     /// color for M2/M3 mode and contrast for light/dark mode is used.
-    final TextTheme? textTheme,
+    TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
     ///
@@ -2518,7 +2521,7 @@ extension FlexThemeData on ThemeData {
     /// FlexColorScheme will detect this and make the color in the passed
     /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
     /// color for M2/M3 mode and contrast for primary color is used.
-    final TextTheme? primaryTextTheme,
+    TextTheme? primaryTextTheme,
 
     /// Name of the font family to use as default font for the text theme in
     /// created theme.
@@ -2526,28 +2529,28 @@ extension FlexThemeData on ThemeData {
     /// Same feature as in [ThemeData] factory. Used to apply the font family
     /// name to default text theme and primary text theme, also passed along
     /// to [ThemeData],
-    final String? fontFamily,
+    String? fontFamily,
 
     /// Name of the font families to use as fallback to main font family.
     ///
     /// Same feature as in [ThemeData] factory. Used to apply the font family
     /// fallback to default text theme and primary text theme, also passed
     /// along to [ThemeData],
-    final List<String>? fontFamilyFallback,
+    List<String>? fontFamilyFallback,
 
     /// Name of the font package to use with font fallback.
     ///
     /// Same feature as in [ThemeData] factory. Used to apply the font package
     /// to default text theme and primary text theme, also passed along
     /// to [ThemeData],
-    final String? package,
+    String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
     /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
     /// on mobile platforms, [MaterialTapTargetSize.shrinkWrap] on desktop
     /// platforms.
-    final MaterialTapTargetSize? materialTapTargetSize,
+    MaterialTapTargetSize? materialTapTargetSize,
 
     /// Default [MaterialPageRoute] transitions per [TargetPlatform].
     ///
@@ -2557,7 +2560,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// This is convenience pass through in FlexColorScheme to avoid a
     /// `copyWith` on `ThemeData` produced by FlexColorScheme.
-    final PageTransitionsTheme? pageTransitionsTheme,
+    PageTransitionsTheme? pageTransitionsTheme,
 
     /// Defines the appearance of ink splashes produces by [InkWell]
     /// and [InkResponse].
@@ -2573,7 +2576,7 @@ extension FlexThemeData on ThemeData {
     ///    more aggressively than the default.
     ///  * [InkSparkle.splashFactory], which defines a more aggressive and
     ///    organic splash with sparkle effects.
-    final InteractiveInkFeatureFactory? splashFactory,
+    InteractiveInkFeatureFactory? splashFactory,
 
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
@@ -2606,7 +2609,7 @@ extension FlexThemeData on ThemeData {
     /// When developing applications you can use this property to dynamically
     /// in the application change the used platform and partially test and see
     /// how adaptive widgets and scroll looks and feels on other platforms.
-    final TargetPlatform? platform,
+    TargetPlatform? platform,
 
     /// The color and geometry [TextTheme] values used to configure [textTheme].
     ///
@@ -2629,7 +2632,7 @@ extension FlexThemeData on ThemeData {
     /// recommended to create your light and dark theme data with
     /// different methods. If you use FlexColorScheme, DO use it for both the
     /// light and dark theme mode.
-    final Typography? typography,
+    Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
     /// elevation for dark themes.
@@ -2684,7 +2687,7 @@ extension FlexThemeData on ThemeData {
     /// lack of it might not be an issue with other modes in such themes.
     /// For more information about this limitation see Flutter SDK issue:
     /// https://github.com/flutter/flutter/issues/90353
-    final bool applyElevationOverlayColor = true,
+    bool applyElevationOverlayColor = true,
 
     /// Components of the [CupertinoThemeData] to override from the Material
     /// [ThemeData] adaptation.
@@ -2697,7 +2700,7 @@ extension FlexThemeData on ThemeData {
     /// This cascading effect for individual attributes of the
     /// [CupertinoThemeData]
     /// can be overridden using attributes of this [cupertinoOverrideTheme].
-    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+    NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
 
     /// A temporary flag used to disable Material-3 design and use legacy
     /// Material-2 design instead. Material-3 design is the default.
@@ -2794,7 +2797,7 @@ extension FlexThemeData on ThemeData {
     /// See also:
     ///
     ///   * [Material 3 specification](https://m3.material.io/).
-    final bool useMaterial3 = true,
+    bool useMaterial3 = true,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
     /// built-in color schemes when [useMaterial3] is true, that benefit
@@ -2844,7 +2847,7 @@ extension FlexThemeData on ThemeData {
     ///
     /// Defaults to false, for backwards compatibility, but prefer setting it
     /// to true if you also set [useMaterial3] to true.
-    final bool swapLegacyOnMaterial3 = false,
+    bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
     ///
@@ -2855,7 +2858,7 @@ extension FlexThemeData on ThemeData {
     /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
     ///
     /// To obtain an extension, use ThemeData.of(context).extension.
-    final Iterable<ThemeExtension<dynamic>>? extensions,
+    Iterable<ThemeExtension<dynamic>>? extensions,
 
     /// **Deprecated:**
     /// A color that typically appears behind scrollable content.
@@ -2871,10 +2874,12 @@ extension FlexThemeData on ThemeData {
     /// it overrode the same color in it as well.
     ///
     /// Defaults to null.
-    @Deprecated('Use surface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? background,
+    @Deprecated(
+      'Use surface instead. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
+    Color? background,
 
     /// **Deprecated:**
     /// A color that is clearly legible when drawn on `background` color.
@@ -2892,80 +2897,81 @@ extension FlexThemeData on ThemeData {
     ///
     /// You used this property for convenience if you want to override the
     /// color that this scheme color gets via the factory behavior.
-    @Deprecated('Use onSurface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? onBackground,
-  }) =>
-      FlexColorScheme.dark(
-        colorScheme: colorScheme,
-        colors: colors,
-        scheme: scheme,
-        usedColors: usedColors,
-        surfaceMode: surfaceMode,
-        blendLevel: blendLevel,
-        fixedColorStyle: fixedColorStyle,
-        //
-        appBarStyle: appBarStyle,
-        appBarOpacity: appBarOpacity,
-        transparentStatusBar: transparentStatusBar,
-        appBarElevation: appBarElevation,
-        bottomAppBarElevation: bottomAppBarElevation,
-        tabBarStyle: tabBarStyle,
-        //
-        primary: primary,
-        primaryLightRef: primaryLightRef,
-        onPrimary: onPrimary,
-        primaryContainer: primaryContainer,
-        onPrimaryContainer: onPrimaryContainer,
-        //
-        secondary: secondary,
-        secondaryLightRef: secondaryLightRef,
-        onSecondary: onSecondary,
-        secondaryContainer: secondaryContainer,
-        onSecondaryContainer: onSecondaryContainer,
-        //
-        tertiary: tertiary,
-        tertiaryLightRef: tertiaryLightRef,
-        onTertiary: onTertiary,
-        tertiaryContainer: tertiaryContainer,
-        onTertiaryContainer: onTertiaryContainer,
-        //
-        error: error,
-        onError: onError,
-        errorContainer: errorContainer,
-        onErrorContainer: onErrorContainer,
-        //
-        surface: surface,
-        onSurface: onSurface,
-        scaffoldBackground: scaffoldBackground,
-        dialogBackground: dialogBackground,
-        appBarBackground: appBarBackground,
-        surfaceTint: surfaceTint,
-        //
-        darkIsTrueBlack: darkIsTrueBlack,
-        swapColors: swapColors,
-        tooltipsMatchBackground: tooltipsMatchBackground,
-        subThemesData: subThemesData,
-        keyColors: keyColors,
-        useMaterial3ErrorColors: useMaterial3ErrorColors,
-        tones: tones,
-        variant: variant,
-        visualDensity: visualDensity,
-        textTheme: textTheme,
-        primaryTextTheme: primaryTextTheme,
-        fontFamily: fontFamily,
-        fontFamilyFallback: fontFamilyFallback,
-        package: package,
-        materialTapTargetSize: materialTapTargetSize,
-        pageTransitionsTheme: pageTransitionsTheme,
-        splashFactory: splashFactory,
-        platform: platform,
-        typography: typography,
-        applyElevationOverlayColor: applyElevationOverlayColor,
-        cupertinoOverrideTheme: cupertinoOverrideTheme,
-        useMaterial3: useMaterial3,
-        swapLegacyOnMaterial3: swapLegacyOnMaterial3,
-        extensions: extensions,
-      ).toTheme;
+    @Deprecated(
+      'Use onSurface instead. It is deprecated '
+      'because Flutter 3.22 deprecated this ColorScheme color. '
+      'It no longer has any function in FCS v8 and will be removed in v9.',
+    )
+    Color? onBackground,
+  }) => FlexColorScheme.dark(
+    colorScheme: colorScheme,
+    colors: colors,
+    scheme: scheme,
+    usedColors: usedColors,
+    surfaceMode: surfaceMode,
+    blendLevel: blendLevel,
+    fixedColorStyle: fixedColorStyle,
+    //
+    appBarStyle: appBarStyle,
+    appBarOpacity: appBarOpacity,
+    transparentStatusBar: transparentStatusBar,
+    appBarElevation: appBarElevation,
+    bottomAppBarElevation: bottomAppBarElevation,
+    tabBarStyle: tabBarStyle,
+    //
+    primary: primary,
+    primaryLightRef: primaryLightRef,
+    onPrimary: onPrimary,
+    primaryContainer: primaryContainer,
+    onPrimaryContainer: onPrimaryContainer,
+    //
+    secondary: secondary,
+    secondaryLightRef: secondaryLightRef,
+    onSecondary: onSecondary,
+    secondaryContainer: secondaryContainer,
+    onSecondaryContainer: onSecondaryContainer,
+    //
+    tertiary: tertiary,
+    tertiaryLightRef: tertiaryLightRef,
+    onTertiary: onTertiary,
+    tertiaryContainer: tertiaryContainer,
+    onTertiaryContainer: onTertiaryContainer,
+    //
+    error: error,
+    onError: onError,
+    errorContainer: errorContainer,
+    onErrorContainer: onErrorContainer,
+    //
+    surface: surface,
+    onSurface: onSurface,
+    scaffoldBackground: scaffoldBackground,
+    dialogBackground: dialogBackground,
+    appBarBackground: appBarBackground,
+    surfaceTint: surfaceTint,
+    //
+    darkIsTrueBlack: darkIsTrueBlack,
+    swapColors: swapColors,
+    tooltipsMatchBackground: tooltipsMatchBackground,
+    subThemesData: subThemesData,
+    keyColors: keyColors,
+    useMaterial3ErrorColors: useMaterial3ErrorColors,
+    tones: tones,
+    variant: variant,
+    visualDensity: visualDensity,
+    textTheme: textTheme,
+    primaryTextTheme: primaryTextTheme,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+    package: package,
+    materialTapTargetSize: materialTapTargetSize,
+    pageTransitionsTheme: pageTransitionsTheme,
+    splashFactory: splashFactory,
+    platform: platform,
+    typography: typography,
+    applyElevationOverlayColor: applyElevationOverlayColor,
+    cupertinoOverrideTheme: cupertinoOverrideTheme,
+    useMaterial3: useMaterial3,
+    swapLegacyOnMaterial3: swapLegacyOnMaterial3,
+    extensions: extensions,
+  ).toTheme;
 }

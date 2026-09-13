@@ -7,7 +7,7 @@ SnackBarThemeData _snackBarTheme({
   /// SnackBar elevation
   ///
   /// If undefined defaults to [kSnackBarElevation] = 4.
-  final double? elevation,
+  double? elevation,
 
   /// Corner radius of the [SnackBar].
   ///
@@ -19,7 +19,7 @@ SnackBarThemeData _snackBarTheme({
   /// NOTE: If this theme property is set, both SnackBars with behavior
   /// fixed and floating will get the assigned radius. See issue:
   /// https://github.com/flutter/flutter/issues/108539
-  final double? radius,
+  double? radius,
 
   /// The background color of the themed SnackBar. Typically one of inverse
   /// brightness compared to theme's surface color brightness.
@@ -43,10 +43,10 @@ SnackBarThemeData _snackBarTheme({
   ///
   ///  If a [colorScheme] is passed in and [backgroundSchemeColor] is defined,
   ///  it will override [backgroundColor] and be used instead.
-  final Color? backgroundColor,
+  Color? backgroundColor,
 
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  final ColorScheme? colorScheme,
+  ColorScheme? colorScheme,
 
   /// Selects which color from the passed in [colorScheme] to use as
   /// [SnackBar] background color.
@@ -55,20 +55,20 @@ SnackBarThemeData _snackBarTheme({
   /// [backgroundColor] will be used, which may be null too and SnackBar then
   /// falls back Flutter SDK defaults, or to FCS default if this is used by
   /// FCS that passes in its one custom default.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Overrides the default value for [SnackBarAction.textColor].
   ///
   /// If null, [SnackBarAction] and [colorScheme] is defined, defaults to
   /// [ColorScheme.inversePrimary], if a [colorScheme] was not defined, then
   /// defaults to effective foreground color with alpha 0xDD.
-  final SchemeColor? actionTextSchemeColor,
+  SchemeColor? actionTextSchemeColor,
 
   /// Used to configure the [DefaultTextStyle] for the [SnackBar.content]
   /// widget.
   ///
   /// If null, [SnackBar] defines its default using titleMedium
-  final TextStyle? contentTextStyle,
+  TextStyle? contentTextStyle,
 }) {
   final Color? background =
       (colorScheme == null || backgroundSchemeColor == null)

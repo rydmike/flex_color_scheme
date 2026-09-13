@@ -1,18 +1,17 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_response.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/enum_popup_menu.dart';
-import '../../shared/test_adaptive_response.dart';
 
 class DialogPanel extends StatelessWidget {
   const DialogPanel(this.controller, {super.key});
@@ -413,7 +412,7 @@ class DialogPanel extends StatelessWidget {
             'Use an alternative dialog border radius on '
             'selected platforms.\n'
             '\n'
-            // ignore: lines_longer_than_80_chars, string interpolation
+            // ignore: string interpolation
             '${controller.adaptiveResponseDialogRadius?.describe ?? AdaptiveResponse.off.describe}',
           ),
           defaultLabel: _adaptiveDialogModeLabel(controller),

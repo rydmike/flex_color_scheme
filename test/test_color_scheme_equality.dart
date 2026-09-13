@@ -1,5 +1,5 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void testColorSchemeEquality(ColorScheme scheme1, ColorScheme scheme2,
     {double threshold = 0.004}) {

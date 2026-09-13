@@ -11,24 +11,24 @@ BottomSheetThemeData _bottomSheetTheme({
   ///
   /// If null, defaults to Flutter's default, which is theme canvas color in
   /// M2 mode and surfaceContainerLow in M3 mode.
-  final Color? backgroundColor,
+  Color? backgroundColor,
 
   /// Value for [BottomSheet.backgroundColor] when the Bottom sheet is
   /// presented as a modal bottom sheet.
   ///
   /// If null, defaults to Flutter's default, which is theme canvas color in
   /// M2 mode and surfaceContainerLow in M3 mode.
-  final Color? modalBackgroundColor,
+  Color? modalBackgroundColor,
 
   /// The none modal bottom sheet elevation.
   ///
   /// If null, defaults to [kBottomSheetElevation] = 1.
-  final double? elevation,
+  double? elevation,
 
   /// The modal bottom sheet elevation.
   ///
   /// If null, defaults to [kBottomSheetModalElevation] = 2.
-  final double? modalElevation,
+  double? modalElevation,
 
   /// The corner radius of the top corners.
   ///
@@ -36,7 +36,7 @@ BottomSheetThemeData _bottomSheetTheme({
   ///
   /// Follows Material M3 guide as default value.
   /// https://m3.material.io/components/bottom-sheets/specs
-  final double? radius,
+  double? radius,
 
   /// Defines the bottom sheet's [Material.clipBehavior]
   /// by overriding the default value for [BottomSheet.clipBehavior].
@@ -48,20 +48,20 @@ BottomSheetThemeData _bottomSheetTheme({
   ///
   /// If this property is null then then the behavior will be [Clip.none],
   /// via Flutter's default values.
-  final Clip? clipBehavior,
+  Clip? clipBehavior,
 
   /// Constrains the size of the [BottomSheet].
   ///
   /// If null, the bottom sheet's size will be unconstrained.
-  final BoxConstraints? constraints,
+  BoxConstraints? constraints,
 
   /// Overrides the default value of [BottomSheet.shadowColor].
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// Overrides the default value for surfaceTintColor.
   ///
   /// See [Material.surfaceTintColor] for more details.
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 }) =>
     BottomSheetThemeData(
       backgroundColor: backgroundColor,

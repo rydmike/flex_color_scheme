@@ -1,11 +1,10 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_picker_inkwell.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
-import 'color_picker_inkwell.dart';
-import 'color_scheme_box.dart';
 
 const String _revealText = 'The surface blend and tint color is used as '
     'seed key color for neutral and neutralVariant seed generated palettes.\n '

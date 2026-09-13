@@ -1,11 +1,10 @@
 import 'dart:math' as math;
 
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/utils/colors_are_close.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/about.dart';
 import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../const/app.dart';
-import '../../utils/colors_are_close.dart';
-import 'about.dart';
 
 // The default width of the side menu when expanded to full menu.
 const double _kMenuWidth = 280;

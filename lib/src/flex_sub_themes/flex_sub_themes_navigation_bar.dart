@@ -26,25 +26,25 @@ part of '../flex_sub_themes.dart';
 /// It can also set an [opacity] on the background color.
 NavigationBarThemeData _navigationBarTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Optional text style for the [NavigationBar] labels.
   ///
   /// The size and colors defined in any of the text size and color properties
   /// are applied as overrides on the text style.
-  final TextStyle? labelTextStyle,
+  TextStyle? labelTextStyle,
 
   /// The size of the text label on selected [NavigationBar] item.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
   /// on selected item, 12 is used as fallback if needed.
-  final double? selectedLabelSize,
+  double? selectedLabelSize,
 
   /// The size of the text label on unselected [NavigationBar] items.
   ///
   /// If defined, it overrides the font size on effective label TextStyle
   /// on unselected items, 12 is used as fallback if needed.
-  final double? unselectedLabelSize,
+  double? unselectedLabelSize,
 
   /// Select which color from the passed in [ColorScheme] to use for
   /// the [NavigationBar]'s label text color.
@@ -54,7 +54,7 @@ NavigationBarThemeData _navigationBarTheme({
   /// [SchemeColor.onSurface] will be used.
   ///
   /// Flutter is default is onSurface.
-  final SchemeColor? selectedLabelSchemeColor,
+  SchemeColor? selectedLabelSchemeColor,
 
   /// Select which color from the theme's [ColorScheme] to for
   /// the [NavigationBar]'s unselected label text color.
@@ -72,7 +72,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
   /// [ColorScheme.onSurfaceVariant] in M3 mode.
-  final SchemeColor? unselectedLabelSchemeColor,
+  SchemeColor? unselectedLabelSchemeColor,
 
   // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
   //
@@ -98,17 +98,17 @@ NavigationBarThemeData _navigationBarTheme({
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
   /// If undefined, defaults to false.
-  final bool? mutedUnselectedLabel,
+  bool? mutedUnselectedLabel,
 
   /// The size of the icon on selected [NavigationBar] item.
   ///
   /// If undefined, defaults to 24.
-  final double? selectedIconSize,
+  double? selectedIconSize,
 
   /// The size of the icons on unselected [NavigationBar] items.
   ///
   /// If null, defaults to [selectedIconSize].
-  final double? unselectedIconSize,
+  double? unselectedIconSize,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [NavigationBar]'s selected item icon color.
@@ -121,7 +121,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
   /// [ColorScheme.onSecondaryContainer] in M3.
-  final SchemeColor? selectedIconSchemeColor,
+  SchemeColor? selectedIconSchemeColor,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [NavigationBar]'s unselected item icon color.
@@ -139,7 +139,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and to
   /// [ColorScheme.onSurfaceVariant] in M3 mode.
-  final SchemeColor? unselectedIconSchemeColor,
+  SchemeColor? unselectedIconSchemeColor,
 
   /// If true, the unselected icon in the [NavigationBar] use a more muted
   /// color version of the color defined by [unselectedIconSchemeColor].
@@ -149,7 +149,7 @@ NavigationBarThemeData _navigationBarTheme({
   /// and withAlpha([kUnselectedAlphaBlend]).
   ///
   /// If undefined, defaults to false.
-  final bool? mutedUnselectedIcon,
+  bool? mutedUnselectedIcon,
 
   /// Select which color from the theme [ColorScheme] to use as base for
   /// the [NavigationBar]'s selected item indicator.
@@ -158,7 +158,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// Flutter SDK defaults to secondaryContainer in M3 mode and to
   /// secondary in M2 mode with opacity 24%.
-  final SchemeColor? indicatorSchemeColor,
+  SchemeColor? indicatorSchemeColor,
 
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [NavigationBar].
@@ -168,12 +168,12 @@ NavigationBarThemeData _navigationBarTheme({
   /// Flutter SDK defaults to surfaceContainer in M3 and in M2 mode to
   /// surface color, with a color overlay using onSurface at
   /// fixed elevation 3.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// NavigationBar background opacity.
   ///
   /// If undefined, defaults to 1, fully opaque.
-  final double? opacity,
+  double? opacity,
 
   /// NavigationBar elevation.
   ///
@@ -181,18 +181,18 @@ NavigationBarThemeData _navigationBarTheme({
   /// M2 mode 0.
   ///
   /// In M2 mode it defaults [kBottomNavigationBarElevation] = 3.
-  final double? elevation,
+  double? elevation,
 
   /// Overrides the default value of [NavigationBar.surfaceTintColor].
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   /// Overrides the default value of [NavigationBar.shadowColor].
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// Height of the container for the Material 3 [NavigationBar].
   ///
   /// If undefined defaults to M3 spec 80dp.
-  final double? height,
+  double? height,
 
   /// Specifies when each [NavigationDestination]'s label should appear.
   ///
@@ -200,7 +200,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// If null, theme behavior defaults to
   /// `NavigationDestinationLabelBehavior.alwaysShow` via Flutter SDK default.
-  final NavigationDestinationLabelBehavior? labelBehavior,
+  NavigationDestinationLabelBehavior? labelBehavior,
 
   /// The alpha value used on selection color of the selection indicator on
   /// the [NavigationBar].
@@ -208,7 +208,7 @@ NavigationBarThemeData _navigationBarTheme({
   /// If not defined, defaults to is 0xFF, or opacity 1.
   ///
   /// Flutter SDK uses 24% in M2 and 100% in M3,
-  final int? indicatorAlpha,
+  int? indicatorAlpha,
 
   /// Border radius of the selection indicator on the [NavigationBar].
   ///
@@ -216,7 +216,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// FCS default, follows the Material M3 guide:
   /// https://m3.material.io/components/navigation-bar/specs
-  final double? indicatorRadius,
+  double? indicatorRadius,
 
   /// The icon color alpha blend value for unselected items, used on icon when
   /// [mutedUnselectedIcon] is true and on label when
@@ -227,7 +227,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// This setting is not exposed via [FlexSubThemesData], but can be if
   /// needed later.
-  final int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
+  int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
 
   /// The icon alpha value for unselected item, used on icon when
   /// [mutedUnselectedIcon] is true and on label when
@@ -238,7 +238,7 @@ NavigationBarThemeData _navigationBarTheme({
   ///
   /// This setting is not exposed via [FlexSubThemesData], but can be if
   /// needed later.
-  final int unselectedAlpha = kUnselectedAlphaBlend,
+  int unselectedAlpha = kUnselectedAlphaBlend,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -252,7 +252,7 @@ NavigationBarThemeData _navigationBarTheme({
     'The useMaterial3 flag no longer has any function in this '
     'component theme and is deprecated here. It will be removed in v9',
   )
-  final bool? useMaterial3,
+  bool? useMaterial3,
 
   /// Set to true to use Flutter SDK defaults for [NavigationBar]
   /// theme when its properties are undefined (null), instead of using
@@ -294,7 +294,7 @@ NavigationBarThemeData _navigationBarTheme({
     'In M2 mode FCS will continue to use its own opinionated defaults for '
     'as long as M2 exists.',
   )
-  final bool? useFlutterDefaults,
+  bool? useFlutterDefaults,
 }) {
   // Background color, when using normal default, falls back to
   // surfaceContainer.

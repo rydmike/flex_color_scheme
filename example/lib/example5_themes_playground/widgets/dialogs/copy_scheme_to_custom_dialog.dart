@@ -1,6 +1,5 @@
+import 'package:flex_color_scheme_example/shared/const/app.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/const/app.dart';
 
 /// Dialog to confirm is active scheme should be copied over to the
 /// custom and modifiable scheme.

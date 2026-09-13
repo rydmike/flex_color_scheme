@@ -6,7 +6,7 @@ part of '../flex_sub_themes.dart';
 /// menu part has an own theme in Flutter SDK.
 DrawerThemeData _drawerTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in [colorScheme] to use as
   /// [Drawer] background color.
@@ -16,7 +16,7 @@ DrawerThemeData _drawerTheme({
   /// Flutter SDK uses surfaceContainerLow color as default in M3 and
   /// ThemeData's canvasColor in M2 mode, which is Colors.grey[50] in
   /// light mode and Colors.grey[850] in dark mode.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Corner radius of the [Drawer]'s visible edge.
   ///
@@ -24,22 +24,22 @@ DrawerThemeData _drawerTheme({
   /// in M3 mode, null is kept but gets 16 via M3 mode defaults.
   /// The 16 dp values is based on M3 specification:
   /// https://m3.material.io/components/navigation-drawer/specs
-  final double? radius,
+  double? radius,
 
   /// Drawer elevation.
   ///
   /// If not defined, defaults to Flutter default values, in M2 mode (16)
   /// and in M3 (1) via SDK defaults.
-  final double? elevation,
+  double? elevation,
 
   /// Drawer elevation shadow color.
   ///
   /// In M2 defaults to [Colors.black] and elevation casts a shadow.
   /// In M3 it defaults [Colors.transparent] and there is no shadow.
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// Overrides the default value for [Drawer.surfaceTintColor].
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   /// Themes the default width of the [Drawer].
   ///
@@ -51,7 +51,7 @@ DrawerThemeData _drawerTheme({
   ///
   /// For more info see issue:
   /// https://github.com/flutter/flutter/issues/123380
-  final double? width,
+  double? width,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -65,7 +65,7 @@ DrawerThemeData _drawerTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   // Get selected background color, defaults to surface.

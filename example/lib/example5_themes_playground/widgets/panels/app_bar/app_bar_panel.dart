@@ -1,21 +1,20 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/app_bar/app_bar_center_title_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/app_bar/app_bar_style_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_response.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/enum_popup_menu.dart';
-import '../../shared/test_adaptive_response.dart';
-import 'app_bar_center_title_toggle_buttons.dart';
-import 'app_bar_style_popup_menu.dart';
 
 class AppBarPanel extends StatelessWidget {
   const AppBarPanel(this.controller, {super.key});
@@ -527,7 +526,7 @@ class AppBarPanel extends StatelessWidget {
               'elevation effect in Material-3 LIGHT mode on selected '
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars, for string interpolation
+              // ignore: for string interpolation
               '${controller.adaptiveAppBarScrollUnderOffLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveAppBarScrollUnderOffLight,
@@ -543,7 +542,7 @@ class AppBarPanel extends StatelessWidget {
               'elevation effect in Material-3 DARK mode on selected '
               'platforms. This setting has no effect in Material-2 mode.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars, for string interpolation
+              // ignore: for string interpolation
               '${controller.adaptiveAppBarScrollUnderOffDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveAppBarScrollUnderOffDark,

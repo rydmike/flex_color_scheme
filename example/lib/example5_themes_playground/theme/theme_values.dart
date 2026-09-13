@@ -1,9 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/adaptive_response.dart';
 
 /// A class container that holds static theming helper functions.
 abstract final class ThemeValues {

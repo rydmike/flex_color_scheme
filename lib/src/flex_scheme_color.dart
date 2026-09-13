@@ -1,12 +1,9 @@
+import 'package:flex_color_scheme/src/flex_color.dart';
+import 'package:flex_color_scheme/src/flex_constants.dart';
+import 'package:flex_color_scheme/src/flex_extensions.dart';
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../flex_color_scheme.dart' show FlexSchemeData; // For comment refs.
-import 'flex_color.dart';
-import 'flex_color_scheme.dart' show FlexColorScheme;
-import 'flex_constants.dart';
-import 'flex_extensions.dart';
 
 /// Immutable color data class for the main scheme colors used in a
 /// FlexColorScheme based color scheme and theming engine.
@@ -396,11 +393,11 @@ class FlexSchemeColor with Diagnosticable {
   /// If the passed in [colors] have none null [error] or [errorContainer],
   /// they are kept.
   static FlexSchemeColor effective(
-    final FlexSchemeColor colors,
-    final int usedColors, {
-    final bool swapLegacy = false,
-    final bool swapColors = false,
-    final Brightness? brightness,
+    FlexSchemeColor colors,
+    int usedColors, {
+    bool swapLegacy = false,
+    bool swapColors = false,
+    Brightness? brightness,
   }) {
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
 
@@ -670,19 +667,19 @@ class FlexSchemeColor with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeColor copyWith({
-    final Color? primary,
-    final Color? primaryContainer,
-    final Color? primaryLightRef,
-    final Color? secondary,
-    final Color? secondaryContainer,
-    final Color? secondaryLightRef,
-    final Color? tertiary,
-    final Color? tertiaryContainer,
-    final Color? tertiaryLightRef,
-    final Color? appBarColor,
-    final Color? error,
-    final Color? errorContainer,
-    final bool? swapOnMaterial3,
+    Color? primary,
+    Color? primaryContainer,
+    Color? primaryLightRef,
+    Color? secondary,
+    Color? secondaryContainer,
+    Color? secondaryLightRef,
+    Color? tertiary,
+    Color? tertiaryContainer,
+    Color? tertiaryLightRef,
+    Color? appBarColor,
+    Color? error,
+    Color? errorContainer,
+    bool? swapOnMaterial3,
   }) {
     return FlexSchemeColor(
       primary: primary ?? this.primary,

@@ -2,12 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-
-import '../../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../../shared/widgets/universal/showcase_material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const SizedBox rowDivider = SizedBox(width: 20);
 const SizedBox colDivider = SizedBox(height: 10);
@@ -2331,7 +2330,7 @@ enum ColorLabel {
   yellow('Yellow', Colors.yellow),
   grey('Grey', Colors.grey);
 
-  const ColorLabel(this.label, this.color);
+  ColorLabel(this.label, this.color);
   final String label;
   final Color color;
 }
@@ -2345,7 +2344,7 @@ enum IconLabel {
   brush('Brush', Icons.brush_outlined),
   heart('Heart', Icons.favorite);
 
-  const IconLabel(this.label, this.icon);
+  IconLabel(this.label, this.icon);
   final String label;
   final IconData icon;
 }
@@ -2619,7 +2618,7 @@ enum ColorItem {
   black('black', Colors.black),
   white('white', Colors.white);
 
-  const ColorItem(this.label, this.color);
+  ColorItem(this.label, this.color);
   final String label;
   final Color color;
 }

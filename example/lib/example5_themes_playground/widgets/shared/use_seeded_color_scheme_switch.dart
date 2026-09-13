@@ -1,9 +1,8 @@
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/use_key_colors_buttons.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/const/app_color.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/examples/use_key_colors_buttons.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
 
 class UseSeededColorSchemeSwitch extends StatelessWidget {
   const UseSeededColorSchemeSwitch({

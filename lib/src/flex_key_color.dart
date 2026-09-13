@@ -1,10 +1,7 @@
+import 'package:flex_color_scheme/src/flex_scheme.dart' show FlexScheme;
 import 'package:flex_seed_scheme/flex_seed_scheme.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
-import 'flex_scheme.dart' show FlexScheme;
-import 'flex_theme_data_extensions.dart' show FlexThemeData; // For comment refs
 
 /// Immutable data class that configures if and how [FlexColorScheme] uses
 /// key colors to populate the Material-3 [ColorScheme] it creates and uses
@@ -538,30 +535,30 @@ class FlexKeyColors with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexKeyColors copyWith({
-    final bool? useKeyColors,
+    bool? useKeyColors,
     //
-    final Color? keyPrimary,
-    final bool? keepPrimary,
-    final bool? keepPrimaryContainer,
+    Color? keyPrimary,
+    bool? keepPrimary,
+    bool? keepPrimaryContainer,
     //
-    final Color? keySecondary,
-    final bool? useSecondary,
-    final bool? keepSecondary,
-    final bool? keepSecondaryContainer,
+    Color? keySecondary,
+    bool? useSecondary,
+    bool? keepSecondary,
+    bool? keepSecondaryContainer,
     //
-    final Color? keyTertiary,
-    final bool? useTertiary,
-    final bool? keepTertiary,
-    final bool? keepTertiaryContainer,
+    Color? keyTertiary,
+    bool? useTertiary,
+    bool? keepTertiary,
+    bool? keepTertiaryContainer,
     //
-    final Color? keyError,
-    final bool? useError,
-    final bool? keepError,
-    final bool? keepErrorContainer,
+    Color? keyError,
+    bool? useError,
+    bool? keepError,
+    bool? keepErrorContainer,
     //
-    final double? contrastLevel,
-    final bool? useExpressiveOnContainerColors,
-    final bool? useLegacyMonochromeSeedBehavior,
+    double? contrastLevel,
+    bool? useExpressiveOnContainerColors,
+    bool? useLegacyMonochromeSeedBehavior,
   }) {
     return FlexKeyColors(
       useKeyColors: useKeyColors ?? this.useKeyColors,

@@ -2,14 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_dark.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_light.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
 import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../../../shared/controllers/theme_controller.dart';
-import '../../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../theme/flex_theme_dark.dart';
-import '../../../../theme/flex_theme_light.dart';
 
 const Widget divider = SizedBox(height: 10);
 

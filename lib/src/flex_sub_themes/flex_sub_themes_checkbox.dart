@@ -9,7 +9,7 @@ part of '../flex_sub_themes.dart';
 /// The splashRadius is not used by FlexColorScheme sub-themes.
 CheckboxThemeData _checkboxTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the checkbox.
@@ -20,29 +20,29 @@ CheckboxThemeData _checkboxTheme({
   /// with M3 design, but applied to M2 switch. The M3 color design
   /// specification for the secondary color, is a poor choice for toggles and
   /// switches, primary color works better.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// The splash radius of the circular Material ink response.
   ///
   /// Defaults to kRadialReactionRadius = 20.
-  final double? splashRadius,
+  double? splashRadius,
 
   /// Defines if unselected [Checkbox] is also themed to be [baseSchemeColor].
   ///
   /// If false, it is grey like in Flutter SDK.
   ///
   /// If undefined, defaults to false.
-  final bool? unselectedIsColored,
+  bool? unselectedIsColored,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -56,7 +56,7 @@ CheckboxThemeData _checkboxTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool isBaseColor = unselectedIsColored ?? false;

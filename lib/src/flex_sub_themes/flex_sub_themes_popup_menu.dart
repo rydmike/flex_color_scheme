@@ -21,7 +21,7 @@ part of '../flex_sub_themes.dart';
 /// border radius values.
 PopupMenuThemeData _popupMenuTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  final ColorScheme? colorScheme,
+  ColorScheme? colorScheme,
 
   /// Defines which [Theme] based [ColorScheme] based color is use as
   /// background color by [PopupMenuButton].
@@ -34,7 +34,7 @@ PopupMenuThemeData _popupMenuTheme({
   /// - [useMaterial3] = false : default theme.cardColor.
   /// - [useMaterial3] = true  : default theme.colorScheme.surfaceContainer.
   /// Usually they are the same.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Defines which [Theme] based [ColorScheme] based color is use as
   /// foreground color by [PopupMenuButton].
@@ -43,7 +43,7 @@ PopupMenuThemeData _popupMenuTheme({
   /// the schemeColorPair for the [backgroundSchemeColor]. If
   /// [backgroundSchemeColor] is also null, then it defaults to Flutter SDK
   /// default foreground color [ColorScheme.onSurface].
-  final SchemeColor? foregroundSchemeColor,
+  SchemeColor? foregroundSchemeColor,
 
   /// The background color of [PopupMenuButton].
   ///
@@ -52,17 +52,17 @@ PopupMenuThemeData _popupMenuTheme({
   /// - [useMaterial3] = false : defaults theme.cardColor.
   /// - [useMaterial3] = true  : defaults theme.colorScheme.surfaceContainer.
   /// Usually they are the same.
-  final Color? color,
+  Color? color,
 
   /// The TextStyle of the selectable items on the [PopupMenuButton].
   ///
   /// The default is [textTheme.labelLarge], via Flutter SDK defaults.
-  final TextStyle? textStyle,
+  TextStyle? textStyle,
 
   /// Popup menu corner radius.
   ///
   /// If not defined, defaults to 4 via Flutter SDK defaults.
-  final double? radius,
+  double? radius,
 
   /// The elevation of the [PopupMenuButton].
   ///
@@ -72,11 +72,11 @@ PopupMenuThemeData _popupMenuTheme({
   /// via Flutter SDK widget default values.
   /// FCS will pass in [kPopupMenuM3Elevation] (3), if Material3 is true
   /// and [kPopupMenuM2Elevation] (6), if it is false.
-  final double? elevation,
+  double? elevation,
 
   /// The color used as an alpha overlay tint color on the effective
   /// [PopupMenuButton] background color.
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 }) {
   // Get selected background color, defaults to surface in M3 if not defined
   // and to theme.cardColor in M2, typically they are the same.

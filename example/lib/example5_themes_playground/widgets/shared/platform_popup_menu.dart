@@ -1,8 +1,7 @@
+import 'package:flex_color_scheme_example/shared/widgets/universal/flex_icons.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/widgets/universal/flex_icons.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
 
 /// A popup menu that allows us to select the Flutter platform we want to use.
 ///

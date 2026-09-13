@@ -1,19 +1,18 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_scheme/flex_tone_config_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/about.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/input_colors_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_pages.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/use_key_colors_buttons.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_center.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../example5_themes_playground/widgets/panels/color_scheme/flex_tone_config_popup_menu.dart';
-import '../shared/const/app.dart';
-import '../shared/const/app_color.dart';
-import '../shared/controllers/theme_controller.dart';
-import '../shared/widgets/examples/about.dart';
-import '../shared/widgets/examples/input_colors_popup_menu.dart';
-import '../shared/widgets/examples/show_color_scheme_colors.dart';
-import '../shared/widgets/examples/show_sub_pages.dart';
-import '../shared/widgets/examples/show_sub_theme_colors.dart';
-import '../shared/widgets/examples/show_theme_data_colors.dart';
-import '../shared/widgets/examples/use_key_colors_buttons.dart';
-import '../shared/widgets/universal/responsive_center.dart';
-import '../shared/widgets/universal/showcase_material.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 4 - All Themes

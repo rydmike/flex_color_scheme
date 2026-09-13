@@ -1,24 +1,23 @@
 import 'dart:async';
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/generate_colorscheme_dart_code.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/import_export_playground_settings.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/share_settings.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/dart_code_dialog.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/reset_settings_dialog.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/show_copy_setup_code_dialog.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/model/theme_topic.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/one_or_two_topic_page_view.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/two_topics_page.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/two_topics_vertical_page.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/responsive_scaffold.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_dialog.dart';
 import 'package:flutter/services.dart';
-
-import '../../../shared/const/app.dart';
-import '../../../shared/const/app_color.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/examples/responsive_scaffold.dart';
-import '../../../shared/widgets/universal/responsive_dialog.dart';
-import '../../utils/generate_colorscheme_dart_code.dart';
-import '../../utils/import_export_playground_settings.dart';
-import '../../utils/share_settings.dart';
-import '../dialogs/dart_code_dialog.dart';
-import '../dialogs/reset_settings_dialog.dart';
-import '../dialogs/show_copy_setup_code_dialog.dart';
-import 'model/theme_topic.dart';
-import 'one_or_two_topic_page_view.dart';
-import 'two_topics_page.dart';
-import 'two_topics_vertical_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Home Page for FlexColorScheme EXAMPLE 5 - Themes Playground.
 ///

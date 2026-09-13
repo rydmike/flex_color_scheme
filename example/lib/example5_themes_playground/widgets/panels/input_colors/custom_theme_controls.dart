@@ -1,10 +1,9 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/copy_scheme_to_custom_dialog.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/reset_custom_colors_dialog.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../dialogs/copy_scheme_to_custom_dialog.dart';
-import '../../dialogs/reset_custom_colors_dialog.dart';
 
 class CustomThemeControls extends StatelessWidget {
   const CustomThemeControls({super.key, required this.controller});

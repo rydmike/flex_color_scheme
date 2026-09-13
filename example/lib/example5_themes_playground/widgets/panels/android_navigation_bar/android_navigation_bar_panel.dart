@@ -1,11 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/android_navigation_bar/system_nav_bar_style_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import 'system_nav_bar_style_toggle_buttons.dart';
 
 // Panel used to control the themed Android system navigation bar on Android.
 //
@@ -39,7 +38,7 @@ class AndroidNavigationBarPanel extends StatelessWidget {
     fragment: 'themed-system-navigation-bar-in-android',
   );
 
-  String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
+  String explainStyle(FlexSystemNavBarStyle style, bool isLight) {
     switch (style) {
       case FlexSystemNavBarStyle.system:
         return isLight

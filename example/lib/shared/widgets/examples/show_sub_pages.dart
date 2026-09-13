@@ -1,8 +1,7 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/pages/page_examples.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/header_card_stateful.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../controllers/theme_controller.dart';
-import '../../pages/page_examples.dart';
-import '../universal/header_card_stateful.dart';
 
 // StatefulHeaderCard wrapper of PageExamples.
 //

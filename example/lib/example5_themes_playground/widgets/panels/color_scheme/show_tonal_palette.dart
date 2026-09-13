@@ -1,11 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_scheme/tonal_palette_colors.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/controllers/tone_indicator_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/controllers/tone_indicator_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import 'tonal_palette_colors.dart';
 
 class ShowTonalPalette extends StatelessWidget {
   const ShowTonalPalette({

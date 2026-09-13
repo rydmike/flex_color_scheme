@@ -1,6 +1,5 @@
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'list_tile_reveal.dart';
 
 /// A discrete [Slider] that is nullable and uses [ListTileReveal] for title
 /// and additional expanded guide content.
@@ -254,9 +253,9 @@ class _SliderListTileRevealState extends State<SliderListTileReveal> {
                                     effectiveMin * widget.valueDisplayScale) <
                                 widget.min * widget.valueDisplayScale
                         ? 'default\n${widget.valueDefaultLabel}'
-                        // ignore: lines_longer_than_80_chars, str interpolation
+                        // ignore: str interpolation
                         : '${(widget.value! * widget.valueDisplayScale).toStringAsFixed(widget.valueDecimalPlaces)}${widget.valueUnitLabel}'
-                    // ignore: lines_longer_than_80_chars, string interpolation
+                    // ignore: string interpolation
                     : 'default\n${widget.valueDefaultDisabledLabel ?? widget.valueDefaultLabel}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(

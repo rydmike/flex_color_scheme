@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
 import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../utils/app_scroll_behavior.dart';
 
 /// A layout with horizontally centered and max width constrained content.
 ///

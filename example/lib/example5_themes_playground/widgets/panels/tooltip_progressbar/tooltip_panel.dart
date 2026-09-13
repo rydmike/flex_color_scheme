@@ -1,10 +1,9 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/color_scheme_popup_menu.dart';
 
 class TooltipPanel extends StatelessWidget {
   const TooltipPanel(this.controller, {super.key});

@@ -1,11 +1,10 @@
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service_hive_adapters.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_data_dir/app_data_dir.dart';
+import 'package:flex_color_scheme_example/shared/utils/same_types.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_ce/hive.dart';
-
-import '../const/app.dart';
-import '../utils/app_data_dir/app_data_dir.dart';
-import '../utils/same_types.dart';
-import 'theme_service.dart';
-import 'theme_service_hive_adapters.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -57,8 +56,7 @@ class ThemeServiceHive implements ThemeService {
     // choice for this type of feature. I wanted to show how it can be
     // used as well. We always show this path info in none release builds.
     if (_debug) {
-      debugPrint(
-          'Hive using storage path: $appDataDir and file name: $boxName');
+      debugPrint('Hive using storage path: $appDataDir and file name: $boxName');
     }
     // Init the Hive box box giving it the platform usable folder.
     Hive.init(appDataDir);
@@ -130,8 +128,10 @@ class ThemeServiceHive implements ThemeService {
           (sameTypes<T, int?>() || sameTypes<T, int>())) {
         final T loaded = value.round() as T;
         if (_debug) {
-          debugPrint(' ** WASM Issue : Expected int but got double, '
-              'returning as int: $loaded');
+          debugPrint(
+            ' ** WASM Issue : Expected int but got double, '
+            'returning as int: $loaded',
+          );
         }
         return loaded;
       } else {

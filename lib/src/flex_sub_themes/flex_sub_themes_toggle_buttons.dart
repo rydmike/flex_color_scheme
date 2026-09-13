@@ -15,7 +15,7 @@ part of '../flex_sub_themes.dart';
 /// reasonably close to each other.
 ToggleButtonsThemeData _toggleButtonsTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// base color for the [ToggleButtons].
@@ -31,27 +31,27 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   /// results in [ColorScheme.outline] color being used.
   ///
   /// If not defined, primary will be used.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// foreground color for the selected [ToggleButtons].
   ///
   /// If not defined, contrast color pair to [baseSchemeColor] will be used,
   /// which for its default value is onPrimary.
-  final SchemeColor? selectedForegroundSchemeColor,
+  SchemeColor? selectedForegroundSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// foreground color for unselected [ToggleButtons].
   ///
   /// If not defined, [baseSchemeColor] will be used as base.
-  final SchemeColor? unselectedSchemeColor,
+  SchemeColor? unselectedSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the border
   /// color for the toggle buttons.
   ///
   /// If not defined, [baseSchemeColor] will be used as base in M2, in M3
   /// [ColorScheme.outline] will be the effective result.
-  final SchemeColor? borderSchemeColor,
+  SchemeColor? borderSchemeColor,
 
   /// The button corner radius.
   ///
@@ -60,7 +60,7 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   /// This is not in M3 specification, but FlexColorScheme component
   /// sub-themes harmonizes [ToggleButtons] size
   /// and border radius with the other Material buttons.
-  final double? radius,
+  double? radius,
 
   /// The width of the borders around the toggle buttons.
   ///
@@ -69,19 +69,19 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   ///
   /// If null, defaults to [kThinBorderWidth] = 1.0, when
   /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
-  final double? borderWidth,
+  double? borderWidth,
 
   /// Minimum button size.
   ///
   /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
-  final Size? minButtonSize,
+  Size? minButtonSize,
 
   /// The default text style for [ToggleButtons.children].
   ///
   /// [TextStyle.color] will be ignored and substituted by [color],
   /// [selectedColor] or [disabledColor] depending on whether the buttons
   /// are active, selected, or disabled.
-  final TextStyle? textStyle,
+  TextStyle? textStyle,
 
   /// VisualDensity for ToggleButtons.
   ///
@@ -94,17 +94,17 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   ///
   /// Defaults to null, that results in VisualDensity.adaptivePlatformDensity
   /// being used, which is same as null default in ThemeData.
-  final VisualDensity? visualDensity,
+  VisualDensity? visualDensity,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -118,7 +118,7 @@ ToggleButtonsThemeData _toggleButtonsTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;

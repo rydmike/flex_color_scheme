@@ -1,8 +1,7 @@
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/const/app_color.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 
 class CustomUsesDarkColorsForSeedSwitch extends StatelessWidget {
   const CustomUsesDarkColorsForSeedSwitch({

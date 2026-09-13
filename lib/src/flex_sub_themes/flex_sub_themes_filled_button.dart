@@ -10,7 +10,7 @@ part of '../flex_sub_themes.dart';
 /// uses 20 in M2, where SDK M2 defaults to 4.
 FilledButtonThemeData _filledButtonTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// background  color for the filled button.
@@ -21,11 +21,11 @@ FilledButtonThemeData _filledButtonTheme({
   /// from the SchemeColor.
   ///
   /// If not defined, [colorScheme.primary] will be used.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// If not defined, defaults to Stadium border based on
   /// https://m3.material.io/components/buttons/specs
-  final double? radius,
+  double? radius,
 
   /// Padding for the button theme.
   ///
@@ -37,30 +37,30 @@ FilledButtonThemeData _filledButtonTheme({
   ///
   /// If null and [useMaterial3] is true in the context, the correct M3
   /// button theme default computed button padding for M3 will be used.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
   /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
   /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
   /// [useMaterial3] is true, via M3 built in defaults.
-  final Size? minButtonSize,
+  Size? minButtonSize,
 
   /// The style for the button's [Text] widget descendants.
   ///
   /// The color of the [textStyle] is typically not used directly, the
   /// [foregroundColor] is used instead.
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  WidgetStateProperty<TextStyle?>? textStyle,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// Creates the [InkWell] splash factory, which defines the appearance of
   /// "ink" splashes that occur in response to taps.
@@ -70,7 +70,7 @@ FilledButtonThemeData _filledButtonTheme({
   /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
   /// null and the default comes via ThemeData.splashFactory, that is has
   /// also defined.
-  final InteractiveInkFeatureFactory? splashFactory,
+  InteractiveInkFeatureFactory? splashFactory,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -84,7 +84,7 @@ FilledButtonThemeData _filledButtonTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;

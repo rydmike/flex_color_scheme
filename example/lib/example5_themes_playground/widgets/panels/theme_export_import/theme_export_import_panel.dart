@@ -1,18 +1,17 @@
 import 'dart:async';
 
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/import_export_playground_settings.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/share_settings.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/delete_settings_data.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/import_settings_dialog.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../theme/theme_values.dart';
-import '../../../utils/import_export_playground_settings.dart';
-import '../../../utils/share_settings.dart';
-import '../../dialogs/delete_settings_data.dart';
-import '../../dialogs/import_settings_dialog.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Export and Import the currently configured FlexColorScheme theme setup.
 class ThemeExportImportPanel extends StatefulWidget {

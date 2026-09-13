@@ -1,14 +1,13 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/chip/chip_blend_colors_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import 'chip_blend_colors_toggle_buttons.dart';
 
 class ChipPanel extends StatelessWidget {
   const ChipPanel(this.controller, {super.key});

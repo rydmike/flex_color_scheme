@@ -7,7 +7,7 @@ part of '../flex_sub_themes.dart';
 /// for your app theme.
 TextSelectionThemeData _textSelectionTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// The [SchemeColor] based color of the cursor in the text field.
   ///
@@ -15,18 +15,18 @@ TextSelectionThemeData _textSelectionTheme({
   /// the field.
   ///
   /// If not defined, [colorScheme.primary] is used.
-  final SchemeColor? cursorSchemeColor,
+  SchemeColor? cursorSchemeColor,
 
   /// The [SchemeColor] based background color of selected text.
   ///
   /// If not defined, [colorScheme.primary] is used.
-  final SchemeColor? selectionSchemeColor,
+  SchemeColor? selectionSchemeColor,
 
   /// The opacity applied to [selectionSchemeColor].
   ///
   /// If not defined, default to [kTextSelectionOpacity] = 0.4 (40%).
   /// Same as Flutter SDK default.
-  final double? selectionOpacity,
+  double? selectionOpacity,
 
   /// The [SchemeColor] based color of the selection handles on the
   /// text field.
@@ -35,13 +35,13 @@ TextSelectionThemeData _textSelectionTheme({
   /// or as a handle to drag the cursor to a new location in the text.
   ///
   /// If not defined, [colorScheme.primary] is used.
-  final SchemeColor? selectionHandleSchemeColor,
+  SchemeColor? selectionHandleSchemeColor,
 
   /// A custom override color that
   /// [TextSelectionThemeData.selectionHandleColor] will use if it is defined.
   ///
   /// If not defined, the result from [selectionHandleSchemeColor] is used.
-  final Color? selectionHandleCustomColor,
+  Color? selectionHandleCustomColor,
 }) {
   // Get used cursorColor, defaults to primary.
   final Color cursorColor = FlexSubThemes.schemeColor(

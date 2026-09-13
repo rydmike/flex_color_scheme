@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/nullable_bool_toggle_buttons.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/nullable_bool_toggle_buttons.dart';
 
 class UseMaterial3Typography extends StatelessWidget {
   const UseMaterial3Typography({
@@ -10,7 +9,7 @@ class UseMaterial3Typography extends StatelessWidget {
   });
   final ThemeController controller;
 
-  String _explainLabelStyle(final bool? value) {
+  String _explainLabelStyle(bool? value) {
     switch (value) {
       case true:
         return 'Use M3 Typography 2021 and text styles';

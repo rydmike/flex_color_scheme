@@ -1,6 +1,5 @@
+import 'package:flex_color_scheme_example/shared/const/app.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/const/app.dart';
 
 /// Dialog to confirm if user wants to reset the current custom colors.
 class ResetCustomColorsDialog extends StatelessWidget {

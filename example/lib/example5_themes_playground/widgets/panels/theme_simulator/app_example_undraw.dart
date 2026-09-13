@@ -1,17 +1,16 @@
 import 'dart:math';
 
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/theme_mode_switch_list_tile.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_images.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/utils/breakpoint.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/utils/random_color.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/svg_asset_image.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/svg_asset_image_switcher.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/const/app_images.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../shared/utils/breakpoint.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/utils/random_color.dart';
-import '../../../../shared/widgets/universal/svg_asset_image.dart';
-import '../../../../shared/widgets/universal/svg_asset_image_switcher.dart';
-import '../../shared/theme_mode_switch_list_tile.dart';
 
 /// An example that show what an app using the theme might look like
 class AppExampleUndraw extends StatefulWidget {

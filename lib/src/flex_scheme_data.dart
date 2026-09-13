@@ -1,9 +1,5 @@
+import 'package:flex_color_scheme/src/flex_scheme_color.dart';
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart' show ThemeData; // For comment refs.
-
-import '../flex_color_scheme.dart' show FlexScheme; // For comment refs.
-import 'flex_color.dart' show FlexColor; // For comment refs.
-import 'flex_scheme_color.dart';
 
 /// Immutable data class that holds [name] and [description] string scheme
 /// descriptions, [light] and [dark], [FlexSchemeColor] definitions.
@@ -46,10 +42,10 @@ class FlexSchemeData with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeData copyWith({
-    final String? name,
-    final String? description,
-    final FlexSchemeColor? light,
-    final FlexSchemeColor? dark,
+    String? name,
+    String? description,
+    FlexSchemeColor? light,
+    FlexSchemeColor? dark,
   }) {
     return FlexSchemeData(
       name: name ?? this.name,

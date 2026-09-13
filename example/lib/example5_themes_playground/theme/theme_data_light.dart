@@ -1,12 +1,11 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/code_theme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_light.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/topic_theme.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../shared/const/app.dart';
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/visual_density_enum.dart';
-import 'code_theme.dart';
-import 'flex_theme_light.dart';
-import 'topic_theme.dart';
 
 /// Return a Flutter SDK standard created [ThemeData] object,
 /// using the [ColorScheme] colors created by the current configuration

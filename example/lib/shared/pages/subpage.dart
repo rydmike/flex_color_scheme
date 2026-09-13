@@ -1,17 +1,16 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/about.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_center.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/theme_mode_switch.dart';
 import 'package:flutter/services.dart';
-
-import '../const/app.dart';
-import '../controllers/theme_controller.dart';
-import '../utils/app_scroll_behavior.dart';
-import '../widgets/examples/about.dart';
-import '../widgets/examples/show_color_scheme_colors.dart';
-import '../widgets/examples/show_sub_theme_colors.dart';
-import '../widgets/examples/show_theme_data_colors.dart';
-import '../widgets/universal/responsive_center.dart';
-import '../widgets/universal/showcase_material.dart';
-import '../widgets/universal/theme_mode_switch.dart';
+import 'package:material_ui/material_ui.dart';
 
 // This sub page is used as a demo in the default example and in examples
 // 4 and 5 to show a sub-page using the same FlexColorScheme based theme.

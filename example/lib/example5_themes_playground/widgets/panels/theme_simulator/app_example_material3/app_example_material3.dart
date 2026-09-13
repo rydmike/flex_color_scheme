@@ -1,16 +1,15 @@
 // Copyright 2021 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/color_palettes_screen.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/component_screen.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/constants.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/elevation_screen.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/typography_screen.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../../shared/const/app.dart';
-import '../../../../../shared/controllers/theme_controller.dart';
-import '../../../../../shared/utils/link_text_span.dart';
-import 'color_palettes_screen.dart';
-import 'component_screen.dart';
-import 'constants.dart';
-import 'elevation_screen.dart';
-import 'typography_screen.dart';
 
 class AppExampleMaterial3 extends StatefulWidget {
   const AppExampleMaterial3({super.key, required this.themeController});

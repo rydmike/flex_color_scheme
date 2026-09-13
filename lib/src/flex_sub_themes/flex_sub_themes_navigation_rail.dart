@@ -21,13 +21,13 @@ part of '../flex_sub_themes.dart';
 /// case for it is not as common as on bottom navigation bars.
 NavigationRailThemeData _navigationRailTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Optional text style for the [NavigationRail] labels.
   ///
   /// The size and colors defined in any of the text size and color properties
   /// are applied as overrides on this text style.
-  final TextStyle? labelTextStyle,
+  TextStyle? labelTextStyle,
 
   /// The size of the text label on selected [NavigationRail] item.
   ///
@@ -39,7 +39,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// This is the same size as default labelMedium in the text theme.
   /// FCS uses this for both M2 and M3 mode. Flutter SDK uses 12 in M3 and
   /// 16 in M23 from its bodyLarge text theme.
-  final double? selectedLabelSize,
+  double? selectedLabelSize,
 
   /// The size of the text label on unselected [NavigationRail] items.
   ///
@@ -51,7 +51,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// This is the same size as default labelMedium in the text theme.
   /// FCS uses this for both M2 and M3 mode. Flutter SDK uses 12 in M3 and
   /// 16 in M23 from its bodyLarge text theme.
-  final double? unselectedLabelSize,
+  double? unselectedLabelSize,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [NavigationRail]'s selected label text color.
@@ -61,7 +61,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// [SchemeColor.onSurface] will be used.
   ///
   /// Flutter M2 default is primary, M3 default is onSurface.
-  final SchemeColor? selectedLabelSchemeColor,
+  SchemeColor? selectedLabelSchemeColor,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [NavigationRails]'s unselected label text color.
@@ -82,7 +82,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// onSurface. This is a spec BUG in Flutter's Material-3 defaults, it should
   /// be onSurfaceVariant based on M3 specification
   /// https://m3.material.io/components/navigation-rail/specs
-  final SchemeColor? unselectedLabelSchemeColor,
+  SchemeColor? unselectedLabelSchemeColor,
 
   // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
   //
@@ -113,19 +113,19 @@ NavigationRailThemeData _navigationRailTheme({
   /// .withAlpha([kUnselectedAlphaBlend]).
   ///
   /// If undefined, defaults to false.
-  final bool? mutedUnselectedLabel,
+  bool? mutedUnselectedLabel,
 
   /// The size of the icon on selected [NavigationRail] item.
   ///
   /// If undefined, it defaults to 24.
   ///
   /// Flutter M2 and M3 defaults are 24.
-  final double? selectedIconSize,
+  double? selectedIconSize,
 
   /// The size of the icon on unselected [NavigationRail] items.
   ///
   /// If undefined, defaults to [selectedIconSize].
-  final double? unselectedIconSize,
+  double? unselectedIconSize,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [NavigationRail]'s selected item icon color.
@@ -138,7 +138,7 @@ NavigationRailThemeData _navigationRailTheme({
   ///
   /// Flutter Material-2 default is primary, Material-3 default is
   /// onSecondaryContainer.
-  final SchemeColor? selectedIconSchemeColor,
+  SchemeColor? selectedIconSchemeColor,
 
   /// Select which color from the passed in [ColorScheme] to use for
   /// the [NavigationRail]'s unselected items icon color.
@@ -156,7 +156,7 @@ NavigationRailThemeData _navigationRailTheme({
   ///
   /// Flutter's Material-2 default is onSurface and in Material-3 it is
   /// onSurfaceVariant.
-  final SchemeColor? unselectedIconSchemeColor,
+  SchemeColor? unselectedIconSchemeColor,
 
   /// If true, the unselected icon in the [NavigationRail] use a more muted
   /// color version of the color defined by [unselectedIconSchemeColor].
@@ -171,7 +171,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// .withAlpha([kUnselectedAlphaBlend]).
   ///
   /// If undefined, defaults to false.
-  final bool? mutedUnselectedIcon,
+  bool? mutedUnselectedIcon,
 
   /// Whether or not the selected [NavigationRail] item should include a
   /// [NavigationIndicator].
@@ -182,7 +182,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// Defaults to true.
   ///
   /// In Flutter defaults, the default is true in M3 and false in M2.
-  final bool? useIndicator,
+  bool? useIndicator,
 
   /// Select which color from the theme [ColorScheme] to use as base for
   /// the selected [NavigationRails]'s highlighted item.
@@ -190,7 +190,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// If undefined, defaults to [SchemeColor.secondaryContainer].
   ///
   /// Flutter defaults to secondary in M2 and to secondaryContainer in M3.
-  final SchemeColor? indicatorSchemeColor,
+  SchemeColor? indicatorSchemeColor,
 
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [NavigationRail].
@@ -198,19 +198,19 @@ NavigationRailThemeData _navigationRailTheme({
   /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If undefined, defaults to [SchemeColor.surface].
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// NavigationRail background opacity.
   ///
   /// If undefined, defaults to 1, fully opaque.
-  final double? opacity,
+  double? opacity,
 
   /// [NavigationRail] elevation.
   ///
   /// If undefined, defaults to [kNavigationRailElevation] = 0.
   ///
   /// Elevation 0 is default for Flutter SDK in both M2 and M3 mode as well.
-  final double? elevation,
+  double? elevation,
 
   /// Defines the layout and behavior of the labels for the
   /// un-extended [NavigationRail].
@@ -225,7 +225,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// When a navigation rail is [extended], the labels are always shown.
   ///
   /// If null, then the default behavior is [NavigationRailLabelType.none].
-  final NavigationRailLabelType? labelType,
+  NavigationRailLabelType? labelType,
 
   /// The vertical alignment for the group of [destinations] within the
   /// [NavigationRail].
@@ -241,7 +241,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// [groupAlignment] is 1.0, then the items are aligned to the bottom.
   ///
   /// The default is -1.0.
-  final double? groupAlignment,
+  double? groupAlignment,
 
   /// The alpha value used on selection color of the selection indicator on
   /// the [NavigationRail].
@@ -253,7 +253,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// used secondary color on its indicator color on the [NavigationBar],
   /// here we use same value on the [NavigationRail].
   /// needed later.
-  final int? indicatorAlpha,
+  int? indicatorAlpha,
 
   /// Border radius of the selection indicator on the [NavigationBar].
   ///
@@ -263,7 +263,7 @@ NavigationRailThemeData _navigationRailTheme({
   ///
   /// FCS default, follows the Material M3 guide:
   /// https://m3.material.io/components/navigation-rail/specs.
-  final double? indicatorRadius,
+  double? indicatorRadius,
 
   /// The icon color alpha blend value for unselected items, used on icon when
   /// [mutedUnselectedIcon] is true and on label when
@@ -274,7 +274,7 @@ NavigationRailThemeData _navigationRailTheme({
   ///
   /// This setting is not exposed via [FlexSubThemesData], but can be if
   /// needed later.
-  final int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
+  int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
 
   /// The icon alpha value for unselected item, used on icon when
   /// [mutedUnselectedIcon] is true and on label when
@@ -285,7 +285,7 @@ NavigationRailThemeData _navigationRailTheme({
   ///
   /// This setting is not exposed via [FlexSubThemesData], but can be if
   /// needed later.
-  final int unselectedAlpha = kUnselectedAlphaBlend,
+  int unselectedAlpha = kUnselectedAlphaBlend,
 
   /// Overrides the default value of [NavigationRail]'s minimum width when it
   /// is not extended.
@@ -293,7 +293,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// If not defined, defaults to M3 spec default value 80 dp.
   ///
   /// Flutter SDK uses 72 in M2 mode and 80 dp in M3 mode.
-  final double? minWidth,
+  double? minWidth,
 
   /// Overrides the default value of [NavigationRail]'s minimum width when it
   /// is extended.
@@ -301,7 +301,7 @@ NavigationRailThemeData _navigationRailTheme({
   /// If not defined, defaults to M3 spec default value 256 dp.
   ///
   /// Flutter M2 and M3 use 256 dp as default.
-  final double? minExtendedWidth,
+  double? minExtendedWidth,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -315,7 +315,7 @@ NavigationRailThemeData _navigationRailTheme({
     'The useMaterial3 flag no longer has any function in this '
     'component theme and is deprecated. It will be removed in v9.',
   )
-  final bool? useMaterial3,
+  bool? useMaterial3,
 
   /// Set to true to use Flutter SDK defaults for [NavigationRail]
   /// theme when its properties are undefined (null) instead of using
@@ -359,7 +359,7 @@ NavigationRailThemeData _navigationRailTheme({
     'In M2 mode FCS will continue to use its own opinionated defaults for '
     'as long as M2 exists.',
   )
-  final bool? useFlutterDefaults,
+  bool? useFlutterDefaults,
 }) {
   // Background color, falls back to surface.
   final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&

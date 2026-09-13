@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:cupertino_ui/cupertino_ui.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:flutter/services.dart';
-
-import 'switch_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Used to show the current themed Material widgets.
 ///
@@ -3236,7 +3235,7 @@ enum _ColorItem {
   grenadier('grenadier', Color(0xFFD54600)),
   white('white', Colors.white);
 
-  const _ColorItem(this.label, this.color);
+  _ColorItem(this.label, this.color);
   final String label;
   final Color color;
 }
@@ -4140,7 +4139,7 @@ enum MenuEntry {
   colorGreen('Green', SingleActivator(LogicalKeyboardKey.keyG, control: true)),
   colorBlue('Blue', SingleActivator(LogicalKeyboardKey.keyB, control: true));
 
-  const MenuEntry(this.label, [this.shortcut]);
+  MenuEntry(this.label, [this.shortcut]);
   final String label;
   final MenuSerializableShortcut? shortcut;
 }
@@ -5073,7 +5072,7 @@ class BottomSheetShowcase extends StatelessWidget {
         elevation: theme.bottomSheetTheme.elevation,
         backgroundColor: theme.bottomSheetTheme.backgroundColor,
         onClosing: () {},
-        builder: (final BuildContext context) => SizedBox(
+        builder: (BuildContext context) => SizedBox(
           height: 150,
           child: Center(
             child: Column(
@@ -5112,7 +5111,7 @@ class BottomSheetModalShowcase extends StatelessWidget {
         backgroundColor: theme.bottomSheetTheme.modalBackgroundColor,
         enableDrag: false,
         onClosing: () {},
-        builder: (final BuildContext context) => SizedBox(
+        builder: (BuildContext context) => SizedBox(
           height: 150,
           child: Center(
             child: Column(

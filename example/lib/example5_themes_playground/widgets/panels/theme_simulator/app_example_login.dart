@@ -1,11 +1,10 @@
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
+import 'package:flex_color_scheme_example/shared/const/app_images.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/svg_asset_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app_images.dart';
-import '../../../../shared/widgets/universal/svg_asset_image.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.

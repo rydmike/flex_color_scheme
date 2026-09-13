@@ -8,7 +8,7 @@ part of '../flex_sub_themes.dart';
 /// [unselectedItemSchemeColor].
 NavigationDrawerThemeData _navigationDrawerTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Defines which [Theme] based [ColorScheme] based background color
   /// of [NavigationDrawer].
@@ -18,7 +18,7 @@ NavigationDrawerThemeData _navigationDrawerTheme({
   ///
   /// Flutter SDK default uses [surfaceContainerLow] color as default in M3,
   /// and [ThemeData.canvasColor] in M2.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Defines the width of [NavigationDrawer]'s indicator.
   ///
@@ -26,7 +26,7 @@ NavigationDrawerThemeData _navigationDrawerTheme({
   /// via Flutter SDK defaults for M3/M2. The 336dp width values is derived
   /// from the M3 padding spec of 12dp around both sides of the M3 drawers
   /// default width of 360dp.
-  final double? indicatorWidth,
+  double? indicatorWidth,
 
   /// Border radius of the selection indicator on the [NavigationDrawer].
   ///
@@ -34,38 +34,38 @@ NavigationDrawerThemeData _navigationDrawerTheme({
   ///
   /// FCS default, follows the Material M3 guide:
   /// https://m3.material.io/components/navigation-drawer/specs
-  final double? indicatorRadius,
+  double? indicatorRadius,
 
   /// The TextStyle of the labels.
   ///
   /// You would pass in Theme.of(context).textTheme.labelLarge
   /// for correct M3 style.
-  final TextStyle? textStyle,
+  TextStyle? textStyle,
 
   /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
   /// uses as as its background color on the selection indicator.
   ///
   /// If undefined, defaults to [SchemeColor.secondaryContainer].
-  final SchemeColor? indicatorSchemeColor,
+  SchemeColor? indicatorSchemeColor,
 
   /// The opacity of the used indicator.
   ///
   /// Defaults to 1, fully opaque if not defined.
-  final double? indicatorOpacity,
+  double? indicatorOpacity,
 
   /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
   /// uses as as its selected item color.
   ///
   /// If undefined, defaults to correct contrast color pair
   /// for [indicatorSchemeColor].
-  final SchemeColor? selectedItemSchemeColor,
+  SchemeColor? selectedItemSchemeColor,
 
   /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
   /// uses as as its unselected item color.
   ///
   /// If undefined, defaults to correct contrast color pair for
   /// [backgroundSchemeColor].
-  final SchemeColor? unselectedItemSchemeColor,
+  SchemeColor? unselectedItemSchemeColor,
 
   // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
   //
@@ -83,10 +83,10 @@ NavigationDrawerThemeData _navigationDrawerTheme({
   // final Color? altUnselectedColor,
 
   /// Overrides the default value of [NavigationDrawer.shadowColor].
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// Overrides the default value of [NavigationDrawer.surfaceTintColor].
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 }) {
   // TODO(rydmike): Drawer indicator tint effect, not supported in Flutter yet
   // See issue: https://github.com/flutter/flutter/issues/123507

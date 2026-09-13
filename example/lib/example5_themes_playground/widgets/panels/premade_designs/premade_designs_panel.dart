@@ -1,12 +1,11 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/dialogs/set_theme_to_premade_dialog.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/use_seeded_color_scheme_switch.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../dialogs/set_theme_to_premade_dialog.dart';
-import '../../shared/test_adaptive_response.dart';
-import '../../shared/use_seeded_color_scheme_switch.dart';
 
 /// A panel with ready premade design we can click on to use.
 class PremadeDesignsPanel extends StatelessWidget {

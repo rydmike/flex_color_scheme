@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
 
 class UseTinted3TextTheme extends StatelessWidget {
   const UseTinted3TextTheme({super.key, required this.controller});

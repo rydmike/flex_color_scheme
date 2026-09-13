@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
 
 class UseAppFontSwitchLisTile extends StatelessWidget {
   const UseAppFontSwitchLisTile({super.key, required this.controller});

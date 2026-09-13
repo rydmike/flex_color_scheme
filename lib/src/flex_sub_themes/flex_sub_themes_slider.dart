@@ -7,7 +7,7 @@ part of '../flex_sub_themes.dart';
 /// for your app theme.
 SliderThemeData _sliderTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the Slider.
@@ -15,18 +15,18 @@ SliderThemeData _sliderTheme({
   /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If not defined, [colorScheme.primary] will be used.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the thumb
   /// color for the Slider.
   ///
   /// If not defined, [baseSchemeColor] will be used.
-  final SchemeColor? thumbSchemeColor,
+  SchemeColor? thumbSchemeColor,
 
   /// The height of the [Slider] track.
   ///
   /// If not defined, defaults to 4 via Flutter SDK defaults.
-  final double? trackHeight,
+  double? trackHeight,
 
   /// Whether the value indicator should be shown for different types of
   /// sliders.
@@ -34,7 +34,7 @@ SliderThemeData _sliderTheme({
   /// By default, [showValueIndicator] is set to
   /// [ShowValueIndicator.onlyForDiscrete]. The value indicator is only shown
   /// when the thumb is being touched.
-  final ShowValueIndicator? showValueIndicator,
+  ShowValueIndicator? showValueIndicator,
 
   /// Enum used to select the type of built-in value indicator used by
   /// [Slider].
@@ -44,27 +44,27 @@ SliderThemeData _sliderTheme({
   /// [DropSliderValueIndicatorShape].
   ///
   /// If not defined, the default for the M2/M3 mode is used.
-  final FlexSliderIndicatorType? valueIndicatorType,
+  FlexSliderIndicatorType? valueIndicatorType,
 
   /// The color given to the [valueIndicatorShape] to draw itself with.
   ///
   /// If undefined, defaults to using Flutter SDK's logic for the color.
-  final Color? valueIndicatorColor,
+  Color? valueIndicatorColor,
 
   /// The text style for the text on the value indicator.
   ///
   /// If undefined, defaults to using Flutter SDK's logic for the TextStyle.
-  final TextStyle? valueIndicatorTextStyle,
+  TextStyle? valueIndicatorTextStyle,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// Overrides the default value of [Slider.year2023].
   ///
@@ -78,7 +78,7 @@ SliderThemeData _sliderTheme({
   ///
   /// If undefined, defaults to true, via Flutter Material's default behavior.
   /// If [useMaterial3] is false, then this property is ignored.
-  final bool? useOldM3Design,
+  bool? useOldM3Design,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -92,7 +92,7 @@ SliderThemeData _sliderTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;

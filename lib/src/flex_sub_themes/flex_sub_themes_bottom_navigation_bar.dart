@@ -17,7 +17,7 @@ part of '../flex_sub_themes.dart';
 BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// Typically you would pass the same [ColorScheme] that is also used in
   /// your [ThemeData] definition.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Optional text style for the [BottomNavigationBar] labels.
   ///
@@ -25,7 +25,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// The size and colors defined in any of the text size and color properties
   /// are applied as overrides on the text style.
-  final TextStyle? labelTextStyle,
+  TextStyle? labelTextStyle,
 
   /// The size of the text label on selected [BottomNavigationBar] item.
   ///
@@ -33,7 +33,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// on selected item
   ///
   /// Defaults to 14.
-  final double? selectedLabelSize,
+  double? selectedLabelSize,
 
   /// The size of the text label on unselected [BottomNavigationBar] items.
   ///
@@ -44,13 +44,13 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// [BottomNavigationBar] uses this -2dp smaller font on the unselected
   /// label as default, since it is so based on Material-2 spec. By assigning
   /// same value as to selectedLabelSize, you can make them the same size.
-  final double? unselectedLabelSize,
+  double? unselectedLabelSize,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [BottomNavigationBar]'s selected label text color.
   ///
   /// If undefined, defaults to [SchemeColor.primary].
-  final SchemeColor? selectedLabelSchemeColor,
+  SchemeColor? selectedLabelSchemeColor,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [BottomNavigationBar]'s unselected label text color.
@@ -70,7 +70,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
   /// [Colors.black54] in light mode and [Colors.white70] in dark.
-  final SchemeColor? unselectedLabelSchemeColor,
+  SchemeColor? unselectedLabelSchemeColor,
 
   /// If true, the unselected labels in the [BottomNavigationBar] use a
   /// more muted color version of the color defined by
@@ -81,23 +81,23 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// When true, this is visually similar to the default styling used in
   /// Material-2, but it is on purpose not an exact match, it is bit more
   /// color expressive.
-  final bool? mutedUnselectedLabel,
+  bool? mutedUnselectedLabel,
 
   /// The size of the icon on selected [BottomNavigationBar] item.
   ///
   /// If undefined, it defaults to 24.
-  final double? selectedIconSize,
+  double? selectedIconSize,
 
   /// The size of the icons on unselected [BottomNavigationBar] items.
   ///
   /// If undefined, defaults to [selectedIconSize].
-  final double? unselectedIconSize,
+  double? unselectedIconSize,
 
   /// Select which color from the theme's [ColorScheme] to use for
   /// the [BottomNavigationBar]'s selected item icon color.
   ///
   /// If undefined, defaults to [SchemeColor.primary].
-  final SchemeColor? selectedIconSchemeColor,
+  SchemeColor? selectedIconSchemeColor,
 
   /// Select which color from the passed in [ColorScheme] to use as base for
   /// the [BottomNavigationBar]'s unselected items icon color.
@@ -117,7 +117,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// Flutter SDK defaults to [ThemeData.unselectedWidgetColor] which is
   /// [Colors.black54] in light mode and [Colors.white70] in dark.
-  final SchemeColor? unselectedIconSchemeColor,
+  SchemeColor? unselectedIconSchemeColor,
 
   // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
   // An alternative unselected item color.
@@ -146,7 +146,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// When true, this is visually similar to the default styling used in
   /// Material-2, but it is on purpose not an exact match, it is bit more
   /// color expressive.
-  final bool? mutedUnselectedIcon,
+  bool? mutedUnselectedIcon,
 
   /// Select which color from the theme's [ColorScheme] to use as background
   /// color for the [BottomNavigationBar].
@@ -155,27 +155,27 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// Flutter defaults to [ThemeData.canvasColor] from the [Material] widgets
   /// default color. Typically this is same as [ColorScheme.surface], or it
-  /// should and will be, since [ColorScheme.background] is deprecated.
-  final SchemeColor? backgroundSchemeColor,
+  /// should and will be, since [ColorScheme.surface] is deprecated.
+  SchemeColor? backgroundSchemeColor,
 
   /// BottomNavigationBar background opacity.
   ///
   /// If undefined, defaults to 1, fully opaque.
-  final double? opacity,
+  double? opacity,
 
   /// [BottomNavigationBar] container elevation.
   ///
   /// If not defined, defaults to component theme defaults to
   /// [kBottomNavigationBarElevation] = 3.
-  final double? elevation,
+  double? elevation,
 
   /// Whether the labels are shown for the selected
   /// [BottomNavigationBarItem].
-  final bool? showSelectedLabels,
+  bool? showSelectedLabels,
 
   /// Whether the labels are shown for the unselected
   /// [BottomNavigationBarItem]s.
-  final bool? showUnselectedLabels,
+  bool? showUnselectedLabels,
 
   /// Defines the layout and behavior of a [BottomNavigationBar].
   ///
@@ -188,7 +188,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// theme provides a type, it is used. Finally, the default behavior will be
   /// [BottomNavigationBarType.fixed] for 3 or fewer items, and
   /// [BottomNavigationBarType.shifting] is used for 4+ items.
-  final BottomNavigationBarType? type,
+  BottomNavigationBarType? type,
 
   /// The arrangement of the bar's [items] when the enclosing
   /// [MediaQueryData.orientation] is [Orientation.landscape].
@@ -209,7 +209,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// Defaults to [BottomNavigationBarLandscapeLayout.spread] via
   /// Widget's default un-themed behavior.
-  final BottomNavigationBarLandscapeLayout? landscapeLayout,
+  BottomNavigationBarLandscapeLayout? landscapeLayout,
 
   /// The icon color alpha blend value for unselected items, used on icon when
   /// [mutedUnselectedIcon] is true and on label when
@@ -220,7 +220,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// This setting is not exposed via [FlexSubThemesData], but can be if
   /// needed later.
-  final int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
+  int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
 
   /// The icon alpha value for unselected item, used on icon when
   /// [mutedUnselectedIcon] is true and on label when
@@ -231,7 +231,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   ///
   /// This setting is not exposed via [FlexSubThemesData], but can be if
   /// needed later.
-  final int unselectedAlpha = kUnselectedAlphaBlend,
+  int unselectedAlpha = kUnselectedAlphaBlend,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -245,7 +245,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 
   /// Set to true to use Flutter SDK defaults for [BottomNavigationBar]
   /// theme when its color, size and text style properties are undefined,
@@ -283,7 +283,7 @@ BottomNavigationBarThemeData _bottomNavigationBarTheme({
     'In M2 mode FCS will continue to use its own opinionated defaults for '
     'as long as M2 exists.',
   )
-  final bool? useFlutterDefaults,
+  bool? useFlutterDefaults,
 }) {
   final bool useM3 = useMaterial3 ?? true;
 

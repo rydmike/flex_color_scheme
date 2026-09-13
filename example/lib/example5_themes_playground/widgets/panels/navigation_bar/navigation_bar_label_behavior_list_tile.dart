@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/navigation_bar_label_behavior_toggle_buttons.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/navigation_bar_label_behavior_toggle_buttons.dart';
 
 class NavigationBarLabelBehaviorListTile extends StatelessWidget {
   const NavigationBarLabelBehaviorListTile({

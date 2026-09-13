@@ -1,9 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/effective_flex_tones.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_name_value.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../utils/effective_flex_tones.dart';
-import '../../shared/color_name_value.dart';
 
 // Display all scheme main and surface onColors in currently selected
 // color scheme, including their name and color code.
@@ -16,11 +15,11 @@ class OnColors extends StatelessWidget {
   final ThemeController controller;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  bool _isLight(final Color color) =>
+  bool _isLight(Color color) =>
       FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  Color _onColor(final Color color) =>
+  Color _onColor(Color color) =>
       _isLight(color) ? Colors.black : Colors.white;
 
   @override

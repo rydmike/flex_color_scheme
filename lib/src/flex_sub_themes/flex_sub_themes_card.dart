@@ -7,7 +7,7 @@ CardThemeData _cardTheme({
   ///
   /// If null, any provided [SchemeColor] values will be ignored and
   /// component theme color defaults will be used.
-  final ColorScheme? colorScheme,
+  ColorScheme? colorScheme,
 
   /// Selects which color from the passed in [colorScheme] to use as the
   /// background color of Cards.
@@ -21,14 +21,14 @@ CardThemeData _cardTheme({
   /// Warning: The Card variants cannot be themed separately in Flutter, if
   /// you provide a color, all card variants will share the same color.
   /// See issue: https://github.com/flutter/flutter/issues/153912
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Corner radius
   ///
   /// If not defined, defaults to [kCardRadius] 12dp,
   /// based on M3 Specification, this is also the opinionated
   /// default for M2 in this package.
-  final double? radius,
+  double? radius,
 
   /// Selects which color from the passed in [colorScheme] to use as the
   /// border color for Cards.
@@ -42,7 +42,7 @@ CardThemeData _cardTheme({
   /// Warning: The Card variants cannot be themed separately in Flutter, if
   /// you provide a color, all card variants will share the same color.
   /// See issue: https://github.com/flutter/flutter/issues/153912
-  final SchemeColor? borderSchemeColor,
+  SchemeColor? borderSchemeColor,
 
   /// Defines the border width of the border on Cards.
   ///
@@ -57,7 +57,7 @@ CardThemeData _cardTheme({
   /// Warning: The Card variants cannot be themed separately in Flutter, if
   /// you provide a color, all card variants will share the same color.
   /// See issue: https://github.com/flutter/flutter/issues/153912
-  final double? borderWidth,
+  double? borderWidth,
 
   /// Card elevation.
   ///
@@ -70,26 +70,26 @@ CardThemeData _cardTheme({
   /// Warning: The Card variants cannot be themed separately in Flutter, if
   /// you provide an elevation, all Card variants will get same elevation.
   /// See issue: https://github.com/flutter/flutter/issues/153912
-  final double? elevation,
+  double? elevation,
 
   /// Overrides the default value for [Card.shadowColor].
   ///
   /// If null, [Card] defaults to fully opaque black.
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// Overrides the default value for [Card.surfaceTintColor].
   ///
   /// If null, [Card] will not display an overlay color.
   ///
   /// See [Material.surfaceTintColor] for more details.
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   /// The clipBehavior of the card theme, defaults to
   /// [Clip.antiAlias] for smooth clipping when using rounded corners.
   ///
   /// There is no config property in [FlexSubThemesData] for [clipBehavior],
   /// if needed it can be exposed. Feel free to make a PR or submit an issue.
-  final Clip clipBehavior = Clip.antiAlias,
+  Clip clipBehavior = Clip.antiAlias,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -103,7 +103,7 @@ CardThemeData _cardTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
 

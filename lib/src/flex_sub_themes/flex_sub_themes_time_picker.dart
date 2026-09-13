@@ -11,7 +11,7 @@ part of '../flex_sub_themes.dart';
 /// will be used on the data entry elements in the picker.
 TimePickerThemeData _timePickerTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Dialog background color.
   ///
@@ -25,7 +25,7 @@ TimePickerThemeData _timePickerTheme({
   /// even after the [ThemeData.dialogBackgroundColor] property is
   /// is deprecated in Flutter SDK. See
   /// https://github.com/flutter/flutter/issues/91772)
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Dialog background color.
   ///
@@ -39,37 +39,37 @@ TimePickerThemeData _timePickerTheme({
   /// even after the [ThemeData.dialogBackgroundColor] property is
   /// is deprecated in Flutter SDK. See
   /// https://github.com/flutter/flutter/issues/91772)
-  final Color? backgroundColor,
+  Color? backgroundColor,
 
   /// Dialog elevation.
   ///
   /// If not defined, defaults to [kDialogElevation] = 6.
-  final double? elevation,
+  double? elevation,
 
   /// Corner radius of the [TimePickerDialog] dialog.
   ///
   /// If not defined, defaults to [kDialogRadius] = 28.
-  final double? radius,
+  double? radius,
 
   /// Corner radius of the [TimePickerDialog] internal elements.
   ///
   /// If not defined, defaults to [kTimeElementRadius] = 12.
-  final double? elementRadius,
+  double? elementRadius,
 
   /// The text style of the day period text.
-  final TextStyle? dayPeriodTextStyle,
+  TextStyle? dayPeriodTextStyle,
 
   /// The text style of the dial text.
-  final TextStyle? dialTextStyle,
+  TextStyle? dialTextStyle,
 
   /// The text style of the help text.
-  final TextStyle? helpTextStyle,
+  TextStyle? helpTextStyle,
 
   /// The text style of the hour/minute text.
-  final TextStyle? hourMinuteTextStyle,
+  TextStyle? hourMinuteTextStyle,
 
   /// A custom input decoration theme for the time picker's input fields.
-  final InputDecorationThemeData? inputDecorationTheme,
+  InputDecorationThemeData? inputDecorationTheme,
 
   /// Use the [inputDecorationTheme] if defined.
   ///
@@ -77,7 +77,7 @@ TimePickerThemeData _timePickerTheme({
   /// defined. If true, it is used if defined.
   ///
   /// Defaults to false.
-  final bool? useInputDecoratorTheme,
+  bool? useInputDecoratorTheme,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -91,7 +91,7 @@ TimePickerThemeData _timePickerTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool useDecorator = useInputDecoratorTheme ?? false;

@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/utils/color_string.dart';
 import 'package:material_ui/material_ui.dart';
 
-import '../../shared/const/app.dart';
-import '../../shared/const/app_color.dart';
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/adaptive_response.dart';
-import '../../shared/utils/color_string.dart';
-import '../theme/theme_values.dart';
-
-// ignore_for_file: lines_longer_than_80_chars, used for code gen strings.
+// ignore_for_file: used for code gen strings.
 
 /// A function that returns the FlexColorScheme Dart and Flutter setup
 /// code for the theme held by ThemeController.

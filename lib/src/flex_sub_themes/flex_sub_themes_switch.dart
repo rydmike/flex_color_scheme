@@ -9,7 +9,7 @@ part of '../flex_sub_themes.dart';
 /// The splashRadius is not used by FlexColorScheme sub-themes.
 SwitchThemeData _switchTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the switch.
@@ -21,7 +21,7 @@ SwitchThemeData _switchTheme({
   /// specification for the secondary color, is a poor choice for toggles and
   /// switches, if such colors are used in M2 mode, primary color works
   /// better.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the thumb
   /// color for the switch.
@@ -39,7 +39,7 @@ SwitchThemeData _switchTheme({
   ///
   /// - If useMaterial3 is false [baseSchemeColor].
   /// - If useMaterial3 is true [SchemeColor.primaryContainer].
-  final SchemeColor? thumbSchemeColor,
+  SchemeColor? thumbSchemeColor,
 
   /// Set to true to keep the [Switch] thumb size fixed.
   ///
@@ -51,29 +51,29 @@ SwitchThemeData _switchTheme({
   /// Material-2 mode.
   ///
   /// If undefined, defaults to false.
-  final bool? thumbFixedSize,
+  bool? thumbFixedSize,
 
   /// The splash radius of the circular Material ink response.
   ///
   /// If null, default via SDK defaults to [kRadialReactionRadius] = 20.
-  final double? splashRadius,
+  double? splashRadius,
 
   /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
   ///
   /// If false, it is grey like in Flutter SDK.
   ///
   /// If undefined, defaults to false.
-  final bool? unselectedIsColored,
+  bool? unselectedIsColored,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// Defines if the theme uses Cupertino style switch.
   ///
@@ -86,7 +86,7 @@ SwitchThemeData _switchTheme({
   /// get with the Material Switch theming features.
   ///
   /// If undefined, defaults to false.
-  final bool? useCupertinoStyle,
+  bool? useCupertinoStyle,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -100,7 +100,7 @@ SwitchThemeData _switchTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
 

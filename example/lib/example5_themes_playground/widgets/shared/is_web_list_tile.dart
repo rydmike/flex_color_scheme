@@ -1,9 +1,8 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/is_web_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/is_web_toggle_buttons.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
 
 class IsWebListTile extends StatelessWidget {
   const IsWebListTile({
@@ -12,7 +11,7 @@ class IsWebListTile extends StatelessWidget {
   });
   final ThemeController controller;
 
-  String _explainLabelStyle(final bool? isWeb) {
+  String _explainLabelStyle(bool? isWeb) {
     switch (isWeb) {
       case true:
         return 'Mock "kIsWeb" set to true and used. '

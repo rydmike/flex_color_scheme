@@ -1,14 +1,13 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/code_theme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/topic_theme.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../shared/const/app.dart';
-import '../../shared/const/app_color.dart';
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/visual_density_enum.dart';
-import 'code_theme.dart';
-import 'theme_values.dart';
-import 'topic_theme.dart';
 
 /// This function calls [flexColorSchemeLight] and uses
 /// [FlexColorScheme.toTheme] to return the [ThemeData] object represented by

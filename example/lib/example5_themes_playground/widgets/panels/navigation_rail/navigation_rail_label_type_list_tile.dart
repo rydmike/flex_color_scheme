@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/navigation_rail_label_type_toggle_buttons.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/navigation_rail_label_type_toggle_buttons.dart';
 
 class NavigationRailLabelBehaviorListTile extends StatelessWidget {
   const NavigationRailLabelBehaviorListTile({
@@ -19,7 +18,7 @@ class NavigationRailLabelBehaviorListTile extends StatelessWidget {
   /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
   final EdgeInsetsGeometry? contentPadding;
 
-  String _explainLabelStyle(final NavigationRailLabelType labelStyle) {
+  String _explainLabelStyle(NavigationRailLabelType labelStyle) {
     switch (labelStyle) {
       case NavigationRailLabelType.none:
         return 'No labels';

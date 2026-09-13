@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../shared/color_scheme_box.dart';
 
 /// Widget used to select used [FlexTones] with a popup menu.
 ///

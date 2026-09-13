@@ -1,10 +1,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/model/splash_type_enum.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../model/adaptive_response.dart';
-import '../model/splash_type_enum.dart';
-import '../model/visual_density_enum.dart';
-import 'app_color.dart';
 
 // A class container for holding storage keys and default value for each
 // stored key-value pair.

@@ -1,9 +1,8 @@
 import 'dart:async' show Timer;
 import 'dart:math' show Random;
 
+import 'package:flex_color_scheme_example/shared/widgets/universal/svg_asset_image.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'svg_asset_image.dart';
 
 enum ImageSwitchType { forward, reverse, random }
 

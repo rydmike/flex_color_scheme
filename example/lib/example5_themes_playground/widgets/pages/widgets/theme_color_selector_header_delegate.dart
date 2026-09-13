@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/theme_color_selector.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:flutter/rendering.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import 'theme_color_selector.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// [ThemeColorSelectorHeaderDelegate] for used custom [SliverPersistentHeader].
 ///

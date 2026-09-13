@@ -1,6 +1,5 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/topic_theme.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../theme/topic_theme.dart';
 
 /// Used to groups [Topic]s into related groups.
 enum TopicGroup {

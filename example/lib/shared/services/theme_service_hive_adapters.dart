@@ -1,10 +1,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/model/splash_type_enum.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
 import 'package:hive_ce/hive.dart';
-
-import '../model/adaptive_response.dart';
-import '../model/splash_type_enum.dart';
-import '../model/visual_density_enum.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A Hive data type adapter for enum [ThemeMode].
 class ThemeModeAdapter extends TypeAdapter<ThemeMode> {

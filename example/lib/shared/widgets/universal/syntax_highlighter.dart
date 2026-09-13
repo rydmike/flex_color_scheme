@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/code_theme.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:string_scanner/string_scanner.dart';
-
-import '../../../example5_themes_playground/theme/code_theme.dart';
 
 /// This syntax highlighter is adopted and converted from the Google Flutter
 /// Gallery application.

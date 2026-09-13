@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../const/app_color.dart';
-import '../../controllers/theme_controller.dart';
 
 /// Popup used to change the used FlexSchemeData index in the theme controller
 /// and via that the selected active theme.

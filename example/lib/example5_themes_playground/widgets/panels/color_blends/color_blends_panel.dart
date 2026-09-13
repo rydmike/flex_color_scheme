@@ -1,17 +1,16 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/dark_surface_mode_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/dark_surface_mode_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/light_surface_mode_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/light_surface_mode_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/on_colors.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/surface_colors.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/scaffold_base_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/surfaces_seed_blend_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/scaffold_base_popup_menu.dart';
-import '../../shared/surfaces_seed_blend_color.dart';
-import 'dark_surface_mode_list_tile.dart';
-import 'dark_surface_mode_popup_menu.dart';
-import 'light_surface_mode_list_tile.dart';
-import 'light_surface_mode_popup_menu.dart';
-import 'on_colors.dart';
-import 'surface_colors.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
@@ -358,7 +357,7 @@ class ColorBlendsPanel extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    // ignore: lines_longer_than_80_chars, string interpolation
+                    // ignore: string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelLight : ""}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),
@@ -416,7 +415,7 @@ class ColorBlendsPanel extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    // ignore: lines_longer_than_80_chars, string interpolation
+                    // ignore: string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
                     style: theme.textTheme.bodySmall!
                         .copyWith(fontWeight: FontWeight.bold),

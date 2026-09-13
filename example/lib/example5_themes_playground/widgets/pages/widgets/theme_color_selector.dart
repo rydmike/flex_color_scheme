@@ -1,9 +1,8 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/input_colors/input_colors_selector.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/header_card.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
-import '../../panels/input_colors/input_colors_selector.dart';
 
 /// Used to select used theme colors, can also turn ON/OFF FlexColorScheme
 /// and component themes.

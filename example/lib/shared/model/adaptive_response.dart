@@ -91,7 +91,7 @@ enum AdaptiveResponse {
     icon: Icons.no_cell_outlined,
   );
 
-  const AdaptiveResponse({
+  AdaptiveResponse({
     required this.label,
     required this.describe,
     required this.code,

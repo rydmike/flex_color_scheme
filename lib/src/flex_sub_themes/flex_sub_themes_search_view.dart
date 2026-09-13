@@ -3,17 +3,17 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [SearchViewThemeData] theme for the [SearchBar]'s view.
 SearchViewThemeData _searchViewTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// The search view's background fill color.
   ///
   /// If null, the default value is `surfaceContainerHigh`.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// The elevation of the search view's [Material].
   ///
   /// If null, the default value is 6.0.
-  final double? elevation,
+  double? elevation,
 
   // TODO(rydmike): Doing just a radius for now. Shapes later
   // The color and weight of the search view's outline.
@@ -37,29 +37,29 @@ SearchViewThemeData _searchViewTheme({
   ///
   /// If not defined defaults to 28.0.
   /// If in full screen defaults to 0.
-  final double? radius,
+  double? radius,
 
   /// The height of the search field on the search view.
   ///
   /// If null, the default value is 56.0.
-  final double? headerHeight,
+  double? headerHeight,
 
   /// The style to use for the text being edited on the search view.
   ///
   /// If null, defaults to the `bodyLarge` text style from the current
   /// [Theme]. The default text color is [ColorScheme.onSurface].
-  final TextStyle? headerTextStyle,
+  TextStyle? headerTextStyle,
 
   /// The style to use for the [viewHintText] on the search view.
   ///
   /// If null, defaults to the `bodyLarge` text style from the current
   /// [Theme]. The default text color is [ColorScheme.onSurfaceVariant].
-  final TextStyle? headerHintStyle,
+  TextStyle? headerHintStyle,
 
   /// The color of the divider on the search view.
   ///
   /// If this property is null, the default value is [ColorScheme.outline].
-  final Color? dividerColor,
+  Color? dividerColor,
 
   /// Optional size constraints for the search view.
   ///
@@ -73,7 +73,7 @@ SearchViewThemeData _searchViewTheme({
   /// ```dart
   /// const BoxConstraints(minWidth: 360.0, minHeight: 240.0)
   /// ```
-  final BoxConstraints? constraints,
+  BoxConstraints? constraints,
 }) {
   // Get selected color, defaults to primary.
   final Color backgroundColor = FlexSubThemes.schemeColor(

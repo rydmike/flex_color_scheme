@@ -1,12 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example3_four_themes/home_page.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service_prefs.dart';
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../shared/controllers/theme_controller.dart';
-import '../shared/services/theme_service.dart';
-import '../shared/services/theme_service_prefs.dart';
-import 'home_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 3 - Four Themes

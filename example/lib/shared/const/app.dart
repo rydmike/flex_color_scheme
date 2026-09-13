@@ -1,10 +1,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/responsive_scaffold.dart';
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../widgets/examples/responsive_scaffold.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A static container class with functions and constants used in by
 /// example applications.

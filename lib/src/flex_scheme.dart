@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:material_ui/material_ui.dart' show ColorScheme; // For comment refs.
-
-import 'flex_color.dart' show FlexColor;
-import 'flex_color_scheme.dart';
-import 'flex_scheme_color.dart' show FlexSchemeColor;
-import 'flex_scheme_data.dart' show FlexSchemeData;
+import 'package:flex_color_scheme/src/flex_color.dart' show FlexColor;
+import 'package:flex_color_scheme/src/flex_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_scheme_color.dart' show FlexSchemeColor;
+import 'package:flex_color_scheme/src/flex_scheme_data.dart' show FlexSchemeData;
+import 'package:material_ui/material_ui.dart' show ColorScheme;
 
 /// Enum that can be used to lookup predefined [FlexSchemeData] color theme
 /// definition objects.

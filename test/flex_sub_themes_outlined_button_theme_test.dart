@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.outlinedButtonTheme ', () {
@@ -31,7 +31,7 @@ void main() {
                 ),
               ), //buttonShape,
               side: WidgetStateProperty.resolveWith<BorderSide?>((
-                final Set<WidgetState> states,
+                Set<WidgetState> states,
               ) {
                 if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
@@ -120,7 +120,7 @@ void main() {
                 return Colors.transparent;
               }),
               side: WidgetStateProperty.resolveWith<BorderSide?>((
-                final Set<WidgetState> states,
+                Set<WidgetState> states,
               ) {
                 if (states.contains(WidgetState.disabled)) {
                   return BorderSide(
@@ -230,7 +230,7 @@ void main() {
                 return Colors.transparent;
               }),
               side: WidgetStateProperty.resolveWith<BorderSide?>((
-                final Set<WidgetState> states,
+                Set<WidgetState> states,
               ) {
                 if (states.contains(WidgetState.disabled)) {
                   return BorderSide(

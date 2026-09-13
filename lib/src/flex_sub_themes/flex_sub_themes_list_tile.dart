@@ -3,13 +3,13 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [ListTileThemeData] theme.
 ListTileThemeData _listTileTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Defines the color used for icons and text when the list tile is
   /// selected.
   ///
   /// If not defined, defaults to [ColorScheme.primary].
-  final SchemeColor? selectedSchemeColor,
+  SchemeColor? selectedSchemeColor,
 
   /// Defines the default color for ListTile [leading] and [trailing] icons.
   ///
@@ -23,7 +23,7 @@ ListTileThemeData _listTileTheme({
   ///
   /// If [selected] is true then [selectedSchemeColor] is used. If
   /// it is null then [ColorScheme.primary] is used.
-  final SchemeColor? iconSchemeColor,
+  SchemeColor? iconSchemeColor,
 
   /// Defines the text color for the [title], [subtitle], [leading], and
   /// [trailing].
@@ -40,7 +40,7 @@ ListTileThemeData _listTileTheme({
   ///
   /// If this color is a [WidgetStateColor] it will be resolved against
   /// [WidgetState.selected] and [WidgetState.disabled] states.
-  final SchemeColor? textSchemeColor,
+  SchemeColor? textSchemeColor,
 
   /// The text style for ListTile's [title].
   ///
@@ -53,7 +53,7 @@ ListTileThemeData _listTileTheme({
   /// Otherwise, If ListTile style is [ListTileStyle.list],
   /// [TextTheme.titleMedium] will be used and if ListTile style
   /// is [ListTileStyle.drawer], [TextTheme.bodyLarge] will be used.
-  final TextStyle? titleTextStyle,
+  TextStyle? titleTextStyle,
 
   /// The text style for ListTile's [subtitle].
   ///
@@ -64,7 +64,7 @@ ListTileThemeData _listTileTheme({
   /// [TextTheme.bodyMedium] with [ColorScheme.onSurfaceVariant] will be used,
   /// otherwise [TextTheme.bodyMedium] with [TextTheme.bodySmall] color will
   /// be used.
-  final TextStyle? subtitleTextStyle,
+  TextStyle? subtitleTextStyle,
 
   /// The text style for ListTile's [leading] and [trailing].
   ///
@@ -74,7 +74,7 @@ ListTileThemeData _listTileTheme({
   /// If that is also null and [ThemeData.useMaterial3] is true,
   /// [TextTheme.labelSmall] with [ColorScheme.onSurfaceVariant] will be used,
   /// otherwise [TextTheme.bodyMedium] will be used.
-  final TextStyle? leadingAndTrailingTextStyle,
+  TextStyle? leadingAndTrailingTextStyle,
 
   /// Defines the background color of `ListTile` when [selected] is false.
   ///
@@ -84,14 +84,14 @@ ListTileThemeData _listTileTheme({
   ///
   /// When that is also null, the [ListTileTheme.selectedTileColor] is used,
   /// otherwise [Colors.transparent] is used.
-  final SchemeColor? tileSchemeColor,
+  SchemeColor? tileSchemeColor,
 
   /// Defines the background color of `ListTile` when [selected] is true.
   ///
   /// When the value if null, the [selectedTileColor] is set to
   /// [ListTileTheme.selectedTileColor] if it's not null and to
   /// [Colors.transparent] if it's null.
-  final SchemeColor? selectedTileSchemeColor,
+  SchemeColor? selectedTileSchemeColor,
 
   // TODO(rydmike): Default is incorrect for M3 in Flutter doc comment. Fix!
   /// The tile's internal padding.
@@ -103,24 +103,24 @@ ListTileThemeData _listTileTheme({
   /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used, if
   /// `useMaterial3` is `false`. If `useMaterial3` is `true` then
   /// `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` is used.
-  final EdgeInsetsGeometry? contentPadding,
+  EdgeInsetsGeometry? contentPadding,
 
   /// The horizontal gap between the titles and the leading/trailing widgets.
   ///
   /// If not defined, defaults to 16.
-  final double? horizontalTitleGap,
+  double? horizontalTitleGap,
 
   /// The minimum padding on the top and bottom of the title and subtitle
   /// widgets.
   ///
   /// If not defined, defaults to 4.
-  final double? minVerticalPadding,
+  double? minVerticalPadding,
 
   /// Defines the font used for the [title].
   ///
   /// If this property is null then [ListTileThemeData.style] is used. If that
   /// is also null then [ListTileStyle.list] is used.
-  final ListTileStyle? style,
+  ListTileStyle? style,
 
   /// Defines how [ListTile.leading] and [ListTile.trailing] are
   /// vertically aligned relative to the [ListTile]'s titles
@@ -129,12 +129,12 @@ ListTileThemeData _listTileTheme({
   /// If this property is null then [ListTileThemeData.titleAlignment]
   /// is used. If that is also null then [ListTileTitleAlignment.threeLine]
   /// is used.
-  final ListTileTitleAlignment? titleAlignment,
+  ListTileTitleAlignment? titleAlignment,
 
   /// If specified, overrides the default value of
   /// [CheckboxListTile.controlAffinity] or [ExpansionTile.controlAffinity]
   /// or [SwitchListTile.controlAffinity] or [RadioListTile.controlAffinity].
-  final ListTileControlAffinity? controlAffinity,
+  ListTileControlAffinity? controlAffinity,
 }) {
   final Color selectedColor = FlexSubThemes.schemeColor(
     selectedSchemeColor ?? SchemeColor.primary,

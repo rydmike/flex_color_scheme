@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/generate_theme_dart_code.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/share_settings.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_code/show_code_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/syntax_highlighter.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/syntax_highlighter.dart';
-import '../../../utils/generate_theme_dart_code.dart';
-import '../../../utils/share_settings.dart';
-import 'show_code_theme_colors.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Show the code for the currently configured FlexColorScheme theme setup.
 ///

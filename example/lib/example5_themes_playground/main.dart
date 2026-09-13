@@ -1,19 +1,18 @@
 import 'dart:async';
 
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_dark.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_light.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_data_dark.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_data_light.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/query_params/query_params_settings.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/home_page.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service_hive.dart';
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../shared/controllers/theme_controller.dart';
-import '../shared/services/theme_service.dart';
-import '../shared/services/theme_service_hive.dart';
-import 'theme/flex_theme_dark.dart';
-import 'theme/flex_theme_light.dart';
-import 'theme/theme_data_dark.dart';
-import 'theme/theme_data_light.dart';
-import 'utils/query_params/query_params_settings.dart';
-import 'widgets/pages/home_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 // if (dart.library.html) 'web_query_handler.dart'
 // if (dart.library.io) 'vm_query_handler.dart';

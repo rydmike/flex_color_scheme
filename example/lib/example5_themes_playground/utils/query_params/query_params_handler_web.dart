@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:js_interop';
 
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/query_params/query_params_handler_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:web/web.dart' as web;
-
-import 'query_params_handler_interface.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.

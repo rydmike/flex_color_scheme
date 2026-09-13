@@ -1,4 +1,4 @@
-import 'theme_service.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
 
 /// A service that stores and retrieves theme settings from memory only.
 ///

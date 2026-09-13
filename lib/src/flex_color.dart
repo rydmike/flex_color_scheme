@@ -1,21 +1,20 @@
+import 'package:flex_color_scheme/src/flex_extensions.dart';
+import 'package:flex_color_scheme/src/flex_scheme.dart';
+import 'package:flex_color_scheme/src/flex_scheme_color.dart';
+import 'package:flex_color_scheme/src/flex_scheme_data.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_blue_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_gray_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_green_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_neutral_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_orange_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_red_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_rose_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_slate_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_stone_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_violet_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_yellow_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_zinc_color_scheme.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'flex_extensions.dart';
-import 'flex_scheme.dart';
-import 'flex_scheme_color.dart';
-import 'flex_scheme_data.dart';
-import 'flex_shad_colors/shad_blue_color_scheme.dart';
-import 'flex_shad_colors/shad_gray_color_scheme.dart';
-import 'flex_shad_colors/shad_green_color_scheme.dart';
-import 'flex_shad_colors/shad_neutral_color_scheme.dart';
-import 'flex_shad_colors/shad_orange_color_scheme.dart';
-import 'flex_shad_colors/shad_red_color_scheme.dart';
-import 'flex_shad_colors/shad_rose_color_scheme.dart';
-import 'flex_shad_colors/shad_slate_color_scheme.dart';
-import 'flex_shad_colors/shad_stone_color_scheme.dart';
-import 'flex_shad_colors/shad_violet_color_scheme.dart';
-import 'flex_shad_colors/shad_yellow_color_scheme.dart';
-import 'flex_shad_colors/shad_zinc_color_scheme.dart';
 
 /// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by FlexColorScheme.

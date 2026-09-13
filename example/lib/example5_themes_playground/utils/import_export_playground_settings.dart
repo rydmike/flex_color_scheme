@@ -1,16 +1,15 @@
 import 'dart:convert';
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/store.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/model/splash_type_enum.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:intl/intl.dart';
-
-import '../../shared/const/app.dart';
-import '../../shared/const/store.dart';
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/model/adaptive_response.dart';
-import '../../shared/model/splash_type_enum.dart';
-import '../../shared/model/visual_density_enum.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -57,7 +56,7 @@ enum JsonKeys {
   typeEnumVisualDensity(key: 'enum_visual_density'),
   value(key: 'value');
 
-  const JsonKeys({required this.key});
+  JsonKeys({required this.key});
   final String key;
 }
 

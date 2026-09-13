@@ -70,11 +70,11 @@ class ColorSchemeBox extends StatelessWidget {
   final Widget? child;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) =>
+  static bool _isLight(Color color) =>
       FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color for icon on the colored box.
-  static Color _onColor(final Color color) => _isLight(color)
+  static Color _onColor(Color color) => _isLight(color)
       ? Colors.black.withValues(alpha: 0.8)
       : Colors.white.withValues(alpha: 0.8);
 

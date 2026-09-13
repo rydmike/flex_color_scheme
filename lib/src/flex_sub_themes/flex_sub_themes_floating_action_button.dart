@@ -16,7 +16,7 @@ part of '../flex_sub_themes.dart';
 /// The circular M2 FAB goes well with those designs too and is more familiar.
 FloatingActionButtonThemeData _floatingActionButtonTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Select which color from the passed in [colorScheme] parameter to use as
   /// the floating action button background color.
@@ -27,21 +27,21 @@ FloatingActionButtonThemeData _floatingActionButtonTheme({
   ///
   /// The foreground color automatically uses the selected background
   /// color's contrast color pair in the passed in [colorScheme] property.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Select which color from the passed in [colorScheme] parameter to use as
   /// the floating action button foreground color.
   ///
   /// If not defined, effective default is the complement color to used
   /// [backgroundSchemeColor].
-  final SchemeColor? foregroundSchemeColor,
+  SchemeColor? foregroundSchemeColor,
 
   /// Corner radius of the [FloatingActionButton].
   ///
   /// If not defined, defaults to [kFabRadius] 16dp,
   /// based on M3 Specification
   /// https://m3.material.io/components/floating-action-button/specs
-  final double? radius,
+  double? radius,
 
   /// Set to false to not apply any Shape theming to the FAB.
   ///
@@ -51,7 +51,7 @@ FloatingActionButtonThemeData _floatingActionButtonTheme({
   /// Flutter SDK default shape behavior. Other properties are still used.
   ///
   /// Default to true.
-  final bool useShape = true,
+  bool useShape = true,
 
   /// Set to true to always use circular and stadium shapes on the FAB.
   ///
@@ -70,15 +70,15 @@ FloatingActionButtonThemeData _floatingActionButtonTheme({
   /// Has no impact if `useShape` is false.
   ///
   /// Defaults to false.
-  final bool alwaysCircular = false,
+  bool alwaysCircular = false,
 
   /// The text style for an extended [FloatingActionButton]'s label.
-  final TextStyle? extendedTextStyle,
+  TextStyle? extendedTextStyle,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -92,7 +92,7 @@ FloatingActionButtonThemeData _floatingActionButtonTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;

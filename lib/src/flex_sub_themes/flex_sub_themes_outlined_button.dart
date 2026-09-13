@@ -9,7 +9,7 @@ part of '../flex_sub_themes.dart';
 /// default in M3, Flutter SDK M2 defaults to 4.
 OutlinedButtonThemeData _outlinedButtonTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the button.
@@ -17,7 +17,7 @@ OutlinedButtonThemeData _outlinedButtonTheme({
   /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If not defined, [colorScheme.primary] will be used.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// Defines which [Theme] based [ColorScheme] based color, that the
   /// [OutlinedButton] uses as its outline color.
@@ -29,25 +29,25 @@ OutlinedButtonThemeData _outlinedButtonTheme({
   /// If [useMaterial3] is true, and the [outlineSchemeColor] is
   /// not defined, the [colorScheme.outline] is used as default button
   /// outline color in M3 style.
-  final SchemeColor? outlineSchemeColor,
+  SchemeColor? outlineSchemeColor,
 
   /// The button corner border radius.
   ///
   /// If not defined, defaults to [kButtonRadius] 40dp in M2. When using
   /// M3 it defaults to Stadium border based on
   /// https://m3.material.io/components/buttons/specs
-  final double? radius,
+  double? radius,
 
   /// The outline thickness when the button is pressed or in error state.
   ///
   /// If null, defaults to [kThickBorderWidth] = 2, when
   /// [useMaterial3] is false, and to 1 when [useMaterial3] is true.
-  final double? pressedOutlineWidth,
+  double? pressedOutlineWidth,
 
   /// The outline thickness when the button is not selected and not pressed.
   ///
   /// If null, defaults to [kThinBorderWidth] = 1.0.
-  final double? outlineWidth,
+  double? outlineWidth,
 
   /// Padding for the button theme.
   ///
@@ -59,25 +59,25 @@ OutlinedButtonThemeData _outlinedButtonTheme({
   ///
   /// If null and [useMaterial3] is true in the context, the correct M3
   /// button theme default computed button padding for M3 will be used.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
   /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
   /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
   /// [useMaterial3] is true.
-  final Size? minButtonSize,
+  Size? minButtonSize,
 
   /// The style for the button's [Text] widget descendants.
   ///
   /// The color of the [textStyle] is typically not used directly, the
   /// [foregroundColor] is used instead.
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  WidgetStateProperty<TextStyle?>? textStyle,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Creates the [InkWell] splash factory, which defines the appearance of
   /// "ink" splashes that occur in response to taps.
@@ -87,12 +87,12 @@ OutlinedButtonThemeData _outlinedButtonTheme({
   /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
   /// null and the default comes via ThemeData.splashFactory, that is has
   /// also defined.
-  final InteractiveInkFeatureFactory? splashFactory,
+  InteractiveInkFeatureFactory? splashFactory,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -106,7 +106,7 @@ OutlinedButtonThemeData _outlinedButtonTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;

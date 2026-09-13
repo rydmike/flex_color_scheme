@@ -1,12 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/about.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_center.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../shared/const/app.dart';
-import '../shared/widgets/examples/about.dart';
-import '../shared/widgets/examples/show_color_scheme_colors.dart';
-import '../shared/widgets/examples/show_theme_data_colors.dart';
-import '../shared/widgets/universal/responsive_center.dart';
-import '../shared/widgets/universal/showcase_material.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 1 - Basic Theme Usage

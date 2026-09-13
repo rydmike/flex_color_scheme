@@ -1,14 +1,13 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/model/splash_type_enum.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_response.dart';
-import '../../../../shared/model/splash_type_enum.dart';
-import '../../../../shared/model/visual_density_enum.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/enum_popup_menu.dart';
-import '../../shared/test_adaptive_response.dart';
 
 // Panel used to control the adaptive theme settings.
 class AdaptiveThemePanel extends StatelessWidget {
@@ -59,7 +58,7 @@ class AdaptiveThemePanel extends StatelessWidget {
                 'It is without unit, since it means different things to '
                 'different UI components.\n'
                 '\n'
-                // ignore: lines_longer_than_80_chars, long string interpolation
+                // ignore: long string interpolation
                 '${controller.visualDensity?.describe ?? VisualDensityEnum.platform.describe}',
               ),
               value: controller.visualDensity,
@@ -106,7 +105,7 @@ class AdaptiveThemePanel extends StatelessWidget {
                 'Defines the type of tap ink splash effect used on Material '
                 'UI components.\n'
                 '\n'
-                // ignore: lines_longer_than_80_chars, for string interpolation
+                // ignore: for string interpolation
                 '${controller.splashType?.describe ?? SplashTypeEnum.defaultSplash.describe}',
               ),
               value: controller.splashType,
@@ -126,7 +125,7 @@ class AdaptiveThemePanel extends StatelessWidget {
                 'adaptive ink feature is OFF, the ink splash effect is '
                 'used.\n'
                 '\n'
-                // ignore: lines_longer_than_80_chars, for string interpolation
+                // ignore: for string interpolation
                 '${controller.splashTypeAdaptive?.describe ?? SplashTypeEnum.defaultSplash.describe}',
               ),
               value: controller.splashTypeAdaptive,
@@ -142,7 +141,7 @@ class AdaptiveThemePanel extends StatelessWidget {
             'An adaptive theme response used to select a different ink '
             'splash effect on selected platforms.\n'
             '\n'
-            // ignore: lines_longer_than_80_chars, for string interpolation
+            // ignore: for string interpolation
             '${controller.adaptiveResponseSplash?.describe ?? AdaptiveResponse.off.describe}',
           ),
           value: controller.adaptiveResponseSplash,
@@ -161,7 +160,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars, for string interpolation
+              // ignore: for string interpolation
               '${controller.adaptiveElevationShadowsBackLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveElevationShadowsBackLight,
@@ -189,7 +188,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
               'want to keep it ON, even if otherwise removing elevation tint.\n'
-              // ignore: lines_longer_than_80_chars, for string interpolation
+              // ignore: for string interpolation
               '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveElevationTintLight,
@@ -207,7 +206,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'Applies to AppBar, BottomAppBar, BottomSheet, DatePickerDialog, '
               'Dialog, Drawer, NavigationBar, NavigationDrawer.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars, for string interpolation
+              // ignore: for string interpolation
               '${controller.adaptiveElevationShadowsBackDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveElevationShadowsBackDark,
@@ -244,7 +243,7 @@ class AdaptiveThemePanel extends StatelessWidget {
               'MenuAnchor, NavigationDrawer and PopupMenuButton. There is a '
               'separate tint removal setting for the NavigationBar, as you may '
               'want to keep it ON, even if otherwise removing elevation tint.\n'
-              // ignore: lines_longer_than_80_chars, for string interpolation
+              // ignore: for string interpolation
               '${controller.adaptiveRemoveElevationTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveElevationTintDark,

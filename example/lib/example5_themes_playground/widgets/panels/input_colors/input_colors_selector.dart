@@ -1,11 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../theme/theme_values.dart';
 
 /// Horizontal color scheme selector of schemes in [AppColor.schemes].
 ///

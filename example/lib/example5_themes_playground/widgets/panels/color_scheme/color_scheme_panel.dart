@@ -1,22 +1,21 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_scheme/flex_tone_config_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_scheme/scheme_colors.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_scheme/show_tonal_palette.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/custom_uses_dark_colors_for_seed_switch.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/show_input_colors_switch.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/surfaces_seed_blend_color.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/use_seeded_color_scheme_switch.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/controllers/tone_indicator_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_slider.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/controllers/tone_indicator_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/list_tile_slider.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/custom_uses_dark_colors_for_seed_switch.dart';
-import '../../shared/enum_popup_menu.dart';
-import '../../shared/show_input_colors_switch.dart';
-import '../../shared/surfaces_seed_blend_color.dart';
-import '../../shared/use_seeded_color_scheme_switch.dart';
-import 'flex_tone_config_popup_menu.dart';
-import 'scheme_colors.dart';
-import 'show_tonal_palette.dart';
 
 // Panel used to show effective color scheme, when using keys to seed it
 // and just using raw FlexSchemeColors input data too based ColorScheme too.
@@ -124,9 +123,9 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                 child: Text(
                   'Tap a color code to copy it to the clipboard.'
                   '\n'
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   "${widget.controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   "${showBlendInfo ? 'Color blends are used, blended colors may not be found in palettes when hovered.' : '\n'}",
                   style: theme.textTheme.labelSmall,
                 ),
@@ -139,9 +138,9 @@ class _ColorSchemePanelState extends State<ColorSchemePanel> {
                   'primary, secondary, tertiary and error colors, plus their '
                   'container colors, to change them.'
                   '\n'
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   "${widget.controller.useKeyColors ? 'Hover a color to highlight its tonal palette source color above. ' : ''}"
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   "${showBlendInfo ? 'Color blends are used, blended colors may not be found in palettes when hovered.' : '\n'}",
                   style: theme.textTheme.labelSmall,
                 ),

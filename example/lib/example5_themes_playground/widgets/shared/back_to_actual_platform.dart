@@ -1,6 +1,5 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/controllers/theme_controller.dart';
 
 class BackToActualPlatform extends StatelessWidget {
   const BackToActualPlatform({

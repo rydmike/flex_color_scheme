@@ -1,16 +1,15 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/navigation_rail/navigation_rail_label_type_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import 'navigation_rail_label_type_list_tile.dart';
 
 class NavigationRailPanel extends StatelessWidget {
   const NavigationRailPanel(this.controller, {super.key});
@@ -237,7 +236,7 @@ class NavigationRailPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationRailSelectedLabelSize !=
                       null
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   ? '${(controller.navigationRailSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
                   : '12 pt',
               valueDefaultDisabledLabel: '12 pt',
@@ -275,7 +274,7 @@ class NavigationRailPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationRailSelectedIconSize !=
                       null
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   ? '${(controller.navigationRailSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
                   : '24 dp',
               valueDefaultDisabledLabel: '24 dp',

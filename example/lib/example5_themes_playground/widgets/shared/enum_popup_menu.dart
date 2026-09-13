@@ -1,11 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/model/splash_type_enum.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/model/adaptive_response.dart';
-import '../../../shared/model/splash_type_enum.dart';
-import '../../../shared/model/visual_density_enum.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
-import 'color_scheme_box.dart';
 
 /// Widget used to select used an enum value of type [T] using a popup menu.
 ///
@@ -202,7 +201,7 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            if (subtitle != null) subtitle!,
+            ?subtitle,
             Text(selectedPopupLabel),
           ],
         ),
@@ -244,8 +243,8 @@ class EnumPopupMenu<T extends Enum> extends StatelessWidget {
   /// we return a shorter `label`, if the enum defines one, or
   /// just the `name`. Typically the short form is used in the
   /// popup menu items and the long form in the ListTile subtitle.
-  String _popupItemLabel(final T? value, final bool useMaterial3,
-      [final bool useLongLabel = true]) {
+  String _popupItemLabel(T? value, bool useMaterial3,
+      [bool useLongLabel = true]) {
     if (T == FlexTabBarStyle) {
       switch (value) {
         case FlexTabBarStyle.forAppBar:

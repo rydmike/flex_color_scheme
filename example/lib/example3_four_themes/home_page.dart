@@ -1,16 +1,15 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example3_four_themes/widgets/theme_select_buttons.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/about.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/use_key_colors_buttons.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_center.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../shared/const/app.dart';
-import '../shared/const/app_color.dart';
-import '../shared/controllers/theme_controller.dart';
-import '../shared/widgets/examples/about.dart';
-import '../shared/widgets/examples/show_color_scheme_colors.dart';
-import '../shared/widgets/examples/show_theme_data_colors.dart';
-import '../shared/widgets/examples/use_key_colors_buttons.dart';
-import '../shared/widgets/universal/responsive_center.dart';
-import '../shared/widgets/universal/showcase_material.dart';
-import 'widgets/theme_select_buttons.dart';
 
 // -----------------------------------------------------------------------------
 // Home Page for EXAMPLE 3 - Four Themes

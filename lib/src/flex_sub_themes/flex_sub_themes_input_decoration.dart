@@ -14,13 +14,13 @@ part of '../flex_sub_themes.dart';
 /// 3 design specification.
 InputDecorationThemeData _inputDecorationTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Optional provided effective TextTheme to use as base for the
   /// input decorations.
   ///
   /// A default one is used if not provided.
-  final TextTheme? textTheme,
+  TextTheme? textTheme,
 
   /// Selects which color from the passed in colorScheme to use for the border
   /// and fill color of the input decorator.
@@ -32,7 +32,7 @@ InputDecorationThemeData _inputDecorationTheme({
   /// The border [borderSchemeColor] can be used to define the
   /// border color separately. It defaults to this color, if
   /// [borderSchemeColor] is not defined, and this color is.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// The decorated input fields corner border radius.
   ///
@@ -40,14 +40,14 @@ InputDecorationThemeData _inputDecorationTheme({
   /// which is 16, in Material-3 mode it defaults to
   /// [kInputDecoratorM3Radius] which is 4, following the Material
   /// 3 design specification.
-  final double? radius,
+  double? radius,
 
   /// Selects input border type.
   ///
   /// If undefined, defaults to [FlexInputBorderType.underline].
   ///
   /// THe underline style is default in Flutter too.
-  final FlexInputBorderType? borderType,
+  FlexInputBorderType? borderType,
 
   /// The padding for the input decoration's container.
   ///
@@ -68,13 +68,13 @@ InputDecorationThemeData _inputDecorationTheme({
   /// If no [contentPadding] is given, Flutter SDK uses default padding values
   /// that depends on if [isDense] is true or false and if we use outline or
   /// underline border.
-  final EdgeInsetsGeometry? contentPadding,
+  EdgeInsetsGeometry? contentPadding,
 
   /// Whether the input decorator's child is part of a dense form (i.e., uses
   /// less vertical space).
   ///
   /// Defaults to false.
-  final bool? isDense,
+  bool? isDense,
 
   /// If true the decoration's container is filled with [fillColor].
   ///
@@ -86,7 +86,7 @@ InputDecorationThemeData _inputDecorationTheme({
   /// true and bordered per the [border].
   ///
   /// Defaults to false, like Flutter SDK does. Filled is nicer, try it.
-  final bool? filled,
+  bool? filled,
 
   /// An optional totally custom fill color used to fill the
   /// `InputDecorator` background with, when `filled` is true.
@@ -94,7 +94,7 @@ InputDecorationThemeData _inputDecorationTheme({
   /// If null, defaults to color scheme color defined by `baseColor`
   /// withAlpha(0x0D) (5%) if color scheme is light and withAlpha(0x14) (8%)
   /// if color scheme is dark.
-  final Color? fillColor,
+  Color? fillColor,
 
   // TODO(rydmike): Migrate backgroundAlpha to backgroundOpacity.
   /// Defines the alpha, opacity channel value used as opacity on effective
@@ -110,19 +110,19 @@ InputDecorationThemeData _inputDecorationTheme({
   /// NOTE: This will be migrated to use o 0.0 to 1.0 opacity values in
   /// version 9.0. A parallel API wil be introduced in v8.0 to allow for
   /// a smooth migration path.
-  final int? backgroundAlpha,
+  int? backgroundAlpha,
 
   /// The icon color of the prefixIcon in a focused [InputDecoration].
   ///
   /// If not defined defaults to [baseSchemeColor] in FCS M2 and to
   /// [SchemeColor.onSurface] in FCS M3.
-  final SchemeColor? prefixIconSchemeColor,
+  SchemeColor? prefixIconSchemeColor,
 
   /// The icon color of the suffixIcon in a focused [InputDecoration].
   ///
   /// If not defined, defaults to [prefixIconSchemeColor] in FCS M2 and to
   /// [SchemeColor.onSurface] in FCS M3.
-  final SchemeColor? suffixIconSchemeColor,
+  SchemeColor? suffixIconSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the border
   /// color of the input decorator.
@@ -138,23 +138,23 @@ InputDecorationThemeData _inputDecorationTheme({
   ///
   /// If not defined and [baseSchemeColor] is defined, it defaults
   /// to the color given by [baseSchemeColor].
-  final SchemeColor? borderSchemeColor,
+  SchemeColor? borderSchemeColor,
 
   /// The border width when the input is selected.
   ///
   /// If null, defaults to [kThickBorderWidth] = 2.
-  final double? focusedBorderWidth,
+  double? focusedBorderWidth,
 
   /// The border width when the input is unselected or disabled.
   ///
   /// If null, defaults to [kThinBorderWidth] = 1.
-  final double? unfocusedBorderWidth,
+  double? unfocusedBorderWidth,
 
   /// Horizontal padding on either side of the border's
   /// [InputDecoration.labelText] width gap.
   ///
   /// Defaults to 4, which is also the default in SDK default input decorator.
-  final double gapPadding = 4,
+  double gapPadding = 4,
 
   /// Unfocused input decoration has a border.
   ///
@@ -168,7 +168,7 @@ InputDecorationThemeData _inputDecorationTheme({
   /// When set to false, there is no border bored on states enabledBorder and
   /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
   /// and errorBorder, so error thus has a border also when it is not focused.
-  final bool unfocusedHasBorder = true,
+  bool unfocusedHasBorder = true,
 
   /// Focused input decoration has a border.
   ///
@@ -182,7 +182,7 @@ InputDecorationThemeData _inputDecorationTheme({
   /// When set to false, there is no border bored on states enabledBorder and
   /// disabledBorder, there is a border on focusedBorder, focusedErrorBorder
   /// and errorBorder, so error thus has a border also when it is not focused.
-  final bool focusedHasBorder = true,
+  bool focusedHasBorder = true,
 
   /// Unfocused input decoration border uses the color baseScheme color.
   ///
@@ -197,17 +197,17 @@ InputDecorationThemeData _inputDecorationTheme({
   /// The unfocused border color selection also applies to it hovered state.
   ///
   /// If undefined, defaults to false.
-  final bool? unfocusedBorderIsColored,
+  bool? unfocusedBorderIsColored,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? tintedInteractions,
+  bool? tintedInteractions,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? tintedDisabled,
+  bool? tintedDisabled,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -221,7 +221,7 @@ InputDecorationThemeData _inputDecorationTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = tintedInteractions ?? false;

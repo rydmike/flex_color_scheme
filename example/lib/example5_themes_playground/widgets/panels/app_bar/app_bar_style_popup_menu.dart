@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../shared/color_scheme_box.dart';
 
 /// Widget used to select used AppBarStyle using a popup menu.
 ///
@@ -79,11 +78,11 @@ class AppBarStylePopupMenu extends StatelessWidget {
   final bool isBlended;
 
   Color _appBarStyleColor(
-    final FlexAppBarStyle? style,
-    final ColorScheme colorScheme,
-    final Color scaffold,
-    final bool isLight,
-    final bool useMaterial3,
+    FlexAppBarStyle? style,
+    ColorScheme colorScheme,
+    Color scaffold,
+    bool isLight,
+    bool useMaterial3,
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
@@ -116,9 +115,9 @@ class AppBarStylePopupMenu extends StatelessWidget {
   }
 
   String _popupItemLabel(
-    final FlexAppBarStyle? style,
-    final bool isLight,
-    final bool useMaterial3,
+    FlexAppBarStyle? style,
+    bool isLight,
+    bool useMaterial3,
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
@@ -226,7 +225,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            if (subtitle != null) subtitle!,
+            ?subtitle,
             Text(selectedPopupLabel),
           ],
         ),

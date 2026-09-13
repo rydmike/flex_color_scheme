@@ -1,13 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../shared/controllers/theme_controller.dart';
-import '../shared/services/theme_service.dart';
+import 'package:flex_color_scheme_example/example2_custom_theme/home_page.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
 // import '../shared/services/theme_service_hive.dart';
-import '../shared/services/theme_service_mem.dart';
-import 'home_page.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service_mem.dart';
+import 'package:flutter/foundation.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 2 - Custom Theme

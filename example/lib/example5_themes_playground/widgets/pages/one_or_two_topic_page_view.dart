@@ -1,17 +1,16 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/model/theme_topic.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/theme_color_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/topic_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/panel.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/utils/colors_are_close.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/header_card.dart';
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
-
-import '../../../shared/const/app.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/utils/app_scroll_behavior.dart';
-import '../../../shared/utils/colors_are_close.dart';
-import '../../../shared/widgets/universal/header_card.dart';
-import '../panels/panel.dart';
-import '../shared/color_scheme_box.dart';
-import 'model/theme_topic.dart';
-import 'widgets/theme_color_selector.dart';
-import 'widgets/topic_selector.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.

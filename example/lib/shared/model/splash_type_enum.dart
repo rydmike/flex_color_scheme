@@ -109,7 +109,7 @@ enum SplashTypeEnum {
   ),
   ;
 
-  const SplashTypeEnum({
+  SplashTypeEnum({
     required this.label,
     required this.describe,
     required this.code,

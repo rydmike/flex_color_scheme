@@ -3,7 +3,7 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
 SegmentedButtonThemeData _segmentedButtonTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as background
   /// color for the selected button.
@@ -12,65 +12,65 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   /// it's onColor pair defines the foreground for selected button.
   ///
   /// If not defined, secondaryContainer will be used.
-  final SchemeColor? selectedSchemeColor,
+  SchemeColor? selectedSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// foreground color for the selected [SegmentedButton].
   ///
   /// If not defined, contrast color pair to [selectedSchemeColor]
   /// will be used.
-  final SchemeColor? selectedForegroundSchemeColor,
+  SchemeColor? selectedForegroundSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// background color for unselected segmented button.
   ///
   /// If not defined, transparent will be used.
-  final SchemeColor? unselectedSchemeColor,
+  SchemeColor? unselectedSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// foreground color for unselected segmented button.
   ///
   /// If not defined, contrast color pair to [unselectedSchemeColor]
   /// will be used, for transparent it is onSurface.
-  final SchemeColor? unselectedForegroundSchemeColor,
+  SchemeColor? unselectedForegroundSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the border
   /// color for the toggle buttons.
   ///
   /// If not defined, [ColorScheme.outline] will be the effective result.
-  final SchemeColor? borderSchemeColor,
+  SchemeColor? borderSchemeColor,
 
   /// The button corner radius.
   ///
   /// If not defined, defaults to defaults to Stadium border.
-  final double? radius,
+  double? radius,
 
   /// The width of the borders around the segmented button.
   ///
   /// If null, defaults to [kThinBorderWidth] = 1.0.
-  final double? borderWidth,
+  double? borderWidth,
 
   /// Padding for the individual segment buttons.
   ///
   /// Defaults to null and uses M3's default scaled padding function.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
   /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
   /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
   /// [useMaterial3] is true, via M3 built in defaults.
-  final Size? minButtonSize,
+  Size? minButtonSize,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// Creates the [InkWell] splash factory, which defines the appearance of
   /// "ink" splashes that occur in response to taps.
@@ -80,14 +80,14 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
   /// null and the default comes via ThemeData.splashFactory, that is has
   /// also defined.
-  final InteractiveInkFeatureFactory? splashFactory,
+  InteractiveInkFeatureFactory? splashFactory,
 
   /// The style for the segmented button's [Text] widget descendants.
   ///
   /// The color of the [textStyle] is typically not used directly, the
   /// [selectedSchemeColor] and [unselectedForegroundSchemeColor] are
   /// used instead.
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  WidgetStateProperty<TextStyle?>? textStyle,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -101,7 +101,7 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;

@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/color_card.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../const/app.dart';
-import 'color_card.dart';
 
 /// Draw a number of boxes showing the colors of key sub theme color properties
 /// in the ColorScheme of the inherited ThemeData and its color properties.
@@ -32,11 +31,11 @@ class ShowSubThemeColors extends StatelessWidget {
   final bool showTitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) =>
+  static bool _isLight(Color color) =>
       ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(final Color color, final Color bg) =>
+  static Color _onColor(Color color, Color bg) =>
       _isLight(Color.alphaBlend(color, bg)) ? Colors.black : Colors.white;
 
   @override

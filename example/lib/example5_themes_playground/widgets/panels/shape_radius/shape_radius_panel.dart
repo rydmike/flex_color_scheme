@@ -1,15 +1,14 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/flex_squircle.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/flex_stadium_squircle.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_response.dart';
-import '../../../../shared/widgets/universal/flex_squircle.dart';
-import '../../../../shared/widgets/universal/flex_stadium_squircle.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/enum_popup_menu.dart';
-import '../../shared/test_adaptive_response.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //

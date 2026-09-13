@@ -1,11 +1,10 @@
 // Copyright 2021 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/constants.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
 import 'package:flutter/rendering.dart';
-
-import '../../../../../shared/utils/app_scroll_behavior.dart';
-import 'constants.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ElevationScreen extends StatelessWidget {
   const ElevationScreen({super.key});

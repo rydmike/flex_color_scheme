@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
 
 class MaterialPanel extends StatelessWidget {
   const MaterialPanel({super.key});

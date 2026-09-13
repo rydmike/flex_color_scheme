@@ -1,10 +1,9 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_dark.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_light.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/color_string.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../shared/const/app.dart';
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/utils/color_string.dart';
-import '../theme/flex_theme_dark.dart';
-import '../theme/flex_theme_light.dart';
 
 /// Function that returns the current light and dark ColorScheme as
 /// a Dart Flutter code String.

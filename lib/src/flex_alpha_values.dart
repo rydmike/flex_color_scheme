@@ -1,13 +1,11 @@
-import 'package:material_ui/material_ui.dart' show ColorScheme; // For comment refs.
+import 'package:flex_color_scheme/src/flex_surface_mode.dart';
 import 'package:meta/meta.dart' show immutable, internal;
-
-import 'flex_surface_mode.dart';
 
 /// Internal class used to hold alpha values for a given [FlexSurfaceMode]
 /// blend mode and blend level.
 ///
 /// The alpha values are used in the alpha blend calculation for each
-/// equivalently named [ColorScheme] color.
+/// equivalently named `ColorScheme` color.
 ///
 /// Normally only used via factory [FlexAlphaValues.getAlphas], a helper used
 /// to create the setup needed to compute the alpha blend values for used
@@ -95,7 +93,7 @@ class FlexAlphaValues {
   /// and brightness.
   // ignore: sort_constructors_first
   factory FlexAlphaValues.getAlphas(
-      final FlexSurfaceMode mode, final int blendLevel) {
+      FlexSurfaceMode mode, int blendLevel) {
     switch (mode) {
       case FlexSurfaceMode.level:
       case FlexSurfaceMode.custom:

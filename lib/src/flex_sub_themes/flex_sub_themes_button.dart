@@ -29,7 +29,7 @@ part of '../flex_sub_themes.dart';
 /// in Flutter stable SDK.
 ButtonThemeData _buttonTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the button.
@@ -37,26 +37,26 @@ ButtonThemeData _buttonTheme({
   /// All colors in the color scheme are not good choices, but some work well.
   ///
   /// If not defined, [colorScheme.primary] will be used.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// The button corner radius.
   ///
   /// If not defined, defaults to [kButtonRadius] 40dp,
   /// based on earlier M3 specification, that was later changed to stadium.
   /// https://m3.material.io/components/buttons/specs
-  final double? radius,
+  double? radius,
 
   /// Padding for legacy button.
   ///
   /// If not defined,
   /// defaults to [kButtonPadding] = `EdgeInsets.symmetric(horizontal: 16)`.
   /// This makes the legacy buttons same size as default margin on new ones.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
   /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
-  final Size? minButtonSize,
+  Size? minButtonSize,
 
   /// If true, then a [DropdownButton] menu's width will match the button's
   /// width.
@@ -69,17 +69,17 @@ ButtonThemeData _buttonTheme({
   /// This property only affects [DropdownButton] and its menu.
   ///
   /// If not defined default to false.
-  final bool? alignedDropdown,
+  bool? alignedDropdown,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 }) {
   final bool tintInteract = useTintedInteraction ?? false;
   final bool tintDisable = useTintedDisable ?? false;

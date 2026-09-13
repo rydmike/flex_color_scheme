@@ -1,12 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/effective_flex_tones.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_name_value.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_picker_inkwell.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/controllers/tone_indicator_controller.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/controllers/tone_indicator_controller.dart';
-import '../../../utils/effective_flex_tones.dart';
-import '../../shared/color_name_value.dart';
-import '../../shared/color_picker_inkwell.dart';
 
 // Display the all scheme colors in currently selected color scheme, including
 // their name and color code.
@@ -24,11 +23,11 @@ class SchemeColors extends StatelessWidget {
   final ToneIndicatorController toneC;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  bool _isLight(final Color color) =>
+  bool _isLight(Color color) =>
       FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  Color _onColor(final Color color) =>
+  Color _onColor(Color color) =>
       _isLight(color) ? Colors.black : Colors.white;
 
   bool _locked(bool isLight, bool keepLight, bool keepDark) =>

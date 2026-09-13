@@ -1,8 +1,7 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/copy_color_to_clipboard.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'copy_color_to_clipboard.dart';
 
 /// This widget is intended to be wrapped in Material with [color].
 /// It shows a [label] describing the theme property name of the [color] and

@@ -1,6 +1,5 @@
+import 'package:flex_color_scheme_example/shared/const/app.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/const/app.dart';
 
 /// Dialog to confirm if user wants to set TextField to M3.
 class SetTextFieldToM3Dialog extends StatelessWidget {

@@ -1,13 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/model/splash_type_enum.dart';
+import 'package:flex_color_scheme_example/shared/model/visual_density_enum.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
+import 'package:flex_color_scheme_example/shared/utils/same_types.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../model/adaptive_response.dart';
-import '../model/splash_type_enum.dart';
-import '../model/visual_density_enum.dart';
-import '../utils/same_types.dart';
-import 'theme_service.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.

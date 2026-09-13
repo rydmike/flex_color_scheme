@@ -1,8 +1,7 @@
+import 'package:flex_color_scheme/src/flex_color.dart';
+import 'package:flex_color_scheme/src/flex_extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'flex_color.dart';
-import 'flex_extensions.dart';
 
 /// Immutable data class used to create "on" colors for displaying text
 /// and icons on surface, background, error colors and the primary,

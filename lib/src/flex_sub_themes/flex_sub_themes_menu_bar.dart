@@ -3,7 +3,7 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [MenuBarThemeData] theme.
 MenuBarThemeData _menuBarTheme({
   // Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Select which color from the passed in [colorScheme] parameter to use as
   /// the MenuBar background color.
@@ -13,28 +13,28 @@ MenuBarThemeData _menuBarTheme({
   /// FlexColorScheme passes in
   /// [FlexSubThemesData.menuBarBackgroundSchemeColor] first, can be null, and
   /// uses [FlexSubThemesData.menuSchemeColor] as fallback, can also be null.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// The shadow color of the MenuBar's [Material].
   ///
   /// The material's elevation shadow can be difficult to see for dark themes,
   /// so by default the menu classes add a semi-transparent overlay to
   /// indicate elevation. See [ThemeData.applyElevationOverlayColor].
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// The surface tint color of the MenuBar's [Material].
   ///
   /// See [Material.surfaceTintColor] for more details.
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   /// The elevation of the MenuBar's [Material].
-  final double? elevation,
+  double? elevation,
 
   /// MenuBar corner radius.
   ///
   /// If not defined, defaults to 4, the M3 specification, via Flutter SDK
   /// widget default values.
-  final double? radius,
+  double? radius,
 }) {
   final Color background = FlexSubThemes.schemeColor(
     backgroundSchemeColor ?? SchemeColor.surfaceContainer,

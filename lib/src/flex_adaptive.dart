@@ -1,9 +1,4 @@
-import 'package:cupertino_ui/cupertino_ui.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart'; // For comment refs.
-
-import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
-import 'flex_sub_themes_data.dart'; // For comment refs.
 
 /// The [FlexAdaptive] class is used to define on what platforms
 /// [FlexColorScheme] generated [ThemeData] platform adaptive theming

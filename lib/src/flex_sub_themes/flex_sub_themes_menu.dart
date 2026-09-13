@@ -6,14 +6,14 @@ part of '../flex_sub_themes.dart';
 /// [MenuAnchor].
 MenuThemeData _menuTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Defines which [Theme] based [ColorScheme] based background color
   /// of [PopupMenuButton].
   ///
   /// If not defined, will remains null and via Flutter SDK defaults get
   /// [ColorScheme.surfaceContainer] color.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Menu background opacity.
   ///
@@ -26,24 +26,24 @@ MenuThemeData _menuTheme({
   /// If opacity is defined and [backgroundSchemeColor] is undefined,
   /// then [ColorScheme.surfaceContainer] will be used as background color to
   /// make a background color with opacity.
-  final double? opacity,
+  double? opacity,
 
   /// Menu corner radius.
   ///
   /// If not defined, default to 4 via Menu widget Flutter SDK defaults.
-  final double? radius,
+  double? radius,
 
   /// The padding between the menu's boundary and its child.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Popup menu elevation.
   ///
   /// If not defined, defaults to 3 dp via Flutter widget SDK defaults.
-  final double? elevation,
+  double? elevation,
 
   /// Overrides the default value for MenuThemeData
   /// [menuStyle.surfaceTintColor].
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 }) {
   // Get effective background color.
   final Color? backgroundColor = backgroundSchemeColor != null

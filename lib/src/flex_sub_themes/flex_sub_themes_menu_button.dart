@@ -12,7 +12,7 @@ part of '../flex_sub_themes.dart';
 /// Disabled items can also to use the optional FCS tinted style.
 MenuButtonThemeData _menuButtonTheme({
   // Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Provide info on which color from the passed in [colorScheme] parameter
   /// that is used as background color of menu containers defined by
@@ -21,21 +21,21 @@ MenuButtonThemeData _menuButtonTheme({
   /// [MenuBar].
   ///
   /// If not defined, defaults to [colorScheme.surfaceContainer].
-  final SchemeColor? menuBackgroundSchemeColor,
+  SchemeColor? menuBackgroundSchemeColor,
 
   /// Select which color from the passed in [colorScheme] parameter to use as
   /// the [SubmenuButton]s and [MenuItemButton]s background color for
   /// unselected, i.e. not highlighted via hover, focus or pressed state.
   ///
   /// If not defined, defaults to [menuBackgroundSchemeColor].
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Select which color from the passed in [colorScheme] parameter to use as
   /// the [SubmenuButton]s and [MenuItemButton]s foreground color.
   ///
   /// If not defined, defaults to the contrast pair for
   /// [backgroundSchemeColor].
-  final SchemeColor? foregroundSchemeColor,
+  SchemeColor? foregroundSchemeColor,
 
   /// Select which color from the passed in [colorScheme] parameter to use as
   /// the highlighted [SubmenuButton]s and [MenuItemButton]s indicator
@@ -43,7 +43,7 @@ MenuButtonThemeData _menuButtonTheme({
   ///
   /// If not defined, defaults to [backgroundSchemeColor] and the indicator
   /// only get overlay color hover, focus and press states.
-  final SchemeColor? indicatorBackgroundSchemeColor,
+  SchemeColor? indicatorBackgroundSchemeColor,
 
   /// Select which color from the passed in [colorScheme] parameter to use as
   /// the highlighted [SubmenuButton]s and [MenuItemButton]s indicator
@@ -53,28 +53,28 @@ MenuButtonThemeData _menuButtonTheme({
   /// [indicatorBackgroundSchemeColor], without its overlay color.
   /// If [indicatorBackgroundSchemeColor] is not defined the result of
   /// this is same color as [foregroundSchemeColor].
-  final SchemeColor? indicatorForegroundSchemeColor,
+  SchemeColor? indicatorForegroundSchemeColor,
 
   /// The MenuButton corner border radius.
   ///
   /// If not defined, defaults to 0 via Widget's default behavior.
-  final double? radius,
+  double? radius,
 
   /// The style for a menu button's [Text] widget descendants.
   ///
   /// The color of the [textStyle] is typically not used directly, the
   /// [foregroundSchemeColor] is used instead.
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  WidgetStateProperty<TextStyle?>? textStyle,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 }) {
   final bool tintInteract = useTintedInteraction ?? false;
   final bool tintDisable = useTintedDisable ?? false;

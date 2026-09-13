@@ -3,7 +3,7 @@ part of '../flex_sub_themes.dart';
 /// A slightly opinionated [DatePickerThemeData] helper for FlexColorScheme.
 DatePickerThemeData _datePickerTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Dialog background color.
   ///
@@ -20,7 +20,7 @@ DatePickerThemeData _datePickerTheme({
   /// even after the [ThemeData.dialogBackgroundColor] property is
   /// is deprecated in Flutter SDK. See
   /// https://github.com/flutter/flutter/issues/91772).
-  final Color? backgroundColor,
+  Color? backgroundColor,
 
   /// Selects which color from the passed in colorScheme to use as the dialog
   /// background color.
@@ -30,7 +30,7 @@ DatePickerThemeData _datePickerTheme({
   /// value for DatePickerDialog, which is [surfaceContainerHigh]
   /// in Material-3 mode and in Material-2 mode in light theme
   /// [Colors.white] and in a dark theme [Colors.grey800].
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// The color of the divider in the [DatePickerDialog].
   ///
@@ -39,7 +39,7 @@ DatePickerThemeData _datePickerTheme({
   /// build.
   ///
   /// Use [SchemeColor.transparent] to remove the divider in Material-3.
-  final SchemeColor? dividerSchemeColor,
+  SchemeColor? dividerSchemeColor,
 
   /// Defines the header's default background fill color.
   ///
@@ -47,7 +47,7 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// Defaults to [surfaceContainerHigh] in Material-3 and Material-2 mode
   /// to [primary] in light mode and to [surface] in dark mode.
-  final SchemeColor? headerBackgroundSchemeColor,
+  SchemeColor? headerBackgroundSchemeColor,
 
   /// Defines the header's default color used for text labels and icons.
   ///
@@ -60,19 +60,19 @@ DatePickerThemeData _datePickerTheme({
   /// [headerBackgroundSchemeColor], with a preference to
   /// [SchemeColor.onSurfaceVariant] if any surface color is used as the
   /// background color.
-  final SchemeColor? headerForegroundSchemeColor,
+  SchemeColor? headerForegroundSchemeColor,
 
   /// Dialog elevation.
   ///
   /// If not defined, defaults to [kDialogElevation] = 6.
-  final double? elevation,
+  double? elevation,
 
   /// Outer corner radius.
   ///
   /// If not defined, defaults to [kDialogRadius] 28dp,
   /// based on M3 Specification
   /// https://m3.material.io/components/dialogs/specs
-  final double? radius,
+  double? radius,
 
   /// An input decoration theme, for the time picker.
   ///
@@ -84,7 +84,7 @@ DatePickerThemeData _datePickerTheme({
   /// does internally to the default null InputDecorationThemeData. There is
   /// no need to add those in the passed in InputDecorationThemeData, pass
   /// in your overall used app InputDecorationThemeData.
-  final InputDecorationThemeData? inputDecorationTheme,
+  InputDecorationThemeData? inputDecorationTheme,
 
   /// Set to true to not use the provided [InputDecorationThemeData].
   ///
@@ -97,13 +97,13 @@ DatePickerThemeData _datePickerTheme({
   /// to the provided InputDecorationThemeData.
   ///
   /// If not defined, defaults to false.
-  final bool? useInputDecoratorTheme,
+  bool? useInputDecoratorTheme,
 
   /// Overrides the default value of [Dialog.shadowColor].
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// Overrides the default value of [Dialog.surfaceTintColor].
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   /// Overrides the header's default headline text style.
   ///
@@ -111,7 +111,7 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// The [TextStyle.color] of the [headerHeadlineStyle] is not used,
   /// [headerForegroundColor] is used instead.
-  final TextStyle? headerHeadlineStyle,
+  TextStyle? headerHeadlineStyle,
 
   /// Overrides the header's default help text style.
   ///
@@ -124,32 +124,32 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// See also:
   ///   [DatePickerDialog.helpText], which specifies the help text.
-  final TextStyle? headerHelpStyle,
+  TextStyle? headerHelpStyle,
 
   /// Overrides the default text style used for the row of weekday
   /// labels at the top of the date picker grid.
-  final TextStyle? weekdayStyle,
+  TextStyle? weekdayStyle,
 
   /// Overrides the default text style used for each individual day
   /// label in the grid of the date picker.
   ///
   /// The [TextStyle.color] of the [dayStyle] is not used,
   /// [dayForegroundColor] is used instead.
-  final TextStyle? dayStyle,
+  TextStyle? dayStyle,
 
   /// Overrides the default color used to paint the day labels in the
   /// grid of the date picker.
   ///
   /// This will be used instead of the color provided in [dayStyle].
-  final WidgetStateProperty<Color?>? dayForegroundColor,
+  WidgetStateProperty<Color?>? dayForegroundColor,
 
   /// Overrides the default color used to paint the background of the
   /// day labels in the grid of the date picker.
-  final WidgetStateProperty<Color?>? dayBackgroundColor,
+  WidgetStateProperty<Color?>? dayBackgroundColor,
 
   /// Overrides the default highlight color that's typically used to
   /// indicate that a day in the grid is focused, hovered, or pressed.
-  final WidgetStateProperty<Color?>? dayOverlayColor,
+  WidgetStateProperty<Color?>? dayOverlayColor,
 
   /// Overrides the default shape used to paint the shape decoration of the
   /// day labels in the grid of the date picker.
@@ -162,7 +162,7 @@ DatePickerThemeData _datePickerTheme({
   /// If the selected day is not the current day, the provided shape with the
   /// value of [dayBackgroundColor] is used to paint the shape decoration of
   /// the day label.
-  final WidgetStateProperty<OutlinedBorder?>? dayShape,
+  WidgetStateProperty<OutlinedBorder?>? dayShape,
 
   /// Overrides the default color used to paint the
   /// [DatePickerDialog.currentDate] label in the grid of the dialog's
@@ -171,11 +171,11 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// This will be used instead of the [TextStyle.color] provided in
   /// [dayStyle].
-  final WidgetStateProperty<Color?>? todayForegroundColor,
+  WidgetStateProperty<Color?>? todayForegroundColor,
 
   /// Overrides the default color used to paint the background of the
   /// [DatePickerDialog.currentDate] label in the grid of the date picker.
-  final WidgetStateProperty<Color?>? todayBackgroundColor,
+  WidgetStateProperty<Color?>? todayBackgroundColor,
 
   /// Overrides the border used to paint the
   /// [DatePickerDialog.currentDate] label in the grid of the date
@@ -183,53 +183,53 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// The border side's [BorderSide.color] is not used,
   /// [todayForegroundColor] is used instead.
-  final BorderSide? todayBorder,
+  BorderSide? todayBorder,
 
   /// Overrides the default text style used to paint each of the year
   /// entries in the year selector of the date picker.
   ///
   /// The [TextStyle.color] of the [yearStyle] is not used,
   /// [yearForegroundColor] is used instead.
-  final TextStyle? yearStyle,
+  TextStyle? yearStyle,
 
   /// Overrides the default color used to paint the year labels in the year
   /// selector of the date picker.
   ///
   /// This will be used instead of the color provided in [yearStyle].
-  final WidgetStateProperty<Color?>? yearForegroundColor,
+  WidgetStateProperty<Color?>? yearForegroundColor,
 
   /// Overrides the default color used to paint the background of the
   /// year labels in the year selector of the of the date picker.
-  final WidgetStateProperty<Color?>? yearBackgroundColor,
+  WidgetStateProperty<Color?>? yearBackgroundColor,
 
   /// Overrides the default highlight color that's typically used to
   /// indicate that a year in the year selector is focused, hovered,
   /// or pressed.
-  final WidgetStateProperty<Color?>? yearOverlayColor,
+  WidgetStateProperty<Color?>? yearOverlayColor,
 
   /// Overrides the default [Scaffold.backgroundColor] for
   /// [DateRangePickerDialog].
-  final Color? rangePickerBackgroundColor,
+  Color? rangePickerBackgroundColor,
 
   /// Overrides the default elevation of the full screen
   /// [DateRangePickerDialog].
-  final double? rangePickerElevation,
+  double? rangePickerElevation,
 
   /// Overrides the color of the shadow painted below a full screen
   /// [DateRangePickerDialog].
-  final Color? rangePickerShadowColor,
+  Color? rangePickerShadowColor,
 
   /// Overrides the default overall shape of a full screen
   /// [DateRangePickerDialog].
   ///
   /// If [elevation] is greater than zero then a shadow is shown and the
   /// shadow's shape mirrors the shape of the dialog.
-  final ShapeBorder? rangePickerShape,
+  ShapeBorder? rangePickerShape,
 
   /// Overrides the default background fill color for [DateRangePickerDialog].
   ///
   /// The dialog's header displays the currently selected date range.
-  final Color? rangePickerHeaderBackgroundColor,
+  Color? rangePickerHeaderBackgroundColor,
 
   /// Overrides the default color used for text labels and icons in
   /// the header of a full screen [DateRangePickerDialog]
@@ -238,7 +238,7 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// This is used instead of any colors provided by
   /// [rangePickerHeaderHeadlineStyle] or [rangePickerHeaderHelpStyle].
-  final Color? rangePickerHeaderForegroundColor,
+  Color? rangePickerHeaderForegroundColor,
 
   /// Overrides the default text style used for the headline text in
   /// the header of a full screen [DateRangePickerDialog].
@@ -247,7 +247,7 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// The [TextStyle.color] of [rangePickerHeaderHeadlineStyle] is not used,
   /// [rangePickerHeaderForegroundColor] is used instead.
-  final TextStyle? rangePickerHeaderHeadlineStyle,
+  TextStyle? rangePickerHeaderHeadlineStyle,
 
   /// Overrides the default text style used for the help text of the
   /// header of a full screen [DateRangePickerDialog].
@@ -258,29 +258,29 @@ DatePickerThemeData _datePickerTheme({
   ///
   /// The [TextStyle.color] of the [rangePickerHeaderHelpStyle] is not used,
   /// [rangePickerHeaderForegroundColor] is used instead.
-  final TextStyle? rangePickerHeaderHelpStyle,
+  TextStyle? rangePickerHeaderHelpStyle,
 
   /// Overrides the default background color used to paint days
   /// selected between the start and end dates in a
   /// [DateRangePickerDialog].
-  final Color? rangeSelectionBackgroundColor,
+  Color? rangeSelectionBackgroundColor,
 
   /// Overrides the default highlight color that's typically used to
   /// indicate that a date in the selected range of a
   /// [DateRangePickerDialog] is focused, hovered, or pressed.
-  final WidgetStateProperty<Color?>? rangeSelectionOverlayColor,
+  WidgetStateProperty<Color?>? rangeSelectionOverlayColor,
 
   /// Overrides the default style of the cancel button of a
   /// [DatePickerDialog].
-  final ButtonStyle? cancelButtonStyle,
+  ButtonStyle? cancelButtonStyle,
 
   /// Overrides the default style of the confirm (OK) button of a
   /// [DatePickerDialog].
-  final ButtonStyle? confirmButtonStyle,
+  ButtonStyle? confirmButtonStyle,
 
   /// An optional [locale] argument can be used to set the locale for the date
   /// picker. It defaults to the ambient locale provided by [Localizations].
-  final Locale? locale,
+  Locale? locale,
 }) {
 // This InputDecorationTheme is here to help work around this issue:
 // https://github.com/flutter/flutter/issues/131666

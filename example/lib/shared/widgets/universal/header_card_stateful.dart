@@ -1,6 +1,5 @@
+import 'package:flex_color_scheme_example/shared/utils/colors_are_close.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../utils/colors_are_close.dart';
 
 /// A [Card] with a [ListTile] header that can be toggled via its trailing
 /// widget to open and reveal more content provided via [child] in the card.

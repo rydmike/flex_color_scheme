@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/theme_mode_switch_list_tile.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/examples/show_color_scheme_colors.dart';
-import '../../../../shared/widgets/examples/show_sub_theme_colors.dart';
-import '../../../../shared/widgets/examples/show_theme_data_colors.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../shared/theme_mode_switch_list_tile.dart';
 
 /// An example that show what the Widget Showcase component look like in a
 /// simulated mobile device frame.

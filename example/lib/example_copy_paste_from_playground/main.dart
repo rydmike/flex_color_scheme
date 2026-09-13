@@ -1,9 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/example_copy_paste_from_playground/app_theme.dart';
+import 'package:flex_color_scheme_example/example_copy_paste_from_playground/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'app_theme.dart';
-import 'home_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 // ignore_for_file: unused_import, for commenting code.
 // ignore_for_file: unreachable_from_main, used in commented tutorial code.

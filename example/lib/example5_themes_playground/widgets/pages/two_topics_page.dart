@@ -1,11 +1,10 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/theme_color_selector_header_delegate.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/topic_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/vertical_panel_view.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../shared/const/app.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import 'widgets/theme_color_selector_header_delegate.dart';
-import 'widgets/topic_selector.dart';
-import 'widgets/vertical_panel_view.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.

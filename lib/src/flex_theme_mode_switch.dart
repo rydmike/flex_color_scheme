@@ -1,7 +1,6 @@
+import 'package:flex_color_scheme/src/flex_scheme_color.dart';
+import 'package:flex_color_scheme/src/flex_scheme_data.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'flex_scheme_color.dart';
-import 'flex_scheme_data.dart';
 
 /// Enum used to define the order, from left to right, of the theme mode
 /// selection buttons on the [FlexThemeModeSwitch].
@@ -75,9 +74,8 @@ class FlexThemeModeSwitch extends StatelessWidget {
     this.padding,
     this.hoverColor,
     this.focusColor,
-  })  : assert(selectedElevation >= 0.0, 'Selected elevation must be >= 0.0'),
-        assert(
-            unselectedElevation >= 0.0, 'Unselected elevation must be >= 0.0');
+  }) : assert(selectedElevation >= 0.0, 'Selected elevation must be >= 0.0'),
+       assert(unselectedElevation >= 0.0, 'Unselected elevation must be >= 0.0');
 
   /// The current themeMode option button to be marked as selected.
   final ThemeMode themeMode;
@@ -233,9 +231,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       flexSchemeColor: flexSchemeData.light,
       backgroundColor: backgroundLight ?? Colors.white,
       label: labelLight,
-      labelStyle: themeMode == ThemeMode.light
-          ? selectedLabelStyle
-          : unselectedLabelStyle,
+      labelStyle: themeMode == ThemeMode.light ? selectedLabelStyle : unselectedLabelStyle,
       labelAbove: labelAbove,
       selected: themeMode == ThemeMode.light,
       onSelect: () {
@@ -243,9 +239,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       },
       selectedBorder: selectedBorder,
       unselectedBorder: unselectedBorder,
-      elevation: themeMode == ThemeMode.light
-          ? selectedElevation
-          : unselectedElevation,
+      elevation: themeMode == ThemeMode.light ? selectedElevation : unselectedElevation,
       optionButtonPadding: optionButtonPadding,
       optionButtonMargin: optionButtonMargin,
       optionButtonBorderRadius: optionButtonBorderRadius,
@@ -261,9 +255,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       flexSchemeColor: flexSchemeData.dark,
       backgroundColor: backgroundDark ?? Colors.grey[850]!,
       label: labelDark,
-      labelStyle: themeMode == ThemeMode.dark
-          ? selectedLabelStyle
-          : unselectedLabelStyle,
+      labelStyle: themeMode == ThemeMode.dark ? selectedLabelStyle : unselectedLabelStyle,
       labelAbove: labelAbove,
       selected: themeMode == ThemeMode.dark,
       onSelect: () {
@@ -271,8 +263,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       },
       selectedBorder: selectedBorder,
       unselectedBorder: unselectedBorder,
-      elevation:
-          themeMode == ThemeMode.dark ? selectedElevation : unselectedElevation,
+      elevation: themeMode == ThemeMode.dark ? selectedElevation : unselectedElevation,
       optionButtonPadding: optionButtonPadding,
       optionButtonMargin: optionButtonMargin,
       optionButtonBorderRadius: optionButtonBorderRadius,
@@ -298,9 +289,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       ),
       backgroundColor: backgroundSystem ?? Colors.grey[500]!,
       label: labelSystem,
-      labelStyle: themeMode == ThemeMode.system
-          ? selectedLabelStyle
-          : unselectedLabelStyle,
+      labelStyle: themeMode == ThemeMode.system ? selectedLabelStyle : unselectedLabelStyle,
       labelAbove: labelAbove,
       selected: themeMode == ThemeMode.system,
       onSelect: () {
@@ -308,9 +297,7 @@ class FlexThemeModeSwitch extends StatelessWidget {
       },
       selectedBorder: selectedBorder,
       unselectedBorder: unselectedBorder,
-      elevation: themeMode == ThemeMode.system
-          ? selectedElevation
-          : unselectedElevation,
+      elevation: themeMode == ThemeMode.system ? selectedElevation : unselectedElevation,
       optionButtonPadding: optionButtonPadding,
       optionButtonMargin: optionButtonMargin,
       optionButtonBorderRadius: optionButtonBorderRadius,
@@ -326,32 +313,29 @@ class FlexThemeModeSwitch extends StatelessWidget {
       children: <Widget>[
         if (hasTitle)
           Expanded(
-            child: title ??
+            child:
+                title ??
                 Text(
                   'Theme mode',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
           ),
-        if (buttonOrder ==
-            FlexThemeModeButtonOrder.lightDarkSystem) ...<Widget>[
+        if (buttonOrder == FlexThemeModeButtonOrder.lightDarkSystem) ...<Widget>[
           lightButton,
           darkButton,
           if (showSystemMode) systemButton,
         ],
-        if (buttonOrder ==
-            FlexThemeModeButtonOrder.darkLightSystem) ...<Widget>[
+        if (buttonOrder == FlexThemeModeButtonOrder.darkLightSystem) ...<Widget>[
           darkButton,
           lightButton,
           if (showSystemMode) systemButton,
         ],
-        if (buttonOrder ==
-            FlexThemeModeButtonOrder.lightSystemDark) ...<Widget>[
+        if (buttonOrder == FlexThemeModeButtonOrder.lightSystemDark) ...<Widget>[
           lightButton,
           if (showSystemMode) systemButton,
           darkButton,
         ],
-        if (buttonOrder ==
-            FlexThemeModeButtonOrder.darkSystemLight) ...<Widget>[
+        if (buttonOrder == FlexThemeModeButtonOrder.darkSystemLight) ...<Widget>[
           darkButton,
           if (showSystemMode) systemButton,
           lightButton,
@@ -511,8 +495,7 @@ class FlexThemeModeOptionButton extends StatefulWidget {
   final bool? setFocusOnTap;
 
   @override
-  State<FlexThemeModeOptionButton> createState() =>
-      _FlexThemeModeOptionButtonState();
+  State<FlexThemeModeOptionButton> createState() => _FlexThemeModeOptionButtonState();
 }
 
 class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
@@ -535,8 +518,7 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
       padX = (padding.start + padding.end) * 2;
       padY = (padding.top + padding.bottom) * 2;
     }
-    final EdgeInsetsGeometry optionButtonMargin =
-        widget.optionButtonMargin ?? _optionButtonMargin;
+    final EdgeInsetsGeometry optionButtonMargin = widget.optionButtonMargin ?? _optionButtonMargin;
     if (optionButtonMargin is EdgeInsets) {
       padX += optionButtonMargin.left + optionButtonMargin.right;
       padY += optionButtonMargin.top + optionButtonMargin.bottom;
@@ -562,8 +544,7 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
   @override
   void didUpdateWidget(covariant FlexThemeModeOptionButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.padding != oldWidget.padding ||
-        widget.optionButtonMargin != oldWidget.optionButtonMargin) {
+    if (widget.padding != oldWidget.padding || widget.optionButtonMargin != oldWidget.optionButtonMargin) {
       updatePaddings();
     }
   }
@@ -571,10 +552,8 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final Color effectiveHoverColor = widget.hoverColor ??
-        (theme.brightness == Brightness.light
-            ? const Color(0x50BCBCBC)
-            : const Color(0x99555555));
+    final Color effectiveHoverColor =
+        widget.hoverColor ?? (theme.brightness == Brightness.light ? const Color(0x50BCBCBC) : const Color(0x99555555));
 
     return Semantics(
       label: widget.semanticLabel ?? widget.label ?? 'Theme mode option button',
@@ -582,8 +561,7 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
       button: true,
       enabled: true,
       child: Padding(
-        padding: widget.optionButtonPadding ??
-            const EdgeInsetsDirectional.only(start: 6),
+        padding: widget.optionButtonPadding ?? const EdgeInsetsDirectional.only(start: 6),
         child: Row(
           children: <Widget>[
             Column(
@@ -604,21 +582,20 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
                     ),
                     side: widget.selected
                         ? widget.selectedBorder ??
-                            BorderSide(
-                              color: theme.colorScheme.primary,
-                              width: 4,
-                            )
+                              BorderSide(
+                                color: theme.colorScheme.primary,
+                                width: 4,
+                              )
                         : widget.unselectedBorder ??
-                            BorderSide(
-                              color: theme.dividerColor,
-                            ),
+                              BorderSide(
+                                color: theme.dividerColor,
+                              ),
                   ),
                   child: Stack(
                     // alignment: AlignmentDirectional.center,
                     children: <Widget>[
                       Padding(
-                        padding:
-                            widget.optionButtonMargin ?? _optionButtonMargin,
+                        padding: widget.optionButtonMargin ?? _optionButtonMargin,
                         child: Column(
                           children: <Widget>[
                             Row(
@@ -642,8 +619,7 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
                             Row(
                               children: <Widget>[
                                 _SchemeColorBox(
-                                  color:
-                                      widget.flexSchemeColor.primaryContainer,
+                                  color: widget.flexSchemeColor.primaryContainer,
                                   height: widget.height,
                                   width: widget.width,
                                   borderRadius: widget.borderRadius,
@@ -678,7 +654,7 @@ class _FlexThemeModeOptionButtonState extends State<FlexThemeModeOptionButton> {
                             height: widget.height * 2 + padY,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

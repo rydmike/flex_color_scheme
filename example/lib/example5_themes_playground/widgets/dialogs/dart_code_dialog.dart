@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/syntax_highlighter.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../shared/widgets/universal/syntax_highlighter.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Show the code for the currently configured FlexColorScheme theme setup.
 ///

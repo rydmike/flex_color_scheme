@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../shared/const/app_color.dart';
-import '../../shared/controllers/theme_controller.dart';
 
 /// Return effective FlexTones for the current theme setup and mode.
 FlexTones effectiveFlexTones(ThemeController controller, BuildContext context) {

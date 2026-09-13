@@ -3,10 +3,6 @@ import 'dart:math' as math;
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:material_ui/material_ui.dart';
 
-// TODO(rydmike): Investigate why we in this Flutter version suddenly need to
-//  ignore discarded futures for AnimationController()..forward
-// ignore_for_file: discarded_futures
-
 const Duration _kUnconfirmedSplashDuration = Duration(milliseconds: 20);
 const Duration _kSplashFadeDuration = Duration(milliseconds: 20);
 

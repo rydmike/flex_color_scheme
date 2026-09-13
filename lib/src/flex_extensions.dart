@@ -31,7 +31,7 @@ import 'package:material_ui/material_ui.dart';
 extension FlexColorExtensions on Color {
   /// Brightens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color brighten([final int amount = 10]) {
+  Color brighten([int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     final Color color = Color.fromARGB(
@@ -45,7 +45,7 @@ extension FlexColorExtensions on Color {
 
   /// Lightens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color lighten([final int amount = 10]) {
+  Color lighten([int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     // HSLColor returns saturation 1 for black, we want 0 instead to be able
@@ -60,7 +60,7 @@ extension FlexColorExtensions on Color {
 
   /// Darkens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color darken([final int amount = 10]) {
+  Color darken([int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.black;
     final HSLColor hsl = HSLColor.fromColor(this);
@@ -101,7 +101,7 @@ extension FlexColorExtensions on Color {
   /// by blending in white color with light scheme color.
   ///
   /// Defaults to 10% alpha blend of the passed in Color value.
-  Color blend(final Color input, [final int amount = 10]) {
+  Color blend(Color input, [int amount = 10]) {
     // Skip blending for impossible value and return the instance color value.
     if (amount <= 0) return this;
     // Blend amounts >= 100 results in the input Color.
@@ -121,7 +121,7 @@ extension FlexColorExtensions on Color {
   ///
   /// Defaults to alpha 0x0A alpha blend of the passed in Color value,
   /// which is 10% alpha blend.
-  Color blendAlpha(final Color input, [final int alpha = 0x0A]) {
+  Color blendAlpha(Color input, [int alpha = 0x0A]) {
     // Skip blending for impossible value and return the instance color value.
     if (alpha <= 0) return this;
     // Blend amounts >= 255 results in the input Color.
@@ -146,10 +146,10 @@ extension FlexColorExtensions on Color {
   /// darker, the extension just returns white or black for such attempts, with
   /// a quick exist from the call.
   Color getShadeColor({
-    final int shadeValue = 15,
-    final bool lighten = true,
-    final bool keepBlack = true,
-    final bool keepWhite = true,
+    int shadeValue = 15,
+    bool lighten = true,
+    bool keepBlack = true,
+    bool keepWhite = true,
   }) {
     if (shadeValue <= 0) return this;
     int usedShadeValue = shadeValue;
@@ -185,7 +185,7 @@ extension FlexColorExtensions on Color {
   /// Return uppercase RGB hex code string, with # and no alpha value.
   /// This format is often used in APIs and in CSS color values..
   String get hex {
-    // ignore: lines_longer_than_80_chars, this case clearer on one line.
+    // ignore: this case clearer on one line.
     return '#${value32bit.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
   }
 }

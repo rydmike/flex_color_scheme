@@ -1,18 +1,17 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/navigation_bar/navigation_bar_label_behavior_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_two_widgets.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_response.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/responsive_two_widgets.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/enum_popup_menu.dart';
-import '../../shared/test_adaptive_response.dart';
-import 'navigation_bar_label_behavior_list_tile.dart';
 
 // Panel used to control the sub-theme for NavigationBar.
 class NavigationBarPanel extends StatelessWidget {
@@ -267,7 +266,7 @@ class NavigationBarPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationBarSelectedLabelSize !=
                       null
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   ? '${(controller.navigationBarSelectedLabelSize ?? 12).toStringAsFixed(0)} pt'
                   : '12 pt',
               valueDefaultDisabledLabel: '12 pt',
@@ -305,7 +304,7 @@ class NavigationBarPanel extends StatelessWidget {
               valueDecimalPlaces: 0,
               valueDefaultLabel: controller.navigationBarSelectedIconSize !=
                       null
-                  // ignore: lines_longer_than_80_chars, string interpolation
+                  // ignore: string interpolation
                   ? '${(controller.navigationBarSelectedIconSize ?? 24).toStringAsFixed(0)} dp'
                   : '24 dp',
               valueDefaultDisabledLabel: '24 dp',
@@ -330,7 +329,7 @@ class NavigationBarPanel extends StatelessWidget {
               'Keeping it around for now, but it is not useful in Flutter 3.22 '
               'and later.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars, string interpolation
+              // ignore: string interpolation
               '${controller.adaptiveRemoveNavigationBarTintLight?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveNavigationBarTintLight,
@@ -352,7 +351,7 @@ class NavigationBarPanel extends StatelessWidget {
               'Keeping it around for now, but it is not useful in Flutter 3.22 '
               'and later.\n'
               '\n'
-              // ignore: lines_longer_than_80_chars, string interpolation
+              // ignore: string interpolation
               '${controller.adaptiveRemoveNavigationBarTintDark?.describe ?? AdaptiveResponse.off.describe}',
             ),
             value: controller.adaptiveRemoveNavigationBarTintDark,

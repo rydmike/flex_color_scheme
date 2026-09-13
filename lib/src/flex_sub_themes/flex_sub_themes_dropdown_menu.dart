@@ -3,23 +3,23 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [DropdownMenuThemeData] theme.
 DropdownMenuThemeData _dropdownMenuTheme({
   /// Typically the same [ColorScheme] that is also used for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// The [TextStyle] of the text entry in a [DropDownMenu].
   ///
   /// If not defined, defaults to Flutter SDK default via widget default
   /// [TextTheme.labelLarge].
-  final TextStyle? textStyle,
+  TextStyle? textStyle,
 
   /// An [InputDecorationThemeData] for the text input part of
   /// the [DropDownMenu].
   ///
   /// Typically you want it to match the input decorator on your TextField.
-  final InputDecorationThemeData? inputDecorationTheme,
+  InputDecorationThemeData? inputDecorationTheme,
 
   /// Overrides the default value for DropdownMenuThemeData
   /// [menuStyle.surfaceTintColor].
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   // TODO(rydmike): Remove maximumSize fallback when fixed in Flutter SDK.
   /// The maximum size of the dropdown menu itself.
@@ -39,7 +39,7 @@ DropdownMenuThemeData _dropdownMenuTheme({
   /// this PR fix https://github.com/flutter/flutter/pull/169438
   /// has landed in the stable Flutter release. It has landed in master, but
   /// not yet in Flutter 3.35.1.
-  final WidgetStateProperty<Size?>? maximumSize,
+  WidgetStateProperty<Size?>? maximumSize,
 }) {
   return DropdownMenuThemeData(
     inputDecorationTheme: inputDecorationTheme,

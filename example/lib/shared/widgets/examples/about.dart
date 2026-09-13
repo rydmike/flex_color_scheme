@@ -1,9 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../const/app.dart';
-import '../../utils/link_text_span.dart';
 
 /// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {

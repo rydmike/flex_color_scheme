@@ -3,27 +3,27 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [SearchBarThemeData] theme for the [SearchBar].
 SearchBarThemeData _searchBarTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// The search bar's background fill color.
   ///
   /// If null, the default value is `surfaceContainerHigh`.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// The elevation of the search bar's [Material].
   ///
   /// If null, default value is 6.0.
-  final double? elevation,
+  double? elevation,
 
   /// The shadow color of the search bar's [Material].
   ///
   /// If null, the default value is [ColorScheme.shadow].
-  final Color? shadowColor,
+  Color? shadowColor,
 
   /// The border radius of the search bar's underlying [Material].
   ///
   /// If not defined defaults to Stadium shape.
-  final double? radius,
+  double? radius,
 
   // TODO(rydmike): Doing just a radius for now. Shapes later
   // The color and weight of the search bar's outline.
@@ -45,19 +45,19 @@ SearchBarThemeData _searchBarTheme({
   /// The padding between the search bar's boundary and its contents.
   ///
   /// If null, then the default value is 16.0 horizontally.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// The style to use for the text being edited.
   ///
   /// If null, defaults to the `bodyLarge` text style from the current
   /// [Theme]. The default text color is [ColorScheme.onSurface].
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  WidgetStateProperty<TextStyle?>? textStyle,
 
   /// The style to use for the [hintText].
   ///
   /// If null, defaults to `bodyLarge` text style from the current [Theme].
   /// The default text color is [ColorScheme.onSurfaceVariant].
-  final WidgetStateProperty<TextStyle?>? hintStyle,
+  WidgetStateProperty<TextStyle?>? hintStyle,
 
   /// Optional size constraints for the search bar.
   ///
@@ -67,7 +67,7 @@ SearchBarThemeData _searchBarTheme({
   /// ```dart
   /// const BoxConstraints(minWidth: 360.0, maxWidth: 800.0, minHeight: 56.0)
   /// ```
-  final BoxConstraints? constraints,
+  BoxConstraints? constraints,
 
   /// Configures how the platform keyboard will select an uppercase or
   /// lowercase keyboard.
@@ -81,12 +81,12 @@ SearchBarThemeData _searchBarTheme({
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? tintedInteractions,
+  bool? tintedInteractions,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? tintedDisabled,
+  bool? tintedDisabled,
 }) {
   final bool tintInteract = tintedInteractions ?? false;
   final bool tintDisable = tintedDisabled ?? false;

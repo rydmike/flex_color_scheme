@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../controllers/theme_controller.dart';
 
 /// A container class with custom application color schemes used in the
 /// examples 4 and 5.
@@ -204,7 +203,7 @@ abstract final class AppColor {
   /// well almost, we include also the logic for computed dark mode colors and
   /// dark mode seed color behavior, in the schemeAtIndex helper it uses to
   /// get the scheme at an index.
-  static FlexSchemeData scheme(final ThemeController controller) =>
+  static FlexSchemeData scheme(ThemeController controller) =>
       schemeAtIndex(controller.schemeIndex, controller);
 
   /// Get the FlexSchemeData at current scheme index.
@@ -219,7 +218,7 @@ abstract final class AppColor {
   /// dark mode scheme. This simplifies our logic in the MaterialApp
   /// of example 5 and we get right dark colors in ThemeSelector and Popup too.
   static FlexSchemeData schemeAtIndex(
-      final int index, final ThemeController controller) {
+      int index, ThemeController controller) {
     if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
           dark: controller.useKeyColors

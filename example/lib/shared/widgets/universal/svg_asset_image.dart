@@ -1,9 +1,9 @@
 import 'dart:async' show Future;
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Displays an Undraw SVG image provided in the applications asset bundle.
 ///
@@ -94,11 +94,11 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     return FutureBuilder<SvgPicture>(
       future: svgImage,
       builder:
-          (final BuildContext context, final AsyncSnapshot<Widget> snapshot) {
+          (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.hasData) {
           return Padding(
             padding: widget.padding ?? const EdgeInsets.all(16),

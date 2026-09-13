@@ -77,7 +77,7 @@ class SquircleStadiumBorder extends ShapeBorder {
   /// By default this value is [BorderSide.none]. It also must not be null.
   final BorderSide side;
 
-  Path _getPath(final Rect rectangle) {
+  Path _getPath(Rect rectangle) {
     // The two 180º arcs will always be positioned on the shorter side of the
     // rectangle like with the traditional stadium border shape.
     final double sideWidth = side.width;

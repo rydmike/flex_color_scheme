@@ -1,10 +1,9 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/component_colors_reveal.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/examples/show_sub_theme_colors.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/component_colors_reveal.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //

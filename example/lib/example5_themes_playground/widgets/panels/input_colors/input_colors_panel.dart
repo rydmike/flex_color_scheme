@@ -1,17 +1,16 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/input_colors/custom_theme_controls.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/input_colors/show_input_colors.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/input_colors/used_colors_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/custom_uses_dark_colors_for_seed_switch.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/show_input_colors_switch.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/theme_mode_switch_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/use_seeded_color_scheme_switch.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/input_colors_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
 import 'package:material_ui/material_ui.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/examples/input_colors_popup_menu.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/custom_uses_dark_colors_for_seed_switch.dart';
-import '../../shared/show_input_colors_switch.dart';
-import '../../shared/theme_mode_switch_list_tile.dart';
-import '../../shared/use_seeded_color_scheme_switch.dart';
-import 'custom_theme_controls.dart';
-import 'show_input_colors.dart';
-import 'used_colors_popup_menu.dart';
 
 class InputColorsPanel extends StatelessWidget {
   const InputColorsPanel(

@@ -3,7 +3,7 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [TooltipThemeData]
 TooltipThemeData _tooltipTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in [colorScheme] to use as
   /// dialog background color.
@@ -12,40 +12,40 @@ TooltipThemeData _tooltipTheme({
   ///
   /// If not defined, defaults to [SchemeColor.onSurface].
   ///
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
   /// Background color of the tooltip.
   ///
   /// If backgroundSchemeColor is defined, it will be used instead.
-  final Color? backgroundColor,
+  Color? backgroundColor,
 
   /// Foreground color of the tooltip.
   ///
   /// If backgroundSchemeColor is defined, its SchemeColor pair will be
   /// used instead.
-  final Color? foregroundColor,
+  Color? foregroundColor,
 
   /// Alpha value for the background color.
   ///
   /// If not defined, defaults to 0xFF, fully opaque.
-  final int? backgroundAlpha,
+  int? backgroundAlpha,
 
   /// The border radius of the tooltip.
   ///
   /// If not defined, defaults to 4 same as Flutter SDK default.
   /// FCS sets it to 8 by default when using sub-themes and
   /// passes it here.
-  final double? borderRadius,
+  double? borderRadius,
 
   /// The color of the tooltip border.
   ///
   /// If not defined, defaults to fully transparent.
-  final Color? borderColor,
+  Color? borderColor,
 
   /// The tooltip text style.
   ///
   /// If not defined defaults to bodyMedium, with effective foregroundColor.
-  final TextStyle? textStyle,
+  TextStyle? textStyle,
 
   /// The amount of space by which to inset the tooltip's [child].
   ///
@@ -53,7 +53,7 @@ TooltipThemeData _tooltipTheme({
   ///   defaults to 16.0 logical pixels horizontally and 4.0 vertically.
   /// On desktop,
   ///   defaults to 8.0 logical pixels horizontally and 4.0 vertically.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// If provided, the amount of empty space to surround the [Tooltip].
   ///
@@ -65,13 +65,13 @@ TooltipThemeData _tooltipTheme({
   ///
   /// If this property is null, the default margin is 0.0 logical
   /// pixels on all sides.
-  final EdgeInsetsGeometry? margin,
+  EdgeInsetsGeometry? margin,
 
   /// The length of time that a pointer must hover over a tooltip's widget
   /// before the tooltip will be shown.
   ///
   /// Defaults to 0 milliseconds (tooltips are shown immediately upon hover).
-  final Duration? waitDuration,
+  Duration? waitDuration,
 
   /// The length of time that the tooltip will be shown after a long press is
   /// released (if triggerMode is [TooltipTriggerMode.longPress]) or a tap is
@@ -80,7 +80,7 @@ TooltipThemeData _tooltipTheme({
   ///
   /// Defaults to 1.5 seconds for long press and tap released or 0.1 seconds
   /// for mouse pointer exits the widget.
-  final Duration? showDuration,
+  Duration? showDuration,
 }) {
   final Color background =
       (backgroundSchemeColor == null && backgroundColor != null)

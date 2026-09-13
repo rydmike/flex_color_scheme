@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:animations/animations.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_images.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
 import 'package:flutter/services.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/const/app_images.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../shared/utils/link_text_span.dart';
+import 'package:material_ui/material_ui.dart';
 
 // An example shop that show what an app using the theme might look like.
 //

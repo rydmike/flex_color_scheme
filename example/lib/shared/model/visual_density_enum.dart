@@ -60,7 +60,7 @@ enum VisualDensityEnum {
     icon: Icons.view_day_outlined,
   );
 
-  const VisualDensityEnum({
+  VisualDensityEnum({
     required this.label,
     required this.describe,
     required this.code,

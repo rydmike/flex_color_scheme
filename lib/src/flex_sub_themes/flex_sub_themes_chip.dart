@@ -3,7 +3,7 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [ChipThemeData] theme.
 ChipThemeData _chipTheme({
   /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Defines if the [baseSchemeColor] and [selectedSchemeColor] are
   /// alpha blended with the surface color.
@@ -15,7 +15,7 @@ ChipThemeData _chipTheme({
   /// color using [kChipBackgroundAlphaBlend] alpha blend value.
   /// The [selectedSchemeColor] is alpha blended with the surface color
   /// using [kChipSelectedBackgroundAlphaBlend] alpha blend value.
-  final bool? blendColors,
+  bool? blendColors,
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
   /// use as their background base color.
@@ -27,7 +27,7 @@ ChipThemeData _chipTheme({
   /// [SchemeColor.primary] with a surface alpha blend of
   /// [kChipBackgroundAlphaBlend] applied, if [blendColors] is true,
   /// which it defaults to in Material-2 mode.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// Defines which [Theme] based [ColorScheme] based color the selected Chips
   /// use as their selected state color.
@@ -42,7 +42,7 @@ ChipThemeData _chipTheme({
   /// [SchemeColor.secondaryContainer] if [blendColors] is false.
   /// If [blendColors] is true, defaults to [SchemeColor.primary] with
   /// a surface alpha blend of [kChipSelectedBackgroundAlphaBlend] applied.
-  final SchemeColor? selectedSchemeColor,
+  SchemeColor? selectedSchemeColor,
 
   /// Defines which [Theme] based [ColorScheme] based color the selected
   /// ChoiceChips use as their selected state color.
@@ -52,7 +52,7 @@ ChipThemeData _chipTheme({
   ///
   /// If not defined and [useMaterial3] is true, defaults to
   /// [selectedSchemeColor].
-  final SchemeColor? secondarySelectedSchemeColor,
+  SchemeColor? secondarySelectedSchemeColor,
 
   /// Defines which [Theme] based [ColorScheme] based color the Chips
   /// use as color of the delete icon.
@@ -63,7 +63,7 @@ ChipThemeData _chipTheme({
   ///
   /// If not defined it defaults to effective theme based color from using
   /// [SchemeColor.onSurfaceVariant] same as Material-3 default.
-  final SchemeColor? deleteIconSchemeColor,
+  SchemeColor? deleteIconSchemeColor,
 
   /// Overrides the default for [ChipAttributes.labelStyle],
   /// the style of the [DefaultTextStyle] that contains the
@@ -76,7 +76,7 @@ ChipThemeData _chipTheme({
   /// [FilterChip], [InputChip], [RawChip].
   ///
   /// If not defined, the font size in the style defaults to 14.
-  final TextStyle? labelStyle,
+  TextStyle? labelStyle,
 
   /// Overrides the default for [ChoiceChip.labelStyle],
   /// the style of the [DefaultTextStyle] that contains the
@@ -86,7 +86,7 @@ ChipThemeData _chipTheme({
   /// [DefaultTextStyle], such as [Text].
   ///
   /// If not defined, the font size in the style defaults to 14.
-  final TextStyle? secondaryLabelStyle,
+  TextStyle? secondaryLabelStyle,
 
   /// Font size of the [labelStyle].
   ///
@@ -96,7 +96,7 @@ ChipThemeData _chipTheme({
   ///
   /// If not defined the default text style font sizes are used, but if they
   /// did not have size defined, defaults 14.
-  final double? fontSize,
+  double? fontSize,
 
   /// Font size of the [secondaryLabelStyle].
   ///
@@ -105,12 +105,12 @@ ChipThemeData _chipTheme({
   /// the passed in [secondaryLabelStyle].
   ///
   /// If not defined, defaults to [fontSize].
-  final double? secondaryFontSize,
+  double? secondaryFontSize,
 
   /// Icon size used by the [IconTheme] used by [Chip]s.
   ///
   /// If not defined defaults to 18.
-  final double? iconSize,
+  double? iconSize,
 
   /// Overrides the default for [ChipAttributes.padding],
   /// the padding between the contents of the chip and the outside [shape].
@@ -121,14 +121,14 @@ ChipThemeData _chipTheme({
   /// If not defined, defaults to EdgeInsets.symmetric(horizontal: 8) in
   /// Material mode and to EdgeInsets.symmetric(horizontal: 4) in
   /// Material2 mode.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Corner radius of the Chip.
   ///
   /// If not defined, defaults to [kChipRadius] 8dp,
   /// based on M3 Specification
   /// https://m3.material.io/components/chips/specs
-  final double? radius,
+  double? radius,
 
   /// Overrides the default for [ChipAttributes.surfaceTintColor], the
   /// Color of the chip's surface tint overlay when its elevation is
@@ -136,12 +136,12 @@ ChipThemeData _chipTheme({
   ///
   /// This property applies to [ActionChip], [Chip], [ChoiceChip],
   /// [FilterChip], [InputChip], [RawChip].
-  final Color? surfaceTintColor,
+  Color? surfaceTintColor,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
@@ -155,7 +155,7 @@ ChipThemeData _chipTheme({
   /// defined, if defined they keep their defined values.
   ///
   /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   // Used to toggle between different defaults from M2 and M3.
   final bool useM3 = useMaterial3 ?? true;

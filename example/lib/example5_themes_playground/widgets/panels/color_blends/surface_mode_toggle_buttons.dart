@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/surface_mode_popup_menu.dart';
 import 'package:material_ui/material_ui.dart';
-
-import 'surface_mode_popup_menu.dart';
 
 /// Widget used to select used [FlexSurfaceMode] using [ToggleButtons].
 ///
