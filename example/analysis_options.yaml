@@ -1,5 +1,16 @@
 include: ../analysis_options.yaml
 
+# Auto analyzer excludes added by Flutter 3.44.8
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+
 linter:
   rules:
     # DO reference all public properties in debug method implementations.
