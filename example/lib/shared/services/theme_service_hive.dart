@@ -196,7 +196,7 @@ class ThemeServiceHive implements ThemeService {
       await _hiveBox.clear();
     }
 
-    return _hiveBox.putAll(values);
+    await _hiveBox.putAll(values);
   }
 
   /// This implementation supports export and import of stored values.
