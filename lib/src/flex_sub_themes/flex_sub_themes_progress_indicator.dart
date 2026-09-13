@@ -66,7 +66,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// Overrides the stop indicator radius of the [LinearProgressIndicator].
 ///
-/// If [LinearProgressIndicator.year2023] is true or
+/// If `LinearProgressIndicator.year2023` is true or
 /// [ThemeData.useMaterial3] is false, then no stop indicator will be drawn.
 ///
 /// ## [strokeWidth]
@@ -135,8 +135,8 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [year2023]
 ///
-/// Overrides the [CircularProgressIndicator.year2023] and
-/// [LinearProgressIndicator.year2023] properties.
+/// Overrides the `CircularProgressIndicator.year2023` and
+/// `LinearProgressIndicator.year2023` properties.
 ///
 /// When true, the [CircularProgressIndicator] and [LinearProgressIndicator]
 /// will use the 2023 Material-3 appearance. Defaults to true.

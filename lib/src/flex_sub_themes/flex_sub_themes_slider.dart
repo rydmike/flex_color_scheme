@@ -78,7 +78,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [useOldM3Design]
 ///
-/// Overrides the default value of [Slider.year2023].
+/// Overrides the default value of `Slider.year2023`.
 ///
 /// When true, the [Slider] will use the 2023 Material Design 3 appearance.
 ///
@@ -86,7 +86,7 @@ part of '../flex_sub_themes.dart';
 /// appearance, which was introduced in December 2023 and become common
 /// in 2024.
 ///
-/// In Flutter Material SDK, this property is named [SliderThemeData.year2023].
+/// In Flutter Material SDK, this property is named `SliderThemeData.year2023`.
 ///
 /// If undefined, defaults to true, via Flutter Material's default behavior.
 /// If [useMaterial3] is false, then this property is ignored.
