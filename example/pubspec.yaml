@@ -10,12 +10,12 @@ dependencies:
   # Prebuilt transition animations (by Google, flutter.dev).
   # Using the container transform navigation in mock Shop in Playground.
   # https://pub.dev/packages/animations
-  animations: ^2.1.0
+  animations: ^3.0.0
 
   # Provides encoders and decoders for various archive and compression
   # formats such as zip, tar, bzip2, gzip, and zlib. (by loki3d.com)
   # https://pub.dev/packages/archive
-  archive: ^4.0.7
+  archive: ^4.3.0
 
   # Confetti for some fun in the demo (by funwith.app).
   # Used for fun on the mock login button in the simulator app in the Playground.
@@ -25,7 +25,7 @@ dependencies:
   # Adds the Cupertino Icons font to your application. Used by the
   # CupertinoIcons class for iOS style icons, by Google flutter.dev.
   # https://pub.dev/packages/cupertino_icons
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
 
   # The official Flutter Cupertino Design Library.
   cupertino_ui: ^1.0.0
@@ -62,23 +62,23 @@ dependencies:
   # SVG file drawing, used by Asset Images, by dnfield.dev, now Google.
   # Used to display undraw SVG image in Playground simulated mock apps.
   # https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.2.1
+  flutter_svg: ^2.3.0
 
   # Google fonts, by Google material.io.
   # https://pub.dev/packages/google_fonts
-  google_fonts: ^6.3.2
+  google_fonts: ^8.2.1
 
   # Hive local storage, originally by Simon Leir/Choi.
   # Used as value-key pair persistence service in examples 4 and 5 (Themes Playground).
   # hive: ^2.2.3 # Original Hive package
   # This is a community edition fork that supports WASM-GC, by using
   # package:web and dart:js_interop.
-  hive_ce: ^2.15.1
+  hive_ce: ^2.20.0
 
   # Internationalization package, by Google dart.dev.
   # Used only for date time string formatting in example 5.
   # https://pub.dev/packages/intl
-  intl: ^0.20.2
+  intl: ^0.20.3
 
   # The official Flutter Material UI Library.
   material_ui: ^1.0.0
@@ -86,12 +86,12 @@ dependencies:
   # Commonly used directories on host platform file systems, by Google (flutter.dev).
   # Used to get a working storage path for Hive on Windows.
   # https://pub.dev/packages/path_provider
-  path_provider: ^2.1.5
+  path_provider: ^2.1.6
 
   # Store value pair shared preference data, by Google flutter.dev.
   # Used as value-key pair persistence service in example 3.
   # https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.5.3
+  shared_preferences: ^2.5.5
 
   # A class for parsing strings using a sequence of patterns.
   # By the Dart team, tools.dart.dev

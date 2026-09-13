@@ -172,10 +172,10 @@ packages:
     dependency: "direct dev"
     description:
       name: google_fonts
-      sha256: "517b20870220c48752eafa0ba1a797a092fb22df0d89535fd9991e86ee2cdd9c"
+      sha256: e3cb3ee6b47fd2472c23de6da5744796a4da195137759ddb3fbcc9467b7b3c7d
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.2"
+    version: "8.2.1"
   http:
     dependency: transitive
     description:

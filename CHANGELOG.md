@@ -21,6 +21,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 
 **CHORE**
 - Bump package version to 9.0.0.
+- Bump packages to latest versions.
 
 ### Themes Playground
 
@@ -32,7 +33,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 
 **CHORE**
 - Bump version to 9.0.0.
-
+- Bump packages to latest versions.
 
 ## 8.4.0
 
