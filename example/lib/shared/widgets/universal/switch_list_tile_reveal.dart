@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 /// is provided as an optional user based reveal action. The purpose is to make
 /// UI less talkative but provide easy access to additional usage explanation.
 ///
-/// This is a Flutter "Universal" Widget that only depends on the SDK and
-/// can be dropped into any application.
+/// This is a "Universal" widget that only depends on the `material_ui`
+/// package and can be dropped into any application.
 class SwitchListTileReveal extends StatefulWidget {
   const SwitchListTileReveal({
     super.key,
@@ -172,7 +172,7 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
           transitionBuilder: (Widget child, Animation<double> animation) {
             return SizeTransition(
               sizeFactor: animation,
-              axisAlignment: _isOpen ? 1 : -1,
+              alignment: AlignmentDirectional(-1, _isOpen ? 1 : -1),
               child: child,
             );
           },
